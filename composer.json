@@ -1,0 +1,15 @@
+{
+    "name": "symplify/easy-coding-standard-prefixed",
+    "bin": [
+        "ecs",
+        "ecs.phar"
+    ],
+    "description": "Prefixed version of ECS compiled in PHAR",
+    "license": "MIT",
+    "require": {
+        "php": "^7.2"
+    },
+    "replace": {
+        "symplify/easy-coding-standard": "self.version"
+    }
+}

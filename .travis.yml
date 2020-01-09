@@ -1,0 +1,73 @@
+# inspired by https://github.com/rectorphp/rector-prefixed/blob/master/.travis.yml
+dist: xenial
+
+language: php
+
+php:
+    - '7.2'
+    - '7.3'
+    - '7.4'
+
+script: skip
+
+jobs:
+    include:
+        -
+            stage: test
+            name: "Run PHARs"
+            script:
+                - php ecs --debug
+                - php ecs.phar --debug
+                - ./ecs --debug
+                - ./ecs.phar --debug
+
+        -
+            stage: test
+            name: "Run PHAR with Set"
+            script:
+                - php ecs process fixture/SomeNonPSR12Class.php --set psr12 --dry-run
+
+        -
+            stage: test
+            name: "Run as Composer Dependency"
+            before_script:
+                - mkdir standalone
+                - cd standalone
+                # wait for deploy to packagist
+                - sleep 30
+            script:
+                - composer require symplify/easy-coding-standard-prefixed:@dev --dev
+                - vendor/bin/ecs --debug
+
+        -
+            stage: test
+            name: "Install with Symfony 2.8"
+            before_script:
+                - mkdir standalone
+                - cd standalone
+                # wait for deploy to packagist
+                - sleep 30
+            script:
+                - composer require symfony/console:2.8
+                - composer require symplify/easy-coding-standard-prefixed:@dev --dev
+                - vendor/bin/ecs --debug
+
+        -
+            stage: test
+            name: "Install with Symfony 3.4"
+            before_script:
+                - mkdir standalone
+                - cd standalone
+                # wait for deploy to packagist
+                - sleep 30
+            script:
+                - composer require symfony/console:3.4
+                - composer require symplify/easy-coding-standard-prefixed:@dev --dev
+                - vendor/bin/ecs --debug
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+notifications:
+    email: false
