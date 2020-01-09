@@ -7,7 +7,9 @@
     "description": "Prefixed version of ECS compiled in PHAR",
     "license": "MIT",
     "require": {
-        "php": "^7.2"
+        "php": "^7.2",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "replace": {
         "symplify/easy-coding-standard": "self.version"
