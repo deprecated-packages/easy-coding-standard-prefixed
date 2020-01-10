@@ -52,7 +52,7 @@ jobs:
 
             -
                 run: |
-                    php ecs process fixture/SomeNonPSR12Class.php --set psr12 --dry-run --debug
+                    php ecs check fixture/SomeNonPSR12Class.php --set psr12 --dry-run --debug
 
     run_as_composer_dependency:
         runs-on: ubuntu-latest
