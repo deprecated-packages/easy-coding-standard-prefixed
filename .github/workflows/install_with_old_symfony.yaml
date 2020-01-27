@@ -1,0 +1,32 @@
+on:
+    pull_request: null
+    push:
+        branches:
+            - master
+
+jobs:
+    install_with_old_symfony:
+        strategy:
+            matrix:
+                symfony: ['2.8', '3.4']
+
+        name: Install with Symfony ${{ matrix.symfony }}
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v1
+                with:
+                    php-version: 7.3
+                    coverage: none
+
+            -
+                run: |
+                    # setup
+                    mkdir standalone
+                    cd standalone
+                    # wait for deploy to packagist
+                    sleep 30
+
+                    composer require symfony/console:${{ matrix.symfony }}
+                    composer require symplify/easy-coding-standard-prefixed:@dev --dev
+                    vendor/bin/ecs --debug
