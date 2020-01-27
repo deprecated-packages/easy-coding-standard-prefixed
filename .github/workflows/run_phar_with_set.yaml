@@ -1,12 +1,13 @@
-name: Parameters Sets
+name: Run PHAR with Set
 
 on:
+    pull_request: null
     push:
         branches:
             - master
 
 jobs:
-    parameters_set:
+    run_phar_with_set:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
@@ -15,4 +16,4 @@ jobs:
                     php-version: 7.3
                     coverage: none
 
-            -   run: php ecs check fixture/SomeNormalClass.php --config ecs-parameters-sets.yaml --debug
+            -   run: php ecs check fixture/SomeNormalClass.php --set psr12 --debug
