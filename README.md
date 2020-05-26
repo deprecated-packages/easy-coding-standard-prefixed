@@ -15,7 +15,7 @@ composer require symplify/easy-coding-standard-prefixed --dev
 `ecs.phar` is also included in this repository
 
 ```
-wget https://github.com/symplify/easy-coding-standard-prefixed/blob/master/ecs.phar
+wget https://github.com/symplify/easy-coding-standard-prefixed/blob/master/ecs.phar?raw=true
 ```
 
 ### Non-Prefixed Version 
