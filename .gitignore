@@ -1,2 +1,5 @@
 /vendor
 composer.lock
+
+# for local debugging
+box.phar
