@@ -1,4 +1,4 @@
-name: Run PHAR with Set
+name: Run with Set
 
 on:
     pull_request: null
@@ -7,13 +7,34 @@ on:
             - master
 
 jobs:
-    run_phar_with_set:
+    matrix:
+        strategy:
+            fail-fast: false
+            matrix:
+                actions:
+                    -
+                        name: 'PSR 12'
+                        run: php ecs check fixture/SomeNormalClass.php --set psr12 --debug
+
+                    -
+                        name: 'Symplify'
+                        run: php ecs check fixture/SomeNormalClass.php --set symplify --debug
+
+                    -
+                        name: 'ECS Parameters Sets'
+                        run: php ecs check fixture/SomeNormalClass.php --config ecs-parameters-sets.yaml --debug
+
+        name: Running Set ${{ matrix.actions.name }}
         runs-on: ubuntu-latest
+
         steps:
             -   uses: actions/checkout@v2
+            # see https://github.com/shivammathur/setup-php
             -   uses: shivammathur/setup-php@v1
                 with:
-                    php-version: 7.3
+                    php-version: 7.4
                     coverage: none
 
-            -   run: php ecs check fixture/SomeNormalClass.php --set psr12 --debug
+            -   run: composer install --no-progress --ansi
+
+            -   run: ${{ matrix.actions.run }}
