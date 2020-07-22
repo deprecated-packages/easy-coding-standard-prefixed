@@ -14,15 +14,15 @@ jobs:
                 actions:
                     -
                         name: 'PSR 12'
-                        run: php ecs check fixture/SomeNormalClass.php --set psr12 --debug
+                        run: php ecs check fixture/SomeNormalClass.php --set psr12 --debug --ansi
 
                     -
                         name: 'Symplify'
-                        run: php ecs check fixture/SomeNormalClass.php --set symplify --debug
+                        run: php ecs check fixture/SomeNormalClass.php --set symplify --debug --ansi
 
                     -
                         name: 'ECS Parameters Sets'
-                        run: php ecs check fixture/SomeNormalClass.php --config ecs-parameters-sets.yaml --debug
+                        run: php ecs check fixture/SomeNormalClass.php --config ecs-parameters-sets.yaml --debug --ansi
 
         name: Running Set ${{ matrix.actions.name }}
         runs-on: ubuntu-latest

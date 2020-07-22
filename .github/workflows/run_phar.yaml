@@ -22,8 +22,7 @@ jobs:
                     php-version: ${{ matrix.php }}
                     coverage: none
 
-            -   run: |
-                    php ecs --debug
-                    php ecs.phar --debug
-                    ./ecs --debug
-                    ./ecs.phar --debug
+            -   run: php ecs --debug --ansi
+            -   run: php ecs.phar --debug --ansi
+            -   run: ./ecs --debug --ansi
+            -   run: ./ecs.phar --debug --ansi

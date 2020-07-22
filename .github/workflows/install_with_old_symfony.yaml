@@ -27,6 +27,6 @@ jobs:
                     # wait for deploy to packagist
                     sleep 30
 
-                    composer require symfony/console:${{ matrix.symfony }}
-                    composer require symplify/easy-coding-standard-prefixed:@dev --dev
-                    vendor/bin/ecs --debug
+                    composer require symfony/console:${{ matrix.symfony }} --ansi
+                    composer require symplify/easy-coding-standard-prefixed:@dev --dev --ansi
+                    vendor/bin/ecs --debug --ansi
