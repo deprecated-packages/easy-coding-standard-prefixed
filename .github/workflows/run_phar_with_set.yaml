@@ -24,6 +24,10 @@ jobs:
                         name: 'ECS Parameters Sets'
                         set_config: '--config ecs-parameters-sets.yaml'
 
+                    -
+                        name: 'ECS PHP Config Sets'
+                        set_config: '--config ecs-php.php'
+
         name: Running Set ${{ matrix.actions.name }}
         runs-on: ubuntu-latest
 
