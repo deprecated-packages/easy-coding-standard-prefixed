@@ -18,12 +18,12 @@ composer require symplify/easy-coding-standard-prefixed --dev
 wget https://github.com/symplify/easy-coding-standard-prefixed/blob/master/ecs.phar?raw=true
 ```
 
-### Non-Prefixed Version 
+### Non-Prefixed Version
 
 Head over to the ["Easy Coding Standard" repository](https://github.com/symplify/easy-coding-standard) for more information.
 
 ## Use
 
 ```bash
-vendor/bin/ecs check src --set dead-code --dry-run
+vendor/bin/ecs check src --set psr12
 ```
