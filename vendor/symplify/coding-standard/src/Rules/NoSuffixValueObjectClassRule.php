@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Name;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Name;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoSuffixValueObjectClassRule\NoSuffixValueObjectClassRuleTest
  */
@@ -32,16 +32,16 @@ final class NoSuffixValueObjectClassRule extends \Symplify\CodingStandard\Rules\
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_::class];
     }
     /**
      * @param Class_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $namespacedName = $node->namespacedName;
-        if (!$namespacedName instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Name) {
+        if (!$namespacedName instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Name) {
             return [];
         }
         $className = (string) $namespacedName;
@@ -55,16 +55,16 @@ final class NoSuffixValueObjectClassRule extends \Symplify\CodingStandard\Rules\
             return [];
         }
         $shortClassName = (string) $node->name;
-        $expectedShortClassName = \_PhpScoper3d04c8135695\Nette\Utils\Strings::replace($shortClassName, self::VALUE_OBJECT_SUFFIX_REGEX, '');
+        $expectedShortClassName = \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::replace($shortClassName, self::VALUE_OBJECT_SUFFIX_REGEX, '');
         $errorMessage = \sprintf(self::ERROR, $shortClassName, $expectedShortClassName);
         return [$errorMessage];
     }
     private function hasValueObjectNamespace(string $fullyQualifiedClassName) : bool
     {
-        return (bool) \_PhpScoper3d04c8135695\Nette\Utils\Strings::match($fullyQualifiedClassName, self::VALUE_OBJECT_NAMESPACE_REGEX);
+        return (bool) \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::match($fullyQualifiedClassName, self::VALUE_OBJECT_NAMESPACE_REGEX);
     }
     private function hasValueObjectSuffix(string $fullyQualifiedClassName) : bool
     {
-        return (bool) \_PhpScoper3d04c8135695\Nette\Utils\Strings::match($fullyQualifiedClassName, self::VALUE_OBJECT_SUFFIX_REGEX);
+        return (bool) \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::match($fullyQualifiedClassName, self::VALUE_OBJECT_SUFFIX_REGEX);
     }
 }

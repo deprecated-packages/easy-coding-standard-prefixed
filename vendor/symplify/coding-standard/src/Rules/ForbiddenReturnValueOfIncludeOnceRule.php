@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Include_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Return_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Assign;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Include_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Return_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\ForbiddenReturnValueOfIncludeOnceRule\ForbiddenReturnValueOfIncludeOnceRuleTest
  */
@@ -22,14 +22,14 @@ final class ForbiddenReturnValueOfIncludeOnceRule extends \Symplify\CodingStanda
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node::class];
     }
     /**
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
-        if (!$node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign && !$node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Return_) {
+        if (!$node instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Assign && !$node instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Return_) {
             return [];
         }
         if (!$this->isIncludeOnceOrRequireOnce($node)) {
@@ -40,11 +40,11 @@ final class ForbiddenReturnValueOfIncludeOnceRule extends \Symplify\CodingStanda
     /**
      * @param Assign|Return_ $node
      */
-    private function isIncludeOnceOrRequireOnce(\_PhpScoper3d04c8135695\PhpParser\Node $node) : bool
+    private function isIncludeOnceOrRequireOnce(\_PhpScoper8de082cbb8c7\PhpParser\Node $node) : bool
     {
-        if (!$node->expr instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Include_) {
+        if (!$node->expr instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Include_) {
             return \false;
         }
-        return \in_array($node->expr->type, [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE], \true);
+        return \in_array($node->expr->type, [\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE, \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE], \true);
     }
 }

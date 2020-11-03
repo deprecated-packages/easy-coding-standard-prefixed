@@ -47,7 +47,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "_PhpScoper3d04c8135695\\Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\": "src\/"
+            "_PhpScoper8de082cbb8c7\\Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\": "src\/"
         }
     },
     "extra": {

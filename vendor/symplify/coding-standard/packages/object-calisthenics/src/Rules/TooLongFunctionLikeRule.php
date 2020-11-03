@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\ObjectCalisthenics\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\FunctionLike;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\FunctionLike;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Function_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\Rules\AbstractSymplifyRule;
 /**
  * @see \Symplify\CodingStandard\ObjectCalisthenics\Tests\Rules\TooLongFunctionLikeRule\TooLongFunctionLikeRuleTest
@@ -31,13 +31,13 @@ final class TooLongFunctionLikeRule extends \Symplify\CodingStandard\Rules\Abstr
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Function_::class, \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod::class];
     }
     /**
      * @param Function_|ClassMethod $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $currentFunctionLikeLenght = $this->getNodeLength($node);
         if ($currentFunctionLikeLenght <= $this->maxFunctionLikeLength) {
@@ -50,14 +50,14 @@ final class TooLongFunctionLikeRule extends \Symplify\CodingStandard\Rules\Abstr
     /**
      * @param Function_|ClassMethod $functionLike
      */
-    private function resolveFunctionLikeType(\_PhpScoper3d04c8135695\PhpParser\Node\FunctionLike $functionLike) : string
+    private function resolveFunctionLikeType(\_PhpScoper8de082cbb8c7\PhpParser\Node\FunctionLike $functionLike) : string
     {
-        if ($functionLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_) {
+        if ($functionLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Function_) {
             return 'Function';
         }
         return 'Method';
     }
-    private function getNodeLength(\_PhpScoper3d04c8135695\PhpParser\Node $node) : int
+    private function getNodeLength(\_PhpScoper8de082cbb8c7\PhpParser\Node $node) : int
     {
         return $node->getEndLine() - $node->getStartLine();
     }

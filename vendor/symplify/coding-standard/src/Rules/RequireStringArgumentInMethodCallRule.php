@@ -3,16 +3,16 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Arg;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ClassConstFetch;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper3d04c8135695\PhpParser\Node\Identifier;
-use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
-use _PhpScoper3d04c8135695\PHPStan\Rules\Rule;
-use _PhpScoper3d04c8135695\PHPStan\Type\TypeWithClassName;
-use _PhpScoper3d04c8135695\Rector\Core\Exception\ShouldNotHappenException;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Arg;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ClassConstFetch;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Identifier;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PHPStan\Rules\Rule;
+use _PhpScoper8de082cbb8c7\PHPStan\Type\TypeWithClassName;
+use _PhpScoper8de082cbb8c7\Rector\Core\Exception\ShouldNotHappenException;
 use Symplify\CodingStandard\PhpParser\NodeNameResolver;
 /**
  * Useful for prefixed phar bulid, to keep original references to class un-prefixed
@@ -49,16 +49,16 @@ final class RequireStringArgumentInMethodCallRule extends \Symplify\CodingStanda
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\MethodCall::class];
     }
     /**
      * @param MethodCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         // unknown method name
-        if (!$node->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Identifier) {
+        if (!$node->name instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Identifier) {
             return [];
         }
         $errorMessages = [];
@@ -80,7 +80,7 @@ final class RequireStringArgumentInMethodCallRule extends \Symplify\CodingStanda
     /**
      * @param array<string, array<int>> $positionsByMethods
      */
-    private function matchPositions(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, string $desiredType, array $positionsByMethods, string $methodName) : ?array
+    private function matchPositions(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope, string $desiredType, array $positionsByMethods, string $methodName) : ?array
     {
         if (!$this->isNodeVarType($methodCall, $scope, $desiredType)) {
             return null;
@@ -90,26 +90,26 @@ final class RequireStringArgumentInMethodCallRule extends \Symplify\CodingStanda
     /**
      * @param int[] $positions
      */
-    private function shouldSkipArg(int $key, array $positions, \_PhpScoper3d04c8135695\PhpParser\Node\Arg $arg) : bool
+    private function shouldSkipArg(int $key, array $positions, \_PhpScoper8de082cbb8c7\PhpParser\Node\Arg $arg) : bool
     {
         if (!\in_array($key, $positions, \true)) {
             return \true;
         }
-        if ($arg->value instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_) {
+        if ($arg->value instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_) {
             return \true;
         }
         /** @var ClassConstFetch $classConstFetch */
         $classConstFetch = $arg->value;
         return !$this->nodeNameResolver->isName($classConstFetch->name, 'class');
     }
-    private function isNodeVarType(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, string $desiredType) : bool
+    private function isNodeVarType(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope, string $desiredType) : bool
     {
         if (\trait_exists($desiredType)) {
             $message = \sprintf('Do not use trait "%s" as type to match, it breaks the matching. Use specific class that is in this trait', $desiredType);
-            throw new \_PhpScoper3d04c8135695\Rector\Core\Exception\ShouldNotHappenException($message);
+            throw new \_PhpScoper8de082cbb8c7\Rector\Core\Exception\ShouldNotHappenException($message);
         }
         $methodVarType = $scope->getType($methodCall->var);
-        if (!$methodVarType instanceof \_PhpScoper3d04c8135695\PHPStan\Type\TypeWithClassName) {
+        if (!$methodVarType instanceof \_PhpScoper8de082cbb8c7\PHPStan\Type\TypeWithClassName) {
             return \false;
         }
         return \is_a($methodVarType->getClassName(), $desiredType, \true);

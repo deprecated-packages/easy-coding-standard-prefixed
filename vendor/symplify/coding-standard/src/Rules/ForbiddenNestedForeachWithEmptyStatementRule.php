@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_;
-use _PhpScoper3d04c8135695\PhpParser\NodeFinder;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Variable;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Foreach_;
+use _PhpScoper8de082cbb8c7\PhpParser\NodeFinder;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\ValueObject\PHPStanAttributeKey;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\ForbiddenNestedForeachWithEmptyStatementRule\ForbiddenNestedForeachWithEmptyStatementRuleTest
@@ -23,7 +23,7 @@ final class ForbiddenNestedForeachWithEmptyStatementRule extends \Symplify\Codin
      * @var NodeFinder
      */
     private $nodeFinder;
-    public function __construct(\_PhpScoper3d04c8135695\PhpParser\NodeFinder $nodeFinder)
+    public function __construct(\_PhpScoper8de082cbb8c7\PhpParser\NodeFinder $nodeFinder)
     {
         $this->nodeFinder = $nodeFinder;
     }
@@ -32,26 +32,26 @@ final class ForbiddenNestedForeachWithEmptyStatementRule extends \Symplify\Codin
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Foreach_::class];
     }
     /**
      * @param Foreach_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         if (!$this->isNextForeachWithEmptyStatement($node)) {
             return [];
         }
         return [self::ERROR_MESSAGE];
     }
-    public function isNextForeachWithEmptyStatement(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_ $foreach) : bool
+    public function isNextForeachWithEmptyStatement(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Foreach_ $foreach) : bool
     {
-        $stmts = $this->nodeFinder->findInstanceOf($foreach->stmts, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt::class);
+        $stmts = $this->nodeFinder->findInstanceOf($foreach->stmts, \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt::class);
         if (!isset($stmts[0])) {
             return \false;
         }
-        if (!$stmts[0] instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_) {
+        if (!$stmts[0] instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Foreach_) {
             return \false;
         }
         /** @var Variable $foreachVariable */

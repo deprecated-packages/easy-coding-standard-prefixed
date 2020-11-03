@@ -11,8 +11,8 @@ namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
-use _PhpScoper3d04c8135695\PHPUnit\Framework\TestCase;
-class RuleInclusionAbsoluteWindowsTest extends \_PhpScoper3d04c8135695\PHPUnit\Framework\TestCase
+use _PhpScoper8de082cbb8c7\PHPUnit\Framework\TestCase;
+class RuleInclusionAbsoluteWindowsTest extends \_PhpScoper8de082cbb8c7\PHPUnit\Framework\TestCase
 {
     /**
      * The Ruleset object.

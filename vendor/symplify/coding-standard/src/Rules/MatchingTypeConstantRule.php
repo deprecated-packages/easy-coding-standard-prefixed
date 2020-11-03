@@ -3,17 +3,17 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\Annotation;
 use PhpCsFixer\DocBlock\DocBlock;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ConstFetch;
-use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\DNumber;
-use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\LNumber;
-use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ConstFetch;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\DNumber;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\LNumber;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassConst;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\MatchingTypeConstantRule\MatchingTypeConstantRuleTest
  */
@@ -26,23 +26,23 @@ final class MatchingTypeConstantRule extends \Symplify\CodingStandard\Rules\Abst
     /**
      * @var array<string, array<string>>
      */
-    private const TYPE_NODES_TO_ACCEPTED_TYPES = [\_PhpScoper3d04c8135695\PhpParser\Node\Scalar\LNumber::class => ['int'], \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\DNumber::class => ['float', 'double'], \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_::class => ['string'], \_PhpScoper3d04c8135695\PhpParser\Node\Expr\ConstFetch::class => ['bool']];
+    private const TYPE_NODES_TO_ACCEPTED_TYPES = [\_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\LNumber::class => ['int'], \_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\DNumber::class => ['float', 'double'], \_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_::class => ['string'], \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ConstFetch::class => ['bool']];
     /**
      * @var array<string, string>
      */
-    private const TYPE_CLASS_TO_STRING_TYPE = [\_PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_::class => 'string', \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\LNumber::class => 'int', \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\DNumber::class => 'float', \_PhpScoper3d04c8135695\PhpParser\Node\Expr\ConstFetch::class => 'bool'];
+    private const TYPE_CLASS_TO_STRING_TYPE = [\_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_::class => 'string', \_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\LNumber::class => 'int', \_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\DNumber::class => 'float', \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ConstFetch::class => 'bool'];
     /**
      * @return string[]
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassConst::class];
     }
     /**
      * @param ClassConst $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         if ($this->shouldSkip($node)) {
             return [];
@@ -52,20 +52,20 @@ final class MatchingTypeConstantRule extends \Symplify\CodingStandard\Rules\Abst
             return [];
         }
         // array, unable to resolve?
-        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::endsWith($type, '[]')) {
+        if (\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::endsWith($type, '[]')) {
             return [];
         }
         $constantValue = $node->consts[0]->value;
         return $this->processConstantValue($constantValue, $type);
     }
-    private function shouldSkip(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst $classConst) : bool
+    private function shouldSkip(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassConst $classConst) : bool
     {
         if ($classConst->getDocComment() === null) {
             return \true;
         }
         return \count((array) $classConst->consts) !== 1;
     }
-    private function resolveOnlyVarAnnotationType(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst $classConst) : ?string
+    private function resolveOnlyVarAnnotationType(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassConst $classConst) : ?string
     {
         $varAnnotations = $this->getVarAnnotationsForNode($classConst);
         if (\count($varAnnotations) === 0) {
@@ -80,7 +80,7 @@ final class MatchingTypeConstantRule extends \Symplify\CodingStandard\Rules\Abst
     /**
      * @return string[]
      */
-    private function processConstantValue(\_PhpScoper3d04c8135695\PhpParser\Node\Expr $expr, string $type) : array
+    private function processConstantValue(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr $expr, string $type) : array
     {
         foreach (self::TYPE_NODES_TO_ACCEPTED_TYPES as $typeNode => $acceptedTypes) {
             /** @var string $typeNode */
@@ -97,7 +97,7 @@ final class MatchingTypeConstantRule extends \Symplify\CodingStandard\Rules\Abst
     /**
      * @return Annotation[]
      */
-    private function getVarAnnotationsForNode(\_PhpScoper3d04c8135695\PhpParser\Node $node) : array
+    private function getVarAnnotationsForNode(\_PhpScoper8de082cbb8c7\PhpParser\Node $node) : array
     {
         if ($node->getDocComment() === null) {
             return [];
@@ -108,13 +108,13 @@ final class MatchingTypeConstantRule extends \Symplify\CodingStandard\Rules\Abst
     /**
      * @param string[] $acceptedTypes
      */
-    private function isValidConstantValue(\_PhpScoper3d04c8135695\PhpParser\Node\Expr $expr, string $type, array $acceptedTypes) : bool
+    private function isValidConstantValue(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr $expr, string $type, array $acceptedTypes) : bool
     {
         if (\in_array($type, $acceptedTypes, \true)) {
             return \true;
         }
         // special bool case
-        if (!$expr instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\ConstFetch) {
+        if (!$expr instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ConstFetch) {
             return \false;
         }
         if ($type !== 'bool') {

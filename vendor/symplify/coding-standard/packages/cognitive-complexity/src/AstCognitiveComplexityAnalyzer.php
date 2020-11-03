@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\CognitiveComplexity;
 
-use _PhpScoper3d04c8135695\PhpParser\Node\FunctionLike;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_;
-use _PhpScoper3d04c8135695\PhpParser\NodeTraverser;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\FunctionLike;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Function_;
+use _PhpScoper8de082cbb8c7\PhpParser\NodeTraverser;
 use Symplify\CodingStandard\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector;
 use Symplify\CodingStandard\CognitiveComplexity\NodeVisitor\ComplexityNodeVisitor;
 use Symplify\CodingStandard\CognitiveComplexity\NodeVisitor\NestingNodeVisitor;
@@ -36,11 +36,11 @@ final class AstCognitiveComplexityAnalyzer
     /**
      * @param Function_|ClassMethod $functionLike
      */
-    public function analyzeFunctionLike(\_PhpScoper3d04c8135695\PhpParser\Node\FunctionLike $functionLike) : int
+    public function analyzeFunctionLike(\_PhpScoper8de082cbb8c7\PhpParser\Node\FunctionLike $functionLike) : int
     {
         $this->cognitiveComplexityDataCollector->reset();
         $this->nestingNodeVisitor->reset();
-        $nodeTraverser = new \_PhpScoper3d04c8135695\PhpParser\NodeTraverser();
+        $nodeTraverser = new \_PhpScoper8de082cbb8c7\PhpParser\NodeTraverser();
         $nodeTraverser->addVisitor($this->nestingNodeVisitor);
         $nodeTraverser->addVisitor($this->complexityNodeVisitor);
         $nodeTraverser->traverse([$functionLike]);

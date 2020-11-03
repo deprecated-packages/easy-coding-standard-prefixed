@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\PropertyFetch;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticPropertyFetch;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\PropertyFetch;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticPropertyFetch;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoDynamicPropertyFetchNameRule\NoDynamicPropertyFetchNameRuleTest
  */
@@ -22,15 +22,15 @@ final class NoDynamicPropertyFetchNameRule extends \Symplify\CodingStandard\Rule
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\PropertyFetch::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticPropertyFetch::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\PropertyFetch::class, \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticPropertyFetch::class];
     }
     /**
      * @param PropertyFetch|StaticPropertyFetch $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
-        if (!$node->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
+        if (!$node->name instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr) {
             return [];
         }
         return [self::ERROR_MESSAGE];

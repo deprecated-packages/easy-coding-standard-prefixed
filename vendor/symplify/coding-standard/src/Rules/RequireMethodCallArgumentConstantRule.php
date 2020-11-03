@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Arg;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ClassConstFetch;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable;
-use _PhpScoper3d04c8135695\PhpParser\Node\Identifier;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Arg;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ClassConstFetch;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Variable;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Identifier;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\PHPStan\Types\ContainsTypeAnalyser;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\RequireMethodCallArgumentConstantRule\RequireMethodCallArgumentConstantRuleTest
@@ -41,15 +41,15 @@ final class RequireMethodCallArgumentConstantRule extends \Symplify\CodingStanda
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\MethodCall::class];
     }
     /**
      * @param MethodCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
-        if (!$node->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Identifier) {
+        if (!$node->name instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Identifier) {
             return [];
         }
         $errorMessages = [];
@@ -72,7 +72,7 @@ final class RequireMethodCallArgumentConstantRule extends \Symplify\CodingStanda
      * @param class-string $desiredType
      * @return mixed|null
      */
-    private function matchPositions(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, string $desiredType, array $positionsByMethods, string $methodName)
+    private function matchPositions(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope, string $desiredType, array $positionsByMethods, string $methodName)
     {
         if (!$this->containsTypeAnalyser->containsExprTypes($methodCall->var, $scope, [$desiredType])) {
             return null;
@@ -82,14 +82,14 @@ final class RequireMethodCallArgumentConstantRule extends \Symplify\CodingStanda
     /**
      * @param int[] $positions
      */
-    private function shouldSkipArg(int $key, array $positions, \_PhpScoper3d04c8135695\PhpParser\Node\Arg $arg) : bool
+    private function shouldSkipArg(int $key, array $positions, \_PhpScoper8de082cbb8c7\PhpParser\Node\Arg $arg) : bool
     {
         if (!\in_array($key, $positions, \true)) {
             return \true;
         }
-        if ($arg->value instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable) {
+        if ($arg->value instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Variable) {
             return \true;
         }
-        return $arg->value instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\ClassConstFetch;
+        return $arg->value instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ClassConstFetch;
     }
 }

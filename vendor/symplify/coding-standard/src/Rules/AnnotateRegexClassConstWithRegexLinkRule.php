@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassConst;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\AnnotateRegexClassConstWithRegexLinkRule\AnnotateRegexClassConstWithRegexLinkRuleTest
  */
@@ -27,19 +27,19 @@ final class AnnotateRegexClassConstWithRegexLinkRule extends \Symplify\CodingSta
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassConst::class];
     }
     /**
      * @param ClassConst $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         if (\count((array) $node->consts) !== 1) {
             return [];
         }
         $onlyConst = $node->consts[0];
-        if (!$onlyConst->value instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_) {
+        if (!$onlyConst->value instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_) {
             return [];
         }
         $constantName = (string) $onlyConst->name;
@@ -59,7 +59,7 @@ final class AnnotateRegexClassConstWithRegexLinkRule extends \Symplify\CodingSta
     private function isNonSingleCharRegexPattern(string $value) : bool
     {
         // skip 1-char regexs
-        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::length($value) < 4) {
+        if (\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::length($value) < 4) {
             return \false;
         }
         $firstChar = $value[0];
@@ -67,26 +67,26 @@ final class AnnotateRegexClassConstWithRegexLinkRule extends \Symplify\CodingSta
             return \false;
         }
         $patternWithoutModifiers = \rtrim($value, self::ALL_MODIFIERS);
-        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::length($patternWithoutModifiers) < 1) {
+        if (\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::length($patternWithoutModifiers) < 1) {
             return \false;
         }
-        $lastChar = \_PhpScoper3d04c8135695\Nette\Utils\Strings::substring($patternWithoutModifiers, -1, 1);
+        $lastChar = \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::substring($patternWithoutModifiers, -1, 1);
         if ($firstChar !== $lastChar) {
             return \false;
         }
         // this is probably a regex
         return \true;
     }
-    private function hasDocBlockWithRegexLink(\_PhpScoper3d04c8135695\PhpParser\Node $node) : bool
+    private function hasDocBlockWithRegexLink(\_PhpScoper8de082cbb8c7\PhpParser\Node $node) : bool
     {
         if ($node->getDocComment() === null) {
             return \false;
         }
         $docCommentText = $node->getDocComment()->getText();
-        return \_PhpScoper3d04c8135695\Nette\Utils\Strings::contains($docCommentText, '@see https://regex101.com/r');
+        return \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::contains($docCommentText, '@see https://regex101.com/r');
     }
     private function isRegexPatternConstantName(string $constantName) : bool
     {
-        return (bool) \_PhpScoper3d04c8135695\Nette\Utils\Strings::endsWith($constantName, '_REGEX');
+        return (bool) \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::endsWith($constantName, '_REGEX');
     }
 }

@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
-use _PhpScoper3d04c8135695\PHPStan\Broker\Broker;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PHPStan\Broker\Broker;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\PrefixAbstractClassRule\PrefixAbstractClassRuleTest
  */
@@ -21,7 +21,7 @@ final class PrefixAbstractClassRule extends \Symplify\CodingStandard\Rules\Abstr
      * @var Broker
      */
     private $broker;
-    public function __construct(\_PhpScoper3d04c8135695\PHPStan\Broker\Broker $broker)
+    public function __construct(\_PhpScoper8de082cbb8c7\PHPStan\Broker\Broker $broker)
     {
         $this->broker = $broker;
     }
@@ -30,13 +30,13 @@ final class PrefixAbstractClassRule extends \Symplify\CodingStandard\Rules\Abstr
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_::class];
     }
     /**
      * @param Class_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $className = (string) $node->namespacedName;
         if (!\class_exists($className)) {
@@ -47,7 +47,7 @@ final class PrefixAbstractClassRule extends \Symplify\CodingStandard\Rules\Abstr
             return [];
         }
         $shortClassName = (string) $node->name;
-        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::startsWith($shortClassName, 'Abstract')) {
+        if (\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::startsWith($shortClassName, 'Abstract')) {
             return [];
         }
         return [\sprintf(self::ERROR_MESSAGE, $shortClassName)];

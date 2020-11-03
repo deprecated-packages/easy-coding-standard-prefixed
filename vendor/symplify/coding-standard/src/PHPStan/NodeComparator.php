@@ -3,16 +3,16 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\PHPStan;
 
-use _PhpScoper3d04c8135695\PhpParser\Node\Arg;
-use _PhpScoper3d04c8135695\PhpParser\Node\Param;
-use _PhpScoper3d04c8135695\PhpParser\PrettyPrinter\Standard;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Arg;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Param;
+use _PhpScoper8de082cbb8c7\PhpParser\PrettyPrinter\Standard;
 final class NodeComparator
 {
     /**
      * @var Standard
      */
     private $printerStandard;
-    public function __construct(\_PhpScoper3d04c8135695\PhpParser\PrettyPrinter\Standard $printerStandard)
+    public function __construct(\_PhpScoper8de082cbb8c7\PhpParser\PrettyPrinter\Standard $printerStandard)
     {
         $this->printerStandard = $printerStandard;
     }

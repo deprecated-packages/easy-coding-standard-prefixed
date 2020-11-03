@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\PHPStan;
 
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
-use _PhpScoper3d04c8135695\PHPStan\Reflection\ClassReflection;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PHPStan\Reflection\ClassReflection;
 final class ParentMethodAnalyser
 {
-    public function hasParentClassMethodWithSameName(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, string $methodName) : bool
+    public function hasParentClassMethodWithSameName(\_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope, string $methodName) : bool
     {
         $classReflection = $scope->getClassReflection();
         if ($classReflection === null) {

@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\PropertyFetch;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticPropertyFetch;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper3d04c8135695\PhpParser\NodeFinder;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Assign;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\PropertyFetch;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticPropertyFetch;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper8de082cbb8c7\PhpParser\NodeFinder;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoSetterOnServiceRule\NoSetterOnServiceRuleTest
  */
@@ -29,7 +29,7 @@ final class NoSetterOnServiceRule extends \Symplify\CodingStandard\Rules\Abstrac
      * @var NodeFinder
      */
     private $nodeFinder;
-    public function __construct(\_PhpScoper3d04c8135695\PhpParser\NodeFinder $nodeFinder)
+    public function __construct(\_PhpScoper8de082cbb8c7\PhpParser\NodeFinder $nodeFinder)
     {
         $this->nodeFinder = $nodeFinder;
     }
@@ -38,33 +38,33 @@ final class NoSetterOnServiceRule extends \Symplify\CodingStandard\Rules\Abstrac
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod::class];
     }
     /**
      * @param ClassMethod $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $fullyQualifiedClassName = $this->getClassName($scope);
         if ($fullyQualifiedClassName === null) {
             return [];
         }
-        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::match($fullyQualifiedClassName, self::NOT_A_SERVICE_NAMESPACE_REGEX)) {
+        if (\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::match($fullyQualifiedClassName, self::NOT_A_SERVICE_NAMESPACE_REGEX)) {
             return [];
         }
         if (!$node->isPublic()) {
             return [];
         }
         $classMethodName = $node->name->toString();
-        if (!\_PhpScoper3d04c8135695\Nette\Utils\Strings::startsWith($classMethodName, 'set')) {
+        if (!\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::startsWith($classMethodName, 'set')) {
             return [];
         }
         /** @var Assign[] $assigns */
-        $assigns = $this->nodeFinder->findInstanceOf((array) $node->getStmts(), \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign::class);
+        $assigns = $this->nodeFinder->findInstanceOf((array) $node->getStmts(), \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Assign::class);
         foreach ($assigns as $assign) {
             $assignVariable = $assign->var;
-            if ($assignVariable instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\PropertyFetch || $assignVariable instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticPropertyFetch) {
+            if ($assignVariable instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\PropertyFetch || $assignVariable instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticPropertyFetch) {
                 return [self::ERROR_MESSAGE];
             }
         }

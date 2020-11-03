@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall;
-use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\FuncCall;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticCall;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoInlineStringRegexRule\NoInlineStringRegexRuleTest
  */
@@ -19,11 +19,11 @@ final class NoInlineStringRegexRule extends \Symplify\CodingStandard\Rules\Abstr
     /**
      * @return string[]
      */
-    public function processRegexFuncCall(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall $funcCall) : array
+    public function processRegexFuncCall(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\FuncCall $funcCall) : array
     {
         $firstArgValue = $funcCall->args[0]->value;
         // it's not string → good
-        if (!$firstArgValue instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_) {
+        if (!$firstArgValue instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_) {
             return [];
         }
         return [self::ERROR_MESSAGE];
@@ -31,15 +31,15 @@ final class NoInlineStringRegexRule extends \Symplify\CodingStandard\Rules\Abstr
     /**
      * @return string[]
      */
-    public function processRegexStaticCall(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall $staticCall) : array
+    public function processRegexStaticCall(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticCall $staticCall) : array
     {
         $secondArgValue = $staticCall->args[1]->value;
         // it's not string → good
-        if (!$secondArgValue instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_) {
+        if (!$secondArgValue instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Scalar\String_) {
             return [];
         }
         $regexValue = $secondArgValue->value;
-        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::length($regexValue) <= 7) {
+        if (\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::length($regexValue) <= 7) {
             return [];
         }
         return [self::ERROR_MESSAGE];

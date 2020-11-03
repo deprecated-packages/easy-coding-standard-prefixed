@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\NullableType;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\NullableType;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoNullableParameterRule\NoNullableParameterRuleTest
  */
@@ -21,20 +21,20 @@ final class NoNullableParameterRule extends \Symplify\CodingStandard\Rules\Abstr
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod::class];
     }
     /**
      * @param ClassMethod $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $errorMessages = [];
         foreach ($node->params as $param) {
             if ($param->type === null) {
                 continue;
             }
-            if (!$param->type instanceof \_PhpScoper3d04c8135695\PhpParser\Node\NullableType) {
+            if (!$param->type instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\NullableType) {
                 continue;
             }
             $paramName = (string) $param->var->name;

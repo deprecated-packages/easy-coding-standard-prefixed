@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassConst;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Property;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\ExcessivePublicCountRule\ExcessivePublicCountRuleTest
  */
@@ -38,13 +38,13 @@ final class ExcessivePublicCountRule extends \Symplify\CodingStandard\Rules\Abst
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_::class];
     }
     /**
      * @param Class_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $classPublicElementCount = $this->resolveClassPublicElementCount($node);
         if ($classPublicElementCount < $this->maxPublicClassElementCount) {
@@ -53,7 +53,7 @@ final class ExcessivePublicCountRule extends \Symplify\CodingStandard\Rules\Abst
         $errorMessage = \sprintf(self::ERROR_MESSAGE, $classPublicElementCount, $this->maxPublicClassElementCount);
         return [$errorMessage];
     }
-    private function resolveClassPublicElementCount(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_ $class) : int
+    private function resolveClassPublicElementCount(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_ $class) : int
     {
         $publicElementCount = 0;
         $className = (string) $class->namespacedName;
@@ -65,20 +65,20 @@ final class ExcessivePublicCountRule extends \Symplify\CodingStandard\Rules\Abst
         }
         return $publicElementCount;
     }
-    private function shouldSkipClassStmt(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt $classStmt, string $className) : bool
+    private function shouldSkipClassStmt(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt $classStmt, string $className) : bool
     {
-        if (!$classStmt instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property && !$classStmt instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod && !$classStmt instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst) {
+        if (!$classStmt instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Property && !$classStmt instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod && !$classStmt instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassConst) {
             return \true;
         }
         if (!$classStmt->isPublic()) {
             return \true;
         }
-        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::match($className, self::VALUE_OBJECT_REGEX) && $classStmt instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst) {
+        if (\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::match($className, self::VALUE_OBJECT_REGEX) && $classStmt instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassConst) {
             return \true;
         }
-        if ($classStmt instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod) {
+        if ($classStmt instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod) {
             $methodName = (string) $classStmt->name;
-            return \_PhpScoper3d04c8135695\Nette\Utils\Strings::startsWith($methodName, '__');
+            return \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::startsWith($methodName, '__');
         }
         return \false;
     }

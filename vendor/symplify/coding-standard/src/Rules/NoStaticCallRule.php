@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticCall;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use Symplify\PackageBuilder\Matcher\ArrayStringAndFnMatcher;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoStaticCallRule\NoStaticCallRuleTest
@@ -24,20 +24,20 @@ final class NoStaticCallRule extends \Symplify\CodingStandard\Rules\AbstractSymp
      */
     private const DEFAULT_ALLOWED_STATIC_CALL_CLASSES = [
         // nette
-        '_PhpScoper3d04c8135695\\Nette\\Utils\\Strings',
-        '_PhpScoper3d04c8135695\\Nette\\Utils\\DateTime',
-        '_PhpScoper3d04c8135695\\Nette\\Utils\\Finder',
-        '_PhpScoper3d04c8135695\\Nette\\Utils\\FileSystem',
-        '_PhpScoper3d04c8135695\\Nette\\Utils\\ObjectHelpers',
-        '_PhpScoper3d04c8135695\\Nette\\Utils\\Json',
-        '_PhpScoper3d04c8135695\\Nette\\Utils\\Arrays',
-        '_PhpScoper3d04c8135695\\Nette\\Utils\\Reflection',
-        '_PhpScoper3d04c8135695\\Ramsey\\Uuid\\Uuid',
+        '_PhpScoper8de082cbb8c7\\Nette\\Utils\\Strings',
+        '_PhpScoper8de082cbb8c7\\Nette\\Utils\\DateTime',
+        '_PhpScoper8de082cbb8c7\\Nette\\Utils\\Finder',
+        '_PhpScoper8de082cbb8c7\\Nette\\Utils\\FileSystem',
+        '_PhpScoper8de082cbb8c7\\Nette\\Utils\\ObjectHelpers',
+        '_PhpScoper8de082cbb8c7\\Nette\\Utils\\Json',
+        '_PhpScoper8de082cbb8c7\\Nette\\Utils\\Arrays',
+        '_PhpScoper8de082cbb8c7\\Nette\\Utils\\Reflection',
+        '_PhpScoper8de082cbb8c7\\Ramsey\\Uuid\\Uuid',
         // symfony
-        '_PhpScoper3d04c8135695\\Symfony\\Component\\Finder\\Finder',
-        '_PhpScoper3d04c8135695\\Symfony\\Component\\Yaml\\Yaml',
-        '_PhpScoper3d04c8135695\\Symfony\\Component\\Process\\Process',
-        '_PhpScoper3d04c8135695\\Symfony\\Component\\Console\\Formatter\\OutputFormatter',
+        '_PhpScoper8de082cbb8c7\\Symfony\\Component\\Finder\\Finder',
+        '_PhpScoper8de082cbb8c7\\Symfony\\Component\\Yaml\\Yaml',
+        '_PhpScoper8de082cbb8c7\\Symfony\\Component\\Process\\Process',
+        '_PhpScoper8de082cbb8c7\\Symfony\\Component\\Console\\Formatter\\OutputFormatter',
         // symplify
         'Symplify\\EasyTesting\\DataProvider\\StaticFixtureFinder',
         'Symplify\\EasyTesting\\StaticFixtureSplitter',
@@ -47,9 +47,9 @@ final class NoStaticCallRule extends \Symplify\CodingStandard\Rules\AbstractSymp
         'Composer\\Factory',
         // various
         'PhpCsFixer\\Tokenizer\\Tokens',
-        '_PhpScoper3d04c8135695\\Jean85\\PrettyVersions',
-        '_PhpScoper3d04c8135695\\DG\\BypassFinals',
-        '_PhpScoper3d04c8135695\\Nette\\Utils\\Random',
+        '_PhpScoper8de082cbb8c7\\Jean85\\PrettyVersions',
+        '_PhpScoper8de082cbb8c7\\DG\\BypassFinals',
+        '_PhpScoper8de082cbb8c7\\Nette\\Utils\\Random',
     ];
     /**
      * @var string[]
@@ -72,15 +72,15 @@ final class NoStaticCallRule extends \Symplify\CodingStandard\Rules\AbstractSymp
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticCall::class];
     }
     /**
      * @param StaticCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
-        if ($node->class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
+        if ($node->class instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr) {
             return [];
         }
         $className = (string) $node->class;
@@ -88,17 +88,17 @@ final class NoStaticCallRule extends \Symplify\CodingStandard\Rules\AbstractSymp
             return [];
         }
         // weird → skip
-        if ($node->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
+        if ($node->name instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr) {
             return [];
         }
         // skip static factories
         $method = (string) $node->name;
-        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::startsWith($method, 'create')) {
+        if (\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::startsWith($method, 'create')) {
             return [];
         }
         // skip static class in name
-        $shortClassName = (string) \_PhpScoper3d04c8135695\Nette\Utils\Strings::after($className, '\\', -1);
-        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::contains($shortClassName, 'Static')) {
+        $shortClassName = (string) \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::after($className, '\\', -1);
+        if (\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::contains($shortClassName, 'Static')) {
             return [];
         }
         if ($this->arrayStringAndFnMatcher->isMatch($className, $this->allowedStaticCallClasses)) {

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3d04c8135695\PhpParser\Lexer\TokenEmulator;
+namespace _PhpScoper8de082cbb8c7\PhpParser\Lexer\TokenEmulator;
 
-abstract class KeywordEmulator extends \_PhpScoper3d04c8135695\PhpParser\Lexer\TokenEmulator\TokenEmulator
+abstract class KeywordEmulator extends \_PhpScoper8de082cbb8c7\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     abstract function getKeywordString() : string;
     abstract function getKeywordToken() : int;

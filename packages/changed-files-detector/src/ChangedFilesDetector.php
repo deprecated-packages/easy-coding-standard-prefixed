@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\ChangedFilesDetector;
 
-use _PhpScoper3d04c8135695\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use _PhpScoper3d04c8135695\Symfony\Component\Cache\CacheItem;
+use _PhpScoper8de082cbb8c7\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use _PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem;
 use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\EasyCodingStandard\ChangedFilesDetector\Tests\ChangedFilesDetectorTest
@@ -27,7 +27,7 @@ final class ChangedFilesDetector
      * @var TagAwareAdapterInterface
      */
     private $tagAwareAdapter;
-    public function __construct(\Symplify\EasyCodingStandard\ChangedFilesDetector\FileHashComputer $fileHashComputer, \_PhpScoper3d04c8135695\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $tagAwareAdapter)
+    public function __construct(\Symplify\EasyCodingStandard\ChangedFilesDetector\FileHashComputer $fileHashComputer, \_PhpScoper8de082cbb8c7\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $tagAwareAdapter)
     {
         $this->fileHashComputer = $fileHashComputer;
         $this->tagAwareAdapter = $tagAwareAdapter;

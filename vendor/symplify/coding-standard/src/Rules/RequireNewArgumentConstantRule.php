@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ClassConstFetch;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\New_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Name\FullyQualified;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ClassConstFetch;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\New_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Name\FullyQualified;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\RequireNewArgumentConstantRule\RequireNewArgumentConstantRuleTest
  */
@@ -33,16 +33,16 @@ final class RequireNewArgumentConstantRule extends \Symplify\CodingStandard\Rule
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\New_::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\New_::class];
     }
     /**
      * @param New_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $class = $node->class;
-        if (!$class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Name\FullyQualified) {
+        if (!$class instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Name\FullyQualified) {
             return [];
         }
         $className = $class->toString();
@@ -52,7 +52,7 @@ final class RequireNewArgumentConstantRule extends \Symplify\CodingStandard\Rule
         $args = $node->args;
         $positions = $this->constantArgByNewByType[$className];
         foreach ($positions as $position) {
-            if (!$args[$position]->value instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\ClassConstFetch) {
+            if (!$args[$position]->value instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ClassConstFetch) {
                 return [\sprintf(self::ERROR_MESSAGE, $position)];
             }
         }

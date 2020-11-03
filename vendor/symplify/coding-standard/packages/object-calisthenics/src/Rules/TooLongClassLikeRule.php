@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\ObjectCalisthenics\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Interface_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassLike;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Interface_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\Rules\AbstractSymplifyRule;
 /**
  * @see \Symplify\CodingStandard\ObjectCalisthenics\Tests\Rules\TooLongClassLikeRule\TooLongClassLikeRuleTest
@@ -31,13 +31,13 @@ final class TooLongClassLikeRule extends \Symplify\CodingStandard\Rules\Abstract
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassLike::class];
     }
     /**
      * @param ClassLike $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $currentClassLenght = $this->getNodeLength($node);
         if ($currentClassLenght <= $this->maxClassLikeLength) {
@@ -47,17 +47,17 @@ final class TooLongClassLikeRule extends \Symplify\CodingStandard\Rules\Abstract
         $errorMessage = \sprintf(self::ERROR_MESSAGE, $classLikeType, $currentClassLenght, $this->maxClassLikeLength);
         return [$errorMessage];
     }
-    private function resolveClassLikeType(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike $classLike) : string
+    private function resolveClassLikeType(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassLike $classLike) : string
     {
-        if ($classLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_) {
+        if ($classLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_) {
             return 'Class';
         }
-        if ($classLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Interface_) {
+        if ($classLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Interface_) {
             return 'Interface';
         }
         return 'Trait';
     }
-    private function getNodeLength(\_PhpScoper3d04c8135695\PhpParser\Node $node) : int
+    private function getNodeLength(\_PhpScoper8de082cbb8c7\PhpParser\Node $node) : int
     {
         return $node->getEndLine() - $node->getStartLine();
     }

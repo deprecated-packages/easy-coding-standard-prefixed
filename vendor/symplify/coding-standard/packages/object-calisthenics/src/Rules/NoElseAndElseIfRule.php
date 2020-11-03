@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\ObjectCalisthenics\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Else_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ElseIf_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Else_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ElseIf_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\Rules\AbstractSymplifyRule;
 /**
  * @see https://github.com/object-calisthenics/phpcs-calisthenics-rules#2-do-not-use-else-keyword
@@ -24,13 +24,13 @@ final class NoElseAndElseIfRule extends \Symplify\CodingStandard\Rules\AbstractS
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Else_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ElseIf_::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Else_::class, \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ElseIf_::class];
     }
     /**
      * @param Else_|ElseIf_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         return [self::MESSAGE];
     }

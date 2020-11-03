@@ -3,17 +3,17 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\PHPStan\NodeAnalyzer;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\PropertyFetch;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Trait_;
-use _PhpScoper3d04c8135695\PhpParser\NodeFinder;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Assign;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\PropertyFetch;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Variable;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassLike;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Property;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Trait_;
+use _PhpScoper8de082cbb8c7\PhpParser\NodeFinder;
 use Symplify\CodingStandard\PHPStan\Naming\SimpleNameResolver;
 use Symplify\CodingStandard\ValueObject\MethodName;
 use Symplify\CodingStandard\ValueObject\PHPStanAttributeKey;
@@ -32,48 +32,48 @@ final class DependencyNodeAnalyzer
      * @var SimpleNameResolver
      */
     private $simpleNameResolver;
-    public function __construct(\_PhpScoper3d04c8135695\PhpParser\NodeFinder $nodeFinder, \Symplify\CodingStandard\PHPStan\Naming\SimpleNameResolver $simpleNameResolver)
+    public function __construct(\_PhpScoper8de082cbb8c7\PhpParser\NodeFinder $nodeFinder, \Symplify\CodingStandard\PHPStan\Naming\SimpleNameResolver $simpleNameResolver)
     {
         $this->nodeFinder = $nodeFinder;
         $this->simpleNameResolver = $simpleNameResolver;
     }
-    public function isInsideAbstractClassAndPassedAsDependencyViaConstructorOrSetUp(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property $property) : bool
+    public function isInsideAbstractClassAndPassedAsDependencyViaConstructorOrSetUp(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Property $property) : bool
     {
         $classLike = $this->resolveCurrentClass($property);
-        if (!$classLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_) {
+        if (!$classLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_) {
             return \false;
         }
         if (!$classLike->isAbstract()) {
             return \false;
         }
         $classMethod = $classLike->getMethod(\Symplify\CodingStandard\ValueObject\MethodName::CONSTRUCTOR) ?? $classLike->getMethod(\Symplify\CodingStandard\ValueObject\MethodName::SET_UP);
-        if (!$classMethod instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod) {
+        if (!$classMethod instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod) {
             return \false;
         }
         /** @var Assign[] $assigns */
-        $assigns = $this->nodeFinder->findInstanceOf($classMethod, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign::class);
+        $assigns = $this->nodeFinder->findInstanceOf($classMethod, \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Assign::class);
         if ($assigns === []) {
             return \false;
         }
         return $this->isBeeingAssignedInAssigns($property, $assigns);
     }
-    public function isInsideClassAndPassedAsDependencyViaAutowireMethod(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property $property) : bool
+    public function isInsideClassAndPassedAsDependencyViaAutowireMethod(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Property $property) : bool
     {
         $classLike = $this->resolveCurrentClass($property);
-        if (!$classLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_ && !$classLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Trait_) {
+        if (!$classLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_ && !$classLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Trait_) {
             return \false;
         }
         $shortClassName = (string) $classLike->name;
         $autowireMethodName = 'autowire' . $shortClassName;
         $classMethod = $classLike->getMethod($autowireMethodName);
-        if (!$classMethod instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod) {
+        if (!$classMethod instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod) {
             return \false;
         }
         if (!$this->hasRequiredAnnotation($classMethod)) {
             return \false;
         }
         /** @var Assign[] $assigns */
-        $assigns = $this->nodeFinder->findInstanceOf($classMethod, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign::class);
+        $assigns = $this->nodeFinder->findInstanceOf($classMethod, \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Assign::class);
         if ($assigns === []) {
             return \false;
         }
@@ -82,10 +82,10 @@ final class DependencyNodeAnalyzer
     /**
      * @param Assign[] $assigns
      */
-    private function isBeeingAssignedInAssigns(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property $property, array $assigns) : bool
+    private function isBeeingAssignedInAssigns(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Property $property, array $assigns) : bool
     {
         foreach ($assigns as $assign) {
-            if (!$assign->var instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\PropertyFetch) {
+            if (!$assign->var instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\PropertyFetch) {
                 continue;
             }
             if ($this->isPropertyFetchAndPropertyMatch($assign->var, $property)) {
@@ -94,18 +94,18 @@ final class DependencyNodeAnalyzer
         }
         return \false;
     }
-    private function resolveCurrentClass(\_PhpScoper3d04c8135695\PhpParser\Node $node) : ?\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike
+    private function resolveCurrentClass(\_PhpScoper8de082cbb8c7\PhpParser\Node $node) : ?\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassLike
     {
         $class = $node->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
         while ($class) {
-            if ($class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike) {
+            if ($class instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassLike) {
                 return $class;
             }
             $class = $class->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
         }
         return null;
     }
-    private function isPropertyFetchAndPropertyMatch(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\PropertyFetch $propertyFetch, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property $property) : bool
+    private function isPropertyFetchAndPropertyMatch(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\PropertyFetch $propertyFetch, \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Property $property) : bool
     {
         $assignedPropertyName = $this->simpleNameResolver->getName($property);
         if ($assignedPropertyName === null) {
@@ -120,20 +120,20 @@ final class DependencyNodeAnalyzer
         }
         return $propertyName === $assignedPropertyName;
     }
-    private function isLocalPropertyFetch(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\PropertyFetch $propertyFetch) : bool
+    private function isLocalPropertyFetch(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\PropertyFetch $propertyFetch) : bool
     {
-        if (!$propertyFetch->var instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable) {
+        if (!$propertyFetch->var instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Variable) {
             return \false;
         }
         $propertyVariableName = $this->simpleNameResolver->getName($propertyFetch->var);
         return $propertyVariableName === 'this';
     }
-    private function hasRequiredAnnotation(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod $classMethod) : bool
+    private function hasRequiredAnnotation(\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod $classMethod) : bool
     {
         $docComment = $classMethod->getDocComment();
         if ($docComment === null) {
             return \false;
         }
-        return (bool) \_PhpScoper3d04c8135695\Nette\Utils\Strings::match($docComment->getText(), self::REQUIRED_DOCBLOCK_REGEX);
+        return (bool) \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::match($docComment->getText(), self::REQUIRED_DOCBLOCK_REGEX);
     }
 }

@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticPropertyFetch;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
-use _PhpScoper3d04c8135695\PHPStan\DependencyInjection\Container;
-use _PhpScoper3d04c8135695\Psr\Container\ContainerInterface;
-use _PhpScoper3d04c8135695\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticPropertyFetch;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PHPStan\DependencyInjection\Container;
+use _PhpScoper8de082cbb8c7\Psr\Container\ContainerInterface;
+use _PhpScoper8de082cbb8c7\Symfony\Component\HttpKernel\KernelInterface;
 use Symplify\CodingStandard\PHPStan\Types\ContainsTypeAnalyser;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoStaticPropertyRule\NoStaticPropertyRuleTest
@@ -22,7 +22,7 @@ final class NoStaticPropertyRule extends \Symplify\CodingStandard\Rules\Abstract
     /**
      * @var string[]
      */
-    private const CACHEABLE_TYPES = [\_PhpScoper3d04c8135695\Psr\Container\ContainerInterface::class, \_PhpScoper3d04c8135695\PHPStan\DependencyInjection\Container::class, \_PhpScoper3d04c8135695\Symfony\Component\HttpKernel\KernelInterface::class];
+    private const CACHEABLE_TYPES = [\_PhpScoper8de082cbb8c7\Psr\Container\ContainerInterface::class, \_PhpScoper8de082cbb8c7\PHPStan\DependencyInjection\Container::class, \_PhpScoper8de082cbb8c7\Symfony\Component\HttpKernel\KernelInterface::class];
     /**
      * @var ContainsTypeAnalyser
      */
@@ -36,13 +36,13 @@ final class NoStaticPropertyRule extends \Symplify\CodingStandard\Rules\Abstract
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticPropertyFetch::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticPropertyFetch::class];
     }
     /**
      * @param StaticPropertyFetch $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         if ($this->containsTypeAnalyser->containsExprTypes($node, $scope, self::CACHEABLE_TYPES)) {
             return [];

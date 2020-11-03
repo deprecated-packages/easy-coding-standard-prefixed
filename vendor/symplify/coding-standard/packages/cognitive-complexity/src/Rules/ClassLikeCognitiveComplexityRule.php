@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\CognitiveComplexity\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Trait_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Trait_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\CognitiveComplexity\AstCognitiveComplexityAnalyzer;
 use Symplify\CodingStandard\Rules\AbstractSymplifyRule;
 /**
@@ -36,13 +36,13 @@ final class ClassLikeCognitiveComplexityRule extends \Symplify\CodingStandard\Ru
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Trait_::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_::class, \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Trait_::class];
     }
     /**
      * @param Class_|Trait_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $classLikeCognitiveComplexity = 0;
         $classMethods = $node->getMethods();
@@ -53,7 +53,7 @@ final class ClassLikeCognitiveComplexityRule extends \Symplify\CodingStandard\Ru
             return [];
         }
         $classLikeName = (string) $node->name;
-        $type = $node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_ ? 'Class' : 'Trait';
+        $type = $node instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Class_ ? 'Class' : 'Trait';
         $message = \sprintf(self::ERROR_MESSAGE, $type, $classLikeName, $classLikeCognitiveComplexity, $this->maxClassCognitiveComplexity);
         return [$message];
     }

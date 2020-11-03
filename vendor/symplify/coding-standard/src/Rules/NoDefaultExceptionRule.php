@@ -4,11 +4,11 @@ declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
 use Exception;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\New_;
-use _PhpScoper3d04c8135695\PhpParser\Node\Name;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Throw_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\New_;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Name;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Throw_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use ReflectionClass;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoDefaultExceptionRule\NoDefaultExceptionRuleTest
@@ -24,20 +24,20 @@ final class NoDefaultExceptionRule extends \Symplify\CodingStandard\Rules\Abstra
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Throw_::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Throw_::class];
     }
     /**
      * @param Throw_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
-        if (!$node->expr instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\New_) {
+        if (!$node->expr instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\New_) {
             return [];
         }
         /** @var New_ $new */
         $new = $node->expr;
-        if (!$new->class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Name) {
+        if (!$new->class instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Name) {
             return [];
         }
         $exceptionClass = (string) $new->class;

@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\CognitiveComplexity\Rules;
 
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ArrowFunction;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Closure;
-use _PhpScoper3d04c8135695\PhpParser\Node\FunctionLike;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ArrowFunction;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Closure;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\FunctionLike;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Function_;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\CognitiveComplexity\AstCognitiveComplexityAnalyzer;
 use Symplify\CodingStandard\Rules\AbstractSymplifyRule;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -49,13 +49,13 @@ final class FunctionLikeCognitiveComplexityRule extends \Symplify\CodingStandard
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod::class, \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Function_::class];
     }
     /**
      * @param Function_|ClassMethod $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
         $functionLikeCognitiveComplexity = $this->astCognitiveComplexityAnalyzer->analyzeFunctionLike($node);
         if ($functionLikeCognitiveComplexity <= $this->maxMethodCognitiveComplexity) {
@@ -65,12 +65,12 @@ final class FunctionLikeCognitiveComplexityRule extends \Symplify\CodingStandard
         $message = \sprintf(self::ERROR_MESSAGE, $functionLikeName, $functionLikeCognitiveComplexity, $this->maxMethodCognitiveComplexity);
         return [$message];
     }
-    private function resolveFunctionName(\_PhpScoper3d04c8135695\PhpParser\Node\FunctionLike $functionLike, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : string
+    private function resolveFunctionName(\_PhpScoper8de082cbb8c7\PhpParser\Node\FunctionLike $functionLike, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : string
     {
-        if ($functionLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_) {
+        if ($functionLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\Function_) {
             return $functionLike->name . '()';
         }
-        if ($functionLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod) {
+        if ($functionLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Stmt\ClassMethod) {
             $name = '';
             $classReflection = $scope->getClassReflection();
             if ($classReflection !== null) {
@@ -78,10 +78,10 @@ final class FunctionLikeCognitiveComplexityRule extends \Symplify\CodingStandard
             }
             return $name . $functionLike->name . '()';
         }
-        if ($functionLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Closure) {
+        if ($functionLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\Closure) {
             return 'closure';
         }
-        if ($functionLike instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\ArrowFunction) {
+        if ($functionLike instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\ArrowFunction) {
             return 'arrow function';
         }
         throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();

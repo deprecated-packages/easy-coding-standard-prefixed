@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
-use _PhpScoper3d04c8135695\PhpParser\Node;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall;
-use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall;
-use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\PhpParser\Node;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\FuncCall;
+use _PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticCall;
+use _PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\Contract\RegexRuleInterface;
 abstract class AbstractRegexRule extends \Symplify\CodingStandard\Rules\AbstractSymplifyRule implements \Symplify\CodingStandard\Contract\RegexRuleInterface
 {
@@ -23,21 +23,21 @@ abstract class AbstractRegexRule extends \Symplify\CodingStandard\Rules\Abstract
     /**
      * @var string
      */
-    private const NETTE_UTILS_STRINGS_CLASS = \_PhpScoper3d04c8135695\Nette\Utils\Strings::class;
+    private const NETTE_UTILS_STRINGS_CLASS = \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::class;
     /**
      * @return string[]
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall::class];
+        return [\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticCall::class, \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\FuncCall::class];
     }
     /**
      * @param StaticCall|FuncCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper8de082cbb8c7\PhpParser\Node $node, \_PhpScoper8de082cbb8c7\PHPStan\Analyser\Scope $scope) : array
     {
-        if ($node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall) {
+        if ($node instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\FuncCall) {
             return $this->processFuncCall($node);
         }
         return $this->processStaticCall($node);
@@ -45,9 +45,9 @@ abstract class AbstractRegexRule extends \Symplify\CodingStandard\Rules\Abstract
     /**
      * @return string[]
      */
-    private function processFuncCall(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall $funcCall) : array
+    private function processFuncCall(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\FuncCall $funcCall) : array
     {
-        if ($funcCall->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
+        if ($funcCall->name instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr) {
             return [];
         }
         $funcCallName = (string) $funcCall->name;
@@ -59,12 +59,12 @@ abstract class AbstractRegexRule extends \Symplify\CodingStandard\Rules\Abstract
     /**
      * @return string[]
      */
-    private function processStaticCall(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall $staticCall) : array
+    private function processStaticCall(\_PhpScoper8de082cbb8c7\PhpParser\Node\Expr\StaticCall $staticCall) : array
     {
-        if ($staticCall->class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
+        if ($staticCall->class instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr) {
             return [];
         }
-        if ($staticCall->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
+        if ($staticCall->name instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Expr) {
             return [];
         }
         $className = (string) $staticCall->class;

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -62,7 +62,7 @@ final class ParamReturnAndVarTagMalformsFixer extends \Symplify\CodingStandard\F
                 continue;
             }
             $docContent = $token->getContent();
-            if (!\_PhpScoper3d04c8135695\Nette\Utils\Strings::match($docContent, self::TYPE_ANNOTATION_REGEX)) {
+            if (!\_PhpScoper8de082cbb8c7\Nette\Utils\Strings::match($docContent, self::TYPE_ANNOTATION_REGEX)) {
                 continue;
             }
             $originalDocContent = $docContent;

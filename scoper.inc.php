@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3d04c8135695;
+namespace _PhpScoper8de082cbb8c7;
 
 require_once __DIR__ . '/vendor/autoload.php';
-use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper8de082cbb8c7\Nette\Utils\Strings;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 $excludedClasses = [
     // part of public API in config
@@ -16,7 +16,7 @@ return ['prefix' => null, 'finders' => [], 'patchers' => [
     function (string $filePath, string $prefix, string $content) use($excludedClasses) : string {
         foreach ($excludedClasses as $excludedClass) {
             $prefixedClassPattern = '#' . $prefix . '\\\\' . \preg_quote($excludedClass, '#') . '#';
-            $content = \_PhpScoper3d04c8135695\Nette\Utils\Strings::replace($content, $prefixedClassPattern, $excludedClass);
+            $content = \_PhpScoper8de082cbb8c7\Nette\Utils\Strings::replace($content, $prefixedClassPattern, $excludedClass);
         }
         return $content;
     },
@@ -29,3 +29,6 @@ return ['prefix' => null, 'finders' => [], 'patchers' => [
     \Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator::class,
     'Composer\\*',
 ]];
+// notes from compiler commands
+// remove this file, breaks stuff
+// __DIR__ . '/../../../vendor/friendsofphp/php-cs-fixer/src/Test/AbstractIntegrationTestCase.php',
