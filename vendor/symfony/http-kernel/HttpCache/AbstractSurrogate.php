@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper83a475a0590e\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScopera238de2e9b5a\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper83a475a0590e\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper83a475a0590e\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper83a475a0590e\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Request;
+use _PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Response;
+use _PhpScopera238de2e9b5a\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Abstract class implementing Surrogate capabilities to Request and Response instances.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-abstract class AbstractSurrogate implements \_PhpScoper83a475a0590e\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface
+abstract class AbstractSurrogate implements \_PhpScopera238de2e9b5a\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface
 {
     protected $contentTypes;
     protected $phpEscapeMap = [['<?', '<%', '<s', '<S'], ['<?php echo "<?"; ?>', '<?php echo "<%"; ?>', '<?php echo "<s"; ?>', '<?php echo "<S"; ?>']];
@@ -38,12 +38,12 @@ abstract class AbstractSurrogate implements \_PhpScoper83a475a0590e\Symfony\Comp
      */
     public function createCacheStrategy()
     {
-        return new \_PhpScoper83a475a0590e\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategy();
+        return new \_PhpScopera238de2e9b5a\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategy();
     }
     /**
      * {@inheritdoc}
      */
-    public function hasSurrogateCapability(\_PhpScoper83a475a0590e\Symfony\Component\HttpFoundation\Request $request)
+    public function hasSurrogateCapability(\_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Request $request)
     {
         if (null === ($value = $request->headers->get('Surrogate-Capability'))) {
             return \false;
@@ -53,7 +53,7 @@ abstract class AbstractSurrogate implements \_PhpScoper83a475a0590e\Symfony\Comp
     /**
      * {@inheritdoc}
      */
-    public function addSurrogateCapability(\_PhpScoper83a475a0590e\Symfony\Component\HttpFoundation\Request $request)
+    public function addSurrogateCapability(\_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Request $request)
     {
         $current = $request->headers->get('Surrogate-Capability');
         $new = \sprintf('symfony="%s/1.0"', \strtoupper($this->getName()));
@@ -62,7 +62,7 @@ abstract class AbstractSurrogate implements \_PhpScoper83a475a0590e\Symfony\Comp
     /**
      * {@inheritdoc}
      */
-    public function needsParsing(\_PhpScoper83a475a0590e\Symfony\Component\HttpFoundation\Response $response)
+    public function needsParsing(\_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Response $response)
     {
         if (!($control = $response->headers->get('Surrogate-Control'))) {
             return \false;
@@ -73,11 +73,11 @@ abstract class AbstractSurrogate implements \_PhpScoper83a475a0590e\Symfony\Comp
     /**
      * {@inheritdoc}
      */
-    public function handle(\_PhpScoper83a475a0590e\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, $uri, $alt, $ignoreErrors)
+    public function handle(\_PhpScopera238de2e9b5a\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, $uri, $alt, $ignoreErrors)
     {
-        $subRequest = \_PhpScoper83a475a0590e\Symfony\Component\HttpFoundation\Request::create($uri, \_PhpScoper83a475a0590e\Symfony\Component\HttpFoundation\Request::METHOD_GET, [], $cache->getRequest()->cookies->all(), [], $cache->getRequest()->server->all());
+        $subRequest = \_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Request::create($uri, \_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Request::METHOD_GET, [], $cache->getRequest()->cookies->all(), [], $cache->getRequest()->server->all());
         try {
-            $response = $cache->handle($subRequest, \_PhpScoper83a475a0590e\Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST, \true);
+            $response = $cache->handle($subRequest, \_PhpScopera238de2e9b5a\Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST, \true);
             if (!$response->isSuccessful()) {
                 throw new \RuntimeException(\sprintf('Error when rendering "%s" (Status code is %s).', $subRequest->getUri(), $response->getStatusCode()));
             }
@@ -95,7 +95,7 @@ abstract class AbstractSurrogate implements \_PhpScoper83a475a0590e\Symfony\Comp
     /**
      * Remove the Surrogate from the Surrogate-Control header.
      */
-    protected function removeFromControl(\_PhpScoper83a475a0590e\Symfony\Component\HttpFoundation\Response $response)
+    protected function removeFromControl(\_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Response $response)
     {
         if (!$response->headers->has('Surrogate-Control')) {
             return;

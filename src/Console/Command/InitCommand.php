@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScoper83a475a0590e\Symfony\Component\Console\Command\Command;
-use _PhpScoper83a475a0590e\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper83a475a0590e\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper83a475a0590e\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopera238de2e9b5a\Symfony\Component\Console\Command\Command;
+use _PhpScopera238de2e9b5a\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopera238de2e9b5a\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopera238de2e9b5a\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\SmartFileSystem\SmartFileSystem;
-final class InitCommand extends \_PhpScoper83a475a0590e\Symfony\Component\Console\Command\Command
+final class InitCommand extends \_PhpScopera238de2e9b5a\Symfony\Component\Console\Command\Command
 {
     /**
      * @var SmartFileSystem
@@ -22,7 +22,7 @@ final class InitCommand extends \_PhpScoper83a475a0590e\Symfony\Component\Consol
     /**
      * InitCommand constructor.
      */
-    public function __construct(\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \_PhpScoper83a475a0590e\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
+    public function __construct(\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \_PhpScopera238de2e9b5a\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
     {
         parent::__construct();
         $this->smartFileSystem = $smartFileSystem;
@@ -32,7 +32,7 @@ final class InitCommand extends \_PhpScoper83a475a0590e\Symfony\Component\Consol
     {
         $this->setDescription('Generate rector.php configuration file');
     }
-    protected function execute(\_PhpScoper83a475a0590e\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper83a475a0590e\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScopera238de2e9b5a\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopera238de2e9b5a\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $rectorConfigFiles = $this->smartFileSystem->exists(\getcwd() . '/ecs.php');
         if (!$rectorConfigFiles) {

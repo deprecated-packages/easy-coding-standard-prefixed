@@ -9,18 +9,18 @@ use SlevomatCodingStandard\Helpers\ConditionHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function in_array;
 use const T_CASE;
-use const _PhpScoper83a475a0590e\T_CLOSE_PARENTHESIS;
-use const _PhpScoper83a475a0590e\T_CLOSE_SHORT_ARRAY;
-use const _PhpScoper83a475a0590e\T_CLOSE_SQUARE_BRACKET;
-use const _PhpScoper83a475a0590e\T_COMMA;
+use const _PhpScopera238de2e9b5a\T_CLOSE_PARENTHESIS;
+use const _PhpScopera238de2e9b5a\T_CLOSE_SHORT_ARRAY;
+use const _PhpScopera238de2e9b5a\T_CLOSE_SQUARE_BRACKET;
+use const _PhpScopera238de2e9b5a\T_COMMA;
 use const T_DOUBLE_ARROW;
-use const _PhpScoper83a475a0590e\T_EQUAL;
-use const _PhpScoper83a475a0590e\T_FALSE;
-use const _PhpScoper83a475a0590e\T_INLINE_ELSE;
-use const _PhpScoper83a475a0590e\T_INLINE_THEN;
+use const _PhpScopera238de2e9b5a\T_EQUAL;
+use const _PhpScopera238de2e9b5a\T_FALSE;
+use const _PhpScopera238de2e9b5a\T_INLINE_ELSE;
+use const _PhpScopera238de2e9b5a\T_INLINE_THEN;
 use const T_OPEN_TAG;
 use const T_RETURN;
-use const _PhpScoper83a475a0590e\T_TRUE;
+use const _PhpScopera238de2e9b5a\T_TRUE;
 class UselessTernaryOperatorSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_USELESS_TERNARY_OPERATOR = 'UselessTernaryOperator';

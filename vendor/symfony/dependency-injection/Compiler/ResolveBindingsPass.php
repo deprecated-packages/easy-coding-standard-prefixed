@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * @author Guilhem Niot <guilhem.niot@gmail.com>
  */
-class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveBindingsPass extends \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $usedBindings = [];
     private $unusedBindings = [];
@@ -30,7 +30,7 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->usedBindings = $container->getRemovedBindingIds();
         try {
@@ -50,9 +50,9 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
                 if ($argumentName) {
                     $message .= \sprintf('named "%s" ', $argumentName);
                 }
-                if (\_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING === $bindingType) {
+                if (\_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING === $bindingType) {
                     $message .= 'under "_defaults"';
-                } elseif (\_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING === $bindingType) {
+                } elseif (\_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING === $bindingType) {
                     $message .= 'under "_instanceof"';
                 } else {
                     $message .= \sprintf('for service "%s"', $serviceId);
@@ -67,7 +67,7 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
                 foreach ($this->errorMessages as $m) {
                     $message .= "\n - " . $m;
                 }
-                throw new \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException($message);
+                throw new \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException($message);
             }
         } finally {
             $this->usedBindings = [];
@@ -80,7 +80,7 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if ($value instanceof \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\TypedReference && $value->getType() === (string) $value) {
+        if ($value instanceof \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\TypedReference && $value->getType() === (string) $value) {
             // Already checked
             $bindings = $this->container->getDefinition($this->currentId)->getBindings();
             if (isset($bindings[$value->getType()])) {
@@ -88,7 +88,7 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
             }
             return parent::processValue($value, $isRoot);
         }
-        if (!$value instanceof \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Definition || !($bindings = $value->getBindings())) {
+        if (!$value instanceof \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Definition || !($bindings = $value->getBindings())) {
             return parent::processValue($value, $isRoot);
         }
         foreach ($bindings as $key => $binding) {
@@ -102,8 +102,8 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
             if (\preg_match('/^(?:(?:array|bool|float|int|string) )?\\$/', $key)) {
                 continue;
             }
-            if (null !== $bindingValue && !$bindingValue instanceof \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Reference && !$bindingValue instanceof \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Definition && !$bindingValue instanceof \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
-                throw new \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid value for binding key "%s" for service "%s": expected null, an instance of %s or an instance of %s or an instance of %s, %s given.', $key, $this->currentId, \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Reference::class, \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Definition::class, \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument::class, \gettype($bindingValue)));
+            if (null !== $bindingValue && !$bindingValue instanceof \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Reference && !$bindingValue instanceof \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Definition && !$bindingValue instanceof \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
+                throw new \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid value for binding key "%s" for service "%s": expected null, an instance of %s or an instance of %s or an instance of %s, %s given.', $key, $this->currentId, \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Reference::class, \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Definition::class, \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument::class, \gettype($bindingValue)));
             }
         }
         if ($value->isAbstract()) {
@@ -114,7 +114,7 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
             if ($constructor = $this->getConstructor($value, \false)) {
                 $calls[] = [$constructor, $value->getArguments()];
             }
-        } catch (\_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+        } catch (\_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
             $this->errorMessages[] = $e->getMessage();
             $this->container->getDefinition($this->currentId)->addError($e->getMessage());
             return parent::processValue($value, $isRoot);
@@ -126,7 +126,7 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
             } else {
                 try {
                     $reflectionMethod = $this->getReflectionMethod($value, $method);
-                } catch (\_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+                } catch (\_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
                     if ($value->getFactory()) {
                         continue;
                     }
@@ -137,7 +137,7 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
                 if (\array_key_exists($key, $arguments) && '' !== $arguments[$key]) {
                     continue;
                 }
-                $typeHint = \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($reflectionMethod, $parameter);
+                $typeHint = \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($reflectionMethod, $parameter);
                 if (\array_key_exists($k = \ltrim($typeHint, '\\') . ' $' . $parameter->name, $bindings)) {
                     $arguments[$key] = $this->getBindingValue($bindings[$k]);
                     continue;
@@ -170,7 +170,7 @@ class ResolveBindingsPass extends \_PhpScoper83a475a0590e\Symfony\Component\Depe
     /**
      * @return mixed
      */
-    private function getBindingValue(\_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Argument\BoundArgument $binding)
+    private function getBindingValue(\_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Argument\BoundArgument $binding)
     {
         list($bindingValue, $bindingId) = $binding->getValues();
         $this->usedBindings[$bindingId] = \true;

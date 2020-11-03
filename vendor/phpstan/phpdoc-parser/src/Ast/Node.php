@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper83a475a0590e\PHPStan\PhpDocParser\Ast;
+namespace _PhpScopera238de2e9b5a\PHPStan\PhpDocParser\Ast;
 
 interface Node
 {

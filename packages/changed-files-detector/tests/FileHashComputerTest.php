@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\ChangedFilesDetector\Tests;
 
-use _PhpScoper83a475a0590e\Migrify\PhpConfigPrinter\YamlToPhpConverter;
+use _PhpScopera238de2e9b5a\Migrify\PhpConfigPrinter\YamlToPhpConverter;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\FileHashComputer;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
@@ -32,7 +32,7 @@ final class FileHashComputerTest extends \Symplify\PackageBuilder\Tests\Abstract
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
         $this->fileHashComputer = self::$container->get(\Symplify\EasyCodingStandard\ChangedFilesDetector\FileHashComputer::class);
         $this->smartFileSystem = self::$container->get(\Symplify\SmartFileSystem\SmartFileSystem::class);
-        $this->yamlToPhpConverter = self::$container->get(\_PhpScoper83a475a0590e\Migrify\PhpConfigPrinter\YamlToPhpConverter::class);
+        $this->yamlToPhpConverter = self::$container->get(\_PhpScopera238de2e9b5a\Migrify\PhpConfigPrinter\YamlToPhpConverter::class);
     }
     public function testInvalidateCacheOnConfigurationChange() : void
     {
