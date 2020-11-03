@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4848279dba07;
+namespace _PhpScoper133be48300f9;
 
 // decoupled in own "*.php" file, so ECS, Rector and PHPStan works out of the box here
 use PHP_CodeSniffer\Util\Tokens;
-use _PhpScoper4848279dba07\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScoper133be48300f9\Symfony\Component\Console\Input\ArgvInput;
 use Symplify\EasyCodingStandard\Bootstrap\ConfigHasher;
 use Symplify\EasyCodingStandard\Bootstrap\ConfigShifter;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
@@ -23,7 +23,7 @@ use Symplify\SetConfigResolver\SetAwareConfigResolver;
 // performance boost
 \gc_disable();
 # 1. autoload
-$autoloadIncluder = new \_PhpScoper4848279dba07\AutoloadIncluder();
+$autoloadIncluder = new \_PhpScoper133be48300f9\AutoloadIncluder();
 $autoloadIncluder->includeCwdVendorAutoloadIfExists();
 $autoloadIncluder->autoloadProjectAutoloaderFile('/../../autoload.php');
 $autoloadIncluder->includeDependencyOrRepositoryVendorAutoloadIfExists();
@@ -35,7 +35,7 @@ try {
     $configFileInfos = [];
     // 1. --config CLI option or default
     $configResolver = new \Symplify\SetConfigResolver\SetAwareConfigResolver(new \Symplify\EasyCodingStandard\Set\EasyCodingStandardSetProvider(new \Symplify\EasyCodingStandard\Set\ConstantReflectionSetFactory()));
-    $input = new \_PhpScoper4848279dba07\Symfony\Component\Console\Input\ArgvInput();
+    $input = new \_PhpScoper133be48300f9\Symfony\Component\Console\Input\ArgvInput();
     $inputConfigFileInfo = $configResolver->resolveFromInputWithFallback($input, ['ecs.php']);
     if ($inputConfigFileInfo !== null) {
         $configFileInfos[] = $inputConfigFileInfo;
@@ -93,7 +93,7 @@ final class AutoloadIncluder
         if (!\is_file($cwdVendorAutoload)) {
             return;
         }
-        $this->loadIfNotLoadedYet($cwdVendorAutoload, __METHOD__ . '()" on line ' . __LINE__);
+        $this->loadIfNotLoadedYet($cwdVendorAutoload);
     }
     public function includeDependencyOrRepositoryVendorAutoloadIfExists() : void
     {
@@ -105,7 +105,7 @@ final class AutoloadIncluder
         if (!\is_file($devVendorAutoload)) {
             return;
         }
-        $this->loadIfNotLoadedYet($devVendorAutoload, __METHOD__ . '()" on line ' . __LINE__);
+        $this->loadIfNotLoadedYet($devVendorAutoload);
     }
     public function autoloadProjectAutoloaderFile(string $file) : void
     {
@@ -113,7 +113,7 @@ final class AutoloadIncluder
         if (!\is_file($path)) {
             return;
         }
-        $this->loadIfNotLoadedYet($path, __METHOD__ . '()" on line ' . __LINE__);
+        $this->loadIfNotLoadedYet($path);
     }
     public function includePhpCodeSnifferAutoloadIfNotInPharAndInitliazeTokens() : void
     {
@@ -137,23 +137,16 @@ final class AutoloadIncluder
         // initalize PHPCS tokens
         new \PHP_CodeSniffer\Util\Tokens();
     }
-    private function loadIfNotLoadedYet(string $file, string $location) : void
+    private function loadIfNotLoadedYet(string $file) : void
     {
         if (\in_array($file, $this->alreadyLoadedAutoloadFiles, \true)) {
             return;
         }
-        if ($this->isDebugOption()) {
-            echo \sprintf(\sprintf('File "%s" is about to be loaded in "%s"' . \PHP_EOL, $file, $location));
-        }
         $this->alreadyLoadedAutoloadFiles[] = \realpath($file);
         require_once $file;
-    }
-    private function isDebugOption() : bool
-    {
-        return \in_array('--debug', $_SERVER['argv'], \true);
     }
 }
 /**
  * Inspired by https://github.com/rectorphp/rector/pull/2373/files#diff-0fc04a2bb7928cac4ae339d5a8bf67f3
  */
-\class_alias('_PhpScoper4848279dba07\\AutoloadIncluder', 'AutoloadIncluder', \false);
+\class_alias('_PhpScoper133be48300f9\\AutoloadIncluder', 'AutoloadIncluder', \false);
