@@ -4,10 +4,10 @@ declare (strict_types=1);
 namespace SlevomatCodingStandard\Helpers\Annotation;
 
 use InvalidArgumentException;
-use _PhpScoper5928e324b45e\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode;
-use _PhpScoper5928e324b45e\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScoper5928e324b45e\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoper5928e324b45e\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoperaad82bb90a86\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode;
+use _PhpScoperaad82bb90a86\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScoperaad82bb90a86\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperaad82bb90a86\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use function sprintf;
 /**
@@ -17,7 +17,7 @@ class MixinAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Annotat
 {
     /** @var MixinTagValueNode|null */
     private $contentNode;
-    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoper5928e324b45e\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode $contentNode)
+    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoperaad82bb90a86\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode $contentNode)
     {
         if ($name !== '@mixin') {
             throw new \InvalidArgumentException(\sprintf('Unsupported annotation %s.', $name));
@@ -29,7 +29,7 @@ class MixinAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Annotat
     {
         return $this->contentNode === null;
     }
-    public function getContentNode() : \_PhpScoper5928e324b45e\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode
+    public function getContentNode() : \_PhpScoperaad82bb90a86\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode
     {
         $this->errorWhenInvalid();
         return $this->contentNode;
@@ -46,7 +46,7 @@ class MixinAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Annotat
     /**
      * @return GenericTypeNode|IdentifierTypeNode
      */
-    public function getType() : \_PhpScoper5928e324b45e\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public function getType() : \_PhpScoperaad82bb90a86\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         $this->errorWhenInvalid();
         /** @var GenericTypeNode|IdentifierTypeNode $type */

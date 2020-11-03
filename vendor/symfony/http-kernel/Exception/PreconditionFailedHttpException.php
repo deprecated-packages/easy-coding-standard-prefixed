@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5928e324b45e\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoperaad82bb90a86\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class PreconditionFailedHttpException extends \_PhpScoper5928e324b45e\Symfony\Component\HttpKernel\Exception\HttpException
+class PreconditionFailedHttpException extends \_PhpScoperaad82bb90a86\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string     $message  The internal exception message

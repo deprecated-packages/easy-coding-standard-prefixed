@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Style;
 
-use _PhpScoper5928e324b45e\Symfony\Component\Console\Application;
-use _PhpScoper5928e324b45e\Symfony\Component\Console\Input\ArgvInput;
-use _PhpScoper5928e324b45e\Symfony\Component\Console\Output\ConsoleOutput;
-use _PhpScoper5928e324b45e\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper5928e324b45e\Symfony\Component\Console\Terminal;
+use _PhpScoperaad82bb90a86\Symfony\Component\Console\Application;
+use _PhpScoperaad82bb90a86\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScoperaad82bb90a86\Symfony\Component\Console\Output\ConsoleOutput;
+use _PhpScoperaad82bb90a86\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperaad82bb90a86\Symfony\Component\Console\Terminal;
 use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 final class EasyCodingStandardStyleFactory
 {
@@ -19,20 +19,20 @@ final class EasyCodingStandardStyleFactory
      * @var Terminal
      */
     private $terminal;
-    public function __construct(\_PhpScoper5928e324b45e\Symfony\Component\Console\Terminal $terminal)
+    public function __construct(\_PhpScoperaad82bb90a86\Symfony\Component\Console\Terminal $terminal)
     {
         $this->privatesCaller = new \Symplify\PackageBuilder\Reflection\PrivatesCaller();
         $this->terminal = $terminal;
     }
     public function create() : \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle
     {
-        $argvInput = new \_PhpScoper5928e324b45e\Symfony\Component\Console\Input\ArgvInput();
-        $consoleOutput = new \_PhpScoper5928e324b45e\Symfony\Component\Console\Output\ConsoleOutput();
+        $argvInput = new \_PhpScoperaad82bb90a86\Symfony\Component\Console\Input\ArgvInput();
+        $consoleOutput = new \_PhpScoperaad82bb90a86\Symfony\Component\Console\Output\ConsoleOutput();
         // to configure all -v, -vv, -vvv options without memory-lock to Application run() arguments
-        $this->privatesCaller->callPrivateMethod(new \_PhpScoper5928e324b45e\Symfony\Component\Console\Application(), 'configureIO', $argvInput, $consoleOutput);
+        $this->privatesCaller->callPrivateMethod(new \_PhpScoperaad82bb90a86\Symfony\Component\Console\Application(), 'configureIO', $argvInput, $consoleOutput);
         // --debug is called
         if ($argvInput->hasParameterOption('--debug')) {
-            $consoleOutput->setVerbosity(\_PhpScoper5928e324b45e\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
+            $consoleOutput->setVerbosity(\_PhpScoperaad82bb90a86\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG);
         }
         return new \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle($argvInput, $consoleOutput, $this->terminal);
     }

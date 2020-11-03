@@ -10,16 +10,16 @@ use SlevomatCodingStandard\Helpers\IdentificatorHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_key_exists;
 use function sprintf;
-use const _PhpScoper5928e324b45e\T_BITWISE_AND;
+use const _PhpScoperaad82bb90a86\T_BITWISE_AND;
 use const T_ELSE;
-use const _PhpScoper5928e324b45e\T_EQUAL;
+use const _PhpScoperaad82bb90a86\T_EQUAL;
 use const T_IF;
-use const _PhpScoper5928e324b45e\T_INLINE_THEN;
+use const _PhpScoperaad82bb90a86\T_INLINE_THEN;
 use const T_LOGICAL_AND;
 use const T_LOGICAL_OR;
 use const T_LOGICAL_XOR;
 use const T_RETURN;
-use const _PhpScoper5928e324b45e\T_SEMICOLON;
+use const _PhpScoperaad82bb90a86\T_SEMICOLON;
 use const T_WHITESPACE;
 class RequireTernaryOperatorSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

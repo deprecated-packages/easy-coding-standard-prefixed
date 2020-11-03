@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Tests\Test;
 
 use PhpCsFixer\RuleSet;
-use _PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -23,7 +23,7 @@ abstract class AbstractIntegrationCaseFactory implements \PhpCsFixer\Tests\Test\
     /**
      * @return IntegrationCase
      */
-    public function create(\_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo $file)
+    public function create(\_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo $file)
     {
         try {
             if (!\preg_match('/^
@@ -50,7 +50,7 @@ abstract class AbstractIntegrationCaseFactory implements \PhpCsFixer\Tests\Test\
      *
      * @return array
      */
-    protected function determineConfig(\_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo $file, $config)
+    protected function determineConfig(\_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo $file, $config)
     {
         $parsed = $this->parseJson($config, ['indent' => '    ', 'lineEnding' => "\n"]);
         if (!\is_string($parsed['indent'])) {
@@ -68,7 +68,7 @@ abstract class AbstractIntegrationCaseFactory implements \PhpCsFixer\Tests\Test\
      *
      * @return array
      */
-    protected function determineRequirements(\_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo $file, $config)
+    protected function determineRequirements(\_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo $file, $config)
     {
         $parsed = $this->parseJson($config, ['php' => \PHP_VERSION_ID]);
         if (!\is_int($parsed['php'])) {
@@ -83,7 +83,7 @@ abstract class AbstractIntegrationCaseFactory implements \PhpCsFixer\Tests\Test\
      *
      * @return RuleSet
      */
-    protected function determineRuleset(\_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo $file, $config)
+    protected function determineRuleset(\_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo $file, $config)
     {
         return new \PhpCsFixer\RuleSet($this->parseJson($config));
     }
@@ -94,7 +94,7 @@ abstract class AbstractIntegrationCaseFactory implements \PhpCsFixer\Tests\Test\
      *
      * @return string
      */
-    protected function determineTitle(\_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo $file, $config)
+    protected function determineTitle(\_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo $file, $config)
     {
         return $config;
     }
@@ -105,7 +105,7 @@ abstract class AbstractIntegrationCaseFactory implements \PhpCsFixer\Tests\Test\
      *
      * @return array
      */
-    protected function determineSettings(\_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo $file, $config)
+    protected function determineSettings(\_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo $file, $config)
     {
         $parsed = $this->parseJson($config, ['checkPriority' => \true]);
         if (!\is_bool($parsed['checkPriority'])) {
@@ -118,7 +118,7 @@ abstract class AbstractIntegrationCaseFactory implements \PhpCsFixer\Tests\Test\
      *
      * @return string
      */
-    protected function determineExpectedCode(\_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo $file, $code)
+    protected function determineExpectedCode(\_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo $file, $code)
     {
         $code = $this->determineCode($file, $code, '-out.php');
         if (null === $code) {
@@ -131,7 +131,7 @@ abstract class AbstractIntegrationCaseFactory implements \PhpCsFixer\Tests\Test\
      *
      * @return null|string
      */
-    protected function determineInputCode(\_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo $file, $code)
+    protected function determineInputCode(\_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo $file, $code)
     {
         return $this->determineCode($file, $code, '-in.php');
     }
@@ -141,12 +141,12 @@ abstract class AbstractIntegrationCaseFactory implements \PhpCsFixer\Tests\Test\
      *
      * @return null|string
      */
-    private function determineCode(\_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo $file, $code, $suffix)
+    private function determineCode(\_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo $file, $code, $suffix)
     {
         if (null !== $code) {
             return $code;
         }
-        $candidateFile = new \_PhpScoper5928e324b45e\Symfony\Component\Finder\SplFileInfo($file->getPathname() . $suffix, '', '');
+        $candidateFile = new \_PhpScoperaad82bb90a86\Symfony\Component\Finder\SplFileInfo($file->getPathname() . $suffix, '', '');
         if ($candidateFile->isFile()) {
             return $candidateFile->getContents();
         }
