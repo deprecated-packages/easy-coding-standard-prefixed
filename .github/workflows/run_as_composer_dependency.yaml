@@ -17,13 +17,11 @@ jobs:
                     php-version: 7.3
                     coverage: none
             -
+                working-directory: standalone
                 run: |
-                    # prepare
-                    mkdir standalone
-                    cd standalone
                     # wait for deploy to packagist
                     sleep 30
 
                     # run
                     composer require symplify/easy-coding-standard-prefixed:@dev --dev
-                    bin/ecs --debug
+                    vendor/bin/ecs --debug

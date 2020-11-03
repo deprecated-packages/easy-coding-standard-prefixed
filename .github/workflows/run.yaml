@@ -1,5 +1,5 @@
 # inspired by https://github.com/Symplify/Symplify/blob/master/.github/workflows/code_checks.yaml
-name: Run PHAR
+name: Run
 
 on:
     pull_request: null
@@ -8,7 +8,7 @@ on:
             - master
 
 jobs:
-    run_phar:
+    run:
         runs-on: ubuntu-latest
 
         strategy:
@@ -22,7 +22,4 @@ jobs:
                     php-version: ${{ matrix.php }}
                     coverage: none
 
-            -   run: php ecs --debug --ansi
-            -   run: php ecs.phar --debug --ansi
-            -   run: ./ecs --debug --ansi
-            -   run: ./ecs.phar --debug --ansi
+            -   run: bin/ecs --debug --ansi
