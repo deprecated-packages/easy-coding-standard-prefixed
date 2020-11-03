@@ -16,6 +16,9 @@ jobs:
                 with:
                     php-version: 7.3
                     coverage: none
+
+            -   run: mkdir standlone
+
             -
                 working-directory: standalone
                 run: |

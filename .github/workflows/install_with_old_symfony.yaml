@@ -6,18 +6,22 @@ on:
 
 jobs:
     install_with_old_symfony:
+        runs-on: ubuntu-latest
+
         strategy:
             matrix:
                 symfony: ['2.8', '3.4', '4.4', '5.1']
 
         name: Install with Symfony ${{ matrix.symfony }}
-        runs-on: ubuntu-latest
+
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v1
                 with:
                     php-version: 7.3
                     coverage: none
+
+            -   run: mkdir standlone
 
             -
                 working-directory: standalone
