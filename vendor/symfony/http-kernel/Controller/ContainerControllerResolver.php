@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaad82bb90a86\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoper83a475a0590e\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScoperaad82bb90a86\Psr\Container\ContainerInterface;
-use _PhpScoperaad82bb90a86\Psr\Log\LoggerInterface;
-use _PhpScoperaad82bb90a86\Symfony\Component\DependencyInjection\Container;
+use _PhpScoper83a475a0590e\Psr\Container\ContainerInterface;
+use _PhpScoper83a475a0590e\Psr\Log\LoggerInterface;
+use _PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Container;
 /**
  * A controller resolver searching for a controller in a psr-11 container when using the "service:method" notation.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class ContainerControllerResolver extends \_PhpScoperaad82bb90a86\Symfony\Component\HttpKernel\Controller\ControllerResolver
+class ContainerControllerResolver extends \_PhpScoper83a475a0590e\Symfony\Component\HttpKernel\Controller\ControllerResolver
 {
     protected $container;
-    public function __construct(\_PhpScoperaad82bb90a86\Psr\Container\ContainerInterface $container, \_PhpScoperaad82bb90a86\Psr\Log\LoggerInterface $logger = null)
+    public function __construct(\_PhpScoper83a475a0590e\Psr\Container\ContainerInterface $container, \_PhpScoper83a475a0590e\Psr\Log\LoggerInterface $logger = null)
     {
         $this->container = $container;
         parent::__construct($logger);
@@ -56,7 +56,7 @@ class ContainerControllerResolver extends \_PhpScoperaad82bb90a86\Symfony\Compon
     }
     private function throwExceptionIfControllerWasRemoved(string $controller, \Throwable $previous)
     {
-        if ($this->container instanceof \_PhpScoperaad82bb90a86\Symfony\Component\DependencyInjection\Container && isset($this->container->getRemovedIds()[$controller])) {
+        if ($this->container instanceof \_PhpScoper83a475a0590e\Symfony\Component\DependencyInjection\Container && isset($this->container->getRemovedIds()[$controller])) {
             throw new \InvalidArgumentException(\sprintf('Controller "%s" cannot be fetched from the container because it is private. Did you forget to tag the service with "controller.service_arguments"?', $controller), 0, $previous);
         }
     }

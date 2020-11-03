@@ -38,9 +38,9 @@ use PhpCsFixer\ToolInfoInterface;
 use PhpCsFixer\Utils;
 use PhpCsFixer\WhitespacesFixerConfig;
 use PhpCsFixer\WordMatcher;
-use _PhpScoperaad82bb90a86\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperaad82bb90a86\Symfony\Component\Filesystem\Filesystem;
-use _PhpScoperaad82bb90a86\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper83a475a0590e\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper83a475a0590e\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper83a475a0590e\Symfony\Component\Finder\Finder as SymfonyFinder;
 /**
  * The resolver that resolves configuration to use by command line options and config.
  *
@@ -232,7 +232,7 @@ final class ConfigurationResolver
     {
         if (null === $this->directory) {
             $path = $this->getCacheFile();
-            $filesystem = new \_PhpScoperaad82bb90a86\Symfony\Component\Filesystem\Filesystem();
+            $filesystem = new \_PhpScoper83a475a0590e\Symfony\Component\Filesystem\Filesystem();
             $absolutePath = $filesystem->isAbsolutePath($path) ? $path : $this->cwd . \DIRECTORY_SEPARATOR . $path;
             $this->directory = new \PhpCsFixer\Cache\Directory(\dirname($absolutePath));
         }
@@ -276,7 +276,7 @@ final class ConfigurationResolver
     public function getPath()
     {
         if (null === $this->path) {
-            $filesystem = new \_PhpScoperaad82bb90a86\Symfony\Component\Filesystem\Filesystem();
+            $filesystem = new \_PhpScoper83a475a0590e\Symfony\Component\Filesystem\Filesystem();
             $cwd = $this->cwd;
             if (1 === \count($this->options['path']) && '-' === $this->options['path'][0]) {
                 $this->path = $this->options['path'];
@@ -300,7 +300,7 @@ final class ConfigurationResolver
     public function getProgress()
     {
         if (null === $this->progress) {
-            if (\_PhpScoperaad82bb90a86\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $this->options['verbosity'] && 'txt' === $this->getFormat()) {
+            if (\_PhpScoper83a475a0590e\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $this->options['verbosity'] && 'txt' === $this->getFormat()) {
                 $progressType = $this->options['show-progress'];
                 $progressTypes = ['none', 'run-in', 'estimating', 'estimating-max', 'dots'];
                 if (null === $progressType) {
@@ -641,7 +641,7 @@ final class ConfigurationResolver
         if (null !== $this->getConfigFile() && null !== $nestedFinder) {
             $this->configFinderIsOverridden = \true;
         }
-        if ($currentFinder instanceof \_PhpScoperaad82bb90a86\Symfony\Component\Finder\Finder && null === $nestedFinder) {
+        if ($currentFinder instanceof \_PhpScoper83a475a0590e\Symfony\Component\Finder\Finder && null === $nestedFinder) {
             // finder from configuration Symfony finder and it is not fully defined, we may fulfill it
             return $currentFinder->in($pathsByType['dir'])->append($pathsByType['file']);
         }

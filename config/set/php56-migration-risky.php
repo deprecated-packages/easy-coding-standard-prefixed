@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperaad82bb90a86;
+namespace _PhpScoper83a475a0590e;
 
 use PhpCsFixer\Fixer\Alias\PowToExponentiationFixer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;

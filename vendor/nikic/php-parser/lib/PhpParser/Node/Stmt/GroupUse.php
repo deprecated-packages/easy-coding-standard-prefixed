@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperaad82bb90a86\PhpParser\Node\Stmt;
+namespace _PhpScoper83a475a0590e\PhpParser\Node\Stmt;
 
-use _PhpScoperaad82bb90a86\PhpParser\Node\Name;
-use _PhpScoperaad82bb90a86\PhpParser\Node\Stmt;
-class GroupUse extends \_PhpScoperaad82bb90a86\PhpParser\Node\Stmt
+use _PhpScoper83a475a0590e\PhpParser\Node\Name;
+use _PhpScoper83a475a0590e\PhpParser\Node\Stmt;
+class GroupUse extends \_PhpScoper83a475a0590e\PhpParser\Node\Stmt
 {
     /** @var int Type of group use */
     public $type;
@@ -21,7 +21,7 @@ class GroupUse extends \_PhpScoperaad82bb90a86\PhpParser\Node\Stmt
      * @param int      $type       Type of group use
      * @param array    $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperaad82bb90a86\PhpParser\Node\Name $prefix, array $uses, int $type = \_PhpScoperaad82bb90a86\PhpParser\Node\Stmt\Use_::TYPE_NORMAL, array $attributes = [])
+    public function __construct(\_PhpScoper83a475a0590e\PhpParser\Node\Name $prefix, array $uses, int $type = \_PhpScoper83a475a0590e\PhpParser\Node\Stmt\Use_::TYPE_NORMAL, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->type = $type;

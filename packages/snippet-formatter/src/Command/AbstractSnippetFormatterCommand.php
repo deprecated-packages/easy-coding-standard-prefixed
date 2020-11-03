@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
-use _PhpScoperaad82bb90a86\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper83a475a0590e\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Console\Command\AbstractCheckCommand;
 use Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter;
 use Symplify\PackageBuilder\Console\ShellCode;
@@ -33,7 +33,7 @@ abstract class AbstractSnippetFormatterCommand extends \Symplify\EasyCodingStand
         $this->smartFileSystem = $smartFileSystem;
         $this->smartFinder = $smartFinder;
     }
-    protected function doExecuteSnippetFormatterWithFileNamesAndSnippetPattern(\_PhpScoperaad82bb90a86\Symfony\Component\Console\Input\InputInterface $input, string $fileNames, string $snippetPattern) : int
+    protected function doExecuteSnippetFormatterWithFileNamesAndSnippetPattern(\_PhpScoper83a475a0590e\Symfony\Component\Console\Input\InputInterface $input, string $fileNames, string $snippetPattern) : int
     {
         $this->configuration->resolveFromInput($input);
         $sources = $this->configuration->getSources();
