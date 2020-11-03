@@ -25,7 +25,7 @@ jobs:
 
             -
                 working-directory: standalone
-                run:
+                run: |
                     # wait for deploy to packagist
                     sleep 30
 
