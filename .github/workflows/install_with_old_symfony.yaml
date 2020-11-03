@@ -5,30 +5,26 @@ on:
             - master
 
 jobs:
+
     install_with_old_symfony:
         runs-on: ubuntu-latest
 
         strategy:
+            fail-fast: false
             matrix:
                 symfony: ['2.8', '3.4', '4.4', '5.1']
 
         name: Install with Symfony ${{ matrix.symfony }}
 
         steps:
-            -   uses: actions/checkout@v2
+            # wait for deploy to packagist
+            -   run: sleep 20
+
             -   uses: shivammathur/setup-php@v1
                 with:
                     php-version: 7.3
                     coverage: none
 
-            -   run: mkdir standalone
-
-            -
-                working-directory: standalone
-                run: |
-                    # wait for deploy to packagist
-                    sleep 30
-
-                    composer require symfony/console:${{ matrix.symfony }} --ansi
-                    composer require symplify/easy-coding-standard-prefixed:@dev --dev --ansi
-                    vendor/bin/ecs --debug --ansi
+            -   run: composer require symfony/console:${{ matrix.symfony }} --ansi
+            -   run: composer require symplify/easy-coding-standard-prefixed:@dev --dev --ansi
+            -   run: vendor/bin/ecs --debug --ansi
