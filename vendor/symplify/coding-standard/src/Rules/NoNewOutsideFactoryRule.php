@@ -1,0 +1,99 @@
+<?php
+
+declare (strict_types=1);
+namespace Symplify\CodingStandard\Rules;
+
+use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
+use PhpCsFixer\Tokenizer\Token;
+use _PhpScoper2b44cb0c30af\PhpParser\Node;
+use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\New_;
+use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Return_;
+use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper2b44cb0c30af\PHPStan\Type\TypeWithClassName;
+use _PhpScoper2b44cb0c30af\Symfony\Component\Process\Process;
+use Symplify\PackageBuilder\Matcher\ArrayStringAndFnMatcher;
+/**
+ * @see \Symplify\CodingStandard\Tests\Rules\NoNewOutsideFactoryRule\NoNewOutsideFactoryRuleTest
+ */
+final class NoNewOutsideFactoryRule extends \Symplify\CodingStandard\Rules\AbstractSymplifyRule
+{
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Use decouled factory service to create "%s" object';
+    /**
+     * @var string[]
+     */
+    private const ALLOWED_CLASSES = ['*FileInfo', '*\\Node\\*', \PhpCsFixer\Tokenizer\Token::class];
+    /**
+     * @var ArrayStringAndFnMatcher
+     */
+    private $arrayStringAndFnMatcher;
+    /**
+     * @var TypeWithClassName|null
+     */
+    private $typeWithClassName;
+    public function __construct(\Symplify\PackageBuilder\Matcher\ArrayStringAndFnMatcher $arrayStringAndFnMatcher)
+    {
+        $this->arrayStringAndFnMatcher = $arrayStringAndFnMatcher;
+    }
+    /**
+     * @return string[]
+     */
+    public function getNodeTypes() : array
+    {
+        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\New_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Return_::class];
+    }
+    /**
+     * @param New_|Return_ $node
+     * @return string[]
+     */
+    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    {
+        // just collect new type node here, so we have context later
+        if ($node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\New_) {
+            $newClassType = $scope->getType($node);
+            if (!$newClassType instanceof \_PhpScoper2b44cb0c30af\PHPStan\Type\TypeWithClassName) {
+                return [];
+            }
+            $this->typeWithClassName = $newClassType;
+            return [];
+        }
+        // working with return here
+        if ($this->typeWithClassName === null) {
+            return [];
+        }
+        // is new class allowed without factory or in right place?
+        $newClassName = $this->typeWithClassName->getClassName();
+        if ($this->arrayStringAndFnMatcher->isMatch($newClassName, self::ALLOWED_CLASSES)) {
+            return [];
+        }
+        if ($this->isLocatedInCorrectlyNamedClass($scope)) {
+            return [];
+        }
+        if ($node->expr === null) {
+            $this->typeWithClassName = null;
+            return [];
+        }
+        $returnType = $scope->getType($node->expr);
+        // not a match, probably somewhere else
+        if (!$this->typeWithClassName->equals($returnType)) {
+            $this->typeWithClassName = null;
+            return [];
+        }
+        $errorMessage = \sprintf(self::ERROR_MESSAGE, $newClassName);
+        return [$errorMessage];
+    }
+    private function isLocatedInCorrectlyNamedClass(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    {
+        $classReflection = $scope->getClassReflection();
+        if ($classReflection === null) {
+            return \true;
+        }
+        $currentClassName = $classReflection->getName();
+        if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::endsWith($currentClassName, 'Factory')) {
+            return \true;
+        }
+        return \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::endsWith($currentClassName, 'Test');
+    }
+}

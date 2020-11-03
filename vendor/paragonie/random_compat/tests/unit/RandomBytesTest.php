@@ -1,0 +1,19 @@
+<?php
+
+namespace _PhpScoper2b44cb0c30af;
+
+class RandomBytesTest extends \_PhpScoper2b44cb0c30af\PHPUnit_Framework_TestCase
+{
+    public function testFuncExists()
+    {
+        $this->assertTrue(\function_exists('random_bytes'));
+    }
+    public function testOutput()
+    {
+        $bytes = array(\random_bytes(12), \random_bytes(64), \random_bytes(64));
+        $this->assertTrue(\strlen(\bin2hex($bytes[0])) === 24);
+        // This should never generate identical byte strings
+        $this->assertFalse($bytes[1] === $bytes[2]);
+    }
+}
+\class_alias('_PhpScoper2b44cb0c30af\\RandomBytesTest', 'RandomBytesTest', \false);

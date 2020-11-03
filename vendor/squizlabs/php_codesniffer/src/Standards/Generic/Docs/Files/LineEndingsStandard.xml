@@ -1,0 +1,7 @@
+<documentation title="Line Endings">
+    <standard>
+    <![CDATA[
+    Unix-style line endings are preferred ("\n" instead of "\_PhpScoper2b44cb0c30af\r\n").
+    ]]>
+    </standard>
+</documentation>

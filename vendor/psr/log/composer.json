@@ -1,0 +1,21 @@
+{
+    "name": "psr\/log",
+    "description": "Common interface for logging libraries",
+    "keywords": [
+        "psr",
+        "psr-3",
+        "log"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PHP-FIG",
+            "homepage": "http:\/\/www.php-fig.org\/"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "_PhpScoper2b44cb0c30af\\Psr\\Log\\": "\/Psr\/Log\/"
+        }
+    }
+}

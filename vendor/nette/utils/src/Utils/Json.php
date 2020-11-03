@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * This file is part of the Nette Framework (https://nette.org)
+ * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ */
+declare (strict_types=1);
+namespace _PhpScoper2b44cb0c30af\Nette\Utils;
+
+use _PhpScoper2b44cb0c30af\Nette;
+/**
+ * JSON encoder and decoder.
+ */
+final class Json
+{
+    use Nette\StaticClass;
+    public const FORCE_ARRAY = 0b1;
+    public const PRETTY = 0b10;
+    public const ESCAPE_UNICODE = 0b100;
+    /**
+     * Returns the JSON representation of a value. Accepts flag Json::PRETTY.
+     */
+    public static function encode($value, int $flags = 0) : string
+    {
+        $flags = ($flags & self::ESCAPE_UNICODE ? 0 : \JSON_UNESCAPED_UNICODE) | \JSON_UNESCAPED_SLASHES | ($flags & self::PRETTY ? \JSON_PRETTY_PRINT : 0) | (\defined('JSON_PRESERVE_ZERO_FRACTION') ? \JSON_PRESERVE_ZERO_FRACTION : 0);
+        // since PHP 5.6.6 & PECL JSON-C 1.3.7
+        $json = \json_encode($value, $flags);
+        if ($error = \json_last_error()) {
+            throw new \_PhpScoper2b44cb0c30af\Nette\Utils\JsonException(\json_last_error_msg(), $error);
+        }
+        return $json;
+    }
+    /**
+     * Decodes a JSON string. Accepts flag Json::FORCE_ARRAY.
+     * @return mixed
+     */
+    public static function decode(string $json, int $flags = 0)
+    {
+        $forceArray = (bool) ($flags & self::FORCE_ARRAY);
+        $value = \json_decode($json, $forceArray, 512, \JSON_BIGINT_AS_STRING);
+        if ($error = \json_last_error()) {
+            throw new \_PhpScoper2b44cb0c30af\Nette\Utils\JsonException(\json_last_error_msg(), $error);
+        }
+        return $value;
+    }
+}

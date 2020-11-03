@@ -1,0 +1,9 @@
+<?php
+
+namespace _PhpScoper2b44cb0c30af;
+
+use _PhpScoper2b44cb0c30af\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetClass;
+class Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment
+{
+}
+\class_alias('_PhpScoper2b44cb0c30af\\Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment', 'Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment', \false);

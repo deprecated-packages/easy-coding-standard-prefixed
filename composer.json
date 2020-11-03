@@ -1,23 +1,13 @@
 {
     "name": "symplify/easy-coding-standard-prefixed",
-    "bin": [
-        "ecs",
-        "ecs.phar"
-    ],
-    "description": "Prefixed version of ECS compiled in PHAR",
-    "license": "MIT",
+    "description": "Prefixed scoped version of symplify/easy-coding-standard package",
     "require": {
-        "php": "^7.2"
+        "php": ">=7.2"
     },
+    "bin": [
+        "bin/ecs"
+    ],
     "replace": {
         "symplify/easy-coding-standard": "self.version"
-    },
-    "conflict": {
-        "symplify/coding-standard": "<7.2",
-        "symplify/package-builder": "<7.2",
-        "symplify/set-config-resolver": "<7.2",
-        "symplify/smart-file-system": "<7.2",
-        "symplify/autowire-array-parameter": "<7.2",
-        "symplify/auto-bind-parameter": "<7.2"
     }
 }
