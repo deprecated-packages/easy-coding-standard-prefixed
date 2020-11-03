@@ -9,7 +9,7 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use const T_AS;
 use const T_CONST;
 use const T_FUNCTION;
-use const _PhpScopera238de2e9b5a\T_NULLABLE;
+use const _PhpScopercf327c47dfc5\T_NULLABLE;
 use const T_PRIVATE;
 use const T_PROTECTED;
 use const T_PUBLIC;

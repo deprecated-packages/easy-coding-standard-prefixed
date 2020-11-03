@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation;
+namespace _PhpScopercf327c47dfc5\Symfony\Component\HttpFoundation;
 
 /**
  * ResponseHeaderBag is a container for Response HTTP headers.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ResponseHeaderBag extends \_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\HeaderBag
+class ResponseHeaderBag extends \_PhpScopercf327c47dfc5\Symfony\Component\HttpFoundation\HeaderBag
 {
     const COOKIES_FLAT = 'flat';
     const COOKIES_ARRAY = 'array';
@@ -96,7 +96,7 @@ class ResponseHeaderBag extends \_PhpScopera238de2e9b5a\Symfony\Component\HttpFo
                 $this->cookies = [];
             }
             foreach ((array) $values as $cookie) {
-                $this->setCookie(\_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Cookie::fromString($cookie));
+                $this->setCookie(\_PhpScopercf327c47dfc5\Symfony\Component\HttpFoundation\Cookie::fromString($cookie));
             }
             $this->headerNames[$uniqueKey] = $key;
             return;
@@ -143,7 +143,7 @@ class ResponseHeaderBag extends \_PhpScopera238de2e9b5a\Symfony\Component\HttpFo
     {
         return \array_key_exists($key, $this->computedCacheControl) ? $this->computedCacheControl[$key] : null;
     }
-    public function setCookie(\_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Cookie $cookie)
+    public function setCookie(\_PhpScopercf327c47dfc5\Symfony\Component\HttpFoundation\Cookie $cookie)
     {
         $this->cookies[$cookie->getDomain()][$cookie->getPath()][$cookie->getName()] = $cookie;
         $this->headerNames['set-cookie'] = 'Set-Cookie';
@@ -197,14 +197,14 @@ class ResponseHeaderBag extends \_PhpScopera238de2e9b5a\Symfony\Component\HttpFo
      */
     public function clearCookie(string $name, ?string $path = '/', string $domain = null, bool $secure = \false, bool $httpOnly = \true, string $sameSite = null)
     {
-        $this->setCookie(new \_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, \false, $sameSite));
+        $this->setCookie(new \_PhpScopercf327c47dfc5\Symfony\Component\HttpFoundation\Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, \false, $sameSite));
     }
     /**
      * @see HeaderUtils::makeDisposition()
      */
     public function makeDisposition(string $disposition, string $filename, string $filenameFallback = '')
     {
-        return \_PhpScopera238de2e9b5a\Symfony\Component\HttpFoundation\HeaderUtils::makeDisposition($disposition, $filename, $filenameFallback);
+        return \_PhpScopercf327c47dfc5\Symfony\Component\HttpFoundation\HeaderUtils::makeDisposition($disposition, $filename, $filenameFallback);
     }
     /**
      * Returns the calculated value of the cache-control header.

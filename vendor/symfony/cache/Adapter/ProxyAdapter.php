@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera238de2e9b5a\Symfony\Component\Cache\Adapter;
+namespace _PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter;
 
-use _PhpScopera238de2e9b5a\Psr\Cache\CacheItemInterface;
-use _PhpScopera238de2e9b5a\Psr\Cache\CacheItemPoolInterface;
-use _PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem;
-use _PhpScopera238de2e9b5a\Symfony\Component\Cache\PruneableInterface;
-use _PhpScopera238de2e9b5a\Symfony\Component\Cache\ResettableInterface;
-use _PhpScopera238de2e9b5a\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScopera238de2e9b5a\Symfony\Component\Cache\Traits\ProxyTrait;
-use _PhpScopera238de2e9b5a\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScopercf327c47dfc5\Psr\Cache\CacheItemInterface;
+use _PhpScopercf327c47dfc5\Psr\Cache\CacheItemPoolInterface;
+use _PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem;
+use _PhpScopercf327c47dfc5\Symfony\Component\Cache\PruneableInterface;
+use _PhpScopercf327c47dfc5\Symfony\Component\Cache\ResettableInterface;
+use _PhpScopercf327c47dfc5\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScopercf327c47dfc5\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScopercf327c47dfc5\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScopera238de2e9b5a\Symfony\Contracts\Cache\CacheInterface, \_PhpScopera238de2e9b5a\Symfony\Component\Cache\PruneableInterface, \_PhpScopera238de2e9b5a\Symfony\Component\Cache\ResettableInterface
+class ProxyAdapter implements \_PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScopercf327c47dfc5\Symfony\Contracts\Cache\CacheInterface, \_PhpScopercf327c47dfc5\Symfony\Component\Cache\PruneableInterface, \_PhpScopercf327c47dfc5\Symfony\Component\Cache\ResettableInterface
 {
     use ProxyTrait;
     use ContractsTrait;
@@ -30,14 +30,14 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
     private $createCacheItem;
     private $setInnerItem;
     private $poolHash;
-    public function __construct(\_PhpScopera238de2e9b5a\Psr\Cache\CacheItemPoolInterface $pool, string $namespace = '', int $defaultLifetime = 0)
+    public function __construct(\_PhpScopercf327c47dfc5\Psr\Cache\CacheItemPoolInterface $pool, string $namespace = '', int $defaultLifetime = 0)
     {
         $this->pool = $pool;
         $this->poolHash = $poolHash = \spl_object_hash($pool);
-        $this->namespace = '' === $namespace ? '' : \_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem::validateKey($namespace);
+        $this->namespace = '' === $namespace ? '' : \_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem::validateKey($namespace);
         $this->namespaceLen = \strlen($namespace);
         $this->createCacheItem = \Closure::bind(static function ($key, $innerItem) use($defaultLifetime, $poolHash) {
-            $item = new \_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem();
+            $item = new \_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             if (null === $innerItem) {
                 return $item;
@@ -53,22 +53,22 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
             if (\is_array($v) && 1 === \count($v) && 10 === \strlen($k = \key($v)) && "" === $k[0] && "\0" === $k[5] && "_" === $k[9]) {
                 $item->value = $v[$k];
                 $v = \unpack('Ve/Nc', \substr($k, 1, -1));
-                $item->metadata[\_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $v['e'] + \_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY_OFFSET;
-                $item->metadata[\_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $v['c'];
-            } elseif ($innerItem instanceof \_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem) {
+                $item->metadata[\_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $v['e'] + \_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY_OFFSET;
+                $item->metadata[\_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $v['c'];
+            } elseif ($innerItem instanceof \_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem) {
                 $item->metadata = $innerItem->metadata;
             }
             $innerItem->set(null);
             return $item;
-        }, null, \_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem::class);
         $this->setInnerItem = \Closure::bind(
             /**
              * @param array $item A CacheItem cast to (array); accessing protected properties requires adding the "\0*\0" PHP prefix
              */
-            static function (\_PhpScopera238de2e9b5a\Psr\Cache\CacheItemInterface $innerItem, array $item) {
+            static function (\_PhpScopercf327c47dfc5\Psr\Cache\CacheItemInterface $innerItem, array $item) {
                 // Tags are stored separately, no need to account for them when considering this item's newly set metadata
-                if (isset(($metadata = $item["\0*\0newMetadata"])[\_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem::METADATA_TAGS])) {
-                    unset($metadata[\_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
+                if (isset(($metadata = $item["\0*\0newMetadata"])[\_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem::METADATA_TAGS])) {
+                    unset($metadata[\_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
                 }
                 if ($metadata) {
                     // For compactness, expiry and creation duration are packed in the key of an array, using magic numbers as separators
@@ -78,7 +78,7 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
                 $innerItem->expiresAt(null !== $item["\0*\0expiry"] ? \DateTime::createFromFormat('U.u', \sprintf('%.6f', $item["\0*\0expiry"])) : null);
             },
             null,
-            \_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem::class
+            \_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem::class
         );
     }
     /**
@@ -86,7 +86,7 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
      */
     public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
     {
-        if (!$this->pool instanceof \_PhpScopera238de2e9b5a\Symfony\Contracts\Cache\CacheInterface) {
+        if (!$this->pool instanceof \_PhpScopercf327c47dfc5\Symfony\Contracts\Cache\CacheInterface) {
             return $this->doGet($this, $key, $callback, $beta, $metadata);
         }
         return $this->pool->get($this->getId($key), function ($innerItem, bool &$save) use($key, $callback) {
@@ -136,7 +136,7 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
     public function clear()
     {
         $prefix = 0 < \func_num_args() ? (string) \func_get_arg(0) : '';
-        if ($this->pool instanceof \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \_PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($this->namespace . $prefix);
         }
         return $this->pool->clear();
@@ -169,7 +169,7 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
      *
      * @return bool
      */
-    public function save(\_PhpScopera238de2e9b5a\Psr\Cache\CacheItemInterface $item)
+    public function save(\_PhpScopercf327c47dfc5\Psr\Cache\CacheItemInterface $item)
     {
         return $this->doSave($item, __FUNCTION__);
     }
@@ -178,7 +178,7 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScopera238de2e9b5a\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\_PhpScopercf327c47dfc5\Psr\Cache\CacheItemInterface $item)
     {
         return $this->doSave($item, __FUNCTION__);
     }
@@ -191,9 +191,9 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
     {
         return $this->pool->commit();
     }
-    private function doSave(\_PhpScopera238de2e9b5a\Psr\Cache\CacheItemInterface $item, string $method)
+    private function doSave(\_PhpScopercf327c47dfc5\Psr\Cache\CacheItemInterface $item, string $method)
     {
-        if (!$item instanceof \_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $item = (array) $item;
@@ -202,7 +202,7 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
         }
         if ($item["\0*\0poolHash"] === $this->poolHash && $item["\0*\0innerItem"]) {
             $innerItem = $item["\0*\0innerItem"];
-        } elseif ($this->pool instanceof \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        } elseif ($this->pool instanceof \_PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter\AdapterInterface) {
             // this is an optimization specific for AdapterInterface implementations
             // so we can save a round-trip to the backend by just creating a new item
             $f = $this->createCacheItem;
@@ -225,7 +225,7 @@ class ProxyAdapter implements \_PhpScopera238de2e9b5a\Symfony\Component\Cache\Ad
     }
     private function getId($key) : string
     {
-        \_PhpScopera238de2e9b5a\Symfony\Component\Cache\CacheItem::validateKey($key);
+        \_PhpScopercf327c47dfc5\Symfony\Component\Cache\CacheItem::validateKey($key);
         return $this->namespace . $key;
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera238de2e9b5a;
+namespace _PhpScopercf327c47dfc5;
 
 require_once __DIR__ . '/vendor/autoload.php';
-use _PhpScopera238de2e9b5a\Nette\Utils\Strings;
+use _PhpScopercf327c47dfc5\Nette\Utils\Strings;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 $excludedClasses = [
     // part of public API in config
@@ -16,7 +16,7 @@ return ['prefix' => null, 'finders' => [], 'patchers' => [
     function (string $filePath, string $prefix, string $content) use($excludedClasses) : string {
         foreach ($excludedClasses as $excludedClass) {
             $prefixedClassPattern = '#' . $prefix . '\\\\' . \preg_quote($excludedClass, '#') . '#';
-            $content = \_PhpScopera238de2e9b5a\Nette\Utils\Strings::replace($content, $prefixedClassPattern, $excludedClass);
+            $content = \_PhpScopercf327c47dfc5\Nette\Utils\Strings::replace($content, $prefixedClassPattern, $excludedClass);
         }
         return $content;
     },

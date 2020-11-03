@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\Extension;
+namespace _PhpScopercf327c47dfc5\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopercf327c47dfc5\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ExtensionInterface is the interface implemented by container extension classes.
  *
@@ -23,7 +23,7 @@ interface ExtensionInterface
      *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
      */
-    public function load(array $configs, \_PhpScopera238de2e9b5a\Symfony\Component\DependencyInjection\ContainerBuilder $container);
+    public function load(array $configs, \_PhpScopercf327c47dfc5\Symfony\Component\DependencyInjection\ContainerBuilder $container);
     /**
      * Returns the namespace to be used for this extension (XML namespace).
      *

@@ -10,7 +10,7 @@ use function array_key_exists;
 use function preg_match;
 use function sprintf;
 use function strtolower;
-use const _PhpScopera238de2e9b5a\T_BINARY_CAST;
+use const _PhpScopercf327c47dfc5\T_BINARY_CAST;
 use const T_BOOL_CAST;
 use const T_DOUBLE_CAST;
 use const T_INT_CAST;

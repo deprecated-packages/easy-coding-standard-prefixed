@@ -17,27 +17,27 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScopera238de2e9b5a\Doctrine\Tests\Common\Annotations\Annotation;
+namespace _PhpScopercf327c47dfc5\Doctrine\Tests\Common\Annotations\Annotation;
 
-use _PhpScopera238de2e9b5a\Doctrine\Common\Annotations\Annotation\Target;
+use _PhpScopercf327c47dfc5\Doctrine\Common\Annotations\Annotation\Target;
 /**
  * Tests for {@see \Doctrine\Common\Annotations\Annotation\Target}
  *
  * @covers \Doctrine\Common\Annotations\Annotation\Target
  */
-class TargetTest extends \_PhpScopera238de2e9b5a\PHPUnit_Framework_TestCase
+class TargetTest extends \_PhpScopercf327c47dfc5\PHPUnit_Framework_TestCase
 {
     /**
      * @group DDC-3006
      */
     public function testValidMixedTargets()
     {
-        $target = new \_PhpScopera238de2e9b5a\Doctrine\Common\Annotations\Annotation\Target(array("value" => array("ALL")));
-        $this->assertEquals(\_PhpScopera238de2e9b5a\Doctrine\Common\Annotations\Annotation\Target::TARGET_ALL, $target->targets);
-        $target = new \_PhpScopera238de2e9b5a\Doctrine\Common\Annotations\Annotation\Target(array("value" => array("METHOD", "METHOD")));
-        $this->assertEquals(\_PhpScopera238de2e9b5a\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD, $target->targets);
-        $this->assertNotEquals(\_PhpScopera238de2e9b5a\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY, $target->targets);
-        $target = new \_PhpScopera238de2e9b5a\Doctrine\Common\Annotations\Annotation\Target(array("value" => array("PROPERTY", "METHOD")));
-        $this->assertEquals(\_PhpScopera238de2e9b5a\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD | \_PhpScopera238de2e9b5a\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY, $target->targets);
+        $target = new \_PhpScopercf327c47dfc5\Doctrine\Common\Annotations\Annotation\Target(array("value" => array("ALL")));
+        $this->assertEquals(\_PhpScopercf327c47dfc5\Doctrine\Common\Annotations\Annotation\Target::TARGET_ALL, $target->targets);
+        $target = new \_PhpScopercf327c47dfc5\Doctrine\Common\Annotations\Annotation\Target(array("value" => array("METHOD", "METHOD")));
+        $this->assertEquals(\_PhpScopercf327c47dfc5\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD, $target->targets);
+        $this->assertNotEquals(\_PhpScopercf327c47dfc5\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY, $target->targets);
+        $target = new \_PhpScopercf327c47dfc5\Doctrine\Common\Annotations\Annotation\Target(array("value" => array("PROPERTY", "METHOD")));
+        $this->assertEquals(\_PhpScopercf327c47dfc5\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD | \_PhpScopercf327c47dfc5\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY, $target->targets);
     }
 }

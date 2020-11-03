@@ -10,8 +10,8 @@
  */
 namespace Composer\XdebugHandler;
 
-use _PhpScopera238de2e9b5a\Psr\Log\LoggerInterface;
-use _PhpScopera238de2e9b5a\Psr\Log\LogLevel;
+use _PhpScopercf327c47dfc5\Psr\Log\LoggerInterface;
+use _PhpScopercf327c47dfc5\Psr\Log\LogLevel;
 /**
  * @author John Stevenson <john-stevenson@blueyonder.co.uk>
  * @internal
@@ -48,7 +48,7 @@ class Status
     /**
      * @param LoggerInterface $logger
      */
-    public function setLogger(\_PhpScopera238de2e9b5a\Psr\Log\LoggerInterface $logger)
+    public function setLogger(\_PhpScopercf327c47dfc5\Psr\Log\LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -73,7 +73,7 @@ class Status
     private function output($text, $level = null)
     {
         if ($this->logger) {
-            $this->logger->log($level ?: \_PhpScopera238de2e9b5a\Psr\Log\LogLevel::DEBUG, $text);
+            $this->logger->log($level ?: \_PhpScopercf327c47dfc5\Psr\Log\LogLevel::DEBUG, $text);
         }
         if ($this->debug) {
             \fwrite(\STDERR, \sprintf('xdebug-handler[%d] %s', \getmypid(), $text . \PHP_EOL));
@@ -86,7 +86,7 @@ class Status
     }
     private function reportError($error)
     {
-        $this->output(\sprintf('No restart (%s)', $error), \_PhpScopera238de2e9b5a\Psr\Log\LogLevel::WARNING);
+        $this->output(\sprintf('No restart (%s)', $error), \_PhpScopercf327c47dfc5\Psr\Log\LogLevel::WARNING);
     }
     private function reportInfo($info)
     {
@@ -112,7 +112,7 @@ class Status
     {
         $loaded = $this->getLoadedMessage();
         $text = \sprintf('Restarted (%d ms). %s', $this->time, $loaded);
-        $level = $this->loaded ? \_PhpScopera238de2e9b5a\Psr\Log\LogLevel::WARNING : null;
+        $level = $this->loaded ? \_PhpScopercf327c47dfc5\Psr\Log\LogLevel::WARNING : null;
         $this->output($text, $level);
     }
     private function reportRestarting($command)

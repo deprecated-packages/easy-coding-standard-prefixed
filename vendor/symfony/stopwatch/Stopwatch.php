@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera238de2e9b5a\Symfony\Component\Stopwatch;
+namespace _PhpScopercf327c47dfc5\Symfony\Component\Stopwatch;
 
 /**
  * Stopwatch provides a way to profile code.
@@ -27,7 +27,7 @@ class Stopwatch
     private $activeSections;
     public function __construct()
     {
-        $this->sections = $this->activeSections = array('__root__' => new \_PhpScopera238de2e9b5a\Symfony\Component\Stopwatch\Section('__root__'));
+        $this->sections = $this->activeSections = array('__root__' => new \_PhpScopercf327c47dfc5\Symfony\Component\Stopwatch\Section('__root__'));
     }
     /**
      * @return Section[]

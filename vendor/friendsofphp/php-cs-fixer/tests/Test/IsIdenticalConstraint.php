@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Tests\Test;
 
 use PhpCsFixer\PhpunitConstraintIsIdenticalString\Constraint\IsIdenticalString;
-use _PhpScopera238de2e9b5a\PHPUnit\Framework\Constraint\IsIdentical as PhpUnitIsIdentical;
+use _PhpScopercf327c47dfc5\PHPUnit\Framework\Constraint\IsIdentical as PhpUnitIsIdentical;
 /**
  * @internal
  *
@@ -37,7 +37,7 @@ trait IsIdenticalConstraint
      */
     private static function getIsIdenticalStringConstraintClassName()
     {
-        foreach ([\PhpCsFixer\PhpunitConstraintIsIdenticalString\Constraint\IsIdenticalString::class, \_PhpScopera238de2e9b5a\PHPUnit\Framework\Constraint\IsIdentical::class, 'PHPUnit_Framework_Constraint_IsIdentical'] as $className) {
+        foreach ([\PhpCsFixer\PhpunitConstraintIsIdenticalString\Constraint\IsIdenticalString::class, \_PhpScopercf327c47dfc5\PHPUnit\Framework\Constraint\IsIdentical::class, 'PHPUnit_Framework_Constraint_IsIdentical'] as $className) {
             if (\class_exists($className)) {
                 return $className;
             }

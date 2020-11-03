@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScopera238de2e9b5a\Nette\Utils\Strings;
+use _PhpScopercf327c47dfc5\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\Comment\NoEmptyCommentFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -37,7 +37,7 @@ final class RemoveSuperfluousDocBlockWhitespaceFixer extends \Symplify\CodingSta
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
                 continue;
             }
-            $newContent = \_PhpScopera238de2e9b5a\Nette\Utils\Strings::replace($token->getContent(), self::EMPTY_LINE_REGEX, function (array $match) : string {
+            $newContent = \_PhpScopercf327c47dfc5\Nette\Utils\Strings::replace($token->getContent(), self::EMPTY_LINE_REGEX, function (array $match) : string {
                 return $match['oneLine'];
             });
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $newContent]);

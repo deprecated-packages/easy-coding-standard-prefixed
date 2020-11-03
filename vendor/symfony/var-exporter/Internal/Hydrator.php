@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera238de2e9b5a\Symfony\Component\VarExporter\Internal;
+namespace _PhpScopercf327c47dfc5\Symfony\Component\VarExporter\Internal;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
@@ -23,7 +23,7 @@ class Hydrator
     public $properties;
     public $value;
     public $wakeups;
-    public function __construct(?\_PhpScopera238de2e9b5a\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScopera238de2e9b5a\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
+    public function __construct(?\_PhpScopercf327c47dfc5\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScopercf327c47dfc5\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
     {
         $this->registry = $registry;
         $this->values = $values;
@@ -52,7 +52,7 @@ class Hydrator
                 }
             };
         }
-        $classReflector = \_PhpScopera238de2e9b5a\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \_PhpScopera238de2e9b5a\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
+        $classReflector = \_PhpScopercf327c47dfc5\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \_PhpScopercf327c47dfc5\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
         if (!$classReflector->isInternal()) {
             return self::$hydrators[$class] = (self::$hydrators['stdClass'] ?? self::getHydrator('stdClass'))->bindTo(null, $class);
         }

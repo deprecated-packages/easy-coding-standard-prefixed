@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera238de2e9b5a\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScopercf327c47dfc5\PHPStan\PhpDocParser\Ast\Type;
 
-class GenericTypeNode implements \_PhpScopera238de2e9b5a\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class GenericTypeNode implements \_PhpScopercf327c47dfc5\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     /** @var IdentifierTypeNode */
     public $type;
     /** @var TypeNode[] */
     public $genericTypes;
-    public function __construct(\_PhpScopera238de2e9b5a\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $type, array $genericTypes)
+    public function __construct(\_PhpScopercf327c47dfc5\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $type, array $genericTypes)
     {
         $this->type = $type;
         $this->genericTypes = $genericTypes;
