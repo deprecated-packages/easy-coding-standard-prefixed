@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercf327c47dfc5;
+namespace _PhpScoper589e8c04a9ef;
 
-use _PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter\Psr16Adapter;
-use _PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter\TagAwareAdapter;
+use _PhpScoper589e8c04a9ef\Symfony\Component\Cache\Adapter\Psr16Adapter;
+use _PhpScoper589e8c04a9ef\Symfony\Component\Cache\Adapter\TagAwareAdapter;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function _PhpScopercf327c47dfc5\Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+use function _PhpScoper589e8c04a9ef\Symfony\Component\DependencyInjection\Loader\Configurator\ref;
 return static function (\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();
     $services->load('Symplify\\EasyCodingStandard\\ChangedFilesDetector\\', __DIR__ . '/../src');
-    $services->set(\_PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter\Psr16Adapter::class);
-    $services->set(\_PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter\TagAwareAdapter::class)->args(['$itemsPool' => \_PhpScopercf327c47dfc5\Symfony\Component\DependencyInjection\Loader\Configurator\ref(\_PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter\Psr16Adapter::class), '$tagsPool' => \_PhpScopercf327c47dfc5\Symfony\Component\DependencyInjection\Loader\Configurator\ref(\_PhpScopercf327c47dfc5\Symfony\Component\Cache\Adapter\Psr16Adapter::class)]);
+    $services->set(\_PhpScoper589e8c04a9ef\Symfony\Component\Cache\Adapter\Psr16Adapter::class);
+    $services->set(\_PhpScoper589e8c04a9ef\Symfony\Component\Cache\Adapter\TagAwareAdapter::class)->args(['$itemsPool' => \_PhpScoper589e8c04a9ef\Symfony\Component\DependencyInjection\Loader\Configurator\ref(\_PhpScoper589e8c04a9ef\Symfony\Component\Cache\Adapter\Psr16Adapter::class), '$tagsPool' => \_PhpScoper589e8c04a9ef\Symfony\Component\DependencyInjection\Loader\Configurator\ref(\_PhpScoper589e8c04a9ef\Symfony\Component\Cache\Adapter\Psr16Adapter::class)]);
 };

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScopercf327c47dfc5;
+namespace _PhpScoper589e8c04a9ef;
 
 /**
  * Validate the PHP_CodeSniffer PEAR package.xml file.
@@ -289,5 +289,5 @@ class ValidatePEARPackageXML
 /**
  * Validate the PHP_CodeSniffer PEAR package.xml file.
  */
-\class_alias('_PhpScopercf327c47dfc5\\ValidatePEARPackageXML', 'ValidatePEARPackageXML', \false);
+\class_alias('_PhpScoper589e8c04a9ef\\ValidatePEARPackageXML', 'ValidatePEARPackageXML', \false);
 //end class

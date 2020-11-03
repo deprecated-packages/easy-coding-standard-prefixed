@@ -10,7 +10,7 @@
  */
 namespace Composer\XdebugHandler;
 
-use _PhpScopercf327c47dfc5\Psr\Log\LoggerInterface;
+use _PhpScoper589e8c04a9ef\Psr\Log\LoggerInterface;
 /**
  * @author John Stevenson <john-stevenson@blueyonder.co.uk>
  */
@@ -72,7 +72,7 @@ class XdebugHandler
      *
      * @return $this
      */
-    public function setLogger(\_PhpScopercf327c47dfc5\Psr\Log\LoggerInterface $logger)
+    public function setLogger(\_PhpScoper589e8c04a9ef\Psr\Log\LoggerInterface $logger)
     {
         $this->statusWriter->setLogger($logger);
         return $this;

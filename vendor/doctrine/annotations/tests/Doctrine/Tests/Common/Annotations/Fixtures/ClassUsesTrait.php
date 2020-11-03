@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScopercf327c47dfc5\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper589e8c04a9ef\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScopercf327c47dfc5\Doctrine\Tests\Common\Annotations\Bar\Autoload;
+use _PhpScoper589e8c04a9ef\Doctrine\Tests\Common\Annotations\Bar\Autoload;
 class ClassUsesTrait
 {
     use TraitWithAnnotatedMethod;
@@ -17,7 +17,7 @@ class ClassUsesTrait
     {
     }
 }
-namespace _PhpScopercf327c47dfc5\Doctrine\Tests\Common\Annotations\Bar;
+namespace _PhpScoper589e8c04a9ef\Doctrine\Tests\Common\Annotations\Bar;
 
 /** @Annotation */
 class Autoload
