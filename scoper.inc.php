@@ -1,39 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper133be48300f9;
+namespace _PhpScoper92feab6bddf8;
 
-require_once __DIR__ . '/vendor/autoload.php';
-use _PhpScoper133be48300f9\Nette\Utils\Strings;
-//$excludedClasses = [
-//    // part of public API in config
-//    ContainerConfigurator::class,
-//];
-return [
-    'prefix' => null,
-    'finders' => [],
-    //    'patchers' => [
-    //        // unprefix excluded classes
-    //        // fixes https://github.com/humbug/box/issues/470
-    //        function (string $filePath, string $prefix, string $content) use ($excludedClasses): string {
-    //            foreach ($excludedClasses as $excludedClass) {
-    //                $prefixedClassPattern = '#' . $prefix . '\\\\' . preg_quote($excludedClass, '#') . '#';
-    //                $content = Strings::replace($content, $prefixedClassPattern, $excludedClass);
-    //            }
-    //
-    //            return $content;
-    //        },
-    //    ],
-    'whitelist' => [
-        // needed for autoload, that is not prefixed, since it's in bin/* file
-        'Symplify\\*',
-        'PhpCsFixer\\*',
-        'PHP_CodeSniffer\\*',
-        'SlevomatCodingStandard\\*',
-        '_PhpScoper133be48300f9\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
-        'Composer\\*',
-    ],
-];
-// notes from compiler commands
-// remove this file, breaks stuff
-// __DIR__ . '/../../../vendor/friendsofphp/php-cs-fixer/src/Test/AbstractIntegrationTestCase.php',
+return ['files-whitelist' => [
+    // do not prefix "trigger_deprecatoin" from symfony - https://github.com/symfony/symfony/commit/0032b2a2893d3be592d4312b7b098fb9d71aca03
+    // these paths are relative to this file location, so it should be in the root directory
+    'vendor/symfony/deprecation-contracts/function.php',
+], 'whitelist' => [
+    // needed for autoload, that is not prefixed, since it's in bin/* file
+    'Symplify\\*',
+    'PhpCsFixer\\*',
+    'PHP_CodeSniffer\\*',
+    'SlevomatCodingStandard\\*',
+    '_PhpScoper92feab6bddf8\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
+]];

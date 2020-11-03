@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Tests\Error\ErrorCollector;
 
-use _PhpScoper133be48300f9\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper92feab6bddf8\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
@@ -27,7 +27,7 @@ final class FixerFileProcessorTest extends \Symplify\PackageBuilder\Tests\Abstra
         $this->fixerFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
         // silent output
         $easyCodingStandardStyle = self::$container->get(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class);
-        $easyCodingStandardStyle->setVerbosity(\_PhpScoper133be48300f9\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+        $easyCodingStandardStyle->setVerbosity(\_PhpScoper92feab6bddf8\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
     }
     public function test() : void
     {

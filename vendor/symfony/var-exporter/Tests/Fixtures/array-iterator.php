@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoper133be48300f9;
+namespace _PhpScoper92feab6bddf8;
 
-return \_PhpScoper133be48300f9\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone \_PhpScoper133be48300f9\Symfony\Component\VarExporter\Internal\Registry::$prototypes['ArrayIterator'] ?? \_PhpScoper133be48300f9\Symfony\Component\VarExporter\Internal\Registry::p('ArrayIterator')], null, ['ArrayIterator' => ["\0" => [[[123], 1]]]], $o[0], []);
+return \_PhpScoper92feab6bddf8\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone \_PhpScoper92feab6bddf8\Symfony\Component\VarExporter\Internal\Registry::$prototypes['ArrayIterator'] ?? \_PhpScoper92feab6bddf8\Symfony\Component\VarExporter\Internal\Registry::p('ArrayIterator')], null, ['ArrayIterator' => ["\0" => [[[123], 1]]]], $o[0], []);

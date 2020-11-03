@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper133be48300f9\Symfony\Contracts\Service;
+namespace _PhpScoper92feab6bddf8\Symfony\Contracts\Service;
 
-use _PhpScoper133be48300f9\Psr\Container\ContainerInterface;
+use _PhpScoper92feab6bddf8\Psr\Container\ContainerInterface;
 /**
  * Implementation of ServiceSubscriberInterface that determines subscribed services from
  * private method return types. Service ids are available as "ClassName::methodName".
@@ -41,7 +41,7 @@ trait ServiceSubscriberTrait
     /**
      * @required
      */
-    public function setContainer(\_PhpScoper133be48300f9\Psr\Container\ContainerInterface $container)
+    public function setContainer(\_PhpScoper92feab6bddf8\Psr\Container\ContainerInterface $container)
     {
         $this->container = $container;
         if (\is_callable(['parent', __FUNCTION__])) {
