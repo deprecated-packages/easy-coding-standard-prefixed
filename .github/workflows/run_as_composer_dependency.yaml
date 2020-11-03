@@ -26,4 +26,4 @@ jobs:
 
                     # run
                     composer require symplify/easy-coding-standard-prefixed:@dev --dev
-                    vendor/bin/ecs --debug
+                    bin/ecs --debug

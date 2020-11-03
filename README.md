@@ -10,20 +10,26 @@ Prefixed version of ECS compiled in PHAR with [`compiler`](https://github.com/Sy
 composer require symplify/easy-coding-standard-prefixed --dev
 ```
 
-### Phar file Version
+## Use
 
-`ecs.phar` is also included in this repository
+Create a config:
 
+```bash
+vendor/bin/ecs init
 ```
-wget https://github.com/symplify/easy-coding-standard-prefixed/blob/master/ecs.phar?raw=true
+
+Setup config and run ECS in dry run:
+
+```bash
+vendor/bin/ecs check src 
+```
+
+To fix the code, add `--fix`:
+
+```bash
+vendor/bin/ecs check src --fix
 ```
 
 ### Non-Prefixed Version
 
 Head over to the ["Easy Coding Standard" repository](https://github.com/symplify/easy-coding-standard) for more information.
-
-## Use
-
-```bash
-vendor/bin/ecs check src --set psr12
-```

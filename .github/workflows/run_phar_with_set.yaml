@@ -21,10 +21,6 @@ jobs:
                         set_config: '--set symplify'
 
                     -
-                        name: 'ECS Parameters Sets'
-                        set_config: '--config ecs-parameters-sets.yaml'
-
-                    -
                         name: 'ECS PHP Config Sets'
                         set_config: '--config ecs-php.php'
 

@@ -1,9 +1,0 @@
-parameters:
-    sets:
-        - 'clean-code'
-        - 'common'
-        - 'php70'
-        - 'php71'
-        - 'psr12'
-        - 'symfony'
-        - 'symfony-risky'

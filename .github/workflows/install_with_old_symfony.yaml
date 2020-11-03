@@ -29,4 +29,4 @@ jobs:
 
                     composer require symfony/console:${{ matrix.symfony }} --ansi
                     composer require symplify/easy-coding-standard-prefixed:@dev --dev --ansi
-                    vendor/bin/ecs --debug --ansi
+                    bin/ecs --debug --ansi
