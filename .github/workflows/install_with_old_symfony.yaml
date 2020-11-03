@@ -20,10 +20,9 @@ jobs:
             # wait for deploy to packagist
             -   run: sleep 20
 
-            -   uses: shivammathur/setup-php@v1
+            -   uses: shivammathur/setup-php@v2
                 with:
                     php-version: 7.3
-                    coverage: none
 
             -   run: composer require symfony/console:${{ matrix.symfony }} --ansi
             -   run: composer require symplify/easy-coding-standard-prefixed:@dev --dev --ansi
