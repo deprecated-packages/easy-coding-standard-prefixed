@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Identifier;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\PHPStan\Type\ObjectType;
-use _PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Identifier;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PHPStan\Type\ObjectType;
+use _PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 use Symplify\CodingStandard\ValueObject\PHPStanAttributeKey;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\CheckRequiredAutowireAutoconfigurePublicUsedInConfigServiceRule\CheckRequiredAutowireAutoconfigurePublicUsedInConfigServiceRuleTest
@@ -28,20 +28,20 @@ final class CheckRequiredAutowireAutoconfigurePublicUsedInConfigServiceRule exte
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall::class];
     }
     /**
      * @param MethodCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $type = $scope->getType($node->var);
-        if (!$type instanceof \_PhpScoper2b44cb0c30af\PHPStan\Type\ObjectType) {
+        if (!$type instanceof \_PhpScoper3d04c8135695\PHPStan\Type\ObjectType) {
             return [];
         }
         $className = $type->getClassName();
-        if (!\is_a($className, \_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator::class, \true)) {
+        if (!\is_a($className, \_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator::class, \true)) {
             return [];
         }
         /** @var Identifier $methodIdentifier */
@@ -61,11 +61,11 @@ final class CheckRequiredAutowireAutoconfigurePublicUsedInConfigServiceRule exte
     /**
      * @return string[]
      */
-    private function getMethodCallNames(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall $methodCall) : array
+    private function getMethodCallNames(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall $methodCall) : array
     {
         $methodCalls = [];
         while ($methodCall) {
-            if ($methodCall instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall && $methodCall->name instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Identifier) {
+            if ($methodCall instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall && $methodCall->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Identifier) {
                 $methodCalls[] = $methodCall->name->toString();
             }
             $methodCall = $methodCall->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);

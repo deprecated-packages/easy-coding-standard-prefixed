@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Name;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Name;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\ClassNameRespectsParentSuffixRule\ClassNameRespectsParentSuffixRuleTest
  */
@@ -37,13 +37,13 @@ final class ClassNameRespectsParentSuffixRule extends \Symplify\CodingStandard\R
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class];
     }
     /**
      * @param Class_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $shortClassName = $node->name;
         if ($shortClassName === null) {
@@ -71,21 +71,21 @@ final class ClassNameRespectsParentSuffixRule extends \Symplify\CodingStandard\R
      */
     private function resolveExpectedSuffix(string $parentType) : string
     {
-        if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::endsWith($parentType, 'Interface')) {
-            $parentType = \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::substring($parentType, 0, -\strlen('Interface'));
+        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::endsWith($parentType, 'Interface')) {
+            $parentType = \_PhpScoper3d04c8135695\Nette\Utils\Strings::substring($parentType, 0, -\strlen('Interface'));
         }
-        if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::endsWith($parentType, 'Abstract')) {
-            $parentType = \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::substring($parentType, 0, -\strlen('Abstract'));
+        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::endsWith($parentType, 'Abstract')) {
+            $parentType = \_PhpScoper3d04c8135695\Nette\Utils\Strings::substring($parentType, 0, -\strlen('Abstract'));
         }
-        if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::startsWith($parentType, 'Abstract')) {
-            $parentType = \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::substring($parentType, \strlen('Abstract'));
+        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::startsWith($parentType, 'Abstract')) {
+            $parentType = \_PhpScoper3d04c8135695\Nette\Utils\Strings::substring($parentType, \strlen('Abstract'));
         }
         return $parentType;
     }
     /**
      * @return string[]
      */
-    private function processParent(\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_ $class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Name $parentClassName) : array
+    private function processParent(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_ $class, \_PhpScoper3d04c8135695\PhpParser\Node\Name $parentClassName) : array
     {
         $shortClassName = (string) $class->name;
         $parentShortClassName = $parentClassName->getLast();
@@ -103,10 +103,10 @@ final class ClassNameRespectsParentSuffixRule extends \Symplify\CodingStandard\R
             if (\is_int($parentSuffix)) {
                 $parentSuffix = $expectedSuffix;
             }
-            if (!\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::endsWith($currentShortClass, $parentSuffix)) {
+            if (!\_PhpScoper3d04c8135695\Nette\Utils\Strings::endsWith($currentShortClass, $parentSuffix)) {
                 continue;
             }
-            if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::endsWith($class, $expectedSuffix)) {
+            if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::endsWith($class, $expectedSuffix)) {
                 return [];
             }
             $errorMessage = \sprintf(self::ERROR_MESSAGE, $class, $currentShortClass);

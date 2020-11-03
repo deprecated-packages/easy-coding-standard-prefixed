@@ -3,17 +3,17 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Arg;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\ArrayItem;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\ArrowFunction;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\AssignRef;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Closure;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Param;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Foreach_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Function_;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Arg;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ArrayItem;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ArrowFunction;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\AssignRef;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Closure;
+use _PhpScoper3d04c8135695\PhpParser\Node\Param;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\PHPStan\ParentMethodAnalyser;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoReferenceRule\NoReferenceRuleTest
@@ -37,16 +37,16 @@ final class NoReferenceRule extends \Symplify\CodingStandard\Rules\AbstractSympl
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Function_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\AssignRef::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Arg::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Foreach_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\ArrayItem::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\ArrowFunction::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Closure::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\AssignRef::class, \_PhpScoper3d04c8135695\PhpParser\Node\Arg::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\ArrayItem::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\ArrowFunction::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Closure::class];
     }
     /**
      * @param ClassMethod|Function_|AssignRef|Arg|Foreach_|ArrayItem|ArrowFunction|Closure $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $errorMessages = [];
-        if ($node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\AssignRef) {
+        if ($node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\AssignRef) {
             $errorMessages[] = self::ERROR_MESSAGE;
         } elseif ($node->byRef) {
             $errorMessages[] = self::ERROR_MESSAGE;
@@ -58,9 +58,9 @@ final class NoReferenceRule extends \Symplify\CodingStandard\Rules\AbstractSympl
     /**
      * @return string[]
      */
-    private function collectParamErrorMessages(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    private function collectParamErrorMessages(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
-        if (!$node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Function_ && !$node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod) {
+        if (!$node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_ && !$node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod) {
             return [];
         }
         // has parent method? → skip it as enforced by parent

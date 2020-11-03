@@ -3,18 +3,18 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Array_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\ArrayItem;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\FuncCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\New_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Scalar\String_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassConst;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\PHPStan\Type\ArrayType;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Array_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ArrayItem;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\New_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PHPStan\Type\ArrayType;
 use Symplify\CodingStandard\PHPStan\ParentGuard\ParentMethodReturnTypeResolver;
 use Symplify\CodingStandard\ValueObject\MethodName;
 use Symplify\CodingStandard\ValueObject\PHPStanAttributeKey;
@@ -45,13 +45,13 @@ final class ForbiddenArrayWithStringKeysRule extends \Symplify\CodingStandard\Ru
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Array_::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Array_::class];
     }
     /**
      * @param Array_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         if ($this->shouldSkipArray($node, $scope)) {
             return [];
@@ -61,14 +61,14 @@ final class ForbiddenArrayWithStringKeysRule extends \Symplify\CodingStandard\Ru
         }
         // is return array required by parent
         $parentMethodReturnType = $this->parentMethodReturnTypeResolver->resolve($scope);
-        if ($parentMethodReturnType instanceof \_PhpScoper2b44cb0c30af\PHPStan\Type\ArrayType) {
+        if ($parentMethodReturnType instanceof \_PhpScoper3d04c8135695\PHPStan\Type\ArrayType) {
             return [];
         }
         return [self::ERROR_MESSAGE];
     }
-    private function shouldSkipArray(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Array_ $array, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    private function shouldSkipArray(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Array_ $array, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : bool
     {
-        if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::match($scope->getFile(), self::TEST_FILE_REGEX)) {
+        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::match($scope->getFile(), self::TEST_FILE_REGEX)) {
             return \true;
         }
         // skip examples in Rector::getDefinition() method
@@ -77,30 +77,30 @@ final class ForbiddenArrayWithStringKeysRule extends \Symplify\CodingStandard\Ru
         }
         return $this->isPartOfClassConstOrNew($array);
     }
-    private function isPartOfClassConstOrNew(\_PhpScoper2b44cb0c30af\PhpParser\Node $currentNode) : bool
+    private function isPartOfClassConstOrNew(\_PhpScoper3d04c8135695\PhpParser\Node $currentNode) : bool
     {
         while ($currentNode = $currentNode->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT)) {
             // constants can have default values
-            if ($currentNode instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassConst) {
+            if ($currentNode instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst) {
                 return \true;
             }
             // the array with string keys is required by the object parameters
-            if ($currentNode instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\New_) {
+            if ($currentNode instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\New_) {
                 return \true;
             }
-            if ($currentNode instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall) {
+            if ($currentNode instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall) {
                 return \true;
             }
-            if ($currentNode instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall) {
+            if ($currentNode instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall) {
                 return \true;
             }
-            if ($currentNode instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\FuncCall) {
+            if ($currentNode instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall) {
                 return \true;
             }
         }
         return \false;
     }
-    private function isArrayWithStringKey(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Array_ $array) : bool
+    private function isArrayWithStringKey(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Array_ $array) : bool
     {
         foreach ($array->items as $arrayItem) {
             if ($arrayItem === null) {
@@ -110,7 +110,7 @@ final class ForbiddenArrayWithStringKeysRule extends \Symplify\CodingStandard\Ru
             if ($arrayItem->key === null) {
                 continue;
             }
-            if (!$arrayItem->key instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Scalar\String_) {
+            if (!$arrayItem->key instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_) {
                 continue;
             }
             return \true;

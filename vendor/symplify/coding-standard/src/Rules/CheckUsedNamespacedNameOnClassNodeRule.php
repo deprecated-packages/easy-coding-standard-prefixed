@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Assign;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Variable;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Identifier;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable;
+use _PhpScoper3d04c8135695\PhpParser\Node\Identifier;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\ValueObject\PHPStanAttributeKey;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\CheckUsedNamespacedNameOnClassNodeRule\CheckUsedNamespacedNameOnClassNodeRuleTest
@@ -35,19 +35,19 @@ final class CheckUsedNamespacedNameOnClassNodeRule extends \Symplify\CodingStand
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Variable::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable::class];
     }
     /**
      * @param Variable $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $type = $scope->getType($node);
         if (!\method_exists($type, 'getClassName')) {
             return [];
         }
-        if ($type->getClassName() !== \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_::class) {
+        if ($type->getClassName() !== \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class) {
             return [];
         }
         $next = $node->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::NEXT);
@@ -61,7 +61,7 @@ final class CheckUsedNamespacedNameOnClassNodeRule extends \Symplify\CodingStand
             return [];
         }
         /** @var Class_|null $class */
-        $class = $this->getFirstParentByType($node, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_::class);
+        $class = $this->getFirstParentByType($node, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class);
         if ($class === null) {
             return [];
         }
@@ -70,11 +70,11 @@ final class CheckUsedNamespacedNameOnClassNodeRule extends \Symplify\CodingStand
         }
         return [self::ERROR_MESSAGE];
     }
-    private function isVariableNamedShortClassName(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Variable $variable) : bool
+    private function isVariableNamedShortClassName(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable $variable) : bool
     {
         /** @var Assign|null $assign */
-        $assign = $this->getFirstParentByType($variable, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Assign::class);
-        if (!$assign instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Assign) {
+        $assign = $this->getFirstParentByType($variable, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign::class);
+        if (!$assign instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign) {
             return \false;
         }
         /** @var Variable $classNameVariable */

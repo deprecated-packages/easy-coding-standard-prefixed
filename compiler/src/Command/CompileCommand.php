@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Compiler\Command;
 
-use _PhpScoper2b44cb0c30af\Symfony\Component\Console\Command\Command;
-use _PhpScoper2b44cb0c30af\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper2b44cb0c30af\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper2b44cb0c30af\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper3d04c8135695\Symfony\Component\Console\Command\Command;
+use _PhpScoper3d04c8135695\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper3d04c8135695\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper3d04c8135695\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\EasyCodingStandard\Compiler\Composer\ComposerJsonManipulator;
 use Symplify\EasyCodingStandard\Compiler\ValueObject\Option;
 use Symplify\PackageBuilder\Console\ShellCode;
@@ -16,7 +16,7 @@ use Symplify\SmartFileSystem\SmartFileSystem;
 /**
  * Inspired by @see https://github.com/phpstan/phpstan-src/blob/f939d23155627b5c2ec6eef36d976dddea22c0c5/compiler/src/Console/CompileCommand.php
  */
-final class CompileCommand extends \_PhpScoper2b44cb0c30af\Symfony\Component\Console\Command\Command
+final class CompileCommand extends \_PhpScoper3d04c8135695\Symfony\Component\Console\Command\Command
 {
     /**
      * @var string
@@ -46,7 +46,7 @@ final class CompileCommand extends \_PhpScoper2b44cb0c30af\Symfony\Component\Con
      * @var ProcessRunner
      */
     private $processRunner;
-    public function __construct(\Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider, \_PhpScoper2b44cb0c30af\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\EasyCodingStandard\Compiler\Composer\ComposerJsonManipulator $composerJsonManipulator, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \Symplify\PackageBuilder\Process\ProcessRunner $processRunner)
+    public function __construct(\Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider, \_PhpScoper3d04c8135695\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\EasyCodingStandard\Compiler\Composer\ComposerJsonManipulator $composerJsonManipulator, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \Symplify\PackageBuilder\Process\ProcessRunner $processRunner)
     {
         parent::__construct();
         $this->dataDir = $parameterProvider->provideParameter(\Symplify\EasyCodingStandard\Compiler\ValueObject\Option::DATA_DIR);
@@ -58,10 +58,9 @@ final class CompileCommand extends \_PhpScoper2b44cb0c30af\Symfony\Component\Con
     }
     protected function configure() : void
     {
-        $this->setName(self::NAME);
         $this->setDescription('Compile prefixed ecs.phar');
     }
-    protected function execute(\_PhpScoper2b44cb0c30af\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper2b44cb0c30af\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoper3d04c8135695\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper3d04c8135695\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         /** @var string $composerJsonFilePath */
         $composerJsonFilePath = \realpath($this->buildDir . '/composer.json');

@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace Symplify\CodingStandard\CognitiveComplexity\Tests\Rules\FunctionLikeCognitiveComplexityRule;
 
 use Iterator;
-use _PhpScoper2b44cb0c30af\PHPStan\Rules\Rule;
+use _PhpScoper3d04c8135695\PHPStan\Rules\Rule;
 use Symplify\CodingStandard\CognitiveComplexity\Rules\FunctionLikeCognitiveComplexityRule;
 use Symplify\CodingStandard\CognitiveComplexity\Tests\Rules\FunctionLikeCognitiveComplexityRule\Source\ClassMethodOverComplicated;
 use Symplify\CodingStandard\CognitiveComplexity\Tests\Rules\FunctionLikeCognitiveComplexityRule\Source\VideoRepository;
@@ -27,7 +27,7 @@ final class FunctionLikeCognitiveComplexityRuleTest extends \Symplify\PHPStanExt
         $errorMessage = \sprintf(\Symplify\CodingStandard\CognitiveComplexity\Rules\FunctionLikeCognitiveComplexityRule::ERROR_MESSAGE, \Symplify\CodingStandard\CognitiveComplexity\Tests\Rules\FunctionLikeCognitiveComplexityRule\Source\VideoRepository::class . '::findBySlug()', 9, 8);
         (yield [__DIR__ . '/Source/VideoRepository.php', [[$errorMessage, 12]]]);
     }
-    protected function getRule() : \_PhpScoper2b44cb0c30af\PHPStan\Rules\Rule
+    protected function getRule() : \_PhpScoper3d04c8135695\PHPStan\Rules\Rule
     {
         return $this->getRuleFromConfig(\Symplify\CodingStandard\CognitiveComplexity\Rules\FunctionLikeCognitiveComplexityRule::class, __DIR__ . '/../../../../../packages/cognitive-complexity/config/cognitive-complexity-rules.neon');
     }

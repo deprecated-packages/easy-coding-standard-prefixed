@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\NodeAnalyzer;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Comment\Doc;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassConst;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Property;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Comment\Doc;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property;
 final class TypeNodeAnalyzer
 {
     /**
@@ -23,25 +23,25 @@ final class TypeNodeAnalyzer
     /**
      * @param Property|ClassConst $node
      */
-    public function isStaticAndContainerOrKernelType(\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : bool
+    public function isStaticAndContainerOrKernelType(\_PhpScoper3d04c8135695\PhpParser\Node $node) : bool
     {
-        if ($node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassConst) {
+        if ($node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassConst) {
             return \false;
         }
-        if (!$node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Property) {
+        if (!$node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property) {
             return \false;
         }
         if (!$node->isStatic()) {
             return \false;
         }
         $docComment = $node->getDocComment();
-        if (!$docComment instanceof \_PhpScoper2b44cb0c30af\PhpParser\Comment\Doc) {
+        if (!$docComment instanceof \_PhpScoper3d04c8135695\PhpParser\Comment\Doc) {
             return \false;
         }
         $docCommentText = $docComment->getText();
-        if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::match($docCommentText, self::KERNEL_REGEX)) {
+        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::match($docCommentText, self::KERNEL_REGEX)) {
             return \true;
         }
-        return (bool) \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::match($docCommentText, self::CONTAINER_REGEX);
+        return (bool) \_PhpScoper3d04c8135695\Nette\Utils\Strings::match($docCommentText, self::CONTAINER_REGEX);
     }
 }

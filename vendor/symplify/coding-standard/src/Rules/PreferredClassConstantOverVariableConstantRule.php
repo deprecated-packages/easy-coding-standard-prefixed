@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\ClassConstFetch;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Name;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ClassConstFetch;
+use _PhpScoper3d04c8135695\PhpParser\Node\Name;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\PreferredClassConstantOverVariableConstantRule\PreferredClassConstantOverVariableConstantRuleTest
  */
@@ -21,15 +21,15 @@ final class PreferredClassConstantOverVariableConstantRule extends \Symplify\Cod
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\ClassConstFetch::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\ClassConstFetch::class];
     }
     /**
      * @param ClassConstFetch $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
-        if ($node->class instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Name) {
+        if ($node->class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Name) {
             return [];
         }
         return [self::ERROR_MESSAGE];

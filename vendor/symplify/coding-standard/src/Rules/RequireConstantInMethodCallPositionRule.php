@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Arg;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\ClassConstFetch;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Variable;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Identifier;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Name;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Name\FullyQualified;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Arg;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\ClassConstFetch;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable;
+use _PhpScoper3d04c8135695\PhpParser\Node\Identifier;
+use _PhpScoper3d04c8135695\PhpParser\Node\Name;
+use _PhpScoper3d04c8135695\PhpParser\Node\Name\FullyQualified;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\PHPStan\Types\ContainsTypeAnalyser;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\RequireConstantInMethodCallPositionRule\RequireConstantInMethodCallPositionRuleTest
@@ -49,15 +49,15 @@ final class RequireConstantInMethodCallPositionRule extends \Symplify\CodingStan
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall::class];
     }
     /**
      * @param MethodCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
-        if (!$node->name instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Identifier) {
+        if (!$node->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Identifier) {
             return [];
         }
         $errorMessagesLocal = $this->getErrorMessages($node, $scope, \true, $this->requiredLocalConstantInMethodCall, 'local');
@@ -67,7 +67,7 @@ final class RequireConstantInMethodCallPositionRule extends \Symplify\CodingStan
     /**
      * @return string[]
      */
-    private function getErrorMessages(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope, bool $isLocalConstant, array $config, string $messageVar) : array
+    private function getErrorMessages(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, bool $isLocalConstant, array $config, string $messageVar) : array
     {
         /** @var Identifier $name */
         $name = $methodCall->name;
@@ -92,7 +92,7 @@ final class RequireConstantInMethodCallPositionRule extends \Symplify\CodingStan
      * @param class-string $desiredType
      * @return mixed|null
      */
-    private function matchPositions(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope, string $desiredType, array $positionsByMethods, string $methodName)
+    private function matchPositions(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall $methodCall, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, string $desiredType, array $positionsByMethods, string $methodName)
     {
         if (!$this->containsTypeAnalyser->containsExprTypes($methodCall->var, $scope, [$desiredType])) {
             return null;
@@ -102,17 +102,17 @@ final class RequireConstantInMethodCallPositionRule extends \Symplify\CodingStan
     /**
      * @param int[] $positions
      */
-    private function shouldSkipArg(int $key, array $positions, \_PhpScoper2b44cb0c30af\PhpParser\Node\Arg $arg, bool $isLocalConstant) : bool
+    private function shouldSkipArg(int $key, array $positions, \_PhpScoper3d04c8135695\PhpParser\Node\Arg $arg, bool $isLocalConstant) : bool
     {
         if (!\in_array($key, $positions, \true)) {
             return \true;
         }
-        if ($arg->value instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Variable) {
+        if ($arg->value instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable) {
             return \true;
         }
-        if (!$arg->value instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\ClassConstFetch) {
+        if (!$arg->value instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\ClassConstFetch) {
             return \false;
         }
-        return $isLocalConstant ? $arg->value->class instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Name : $arg->value->class instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Name\FullyQualified;
+        return $isLocalConstant ? $arg->value->class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Name : $arg->value->class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Name\FullyQualified;
     }
 }

@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassLike;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoDuplicatedShortClassNameRule\NoDuplicatedShortClassNameRuleTest
  */
@@ -40,13 +40,13 @@ final class NoDuplicatedShortClassNameRule extends \Symplify\CodingStandard\Rule
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassLike::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike::class];
     }
     /**
      * @param ClassLike $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $fullyQualifiedClassName = (string) $node->namespacedName;
         if ($fullyQualifiedClassName === '') {
@@ -57,7 +57,7 @@ final class NoDuplicatedShortClassNameRule extends \Symplify\CodingStandard\Rule
         }
         $this->prepareDeclaredClassesByShortName();
         /** @var string $shortClassName */
-        $shortClassName = \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::after($fullyQualifiedClassName, '\\', -1);
+        $shortClassName = \_PhpScoper3d04c8135695\Nette\Utils\Strings::after($fullyQualifiedClassName, '\\', -1);
         $classesByShortName = $this->declaredClassesByShortName[$shortClassName] ?? [];
         if (\count($classesByShortName) <= 1) {
             return [];
@@ -73,10 +73,10 @@ final class NoDuplicatedShortClassNameRule extends \Symplify\CodingStandard\Rule
         }
         $fullyQualifiedClassNames = \get_declared_classes();
         foreach ($fullyQualifiedClassNames as $fullyQualifiedClassName) {
-            if (!\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::contains($fullyQualifiedClassName, '\\')) {
+            if (!\_PhpScoper3d04c8135695\Nette\Utils\Strings::contains($fullyQualifiedClassName, '\\')) {
                 continue;
             }
-            $shortClassName = \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::after($fullyQualifiedClassName, '\\', -1);
+            $shortClassName = \_PhpScoper3d04c8135695\Nette\Utils\Strings::after($fullyQualifiedClassName, '\\', -1);
             $this->declaredClassesByShortName[$shortClassName][] = $fullyQualifiedClassName;
         }
         \ksort($this->declaredClassesByShortName);
@@ -85,7 +85,7 @@ final class NoDuplicatedShortClassNameRule extends \Symplify\CodingStandard\Rule
     {
         // is allowed
         foreach (self::ALLOWED_CLASS_NAMES as $allowedClassName) {
-            if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::match($name, $allowedClassName)) {
+            if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::match($name, $allowedClassName)) {
                 return \true;
             }
         }

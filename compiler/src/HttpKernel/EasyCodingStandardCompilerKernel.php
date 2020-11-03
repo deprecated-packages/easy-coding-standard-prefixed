@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Compiler\HttpKernel;
 
-use _PhpScoper2b44cb0c30af\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoper2b44cb0c30af\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use _PhpScoper2b44cb0c30af\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper3d04c8135695\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper3d04c8135695\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper3d04c8135695\Symfony\Component\HttpKernel\Kernel;
 use Symplify\ConsoleColorDiff\ConsoleColorDiffBundle;
-final class EasyCodingStandardCompilerKernel extends \_PhpScoper2b44cb0c30af\Symfony\Component\HttpKernel\Kernel
+final class EasyCodingStandardCompilerKernel extends \_PhpScoper3d04c8135695\Symfony\Component\HttpKernel\Kernel
 {
     public function getCacheDir() : string
     {
@@ -19,7 +19,7 @@ final class EasyCodingStandardCompilerKernel extends \_PhpScoper2b44cb0c30af\Sym
         // manually configured, so it can be replaced in phar
         return \sys_get_temp_dir() . '/_ecs_compiler_log';
     }
-    public function registerContainerConfiguration(\_PhpScoper2b44cb0c30af\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(\_PhpScoper3d04c8135695\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
     }

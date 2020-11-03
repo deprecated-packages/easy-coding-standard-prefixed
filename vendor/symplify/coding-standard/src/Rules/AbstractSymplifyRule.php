@@ -3,17 +3,17 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\PHPStan\Rules\Rule;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PHPStan\Rules\Rule;
 use Symplify\CodingStandard\Contract\ManyNodeRuleInterface;
 use Symplify\CodingStandard\ValueObject\PHPStanAttributeKey;
-abstract class AbstractSymplifyRule implements \_PhpScoper2b44cb0c30af\PHPStan\Rules\Rule, \Symplify\CodingStandard\Contract\ManyNodeRuleInterface
+abstract class AbstractSymplifyRule implements \_PhpScoper3d04c8135695\PHPStan\Rules\Rule, \Symplify\CodingStandard\Contract\ManyNodeRuleInterface
 {
-    public function getShortClassName(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : ?string
+    public function getShortClassName(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : ?string
     {
         $className = $this->getClassName($scope);
         if ($className === null) {
@@ -21,7 +21,7 @@ abstract class AbstractSymplifyRule implements \_PhpScoper2b44cb0c30af\PHPStan\R
         }
         return $this->resolveShortName($className);
     }
-    public function getClassName(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : ?string
+    public function getClassName(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : ?string
     {
         if ($scope->isInTrait()) {
             $traitReflection = $scope->getTraitReflection();
@@ -38,19 +38,19 @@ abstract class AbstractSymplifyRule implements \_PhpScoper2b44cb0c30af\PHPStan\R
     }
     public function getNodeType() : string
     {
-        return \_PhpScoper2b44cb0c30af\PhpParser\Node::class;
+        return \_PhpScoper3d04c8135695\PhpParser\Node::class;
     }
     /**
      * @return mixed[]
      */
-    public function processNode(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function processNode(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         if ($this->shouldSkipNode($node)) {
             return [];
         }
         return $this->process($node, $scope);
     }
-    public function resolveCurrentClassName(\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : ?string
+    public function resolveCurrentClassName(\_PhpScoper3d04c8135695\PhpParser\Node $node) : ?string
     {
         $class = $this->resolveCurrentClass($node);
         if ($class === null) {
@@ -62,40 +62,40 @@ abstract class AbstractSymplifyRule implements \_PhpScoper2b44cb0c30af\PHPStan\R
         }
         return (string) $class->namespacedName;
     }
-    public function resolveCurrentClass(\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : ?\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_
+    public function resolveCurrentClass(\_PhpScoper3d04c8135695\PhpParser\Node $node) : ?\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_
     {
         $class = $node->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
         while ($class) {
-            if ($class instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_) {
+            if ($class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_) {
                 return $class;
             }
             $class = $class->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
         }
         return null;
     }
-    public function resolveCurrentClassMethod(\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : ?\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod
+    public function resolveCurrentClassMethod(\_PhpScoper3d04c8135695\PhpParser\Node $node) : ?\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod
     {
         $classMethod = $node->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
         while ($classMethod) {
-            if ($classMethod instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod) {
+            if ($classMethod instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod) {
                 return $classMethod;
             }
             $classMethod = $classMethod->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
         }
         return null;
     }
-    public function getFirstParentByType(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, string $nodeClass) : ?\_PhpScoper2b44cb0c30af\PhpParser\Node
+    public function getFirstParentByType(\_PhpScoper3d04c8135695\PhpParser\Node $node, string $nodeClass) : ?\_PhpScoper3d04c8135695\PhpParser\Node
     {
         $node = $node->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
         while ($node) {
-            if (\is_a($node, $nodeClass, \true) && $node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node) {
+            if (\is_a($node, $nodeClass, \true) && $node instanceof \_PhpScoper3d04c8135695\PhpParser\Node) {
                 return $node;
             }
             $node = $node->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
         }
         return null;
     }
-    private function shouldSkipNode(\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : bool
+    private function shouldSkipNode(\_PhpScoper3d04c8135695\PhpParser\Node $node) : bool
     {
         $nodeTypes = $this->getNodeTypes();
         foreach ($nodeTypes as $nodeType) {
@@ -107,9 +107,9 @@ abstract class AbstractSymplifyRule implements \_PhpScoper2b44cb0c30af\PHPStan\R
     }
     private function resolveShortName(string $className) : string
     {
-        if (!\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::contains($className, '\\')) {
+        if (!\_PhpScoper3d04c8135695\Nette\Utils\Strings::contains($className, '\\')) {
             return $className;
         }
-        return (string) \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::after($className, '\\', -1);
+        return (string) \_PhpScoper3d04c8135695\Nette\Utils\Strings::after($className, '\\', -1);
     }
 }

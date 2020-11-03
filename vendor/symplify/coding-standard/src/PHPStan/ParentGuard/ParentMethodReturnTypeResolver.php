@@ -3,23 +3,23 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\PHPStan\ParentGuard;
 
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\PHPStan\Reflection\ClassReflection;
-use _PhpScoper2b44cb0c30af\PHPStan\Reflection\FunctionVariant;
-use _PhpScoper2b44cb0c30af\PHPStan\Reflection\MethodReflection;
-use _PhpScoper2b44cb0c30af\PHPStan\Reflection\ParametersAcceptorSelector;
-use _PhpScoper2b44cb0c30af\PHPStan\Reflection\Php\PhpMethodReflection;
-use _PhpScoper2b44cb0c30af\PHPStan\Type\Type;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PHPStan\Reflection\ClassReflection;
+use _PhpScoper3d04c8135695\PHPStan\Reflection\FunctionVariant;
+use _PhpScoper3d04c8135695\PHPStan\Reflection\MethodReflection;
+use _PhpScoper3d04c8135695\PHPStan\Reflection\ParametersAcceptorSelector;
+use _PhpScoper3d04c8135695\PHPStan\Reflection\Php\PhpMethodReflection;
+use _PhpScoper3d04c8135695\PHPStan\Type\Type;
 final class ParentMethodReturnTypeResolver
 {
-    public function resolve(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : ?\_PhpScoper2b44cb0c30af\PHPStan\Type\Type
+    public function resolve(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : ?\_PhpScoper3d04c8135695\PHPStan\Type\Type
     {
         $functionReflection = $scope->getFunction();
-        if (!$functionReflection instanceof \_PhpScoper2b44cb0c30af\PHPStan\Reflection\MethodReflection) {
+        if (!$functionReflection instanceof \_PhpScoper3d04c8135695\PHPStan\Reflection\MethodReflection) {
             return null;
         }
         $classReflection = $scope->getClassReflection();
-        if (!$classReflection instanceof \_PhpScoper2b44cb0c30af\PHPStan\Reflection\ClassReflection) {
+        if (!$classReflection instanceof \_PhpScoper3d04c8135695\PHPStan\Reflection\ClassReflection) {
             return null;
         }
         $methodName = $functionReflection->getName();
@@ -30,11 +30,11 @@ final class ParentMethodReturnTypeResolver
                 continue;
             }
             $nativeMethodReflection = $parentClassLikeReflection->getNativeMethod($methodName);
-            if (!$nativeMethodReflection instanceof \_PhpScoper2b44cb0c30af\PHPStan\Reflection\Php\PhpMethodReflection) {
+            if (!$nativeMethodReflection instanceof \_PhpScoper3d04c8135695\PHPStan\Reflection\Php\PhpMethodReflection) {
                 continue;
             }
-            $parametersAcceptor = \_PhpScoper2b44cb0c30af\PHPStan\Reflection\ParametersAcceptorSelector::selectSingle($nativeMethodReflection->getVariants());
-            if (!$parametersAcceptor instanceof \_PhpScoper2b44cb0c30af\PHPStan\Reflection\FunctionVariant) {
+            $parametersAcceptor = \_PhpScoper3d04c8135695\PHPStan\Reflection\ParametersAcceptorSelector::selectSingle($nativeMethodReflection->getVariants());
+            if (!$parametersAcceptor instanceof \_PhpScoper3d04c8135695\PHPStan\Reflection\FunctionVariant) {
                 continue;
             }
             return $parametersAcceptor->getReturnType();

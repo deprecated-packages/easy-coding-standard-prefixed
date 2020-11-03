@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\BinaryOp\Concat;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Scalar\MagicConst\Dir;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Scalar\String_;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\PHPUnit\Framework\TestCase;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\BinaryOp\Concat;
+use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\MagicConst\Dir;
+use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PHPUnit\Framework\TestCase;
 use Symplify\CodingStandard\PhpParser\FileExistFuncCallAnalyzer;
 use Symplify\CodingStandard\ValueObject\PHPStanAttributeKey;
 /**
@@ -39,18 +39,18 @@ final class NoMissingDirPathRule extends \Symplify\CodingStandard\Rules\Abstract
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Scalar\MagicConst\Dir::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Scalar\MagicConst\Dir::class];
     }
     /**
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $parent = $node->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
-        if (!$parent instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\BinaryOp\Concat) {
+        if (!$parent instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\BinaryOp\Concat) {
             return [];
         }
-        if (!$parent->right instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Scalar\String_) {
+        if (!$parent->right instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\String_) {
             return [];
         }
         $relativeDirPath = $parent->right->value;
@@ -65,22 +65,22 @@ final class NoMissingDirPathRule extends \Symplify\CodingStandard\Rules\Abstract
         $errorMessage = \sprintf(self::ERROR_MESSAGE, $relativeDirPath);
         return [$errorMessage];
     }
-    private function isPartOfPHPUnit(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    private function isPartOfPHPUnit(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : bool
     {
         $classReflection = $scope->getClassReflection();
         if ($classReflection === null) {
             return \false;
         }
         $className = $classReflection->getName();
-        return \is_a($className, \_PhpScoper2b44cb0c30af\PHPUnit\Framework\TestCase::class, \true);
+        return \is_a($className, \_PhpScoper3d04c8135695\PHPUnit\Framework\TestCase::class, \true);
     }
-    private function shouldSkip(string $relativeDirPath, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\BinaryOp\Concat $concat, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    private function shouldSkip(string $relativeDirPath, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\BinaryOp\Concat $concat, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : bool
     {
         // is vendor autolaod? it yet to be exist
-        if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::match($relativeDirPath, self::VENDOR_REGEX)) {
+        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::match($relativeDirPath, self::VENDOR_REGEX)) {
             return \true;
         }
-        if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::contains($relativeDirPath, '*')) {
+        if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::contains($relativeDirPath, '*')) {
             return \true;
         }
         if ($this->isPartOfPHPUnit($scope)) {

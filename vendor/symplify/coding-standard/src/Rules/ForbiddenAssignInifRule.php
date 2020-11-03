@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Assign;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\If_;
-use _PhpScoper2b44cb0c30af\PhpParser\NodeFinder;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\If_;
+use _PhpScoper3d04c8135695\PhpParser\NodeFinder;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\ForbiddenAssignInifRule\ForbiddenAssignInifRuleTest
  */
@@ -21,7 +21,7 @@ final class ForbiddenAssignInifRule extends \Symplify\CodingStandard\Rules\Abstr
      * @var NodeFinder
      */
     private $nodeFinder;
-    public function __construct(\_PhpScoper2b44cb0c30af\PhpParser\NodeFinder $nodeFinder)
+    public function __construct(\_PhpScoper3d04c8135695\PhpParser\NodeFinder $nodeFinder)
     {
         $this->nodeFinder = $nodeFinder;
     }
@@ -30,23 +30,23 @@ final class ForbiddenAssignInifRule extends \Symplify\CodingStandard\Rules\Abstr
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\If_::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\If_::class];
     }
     /**
      * @param If_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         if (!$this->isHaveAssignmentInside($node)) {
             return [];
         }
         return [self::ERROR_MESSAGE];
     }
-    private function isHaveAssignmentInside(\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\If_ $if) : bool
+    private function isHaveAssignmentInside(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\If_ $if) : bool
     {
-        return (bool) $this->nodeFinder->findFirst($if->cond, function (\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : bool {
-            return $node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Assign;
+        return (bool) $this->nodeFinder->findFirst($if->cond, function (\_PhpScoper3d04c8135695\PhpParser\Node $node) : bool {
+            return $node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign;
         });
     }
 }

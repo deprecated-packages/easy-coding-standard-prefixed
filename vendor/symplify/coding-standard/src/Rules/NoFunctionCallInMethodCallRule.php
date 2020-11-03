@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Arg;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\FuncCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Arg;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoFunctionCallInMethodCallRule\NoFunctionCallInMethodCallRuleTest
  */
@@ -28,21 +28,21 @@ final class NoFunctionCallInMethodCallRule extends \Symplify\CodingStandard\Rule
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall::class];
     }
     /**
      * @param MethodCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $messages = [];
         foreach ($node->args as $arg) {
-            if (!$arg->value instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\FuncCall) {
+            if (!$arg->value instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall) {
                 continue;
             }
             $funcCallName = $this->resolveFuncCallName($arg);
-            if (\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::contains($funcCallName, '\\')) {
+            if (\_PhpScoper3d04c8135695\Nette\Utils\Strings::contains($funcCallName, '\\')) {
                 continue;
             }
             if (\in_array($funcCallName, self::ALLOWED_FUNC_CALL_NAMES, \true)) {
@@ -52,11 +52,11 @@ final class NoFunctionCallInMethodCallRule extends \Symplify\CodingStandard\Rule
         }
         return $messages;
     }
-    private function resolveFuncCallName(\_PhpScoper2b44cb0c30af\PhpParser\Node\Arg $arg) : string
+    private function resolveFuncCallName(\_PhpScoper3d04c8135695\PhpParser\Node\Arg $arg) : string
     {
         /** @var FuncCall $funcCall */
         $funcCall = $arg->value;
-        if ($funcCall->name instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr) {
+        if ($funcCall->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
             return '*dynamic*';
         }
         return (string) $funcCall->name;

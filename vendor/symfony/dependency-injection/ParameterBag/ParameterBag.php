@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\ParameterBag;
+namespace _PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\ParameterBag;
 
-use _PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use _PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use _PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use _PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * Holds parameters.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterBag implements \_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
+class ParameterBag implements \_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
 {
     protected $parameters = [];
     protected $resolved = \false;
@@ -62,7 +62,7 @@ class ParameterBag implements \_PhpScoper2b44cb0c30af\Symfony\Component\Dependen
         $name = (string) $name;
         if (!\array_key_exists($name, $this->parameters)) {
             if (!$name) {
-                throw new \_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
+                throw new \_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
             }
             $alternatives = [];
             foreach ($this->parameters as $key => $parameterValue) {
@@ -85,7 +85,7 @@ class ParameterBag implements \_PhpScoper2b44cb0c30af\Symfony\Component\Dependen
                     $key = \substr($key, 0, -1 * (1 + \array_pop($namePartsLength)));
                 }
             }
-            throw new \_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name, null, null, null, $alternatives, $nonNestedAlternative);
+            throw new \_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name, null, null, null, $alternatives, $nonNestedAlternative);
         }
         return $this->parameters[$name];
     }
@@ -128,7 +128,7 @@ class ParameterBag implements \_PhpScoper2b44cb0c30af\Symfony\Component\Dependen
             try {
                 $value = $this->resolveValue($value);
                 $parameters[$key] = $this->unescapeValue($value);
-            } catch (\_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+            } catch (\_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
                 $e->setSourceKey($key);
                 throw $e;
             }
@@ -182,7 +182,7 @@ class ParameterBag implements \_PhpScoper2b44cb0c30af\Symfony\Component\Dependen
         if (\preg_match('/^%([^%\\s]+)%$/', $value, $match)) {
             $key = $match[1];
             if (isset($resolving[$key])) {
-                throw new \_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
+                throw new \_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
             }
             $resolving[$key] = \true;
             return $this->resolved ? $this->get($key) : $this->resolveValue($this->get($key), $resolving);
@@ -194,11 +194,11 @@ class ParameterBag implements \_PhpScoper2b44cb0c30af\Symfony\Component\Dependen
             }
             $key = $match[1];
             if (isset($resolving[$key])) {
-                throw new \_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
+                throw new \_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
             }
             $resolved = $this->get($key);
             if (!\is_string($resolved) && !\is_numeric($resolved)) {
-                throw new \_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('A string value must be composed of strings and/or numbers, but found parameter "%s" of type %s inside string value "%s".', $key, \gettype($resolved), $value));
+                throw new \_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('A string value must be composed of strings and/or numbers, but found parameter "%s" of type %s inside string value "%s".', $key, \gettype($resolved), $value));
             }
             $resolved = (string) $resolved;
             $resolving[$key] = \true;

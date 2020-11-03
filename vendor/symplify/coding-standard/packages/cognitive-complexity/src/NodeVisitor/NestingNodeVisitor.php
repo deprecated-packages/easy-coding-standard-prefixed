@@ -3,22 +3,22 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\CognitiveComplexity\NodeVisitor;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Closure;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Ternary;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Catch_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Do_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\For_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Foreach_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\If_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\While_;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Closure;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Ternary;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Catch_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Do_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\For_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\If_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\While_;
 use Symplify\CodingStandard\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector;
 final class NestingNodeVisitor extends \Symplify\CodingStandard\CognitiveComplexity\NodeVisitor\AbstractComplexityNodeVisitor
 {
     /**
      * @var class-string[]
      */
-    private const NESTING_NODE_TYPES = [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\If_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\For_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\While_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Catch_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Closure::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Foreach_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Do_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Ternary::class];
+    private const NESTING_NODE_TYPES = [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\If_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\For_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\While_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Catch_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Closure::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Do_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Ternary::class];
     /**
      * @var int
      */
@@ -39,7 +39,7 @@ final class NestingNodeVisitor extends \Symplify\CodingStandard\CognitiveComplex
     {
         $this->measuredNestingLevel = 1;
     }
-    public function enterNode(\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : ?\_PhpScoper2b44cb0c30af\PhpParser\Node
+    public function enterNode(\_PhpScoper3d04c8135695\PhpParser\Node $node) : ?\_PhpScoper3d04c8135695\PhpParser\Node
     {
         if ($this->isNestingNode($node)) {
             ++$this->measuredNestingLevel;
@@ -60,14 +60,14 @@ final class NestingNodeVisitor extends \Symplify\CodingStandard\CognitiveComplex
         $this->previousNestingLevel = $this->measuredNestingLevel;
         return null;
     }
-    public function leaveNode(\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : ?\_PhpScoper2b44cb0c30af\PhpParser\Node
+    public function leaveNode(\_PhpScoper3d04c8135695\PhpParser\Node $node) : ?\_PhpScoper3d04c8135695\PhpParser\Node
     {
         if ($this->isNestingNode($node)) {
             --$this->measuredNestingLevel;
         }
         return null;
     }
-    private function isNestingNode(\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : bool
+    private function isNestingNode(\_PhpScoper3d04c8135695\PhpParser\Node $node) : bool
     {
         return $this->isNodeOfTypes($node, self::NESTING_NODE_TYPES);
     }

@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Compiler\ValueObjectFactory;
 
-use _PhpScoper2b44cb0c30af\PharIo\Version\Version;
+use _PhpScoper3d04c8135695\PharIo\Version\Version;
 final class VersionFactory
 {
-    public function create(string $version) : \_PhpScoper2b44cb0c30af\PharIo\Version\Version
+    public function create(string $version) : \_PhpScoper3d04c8135695\PharIo\Version\Version
     {
-        return new \_PhpScoper2b44cb0c30af\PharIo\Version\Version($version);
+        return new \_PhpScoper3d04c8135695\PharIo\Version\Version($version);
     }
 }

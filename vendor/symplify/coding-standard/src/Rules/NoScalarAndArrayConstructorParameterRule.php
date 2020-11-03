@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Variable;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\PHPStan\Reflection\MethodReflection;
-use _PhpScoper2b44cb0c30af\PHPStan\Rules\Rule;
-use _PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoper2b44cb0c30af\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PHPStan\Reflection\MethodReflection;
+use _PhpScoper3d04c8135695\PHPStan\Rules\Rule;
+use _PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoper3d04c8135695\Symfony\Component\HttpKernel\Kernel;
 use Symplify\Autodiscovery\Discovery;
 use Symplify\Autodiscovery\Finder\AutodiscoveryFinder;
 use Symplify\CodingStandard\PHPStan\Types\ScalarTypeAnalyser;
@@ -36,16 +36,16 @@ final class NoScalarAndArrayConstructorParameterRule extends \Symplify\CodingSta
      * @var string[]
      */
     private const ALLOWED_TYPES = [
-        \_PhpScoper2b44cb0c30af\PHPStan\Rules\Rule::class,
+        \_PhpScoper3d04c8135695\PHPStan\Rules\Rule::class,
         \Throwable::class,
         // part of before construction of dependency injeciton
-        \_PhpScoper2b44cb0c30af\Symfony\Component\HttpKernel\Kernel::class,
-        \_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface::class,
+        \_PhpScoper3d04c8135695\Symfony\Component\HttpKernel\Kernel::class,
+        \_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface::class,
         \Symplify\FlexLoader\Flex\FlexLoader::class,
         \Symplify\Autodiscovery\Finder\AutodiscoveryFinder::class,
         \Symplify\Autodiscovery\Discovery::class,
         \Symplify\Autodiscovery\Finder\AutodiscoveryFinder::class,
-        \_PhpScoper2b44cb0c30af\Symfony\Component\DependencyInjection\Extension\Extension::class,
+        \_PhpScoper3d04c8135695\Symfony\Component\DependencyInjection\Extension\Extension::class,
     ];
     /**
      * @var VariableAsParamAnalyser
@@ -65,13 +65,13 @@ final class NoScalarAndArrayConstructorParameterRule extends \Symplify\CodingSta
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Variable::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Variable::class];
     }
     /**
      * @param Variable $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         if ($this->isClassAllowed($scope)) {
             return [];
@@ -80,7 +80,7 @@ final class NoScalarAndArrayConstructorParameterRule extends \Symplify\CodingSta
             return [];
         }
         $functionReflection = $scope->getFunction();
-        if (!$functionReflection instanceof \_PhpScoper2b44cb0c30af\PHPStan\Reflection\MethodReflection) {
+        if (!$functionReflection instanceof \_PhpScoper3d04c8135695\PHPStan\Reflection\MethodReflection) {
             return [];
         }
         if (!$this->variableAsParamAnalyser->isVariableFromConstructorParam($functionReflection, $node)) {
@@ -93,11 +93,11 @@ final class NoScalarAndArrayConstructorParameterRule extends \Symplify\CodingSta
         }
         return [self::ERROR_MESSAGE];
     }
-    private function isValueObjectNamespace(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    private function isValueObjectNamespace(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : bool
     {
-        return (bool) \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::match($scope->getFile(), self::VALUE_OBJECT_REGEX);
+        return (bool) \_PhpScoper3d04c8135695\Nette\Utils\Strings::match($scope->getFile(), self::VALUE_OBJECT_REGEX);
     }
-    private function isClassAllowed(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    private function isClassAllowed(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : bool
     {
         $classReflection = $scope->getClassReflection();
         if ($classReflection === null) {

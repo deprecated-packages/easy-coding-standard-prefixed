@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Identifier;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Identifier;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\ValueObject\MethodName;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoGetRepositoryOutsideConstructorRule\NoGetRepositoryOutsideConstructorRuleTest
@@ -22,15 +22,15 @@ final class NoGetRepositoryOutsideConstructorRule extends \Symplify\CodingStanda
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall::class];
     }
     /**
      * @param MethodCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
-        if (!$node->name instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Identifier) {
+        if (!$node->name instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Identifier) {
             return [];
         }
         $methodCallName = (string) $node->name;

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper2b44cb0c30af;
+namespace _PhpScoper3d04c8135695;
 
 /**
  * This class is not an annotation
@@ -13,4 +13,4 @@ class Api
  * This class is not an annotation
  * It's a class build to test ClassWithInclude
  */
-\class_alias('_PhpScoper2b44cb0c30af\\Api', 'Api', \false);
+\class_alias('_PhpScoper3d04c8135695\\Api', 'Api', \false);

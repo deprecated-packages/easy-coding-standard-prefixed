@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Name;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Namespace_;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Name;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Namespace_;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\CheckNotTestsNamespaceOutsideTestsDirectoryRule\CheckNotTestsNamespaceOutsideTestsDirectoryRuleTest
@@ -27,13 +27,13 @@ final class CheckNotTestsNamespaceOutsideTestsDirectoryRule extends \Symplify\Co
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Namespace_::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Namespace_::class];
     }
     /**
      * @param Namespace_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         if ($node->name === null) {
             return [];
@@ -52,16 +52,16 @@ final class CheckNotTestsNamespaceOutsideTestsDirectoryRule extends \Symplify\Co
         $errorMessage = \sprintf(self::ERROR_NAMESPACE_OUTSIDE_TEST_DIR, $node->name->toString(), $fileInfo->getRelativeFilePathFromCwd());
         return [$errorMessage];
     }
-    private function hasTestsNamespace(\_PhpScoper2b44cb0c30af\PhpParser\Node\Name $name) : bool
+    private function hasTestsNamespace(\_PhpScoper3d04c8135695\PhpParser\Node\Name $name) : bool
     {
         return \in_array('Tests', $name->parts, \true);
     }
-    private function hasTestSuffix(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    private function hasTestSuffix(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : bool
     {
-        return \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::endsWith($scope->getFile(), 'Test.php');
+        return \_PhpScoper3d04c8135695\Nette\Utils\Strings::endsWith($scope->getFile(), 'Test.php');
     }
-    private function isInTestsDirectory(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    private function isInTestsDirectory(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : bool
     {
-        return \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::contains($scope->getFile(), \DIRECTORY_SEPARATOR . 'tests' . \DIRECTORY_SEPARATOR);
+        return \_PhpScoper3d04c8135695\Nette\Utils\Strings::contains($scope->getFile(), \DIRECTORY_SEPARATOR . 'tests' . \DIRECTORY_SEPARATOR);
     }
 }

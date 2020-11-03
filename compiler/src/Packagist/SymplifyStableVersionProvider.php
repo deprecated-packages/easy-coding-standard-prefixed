@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Compiler\Packagist;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Json;
+use _PhpScoper3d04c8135695\Nette\Utils\Json;
 use Symplify\EasyCodingStandard\Compiler\ValueObjectFactory\VersionFactory;
 use Symplify\SmartFileSystem\SmartFileSystem;
 final class SymplifyStableVersionProvider
@@ -40,7 +40,7 @@ final class SymplifyStableVersionProvider
     }
     private function loadContentJsonStringToArray(string $jsonContent) : array
     {
-        return \_PhpScoper2b44cb0c30af\Nette\Utils\Json::decode($jsonContent, \_PhpScoper2b44cb0c30af\Nette\Utils\Json::FORCE_ARRAY);
+        return \_PhpScoper3d04c8135695\Nette\Utils\Json::decode($jsonContent, \_PhpScoper3d04c8135695\Nette\Utils\Json::FORCE_ARRAY);
     }
     private function getLastKey(array $items) : string
     {

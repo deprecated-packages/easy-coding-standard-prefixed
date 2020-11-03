@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\PHPStan\NodeAnalyser;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Property;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property;
 use Symplify\CodingStandard\NodeAnalyzer\TypeNodeAnalyzer;
 use Symplify\CodingStandard\PHPStan\NodeAnalyzer\DependencyNodeAnalyzer;
 final class ProtectedAnalyser
@@ -21,7 +21,7 @@ final class ProtectedAnalyser
         $this->dependencyNodeAnalyzer = $dependencyNodeAnalyzer;
         $this->typeNodeAnalyzer = $typeNodeAnalyzer;
     }
-    public function isProtectedPropertyOrClassConstAllowed(\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Property $property) : bool
+    public function isProtectedPropertyOrClassConstAllowed(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Property $property) : bool
     {
         if ($this->dependencyNodeAnalyzer->isInsideAbstractClassAndPassedAsDependencyViaConstructorOrSetUp($property)) {
             return \true;

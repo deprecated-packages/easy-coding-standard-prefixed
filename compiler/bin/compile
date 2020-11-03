@@ -1,16 +1,16 @@
 #!/usr/bin/env php
 <?php 
 declare (strict_types=1);
-namespace _PhpScoper2b44cb0c30af;
+namespace _PhpScoper3d04c8135695;
 
-use _PhpScoper2b44cb0c30af\Psr\Container\ContainerInterface;
+use _PhpScoper3d04c8135695\Psr\Container\ContainerInterface;
 use Symplify\EasyCodingStandard\Compiler\Console\EasyCodingStandardCompilerApplication;
 use Symplify\EasyCodingStandard\Compiler\HttpKernel\EasyCodingStandardCompilerKernel;
 // use EasyCodingStandard package autoload.php
 require_once __DIR__ . '/../vendor/autoload.php';
 final class ContainerFactory
 {
-    public function create() : \_PhpScoper2b44cb0c30af\Psr\Container\ContainerInterface
+    public function create() : \_PhpScoper3d04c8135695\Psr\Container\ContainerInterface
     {
         $environment = 'prod' . \random_int(1, 10000000);
         $kernel = new \Symplify\EasyCodingStandard\Compiler\HttpKernel\EasyCodingStandardCompilerKernel($environment, \true);
@@ -18,8 +18,8 @@ final class ContainerFactory
         return $kernel->getContainer();
     }
 }
-\class_alias('_PhpScoper2b44cb0c30af\\ContainerFactory', 'ContainerFactory', \false);
-$container = (new \_PhpScoper2b44cb0c30af\ContainerFactory())->create();
+\class_alias('_PhpScoper3d04c8135695\\ContainerFactory', 'ContainerFactory', \false);
+$container = (new \_PhpScoper3d04c8135695\ContainerFactory())->create();
 /** @var EasyCodingStandardCompilerApplication $application */
 $application = $container->get(\Symplify\EasyCodingStandard\Compiler\Console\EasyCodingStandardCompilerApplication::class);
 exit($application->run());

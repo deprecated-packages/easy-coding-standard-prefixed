@@ -3,18 +3,18 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Comment\Doc;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\PHPStan\Broker\Broker;
-use _PhpScoper2b44cb0c30af\PHPStan\PhpDoc\ResolvedPhpDocBlock;
-use _PhpScoper2b44cb0c30af\PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode;
-use _PhpScoper2b44cb0c30af\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
-use _PhpScoper2b44cb0c30af\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
-use _PhpScoper2b44cb0c30af\PHPStan\Reflection\ClassReflection;
-use _PhpScoper2b44cb0c30af\PHPStan\Type\FileTypeMapper;
-use _PhpScoper2b44cb0c30af\PHPUnit\Framework\TestCase;
+use _PhpScoper3d04c8135695\PhpParser\Comment\Doc;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PHPStan\Broker\Broker;
+use _PhpScoper3d04c8135695\PHPStan\PhpDoc\ResolvedPhpDocBlock;
+use _PhpScoper3d04c8135695\PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode;
+use _PhpScoper3d04c8135695\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
+use _PhpScoper3d04c8135695\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
+use _PhpScoper3d04c8135695\PHPStan\Reflection\ClassReflection;
+use _PhpScoper3d04c8135695\PHPStan\Type\FileTypeMapper;
+use _PhpScoper3d04c8135695\PHPUnit\Framework\TestCase;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\SeeAnnotationToTestRule\SeeAnnotationToTestRuleTest
@@ -41,7 +41,7 @@ final class SeeAnnotationToTestRule extends \Symplify\CodingStandard\Rules\Abstr
      * @var PrivatesAccessor
      */
     private $privatesAccessor;
-    public function __construct(\_PhpScoper2b44cb0c30af\PHPStan\Broker\Broker $broker, \_PhpScoper2b44cb0c30af\PHPStan\Type\FileTypeMapper $fileTypeMapper, array $requiredSeeTypes = [])
+    public function __construct(\_PhpScoper3d04c8135695\PHPStan\Broker\Broker $broker, \_PhpScoper3d04c8135695\PHPStan\Type\FileTypeMapper $fileTypeMapper, array $requiredSeeTypes = [])
     {
         $this->fileTypeMapper = $fileTypeMapper;
         $this->broker = $broker;
@@ -53,13 +53,13 @@ final class SeeAnnotationToTestRule extends \Symplify\CodingStandard\Rules\Abstr
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class];
     }
     /**
      * @param Class_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $classReflection = $this->matchClassReflection($node);
         if ($classReflection === null) {
@@ -84,7 +84,7 @@ final class SeeAnnotationToTestRule extends \Symplify\CodingStandard\Rules\Abstr
         }
         return [\sprintf(self::ERROR_MESSAGE, $classReflection->getName())];
     }
-    private function shouldSkipClassReflection(\_PhpScoper2b44cb0c30af\PHPStan\Reflection\ClassReflection $classReflection) : bool
+    private function shouldSkipClassReflection(\_PhpScoper3d04c8135695\PHPStan\Reflection\ClassReflection $classReflection) : bool
     {
         if ($classReflection->isAbstract()) {
             return \true;
@@ -96,7 +96,7 @@ final class SeeAnnotationToTestRule extends \Symplify\CodingStandard\Rules\Abstr
         }
         return \true;
     }
-    private function matchClassReflection(\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_ $class) : ?\_PhpScoper2b44cb0c30af\PHPStan\Reflection\ClassReflection
+    private function matchClassReflection(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_ $class) : ?\_PhpScoper3d04c8135695\PHPStan\Reflection\ClassReflection
     {
         $shortClassName = $class->name;
         if ($shortClassName === null) {
@@ -108,7 +108,7 @@ final class SeeAnnotationToTestRule extends \Symplify\CodingStandard\Rules\Abstr
         }
         return $this->broker->getClass($className);
     }
-    private function resolvePhpDoc(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope, \_PhpScoper2b44cb0c30af\PHPStan\Reflection\ClassReflection $classReflection, \_PhpScoper2b44cb0c30af\PhpParser\Comment\Doc $doc) : \_PhpScoper2b44cb0c30af\PHPStan\PhpDoc\ResolvedPhpDocBlock
+    private function resolvePhpDoc(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, \_PhpScoper3d04c8135695\PHPStan\Reflection\ClassReflection $classReflection, \_PhpScoper3d04c8135695\PhpParser\Comment\Doc $doc) : \_PhpScoper3d04c8135695\PHPStan\PhpDoc\ResolvedPhpDocBlock
     {
         return $this->fileTypeMapper->getResolvedPhpDoc($scope->getFile(), $classReflection->getName(), null, null, $doc->getText());
     }
@@ -118,10 +118,10 @@ final class SeeAnnotationToTestRule extends \Symplify\CodingStandard\Rules\Abstr
     private function hasSeeTestCaseAnnotation(array $seeTags) : bool
     {
         foreach ($seeTags as $seeTag) {
-            if (!$seeTag->value instanceof \_PhpScoper2b44cb0c30af\PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode) {
+            if (!$seeTag->value instanceof \_PhpScoper3d04c8135695\PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode) {
                 continue;
             }
-            if (\is_a($seeTag->value->value, \_PhpScoper2b44cb0c30af\PHPUnit\Framework\TestCase::class, \true)) {
+            if (\is_a($seeTag->value->value, \_PhpScoper3d04c8135695\PHPUnit\Framework\TestCase::class, \true)) {
                 return \true;
             }
         }
@@ -130,7 +130,7 @@ final class SeeAnnotationToTestRule extends \Symplify\CodingStandard\Rules\Abstr
     /**
      * @return PhpDocTagNode[]
      */
-    private function getSeeTagNodes(\_PhpScoper2b44cb0c30af\PHPStan\PhpDoc\ResolvedPhpDocBlock $resolvedPhpDocBlock) : array
+    private function getSeeTagNodes(\_PhpScoper3d04c8135695\PHPStan\PhpDoc\ResolvedPhpDocBlock $resolvedPhpDocBlock) : array
     {
         /** @var PhpDocNode $phpDocNode */
         $phpDocNode = $this->privatesAccessor->getPrivateProperty($resolvedPhpDocBlock, 'phpDocNode');

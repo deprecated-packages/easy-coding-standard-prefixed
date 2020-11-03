@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Foreach_;
-use _PhpScoper2b44cb0c30af\PhpParser\NodeFinder;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_;
+use _PhpScoper3d04c8135695\PhpParser\NodeFinder;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\ForbiddenMethodOrStaticCallInForeachRule\ForbiddenMethodOrStaticCallInForeachRuleTest
  */
@@ -22,7 +22,7 @@ final class ForbiddenMethodOrStaticCallInForeachRule extends \Symplify\CodingSta
      * @var NodeFinder
      */
     private $nodeFinder;
-    public function __construct(\_PhpScoper2b44cb0c30af\PhpParser\NodeFinder $nodeFinder)
+    public function __construct(\_PhpScoper3d04c8135695\PhpParser\NodeFinder $nodeFinder)
     {
         $this->nodeFinder = $nodeFinder;
     }
@@ -31,15 +31,15 @@ final class ForbiddenMethodOrStaticCallInForeachRule extends \Symplify\CodingSta
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Foreach_::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Foreach_::class];
     }
     /**
      * @param Foreach_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
-        $expressionClasses = [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall::class];
+        $expressionClasses = [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall::class];
         foreach ($expressionClasses as $expressionClass) {
             /** @var MethodCall[]|StaticCall[] $calls */
             $calls = $this->nodeFinder->findInstanceOf($node->expr, $expressionClass);

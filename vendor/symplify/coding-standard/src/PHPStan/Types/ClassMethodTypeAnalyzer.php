@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\PHPStan\Types;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 final class ClassMethodTypeAnalyzer
 {
     /**
      * @param string[] $methodNames
      */
-    public function isClassMethodOfNamesAndType(\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod $classMethod, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope, array $methodNames, string $classType) : bool
+    public function isClassMethodOfNamesAndType(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod $classMethod, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, array $methodNames, string $classType) : bool
     {
         $classMethodName = (string) $classMethod->name;
         if (!\in_array($classMethodName, $methodNames, \true)) {
@@ -18,7 +18,7 @@ final class ClassMethodTypeAnalyzer
         }
         return $this->isClassType($scope, $classType);
     }
-    private function isClassType(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope, string $classType) : bool
+    private function isClassType(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, string $classType) : bool
     {
         $classReflection = $scope->getClassReflection();
         if ($classReflection === null) {

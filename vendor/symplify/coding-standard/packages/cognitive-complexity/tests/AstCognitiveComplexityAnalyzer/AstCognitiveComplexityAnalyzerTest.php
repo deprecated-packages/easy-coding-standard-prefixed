@@ -4,19 +4,19 @@ declare (strict_types=1);
 namespace Symplify\CodingStandard\CognitiveComplexity\Tests\AstCognitiveComplexityAnalyzer;
 
 use Iterator;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Function_;
-use _PhpScoper2b44cb0c30af\PhpParser\NodeFinder;
-use _PhpScoper2b44cb0c30af\PhpParser\ParserFactory;
-use _PhpScoper2b44cb0c30af\PHPStan\DependencyInjection\ContainerFactory;
-use _PhpScoper2b44cb0c30af\PHPUnit\Framework\TestCase;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_;
+use _PhpScoper3d04c8135695\PhpParser\NodeFinder;
+use _PhpScoper3d04c8135695\PhpParser\ParserFactory;
+use _PhpScoper3d04c8135695\PHPStan\DependencyInjection\ContainerFactory;
+use _PhpScoper3d04c8135695\PHPUnit\Framework\TestCase;
 use Symplify\CodingStandard\CognitiveComplexity\AstCognitiveComplexityAnalyzer;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
-final class AstCognitiveComplexityAnalyzerTest extends \_PhpScoper2b44cb0c30af\PHPUnit\Framework\TestCase
+final class AstCognitiveComplexityAnalyzerTest extends \_PhpScoper3d04c8135695\PHPUnit\Framework\TestCase
 {
     /**
      * @var AstCognitiveComplexityAnalyzer
@@ -24,7 +24,7 @@ final class AstCognitiveComplexityAnalyzerTest extends \_PhpScoper2b44cb0c30af\P
     private $astCognitiveComplexityAnalyzer;
     protected function setUp() : void
     {
-        $phpstanContainerFactory = new \_PhpScoper2b44cb0c30af\PHPStan\DependencyInjection\ContainerFactory(\getcwd());
+        $phpstanContainerFactory = new \_PhpScoper3d04c8135695\PHPStan\DependencyInjection\ContainerFactory(\getcwd());
         $tempFile = \sys_get_temp_dir() . '/_symplify_cogntive_complexity_test';
         $container = $phpstanContainerFactory->create($tempFile, [__DIR__ . '/../../config/cognitive-complexity-rules.neon'], []);
         $this->astCognitiveComplexityAnalyzer = $container->getByType(\Symplify\CodingStandard\CognitiveComplexity\AstCognitiveComplexityAnalyzer::class);
@@ -52,14 +52,14 @@ final class AstCognitiveComplexityAnalyzerTest extends \_PhpScoper2b44cb0c30af\P
     /**
      * @return ClassMethod|Function_
      */
-    private function parseFileToFistFunctionLike(string $fileContent) : ?\_PhpScoper2b44cb0c30af\PhpParser\Node
+    private function parseFileToFistFunctionLike(string $fileContent) : ?\_PhpScoper3d04c8135695\PhpParser\Node
     {
-        $parserFactory = new \_PhpScoper2b44cb0c30af\PhpParser\ParserFactory();
-        $parser = $parserFactory->create(\_PhpScoper2b44cb0c30af\PhpParser\ParserFactory::ONLY_PHP7);
+        $parserFactory = new \_PhpScoper3d04c8135695\PhpParser\ParserFactory();
+        $parser = $parserFactory->create(\_PhpScoper3d04c8135695\PhpParser\ParserFactory::ONLY_PHP7);
         $nodes = $parser->parse($fileContent);
-        $nodeFinder = new \_PhpScoper2b44cb0c30af\PhpParser\NodeFinder();
-        return $nodeFinder->findFirst((array) $nodes, function (\_PhpScoper2b44cb0c30af\PhpParser\Node $node) : bool {
-            return $node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod || $node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Function_;
+        $nodeFinder = new \_PhpScoper3d04c8135695\PhpParser\NodeFinder();
+        return $nodeFinder->findFirst((array) $nodes, function (\_PhpScoper3d04c8135695\PhpParser\Node $node) : bool {
+            return $node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod || $node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Function_;
         });
     }
 }

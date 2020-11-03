@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Array_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Assign;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\FuncCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\PHPStan\Type\ObjectType;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Array_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PHPStan\Type\ObjectType;
 use ReflectionClass;
 use Symplify\CodingStandard\PhpParser\NodeNameResolver;
 /**
@@ -41,19 +41,19 @@ final class ForbiddenArrayDestructRule extends \Symplify\CodingStandard\Rules\Ab
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Assign::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign::class];
     }
     /**
      * @param Assign $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
-        if (!$node->var instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Array_) {
+        if (!$node->var instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Array_) {
             return [];
         }
         // swaps are allowed
-        if ($node->expr instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Array_) {
+        if ($node->expr instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\Array_) {
             return [];
         }
         if ($this->isAllowedCall($node)) {
@@ -65,25 +65,25 @@ final class ForbiddenArrayDestructRule extends \Symplify\CodingStandard\Rules\Ab
         }
         return [self::ERROR_MESSAGE];
     }
-    private function isAllowedCall(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Assign $assign) : bool
+    private function isAllowedCall(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign $assign) : bool
     {
         // "explode()" is allowed
-        if ($assign->expr instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\FuncCall && $this->nodeNameResolver->isName($assign->expr->name, 'explode')) {
+        if ($assign->expr instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\FuncCall && $this->nodeNameResolver->isName($assign->expr->name, 'explode')) {
             return \true;
         }
         // Strings::split() is allowed
-        return $assign->expr instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall && $this->nodeNameResolver->isName($assign->expr->name, 'split');
+        return $assign->expr instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall && $this->nodeNameResolver->isName($assign->expr->name, 'split');
     }
-    private function isVendorProvider(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Assign $assign, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    private function isVendorProvider(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Assign $assign, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : bool
     {
-        if (!$assign->expr instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\MethodCall) {
+        if (!$assign->expr instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\MethodCall) {
             return \false;
         }
         $callerType = $scope->getType($assign->expr->var);
-        if (!$callerType instanceof \_PhpScoper2b44cb0c30af\PHPStan\Type\ObjectType) {
+        if (!$callerType instanceof \_PhpScoper3d04c8135695\PHPStan\Type\ObjectType) {
             return \false;
         }
         $reflectionClass = new \ReflectionClass($callerType->getClassName());
-        return (bool) \_PhpScoper2b44cb0c30af\Nette\Utils\Strings::match((string) $reflectionClass->getFileName(), self::VENDOR_DIRECTORY_REGEX);
+        return (bool) \_PhpScoper3d04c8135695\Nette\Utils\Strings::match((string) $reflectionClass->getFileName(), self::VENDOR_DIRECTORY_REGEX);
     }
 }

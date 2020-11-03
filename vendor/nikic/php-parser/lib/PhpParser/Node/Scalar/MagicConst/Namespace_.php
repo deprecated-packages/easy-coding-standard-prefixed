@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper2b44cb0c30af\PhpParser\Node\Scalar\MagicConst;
+namespace _PhpScoper3d04c8135695\PhpParser\Node\Scalar\MagicConst;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Scalar\MagicConst;
-class Namespace_ extends \_PhpScoper2b44cb0c30af\PhpParser\Node\Scalar\MagicConst
+use _PhpScoper3d04c8135695\PhpParser\Node\Scalar\MagicConst;
+class Namespace_ extends \_PhpScoper3d04c8135695\PhpParser\Node\Scalar\MagicConst
 {
     public function getName() : string
     {

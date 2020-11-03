@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Nop;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Nop;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\PhpParser\NodeNameResolver;
 use Symplify\CodingStandard\PHPStan\ParentClassMethodNodeResolver;
 use Throwable;
@@ -38,15 +38,15 @@ final class NoParentMethodCallOnEmptyStatementInParentMethodRule extends \Sympli
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall::class];
     }
     /**
      * @param StaticCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
-        if ($node->class instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr) {
+        if ($node->class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
             return [];
         }
         $className = $node->class->toString();
@@ -71,13 +71,13 @@ final class NoParentMethodCallOnEmptyStatementInParentMethodRule extends \Sympli
         }
         return [];
     }
-    private function resolveParentClassMethodStmtCount(\_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope, string $methodName) : int
+    private function resolveParentClassMethodStmtCount(\_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope, string $methodName) : int
     {
         $parentClassMethodNodes = $this->parentClassMethodNodeResolver->resolveParentClassMethodNodes($scope, $methodName);
         $countStmts = 0;
         foreach ($parentClassMethodNodes as $stmt) {
             // ensure empty statement not counted
-            if ($stmt instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Nop) {
+            if ($stmt instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Nop) {
                 continue;
             }
             ++$countStmts;

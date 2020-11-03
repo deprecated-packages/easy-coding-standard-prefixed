@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassLike;
-use _PhpScoper2b44cb0c30af\PhpParser\NodeFinder;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\PHPStan\Node\FileNode;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike;
+use _PhpScoper3d04c8135695\PhpParser\NodeFinder;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PHPStan\Node\FileNode;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\ForbiddenMultipleClassLikeInOneFileRule\ForbiddenMultipleClassLikeInOneFileRuleTest
  */
@@ -21,7 +21,7 @@ final class ForbiddenMultipleClassLikeInOneFileRule extends \Symplify\CodingStan
      * @var NodeFinder
      */
     private $nodeFinder;
-    public function __construct(\_PhpScoper2b44cb0c30af\PhpParser\NodeFinder $nodeFinder)
+    public function __construct(\_PhpScoper3d04c8135695\PhpParser\NodeFinder $nodeFinder)
     {
         $this->nodeFinder = $nodeFinder;
     }
@@ -30,16 +30,16 @@ final class ForbiddenMultipleClassLikeInOneFileRule extends \Symplify\CodingStan
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PHPStan\Node\FileNode::class];
+        return [\_PhpScoper3d04c8135695\PHPStan\Node\FileNode::class];
     }
     /**
      * @param FileNode $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         /** @var ClassLike[] $classLikes */
-        $classLikes = $this->nodeFinder->findInstanceOf($node->getNodes(), \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassLike::class);
+        $classLikes = $this->nodeFinder->findInstanceOf($node->getNodes(), \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassLike::class);
         $findclassLikes = [];
         foreach ($classLikes as $classLike) {
             if ($classLike->name === null) {

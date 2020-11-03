@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Compiler\Composer;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Json;
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\Nette\Utils\Json;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
 use Symplify\ConsoleColorDiff\Console\Output\ConsoleDiffer;
 use Symplify\EasyCodingStandard\Compiler\Packagist\SymplifyStableVersionProvider;
 use Symplify\SmartFileSystem\SmartFileSystem;
@@ -41,14 +41,14 @@ final class ComposerJsonManipulator
         $this->composerJsonFilePath = $composerJsonFilePath;
         $fileContent = $this->smartFileSystem->readFile($composerJsonFilePath);
         $this->originalComposerJsonFileContent = $fileContent;
-        $json = \_PhpScoper2b44cb0c30af\Nette\Utils\Json::decode($fileContent, \_PhpScoper2b44cb0c30af\Nette\Utils\Json::FORCE_ARRAY);
+        $json = \_PhpScoper3d04c8135695\Nette\Utils\Json::decode($fileContent, \_PhpScoper3d04c8135695\Nette\Utils\Json::FORCE_ARRAY);
         $json = $this->replaceDevSymplifyVersionWithLastStableVersion($json);
         $json = $this->replacePHPStanWithPHPStanSrc($json);
         $json = $this->changeReplace($json);
         $json = $this->fixPhpCodeSnifferAutoloading($json);
         $json = $this->removeDevContent($json);
         // see https://github.com/phpstan/phpstan-src/blob/769669d4ec2a4839cb1aa25a3a29f05aa86b83ed/composer.json#L19
-        $encodedJson = \_PhpScoper2b44cb0c30af\Nette\Utils\Json::encode($json, \_PhpScoper2b44cb0c30af\Nette\Utils\Json::PRETTY);
+        $encodedJson = \_PhpScoper3d04c8135695\Nette\Utils\Json::encode($json, \_PhpScoper3d04c8135695\Nette\Utils\Json::PRETTY);
         // show diff
         $this->consoleDiffer->diff($this->originalComposerJsonFileContent, $encodedJson);
         $this->smartFileSystem->dumpFile($composerJsonFilePath, $encodedJson);
@@ -69,7 +69,7 @@ final class ComposerJsonManipulator
         $packages = \array_keys($json['require']);
         foreach ($packages as $package) {
             /** @var string $package */
-            if (!\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::startsWith($package, 'symplify/')) {
+            if (!\_PhpScoper3d04c8135695\Nette\Utils\Strings::startsWith($package, 'symplify/')) {
                 continue;
             }
             $json['require'][$package] = $symplifyVersionToRequire;
@@ -119,7 +119,7 @@ final class ComposerJsonManipulator
     private function resolveCodingStandardPHPStanVersion() : string
     {
         $codingStandardFileContent = $this->smartFileSystem->readFile(__DIR__ . '/../../../../../packages/coding-standard/composer.json');
-        $json = \_PhpScoper2b44cb0c30af\Nette\Utils\Json::decode($codingStandardFileContent, \_PhpScoper2b44cb0c30af\Nette\Utils\Json::FORCE_ARRAY);
+        $json = \_PhpScoper3d04c8135695\Nette\Utils\Json::decode($codingStandardFileContent, \_PhpScoper3d04c8135695\Nette\Utils\Json::FORCE_ARRAY);
         return (string) $json['require']['phpstan/phpstan'];
     }
 }

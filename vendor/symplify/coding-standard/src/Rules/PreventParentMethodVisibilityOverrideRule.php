@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
-use _PhpScoper2b44cb0c30af\Rector\Core\Exception\NotImplementedException;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\Rector\Core\Exception\NotImplementedException;
 use ReflectionMethod;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\PreventParentMethodVisibilityOverrideRule\PreventParentMethodVisibilityOverrideRuleTest
@@ -22,13 +22,13 @@ final class PreventParentMethodVisibilityOverrideRule extends \Symplify\CodingSt
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod::class];
     }
     /**
      * @param ClassMethod $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         if ($scope->getClassReflection() === null) {
             return [];
@@ -53,7 +53,7 @@ final class PreventParentMethodVisibilityOverrideRule extends \Symplify\CodingSt
         }
         return [];
     }
-    private function isClassMethodCompatibleWithParentReflectionMethod(\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod $classMethod, \ReflectionMethod $reflectionMethod) : bool
+    private function isClassMethodCompatibleWithParentReflectionMethod(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod $classMethod, \ReflectionMethod $reflectionMethod) : bool
     {
         if ($reflectionMethod->isPublic() && $classMethod->isPublic()) {
             return \true;
@@ -74,6 +74,6 @@ final class PreventParentMethodVisibilityOverrideRule extends \Symplify\CodingSt
         if ($reflectionMethod->isPrivate()) {
             return 'private';
         }
-        throw new \_PhpScoper2b44cb0c30af\Rector\Core\Exception\NotImplementedException();
+        throw new \_PhpScoper3d04c8135695\Rector\Core\Exception\NotImplementedException();
     }
 }

@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace Symplify\CodingStandard\ObjectCalisthenics\Tests\Rules\TooLongFunctionLikeRule;
 
 use Iterator;
-use _PhpScoper2b44cb0c30af\PHPStan\Rules\Rule;
+use _PhpScoper3d04c8135695\PHPStan\Rules\Rule;
 use Symplify\CodingStandard\ObjectCalisthenics\Rules\TooLongFunctionLikeRule;
 use Symplify\PHPStanExtensions\Testing\AbstractServiceAwareRuleTestCase;
 final class TooLongFunctionLikeRuleTest extends \Symplify\PHPStanExtensions\Testing\AbstractServiceAwareRuleTestCase
@@ -22,7 +22,7 @@ final class TooLongFunctionLikeRuleTest extends \Symplify\PHPStanExtensions\Test
         (yield [__DIR__ . '/Fixture/SuperLongMethod.php', [[$errorMessage, 9]]]);
         (yield [__DIR__ . '/Fixture/SkipShortMethod.php', []]);
     }
-    protected function getRule() : \_PhpScoper2b44cb0c30af\PHPStan\Rules\Rule
+    protected function getRule() : \_PhpScoper3d04c8135695\PHPStan\Rules\Rule
     {
         return $this->getRuleFromConfig(\Symplify\CodingStandard\ObjectCalisthenics\Rules\TooLongFunctionLikeRule::class, __DIR__ . '/config/configured_rule.neon');
     }

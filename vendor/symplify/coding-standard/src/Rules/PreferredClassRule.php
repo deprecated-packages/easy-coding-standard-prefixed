@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\New_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Name;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Param;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\New_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall;
+use _PhpScoper3d04c8135695\PhpParser\Node\Name;
+use _PhpScoper3d04c8135695\PhpParser\Node\Param;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 use Symplify\CodingStandard\ValueObject\PHPStanAttributeKey;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
@@ -38,21 +38,21 @@ final class PreferredClassRule extends \Symplify\CodingStandard\Rules\AbstractSy
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\New_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Name::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_::class, \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\New_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Name::class, \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class, \_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall::class];
     }
     /**
      * @param New_|Name|Class_|StaticCall $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
-        if ($node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\New_) {
+        if ($node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\New_) {
             return $this->processNew($node, $scope);
         }
-        if ($node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_) {
+        if ($node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_) {
             return $this->processClass($node);
         }
-        if ($node instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall) {
+        if ($node instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall) {
             return $this->processStaticCall($node, $scope);
         }
         return $this->processClassName($node->toString(), $node, $scope);
@@ -60,13 +60,13 @@ final class PreferredClassRule extends \Symplify\CodingStandard\Rules\AbstractSy
     /**
      * @return string[]
      */
-    private function processNew(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\New_ $new, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    private function processNew(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\New_ $new, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $newClass = $new->class;
-        if ($newClass instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr) {
+        if ($newClass instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
             return [];
         }
-        if ($newClass instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_) {
+        if ($newClass instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_) {
             $shortClassName = $newClass->name;
             if ($shortClassName === null) {
                 return [];
@@ -80,7 +80,7 @@ final class PreferredClassRule extends \Symplify\CodingStandard\Rules\AbstractSy
     /**
      * @return string[]
      */
-    private function processClass(\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_ $class) : array
+    private function processClass(\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_ $class) : array
     {
         if ($class->extends === null) {
             return [];
@@ -102,7 +102,7 @@ final class PreferredClassRule extends \Symplify\CodingStandard\Rules\AbstractSy
     /**
      * @return string[]
      */
-    private function processClassName(string $className, \_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    private function processClassName(string $className, \_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         if ($this->isTypeRequiredByParentClassOrContract($node, $scope)) {
             return [];
@@ -116,15 +116,15 @@ final class PreferredClassRule extends \Symplify\CodingStandard\Rules\AbstractSy
         }
         return [];
     }
-    private function isTypeRequiredByParentClassOrContract(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : bool
+    private function isTypeRequiredByParentClassOrContract(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : bool
     {
         $parent = $node->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
-        if (!$parent instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Param) {
+        if (!$parent instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Param) {
             return \false;
         }
         // possibly protected by parent class
         $parentParent = $parent->getAttribute(\Symplify\CodingStandard\ValueObject\PHPStanAttributeKey::PARENT);
-        if (!$parentParent instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\ClassMethod) {
+        if (!$parentParent instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Stmt\ClassMethod) {
             return \false;
         }
         /** @var string $methodName */
@@ -144,9 +144,9 @@ final class PreferredClassRule extends \Symplify\CodingStandard\Rules\AbstractSy
     /**
      * @return string[]
      */
-    private function processStaticCall(\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\StaticCall $staticCall, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    private function processStaticCall(\_PhpScoper3d04c8135695\PhpParser\Node\Expr\StaticCall $staticCall, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
-        if ($staticCall->class instanceof \_PhpScoper2b44cb0c30af\PhpParser\Node\Expr) {
+        if ($staticCall->class instanceof \_PhpScoper3d04c8135695\PhpParser\Node\Expr) {
             return [];
         }
         $className = (string) $staticCall->class;

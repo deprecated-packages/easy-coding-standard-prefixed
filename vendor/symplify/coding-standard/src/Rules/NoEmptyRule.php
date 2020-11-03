@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Empty_;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Expr\Empty_;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 /**
  * @deprecated Use
  * @see NoParticularNodeRule with configuration instead
@@ -23,13 +23,13 @@ final class NoEmptyRule extends \Symplify\CodingStandard\Rules\AbstractSymplifyR
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Expr\Empty_::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Expr\Empty_::class];
     }
     /**
      * @param Empty_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         return [self::ERROR_MESSAGE];
     }

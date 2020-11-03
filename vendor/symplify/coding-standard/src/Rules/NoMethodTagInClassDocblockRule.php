@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Rules;
 
-use _PhpScoper2b44cb0c30af\Nette\Utils\Strings;
-use _PhpScoper2b44cb0c30af\PhpParser\Comment\Doc;
-use _PhpScoper2b44cb0c30af\PhpParser\Node;
-use _PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_;
-use _PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope;
+use _PhpScoper3d04c8135695\Nette\Utils\Strings;
+use _PhpScoper3d04c8135695\PhpParser\Comment\Doc;
+use _PhpScoper3d04c8135695\PhpParser\Node;
+use _PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_;
+use _PhpScoper3d04c8135695\PHPStan\Analyser\Scope;
 /**
  * @see \Symplify\CodingStandard\Tests\Rules\NoMethodTagInClassDocblockRule\NoMethodTagInClassDocblockRuleTest
  */
@@ -27,19 +27,19 @@ final class NoMethodTagInClassDocblockRule extends \Symplify\CodingStandard\Rule
      */
     public function getNodeTypes() : array
     {
-        return [\_PhpScoper2b44cb0c30af\PhpParser\Node\Stmt\Class_::class];
+        return [\_PhpScoper3d04c8135695\PhpParser\Node\Stmt\Class_::class];
     }
     /**
      * @param Class_ $node
      * @return string[]
      */
-    public function process(\_PhpScoper2b44cb0c30af\PhpParser\Node $node, \_PhpScoper2b44cb0c30af\PHPStan\Analyser\Scope $scope) : array
+    public function process(\_PhpScoper3d04c8135695\PhpParser\Node $node, \_PhpScoper3d04c8135695\PHPStan\Analyser\Scope $scope) : array
     {
         $docComment = $node->getDocComment();
-        if (!$docComment instanceof \_PhpScoper2b44cb0c30af\PhpParser\Comment\Doc) {
+        if (!$docComment instanceof \_PhpScoper3d04c8135695\PhpParser\Comment\Doc) {
             return [];
         }
-        if (!\_PhpScoper2b44cb0c30af\Nette\Utils\Strings::match($docComment->getText(), self::METHOD_TAG_REGEX)) {
+        if (!\_PhpScoper3d04c8135695\Nette\Utils\Strings::match($docComment->getText(), self::METHOD_TAG_REGEX)) {
             return [];
         }
         return [self::ERROR_MESSAGE];
