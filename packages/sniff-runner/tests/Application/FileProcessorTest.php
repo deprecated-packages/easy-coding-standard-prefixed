@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SniffRunner\Tests\Application;
 
-use _PhpScoper61bdb485188f\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper7f41430b5328\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
@@ -40,6 +40,6 @@ final class FileProcessorTest extends \Symplify\PackageBuilder\Tests\AbstractKer
     private function makeConsoleOutputQuiet() : void
     {
         $easyCodingStandardStyle = self::$container->get(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class);
-        $easyCodingStandardStyle->setVerbosity(\_PhpScoper61bdb485188f\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+        $easyCodingStandardStyle->setVerbosity(\_PhpScoper7f41430b5328\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
     }
 }
