@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Compiler\Composer;
 
-use _PhpScoper8de082cbb8c7\Nette\Utils\Json;
+use _PhpScoper5928e324b45e\Nette\Utils\Json;
 use Symplify\ConsoleColorDiff\Console\Output\ConsoleDiffer;
 use Symplify\SmartFileSystem\SmartFileSystem;
 final class ComposerJsonManipulator
@@ -30,12 +30,12 @@ final class ComposerJsonManipulator
         $this->composerJsonFilePath = $composerJsonFilePath;
         $fileContent = $this->smartFileSystem->readFile($composerJsonFilePath);
         $this->originalComposerJsonFileContent = $fileContent;
-        $json = \_PhpScoper8de082cbb8c7\Nette\Utils\Json::decode($fileContent, \_PhpScoper8de082cbb8c7\Nette\Utils\Json::FORCE_ARRAY);
+        $json = \_PhpScoper5928e324b45e\Nette\Utils\Json::decode($fileContent, \_PhpScoper5928e324b45e\Nette\Utils\Json::FORCE_ARRAY);
         $json = $this->replacePHPStanWithPHPStanSrc($json);
         $json = $this->changeReplace($json);
         $json = $this->fixPhpCodeSnifferAutoloading($json);
         // see https://github.com/phpstan/phpstan-src/blob/769669d4ec2a4839cb1aa25a3a29f05aa86b83ed/composer.json#L19
-        $encodedJson = \_PhpScoper8de082cbb8c7\Nette\Utils\Json::encode($json, \_PhpScoper8de082cbb8c7\Nette\Utils\Json::PRETTY);
+        $encodedJson = \_PhpScoper5928e324b45e\Nette\Utils\Json::encode($json, \_PhpScoper5928e324b45e\Nette\Utils\Json::PRETTY);
         // show diff
         $this->consoleDiffer->diff($this->originalComposerJsonFileContent, $encodedJson);
         $this->smartFileSystem->dumpFile($composerJsonFilePath, $encodedJson);
@@ -75,7 +75,7 @@ final class ComposerJsonManipulator
     private function resolveCodingStandardPHPStanVersion() : string
     {
         $codingStandardFileContent = $this->smartFileSystem->readFile(__DIR__ . '/../../../../../packages/coding-standard/composer.json');
-        $json = \_PhpScoper8de082cbb8c7\Nette\Utils\Json::decode($codingStandardFileContent, \_PhpScoper8de082cbb8c7\Nette\Utils\Json::FORCE_ARRAY);
+        $json = \_PhpScoper5928e324b45e\Nette\Utils\Json::decode($codingStandardFileContent, \_PhpScoper5928e324b45e\Nette\Utils\Json::FORCE_ARRAY);
         return (string) $json['require']['phpstan/phpstan'];
     }
 }

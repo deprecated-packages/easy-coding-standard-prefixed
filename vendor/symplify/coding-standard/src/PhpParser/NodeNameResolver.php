@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\PhpParser;
 
-use _PhpScoper8de082cbb8c7\PhpParser\Node;
-use _PhpScoper8de082cbb8c7\PhpParser\Node\Identifier;
-use _PhpScoper8de082cbb8c7\PhpParser\Node\Name;
+use _PhpScoper5928e324b45e\PhpParser\Node;
+use _PhpScoper5928e324b45e\PhpParser\Node\Identifier;
+use _PhpScoper5928e324b45e\PhpParser\Node\Name;
 final class NodeNameResolver
 {
     /**
@@ -16,7 +16,7 @@ final class NodeNameResolver
         if (\is_string($node)) {
             return $node === $desiredName;
         }
-        if ($node instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Name || $node instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Identifier) {
+        if ($node instanceof \_PhpScoper5928e324b45e\PhpParser\Node\Name || $node instanceof \_PhpScoper5928e324b45e\PhpParser\Node\Identifier) {
             return (string) $node === $desiredName;
         }
         return \false;
@@ -29,12 +29,12 @@ final class NodeNameResolver
         if (\is_string($node)) {
             return $node;
         }
-        if ($node instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Name || $node instanceof \_PhpScoper8de082cbb8c7\PhpParser\Node\Identifier) {
+        if ($node instanceof \_PhpScoper5928e324b45e\PhpParser\Node\Name || $node instanceof \_PhpScoper5928e324b45e\PhpParser\Node\Identifier) {
             return (string) $node;
         }
         return null;
     }
-    public function areNamesEquals(\_PhpScoper8de082cbb8c7\PhpParser\Node $firstNode, \_PhpScoper8de082cbb8c7\PhpParser\Node $secondNode) : bool
+    public function areNamesEquals(\_PhpScoper5928e324b45e\PhpParser\Node $firstNode, \_PhpScoper5928e324b45e\PhpParser\Node $secondNode) : bool
     {
         $firstName = $this->getName($firstNode);
         if ($firstName === null) {

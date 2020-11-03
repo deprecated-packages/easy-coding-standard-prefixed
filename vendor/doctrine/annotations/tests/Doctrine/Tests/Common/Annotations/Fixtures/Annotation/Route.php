@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper8de082cbb8c7\Doctrine\Tests\Common\Annotations\Fixtures\Annotation;
+namespace _PhpScoper5928e324b45e\Doctrine\Tests\Common\Annotations\Fixtures\Annotation;
 
 /** @Annotation */
 class Route

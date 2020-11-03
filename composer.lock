@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e152d27ff59e3da0b33150d9cf4834e",
+    "content-hash": "3cc41f184c6d1f469a6a0bf541f4c4e4",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -964,66 +964,6 @@
                 "source": "https://github.com/phpstan/phpdoc-parser/tree/master"
             },
             "time": "2020-05-02T07:04:38+00:00"
-        },
-        {
-            "name": "phpstan/phpstan",
-            "version": "0.12.40",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "dce7293ad7b59fc09a9ab9b0b5b44902c092ca17"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dce7293ad7b59fc09a9ab9b0b5b44902c092ca17",
-                "reference": "dce7293ad7b59fc09a9ab9b0b5b44902c092ca17",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1|^8.0"
-            },
-            "conflict": {
-                "phpstan/phpstan-shim": "*"
-            },
-            "bin": [
-                "phpstan",
-                "phpstan.phar"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.12-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPStan - PHP Static Analysis Tool",
-            "support": {
-                "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.40"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/ondrejmirtes",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/phpstan",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-08-26T19:06:20+00:00"
         },
         {
             "name": "psr/cache",
@@ -3206,7 +3146,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "fe737efa6cd0ab29a0879c1c58c4f208e8c7dd8f"
+                "reference": "60ef452e78a9d2788a3ca0dbb0775ef1eb8aaaa1"
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.16",
@@ -3214,7 +3154,6 @@
                 "nette/utils": "^3.0",
                 "nikic/php-parser": "^4.10.2",
                 "php": ">=7.2",
-                "phpstan/phpstan": "^0.12.40",
                 "slevomat/coding-standard": "^6.4",
                 "squizlabs/php_codesniffer": "^3.5",
                 "symplify/autowire-array-parameter": "dev-master",
@@ -3231,7 +3170,6 @@
                 "symfony/http-kernel": "^4.4|^5.1",
                 "symplify/easy-coding-standard-tester": "dev-master",
                 "symplify/package-builder": "dev-master",
-                "symplify/phpstan-extensions": "dev-master",
                 "symplify/smart-file-system": "dev-master"
             },
             "type": "library",
@@ -3242,15 +3180,12 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Symplify\\CodingStandard\\": "src",
-                    "Symplify\\CodingStandard\\CognitiveComplexity\\": "packages/cognitive-complexity/src",
-                    "Symplify\\CodingStandard\\ObjectCalisthenics\\": "packages/object-calisthenics/src"
+                    "Symplify\\CodingStandard\\": "src"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "Symplify\\CodingStandard\\Tests\\": "tests",
-                    "Symplify\\CodingStandard\\ObjectCalisthenics\\Tests\\": "packages/object-calisthenics/tests"
+                    "Symplify\\CodingStandard\\Tests\\": "tests"
                 }
             },
             "license": [

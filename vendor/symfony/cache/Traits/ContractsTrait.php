@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8de082cbb8c7\Symfony\Component\Cache\Traits;
+namespace _PhpScoper5928e324b45e\Symfony\Component\Cache\Traits;
 
-use _PhpScoper8de082cbb8c7\Psr\Log\LoggerInterface;
-use _PhpScoper8de082cbb8c7\Symfony\Component\Cache\Adapter\AdapterInterface;
-use _PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem;
-use _PhpScoper8de082cbb8c7\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper8de082cbb8c7\Symfony\Component\Cache\LockRegistry;
-use _PhpScoper8de082cbb8c7\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoper8de082cbb8c7\Symfony\Contracts\Cache\CacheTrait;
-use _PhpScoper8de082cbb8c7\Symfony\Contracts\Cache\ItemInterface;
+use _PhpScoper5928e324b45e\Psr\Log\LoggerInterface;
+use _PhpScoper5928e324b45e\Symfony\Component\Cache\Adapter\AdapterInterface;
+use _PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem;
+use _PhpScoper5928e324b45e\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper5928e324b45e\Symfony\Component\Cache\LockRegistry;
+use _PhpScoper5928e324b45e\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper5928e324b45e\Symfony\Contracts\Cache\CacheTrait;
+use _PhpScoper5928e324b45e\Symfony\Contracts\Cache\ItemInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -28,7 +28,7 @@ trait ContractsTrait
     use CacheTrait {
         doGet as private contractsGet;
     }
-    private $callbackWrapper = [\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\LockRegistry::class, 'compute'];
+    private $callbackWrapper = [\_PhpScoper5928e324b45e\Symfony\Component\Cache\LockRegistry::class, 'compute'];
     private $computing = [];
     /**
      * Wraps the callback passed to ->get() in a callable.
@@ -38,26 +38,26 @@ trait ContractsTrait
     public function setCallbackWrapper(?callable $callbackWrapper) : callable
     {
         $previousWrapper = $this->callbackWrapper;
-        $this->callbackWrapper = $callbackWrapper ?? function (callable $callback, \_PhpScoper8de082cbb8c7\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \_PhpScoper8de082cbb8c7\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata, ?\_PhpScoper8de082cbb8c7\Psr\Log\LoggerInterface $logger) {
+        $this->callbackWrapper = $callbackWrapper ?? function (callable $callback, \_PhpScoper5928e324b45e\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \_PhpScoper5928e324b45e\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata, ?\_PhpScoper5928e324b45e\Psr\Log\LoggerInterface $logger) {
             return $callback($item, $save);
         };
         return $previousWrapper;
     }
-    private function doGet(\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\Adapter\AdapterInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null)
+    private function doGet(\_PhpScoper5928e324b45e\Symfony\Component\Cache\Adapter\AdapterInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null)
     {
         if (0 > ($beta = $beta ?? 1.0)) {
-            throw new \_PhpScoper8de082cbb8c7\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', \get_class($this), $beta));
+            throw new \_PhpScoper5928e324b45e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', \get_class($this), $beta));
         }
         static $setMetadata;
-        $setMetadata = $setMetadata ?? \Closure::bind(static function (\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem $item, float $startTime, ?array &$metadata) {
+        $setMetadata = $setMetadata ?? \Closure::bind(static function (\_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem $item, float $startTime, ?array &$metadata) {
             if ($item->expiry > ($endTime = \microtime(\true))) {
-                $item->newMetadata[\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $metadata[\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $item->expiry;
-                $item->newMetadata[\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $metadata[\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = (int) \ceil(1000 * ($endTime - $startTime));
+                $item->newMetadata[\_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $metadata[\_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $item->expiry;
+                $item->newMetadata[\_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $metadata[\_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = (int) \ceil(1000 * ($endTime - $startTime));
             } else {
-                unset($metadata[\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY], $metadata[\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem::METADATA_CTIME]);
+                unset($metadata[\_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY], $metadata[\_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem::METADATA_CTIME]);
             }
-        }, null, \_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem::class);
-        return $this->contractsGet($pool, $key, function (\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem $item, bool &$save) use($pool, $callback, $setMetadata, &$metadata, $key) {
+        }, null, \_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem::class);
+        return $this->contractsGet($pool, $key, function (\_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem $item, bool &$save) use($pool, $callback, $setMetadata, &$metadata, $key) {
             // don't wrap nor save recursive calls
             if (isset($this->computing[$key])) {
                 $value = $callback($item, $save);
@@ -67,7 +67,7 @@ trait ContractsTrait
             $this->computing[$key] = $key;
             $startTime = \microtime(\true);
             try {
-                $value = ($this->callbackWrapper)($callback, $item, $save, $pool, function (\_PhpScoper8de082cbb8c7\Symfony\Component\Cache\CacheItem $item) use($setMetadata, $startTime, &$metadata) {
+                $value = ($this->callbackWrapper)($callback, $item, $save, $pool, function (\_PhpScoper5928e324b45e\Symfony\Component\Cache\CacheItem $item) use($setMetadata, $startTime, &$metadata) {
                     $setMetadata($item, $startTime, $metadata);
                 }, $this->logger ?? null);
                 $setMetadata($item, $startTime, $metadata);

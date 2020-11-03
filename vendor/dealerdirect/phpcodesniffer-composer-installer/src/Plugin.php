@@ -7,7 +7,7 @@
  * @copyright 2016-2020 Dealerdirect B.V.
  * @license MIT
  */
-namespace _PhpScoper8de082cbb8c7\Dealerdirect\Composer\Plugin\Installers\PHPCodeSniffer;
+namespace _PhpScoper5928e324b45e\Dealerdirect\Composer\Plugin\Installers\PHPCodeSniffer;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
@@ -20,11 +20,11 @@ use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use Composer\Util\Filesystem;
 use Composer\Util\ProcessExecutor;
-use _PhpScoper8de082cbb8c7\Symfony\Component\Finder\Finder;
-use _PhpScoper8de082cbb8c7\Symfony\Component\Process\Exception\LogicException;
-use _PhpScoper8de082cbb8c7\Symfony\Component\Process\Exception\ProcessFailedException;
-use _PhpScoper8de082cbb8c7\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScoper8de082cbb8c7\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScoper5928e324b45e\Symfony\Component\Finder\Finder;
+use _PhpScoper5928e324b45e\Symfony\Component\Process\Exception\LogicException;
+use _PhpScoper5928e324b45e\Symfony\Component\Process\Exception\ProcessFailedException;
+use _PhpScoper5928e324b45e\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScoper5928e324b45e\Symfony\Component\Process\PhpExecutableFinder;
 /**
  * PHP_CodeSniffer standard installation manager.
  *
@@ -278,7 +278,7 @@ class Plugin implements \Composer\Plugin\PluginInterface, \Composer\EventDispatc
      */
     protected function getPhpExecCommand()
     {
-        $finder = new \_PhpScoper8de082cbb8c7\Symfony\Component\Process\PhpExecutableFinder();
+        $finder = new \_PhpScoper5928e324b45e\Symfony\Component\Process\PhpExecutableFinder();
         $phpPath = $finder->find(\false);
         if ($phpPath === \false) {
             throw new \RuntimeException('Failed to locate PHP binary to execute ' . $phpPath);
@@ -330,7 +330,7 @@ class Plugin implements \Composer\Plugin\PluginInterface, \Composer\EventDispatc
             }
             $searchPaths[] = $installPath;
         }
-        $finder = new \_PhpScoper8de082cbb8c7\Symfony\Component\Finder\Finder();
+        $finder = new \_PhpScoper5928e324b45e\Symfony\Component\Finder\Finder();
         $finder->files()->depth('<= ' . $this->getMaxDepth())->depth('>= ' . $this->getMinDepth())->ignoreUnreadableDirs()->ignoreVCS(\true)->in($searchPaths)->name('ruleset.xml');
         // Process each found possible ruleset.
         foreach ($finder as $ruleset) {
@@ -366,7 +366,7 @@ class Plugin implements \Composer\Plugin\PluginInterface, \Composer\EventDispatc
             if ($package instanceof \Composer\Package\AliasPackage) {
                 return \false;
             }
-            return $package->getType() === \_PhpScoper8de082cbb8c7\Dealerdirect\Composer\Plugin\Installers\PHPCodeSniffer\Plugin::PACKAGE_TYPE;
+            return $package->getType() === \_PhpScoper5928e324b45e\Dealerdirect\Composer\Plugin\Installers\PHPCodeSniffer\Plugin::PACKAGE_TYPE;
         });
         if (!$this->composer->getPackage() instanceof \Composer\Package\RootPackageInterface && $this->composer->getPackage()->getType() === self::PACKAGE_TYPE) {
             $codingStandardPackages[] = $this->composer->getPackage();
