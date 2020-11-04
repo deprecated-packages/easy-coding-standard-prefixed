@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb383f16e851e\PHPStan\PhpDocParser\Parser;
+namespace _PhpScoper7145e5e87de5\PHPStan\PhpDocParser\Parser;
 
-use _PhpScoperb383f16e851e\PHPStan\PhpDocParser\Lexer\Lexer;
+use _PhpScoper7145e5e87de5\PHPStan\PhpDocParser\Lexer\Lexer;
 class ParserException extends \Exception
 {
     /** @var string */
@@ -26,7 +26,7 @@ class ParserException extends \Exception
         $json = \json_encode($currentTokenValue, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
         \assert($json !== \false);
         if ($expectedTokenType !== null) {
-            parent::__construct(\sprintf('Unexpected token %s, expected %s at offset %d', $json, \_PhpScoperb383f16e851e\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_LABELS[$expectedTokenType], $currentOffset));
+            parent::__construct(\sprintf('Unexpected token %s, expected %s at offset %d', $json, \_PhpScoper7145e5e87de5\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_LABELS[$expectedTokenType], $currentOffset));
         } elseif ($expectedTokenValue !== null) {
             parent::__construct(\sprintf('Unexpected token value %s, expected value %s at offset %d', $json, $expectedTokenValue, $currentOffset));
         } else {
