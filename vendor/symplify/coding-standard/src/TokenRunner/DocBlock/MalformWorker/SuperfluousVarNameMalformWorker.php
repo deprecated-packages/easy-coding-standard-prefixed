@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper75713bc3e278\Nette\Utils\Strings;
+use _PhpScoperfabf55fef6b7\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,17 +27,17 @@ final class SuperfluousVarNameMalformWorker extends \Symplify\CodingStandard\Tok
         $docBlock = new \PhpCsFixer\DocBlock\DocBlock($docContent);
         $lines = $docBlock->getLines();
         foreach ($lines as $line) {
-            $match = \_PhpScoper75713bc3e278\Nette\Utils\Strings::match($line->getContent(), self::VAR_VARIABLE_NAME_REGEX);
+            $match = \_PhpScoperfabf55fef6b7\Nette\Utils\Strings::match($line->getContent(), self::VAR_VARIABLE_NAME_REGEX);
             if ($match === null) {
                 continue;
             }
-            $newLineContent = \_PhpScoper75713bc3e278\Nette\Utils\Strings::replace($line->getContent(), self::VAR_VARIABLE_NAME_REGEX, function (array $match) : string {
+            $newLineContent = \_PhpScoperfabf55fef6b7\Nette\Utils\Strings::replace($line->getContent(), self::VAR_VARIABLE_NAME_REGEX, function (array $match) : string {
                 $replacement = $match[1];
                 if ($match['type'] !== []) {
                     $replacement .= $match['type'];
                 }
-                if (\_PhpScoper75713bc3e278\Nette\Utils\Strings::match($match[0], self::THIS_VARIABLE_REGEX)) {
-                    return \_PhpScoper75713bc3e278\Nette\Utils\Strings::replace($match[0], self::THIS_VARIABLE_REGEX, 'self');
+                if (\_PhpScoperfabf55fef6b7\Nette\Utils\Strings::match($match[0], self::THIS_VARIABLE_REGEX)) {
+                    return \_PhpScoperfabf55fef6b7\Nette\Utils\Strings::replace($match[0], self::THIS_VARIABLE_REGEX, 'self');
                 }
                 return $replacement;
             });

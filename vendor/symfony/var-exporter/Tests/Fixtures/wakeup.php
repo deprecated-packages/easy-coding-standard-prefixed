@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoper75713bc3e278;
+namespace _PhpScoperfabf55fef6b7;
 
-return \_PhpScoper75713bc3e278\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone ($p =& \_PhpScoper75713bc3e278\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\VarExporter\\Tests\\MyWakeup'] ?? \_PhpScoper75713bc3e278\Symfony\Component\VarExporter\Internal\Registry::p('_PhpScoper75713bc3e278\\Symfony\\Component\\VarExporter\\Tests\\MyWakeup'), clone $p['Symfony\\Component\\VarExporter\\Tests\\MyWakeup']], null, ['stdClass' => ['sub' => [$o[1], 123], 'baz' => [1 => 123]]], $o[0], [1 => 1, 0]);
+return \_PhpScoperfabf55fef6b7\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone ($p =& \_PhpScoperfabf55fef6b7\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\VarExporter\\Tests\\MyWakeup'] ?? \_PhpScoperfabf55fef6b7\Symfony\Component\VarExporter\Internal\Registry::p('_PhpScoperfabf55fef6b7\\Symfony\\Component\\VarExporter\\Tests\\MyWakeup'), clone $p['Symfony\\Component\\VarExporter\\Tests\\MyWakeup']], null, ['stdClass' => ['sub' => [$o[1], 123], 'baz' => [1 => 123]]], $o[0], [1 => 1, 0]);
