@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7f41430b5328\Symfony\Component\HttpFoundation\Session;
+namespace _PhpScoper48b5ec5b60cf\Symfony\Component\HttpFoundation\Session;
 
-use _PhpScoper7f41430b5328\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
+use _PhpScoper48b5ec5b60cf\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
 /**
  * Interface for the session.
  *
@@ -130,7 +130,7 @@ interface SessionInterface
     /**
      * Registers a SessionBagInterface with the session.
      */
-    public function registerBag(\_PhpScoper7f41430b5328\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag);
+    public function registerBag(\_PhpScoper48b5ec5b60cf\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag);
     /**
      * Gets a bag instance by name.
      *

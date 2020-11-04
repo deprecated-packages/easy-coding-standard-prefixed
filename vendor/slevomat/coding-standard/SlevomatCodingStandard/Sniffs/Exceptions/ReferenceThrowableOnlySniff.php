@@ -16,13 +16,13 @@ use function array_key_exists;
 use function array_merge;
 use function in_array;
 use function sprintf;
-use const _PhpScoper7f41430b5328\T_BITWISE_OR;
+use const _PhpScoper48b5ec5b60cf\T_BITWISE_OR;
 use const T_CATCH;
 use const T_EXTENDS;
 use const T_FUNCTION;
 use const T_INSTANCEOF;
 use const T_NEW;
-use const _PhpScoper7f41430b5328\T_OPEN_PARENTHESIS;
+use const _PhpScoper48b5ec5b60cf\T_OPEN_PARENTHESIS;
 use const T_OPEN_TAG;
 class ReferenceThrowableOnlySniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
