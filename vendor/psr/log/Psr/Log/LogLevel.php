@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperfabf55fef6b7\Psr\Log;
+namespace _PhpScoperb383f16e851e\Psr\Log;
 
 /**
  * Describes log levels

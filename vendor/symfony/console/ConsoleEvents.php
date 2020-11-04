@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfabf55fef6b7\Symfony\Component\Console;
+namespace _PhpScoperb383f16e851e\Symfony\Component\Console;
 
 /**
  * Contains all events dispatched by an Application.

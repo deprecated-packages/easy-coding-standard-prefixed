@@ -8,38 +8,38 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperfabf55fef6b7\Symfony\Component\Config\Definition\BaseNode;
-use _PhpScoperfabf55fef6b7\Symfony\Component\Config\Definition\Exception\TreeWithoutRootNodeException;
-use _PhpScoperfabf55fef6b7\Symfony\Component\Config\Definition\Processor;
-use _PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use _PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use _PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use _PhpScoperb383f16e851e\Symfony\Component\Config\Definition\BaseNode;
+use _PhpScoperb383f16e851e\Symfony\Component\Config\Definition\Exception\TreeWithoutRootNodeException;
+use _PhpScoperb383f16e851e\Symfony\Component\Config\Definition\Processor;
+use _PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use _PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use _PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 /**
  * Validates environment variable placeholders used in extension configuration with dummy values.
  *
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class ValidateEnvPlaceholdersPass implements \_PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ValidateEnvPlaceholdersPass implements \_PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private static $typeFixtures = ['array' => [], 'bool' => \false, 'float' => 0.0, 'int' => 0, 'string' => ''];
     private $extensionConfig = [];
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->extensionConfig = [];
-        if (!\class_exists(\_PhpScoperfabf55fef6b7\Symfony\Component\Config\Definition\BaseNode::class) || !($extensions = $container->getExtensions())) {
+        if (!\class_exists(\_PhpScoperb383f16e851e\Symfony\Component\Config\Definition\BaseNode::class) || !($extensions = $container->getExtensions())) {
             return;
         }
         $resolvingBag = $container->getParameterBag();
-        if (!$resolvingBag instanceof \_PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag) {
+        if (!$resolvingBag instanceof \_PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag) {
             return;
         }
-        $defaultBag = new \_PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag($resolvingBag->all());
+        $defaultBag = new \_PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag($resolvingBag->all());
         $envTypes = $resolvingBag->getProvidedTypes();
         try {
             foreach ($resolvingBag->getEnvPlaceholders() + $resolvingBag->getUnusedEnvPlaceholders() as $env => $placeholders) {
@@ -55,12 +55,12 @@ class ValidateEnvPlaceholdersPass implements \_PhpScoperfabf55fef6b7\Symfony\Com
                     }
                 }
                 foreach ($placeholders as $placeholder) {
-                    \_PhpScoperfabf55fef6b7\Symfony\Component\Config\Definition\BaseNode::setPlaceholder($placeholder, $values);
+                    \_PhpScoperb383f16e851e\Symfony\Component\Config\Definition\BaseNode::setPlaceholder($placeholder, $values);
                 }
             }
-            $processor = new \_PhpScoperfabf55fef6b7\Symfony\Component\Config\Definition\Processor();
+            $processor = new \_PhpScoperb383f16e851e\Symfony\Component\Config\Definition\Processor();
             foreach ($extensions as $name => $extension) {
-                if (!$extension instanceof \_PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface || !($config = \array_filter($container->getExtensionConfig($name)))) {
+                if (!$extension instanceof \_PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface || !($config = \array_filter($container->getExtensionConfig($name)))) {
                     // this extension has no semantic configuration or was not called
                     continue;
                 }
@@ -70,11 +70,11 @@ class ValidateEnvPlaceholdersPass implements \_PhpScoperfabf55fef6b7\Symfony\Com
                 }
                 try {
                     $this->extensionConfig[$name] = $processor->processConfiguration($configuration, $config);
-                } catch (\_PhpScoperfabf55fef6b7\Symfony\Component\Config\Definition\Exception\TreeWithoutRootNodeException $e) {
+                } catch (\_PhpScoperb383f16e851e\Symfony\Component\Config\Definition\Exception\TreeWithoutRootNodeException $e) {
                 }
             }
         } finally {
-            \_PhpScoperfabf55fef6b7\Symfony\Component\Config\Definition\BaseNode::resetPlaceholders();
+            \_PhpScoperb383f16e851e\Symfony\Component\Config\Definition\BaseNode::resetPlaceholders();
         }
         $resolvingBag->clearUnusedEnvPlaceholders();
     }

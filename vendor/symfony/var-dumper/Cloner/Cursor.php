@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfabf55fef6b7\Symfony\Component\VarDumper\Cloner;
+namespace _PhpScoperb383f16e851e\Symfony\Component\VarDumper\Cloner;
 
 /**
  * Represents the current state of a dumper while dumping.
@@ -17,10 +17,10 @@ namespace _PhpScoperfabf55fef6b7\Symfony\Component\VarDumper\Cloner;
  */
 class Cursor
 {
-    const HASH_INDEXED = \_PhpScoperfabf55fef6b7\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_INDEXED;
-    const HASH_ASSOC = \_PhpScoperfabf55fef6b7\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_ASSOC;
-    const HASH_OBJECT = \_PhpScoperfabf55fef6b7\Symfony\Component\VarDumper\Cloner\Stub::TYPE_OBJECT;
-    const HASH_RESOURCE = \_PhpScoperfabf55fef6b7\Symfony\Component\VarDumper\Cloner\Stub::TYPE_RESOURCE;
+    const HASH_INDEXED = \_PhpScoperb383f16e851e\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_INDEXED;
+    const HASH_ASSOC = \_PhpScoperb383f16e851e\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_ASSOC;
+    const HASH_OBJECT = \_PhpScoperb383f16e851e\Symfony\Component\VarDumper\Cloner\Stub::TYPE_OBJECT;
+    const HASH_RESOURCE = \_PhpScoperb383f16e851e\Symfony\Component\VarDumper\Cloner\Stub::TYPE_RESOURCE;
     public $depth = 0;
     public $refIndex = 0;
     public $softRefTo = 0;

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfabf55fef6b7\Symfony\Component\Finder\Iterator;
+namespace _PhpScoperb383f16e851e\Symfony\Component\Finder\Iterator;
 
 /**
  * FilecontentFilterIterator filters files by their contents using patterns (regexps or strings).
@@ -16,7 +16,7 @@ namespace _PhpScoperfabf55fef6b7\Symfony\Component\Finder\Iterator;
  * @author Fabien Potencier  <fabien@symfony.com>
  * @author Włodzimierz Gajda <gajdaw@gajdaw.pl>
  */
-class FilecontentFilterIterator extends \_PhpScoperfabf55fef6b7\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
+class FilecontentFilterIterator extends \_PhpScoperb383f16e851e\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
 {
     /**
      * Filters the iterator values.

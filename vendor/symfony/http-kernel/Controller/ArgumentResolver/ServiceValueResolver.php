@@ -8,29 +8,29 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfabf55fef6b7\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScoperb383f16e851e\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoperfabf55fef6b7\Psr\Container\ContainerInterface;
-use _PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperfabf55fef6b7\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperfabf55fef6b7\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoperfabf55fef6b7\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoperb383f16e851e\Psr\Container\ContainerInterface;
+use _PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperb383f16e851e\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperb383f16e851e\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScoperb383f16e851e\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields a service keyed by _controller and argument name.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-final class ServiceValueResolver implements \_PhpScoperfabf55fef6b7\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class ServiceValueResolver implements \_PhpScoperb383f16e851e\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     private $container;
-    public function __construct(\_PhpScoperfabf55fef6b7\Psr\Container\ContainerInterface $container)
+    public function __construct(\_PhpScoperb383f16e851e\Psr\Container\ContainerInterface $container)
     {
         $this->container = $container;
     }
     /**
      * {@inheritdoc}
      */
-    public function supports(\_PhpScoperfabf55fef6b7\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperfabf55fef6b7\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
+    public function supports(\_PhpScoperb383f16e851e\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperb383f16e851e\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
     {
         $controller = $request->attributes->get('_controller');
         if (\is_array($controller) && \is_callable($controller, \true) && \is_string($controller[0])) {
@@ -49,7 +49,7 @@ final class ServiceValueResolver implements \_PhpScoperfabf55fef6b7\Symfony\Comp
     /**
      * {@inheritdoc}
      */
-    public function resolve(\_PhpScoperfabf55fef6b7\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperfabf55fef6b7\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
+    public function resolve(\_PhpScoperb383f16e851e\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperb383f16e851e\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
     {
         if (\is_array($controller = $request->attributes->get('_controller'))) {
             $controller = $controller[0] . '::' . $controller[1];
@@ -63,7 +63,7 @@ final class ServiceValueResolver implements \_PhpScoperfabf55fef6b7\Symfony\Comp
         }
         try {
             (yield $this->container->get($controller)->get($argument->getName()));
-        } catch (\_PhpScoperfabf55fef6b7\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+        } catch (\_PhpScoperb383f16e851e\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
             $what = \sprintf('argument $%s of "%s()"', $argument->getName(), $controller);
             $message = \preg_replace('/service "\\.service_locator\\.[^"]++"/', $what, $e->getMessage());
             if ($e->getMessage() === $message) {

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Naming;
 
-use _PhpScoperfabf55fef6b7\Nette\Utils\Strings;
+use _PhpScoperb383f16e851e\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -66,11 +66,11 @@ final class StandardizeHereNowDocKeywordFixer extends \Symplify\CodingStandard\F
     }
     private function fixStartToken(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $position) : void
     {
-        $match = \_PhpScoperfabf55fef6b7\Nette\Utils\Strings::match($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX);
+        $match = \_PhpScoperb383f16e851e\Nette\Utils\Strings::match($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX);
         if (!isset($match['name'])) {
             return;
         }
-        $newContent = \_PhpScoperfabf55fef6b7\Nette\Utils\Strings::replace($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX, '$1' . $this->keyword . '$4');
+        $newContent = \_PhpScoperb383f16e851e\Nette\Utils\Strings::replace($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX, '$1' . $this->keyword . '$4');
         $tokens[$position] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), $newContent]);
     }
     private function fixEndToken(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $position) : void
