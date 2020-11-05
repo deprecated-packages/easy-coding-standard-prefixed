@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\DependencyInjection\CompilerPass;
 
-use _PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\ContainerBuilder;
-final class AutowireInterfacesCompilerPass implements \_PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+use _PhpScoper6ec31b85adcf\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper6ec31b85adcf\Symfony\Component\DependencyInjection\ContainerBuilder;
+final class AutowireInterfacesCompilerPass implements \_PhpScoper6ec31b85adcf\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * @var string[]
@@ -18,7 +18,7 @@ final class AutowireInterfacesCompilerPass implements \_PhpScoper39d23eef9a06\Sy
     {
         $this->typesToAutowire = $typesToAutowire;
     }
-    public function process(\_PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function process(\_PhpScoper6ec31b85adcf\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $containerBuilderDefinitions = $containerBuilder->getDefinitions();
         foreach ($containerBuilderDefinitions as $definition) {

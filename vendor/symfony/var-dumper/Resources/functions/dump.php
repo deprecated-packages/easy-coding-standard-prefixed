@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper39d23eef9a06;
+namespace _PhpScoper6ec31b85adcf;
 
 /*
  * This file is part of the Symfony package.
@@ -10,16 +10,16 @@ namespace _PhpScoper39d23eef9a06;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoper39d23eef9a06\Symfony\Component\VarDumper\VarDumper;
-if (!\function_exists('_PhpScoper39d23eef9a06\\dump')) {
+use _PhpScoper6ec31b85adcf\Symfony\Component\VarDumper\VarDumper;
+if (!\function_exists('_PhpScoper6ec31b85adcf\\dump')) {
     /**
      * @author Nicolas Grekas <p@tchwork.com>
      */
     function dump($var, ...$moreVars)
     {
-        \_PhpScoper39d23eef9a06\Symfony\Component\VarDumper\VarDumper::dump($var);
+        \_PhpScoper6ec31b85adcf\Symfony\Component\VarDumper\VarDumper::dump($var);
         foreach ($moreVars as $v) {
-            \_PhpScoper39d23eef9a06\Symfony\Component\VarDumper\VarDumper::dump($v);
+            \_PhpScoper6ec31b85adcf\Symfony\Component\VarDumper\VarDumper::dump($v);
         }
         if (1 < \func_num_args()) {
             return \func_get_args();
@@ -27,11 +27,11 @@ if (!\function_exists('_PhpScoper39d23eef9a06\\dump')) {
         return $var;
     }
 }
-if (!\function_exists('_PhpScoper39d23eef9a06\\dd')) {
+if (!\function_exists('_PhpScoper6ec31b85adcf\\dd')) {
     function dd(...$vars)
     {
         foreach ($vars as $v) {
-            \_PhpScoper39d23eef9a06\Symfony\Component\VarDumper\VarDumper::dump($v);
+            \_PhpScoper6ec31b85adcf\Symfony\Component\VarDumper\VarDumper::dump($v);
         }
         die(1);
     }

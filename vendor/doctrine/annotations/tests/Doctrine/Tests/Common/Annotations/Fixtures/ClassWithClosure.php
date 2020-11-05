@@ -1,9 +1,9 @@
 <?php
 
-namespace _PhpScoper39d23eef9a06\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper6ec31b85adcf\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper39d23eef9a06\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAll;
-use _PhpScoper39d23eef9a06\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAnnotation;
+use _PhpScoper6ec31b85adcf\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAll;
+use _PhpScoper6ec31b85adcf\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAnnotation;
 /**
  * @AnnotationTargetAll("Foo")
  */

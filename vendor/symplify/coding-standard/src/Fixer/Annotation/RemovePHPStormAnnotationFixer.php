@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Annotation;
 
-use _PhpScoper39d23eef9a06\Nette\Utils\Strings;
+use _PhpScoper6ec31b85adcf\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -35,7 +35,7 @@ final class RemovePHPStormAnnotationFixer extends \Symplify\CodingStandard\Fixer
                 continue;
             }
             $originalDocContent = $token->getContent();
-            $cleanedDocContent = \_PhpScoper39d23eef9a06\Nette\Utils\Strings::replace($originalDocContent, self::CRETED_BY_PHPSTORM_DOC_REGEX, '');
+            $cleanedDocContent = \_PhpScoper6ec31b85adcf\Nette\Utils\Strings::replace($originalDocContent, self::CRETED_BY_PHPSTORM_DOC_REGEX, '');
             if ($cleanedDocContent !== '') {
                 continue;
             }

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\ArrayNotation;
 
-use _PhpScoper39d23eef9a06\Nette\Utils\Strings;
+use _PhpScoper6ec31b85adcf\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -32,7 +32,7 @@ class ArrayListItemNewlineFixer extends \Symplify\CodingStandard\Fixer\ArrayNota
             if (!$nextToken instanceof \PhpCsFixer\Tokenizer\Token) {
                 return;
             }
-            if (\_PhpScoper39d23eef9a06\Nette\Utils\Strings::contains($nextToken->getContent(), "\n")) {
+            if (\_PhpScoper6ec31b85adcf\Nette\Utils\Strings::contains($nextToken->getContent(), "\n")) {
                 return;
             }
             $tokens->ensureWhitespaceAtIndex($nextTokenPosition, 0, $this->whitespacesFixerConfig->getLineEnding());

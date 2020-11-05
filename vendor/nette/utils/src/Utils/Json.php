@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper39d23eef9a06\Nette\Utils;
+namespace _PhpScoper6ec31b85adcf\Nette\Utils;
 
-use _PhpScoper39d23eef9a06\Nette;
+use _PhpScoper6ec31b85adcf\Nette;
 /**
  * JSON encoder and decoder.
  */
@@ -26,7 +26,7 @@ final class Json
         // since PHP 5.6.6 & PECL JSON-C 1.3.7
         $json = \json_encode($value, $flags);
         if ($error = \json_last_error()) {
-            throw new \_PhpScoper39d23eef9a06\Nette\Utils\JsonException(\json_last_error_msg(), $error);
+            throw new \_PhpScoper6ec31b85adcf\Nette\Utils\JsonException(\json_last_error_msg(), $error);
         }
         return $json;
     }
@@ -39,7 +39,7 @@ final class Json
         $forceArray = (bool) ($flags & self::FORCE_ARRAY);
         $value = \json_decode($json, $forceArray, 512, \JSON_BIGINT_AS_STRING);
         if ($error = \json_last_error()) {
-            throw new \_PhpScoper39d23eef9a06\Nette\Utils\JsonException(\json_last_error_msg(), $error);
+            throw new \_PhpScoper6ec31b85adcf\Nette\Utils\JsonException(\json_last_error_msg(), $error);
         }
         return $value;
     }
