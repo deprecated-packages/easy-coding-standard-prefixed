@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\SniffSettingsHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function sprintf;
-use const _PhpScoper7145e5e87de5\T_ANON_CLASS;
+use const _PhpScoperdebd9d705540\T_ANON_CLASS;
 use const T_CLASS;
 use const T_INTERFACE;
 use const T_TRAIT;
