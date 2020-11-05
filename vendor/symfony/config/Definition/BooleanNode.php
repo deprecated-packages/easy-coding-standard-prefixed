@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdebd9d705540\Symfony\Component\Config\Definition;
+namespace _PhpScoper39d23eef9a06\Symfony\Component\Config\Definition;
 
-use _PhpScoperdebd9d705540\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScoper39d23eef9a06\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 /**
  * This node represents a Boolean value in the config tree.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class BooleanNode extends \_PhpScoperdebd9d705540\Symfony\Component\Config\Definition\ScalarNode
+class BooleanNode extends \_PhpScoper39d23eef9a06\Symfony\Component\Config\Definition\ScalarNode
 {
     /**
      * {@inheritdoc}
@@ -24,7 +24,7 @@ class BooleanNode extends \_PhpScoperdebd9d705540\Symfony\Component\Config\Defin
     protected function validateType($value)
     {
         if (!\is_bool($value)) {
-            $ex = new \_PhpScoperdebd9d705540\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected boolean, but got %s.', $this->getPath(), \gettype($value)));
+            $ex = new \_PhpScoper39d23eef9a06\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected boolean, but got %s.', $this->getPath(), \gettype($value)));
             if ($hint = $this->getInfo()) {
                 $ex->addHint($hint);
             }

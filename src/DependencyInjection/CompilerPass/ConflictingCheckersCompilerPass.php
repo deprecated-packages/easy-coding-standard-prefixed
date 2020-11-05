@@ -14,10 +14,10 @@ use PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer;
 use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
-use _PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\EasyCodingStandard\Configuration\Exception\ConflictingCheckersLoadedException;
-final class ConflictingCheckersCompilerPass implements \_PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+final class ConflictingCheckersCompilerPass implements \_PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * These groups do the opposite of each other, e.g. Yoda vs NoYoda.
@@ -25,7 +25,7 @@ final class ConflictingCheckersCompilerPass implements \_PhpScoperdebd9d705540\S
      * @var string[][]
      */
     private const CONFLICTING_CHECKER_GROUPS = [[\SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff::class, \PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer::class], [\PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseConstantSniff::class, \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff::class], [\PhpCsFixer\Fixer\Casing\LowercaseConstantsFixer::class, \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff::class], [\PhpCsFixer\Fixer\Casing\ConstantCaseFixer::class, \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff::class], [\SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff::class, \PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer::class], [\SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff::class, \PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer::class], [\PHP_CodeSniffer\Standards\PSR12\Sniffs\Files\FileHeaderSniff::class, \PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer::class]];
-    public function process(\_PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function process(\_PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $checkers = $containerBuilder->getServiceIds();
         if (\count($checkers) === 0) {

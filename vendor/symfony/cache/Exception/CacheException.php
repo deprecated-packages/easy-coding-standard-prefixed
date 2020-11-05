@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdebd9d705540\Symfony\Component\Cache\Exception;
+namespace _PhpScoper39d23eef9a06\Symfony\Component\Cache\Exception;
 
-use _PhpScoperdebd9d705540\Psr\Cache\CacheException as Psr6CacheInterface;
-use _PhpScoperdebd9d705540\Psr\SimpleCache\CacheException as SimpleCacheInterface;
-if (\interface_exists(\_PhpScoperdebd9d705540\Psr\SimpleCache\CacheException::class)) {
-    class CacheException extends \Exception implements \_PhpScoperdebd9d705540\Psr\Cache\CacheException, \_PhpScoperdebd9d705540\Psr\SimpleCache\CacheException
+use _PhpScoper39d23eef9a06\Psr\Cache\CacheException as Psr6CacheInterface;
+use _PhpScoper39d23eef9a06\Psr\SimpleCache\CacheException as SimpleCacheInterface;
+if (\interface_exists(\_PhpScoper39d23eef9a06\Psr\SimpleCache\CacheException::class)) {
+    class CacheException extends \Exception implements \_PhpScoper39d23eef9a06\Psr\Cache\CacheException, \_PhpScoper39d23eef9a06\Psr\SimpleCache\CacheException
     {
     }
 } else {
-    class CacheException extends \Exception implements \_PhpScoperdebd9d705540\Psr\Cache\CacheException
+    class CacheException extends \Exception implements \_PhpScoper39d23eef9a06\Psr\Cache\CacheException
     {
     }
 }

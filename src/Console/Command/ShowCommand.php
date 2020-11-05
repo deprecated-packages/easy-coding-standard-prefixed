@@ -5,9 +5,9 @@ namespace Symplify\EasyCodingStandard\Console\Command;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpCsFixer\Fixer\FixerInterface;
-use _PhpScoperdebd9d705540\Symfony\Component\Console\Command\Command;
-use _PhpScoperdebd9d705540\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperdebd9d705540\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper39d23eef9a06\Symfony\Component\Console\Command\Command;
+use _PhpScoper39d23eef9a06\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper39d23eef9a06\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
@@ -15,7 +15,7 @@ use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class ShowCommand extends \_PhpScoperdebd9d705540\Symfony\Component\Console\Command\Command
+final class ShowCommand extends \_PhpScoper39d23eef9a06\Symfony\Component\Console\Command\Command
 {
     /**
      * @var int
@@ -49,7 +49,7 @@ final class ShowCommand extends \_PhpScoperdebd9d705540\Symfony\Component\Consol
     {
         $this->setDescription('Show loaded checkers');
     }
-    protected function execute(\_PhpScoperdebd9d705540\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperdebd9d705540\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoper39d23eef9a06\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper39d23eef9a06\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $this->displayCheckerList($this->sniffFileProcessor->getCheckers(), 'PHP_CodeSniffer');
         $this->displayCheckerList($this->fixerFileProcessor->getCheckers(), 'PHP-CS-Fixer');

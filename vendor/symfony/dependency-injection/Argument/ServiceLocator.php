@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\Argument;
+namespace _PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\Argument;
 
-use _PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
+use _PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @internal
  */
-class ServiceLocator extends \_PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\ServiceLocator
+class ServiceLocator extends \_PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\ServiceLocator
 {
     private $factory;
     private $serviceMap;

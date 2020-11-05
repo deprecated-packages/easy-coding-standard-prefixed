@@ -3,20 +3,20 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Bundle;
 
-use _PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoperdebd9d705540\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper39d23eef9a06\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 use Symplify\SymplifyKernel\DependencyInjection\CompilerPass\MakeConsoleApplicationPublicAliasCompilerPass;
 use Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension;
-final class SymplifyKernelBundle extends \_PhpScoperdebd9d705540\Symfony\Component\HttpKernel\Bundle\Bundle
+final class SymplifyKernelBundle extends \_PhpScoper39d23eef9a06\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    public function build(\_PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->addCompilerPass(new \Symplify\SymplifyKernel\DependencyInjection\CompilerPass\MakeConsoleApplicationPublicAliasCompilerPass());
         $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : ?\_PhpScoperdebd9d705540\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScoper39d23eef9a06\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
         return new \Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension();
     }
