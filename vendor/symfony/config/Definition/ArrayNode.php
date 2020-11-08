@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd79d87c3336e\Symfony\Component\Config\Definition;
+namespace _PhpScoper190659c42b56\Symfony\Component\Config\Definition;
 
-use _PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use _PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
-use _PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use _PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use _PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * Represents an Array node in the config tree.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ArrayNode extends \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\BaseNode implements \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\PrototypeNodeInterface
+class ArrayNode extends \_PhpScoper190659c42b56\Symfony\Component\Config\Definition\BaseNode implements \_PhpScoper190659c42b56\Symfony\Component\Config\Definition\PrototypeNodeInterface
 {
     protected $xmlRemappings = [];
     protected $children = [];
@@ -168,7 +168,7 @@ class ArrayNode extends \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definit
      * @throws \InvalidArgumentException when the child node has no name
      * @throws \InvalidArgumentException when the child node's name is not unique
      */
-    public function addChild(\_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\NodeInterface $node)
+    public function addChild(\_PhpScoper190659c42b56\Symfony\Component\Config\Definition\NodeInterface $node)
     {
         $name = $node->getName();
         if (!\strlen($name)) {
@@ -192,12 +192,12 @@ class ArrayNode extends \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definit
     protected function finalizeValue($value)
     {
         if (\false === $value) {
-            throw new \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\UnsetKeyException(\sprintf('Unsetting key for path "%s", value: %s', $this->getPath(), \json_encode($value)));
+            throw new \_PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\UnsetKeyException(\sprintf('Unsetting key for path "%s", value: %s', $this->getPath(), \json_encode($value)));
         }
         foreach ($this->children as $name => $child) {
             if (!\array_key_exists($name, $value)) {
                 if ($child->isRequired()) {
-                    $ex = new \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('The child node "%s" at path "%s" must be configured.', $name, $this->getPath()));
+                    $ex = new \_PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('The child node "%s" at path "%s" must be configured.', $name, $this->getPath()));
                     $ex->setPath($this->getPath());
                     throw $ex;
                 }
@@ -211,7 +211,7 @@ class ArrayNode extends \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definit
             }
             try {
                 $value[$name] = $child->finalize($value[$name]);
-            } catch (\_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\UnsetKeyException $e) {
+            } catch (\_PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\UnsetKeyException $e) {
                 unset($value[$name]);
             }
         }
@@ -227,7 +227,7 @@ class ArrayNode extends \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definit
     protected function validateType($value)
     {
         if (!\is_array($value) && (!$this->allowFalse || \false !== $value)) {
-            $ex = new \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected array, but got %s', $this->getPath(), \gettype($value)));
+            $ex = new \_PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected array, but got %s', $this->getPath(), \gettype($value)));
             if ($hint = $this->getInfo()) {
                 $ex->addHint($hint);
             }
@@ -255,7 +255,7 @@ class ArrayNode extends \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definit
             if (isset($this->children[$name])) {
                 try {
                     $normalized[$name] = $this->children[$name]->normalize($val);
-                } catch (\_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\UnsetKeyException $e) {
+                } catch (\_PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\UnsetKeyException $e) {
                 }
                 unset($value[$name]);
             } elseif (!$this->removeExtraKeys) {
@@ -284,7 +284,7 @@ class ArrayNode extends \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definit
             } else {
                 $msg .= \sprintf('. Available option%s %s "%s".', 1 === \count($proposals) ? '' : 's', 1 === \count($proposals) ? 'is' : 'are', \implode('", "', $proposals));
             }
-            $ex = new \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException($msg);
+            $ex = new \_PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException($msg);
             $ex->setPath($this->getPath());
             throw $ex;
         }
@@ -303,7 +303,7 @@ class ArrayNode extends \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definit
             if (!isset($value[$singular])) {
                 continue;
             }
-            $value[$plural] = \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Processor::normalizeConfig($value, $singular, $plural);
+            $value[$plural] = \_PhpScoper190659c42b56\Symfony\Component\Config\Definition\Processor::normalizeConfig($value, $singular, $plural);
             unset($value[$singular]);
         }
         return $value;
@@ -333,7 +333,7 @@ class ArrayNode extends \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definit
             // no conflict
             if (!\array_key_exists($k, $leftSide)) {
                 if (!$this->allowNewKeys) {
-                    $ex = new \_PhpScoperd79d87c3336e\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('You are not allowed to define new elements for path "%s". Please define all elements for this path in one config file. If you are trying to overwrite an element, make sure you redefine it with the same name.', $this->getPath()));
+                    $ex = new \_PhpScoper190659c42b56\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('You are not allowed to define new elements for path "%s". Please define all elements for this path in one config file. If you are trying to overwrite an element, make sure you redefine it with the same name.', $this->getPath()));
                     $ex->setPath($this->getPath());
                     throw $ex;
                 }
