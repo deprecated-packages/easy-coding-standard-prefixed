@@ -6,8 +6,8 @@ namespace Symplify\EasyCodingStandard\SniffRunner\Tests\DI;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
-final class SniffServiceRegistrationTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestCase
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
+final class SniffServiceRegistrationTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     public function test() : void
     {

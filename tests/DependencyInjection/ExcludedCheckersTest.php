@@ -5,8 +5,8 @@ namespace Symplify\EasyCodingStandard\Tests\DependencyInjection;
 
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
-final class ExcludedCheckersTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestCase
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
+final class ExcludedCheckersTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     protected function setUp() : void
     {

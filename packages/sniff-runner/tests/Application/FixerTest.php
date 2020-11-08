@@ -7,9 +7,9 @@ use PHP_CodeSniffer\Fixer;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\EasyCodingStandard\SniffRunner\File\FileFactory;
 use Symplify\EasyCodingStandard\SniffRunner\ValueObject\File;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class FixerTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestCase
+final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     /**
      * @var Fixer
@@ -54,7 +54,7 @@ final class FixerTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestC
         $this->assertSame('A\\', $token);
         $this->fixer->addContent(14, 'B');
         $token = $this->fixer->getTokenContent(14);
-        $this->assertSame('_PhpScoper6ec31b85adcf\\A\\B', $token);
+        $this->assertSame('_PhpScoperd79d87c3336e\\A\\B', $token);
     }
     public function testChangesets() : void
     {
@@ -66,7 +66,7 @@ final class FixerTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestC
         $this->assertSame('A\\', $this->fixer->getTokenContent(14));
         // during the changeset, you are free to modify current token as you wish...
         $this->fixer->addContent(14, 'B');
-        $this->assertSame('_PhpScoper6ec31b85adcf\\A\\B', $this->fixer->getTokenContent(14));
+        $this->assertSame('_PhpScoperd79d87c3336e\\A\\B', $this->fixer->getTokenContent(14));
         // you can also rollback the changes...
         $this->fixer->rollbackChangeset();
         $this->assertSame('\\', $this->fixer->getTokenContent(14));

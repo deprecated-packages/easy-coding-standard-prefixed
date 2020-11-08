@@ -5,8 +5,8 @@ namespace Symplify\EasyCodingStandard\Tests\Finder;
 
 use Symplify\EasyCodingStandard\Finder\SourceFinder;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
-final class SourceFinderTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestCase
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
+final class SourceFinderTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     public function test() : void
     {

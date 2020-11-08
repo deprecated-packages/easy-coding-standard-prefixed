@@ -10,9 +10,9 @@ use Symplify\EasyCodingStandard\SniffRunner\Exception\File\NotImplementedExcepti
 use Symplify\EasyCodingStandard\SniffRunner\File\FileFactory;
 use Symplify\EasyCodingStandard\SniffRunner\ValueObject\File;
 use Symplify\EasyCodingStandard\ValueObject\Error\CodingStandardError;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class FileTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestCase
+final class FileTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     /**
      * @var File

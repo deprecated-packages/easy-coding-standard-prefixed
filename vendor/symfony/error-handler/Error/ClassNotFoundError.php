@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ec31b85adcf\Symfony\Component\ErrorHandler\Error;
+namespace _PhpScoperd79d87c3336e\Symfony\Component\ErrorHandler\Error;
 
 class ClassNotFoundError extends \Error
 {

@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper6ec31b85adcf\Nette\Utils;
+namespace _PhpScoperd79d87c3336e\Nette\Utils;
 
-use _PhpScoper6ec31b85adcf\Nette;
+use _PhpScoperd79d87c3336e\Nette;
 use function is_array, is_object, is_string;
 /**
  * PHP callable tools.
@@ -24,7 +24,7 @@ final class Callback
         try {
             return \Closure::fromCallable($method === null ? $callable : [$callable, $method]);
         } catch (\TypeError $e) {
-            throw new \_PhpScoper6ec31b85adcf\Nette\InvalidArgumentException($e->getMessage());
+            throw new \_PhpScoperd79d87c3336e\Nette\InvalidArgumentException($e->getMessage());
         }
     }
     /**
@@ -57,7 +57,7 @@ final class Callback
     {
         $prev = \set_error_handler(function ($severity, $message, $file) use($onError, &$prev, $function) : ?bool {
             if ($file === __FILE__) {
-                $msg = \ini_get('html_errors') ? \_PhpScoper6ec31b85adcf\Nette\Utils\Html::htmlToText($message) : $message;
+                $msg = \ini_get('html_errors') ? \_PhpScoperd79d87c3336e\Nette\Utils\Html::htmlToText($message) : $message;
                 $msg = \preg_replace("#^{$function}\\(.*?\\): #", '', $msg);
                 if ($onError($msg, $severity) !== \false) {
                     return null;
@@ -77,7 +77,7 @@ final class Callback
     public static function check($callable, bool $syntax = \false)
     {
         if (!\is_callable($callable, $syntax)) {
-            throw new \_PhpScoper6ec31b85adcf\Nette\InvalidArgumentException($syntax ? 'Given value is not a callable type.' : \sprintf("Callback '%s' is not callable.", self::toString($callable)));
+            throw new \_PhpScoperd79d87c3336e\Nette\InvalidArgumentException($syntax ? 'Given value is not a callable type.' : \sprintf("Callback '%s' is not callable.", self::toString($callable)));
         }
         return $callable;
     }

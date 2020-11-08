@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Tests\HeredocNowdoc;
 
 use Iterator;
-use _PhpScoper6ec31b85adcf\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperd79d87c3336e\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
@@ -12,13 +12,13 @@ use Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter;
 use Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @requires PHP >= 7.3
  * For testing approach @see https://github.com/symplify/easy-testing
  */
-final class Php73Test extends \Symplify\PackageBuilder\Tests\AbstractKernelTestCase
+final class Php73Test extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     /**
      * @var SnippetFormatter
@@ -30,7 +30,7 @@ final class Php73Test extends \Symplify\PackageBuilder\Tests\AbstractKernelTestC
         $this->snippetFormatter = self::$container->get(\Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter::class);
         /** @var EasyCodingStandardStyle $easyCodingStandardStyle */
         $easyCodingStandardStyle = self::$container->get(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class);
-        $easyCodingStandardStyle->setVerbosity(\_PhpScoper6ec31b85adcf\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+        $easyCodingStandardStyle->setVerbosity(\_PhpScoperd79d87c3336e\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
         // enable fixing
         /** @var Configuration $configuration */
         $configuration = self::$container->get(\Symplify\EasyCodingStandard\Configuration\Configuration::class);

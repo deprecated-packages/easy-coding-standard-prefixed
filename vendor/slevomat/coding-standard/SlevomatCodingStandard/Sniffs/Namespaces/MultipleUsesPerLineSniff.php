@@ -7,8 +7,8 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use SlevomatCodingStandard\Helpers\UseStatementHelper;
-use const _PhpScoper6ec31b85adcf\T_COMMA;
-use const _PhpScoper6ec31b85adcf\T_SEMICOLON;
+use const _PhpScoperd79d87c3336e\T_COMMA;
+use const _PhpScoperd79d87c3336e\T_SEMICOLON;
 use const T_USE;
 class MultipleUsesPerLineSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

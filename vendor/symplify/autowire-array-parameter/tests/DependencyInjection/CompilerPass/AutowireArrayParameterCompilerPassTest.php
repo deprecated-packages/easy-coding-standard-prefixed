@@ -5,8 +5,8 @@ namespace Symplify\AutowireArrayParameter\Tests\DependencyInjection\CompilerPass
 
 use Symplify\AutowireArrayParameter\Tests\HttpKernel\AutowireArrayParameterHttpKernel;
 use Symplify\AutowireArrayParameter\Tests\Source\SomeCollector;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
-final class AutowireArrayParameterCompilerPassTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestCase
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
+final class AutowireArrayParameterCompilerPassTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     public function test() : void
     {

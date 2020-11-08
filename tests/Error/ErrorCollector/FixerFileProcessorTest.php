@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Tests\Error\ErrorCollector;
 
-use _PhpScoper6ec31b85adcf\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperd79d87c3336e\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class FixerFileProcessorTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestCase
+final class FixerFileProcessorTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     /**
      * @var ErrorAndDiffCollector
@@ -27,7 +27,7 @@ final class FixerFileProcessorTest extends \Symplify\PackageBuilder\Tests\Abstra
         $this->fixerFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
         // silent output
         $easyCodingStandardStyle = self::$container->get(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class);
-        $easyCodingStandardStyle->setVerbosity(\_PhpScoper6ec31b85adcf\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+        $easyCodingStandardStyle->setVerbosity(\_PhpScoperd79d87c3336e\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
     }
     public function test() : void
     {

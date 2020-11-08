@@ -4,13 +4,13 @@ declare (strict_types=1);
 namespace Symplify\Skipper\Tests\Skipper\Only;
 
 use Iterator;
-use Symplify\PackageBuilder\Tests\AbstractKernelTestCase;
+use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\Skipper\HttpKernel\SkipperKernel;
 use Symplify\Skipper\Skipper\Skipper;
 use Symplify\Skipper\Tests\Skipper\Only\Source\IncludeThisClass;
 use Symplify\Skipper\Tests\Skipper\Only\Source\SkipThisClass;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class SkipperOnlyTest extends \Symplify\PackageBuilder\Tests\AbstractKernelTestCase
+final class SkipperOnlyTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     /**
      * @var Skipper

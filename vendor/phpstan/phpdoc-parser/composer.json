@@ -27,14 +27,14 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper6ec31b85adcf\\PHPStan\\PhpDocParser\\": [
+            "_PhpScoperd79d87c3336e\\PHPStan\\PhpDocParser\\": [
                 "src\/"
             ]
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoper6ec31b85adcf\\PHPStan\\PhpDocParser\\": [
+            "_PhpScoperd79d87c3336e\\PHPStan\\PhpDocParser\\": [
                 "tests\/PHPStan"
             ]
         }
