@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperae959d396e95\Symfony\Contracts\Cache;
+namespace _PhpScoper0d0ee1ba46d4\Symfony\Contracts\Cache;
 
-use _PhpScoperae959d396e95\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoperae959d396e95\Psr\Cache\InvalidArgumentException;
-use _PhpScoperae959d396e95\Psr\Log\LoggerInterface;
+use _PhpScoper0d0ee1ba46d4\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper0d0ee1ba46d4\Psr\Cache\InvalidArgumentException;
+use _PhpScoper0d0ee1ba46d4\Psr\Log\LoggerInterface;
 /**
  * An implementation of CacheInterface for PSR-6 CacheItemPoolInterface classes.
  *
@@ -34,19 +34,19 @@ trait CacheTrait
     {
         return $this->deleteItem($key);
     }
-    private function doGet(\_PhpScoperae959d396e95\Psr\Cache\CacheItemPoolInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null, \_PhpScoperae959d396e95\Psr\Log\LoggerInterface $logger = null)
+    private function doGet(\_PhpScoper0d0ee1ba46d4\Psr\Cache\CacheItemPoolInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null, \_PhpScoper0d0ee1ba46d4\Psr\Log\LoggerInterface $logger = null)
     {
         if (0 > ($beta = $beta ?? 1.0)) {
-            throw new class(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', \get_class($this), $beta)) extends \InvalidArgumentException implements \_PhpScoperae959d396e95\Psr\Cache\InvalidArgumentException
+            throw new class(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', \get_class($this), $beta)) extends \InvalidArgumentException implements \_PhpScoper0d0ee1ba46d4\Psr\Cache\InvalidArgumentException
             {
             };
         }
         $item = $pool->getItem($key);
         $recompute = !$item->isHit() || \INF === $beta;
-        $metadata = $item instanceof \_PhpScoperae959d396e95\Symfony\Contracts\Cache\ItemInterface ? $item->getMetadata() : [];
+        $metadata = $item instanceof \_PhpScoper0d0ee1ba46d4\Symfony\Contracts\Cache\ItemInterface ? $item->getMetadata() : [];
         if (!$recompute && $metadata) {
-            $expiry = $metadata[\_PhpScoperae959d396e95\Symfony\Contracts\Cache\ItemInterface::METADATA_EXPIRY] ?? \false;
-            $ctime = $metadata[\_PhpScoperae959d396e95\Symfony\Contracts\Cache\ItemInterface::METADATA_CTIME] ?? \false;
+            $expiry = $metadata[\_PhpScoper0d0ee1ba46d4\Symfony\Contracts\Cache\ItemInterface::METADATA_EXPIRY] ?? \false;
+            $ctime = $metadata[\_PhpScoper0d0ee1ba46d4\Symfony\Contracts\Cache\ItemInterface::METADATA_CTIME] ?? \false;
             if ($recompute = $ctime && $expiry && $expiry <= ($now = \microtime(\true)) - $ctime / 1000 * $beta * \log(\random_int(1, \PHP_INT_MAX) / \PHP_INT_MAX)) {
                 // force applying defaultLifetime to expiry
                 $item->expiresAt(null);

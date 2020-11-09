@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperae959d396e95\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper0d0ee1ba46d4\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperae959d396e95\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use _PhpScoper0d0ee1ba46d4\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-class TraceableTagAwareAdapter extends \_PhpScoperae959d396e95\Symfony\Component\Cache\Adapter\TraceableAdapter implements \_PhpScoperae959d396e95\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \_PhpScoperae959d396e95\Symfony\Contracts\Cache\TagAwareCacheInterface
+class TraceableTagAwareAdapter extends \_PhpScoper0d0ee1ba46d4\Symfony\Component\Cache\Adapter\TraceableAdapter implements \_PhpScoper0d0ee1ba46d4\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \_PhpScoper0d0ee1ba46d4\Symfony\Contracts\Cache\TagAwareCacheInterface
 {
-    public function __construct(\_PhpScoperae959d396e95\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $pool)
+    public function __construct(\_PhpScoper0d0ee1ba46d4\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $pool)
     {
         parent::__construct($pool);
     }

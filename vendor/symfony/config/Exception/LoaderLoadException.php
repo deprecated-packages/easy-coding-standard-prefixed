@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperae959d396e95\Symfony\Component\Config\Exception;
+namespace _PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Exception;
 
 /**
  * Exception class for when a resource cannot be loaded or imported.
  *
  * @author Ryan Weaver <ryan@thatsquality.com>
  */
-class LoaderLoadException extends \_PhpScoperae959d396e95\Symfony\Component\Config\Exception\FileLoaderLoadException
+class LoaderLoadException extends \_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Exception\FileLoaderLoadException
 {
 }

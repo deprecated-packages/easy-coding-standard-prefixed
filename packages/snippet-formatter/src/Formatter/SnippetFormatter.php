@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Formatter;
 
-use _PhpScoperae959d396e95\Nette\Utils\Strings;
+use _PhpScoper0d0ee1ba46d4\Nette\Utils\Strings;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
 use Symplify\EasyCodingStandard\SnippetFormatter\Provider\CurrentParentFileInfoProvider;
@@ -47,8 +47,8 @@ final class SnippetFormatter
     public function format(\Symplify\SmartFileSystem\SmartFileInfo $fileInfo, string $snippetRegex) : string
     {
         $this->currentParentFileInfoProvider->setParentFileInfo($fileInfo);
-        return (string) \_PhpScoperae959d396e95\Nette\Utils\Strings::replace($fileInfo->getContents(), $snippetRegex, function ($match) : string {
-            if (\_PhpScoperae959d396e95\Nette\Utils\Strings::contains($match['content'], '-----')) {
+        return (string) \_PhpScoper0d0ee1ba46d4\Nette\Utils\Strings::replace($fileInfo->getContents(), $snippetRegex, function ($match) : string {
+            if (\_PhpScoper0d0ee1ba46d4\Nette\Utils\Strings::contains($match['content'], '-----')) {
                 // do nothing
                 return $match['opening'] . $match['content'] . $match['closing'];
             }
@@ -72,7 +72,7 @@ final class SnippetFormatter
         /** @var string $temporaryFilePath */
         $temporaryFilePath = \sys_get_temp_dir() . '/ecs_temp/' . \sprintf('php-code-%s.php', $key);
         $hasPreviouslyOpeningPHPTag = \true;
-        if (!\_PhpScoperae959d396e95\Nette\Utils\Strings::startsWith($this->isPhp73OrAbove ? \trim($content) : $content, '<?php')) {
+        if (!\_PhpScoper0d0ee1ba46d4\Nette\Utils\Strings::startsWith($this->isPhp73OrAbove ? \trim($content) : $content, '<?php')) {
             $content = '<?php' . \PHP_EOL . $content;
             $hasPreviouslyOpeningPHPTag = \false;
         }
