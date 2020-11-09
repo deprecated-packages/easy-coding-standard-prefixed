@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoper0d0ee1ba46d4\Nette\Utils\Strings;
+use _PhpScoperf5f75c22067b\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -16,12 +16,15 @@ use Symplify\CodingStandard\Fixer\AbstractSymplifyFixer;
 use Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder;
 use Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthTransformer;
 use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
+use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use Symplify\RuleDocGenerator\ValueObject\ConfiguredCodeSample;
+use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 use Throwable;
 /**
  * @see \Symplify\CodingStandard\Tests\Fixer\LineLength\LineLengthFixer\LineLengthFixerTest
  * @see \Symplify\CodingStandard\Tests\Fixer\LineLength\LineLengthFixer\ConfiguredLineLengthFixerTest
  */
-final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface
+final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface, \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
 {
     /**
      * @api
@@ -38,6 +41,10 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
      * @var string
      */
     public const INLINE_SHORT_LINES = 'inline_short_lines';
+    /**
+     * @var string
+     */
+    private const ERROR_MESSAGE = 'Array items, method parameters, method call arguments, new arguments should be on same/standalone line to fit line length.';
     /**
      * @var int
      */
@@ -65,7 +72,7 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
     }
     public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Array items, method parameters, method call arguments, new arguments should be on same/standalone line to fit line length.', []);
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
     }
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
@@ -117,6 +124,32 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
         $this->lineLength = $configuration[self::LINE_LENGTH] ?? 120;
         $this->breakLongLines = $configuration[self::BREAK_LONG_LINES] ?? \true;
         $this->inlineShortLines = $configuration[self::INLINE_SHORT_LINES] ?? \true;
+    }
+    public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+    {
+        return new \Symplify\RuleDocGenerator\ValueObject\RuleDefinition(self::ERROR_MESSAGE, [new \Symplify\RuleDocGenerator\ValueObject\ConfiguredCodeSample(<<<'CODE_SAMPLE'
+function some($veryLong, $superLong, $oneMoreTime)
+{
+}
+
+function another(
+    $short,
+    $now
+) {
+}
+CODE_SAMPLE
+, <<<'CODE_SAMPLE'
+function some(
+    $veryLong,
+    $superLong,
+    $oneMoreTime
+) {
+}
+
+function another($short, $now) {
+}
+CODE_SAMPLE
+, [self::LINE_LENGTH => 40])]);
     }
     private function processMethodCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : void
     {
@@ -186,7 +219,7 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
         $nextTokenPosition = $tokens->getNextMeaningfulToken($blockInfo->getStart());
         /** @var Token $nextToken */
         $nextToken = $tokens[$nextTokenPosition];
-        if (\_PhpScoper0d0ee1ba46d4\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<')) {
+        if (\_PhpScoperf5f75c22067b\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<')) {
             return \true;
         }
         // is array with indexed values "=>"

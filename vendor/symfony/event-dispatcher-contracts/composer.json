@@ -31,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper0d0ee1ba46d4\\Symfony\\Contracts\\EventDispatcher\\": ""
+            "_PhpScoperf5f75c22067b\\Symfony\\Contracts\\EventDispatcher\\": ""
         }
     },
     "minimum-stability": "dev",

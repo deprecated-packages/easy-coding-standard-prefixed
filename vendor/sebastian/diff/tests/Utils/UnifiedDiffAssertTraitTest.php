@@ -9,13 +9,13 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0d0ee1ba46d4\SebastianBergmann\Diff\Utils;
+namespace _PhpScoperf5f75c22067b\SebastianBergmann\Diff\Utils;
 
-use _PhpScoper0d0ee1ba46d4\PHPUnit\Framework\TestCase;
+use _PhpScoperf5f75c22067b\PHPUnit\Framework\TestCase;
 /**
  * @covers SebastianBergmann\Diff\Utils\UnifiedDiffAssertTrait
  */
-final class UnifiedDiffAssertTraitTest extends \_PhpScoper0d0ee1ba46d4\PHPUnit\Framework\TestCase
+final class UnifiedDiffAssertTraitTest extends \_PhpScoperf5f75c22067b\PHPUnit\Framework\TestCase
 {
     use UnifiedDiffAssertTrait;
     /**

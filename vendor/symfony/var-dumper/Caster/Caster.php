@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0d0ee1ba46d4\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoperf5f75c22067b\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoperf5f75c22067b\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Helper for filtering out properties in casters.
  *
@@ -36,11 +36,12 @@ class Caster
     /**
      * Casts objects to arrays and adds the dynamic property prefix.
      *
-     * @param bool $hasDebugInfo Whether the __debugInfo method exists on $obj or not
+     * @param object $obj          The object to cast
+     * @param bool   $hasDebugInfo Whether the __debugInfo method exists on $obj or not
      *
      * @return array The array-cast of the object, with prefixed dynamic properties
      */
-    public static function castObject(object $obj, string $class, bool $hasDebugInfo = \false) : array
+    public static function castObject($obj, string $class, bool $hasDebugInfo = \false) : array
     {
         $a = $obj instanceof \Closure ? [] : (array) $obj;
         if ($obj instanceof \__PHP_Incomplete_Class) {
@@ -51,7 +52,7 @@ class Caster
             $i = 0;
             $prefixedKeys = [];
             foreach ($a as $k => $v) {
-                if ("\0" !== ($k[0] ?? '')) {
+                if (isset($k[0]) ? "\0" !== $k[0] : \PHP_VERSION_ID >= 70200) {
                     if (!isset($publicProperties[$class])) {
                         foreach ((new \ReflectionClass($class))->getProperties(\ReflectionProperty::IS_PUBLIC) as $prop) {
                             $publicProperties[$class][$prop->name] = \true;
@@ -132,7 +133,7 @@ class Caster
         }
         return $a;
     }
-    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, \_PhpScoper0d0ee1ba46d4\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, \_PhpScoperf5f75c22067b\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
         if (isset($a['__PHP_Incomplete_Class_Name'])) {
             $stub->class .= '(' . $a['__PHP_Incomplete_Class_Name'] . ')';

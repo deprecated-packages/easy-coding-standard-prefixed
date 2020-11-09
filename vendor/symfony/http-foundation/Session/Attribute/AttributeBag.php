@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\Session\Attribute;
+namespace _PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\Session\Attribute;
 
 /**
  * This class relates to session attribute storage.
  */
-class AttributeBag implements \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface, \IteratorAggregate, \Countable
+class AttributeBag implements \_PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface, \IteratorAggregate, \Countable
 {
     private $name = 'attributes';
     private $storageKey;
@@ -32,7 +32,7 @@ class AttributeBag implements \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoun
     {
         return $this->name;
     }
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -53,21 +53,21 @@ class AttributeBag implements \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoun
     /**
      * {@inheritdoc}
      */
-    public function has(string $name)
+    public function has($name)
     {
         return \array_key_exists($name, $this->attributes);
     }
     /**
      * {@inheritdoc}
      */
-    public function get(string $name, $default = null)
+    public function get($name, $default = null)
     {
         return \array_key_exists($name, $this->attributes) ? $this->attributes[$name] : $default;
     }
     /**
      * {@inheritdoc}
      */
-    public function set(string $name, $value)
+    public function set($name, $value)
     {
         $this->attributes[$name] = $value;
     }
@@ -91,7 +91,7 @@ class AttributeBag implements \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoun
     /**
      * {@inheritdoc}
      */
-    public function remove(string $name)
+    public function remove($name)
     {
         $retval = null;
         if (\array_key_exists($name, $this->attributes)) {

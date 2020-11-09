@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0d0ee1ba46d4\Symfony\Component\Cache;
+namespace _PhpScoperf5f75c22067b\Symfony\Component\Cache;
 
-use _PhpScoper0d0ee1ba46d4\Doctrine\Common\Cache\CacheProvider;
-use _PhpScoper0d0ee1ba46d4\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoper0d0ee1ba46d4\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoperf5f75c22067b\Doctrine\Common\Cache\CacheProvider;
+use _PhpScoperf5f75c22067b\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoperf5f75c22067b\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DoctrineProvider extends \_PhpScoper0d0ee1ba46d4\Doctrine\Common\Cache\CacheProvider implements \_PhpScoper0d0ee1ba46d4\Symfony\Component\Cache\PruneableInterface, \_PhpScoper0d0ee1ba46d4\Symfony\Component\Cache\ResettableInterface
+class DoctrineProvider extends \_PhpScoperf5f75c22067b\Doctrine\Common\Cache\CacheProvider implements \_PhpScoperf5f75c22067b\Symfony\Component\Cache\PruneableInterface, \_PhpScoperf5f75c22067b\Symfony\Component\Cache\ResettableInterface
 {
     private $pool;
-    public function __construct(\_PhpScoper0d0ee1ba46d4\Psr\Cache\CacheItemPoolInterface $pool)
+    public function __construct(\_PhpScoperf5f75c22067b\Psr\Cache\CacheItemPoolInterface $pool)
     {
         $this->pool = $pool;
     }
@@ -28,14 +28,14 @@ class DoctrineProvider extends \_PhpScoper0d0ee1ba46d4\Doctrine\Common\Cache\Cac
      */
     public function prune()
     {
-        return $this->pool instanceof \_PhpScoper0d0ee1ba46d4\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
+        return $this->pool instanceof \_PhpScoperf5f75c22067b\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
     }
     /**
      * {@inheritdoc}
      */
     public function reset()
     {
-        if ($this->pool instanceof \_PhpScoper0d0ee1ba46d4\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->pool instanceof \_PhpScoperf5f75c22067b\Symfony\Contracts\Service\ResetInterface) {
             $this->pool->reset();
         }
         $this->setNamespace($this->getNamespace());

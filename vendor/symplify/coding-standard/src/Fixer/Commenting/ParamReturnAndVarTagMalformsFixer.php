@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScoper0d0ee1ba46d4\Nette\Utils\Strings;
+use _PhpScoperf5f75c22067b\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -18,6 +18,9 @@ use Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker\ParamNameTypoMalf
 use Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker\SuperfluousReturnNameMalformWorker;
 use Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker\SuperfluousVarNameMalformWorker;
 use Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker\SwitchedTypeAndNameMalformWorker;
+use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample;
+use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see ParamNameTypoMalformWorker
  * @see InlineVarMalformWorker
@@ -28,8 +31,12 @@ use Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker\SwitchedTypeAndNa
  *
  * @see \Symplify\CodingStandard\Tests\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer\ParamReturnAndVarTagMalformsFixerTest
  */
-final class ParamReturnAndVarTagMalformsFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer
+final class ParamReturnAndVarTagMalformsFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
 {
+    /**
+     * @var string
+     */
+    private const ERROR_MESSAGE = 'Fixes @param, @return, @var and inline @var annotations broken formats';
     /**
      * @var string
      * @see https://regex101.com/r/8iqNuR/1
@@ -48,7 +55,7 @@ final class ParamReturnAndVarTagMalformsFixer extends \Symplify\CodingStandard\F
     }
     public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('The @param, @return, @var and inline @var annotations should keep standard format', []);
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
     }
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
@@ -62,7 +69,7 @@ final class ParamReturnAndVarTagMalformsFixer extends \Symplify\CodingStandard\F
                 continue;
             }
             $docContent = $token->getContent();
-            if (!\_PhpScoper0d0ee1ba46d4\Nette\Utils\Strings::match($docContent, self::TYPE_ANNOTATION_REGEX)) {
+            if (!\_PhpScoperf5f75c22067b\Nette\Utils\Strings::match($docContent, self::TYPE_ANNOTATION_REGEX)) {
                 continue;
             }
             $originalDocContent = $docContent;
@@ -78,5 +85,25 @@ final class ParamReturnAndVarTagMalformsFixer extends \Symplify\CodingStandard\F
     public function getPriority() : int
     {
         return $this->getPriorityBefore(\PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer::class);
+    }
+    public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+    {
+        return new \Symplify\RuleDocGenerator\ValueObject\RuleDefinition(self::ERROR_MESSAGE, [new \Symplify\RuleDocGenerator\ValueObject\CodeSample(<<<'CODE_SAMPLE'
+/**
+ * @param string
+ */
+function getPerson($name)
+{
+}
+CODE_SAMPLE
+, <<<'CODE_SAMPLE'
+/**
+ * @param string $name
+ */
+function getPerson($name)
+{
+}
+CODE_SAMPLE
+)]);
     }
 }

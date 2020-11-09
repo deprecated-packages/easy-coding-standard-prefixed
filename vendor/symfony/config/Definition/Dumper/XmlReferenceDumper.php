@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\Dumper;
+namespace _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Dumper;
 
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\ArrayNode;
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\EnumNode;
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\NodeInterface;
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\ArrayNode;
+use _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\EnumNode;
+use _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\NodeInterface;
+use _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\PrototypedArrayNode;
 /**
  * Dumps a XML reference configuration for the given configuration/node instance.
  *
@@ -23,11 +23,11 @@ use _PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\PrototypedArrayNo
 class XmlReferenceDumper
 {
     private $reference;
-    public function dump(\_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\ConfigurationInterface $configuration, $namespace = null)
+    public function dump(\_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\ConfigurationInterface $configuration, $namespace = null)
     {
         return $this->dumpNode($configuration->getConfigTreeBuilder()->buildTree(), $namespace);
     }
-    public function dumpNode(\_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\NodeInterface $node, $namespace = null)
+    public function dumpNode(\_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\NodeInterface $node, $namespace = null)
     {
         $this->reference = '';
         $this->writeNode($node, 0, \true, $namespace);
@@ -35,7 +35,7 @@ class XmlReferenceDumper
         $this->reference = null;
         return $ref;
     }
-    private function writeNode(\_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\NodeInterface $node, int $depth = 0, bool $root = \false, string $namespace = null)
+    private function writeNode(\_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\NodeInterface $node, int $depth = 0, bool $root = \false, string $namespace = null)
     {
         $rootName = $root ? 'config' : $node->getName();
         $rootNamespace = $namespace ?: ($root ? 'http://example.org/schema/dic/' . $node->getName() : null);
@@ -54,7 +54,7 @@ class XmlReferenceDumper
         $rootAttributeComments = [];
         $rootChildren = [];
         $rootComments = [];
-        if ($node instanceof \_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\ArrayNode) {
+        if ($node instanceof \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\ArrayNode) {
             $children = $node->getChildren();
             // comments about the root node
             if ($rootInfo = $node->getInfo()) {
@@ -64,7 +64,7 @@ class XmlReferenceDumper
                 $rootComments[] = 'Namespace: ' . $rootNamespace;
             }
             // render prototyped nodes
-            if ($node instanceof \_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\PrototypedArrayNode) {
+            if ($node instanceof \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\PrototypedArrayNode) {
                 $prototype = $node->getPrototype();
                 $info = 'prototype';
                 if (null !== $prototype->getInfo()) {
@@ -74,10 +74,10 @@ class XmlReferenceDumper
                 if ($key = $node->getKeyAttribute()) {
                     $rootAttributes[$key] = \str_replace('-', ' ', $rootName) . ' ' . $key;
                 }
-                if ($prototype instanceof \_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\PrototypedArrayNode) {
+                if ($prototype instanceof \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\PrototypedArrayNode) {
                     $prototype->setName($key);
                     $children = [$key => $prototype];
-                } elseif ($prototype instanceof \_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\ArrayNode) {
+                } elseif ($prototype instanceof \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\ArrayNode) {
                     $children = $prototype->getChildren();
                 } else {
                     if ($prototype->hasDefaultValue()) {
@@ -105,7 +105,7 @@ class XmlReferenceDumper
             }
             // get attributes and elements
             foreach ($children as $child) {
-                if (!$child instanceof \_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\ArrayNode) {
+                if (!$child instanceof \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\ArrayNode) {
                     // get attributes
                     // metadata
                     $name = \str_replace('_', '-', $child->getName());
@@ -125,7 +125,7 @@ class XmlReferenceDumper
                     if ($child->isDeprecated()) {
                         $comments[] = \sprintf('Deprecated (%s)', $child->getDeprecationMessage($child->getName(), $node->getPath()));
                     }
-                    if ($child instanceof \_PhpScoper0d0ee1ba46d4\Symfony\Component\Config\Definition\EnumNode) {
+                    if ($child instanceof \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\EnumNode) {
                         $comments[] = 'One of ' . \implode('; ', \array_map('json_encode', $child->getValues()));
                     }
                     if (\count($comments)) {

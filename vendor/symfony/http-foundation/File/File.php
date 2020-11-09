@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\File;
+namespace _PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\File;
 
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\Mime\MimeTypes;
+use _PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use _PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use _PhpScoperf5f75c22067b\Symfony\Component\Mime\MimeTypes;
 /**
  * A file in the file system.
  *
@@ -31,7 +31,7 @@ class File extends \SplFileInfo
     public function __construct(string $path, bool $checkPath = \true)
     {
         if ($checkPath && !\is_file($path)) {
-            throw new \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
+            throw new \_PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
         }
         parent::__construct($path);
     }
@@ -50,10 +50,7 @@ class File extends \SplFileInfo
      */
     public function guessExtension()
     {
-        if (!\class_exists(\_PhpScoper0d0ee1ba46d4\Symfony\Component\Mime\MimeTypes::class)) {
-            throw new \LogicException('You cannot guess the extension as the Mime component is not installed. Try running "composer require symfony/mime".');
-        }
-        return \_PhpScoper0d0ee1ba46d4\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getMimeType())[0] ?? null;
+        return \_PhpScoperf5f75c22067b\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getMimeType())[0] ?? null;
     }
     /**
      * Returns the mime type of the file.
@@ -68,19 +65,19 @@ class File extends \SplFileInfo
      */
     public function getMimeType()
     {
-        if (!\class_exists(\_PhpScoper0d0ee1ba46d4\Symfony\Component\Mime\MimeTypes::class)) {
-            throw new \LogicException('You cannot guess the mime type as the Mime component is not installed. Try running "composer require symfony/mime".');
-        }
-        return \_PhpScoper0d0ee1ba46d4\Symfony\Component\Mime\MimeTypes::getDefault()->guessMimeType($this->getPathname());
+        return \_PhpScoperf5f75c22067b\Symfony\Component\Mime\MimeTypes::getDefault()->guessMimeType($this->getPathname());
     }
     /**
      * Moves the file to a new location.
+     *
+     * @param string $directory The destination folder
+     * @param string $name      The new file name
      *
      * @return self A File object representing the new file
      *
      * @throws FileException if the target file could not be created
      */
-    public function move(string $directory, string $name = null)
+    public function move($directory, $name = null)
     {
         $target = $this->getTargetFile($directory, $name);
         \set_error_handler(function ($type, $msg) use(&$error) {
@@ -89,7 +86,7 @@ class File extends \SplFileInfo
         $renamed = \rename($this->getPathname(), $target);
         \restore_error_handler();
         if (!$renamed) {
-            throw new \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s).', $this->getPathname(), $target, \strip_tags($error)));
+            throw new \_PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s)', $this->getPathname(), $target, \strip_tags($error)));
         }
         @\chmod($target, 0666 & ~\umask());
         return $target;
@@ -97,14 +94,14 @@ class File extends \SplFileInfo
     /**
      * @return self
      */
-    protected function getTargetFile(string $directory, string $name = null)
+    protected function getTargetFile($directory, $name = null)
     {
         if (!\is_dir($directory)) {
             if (\false === @\mkdir($directory, 0777, \true) && !\is_dir($directory)) {
-                throw new \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to create the "%s" directory.', $directory));
+                throw new \_PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to create the "%s" directory', $directory));
             }
         } elseif (!\is_writable($directory)) {
-            throw new \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to write in the "%s" directory.', $directory));
+            throw new \_PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to write in the "%s" directory', $directory));
         }
         $target = \rtrim($directory, '/\\') . \DIRECTORY_SEPARATOR . (null === $name ? $this->getBasename() : $this->getName($name));
         return new self($target, \false);
@@ -112,9 +109,11 @@ class File extends \SplFileInfo
     /**
      * Returns locale independent base name of the given path.
      *
+     * @param string $name The new file name
+     *
      * @return string
      */
-    protected function getName(string $name)
+    protected function getName($name)
     {
         $originalName = \str_replace('\\', '/', $name);
         $pos = \strrpos($originalName, '/');

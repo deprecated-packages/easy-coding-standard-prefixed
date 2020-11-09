@@ -8,36 +8,40 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\Session\Attribute;
+namespace _PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\Session\Attribute;
 
-use _PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use _PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * Attributes store.
  *
  * @author Drak <drak@zikula.org>
  */
-interface AttributeBagInterface extends \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\Session\SessionBagInterface
+interface AttributeBagInterface extends \_PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\Session\SessionBagInterface
 {
     /**
      * Checks if an attribute is defined.
      *
+     * @param string $name The attribute name
+     *
      * @return bool true if the attribute is defined, false otherwise
      */
-    public function has(string $name);
+    public function has($name);
     /**
      * Returns an attribute.
      *
-     * @param mixed $default The default value if not found
+     * @param string $name    The attribute name
+     * @param mixed  $default The default value if not found
      *
      * @return mixed
      */
-    public function get(string $name, $default = null);
+    public function get($name, $default = null);
     /**
      * Sets an attribute.
      *
-     * @param mixed $value
+     * @param string $name
+     * @param mixed  $value
      */
-    public function set(string $name, $value);
+    public function set($name, $value);
     /**
      * Returns attributes.
      *
@@ -48,7 +52,9 @@ interface AttributeBagInterface extends \_PhpScoper0d0ee1ba46d4\Symfony\Componen
     /**
      * Removes an attribute.
      *
+     * @param string $name
+     *
      * @return mixed The removed value or null when it does not exist
      */
-    public function remove(string $name);
+    public function remove($name);
 }

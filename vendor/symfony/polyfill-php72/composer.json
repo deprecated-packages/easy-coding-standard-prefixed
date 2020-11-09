@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper0d0ee1ba46d4\\Symfony\\Polyfill\\Php72\\": ""
+            "_PhpScoperf5f75c22067b\\Symfony\\Polyfill\\Php72\\": ""
         },
         "files": [
             "bootstrap.php"
@@ -34,7 +34,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.4-dev"
+            "dev-master": "1.9-dev"
         }
     }
 }

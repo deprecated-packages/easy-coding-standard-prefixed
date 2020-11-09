@@ -10,14 +10,21 @@ use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
 use SplFileInfo;
 use Symplify\CodingStandard\Fixer\AbstractSymplifyFixer;
+use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample;
+use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * Inspired at https://github.com/aidantwoods/PHP-CS-Fixer/tree/feature/DeclareStrictTypesFixer-split
  *
  * @thanks Aidan Woods
  * @see \Symplify\CodingStandard\Tests\Fixer\Strict\BlankLineAfterStrictTypesFixer\BlankLineAfterStrictTypesFixerTest
  */
-final class BlankLineAfterStrictTypesFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer
+final class BlankLineAfterStrictTypesFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
 {
+    /**
+     * @var string
+     */
+    private const ERROR_MESSAGE = 'Strict type declaration has to be followed by empty line';
     /**
      * @var WhitespacesFixerConfig
      */
@@ -34,7 +41,7 @@ final class BlankLineAfterStrictTypesFixer extends \Symplify\CodingStandard\Fixe
     }
     public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Strict type declaration has to be followed by empty line', []);
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
     }
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
@@ -54,5 +61,18 @@ final class BlankLineAfterStrictTypesFixer extends \Symplify\CodingStandard\Fixe
         }
         $lineEnding = $this->whitespacesFixerConfig->getLineEnding();
         $tokens->ensureWhitespaceAtIndex($semicolonPosition + 1, 0, $lineEnding . $lineEnding);
+    }
+    public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+    {
+        return new \Symplify\RuleDocGenerator\ValueObject\RuleDefinition(self::ERROR_MESSAGE, [new \Symplify\RuleDocGenerator\ValueObject\CodeSample(<<<'CODE_SAMPLE'
+declare(strict_types=1);
+namespace App;
+CODE_SAMPLE
+, <<<'CODE_SAMPLE'
+declare(strict_types=1);
+
+namespace App;
+CODE_SAMPLE
+)]);
     }
 }

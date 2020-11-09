@@ -12,13 +12,13 @@ use function count;
 use function sprintf;
 use function trim;
 use const T_AS;
-use const _PhpScoper0d0ee1ba46d4\T_COMMA;
+use const _PhpScoperf5f75c22067b\T_COMMA;
 use const T_FUNCTION;
-use const _PhpScoper0d0ee1ba46d4\T_OPEN_SHORT_ARRAY;
+use const _PhpScoperf5f75c22067b\T_OPEN_SHORT_ARRAY;
 use const T_PRIVATE;
 use const T_PROTECTED;
 use const T_PUBLIC;
-use const _PhpScoper0d0ee1ba46d4\T_SEMICOLON;
+use const _PhpScoperf5f75c22067b\T_SEMICOLON;
 use const T_VAR;
 use const T_VARIABLE;
 class DisallowMultiPropertyDefinitionSniff implements \PHP_CodeSniffer\Sniffs\Sniff

@@ -11,7 +11,8 @@
         "friendsofphp\/php-cs-fixer": "^2.16",
         "symplify\/symplify-kernel": "dev-master",
         "symplify\/package-builder": "dev-master",
-        "symplify\/autowire-array-parameter": "dev-master"
+        "symplify\/autowire-array-parameter": "dev-master",
+        "symplify\/rule-doc-generator": "dev-master"
     },
     "require-dev": {
         "nette\/application": "^3.0",

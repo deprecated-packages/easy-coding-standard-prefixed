@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation;
+namespace _PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation;
 
 /**
  * Represents an Accept-* header item.
@@ -31,13 +31,15 @@ class AcceptHeaderItem
     /**
      * Builds an AcceptHeaderInstance instance from a string.
      *
+     * @param string $itemValue
+     *
      * @return self
      */
-    public static function fromString(?string $itemValue)
+    public static function fromString($itemValue)
     {
-        $parts = \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\HeaderUtils::split($itemValue ?? '', ';=');
+        $parts = \_PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\HeaderUtils::split($itemValue, ';=');
         $part = \array_shift($parts);
-        $attributes = \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
+        $attributes = \_PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
         return new self($part[0], $attributes);
     }
     /**
@@ -49,16 +51,18 @@ class AcceptHeaderItem
     {
         $string = $this->value . ($this->quality < 1 ? ';q=' . $this->quality : '');
         if (\count($this->attributes) > 0) {
-            $string .= '; ' . \_PhpScoper0d0ee1ba46d4\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->attributes, ';');
+            $string .= '; ' . \_PhpScoperf5f75c22067b\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->attributes, ';');
         }
         return $string;
     }
     /**
      * Set the item value.
      *
+     * @param string $value
+     *
      * @return $this
      */
-    public function setValue(string $value)
+    public function setValue($value)
     {
         $this->value = $value;
         return $this;
@@ -75,9 +79,11 @@ class AcceptHeaderItem
     /**
      * Set the item quality.
      *
+     * @param float $quality
+     *
      * @return $this
      */
-    public function setQuality(float $quality)
+    public function setQuality($quality)
     {
         $this->quality = $quality;
         return $this;
@@ -94,9 +100,11 @@ class AcceptHeaderItem
     /**
      * Set the item index.
      *
+     * @param int $index
+     *
      * @return $this
      */
-    public function setIndex(int $index)
+    public function setIndex($index)
     {
         $this->index = $index;
         return $this;
@@ -113,20 +121,23 @@ class AcceptHeaderItem
     /**
      * Tests if an attribute exists.
      *
+     * @param string $name
+     *
      * @return bool
      */
-    public function hasAttribute(string $name)
+    public function hasAttribute($name)
     {
         return isset($this->attributes[$name]);
     }
     /**
      * Returns an attribute by its name.
      *
-     * @param mixed $default
+     * @param string $name
+     * @param mixed  $default
      *
      * @return mixed
      */
-    public function getAttribute(string $name, $default = null)
+    public function getAttribute($name, $default = null)
     {
         return isset($this->attributes[$name]) ? $this->attributes[$name] : $default;
     }
@@ -142,14 +153,17 @@ class AcceptHeaderItem
     /**
      * Set an attribute.
      *
+     * @param string $name
+     * @param string $value
+     *
      * @return $this
      */
-    public function setAttribute(string $name, string $value)
+    public function setAttribute($name, $value)
     {
         if ('q' === $name) {
             $this->quality = (float) $value;
         } else {
-            $this->attributes[$name] = $value;
+            $this->attributes[$name] = (string) $value;
         }
         return $this;
     }

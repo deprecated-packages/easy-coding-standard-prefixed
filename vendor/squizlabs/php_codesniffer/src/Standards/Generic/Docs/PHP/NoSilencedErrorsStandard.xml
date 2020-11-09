@@ -8,14 +8,14 @@
         <code title="Valid: isset() is used to verify that a variable exists before trying to use it.">
         <![CDATA[
 if (<em>isset($foo)</em> && $foo) {
-    echo "_PhpScoper0d0ee1ba46d4\Hello\n";
+    echo "_PhpScoperf5f75c22067b\Hello\n";
 }
         ]]>
         </code>
         <code title="Invalid: Errors are suppressed.">
         <![CDATA[
 if (<em>@</em>$foo) {
-    echo "_PhpScoper0d0ee1ba46d4\Hello\n";
+    echo "_PhpScoperf5f75c22067b\Hello\n";
 }
         ]]>
         </code>
