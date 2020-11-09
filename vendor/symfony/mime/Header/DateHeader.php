@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere015d8a3273c\Symfony\Component\Mime\Header;
+namespace _PhpScoper880bfa4d8b51\Symfony\Component\Mime\Header;
 
 /**
  * A Date MIME Header.
@@ -17,7 +17,7 @@ namespace _PhpScopere015d8a3273c\Symfony\Component\Mime\Header;
  *
  * @experimental in 4.3
  */
-final class DateHeader extends \_PhpScopere015d8a3273c\Symfony\Component\Mime\Header\AbstractHeader
+final class DateHeader extends \_PhpScoper880bfa4d8b51\Symfony\Component\Mime\Header\AbstractHeader
 {
     private $dateTime;
     public function __construct(string $name, \DateTimeInterface $date)

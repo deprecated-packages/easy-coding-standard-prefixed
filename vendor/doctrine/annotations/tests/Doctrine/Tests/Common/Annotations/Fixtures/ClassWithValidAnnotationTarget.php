@@ -1,11 +1,11 @@
 <?php
 
-namespace _PhpScopere015d8a3273c\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper880bfa4d8b51\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScopere015d8a3273c\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetClass;
-use _PhpScopere015d8a3273c\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAll;
-use _PhpScopere015d8a3273c\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetPropertyMethod;
-use _PhpScopere015d8a3273c\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetNestedAnnotation;
+use _PhpScoper880bfa4d8b51\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetClass;
+use _PhpScoper880bfa4d8b51\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAll;
+use _PhpScoper880bfa4d8b51\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetPropertyMethod;
+use _PhpScoper880bfa4d8b51\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetNestedAnnotation;
 /**
  * @AnnotationTargetClass("Some data")
  */

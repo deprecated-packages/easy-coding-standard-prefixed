@@ -9,11 +9,11 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere015d8a3273c\SebastianBergmann\Diff\Output;
+namespace _PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Output;
 
-use _PhpScopere015d8a3273c\PHPUnit\Framework\TestCase;
-use _PhpScopere015d8a3273c\SebastianBergmann\Diff\Utils\UnifiedDiffAssertTrait;
-use _PhpScopere015d8a3273c\Symfony\Component\Process\Process;
+use _PhpScoper880bfa4d8b51\PHPUnit\Framework\TestCase;
+use _PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Utils\UnifiedDiffAssertTrait;
+use _PhpScoper880bfa4d8b51\Symfony\Component\Process\Process;
 /**
  * @covers SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
  *
@@ -22,7 +22,7 @@ use _PhpScopere015d8a3273c\Symfony\Component\Process\Process;
  *
  * @requires OS Linux
  */
-final class UnifiedDiffOutputBuilderIntegrationTest extends \_PhpScopere015d8a3273c\PHPUnit\Framework\TestCase
+final class UnifiedDiffOutputBuilderIntegrationTest extends \_PhpScoper880bfa4d8b51\PHPUnit\Framework\TestCase
 {
     use UnifiedDiffAssertTrait;
     private $dir;
@@ -63,7 +63,7 @@ final class UnifiedDiffOutputBuilderIntegrationTest extends \_PhpScopere015d8a32
     }
     public function provideDiffWithLineNumbers()
     {
-        return \array_filter(\_PhpScopere015d8a3273c\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilderDataProvider::provideDiffWithLineNumbers(), static function ($key) {
+        return \array_filter(\_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilderDataProvider::provideDiffWithLineNumbers(), static function ($key) {
             return !\is_string($key) || \false === \strpos($key, 'non_patch_compat');
         }, \ARRAY_FILTER_USE_KEY);
     }
@@ -80,7 +80,7 @@ final class UnifiedDiffOutputBuilderIntegrationTest extends \_PhpScopere015d8a32
             \escapeshellarg($this->fileFrom),
             \escapeshellarg($this->filePatch)
         );
-        $p = new \_PhpScopere015d8a3273c\Symfony\Component\Process\Process($command);
+        $p = new \_PhpScoper880bfa4d8b51\Symfony\Component\Process\Process($command);
         $p->run();
         $this->assertProcessSuccessful($p);
         $this->assertStringEqualsFile($this->fileFrom, $to, \sprintf('Patch command "%s".', $command));
@@ -93,11 +93,11 @@ final class UnifiedDiffOutputBuilderIntegrationTest extends \_PhpScopere015d8a32
         $this->assertNotFalse(\file_put_contents($this->fileFrom, $from));
         $this->assertNotFalse(\file_put_contents($this->filePatch, $diff));
         $command = \sprintf('git --git-dir %s apply --check -v --unsafe-paths --ignore-whitespace %s', \escapeshellarg($this->dir), \escapeshellarg($this->filePatch));
-        $p = new \_PhpScopere015d8a3273c\Symfony\Component\Process\Process($command);
+        $p = new \_PhpScoper880bfa4d8b51\Symfony\Component\Process\Process($command);
         $p->run();
         $this->assertProcessSuccessful($p);
     }
-    private function assertProcessSuccessful(\_PhpScopere015d8a3273c\Symfony\Component\Process\Process $p) : void
+    private function assertProcessSuccessful(\_PhpScoper880bfa4d8b51\Symfony\Component\Process\Process $p) : void
     {
         $this->assertTrue($p->isSuccessful(), \sprintf("Command exec. was not successful:\n\"%s\"\nOutput:\n\"%s\"\nStdErr:\n\"%s\"\nExit code %d.\n", $p->getCommandLine(), $p->getOutput(), $p->getErrorOutput(), $p->getExitCode()));
     }

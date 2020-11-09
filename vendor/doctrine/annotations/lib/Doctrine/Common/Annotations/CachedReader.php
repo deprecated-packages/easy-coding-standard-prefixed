@@ -17,16 +17,16 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScopere015d8a3273c\Doctrine\Common\Annotations;
+namespace _PhpScoper880bfa4d8b51\Doctrine\Common\Annotations;
 
-use _PhpScopere015d8a3273c\Doctrine\Common\Cache\Cache;
+use _PhpScoper880bfa4d8b51\Doctrine\Common\Cache\Cache;
 /**
  * A cache aware annotation reader.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
-final class CachedReader implements \_PhpScopere015d8a3273c\Doctrine\Common\Annotations\Reader
+final class CachedReader implements \_PhpScoper880bfa4d8b51\Doctrine\Common\Annotations\Reader
 {
     /**
      * @var string
@@ -55,7 +55,7 @@ final class CachedReader implements \_PhpScopere015d8a3273c\Doctrine\Common\Anno
      * @param Cache  $cache
      * @param bool   $debug
      */
-    public function __construct(\_PhpScopere015d8a3273c\Doctrine\Common\Annotations\Reader $reader, \_PhpScopere015d8a3273c\Doctrine\Common\Cache\Cache $cache, $debug = \false)
+    public function __construct(\_PhpScoper880bfa4d8b51\Doctrine\Common\Annotations\Reader $reader, \_PhpScoper880bfa4d8b51\Doctrine\Common\Cache\Cache $cache, $debug = \false)
     {
         $this->delegate = $reader;
         $this->cache = $cache;

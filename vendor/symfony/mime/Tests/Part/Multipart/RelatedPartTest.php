@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere015d8a3273c\Symfony\Component\Mime\Tests\Part\Multipart;
+namespace _PhpScoper880bfa4d8b51\Symfony\Component\Mime\Tests\Part\Multipart;
 
-use _PhpScopere015d8a3273c\PHPUnit\Framework\TestCase;
-use _PhpScopere015d8a3273c\Symfony\Component\Mime\Part\Multipart\RelatedPart;
-use _PhpScopere015d8a3273c\Symfony\Component\Mime\Part\TextPart;
-class RelatedPartTest extends \_PhpScopere015d8a3273c\PHPUnit\Framework\TestCase
+use _PhpScoper880bfa4d8b51\PHPUnit\Framework\TestCase;
+use _PhpScoper880bfa4d8b51\Symfony\Component\Mime\Part\Multipart\RelatedPart;
+use _PhpScoper880bfa4d8b51\Symfony\Component\Mime\Part\TextPart;
+class RelatedPartTest extends \_PhpScoper880bfa4d8b51\PHPUnit\Framework\TestCase
 {
     public function testConstructor()
     {
-        $r = new \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\Multipart\RelatedPart($a = new \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\TextPart('content'), $b = new \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\TextPart('HTML content', 'utf-8', 'html'), $c = new \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\TextPart('HTML content again', 'utf-8', 'html'));
+        $r = new \_PhpScoper880bfa4d8b51\Symfony\Component\Mime\Part\Multipart\RelatedPart($a = new \_PhpScoper880bfa4d8b51\Symfony\Component\Mime\Part\TextPart('content'), $b = new \_PhpScoper880bfa4d8b51\Symfony\Component\Mime\Part\TextPart('HTML content', 'utf-8', 'html'), $c = new \_PhpScoper880bfa4d8b51\Symfony\Component\Mime\Part\TextPart('HTML content again', 'utf-8', 'html'));
         $this->assertEquals('multipart', $r->getMediaType());
         $this->assertEquals('related', $r->getMediaSubtype());
         $this->assertEquals([$a, $b, $c], $r->getParts());

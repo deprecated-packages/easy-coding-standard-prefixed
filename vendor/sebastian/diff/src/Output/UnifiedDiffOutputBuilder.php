@@ -9,13 +9,13 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere015d8a3273c\SebastianBergmann\Diff\Output;
+namespace _PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Output;
 
-use _PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ;
+use _PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ;
 /**
  * Builds a diff string representation in unified diff format in chunks.
  */
-final class UnifiedDiffOutputBuilder extends \_PhpScopere015d8a3273c\SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
+final class UnifiedDiffOutputBuilder extends \_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
 {
     /**
      * @var bool
@@ -68,7 +68,7 @@ final class UnifiedDiffOutputBuilder extends \_PhpScopere015d8a3273c\SebastianBe
         if (0 === $diff[$upperLimit - 1][1]) {
             $lc = \substr($diff[$upperLimit - 1][0], -1);
             if ("\n" !== $lc) {
-                \array_splice($diff, $upperLimit, 0, [["\n\\ No newline at end of file\n", \_PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ::NO_LINE_END_EOF_WARNING]]);
+                \array_splice($diff, $upperLimit, 0, [["\n\\ No newline at end of file\n", \_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ::NO_LINE_END_EOF_WARNING]]);
             }
         } else {
             // search back for the last `+` and `-` line,
@@ -79,7 +79,7 @@ final class UnifiedDiffOutputBuilder extends \_PhpScopere015d8a3273c\SebastianBe
                     unset($toFind[$diff[$i][1]]);
                     $lc = \substr($diff[$i][0], -1);
                     if ("\n" !== $lc) {
-                        \array_splice($diff, $i + 1, 0, [["\n\\ No newline at end of file\n", \_PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ::NO_LINE_END_EOF_WARNING]]);
+                        \array_splice($diff, $i + 1, 0, [["\n\\ No newline at end of file\n", \_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ::NO_LINE_END_EOF_WARNING]]);
                     }
                     if (!\count($toFind)) {
                         break;
@@ -124,16 +124,16 @@ final class UnifiedDiffOutputBuilder extends \_PhpScopere015d8a3273c\SebastianBe
                 continue;
             }
             $sameCount = 0;
-            if ($entry[1] === \_PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ::NO_LINE_END_EOF_WARNING) {
+            if ($entry[1] === \_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ::NO_LINE_END_EOF_WARNING) {
                 continue;
             }
             if (\false === $hunkCapture) {
                 $hunkCapture = $i;
             }
-            if (\_PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ::ADDED === $entry[1]) {
+            if (\_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ::ADDED === $entry[1]) {
                 ++$toRange;
             }
-            if (\_PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ::REMOVED === $entry[1]) {
+            if (\_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ::REMOVED === $entry[1]) {
                 ++$fromRange;
             }
         }
@@ -166,13 +166,13 @@ final class UnifiedDiffOutputBuilder extends \_PhpScopere015d8a3273c\SebastianBe
             \fwrite($output, "@@ @@\n");
         }
         for ($i = $diffStartIndex; $i < $diffEndIndex; ++$i) {
-            if ($diff[$i][1] === \_PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ::ADDED) {
+            if ($diff[$i][1] === \_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ::ADDED) {
                 \fwrite($output, '+' . $diff[$i][0]);
-            } elseif ($diff[$i][1] === \_PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ::REMOVED) {
+            } elseif ($diff[$i][1] === \_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ::REMOVED) {
                 \fwrite($output, '-' . $diff[$i][0]);
-            } elseif ($diff[$i][1] === \_PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ::OLD) {
+            } elseif ($diff[$i][1] === \_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ::OLD) {
                 \fwrite($output, ' ' . $diff[$i][0]);
-            } elseif ($diff[$i][1] === \_PhpScopere015d8a3273c\SebastianBergmann\Diff\Differ::NO_LINE_END_EOF_WARNING) {
+            } elseif ($diff[$i][1] === \_PhpScoper880bfa4d8b51\SebastianBergmann\Diff\Differ::NO_LINE_END_EOF_WARNING) {
                 \fwrite($output, "\n");
                 // $diff[$i][0]
             } else {

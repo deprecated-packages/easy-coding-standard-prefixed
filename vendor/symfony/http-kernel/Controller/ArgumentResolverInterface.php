@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere015d8a3273c\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoper880bfa4d8b51\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScopere015d8a3273c\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper880bfa4d8b51\Symfony\Component\HttpFoundation\Request;
 /**
  * An ArgumentResolverInterface instance knows how to determine the
  * arguments for a specific action.
@@ -28,5 +28,5 @@ interface ArgumentResolverInterface
      *
      * @throws \RuntimeException When no value could be provided for a required argument
      */
-    public function getArguments(\_PhpScopere015d8a3273c\Symfony\Component\HttpFoundation\Request $request, $controller);
+    public function getArguments(\_PhpScoper880bfa4d8b51\Symfony\Component\HttpFoundation\Request $request, $controller);
 }
