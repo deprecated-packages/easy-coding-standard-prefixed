@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoperf5f75c22067b;
+namespace _PhpScopere015d8a3273c;
 
-return \_PhpScoperf5f75c22067b\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone \_PhpScoperf5f75c22067b\Symfony\Component\VarExporter\Internal\Registry::$prototypes['DateTime'] ?? \_PhpScoperf5f75c22067b\Symfony\Component\VarExporter\Internal\Registry::p('DateTime')], null, ['stdClass' => ['date' => ['1970-01-01 00:00:00.000000'], 'timezone_type' => [1], 'timezone' => ['+00:00']]], $o[0], [1 => 0]);
+return \_PhpScopere015d8a3273c\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone \_PhpScopere015d8a3273c\Symfony\Component\VarExporter\Internal\Registry::$prototypes['DateTime'] ?? \_PhpScopere015d8a3273c\Symfony\Component\VarExporter\Internal\Registry::p('DateTime')], null, ['stdClass' => ['date' => ['1970-01-01 00:00:00.000000'], 'timezone_type' => [1], 'timezone' => ['+00:00']]], $o[0], [1 => 0]);

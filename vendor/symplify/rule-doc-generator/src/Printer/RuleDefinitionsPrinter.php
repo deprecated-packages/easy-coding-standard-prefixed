@@ -25,7 +25,7 @@ final class RuleDefinitionsPrinter
             $markdownLines[] = '## ' . $ruleDefinition->getRuleShortClass();
             $markdownLines[] = $ruleDefinition->getDescription();
             $markdownLines[] = '- `' . $ruleDefinition->getRuleClass() . '`';
-            $codeSampleLines = $this->codeSamplesPrinter->print($ruleDefinition->getCodeSamples());
+            $codeSampleLines = $this->codeSamplesPrinter->print($ruleDefinition);
             $markdownLines = \array_merge($markdownLines, $codeSampleLines);
         }
         return $markdownLines;

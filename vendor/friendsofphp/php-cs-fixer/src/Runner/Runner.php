@@ -25,9 +25,9 @@ use PhpCsFixer\Linter\LinterInterface;
 use PhpCsFixer\Linter\LintingException;
 use PhpCsFixer\Linter\LintingResultInterface;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoperf5f75c22067b\Symfony\Component\EventDispatcher\Event;
-use _PhpScoperf5f75c22067b\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScoperf5f75c22067b\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScopere015d8a3273c\Symfony\Component\EventDispatcher\Event;
+use _PhpScopere015d8a3273c\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScopere015d8a3273c\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
@@ -73,7 +73,7 @@ final class Runner
      * @var bool
      */
     private $stopOnViolation;
-    public function __construct($finder, array $fixers, \PhpCsFixer\Differ\DifferInterface $differ, \_PhpScoperf5f75c22067b\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Error\ErrorsManager $errorsManager, \PhpCsFixer\Linter\LinterInterface $linter, $isDryRun, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager, \PhpCsFixer\Cache\DirectoryInterface $directory = null, $stopOnViolation = \false)
+    public function __construct($finder, array $fixers, \PhpCsFixer\Differ\DifferInterface $differ, \_PhpScopere015d8a3273c\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Error\ErrorsManager $errorsManager, \PhpCsFixer\Linter\LinterInterface $linter, $isDryRun, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager, \PhpCsFixer\Cache\DirectoryInterface $directory = null, $stopOnViolation = \false)
     {
         $this->finder = $finder;
         $this->fixers = $fixers;
@@ -173,7 +173,7 @@ final class Runner
             if (!$this->isDryRun) {
                 if (\false === @\file_put_contents($file->getRealPath(), $new)) {
                     $error = \error_get_last();
-                    throw new \_PhpScoperf5f75c22067b\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s", "%s".', $file->getPathname(), $error ? $error['message'] : 'no reason available'), 0, null, $file->getRealPath());
+                    throw new \_PhpScopere015d8a3273c\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s", "%s".', $file->getPathname(), $error ? $error['message'] : 'no reason available'), 0, null, $file->getRealPath());
                 }
             }
         }
@@ -195,13 +195,13 @@ final class Runner
     /**
      * @param string $name
      */
-    private function dispatchEvent($name, \_PhpScoperf5f75c22067b\Symfony\Component\EventDispatcher\Event $event)
+    private function dispatchEvent($name, \_PhpScopere015d8a3273c\Symfony\Component\EventDispatcher\Event $event)
     {
         if (null === $this->eventDispatcher) {
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoperf5f75c22067b\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScopere015d8a3273c\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

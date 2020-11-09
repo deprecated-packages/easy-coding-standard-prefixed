@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5f75c22067b\Symfony\Component\Process\Tests;
+namespace _PhpScopere015d8a3273c\Symfony\Component\Process\Tests;
 
-use _PhpScoperf5f75c22067b\PHPUnit\Framework\TestCase;
-use _PhpScoperf5f75c22067b\Symfony\Component\Process\ExecutableFinder;
+use _PhpScopere015d8a3273c\PHPUnit\Framework\TestCase;
+use _PhpScopere015d8a3273c\Symfony\Component\Process\ExecutableFinder;
 /**
  * @author Chris Smith <chris@cs278.org>
  */
-class ExecutableFinderTest extends \_PhpScoperf5f75c22067b\PHPUnit\Framework\TestCase
+class ExecutableFinderTest extends \_PhpScopere015d8a3273c\PHPUnit\Framework\TestCase
 {
     private $path;
     protected function tearDown()
@@ -36,7 +36,7 @@ class ExecutableFinderTest extends \_PhpScoperf5f75c22067b\PHPUnit\Framework\Tes
             $this->markTestSkipped('Cannot test when open_basedir is set');
         }
         $this->setPath(\dirname(\PHP_BINARY));
-        $finder = new \_PhpScoperf5f75c22067b\Symfony\Component\Process\ExecutableFinder();
+        $finder = new \_PhpScopere015d8a3273c\Symfony\Component\Process\ExecutableFinder();
         $result = $finder->find($this->getPhpBinaryName());
         $this->assertSamePath(\PHP_BINARY, $result);
     }
@@ -47,7 +47,7 @@ class ExecutableFinderTest extends \_PhpScoperf5f75c22067b\PHPUnit\Framework\Tes
         }
         $expected = 'defaultValue';
         $this->setPath('');
-        $finder = new \_PhpScoperf5f75c22067b\Symfony\Component\Process\ExecutableFinder();
+        $finder = new \_PhpScopere015d8a3273c\Symfony\Component\Process\ExecutableFinder();
         $result = $finder->find('foo', $expected);
         $this->assertEquals($expected, $result);
     }
@@ -58,7 +58,7 @@ class ExecutableFinderTest extends \_PhpScoperf5f75c22067b\PHPUnit\Framework\Tes
         }
         $this->setPath('');
         $extraDirs = array(\dirname(\PHP_BINARY));
-        $finder = new \_PhpScoperf5f75c22067b\Symfony\Component\Process\ExecutableFinder();
+        $finder = new \_PhpScopere015d8a3273c\Symfony\Component\Process\ExecutableFinder();
         $result = $finder->find($this->getPhpBinaryName(), null, $extraDirs);
         $this->assertSamePath(\PHP_BINARY, $result);
     }
@@ -71,7 +71,7 @@ class ExecutableFinderTest extends \_PhpScoperf5f75c22067b\PHPUnit\Framework\Tes
             $this->markTestSkipped('Cannot test when open_basedir is set');
         }
         $this->iniSet('open_basedir', \dirname(\PHP_BINARY) . (!\defined('HHVM_VERSION') || HHVM_VERSION_ID >= 30800 ? \PATH_SEPARATOR . '/' : ''));
-        $finder = new \_PhpScoperf5f75c22067b\Symfony\Component\Process\ExecutableFinder();
+        $finder = new \_PhpScopere015d8a3273c\Symfony\Component\Process\ExecutableFinder();
         $result = $finder->find($this->getPhpBinaryName());
         $this->assertSamePath(\PHP_BINARY, $result);
     }
@@ -85,7 +85,7 @@ class ExecutableFinderTest extends \_PhpScoperf5f75c22067b\PHPUnit\Framework\Tes
         }
         $this->setPath('');
         $this->iniSet('open_basedir', \PHP_BINARY . (!\defined('HHVM_VERSION') || HHVM_VERSION_ID >= 30800 ? \PATH_SEPARATOR . '/' : ''));
-        $finder = new \_PhpScoperf5f75c22067b\Symfony\Component\Process\ExecutableFinder();
+        $finder = new \_PhpScopere015d8a3273c\Symfony\Component\Process\ExecutableFinder();
         $result = $finder->find($this->getPhpBinaryName(), \false);
         $this->assertSamePath(\PHP_BINARY, $result);
     }

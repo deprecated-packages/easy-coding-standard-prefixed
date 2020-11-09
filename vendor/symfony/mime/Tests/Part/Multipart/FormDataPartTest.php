@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5f75c22067b\Symfony\Component\Mime\Tests\Part\Multipart;
+namespace _PhpScopere015d8a3273c\Symfony\Component\Mime\Tests\Part\Multipart;
 
-use _PhpScoperf5f75c22067b\PHPUnit\Framework\TestCase;
-use _PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\DataPart;
-use _PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\Multipart\FormDataPart;
-use _PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\TextPart;
-class FormDataPartTest extends \_PhpScoperf5f75c22067b\PHPUnit\Framework\TestCase
+use _PhpScopere015d8a3273c\PHPUnit\Framework\TestCase;
+use _PhpScopere015d8a3273c\Symfony\Component\Mime\Part\DataPart;
+use _PhpScopere015d8a3273c\Symfony\Component\Mime\Part\Multipart\FormDataPart;
+use _PhpScopere015d8a3273c\Symfony\Component\Mime\Part\TextPart;
+class FormDataPartTest extends \_PhpScopere015d8a3273c\PHPUnit\Framework\TestCase
 {
     public function testConstructor()
     {
-        $r = new \ReflectionProperty(\_PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\TextPart::class, 'encoding');
+        $r = new \ReflectionProperty(\_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\TextPart::class, 'encoding');
         $r->setAccessible(\true);
-        $b = new \_PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\TextPart('content');
-        $c = \_PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\DataPart::fromPath($file = __DIR__ . '/../../Fixtures/mimetypes/test.gif');
-        $f = new \_PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\Multipart\FormDataPart(['foo' => $content = 'very very long content that will not be cut even if the length i way more than 76 characters, ok?', 'bar' => clone $b, 'baz' => clone $c]);
+        $b = new \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\TextPart('content');
+        $c = \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\DataPart::fromPath($file = __DIR__ . '/../../Fixtures/mimetypes/test.gif');
+        $f = new \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\Multipart\FormDataPart(['foo' => $content = 'very very long content that will not be cut even if the length i way more than 76 characters, ok?', 'bar' => clone $b, 'baz' => clone $c]);
         $this->assertEquals('multipart', $f->getMediaType());
         $this->assertEquals('form-data', $f->getMediaSubtype());
-        $t = new \_PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\TextPart($content, 'utf-8', 'plain', '8bit');
+        $t = new \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\TextPart($content, 'utf-8', 'plain', '8bit');
         $t->setDisposition('form-data');
         $t->setName('foo');
         $t->getHeaders()->setMaxLineLength(\PHP_INT_MAX);
@@ -41,12 +41,12 @@ class FormDataPartTest extends \_PhpScoperf5f75c22067b\PHPUnit\Framework\TestCas
     }
     public function testToString()
     {
-        $p = \_PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\DataPart::fromPath($file = __DIR__ . '/../../Fixtures/mimetypes/test.gif');
+        $p = \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\DataPart::fromPath($file = __DIR__ . '/../../Fixtures/mimetypes/test.gif');
         $this->assertEquals(\base64_encode(\file_get_contents($file)), $p->bodyToString());
     }
     public function testContentLineLength()
     {
-        $f = new \_PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\Multipart\FormDataPart(['foo' => new \_PhpScoperf5f75c22067b\Symfony\Component\Mime\Part\DataPart($foo = \str_repeat('foo', 1000), 'foo.txt', 'text/plain'), 'bar' => $bar = \str_repeat('bar', 1000)]);
+        $f = new \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\Multipart\FormDataPart(['foo' => new \_PhpScopere015d8a3273c\Symfony\Component\Mime\Part\DataPart($foo = \str_repeat('foo', 1000), 'foo.txt', 'text/plain'), 'bar' => $bar = \str_repeat('bar', 1000)]);
         $parts = $f->getParts();
         $this->assertEquals($foo, $parts[0]->bodyToString());
         $this->assertEquals($bar, $parts[1]->bodyToString());

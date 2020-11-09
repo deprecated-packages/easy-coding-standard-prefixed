@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 /**
  * Resolves all parameter placeholders "%somevalue%" to their real values.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ResolveParameterPlaceHoldersPass extends \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveParameterPlaceHoldersPass extends \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $bag;
     private $resolveArrays;
@@ -31,7 +31,7 @@ class ResolveParameterPlaceHoldersPass extends \_PhpScoperf5f75c22067b\Symfony\C
      *
      * @throws ParameterNotFoundException
      */
-    public function process(\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->bag = $container->getParameterBag();
         try {
@@ -42,7 +42,7 @@ class ResolveParameterPlaceHoldersPass extends \_PhpScoperf5f75c22067b\Symfony\C
                 $aliases[$this->bag->resolveValue($name)] = $target;
             }
             $container->setAliases($aliases);
-        } catch (\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+        } catch (\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
             $e->setSourceId($this->currentId);
             throw $e;
         }
@@ -55,7 +55,7 @@ class ResolveParameterPlaceHoldersPass extends \_PhpScoperf5f75c22067b\Symfony\C
             $v = $this->bag->resolveValue($value);
             return $this->resolveArrays || !$v || !\is_array($v) ? $v : $value;
         }
-        if ($value instanceof \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Definition) {
+        if ($value instanceof \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Definition) {
             $value->setBindings($this->processValue($value->getBindings()));
             $changes = $value->getChanges();
             if (isset($changes['class'])) {

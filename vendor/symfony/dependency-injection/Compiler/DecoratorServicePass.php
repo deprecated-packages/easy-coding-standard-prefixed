@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Alias;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Reference;
 /**
  * Overwrites a service but keeps the overridden one.
  *
@@ -22,9 +22,9 @@ use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Reference;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Diego Saint Esteben <diego@saintesteben.me>
  */
-class DecoratorServicePass implements \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class DecoratorServicePass implements \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
-    public function process(\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $definitions = new \SplPriorityQueue();
         $order = \PHP_INT_MAX;
@@ -38,7 +38,7 @@ class DecoratorServicePass implements \_PhpScoperf5f75c22067b\Symfony\Component\
         foreach ($definitions as list($id, $definition)) {
             $decoratedService = $definition->getDecoratedService();
             list($inner, $renamedId) = $decoratedService;
-            $invalidBehavior = $decoratedService[3] ?? \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
+            $invalidBehavior = $decoratedService[3] ?? \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
             $definition->setDecoratedService(null);
             if (!$renamedId) {
                 $renamedId = $id . '.inner';
@@ -51,7 +51,7 @@ class DecoratorServicePass implements \_PhpScoperf5f75c22067b\Symfony\Component\
                 $alias = $container->getAlias($inner);
                 $public = $alias->isPublic();
                 $private = $alias->isPrivate();
-                $container->setAlias($renamedId, new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Alias((string) $alias, \false));
+                $container->setAlias($renamedId, new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Alias((string) $alias, \false));
             } elseif ($container->hasDefinition($inner)) {
                 $decoratedDefinition = $container->getDefinition($inner);
                 $public = $decoratedDefinition->isPublic();
@@ -59,14 +59,14 @@ class DecoratorServicePass implements \_PhpScoperf5f75c22067b\Symfony\Component\
                 $decoratedDefinition->setPublic(\false);
                 $container->setDefinition($renamedId, $decoratedDefinition);
                 $decoratingDefinitions[$inner] = $decoratedDefinition;
-            } elseif (\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE === $invalidBehavior) {
+            } elseif (\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE === $invalidBehavior) {
                 $container->removeDefinition($id);
                 continue;
-            } elseif (\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE === $invalidBehavior) {
+            } elseif (\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE === $invalidBehavior) {
                 $public = $definition->isPublic();
                 $private = $definition->isPrivate();
             } else {
-                throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($inner, $id);
+                throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($inner, $id);
             }
             if (isset($decoratingDefinitions[$inner])) {
                 $decoratingDefinition = $decoratingDefinitions[$inner];

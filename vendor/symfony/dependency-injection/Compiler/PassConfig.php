@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * Compiler Pass Configuration.
  *
@@ -33,12 +33,12 @@ class PassConfig
     private $removingPasses;
     public function __construct()
     {
-        $this->mergePass = new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass();
-        $this->beforeOptimizationPasses = [100 => [new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveClassPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\RegisterEnvVarProcessorsPass()], -1000 => [new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ExtensionCompilerPass()]];
-        $this->optimizationPasses = [[new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ValidateEnvPlaceholdersPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\RegisterServiceSubscribersPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveParameterPlaceHoldersPass(\false), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveFactoryClassPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveNamedArgumentsPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\CheckDefinitionValidityPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\AutowirePass(\false), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveTaggedIteratorArgumentPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveServiceSubscribersPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveReferencesToAliasesPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveInvalidReferencesPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(\true), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\CheckReferenceValidityPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\CheckArgumentsValidityPass(\false)]];
-        $this->beforeRemovingPasses = [-100 => [new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolvePrivatesPass()]];
-        $this->removingPasses = [[new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\RemovePrivateAliasesPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ReplaceAliasByActualDefinitionPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\RemoveUnusedDefinitionsPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass(new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass()), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\DefinitionErrorExceptionPass()]];
-        $this->afterRemovingPasses = [[new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\CheckExceptionOnInvalidReferenceBehaviorPass(), new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\ResolveHotPathPass()]];
+        $this->mergePass = new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass();
+        $this->beforeOptimizationPasses = [100 => [new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveClassPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\RegisterEnvVarProcessorsPass()], -1000 => [new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ExtensionCompilerPass()]];
+        $this->optimizationPasses = [[new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ValidateEnvPlaceholdersPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\RegisterServiceSubscribersPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveParameterPlaceHoldersPass(\false), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveFactoryClassPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveNamedArgumentsPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\CheckDefinitionValidityPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\AutowirePass(\false), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveTaggedIteratorArgumentPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveServiceSubscribersPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveReferencesToAliasesPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveInvalidReferencesPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(\true), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\CheckReferenceValidityPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\CheckArgumentsValidityPass(\false)]];
+        $this->beforeRemovingPasses = [-100 => [new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolvePrivatesPass()]];
+        $this->removingPasses = [[new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\RemovePrivateAliasesPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ReplaceAliasByActualDefinitionPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\RemoveAbstractDefinitionsPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\RemoveUnusedDefinitionsPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass(new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass()), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\DefinitionErrorExceptionPass()]];
+        $this->afterRemovingPasses = [[new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\CheckExceptionOnInvalidReferenceBehaviorPass(), new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\ResolveHotPathPass()]];
     }
     /**
      * Returns all passes in order to be processed.
@@ -57,11 +57,11 @@ class PassConfig
      *
      * @throws InvalidArgumentException when a pass type doesn't exist
      */
-    public function addPass(\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, $type = self::TYPE_BEFORE_OPTIMIZATION, int $priority = 0)
+    public function addPass(\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, $type = self::TYPE_BEFORE_OPTIMIZATION, int $priority = 0)
     {
         $property = $type . 'Passes';
         if (!isset($this->{$property})) {
-            throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid type "%s".', $type));
+            throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid type "%s".', $type));
         }
         $passes =& $this->{$property};
         if (!isset($passes[$priority])) {
@@ -123,7 +123,7 @@ class PassConfig
     {
         return $this->mergePass;
     }
-    public function setMergePass(\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass)
+    public function setMergePass(\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass)
     {
         $this->mergePass = $pass;
     }

@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\BaseNode;
-use _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
-use _PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\NodeInterface;
+use _PhpScopere015d8a3273c\Symfony\Component\Config\Definition\BaseNode;
+use _PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use _PhpScopere015d8a3273c\Symfony\Component\Config\Definition\NodeInterface;
 /**
  * This class provides a fluent interface for defining a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class NodeDefinition implements \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\NodeParentInterface
+abstract class NodeDefinition implements \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\NodeParentInterface
 {
     protected $name;
     protected $normalization;
@@ -32,10 +32,10 @@ abstract class NodeDefinition implements \_PhpScoperf5f75c22067b\Symfony\Compone
     protected $nullEquivalent;
     protected $trueEquivalent = \true;
     protected $falseEquivalent = \false;
-    protected $pathSeparator = \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR;
+    protected $pathSeparator = \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR;
     protected $parent;
     protected $attributes = [];
-    public function __construct(?string $name, \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
+    public function __construct(?string $name, \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         $this->parent = $parent;
         $this->name = $name;
@@ -45,7 +45,7 @@ abstract class NodeDefinition implements \_PhpScoperf5f75c22067b\Symfony\Compone
      *
      * @return $this
      */
-    public function setParent(\_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent)
+    public function setParent(\_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent)
     {
         $this->parent = $parent;
         return $this;
@@ -107,10 +107,10 @@ abstract class NodeDefinition implements \_PhpScoperf5f75c22067b\Symfony\Compone
             $this->parent = null;
         }
         if (null !== $this->normalization) {
-            $this->normalization->before = \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->normalization->before);
+            $this->normalization->before = \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->normalization->before);
         }
         if (null !== $this->validation) {
-            $this->validation->rules = \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->validation->rules);
+            $this->validation->rules = \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\ExprBuilder::buildExpressions($this->validation->rules);
         }
         $node = $this->createNode();
         $node->setAttributes($this->attributes);
@@ -269,7 +269,7 @@ abstract class NodeDefinition implements \_PhpScoperf5f75c22067b\Symfony\Compone
     protected function validation()
     {
         if (null === $this->validation) {
-            $this->validation = new \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\ValidationBuilder($this);
+            $this->validation = new \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\ValidationBuilder($this);
         }
         return $this->validation;
     }
@@ -281,7 +281,7 @@ abstract class NodeDefinition implements \_PhpScoperf5f75c22067b\Symfony\Compone
     protected function merge()
     {
         if (null === $this->merge) {
-            $this->merge = new \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\MergeBuilder($this);
+            $this->merge = new \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\MergeBuilder($this);
         }
         return $this->merge;
     }
@@ -293,7 +293,7 @@ abstract class NodeDefinition implements \_PhpScoperf5f75c22067b\Symfony\Compone
     protected function normalization()
     {
         if (null === $this->normalization) {
-            $this->normalization = new \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\NormalizationBuilder($this);
+            $this->normalization = new \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\NormalizationBuilder($this);
         }
         return $this->normalization;
     }
@@ -312,13 +312,13 @@ abstract class NodeDefinition implements \_PhpScoperf5f75c22067b\Symfony\Compone
      */
     public function setPathSeparator(string $separator)
     {
-        if ($this instanceof \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface) {
+        if ($this instanceof \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface) {
             if (\method_exists($this, 'getChildNodeDefinitions')) {
                 foreach ($this->getChildNodeDefinitions() as $child) {
                     $child->setPathSeparator($separator);
                 }
             } else {
-                @\trigger_error(\sprintf('Not implementing the "%s::getChildNodeDefinitions()" method in "%s" is deprecated since Symfony 4.1.', \_PhpScoperf5f75c22067b\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface::class, \get_class($this)), \E_USER_DEPRECATED);
+                @\trigger_error(\sprintf('Not implementing the "%s::getChildNodeDefinitions()" method in "%s" is deprecated since Symfony 4.1.', \_PhpScopere015d8a3273c\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface::class, \get_class($this)), \E_USER_DEPRECATED);
             }
         }
         $this->pathSeparator = $separator;

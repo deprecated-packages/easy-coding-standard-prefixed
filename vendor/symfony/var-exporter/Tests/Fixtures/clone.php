@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoperf5f75c22067b;
+namespace _PhpScopere015d8a3273c;
 
-return \_PhpScoperf5f75c22067b\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [(($f =& \_PhpScoperf5f75c22067b\Symfony\Component\VarExporter\Internal\Registry::$factories)['Symfony\\Component\\VarExporter\\Tests\\MyCloneable'] ?? \_PhpScoperf5f75c22067b\Symfony\Component\VarExporter\Internal\Registry::f('_PhpScoperf5f75c22067b\\Symfony\\Component\\VarExporter\\Tests\\MyCloneable'))(), ($f['Symfony\\Component\\VarExporter\\Tests\\MyNotCloneable'] ?? \_PhpScoperf5f75c22067b\Symfony\Component\VarExporter\Internal\Registry::f('_PhpScoperf5f75c22067b\\Symfony\\Component\\VarExporter\\Tests\\MyNotCloneable'))()], null, [], [$o[0], $o[1]], []);
+return \_PhpScopere015d8a3273c\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [(($f =& \_PhpScopere015d8a3273c\Symfony\Component\VarExporter\Internal\Registry::$factories)['Symfony\\Component\\VarExporter\\Tests\\MyCloneable'] ?? \_PhpScopere015d8a3273c\Symfony\Component\VarExporter\Internal\Registry::f('_PhpScopere015d8a3273c\\Symfony\\Component\\VarExporter\\Tests\\MyCloneable'))(), ($f['Symfony\\Component\\VarExporter\\Tests\\MyNotCloneable'] ?? \_PhpScopere015d8a3273c\Symfony\Component\VarExporter\Internal\Registry::f('_PhpScopere015d8a3273c\\Symfony\\Component\\VarExporter\\Tests\\MyNotCloneable'))()], null, [], [$o[0], $o[1]], []);

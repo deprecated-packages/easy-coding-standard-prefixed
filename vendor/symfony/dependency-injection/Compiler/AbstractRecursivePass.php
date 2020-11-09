@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\LogicException;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use _PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperf5f75c22067b\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use _PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopere015d8a3273c\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-abstract class AbstractRecursivePass implements \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+abstract class AbstractRecursivePass implements \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * @var ContainerBuilder
@@ -34,7 +34,7 @@ abstract class AbstractRecursivePass implements \_PhpScoperf5f75c22067b\Symfony\
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->container = $container;
         try {
@@ -74,11 +74,11 @@ abstract class AbstractRecursivePass implements \_PhpScoperf5f75c22067b\Symfony\
                     $value[$k] = $processedValue;
                 }
             }
-        } elseif ($value instanceof \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
+        } elseif ($value instanceof \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
             $value->setValues($this->processValue($value->getValues()));
-        } elseif ($value instanceof \_PhpScoperf5f75c22067b\Symfony\Component\ExpressionLanguage\Expression && $this->processExpressions) {
+        } elseif ($value instanceof \_PhpScopere015d8a3273c\Symfony\Component\ExpressionLanguage\Expression && $this->processExpressions) {
             $this->getExpressionLanguage()->compile((string) $value, ['this' => 'container']);
-        } elseif ($value instanceof \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Definition) {
+        } elseif ($value instanceof \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Definition) {
             $value->setArguments($this->processValue($value->getArguments()));
             $value->setProperties($this->processValue($value->getProperties()));
             $value->setMethodCalls($this->processValue($value->getMethodCalls()));
@@ -99,14 +99,14 @@ abstract class AbstractRecursivePass implements \_PhpScoperf5f75c22067b\Symfony\
      *
      * @throws RuntimeException
      */
-    protected function getConstructor(\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Definition $definition, $required)
+    protected function getConstructor(\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Definition $definition, $required)
     {
         if ($definition->isSynthetic()) {
             return null;
         }
         if (\is_string($factory = $definition->getFactory())) {
             if (!\function_exists($factory)) {
-                throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": function "%s" does not exist.', $this->currentId, $factory));
+                throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": function "%s" does not exist.', $this->currentId, $factory));
             }
             $r = new \ReflectionFunction($factory);
             if (\false !== $r->getFileName() && \file_exists($r->getFileName())) {
@@ -116,32 +116,32 @@ abstract class AbstractRecursivePass implements \_PhpScoperf5f75c22067b\Symfony\
         }
         if ($factory) {
             list($class, $method) = $factory;
-            if ($class instanceof \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Reference) {
+            if ($class instanceof \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Reference) {
                 $class = $this->container->findDefinition((string) $class)->getClass();
-            } elseif ($class instanceof \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Definition) {
+            } elseif ($class instanceof \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Definition) {
                 $class = $class->getClass();
             } elseif (null === $class) {
                 $class = $definition->getClass();
             }
             if ('__construct' === $method) {
-                throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": "__construct()" cannot be used as a factory method.', $this->currentId));
+                throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": "__construct()" cannot be used as a factory method.', $this->currentId));
             }
-            return $this->getReflectionMethod(new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Definition($class), $method);
+            return $this->getReflectionMethod(new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Definition($class), $method);
         }
         $class = $definition->getClass();
         try {
             if (!($r = $this->container->getReflectionClass($class))) {
-                throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": class "%s" does not exist.', $this->currentId, $class));
+                throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": class "%s" does not exist.', $this->currentId, $class));
             }
         } catch (\ReflectionException $e) {
-            throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": %s.', $this->currentId, \lcfirst(\rtrim($e->getMessage(), '.'))));
+            throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": %s.', $this->currentId, \lcfirst(\rtrim($e->getMessage(), '.'))));
         }
         if (!($r = $r->getConstructor())) {
             if ($required) {
-                throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": class%s has no constructor.', $this->currentId, \sprintf($class !== $this->currentId ? ' "%s"' : '', $class)));
+                throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": class%s has no constructor.', $this->currentId, \sprintf($class !== $this->currentId ? ' "%s"' : '', $class)));
             }
         } elseif (!$r->isPublic()) {
-            throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": %s must be public.', $this->currentId, \sprintf($class !== $this->currentId ? 'constructor of class "%s"' : 'its constructor', $class)));
+            throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": %s must be public.', $this->currentId, \sprintf($class !== $this->currentId ? 'constructor of class "%s"' : 'its constructor', $class)));
         }
         return $r;
     }
@@ -152,41 +152,41 @@ abstract class AbstractRecursivePass implements \_PhpScoperf5f75c22067b\Symfony\
      *
      * @return \ReflectionFunctionAbstract
      */
-    protected function getReflectionMethod(\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Definition $definition, $method)
+    protected function getReflectionMethod(\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Definition $definition, $method)
     {
         if ('__construct' === $method) {
             return $this->getConstructor($definition, \true);
         }
         if (!($class = $definition->getClass())) {
-            throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": the class is not set.', $this->currentId));
+            throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": the class is not set.', $this->currentId));
         }
         if (!($r = $this->container->getReflectionClass($class))) {
-            throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": class "%s" does not exist.', $this->currentId, $class));
+            throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": class "%s" does not exist.', $this->currentId, $class));
         }
         if (!$r->hasMethod($method)) {
-            throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": method "%s()" does not exist.', $this->currentId, $class !== $this->currentId ? $class . '::' . $method : $method));
+            throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": method "%s()" does not exist.', $this->currentId, $class !== $this->currentId ? $class . '::' . $method : $method));
         }
         $r = $r->getMethod($method);
         if (!$r->isPublic()) {
-            throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": method "%s()" must be public.', $this->currentId, $class !== $this->currentId ? $class . '::' . $method : $method));
+            throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid service "%s": method "%s()" must be public.', $this->currentId, $class !== $this->currentId ? $class . '::' . $method : $method));
         }
         return $r;
     }
-    private function getExpressionLanguage() : \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ExpressionLanguage
+    private function getExpressionLanguage() : \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ExpressionLanguage
     {
         if (null === $this->expressionLanguage) {
-            if (!\class_exists(\_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ExpressionLanguage::class)) {
-                throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\LogicException('Unable to use expressions as the Symfony ExpressionLanguage component is not installed.');
+            if (!\class_exists(\_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ExpressionLanguage::class)) {
+                throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\LogicException('Unable to use expressions as the Symfony ExpressionLanguage component is not installed.');
             }
             $providers = $this->container->getExpressionLanguageProviders();
-            $this->expressionLanguage = new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\ExpressionLanguage(null, $providers, function (string $arg) : string {
+            $this->expressionLanguage = new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\ExpressionLanguage(null, $providers, function (string $arg) : string {
                 if ('""' === \substr_replace($arg, '', 1, -1)) {
                     $id = \stripcslashes(\substr($arg, 1, -1));
                     $this->inExpression = \true;
-                    $arg = $this->processValue(new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Reference($id));
+                    $arg = $this->processValue(new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Reference($id));
                     $this->inExpression = \false;
-                    if (!$arg instanceof \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Reference) {
-                        throw new \_PhpScoperf5f75c22067b\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('"%s::processValue()" must return a Reference when processing an expression, %s returned for service("%s").', \get_class($this), \is_object($arg) ? \get_class($arg) : \gettype($arg), $id));
+                    if (!$arg instanceof \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Reference) {
+                        throw new \_PhpScopere015d8a3273c\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('"%s::processValue()" must return a Reference when processing an expression, %s returned for service("%s").', \get_class($this), \is_object($arg) ? \get_class($arg) : \gettype($arg), $id));
                     }
                     $arg = \sprintf('"%s"', $arg);
                 }

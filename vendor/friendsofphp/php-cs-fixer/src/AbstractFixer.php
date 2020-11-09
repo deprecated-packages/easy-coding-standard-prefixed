@@ -24,8 +24,8 @@ use PhpCsFixer\FixerConfiguration\DeprecatedFixerOption;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\InvalidOptionsForEnvException;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoperf5f75c22067b\Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
-use _PhpScoperf5f75c22067b\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
+use _PhpScopere015d8a3273c\Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
+use _PhpScopere015d8a3273c\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -125,11 +125,11 @@ abstract class AbstractFixer implements \PhpCsFixer\Fixer\FixerInterface, \PhpCs
         }
         try {
             $this->configuration = $this->getConfigurationDefinition()->resolve($configuration);
-        } catch (\_PhpScoperf5f75c22067b\Symfony\Component\OptionsResolver\Exception\MissingOptionsException $exception) {
+        } catch (\_PhpScopere015d8a3273c\Symfony\Component\OptionsResolver\Exception\MissingOptionsException $exception) {
             throw new \PhpCsFixer\ConfigurationException\RequiredFixerConfigurationException($this->getName(), \sprintf('Missing required configuration: %s', $exception->getMessage()), $exception);
         } catch (\PhpCsFixer\FixerConfiguration\InvalidOptionsForEnvException $exception) {
             throw new \PhpCsFixer\ConfigurationException\InvalidForEnvFixerConfigurationException($this->getName(), \sprintf('Invalid configuration for env: %s', $exception->getMessage()), $exception);
-        } catch (\_PhpScoperf5f75c22067b\Symfony\Component\OptionsResolver\Exception\ExceptionInterface $exception) {
+        } catch (\_PhpScopere015d8a3273c\Symfony\Component\OptionsResolver\Exception\ExceptionInterface $exception) {
             throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($this->getName(), \sprintf('Invalid configuration: %s', $exception->getMessage()), $exception);
         }
     }

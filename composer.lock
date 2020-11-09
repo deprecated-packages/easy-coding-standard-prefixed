@@ -3292,7 +3292,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "5110973b0a8853f1fc797348fbdff043a92de082"
+                "reference": "c16f030483b6c3e139b5d4b43e3808fdb8a29b08"
             },
             "require": {
                 "nette/robot-loader": "^3.2",
@@ -3303,6 +3303,7 @@
                 "symplify/symplify-kernel": "dev-master"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
                 "phpstan/phpstan": "^0.12.40",
                 "phpunit/phpunit": "^8.5|^9.4"
             },

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScopere015d8a3273c\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperf5f75c22067b\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use _PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\HttpCache\HttpCache;
-use _PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
-use _PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScopere015d8a3273c\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScopere015d8a3273c\Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use _PhpScopere015d8a3273c\Symfony\Component\HttpKernel\HttpCache\HttpCache;
+use _PhpScopere015d8a3273c\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
+use _PhpScopere015d8a3273c\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * SurrogateListener adds a Surrogate-Control HTTP header when the Response needs to be parsed for Surrogates.
  *
@@ -22,24 +22,24 @@ use _PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @final since Symfony 4.3
  */
-class SurrogateListener implements \_PhpScoperf5f75c22067b\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class SurrogateListener implements \_PhpScopere015d8a3273c\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $surrogate;
-    public function __construct(\_PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate = null)
+    public function __construct(\_PhpScopere015d8a3273c\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate = null)
     {
         $this->surrogate = $surrogate;
     }
     /**
      * Filters the Response.
      */
-    public function onKernelResponse(\_PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\Event\FilterResponseEvent $event)
+    public function onKernelResponse(\_PhpScopere015d8a3273c\Symfony\Component\HttpKernel\Event\FilterResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
         }
         $kernel = $event->getKernel();
         $surrogate = $this->surrogate;
-        if ($kernel instanceof \_PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\HttpCache\HttpCache) {
+        if ($kernel instanceof \_PhpScopere015d8a3273c\Symfony\Component\HttpKernel\HttpCache\HttpCache) {
             $surrogate = $kernel->getSurrogate();
             if (null !== $this->surrogate && $this->surrogate->getName() !== $surrogate->getName()) {
                 $surrogate = $this->surrogate;
@@ -52,6 +52,6 @@ class SurrogateListener implements \_PhpScoperf5f75c22067b\Symfony\Component\Eve
     }
     public static function getSubscribedEvents()
     {
-        return [\_PhpScoperf5f75c22067b\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => 'onKernelResponse'];
+        return [\_PhpScopere015d8a3273c\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => 'onKernelResponse'];
     }
 }
