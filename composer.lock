@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87eefdbd46c2c500c11bab739936b9e8",
+    "content-hash": "a2ef8a3b9fa230bf64fbfe04cfa41fd8",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -3401,6 +3401,52 @@
             }
         },
         {
+            "name": "symplify/composer-json-manipulator",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../../packages/composer-json-manipulator",
+                "reference": "86b5dc98e6d8a488bb7914072038dd64aa610231"
+            },
+            "require": {
+                "nette/utils": "^3.0",
+                "php": ">=7.2",
+                "symfony/config": "^4.4|^5.1",
+                "symfony/dependency-injection": "^4.4|^5.1",
+                "symfony/filesystem": "^4.4|^5.1",
+                "symfony/http-kernel": "^4.4|^5.1",
+                "symplify/package-builder": "dev-master",
+                "symplify/smart-file-system": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5|^9.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "8.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symplify\\ComposerJsonManipulator\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Package to load, merge and save composer.json file(s)",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            }
+        },
+        {
             "name": "symplify/console-color-diff",
             "version": "dev-master",
             "dist": {
@@ -3539,10 +3585,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/package-builder",
-                "reference": "aef44d7dfb02e7b09878a041f5629232b4127a7f"
+                "reference": "e34436a569b581d0ab79617278f2e65eed088cdc"
             },
             "require": {
                 "nette/finder": "^2.5",
+                "nette/neon": "^3.2",
                 "nette/utils": "^3.0",
                 "php": ">=7.2",
                 "symfony/config": "^4.4|^5.1",
@@ -3588,7 +3635,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "a2ccc5a752849c1942f52d8f1ce78940ca6af37d"
+                "reference": "28c66edee574f12dcf14b592f9bd5e87951e4baf"
             },
             "require": {
                 "migrify/php-config-printer": "^0.3.50",
@@ -3598,6 +3645,7 @@
                 "symfony/console": "^4.4|^5.1",
                 "symfony/dependency-injection": "^4.4|^5.1",
                 "symplify/markdown-diff": "dev-master",
+                "symplify/package-builder": "dev-master",
                 "symplify/symplify-kernel": "dev-master"
             },
             "require-dev": {
@@ -3777,7 +3825,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/symplify-kernel",
-                "reference": "9db36c72aa99eedda1ad6cbc3a863f34bff13e64"
+                "reference": "b0e7e3d2a4ec988943bba59ffb8e726f126a0ea4"
             },
             "require": {
                 "php": ">=7.2",
@@ -3785,6 +3833,7 @@
                 "symfony/dependency-injection": "^4.4|^5.1",
                 "symfony/http-kernel": "^4.4|^5.1",
                 "symplify/autowire-array-parameter": "dev-master",
+                "symplify/composer-json-manipulator": "dev-master",
                 "symplify/package-builder": "dev-master",
                 "symplify/smart-file-system": "dev-master"
             },

@@ -26,6 +26,17 @@ final class RuleDefinitionsResolver
             $ruleDefinition->setRuleClass($className);
             $ruleDefinitions[] = $ruleDefinition;
         }
+        return $this->sortByClassName($ruleDefinitions);
+    }
+    /**
+     * @param RuleDefinition[] $ruleDefinitions
+     * @return RuleDefinition[]
+     */
+    private function sortByClassName(array $ruleDefinitions) : array
+    {
+        \usort($ruleDefinitions, function (\Symplify\RuleDocGenerator\ValueObject\RuleDefinition $firstRuleDefinition, \Symplify\RuleDocGenerator\ValueObject\RuleDefinition $secondRuleDefinition) : int {
+            return $firstRuleDefinition->getRuleShortClass() <=> $secondRuleDefinition->getRuleShortClass();
+        });
         return $ruleDefinitions;
     }
 }

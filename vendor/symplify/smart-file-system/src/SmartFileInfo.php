@@ -3,14 +3,16 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem;
 
-use _PhpScoper836bc32aecc2\Nette\Utils\Strings;
-use _PhpScoper836bc32aecc2\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper0c236037eb04\Nette\Utils\Strings;
+use _PhpScoper0c236037eb04\Symfony\Component\Finder\SplFileInfo;
+use Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
+use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 /**
  * @see \Symplify\SmartFileSystem\Tests\SmartFileInfo\SmartFileInfoTest
  */
-final class SmartFileInfo extends \_PhpScoper836bc32aecc2\Symfony\Component\Finder\SplFileInfo
+final class SmartFileInfo extends \_PhpScoper0c236037eb04\Symfony\Component\Finder\SplFileInfo
 {
     /**
      * @var string
@@ -29,7 +31,7 @@ final class SmartFileInfo extends \_PhpScoper836bc32aecc2\Symfony\Component\Find
             throw new \Symplify\SmartFileSystem\Exception\FileNotFoundException(\sprintf('File path "%s" was not found while creating "%s" object.', $filePath, self::class));
         }
         // real path doesn't work in PHAR: https://www.php.net/manual/en/function.realpath.php
-        if (\_PhpScoper836bc32aecc2\Nette\Utils\Strings::startsWith($filePath, 'phar://')) {
+        if (\_PhpScoper0c236037eb04\Nette\Utils\Strings::startsWith($filePath, 'phar://')) {
             $relativeFilePath = $filePath;
             $relativeDirectoryPath = \dirname($filePath);
         } else {
@@ -53,7 +55,7 @@ final class SmartFileInfo extends \_PhpScoper836bc32aecc2\Symfony\Component\Find
     }
     public function getRealPathWithoutSuffix() : string
     {
-        return \_PhpScoper836bc32aecc2\Nette\Utils\Strings::replace($this->getRealPath(), self::LAST_SUFFIX_REGEX, '');
+        return \_PhpScoper0c236037eb04\Nette\Utils\Strings::replace($this->getRealPath(), self::LAST_SUFFIX_REGEX, '');
     }
     public function getRelativeFilePath() : string
     {
@@ -70,13 +72,21 @@ final class SmartFileInfo extends \_PhpScoper836bc32aecc2\Symfony\Component\Find
         }
         return \rtrim($this->smartFileSystem->makePathRelative($this->getNormalizedRealPath(), (string) \realpath($directory)), '/');
     }
+    public function getRelativeFilePathFromCwdInTests() : string
+    {
+        // special case for tests
+        if (\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment::isPHPUnitRun()) {
+            return $this->getRelativeFilePathFromDirectory(\Symplify\EasyTesting\StaticFixtureSplitter::getTemporaryPath());
+        }
+        return $this->getRelativeFilePathFromDirectory(\getcwd());
+    }
     public function getRelativeFilePathFromCwd() : string
     {
         return $this->getRelativeFilePathFromDirectory(\getcwd());
     }
     public function endsWith(string $string) : bool
     {
-        return \_PhpScoper836bc32aecc2\Nette\Utils\Strings::endsWith($this->getNormalizedRealPath(), $string);
+        return \_PhpScoper0c236037eb04\Nette\Utils\Strings::endsWith($this->getNormalizedRealPath(), $string);
     }
     public function doesFnmatch(string $string) : bool
     {
@@ -90,6 +100,10 @@ final class SmartFileInfo extends \_PhpScoper836bc32aecc2\Symfony\Component\Find
     {
         // for phar compatibility @see https://github.com/rectorphp/rector/commit/e5d7cee69558f7e6b35d995a5ca03fa481b0407c
         return parent::getRealPath() ?: $this->getPathname();
+    }
+    public function getRealPathDirectory() : string
+    {
+        return \dirname($this->getRealPath());
     }
     private function getNormalizedRealPath() : string
     {

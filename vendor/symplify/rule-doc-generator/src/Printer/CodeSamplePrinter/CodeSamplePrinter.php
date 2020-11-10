@@ -5,6 +5,7 @@ namespace Symplify\RuleDocGenerator\Printer\CodeSamplePrinter;
 
 use Symplify\MarkdownDiff\Differ\MarkdownDiffer;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
+use Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class CodeSamplePrinter
@@ -17,10 +18,15 @@ final class CodeSamplePrinter
      * @var ConfiguredCodeSamplePrinter
      */
     private $configuredCodeSamplePrinter;
-    public function __construct(\Symplify\MarkdownDiff\Differ\MarkdownDiffer $markdownDiffer, \Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\ConfiguredCodeSamplePrinter $configuredCodeSamplePrinter)
+    /**
+     * @var MarkdownCodeWrapper
+     */
+    private $markdownCodeWrapper;
+    public function __construct(\Symplify\MarkdownDiff\Differ\MarkdownDiffer $markdownDiffer, \Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\ConfiguredCodeSamplePrinter $configuredCodeSamplePrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper)
     {
         $this->markdownDiffer = $markdownDiffer;
         $this->configuredCodeSamplePrinter = $configuredCodeSamplePrinter;
+        $this->markdownCodeWrapper = $markdownCodeWrapper;
     }
     /**
      * @return string[]
@@ -51,9 +57,10 @@ final class CodeSamplePrinter
     private function printGoodBadCodeSample(\Symplify\RuleDocGenerator\Contract\CodeSampleInterface $codeSample) : array
     {
         $lines = [];
-        $lines[] = $this->printPhpCode($codeSample->getGoodCode());
+        $lines[] = $this->markdownCodeWrapper->printPhpCode($codeSample->getGoodCode());
         $lines[] = ':x:';
-        $lines[] = $this->printPhpCode($codeSample->getBadCode());
+        $lines[] = '<br>';
+        $lines[] = $this->markdownCodeWrapper->printPhpCode($codeSample->getBadCode());
         $lines[] = ':+1:';
         return $lines;
     }
@@ -65,13 +72,5 @@ final class CodeSamplePrinter
         $lines = [];
         $lines[] = $this->markdownDiffer->diff($codeSample->getGoodCode(), $codeSample->getBadCode());
         return $lines;
-    }
-    private function printPhpCode(string $content) : string
-    {
-        return $this->printCodeWrapped($content, 'php');
-    }
-    private function printCodeWrapped(string $content, string $format) : string
-    {
-        return \sprintf('```%s%s%s%s```', $format, \PHP_EOL, \rtrim($content), \PHP_EOL) . \PHP_EOL;
     }
 }

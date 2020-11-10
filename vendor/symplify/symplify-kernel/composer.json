@@ -9,6 +9,7 @@
         "symfony\/dependency-injection": "^4.4|^5.1",
         "symplify\/smart-file-system": "dev-master",
         "symplify\/autowire-array-parameter": "dev-master",
+        "symplify\/composer-json-manipulator": "dev-master",
         "symplify\/package-builder": "dev-master"
     },
     "require-dev": {

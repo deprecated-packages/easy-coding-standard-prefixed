@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper836bc32aecc2\Psr\SimpleCache;
+namespace _PhpScoper0c236037eb04\Psr\SimpleCache;
 
 /**
  * Interface used for all types of exceptions thrown by the implementing library.

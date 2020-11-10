@@ -15,6 +15,13 @@ final class StaticFixtureUpdater
         $newOriginalContent = self::resolveNewFixtureContent($originalFileInfo, $changedContent);
         self::getSmartFileSystem()->dumpFile($fixtureFileInfo->getRealPath(), $newOriginalContent);
     }
+    public static function updateExpectedFixtureContent(string $newOriginalContent, \Symplify\SmartFileSystem\SmartFileInfo $expectedFixtureFileInfo) : void
+    {
+        if (!\getenv('UPDATE_TESTS') && !\getenv('UT')) {
+            return;
+        }
+        self::getSmartFileSystem()->dumpFile($expectedFixtureFileInfo->getRealPath(), $newOriginalContent);
+    }
     private static function getSmartFileSystem() : \Symplify\SmartFileSystem\SmartFileSystem
     {
         return new \Symplify\SmartFileSystem\SmartFileSystem();

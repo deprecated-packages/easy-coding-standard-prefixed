@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper836bc32aecc2\Migrify\MigrifyKernel\Console;
+namespace _PhpScoper0c236037eb04\Migrify\MigrifyKernel\Console;
 
-use _PhpScoper836bc32aecc2\Symfony\Component\Console\Application;
-use _PhpScoper836bc32aecc2\Symfony\Component\Console\Command\Command;
-final class CommandAwareConsoleApplication extends \_PhpScoper836bc32aecc2\Symfony\Component\Console\Application
+use _PhpScoper0c236037eb04\Symfony\Component\Console\Application;
+use _PhpScoper0c236037eb04\Symfony\Component\Console\Command\Command;
+final class CommandAwareConsoleApplication extends \_PhpScoper0c236037eb04\Symfony\Component\Console\Application
 {
     /**
      * @param Command[] $commands

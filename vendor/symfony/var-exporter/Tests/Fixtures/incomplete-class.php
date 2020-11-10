@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoper836bc32aecc2;
+namespace _PhpScoper0c236037eb04;
 
-return \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Internal\Registry::unserialize([], ['O:20:"SomeNotExistingClass":0:{}']), null, [], $o[0], []);
+return \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Internal\Registry::unserialize([], ['O:20:"SomeNotExistingClass":0:{}']), null, [], $o[0], []);

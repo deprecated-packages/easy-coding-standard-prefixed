@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests;
+namespace _PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests;
 
-use _PhpScoper836bc32aecc2\PHPUnit\Framework\TestCase;
-use _PhpScoper836bc32aecc2\Symfony\Component\VarDumper\Test\VarDumperTestTrait;
-use _PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Internal\Registry;
-use _PhpScoper836bc32aecc2\Symfony\Component\VarExporter\VarExporter;
-class VarExporterTest extends \_PhpScoper836bc32aecc2\PHPUnit\Framework\TestCase
+use _PhpScoper0c236037eb04\PHPUnit\Framework\TestCase;
+use _PhpScoper0c236037eb04\Symfony\Component\VarDumper\Test\VarDumperTestTrait;
+use _PhpScoper0c236037eb04\Symfony\Component\VarExporter\Internal\Registry;
+use _PhpScoper0c236037eb04\Symfony\Component\VarExporter\VarExporter;
+class VarExporterTest extends \_PhpScoper0c236037eb04\PHPUnit\Framework\TestCase
 {
     use VarDumperTestTrait;
     /**
@@ -25,7 +25,7 @@ class VarExporterTest extends \_PhpScoper836bc32aecc2\PHPUnit\Framework\TestCase
     {
         $unserializeCallback = \ini_set('unserialize_callback_func', 'var_dump');
         try {
-            \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Internal\Registry::unserialize(array(), array('O:20:"SomeNotExistingClass":0:{}'));
+            \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Internal\Registry::unserialize(array(), array('O:20:"SomeNotExistingClass":0:{}'));
         } finally {
             $this->assertSame('var_dump', \ini_set('unserialize_callback_func', $unserializeCallback));
         }
@@ -39,7 +39,7 @@ class VarExporterTest extends \_PhpScoper836bc32aecc2\PHPUnit\Framework\TestCase
     {
         $expectedDump = $this->getDump($value);
         try {
-            \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\VarExporter::export($value);
+            \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\VarExporter::export($value);
         } finally {
             $this->assertDumpEquals(\rtrim($expectedDump), $value);
         }
@@ -76,7 +76,7 @@ class VarExporterTest extends \_PhpScoper836bc32aecc2\PHPUnit\Framework\TestCase
     {
         $dumpedValue = $this->getDump($value);
         $isStaticValue = \true;
-        $marshalledValue = \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
+        $marshalledValue = \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
         $this->assertSame($staticValueExpected, $isStaticValue);
         if ('var-on-sleep' !== $testName) {
             $this->assertDumpEquals($dumpedValue, $value);
@@ -90,7 +90,7 @@ class VarExporterTest extends \_PhpScoper836bc32aecc2\PHPUnit\Framework\TestCase
         }
         $marshalledValue = (include $fixtureFile);
         if (!$isStaticValue) {
-            if ($value instanceof \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyWakeup) {
+            if ($value instanceof \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyWakeup) {
                 $value->bis = null;
             }
             $this->assertDumpEquals($value, $marshalledValue);
@@ -110,17 +110,17 @@ class VarExporterTest extends \_PhpScoper836bc32aecc2\PHPUnit\Framework\TestCase
         $value[1] = $value;
         (yield array('array-object', $value));
         (yield array('array-iterator', new \ArrayIterator(array(123), 1)));
-        (yield array('array-object-custom', new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyArrayObject(array(234))));
-        $value = new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MySerializable();
+        (yield array('array-object-custom', new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyArrayObject(array(234))));
+        $value = new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MySerializable();
         (yield array('serializable', array($value, $value)));
-        $value = new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyWakeup();
-        $value->sub = new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyWakeup();
+        $value = new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyWakeup();
+        $value->sub = new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyWakeup();
         $value->sub->sub = 123;
         $value->sub->bis = 123;
         $value->sub->baz = 123;
         (yield array('wakeup', $value));
-        (yield array('clone', array(new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyCloneable(), new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyNotCloneable())));
-        (yield array('private', array(new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyPrivateValue(123, 234), new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyPrivateChildValue(123, 234))));
+        (yield array('clone', array(new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyCloneable(), new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyNotCloneable())));
+        (yield array('private', array(new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyPrivateValue(123, 234), new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyPrivateChildValue(123, 234))));
         $value = new \SplObjectStorage();
         $value[new \stdClass()] = 345;
         (yield array('spl-object-storage', $value));
@@ -143,14 +143,14 @@ class VarExporterTest extends \_PhpScoper836bc32aecc2\PHPUnit\Framework\TestCase
         $rl->setAccessible(\true);
         $rl->setValue($value, 234);
         (yield array('error', $value));
-        (yield array('var-on-sleep', new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\GoodNight()));
-        $value = new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\FinalError(\false);
+        (yield array('var-on-sleep', new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\GoodNight()));
+        $value = new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\FinalError(\false);
         $rt->setValue($value, array());
         $rl->setValue($value, 123);
         (yield array('final-error', $value));
-        (yield array('final-array-iterator', new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\FinalArrayIterator()));
-        (yield array('final-stdclass', new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\FinalStdClass()));
-        $value = new \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyWakeup();
+        (yield array('final-array-iterator', new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\FinalArrayIterator()));
+        (yield array('final-stdclass', new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\FinalStdClass()));
+        $value = new \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyWakeup();
         $value->bis = new \ReflectionClass($value);
         (yield array('wakeup-refl', $value));
     }
@@ -208,7 +208,7 @@ class MyPrivateValue
         $this->priv = $priv;
     }
 }
-class MyPrivateChildValue extends \_PhpScoper836bc32aecc2\Symfony\Component\VarExporter\Tests\MyPrivateValue
+class MyPrivateChildValue extends \_PhpScoper0c236037eb04\Symfony\Component\VarExporter\Tests\MyPrivateValue
 {
 }
 class MyArrayObject extends \ArrayObject

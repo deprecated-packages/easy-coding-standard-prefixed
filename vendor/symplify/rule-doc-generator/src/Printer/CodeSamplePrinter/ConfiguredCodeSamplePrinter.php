@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Printer\CodeSamplePrinter;
 
-use _PhpScoper836bc32aecc2\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
+use _PhpScoper0c236037eb04\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
 use Symplify\CodingStandard\Exception\NotImplementedYetException;
-use Symplify\RuleDocGenerator\Neon\NeonPrinter;
+use Symplify\PackageBuilder\Neon\NeonPrinter;
 use Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -23,7 +23,7 @@ final class ConfiguredCodeSamplePrinter
      * @var SmartPhpConfigPrinter
      */
     private $smartPhpConfigPrinter;
-    public function __construct(\Symplify\RuleDocGenerator\Neon\NeonPrinter $neonPrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \_PhpScoper836bc32aecc2\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
+    public function __construct(\Symplify\PackageBuilder\Neon\NeonPrinter $neonPrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \_PhpScoper0c236037eb04\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
     {
         $this->neonPrinter = $neonPrinter;
         $this->markdownCodeWrapper = $markdownCodeWrapper;
@@ -56,7 +56,7 @@ final class ConfiguredCodeSamplePrinter
     {
         $lines = [];
         $phpstanNeon = ['services' => [['class' => $ruleDefinition->getRuleClass(), 'tags' => ['phpstan.rules.rule'], 'arguments' => $configuredCodeSample->getConfiguration()]]];
-        $printedNeon = $this->neonPrinter->print($phpstanNeon);
+        $printedNeon = $this->neonPrinter->printNeon($phpstanNeon);
         $lines[] = $this->markdownCodeWrapper->printYamlCode($printedNeon);
         return $lines;
     }
