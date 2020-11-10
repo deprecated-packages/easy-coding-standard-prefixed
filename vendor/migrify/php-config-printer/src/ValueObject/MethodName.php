@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper0c236037eb04\Migrify\PhpConfigPrinter\ValueObject;
+namespace _PhpScopere5e7dca8c031\Migrify\PhpConfigPrinter\ValueObject;
 
 final class MethodName
 {

@@ -5,6 +5,7 @@ namespace Symplify\EasyCodingStandard\FixerRunner\Application;
 
 use PhpCsFixer\Differ\DifferInterface;
 use PhpCsFixer\Fixer\FixerInterface;
+use PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer;
 use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
@@ -164,6 +165,9 @@ final class FixerFileProcessor extends \Symplify\EasyCodingStandard\Application\
             return \true;
         }
         if ($fixer instanceof \PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer) {
+            return \true;
+        }
+        if ($fixer instanceof \PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer) {
             return \true;
         }
         return $fixer instanceof \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;

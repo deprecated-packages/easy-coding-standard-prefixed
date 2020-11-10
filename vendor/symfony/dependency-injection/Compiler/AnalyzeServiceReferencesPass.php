@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Reference;
 /**
  * Run this pass before passes that need to know more about the relation of
  * your services.
@@ -25,7 +25,7 @@ use _PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Reference;
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AnalyzeServiceReferencesPass extends \_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass implements \_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Compiler\RepeatablePassInterface
+class AnalyzeServiceReferencesPass extends \_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass implements \_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Compiler\RepeatablePassInterface
 {
     private $graph;
     private $currentDefinition;
@@ -47,14 +47,14 @@ class AnalyzeServiceReferencesPass extends \_PhpScoper0c236037eb04\Symfony\Compo
     /**
      * {@inheritdoc}
      */
-    public function setRepeatedPass(\_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Compiler\RepeatedPass $repeatedPass)
+    public function setRepeatedPass(\_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Compiler\RepeatedPass $repeatedPass)
     {
         @\trigger_error(\sprintf('The "%s()" method is deprecated since Symfony 4.2.', __METHOD__), \E_USER_DEPRECATED);
     }
     /**
      * Processes a ContainerBuilder object to populate the service reference graph.
      */
-    public function process(\_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->container = $container;
         $this->graph = $container->getCompiler()->getServiceReferenceGraph();
@@ -77,22 +77,22 @@ class AnalyzeServiceReferencesPass extends \_PhpScoper0c236037eb04\Symfony\Compo
     {
         $lazy = $this->lazy;
         $inExpression = $this->inExpression();
-        if ($value instanceof \_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
+        if ($value instanceof \_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
             $this->lazy = \true;
             parent::processValue($value->getValues());
             $this->lazy = $lazy;
             return $value;
         }
-        if ($value instanceof \_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Reference) {
+        if ($value instanceof \_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Reference) {
             $targetId = $this->getDefinitionId((string) $value);
             $targetDefinition = null !== $targetId ? $this->container->getDefinition($targetId) : null;
-            $this->graph->connect($this->currentId, $this->currentDefinition, $targetId, $targetDefinition, $value, $this->lazy || $this->hasProxyDumper && $targetDefinition && $targetDefinition->isLazy(), \_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE === $value->getInvalidBehavior(), $this->byConstructor);
+            $this->graph->connect($this->currentId, $this->currentDefinition, $targetId, $targetDefinition, $value, $this->lazy || $this->hasProxyDumper && $targetDefinition && $targetDefinition->isLazy(), \_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE === $value->getInvalidBehavior(), $this->byConstructor);
             if ($inExpression) {
                 $this->graph->connect('.internal.reference_in_expression', null, $targetId, $targetDefinition, $value, $this->lazy || $targetDefinition && $targetDefinition->isLazy(), \true);
             }
             return $value;
         }
-        if (!$value instanceof \_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Definition) {
+        if (!$value instanceof \_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Definition) {
             return parent::processValue($value, $isRoot);
         }
         if ($isRoot) {

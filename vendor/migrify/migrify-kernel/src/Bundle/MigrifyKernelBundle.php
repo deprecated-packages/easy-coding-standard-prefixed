@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper0c236037eb04\Migrify\MigrifyKernel\Bundle;
+namespace _PhpScopere5e7dca8c031\Migrify\MigrifyKernel\Bundle;
 
-use _PhpScoper0c236037eb04\Migrify\MigrifyKernel\DependencyInjection\Extension\MigrifyKernelExtension;
-use _PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoper0c236037eb04\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScopere5e7dca8c031\Migrify\MigrifyKernel\DependencyInjection\Extension\MigrifyKernelExtension;
+use _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScopere5e7dca8c031\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-final class MigrifyKernelBundle extends \_PhpScoper0c236037eb04\Symfony\Component\HttpKernel\Bundle\Bundle
+final class MigrifyKernelBundle extends \_PhpScopere5e7dca8c031\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    public function build(\_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : ?\_PhpScoper0c236037eb04\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
-        return new \_PhpScoper0c236037eb04\Migrify\MigrifyKernel\DependencyInjection\Extension\MigrifyKernelExtension();
+        return new \_PhpScopere5e7dca8c031\Migrify\MigrifyKernel\DependencyInjection\Extension\MigrifyKernelExtension();
     }
 }

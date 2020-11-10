@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper0c236037eb04\PhpParser\NodeVisitor;
+namespace _PhpScopere5e7dca8c031\PhpParser\NodeVisitor;
 
-use _PhpScoper0c236037eb04\PhpParser\Node;
-use _PhpScoper0c236037eb04\PhpParser\NodeTraverser;
-use _PhpScoper0c236037eb04\PhpParser\NodeVisitorAbstract;
+use _PhpScopere5e7dca8c031\PhpParser\Node;
+use _PhpScopere5e7dca8c031\PhpParser\NodeTraverser;
+use _PhpScopere5e7dca8c031\PhpParser\NodeVisitorAbstract;
 /**
  * This visitor can be used to find the first node satisfying some criterion determined by
  * a filter callback.
  */
-class FirstFindingVisitor extends \_PhpScoper0c236037eb04\PhpParser\NodeVisitorAbstract
+class FirstFindingVisitor extends \_PhpScopere5e7dca8c031\PhpParser\NodeVisitorAbstract
 {
     /** @var callable Filter callback */
     protected $filterCallback;
@@ -36,12 +36,12 @@ class FirstFindingVisitor extends \_PhpScoper0c236037eb04\PhpParser\NodeVisitorA
         $this->foundNode = null;
         return null;
     }
-    public function enterNode(\_PhpScoper0c236037eb04\PhpParser\Node $node)
+    public function enterNode(\_PhpScopere5e7dca8c031\PhpParser\Node $node)
     {
         $filterCallback = $this->filterCallback;
         if ($filterCallback($node)) {
             $this->foundNode = $node;
-            return \_PhpScoper0c236037eb04\PhpParser\NodeTraverser::STOP_TRAVERSAL;
+            return \_PhpScopere5e7dca8c031\PhpParser\NodeTraverser::STOP_TRAVERSAL;
         }
         return null;
     }
