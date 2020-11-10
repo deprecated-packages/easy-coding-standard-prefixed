@@ -37,7 +37,7 @@ final class Php73Test extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
     public function test(\Symplify\SmartFileSystem\SmartFileInfo $fixtureFileInfo) : void
     {
         $inputAndExpectedFileInfos = \Symplify\EasyTesting\StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos($fixtureFileInfo);
-        $changedContent = $this->snippetFormatter->format($inputAndExpectedFileInfos->getInputFileInfo(), \Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern::HERENOWDOC_SNIPPET_REGEX);
+        $changedContent = $this->snippetFormatter->format($inputAndExpectedFileInfos->getInputFileInfo(), \Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern::HERENOWDOC_SNIPPET_REGEX, 'herenowdoc');
         $expectedFileContent = $inputAndExpectedFileInfos->getExpectedFileContent();
         $this->assertSame($expectedFileContent, $changedContent, $fixtureFileInfo->getRelativeFilePathFromCwd());
     }

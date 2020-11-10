@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
-use _PhpScoper48800f361566\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper666af036e800\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Console\Command\AbstractCheckCommand;
 use Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter;
 use Symplify\PackageBuilder\Console\ShellCode;
@@ -33,25 +33,25 @@ abstract class AbstractSnippetFormatterCommand extends \Symplify\EasyCodingStand
         $this->smartFileSystem = $smartFileSystem;
         $this->smartFinder = $smartFinder;
     }
-    protected function doExecuteSnippetFormatterWithFileNamesAndSnippetPattern(\_PhpScoper48800f361566\Symfony\Component\Console\Input\InputInterface $input, string $fileNames, string $snippetPattern) : int
+    protected function doExecuteSnippetFormatterWithFileNamesAndSnippetPattern(\_PhpScoper666af036e800\Symfony\Component\Console\Input\InputInterface $input, string $fileNames, string $snippetPattern, string $kind) : int
     {
         $this->configuration->resolveFromInput($input);
         $sources = $this->configuration->getSources();
-        $phpFileInfos = $this->smartFinder->find($sources, $fileNames);
+        $phpFileInfos = $this->smartFinder->find($sources, $fileNames, ['Fixture']);
         $fileCount = \count($phpFileInfos);
         if ($fileCount === 0) {
             return $this->printNoFilesFoundWarningAndExitSuccess($sources, $fileNames);
         }
         $this->easyCodingStandardStyle->progressStart($fileCount);
         foreach ($phpFileInfos as $phpFileInfo) {
-            $this->processFileInfoWithPattern($phpFileInfo, $snippetPattern);
+            $this->processFileInfoWithPattern($phpFileInfo, $snippetPattern, $kind);
             $this->easyCodingStandardStyle->progressAdvance();
         }
         return $this->reportProcessedFiles($fileCount);
     }
-    private function processFileInfoWithPattern(\Symplify\SmartFileSystem\SmartFileInfo $phpFileInfo, string $snippetPattern) : void
+    private function processFileInfoWithPattern(\Symplify\SmartFileSystem\SmartFileInfo $phpFileInfo, string $snippetPattern, string $kind) : void
     {
-        $fixedContent = $this->snippetFormatter->format($phpFileInfo, $snippetPattern);
+        $fixedContent = $this->snippetFormatter->format($phpFileInfo, $snippetPattern, $kind);
         if ($phpFileInfo->getContents() === $fixedContent) {
             // nothing has changed
             return;

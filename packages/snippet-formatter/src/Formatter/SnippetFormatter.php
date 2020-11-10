@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Formatter;
 
-use _PhpScoper48800f361566\Nette\Utils\Strings;
+use _PhpScoper666af036e800\Nette\Utils\Strings;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
 use Symplify\EasyCodingStandard\SnippetFormatter\Provider\CurrentParentFileInfoProvider;
@@ -20,12 +20,17 @@ final class SnippetFormatter
      * @see https://regex101.com/r/MJTq5C/1
      * @var string
      */
-    private const DECLARE_REGEX = '#(declare\\(strict\\_types\\=1\\)\\;\\s+)#ms';
+    private const DECLARE_REGEX = '#(declare\\(strict\\_types\\=1\\)\\;\\n)#ms';
     /**
      * @see https://regex101.com/r/MJTq5C/3
      * @var string
      */
     private const OPENING_TAG_REGEX = '#^\\<\\?php\\n#ms';
+    /**
+     * @see https://regex101.com/r/MJTq5C/3
+     * @var string
+     */
+    private const OPENING_TAG_HERENOWDOC_REGEX = '#^\\<\\?php\\n#ms';
     /**
      * @var SmartFileSystem
      */
@@ -54,32 +59,32 @@ final class SnippetFormatter
         $this->currentParentFileInfoProvider = $currentParentFileInfoProvider;
         $this->isPhp73OrAbove = \PHP_VERSION_ID >= 70300;
     }
-    public function format(\Symplify\SmartFileSystem\SmartFileInfo $fileInfo, string $snippetRegex) : string
+    public function format(\Symplify\SmartFileSystem\SmartFileInfo $fileInfo, string $snippetRegex, string $kind) : string
     {
         $this->currentParentFileInfoProvider->setParentFileInfo($fileInfo);
-        return (string) \_PhpScoper48800f361566\Nette\Utils\Strings::replace($fileInfo->getContents(), $snippetRegex, function ($match) : string {
-            if (\_PhpScoper48800f361566\Nette\Utils\Strings::contains($match['content'], '-----')) {
+        return (string) \_PhpScoper666af036e800\Nette\Utils\Strings::replace($fileInfo->getContents(), $snippetRegex, function ($match) use($kind) : string {
+            if (\_PhpScoper666af036e800\Nette\Utils\Strings::contains($match['content'], '-----')) {
                 // do nothing
                 return $match['opening'] . $match['content'] . $match['closing'];
             }
-            return $this->fixContentAndPreserveFormatting($match);
+            return $this->fixContentAndPreserveFormatting($match, $kind);
         });
     }
     /**
      * @param string[] $match
      */
-    private function fixContentAndPreserveFormatting(array $match) : string
+    private function fixContentAndPreserveFormatting(array $match, string $kind) : string
     {
         if ($this->isPhp73OrAbove) {
-            return \str_replace(\PHP_EOL, '', $match['opening']) . \PHP_EOL . $this->fixContent($match['content']) . \str_replace(\PHP_EOL, '', $match['closing']);
+            return \str_replace(\PHP_EOL, '', $match['opening']) . \PHP_EOL . $this->fixContent($match['content'], $kind) . \str_replace(\PHP_EOL, '', $match['closing']);
         }
-        return \rtrim($match['opening'], \PHP_EOL) . \PHP_EOL . $this->fixContent($match['content']) . \ltrim($match['closing'], \PHP_EOL);
+        return \rtrim($match['opening'], \PHP_EOL) . \PHP_EOL . $this->fixContent($match['content'], $kind) . \ltrim($match['closing'], \PHP_EOL);
     }
-    private function fixContent(string $content) : string
+    private function fixContent(string $content, string $kind) : string
     {
         $content = $this->isPhp73OrAbove ? $content : \trim($content);
         $temporaryFilePath = $this->createTemporaryFilePath($content);
-        if (!\_PhpScoper48800f361566\Nette\Utils\Strings::startsWith($this->isPhp73OrAbove ? \trim($content) : $content, '<?php')) {
+        if (!\_PhpScoper666af036e800\Nette\Utils\Strings::startsWith($this->isPhp73OrAbove ? \trim($content) : $content, '<?php')) {
             $content = '<?php' . \PHP_EOL . $content;
         }
         $fileContent = $this->isPhp73OrAbove ? \ltrim($content, \PHP_EOL) : $content;
@@ -96,23 +101,29 @@ final class SnippetFormatter
             $this->smartFileSystem->remove($temporaryFilePath);
         }
         $fileContent = \rtrim($fileContent, \PHP_EOL) . \PHP_EOL;
-        if ($this->isPhp73OrAbove) {
+        if ($kind === 'markdown') {
             $fileContent = \ltrim($fileContent, \PHP_EOL);
+            $fileContent = $this->removeOpeningTagAndStrictTypes($fileContent);
+            return \ltrim($fileContent);
         }
-        return $this->removeOpeningTagAndStrictTypes($fileContent);
+        return \_PhpScoper666af036e800\Nette\Utils\Strings::replace($fileContent, self::OPENING_TAG_HERENOWDOC_REGEX, '$1');
     }
     /**
      * It does not have any added value and only clutters the output
      */
     private function removeOpeningTagAndStrictTypes(string $content) : string
     {
-        $content = \_PhpScoper48800f361566\Nette\Utils\Strings::replace($content, self::DECLARE_REGEX, '');
-        return \_PhpScoper48800f361566\Nette\Utils\Strings::replace($content, self::OPENING_TAG_REGEX, '$1');
+        $content = \_PhpScoper666af036e800\Nette\Utils\Strings::replace($content, self::DECLARE_REGEX, '');
+        return $this->removeOpeningTag($content);
     }
     private function createTemporaryFilePath(string $content) : string
     {
         $key = \md5($content);
         $fileName = \sprintf('php-code-%s.php', $key);
         return \sys_get_temp_dir() . \DIRECTORY_SEPARATOR . 'ecs_temp' . \DIRECTORY_SEPARATOR . $fileName;
+    }
+    private function removeOpeningTag(string $fileContent) : string
+    {
+        return \_PhpScoper666af036e800\Nette\Utils\Strings::replace($fileContent, self::OPENING_TAG_REGEX, '$1');
     }
 }
