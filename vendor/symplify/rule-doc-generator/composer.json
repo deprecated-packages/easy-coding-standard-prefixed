@@ -11,7 +11,8 @@
         "symfony\/console": "^4.4|^5.1",
         "nette\/robot-loader": "^3.2",
         "symplify\/symplify-kernel": "dev-master",
-        "symplify\/console-color-diff": "dev-master"
+        "symplify\/markdown-diff": "dev-master",
+        "migrify\/php-config-printer": "^0.3.50"
     },
     "require-dev": {
         "phpunit\/phpunit": "^8.5|^9.4",

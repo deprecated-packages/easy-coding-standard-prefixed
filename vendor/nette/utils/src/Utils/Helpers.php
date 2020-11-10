@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper880bfa4d8b51\Nette\Utils;
+namespace _PhpScoper470d6df94ac0\Nette\Utils;
 
 class Helpers
 {
@@ -30,7 +30,7 @@ class Helpers
     public static function getLastError() : string
     {
         $message = \error_get_last()['message'] ?? '';
-        $message = \ini_get('html_errors') ? \_PhpScoper880bfa4d8b51\Nette\Utils\Html::htmlToText($message) : $message;
+        $message = \ini_get('html_errors') ? \_PhpScoper470d6df94ac0\Nette\Utils\Html::htmlToText($message) : $message;
         $message = \preg_replace('#^\\w+\\(.*?\\): #', '', $message);
         return $message;
     }

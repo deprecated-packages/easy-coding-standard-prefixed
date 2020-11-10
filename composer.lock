@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "675a57518c40f86ebf66d8da3db905d5",
+    "content-hash": "2561513c0c3c39ce970372716bac0d06",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -540,6 +540,91 @@
             "time": "2018-06-13T13:22:40+00:00"
         },
         {
+            "name": "migrify/migrify-kernel",
+            "version": "0.3.50",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/migrify/migrify-kernel.git",
+                "reference": "a08a913fd2bd6197be235bff78a702e1d9d72d64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/migrify/migrify-kernel/zipball/a08a913fd2bd6197be235bff78a702e1d9d72d64",
+                "reference": "a08a913fd2bd6197be235bff78a702e1d9d72d64",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "symfony/console": "^4.4|^5.1",
+                "symfony/dependency-injection": "^4.4|^5.1",
+                "symfony/http-kernel": "^4.4|^5.1",
+                "symplify/autowire-array-parameter": "^8.3.35",
+                "symplify/package-builder": "^8.3.35",
+                "symplify/smart-file-system": "^8.3.35"
+            },
+            "require-dev": {
+                "tracy/tracy": "^2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Migrify\\MigrifyKernel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Kernel for small CLI applications",
+            "support": {
+                "issues": "https://github.com/migrify/migrify-kernel/issues",
+                "source": "https://github.com/migrify/migrify-kernel/tree/0.3.50"
+            },
+            "time": "2020-10-23T15:52:07+00:00"
+        },
+        {
+            "name": "migrify/php-config-printer",
+            "version": "0.3.50",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/migrify/php-config-printer.git",
+                "reference": "53d7e94a72a5ed390dd8ec4241f385f939cde070"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/migrify/php-config-printer/zipball/53d7e94a72a5ed390dd8ec4241f385f939cde070",
+                "reference": "53d7e94a72a5ed390dd8ec4241f385f939cde070",
+                "shasum": ""
+            },
+            "require": {
+                "migrify/migrify-kernel": "^0.3.50",
+                "nette/utils": "^3.1",
+                "nikic/php-parser": "^4.9",
+                "php": ">=7.2",
+                "symfony/http-kernel": "^4.4|^5.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5|^9.0",
+                "symplify/easy-testing": "^8.3.35"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Migrify\\PhpConfigPrinter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Print Symfony services array with configuration to to plain PHP file format thanks to this simple php-parser wrapper",
+            "support": {
+                "issues": "https://github.com/migrify/php-config-printer/issues",
+                "source": "https://github.com/migrify/php-config-printer/tree/0.3.50"
+            },
+            "time": "2020-10-23T15:54:04+00:00"
+        },
+        {
             "name": "nette/finder",
             "version": "v2.5.2",
             "source": {
@@ -753,6 +838,62 @@
                 "source": "https://github.com/nette/utils/tree/master"
             },
             "time": "2020-01-03T18:13:31+00:00"
+        },
+        {
+            "name": "nikic/php-parser",
+            "version": "v4.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "aaee038b912e567780949787d5fe1977be11a778"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/aaee038b912e567780949787d5fe1977be11a778",
+                "reference": "aaee038b912e567780949787d5fe1977be11a778",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "ircmaxell/php-yacc": "^0.0.7",
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
+            },
+            "bin": [
+                "bin/php-parse"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpParser\\": "lib/PhpParser"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov"
+                }
+            ],
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/nikic/PHP-Parser/issues",
+                "source": "https://github.com/nikic/PHP-Parser/tree/master"
+            },
+            "time": "2020-08-18T19:48:01+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3239,6 +3380,50 @@
             }
         },
         {
+            "name": "symplify/markdown-diff",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../../packages/markdown-diff",
+                "reference": "8d690d3bcaec3413c4c853e922f4f245e35fc408"
+            },
+            "require": {
+                "nette/utils": "^3.0",
+                "php": ">=7.2",
+                "sebastian/diff": "^3.0|^4.0",
+                "symfony/dependency-injection": "^4.4|^5.1",
+                "symfony/http-kernel": "^4.4|^5.1",
+                "symplify/package-builder": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5|^9.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "8.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symplify\\MarkdownDiff\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Symplify\\MarkdownDiff\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Package to print diffs for Markdown",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            }
+        },
+        {
             "name": "symplify/package-builder",
             "version": "dev-master",
             "dist": {
@@ -3292,14 +3477,15 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "c16f030483b6c3e139b5d4b43e3808fdb8a29b08"
+                "reference": "0d7bb652244397217f7a7338467f404394b6eff3"
             },
             "require": {
+                "migrify/php-config-printer": "^0.3.50",
                 "nette/robot-loader": "^3.2",
                 "php": ">=7.2",
                 "symfony/console": "^4.4|^5.1",
                 "symfony/dependency-injection": "^4.4|^5.1",
-                "symplify/console-color-diff": "dev-master",
+                "symplify/markdown-diff": "dev-master",
                 "symplify/symplify-kernel": "dev-master"
             },
             "require-dev": {
@@ -3635,91 +3821,6 @@
             "time": "2019-03-17T17:37:11+00:00"
         },
         {
-            "name": "migrify/migrify-kernel",
-            "version": "0.3.50",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/migrify/migrify-kernel.git",
-                "reference": "a08a913fd2bd6197be235bff78a702e1d9d72d64"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/migrify/migrify-kernel/zipball/a08a913fd2bd6197be235bff78a702e1d9d72d64",
-                "reference": "a08a913fd2bd6197be235bff78a702e1d9d72d64",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2",
-                "symfony/console": "^4.4|^5.1",
-                "symfony/dependency-injection": "^4.4|^5.1",
-                "symfony/http-kernel": "^4.4|^5.1",
-                "symplify/autowire-array-parameter": "^8.3.35",
-                "symplify/package-builder": "^8.3.35",
-                "symplify/smart-file-system": "^8.3.35"
-            },
-            "require-dev": {
-                "tracy/tracy": "^2.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Migrify\\MigrifyKernel\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Kernel for small CLI applications",
-            "support": {
-                "issues": "https://github.com/migrify/migrify-kernel/issues",
-                "source": "https://github.com/migrify/migrify-kernel/tree/0.3.50"
-            },
-            "time": "2020-10-23T15:52:07+00:00"
-        },
-        {
-            "name": "migrify/php-config-printer",
-            "version": "0.3.50",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/migrify/php-config-printer.git",
-                "reference": "53d7e94a72a5ed390dd8ec4241f385f939cde070"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/migrify/php-config-printer/zipball/53d7e94a72a5ed390dd8ec4241f385f939cde070",
-                "reference": "53d7e94a72a5ed390dd8ec4241f385f939cde070",
-                "shasum": ""
-            },
-            "require": {
-                "migrify/migrify-kernel": "^0.3.50",
-                "nette/utils": "^3.1",
-                "nikic/php-parser": "^4.9",
-                "php": ">=7.2",
-                "symfony/http-kernel": "^4.4|^5.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5|^9.0",
-                "symplify/easy-testing": "^8.3.35"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Migrify\\PhpConfigPrinter\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Print Symfony services array with configuration to to plain PHP file format thanks to this simple php-parser wrapper",
-            "support": {
-                "issues": "https://github.com/migrify/php-config-printer/issues",
-                "source": "https://github.com/migrify/php-config-printer/tree/0.3.50"
-            },
-            "time": "2020-10-23T15:54:04+00:00"
-        },
-        {
             "name": "myclabs/deep-copy",
             "version": "1.9.1",
             "source": {
@@ -3770,62 +3871,6 @@
                 "source": "https://github.com/myclabs/DeepCopy/tree/1.9.1"
             },
             "time": "2019-04-07T13:18:21+00:00"
-        },
-        {
-            "name": "nikic/php-parser",
-            "version": "v4.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "aaee038b912e567780949787d5fe1977be11a778"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/aaee038b912e567780949787d5fe1977be11a778",
-                "reference": "aaee038b912e567780949787d5fe1977be11a778",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/master"
-            },
-            "time": "2020-08-18T19:48:01+00:00"
         },
         {
             "name": "phar-io/manifest",

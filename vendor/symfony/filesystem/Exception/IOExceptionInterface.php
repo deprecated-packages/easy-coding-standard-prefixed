@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper880bfa4d8b51\Symfony\Component\Filesystem\Exception;
+namespace _PhpScoper470d6df94ac0\Symfony\Component\Filesystem\Exception;
 
 /**
  * IOException interface for file and input/output stream related exceptions thrown by the component.
  *
  * @author Christian Gärtner <christiangaertner.film@googlemail.com>
  */
-interface IOExceptionInterface extends \_PhpScoper880bfa4d8b51\Symfony\Component\Filesystem\Exception\ExceptionInterface
+interface IOExceptionInterface extends \_PhpScoper470d6df94ac0\Symfony\Component\Filesystem\Exception\ExceptionInterface
 {
     /**
      * Returns the associated path for the exception.

@@ -3,7 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Printer;
 
-use Symplify\ConsoleColorDiff\Differ\MarkdownDiffer;
+use _PhpScoper470d6df94ac0\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
+use Symplify\MarkdownDiff\Differ\MarkdownDiffer;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\ValueObject\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -13,9 +14,14 @@ final class CodeSamplesPrinter
      * @var MarkdownDiffer
      */
     private $markdownDiffer;
-    public function __construct(\Symplify\ConsoleColorDiff\Differ\MarkdownDiffer $markdownDiffer)
+    /**
+     * @var SmartPhpConfigPrinter
+     */
+    private $smartPhpConfigPrinter;
+    public function __construct(\Symplify\MarkdownDiff\Differ\MarkdownDiffer $markdownDiffer, \_PhpScoper470d6df94ac0\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
     {
         $this->markdownDiffer = $markdownDiffer;
+        $this->smartPhpConfigPrinter = $smartPhpConfigPrinter;
     }
     /**
      * @return string[]
@@ -30,17 +36,13 @@ final class CodeSamplesPrinter
             } else {
                 $lines = \array_merge($lines, $this->printGoodBadCodeSample($codeSample));
             }
+            if ($codeSample instanceof \Symplify\RuleDocGenerator\ValueObject\ConfiguredCodeSample) {
+                $configContent = $this->smartPhpConfigPrinter->printConfiguredServices([$ruleDefinition->getRuleClass() => $codeSample->getConfiguration()]);
+                $lines[] = $this->printPhpCode($configContent);
+            }
             $lines[] = '<br>';
         }
         return $lines;
-    }
-    private function printPhpCode(string $content) : string
-    {
-        return $this->printCodeWrapped($content, 'php');
-    }
-    private function printCodeWrapped(string $content, string $format) : string
-    {
-        return \sprintf('```%s%s%s%s```', $format, \PHP_EOL, \rtrim($content), \PHP_EOL);
     }
     /**
      * @return string[]
@@ -62,8 +64,16 @@ final class CodeSamplesPrinter
      */
     private function printDiffCodeSample(\Symplify\RuleDocGenerator\Contract\CodeSampleInterface $codeSample) : array
     {
-        $diffContent = $this->markdownDiffer->diff($codeSample->getGoodCode(), $codeSample->getBadCode());
-        $diffLine = $this->printCodeWrapped($diffContent, 'diff');
-        return [$diffLine];
+        $lines = [];
+        $lines[] = $this->markdownDiffer->diff($codeSample->getGoodCode(), $codeSample->getBadCode());
+        return $lines;
+    }
+    private function printPhpCode(string $content) : string
+    {
+        return $this->printCodeWrapped($content, 'php');
+    }
+    private function printCodeWrapped(string $content, string $format) : string
+    {
+        return \sprintf('```%s%s%s%s```', $format, \PHP_EOL, \rtrim($content), \PHP_EOL) . \PHP_EOL;
     }
 }
