@@ -4,9 +4,7 @@ declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Tests\HeredocNowdoc;
 
 use Iterator;
-use _PhpScoper470d6df94ac0\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
-use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter;
 use Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern;
@@ -28,9 +26,6 @@ final class Php73Test extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
     {
         self::bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/config/array_fixer.php']);
         $this->snippetFormatter = self::$container->get(\Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter::class);
-        /** @var EasyCodingStandardStyle $easyCodingStandardStyle */
-        $easyCodingStandardStyle = self::$container->get(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class);
-        $easyCodingStandardStyle->setVerbosity(\_PhpScoper470d6df94ac0\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
         // enable fixing
         /** @var Configuration $configuration */
         $configuration = self::$container->get(\Symplify\EasyCodingStandard\Configuration\Configuration::class);
@@ -44,7 +39,7 @@ final class Php73Test extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
         $inputAndExpectedFileInfos = \Symplify\EasyTesting\StaticFixtureSplitter::splitFileInfoToLocalInputAndExpectedFileInfos($fixtureFileInfo);
         $changedContent = $this->snippetFormatter->format($inputAndExpectedFileInfos->getInputFileInfo(), \Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern::HERENOWDOC_SNIPPET_REGEX);
         $expectedFileContent = $inputAndExpectedFileInfos->getExpectedFileContent();
-        $this->assertSame($changedContent, $expectedFileContent, $fixtureFileInfo->getRelativeFilePathFromCwd());
+        $this->assertSame($expectedFileContent, $changedContent, $fixtureFileInfo->getRelativeFilePathFromCwd());
     }
     public function provideData() : \Iterator
     {

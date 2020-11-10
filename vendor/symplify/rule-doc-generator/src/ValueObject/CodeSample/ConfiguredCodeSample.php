@@ -1,17 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace Symplify\RuleDocGenerator\ValueObject;
+namespace Symplify\RuleDocGenerator\ValueObject\CodeSample;
 
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
+use Symplify\RuleDocGenerator\ValueObject\AbstractCodeSample;
 final class ConfiguredCodeSample extends \Symplify\RuleDocGenerator\ValueObject\AbstractCodeSample implements \Symplify\RuleDocGenerator\Contract\CodeSampleInterface
 {
     /**
-     * @var mixed[]
+     * @var array<string, mixed>
      */
     private $configuration = [];
     /**
-     * @param mixed[] $configuration
+     * @param array<string, mixed> $configuration
      */
     public function __construct(string $goodCode, string $badCode, array $configuration)
     {
@@ -19,7 +20,7 @@ final class ConfiguredCodeSample extends \Symplify\RuleDocGenerator\ValueObject\
         parent::__construct($goodCode, $badCode);
     }
     /**
-     * @return mixed[]
+     * @return array<string, mixed>
      */
     public function getConfiguration() : array
     {

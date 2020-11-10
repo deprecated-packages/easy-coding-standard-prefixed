@@ -4,7 +4,7 @@ declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Tests\HeredocNowdoc;
 
 use Iterator;
-use _PhpScoper470d6df94ac0\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper48800f361566\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
@@ -29,7 +29,7 @@ final class HereNowDocSnippetFormatterTest extends \Symplify\PackageBuilder\Test
         $this->snippetFormatter = self::$container->get(\Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter::class);
         /** @var EasyCodingStandardStyle $easyCodingStandardStyle */
         $easyCodingStandardStyle = self::$container->get(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class);
-        $easyCodingStandardStyle->setVerbosity(\_PhpScoper470d6df94ac0\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
+        $easyCodingStandardStyle->setVerbosity(\_PhpScoper48800f361566\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
         // enable fixing
         /** @var Configuration $configuration */
         $configuration = self::$container->get(\Symplify\EasyCodingStandard\Configuration\Configuration::class);

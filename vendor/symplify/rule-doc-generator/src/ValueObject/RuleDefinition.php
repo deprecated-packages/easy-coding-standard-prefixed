@@ -3,9 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject;
 
-use _PhpScoper470d6df94ac0\Nette\Utils\Strings;
+use _PhpScoper48800f361566\Nette\Utils\Strings;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class RuleDefinition
 {
@@ -40,6 +41,21 @@ final class RuleDefinition
     {
         $this->ruleClass = $ruleClass;
     }
+    public function isPHPStanRule() : bool
+    {
+        /** @noRector */
+        return \is_a($this->ruleClass, '_PhpScoper48800f361566\\PHPStan\\Rules\\Rule', \true);
+    }
+    public function isPHPCSFixer() : bool
+    {
+        /** @noRector */
+        return \is_a($this->ruleClass, 'PhpCsFixer\\Fixer\\FixerInterface', \true);
+    }
+    public function isPHPCodeSniffer() : bool
+    {
+        /** @noRector */
+        return \is_a($this->ruleClass, 'PHP_CodeSniffer\\Sniffs\\Sniff', \true);
+    }
     public function getRuleClass() : string
     {
         if ($this->ruleClass === null) {
@@ -49,7 +65,7 @@ final class RuleDefinition
     }
     public function getRuleShortClass() : string
     {
-        return (string) \_PhpScoper470d6df94ac0\Nette\Utils\Strings::after($this->ruleClass, '\\', -1);
+        return (string) \_PhpScoper48800f361566\Nette\Utils\Strings::after($this->ruleClass, '\\', -1);
     }
     /**
      * @return CodeSampleInterface[]
@@ -61,7 +77,7 @@ final class RuleDefinition
     public function isConfigurable() : bool
     {
         foreach ($this->codeSamples as $codeSample) {
-            if ($codeSample instanceof \Symplify\RuleDocGenerator\ValueObject\ConfiguredCodeSample) {
+            if ($codeSample instanceof \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample) {
                 return \true;
             }
         }

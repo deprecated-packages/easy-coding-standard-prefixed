@@ -3,16 +3,18 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Printer;
 
+use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter;
+use Symplify\RuleDocGenerator\ValueObject\Lines;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RuleDefinitionsPrinter
 {
     /**
-     * @var CodeSamplesPrinter
+     * @var CodeSamplePrinter
      */
-    private $codeSamplesPrinter;
-    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplesPrinter $codeSamplesPrinter)
+    private $codeSamplePrinter;
+    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter $codeSamplePrinter)
     {
-        $this->codeSamplesPrinter = $codeSamplesPrinter;
+        $this->codeSamplePrinter = $codeSamplePrinter;
     }
     /**
      * @param RuleDefinition[] $ruleDefinitions
@@ -26,10 +28,10 @@ final class RuleDefinitionsPrinter
             $lines[] = '## ' . $ruleDefinition->getRuleShortClass();
             $lines[] = $ruleDefinition->getDescription();
             if ($ruleDefinition->isConfigurable()) {
-                $lines[] = ':wrench: **configure it!**';
+                $lines[] = \Symplify\RuleDocGenerator\ValueObject\Lines::CONFIGURE_IT;
             }
             $lines[] = '- class: `' . $ruleDefinition->getRuleClass() . '`';
-            $codeSampleLines = $this->codeSamplesPrinter->print($ruleDefinition);
+            $codeSampleLines = $this->codeSamplePrinter->print($ruleDefinition);
             $lines = \array_merge($lines, $codeSampleLines);
         }
         return $lines;

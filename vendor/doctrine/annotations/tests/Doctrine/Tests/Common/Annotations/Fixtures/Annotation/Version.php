@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper470d6df94ac0\Doctrine\Tests\Common\Annotations\Fixtures\Annotation;
+namespace _PhpScoper48800f361566\Doctrine\Tests\Common\Annotations\Fixtures\Annotation;
 
 /**
  * @Annotation

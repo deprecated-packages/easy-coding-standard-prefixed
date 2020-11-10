@@ -3,8 +3,6 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SniffRunner\Tests\Application;
 
-use _PhpScoper470d6df94ac0\Symfony\Component\Console\Output\OutputInterface;
-use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
@@ -22,7 +20,6 @@ final class FileProcessorTest extends \Symplify\PackageBuilder\Testing\AbstractK
     protected function setUp() : void
     {
         static::bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/FileProcessorSource/easy-coding-standard.php']);
-        $this->makeConsoleOutputQuiet();
         $this->sniffFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
     }
     public function test() : void
@@ -36,10 +33,5 @@ final class FileProcessorTest extends \Symplify\PackageBuilder\Testing\AbstractK
     {
         $sniffs = $this->sniffFileProcessor->getCheckers();
         $this->assertCount(1, $sniffs);
-    }
-    private function makeConsoleOutputQuiet() : void
-    {
-        $easyCodingStandardStyle = self::$container->get(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class);
-        $easyCodingStandardStyle->setVerbosity(\_PhpScoper470d6df94ac0\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
     }
 }

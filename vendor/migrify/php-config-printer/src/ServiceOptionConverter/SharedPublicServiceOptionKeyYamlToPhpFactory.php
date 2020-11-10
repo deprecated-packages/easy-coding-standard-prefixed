@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper470d6df94ac0\Migrify\PhpConfigPrinter\ServiceOptionConverter;
+namespace _PhpScoper48800f361566\Migrify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoper470d6df94ac0\Migrify\MigrifyKernel\Exception\NotImplementedYetException;
-use _PhpScoper470d6df94ac0\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use _PhpScoper470d6df94ac0\PhpParser\Node\Expr\MethodCall;
-final class SharedPublicServiceOptionKeyYamlToPhpFactory implements \_PhpScoper470d6df94ac0\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use _PhpScoper48800f361566\Migrify\MigrifyKernel\Exception\NotImplementedYetException;
+use _PhpScoper48800f361566\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use _PhpScoper48800f361566\PhpParser\Node\Expr\MethodCall;
+final class SharedPublicServiceOptionKeyYamlToPhpFactory implements \_PhpScoper48800f361566\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper470d6df94ac0\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper470d6df94ac0\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper48800f361566\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper48800f361566\PhpParser\Node\Expr\MethodCall
     {
         if ($key === 'public') {
             if ($yaml === \false) {
-                return new \_PhpScoper470d6df94ac0\PhpParser\Node\Expr\MethodCall($methodCall, 'private');
+                return new \_PhpScoper48800f361566\PhpParser\Node\Expr\MethodCall($methodCall, 'private');
             }
-            return new \_PhpScoper470d6df94ac0\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
+            return new \_PhpScoper48800f361566\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
         }
-        throw new \_PhpScoper470d6df94ac0\Migrify\MigrifyKernel\Exception\NotImplementedYetException();
+        throw new \_PhpScoper48800f361566\Migrify\MigrifyKernel\Exception\NotImplementedYetException();
     }
     public function isMatch($key, $values) : bool
     {

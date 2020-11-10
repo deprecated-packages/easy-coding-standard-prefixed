@@ -1,27 +1,26 @@
 <?php
 
 declare (strict_types=1);
-namespace Symplify\RuleDocGenerator\Printer;
+namespace Symplify\RuleDocGenerator\Printer\CodeSamplePrinter;
 
-use _PhpScoper470d6df94ac0\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
 use Symplify\MarkdownDiff\Differ\MarkdownDiffer;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
-use Symplify\RuleDocGenerator\ValueObject\ConfiguredCodeSample;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
-final class CodeSamplesPrinter
+final class CodeSamplePrinter
 {
     /**
      * @var MarkdownDiffer
      */
     private $markdownDiffer;
     /**
-     * @var SmartPhpConfigPrinter
+     * @var ConfiguredCodeSamplePrinter
      */
-    private $smartPhpConfigPrinter;
-    public function __construct(\Symplify\MarkdownDiff\Differ\MarkdownDiffer $markdownDiffer, \_PhpScoper470d6df94ac0\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
+    private $configuredCodeSamplePrinter;
+    public function __construct(\Symplify\MarkdownDiff\Differ\MarkdownDiffer $markdownDiffer, \Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\ConfiguredCodeSamplePrinter $configuredCodeSamplePrinter)
     {
         $this->markdownDiffer = $markdownDiffer;
-        $this->smartPhpConfigPrinter = $smartPhpConfigPrinter;
+        $this->configuredCodeSamplePrinter = $configuredCodeSamplePrinter;
     }
     /**
      * @return string[]
@@ -30,15 +29,17 @@ final class CodeSamplesPrinter
     {
         $lines = [];
         foreach ($ruleDefinition->getCodeSamples() as $codeSample) {
-            /** @noRector */
-            if (\is_a($ruleDefinition->getRuleClass(), 'PhpCsFixer\\Fixer\\FixerInterface', \true)) {
-                $lines = \array_merge($lines, $this->printDiffCodeSample($codeSample));
-            } else {
-                $lines = \array_merge($lines, $this->printGoodBadCodeSample($codeSample));
+            if ($codeSample instanceof \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample) {
+                $newLines = $this->configuredCodeSamplePrinter->print($codeSample, $ruleDefinition);
+                $lines = \array_merge($lines, $newLines);
             }
-            if ($codeSample instanceof \Symplify\RuleDocGenerator\ValueObject\ConfiguredCodeSample) {
-                $configContent = $this->smartPhpConfigPrinter->printConfiguredServices([$ruleDefinition->getRuleClass() => $codeSample->getConfiguration()]);
-                $lines[] = $this->printPhpCode($configContent);
+            /** @noRector */
+            if ($ruleDefinition->isPHPCSFixer()) {
+                $newLines = $this->printDiffCodeSample($codeSample);
+                $lines = \array_merge($lines, $newLines);
+            } else {
+                $newLines = $this->printGoodBadCodeSample($codeSample);
+                $lines = \array_merge($lines, $newLines);
             }
             $lines[] = '<br>';
         }
@@ -54,9 +55,6 @@ final class CodeSamplesPrinter
         $lines[] = ':x:';
         $lines[] = $this->printPhpCode($codeSample->getBadCode());
         $lines[] = ':+1:';
-        if ($codeSample instanceof \Symplify\RuleDocGenerator\ValueObject\ConfiguredCodeSample) {
-            // @todo
-        }
         return $lines;
     }
     /**

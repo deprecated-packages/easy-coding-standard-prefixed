@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper470d6df94ac0\\Migrify\\MigrifyKernel\\": "src"
+            "_PhpScoper48800f361566\\Migrify\\MigrifyKernel\\": "src"
         }
     },
     "minimum-stability": "dev",

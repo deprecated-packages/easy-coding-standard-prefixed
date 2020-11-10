@@ -3,9 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Tests\Error\ErrorCollector;
 
-use _PhpScoper470d6df94ac0\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
-use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector;
 use Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
@@ -32,9 +30,6 @@ final class SniffFileProcessorTest extends \Symplify\PackageBuilder\Testing\Abst
         $this->errorAndDiffCollector = self::$container->get(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
         $this->errorAndDiffResultFactory = self::$container->get(\Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory::class);
         $this->sniffFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
-        // silent output
-        $easyCodingStandardStyle = self::$container->get(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class);
-        $easyCodingStandardStyle->setVerbosity(\_PhpScoper470d6df94ac0\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET);
         $changedFilesDetector = self::$container->get(\Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector::class);
         $changedFilesDetector->clearCache();
     }
