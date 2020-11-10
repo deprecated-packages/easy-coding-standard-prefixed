@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2561513c0c3c39ce970372716bac0d06",
+    "content-hash": "87eefdbd46c2c500c11bab739936b9e8",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -690,6 +690,72 @@
                 "source": "https://github.com/nette/finder/tree/v2.5.2"
             },
             "time": "2020-01-03T20:35:40+00:00"
+        },
+        {
+            "name": "nette/neon",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/neon.git",
+                "reference": "72dd80316595d4b5c5312ea4e9beb53f3ba823d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/neon/zipball/72dd80316595d4b5c5312ea4e9beb53f3ba823d7",
+                "reference": "72dd80316595d4b5c5312ea4e9beb53f3ba823d7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "ext-json": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "nette/tester": "^2.0",
+                "phpstan/phpstan": "^0.12",
+                "tracy/tracy": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0-only",
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
+            "homepage": "https://ne-on.org",
+            "keywords": [
+                "export",
+                "import",
+                "neon",
+                "nette",
+                "yaml"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/neon/issues",
+                "source": "https://github.com/nette/neon/tree/master"
+            },
+            "time": "2020-05-15T20:57:55+00:00"
         },
         {
             "name": "nette/robot-loader",
@@ -3380,6 +3446,50 @@
             }
         },
         {
+            "name": "symplify/easy-testing",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../../packages/easy-testing",
+                "reference": "20bda390c67cd9080c2f255d41d74fa1f8f6622b"
+            },
+            "require": {
+                "nette/utils": "^3.0",
+                "php": ">=7.2",
+                "symfony/finder": "^4.4|^5.1",
+                "symplify/package-builder": "dev-master",
+                "symplify/smart-file-system": "dev-master",
+                "symplify/symplify-kernel": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5|^9.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "8.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symplify\\EasyTesting\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Symplify\\EasyTesting\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Testing made easy",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            }
+        },
+        {
             "name": "symplify/markdown-diff",
             "version": "dev-master",
             "dist": {
@@ -3429,7 +3539,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/package-builder",
-                "reference": "130b6546bdb2ab67c9eabdb3b5d49df1384c9335"
+                "reference": "aef44d7dfb02e7b09878a041f5629232b4127a7f"
             },
             "require": {
                 "nette/finder": "^2.5",
@@ -3441,6 +3551,7 @@
                 "symfony/finder": "^4.4|^5.1",
                 "symfony/http-kernel": "^4.4|^5.1",
                 "symfony/yaml": "^4.4|^5.1",
+                "symplify/easy-testing": "dev-master",
                 "symplify/symplify-kernel": "dev-master"
             },
             "require-dev": {
@@ -3477,10 +3588,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "0d7bb652244397217f7a7338467f404394b6eff3"
+                "reference": "a2ccc5a752849c1942f52d8f1ce78940ca6af37d"
             },
             "require": {
                 "migrify/php-config-printer": "^0.3.50",
+                "nette/neon": "^3.2",
                 "nette/robot-loader": "^3.2",
                 "php": ">=7.2",
                 "symfony/console": "^4.4|^5.1",
@@ -5105,50 +5217,6 @@
             }
         },
         {
-            "name": "symplify/easy-testing",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "../../packages/easy-testing",
-                "reference": "20bda390c67cd9080c2f255d41d74fa1f8f6622b"
-            },
-            "require": {
-                "nette/utils": "^3.0",
-                "php": ">=7.2",
-                "symfony/finder": "^4.4|^5.1",
-                "symplify/package-builder": "dev-master",
-                "symplify/smart-file-system": "dev-master",
-                "symplify/symplify-kernel": "dev-master"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5|^9.4"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "8.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symplify\\EasyTesting\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Symplify\\EasyTesting\\Tests\\": "tests"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Testing made easy",
-            "transport-options": {
-                "symlink": false,
-                "relative": true
-            }
-        },
-        {
             "name": "theseer/tokenizer",
             "version": "1.1.3",
             "source": {
@@ -5204,6 +5272,7 @@
         "symplify/autowire-array-parameter": 20,
         "symplify/skipper": 20,
         "symplify/console-color-diff": 20,
+        "symplify/easy-testing": 20,
         "symplify/easy-coding-standard-tester": 20
     },
     "prefer-stable": true,

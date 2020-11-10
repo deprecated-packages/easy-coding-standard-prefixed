@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper666af036e800\Symfony\Component\DependencyInjection;
+namespace _PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection;
 
-use _PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
-use _PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use _PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
+use _PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use _PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EnvVarProcessor implements \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\EnvVarProcessorInterface
+class EnvVarProcessor implements \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\EnvVarProcessorInterface
 {
     private $container;
     private $loaders;
@@ -24,7 +24,7 @@ class EnvVarProcessor implements \_PhpScoper666af036e800\Symfony\Component\Depen
     /**
      * @param EnvVarLoaderInterface[] $loaders
      */
-    public function __construct(\_PhpScoper666af036e800\Symfony\Component\DependencyInjection\ContainerInterface $container, \Traversable $loaders = null)
+    public function __construct(\_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\ContainerInterface $container, \Traversable $loaders = null)
     {
         $this->container = $container;
         $this->loaders = new \IteratorIterator($loaders ?? new \ArrayIterator());
@@ -45,44 +45,44 @@ class EnvVarProcessor implements \_PhpScoper666af036e800\Symfony\Component\Depen
         $i = \strpos($name, ':');
         if ('key' === $prefix) {
             if (\false === $i) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid env "key:%s": a key specifier should be provided.', $name));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid env "key:%s": a key specifier should be provided.', $name));
             }
             $next = \substr($name, $i + 1);
             $key = \substr($name, 0, $i);
             $array = $getEnv($next);
             if (!\is_array($array)) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Resolved value of "%s" did not result in an array value.', $next));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Resolved value of "%s" did not result in an array value.', $next));
             }
             if (!isset($array[$key]) && !\array_key_exists($key, $array)) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException(\sprintf('Key "%s" not found in "%s" (resolved from "%s").', $key, \json_encode($array), $next));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException(\sprintf('Key "%s" not found in "%s" (resolved from "%s").', $key, \json_encode($array), $next));
             }
             return $array[$key];
         }
         if ('default' === $prefix) {
             if (\false === $i) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid env "default:%s": a fallback parameter should be provided.', $name));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid env "default:%s": a fallback parameter should be provided.', $name));
             }
             $next = \substr($name, $i + 1);
             $default = \substr($name, 0, $i);
             if ('' !== $default && !$this->container->hasParameter($default)) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid env fallback in "default:%s": parameter "%s" not found.', $name, $default));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid env fallback in "default:%s": parameter "%s" not found.', $name, $default));
             }
             try {
                 $env = $getEnv($next);
                 if ('' !== $env && null !== $env) {
                     return $env;
                 }
-            } catch (\_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException $e) {
+            } catch (\_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException $e) {
                 // no-op
             }
             return '' === $default ? null : $this->container->getParameter($default);
         }
         if ('file' === $prefix || 'require' === $prefix) {
             if (!\is_scalar($file = $getEnv($name))) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid file name: env var "%s" is non-scalar.', $name));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid file name: env var "%s" is non-scalar.', $name));
             }
             if (!\file_exists($file)) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException(\sprintf('File "%s" not found (resolved from "%s").', $file, $name));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException(\sprintf('File "%s" not found (resolved from "%s").', $file, $name));
             }
             if ('file' === $prefix) {
                 return \file_get_contents($file);
@@ -114,14 +114,14 @@ class EnvVarProcessor implements \_PhpScoper666af036e800\Symfony\Component\Depen
                     $this->loadedVars[] = $vars = $loader->loadEnvVars();
                     $env = $vars[$name] ?? \false;
                 }
-            } catch (\_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException $e) {
+            } catch (\_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException $e) {
                 // skip loaders that need an env var that is not defined
             } finally {
                 $this->loaders = $loaders;
             }
             if (\false === $env || null === $env) {
                 if (!$this->container->hasParameter("env({$name})")) {
-                    throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException(\sprintf('Environment variable not found: "%s".', $name));
+                    throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException(\sprintf('Environment variable not found: "%s".', $name));
                 }
                 if (null === ($env = $this->container->getParameter("env({$name})"))) {
                     return null;
@@ -129,7 +129,7 @@ class EnvVarProcessor implements \_PhpScoper666af036e800\Symfony\Component\Depen
             }
         }
         if (!\is_scalar($env)) {
-            throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Non-scalar env var "%s" cannot be cast to %s.', $name, $prefix));
+            throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Non-scalar env var "%s" cannot be cast to %s.', $name, $prefix));
         }
         if ('string' === $prefix) {
             return (string) $env;
@@ -139,19 +139,19 @@ class EnvVarProcessor implements \_PhpScoper666af036e800\Symfony\Component\Depen
         }
         if ('int' === $prefix) {
             if (\false === ($env = \filter_var($env, \FILTER_VALIDATE_INT) ?: \filter_var($env, \FILTER_VALIDATE_FLOAT))) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Non-numeric env var "%s" cannot be cast to int.', $name));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Non-numeric env var "%s" cannot be cast to int.', $name));
             }
             return (int) $env;
         }
         if ('float' === $prefix) {
             if (\false === ($env = \filter_var($env, \FILTER_VALIDATE_FLOAT))) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Non-numeric env var "%s" cannot be cast to float.', $name));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Non-numeric env var "%s" cannot be cast to float.', $name));
             }
             return (float) $env;
         }
         if ('const' === $prefix) {
             if (!\defined($env)) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Env var "%s" maps to undefined constant "%s".', $name, $env));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Env var "%s" maps to undefined constant "%s".', $name, $env));
             }
             return \constant($env);
         }
@@ -161,20 +161,20 @@ class EnvVarProcessor implements \_PhpScoper666af036e800\Symfony\Component\Depen
         if ('json' === $prefix) {
             $env = \json_decode($env, \true);
             if (\JSON_ERROR_NONE !== \json_last_error()) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid JSON in env var "%s": ' . \json_last_error_msg(), $name));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid JSON in env var "%s": ' . \json_last_error_msg(), $name));
             }
             if (null !== $env && !\is_array($env)) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid JSON env var "%s": array or null expected, %s given.', $name, \gettype($env)));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid JSON env var "%s": array or null expected, %s given.', $name, \gettype($env)));
             }
             return $env;
         }
         if ('url' === $prefix) {
             $parsedEnv = \parse_url($env);
             if (\false === $parsedEnv) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid URL in env var "%s"', $name));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid URL in env var "%s"', $name));
             }
             if (!isset($parsedEnv['scheme'], $parsedEnv['host'])) {
-                throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid URL env var "%s": schema and host expected, %s given.', $name, $env));
+                throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Invalid URL env var "%s": schema and host expected, %s given.', $name, $env));
             }
             $parsedEnv += ['port' => null, 'user' => null, 'pass' => null, 'path' => null, 'query' => null, 'fragment' => null];
             // remove the '/' separator
@@ -193,7 +193,7 @@ class EnvVarProcessor implements \_PhpScoper666af036e800\Symfony\Component\Depen
                 }
                 $value = $this->container->getParameter($match[1]);
                 if (!\is_scalar($value)) {
-                    throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Parameter "%s" found when resolving env var "%s" must be scalar, "%s" given.', $match[1], $name, \gettype($value)));
+                    throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Parameter "%s" found when resolving env var "%s" must be scalar, "%s" given.', $match[1], $name, \gettype($value)));
                 }
                 return $value;
             }, $env);
@@ -204,6 +204,6 @@ class EnvVarProcessor implements \_PhpScoper666af036e800\Symfony\Component\Depen
         if ('trim' === $prefix) {
             return \trim($env);
         }
-        throw new \_PhpScoper666af036e800\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Unsupported env var prefix "%s".', $prefix));
+        throw new \_PhpScoper836bc32aecc2\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Unsupported env var prefix "%s".', $prefix));
     }
 }

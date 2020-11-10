@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Neon;
 
-use _PhpScoper666af036e800\Nette\Neon\Encoder;
-use _PhpScoper666af036e800\Nette\Neon\Neon;
-use _PhpScoper666af036e800\Nette\Utils\Strings;
+use _PhpScoper836bc32aecc2\Nette\Neon\Encoder;
+use _PhpScoper836bc32aecc2\Nette\Neon\Neon;
+use _PhpScoper836bc32aecc2\Nette\Utils\Strings;
 final class NeonPrinter
 {
     /**
@@ -23,11 +23,11 @@ final class NeonPrinter
      */
     public function print(array $neon) : string
     {
-        $neonContent = \_PhpScoper666af036e800\Nette\Neon\Neon::encode($neon, \_PhpScoper666af036e800\Nette\Neon\Encoder::BLOCK);
+        $neonContent = \_PhpScoper836bc32aecc2\Nette\Neon\Neon::encode($neon, \_PhpScoper836bc32aecc2\Nette\Neon\Encoder::BLOCK);
         // inline single tags, dummy
-        $neonContent = \_PhpScoper666af036e800\Nette\Utils\Strings::replace($neonContent, self::TAGS_REGEX, 'tags: [$1]');
+        $neonContent = \_PhpScoper836bc32aecc2\Nette\Utils\Strings::replace($neonContent, self::TAGS_REGEX, 'tags: [$1]');
         // fix double space in arguments
-        $neonContent = \_PhpScoper666af036e800\Nette\Utils\Strings::replace($neonContent, self::ARGUMENTS_DOUBLE_SPACE_REGEX, '$1');
-        return \_PhpScoper666af036e800\Nette\Utils\Strings::replace($neonContent, '#\\t#', '    ');
+        $neonContent = \_PhpScoper836bc32aecc2\Nette\Utils\Strings::replace($neonContent, self::ARGUMENTS_DOUBLE_SPACE_REGEX, '$1');
+        return \_PhpScoper836bc32aecc2\Nette\Utils\Strings::replace($neonContent, '#\\t#', '    ');
     }
 }
