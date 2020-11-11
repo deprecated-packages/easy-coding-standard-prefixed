@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper06c66bea2cf6;
+namespace _PhpScoper0f5cd390c37a;
 
-class Normalizer extends \_PhpScoper06c66bea2cf6\Symfony\Polyfill\Intl\Normalizer\Normalizer
+class Normalizer extends \_PhpScoper0f5cd390c37a\Symfony\Polyfill\Intl\Normalizer\Normalizer
 {
 }
-\class_alias('_PhpScoper06c66bea2cf6\\Normalizer', 'Normalizer', \false);
+\class_alias('_PhpScoper0f5cd390c37a\\Normalizer', 'Normalizer', \false);

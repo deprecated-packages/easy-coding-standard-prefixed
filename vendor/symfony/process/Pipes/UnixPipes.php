@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper06c66bea2cf6\Symfony\Component\Process\Pipes;
+namespace _PhpScoper0f5cd390c37a\Symfony\Component\Process\Pipes;
 
-use _PhpScoper06c66bea2cf6\Symfony\Component\Process\Process;
+use _PhpScoper0f5cd390c37a\Symfony\Component\Process\Process;
 /**
  * UnixPipes implementation uses unix pipes as handles.
  *
@@ -18,7 +18,7 @@ use _PhpScoper06c66bea2cf6\Symfony\Component\Process\Process;
  *
  * @internal
  */
-class UnixPipes extends \_PhpScoper06c66bea2cf6\Symfony\Component\Process\Pipes\AbstractPipes
+class UnixPipes extends \_PhpScoper0f5cd390c37a\Symfony\Component\Process\Pipes\AbstractPipes
 {
     /** @var bool */
     private $ttyMode;
@@ -49,7 +49,7 @@ class UnixPipes extends \_PhpScoper06c66bea2cf6\Symfony\Component\Process\Pipes\
         if ($this->ttyMode) {
             return array(array('file', '/dev/tty', 'r'), array('file', '/dev/tty', 'w'), array('file', '/dev/tty', 'w'));
         }
-        if ($this->ptyMode && \_PhpScoper06c66bea2cf6\Symfony\Component\Process\Process::isPtySupported()) {
+        if ($this->ptyMode && \_PhpScoper0f5cd390c37a\Symfony\Component\Process\Process::isPtySupported()) {
             return array(array('pty'), array('pty'), array('pty'));
         }
         return array(
@@ -77,7 +77,7 @@ class UnixPipes extends \_PhpScoper06c66bea2cf6\Symfony\Component\Process\Pipes\
         $r = $this->pipes;
         unset($r[0]);
         // let's have a look if something changed in streams
-        if (($r || $w) && \false === ($n = @\stream_select($r, $w, $e, 0, $blocking ? \_PhpScoper06c66bea2cf6\Symfony\Component\Process\Process::TIMEOUT_PRECISION * 1000000.0 : 0))) {
+        if (($r || $w) && \false === ($n = @\stream_select($r, $w, $e, 0, $blocking ? \_PhpScoper0f5cd390c37a\Symfony\Component\Process\Process::TIMEOUT_PRECISION * 1000000.0 : 0))) {
             // if a system call has been interrupted, forget about it, let's try again
             // otherwise, an error occurred, let's reset pipes
             if (!$this->hasSystemCallBeenInterrupted()) {

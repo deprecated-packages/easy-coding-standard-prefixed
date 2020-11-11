@@ -20,7 +20,7 @@ use PhpCsFixer\Tests\Test\Assert\AssertTokensTrait;
 use PhpCsFixer\Tests\TestCase;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper06c66bea2cf6\Prophecy\Argument;
+use _PhpScoper0f5cd390c37a\Prophecy\Argument;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -150,7 +150,7 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
         if (null === $linter) {
             if (\getenv('SKIP_LINT_TEST_CASES')) {
                 $linterProphecy = $this->prophesize(\PhpCsFixer\Linter\LinterInterface::class);
-                $linterProphecy->lintSource(\_PhpScoper06c66bea2cf6\Prophecy\Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
+                $linterProphecy->lintSource(\_PhpScoper0f5cd390c37a\Prophecy\Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
                 $linter = $linterProphecy->reveal();
             } else {
                 $linter = new \PhpCsFixer\Linter\CachingLinter(new \PhpCsFixer\Linter\Linter());

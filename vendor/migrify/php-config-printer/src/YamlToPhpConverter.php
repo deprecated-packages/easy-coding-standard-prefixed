@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter;
+namespace _PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter;
 
-use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
-use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
-use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
-use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter;
-use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
-use _PhpScoper06c66bea2cf6\Symfony\Component\Yaml\Parser;
-use _PhpScoper06c66bea2cf6\Symfony\Component\Yaml\Yaml;
+use _PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
+use _PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
+use _PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
+use _PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter;
+use _PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter;
+use _PhpScoper0f5cd390c37a\Symfony\Component\Yaml\Parser;
+use _PhpScoper0f5cd390c37a\Symfony\Component\Yaml\Yaml;
 /**
  * @source https://raw.githubusercontent.com/archeoprog/maker-bundle/make-convert-services/src/Util/PhpServicesCreator.php
  *
@@ -45,7 +45,7 @@ final class YamlToPhpConverter
      * @var RoutingConfiguratorReturnClosureFactory
      */
     private $routingConfiguratorReturnClosureFactory;
-    public function __construct(\_PhpScoper06c66bea2cf6\Symfony\Component\Yaml\Parser $yamlParser, \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $returnClosureNodesFactory, \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface $yamlFileContentProvider, \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter $checkerServiceParametersShifter)
+    public function __construct(\_PhpScoper0f5cd390c37a\Symfony\Component\Yaml\Parser $yamlParser, \_PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \_PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $returnClosureNodesFactory, \_PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, \_PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface $yamlFileContentProvider, \_PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter $checkerServiceParametersShifter)
     {
         $this->yamlParser = $yamlParser;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;
@@ -58,7 +58,7 @@ final class YamlToPhpConverter
     {
         $this->yamlFileContentProvider->setContent($yaml);
         /** @var mixed[]|null $yamlArray */
-        $yamlArray = $this->yamlParser->parse($yaml, \_PhpScoper06c66bea2cf6\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS | \_PhpScoper06c66bea2cf6\Symfony\Component\Yaml\Yaml::PARSE_CONSTANT);
+        $yamlArray = $this->yamlParser->parse($yaml, \_PhpScoper0f5cd390c37a\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS | \_PhpScoper0f5cd390c37a\Symfony\Component\Yaml\Yaml::PARSE_CONSTANT);
         if ($yamlArray === null) {
             return '';
         }

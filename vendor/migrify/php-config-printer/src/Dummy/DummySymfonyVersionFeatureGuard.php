@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Dummy;
+namespace _PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\Dummy;
 
-use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
-final class DummySymfonyVersionFeatureGuard implements \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface
+use _PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
+final class DummySymfonyVersionFeatureGuard implements \_PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface
 {
     public function isAtLeastSymfonyVersion(float $symfonyVersion) : bool
     {

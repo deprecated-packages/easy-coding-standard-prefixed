@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\ValueObject;
+namespace _PhpScoper0f5cd390c37a\Migrify\PhpConfigPrinter\ValueObject;
 
 final class Option
 {
