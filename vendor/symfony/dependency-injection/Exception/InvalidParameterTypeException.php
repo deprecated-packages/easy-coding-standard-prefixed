@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Exception;
+namespace _PhpScoper2fe14d6302bc\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Thrown when trying to inject a parameter into a constructor/method with an incompatible type.
@@ -16,7 +16,7 @@ namespace _PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Exception
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Julien Maulny <jmaulny@darkmira.fr>
  */
-class InvalidParameterTypeException extends \_PhpScopere5e7dca8c031\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+class InvalidParameterTypeException extends \_PhpScoper2fe14d6302bc\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
 {
     public function __construct(string $serviceId, string $type, \ReflectionParameter $parameter)
     {

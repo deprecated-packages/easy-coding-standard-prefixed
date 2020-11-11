@@ -3,36 +3,17 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScopere5e7dca8c031\Symfony\Component\Console\Command\Command;
-use _PhpScopere5e7dca8c031\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopere5e7dca8c031\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopere5e7dca8c031\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper2fe14d6302bc\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper2fe14d6302bc\Symfony\Component\Console\Output\OutputInterface;
+use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
-use Symplify\SmartFileSystem\SmartFileSystem;
-final class InitCommand extends \_PhpScopere5e7dca8c031\Symfony\Component\Console\Command\Command
+final class InitCommand extends \Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
 {
-    /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
-    /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-    /**
-     * InitCommand constructor.
-     */
-    public function __construct(\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \_PhpScopere5e7dca8c031\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
-    {
-        parent::__construct();
-        $this->smartFileSystem = $smartFileSystem;
-        $this->symfonyStyle = $symfonyStyle;
-    }
     protected function configure() : void
     {
         $this->setDescription('Generate rector.php configuration file');
     }
-    protected function execute(\_PhpScopere5e7dca8c031\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopere5e7dca8c031\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoper2fe14d6302bc\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper2fe14d6302bc\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $rectorConfigFiles = $this->smartFileSystem->exists(\getcwd() . '/ecs.php');
         if (!$rectorConfigFiles) {

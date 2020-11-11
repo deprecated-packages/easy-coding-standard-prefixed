@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopere5e7dca8c031\Migrify\PhpConfigPrinter\NodeTraverser;
+namespace _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\NodeTraverser;
 
-use _PhpScopere5e7dca8c031\Migrify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
-use _PhpScopere5e7dca8c031\Nette\Utils\Strings;
-use _PhpScopere5e7dca8c031\PhpParser\BuilderFactory;
-use _PhpScopere5e7dca8c031\PhpParser\Node;
-use _PhpScopere5e7dca8c031\PhpParser\Node\Name;
-use _PhpScopere5e7dca8c031\PhpParser\Node\Stmt\Nop;
-use _PhpScopere5e7dca8c031\PhpParser\Node\Stmt\Use_;
-use _PhpScopere5e7dca8c031\PhpParser\NodeTraverser;
+use _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
+use _PhpScoper2fe14d6302bc\Nette\Utils\Strings;
+use _PhpScoper2fe14d6302bc\PhpParser\BuilderFactory;
+use _PhpScoper2fe14d6302bc\PhpParser\Node;
+use _PhpScoper2fe14d6302bc\PhpParser\Node\Name;
+use _PhpScoper2fe14d6302bc\PhpParser\Node\Stmt\Nop;
+use _PhpScoper2fe14d6302bc\PhpParser\Node\Stmt\Use_;
+use _PhpScoper2fe14d6302bc\PhpParser\NodeTraverser;
 final class ImportFullyQualifiedNamesNodeTraverser
 {
     /**
@@ -21,7 +21,7 @@ final class ImportFullyQualifiedNamesNodeTraverser
      * @var BuilderFactory
      */
     private $builderFactory;
-    public function __construct(\_PhpScopere5e7dca8c031\Migrify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor $importFullyQualifiedNamesNodeVisitor, \_PhpScopere5e7dca8c031\PhpParser\BuilderFactory $builderFactory)
+    public function __construct(\_PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor $importFullyQualifiedNamesNodeVisitor, \_PhpScoper2fe14d6302bc\PhpParser\BuilderFactory $builderFactory)
     {
         $this->importFullyQualifiedNamesNodeVisitor = $importFullyQualifiedNamesNodeVisitor;
         $this->builderFactory = $builderFactory;
@@ -50,7 +50,7 @@ final class ImportFullyQualifiedNamesNodeTraverser
         }
         \sort($nameImports);
         $useImports = $this->createUses($nameImports);
-        $useImports[] = new \_PhpScopere5e7dca8c031\PhpParser\Node\Stmt\Nop();
+        $useImports[] = new \_PhpScoper2fe14d6302bc\PhpParser\Node\Stmt\Nop();
         return \array_merge($useImports, $nodes);
     }
     /**
@@ -59,7 +59,7 @@ final class ImportFullyQualifiedNamesNodeTraverser
      */
     private function collectNameImportsFromNodes(array $nodes) : array
     {
-        $nodeTraverser = new \_PhpScopere5e7dca8c031\PhpParser\NodeTraverser();
+        $nodeTraverser = new \_PhpScoper2fe14d6302bc\PhpParser\NodeTraverser();
         $nodeTraverser->addVisitor($this->importFullyQualifiedNamesNodeVisitor);
         $nodeTraverser->traverse($nodes);
         $nameImports = $this->importFullyQualifiedNamesNodeVisitor->getNameImports();
@@ -73,12 +73,12 @@ final class ImportFullyQualifiedNamesNodeTraverser
     {
         $useImports = [];
         foreach ($nameImports as $nameImport) {
-            $shortNameImport = \_PhpScopere5e7dca8c031\Nette\Utils\Strings::after($nameImport, '\\', -1);
+            $shortNameImport = \_PhpScoper2fe14d6302bc\Nette\Utils\Strings::after($nameImport, '\\', -1);
             if (\function_exists($nameImport) || $shortNameImport === 'ref') {
-                $useBuilder = $this->builderFactory->useFunction(new \_PhpScopere5e7dca8c031\PhpParser\Node\Name($nameImport));
+                $useBuilder = $this->builderFactory->useFunction(new \_PhpScoper2fe14d6302bc\PhpParser\Node\Name($nameImport));
                 $useImports[] = $useBuilder->getNode();
             } else {
-                $useBuilder = $this->builderFactory->use(new \_PhpScopere5e7dca8c031\PhpParser\Node\Name($nameImport));
+                $useBuilder = $this->builderFactory->use(new \_PhpScoper2fe14d6302bc\PhpParser\Node\Name($nameImport));
                 $useImports[] = $useBuilder->getNode();
             }
         }

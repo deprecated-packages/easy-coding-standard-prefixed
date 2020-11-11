@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere5e7dca8c031\Symfony\Component\Process;
+namespace _PhpScoper2fe14d6302bc\Symfony\Component\Process;
 
-use _PhpScopere5e7dca8c031\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScoper2fe14d6302bc\Symfony\Component\Process\Exception\RuntimeException;
 /**
  * PhpProcess runs a PHP script in an independent process.
  *
@@ -20,7 +20,7 @@ use _PhpScopere5e7dca8c031\Symfony\Component\Process\Exception\RuntimeException;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class PhpProcess extends \_PhpScopere5e7dca8c031\Symfony\Component\Process\Process
+class PhpProcess extends \_PhpScoper2fe14d6302bc\Symfony\Component\Process\Process
 {
     /**
      * Constructor.
@@ -33,7 +33,7 @@ class PhpProcess extends \_PhpScopere5e7dca8c031\Symfony\Component\Process\Proce
      */
     public function __construct($script, $cwd = null, array $env = null, $timeout = 60, array $options = null)
     {
-        $executableFinder = new \_PhpScopere5e7dca8c031\Symfony\Component\Process\PhpExecutableFinder();
+        $executableFinder = new \_PhpScoper2fe14d6302bc\Symfony\Component\Process\PhpExecutableFinder();
         if (\false === ($php = $executableFinder->find(\false))) {
             $php = null;
         } else {
@@ -64,7 +64,7 @@ class PhpProcess extends \_PhpScopere5e7dca8c031\Symfony\Component\Process\Proce
     public function start(callable $callback = null)
     {
         if (null === $this->getCommandLine()) {
-            throw new \_PhpScopere5e7dca8c031\Symfony\Component\Process\Exception\RuntimeException('Unable to find the PHP executable.');
+            throw new \_PhpScoper2fe14d6302bc\Symfony\Component\Process\Exception\RuntimeException('Unable to find the PHP executable.');
         }
         $env = 1 < \func_num_args() ? \func_get_arg(1) : null;
         parent::start($callback, $env);
