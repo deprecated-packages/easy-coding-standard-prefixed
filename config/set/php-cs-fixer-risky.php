@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper0f5cd390c37a;
+namespace _PhpScoper4f985154d5a0;
 
 use PhpCsFixer\Fixer\Alias\EregToPregFixer;
 use PhpCsFixer\Fixer\Alias\NoAliasFunctionsFixer;
@@ -35,8 +35,8 @@ use PhpCsFixer\Fixer\PhpUnit\PhpUnitTestCaseStaticMethodCallsFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\StringNotation\StringLineEndingFixer;
-use _PhpScoper0f5cd390c37a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoper0f5cd390c37a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\Comment\CommentToPhpdocFixer::class);
     $services->set(\PhpCsFixer\Fixer\LanguageConstruct\DirConstantFixer::class);

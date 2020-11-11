@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0f5cd390c37a\Symfony\Component\Config\Exception;
+namespace _PhpScoper4f985154d5a0\Symfony\Component\Config\Exception;
 
 /**
  * Exception class for when a resource cannot be loaded or imported.

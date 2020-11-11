@@ -9,10 +9,10 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0f5cd390c37a\SebastianBergmann\Diff;
+namespace _PhpScoper4f985154d5a0\SebastianBergmann\Diff;
 
-use _PhpScoper0f5cd390c37a\PHPUnit\Framework\TestCase;
-use _PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Utils\FileUtils;
+use _PhpScoper4f985154d5a0\PHPUnit\Framework\TestCase;
+use _PhpScoper4f985154d5a0\SebastianBergmann\Diff\Utils\FileUtils;
 /**
  * @covers SebastianBergmann\Diff\Parser
  *
@@ -20,7 +20,7 @@ use _PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Utils\FileUtils;
  * @uses SebastianBergmann\Diff\Diff
  * @uses SebastianBergmann\Diff\Line
  */
-final class ParserTest extends \_PhpScoper0f5cd390c37a\PHPUnit\Framework\TestCase
+final class ParserTest extends \_PhpScoper4f985154d5a0\PHPUnit\Framework\TestCase
 {
     /**
      * @var Parser
@@ -28,23 +28,23 @@ final class ParserTest extends \_PhpScoper0f5cd390c37a\PHPUnit\Framework\TestCas
     private $parser;
     protected function setUp() : void
     {
-        $this->parser = new \_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Parser();
+        $this->parser = new \_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Parser();
     }
     public function testParse() : void
     {
-        $content = \_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Utils\FileUtils::getFileContent(__DIR__ . '/fixtures/patch.txt');
+        $content = \_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Utils\FileUtils::getFileContent(__DIR__ . '/fixtures/patch.txt');
         $diffs = $this->parser->parse($content);
-        $this->assertContainsOnlyInstancesOf(\_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Diff::class, $diffs);
+        $this->assertContainsOnlyInstancesOf(\_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Diff::class, $diffs);
         $this->assertCount(1, $diffs);
         $chunks = $diffs[0]->getChunks();
-        $this->assertContainsOnlyInstancesOf(\_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Chunk::class, $chunks);
+        $this->assertContainsOnlyInstancesOf(\_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Chunk::class, $chunks);
         $this->assertCount(1, $chunks);
         $this->assertSame(20, $chunks[0]->getStart());
         $this->assertCount(4, $chunks[0]->getLines());
     }
     public function testParseWithMultipleChunks() : void
     {
-        $content = \_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Utils\FileUtils::getFileContent(__DIR__ . '/fixtures/patch2.txt');
+        $content = \_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Utils\FileUtils::getFileContent(__DIR__ . '/fixtures/patch2.txt');
         $diffs = $this->parser->parse($content);
         $this->assertCount(1, $diffs);
         $chunks = $diffs[0]->getChunks();
@@ -68,10 +68,10 @@ index abcdefg..abcdefh 100644
 -B
 END;
         $diffs = $this->parser->parse($content);
-        $this->assertContainsOnlyInstancesOf(\_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Diff::class, $diffs);
+        $this->assertContainsOnlyInstancesOf(\_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Diff::class, $diffs);
         $this->assertCount(1, $diffs);
         $chunks = $diffs[0]->getChunks();
-        $this->assertContainsOnlyInstancesOf(\_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Chunk::class, $chunks);
+        $this->assertContainsOnlyInstancesOf(\_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Chunk::class, $chunks);
         $this->assertCount(1, $chunks);
         $chunk = $chunks[0];
         $this->assertSame(49, $chunk->getStart());
@@ -79,15 +79,15 @@ END;
         $this->assertSame(9, $chunk->getStartRange());
         $this->assertSame(8, $chunk->getEndRange());
         $lines = $chunk->getLines();
-        $this->assertContainsOnlyInstancesOf(\_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Line::class, $lines);
+        $this->assertContainsOnlyInstancesOf(\_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Line::class, $lines);
         $this->assertCount(2, $lines);
         /** @var Line $line */
         $line = $lines[0];
         $this->assertSame('A', $line->getContent());
-        $this->assertSame(\_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Line::UNCHANGED, $line->getType());
+        $this->assertSame(\_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Line::UNCHANGED, $line->getType());
         $line = $lines[1];
         $this->assertSame('B', $line->getContent());
-        $this->assertSame(\_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Line::REMOVED, $line->getType());
+        $this->assertSame(\_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Line::REMOVED, $line->getType());
     }
     public function testParseDiffForMulitpleFiles() : void
     {
@@ -133,6 +133,6 @@ END;
     }
     public function diffProvider() : array
     {
-        return [["--- old.txt\t2014-11-04 08:51:02.661868729 +0300\n+++ new.txt\t2014-11-04 08:51:02.665868730 +0300\n@@ -1,3 +1,4 @@\n+2222111\n 1111111\n 1111111\n 1111111\n@@ -5,10 +6,8 @@\n 1111111\n 1111111\n 1111111\n +1121211\n 1111111\n -1111111\n -1111111\n -2222222\n 2222222\n 2222222\n 2222222\n@@ -17,5 +16,6 @@\n 2222222\n 2222222\n 2222222\n +2122212\n 2222222\n 2222222\n", \unserialize(\_PhpScoper0f5cd390c37a\SebastianBergmann\Diff\Utils\FileUtils::getFileContent(__DIR__ . '/fixtures/serialized_diff.bin'))]];
+        return [["--- old.txt\t2014-11-04 08:51:02.661868729 +0300\n+++ new.txt\t2014-11-04 08:51:02.665868730 +0300\n@@ -1,3 +1,4 @@\n+2222111\n 1111111\n 1111111\n 1111111\n@@ -5,10 +6,8 @@\n 1111111\n 1111111\n 1111111\n +1121211\n 1111111\n -1111111\n -1111111\n -2222222\n 2222222\n 2222222\n 2222222\n@@ -17,5 +16,6 @@\n 2222222\n 2222222\n 2222222\n +2122212\n 2222222\n 2222222\n", \unserialize(\_PhpScoper4f985154d5a0\SebastianBergmann\Diff\Utils\FileUtils::getFileContent(__DIR__ . '/fixtures/serialized_diff.bin'))]];
     }
 }

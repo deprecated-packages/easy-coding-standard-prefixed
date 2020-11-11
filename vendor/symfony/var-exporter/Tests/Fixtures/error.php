@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoper0f5cd390c37a;
+namespace _PhpScoper4f985154d5a0;
 
-return \_PhpScoper0f5cd390c37a\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [(\_PhpScoper0f5cd390c37a\Symfony\Component\VarExporter\Internal\Registry::$factories['Error'] ?? \_PhpScoper0f5cd390c37a\Symfony\Component\VarExporter\Internal\Registry::f('Error'))()], null, ['TypeError' => ['file' => [\dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'VarExporterTest.php'], 'line' => [234]], 'Error' => ['trace' => [['file' => \dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'VarExporterTest.php', 'line' => 123]]]], $o[0], [1 => 0]);
+return \_PhpScoper4f985154d5a0\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [(\_PhpScoper4f985154d5a0\Symfony\Component\VarExporter\Internal\Registry::$factories['Error'] ?? \_PhpScoper4f985154d5a0\Symfony\Component\VarExporter\Internal\Registry::f('Error'))()], null, ['TypeError' => ['file' => [\dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'VarExporterTest.php'], 'line' => [234]], 'Error' => ['trace' => [['file' => \dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'VarExporterTest.php', 'line' => 123]]]], $o[0], [1 => 0]);

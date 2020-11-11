@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection\CompilerPass;
 
-use _PhpScoper0f5cd390c37a\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper0f5cd390c37a\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper0f5cd390c37a\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use _PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symplify\EasyCodingStandard\ValueObject\Option;
-final class RemoveExcludedCheckersCompilerPass implements \_PhpScoper0f5cd390c37a\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+final class RemoveExcludedCheckersCompilerPass implements \_PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
-    public function process(\_PhpScoper0f5cd390c37a\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function process(\_PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $excludedCheckers = $this->getExcludedCheckersFromParameterBag($containerBuilder->getParameterBag());
         $definitions = $containerBuilder->getDefinitions();
@@ -23,7 +23,7 @@ final class RemoveExcludedCheckersCompilerPass implements \_PhpScoper0f5cd390c37
     /**
      * @return array<int, class-string>
      */
-    private function getExcludedCheckersFromParameterBag(\_PhpScoper0f5cd390c37a\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag) : array
+    private function getExcludedCheckersFromParameterBag(\_PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag) : array
     {
         $excludedCheckers = [];
         // parts of "skip" parameter

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0f5cd390c37a\Symfony\Component\Cache\Traits;
+namespace _PhpScoper4f985154d5a0\Symfony\Component\Cache\Traits;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>

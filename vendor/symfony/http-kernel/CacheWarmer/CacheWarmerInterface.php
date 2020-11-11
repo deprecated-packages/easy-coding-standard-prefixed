@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0f5cd390c37a\Symfony\Component\HttpKernel\CacheWarmer;
+namespace _PhpScoper4f985154d5a0\Symfony\Component\HttpKernel\CacheWarmer;
 
 /**
  * Interface for classes able to warm up the cache.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface CacheWarmerInterface extends \_PhpScoper0f5cd390c37a\Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface
+interface CacheWarmerInterface extends \_PhpScoper4f985154d5a0\Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface
 {
     /**
      * Checks whether this warmer is optional or not.

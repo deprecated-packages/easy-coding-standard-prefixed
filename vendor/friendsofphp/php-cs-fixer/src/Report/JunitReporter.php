@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Report;
 
 use PhpCsFixer\Preg;
-use _PhpScoper0f5cd390c37a\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper4f985154d5a0\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *
@@ -49,7 +49,7 @@ final class JunitReporter implements \PhpCsFixer\Report\ReporterInterface
             $testsuite->setAttribute('time', \sprintf('%.3f', $reportSummary->getTime() / 1000));
         }
         $dom->formatOutput = \true;
-        return $reportSummary->isDecoratedOutput() ? \_PhpScoper0f5cd390c37a\Symfony\Component\Console\Formatter\OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
+        return $reportSummary->isDecoratedOutput() ? \_PhpScoper4f985154d5a0\Symfony\Component\Console\Formatter\OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
     }
     private function createSuccessTestCase(\DOMDocument $dom, \DOMElement $testsuite)
     {

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0f5cd390c37a\Symfony\Component\VarDumper\Cloner;
+namespace _PhpScoper4f985154d5a0\Symfony\Component\VarDumper\Cloner;
 
 /**
  * Represents the main properties of a PHP variable.

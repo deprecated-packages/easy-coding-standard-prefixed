@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Tests;
+namespace _PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Tests;
 
-use _PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options;
-use _PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\OptionsResolver;
-class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_TestCase
+use _PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\OptionsResolver;
+class OptionsResolverTest extends \_PhpScoper4f985154d5a0\PHPUnit_Framework_TestCase
 {
     /**
      * @var OptionsResolver
@@ -21,7 +21,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     private $resolver;
     protected function setUp()
     {
-        $this->resolver = new \_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\OptionsResolver();
+        $this->resolver = new \_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\OptionsResolver();
     }
     ////////////////////////////////////////////////////////////////////////////
     // resolve()
@@ -51,7 +51,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testResolveFailsFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->resolve(array());
         });
         $this->resolver->resolve();
@@ -74,7 +74,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfSetDefaultFromLazyOption()
     {
-        $this->resolver->setDefault('lazy', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('lazy', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->setDefault('default', 42);
         });
         $this->resolver->resolve();
@@ -96,12 +96,12 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     ////////////////////////////////////////////////////////////////////////////
     public function testSetLazyReturnsThis()
     {
-        $this->assertSame($this->resolver, $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->assertSame($this->resolver, $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
         }));
     }
     public function testSetLazyClosure()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             return 'lazy';
         });
         $this->assertEquals(array('foo' => 'lazy'), $this->resolver->resolve());
@@ -109,7 +109,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testClosureWithoutTypeHintNotInvoked()
     {
         $closure = function ($options) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::fail('Should not be called');
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::fail('Should not be called');
         };
         $this->resolver->setDefault('foo', $closure);
         $this->assertSame(array('foo' => $closure), $this->resolver->resolve());
@@ -117,7 +117,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testClosureWithoutParametersNotInvoked()
     {
         $closure = function () {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::fail('Should not be called');
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::fail('Should not be called');
         };
         $this->resolver->setDefault('foo', $closure);
         $this->assertSame(array('foo' => $closure), $this->resolver->resolve());
@@ -127,8 +127,8 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
         // defined by superclass
         $this->resolver->setDefault('foo', 'bar');
         // defined by subclass
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options, $previousValue) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertEquals('bar', $previousValue);
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options, $previousValue) {
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertEquals('bar', $previousValue);
             return 'lazy';
         });
         $this->assertEquals(array('foo' => 'lazy'), $this->resolver->resolve());
@@ -136,12 +136,12 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testAccessPreviousLazyDefaultValue()
     {
         // defined by superclass
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             return 'bar';
         });
         // defined by subclass
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options, $previousValue) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertEquals('bar', $previousValue);
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options, $previousValue) {
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertEquals('bar', $previousValue);
             return 'lazy';
         });
         $this->assertEquals(array('foo' => 'lazy'), $this->resolver->resolve());
@@ -150,18 +150,18 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     {
         // defined by superclass
         $this->resolver->setDefault('foo', function () {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::fail('Should not be called');
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::fail('Should not be called');
         });
         // defined by subclass, no $previousValue argument defined!
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             return 'lazy';
         });
         $this->assertEquals(array('foo' => 'lazy'), $this->resolver->resolve());
     }
     public function testOverwrittenLazyOptionNotEvaluated()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::fail('Should not be called');
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::fail('Should not be called');
         });
         $this->resolver->setDefault('foo', 'bar');
         $this->assertSame(array('foo' => 'bar'), $this->resolver->resolve());
@@ -169,12 +169,12 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testInvokeEachLazyOptionOnlyOnce()
     {
         $calls = 0;
-        $this->resolver->setDefault('lazy1', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) use(&$calls) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertSame(1, ++$calls);
+        $this->resolver->setDefault('lazy1', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) use(&$calls) {
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertSame(1, ++$calls);
             $options['lazy2'];
         });
-        $this->resolver->setDefault('lazy2', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) use(&$calls) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertSame(2, ++$calls);
+        $this->resolver->setDefault('lazy2', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) use(&$calls) {
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertSame(2, ++$calls);
         });
         $this->resolver->resolve();
         $this->assertSame(2, $calls);
@@ -191,7 +191,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfSetRequiredFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->setRequired('bar');
         });
         $this->resolver->resolve();
@@ -299,7 +299,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfSetDefinedFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->setDefined('bar');
         });
         $this->resolver->resolve();
@@ -335,7 +335,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testLazyOptionsAreDefined()
     {
         $this->assertFalse($this->resolver->isDefined('foo'));
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
         });
         $this->assertTrue($this->resolver->isDefined('foo'));
     }
@@ -389,7 +389,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfSetAllowedTypesFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->setAllowedTypes('bar', 'string');
         });
         $this->resolver->setDefault('bar', 'baz');
@@ -402,12 +402,12 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     {
         $this->resolver->setDefined('option');
         $this->resolver->setAllowedTypes('option', $allowedType);
-        $this->setExpectedException('_PhpScoper0f5cd390c37a\\Symfony\\Component\\OptionsResolver\\Exception\\InvalidOptionsException', $exceptionMessage);
+        $this->setExpectedException('_PhpScoper4f985154d5a0\\Symfony\\Component\\OptionsResolver\\Exception\\InvalidOptionsException', $exceptionMessage);
         $this->resolver->resolve(array('option' => $actualType));
     }
     public function provideInvalidTypes()
     {
-        return array(array(\true, 'string', 'The option "option" with value true is expected to be of type "string", but is of type "boolean".'), array(\false, 'string', 'The option "option" with value false is expected to be of type "string", but is of type "boolean".'), array(\fopen(__FILE__, 'r'), 'string', 'The option "option" with value resource is expected to be of type "string", but is of type "resource".'), array(array(), 'string', 'The option "option" with value array is expected to be of type "string", but is of type "array".'), array(new \_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\OptionsResolver(), 'string', 'The option "option" with value Symfony\\Component\\OptionsResolver\\OptionsResolver is expected to be of type "string", but is of type "Symfony\\Component\\OptionsResolver\\OptionsResolver".'), array(42, 'string', 'The option "option" with value 42 is expected to be of type "string", but is of type "integer".'), array(null, 'string', 'The option "option" with value null is expected to be of type "string", but is of type "NULL".'), array('bar', '\\stdClass', 'The option "option" with value "bar" is expected to be of type "\\stdClass", but is of type "string".'));
+        return array(array(\true, 'string', 'The option "option" with value true is expected to be of type "string", but is of type "boolean".'), array(\false, 'string', 'The option "option" with value false is expected to be of type "string", but is of type "boolean".'), array(\fopen(__FILE__, 'r'), 'string', 'The option "option" with value resource is expected to be of type "string", but is of type "resource".'), array(array(), 'string', 'The option "option" with value array is expected to be of type "string", but is of type "array".'), array(new \_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\OptionsResolver(), 'string', 'The option "option" with value Symfony\\Component\\OptionsResolver\\OptionsResolver is expected to be of type "string", but is of type "Symfony\\Component\\OptionsResolver\\OptionsResolver".'), array(42, 'string', 'The option "option" with value 42 is expected to be of type "string", but is of type "integer".'), array(null, 'string', 'The option "option" with value null is expected to be of type "string", but is of type "NULL".'), array('bar', '\\stdClass', 'The option "option" with value "bar" is expected to be of type "\\stdClass", but is of type "string".'));
     }
     public function testResolveSucceedsIfValidType()
     {
@@ -452,7 +452,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfAddAllowedTypesFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->addAllowedTypes('bar', 'string');
         });
         $this->resolver->setDefault('bar', 'baz');
@@ -519,7 +519,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfSetAllowedValuesFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->setAllowedValues('bar', 'baz');
         });
         $this->resolver->setDefault('bar', 'baz');
@@ -592,7 +592,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
         try {
             $this->resolver->resolve();
             $this->fail('Should fail');
-        } catch (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException $e) {
+        } catch (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException $e) {
         }
         $this->assertSame(42, $passedValue);
     }
@@ -648,7 +648,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfAddAllowedValuesFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->addAllowedValues('bar', 'baz');
         });
         $this->resolver->setDefault('bar', 'baz');
@@ -770,7 +770,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfSetNormalizerFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->setNormalizer('foo', function () {
             });
         });
@@ -780,7 +780,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testNormalizerReceivesSetOption()
     {
         $this->resolver->setDefault('foo', 'bar');
-        $this->resolver->setNormalizer('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options, $value) {
+        $this->resolver->setNormalizer('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options, $value) {
             return 'normalized[' . $value . ']';
         });
         $this->assertEquals(array('foo' => 'normalized[bar]'), $this->resolver->resolve());
@@ -788,7 +788,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testNormalizerReceivesPassedOption()
     {
         $this->resolver->setDefault('foo', 'bar');
-        $this->resolver->setNormalizer('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options, $value) {
+        $this->resolver->setNormalizer('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options, $value) {
             return 'normalized[' . $value . ']';
         });
         $resolved = $this->resolver->resolve(array('foo' => 'baz'));
@@ -802,7 +802,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
         $this->resolver->setDefault('foo', 'bar');
         $this->resolver->setAllowedTypes('foo', 'int');
         $this->resolver->setNormalizer('foo', function () {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::fail('Should not be called.');
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::fail('Should not be called.');
         });
         $this->resolver->resolve();
     }
@@ -814,7 +814,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
         $this->resolver->setDefault('foo', 'bar');
         $this->resolver->setAllowedValues('foo', 'baz');
         $this->resolver->setNormalizer('foo', function () {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::fail('Should not be called.');
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::fail('Should not be called.');
         });
         $this->resolver->resolve();
     }
@@ -822,22 +822,22 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     {
         $this->resolver->setDefault('default', 'bar');
         $this->resolver->setDefault('norm', 'baz');
-        $this->resolver->setNormalizer('norm', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setNormalizer('norm', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             /* @var \PHPUnit_Framework_TestCase $test */
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertSame('bar', $options['default']);
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertSame('bar', $options['default']);
             return 'normalized';
         });
         $this->assertEquals(array('default' => 'bar', 'norm' => 'normalized'), $this->resolver->resolve());
     }
     public function testNormalizerCanAccessLazyOptions()
     {
-        $this->resolver->setDefault('lazy', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('lazy', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             return 'bar';
         });
         $this->resolver->setDefault('norm', 'baz');
-        $this->resolver->setNormalizer('norm', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setNormalizer('norm', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             /* @var \PHPUnit_Framework_TestCase $test */
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertEquals('bar', $options['lazy']);
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertEquals('bar', $options['lazy']);
             return 'normalized';
         });
         $this->assertEquals(array('lazy' => 'bar', 'norm' => 'normalized'), $this->resolver->resolve());
@@ -849,10 +849,10 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     {
         $this->resolver->setDefault('norm1', 'bar');
         $this->resolver->setDefault('norm2', 'baz');
-        $this->resolver->setNormalizer('norm1', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setNormalizer('norm1', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options['norm2'];
         });
-        $this->resolver->setNormalizer('norm2', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setNormalizer('norm2', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options['norm1'];
         });
         $this->resolver->resolve();
@@ -862,11 +862,11 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfCyclicDependencyBetweenNormalizerAndLazyOption()
     {
-        $this->resolver->setDefault('lazy', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('lazy', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options['norm'];
         });
         $this->resolver->setDefault('norm', 'baz');
-        $this->resolver->setNormalizer('norm', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setNormalizer('norm', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options['lazy'];
         });
         $this->resolver->resolve();
@@ -875,14 +875,14 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     {
         $throw = \true;
         $this->resolver->setDefaults(array('catcher' => null, 'thrower' => null));
-        $this->resolver->setNormalizer('catcher', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setNormalizer('catcher', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             try {
                 return $options['thrower'];
             } catch (\Exception $e) {
                 return \false;
             }
         });
-        $this->resolver->setNormalizer('thrower', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) use(&$throw) {
+        $this->resolver->setNormalizer('thrower', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) use(&$throw) {
             if ($throw) {
                 $throw = \false;
                 throw new \UnexpectedValueException('throwing');
@@ -894,14 +894,14 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testCatchedExceptionFromLazyDoesNotCrashOptionResolver()
     {
         $throw = \true;
-        $this->resolver->setDefault('catcher', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('catcher', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             try {
                 return $options['thrower'];
             } catch (\Exception $e) {
                 return \false;
             }
         });
-        $this->resolver->setDefault('thrower', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) use(&$throw) {
+        $this->resolver->setDefault('thrower', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) use(&$throw) {
             if ($throw) {
                 $throw = \false;
                 throw new \UnexpectedValueException('throwing');
@@ -916,11 +916,11 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
         $this->resolver->setDefault('norm1', 'bar');
         $this->resolver->setDefault('norm2', 'baz');
         $this->resolver->setNormalizer('norm1', function ($options) use(&$calls) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertSame(1, ++$calls);
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertSame(1, ++$calls);
             $options['norm2'];
         });
         $this->resolver->setNormalizer('norm2', function () use(&$calls) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertSame(2, ++$calls);
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertSame(2, ++$calls);
         });
         $this->resolver->resolve();
         $this->assertSame(2, $calls);
@@ -929,7 +929,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     {
         $this->resolver->setDefined('norm');
         $this->resolver->setNormalizer('norm', function () {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::fail('Should not be called.');
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::fail('Should not be called.');
         });
         $this->assertEmpty($this->resolver->resolve());
     }
@@ -952,7 +952,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfSetDefaultsFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->setDefaults(array('two' => '2'));
         });
         $this->resolver->resolve();
@@ -982,7 +982,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     }
     public function testRemoveLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             return 'lazy';
         });
         $this->resolver->remove('foo');
@@ -991,7 +991,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testRemoveNormalizer()
     {
         $this->resolver->setDefault('foo', 'bar');
-        $this->resolver->setNormalizer('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options, $value) {
+        $this->resolver->setNormalizer('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options, $value) {
             return 'normalized';
         });
         $this->resolver->remove('foo');
@@ -1019,7 +1019,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfRemoveFromLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->remove('bar');
         });
         $this->resolver->setDefault('bar', 'baz');
@@ -1045,7 +1045,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     }
     public function testClearLazyOption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             return 'lazy';
         });
         $this->resolver->clear();
@@ -1054,7 +1054,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testClearNormalizer()
     {
         $this->resolver->setDefault('foo', 'bar');
-        $this->resolver->setNormalizer('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options, $value) {
+        $this->resolver->setNormalizer('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options, $value) {
             return 'normalized';
         });
         $this->resolver->clear();
@@ -1082,7 +1082,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfClearFromLazyption()
     {
-        $this->resolver->setDefault('foo', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('foo', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options->clear();
         });
         $this->resolver->setDefault('bar', 'baz');
@@ -1091,11 +1091,11 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testClearOptionAndNormalizer()
     {
         $this->resolver->setDefault('foo1', 'bar');
-        $this->resolver->setNormalizer('foo1', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setNormalizer('foo1', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             return '';
         });
         $this->resolver->setDefault('foo2', 'bar');
-        $this->resolver->setNormalizer('foo2', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setNormalizer('foo2', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             return '';
         });
         $this->resolver->clear();
@@ -1110,20 +1110,20 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
         $this->resolver->setDefault('default2', 1);
         $this->resolver->setRequired('required');
         $this->resolver->setDefined('defined');
-        $this->resolver->setDefault('lazy1', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('lazy1', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             return 'lazy';
         });
-        $this->resolver->setDefault('lazy2', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertTrue(isset($options['default1']));
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertTrue(isset($options['default2']));
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertTrue(isset($options['required']));
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertTrue(isset($options['lazy1']));
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertTrue(isset($options['lazy2']));
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertFalse(isset($options['defined']));
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertSame(0, $options['default1']);
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertSame(42, $options['default2']);
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertSame('value', $options['required']);
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertSame('lazy', $options['lazy1']);
+        $this->resolver->setDefault('lazy2', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertTrue(isset($options['default1']));
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertTrue(isset($options['default2']));
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertTrue(isset($options['required']));
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertTrue(isset($options['lazy1']));
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertTrue(isset($options['lazy2']));
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertFalse(isset($options['defined']));
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertSame(0, $options['default1']);
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertSame(42, $options['default2']);
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertSame('value', $options['required']);
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertSame('lazy', $options['lazy1']);
             // Obviously $options['lazy'] and $options['defined'] cannot be
             // accessed
         });
@@ -1167,7 +1167,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testFailIfGetNonExisting()
     {
         $this->resolver->setDefault('foo', 'bar');
-        $this->resolver->setDefault('lazy', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('lazy', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options['undefined'];
         });
         $this->resolver->resolve();
@@ -1179,7 +1179,7 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
     public function testFailIfGetDefinedButUnset()
     {
         $this->resolver->setDefined('defined');
-        $this->resolver->setDefault('lazy', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('lazy', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options['defined'];
         });
         $this->resolver->resolve();
@@ -1189,10 +1189,10 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
      */
     public function testFailIfCyclicDependency()
     {
-        $this->resolver->setDefault('lazy1', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('lazy1', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options['lazy2'];
         });
-        $this->resolver->setDefault('lazy2', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
+        $this->resolver->setDefault('lazy2', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
             $options['lazy1'];
         });
         $this->resolver->resolve();
@@ -1207,8 +1207,8 @@ class OptionsResolverTest extends \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Test
         $this->resolver->setDefined('defined');
         $this->resolver->setDefault('lazy1', function () {
         });
-        $this->resolver->setDefault('lazy2', function (\_PhpScoper0f5cd390c37a\Symfony\Component\OptionsResolver\Options $options) {
-            \_PhpScoper0f5cd390c37a\PHPUnit_Framework_Assert::assertCount(4, $options);
+        $this->resolver->setDefault('lazy2', function (\_PhpScoper4f985154d5a0\Symfony\Component\OptionsResolver\Options $options) {
+            \_PhpScoper4f985154d5a0\PHPUnit_Framework_Assert::assertCount(4, $options);
         });
         $this->assertCount(4, $this->resolver->resolve(array('required' => 'value')));
     }
