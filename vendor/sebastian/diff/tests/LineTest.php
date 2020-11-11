@@ -9,13 +9,13 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2fe14d6302bc\SebastianBergmann\Diff;
+namespace _PhpScoper06c66bea2cf6\SebastianBergmann\Diff;
 
-use _PhpScoper2fe14d6302bc\PHPUnit\Framework\TestCase;
+use _PhpScoper06c66bea2cf6\PHPUnit\Framework\TestCase;
 /**
  * @covers SebastianBergmann\Diff\Line
  */
-final class LineTest extends \_PhpScoper2fe14d6302bc\PHPUnit\Framework\TestCase
+final class LineTest extends \_PhpScoper06c66bea2cf6\PHPUnit\Framework\TestCase
 {
     /**
      * @var Line
@@ -23,15 +23,15 @@ final class LineTest extends \_PhpScoper2fe14d6302bc\PHPUnit\Framework\TestCase
     private $line;
     protected function setUp() : void
     {
-        $this->line = new \_PhpScoper2fe14d6302bc\SebastianBergmann\Diff\Line();
+        $this->line = new \_PhpScoper06c66bea2cf6\SebastianBergmann\Diff\Line();
     }
     public function testCanBeCreatedWithoutArguments() : void
     {
-        $this->assertInstanceOf(\_PhpScoper2fe14d6302bc\SebastianBergmann\Diff\Line::class, $this->line);
+        $this->assertInstanceOf(\_PhpScoper06c66bea2cf6\SebastianBergmann\Diff\Line::class, $this->line);
     }
     public function testTypeCanBeRetrieved() : void
     {
-        $this->assertSame(\_PhpScoper2fe14d6302bc\SebastianBergmann\Diff\Line::UNCHANGED, $this->line->getType());
+        $this->assertSame(\_PhpScoper06c66bea2cf6\SebastianBergmann\Diff\Line::UNCHANGED, $this->line->getType());
     }
     public function testContentCanBeRetrieved() : void
     {

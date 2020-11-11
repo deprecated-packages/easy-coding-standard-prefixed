@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper2fe14d6302bc;
+namespace _PhpScoper06c66bea2cf6;
 
 /**
  * Random_* Compatibility Library 
@@ -108,14 +108,14 @@ if (!\function_exists('random_bytes') && !\ini_get('open_basedir') && \is_readab
                 /**
                  * Decrease the number of bytes returned from remaining
                  */
-                $remaining -= \_PhpScoper2fe14d6302bc\RandomCompat_strlen($read);
+                $remaining -= \_PhpScoper06c66bea2cf6\RandomCompat_strlen($read);
                 $buf .= $read;
             } while ($remaining > 0);
             /**
              * Is our result valid?
              */
             if ($buf !== \false) {
-                if (\_PhpScoper2fe14d6302bc\RandomCompat_strlen($buf) === $bytes) {
+                if (\_PhpScoper06c66bea2cf6\RandomCompat_strlen($buf) === $bytes) {
                     /**
                      * Return our random entropy buffer here:
                      */

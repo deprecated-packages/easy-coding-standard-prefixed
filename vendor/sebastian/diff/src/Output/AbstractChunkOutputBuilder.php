@@ -9,9 +9,9 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2fe14d6302bc\SebastianBergmann\Diff\Output;
+namespace _PhpScoper06c66bea2cf6\SebastianBergmann\Diff\Output;
 
-abstract class AbstractChunkOutputBuilder implements \_PhpScoper2fe14d6302bc\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface
+abstract class AbstractChunkOutputBuilder implements \_PhpScoper06c66bea2cf6\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface
 {
     /**
      * Takes input of the diff array and returns the common parts.

@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\CaseConverter;
+namespace _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
-use _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\ValueObject\MethodName;
-use _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScoper2fe14d6302bc\PhpParser\Node\Expr;
-use _PhpScoper2fe14d6302bc\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper2fe14d6302bc\PhpParser\Node\Expr\Variable;
-use _PhpScoper2fe14d6302bc\PhpParser\Node\Stmt\Expression;
+use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider;
+use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\ValueObject\MethodName;
+use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoper06c66bea2cf6\PhpParser\Node\Expr;
+use _PhpScoper06c66bea2cf6\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper06c66bea2cf6\PhpParser\Node\Expr\Variable;
+use _PhpScoper06c66bea2cf6\PhpParser\Node\Stmt\Expression;
 /**
  * Handles this part:
  *
  * parameters: <---
  */
-final class ParameterCaseConverter implements \_PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
+final class ParameterCaseConverter implements \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var ArgsNodeFactory
@@ -33,7 +33,7 @@ final class ParameterCaseConverter implements \_PhpScoper2fe14d6302bc\Migrify\Ph
      * @var CommonNodeFactory
      */
     private $commonNodeFactory;
-    public function __construct(\_PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider $currentFilePathProvider, \_PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
+    public function __construct(\_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\Provider\CurrentFilePathProvider $currentFilePathProvider, \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
         $this->currentFilePathProvider = $currentFilePathProvider;
@@ -41,13 +41,13 @@ final class ParameterCaseConverter implements \_PhpScoper2fe14d6302bc\Migrify\Ph
     }
     public function getKey() : string
     {
-        return \_PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS;
+        return \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS;
     }
     public function match(string $rootKey, $key, $values) : bool
     {
-        return $rootKey === \_PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS;
+        return $rootKey === \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoper2fe14d6302bc\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoper06c66bea2cf6\PhpParser\Node\Stmt\Expression
     {
         if (\is_string($values)) {
             $values = $this->prefixWithDirConstantIfExistingPath($values);
@@ -61,9 +61,9 @@ final class ParameterCaseConverter implements \_PhpScoper2fe14d6302bc\Migrify\Ph
             }
         }
         $args = $this->argsNodeFactory->createFromValues([$key, $values]);
-        $parametersVariable = new \_PhpScoper2fe14d6302bc\PhpParser\Node\Expr\Variable(\_PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\ValueObject\VariableName::PARAMETERS);
-        $methodCall = new \_PhpScoper2fe14d6302bc\PhpParser\Node\Expr\MethodCall($parametersVariable, \_PhpScoper2fe14d6302bc\Migrify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
-        return new \_PhpScoper2fe14d6302bc\PhpParser\Node\Stmt\Expression($methodCall);
+        $parametersVariable = new \_PhpScoper06c66bea2cf6\PhpParser\Node\Expr\Variable(\_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\ValueObject\VariableName::PARAMETERS);
+        $methodCall = new \_PhpScoper06c66bea2cf6\PhpParser\Node\Expr\MethodCall($parametersVariable, \_PhpScoper06c66bea2cf6\Migrify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
+        return new \_PhpScoper06c66bea2cf6\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @return Expr|string

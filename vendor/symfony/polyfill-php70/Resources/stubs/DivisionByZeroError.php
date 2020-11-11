@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper2fe14d6302bc;
+namespace _PhpScoper06c66bea2cf6;
 
 class DivisionByZeroError extends \Error
 {
 }
-\class_alias('_PhpScoper2fe14d6302bc\\DivisionByZeroError', 'DivisionByZeroError', \false);
+\class_alias('_PhpScoper06c66bea2cf6\\DivisionByZeroError', 'DivisionByZeroError', \false);
