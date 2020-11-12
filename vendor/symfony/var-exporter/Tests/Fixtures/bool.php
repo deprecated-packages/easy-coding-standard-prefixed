@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoper3d6b50c3ca2f;
+namespace _PhpScoper7cef7256eba6;
 
 return \true;

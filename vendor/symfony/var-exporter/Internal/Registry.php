@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Internal;
+namespace _PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Internal;
 
-use _PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
-use _PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use _PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use _PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -55,13 +55,13 @@ class Registry
     public static function getClassReflector($class, $instantiableWithoutConstructor = \false, $cloneable = null)
     {
         if (!\class_exists($class) && !\interface_exists($class, \false) && !\trait_exists($class, \false)) {
-            throw new \_PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
+            throw new \_PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
         }
         $reflector = new \ReflectionClass($class);
         if ($instantiableWithoutConstructor) {
             $proto = $reflector->newInstanceWithoutConstructor();
         } elseif (!$reflector->isInstantiable()) {
-            throw new \_PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+            throw new \_PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
         } elseif ($reflector->name !== $class) {
             $reflector = self::$reflectors[$name = $reflector->name] ?? self::getClassReflector($name, $instantiableWithoutConstructor, $cloneable);
             self::$cloneable[$class] = self::$cloneable[$name];
@@ -77,7 +77,7 @@ class Registry
                 if ('C:' === $proto && !$reflector->getMethod('unserialize')->isInternal()) {
                     $proto = null;
                 } elseif (\false === ($proto = @\unserialize($proto . \strlen($class) . ':"' . $class . '":0:{}'))) {
-                    throw new \_PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+                    throw new \_PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
                 }
             }
             if (null !== $proto && !$proto instanceof \Throwable) {
@@ -90,13 +90,13 @@ class Registry
                         \serialize(\unserialize(($proto instanceof \Serializable ? 'C:' : 'O:') . \strlen($class) . ':"' . $class . '":0:{}'));
                     }
                 } catch (\Exception $e) {
-                    throw new \_PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class, $e);
+                    throw new \_PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class, $e);
                 }
             }
         }
         if (null === $cloneable) {
             if (($proto instanceof \Reflector || $proto instanceof \ReflectionGenerator || $proto instanceof \ReflectionType || $proto instanceof \IteratorIterator || $proto instanceof \RecursiveIteratorIterator) && (!$proto instanceof \Serializable && !\method_exists($proto, '__wakeup'))) {
-                throw new \_PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+                throw new \_PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
             }
             $cloneable = $reflector->isCloneable() && !$reflector->hasMethod('__clone');
         }

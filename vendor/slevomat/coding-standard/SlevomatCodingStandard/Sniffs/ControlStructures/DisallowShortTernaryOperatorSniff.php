@@ -7,8 +7,8 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function sprintf;
-use const _PhpScoper3d6b50c3ca2f\T_INLINE_ELSE;
-use const _PhpScoper3d6b50c3ca2f\T_INLINE_THEN;
+use const _PhpScoper7cef7256eba6\T_INLINE_ELSE;
+use const _PhpScoper7cef7256eba6\T_INLINE_THEN;
 use const T_VARIABLE;
 class DisallowShortTernaryOperatorSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Tests\Header;
+namespace _PhpScoper7cef7256eba6\Symfony\Component\Mime\Tests\Header;
 
-use _PhpScoper3d6b50c3ca2f\PHPUnit\Framework\TestCase;
-use _PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader;
-class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\TestCase
+use _PhpScoper7cef7256eba6\PHPUnit\Framework\TestCase;
+use _PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader;
+class ParameterizedHeaderTest extends \_PhpScoper7cef7256eba6\PHPUnit\Framework\TestCase
 {
     private $charset = 'utf-8';
     private $lang = 'en-us';
     public function testValueIsReturnedVerbatim()
     {
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/plain');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/plain');
         $this->assertEquals('text/plain', $header->getValue());
     }
     public function testParametersAreAppended()
@@ -41,13 +41,13 @@ class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\
                            ; Must be in quoted-string,
                            ; to use within parameter values
                 */
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/plain');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/plain');
         $header->setParameters(['charset' => 'utf-8']);
         $this->assertEquals('text/plain; charset=utf-8', $header->getBodyAsString());
     }
     public function testSpaceInParamResultsInQuotedString()
     {
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'attachment');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'attachment');
         $header->setParameters(['filename' => 'my file.txt']);
         $this->assertEquals('attachment; filename="my file.txt"', $header->getBodyAsString());
     }
@@ -80,7 +80,7 @@ class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\
                 continuation fields.
                 */
         $value = \str_repeat('a', 180);
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment');
         $header->setParameters(['filename' => $value]);
         $this->assertEquals('attachment; ' . 'filename*0*=utf-8\'\'' . \str_repeat('a', 60) . ";\r\n " . 'filename*1*=' . \str_repeat('a', 60) . ";\r\n " . 'filename*2*=' . \str_repeat('a', 60), $header->getBodyAsString());
     }
@@ -109,7 +109,7 @@ class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\
                 omitted.
                 */
         $value = \str_repeat('a', 20) . \pack('C', 0x8f) . \str_repeat('a', 10);
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment');
         $header->setCharset('iso-8859-1');
         $header->setValue('attachment');
         $header->setParameters(['filename' => $value]);
@@ -147,7 +147,7 @@ class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\
                       MUST be present even when the fields are left blank.
                    */
         $value = \str_repeat('a', 20) . \pack('C', 0x8f) . \str_repeat('a', 60);
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment');
         $header->setValue('attachment');
         $header->setCharset('utf-6');
         $header->setParameters(['filename' => $value]);
@@ -156,14 +156,14 @@ class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\
     }
     public function testToString()
     {
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html');
         $header->setParameters(['charset' => 'utf-8']);
         $this->assertEquals('Content-Type: text/html; charset=utf-8', $header->toString());
     }
     public function testValueCanBeEncodedIfNonAscii()
     {
         $value = 'fo' . \pack('C', 0x8f) . 'bar';
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('X-Foo', $value);
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('X-Foo', $value);
         $header->setCharset('iso-8859-1');
         $header->setParameters(['lookslike' => 'foobar']);
         $this->assertEquals('X-Foo: =?' . $header->getCharset() . '?Q?fo=8Fbar?=; lookslike=foobar', $header->toString());
@@ -171,7 +171,7 @@ class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\
     public function testValueAndParamCanBeEncodedIfNonAscii()
     {
         $value = 'fo' . \pack('C', 0x8f) . 'bar';
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('X-Foo', $value);
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('X-Foo', $value);
         $header->setCharset('iso-8859-1');
         $header->setParameters(['says' => $value]);
         $this->assertEquals('X-Foo: =?' . $header->getCharset() . '?Q?fo=8Fbar?=; says="=?' . $header->getCharset() . '?Q?fo=8Fbar?="', $header->toString());
@@ -179,7 +179,7 @@ class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\
     public function testParamsAreEncodedWithEncodedWordsIfNoParamEncoderSet()
     {
         $value = 'fo' . \pack('C', 0x8f) . 'bar';
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('X-Foo', 'bar');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('X-Foo', 'bar');
         $header->setCharset('iso-8859-1');
         $header->setParameters(['says' => $value]);
         $this->assertEquals('X-Foo: bar; says="=?' . $header->getCharset() . '?Q?fo=8Fbar?="', $header->toString());
@@ -203,7 +203,7 @@ class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\
                             From: =?US-ASCII*EN?Q?Keith_Moore?= <moore@cs.utk.edu>
                 */
         $value = 'fo' . \pack('C', 0x8f) . 'bar';
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('X-Foo', $value);
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('X-Foo', $value);
         $header->setCharset('iso-8859-1');
         $header->setLanguage('en');
         $header->setParameters(['says' => $value]);
@@ -211,25 +211,25 @@ class ParameterizedHeaderTest extends \_PhpScoper3d6b50c3ca2f\PHPUnit\Framework\
     }
     public function testSetBody()
     {
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html');
         $header->setBody('text/plain');
         $this->assertEquals('text/plain', $header->getValue());
     }
     public function testGetBody()
     {
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/plain');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/plain');
         $this->assertEquals('text/plain', $header->getBody());
     }
     public function testSetParameter()
     {
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html');
         $header->setParameters(['charset' => 'utf-8', 'delsp' => 'yes']);
         $header->setParameter('delsp', 'no');
         $this->assertEquals(['charset' => 'utf-8', 'delsp' => 'no'], $header->getParameters());
     }
     public function testGetParameter()
     {
-        $header = new \_PhpScoper3d6b50c3ca2f\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html');
+        $header = new \_PhpScoper7cef7256eba6\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html');
         $header->setParameters(['charset' => 'utf-8', 'delsp' => 'yes']);
         $this->assertEquals('utf-8', $header->getParameter('charset'));
     }

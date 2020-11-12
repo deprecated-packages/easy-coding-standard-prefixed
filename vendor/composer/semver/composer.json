@@ -39,12 +39,12 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper3d6b50c3ca2f\\Composer\\Semver\\": "src"
+            "_PhpScoper7cef7256eba6\\Composer\\Semver\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoper3d6b50c3ca2f\\Composer\\Semver\\": "tests"
+            "_PhpScoper7cef7256eba6\\Composer\\Semver\\": "tests"
         }
     },
     "extra": {

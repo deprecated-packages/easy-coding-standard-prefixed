@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoper3d6b50c3ca2f;
+namespace _PhpScoper7cef7256eba6;
 
-return \_PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = \_PhpScoper3d6b50c3ca2f\Symfony\Component\VarExporter\Internal\Registry::unserialize([], ['O:46:"Symfony\\Component\\VarExporter\\Tests\\FinalError":1:{s:12:"' . "\0" . 'Error' . "\0" . 'trace";a:0:{}}']), null, ['TypeError' => ['file' => [\dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'VarExporterTest.php'], 'line' => [123]]], $o[0], [1 => 0]);
+return \_PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = \_PhpScoper7cef7256eba6\Symfony\Component\VarExporter\Internal\Registry::unserialize([], ['O:46:"Symfony\\Component\\VarExporter\\Tests\\FinalError":1:{s:12:"' . "\0" . 'Error' . "\0" . 'trace";a:0:{}}']), null, ['TypeError' => ['file' => [\dirname(__DIR__) . \DIRECTORY_SEPARATOR . 'VarExporterTest.php'], 'line' => [123]]], $o[0], [1 => 0]);
