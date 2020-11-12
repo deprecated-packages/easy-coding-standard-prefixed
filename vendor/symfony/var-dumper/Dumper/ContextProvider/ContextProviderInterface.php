@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4f985154d5a0\Symfony\Component\VarDumper\Dumper\ContextProvider;
+namespace _PhpScoper3d6b50c3ca2f\Symfony\Component\VarDumper\Dumper\ContextProvider;
 
 /**
  * Interface to provide contextual data about dump data clones sent to a server.

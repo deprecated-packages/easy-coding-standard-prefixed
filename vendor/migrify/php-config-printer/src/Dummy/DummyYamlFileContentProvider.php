@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4f985154d5a0\Migrify\PhpConfigPrinter\Dummy;
+namespace _PhpScoper3d6b50c3ca2f\Migrify\PhpConfigPrinter\Dummy;
 
-use _PhpScoper4f985154d5a0\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
-final class DummyYamlFileContentProvider implements \_PhpScoper4f985154d5a0\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface
+use _PhpScoper3d6b50c3ca2f\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
+final class DummyYamlFileContentProvider implements \_PhpScoper3d6b50c3ca2f\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface
 {
     public function setContent(string $yamlContent) : void
     {

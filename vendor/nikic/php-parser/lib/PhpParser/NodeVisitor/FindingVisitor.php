@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4f985154d5a0\PhpParser\NodeVisitor;
+namespace _PhpScoper3d6b50c3ca2f\PhpParser\NodeVisitor;
 
-use _PhpScoper4f985154d5a0\PhpParser\Node;
-use _PhpScoper4f985154d5a0\PhpParser\NodeVisitorAbstract;
+use _PhpScoper3d6b50c3ca2f\PhpParser\Node;
+use _PhpScoper3d6b50c3ca2f\PhpParser\NodeVisitorAbstract;
 /**
  * This visitor can be used to find and collect all nodes satisfying some criterion determined by
  * a filter callback.
  */
-class FindingVisitor extends \_PhpScoper4f985154d5a0\PhpParser\NodeVisitorAbstract
+class FindingVisitor extends \_PhpScoper3d6b50c3ca2f\PhpParser\NodeVisitorAbstract
 {
     /** @var callable Filter callback */
     protected $filterCallback;
@@ -35,7 +35,7 @@ class FindingVisitor extends \_PhpScoper4f985154d5a0\PhpParser\NodeVisitorAbstra
         $this->foundNodes = [];
         return null;
     }
-    public function enterNode(\_PhpScoper4f985154d5a0\PhpParser\Node $node)
+    public function enterNode(\_PhpScoper3d6b50c3ca2f\PhpParser\Node $node)
     {
         $filterCallback = $this->filterCallback;
         if ($filterCallback($node)) {

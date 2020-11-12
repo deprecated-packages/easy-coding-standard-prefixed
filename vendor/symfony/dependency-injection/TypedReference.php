@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection;
+namespace _PhpScoper3d6b50c3ca2f\Symfony\Component\DependencyInjection;
 
 /**
  * Represents a PHP type-hinted service reference.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TypedReference extends \_PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\Reference
+class TypedReference extends \_PhpScoper3d6b50c3ca2f\Symfony\Component\DependencyInjection\Reference
 {
     private $type;
     private $name;
@@ -26,12 +26,12 @@ class TypedReference extends \_PhpScoper4f985154d5a0\Symfony\Component\Dependenc
      * @param int    $invalidBehavior The behavior when the service does not exist
      * @param string $name            The name of the argument targeting the service
      */
-    public function __construct(string $id, string $type, $invalidBehavior = \_PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $name = null)
+    public function __construct(string $id, string $type, $invalidBehavior = \_PhpScoper3d6b50c3ca2f\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $name = null)
     {
         if (\is_string($invalidBehavior ?? '') || \is_int($name)) {
             @\trigger_error(\sprintf('The $requiringClass argument of "%s()" is deprecated since Symfony 4.1.', __METHOD__), \E_USER_DEPRECATED);
             $this->requiringClass = $invalidBehavior;
-            $invalidBehavior = 3 < \func_num_args() ? \func_get_arg(3) : \_PhpScoper4f985154d5a0\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
+            $invalidBehavior = 3 < \func_num_args() ? \func_get_arg(3) : \_PhpScoper3d6b50c3ca2f\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
         } else {
             $this->name = $type === $id ? $name : null;
         }

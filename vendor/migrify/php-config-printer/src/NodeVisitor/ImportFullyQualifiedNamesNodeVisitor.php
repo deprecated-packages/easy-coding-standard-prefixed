@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4f985154d5a0\Migrify\PhpConfigPrinter\NodeVisitor;
+namespace _PhpScoper3d6b50c3ca2f\Migrify\PhpConfigPrinter\NodeVisitor;
 
-use _PhpScoper4f985154d5a0\Migrify\PhpConfigPrinter\Naming\ClassNaming;
-use _PhpScoper4f985154d5a0\Nette\Utils\Strings;
-use _PhpScoper4f985154d5a0\PhpParser\Node;
-use _PhpScoper4f985154d5a0\PhpParser\Node\Name;
-use _PhpScoper4f985154d5a0\PhpParser\Node\Name\FullyQualified;
-use _PhpScoper4f985154d5a0\PhpParser\NodeVisitorAbstract;
-final class ImportFullyQualifiedNamesNodeVisitor extends \_PhpScoper4f985154d5a0\PhpParser\NodeVisitorAbstract
+use _PhpScoper3d6b50c3ca2f\Migrify\PhpConfigPrinter\Naming\ClassNaming;
+use _PhpScoper3d6b50c3ca2f\Nette\Utils\Strings;
+use _PhpScoper3d6b50c3ca2f\PhpParser\Node;
+use _PhpScoper3d6b50c3ca2f\PhpParser\Node\Name;
+use _PhpScoper3d6b50c3ca2f\PhpParser\Node\Name\FullyQualified;
+use _PhpScoper3d6b50c3ca2f\PhpParser\NodeVisitorAbstract;
+final class ImportFullyQualifiedNamesNodeVisitor extends \_PhpScoper3d6b50c3ca2f\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var ClassNaming
@@ -19,7 +19,7 @@ final class ImportFullyQualifiedNamesNodeVisitor extends \_PhpScoper4f985154d5a0
      * @var string[]
      */
     private $nameImports = [];
-    public function __construct(\_PhpScoper4f985154d5a0\Migrify\PhpConfigPrinter\Naming\ClassNaming $classNaming)
+    public function __construct(\_PhpScoper3d6b50c3ca2f\Migrify\PhpConfigPrinter\Naming\ClassNaming $classNaming)
     {
         $this->classNaming = $classNaming;
     }
@@ -32,22 +32,22 @@ final class ImportFullyQualifiedNamesNodeVisitor extends \_PhpScoper4f985154d5a0
         $this->nameImports = [];
         return null;
     }
-    public function enterNode(\_PhpScoper4f985154d5a0\PhpParser\Node $node) : ?\_PhpScoper4f985154d5a0\PhpParser\Node
+    public function enterNode(\_PhpScoper3d6b50c3ca2f\PhpParser\Node $node) : ?\_PhpScoper3d6b50c3ca2f\PhpParser\Node
     {
-        if (!$node instanceof \_PhpScoper4f985154d5a0\PhpParser\Node\Name\FullyQualified) {
+        if (!$node instanceof \_PhpScoper3d6b50c3ca2f\PhpParser\Node\Name\FullyQualified) {
             return null;
         }
         $fullyQualifiedName = $node->toString();
         // namespace-less class name
-        if (\_PhpScoper4f985154d5a0\Nette\Utils\Strings::startsWith($fullyQualifiedName, '\\')) {
+        if (\_PhpScoper3d6b50c3ca2f\Nette\Utils\Strings::startsWith($fullyQualifiedName, '\\')) {
             $fullyQualifiedName = \ltrim($fullyQualifiedName, '\\');
         }
-        if (!\_PhpScoper4f985154d5a0\Nette\Utils\Strings::contains($fullyQualifiedName, '\\')) {
-            return new \_PhpScoper4f985154d5a0\PhpParser\Node\Name($fullyQualifiedName);
+        if (!\_PhpScoper3d6b50c3ca2f\Nette\Utils\Strings::contains($fullyQualifiedName, '\\')) {
+            return new \_PhpScoper3d6b50c3ca2f\PhpParser\Node\Name($fullyQualifiedName);
         }
         $shortClassName = $this->classNaming->getShortName($fullyQualifiedName);
         $this->nameImports[] = $fullyQualifiedName;
-        return new \_PhpScoper4f985154d5a0\PhpParser\Node\Name($shortClassName);
+        return new \_PhpScoper3d6b50c3ca2f\PhpParser\Node\Name($shortClassName);
     }
     /**
      * @return string[]
