@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercda2b863d098\Symfony\Component\VarDumper\Dumper\ContextProvider;
+namespace _PhpScoper229e8121cf9f\Symfony\Component\VarDumper\Dumper\ContextProvider;
 
-use _PhpScopercda2b863d098\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopercda2b863d098\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use _PhpScopercda2b863d098\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoper229e8121cf9f\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper229e8121cf9f\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use _PhpScoper229e8121cf9f\Symfony\Component\VarDumper\Cloner\VarCloner;
 /**
  * Tries to provide context from a request.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-final class RequestContextProvider implements \_PhpScopercda2b863d098\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
+final class RequestContextProvider implements \_PhpScoper229e8121cf9f\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
 {
     private $requestStack;
     private $cloner;
-    public function __construct(\_PhpScopercda2b863d098\Symfony\Component\HttpFoundation\RequestStack $requestStack)
+    public function __construct(\_PhpScoper229e8121cf9f\Symfony\Component\HttpFoundation\RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->cloner = new \_PhpScopercda2b863d098\Symfony\Component\VarDumper\Cloner\VarCloner();
+        $this->cloner = new \_PhpScoper229e8121cf9f\Symfony\Component\VarDumper\Cloner\VarCloner();
         $this->cloner->setMaxItems(0);
-        $this->cloner->addCasters(\_PhpScopercda2b863d098\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
+        $this->cloner->addCasters(\_PhpScoper229e8121cf9f\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
     }
     public function getContext() : ?array
     {

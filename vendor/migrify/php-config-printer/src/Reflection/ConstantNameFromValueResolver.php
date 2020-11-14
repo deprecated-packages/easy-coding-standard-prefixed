@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercda2b863d098\Migrify\PhpConfigPrinter\Reflection;
+namespace _PhpScoper229e8121cf9f\Migrify\PhpConfigPrinter\Reflection;
 
 use ReflectionClass;
 final class ConstantNameFromValueResolver

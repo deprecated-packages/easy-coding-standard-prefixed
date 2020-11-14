@@ -1,5 +1,5 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScopercda2b863d098;
+namespace _PhpScoper229e8121cf9f;
 
 require __DIR__ . '/ecs.php';

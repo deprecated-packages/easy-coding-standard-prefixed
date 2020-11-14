@@ -3,34 +3,34 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection;
 
-use _PhpScopercda2b863d098\Symfony\Component\Config\FileLocator as SimpleFileLocator;
-use _PhpScopercda2b863d098\Symfony\Component\Config\Loader\DelegatingLoader;
-use _PhpScopercda2b863d098\Symfony\Component\Config\Loader\GlobFileLoader;
-use _PhpScopercda2b863d098\Symfony\Component\Config\Loader\LoaderResolver;
-use _PhpScopercda2b863d098\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercda2b863d098\Symfony\Component\HttpKernel\Config\FileLocator;
-use _PhpScopercda2b863d098\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoper229e8121cf9f\Symfony\Component\Config\FileLocator as SimpleFileLocator;
+use _PhpScoper229e8121cf9f\Symfony\Component\Config\Loader\DelegatingLoader;
+use _PhpScoper229e8121cf9f\Symfony\Component\Config\Loader\GlobFileLoader;
+use _PhpScoper229e8121cf9f\Symfony\Component\Config\Loader\LoaderResolver;
+use _PhpScoper229e8121cf9f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper229e8121cf9f\Symfony\Component\HttpKernel\Config\FileLocator;
+use _PhpScoper229e8121cf9f\Symfony\Component\HttpKernel\KernelInterface;
 use Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader;
 final class DelegatingLoaderFactory
 {
-    public function createFromContainerBuilderAndKernel(\_PhpScopercda2b863d098\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \_PhpScopercda2b863d098\Symfony\Component\HttpKernel\KernelInterface $kernel) : \_PhpScopercda2b863d098\Symfony\Component\Config\Loader\DelegatingLoader
+    public function createFromContainerBuilderAndKernel(\_PhpScoper229e8121cf9f\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \_PhpScoper229e8121cf9f\Symfony\Component\HttpKernel\KernelInterface $kernel) : \_PhpScoper229e8121cf9f\Symfony\Component\Config\Loader\DelegatingLoader
     {
-        $kernelFileLocator = new \_PhpScopercda2b863d098\Symfony\Component\HttpKernel\Config\FileLocator($kernel);
+        $kernelFileLocator = new \_PhpScoper229e8121cf9f\Symfony\Component\HttpKernel\Config\FileLocator($kernel);
         return $this->createFromContainerBuilderAndFileLocator($containerBuilder, $kernelFileLocator);
     }
     /**
      * For tests
      */
-    public function createContainerBuilderAndConfig(\_PhpScopercda2b863d098\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $config) : \_PhpScopercda2b863d098\Symfony\Component\Config\Loader\DelegatingLoader
+    public function createContainerBuilderAndConfig(\_PhpScoper229e8121cf9f\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $config) : \_PhpScoper229e8121cf9f\Symfony\Component\Config\Loader\DelegatingLoader
     {
         $directory = \dirname($config);
-        $fileLocator = new \_PhpScopercda2b863d098\Symfony\Component\Config\FileLocator($directory);
+        $fileLocator = new \_PhpScoper229e8121cf9f\Symfony\Component\Config\FileLocator($directory);
         return $this->createFromContainerBuilderAndFileLocator($containerBuilder, $fileLocator);
     }
-    private function createFromContainerBuilderAndFileLocator(\_PhpScopercda2b863d098\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \_PhpScopercda2b863d098\Symfony\Component\Config\FileLocator $simpleFileLocator) : \_PhpScopercda2b863d098\Symfony\Component\Config\Loader\DelegatingLoader
+    private function createFromContainerBuilderAndFileLocator(\_PhpScoper229e8121cf9f\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \_PhpScoper229e8121cf9f\Symfony\Component\Config\FileLocator $simpleFileLocator) : \_PhpScoper229e8121cf9f\Symfony\Component\Config\Loader\DelegatingLoader
     {
-        $loaders = [new \_PhpScopercda2b863d098\Symfony\Component\Config\Loader\GlobFileLoader($simpleFileLocator), new \Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader($containerBuilder, $simpleFileLocator)];
-        $loaderResolver = new \_PhpScopercda2b863d098\Symfony\Component\Config\Loader\LoaderResolver($loaders);
-        return new \_PhpScopercda2b863d098\Symfony\Component\Config\Loader\DelegatingLoader($loaderResolver);
+        $loaders = [new \_PhpScoper229e8121cf9f\Symfony\Component\Config\Loader\GlobFileLoader($simpleFileLocator), new \Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader($containerBuilder, $simpleFileLocator)];
+        $loaderResolver = new \_PhpScoper229e8121cf9f\Symfony\Component\Config\Loader\LoaderResolver($loaders);
+        return new \_PhpScoper229e8121cf9f\Symfony\Component\Config\Loader\DelegatingLoader($loaderResolver);
     }
 }

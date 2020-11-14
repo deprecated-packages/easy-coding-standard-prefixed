@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercda2b863d098\Symfony\Component\HttpFoundation;
+namespace _PhpScoper229e8121cf9f\Symfony\Component\HttpFoundation;
 
-use _PhpScopercda2b863d098\Symfony\Component\Routing\RequestContext;
+use _PhpScoper229e8121cf9f\Symfony\Component\Routing\RequestContext;
 /**
  * A helper service for manipulating URLs within and outside the request scope.
  *
@@ -20,7 +20,7 @@ final class UrlHelper
 {
     private $requestStack;
     private $requestContext;
-    public function __construct(\_PhpScopercda2b863d098\Symfony\Component\HttpFoundation\RequestStack $requestStack, \_PhpScopercda2b863d098\Symfony\Component\Routing\RequestContext $requestContext = null)
+    public function __construct(\_PhpScoper229e8121cf9f\Symfony\Component\HttpFoundation\RequestStack $requestStack, \_PhpScoper229e8121cf9f\Symfony\Component\Routing\RequestContext $requestContext = null)
     {
         $this->requestStack = $requestStack;
         $this->requestContext = $requestContext;
