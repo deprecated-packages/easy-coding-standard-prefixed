@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type;
 
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
-class ConstTypeNode implements \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
+class ConstTypeNode implements \_PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     /** @var ConstExprNode */
     public $constExpr;
-    public function __construct(\_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $constExpr)
+    public function __construct(\_PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $constExpr)
     {
         $this->constExpr = $constExpr;
     }

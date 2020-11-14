@@ -9,16 +9,16 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera749ac204cd2\SebastianBergmann\Diff\Utils;
+namespace _PhpScoperd4937ee9b515\SebastianBergmann\Diff\Utils;
 
-use _PhpScopera749ac204cd2\PHPUnit\Framework\TestCase;
-use _PhpScopera749ac204cd2\Symfony\Component\Process\Process;
+use _PhpScoperd4937ee9b515\PHPUnit\Framework\TestCase;
+use _PhpScoperd4937ee9b515\Symfony\Component\Process\Process;
 /**
  * @requires OS Linux
  *
  * @coversNothing
  */
-final class UnifiedDiffAssertTraitIntegrationTest extends \_PhpScopera749ac204cd2\PHPUnit\Framework\TestCase
+final class UnifiedDiffAssertTraitIntegrationTest extends \_PhpScoperd4937ee9b515\PHPUnit\Framework\TestCase
 {
     use UnifiedDiffAssertTrait;
     private $filePatch;
@@ -40,7 +40,7 @@ final class UnifiedDiffAssertTraitIntegrationTest extends \_PhpScopera749ac204cd
     public function testValidPatches(string $fileFrom, string $fileTo) : void
     {
         $command = \sprintf('diff -u %s %s > %s', \escapeshellarg(\realpath($fileFrom)), \escapeshellarg(\realpath($fileTo)), \escapeshellarg($this->filePatch));
-        $p = new \_PhpScopera749ac204cd2\Symfony\Component\Process\Process($command);
+        $p = new \_PhpScoperd4937ee9b515\Symfony\Component\Process\Process($command);
         $p->run();
         $exitCode = $p->getExitCode();
         if (0 === $exitCode) {
@@ -54,7 +54,7 @@ final class UnifiedDiffAssertTraitIntegrationTest extends \_PhpScopera749ac204cd
             $exitCode,
             \sprintf("Command exec. was not successful:\n\"%s\"\nOutput:\n\"%s\"\nStdErr:\n\"%s\"\nExit code %d.\n", $command, $p->getOutput(), $p->getErrorOutput(), $p->getExitCode())
         );
-        $this->assertValidUnifiedDiffFormat(\_PhpScopera749ac204cd2\SebastianBergmann\Diff\Utils\FileUtils::getFileContent($this->filePatch));
+        $this->assertValidUnifiedDiffFormat(\_PhpScoperd4937ee9b515\SebastianBergmann\Diff\Utils\FileUtils::getFileContent($this->filePatch));
     }
     /**
      * @return array<string, array<string, string>>

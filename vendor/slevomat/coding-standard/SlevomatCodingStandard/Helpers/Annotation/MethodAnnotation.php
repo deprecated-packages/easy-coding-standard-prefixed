@@ -4,16 +4,16 @@ declare (strict_types=1);
 namespace SlevomatCodingStandard\Helpers\Annotation;
 
 use InvalidArgumentException;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueParameterNode;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueParameterNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use function implode;
 use function in_array;
@@ -25,7 +25,7 @@ class MethodAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Annota
 {
     /** @var MethodTagValueNode|null */
     private $contentNode;
-    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode $contentNode)
+    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode $contentNode)
     {
         if (!\in_array($name, ['@method', '@psalm-method', '@phpstan-method'], \true)) {
             throw new \InvalidArgumentException(\sprintf('Unsupported annotation %s.', $name));
@@ -37,7 +37,7 @@ class MethodAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Annota
     {
         return $this->contentNode === null;
     }
-    public function getContentNode() : \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode
+    public function getContentNode() : \_PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode
     {
         $this->errorWhenInvalid();
         return $this->contentNode;
@@ -59,7 +59,7 @@ class MethodAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Annota
     /**
      * @return GenericTypeNode|CallableTypeNode|IntersectionTypeNode|UnionTypeNode|ArrayTypeNode|IdentifierTypeNode|ThisTypeNode
      */
-    public function getMethodReturnType() : ?\_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public function getMethodReturnType() : ?\_PhpScoperd4937ee9b515\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         $this->errorWhenInvalid();
         /** @var GenericTypeNode|CallableTypeNode|IntersectionTypeNode|UnionTypeNode|ArrayTypeNode|IdentifierTypeNode|ThisTypeNode $type */

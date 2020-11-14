@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScopera749ac204cd2;
+namespace _PhpScoperd4937ee9b515;
 
-return \_PhpScopera749ac204cd2\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = \_PhpScopera749ac204cd2\Symfony\Component\VarExporter\Internal\Registry::unserialize([], ['C:50:"Symfony\\Component\\VarExporter\\Tests\\MySerializable":3:{123}']), null, [], [$o[0], $o[0]], []);
+return \_PhpScoperd4937ee9b515\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = \_PhpScoperd4937ee9b515\Symfony\Component\VarExporter\Internal\Registry::unserialize([], ['C:50:"Symfony\\Component\\VarExporter\\Tests\\MySerializable":3:{123}']), null, [], [$o[0], $o[0]], []);

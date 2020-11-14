@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera749ac204cd2\PhpParser\Node\Stmt;
+namespace _PhpScoperd4937ee9b515\PhpParser\Node\Stmt;
 
-use _PhpScopera749ac204cd2\PhpParser\Node;
-class If_ extends \_PhpScopera749ac204cd2\PhpParser\Node\Stmt
+use _PhpScoperd4937ee9b515\PhpParser\Node;
+class If_ extends \_PhpScoperd4937ee9b515\PhpParser\Node\Stmt
 {
     /** @var Node\Expr Condition expression */
     public $cond;
@@ -24,7 +24,7 @@ class If_ extends \_PhpScopera749ac204cd2\PhpParser\Node\Stmt
      *                              'else'    => null   : Else clause
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\_PhpScopera749ac204cd2\PhpParser\Node\Expr $cond, array $subNodes = [], array $attributes = [])
+    public function __construct(\_PhpScoperd4937ee9b515\PhpParser\Node\Expr $cond, array $subNodes = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;

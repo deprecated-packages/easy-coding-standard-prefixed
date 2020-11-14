@@ -1,11 +1,11 @@
 <?php
 
-namespace _PhpScopera749ac204cd2;
+namespace _PhpScoperd4937ee9b515;
 
-use _PhpScopera749ac204cd2\Doctrine\Common\Annotations\Annotation;
+use _PhpScoperd4937ee9b515\Doctrine\Common\Annotations\Annotation;
 /** @Annotation */
-class TopLevelAnnotation extends \_PhpScopera749ac204cd2\Doctrine\Common\Annotations\Annotation
+class TopLevelAnnotation extends \_PhpScoperd4937ee9b515\Doctrine\Common\Annotations\Annotation
 {
 }
 /** @Annotation */
-\class_alias('_PhpScopera749ac204cd2\\TopLevelAnnotation', 'TopLevelAnnotation', \false);
+\class_alias('_PhpScoperd4937ee9b515\\TopLevelAnnotation', 'TopLevelAnnotation', \false);

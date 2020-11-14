@@ -1,5 +1,5 @@
 <!-- <?php 
-namespace _PhpScopera749ac204cd2;
+namespace _PhpScoperd4937ee9b515;
 
 echo $_message = \sprintf('%s (%d %s)', $exceptionMessage, $statusCode, $statusText);
 ?> -->
@@ -26,7 +26,7 @@ echo $this->include('assets/css/exception_full.css');
     </head>
     <body>
         <?php 
-if (\class_exists('_PhpScopera749ac204cd2\\Symfony\\Component\\HttpKernel\\Kernel')) {
+if (\class_exists('_PhpScoperd4937ee9b515\\Symfony\\Component\\HttpKernel\\Kernel')) {
     ?>
             <header>
                 <div class="container">
@@ -36,7 +36,7 @@ if (\class_exists('_PhpScopera749ac204cd2\\Symfony\\Component\\HttpKernel\\Kerne
 
                     <div class="help-link">
                         <a href="https://symfony.com/doc/<?php 
-    echo \_PhpScopera749ac204cd2\Symfony\Component\HttpKernel\Kernel::VERSION;
+    echo \_PhpScoperd4937ee9b515\Symfony\Component\HttpKernel\Kernel::VERSION;
     ?>/index.html">
                             <span class="icon"><?php 
     echo $this->include('assets/images/icon-book.svg');

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScopera749ac204cd2\PhpParser\Parser;
+namespace _PhpScoperd4937ee9b515\PhpParser\Parser;
 
 /* GENERATED file based on grammar/tokens.y */
 final class Tokens

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera749ac204cd2;
+namespace _PhpScoperd4937ee9b515;
 
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff;
@@ -25,8 +25,8 @@ use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff;
-use _PhpScopera749ac204cd2\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScopera749ac204cd2\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff::class);
     $services->set(\SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff::class);
