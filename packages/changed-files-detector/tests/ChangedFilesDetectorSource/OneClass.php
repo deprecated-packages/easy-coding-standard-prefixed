@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7cef7256eba6;
+namespace _PhpScopercda2b863d098;
 
 final class OneClass
 {
 }
-\class_alias('_PhpScoper7cef7256eba6\\OneClass', 'OneClass', \false);
+\class_alias('_PhpScopercda2b863d098\\OneClass', 'OneClass', \false);

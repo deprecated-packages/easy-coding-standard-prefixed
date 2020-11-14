@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7cef7256eba6\Migrify\PhpConfigPrinter\NodeFactory;
+namespace _PhpScopercda2b863d098\Migrify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoper7cef7256eba6\PhpParser\BuilderHelpers;
-use _PhpScoper7cef7256eba6\PhpParser\Node\Arg;
-use _PhpScoper7cef7256eba6\PhpParser\Node\Expr\New_;
-use _PhpScoper7cef7256eba6\PhpParser\Node\Name\FullyQualified;
+use _PhpScopercda2b863d098\PhpParser\BuilderHelpers;
+use _PhpScopercda2b863d098\PhpParser\Node\Arg;
+use _PhpScopercda2b863d098\PhpParser\Node\Expr\New_;
+use _PhpScopercda2b863d098\PhpParser\Node\Name\FullyQualified;
 use ReflectionClass;
 final class NewValueObjectFactory
 {
-    public function create(object $valueObject) : \_PhpScoper7cef7256eba6\PhpParser\Node\Expr\New_
+    public function create(object $valueObject) : \_PhpScopercda2b863d098\PhpParser\Node\Expr\New_
     {
         $valueObjectClass = \get_class($valueObject);
         $propertyValues = $this->resolvePropertyValuesFromValueObject($valueObjectClass, $valueObject);
         $args = $this->createArgs($propertyValues);
-        return new \_PhpScoper7cef7256eba6\PhpParser\Node\Expr\New_(new \_PhpScoper7cef7256eba6\PhpParser\Node\Name\FullyQualified($valueObjectClass), $args);
+        return new \_PhpScopercda2b863d098\PhpParser\Node\Expr\New_(new \_PhpScopercda2b863d098\PhpParser\Node\Name\FullyQualified($valueObjectClass), $args);
     }
     /**
      * @return mixed[]
@@ -38,7 +38,7 @@ final class NewValueObjectFactory
     {
         $args = [];
         foreach ($propertyValues as $propertyValue) {
-            $args[] = new \_PhpScoper7cef7256eba6\PhpParser\Node\Arg(\_PhpScoper7cef7256eba6\PhpParser\BuilderHelpers::normalizeValue($propertyValue));
+            $args[] = new \_PhpScopercda2b863d098\PhpParser\Node\Arg(\_PhpScopercda2b863d098\PhpParser\BuilderHelpers::normalizeValue($propertyValue));
         }
         return $args;
     }

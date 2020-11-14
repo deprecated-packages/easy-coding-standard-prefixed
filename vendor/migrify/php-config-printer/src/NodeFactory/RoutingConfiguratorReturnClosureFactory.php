@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7cef7256eba6\Migrify\PhpConfigPrinter\NodeFactory;
+namespace _PhpScopercda2b863d098\Migrify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoper7cef7256eba6\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
-use _PhpScoper7cef7256eba6\Migrify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
-use _PhpScoper7cef7256eba6\PhpParser\Node;
-use _PhpScoper7cef7256eba6\PhpParser\Node\Stmt\Return_;
+use _PhpScopercda2b863d098\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use _PhpScopercda2b863d098\Migrify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
+use _PhpScopercda2b863d098\PhpParser\Node;
+use _PhpScopercda2b863d098\PhpParser\Node\Stmt\Return_;
 final class RoutingConfiguratorReturnClosureFactory
 {
     /**
@@ -20,16 +20,16 @@ final class RoutingConfiguratorReturnClosureFactory
     /**
      * @param RoutingCaseConverterInterface[] $routingCaseConverters
      */
-    public function __construct(\_PhpScoper7cef7256eba6\Migrify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $containerConfiguratorClosureNodeFactory, array $routingCaseConverters)
+    public function __construct(\_PhpScopercda2b863d098\Migrify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $containerConfiguratorClosureNodeFactory, array $routingCaseConverters)
     {
         $this->containerConfiguratorClosureNodeFactory = $containerConfiguratorClosureNodeFactory;
         $this->routingCaseConverters = $routingCaseConverters;
     }
-    public function createFromArrayData(array $arrayData) : \_PhpScoper7cef7256eba6\PhpParser\Node\Stmt\Return_
+    public function createFromArrayData(array $arrayData) : \_PhpScopercda2b863d098\PhpParser\Node\Stmt\Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->containerConfiguratorClosureNodeFactory->createRoutingClosureFromStmts($stmts);
-        return new \_PhpScoper7cef7256eba6\PhpParser\Node\Stmt\Return_($closure);
+        return new \_PhpScopercda2b863d098\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
      * @return Node[]
