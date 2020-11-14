@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper229e8121cf9f\PhpParser\Node\Expr;
+namespace _PhpScoper4936962185e7\PhpParser\Node\Expr;
 
-use _PhpScoper229e8121cf9f\PhpParser\Node;
-use _PhpScoper229e8121cf9f\PhpParser\Node\Expr;
-use _PhpScoper229e8121cf9f\PhpParser\Node\FunctionLike;
-class ArrowFunction extends \_PhpScoper229e8121cf9f\PhpParser\Node\Expr implements \_PhpScoper229e8121cf9f\PhpParser\Node\FunctionLike
+use _PhpScoper4936962185e7\PhpParser\Node;
+use _PhpScoper4936962185e7\PhpParser\Node\Expr;
+use _PhpScoper4936962185e7\PhpParser\Node\FunctionLike;
+class ArrowFunction extends \_PhpScoper4936962185e7\PhpParser\Node\Expr implements \_PhpScoper4936962185e7\PhpParser\Node\FunctionLike
 {
     /** @var bool */
     public $static;
@@ -34,7 +34,7 @@ class ArrowFunction extends \_PhpScoper229e8121cf9f\PhpParser\Node\Expr implemen
         $this->byRef = $subNodes['byRef'] ?? \false;
         $this->params = $subNodes['params'] ?? [];
         $returnType = $subNodes['returnType'] ?? null;
-        $this->returnType = \is_string($returnType) ? new \_PhpScoper229e8121cf9f\PhpParser\Node\Identifier($returnType) : $returnType;
+        $this->returnType = \is_string($returnType) ? new \_PhpScoper4936962185e7\PhpParser\Node\Identifier($returnType) : $returnType;
         $this->expr = $subNodes['expr'] ?? null;
     }
     public function getSubNodeNames() : array
@@ -58,7 +58,7 @@ class ArrowFunction extends \_PhpScoper229e8121cf9f\PhpParser\Node\Expr implemen
      */
     public function getStmts() : array
     {
-        return [new \_PhpScoper229e8121cf9f\PhpParser\Node\Stmt\Return_($this->expr)];
+        return [new \_PhpScoper4936962185e7\PhpParser\Node\Stmt\Return_($this->expr)];
     }
     public function getType() : string
     {

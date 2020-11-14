@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper229e8121cf9f\PhpParser\Node\Expr\AssignOp;
+namespace _PhpScoper4936962185e7\PhpParser\Node\Expr\AssignOp;
 
-use _PhpScoper229e8121cf9f\PhpParser\Node\Expr\AssignOp;
-class Mul extends \_PhpScoper229e8121cf9f\PhpParser\Node\Expr\AssignOp
+use _PhpScoper4936962185e7\PhpParser\Node\Expr\AssignOp;
+class Mul extends \_PhpScoper4936962185e7\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {
