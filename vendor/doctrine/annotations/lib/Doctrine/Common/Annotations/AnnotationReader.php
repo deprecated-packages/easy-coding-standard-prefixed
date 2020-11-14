@@ -17,10 +17,10 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScoperddde3ba4aebc\Doctrine\Common\Annotations;
+namespace _PhpScopera749ac204cd2\Doctrine\Common\Annotations;
 
-use _PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
-use _PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\Annotation\Target;
+use _PhpScopera749ac204cd2\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
+use _PhpScopera749ac204cd2\Doctrine\Common\Annotations\Annotation\Target;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
@@ -33,14 +33,14 @@ use ReflectionProperty;
  * @author  Roman Borschel <roman@code-factory.org>
  * @author  Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class AnnotationReader implements \_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\Reader
+class AnnotationReader implements \_PhpScopera749ac204cd2\Doctrine\Common\Annotations\Reader
 {
     /**
      * Global map for imports.
      *
      * @var array
      */
-    private static $globalImports = array('ignoreannotation' => '_PhpScoperddde3ba4aebc\\Doctrine\\Common\\Annotations\\Annotation\\IgnoreAnnotation');
+    private static $globalImports = array('ignoreannotation' => '_PhpScopera749ac204cd2\\Doctrine\\Common\\Annotations\\Annotation\\IgnoreAnnotation');
     /**
      * A list with annotations that are not causing exceptions when not resolved to an annotation class.
      *
@@ -173,24 +173,24 @@ class AnnotationReader implements \_PhpScoperddde3ba4aebc\Doctrine\Common\Annota
     public function __construct()
     {
         if (\extension_loaded('Zend Optimizer+') && (\ini_get('zend_optimizerplus.save_comments') === "0" || \ini_get('opcache.save_comments') === "0")) {
-            throw \_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\AnnotationException::optimizerPlusSaveComments();
+            throw \_PhpScopera749ac204cd2\Doctrine\Common\Annotations\AnnotationException::optimizerPlusSaveComments();
         }
         if (\extension_loaded('Zend OPcache') && \ini_get('opcache.save_comments') == 0) {
-            throw \_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\AnnotationException::optimizerPlusSaveComments();
+            throw \_PhpScopera749ac204cd2\Doctrine\Common\Annotations\AnnotationException::optimizerPlusSaveComments();
         }
-        \_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/IgnoreAnnotation.php');
-        $this->parser = new \_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\DocParser();
-        $this->preParser = new \_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\DocParser();
+        \_PhpScopera749ac204cd2\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/IgnoreAnnotation.php');
+        $this->parser = new \_PhpScopera749ac204cd2\Doctrine\Common\Annotations\DocParser();
+        $this->preParser = new \_PhpScopera749ac204cd2\Doctrine\Common\Annotations\DocParser();
         $this->preParser->setImports(self::$globalImports);
         $this->preParser->setIgnoreNotImportedAnnotations(\true);
-        $this->phpParser = new \_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\PhpParser();
+        $this->phpParser = new \_PhpScopera749ac204cd2\Doctrine\Common\Annotations\PhpParser();
     }
     /**
      * {@inheritDoc}
      */
     public function getClassAnnotations(\ReflectionClass $class)
     {
-        $this->parser->setTarget(\_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
+        $this->parser->setTarget(\_PhpScopera749ac204cd2\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
         $this->parser->setImports($this->getClassImports($class));
         $this->parser->setIgnoredAnnotationNames($this->getIgnoredAnnotationNames($class));
         return $this->parser->parse($class->getDocComment(), 'class ' . $class->getName());
@@ -215,7 +215,7 @@ class AnnotationReader implements \_PhpScoperddde3ba4aebc\Doctrine\Common\Annota
     {
         $class = $property->getDeclaringClass();
         $context = 'property ' . $class->getName() . "::\$" . $property->getName();
-        $this->parser->setTarget(\_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $this->parser->setTarget(\_PhpScopera749ac204cd2\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         $this->parser->setImports($this->getPropertyImports($property));
         $this->parser->setIgnoredAnnotationNames($this->getIgnoredAnnotationNames($class));
         return $this->parser->parse($property->getDocComment(), $context);
@@ -240,7 +240,7 @@ class AnnotationReader implements \_PhpScoperddde3ba4aebc\Doctrine\Common\Annota
     {
         $class = $method->getDeclaringClass();
         $context = 'method ' . $class->getName() . '::' . $method->getName() . '()';
-        $this->parser->setTarget(\_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD);
+        $this->parser->setTarget(\_PhpScopera749ac204cd2\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD);
         $this->parser->setImports($this->getMethodImports($method));
         $this->parser->setIgnoredAnnotationNames($this->getIgnoredAnnotationNames($class));
         return $this->parser->parse($method->getDocComment(), $context);
@@ -342,7 +342,7 @@ class AnnotationReader implements \_PhpScoperddde3ba4aebc\Doctrine\Common\Annota
         $ignoredAnnotationNames = self::$globalIgnoredNames;
         $annotations = $this->preParser->parse($class->getDocComment(), 'class ' . $class->name);
         foreach ($annotations as $annotation) {
-            if ($annotation instanceof \_PhpScoperddde3ba4aebc\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation) {
+            if ($annotation instanceof \_PhpScopera749ac204cd2\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation) {
                 foreach ($annotation->names as $annot) {
                     $ignoredAnnotationNames[$annot] = \true;
                 }

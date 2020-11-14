@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScopera749ac204cd2\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Response;
+use _PhpScopera749ac204cd2\Symfony\Component\HttpFoundation\Response;
 /**
  * ResponseCacheStrategy knows how to compute the Response cache HTTP header
  * based on the different response cache headers.
@@ -20,7 +20,7 @@ use _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Response;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ResponseCacheStrategy implements \_PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategyInterface
+class ResponseCacheStrategy implements \_PhpScopera749ac204cd2\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategyInterface
 {
     /**
      * Cache-Control headers that are sent to the final response if they appear in ANY of the responses.
@@ -38,7 +38,7 @@ class ResponseCacheStrategy implements \_PhpScoperddde3ba4aebc\Symfony\Component
     /**
      * {@inheritdoc}
      */
-    public function add(\_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Response $response)
+    public function add(\_PhpScopera749ac204cd2\Symfony\Component\HttpFoundation\Response $response)
     {
         ++$this->embeddedResponses;
         foreach (self::$overrideDirectives as $directive) {
@@ -66,7 +66,7 @@ class ResponseCacheStrategy implements \_PhpScoperddde3ba4aebc\Symfony\Component
     /**
      * {@inheritdoc}
      */
-    public function update(\_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Response $response)
+    public function update(\_PhpScopera749ac204cd2\Symfony\Component\HttpFoundation\Response $response)
     {
         // if we have no embedded Response, do nothing
         if (0 === $this->embeddedResponses) {
@@ -115,7 +115,7 @@ class ResponseCacheStrategy implements \_PhpScoperddde3ba4aebc\Symfony\Component
      *
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.4
      */
-    private function willMakeFinalResponseUncacheable(\_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Response $response) : bool
+    private function willMakeFinalResponseUncacheable(\_PhpScopera749ac204cd2\Symfony\Component\HttpFoundation\Response $response) : bool
     {
         // RFC2616: A response received with a status code of 200, 203, 300, 301 or 410
         // MAY be stored by a cache […] unless a cache-control directive prohibits caching.

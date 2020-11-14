@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperddde3ba4aebc\PhpParser\Node\Stmt;
+namespace _PhpScopera749ac204cd2\PhpParser\Node\Stmt;
 
-use _PhpScoperddde3ba4aebc\PhpParser\Error;
-use _PhpScoperddde3ba4aebc\PhpParser\Node;
-class Class_ extends \_PhpScoperddde3ba4aebc\PhpParser\Node\Stmt\ClassLike
+use _PhpScopera749ac204cd2\PhpParser\Error;
+use _PhpScopera749ac204cd2\PhpParser\Node;
+class Class_ extends \_PhpScopera749ac204cd2\PhpParser\Node\Stmt\ClassLike
 {
     const MODIFIER_PUBLIC = 1;
     const MODIFIER_PROTECTED = 2;
@@ -36,7 +36,7 @@ class Class_ extends \_PhpScoperddde3ba4aebc\PhpParser\Node\Stmt\ClassLike
     {
         $this->attributes = $attributes;
         $this->flags = $subNodes['flags'] ?? $subNodes['type'] ?? 0;
-        $this->name = \is_string($name) ? new \_PhpScoperddde3ba4aebc\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScopera749ac204cd2\PhpParser\Node\Identifier($name) : $name;
         $this->extends = $subNodes['extends'] ?? null;
         $this->implements = $subNodes['implements'] ?? [];
         $this->stmts = $subNodes['stmts'] ?? [];
@@ -78,19 +78,19 @@ class Class_ extends \_PhpScoperddde3ba4aebc\PhpParser\Node\Stmt\ClassLike
     public static function verifyModifier($a, $b)
     {
         if ($a & self::VISIBILITY_MODIFIER_MASK && $b & self::VISIBILITY_MODIFIER_MASK) {
-            throw new \_PhpScoperddde3ba4aebc\PhpParser\Error('Multiple access type modifiers are not allowed');
+            throw new \_PhpScopera749ac204cd2\PhpParser\Error('Multiple access type modifiers are not allowed');
         }
         if ($a & self::MODIFIER_ABSTRACT && $b & self::MODIFIER_ABSTRACT) {
-            throw new \_PhpScoperddde3ba4aebc\PhpParser\Error('Multiple abstract modifiers are not allowed');
+            throw new \_PhpScopera749ac204cd2\PhpParser\Error('Multiple abstract modifiers are not allowed');
         }
         if ($a & self::MODIFIER_STATIC && $b & self::MODIFIER_STATIC) {
-            throw new \_PhpScoperddde3ba4aebc\PhpParser\Error('Multiple static modifiers are not allowed');
+            throw new \_PhpScopera749ac204cd2\PhpParser\Error('Multiple static modifiers are not allowed');
         }
         if ($a & self::MODIFIER_FINAL && $b & self::MODIFIER_FINAL) {
-            throw new \_PhpScoperddde3ba4aebc\PhpParser\Error('Multiple final modifiers are not allowed');
+            throw new \_PhpScopera749ac204cd2\PhpParser\Error('Multiple final modifiers are not allowed');
         }
         if ($a & 48 && $b & 48) {
-            throw new \_PhpScoperddde3ba4aebc\PhpParser\Error('Cannot use the final modifier on an abstract class member');
+            throw new \_PhpScopera749ac204cd2\PhpParser\Error('Cannot use the final modifier on an abstract class member');
         }
     }
     public function getType() : string

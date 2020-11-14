@@ -5,22 +5,22 @@ namespace SlevomatCodingStandard\Helpers;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\PhpDoc\InvalidTagValueNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Lexer\Lexer;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Parser\ConstExprParser;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Parser\PhpDocParser;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Parser\TokenIterator;
-use _PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Parser\TypeParser;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\PhpDoc\InvalidTagValueNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Lexer\Lexer;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Parser\ConstExprParser;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Parser\PhpDocParser;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Parser\TokenIterator;
+use _PhpScopera749ac204cd2\PHPStan\PhpDocParser\Parser\TypeParser;
 use SlevomatCodingStandard\Helpers\Annotation\Annotation;
 use SlevomatCodingStandard\Helpers\Annotation\ExtendsAnnotation;
 use SlevomatCodingStandard\Helpers\Annotation\GenericAnnotation;
@@ -44,11 +44,11 @@ use function preg_replace;
 use function sprintf;
 use function strtolower;
 use function trim;
-use const _PhpScoperddde3ba4aebc\T_DOC_COMMENT_CLOSE_TAG;
-use const _PhpScoperddde3ba4aebc\T_DOC_COMMENT_STAR;
-use const _PhpScoperddde3ba4aebc\T_DOC_COMMENT_STRING;
-use const _PhpScoperddde3ba4aebc\T_DOC_COMMENT_TAG;
-use const _PhpScoperddde3ba4aebc\T_DOC_COMMENT_WHITESPACE;
+use const _PhpScopera749ac204cd2\T_DOC_COMMENT_CLOSE_TAG;
+use const _PhpScopera749ac204cd2\T_DOC_COMMENT_STAR;
+use const _PhpScopera749ac204cd2\T_DOC_COMMENT_STRING;
+use const _PhpScopera749ac204cd2\T_DOC_COMMENT_TAG;
+use const _PhpScopera749ac204cd2\T_DOC_COMMENT_WHITESPACE;
 class AnnotationHelper
 {
     public const PREFIXES = ['psalm', 'phpstan'];
@@ -110,7 +110,7 @@ class AnnotationHelper
      * @param TypeNode $fixedTypeNode
      * @return string
      */
-    public static function fixAnnotationType(\PHP_CodeSniffer\Files\File $phpcsFile, \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation, \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\TypeNode $fixedTypeNode) : string
+    public static function fixAnnotationType(\PHP_CodeSniffer\Files\File $phpcsFile, \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation, \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\TypeNode $fixedTypeNode) : string
     {
         $fixedAnnotation = self::fixAnnotation($annotation, $typeNode, $fixedTypeNode);
         return self::fix($phpcsFile, $annotation, $fixedAnnotation);
@@ -123,7 +123,7 @@ class AnnotationHelper
      * @param ConstFetchNode $fixedNode
      * @return string
      */
-    public static function fixAnnotationConstantFetchNode(\PHP_CodeSniffer\Files\File $phpcsFile, \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation, \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode $node, \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode $fixedNode) : string
+    public static function fixAnnotationConstantFetchNode(\PHP_CodeSniffer\Files\File $phpcsFile, \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation, \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode $node, \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode $fixedNode) : string
     {
         if ($annotation instanceof \SlevomatCodingStandard\Helpers\Annotation\MethodAnnotation) {
             $fixedContentNode = clone $annotation->getContentNode();
@@ -143,7 +143,7 @@ class AnnotationHelper
                         if ($constFetchNode !== $node) {
                             continue;
                         }
-                        $fixedConstTypeNode = new \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode(\SlevomatCodingStandard\Helpers\AnnotationConstantExpressionHelper::change($constTypeNode->constExpr, $node, $fixedNode));
+                        $fixedConstTypeNode = new \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode(\SlevomatCodingStandard\Helpers\AnnotationConstantExpressionHelper::change($constTypeNode->constExpr, $node, $fixedNode));
                         $fixedAnnotation = self::fixAnnotation($annotation, $constTypeNode, $fixedConstTypeNode);
                         break 3;
                     }
@@ -234,7 +234,7 @@ class AnnotationHelper
                     $parsedContent = null;
                     if ($annotationContent !== null) {
                         $parsedContent = self::parseAnnotationContent($annotationName, $annotationContent);
-                        if ($parsedContent instanceof \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\PhpDoc\InvalidTagValueNode) {
+                        if ($parsedContent instanceof \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\PhpDoc\InvalidTagValueNode) {
                             $parsedContent = null;
                         }
                     }
@@ -276,24 +276,24 @@ class AnnotationHelper
             /** @var UnionTypeNode $annotationTypeNode */
             $annotationTypeNode = $annotation->getType();
             $annotationTypeHintNode = \SlevomatCodingStandard\Helpers\AnnotationTypeHelper::getTypeFromNullableType($annotationTypeNode);
-            $annotationTypeHint = $annotationTypeHintNode instanceof \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode ? $annotationTypeHintNode->name : (string) $annotationTypeHintNode;
+            $annotationTypeHint = $annotationTypeHintNode instanceof \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode ? $annotationTypeHintNode->name : (string) $annotationTypeHintNode;
             return \SlevomatCodingStandard\Helpers\TypeHintHelper::typeHintEqualsAnnotation($phpcsFile, $functionPointer, $typeHint->getTypeHint(), $annotationTypeHint);
         }
         if (!\SlevomatCodingStandard\Helpers\AnnotationTypeHelper::containsOneType($annotation->getType())) {
             return \false;
         }
-        if ($annotation->getType() instanceof \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
+        if ($annotation->getType() instanceof \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
             return \false;
         }
-        if ($annotation->getType() instanceof \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($annotation->getType() instanceof \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             return \false;
         }
-        if ($annotation->getType() instanceof \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
+        if ($annotation->getType() instanceof \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
             return \false;
         }
         /** @var GenericTypeNode|CallableTypeNode|IdentifierTypeNode|ThisTypeNode $annotationTypeNode */
         $annotationTypeNode = $annotation->getType();
-        if ($annotationTypeNode instanceof \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \in_array(\strtolower($annotationTypeNode->name), ['true', 'false', 'class-string', 'trait-string', 'callable-string', 'numeric-string'], \true)) {
+        if ($annotationTypeNode instanceof \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \in_array(\strtolower($annotationTypeNode->name), ['true', 'false', 'class-string', 'trait-string', 'callable-string', 'numeric-string'], \true)) {
             return \false;
         }
         $annotationTypeHint = \SlevomatCodingStandard\Helpers\AnnotationTypeHelper::getTypeHintFromOneType($annotationTypeNode);
@@ -305,7 +305,7 @@ class AnnotationHelper
      * @param TypeNode $fixedTypeNode
      * @return Annotation
      */
-    private static function fixAnnotation(\SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation, \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\Type\TypeNode $fixedTypeNode) : \SlevomatCodingStandard\Helpers\Annotation\Annotation
+    private static function fixAnnotation(\SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation, \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\Type\TypeNode $fixedTypeNode) : \SlevomatCodingStandard\Helpers\Annotation\Annotation
     {
         if ($annotation instanceof \SlevomatCodingStandard\Helpers\Annotation\MethodAnnotation) {
             $fixedContentNode = clone $annotation->getContentNode();
@@ -343,26 +343,26 @@ class AnnotationHelper
         $fixedAnnotationContent = $fixedAnnotation->export() . $spaceAfterContent;
         return \preg_replace('~(\\r\\n|\\n|\\r)~', '\\1 * ', $fixedAnnotationContent);
     }
-    private static function parseAnnotationContent(string $annotationName, string $annotationContent) : \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+    private static function parseAnnotationContent(string $annotationName, string $annotationContent) : \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
     {
         $annotationContentWithoutNewLines = \preg_replace('~[\\r\\n]~', ' ', $annotationContent);
-        $tokens = new \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Parser\TokenIterator(self::getPhpDocLexer()->tokenize($annotationContentWithoutNewLines));
+        $tokens = new \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Parser\TokenIterator(self::getPhpDocLexer()->tokenize($annotationContentWithoutNewLines));
         return self::getPhpDocParser()->parseTagValue($tokens, $annotationName);
     }
-    private static function getPhpDocLexer() : \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Lexer\Lexer
+    private static function getPhpDocLexer() : \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Lexer\Lexer
     {
         static $phpDocLexer;
         if ($phpDocLexer === null) {
-            $phpDocLexer = new \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Lexer\Lexer();
+            $phpDocLexer = new \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Lexer\Lexer();
         }
         return $phpDocLexer;
     }
-    private static function getPhpDocParser() : \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Parser\PhpDocParser
+    private static function getPhpDocParser() : \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Parser\PhpDocParser
     {
         static $phpDocParser;
         if ($phpDocParser === null) {
-            $constantExpressionParser = new \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Parser\ConstExprParser();
-            $phpDocParser = new \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Parser\PhpDocParser(new \_PhpScoperddde3ba4aebc\PHPStan\PhpDocParser\Parser\TypeParser($constantExpressionParser), $constantExpressionParser);
+            $constantExpressionParser = new \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Parser\ConstExprParser();
+            $phpDocParser = new \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Parser\PhpDocParser(new \_PhpScopera749ac204cd2\PHPStan\PhpDocParser\Parser\TypeParser($constantExpressionParser), $constantExpressionParser);
         }
         return $phpDocParser;
     }

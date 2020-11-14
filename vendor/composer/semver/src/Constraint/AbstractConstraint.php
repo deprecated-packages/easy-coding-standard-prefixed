@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoperddde3ba4aebc\Composer\Semver\Constraint;
+namespace _PhpScopera749ac204cd2\Composer\Semver\Constraint;
 
 \trigger_error('The ' . __CLASS__ . ' abstract class is deprecated, there is no replacement for it, it will be removed in the next major version.', \E_USER_DEPRECATED);
 /**
  * Base constraint class.
  */
-abstract class AbstractConstraint implements \_PhpScoperddde3ba4aebc\Composer\Semver\Constraint\ConstraintInterface
+abstract class AbstractConstraint implements \_PhpScopera749ac204cd2\Composer\Semver\Constraint\ConstraintInterface
 {
     /** @var string */
     protected $prettyString;
@@ -23,7 +23,7 @@ abstract class AbstractConstraint implements \_PhpScoperddde3ba4aebc\Composer\Se
      *
      * @return bool
      */
-    public function matches(\_PhpScoperddde3ba4aebc\Composer\Semver\Constraint\ConstraintInterface $provider)
+    public function matches(\_PhpScopera749ac204cd2\Composer\Semver\Constraint\ConstraintInterface $provider)
     {
         if ($provider instanceof $this) {
             // see note at bottom of this class declaration
