@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4936962185e7\Migrify\PhpConfigPrinter\CaseConverter;
+namespace _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoper4936962185e7\Migrify\MigrifyKernel\Exception\NotImplementedYetException;
-use _PhpScoper4936962185e7\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use _PhpScoper4936962185e7\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use _PhpScoper4936962185e7\Migrify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
-use _PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScoper4936962185e7\Nette\Utils\Strings;
-use _PhpScoper4936962185e7\PhpParser\BuilderHelpers;
-use _PhpScoper4936962185e7\PhpParser\Node\Arg;
-use _PhpScoper4936962185e7\PhpParser\Node\Expr;
-use _PhpScoper4936962185e7\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper4936962185e7\PhpParser\Node\Expr\Variable;
-use _PhpScoper4936962185e7\PhpParser\Node\Scalar\String_;
-use _PhpScoper4936962185e7\PhpParser\Node\Stmt\Expression;
+use _PhpScoperb09c3ec8e01a\Migrify\MigrifyKernel\Exception\NotImplementedYetException;
+use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Sorter\YamlArgumentSorter;
+use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoperb09c3ec8e01a\Nette\Utils\Strings;
+use _PhpScoperb09c3ec8e01a\PhpParser\BuilderHelpers;
+use _PhpScoperb09c3ec8e01a\PhpParser\Node\Arg;
+use _PhpScoperb09c3ec8e01a\PhpParser\Node\Expr;
+use _PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\Variable;
+use _PhpScoperb09c3ec8e01a\PhpParser\Node\Scalar\String_;
+use _PhpScoperb09c3ec8e01a\PhpParser\Node\Stmt\Expression;
 /**
  * Handles this part:
  *
  * imports: <---
  */
-final class ImportCaseConverter implements \_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
+final class ImportCaseConverter implements \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @see https://regex101.com/r/hOTdIE/1
@@ -37,36 +37,36 @@ final class ImportCaseConverter implements \_PhpScoper4936962185e7\Migrify\PhpCo
      * @var CommonNodeFactory
      */
     private $commonNodeFactory;
-    public function __construct(\_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\Sorter\YamlArgumentSorter $yamlArgumentSorter, \_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
+    public function __construct(\_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Sorter\YamlArgumentSorter $yamlArgumentSorter, \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory)
     {
         $this->yamlArgumentSorter = $yamlArgumentSorter;
         $this->commonNodeFactory = $commonNodeFactory;
     }
     public function getKey() : string
     {
-        return \_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IMPORTS;
+        return \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IMPORTS;
     }
     public function match(string $rootKey, $key, $values) : bool
     {
-        return $rootKey === \_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IMPORTS;
+        return $rootKey === \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IMPORTS;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoper4936962185e7\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperb09c3ec8e01a\PhpParser\Node\Stmt\Expression
     {
         if (\is_array($values)) {
-            $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($values, [\_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE => '', 'type' => null, \_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS => \false]);
+            $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($values, [\_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE => '', 'type' => null, \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS => \false]);
             return $this->createImportMethodCall($arguments);
         }
-        throw new \_PhpScoper4936962185e7\Migrify\MigrifyKernel\Exception\NotImplementedYetException();
+        throw new \_PhpScoperb09c3ec8e01a\Migrify\MigrifyKernel\Exception\NotImplementedYetException();
     }
     /**
      * @param mixed[] $arguments
      */
-    private function createImportMethodCall(array $arguments) : \_PhpScoper4936962185e7\PhpParser\Node\Stmt\Expression
+    private function createImportMethodCall(array $arguments) : \_PhpScoperb09c3ec8e01a\PhpParser\Node\Stmt\Expression
     {
-        $containerConfiguratorVariable = new \_PhpScoper4936962185e7\PhpParser\Node\Expr\Variable(\_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $containerConfiguratorVariable = new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\Variable(\_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
         $args = $this->createArgs($arguments);
-        $methodCall = new \_PhpScoper4936962185e7\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, 'import', $args);
-        return new \_PhpScoper4936962185e7\PhpParser\Node\Stmt\Expression($methodCall);
+        $methodCall = new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, 'import', $args);
+        return new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param mixed[] $arguments
@@ -80,14 +80,14 @@ final class ImportCaseConverter implements \_PhpScoper4936962185e7\Migrify\PhpCo
                 continue;
             }
             $expr = $this->resolveExpr($value);
-            $args[] = new \_PhpScoper4936962185e7\PhpParser\Node\Arg($expr);
+            $args[] = new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Arg($expr);
         }
         return $args;
     }
     private function shouldSkipDefaultValue(string $name, $value, array $arguments) : bool
     {
         // skip default value for "ignore_errors"
-        if ($name === \_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS && $value === \false) {
+        if ($name === \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS && $value === \false) {
             return \true;
         }
         // check if default value for "type"
@@ -98,22 +98,22 @@ final class ImportCaseConverter implements \_PhpScoper4936962185e7\Migrify\PhpCo
             return \false;
         }
         // follow by default value for "ignore_errors"
-        return isset($arguments[\_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS]) && $arguments[\_PhpScoper4936962185e7\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS] === \false;
+        return isset($arguments[\_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS]) && $arguments[\_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS] === \false;
     }
     private function replaceImportedFileSuffix($value)
     {
         if (!\is_string($value)) {
             return $value;
         }
-        return \_PhpScoper4936962185e7\Nette\Utils\Strings::replace($value, self::INPUT_SUFFIX_REGEX, '.php');
+        return \_PhpScoperb09c3ec8e01a\Nette\Utils\Strings::replace($value, self::INPUT_SUFFIX_REGEX, '.php');
     }
-    private function resolveExpr($value) : \_PhpScoper4936962185e7\PhpParser\Node\Expr
+    private function resolveExpr($value) : \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr
     {
         if (\is_bool($value) || \in_array($value, ['annotations', 'directory', 'glob'], \true)) {
-            return \_PhpScoper4936962185e7\PhpParser\BuilderHelpers::normalizeValue($value);
+            return \_PhpScoperb09c3ec8e01a\PhpParser\BuilderHelpers::normalizeValue($value);
         }
         if ($value === 'not_found') {
-            return new \_PhpScoper4936962185e7\PhpParser\Node\Scalar\String_('not_found');
+            return new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Scalar\String_('not_found');
         }
         $value = $this->replaceImportedFileSuffix($value);
         return $this->commonNodeFactory->createAbsoluteDirExpr($value);

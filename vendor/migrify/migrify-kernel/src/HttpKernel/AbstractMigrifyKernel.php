@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4936962185e7\Migrify\MigrifyKernel\HttpKernel;
+namespace _PhpScoperb09c3ec8e01a\Migrify\MigrifyKernel\HttpKernel;
 
-use _PhpScoper4936962185e7\Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle;
-use _PhpScoper4936962185e7\Nette\Utils\Strings;
-use _PhpScoper4936962185e7\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use _PhpScoper4936962185e7\Symfony\Component\HttpKernel\Kernel;
-abstract class AbstractMigrifyKernel extends \_PhpScoper4936962185e7\Symfony\Component\HttpKernel\Kernel
+use _PhpScoperb09c3ec8e01a\Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle;
+use _PhpScoperb09c3ec8e01a\Nette\Utils\Strings;
+use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\Kernel;
+abstract class AbstractMigrifyKernel extends \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\Kernel
 {
     public function getUniqueKernelHash() : string
     {
         $finalKernelClass = static::class;
-        $shortClassName = (string) \_PhpScoper4936962185e7\Nette\Utils\Strings::after($finalKernelClass, '\\', -1);
+        $shortClassName = (string) \_PhpScoperb09c3ec8e01a\Nette\Utils\Strings::after($finalKernelClass, '\\', -1);
         return $this->camelCaseToGlue($shortClassName, '_');
     }
     public function getCacheDir() : string
@@ -28,14 +28,14 @@ abstract class AbstractMigrifyKernel extends \_PhpScoper4936962185e7\Symfony\Com
      */
     public function registerBundles() : iterable
     {
-        return [new \_PhpScoper4936962185e7\Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle()];
+        return [new \_PhpScoperb09c3ec8e01a\Migrify\MigrifyKernel\Bundle\MigrifyKernelBundle()];
     }
     private function camelCaseToGlue(string $input, string $glue) : string
     {
         if ($input === \strtolower($input)) {
             return $input;
         }
-        $matches = \_PhpScoper4936962185e7\Nette\Utils\Strings::matchAll($input, '#([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)#');
+        $matches = \_PhpScoperb09c3ec8e01a\Nette\Utils\Strings::matchAll($input, '#([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)#');
         $parts = [];
         foreach ($matches as $match) {
             $parts[] = $match[0] === \strtoupper($match[0]) ? \strtolower($match[0]) : \lcfirst($match[0]);

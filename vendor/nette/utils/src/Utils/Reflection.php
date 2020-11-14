@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper4936962185e7\Nette\Utils;
+namespace _PhpScoperb09c3ec8e01a\Nette\Utils;
 
-use _PhpScoper4936962185e7\Nette;
+use _PhpScoperb09c3ec8e01a\Nette;
 /**
  * PHP reflection helpers.
  */
@@ -106,7 +106,7 @@ final class Reflection
         } elseif ($ref instanceof \ReflectionParameter) {
             return '$' . $ref->getName() . ' in ' . self::toString($ref->getDeclaringFunction()) . '()';
         } else {
-            throw new \_PhpScoper4936962185e7\Nette\InvalidArgumentException();
+            throw new \_PhpScoperb09c3ec8e01a\Nette\InvalidArgumentException();
         }
     }
     /**
@@ -117,7 +117,7 @@ final class Reflection
     {
         $lower = \strtolower($name);
         if (empty($name)) {
-            throw new \_PhpScoper4936962185e7\Nette\InvalidArgumentException('Class name must not be empty.');
+            throw new \_PhpScoperb09c3ec8e01a\Nette\InvalidArgumentException('Class name must not be empty.');
         } elseif (isset(self::BUILTIN_TYPES[$lower])) {
             return $lower;
         } elseif ($lower === 'self') {
@@ -143,7 +143,7 @@ final class Reflection
     public static function getUseStatements(\ReflectionClass $class) : array
     {
         if ($class->isAnonymous()) {
-            throw new \_PhpScoper4936962185e7\Nette\NotImplementedException('Anonymous classes are not supported.');
+            throw new \_PhpScoperb09c3ec8e01a\Nette\NotImplementedException('Anonymous classes are not supported.');
         }
         static $cache = [];
         if (!isset($cache[$name = $class->getName()])) {

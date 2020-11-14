@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4936962185e7\Symfony\Component\Console\CommandLoader;
+namespace _PhpScoperb09c3ec8e01a\Symfony\Component\Console\CommandLoader;
 
-use _PhpScoper4936962185e7\Psr\Container\ContainerInterface;
-use _PhpScoper4936962185e7\Symfony\Component\Console\Exception\CommandNotFoundException;
+use _PhpScoperb09c3ec8e01a\Psr\Container\ContainerInterface;
+use _PhpScoperb09c3ec8e01a\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * Loads commands from a PSR-11 container.
  *
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-class ContainerCommandLoader implements \_PhpScoper4936962185e7\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+class ContainerCommandLoader implements \_PhpScoperb09c3ec8e01a\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
 {
     private $container;
     private $commandMap;
     /**
      * @param array $commandMap An array with command names as keys and service ids as values
      */
-    public function __construct(\_PhpScoper4936962185e7\Psr\Container\ContainerInterface $container, array $commandMap)
+    public function __construct(\_PhpScoperb09c3ec8e01a\Psr\Container\ContainerInterface $container, array $commandMap)
     {
         $this->container = $container;
         $this->commandMap = $commandMap;
@@ -35,7 +35,7 @@ class ContainerCommandLoader implements \_PhpScoper4936962185e7\Symfony\Componen
     public function get($name)
     {
         if (!$this->has($name)) {
-            throw new \_PhpScoper4936962185e7\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
+            throw new \_PhpScoperb09c3ec8e01a\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
         }
         return $this->container->get($this->commandMap[$name]);
     }
