@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator;
 
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\Finder\ClassByTypeFinder;
 use Symplify\RuleDocGenerator\Printer\RuleDefinitionsPrinter;
@@ -29,7 +29,7 @@ final class DirectoryToMarkdownPrinter
      * @var RuleDefinitionsPrinter
      */
     private $ruleDefinitionsPrinter;
-    public function __construct(\Symplify\RuleDocGenerator\Finder\ClassByTypeFinder $classByTypeFinder, \_PhpScoperb09c3ec8e01a\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\RuleDocGenerator\RuleDefinitionsResolver $ruleDefinitionsResolver, \Symplify\RuleDocGenerator\Printer\RuleDefinitionsPrinter $ruleDefinitionsPrinter)
+    public function __construct(\Symplify\RuleDocGenerator\Finder\ClassByTypeFinder $classByTypeFinder, \_PhpScoperddde3ba4aebc\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\RuleDocGenerator\RuleDefinitionsResolver $ruleDefinitionsResolver, \Symplify\RuleDocGenerator\Printer\RuleDefinitionsPrinter $ruleDefinitionsPrinter)
     {
         $this->classByTypeFinder = $classByTypeFinder;
         $this->symfonyStyle = $symfonyStyle;

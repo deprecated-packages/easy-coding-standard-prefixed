@@ -8,37 +8,37 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperb09c3ec8e01a\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScoperb09c3ec8e01a\Symfony\Contracts\Translation\LocaleAwareInterface;
+use _PhpScoperddde3ba4aebc\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoperddde3ba4aebc\Symfony\Contracts\Translation\LocaleAwareInterface;
 /**
  * Pass the current locale to the provided services.
  *
  * @author Pierre Bobiet <pierrebobiet@gmail.com>
  */
-class LocaleAwareListener implements \_PhpScoperb09c3ec8e01a\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class LocaleAwareListener implements \_PhpScoperddde3ba4aebc\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $localeAwareServices;
     private $requestStack;
     /**
      * @param LocaleAwareInterface[] $localeAwareServices
      */
-    public function __construct(iterable $localeAwareServices, \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\RequestStack $requestStack)
+    public function __construct(iterable $localeAwareServices, \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\RequestStack $requestStack)
     {
         $this->localeAwareServices = $localeAwareServices;
         $this->requestStack = $requestStack;
     }
-    public function onKernelRequest(\_PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\Event\RequestEvent $event) : void
+    public function onKernelRequest(\_PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\Event\RequestEvent $event) : void
     {
         $this->setLocale($event->getRequest()->getLocale(), $event->getRequest()->getDefaultLocale());
     }
-    public function onKernelFinishRequest(\_PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event) : void
+    public function onKernelFinishRequest(\_PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event) : void
     {
         if (null === ($parentRequest = $this->requestStack->getParentRequest())) {
             foreach ($this->localeAwareServices as $service) {
@@ -52,8 +52,8 @@ class LocaleAwareListener implements \_PhpScoperb09c3ec8e01a\Symfony\Component\E
     {
         return [
             // must be registered after the Locale listener
-            \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 15]],
-            \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', -15]],
+            \_PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 15]],
+            \_PhpScoperddde3ba4aebc\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', -15]],
         ];
     }
     private function setLocale(string $locale, string $defaultLocale) : void

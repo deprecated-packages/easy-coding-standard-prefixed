@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Printer;
+namespace _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\Printer;
 
-use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
-use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator;
+use _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
+use _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator;
 /**
  * @see \Migrify\PhpConfigPrinter\Tests\Printer\SmartPhpConfigPrinter\SmartPhpConfigPrinterTest
  */
@@ -22,7 +22,7 @@ final class SmartPhpConfigPrinter
      * @var ServiceConfigurationDecorator
      */
     private $serviceConfigurationDecorator;
-    public function __construct(\_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $configuratorReturnClosureFactory, \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator $serviceConfigurationDecorator)
+    public function __construct(\_PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $configuratorReturnClosureFactory, \_PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \_PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\Printer\ArrayDecorator\ServiceConfigurationDecorator $serviceConfigurationDecorator)
     {
         $this->configuratorReturnClosureFactory = $configuratorReturnClosureFactory;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;

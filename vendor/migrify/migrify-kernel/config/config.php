@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb09c3ec8e01a;
+namespace _PhpScoperddde3ba4aebc;
 
-use _PhpScoperb09c3ec8e01a\Migrify\MigrifyKernel\Console\CommandAwareConsoleApplication;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Console\Application;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoperddde3ba4aebc\Migrify\MigrifyKernel\Console\ConsoleApplicationFactory;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Console\Application;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
@@ -15,16 +15,15 @@ use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileSystem;
-use function _PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Loader\Configurator\ref;
-return static function (\_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use function _PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+return static function (\_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
     // console application with commands
-    $services->set(\_PhpScoperb09c3ec8e01a\Migrify\MigrifyKernel\Console\CommandAwareConsoleApplication::class)->public();
-    $services->alias(\_PhpScoperb09c3ec8e01a\Symfony\Component\Console\Application::class, \_PhpScoperb09c3ec8e01a\Migrify\MigrifyKernel\Console\CommandAwareConsoleApplication::class);
+    $services->set(\_PhpScoperddde3ba4aebc\Migrify\MigrifyKernel\Console\ConsoleApplicationFactory::class);
     // symfony style
     $services->set(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class);
-    $services->set(\_PhpScoperb09c3ec8e01a\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Loader\Configurator\ref(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
+    $services->set(\_PhpScoperddde3ba4aebc\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Loader\Configurator\ref(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
     // filesystem
     $services->set(\Symplify\SmartFileSystem\Finder\FinderSanitizer::class);
     $services->set(\Symplify\SmartFileSystem\SmartFileSystem::class);

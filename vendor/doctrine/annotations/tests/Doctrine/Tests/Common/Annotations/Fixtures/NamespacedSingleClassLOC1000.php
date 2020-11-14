@@ -1,10 +1,10 @@
 <?php
 
-namespace _PhpScoperb09c3ec8e01a\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoperddde3ba4aebc\Doctrine\Tests\Common\Annotations\Fixtures;
 
 use ReflectionClass, ReflectionProperty, ReflectionMethod;
-use _PhpScoperb09c3ec8e01a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
-use _PhpScoperb09c3ec8e01a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoperddde3ba4aebc\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+use _PhpScoperddde3ba4aebc\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
 class NamespacedSingleClassLOC1000
 {
     const TEST1 = 1234567890;

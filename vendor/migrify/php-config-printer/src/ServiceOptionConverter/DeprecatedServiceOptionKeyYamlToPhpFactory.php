@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ServiceOptionConverter;
+namespace _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-use _PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\MethodCall;
-final class DeprecatedServiceOptionKeyYamlToPhpFactory implements \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+use _PhpScoperddde3ba4aebc\PhpParser\Node\Expr\MethodCall;
+final class DeprecatedServiceOptionKeyYamlToPhpFactory implements \_PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\_PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperddde3ba4aebc\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperddde3ba4aebc\PhpParser\Node\Expr\MethodCall
     {
         // the old, simple format
         if (!\is_array($yaml)) {
@@ -26,10 +26,10 @@ final class DeprecatedServiceOptionKeyYamlToPhpFactory implements \_PhpScoperb09
             $items = [$yaml['package'] ?? '', $yaml['version'] ?? '', $yaml['message'] ?? ''];
             $args = $this->argsNodeFactory->createFromValues($items);
         }
-        return new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\MethodCall($methodCall, 'deprecate', $args);
+        return new \_PhpScoperddde3ba4aebc\PhpParser\Node\Expr\MethodCall($methodCall, 'deprecate', $args);
     }
     public function isMatch($key, $values) : bool
     {
-        return $key === \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey::DEPRECATED;
+        return $key === \_PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey::DEPRECATED;
     }
 }

@@ -22,7 +22,7 @@
         "doctrine\/orm": "^2.7",
         "symplify\/smart-file-system": "dev-master",
         "symfony\/framework-bundle": "^4.4|^5.1",
-        "migrify\/php-config-printer": "^0.3.50",
+        "migrify\/php-config-printer": "^0.4",
         "phpunit\/phpunit": "^8.5|^9.4"
     },
     "autoload": {
@@ -37,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "8.4-dev"
+            "dev-master": "9.0-dev"
         }
     },
     "minimum-stability": "dev",

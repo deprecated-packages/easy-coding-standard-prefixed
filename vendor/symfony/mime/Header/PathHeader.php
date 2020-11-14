@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb09c3ec8e01a\Symfony\Component\Mime\Header;
+namespace _PhpScoperddde3ba4aebc\Symfony\Component\Mime\Header;
 
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Mime\Address;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Mime\Exception\RfcComplianceException;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Mime\Address;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Mime\Exception\RfcComplianceException;
 /**
  * A Path Header, such a Return-Path (one address).
  *
@@ -19,10 +19,10 @@ use _PhpScoperb09c3ec8e01a\Symfony\Component\Mime\Exception\RfcComplianceExcepti
  *
  * @experimental in 4.3
  */
-final class PathHeader extends \_PhpScoperb09c3ec8e01a\Symfony\Component\Mime\Header\AbstractHeader
+final class PathHeader extends \_PhpScoperddde3ba4aebc\Symfony\Component\Mime\Header\AbstractHeader
 {
     private $address;
-    public function __construct(string $name, \_PhpScoperb09c3ec8e01a\Symfony\Component\Mime\Address $address)
+    public function __construct(string $name, \_PhpScoperddde3ba4aebc\Symfony\Component\Mime\Address $address)
     {
         parent::__construct($name);
         $this->setAddress($address);
@@ -43,11 +43,11 @@ final class PathHeader extends \_PhpScoperb09c3ec8e01a\Symfony\Component\Mime\He
     {
         return $this->getAddress();
     }
-    public function setAddress(\_PhpScoperb09c3ec8e01a\Symfony\Component\Mime\Address $address)
+    public function setAddress(\_PhpScoperddde3ba4aebc\Symfony\Component\Mime\Address $address)
     {
         $this->address = $address;
     }
-    public function getAddress() : \_PhpScoperb09c3ec8e01a\Symfony\Component\Mime\Address
+    public function getAddress() : \_PhpScoperddde3ba4aebc\Symfony\Component\Mime\Address
     {
         return $this->address;
     }

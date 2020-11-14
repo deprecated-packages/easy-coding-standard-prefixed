@@ -7,20 +7,20 @@
         "nette\/utils": "^3.1",
         "nikic\/php-parser": "^4.9",
         "symfony\/http-kernel": "^4.4|^5.1",
-        "migrify\/migrify-kernel": "^0.3.50"
+        "migrify\/migrify-kernel": "^0.4"
     },
     "require-dev": {
-        "symplify\/easy-testing": "^8.3.35",
+        "symplify\/easy-testing": "^8.3.46|^9.0",
         "phpunit\/phpunit": "^8.5|^9.0"
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperb09c3ec8e01a\\Migrify\\PhpConfigPrinter\\": "src"
+            "_PhpScoperddde3ba4aebc\\Migrify\\PhpConfigPrinter\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoperb09c3ec8e01a\\Migrify\\PhpConfigPrinter\\Tests\\": "tests"
+            "_PhpScoperddde3ba4aebc\\Migrify\\PhpConfigPrinter\\Tests\\": "tests"
         }
     },
     "minimum-stability": "dev",

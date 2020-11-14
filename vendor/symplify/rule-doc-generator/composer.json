@@ -14,7 +14,7 @@
         "symplify\/markdown-diff": "dev-master",
         "symplify\/package-builder": "dev-master",
         "nette\/neon": "^3.2",
-        "migrify\/php-config-printer": "^0.3.50"
+        "migrify\/php-config-printer": "^0.4"
     },
     "require-dev": {
         "phpunit\/phpunit": "^8.5|^9.4",
@@ -33,7 +33,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "8.4-dev"
+            "dev-master": "9.0-dev"
         }
     },
     "minimum-stability": "dev",

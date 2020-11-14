@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperddde3ba4aebc\Symfony\Component\ExpressionLanguage\Expression;
 abstract class AbstractConfigurator
 {
     const FACTORY = 'unknown';
@@ -44,30 +44,30 @@ abstract class AbstractConfigurator
             }
             return $value;
         }
-        if ($value instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator) {
-            return new \_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Reference($value->id, $value->invalidBehavior);
+        if ($value instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator) {
+            return new \_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Reference($value->id, $value->invalidBehavior);
         }
-        if ($value instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator) {
+        if ($value instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator) {
             $def = $value->definition;
             $value->definition = null;
             return $def;
         }
         if ($value instanceof self) {
-            throw new \_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('"%s()" can be used only at the root of service configuration files.', $value::FACTORY));
+            throw new \_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('"%s()" can be used only at the root of service configuration files.', $value::FACTORY));
         }
         switch (\true) {
             case null === $value:
             case \is_scalar($value):
                 return $value;
-            case $value instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface:
-            case $value instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Definition:
-            case $value instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\ExpressionLanguage\Expression:
-            case $value instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Parameter:
-            case $value instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Reference:
+            case $value instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Argument\ArgumentInterface:
+            case $value instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Definition:
+            case $value instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\ExpressionLanguage\Expression:
+            case $value instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Parameter:
+            case $value instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Reference:
                 if ($allowServices) {
                     return $value;
                 }
         }
-        throw new \_PhpScoperb09c3ec8e01a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Cannot use values of type "%s" in service configuration files.', \is_object($value) ? \get_class($value) : \gettype($value)));
+        throw new \_PhpScoperddde3ba4aebc\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Cannot use values of type "%s" in service configuration files.', \is_object($value) ? \get_class($value) : \gettype($value)));
     }
 }

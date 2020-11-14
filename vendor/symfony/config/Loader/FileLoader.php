@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb09c3ec8e01a\Symfony\Component\Config\Loader;
+namespace _PhpScoperddde3ba4aebc\Symfony\Component\Config\Loader;
 
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Config\Exception\LoaderLoadException;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Config\FileLocatorInterface;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Config\Resource\FileExistenceResource;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\Config\Resource\GlobResource;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Config\Exception\LoaderLoadException;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Config\FileLocatorInterface;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Config\Resource\FileExistenceResource;
+use _PhpScoperddde3ba4aebc\Symfony\Component\Config\Resource\GlobResource;
 /**
  * FileLoader is the abstract class used by all built-in loaders that are file based.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class FileLoader extends \_PhpScoperb09c3ec8e01a\Symfony\Component\Config\Loader\Loader
+abstract class FileLoader extends \_PhpScoperddde3ba4aebc\Symfony\Component\Config\Loader\Loader
 {
     protected static $loading = [];
     protected $locator;
     private $currentDir;
-    public function __construct(\_PhpScoperb09c3ec8e01a\Symfony\Component\Config\FileLocatorInterface $locator)
+    public function __construct(\_PhpScoperddde3ba4aebc\Symfony\Component\Config\FileLocatorInterface $locator)
     {
         $this->locator = $locator;
     }
@@ -65,7 +65,7 @@ abstract class FileLoader extends \_PhpScoperb09c3ec8e01a\Symfony\Component\Conf
      */
     public function import($resource, $type = null, $ignoreErrors = \false, $sourceResource = null)
     {
-        if (\func_num_args() < 5 && __CLASS__ !== \get_class($this) && 0 !== \strpos(\get_class($this), 'Symfony\\Component\\') && __CLASS__ !== (new \ReflectionMethod($this, __FUNCTION__))->getDeclaringClass()->getName() && !$this instanceof \_PhpScoperb09c3ec8e01a\PHPUnit\Framework\MockObject\MockObject && !$this instanceof \_PhpScoperb09c3ec8e01a\Prophecy\Prophecy\ProphecySubjectInterface) {
+        if (\func_num_args() < 5 && __CLASS__ !== \get_class($this) && 0 !== \strpos(\get_class($this), 'Symfony\\Component\\') && __CLASS__ !== (new \ReflectionMethod($this, __FUNCTION__))->getDeclaringClass()->getName() && !$this instanceof \_PhpScoperddde3ba4aebc\PHPUnit\Framework\MockObject\MockObject && !$this instanceof \_PhpScoperddde3ba4aebc\Prophecy\Prophecy\ProphecySubjectInterface) {
             @\trigger_error(\sprintf('The "%s()" method will have a new "$exclude = null" argument in version 5.0, not defining it is deprecated since Symfony 4.4.', __METHOD__), \E_USER_DEPRECATED);
         }
         $exclude = \func_num_args() >= 5 ? \func_get_arg(4) : null;
@@ -108,17 +108,17 @@ abstract class FileLoader extends \_PhpScoperb09c3ec8e01a\Symfony\Component\Conf
         }
         try {
             $prefix = $this->locator->locate($prefix, $this->currentDir, \true);
-        } catch (\_PhpScoperb09c3ec8e01a\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException $e) {
+        } catch (\_PhpScoperddde3ba4aebc\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException $e) {
             if (!$ignoreErrors) {
                 throw $e;
             }
             $resource = [];
             foreach ($e->getPaths() as $path) {
-                $resource[] = new \_PhpScoperb09c3ec8e01a\Symfony\Component\Config\Resource\FileExistenceResource($path);
+                $resource[] = new \_PhpScoperddde3ba4aebc\Symfony\Component\Config\Resource\FileExistenceResource($path);
             }
             return;
         }
-        $resource = new \_PhpScoperb09c3ec8e01a\Symfony\Component\Config\Resource\GlobResource($prefix, $pattern, $recursive, $forExclusion, $excluded);
+        $resource = new \_PhpScoperddde3ba4aebc\Symfony\Component\Config\Resource\GlobResource($prefix, $pattern, $recursive, $forExclusion, $excluded);
         yield from $resource;
     }
     private function doImport($resource, string $type = null, bool $ignoreErrors = \false, $sourceResource = null)
@@ -132,7 +132,7 @@ abstract class FileLoader extends \_PhpScoperb09c3ec8e01a\Symfony\Component\Conf
             for ($i = 0; $i < ($resourcesCount = \count($resources)); ++$i) {
                 if (isset(self::$loading[$resources[$i]])) {
                     if ($i == $resourcesCount - 1) {
-                        throw new \_PhpScoperb09c3ec8e01a\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException(\array_keys(self::$loading));
+                        throw new \_PhpScoperddde3ba4aebc\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException(\array_keys(self::$loading));
                     }
                 } else {
                     $resource = $resources[$i];
@@ -146,15 +146,15 @@ abstract class FileLoader extends \_PhpScoperb09c3ec8e01a\Symfony\Component\Conf
                 unset(self::$loading[$resource]);
             }
             return $ret;
-        } catch (\_PhpScoperb09c3ec8e01a\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException $e) {
+        } catch (\_PhpScoperddde3ba4aebc\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException $e) {
             throw $e;
         } catch (\Exception $e) {
             if (!$ignoreErrors) {
                 // prevent embedded imports from nesting multiple exceptions
-                if ($e instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\Config\Exception\LoaderLoadException) {
+                if ($e instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\Config\Exception\LoaderLoadException) {
                     throw $e;
                 }
-                throw new \_PhpScoperb09c3ec8e01a\Symfony\Component\Config\Exception\LoaderLoadException($resource, $sourceResource, null, $e, $type);
+                throw new \_PhpScoperddde3ba4aebc\Symfony\Component\Config\Exception\LoaderLoadException($resource, $sourceResource, null, $e, $type);
             }
         }
         return null;

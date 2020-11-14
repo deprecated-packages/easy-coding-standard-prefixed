@@ -7,16 +7,16 @@
         "symfony\/console": "^4.4|^5.1",
         "symfony\/dependency-injection": "^4.4|^5.1",
         "symfony\/http-kernel": "^4.4|^5.1",
-        "symplify\/package-builder": "^8.3.35",
-        "symplify\/smart-file-system": "^8.3.35",
-        "symplify\/autowire-array-parameter": "^8.3.35"
+        "symplify\/package-builder": "^8.3.46|^9.0",
+        "symplify\/smart-file-system": "^8.3.46|^9.0",
+        "symplify\/autowire-array-parameter": "^8.3.46|^9.0"
     },
     "require-dev": {
         "tracy\/tracy": "^2.7"
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperb09c3ec8e01a\\Migrify\\MigrifyKernel\\": "src"
+            "_PhpScoperddde3ba4aebc\\Migrify\\MigrifyKernel\\": "src"
         }
     },
     "minimum-stability": "dev",

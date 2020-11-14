@@ -1,21 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\NodeFactory;
+namespace _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoperb09c3ec8e01a\PhpParser\BuilderHelpers;
-use _PhpScoperb09c3ec8e01a\PhpParser\Node\Arg;
-use _PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\New_;
-use _PhpScoperb09c3ec8e01a\PhpParser\Node\Name\FullyQualified;
+use _PhpScoperddde3ba4aebc\PhpParser\BuilderHelpers;
+use _PhpScoperddde3ba4aebc\PhpParser\Node\Arg;
+use _PhpScoperddde3ba4aebc\PhpParser\Node\Expr\Array_;
+use _PhpScoperddde3ba4aebc\PhpParser\Node\Expr\New_;
+use _PhpScoperddde3ba4aebc\PhpParser\Node\Name\FullyQualified;
 use ReflectionClass;
 final class NewValueObjectFactory
 {
-    public function create(object $valueObject) : \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\New_
+    public function create(object $valueObject) : \_PhpScoperddde3ba4aebc\PhpParser\Node\Expr\New_
     {
         $valueObjectClass = \get_class($valueObject);
         $propertyValues = $this->resolvePropertyValuesFromValueObject($valueObjectClass, $valueObject);
         $args = $this->createArgs($propertyValues);
-        return new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\New_(new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Name\FullyQualified($valueObjectClass), $args);
+        return new \_PhpScoperddde3ba4aebc\PhpParser\Node\Expr\New_(new \_PhpScoperddde3ba4aebc\PhpParser\Node\Name\FullyQualified($valueObjectClass), $args);
     }
     /**
      * @return mixed[]
@@ -38,7 +39,13 @@ final class NewValueObjectFactory
     {
         $args = [];
         foreach ($propertyValues as $propertyValue) {
-            $args[] = new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Arg(\_PhpScoperb09c3ec8e01a\PhpParser\BuilderHelpers::normalizeValue($propertyValue));
+            if (\is_object($propertyValue)) {
+                $args[] = new \_PhpScoperddde3ba4aebc\PhpParser\Node\Arg($resolvedNestedObject = $this->create($propertyValue));
+            } elseif (\is_array($propertyValue)) {
+                $args[] = new \_PhpScoperddde3ba4aebc\PhpParser\Node\Arg(new \_PhpScoperddde3ba4aebc\PhpParser\Node\Expr\Array_($this->createArgs($propertyValue)));
+            } else {
+                $args[] = new \_PhpScoperddde3ba4aebc\PhpParser\Node\Arg(\_PhpScoperddde3ba4aebc\PhpParser\BuilderHelpers::normalizeValue($propertyValue));
+            }
         }
         return $args;
     }

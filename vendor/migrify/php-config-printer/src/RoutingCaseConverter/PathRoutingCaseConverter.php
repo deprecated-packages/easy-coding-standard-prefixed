@@ -1,30 +1,34 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\RoutingCaseConverter;
+namespace _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\RoutingCaseConverter;
 
-use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
-use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoperb09c3ec8e01a\PhpParser\Node\Arg;
-use _PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\Variable;
-use _PhpScoperb09c3ec8e01a\PhpParser\Node\Stmt\Expression;
-final class PathRoutingCaseConverter implements \_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
+use _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoperddde3ba4aebc\PhpParser\Node\Arg;
+use _PhpScoperddde3ba4aebc\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperddde3ba4aebc\PhpParser\Node\Expr\Variable;
+use _PhpScoperddde3ba4aebc\PhpParser\Node\Stmt\Expression;
+final class PathRoutingCaseConverter implements \_PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
 {
     /**
      * @var string[]
      */
-    private const NESTED_KEYS = ['controller', 'defaults'];
+    private const NESTED_KEYS = ['controller', 'defaults', self::METHODS, 'requirements'];
     /**
      * @var string
      */
     private const PATH = 'path';
     /**
+     * @var string
+     */
+    private const METHODS = 'methods';
+    /**
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\_PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
@@ -32,20 +36,25 @@ final class PathRoutingCaseConverter implements \_PhpScoperb09c3ec8e01a\Migrify\
     {
         return isset($values[self::PATH]);
     }
-    public function convertToMethodCall(string $key, $values) : \_PhpScoperb09c3ec8e01a\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall(string $key, $values) : \_PhpScoperddde3ba4aebc\PhpParser\Node\Stmt\Expression
     {
-        $variable = new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\Variable(\_PhpScoperb09c3ec8e01a\Migrify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
+        $variable = new \_PhpScoperddde3ba4aebc\PhpParser\Node\Expr\Variable(\_PhpScoperddde3ba4aebc\Migrify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
         // @todo args
         $args = $this->createAddArgs($key, $values);
-        $methodCall = new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\MethodCall($variable, 'add', $args);
+        $methodCall = new \_PhpScoperddde3ba4aebc\PhpParser\Node\Expr\MethodCall($variable, 'add', $args);
         foreach (self::NESTED_KEYS as $nestedKey) {
             if (!isset($values[$nestedKey])) {
                 continue;
             }
-            $args = $this->argsNodeFactory->createFromValues([$values[$nestedKey]]);
-            $methodCall = new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Expr\MethodCall($methodCall, $nestedKey, $args);
+            $nestedValues = $values[$nestedKey];
+            // Transform methods as string GET|HEAD to array
+            if ($nestedKey === self::METHODS && \is_string($nestedValues)) {
+                $nestedValues = \explode('|', $nestedValues);
+            }
+            $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
+            $methodCall = new \_PhpScoperddde3ba4aebc\PhpParser\Node\Expr\MethodCall($methodCall, $nestedKey, $args);
         }
-        return new \_PhpScoperb09c3ec8e01a\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \_PhpScoperddde3ba4aebc\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param mixed $values

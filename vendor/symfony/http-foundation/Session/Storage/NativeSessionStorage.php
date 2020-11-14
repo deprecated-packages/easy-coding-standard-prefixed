@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage;
+namespace _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage;
 
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\SessionUtils;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
-use _PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\SessionUtils;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
+use _PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy;
 /**
  * This provides a base class for session attribute storage.
  *
  * @author Drak <drak@zikula.org>
  */
-class NativeSessionStorage implements \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
+class NativeSessionStorage implements \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
 {
     /**
      * @var SessionBagInterface[]
@@ -91,7 +91,7 @@ class NativeSessionStorage implements \_PhpScoperb09c3ec8e01a\Symfony\Component\
      *
      * @param AbstractProxy|\SessionHandlerInterface|null $handler
      */
-    public function __construct(array $options = [], $handler = null, \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(array $options = [], $handler = null, \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         if (!\extension_loaded('session')) {
             throw new \LogicException('PHP extension "session" is required.');
@@ -130,7 +130,7 @@ class NativeSessionStorage implements \_PhpScoperb09c3ec8e01a\Symfony\Component\
             throw new \RuntimeException('Failed to start the session');
         }
         if (null !== $this->emulateSameSite) {
-            $originalCookie = \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie(\session_name(), \session_id());
+            $originalCookie = \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie(\session_name(), \session_id());
             if (null !== $originalCookie) {
                 \header(\sprintf('%s; SameSite=%s', $originalCookie, $this->emulateSameSite), \false);
             }
@@ -189,7 +189,7 @@ class NativeSessionStorage implements \_PhpScoperb09c3ec8e01a\Symfony\Component\
         // @see https://bugs.php.net/70013
         $this->loadSession();
         if (null !== $this->emulateSameSite) {
-            $originalCookie = \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie(\session_name(), \session_id());
+            $originalCookie = \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie(\session_name(), \session_id());
             if (null !== $originalCookie) {
                 \header(\sprintf('%s; SameSite=%s', $originalCookie, $this->emulateSameSite), \false);
             }
@@ -214,7 +214,7 @@ class NativeSessionStorage implements \_PhpScoperb09c3ec8e01a\Symfony\Component\
         // Register error handler to add information about the current save handler
         $previousHandler = \set_error_handler(function ($type, $msg, $file, $line) use(&$previousHandler) {
             if (\E_WARNING === $type && 0 === \strpos($msg, 'session_write_close():')) {
-                $handler = $this->saveHandler instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy ? $this->saveHandler->getHandler() : $this->saveHandler;
+                $handler = $this->saveHandler instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy ? $this->saveHandler->getHandler() : $this->saveHandler;
                 $msg = \sprintf('session_write_close(): Failed to write session data with "%s" handler', \get_class($handler));
             }
             return $previousHandler ? $previousHandler($type, $msg, $file, $line) : \false;
@@ -248,7 +248,7 @@ class NativeSessionStorage implements \_PhpScoperb09c3ec8e01a\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function registerBag(\_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag)
+    public function registerBag(\_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag)
     {
         if ($this->started) {
             throw new \LogicException('Cannot register a bag when the session is already started.');
@@ -270,10 +270,10 @@ class NativeSessionStorage implements \_PhpScoperb09c3ec8e01a\Symfony\Component\
         }
         return $this->bags[$name];
     }
-    public function setMetadataBag(\_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function setMetadataBag(\_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         if (null === $metaBag) {
-            $metaBag = new \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
+            $metaBag = new \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
         }
         $this->metadataBag = $metaBag;
     }
@@ -345,20 +345,20 @@ class NativeSessionStorage implements \_PhpScoperb09c3ec8e01a\Symfony\Component\
      */
     public function setSaveHandler($saveHandler = null)
     {
-        if (!$saveHandler instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy && !$saveHandler instanceof \SessionHandlerInterface && null !== $saveHandler) {
+        if (!$saveHandler instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy && !$saveHandler instanceof \SessionHandlerInterface && null !== $saveHandler) {
             throw new \InvalidArgumentException('Must be instance of AbstractProxy; implement \\SessionHandlerInterface; or be null.');
         }
         // Wrap $saveHandler in proxy and prevent double wrapping of proxy
-        if (!$saveHandler instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy && $saveHandler instanceof \SessionHandlerInterface) {
-            $saveHandler = new \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy($saveHandler);
-        } elseif (!$saveHandler instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy) {
-            $saveHandler = new \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy(new \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler(new \SessionHandler()));
+        if (!$saveHandler instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy && $saveHandler instanceof \SessionHandlerInterface) {
+            $saveHandler = new \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy($saveHandler);
+        } elseif (!$saveHandler instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy) {
+            $saveHandler = new \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy(new \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler(new \SessionHandler()));
         }
         $this->saveHandler = $saveHandler;
         if (\headers_sent() || \PHP_SESSION_ACTIVE === \session_status()) {
             return;
         }
-        if ($this->saveHandler instanceof \_PhpScoperb09c3ec8e01a\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy) {
+        if ($this->saveHandler instanceof \_PhpScoperddde3ba4aebc\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy) {
             \session_set_save_handler($this->saveHandler, \false);
         }
     }

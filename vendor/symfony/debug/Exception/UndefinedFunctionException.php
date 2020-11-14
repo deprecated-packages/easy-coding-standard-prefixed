@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb09c3ec8e01a\Symfony\Component\Debug\Exception;
+namespace _PhpScoperddde3ba4aebc\Symfony\Component\Debug\Exception;
 
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoperb09c3ec8e01a\Symfony\Component\Debug\Exception\UndefinedFunctionException::class, \_PhpScoperb09c3ec8e01a\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError::class), \E_USER_DEPRECATED);
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoperddde3ba4aebc\Symfony\Component\Debug\Exception\UndefinedFunctionException::class, \_PhpScoperddde3ba4aebc\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError::class), \E_USER_DEPRECATED);
 /**
  * Undefined Function Exception.
  *
@@ -18,7 +18,7 @@ namespace _PhpScoperb09c3ec8e01a\Symfony\Component\Debug\Exception;
  *
  * @deprecated since Symfony 4.4, use Symfony\Component\ErrorHandler\Error\UndefinedFunctionError instead.
  */
-class UndefinedFunctionException extends \_PhpScoperb09c3ec8e01a\Symfony\Component\Debug\Exception\FatalErrorException
+class UndefinedFunctionException extends \_PhpScoperddde3ba4aebc\Symfony\Component\Debug\Exception\FatalErrorException
 {
     public function __construct(string $message, \ErrorException $previous)
     {

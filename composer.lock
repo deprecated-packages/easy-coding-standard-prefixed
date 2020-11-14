@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2ef8a3b9fa230bf64fbfe04cfa41fd8",
+    "content-hash": "86518c919d1f67f4b8b6882a01af92dd",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -541,16 +541,16 @@
         },
         {
             "name": "migrify/migrify-kernel",
-            "version": "0.3.50",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/migrify/migrify-kernel.git",
-                "reference": "a08a913fd2bd6197be235bff78a702e1d9d72d64"
+                "reference": "679ef17540401c30b28257786ee94fda464a5a8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/migrify/migrify-kernel/zipball/a08a913fd2bd6197be235bff78a702e1d9d72d64",
-                "reference": "a08a913fd2bd6197be235bff78a702e1d9d72d64",
+                "url": "https://api.github.com/repos/migrify/migrify-kernel/zipball/679ef17540401c30b28257786ee94fda464a5a8b",
+                "reference": "679ef17540401c30b28257786ee94fda464a5a8b",
                 "shasum": ""
             },
             "require": {
@@ -558,9 +558,9 @@
                 "symfony/console": "^4.4|^5.1",
                 "symfony/dependency-injection": "^4.4|^5.1",
                 "symfony/http-kernel": "^4.4|^5.1",
-                "symplify/autowire-array-parameter": "^8.3.35",
-                "symplify/package-builder": "^8.3.35",
-                "symplify/smart-file-system": "^8.3.35"
+                "symplify/autowire-array-parameter": "^8.3.46|^9.0",
+                "symplify/package-builder": "^8.3.46|^9.0",
+                "symplify/smart-file-system": "^8.3.46|^9.0"
             },
             "require-dev": {
                 "tracy/tracy": "^2.7"
@@ -578,26 +578,26 @@
             "description": "Kernel for small CLI applications",
             "support": {
                 "issues": "https://github.com/migrify/migrify-kernel/issues",
-                "source": "https://github.com/migrify/migrify-kernel/tree/0.3.50"
+                "source": "https://github.com/migrify/migrify-kernel/tree/0.4.0"
             },
-            "time": "2020-10-23T15:52:07+00:00"
+            "time": "2020-11-14T20:12:17+00:00"
         },
         {
             "name": "migrify/php-config-printer",
-            "version": "0.3.50",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/migrify/php-config-printer.git",
-                "reference": "53d7e94a72a5ed390dd8ec4241f385f939cde070"
+                "reference": "10002de5ceb9532f93cae71b1644583166889e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/migrify/php-config-printer/zipball/53d7e94a72a5ed390dd8ec4241f385f939cde070",
-                "reference": "53d7e94a72a5ed390dd8ec4241f385f939cde070",
+                "url": "https://api.github.com/repos/migrify/php-config-printer/zipball/10002de5ceb9532f93cae71b1644583166889e8a",
+                "reference": "10002de5ceb9532f93cae71b1644583166889e8a",
                 "shasum": ""
             },
             "require": {
-                "migrify/migrify-kernel": "^0.3.50",
+                "migrify/migrify-kernel": "^0.4",
                 "nette/utils": "^3.1",
                 "nikic/php-parser": "^4.9",
                 "php": ">=7.2",
@@ -605,7 +605,7 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^8.5|^9.0",
-                "symplify/easy-testing": "^8.3.35"
+                "symplify/easy-testing": "^8.3.46|^9.0"
             },
             "type": "library",
             "autoload": {
@@ -620,9 +620,9 @@
             "description": "Print Symfony services array with configuration to to plain PHP file format thanks to this simple php-parser wrapper",
             "support": {
                 "issues": "https://github.com/migrify/php-config-printer/issues",
-                "source": "https://github.com/migrify/php-config-printer/tree/0.3.50"
+                "source": "https://github.com/migrify/php-config-printer/tree/0.4.0"
             },
-            "time": "2020-10-23T15:54:04+00:00"
+            "time": "2020-11-14T20:12:21+00:00"
         },
         {
             "name": "nette/finder",
@@ -3308,7 +3308,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/autowire-array-parameter",
-                "reference": "083679c4b8376e42697761db3e1f8fca3b17e97b"
+                "reference": "506e7ff399512f18f0e1953c7a00e52638d4e354"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3322,7 +3322,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3350,7 +3350,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "af77bbbf8e5eb6ff7eff05f8f362ec3baa7f10db"
+                "reference": "822b0f2b9b78bfe8cf9bc7c648540f9a585608b8"
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.16",
@@ -3366,7 +3366,7 @@
             },
             "require-dev": {
                 "doctrine/orm": "^2.7",
-                "migrify/php-config-printer": "^0.3.50",
+                "migrify/php-config-printer": "^0.4",
                 "nette/application": "^3.0",
                 "nette/bootstrap": "^3.0",
                 "phpunit/phpunit": "^8.5|^9.4",
@@ -3378,7 +3378,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3406,7 +3406,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/composer-json-manipulator",
-                "reference": "86b5dc98e6d8a488bb7914072038dd64aa610231"
+                "reference": "14142253a69ed5fa2fe65b509d9eff2a9ecf2ff1"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3424,7 +3424,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3452,7 +3452,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/console-color-diff",
-                "reference": "5ee746f77756b91986f0ce1f93a72d656f28f934"
+                "reference": "5f48703a225eec6cfaf251b6b58af372207f0284"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3469,7 +3469,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3497,7 +3497,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-testing",
-                "reference": "20bda390c67cd9080c2f255d41d74fa1f8f6622b"
+                "reference": "170ee891547dde4d63bc29b00afa22884c6df25c"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3513,7 +3513,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3541,7 +3541,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/markdown-diff",
-                "reference": "8d690d3bcaec3413c4c853e922f4f245e35fc408"
+                "reference": "1b9a0b3d68731936dccab0c8bd5bd115e7d833f6"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3557,7 +3557,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3585,7 +3585,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/package-builder",
-                "reference": "e34436a569b581d0ab79617278f2e65eed088cdc"
+                "reference": "b57de196cd914ad695e95acce54dd9ae80c7dbbc"
             },
             "require": {
                 "nette/finder": "^2.5",
@@ -3607,7 +3607,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3635,10 +3635,10 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "28c66edee574f12dcf14b592f9bd5e87951e4baf"
+                "reference": "e0aa106046b909b94b1a51a5249ed1ba9c64ba5d"
             },
             "require": {
-                "migrify/php-config-printer": "^0.3.50",
+                "migrify/php-config-printer": "^0.4",
                 "nette/neon": "^3.2",
                 "nette/robot-loader": "^3.2",
                 "php": ">=7.2",
@@ -3659,7 +3659,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3687,7 +3687,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/set-config-resolver",
-                "reference": "6f301b255822aac10ec382386083b05525c760a8"
+                "reference": "a3d9f13248061bfe06b7255394c8e40502175203"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3707,7 +3707,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3735,7 +3735,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/skipper",
-                "reference": "55e2ba8e57a0e375c4df7b15dd83d64481347333"
+                "reference": "4fd9d6828ed98092416525ac177c27ccb977998b"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3754,7 +3754,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3782,7 +3782,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/smart-file-system",
-                "reference": "962d275caa1eeb74ab6814881ae9f7750f3efa9e"
+                "reference": "abc529006989de756721cb1ec21a3791b7f1bd68"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3797,7 +3797,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -3825,7 +3825,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/symplify-kernel",
-                "reference": "efd92904d671ad56fa68bf90633508eedb98ad9c"
+                "reference": "38dd5f0f89d7ad57f4674b7332659f4514ffcbd6"
             },
             "require": {
                 "php": ">=7.2",
@@ -3843,7 +3843,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
@@ -5234,7 +5234,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-coding-standard-tester",
-                "reference": "67f45a53d5b8a79833f9ac726497a5939938fc04"
+                "reference": "224b26922a630fe70b67ae76803c5f847589ceac"
             },
             "require": {
                 "php": ">=7.2",
@@ -5248,7 +5248,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.4-dev"
+                    "dev-master": "9.0-dev"
                 }
             },
             "autoload": {
