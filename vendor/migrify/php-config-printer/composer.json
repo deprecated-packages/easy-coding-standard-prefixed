@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperd4937ee9b515\\Migrify\\PhpConfigPrinter\\": "src"
+            "_PhpScoperecb978830f1e\\Migrify\\PhpConfigPrinter\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoperd4937ee9b515\\Migrify\\PhpConfigPrinter\\Tests\\": "tests"
+            "_PhpScoperecb978830f1e\\Migrify\\PhpConfigPrinter\\Tests\\": "tests"
         }
     },
     "minimum-stability": "dev",

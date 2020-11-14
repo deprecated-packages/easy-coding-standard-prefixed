@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd4937ee9b515\Symfony\Component\Console\Input;
+namespace _PhpScoperecb978830f1e\Symfony\Component\Console\Input;
 
-use _PhpScoperd4937ee9b515\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoperd4937ee9b515\Symfony\Component\Console\Exception\LogicException;
+use _PhpScoperecb978830f1e\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperecb978830f1e\Symfony\Component\Console\Exception\LogicException;
 /**
  * Represents a command line argument.
  *
@@ -39,7 +39,7 @@ class InputArgument
         if (null === $mode) {
             $mode = self::OPTIONAL;
         } elseif ($mode > 7 || $mode < 1) {
-            throw new \_PhpScoperd4937ee9b515\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Argument mode "%s" is not valid.', $mode));
+            throw new \_PhpScoperecb978830f1e\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Argument mode "%s" is not valid.', $mode));
         }
         $this->name = $name;
         $this->mode = $mode;
@@ -83,13 +83,13 @@ class InputArgument
     public function setDefault($default = null)
     {
         if (self::REQUIRED === $this->mode && null !== $default) {
-            throw new \_PhpScoperd4937ee9b515\Symfony\Component\Console\Exception\LogicException('Cannot set a default value except for InputArgument::OPTIONAL mode.');
+            throw new \_PhpScoperecb978830f1e\Symfony\Component\Console\Exception\LogicException('Cannot set a default value except for InputArgument::OPTIONAL mode.');
         }
         if ($this->isArray()) {
             if (null === $default) {
                 $default = [];
             } elseif (!\is_array($default)) {
-                throw new \_PhpScoperd4937ee9b515\Symfony\Component\Console\Exception\LogicException('A default value for an array argument must be an array.');
+                throw new \_PhpScoperecb978830f1e\Symfony\Component\Console\Exception\LogicException('A default value for an array argument must be an array.');
             }
         }
         $this->default = $default;

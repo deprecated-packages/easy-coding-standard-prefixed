@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Command;
 
-use _PhpScoperd4937ee9b515\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperd4937ee9b515\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperd4937ee9b515\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperd4937ee9b515\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperecb978830f1e\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoperecb978830f1e\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperecb978830f1e\Symfony\Component\Console\Input\InputOption;
+use _PhpScoperecb978830f1e\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\RuleDocGenerator\DirectoryToMarkdownPrinter;
@@ -26,10 +26,10 @@ final class GenerateCommand extends \Symplify\PackageBuilder\Console\Command\Abs
     protected function configure() : void
     {
         $this->setDescription('Generated Markdown documentation based on documented rules found in directory');
-        $this->addArgument(\Symplify\RuleDocGenerator\ValueObject\Option::PATH, \_PhpScoperd4937ee9b515\Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Path to directory of your project');
-        $this->addOption(\Symplify\RuleDocGenerator\ValueObject\Option::OUTPUT, null, \_PhpScoperd4937ee9b515\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Path to output generated markdown file', \getcwd() . '/docs/rules_overview.md');
+        $this->addArgument(\Symplify\RuleDocGenerator\ValueObject\Option::PATH, \_PhpScoperecb978830f1e\Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Path to directory of your project');
+        $this->addOption(\Symplify\RuleDocGenerator\ValueObject\Option::OUTPUT, null, \_PhpScoperecb978830f1e\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Path to output generated markdown file', \getcwd() . '/docs/rules_overview.md');
     }
-    protected function execute(\_PhpScoperd4937ee9b515\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperd4937ee9b515\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoperecb978830f1e\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperecb978830f1e\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $path = (string) $input->getArgument(\Symplify\RuleDocGenerator\ValueObject\Option::PATH);
         $directoryFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo($path);

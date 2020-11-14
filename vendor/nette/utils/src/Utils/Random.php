@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperd4937ee9b515\Nette\Utils;
+namespace _PhpScoperecb978830f1e\Nette\Utils;
 
-use _PhpScoperd4937ee9b515\Nette;
+use _PhpScoperecb978830f1e\Nette;
 /**
  * Secure random string generator.
  */
@@ -24,9 +24,9 @@ final class Random
         }, $charlist), 3);
         $chLen = \strlen($charlist);
         if ($length < 1) {
-            throw new \_PhpScoperd4937ee9b515\Nette\InvalidArgumentException('Length must be greater than zero.');
+            throw new \_PhpScoperecb978830f1e\Nette\InvalidArgumentException('Length must be greater than zero.');
         } elseif ($chLen < 2) {
-            throw new \_PhpScoperd4937ee9b515\Nette\InvalidArgumentException('Character list must contain at least two chars.');
+            throw new \_PhpScoperecb978830f1e\Nette\InvalidArgumentException('Character list must contain at least two chars.');
         }
         $res = '';
         for ($i = 0; $i < $length; $i++) {

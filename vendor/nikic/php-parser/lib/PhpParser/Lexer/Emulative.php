@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperd4937ee9b515\PhpParser\Lexer;
+namespace _PhpScoperecb978830f1e\PhpParser\Lexer;
 
-use _PhpScoperd4937ee9b515\PhpParser\Error;
-use _PhpScoperd4937ee9b515\PhpParser\ErrorHandler;
-use _PhpScoperd4937ee9b515\PhpParser\Lexer;
-use _PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator;
-use _PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\FnTokenEmulator;
-use _PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator;
-use _PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator;
-use _PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator;
-use _PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\TokenEmulatorInterface;
-use _PhpScoperd4937ee9b515\PhpParser\Parser\Tokens;
-class Emulative extends \_PhpScoperd4937ee9b515\PhpParser\Lexer
+use _PhpScoperecb978830f1e\PhpParser\Error;
+use _PhpScoperecb978830f1e\PhpParser\ErrorHandler;
+use _PhpScoperecb978830f1e\PhpParser\Lexer;
+use _PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator;
+use _PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\FnTokenEmulator;
+use _PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator;
+use _PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator;
+use _PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator;
+use _PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\TokenEmulatorInterface;
+use _PhpScoperecb978830f1e\PhpParser\Parser\Tokens;
+class Emulative extends \_PhpScoperecb978830f1e\PhpParser\Lexer
 {
     const PHP_7_3 = '7.3dev';
     const PHP_7_4 = '7.4dev';
@@ -36,16 +36,16 @@ REGEX;
      */
     public function __construct(array $options = [])
     {
-        $this->targetPhpVersion = $options['phpVersion'] ?? \_PhpScoperd4937ee9b515\PhpParser\Lexer\Emulative::PHP_8_0;
+        $this->targetPhpVersion = $options['phpVersion'] ?? \_PhpScoperecb978830f1e\PhpParser\Lexer\Emulative::PHP_8_0;
         unset($options['phpVersion']);
         parent::__construct($options);
-        $this->tokenEmulators[] = new \_PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\FnTokenEmulator();
-        $this->tokenEmulators[] = new \_PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator();
-        $this->tokenEmulators[] = new \_PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator();
-        $this->tokenEmulators[] = new \_PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator();
-        $this->tokenEmulators[] = new \_PhpScoperd4937ee9b515\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator();
+        $this->tokenEmulators[] = new \_PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\FnTokenEmulator();
+        $this->tokenEmulators[] = new \_PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator();
+        $this->tokenEmulators[] = new \_PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator();
+        $this->tokenEmulators[] = new \_PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator();
+        $this->tokenEmulators[] = new \_PhpScoperecb978830f1e\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator();
     }
-    public function startLexing(string $code, \_PhpScoperd4937ee9b515\PhpParser\ErrorHandler $errorHandler = null)
+    public function startLexing(string $code, \_PhpScoperecb978830f1e\PhpParser\ErrorHandler $errorHandler = null)
     {
         $this->patches = [];
         if ($this->isEmulationNeeded($code) === \false) {
@@ -53,7 +53,7 @@ REGEX;
             parent::startLexing($code, $errorHandler);
             return;
         }
-        $collector = new \_PhpScoperd4937ee9b515\PhpParser\ErrorHandler\Collecting();
+        $collector = new \_PhpScoperecb978830f1e\PhpParser\ErrorHandler\Collecting();
         // 1. emulation of heredoc and nowdoc new syntax
         $preparedCode = $this->processHeredocNowdoc($code);
         parent::startLexing($preparedCode, $collector);

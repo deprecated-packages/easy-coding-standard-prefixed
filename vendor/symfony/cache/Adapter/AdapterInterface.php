@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd4937ee9b515\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperecb978830f1e\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperd4937ee9b515\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoperd4937ee9b515\Symfony\Component\Cache\CacheItem;
+use _PhpScoperecb978830f1e\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoperecb978830f1e\Symfony\Component\Cache\CacheItem;
 /**
  * Interface for adapters managing instances of Symfony's CacheItem.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-interface AdapterInterface extends \_PhpScoperd4937ee9b515\Psr\Cache\CacheItemPoolInterface
+interface AdapterInterface extends \_PhpScoperecb978830f1e\Psr\Cache\CacheItemPoolInterface
 {
     /**
      * {@inheritdoc}

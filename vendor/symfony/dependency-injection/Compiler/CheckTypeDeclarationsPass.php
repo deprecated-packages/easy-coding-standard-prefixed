@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Container;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\ServiceLocator;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Container;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\ServiceLocator;
 /**
  * Checks whether injected parameters are compatible with type declarations.
  *
@@ -30,7 +30,7 @@ use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\ServiceLocator;
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Julien Maulny <jmaulny@darkmira.fr>
  */
-final class CheckTypeDeclarationsPass extends \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+final class CheckTypeDeclarationsPass extends \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private const SCALAR_TYPES = ['int', 'float', 'bool', 'string'];
     private $autoload;
@@ -49,13 +49,13 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperd4937ee9b515\Symfony\Co
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if (!$value instanceof \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Definition || isset($this->ignoredServices[$this->currentId])) {
+        if (!$value instanceof \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Definition || isset($this->ignoredServices[$this->currentId])) {
             return parent::processValue($value, $isRoot);
         }
         if (!$this->autoload && !\class_exists($class = $value->getClass(), \false) && !\interface_exists($class, \false)) {
             return parent::processValue($value, $isRoot);
         }
-        if (\_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\ServiceLocator::class === $value->getClass()) {
+        if (\_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\ServiceLocator::class === $value->getClass()) {
             return parent::processValue($value, $isRoot);
         }
         if ($constructor = $this->getConstructor($value, \false)) {
@@ -70,11 +70,11 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperd4937ee9b515\Symfony\Co
     /**
      * @throws InvalidArgumentException When not enough parameters are defined for the method
      */
-    private function checkTypeDeclarations(\_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Definition $checkedDefinition, \ReflectionFunctionAbstract $reflectionFunction, array $values) : void
+    private function checkTypeDeclarations(\_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Definition $checkedDefinition, \ReflectionFunctionAbstract $reflectionFunction, array $values) : void
     {
         $numberOfRequiredParameters = $reflectionFunction->getNumberOfRequiredParameters();
         if (\count($values) < $numberOfRequiredParameters) {
-            throw new \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid definition for service "%s": "%s::%s()" requires %d arguments, %d passed.', $this->currentId, $reflectionFunction->class, $reflectionFunction->name, $numberOfRequiredParameters, \count($values)));
+            throw new \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid definition for service "%s": "%s::%s()" requires %d arguments, %d passed.', $this->currentId, $reflectionFunction->class, $reflectionFunction->name, $numberOfRequiredParameters, \count($values)));
         }
         $reflectionParameters = $reflectionFunction->getParameters();
         $checksCount = \min($reflectionFunction->getNumberOfParameters(), \count($values));
@@ -94,14 +94,14 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperd4937ee9b515\Symfony\Co
     /**
      * @throws InvalidParameterTypeException When a parameter is not compatible with the declared type
      */
-    private function checkType(\_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Definition $checkedDefinition, $value, \ReflectionParameter $parameter) : void
+    private function checkType(\_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Definition $checkedDefinition, $value, \ReflectionParameter $parameter) : void
     {
         $type = $parameter->getType()->getName();
-        if ($value instanceof \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Reference) {
+        if ($value instanceof \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Reference) {
             if (!$this->container->has($value = (string) $value)) {
                 return;
             }
-            if ('service_container' === $value && \is_a($type, \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Container::class, \true)) {
+            if ('service_container' === $value && \is_a($type, \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Container::class, \true)) {
                 return;
             }
             $value = $this->container->findDefinition($value);
@@ -112,7 +112,7 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperd4937ee9b515\Symfony\Co
         if ('static' === $type) {
             $type = $checkedDefinition->getClass();
         }
-        if ($value instanceof \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Definition) {
+        if ($value instanceof \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Definition) {
             $class = $value->getClass();
             if (!$class || !$this->autoload && !\class_exists($class, \false) && !\interface_exists($class, \false)) {
                 return;
@@ -126,9 +126,9 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperd4937ee9b515\Symfony\Co
             if (\is_a($class, $type, \true)) {
                 return;
             }
-            throw new \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException($this->currentId, $class, $parameter);
+            throw new \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException($this->currentId, $class, $parameter);
         }
-        if ($value instanceof \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Parameter) {
+        if ($value instanceof \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Parameter) {
             $value = $this->container->getParameter($value);
         } elseif (\is_string($value) && '%' === ($value[0] ?? '') && \preg_match('/^%([^%]+)%$/', $value, $match)) {
             $value = $this->container->getParameter($match[1]);
@@ -139,18 +139,18 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperd4937ee9b515\Symfony\Co
         if (\in_array($type, self::SCALAR_TYPES, \true) && \is_scalar($value)) {
             return;
         }
-        if ('callable' === $type && \is_array($value) && isset($value[0]) && ($value[0] instanceof \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Reference || $value[0] instanceof \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Definition)) {
+        if ('callable' === $type && \is_array($value) && isset($value[0]) && ($value[0] instanceof \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Reference || $value[0] instanceof \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Definition)) {
             return;
         }
-        if ('iterable' === $type && (\is_array($value) || $value instanceof \Traversable || $value instanceof \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Argument\IteratorArgument)) {
+        if ('iterable' === $type && (\is_array($value) || $value instanceof \Traversable || $value instanceof \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Argument\IteratorArgument)) {
             return;
         }
-        if ('Traversable' === $type && ($value instanceof \Traversable || $value instanceof \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Argument\IteratorArgument)) {
+        if ('Traversable' === $type && ($value instanceof \Traversable || $value instanceof \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Argument\IteratorArgument)) {
             return;
         }
         $checkFunction = \sprintf('is_%s', $parameter->getType()->getName());
         if (!$parameter->getType()->isBuiltin() || !$checkFunction($value)) {
-            throw new \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException($this->currentId, \is_object($value) ? \get_class($value) : \gettype($value), $parameter);
+            throw new \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException($this->currentId, \is_object($value) ? \get_class($value) : \gettype($value), $parameter);
         }
     }
 }

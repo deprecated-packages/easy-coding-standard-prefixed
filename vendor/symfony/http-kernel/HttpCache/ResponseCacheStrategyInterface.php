@@ -12,9 +12,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd4937ee9b515\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScoperecb978830f1e\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoperd4937ee9b515\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperecb978830f1e\Symfony\Component\HttpFoundation\Response;
 /**
  * ResponseCacheStrategyInterface implementations know how to compute the
  * Response cache HTTP header based on the different response cache headers.
@@ -26,9 +26,9 @@ interface ResponseCacheStrategyInterface
     /**
      * Adds a Response.
      */
-    public function add(\_PhpScoperd4937ee9b515\Symfony\Component\HttpFoundation\Response $response);
+    public function add(\_PhpScoperecb978830f1e\Symfony\Component\HttpFoundation\Response $response);
     /**
      * Updates the Response HTTP headers based on the embedded Responses.
      */
-    public function update(\_PhpScoperd4937ee9b515\Symfony\Component\HttpFoundation\Response $response);
+    public function update(\_PhpScoperecb978830f1e\Symfony\Component\HttpFoundation\Response $response);
 }

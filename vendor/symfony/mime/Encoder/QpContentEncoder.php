@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd4937ee9b515\Symfony\Component\Mime\Encoder;
+namespace _PhpScoperecb978830f1e\Symfony\Component\Mime\Encoder;
 
 /**
  * @author Lars Strojny
  *
  * @experimental in 4.3
  */
-final class QpContentEncoder implements \_PhpScoperd4937ee9b515\Symfony\Component\Mime\Encoder\ContentEncoderInterface
+final class QpContentEncoder implements \_PhpScoperecb978830f1e\Symfony\Component\Mime\Encoder\ContentEncoderInterface
 {
     public function encodeByteStream($stream, int $maxLineLength = 0) : iterable
     {

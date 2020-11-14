@@ -1,13 +1,13 @@
 <?php
 
-namespace _PhpScoperd4937ee9b515\Doctrine\Tests\Common\Annotations\Ticket;
+namespace _PhpScoperecb978830f1e\Doctrine\Tests\Common\Annotations\Ticket;
 
-use _PhpScoperd4937ee9b515\Doctrine\Tests\Common\Annotations\Fixtures\Controller;
-use _PhpScoperd4937ee9b515\Doctrine\Common\Annotations\AnnotationReader;
+use _PhpScoperecb978830f1e\Doctrine\Tests\Common\Annotations\Fixtures\Controller;
+use _PhpScoperecb978830f1e\Doctrine\Common\Annotations\AnnotationReader;
 /**
  * @group
  */
-class DCOM55Test extends \_PhpScoperd4937ee9b515\PHPUnit_Framework_TestCase
+class DCOM55Test extends \_PhpScoperecb978830f1e\PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException \Doctrine\Common\Annotations\AnnotationException
@@ -16,13 +16,13 @@ class DCOM55Test extends \_PhpScoperd4937ee9b515\PHPUnit_Framework_TestCase
     public function testIssue()
     {
         $class = new \ReflectionClass(__NAMESPACE__ . '\\Dummy');
-        $reader = new \_PhpScoperd4937ee9b515\Doctrine\Common\Annotations\AnnotationReader();
+        $reader = new \_PhpScoperecb978830f1e\Doctrine\Common\Annotations\AnnotationReader();
         $reader->getClassAnnotations($class);
     }
     public function testAnnotation()
     {
         $class = new \ReflectionClass(__NAMESPACE__ . '\\DCOM55Consumer');
-        $reader = new \_PhpScoperd4937ee9b515\Doctrine\Common\Annotations\AnnotationReader();
+        $reader = new \_PhpScoperecb978830f1e\Doctrine\Common\Annotations\AnnotationReader();
         $annots = $reader->getClassAnnotations($class);
         $this->assertEquals(1, \count($annots));
         $this->assertInstanceOf(__NAMESPACE__ . '\\DCOM55Annotation', $annots[0]);
@@ -30,7 +30,7 @@ class DCOM55Test extends \_PhpScoperd4937ee9b515\PHPUnit_Framework_TestCase
     public function testParseAnnotationDocblocks()
     {
         $class = new \ReflectionClass(__NAMESPACE__ . '\\DCOM55Annotation');
-        $reader = new \_PhpScoperd4937ee9b515\Doctrine\Common\Annotations\AnnotationReader();
+        $reader = new \_PhpScoperecb978830f1e\Doctrine\Common\Annotations\AnnotationReader();
         $annots = $reader->getClassAnnotations($class);
         $this->assertEquals(0, \count($annots));
     }

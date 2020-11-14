@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperd4937ee9b515\Migrify\MigrifyKernel\DependencyInjection\Extension;
+namespace _PhpScoperecb978830f1e\Migrify\MigrifyKernel\DependencyInjection\Extension;
 
-use _PhpScoperd4937ee9b515\Symfony\Component\Config\FileLocator;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class MigrifyKernelExtension extends \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Extension\Extension
+use _PhpScoperecb978830f1e\Symfony\Component\Config\FileLocator;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class MigrifyKernelExtension extends \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Extension\Extension
 {
-    public function load(array $configs, \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         // needed for parameter shifting of sniff/fixer params
-        $phpFileLoader = new \_PhpScoperd4937ee9b515\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperd4937ee9b515\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperecb978830f1e\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');
     }
 }

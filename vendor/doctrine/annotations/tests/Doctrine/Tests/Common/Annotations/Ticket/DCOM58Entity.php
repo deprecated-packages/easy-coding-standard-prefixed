@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperd4937ee9b515;
+namespace _PhpScoperecb978830f1e;
 
 // Some class named Entity in the global namespace
 /**
@@ -13,4 +13,4 @@ class Entity
 /**
  * @Annotation
  */
-\class_alias('_PhpScoperd4937ee9b515\\Entity', 'Entity', \false);
+\class_alias('_PhpScoperecb978830f1e\\Entity', 'Entity', \false);
