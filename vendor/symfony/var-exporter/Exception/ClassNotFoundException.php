@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercb576ca159b5\Symfony\Component\VarExporter\Exception;
+namespace _PhpScoper207eb8f99af3\Symfony\Component\VarExporter\Exception;
 
-class ClassNotFoundException extends \Exception implements \_PhpScopercb576ca159b5\Symfony\Component\VarExporter\Exception\ExceptionInterface
+class ClassNotFoundException extends \Exception implements \_PhpScoper207eb8f99af3\Symfony\Component\VarExporter\Exception\ExceptionInterface
 {
     public function __construct(string $class, \Throwable $previous = null)
     {

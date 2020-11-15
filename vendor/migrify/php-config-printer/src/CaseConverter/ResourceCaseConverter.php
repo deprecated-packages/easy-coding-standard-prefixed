@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\CaseConverter;
+namespace _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory;
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScopercb576ca159b5\PhpParser\Node\Stmt\Expression;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoper207eb8f99af3\PhpParser\Node\Stmt\Expression;
 /**
  * Handles this part:
  *
@@ -14,17 +14,17 @@ use _PhpScopercb576ca159b5\PhpParser\Node\Stmt\Expression;
  *     App\\: <--
  *          source: '../src'
  */
-final class ResourceCaseConverter implements \_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
+final class ResourceCaseConverter implements \_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var ServicesPhpNodeFactory
      */
     private $servicesPhpNodeFactory;
-    public function __construct(\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory $servicesPhpNodeFactory)
+    public function __construct(\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\NodeFactory\Service\ServicesPhpNodeFactory $servicesPhpNodeFactory)
     {
         $this->servicesPhpNodeFactory = $servicesPhpNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScopercb576ca159b5\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoper207eb8f99af3\PhpParser\Node\Stmt\Expression
     {
         // Due to the yaml behavior that does not allow the declaration of several identical key names.
         if (isset($values['namespace'])) {
@@ -35,6 +35,6 @@ final class ResourceCaseConverter implements \_PhpScopercb576ca159b5\Migrify\Php
     }
     public function match(string $rootKey, $key, $values) : bool
     {
-        return isset($values[\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE]);
+        return isset($values[\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE]);
     }
 }

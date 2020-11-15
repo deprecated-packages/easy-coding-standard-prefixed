@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercb576ca159b5\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScopercb576ca159b5\Psr\Container\ContainerInterface;
-use _PhpScopercb576ca159b5\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopercb576ca159b5\Symfony\Component\HttpFoundation\Session\Session;
-use _PhpScopercb576ca159b5\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScopercb576ca159b5\Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use _PhpScopercb576ca159b5\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScopercb576ca159b5\Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use _PhpScopercb576ca159b5\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper207eb8f99af3\Psr\Container\ContainerInterface;
+use _PhpScoper207eb8f99af3\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper207eb8f99af3\Symfony\Component\HttpFoundation\Session\Session;
+use _PhpScoper207eb8f99af3\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use _PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use _PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Sets the session onto the request on the "kernel.request" event and saves
  * it on the "kernel.response" event.
@@ -33,16 +33,16 @@ use _PhpScopercb576ca159b5\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @internal since Symfony 4.3
  */
-abstract class AbstractSessionListener implements \_PhpScopercb576ca159b5\Symfony\Component\EventDispatcher\EventSubscriberInterface
+abstract class AbstractSessionListener implements \_PhpScoper207eb8f99af3\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     const NO_AUTO_CACHE_CONTROL_HEADER = 'Symfony-Session-NoAutoCacheControl';
     protected $container;
     private $sessionUsageStack = [];
-    public function __construct(\_PhpScopercb576ca159b5\Psr\Container\ContainerInterface $container = null)
+    public function __construct(\_PhpScoper207eb8f99af3\Psr\Container\ContainerInterface $container = null)
     {
         $this->container = $container;
     }
-    public function onKernelRequest(\_PhpScopercb576ca159b5\Symfony\Component\HttpKernel\Event\GetResponseEvent $event)
+    public function onKernelRequest(\_PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\Event\GetResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -59,9 +59,9 @@ abstract class AbstractSessionListener implements \_PhpScopercb576ca159b5\Symfon
             $request->setSession($session);
         }
         $session = $session ?? ($this->container && $this->container->has('initialized_session') ? $this->container->get('initialized_session') : null);
-        $this->sessionUsageStack[] = $session instanceof \_PhpScopercb576ca159b5\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() : 0;
+        $this->sessionUsageStack[] = $session instanceof \_PhpScoper207eb8f99af3\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() : 0;
     }
-    public function onKernelResponse(\_PhpScopercb576ca159b5\Symfony\Component\HttpKernel\Event\FilterResponseEvent $event)
+    public function onKernelResponse(\_PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\Event\FilterResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -73,7 +73,7 @@ abstract class AbstractSessionListener implements \_PhpScopercb576ca159b5\Symfon
         if (!($session = $this->container && $this->container->has('initialized_session') ? $this->container->get('initialized_session') : $event->getRequest()->getSession())) {
             return;
         }
-        if ($session instanceof \_PhpScopercb576ca159b5\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() !== \end($this->sessionUsageStack) : $session->isStarted()) {
+        if ($session instanceof \_PhpScoper207eb8f99af3\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() !== \end($this->sessionUsageStack) : $session->isStarted()) {
             if ($autoCacheControl) {
                 $response->setExpires(new \DateTime())->setPrivate()->setMaxAge(0)->headers->addCacheControlDirective('must-revalidate');
             }
@@ -110,7 +110,7 @@ abstract class AbstractSessionListener implements \_PhpScopercb576ca159b5\Symfon
     /**
      * @internal
      */
-    public function onFinishRequest(\_PhpScopercb576ca159b5\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event)
+    public function onFinishRequest(\_PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event)
     {
         if ($event->isMasterRequest()) {
             \array_pop($this->sessionUsageStack);
@@ -119,10 +119,10 @@ abstract class AbstractSessionListener implements \_PhpScopercb576ca159b5\Symfon
     public static function getSubscribedEvents()
     {
         return [
-            \_PhpScopercb576ca159b5\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 128],
+            \_PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 128],
             // low priority to come after regular response listeners, but higher than StreamedResponseListener
-            \_PhpScopercb576ca159b5\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1000],
-            \_PhpScopercb576ca159b5\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => ['onFinishRequest'],
+            \_PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1000],
+            \_PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => ['onFinishRequest'],
         ];
     }
     /**

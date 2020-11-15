@@ -1,42 +1,42 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Bundle;
+namespace _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Bundle;
 
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\DependencyInjection\Extension\PhpConfigPrinterExtension;
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Dummy\DummySymfonyVersionFeatureGuard;
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Dummy\DummyYamlFileContentProvider;
-use _PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScopercb576ca159b5\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\DependencyInjection\Extension\PhpConfigPrinterExtension;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Dummy\DummySymfonyVersionFeatureGuard;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Dummy\DummyYamlFileContentProvider;
+use _PhpScoper207eb8f99af3\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper207eb8f99af3\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 /**
  * This class is dislocated in non-standard location, so it's not added by symfony/flex
  * to bundles.php and cause app to crash. See https://github.com/symplify/symplify/issues/1952#issuecomment-628765364
  */
-final class PhpConfigPrinterBundle extends \_PhpScopercb576ca159b5\Symfony\Component\HttpKernel\Bundle\Bundle
+final class PhpConfigPrinterBundle extends \_PhpScoper207eb8f99af3\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    public function build(\_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScoper207eb8f99af3\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $this->registerDefaultImplementations($containerBuilder);
         $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : ?\_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScoper207eb8f99af3\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
-        return new \_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\DependencyInjection\Extension\PhpConfigPrinterExtension();
+        return new \_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\DependencyInjection\Extension\PhpConfigPrinterExtension();
     }
-    private function registerDefaultImplementations(\_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    private function registerDefaultImplementations(\_PhpScoper207eb8f99af3\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         // set default implementations, if none provided - for better developer experience out of the box
-        if (!$containerBuilder->has(\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface::class)) {
-            $containerBuilder->autowire(\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Dummy\DummyYamlFileContentProvider::class)->setPublic(\true);
-            $containerBuilder->setAlias(\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface::class, \_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Dummy\DummyYamlFileContentProvider::class);
+        if (!$containerBuilder->has(\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface::class)) {
+            $containerBuilder->autowire(\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Dummy\DummyYamlFileContentProvider::class)->setPublic(\true);
+            $containerBuilder->setAlias(\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface::class, \_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Dummy\DummyYamlFileContentProvider::class);
         }
-        if (!$containerBuilder->has(\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface::class)) {
-            $containerBuilder->autowire(\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Dummy\DummySymfonyVersionFeatureGuard::class)->setPublic(\true);
-            $containerBuilder->setAlias(\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface::class, \_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Dummy\DummySymfonyVersionFeatureGuard::class);
+        if (!$containerBuilder->has(\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface::class)) {
+            $containerBuilder->autowire(\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Dummy\DummySymfonyVersionFeatureGuard::class)->setPublic(\true);
+            $containerBuilder->setAlias(\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface::class, \_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Dummy\DummySymfonyVersionFeatureGuard::class);
         }
     }
 }

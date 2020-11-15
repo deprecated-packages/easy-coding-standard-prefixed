@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercb576ca159b5\Symfony\Component\Debug\Exception;
+namespace _PhpScoper207eb8f99af3\Symfony\Component\Debug\Exception;
 
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4.', \_PhpScopercb576ca159b5\Symfony\Component\Debug\Exception\FatalThrowableError::class), \E_USER_DEPRECATED);
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4.', \_PhpScoper207eb8f99af3\Symfony\Component\Debug\Exception\FatalThrowableError::class), \E_USER_DEPRECATED);
 /**
  * Fatal Throwable Error.
  *
@@ -18,7 +18,7 @@ namespace _PhpScopercb576ca159b5\Symfony\Component\Debug\Exception;
  *
  * @deprecated since Symfony 4.4
  */
-class FatalThrowableError extends \_PhpScopercb576ca159b5\Symfony\Component\Debug\Exception\FatalErrorException
+class FatalThrowableError extends \_PhpScoper207eb8f99af3\Symfony\Component\Debug\Exception\FatalErrorException
 {
     private $originalClassName;
     public function __construct(\Throwable $e)

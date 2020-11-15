@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\RoutingCaseConverter;
+namespace _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\RoutingCaseConverter;
 
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScopercb576ca159b5\PhpParser\Node\Arg;
-use _PhpScopercb576ca159b5\PhpParser\Node\Expr\MethodCall;
-use _PhpScopercb576ca159b5\PhpParser\Node\Expr\Variable;
-use _PhpScopercb576ca159b5\PhpParser\Node\Stmt\Expression;
-final class PathRoutingCaseConverter implements \_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoper207eb8f99af3\PhpParser\Node\Arg;
+use _PhpScoper207eb8f99af3\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper207eb8f99af3\PhpParser\Node\Expr\Variable;
+use _PhpScoper207eb8f99af3\PhpParser\Node\Stmt\Expression;
+final class PathRoutingCaseConverter implements \_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
 {
     /**
      * @var string[]
@@ -28,7 +28,7 @@ final class PathRoutingCaseConverter implements \_PhpScopercb576ca159b5\Migrify\
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
@@ -36,12 +36,12 @@ final class PathRoutingCaseConverter implements \_PhpScopercb576ca159b5\Migrify\
     {
         return isset($values[self::PATH]);
     }
-    public function convertToMethodCall(string $key, $values) : \_PhpScopercb576ca159b5\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall(string $key, $values) : \_PhpScoper207eb8f99af3\PhpParser\Node\Stmt\Expression
     {
-        $variable = new \_PhpScopercb576ca159b5\PhpParser\Node\Expr\Variable(\_PhpScopercb576ca159b5\Migrify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
+        $variable = new \_PhpScoper207eb8f99af3\PhpParser\Node\Expr\Variable(\_PhpScoper207eb8f99af3\Migrify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
         // @todo args
         $args = $this->createAddArgs($key, $values);
-        $methodCall = new \_PhpScopercb576ca159b5\PhpParser\Node\Expr\MethodCall($variable, 'add', $args);
+        $methodCall = new \_PhpScoper207eb8f99af3\PhpParser\Node\Expr\MethodCall($variable, 'add', $args);
         foreach (self::NESTED_KEYS as $nestedKey) {
             if (!isset($values[$nestedKey])) {
                 continue;
@@ -52,9 +52,9 @@ final class PathRoutingCaseConverter implements \_PhpScopercb576ca159b5\Migrify\
                 $nestedValues = \explode('|', $nestedValues);
             }
             $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
-            $methodCall = new \_PhpScopercb576ca159b5\PhpParser\Node\Expr\MethodCall($methodCall, $nestedKey, $args);
+            $methodCall = new \_PhpScoper207eb8f99af3\PhpParser\Node\Expr\MethodCall($methodCall, $nestedKey, $args);
         }
-        return new \_PhpScopercb576ca159b5\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \_PhpScoper207eb8f99af3\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param mixed $values

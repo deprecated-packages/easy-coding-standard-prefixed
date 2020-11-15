@@ -38,7 +38,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\PackageVersions\\": "src\/PackageVersions"
+                    "_PhpScoper207eb8f99af3\\PackageVersions\\": "src\/PackageVersions"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -103,7 +103,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Composer\\Semver\\": "src"
+                    "_PhpScoper207eb8f99af3\\Composer\\Semver\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -168,7 +168,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Composer\\XdebugHandler\\": "src"
+                    "_PhpScoper207eb8f99af3\\Composer\\XdebugHandler\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -226,7 +226,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\": "src\/"
+                    "_PhpScoper207eb8f99af3\\Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -299,7 +299,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations\/"
+                    "_PhpScoper207eb8f99af3\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -368,7 +368,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer\/"
+                    "_PhpScoper207eb8f99af3\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -531,7 +531,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Jean85\\": "src\/"
+                    "_PhpScoper207eb8f99af3\\Jean85\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -589,7 +589,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Migrify\\MigrifyKernel\\": "src"
+                    "_PhpScoper207eb8f99af3\\Migrify\\MigrifyKernel\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -634,7 +634,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Migrify\\PhpConfigPrinter\\": "src"
+                    "_PhpScoper207eb8f99af3\\Migrify\\PhpConfigPrinter\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -977,7 +977,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\PhpParser\\": "lib\/PhpParser"
+                    "_PhpScoper207eb8f99af3\\PhpParser\\": "lib\/PhpParser"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1148,7 +1148,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\PHPStan\\PhpDocParser\\": [
+                    "_PhpScoper207eb8f99af3\\PHPStan\\PhpDocParser\\": [
                         "src\/"
                     ]
                 }
@@ -1192,7 +1192,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Psr\\Cache\\": "src\/"
+                    "_PhpScoper207eb8f99af3\\Psr\\Cache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1245,7 +1245,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Psr\\Container\\": "src\/"
+                    "_PhpScoper207eb8f99af3\\Psr\\Container\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1293,7 +1293,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Psr\\Log\\": "\/Psr\/Log\/"
+                    "_PhpScoper207eb8f99af3\\Psr\\Log\\": "\/Psr\/Log\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1346,7 +1346,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Psr\\SimpleCache\\": "src\/"
+                    "_PhpScoper207eb8f99af3\\Psr\\SimpleCache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1612,7 +1612,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Cache\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Cache\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1675,7 +1675,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Contracts\\Cache\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Contracts\\Cache\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1750,7 +1750,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Config\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Config\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1832,7 +1832,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Console\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Console\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1894,7 +1894,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Debug\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Debug\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1973,7 +1973,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\DependencyInjection\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\DependencyInjection\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2035,7 +2035,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\ErrorHandler\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\ErrorHandler\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2112,7 +2112,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\EventDispatcher\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\EventDispatcher\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2171,7 +2171,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Contracts\\EventDispatcher\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Contracts\\EventDispatcher\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2232,7 +2232,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Filesystem\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Filesystem\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2287,7 +2287,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Finder\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Finder\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2348,7 +2348,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\HttpFoundation\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\HttpFoundation\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2444,7 +2444,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\HttpKernel\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\HttpKernel\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2505,7 +2505,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Mime\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Mime\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2564,7 +2564,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\OptionsResolver\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\OptionsResolver\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2624,7 +2624,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Polyfill\\Ctype\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Polyfill\\Ctype\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2694,7 +2694,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Polyfill\\Intl\\Idn\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Polyfill\\Intl\\Idn\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2778,7 +2778,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Polyfill\\Intl\\Normalizer\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2847,7 +2847,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Polyfill\\Mbstring\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Polyfill\\Mbstring\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2910,7 +2910,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Polyfill\\Php70\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Polyfill\\Php70\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2974,7 +2974,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Polyfill\\Php72\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Polyfill\\Php72\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -3035,7 +3035,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Polyfill\\Php73\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Polyfill\\Php73\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -3096,7 +3096,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Process\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Process\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3155,7 +3155,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Contracts\\Service\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Contracts\\Service\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -3215,7 +3215,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Stopwatch\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Stopwatch\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3293,7 +3293,7 @@
                     "Resources\/functions\/dump.php"
                 ],
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\VarDumper\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\VarDumper\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3355,7 +3355,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\VarExporter\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\VarExporter\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3428,7 +3428,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopercb576ca159b5\\Symfony\\Component\\Yaml\\": ""
+                    "_PhpScoper207eb8f99af3\\Symfony\\Component\\Yaml\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScopercb576ca159b5\Nette\Utils\Strings;
+use _PhpScoper207eb8f99af3\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\Contract\DocBlock\MalformWorkerInterface;
@@ -20,7 +20,7 @@ final class SwitchedTypeAndNameMalformWorker implements \Symplify\CodingStandard
         $lines = $docBlock->getLines();
         foreach ($lines as $line) {
             // $value is first, instead of type is first
-            $match = \_PhpScopercb576ca159b5\Nette\Utils\Strings::match($line->getContent(), self::NAME_THEN_TYPE_REGEX);
+            $match = \_PhpScoper207eb8f99af3\Nette\Utils\Strings::match($line->getContent(), self::NAME_THEN_TYPE_REGEX);
             if ($match === null) {
                 continue;
             }
@@ -31,7 +31,7 @@ final class SwitchedTypeAndNameMalformWorker implements \Symplify\CodingStandard
             if (\in_array($match['type'], ['The', 'Set'], \true)) {
                 continue;
             }
-            $newLine = \_PhpScopercb576ca159b5\Nette\Utils\Strings::replace($line->getContent(), self::NAME_THEN_TYPE_REGEX, '@$1$2$5$4$3');
+            $newLine = \_PhpScoper207eb8f99af3\Nette\Utils\Strings::replace($line->getContent(), self::NAME_THEN_TYPE_REGEX, '@$1$2$5$4$3');
             $line->setContent($newLine);
         }
         return $docBlock->getContent();
