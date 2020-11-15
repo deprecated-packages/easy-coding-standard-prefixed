@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperecb978830f1e\Symfony\Component\Mime;
+namespace _PhpScoperd9c3b46af121\Symfony\Component\Mime;
 
-use _PhpScoperecb978830f1e\Symfony\Component\Mime\Exception\InvalidArgumentException;
-use _PhpScoperecb978830f1e\Symfony\Component\Mime\Exception\LogicException;
+use _PhpScoperd9c3b46af121\Symfony\Component\Mime\Exception\InvalidArgumentException;
+use _PhpScoperd9c3b46af121\Symfony\Component\Mime\Exception\LogicException;
 /**
  * Guesses the MIME type with the binary "file" (only available on *nix).
  *
@@ -19,7 +19,7 @@ use _PhpScoperecb978830f1e\Symfony\Component\Mime\Exception\LogicException;
  *
  * @experimental in 4.3
  */
-class FileBinaryMimeTypeGuesser implements \_PhpScoperecb978830f1e\Symfony\Component\Mime\MimeTypeGuesserInterface
+class FileBinaryMimeTypeGuesser implements \_PhpScoperd9c3b46af121\Symfony\Component\Mime\MimeTypeGuesserInterface
 {
     private $cmd;
     /**
@@ -57,10 +57,10 @@ class FileBinaryMimeTypeGuesser implements \_PhpScoperecb978830f1e\Symfony\Compo
     public function guessMimeType(string $path) : ?string
     {
         if (!\is_file($path) || !\is_readable($path)) {
-            throw new \_PhpScoperecb978830f1e\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('The "%s" file does not exist or is not readable.', $path));
+            throw new \_PhpScoperd9c3b46af121\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('The "%s" file does not exist or is not readable.', $path));
         }
         if (!$this->isGuesserSupported()) {
-            throw new \_PhpScoperecb978830f1e\Symfony\Component\Mime\Exception\LogicException(\sprintf('The "%s" guesser is not supported.', __CLASS__));
+            throw new \_PhpScoperd9c3b46af121\Symfony\Component\Mime\Exception\LogicException(\sprintf('The "%s" guesser is not supported.', __CLASS__));
         }
         \ob_start();
         // need to use --mime instead of -i. see #6641

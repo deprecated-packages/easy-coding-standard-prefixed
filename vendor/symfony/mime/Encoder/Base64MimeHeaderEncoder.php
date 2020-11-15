@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperecb978830f1e\Symfony\Component\Mime\Encoder;
+namespace _PhpScoperd9c3b46af121\Symfony\Component\Mime\Encoder;
 
 /**
  * @author Chris Corbyn
  *
  * @experimental in 4.3
  */
-final class Base64MimeHeaderEncoder extends \_PhpScoperecb978830f1e\Symfony\Component\Mime\Encoder\Base64Encoder implements \_PhpScoperecb978830f1e\Symfony\Component\Mime\Encoder\MimeHeaderEncoderInterface
+final class Base64MimeHeaderEncoder extends \_PhpScoperd9c3b46af121\Symfony\Component\Mime\Encoder\Base64Encoder implements \_PhpScoperd9c3b46af121\Symfony\Component\Mime\Encoder\MimeHeaderEncoderInterface
 {
     public function getName() : string
     {

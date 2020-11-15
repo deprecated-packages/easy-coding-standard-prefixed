@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperecb978830f1e\Symfony\Component\Cache\Traits;
+namespace _PhpScoperd9c3b46af121\Symfony\Component\Cache\Traits;
 
-use _PhpScoperecb978830f1e\Symfony\Component\Cache\CacheItem;
-use _PhpScoperecb978830f1e\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoperd9c3b46af121\Symfony\Component\Cache\CacheItem;
+use _PhpScoperd9c3b46af121\Symfony\Component\Cache\Exception\CacheException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -26,14 +26,14 @@ trait ApcuTrait
     private function init(string $namespace, int $defaultLifetime, ?string $version)
     {
         if (!static::isSupported()) {
-            throw new \_PhpScoperecb978830f1e\Symfony\Component\Cache\Exception\CacheException('APCu is not enabled');
+            throw new \_PhpScoperd9c3b46af121\Symfony\Component\Cache\Exception\CacheException('APCu is not enabled');
         }
         if ('cli' === \PHP_SAPI) {
             \ini_set('apc.use_request_time', 0);
         }
         parent::__construct($namespace, $defaultLifetime);
         if (null !== $version) {
-            \_PhpScoperecb978830f1e\Symfony\Component\Cache\CacheItem::validateKey($version);
+            \_PhpScoperd9c3b46af121\Symfony\Component\Cache\CacheItem::validateKey($version);
             if (!\apcu_exists($version . '@' . $namespace)) {
                 $this->doClear($namespace);
                 \apcu_add($version . '@' . $namespace, null);

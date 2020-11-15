@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperecb978830f1e\\PackageVersions\\": "src\/PackageVersions"
+            "_PhpScoperd9c3b46af121\\PackageVersions\\": "src\/PackageVersions"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoperecb978830f1e\\PackageVersionsTest\\": "test\/PackageVersionsTest"
+            "_PhpScoperd9c3b46af121\\PackageVersionsTest\\": "test\/PackageVersionsTest"
         }
     },
     "extra": {

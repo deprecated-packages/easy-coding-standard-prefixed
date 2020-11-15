@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperecb978830f1e\Symfony\Component\Filesystem\Exception;
+namespace _PhpScoperd9c3b46af121\Symfony\Component\Filesystem\Exception;
 
 /**
  * Exception interface for all exceptions thrown by the component.

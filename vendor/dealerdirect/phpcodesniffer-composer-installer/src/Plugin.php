@@ -7,30 +7,30 @@
  * @copyright 2016-2020 Dealerdirect B.V.
  * @license MIT
  */
-namespace _PhpScoperecb978830f1e\Dealerdirect\Composer\Plugin\Installers\PHPCodeSniffer;
+namespace _PhpScoperd9c3b46af121\Dealerdirect\Composer\Plugin\Installers\PHPCodeSniffer;
 
-use _PhpScoperecb978830f1e\Composer\Composer;
-use _PhpScoperecb978830f1e\Composer\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperecb978830f1e\Composer\IO\IOInterface;
-use _PhpScoperecb978830f1e\Composer\Package\AliasPackage;
-use _PhpScoperecb978830f1e\Composer\Package\PackageInterface;
-use _PhpScoperecb978830f1e\Composer\Package\RootPackageInterface;
-use _PhpScoperecb978830f1e\Composer\Plugin\PluginInterface;
-use _PhpScoperecb978830f1e\Composer\Script\Event;
-use _PhpScoperecb978830f1e\Composer\Script\ScriptEvents;
-use _PhpScoperecb978830f1e\Composer\Util\Filesystem;
-use _PhpScoperecb978830f1e\Composer\Util\ProcessExecutor;
-use _PhpScoperecb978830f1e\Symfony\Component\Finder\Finder;
-use _PhpScoperecb978830f1e\Symfony\Component\Process\Exception\LogicException;
-use _PhpScoperecb978830f1e\Symfony\Component\Process\Exception\ProcessFailedException;
-use _PhpScoperecb978830f1e\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScoperecb978830f1e\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScoperd9c3b46af121\Composer\Composer;
+use _PhpScoperd9c3b46af121\Composer\EventDispatcher\EventSubscriberInterface;
+use _PhpScoperd9c3b46af121\Composer\IO\IOInterface;
+use _PhpScoperd9c3b46af121\Composer\Package\AliasPackage;
+use _PhpScoperd9c3b46af121\Composer\Package\PackageInterface;
+use _PhpScoperd9c3b46af121\Composer\Package\RootPackageInterface;
+use _PhpScoperd9c3b46af121\Composer\Plugin\PluginInterface;
+use _PhpScoperd9c3b46af121\Composer\Script\Event;
+use _PhpScoperd9c3b46af121\Composer\Script\ScriptEvents;
+use _PhpScoperd9c3b46af121\Composer\Util\Filesystem;
+use _PhpScoperd9c3b46af121\Composer\Util\ProcessExecutor;
+use _PhpScoperd9c3b46af121\Symfony\Component\Finder\Finder;
+use _PhpScoperd9c3b46af121\Symfony\Component\Process\Exception\LogicException;
+use _PhpScoperd9c3b46af121\Symfony\Component\Process\Exception\ProcessFailedException;
+use _PhpScoperd9c3b46af121\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScoperd9c3b46af121\Symfony\Component\Process\PhpExecutableFinder;
 /**
  * PHP_CodeSniffer standard installation manager.
  *
  * @author Franck Nijhof <franck.nijhof@dealerdirect.com>
  */
-class Plugin implements \_PhpScoperecb978830f1e\Composer\Plugin\PluginInterface, \_PhpScoperecb978830f1e\Composer\EventDispatcher\EventSubscriberInterface
+class Plugin implements \_PhpScoperd9c3b46af121\Composer\Plugin\PluginInterface, \_PhpScoperd9c3b46af121\Composer\EventDispatcher\EventSubscriberInterface
 {
     const KEY_MAX_DEPTH = 'phpcodesniffer-search-depth';
     const MESSAGE_ERROR_WRONG_MAX_DEPTH = 'The value of "%s" (in the composer.json "extra".section) must be an integer larger then %d, %s given.';
@@ -80,7 +80,7 @@ class Plugin implements \_PhpScoperecb978830f1e\Composer\Plugin\PluginInterface,
      * @throws ProcessFailedException
      * @throws RuntimeException
      */
-    public static function run(\_PhpScoperecb978830f1e\Composer\Script\Event $event)
+    public static function run(\_PhpScoperd9c3b46af121\Composer\Script\Event $event)
     {
         $io = $event->getIO();
         $composer = $event->getComposer();
@@ -98,7 +98,7 @@ class Plugin implements \_PhpScoperecb978830f1e\Composer\Plugin\PluginInterface,
      * @throws ProcessFailedException
      * @throws RuntimeException
      */
-    public function activate(\_PhpScoperecb978830f1e\Composer\Composer $composer, \_PhpScoperecb978830f1e\Composer\IO\IOInterface $io)
+    public function activate(\_PhpScoperd9c3b46af121\Composer\Composer $composer, \_PhpScoperd9c3b46af121\Composer\IO\IOInterface $io)
     {
         $this->composer = $composer;
         $this->io = $io;
@@ -107,13 +107,13 @@ class Plugin implements \_PhpScoperecb978830f1e\Composer\Plugin\PluginInterface,
     /**
      * {@inheritDoc}
      */
-    public function deactivate(\_PhpScoperecb978830f1e\Composer\Composer $composer, \_PhpScoperecb978830f1e\Composer\IO\IOInterface $io)
+    public function deactivate(\_PhpScoperd9c3b46af121\Composer\Composer $composer, \_PhpScoperd9c3b46af121\Composer\IO\IOInterface $io)
     {
     }
     /**
      * {@inheritDoc}
      */
-    public function uninstall(\_PhpScoperecb978830f1e\Composer\Composer $composer, \_PhpScoperecb978830f1e\Composer\IO\IOInterface $io)
+    public function uninstall(\_PhpScoperd9c3b46af121\Composer\Composer $composer, \_PhpScoperd9c3b46af121\Composer\IO\IOInterface $io)
     {
     }
     /**
@@ -128,15 +128,15 @@ class Plugin implements \_PhpScoperecb978830f1e\Composer\Plugin\PluginInterface,
     {
         $this->cwd = \getcwd();
         $this->installedPaths = array();
-        $this->processExecutor = new \_PhpScoperecb978830f1e\Composer\Util\ProcessExecutor($this->io);
-        $this->filesystem = new \_PhpScoperecb978830f1e\Composer\Util\Filesystem($this->processExecutor);
+        $this->processExecutor = new \_PhpScoperd9c3b46af121\Composer\Util\ProcessExecutor($this->io);
+        $this->filesystem = new \_PhpScoperd9c3b46af121\Composer\Util\Filesystem($this->processExecutor);
     }
     /**
      * {@inheritDoc}
      */
     public static function getSubscribedEvents()
     {
-        return array(\_PhpScoperecb978830f1e\Composer\Script\ScriptEvents::POST_INSTALL_CMD => array(array('onDependenciesChangedEvent', 0)), \_PhpScoperecb978830f1e\Composer\Script\ScriptEvents::POST_UPDATE_CMD => array(array('onDependenciesChangedEvent', 0)));
+        return array(\_PhpScoperd9c3b46af121\Composer\Script\ScriptEvents::POST_INSTALL_CMD => array(array('onDependenciesChangedEvent', 0)), \_PhpScoperd9c3b46af121\Composer\Script\ScriptEvents::POST_UPDATE_CMD => array(array('onDependenciesChangedEvent', 0)));
     }
     /**
      * Entry point for post install and post update events.
@@ -278,14 +278,14 @@ class Plugin implements \_PhpScoperecb978830f1e\Composer\Plugin\PluginInterface,
      */
     protected function getPhpExecCommand()
     {
-        $finder = new \_PhpScoperecb978830f1e\Symfony\Component\Process\PhpExecutableFinder();
+        $finder = new \_PhpScoperd9c3b46af121\Symfony\Component\Process\PhpExecutableFinder();
         $phpPath = $finder->find(\false);
         if ($phpPath === \false) {
             throw new \RuntimeException('Failed to locate PHP binary to execute ' . $phpPath);
         }
         $phpArgs = $finder->findArguments();
         $phpArgs = $phpArgs ? ' ' . \implode(' ', $phpArgs) : '';
-        $command = \_PhpScoperecb978830f1e\Composer\Util\ProcessExecutor::escape($phpPath) . $phpArgs . ' -d allow_url_fopen=' . \_PhpScoperecb978830f1e\Composer\Util\ProcessExecutor::escape(\ini_get('allow_url_fopen')) . ' -d disable_functions=' . \_PhpScoperecb978830f1e\Composer\Util\ProcessExecutor::escape(\ini_get('disable_functions')) . ' -d memory_limit=' . \_PhpScoperecb978830f1e\Composer\Util\ProcessExecutor::escape(\ini_get('memory_limit'));
+        $command = \_PhpScoperd9c3b46af121\Composer\Util\ProcessExecutor::escape($phpPath) . $phpArgs . ' -d allow_url_fopen=' . \_PhpScoperd9c3b46af121\Composer\Util\ProcessExecutor::escape(\ini_get('allow_url_fopen')) . ' -d disable_functions=' . \_PhpScoperd9c3b46af121\Composer\Util\ProcessExecutor::escape(\ini_get('disable_functions')) . ' -d memory_limit=' . \_PhpScoperd9c3b46af121\Composer\Util\ProcessExecutor::escape(\ini_get('memory_limit'));
         return $command;
     }
     /**
@@ -330,7 +330,7 @@ class Plugin implements \_PhpScoperecb978830f1e\Composer\Plugin\PluginInterface,
             }
             $searchPaths[] = $installPath;
         }
-        $finder = new \_PhpScoperecb978830f1e\Symfony\Component\Finder\Finder();
+        $finder = new \_PhpScoperd9c3b46af121\Symfony\Component\Finder\Finder();
         $finder->files()->depth('<= ' . $this->getMaxDepth())->depth('>= ' . $this->getMinDepth())->ignoreUnreadableDirs()->ignoreVCS(\true)->in($searchPaths)->name('ruleset.xml');
         // Process each found possible ruleset.
         foreach ($finder as $ruleset) {
@@ -362,13 +362,13 @@ class Plugin implements \_PhpScoperecb978830f1e\Composer\Plugin\PluginInterface,
      */
     private function getPHPCodingStandardPackages()
     {
-        $codingStandardPackages = \array_filter($this->composer->getRepositoryManager()->getLocalRepository()->getPackages(), function (\_PhpScoperecb978830f1e\Composer\Package\PackageInterface $package) {
-            if ($package instanceof \_PhpScoperecb978830f1e\Composer\Package\AliasPackage) {
+        $codingStandardPackages = \array_filter($this->composer->getRepositoryManager()->getLocalRepository()->getPackages(), function (\_PhpScoperd9c3b46af121\Composer\Package\PackageInterface $package) {
+            if ($package instanceof \_PhpScoperd9c3b46af121\Composer\Package\AliasPackage) {
                 return \false;
             }
-            return $package->getType() === \_PhpScoperecb978830f1e\Dealerdirect\Composer\Plugin\Installers\PHPCodeSniffer\Plugin::PACKAGE_TYPE;
+            return $package->getType() === \_PhpScoperd9c3b46af121\Dealerdirect\Composer\Plugin\Installers\PHPCodeSniffer\Plugin::PACKAGE_TYPE;
         });
-        if (!$this->composer->getPackage() instanceof \_PhpScoperecb978830f1e\Composer\Package\RootPackageInterface && $this->composer->getPackage()->getType() === self::PACKAGE_TYPE) {
+        if (!$this->composer->getPackage() instanceof \_PhpScoperd9c3b46af121\Composer\Package\RootPackageInterface && $this->composer->getPackage()->getType() === self::PACKAGE_TYPE) {
             $codingStandardPackages[] = $this->composer->getPackage();
         }
         return $codingStandardPackages;

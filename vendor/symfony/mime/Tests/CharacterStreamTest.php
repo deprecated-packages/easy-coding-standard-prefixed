@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperecb978830f1e\Symfony\Component\Mime\Tests;
+namespace _PhpScoperd9c3b46af121\Symfony\Component\Mime\Tests;
 
-use _PhpScoperecb978830f1e\PHPUnit\Framework\TestCase;
-use _PhpScoperecb978830f1e\Symfony\Component\Mime\CharacterStream;
-class CharacterStreamTest extends \_PhpScoperecb978830f1e\PHPUnit\Framework\TestCase
+use _PhpScoperd9c3b46af121\PHPUnit\Framework\TestCase;
+use _PhpScoperd9c3b46af121\Symfony\Component\Mime\CharacterStream;
+class CharacterStreamTest extends \_PhpScoperd9c3b46af121\PHPUnit\Framework\TestCase
 {
     public function testReadCharactersAreInTact()
     {
-        $stream = new \_PhpScoperecb978830f1e\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
+        $stream = new \_PhpScoperd9c3b46af121\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
         $stream->write(\pack('C*', 0xd0, 0xbb, 0xd1, 0x8e, 0xd0, 0xb1, 0xd1, 0x8b, 0xd1, 0x85));
         $this->assertSame(\pack('C*', 0xd0, 0x94), $stream->read(1));
         $this->assertSame(\pack('C*', 0xd0, 0xb6, 0xd0, 0xbe), $stream->read(2));
@@ -27,7 +27,7 @@ class CharacterStreamTest extends \_PhpScoperecb978830f1e\PHPUnit\Framework\Test
     }
     public function testCharactersCanBeReadAsByteArrays()
     {
-        $stream = new \_PhpScoperecb978830f1e\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
+        $stream = new \_PhpScoperd9c3b46af121\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
         $stream->write(\pack('C*', 0xd0, 0xbb, 0xd1, 0x8e, 0xd0, 0xb1, 0xd1, 0x8b, 0xd1, 0x85));
         $this->assertEquals([0xd0, 0x94], $stream->readBytes(1));
         $this->assertEquals([0xd0, 0xb6, 0xd0, 0xbe], $stream->readBytes(2));
@@ -38,19 +38,19 @@ class CharacterStreamTest extends \_PhpScoperecb978830f1e\PHPUnit\Framework\Test
     }
     public function testRequestingLargeCharCountPastEndOfStream()
     {
-        $stream = new \_PhpScoperecb978830f1e\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
+        $stream = new \_PhpScoperd9c3b46af121\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
         $this->assertSame(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe), $stream->read(100));
         $this->assertNull($stream->read(1));
     }
     public function testRequestingByteArrayCountPastEndOfStream()
     {
-        $stream = new \_PhpScoperecb978830f1e\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
+        $stream = new \_PhpScoperd9c3b46af121\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
         $this->assertEquals([0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe], $stream->readBytes(100));
         $this->assertNull($stream->readBytes(1));
     }
     public function testPointerOffsetCanBeSet()
     {
-        $stream = new \_PhpScoperecb978830f1e\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
+        $stream = new \_PhpScoperd9c3b46af121\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd0, 0x94, 0xd0, 0xb6, 0xd0, 0xbe));
         $this->assertSame(\pack('C*', 0xd0, 0x94), $stream->read(1));
         $stream->setPointer(0);
         $this->assertSame(\pack('C*', 0xd0, 0x94), $stream->read(1));
@@ -59,7 +59,7 @@ class CharacterStreamTest extends \_PhpScoperecb978830f1e\PHPUnit\Framework\Test
     }
     public function testAlgorithmWithFixedWidthCharsets()
     {
-        $stream = new \_PhpScoperecb978830f1e\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd1, 0x8d, 0xd0, 0xbb, 0xd0, 0xb0));
+        $stream = new \_PhpScoperd9c3b46af121\Symfony\Component\Mime\CharacterStream(\pack('C*', 0xd1, 0x8d, 0xd0, 0xbb, 0xd0, 0xb0));
         $this->assertSame(\pack('C*', 0xd1, 0x8d), $stream->read(1));
         $this->assertSame(\pack('C*', 0xd0, 0xbb), $stream->read(1));
         $this->assertSame(\pack('C*', 0xd0, 0xb0), $stream->read(1));

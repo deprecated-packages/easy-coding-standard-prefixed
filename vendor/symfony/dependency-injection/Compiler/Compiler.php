@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
+use _PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
 /**
  * This class is used to remove circular dependencies between individual passes.
  *
@@ -24,8 +24,8 @@ class Compiler
     private $serviceReferenceGraph;
     public function __construct()
     {
-        $this->passConfig = new \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Compiler\PassConfig();
-        $this->serviceReferenceGraph = new \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraph();
+        $this->passConfig = new \_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Compiler\PassConfig();
+        $this->serviceReferenceGraph = new \_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraph();
     }
     /**
      * Returns the PassConfig.
@@ -51,14 +51,14 @@ class Compiler
      * @param string $type     The type of the pass
      * @param int    $priority Used to sort the passes
      */
-    public function addPass(\_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, $type = \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, int $priority = 0)
+    public function addPass(\_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, $type = \_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, int $priority = 0)
     {
         $this->passConfig->addPass($pass, $type, $priority);
     }
     /**
      * @final
      */
-    public function log(\_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, string $message)
+    public function log(\_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, string $message)
     {
         if (\false !== \strpos($message, "\n")) {
             $message = \str_replace("\n", "\n" . \get_class($pass) . ': ', \trim($message));
@@ -77,7 +77,7 @@ class Compiler
     /**
      * Run the Compiler and process all Passes.
      */
-    public function compile(\_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function compile(\_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         try {
             foreach ($this->passConfig->getPasses() as $pass) {
@@ -95,7 +95,7 @@ class Compiler
                 }
             } while ($prev = $prev->getPrevious());
             if ($usedEnvs) {
-                $e = new \_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Exception\EnvParameterException($usedEnvs, $e);
+                $e = new \_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Exception\EnvParameterException($usedEnvs, $e);
             }
             throw $e;
         } finally {

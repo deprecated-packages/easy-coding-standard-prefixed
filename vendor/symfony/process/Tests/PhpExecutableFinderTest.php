@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperecb978830f1e\Symfony\Component\Process\Tests;
+namespace _PhpScoperd9c3b46af121\Symfony\Component\Process\Tests;
 
-use _PhpScoperecb978830f1e\PHPUnit\Framework\TestCase;
-use _PhpScoperecb978830f1e\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScoperd9c3b46af121\PHPUnit\Framework\TestCase;
+use _PhpScoperd9c3b46af121\Symfony\Component\Process\PhpExecutableFinder;
 /**
  * @author Robert Schönthal <seroscho@googlemail.com>
  */
-class PhpExecutableFinderTest extends \_PhpScoperecb978830f1e\PHPUnit\Framework\TestCase
+class PhpExecutableFinderTest extends \_PhpScoperd9c3b46af121\PHPUnit\Framework\TestCase
 {
     /**
      * tests find() with the constant PHP_BINARY.
@@ -25,7 +25,7 @@ class PhpExecutableFinderTest extends \_PhpScoperecb978830f1e\PHPUnit\Framework\
         if (\defined('HHVM_VERSION')) {
             $this->markTestSkipped('Should not be executed in HHVM context.');
         }
-        $f = new \_PhpScoperecb978830f1e\Symfony\Component\Process\PhpExecutableFinder();
+        $f = new \_PhpScoperd9c3b46af121\Symfony\Component\Process\PhpExecutableFinder();
         $current = \PHP_BINARY;
         $args = 'phpdbg' === \PHP_SAPI ? ' -qrr' : '';
         $this->assertEquals($current . $args, $f->find(), '::find() returns the executable PHP');
@@ -39,7 +39,7 @@ class PhpExecutableFinderTest extends \_PhpScoperecb978830f1e\PHPUnit\Framework\
         if (!\defined('HHVM_VERSION')) {
             $this->markTestSkipped('Should be executed in HHVM context.');
         }
-        $f = new \_PhpScoperecb978830f1e\Symfony\Component\Process\PhpExecutableFinder();
+        $f = new \_PhpScoperd9c3b46af121\Symfony\Component\Process\PhpExecutableFinder();
         $current = \getenv('PHP_BINARY') ?: \PHP_BINARY;
         $this->assertEquals($current . ' --php', $f->find(), '::find() returns the executable PHP');
         $this->assertEquals($current, $f->find(\false), '::find() returns the executable PHP');
@@ -49,7 +49,7 @@ class PhpExecutableFinderTest extends \_PhpScoperecb978830f1e\PHPUnit\Framework\
      */
     public function testFindArguments()
     {
-        $f = new \_PhpScoperecb978830f1e\Symfony\Component\Process\PhpExecutableFinder();
+        $f = new \_PhpScoperd9c3b46af121\Symfony\Component\Process\PhpExecutableFinder();
         if (\defined('HHVM_VERSION')) {
             $this->assertEquals($f->findArguments(), array('--php'), '::findArguments() returns HHVM arguments');
         } elseif ('phpdbg' === \PHP_SAPI) {

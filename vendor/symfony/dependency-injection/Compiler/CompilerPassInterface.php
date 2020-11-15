@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Interface that must be implemented by compilation passes.
  *
@@ -21,5 +21,5 @@ interface CompilerPassInterface
     /**
      * You can modify the container here before it is dumped to PHP code.
      */
-    public function process(\_PhpScoperecb978830f1e\Symfony\Component\DependencyInjection\ContainerBuilder $container);
+    public function process(\_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\ContainerBuilder $container);
 }

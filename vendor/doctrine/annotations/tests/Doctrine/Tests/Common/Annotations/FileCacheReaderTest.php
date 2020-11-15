@@ -1,17 +1,17 @@
 <?php
 
-namespace _PhpScoperecb978830f1e\Doctrine\Tests\Common\Annotations;
+namespace _PhpScoperd9c3b46af121\Doctrine\Tests\Common\Annotations;
 
-use _PhpScoperecb978830f1e\Doctrine\Common\Annotations\AnnotationReader;
-use _PhpScoperecb978830f1e\Doctrine\Common\Annotations\FileCacheReader;
-class FileCacheReaderTest extends \_PhpScoperecb978830f1e\Doctrine\Tests\Common\Annotations\AbstractReaderTest
+use _PhpScoperd9c3b46af121\Doctrine\Common\Annotations\AnnotationReader;
+use _PhpScoperd9c3b46af121\Doctrine\Common\Annotations\FileCacheReader;
+class FileCacheReaderTest extends \_PhpScoperd9c3b46af121\Doctrine\Tests\Common\Annotations\AbstractReaderTest
 {
     private $cacheDir;
     protected function getReader()
     {
         $this->cacheDir = \sys_get_temp_dir() . "/annotations_" . \uniqid();
         @\mkdir($this->cacheDir);
-        return new \_PhpScoperecb978830f1e\Doctrine\Common\Annotations\FileCacheReader(new \_PhpScoperecb978830f1e\Doctrine\Common\Annotations\AnnotationReader(), $this->cacheDir);
+        return new \_PhpScoperd9c3b46af121\Doctrine\Common\Annotations\FileCacheReader(new \_PhpScoperd9c3b46af121\Doctrine\Common\Annotations\AnnotationReader(), $this->cacheDir);
     }
     public function tearDown()
     {
@@ -27,7 +27,7 @@ class FileCacheReaderTest extends \_PhpScoperecb978830f1e\Doctrine\Tests\Common\
     {
         $this->cacheDir = \sys_get_temp_dir() . "/not_existed_dir_" . \uniqid();
         $this->assertFalse(\is_dir($this->cacheDir));
-        new \_PhpScoperecb978830f1e\Doctrine\Common\Annotations\FileCacheReader(new \_PhpScoperecb978830f1e\Doctrine\Common\Annotations\AnnotationReader(), $this->cacheDir);
+        new \_PhpScoperd9c3b46af121\Doctrine\Common\Annotations\FileCacheReader(new \_PhpScoperd9c3b46af121\Doctrine\Common\Annotations\AnnotationReader(), $this->cacheDir);
         $this->assertTrue(\is_dir($this->cacheDir));
     }
 }
