@@ -31,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper21763e6c7ac4\\Symfony\\Contracts\\Cache\\": ""
+            "_PhpScoper70072c07b02b\\Symfony\\Contracts\\Cache\\": ""
         }
     },
     "minimum-stability": "dev",

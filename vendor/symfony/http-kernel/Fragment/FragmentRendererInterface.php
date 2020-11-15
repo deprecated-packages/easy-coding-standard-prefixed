@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper21763e6c7ac4\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScoper70072c07b02b\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoper21763e6c7ac4\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper21763e6c7ac4\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper21763e6c7ac4\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScoper70072c07b02b\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper70072c07b02b\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper70072c07b02b\Symfony\Component\HttpKernel\Controller\ControllerReference;
 /**
  * Interface implemented by all rendering strategies.
  *
@@ -27,7 +27,7 @@ interface FragmentRendererInterface
      *
      * @return Response A Response instance
      */
-    public function render($uri, \_PhpScoper21763e6c7ac4\Symfony\Component\HttpFoundation\Request $request, array $options = []);
+    public function render($uri, \_PhpScoper70072c07b02b\Symfony\Component\HttpFoundation\Request $request, array $options = []);
     /**
      * Gets the name of the strategy.
      *

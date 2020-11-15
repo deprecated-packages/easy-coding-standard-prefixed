@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper21763e6c7ac4\Composer\Semver\Constraint;
+namespace _PhpScoper70072c07b02b\Composer\Semver\Constraint;
 
 /**
  * Defines a constraint.
  */
-class Constraint implements \_PhpScoper21763e6c7ac4\Composer\Semver\Constraint\ConstraintInterface
+class Constraint implements \_PhpScoper70072c07b02b\Composer\Semver\Constraint\ConstraintInterface
 {
     /* operator integer values */
     const OP_EQ = 0;
@@ -45,7 +45,7 @@ class Constraint implements \_PhpScoper21763e6c7ac4\Composer\Semver\Constraint\C
      *
      * @return bool
      */
-    public function matches(\_PhpScoper21763e6c7ac4\Composer\Semver\Constraint\ConstraintInterface $provider)
+    public function matches(\_PhpScoper70072c07b02b\Composer\Semver\Constraint\ConstraintInterface $provider)
     {
         if ($provider instanceof $this) {
             return $this->matchSpecific($provider);
@@ -127,7 +127,7 @@ class Constraint implements \_PhpScoper21763e6c7ac4\Composer\Semver\Constraint\C
      *
      * @return bool
      */
-    public function matchSpecific(\_PhpScoper21763e6c7ac4\Composer\Semver\Constraint\Constraint $provider, $compareBranches = \false)
+    public function matchSpecific(\_PhpScoper70072c07b02b\Composer\Semver\Constraint\Constraint $provider, $compareBranches = \false)
     {
         $noEqualOp = \str_replace('=', '', self::$transOpInt[$this->operator]);
         $providerNoEqualOp = \str_replace('=', '', self::$transOpInt[$provider->operator]);

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper21763e6c7ac4\PhpParser\Node\Expr;
+namespace _PhpScoper70072c07b02b\PhpParser\Node\Expr;
 
-use _PhpScoper21763e6c7ac4\PhpParser\Node\Expr;
-abstract class Cast extends \_PhpScoper21763e6c7ac4\PhpParser\Node\Expr
+use _PhpScoper70072c07b02b\PhpParser\Node\Expr;
+abstract class Cast extends \_PhpScoper70072c07b02b\PhpParser\Node\Expr
 {
     /** @var Expr Expression */
     public $expr;
@@ -14,7 +14,7 @@ abstract class Cast extends \_PhpScoper21763e6c7ac4\PhpParser\Node\Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper21763e6c7ac4\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\_PhpScoper70072c07b02b\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;
