@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper49c742f5a4ee\Symfony\Component\DependencyInjection\Exception;
+namespace _PhpScopera189153e1f79\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Base OutOfBoundsException for Dependency Injection component.
  */
-class OutOfBoundsException extends \OutOfBoundsException implements \_PhpScoper49c742f5a4ee\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
+class OutOfBoundsException extends \OutOfBoundsException implements \_PhpScopera189153e1f79\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
 {
 }

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper49c742f5a4ee\PhpParser;
+namespace _PhpScopera189153e1f79\PhpParser;
 
 class Comment implements \JsonSerializable
 {
@@ -219,7 +219,7 @@ class Comment implements \JsonSerializable
     public function jsonSerialize() : array
     {
         // Technically not a node, but we make it look like one anyway
-        $type = $this instanceof \_PhpScoper49c742f5a4ee\PhpParser\Comment\Doc ? 'Comment_Doc' : 'Comment';
+        $type = $this instanceof \_PhpScopera189153e1f79\PhpParser\Comment\Doc ? 'Comment_Doc' : 'Comment';
         return [
             'nodeType' => $type,
             'text' => $this->text,

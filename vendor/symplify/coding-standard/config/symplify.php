@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper49c742f5a4ee;
+namespace _PhpScopera189153e1f79;
 
 use PhpCsFixer\Fixer\ClassNotation\FinalInternalClassFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer;
 use SlevomatCodingStandard\Sniffs\Namespaces\ReferenceUsedNamesOnlySniff;
-use _PhpScoper49c742f5a4ee\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoper49c742f5a4ee\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScopera189153e1f79\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScopera189153e1f79\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(__DIR__ . '/config.php');
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();

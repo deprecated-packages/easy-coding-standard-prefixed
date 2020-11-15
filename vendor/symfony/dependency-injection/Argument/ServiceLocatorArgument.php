@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper49c742f5a4ee\Symfony\Component\DependencyInjection\Argument;
+namespace _PhpScopera189153e1f79\Symfony\Component\DependencyInjection\Argument;
 
-use _PhpScoper49c742f5a4ee\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopera189153e1f79\Symfony\Component\DependencyInjection\Reference;
 /**
  * Represents a closure acting as a service locator.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceLocatorArgument implements \_PhpScoper49c742f5a4ee\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+class ServiceLocatorArgument implements \_PhpScopera189153e1f79\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
 {
     use ReferenceSetArgumentTrait;
     private $taggedIteratorArgument;
@@ -25,14 +25,14 @@ class ServiceLocatorArgument implements \_PhpScoper49c742f5a4ee\Symfony\Componen
      */
     public function __construct($values = [])
     {
-        if ($values instanceof \_PhpScoper49c742f5a4ee\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
+        if ($values instanceof \_PhpScopera189153e1f79\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
             $this->taggedIteratorArgument = $values;
             $this->values = [];
         } else {
             $this->setValues($values);
         }
     }
-    public function getTaggedIteratorArgument() : ?\_PhpScoper49c742f5a4ee\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+    public function getTaggedIteratorArgument() : ?\_PhpScopera189153e1f79\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
     {
         return $this->taggedIteratorArgument;
     }

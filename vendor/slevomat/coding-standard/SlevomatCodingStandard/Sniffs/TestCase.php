@@ -24,7 +24,7 @@ use const PHP_EOL;
 /**
  * @codeCoverageIgnore
  */
-abstract class TestCase extends \_PhpScoper49c742f5a4ee\PHPUnit\Framework\TestCase
+abstract class TestCase extends \_PhpScopera189153e1f79\PHPUnit\Framework\TestCase
 {
     /**
      * @param string $filePath
@@ -80,7 +80,7 @@ abstract class TestCase extends \_PhpScoper49c742f5a4ee\PHPUnit\Framework\TestCa
     {
         $phpcsFile->disableCaching();
         $phpcsFile->fixer->fixFile();
-        self::assertStringEqualsFile(\preg_replace('~(\\.php)$~', '_PhpScoper49c742f5a4ee\\.fixed\\1', $phpcsFile->getFilename()), $phpcsFile->fixer->getContents());
+        self::assertStringEqualsFile(\preg_replace('~(\\.php)$~', '_PhpScopera189153e1f79\\.fixed\\1', $phpcsFile->getFilename()), $phpcsFile->fixer->getContents());
     }
     protected static function getSniffName() : string
     {
