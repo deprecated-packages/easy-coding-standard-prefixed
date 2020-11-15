@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper279cf54b77ad\Symfony\Contracts\EventDispatcher;
+namespace _PhpScoper21763e6c7ac4\Symfony\Contracts\EventDispatcher;
 
-use _PhpScoper279cf54b77ad\Psr\EventDispatcher\EventDispatcherInterface as PsrEventDispatcherInterface;
-if (\interface_exists(\_PhpScoper279cf54b77ad\Psr\EventDispatcher\EventDispatcherInterface::class)) {
+use _PhpScoper21763e6c7ac4\Psr\EventDispatcher\EventDispatcherInterface as PsrEventDispatcherInterface;
+if (\interface_exists(\_PhpScoper21763e6c7ac4\Psr\EventDispatcher\EventDispatcherInterface::class)) {
     /**
      * Allows providing hooks on domain-specific lifecycles by dispatching events.
      */
-    interface EventDispatcherInterface extends \_PhpScoper279cf54b77ad\Psr\EventDispatcher\EventDispatcherInterface
+    interface EventDispatcherInterface extends \_PhpScoper21763e6c7ac4\Psr\EventDispatcher\EventDispatcherInterface
     {
         /**
          * Dispatches an event to all registered listeners.

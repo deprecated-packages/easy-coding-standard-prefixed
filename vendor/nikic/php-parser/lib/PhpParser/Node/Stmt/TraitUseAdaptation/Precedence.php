@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper279cf54b77ad\PhpParser\Node\Stmt\TraitUseAdaptation;
+namespace _PhpScoper21763e6c7ac4\PhpParser\Node\Stmt\TraitUseAdaptation;
 
-use _PhpScoper279cf54b77ad\PhpParser\Node;
-class Precedence extends \_PhpScoper279cf54b77ad\PhpParser\Node\Stmt\TraitUseAdaptation
+use _PhpScoper21763e6c7ac4\PhpParser\Node;
+class Precedence extends \_PhpScoper21763e6c7ac4\PhpParser\Node\Stmt\TraitUseAdaptation
 {
     /** @var Node\Name[] Overwritten traits */
     public $insteadof;
@@ -16,11 +16,11 @@ class Precedence extends \_PhpScoper279cf54b77ad\PhpParser\Node\Stmt\TraitUseAda
      * @param Node\Name[]            $insteadof   Overwritten traits
      * @param array                  $attributes  Additional attributes
      */
-    public function __construct(\_PhpScoper279cf54b77ad\PhpParser\Node\Name $trait, $method, array $insteadof, array $attributes = [])
+    public function __construct(\_PhpScoper21763e6c7ac4\PhpParser\Node\Name $trait, $method, array $insteadof, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->trait = $trait;
-        $this->method = \is_string($method) ? new \_PhpScoper279cf54b77ad\PhpParser\Node\Identifier($method) : $method;
+        $this->method = \is_string($method) ? new \_PhpScoper21763e6c7ac4\PhpParser\Node\Identifier($method) : $method;
         $this->insteadof = $insteadof;
     }
     public function getSubNodeNames() : array

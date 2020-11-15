@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper279cf54b77ad\Symfony\Component\OptionsResolver\Exception;
+namespace _PhpScoper21763e6c7ac4\Symfony\Component\OptionsResolver\Exception;
 
 /**
  * Thrown when the value of an option does not match its validation rules.
@@ -17,6 +17,6 @@ namespace _PhpScoper279cf54b77ad\Symfony\Component\OptionsResolver\Exception;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class InvalidOptionsException extends \_PhpScoper279cf54b77ad\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException
+class InvalidOptionsException extends \_PhpScoper21763e6c7ac4\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException
 {
 }

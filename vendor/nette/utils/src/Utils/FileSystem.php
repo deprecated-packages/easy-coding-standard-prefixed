@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper279cf54b77ad\Nette\Utils;
+namespace _PhpScoper21763e6c7ac4\Nette\Utils;
 
-use _PhpScoper279cf54b77ad\Nette;
+use _PhpScoper21763e6c7ac4\Nette;
 /**
  * File system tool.
  */
@@ -22,7 +22,7 @@ final class FileSystem
     {
         if (!\is_dir($dir) && !@\mkdir($dir, $mode, \true) && !\is_dir($dir)) {
             // @ - dir may already exist
-            throw new \_PhpScoper279cf54b77ad\Nette\IOException("Unable to create directory '{$dir}'. " . \_PhpScoper279cf54b77ad\Nette\Utils\Helpers::getLastError());
+            throw new \_PhpScoper21763e6c7ac4\Nette\IOException("Unable to create directory '{$dir}'. " . \_PhpScoper21763e6c7ac4\Nette\Utils\Helpers::getLastError());
         }
     }
     /**
@@ -32,9 +32,9 @@ final class FileSystem
     public static function copy(string $source, string $dest, bool $overwrite = \true) : void
     {
         if (\stream_is_local($source) && !\file_exists($source)) {
-            throw new \_PhpScoper279cf54b77ad\Nette\IOException("File or directory '{$source}' not found.");
+            throw new \_PhpScoper21763e6c7ac4\Nette\IOException("File or directory '{$source}' not found.");
         } elseif (!$overwrite && \file_exists($dest)) {
-            throw new \_PhpScoper279cf54b77ad\Nette\InvalidStateException("File or directory '{$dest}' already exists.");
+            throw new \_PhpScoper21763e6c7ac4\Nette\InvalidStateException("File or directory '{$dest}' already exists.");
         } elseif (\is_dir($source)) {
             static::createDir($dest);
             foreach (new \FilesystemIterator($dest) as $item) {
@@ -51,7 +51,7 @@ final class FileSystem
             static::createDir(\dirname($dest));
             if (($s = @\fopen($source, 'rb')) && ($d = @\fopen($dest, 'wb')) && @\stream_copy_to_stream($s, $d) === \false) {
                 // @ is escalated to exception
-                throw new \_PhpScoper279cf54b77ad\Nette\IOException("Unable to copy file '{$source}' to '{$dest}'. " . \_PhpScoper279cf54b77ad\Nette\Utils\Helpers::getLastError());
+                throw new \_PhpScoper21763e6c7ac4\Nette\IOException("Unable to copy file '{$source}' to '{$dest}'. " . \_PhpScoper21763e6c7ac4\Nette\Utils\Helpers::getLastError());
             }
         }
     }
@@ -65,7 +65,7 @@ final class FileSystem
             $func = \DIRECTORY_SEPARATOR === '\\' && \is_dir($path) ? 'rmdir' : 'unlink';
             if (!@$func($path)) {
                 // @ is escalated to exception
-                throw new \_PhpScoper279cf54b77ad\Nette\IOException("Unable to delete '{$path}'. " . \_PhpScoper279cf54b77ad\Nette\Utils\Helpers::getLastError());
+                throw new \_PhpScoper21763e6c7ac4\Nette\IOException("Unable to delete '{$path}'. " . \_PhpScoper21763e6c7ac4\Nette\Utils\Helpers::getLastError());
             }
         } elseif (\is_dir($path)) {
             foreach (new \FilesystemIterator($path) as $item) {
@@ -73,7 +73,7 @@ final class FileSystem
             }
             if (!@\rmdir($path)) {
                 // @ is escalated to exception
-                throw new \_PhpScoper279cf54b77ad\Nette\IOException("Unable to delete directory '{$path}'. " . \_PhpScoper279cf54b77ad\Nette\Utils\Helpers::getLastError());
+                throw new \_PhpScoper21763e6c7ac4\Nette\IOException("Unable to delete directory '{$path}'. " . \_PhpScoper21763e6c7ac4\Nette\Utils\Helpers::getLastError());
             }
         }
     }
@@ -85,9 +85,9 @@ final class FileSystem
     public static function rename(string $name, string $newName, bool $overwrite = \true) : void
     {
         if (!$overwrite && \file_exists($newName)) {
-            throw new \_PhpScoper279cf54b77ad\Nette\InvalidStateException("File or directory '{$newName}' already exists.");
+            throw new \_PhpScoper21763e6c7ac4\Nette\InvalidStateException("File or directory '{$newName}' already exists.");
         } elseif (!\file_exists($name)) {
-            throw new \_PhpScoper279cf54b77ad\Nette\IOException("File or directory '{$name}' not found.");
+            throw new \_PhpScoper21763e6c7ac4\Nette\IOException("File or directory '{$name}' not found.");
         } else {
             static::createDir(\dirname($newName));
             if (\realpath($name) !== \realpath($newName)) {
@@ -95,7 +95,7 @@ final class FileSystem
             }
             if (!@\rename($name, $newName)) {
                 // @ is escalated to exception
-                throw new \_PhpScoper279cf54b77ad\Nette\IOException("Unable to rename file or directory '{$name}' to '{$newName}'. " . \_PhpScoper279cf54b77ad\Nette\Utils\Helpers::getLastError());
+                throw new \_PhpScoper21763e6c7ac4\Nette\IOException("Unable to rename file or directory '{$name}' to '{$newName}'. " . \_PhpScoper21763e6c7ac4\Nette\Utils\Helpers::getLastError());
             }
         }
     }
@@ -108,7 +108,7 @@ final class FileSystem
         $content = @\file_get_contents($file);
         // @ is escalated to exception
         if ($content === \false) {
-            throw new \_PhpScoper279cf54b77ad\Nette\IOException("Unable to read file '{$file}'. " . \_PhpScoper279cf54b77ad\Nette\Utils\Helpers::getLastError());
+            throw new \_PhpScoper21763e6c7ac4\Nette\IOException("Unable to read file '{$file}'. " . \_PhpScoper21763e6c7ac4\Nette\Utils\Helpers::getLastError());
         }
         return $content;
     }
@@ -121,11 +121,11 @@ final class FileSystem
         static::createDir(\dirname($file));
         if (@\file_put_contents($file, $content) === \false) {
             // @ is escalated to exception
-            throw new \_PhpScoper279cf54b77ad\Nette\IOException("Unable to write file '{$file}'. " . \_PhpScoper279cf54b77ad\Nette\Utils\Helpers::getLastError());
+            throw new \_PhpScoper21763e6c7ac4\Nette\IOException("Unable to write file '{$file}'. " . \_PhpScoper21763e6c7ac4\Nette\Utils\Helpers::getLastError());
         }
         if ($mode !== null && !@\chmod($file, $mode)) {
             // @ is escalated to exception
-            throw new \_PhpScoper279cf54b77ad\Nette\IOException("Unable to chmod file '{$file}'. " . \_PhpScoper279cf54b77ad\Nette\Utils\Helpers::getLastError());
+            throw new \_PhpScoper21763e6c7ac4\Nette\IOException("Unable to chmod file '{$file}'. " . \_PhpScoper21763e6c7ac4\Nette\Utils\Helpers::getLastError());
         }
     }
     /**

@@ -25,7 +25,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper279cf54b77ad\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper21763e6c7ac4\Symfony\Component\OptionsResolver\Options;
 /**
  * Fixer for rules defined in PSR2 ¶4.3, ¶4.5.
  *
@@ -68,7 +68,7 @@ class Sample
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('elements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('elements', 'The structural elements to fix (PHP >= 7.1 required for `const`).'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(['property', 'method', 'const'])])->setNormalizer(static function (\_PhpScoper279cf54b77ad\Symfony\Component\OptionsResolver\Options $options, $value) {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('elements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('elements', 'The structural elements to fix (PHP >= 7.1 required for `const`).'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(['property', 'method', 'const'])])->setNormalizer(static function (\_PhpScoper21763e6c7ac4\Symfony\Component\OptionsResolver\Options $options, $value) {
             if (\PHP_VERSION_ID < 70100 && \in_array('const', $value, \true)) {
                 throw new \PhpCsFixer\FixerConfiguration\InvalidOptionsForEnvException('"const" option can only be enabled with PHP 7.1+.');
             }

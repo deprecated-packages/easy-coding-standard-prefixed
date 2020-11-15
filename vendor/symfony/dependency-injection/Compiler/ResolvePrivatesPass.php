@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper279cf54b77ad\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper21763e6c7ac4\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper279cf54b77ad\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper21763e6c7ac4\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolvePrivatesPass implements \_PhpScoper279cf54b77ad\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolvePrivatesPass implements \_PhpScoper21763e6c7ac4\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoper279cf54b77ad\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoper21763e6c7ac4\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         foreach ($container->getDefinitions() as $id => $definition) {
             if ($definition->isPrivate()) {
