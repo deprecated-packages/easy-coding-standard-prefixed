@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper207eb8f99af3\PhpParser\Node\Expr\AssignOp;
+namespace _PhpScoper49c742f5a4ee\PhpParser\Node\Expr\AssignOp;
 
-use _PhpScoper207eb8f99af3\PhpParser\Node\Expr\AssignOp;
-class Pow extends \_PhpScoper207eb8f99af3\PhpParser\Node\Expr\AssignOp
+use _PhpScoper49c742f5a4ee\PhpParser\Node\Expr\AssignOp;
+class Pow extends \_PhpScoper49c742f5a4ee\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {

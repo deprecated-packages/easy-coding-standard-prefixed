@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper207eb8f99af3\PhpParser\Node;
+namespace _PhpScoper49c742f5a4ee\PhpParser\Node;
 
-use _PhpScoper207eb8f99af3\PhpParser\NodeAbstract;
-class Param extends \_PhpScoper207eb8f99af3\PhpParser\NodeAbstract
+use _PhpScoper49c742f5a4ee\PhpParser\NodeAbstract;
+class Param extends \_PhpScoper49c742f5a4ee\PhpParser\NodeAbstract
 {
     /** @var null|Identifier|Name|NullableType|UnionType Type declaration */
     public $type;
@@ -29,10 +29,10 @@ class Param extends \_PhpScoper207eb8f99af3\PhpParser\NodeAbstract
      * @param array                                              $flags      Optional visibility flags
      * @param array                                              $attributes Additional attributes
      */
-    public function __construct($var, \_PhpScoper207eb8f99af3\PhpParser\Node\Expr $default = null, $type = null, bool $byRef = \false, bool $variadic = \false, array $attributes = [], int $flags = 0)
+    public function __construct($var, \_PhpScoper49c742f5a4ee\PhpParser\Node\Expr $default = null, $type = null, bool $byRef = \false, bool $variadic = \false, array $attributes = [], int $flags = 0)
     {
         $this->attributes = $attributes;
-        $this->type = \is_string($type) ? new \_PhpScoper207eb8f99af3\PhpParser\Node\Identifier($type) : $type;
+        $this->type = \is_string($type) ? new \_PhpScoper49c742f5a4ee\PhpParser\Node\Identifier($type) : $type;
         $this->byRef = $byRef;
         $this->variadic = $variadic;
         $this->var = $var;

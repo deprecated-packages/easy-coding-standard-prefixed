@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper207eb8f99af3\Symfony\Component\Mime\Tests;
+namespace _PhpScoper49c742f5a4ee\Symfony\Component\Mime\Tests;
 
-use _PhpScoper207eb8f99af3\Symfony\Component\Mime\FileBinaryMimeTypeGuesser;
-use _PhpScoper207eb8f99af3\Symfony\Component\Mime\MimeTypeGuesserInterface;
-class FileBinaryMimeTypeGuesserTest extends \_PhpScoper207eb8f99af3\Symfony\Component\Mime\Tests\AbstractMimeTypeGuesserTest
+use _PhpScoper49c742f5a4ee\Symfony\Component\Mime\FileBinaryMimeTypeGuesser;
+use _PhpScoper49c742f5a4ee\Symfony\Component\Mime\MimeTypeGuesserInterface;
+class FileBinaryMimeTypeGuesserTest extends \_PhpScoper49c742f5a4ee\Symfony\Component\Mime\Tests\AbstractMimeTypeGuesserTest
 {
-    protected function getGuesser() : \_PhpScoper207eb8f99af3\Symfony\Component\Mime\MimeTypeGuesserInterface
+    protected function getGuesser() : \_PhpScoper49c742f5a4ee\Symfony\Component\Mime\MimeTypeGuesserInterface
     {
-        return new \_PhpScoper207eb8f99af3\Symfony\Component\Mime\FileBinaryMimeTypeGuesser();
+        return new \_PhpScoper49c742f5a4ee\Symfony\Component\Mime\FileBinaryMimeTypeGuesser();
     }
 }

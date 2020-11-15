@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Provider;
 
-use _PhpScoper207eb8f99af3\Nette\Utils\Strings;
+use _PhpScoper49c742f5a4ee\Nette\Utils\Strings;
 use Symplify\SetConfigResolver\Contract\SetProviderInterface;
 use Symplify\SetConfigResolver\Exception\SetNotFoundException;
 use Symplify\SetConfigResolver\ValueObject\Set;
@@ -38,7 +38,7 @@ abstract class AbstractSetProvider implements \Symplify\SetConfigResolver\Contra
             foreach ($sets as $set) {
                 // possible bug for PHAR files, see https://bugs.php.net/bug.php?id=52769
                 // this is very tricky to handle, see https://stackoverflow.com/questions/27838025/how-to-get-a-phar-file-real-directory-within-the-phar-file-code
-                $setUniqueId = $this->resolveSetUniquePathId($set->getSetFileInfo()->getPathname());
+                $setUniqueId = $this->resolveSetUniquePathId($set->getSetPathname());
                 $desiredSetUniqueId = $this->resolveSetUniquePathId($desiredSetName);
                 if ($setUniqueId !== $desiredSetUniqueId) {
                     continue;
@@ -52,7 +52,7 @@ abstract class AbstractSetProvider implements \Symplify\SetConfigResolver\Contra
     }
     private function resolveSetUniquePathId(string $setPath) : string
     {
-        $setPath = \_PhpScoper207eb8f99af3\Nette\Utils\Strings::after($setPath, \DIRECTORY_SEPARATOR, -2);
+        $setPath = \_PhpScoper49c742f5a4ee\Nette\Utils\Strings::after($setPath, \DIRECTORY_SEPARATOR, -2);
         if ($setPath === null) {
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }

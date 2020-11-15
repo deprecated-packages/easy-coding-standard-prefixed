@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper207eb8f99af3\Symfony\Component\HttpFoundation\Session\Storage;
+namespace _PhpScoper49c742f5a4ee\Symfony\Component\HttpFoundation\Session\Storage;
 
-use _PhpScoper207eb8f99af3\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use _PhpScoper49c742f5a4ee\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * Metadata container.
  *
@@ -18,7 +18,7 @@ use _PhpScoper207eb8f99af3\Symfony\Component\HttpFoundation\Session\SessionBagIn
  *
  * @author Drak <drak@zikula.org>
  */
-class MetadataBag implements \_PhpScoper207eb8f99af3\Symfony\Component\HttpFoundation\Session\SessionBagInterface
+class MetadataBag implements \_PhpScoper49c742f5a4ee\Symfony\Component\HttpFoundation\Session\SessionBagInterface
 {
     const CREATED = 'c';
     const UPDATED = 'u';

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper207eb8f99af3\PhpParser\Node\Stmt;
+namespace _PhpScoper49c742f5a4ee\PhpParser\Node\Stmt;
 
-use _PhpScoper207eb8f99af3\PhpParser\Node;
-class Continue_ extends \_PhpScoper207eb8f99af3\PhpParser\Node\Stmt
+use _PhpScoper49c742f5a4ee\PhpParser\Node;
+class Continue_ extends \_PhpScoper49c742f5a4ee\PhpParser\Node\Stmt
 {
     /** @var null|Node\Expr Number of loops to continue */
     public $num;
@@ -14,7 +14,7 @@ class Continue_ extends \_PhpScoper207eb8f99af3\PhpParser\Node\Stmt
      * @param null|Node\Expr $num        Number of loops to continue
      * @param array          $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper207eb8f99af3\PhpParser\Node\Expr $num = null, array $attributes = [])
+    public function __construct(\_PhpScoper49c742f5a4ee\PhpParser\Node\Expr $num = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->num = $num;
