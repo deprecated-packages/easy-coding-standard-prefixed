@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Printer\CodeSamplePrinter;
 
-use _PhpScopera189153e1f79\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
+use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
 use Symplify\CodingStandard\Exception\NotImplementedYetException;
 use Symplify\PackageBuilder\Neon\NeonPrinter;
 use Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper;
@@ -23,7 +23,7 @@ final class ConfiguredCodeSamplePrinter
      * @var SmartPhpConfigPrinter
      */
     private $smartPhpConfigPrinter;
-    public function __construct(\Symplify\PackageBuilder\Neon\NeonPrinter $neonPrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \_PhpScopera189153e1f79\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
+    public function __construct(\Symplify\PackageBuilder\Neon\NeonPrinter $neonPrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
     {
         $this->neonPrinter = $neonPrinter;
         $this->markdownCodeWrapper = $markdownCodeWrapper;

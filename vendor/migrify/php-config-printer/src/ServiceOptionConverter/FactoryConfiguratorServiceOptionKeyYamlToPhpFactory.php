@@ -1,29 +1,29 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera189153e1f79\Migrify\PhpConfigPrinter\ServiceOptionConverter;
+namespace _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScopera189153e1f79\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use _PhpScopera189153e1f79\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScopera189153e1f79\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScopera189153e1f79\PhpParser\Node\Expr\MethodCall;
-final class FactoryConfiguratorServiceOptionKeyYamlToPhpFactory implements \_PhpScopera189153e1f79\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoper64a921a5401b\PhpParser\Node\Expr\MethodCall;
+final class FactoryConfiguratorServiceOptionKeyYamlToPhpFactory implements \_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\_PhpScopera189153e1f79\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScopera189153e1f79\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScopera189153e1f79\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper64a921a5401b\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper64a921a5401b\PhpParser\Node\Expr\MethodCall
     {
         $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($yaml);
-        return new \_PhpScopera189153e1f79\PhpParser\Node\Expr\MethodCall($methodCall, 'factory', $args);
+        return new \_PhpScoper64a921a5401b\PhpParser\Node\Expr\MethodCall($methodCall, 'factory', $args);
     }
     public function isMatch($key, $values) : bool
     {
-        return \in_array($key, [\_PhpScopera189153e1f79\Migrify\PhpConfigPrinter\ValueObject\YamlKey::FACTORY, \_PhpScopera189153e1f79\Migrify\PhpConfigPrinter\ValueObject\YamlKey::CONFIGURATOR], \true);
+        return \in_array($key, [\_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\YamlKey::FACTORY, \_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\YamlKey::CONFIGURATOR], \true);
     }
 }

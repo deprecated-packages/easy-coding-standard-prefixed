@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera189153e1f79\Migrify\PhpConfigPrinter\Contract;
+namespace _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\Contract;
 
-use _PhpScopera189153e1f79\PhpParser\Node\Stmt\Expression;
+use _PhpScoper64a921a5401b\PhpParser\Node\Stmt\Expression;
 interface NestedCaseConverterInterface
 {
     public function match(string $rootKey, $subKey) : bool;
-    public function convertToMethodCall($key, $values) : \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Expression;
+    public function convertToMethodCall($key, $values) : \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Expression;
 }

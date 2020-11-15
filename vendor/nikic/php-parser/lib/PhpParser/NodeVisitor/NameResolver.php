@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera189153e1f79\PhpParser\NodeVisitor;
+namespace _PhpScoper64a921a5401b\PhpParser\NodeVisitor;
 
-use _PhpScopera189153e1f79\PhpParser\ErrorHandler;
-use _PhpScopera189153e1f79\PhpParser\NameContext;
-use _PhpScopera189153e1f79\PhpParser\Node;
-use _PhpScopera189153e1f79\PhpParser\Node\Expr;
-use _PhpScopera189153e1f79\PhpParser\Node\Name;
-use _PhpScopera189153e1f79\PhpParser\Node\Name\FullyQualified;
-use _PhpScopera189153e1f79\PhpParser\Node\Stmt;
-use _PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract;
-class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
+use _PhpScoper64a921a5401b\PhpParser\ErrorHandler;
+use _PhpScoper64a921a5401b\PhpParser\NameContext;
+use _PhpScoper64a921a5401b\PhpParser\Node;
+use _PhpScoper64a921a5401b\PhpParser\Node\Expr;
+use _PhpScoper64a921a5401b\PhpParser\Node\Name;
+use _PhpScoper64a921a5401b\PhpParser\Node\Name\FullyQualified;
+use _PhpScoper64a921a5401b\PhpParser\Node\Stmt;
+use _PhpScoper64a921a5401b\PhpParser\NodeVisitorAbstract;
+class NameResolver extends \_PhpScoper64a921a5401b\PhpParser\NodeVisitorAbstract
 {
     /** @var NameContext Naming context */
     protected $nameContext;
@@ -32,9 +32,9 @@ class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
      * @param ErrorHandler|null $errorHandler Error handler
      * @param array $options Options
      */
-    public function __construct(\_PhpScopera189153e1f79\PhpParser\ErrorHandler $errorHandler = null, array $options = [])
+    public function __construct(\_PhpScoper64a921a5401b\PhpParser\ErrorHandler $errorHandler = null, array $options = [])
     {
-        $this->nameContext = new \_PhpScopera189153e1f79\PhpParser\NameContext($errorHandler ?? new \_PhpScopera189153e1f79\PhpParser\ErrorHandler\Throwing());
+        $this->nameContext = new \_PhpScoper64a921a5401b\PhpParser\NameContext($errorHandler ?? new \_PhpScoper64a921a5401b\PhpParser\ErrorHandler\Throwing());
         $this->preserveOriginalNames = $options['preserveOriginalNames'] ?? \false;
         $this->replaceNodes = $options['replaceNodes'] ?? \true;
     }
@@ -43,7 +43,7 @@ class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
      *
      * @return NameContext
      */
-    public function getNameContext() : \_PhpScopera189153e1f79\PhpParser\NameContext
+    public function getNameContext() : \_PhpScoper64a921a5401b\PhpParser\NameContext
     {
         return $this->nameContext;
     }
@@ -52,19 +52,19 @@ class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
         $this->nameContext->startNamespace();
         return null;
     }
-    public function enterNode(\_PhpScopera189153e1f79\PhpParser\Node $node)
+    public function enterNode(\_PhpScoper64a921a5401b\PhpParser\Node $node)
     {
-        if ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Namespace_) {
+        if ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Namespace_) {
             $this->nameContext->startNamespace($node->name);
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Use_) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Use_) {
             foreach ($node->uses as $use) {
                 $this->addAlias($use, $node->type, null);
             }
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\GroupUse) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\GroupUse) {
             foreach ($node->uses as $use) {
                 $this->addAlias($use, $node->type, $node->prefix);
             }
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Class_) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Class_) {
             if (null !== $node->extends) {
                 $node->extends = $this->resolveClassName($node->extends);
             }
@@ -74,41 +74,41 @@ class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
             if (null !== $node->name) {
                 $this->addNamespacedName($node);
             }
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Interface_) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Interface_) {
             foreach ($node->extends as &$interface) {
                 $interface = $this->resolveClassName($interface);
             }
             $this->addNamespacedName($node);
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Trait_) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Trait_) {
             $this->addNamespacedName($node);
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Function_) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Function_) {
             $this->addNamespacedName($node);
             $this->resolveSignature($node);
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\ClassMethod || $node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Expr\Closure || $node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Expr\ArrowFunction) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\ClassMethod || $node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Expr\Closure || $node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Expr\ArrowFunction) {
             $this->resolveSignature($node);
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Property) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Property) {
             if (null !== $node->type) {
                 $node->type = $this->resolveType($node->type);
             }
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Const_) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Const_) {
             foreach ($node->consts as $const) {
                 $this->addNamespacedName($const);
             }
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Expr\StaticCall || $node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Expr\StaticPropertyFetch || $node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Expr\ClassConstFetch || $node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Expr\New_ || $node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Expr\Instanceof_) {
-            if ($node->class instanceof \_PhpScopera189153e1f79\PhpParser\Node\Name) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Expr\StaticCall || $node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Expr\StaticPropertyFetch || $node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Expr\ClassConstFetch || $node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Expr\New_ || $node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Expr\Instanceof_) {
+            if ($node->class instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Name) {
                 $node->class = $this->resolveClassName($node->class);
             }
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Catch_) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Catch_) {
             foreach ($node->types as &$type) {
                 $type = $this->resolveClassName($type);
             }
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Expr\FuncCall) {
-            if ($node->name instanceof \_PhpScopera189153e1f79\PhpParser\Node\Name) {
-                $node->name = $this->resolveName($node->name, \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION);
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Expr\FuncCall) {
+            if ($node->name instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Name) {
+                $node->name = $this->resolveName($node->name, \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION);
             }
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Expr\ConstFetch) {
-            $node->name = $this->resolveName($node->name, \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT);
-        } elseif ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\TraitUse) {
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Expr\ConstFetch) {
+            $node->name = $this->resolveName($node->name, \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT);
+        } elseif ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\TraitUse) {
             foreach ($node->traits as &$trait) {
                 $trait = $this->resolveClassName($trait);
             }
@@ -116,7 +116,7 @@ class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
                 if (null !== $adaptation->trait) {
                     $adaptation->trait = $this->resolveClassName($adaptation->trait);
                 }
-                if ($adaptation instanceof \_PhpScopera189153e1f79\PhpParser\Node\Stmt\TraitUseAdaptation\Precedence) {
+                if ($adaptation instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\TraitUseAdaptation\Precedence) {
                     foreach ($adaptation->insteadof as &$insteadof) {
                         $insteadof = $this->resolveClassName($insteadof);
                     }
@@ -125,10 +125,10 @@ class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
         }
         return null;
     }
-    private function addAlias(\_PhpScopera189153e1f79\PhpParser\Node\Stmt\UseUse $use, $type, \_PhpScopera189153e1f79\PhpParser\Node\Name $prefix = null)
+    private function addAlias(\_PhpScoper64a921a5401b\PhpParser\Node\Stmt\UseUse $use, $type, \_PhpScoper64a921a5401b\PhpParser\Node\Name $prefix = null)
     {
         // Add prefix for group uses
-        $name = $prefix ? \_PhpScopera189153e1f79\PhpParser\Node\Name::concat($prefix, $use->name) : $use->name;
+        $name = $prefix ? \_PhpScoper64a921a5401b\PhpParser\Node\Name::concat($prefix, $use->name) : $use->name;
         // Type is determined either by individual element or whole use declaration
         $type |= $use->type;
         $this->nameContext->addAlias($name, (string) $use->getAlias(), $type, $use->getAttributes());
@@ -143,14 +143,14 @@ class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
     }
     private function resolveType($node)
     {
-        if ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\Name) {
+        if ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\Name) {
             return $this->resolveClassName($node);
         }
-        if ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\NullableType) {
+        if ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\NullableType) {
             $node->type = $this->resolveType($node->type);
             return $node;
         }
-        if ($node instanceof \_PhpScopera189153e1f79\PhpParser\Node\UnionType) {
+        if ($node instanceof \_PhpScoper64a921a5401b\PhpParser\Node\UnionType) {
             foreach ($node->types as &$type) {
                 $type = $this->resolveType($type);
             }
@@ -166,14 +166,14 @@ class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
      *
      * @return Name Resolved name, or original name with attribute
      */
-    protected function resolveName(\_PhpScopera189153e1f79\PhpParser\Node\Name $name, int $type) : \_PhpScopera189153e1f79\PhpParser\Node\Name
+    protected function resolveName(\_PhpScoper64a921a5401b\PhpParser\Node\Name $name, int $type) : \_PhpScoper64a921a5401b\PhpParser\Node\Name
     {
         if (!$this->replaceNodes) {
             $resolvedName = $this->nameContext->getResolvedName($name, $type);
             if (null !== $resolvedName) {
                 $name->setAttribute('resolvedName', $resolvedName);
             } else {
-                $name->setAttribute('namespacedName', \_PhpScopera189153e1f79\PhpParser\Node\Name\FullyQualified::concat($this->nameContext->getNamespace(), $name, $name->getAttributes()));
+                $name->setAttribute('namespacedName', \_PhpScoper64a921a5401b\PhpParser\Node\Name\FullyQualified::concat($this->nameContext->getNamespace(), $name, $name->getAttributes()));
             }
             return $name;
         }
@@ -189,15 +189,15 @@ class NameResolver extends \_PhpScopera189153e1f79\PhpParser\NodeVisitorAbstract
         }
         // unqualified names inside a namespace cannot be resolved at compile-time
         // add the namespaced version of the name as an attribute
-        $name->setAttribute('namespacedName', \_PhpScopera189153e1f79\PhpParser\Node\Name\FullyQualified::concat($this->nameContext->getNamespace(), $name, $name->getAttributes()));
+        $name->setAttribute('namespacedName', \_PhpScoper64a921a5401b\PhpParser\Node\Name\FullyQualified::concat($this->nameContext->getNamespace(), $name, $name->getAttributes()));
         return $name;
     }
-    protected function resolveClassName(\_PhpScopera189153e1f79\PhpParser\Node\Name $name)
+    protected function resolveClassName(\_PhpScoper64a921a5401b\PhpParser\Node\Name $name)
     {
-        return $this->resolveName($name, \_PhpScopera189153e1f79\PhpParser\Node\Stmt\Use_::TYPE_NORMAL);
+        return $this->resolveName($name, \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Use_::TYPE_NORMAL);
     }
-    protected function addNamespacedName(\_PhpScopera189153e1f79\PhpParser\Node $node)
+    protected function addNamespacedName(\_PhpScoper64a921a5401b\PhpParser\Node $node)
     {
-        $node->namespacedName = \_PhpScopera189153e1f79\PhpParser\Node\Name::concat($this->nameContext->getNamespace(), (string) $node->name);
+        $node->namespacedName = \_PhpScoper64a921a5401b\PhpParser\Node\Name::concat($this->nameContext->getNamespace(), (string) $node->name);
     }
 }
