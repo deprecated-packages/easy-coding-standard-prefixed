@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper70072c07b02b\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScopercb576ca159b5\Symfony\Component\HttpKernel\DataCollector;
 
 /**
  * LateDataCollectorInterface.

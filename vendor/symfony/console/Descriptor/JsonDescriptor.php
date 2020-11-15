@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper70072c07b02b\Symfony\Component\Console\Descriptor;
+namespace _PhpScopercb576ca159b5\Symfony\Component\Console\Descriptor;
 
-use _PhpScoper70072c07b02b\Symfony\Component\Console\Application;
-use _PhpScoper70072c07b02b\Symfony\Component\Console\Command\Command;
-use _PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputOption;
+use _PhpScopercb576ca159b5\Symfony\Component\Console\Application;
+use _PhpScopercb576ca159b5\Symfony\Component\Console\Command\Command;
+use _PhpScopercb576ca159b5\Symfony\Component\Console\Input\InputArgument;
+use _PhpScopercb576ca159b5\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScopercb576ca159b5\Symfony\Component\Console\Input\InputOption;
 /**
  * JSON descriptor.
  *
@@ -22,43 +22,43 @@ use _PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputOption;
  *
  * @internal
  */
-class JsonDescriptor extends \_PhpScoper70072c07b02b\Symfony\Component\Console\Descriptor\Descriptor
+class JsonDescriptor extends \_PhpScopercb576ca159b5\Symfony\Component\Console\Descriptor\Descriptor
 {
     /**
      * {@inheritdoc}
      */
-    protected function describeInputArgument(\_PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputArgument $argument, array $options = [])
+    protected function describeInputArgument(\_PhpScopercb576ca159b5\Symfony\Component\Console\Input\InputArgument $argument, array $options = [])
     {
         $this->writeData($this->getInputArgumentData($argument), $options);
     }
     /**
      * {@inheritdoc}
      */
-    protected function describeInputOption(\_PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputOption $option, array $options = [])
+    protected function describeInputOption(\_PhpScopercb576ca159b5\Symfony\Component\Console\Input\InputOption $option, array $options = [])
     {
         $this->writeData($this->getInputOptionData($option), $options);
     }
     /**
      * {@inheritdoc}
      */
-    protected function describeInputDefinition(\_PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputDefinition $definition, array $options = [])
+    protected function describeInputDefinition(\_PhpScopercb576ca159b5\Symfony\Component\Console\Input\InputDefinition $definition, array $options = [])
     {
         $this->writeData($this->getInputDefinitionData($definition), $options);
     }
     /**
      * {@inheritdoc}
      */
-    protected function describeCommand(\_PhpScoper70072c07b02b\Symfony\Component\Console\Command\Command $command, array $options = [])
+    protected function describeCommand(\_PhpScopercb576ca159b5\Symfony\Component\Console\Command\Command $command, array $options = [])
     {
         $this->writeData($this->getCommandData($command), $options);
     }
     /**
      * {@inheritdoc}
      */
-    protected function describeApplication(\_PhpScoper70072c07b02b\Symfony\Component\Console\Application $application, array $options = [])
+    protected function describeApplication(\_PhpScopercb576ca159b5\Symfony\Component\Console\Application $application, array $options = [])
     {
         $describedNamespace = isset($options['namespace']) ? $options['namespace'] : null;
-        $description = new \_PhpScoper70072c07b02b\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace, \true);
+        $description = new \_PhpScopercb576ca159b5\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace, \true);
         $commands = [];
         foreach ($description->getCommands() as $command) {
             $commands[] = $this->getCommandData($command);
@@ -86,15 +86,15 @@ class JsonDescriptor extends \_PhpScoper70072c07b02b\Symfony\Component\Console\D
         $flags = isset($options['json_encoding']) ? $options['json_encoding'] : 0;
         $this->write(\json_encode($data, $flags));
     }
-    private function getInputArgumentData(\_PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputArgument $argument) : array
+    private function getInputArgumentData(\_PhpScopercb576ca159b5\Symfony\Component\Console\Input\InputArgument $argument) : array
     {
         return ['name' => $argument->getName(), 'is_required' => $argument->isRequired(), 'is_array' => $argument->isArray(), 'description' => \preg_replace('/\\s*[\\r\\n]\\s*/', ' ', $argument->getDescription()), 'default' => \INF === $argument->getDefault() ? 'INF' : $argument->getDefault()];
     }
-    private function getInputOptionData(\_PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputOption $option) : array
+    private function getInputOptionData(\_PhpScopercb576ca159b5\Symfony\Component\Console\Input\InputOption $option) : array
     {
         return ['name' => '--' . $option->getName(), 'shortcut' => $option->getShortcut() ? '-' . \str_replace('|', '|-', $option->getShortcut()) : '', 'accept_value' => $option->acceptValue(), 'is_value_required' => $option->isValueRequired(), 'is_multiple' => $option->isArray(), 'description' => \preg_replace('/\\s*[\\r\\n]\\s*/', ' ', $option->getDescription()), 'default' => \INF === $option->getDefault() ? 'INF' : $option->getDefault()];
     }
-    private function getInputDefinitionData(\_PhpScoper70072c07b02b\Symfony\Component\Console\Input\InputDefinition $definition) : array
+    private function getInputDefinitionData(\_PhpScopercb576ca159b5\Symfony\Component\Console\Input\InputDefinition $definition) : array
     {
         $inputArguments = [];
         foreach ($definition->getArguments() as $name => $argument) {
@@ -106,7 +106,7 @@ class JsonDescriptor extends \_PhpScoper70072c07b02b\Symfony\Component\Console\D
         }
         return ['arguments' => $inputArguments, 'options' => $inputOptions];
     }
-    private function getCommandData(\_PhpScoper70072c07b02b\Symfony\Component\Console\Command\Command $command) : array
+    private function getCommandData(\_PhpScopercb576ca159b5\Symfony\Component\Console\Command\Command $command) : array
     {
         $command->getSynopsis();
         $command->mergeApplicationDefinition(\false);

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper70072c07b02b\Migrify\MigrifyKernel\Console;
+namespace _PhpScopercb576ca159b5\Migrify\MigrifyKernel\Console;
 
-use _PhpScoper70072c07b02b\Symfony\Component\Console\Command\Command;
+use _PhpScopercb576ca159b5\Symfony\Component\Console\Command\Command;
 final class ConsoleApplicationFactory
 {
     /**
@@ -17,8 +17,8 @@ final class ConsoleApplicationFactory
     {
         $this->commands = $commands;
     }
-    public function create() : \_PhpScoper70072c07b02b\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication
+    public function create() : \_PhpScopercb576ca159b5\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication
     {
-        return new \_PhpScoper70072c07b02b\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication($this->commands);
+        return new \_PhpScopercb576ca159b5\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication($this->commands);
     }
 }

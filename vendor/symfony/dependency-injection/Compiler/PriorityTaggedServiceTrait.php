@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Trait that allows a generic method to find and sort service by priority option in the tag.
  *
@@ -36,10 +36,10 @@ trait PriorityTaggedServiceTrait
      *
      * @return Reference[]
      */
-    private function findAndSortTaggedServices($tagName, \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\ContainerBuilder $container) : array
+    private function findAndSortTaggedServices($tagName, \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\ContainerBuilder $container) : array
     {
         $indexAttribute = $defaultIndexMethod = $needsIndexes = $defaultPriorityMethod = null;
-        if ($tagName instanceof \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
+        if ($tagName instanceof \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
             $indexAttribute = $tagName->getIndexAttribute();
             $defaultIndexMethod = $tagName->getDefaultIndexMethod();
             $needsIndexes = $tagName->needsIndexes();
@@ -57,19 +57,19 @@ trait PriorityTaggedServiceTrait
                 $class = $container->getParameterBag()->resolveValue($class) ?: null;
                 if (($r = $container->getReflectionClass($class)) && $r->hasMethod($defaultPriorityMethod)) {
                     if (!($rm = $r->getMethod($defaultPriorityMethod))->isStatic()) {
-                        throw new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should be static: tag "%s" on service "%s".', $class, $defaultPriorityMethod, $tagName, $serviceId));
+                        throw new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should be static: tag "%s" on service "%s".', $class, $defaultPriorityMethod, $tagName, $serviceId));
                     }
                     if (!$rm->isPublic()) {
-                        throw new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should be public: tag "%s" on service "%s".', $class, $defaultPriorityMethod, $tagName, $serviceId));
+                        throw new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should be public: tag "%s" on service "%s".', $class, $defaultPriorityMethod, $tagName, $serviceId));
                     }
                     $priority = $rm->invoke(null);
                     if (!\is_int($priority)) {
-                        throw new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should return an integer, got %s: tag "%s" on service "%s".', $class, $defaultPriorityMethod, \gettype($priority), $tagName, $serviceId));
+                        throw new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should return an integer, got %s: tag "%s" on service "%s".', $class, $defaultPriorityMethod, \gettype($priority), $tagName, $serviceId));
                     }
                 }
             }
             if (null === $indexAttribute && !$needsIndexes) {
-                $services[$priority][] = new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Reference($serviceId);
+                $services[$priority][] = new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Reference($serviceId);
                 continue;
             }
             if (!$class) {
@@ -77,31 +77,31 @@ trait PriorityTaggedServiceTrait
                 $class = $container->getParameterBag()->resolveValue($class) ?: null;
             }
             if (null !== $indexAttribute && isset($attributes[0][$indexAttribute])) {
-                $services[$priority][$attributes[0][$indexAttribute]] = new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class, \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\ContainerBuilder::EXCEPTION_ON_INVALID_REFERENCE, $attributes[0][$indexAttribute]);
+                $services[$priority][$attributes[0][$indexAttribute]] = new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class, \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\ContainerBuilder::EXCEPTION_ON_INVALID_REFERENCE, $attributes[0][$indexAttribute]);
                 continue;
             }
             if (!$r && !($r = $container->getReflectionClass($class))) {
-                throw new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $serviceId));
+                throw new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $serviceId));
             }
             $class = $r->name;
             if (!$r->hasMethod($defaultIndexMethod)) {
                 if ($needsIndexes) {
-                    $services[$priority][$serviceId] = new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class);
+                    $services[$priority][$serviceId] = new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class);
                     continue;
                 }
-                throw new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" not found: tag "%s" on service "%s" is missing "%s" attribute.', $class, $defaultIndexMethod, $tagName, $serviceId, $indexAttribute));
+                throw new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" not found: tag "%s" on service "%s" is missing "%s" attribute.', $class, $defaultIndexMethod, $tagName, $serviceId, $indexAttribute));
             }
             if (!($rm = $r->getMethod($defaultIndexMethod))->isStatic()) {
-                throw new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should be static: tag "%s" on service "%s" is missing "%s" attribute.', $class, $defaultIndexMethod, $tagName, $serviceId, $indexAttribute));
+                throw new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should be static: tag "%s" on service "%s" is missing "%s" attribute.', $class, $defaultIndexMethod, $tagName, $serviceId, $indexAttribute));
             }
             if (!$rm->isPublic()) {
-                throw new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should be public: tag "%s" on service "%s" is missing "%s" attribute.', $class, $defaultIndexMethod, $tagName, $serviceId, $indexAttribute));
+                throw new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should be public: tag "%s" on service "%s" is missing "%s" attribute.', $class, $defaultIndexMethod, $tagName, $serviceId, $indexAttribute));
             }
             $key = $rm->invoke(null);
             if (!\is_string($key)) {
-                throw new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should return a string, got %s: tag "%s" on service "%s" is missing "%s" attribute.', $class, $defaultIndexMethod, \gettype($key), $tagName, $serviceId, $indexAttribute));
+                throw new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Method "%s::%s()" should return a string, got %s: tag "%s" on service "%s" is missing "%s" attribute.', $class, $defaultIndexMethod, \gettype($key), $tagName, $serviceId, $indexAttribute));
             }
-            $services[$priority][$key] = new \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class, \_PhpScoper70072c07b02b\Symfony\Component\DependencyInjection\ContainerBuilder::EXCEPTION_ON_INVALID_REFERENCE, $key);
+            $services[$priority][$key] = new \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\TypedReference($serviceId, $class, \_PhpScopercb576ca159b5\Symfony\Component\DependencyInjection\ContainerBuilder::EXCEPTION_ON_INVALID_REFERENCE, $key);
         }
         if ($services) {
             \krsort($services);
