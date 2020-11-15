@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\ValueObject;
 
-use _PhpScoperd9c3b46af121\Nette\Utils\Arrays;
-use _PhpScoperd9c3b46af121\Nette\Utils\Strings;
+use _PhpScoper279cf54b77ad\Nette\Utils\Arrays;
+use _PhpScoper279cf54b77ad\Nette\Utils\Strings;
 use Symplify\ComposerJsonManipulator\Sorter\ComposerPackageSorter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -90,6 +90,10 @@ final class ComposerJson
      * @var mixed[]
      */
     private $bin = [];
+    /**
+     * @var string|null
+     */
+    private $type;
     public function __construct()
     {
         $this->composerPackageSorter = new \Symplify\ComposerJsonManipulator\Sorter\ComposerPackageSorter();
@@ -101,6 +105,10 @@ final class ComposerJson
     public function setName(string $name) : void
     {
         $this->name = $name;
+    }
+    public function setType(string $type) : void
+    {
+        $this->type = $type;
     }
     /**
      * @param mixed[] $require
@@ -269,7 +277,7 @@ final class ComposerJson
         if ($this->name === null) {
             return null;
         }
-        return \_PhpScoperd9c3b46af121\Nette\Utils\Strings::after($this->name, '/', -1);
+        return \_PhpScoper279cf54b77ad\Nette\Utils\Strings::after($this->name, '/', -1);
     }
     /**
      * @return string[]
@@ -459,13 +467,17 @@ final class ComposerJson
     {
         return $this->bin;
     }
+    public function getType() : ?string
+    {
+        return $this->type;
+    }
     /**
      * @return string[]
      */
     private function getAutoloadDirectories() : array
     {
         $autoloadDirectories = \array_merge($this->getPsr4AndClassmapDirectories(), $this->getPsr4AndClassmapDevDirectories());
-        return \_PhpScoperd9c3b46af121\Nette\Utils\Arrays::flatten($autoloadDirectories);
+        return \_PhpScoper279cf54b77ad\Nette\Utils\Arrays::flatten($autoloadDirectories);
     }
     /**
      * @return string[]

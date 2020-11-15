@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Argument;
+namespace _PhpScoper279cf54b77ad\Symfony\Component\DependencyInjection\Argument;
 
-use _PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper279cf54b77ad\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper279cf54b77ad\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
@@ -39,8 +39,8 @@ trait ReferenceSetArgumentTrait
     public function setValues(array $values)
     {
         foreach ($values as $k => $v) {
-            if (null !== $v && !$v instanceof \_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Reference) {
-                throw new \_PhpScoperd9c3b46af121\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('A %s must hold only Reference instances, "%s" given.', __CLASS__, \is_object($v) ? \get_class($v) : \gettype($v)));
+            if (null !== $v && !$v instanceof \_PhpScoper279cf54b77ad\Symfony\Component\DependencyInjection\Reference) {
+                throw new \_PhpScoper279cf54b77ad\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('A %s must hold only Reference instances, "%s" given.', __CLASS__, \is_object($v) ? \get_class($v) : \gettype($v)));
             }
         }
         $this->values = $values;

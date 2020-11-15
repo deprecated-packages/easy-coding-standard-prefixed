@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd9c3b46af121\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper279cf54b77ad\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperd9c3b46af121\Psr\SimpleCache\CacheInterface;
-use _PhpScoperd9c3b46af121\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperd9c3b46af121\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperd9c3b46af121\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScoper279cf54b77ad\Psr\SimpleCache\CacheInterface;
+use _PhpScoper279cf54b77ad\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper279cf54b77ad\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper279cf54b77ad\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-16 cache into a PSR-6 one.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Psr16Adapter extends \_PhpScoperd9c3b46af121\Symfony\Component\Cache\Adapter\AbstractAdapter implements \_PhpScoperd9c3b46af121\Symfony\Component\Cache\PruneableInterface, \_PhpScoperd9c3b46af121\Symfony\Component\Cache\ResettableInterface
+class Psr16Adapter extends \_PhpScoper279cf54b77ad\Symfony\Component\Cache\Adapter\AbstractAdapter implements \_PhpScoper279cf54b77ad\Symfony\Component\Cache\PruneableInterface, \_PhpScoper279cf54b77ad\Symfony\Component\Cache\ResettableInterface
 {
     /**
      * @internal
@@ -27,7 +27,7 @@ class Psr16Adapter extends \_PhpScoperd9c3b46af121\Symfony\Component\Cache\Adapt
     protected const NS_SEPARATOR = '_';
     use ProxyTrait;
     private $miss;
-    public function __construct(\_PhpScoperd9c3b46af121\Psr\SimpleCache\CacheInterface $pool, string $namespace = '', int $defaultLifetime = 0)
+    public function __construct(\_PhpScoper279cf54b77ad\Psr\SimpleCache\CacheInterface $pool, string $namespace = '', int $defaultLifetime = 0)
     {
         parent::__construct($namespace, $defaultLifetime);
         $this->pool = $pool;
