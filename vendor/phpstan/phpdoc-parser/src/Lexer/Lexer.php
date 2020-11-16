@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperdf6a0b341030\PHPStan\PhpDocParser\Lexer;
+namespace _PhpScoper3e1e0e5bb8ef\PHPStan\PhpDocParser\Lexer;
 
 /**
  * Implementation based on Nette Tokenizer (New BSD License; https://github.com/nette/tokenizer)

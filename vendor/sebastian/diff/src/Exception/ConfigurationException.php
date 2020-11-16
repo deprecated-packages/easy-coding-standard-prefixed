@@ -9,9 +9,9 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdf6a0b341030\SebastianBergmann\Diff;
+namespace _PhpScoper3e1e0e5bb8ef\SebastianBergmann\Diff;
 
-final class ConfigurationException extends \_PhpScoperdf6a0b341030\SebastianBergmann\Diff\InvalidArgumentException
+final class ConfigurationException extends \_PhpScoper3e1e0e5bb8ef\SebastianBergmann\Diff\InvalidArgumentException
 {
     /**
      * @param string          $option

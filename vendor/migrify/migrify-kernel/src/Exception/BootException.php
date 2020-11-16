@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperdf6a0b341030\Migrify\MigrifyKernel\Exception;
+namespace _PhpScoper3e1e0e5bb8ef\Migrify\MigrifyKernel\Exception;
 
 use Exception;
 final class BootException extends \Exception

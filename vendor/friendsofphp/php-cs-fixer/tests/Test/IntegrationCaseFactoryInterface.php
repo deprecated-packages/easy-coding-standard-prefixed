@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Tests\Test;
 
-use _PhpScoperdf6a0b341030\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper3e1e0e5bb8ef\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -22,5 +22,5 @@ interface IntegrationCaseFactoryInterface
     /**
      * @return IntegrationCase
      */
-    public function create(\_PhpScoperdf6a0b341030\Symfony\Component\Finder\SplFileInfo $file);
+    public function create(\_PhpScoper3e1e0e5bb8ef\Symfony\Component\Finder\SplFileInfo $file);
 }

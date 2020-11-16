@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdf6a0b341030\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper3e1e0e5bb8ef\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoperdf6a0b341030\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper3e1e0e5bb8ef\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DsPairStub extends \_PhpScoperdf6a0b341030\Symfony\Component\VarDumper\Cloner\Stub
+class DsPairStub extends \_PhpScoper3e1e0e5bb8ef\Symfony\Component\VarDumper\Cloner\Stub
 {
     public function __construct($key, $value)
     {
-        $this->value = [\_PhpScoperdf6a0b341030\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'key' => $key, \_PhpScoperdf6a0b341030\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'value' => $value];
+        $this->value = [\_PhpScoper3e1e0e5bb8ef\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'key' => $key, \_PhpScoper3e1e0e5bb8ef\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'value' => $value];
     }
 }

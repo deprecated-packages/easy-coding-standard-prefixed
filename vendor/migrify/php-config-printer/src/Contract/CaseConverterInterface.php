@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\Contract;
+namespace _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\Contract;
 
-use _PhpScoperdf6a0b341030\PhpParser\Node\Stmt\Expression;
+use _PhpScoper3e1e0e5bb8ef\PhpParser\Node\Stmt\Expression;
 interface CaseConverterInterface
 {
     public function match(string $rootKey, $key, $values) : bool;
-    public function convertToMethodCall($key, $values) : \_PhpScoperdf6a0b341030\PhpParser\Node\Stmt\Expression;
+    public function convertToMethodCall($key, $values) : \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Stmt\Expression;
 }

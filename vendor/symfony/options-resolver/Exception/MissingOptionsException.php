@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdf6a0b341030\Symfony\Component\OptionsResolver\Exception;
+namespace _PhpScoper3e1e0e5bb8ef\Symfony\Component\OptionsResolver\Exception;
 
 /**
  * Exception thrown when a required option is missing.
@@ -17,6 +17,6 @@ namespace _PhpScoperdf6a0b341030\Symfony\Component\OptionsResolver\Exception;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class MissingOptionsException extends \_PhpScoperdf6a0b341030\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException
+class MissingOptionsException extends \_PhpScoper3e1e0e5bb8ef\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException
 {
 }

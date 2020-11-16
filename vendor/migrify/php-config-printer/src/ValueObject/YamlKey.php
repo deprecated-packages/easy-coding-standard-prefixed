@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\ValueObject;
+namespace _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject;
 
 final class YamlKey
 {

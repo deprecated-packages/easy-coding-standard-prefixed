@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdf6a0b341030\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoper3e1e0e5bb8ef\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScoperdf6a0b341030\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoperdf6a0b341030\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper3e1e0e5bb8ef\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper3e1e0e5bb8ef\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait AutoconfigureTrait
 {
     /**
@@ -23,8 +23,8 @@ trait AutoconfigureTrait
      */
     public final function autoconfigure(bool $autoconfigured = \true) : self
     {
-        if ($autoconfigured && $this->definition instanceof \_PhpScoperdf6a0b341030\Symfony\Component\DependencyInjection\ChildDefinition) {
-            throw new \_PhpScoperdf6a0b341030\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The service "%s" cannot have a "parent" and also have "autoconfigure". Try disabling autoconfiguration for the service.', $this->id));
+        if ($autoconfigured && $this->definition instanceof \_PhpScoper3e1e0e5bb8ef\Symfony\Component\DependencyInjection\ChildDefinition) {
+            throw new \_PhpScoper3e1e0e5bb8ef\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The service "%s" cannot have a "parent" and also have "autoconfigure". Try disabling autoconfiguration for the service.', $this->id));
         }
         $this->definition->setAutoconfigured($autoconfigured);
         return $this;
