@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperedc2e0c967db\\Symfony\\Component\\Filesystem\\": ""
+            "_PhpScoper8e2d8a2760d1\\Symfony\\Component\\Filesystem\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

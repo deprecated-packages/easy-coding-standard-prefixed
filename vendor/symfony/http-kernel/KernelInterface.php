@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperedc2e0c967db\Symfony\Component\HttpKernel;
+namespace _PhpScoper8e2d8a2760d1\Symfony\Component\HttpKernel;
 
-use _PhpScoperedc2e0c967db\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoperedc2e0c967db\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperedc2e0c967db\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper8e2d8a2760d1\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper8e2d8a2760d1\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 /**
  * The Kernel is the heart of the Symfony system.
  *
@@ -22,7 +22,7 @@ use _PhpScoperedc2e0c967db\Symfony\Component\HttpKernel\Bundle\BundleInterface;
  *
  * @method string getProjectDir() Gets the project dir (path of the project's composer file) - not defining it is deprecated since Symfony 4.2
  */
-interface KernelInterface extends \_PhpScoperedc2e0c967db\Symfony\Component\HttpKernel\HttpKernelInterface
+interface KernelInterface extends \_PhpScoper8e2d8a2760d1\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     /**
      * Returns an array of bundles to register.
@@ -33,7 +33,7 @@ interface KernelInterface extends \_PhpScoperedc2e0c967db\Symfony\Component\Http
     /**
      * Loads the container configuration.
      */
-    public function registerContainerConfiguration(\_PhpScoperedc2e0c967db\Symfony\Component\Config\Loader\LoaderInterface $loader);
+    public function registerContainerConfiguration(\_PhpScoper8e2d8a2760d1\Symfony\Component\Config\Loader\LoaderInterface $loader);
     /**
      * Boots the current kernel.
      */

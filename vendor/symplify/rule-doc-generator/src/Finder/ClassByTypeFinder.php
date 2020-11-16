@@ -3,21 +3,22 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Finder;
 
-use _PhpScoperedc2e0c967db\Nette\Loaders\RobotLoader;
+use _PhpScoper8e2d8a2760d1\Nette\Loaders\RobotLoader;
 use ReflectionClass;
-use Symplify\SmartFileSystem\SmartFileInfo;
 final class ClassByTypeFinder
 {
     /**
+     * @param string[] $directories
      * @return string[]
      */
-    public function findByType(\Symplify\SmartFileSystem\SmartFileInfo $directoryFileInfo, string $type) : array
+    public function findByType(array $directories, string $type) : array
     {
-        $robotLoader = new \_PhpScoperedc2e0c967db\Nette\Loaders\RobotLoader();
+        $robotLoader = new \_PhpScoper8e2d8a2760d1\Nette\Loaders\RobotLoader();
         $robotLoader->setTempDirectory(\sys_get_temp_dir() . '/robot_loader_temp');
-        $robotLoader->addDirectory($directoryFileInfo->getPathname());
+        $robotLoader->addDirectory(...$directories);
         $robotLoader->ignoreDirs[] = '*tests*';
         $robotLoader->ignoreDirs[] = '*Fixture*';
+        $robotLoader->ignoreDirs[] = '*templates*';
         $robotLoader->rebuild();
         $desiredClasses = [];
         foreach (\array_keys($robotLoader->getIndexedClasses()) as $class) {

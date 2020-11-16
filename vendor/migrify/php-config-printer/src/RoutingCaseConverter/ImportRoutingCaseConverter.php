@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\RoutingCaseConverter;
+namespace _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\RoutingCaseConverter;
 
-use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
-use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoperedc2e0c967db\PhpParser\Node\Arg;
-use _PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperedc2e0c967db\PhpParser\Node\Expr\Variable;
-use _PhpScoperedc2e0c967db\PhpParser\Node\Stmt\Expression;
+use _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
+use _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoper8e2d8a2760d1\PhpParser\Node\Arg;
+use _PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\Variable;
+use _PhpScoper8e2d8a2760d1\PhpParser\Node\Stmt\Expression;
 use Symplify\PackageBuilder\Strings\StringFormatConverter;
-final class ImportRoutingCaseConverter implements \_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
+final class ImportRoutingCaseConverter implements \_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface
 {
     /**
      * @var string[]
@@ -57,7 +57,7 @@ final class ImportRoutingCaseConverter implements \_PhpScoperedc2e0c967db\Migrif
      * @var StringFormatConverter
      */
     private $stringFormatConverter;
-    public function __construct(\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
         $this->stringFormatConverter = new \Symplify\PackageBuilder\Strings\StringFormatConverter();
@@ -66,15 +66,15 @@ final class ImportRoutingCaseConverter implements \_PhpScoperedc2e0c967db\Migrif
     {
         return isset($values[self::RESOURCE]);
     }
-    public function convertToMethodCall(string $key, $values) : \_PhpScoperedc2e0c967db\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall(string $key, $values) : \_PhpScoper8e2d8a2760d1\PhpParser\Node\Stmt\Expression
     {
-        $variable = new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\Variable(\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
+        $variable = new \_PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\Variable(\_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
         $args = $this->createAddArgs(self::IMPORT_ARGS, $values);
-        $methodCall = new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall($variable, 'import', $args);
+        $methodCall = new \_PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\MethodCall($variable, 'import', $args);
         // Handle prefix independently as it has specific args
         if (isset($values[self::PREFIX])) {
             $args = $this->createAddArgs(self::PREFIX_ARGS, $values);
-            $methodCall = new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall($methodCall, self::PREFIX, $args);
+            $methodCall = new \_PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\MethodCall($methodCall, self::PREFIX, $args);
         }
         foreach (self::NESTED_KEYS as $nestedKey) {
             if (!isset($values[$nestedKey])) {
@@ -87,9 +87,9 @@ final class ImportRoutingCaseConverter implements \_PhpScoperedc2e0c967db\Migrif
             }
             $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
             $name = $this->stringFormatConverter->underscoreAndHyphenToCamelCase($nestedKey);
-            $methodCall = new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall($methodCall, $name, $args);
+            $methodCall = new \_PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\MethodCall($methodCall, $name, $args);
         }
-        return new \_PhpScoperedc2e0c967db\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \_PhpScoper8e2d8a2760d1\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param string[] $argsNames

@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperedc2e0c967db\Symfony\Component\Process\Exception;
+namespace _PhpScoper8e2d8a2760d1\Symfony\Component\Process\Exception;
 
-use _PhpScoperedc2e0c967db\Symfony\Component\Process\Process;
+use _PhpScoper8e2d8a2760d1\Symfony\Component\Process\Process;
 /**
  * Exception that is thrown when a process times out.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ProcessTimedOutException extends \_PhpScoperedc2e0c967db\Symfony\Component\Process\Exception\RuntimeException
+class ProcessTimedOutException extends \_PhpScoper8e2d8a2760d1\Symfony\Component\Process\Exception\RuntimeException
 {
     const TYPE_GENERAL = 1;
     const TYPE_IDLE = 2;
     private $process;
     private $timeoutType;
-    public function __construct(\_PhpScoperedc2e0c967db\Symfony\Component\Process\Process $process, $timeoutType)
+    public function __construct(\_PhpScoper8e2d8a2760d1\Symfony\Component\Process\Process $process, $timeoutType)
     {
         $this->process = $process;
         $this->timeoutType = $timeoutType;

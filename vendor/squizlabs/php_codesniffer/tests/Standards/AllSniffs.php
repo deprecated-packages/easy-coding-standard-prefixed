@@ -11,8 +11,8 @@ namespace PHP_CodeSniffer\Tests\Standards;
 
 use PHP_CodeSniffer\Util\Standards;
 use PHP_CodeSniffer\Autoload;
-use _PhpScoperedc2e0c967db\PHPUnit\TextUI\TestRunner;
-use _PhpScoperedc2e0c967db\PHPUnit\Framework\TestSuite;
+use _PhpScoper8e2d8a2760d1\PHPUnit\TextUI\TestRunner;
+use _PhpScoper8e2d8a2760d1\PHPUnit\Framework\TestSuite;
 class AllSniffs
 {
     /**
@@ -22,7 +22,7 @@ class AllSniffs
      */
     public static function main()
     {
-        \_PhpScoperedc2e0c967db\PHPUnit\TextUI\TestRunner::run(self::suite());
+        \_PhpScoper8e2d8a2760d1\PHPUnit\TextUI\TestRunner::run(self::suite());
     }
     //end main()
     /**
@@ -38,7 +38,7 @@ class AllSniffs
         $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'] = [];
         $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'] = [];
         $GLOBALS['PHP_CODESNIFFER_SNIFF_CASE_FILES'] = [];
-        $suite = new \_PhpScoperedc2e0c967db\PHPUnit\Framework\TestSuite('PHP CodeSniffer Standards');
+        $suite = new \_PhpScoper8e2d8a2760d1\PHPUnit\Framework\TestSuite('PHP CodeSniffer Standards');
         $isInstalled = !\is_file(__DIR__ . '/../../autoload.php');
         // Optionally allow for ignoring the tests for one or more standards.
         $ignoreTestsForStandards = \getenv('PHPCS_IGNORE_TESTS');
