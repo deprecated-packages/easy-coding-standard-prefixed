@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e1e0e5bb8ef\Symfony\Component\DependencyInjection;
+namespace _PhpScoperedc2e0c967db\Symfony\Component\DependencyInjection;
 
-use _PhpScoper3e1e0e5bb8ef\Symfony\Contracts\Service\ServiceSubscriberInterface as BaseServiceSubscriberInterface;
+use _PhpScoperedc2e0c967db\Symfony\Contracts\Service\ServiceSubscriberInterface as BaseServiceSubscriberInterface;
 /**
  * {@inheritdoc}
  *
  * @deprecated since Symfony 4.2, use Symfony\Contracts\Service\ServiceSubscriberInterface instead.
  */
-interface ServiceSubscriberInterface extends \_PhpScoper3e1e0e5bb8ef\Symfony\Contracts\Service\ServiceSubscriberInterface
+interface ServiceSubscriberInterface extends \_PhpScoperedc2e0c967db\Symfony\Contracts\Service\ServiceSubscriberInterface
 {
 }

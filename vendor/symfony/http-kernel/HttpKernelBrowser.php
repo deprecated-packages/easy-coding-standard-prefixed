@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpKernel;
+namespace _PhpScoperedc2e0c967db\Symfony\Component\HttpKernel;
 
-use _PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperedc2e0c967db\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperedc2e0c967db\Symfony\Component\HttpFoundation\Response;
 /**
  * Client simulates a browser and makes requests to an HttpKernel instance.
  *
@@ -20,6 +20,6 @@ use _PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpFoundation\Response;
  * @method Request  getRequest()  A Request instance
  * @method Response getResponse() A Response instance
  */
-class HttpKernelBrowser extends \_PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpKernel\Client
+class HttpKernelBrowser extends \_PhpScoperedc2e0c967db\Symfony\Component\HttpKernel\Client
 {
 }

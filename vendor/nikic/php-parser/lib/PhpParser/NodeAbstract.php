@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3e1e0e5bb8ef\PhpParser;
+namespace _PhpScoperedc2e0c967db\PhpParser;
 
-abstract class NodeAbstract implements \_PhpScoper3e1e0e5bb8ef\PhpParser\Node, \JsonSerializable
+abstract class NodeAbstract implements \_PhpScoperedc2e0c967db\PhpParser\Node, \JsonSerializable
 {
     protected $attributes;
     /**
@@ -115,7 +115,7 @@ abstract class NodeAbstract implements \_PhpScoper3e1e0e5bb8ef\PhpParser\Node, \
         $comments = $this->getComments();
         for ($i = \count($comments) - 1; $i >= 0; $i--) {
             $comment = $comments[$i];
-            if ($comment instanceof \_PhpScoper3e1e0e5bb8ef\PhpParser\Comment\Doc) {
+            if ($comment instanceof \_PhpScoperedc2e0c967db\PhpParser\Comment\Doc) {
                 return $comment;
             }
         }
@@ -128,11 +128,11 @@ abstract class NodeAbstract implements \_PhpScoper3e1e0e5bb8ef\PhpParser\Node, \
      *
      * @param Comment\Doc $docComment Doc comment to set
      */
-    public function setDocComment(\_PhpScoper3e1e0e5bb8ef\PhpParser\Comment\Doc $docComment)
+    public function setDocComment(\_PhpScoperedc2e0c967db\PhpParser\Comment\Doc $docComment)
     {
         $comments = $this->getComments();
         for ($i = \count($comments) - 1; $i >= 0; $i--) {
-            if ($comments[$i] instanceof \_PhpScoper3e1e0e5bb8ef\PhpParser\Comment\Doc) {
+            if ($comments[$i] instanceof \_PhpScoperedc2e0c967db\PhpParser\Comment\Doc) {
                 // Replace existing doc comment.
                 $comments[$i] = $docComment;
                 $this->setAttribute('comments', $comments);

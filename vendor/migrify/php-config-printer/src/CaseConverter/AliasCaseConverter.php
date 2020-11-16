@@ -1,30 +1,30 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\CaseConverter;
+namespace _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoper3e1e0e5bb8ef\Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
-use _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
-use _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\MethodName;
-use _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScoper3e1e0e5bb8ef\Nette\Utils\Strings;
-use _PhpScoper3e1e0e5bb8ef\PhpParser\Node\Arg;
-use _PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\BinaryOp\Concat;
-use _PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\Variable;
-use _PhpScoper3e1e0e5bb8ef\PhpParser\Node\Scalar\String_;
-use _PhpScoper3e1e0e5bb8ef\PhpParser\Node\Stmt\Expression;
+use _PhpScoperedc2e0c967db\Migrify\MigrifyKernel\Exception\ShouldNotHappenException;
+use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
+use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\MethodName;
+use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoperedc2e0c967db\Nette\Utils\Strings;
+use _PhpScoperedc2e0c967db\PhpParser\Node\Arg;
+use _PhpScoperedc2e0c967db\PhpParser\Node\Expr\BinaryOp\Concat;
+use _PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperedc2e0c967db\PhpParser\Node\Expr\Variable;
+use _PhpScoperedc2e0c967db\PhpParser\Node\Scalar\String_;
+use _PhpScoperedc2e0c967db\PhpParser\Node\Stmt\Expression;
 /**
  * Handles this part:
  *
  * services:
  *     Some: Other <---
  */
-final class AliasCaseConverter implements \_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
+final class AliasCaseConverter implements \_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @see https://regex101.com/r/BwXkfO/2/
@@ -43,73 +43,73 @@ final class AliasCaseConverter implements \_PhpScoper3e1e0e5bb8ef\Migrify\PhpCon
      * @var ServiceOptionNodeFactory
      */
     private $serviceOptionNodeFactory;
-    public function __construct(\_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
+    public function __construct(\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperedc2e0c967db\PhpParser\Node\Stmt\Expression
     {
         if (!\is_string($key)) {
-            throw new \_PhpScoper3e1e0e5bb8ef\Migrify\MigrifyKernel\Exception\ShouldNotHappenException();
+            throw new \_PhpScoperedc2e0c967db\Migrify\MigrifyKernel\Exception\ShouldNotHappenException();
         }
-        $servicesVariable = new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\Variable(\_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $servicesVariable = new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\Variable(\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
         if (\class_exists($key) || \interface_exists($key)) {
             $classReference = $this->commonNodeFactory->createClassReference($key);
             $argValues = [];
             $argValues[] = $classReference;
-            $argValues[] = $values[\_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS] ?? $values;
+            $argValues[] = $values[\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS] ?? $values;
             $args = $this->argsNodeFactory->createFromValues($argValues, \true);
-            $methodCall = new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\MethodCall($servicesVariable, \_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
-            return new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Stmt\Expression($methodCall);
+            $methodCall = new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall($servicesVariable, \_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+            return new \_PhpScoperedc2e0c967db\PhpParser\Node\Stmt\Expression($methodCall);
         }
         // handles: "SomeClass $someVariable: ..."
-        $fullClassName = \_PhpScoper3e1e0e5bb8ef\Nette\Utils\Strings::before($key, ' $');
+        $fullClassName = \_PhpScoperedc2e0c967db\Nette\Utils\Strings::before($key, ' $');
         if ($fullClassName !== null) {
             $methodCall = $this->createAliasNode($key, $fullClassName, $values);
-            return new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Stmt\Expression($methodCall);
+            return new \_PhpScoperedc2e0c967db\PhpParser\Node\Stmt\Expression($methodCall);
         }
-        if (isset($values[\_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS])) {
-            $className = $values[\_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS];
+        if (isset($values[\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS])) {
+            $className = $values[\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS];
             $classReference = $this->commonNodeFactory->createClassReference($className);
             $args = $this->argsNodeFactory->createFromValues([$key, $classReference]);
-            $methodCall = new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\MethodCall($servicesVariable, \_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
-            unset($values[\_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS]);
+            $methodCall = new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall($servicesVariable, \_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+            unset($values[\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS]);
         }
         /** @var string|mixed[] $values */
         if (\is_string($values) && $values[0] === '@') {
             $args = $this->argsNodeFactory->createFromValues([$values], \true);
-            $methodCall = new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\MethodCall($servicesVariable, \_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+            $methodCall = new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall($servicesVariable, \_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
         } elseif (\is_array($values)) {
             /** @var MethodCall $methodCall */
             $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $methodCall);
         }
-        return new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \_PhpScoperedc2e0c967db\PhpParser\Node\Stmt\Expression($methodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {
-        if ($rootKey !== \_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
-        if (isset($values[\_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS])) {
+        if (isset($values[\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS])) {
             return \true;
         }
-        if (\_PhpScoper3e1e0e5bb8ef\Nette\Utils\Strings::match($key, '#\\w+\\s+\\$\\w+#')) {
+        if (\_PhpScoperedc2e0c967db\Nette\Utils\Strings::match($key, '#\\w+\\s+\\$\\w+#')) {
             return \true;
         }
         return \is_string($values) && $values[0] === '@';
     }
-    private function createAliasNode(string $key, string $fullClassName, $serviceValues) : \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\MethodCall
+    private function createAliasNode(string $key, string $fullClassName, $serviceValues) : \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall
     {
         $args = [];
         $classConstFetch = $this->commonNodeFactory->createClassReference($fullClassName);
-        \_PhpScoper3e1e0e5bb8ef\Nette\Utils\Strings::match($key, self::ARGUMENT_NAME_REGEX);
+        \_PhpScoperedc2e0c967db\Nette\Utils\Strings::match($key, self::ARGUMENT_NAME_REGEX);
         $argumentName = \strstr($key, '$');
-        $concat = new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\BinaryOp\Concat($classConstFetch, new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Scalar\String_(' ' . $argumentName));
-        $args[] = new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Arg($concat);
+        $concat = new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\BinaryOp\Concat($classConstFetch, new \_PhpScoperedc2e0c967db\PhpParser\Node\Scalar\String_(' ' . $argumentName));
+        $args[] = new \_PhpScoperedc2e0c967db\PhpParser\Node\Arg($concat);
         $serviceName = \ltrim($serviceValues, '@');
-        $args[] = new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Arg(new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Scalar\String_($serviceName));
-        return new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\MethodCall(new \_PhpScoper3e1e0e5bb8ef\PhpParser\Node\Expr\Variable(\_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \_PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+        $args[] = new \_PhpScoperedc2e0c967db\PhpParser\Node\Arg(new \_PhpScoperedc2e0c967db\PhpParser\Node\Scalar\String_($serviceName));
+        return new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\MethodCall(new \_PhpScoperedc2e0c967db\PhpParser\Node\Expr\Variable(\_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \_PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
     }
 }

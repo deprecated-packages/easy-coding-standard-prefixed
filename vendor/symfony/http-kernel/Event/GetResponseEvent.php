@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoperedc2e0c967db\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperedc2e0c967db\Symfony\Component\HttpFoundation\Response;
 /**
  * @deprecated since Symfony 4.3, use RequestEvent instead
  */
-class GetResponseEvent extends \_PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpKernel\Event\KernelEvent
+class GetResponseEvent extends \_PhpScoperedc2e0c967db\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
     /**
@@ -29,7 +29,7 @@ class GetResponseEvent extends \_PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpKer
     /**
      * Sets a response and stops event propagation.
      */
-    public function setResponse(\_PhpScoper3e1e0e5bb8ef\Symfony\Component\HttpFoundation\Response $response)
+    public function setResponse(\_PhpScoperedc2e0c967db\Symfony\Component\HttpFoundation\Response $response)
     {
         $this->response = $response;
         $this->stopPropagation();

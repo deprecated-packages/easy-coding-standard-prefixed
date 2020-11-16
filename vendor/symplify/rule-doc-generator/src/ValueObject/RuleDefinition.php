@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject;
 
-use _PhpScoper3e1e0e5bb8ef\Nette\Utils\Strings;
+use _PhpScoperedc2e0c967db\Nette\Utils\Strings;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
@@ -44,7 +44,7 @@ final class RuleDefinition
     public function isPHPStanRule() : bool
     {
         /** @noRector */
-        return \is_a($this->ruleClass, '_PhpScoper3e1e0e5bb8ef\\PHPStan\\Rules\\Rule', \true);
+        return \is_a($this->ruleClass, '_PhpScoperedc2e0c967db\\PHPStan\\Rules\\Rule', \true);
     }
     public function isPHPCSFixer() : bool
     {
@@ -65,7 +65,7 @@ final class RuleDefinition
     }
     public function getRuleShortClass() : string
     {
-        return (string) \_PhpScoper3e1e0e5bb8ef\Nette\Utils\Strings::after($this->ruleClass, '\\', -1);
+        return (string) \_PhpScoperedc2e0c967db\Nette\Utils\Strings::after($this->ruleClass, '\\', -1);
     }
     /**
      * @return CodeSampleInterface[]

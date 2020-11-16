@@ -17,7 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScoper3e1e0e5bb8ef\Doctrine\Common\Annotations\Annotation;
+namespace _PhpScoperedc2e0c967db\Doctrine\Common\Annotations\Annotation;
 
 /**
  * Annotation that can be used to signal to the parser

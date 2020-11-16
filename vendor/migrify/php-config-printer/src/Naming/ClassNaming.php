@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3e1e0e5bb8ef\Migrify\PhpConfigPrinter\Naming;
+namespace _PhpScoperedc2e0c967db\Migrify\PhpConfigPrinter\Naming;
 
-use _PhpScoper3e1e0e5bb8ef\Nette\Utils\Strings;
+use _PhpScoperedc2e0c967db\Nette\Utils\Strings;
 final class ClassNaming
 {
     public function getShortName(string $class) : string
     {
-        if (\_PhpScoper3e1e0e5bb8ef\Nette\Utils\Strings::contains($class, '\\')) {
-            return (string) \_PhpScoper3e1e0e5bb8ef\Nette\Utils\Strings::after($class, '\\', -1);
+        if (\_PhpScoperedc2e0c967db\Nette\Utils\Strings::contains($class, '\\')) {
+            return (string) \_PhpScoperedc2e0c967db\Nette\Utils\Strings::after($class, '\\', -1);
         }
         return $class;
     }
