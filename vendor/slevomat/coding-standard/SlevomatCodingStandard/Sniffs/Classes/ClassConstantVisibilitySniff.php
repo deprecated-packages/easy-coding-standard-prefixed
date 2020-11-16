@@ -11,7 +11,7 @@ use function array_keys;
 use function count;
 use function in_array;
 use function sprintf;
-use const _PhpScopera9d6b451df71\T_ANON_CLASS;
+use const _PhpScoper1103e00fb46b\T_ANON_CLASS;
 use const T_CLASS;
 use const T_CONST;
 use const T_INTERFACE;

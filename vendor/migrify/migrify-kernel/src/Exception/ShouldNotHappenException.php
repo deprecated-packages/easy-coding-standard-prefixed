@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera9d6b451df71\Migrify\MigrifyKernel\Exception;
+namespace _PhpScoper1103e00fb46b\Migrify\MigrifyKernel\Exception;
 
 use Exception;
 final class ShouldNotHappenException extends \Exception

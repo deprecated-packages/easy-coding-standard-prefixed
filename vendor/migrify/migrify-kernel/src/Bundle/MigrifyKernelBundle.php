@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera9d6b451df71\Migrify\MigrifyKernel\Bundle;
+namespace _PhpScoper1103e00fb46b\Migrify\MigrifyKernel\Bundle;
 
-use _PhpScopera9d6b451df71\Migrify\MigrifyKernel\DependencyInjection\CompilerPass\PrepareConsoleApplicationCompilerPass;
-use _PhpScopera9d6b451df71\Migrify\MigrifyKernel\DependencyInjection\Extension\MigrifyKernelExtension;
-use _PhpScopera9d6b451df71\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopera9d6b451df71\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScopera9d6b451df71\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper1103e00fb46b\Migrify\MigrifyKernel\DependencyInjection\CompilerPass\PrepareConsoleApplicationCompilerPass;
+use _PhpScoper1103e00fb46b\Migrify\MigrifyKernel\DependencyInjection\Extension\MigrifyKernelExtension;
+use _PhpScoper1103e00fb46b\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper1103e00fb46b\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper1103e00fb46b\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-final class MigrifyKernelBundle extends \_PhpScopera9d6b451df71\Symfony\Component\HttpKernel\Bundle\Bundle
+final class MigrifyKernelBundle extends \_PhpScoper1103e00fb46b\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    public function build(\_PhpScopera9d6b451df71\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScoper1103e00fb46b\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
-        $containerBuilder->addCompilerPass(new \_PhpScopera9d6b451df71\Migrify\MigrifyKernel\DependencyInjection\CompilerPass\PrepareConsoleApplicationCompilerPass());
+        $containerBuilder->addCompilerPass(new \_PhpScoper1103e00fb46b\Migrify\MigrifyKernel\DependencyInjection\CompilerPass\PrepareConsoleApplicationCompilerPass());
     }
-    protected function createContainerExtension() : ?\_PhpScopera9d6b451df71\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScoper1103e00fb46b\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
-        return new \_PhpScopera9d6b451df71\Migrify\MigrifyKernel\DependencyInjection\Extension\MigrifyKernelExtension();
+        return new \_PhpScoper1103e00fb46b\Migrify\MigrifyKernel\DependencyInjection\Extension\MigrifyKernelExtension();
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera9d6b451df71\PhpParser\Node\Expr;
+namespace _PhpScoper1103e00fb46b\PhpParser\Node\Expr;
 
-use _PhpScopera9d6b451df71\PhpParser\Node\Expr;
-class BitwiseNot extends \_PhpScopera9d6b451df71\PhpParser\Node\Expr
+use _PhpScoper1103e00fb46b\PhpParser\Node\Expr;
+class BitwiseNot extends \_PhpScoper1103e00fb46b\PhpParser\Node\Expr
 {
     /** @var Expr Expression */
     public $expr;
@@ -14,7 +14,7 @@ class BitwiseNot extends \_PhpScopera9d6b451df71\PhpParser\Node\Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScopera9d6b451df71\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\_PhpScoper1103e00fb46b\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

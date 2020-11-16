@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\ValueObjectFactory;
 
-use _PhpScopera9d6b451df71\Nette\Utils\Strings;
+use _PhpScoper1103e00fb46b\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException;
@@ -44,7 +44,7 @@ final class LineLengthAndPositionFactory
         if (!isset($tokens[$position])) {
             throw new \Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException($position);
         }
-        if (\_PhpScopera9d6b451df71\Nette\Utils\Strings::startsWith($tokens[$position]->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
+        if (\_PhpScoper1103e00fb46b\Nette\Utils\Strings::startsWith($tokens[$position]->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
             return \true;
         }
         return $tokens[$position]->isGivenKind(\T_OPEN_TAG);

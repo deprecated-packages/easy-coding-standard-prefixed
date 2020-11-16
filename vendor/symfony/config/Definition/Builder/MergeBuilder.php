@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera9d6b451df71\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper1103e00fb46b\Symfony\Component\Config\Definition\Builder;
 
 /**
  * This class builds merge conditions.
@@ -20,7 +20,7 @@ class MergeBuilder
     protected $node;
     public $allowFalse = \false;
     public $allowOverwrite = \true;
-    public function __construct(\_PhpScopera9d6b451df71\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function __construct(\_PhpScoper1103e00fb46b\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->node = $node;
     }
