@@ -170,7 +170,7 @@ class GetMethodParametersTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
      */
     private function getMethodParametersTestHelper($commentString, $expected)
     {
-        $function = $this->getTargetToken($commentString, [\T_FUNCTION, \T_FN]);
+        $function = $this->getTargetToken($commentString, [\T_FUNCTION, T_FN]);
         $found = self::$phpcsFile->getMethodParameters($function);
         $this->assertArraySubset($expected, $found, \true);
     }

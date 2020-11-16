@@ -25,7 +25,7 @@ abstract class AbstractMalformWorker implements \Symplify\CodingStandard\TokenRu
         $functionTokens = [new \PhpCsFixer\Tokenizer\Token([\T_FUNCTION, 'function'])];
         // only in PHP 7.4+
         if (\defined('T_FN') && \PHP_VERSION_ID >= 70400) {
-            $functionTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_FN, 'fn']);
+            $functionTokens[] = new \PhpCsFixer\Tokenizer\Token([T_FN, 'fn']);
         }
         $functionTokenPosition = $tokens->getNextTokenOfKind($docTokenPosition, $functionTokens);
         if ($functionTokenPosition === null) {

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8e2d8a2760d1\Symfony\Component\HttpFoundation\File;
+namespace _PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\File;
 
-use _PhpScoper8e2d8a2760d1\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use _PhpScoper8e2d8a2760d1\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use _PhpScoper8e2d8a2760d1\Symfony\Component\Mime\MimeTypes;
+use _PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use _PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use _PhpScoperad4605bb9267\Symfony\Component\Mime\MimeTypes;
 /**
  * A file in the file system.
  *
@@ -31,7 +31,7 @@ class File extends \SplFileInfo
     public function __construct(string $path, bool $checkPath = \true)
     {
         if ($checkPath && !\is_file($path)) {
-            throw new \_PhpScoper8e2d8a2760d1\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
+            throw new \_PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
         }
         parent::__construct($path);
     }
@@ -50,7 +50,7 @@ class File extends \SplFileInfo
      */
     public function guessExtension()
     {
-        return \_PhpScoper8e2d8a2760d1\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getMimeType())[0] ?? null;
+        return \_PhpScoperad4605bb9267\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getMimeType())[0] ?? null;
     }
     /**
      * Returns the mime type of the file.
@@ -65,7 +65,7 @@ class File extends \SplFileInfo
      */
     public function getMimeType()
     {
-        return \_PhpScoper8e2d8a2760d1\Symfony\Component\Mime\MimeTypes::getDefault()->guessMimeType($this->getPathname());
+        return \_PhpScoperad4605bb9267\Symfony\Component\Mime\MimeTypes::getDefault()->guessMimeType($this->getPathname());
     }
     /**
      * Moves the file to a new location.
@@ -86,7 +86,7 @@ class File extends \SplFileInfo
         $renamed = \rename($this->getPathname(), $target);
         \restore_error_handler();
         if (!$renamed) {
-            throw new \_PhpScoper8e2d8a2760d1\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s)', $this->getPathname(), $target, \strip_tags($error)));
+            throw new \_PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s)', $this->getPathname(), $target, \strip_tags($error)));
         }
         @\chmod($target, 0666 & ~\umask());
         return $target;
@@ -98,10 +98,10 @@ class File extends \SplFileInfo
     {
         if (!\is_dir($directory)) {
             if (\false === @\mkdir($directory, 0777, \true) && !\is_dir($directory)) {
-                throw new \_PhpScoper8e2d8a2760d1\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to create the "%s" directory', $directory));
+                throw new \_PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to create the "%s" directory', $directory));
             }
         } elseif (!\is_writable($directory)) {
-            throw new \_PhpScoper8e2d8a2760d1\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to write in the "%s" directory', $directory));
+            throw new \_PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Unable to write in the "%s" directory', $directory));
         }
         $target = \rtrim($directory, '/\\') . \DIRECTORY_SEPARATOR . (null === $name ? $this->getBasename() : $this->getName($name));
         return new self($target, \false);

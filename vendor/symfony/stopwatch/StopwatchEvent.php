@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8e2d8a2760d1\Symfony\Component\Stopwatch;
+namespace _PhpScoperad4605bb9267\Symfony\Component\Stopwatch;
 
 /**
  * Represents an Event managed by Stopwatch.
@@ -88,7 +88,7 @@ class StopwatchEvent
         if (!\count($this->started)) {
             throw new \LogicException('stop() called but start() has not been called before.');
         }
-        $this->periods[] = new \_PhpScoper8e2d8a2760d1\Symfony\Component\Stopwatch\StopwatchPeriod(\array_pop($this->started), $this->getNow());
+        $this->periods[] = new \_PhpScoperad4605bb9267\Symfony\Component\Stopwatch\StopwatchPeriod(\array_pop($this->started), $this->getNow());
         return $this;
     }
     /**
@@ -158,7 +158,7 @@ class StopwatchEvent
         $left = \count($this->started) - $stopped;
         for ($i = 0; $i < $left; ++$i) {
             $index = $stopped + $i;
-            $periods[] = new \_PhpScoper8e2d8a2760d1\Symfony\Component\Stopwatch\StopwatchPeriod($this->started[$index], $this->getNow());
+            $periods[] = new \_PhpScoperad4605bb9267\Symfony\Component\Stopwatch\StopwatchPeriod($this->started[$index], $this->getNow());
         }
         $total = 0;
         foreach ($periods as $period) {

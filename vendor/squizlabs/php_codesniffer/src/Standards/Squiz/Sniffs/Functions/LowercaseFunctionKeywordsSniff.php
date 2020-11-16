@@ -24,7 +24,7 @@ class LowercaseFunctionKeywordsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         $tokens = \PHP_CodeSniffer\Util\Tokens::$methodPrefixes;
         $tokens[] = \T_FUNCTION;
         $tokens[] = T_CLOSURE;
-        $tokens[] = \T_FN;
+        $tokens[] = T_FN;
         return $tokens;
     }
     //end register()

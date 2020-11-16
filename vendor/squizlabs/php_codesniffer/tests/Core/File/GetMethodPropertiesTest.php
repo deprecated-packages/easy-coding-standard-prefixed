@@ -129,7 +129,7 @@ class GetMethodPropertiesTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
      */
     public function testReturnNamespace()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper8e2d8a2760d1\\MyNamespace\\MyClass', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoperad4605bb9267\\MyNamespace\\MyClass', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testReturnNamespace()
@@ -140,7 +140,7 @@ class GetMethodPropertiesTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
      */
     public function testReturnMultilineNamespace()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper8e2d8a2760d1\\MyNamespace\\MyClass\\Foo', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoperad4605bb9267\\MyNamespace\\MyClass\\Foo', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testReturnMultilineNamespace()
@@ -231,7 +231,7 @@ class GetMethodPropertiesTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
      */
     private function getMethodPropertiesTestHelper($commentString, $expected)
     {
-        $function = $this->getTargetToken($commentString, [\T_FUNCTION, T_CLOSURE, \T_FN]);
+        $function = $this->getTargetToken($commentString, [\T_FUNCTION, T_CLOSURE, T_FN]);
         $found = self::$phpcsFile->getMethodProperties($function);
         $this->assertArraySubset($expected, $found, \true);
     }

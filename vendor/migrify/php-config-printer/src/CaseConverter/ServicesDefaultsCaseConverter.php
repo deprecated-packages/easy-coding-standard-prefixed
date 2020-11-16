@@ -1,47 +1,47 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\CaseConverter;
+namespace _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory;
-use _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\ValueObject\MethodName;
-use _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\Variable;
-use _PhpScoper8e2d8a2760d1\PhpParser\Node\Stmt\Expression;
+use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory;
+use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\MethodName;
+use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoperad4605bb9267\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperad4605bb9267\PhpParser\Node\Expr\Variable;
+use _PhpScoperad4605bb9267\PhpParser\Node\Stmt\Expression;
 /**
  * Handles this part:
  *
  * services:
  *     _defaults: <---
  */
-final class ServicesDefaultsCaseConverter implements \_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
+final class ServicesDefaultsCaseConverter implements \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var AutoBindNodeFactory
      */
     private $autoBindNodeFactory;
-    public function __construct(\_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory $autoBindNodeFactory)
+    public function __construct(\_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory $autoBindNodeFactory)
     {
         $this->autoBindNodeFactory = $autoBindNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoper8e2d8a2760d1\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperad4605bb9267\PhpParser\Node\Stmt\Expression
     {
-        $methodCall = new \_PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\MethodCall($this->createServicesVariable(), \_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\ValueObject\MethodName::DEFAULTS);
-        $methodCall = $this->autoBindNodeFactory->createAutoBindCalls($values, $methodCall, \_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory::TYPE_DEFAULTS);
-        return new \_PhpScoper8e2d8a2760d1\PhpParser\Node\Stmt\Expression($methodCall);
+        $methodCall = new \_PhpScoperad4605bb9267\PhpParser\Node\Expr\MethodCall($this->createServicesVariable(), \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\MethodName::DEFAULTS);
+        $methodCall = $this->autoBindNodeFactory->createAutoBindCalls($values, $methodCall, \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory::TYPE_DEFAULTS);
+        return new \_PhpScoperad4605bb9267\PhpParser\Node\Stmt\Expression($methodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {
-        if ($rootKey !== \_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
-        return $key === \_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\ValueObject\YamlKey::_DEFAULTS;
+        return $key === \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlKey::_DEFAULTS;
     }
-    private function createServicesVariable() : \_PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\Variable
+    private function createServicesVariable() : \_PhpScoperad4605bb9267\PhpParser\Node\Expr\Variable
     {
-        return new \_PhpScoper8e2d8a2760d1\PhpParser\Node\Expr\Variable(\_PhpScoper8e2d8a2760d1\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        return new \_PhpScoperad4605bb9267\PhpParser\Node\Expr\Variable(\_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper8e2d8a2760d1\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoperad4605bb9267\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper8e2d8a2760d1\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoperad4605bb9267\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
 /**
  * @NoAnnotation
  * @IgnoreAnnotation("NoAnnotation")

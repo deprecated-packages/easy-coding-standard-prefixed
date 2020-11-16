@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Dumper;
+namespace _PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Dumper;
 
-use _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use _PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Reference;
 /**
  * GraphvizDumper dumps a service container as a graphviz file.
  *
@@ -26,7 +26,7 @@ use _PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Reference;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class GraphvizDumper extends \_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Dumper\Dumper
+class GraphvizDumper extends \_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Dumper\Dumper
 {
     private $nodes;
     private $edges;
@@ -88,12 +88,12 @@ class GraphvizDumper extends \_PhpScoper8e2d8a2760d1\Symfony\Component\Dependenc
     {
         $edges = [];
         foreach ($arguments as $argument) {
-            if ($argument instanceof \_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Parameter) {
+            if ($argument instanceof \_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Parameter) {
                 $argument = $this->container->hasParameter($argument) ? $this->container->getParameter($argument) : null;
             } elseif (\is_string($argument) && \preg_match('/^%([^%]+)%$/', $argument, $match)) {
                 $argument = $this->container->hasParameter($match[1]) ? $this->container->getParameter($match[1]) : null;
             }
-            if ($argument instanceof \_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Reference) {
+            if ($argument instanceof \_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Reference) {
                 $lazyEdge = $lazy;
                 if (!$this->container->has((string) $argument)) {
                     $this->nodes[(string) $argument] = ['name' => $name, 'required' => $required, 'class' => '', 'attributes' => $this->options['node.missing']];
@@ -101,9 +101,9 @@ class GraphvizDumper extends \_PhpScoper8e2d8a2760d1\Symfony\Component\Dependenc
                     $lazyEdge = $lazy || $this->container->getDefinition((string) $argument)->isLazy();
                 }
                 $edges[] = ['name' => $name, 'required' => $required, 'to' => $argument, 'lazy' => $lazyEdge];
-            } elseif ($argument instanceof \_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
+            } elseif ($argument instanceof \_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
                 $edges = \array_merge($edges, $this->findEdges($id, $argument->getValues(), $required, $name, \true));
-            } elseif ($argument instanceof \_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Definition) {
+            } elseif ($argument instanceof \_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Definition) {
                 $edges = \array_merge($edges, $this->findEdges($id, $argument->getArguments(), $required, ''), $this->findEdges($id, $argument->getProperties(), \false, ''));
                 foreach ($argument->getMethodCalls() as $call) {
                     $edges = \array_merge($edges, $this->findEdges($id, $call[1], \false, $call[0] . '()'));
@@ -125,10 +125,10 @@ class GraphvizDumper extends \_PhpScoper8e2d8a2760d1\Symfony\Component\Dependenc
             }
             try {
                 $class = $this->container->getParameterBag()->resolveValue($class);
-            } catch (\_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+            } catch (\_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
             }
             $nodes[$id] = ['class' => \str_replace('\\', '\\\\', $class), 'attributes' => \array_merge($this->options['node.definition'], ['style' => $definition->isShared() ? 'filled' : 'dotted'])];
-            $container->setDefinition($id, new \_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\Definition('stdClass'));
+            $container->setDefinition($id, new \_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\Definition('stdClass'));
         }
         foreach ($container->getServiceIds() as $id) {
             if (\array_key_exists($id, $container->getAliases())) {
@@ -140,10 +140,10 @@ class GraphvizDumper extends \_PhpScoper8e2d8a2760d1\Symfony\Component\Dependenc
         }
         return $nodes;
     }
-    private function cloneContainer() : \_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\ContainerBuilder
+    private function cloneContainer() : \_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\ContainerBuilder
     {
-        $parameterBag = new \_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag($this->container->getParameterBag()->all());
-        $container = new \_PhpScoper8e2d8a2760d1\Symfony\Component\DependencyInjection\ContainerBuilder($parameterBag);
+        $parameterBag = new \_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag($this->container->getParameterBag()->all());
+        $container = new \_PhpScoperad4605bb9267\Symfony\Component\DependencyInjection\ContainerBuilder($parameterBag);
         $container->setDefinitions($this->container->getDefinitions());
         $container->setAliases($this->container->getAliases());
         $container->setResources($this->container->getResources());
