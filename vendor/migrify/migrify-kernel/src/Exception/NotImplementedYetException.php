@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4d05106cc3c0\Migrify\MigrifyKernel\Exception;
+namespace _PhpScoper6d28bdf6a7f9\Migrify\MigrifyKernel\Exception;
 
 use Exception;
 final class NotImplementedYetException extends \Exception

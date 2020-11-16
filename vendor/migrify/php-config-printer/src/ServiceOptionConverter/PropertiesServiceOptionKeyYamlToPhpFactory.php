@@ -1,28 +1,28 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4d05106cc3c0\Migrify\PhpConfigPrinter\ServiceOptionConverter;
+namespace _PhpScoper6d28bdf6a7f9\Migrify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoper4d05106cc3c0\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use _PhpScoper4d05106cc3c0\Migrify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory;
-use _PhpScoper4d05106cc3c0\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-use _PhpScoper4d05106cc3c0\PhpParser\Node\Expr\MethodCall;
-final class PropertiesServiceOptionKeyYamlToPhpFactory implements \_PhpScoper4d05106cc3c0\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use _PhpScoper6d28bdf6a7f9\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use _PhpScoper6d28bdf6a7f9\Migrify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory;
+use _PhpScoper6d28bdf6a7f9\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+use _PhpScoper6d28bdf6a7f9\PhpParser\Node\Expr\MethodCall;
+final class PropertiesServiceOptionKeyYamlToPhpFactory implements \_PhpScoper6d28bdf6a7f9\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var SingleServicePhpNodeFactory
      */
     private $singleServicePhpNodeFactory;
-    public function __construct(\_PhpScoper4d05106cc3c0\Migrify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory $singleServicePhpNodeFactory)
+    public function __construct(\_PhpScoper6d28bdf6a7f9\Migrify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory $singleServicePhpNodeFactory)
     {
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper4d05106cc3c0\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper4d05106cc3c0\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper6d28bdf6a7f9\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper6d28bdf6a7f9\PhpParser\Node\Expr\MethodCall
     {
         return $this->singleServicePhpNodeFactory->createProperties($methodCall, $yaml);
     }
     public function isMatch($key, $values) : bool
     {
-        return $key === \_PhpScoper4d05106cc3c0\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey::PROPERTIES;
+        return $key === \_PhpScoper6d28bdf6a7f9\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey::PROPERTIES;
     }
 }
