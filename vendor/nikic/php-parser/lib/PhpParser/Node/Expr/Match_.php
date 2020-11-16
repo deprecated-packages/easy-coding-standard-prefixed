@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperbcc0395698f8\PhpParser\Node\Expr;
+namespace _PhpScoper239b374a39c8\PhpParser\Node\Expr;
 
-use _PhpScoperbcc0395698f8\PhpParser\Node;
-use _PhpScoperbcc0395698f8\PhpParser\Node\MatchArm;
-class Match_ extends \_PhpScoperbcc0395698f8\PhpParser\Node\Expr
+use _PhpScoper239b374a39c8\PhpParser\Node;
+use _PhpScoper239b374a39c8\PhpParser\Node\MatchArm;
+class Match_ extends \_PhpScoper239b374a39c8\PhpParser\Node\Expr
 {
     /** @var Node\Expr */
     public $cond;
@@ -14,7 +14,7 @@ class Match_ extends \_PhpScoperbcc0395698f8\PhpParser\Node\Expr
     /**
      * @param MatchArm[] $arms
      */
-    public function __construct(\_PhpScoperbcc0395698f8\PhpParser\Node\Expr $cond, array $arms = [], array $attributes = [])
+    public function __construct(\_PhpScoper239b374a39c8\PhpParser\Node\Expr $cond, array $arms = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;

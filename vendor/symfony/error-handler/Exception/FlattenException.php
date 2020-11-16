@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperbcc0395698f8\Symfony\Component\ErrorHandler\Exception;
+namespace _PhpScoper239b374a39c8\Symfony\Component\ErrorHandler\Exception;
 
-use _PhpScoperbcc0395698f8\Symfony\Component\Debug\Exception\FatalThrowableError;
-use _PhpScoperbcc0395698f8\Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
-use _PhpScoperbcc0395698f8\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
-use _PhpScoperbcc0395698f8\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperbcc0395698f8\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use _PhpScoper239b374a39c8\Symfony\Component\Debug\Exception\FatalThrowableError;
+use _PhpScoper239b374a39c8\Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
+use _PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
+use _PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper239b374a39c8\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 /**
  * FlattenException wraps a PHP Error or Exception to be able to serialize it.
  *
@@ -22,7 +22,7 @@ use _PhpScoperbcc0395698f8\Symfony\Component\HttpKernel\Exception\HttpExceptionI
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FlattenException extends \_PhpScoperbcc0395698f8\Symfony\Component\Debug\Exception\FlattenException
+class FlattenException extends \_PhpScoper239b374a39c8\Symfony\Component\Debug\Exception\FlattenException
 {
     private $message;
     private $code;
@@ -45,17 +45,17 @@ class FlattenException extends \_PhpScoperbcc0395698f8\Symfony\Component\Debug\E
         $e = new static();
         $e->setMessage($exception->getMessage());
         $e->setCode($exception->getCode());
-        if ($exception instanceof \_PhpScoperbcc0395698f8\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+        if ($exception instanceof \_PhpScoper239b374a39c8\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
             $statusCode = $exception->getStatusCode();
             $headers = \array_merge($headers, $exception->getHeaders());
-        } elseif ($exception instanceof \_PhpScoperbcc0395698f8\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
+        } elseif ($exception instanceof \_PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
             $statusCode = 400;
         }
         if (null === $statusCode) {
             $statusCode = 500;
         }
-        if (\class_exists(\_PhpScoperbcc0395698f8\Symfony\Component\HttpFoundation\Response::class) && isset(\_PhpScoperbcc0395698f8\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode])) {
-            $statusText = \_PhpScoperbcc0395698f8\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode];
+        if (\class_exists(\_PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Response::class) && isset(\_PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode])) {
+            $statusText = \_PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode];
         } else {
             $statusText = 'Whoops, looks like something went wrong.';
         }
@@ -63,7 +63,7 @@ class FlattenException extends \_PhpScoperbcc0395698f8\Symfony\Component\Debug\E
         $e->setStatusCode($statusCode);
         $e->setHeaders($headers);
         $e->setTraceFromThrowable($exception);
-        $e->setClass($exception instanceof \_PhpScoperbcc0395698f8\Symfony\Component\Debug\Exception\FatalThrowableError ? $exception->getOriginalClassName() : \get_class($exception));
+        $e->setClass($exception instanceof \_PhpScoper239b374a39c8\Symfony\Component\Debug\Exception\FatalThrowableError ? $exception->getOriginalClassName() : \get_class($exception));
         $e->setFile($exception->getFile());
         $e->setLine($exception->getLine());
         $previous = $exception->getPrevious();
@@ -188,7 +188,7 @@ class FlattenException extends \_PhpScoperbcc0395698f8\Symfony\Component\Debug\E
     /**
      * @return $this
      */
-    public final function setPrevious(\_PhpScoperbcc0395698f8\Symfony\Component\Debug\Exception\FlattenException $previous) : self
+    public final function setPrevious(\_PhpScoper239b374a39c8\Symfony\Component\Debug\Exception\FlattenException $previous) : self
     {
         $this->previous = $previous;
         return $this;
