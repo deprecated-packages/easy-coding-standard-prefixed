@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Printer;
 
 use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter;
+use Symplify\RuleDocGenerator\Text\KeywordHighlighter;
 use Symplify\RuleDocGenerator\ValueObject\Lines;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RuleDefinitionsPrinter
@@ -12,9 +13,14 @@ final class RuleDefinitionsPrinter
      * @var CodeSamplePrinter
      */
     private $codeSamplePrinter;
-    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter $codeSamplePrinter)
+    /**
+     * @var KeywordHighlighter
+     */
+    private $keywordHighlighter;
+    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter $codeSamplePrinter, \Symplify\RuleDocGenerator\Text\KeywordHighlighter $keywordHighlighter)
     {
         $this->codeSamplePrinter = $codeSamplePrinter;
+        $this->keywordHighlighter = $keywordHighlighter;
     }
     /**
      * @param RuleDefinition[] $ruleDefinitions
@@ -26,7 +32,7 @@ final class RuleDefinitionsPrinter
         $lines[] = '# Rules Overview';
         foreach ($ruleDefinitions as $ruleDefinition) {
             $lines[] = '## ' . $ruleDefinition->getRuleShortClass();
-            $lines[] = $ruleDefinition->getDescription();
+            $lines[] = $this->keywordHighlighter->highlight($ruleDefinition->getDescription());
             if ($ruleDefinition->isConfigurable()) {
                 $lines[] = \Symplify\RuleDocGenerator\ValueObject\Lines::CONFIGURE_IT;
             }

@@ -1,8 +1,8 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper6d28bdf6a7f9\Migrify\MigrifyKernel\Console;
+namespace _PhpScopera9d6b451df71\Migrify\MigrifyKernel\Console;
 
-final class AutowiredConsoleApplication extends \_PhpScoper6d28bdf6a7f9\Migrify\MigrifyKernel\Console\AbstractMigrifyConsoleApplication
+final class AutowiredConsoleApplication extends \_PhpScopera9d6b451df71\Migrify\MigrifyKernel\Console\AbstractMigrifyConsoleApplication
 {
 }

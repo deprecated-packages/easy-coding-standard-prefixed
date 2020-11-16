@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6d28bdf6a7f9\Symfony\Component\DependencyInjection\Argument;
+namespace _PhpScopera9d6b451df71\Symfony\Component\DependencyInjection\Argument;
 
 /**
  * @internal

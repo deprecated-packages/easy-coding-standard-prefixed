@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6d28bdf6a7f9\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScopera9d6b451df71\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper6d28bdf6a7f9\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper6d28bdf6a7f9\Symfony\Component\HttpFoundation\Response;
+use _PhpScopera9d6b451df71\Symfony\Component\HttpFoundation\Request;
+use _PhpScopera9d6b451df71\Symfony\Component\HttpFoundation\Response;
 interface SurrogateInterface
 {
     /**
@@ -31,23 +31,23 @@ interface SurrogateInterface
      *
      * @return bool true if one surrogate has Surrogate capability, false otherwise
      */
-    public function hasSurrogateCapability(\_PhpScoper6d28bdf6a7f9\Symfony\Component\HttpFoundation\Request $request);
+    public function hasSurrogateCapability(\_PhpScopera9d6b451df71\Symfony\Component\HttpFoundation\Request $request);
     /**
      * Adds Surrogate-capability to the given Request.
      */
-    public function addSurrogateCapability(\_PhpScoper6d28bdf6a7f9\Symfony\Component\HttpFoundation\Request $request);
+    public function addSurrogateCapability(\_PhpScopera9d6b451df71\Symfony\Component\HttpFoundation\Request $request);
     /**
      * Adds HTTP headers to specify that the Response needs to be parsed for Surrogate.
      *
      * This method only adds an Surrogate HTTP header if the Response has some Surrogate tags.
      */
-    public function addSurrogateControl(\_PhpScoper6d28bdf6a7f9\Symfony\Component\HttpFoundation\Response $response);
+    public function addSurrogateControl(\_PhpScopera9d6b451df71\Symfony\Component\HttpFoundation\Response $response);
     /**
      * Checks that the Response needs to be parsed for Surrogate tags.
      *
      * @return bool true if the Response needs to be parsed, false otherwise
      */
-    public function needsParsing(\_PhpScoper6d28bdf6a7f9\Symfony\Component\HttpFoundation\Response $response);
+    public function needsParsing(\_PhpScopera9d6b451df71\Symfony\Component\HttpFoundation\Response $response);
     /**
      * Renders a Surrogate tag.
      *
@@ -64,7 +64,7 @@ interface SurrogateInterface
      *
      * @return Response
      */
-    public function process(\_PhpScoper6d28bdf6a7f9\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper6d28bdf6a7f9\Symfony\Component\HttpFoundation\Response $response);
+    public function process(\_PhpScopera9d6b451df71\Symfony\Component\HttpFoundation\Request $request, \_PhpScopera9d6b451df71\Symfony\Component\HttpFoundation\Response $response);
     /**
      * Handles a Surrogate from the cache.
      *
@@ -77,5 +77,5 @@ interface SurrogateInterface
      * @throws \RuntimeException
      * @throws \Exception
      */
-    public function handle(\_PhpScoper6d28bdf6a7f9\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, $uri, $alt, $ignoreErrors);
+    public function handle(\_PhpScopera9d6b451df71\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, $uri, $alt, $ignoreErrors);
 }
