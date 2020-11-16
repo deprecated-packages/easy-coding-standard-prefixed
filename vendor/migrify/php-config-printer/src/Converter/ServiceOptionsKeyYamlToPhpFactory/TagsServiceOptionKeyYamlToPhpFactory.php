@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory;
+namespace _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory;
 
-use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-use _PhpScoperad4605bb9267\PhpParser\BuilderHelpers;
-use _PhpScoperad4605bb9267\PhpParser\Node\Arg;
-use _PhpScoperad4605bb9267\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperad4605bb9267\PhpParser\Node\Scalar\String_;
-final class TagsServiceOptionKeyYamlToPhpFactory implements \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
+use _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+use _PhpScoper6207116d4311\PhpParser\BuilderHelpers;
+use _PhpScoper6207116d4311\PhpParser\Node\Arg;
+use _PhpScoper6207116d4311\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper6207116d4311\PhpParser\Node\Scalar\String_;
+final class TagsServiceOptionKeyYamlToPhpFactory implements \_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
     /**
      * @var string
@@ -20,33 +20,33 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements \_PhpScoperad4605bb9
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    public function __construct(\_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperad4605bb9267\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperad4605bb9267\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper6207116d4311\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper6207116d4311\PhpParser\Node\Expr\MethodCall
     {
         /** @var mixed[] $yaml */
         if (\count($yaml) === 1 && \is_string($yaml[0])) {
-            $string = new \_PhpScoperad4605bb9267\PhpParser\Node\Scalar\String_($yaml[0]);
-            return new \_PhpScoperad4605bb9267\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, [new \_PhpScoperad4605bb9267\PhpParser\Node\Arg($string)]);
+            $string = new \_PhpScoper6207116d4311\PhpParser\Node\Scalar\String_($yaml[0]);
+            return new \_PhpScoper6207116d4311\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, [new \_PhpScoper6207116d4311\PhpParser\Node\Arg($string)]);
         }
         foreach ($yaml as $singleValue) {
             $args = [];
             foreach ($singleValue as $singleNestedKey => $singleNestedValue) {
                 if ($singleNestedKey === 'name') {
-                    $args[] = new \_PhpScoperad4605bb9267\PhpParser\Node\Arg(\_PhpScoperad4605bb9267\PhpParser\BuilderHelpers::normalizeValue($singleNestedValue));
+                    $args[] = new \_PhpScoper6207116d4311\PhpParser\Node\Arg(\_PhpScoper6207116d4311\PhpParser\BuilderHelpers::normalizeValue($singleNestedValue));
                     unset($singleValue[$singleNestedKey]);
                 }
             }
             $restArgs = $this->argsNodeFactory->createFromValuesAndWrapInArray($singleValue);
             $args = \array_merge($args, $restArgs);
-            $methodCall = new \_PhpScoperad4605bb9267\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, $args);
+            $methodCall = new \_PhpScoper6207116d4311\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, $args);
         }
         return $methodCall;
     }
     public function isMatch($key, $values) : bool
     {
-        return $key === \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey::TAGS;
+        return $key === \_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey::TAGS;
     }
 }

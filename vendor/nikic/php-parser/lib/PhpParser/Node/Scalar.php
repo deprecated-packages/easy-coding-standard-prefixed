@@ -1,8 +1,8 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperad4605bb9267\PhpParser\Node;
+namespace _PhpScoper6207116d4311\PhpParser\Node;
 
-abstract class Scalar extends \_PhpScoperad4605bb9267\PhpParser\Node\Expr
+abstract class Scalar extends \_PhpScoper6207116d4311\PhpParser\Node\Expr
 {
 }

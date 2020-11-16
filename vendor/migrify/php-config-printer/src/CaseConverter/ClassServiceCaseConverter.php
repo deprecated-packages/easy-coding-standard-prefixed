@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\CaseConverter;
+namespace _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
-use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\MethodName;
-use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScoperad4605bb9267\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperad4605bb9267\PhpParser\Node\Expr\Variable;
-use _PhpScoperad4605bb9267\PhpParser\Node\Stmt\Expression;
+use _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
+use _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\MethodName;
+use _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoper6207116d4311\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper6207116d4311\PhpParser\Node\Expr\Variable;
+use _PhpScoper6207116d4311\PhpParser\Node\Stmt\Expression;
 /**
  * Handles this part:
  *
@@ -19,7 +19,7 @@ use _PhpScoperad4605bb9267\PhpParser\Node\Stmt\Expression;
  *     Some:
  *         class: Other <---
  */
-final class ClassServiceCaseConverter implements \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
+final class ClassServiceCaseConverter implements \_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var ArgsNodeFactory
@@ -29,27 +29,27 @@ final class ClassServiceCaseConverter implements \_PhpScoperad4605bb9267\Migrify
      * @var ServiceOptionNodeFactory
      */
     private $serviceOptionNodeFactory;
-    public function __construct(\_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
+    public function __construct(\_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
     {
         $this->argsNodeFactory = $argsNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoperad4605bb9267\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoper6207116d4311\PhpParser\Node\Stmt\Expression
     {
-        $args = $this->argsNodeFactory->createFromValues([$key, $values[\_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY]]);
-        $setMethodCall = new \_PhpScoperad4605bb9267\PhpParser\Node\Expr\MethodCall(new \_PhpScoperad4605bb9267\PhpParser\Node\Expr\Variable(\_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
-        unset($values[\_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY]);
+        $args = $this->argsNodeFactory->createFromValues([$key, $values[\_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY]]);
+        $setMethodCall = new \_PhpScoper6207116d4311\PhpParser\Node\Expr\MethodCall(new \_PhpScoper6207116d4311\PhpParser\Node\Expr\Variable(\_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
+        unset($values[\_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY]);
         $setMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $setMethodCall);
-        return new \_PhpScoperad4605bb9267\PhpParser\Node\Stmt\Expression($setMethodCall);
+        return new \_PhpScoper6207116d4311\PhpParser\Node\Stmt\Expression($setMethodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {
-        if ($rootKey !== \_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
         if (\is_array($values) && \count($values) !== 1) {
             return \false;
         }
-        return isset($values[\_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY]) && !isset($values[\_PhpScoperad4605bb9267\Migrify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS]);
+        return isset($values[\_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY]) && !isset($values[\_PhpScoper6207116d4311\Migrify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS]);
     }
 }

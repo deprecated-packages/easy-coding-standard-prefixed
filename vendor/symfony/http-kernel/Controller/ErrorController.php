@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperad4605bb9267\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoper6207116d4311\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScoperad4605bb9267\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface;
-use _PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperad4605bb9267\Symfony\Component\HttpKernel\Exception\HttpException;
-use _PhpScoperad4605bb9267\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoper6207116d4311\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface;
+use _PhpScoper6207116d4311\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper6207116d4311\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper6207116d4311\Symfony\Component\HttpKernel\Exception\HttpException;
+use _PhpScoper6207116d4311\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Renders error or exception pages from a given FlattenException.
  *
@@ -26,25 +26,25 @@ class ErrorController
     private $kernel;
     private $controller;
     private $errorRenderer;
-    public function __construct(\_PhpScoperad4605bb9267\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, $controller, \_PhpScoperad4605bb9267\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $errorRenderer)
+    public function __construct(\_PhpScoper6207116d4311\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, $controller, \_PhpScoper6207116d4311\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $errorRenderer)
     {
         $this->kernel = $kernel;
         $this->controller = $controller;
         $this->errorRenderer = $errorRenderer;
     }
-    public function __invoke(\Throwable $exception) : \_PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\Response
+    public function __invoke(\Throwable $exception) : \_PhpScoper6207116d4311\Symfony\Component\HttpFoundation\Response
     {
         $exception = $this->errorRenderer->render($exception);
-        return new \_PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\Response($exception->getAsString(), $exception->getStatusCode(), $exception->getHeaders());
+        return new \_PhpScoper6207116d4311\Symfony\Component\HttpFoundation\Response($exception->getAsString(), $exception->getStatusCode(), $exception->getHeaders());
     }
-    public function preview(\_PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\Request $request, int $code) : \_PhpScoperad4605bb9267\Symfony\Component\HttpFoundation\Response
+    public function preview(\_PhpScoper6207116d4311\Symfony\Component\HttpFoundation\Request $request, int $code) : \_PhpScoper6207116d4311\Symfony\Component\HttpFoundation\Response
     {
         /*
          * This Request mimics the parameters set by
          * \Symfony\Component\HttpKernel\EventListener\ErrorListener::duplicateRequest, with
          * the additional "showException" flag.
          */
-        $subRequest = $request->duplicate(null, null, ['_controller' => $this->controller, 'exception' => new \_PhpScoperad4605bb9267\Symfony\Component\HttpKernel\Exception\HttpException($code, 'This is a sample exception.'), 'logger' => null, 'showException' => \false]);
-        return $this->kernel->handle($subRequest, \_PhpScoperad4605bb9267\Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
+        $subRequest = $request->duplicate(null, null, ['_controller' => $this->controller, 'exception' => new \_PhpScoper6207116d4311\Symfony\Component\HttpKernel\Exception\HttpException($code, 'This is a sample exception.'), 'logger' => null, 'showException' => \false]);
+        return $this->kernel->handle($subRequest, \_PhpScoper6207116d4311\Symfony\Component\HttpKernel\HttpKernelInterface::SUB_REQUEST);
     }
 }
