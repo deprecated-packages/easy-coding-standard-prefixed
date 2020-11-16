@@ -3,7 +3,7 @@
 /**
  * @license http://www.opensource.org/licenses/mit-license.php MIT (see the LICENSE file)
  */
-namespace _PhpScoper64a921a5401b\Psr\Container;
+namespace _PhpScoperdf6a0b341030\Psr\Container;
 
 /**
  * Describes the interface of a container that exposes methods to read its entries.

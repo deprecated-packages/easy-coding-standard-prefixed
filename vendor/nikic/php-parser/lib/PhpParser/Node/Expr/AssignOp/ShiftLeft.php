@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper64a921a5401b\PhpParser\Node\Expr\AssignOp;
+namespace _PhpScoperdf6a0b341030\PhpParser\Node\Expr\AssignOp;
 
-use _PhpScoper64a921a5401b\PhpParser\Node\Expr\AssignOp;
-class ShiftLeft extends \_PhpScoper64a921a5401b\PhpParser\Node\Expr\AssignOp
+use _PhpScoperdf6a0b341030\PhpParser\Node\Expr\AssignOp;
+class ShiftLeft extends \_PhpScoperdf6a0b341030\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {

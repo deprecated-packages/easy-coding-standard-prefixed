@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper64a921a5401b\Migrify\MigrifyKernel\Bootstrap;
+namespace _PhpScoperdf6a0b341030\Migrify\MigrifyKernel\Bootstrap;
 
-use _PhpScoper64a921a5401b\Migrify\MigrifyKernel\Exception\BootException;
-use _PhpScoper64a921a5401b\Symfony\Component\Console\Application;
-use _PhpScoper64a921a5401b\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoperdf6a0b341030\Migrify\MigrifyKernel\Exception\BootException;
+use _PhpScoperdf6a0b341030\Symfony\Component\Console\Application;
+use _PhpScoperdf6a0b341030\Symfony\Component\HttpKernel\KernelInterface;
 use Symplify\PackageBuilder\Console\Input\InputDetector;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
@@ -41,7 +41,7 @@ final class KernelBootAndApplicationRun
             exit(\Symplify\PackageBuilder\Console\ShellCode::ERROR);
         }
     }
-    private function createKernel() : \_PhpScoper64a921a5401b\Symfony\Component\HttpKernel\KernelInterface
+    private function createKernel() : \_PhpScoperdf6a0b341030\Symfony\Component\HttpKernel\KernelInterface
     {
         // random has is needed, so cache is invalidated and changes from config are loaded
         $environment = 'prod' . \random_int(1, 100000);
@@ -59,14 +59,14 @@ final class KernelBootAndApplicationRun
         $kernel->boot();
         $container = $kernel->getContainer();
         /** @var Application|null $application */
-        $application = $container->get(\_PhpScoper64a921a5401b\Symfony\Component\Console\Application::class);
+        $application = $container->get(\_PhpScoperdf6a0b341030\Symfony\Component\Console\Application::class);
         if ($application === null) {
-            $message = \sprintf('Application class %s was not found. Make it public in the config.', \_PhpScoper64a921a5401b\Symfony\Component\Console\Application::class);
-            throw new \_PhpScoper64a921a5401b\Migrify\MigrifyKernel\Exception\BootException($message);
+            $message = \sprintf('Application class %s was not found. Make it public in the config.', \_PhpScoperdf6a0b341030\Symfony\Component\Console\Application::class);
+            throw new \_PhpScoperdf6a0b341030\Migrify\MigrifyKernel\Exception\BootException($message);
         }
         exit($application->run());
     }
-    private function setExtraConfigs(\_PhpScoper64a921a5401b\Symfony\Component\HttpKernel\KernelInterface $kernel, string $kernelClass) : void
+    private function setExtraConfigs(\_PhpScoperdf6a0b341030\Symfony\Component\HttpKernel\KernelInterface $kernel, string $kernelClass) : void
     {
         if ($this->extraConfigs === []) {
             return;
@@ -76,7 +76,7 @@ final class KernelBootAndApplicationRun
             $kernel->setConfigs($this->extraConfigs);
         } else {
             $message = \sprintf('Extra configs are set, but the "%s" class is missing "%s" interface', $kernelClass, \Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface::class);
-            throw new \_PhpScoper64a921a5401b\Migrify\MigrifyKernel\Exception\BootException($message);
+            throw new \_PhpScoperdf6a0b341030\Migrify\MigrifyKernel\Exception\BootException($message);
         }
     }
     /**
@@ -84,9 +84,9 @@ final class KernelBootAndApplicationRun
      */
     private function setKernelClass(string $kernelClass) : void
     {
-        if (!\is_a($kernelClass, \_PhpScoper64a921a5401b\Symfony\Component\HttpKernel\KernelInterface::class, \true)) {
-            $message = \sprintf('Class "%s" must by type of "%s"', $kernelClass, \_PhpScoper64a921a5401b\Symfony\Component\HttpKernel\KernelInterface::class);
-            throw new \_PhpScoper64a921a5401b\Migrify\MigrifyKernel\Exception\BootException($message);
+        if (!\is_a($kernelClass, \_PhpScoperdf6a0b341030\Symfony\Component\HttpKernel\KernelInterface::class, \true)) {
+            $message = \sprintf('Class "%s" must by type of "%s"', $kernelClass, \_PhpScoperdf6a0b341030\Symfony\Component\HttpKernel\KernelInterface::class);
+            throw new \_PhpScoperdf6a0b341030\Migrify\MigrifyKernel\Exception\BootException($message);
         }
         $this->kernelClass = $kernelClass;
     }

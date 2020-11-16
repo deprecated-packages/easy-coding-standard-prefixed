@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\Contract;
+namespace _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\Contract;
 
 interface YamlFileContentProviderInterface
 {

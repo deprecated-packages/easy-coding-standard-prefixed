@@ -1,25 +1,25 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\CaseConverter;
+namespace _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\Contract\NestedCaseConverterInterface;
-use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
-use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\MethodName;
-use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScoper64a921a5401b\PhpParser\Node\Arg;
-use _PhpScoper64a921a5401b\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper64a921a5401b\PhpParser\Node\Expr\Variable;
-use _PhpScoper64a921a5401b\PhpParser\Node\Stmt\Expression;
+use _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\Contract\NestedCaseConverterInterface;
+use _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
+use _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\ValueObject\MethodName;
+use _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoperdf6a0b341030\PhpParser\Node\Arg;
+use _PhpScoperdf6a0b341030\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperdf6a0b341030\PhpParser\Node\Expr\Variable;
+use _PhpScoperdf6a0b341030\PhpParser\Node\Stmt\Expression;
 /**
  * Handles this part:
  *
  * services:
  *     _instanceof: <---
  */
-final class InstanceOfNestedCaseConverter implements \_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\Contract\NestedCaseConverterInterface
+final class InstanceOfNestedCaseConverter implements \_PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\Contract\NestedCaseConverterInterface
 {
     /**
      * @var CommonNodeFactory
@@ -29,30 +29,30 @@ final class InstanceOfNestedCaseConverter implements \_PhpScoper64a921a5401b\Mig
      * @var ServiceOptionNodeFactory
      */
     private $serviceOptionNodeFactory;
-    public function __construct(\_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
+    public function __construct(\_PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \_PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory $serviceOptionNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperdf6a0b341030\PhpParser\Node\Stmt\Expression
     {
         $classConstFetch = $this->commonNodeFactory->createClassReference($key);
-        $servicesVariable = new \_PhpScoper64a921a5401b\PhpParser\Node\Expr\Variable(\_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
-        $args = [new \_PhpScoper64a921a5401b\PhpParser\Node\Arg($classConstFetch)];
-        $instanceofMethodCall = new \_PhpScoper64a921a5401b\PhpParser\Node\Expr\MethodCall($servicesVariable, \_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\MethodName::INSTANCEOF, $args);
+        $servicesVariable = new \_PhpScoperdf6a0b341030\PhpParser\Node\Expr\Variable(\_PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $args = [new \_PhpScoperdf6a0b341030\PhpParser\Node\Arg($classConstFetch)];
+        $instanceofMethodCall = new \_PhpScoperdf6a0b341030\PhpParser\Node\Expr\MethodCall($servicesVariable, \_PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\ValueObject\MethodName::INSTANCEOF, $args);
         $instanceofMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $instanceofMethodCall);
-        $expression = new \_PhpScoper64a921a5401b\PhpParser\Node\Stmt\Expression($instanceofMethodCall);
+        $expression = new \_PhpScoperdf6a0b341030\PhpParser\Node\Stmt\Expression($instanceofMethodCall);
         $expression->setAttribute('comments', $instanceofMethodCall->getComments());
         return $expression;
     }
     public function match(string $rootKey, $subKey) : bool
     {
-        if ($rootKey !== \_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+        if ($rootKey !== \_PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
             return \false;
         }
         if (!\is_string($subKey)) {
             return \false;
         }
-        return $subKey === \_PhpScoper64a921a5401b\Migrify\PhpConfigPrinter\ValueObject\YamlKey::_INSTANCEOF;
+        return $subKey === \_PhpScoperdf6a0b341030\Migrify\PhpConfigPrinter\ValueObject\YamlKey::_INSTANCEOF;
     }
 }
