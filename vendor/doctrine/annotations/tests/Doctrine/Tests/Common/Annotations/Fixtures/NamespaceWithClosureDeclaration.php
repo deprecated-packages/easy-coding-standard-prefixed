@@ -1,10 +1,10 @@
 <?php
 
-namespace _PhpScoper1103e00fb46b\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoperbcc0395698f8\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper1103e00fb46b\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
-use _PhpScoper1103e00fb46b\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
-use _PhpScoper1103e00fb46b\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
+use _PhpScoperbcc0395698f8\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+use _PhpScoperbcc0395698f8\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoperbcc0395698f8\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
 $var = 1;
 function () use($var) {
 };

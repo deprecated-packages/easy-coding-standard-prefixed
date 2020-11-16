@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1103e00fb46b\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoperbcc0395698f8\Symfony\Component\HttpKernel\EventListener;
 
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.1, use AbstractSessionListener instead.', \_PhpScoper1103e00fb46b\Symfony\Component\HttpKernel\EventListener\SaveSessionListener::class), \E_USER_DEPRECATED);
-use _PhpScoper1103e00fb46b\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper1103e00fb46b\Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use _PhpScoper1103e00fb46b\Symfony\Component\HttpKernel\KernelEvents;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.1, use AbstractSessionListener instead.', \_PhpScoperbcc0395698f8\Symfony\Component\HttpKernel\EventListener\SaveSessionListener::class), \E_USER_DEPRECATED);
+use _PhpScoperbcc0395698f8\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoperbcc0395698f8\Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use _PhpScoperbcc0395698f8\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * @author Tobias Schultze <http://tobion.de>
  *
  * @deprecated since Symfony 4.1, use AbstractSessionListener instead
  */
-class SaveSessionListener implements \_PhpScoper1103e00fb46b\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class SaveSessionListener implements \_PhpScoperbcc0395698f8\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
-    public function onKernelResponse(\_PhpScoper1103e00fb46b\Symfony\Component\HttpKernel\Event\FilterResponseEvent $event)
+    public function onKernelResponse(\_PhpScoperbcc0395698f8\Symfony\Component\HttpKernel\Event\FilterResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -35,7 +35,7 @@ class SaveSessionListener implements \_PhpScoper1103e00fb46b\Symfony\Component\E
     {
         return [
             // low priority but higher than StreamedResponseListener
-            \_PhpScoper1103e00fb46b\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => [['onKernelResponse', -1000]],
+            \_PhpScoperbcc0395698f8\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => [['onKernelResponse', -1000]],
         ];
     }
 }

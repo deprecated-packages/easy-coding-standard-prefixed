@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper1103e00fb46b\Migrify\PhpConfigPrinter\NodeFactory\Service;
+namespace _PhpScoperbcc0395698f8\Migrify\PhpConfigPrinter\NodeFactory\Service;
 
-use _PhpScoper1103e00fb46b\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScoper1103e00fb46b\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
-use _PhpScoper1103e00fb46b\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoper1103e00fb46b\PhpParser\Node\Arg;
-use _PhpScoper1103e00fb46b\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper1103e00fb46b\PhpParser\Node\Expr\Variable;
-use _PhpScoper1103e00fb46b\PhpParser\Node\Scalar\String_;
-use _PhpScoper1103e00fb46b\PhpParser\Node\Stmt\Expression;
+use _PhpScoperbcc0395698f8\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoperbcc0395698f8\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
+use _PhpScoperbcc0395698f8\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoperbcc0395698f8\PhpParser\Node\Arg;
+use _PhpScoperbcc0395698f8\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperbcc0395698f8\PhpParser\Node\Expr\Variable;
+use _PhpScoperbcc0395698f8\PhpParser\Node\Scalar\String_;
+use _PhpScoperbcc0395698f8\PhpParser\Node\Stmt\Expression;
 final class ServicesPhpNodeFactory
 {
     /**
@@ -29,18 +29,18 @@ final class ServicesPhpNodeFactory
      * @var AutoBindNodeFactory
      */
     private $autoBindNodeFactory;
-    public function __construct(\_PhpScoper1103e00fb46b\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \_PhpScoper1103e00fb46b\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScoper1103e00fb46b\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory $autoBindNodeFactory)
+    public function __construct(\_PhpScoperbcc0395698f8\Migrify\PhpConfigPrinter\NodeFactory\CommonNodeFactory $commonNodeFactory, \_PhpScoperbcc0395698f8\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScoperbcc0395698f8\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory $autoBindNodeFactory)
     {
         $this->commonNodeFactory = $commonNodeFactory;
         $this->argsNodeFactory = $argsNodeFactory;
         $this->autoBindNodeFactory = $autoBindNodeFactory;
     }
-    public function createResource(string $serviceKey, array $serviceValues) : \_PhpScoper1103e00fb46b\PhpParser\Node\Stmt\Expression
+    public function createResource(string $serviceKey, array $serviceValues) : \_PhpScoperbcc0395698f8\PhpParser\Node\Stmt\Expression
     {
         $servicesLoadMethodCall = $this->createServicesLoadMethodCall($serviceKey, $serviceValues);
-        $servicesLoadMethodCall = $this->autoBindNodeFactory->createAutoBindCalls($serviceValues, $servicesLoadMethodCall, \_PhpScoper1103e00fb46b\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory::TYPE_SERVICE);
+        $servicesLoadMethodCall = $this->autoBindNodeFactory->createAutoBindCalls($serviceValues, $servicesLoadMethodCall, \_PhpScoperbcc0395698f8\Migrify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory::TYPE_SERVICE);
         if (!isset($serviceValues[self::EXCLUDE])) {
-            return new \_PhpScoper1103e00fb46b\PhpParser\Node\Stmt\Expression($servicesLoadMethodCall);
+            return new \_PhpScoperbcc0395698f8\PhpParser\Node\Stmt\Expression($servicesLoadMethodCall);
         }
         $exclude = $serviceValues[self::EXCLUDE];
         if (!\is_array($exclude)) {
@@ -51,16 +51,16 @@ final class ServicesPhpNodeFactory
             $excludeValue[$key] = $this->commonNodeFactory->createAbsoluteDirExpr($singleExclude);
         }
         $args = $this->argsNodeFactory->createFromValues([$excludeValue]);
-        $excludeMethodCall = new \_PhpScoper1103e00fb46b\PhpParser\Node\Expr\MethodCall($servicesLoadMethodCall, self::EXCLUDE, $args);
-        return new \_PhpScoper1103e00fb46b\PhpParser\Node\Stmt\Expression($excludeMethodCall);
+        $excludeMethodCall = new \_PhpScoperbcc0395698f8\PhpParser\Node\Expr\MethodCall($servicesLoadMethodCall, self::EXCLUDE, $args);
+        return new \_PhpScoperbcc0395698f8\PhpParser\Node\Stmt\Expression($excludeMethodCall);
     }
-    private function createServicesLoadMethodCall(string $serviceKey, $serviceValues) : \_PhpScoper1103e00fb46b\PhpParser\Node\Expr\MethodCall
+    private function createServicesLoadMethodCall(string $serviceKey, $serviceValues) : \_PhpScoperbcc0395698f8\PhpParser\Node\Expr\MethodCall
     {
-        $servicesVariable = new \_PhpScoper1103e00fb46b\PhpParser\Node\Expr\Variable(\_PhpScoper1103e00fb46b\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $servicesVariable = new \_PhpScoperbcc0395698f8\PhpParser\Node\Expr\Variable(\_PhpScoperbcc0395698f8\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
         $resource = $serviceValues['resource'];
         $args = [];
-        $args[] = new \_PhpScoper1103e00fb46b\PhpParser\Node\Arg(new \_PhpScoper1103e00fb46b\PhpParser\Node\Scalar\String_($serviceKey));
-        $args[] = new \_PhpScoper1103e00fb46b\PhpParser\Node\Arg($this->commonNodeFactory->createAbsoluteDirExpr($resource));
-        return new \_PhpScoper1103e00fb46b\PhpParser\Node\Expr\MethodCall($servicesVariable, 'load', $args);
+        $args[] = new \_PhpScoperbcc0395698f8\PhpParser\Node\Arg(new \_PhpScoperbcc0395698f8\PhpParser\Node\Scalar\String_($serviceKey));
+        $args[] = new \_PhpScoperbcc0395698f8\PhpParser\Node\Arg($this->commonNodeFactory->createAbsoluteDirExpr($resource));
+        return new \_PhpScoperbcc0395698f8\PhpParser\Node\Expr\MethodCall($servicesVariable, 'load', $args);
     }
 }

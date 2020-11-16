@@ -9,10 +9,10 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1103e00fb46b\SebastianBergmann\Diff;
+namespace _PhpScoperbcc0395698f8\SebastianBergmann\Diff;
 
-use _PhpScoper1103e00fb46b\PHPUnit\Framework\TestCase;
-use _PhpScoper1103e00fb46b\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use _PhpScoperbcc0395698f8\PHPUnit\Framework\TestCase;
+use _PhpScoperbcc0395698f8\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 /**
  * @covers SebastianBergmann\Diff\Differ
  * @covers SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
@@ -21,7 +21,7 @@ use _PhpScoper1103e00fb46b\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilde
  * @uses SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator
  * @uses SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
  */
-final class DifferTest extends \_PhpScoper1103e00fb46b\PHPUnit\Framework\TestCase
+final class DifferTest extends \_PhpScoperbcc0395698f8\PHPUnit\Framework\TestCase
 {
     /**
      * @var Differ
@@ -29,7 +29,7 @@ final class DifferTest extends \_PhpScoper1103e00fb46b\PHPUnit\Framework\TestCas
     private $differ;
     protected function setUp() : void
     {
-        $this->differ = new \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ();
+        $this->differ = new \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ();
     }
     /**
      * @param array        $expected
@@ -40,7 +40,7 @@ final class DifferTest extends \_PhpScoper1103e00fb46b\PHPUnit\Framework\TestCas
      */
     public function testArrayRepresentationOfDiffCanBeRenderedUsingTimeEfficientLcsImplementation(array $expected, $from, $to) : void
     {
-        $this->assertSame($expected, $this->differ->diffToArray($from, $to, new \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator()));
+        $this->assertSame($expected, $this->differ->diffToArray($from, $to, new \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator()));
     }
     /**
      * @param string $expected
@@ -51,7 +51,7 @@ final class DifferTest extends \_PhpScoper1103e00fb46b\PHPUnit\Framework\TestCas
      */
     public function testTextRepresentationOfDiffCanBeRenderedUsingTimeEfficientLcsImplementation(string $expected, string $from, string $to) : void
     {
-        $this->assertSame($expected, $this->differ->diff($from, $to, new \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator()));
+        $this->assertSame($expected, $this->differ->diff($from, $to, new \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator()));
     }
     /**
      * @param array        $expected
@@ -62,7 +62,7 @@ final class DifferTest extends \_PhpScoper1103e00fb46b\PHPUnit\Framework\TestCas
      */
     public function testArrayRepresentationOfDiffCanBeRenderedUsingMemoryEfficientLcsImplementation(array $expected, $from, $to) : void
     {
-        $this->assertSame($expected, $this->differ->diffToArray($from, $to, new \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator()));
+        $this->assertSame($expected, $this->differ->diffToArray($from, $to, new \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator()));
     }
     /**
      * @param string $expected
@@ -73,7 +73,7 @@ final class DifferTest extends \_PhpScoper1103e00fb46b\PHPUnit\Framework\TestCas
      */
     public function testTextRepresentationOfDiffCanBeRenderedUsingMemoryEfficientLcsImplementation(string $expected, string $from, string $to) : void
     {
-        $this->assertSame($expected, $this->differ->diff($from, $to, new \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator()));
+        $this->assertSame($expected, $this->differ->diff($from, $to, new \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator()));
     }
     public function testTypesOtherThanArrayAndStringCanBePassed() : void
     {
@@ -90,7 +90,7 @@ final class DifferTest extends \_PhpScoper1103e00fb46b\PHPUnit\Framework\TestCas
     }
     public function arrayProvider() : array
     {
-        return [[[['a', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['b', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], 'a', 'b'], [[['ba', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['bc', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], 'ba', 'bc'], [[['ab', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['cb', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], 'ab', 'cb'], [[['abc', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['adc', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], 'abc', 'adc'], [[['ab', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['abc', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], 'ab', 'abc'], [[['bc', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['abc', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], 'bc', 'abc'], [[['abc', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['abbc', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], 'abc', 'abbc'], [[['abcdde', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['abcde', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], 'abcdde', 'abcde'], 'same start' => [[[17, \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::OLD], ['b', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['d', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], [30 => 17, 'a' => 'b'], [30 => 17, 'c' => 'd']], 'same end' => [[[1, \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], [2, \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED], ['b', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::OLD]], [1 => 1, 'a' => 'b'], [1 => 2, 'a' => 'b']], 'same start (2), same end (1)' => [[[17, \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::OLD], [2, \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::OLD], [4, \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['a', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED], [5, \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED], ['x', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::OLD]], [30 => 17, 1 => 2, 2 => 4, 'z' => 'x'], [30 => 17, 1 => 2, 3 => 'a', 2 => 5, 'z' => 'x']], 'same' => [[['x', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::OLD]], ['z' => 'x'], ['z' => 'x']], 'diff' => [[['y', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['x', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], ['x' => 'y'], ['z' => 'x']], 'diff 2' => [[['y', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['b', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ['x', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED], ['d', \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], ['x' => 'y', 'a' => 'b'], ['z' => 'x', 'c' => 'd']], 'test line diff detection' => [[["#Warning: Strings contain different line endings!\n", \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::DIFF_LINE_END_WARNING], ["<?php\r\n", \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ["<?php\n", \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], "<?php\r\n", "<?php\n"], 'test line diff detection in array input' => [[["#Warning: Strings contain different line endings!\n", \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::DIFF_LINE_END_WARNING], ["<?php\r\n", \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::REMOVED], ["<?php\n", \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ::ADDED]], ["<?php\r\n"], ["<?php\n"]]];
+        return [[[['a', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['b', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], 'a', 'b'], [[['ba', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['bc', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], 'ba', 'bc'], [[['ab', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['cb', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], 'ab', 'cb'], [[['abc', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['adc', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], 'abc', 'adc'], [[['ab', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['abc', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], 'ab', 'abc'], [[['bc', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['abc', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], 'bc', 'abc'], [[['abc', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['abbc', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], 'abc', 'abbc'], [[['abcdde', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['abcde', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], 'abcdde', 'abcde'], 'same start' => [[[17, \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::OLD], ['b', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['d', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], [30 => 17, 'a' => 'b'], [30 => 17, 'c' => 'd']], 'same end' => [[[1, \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], [2, \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED], ['b', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::OLD]], [1 => 1, 'a' => 'b'], [1 => 2, 'a' => 'b']], 'same start (2), same end (1)' => [[[17, \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::OLD], [2, \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::OLD], [4, \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['a', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED], [5, \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED], ['x', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::OLD]], [30 => 17, 1 => 2, 2 => 4, 'z' => 'x'], [30 => 17, 1 => 2, 3 => 'a', 2 => 5, 'z' => 'x']], 'same' => [[['x', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::OLD]], ['z' => 'x'], ['z' => 'x']], 'diff' => [[['y', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['x', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], ['x' => 'y'], ['z' => 'x']], 'diff 2' => [[['y', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['b', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ['x', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED], ['d', \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], ['x' => 'y', 'a' => 'b'], ['z' => 'x', 'c' => 'd']], 'test line diff detection' => [[["#Warning: Strings contain different line endings!\n", \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::DIFF_LINE_END_WARNING], ["<?php\r\n", \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ["<?php\n", \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], "<?php\r\n", "<?php\n"], 'test line diff detection in array input' => [[["#Warning: Strings contain different line endings!\n", \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::DIFF_LINE_END_WARNING], ["<?php\r\n", \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::REMOVED], ["<?php\n", \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ::ADDED]], ["<?php\r\n"], ["<?php\n"]]];
     }
     public function textProvider() : array
     {
@@ -128,13 +128,13 @@ EOF
     }
     public function testDiffToArrayInvalidFromType() : void
     {
-        $this->expectException(\_PhpScoper1103e00fb46b\SebastianBergmann\Diff\InvalidArgumentException::class);
+        $this->expectException(\_PhpScoperbcc0395698f8\SebastianBergmann\Diff\InvalidArgumentException::class);
         $this->expectExceptionMessageRegExp('#^"from" must be an array or string\\.$#');
         $this->differ->diffToArray(null, '');
     }
     public function testDiffInvalidToType() : void
     {
-        $this->expectException(\_PhpScoper1103e00fb46b\SebastianBergmann\Diff\InvalidArgumentException::class);
+        $this->expectException(\_PhpScoperbcc0395698f8\SebastianBergmann\Diff\InvalidArgumentException::class);
         $this->expectExceptionMessageRegExp('#^"to" must be an array or string\\.$#');
         $this->differ->diffToArray('', new \stdClass());
     }
@@ -157,14 +157,14 @@ EOF
     }
     public function testConstructorInvalidArgInt() : void
     {
-        $this->expectException(\_PhpScoper1103e00fb46b\SebastianBergmann\Diff\InvalidArgumentException::class);
+        $this->expectException(\_PhpScoperbcc0395698f8\SebastianBergmann\Diff\InvalidArgumentException::class);
         $this->expectExceptionMessageRegExp('/^Expected builder to be an instance of DiffOutputBuilderInterface, <null> or a string, got integer "1"\\.$/');
-        new \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ(1);
+        new \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ(1);
     }
     public function testConstructorInvalidArgObject() : void
     {
-        $this->expectException(\_PhpScoper1103e00fb46b\SebastianBergmann\Diff\InvalidArgumentException::class);
+        $this->expectException(\_PhpScoperbcc0395698f8\SebastianBergmann\Diff\InvalidArgumentException::class);
         $this->expectExceptionMessageRegExp('/^Expected builder to be an instance of DiffOutputBuilderInterface, <null> or a string, got instance of "SplFileInfo"\\.$/');
-        new \_PhpScoper1103e00fb46b\SebastianBergmann\Diff\Differ(new \SplFileInfo(__FILE__));
+        new \_PhpScoperbcc0395698f8\SebastianBergmann\Diff\Differ(new \SplFileInfo(__FILE__));
     }
 }

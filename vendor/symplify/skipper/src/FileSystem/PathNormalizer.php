@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\FileSystem;
 
-use _PhpScoper1103e00fb46b\Nette\Utils\Strings;
+use _PhpScoperbcc0395698f8\Nette\Utils\Strings;
 final class PathNormalizer
 {
     /**
@@ -23,11 +23,11 @@ final class PathNormalizer
     public function normalizeForFnmatch(string $path) : string
     {
         // ends with *
-        if (\_PhpScoper1103e00fb46b\Nette\Utils\Strings::match($path, self::ONLY_ENDS_WITH_ASTERISK_REGEX)) {
+        if (\_PhpScoperbcc0395698f8\Nette\Utils\Strings::match($path, self::ONLY_ENDS_WITH_ASTERISK_REGEX)) {
             return '*' . $path;
         }
         // starts with *
-        if (\_PhpScoper1103e00fb46b\Nette\Utils\Strings::match($path, self::ONLY_STARTS_WITH_ASTERISK_REGEX)) {
+        if (\_PhpScoperbcc0395698f8\Nette\Utils\Strings::match($path, self::ONLY_STARTS_WITH_ASTERISK_REGEX)) {
             return $path . '*';
         }
         return $path;
