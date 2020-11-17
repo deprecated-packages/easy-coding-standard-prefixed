@@ -3635,7 +3635,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "e0aa106046b909b94b1a51a5249ed1ba9c64ba5d"
+                "reference": "fa3758734aee75e7a67f4e3c08a547340dbdd116"
             },
             "require": {
                 "migrify/php-config-printer": "^0.4",
@@ -3651,7 +3651,8 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "phpstan/phpstan": "^0.12.40",
-                "phpunit/phpunit": "^8.5|^9.4"
+                "phpunit/phpunit": "^8.5|^9.4",
+                "rector/rector": "^0.8.56"
             },
             "bin": [
                 "bin/rule-doc-generator"

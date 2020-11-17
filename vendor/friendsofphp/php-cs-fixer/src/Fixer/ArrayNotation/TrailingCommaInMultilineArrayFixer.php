@@ -24,7 +24,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper2a8ad010dfbd\Symfony\Component\OptionsResolver\Options;
+use _PhpScoperad4b7e2c09d8\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Sebastiaan Stok <s.stok@rollerscapes.net>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -72,7 +72,7 @@ SAMPLE
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('after_heredoc', 'Whether a trailing comma should also be placed after heredoc end.'))->setAllowedTypes(['bool'])->setDefault(\false)->setNormalizer(static function (\_PhpScoper2a8ad010dfbd\Symfony\Component\OptionsResolver\Options $options, $value) {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('after_heredoc', 'Whether a trailing comma should also be placed after heredoc end.'))->setAllowedTypes(['bool'])->setDefault(\false)->setNormalizer(static function (\_PhpScoperad4b7e2c09d8\Symfony\Component\OptionsResolver\Options $options, $value) {
             if (\PHP_VERSION_ID < 70300 && $value) {
                 throw new \PhpCsFixer\FixerConfiguration\InvalidOptionsForEnvException('"after_heredoc" option can only be enabled with PHP 7.3+.');
             }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper2a8ad010dfbd\PhpParser\Node\Stmt;
+namespace _PhpScoperad4b7e2c09d8\PhpParser\Node\Stmt;
 
-use _PhpScoper2a8ad010dfbd\PhpParser\Node\Stmt;
-class Static_ extends \_PhpScoper2a8ad010dfbd\PhpParser\Node\Stmt
+use _PhpScoperad4b7e2c09d8\PhpParser\Node\Stmt;
+class Static_ extends \_PhpScoperad4b7e2c09d8\PhpParser\Node\Stmt
 {
     /** @var StaticVar[] Variable definitions */
     public $vars;

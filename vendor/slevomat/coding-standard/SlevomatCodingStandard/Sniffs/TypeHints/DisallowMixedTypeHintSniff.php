@@ -11,7 +11,7 @@ use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use SlevomatCodingStandard\Helpers\SuppressHelper;
 use function sprintf;
 use function strtolower;
-use const _PhpScoper2a8ad010dfbd\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoperad4b7e2c09d8\T_DOC_COMMENT_OPEN_TAG;
 class DisallowMixedTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_DISALLOWED_MIXED_TYPE_HINT = 'DisallowedMixedTypeHint';

@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Report;
 
-use _PhpScoper2a8ad010dfbd\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperad4b7e2c09d8\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *
@@ -50,6 +50,6 @@ final class JsonReporter implements \PhpCsFixer\Report\ReporterInterface
             $json['memory'] = \round($reportSummary->getMemory() / 1024 / 1024, 3);
         }
         $json = \json_encode($json);
-        return $reportSummary->isDecoratedOutput() ? \_PhpScoper2a8ad010dfbd\Symfony\Component\Console\Formatter\OutputFormatter::escape($json) : $json;
+        return $reportSummary->isDecoratedOutput() ? \_PhpScoperad4b7e2c09d8\Symfony\Component\Console\Formatter\OutputFormatter::escape($json) : $json;
     }
 }

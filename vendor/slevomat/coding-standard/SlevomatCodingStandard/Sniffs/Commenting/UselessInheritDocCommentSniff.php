@@ -11,9 +11,9 @@ use SlevomatCodingStandard\Helpers\TypeHintHelper;
 use function array_merge;
 use function in_array;
 use function preg_match;
-use const _PhpScoper2a8ad010dfbd\T_DOC_COMMENT_OPEN_TAG;
-use const _PhpScoper2a8ad010dfbd\T_DOC_COMMENT_STAR;
-use const _PhpScoper2a8ad010dfbd\T_DOC_COMMENT_WHITESPACE;
+use const _PhpScoperad4b7e2c09d8\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoperad4b7e2c09d8\T_DOC_COMMENT_STAR;
+use const _PhpScoperad4b7e2c09d8\T_DOC_COMMENT_WHITESPACE;
 use const T_WHITESPACE;
 class UselessInheritDocCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

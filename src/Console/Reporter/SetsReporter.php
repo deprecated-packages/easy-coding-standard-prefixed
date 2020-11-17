@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Reporter;
 
-use _PhpScoper2a8ad010dfbd\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoperad4b7e2c09d8\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -17,7 +17,7 @@ final class SetsReporter
      * @var ParameterProvider
      */
     private $parameterProvider;
-    public function __construct(\_PhpScoper2a8ad010dfbd\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider)
+    public function __construct(\_PhpScoperad4b7e2c09d8\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->parameterProvider = $parameterProvider;
