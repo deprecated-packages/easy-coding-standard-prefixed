@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper967c4b7e296e\Symfony\Component\Console\Output;
+namespace _PhpScoper2a8ad010dfbd\Symfony\Component\Console\Output;
 
-use _PhpScoper967c4b7e296e\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper967c4b7e296e\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoper2a8ad010dfbd\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper2a8ad010dfbd\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * NullOutput suppresses all output.
  *
@@ -20,12 +20,12 @@ use _PhpScoper967c4b7e296e\Symfony\Component\Console\Formatter\OutputFormatterIn
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class NullOutput implements \_PhpScoper967c4b7e296e\Symfony\Component\Console\Output\OutputInterface
+class NullOutput implements \_PhpScoper2a8ad010dfbd\Symfony\Component\Console\Output\OutputInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\_PhpScoper967c4b7e296e\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function setFormatter(\_PhpScoper2a8ad010dfbd\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         // do nothing
     }
@@ -35,7 +35,7 @@ class NullOutput implements \_PhpScoper967c4b7e296e\Symfony\Component\Console\Ou
     public function getFormatter()
     {
         // to comply with the interface we must return a OutputFormatterInterface
-        return new \_PhpScoper967c4b7e296e\Symfony\Component\Console\Formatter\OutputFormatter();
+        return new \_PhpScoper2a8ad010dfbd\Symfony\Component\Console\Formatter\OutputFormatter();
     }
     /**
      * {@inheritdoc}

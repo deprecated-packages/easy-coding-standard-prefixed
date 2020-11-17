@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper967c4b7e296e\PhpParser;
+namespace _PhpScoper2a8ad010dfbd\PhpParser;
 
-use _PhpScoper967c4b7e296e\PhpParser\NodeVisitor\FindingVisitor;
-use _PhpScoper967c4b7e296e\PhpParser\NodeVisitor\FirstFindingVisitor;
+use _PhpScoper2a8ad010dfbd\PhpParser\NodeVisitor\FindingVisitor;
+use _PhpScoper2a8ad010dfbd\PhpParser\NodeVisitor\FirstFindingVisitor;
 class NodeFinder
 {
     /**
@@ -20,8 +20,8 @@ class NodeFinder
         if (!\is_array($nodes)) {
             $nodes = [$nodes];
         }
-        $visitor = new \_PhpScoper967c4b7e296e\PhpParser\NodeVisitor\FindingVisitor($filter);
-        $traverser = new \_PhpScoper967c4b7e296e\PhpParser\NodeTraverser();
+        $visitor = new \_PhpScoper2a8ad010dfbd\PhpParser\NodeVisitor\FindingVisitor($filter);
+        $traverser = new \_PhpScoper2a8ad010dfbd\PhpParser\NodeTraverser();
         $traverser->addVisitor($visitor);
         $traverser->traverse($nodes);
         return $visitor->getFoundNodes();
@@ -53,8 +53,8 @@ class NodeFinder
         if (!\is_array($nodes)) {
             $nodes = [$nodes];
         }
-        $visitor = new \_PhpScoper967c4b7e296e\PhpParser\NodeVisitor\FirstFindingVisitor($filter);
-        $traverser = new \_PhpScoper967c4b7e296e\PhpParser\NodeTraverser();
+        $visitor = new \_PhpScoper2a8ad010dfbd\PhpParser\NodeVisitor\FirstFindingVisitor($filter);
+        $traverser = new \_PhpScoper2a8ad010dfbd\PhpParser\NodeTraverser();
         $traverser->addVisitor($visitor);
         $traverser->traverse($nodes);
         return $visitor->getFoundNode();

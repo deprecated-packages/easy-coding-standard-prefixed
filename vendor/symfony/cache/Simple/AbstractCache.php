@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper967c4b7e296e\Symfony\Component\Cache\Simple;
+namespace _PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Simple;
 
-use _PhpScoper967c4b7e296e\Psr\Log\LoggerAwareInterface;
-use _PhpScoper967c4b7e296e\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
-use _PhpScoper967c4b7e296e\Symfony\Component\Cache\Adapter\AbstractAdapter;
-use _PhpScoper967c4b7e296e\Symfony\Component\Cache\CacheItem;
-use _PhpScoper967c4b7e296e\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper967c4b7e296e\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper967c4b7e296e\Symfony\Component\Cache\Traits\AbstractTrait;
-use _PhpScoper967c4b7e296e\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper967c4b7e296e\Symfony\Component\Cache\Simple\AbstractCache::class, \_PhpScoper967c4b7e296e\Symfony\Component\Cache\Adapter\AbstractAdapter::class, \_PhpScoper967c4b7e296e\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoper2a8ad010dfbd\Psr\Log\LoggerAwareInterface;
+use _PhpScoper2a8ad010dfbd\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
+use _PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Adapter\AbstractAdapter;
+use _PhpScoper2a8ad010dfbd\Symfony\Component\Cache\CacheItem;
+use _PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper2a8ad010dfbd\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Traits\AbstractTrait;
+use _PhpScoper2a8ad010dfbd\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Simple\AbstractCache::class, \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Adapter\AbstractAdapter::class, \_PhpScoper2a8ad010dfbd\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use AbstractAdapter and type-hint for CacheInterface instead.
  */
-abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\CacheInterface, \_PhpScoper967c4b7e296e\Psr\Log\LoggerAwareInterface, \_PhpScoper967c4b7e296e\Symfony\Component\Cache\ResettableInterface
+abstract class AbstractCache implements \_PhpScoper2a8ad010dfbd\Psr\SimpleCache\CacheInterface, \_PhpScoper2a8ad010dfbd\Psr\Log\LoggerAwareInterface, \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\ResettableInterface
 {
     /**
      * @internal
@@ -37,9 +37,9 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
     protected function __construct(string $namespace = '', int $defaultLifetime = 0)
     {
         $this->defaultLifetime = \max(0, $defaultLifetime);
-        $this->namespace = '' === $namespace ? '' : \_PhpScoper967c4b7e296e\Symfony\Component\Cache\CacheItem::validateKey($namespace) . ':';
+        $this->namespace = '' === $namespace ? '' : \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\CacheItem::validateKey($namespace) . ':';
         if (null !== $this->maxIdLength && \strlen($namespace) > $this->maxIdLength - 24) {
-            throw new \_PhpScoper967c4b7e296e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace must be %d chars max, %d given ("%s")', $this->maxIdLength - 24, \strlen($namespace), $namespace));
+            throw new \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace must be %d chars max, %d given ("%s")', $this->maxIdLength - 24, \strlen($namespace), $namespace));
         }
     }
     /**
@@ -53,7 +53,7 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
                 return $value;
             }
         } catch (\Exception $e) {
-            \_PhpScoper967c4b7e296e\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e]);
+            \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e]);
         }
         return $default;
     }
@@ -64,7 +64,7 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
      */
     public function set($key, $value, $ttl = null)
     {
-        \_PhpScoper967c4b7e296e\Symfony\Component\Cache\CacheItem::validateKey($key);
+        \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\CacheItem::validateKey($key);
         return $this->setMultiple([$key => $value], $ttl);
     }
     /**
@@ -77,7 +77,7 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
         if ($keys instanceof \Traversable) {
             $keys = \iterator_to_array($keys, \false);
         } elseif (!\is_array($keys)) {
-            throw new \_PhpScoper967c4b7e296e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
+            throw new \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
         }
         $ids = [];
         foreach ($keys as $key) {
@@ -86,7 +86,7 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
         try {
             $values = $this->doFetch($ids);
         } catch (\Exception $e) {
-            \_PhpScoper967c4b7e296e\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch values: ' . $e->getMessage(), ['keys' => $keys, 'exception' => $e]);
+            \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch values: ' . $e->getMessage(), ['keys' => $keys, 'exception' => $e]);
             $values = [];
         }
         $ids = \array_combine($ids, $keys);
@@ -100,7 +100,7 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
     public function setMultiple($values, $ttl = null)
     {
         if (!\is_array($values) && !$values instanceof \Traversable) {
-            throw new \_PhpScoper967c4b7e296e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache values must be array or Traversable, "%s" given', \is_object($values) ? \get_class($values) : \gettype($values)));
+            throw new \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache values must be array or Traversable, "%s" given', \is_object($values) ? \get_class($values) : \gettype($values)));
         }
         $valuesById = [];
         foreach ($values as $key => $value) {
@@ -124,7 +124,7 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
             $keys[] = \substr($id, \strlen($this->namespace));
         }
         $message = 'Failed to save values' . ($e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-        \_PhpScoper967c4b7e296e\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['keys' => $keys, 'exception' => $e instanceof \Exception ? $e : null]);
+        \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['keys' => $keys, 'exception' => $e instanceof \Exception ? $e : null]);
         return \false;
     }
     /**
@@ -137,7 +137,7 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
         if ($keys instanceof \Traversable) {
             $keys = \iterator_to_array($keys, \false);
         } elseif (!\is_array($keys)) {
-            throw new \_PhpScoper967c4b7e296e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
+            throw new \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
         }
         return $this->deleteItems($keys);
     }
@@ -152,7 +152,7 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
         if (\is_int($ttl)) {
             return 0 < $ttl ? $ttl : \false;
         }
-        throw new \_PhpScoper967c4b7e296e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must be an integer, a DateInterval or null, "%s" given', \is_object($ttl) ? \get_class($ttl) : \gettype($ttl)));
+        throw new \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must be an integer, a DateInterval or null, "%s" given', \is_object($ttl) ? \get_class($ttl) : \gettype($ttl)));
     }
     private function generateValues(iterable $values, array &$keys, $default) : iterable
     {
@@ -166,7 +166,7 @@ abstract class AbstractCache implements \_PhpScoper967c4b7e296e\Psr\SimpleCache\
                 (yield $key => $value);
             }
         } catch (\Exception $e) {
-            \_PhpScoper967c4b7e296e\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch values: ' . $e->getMessage(), ['keys' => \array_values($keys), 'exception' => $e]);
+            \_PhpScoper2a8ad010dfbd\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch values: ' . $e->getMessage(), ['keys' => \array_values($keys), 'exception' => $e]);
         }
         foreach ($keys as $key) {
             (yield $key => $default);

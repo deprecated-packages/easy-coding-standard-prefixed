@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper967c4b7e296e\Composer\Semver\Constraint;
+namespace _PhpScoper2a8ad010dfbd\Composer\Semver\Constraint;
 
 interface ConstraintInterface
 {
@@ -17,7 +17,7 @@ interface ConstraintInterface
      *
      * @return bool
      */
-    public function matches(\_PhpScoper967c4b7e296e\Composer\Semver\Constraint\ConstraintInterface $provider);
+    public function matches(\_PhpScoper2a8ad010dfbd\Composer\Semver\Constraint\ConstraintInterface $provider);
     /**
      * @return string
      */
