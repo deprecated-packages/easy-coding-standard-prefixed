@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\RuleCodeSamplePrinter;
 
-use _PhpScoper239b374a39c8\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
+use _PhpScoper967c4b7e296e\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter;
@@ -24,7 +24,7 @@ final class PHPCSFixerRuleCodeSamplePrinter implements \Symplify\RuleDocGenerato
      * @var SmartPhpConfigPrinter
      */
     private $smartPhpConfigPrinter;
-    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter $diffCodeSamplePrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \_PhpScoper239b374a39c8\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
+    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter $diffCodeSamplePrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \_PhpScoper967c4b7e296e\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
     {
         $this->diffCodeSamplePrinter = $diffCodeSamplePrinter;
         $this->markdownCodeWrapper = $markdownCodeWrapper;
@@ -36,7 +36,7 @@ final class PHPCSFixerRuleCodeSamplePrinter implements \Symplify\RuleDocGenerato
         return \is_a($class, 'PhpCsFixer\\Fixer\\FixerInterface', \true);
     }
     /**
-     * @return string[]
+     * @return mixed[]|string[]
      */
     public function print(\Symplify\RuleDocGenerator\Contract\CodeSampleInterface $codeSample, \Symplify\RuleDocGenerator\ValueObject\RuleDefinition $ruleDefinition) : array
     {
@@ -45,6 +45,9 @@ final class PHPCSFixerRuleCodeSamplePrinter implements \Symplify\RuleDocGenerato
         }
         return $this->diffCodeSamplePrinter->print($codeSample);
     }
+    /**
+     * @return string[]
+     */
     private function printConfiguredCodeSample(\Symplify\RuleDocGenerator\ValueObject\RuleDefinition $ruleDefinition, \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample $configuredCodeSample) : array
     {
         $lines = [];

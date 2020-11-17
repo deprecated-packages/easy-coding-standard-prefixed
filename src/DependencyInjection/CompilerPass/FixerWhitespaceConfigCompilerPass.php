@@ -5,12 +5,12 @@ namespace Symplify\EasyCodingStandard\DependencyInjection\CompilerPass;
 
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Reference;
-final class FixerWhitespaceConfigCompilerPass implements \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+use _PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Reference;
+final class FixerWhitespaceConfigCompilerPass implements \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
-    public function process(\_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function process(\_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $definitions = $containerBuilder->getDefinitions();
         foreach ($definitions as $definition) {
@@ -20,7 +20,7 @@ final class FixerWhitespaceConfigCompilerPass implements \_PhpScoper239b374a39c8
             if (!\is_a($definition->getClass(), \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface::class, \true)) {
                 continue;
             }
-            $definition->addMethodCall('setWhitespacesConfig', [new \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Reference(\PhpCsFixer\WhitespacesFixerConfig::class)]);
+            $definition->addMethodCall('setWhitespacesConfig', [new \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Reference(\PhpCsFixer\WhitespacesFixerConfig::class)]);
         }
     }
 }

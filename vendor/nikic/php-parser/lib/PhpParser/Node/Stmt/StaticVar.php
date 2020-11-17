@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper239b374a39c8\PhpParser\Node\Stmt;
+namespace _PhpScoper967c4b7e296e\PhpParser\Node\Stmt;
 
-use _PhpScoper239b374a39c8\PhpParser\Node;
-use _PhpScoper239b374a39c8\PhpParser\Node\Expr;
-class StaticVar extends \_PhpScoper239b374a39c8\PhpParser\Node\Stmt
+use _PhpScoper967c4b7e296e\PhpParser\Node;
+use _PhpScoper967c4b7e296e\PhpParser\Node\Expr;
+class StaticVar extends \_PhpScoper967c4b7e296e\PhpParser\Node\Stmt
 {
     /** @var Expr\Variable Variable */
     public $var;
@@ -18,7 +18,7 @@ class StaticVar extends \_PhpScoper239b374a39c8\PhpParser\Node\Stmt
      * @param null|Node\Expr $default    Default value
      * @param array          $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper239b374a39c8\PhpParser\Node\Expr\Variable $var, \_PhpScoper239b374a39c8\PhpParser\Node\Expr $default = null, array $attributes = [])
+    public function __construct(\_PhpScoper967c4b7e296e\PhpParser\Node\Expr\Variable $var, \_PhpScoper967c4b7e296e\PhpParser\Node\Expr $default = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;

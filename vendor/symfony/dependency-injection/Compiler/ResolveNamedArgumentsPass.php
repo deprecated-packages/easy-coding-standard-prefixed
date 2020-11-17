@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use _PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use _PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Reference;
 /**
  * Resolves named arguments to their corresponding numeric index.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class ResolveNamedArgumentsPass extends \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveNamedArgumentsPass extends \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if (!$value instanceof \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Definition) {
+        if (!$value instanceof \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Definition) {
             return parent::processValue($value, $isRoot);
         }
         $calls = $value->getMethodCalls();
@@ -47,7 +47,7 @@ class ResolveNamedArgumentsPass extends \_PhpScoper239b374a39c8\Symfony\Componen
                     $parameters = $r->getParameters();
                 }
                 if (isset($key[0]) && '$' !== $key[0] && !\class_exists($key) && !\interface_exists($key, \false)) {
-                    throw new \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": did you forget to add the "$" prefix to argument "%s"?', $this->currentId, $key));
+                    throw new \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": did you forget to add the "$" prefix to argument "%s"?', $this->currentId, $key));
                 }
                 if (isset($key[0]) && '$' === $key[0]) {
                     foreach ($parameters as $j => $p) {
@@ -62,20 +62,20 @@ class ResolveNamedArgumentsPass extends \_PhpScoper239b374a39c8\Symfony\Componen
                             continue 2;
                         }
                     }
-                    throw new \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": method "%s()" has no argument named "%s". Check your service definition.', $this->currentId, $class !== $this->currentId ? $class . '::' . $method : $method, $key));
+                    throw new \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": method "%s()" has no argument named "%s". Check your service definition.', $this->currentId, $class !== $this->currentId ? $class . '::' . $method : $method, $key));
                 }
-                if (null !== $argument && !$argument instanceof \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Reference && !$argument instanceof \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Definition) {
-                    throw new \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": the value of argument "%s" of method "%s()" must be null, an instance of %s or an instance of %s, %s given.', $this->currentId, $key, $class !== $this->currentId ? $class . '::' . $method : $method, \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Reference::class, \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Definition::class, \gettype($argument)));
+                if (null !== $argument && !$argument instanceof \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Reference && !$argument instanceof \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Definition) {
+                    throw new \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": the value of argument "%s" of method "%s()" must be null, an instance of %s or an instance of %s, %s given.', $this->currentId, $key, $class !== $this->currentId ? $class . '::' . $method : $method, \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Reference::class, \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Definition::class, \gettype($argument)));
                 }
                 $typeFound = \false;
                 foreach ($parameters as $j => $p) {
-                    if (!\array_key_exists($j, $resolvedArguments) && \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($r, $p, \true) === $key) {
+                    if (!\array_key_exists($j, $resolvedArguments) && \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper::getTypeHint($r, $p, \true) === $key) {
                         $resolvedArguments[$j] = $argument;
                         $typeFound = \true;
                     }
                 }
                 if (!$typeFound) {
-                    throw new \_PhpScoper239b374a39c8\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": method "%s()" has no argument type-hinted as "%s". Check your service definition.', $this->currentId, $class !== $this->currentId ? $class . '::' . $method : $method, $key));
+                    throw new \_PhpScoper967c4b7e296e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid service "%s": method "%s()" has no argument type-hinted as "%s". Check your service definition.', $this->currentId, $class !== $this->currentId ? $class . '::' . $method : $method, $key));
                 }
             }
             if ($resolvedArguments !== $call[1]) {

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper239b374a39c8\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace _PhpScoper967c4b7e296e\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-class ConstExprStringNode implements \_PhpScoper239b374a39c8\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
+class ConstExprStringNode implements \_PhpScoper967c4b7e296e\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
 {
     /** @var string */
     public $value;

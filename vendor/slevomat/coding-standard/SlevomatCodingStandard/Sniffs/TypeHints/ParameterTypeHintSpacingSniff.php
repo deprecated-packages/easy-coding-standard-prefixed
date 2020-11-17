@@ -8,10 +8,10 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_keys;
 use function sprintf;
-use const _PhpScoper239b374a39c8\T_BITWISE_AND;
-use const _PhpScoper239b374a39c8\T_COMMA;
+use const _PhpScoper967c4b7e296e\T_BITWISE_AND;
+use const _PhpScoper967c4b7e296e\T_COMMA;
 use const T_ELLIPSIS;
-use const _PhpScoper239b374a39c8\T_NULLABLE;
+use const _PhpScoper967c4b7e296e\T_NULLABLE;
 use const T_VARIABLE;
 use const T_WHITESPACE;
 class ParameterTypeHintSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff

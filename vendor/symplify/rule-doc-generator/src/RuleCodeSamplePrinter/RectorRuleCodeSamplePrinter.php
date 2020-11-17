@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\RuleCodeSamplePrinter;
 
-use _PhpScoper239b374a39c8\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
+use _PhpScoper967c4b7e296e\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter;
@@ -26,7 +26,7 @@ final class RectorRuleCodeSamplePrinter implements \Symplify\RuleDocGenerator\Co
      * @var SmartPhpConfigPrinter
      */
     private $smartPhpConfigPrinter;
-    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter $diffCodeSamplePrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \_PhpScoper239b374a39c8\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
+    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter $diffCodeSamplePrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \_PhpScoper967c4b7e296e\Migrify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
     {
         $this->diffCodeSamplePrinter = $diffCodeSamplePrinter;
         $this->markdownCodeWrapper = $markdownCodeWrapper;
@@ -35,10 +35,10 @@ final class RectorRuleCodeSamplePrinter implements \Symplify\RuleDocGenerator\Co
     public function isMatch(string $class) : bool
     {
         /** @noRector */
-        return \is_a($class, '_PhpScoper239b374a39c8\\Rector\\Core\\Contract\\Rector\\RectorInterface', \true);
+        return \is_a($class, '_PhpScoper967c4b7e296e\\Rector\\Core\\Contract\\Rector\\RectorInterface', \true);
     }
     /**
-     * @return string[]
+     * @return string[]|mixed|mixed[]
      */
     public function print(\Symplify\RuleDocGenerator\Contract\CodeSampleInterface $codeSample, \Symplify\RuleDocGenerator\ValueObject\RuleDefinition $ruleDefinition) : array
     {
@@ -53,6 +53,9 @@ final class RectorRuleCodeSamplePrinter implements \Symplify\RuleDocGenerator\Co
         }
         return $this->diffCodeSamplePrinter->print($codeSample);
     }
+    /**
+     * @return string[]
+     */
     private function printConfiguredCodeSample(\Symplify\RuleDocGenerator\ValueObject\RuleDefinition $ruleDefinition, \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample $configuredCodeSample) : array
     {
         $lines = [];
@@ -62,7 +65,10 @@ final class RectorRuleCodeSamplePrinter implements \Symplify\RuleDocGenerator\Co
         $newLines = $this->diffCodeSamplePrinter->print($configuredCodeSample);
         return \array_merge($lines, $newLines);
     }
-    private function printComposerJsonAwareCodeSample(\Symplify\RuleDocGenerator\ValueObject\CodeSample\ComposerJsonAwareCodeSample $composerJsonAwareCodeSample)
+    /**
+     * @return string[]
+     */
+    private function printComposerJsonAwareCodeSample(\Symplify\RuleDocGenerator\ValueObject\CodeSample\ComposerJsonAwareCodeSample $composerJsonAwareCodeSample) : array
     {
         $lines = [];
         $lines[] = '- with `composer.json`:';

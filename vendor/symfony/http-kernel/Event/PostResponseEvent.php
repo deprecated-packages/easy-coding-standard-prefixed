@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper239b374a39c8\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper967c4b7e296e\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper239b374a39c8\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoper967c4b7e296e\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper967c4b7e296e\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper967c4b7e296e\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * @deprecated since Symfony 4.3, use TerminateEvent instead
  */
-class PostResponseEvent extends \_PhpScoper239b374a39c8\Symfony\Component\HttpKernel\Event\KernelEvent
+class PostResponseEvent extends \_PhpScoper967c4b7e296e\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
-    public function __construct(\_PhpScoper239b374a39c8\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \_PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper239b374a39c8\Symfony\Component\HttpFoundation\Response $response)
+    public function __construct(\_PhpScoper967c4b7e296e\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \_PhpScoper967c4b7e296e\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper967c4b7e296e\Symfony\Component\HttpFoundation\Response $response)
     {
-        parent::__construct($kernel, $request, \_PhpScoper239b374a39c8\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST);
+        parent::__construct($kernel, $request, \_PhpScoper967c4b7e296e\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST);
         $this->response = $response;
     }
     /**

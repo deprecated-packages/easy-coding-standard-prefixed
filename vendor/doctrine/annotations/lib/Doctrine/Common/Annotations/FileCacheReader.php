@@ -17,7 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScoper239b374a39c8\Doctrine\Common\Annotations;
+namespace _PhpScoper967c4b7e296e\Doctrine\Common\Annotations;
 
 /**
  * File cache reader for annotations.
@@ -25,7 +25,7 @@ namespace _PhpScoper239b374a39c8\Doctrine\Common\Annotations;
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  */
-class FileCacheReader implements \_PhpScoper239b374a39c8\Doctrine\Common\Annotations\Reader
+class FileCacheReader implements \_PhpScoper967c4b7e296e\Doctrine\Common\Annotations\Reader
 {
     /**
      * @var Reader
@@ -56,7 +56,7 @@ class FileCacheReader implements \_PhpScoper239b374a39c8\Doctrine\Common\Annotat
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(\_PhpScoper239b374a39c8\Doctrine\Common\Annotations\Reader $reader, $cacheDir, $debug = \false)
+    public function __construct(\_PhpScoper967c4b7e296e\Doctrine\Common\Annotations\Reader $reader, $cacheDir, $debug = \false)
     {
         $this->reader = $reader;
         if (!\is_dir($cacheDir) && !@\mkdir($cacheDir, 0777, \true)) {

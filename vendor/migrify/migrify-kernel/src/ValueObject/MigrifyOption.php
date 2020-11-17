@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper239b374a39c8\Migrify\MigrifyKernel\ValueObject;
+namespace _PhpScoper967c4b7e296e\Migrify\MigrifyKernel\ValueObject;
 
 /**
  * Single class for parameter names and command line options

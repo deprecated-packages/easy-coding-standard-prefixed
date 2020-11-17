@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper239b374a39c8\Symfony\Component\Mime\Tests\Encoder;
+namespace _PhpScoper967c4b7e296e\Symfony\Component\Mime\Tests\Encoder;
 
-use _PhpScoper239b374a39c8\PHPUnit\Framework\TestCase;
-use _PhpScoper239b374a39c8\Symfony\Component\Mime\Encoder\Base64MimeHeaderEncoder;
-class Base64MimeHeaderEncoderTest extends \_PhpScoper239b374a39c8\PHPUnit\Framework\TestCase
+use _PhpScoper967c4b7e296e\PHPUnit\Framework\TestCase;
+use _PhpScoper967c4b7e296e\Symfony\Component\Mime\Encoder\Base64MimeHeaderEncoder;
+class Base64MimeHeaderEncoderTest extends \_PhpScoper967c4b7e296e\PHPUnit\Framework\TestCase
 {
     public function testNameIsB()
     {
-        $this->assertEquals('B', (new \_PhpScoper239b374a39c8\Symfony\Component\Mime\Encoder\Base64MimeHeaderEncoder())->getName());
+        $this->assertEquals('B', (new \_PhpScoper967c4b7e296e\Symfony\Component\Mime\Encoder\Base64MimeHeaderEncoder())->getName());
     }
 }
