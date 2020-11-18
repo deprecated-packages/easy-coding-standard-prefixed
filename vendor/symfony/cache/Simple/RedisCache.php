@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperad4b7e2c09d8\Symfony\Component\Cache\Simple;
+namespace _PhpScoper0270f1d35181\Symfony\Component\Cache\Simple;
 
-use _PhpScoperad4b7e2c09d8\Symfony\Component\Cache\Adapter\RedisAdapter;
-use _PhpScoperad4b7e2c09d8\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoperad4b7e2c09d8\Symfony\Component\Cache\Traits\RedisTrait;
-use _PhpScoperad4b7e2c09d8\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperad4b7e2c09d8\Symfony\Component\Cache\Simple\RedisCache::class, \_PhpScoperad4b7e2c09d8\Symfony\Component\Cache\Adapter\RedisAdapter::class, \_PhpScoperad4b7e2c09d8\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoper0270f1d35181\Symfony\Component\Cache\Adapter\RedisAdapter;
+use _PhpScoper0270f1d35181\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper0270f1d35181\Symfony\Component\Cache\Traits\RedisTrait;
+use _PhpScoper0270f1d35181\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper0270f1d35181\Symfony\Component\Cache\Simple\RedisCache::class, \_PhpScoper0270f1d35181\Symfony\Component\Cache\Adapter\RedisAdapter::class, \_PhpScoper0270f1d35181\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use RedisAdapter and type-hint for CacheInterface instead.
  */
-class RedisCache extends \_PhpScoperad4b7e2c09d8\Symfony\Component\Cache\Simple\AbstractCache
+class RedisCache extends \_PhpScoper0270f1d35181\Symfony\Component\Cache\Simple\AbstractCache
 {
     use RedisTrait;
     /**
      * @param \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface $redisClient
      */
-    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \_PhpScoperad4b7e2c09d8\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \_PhpScoper0270f1d35181\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         $this->init($redisClient, $namespace, $defaultLifetime, $marshaller);
     }

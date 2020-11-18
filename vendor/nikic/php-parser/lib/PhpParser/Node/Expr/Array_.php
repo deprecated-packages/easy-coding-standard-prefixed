@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperad4b7e2c09d8\PhpParser\Node\Expr;
+namespace _PhpScoper0270f1d35181\PhpParser\Node\Expr;
 
-use _PhpScoperad4b7e2c09d8\PhpParser\Node\Expr;
-class Array_ extends \_PhpScoperad4b7e2c09d8\PhpParser\Node\Expr
+use _PhpScoper0270f1d35181\PhpParser\Node\Expr;
+class Array_ extends \_PhpScoper0270f1d35181\PhpParser\Node\Expr
 {
     // For use in "kind" attribute
     const KIND_LONG = 1;

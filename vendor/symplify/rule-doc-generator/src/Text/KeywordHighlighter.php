@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Text;
 
-use _PhpScoperad4b7e2c09d8\Nette\Utils\Strings;
-use _PhpScoperad4b7e2c09d8\Rector\NodeTypeResolver\ClassExistenceStaticHelper;
+use _PhpScoper0270f1d35181\Nette\Utils\Strings;
+use _PhpScoper0270f1d35181\Rector\NodeTypeResolver\ClassExistenceStaticHelper;
 use Throwable;
 /**
  * @see \Symplify\RuleDocGenerator\Tests\Text\KeywordHighlighterTest
@@ -37,7 +37,7 @@ final class KeywordHighlighter
     private const METHOD_NAME_REGEX = '#\\w+\\(\\)#';
     public function highlight(string $content) : string
     {
-        $words = \_PhpScoperad4b7e2c09d8\Nette\Utils\Strings::split($content, '# #');
+        $words = \_PhpScoper0270f1d35181\Nette\Utils\Strings::split($content, '# #');
         foreach ($words as $key => $word) {
             if (!$this->isKeywordToHighlight($word)) {
                 continue;
@@ -48,11 +48,11 @@ final class KeywordHighlighter
     }
     private function isKeywordToHighlight(string $word) : bool
     {
-        if (\_PhpScoperad4b7e2c09d8\Nette\Utils\Strings::match($word, self::ANNOTATION_REGEX)) {
+        if (\_PhpScoper0270f1d35181\Nette\Utils\Strings::match($word, self::ANNOTATION_REGEX)) {
             return \true;
         }
         // already in code quotes
-        if (\_PhpScoperad4b7e2c09d8\Nette\Utils\Strings::startsWith($word, '`') || \_PhpScoperad4b7e2c09d8\Nette\Utils\Strings::endsWith($word, '`')) {
+        if (\_PhpScoper0270f1d35181\Nette\Utils\Strings::startsWith($word, '`') || \_PhpScoper0270f1d35181\Nette\Utils\Strings::endsWith($word, '`')) {
             return \false;
         }
         // part of normal text
@@ -65,22 +65,22 @@ final class KeywordHighlighter
         if ($word === 'composer.json') {
             return \true;
         }
-        if ((bool) \_PhpScoperad4b7e2c09d8\Nette\Utils\Strings::match($word, self::VARIABLE_CALL_OR_VARIABLE_REGEX)) {
+        if ((bool) \_PhpScoper0270f1d35181\Nette\Utils\Strings::match($word, self::VARIABLE_CALL_OR_VARIABLE_REGEX)) {
             return \true;
         }
-        return (bool) \_PhpScoperad4b7e2c09d8\Nette\Utils\Strings::match($word, self::STATIC_CALL_REGEX);
+        return (bool) \_PhpScoper0270f1d35181\Nette\Utils\Strings::match($word, self::STATIC_CALL_REGEX);
     }
     private function isFunctionOrClass(string $word) : bool
     {
-        if (\_PhpScoperad4b7e2c09d8\Nette\Utils\Strings::match($word, self::METHOD_NAME_REGEX)) {
+        if (\_PhpScoper0270f1d35181\Nette\Utils\Strings::match($word, self::METHOD_NAME_REGEX)) {
             return \true;
         }
         if (\function_exists($word) || \function_exists(\trim($word, '()'))) {
             return \true;
         }
-        if (\_PhpScoperad4b7e2c09d8\Rector\NodeTypeResolver\ClassExistenceStaticHelper::doesClassLikeExist($word)) {
+        if (\_PhpScoper0270f1d35181\Rector\NodeTypeResolver\ClassExistenceStaticHelper::doesClassLikeExist($word)) {
             // not a class
-            if (!\_PhpScoperad4b7e2c09d8\Nette\Utils\Strings::contains($word, '\\')) {
+            if (!\_PhpScoper0270f1d35181\Nette\Utils\Strings::contains($word, '\\')) {
                 return \in_array($word, [\Throwable::class, 'Exception'], \true);
             }
             return \true;

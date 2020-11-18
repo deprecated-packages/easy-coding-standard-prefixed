@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\HttpKernel;
 
-use _PhpScoperad4b7e2c09d8\Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
-use _PhpScoperad4b7e2c09d8\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoperad4b7e2c09d8\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper0270f1d35181\Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
+use _PhpScoper0270f1d35181\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper0270f1d35181\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\MarkdownDiff\MarkdownDiffBundle;
 use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
 final class RuleDocGeneratorKernel extends \Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
-    public function registerContainerConfiguration(\_PhpScoperad4b7e2c09d8\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(\_PhpScoper0270f1d35181\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
     }
@@ -20,6 +20,6 @@ final class RuleDocGeneratorKernel extends \Symplify\SymplifyKernel\HttpKernel\A
      */
     public function registerBundles() : iterable
     {
-        return [new \Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle(), new \Symplify\MarkdownDiff\MarkdownDiffBundle(), new \_PhpScoperad4b7e2c09d8\Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
+        return [new \Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle(), new \Symplify\MarkdownDiff\MarkdownDiffBundle(), new \_PhpScoper0270f1d35181\Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
     }
 }

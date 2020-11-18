@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperad4b7e2c09d8\Migrify\PhpConfigPrinter\HttpKernel;
+namespace _PhpScoper0270f1d35181\Migrify\PhpConfigPrinter\HttpKernel;
 
-use _PhpScoperad4b7e2c09d8\Migrify\MigrifyKernel\HttpKernel\AbstractMigrifyKernel;
-use _PhpScoperad4b7e2c09d8\Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
-use _PhpScoperad4b7e2c09d8\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoperad4b7e2c09d8\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper0270f1d35181\Migrify\MigrifyKernel\HttpKernel\AbstractMigrifyKernel;
+use _PhpScoper0270f1d35181\Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
+use _PhpScoper0270f1d35181\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper0270f1d35181\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
-final class PhpConfigPrinterKernel extends \_PhpScoperad4b7e2c09d8\Migrify\MigrifyKernel\HttpKernel\AbstractMigrifyKernel implements \Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface
+final class PhpConfigPrinterKernel extends \_PhpScoper0270f1d35181\Migrify\MigrifyKernel\HttpKernel\AbstractMigrifyKernel implements \Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface
 {
     /**
      * @var string[]
      */
     private $configs = [];
-    public function registerContainerConfiguration(\_PhpScoperad4b7e2c09d8\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(\_PhpScoper0270f1d35181\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
         foreach ($this->configs as $config) {
@@ -26,7 +26,7 @@ final class PhpConfigPrinterKernel extends \_PhpScoperad4b7e2c09d8\Migrify\Migri
      */
     public function registerBundles() : iterable
     {
-        return [new \_PhpScoperad4b7e2c09d8\Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
+        return [new \_PhpScoper0270f1d35181\Migrify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle()];
     }
     /**
      * @param string[] $configs
