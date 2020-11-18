@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0270f1d35181\Symfony\Component\HttpFoundation\Exception;
+namespace _PhpScoperf77bffce0320\Symfony\Component\HttpFoundation\Exception;
 
 /**
  * Raised when a user has performed an operation that should be considered
  * suspicious from a security perspective.
  */
-class SuspiciousOperationException extends \UnexpectedValueException implements \_PhpScoper0270f1d35181\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
+class SuspiciousOperationException extends \UnexpectedValueException implements \_PhpScoperf77bffce0320\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
 {
 }

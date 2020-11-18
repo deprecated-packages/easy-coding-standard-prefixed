@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper0270f1d35181;
+namespace _PhpScoperf77bffce0320;
 
 /**
  * Bootstrap file for PHP_CodeSniffer unit tests.
@@ -25,17 +25,17 @@ if (\is_file(__DIR__ . '/../autoload.php') === \true) {
 }
 $tokens = new \PHP_CodeSniffer\Util\Tokens();
 // Compatibility for PHPUnit < 6 and PHPUnit 6+.
-if (\class_exists('_PhpScoper0270f1d35181\\PHPUnit_Framework_TestSuite') === \true && \class_exists('_PhpScoper0270f1d35181\\PHPUnit\\Framework\\TestSuite') === \false) {
-    \class_alias('_PhpScoper0270f1d35181\\PHPUnit_Framework_TestSuite', 'PHPUnit' . '\\Framework\\TestSuite');
+if (\class_exists('_PhpScoperf77bffce0320\\PHPUnit_Framework_TestSuite') === \true && \class_exists('_PhpScoperf77bffce0320\\PHPUnit\\Framework\\TestSuite') === \false) {
+    \class_alias('_PhpScoperf77bffce0320\\PHPUnit_Framework_TestSuite', 'PHPUnit' . '\\Framework\\TestSuite');
 }
-if (\class_exists('_PhpScoper0270f1d35181\\PHPUnit_Framework_TestCase') === \true && \class_exists('_PhpScoper0270f1d35181\\PHPUnit\\Framework\\TestCase') === \false) {
-    \class_alias('_PhpScoper0270f1d35181\\PHPUnit_Framework_TestCase', 'PHPUnit' . '\\Framework\\TestCase');
+if (\class_exists('_PhpScoperf77bffce0320\\PHPUnit_Framework_TestCase') === \true && \class_exists('_PhpScoperf77bffce0320\\PHPUnit\\Framework\\TestCase') === \false) {
+    \class_alias('_PhpScoperf77bffce0320\\PHPUnit_Framework_TestCase', 'PHPUnit' . '\\Framework\\TestCase');
 }
-if (\class_exists('_PhpScoper0270f1d35181\\PHPUnit_TextUI_TestRunner') === \true && \class_exists('_PhpScoper0270f1d35181\\PHPUnit\\TextUI\\TestRunner') === \false) {
-    \class_alias('_PhpScoper0270f1d35181\\PHPUnit_TextUI_TestRunner', 'PHPUnit' . '\\TextUI\\TestRunner');
+if (\class_exists('_PhpScoperf77bffce0320\\PHPUnit_TextUI_TestRunner') === \true && \class_exists('_PhpScoperf77bffce0320\\PHPUnit\\TextUI\\TestRunner') === \false) {
+    \class_alias('_PhpScoperf77bffce0320\\PHPUnit_TextUI_TestRunner', 'PHPUnit' . '\\TextUI\\TestRunner');
 }
-if (\class_exists('_PhpScoper0270f1d35181\\PHPUnit_Framework_TestResult') === \true && \class_exists('_PhpScoper0270f1d35181\\PHPUnit\\Framework\\TestResult') === \false) {
-    \class_alias('_PhpScoper0270f1d35181\\PHPUnit_Framework_TestResult', 'PHPUnit' . '\\Framework\\TestResult');
+if (\class_exists('_PhpScoperf77bffce0320\\PHPUnit_Framework_TestResult') === \true && \class_exists('_PhpScoperf77bffce0320\\PHPUnit\\Framework\\TestResult') === \false) {
+    \class_alias('_PhpScoperf77bffce0320\\PHPUnit_Framework_TestResult', 'PHPUnit' . '\\Framework\\TestResult');
 }
 /**
  * A global util function to help print unit test fixing data.

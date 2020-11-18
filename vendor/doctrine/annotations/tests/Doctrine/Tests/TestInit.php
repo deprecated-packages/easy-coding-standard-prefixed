@@ -3,7 +3,7 @@
 /*
  * This file bootstraps the test environment.
  */
-namespace _PhpScoper0270f1d35181\Doctrine\Tests;
+namespace _PhpScoperf77bffce0320\Doctrine\Tests;
 
 \error_reporting(\E_ALL | \E_STRICT);
 // register silently failing autoloader
@@ -17,4 +17,4 @@ namespace _PhpScoper0270f1d35181\Doctrine\Tests;
     }
 });
 require_once __DIR__ . "/../../../vendor/autoload.php";
-\_PhpScoper0270f1d35181\Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('_PhpScoper0270f1d35181\\Doctrine\\Tests\\Common\\Annotations\\Fixtures', __DIR__ . '/../../');
+\_PhpScoperf77bffce0320\Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('_PhpScoperf77bffce0320\\Doctrine\\Tests\\Common\\Annotations\\Fixtures', __DIR__ . '/../../');
