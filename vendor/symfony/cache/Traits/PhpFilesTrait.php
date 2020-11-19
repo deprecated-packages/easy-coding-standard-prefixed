@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf77bffce0320\Symfony\Component\Cache\Traits;
+namespace _PhpScoper63567e560066\Symfony\Component\Cache\Traits;
 
-use _PhpScoperf77bffce0320\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScoperf77bffce0320\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperf77bffce0320\Symfony\Component\VarExporter\VarExporter;
+use _PhpScoper63567e560066\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper63567e560066\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper63567e560066\Symfony\Component\VarExporter\VarExporter;
 /**
  * @author Piotr Stankowski <git@trakos.pl>
  * @author Nicolas Grekas <p@tchwork.com>
@@ -86,7 +86,7 @@ trait PhpFilesTrait
                 $values[$id] = null;
             } elseif (!\is_object($value)) {
                 $values[$id] = $value;
-            } elseif (!$value instanceof \_PhpScoperf77bffce0320\Symfony\Component\Cache\Traits\LazyValue) {
+            } elseif (!$value instanceof \_PhpScoper63567e560066\Symfony\Component\Cache\Traits\LazyValue) {
                 // calling a Closure is for @deprecated BC and should be removed in Symfony 5.0
                 $values[$id] = $value();
             } elseif (\false === ($values[$id] = (include $value->file))) {
@@ -109,7 +109,7 @@ trait PhpFilesTrait
                     if (\is_array($expiresAt = (include $file))) {
                         [$expiresAt, $this->values[$id]] = $expiresAt;
                     } elseif ($now < $expiresAt) {
-                        $this->values[$id] = new \_PhpScoperf77bffce0320\Symfony\Component\Cache\Traits\LazyValue($file);
+                        $this->values[$id] = new \_PhpScoper63567e560066\Symfony\Component\Cache\Traits\LazyValue($file);
                     }
                     if ($now >= $expiresAt) {
                         unset($this->values[$id], $missingIds[$k]);
@@ -140,7 +140,7 @@ trait PhpFilesTrait
             if (\is_array($expiresAt = (include $file))) {
                 [$expiresAt, $value] = $expiresAt;
             } elseif ($this->appendOnly) {
-                $value = new \_PhpScoperf77bffce0320\Symfony\Component\Cache\Traits\LazyValue($file);
+                $value = new \_PhpScoper63567e560066\Symfony\Component\Cache\Traits\LazyValue($file);
             }
         } catch (\ErrorException $e) {
             return \false;
@@ -170,9 +170,9 @@ trait PhpFilesTrait
                 $value = "'N;'";
             } elseif (\is_object($value) || \is_array($value)) {
                 try {
-                    $value = \_PhpScoperf77bffce0320\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
+                    $value = \_PhpScoper63567e560066\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
                 } catch (\Exception $e) {
-                    throw new \_PhpScoperf77bffce0320\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable %s value.', $key, \is_object($value) ? \get_class($value) : 'array'), 0, $e);
+                    throw new \_PhpScoper63567e560066\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable %s value.', $key, \is_object($value) ? \get_class($value) : 'array'), 0, $e);
                 }
             } elseif (\is_string($value)) {
                 // Wrap "N;" in a closure to not confuse it with an encoded `null`
@@ -181,7 +181,7 @@ trait PhpFilesTrait
                 }
                 $value = \var_export($value, \true);
             } elseif (!\is_scalar($value)) {
-                throw new \_PhpScoperf77bffce0320\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable %s value.', $key, \gettype($value)));
+                throw new \_PhpScoper63567e560066\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable %s value.', $key, \gettype($value)));
             } else {
                 $value = \var_export($value, \true);
             }
@@ -202,7 +202,7 @@ trait PhpFilesTrait
             }
         }
         if (!$ok && !\is_writable($this->directory)) {
-            throw new \_PhpScoperf77bffce0320\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s)', $this->directory));
+            throw new \_PhpScoper63567e560066\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s)', $this->directory));
         }
         return $ok;
     }

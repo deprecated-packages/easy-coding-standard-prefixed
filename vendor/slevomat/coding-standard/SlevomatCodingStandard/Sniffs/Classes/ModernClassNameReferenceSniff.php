@@ -16,7 +16,7 @@ use const T_CLASS_C;
 use const T_DOUBLE_COLON;
 use const T_NS_SEPARATOR;
 use const T_OBJECT_OPERATOR;
-use const _PhpScoperf77bffce0320\T_OPEN_PARENTHESIS;
+use const _PhpScoper63567e560066\T_OPEN_PARENTHESIS;
 use const T_VARIABLE;
 class ModernClassNameReferenceSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

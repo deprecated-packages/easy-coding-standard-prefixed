@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf77bffce0320\Symfony\Component\Config\Resource;
+namespace _PhpScoper63567e560066\Symfony\Component\Config\Resource;
 
 /**
  * FileExistenceResource represents a resource stored on the filesystem.
@@ -20,7 +20,7 @@ namespace _PhpScoperf77bffce0320\Symfony\Component\Config\Resource;
  *
  * @final since Symfony 4.3
  */
-class FileExistenceResource implements \_PhpScoperf77bffce0320\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class FileExistenceResource implements \_PhpScoper63567e560066\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $resource;
     private $exists;

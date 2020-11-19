@@ -9,24 +9,24 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf77bffce0320\SebastianBergmann\Diff;
+namespace _PhpScoper63567e560066\SebastianBergmann\Diff;
 
-use _PhpScoperf77bffce0320\PHPUnit\Framework\TestCase;
+use _PhpScoper63567e560066\PHPUnit\Framework\TestCase;
 /**
  * @covers SebastianBergmann\Diff\ConfigurationException
  */
-final class ConfigurationExceptionTest extends \_PhpScoperf77bffce0320\PHPUnit\Framework\TestCase
+final class ConfigurationExceptionTest extends \_PhpScoper63567e560066\PHPUnit\Framework\TestCase
 {
     public function testConstructWithDefaults() : void
     {
-        $e = new \_PhpScoperf77bffce0320\SebastianBergmann\Diff\ConfigurationException('test', 'A', 'B');
+        $e = new \_PhpScoper63567e560066\SebastianBergmann\Diff\ConfigurationException('test', 'A', 'B');
         $this->assertSame(0, $e->getCode());
         $this->assertNull($e->getPrevious());
         $this->assertSame('Option "test" must be A, got "string#B".', $e->getMessage());
     }
     public function testConstruct() : void
     {
-        $e = new \_PhpScoperf77bffce0320\SebastianBergmann\Diff\ConfigurationException('test', 'integer', new \SplFileInfo(__FILE__), 789, new \BadMethodCallException(__METHOD__));
+        $e = new \_PhpScoper63567e560066\SebastianBergmann\Diff\ConfigurationException('test', 'integer', new \SplFileInfo(__FILE__), 789, new \BadMethodCallException(__METHOD__));
         $this->assertSame('Option "test" must be integer, got "SplFileInfo".', $e->getMessage());
     }
 }

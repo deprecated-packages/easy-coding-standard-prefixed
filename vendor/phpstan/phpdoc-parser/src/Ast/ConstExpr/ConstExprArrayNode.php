@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf77bffce0320\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace _PhpScoper63567e560066\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-class ConstExprArrayNode implements \_PhpScoperf77bffce0320\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
+class ConstExprArrayNode implements \_PhpScoper63567e560066\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
 {
     /** @var ConstExprArrayItemNode[] */
     public $items;

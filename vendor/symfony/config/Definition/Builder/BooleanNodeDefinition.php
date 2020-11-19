@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf77bffce0320\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper63567e560066\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoperf77bffce0320\Symfony\Component\Config\Definition\BooleanNode;
-use _PhpScoperf77bffce0320\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use _PhpScoper63567e560066\Symfony\Component\Config\Definition\BooleanNode;
+use _PhpScoper63567e560066\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
 /**
  * This class provides a fluent interface for defining a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class BooleanNodeDefinition extends \_PhpScoperf77bffce0320\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+class BooleanNodeDefinition extends \_PhpScoper63567e560066\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
 {
     /**
      * {@inheritdoc}
      */
-    public function __construct(?string $name, \_PhpScoperf77bffce0320\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
+    public function __construct(?string $name, \_PhpScoper63567e560066\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         parent::__construct($name, $parent);
         $this->nullEquivalent = \true;
@@ -34,7 +34,7 @@ class BooleanNodeDefinition extends \_PhpScoperf77bffce0320\Symfony\Component\Co
      */
     protected function instantiateNode()
     {
-        return new \_PhpScoperf77bffce0320\Symfony\Component\Config\Definition\BooleanNode($this->name, $this->parent, $this->pathSeparator);
+        return new \_PhpScoper63567e560066\Symfony\Component\Config\Definition\BooleanNode($this->name, $this->parent, $this->pathSeparator);
     }
     /**
      * {@inheritdoc}
@@ -43,6 +43,6 @@ class BooleanNodeDefinition extends \_PhpScoperf77bffce0320\Symfony\Component\Co
      */
     public function cannotBeEmpty()
     {
-        throw new \_PhpScoperf77bffce0320\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException('->cannotBeEmpty() is not applicable to BooleanNodeDefinition.');
+        throw new \_PhpScoper63567e560066\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException('->cannotBeEmpty() is not applicable to BooleanNodeDefinition.');
     }
 }

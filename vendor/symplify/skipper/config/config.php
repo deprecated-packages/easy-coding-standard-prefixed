@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf77bffce0320;
+namespace _PhpScoper63567e560066;
 
-use _PhpScoperf77bffce0320\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper63567e560066\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
 use Symplify\Skipper\ValueObject\Option;
-return static function (\_PhpScoperf77bffce0320\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper63567e560066\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $parameters = $containerConfigurator->parameters();
     $parameters->set(\Symplify\Skipper\ValueObject\Option::SKIP, []);
     $parameters->set(\Symplify\Skipper\ValueObject\Option::ONLY, []);
