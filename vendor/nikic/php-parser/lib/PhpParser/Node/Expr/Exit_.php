@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6d4bd368bd9\PhpParser\Node\Expr;
+namespace _PhpScoperc753ccca5a0c\PhpParser\Node\Expr;
 
-use _PhpScoperb6d4bd368bd9\PhpParser\Node\Expr;
-class Exit_ extends \_PhpScoperb6d4bd368bd9\PhpParser\Node\Expr
+use _PhpScoperc753ccca5a0c\PhpParser\Node\Expr;
+class Exit_ extends \_PhpScoperc753ccca5a0c\PhpParser\Node\Expr
 {
     /* For use in "kind" attribute */
     const KIND_EXIT = 1;
@@ -17,7 +17,7 @@ class Exit_ extends \_PhpScoperb6d4bd368bd9\PhpParser\Node\Expr
      * @param null|Expr $expr       Expression
      * @param array                    $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperb6d4bd368bd9\PhpParser\Node\Expr $expr = null, array $attributes = [])
+    public function __construct(\_PhpScoperc753ccca5a0c\PhpParser\Node\Expr $expr = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

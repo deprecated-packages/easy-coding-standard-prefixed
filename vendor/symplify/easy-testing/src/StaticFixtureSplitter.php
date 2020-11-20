@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting;
 
-use _PhpScoperb6d4bd368bd9\Nette\Utils\Strings;
+use _PhpScoperc753ccca5a0c\Nette\Utils\Strings;
 use Symplify\EasyTesting\ValueObject\InputAndExpected;
 use Symplify\EasyTesting\ValueObject\InputFileInfoAndExpected;
 use Symplify\EasyTesting\ValueObject\InputFileInfoAndExpectedFileInfo;
@@ -18,11 +18,11 @@ final class StaticFixtureSplitter
     public static $customTemporaryPath;
     public static function splitFileInfoToInputAndExpected(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \Symplify\EasyTesting\ValueObject\InputAndExpected
     {
-        $splitLineCount = \count(\_PhpScoperb6d4bd368bd9\Nette\Utils\Strings::matchAll($smartFileInfo->getContents(), \Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX));
+        $splitLineCount = \count(\_PhpScoperc753ccca5a0c\Nette\Utils\Strings::matchAll($smartFileInfo->getContents(), \Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX));
         // if more or less, it could be a test cases for monorepo line in it
         if ($splitLineCount === 1) {
             // input → expected
-            [$input, $expected] = \_PhpScoperb6d4bd368bd9\Nette\Utils\Strings::split($smartFileInfo->getContents(), \Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX);
+            [$input, $expected] = \_PhpScoperc753ccca5a0c\Nette\Utils\Strings::split($smartFileInfo->getContents(), \Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX);
             $expected = self::retypeExpected($expected);
             return new \Symplify\EasyTesting\ValueObject\InputAndExpected($input, $expected);
         }
@@ -66,7 +66,7 @@ final class StaticFixtureSplitter
     }
     private static function createTemporaryPathWithPrefix(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo, string $prefix) : string
     {
-        $hash = \_PhpScoperb6d4bd368bd9\Nette\Utils\Strings::substring(\md5($smartFileInfo->getRealPath()), -20);
+        $hash = \_PhpScoperc753ccca5a0c\Nette\Utils\Strings::substring(\md5($smartFileInfo->getRealPath()), -20);
         $fileBaseName = $smartFileInfo->getBasename('.inc');
         return self::getTemporaryPath() . \sprintf('/%s_%s_%s', $prefix, $hash, $fileBaseName);
     }

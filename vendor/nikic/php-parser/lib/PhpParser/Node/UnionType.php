@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6d4bd368bd9\PhpParser\Node;
+namespace _PhpScoperc753ccca5a0c\PhpParser\Node;
 
-use _PhpScoperb6d4bd368bd9\PhpParser\NodeAbstract;
-class UnionType extends \_PhpScoperb6d4bd368bd9\PhpParser\NodeAbstract
+use _PhpScoperc753ccca5a0c\PhpParser\NodeAbstract;
+class UnionType extends \_PhpScoperc753ccca5a0c\PhpParser\NodeAbstract
 {
     /** @var (Identifier|Name)[] Types */
     public $types;

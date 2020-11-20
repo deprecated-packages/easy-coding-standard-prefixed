@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperb6d4bd368bd9\PhpParser;
+namespace _PhpScoperc753ccca5a0c\PhpParser;
 
 class ConstExprEvaluationException extends \Exception
 {

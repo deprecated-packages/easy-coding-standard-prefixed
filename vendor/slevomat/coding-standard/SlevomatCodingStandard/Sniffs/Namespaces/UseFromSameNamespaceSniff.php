@@ -13,7 +13,7 @@ use function sprintf;
 use function strlen;
 use function substr;
 use const T_AS;
-use const _PhpScoperb6d4bd368bd9\T_SEMICOLON;
+use const _PhpScoperc753ccca5a0c\T_SEMICOLON;
 use const T_USE;
 class UseFromSameNamespaceSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6d4bd368bd9;
+namespace _PhpScoperc753ccca5a0c;
 
 use PhpCsFixer\Fixer\Basic\BracesFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
@@ -28,8 +28,8 @@ use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
-use _PhpScoperb6d4bd368bd9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoperb6d4bd368bd9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\Basic\EncodingFixer::class);
     $services->set(\PhpCsFixer\Fixer\PhpTag\FullOpeningTagFixer::class);

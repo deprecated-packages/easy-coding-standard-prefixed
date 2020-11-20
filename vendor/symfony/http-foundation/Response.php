@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation;
+namespace _PhpScoperc753ccca5a0c\Symfony\Component\HttpFoundation;
 
 /**
  * Response represents an HTTP response.
@@ -230,7 +230,7 @@ class Response
      */
     public function __construct($content = '', int $status = 200, array $headers = [])
     {
-        $this->headers = new \_PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation\ResponseHeaderBag($headers);
+        $this->headers = new \_PhpScoperc753ccca5a0c\Symfony\Component\HttpFoundation\ResponseHeaderBag($headers);
         $this->setContent($content);
         $this->setStatusCode($status);
         $this->setProtocolVersion('1.0');
@@ -284,7 +284,7 @@ class Response
      *
      * @return $this
      */
-    public function prepare(\_PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation\Request $request)
+    public function prepare(\_PhpScoperc753ccca5a0c\Symfony\Component\HttpFoundation\Request $request)
     {
         $headers = $this->headers;
         if ($this->isInformational() || $this->isEmpty()) {
@@ -982,7 +982,7 @@ class Response
      *
      * @final
      */
-    public function isNotModified(\_PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation\Request $request) : bool
+    public function isNotModified(\_PhpScoperc753ccca5a0c\Symfony\Component\HttpFoundation\Request $request) : bool
     {
         if (!$request->isMethodCacheable()) {
             return \false;
@@ -1129,7 +1129,7 @@ class Response
      *
      * @final
      */
-    protected function ensureIEOverSSLCompatibility(\_PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation\Request $request) : void
+    protected function ensureIEOverSSLCompatibility(\_PhpScoperc753ccca5a0c\Symfony\Component\HttpFoundation\Request $request) : void
     {
         if (\false !== \stripos($this->headers->get('Content-Disposition'), 'attachment') && 1 == \preg_match('/MSIE (.*?);/i', $request->server->get('HTTP_USER_AGENT'), $match) && \true === $request->isSecure()) {
             if ((int) \preg_replace('/(MSIE )(.*?);/', '$2', $match[0]) < 9) {

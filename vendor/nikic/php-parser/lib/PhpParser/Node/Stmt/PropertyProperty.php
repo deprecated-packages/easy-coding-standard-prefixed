@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6d4bd368bd9\PhpParser\Node\Stmt;
+namespace _PhpScoperc753ccca5a0c\PhpParser\Node\Stmt;
 
-use _PhpScoperb6d4bd368bd9\PhpParser\Node;
-class PropertyProperty extends \_PhpScoperb6d4bd368bd9\PhpParser\Node\Stmt
+use _PhpScoperc753ccca5a0c\PhpParser\Node;
+class PropertyProperty extends \_PhpScoperc753ccca5a0c\PhpParser\Node\Stmt
 {
     /** @var Node\VarLikeIdentifier Name */
     public $name;
@@ -17,10 +17,10 @@ class PropertyProperty extends \_PhpScoperb6d4bd368bd9\PhpParser\Node\Stmt
      * @param null|Node\Expr                $default    Default value
      * @param array                         $attributes Additional attributes
      */
-    public function __construct($name, \_PhpScoperb6d4bd368bd9\PhpParser\Node\Expr $default = null, array $attributes = [])
+    public function __construct($name, \_PhpScoperc753ccca5a0c\PhpParser\Node\Expr $default = null, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \_PhpScoperb6d4bd368bd9\PhpParser\Node\VarLikeIdentifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScoperc753ccca5a0c\PhpParser\Node\VarLikeIdentifier($name) : $name;
         $this->default = $default;
     }
     public function getSubNodeNames() : array

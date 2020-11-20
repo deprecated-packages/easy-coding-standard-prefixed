@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Linter;
 
-use _PhpScoperb6d4bd368bd9\Symfony\Component\Process\Process;
+use _PhpScoperc753ccca5a0c\Symfony\Component\Process\Process;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -37,6 +37,6 @@ final class ProcessLinterProcessBuilder
      */
     public function build($path)
     {
-        return new \_PhpScoperb6d4bd368bd9\Symfony\Component\Process\Process([$this->executable, '-l', $path]);
+        return new \_PhpScoperc753ccca5a0c\Symfony\Component\Process\Process([$this->executable, '-l', $path]);
     }
 }

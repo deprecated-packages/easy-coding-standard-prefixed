@@ -4,8 +4,8 @@ declare (strict_types=1);
 namespace Symplify\EasyTesting\DataProvider;
 
 use Iterator;
-use _PhpScoperb6d4bd368bd9\Symfony\Component\Finder\Finder;
-use _PhpScoperb6d4bd368bd9\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoperc753ccca5a0c\Symfony\Component\Finder\Finder;
+use _PhpScoperc753ccca5a0c\Symfony\Component\Finder\SplFileInfo;
 use Symplify\SmartFileSystem\SmartFileInfo;
 final class StaticFixtureFinder
 {
@@ -21,7 +21,7 @@ final class StaticFixtureFinder
      */
     private static function findFilesInDirectory(string $directory, string $suffix) : array
     {
-        $finder = \_PhpScoperb6d4bd368bd9\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
+        $finder = \_PhpScoperc753ccca5a0c\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
         $fileInfos = \iterator_to_array($finder);
         return \array_values($fileInfos);
     }

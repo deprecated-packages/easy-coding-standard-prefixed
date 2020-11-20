@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation;
+namespace _PhpScoperc753ccca5a0c\Symfony\Component\HttpFoundation;
 
 /**
  * StreamedResponse represents a streamed HTTP response.
@@ -23,7 +23,7 @@ namespace _PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StreamedResponse extends \_PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation\Response
+class StreamedResponse extends \_PhpScoperc753ccca5a0c\Symfony\Component\HttpFoundation\Response
 {
     protected $callback;
     protected $streamed;

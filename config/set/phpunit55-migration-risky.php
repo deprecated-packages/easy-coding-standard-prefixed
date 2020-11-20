@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6d4bd368bd9;
+namespace _PhpScoperc753ccca5a0c;
 
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitDedicateAssertFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitExpectationFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMockFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitNamespacedFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitNoExpectationAnnotationFixer;
-use _PhpScoperb6d4bd368bd9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoperb6d4bd368bd9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitDedicateAssertFixer::class);
     $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitExpectationFixer::class)->call('configure', [['target' => '5.2']]);

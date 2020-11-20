@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb6d4bd368bd9\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoperc753ccca5a0c\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperb6d4bd368bd9\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperb6d4bd368bd9\Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use _PhpScoperb6d4bd368bd9\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoperc753ccca5a0c\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoperc753ccca5a0c\Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use _PhpScoperc753ccca5a0c\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Validates Requests.
  *
@@ -20,12 +20,12 @@ use _PhpScoperb6d4bd368bd9\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @final since Symfony 4.3
  */
-class ValidateRequestListener implements \_PhpScoperb6d4bd368bd9\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class ValidateRequestListener implements \_PhpScoperc753ccca5a0c\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     /**
      * Performs the validation.
      */
-    public function onKernelRequest(\_PhpScoperb6d4bd368bd9\Symfony\Component\HttpKernel\Event\GetResponseEvent $event)
+    public function onKernelRequest(\_PhpScoperc753ccca5a0c\Symfony\Component\HttpKernel\Event\GetResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -41,6 +41,6 @@ class ValidateRequestListener implements \_PhpScoperb6d4bd368bd9\Symfony\Compone
      */
     public static function getSubscribedEvents()
     {
-        return [\_PhpScoperb6d4bd368bd9\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 256]]];
+        return [\_PhpScoperc753ccca5a0c\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 256]]];
     }
 }

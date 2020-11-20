@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperb6d4bd368bd9\Nette;
+namespace _PhpScoperc753ccca5a0c\Nette;
 
 /**
  * The exception that is thrown when the value of an argument is
@@ -37,7 +37,7 @@ class NotSupportedException extends \LogicException
 /**
  * The exception that is thrown when a requested method or operation is deprecated.
  */
-class DeprecatedException extends \_PhpScoperb6d4bd368bd9\Nette\NotSupportedException
+class DeprecatedException extends \_PhpScoperc753ccca5a0c\Nette\NotSupportedException
 {
 }
 /**
@@ -55,13 +55,13 @@ class IOException extends \RuntimeException
 /**
  * The exception that is thrown when accessing a file that does not exist on disk.
  */
-class FileNotFoundException extends \_PhpScoperb6d4bd368bd9\Nette\IOException
+class FileNotFoundException extends \_PhpScoperc753ccca5a0c\Nette\IOException
 {
 }
 /**
  * The exception that is thrown when part of a file or directory cannot be found.
  */
-class DirectoryNotFoundException extends \_PhpScoperb6d4bd368bd9\Nette\IOException
+class DirectoryNotFoundException extends \_PhpScoperc753ccca5a0c\Nette\IOException
 {
 }
 /**
@@ -82,7 +82,7 @@ class OutOfRangeException extends \OutOfRangeException
 class UnexpectedValueException extends \UnexpectedValueException
 {
 }
-namespace _PhpScoperb6d4bd368bd9\Nette\Utils;
+namespace _PhpScoperc753ccca5a0c\Nette\Utils;
 
 /**
  * The exception that is thrown when an image error occurs.
@@ -93,7 +93,7 @@ class ImageException extends \Exception
 /**
  * The exception that indicates invalid image file.
  */
-class UnknownImageFileException extends \_PhpScoperb6d4bd368bd9\Nette\Utils\ImageException
+class UnknownImageFileException extends \_PhpScoperc753ccca5a0c\Nette\Utils\ImageException
 {
 }
 /**

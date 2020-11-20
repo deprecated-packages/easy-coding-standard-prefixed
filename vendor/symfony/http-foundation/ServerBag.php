@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation;
+namespace _PhpScoperc753ccca5a0c\Symfony\Component\HttpFoundation;
 
 /**
  * ServerBag is a container for HTTP headers from the $_SERVER variable.
@@ -17,7 +17,7 @@ namespace _PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation;
  * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
  * @author Robert Kiss <kepten@gmail.com>
  */
-class ServerBag extends \_PhpScoperb6d4bd368bd9\Symfony\Component\HttpFoundation\ParameterBag
+class ServerBag extends \_PhpScoperc753ccca5a0c\Symfony\Component\HttpFoundation\ParameterBag
 {
     /**
      * Gets the HTTP headers.

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoperb6d4bd368bd9\Composer\XdebugHandler;
+namespace _PhpScoperc753ccca5a0c\Composer\XdebugHandler;
 
 /**
  * Provides utility functions to prepare a child process command-line and set

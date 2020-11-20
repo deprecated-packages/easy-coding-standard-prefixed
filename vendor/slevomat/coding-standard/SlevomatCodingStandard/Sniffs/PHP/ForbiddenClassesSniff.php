@@ -20,13 +20,13 @@ use function sprintf;
 use function strlen;
 use function strtolower;
 use const PHP_INT_MAX;
-use const _PhpScoperb6d4bd368bd9\T_COMMA;
+use const _PhpScoperc753ccca5a0c\T_COMMA;
 use const T_DOUBLE_COLON;
 use const T_EXTENDS;
 use const T_IMPLEMENTS;
 use const T_NEW;
-use const _PhpScoperb6d4bd368bd9\T_OPEN_CURLY_BRACKET;
-use const _PhpScoperb6d4bd368bd9\T_SEMICOLON;
+use const _PhpScoperc753ccca5a0c\T_OPEN_CURLY_BRACKET;
+use const _PhpScoperc753ccca5a0c\T_SEMICOLON;
 use const T_USE;
 class ForbiddenClassesSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
