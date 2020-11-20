@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5a9febfbbe05\Symfony\Component\Finder\Iterator;
+namespace _PhpScoperb6d4bd368bd9\Symfony\Component\Finder\Iterator;
 
-use _PhpScoper5a9febfbbe05\Symfony\Component\Finder\Comparator\NumberComparator;
+use _PhpScoperb6d4bd368bd9\Symfony\Component\Finder\Comparator\NumberComparator;
 /**
  * SizeRangeFilterIterator filters out files that are not in the given size range.
  *

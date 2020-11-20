@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\NodeFactory;
+namespace _PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use _PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\Contract\NestedCaseConverterInterface;
-use _PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
-use _PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\MethodName;
-use _PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScoper5a9febfbbe05\PhpParser\Node;
-use _PhpScoper5a9febfbbe05\PhpParser\Node\Expr\Assign;
-use _PhpScoper5a9febfbbe05\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper5a9febfbbe05\PhpParser\Node\Expr\Variable;
-use _PhpScoper5a9febfbbe05\PhpParser\Node\Stmt\Expression;
-use _PhpScoper5a9febfbbe05\PhpParser\Node\Stmt\Return_;
+use _PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use _PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\Contract\NestedCaseConverterInterface;
+use _PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
+use _PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\MethodName;
+use _PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoperb6d4bd368bd9\PhpParser\Node;
+use _PhpScoperb6d4bd368bd9\PhpParser\Node\Expr\Assign;
+use _PhpScoperb6d4bd368bd9\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperb6d4bd368bd9\PhpParser\Node\Expr\Variable;
+use _PhpScoperb6d4bd368bd9\PhpParser\Node\Stmt\Expression;
+use _PhpScoperb6d4bd368bd9\PhpParser\Node\Stmt\Return_;
 final class ContainerConfiguratorReturnClosureFactory
 {
     /**
@@ -33,17 +33,17 @@ final class ContainerConfiguratorReturnClosureFactory
      * @param CaseConverterInterface[] $caseConverters
      * @param NestedCaseConverterInterface[] $nestedCaseConverters
      */
-    public function __construct(\_PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $configuratorClosureNodeFactory, array $caseConverters, array $nestedCaseConverters)
+    public function __construct(\_PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $configuratorClosureNodeFactory, array $caseConverters, array $nestedCaseConverters)
     {
         $this->configuratorClosureNodeFactory = $configuratorClosureNodeFactory;
         $this->caseConverters = $caseConverters;
         $this->nestedCaseConverters = $nestedCaseConverters;
     }
-    public function createFromYamlArray(array $arrayData) : \_PhpScoper5a9febfbbe05\PhpParser\Node\Stmt\Return_
+    public function createFromYamlArray(array $arrayData) : \_PhpScoperb6d4bd368bd9\PhpParser\Node\Stmt\Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->configuratorClosureNodeFactory->createContainerClosureFromStmts($stmts);
-        return new \_PhpScoper5a9febfbbe05\PhpParser\Node\Stmt\Return_($closure);
+        return new \_PhpScoperb6d4bd368bd9\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
      * @return Node[]
@@ -96,20 +96,20 @@ final class ContainerConfiguratorReturnClosureFactory
         }
         return $nodes;
     }
-    private function createInitializeAssign(string $variableName, string $methodName) : \_PhpScoper5a9febfbbe05\PhpParser\Node\Stmt\Expression
+    private function createInitializeAssign(string $variableName, string $methodName) : \_PhpScoperb6d4bd368bd9\PhpParser\Node\Stmt\Expression
     {
-        $servicesVariable = new \_PhpScoper5a9febfbbe05\PhpParser\Node\Expr\Variable($variableName);
-        $containerConfiguratorVariable = new \_PhpScoper5a9febfbbe05\PhpParser\Node\Expr\Variable(\_PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
-        $assign = new \_PhpScoper5a9febfbbe05\PhpParser\Node\Expr\Assign($servicesVariable, new \_PhpScoper5a9febfbbe05\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, $methodName));
-        return new \_PhpScoper5a9febfbbe05\PhpParser\Node\Stmt\Expression($assign);
+        $servicesVariable = new \_PhpScoperb6d4bd368bd9\PhpParser\Node\Expr\Variable($variableName);
+        $containerConfiguratorVariable = new \_PhpScoperb6d4bd368bd9\PhpParser\Node\Expr\Variable(\_PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $assign = new \_PhpScoperb6d4bd368bd9\PhpParser\Node\Expr\Assign($servicesVariable, new \_PhpScoperb6d4bd368bd9\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, $methodName));
+        return new \_PhpScoperb6d4bd368bd9\PhpParser\Node\Stmt\Expression($assign);
     }
     private function createInitializeNode(string $key, array $nodes) : array
     {
-        if ($key === \_PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
-            $nodes[] = $this->createInitializeAssign(\_PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES, \_PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\MethodName::SERVICES);
+        if ($key === \_PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
+            $nodes[] = $this->createInitializeAssign(\_PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\VariableName::SERVICES, \_PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\MethodName::SERVICES);
         }
-        if ($key === \_PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS) {
-            $nodes[] = $this->createInitializeAssign(\_PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\VariableName::PARAMETERS, \_PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\ValueObject\MethodName::PARAMETERS);
+        if ($key === \_PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS) {
+            $nodes[] = $this->createInitializeAssign(\_PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\VariableName::PARAMETERS, \_PhpScoperb6d4bd368bd9\Migrify\PhpConfigPrinter\ValueObject\MethodName::PARAMETERS);
         }
         return $nodes;
     }
