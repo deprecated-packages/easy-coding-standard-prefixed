@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper63567e560066\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper5a9febfbbe05\Symfony\Component\HttpKernel\Event;
 
 /**
  * Allows to create a response for the return value of a controller.
@@ -21,6 +21,6 @@ namespace _PhpScoper63567e560066\Symfony\Component\HttpKernel\Event;
  *
  * @final since Symfony 4.4
  */
-class ViewEvent extends \_PhpScoper63567e560066\Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent
+class ViewEvent extends \_PhpScoper5a9febfbbe05\Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent
 {
 }

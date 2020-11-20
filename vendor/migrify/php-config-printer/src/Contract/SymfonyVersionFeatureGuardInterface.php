@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper63567e560066\Migrify\PhpConfigPrinter\Contract;
+namespace _PhpScoper5a9febfbbe05\Migrify\PhpConfigPrinter\Contract;
 
 interface SymfonyVersionFeatureGuardInterface
 {

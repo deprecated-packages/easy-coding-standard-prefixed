@@ -14,8 +14,8 @@ namespace PhpCsFixer\Console\Output;
 use PhpCsFixer\Differ\DiffConsoleFormatter;
 use PhpCsFixer\Error\Error;
 use PhpCsFixer\Linter\LintingException;
-use _PhpScoper63567e560066\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper63567e560066\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper5a9febfbbe05\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper5a9febfbbe05\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author SpacePossum
  *
@@ -31,7 +31,7 @@ final class ErrorOutput
      * @var bool
      */
     private $isDecorated;
-    public function __construct(\_PhpScoper63567e560066\Symfony\Component\Console\Output\OutputInterface $output)
+    public function __construct(\_PhpScoper5a9febfbbe05\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $this->output = $output;
         $this->isDecorated = $output->isDecorated();
@@ -43,8 +43,8 @@ final class ErrorOutput
     public function listErrors($process, array $errors)
     {
         $this->output->writeln(['', \sprintf('Files that were not fixed due to errors reported during %s:', $process)]);
-        $showDetails = $this->output->getVerbosity() >= \_PhpScoper63567e560066\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE;
-        $showTrace = $this->output->getVerbosity() >= \_PhpScoper63567e560066\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG;
+        $showDetails = $this->output->getVerbosity() >= \_PhpScoper5a9febfbbe05\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE;
+        $showTrace = $this->output->getVerbosity() >= \_PhpScoper5a9febfbbe05\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG;
         foreach ($errors as $i => $error) {
             $this->output->writeln(\sprintf('%4d) %s', $i + 1, $error->getFilePath()));
             $e = $error->getSource();
@@ -71,7 +71,7 @@ final class ErrorOutput
                 $this->output->writeln('');
                 $stackTrace = $e->getTrace();
                 foreach ($stackTrace as $trace) {
-                    if (isset($trace['class'], $trace['function']) && \_PhpScoper63567e560066\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
+                    if (isset($trace['class'], $trace['function']) && \_PhpScoper5a9febfbbe05\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
                         $this->output->writeln('      [ ... ]');
                         break;
                     }
@@ -107,6 +107,6 @@ final class ErrorOutput
      */
     private function prepareOutput($string)
     {
-        return $this->isDecorated ? \_PhpScoper63567e560066\Symfony\Component\Console\Formatter\OutputFormatter::escape($string) : $string;
+        return $this->isDecorated ? \_PhpScoper5a9febfbbe05\Symfony\Component\Console\Formatter\OutputFormatter::escape($string) : $string;
     }
 }
