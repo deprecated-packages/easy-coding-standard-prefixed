@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper224ae0b86670\PhpParser\Node\Stmt;
+namespace _PhpScopera4be459e5e3d\PhpParser\Node\Stmt;
 
-use _PhpScoper224ae0b86670\PhpParser\Node;
-class Trait_ extends \_PhpScoper224ae0b86670\PhpParser\Node\Stmt\ClassLike
+use _PhpScopera4be459e5e3d\PhpParser\Node;
+class Trait_ extends \_PhpScopera4be459e5e3d\PhpParser\Node\Stmt\ClassLike
 {
     /**
      * Constructs a trait node.
@@ -17,7 +17,7 @@ class Trait_ extends \_PhpScoper224ae0b86670\PhpParser\Node\Stmt\ClassLike
     public function __construct($name, array $subNodes = [], array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \_PhpScoper224ae0b86670\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScopera4be459e5e3d\PhpParser\Node\Identifier($name) : $name;
         $this->stmts = $subNodes['stmts'] ?? [];
     }
     public function getSubNodeNames() : array

@@ -13,12 +13,12 @@ use function ltrim;
 use function sprintf;
 use function strtolower;
 use function trim;
-use const _PhpScoper224ae0b86670\T_COMMA;
+use const _PhpScopera4be459e5e3d\T_COMMA;
 use const T_DOUBLE_COLON;
 use const T_FUNCTION;
 use const T_OBJECT_OPERATOR;
-use const _PhpScoper224ae0b86670\T_OPEN_PARENTHESIS;
-use const _PhpScoper224ae0b86670\T_OPEN_SHORT_ARRAY;
+use const _PhpScopera4be459e5e3d\T_OPEN_PARENTHESIS;
+use const _PhpScopera4be459e5e3d\T_OPEN_SHORT_ARRAY;
 class StrictCallSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_STRICT_PARAMETER_MISSING = 'StrictParameterMissing';

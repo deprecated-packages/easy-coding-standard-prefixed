@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper224ae0b86670\Migrify\PhpConfigPrinter\Printer;
+namespace _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\Printer;
 
-use _PhpScoper224ae0b86670\Migrify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
-use _PhpScoper224ae0b86670\Migrify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator;
-use _PhpScoper224ae0b86670\Nette\Utils\Strings;
-use _PhpScoper224ae0b86670\PhpParser\Node;
-use _PhpScoper224ae0b86670\PhpParser\Node\Expr\Array_;
-use _PhpScoper224ae0b86670\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper224ae0b86670\PhpParser\Node\Scalar\LNumber;
-use _PhpScoper224ae0b86670\PhpParser\Node\Stmt\Declare_;
-use _PhpScoper224ae0b86670\PhpParser\Node\Stmt\DeclareDeclare;
-use _PhpScoper224ae0b86670\PhpParser\Node\Stmt\Nop;
-use _PhpScoper224ae0b86670\PhpParser\PrettyPrinter\Standard;
-final class PhpParserPhpConfigPrinter extends \_PhpScoper224ae0b86670\PhpParser\PrettyPrinter\Standard
+use _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser;
+use _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator;
+use _PhpScopera4be459e5e3d\Nette\Utils\Strings;
+use _PhpScopera4be459e5e3d\PhpParser\Node;
+use _PhpScopera4be459e5e3d\PhpParser\Node\Expr\Array_;
+use _PhpScopera4be459e5e3d\PhpParser\Node\Expr\MethodCall;
+use _PhpScopera4be459e5e3d\PhpParser\Node\Scalar\LNumber;
+use _PhpScopera4be459e5e3d\PhpParser\Node\Stmt\Declare_;
+use _PhpScopera4be459e5e3d\PhpParser\Node\Stmt\DeclareDeclare;
+use _PhpScopera4be459e5e3d\PhpParser\Node\Stmt\Nop;
+use _PhpScopera4be459e5e3d\PhpParser\PrettyPrinter\Standard;
+final class PhpParserPhpConfigPrinter extends \_PhpScopera4be459e5e3d\PhpParser\PrettyPrinter\Standard
 {
     /**
      * @var string
@@ -28,7 +28,7 @@ final class PhpParserPhpConfigPrinter extends \_PhpScoper224ae0b86670\PhpParser\
      * @var EmptyLineNodeDecorator
      */
     private $emptyLineNodeDecorator;
-    public function __construct(\_PhpScoper224ae0b86670\Migrify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser, \_PhpScoper224ae0b86670\Migrify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator $emptyLineNodeDecorator)
+    public function __construct(\_PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\NodeTraverser\ImportFullyQualifiedNamesNodeTraverser $importFullyQualifiedNamesNodeTraverser, \_PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\Printer\NodeDecorator\EmptyLineNodeDecorator $emptyLineNodeDecorator)
     {
         $this->importFullyQualifiedNamesNodeTraverser = $importFullyQualifiedNamesNodeTraverser;
         $this->emptyLineNodeDecorator = $emptyLineNodeDecorator;
@@ -42,11 +42,11 @@ final class PhpParserPhpConfigPrinter extends \_PhpScoper224ae0b86670\PhpParser\
         $stmts = $this->prependStrictTypesDeclare($stmts);
         $printedContent = parent::prettyPrintFile($stmts);
         // remove trailing spaces
-        $printedContent = \_PhpScoper224ae0b86670\Nette\Utils\Strings::replace($printedContent, '#^[ ]+\\n#m', "\n");
+        $printedContent = \_PhpScopera4be459e5e3d\Nette\Utils\Strings::replace($printedContent, '#^[ ]+\\n#m', "\n");
         // remove space before " :" in main closure
-        $printedContent = \_PhpScoper224ae0b86670\Nette\Utils\Strings::replace($printedContent, '#\\) : void#', '): void');
+        $printedContent = \_PhpScopera4be459e5e3d\Nette\Utils\Strings::replace($printedContent, '#\\) : void#', '): void');
         // remove space between declare strict types
-        $printedContent = \_PhpScoper224ae0b86670\Nette\Utils\Strings::replace($printedContent, '#declare \\(strict#', 'declare(strict');
+        $printedContent = \_PhpScopera4be459e5e3d\Nette\Utils\Strings::replace($printedContent, '#declare \\(strict#', 'declare(strict');
         return $printedContent . self::EOL_CHAR;
     }
     /**
@@ -60,22 +60,22 @@ final class PhpParserPhpConfigPrinter extends \_PhpScoper224ae0b86670\PhpParser\
      */
     protected function pSingleQuotedString(string $string) : string
     {
-        return "'" . \_PhpScoper224ae0b86670\Nette\Utils\Strings::replace($string, "#'|\\\\(?=[\\\\']|\$)#", '\\\\$0') . "'";
+        return "'" . \_PhpScopera4be459e5e3d\Nette\Utils\Strings::replace($string, "#'|\\\\(?=[\\\\']|\$)#", '\\\\$0') . "'";
     }
-    protected function pExpr_Array(\_PhpScoper224ae0b86670\PhpParser\Node\Expr\Array_ $array) : string
+    protected function pExpr_Array(\_PhpScopera4be459e5e3d\PhpParser\Node\Expr\Array_ $array) : string
     {
-        $array->setAttribute('kind', \_PhpScoper224ae0b86670\PhpParser\Node\Expr\Array_::KIND_SHORT);
+        $array->setAttribute('kind', \_PhpScopera4be459e5e3d\PhpParser\Node\Expr\Array_::KIND_SHORT);
         return parent::pExpr_Array($array);
     }
-    protected function pExpr_MethodCall(\_PhpScoper224ae0b86670\PhpParser\Node\Expr\MethodCall $methodCall) : string
+    protected function pExpr_MethodCall(\_PhpScopera4be459e5e3d\PhpParser\Node\Expr\MethodCall $methodCall) : string
     {
         $printedMethodCall = parent::pExpr_MethodCall($methodCall);
         return $this->indentFluentCallToNewline($printedMethodCall);
     }
     private function indentFluentCallToNewline(string $content) : string
     {
-        $nextCallIndentReplacement = ')' . \PHP_EOL . \_PhpScoper224ae0b86670\Nette\Utils\Strings::indent('->', 8, ' ');
-        return \_PhpScoper224ae0b86670\Nette\Utils\Strings::replace($content, '#\\)->#', $nextCallIndentReplacement);
+        $nextCallIndentReplacement = ')' . \PHP_EOL . \_PhpScopera4be459e5e3d\Nette\Utils\Strings::indent('->', 8, ' ');
+        return \_PhpScopera4be459e5e3d\Nette\Utils\Strings::replace($content, '#\\)->#', $nextCallIndentReplacement);
     }
     /**
      * @param Node[] $stmts
@@ -84,11 +84,11 @@ final class PhpParserPhpConfigPrinter extends \_PhpScoper224ae0b86670\PhpParser\
     private function prependStrictTypesDeclare(array $stmts) : array
     {
         $strictTypesDeclare = $this->createStrictTypesDeclare();
-        return \array_merge([$strictTypesDeclare, new \_PhpScoper224ae0b86670\PhpParser\Node\Stmt\Nop()], $stmts);
+        return \array_merge([$strictTypesDeclare, new \_PhpScopera4be459e5e3d\PhpParser\Node\Stmt\Nop()], $stmts);
     }
-    private function createStrictTypesDeclare() : \_PhpScoper224ae0b86670\PhpParser\Node\Stmt\Declare_
+    private function createStrictTypesDeclare() : \_PhpScopera4be459e5e3d\PhpParser\Node\Stmt\Declare_
     {
-        $declareDeclare = new \_PhpScoper224ae0b86670\PhpParser\Node\Stmt\DeclareDeclare('strict_types', new \_PhpScoper224ae0b86670\PhpParser\Node\Scalar\LNumber(1));
-        return new \_PhpScoper224ae0b86670\PhpParser\Node\Stmt\Declare_([$declareDeclare]);
+        $declareDeclare = new \_PhpScopera4be459e5e3d\PhpParser\Node\Stmt\DeclareDeclare('strict_types', new \_PhpScopera4be459e5e3d\PhpParser\Node\Scalar\LNumber(1));
+        return new \_PhpScopera4be459e5e3d\PhpParser\Node\Stmt\Declare_([$declareDeclare]);
     }
 }
