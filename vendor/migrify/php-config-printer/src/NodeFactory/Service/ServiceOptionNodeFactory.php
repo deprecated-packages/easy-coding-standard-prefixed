@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc753ccca5a0c\Migrify\PhpConfigPrinter\NodeFactory\Service;
+namespace _PhpScoper3639953bb9e5\Migrify\PhpConfigPrinter\NodeFactory\Service;
 
-use _PhpScoperc753ccca5a0c\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
-use _PhpScoperc753ccca5a0c\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
-use _PhpScoperc753ccca5a0c\Nette\Utils\Strings;
-use _PhpScoperc753ccca5a0c\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3639953bb9e5\Migrify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
+use _PhpScoper3639953bb9e5\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey;
+use _PhpScoper3639953bb9e5\Nette\Utils\Strings;
+use _PhpScoper3639953bb9e5\PhpParser\Node\Expr\MethodCall;
 final class ServiceOptionNodeFactory
 {
     /**
@@ -20,12 +20,12 @@ final class ServiceOptionNodeFactory
     {
         $this->serviceOptionKeyYamlToPhpFactories = $serviceOptionKeyYamlToPhpFactories;
     }
-    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScoperc753ccca5a0c\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperc753ccca5a0c\PhpParser\Node\Expr\MethodCall
+    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScoper3639953bb9e5\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper3639953bb9e5\PhpParser\Node\Expr\MethodCall
     {
         $servicesValues = $this->unNestArguments($servicesValues);
         foreach ($servicesValues as $key => $value) {
             // options started by decoration_<option> are used as options of the method decorate().
-            if (\_PhpScoperc753ccca5a0c\Nette\Utils\Strings::startsWith($key, 'decoration_') || $key === 'alias') {
+            if (\_PhpScoper3639953bb9e5\Nette\Utils\Strings::startsWith($key, 'decoration_') || $key === 'alias') {
                 continue;
             }
             foreach ($this->serviceOptionKeyYamlToPhpFactories as $serviceOptionKeyYamlToPhpFactory) {
@@ -44,7 +44,7 @@ final class ServiceOptionNodeFactory
             return \false;
         }
         foreach (\array_keys($servicesValues) as $key) {
-            if (!\_PhpScoperc753ccca5a0c\Nette\Utils\Strings::startsWith((string) $key, '$')) {
+            if (!\_PhpScoper3639953bb9e5\Nette\Utils\Strings::startsWith((string) $key, '$')) {
                 return \false;
             }
         }
@@ -55,6 +55,6 @@ final class ServiceOptionNodeFactory
         if (!$this->isNestedArguments($servicesValues)) {
             return $servicesValues;
         }
-        return [\_PhpScoperc753ccca5a0c\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey::ARGUMENTS => $servicesValues];
+        return [\_PhpScoper3639953bb9e5\Migrify\PhpConfigPrinter\ValueObject\YamlServiceKey::ARGUMENTS => $servicesValues];
     }
 }

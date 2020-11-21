@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc753ccca5a0c\Migrify\PhpConfigPrinter\Contract\Converter;
+namespace _PhpScoper3639953bb9e5\Migrify\PhpConfigPrinter\Contract\Converter;
 
-use _PhpScoperc753ccca5a0c\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3639953bb9e5\PhpParser\Node\Expr\MethodCall;
 interface ServiceOptionsKeyYamlToPhpFactoryInterface
 {
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperc753ccca5a0c\PhpParser\Node\Expr\MethodCall $serviceMethodCall) : \_PhpScoperc753ccca5a0c\PhpParser\Node\Expr\MethodCall;
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper3639953bb9e5\PhpParser\Node\Expr\MethodCall $serviceMethodCall) : \_PhpScoper3639953bb9e5\PhpParser\Node\Expr\MethodCall;
     public function isMatch($key, $values) : bool;
 }

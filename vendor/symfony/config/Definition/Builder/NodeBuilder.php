@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc753ccca5a0c\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper3639953bb9e5\Symfony\Component\Config\Definition\Builder;
 
 /**
  * This class provides a fluent interface for building a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class NodeBuilder implements \_PhpScoperc753ccca5a0c\Symfony\Component\Config\Definition\Builder\NodeParentInterface
+class NodeBuilder implements \_PhpScoper3639953bb9e5\Symfony\Component\Config\Definition\Builder\NodeParentInterface
 {
     protected $parent;
     protected $nodeMapping;
@@ -28,7 +28,7 @@ class NodeBuilder implements \_PhpScoperc753ccca5a0c\Symfony\Component\Config\De
      *
      * @return $this
      */
-    public function setParent(\_PhpScoperc753ccca5a0c\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface $parent = null)
+    public function setParent(\_PhpScoper3639953bb9e5\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface $parent = null)
     {
         $this->parent = $parent;
         return $this;
@@ -152,9 +152,9 @@ class NodeBuilder implements \_PhpScoperc753ccca5a0c\Symfony\Component\Config\De
      *
      * @return $this
      */
-    public function append(\_PhpScoperc753ccca5a0c\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function append(\_PhpScoper3639953bb9e5\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
-        if ($node instanceof \_PhpScoperc753ccca5a0c\Symfony\Component\Config\Definition\Builder\BuilderAwareInterface) {
+        if ($node instanceof \_PhpScoper3639953bb9e5\Symfony\Component\Config\Definition\Builder\BuilderAwareInterface) {
             $builder = clone $this;
             $builder->setParent(null);
             $node->setBuilder($builder);

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc753ccca5a0c\PhpParser\Node;
+namespace _PhpScoper3639953bb9e5\PhpParser\Node;
 
 /**
  * Represents a name that is written in source code with a leading dollar,
@@ -10,7 +10,7 @@ namespace _PhpScoperc753ccca5a0c\PhpParser\Node;
  * Examples: Names in property declarations are formatted as variables. Names in static property
  * lookups are also formatted as variables.
  */
-class VarLikeIdentifier extends \_PhpScoperc753ccca5a0c\PhpParser\Node\Identifier
+class VarLikeIdentifier extends \_PhpScoper3639953bb9e5\PhpParser\Node\Identifier
 {
     public function getType() : string
     {

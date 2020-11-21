@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc753ccca5a0c\Symfony\Component\Mime\Encoder;
+namespace _PhpScoper3639953bb9e5\Symfony\Component\Mime\Encoder;
 
 /**
  * @author Chris Corbyn
  *
  * @experimental in 4.3
  */
-class Base64Encoder implements \_PhpScoperc753ccca5a0c\Symfony\Component\Mime\Encoder\EncoderInterface
+class Base64Encoder implements \_PhpScoper3639953bb9e5\Symfony\Component\Mime\Encoder\EncoderInterface
 {
     /**
      * Takes an unencoded string and produces a Base64 encoded string from it.

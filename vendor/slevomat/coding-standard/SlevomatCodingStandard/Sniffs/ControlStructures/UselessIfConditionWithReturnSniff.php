@@ -13,11 +13,11 @@ use function in_array;
 use function sprintf;
 use function strtolower;
 use const T_ELSE;
-use const _PhpScoperc753ccca5a0c\T_FALSE;
+use const _PhpScoper3639953bb9e5\T_FALSE;
 use const T_IF;
 use const T_RETURN;
-use const _PhpScoperc753ccca5a0c\T_SEMICOLON;
-use const _PhpScoperc753ccca5a0c\T_TRUE;
+use const _PhpScoper3639953bb9e5\T_SEMICOLON;
+use const _PhpScoper3639953bb9e5\T_TRUE;
 class UselessIfConditionWithReturnSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_USELESS_IF_CONDITION = 'UselessIfCondition';

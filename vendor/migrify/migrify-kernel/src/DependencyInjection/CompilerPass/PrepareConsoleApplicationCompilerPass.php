@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc753ccca5a0c\Migrify\MigrifyKernel\DependencyInjection\CompilerPass;
+namespace _PhpScoper3639953bb9e5\Migrify\MigrifyKernel\DependencyInjection\CompilerPass;
 
-use _PhpScoperc753ccca5a0c\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication;
-use _PhpScoperc753ccca5a0c\Migrify\MigrifyKernel\Console\ConsoleApplicationFactory;
-use _PhpScoperc753ccca5a0c\Symfony\Component\Console\Application;
-use _PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper3639953bb9e5\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication;
+use _PhpScoper3639953bb9e5\Migrify\MigrifyKernel\Console\ConsoleApplicationFactory;
+use _PhpScoper3639953bb9e5\Symfony\Component\Console\Application;
+use _PhpScoper3639953bb9e5\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper3639953bb9e5\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper3639953bb9e5\Symfony\Component\DependencyInjection\Reference;
 /**
  * @todo replace with symplify/symplify-kernel after release of Symplify 9
  */
-final class PrepareConsoleApplicationCompilerPass implements \_PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+final class PrepareConsoleApplicationCompilerPass implements \_PhpScoper3639953bb9e5\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
-    public function process(\_PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function process(\_PhpScoper3639953bb9e5\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $consoleApplicationClass = $this->resolveConsoleApplicationClass($containerBuilder);
         if ($consoleApplicationClass === null) {
@@ -22,15 +22,15 @@ final class PrepareConsoleApplicationCompilerPass implements \_PhpScoperc753ccca
             return;
         }
         // add console application alias
-        if ($consoleApplicationClass === \_PhpScoperc753ccca5a0c\Symfony\Component\Console\Application::class) {
+        if ($consoleApplicationClass === \_PhpScoper3639953bb9e5\Symfony\Component\Console\Application::class) {
             return;
         }
-        $containerBuilder->setAlias(\_PhpScoperc753ccca5a0c\Symfony\Component\Console\Application::class, $consoleApplicationClass)->setPublic(\true);
+        $containerBuilder->setAlias(\_PhpScoper3639953bb9e5\Symfony\Component\Console\Application::class, $consoleApplicationClass)->setPublic(\true);
     }
-    private function resolveConsoleApplicationClass(\_PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : ?string
+    private function resolveConsoleApplicationClass(\_PhpScoper3639953bb9e5\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : ?string
     {
         foreach ($containerBuilder->getDefinitions() as $definition) {
-            if (!\is_a((string) $definition->getClass(), \_PhpScoperc753ccca5a0c\Symfony\Component\Console\Application::class, \true)) {
+            if (!\is_a((string) $definition->getClass(), \_PhpScoper3639953bb9e5\Symfony\Component\Console\Application::class, \true)) {
                 continue;
             }
             return $definition->getClass();
@@ -40,9 +40,9 @@ final class PrepareConsoleApplicationCompilerPass implements \_PhpScoperc753ccca
     /**
      * Missing console application? add basic one
      */
-    private function registerAutowiredSymfonyConsole(\_PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    private function registerAutowiredSymfonyConsole(\_PhpScoper3639953bb9e5\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
-        $containerBuilder->autowire(\_PhpScoperc753ccca5a0c\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication::class, \_PhpScoperc753ccca5a0c\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication::class)->setFactory([new \_PhpScoperc753ccca5a0c\Symfony\Component\DependencyInjection\Reference(\_PhpScoperc753ccca5a0c\Migrify\MigrifyKernel\Console\ConsoleApplicationFactory::class), 'create']);
-        $containerBuilder->setAlias(\_PhpScoperc753ccca5a0c\Symfony\Component\Console\Application::class, \_PhpScoperc753ccca5a0c\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication::class)->setPublic(\true);
+        $containerBuilder->autowire(\_PhpScoper3639953bb9e5\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication::class, \_PhpScoper3639953bb9e5\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication::class)->setFactory([new \_PhpScoper3639953bb9e5\Symfony\Component\DependencyInjection\Reference(\_PhpScoper3639953bb9e5\Migrify\MigrifyKernel\Console\ConsoleApplicationFactory::class), 'create']);
+        $containerBuilder->setAlias(\_PhpScoper3639953bb9e5\Symfony\Component\Console\Application::class, \_PhpScoper3639953bb9e5\Migrify\MigrifyKernel\Console\AutowiredConsoleApplication::class)->setPublic(\true);
     }
 }
