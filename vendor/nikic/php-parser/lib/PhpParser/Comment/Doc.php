@@ -1,8 +1,8 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3639953bb9e5\PhpParser\Comment;
+namespace _PhpScoper224ae0b86670\PhpParser\Comment;
 
-class Doc extends \_PhpScoper3639953bb9e5\PhpParser\Comment
+class Doc extends \_PhpScoper224ae0b86670\PhpParser\Comment
 {
 }
