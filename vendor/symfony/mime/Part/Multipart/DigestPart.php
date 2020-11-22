@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4cd05b62e9f1\Symfony\Component\Mime\Part\Multipart;
+namespace _PhpScoperf3db63c305b2\Symfony\Component\Mime\Part\Multipart;
 
-use _PhpScoper4cd05b62e9f1\Symfony\Component\Mime\Part\AbstractMultipartPart;
-use _PhpScoper4cd05b62e9f1\Symfony\Component\Mime\Part\MessagePart;
+use _PhpScoperf3db63c305b2\Symfony\Component\Mime\Part\AbstractMultipartPart;
+use _PhpScoperf3db63c305b2\Symfony\Component\Mime\Part\MessagePart;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @experimental in 4.3
  */
-final class DigestPart extends \_PhpScoper4cd05b62e9f1\Symfony\Component\Mime\Part\AbstractMultipartPart
+final class DigestPart extends \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Part\AbstractMultipartPart
 {
-    public function __construct(\_PhpScoper4cd05b62e9f1\Symfony\Component\Mime\Part\MessagePart ...$parts)
+    public function __construct(\_PhpScoperf3db63c305b2\Symfony\Component\Mime\Part\MessagePart ...$parts)
     {
         parent::__construct(...$parts);
     }
