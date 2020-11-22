@@ -1,11 +1,11 @@
 <?php
 
-namespace _PhpScopera4be459e5e3d\Doctrine\Tests\Common\Annotations;
+namespace _PhpScoper5ade29b97028\Doctrine\Tests\Common\Annotations;
 
-use _PhpScopera4be459e5e3d\Doctrine\Tests\Common\Annotations\DummyAnnotation;
-use _PhpScopera4be459e5e3d\Doctrine\Tests\Common\Annotations\Name;
-use _PhpScopera4be459e5e3d\Doctrine\Tests\Common\Annotations\DummyJoinTable;
-use _PhpScopera4be459e5e3d\Doctrine\Tests\Common\Annotations\DummyJoinColumn;
+use _PhpScoper5ade29b97028\Doctrine\Tests\Common\Annotations\DummyAnnotation;
+use _PhpScoper5ade29b97028\Doctrine\Tests\Common\Annotations\Name;
+use _PhpScoper5ade29b97028\Doctrine\Tests\Common\Annotations\DummyJoinTable;
+use _PhpScoper5ade29b97028\Doctrine\Tests\Common\Annotations\DummyJoinColumn;
 /**
  * A description of this class.
  *

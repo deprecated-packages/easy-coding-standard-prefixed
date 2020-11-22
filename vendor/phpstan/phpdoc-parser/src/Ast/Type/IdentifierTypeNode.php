@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera4be459e5e3d\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\Type;
 
-class IdentifierTypeNode implements \_PhpScopera4be459e5e3d\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class IdentifierTypeNode implements \_PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     /** @var string */
     public $name;

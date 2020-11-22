@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
-use _PhpScopera4be459e5e3d\Nette\Utils\Strings;
+use _PhpScoper5ade29b97028\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
@@ -129,7 +129,7 @@ final class LineLengthTransformer
             throw new \Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException($nextPosition);
         }
         $tokenContent = $tokens[$nextPosition]->getContent();
-        return \_PhpScopera4be459e5e3d\Nette\Utils\Strings::contains($tokenContent, $this->whitespacesFixerConfig->getLineEnding());
+        return \_PhpScoper5ade29b97028\Nette\Utils\Strings::contains($tokenContent, $this->whitespacesFixerConfig->getLineEnding());
     }
     /**
      * @param Tokens|Token[] $tokens

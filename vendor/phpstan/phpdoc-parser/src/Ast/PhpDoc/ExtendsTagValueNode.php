@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera4be459e5e3d\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use _PhpScopera4be459e5e3d\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-class ExtendsTagValueNode implements \_PhpScopera4be459e5e3d\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+use _PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+class ExtendsTagValueNode implements \_PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     /** @var GenericTypeNode */
     public $type;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(\_PhpScopera4be459e5e3d\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode $type, string $description)
+    public function __construct(\_PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode $type, string $description)
     {
         $this->type = $type;
         $this->description = $description;

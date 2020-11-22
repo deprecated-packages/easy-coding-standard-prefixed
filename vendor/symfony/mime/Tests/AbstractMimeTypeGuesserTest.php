@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera4be459e5e3d\Symfony\Component\Mime\Tests;
+namespace _PhpScoper5ade29b97028\Symfony\Component\Mime\Tests;
 
-use _PhpScopera4be459e5e3d\PHPUnit\Framework\TestCase;
-use _PhpScopera4be459e5e3d\Symfony\Component\Mime\MimeTypeGuesserInterface;
-abstract class AbstractMimeTypeGuesserTest extends \_PhpScopera4be459e5e3d\PHPUnit\Framework\TestCase
+use _PhpScoper5ade29b97028\PHPUnit\Framework\TestCase;
+use _PhpScoper5ade29b97028\Symfony\Component\Mime\MimeTypeGuesserInterface;
+abstract class AbstractMimeTypeGuesserTest extends \_PhpScoper5ade29b97028\PHPUnit\Framework\TestCase
 {
     public static function tearDownAfterClass()
     {
@@ -22,7 +22,7 @@ abstract class AbstractMimeTypeGuesserTest extends \_PhpScopera4be459e5e3d\PHPUn
             @\unlink($path);
         }
     }
-    protected abstract function getGuesser() : \_PhpScopera4be459e5e3d\Symfony\Component\Mime\MimeTypeGuesserInterface;
+    protected abstract function getGuesser() : \_PhpScoper5ade29b97028\Symfony\Component\Mime\MimeTypeGuesserInterface;
     public function testGuessImageWithoutExtension()
     {
         if (!$this->getGuesser()->isGuesserSupported()) {

@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\CaseConverter;
+namespace _PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
-use _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\ValueObject\MethodName;
-use _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\ValueObject\VariableName;
-use _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
-use _PhpScopera4be459e5e3d\PhpParser\Node\Expr\MethodCall;
-use _PhpScopera4be459e5e3d\PhpParser\Node\Expr\Variable;
-use _PhpScopera4be459e5e3d\PhpParser\Node\Stmt\Expression;
+use _PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface;
+use _PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use _PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\ValueObject\MethodName;
+use _PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\ValueObject\VariableName;
+use _PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\ValueObject\YamlKey;
+use _PhpScoper5ade29b97028\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper5ade29b97028\PhpParser\Node\Expr\Variable;
+use _PhpScoper5ade29b97028\PhpParser\Node\Stmt\Expression;
 /**
  * Handles this part:
  *
  * framework: <---
  *     key: value
  */
-final class ExtensionConverter implements \_PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
+final class ExtensionConverter implements \_PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\Contract\CaseConverterInterface
 {
     /**
      * @var ArgsNodeFactory
@@ -31,17 +31,17 @@ final class ExtensionConverter implements \_PhpScopera4be459e5e3d\Migrify\PhpCon
      * @var YamlKey
      */
     private $yamlKey;
-    public function __construct(\_PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\ValueObject\YamlKey $yamlKey)
+    public function __construct(\_PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \_PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\ValueObject\YamlKey $yamlKey)
     {
         $this->argsNodeFactory = $argsNodeFactory;
         $this->yamlKey = $yamlKey;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScopera4be459e5e3d\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoper5ade29b97028\PhpParser\Node\Stmt\Expression
     {
         $args = $this->argsNodeFactory->createFromValues([$this->rootKey, [$key => $values]]);
-        $containerConfiguratorVariable = new \_PhpScopera4be459e5e3d\PhpParser\Node\Expr\Variable(\_PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
-        $methodCall = new \_PhpScopera4be459e5e3d\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, \_PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\ValueObject\MethodName::EXTENSION, $args);
-        return new \_PhpScopera4be459e5e3d\PhpParser\Node\Stmt\Expression($methodCall);
+        $containerConfiguratorVariable = new \_PhpScoper5ade29b97028\PhpParser\Node\Expr\Variable(\_PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $methodCall = new \_PhpScoper5ade29b97028\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, \_PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\ValueObject\MethodName::EXTENSION, $args);
+        return new \_PhpScoper5ade29b97028\PhpParser\Node\Stmt\Expression($methodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera4be459e5e3d\Migrify\PhpConfigPrinter\Provider;
+namespace _PhpScoper5ade29b97028\Migrify\PhpConfigPrinter\Provider;
 
 final class CurrentFilePathProvider
 {
