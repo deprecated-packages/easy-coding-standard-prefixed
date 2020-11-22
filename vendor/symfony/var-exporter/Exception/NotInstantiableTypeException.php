@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3fa05b4669af\Symfony\Component\VarExporter\Exception;
+namespace _PhpScoper66292c14b658\Symfony\Component\VarExporter\Exception;
 
-class NotInstantiableTypeException extends \Exception implements \_PhpScoper3fa05b4669af\Symfony\Component\VarExporter\Exception\ExceptionInterface
+class NotInstantiableTypeException extends \Exception implements \_PhpScoper66292c14b658\Symfony\Component\VarExporter\Exception\ExceptionInterface
 {
     public function __construct(string $type)
     {

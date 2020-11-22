@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use _PhpScoper3fa05b4669af\Nette\Utils\Strings;
-use _PhpScoper3fa05b4669af\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper66292c14b658\Nette\Utils\Strings;
+use _PhpScoper66292c14b658\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
 final class ServiceOptionNodeFactory
@@ -20,12 +20,12 @@ final class ServiceOptionNodeFactory
     {
         $this->serviceOptionKeyYamlToPhpFactories = $serviceOptionKeyYamlToPhpFactories;
     }
-    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScoper3fa05b4669af\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper3fa05b4669af\PhpParser\Node\Expr\MethodCall
+    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScoper66292c14b658\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper66292c14b658\PhpParser\Node\Expr\MethodCall
     {
         $servicesValues = $this->unNestArguments($servicesValues);
         foreach ($servicesValues as $key => $value) {
             // options started by decoration_<option> are used as options of the method decorate().
-            if (\_PhpScoper3fa05b4669af\Nette\Utils\Strings::startsWith($key, 'decoration_') || $key === 'alias') {
+            if (\_PhpScoper66292c14b658\Nette\Utils\Strings::startsWith($key, 'decoration_') || $key === 'alias') {
                 continue;
             }
             foreach ($this->serviceOptionKeyYamlToPhpFactories as $serviceOptionKeyYamlToPhpFactory) {
@@ -44,7 +44,7 @@ final class ServiceOptionNodeFactory
             return \false;
         }
         foreach (\array_keys($servicesValues) as $key) {
-            if (!\_PhpScoper3fa05b4669af\Nette\Utils\Strings::startsWith((string) $key, '$')) {
+            if (!\_PhpScoper66292c14b658\Nette\Utils\Strings::startsWith((string) $key, '$')) {
                 return \false;
             }
         }

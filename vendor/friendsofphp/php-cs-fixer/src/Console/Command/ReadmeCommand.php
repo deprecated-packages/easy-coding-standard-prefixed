@@ -12,16 +12,16 @@
 namespace PhpCsFixer\Console\Command;
 
 use PhpCsFixer\Preg;
-use _PhpScoper3fa05b4669af\Symfony\Component\Console\Command\Command;
-use _PhpScoper3fa05b4669af\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper3fa05b4669af\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper66292c14b658\Symfony\Component\Console\Command\Command;
+use _PhpScoper66292c14b658\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper66292c14b658\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @internal
  */
-final class ReadmeCommand extends \_PhpScoper3fa05b4669af\Symfony\Component\Console\Command\Command
+final class ReadmeCommand extends \_PhpScoper66292c14b658\Symfony\Component\Console\Command\Command
 {
     protected static $defaultName = 'readme';
     /**
@@ -34,7 +34,7 @@ final class ReadmeCommand extends \_PhpScoper3fa05b4669af\Symfony\Component\Cons
     /**
      * {@inheritdoc}
      */
-    protected function execute(\_PhpScoper3fa05b4669af\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper3fa05b4669af\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function execute(\_PhpScoper66292c14b658\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper66292c14b658\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $header = <<<'EOF'
 PHP Coding Standards Fixer

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper3fa05b4669af\Psr\Log;
+namespace _PhpScoper66292c14b658\Psr\Log;
 
 /**
  * This is a simple Logger trait that classes unable to extend AbstractLogger
@@ -21,7 +21,7 @@ trait LoggerTrait
      */
     public function emergency($message, array $context = array())
     {
-        $this->log(\_PhpScoper3fa05b4669af\Psr\Log\LogLevel::EMERGENCY, $message, $context);
+        $this->log(\_PhpScoper66292c14b658\Psr\Log\LogLevel::EMERGENCY, $message, $context);
     }
     /**
      * Action must be taken immediately.
@@ -35,7 +35,7 @@ trait LoggerTrait
      */
     public function alert($message, array $context = array())
     {
-        $this->log(\_PhpScoper3fa05b4669af\Psr\Log\LogLevel::ALERT, $message, $context);
+        $this->log(\_PhpScoper66292c14b658\Psr\Log\LogLevel::ALERT, $message, $context);
     }
     /**
      * Critical conditions.
@@ -48,7 +48,7 @@ trait LoggerTrait
      */
     public function critical($message, array $context = array())
     {
-        $this->log(\_PhpScoper3fa05b4669af\Psr\Log\LogLevel::CRITICAL, $message, $context);
+        $this->log(\_PhpScoper66292c14b658\Psr\Log\LogLevel::CRITICAL, $message, $context);
     }
     /**
      * Runtime errors that do not require immediate action but should typically
@@ -60,7 +60,7 @@ trait LoggerTrait
      */
     public function error($message, array $context = array())
     {
-        $this->log(\_PhpScoper3fa05b4669af\Psr\Log\LogLevel::ERROR, $message, $context);
+        $this->log(\_PhpScoper66292c14b658\Psr\Log\LogLevel::ERROR, $message, $context);
     }
     /**
      * Exceptional occurrences that are not errors.
@@ -74,7 +74,7 @@ trait LoggerTrait
      */
     public function warning($message, array $context = array())
     {
-        $this->log(\_PhpScoper3fa05b4669af\Psr\Log\LogLevel::WARNING, $message, $context);
+        $this->log(\_PhpScoper66292c14b658\Psr\Log\LogLevel::WARNING, $message, $context);
     }
     /**
      * Normal but significant events.
@@ -85,7 +85,7 @@ trait LoggerTrait
      */
     public function notice($message, array $context = array())
     {
-        $this->log(\_PhpScoper3fa05b4669af\Psr\Log\LogLevel::NOTICE, $message, $context);
+        $this->log(\_PhpScoper66292c14b658\Psr\Log\LogLevel::NOTICE, $message, $context);
     }
     /**
      * Interesting events.
@@ -98,7 +98,7 @@ trait LoggerTrait
      */
     public function info($message, array $context = array())
     {
-        $this->log(\_PhpScoper3fa05b4669af\Psr\Log\LogLevel::INFO, $message, $context);
+        $this->log(\_PhpScoper66292c14b658\Psr\Log\LogLevel::INFO, $message, $context);
     }
     /**
      * Detailed debug information.
@@ -109,7 +109,7 @@ trait LoggerTrait
      */
     public function debug($message, array $context = array())
     {
-        $this->log(\_PhpScoper3fa05b4669af\Psr\Log\LogLevel::DEBUG, $message, $context);
+        $this->log(\_PhpScoper66292c14b658\Psr\Log\LogLevel::DEBUG, $message, $context);
     }
     /**
      * Logs with an arbitrary level.
