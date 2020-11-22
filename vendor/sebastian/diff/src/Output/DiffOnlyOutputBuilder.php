@@ -9,14 +9,14 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5bee3a837bb\SebastianBergmann\Diff\Output;
+namespace _PhpScoper797695bcfb1f\SebastianBergmann\Diff\Output;
 
-use _PhpScoperc5bee3a837bb\SebastianBergmann\Diff\Differ;
+use _PhpScoper797695bcfb1f\SebastianBergmann\Diff\Differ;
 /**
  * Builds a diff string representation in a loose unified diff format
  * listing only changes lines. Does not include line numbers.
  */
-final class DiffOnlyOutputBuilder implements \_PhpScoperc5bee3a837bb\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface
+final class DiffOnlyOutputBuilder implements \_PhpScoper797695bcfb1f\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface
 {
     /**
      * @var string
@@ -36,11 +36,11 @@ final class DiffOnlyOutputBuilder implements \_PhpScoperc5bee3a837bb\SebastianBe
             }
         }
         foreach ($diff as $diffEntry) {
-            if ($diffEntry[1] === \_PhpScoperc5bee3a837bb\SebastianBergmann\Diff\Differ::ADDED) {
+            if ($diffEntry[1] === \_PhpScoper797695bcfb1f\SebastianBergmann\Diff\Differ::ADDED) {
                 \fwrite($buffer, '+' . $diffEntry[0]);
-            } elseif ($diffEntry[1] === \_PhpScoperc5bee3a837bb\SebastianBergmann\Diff\Differ::REMOVED) {
+            } elseif ($diffEntry[1] === \_PhpScoper797695bcfb1f\SebastianBergmann\Diff\Differ::REMOVED) {
                 \fwrite($buffer, '-' . $diffEntry[0]);
-            } elseif ($diffEntry[1] === \_PhpScoperc5bee3a837bb\SebastianBergmann\Diff\Differ::DIFF_LINE_END_WARNING) {
+            } elseif ($diffEntry[1] === \_PhpScoper797695bcfb1f\SebastianBergmann\Diff\Differ::DIFF_LINE_END_WARNING) {
                 \fwrite($buffer, ' ' . $diffEntry[0]);
                 continue;
                 // Warnings should not be tested for line break, it will always be there

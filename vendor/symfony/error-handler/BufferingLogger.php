@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5bee3a837bb\Symfony\Component\ErrorHandler;
+namespace _PhpScoper797695bcfb1f\Symfony\Component\ErrorHandler;
 
-use _PhpScoperc5bee3a837bb\Psr\Log\AbstractLogger;
+use _PhpScoper797695bcfb1f\Psr\Log\AbstractLogger;
 /**
  * A buffering logger that stacks logs for later.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class BufferingLogger extends \_PhpScoperc5bee3a837bb\Psr\Log\AbstractLogger
+class BufferingLogger extends \_PhpScoper797695bcfb1f\Psr\Log\AbstractLogger
 {
     private $logs = [];
     public function log($level, $message, array $context = []) : void

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5bee3a837bb\Symfony\Component\Cache\Simple;
+namespace _PhpScoper797695bcfb1f\Symfony\Component\Cache\Simple;
 
-use _PhpScoperc5bee3a837bb\Symfony\Component\Cache\Psr16Cache;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" instead.', \_PhpScoperc5bee3a837bb\Symfony\Component\Cache\Simple\Psr6Cache::class, \_PhpScoperc5bee3a837bb\Symfony\Component\Cache\Psr16Cache::class), \E_USER_DEPRECATED);
+use _PhpScoper797695bcfb1f\Symfony\Component\Cache\Psr16Cache;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" instead.', \_PhpScoper797695bcfb1f\Symfony\Component\Cache\Simple\Psr6Cache::class, \_PhpScoper797695bcfb1f\Symfony\Component\Cache\Psr16Cache::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use Psr16Cache instead.
  */
-class Psr6Cache extends \_PhpScoperc5bee3a837bb\Symfony\Component\Cache\Psr16Cache
+class Psr6Cache extends \_PhpScoper797695bcfb1f\Symfony\Component\Cache\Psr16Cache
 {
 }
