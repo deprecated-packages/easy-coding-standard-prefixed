@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\DependencyInjection\Extension;
 
-use _PhpScoperac4e86be08e5\Symfony\Component\Config\FileLocator;
-use _PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class ComposerJsonManipulatorExtension extends \_PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Extension\Extension
+use _PhpScoperc5bee3a837bb\Symfony\Component\Config\FileLocator;
+use _PhpScoperc5bee3a837bb\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperc5bee3a837bb\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoperc5bee3a837bb\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class ComposerJsonManipulatorExtension extends \_PhpScoperc5bee3a837bb\Symfony\Component\DependencyInjection\Extension\Extension
 {
-    public function load(array $configs, \_PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, \_PhpScoperc5bee3a837bb\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
-        $phpFileLoader = new \_PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperac4e86be08e5\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \_PhpScoperc5bee3a837bb\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperc5bee3a837bb\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');
     }
 }

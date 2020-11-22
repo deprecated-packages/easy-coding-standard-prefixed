@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperac4e86be08e5\PhpParser\Node\Expr;
+namespace _PhpScoperc5bee3a837bb\PhpParser\Node\Expr;
 
-use _PhpScoperac4e86be08e5\PhpParser\Node\Expr;
-class ArrayItem extends \_PhpScoperac4e86be08e5\PhpParser\Node\Expr
+use _PhpScoperc5bee3a837bb\PhpParser\Node\Expr;
+class ArrayItem extends \_PhpScoperc5bee3a837bb\PhpParser\Node\Expr
 {
     /** @var null|Expr Key */
     public $key;
@@ -22,7 +22,7 @@ class ArrayItem extends \_PhpScoperac4e86be08e5\PhpParser\Node\Expr
      * @param bool      $byRef      Whether to assign by reference
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperac4e86be08e5\PhpParser\Node\Expr $value, \_PhpScoperac4e86be08e5\PhpParser\Node\Expr $key = null, bool $byRef = \false, array $attributes = [], bool $unpack = \false)
+    public function __construct(\_PhpScoperc5bee3a837bb\PhpParser\Node\Expr $value, \_PhpScoperc5bee3a837bb\PhpParser\Node\Expr $key = null, bool $byRef = \false, array $attributes = [], bool $unpack = \false)
     {
         $this->attributes = $attributes;
         $this->key = $key;

@@ -1,33 +1,33 @@
 <?php
 
-namespace _PhpScoperac4e86be08e5\Doctrine\Tests\Common\Annotations;
+namespace _PhpScoperc5bee3a837bb\Doctrine\Tests\Common\Annotations;
 
-use _PhpScoperac4e86be08e5\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
-use _PhpScoperac4e86be08e5\Doctrine\Common\Annotations\AnnotationReader;
-use _PhpScoperac4e86be08e5\Doctrine\Common\Annotations\CachedReader;
-use _PhpScoperac4e86be08e5\Doctrine\Common\Cache\ArrayCache;
-class CachedReaderTest extends \_PhpScoperac4e86be08e5\Doctrine\Tests\Common\Annotations\AbstractReaderTest
+use _PhpScoperc5bee3a837bb\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoperc5bee3a837bb\Doctrine\Common\Annotations\AnnotationReader;
+use _PhpScoperc5bee3a837bb\Doctrine\Common\Annotations\CachedReader;
+use _PhpScoperc5bee3a837bb\Doctrine\Common\Cache\ArrayCache;
+class CachedReaderTest extends \_PhpScoperc5bee3a837bb\Doctrine\Tests\Common\Annotations\AbstractReaderTest
 {
     private $cache;
     public function testIgnoresStaleCache()
     {
         $file = __DIR__ . '/Fixtures/Controller.php';
         \touch($file);
-        $name = '_PhpScoperac4e86be08e5\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Controller';
+        $name = '_PhpScoperc5bee3a837bb\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Controller';
         $cacheKey = $name . '@[Annot]';
-        $cache = $this->getMock('_PhpScoperac4e86be08e5\\Doctrine\\Common\\Cache\\Cache');
+        $cache = $this->getMock('_PhpScoperc5bee3a837bb\\Doctrine\\Common\\Cache\\Cache');
         $cache->expects($this->at(0))->method('fetch')->with($this->equalTo($cacheKey))->will($this->returnValue(array()));
         $cache->expects($this->at(1))->method('fetch')->with($this->equalTo('[C]' . $cacheKey))->will($this->returnValue(\time() - 10));
         $cache->expects($this->at(2))->method('save')->with($this->equalTo($cacheKey));
         $cache->expects($this->at(3))->method('save')->with($this->equalTo('[C]' . $cacheKey));
-        $reader = new \_PhpScoperac4e86be08e5\Doctrine\Common\Annotations\CachedReader(new \_PhpScoperac4e86be08e5\Doctrine\Common\Annotations\AnnotationReader(), $cache, \true);
-        $route = new \_PhpScoperac4e86be08e5\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route();
+        $reader = new \_PhpScoperc5bee3a837bb\Doctrine\Common\Annotations\CachedReader(new \_PhpScoperc5bee3a837bb\Doctrine\Common\Annotations\AnnotationReader(), $cache, \true);
+        $route = new \_PhpScoperc5bee3a837bb\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route();
         $route->pattern = '/someprefix';
         $this->assertEquals(array($route), $reader->getClassAnnotations(new \ReflectionClass($name)));
     }
     protected function getReader()
     {
-        $this->cache = new \_PhpScoperac4e86be08e5\Doctrine\Common\Cache\ArrayCache();
-        return new \_PhpScoperac4e86be08e5\Doctrine\Common\Annotations\CachedReader(new \_PhpScoperac4e86be08e5\Doctrine\Common\Annotations\AnnotationReader(), $this->cache);
+        $this->cache = new \_PhpScoperc5bee3a837bb\Doctrine\Common\Cache\ArrayCache();
+        return new \_PhpScoperc5bee3a837bb\Doctrine\Common\Annotations\CachedReader(new \_PhpScoperc5bee3a837bb\Doctrine\Common\Annotations\AnnotationReader(), $this->cache);
     }
 }

@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoperac4e86be08e5\Nette\Utils\Strings;
-use _PhpScoperac4e86be08e5\PhpParser\BuilderHelpers;
-use _PhpScoperac4e86be08e5\PhpParser\Node\Arg;
-use _PhpScoperac4e86be08e5\PhpParser\Node\Expr;
-use _PhpScoperac4e86be08e5\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperac4e86be08e5\PhpParser\Node\Expr\Variable;
-use _PhpScoperac4e86be08e5\PhpParser\Node\Scalar\String_;
-use _PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Expression;
+use _PhpScoperc5bee3a837bb\Nette\Utils\Strings;
+use _PhpScoperc5bee3a837bb\PhpParser\BuilderHelpers;
+use _PhpScoperc5bee3a837bb\PhpParser\Node\Arg;
+use _PhpScoperc5bee3a837bb\PhpParser\Node\Expr;
+use _PhpScoperc5bee3a837bb\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperc5bee3a837bb\PhpParser\Node\Expr\Variable;
+use _PhpScoperc5bee3a837bb\PhpParser\Node\Scalar\String_;
+use _PhpScoperc5bee3a837bb\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
@@ -50,7 +50,7 @@ final class ImportCaseConverter implements \Symplify\PhpConfigPrinter\Contract\C
     {
         return $rootKey === \Symplify\PhpConfigPrinter\ValueObject\YamlKey::IMPORTS;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperc5bee3a837bb\PhpParser\Node\Stmt\Expression
     {
         if (\is_array($values)) {
             $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($values, [\Symplify\PhpConfigPrinter\ValueObject\YamlKey::RESOURCE => '', 'type' => null, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::IGNORE_ERRORS => \false]);
@@ -61,12 +61,12 @@ final class ImportCaseConverter implements \Symplify\PhpConfigPrinter\Contract\C
     /**
      * @param mixed[] $arguments
      */
-    private function createImportMethodCall(array $arguments) : \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Expression
+    private function createImportMethodCall(array $arguments) : \_PhpScoperc5bee3a837bb\PhpParser\Node\Stmt\Expression
     {
-        $containerConfiguratorVariable = new \_PhpScoperac4e86be08e5\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $containerConfiguratorVariable = new \_PhpScoperc5bee3a837bb\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
         $args = $this->createArgs($arguments);
-        $methodCall = new \_PhpScoperac4e86be08e5\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, 'import', $args);
-        return new \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Expression($methodCall);
+        $methodCall = new \_PhpScoperc5bee3a837bb\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, 'import', $args);
+        return new \_PhpScoperc5bee3a837bb\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param mixed[] $arguments
@@ -80,7 +80,7 @@ final class ImportCaseConverter implements \Symplify\PhpConfigPrinter\Contract\C
                 continue;
             }
             $expr = $this->resolveExpr($value);
-            $args[] = new \_PhpScoperac4e86be08e5\PhpParser\Node\Arg($expr);
+            $args[] = new \_PhpScoperc5bee3a837bb\PhpParser\Node\Arg($expr);
         }
         return $args;
     }
@@ -105,15 +105,15 @@ final class ImportCaseConverter implements \Symplify\PhpConfigPrinter\Contract\C
         if (!\is_string($value)) {
             return $value;
         }
-        return \_PhpScoperac4e86be08e5\Nette\Utils\Strings::replace($value, self::INPUT_SUFFIX_REGEX, '.php');
+        return \_PhpScoperc5bee3a837bb\Nette\Utils\Strings::replace($value, self::INPUT_SUFFIX_REGEX, '.php');
     }
-    private function resolveExpr($value) : \_PhpScoperac4e86be08e5\PhpParser\Node\Expr
+    private function resolveExpr($value) : \_PhpScoperc5bee3a837bb\PhpParser\Node\Expr
     {
         if (\is_bool($value) || \in_array($value, ['annotations', 'directory', 'glob'], \true)) {
-            return \_PhpScoperac4e86be08e5\PhpParser\BuilderHelpers::normalizeValue($value);
+            return \_PhpScoperc5bee3a837bb\PhpParser\BuilderHelpers::normalizeValue($value);
         }
         if ($value === 'not_found') {
-            return new \_PhpScoperac4e86be08e5\PhpParser\Node\Scalar\String_('not_found');
+            return new \_PhpScoperc5bee3a837bb\PhpParser\Node\Scalar\String_('not_found');
         }
         $value = $this->replaceImportedFileSuffix($value);
         return $this->commonNodeFactory->createAbsoluteDirExpr($value);

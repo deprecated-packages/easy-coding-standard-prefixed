@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Tests\Test;
 
-use _PhpScoperac4e86be08e5\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoperc5bee3a837bb\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -22,7 +22,7 @@ final class InternalIntegrationCaseFactory extends \PhpCsFixer\Tests\Test\Abstra
     /**
      * {@inheritdoc}
      */
-    protected function determineSettings(\_PhpScoperac4e86be08e5\Symfony\Component\Finder\SplFileInfo $file, $config)
+    protected function determineSettings(\_PhpScoperc5bee3a837bb\Symfony\Component\Finder\SplFileInfo $file, $config)
     {
         $parsed = parent::determineSettings($file, $config);
         $parsed['isExplicitPriorityCheck'] = \in_array('priority', \explode(\DIRECTORY_SEPARATOR, $file->getRelativePathname()), \true);
