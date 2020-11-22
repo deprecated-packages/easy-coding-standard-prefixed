@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5ade29b97028\PhpParser\Node\Stmt;
+namespace _PhpScoperfacc742d2745\PhpParser\Node\Stmt;
 
-use _PhpScoper5ade29b97028\PhpParser\Node;
-class Switch_ extends \_PhpScoper5ade29b97028\PhpParser\Node\Stmt
+use _PhpScoperfacc742d2745\PhpParser\Node;
+class Switch_ extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
 {
     /** @var Node\Expr Condition */
     public $cond;
@@ -17,7 +17,7 @@ class Switch_ extends \_PhpScoper5ade29b97028\PhpParser\Node\Stmt
      * @param Case_[]   $cases      Case list
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper5ade29b97028\PhpParser\Node\Expr $cond, array $cases, array $attributes = [])
+    public function __construct(\_PhpScoperfacc742d2745\PhpParser\Node\Expr $cond, array $cases, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;

@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5ade29b97028\Symfony\Component\Console\Helper;
+namespace _PhpScoperfacc742d2745\Symfony\Component\Console\Helper;
 
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Exception\RuntimeException;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Input\StreamableInputInterface;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Question\ChoiceQuestion;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Question\Question;
-use _PhpScoper5ade29b97028\Symfony\Component\Console\Terminal;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Exception\RuntimeException;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Input\StreamableInputInterface;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Question\ChoiceQuestion;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Question\Question;
+use _PhpScoperfacc742d2745\Symfony\Component\Console\Terminal;
 /**
  * The QuestionHelper class provides helpers to interact with the user.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\Helper\Helper
+class QuestionHelper extends \_PhpScoperfacc742d2745\Symfony\Component\Console\Helper\Helper
 {
     private $inputStream;
     private static $shell;
@@ -38,9 +38,9 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
      *
      * @throws RuntimeException If there is no data to read in the input stream
      */
-    public function ask(\_PhpScoper5ade29b97028\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper5ade29b97028\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper5ade29b97028\Symfony\Component\Console\Question\Question $question)
+    public function ask(\_PhpScoperfacc742d2745\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoperfacc742d2745\Symfony\Component\Console\Question\Question $question)
     {
-        if ($output instanceof \_PhpScoper5ade29b97028\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+        if ($output instanceof \_PhpScoperfacc742d2745\Symfony\Component\Console\Output\ConsoleOutputInterface) {
             $output = $output->getErrorOutput();
         }
         if (!$input->isInteractive()) {
@@ -50,7 +50,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
             }
             if ($validator = $question->getValidator()) {
                 return \call_user_func($question->getValidator(), $default);
-            } elseif ($question instanceof \_PhpScoper5ade29b97028\Symfony\Component\Console\Question\ChoiceQuestion) {
+            } elseif ($question instanceof \_PhpScoperfacc742d2745\Symfony\Component\Console\Question\ChoiceQuestion) {
                 $choices = $question->getChoices();
                 if (!$question->isMultiselect()) {
                     return isset($choices[$default]) ? $choices[$default] : $default;
@@ -63,7 +63,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
             }
             return $default;
         }
-        if ($input instanceof \_PhpScoper5ade29b97028\Symfony\Component\Console\Input\StreamableInputInterface && ($stream = $input->getStream())) {
+        if ($input instanceof \_PhpScoperfacc742d2745\Symfony\Component\Console\Input\StreamableInputInterface && ($stream = $input->getStream())) {
             $this->inputStream = $stream;
         }
         if (!$question->getValidator()) {
@@ -95,18 +95,18 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
      *
      * @throws RuntimeException In case the fallback is deactivated and the response cannot be hidden
      */
-    private function doAsk(\_PhpScoper5ade29b97028\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper5ade29b97028\Symfony\Component\Console\Question\Question $question)
+    private function doAsk(\_PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoperfacc742d2745\Symfony\Component\Console\Question\Question $question)
     {
         $this->writePrompt($output, $question);
         $inputStream = $this->inputStream ?: \STDIN;
         $autocomplete = $question->getAutocompleterCallback();
-        if (null === $autocomplete || !\_PhpScoper5ade29b97028\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
+        if (null === $autocomplete || !\_PhpScoperfacc742d2745\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
             $ret = \false;
             if ($question->isHidden()) {
                 try {
                     $hiddenResponse = $this->getHiddenResponse($output, $inputStream, $question->isTrimmable());
                     $ret = $question->isTrimmable() ? \trim($hiddenResponse) : $hiddenResponse;
-                } catch (\_PhpScoper5ade29b97028\Symfony\Component\Console\Exception\RuntimeException $e) {
+                } catch (\_PhpScoperfacc742d2745\Symfony\Component\Console\Exception\RuntimeException $e) {
                     if (!$question->isHiddenFallback()) {
                         throw $e;
                     }
@@ -115,7 +115,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
             if (\false === $ret) {
                 $ret = \fgets($inputStream, 4096);
                 if (\false === $ret) {
-                    throw new \_PhpScoper5ade29b97028\Symfony\Component\Console\Exception\RuntimeException('Aborted.');
+                    throw new \_PhpScoperfacc742d2745\Symfony\Component\Console\Exception\RuntimeException('Aborted.');
                 }
                 if ($question->isTrimmable()) {
                     $ret = \trim($ret);
@@ -125,7 +125,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
             $autocomplete = $this->autocomplete($output, $question, $inputStream, $autocomplete);
             $ret = $question->isTrimmable() ? \trim($autocomplete) : $autocomplete;
         }
-        if ($output instanceof \_PhpScoper5ade29b97028\Symfony\Component\Console\Output\ConsoleSectionOutput) {
+        if ($output instanceof \_PhpScoperfacc742d2745\Symfony\Component\Console\Output\ConsoleSectionOutput) {
             $output->addContent($ret);
         }
         $ret = \strlen($ret) > 0 ? $ret : $question->getDefault();
@@ -137,10 +137,10 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
     /**
      * Outputs the question prompt.
      */
-    protected function writePrompt(\_PhpScoper5ade29b97028\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper5ade29b97028\Symfony\Component\Console\Question\Question $question)
+    protected function writePrompt(\_PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoperfacc742d2745\Symfony\Component\Console\Question\Question $question)
     {
         $message = $question->getQuestion();
-        if ($question instanceof \_PhpScoper5ade29b97028\Symfony\Component\Console\Question\ChoiceQuestion) {
+        if ($question instanceof \_PhpScoperfacc742d2745\Symfony\Component\Console\Question\ChoiceQuestion) {
             $maxWidth = \max(\array_map([$this, 'strlen'], \array_keys($question->getChoices())));
             $messages = (array) $question->getQuestion();
             foreach ($question->getChoices() as $key => $value) {
@@ -155,7 +155,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
     /**
      * Outputs an error message.
      */
-    protected function writeError(\_PhpScoper5ade29b97028\Symfony\Component\Console\Output\OutputInterface $output, \Exception $error)
+    protected function writeError(\_PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface $output, \Exception $error)
     {
         if (null !== $this->getHelperSet() && $this->getHelperSet()->has('formatter')) {
             $message = $this->getHelperSet()->get('formatter')->formatBlock($error->getMessage(), 'error');
@@ -169,7 +169,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
      *
      * @param resource $inputStream
      */
-    private function autocomplete(\_PhpScoper5ade29b97028\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper5ade29b97028\Symfony\Component\Console\Question\Question $question, $inputStream, callable $autocomplete) : string
+    private function autocomplete(\_PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoperfacc742d2745\Symfony\Component\Console\Question\Question $question, $inputStream, callable $autocomplete) : string
     {
         $fullChoice = '';
         $ret = '';
@@ -181,14 +181,14 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
         // Disable icanon (so we can fread each keypress) and echo (we'll do echoing here instead)
         \shell_exec('stty -icanon -echo');
         // Add highlighted text style
-        $output->getFormatter()->setStyle('hl', new \_PhpScoper5ade29b97028\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'white'));
+        $output->getFormatter()->setStyle('hl', new \_PhpScoperfacc742d2745\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'white'));
         // Read a keypress
         while (!\feof($inputStream)) {
             $c = \fread($inputStream, 1);
             // as opposed to fgets(), fread() returns an empty string when the stream content is empty, not false.
             if (\false === $c || '' === $ret && '' === $c && null === $question->getDefault()) {
                 \shell_exec(\sprintf('stty %s', $sttyMode));
-                throw new \_PhpScoper5ade29b97028\Symfony\Component\Console\Exception\RuntimeException('Aborted.');
+                throw new \_PhpScoperfacc742d2745\Symfony\Component\Console\Exception\RuntimeException('Aborted.');
             } elseif ("" === $c) {
                 // Backspace Character
                 if (0 === $numMatches && 0 !== $i) {
@@ -250,7 +250,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
                 $fullChoice .= $c;
                 ++$i;
                 $tempRet = $ret;
-                if ($question instanceof \_PhpScoper5ade29b97028\Symfony\Component\Console\Question\ChoiceQuestion && $question->isMultiselect()) {
+                if ($question instanceof \_PhpScoperfacc742d2745\Symfony\Component\Console\Question\ChoiceQuestion && $question->isMultiselect()) {
                     $tempRet = $this->mostRecentlyEnteredValue($fullChoice);
                 }
                 $numMatches = 0;
@@ -269,7 +269,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
                 $output->write("\0337");
                 // Write highlighted text, complete the partially entered response
                 $charactersEntered = \strlen(\trim($this->mostRecentlyEnteredValue($fullChoice)));
-                $output->write('<hl>' . \_PhpScoper5ade29b97028\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash(\substr($matches[$ofs], $charactersEntered)) . '</hl>');
+                $output->write('<hl>' . \_PhpScoperfacc742d2745\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash(\substr($matches[$ofs], $charactersEntered)) . '</hl>');
                 // Restore cursor position
                 $output->write("\338");
             }
@@ -298,7 +298,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
      *
      * @throws RuntimeException In case the fallback is deactivated and the response cannot be hidden
      */
-    private function getHiddenResponse(\_PhpScoper5ade29b97028\Symfony\Component\Console\Output\OutputInterface $output, $inputStream, bool $trimmable = \true) : string
+    private function getHiddenResponse(\_PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface $output, $inputStream, bool $trimmable = \true) : string
     {
         if ('\\' === \DIRECTORY_SEPARATOR) {
             $exe = __DIR__ . '/../Resources/bin/hiddeninput.exe';
@@ -316,13 +316,13 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
             }
             return $value;
         }
-        if (\_PhpScoper5ade29b97028\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
+        if (\_PhpScoperfacc742d2745\Symfony\Component\Console\Terminal::hasSttyAvailable()) {
             $sttyMode = \shell_exec('stty -g');
             \shell_exec('stty -echo');
             $value = \fgets($inputStream, 4096);
             \shell_exec(\sprintf('stty %s', $sttyMode));
             if (\false === $value) {
-                throw new \_PhpScoper5ade29b97028\Symfony\Component\Console\Exception\RuntimeException('Aborted.');
+                throw new \_PhpScoperfacc742d2745\Symfony\Component\Console\Exception\RuntimeException('Aborted.');
             }
             if ($trimmable) {
                 $value = \trim($value);
@@ -338,7 +338,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
             $output->writeln('');
             return $value;
         }
-        throw new \_PhpScoper5ade29b97028\Symfony\Component\Console\Exception\RuntimeException('Unable to hide the response.');
+        throw new \_PhpScoperfacc742d2745\Symfony\Component\Console\Exception\RuntimeException('Unable to hide the response.');
     }
     /**
      * Validates an attempt.
@@ -349,7 +349,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
      *
      * @throws \Exception In case the max number of attempts has been reached and no valid response has been given
      */
-    private function validateAttempts(callable $interviewer, \_PhpScoper5ade29b97028\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper5ade29b97028\Symfony\Component\Console\Question\Question $question)
+    private function validateAttempts(callable $interviewer, \_PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoperfacc742d2745\Symfony\Component\Console\Question\Question $question)
     {
         $error = null;
         $attempts = $question->getMaxAttempts();
@@ -359,7 +359,7 @@ class QuestionHelper extends \_PhpScoper5ade29b97028\Symfony\Component\Console\H
             }
             try {
                 return $question->getValidator()($interviewer());
-            } catch (\_PhpScoper5ade29b97028\Symfony\Component\Console\Exception\RuntimeException $e) {
+            } catch (\_PhpScoperfacc742d2745\Symfony\Component\Console\Exception\RuntimeException $e) {
                 throw $e;
             } catch (\Exception $error) {
             }

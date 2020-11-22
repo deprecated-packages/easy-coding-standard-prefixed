@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoperfacc742d2745\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use _PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-class MethodTagValueNode implements \_PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+use _PhpScoperfacc742d2745\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+class MethodTagValueNode implements \_PhpScoperfacc742d2745\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     /** @var bool */
     public $isStatic;
@@ -16,7 +16,7 @@ class MethodTagValueNode implements \_PhpScoper5ade29b97028\PHPStan\PhpDocParser
     public $parameters;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(bool $isStatic, ?\_PhpScoper5ade29b97028\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType, string $methodName, array $parameters, string $description)
+    public function __construct(bool $isStatic, ?\_PhpScoperfacc742d2745\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType, string $methodName, array $parameters, string $description)
     {
         $this->isStatic = $isStatic;
         $this->returnType = $returnType;
