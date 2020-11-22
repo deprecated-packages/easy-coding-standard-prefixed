@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf3db63c305b2\Symfony\Component\Console\Output;
+namespace _PhpScoper3fa05b4669af\Symfony\Component\Console\Output;
 
-use _PhpScoperf3db63c305b2\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScoperf3db63c305b2\Symfony\Component\Console\Helper\Helper;
-use _PhpScoperf3db63c305b2\Symfony\Component\Console\Terminal;
+use _PhpScoper3fa05b4669af\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoper3fa05b4669af\Symfony\Component\Console\Helper\Helper;
+use _PhpScoper3fa05b4669af\Symfony\Component\Console\Terminal;
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  * @author Gabriel Ostrolucký <gabriel.ostrolucky@gmail.com>
  */
-class ConsoleSectionOutput extends \_PhpScoperf3db63c305b2\Symfony\Component\Console\Output\StreamOutput
+class ConsoleSectionOutput extends \_PhpScoper3fa05b4669af\Symfony\Component\Console\Output\StreamOutput
 {
     private $content = [];
     private $lines = 0;
@@ -27,12 +27,12 @@ class ConsoleSectionOutput extends \_PhpScoperf3db63c305b2\Symfony\Component\Con
      * @param resource               $stream
      * @param ConsoleSectionOutput[] $sections
      */
-    public function __construct($stream, array &$sections, int $verbosity, bool $decorated, \_PhpScoperf3db63c305b2\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function __construct($stream, array &$sections, int $verbosity, bool $decorated, \_PhpScoper3fa05b4669af\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         parent::__construct($stream, $verbosity, $decorated, $formatter);
         \array_unshift($sections, $this);
         $this->sections =& $sections;
-        $this->terminal = new \_PhpScoperf3db63c305b2\Symfony\Component\Console\Terminal();
+        $this->terminal = new \_PhpScoper3fa05b4669af\Symfony\Component\Console\Terminal();
     }
     /**
      * Clears previous output for this section.
@@ -118,6 +118,6 @@ class ConsoleSectionOutput extends \_PhpScoperf3db63c305b2\Symfony\Component\Con
     }
     private function getDisplayLength(string $text) : string
     {
-        return \_PhpScoperf3db63c305b2\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($this->getFormatter(), \str_replace("\t", '        ', $text));
+        return \_PhpScoper3fa05b4669af\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($this->getFormatter(), \str_replace("\t", '        ', $text));
     }
 }

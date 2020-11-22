@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf3db63c305b2\Symfony\Component\Mime\Tests\Encoder;
+namespace _PhpScoper3fa05b4669af\Symfony\Component\Mime\Tests\Encoder;
 
-use _PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase;
-use _PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder;
-class QpEncoderTest extends \_PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase
+use _PhpScoper3fa05b4669af\PHPUnit\Framework\TestCase;
+use _PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder;
+class QpEncoderTest extends \_PhpScoper3fa05b4669af\PHPUnit\Framework\TestCase
 {
     /* -- RFC 2045, 6.7 --
        (1)   (General 8bit representation) Any octet, except a CR or
@@ -39,7 +39,7 @@ class QpEncoderTest extends \_PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase
                        LESS THAN, and GREATER THAN through TILDE,
                        respectively).
                        */
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         foreach (\array_merge(\range(33, 60), \range(62, 126)) as $ordinal) {
             $char = \chr($ordinal);
             $this->assertSame($char, $encoder->encodeString($char));
@@ -69,7 +69,7 @@ class QpEncoderTest extends \_PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase
                        deleted, as it will necessarily have been added by
                        intermediate transport agents.
                        */
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         $HT = \chr(0x9);
         // 9
         $SPACE = \chr(0x20);
@@ -109,7 +109,7 @@ class QpEncoderTest extends \_PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase
         when the combined canonicalization-encoding step is
         equivalent to performing the three steps separately.
         */
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         $string = 'a' . "\r\n" . 'b' . "\r\n" . 'c' . "\r\n";
         $this->assertEquals($string, $encoder->encodeString($string));
     }
@@ -124,7 +124,7 @@ class QpEncoderTest extends \_PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase
         encoded line indicates such a non-significant ("soft")
         line break in the encoded text.
         */
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         $input = \str_repeat('a', 140);
         $output = '';
         for ($i = 0; $i < 140; ++$i) {
@@ -138,7 +138,7 @@ class QpEncoderTest extends \_PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase
     }
     public function testMaxLineLengthCanBeSpecified()
     {
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         $input = \str_repeat('a', 100);
         $output = '';
         for ($i = 0; $i < 100; ++$i) {
@@ -153,7 +153,7 @@ class QpEncoderTest extends \_PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase
     public function testBytesBelowPermittedRangeAreEncoded()
     {
         // According to Rule (1 & 2)
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         foreach (\range(0, 32) as $ordinal) {
             $char = \chr($ordinal);
             $this->assertEquals(\sprintf('=%02X', $ordinal), $encoder->encodeString($char));
@@ -162,20 +162,20 @@ class QpEncoderTest extends \_PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase
     public function testDecimalByte61IsEncoded()
     {
         // According to Rule (1 & 2)
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         $this->assertEquals('=3D', $encoder->encodeString('='));
     }
     public function testBytesAbovePermittedRangeAreEncoded()
     {
         // According to Rule (1 & 2)
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         foreach (\range(127, 255) as $ordinal) {
             $this->assertSame(\sprintf('=%02X', $ordinal), $encoder->encodeString(\chr($ordinal), 'iso-8859-1'));
         }
     }
     public function testFirstLineLengthCanBeDifferent()
     {
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         $input = \str_repeat('a', 140);
         $output = '';
         for ($i = 0; $i < 140; ++$i) {
@@ -189,7 +189,7 @@ class QpEncoderTest extends \_PhpScoperf3db63c305b2\PHPUnit\Framework\TestCase
     }
     public function testTextIsPreWrapped()
     {
-        $encoder = new \_PhpScoperf3db63c305b2\Symfony\Component\Mime\Encoder\QpEncoder();
+        $encoder = new \_PhpScoper3fa05b4669af\Symfony\Component\Mime\Encoder\QpEncoder();
         $input = \str_repeat('a', 70) . "\r\n" . \str_repeat('a', 70) . "\r\n" . \str_repeat('a', 70);
         $this->assertEquals($input, $encoder->encodeString($input));
     }

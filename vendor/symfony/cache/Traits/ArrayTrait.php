@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf3db63c305b2\Symfony\Component\Cache\Traits;
+namespace _PhpScoper3fa05b4669af\Symfony\Component\Cache\Traits;
 
-use _PhpScoperf3db63c305b2\Psr\Log\LoggerAwareTrait;
-use _PhpScoperf3db63c305b2\Symfony\Component\Cache\CacheItem;
+use _PhpScoper3fa05b4669af\Psr\Log\LoggerAwareTrait;
+use _PhpScoper3fa05b4669af\Symfony\Component\Cache\CacheItem;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -54,7 +54,7 @@ trait ArrayTrait
         if (\is_string($key) && isset($this->expiries[$key]) && $this->expiries[$key] > \microtime(\true)) {
             return \true;
         }
-        \_PhpScoperf3db63c305b2\Symfony\Component\Cache\CacheItem::validateKey($key);
+        \_PhpScoper3fa05b4669af\Symfony\Component\Cache\CacheItem::validateKey($key);
         return isset($this->expiries[$key]) && !$this->deleteItem($key);
     }
     /**
@@ -86,7 +86,7 @@ trait ArrayTrait
     public function deleteItem($key)
     {
         if (!\is_string($key) || !isset($this->expiries[$key])) {
-            \_PhpScoperf3db63c305b2\Symfony\Component\Cache\CacheItem::validateKey($key);
+            \_PhpScoper3fa05b4669af\Symfony\Component\Cache\CacheItem::validateKey($key);
         }
         unset($this->values[$key], $this->expiries[$key]);
         return \true;
@@ -129,7 +129,7 @@ trait ArrayTrait
             } catch (\Exception $e) {
                 $type = \is_object($value) ? \get_class($value) : \gettype($value);
                 $message = \sprintf('Failed to save key "{key}" of type %s: %s', $type, $e->getMessage());
-                \_PhpScoperf3db63c305b2\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e]);
+                \_PhpScoper3fa05b4669af\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e]);
                 return null;
             }
             // Keep value serialized if it contains any objects or any internal references
@@ -148,7 +148,7 @@ trait ArrayTrait
             try {
                 $value = \unserialize($value);
             } catch (\Exception $e) {
-                \_PhpScoperf3db63c305b2\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to unserialize key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e]);
+                \_PhpScoper3fa05b4669af\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to unserialize key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e]);
                 $value = \false;
             }
             if (\false === $value) {
