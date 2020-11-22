@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper797695bcfb1f\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScopera88a8b9f064a\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper797695bcfb1f\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route, _PhpScoper797695bcfb1f\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+use _PhpScopera88a8b9f064a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route, _PhpScopera88a8b9f064a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
 class MultipleImportsInUseStatement
 {
 }

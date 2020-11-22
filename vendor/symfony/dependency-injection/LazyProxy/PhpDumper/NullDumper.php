@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper797695bcfb1f\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
+namespace _PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
 
-use _PhpScoper797695bcfb1f\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Definition;
 /**
  * Null dumper, negates any proxy code generation for any given service definition.
  *
@@ -18,26 +18,26 @@ use _PhpScoper797695bcfb1f\Symfony\Component\DependencyInjection\Definition;
  *
  * @final
  */
-class NullDumper implements \_PhpScoper797695bcfb1f\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
+class NullDumper implements \_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function isProxyCandidate(\_PhpScoper797695bcfb1f\Symfony\Component\DependencyInjection\Definition $definition) : bool
+    public function isProxyCandidate(\_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Definition $definition) : bool
     {
         return \false;
     }
     /**
      * {@inheritdoc}
      */
-    public function getProxyFactoryCode(\_PhpScoper797695bcfb1f\Symfony\Component\DependencyInjection\Definition $definition, $id, $factoryCode = null) : string
+    public function getProxyFactoryCode(\_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Definition $definition, $id, $factoryCode = null) : string
     {
         return '';
     }
     /**
      * {@inheritdoc}
      */
-    public function getProxyCode(\_PhpScoper797695bcfb1f\Symfony\Component\DependencyInjection\Definition $definition) : string
+    public function getProxyCode(\_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Definition $definition) : string
     {
         return '';
     }

@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper797695bcfb1f\Nette\Utils;
+namespace _PhpScopera88a8b9f064a\Nette\Utils;
 
-use _PhpScoper797695bcfb1f\Nette;
+use _PhpScopera88a8b9f064a\Nette;
 /**
  * PHP reflection helpers.
  */
@@ -102,7 +102,7 @@ final class Reflection
         } elseif ($ref instanceof \ReflectionParameter) {
             return '$' . $ref->getName() . ' in ' . self::toString($ref->getDeclaringFunction()) . '()';
         } else {
-            throw new \_PhpScoper797695bcfb1f\Nette\InvalidArgumentException();
+            throw new \_PhpScopera88a8b9f064a\Nette\InvalidArgumentException();
         }
     }
     /**
@@ -113,7 +113,7 @@ final class Reflection
     {
         $lower = \strtolower($name);
         if (empty($name)) {
-            throw new \_PhpScoper797695bcfb1f\Nette\InvalidArgumentException('Class name must not be empty.');
+            throw new \_PhpScopera88a8b9f064a\Nette\InvalidArgumentException('Class name must not be empty.');
         } elseif (isset(self::BUILTIN_TYPES[$lower])) {
             return $lower;
         } elseif ($lower === 'self') {

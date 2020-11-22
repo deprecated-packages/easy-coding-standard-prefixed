@@ -3,18 +3,18 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoper797695bcfb1f\Nette\Utils\Strings;
-use _PhpScoper797695bcfb1f\PhpParser\BuilderHelpers;
-use _PhpScoper797695bcfb1f\PhpParser\Node;
-use _PhpScoper797695bcfb1f\PhpParser\Node\Arg;
-use _PhpScoper797695bcfb1f\PhpParser\Node\Expr;
-use _PhpScoper797695bcfb1f\PhpParser\Node\Expr\Array_;
-use _PhpScoper797695bcfb1f\PhpParser\Node\Expr\ArrayItem;
-use _PhpScoper797695bcfb1f\PhpParser\Node\Expr\FuncCall;
-use _PhpScoper797695bcfb1f\PhpParser\Node\Name;
-use _PhpScoper797695bcfb1f\PhpParser\Node\Name\FullyQualified;
-use _PhpScoper797695bcfb1f\PhpParser\Node\Scalar\String_;
-use _PhpScoper797695bcfb1f\Symfony\Component\Yaml\Tag\TaggedValue;
+use _PhpScopera88a8b9f064a\Nette\Utils\Strings;
+use _PhpScopera88a8b9f064a\PhpParser\BuilderHelpers;
+use _PhpScopera88a8b9f064a\PhpParser\Node;
+use _PhpScopera88a8b9f064a\PhpParser\Node\Arg;
+use _PhpScopera88a8b9f064a\PhpParser\Node\Expr;
+use _PhpScopera88a8b9f064a\PhpParser\Node\Expr\Array_;
+use _PhpScopera88a8b9f064a\PhpParser\Node\Expr\ArrayItem;
+use _PhpScopera88a8b9f064a\PhpParser\Node\Expr\FuncCall;
+use _PhpScopera88a8b9f064a\PhpParser\Node\Name;
+use _PhpScopera88a8b9f064a\PhpParser\Node\Name\FullyQualified;
+use _PhpScopera88a8b9f064a\PhpParser\Node\Scalar\String_;
+use _PhpScopera88a8b9f064a\Symfony\Component\Yaml\Tag\TaggedValue;
 use Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
@@ -65,10 +65,10 @@ final class ArgsNodeFactory
             $array = $this->resolveExprFromArray($values);
         } else {
             $expr = $this->resolveExpr($values);
-            $items = [new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\ArrayItem($expr)];
-            $array = new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\Array_($items);
+            $items = [new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\ArrayItem($expr)];
+            $array = new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\Array_($items);
         }
-        return [new \_PhpScoper797695bcfb1f\PhpParser\Node\Arg($array)];
+        return [new \_PhpScopera88a8b9f064a\PhpParser\Node\Arg($array)];
     }
     /**
      * @return Arg[]
@@ -79,67 +79,67 @@ final class ArgsNodeFactory
             $args = [];
             foreach ($values as $value) {
                 $expr = $this->resolveExpr($value, $skipServiceReference, $skipClassesToConstantReference);
-                $args[] = new \_PhpScoper797695bcfb1f\PhpParser\Node\Arg($expr);
+                $args[] = new \_PhpScopera88a8b9f064a\PhpParser\Node\Arg($expr);
             }
             return $args;
         }
-        if ($values instanceof \_PhpScoper797695bcfb1f\PhpParser\Node) {
-            if ($values instanceof \_PhpScoper797695bcfb1f\PhpParser\Node\Arg) {
+        if ($values instanceof \_PhpScopera88a8b9f064a\PhpParser\Node) {
+            if ($values instanceof \_PhpScopera88a8b9f064a\PhpParser\Node\Arg) {
                 return [$values];
             }
-            if ($values instanceof \_PhpScoper797695bcfb1f\PhpParser\Node\Expr) {
-                return [new \_PhpScoper797695bcfb1f\PhpParser\Node\Arg($values)];
+            if ($values instanceof \_PhpScopera88a8b9f064a\PhpParser\Node\Expr) {
+                return [new \_PhpScopera88a8b9f064a\PhpParser\Node\Arg($values)];
             }
         }
         if (\is_string($values)) {
             $expr = $this->resolveExpr($values);
-            return [new \_PhpScoper797695bcfb1f\PhpParser\Node\Arg($expr)];
+            return [new \_PhpScopera88a8b9f064a\PhpParser\Node\Arg($expr)];
         }
         throw new \Symplify\PhpConfigPrinter\Exception\NotImplementedYetException();
     }
-    public function resolveExpr($value, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false) : \_PhpScoper797695bcfb1f\PhpParser\Node\Expr
+    public function resolveExpr($value, bool $skipServiceReference = \false, bool $skipClassesToConstantReference = \false) : \_PhpScopera88a8b9f064a\PhpParser\Node\Expr
     {
         if (\is_string($value)) {
             return $this->resolveStringExpr($value, $skipServiceReference, $skipClassesToConstantReference);
         }
-        if ($value instanceof \_PhpScoper797695bcfb1f\PhpParser\Node\Expr) {
+        if ($value instanceof \_PhpScopera88a8b9f064a\PhpParser\Node\Expr) {
             return $value;
         }
-        if ($value instanceof \_PhpScoper797695bcfb1f\Symfony\Component\Yaml\Tag\TaggedValue) {
+        if ($value instanceof \_PhpScopera88a8b9f064a\Symfony\Component\Yaml\Tag\TaggedValue) {
             return $this->createServiceReferenceFromTaggedValue($value);
         }
         if (\is_array($value)) {
             $arrayItems = $this->resolveArrayItems($value, $skipClassesToConstantReference);
-            return new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\Array_($arrayItems);
+            return new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\Array_($arrayItems);
         }
-        return \_PhpScoper797695bcfb1f\PhpParser\BuilderHelpers::normalizeValue($value);
+        return \_PhpScopera88a8b9f064a\PhpParser\BuilderHelpers::normalizeValue($value);
     }
-    private function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : \_PhpScoper797695bcfb1f\PhpParser\Node\Expr
+    private function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : \_PhpScopera88a8b9f064a\PhpParser\Node\Expr
     {
         $value = \ltrim($value, '@');
         $expr = $this->resolveExpr($value);
         if ($skipServiceReference) {
             return $expr;
         }
-        $args = [new \_PhpScoper797695bcfb1f\PhpParser\Node\Arg($expr)];
-        return new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\FuncCall(new \_PhpScoper797695bcfb1f\PhpParser\Node\Name\FullyQualified($functionName), $args);
+        $args = [new \_PhpScopera88a8b9f064a\PhpParser\Node\Arg($expr)];
+        return new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\FuncCall(new \_PhpScopera88a8b9f064a\PhpParser\Node\Name\FullyQualified($functionName), $args);
     }
-    private function resolveExprFromArray(array $values) : \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\Array_
+    private function resolveExprFromArray(array $values) : \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\Array_
     {
         $arrayItems = [];
         foreach ($values as $key => $value) {
             $expr = \is_array($value) ? $this->resolveExprFromArray($value) : $this->resolveExpr($value);
             if (!\is_int($key)) {
                 $keyExpr = $this->resolveExpr($key);
-                $arrayItem = new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\ArrayItem($expr, $keyExpr);
+                $arrayItem = new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\ArrayItem($expr, $keyExpr);
             } else {
-                $arrayItem = new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\ArrayItem($expr);
+                $arrayItem = new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\ArrayItem($expr);
             }
             $arrayItems[] = $arrayItem;
         }
-        return new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\Array_($arrayItems);
+        return new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\Array_($arrayItems);
     }
-    private function createServiceReferenceFromTaggedValue(\_PhpScoper797695bcfb1f\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \_PhpScoper797695bcfb1f\PhpParser\Node\Expr
+    private function createServiceReferenceFromTaggedValue(\_PhpScopera88a8b9f064a\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \_PhpScopera88a8b9f064a\PhpParser\Node\Expr
     {
         $shouldWrapInArray = \false;
         // that's the only value
@@ -156,18 +156,18 @@ final class ArgsNodeFactory
             } else {
                 $args = $this->createFromValues([$taggedValue->getValue()]);
             }
-            return new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\FuncCall(new \_PhpScoper797695bcfb1f\PhpParser\Node\Name($taggedValue->getTag()), $args);
+            return new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\FuncCall(new \_PhpScopera88a8b9f064a\PhpParser\Node\Name($taggedValue->getTag()), $args);
         }
         $funcCall = $this->resolveServiceReferenceExpr($serviceName, \false, $functionName);
         if ($shouldWrapInArray) {
-            return new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\Array_([new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\ArrayItem($funcCall)]);
+            return new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\Array_([new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\ArrayItem($funcCall)]);
         }
         return $funcCall;
     }
-    private function resolveStringExpr(string $value, bool $skipServiceReference, bool $skipClassesToConstantReference) : \_PhpScoper797695bcfb1f\PhpParser\Node\Expr
+    private function resolveStringExpr(string $value, bool $skipServiceReference, bool $skipClassesToConstantReference) : \_PhpScopera88a8b9f064a\PhpParser\Node\Expr
     {
         if ($value === '') {
-            return new \_PhpScoper797695bcfb1f\PhpParser\Node\Scalar\String_($value);
+            return new \_PhpScopera88a8b9f064a\PhpParser\Node\Scalar\String_($value);
         }
         $constFetch = $this->constantNodeFactory->createConstantIfValue($value);
         if ($constFetch !== null) {
@@ -175,25 +175,25 @@ final class ArgsNodeFactory
         }
         // do not print "\n" as empty space, but use string value instead
         if (\in_array($value, ["\r", "\n", "\r\n"], \true)) {
-            $string = new \_PhpScoper797695bcfb1f\PhpParser\Node\Scalar\String_($value);
-            $string->setAttribute(self::KIND, \_PhpScoper797695bcfb1f\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED);
+            $string = new \_PhpScopera88a8b9f064a\PhpParser\Node\Scalar\String_($value);
+            $string->setAttribute(self::KIND, \_PhpScopera88a8b9f064a\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED);
             return $string;
         }
         $value = \ltrim($value, '\\');
         if (\ctype_upper($value[0]) && \class_exists($value) || \interface_exists($value)) {
             return $this->resolveClassType($skipClassesToConstantReference, $value);
         }
-        if (\_PhpScoper797695bcfb1f\Nette\Utils\Strings::startsWith($value, '@=')) {
+        if (\_PhpScopera88a8b9f064a\Nette\Utils\Strings::startsWith($value, '@=')) {
             $value = \ltrim($value, '@=');
             $args = $this->createFromValues($value);
-            return new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\FuncCall(new \_PhpScoper797695bcfb1f\PhpParser\Node\Name\FullyQualified(\Symplify\PhpConfigPrinter\ValueObject\FunctionName::EXPR), $args);
+            return new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\FuncCall(new \_PhpScopera88a8b9f064a\PhpParser\Node\Name\FullyQualified(\Symplify\PhpConfigPrinter\ValueObject\FunctionName::EXPR), $args);
         }
         // is service reference
-        if (\_PhpScoper797695bcfb1f\Nette\Utils\Strings::startsWith($value, '@') && !$this->isFilePath($value)) {
+        if (\_PhpScopera88a8b9f064a\Nette\Utils\Strings::startsWith($value, '@') && !$this->isFilePath($value)) {
             $refOrServiceFunctionName = $this->getRefOrServiceFunctionName();
             return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $refOrServiceFunctionName);
         }
-        return \_PhpScoper797695bcfb1f\PhpParser\BuilderHelpers::normalizeValue($value);
+        return \_PhpScopera88a8b9f064a\PhpParser\BuilderHelpers::normalizeValue($value);
     }
     /**
      * @param mixed[] $value
@@ -207,9 +207,9 @@ final class ArgsNodeFactory
             $valueExpr = $this->resolveExpr($nestedValue, \false, $skipClassesToConstantReference);
             if (!\is_int($nestedKey) || $nestedKey !== $naturalKey) {
                 $keyExpr = $this->resolveExpr($nestedKey, \false, $skipClassesToConstantReference);
-                $arrayItem = new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\ArrayItem($valueExpr, $keyExpr);
+                $arrayItem = new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\ArrayItem($valueExpr, $keyExpr);
             } else {
-                $arrayItem = new \_PhpScoper797695bcfb1f\PhpParser\Node\Expr\ArrayItem($valueExpr);
+                $arrayItem = new \_PhpScopera88a8b9f064a\PhpParser\Node\Expr\ArrayItem($valueExpr);
             }
             $arrayItems[] = $arrayItem;
             ++$naturalKey;
@@ -225,12 +225,12 @@ final class ArgsNodeFactory
     }
     private function isFilePath(string $value) : bool
     {
-        return (bool) \_PhpScoper797695bcfb1f\Nette\Utils\Strings::match($value, self::TWIG_HTML_XML_SUFFIX_REGEX);
+        return (bool) \_PhpScopera88a8b9f064a\Nette\Utils\Strings::match($value, self::TWIG_HTML_XML_SUFFIX_REGEX);
     }
     private function resolveClassType(bool $skipClassesToConstantReference, string $value)
     {
         if ($skipClassesToConstantReference) {
-            return new \_PhpScoper797695bcfb1f\PhpParser\Node\Scalar\String_($value);
+            return new \_PhpScopera88a8b9f064a\PhpParser\Node\Scalar\String_($value);
         }
         return $this->commonNodeFactory->createClassReference($value);
     }
