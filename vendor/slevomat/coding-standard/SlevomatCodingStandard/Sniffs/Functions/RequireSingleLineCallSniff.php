@@ -11,14 +11,14 @@ use function in_array;
 use function ltrim;
 use function sprintf;
 use function strlen;
-use const _PhpScoperfacc742d2745\T_CLOSURE;
+use const _PhpScoperac4e86be08e5\T_CLOSURE;
 use const T_DOUBLE_COLON;
-use const _PhpScoperfacc742d2745\T_FN;
+use const _PhpScoperac4e86be08e5\T_FN;
 use const T_FUNCTION;
 use const T_NEW;
 use const T_OBJECT_OPERATOR;
-use const _PhpScoperfacc742d2745\T_OPEN_PARENTHESIS;
-use const _PhpScoperfacc742d2745\T_OPEN_SHORT_ARRAY;
+use const _PhpScoperac4e86be08e5\T_OPEN_PARENTHESIS;
+use const _PhpScoperac4e86be08e5\T_OPEN_SHORT_ARRAY;
 use const T_STRING;
 class RequireSingleLineCallSniff extends \SlevomatCodingStandard\Sniffs\Functions\AbstractLineCall
 {

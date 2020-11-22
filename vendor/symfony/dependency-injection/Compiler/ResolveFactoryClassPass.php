@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfacc742d2745\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperfacc742d2745\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperfacc742d2745\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class ResolveFactoryClassPass extends \_PhpScoperfacc742d2745\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveFactoryClassPass extends \_PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if ($value instanceof \_PhpScoperfacc742d2745\Symfony\Component\DependencyInjection\Definition && \is_array($factory = $value->getFactory()) && null === $factory[0]) {
+        if ($value instanceof \_PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Definition && \is_array($factory = $value->getFactory()) && null === $factory[0]) {
             if (null === ($class = $value->getClass())) {
-                throw new \_PhpScoperfacc742d2745\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('The "%s" service is defined to be created by a factory, but is missing the factory class. Did you forget to define the factory or service class?', $this->currentId));
+                throw new \_PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('The "%s" service is defined to be created by a factory, but is missing the factory class. Did you forget to define the factory or service class?', $this->currentId));
             }
             $factory[0] = $class;
             $value->setFactory($factory);

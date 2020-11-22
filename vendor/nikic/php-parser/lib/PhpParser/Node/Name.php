@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\PhpParser\Node;
+namespace _PhpScoperac4e86be08e5\PhpParser\Node;
 
-use _PhpScoperfacc742d2745\PhpParser\NodeAbstract;
-class Name extends \_PhpScoperfacc742d2745\PhpParser\NodeAbstract
+use _PhpScoperac4e86be08e5\PhpParser\NodeAbstract;
+class Name extends \_PhpScoperac4e86be08e5\PhpParser\NodeAbstract
 {
     /** @var string[] Parts of the name */
     public $parts;
@@ -79,7 +79,7 @@ class Name extends \_PhpScoperfacc742d2745\PhpParser\NodeAbstract
         return \false;
     }
     /**
-     * Returns a string representation of the name itself, without taking taking the name type into
+     * Returns a string representation of the name itself, without taking the name type into
      * account (e.g., not including a leading backslash for fully qualified names).
      *
      * @return string String representation

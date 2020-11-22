@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\Nette\Utils;
+namespace _PhpScoperac4e86be08e5\Nette\Utils;
 
-use _PhpScoperfacc742d2745\Nette;
-use function is_array, is_int, is_object, count;
+use _PhpScoperac4e86be08e5\Nette;
+use function is_array, is_int, is_object;
 /**
  * Array tools library.
  */
@@ -28,7 +28,7 @@ class Arrays
                 $arr = $arr[$k];
             } else {
                 if (\func_num_args() < 3) {
-                    throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException("Missing item '{$k}'.");
+                    throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException("Missing item '{$k}'.");
                 }
                 return $default;
             }
@@ -47,7 +47,7 @@ class Arrays
             if (\is_array($arr) || $arr === null) {
                 $arr =& $arr[$k];
             } else {
-                throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException('Traversed item is not an array.');
+                throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException('Traversed item is not an array.');
             }
         }
         return $arr;
@@ -72,7 +72,7 @@ class Arrays
     public static function searchKey(array $arr, $key) : ?int
     {
         $foo = [$key => null];
-        return \_PhpScoperfacc742d2745\Nette\Utils\Helpers::falseToNull(\array_search(\key($foo), \array_keys($arr), \true));
+        return ($tmp = \array_search(\key($foo), \array_keys($arr), \true)) === \false ? null : $tmp;
     }
     /**
      * Inserts new array before item specified by key.
@@ -108,7 +108,7 @@ class Arrays
      */
     public static function grep(array $arr, string $pattern, int $flags = 0) : array
     {
-        return \_PhpScoperfacc742d2745\Nette\Utils\Strings::pcre('preg_grep', [$pattern, $arr, $flags]);
+        return \_PhpScoperac4e86be08e5\Nette\Utils\Strings::pcre('preg_grep', [$pattern, $arr, $flags]);
     }
     /**
      * Returns flattened array.
@@ -138,8 +138,8 @@ class Arrays
     public static function associate(array $arr, $path)
     {
         $parts = \is_array($path) ? $path : \preg_split('#(\\[\\]|->|=|\\|)#', $path, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
-        if (!$parts || $parts === ['->'] || $parts[0] === '=' || $parts[0] === '|') {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException("Invalid path '{$path}'.");
+        if (!$parts || $parts[0] === '=' || $parts[0] === '|' || $parts === ['->']) {
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException("Invalid path '{$path}'.");
         }
         $res = $parts[0] === '->' ? new \stdClass() : [];
         foreach ($arr as $rowOrig) {
@@ -156,9 +156,6 @@ class Arrays
                     }
                 } elseif ($part === '->') {
                     if (isset($parts[++$i])) {
-                        if ($x === null) {
-                            $x = new \stdClass();
-                        }
                         $x =& $x->{$row[$parts[$i]]};
                     } else {
                         $row = \is_object($rowOrig) ? $rowOrig : (object) $row;
@@ -197,7 +194,7 @@ class Arrays
             unset($arr[$key]);
             return $value;
         } elseif (\func_num_args() < 3) {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException("Missing item '{$key}'.");
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException("Missing item '{$key}'.");
         } else {
             return $default;
         }
@@ -236,17 +233,5 @@ class Arrays
             $res[$k] = $callback($v, $k, $arr);
         }
         return $res;
-    }
-    /**
-     * Converts array to object
-     * @param  object  $obj
-     * @return object
-     */
-    public static function toObject(array $arr, $obj)
-    {
-        foreach ($arr as $k => $v) {
-            $obj->{$k} = $v;
-        }
-        return $obj;
     }
 }

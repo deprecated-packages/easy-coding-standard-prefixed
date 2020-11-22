@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\Nette\Utils;
+namespace _PhpScoperac4e86be08e5\Nette\Utils;
 
-use _PhpScoperfacc742d2745\Nette;
+use _PhpScoperac4e86be08e5\Nette;
 use function is_array, is_object, strlen;
 /**
  * String tools library.
@@ -38,7 +38,7 @@ class Strings
     public static function chr(int $code) : string
     {
         if ($code < 0 || $code >= 0xd800 && $code <= 0xdfff || $code > 0x10ffff) {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException('Code point must be in range 0x0 to 0xD7FF or 0xE000 to 0x10FFFF.');
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException('Code point must be in range 0x0 to 0xD7FF or 0xE000 to 0x10FFFF.');
         }
         return \iconv('UTF-32BE', 'UTF-8//IGNORE', \pack('N', $code));
     }
@@ -54,7 +54,7 @@ class Strings
      */
     public static function endsWith(string $haystack, string $needle) : bool
     {
-        return $needle === '' || \substr($haystack, -\strlen($needle)) === $needle;
+        return \strlen($needle) === 0 || \substr($haystack, -\strlen($needle)) === $needle;
     }
     /**
      * Does $haystack contain $needle?
@@ -85,14 +85,14 @@ class Strings
     public static function normalize(string $s) : string
     {
         // convert to compressed normal form (NFC)
-        if (\class_exists('Normalizer', \false) && ($n = \Normalizer::normalize($s, \Normalizer::FORM_C)) !== \false) {
-            $s = $n;
+        if (\class_exists('Normalizer', \false)) {
+            $s = \Normalizer::normalize($s, \Normalizer::FORM_C);
         }
         $s = self::normalizeNewLines($s);
         // remove control characters; leave \t + \n
-        $s = self::pcre('preg_replace', ['#[\\x00-\\x08\\x0B-\\x1F\\x7F-\\x9F]+#u', '', $s]);
+        $s = \preg_replace('#[\\x00-\\x08\\x0B-\\x1F\\x7F-\\x9F]+#u', '', $s);
         // right trim
-        $s = self::pcre('preg_replace', ['#[\\t ]+$#m', '', $s]);
+        $s = \preg_replace('#[\\t ]+$#m', '', $s);
         // leading and trailing blank lines
         $s = \trim($s, "\n");
         return $s;
@@ -113,40 +113,22 @@ class Strings
         if ($transliterator === null && \class_exists('Transliterator', \false)) {
             $transliterator = \Transliterator::create('Any-Latin; Latin-ASCII');
         }
-        // remove control characters and check UTF-8 validity
-        $s = self::pcre('preg_replace', ['#[^\\x09\\x0A\\x0D\\x20-\\x7E\\xA0-\\x{2FF}\\x{370}-\\x{10FFFF}]#u', '', $s]);
-        // transliteration (by Transliterator and iconv) is not optimal, replace some characters directly
-        $s = \str_replace(
-            ["â€ž", "â€œ", "â€", "â€š", "â€˜", "â€™", "Â°", "Ð¯", "Ñ", "Ð®", "ÑŽ"],
-            // â€ž â€œ â€ â€š â€˜ â€™ Â° Ð¯ Ñ Ð® ÑŽ
-            ['"', '"', '"', "'", "'", "'", '^', 'Ya', 'ya', 'Yu', 'yu'],
-            $s
-        );
-        // temporarily hide these characters to distinguish them from the garbage that iconv creates
+        $s = \preg_replace('#[^\\x09\\x0A\\x0D\\x20-\\x7E\\xA0-\\x{2FF}\\x{370}-\\x{10FFFF}]#u', '', $s);
         $s = \strtr($s, '`\'"^~?', "\1\2\3\4\5\6");
+        $s = \str_replace(["â€ž", "â€œ", "â€", "â€š", "â€˜", "â€™", "Â°"], ["\3", "\3", "\3", "\2", "\2", "\2", "\4"], $s);
         if ($transliterator !== null) {
             $s = $transliterator->transliterate($s);
         }
         if (\ICONV_IMPL === 'glibc') {
-            // glibc implementation is very limited. replace some characters directly
-            $s = \str_replace(
-                ["Â»", "Â«", "â€¦", "â„¢", "Â©", "Â®"],
-                // Â» Â« â€¦ â„¢ Â© Â®
-                ['>>', '<<', '...', 'TM', '(c)', '(R)'],
-                $s
-            );
-            // transliterate the rest into Windows-1250 and then into ASCII, so most Eastern European characters are preserved
+            $s = \str_replace(["Â»", "Â«", "â€¦", "â„¢", "Â©", "Â®"], ['>>', '<<', '...', 'TM', '(c)', '(R)'], $s);
             $s = \iconv('UTF-8', 'WINDOWS-1250//TRANSLIT//IGNORE', $s);
             $s = \strtr($s, "¥£¼Œ§ŠªŽ¯¹³¾œšºŸž" . "¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓ" . "ÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçè" . "éêëìíîïðñòóôõöøùúûüýþ" . "– ‹—›¦­·", 'ALLSSSSTZZZallssstzzzRAAAALCCCEEEEIIDDNNOOOOxRUUUUYTsraaaalccceeeeiiddnnooooruuuuyt- <->|-.');
-            $s = self::pcre('preg_replace', ['#[^\\x00-\\x7F]++#', '', $s]);
+            $s = \preg_replace('#[^\\x00-\\x7F]++#', '', $s);
         } else {
             $s = \iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $s);
         }
-        // remove garbage that iconv creates during transliteration (eg Ã -> Y')
         $s = \str_replace(['`', "'", '"', '^', '~', '?'], '', $s);
-        // restore temporarily hidden characters
-        $s = \strtr($s, "\1\2\3\4\5\6", '`\'"^~?');
-        return $s;
+        return \strtr($s, "\1\2\3\4\5\6", '`\'"^~?');
     }
     /**
      * Converts UTF-8 string to web safe characters [a-z0-9-] text.
@@ -157,7 +139,7 @@ class Strings
         if ($lower) {
             $s = \strtolower($s);
         }
-        $s = self::pcre('preg_replace', ['#[^a-z0-9' . ($charlist !== null ? \preg_quote($charlist, '#') : '') . ']+#i', '-', $s]);
+        $s = \preg_replace('#[^a-z0-9' . ($charlist !== null ? \preg_quote($charlist, '#') : '') . ']+#i', '-', $s);
         $s = \trim($s, '-');
         return $s;
     }
@@ -167,7 +149,7 @@ class Strings
     public static function truncate(string $s, int $maxLen, string $append = "â€¦") : string
     {
         if (self::length($s) > $maxLen) {
-            $maxLen -= self::length($append);
+            $maxLen = $maxLen - self::length($append);
             if ($maxLen < 1) {
                 return $append;
             } elseif ($matches = self::match($s, '#^.{1,' . $maxLen . '}(?=[\\s\\x00-/:-@\\[-`{-~])#us')) {
@@ -276,7 +258,7 @@ class Strings
     public static function trim(string $s, string $charlist = self::TRIM_CHARACTERS) : string
     {
         $charlist = \preg_quote($charlist, '#');
-        return self::replace($s, '#^[' . $charlist . ']+|[' . $charlist . ']+$#Du', '');
+        return self::replace($s, '#^[' . $charlist . ']+|[' . $charlist . ']+\\z#u', '');
     }
     /**
      * Pad a UTF-8 string to a certain length with another string.
@@ -339,7 +321,7 @@ class Strings
         if (!$nth) {
             return null;
         } elseif ($nth > 0) {
-            if ($needle === '') {
+            if (\strlen($needle) === 0) {
                 return 0;
             }
             $pos = 0;
@@ -348,7 +330,7 @@ class Strings
             }
         } else {
             $len = \strlen($haystack);
-            if ($needle === '') {
+            if (\strlen($needle) === 0) {
                 return $len;
             }
             $pos = $len - 1;
@@ -356,7 +338,7 @@ class Strings
                 $pos--;
             }
         }
-        return \_PhpScoperfacc742d2745\Nette\Utils\Helpers::falseToNull($pos);
+        return $pos === \false ? null : $pos;
     }
     /**
      * Splits string by a regular expression.
@@ -395,7 +377,7 @@ class Strings
     {
         if (\is_object($replacement) || \is_array($replacement)) {
             if (!\is_callable($replacement, \false, $textual)) {
-                throw new \_PhpScoperfacc742d2745\Nette\InvalidStateException("Callback '{$textual}' is not callable.");
+                throw new \_PhpScoperac4e86be08e5\Nette\InvalidStateException("Callback '{$textual}' is not callable.");
             }
             return self::pcre('preg_replace_callback', [$pattern, $replacement, $subject, $limit]);
         } elseif ($replacement === null && \is_array($pattern)) {
@@ -407,12 +389,12 @@ class Strings
     /** @internal */
     public static function pcre(string $func, array $args)
     {
-        $res = \_PhpScoperfacc742d2745\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
+        $res = \_PhpScoperac4e86be08e5\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
             // compile-time error, not detectable by preg_last_error
-            throw new \_PhpScoperfacc742d2745\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
+            throw new \_PhpScoperac4e86be08e5\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
         });
         if (($code = \preg_last_error()) && ($res === null || !\in_array($func, ['preg_filter', 'preg_replace_callback', 'preg_replace'], \true))) {
-            throw new \_PhpScoperfacc742d2745\Nette\Utils\RegexpException((\_PhpScoperfacc742d2745\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
+            throw new \_PhpScoperac4e86be08e5\Nette\Utils\RegexpException((\_PhpScoperac4e86be08e5\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
         }
         return $res;
     }

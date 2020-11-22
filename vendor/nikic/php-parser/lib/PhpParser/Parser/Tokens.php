@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperfacc742d2745\PhpParser\Parser;
+namespace _PhpScoperac4e86be08e5\PhpParser\Parser;
 
 /* GENERATED file based on grammar/tokens.y */
 final class Tokens
@@ -140,4 +140,5 @@ final class Tokens
     const T_NAME_FULLY_QUALIFIED = 388;
     const T_NAME_QUALIFIED = 389;
     const T_NAME_RELATIVE = 390;
+    const T_ATTRIBUTE = 391;
 }

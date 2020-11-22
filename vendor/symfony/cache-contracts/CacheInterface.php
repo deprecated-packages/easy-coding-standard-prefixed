@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfacc742d2745\Symfony\Contracts\Cache;
+namespace _PhpScoperac4e86be08e5\Symfony\Contracts\Cache;
 
-use _PhpScoperfacc742d2745\Psr\Cache\CacheItemInterface;
-use _PhpScoperfacc742d2745\Psr\Cache\InvalidArgumentException;
+use _PhpScoperac4e86be08e5\Psr\Cache\CacheItemInterface;
+use _PhpScoperac4e86be08e5\Psr\Cache\InvalidArgumentException;
 /**
  * Covers most simple to advanced caching needs.
  *

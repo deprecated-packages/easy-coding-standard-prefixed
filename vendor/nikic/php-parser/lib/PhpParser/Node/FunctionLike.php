@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\PhpParser\Node;
+namespace _PhpScoperac4e86be08e5\PhpParser\Node;
 
-use _PhpScoperfacc742d2745\PhpParser\Node;
-interface FunctionLike extends \_PhpScoperfacc742d2745\PhpParser\Node
+use _PhpScoperac4e86be08e5\PhpParser\Node;
+interface FunctionLike extends \_PhpScoperac4e86be08e5\PhpParser\Node
 {
     /**
      * Whether to return by reference
@@ -15,19 +15,25 @@ interface FunctionLike extends \_PhpScoperfacc742d2745\PhpParser\Node
     /**
      * List of parameters
      *
-     * @return Node\Param[]
+     * @return Param[]
      */
     public function getParams() : array;
     /**
      * Get the declared return type or null
      *
-     * @return null|Identifier|Node\Name|Node\NullableType|Node\UnionType
+     * @return null|Identifier|Name|NullableType|UnionType
      */
     public function getReturnType();
     /**
      * The function body
      *
-     * @return Node\Stmt[]|null
+     * @return Stmt[]|null
      */
     public function getStmts();
+    /**
+     * Get PHP attribute groups.
+     *
+     * @return AttributeGroup[]
+     */
+    public function getAttrGroups() : array;
 }

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfacc742d2745\Symfony\Component\Mime\Header;
+namespace _PhpScoperac4e86be08e5\Symfony\Component\Mime\Header;
 
-use _PhpScoperfacc742d2745\Symfony\Component\Mime\Address;
-use _PhpScoperfacc742d2745\Symfony\Component\Mime\Exception\LogicException;
-use _PhpScoperfacc742d2745\Symfony\Component\Mime\NamedAddress;
+use _PhpScoperac4e86be08e5\Symfony\Component\Mime\Address;
+use _PhpScoperac4e86be08e5\Symfony\Component\Mime\Exception\LogicException;
+use _PhpScoperac4e86be08e5\Symfony\Component\Mime\NamedAddress;
 /**
  * A collection of headers.
  *
@@ -25,7 +25,7 @@ final class Headers
     private static $uniqueHeaders = ['date', 'from', 'sender', 'reply-to', 'to', 'cc', 'bcc', 'message-id', 'in-reply-to', 'references', 'subject'];
     private $headers = [];
     private $lineLength = 76;
-    public function __construct(\_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\HeaderInterface ...$headers)
+    public function __construct(\_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\HeaderInterface ...$headers)
     {
         foreach ($headers as $header) {
             $this->add($header);
@@ -57,7 +57,7 @@ final class Headers
      */
     public function addMailboxListHeader(string $name, array $addresses)
     {
-        return $this->add(new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\MailboxListHeader($name, \_PhpScoperfacc742d2745\Symfony\Component\Mime\Address::createArray($addresses)));
+        return $this->add(new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\MailboxListHeader($name, \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Address::createArray($addresses)));
     }
     /**
      * @param NamedAddress|Address|string $address
@@ -66,7 +66,7 @@ final class Headers
      */
     public function addMailboxHeader(string $name, $address)
     {
-        return $this->add(new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\MailboxHeader($name, \_PhpScoperfacc742d2745\Symfony\Component\Mime\Address::create($address)));
+        return $this->add(new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\MailboxHeader($name, \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Address::create($address)));
     }
     /**
      * @param string|array $ids
@@ -75,7 +75,7 @@ final class Headers
      */
     public function addIdHeader(string $name, $ids)
     {
-        return $this->add(new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\IdentificationHeader($name, $ids));
+        return $this->add(new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\IdentificationHeader($name, $ids));
     }
     /**
      * @param Address|string $path
@@ -84,28 +84,28 @@ final class Headers
      */
     public function addPathHeader(string $name, $path)
     {
-        return $this->add(new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\PathHeader($name, $path instanceof \_PhpScoperfacc742d2745\Symfony\Component\Mime\Address ? $path : new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Address($path)));
+        return $this->add(new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\PathHeader($name, $path instanceof \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Address ? $path : new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Address($path)));
     }
     /**
      * @return $this
      */
     public function addDateHeader(string $name, \DateTimeInterface $dateTime)
     {
-        return $this->add(new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\DateHeader($name, $dateTime));
+        return $this->add(new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\DateHeader($name, $dateTime));
     }
     /**
      * @return $this
      */
     public function addTextHeader(string $name, string $value)
     {
-        return $this->add(new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\UnstructuredHeader($name, $value));
+        return $this->add(new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\UnstructuredHeader($name, $value));
     }
     /**
      * @return $this
      */
     public function addParameterizedHeader(string $name, string $value, array $params = [])
     {
-        return $this->add(new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\ParameterizedHeader($name, $value, $params));
+        return $this->add(new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\ParameterizedHeader($name, $value, $params));
     }
     public function has(string $name) : bool
     {
@@ -114,21 +114,21 @@ final class Headers
     /**
      * @return $this
      */
-    public function add(\_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\HeaderInterface $header)
+    public function add(\_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\HeaderInterface $header)
     {
-        static $map = ['date' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\DateHeader::class, 'from' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\MailboxListHeader::class, 'sender' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\MailboxHeader::class, 'reply-to' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\MailboxListHeader::class, 'to' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\MailboxListHeader::class, 'cc' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\MailboxListHeader::class, 'bcc' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\MailboxListHeader::class, 'message-id' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\IdentificationHeader::class, 'in-reply-to' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\IdentificationHeader::class, 'references' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\IdentificationHeader::class, 'return-path' => \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\PathHeader::class];
+        static $map = ['date' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\DateHeader::class, 'from' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\MailboxListHeader::class, 'sender' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\MailboxHeader::class, 'reply-to' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\MailboxListHeader::class, 'to' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\MailboxListHeader::class, 'cc' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\MailboxListHeader::class, 'bcc' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\MailboxListHeader::class, 'message-id' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\IdentificationHeader::class, 'in-reply-to' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\IdentificationHeader::class, 'references' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\IdentificationHeader::class, 'return-path' => \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\PathHeader::class];
         $header->setMaxLineLength($this->lineLength);
         $name = \strtolower($header->getName());
         if (isset($map[$name]) && !$header instanceof $map[$name]) {
-            throw new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Exception\LogicException(\sprintf('The "%s" header must be an instance of "%s" (got "%s").', $header->getName(), $map[$name], \get_class($header)));
+            throw new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Exception\LogicException(\sprintf('The "%s" header must be an instance of "%s" (got "%s").', $header->getName(), $map[$name], \get_class($header)));
         }
         if (\in_array($name, self::$uniqueHeaders, \true) && isset($this->headers[$name]) && \count($this->headers[$name]) > 0) {
-            throw new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Exception\LogicException(\sprintf('Impossible to set header "%s" as it\'s already defined and must be unique.', $header->getName()));
+            throw new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Exception\LogicException(\sprintf('Impossible to set header "%s" as it\'s already defined and must be unique.', $header->getName()));
         }
         $this->headers[$name][] = $header;
         return $this;
     }
-    public function get(string $name) : ?\_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\HeaderInterface
+    public function get(string $name) : ?\_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\HeaderInterface
     {
         $name = \strtolower($name);
         if (!isset($this->headers[$name])) {
@@ -208,8 +208,8 @@ final class Headers
             return null;
         }
         $header = $this->get($name);
-        if (!$header instanceof \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\ParameterizedHeader) {
-            throw new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Exception\LogicException(\sprintf('Unable to get parameter "%s" on header "%s" as the header is not of class "%s".', $parameter, $name, \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\ParameterizedHeader::class));
+        if (!$header instanceof \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\ParameterizedHeader) {
+            throw new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Exception\LogicException(\sprintf('Unable to get parameter "%s" on header "%s" as the header is not of class "%s".', $parameter, $name, \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\ParameterizedHeader::class));
         }
         return $header->getParameter($parameter);
     }
@@ -219,11 +219,11 @@ final class Headers
     public function setHeaderParameter(string $name, string $parameter, $value) : void
     {
         if (!$this->has($name)) {
-            throw new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Exception\LogicException(\sprintf('Unable to set parameter "%s" on header "%s" as the header is not defined.', $parameter, $name));
+            throw new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Exception\LogicException(\sprintf('Unable to set parameter "%s" on header "%s" as the header is not defined.', $parameter, $name));
         }
         $header = $this->get($name);
-        if (!$header instanceof \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\ParameterizedHeader) {
-            throw new \_PhpScoperfacc742d2745\Symfony\Component\Mime\Exception\LogicException(\sprintf('Unable to set parameter "%s" on header "%s" as the header is not of class "%s".', $parameter, $name, \_PhpScoperfacc742d2745\Symfony\Component\Mime\Header\ParameterizedHeader::class));
+        if (!$header instanceof \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\ParameterizedHeader) {
+            throw new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Exception\LogicException(\sprintf('Unable to set parameter "%s" on header "%s" as the header is not of class "%s".', $parameter, $name, \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Header\ParameterizedHeader::class));
         }
         $header->setParameter($parameter, $value);
     }

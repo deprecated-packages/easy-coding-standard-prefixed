@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfacc742d2745\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoperfacc742d2745\Symfony\Component\VarDumper\Caster\CutStub;
-use _PhpScoperfacc742d2745\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use _PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use _PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\Stub;
-use _PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Caster\CutStub;
+use _PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use _PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use _PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Cloner\VarCloner;
 /**
  * DataCollector.
  *
@@ -24,7 +24,7 @@ use _PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\VarCloner;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Bernhard Schussek <bschussek@symfony.com>
  */
-abstract class DataCollector implements \_PhpScoperfacc742d2745\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+abstract class DataCollector implements \_PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
 {
     /**
      * @var array|Data
@@ -64,11 +64,11 @@ abstract class DataCollector implements \_PhpScoperfacc742d2745\Symfony\Componen
      */
     protected function cloneVar($var)
     {
-        if ($var instanceof \_PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\Data) {
+        if ($var instanceof \_PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Cloner\Data) {
             return $var;
         }
         if (null === $this->cloner) {
-            $this->cloner = new \_PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\VarCloner();
+            $this->cloner = new \_PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Cloner\VarCloner();
             $this->cloner->setMaxItems(-1);
             $this->cloner->addCasters($this->getCasters());
         }
@@ -79,16 +79,16 @@ abstract class DataCollector implements \_PhpScoperfacc742d2745\Symfony\Componen
      */
     protected function getCasters()
     {
-        $casters = ['*' => function ($v, array $a, \_PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\Stub $s, $isNested) {
-            if (!$v instanceof \_PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\Stub) {
+        $casters = ['*' => function ($v, array $a, \_PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Cloner\Stub $s, $isNested) {
+            if (!$v instanceof \_PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Cloner\Stub) {
                 foreach ($a as $k => $v) {
-                    if (\is_object($v) && !$v instanceof \DateTimeInterface && !$v instanceof \_PhpScoperfacc742d2745\Symfony\Component\VarDumper\Cloner\Stub) {
-                        $a[$k] = new \_PhpScoperfacc742d2745\Symfony\Component\VarDumper\Caster\CutStub($v);
+                    if (\is_object($v) && !$v instanceof \DateTimeInterface && !$v instanceof \_PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Cloner\Stub) {
+                        $a[$k] = new \_PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Caster\CutStub($v);
                     }
                 }
             }
             return $a;
-        }] + \_PhpScoperfacc742d2745\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO;
+        }] + \_PhpScoperac4e86be08e5\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO;
         return $casters;
     }
     /**

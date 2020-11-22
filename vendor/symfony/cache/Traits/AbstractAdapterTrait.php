@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfacc742d2745\Symfony\Component\Cache\Traits;
+namespace _PhpScoperac4e86be08e5\Symfony\Component\Cache\Traits;
 
-use _PhpScoperfacc742d2745\Psr\Cache\CacheItemInterface;
-use _PhpScoperfacc742d2745\Symfony\Component\Cache\CacheItem;
+use _PhpScoperac4e86be08e5\Psr\Cache\CacheItemInterface;
+use _PhpScoperac4e86be08e5\Symfony\Component\Cache\CacheItem;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -46,7 +46,7 @@ trait AbstractAdapterTrait
             }
             return $f($key, $value, $isHit);
         } catch (\Exception $e) {
-            \_PhpScoperfacc742d2745\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e]);
+            \_PhpScoperac4e86be08e5\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e]);
         }
         return $f($key, null, \false);
     }
@@ -65,7 +65,7 @@ trait AbstractAdapterTrait
         try {
             $items = $this->doFetch($ids);
         } catch (\Exception $e) {
-            \_PhpScoperfacc742d2745\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch items: ' . $e->getMessage(), ['keys' => $keys, 'exception' => $e]);
+            \_PhpScoperac4e86be08e5\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch items: ' . $e->getMessage(), ['keys' => $keys, 'exception' => $e]);
             $items = [];
         }
         $ids = \array_combine($ids, $keys);
@@ -76,9 +76,9 @@ trait AbstractAdapterTrait
      *
      * @return bool
      */
-    public function save(\_PhpScoperfacc742d2745\Psr\Cache\CacheItemInterface $item)
+    public function save(\_PhpScoperac4e86be08e5\Psr\Cache\CacheItemInterface $item)
     {
-        if (!$item instanceof \_PhpScoperfacc742d2745\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \_PhpScoperac4e86be08e5\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -89,9 +89,9 @@ trait AbstractAdapterTrait
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScoperfacc742d2745\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\_PhpScoperac4e86be08e5\Psr\Cache\CacheItemInterface $item)
     {
-        if (!$item instanceof \_PhpScoperfacc742d2745\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \_PhpScoperac4e86be08e5\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -124,7 +124,7 @@ trait AbstractAdapterTrait
                 (yield $key => $f($key, $value, \true));
             }
         } catch (\Exception $e) {
-            \_PhpScoperfacc742d2745\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch items: ' . $e->getMessage(), ['keys' => \array_values($keys), 'exception' => $e]);
+            \_PhpScoperac4e86be08e5\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to fetch items: ' . $e->getMessage(), ['keys' => \array_values($keys), 'exception' => $e]);
         }
         foreach ($keys as $key) {
             (yield $key => $f($key, null, \false));

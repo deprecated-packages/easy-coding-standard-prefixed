@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
-use _PhpScoperfacc742d2745\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperac4e86be08e5\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperac4e86be08e5\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern;
 final class CheckHeredocNowdocCommand extends \Symplify\EasyCodingStandard\SnippetFormatter\Command\AbstractSnippetFormatterCommand
 {
@@ -13,7 +13,7 @@ final class CheckHeredocNowdocCommand extends \Symplify\EasyCodingStandard\Snipp
         $this->setDescription('Format Heredoc/Nowdoc PHP snippets in PHP files');
         parent::configure();
     }
-    protected function execute(\_PhpScoperfacc742d2745\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperfacc742d2745\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoperac4e86be08e5\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperac4e86be08e5\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         return $this->doExecuteSnippetFormatterWithFileNamesAndSnippetPattern($input, '*.php', \Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern::HERENOWDOC_SNIPPET_REGEX, 'heredocnowdox');
     }

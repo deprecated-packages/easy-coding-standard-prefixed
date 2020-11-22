@@ -8,29 +8,29 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfacc742d2745\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoperfacc742d2745\Psr\Container\ContainerInterface;
-use _PhpScoperfacc742d2745\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperfacc742d2745\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperfacc742d2745\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoperfacc742d2745\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoperac4e86be08e5\Psr\Container\ContainerInterface;
+use _PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperac4e86be08e5\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Provides an intuitive error message when controller fails because it is not registered as a service.
  *
  * @author Simeon Kolev <simeon.kolev9@gmail.com>
  */
-final class NotTaggedControllerValueResolver implements \_PhpScoperfacc742d2745\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class NotTaggedControllerValueResolver implements \_PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     private $container;
-    public function __construct(\_PhpScoperfacc742d2745\Psr\Container\ContainerInterface $container)
+    public function __construct(\_PhpScoperac4e86be08e5\Psr\Container\ContainerInterface $container)
     {
         $this->container = $container;
     }
     /**
      * {@inheritdoc}
      */
-    public function supports(\_PhpScoperfacc742d2745\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperfacc742d2745\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
+    public function supports(\_PhpScoperac4e86be08e5\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
     {
         $controller = $request->attributes->get('_controller');
         if (\is_array($controller) && \is_callable($controller, \true) && \is_string($controller[0])) {
@@ -49,7 +49,7 @@ final class NotTaggedControllerValueResolver implements \_PhpScoperfacc742d2745\
     /**
      * {@inheritdoc}
      */
-    public function resolve(\_PhpScoperfacc742d2745\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperfacc742d2745\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
+    public function resolve(\_PhpScoperac4e86be08e5\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
     {
         if (\is_array($controller = $request->attributes->get('_controller'))) {
             $controller = $controller[0] . '::' . $controller[1];
@@ -63,6 +63,6 @@ final class NotTaggedControllerValueResolver implements \_PhpScoperfacc742d2745\
         }
         $what = \sprintf('argument $%s of "%s()"', $argument->getName(), $controller);
         $message = \sprintf('Could not resolve %s, maybe you forgot to register the controller as a service or missed tagging it with the "controller.service_arguments"?', $what);
-        throw new \_PhpScoperfacc742d2745\Symfony\Component\DependencyInjection\Exception\RuntimeException($message);
+        throw new \_PhpScoperac4e86be08e5\Symfony\Component\DependencyInjection\Exception\RuntimeException($message);
     }
 }

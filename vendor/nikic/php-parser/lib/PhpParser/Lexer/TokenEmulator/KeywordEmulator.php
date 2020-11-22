@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\PhpParser\Lexer\TokenEmulator;
+namespace _PhpScoperac4e86be08e5\PhpParser\Lexer\TokenEmulator;
 
-abstract class KeywordEmulator implements \_PhpScoperfacc742d2745\PhpParser\Lexer\TokenEmulator\TokenEmulatorInterface
+abstract class KeywordEmulator extends \_PhpScoperac4e86be08e5\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     abstract function getKeywordString() : string;
     abstract function getKeywordToken() : int;
     public function isEmulationNeeded(string $code) : bool
     {
-        return \strpos($code, $this->getKeywordString()) !== \false;
+        return \strpos(\strtolower($code), $this->getKeywordString()) !== \false;
     }
     public function emulate(string $code, array $tokens) : array
     {

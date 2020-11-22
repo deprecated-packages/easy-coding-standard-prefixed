@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfacc742d2745\Symfony\Component\Mime\Encoder;
+namespace _PhpScoperac4e86be08e5\Symfony\Component\Mime\Encoder;
 
-use _PhpScoperfacc742d2745\Symfony\Component\Mime\CharacterStream;
+use _PhpScoperac4e86be08e5\Symfony\Component\Mime\CharacterStream;
 /**
  * @author Chris Corbyn
  *
  * @experimental in 4.3
  */
-class QpEncoder implements \_PhpScoperfacc742d2745\Symfony\Component\Mime\Encoder\EncoderInterface
+class QpEncoder implements \_PhpScoperac4e86be08e5\Symfony\Component\Mime\Encoder\EncoderInterface
 {
     /**
      * Pre-computed QP for HUGE optimization.
@@ -67,7 +67,7 @@ class QpEncoder implements \_PhpScoperfacc742d2745\Symfony\Component\Mime\Encode
         $lines[$lNo] = '';
         $currentLine =& $lines[$lNo++];
         $size = $lineLen = 0;
-        $charStream = new \_PhpScoperfacc742d2745\Symfony\Component\Mime\CharacterStream($string, $charset);
+        $charStream = new \_PhpScoperac4e86be08e5\Symfony\Component\Mime\CharacterStream($string, $charset);
         // Fetching more than 4 chars at one is slower, as is fetching fewer bytes
         // Conveniently 4 chars is the UTF-8 safe number since UTF-8 has up to 6
         // bytes per char and (6 * 4 * 3 = 72 chars per line) * =NN is 3 bytes

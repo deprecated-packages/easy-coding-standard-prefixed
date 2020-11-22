@@ -17,7 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScoperfacc742d2745\Doctrine\Common\Annotations;
+namespace _PhpScoperac4e86be08e5\Doctrine\Common\Annotations;
 
 /**
  * Annotations class.

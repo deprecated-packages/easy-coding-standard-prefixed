@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfacc742d2745\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScoperfacc742d2745\Psr\Log\LoggerInterface;
-use _PhpScoperfacc742d2745\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperac4e86be08e5\Psr\Log\LoggerInterface;
+use _PhpScoperac4e86be08e5\Symfony\Component\HttpFoundation\Request;
 /**
  * This implementation uses the '_controller' request attribute to determine
  * the controller to execute.
@@ -19,17 +19,17 @@ use _PhpScoperfacc742d2745\Symfony\Component\HttpFoundation\Request;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class ControllerResolver implements \_PhpScoperfacc742d2745\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+class ControllerResolver implements \_PhpScoperac4e86be08e5\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
 {
     private $logger;
-    public function __construct(\_PhpScoperfacc742d2745\Psr\Log\LoggerInterface $logger = null)
+    public function __construct(\_PhpScoperac4e86be08e5\Psr\Log\LoggerInterface $logger = null)
     {
         $this->logger = $logger;
     }
     /**
      * {@inheritdoc}
      */
-    public function getController(\_PhpScoperfacc742d2745\Symfony\Component\HttpFoundation\Request $request)
+    public function getController(\_PhpScoperac4e86be08e5\Symfony\Component\HttpFoundation\Request $request)
     {
         if (!($controller = $request->attributes->get('_controller'))) {
             if (null !== $this->logger) {

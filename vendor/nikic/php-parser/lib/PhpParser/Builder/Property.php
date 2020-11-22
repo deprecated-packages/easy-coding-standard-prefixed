@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\PhpParser\Builder;
+namespace _PhpScoperac4e86be08e5\PhpParser\Builder;
 
-use _PhpScoperfacc742d2745\PhpParser;
-use _PhpScoperfacc742d2745\PhpParser\BuilderHelpers;
-use _PhpScoperfacc742d2745\PhpParser\Node\Identifier;
-use _PhpScoperfacc742d2745\PhpParser\Node\Name;
-use _PhpScoperfacc742d2745\PhpParser\Node\NullableType;
-use _PhpScoperfacc742d2745\PhpParser\Node\Stmt;
-class Property implements \_PhpScoperfacc742d2745\PhpParser\Builder
+use _PhpScoperac4e86be08e5\PhpParser;
+use _PhpScoperac4e86be08e5\PhpParser\BuilderHelpers;
+use _PhpScoperac4e86be08e5\PhpParser\Node\Identifier;
+use _PhpScoperac4e86be08e5\PhpParser\Node\Name;
+use _PhpScoperac4e86be08e5\PhpParser\Node\NullableType;
+use _PhpScoperac4e86be08e5\PhpParser\Node\Stmt;
+class Property implements \_PhpScoperac4e86be08e5\PhpParser\Builder
 {
     protected $name;
     protected $flags = 0;
@@ -33,7 +33,7 @@ class Property implements \_PhpScoperfacc742d2745\PhpParser\Builder
      */
     public function makePublic()
     {
-        $this->flags = \_PhpScoperfacc742d2745\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
+        $this->flags = \_PhpScoperac4e86be08e5\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
         return $this;
     }
     /**
@@ -43,7 +43,7 @@ class Property implements \_PhpScoperfacc742d2745\PhpParser\Builder
      */
     public function makeProtected()
     {
-        $this->flags = \_PhpScoperfacc742d2745\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        $this->flags = \_PhpScoperac4e86be08e5\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
         return $this;
     }
     /**
@@ -53,7 +53,7 @@ class Property implements \_PhpScoperfacc742d2745\PhpParser\Builder
      */
     public function makePrivate()
     {
-        $this->flags = \_PhpScoperfacc742d2745\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        $this->flags = \_PhpScoperac4e86be08e5\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
         return $this;
     }
     /**
@@ -63,7 +63,7 @@ class Property implements \_PhpScoperfacc742d2745\PhpParser\Builder
      */
     public function makeStatic()
     {
-        $this->flags = \_PhpScoperfacc742d2745\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
+        $this->flags = \_PhpScoperac4e86be08e5\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
         return $this;
     }
     /**
@@ -75,7 +75,7 @@ class Property implements \_PhpScoperfacc742d2745\PhpParser\Builder
      */
     public function setDefault($value)
     {
-        $this->default = \_PhpScoperfacc742d2745\PhpParser\BuilderHelpers::normalizeValue($value);
+        $this->default = \_PhpScoperac4e86be08e5\PhpParser\BuilderHelpers::normalizeValue($value);
         return $this;
     }
     /**
@@ -87,7 +87,7 @@ class Property implements \_PhpScoperfacc742d2745\PhpParser\Builder
      */
     public function setDocComment($docComment)
     {
-        $this->attributes = ['comments' => [\_PhpScoperfacc742d2745\PhpParser\BuilderHelpers::normalizeDocComment($docComment)]];
+        $this->attributes = ['comments' => [\_PhpScoperac4e86be08e5\PhpParser\BuilderHelpers::normalizeDocComment($docComment)]];
         return $this;
     }
     /**
@@ -99,7 +99,7 @@ class Property implements \_PhpScoperfacc742d2745\PhpParser\Builder
      */
     public function setType($type)
     {
-        $this->type = \_PhpScoperfacc742d2745\PhpParser\BuilderHelpers::normalizeType($type);
+        $this->type = \_PhpScoperac4e86be08e5\PhpParser\BuilderHelpers::normalizeType($type);
         return $this;
     }
     /**
@@ -107,8 +107,8 @@ class Property implements \_PhpScoperfacc742d2745\PhpParser\Builder
      *
      * @return Stmt\Property The built property node
      */
-    public function getNode() : \_PhpScoperfacc742d2745\PhpParser\Node
+    public function getNode() : \_PhpScoperac4e86be08e5\PhpParser\Node
     {
-        return new \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Property($this->flags !== 0 ? $this->flags : \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC, [new \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\PropertyProperty($this->name, $this->default)], $this->attributes, $this->type);
+        return new \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Property($this->flags !== 0 ? $this->flags : \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC, [new \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\PropertyProperty($this->name, $this->default)], $this->attributes, $this->type);
     }
 }

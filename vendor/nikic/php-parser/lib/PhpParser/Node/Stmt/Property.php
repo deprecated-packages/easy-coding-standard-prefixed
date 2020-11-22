@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\PhpParser\Node\Stmt;
+namespace _PhpScoperac4e86be08e5\PhpParser\Node\Stmt;
 
-use _PhpScoperfacc742d2745\PhpParser\Node;
-use _PhpScoperfacc742d2745\PhpParser\Node\Identifier;
-use _PhpScoperfacc742d2745\PhpParser\Node\Name;
-use _PhpScoperfacc742d2745\PhpParser\Node\NullableType;
-use _PhpScoperfacc742d2745\PhpParser\Node\UnionType;
-class Property extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
+use _PhpScoperac4e86be08e5\PhpParser\Node;
+use _PhpScoperac4e86be08e5\PhpParser\Node\Identifier;
+use _PhpScoperac4e86be08e5\PhpParser\Node\Name;
+use _PhpScoperac4e86be08e5\PhpParser\Node\NullableType;
+use _PhpScoperac4e86be08e5\PhpParser\Node\UnionType;
+class Property extends \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt
 {
     /** @var int Modifiers */
     public $flags;
@@ -16,6 +16,8 @@ class Property extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
     public $props;
     /** @var null|Identifier|Name|NullableType|UnionType Type declaration */
     public $type;
+    /** @var Node\AttributeGroup[] PHP attribute groups */
+    public $attrGroups;
     /**
      * Constructs a class property list node.
      *
@@ -23,17 +25,19 @@ class Property extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
      * @param PropertyProperty[]                                 $props      Properties
      * @param array                                              $attributes Additional attributes
      * @param null|string|Identifier|Name|NullableType|UnionType $type       Type declaration
+     * @param Node\AttributeGroup[]                              $attrGroups PHP attribute groups
      */
-    public function __construct(int $flags, array $props, array $attributes = [], $type = null)
+    public function __construct(int $flags, array $props, array $attributes = [], $type = null, array $attrGroups = [])
     {
         $this->attributes = $attributes;
         $this->flags = $flags;
         $this->props = $props;
-        $this->type = \is_string($type) ? new \_PhpScoperfacc742d2745\PhpParser\Node\Identifier($type) : $type;
+        $this->type = \is_string($type) ? new \_PhpScoperac4e86be08e5\PhpParser\Node\Identifier($type) : $type;
+        $this->attrGroups = $attrGroups;
     }
     public function getSubNodeNames() : array
     {
-        return ['flags', 'type', 'props'];
+        return ['attrGroups', 'flags', 'type', 'props'];
     }
     /**
      * Whether the property is explicitly or implicitly public.
@@ -42,7 +46,7 @@ class Property extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
      */
     public function isPublic() : bool
     {
-        return ($this->flags & \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
+        return ($this->flags & \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
     }
     /**
      * Whether the property is protected.
@@ -51,7 +55,7 @@ class Property extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
      */
     public function isProtected() : bool
     {
-        return (bool) ($this->flags & \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        return (bool) ($this->flags & \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
     }
     /**
      * Whether the property is private.
@@ -60,7 +64,7 @@ class Property extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
      */
     public function isPrivate() : bool
     {
-        return (bool) ($this->flags & \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        return (bool) ($this->flags & \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
     }
     /**
      * Whether the property is static.
@@ -69,7 +73,7 @@ class Property extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
      */
     public function isStatic() : bool
     {
-        return (bool) ($this->flags & \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
+        return (bool) ($this->flags & \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
     }
     public function getType() : string
     {

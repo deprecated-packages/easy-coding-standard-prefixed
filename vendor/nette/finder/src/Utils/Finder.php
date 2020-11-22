@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\Nette\Utils;
+namespace _PhpScoperac4e86be08e5\Nette\Utils;
 
-use _PhpScoperfacc742d2745\Nette;
+use _PhpScoperac4e86be08e5\Nette;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 /**
@@ -98,7 +98,7 @@ class Finder implements \IteratorAggregate, \Countable
     public function from(...$paths) : self
     {
         if ($this->paths) {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidStateException('Directory to search has already been specified.');
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidStateException('Directory to search has already been specified.');
         }
         $this->paths = \is_array($paths[0]) ? $paths[0] : $paths;
         $this->cursor =& $this->exclude;
@@ -133,7 +133,7 @@ class Finder implements \IteratorAggregate, \Countable
             }
             $pattern[] = $prefix . \strtr(\preg_quote($mask, '#'), ['\\*\\*' => '.*', '\\*' => '[^/]*', '\\?' => '[^/]', '\\[\\!' => '[^', '\\[' => '[', '\\]' => ']', '\\-' => '-']);
         }
-        return $pattern ? '#/(' . \implode('|', $pattern) . ')$#Di' : null;
+        return $pattern ? '#/(' . \implode('|', $pattern) . ')\\z#i' : null;
     }
     /********************* iterator generator ****************d*g**/
     /**
@@ -149,7 +149,7 @@ class Finder implements \IteratorAggregate, \Countable
     public function getIterator() : \Iterator
     {
         if (!$this->paths) {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidStateException('Call in() or from() to specify directory to search.');
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidStateException('Call in() or from() to specify directory to search.');
         } elseif (\count($this->paths) === 1) {
             return $this->buildIterator((string) $this->paths[0]);
         } else {
@@ -244,8 +244,8 @@ class Finder implements \IteratorAggregate, \Countable
     {
         if (\func_num_args() === 1) {
             // in $operator is predicate
-            if (!\preg_match('#^(?:([=<>!]=?|<>)\\s*)?((?:\\d*\\.)?\\d+)\\s*(K|M|G|)B?$#Di', $operator, $matches)) {
-                throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException('Invalid size predicate format.');
+            if (!\preg_match('#^(?:([=<>!]=?|<>)\\s*)?((?:\\d*\\.)?\\d+)\\s*(K|M|G|)B?\\z#i', $operator, $matches)) {
+                throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException('Invalid size predicate format.');
             }
             [, $operator, $size, $unit] = $matches;
             static $units = ['' => 1, 'k' => 1000.0, 'm' => 1000000.0, 'g' => 1000000000.0];
@@ -266,13 +266,13 @@ class Finder implements \IteratorAggregate, \Countable
     {
         if (\func_num_args() === 1) {
             // in $operator is predicate
-            if (!\preg_match('#^(?:([=<>!]=?|<>)\\s*)?(.+)$#Di', $operator, $matches)) {
-                throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException('Invalid date predicate format.');
+            if (!\preg_match('#^(?:([=<>!]=?|<>)\\s*)?(.+)\\z#i', $operator, $matches)) {
+                throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException('Invalid date predicate format.');
             }
             [, $operator, $date] = $matches;
             $operator = $operator ?: '=';
         }
-        $date = \_PhpScoperfacc742d2745\Nette\Utils\DateTime::from($date)->format('U');
+        $date = \_PhpScoperac4e86be08e5\Nette\Utils\DateTime::from($date)->format('U');
         return $this->filter(function (\RecursiveDirectoryIterator $file) use($operator, $date) : bool {
             return self::compare($file->getMTime(), $operator, $date);
         });
@@ -299,13 +299,13 @@ class Finder implements \IteratorAggregate, \Countable
             case '<>':
                 return $l != $r;
             default:
-                throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException("Unknown operator {$operator}.");
+                throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException("Unknown operator {$operator}.");
         }
     }
     /********************* extension methods ****************d*g**/
     public function __call(string $name, array $args)
     {
-        return isset(self::$extMethods[$name]) ? self::$extMethods[$name]($this, ...$args) : \_PhpScoperfacc742d2745\Nette\Utils\ObjectHelpers::strictCall(\get_class($this), $name, \array_keys(self::$extMethods));
+        return isset(self::$extMethods[$name]) ? self::$extMethods[$name]($this, ...$args) : parent::__call($name, $args);
     }
     public static function extensionMethod(string $name, callable $callback) : void
     {

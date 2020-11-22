@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\PhpParser\Node;
+namespace _PhpScoperac4e86be08e5\PhpParser\Node;
 
-use _PhpScoperfacc742d2745\PhpParser\NodeAbstract;
-class Param extends \_PhpScoperfacc742d2745\PhpParser\NodeAbstract
+use _PhpScoperac4e86be08e5\PhpParser\NodeAbstract;
+class Param extends \_PhpScoperac4e86be08e5\PhpParser\NodeAbstract
 {
     /** @var null|Identifier|Name|NullableType|UnionType Type declaration */
     public $type;
@@ -18,6 +18,8 @@ class Param extends \_PhpScoperfacc742d2745\PhpParser\NodeAbstract
     public $default;
     /** @var int */
     public $flags;
+    /** @var AttributeGroup[] PHP attribute groups */
+    public $attrGroups;
     /**
      * Constructs a parameter node.
      *
@@ -26,22 +28,24 @@ class Param extends \_PhpScoperfacc742d2745\PhpParser\NodeAbstract
      * @param null|string|Identifier|Name|NullableType|UnionType $type       Type declaration
      * @param bool                                               $byRef      Whether is passed by reference
      * @param bool                                               $variadic   Whether this is a variadic argument
-     * @param array                                              $flags      Optional visibility flags
      * @param array                                              $attributes Additional attributes
+     * @param int                                                $flags      Optional visibility flags
+     * @param AttributeGroup[]                                   $attrGroups PHP attribute groups
      */
-    public function __construct($var, \_PhpScoperfacc742d2745\PhpParser\Node\Expr $default = null, $type = null, bool $byRef = \false, bool $variadic = \false, array $attributes = [], int $flags = 0)
+    public function __construct($var, \_PhpScoperac4e86be08e5\PhpParser\Node\Expr $default = null, $type = null, bool $byRef = \false, bool $variadic = \false, array $attributes = [], int $flags = 0, array $attrGroups = [])
     {
         $this->attributes = $attributes;
-        $this->type = \is_string($type) ? new \_PhpScoperfacc742d2745\PhpParser\Node\Identifier($type) : $type;
+        $this->type = \is_string($type) ? new \_PhpScoperac4e86be08e5\PhpParser\Node\Identifier($type) : $type;
         $this->byRef = $byRef;
         $this->variadic = $variadic;
         $this->var = $var;
         $this->default = $default;
         $this->flags = $flags;
+        $this->attrGroups = $attrGroups;
     }
     public function getSubNodeNames() : array
     {
-        return ['flags', 'type', 'byRef', 'variadic', 'var', 'default'];
+        return ['attrGroups', 'flags', 'type', 'byRef', 'variadic', 'var', 'default'];
     }
     public function getType() : string
     {

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\PhpParser\Internal;
+namespace _PhpScoperac4e86be08e5\PhpParser\Internal;
 
-use _PhpScoperfacc742d2745\PhpParser\Node;
-use _PhpScoperfacc742d2745\PhpParser\Node\Expr;
+use _PhpScoperac4e86be08e5\PhpParser\Node;
+use _PhpScoperac4e86be08e5\PhpParser\Node\Expr;
 /**
  * This node is used internally by the format-preserving pretty printer to print anonymous classes.
  *
@@ -15,8 +15,10 @@ use _PhpScoperfacc742d2745\PhpParser\Node\Expr;
  *
  * @internal
  */
-class PrintableNewAnonClassNode extends \_PhpScoperfacc742d2745\PhpParser\Node\Expr
+class PrintableNewAnonClassNode extends \_PhpScoperac4e86be08e5\PhpParser\Node\Expr
 {
+    /** @var Node\AttributeGroup[] PHP attribute groups */
+    public $attrGroups;
     /** @var Node\Arg[] Arguments */
     public $args;
     /** @var null|Node\Name Name of extended class */
@@ -25,21 +27,22 @@ class PrintableNewAnonClassNode extends \_PhpScoperfacc742d2745\PhpParser\Node\E
     public $implements;
     /** @var Node\Stmt[] Statements */
     public $stmts;
-    public function __construct(array $args, \_PhpScoperfacc742d2745\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
+    public function __construct(array $attrGroups, array $args, \_PhpScoperac4e86be08e5\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
     {
         parent::__construct($attributes);
+        $this->attrGroups = $attrGroups;
         $this->args = $args;
         $this->extends = $extends;
         $this->implements = $implements;
         $this->stmts = $stmts;
     }
-    public static function fromNewNode(\_PhpScoperfacc742d2745\PhpParser\Node\Expr\New_ $newNode)
+    public static function fromNewNode(\_PhpScoperac4e86be08e5\PhpParser\Node\Expr\New_ $newNode)
     {
         $class = $newNode->class;
-        \assert($class instanceof \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_);
+        \assert($class instanceof \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_);
         // We don't assert that $class->name is null here, to allow consumers to assign unique names
         // to anonymous classes for their own purposes. We simplify ignore the name here.
-        return new self($newNode->args, $class->extends, $class->implements, $class->stmts, $newNode->getAttributes());
+        return new self($class->attrGroups, $newNode->args, $class->extends, $class->implements, $class->stmts, $newNode->getAttributes());
     }
     public function getType() : string
     {
@@ -47,6 +50,6 @@ class PrintableNewAnonClassNode extends \_PhpScoperfacc742d2745\PhpParser\Node\E
     }
     public function getSubNodeNames() : array
     {
-        return ['args', 'extends', 'implements', 'stmts'];
+        return ['attrGroups', 'args', 'extends', 'implements', 'stmts'];
     }
 }

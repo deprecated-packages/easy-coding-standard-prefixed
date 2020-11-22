@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\Nette\Utils;
+namespace _PhpScoperac4e86be08e5\Nette\Utils;
 
-use _PhpScoperfacc742d2745\Nette;
+use _PhpScoperac4e86be08e5\Nette;
 /**
  * Basic manipulation with images.
  *
@@ -58,23 +58,19 @@ use _PhpScoperfacc742d2745\Nette;
  * @method void flip(int $mode)
  * @method array ftText($size, $angle, $x, $y, $col, string $fontFile, string $text, array $extrainfo = null)
  * @method void gammaCorrect(float $inputgamma, float $outputgamma)
- * @method array getClip()
  * @method int interlace($interlace = null)
  * @method bool isTrueColor()
  * @method void layerEffect($effect)
  * @method void line($x1, $y1, $x2, $y2, $color)
- * @method void openPolygon(array $points, int $num_points, int $color)
  * @method void paletteCopy(Image $source)
  * @method void paletteToTrueColor()
  * @method void polygon(array $points, $numPoints, $color)
  * @method array psText(string $text, $font, $size, $color, $backgroundColor, $x, $y, $space = null, $tightness = null, float $angle = null, $antialiasSteps = null)
  * @method void rectangle($x1, $y1, $x2, $y2, $col)
- * @method mixed resolution(int $res_x = null, int $res_y = null)
  * @method Image rotate(float $angle, $backgroundColor)
  * @method void saveAlpha(bool $saveflag)
  * @method Image scale(int $newWidth, int $newHeight = -1, int $mode = IMG_BILINEAR_FIXED)
  * @method void setBrush(Image $brush)
- * @method void setClip(int $x1, int $y1, int $x2, int $y2)
  * @method void setPixel($x, $y, $color)
  * @method void setStyle(array $style)
  * @method void setThickness($thickness)
@@ -101,9 +97,10 @@ class Image
     /** {@link resize()} fills given area exactly */
     public const EXACT = 0b1000;
     /** image types */
-    public const JPEG = \IMAGETYPE_JPEG, PNG = \IMAGETYPE_PNG, GIF = \IMAGETYPE_GIF, WEBP = \IMAGETYPE_WEBP, BMP = \IMAGETYPE_BMP;
+    public const JPEG = \IMAGETYPE_JPEG, PNG = \IMAGETYPE_PNG, GIF = \IMAGETYPE_GIF, WEBP = 18;
+    // IMAGETYPE_WEBP is available as of PHP 7.1
     public const EMPTY_GIF = "GIF89a\1\0\1\0€\0\0\0\0\0\0\0\0!ù\4\1\0\0\0\0,\0\0\0\0\1\0\1\0\0\2\2D\1\0;";
-    private const FORMATS = [self::JPEG => 'jpeg', self::PNG => 'png', self::GIF => 'gif', self::WEBP => 'webp', self::BMP => 'bmp'];
+    private const FORMATS = [self::JPEG => 'jpeg', self::PNG => 'png', self::GIF => 'gif', self::WEBP => 'webp'];
     /** @var resource */
     private $image;
     /**
@@ -122,16 +119,16 @@ class Image
     public static function fromFile(string $file, int &$detectedFormat = null)
     {
         if (!\extension_loaded('gd')) {
-            throw new \_PhpScoperfacc742d2745\Nette\NotSupportedException('PHP extension GD is not loaded.');
+            throw new \_PhpScoperac4e86be08e5\Nette\NotSupportedException('PHP extension GD is not loaded.');
         }
         $detectedFormat = @\getimagesize($file)[2];
         // @ - files smaller than 12 bytes causes read error
         if (!isset(self::FORMATS[$detectedFormat])) {
             $detectedFormat = null;
-            throw new \_PhpScoperfacc742d2745\Nette\Utils\UnknownImageFileException(\is_file($file) ? "Unknown type of file '{$file}'." : "File '{$file}' not found.");
+            throw new \_PhpScoperac4e86be08e5\Nette\Utils\UnknownImageFileException(\is_file($file) ? "Unknown type of file '{$file}'." : "File '{$file}' not found.");
         }
-        return new static(\_PhpScoperfacc742d2745\Nette\Utils\Callback::invokeSafe('imagecreatefrom' . \image_type_to_extension($detectedFormat, \false), [$file], function (string $message) : void {
-            throw new \_PhpScoperfacc742d2745\Nette\Utils\ImageException($message);
+        return new static(\_PhpScoperac4e86be08e5\Nette\Utils\Callback::invokeSafe('imagecreatefrom' . \image_type_to_extension($detectedFormat, \false), [$file], function (string $message) : void {
+            throw new \_PhpScoperac4e86be08e5\Nette\Utils\ImageException($message);
         }));
     }
     /**
@@ -142,15 +139,15 @@ class Image
     public static function fromString(string $s, int &$detectedFormat = null)
     {
         if (!\extension_loaded('gd')) {
-            throw new \_PhpScoperfacc742d2745\Nette\NotSupportedException('PHP extension GD is not loaded.');
+            throw new \_PhpScoperac4e86be08e5\Nette\NotSupportedException('PHP extension GD is not loaded.');
         }
         if (\func_num_args() > 1) {
             $tmp = @\getimagesizefromstring($s)[2];
             // @ - strings smaller than 12 bytes causes read error
             $detectedFormat = isset(self::FORMATS[$tmp]) ? $tmp : null;
         }
-        return new static(\_PhpScoperfacc742d2745\Nette\Utils\Callback::invokeSafe('imagecreatefromstring', [$s], function (string $message) : void {
-            throw new \_PhpScoperfacc742d2745\Nette\Utils\ImageException($message);
+        return new static(\_PhpScoperac4e86be08e5\Nette\Utils\Callback::invokeSafe('imagecreatefromstring', [$s], function (string $message) : void {
+            throw new \_PhpScoperac4e86be08e5\Nette\Utils\ImageException($message);
         }));
     }
     /**
@@ -160,10 +157,10 @@ class Image
     public static function fromBlank(int $width, int $height, array $color = null)
     {
         if (!\extension_loaded('gd')) {
-            throw new \_PhpScoperfacc742d2745\Nette\NotSupportedException('PHP extension GD is not loaded.');
+            throw new \_PhpScoperac4e86be08e5\Nette\NotSupportedException('PHP extension GD is not loaded.');
         }
         if ($width < 1 || $height < 1) {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException('Image width and height must be greater than zero.');
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException('Image width and height must be greater than zero.');
         }
         $image = \imagecreatetruecolor($width, $height);
         if ($color) {
@@ -206,7 +203,7 @@ class Image
     protected function setImageResource($image)
     {
         if (!\is_resource($image) || \get_resource_type($image) !== 'gd') {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException('Image is not valid.');
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException('Image is not valid.');
         }
         $this->image = $image;
         return $this;
@@ -221,8 +218,8 @@ class Image
     }
     /**
      * Resizes image.
-     * @param  int|string|null  $width in pixels or percent
-     * @param  int|string|null  $height in pixels or percent
+     * @param  int|string  $width in pixels or percent
+     * @param  int|string  $height in pixels or percent
      * @return static
      */
     public function resize($width, $height, int $flags = self::FIT)
@@ -244,19 +241,19 @@ class Image
     }
     /**
      * Calculates dimensions of resized image.
-     * @param  int|string|null  $newWidth in pixels or percent
-     * @param  int|string|null  $newHeight in pixels or percent
+     * @param  int|string  $newWidth in pixels or percent
+     * @param  int|string  $newHeight in pixels or percent
      */
     public static function calculateSize(int $srcWidth, int $srcHeight, $newWidth, $newHeight, int $flags = self::FIT) : array
     {
         if (\is_string($newWidth) && \substr($newWidth, -1) === '%') {
-            $newWidth = (int) \round($srcWidth / 100 * \abs((int) \substr($newWidth, 0, -1)));
+            $newWidth = (int) \round($srcWidth / 100 * \abs(\substr($newWidth, 0, -1)));
             $percents = \true;
         } else {
             $newWidth = (int) \abs($newWidth);
         }
         if (\is_string($newHeight) && \substr($newHeight, -1) === '%') {
-            $newHeight = (int) \round($srcHeight / 100 * \abs((int) \substr($newHeight, 0, -1)));
+            $newHeight = (int) \round($srcHeight / 100 * \abs(\substr($newHeight, 0, -1)));
             $flags |= empty($percents) ? 0 : self::STRETCH;
         } else {
             $newHeight = (int) \abs($newHeight);
@@ -264,7 +261,7 @@ class Image
         if ($flags & self::STRETCH) {
             // non-proportional
             if (empty($newWidth) || empty($newHeight)) {
-                throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException('For stretching must be both width and height specified.');
+                throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException('For stretching must be both width and height specified.');
             }
             if ($flags & self::SHRINK_ONLY) {
                 $newWidth = (int) \round($srcWidth * \min(1, $newWidth / $srcWidth));
@@ -273,7 +270,7 @@ class Image
         } else {
             // proportional
             if (empty($newWidth) && empty($newHeight)) {
-                throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException('At least width or height must be specified.');
+                throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException('At least width or height must be specified.');
             }
             $scale = [];
             if ($newWidth > 0) {
@@ -308,7 +305,6 @@ class Image
     {
         [$r['x'], $r['y'], $r['width'], $r['height']] = static::calculateCutout($this->getWidth(), $this->getHeight(), $left, $top, $width, $height);
         $this->image = \imagecrop($this->image, $r);
-        \imagesavealpha($this->image, \true);
         return $this;
     }
     /**
@@ -321,16 +317,16 @@ class Image
     public static function calculateCutout(int $srcWidth, int $srcHeight, $left, $top, $newWidth, $newHeight) : array
     {
         if (\is_string($newWidth) && \substr($newWidth, -1) === '%') {
-            $newWidth = (int) \round($srcWidth / 100 * (int) \substr($newWidth, 0, -1));
+            $newWidth = (int) \round($srcWidth / 100 * \substr($newWidth, 0, -1));
         }
         if (\is_string($newHeight) && \substr($newHeight, -1) === '%') {
-            $newHeight = (int) \round($srcHeight / 100 * (int) \substr($newHeight, 0, -1));
+            $newHeight = (int) \round($srcHeight / 100 * \substr($newHeight, 0, -1));
         }
         if (\is_string($left) && \substr($left, -1) === '%') {
-            $left = (int) \round(($srcWidth - $newWidth) / 100 * (int) \substr($left, 0, -1));
+            $left = (int) \round(($srcWidth - $newWidth) / 100 * \substr($left, 0, -1));
         }
         if (\is_string($top) && \substr($top, -1) === '%') {
-            $top = (int) \round(($srcHeight - $newHeight) / 100 * (int) \substr($top, 0, -1));
+            $top = (int) \round(($srcHeight - $newHeight) / 100 * \substr($top, 0, -1));
         }
         if ($left < 0) {
             $newWidth += $left;
@@ -374,10 +370,10 @@ class Image
         $width = $image->getWidth();
         $height = $image->getHeight();
         if (\is_string($left) && \substr($left, -1) === '%') {
-            $left = (int) \round(($this->getWidth() - $width) / 100 * (int) \substr($left, 0, -1));
+            $left = (int) \round(($this->getWidth() - $width) / 100 * \substr($left, 0, -1));
         }
         if (\is_string($top) && \substr($top, -1) === '%') {
-            $top = (int) \round(($this->getHeight() - $height) / 100 * (int) \substr($top, 0, -1));
+            $top = (int) \round(($this->getHeight() - $height) / 100 * \substr($top, 0, -1));
         }
         $output = $input = $image->image;
         if ($opacity < 100) {
@@ -414,7 +410,7 @@ class Image
             $extensions = \array_flip(self::FORMATS) + ['jpg' => self::JPEG];
             $ext = \strtolower(\pathinfo($file, \PATHINFO_EXTENSION));
             if (!isset($extensions[$ext])) {
-                throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException("Unsupported file extension '{$ext}'.");
+                throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException("Unsupported file extension '{$ext}'.");
             }
             $type = $extensions[$ext];
         }
@@ -425,9 +421,10 @@ class Image
      */
     public function toString(int $type = self::JPEG, int $quality = null) : string
     {
-        return \_PhpScoperfacc742d2745\Nette\Utils\Helpers::capture(function () use($type, $quality) {
-            $this->output($type, $quality);
+        \ob_start(function () {
         });
+        $this->output($type, $quality);
+        return \ob_get_clean();
     }
     /**
      * Outputs image to string.
@@ -437,11 +434,10 @@ class Image
         try {
             return $this->toString();
         } catch (\Throwable $e) {
-            if (\func_num_args() || \PHP_VERSION_ID >= 70400) {
+            if (\func_num_args()) {
                 throw $e;
             }
             \trigger_error('Exception in ' . __METHOD__ . "(): {$e->getMessage()} in {$e->getFile()}:{$e->getLine()}", \E_USER_ERROR);
-            return '';
         }
     }
     /**
@@ -451,7 +447,7 @@ class Image
     public function send(int $type = self::JPEG, int $quality = null) : void
     {
         if (!isset(self::FORMATS[$type])) {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException("Unsupported image type '{$type}'.");
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException("Unsupported image type '{$type}'.");
         }
         \header('Content-Type: ' . \image_type_to_mime_type($type));
         $this->output($type, $quality);
@@ -465,32 +461,24 @@ class Image
         switch ($type) {
             case self::JPEG:
                 $quality = $quality === null ? 85 : \max(0, \min(100, $quality));
-                $success = @\imagejpeg($this->image, $file, $quality);
-                // @ is escalated to exception
+                $success = \imagejpeg($this->image, $file, $quality);
                 break;
             case self::PNG:
                 $quality = $quality === null ? 9 : \max(0, \min(9, $quality));
-                $success = @\imagepng($this->image, $file, $quality);
-                // @ is escalated to exception
+                $success = \imagepng($this->image, $file, $quality);
                 break;
             case self::GIF:
-                $success = @\imagegif($this->image, $file);
-                // @ is escalated to exception
+                $success = \imagegif($this->image, $file);
                 break;
             case self::WEBP:
                 $quality = $quality === null ? 80 : \max(0, \min(100, $quality));
-                $success = @\imagewebp($this->image, $file, $quality);
-                // @ is escalated to exception
-                break;
-            case self::BMP:
-                $success = @\imagebmp($this->image, $file);
-                // @ is escalated to exception
+                $success = \imagewebp($this->image, $file, $quality);
                 break;
             default:
-                throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException("Unsupported image type '{$type}'.");
+                throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException("Unsupported image type '{$type}'.");
         }
         if (!$success) {
-            throw new \_PhpScoperfacc742d2745\Nette\Utils\ImageException(\_PhpScoperfacc742d2745\Nette\Utils\Helpers::getLastError() ?: 'Unknown error');
+            throw new \_PhpScoperac4e86be08e5\Nette\Utils\ImageException(\error_get_last()['message']);
         }
     }
     /**
@@ -502,7 +490,7 @@ class Image
     {
         $function = 'image' . $name;
         if (!\function_exists($function)) {
-            \_PhpScoperfacc742d2745\Nette\Utils\ObjectHelpers::strictCall(\get_class($this), $name);
+            \_PhpScoperac4e86be08e5\Nette\Utils\ObjectHelpers::strictCall(\get_class($this), $name);
         }
         foreach ($args as $key => $value) {
             if ($value instanceof self) {
@@ -525,8 +513,8 @@ class Image
     /**
      * Prevents serialization.
      */
-    public function __sleep() : array
+    public function __sleep()
     {
-        throw new \_PhpScoperfacc742d2745\Nette\NotSupportedException('You cannot serialize or unserialize ' . self::class . ' instances.');
+        throw new \_PhpScoperac4e86be08e5\Nette\NotSupportedException('You cannot serialize or unserialize ' . self::class . ' instances.');
     }
 }

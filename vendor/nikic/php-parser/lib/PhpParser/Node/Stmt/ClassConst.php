@@ -1,31 +1,35 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\PhpParser\Node\Stmt;
+namespace _PhpScoperac4e86be08e5\PhpParser\Node\Stmt;
 
-use _PhpScoperfacc742d2745\PhpParser\Node;
-class ClassConst extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
+use _PhpScoperac4e86be08e5\PhpParser\Node;
+class ClassConst extends \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt
 {
     /** @var int Modifiers */
     public $flags;
     /** @var Node\Const_[] Constant declarations */
     public $consts;
+    /** @var Node\AttributeGroup[] */
+    public $attrGroups;
     /**
      * Constructs a class const list node.
      *
-     * @param Node\Const_[] $consts     Constant declarations
-     * @param int           $flags      Modifiers
-     * @param array         $attributes Additional attributes
+     * @param Node\Const_[]         $consts     Constant declarations
+     * @param int                   $flags      Modifiers
+     * @param array                 $attributes Additional attributes
+     * @param Node\AttributeGroup[] $attrGroups PHP attribute groups
      */
-    public function __construct(array $consts, int $flags = 0, array $attributes = [])
+    public function __construct(array $consts, int $flags = 0, array $attributes = [], array $attrGroups = [])
     {
         $this->attributes = $attributes;
         $this->flags = $flags;
         $this->consts = $consts;
+        $this->attrGroups = $attrGroups;
     }
     public function getSubNodeNames() : array
     {
-        return ['flags', 'consts'];
+        return ['attrGroups', 'flags', 'consts'];
     }
     /**
      * Whether constant is explicitly or implicitly public.
@@ -34,7 +38,7 @@ class ClassConst extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
      */
     public function isPublic() : bool
     {
-        return ($this->flags & \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
+        return ($this->flags & \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
     }
     /**
      * Whether constant is protected.
@@ -43,7 +47,7 @@ class ClassConst extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
      */
     public function isProtected() : bool
     {
-        return (bool) ($this->flags & \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        return (bool) ($this->flags & \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
     }
     /**
      * Whether constant is private.
@@ -52,7 +56,7 @@ class ClassConst extends \_PhpScoperfacc742d2745\PhpParser\Node\Stmt
      */
     public function isPrivate() : bool
     {
-        return (bool) ($this->flags & \_PhpScoperfacc742d2745\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        return (bool) ($this->flags & \_PhpScoperac4e86be08e5\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
     }
     public function getType() : string
     {

@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\Nette\Utils;
+namespace _PhpScoperac4e86be08e5\Nette\Utils;
 
-use _PhpScoperfacc742d2745\Nette;
-use _PhpScoperfacc742d2745\Nette\MemberAccessException;
+use _PhpScoperac4e86be08e5\Nette;
+use _PhpScoperac4e86be08e5\Nette\MemberAccessException;
 /**
  * Nette\SmartObject helpers.
  */
@@ -24,7 +24,7 @@ final class ObjectHelpers
         $hint = self::getSuggestion(\array_merge(\array_filter($rc->getProperties(\ReflectionProperty::IS_PUBLIC), function ($p) {
             return !$p->isStatic();
         }), self::parseFullDoc($rc, '~^[ \\t*]*@property(?:-read)?[ \\t]+(?:\\S+[ \\t]+)??\\$(\\w+)~m')), $name);
-        throw new \_PhpScoperfacc742d2745\Nette\MemberAccessException("Cannot read an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
+        throw new \_PhpScoperac4e86be08e5\Nette\MemberAccessException("Cannot read an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
     }
     /**
      * @throws MemberAccessException
@@ -35,7 +35,7 @@ final class ObjectHelpers
         $hint = self::getSuggestion(\array_merge(\array_filter($rc->getProperties(\ReflectionProperty::IS_PUBLIC), function ($p) {
             return !$p->isStatic();
         }), self::parseFullDoc($rc, '~^[ \\t*]*@property(?:-write)?[ \\t]+(?:\\S+[ \\t]+)??\\$(\\w+)~m')), $name);
-        throw new \_PhpScoperfacc742d2745\Nette\MemberAccessException("Cannot write to an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
+        throw new \_PhpScoperac4e86be08e5\Nette\MemberAccessException("Cannot write to an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
     }
     /**
      * @throws MemberAccessException
@@ -47,7 +47,7 @@ final class ObjectHelpers
             // called parent::$method()
             $class = 'parent';
         }
-        throw new \_PhpScoperfacc742d2745\Nette\MemberAccessException("Call to undefined method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
+        throw new \_PhpScoperac4e86be08e5\Nette\MemberAccessException("Call to undefined method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
     }
     /**
      * @throws MemberAccessException
@@ -57,7 +57,7 @@ final class ObjectHelpers
         $hint = self::getSuggestion(\array_filter((new \ReflectionClass($class))->getMethods(\ReflectionMethod::IS_PUBLIC), function ($m) {
             return $m->isStatic();
         }), $method);
-        throw new \_PhpScoperfacc742d2745\Nette\MemberAccessException("Call to undefined static method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
+        throw new \_PhpScoperac4e86be08e5\Nette\MemberAccessException("Call to undefined static method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
     }
     /**
      * Returns array of magic properties defined by annotation @property.
@@ -97,12 +97,12 @@ final class ObjectHelpers
      */
     public static function getSuggestion(array $possibilities, string $value) : ?string
     {
-        $norm = \preg_replace($re = '#^(get|set|has|is|add)(?=[A-Z])#', '+', $value);
+        $norm = \preg_replace($re = '#^(get|set|has|is|add)(?=[A-Z])#', '', $value);
         $best = null;
         $min = (\strlen($value) / 4 + 1) * 10 + 0.1;
         foreach (\array_unique($possibilities, \SORT_REGULAR) as $item) {
             $item = $item instanceof \Reflector ? $item->getName() : $item;
-            if ($item !== $value && (($len = \levenshtein($item, $value, 10, 11, 10)) < $min || ($len = \levenshtein(\preg_replace($re, '*', $item), $norm, 10, 11, 10)) < $min)) {
+            if ($item !== $value && (($len = \levenshtein($item, $value, 10, 11, 10)) < $min || ($len = \levenshtein(\preg_replace($re, '', $item), $norm, 10, 11, 10) + 20) < $min)) {
                 $min = $len;
                 $best = $item;
             }

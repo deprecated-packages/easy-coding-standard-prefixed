@@ -5,31 +5,27 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperfacc742d2745\Nette\Utils;
+namespace _PhpScoperac4e86be08e5\Nette\Utils;
 
-use _PhpScoperfacc742d2745\Nette;
+use _PhpScoperac4e86be08e5\Nette;
 /**
  * PHP reflection helpers.
  */
 final class Reflection
 {
     use Nette\StaticClass;
-    private const BUILTIN_TYPES = ['string' => 1, 'int' => 1, 'float' => 1, 'bool' => 1, 'array' => 1, 'object' => 1, 'callable' => 1, 'iterable' => 1, 'void' => 1, 'null' => 1];
+    private const BUILTIN_TYPES = ['string' => 1, 'int' => 1, 'float' => 1, 'bool' => 1, 'array' => 1, 'object' => 1, 'callable' => 1, 'iterable' => 1, 'void' => 1];
     public static function isBuiltinType(string $type) : bool
     {
         return isset(self::BUILTIN_TYPES[\strtolower($type)]);
     }
     public static function getReturnType(\ReflectionFunctionAbstract $func) : ?string
     {
-        return $func->hasReturnType() ? self::normalizeType($func->getReturnType()->getName(), $func) : null;
+        return $func->hasReturnType() ? self::normalizeType((string) $func->getReturnType(), $func) : null;
     }
     public static function getParameterType(\ReflectionParameter $param) : ?string
     {
-        return $param->hasType() ? self::normalizeType($param->getType()->getName(), $param) : null;
-    }
-    public static function getPropertyType(\ReflectionProperty $prop) : ?string
-    {
-        return \PHP_VERSION_ID >= 70400 && $prop->hasType() ? self::normalizeType($prop->getType()->getName(), $prop) : null;
+        return $param->hasType() ? self::normalizeType((string) $param->getType(), $param) : null;
     }
     private static function normalizeType(string $type, $reflection) : string
     {
@@ -106,7 +102,7 @@ final class Reflection
         } elseif ($ref instanceof \ReflectionParameter) {
             return '$' . $ref->getName() . ' in ' . self::toString($ref->getDeclaringFunction()) . '()';
         } else {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException();
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException();
         }
     }
     /**
@@ -117,7 +113,7 @@ final class Reflection
     {
         $lower = \strtolower($name);
         if (empty($name)) {
-            throw new \_PhpScoperfacc742d2745\Nette\InvalidArgumentException('Class name must not be empty.');
+            throw new \_PhpScoperac4e86be08e5\Nette\InvalidArgumentException('Class name must not be empty.');
         } elseif (isset(self::BUILTIN_TYPES[$lower])) {
             return $lower;
         } elseif ($lower === 'self') {
@@ -142,9 +138,6 @@ final class Reflection
      */
     public static function getUseStatements(\ReflectionClass $class) : array
     {
-        if ($class->isAnonymous()) {
-            throw new \_PhpScoperfacc742d2745\Nette\NotImplementedException('Anonymous classes are not supported.');
-        }
         static $cache = [];
         if (!isset($cache[$name = $class->getName()])) {
             if ($class->isInternal()) {
