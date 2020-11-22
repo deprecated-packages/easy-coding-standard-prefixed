@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScoper16399a42e87c\Nette\Utils\Strings;
+use _PhpScoper21fff473f90a\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -62,9 +62,9 @@ final class RemoveUselessClassCommentFixer extends \Symplify\CodingStandard\Fixe
                 continue;
             }
             $originalDocContent = $token->getContent();
-            $cleanedDocContent = \_PhpScoper16399a42e87c\Nette\Utils\Strings::replace($originalDocContent, self::COMMENT_CLASS_REGEX, '');
-            $cleanedDocContent = \_PhpScoper16399a42e87c\Nette\Utils\Strings::replace($cleanedDocContent, self::COMMENT_CONSTRUCTOR_CLASS_REGEX, '');
-            $cleanedDocContent = \_PhpScoper16399a42e87c\Nette\Utils\Strings::replace($cleanedDocContent, self::COMMENT_METHOD_CLASS_REGEX, '');
+            $cleanedDocContent = \_PhpScoper21fff473f90a\Nette\Utils\Strings::replace($originalDocContent, self::COMMENT_CLASS_REGEX, '');
+            $cleanedDocContent = \_PhpScoper21fff473f90a\Nette\Utils\Strings::replace($cleanedDocContent, self::COMMENT_CONSTRUCTOR_CLASS_REGEX, '');
+            $cleanedDocContent = \_PhpScoper21fff473f90a\Nette\Utils\Strings::replace($cleanedDocContent, self::COMMENT_METHOD_CLASS_REGEX, '');
             $cleanedDocContent = $this->cleanClassMethodCommentMimicMethodName($cleanedDocContent, $reverseTokens, $index);
             if ($cleanedDocContent !== '') {
                 continue;
@@ -124,11 +124,11 @@ CODE_SAMPLE
     }
     private function cleanClassMethodCommentMimicMethodName(string $cleanedDocContent, array $reverseTokens, int $index) : string
     {
-        $matchMethodClass = \_PhpScoper16399a42e87c\Nette\Utils\Strings::match($cleanedDocContent, self::COMMENT_METHOD_CLASS_REGEX);
+        $matchMethodClass = \_PhpScoper21fff473f90a\Nette\Utils\Strings::match($cleanedDocContent, self::COMMENT_METHOD_CLASS_REGEX);
         if (!$matchMethodClass && $this->isNextFunction($reverseTokens, $index)) {
-            $matchAnyMethodClass = \_PhpScoper16399a42e87c\Nette\Utils\Strings::match($cleanedDocContent, self::COMMENT_ANY_METHOD_CLASS_REGEX);
-            if ($matchAnyMethodClass && \strtolower(\_PhpScoper16399a42e87c\Nette\Utils\Strings::replace($matchAnyMethodClass[3], self::SPACE_STAR_SLASH_REGEX, '')) === \strtolower($reverseTokens[$index + 6]->getContent())) {
-                return \_PhpScoper16399a42e87c\Nette\Utils\Strings::replace($cleanedDocContent, self::COMMENT_ANY_METHOD_CLASS_REGEX, '');
+            $matchAnyMethodClass = \_PhpScoper21fff473f90a\Nette\Utils\Strings::match($cleanedDocContent, self::COMMENT_ANY_METHOD_CLASS_REGEX);
+            if ($matchAnyMethodClass && \strtolower(\_PhpScoper21fff473f90a\Nette\Utils\Strings::replace($matchAnyMethodClass[3], self::SPACE_STAR_SLASH_REGEX, '')) === \strtolower($reverseTokens[$index + 6]->getContent())) {
+                return \_PhpScoper21fff473f90a\Nette\Utils\Strings::replace($cleanedDocContent, self::COMMENT_ANY_METHOD_CLASS_REGEX, '');
             }
         }
         return $cleanedDocContent;
