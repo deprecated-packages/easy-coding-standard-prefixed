@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper66292c14b658\PhpParser\Node\Expr\AssignOp;
+namespace _PhpScoperbc5235eb86f3\PhpParser\Node\Expr\AssignOp;
 
-use _PhpScoper66292c14b658\PhpParser\Node\Expr\AssignOp;
-class Coalesce extends \_PhpScoper66292c14b658\PhpParser\Node\Expr\AssignOp
+use _PhpScoperbc5235eb86f3\PhpParser\Node\Expr\AssignOp;
+class Coalesce extends \_PhpScoperbc5235eb86f3\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {

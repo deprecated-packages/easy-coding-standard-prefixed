@@ -9,12 +9,12 @@ use SlevomatCodingStandard\Helpers\ScopeHelper;
 use SlevomatCodingStandard\Helpers\SniffSettingsHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function count;
-use const _PhpScoper66292c14b658\T_BITWISE_AND;
-use const _PhpScoper66292c14b658\T_CLOSE_PARENTHESIS;
-use const _PhpScoper66292c14b658\T_CLOSURE;
-use const _PhpScoper66292c14b658\T_FN;
+use const _PhpScoperbc5235eb86f3\T_BITWISE_AND;
+use const _PhpScoperbc5235eb86f3\T_CLOSE_PARENTHESIS;
+use const _PhpScoperbc5235eb86f3\T_CLOSURE;
+use const _PhpScoperbc5235eb86f3\T_FN;
 use const T_RETURN;
-use const _PhpScoper66292c14b658\T_SEMICOLON;
+use const _PhpScoperbc5235eb86f3\T_SEMICOLON;
 use const T_USE;
 use const T_WHITESPACE;
 class RequireArrowFunctionSniff implements \PHP_CodeSniffer\Sniffs\Sniff

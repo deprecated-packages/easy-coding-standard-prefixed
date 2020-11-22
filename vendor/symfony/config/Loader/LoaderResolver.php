@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper66292c14b658\Symfony\Component\Config\Loader;
+namespace _PhpScoperbc5235eb86f3\Symfony\Component\Config\Loader;
 
 /**
  * LoaderResolver selects a loader for a given resource.
@@ -18,7 +18,7 @@ namespace _PhpScoper66292c14b658\Symfony\Component\Config\Loader;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class LoaderResolver implements \_PhpScoper66292c14b658\Symfony\Component\Config\Loader\LoaderResolverInterface
+class LoaderResolver implements \_PhpScoperbc5235eb86f3\Symfony\Component\Config\Loader\LoaderResolverInterface
 {
     /**
      * @var LoaderInterface[] An array of LoaderInterface objects
@@ -45,7 +45,7 @@ class LoaderResolver implements \_PhpScoper66292c14b658\Symfony\Component\Config
         }
         return \false;
     }
-    public function addLoader(\_PhpScoper66292c14b658\Symfony\Component\Config\Loader\LoaderInterface $loader)
+    public function addLoader(\_PhpScoperbc5235eb86f3\Symfony\Component\Config\Loader\LoaderInterface $loader)
     {
         $this->loaders[] = $loader;
         $loader->setResolver($this);
