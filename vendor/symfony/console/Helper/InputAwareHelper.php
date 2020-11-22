@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera88a8b9f064a\Symfony\Component\Console\Helper;
+namespace _PhpScoper16399a42e87c\Symfony\Component\Console\Helper;
 
-use _PhpScopera88a8b9f064a\Symfony\Component\Console\Input\InputAwareInterface;
-use _PhpScopera88a8b9f064a\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper16399a42e87c\Symfony\Component\Console\Input\InputAwareInterface;
+use _PhpScoper16399a42e87c\Symfony\Component\Console\Input\InputInterface;
 /**
  * An implementation of InputAwareInterface for Helpers.
  *
  * @author Wouter J <waldio.webdesign@gmail.com>
  */
-abstract class InputAwareHelper extends \_PhpScopera88a8b9f064a\Symfony\Component\Console\Helper\Helper implements \_PhpScopera88a8b9f064a\Symfony\Component\Console\Input\InputAwareInterface
+abstract class InputAwareHelper extends \_PhpScoper16399a42e87c\Symfony\Component\Console\Helper\Helper implements \_PhpScoper16399a42e87c\Symfony\Component\Console\Input\InputAwareInterface
 {
     protected $input;
     /**
      * {@inheritdoc}
      */
-    public function setInput(\_PhpScopera88a8b9f064a\Symfony\Component\Console\Input\InputInterface $input)
+    public function setInput(\_PhpScoper16399a42e87c\Symfony\Component\Console\Input\InputInterface $input)
     {
         $this->input = $input;
     }

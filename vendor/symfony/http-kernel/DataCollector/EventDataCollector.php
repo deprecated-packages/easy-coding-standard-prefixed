@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera88a8b9f064a\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper16399a42e87c\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScopera88a8b9f064a\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
-use _PhpScopera88a8b9f064a\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcherInterface;
-use _PhpScopera88a8b9f064a\Symfony\Component\HttpFoundation\Request;
-use _PhpScopera88a8b9f064a\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopera88a8b9f064a\Symfony\Component\HttpFoundation\Response;
-use _PhpScopera88a8b9f064a\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use _PhpScopera88a8b9f064a\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper16399a42e87c\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
+use _PhpScoper16399a42e87c\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcherInterface;
+use _PhpScoper16399a42e87c\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper16399a42e87c\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper16399a42e87c\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper16399a42e87c\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper16399a42e87c\Symfony\Contracts\Service\ResetInterface;
 /**
  * EventDataCollector.
  *
@@ -24,12 +24,12 @@ use _PhpScopera88a8b9f064a\Symfony\Contracts\Service\ResetInterface;
  *
  * @final since Symfony 4.4
  */
-class EventDataCollector extends \_PhpScopera88a8b9f064a\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScopera88a8b9f064a\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class EventDataCollector extends \_PhpScoper16399a42e87c\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper16399a42e87c\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     protected $dispatcher;
     private $requestStack;
     private $currentRequest;
-    public function __construct(\_PhpScopera88a8b9f064a\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher = null, \_PhpScopera88a8b9f064a\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
+    public function __construct(\_PhpScoper16399a42e87c\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher = null, \_PhpScoper16399a42e87c\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
     {
         $this->dispatcher = $dispatcher;
         $this->requestStack = $requestStack;
@@ -39,7 +39,7 @@ class EventDataCollector extends \_PhpScopera88a8b9f064a\Symfony\Component\HttpK
      *
      * @param \Throwable|null $exception
      */
-    public function collect(\_PhpScopera88a8b9f064a\Symfony\Component\HttpFoundation\Request $request, \_PhpScopera88a8b9f064a\Symfony\Component\HttpFoundation\Response $response)
+    public function collect(\_PhpScoper16399a42e87c\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper16399a42e87c\Symfony\Component\HttpFoundation\Response $response)
     {
         $this->currentRequest = $this->requestStack && $this->requestStack->getMasterRequest() !== $request ? $request : null;
         $this->data = ['called_listeners' => [], 'not_called_listeners' => [], 'orphaned_events' => []];
@@ -47,17 +47,17 @@ class EventDataCollector extends \_PhpScopera88a8b9f064a\Symfony\Component\HttpK
     public function reset()
     {
         $this->data = [];
-        if ($this->dispatcher instanceof \_PhpScopera88a8b9f064a\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->dispatcher instanceof \_PhpScoper16399a42e87c\Symfony\Contracts\Service\ResetInterface) {
             $this->dispatcher->reset();
         }
     }
     public function lateCollect()
     {
-        if ($this->dispatcher instanceof \_PhpScopera88a8b9f064a\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcherInterface) {
+        if ($this->dispatcher instanceof \_PhpScoper16399a42e87c\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcherInterface) {
             $this->setCalledListeners($this->dispatcher->getCalledListeners($this->currentRequest));
             $this->setNotCalledListeners($this->dispatcher->getNotCalledListeners($this->currentRequest));
         }
-        if ($this->dispatcher instanceof \_PhpScopera88a8b9f064a\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher) {
+        if ($this->dispatcher instanceof \_PhpScoper16399a42e87c\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher) {
             $this->setOrphanedEvents($this->dispatcher->getOrphanedEvents($this->currentRequest));
         }
         $this->data = $this->cloneVar($this->data);

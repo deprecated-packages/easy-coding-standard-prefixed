@@ -9,9 +9,9 @@ use SlevomatCodingStandard\Helpers\SniffSettingsHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function sprintf;
 use function str_repeat;
-use const _PhpScopera88a8b9f064a\T_COMMA;
-use const _PhpScopera88a8b9f064a\T_OPEN_PARENTHESIS;
-use const _PhpScopera88a8b9f064a\T_OPEN_SHORT_ARRAY;
+use const _PhpScoper16399a42e87c\T_COMMA;
+use const _PhpScoper16399a42e87c\T_OPEN_PARENTHESIS;
+use const _PhpScoper16399a42e87c\T_OPEN_SHORT_ARRAY;
 use const T_WHITESPACE;
 class SingleLineArrayWhitespaceSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

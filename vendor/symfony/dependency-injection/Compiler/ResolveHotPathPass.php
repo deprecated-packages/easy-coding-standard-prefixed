@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\Reference;
 /**
  * Propagate "container.hot_path" tags to referenced services.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveHotPathPass extends \_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveHotPathPass extends \_PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $tagName;
     private $resolvedIds = [];
@@ -30,7 +30,7 @@ class ResolveHotPathPass extends \_PhpScopera88a8b9f064a\Symfony\Component\Depen
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         try {
             parent::process($container);
@@ -44,13 +44,13 @@ class ResolveHotPathPass extends \_PhpScopera88a8b9f064a\Symfony\Component\Depen
      */
     protected function processValue($value, $isRoot = \false)
     {
-        if ($value instanceof \_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
+        if ($value instanceof \_PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
             return $value;
         }
-        if ($value instanceof \_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Definition && $isRoot && (isset($this->resolvedIds[$this->currentId]) || !$value->hasTag($this->tagName) || $value->isDeprecated())) {
+        if ($value instanceof \_PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\Definition && $isRoot && (isset($this->resolvedIds[$this->currentId]) || !$value->hasTag($this->tagName) || $value->isDeprecated())) {
             return $value->isDeprecated() ? $value->clearTag($this->tagName) : $value;
         }
-        if ($value instanceof \_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\Reference && \_PhpScopera88a8b9f064a\Symfony\Component\DependencyInjection\ContainerBuilder::IGNORE_ON_UNINITIALIZED_REFERENCE !== $value->getInvalidBehavior() && $this->container->has($id = (string) $value)) {
+        if ($value instanceof \_PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\Reference && \_PhpScoper16399a42e87c\Symfony\Component\DependencyInjection\ContainerBuilder::IGNORE_ON_UNINITIALIZED_REFERENCE !== $value->getInvalidBehavior() && $this->container->has($id = (string) $value)) {
             $definition = $this->container->findDefinition($id);
             if (!$definition->hasTag($this->tagName) && !$definition->isDeprecated()) {
                 $this->resolvedIds[$id] = \true;
