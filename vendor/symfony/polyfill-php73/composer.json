@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperbc5235eb86f3\\Symfony\\Polyfill\\Php73\\": ""
+            "_PhpScoper6db4fde00cda\\Symfony\\Polyfill\\Php73\\": ""
         },
         "files": [
             "bootstrap.php"
