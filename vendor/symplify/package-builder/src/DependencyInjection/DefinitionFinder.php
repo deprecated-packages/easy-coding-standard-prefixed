@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\DependencyInjection;
 
-use _PhpScoper59558822d8c7\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper59558822d8c7\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperd4c5032f0671\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperd4c5032f0671\Symfony\Component\DependencyInjection\Definition;
 use Symplify\PackageBuilder\Exception\DependencyInjection\DefinitionForTypeNotFoundException;
 use Throwable;
 /**
@@ -15,7 +15,7 @@ final class DefinitionFinder
     /**
      * @return Definition[]
      */
-    public function findAllByType(\_PhpScoper59558822d8c7\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : array
+    public function findAllByType(\_PhpScoperd4c5032f0671\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : array
     {
         $definitions = [];
         $containerBuilderDefinitions = $containerBuilder->getDefinitions();
@@ -30,7 +30,7 @@ final class DefinitionFinder
         }
         return $definitions;
     }
-    public function getByType(\_PhpScoper59558822d8c7\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : \_PhpScoper59558822d8c7\Symfony\Component\DependencyInjection\Definition
+    public function getByType(\_PhpScoperd4c5032f0671\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : \_PhpScoperd4c5032f0671\Symfony\Component\DependencyInjection\Definition
     {
         $definition = self::getByTypeIfExists($containerBuilder, $type);
         if ($definition !== null) {
@@ -38,7 +38,7 @@ final class DefinitionFinder
         }
         throw new \Symplify\PackageBuilder\Exception\DependencyInjection\DefinitionForTypeNotFoundException(\sprintf('Definition for type "%s" was not found.', $type));
     }
-    public function getByTypeIfExists(\_PhpScoper59558822d8c7\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : ?\_PhpScoper59558822d8c7\Symfony\Component\DependencyInjection\Definition
+    public function getByTypeIfExists(\_PhpScoperd4c5032f0671\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, string $type) : ?\_PhpScoperd4c5032f0671\Symfony\Component\DependencyInjection\Definition
     {
         $containerBuilderDefinitions = $containerBuilder->getDefinitions();
         foreach ($containerBuilderDefinitions as $name => $definition) {

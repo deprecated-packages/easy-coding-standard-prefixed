@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper59558822d8c7\Symfony\Component\DependencyInjection\Exception;
+namespace _PhpScoperd4c5032f0671\Symfony\Component\DependencyInjection\Exception;
 
-use _PhpScoper59558822d8c7\Psr\Container\NotFoundExceptionInterface;
+use _PhpScoperd4c5032f0671\Psr\Container\NotFoundExceptionInterface;
 /**
  * This exception is thrown when a non-existent parameter is used.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterNotFoundException extends \_PhpScoper59558822d8c7\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \_PhpScoper59558822d8c7\Psr\Container\NotFoundExceptionInterface
+class ParameterNotFoundException extends \_PhpScoperd4c5032f0671\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException implements \_PhpScoperd4c5032f0671\Psr\Container\NotFoundExceptionInterface
 {
     private $key;
     private $sourceId;

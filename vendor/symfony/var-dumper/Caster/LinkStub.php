@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper59558822d8c7\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoperd4c5032f0671\Symfony\Component\VarDumper\Caster;
 
 /**
  * Represents a file or a URL.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class LinkStub extends \_PhpScoper59558822d8c7\Symfony\Component\VarDumper\Caster\ConstStub
+class LinkStub extends \_PhpScoperd4c5032f0671\Symfony\Component\VarDumper\Caster\ConstStub
 {
     public $inVendor = \false;
     private static $vendorRoots;
