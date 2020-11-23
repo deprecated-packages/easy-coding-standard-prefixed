@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoperd4c5032f0671\Nette\Utils\Strings;
+use _PhpScopere341acab57d4\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\Tokenizer\Tokens;
 final class SuperfluousReturnNameMalformWorker extends \Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker\AbstractMalformWorker
@@ -27,11 +27,11 @@ final class SuperfluousReturnNameMalformWorker extends \Symplify\CodingStandard\
         $docBlock = new \PhpCsFixer\DocBlock\DocBlock($docContent);
         $lines = $docBlock->getLines();
         foreach ($lines as $line) {
-            $match = \_PhpScoperd4c5032f0671\Nette\Utils\Strings::match($line->getContent(), self::RETURN_VARIABLE_NAME_REGEX);
+            $match = \_PhpScopere341acab57d4\Nette\Utils\Strings::match($line->getContent(), self::RETURN_VARIABLE_NAME_REGEX);
             if ($this->shouldSkip($match, $line->getContent())) {
                 continue;
             }
-            $newLineContent = \_PhpScoperd4c5032f0671\Nette\Utils\Strings::replace($line->getContent(), self::RETURN_VARIABLE_NAME_REGEX, function (array $match) {
+            $newLineContent = \_PhpScopere341acab57d4\Nette\Utils\Strings::replace($line->getContent(), self::RETURN_VARIABLE_NAME_REGEX, function (array $match) {
                 $replacement = $match[1];
                 if ($match['type'] !== []) {
                     $replacement .= $match['type'];
@@ -54,6 +54,6 @@ final class SuperfluousReturnNameMalformWorker extends \Symplify\CodingStandard\
             return \true;
         }
         // has multiple return values? "@return array $one, $two"
-        return \count(\_PhpScoperd4c5032f0671\Nette\Utils\Strings::matchAll($content, self::VARIABLE_NAME_REGEX)) >= 2;
+        return \count(\_PhpScopere341acab57d4\Nette\Utils\Strings::matchAll($content, self::VARIABLE_NAME_REGEX)) >= 2;
     }
 }

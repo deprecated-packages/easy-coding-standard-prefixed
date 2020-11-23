@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd4c5032f0671\Symfony\Component\Mime\Part\Multipart;
+namespace _PhpScopere341acab57d4\Symfony\Component\Mime\Part\Multipart;
 
-use _PhpScoperd4c5032f0671\Symfony\Component\Mime\Part\AbstractMultipartPart;
-use _PhpScoperd4c5032f0671\Symfony\Component\Mime\Part\AbstractPart;
+use _PhpScopere341acab57d4\Symfony\Component\Mime\Part\AbstractMultipartPart;
+use _PhpScopere341acab57d4\Symfony\Component\Mime\Part\AbstractPart;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @experimental in 4.3
  */
-final class RelatedPart extends \_PhpScoperd4c5032f0671\Symfony\Component\Mime\Part\AbstractMultipartPart
+final class RelatedPart extends \_PhpScopere341acab57d4\Symfony\Component\Mime\Part\AbstractMultipartPart
 {
     private $mainPart;
-    public function __construct(\_PhpScoperd4c5032f0671\Symfony\Component\Mime\Part\AbstractPart $mainPart, \_PhpScoperd4c5032f0671\Symfony\Component\Mime\Part\AbstractPart $part, \_PhpScoperd4c5032f0671\Symfony\Component\Mime\Part\AbstractPart ...$parts)
+    public function __construct(\_PhpScopere341acab57d4\Symfony\Component\Mime\Part\AbstractPart $mainPart, \_PhpScopere341acab57d4\Symfony\Component\Mime\Part\AbstractPart $part, \_PhpScopere341acab57d4\Symfony\Component\Mime\Part\AbstractPart ...$parts)
     {
         $this->mainPart = $mainPart;
         $this->prepareParts($part, ...$parts);
@@ -38,7 +38,7 @@ final class RelatedPart extends \_PhpScoperd4c5032f0671\Symfony\Component\Mime\P
     {
         return \bin2hex(\random_bytes(16)) . '@symfony';
     }
-    private function prepareParts(\_PhpScoperd4c5032f0671\Symfony\Component\Mime\Part\AbstractPart ...$parts) : void
+    private function prepareParts(\_PhpScopere341acab57d4\Symfony\Component\Mime\Part\AbstractPart ...$parts) : void
     {
         foreach ($parts as $part) {
             if (!$part->getHeaders()->has('Content-ID')) {

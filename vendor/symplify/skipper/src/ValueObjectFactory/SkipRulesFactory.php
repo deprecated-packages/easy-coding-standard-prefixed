@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\ValueObjectFactory;
 
-use _PhpScoperd4c5032f0671\Nette\Utils\Strings;
+use _PhpScopere341acab57d4\Nette\Utils\Strings;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\Skipper\ValueObject\Option;
 use Symplify\Skipper\ValueObject\SkipRules;
@@ -50,7 +50,7 @@ final class SkipRulesFactory
             $this->skippedClasses[$key] = $value;
             return;
         }
-        $class = (string) \_PhpScoperd4c5032f0671\Nette\Utils\Strings::before($key, '.');
+        $class = (string) \_PhpScopere341acab57d4\Nette\Utils\Strings::before($key, '.');
         if (\class_exists($class)) {
             $this->skippedCodes[$key] = $value;
             return;
