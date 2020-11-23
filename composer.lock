@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0240d5430e1e6d7479ae5c8e73f56bb",
+    "content-hash": "59420dfd045139ffdb5b86c84dbc88bb",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -3265,7 +3265,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "af6286ad44006d7d8845629cdd8cea169a4e3ff0"
+                "reference": "2547074b667748b9462e217f71780a98e40b7b7e"
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.16",
@@ -3281,7 +3281,7 @@
             },
             "require-dev": {
                 "doctrine/orm": "^2.7",
-                "nette/application": "^3.0",
+                "nette/application": "^3.0.7",
                 "nette/bootstrap": "^3.0",
                 "phpunit/phpunit": "^8.5|^9.4",
                 "symfony/framework-bundle": "^4.4|^5.1",

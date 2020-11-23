@@ -20,18 +20,18 @@ use PhpCsFixer\Console\SelfUpdate\GithubClient;
 use PhpCsFixer\Console\SelfUpdate\NewVersionChecker;
 use PhpCsFixer\PharChecker;
 use PhpCsFixer\ToolInfo;
-use _PhpScoper7b8580219c59\Symfony\Component\Console\Application as BaseApplication;
-use _PhpScoper7b8580219c59\Symfony\Component\Console\Command\ListCommand;
-use _PhpScoper7b8580219c59\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper7b8580219c59\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoper7b8580219c59\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper59558822d8c7\Symfony\Component\Console\Application as BaseApplication;
+use _PhpScoper59558822d8c7\Symfony\Component\Console\Command\ListCommand;
+use _PhpScoper59558822d8c7\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper59558822d8c7\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper59558822d8c7\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @internal
  */
-final class Application extends \_PhpScoper7b8580219c59\Symfony\Component\Console\Application
+final class Application extends \_PhpScoper59558822d8c7\Symfony\Component\Console\Application
 {
     const VERSION = '2.16.0';
     const VERSION_CODENAME = 'Yellow Bird';
@@ -54,9 +54,9 @@ final class Application extends \_PhpScoper7b8580219c59\Symfony\Component\Consol
     /**
      * {@inheritdoc}
      */
-    public function doRun(\_PhpScoper7b8580219c59\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper7b8580219c59\Symfony\Component\Console\Output\OutputInterface $output)
+    public function doRun(\_PhpScoper59558822d8c7\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper59558822d8c7\Symfony\Component\Console\Output\OutputInterface $output)
     {
-        $stdErr = $output instanceof \_PhpScoper7b8580219c59\Symfony\Component\Console\Output\ConsoleOutputInterface ? $output->getErrorOutput() : ($input->hasParameterOption('--format', \true) && 'txt' !== $input->getParameterOption('--format', null, \true) ? null : $output);
+        $stdErr = $output instanceof \_PhpScoper59558822d8c7\Symfony\Component\Console\Output\ConsoleOutputInterface ? $output->getErrorOutput() : ($input->hasParameterOption('--format', \true) && 'txt' !== $input->getParameterOption('--format', null, \true) ? null : $output);
         if (null !== $stdErr) {
             $warningsDetector = new \PhpCsFixer\Console\WarningsDetector($this->toolInfo);
             $warningsDetector->detectOldVendor();
@@ -88,6 +88,6 @@ final class Application extends \_PhpScoper7b8580219c59\Symfony\Component\Consol
      */
     protected function getDefaultCommands()
     {
-        return [new \PhpCsFixer\Console\Command\HelpCommand(), new \_PhpScoper7b8580219c59\Symfony\Component\Console\Command\ListCommand()];
+        return [new \PhpCsFixer\Console\Command\HelpCommand(), new \_PhpScoper59558822d8c7\Symfony\Component\Console\Command\ListCommand()];
     }
 }

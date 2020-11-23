@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper7b8580219c59\\Composer\\XdebugHandler\\": "src"
+            "_PhpScoper59558822d8c7\\Composer\\XdebugHandler\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoper7b8580219c59\\Composer\\XdebugHandler\\": "tests"
+            "_PhpScoper59558822d8c7\\Composer\\XdebugHandler\\": "tests"
         }
     },
     "scripts": {
