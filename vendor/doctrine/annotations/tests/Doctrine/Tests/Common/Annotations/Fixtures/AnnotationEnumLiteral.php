@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper6db4fde00cda\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper7b8580219c59\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper6db4fde00cda\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationEnumLiteral as SelfEnum;
+use _PhpScoper7b8580219c59\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationEnumLiteral as SelfEnum;
 /**
  * @Annotation
  * @Target("ALL")
