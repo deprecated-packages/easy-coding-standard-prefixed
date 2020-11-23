@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere341acab57d4\Symfony\Component\Cache\Simple;
+namespace _PhpScoperc4b135661b3a\Symfony\Component\Cache\Simple;
 
-use _PhpScopere341acab57d4\Symfony\Component\Cache\Traits\ApcuTrait;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScopere341acab57d4\Symfony\Component\Cache\Simple\ApcuCache::class, \_PhpScopere341acab57d4\Symfony\Component\Cache\Simple\ApcuAdapter::class, \_PhpScopere341acab57d4\Symfony\Component\Cache\Simple\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoperc4b135661b3a\Symfony\Component\Cache\Traits\ApcuTrait;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperc4b135661b3a\Symfony\Component\Cache\Simple\ApcuCache::class, \_PhpScoperc4b135661b3a\Symfony\Component\Cache\Simple\ApcuAdapter::class, \_PhpScoperc4b135661b3a\Symfony\Component\Cache\Simple\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use ApcuAdapter and type-hint for CacheInterface instead.
  */
-class ApcuCache extends \_PhpScopere341acab57d4\Symfony\Component\Cache\Simple\AbstractCache
+class ApcuCache extends \_PhpScoperc4b135661b3a\Symfony\Component\Cache\Simple\AbstractCache
 {
     use ApcuTrait;
     public function __construct(string $namespace = '', int $defaultLifetime = 0, string $version = null)

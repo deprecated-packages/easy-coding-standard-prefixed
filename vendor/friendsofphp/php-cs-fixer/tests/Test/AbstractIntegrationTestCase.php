@@ -25,11 +25,11 @@ use PhpCsFixer\Runner\Runner;
 use PhpCsFixer\Tests\TestCase;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScopere341acab57d4\Prophecy\Argument;
-use _PhpScopere341acab57d4\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScopere341acab57d4\Symfony\Component\Filesystem\Filesystem;
-use _PhpScopere341acab57d4\Symfony\Component\Finder\Finder;
-use _PhpScopere341acab57d4\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoperc4b135661b3a\Prophecy\Argument;
+use _PhpScoperc4b135661b3a\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoperc4b135661b3a\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoperc4b135661b3a\Symfony\Component\Finder\Finder;
+use _PhpScoperc4b135661b3a\Symfony\Component\Finder\SplFileInfo;
 /**
  * Integration test base class.
  *
@@ -78,7 +78,7 @@ abstract class AbstractIntegrationTestCase extends \PhpCsFixer\Tests\TestCase
         if (!\is_file($tmpFile)) {
             $dir = \dirname($tmpFile);
             if (!\is_dir($dir)) {
-                $fs = new \_PhpScopere341acab57d4\Symfony\Component\Filesystem\Filesystem();
+                $fs = new \_PhpScoperc4b135661b3a\Symfony\Component\Filesystem\Filesystem();
                 $fs->mkdir($dir, 0766);
             }
         }
@@ -129,7 +129,7 @@ abstract class AbstractIntegrationTestCase extends \PhpCsFixer\Tests\TestCase
         $factory = static::createIntegrationCaseFactory();
         $tests = [];
         /** @var SplFileInfo $file */
-        foreach (\_PhpScopere341acab57d4\Symfony\Component\Finder\Finder::create()->files()->in($fixturesDir) as $file) {
+        foreach (\_PhpScoperc4b135661b3a\Symfony\Component\Finder\Finder::create()->files()->in($fixturesDir) as $file) {
             if ('test' !== $file->getExtension()) {
                 continue;
             }
@@ -179,7 +179,7 @@ abstract class AbstractIntegrationTestCase extends \PhpCsFixer\Tests\TestCase
         $input = $case->hasInputCode() ? $input : $expected;
         $tmpFile = static::getTempFile();
         if (\false === @\file_put_contents($tmpFile, $input)) {
-            throw new \_PhpScopere341acab57d4\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write to tmp. file "%s".', $tmpFile));
+            throw new \_PhpScoperc4b135661b3a\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write to tmp. file "%s".', $tmpFile));
         }
         $errorsManager = new \PhpCsFixer\Error\ErrorsManager();
         $fixers = static::createFixers($case);
@@ -205,7 +205,7 @@ abstract class AbstractIntegrationTestCase extends \PhpCsFixer\Tests\TestCase
         if (1 < \count($fixers)) {
             $tmpFile = static::getTempFile();
             if (\false === @\file_put_contents($tmpFile, $input)) {
-                throw new \_PhpScopere341acab57d4\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write to tmp. file "%s".', $tmpFile));
+                throw new \_PhpScoperc4b135661b3a\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write to tmp. file "%s".', $tmpFile));
             }
             $runner = new \PhpCsFixer\Runner\Runner(new \ArrayIterator([new \SplFileInfo($tmpFile)]), \array_reverse($fixers), new \PhpCsFixer\Differ\SebastianBergmannDiffer(), null, $errorsManager, $this->linter, \false, new \PhpCsFixer\Cache\NullCacheManager());
             \PhpCsFixer\Tokenizer\Tokens::clearCache();
@@ -261,8 +261,8 @@ abstract class AbstractIntegrationTestCase extends \PhpCsFixer\Tests\TestCase
         if (null === $linter) {
             if (\getenv('SKIP_LINT_TEST_CASES')) {
                 $linterProphecy = $this->prophesize(\PhpCsFixer\Linter\LinterInterface::class);
-                $linterProphecy->lintSource(\_PhpScopere341acab57d4\Prophecy\Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
-                $linterProphecy->lintFile(\_PhpScopere341acab57d4\Prophecy\Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
+                $linterProphecy->lintSource(\_PhpScoperc4b135661b3a\Prophecy\Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
+                $linterProphecy->lintFile(\_PhpScoperc4b135661b3a\Prophecy\Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
                 $linterProphecy->isAsync()->willReturn(\false);
                 $linter = $linterProphecy->reveal();
             } else {

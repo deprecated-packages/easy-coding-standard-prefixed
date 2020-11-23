@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere341acab57d4\Symfony\Component\Console\Input;
+namespace _PhpScoperc4b135661b3a\Symfony\Component\Console\Input;
 
-use _PhpScopere341acab57d4\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScopere341acab57d4\Symfony\Component\Console\Exception\RuntimeException;
+use _PhpScoperc4b135661b3a\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperc4b135661b3a\Symfony\Component\Console\Exception\RuntimeException;
 /**
  * InputInterface is the interface implemented by all input classes.
  *
@@ -59,7 +59,7 @@ interface InputInterface
      *
      * @throws RuntimeException
      */
-    public function bind(\_PhpScopere341acab57d4\Symfony\Component\Console\Input\InputDefinition $definition);
+    public function bind(\_PhpScoperc4b135661b3a\Symfony\Component\Console\Input\InputDefinition $definition);
     /**
      * Validates the input.
      *

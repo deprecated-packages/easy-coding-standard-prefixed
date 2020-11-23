@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScopere341acab57d4\PhpParser\Node\Arg;
-use _PhpScopere341acab57d4\PhpParser\Node\Expr\MethodCall;
-use _PhpScopere341acab57d4\PhpParser\Node\Expr\Variable;
-use _PhpScopere341acab57d4\PhpParser\Node\Stmt\Expression;
+use _PhpScoperc4b135661b3a\PhpParser\Node\Arg;
+use _PhpScoperc4b135661b3a\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperc4b135661b3a\PhpParser\Node\Expr\Variable;
+use _PhpScoperc4b135661b3a\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\NestedCaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
@@ -34,14 +34,14 @@ final class InstanceOfNestedCaseConverter implements \Symplify\PhpConfigPrinter\
         $this->commonNodeFactory = $commonNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScopere341acab57d4\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperc4b135661b3a\PhpParser\Node\Stmt\Expression
     {
         $classConstFetch = $this->commonNodeFactory->createClassReference($key);
-        $servicesVariable = new \_PhpScopere341acab57d4\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
-        $args = [new \_PhpScopere341acab57d4\PhpParser\Node\Arg($classConstFetch)];
-        $instanceofMethodCall = new \_PhpScopere341acab57d4\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::INSTANCEOF, $args);
+        $servicesVariable = new \_PhpScoperc4b135661b3a\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $args = [new \_PhpScoperc4b135661b3a\PhpParser\Node\Arg($classConstFetch)];
+        $instanceofMethodCall = new \_PhpScoperc4b135661b3a\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::INSTANCEOF, $args);
         $instanceofMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $instanceofMethodCall);
-        return new \_PhpScopere341acab57d4\PhpParser\Node\Stmt\Expression($instanceofMethodCall);
+        return new \_PhpScoperc4b135661b3a\PhpParser\Node\Stmt\Expression($instanceofMethodCall);
     }
     public function match(string $rootKey, $subKey) : bool
     {

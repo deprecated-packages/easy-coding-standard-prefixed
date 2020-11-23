@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere341acab57d4\Symfony\Component\DependencyInjection;
+namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection;
 
-use _PhpScopere341acab57d4\Psr\Container\ContainerInterface;
-use _PhpScopere341acab57d4\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoperc4b135661b3a\Psr\Container\ContainerInterface;
+use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 /**
  * Turns public and "container.reversible" services back to their ids.
  *
@@ -23,14 +23,14 @@ final class ReverseContainer
     private $reversibleLocator;
     private $tagName;
     private $getServiceId;
-    public function __construct(\_PhpScopere341acab57d4\Symfony\Component\DependencyInjection\Container $serviceContainer, \_PhpScopere341acab57d4\Psr\Container\ContainerInterface $reversibleLocator, string $tagName = 'container.reversible')
+    public function __construct(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Container $serviceContainer, \_PhpScoperc4b135661b3a\Psr\Container\ContainerInterface $reversibleLocator, string $tagName = 'container.reversible')
     {
         $this->serviceContainer = $serviceContainer;
         $this->reversibleLocator = $reversibleLocator;
         $this->tagName = $tagName;
         $this->getServiceId = \Closure::bind(function ($service) : ?string {
             return \array_search($service, $this->services, \true) ?: \array_search($service, $this->privates, \true) ?: null;
-        }, $serviceContainer, \_PhpScopere341acab57d4\Symfony\Component\DependencyInjection\Container::class);
+        }, $serviceContainer, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Container::class);
     }
     /**
      * Returns the id of the passed object when it exists as a service.
@@ -66,7 +66,7 @@ final class ReverseContainer
             return $this->reversibleLocator->get($id);
         }
         if (isset($this->serviceContainer->getRemovedIds()[$id])) {
-            throw new \_PhpScopere341acab57d4\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service is private and cannot be accessed by reference. You should either make it public, or tag it as "%s".', $id, $this->tagName));
+            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service is private and cannot be accessed by reference. You should either make it public, or tag it as "%s".', $id, $this->tagName));
         }
         // will throw a ServiceNotFoundException
         $this->serviceContainer->get($id);

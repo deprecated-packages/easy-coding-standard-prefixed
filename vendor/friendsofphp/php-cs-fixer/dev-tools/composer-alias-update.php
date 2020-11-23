@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScopere341acab57d4;
+namespace _PhpScoperc4b135661b3a;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 const COMPOSER_JSON_FILE = __DIR__ . '/../composer.json';
@@ -16,6 +16,6 @@ function convertAppVersionToAliasedVersion($version)
 }
 $composerJson = \json_decode(\file_get_contents(\COMPOSER_JSON_FILE), \true);
 if (isset($composerJson['extra']['branch-alias'])) {
-    $composerJson['extra']['branch-alias'] = ['dev-master' => \_PhpScopere341acab57d4\convertAppVersionToAliasedVersion(\PhpCsFixer\Console\Application::VERSION)];
+    $composerJson['extra']['branch-alias'] = ['dev-master' => \_PhpScoperc4b135661b3a\convertAppVersionToAliasedVersion(\PhpCsFixer\Console\Application::VERSION)];
 }
 \file_put_contents(\COMPOSER_JSON_FILE, \json_encode($composerJson, \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE | \JSON_PRETTY_PRINT) . "\n");

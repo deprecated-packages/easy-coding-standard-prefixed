@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere341acab57d4\Symfony\Component\Mime\Tests\Header;
+namespace _PhpScoperc4b135661b3a\Symfony\Component\Mime\Tests\Header;
 
-use _PhpScopere341acab57d4\PHPUnit\Framework\TestCase;
-use _PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader;
-class IdentificationHeaderTest extends \_PhpScopere341acab57d4\PHPUnit\Framework\TestCase
+use _PhpScoperc4b135661b3a\PHPUnit\Framework\TestCase;
+use _PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader;
+class IdentificationHeaderTest extends \_PhpScoperc4b135661b3a\PHPUnit\Framework\TestCase
 {
     public function testValueMatchesMsgIdSpec()
     {
@@ -33,17 +33,17 @@ class IdentificationHeaderTest extends \_PhpScopere341acab57d4\PHPUnit\Framework
         
                  no-fold-literal =       "[" *(dtext / quoted-pair) "]"
                 */
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('Message-ID', 'id-left@id-right');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('Message-ID', 'id-left@id-right');
         $this->assertEquals('<id-left@id-right>', $header->getBodyAsString());
     }
     public function testIdCanBeRetrievedVerbatim()
     {
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('Message-ID', 'id-left@id-right');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('Message-ID', 'id-left@id-right');
         $this->assertEquals('id-left@id-right', $header->getId());
     }
     public function testMultipleIdsCanBeSet()
     {
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', 'c@d');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', 'c@d');
         $header->setIds(['a@b', 'x@y']);
         $this->assertEquals(['a@b', 'x@y'], $header->getIds());
     }
@@ -59,7 +59,7 @@ class IdentificationHeaderTest extends \_PhpScopere341acab57d4\PHPUnit\Framework
         
                  references      =       "References:" 1*msg-id CRLF
                  */
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', ['a@b', 'x@y']);
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', ['a@b', 'x@y']);
         $this->assertEquals('<a@b> <x@y>', $header->getBodyAsString());
     }
     public function testIdLeftCanBeQuoted()
@@ -67,7 +67,7 @@ class IdentificationHeaderTest extends \_PhpScopere341acab57d4\PHPUnit\Framework
         /* -- RFC 2822, 3.6.4.
            id-left         =       dot-atom-text / no-fold-quote / obs-id-left
            */
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', '"ab"@c');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', '"ab"@c');
         $this->assertEquals('"ab"@c', $header->getId());
         $this->assertEquals('<"ab"@c>', $header->getBodyAsString());
     }
@@ -76,13 +76,13 @@ class IdentificationHeaderTest extends \_PhpScopere341acab57d4\PHPUnit\Framework
         /* -- RFC 2822, 3.6.4.
            no-fold-quote   =       DQUOTE *(qtext / quoted-pair) DQUOTE
            */
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', '"a\\<\\>b"@c');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', '"a\\<\\>b"@c');
         $this->assertEquals('"a\\<\\>b"@c', $header->getId());
         $this->assertEquals('<"a\\<\\>b"@c>', $header->getBodyAsString());
     }
     public function testIdLeftCanBeDotAtom()
     {
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a.b+&%$.c@d');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a.b+&%$.c@d');
         $this->assertEquals('a.b+&%$.c@d', $header->getId());
         $this->assertEquals('<a.b+&%$.c@d>', $header->getBodyAsString());
     }
@@ -92,14 +92,14 @@ class IdentificationHeaderTest extends \_PhpScopere341acab57d4\PHPUnit\Framework
      */
     public function testInvalidIdLeftThrowsException()
     {
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a b c@d');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a b c@d');
     }
     public function testIdRightCanBeDotAtom()
     {
         /* -- RFC 2822, 3.6.4.
            id-right        =       dot-atom-text / no-fold-literal / obs-id-right
            */
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a@b.c+&%$.d');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a@b.c+&%$.d');
         $this->assertEquals('a@b.c+&%$.d', $header->getId());
         $this->assertEquals('<a@b.c+&%$.d>', $header->getBodyAsString());
     }
@@ -108,13 +108,13 @@ class IdentificationHeaderTest extends \_PhpScopere341acab57d4\PHPUnit\Framework
         /* -- RFC 2822, 3.6.4.
             no-fold-literal =       "[" *(dtext / quoted-pair) "]"
            */
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a@[1.2.3.4]');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a@[1.2.3.4]');
         $this->assertEquals('a@[1.2.3.4]', $header->getId());
         $this->assertEquals('<a@[1.2.3.4]>', $header->getBodyAsString());
     }
     public function testIdRigthIsIdnEncoded()
     {
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a@ä');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a@ä');
         $this->assertEquals('a@ä', $header->getId());
         $this->assertEquals('<a@xn--4ca>', $header->getBodyAsString());
     }
@@ -124,7 +124,7 @@ class IdentificationHeaderTest extends \_PhpScopere341acab57d4\PHPUnit\Framework
      */
     public function testInvalidIdRightThrowsException()
     {
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a@b c d');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', 'a@b c d');
     }
     /**
      * @expectedException \Exception
@@ -135,22 +135,22 @@ class IdentificationHeaderTest extends \_PhpScopere341acab57d4\PHPUnit\Framework
         /* -- RFC 2822, 3.6.4.
            msg-id          =       [CFWS] "<" id-left "@" id-right ">" [CFWS]
            */
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', 'abc');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', 'abc');
     }
     public function testSetBody()
     {
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('Message-ID', 'c@d');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('Message-ID', 'c@d');
         $header->setBody('a@b');
         $this->assertEquals(['a@b'], $header->getIds());
     }
     public function testGetBody()
     {
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('Message-ID', 'a@b');
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('Message-ID', 'a@b');
         $this->assertEquals(['a@b'], $header->getBody());
     }
     public function testStringValue()
     {
-        $header = new \_PhpScopere341acab57d4\Symfony\Component\Mime\Header\IdentificationHeader('References', ['a@b', 'x@y']);
+        $header = new \_PhpScoperc4b135661b3a\Symfony\Component\Mime\Header\IdentificationHeader('References', ['a@b', 'x@y']);
         $this->assertEquals('References: <a@b> <x@y>', $header->toString());
     }
 }
