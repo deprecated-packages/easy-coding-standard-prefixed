@@ -8,15 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceConfigurator extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class ServiceConfigurator extends \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     const FACTORY = 'services';
     use Traits\AbstractTrait;
@@ -42,7 +41,7 @@ class ServiceConfigurator extends \_PhpScoperc4b135661b3a\Symfony\Component\Depe
     private $instanceof;
     private $allowParent;
     private $path;
-    public function __construct(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition, $id, array $defaultTags, string $path = null)
+    public function __construct(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, $id, array $defaultTags, string $path = null)
     {
         $this->container = $container;
         $this->instanceof = $instanceof;
@@ -54,10 +53,6 @@ class ServiceConfigurator extends \_PhpScoperc4b135661b3a\Symfony\Component\Depe
     {
         parent::__destruct();
         $this->container->removeBindings($this->id);
-        if (!$this->definition instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ChildDefinition) {
-            $this->container->setDefinition($this->id, $this->definition->setInstanceofConditionals($this->instanceof));
-        } else {
-            $this->container->setDefinition($this->id, $this->definition);
-        }
+        $this->container->setDefinition($this->id, $this->definition->setInstanceofConditionals($this->instanceof));
     }
 }

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\HttpFoundation\Session\Storage;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\HttpFoundation\Session\Storage;
 
 /**
  * MockFileSessionStorage is used to mock sessions for
@@ -21,14 +21,14 @@ namespace _PhpScoperc4b135661b3a\Symfony\Component\HttpFoundation\Session\Storag
  *
  * @author Drak <drak@zikula.org>
  */
-class MockFileSessionStorage extends \_PhpScoperc4b135661b3a\Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage
+class MockFileSessionStorage extends \_PhpScoperd675aaf00c76\Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage
 {
     private $savePath;
     /**
      * @param string $savePath Path of directory to save session files
      * @param string $name     Session name
      */
-    public function __construct(string $savePath = null, string $name = 'MOCKSESSID', \_PhpScoperc4b135661b3a\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(string $savePath = null, string $name = 'MOCKSESSID', \_PhpScoperd675aaf00c76\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         if (null === $savePath) {
             $savePath = \sys_get_temp_dir();

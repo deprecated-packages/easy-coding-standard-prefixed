@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * Checks if arguments of methods are properly configured.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CheckArgumentsValidityPass extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class CheckArgumentsValidityPass extends \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $throwExceptions;
     public function __construct(bool $throwExceptions = \true)
@@ -28,9 +28,9 @@ class CheckArgumentsValidityPass extends \_PhpScoperc4b135661b3a\Symfony\Compone
     /**
      * {@inheritdoc}
      */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
-        if (!$value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition) {
+        if (!$value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition) {
             return parent::processValue($value, $isRoot);
         }
         $i = 0;
@@ -40,14 +40,14 @@ class CheckArgumentsValidityPass extends \_PhpScoperc4b135661b3a\Symfony\Compone
                     $msg = \sprintf('Invalid constructor argument for service "%s": integer expected but found string "%s". Check your service definition.', $this->currentId, $k);
                     $value->addError($msg);
                     if ($this->throwExceptions) {
-                        throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException($msg);
+                        throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException($msg);
                     }
                     break;
                 }
                 $msg = \sprintf('Invalid constructor argument %d for service "%s": argument %d must be defined before. Check your service definition.', 1 + $k, $this->currentId, $i);
                 $value->addError($msg);
                 if ($this->throwExceptions) {
-                    throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException($msg);
+                    throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException($msg);
                 }
             }
         }
@@ -59,14 +59,14 @@ class CheckArgumentsValidityPass extends \_PhpScoperc4b135661b3a\Symfony\Compone
                         $msg = \sprintf('Invalid argument for method call "%s" of service "%s": integer expected but found string "%s". Check your service definition.', $methodCall[0], $this->currentId, $k);
                         $value->addError($msg);
                         if ($this->throwExceptions) {
-                            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException($msg);
+                            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException($msg);
                         }
                         break;
                     }
                     $msg = \sprintf('Invalid argument %d for method call "%s" of service "%s": argument %d must be defined before. Check your service definition.', 1 + $k, $methodCall[0], $this->currentId, $i);
                     $value->addError($msg);
                     if ($this->throwExceptions) {
-                        throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException($msg);
+                        throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException($msg);
                     }
                 }
             }

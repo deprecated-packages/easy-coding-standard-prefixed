@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\HttpFoundation;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\HttpFoundation;
 
 /**
  * ParameterBag is a container for key/value pairs.

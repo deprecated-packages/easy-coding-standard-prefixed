@@ -8,46 +8,48 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Dumper;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Dumper;
 
-use _PhpScoperc4b135661b3a\Composer\Autoload\ClassLoader;
-use _PhpScoperc4b135661b3a\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceLocator;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Container;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\LogicException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface as ProxyDumper;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Loader\FileLoader;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\TypedReference;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Variable;
-use _PhpScoperc4b135661b3a\Symfony\Component\ErrorHandler\DebugClassLoader;
-use _PhpScoperc4b135661b3a\Symfony\Component\ExpressionLanguage\Expression;
-use _PhpScoperc4b135661b3a\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoperd675aaf00c76\Composer\Autoload\ClassLoader;
+use _PhpScoperd675aaf00c76\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocator;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Container;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface as ProxyDumper;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Loader\FileLoader;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Variable;
+use _PhpScoperd675aaf00c76\Symfony\Component\ErrorHandler\DebugClassLoader;
+use _PhpScoperd675aaf00c76\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoperd675aaf00c76\Symfony\Component\HttpKernel\Kernel;
 /**
  * PhpDumper dumps a service container as a PHP class.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class PhpDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Dumper\Dumper
+class PhpDumper extends \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Dumper\Dumper
 {
     /**
      * Characters that might appear in the generated variable name as first character.
@@ -62,7 +64,7 @@ class PhpDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInje
     private $variableCount;
     private $inlinedDefinitions;
     private $serviceCalls;
-    private $reservedVariables = ['instance', 'class', 'this'];
+    private $reservedVariables = ['instance', 'class', 'this', 'container'];
     private $expressionLanguage;
     private $targetDirRegex;
     private $targetDirMaxMatches;
@@ -72,11 +74,13 @@ class PhpDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInje
     private $namespace;
     private $asFiles;
     private $hotPathTag;
+    private $preloadTags;
     private $inlineFactories;
     private $inlineRequires;
     private $inlinedRequires = [];
     private $circularReferences = [];
     private $singleUsePrivateIds = [];
+    private $preload = [];
     private $addThrow = \false;
     private $addGetService = \false;
     private $locatedIds = [];
@@ -90,17 +94,17 @@ class PhpDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInje
     /**
      * {@inheritdoc}
      */
-    public function __construct(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function __construct(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->isCompiled()) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\LogicException('Cannot dump an uncompiled container.');
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\LogicException('Cannot dump an uncompiled container.');
         }
         parent::__construct($container);
     }
     /**
      * Sets the dumper to be used when dumping proxies in the generated container.
      */
-    public function setProxyDumper(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface $proxyDumper)
+    public function setProxyDumper(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface $proxyDumper)
     {
         $this->proxyDumper = $proxyDumper;
     }
@@ -124,40 +128,41 @@ class PhpDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInje
         $this->targetDirRegex = null;
         $this->inlinedRequires = [];
         $this->exportedVariables = [];
-        $options = \array_merge(['class' => 'ProjectServiceContainer', 'base_class' => 'Container', 'namespace' => '', 'as_files' => \false, 'debug' => \true, 'hot_path_tag' => 'container.hot_path', 'inline_factories_parameter' => 'container.dumper.inline_factories', 'inline_class_loader_parameter' => 'container.dumper.inline_class_loader', 'service_locator_tag' => 'container.service_locator', 'build_time' => \time()], $options);
+        $options = \array_merge(['class' => 'ProjectServiceContainer', 'base_class' => 'Container', 'namespace' => '', 'as_files' => \false, 'debug' => \true, 'hot_path_tag' => 'container.hot_path', 'preload_tags' => ['container.preload', 'container.no_preload'], 'inline_factories_parameter' => 'container.dumper.inline_factories', 'inline_class_loader_parameter' => 'container.dumper.inline_class_loader', 'preload_classes' => [], 'service_locator_tag' => 'container.service_locator', 'build_time' => \time()], $options);
         $this->addThrow = $this->addGetService = \false;
         $this->namespace = $options['namespace'];
         $this->asFiles = $options['as_files'];
         $this->hotPathTag = $options['hot_path_tag'];
+        $this->preloadTags = $options['preload_tags'];
         $this->inlineFactories = $this->asFiles && $options['inline_factories_parameter'] && $this->container->hasParameter($options['inline_factories_parameter']) && $this->container->getParameter($options['inline_factories_parameter']);
-        $this->inlineRequires = $options['inline_class_loader_parameter'] && $this->container->hasParameter($options['inline_class_loader_parameter']) && $this->container->getParameter($options['inline_class_loader_parameter']);
+        $this->inlineRequires = $options['inline_class_loader_parameter'] && ($this->container->hasParameter($options['inline_class_loader_parameter']) ? $this->container->getParameter($options['inline_class_loader_parameter']) : \PHP_VERSION_ID < 70400 || $options['debug']);
         $this->serviceLocatorTag = $options['service_locator_tag'];
         if (0 !== \strpos($baseClass = $options['base_class'], '\\') && 'Container' !== $baseClass) {
             $baseClass = \sprintf('%s\\%s', $options['namespace'] ? '\\' . $options['namespace'] : '', $baseClass);
             $this->baseClass = $baseClass;
         } elseif ('Container' === $baseClass) {
-            $this->baseClass = \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Container::class;
+            $this->baseClass = \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Container::class;
         } else {
             $this->baseClass = $baseClass;
         }
-        $this->initializeMethodNamesMap('Container' === $baseClass ? \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Container::class : $baseClass);
-        if ($this->getProxyDumper() instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper) {
-            (new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(\true, \false))->process($this->container);
+        $this->initializeMethodNamesMap('Container' === $baseClass ? \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Container::class : $baseClass);
+        if ($this->getProxyDumper() instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper) {
+            (new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(\true, \false))->process($this->container);
             try {
-                (new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass())->process($this->container);
-            } catch (\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException $e) {
+                (new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass())->process($this->container);
+            } catch (\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException $e) {
                 $path = $e->getPath();
                 \end($path);
                 $path[\key($path)] .= '". Try running "composer require symfony/proxy-manager-bridge';
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($e->getServiceId(), $path);
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($e->getServiceId(), $path);
             }
         }
-        (new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(\false, !$this->getProxyDumper() instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper))->process($this->container);
+        (new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass(\false, !$this->getProxyDumper() instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper))->process($this->container);
         $checkedNodes = [];
         $this->circularReferences = [];
         $this->singleUsePrivateIds = [];
         foreach ($this->container->getCompiler()->getServiceReferenceGraph()->getNodes() as $id => $node) {
-            if (!$node->getValue() instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition) {
+            if (!$node->getValue() instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition) {
                 continue;
             }
             if (!isset($checkedNodes[$id])) {
@@ -174,12 +179,12 @@ class PhpDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInje
         if (!empty($options['file']) && \is_dir($dir = \dirname($options['file']))) {
             // Build a regexp where the first root dirs are mandatory,
             // but every other sub-dir is optional up to the full path in $dir
-            // Mandate at least 2 root dirs and not more that 5 optional dirs.
+            // Mandate at least 1 root dir and not more than 5 optional dirs.
             $dir = \explode(\DIRECTORY_SEPARATOR, \realpath($dir));
             $i = \count($dir);
-            if (3 <= $i) {
+            if (2 + (int) ('\\' === \DIRECTORY_SEPARATOR) <= $i) {
                 $regex = '';
-                $lastOptionalDir = $i > 8 ? $i - 5 : 3;
+                $lastOptionalDir = $i > 8 ? $i - 5 : 2 + (int) ('\\' === \DIRECTORY_SEPARATOR);
                 $this->targetDirMaxMatches = $i - $lastOptionalDir;
                 while (--$i >= $lastOptionalDir) {
                     $regex = \sprintf('(%s%s)?', \preg_quote(\DIRECTORY_SEPARATOR . $dir[$i], '#'), $regex);
@@ -191,22 +196,30 @@ class PhpDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInje
             }
         }
         $proxyClasses = $this->inlineFactories ? $this->generateProxyClasses() : null;
-        $code = $this->startClass($options['class'], $baseClass, $preload) . $this->addServices($services) . $this->addDeprecatedAliases() . $this->addDefaultParametersMethod();
+        if ($options['preload_classes']) {
+            $this->preload = \array_combine($options['preload_classes'], $options['preload_classes']);
+        }
+        $code = $this->startClass($options['class'], $baseClass) . $this->addServices($services) . $this->addDeprecatedAliases() . $this->addDefaultParametersMethod();
         $proxyClasses = $proxyClasses ?? $this->generateProxyClasses();
         if ($this->addGetService) {
-            $code = \preg_replace("/(\r?\n\r?\n    public function __construct.+?\\{\r?\n)/s", "\n    private \$getService;\$1        \$this->getService = \\Closure::fromCallable([\$this, 'getService']);\n", $code, 1);
+            $code = \preg_replace("/(\r?\n\r?\n    public function __construct.+?\\{\r?\n)/s", "\n    protected \$getService;\$1        \$this->getService = \\Closure::fromCallable([\$this, 'getService']);\n", $code, 1);
         }
         if ($this->asFiles) {
-            $fileStart = <<<EOF
+            $fileTemplate = <<<EOF
 <?php
 
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
 
-// This file has been auto-generated by the Symfony Dependency Injection Component for internal use.
+/*{$this->docStar}
+ * @internal This class has been auto-generated by the Symfony Dependency Injection Component.
+ */
+class %s extends {$options['class']}
+{%s}
 
 EOF;
             $files = [];
+            $preloadedFiles = [];
             $ids = $this->container->getRemovedIds();
             foreach ($this->container->getDefinitions() as $id => $definition) {
                 if (!$definition->isPublic()) {
@@ -222,11 +235,15 @@ EOF;
                 $files['removed-ids.php'] = $c . "];\n";
             }
             if (!$this->inlineFactories) {
-                foreach ($this->generateServiceFiles($services) as $file => $c) {
-                    $files[$file] = $fileStart . $c;
+                foreach ($this->generateServiceFiles($services) as $file => [$c, $preload]) {
+                    $files[$file] = \sprintf($fileTemplate, \substr($file, 0, -4), $c);
+                    if ($preload) {
+                        $preloadedFiles[$file] = $file;
+                    }
                 }
                 foreach ($proxyClasses as $file => $c) {
                     $files[$file] = "<?php\n" . $c;
+                    $preloadedFiles[$file] = $file;
                 }
             }
             $code .= $this->endClass();
@@ -236,35 +253,44 @@ EOF;
                 }
             }
             $files[$options['class'] . '.php'] = $code;
-            $hash = \ucfirst(\strtr(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerBuilder::hash($files), '._', 'xx'));
+            $preloadedFiles[$options['class'] . '.php'] = $options['class'] . '.php';
+            $hash = \ucfirst(\strtr(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerBuilder::hash($files), '._', 'xx'));
             $code = [];
             foreach ($files as $file => $c) {
-                $code["Container{$hash}/{$file}"] = $c;
+                $code["Container{$hash}/{$file}"] = \substr_replace($c, "<?php\n\nnamespace Container{$hash};\n", 0, 6);
+                if (isset($preloadedFiles[$file])) {
+                    $preloadedFiles[$file] = "Container{$hash}/{$file}";
+                }
             }
-            \array_pop($code);
-            $code["Container{$hash}/{$options['class']}.php"] = \substr_replace($files[$options['class'] . '.php'], "<?php\n\nnamespace Container{$hash};\n", 0, 6);
             $namespaceLine = $this->namespace ? "\nnamespace {$this->namespace};\n" : '';
             $time = $options['build_time'];
             $id = \hash('crc32', $hash . $time);
             $this->asFiles = \false;
-            if ($preload && null !== ($autoloadFile = $this->getAutoloadFile())) {
+            if ($this->preload && null !== ($autoloadFile = $this->getAutoloadFile())) {
                 $autoloadFile = \substr($this->export($autoloadFile), 2, -1);
+                $preloadedFiles = \array_reverse($preloadedFiles);
+                $preloadedFiles = \implode("';\nrequire __DIR__.'/", $preloadedFiles);
                 $code[$options['class'] . '.preload.php'] = <<<EOF
 <?php
 
 // This file has been auto-generated by the Symfony Dependency Injection Component
 // You can reference it in the "opcache.preload" php.ini setting on PHP >= 7.4 when preloading is desired
 
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\Dumper\\Preloader;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\Dumper\\Preloader;
 
 require {$autoloadFile};
-require __DIR__.'/Container{$hash}/{$options['class']}.php';
+require __DIR__.'/{$preloadedFiles}';
 
 \$classes = [];
 
 EOF;
-                foreach ($preload as $class) {
-                    $code[$options['class'] . '.preload.php'] .= \sprintf("\$classes[] = '%s';\n", $class);
+                foreach ($this->preload as $class) {
+                    if (!$class || \false !== \strpos($class, '$') || \in_array($class, ['int', 'float', 'string', 'bool', 'resource', 'object', 'array', 'null', 'callable', 'iterable', 'mixed', 'void'], \true)) {
+                        continue;
+                    }
+                    if (!(\class_exists($class, \false) || \interface_exists($class, \false) || \trait_exists($class, \false)) || (new \ReflectionClass($class))->isUserDefined()) {
+                        $code[$options['class'] . '.preload.php'] .= \sprintf("\$classes[] = '%s';\n", $class);
+                    }
                 }
                 $code[$options['class'] . '.preload.php'] .= <<<'EOF'
 
@@ -307,6 +333,7 @@ EOF;
         $this->circularReferences = [];
         $this->locatedIds = [];
         $this->exportedVariables = [];
+        $this->preload = [];
         $unusedEnvs = [];
         foreach ($this->container->getEnvCounters() as $env => $use) {
             if (!$use) {
@@ -314,20 +341,23 @@ EOF;
             }
         }
         if ($unusedEnvs) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\EnvParameterException($unusedEnvs, null, 'Environment variables "%s" are never used. Please, check your container\'s configuration.');
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\EnvParameterException($unusedEnvs, null, 'Environment variables "%s" are never used. Please, check your container\'s configuration.');
         }
         return $code;
     }
     /**
      * Retrieves the currently set proxy dumper or instantiates one.
      */
-    private function getProxyDumper() : \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
+    private function getProxyDumper() : \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
     {
         if (!$this->proxyDumper) {
-            $this->proxyDumper = new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper();
+            $this->proxyDumper = new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper();
         }
         return $this->proxyDumper;
     }
+    /**
+     * @param ServiceReferenceGraphEdge[] $edges
+     */
     private function analyzeCircularReferences(string $sourceId, array $edges, array &$checkedNodes, array &$currentPath = [], bool $byConstructor = \true)
     {
         $checkedNodes[$sourceId] = \true;
@@ -335,7 +365,7 @@ EOF;
         foreach ($edges as $edge) {
             $node = $edge->getDestNode();
             $id = $node->getId();
-            if (!$node->getValue() instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition || $sourceId === $id || $edge->isLazy() || $edge->isWeak()) {
+            if (!$node->getValue() instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition || $sourceId === $id || $edge->isLazy() || $edge->isWeak()) {
                 // no-op
             } elseif (isset($currentPath[$id])) {
                 $this->addCircularReferences($id, $currentPath, $edge->isReferencedByConstructor());
@@ -411,7 +441,7 @@ EOF;
         $proxyClasses = [];
         $alreadyGenerated = [];
         $definitions = $this->container->getDefinitions();
-        $strip = '' === $this->docStar && \method_exists('_PhpScoperc4b135661b3a\\Symfony\\Component\\HttpKernel\\Kernel', 'stripComments');
+        $strip = '' === $this->docStar && \method_exists('_PhpScoperd675aaf00c76\\Symfony\\Component\\HttpKernel\\Kernel', 'stripComments');
         $proxyDumper = $this->getProxyDumper();
         \ksort($definitions);
         foreach ($definitions as $definition) {
@@ -441,25 +471,33 @@ EOF;
             }
             if ($strip) {
                 $proxyCode = "<?php\n" . $proxyCode;
-                $proxyCode = \substr(\_PhpScoperc4b135661b3a\Symfony\Component\HttpKernel\Kernel::stripComments($proxyCode), 5);
+                $proxyCode = \substr(\_PhpScoperd675aaf00c76\Symfony\Component\HttpKernel\Kernel::stripComments($proxyCode), 5);
             }
-            $proxyClasses[\sprintf('%s.php', \explode(' ', $this->inlineRequires ? \substr($proxyCode, \strlen($code)) : $proxyCode, 3)[1])] = $proxyCode;
+            $proxyClass = \explode(' ', $this->inlineRequires ? \substr($proxyCode, \strlen($code)) : $proxyCode, 3)[1];
+            if ($this->asFiles || $this->namespace) {
+                $proxyCode .= "\n\\class_alias(__NAMESPACE__.'\\\\{$proxyClass}', '{$proxyClass}', false);\n";
+            }
+            $proxyClasses[$proxyClass . '.php'] = $proxyCode;
         }
         return $proxyClasses;
     }
-    private function addServiceInclude(string $cId, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition) : string
+    private function addServiceInclude(string $cId, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition) : string
     {
         $code = '';
         if ($this->inlineRequires && (!$this->isHotPath($definition) || $this->getProxyDumper()->isProxyCandidate($definition))) {
             $lineage = [];
             foreach ($this->inlinedDefinitions as $def) {
-                if (!$def->isDeprecated() && \is_string($class = \is_array($factory = $def->getFactory()) && \is_string($factory[0]) ? $factory[0] : $def->getClass())) {
-                    $this->collectLineage($class, $lineage);
+                if (!$def->isDeprecated()) {
+                    foreach ($this->getClasses($def, $cId) as $class) {
+                        $this->collectLineage($class, $lineage);
+                    }
                 }
             }
             foreach ($this->serviceCalls as $id => list($callCount, $behavior)) {
-                if ('service_container' !== $id && $id !== $cId && \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE !== $behavior && $this->container->has($id) && $this->isTrivialInstance($def = $this->container->findDefinition($id)) && \is_string($class = \is_array($factory = $def->getFactory()) && \is_string($factory[0]) ? $factory[0] : $def->getClass())) {
-                    $this->collectLineage($class, $lineage);
+                if ('service_container' !== $id && $id !== $cId && \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE !== $behavior && $this->container->has($id) && $this->isTrivialInstance($def = $this->container->findDefinition($id))) {
+                    foreach ($this->getClasses($def, $cId) as $class) {
+                        $this->collectLineage($class, $lineage);
+                    }
                 }
             }
             foreach (\array_diff_key(\array_flip($lineage), $this->inlinedRequires) as $file => $class) {
@@ -482,11 +520,11 @@ EOF;
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    private function addServiceInstance(string $id, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition, bool $isSimpleInstance) : string
+    private function addServiceInstance(string $id, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, bool $isSimpleInstance) : string
     {
         $class = $this->dumpValue($definition->getClass());
         if (0 === \strpos($class, "'") && \false === \strpos($class, '$') && !\preg_match('/^\'(?:\\\\{2})?[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*(?:\\\\{2}[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*)*\'$/', $class)) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('"%s" is not a valid class name for the "%s" service.', $class, $id));
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('"%s" is not a valid class name for the "%s" service.', $class, $id));
         }
         $isProxyCandidate = $this->getProxyDumper()->isProxyCandidate($definition);
         $instantiation = '';
@@ -509,7 +547,7 @@ EOF;
         }
         return $this->addNewInstance($definition, '        ' . $return . $instantiation, $id);
     }
-    private function isTrivialInstance(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition) : bool
+    private function isTrivialInstance(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition) : bool
     {
         if ($definition->hasErrors()) {
             return \true;
@@ -521,7 +559,7 @@ EOF;
             return \false;
         }
         foreach ($definition->getArguments() as $arg) {
-            if (!$arg || $arg instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Parameter) {
+            if (!$arg || $arg instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Parameter) {
                 continue;
             }
             if (\is_array($arg) && 3 >= \count($arg)) {
@@ -529,17 +567,17 @@ EOF;
                     if ($this->dumpValue($k) !== $this->dumpValue($k, \false)) {
                         return \false;
                     }
-                    if (!$v || $v instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Parameter) {
+                    if (!$v || $v instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Parameter) {
                         continue;
                     }
-                    if ($v instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference && $this->container->has($id = (string) $v) && $this->container->findDefinition($id)->isSynthetic()) {
+                    if ($v instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference && $this->container->has($id = (string) $v) && $this->container->findDefinition($id)->isSynthetic()) {
                         continue;
                     }
                     if (!\is_scalar($v) || $this->dumpValue($v) !== $this->dumpValue($v, \false)) {
                         return \false;
                     }
                 }
-            } elseif ($arg instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference && $this->container->has($id = (string) $arg) && $this->container->findDefinition($id)->isSynthetic()) {
+            } elseif ($arg instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference && $this->container->has($id = (string) $arg) && $this->container->findDefinition($id)->isSynthetic()) {
                 continue;
             } elseif (!\is_scalar($arg) || $this->dumpValue($arg) !== $this->dumpValue($arg, \false)) {
                 return \false;
@@ -547,7 +585,7 @@ EOF;
         }
         return \true;
     }
-    private function addServiceMethodCalls(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition, string $variableName, ?string $sharedNonLazyId) : string
+    private function addServiceMethodCalls(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, string $variableName, ?string $sharedNonLazyId) : string
     {
         $lastWitherIndex = null;
         foreach ($definition->getMethodCalls() as $k => $call) {
@@ -572,7 +610,7 @@ EOF;
         }
         return $calls;
     }
-    private function addServiceProperties(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition, string $variableName = 'instance') : string
+    private function addServiceProperties(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, string $variableName = 'instance') : string
     {
         $code = '';
         foreach ($definition->getProperties() as $name => $value) {
@@ -580,13 +618,13 @@ EOF;
         }
         return $code;
     }
-    private function addServiceConfigurator(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition, string $variableName = 'instance') : string
+    private function addServiceConfigurator(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, string $variableName = 'instance') : string
     {
         if (!($callable = $definition->getConfigurator())) {
             return '';
         }
         if (\is_array($callable)) {
-            if ($callable[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference || $callable[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition && $this->definitionVariables->contains($callable[0])) {
+            if ($callable[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference || $callable[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition && $this->definitionVariables->contains($callable[0])) {
                 return \sprintf("        %s->%s(\$%s);\n", $this->dumpValue($callable[0]), $callable[1], $variableName);
             }
             $class = $this->dumpValue($callable[0]);
@@ -601,23 +639,23 @@ EOF;
         }
         return \sprintf("        %s(\$%s);\n", $callable, $variableName);
     }
-    private function addService(string $id, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition) : array
+    private function addService(string $id, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition) : array
     {
         $this->definitionVariables = new \SplObjectStorage();
         $this->referenceVariables = [];
         $this->variableCount = 0;
-        $this->referenceVariables[$id] = new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Variable('instance');
+        $this->referenceVariables[$id] = new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Variable('instance');
         $return = [];
         if ($class = $definition->getClass()) {
-            $class = $class instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Parameter ? '%' . $class . '%' : $this->container->resolveEnvPlaceholders($class);
+            $class = $class instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Parameter ? '%' . $class . '%' : $this->container->resolveEnvPlaceholders($class);
             $return[] = \sprintf(0 === \strpos($class, '%') ? '@return object A %1$s instance' : '@return \\%s', \ltrim($class, '\\'));
         } elseif ($definition->getFactory()) {
             $factory = $definition->getFactory();
             if (\is_string($factory)) {
                 $return[] = \sprintf('@return object An instance returned by %s()', $factory);
-            } elseif (\is_array($factory) && (\is_string($factory[0]) || $factory[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition || $factory[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference)) {
-                $class = $factory[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition ? $factory[0]->getClass() : (string) $factory[0];
-                $class = $class instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Parameter ? '%' . $class . '%' : $this->container->resolveEnvPlaceholders($class);
+            } elseif (\is_array($factory) && (\is_string($factory[0]) || $factory[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition || $factory[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference)) {
+                $class = $factory[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition ? $factory[0]->getClass() : (string) $factory[0];
+                $class = $class instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Parameter ? '%' . $class . '%' : $this->container->resolveEnvPlaceholders($class);
                 $return[] = \sprintf('@return object An instance returned by %s::%s()', $class, $factory[1]);
             }
         }
@@ -625,77 +663,89 @@ EOF;
             if ($return && 0 === \strpos($return[\count($return) - 1], '@return')) {
                 $return[] = '';
             }
-            $return[] = \sprintf('@deprecated %s', $definition->getDeprecationMessage($id));
+            $deprecation = $definition->getDeprecation($id);
+            $return[] = \sprintf('@deprecated %s', ($deprecation['package'] || $deprecation['version'] ? "Since {$deprecation['package']} {$deprecation['version']}: " : '') . $deprecation['message']);
         }
         $return = \str_replace("\n     * \n", "\n     *\n", \implode("\n     * ", $return));
         $return = $this->container->resolveEnvPlaceholders($return);
         $shared = $definition->isShared() ? ' shared' : '';
         $public = $definition->isPublic() ? 'public' : 'private';
         $autowired = $definition->isAutowired() ? ' autowired' : '';
-        if ($definition->isLazy()) {
+        $asFile = $this->asFiles && !$this->inlineFactories && !$this->isHotPath($definition);
+        $methodName = $this->generateMethodName($id);
+        if ($asFile || $definition->isLazy()) {
             $lazyInitialization = '$lazyLoad = true';
         } else {
             $lazyInitialization = '';
         }
-        $asFile = $this->asFiles && !$this->inlineFactories && !$this->isHotPath($definition);
-        $methodName = $this->generateMethodName($id);
-        if ($asFile) {
-            $file = $methodName . '.php';
-            $code = "        // Returns the {$public} '{$id}'{$shared}{$autowired} service.\n\n";
-        } else {
-            $file = null;
-            $code = <<<EOF
+        $code = <<<EOF
 
     /*{$this->docStar}
      * Gets the {$public} '{$id}'{$shared}{$autowired} service.
      *
      * {$return}
 EOF;
-            $code = \str_replace('*/', ' ', $code) . <<<EOF
+        $code = \str_replace('*/', ' ', $code) . <<<EOF
 
      */
     protected function {$methodName}({$lazyInitialization})
     {
 
 EOF;
-        }
-        $this->serviceCalls = [];
-        $this->inlinedDefinitions = $this->getDefinitionsFromArguments([$definition], null, $this->serviceCalls);
-        if ($definition->isDeprecated()) {
-            $code .= \sprintf("        @trigger_error(%s, E_USER_DEPRECATED);\n\n", $this->export($definition->getDeprecationMessage($id)));
-        }
-        if ($this->getProxyDumper()->isProxyCandidate($definition)) {
-            $factoryCode = $asFile ? $definition->isShared() ? "\$this->load('%s.php', false)" : '$this->factories[%2$s](false)' : '$this->%s(false)';
-            $code .= $this->getProxyDumper()->getProxyFactoryCode($definition, $id, \sprintf($factoryCode, $methodName, $this->doExport($id)));
-        }
-        $code .= $this->addServiceInclude($id, $definition);
-        $code .= $this->addInlineService($id, $definition);
         if ($asFile) {
-            $code = \implode("\n", \array_map(function ($line) {
-                return $line ? \substr($line, 8) : $line;
-            }, \explode("\n", $code)));
+            $file = $methodName . '.php';
+            $code = \str_replace("protected function {$methodName}(", 'public static function do($container, ', $code);
         } else {
-            $code .= "    }\n";
+            $file = null;
         }
+        if ($definition->hasErrors() && ($e = $definition->getErrors())) {
+            $this->addThrow = \true;
+            $code .= \sprintf("        \$this->throw(%s);\n", $this->export(\reset($e)));
+        } else {
+            $this->serviceCalls = [];
+            $this->inlinedDefinitions = $this->getDefinitionsFromArguments([$definition], null, $this->serviceCalls);
+            if ($definition->isDeprecated()) {
+                $deprecation = $definition->getDeprecation($id);
+                $code .= \sprintf("        trigger_deprecation(%s, %s, %s);\n\n", $this->export($deprecation['package']), $this->export($deprecation['version']), $this->export($deprecation['message']));
+            } elseif ($definition->hasTag($this->hotPathTag) || !$definition->hasTag($this->preloadTags[1])) {
+                foreach ($this->inlinedDefinitions as $def) {
+                    foreach ($this->getClasses($def, $id) as $class) {
+                        $this->preload[$class] = $class;
+                    }
+                }
+            }
+            if ($this->getProxyDumper()->isProxyCandidate($definition)) {
+                $factoryCode = $asFile ? "\$this->load('%s', false)" : '$this->%s(false)';
+                $factoryCode = $this->getProxyDumper()->getProxyFactoryCode($definition, $id, \sprintf($factoryCode, $methodName));
+                $code .= $asFile ? \preg_replace('/function \\(([^)]*+)\\) {/', 'function (\\1) use ($container) {', $factoryCode) : $factoryCode;
+            }
+            $code .= $this->addServiceInclude($id, $definition);
+            $code .= $this->addInlineService($id, $definition);
+        }
+        if ($asFile) {
+            $code = \str_replace('$this', '$container', $code);
+            $code = \str_replace('function () {', 'function () use ($container) {', $code);
+        }
+        $code .= "    }\n";
         $this->definitionVariables = $this->inlinedDefinitions = null;
         $this->referenceVariables = $this->serviceCalls = null;
         return [$file, $code];
     }
-    private function addInlineVariables(string $id, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition, array $arguments, bool $forConstructor) : string
+    private function addInlineVariables(string $id, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, array $arguments, bool $forConstructor) : string
     {
         $code = '';
         foreach ($arguments as $argument) {
             if (\is_array($argument)) {
                 $code .= $this->addInlineVariables($id, $definition, $argument, $forConstructor);
-            } elseif ($argument instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference) {
+            } elseif ($argument instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference) {
                 $code .= $this->addInlineReference($id, $definition, $argument, $forConstructor);
-            } elseif ($argument instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition) {
+            } elseif ($argument instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition) {
                 $code .= $this->addInlineService($id, $definition, $argument, $forConstructor);
             }
         }
         return $code;
     }
-    private function addInlineReference(string $id, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition, string $targetId, bool $forConstructor) : string
+    private function addInlineReference(string $id, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, string $targetId, bool $forConstructor) : string
     {
         while ($this->container->hasAlias($targetId)) {
             $targetId = (string) $this->container->getAlias($targetId);
@@ -717,8 +767,8 @@ EOF;
             return $code;
         }
         $name = $this->getNextVariableName();
-        $this->referenceVariables[$targetId] = new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Variable($name);
-        $reference = \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE >= $behavior ? new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference($targetId, $behavior) : null;
+        $this->referenceVariables[$targetId] = new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Variable($name);
+        $reference = \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE >= $behavior ? new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference($targetId, $behavior) : null;
         $code .= \sprintf("        \$%s = %s;\n", $name, $this->getServiceCall($targetId, $reference));
         if (!$hasSelfRef || !$forConstructor) {
             return $code;
@@ -733,7 +783,7 @@ EOTXT
 , $this->container->getDefinition($id)->isPublic() ? 'services' : 'privates', $this->doExport($id));
         return $code;
     }
-    private function addInlineService(string $id, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $inlineDef = null, bool $forConstructor = \true) : string
+    private function addInlineService(string $id, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $inlineDef = null, bool $forConstructor = \true) : string
     {
         $code = '';
         if ($isSimpleInstance = $isRootInstance = null === $inlineDef) {
@@ -757,7 +807,7 @@ EOTXT
             $isSimpleInstance = \false;
         } else {
             $name = $definition === $inlineDef ? 'instance' : $this->getNextVariableName();
-            $this->definitionVariables[$inlineDef] = new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Variable($name);
+            $this->definitionVariables[$inlineDef] = new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Variable($name);
             $code .= '' !== $code ? "\n" : '';
             if ('instance' === $name) {
                 $code .= $this->addServiceInstance($id, $definition, $isSimpleInstance);
@@ -784,7 +834,14 @@ EOTXT
         $definitions = $this->container->getDefinitions();
         \ksort($definitions);
         foreach ($definitions as $id => $definition) {
-            $services[$id] = $definition->isSynthetic() ? null : $this->addService($id, $definition);
+            if (!$definition->isSynthetic()) {
+                $services[$id] = $this->addService($id, $definition);
+            } elseif ($definition->hasTag($this->hotPathTag) || !$definition->hasTag($this->preloadTags[1])) {
+                $services[$id] = null;
+                foreach ($this->getClasses($definition, $id) as $class) {
+                    $this->preload[$class] = $class;
+                }
+            }
         }
         foreach ($definitions as $id => $definition) {
             if (!(list($file, $code) = $services[$id]) || null !== $file) {
@@ -804,34 +861,19 @@ EOTXT
         \ksort($definitions);
         foreach ($definitions as $id => $definition) {
             if ((list($file, $code) = $services[$id]) && null !== $file && ($definition->isPublic() || !$this->isTrivialInstance($definition) || isset($this->locatedIds[$id]))) {
-                if (!$definition->isShared()) {
-                    $i = \strpos($code, "\n\ninclude_once ");
-                    if (\false !== $i && \false !== ($i = \strpos($code, "\n\n", 2 + $i))) {
-                        $code = [\substr($code, 0, 2 + $i), \substr($code, 2 + $i)];
-                    } else {
-                        $code = ["\n", $code];
-                    }
-                    $code[1] = \implode("\n", \array_map(function ($line) {
-                        return $line ? '    ' . $line : $line;
-                    }, \explode("\n", $code[1])));
-                    $factory = \sprintf('$this->factories%s[%s]', $definition->isPublic() ? '' : "['service_container']", $this->doExport($id));
-                    $lazyloadInitialization = $definition->isLazy() ? '$lazyLoad = true' : '';
-                    $code[1] = \sprintf("%s = function (%s) {\n%s};\n\nreturn %1\$s();\n", $factory, $lazyloadInitialization, $code[1]);
-                    $code = $code[0] . $code[1];
-                }
-                (yield $file => $code);
+                (yield $file => [$code, $definition->hasTag($this->hotPathTag) || !$definition->hasTag($this->preloadTags[1]) && !$definition->isDeprecated() && !$definition->hasErrors()]);
             }
         }
     }
-    private function addNewInstance(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition, string $return = '', string $id = null) : string
+    private function addNewInstance(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, string $return = '', string $id = null) : string
     {
         $tail = $return ? ";\n" : '';
-        if (\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ServiceLocator::class === $definition->getClass() && $definition->hasTag($this->serviceLocatorTag)) {
+        if (\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ServiceLocator::class === $definition->getClass() && $definition->hasTag($this->serviceLocatorTag)) {
             $arguments = [];
             foreach ($definition->getArgument(0) as $k => $argument) {
                 $arguments[$k] = $argument->getValues()[0];
             }
-            return $return . $this->dumpValue(new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument($arguments)) . $tail;
+            return $return . $this->dumpValue(new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument($arguments)) . $tail;
         }
         $arguments = [];
         foreach ($definition->getArguments() as $value) {
@@ -841,16 +883,16 @@ EOTXT
             $callable = $definition->getFactory();
             if (\is_array($callable)) {
                 if (!\preg_match('/^[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*$/', $callable[1])) {
-                    throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Cannot dump definition because of invalid factory method (%s)', $callable[1] ?: 'n/a'));
+                    throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Cannot dump definition because of invalid factory method (%s).', $callable[1] ?: 'n/a'));
                 }
-                if ($callable[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference || $callable[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition && $this->definitionVariables->contains($callable[0])) {
+                if ($callable[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference || $callable[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition && $this->definitionVariables->contains($callable[0])) {
                     return $return . \sprintf('%s->%s(%s)', $this->dumpValue($callable[0]), $callable[1], $arguments ? \implode(', ', $arguments) : '') . $tail;
                 }
                 $class = $this->dumpValue($callable[0]);
                 // If the class is a string we can optimize away
                 if (0 === \strpos($class, "'") && \false === \strpos($class, '$')) {
                     if ("''" === $class) {
-                        throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Cannot dump definition: %s service is defined to be created by a factory but is missing the service reference, did you forget to define the factory service id or class?', $id ? 'The "' . $id . '"' : 'inline'));
+                        throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Cannot dump definition: %s service is defined to be created by a factory but is missing the service reference, did you forget to define the factory service id or class?', $id ? 'The "' . $id . '"' : 'inline'));
                     }
                     return $return . \sprintf('%s::%s(%s)', $this->dumpLiteralClass($class), $callable[1], $arguments ? \implode(', ', $arguments) : '') . $tail;
                 }
@@ -862,52 +904,49 @@ EOTXT
             return $return . \sprintf('%s(%s)', $this->dumpLiteralClass($this->dumpValue($callable)), $arguments ? \implode(', ', $arguments) : '') . $tail;
         }
         if (null === ($class = $definition->getClass())) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException('Cannot dump definitions which have no class nor factory.');
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException('Cannot dump definitions which have no class nor factory.');
         }
         return $return . \sprintf('new %s(%s)', $this->dumpLiteralClass($this->dumpValue($class)), \implode(', ', $arguments)) . $tail;
     }
-    private function startClass(string $class, string $baseClass, ?array &$preload) : string
+    private function startClass(string $class, string $baseClass) : string
     {
         $namespaceLine = !$this->asFiles && $this->namespace ? "\nnamespace {$this->namespace};\n" : '';
         $code = <<<EOF
 <?php
 {$namespaceLine}
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\ContainerInterface;
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\Container;
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException;
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\Exception\\LogicException;
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\ParameterBag\\FrozenParameterBag;
-use _PhpScoperc4b135661b3a\\Symfony\\Component\\DependencyInjection\\ParameterBag\\ParameterBagInterface;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\ContainerInterface;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\Container;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\Exception\\LogicException;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\ParameterBag\\FrozenParameterBag;
+use _PhpScoperd675aaf00c76\\Symfony\\Component\\DependencyInjection\\ParameterBag\\ParameterBagInterface;
 
 /*{$this->docStar}
- * This class has been auto-generated
- * by the Symfony Dependency Injection Component.
- *
- * @final
+ * @internal This class has been auto-generated by the Symfony Dependency Injection Component.
  */
 class {$class} extends {$baseClass}
 {
-    private \$parameters = [];
+    protected \$parameters = [];
 
     public function __construct()
     {
 
 EOF;
         if ($this->asFiles) {
-            $code = \str_replace('$parameters', "\$buildParameters;\n    private \$containerDir;\n    private \$parameters", $code);
+            $code = \str_replace('$parameters = []', "\$containerDir;\n    protected \$parameters = [];\n    private \$buildParameters", $code);
             $code = \str_replace('__construct()', '__construct(array $buildParameters = [], $containerDir = __DIR__)', $code);
             $code .= "        \$this->buildParameters = \$buildParameters;\n";
             $code .= "        \$this->containerDir = \$containerDir;\n";
             if (null !== $this->targetDirRegex) {
-                $code = \str_replace('$parameters', "\$targetDir;\n    private \$parameters", $code);
+                $code = \str_replace('$parameters = []', "\$targetDir;\n    protected \$parameters = []", $code);
                 $code .= '        $this->targetDir = \\dirname($containerDir);' . "\n";
             }
         }
-        if (\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Container::class !== $this->baseClass) {
+        if (\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Container::class !== $this->baseClass) {
             $r = $this->container->getReflectionClass($this->baseClass, \false);
-            if (null !== $r && null !== ($constructor = $r->getConstructor()) && 0 === $constructor->getNumberOfRequiredParameters() && \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Container::class !== $constructor->getDeclaringClass()->name) {
+            if (null !== $r && null !== ($constructor = $r->getConstructor()) && 0 === $constructor->getNumberOfRequiredParameters() && \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Container::class !== $constructor->getDeclaringClass()->name) {
                 $code .= "        parent::__construct();\n";
                 $code .= "        \$this->parameterBag = null;\n\n";
             }
@@ -920,7 +959,7 @@ EOF;
         $code .= $this->addMethodMap();
         $code .= $this->asFiles && !$this->inlineFactories ? $this->addFileMap() : '';
         $code .= $this->addAliases();
-        $code .= $this->addInlineRequires($preload);
+        $code .= $this->addInlineRequires();
         $code .= <<<EOF
     }
 
@@ -937,11 +976,23 @@ EOF;
 EOF;
         $code .= $this->addRemovedIds();
         if ($this->asFiles && !$this->inlineFactories) {
-            $code .= <<<EOF
+            $code .= <<<'EOF'
 
-    protected function load(\$file, \$lazyLoad = true)
+    protected function load($file, $lazyLoad = true)
     {
-        return require \$this->containerDir.\\DIRECTORY_SEPARATOR.\$file;
+        if (class_exists($class = __NAMESPACE__.'\\'.$file, false)) {
+            return $class::do($this, $lazyLoad);
+        }
+
+        if ('.' === $file[-4]) {
+            $class = substr($class, 0, -4);
+        } else {
+            $file .= '.php';
+        }
+
+        $service = require $this->containerDir.\DIRECTORY_SEPARATOR.$file;
+
+        return class_exists($class, false) ? $class::do($this, $lazyLoad) : $service;
     }
 
 EOF;
@@ -952,14 +1003,9 @@ EOF;
                 continue;
             }
             if ($this->asFiles && !$this->inlineFactories) {
-                $proxyLoader = '$this->load("{$class}.php")';
-            } elseif ($this->namespace || $this->inlineFactories) {
-                $proxyLoader = 'class_alias(__NAMESPACE__."\\\\$class", $class, false)';
+                $proxyLoader = "class_exists(\$class, false) || require __DIR__.'/'.\$class.'.php';\n\n        ";
             } else {
                 $proxyLoader = '';
-            }
-            if ($proxyLoader) {
-                $proxyLoader = "class_exists(\$class, false) || {$proxyLoader};\n\n        ";
             }
             $code .= <<<EOF
 
@@ -1003,7 +1049,7 @@ EOF;
             $ids = \array_keys($ids);
             \sort($ids);
             foreach ($ids as $id) {
-                if (\preg_match(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Loader\FileLoader::ANONYMOUS_ID_REGEXP, $id)) {
+                if (\preg_match(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Loader\FileLoader::ANONYMOUS_ID_REGEXP, $id)) {
                     continue;
                 }
                 $code .= '            ' . $this->doExport($id) . " => true,\n";
@@ -1045,7 +1091,7 @@ EOF;
         \ksort($definitions);
         foreach ($definitions as $id => $definition) {
             if (!$definition->isSynthetic() && $definition->isPublic() && !$this->isHotPath($definition)) {
-                $code .= \sprintf("            %s => '%s.php',\n", $this->doExport($id), $this->generateMethodName($id));
+                $code .= \sprintf("            %s => '%s',\n", $this->doExport($id), $this->generateMethodName($id));
             }
         }
         return $code ? "        \$this->fileMap = [\n{$code}        ];\n" : '';
@@ -1081,7 +1127,10 @@ EOF;
             $id = (string) $definition;
             $methodNameAlias = $this->generateMethodName($alias);
             $idExported = $this->export($id);
-            $messageExported = $this->export($definition->getDeprecationMessage($alias));
+            $deprecation = $definition->getDeprecation($alias);
+            $packageExported = $this->export($deprecation['package']);
+            $versionExported = $this->export($deprecation['version']);
+            $messageExported = $this->export($deprecation['message']);
             $code .= <<<EOF
 
     /*{$this->docStar}
@@ -1091,7 +1140,7 @@ EOF;
      */
     protected function {$methodNameAlias}()
     {
-        @trigger_error({$messageExported}, E_USER_DEPRECATED);
+        trigger_deprecation({$packageExported}, {$versionExported}, {$messageExported});
 
         return \$this->get({$idExported});
     }
@@ -1100,7 +1149,7 @@ EOF;
         }
         return $code;
     }
-    private function addInlineRequires(?array &$preload) : string
+    private function addInlineRequires() : string
     {
         if (!$this->hotPathTag || !$this->inlineRequires) {
             return '';
@@ -1113,8 +1162,7 @@ EOF;
             }
             $inlinedDefinitions = $this->getDefinitionsFromArguments([$definition]);
             foreach ($inlinedDefinitions as $def) {
-                if (\is_string($class = \is_array($factory = $def->getFactory()) && \is_string($factory[0]) ? $factory[0] : $def->getClass())) {
-                    $preload[$class] = $class;
+                foreach ($this->getClasses($def, $id) as $class) {
                     $this->collectLineage($class, $lineage);
                 }
             }
@@ -1137,7 +1185,7 @@ EOF;
         $dynamicPhp = [];
         foreach ($this->container->getParameterBag()->all() as $key => $value) {
             if ($key !== ($resolvedKey = $this->container->resolveEnvPlaceholders($key))) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Parameter name cannot use env parameters: %s.', $resolvedKey));
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Parameter name cannot use env parameters: "%s".', $resolvedKey));
             }
             $export = $this->exportParameters([$value]);
             $export = \explode('0 => ', \substr(\rtrim($export, " ]\n"), 2, -1), 2);
@@ -1150,14 +1198,13 @@ EOF;
         $parameters = \sprintf("[\n%s\n%s]", \implode("\n", $php), \str_repeat(' ', 8));
         $code = <<<'EOF'
 
-    public function getParameter($name)
+    public function getParameter(string $name)
     {
-        $name = (string) $name;
         if (isset($this->buildParameters[$name])) {
             return $this->buildParameters[$name];
         }
 
-        if (!(isset($this->parameters[$name]) || isset($this->loadedDynamicParameters[$name]) || array_key_exists($name, $this->parameters))) {
+        if (!(isset($this->parameters[$name]) || isset($this->loadedDynamicParameters[$name]) || \array_key_exists($name, $this->parameters))) {
             throw new InvalidArgumentException(sprintf('The parameter "%s" must be defined.', $name));
         }
         if (isset($this->loadedDynamicParameters[$name])) {
@@ -1167,17 +1214,16 @@ EOF;
         return $this->parameters[$name];
     }
 
-    public function hasParameter($name): bool
+    public function hasParameter(string $name): bool
     {
-        $name = (string) $name;
         if (isset($this->buildParameters[$name])) {
             return true;
         }
 
-        return isset($this->parameters[$name]) || isset($this->loadedDynamicParameters[$name]) || array_key_exists($name, $this->parameters);
+        return isset($this->parameters[$name]) || isset($this->loadedDynamicParameters[$name]) || \array_key_exists($name, $this->parameters);
     }
 
-    public function setParameter($name, $value): void
+    public function setParameter(string $name, $value): void
     {
         throw new LogicException('Impossible to call set() on a frozen ParameterBag.');
     }
@@ -1200,7 +1246,7 @@ EOF;
 
 EOF;
         if (!$this->asFiles) {
-            $code = \preg_replace('/^.*buildParameters.*\\n.*\\n.*\\n/m', '', $code);
+            $code = \preg_replace('/^.*buildParameters.*\\n.*\\n.*\\n\\n?/m', '', $code);
         }
         if ($dynamicPhp) {
             $loadedDynamicParameters = $this->exportParameters(\array_combine(\array_keys($dynamicPhp), \array_fill(0, \count($dynamicPhp), \false)), '', 8);
@@ -1245,16 +1291,16 @@ EOF;
         foreach ($parameters as $key => $value) {
             if (\is_array($value)) {
                 $value = $this->exportParameters($value, $path . '/' . $key, $indent + 4);
-            } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain special arguments. "%s" found in "%s".', \get_class($value), $path . '/' . $key));
-            } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Variable) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain variable references. Variable "%s" found in "%s".', $value, $path . '/' . $key));
-            } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain service definitions. Definition for "%s" found in "%s".', $value->getClass(), $path . '/' . $key));
-            } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain references to other services (reference to service "%s" found in "%s").', $value, $path . '/' . $key));
-            } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\ExpressionLanguage\Expression) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain expressions. Expression "%s" found in "%s".', $value, $path . '/' . $key));
+            } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain special arguments. "%s" found in "%s".', \get_debug_type($value), $path . '/' . $key));
+            } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Variable) {
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain variable references. Variable "%s" found in "%s".', $value, $path . '/' . $key));
+            } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition) {
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain service definitions. Definition for "%s" found in "%s".', $value->getClass(), $path . '/' . $key));
+            } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference) {
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain references to other services (reference to service "%s" found in "%s").', $value, $path . '/' . $key));
+            } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\ExpressionLanguage\Expression) {
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('You cannot dump a container with parameters that contain expressions. Expression "%s" found in "%s".', $value, $path . '/' . $key));
             } else {
                 $value = $this->export($value);
             }
@@ -1294,13 +1340,13 @@ EOF;
     private function getServiceConditionals($value) : string
     {
         $conditions = [];
-        foreach (\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerBuilder::getInitializedConditionals($value) as $service) {
+        foreach (\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerBuilder::getInitializedConditionals($value) as $service) {
             if (!$this->container->hasDefinition($service)) {
                 return 'false';
             }
             $conditions[] = \sprintf('isset($this->%s[%s])', $this->container->getDefinition($service)->isPublic() ? 'services' : 'privates', $this->doExport($service));
         }
-        foreach (\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerBuilder::getServiceConditionals($value) as $service) {
+        foreach (\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerBuilder::getServiceConditionals($value) as $service) {
             if ($this->container->hasDefinition($service) && !$this->container->getDefinition($service)->isPublic()) {
                 continue;
             }
@@ -1319,7 +1365,7 @@ EOF;
         foreach ($arguments as $argument) {
             if (\is_array($argument)) {
                 $this->getDefinitionsFromArguments($argument, $definitions, $calls, $byConstructor);
-            } elseif ($argument instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference) {
+            } elseif ($argument instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference) {
                 $id = (string) $argument;
                 while ($this->container->hasAlias($id)) {
                     $id = (string) $this->container->getAlias($id);
@@ -1330,7 +1376,7 @@ EOF;
                     $calls[$id][1] = \min($calls[$id][1], $argument->getInvalidBehavior());
                 }
                 ++$calls[$id][0];
-            } elseif (!$argument instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition) {
+            } elseif (!$argument instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition) {
                 // no-op
             } elseif (isset($definitions[$argument])) {
                 $definitions[$argument] = 1 + $definitions[$argument];
@@ -1358,21 +1404,21 @@ EOF;
                 $code[] = \sprintf('%s => %s', $this->dumpValue($k, $interpolate), $this->dumpValue($v, $interpolate));
             }
             return \sprintf('[%s]', \implode(', ', $code));
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
             $scope = [$this->definitionVariables, $this->referenceVariables];
             $this->definitionVariables = $this->referenceVariables = null;
             try {
-                if ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument) {
+                if ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument) {
                     $value = $value->getValues()[0];
                     $code = $this->dumpValue($value, $interpolate);
                     $returnedType = '';
-                    if ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\TypedReference) {
-                        $returnedType = \sprintf(': %s\\%s', \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE >= $value->getInvalidBehavior() ? '' : '?', $value->getType());
+                    if ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\TypedReference) {
+                        $returnedType = \sprintf(': %s\\%s', \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE >= $value->getInvalidBehavior() ? '' : '?', $value->getType());
                     }
                     $code = \sprintf('return %s;', $code);
                     return \sprintf("function ()%s {\n            %s\n        }", $returnedType, $code);
                 }
-                if ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\IteratorArgument) {
+                if ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\IteratorArgument) {
                     $operands = [0];
                     $code = [];
                     $code[] = 'new RewindableGenerator(function () {';
@@ -1396,26 +1442,30 @@ EOF;
                     $code[] = \sprintf('        }, %s)', \count($operands) > 1 ? \implode("\n", $countCode) : $operands[0]);
                     return \implode("\n", $code);
                 }
-                if ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
+                if ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
                     $serviceMap = '';
                     $serviceTypes = '';
                     foreach ($value->getValues() as $k => $v) {
                         if (!$v) {
                             continue;
                         }
-                        $definition = $this->container->findDefinition($id = (string) $v);
+                        $id = (string) $v;
+                        while ($this->container->hasAlias($id)) {
+                            $id = (string) $this->container->getAlias($id);
+                        }
+                        $definition = $this->container->getDefinition($id);
                         $load = !($definition->hasErrors() && ($e = $definition->getErrors())) ? $this->asFiles && !$this->inlineFactories && !$this->isHotPath($definition) : \reset($e);
-                        $serviceMap .= \sprintf("\n            %s => [%s, %s, %s, %s],", $this->export($k), $this->export($definition->isShared() ? $definition->isPublic() ? 'services' : 'privates' : \false), $this->doExport($id), $this->export(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE !== $v->getInvalidBehavior() && !\is_string($load) ? $this->generateMethodName($id) . ($load ? '.php' : '') : null), $this->export($load));
-                        $serviceTypes .= \sprintf("\n            %s => %s,", $this->export($k), $this->export($v instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\TypedReference ? $v->getType() : '?'));
+                        $serviceMap .= \sprintf("\n            %s => [%s, %s, %s, %s],", $this->export($k), $this->export($definition->isShared() ? $definition->isPublic() ? 'services' : 'privates' : \false), $this->doExport($id), $this->export(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE !== $v->getInvalidBehavior() && !\is_string($load) ? $this->generateMethodName($id) : null), $this->export($load));
+                        $serviceTypes .= \sprintf("\n            %s => %s,", $this->export($k), $this->export($v instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\TypedReference ? $v->getType() : '?'));
                         $this->locatedIds[$id] = \true;
                     }
                     $this->addGetService = \true;
-                    return \sprintf('new \\%s($this->getService, [%s%s], [%s%s])', \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceLocator::class, $serviceMap, $serviceMap ? "\n        " : '', $serviceTypes, $serviceTypes ? "\n        " : '');
+                    return \sprintf('new \\%s($this->getService, [%s%s], [%s%s])', \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocator::class, $serviceMap, $serviceMap ? "\n        " : '', $serviceTypes, $serviceTypes ? "\n        " : '');
                 }
             } finally {
                 list($this->definitionVariables, $this->referenceVariables) = $scope;
             }
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition) {
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition) {
             if ($value->hasErrors() && ($e = $value->getErrors())) {
                 $this->addThrow = \true;
                 return \sprintf('$this->throw(%s)', $this->export(\reset($e)));
@@ -1424,18 +1474,18 @@ EOF;
                 return $this->dumpValue($this->definitionVariables[$value], $interpolate);
             }
             if ($value->getMethodCalls()) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException('Cannot dump definitions which have method calls.');
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException('Cannot dump definitions which have method calls.');
             }
             if ($value->getProperties()) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException('Cannot dump definitions which have properties.');
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException('Cannot dump definitions which have properties.');
             }
             if (null !== $value->getConfigurator()) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException('Cannot dump definitions which have a configurator.');
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException('Cannot dump definitions which have a configurator.');
             }
             return $this->addNewInstance($value);
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Variable) {
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Variable) {
             return '$' . $value;
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference) {
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference) {
             $id = (string) $value;
             while ($this->container->hasAlias($id)) {
                 $id = (string) $this->container->getAlias($id);
@@ -1444,9 +1494,9 @@ EOF;
                 return $this->dumpValue($this->referenceVariables[$id], $interpolate);
             }
             return $this->getServiceCall($id, $value);
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\ExpressionLanguage\Expression) {
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\ExpressionLanguage\Expression) {
             return $this->getExpressionLanguage()->compile((string) $value, ['this' => 'container']);
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Parameter) {
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Parameter) {
             return $this->dumpParameter($value);
         } elseif (\true === $interpolate && \is_string($value)) {
             if (\preg_match('/^%([^%]+)%$/', $value, $match)) {
@@ -1460,8 +1510,10 @@ EOF;
                 $code = \str_replace('%%', '%', \preg_replace_callback('/(?<!%)(%)([^%]+)\\1/', $replaceParameters, $this->export($value)));
                 return $code;
             }
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\AbstractArgument) {
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException($value->getTextWithContext());
         } elseif (\is_object($value) || \is_resource($value)) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException('Unable to dump a service container if a parameter is an object or a resource.');
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException('Unable to dump a service container if a parameter is an object or a resource.');
         }
         return $this->export($value);
     }
@@ -1476,7 +1528,7 @@ EOF;
             return \sprintf('${($_ = %s) && false ?: "_"}', $class);
         }
         if (0 !== \strpos($class, "'") || !\preg_match('/^\'(?:\\\\{2})?[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*(?:\\\\{2}[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*)*\'$/', $class)) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Cannot dump definition because of invalid class name (%s)', $class ?: 'n/a'));
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Cannot dump definition because of invalid class name (%s).', $class ?: 'n/a'));
         }
         $class = \substr(\str_replace('\\\\', '\\', $class), 1, -1);
         return 0 === \strpos($class, '\\') ? $class : '\\' . $class;
@@ -1495,7 +1547,7 @@ EOF;
         }
         return \sprintf('$this->getParameter(%s)', $this->doExport($name));
     }
-    private function getServiceCall(string $id, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference $reference = null) : string
+    private function getServiceCall(string $id, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference $reference = null) : string
     {
         while ($this->container->hasAlias($id)) {
             $id = (string) $this->container->getAlias($id);
@@ -1506,7 +1558,7 @@ EOF;
         if ($this->container->hasDefinition($id) && ($definition = $this->container->getDefinition($id))) {
             if ($definition->isSynthetic()) {
                 $code = \sprintf('$this->get(%s%s)', $this->doExport($id), null !== $reference ? ', ' . $reference->getInvalidBehavior() : '');
-            } elseif (null !== $reference && \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE === $reference->getInvalidBehavior()) {
+            } elseif (null !== $reference && \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE === $reference->getInvalidBehavior()) {
                 $code = 'null';
                 if (!$definition->isShared()) {
                     return $code;
@@ -1522,11 +1574,7 @@ EOF;
                 }
                 $code = "({$code})";
             } elseif ($this->asFiles && !$this->inlineFactories && !$this->isHotPath($definition)) {
-                $code = \sprintf("\$this->load('%s.php')", $this->generateMethodName($id));
-                if (!$definition->isShared()) {
-                    $factory = \sprintf('$this->factories%s[%s]', $definition->isPublic() ? '' : "['service_container']", $this->doExport($id));
-                    $code = \sprintf('(isset(%s) ? %1$s() : %s)', $factory, $code);
-                }
+                $code = \sprintf("\$this->load('%s')", $this->generateMethodName($id));
             } else {
                 $code = \sprintf('$this->%s()', $this->generateMethodName($id));
             }
@@ -1535,11 +1583,11 @@ EOF;
             }
             return $code;
         }
-        if (null !== $reference && \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE === $reference->getInvalidBehavior()) {
+        if (null !== $reference && \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE === $reference->getInvalidBehavior()) {
             return 'null';
         }
-        if (null !== $reference && \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE < $reference->getInvalidBehavior()) {
-            $code = \sprintf('$this->get(%s, /* ContainerInterface::NULL_ON_INVALID_REFERENCE */ %d)', $this->doExport($id), \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        if (null !== $reference && \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE < $reference->getInvalidBehavior()) {
+            $code = \sprintf('$this->get(%s, /* ContainerInterface::NULL_ON_INVALID_REFERENCE */ %d)', $this->doExport($id), \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE);
         } else {
             $code = \sprintf('$this->get(%s)', $this->doExport($id));
         }
@@ -1567,7 +1615,7 @@ EOF;
             return $this->serviceIdToMethodNameMap[$id];
         }
         $i = \strrpos($id, '\\');
-        $name = \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Container::camelize(\false !== $i && isset($id[1 + $i]) ? \substr($id, 1 + $i) : $id);
+        $name = \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Container::camelize(\false !== $i && isset($id[1 + $i]) ? \substr($id, 1 + $i) : $id);
         $name = \preg_replace('/[^a-zA-Z0-9_\\x7f-\\xff]/', '', $name);
         $methodName = 'get' . $name . 'Service';
         $suffix = 1;
@@ -1605,14 +1653,14 @@ EOF;
             return $name;
         }
     }
-    private function getExpressionLanguage() : \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ExpressionLanguage
+    private function getExpressionLanguage() : \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ExpressionLanguage
     {
         if (null === $this->expressionLanguage) {
-            if (!\class_exists('_PhpScoperc4b135661b3a\\Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage')) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\LogicException('Unable to use expressions as the Symfony ExpressionLanguage component is not installed.');
+            if (!\class_exists('_PhpScoperd675aaf00c76\\Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage')) {
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\LogicException('Unable to use expressions as the Symfony ExpressionLanguage component is not installed.');
             }
             $providers = $this->container->getExpressionLanguageProviders();
-            $this->expressionLanguage = new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ExpressionLanguage(null, $providers, function ($arg) {
+            $this->expressionLanguage = new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ExpressionLanguage(null, $providers, function ($arg) {
                 $id = '""' === \substr_replace($arg, '', 1, -1) ? \stripcslashes(\substr($arg, 1, -1)) : null;
                 if (null !== $id && ($this->container->hasAlias($id) || $this->container->hasDefinition($id))) {
                     return $this->getServiceCall($id);
@@ -1627,11 +1675,11 @@ EOF;
         }
         return $this->expressionLanguage;
     }
-    private function isHotPath(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition) : bool
+    private function isHotPath(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition) : bool
     {
         return $this->hotPathTag && $definition->hasTag($this->hotPathTag) && !$definition->isDeprecated();
     }
-    private function isSingleUsePrivateNode(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $node) : bool
+    private function isSingleUsePrivateNode(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $node) : bool
     {
         if ($node->getValue()->isPublic()) {
             return \false;
@@ -1641,7 +1689,7 @@ EOF;
             if (!($value = $edge->getSourceNode()->getValue())) {
                 continue;
             }
-            if ($edge->isLazy() || !$value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition || !$value->isShared()) {
+            if ($edge->isLazy() || !$value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition || !$value->isShared()) {
                 return \false;
             }
             $ids[$edge->getSourceNode()->getId()] = \true;
@@ -1690,6 +1738,14 @@ EOF;
         } else {
             $export = \var_export($value, \true);
         }
+        if ($this->asFiles) {
+            if (\false !== \strpos($export, '$this')) {
+                $export = \str_replace('$this', "\$'.'this", $export);
+            }
+            if (\false !== \strpos($export, 'function () {')) {
+                $export = \str_replace('function () {', "function ('.') {", $export);
+            }
+        }
         if ($resolveEnv && "'" === $export[0] && $export !== ($resolvedExport = $this->container->resolveEnvPlaceholders($export, "'.\$this->getEnv('string:%s').'"))) {
             $export = $resolvedExport;
             if (".''" === \substr($export, -3)) {
@@ -1716,10 +1772,10 @@ EOF;
             if (!\is_array($autoloader)) {
                 continue;
             }
-            if ($autoloader[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\ErrorHandler\DebugClassLoader || $autoloader[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\Debug\DebugClassLoader) {
+            if ($autoloader[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\ErrorHandler\DebugClassLoader || $autoloader[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\Debug\DebugClassLoader) {
                 $autoloader = $autoloader[0]->getClassLoader();
             }
-            if (!\is_array($autoloader) || !$autoloader[0] instanceof \_PhpScoperc4b135661b3a\Composer\Autoload\ClassLoader || !$autoloader[0]->findFile(__CLASS__)) {
+            if (!\is_array($autoloader) || !$autoloader[0] instanceof \_PhpScoperd675aaf00c76\Composer\Autoload\ClassLoader || !$autoloader[0]->findFile(__CLASS__)) {
                 continue;
             }
             foreach (\get_declared_classes() as $class) {
@@ -1732,5 +1788,30 @@ EOF;
             }
         }
         return null;
+    }
+    private function getClasses(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition, string $id) : array
+    {
+        $classes = [];
+        while ($definition instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition) {
+            foreach ($definition->getTag($this->preloadTags[0]) as $tag) {
+                if (!isset($tag['class'])) {
+                    throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Missing attribute "class" on tag "%s" for service "%s".', $this->preloadTags[0], $id));
+                }
+                $classes[] = \trim($tag['class'], '\\');
+            }
+            $classes[] = \trim($definition->getClass(), '\\');
+            $factory = $definition->getFactory();
+            if (!\is_array($factory)) {
+                $factory = [$factory];
+            }
+            if (\is_string($factory[0])) {
+                if (\false !== ($i = \strrpos($factory[0], '::'))) {
+                    $factory[0] = \substr($factory[0], 0, $i);
+                }
+                $classes[] = \trim($factory[0], '\\');
+            }
+            $definition = $factory[0];
+        }
+        return \array_filter($classes);
     }
 }

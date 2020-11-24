@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\Config\Definition;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\Config\Definition;
 
 /**
  * This class is the entry point for config normalization/merging/finalization.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  *
- * @final since version 4.1
+ * @final
  */
 class Processor
 {
@@ -26,7 +26,7 @@ class Processor
      *
      * @return array The processed configuration
      */
-    public function process(\_PhpScoperc4b135661b3a\Symfony\Component\Config\Definition\NodeInterface $configTree, array $configs)
+    public function process(\_PhpScoperd675aaf00c76\Symfony\Component\Config\Definition\NodeInterface $configTree, array $configs) : array
     {
         $currentConfig = [];
         foreach ($configs as $config) {
@@ -42,7 +42,7 @@ class Processor
      *
      * @return array The processed configuration
      */
-    public function processConfiguration(\_PhpScoperc4b135661b3a\Symfony\Component\Config\Definition\ConfigurationInterface $configuration, array $configs)
+    public function processConfiguration(\_PhpScoperd675aaf00c76\Symfony\Component\Config\Definition\ConfigurationInterface $configuration, array $configs) : array
     {
         return $this->process($configuration->getConfigTreeBuilder()->buildTree(), $configs);
     }
@@ -66,10 +66,8 @@ class Processor
      * @param array  $config A config array
      * @param string $key    The key to normalize
      * @param string $plural The plural form of the key if it is irregular
-     *
-     * @return array
      */
-    public static function normalizeConfig($config, $key, $plural = null)
+    public static function normalizeConfig(array $config, string $key, string $plural = null) : array
     {
         if (null === $plural) {
             $plural = $key . 's';

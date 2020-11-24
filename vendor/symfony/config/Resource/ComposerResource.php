@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\Config\Resource;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\Config\Resource;
 
 /**
  * ComposerResource tracks the PHP version and Composer dependencies.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  *
- * @final since Symfony 4.3
+ * @final
  */
-class ComposerResource implements \_PhpScoperc4b135661b3a\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class ComposerResource implements \_PhpScoperd675aaf00c76\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $vendors;
     private static $runtimeVendors;
@@ -26,21 +26,21 @@ class ComposerResource implements \_PhpScoperc4b135661b3a\Symfony\Component\Conf
         self::refresh();
         $this->vendors = self::$runtimeVendors;
     }
-    public function getVendors()
+    public function getVendors() : array
     {
         return \array_keys($this->vendors);
     }
     /**
      * {@inheritdoc}
      */
-    public function __toString()
+    public function __toString() : string
     {
         return __CLASS__;
     }
     /**
      * {@inheritdoc}
      */
-    public function isFresh($timestamp)
+    public function isFresh(int $timestamp) : bool
     {
         self::refresh();
         return \array_values(self::$runtimeVendors) === \array_values($this->vendors);
@@ -52,7 +52,7 @@ class ComposerResource implements \_PhpScoperc4b135661b3a\Symfony\Component\Conf
             if ('C' === $class[0] && 0 === \strpos($class, 'ComposerAutoloaderInit')) {
                 $r = new \ReflectionClass($class);
                 $v = \dirname($r->getFileName(), 2);
-                if (\file_exists($v . '/composer/installed.json')) {
+                if (\is_file($v . '/composer/installed.json')) {
                     self::$runtimeVendors[$v] = @\filemtime($v . '/composer/installed.json');
                 }
             }

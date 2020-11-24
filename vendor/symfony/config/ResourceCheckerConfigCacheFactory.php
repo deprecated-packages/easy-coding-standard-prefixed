@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\Config;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\Config;
 
 /**
  * A ConfigCacheFactory implementation that validates the
@@ -16,7 +16,7 @@ namespace _PhpScoperc4b135661b3a\Symfony\Component\Config;
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ResourceCheckerConfigCacheFactory implements \_PhpScoperc4b135661b3a\Symfony\Component\Config\ConfigCacheFactoryInterface
+class ResourceCheckerConfigCacheFactory implements \_PhpScoperd675aaf00c76\Symfony\Component\Config\ConfigCacheFactoryInterface
 {
     private $resourceCheckers = [];
     /**
@@ -29,14 +29,11 @@ class ResourceCheckerConfigCacheFactory implements \_PhpScoperc4b135661b3a\Symfo
     /**
      * {@inheritdoc}
      */
-    public function cache($file, $callback)
+    public function cache(string $file, callable $callable)
     {
-        if (!\is_callable($callback)) {
-            throw new \InvalidArgumentException(\sprintf('Invalid type for callback argument. Expected callable, but got "%s".', \gettype($callback)));
-        }
-        $cache = new \_PhpScoperc4b135661b3a\Symfony\Component\Config\ResourceCheckerConfigCache($file, $this->resourceCheckers);
+        $cache = new \_PhpScoperd675aaf00c76\Symfony\Component\Config\ResourceCheckerConfigCache($file, $this->resourceCheckers);
         if (!$cache->isFresh()) {
-            $callback($cache);
+            $callable($cache);
         }
         return $cache;
     }

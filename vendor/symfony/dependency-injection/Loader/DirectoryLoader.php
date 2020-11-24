@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Loader;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Loader;
 
 /**
  * DirectoryLoader is a recursive loader to go through directories.
  *
  * @author Sebastien Lavoie <seb@wemakecustom.com>
  */
-class DirectoryLoader extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Loader\FileLoader
+class DirectoryLoader extends \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Loader\FileLoader
 {
     /**
      * {@inheritdoc}
      */
-    public function load($file, $type = null)
+    public function load($file, string $type = null)
     {
         $file = \rtrim($file, '/');
         $path = $this->locator->locate($file);
@@ -39,7 +39,7 @@ class DirectoryLoader extends \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
     /**
      * {@inheritdoc}
      */
-    public function supports($resource, $type = null)
+    public function supports($resource, string $type = null)
     {
         if ('directory' === $type) {
             return \true;

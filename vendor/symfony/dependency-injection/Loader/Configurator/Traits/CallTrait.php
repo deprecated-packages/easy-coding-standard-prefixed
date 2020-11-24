@@ -8,24 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait CallTrait
 {
     /**
      * Adds a method to call after service initialization.
      *
-     * @param string $method    The method name to call
-     * @param array  $arguments An array of arguments to pass to the method call
+     * @param string $method       The method name to call
+     * @param array  $arguments    An array of arguments to pass to the method call
+     * @param bool   $returnsClone Whether the call returns the service instance or not
      *
      * @return $this
      *
      * @throws InvalidArgumentException on empty $method param
      */
-    public final function call(string $method, array $arguments = []) : self
+    public final function call(string $method, array $arguments = [], bool $returnsClone = \false) : self
     {
-        $this->definition->addMethodCall($method, static::processValue($arguments, \true));
+        $this->definition->addMethodCall($method, static::processValue($arguments, \true), $returnsClone);
         return $this;
     }
 }

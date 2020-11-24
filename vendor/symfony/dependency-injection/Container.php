@@ -8,18 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection;
 
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use _PhpScoperc4b135661b3a\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocator as ArgumentServiceLocator;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use _PhpScoperd675aaf00c76\Symfony\Contracts\Service\ResetInterface;
+// Help opcache.preload discover always-needed symbols
+\class_exists(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\RewindableGenerator::class);
+\class_exists(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocator::class);
 /**
  * Container is a dependency injection container.
  *
@@ -37,7 +42,7 @@ use _PhpScoperc4b135661b3a\Symfony\Contracts\Service\ResetInterface;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ResettableContainerInterface
+class Container implements \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface, \_PhpScoperd675aaf00c76\Symfony\Contracts\Service\ResetInterface
 {
     protected $parameterBag;
     protected $services = [];
@@ -52,9 +57,9 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
     private $envCache = [];
     private $compiled = \false;
     private $getEnv;
-    public function __construct(\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag = null)
+    public function __construct(\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag = null)
     {
-        $this->parameterBag = $parameterBag ?: new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag();
+        $this->parameterBag = $parameterBag ?: new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag();
     }
     /**
      * Compiles the container.
@@ -67,7 +72,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
     public function compile()
     {
         $this->parameterBag->resolve();
-        $this->parameterBag = new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag($this->parameterBag->all());
+        $this->parameterBag = new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag($this->parameterBag->all());
         $this->compiled = \true;
     }
     /**
@@ -97,7 +102,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
      *
      * @throws InvalidArgumentException if the parameter is not defined
      */
-    public function getParameter($name)
+    public function getParameter(string $name)
     {
         return $this->parameterBag->get($name);
     }
@@ -108,7 +113,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
      *
      * @return bool The presence of parameter in container
      */
-    public function hasParameter($name)
+    public function hasParameter(string $name)
     {
         return $this->parameterBag->has($name);
     }
@@ -118,7 +123,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
      * @param string $name  The parameter name
      * @param mixed  $value The parameter value
      */
-    public function setParameter($name, $value)
+    public function setParameter(string $name, $value)
     {
         $this->parameterBag->set($name, $value);
     }
@@ -127,11 +132,8 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
      *
      * Setting a synthetic service to null resets it: has() returns false and get()
      * behaves in the same way as if the service was never created.
-     *
-     * @param string      $id      The service identifier
-     * @param object|null $service The service instance
      */
-    public function set($id, $service)
+    public function set(string $id, ?object $service)
     {
         // Runs the internal initializer; used by the dumped container to include always-needed files
         if (isset($this->privates['service_container']) && $this->privates['service_container'] instanceof \Closure) {
@@ -140,18 +142,18 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
             $initialize();
         }
         if ('service_container' === $id) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('You cannot set service "service_container".');
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('You cannot set service "service_container".');
         }
         if (!(isset($this->fileMap[$id]) || isset($this->methodMap[$id]))) {
             if (isset($this->syntheticIds[$id]) || !isset($this->getRemovedIds()[$id])) {
                 // no-op
             } elseif (null === $service) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private, you cannot unset it.', $id));
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private, you cannot unset it.', $id));
             } else {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private, you cannot replace it.', $id));
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private, you cannot replace it.', $id));
             }
         } elseif (isset($this->services[$id])) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is already initialized, you cannot replace it.', $id));
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is already initialized, you cannot replace it.', $id));
         }
         if (isset($this->aliases[$id])) {
             unset($this->aliases[$id]);
@@ -196,13 +198,9 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
      *
      * @see Reference
      */
-    public function get($id, $invalidBehavior = 1)
+    public function get($id, int $invalidBehavior = 1)
     {
-        $service = $this->services[$id] ?? $this->services[$id = $this->aliases[$id] ?? $id] ?? ('service_container' === $id ? $this : ($this->factories[$id] ?? [$this, 'make'])($id, $invalidBehavior));
-        if (!\is_object($service) && null !== $service) {
-            @\trigger_error(\sprintf('Non-object services are deprecated since Symfony 4.4, please fix the "%s" service which is of type "%s" right now.', $id, \gettype($service)), \E_USER_DEPRECATED);
-        }
-        return $service;
+        return $this->services[$id] ?? $this->services[$id = $this->aliases[$id] ?? $id] ?? ('service_container' === $id ? $this : ($this->factories[$id] ?? [$this, 'make'])($id, $invalidBehavior));
     }
     /**
      * Creates a service.
@@ -212,7 +210,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
     private function make(string $id, int $invalidBehavior)
     {
         if (isset($this->loading[$id])) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_merge(\array_keys($this->loading), [$id]));
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException($id, \array_merge(\array_keys($this->loading), [$id]));
         }
         $this->loading[$id] = \true;
         try {
@@ -229,13 +227,13 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
         }
         if (1 === $invalidBehavior) {
             if (!$id) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id);
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id);
             }
             if (isset($this->syntheticIds[$id])) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service is synthetic, it needs to be set at boot time before it can be used.', $id));
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service is synthetic, it needs to be set at boot time before it can be used.', $id));
             }
             if (isset($this->getRemovedIds()[$id])) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead.', $id));
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, [], \sprintf('The "%s" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead.', $id));
             }
             $alternatives = [];
             foreach ($this->getServiceIds() as $knownId) {
@@ -247,7 +245,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
                     $alternatives[] = $knownId;
                 }
             }
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, $alternatives);
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, null, null, $alternatives);
         }
         return null;
     }
@@ -258,7 +256,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
      *
      * @return bool true if service has already been initialized, false otherwise
      */
-    public function initialized($id)
+    public function initialized(string $id)
     {
         if (isset($this->aliases[$id])) {
             $id = $this->aliases[$id];
@@ -277,7 +275,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
         $this->services = $this->factories = $this->privates = [];
         foreach ($services as $service) {
             try {
-                if ($service instanceof \_PhpScoperc4b135661b3a\Symfony\Contracts\Service\ResetInterface) {
+                if ($service instanceof \_PhpScoperd675aaf00c76\Symfony\Contracts\Service\ResetInterface) {
                     $service->reset();
                 }
             } catch (\Throwable $e) {
@@ -344,13 +342,13 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
     protected function getEnv($name)
     {
         if (isset($this->resolving[$envName = "env({$name})"])) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($this->resolving));
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($this->resolving));
         }
         if (isset($this->envCache[$name]) || \array_key_exists($name, $this->envCache)) {
             return $this->envCache[$name];
         }
         if (!$this->has($id = 'container.env_var_processors_locator')) {
-            $this->set($id, new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ServiceLocator([]));
+            $this->set($id, new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ServiceLocator([]));
         }
         if (!$this->getEnv) {
             $this->getEnv = new \ReflectionMethod($this, __FUNCTION__);
@@ -365,7 +363,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
             $prefix = 'string';
             $localName = $name;
         }
-        $processor = $processors->has($prefix) ? $processors->get($prefix) : new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\EnvVarProcessor($this);
+        $processor = $processors->has($prefix) ? $processors->get($prefix) : new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\EnvVarProcessor($this);
         $this->resolving[$envName] = \true;
         try {
             return $this->envCache[$name] = $processor->getEnv($prefix, $localName, $this->getEnv);
@@ -387,7 +385,7 @@ class Container implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyI
             return $this;
         }
         if (\is_string($load)) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException($load);
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException($load);
         }
         if (null === $method) {
             return \false !== $registry ? $this->{$registry}[$id] ?? null : null;

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\Console\Question;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\Console\Question;
 
 /**
  * Represents a yes/no question.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ConfirmationQuestion extends \_PhpScoperc4b135661b3a\Symfony\Component\Console\Question\Question
+class ConfirmationQuestion extends \_PhpScoperd675aaf00c76\Symfony\Component\Console\Question\Question
 {
     private $trueAnswerRegex;
     /**

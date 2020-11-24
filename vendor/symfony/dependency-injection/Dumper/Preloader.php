@@ -8,16 +8,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Dumper;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Dumper;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
- *
- * @internal
  */
-class Preloader
+final class Preloader
 {
-    public static function preload(array $classes)
+    public static function append(string $file, array $list) : void
+    {
+        if (!\file_exists($file)) {
+            throw new \LogicException(\sprintf('File "%s" does not exist.', $file));
+        }
+        $cacheDir = \dirname($file);
+        $classes = [];
+        foreach ($list as $item) {
+            if (0 === \strpos($item, $cacheDir)) {
+                \file_put_contents($file, \sprintf("require_once __DIR__.%s;\n", \var_export(\substr($item, \strlen($cacheDir)), \true)), \FILE_APPEND);
+                continue;
+            }
+            $classes[] = \sprintf("\$classes[] = %s;\n", \var_export($item, \true));
+        }
+        \file_put_contents($file, \sprintf("\n\$classes = [];\n%sPreloader::preload(\$classes);\n", \implode('', $classes)), \FILE_APPEND);
+    }
+    public static function preload(array $classes) : void
     {
         \set_error_handler(function ($t, $m, $f, $l) {
             if (\error_reporting() & $t) {

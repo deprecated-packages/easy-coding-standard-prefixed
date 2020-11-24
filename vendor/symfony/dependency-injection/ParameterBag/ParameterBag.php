@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ParameterBag;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ParameterBag;
 
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * Holds parameters.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
+class ParameterBag implements \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
 {
     protected $parameters = [];
     protected $resolved = \false;
@@ -57,12 +57,11 @@ class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
     /**
      * {@inheritdoc}
      */
-    public function get($name)
+    public function get(string $name)
     {
-        $name = (string) $name;
         if (!\array_key_exists($name, $this->parameters)) {
             if (!$name) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name);
             }
             $alternatives = [];
             foreach ($this->parameters as $key => $parameterValue) {
@@ -85,7 +84,7 @@ class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
                     $key = \substr($key, 0, -1 * (1 + \array_pop($namePartsLength)));
                 }
             }
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name, null, null, null, $alternatives, $nonNestedAlternative);
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException($name, null, null, null, $alternatives, $nonNestedAlternative);
         }
         return $this->parameters[$name];
     }
@@ -95,14 +94,14 @@ class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
      * @param string $name  The parameter name
      * @param mixed  $value The parameter value
      */
-    public function set($name, $value)
+    public function set(string $name, $value)
     {
-        $this->parameters[(string) $name] = $value;
+        $this->parameters[$name] = $value;
     }
     /**
      * {@inheritdoc}
      */
-    public function has($name)
+    public function has(string $name)
     {
         return \array_key_exists((string) $name, $this->parameters);
     }
@@ -111,9 +110,9 @@ class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
      *
      * @param string $name The parameter name
      */
-    public function remove($name)
+    public function remove(string $name)
     {
-        unset($this->parameters[(string) $name]);
+        unset($this->parameters[$name]);
     }
     /**
      * {@inheritdoc}
@@ -128,7 +127,7 @@ class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
             try {
                 $value = $this->resolveValue($value);
                 $parameters[$key] = $this->unescapeValue($value);
-            } catch (\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+            } catch (\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
                 $e->setSourceKey($key);
                 throw $e;
             }
@@ -165,8 +164,7 @@ class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
     /**
      * Resolves parameters inside a string.
      *
-     * @param string $value     The string to resolve
-     * @param array  $resolving An array of keys that are being resolved (used internally to detect circular references)
+     * @param array $resolving An array of keys that are being resolved (used internally to detect circular references)
      *
      * @return mixed The resolved string
      *
@@ -174,7 +172,7 @@ class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
      * @throws ParameterCircularReferenceException if a circular reference if detected
      * @throws RuntimeException                    when a given parameter has a type problem
      */
-    public function resolveString($value, array $resolving = [])
+    public function resolveString(string $value, array $resolving = [])
     {
         // we do this to deal with non string values (Boolean, integer, ...)
         // as the preg_replace_callback throw an exception when trying
@@ -182,7 +180,7 @@ class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
         if (\preg_match('/^%([^%\\s]+)%$/', $value, $match)) {
             $key = $match[1];
             if (isset($resolving[$key])) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
             }
             $resolving[$key] = \true;
             return $this->resolved ? $this->get($key) : $this->resolveValue($this->get($key), $resolving);
@@ -194,11 +192,11 @@ class ParameterBag implements \_PhpScoperc4b135661b3a\Symfony\Component\Dependen
             }
             $key = $match[1];
             if (isset($resolving[$key])) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException(\array_keys($resolving));
             }
             $resolved = $this->get($key);
             if (!\is_string($resolved) && !\is_numeric($resolved)) {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('A string value must be composed of strings and/or numbers, but found parameter "%s" of type %s inside string value "%s".', $key, \gettype($resolved), $value));
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('A string value must be composed of strings and/or numbers, but found parameter "%s" of type "%s" inside string value "%s".', $key, \get_debug_type($resolved), $value));
             }
             $resolved = (string) $resolved;
             $resolving[$key] = \true;

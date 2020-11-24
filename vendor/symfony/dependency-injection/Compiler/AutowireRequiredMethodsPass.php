@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition;
 /**
  * Looks for definitions with autowiring enabled and registers their corresponding "@required" methods as setters.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AutowireRequiredMethodsPass extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class AutowireRequiredMethodsPass extends \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}
      */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         $value = parent::processValue($value, $isRoot);
-        if (!$value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition || !$value->isAutowired() || $value->isAbstract() || !$value->getClass()) {
+        if (!$value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition || !$value->isAutowired() || $value->isAbstract() || !$value->getClass()) {
             return $value;
         }
         if (!($reflectionClass = $this->container->getReflectionClass($value->getClass(), \false))) {
@@ -43,7 +43,7 @@ class AutowireRequiredMethodsPass extends \_PhpScoperc4b135661b3a\Symfony\Compon
             while (\true) {
                 if (\false !== ($doc = $r->getDocComment())) {
                     if (\false !== \stripos($doc, '@required') && \preg_match('#(?:^/\\*\\*|\\n\\s*+\\*)\\s*+@required(?:\\s|\\*/$)#i', $doc)) {
-                        if (\preg_match('#(?:^/\\*\\*|\\n\\s*+\\*)\\s*+@return\\s++static[\\s\\*]#i', $doc)) {
+                        if ($this->isWither($reflectionMethod, $doc)) {
                             $withers[] = [$reflectionMethod->name, [], \true];
                         } else {
                             $value->addMethodCall($reflectionMethod->name, []);
@@ -71,5 +71,17 @@ class AutowireRequiredMethodsPass extends \_PhpScoperc4b135661b3a\Symfony\Compon
             }
         }
         return $value;
+    }
+    private function isWither(\ReflectionMethod $reflectionMethod, string $doc) : bool
+    {
+        $match = \preg_match('#(?:^/\\*\\*|\\n\\s*+\\*)\\s*+@return\\s++(static|\\$this)[\\s\\*]#i', $doc, $matches);
+        if ($match && 'static' === $matches[1]) {
+            return \true;
+        }
+        if ($match && '$this' === $matches[1]) {
+            return \false;
+        }
+        $reflectionType = $reflectionMethod->hasReturnType() ? $reflectionMethod->getReturnType() : null;
+        return $reflectionType instanceof \ReflectionNamedType && 'static' === $reflectionType->getName();
     }
 }

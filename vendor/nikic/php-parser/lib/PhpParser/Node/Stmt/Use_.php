@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc4b135661b3a\PhpParser\Node\Stmt;
+namespace _PhpScoperd675aaf00c76\PhpParser\Node\Stmt;
 
-use _PhpScoperc4b135661b3a\PhpParser\Node\Stmt;
-class Use_ extends \_PhpScoperc4b135661b3a\PhpParser\Node\Stmt
+use _PhpScoperd675aaf00c76\PhpParser\Node\Stmt;
+class Use_ extends \_PhpScoperd675aaf00c76\PhpParser\Node\Stmt
 {
     /**
      * Unknown type. Both Stmt\Use_ / Stmt\GroupUse and Stmt\UseUse have a $type property, one of them will always be

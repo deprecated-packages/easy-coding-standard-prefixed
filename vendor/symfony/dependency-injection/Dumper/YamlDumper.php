@@ -8,31 +8,32 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Dumper;
+namespace _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Dumper;
 
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\LogicException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperc4b135661b3a\Symfony\Component\ExpressionLanguage\Expression;
-use _PhpScoperc4b135661b3a\Symfony\Component\Yaml\Dumper as YmlDumper;
-use _PhpScoperc4b135661b3a\Symfony\Component\Yaml\Parser;
-use _PhpScoperc4b135661b3a\Symfony\Component\Yaml\Tag\TaggedValue;
-use _PhpScoperc4b135661b3a\Symfony\Component\Yaml\Yaml;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Alias;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperd675aaf00c76\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoperd675aaf00c76\Symfony\Component\Yaml\Dumper as YmlDumper;
+use _PhpScoperd675aaf00c76\Symfony\Component\Yaml\Parser;
+use _PhpScoperd675aaf00c76\Symfony\Component\Yaml\Tag\TaggedValue;
+use _PhpScoperd675aaf00c76\Symfony\Component\Yaml\Yaml;
 /**
  * YamlDumper dumps a service container as a YAML string.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Dumper\Dumper
+class YamlDumper extends \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Dumper\Dumper
 {
     private $dumper;
     /**
@@ -42,15 +43,15 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
      */
     public function dump(array $options = [])
     {
-        if (!\class_exists('_PhpScoperc4b135661b3a\\Symfony\\Component\\Yaml\\Dumper')) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\LogicException('Unable to dump the container as the Symfony Yaml Component is not installed.');
+        if (!\class_exists('_PhpScoperd675aaf00c76\\Symfony\\Component\\Yaml\\Dumper')) {
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\LogicException('Unable to dump the container as the Symfony Yaml Component is not installed.');
         }
         if (null === $this->dumper) {
-            $this->dumper = new \_PhpScoperc4b135661b3a\Symfony\Component\Yaml\Dumper();
+            $this->dumper = new \_PhpScoperd675aaf00c76\Symfony\Component\Yaml\Dumper();
         }
         return $this->container->resolveEnvPlaceholders($this->addParameters() . "\n" . $this->addServices());
     }
-    private function addService(string $id, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition $definition) : string
+    private function addService(string $id, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition $definition) : string
     {
         $code = "    {$id}:\n";
         if ($class = $definition->getClass()) {
@@ -69,8 +70,8 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
                 foreach ($attributes as $key => $value) {
                     $att[] = \sprintf('%s: %s', $this->dumper->dump($key), $this->dumper->dump($value));
                 }
-                $att = $att ? ', ' . \implode(', ', $att) : '';
-                $tagsCode .= \sprintf("            - { name: %s%s }\n", $this->dumper->dump($name), $att);
+                $att = $att ? ': { ' . \implode(', ', $att) . ' }' : '';
+                $tagsCode .= \sprintf("            - %s%s\n", $this->dumper->dump($name), $att);
             }
         }
         if ($tagsCode) {
@@ -83,7 +84,12 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
             $code .= "        synthetic: true\n";
         }
         if ($definition->isDeprecated()) {
-            $code .= \sprintf("        deprecated: %s\n", $this->dumper->dump($definition->getDeprecationMessage('%service_id%')));
+            $code .= "        deprecated:\n";
+            foreach ($definition->getDeprecation('%service_id%') as $key => $value) {
+                if ('' !== $value) {
+                    $code .= \sprintf("            %s: %s\n", $key, $this->dumper->dump($value));
+                }
+            }
         }
         if ($definition->isAutowired()) {
             $code .= "        autowire: true\n";
@@ -118,9 +124,9 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
             if (0 !== $priority) {
                 $code .= \sprintf("        decoration_priority: %s\n", $priority);
             }
-            $decorationOnInvalid = $decoratedService[3] ?? \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
-            if (\in_array($decorationOnInvalid, [\_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE])) {
-                $invalidBehavior = \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE === $decorationOnInvalid ? 'null' : 'ignore';
+            $decorationOnInvalid = $decoratedService[3] ?? \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
+            if (\in_array($decorationOnInvalid, [\_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE])) {
+                $invalidBehavior = \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::NULL_ON_INVALID_REFERENCE === $decorationOnInvalid ? 'null' : 'ignore';
                 $code .= \sprintf("        decoration_on_invalid: %s\n", $invalidBehavior);
             }
         }
@@ -132,9 +138,17 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
         }
         return $code;
     }
-    private function addServiceAlias(string $alias, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Alias $id) : string
+    private function addServiceAlias(string $alias, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Alias $id) : string
     {
-        $deprecated = $id->isDeprecated() ? \sprintf("        deprecated: %s\n", $id->getDeprecationMessage('%alias_id%')) : '';
+        $deprecated = '';
+        if ($id->isDeprecated()) {
+            $deprecated = "        deprecated:\n";
+            foreach ($id->getDeprecation('%alias_id%') as $key => $value) {
+                if ('' !== $value) {
+                    $deprecated .= \sprintf("            %s: %s\n", $key, $value);
+                }
+            }
+        }
         if ($id->isPrivate()) {
             return \sprintf("    %s: '@%s'\n%s", $alias, $id, $deprecated);
         }
@@ -176,7 +190,7 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
     private function dumpCallable($callable)
     {
         if (\is_array($callable)) {
-            if ($callable[0] instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference) {
+            if ($callable[0] instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference) {
                 $callable = [$this->getServiceCall((string) $callable[0], $callable[0]), $callable[1]];
             } else {
                 $callable = [$callable[0], $callable[1]];
@@ -193,12 +207,12 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
      */
     private function dumpValue($value)
     {
-        if ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument) {
+        if ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument) {
             $value = $value->getValues()[0];
         }
-        if ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
+        if ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ArgumentInterface) {
             $tag = $value;
-            if ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument || $value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument && ($tag = $value->getTaggedIteratorArgument())) {
+            if ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument || $value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument && ($tag = $value->getTaggedIteratorArgument())) {
                 if (null === $tag->getIndexAttribute()) {
                     $content = $tag->getTag();
                 } else {
@@ -210,16 +224,16 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
                         $content['default_priority_method'] = $tag->getDefaultPriorityMethod();
                     }
                 }
-                return new \_PhpScoperc4b135661b3a\Symfony\Component\Yaml\Tag\TaggedValue($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument ? 'tagged_iterator' : 'tagged_locator', $content);
+                return new \_PhpScoperd675aaf00c76\Symfony\Component\Yaml\Tag\TaggedValue($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument ? 'tagged_iterator' : 'tagged_locator', $content);
             }
-            if ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\IteratorArgument) {
+            if ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\IteratorArgument) {
                 $tag = 'iterator';
-            } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
+            } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
                 $tag = 'service_locator';
             } else {
-                throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Unspecified Yaml tag for type "%s".', \get_class($value)));
+                throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Unspecified Yaml tag for type "%s".', \get_debug_type($value)));
             }
-            return new \_PhpScoperc4b135661b3a\Symfony\Component\Yaml\Tag\TaggedValue($tag, $this->dumpValue($value->getValues()));
+            return new \_PhpScoperd675aaf00c76\Symfony\Component\Yaml\Tag\TaggedValue($tag, $this->dumpValue($value->getValues()));
         }
         if (\is_array($value)) {
             $code = [];
@@ -227,28 +241,30 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
                 $code[$k] = $this->dumpValue($v);
             }
             return $code;
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference) {
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference) {
             return $this->getServiceCall((string) $value, $value);
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Parameter) {
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Parameter) {
             return $this->getParameterCall((string) $value);
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\ExpressionLanguage\Expression) {
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\ExpressionLanguage\Expression) {
             return $this->getExpressionCall((string) $value);
-        } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Definition) {
-            return new \_PhpScoperc4b135661b3a\Symfony\Component\Yaml\Tag\TaggedValue('service', (new \_PhpScoperc4b135661b3a\Symfony\Component\Yaml\Parser())->parse("_:\n" . $this->addService('_', $value), \_PhpScoperc4b135661b3a\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS)['_']['_']);
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Definition) {
+            return new \_PhpScoperd675aaf00c76\Symfony\Component\Yaml\Tag\TaggedValue('service', (new \_PhpScoperd675aaf00c76\Symfony\Component\Yaml\Parser())->parse("_:\n" . $this->addService('_', $value), \_PhpScoperd675aaf00c76\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS)['_']['_']);
+        } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Argument\AbstractArgument) {
+            return new \_PhpScoperd675aaf00c76\Symfony\Component\Yaml\Tag\TaggedValue('abstract', $value->getText());
         } elseif (\is_object($value) || \is_resource($value)) {
-            throw new \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Exception\RuntimeException('Unable to dump a service container if a parameter is an object or a resource.');
+            throw new \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Exception\RuntimeException('Unable to dump a service container if a parameter is an object or a resource.');
         }
         return $value;
     }
-    private function getServiceCall(string $id, \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference $reference = null) : string
+    private function getServiceCall(string $id, \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference $reference = null) : string
     {
         if (null !== $reference) {
             switch ($reference->getInvalidBehavior()) {
-                case \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE:
+                case \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE:
                     break;
-                case \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE:
+                case \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE:
                     break;
-                case \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE:
+                case \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE:
                     return \sprintf('@!%s', $id);
                 default:
                     return \sprintf('@?%s', $id);
@@ -270,7 +286,7 @@ class YamlDumper extends \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInj
         foreach ($parameters as $key => $value) {
             if (\is_array($value)) {
                 $value = $this->prepareParameters($value, $escape);
-            } elseif ($value instanceof \_PhpScoperc4b135661b3a\Symfony\Component\DependencyInjection\Reference || \is_string($value) && 0 === \strpos($value, '@')) {
+            } elseif ($value instanceof \_PhpScoperd675aaf00c76\Symfony\Component\DependencyInjection\Reference || \is_string($value) && 0 === \strpos($value, '@')) {
                 $value = '@' . $value;
             }
             $filtered[$key] = $value;
