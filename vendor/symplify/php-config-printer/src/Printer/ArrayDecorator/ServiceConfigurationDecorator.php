@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
 
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Arg;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\Array_;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\ArrayItem;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\FuncCall;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Name\FullyQualified;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Arg;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Expr\Array_;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Expr\ArrayItem;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Expr\FuncCall;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Name\FullyQualified;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory;
 use Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
@@ -68,24 +68,24 @@ final class ServiceConfigurationDecorator
         }
         return $configuration;
     }
-    private function decorateValueObject(object $value) : \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\FuncCall
+    private function decorateValueObject(object $value) : \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\FuncCall
     {
         $new = $this->newValueObjectFactory->create($value);
-        $args = [new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Arg($new)];
+        $args = [new \_PhpScoperbd5fb781fe24\PhpParser\Node\Arg($new)];
         $functionName = $this->parameterProvider->provideStringParameter(\Symplify\PhpConfigPrinter\ValueObject\Option::INLINE_VALUE_OBJECT_FUNC_CALL_NAME);
-        return new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\FuncCall(new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Name\FullyQualified($functionName), $args);
+        return new \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\FuncCall(new \_PhpScoperbd5fb781fe24\PhpParser\Node\Name\FullyQualified($functionName), $args);
     }
-    private function decorateValueObjects(array $values) : \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\FuncCall
+    private function decorateValueObjects(array $values) : \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\FuncCall
     {
         $arrayItems = [];
         foreach ($values as $value) {
             $new = $this->newValueObjectFactory->create($value);
-            $arrayItems[] = new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\ArrayItem($new);
+            $arrayItems[] = new \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\ArrayItem($new);
         }
-        $array = new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\Array_($arrayItems);
-        $args = [new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Arg($array)];
+        $array = new \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\Array_($arrayItems);
+        $args = [new \_PhpScoperbd5fb781fe24\PhpParser\Node\Arg($array)];
         $functionName = $this->parameterProvider->provideStringParameter(\Symplify\PhpConfigPrinter\ValueObject\Option::INLINE_VALUE_OBJECTS_FUNC_CALL_NAME);
-        return new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\FuncCall(new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Name\FullyQualified($functionName), $args);
+        return new \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\FuncCall(new \_PhpScoperbd5fb781fe24\PhpParser\Node\Name\FullyQualified($functionName), $args);
     }
     private function isArrayOfObjects($values) : bool
     {

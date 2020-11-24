@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoperfd70a7e8e84f\PhpParser\Node;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt\Return_;
+use _PhpScoperbd5fb781fe24\PhpParser\Node;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Return_;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
 final class RoutingConfiguratorReturnClosureFactory
@@ -25,11 +25,11 @@ final class RoutingConfiguratorReturnClosureFactory
         $this->containerConfiguratorClosureNodeFactory = $containerConfiguratorClosureNodeFactory;
         $this->routingCaseConverters = $routingCaseConverters;
     }
-    public function createFromArrayData(array $arrayData) : \_PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt\Return_
+    public function createFromArrayData(array $arrayData) : \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->containerConfiguratorClosureNodeFactory->createRoutingClosureFromStmts($stmts);
-        return new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt\Return_($closure);
+        return new \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
      * @return Node[]

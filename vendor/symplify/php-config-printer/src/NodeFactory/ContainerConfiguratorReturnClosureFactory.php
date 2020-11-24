@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoperfd70a7e8e84f\PhpParser\Node;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\Assign;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\Variable;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt\Expression;
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt\Return_;
+use _PhpScoperbd5fb781fe24\PhpParser\Node;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Expr\Assign;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Expr\Variable;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Expression;
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Return_;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\Contract\NestedCaseConverterInterface;
 use Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
@@ -39,11 +39,11 @@ final class ContainerConfiguratorReturnClosureFactory
         $this->caseConverters = $caseConverters;
         $this->nestedCaseConverters = $nestedCaseConverters;
     }
-    public function createFromYamlArray(array $arrayData) : \_PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt\Return_
+    public function createFromYamlArray(array $arrayData) : \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->configuratorClosureNodeFactory->createContainerClosureFromStmts($stmts);
-        return new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt\Return_($closure);
+        return new \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
      * @return Node[]
@@ -96,12 +96,12 @@ final class ContainerConfiguratorReturnClosureFactory
         }
         return $nodes;
     }
-    private function createInitializeAssign(string $variableName, string $methodName) : \_PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt\Expression
+    private function createInitializeAssign(string $variableName, string $methodName) : \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Expression
     {
-        $servicesVariable = new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\Variable($variableName);
-        $containerConfiguratorVariable = new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
-        $assign = new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\Assign($servicesVariable, new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, $methodName));
-        return new \_PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt\Expression($assign);
+        $servicesVariable = new \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\Variable($variableName);
+        $containerConfiguratorVariable = new \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $assign = new \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\Assign($servicesVariable, new \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, $methodName));
+        return new \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Expression($assign);
     }
     private function createInitializeNode(string $key, array $nodes) : array
     {

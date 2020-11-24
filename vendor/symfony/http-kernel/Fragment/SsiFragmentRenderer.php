@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfd70a7e8e84f\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScoperbd5fb781fe24\Symfony\Component\HttpKernel\Fragment;
 
 /**
  * Implements the SSI rendering strategy.
  *
  * @author Sebastian Krebs <krebs.seb@gmail.com>
  */
-class SsiFragmentRenderer extends \_PhpScoperfd70a7e8e84f\Symfony\Component\HttpKernel\Fragment\AbstractSurrogateFragmentRenderer
+class SsiFragmentRenderer extends \_PhpScoperbd5fb781fe24\Symfony\Component\HttpKernel\Fragment\AbstractSurrogateFragmentRenderer
 {
     /**
      * {@inheritdoc}

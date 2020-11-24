@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfd70a7e8e84f\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperbd5fb781fe24\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperfd70a7e8e84f\Psr\Cache\InvalidArgumentException;
+use _PhpScoperbd5fb781fe24\Psr\Cache\InvalidArgumentException;
 /**
  * Interface for invalidating cached items using tags.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface TagAwareAdapterInterface extends \_PhpScoperfd70a7e8e84f\Symfony\Component\Cache\Adapter\AdapterInterface
+interface TagAwareAdapterInterface extends \_PhpScoperbd5fb781fe24\Symfony\Component\Cache\Adapter\AdapterInterface
 {
     /**
      * Invalidates cached items using tags.

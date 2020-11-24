@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher;
+namespace _PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher;
 
-use _PhpScoperfd70a7e8e84f\Psr\EventDispatcher\StoppableEventInterface;
-use _PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\Debug\WrappedListener;
-use _PhpScoperfd70a7e8e84f\Symfony\Contracts\EventDispatcher\Event as ContractsEvent;
+use _PhpScoperbd5fb781fe24\Psr\EventDispatcher\StoppableEventInterface;
+use _PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\Debug\WrappedListener;
+use _PhpScoperbd5fb781fe24\Symfony\Contracts\EventDispatcher\Event as ContractsEvent;
 /**
  * The EventDispatcherInterface is the central point of Symfony's event listener system.
  *
@@ -28,7 +28,7 @@ use _PhpScoperfd70a7e8e84f\Symfony\Contracts\EventDispatcher\Event as ContractsE
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EventDispatcher implements \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\EventDispatcherInterface
+class EventDispatcher implements \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\EventDispatcherInterface
 {
     private $listeners = [];
     private $sorted = [];
@@ -49,13 +49,13 @@ class EventDispatcher implements \_PhpScoperfd70a7e8e84f\Symfony\Component\Event
         $eventName = 1 < \func_num_args() ? \func_get_arg(1) : null;
         if (\is_object($event)) {
             $eventName = $eventName ?? \get_class($event);
-        } elseif (\is_string($event) && (null === $eventName || $eventName instanceof \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\Event)) {
-            @\trigger_error(\sprintf('Calling the "%s::dispatch()" method with the event name as the first argument is deprecated since Symfony 4.3, pass it as the second argument and provide the event object as the first argument instead.', \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\EventDispatcherInterface::class), \E_USER_DEPRECATED);
+        } elseif (\is_string($event) && (null === $eventName || $eventName instanceof \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\Event)) {
+            @\trigger_error(\sprintf('Calling the "%s::dispatch()" method with the event name as the first argument is deprecated since Symfony 4.3, pass it as the second argument and provide the event object as the first argument instead.', \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\EventDispatcherInterface::class), \E_USER_DEPRECATED);
             $swap = $event;
-            $event = $eventName ?? new \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\Event();
+            $event = $eventName ?? new \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\Event();
             $eventName = $swap;
         } else {
-            throw new \TypeError(\sprintf('Argument 1 passed to "%s::dispatch()" must be an object, %s given.', \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\EventDispatcherInterface::class, \is_object($event) ? \get_class($event) : \gettype($event)));
+            throw new \TypeError(\sprintf('Argument 1 passed to "%s::dispatch()" must be an object, %s given.', \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\EventDispatcherInterface::class, \is_object($event) ? \get_class($event) : \gettype($event)));
         }
         if (null !== $this->optimized && null !== $eventName) {
             $listeners = $this->optimized[$eventName] ?? (empty($this->listeners[$eventName]) ? [] : $this->optimizeListeners($eventName));
@@ -166,7 +166,7 @@ class EventDispatcher implements \_PhpScoperfd70a7e8e84f\Symfony\Component\Event
     /**
      * {@inheritdoc}
      */
-    public function addSubscriber(\_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function addSubscriber(\_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         foreach ($subscriber->getSubscribedEvents() as $eventName => $params) {
             if (\is_string($params)) {
@@ -183,7 +183,7 @@ class EventDispatcher implements \_PhpScoperfd70a7e8e84f\Symfony\Component\Event
     /**
      * {@inheritdoc}
      */
-    public function removeSubscriber(\_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function removeSubscriber(\_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         foreach ($subscriber->getSubscribedEvents() as $eventName => $params) {
             if (\is_array($params) && \is_array($params[0])) {
@@ -207,23 +207,23 @@ class EventDispatcher implements \_PhpScoperfd70a7e8e84f\Symfony\Component\Event
      */
     protected function callListeners(iterable $listeners, string $eventName, $event)
     {
-        if ($event instanceof \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\Event) {
+        if ($event instanceof \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\Event) {
             $this->doDispatch($listeners, $eventName, $event);
             return;
         }
-        $stoppable = $event instanceof \_PhpScoperfd70a7e8e84f\Symfony\Contracts\EventDispatcher\Event || $event instanceof \_PhpScoperfd70a7e8e84f\Psr\EventDispatcher\StoppableEventInterface;
+        $stoppable = $event instanceof \_PhpScoperbd5fb781fe24\Symfony\Contracts\EventDispatcher\Event || $event instanceof \_PhpScoperbd5fb781fe24\Psr\EventDispatcher\StoppableEventInterface;
         foreach ($listeners as $listener) {
             if ($stoppable && $event->isPropagationStopped()) {
                 break;
             }
             // @deprecated: the ternary operator is part of a BC layer and should be removed in 5.0
-            $listener($listener instanceof \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\Debug\WrappedListener ? new \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\LegacyEventProxy($event) : $event, $eventName, $this);
+            $listener($listener instanceof \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\Debug\WrappedListener ? new \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\LegacyEventProxy($event) : $event, $eventName, $this);
         }
     }
     /**
      * @deprecated since Symfony 4.3, use callListeners() instead
      */
-    protected function doDispatch($listeners, $eventName, \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\Event $event)
+    protected function doDispatch($listeners, $eventName, \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\Event $event)
     {
         foreach ($listeners as $listener) {
             if ($event->isPropagationStopped()) {
@@ -268,7 +268,7 @@ class EventDispatcher implements \_PhpScoperfd70a7e8e84f\Symfony\Component\Event
                         ($closure = \Closure::fromCallable($listener))(...$args);
                     };
                 } else {
-                    $closure = $listener instanceof \Closure || $listener instanceof \_PhpScoperfd70a7e8e84f\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener : \Closure::fromCallable($listener);
+                    $closure = $listener instanceof \Closure || $listener instanceof \_PhpScoperbd5fb781fe24\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener : \Closure::fromCallable($listener);
                 }
             }
         }

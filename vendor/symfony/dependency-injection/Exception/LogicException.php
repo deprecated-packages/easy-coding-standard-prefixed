@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfd70a7e8e84f\Symfony\Component\DependencyInjection\Exception;
+namespace _PhpScoperbd5fb781fe24\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Base LogicException for Dependency Injection component.
  */
-class LogicException extends \LogicException implements \_PhpScoperfd70a7e8e84f\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
+class LogicException extends \LogicException implements \_PhpScoperbd5fb781fe24\Symfony\Component\DependencyInjection\Exception\ExceptionInterface
 {
 }

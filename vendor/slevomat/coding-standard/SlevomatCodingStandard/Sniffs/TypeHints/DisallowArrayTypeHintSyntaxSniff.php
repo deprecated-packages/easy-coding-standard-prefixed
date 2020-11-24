@@ -5,11 +5,11 @@ namespace SlevomatCodingStandard\Sniffs\TypeHints;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\Annotation;
 use SlevomatCodingStandard\Helpers\Annotation\GenericAnnotation;
 use SlevomatCodingStandard\Helpers\Annotation\ParameterAnnotation;
@@ -27,7 +27,7 @@ use function array_map;
 use function count;
 use function in_array;
 use function sprintf;
-use const _PhpScoperfd70a7e8e84f\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoperbd5fb781fe24\T_DOC_COMMENT_OPEN_TAG;
 use const T_FUNCTION;
 class DisallowArrayTypeHintSyntaxSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
@@ -70,15 +70,15 @@ class DisallowArrayTypeHintSyntaxSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                         if ($unionTypeNode !== null) {
                             $genericIdentifier = $this->findGenericIdentifier($phpcsFile, $unionTypeNode, $annotation);
                             if ($genericIdentifier !== null) {
-                                $genericTypeNode = new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode(new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($genericIdentifier), [$this->fixArrayNode($arrayTypeNode->type)]);
+                                $genericTypeNode = new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode(new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($genericIdentifier), [$this->fixArrayNode($arrayTypeNode->type)]);
                                 $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $annotation, $unionTypeNode, $genericTypeNode);
                             } else {
-                                $genericTypeNode = new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode(new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode('array'), [$this->fixArrayNode($arrayTypeNode->type)]);
+                                $genericTypeNode = new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode(new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode('array'), [$this->fixArrayNode($arrayTypeNode->type)]);
                                 $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $annotation, $arrayTypeNode, $genericTypeNode);
                             }
                         } else {
                             $genericIdentifier = $this->findGenericIdentifier($phpcsFile, $arrayTypeNode, $annotation) ?? 'array';
-                            $genericTypeNode = new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode(new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($genericIdentifier), [$this->fixArrayNode($arrayTypeNode->type)]);
+                            $genericTypeNode = new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode(new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($genericIdentifier), [$this->fixArrayNode($arrayTypeNode->type)]);
                             $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $annotation, $arrayTypeNode, $genericTypeNode);
                         }
                         $phpcsFile->fixer->beginChangeset();
@@ -96,12 +96,12 @@ class DisallowArrayTypeHintSyntaxSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      * @param TypeNode $typeNode
      * @return ArrayTypeNode[]
      */
-    public function getArrayTypeNodes(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
+    public function getArrayTypeNodes(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
     {
         $arrayTypeNodes = \SlevomatCodingStandard\Helpers\AnnotationTypeHelper::getArrayTypeNodes($typeNode);
         $arrayTypeNodesToIgnore = [];
         foreach ($arrayTypeNodes as $arrayTypeNode) {
-            if (!$arrayTypeNode->type instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+            if (!$arrayTypeNode->type instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
                 continue;
             }
             $arrayTypeNodesToIgnore[] = $arrayTypeNode->type;
@@ -114,19 +114,19 @@ class DisallowArrayTypeHintSyntaxSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         }
         return $arrayTypeNodes;
     }
-    private function fixArrayNode(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $node) : \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    private function fixArrayNode(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $node) : \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
-        if (!$node instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+        if (!$node instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
             return $node;
         }
-        return new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode(new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode('array'), [$this->fixArrayNode($node->type)]);
+        return new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode(new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode('array'), [$this->fixArrayNode($node->type)]);
     }
     /**
      * @param ArrayTypeNode $arrayTypeNode
      * @param UnionTypeNode[] $unionTypeNodes
      * @return UnionTypeNode|null
      */
-    private function findUnionTypeThatContainsArrayType(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode $arrayTypeNode, array $unionTypeNodes) : ?\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode
+    private function findUnionTypeThatContainsArrayType(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode $arrayTypeNode, array $unionTypeNodes) : ?\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode
     {
         foreach ($unionTypeNodes as $unionTypeNode) {
             if (\in_array($arrayTypeNode, $unionTypeNode->types, \true)) {
@@ -135,9 +135,9 @@ class DisallowArrayTypeHintSyntaxSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         }
         return null;
     }
-    private function findGenericIdentifier(\PHP_CodeSniffer\Files\File $phpcsFile, \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation) : ?string
+    private function findGenericIdentifier(\PHP_CodeSniffer\Files\File $phpcsFile, \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \SlevomatCodingStandard\Helpers\Annotation\Annotation $annotation) : ?string
     {
-        if (!$typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode) {
+        if (!$typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode) {
             if (!$annotation instanceof \SlevomatCodingStandard\Helpers\Annotation\ParameterAnnotation && !$annotation instanceof \SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation) {
                 return null;
             }
@@ -155,10 +155,10 @@ class DisallowArrayTypeHintSyntaxSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         if (\count($typeNode->types) !== 2) {
             return null;
         }
-        if ($typeNode->types[0] instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && $typeNode->types[1] instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && $this->isTraversableType(\SlevomatCodingStandard\Helpers\TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $annotation->getStartPointer(), $typeNode->types[1]->name))) {
+        if ($typeNode->types[0] instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && $typeNode->types[1] instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && $this->isTraversableType(\SlevomatCodingStandard\Helpers\TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $annotation->getStartPointer(), $typeNode->types[1]->name))) {
             return $typeNode->types[1]->name;
         }
-        if ($typeNode->types[1] instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && $typeNode->types[0] instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && $this->isTraversableType(\SlevomatCodingStandard\Helpers\TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $annotation->getStartPointer(), $typeNode->types[0]->name))) {
+        if ($typeNode->types[1] instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && $typeNode->types[0] instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && $this->isTraversableType(\SlevomatCodingStandard\Helpers\TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $annotation->getStartPointer(), $typeNode->types[0]->name))) {
             return $typeNode->types[0]->name;
         }
         return null;

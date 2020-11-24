@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfd70a7e8e84f\PhpParser\Node\Expr;
+namespace _PhpScoperbd5fb781fe24\PhpParser\Node\Expr;
 
-use _PhpScoperfd70a7e8e84f\PhpParser\Node\Expr;
-class Include_ extends \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr
+use _PhpScoperbd5fb781fe24\PhpParser\Node\Expr;
+class Include_ extends \_PhpScoperbd5fb781fe24\PhpParser\Node\Expr
 {
     const TYPE_INCLUDE = 1;
     const TYPE_INCLUDE_ONCE = 2;
@@ -21,7 +21,7 @@ class Include_ extends \_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr
      * @param int   $type       Type of include
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperfd70a7e8e84f\PhpParser\Node\Expr $expr, int $type, array $attributes = [])
+    public function __construct(\_PhpScoperbd5fb781fe24\PhpParser\Node\Expr $expr, int $type, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

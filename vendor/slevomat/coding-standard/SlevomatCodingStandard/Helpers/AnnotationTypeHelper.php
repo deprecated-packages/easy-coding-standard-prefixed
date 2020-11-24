@@ -4,22 +4,22 @@ declare (strict_types=1);
 namespace SlevomatCodingStandard\Helpers;
 
 use PHP_CodeSniffer\Files\File;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFloatNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeItemNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeParameterNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use _PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFloatNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeItemNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeParameterNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use function array_merge;
 use function count;
 use function in_array;
@@ -35,43 +35,43 @@ class AnnotationTypeHelper
      * @param TypeNode $typeNode
      * @return IdentifierTypeNode[]|ThisTypeNode[]
      */
-    public static function getIdentifierTypeNodes(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
+    public static function getIdentifierTypeNodes(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
     {
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
             return self::getIdentifierTypeNodes($typeNode->type);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
             $identifierTypeNodes = [];
             foreach ($typeNode->items as $arrayShapeItemNode) {
                 $identifierTypeNodes = \array_merge($identifierTypeNodes, self::getIdentifierTypeNodes($arrayShapeItemNode->valueType));
             }
             return $identifierTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             $identifierTypeNodes = [];
             foreach ($typeNode->types as $innerTypeNode) {
                 $identifierTypeNodes = \array_merge($identifierTypeNodes, self::getIdentifierTypeNodes($innerTypeNode));
             }
             return $identifierTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             $identifierTypeNodes = self::getIdentifierTypeNodes($typeNode->type);
             foreach ($typeNode->genericTypes as $innerTypeNode) {
                 $identifierTypeNodes = \array_merge($identifierTypeNodes, self::getIdentifierTypeNodes($innerTypeNode));
             }
             return $identifierTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
             return self::getIdentifierTypeNodes($typeNode->type);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
             $identifierTypeNodes = \array_merge([$typeNode->identifier], self::getIdentifierTypeNodes($typeNode->returnType));
             foreach ($typeNode->parameters as $callableParameterNode) {
                 $identifierTypeNodes = \array_merge($identifierTypeNodes, self::getIdentifierTypeNodes($callableParameterNode->type));
             }
             return $identifierTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
             return [];
         }
         /** @var IdentifierTypeNode|ThisTypeNode $typeNode */
@@ -82,43 +82,43 @@ class AnnotationTypeHelper
      * @param TypeNode $typeNode
      * @return ConstTypeNode[]
      */
-    public static function getConstantTypeNodes(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
+    public static function getConstantTypeNodes(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
     {
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
             return self::getConstantTypeNodes($typeNode->type);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
             $constTypeNodes = [];
             foreach ($typeNode->items as $arrayShapeItemNode) {
                 $constTypeNodes = \array_merge($constTypeNodes, self::getConstantTypeNodes($arrayShapeItemNode->valueType));
             }
             return $constTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             $constTypeNodes = [];
             foreach ($typeNode->types as $innerTypeNode) {
                 $constTypeNodes = \array_merge($constTypeNodes, self::getConstantTypeNodes($innerTypeNode));
             }
             return $constTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             $constTypeNodes = [];
             foreach ($typeNode->genericTypes as $innerTypeNode) {
                 $constTypeNodes = \array_merge($constTypeNodes, self::getConstantTypeNodes($innerTypeNode));
             }
             return $constTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
             return self::getConstantTypeNodes($typeNode->type);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
             $constTypeNodes = self::getConstantTypeNodes($typeNode->returnType);
             foreach ($typeNode->parameters as $callableParameterNode) {
                 $constTypeNodes = \array_merge($constTypeNodes, self::getConstantTypeNodes($callableParameterNode->type));
             }
             return $constTypeNodes;
         }
-        if (!$typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
+        if (!$typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
             return [];
         }
         return [$typeNode];
@@ -127,39 +127,39 @@ class AnnotationTypeHelper
      * @param TypeNode $typeNode
      * @return UnionTypeNode[]
      */
-    public static function getUnionTypeNodes(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
+    public static function getUnionTypeNodes(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
     {
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode) {
             return [$typeNode];
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
             return self::getUnionTypeNodes($typeNode->type);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
             return self::getUnionTypeNodes($typeNode->type);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
             $unionTypeNodes = [];
             foreach ($typeNode->items as $arrayShapeItemNode) {
                 $unionTypeNodes = \array_merge($unionTypeNodes, self::getUnionTypeNodes($arrayShapeItemNode->valueType));
             }
             return $unionTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             $unionTypeNodes = [];
             foreach ($typeNode->types as $innerTypeNode) {
                 $unionTypeNodes = \array_merge($unionTypeNodes, self::getUnionTypeNodes($innerTypeNode));
             }
             return $unionTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             $unionTypeNodes = [];
             foreach ($typeNode->genericTypes as $innerTypeNode) {
                 $unionTypeNodes = \array_merge($unionTypeNodes, self::getUnionTypeNodes($innerTypeNode));
             }
             return $unionTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
             $unionTypeNodes = self::getUnionTypeNodes($typeNode->returnType);
             foreach ($typeNode->parameters as $callableParameterNode) {
                 $unionTypeNodes = \array_merge($unionTypeNodes, self::getUnionTypeNodes($callableParameterNode->type));
@@ -172,36 +172,36 @@ class AnnotationTypeHelper
      * @param TypeNode $typeNode
      * @return ArrayTypeNode[]
      */
-    public static function getArrayTypeNodes(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
+    public static function getArrayTypeNodes(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
     {
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
             return \array_merge([$typeNode], self::getArrayTypeNodes($typeNode->type));
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
             $arrayTypeNodes = [];
             foreach ($typeNode->items as $arrayShapeItemNode) {
                 $arrayTypeNodes = \array_merge($arrayTypeNodes, self::getArrayTypeNodes($arrayShapeItemNode->valueType));
             }
             return $arrayTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
             return self::getArrayTypeNodes($typeNode->type);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             $arrayTypeNodes = [];
             foreach ($typeNode->types as $innerTypeNode) {
                 $arrayTypeNodes = \array_merge($arrayTypeNodes, self::getArrayTypeNodes($innerTypeNode));
             }
             return $arrayTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             $arrayTypeNodes = [];
             foreach ($typeNode->genericTypes as $innerTypeNode) {
                 $arrayTypeNodes = \array_merge($arrayTypeNodes, self::getArrayTypeNodes($innerTypeNode));
             }
             return $arrayTypeNodes;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
             $arrayTypeNodes = self::getArrayTypeNodes($typeNode->returnType);
             foreach ($typeNode->parameters as $callableParameterNode) {
                 $arrayTypeNodes = \array_merge($arrayTypeNodes, self::getArrayTypeNodes($callableParameterNode->type));
@@ -214,70 +214,70 @@ class AnnotationTypeHelper
      * @param IdentifierTypeNode|ThisTypeNode $typeNode
      * @return string
      */
-    public static function getTypeHintFromNode(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : string
+    public static function getTypeHintFromNode(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : string
     {
-        return $typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode ? (string) $typeNode : $typeNode->name;
+        return $typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode ? (string) $typeNode : $typeNode->name;
     }
-    public static function export(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : string
+    public static function export(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : string
     {
         $exportedTypeNode = \preg_replace(['~\\s*(&|\\|)\\s*~'], '\\1', (string) $typeNode);
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             $exportedTypeNode = \substr($exportedTypeNode, 1, -1);
         }
         return $exportedTypeNode;
     }
-    public static function change(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $masterTypeNode, \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNodeToChange, \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $changedTypeNode) : \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public static function change(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $masterTypeNode, \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNodeToChange, \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $changedTypeNode) : \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         if ($masterTypeNode === $typeNodeToChange) {
             return $changedTypeNode;
         }
-        if ($masterTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode) {
+        if ($masterTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode) {
             $types = [];
             foreach ($masterTypeNode->types as $typeNone) {
                 $types[] = self::change($typeNone, $typeNodeToChange, $changedTypeNode);
             }
-            return new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode($types);
+            return new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode($types);
         }
-        if ($masterTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if ($masterTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             $types = [];
             foreach ($masterTypeNode->types as $typeNone) {
                 $types[] = self::change($typeNone, $typeNodeToChange, $changedTypeNode);
             }
-            return new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode($types);
+            return new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode($types);
         }
-        if ($masterTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($masterTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             $genericTypes = [];
             foreach ($masterTypeNode->genericTypes as $genericTypeNode) {
                 $genericTypes[] = self::change($genericTypeNode, $typeNodeToChange, $changedTypeNode);
             }
             /** @var IdentifierTypeNode $identificatorTypeNode */
             $identificatorTypeNode = self::change($masterTypeNode->type, $typeNodeToChange, $changedTypeNode);
-            return new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode($identificatorTypeNode, $genericTypes);
+            return new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode($identificatorTypeNode, $genericTypes);
         }
-        if ($masterTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
-            return new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode(self::change($masterTypeNode->type, $typeNodeToChange, $changedTypeNode));
+        if ($masterTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+            return new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode(self::change($masterTypeNode->type, $typeNodeToChange, $changedTypeNode));
         }
-        if ($masterTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
+        if ($masterTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
             $arrayShapeItemNodes = [];
             foreach ($masterTypeNode->items as $arrayShapeItemNode) {
                 $arrayShapeItemNodes[] = self::change($arrayShapeItemNode, $typeNodeToChange, $changedTypeNode);
             }
-            return new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode($arrayShapeItemNodes);
+            return new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode($arrayShapeItemNodes);
         }
-        if ($masterTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeItemNode) {
-            return new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeItemNode($masterTypeNode->keyName, $masterTypeNode->optional, self::change($masterTypeNode->valueType, $typeNodeToChange, $changedTypeNode));
+        if ($masterTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeItemNode) {
+            return new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeItemNode($masterTypeNode->keyName, $masterTypeNode->optional, self::change($masterTypeNode->valueType, $typeNodeToChange, $changedTypeNode));
         }
-        if ($masterTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
-            return new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode(self::change($masterTypeNode->type, $typeNodeToChange, $changedTypeNode));
+        if ($masterTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+            return new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode(self::change($masterTypeNode->type, $typeNodeToChange, $changedTypeNode));
         }
-        if ($masterTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
+        if ($masterTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
             $callableParameters = [];
             foreach ($masterTypeNode->parameters as $parameterTypeNode) {
-                $callableParameters[] = new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeParameterNode(self::change($parameterTypeNode->type, $typeNodeToChange, $changedTypeNode), $parameterTypeNode->isReference, $parameterTypeNode->isVariadic, $parameterTypeNode->parameterName, $parameterTypeNode->isOptional);
+                $callableParameters[] = new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeParameterNode(self::change($parameterTypeNode->type, $typeNodeToChange, $changedTypeNode), $parameterTypeNode->isReference, $parameterTypeNode->isVariadic, $parameterTypeNode->parameterName, $parameterTypeNode->isOptional);
             }
             /** @var IdentifierTypeNode $identificatorTypeNode */
             $identificatorTypeNode = self::change($masterTypeNode->identifier, $typeNodeToChange, $changedTypeNode);
-            return new \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode($identificatorTypeNode, $callableParameters, self::change($masterTypeNode->returnType, $typeNodeToChange, $changedTypeNode));
+            return new \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode($identificatorTypeNode, $callableParameters, self::change($masterTypeNode->returnType, $typeNodeToChange, $changedTypeNode));
         }
         return clone $masterTypeNode;
     }
@@ -285,10 +285,10 @@ class AnnotationTypeHelper
      * @param UnionTypeNode|IntersectionTypeNode $typeNode
      * @return bool
      */
-    public static function containsNullType(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
+    public static function containsNullType(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
     {
         foreach ($typeNode->types as $innerTypeNode) {
-            if (!$innerTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+            if (!$innerTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
                 continue;
             }
             if (\strtolower($innerTypeNode->name) === 'null') {
@@ -297,15 +297,15 @@ class AnnotationTypeHelper
         }
         return \false;
     }
-    public static function containsStaticOrThisType(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
+    public static function containsStaticOrThisType(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
     {
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
             return \strtolower($typeNode->name) === 'static';
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             foreach ($typeNode->types as $innerTypeNode) {
                 if (self::containsStaticOrThisType($innerTypeNode)) {
                     return \true;
@@ -314,47 +314,47 @@ class AnnotationTypeHelper
         }
         return \false;
     }
-    public static function containsOneType(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
+    public static function containsOneType(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
     {
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
-            if ($typeNode->constExpr instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
+            if ($typeNode->constExpr instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode) {
                 return \true;
             }
-            if ($typeNode->constExpr instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFloatNode) {
+            if ($typeNode->constExpr instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFloatNode) {
                 return \true;
             }
-            if ($typeNode->constExpr instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode) {
+            if ($typeNode->constExpr instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode) {
                 return \true;
             }
         }
         return \false;
     }
-    public static function containsJustTwoTypes(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
+    public static function containsJustTwoTypes(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
     {
-        if (!$typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode && !$typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if (!$typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode && !$typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             return \false;
         }
         return \count($typeNode->types) === 2;
     }
-    public static function isCompoundOfNull(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
+    public static function isCompoundOfNull(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
     {
         if (!self::containsJustTwoTypes($typeNode)) {
             return \false;
@@ -370,22 +370,22 @@ class AnnotationTypeHelper
      * @param array<int, string> $traversableTypeHints
      * @return bool
      */
-    public static function containsTraversableType(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \PHP_CodeSniffer\Files\File $phpcsFile, int $pointer, array $traversableTypeHints) : bool
+    public static function containsTraversableType(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \PHP_CodeSniffer\Files\File $phpcsFile, int $pointer, array $traversableTypeHints) : bool
     {
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
             $fullyQualifiedType = \SlevomatCodingStandard\Helpers\TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $pointer, $typeNode->name);
             return \SlevomatCodingStandard\Helpers\TypeHintHelper::isTraversableType($fullyQualifiedType, $traversableTypeHints);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             foreach ($typeNode->types as $innerTypeNode) {
                 if (self::containsTraversableType($innerTypeNode, $phpcsFile, $pointer, $traversableTypeHints)) {
                     return \true;
@@ -402,9 +402,9 @@ class AnnotationTypeHelper
      * @param bool $inTraversable
      * @return bool
      */
-    public static function containsItemsSpecificationForTraversable(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \PHP_CodeSniffer\Files\File $phpcsFile, int $pointer, array $traversableTypeHints, bool $inTraversable = \false) : bool
+    public static function containsItemsSpecificationForTraversable(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \PHP_CodeSniffer\Files\File $phpcsFile, int $pointer, array $traversableTypeHints, bool $inTraversable = \false) : bool
     {
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             foreach ($typeNode->genericTypes as $genericType) {
                 if (!self::containsItemsSpecificationForTraversable($genericType, $phpcsFile, $pointer, $traversableTypeHints, \true)) {
                     return \false;
@@ -412,7 +412,7 @@ class AnnotationTypeHelper
             }
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
             foreach ($typeNode->items as $arrayShapeItemNode) {
                 if (!self::containsItemsSpecificationForTraversable($arrayShapeItemNode->valueType, $phpcsFile, $pointer, $traversableTypeHints, \true)) {
                     return \false;
@@ -420,24 +420,24 @@ class AnnotationTypeHelper
             }
             return \true;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
             return self::containsItemsSpecificationForTraversable($typeNode->type, $phpcsFile, $pointer, $traversableTypeHints, \true);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
             if (!$inTraversable) {
                 return \false;
             }
             return !\SlevomatCodingStandard\Helpers\TypeHintHelper::isTraversableType(\SlevomatCodingStandard\Helpers\TypeHintHelper::getFullyQualifiedTypeHint($phpcsFile, $pointer, $typeNode->name), $traversableTypeHints);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
             return $inTraversable;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
             return self::containsItemsSpecificationForTraversable($typeNode->type, $phpcsFile, $pointer, $traversableTypeHints, \true);
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             foreach ($typeNode->types as $innerTypeNode) {
-                if (!$inTraversable && $innerTypeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($innerTypeNode->name) === 'null') {
+                if (!$inTraversable && $innerTypeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($innerTypeNode->name) === 'null') {
                     continue;
                 }
                 if (self::containsItemsSpecificationForTraversable($innerTypeNode, $phpcsFile, $pointer, $traversableTypeHints, $inTraversable)) {
@@ -451,20 +451,20 @@ class AnnotationTypeHelper
      * @param UnionTypeNode|IntersectionTypeNode $typeNode
      * @return TypeNode
      */
-    public static function getTypeFromNullableType(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public static function getTypeFromNullableType(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
-        return $typeNode->types[0] instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($typeNode->types[0]->name) === 'null' ? $typeNode->types[1] : $typeNode->types[0];
+        return $typeNode->types[0] instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($typeNode->types[0]->name) === 'null' ? $typeNode->types[1] : $typeNode->types[0];
     }
     /**
      * @param CallableTypeNode|GenericTypeNode|IdentifierTypeNode|ThisTypeNode|ArrayTypeNode|ArrayShapeNode|ConstTypeNode $typeNode
      * @return string
      */
-    public static function getTypeHintFromOneType(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : string
+    public static function getTypeHintFromOneType(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : string
     {
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode) {
             return $typeNode->type->name;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
             if (\strtolower($typeNode->name) === 'true') {
                 return 'bool';
             }
@@ -476,23 +476,23 @@ class AnnotationTypeHelper
             }
             return $typeNode->name;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode) {
             return $typeNode->identifier->name;
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
             return 'array';
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode) {
             return 'array';
         }
-        if ($typeNode instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
-            if ($typeNode->constExpr instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode) {
+        if ($typeNode instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode) {
+            if ($typeNode->constExpr instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode) {
                 return 'int';
             }
-            if ($typeNode->constExpr instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFloatNode) {
+            if ($typeNode->constExpr instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFloatNode) {
                 return 'float';
             }
-            if ($typeNode->constExpr instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode) {
+            if ($typeNode->constExpr instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode) {
                 return 'string';
             }
         }
@@ -505,11 +505,11 @@ class AnnotationTypeHelper
      * @param array<int, string> $traversableTypeHints
      * @return string|null
      */
-    public static function getTraversableTypeHintFromType(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \PHP_CodeSniffer\Files\File $phpcsFile, int $pointer, array $traversableTypeHints) : ?string
+    public static function getTraversableTypeHintFromType(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode, \PHP_CodeSniffer\Files\File $phpcsFile, int $pointer, array $traversableTypeHints) : ?string
     {
         $typeHint = null;
         foreach ($typeNode->types as $type) {
-            if ($type instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode || $type instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode || $type instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+            if ($type instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode || $type instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode || $type instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
                 $typeHint = self::getTypeHintFromOneType($type);
                 break;
             }
@@ -520,10 +520,10 @@ class AnnotationTypeHelper
      * @param UnionTypeNode|IntersectionTypeNode $typeNode
      * @return ?TypeNode
      */
-    public static function getItemsSpecificationTypeFromType(\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : ?\_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public static function getItemsSpecificationTypeFromType(\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : ?\_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         foreach ($typeNode->types as $type) {
-            if ($type instanceof \_PhpScoperfd70a7e8e84f\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
+            if ($type instanceof \_PhpScoperbd5fb781fe24\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode) {
                 return $type;
             }
         }
