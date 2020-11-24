@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7108c819f5c5\Symfony\Component\Yaml;
+namespace _PhpScoperf3d5f0921050\Symfony\Component\Yaml;
 
-use _PhpScoper7108c819f5c5\Symfony\Component\Yaml\Tag\TaggedValue;
+use _PhpScoperf3d5f0921050\Symfony\Component\Yaml\Tag\TaggedValue;
 /**
  * Dumper dumps PHP variables to YAML strings.
  *
@@ -48,26 +48,26 @@ class Dumper
         $output = '';
         $prefix = $indent ? \str_repeat(' ', $indent) : '';
         $dumpObjectAsInlineMap = \true;
-        if (\_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Yaml::DUMP_OBJECT_AS_MAP & $flags && ($input instanceof \ArrayObject || $input instanceof \stdClass)) {
+        if (\_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Yaml::DUMP_OBJECT_AS_MAP & $flags && ($input instanceof \ArrayObject || $input instanceof \stdClass)) {
             $dumpObjectAsInlineMap = empty((array) $input);
         }
-        if ($inline <= 0 || !\is_array($input) && !$input instanceof \_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Tag\TaggedValue && $dumpObjectAsInlineMap || empty($input)) {
-            $output .= $prefix . \_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Inline::dump($input, $flags);
+        if ($inline <= 0 || !\is_array($input) && !$input instanceof \_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Tag\TaggedValue && $dumpObjectAsInlineMap || empty($input)) {
+            $output .= $prefix . \_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Inline::dump($input, $flags);
         } else {
-            $dumpAsMap = \_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Inline::isHash($input);
+            $dumpAsMap = \_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Inline::isHash($input);
             foreach ($input as $key => $value) {
-                if ($inline >= 1 && \_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK & $flags && \is_string($value) && \false !== \strpos($value, "\n") && \false === \strpos($value, "\r\n")) {
+                if ($inline >= 1 && \_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK & $flags && \is_string($value) && \false !== \strpos($value, "\n") && \false === \strpos($value, "\r\n")) {
                     // If the first line starts with a space character, the spec requires a blockIndicationIndicator
                     // http://www.yaml.org/spec/1.2/spec.html#id2793979
                     $blockIndentationIndicator = ' ' === \substr($value, 0, 1) ? (string) $this->indentation : '';
-                    $output .= \sprintf("%s%s%s |%s\n", $prefix, $dumpAsMap ? \_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Inline::dump($key, $flags) . ':' : '-', '', $blockIndentationIndicator);
+                    $output .= \sprintf("%s%s%s |%s\n", $prefix, $dumpAsMap ? \_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Inline::dump($key, $flags) . ':' : '-', '', $blockIndentationIndicator);
                     foreach (\preg_split('/\\n|\\r\\n/', $value) as $row) {
                         $output .= \sprintf("%s%s%s\n", $prefix, \str_repeat(' ', $this->indentation), $row);
                     }
                     continue;
                 }
-                if ($value instanceof \_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Tag\TaggedValue) {
-                    $output .= \sprintf('%s%s !%s', $prefix, $dumpAsMap ? \_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Inline::dump($key, $flags) . ':' : '-', $value->getTag());
+                if ($value instanceof \_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Tag\TaggedValue) {
+                    $output .= \sprintf('%s%s !%s', $prefix, $dumpAsMap ? \_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Inline::dump($key, $flags) . ':' : '-', $value->getTag());
                     if ($inline - 1 <= 0 || null === $value->getValue() || \is_scalar($value->getValue())) {
                         $output .= ' ' . $this->dump($value->getValue(), $inline - 1, 0, $flags) . "\n";
                     } else {
@@ -77,11 +77,11 @@ class Dumper
                     continue;
                 }
                 $dumpObjectAsInlineMap = \true;
-                if (\_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Yaml::DUMP_OBJECT_AS_MAP & $flags && ($value instanceof \ArrayObject || $value instanceof \stdClass)) {
+                if (\_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Yaml::DUMP_OBJECT_AS_MAP & $flags && ($value instanceof \ArrayObject || $value instanceof \stdClass)) {
                     $dumpObjectAsInlineMap = empty((array) $value);
                 }
                 $willBeInlined = $inline - 1 <= 0 || !\is_array($value) && $dumpObjectAsInlineMap || empty($value);
-                $output .= \sprintf('%s%s%s%s', $prefix, $dumpAsMap ? \_PhpScoper7108c819f5c5\Symfony\Component\Yaml\Inline::dump($key, $flags) . ':' : '-', $willBeInlined ? ' ' : "\n", $this->dump($value, $inline - 1, $willBeInlined ? 0 : $indent + $this->indentation, $flags)) . ($willBeInlined ? "\n" : '');
+                $output .= \sprintf('%s%s%s%s', $prefix, $dumpAsMap ? \_PhpScoperf3d5f0921050\Symfony\Component\Yaml\Inline::dump($key, $flags) . ':' : '-', $willBeInlined ? ' ' : "\n", $this->dump($value, $inline - 1, $willBeInlined ? 0 : $indent + $this->indentation, $flags)) . ($willBeInlined ? "\n" : '');
             }
         }
         return $output;

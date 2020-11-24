@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7108c819f5c5\PhpParser\Node\Expr;
+namespace _PhpScoperf3d5f0921050\PhpParser\Node\Expr;
 
-use _PhpScoper7108c819f5c5\PhpParser\Node\Expr;
-class Ternary extends \_PhpScoper7108c819f5c5\PhpParser\Node\Expr
+use _PhpScoperf3d5f0921050\PhpParser\Node\Expr;
+class Ternary extends \_PhpScoperf3d5f0921050\PhpParser\Node\Expr
 {
     /** @var Expr Condition */
     public $cond;
@@ -20,7 +20,7 @@ class Ternary extends \_PhpScoper7108c819f5c5\PhpParser\Node\Expr
      * @param Expr      $else       Expression for false
      * @param array                    $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper7108c819f5c5\PhpParser\Node\Expr $cond, $if, \_PhpScoper7108c819f5c5\PhpParser\Node\Expr $else, array $attributes = [])
+    public function __construct(\_PhpScoperf3d5f0921050\PhpParser\Node\Expr $cond, $if, \_PhpScoperf3d5f0921050\PhpParser\Node\Expr $else, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;

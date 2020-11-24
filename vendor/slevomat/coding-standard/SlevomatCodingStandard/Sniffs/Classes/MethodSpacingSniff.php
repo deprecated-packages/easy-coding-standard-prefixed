@@ -15,7 +15,7 @@ use function array_key_exists;
 use function sprintf;
 use function str_repeat;
 use const T_FUNCTION;
-use const _PhpScoper7108c819f5c5\T_SEMICOLON;
+use const _PhpScoperf3d5f0921050\T_SEMICOLON;
 use const T_WHITESPACE;
 class MethodSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

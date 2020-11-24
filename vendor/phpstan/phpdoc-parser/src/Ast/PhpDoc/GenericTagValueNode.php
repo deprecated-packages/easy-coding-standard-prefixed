@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7108c819f5c5\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoperf3d5f0921050\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-class GenericTagValueNode implements \_PhpScoper7108c819f5c5\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class GenericTagValueNode implements \_PhpScoperf3d5f0921050\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     /** @var string (may be empty) */
     public $value;
