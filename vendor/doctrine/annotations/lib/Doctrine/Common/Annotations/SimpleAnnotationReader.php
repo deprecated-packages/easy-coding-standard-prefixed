@@ -17,7 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScoperd675aaf00c76\Doctrine\Common\Annotations;
+namespace _PhpScoper528afa732cbd\Doctrine\Common\Annotations;
 
 /**
  * Simple Annotation Reader.
@@ -29,7 +29,7 @@ namespace _PhpScoperd675aaf00c76\Doctrine\Common\Annotations;
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Fabio B. Silva <fabio.bat.silva@gmail.com>
  */
-class SimpleAnnotationReader implements \_PhpScoperd675aaf00c76\Doctrine\Common\Annotations\Reader
+class SimpleAnnotationReader implements \_PhpScoper528afa732cbd\Doctrine\Common\Annotations\Reader
 {
     /**
      * @var DocParser
@@ -42,7 +42,7 @@ class SimpleAnnotationReader implements \_PhpScoperd675aaf00c76\Doctrine\Common\
      */
     public function __construct()
     {
-        $this->parser = new \_PhpScoperd675aaf00c76\Doctrine\Common\Annotations\DocParser();
+        $this->parser = new \_PhpScoper528afa732cbd\Doctrine\Common\Annotations\DocParser();
         $this->parser->setIgnoreNotImportedAnnotations(\true);
     }
     /**

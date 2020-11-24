@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd675aaf00c76\Symfony\Component\Cache\Simple;
+namespace _PhpScoper528afa732cbd\Symfony\Component\Cache\Simple;
 
-use _PhpScoperd675aaf00c76\Symfony\Component\Cache\Adapter\PhpFilesAdapter;
-use _PhpScoperd675aaf00c76\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScoperd675aaf00c76\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperd675aaf00c76\Symfony\Component\Cache\Traits\PhpFilesTrait;
-use _PhpScoperd675aaf00c76\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperd675aaf00c76\Symfony\Component\Cache\Simple\PhpFilesCache::class, \_PhpScoperd675aaf00c76\Symfony\Component\Cache\Adapter\PhpFilesAdapter::class, \_PhpScoperd675aaf00c76\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoper528afa732cbd\Symfony\Component\Cache\Adapter\PhpFilesAdapter;
+use _PhpScoper528afa732cbd\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper528afa732cbd\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper528afa732cbd\Symfony\Component\Cache\Traits\PhpFilesTrait;
+use _PhpScoper528afa732cbd\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper528afa732cbd\Symfony\Component\Cache\Simple\PhpFilesCache::class, \_PhpScoper528afa732cbd\Symfony\Component\Cache\Adapter\PhpFilesAdapter::class, \_PhpScoper528afa732cbd\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use PhpFilesAdapter and type-hint for CacheInterface instead.
  */
-class PhpFilesCache extends \_PhpScoperd675aaf00c76\Symfony\Component\Cache\Simple\AbstractCache implements \_PhpScoperd675aaf00c76\Symfony\Component\Cache\PruneableInterface
+class PhpFilesCache extends \_PhpScoper528afa732cbd\Symfony\Component\Cache\Simple\AbstractCache implements \_PhpScoper528afa732cbd\Symfony\Component\Cache\PruneableInterface
 {
     use PhpFilesTrait;
     /**

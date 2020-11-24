@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperd675aaf00c76\PhpParser\Node\Expr;
+namespace _PhpScoper528afa732cbd\PhpParser\Node\Expr;
 
-use _PhpScoperd675aaf00c76\PhpParser\Node\Expr;
-class ShellExec extends \_PhpScoperd675aaf00c76\PhpParser\Node\Expr
+use _PhpScoper528afa732cbd\PhpParser\Node\Expr;
+class ShellExec extends \_PhpScoper528afa732cbd\PhpParser\Node\Expr
 {
     /** @var array Encapsed string array */
     public $parts;

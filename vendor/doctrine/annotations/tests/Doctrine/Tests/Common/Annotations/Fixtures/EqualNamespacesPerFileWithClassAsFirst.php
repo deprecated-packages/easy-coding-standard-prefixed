@@ -1,12 +1,12 @@
 <?php
 
-namespace _PhpScoperd675aaf00c76\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper528afa732cbd\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoperd675aaf00c76\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
-use _PhpScoperd675aaf00c76\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoper528afa732cbd\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+use _PhpScoper528afa732cbd\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
 class EqualNamespacesPerFileWithClassAsFirst
 {
 }
-namespace _PhpScoperd675aaf00c76\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper528afa732cbd\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoperd675aaf00c76\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
+use _PhpScoper528afa732cbd\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
