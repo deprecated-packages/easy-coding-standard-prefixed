@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf3d5f0921050\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper7c0f822a05e1\Symfony\Component\HttpKernel\Event;
 
 /**
  * Allows filtering of a controller callable.
@@ -23,6 +23,6 @@ namespace _PhpScoperf3d5f0921050\Symfony\Component\HttpKernel\Event;
  *
  * @final since Symfony 4.4
  */
-class ControllerEvent extends \_PhpScoperf3d5f0921050\Symfony\Component\HttpKernel\Event\FilterControllerEvent
+class ControllerEvent extends \_PhpScoper7c0f822a05e1\Symfony\Component\HttpKernel\Event\FilterControllerEvent
 {
 }

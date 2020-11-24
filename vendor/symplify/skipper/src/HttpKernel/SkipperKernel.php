@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\HttpKernel;
 
-use _PhpScoperf3d5f0921050\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoperf3d5f0921050\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper7c0f822a05e1\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper7c0f822a05e1\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\Skipper\Bundle\SkipperBundle;
 use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
 final class SkipperKernel extends \Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
-    public function registerContainerConfiguration(\_PhpScoperf3d5f0921050\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(\_PhpScoper7c0f822a05e1\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
         parent::registerContainerConfiguration($loader);

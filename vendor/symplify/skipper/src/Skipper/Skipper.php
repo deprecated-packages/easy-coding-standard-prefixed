@@ -136,7 +136,7 @@ final class Skipper
             return \true;
         }
         $ignoredPath = $this->pathNormalizer->normalizeForFnmatch($ignoredPath);
-        if ($ignoredPath === "") {
+        if ($ignoredPath === '') {
             return \false;
         }
         return $smartFileInfo->endsWith($ignoredPath) || $smartFileInfo->doesFnmatch($ignoredPath);

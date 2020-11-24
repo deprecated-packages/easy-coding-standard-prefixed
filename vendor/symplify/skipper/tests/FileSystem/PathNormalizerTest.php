@@ -23,7 +23,7 @@ final class PathNormalizerTest extends \Symplify\PackageBuilder\Testing\Abstract
      */
     public function testPaths(string $path, string $expected) : void
     {
-        $this->assertEquals($expected, $this->pathNormalizer->normalizeForFnmatch($path));
+        $this->assertSame($expected, $this->pathNormalizer->normalizeForFnmatch($path));
     }
     public function providePaths() : \Iterator
     {
