@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper528afa732cbd\Symfony\Component\Mime\Part;
+namespace _PhpScoper7108c819f5c5\Symfony\Component\Mime\Part;
 
-use _PhpScoper528afa732cbd\Symfony\Component\Mime\Header\Headers;
+use _PhpScoper7108c819f5c5\Symfony\Component\Mime\Header\Headers;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @experimental in 4.3
  */
-abstract class AbstractMultipartPart extends \_PhpScoper528afa732cbd\Symfony\Component\Mime\Part\AbstractPart
+abstract class AbstractMultipartPart extends \_PhpScoper7108c819f5c5\Symfony\Component\Mime\Part\AbstractPart
 {
     private $boundary;
     private $parts = [];
-    public function __construct(\_PhpScoper528afa732cbd\Symfony\Component\Mime\Part\AbstractPart ...$parts)
+    public function __construct(\_PhpScoper7108c819f5c5\Symfony\Component\Mime\Part\AbstractPart ...$parts)
     {
         parent::__construct();
         foreach ($parts as $part) {
@@ -38,7 +38,7 @@ abstract class AbstractMultipartPart extends \_PhpScoper528afa732cbd\Symfony\Com
     {
         return 'multipart';
     }
-    public function getPreparedHeaders() : \_PhpScoper528afa732cbd\Symfony\Component\Mime\Header\Headers
+    public function getPreparedHeaders() : \_PhpScoper7108c819f5c5\Symfony\Component\Mime\Header\Headers
     {
         $headers = parent::getPreparedHeaders();
         $headers->setHeaderParameter('Content-Type', 'boundary', $this->getBoundary());
