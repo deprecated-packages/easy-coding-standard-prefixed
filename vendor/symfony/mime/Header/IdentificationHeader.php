@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7c0f822a05e1\Symfony\Component\Mime\Header;
+namespace _PhpScoperfd70a7e8e84f\Symfony\Component\Mime\Header;
 
-use _PhpScoper7c0f822a05e1\Symfony\Component\Mime\Address;
-use _PhpScoper7c0f822a05e1\Symfony\Component\Mime\Exception\RfcComplianceException;
+use _PhpScoperfd70a7e8e84f\Symfony\Component\Mime\Address;
+use _PhpScoperfd70a7e8e84f\Symfony\Component\Mime\Exception\RfcComplianceException;
 /**
  * An ID MIME Header for something like Message-ID or Content-ID (one or more addresses).
  *
@@ -19,7 +19,7 @@ use _PhpScoper7c0f822a05e1\Symfony\Component\Mime\Exception\RfcComplianceExcepti
  *
  * @experimental in 4.3
  */
-final class IdentificationHeader extends \_PhpScoper7c0f822a05e1\Symfony\Component\Mime\Header\AbstractHeader
+final class IdentificationHeader extends \_PhpScoperfd70a7e8e84f\Symfony\Component\Mime\Header\AbstractHeader
 {
     private $ids = [];
     private $idsAsAddresses = [];
@@ -79,7 +79,7 @@ final class IdentificationHeader extends \_PhpScoper7c0f822a05e1\Symfony\Compone
         $this->ids = [];
         $this->idsAsAddresses = [];
         foreach ($ids as $id) {
-            $this->idsAsAddresses[] = new \_PhpScoper7c0f822a05e1\Symfony\Component\Mime\Address($id);
+            $this->idsAsAddresses[] = new \_PhpScoperfd70a7e8e84f\Symfony\Component\Mime\Address($id);
             $this->ids[] = $id;
         }
     }

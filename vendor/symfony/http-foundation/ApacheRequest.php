@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7c0f822a05e1\Symfony\Component\HttpFoundation;
+namespace _PhpScoperfd70a7e8e84f\Symfony\Component\HttpFoundation;
 
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoper7c0f822a05e1\Symfony\Component\HttpFoundation\ApacheRequest::class, \_PhpScoper7c0f822a05e1\Symfony\Component\HttpFoundation\Request::class), \E_USER_DEPRECATED);
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoperfd70a7e8e84f\Symfony\Component\HttpFoundation\ApacheRequest::class, \_PhpScoperfd70a7e8e84f\Symfony\Component\HttpFoundation\Request::class), \E_USER_DEPRECATED);
 /**
  * Request represents an HTTP request from an Apache server.
  *
@@ -18,7 +18,7 @@ namespace _PhpScoper7c0f822a05e1\Symfony\Component\HttpFoundation;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ApacheRequest extends \_PhpScoper7c0f822a05e1\Symfony\Component\HttpFoundation\Request
+class ApacheRequest extends \_PhpScoperfd70a7e8e84f\Symfony\Component\HttpFoundation\Request
 {
     /**
      * {@inheritdoc}

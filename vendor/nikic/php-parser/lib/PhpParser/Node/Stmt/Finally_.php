@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7c0f822a05e1\PhpParser\Node\Stmt;
+namespace _PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt;
 
-use _PhpScoper7c0f822a05e1\PhpParser\Node;
-class Finally_ extends \_PhpScoper7c0f822a05e1\PhpParser\Node\Stmt
+use _PhpScoperfd70a7e8e84f\PhpParser\Node;
+class Finally_ extends \_PhpScoperfd70a7e8e84f\PhpParser\Node\Stmt
 {
     /** @var Node\Stmt[] Statements */
     public $stmts;
