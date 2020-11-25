@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperca8ca183ac38\Symfony\Component\Debug\Exception;
+namespace _PhpScoper544eb478a6f6\Symfony\Component\Debug\Exception;
 
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoperca8ca183ac38\Symfony\Component\Debug\Exception\SilencedErrorContext::class, \_PhpScoperca8ca183ac38\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext::class), \E_USER_DEPRECATED);
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoper544eb478a6f6\Symfony\Component\Debug\Exception\SilencedErrorContext::class, \_PhpScoper544eb478a6f6\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext::class), \E_USER_DEPRECATED);
 /**
  * Data Object that represents a Silenced Error.
  *

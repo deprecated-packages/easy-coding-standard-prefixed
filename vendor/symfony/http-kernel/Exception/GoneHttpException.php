@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperca8ca183ac38\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoper544eb478a6f6\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class GoneHttpException extends \_PhpScoperca8ca183ac38\Symfony\Component\HttpKernel\Exception\HttpException
+class GoneHttpException extends \_PhpScoper544eb478a6f6\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string     $message  The internal exception message

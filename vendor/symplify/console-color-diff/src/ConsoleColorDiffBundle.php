@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff;
 
-use _PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoperca8ca183ac38\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper544eb478a6f6\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper544eb478a6f6\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\ConsoleColorDiff\DependencyInjection\Extension\ConsoleColorDiffExtension;
-final class ConsoleColorDiffBundle extends \_PhpScoperca8ca183ac38\Symfony\Component\HttpKernel\Bundle\Bundle
+final class ConsoleColorDiffBundle extends \_PhpScoper544eb478a6f6\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    protected function createContainerExtension() : ?\_PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScoper544eb478a6f6\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
         return new \Symplify\ConsoleColorDiff\DependencyInjection\Extension\ConsoleColorDiffExtension();
     }

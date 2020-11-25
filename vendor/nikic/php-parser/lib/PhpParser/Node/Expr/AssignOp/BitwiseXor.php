@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperca8ca183ac38\PhpParser\Node\Expr\AssignOp;
+namespace _PhpScoper544eb478a6f6\PhpParser\Node\Expr\AssignOp;
 
-use _PhpScoperca8ca183ac38\PhpParser\Node\Expr\AssignOp;
-class BitwiseXor extends \_PhpScoperca8ca183ac38\PhpParser\Node\Expr\AssignOp
+use _PhpScoper544eb478a6f6\PhpParser\Node\Expr\AssignOp;
+class BitwiseXor extends \_PhpScoper544eb478a6f6\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {

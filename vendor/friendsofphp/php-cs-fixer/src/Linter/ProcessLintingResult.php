@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Linter;
 
-use _PhpScoperca8ca183ac38\Symfony\Component\Process\Process;
+use _PhpScoper544eb478a6f6\Symfony\Component\Process\Process;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -27,7 +27,7 @@ final class ProcessLintingResult implements \PhpCsFixer\Linter\LintingResultInte
      * @var Process
      */
     private $process;
-    public function __construct(\_PhpScoperca8ca183ac38\Symfony\Component\Process\Process $process)
+    public function __construct(\_PhpScoper544eb478a6f6\Symfony\Component\Process\Process $process)
     {
         $this->process = $process;
     }
