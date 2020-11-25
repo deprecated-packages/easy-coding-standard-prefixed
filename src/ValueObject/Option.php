@@ -31,11 +31,6 @@ class Option
      */
     public const SKIP = 'skip';
     /**
-     * @api
-     * @var string
-     */
-    public const EXCLUDE_PATHS = 'exclude_paths';
-    /**
      * @var string
      */
     public const SETS = 'sets';

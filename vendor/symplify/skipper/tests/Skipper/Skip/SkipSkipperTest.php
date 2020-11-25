@@ -26,6 +26,7 @@ final class SkipSkipperTest extends \Symplify\PackageBuilder\Testing\AbstractKer
      * @dataProvider provideCheckerAndFile()
      * @dataProvider provideCodeAndFile()
      * @dataProvider provideMessageAndFile()
+     * @dataProvider provideAnythingAndFilePath()
      */
     public function test(string $element, string $filePath, bool $expectedSkip) : void
     {
@@ -55,5 +56,10 @@ final class SkipSkipperTest extends \Symplify\PackageBuilder\Testing\AbstractKer
         (yield ['some another fishy code at line 5!', __DIR__ . '/Fixture/someDirectory/someFile.php', \true]);
         (yield ['Cognitive complexity for method "foo" is 2 but has to be less than or equal to 1.', __DIR__ . '/Fixture/skip.php.inc', \true]);
         (yield ['Cognitive complexity for method "bar" is 2 but has to be less than or equal to 1.', __DIR__ . '/Fixture/skip.php.inc', \false]);
+    }
+    public function provideAnythingAndFilePath() : \Iterator
+    {
+        (yield ['anything', __DIR__ . '/Fixture/AlwaysSkippedPath/some_file.txt', \true]);
+        (yield ['anything', __DIR__ . '/Fixture/PathSkippedWithMask/another_file.txt', \true]);
     }
 }
