@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper833c56a97273\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperd301db66c80c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper833c56a97273\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoper833c56a97273\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper833c56a97273\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperd301db66c80c\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoperd301db66c80c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperd301db66c80c\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveClassPass implements \_PhpScoper833c56a97273\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolveClassPass implements \_PhpScoperd301db66c80c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoper833c56a97273\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperd301db66c80c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         foreach ($container->getDefinitions() as $id => $definition) {
             if ($definition->isSynthetic() || null !== $definition->getClass()) {
                 continue;
             }
             if (\preg_match('/^[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*+(?:\\\\[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*+)++$/', $id)) {
-                if ($definition instanceof \_PhpScoper833c56a97273\Symfony\Component\DependencyInjection\ChildDefinition && !\class_exists($id)) {
-                    throw new \_PhpScoper833c56a97273\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service definition "%s" has a parent but no class, and its name looks like a FQCN. Either the class is missing or you want to inherit it from the parent service. To resolve this ambiguity, please rename this service to a non-FQCN (e.g. using dots), or create the missing class.', $id));
+                if ($definition instanceof \_PhpScoperd301db66c80c\Symfony\Component\DependencyInjection\ChildDefinition && !\class_exists($id)) {
+                    throw new \_PhpScoperd301db66c80c\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service definition "%s" has a parent but no class, and its name looks like a FQCN. Either the class is missing or you want to inherit it from the parent service. To resolve this ambiguity, please rename this service to a non-FQCN (e.g. using dots), or create the missing class.', $id));
                 }
                 $definition->setClass($id);
             }
