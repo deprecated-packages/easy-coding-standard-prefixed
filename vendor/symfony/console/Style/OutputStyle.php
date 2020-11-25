@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaac5f7c652e4\Symfony\Component\Console\Style;
+namespace _PhpScoperca8ca183ac38\Symfony\Component\Console\Style;
 
-use _PhpScoperaac5f7c652e4\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScoperaac5f7c652e4\Symfony\Component\Console\Helper\ProgressBar;
-use _PhpScoperaac5f7c652e4\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoperaac5f7c652e4\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperca8ca183ac38\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoperca8ca183ac38\Symfony\Component\Console\Helper\ProgressBar;
+use _PhpScoperca8ca183ac38\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoperca8ca183ac38\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Decorates output to add console style guide helpers.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-abstract class OutputStyle implements \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Output\OutputInterface, \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Style\StyleInterface
+abstract class OutputStyle implements \_PhpScoperca8ca183ac38\Symfony\Component\Console\Output\OutputInterface, \_PhpScoperca8ca183ac38\Symfony\Component\Console\Style\StyleInterface
 {
     private $output;
-    public function __construct(\_PhpScoperaac5f7c652e4\Symfony\Component\Console\Output\OutputInterface $output)
+    public function __construct(\_PhpScoperca8ca183ac38\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $this->output = $output;
     }
@@ -40,7 +40,7 @@ abstract class OutputStyle implements \_PhpScoperaac5f7c652e4\Symfony\Component\
      */
     public function createProgressBar($max = 0)
     {
-        return new \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Helper\ProgressBar($this->output, $max);
+        return new \_PhpScoperca8ca183ac38\Symfony\Component\Console\Helper\ProgressBar($this->output, $max);
     }
     /**
      * {@inheritdoc}
@@ -87,7 +87,7 @@ abstract class OutputStyle implements \_PhpScoperaac5f7c652e4\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\_PhpScoperaac5f7c652e4\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function setFormatter(\_PhpScoperca8ca183ac38\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
     {
         $this->output->setFormatter($formatter);
     }
@@ -128,7 +128,7 @@ abstract class OutputStyle implements \_PhpScoperaac5f7c652e4\Symfony\Component\
     }
     protected function getErrorOutput()
     {
-        if (!$this->output instanceof \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+        if (!$this->output instanceof \_PhpScoperca8ca183ac38\Symfony\Component\Console\Output\ConsoleOutputInterface) {
             return $this->output;
         }
         return $this->output->getErrorOutput();

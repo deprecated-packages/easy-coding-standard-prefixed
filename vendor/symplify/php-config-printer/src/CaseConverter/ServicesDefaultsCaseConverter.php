@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoperaac5f7c652e4\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperaac5f7c652e4\PhpParser\Node\Expr\Variable;
-use _PhpScoperaac5f7c652e4\PhpParser\Node\Stmt\Expression;
+use _PhpScoperca8ca183ac38\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperca8ca183ac38\PhpParser\Node\Expr\Variable;
+use _PhpScoperca8ca183ac38\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\MethodName;
@@ -27,11 +27,11 @@ final class ServicesDefaultsCaseConverter implements \Symplify\PhpConfigPrinter\
     {
         $this->autoBindNodeFactory = $autoBindNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoperaac5f7c652e4\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperca8ca183ac38\PhpParser\Node\Stmt\Expression
     {
-        $methodCall = new \_PhpScoperaac5f7c652e4\PhpParser\Node\Expr\MethodCall($this->createServicesVariable(), \Symplify\PhpConfigPrinter\ValueObject\MethodName::DEFAULTS);
+        $methodCall = new \_PhpScoperca8ca183ac38\PhpParser\Node\Expr\MethodCall($this->createServicesVariable(), \Symplify\PhpConfigPrinter\ValueObject\MethodName::DEFAULTS);
         $methodCall = $this->autoBindNodeFactory->createAutoBindCalls($values, $methodCall, \Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory::TYPE_DEFAULTS);
-        return new \_PhpScoperaac5f7c652e4\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \_PhpScoperca8ca183ac38\PhpParser\Node\Stmt\Expression($methodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {
@@ -40,8 +40,8 @@ final class ServicesDefaultsCaseConverter implements \Symplify\PhpConfigPrinter\
         }
         return $key === \Symplify\PhpConfigPrinter\ValueObject\YamlKey::_DEFAULTS;
     }
-    private function createServicesVariable() : \_PhpScoperaac5f7c652e4\PhpParser\Node\Expr\Variable
+    private function createServicesVariable() : \_PhpScoperca8ca183ac38\PhpParser\Node\Expr\Variable
     {
-        return new \_PhpScoperaac5f7c652e4\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        return new \_PhpScoperca8ca183ac38\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
     }
 }

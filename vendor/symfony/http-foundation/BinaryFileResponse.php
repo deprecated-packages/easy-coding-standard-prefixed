@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation;
+namespace _PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation;
 
-use _PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use _PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\File\File;
+use _PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use _PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation\File\File;
 /**
  * BinaryFileResponse represents an HTTP response delivering a file.
  *
@@ -21,7 +21,7 @@ use _PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\File\File;
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  * @author Sergey Linnik <linniksa@gmail.com>
  */
-class BinaryFileResponse extends \_PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\Response
+class BinaryFileResponse extends \_PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation\Response
 {
     protected static $trustXSendfileTypeHeader = \false;
     /**
@@ -77,15 +77,15 @@ class BinaryFileResponse extends \_PhpScoperaac5f7c652e4\Symfony\Component\HttpF
      */
     public function setFile($file, $contentDisposition = null, $autoEtag = \false, $autoLastModified = \true)
     {
-        if (!$file instanceof \_PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\File\File) {
+        if (!$file instanceof \_PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation\File\File) {
             if ($file instanceof \SplFileInfo) {
-                $file = new \_PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\File\File($file->getPathname());
+                $file = new \_PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation\File\File($file->getPathname());
             } else {
-                $file = new \_PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\File\File((string) $file);
+                $file = new \_PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation\File\File((string) $file);
             }
         }
         if (!$file->isReadable()) {
-            throw new \_PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\File\Exception\FileException('File must be readable.');
+            throw new \_PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation\File\Exception\FileException('File must be readable.');
         }
         $this->file = $file;
         if ($autoEtag) {
@@ -156,7 +156,7 @@ class BinaryFileResponse extends \_PhpScoperaac5f7c652e4\Symfony\Component\HttpF
     /**
      * {@inheritdoc}
      */
-    public function prepare(\_PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\Request $request)
+    public function prepare(\_PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation\Request $request)
     {
         if (!$this->headers->has('Content-Type')) {
             $this->headers->set('Content-Type', $this->file->getMimeType() ?: 'application/octet-stream');
@@ -186,7 +186,7 @@ class BinaryFileResponse extends \_PhpScoperaac5f7c652e4\Symfony\Component\HttpF
             if ('x-accel-redirect' === \strtolower($type)) {
                 // Do X-Accel-Mapping substitutions.
                 // @link http://wiki.nginx.org/X-accel#X-Accel-Redirect
-                $parts = \_PhpScoperaac5f7c652e4\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
+                $parts = \_PhpScoperca8ca183ac38\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
                 foreach ($parts as $part) {
                     list($pathPrefix, $location) = $part;
                     if (\substr($path, 0, \strlen($pathPrefix)) === $pathPrefix) {

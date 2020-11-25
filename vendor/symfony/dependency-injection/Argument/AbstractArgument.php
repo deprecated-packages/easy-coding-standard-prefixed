@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Argument;
+namespace _PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Argument;
 
 /**
  * Represents an abstract service argument, which have to be set by a compiler pass or a DI extension.

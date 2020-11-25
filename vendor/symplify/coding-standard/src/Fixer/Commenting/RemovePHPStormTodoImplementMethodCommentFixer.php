@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScoperaac5f7c652e4\Nette\Utils\Strings;
+use _PhpScoperca8ca183ac38\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -42,7 +42,7 @@ final class RemovePHPStormTodoImplementMethodCommentFixer extends \Symplify\Codi
                 continue;
             }
             $originalDocContent = $token->getContent();
-            $cleanedDocContent = \_PhpScoperaac5f7c652e4\Nette\Utils\Strings::replace($originalDocContent, self::TODO_IMPLEMENT_METHOD_COMMENT_BY_PHPSTORM_REGEX, '');
+            $cleanedDocContent = \_PhpScoperca8ca183ac38\Nette\Utils\Strings::replace($originalDocContent, self::TODO_IMPLEMENT_METHOD_COMMENT_BY_PHPSTORM_REGEX, '');
             if ($cleanedDocContent !== '') {
                 continue;
             }

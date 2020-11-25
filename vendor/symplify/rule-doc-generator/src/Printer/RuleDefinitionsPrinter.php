@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Printer;
 
-use _PhpScoperaac5f7c652e4\Nette\Utils\Strings;
+use _PhpScoperca8ca183ac38\Nette\Utils\Strings;
 use Symplify\RuleDocGenerator\Category\CategoryResolver;
 use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter;
 use Symplify\RuleDocGenerator\Text\KeywordHighlighter;
@@ -42,7 +42,7 @@ final class RuleDefinitionsPrinter
             $ruleDefinitionsByCategory = $this->groupDefinitionsByCategory($ruleDefinitions);
             $lines[] = '## Categories';
             foreach ($ruleDefinitionsByCategory as $category => $ruleDefinitions) {
-                $lines[] = \sprintf('- [%s](#%s) (%d)', $category, \_PhpScoperaac5f7c652e4\Nette\Utils\Strings::webalize($category), \count($ruleDefinitions));
+                $lines[] = \sprintf('- [%s](#%s) (%d)', $category, \_PhpScoperca8ca183ac38\Nette\Utils\Strings::webalize($category), \count($ruleDefinitions));
             }
             foreach ($ruleDefinitionsByCategory as $category => $ruleDefinitions) {
                 $lines[] = '## ' . $category;

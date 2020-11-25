@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoperaac5f7c652e4;
+namespace _PhpScoperca8ca183ac38;
 
 /*
  * This file is part of the Symfony package.
@@ -15,31 +15,31 @@ namespace _PhpScoperaac5f7c652e4;
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-use _PhpScoperaac5f7c652e4\Psr\Log\LoggerInterface;
-use _PhpScoperaac5f7c652e4\Symfony\Component\Console\Application;
-use _PhpScoperaac5f7c652e4\Symfony\Component\Console\Input\ArgvInput;
-use _PhpScoperaac5f7c652e4\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperaac5f7c652e4\Symfony\Component\Console\Logger\ConsoleLogger;
-use _PhpScoperaac5f7c652e4\Symfony\Component\Console\Output\ConsoleOutput;
-use _PhpScoperaac5f7c652e4\Symfony\Component\VarDumper\Command\ServerDumpCommand;
-use _PhpScoperaac5f7c652e4\Symfony\Component\VarDumper\Server\DumpServer;
+use _PhpScoperca8ca183ac38\Psr\Log\LoggerInterface;
+use _PhpScoperca8ca183ac38\Symfony\Component\Console\Application;
+use _PhpScoperca8ca183ac38\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScoperca8ca183ac38\Symfony\Component\Console\Input\InputOption;
+use _PhpScoperca8ca183ac38\Symfony\Component\Console\Logger\ConsoleLogger;
+use _PhpScoperca8ca183ac38\Symfony\Component\Console\Output\ConsoleOutput;
+use _PhpScoperca8ca183ac38\Symfony\Component\VarDumper\Command\ServerDumpCommand;
+use _PhpScoperca8ca183ac38\Symfony\Component\VarDumper\Server\DumpServer;
 function includeIfExists(string $file) : bool
 {
     return \file_exists($file) && (include $file);
 }
-if (!\_PhpScoperaac5f7c652e4\includeIfExists(__DIR__ . '/../../../../autoload.php') && !\_PhpScoperaac5f7c652e4\includeIfExists(__DIR__ . '/../../vendor/autoload.php') && !\_PhpScoperaac5f7c652e4\includeIfExists(__DIR__ . '/../../../../../../vendor/autoload.php')) {
+if (!\_PhpScoperca8ca183ac38\includeIfExists(__DIR__ . '/../../../../autoload.php') && !\_PhpScoperca8ca183ac38\includeIfExists(__DIR__ . '/../../vendor/autoload.php') && !\_PhpScoperca8ca183ac38\includeIfExists(__DIR__ . '/../../../../../../vendor/autoload.php')) {
     \fwrite(\STDERR, 'Install dependencies using Composer.' . \PHP_EOL);
     exit(1);
 }
-if (!\class_exists(\_PhpScoperaac5f7c652e4\Symfony\Component\Console\Application::class)) {
+if (!\class_exists(\_PhpScoperca8ca183ac38\Symfony\Component\Console\Application::class)) {
     \fwrite(\STDERR, 'You need the "symfony/console" component in order to run the VarDumper server.' . \PHP_EOL);
     exit(1);
 }
-$input = new \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Input\ArgvInput();
-$output = new \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Output\ConsoleOutput();
+$input = new \_PhpScoperca8ca183ac38\Symfony\Component\Console\Input\ArgvInput();
+$output = new \_PhpScoperca8ca183ac38\Symfony\Component\Console\Output\ConsoleOutput();
 $defaultHost = '127.0.0.1:9912';
 $host = $input->getParameterOption(['--host'], $_SERVER['VAR_DUMPER_SERVER'] ?? $defaultHost, \true);
-$logger = \interface_exists(\_PhpScoperaac5f7c652e4\Psr\Log\LoggerInterface::class) ? new \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Logger\ConsoleLogger($output->getErrorOutput()) : null;
-$app = new \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Application();
-$app->getDefinition()->addOption(new \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Input\InputOption('--host', null, \_PhpScoperaac5f7c652e4\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The address the server should listen to', $defaultHost));
-$app->add($command = new \_PhpScoperaac5f7c652e4\Symfony\Component\VarDumper\Command\ServerDumpCommand(new \_PhpScoperaac5f7c652e4\Symfony\Component\VarDumper\Server\DumpServer($host, $logger)))->getApplication()->setDefaultCommand($command->getName(), \true)->run($input, $output);
+$logger = \interface_exists(\_PhpScoperca8ca183ac38\Psr\Log\LoggerInterface::class) ? new \_PhpScoperca8ca183ac38\Symfony\Component\Console\Logger\ConsoleLogger($output->getErrorOutput()) : null;
+$app = new \_PhpScoperca8ca183ac38\Symfony\Component\Console\Application();
+$app->getDefinition()->addOption(new \_PhpScoperca8ca183ac38\Symfony\Component\Console\Input\InputOption('--host', null, \_PhpScoperca8ca183ac38\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The address the server should listen to', $defaultHost));
+$app->add($command = new \_PhpScoperca8ca183ac38\Symfony\Component\VarDumper\Command\ServerDumpCommand(new \_PhpScoperca8ca183ac38\Symfony\Component\VarDumper\Server\DumpServer($host, $logger)))->getApplication()->setDefaultCommand($command->getName(), \true)->run($input, $output);

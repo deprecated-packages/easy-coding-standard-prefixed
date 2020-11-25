@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Reference;
-final class AliasDeprecatedPublicServicesPass extends \_PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+use _PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Reference;
+final class AliasDeprecatedPublicServicesPass extends \_PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $tagName;
     private $aliases = [];
@@ -26,26 +26,26 @@ final class AliasDeprecatedPublicServicesPass extends \_PhpScoperaac5f7c652e4\Sy
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if ($value instanceof \_PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Reference && isset($this->aliases[$id = (string) $value])) {
-            return new \_PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Reference($this->aliases[$id], $value->getInvalidBehavior());
+        if ($value instanceof \_PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Reference && isset($this->aliases[$id = (string) $value])) {
+            return new \_PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Reference($this->aliases[$id], $value->getInvalidBehavior());
         }
         return parent::processValue($value, $isRoot);
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         foreach ($container->findTaggedServiceIds($this->tagName) as $id => $tags) {
             if (null === ($package = $tags[0]['package'] ?? null)) {
-                throw new \_PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "package" attribute is mandatory for the "%s" tag on the "%s" service.', $this->tagName, $id));
+                throw new \_PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "package" attribute is mandatory for the "%s" tag on the "%s" service.', $this->tagName, $id));
             }
             if (null === ($version = $tags[0]['version'] ?? null)) {
-                throw new \_PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "version" attribute is mandatory for the "%s" tag on the "%s" service.', $this->tagName, $id));
+                throw new \_PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "version" attribute is mandatory for the "%s" tag on the "%s" service.', $this->tagName, $id));
             }
             $definition = $container->getDefinition($id);
             if (!$definition->isPublic() || $definition->isPrivate()) {
-                throw new \_PhpScoperaac5f7c652e4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private: it cannot have the "%s" tag.', $id, $this->tagName));
+                throw new \_PhpScoperca8ca183ac38\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The "%s" service is private: it cannot have the "%s" tag.', $id, $this->tagName));
             }
             $container->setAlias($id, $aliasId = '.' . $this->tagName . '.' . $id)->setPublic(\true)->setDeprecated($package, $version, 'Accessing the "%alias_id%" service directly from the container is deprecated, use dependency injection instead.');
             $container->setDefinition($aliasId, $definition);
