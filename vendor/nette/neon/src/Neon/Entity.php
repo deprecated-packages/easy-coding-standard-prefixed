@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper13133e188f67\Nette\Neon;
+namespace _PhpScoper38a7d00685f8\Nette\Neon;
 
 /**
  * Representation of 'foo(bar=1)' literal

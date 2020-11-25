@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper38a7d00685f8\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithTargetSyntaxError;
+use _PhpScoper38a7d00685f8\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithTargetSyntaxError;
 /**
  * @AnnotationWithTargetSyntaxError()
  */

@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Style;
 
-use _PhpScoper13133e188f67\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper13133e188f67\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper13133e188f67\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoper13133e188f67\Symfony\Component\Console\Terminal;
+use _PhpScoper38a7d00685f8\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper38a7d00685f8\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper38a7d00685f8\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper38a7d00685f8\Symfony\Component\Console\Terminal;
 use Symplify\EasyCodingStandard\ValueObject\Error\CodingStandardError;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 use Symplify\PackageBuilder\Reflection\PrivatesCaller;
-final class EasyCodingStandardStyle extends \_PhpScoper13133e188f67\Symfony\Component\Console\Style\SymfonyStyle
+final class EasyCodingStandardStyle extends \_PhpScoper38a7d00685f8\Symfony\Component\Console\Style\SymfonyStyle
 {
     /**
      * To fit in Linux/Windows terminal windows to prevent overflow.
@@ -21,7 +21,7 @@ final class EasyCodingStandardStyle extends \_PhpScoper13133e188f67\Symfony\Comp
      * @var Terminal
      */
     private $terminal;
-    public function __construct(\_PhpScoper13133e188f67\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper13133e188f67\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper13133e188f67\Symfony\Component\Console\Terminal $terminal)
+    public function __construct(\_PhpScoper38a7d00685f8\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper38a7d00685f8\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper38a7d00685f8\Symfony\Component\Console\Terminal $terminal)
     {
         parent::__construct($input, $output);
         $this->terminal = $terminal;
