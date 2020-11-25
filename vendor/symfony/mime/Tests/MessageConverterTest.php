@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdc8fbcd7c69d\Symfony\Component\Mime\Tests;
+namespace _PhpScoper833c56a97273\Symfony\Component\Mime\Tests;
 
-use _PhpScoperdc8fbcd7c69d\PHPUnit\Framework\TestCase;
-use _PhpScoperdc8fbcd7c69d\Symfony\Component\Mime\Email;
-use _PhpScoperdc8fbcd7c69d\Symfony\Component\Mime\Message;
-use _PhpScoperdc8fbcd7c69d\Symfony\Component\Mime\MessageConverter;
-class MessageConverterTest extends \_PhpScoperdc8fbcd7c69d\PHPUnit\Framework\TestCase
+use _PhpScoper833c56a97273\PHPUnit\Framework\TestCase;
+use _PhpScoper833c56a97273\Symfony\Component\Mime\Email;
+use _PhpScoper833c56a97273\Symfony\Component\Mime\Message;
+use _PhpScoper833c56a97273\Symfony\Component\Mime\MessageConverter;
+class MessageConverterTest extends \_PhpScoper833c56a97273\PHPUnit\Framework\TestCase
 {
     public function testToEmail()
     {
         $file = \file_get_contents(__DIR__ . '/Fixtures/mimetypes/test.gif');
-        $email = (new \_PhpScoperdc8fbcd7c69d\Symfony\Component\Mime\Email())->from('fabien@symfony.com');
-        $this->assertSame($email, \_PhpScoperdc8fbcd7c69d\Symfony\Component\Mime\MessageConverter::toEmail($email));
+        $email = (new \_PhpScoper833c56a97273\Symfony\Component\Mime\Email())->from('fabien@symfony.com');
+        $this->assertSame($email, \_PhpScoper833c56a97273\Symfony\Component\Mime\MessageConverter::toEmail($email));
         $this->assertConversion((clone $email)->text('text content'));
         $this->assertConversion((clone $email)->html('HTML content <img src="cid:test.jpg" />'));
         $this->assertConversion((clone $email)->text('text content')->html('HTML content <img src="cid:test.jpg" />'));
@@ -32,12 +32,12 @@ class MessageConverterTest extends \_PhpScoperdc8fbcd7c69d\PHPUnit\Framework\Tes
         $this->assertConversion((clone $email)->html('HTML content <img src="cid:test.jpg" />')->embed($file, 'test.jpg', 'image/gif'));
         $this->assertConversion((clone $email)->text('text content')->embed($file, 'test_attached.jpg', 'image/gif'));
     }
-    private function assertConversion(\_PhpScoperdc8fbcd7c69d\Symfony\Component\Mime\Email $expected)
+    private function assertConversion(\_PhpScoper833c56a97273\Symfony\Component\Mime\Email $expected)
     {
         $r = new \ReflectionMethod($expected, 'generateBody');
         $r->setAccessible(\true);
-        $message = new \_PhpScoperdc8fbcd7c69d\Symfony\Component\Mime\Message($expected->getHeaders(), $r->invoke($expected));
-        $converted = \_PhpScoperdc8fbcd7c69d\Symfony\Component\Mime\MessageConverter::toEmail($message);
+        $message = new \_PhpScoper833c56a97273\Symfony\Component\Mime\Message($expected->getHeaders(), $r->invoke($expected));
+        $converted = \_PhpScoper833c56a97273\Symfony\Component\Mime\MessageConverter::toEmail($message);
         if ($expected->getHtmlBody()) {
             $this->assertStringMatchesFormat(\str_replace('cid:test.jpg', 'cid:%s', $expected->getHtmlBody()), $converted->getHtmlBody());
             $expected->html('HTML content');

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Printer;
 
-use _PhpScoperdc8fbcd7c69d\Nette\Utils\Strings;
+use _PhpScoper833c56a97273\Nette\Utils\Strings;
 use Symplify\RuleDocGenerator\Category\CategoryResolver;
 use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter;
 use Symplify\RuleDocGenerator\Text\KeywordHighlighter;
@@ -40,10 +40,8 @@ final class RuleDefinitionsPrinter
         $lines[] = \sprintf('# %d Rules Overview', $ruleCount);
         if ($shouldCategorize) {
             $ruleDefinitionsByCategory = $this->groupDefinitionsByCategory($ruleDefinitions);
-            $lines[] = '## Categories';
-            foreach ($ruleDefinitionsByCategory as $category => $ruleDefinitions) {
-                $lines[] = \sprintf('- [%s](#%s) (%d)', $category, \_PhpScoperdc8fbcd7c69d\Nette\Utils\Strings::webalize($category), \count($ruleDefinitions));
-            }
+            $categoryMenuLines = $this->createCategoryMenu($ruleDefinitionsByCategory);
+            $lines = \array_merge($lines, $categoryMenuLines);
             foreach ($ruleDefinitionsByCategory as $category => $ruleDefinitions) {
                 $lines[] = '## ' . $category;
                 $lines = $this->printRuleDefinitions($ruleDefinitions, $lines, $shouldCategorize);
@@ -88,6 +86,21 @@ final class RuleDefinitionsPrinter
             $codeSampleLines = $this->codeSamplePrinter->print($ruleDefinition);
             $lines = \array_merge($lines, $codeSampleLines);
         }
+        return $lines;
+    }
+    /**
+     * @param array<string, RuleDefinition[]> $ruleDefinitionsByCategory
+     * @return string[]
+     */
+    private function createCategoryMenu(array $ruleDefinitionsByCategory) : array
+    {
+        $lines = [];
+        $lines[] = '<br>';
+        $lines[] = '## Categories';
+        foreach ($ruleDefinitionsByCategory as $category => $ruleDefinitions) {
+            $lines[] = \sprintf('- [%s](#%s) (%d)', $category, \_PhpScoper833c56a97273\Nette\Utils\Strings::webalize($category), \count($ruleDefinitions));
+        }
+        $lines[] = '<br>';
         return $lines;
     }
 }
