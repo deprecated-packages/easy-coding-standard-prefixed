@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperbd5fb781fe24\PhpParser\Builder;
+namespace _PhpScoper2f75f00bf6fa\PhpParser\Builder;
 
-use _PhpScoperbd5fb781fe24\PhpParser;
-use _PhpScoperbd5fb781fe24\PhpParser\BuilderHelpers;
-use _PhpScoperbd5fb781fe24\PhpParser\Node;
-use _PhpScoperbd5fb781fe24\PhpParser\Node\Stmt;
-class Method extends \_PhpScoperbd5fb781fe24\PhpParser\Builder\FunctionLike
+use _PhpScoper2f75f00bf6fa\PhpParser;
+use _PhpScoper2f75f00bf6fa\PhpParser\BuilderHelpers;
+use _PhpScoper2f75f00bf6fa\PhpParser\Node;
+use _PhpScoper2f75f00bf6fa\PhpParser\Node\Stmt;
+class Method extends \_PhpScoper2f75f00bf6fa\PhpParser\Builder\FunctionLike
 {
     protected $name;
     protected $flags = 0;
@@ -29,7 +29,7 @@ class Method extends \_PhpScoperbd5fb781fe24\PhpParser\Builder\FunctionLike
      */
     public function makePublic()
     {
-        $this->flags = \_PhpScoperbd5fb781fe24\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
+        $this->flags = \_PhpScoper2f75f00bf6fa\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper2f75f00bf6fa\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
         return $this;
     }
     /**
@@ -39,7 +39,7 @@ class Method extends \_PhpScoperbd5fb781fe24\PhpParser\Builder\FunctionLike
      */
     public function makeProtected()
     {
-        $this->flags = \_PhpScoperbd5fb781fe24\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        $this->flags = \_PhpScoper2f75f00bf6fa\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper2f75f00bf6fa\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
         return $this;
     }
     /**
@@ -49,7 +49,7 @@ class Method extends \_PhpScoperbd5fb781fe24\PhpParser\Builder\FunctionLike
      */
     public function makePrivate()
     {
-        $this->flags = \_PhpScoperbd5fb781fe24\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        $this->flags = \_PhpScoper2f75f00bf6fa\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper2f75f00bf6fa\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
         return $this;
     }
     /**
@@ -59,7 +59,7 @@ class Method extends \_PhpScoperbd5fb781fe24\PhpParser\Builder\FunctionLike
      */
     public function makeStatic()
     {
-        $this->flags = \_PhpScoperbd5fb781fe24\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
+        $this->flags = \_PhpScoper2f75f00bf6fa\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper2f75f00bf6fa\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC);
         return $this;
     }
     /**
@@ -72,7 +72,7 @@ class Method extends \_PhpScoperbd5fb781fe24\PhpParser\Builder\FunctionLike
         if (!empty($this->stmts)) {
             throw new \LogicException('Cannot make method with statements abstract');
         }
-        $this->flags = \_PhpScoperbd5fb781fe24\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT);
+        $this->flags = \_PhpScoper2f75f00bf6fa\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper2f75f00bf6fa\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT);
         $this->stmts = null;
         // abstract methods don't have statements
         return $this;
@@ -84,7 +84,7 @@ class Method extends \_PhpScoperbd5fb781fe24\PhpParser\Builder\FunctionLike
      */
     public function makeFinal()
     {
-        $this->flags = \_PhpScoperbd5fb781fe24\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
+        $this->flags = \_PhpScoper2f75f00bf6fa\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper2f75f00bf6fa\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
         return $this;
     }
     /**
@@ -99,7 +99,7 @@ class Method extends \_PhpScoperbd5fb781fe24\PhpParser\Builder\FunctionLike
         if (null === $this->stmts) {
             throw new \LogicException('Cannot add statements to an abstract method');
         }
-        $this->stmts[] = \_PhpScoperbd5fb781fe24\PhpParser\BuilderHelpers::normalizeStmt($stmt);
+        $this->stmts[] = \_PhpScoper2f75f00bf6fa\PhpParser\BuilderHelpers::normalizeStmt($stmt);
         return $this;
     }
     /**
@@ -107,8 +107,8 @@ class Method extends \_PhpScoperbd5fb781fe24\PhpParser\Builder\FunctionLike
      *
      * @return Stmt\ClassMethod The built method node
      */
-    public function getNode() : \_PhpScoperbd5fb781fe24\PhpParser\Node
+    public function getNode() : \_PhpScoper2f75f00bf6fa\PhpParser\Node
     {
-        return new \_PhpScoperbd5fb781fe24\PhpParser\Node\Stmt\ClassMethod($this->name, ['flags' => $this->flags, 'byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts], $this->attributes);
+        return new \_PhpScoper2f75f00bf6fa\PhpParser\Node\Stmt\ClassMethod($this->name, ['flags' => $this->flags, 'byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts], $this->attributes);
     }
 }
