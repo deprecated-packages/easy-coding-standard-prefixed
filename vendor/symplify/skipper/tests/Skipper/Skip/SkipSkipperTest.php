@@ -11,7 +11,7 @@ use Symplify\Skipper\Tests\Skipper\Skip\Source\AnotherClassToSkip;
 use Symplify\Skipper\Tests\Skipper\Skip\Source\NotSkippedClass;
 use Symplify\Skipper\Tests\Skipper\Skip\Source\SomeClassToSkip;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class SkipperSkipTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
+final class SkipSkipperTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     /**
      * @var Skipper
@@ -60,7 +60,8 @@ final class SkipperSkipTest extends \Symplify\PackageBuilder\Testing\AbstractKer
     public function testMessageAndFile(string $message, string $filePath, bool $expected) : void
     {
         $smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo($filePath);
-        $this->assertSame($expected, $this->skipper->shouldSkipMessageAndFile($message, $smartFileInfo));
+        $isSkipped = $this->skipper->shouldSkipMessageAndFile($message, $smartFileInfo);
+        $this->assertSame($expected, $isSkipped);
     }
     public function provideMessageAndFile() : \Iterator
     {

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait CallTrait
 {
     /**

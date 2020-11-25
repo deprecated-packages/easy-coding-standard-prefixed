@@ -1,12 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper418afc2f157c;
+namespace _PhpScoper7312d63d356f;
 
-use _PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\Skipper\Tests\Skipper\Only\Source\IncludeThisClass;
+use Symplify\Skipper\Tests\Skipper\Only\Source\SkipCompletely;
+use Symplify\Skipper\Tests\Skipper\Only\Source\SkipCompletelyToo;
 use Symplify\Skipper\ValueObject\Option;
-return static function (\_PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $parameters = $containerConfigurator->parameters();
-    $parameters->set(\Symplify\Skipper\ValueObject\Option::ONLY, [\Symplify\Skipper\Tests\Skipper\Only\Source\IncludeThisClass::class => ['SomeFileToOnlyInclude.php']]);
+    $parameters->set(\Symplify\Skipper\ValueObject\Option::ONLY, [
+        \Symplify\Skipper\Tests\Skipper\Only\Source\IncludeThisClass::class => ['SomeFileToOnlyInclude.php'],
+        // these 2 lines should be identical
+        \Symplify\Skipper\Tests\Skipper\Only\Source\SkipCompletely::class => null,
+        \Symplify\Skipper\Tests\Skipper\Only\Source\SkipCompletelyToo::class,
+    ]);
 };

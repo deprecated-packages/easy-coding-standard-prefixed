@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper418afc2f157c\Symfony\Component\Cache\DependencyInjection;
+namespace _PhpScoper7312d63d356f\Symfony\Component\Cache\DependencyInjection;
 
-use _PhpScoper418afc2f157c\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper7312d63d356f\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Rob Frawley 2nd <rmf@src.run>
  */
-class CachePoolPrunerPass implements \_PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CachePoolPrunerPass implements \_PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $cacheCommandServiceId;
     private $cachePoolTag;
@@ -31,7 +31,7 @@ class CachePoolPrunerPass implements \_PhpScoper418afc2f157c\Symfony\Component\D
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->cacheCommandServiceId)) {
             return;
@@ -40,12 +40,12 @@ class CachePoolPrunerPass implements \_PhpScoper418afc2f157c\Symfony\Component\D
         foreach ($container->findTaggedServiceIds($this->cachePoolTag) as $id => $tags) {
             $class = $container->getParameterBag()->resolveValue($container->getDefinition($id)->getClass());
             if (!($reflection = $container->getReflectionClass($class))) {
-                throw new \_PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                throw new \_PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
             }
-            if ($reflection->implementsInterface(\_PhpScoper418afc2f157c\Symfony\Component\Cache\PruneableInterface::class)) {
-                $services[$id] = new \_PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Reference($id);
+            if ($reflection->implementsInterface(\_PhpScoper7312d63d356f\Symfony\Component\Cache\PruneableInterface::class)) {
+                $services[$id] = new \_PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Reference($id);
             }
         }
-        $container->getDefinition($this->cacheCommandServiceId)->replaceArgument(0, new \_PhpScoper418afc2f157c\Symfony\Component\DependencyInjection\Argument\IteratorArgument($services));
+        $container->getDefinition($this->cacheCommandServiceId)->replaceArgument(0, new \_PhpScoper7312d63d356f\Symfony\Component\DependencyInjection\Argument\IteratorArgument($services));
     }
 }

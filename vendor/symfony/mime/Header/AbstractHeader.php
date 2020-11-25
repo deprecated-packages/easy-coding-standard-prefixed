@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper418afc2f157c\Symfony\Component\Mime\Header;
+namespace _PhpScoper7312d63d356f\Symfony\Component\Mime\Header;
 
-use _PhpScoper418afc2f157c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder;
+use _PhpScoper7312d63d356f\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder;
 /**
  * An abstract base MIME Header.
  *
@@ -18,7 +18,7 @@ use _PhpScoper418afc2f157c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder;
  *
  * @experimental in 4.3
  */
-abstract class AbstractHeader implements \_PhpScoper418afc2f157c\Symfony\Component\Mime\Header\HeaderInterface
+abstract class AbstractHeader implements \_PhpScoper7312d63d356f\Symfony\Component\Mime\Header\HeaderInterface
 {
     const PHRASE_PATTERN = '(?:(?:(?:(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))*(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))|(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])))?[a-zA-Z0-9!#\\$%&\'\\*\\+\\-\\/=\\?\\^_`\\{\\}\\|~]+(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))*(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))|(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])))?)|(?:(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))*(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))|(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])))?"((?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21\\x23-\\x5B\\x5D-\\x7E])|(?:\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?"(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))*(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))|(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])))?))+?)';
     private static $encoder;
@@ -73,7 +73,7 @@ abstract class AbstractHeader implements \_PhpScoper418afc2f157c\Symfony\Compone
      * @param string $string  as displayed
      * @param bool   $shorten the first line to make remove for header name
      */
-    protected function createPhrase(\_PhpScoper418afc2f157c\Symfony\Component\Mime\Header\HeaderInterface $header, string $string, string $charset, bool $shorten = \false) : string
+    protected function createPhrase(\_PhpScoper7312d63d356f\Symfony\Component\Mime\Header\HeaderInterface $header, string $string, string $charset, bool $shorten = \false) : string
     {
         // Treat token as exactly what was given
         $phraseStr = $string;
@@ -102,7 +102,7 @@ abstract class AbstractHeader implements \_PhpScoper418afc2f157c\Symfony\Compone
     /**
      * Encode needed word tokens within a string of input.
      */
-    protected function encodeWords(\_PhpScoper418afc2f157c\Symfony\Component\Mime\Header\HeaderInterface $header, string $input, int $usedLength = -1) : string
+    protected function encodeWords(\_PhpScoper7312d63d356f\Symfony\Component\Mime\Header\HeaderInterface $header, string $input, int $usedLength = -1) : string
     {
         $value = '';
         $tokens = $this->getEncodableWordTokens($input);
@@ -163,7 +163,7 @@ abstract class AbstractHeader implements \_PhpScoper418afc2f157c\Symfony\Compone
     protected function getTokenAsEncodedWord(string $token, int $firstLineOffset = 0) : string
     {
         if (null === self::$encoder) {
-            self::$encoder = new \_PhpScoper418afc2f157c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
+            self::$encoder = new \_PhpScoper7312d63d356f\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
         }
         // Adjust $firstLineOffset to account for space needed for syntax
         $charsetDecl = $this->charset;

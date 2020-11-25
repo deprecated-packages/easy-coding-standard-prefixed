@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\Annotation\GenericAnnotation;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
 use function count;
-use const _PhpScoper418afc2f157c\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoper7312d63d356f\T_DOC_COMMENT_OPEN_TAG;
 class DeprecatedAnnotationDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const MISSING_DESCRIPTION = 'MissingDescription';
