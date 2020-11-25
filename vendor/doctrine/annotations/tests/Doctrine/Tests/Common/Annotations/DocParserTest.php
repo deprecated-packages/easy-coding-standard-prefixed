@@ -1,15 +1,15 @@
 <?php
 
-namespace _PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations;
+namespace _PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations;
 
-use _PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
-use _PhpScoper7312d63d356f\Doctrine\Common\Annotations\DocParser;
-use _PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationRegistry;
-use _PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target;
-use _PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants;
-use _PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants;
-use _PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants;
-class DocParserTest extends \_PhpScoper7312d63d356f\PHPUnit_Framework_TestCase
+use _PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
+use _PhpScoper13133e188f67\Doctrine\Common\Annotations\DocParser;
+use _PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationRegistry;
+use _PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target;
+use _PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants;
+use _PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants;
+use _PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants;
+class DocParserTest extends \_PhpScoper13133e188f67\PHPUnit_Framework_TestCase
 {
     public function testNestedArraysWithNestedAnnotation()
     {
@@ -17,7 +17,7 @@ class DocParserTest extends \_PhpScoper7312d63d356f\PHPUnit_Framework_TestCase
         // Nested arrays with nested annotations
         $result = $parser->parse('@Name(foo={1,2, {"key"=@Name}})');
         $annot = $result[0];
-        $this->assertTrue($annot instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
         $this->assertNull($annot->value);
         $this->assertEquals(3, \count($annot->foo));
         $this->assertEquals(1, $annot->foo[0]);
@@ -25,7 +25,7 @@ class DocParserTest extends \_PhpScoper7312d63d356f\PHPUnit_Framework_TestCase
         $this->assertTrue(\is_array($annot->foo[2]));
         $nestedArray = $annot->foo[2];
         $this->assertTrue(isset($nestedArray['key']));
-        $this->assertTrue($nestedArray['key'] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($nestedArray['key'] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
     }
     public function testBasicAnnotations()
     {
@@ -33,7 +33,7 @@ class DocParserTest extends \_PhpScoper7312d63d356f\PHPUnit_Framework_TestCase
         // Marker annotation
         $result = $parser->parse("@Name");
         $annot = $result[0];
-        $this->assertTrue($annot instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
         $this->assertNull($annot->value);
         $this->assertNull($annot->foo);
         // Associative arrays
@@ -54,16 +54,16 @@ class DocParserTest extends \_PhpScoper7312d63d356f\PHPUnit_Framework_TestCase
         // Multiple values
         $result = $parser->parse('@Name(@Name, @Name)');
         $annot = $result[0];
-        $this->assertTrue($annot instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
         $this->assertTrue(\is_array($annot->value));
-        $this->assertTrue($annot->value[0] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
-        $this->assertTrue($annot->value[1] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot->value[0] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot->value[1] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
         // Multiple types as values
         $result = $parser->parse('@Name(foo="Bar", @Name, {"key1"="value1", "key2"="value2"})');
         $annot = $result[0];
-        $this->assertTrue($annot instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
         $this->assertTrue(\is_array($annot->value));
-        $this->assertTrue($annot->value[0] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot->value[0] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
         $this->assertTrue(\is_array($annot->value[1]));
         $this->assertEquals('value1', $annot->value[1]['key1']);
         $this->assertEquals('value2', $annot->value[1]['key2']);
@@ -79,13 +79,13 @@ DOCBLOCK;
         $result = $parser->parse($docblock);
         $this->assertEquals(1, \count($result));
         $annot = $result[0];
-        $this->assertTrue($annot instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
         $this->assertEquals("bar", $annot->foo);
         $this->assertNull($annot->value);
     }
     public function testNamespacedAnnotations()
     {
-        $parser = new \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\DocParser();
+        $parser = new \_PhpScoper13133e188f67\Doctrine\Common\Annotations\DocParser();
         $parser->setIgnoreNotImportedAnnotations(\true);
         $docblock = <<<DOCBLOCK
 /**
@@ -101,7 +101,7 @@ DOCBLOCK;
         $result = $parser->parse($docblock);
         $this->assertEquals(1, \count($result));
         $annot = $result[0];
-        $this->assertTrue($annot instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
         $this->assertEquals("bar", $annot->foo);
     }
     /**
@@ -128,10 +128,10 @@ DOCBLOCK;
         $this->assertTrue(isset($result[0]));
         $this->assertTrue(isset($result[1]));
         $annot = $result[0];
-        $this->assertTrue($annot instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Name);
+        $this->assertTrue($annot instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Name);
         $this->assertEquals("bar", $annot->foo);
         $marker = $result[1];
-        $this->assertTrue($marker instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Marker);
+        $this->assertTrue($marker instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Marker);
     }
     public function testAnnotationWithoutConstructor()
     {
@@ -145,7 +145,7 @@ DOCBLOCK;
         $this->assertEquals(\count($result), 1);
         $annot = $result[0];
         $this->assertNotNull($annot);
-        $this->assertTrue($annot instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\SomeAnnotationClassNameWithoutConstructor);
+        $this->assertTrue($annot instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\SomeAnnotationClassNameWithoutConstructor);
         $this->assertNull($annot->name);
         $this->assertNotNull($annot->data);
         $this->assertEquals($annot->data, "Some data");
@@ -158,7 +158,7 @@ DOCBLOCK;
         $this->assertEquals(\count($result), 1);
         $annot = $result[0];
         $this->assertNotNull($annot);
-        $this->assertTrue($annot instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\SomeAnnotationClassNameWithoutConstructor);
+        $this->assertTrue($annot instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\SomeAnnotationClassNameWithoutConstructor);
         $this->assertEquals($annot->name, "Some Name");
         $this->assertEquals($annot->data, "Some data");
         $docblock = <<<DOCBLOCK
@@ -218,57 +218,57 @@ DOCBLOCK;
 DOCBLOCK;
         $result = $parser->parse($docblock);
         $this->assertEquals(\count($result), 1);
-        $this->assertTrue($result[0] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\SomeAnnotationClassNameWithoutConstructorAndProperties);
+        $this->assertTrue($result[0] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\SomeAnnotationClassNameWithoutConstructorAndProperties);
     }
     public function testAnnotationTarget()
     {
-        $parser = new \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\DocParser();
-        $parser->setImports(array('__NAMESPACE__' => '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures'));
-        $class = new \ReflectionClass('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithValidAnnotationTarget');
+        $parser = new \_PhpScoper13133e188f67\Doctrine\Common\Annotations\DocParser();
+        $parser->setImports(array('__NAMESPACE__' => '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures'));
+        $class = new \ReflectionClass('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithValidAnnotationTarget');
         $context = 'class ' . $class->getName();
         $docComment = $class->getDocComment();
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
         $this->assertNotNull($parser->parse($docComment, $context));
         $property = $class->getProperty('foo');
         $docComment = $property->getDocComment();
         $context = 'property ' . $class->getName() . "::\$" . $property->getName();
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         $this->assertNotNull($parser->parse($docComment, $context));
         $method = $class->getMethod('someFunction');
         $docComment = $property->getDocComment();
         $context = 'method ' . $class->getName() . '::' . $method->getName() . '()';
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD);
         $this->assertNotNull($parser->parse($docComment, $context));
         try {
-            $class = new \ReflectionClass('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithInvalidAnnotationTargetAtClass');
+            $class = new \ReflectionClass('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithInvalidAnnotationTargetAtClass');
             $context = 'class ' . $class->getName();
             $docComment = $class->getDocComment();
-            $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
+            $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
             $parser->parse($docComment, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertNotNull($exc->getMessage());
         }
         try {
-            $class = new \ReflectionClass('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithInvalidAnnotationTargetAtMethod');
+            $class = new \ReflectionClass('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithInvalidAnnotationTargetAtMethod');
             $method = $class->getMethod('functionName');
             $docComment = $method->getDocComment();
             $context = 'method ' . $class->getName() . '::' . $method->getName() . '()';
-            $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD);
+            $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_METHOD);
             $parser->parse($docComment, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertNotNull($exc->getMessage());
         }
         try {
-            $class = new \ReflectionClass('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithInvalidAnnotationTargetAtProperty');
+            $class = new \ReflectionClass('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithInvalidAnnotationTargetAtProperty');
             $property = $class->getProperty('foo');
             $docComment = $property->getDocComment();
             $context = 'property ' . $class->getName() . "::\$" . $property->getName();
-            $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+            $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
             $parser->parse($docComment, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertNotNull($exc->getMessage());
         }
     }
@@ -282,7 +282,7 @@ DOCBLOCK;
             array('mixed', 'false'),
             array('mixed', '1'),
             array('mixed', '1.2'),
-            array('mixed', '_PhpScoper7312d63d356f\\@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll'),
+            array('mixed', '_PhpScoper13133e188f67\\@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll'),
             // boolean type
             array('boolean', 'true'),
             array('boolean', 'false'),
@@ -312,7 +312,7 @@ DOCBLOCK;
             array('arrayOfAnnotations', '{@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll}'),
             array('arrayOfAnnotations', '{@AnnotationExtendsAnnotationTargetAll, @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll}'),
             // annotation instance
-            array('annotation', '_PhpScoper7312d63d356f\\@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll'),
+            array('annotation', '_PhpScoper13133e188f67\\@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll'),
             array('annotation', '@AnnotationExtendsAnnotationTargetAll'),
         );
     }
@@ -325,7 +325,7 @@ DOCBLOCK;
             array('boolean', 'boolean', '1.2', 'double'),
             array('boolean', 'boolean', '"str"', 'string'),
             array('boolean', 'boolean', '{1,2,3}', 'array'),
-            array('boolean', 'boolean', '@Name', '_PhpScoper7312d63d356f\\an instance of Doctrine\\Tests\\Common\\Annotations\\Name'),
+            array('boolean', 'boolean', '@Name', '_PhpScoper13133e188f67\\an instance of Doctrine\\Tests\\Common\\Annotations\\Name'),
             // alias for internal type boolean
             array('bool', 'bool', '1', 'integer'),
             array('bool', 'bool', '1.2', 'double'),
@@ -354,19 +354,19 @@ DOCBLOCK;
             array('string', 'string', '{"str"}', 'array'),
             array('string', 'string', '{1,2,3,4}', 'array'),
             // annotation instance
-            array('annotation', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', 'true', 'boolean'),
-            array('annotation', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', 'false', 'boolean'),
-            array('annotation', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '12', 'integer'),
-            array('annotation', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '1.2', 'double'),
-            array('annotation', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{"str"}', 'array'),
-            array('annotation', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{1,2,3,4}', 'array'),
-            array('annotation', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '@Name', '_PhpScoper7312d63d356f\\an instance of Doctrine\\Tests\\Common\\Annotations\\Name'),
+            array('annotation', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', 'true', 'boolean'),
+            array('annotation', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', 'false', 'boolean'),
+            array('annotation', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '12', 'integer'),
+            array('annotation', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '1.2', 'double'),
+            array('annotation', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{"str"}', 'array'),
+            array('annotation', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{1,2,3,4}', 'array'),
+            array('annotation', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '@Name', '_PhpScoper13133e188f67\\an instance of Doctrine\\Tests\\Common\\Annotations\\Name'),
         );
     }
     public function getAnnotationVarTypeArrayProviderInvalid()
     {
         //({attribute name}, {type declared type}, {attribute value} , {given type or class})
-        return array(array('arrayOfIntegers', 'integer', 'true', 'boolean'), array('arrayOfIntegers', 'integer', 'false', 'boolean'), array('arrayOfIntegers', 'integer', '{true,true}', 'boolean'), array('arrayOfIntegers', 'integer', '{1,true}', 'boolean'), array('arrayOfIntegers', 'integer', '{1,2,1.2}', 'double'), array('arrayOfIntegers', 'integer', '{1,2,"str"}', 'string'), array('arrayOfStrings', 'string', 'true', 'boolean'), array('arrayOfStrings', 'string', 'false', 'boolean'), array('arrayOfStrings', 'string', '{true,true}', 'boolean'), array('arrayOfStrings', 'string', '{"foo",true}', 'boolean'), array('arrayOfStrings', 'string', '{"foo","bar",1.2}', 'double'), array('arrayOfStrings', 'string', '1', 'integer'), array('arrayOfAnnotations', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', 'true', 'boolean'), array('arrayOfAnnotations', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', 'false', 'boolean'), array('arrayOfAnnotations', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll,true}', 'boolean'), array('arrayOfAnnotations', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll,true}', 'boolean'), array('arrayOfAnnotations', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll,1.2}', 'double'), array('arrayOfAnnotations', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll,@AnnotationExtendsAnnotationTargetAll,"str"}', 'string'));
+        return array(array('arrayOfIntegers', 'integer', 'true', 'boolean'), array('arrayOfIntegers', 'integer', 'false', 'boolean'), array('arrayOfIntegers', 'integer', '{true,true}', 'boolean'), array('arrayOfIntegers', 'integer', '{1,true}', 'boolean'), array('arrayOfIntegers', 'integer', '{1,2,1.2}', 'double'), array('arrayOfIntegers', 'integer', '{1,2,"str"}', 'string'), array('arrayOfStrings', 'string', 'true', 'boolean'), array('arrayOfStrings', 'string', 'false', 'boolean'), array('arrayOfStrings', 'string', '{true,true}', 'boolean'), array('arrayOfStrings', 'string', '{"foo",true}', 'boolean'), array('arrayOfStrings', 'string', '{"foo","bar",1.2}', 'double'), array('arrayOfStrings', 'string', '1', 'integer'), array('arrayOfAnnotations', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', 'true', 'boolean'), array('arrayOfAnnotations', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', 'false', 'boolean'), array('arrayOfAnnotations', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll,true}', 'boolean'), array('arrayOfAnnotations', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll,true}', 'boolean'), array('arrayOfAnnotations', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll,1.2}', 'double'), array('arrayOfAnnotations', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll', '{@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAll,@AnnotationExtendsAnnotationTargetAll,"str"}', 'string'));
     }
     /**
      * @dataProvider getAnnotationVarTypeProviderValid
@@ -376,10 +376,10 @@ DOCBLOCK;
         $parser = $this->createTestParser();
         $context = 'property SomeClassName::$invalidProperty.';
         $docblock = \sprintf('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithVarType(%s = %s)', $attribute, $value);
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         $result = $parser->parse($docblock, $context);
         $this->assertTrue(\sizeof($result) === 1);
-        $this->assertInstanceOf('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithVarType', $result[0]);
+        $this->assertInstanceOf('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithVarType', $result[0]);
         $this->assertNotNull($result[0]->{$attribute});
     }
     /**
@@ -390,11 +390,11 @@ DOCBLOCK;
         $parser = $this->createTestParser();
         $context = 'property SomeClassName::invalidProperty.';
         $docblock = \sprintf('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithVarType(%s = %s)', $attribute, $value);
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         try {
             $parser->parse($docblock, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertContains("[Type Error] Attribute \"{$attribute}\" of @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithVarType declared on property SomeClassName::invalidProperty. expects a(n) {$type}, but got {$given}.", $exc->getMessage());
         }
     }
@@ -406,11 +406,11 @@ DOCBLOCK;
         $parser = $this->createTestParser();
         $context = 'property SomeClassName::invalidProperty.';
         $docblock = \sprintf('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithVarType(%s = %s)', $attribute, $value);
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         try {
             $parser->parse($docblock, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertContains("[Type Error] Attribute \"{$attribute}\" of @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithVarType declared on property SomeClassName::invalidProperty. expects either a(n) {$type}, or an array of {$type}s, but got {$given}.", $exc->getMessage());
         }
     }
@@ -422,10 +422,10 @@ DOCBLOCK;
         $parser = $this->createTestParser();
         $context = 'property SomeClassName::$invalidProperty.';
         $docblock = \sprintf('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithAttributes(%s = %s)', $attribute, $value);
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         $result = $parser->parse($docblock, $context);
         $this->assertTrue(\sizeof($result) === 1);
-        $this->assertInstanceOf('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithAttributes', $result[0]);
+        $this->assertInstanceOf('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithAttributes', $result[0]);
         $getter = "get" . \ucfirst($attribute);
         $this->assertNotNull($result[0]->{$getter}());
     }
@@ -437,11 +437,11 @@ DOCBLOCK;
         $parser = $this->createTestParser();
         $context = 'property SomeClassName::invalidProperty.';
         $docblock = \sprintf('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithAttributes(%s = %s)', $attribute, $value);
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         try {
             $parser->parse($docblock, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertContains("[Type Error] Attribute \"{$attribute}\" of @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithAttributes declared on property SomeClassName::invalidProperty. expects a(n) {$type}, but got {$given}.", $exc->getMessage());
         }
     }
@@ -453,11 +453,11 @@ DOCBLOCK;
         $parser = $this->createTestParser();
         $context = 'property SomeClassName::invalidProperty.';
         $docblock = \sprintf('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithAttributes(%s = %s)', $attribute, $value);
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         try {
             $parser->parse($docblock, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertContains("[Type Error] Attribute \"{$attribute}\" of @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithAttributes declared on property SomeClassName::invalidProperty. expects either a(n) {$type}, or an array of {$type}s, but got {$given}.", $exc->getMessage());
         }
     }
@@ -465,25 +465,25 @@ DOCBLOCK;
     {
         $parser = $this->createTestParser();
         $context = 'property SomeClassName::invalidProperty.';
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         $docblock = '@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributes("Some Value", annot = @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation)';
         $result = $parser->parse($docblock);
         $this->assertTrue(\sizeof($result) === 1);
-        $this->assertInstanceOf('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributes', $result[0]);
+        $this->assertInstanceOf('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributes', $result[0]);
         $this->assertEquals("Some Value", $result[0]->getValue());
-        $this->assertInstanceOf('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation', $result[0]->getAnnot());
+        $this->assertInstanceOf('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation', $result[0]->getAnnot());
         $docblock = '@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributes("Some Value")';
         try {
             $result = $parser->parse($docblock, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertContains('Attribute "annot" of @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributes declared on property SomeClassName::invalidProperty. expects a(n) Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation. This value should not be null.', $exc->getMessage());
         }
         $docblock = '@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributes(annot = @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation)';
         try {
             $result = $parser->parse($docblock, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertContains('Attribute "value" of @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributes declared on property SomeClassName::invalidProperty. expects a(n) string. This value should not be null.', $exc->getMessage());
         }
     }
@@ -491,25 +491,25 @@ DOCBLOCK;
     {
         $parser = $this->createTestParser();
         $context = 'property SomeClassName::invalidProperty.';
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         $docblock = '@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributesWithoutContructor("Some Value", annot = @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation)';
         $result = $parser->parse($docblock);
         $this->assertTrue(\sizeof($result) === 1);
-        $this->assertInstanceOf('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributesWithoutContructor', $result[0]);
+        $this->assertInstanceOf('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributesWithoutContructor', $result[0]);
         $this->assertEquals("Some Value", $result[0]->value);
-        $this->assertInstanceOf('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation', $result[0]->annot);
+        $this->assertInstanceOf('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation', $result[0]->annot);
         $docblock = '@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributesWithoutContructor("Some Value")';
         try {
             $result = $parser->parse($docblock, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertContains('Attribute "annot" of @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributesWithoutContructor declared on property SomeClassName::invalidProperty. expects a(n) Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation. This value should not be null.', $exc->getMessage());
         }
         $docblock = '@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributesWithoutContructor(annot = @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationTargetAnnotation)';
         try {
             $result = $parser->parse($docblock, $context);
             $this->fail();
-        } catch (\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationException $exc) {
+        } catch (\_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationException $exc) {
             $this->assertContains('Attribute "value" of @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithRequiredAttributesWithoutContructor declared on property SomeClassName::invalidProperty. expects a(n) string. This value should not be null.', $exc->getMessage());
         }
     }
@@ -523,7 +523,7 @@ DOCBLOCK;
         $context = 'property SomeClassName::invalidProperty.';
         $docblock = '@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationEnum("FOUR")';
         $parser->setIgnoreNotImportedAnnotations(\false);
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         $parser->parse($docblock, $context);
     }
     /**
@@ -536,7 +536,7 @@ DOCBLOCK;
         $context = 'property SomeClassName::invalidProperty.';
         $docblock = '@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationEnumLiteral(4)';
         $parser->setIgnoreNotImportedAnnotations(\false);
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
         $parser->parse($docblock, $context);
     }
     /**
@@ -564,34 +564,34 @@ DOCBLOCK;
     public function getConstantsProvider()
     {
         $provider[] = array('@AnnotationWithConstants(PHP_EOL)', \PHP_EOL);
-        $provider[] = array('@AnnotationWithConstants(AnnotationWithConstants::INTEGER)', \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER);
-        $provider[] = array('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants(AnnotationWithConstants::STRING)', \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::STRING);
-        $provider[] = array('@AnnotationWithConstants(Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants::FLOAT)', \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::FLOAT);
-        $provider[] = array('@AnnotationWithConstants(ClassWithConstants::SOME_VALUE)', \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_VALUE);
-        $provider[] = array('@AnnotationWithConstants(ClassWithConstants::OTHER_KEY_)', \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::OTHER_KEY_);
-        $provider[] = array('@AnnotationWithConstants(ClassWithConstants::OTHER_KEY_2)', \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::OTHER_KEY_2);
-        $provider[] = array('@AnnotationWithConstants(Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithConstants::SOME_VALUE)', \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_VALUE);
-        $provider[] = array('@AnnotationWithConstants(IntefaceWithConstants::SOME_VALUE)', \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_VALUE);
-        $provider[] = array('@AnnotationWithConstants(\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\IntefaceWithConstants::SOME_VALUE)', \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_VALUE);
-        $provider[] = array('@AnnotationWithConstants({AnnotationWithConstants::STRING, AnnotationWithConstants::INTEGER, AnnotationWithConstants::FLOAT})', array(\_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::STRING, \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER, \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::FLOAT));
+        $provider[] = array('@AnnotationWithConstants(AnnotationWithConstants::INTEGER)', \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER);
+        $provider[] = array('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants(AnnotationWithConstants::STRING)', \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::STRING);
+        $provider[] = array('@AnnotationWithConstants(Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants::FLOAT)', \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::FLOAT);
+        $provider[] = array('@AnnotationWithConstants(ClassWithConstants::SOME_VALUE)', \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_VALUE);
+        $provider[] = array('@AnnotationWithConstants(ClassWithConstants::OTHER_KEY_)', \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::OTHER_KEY_);
+        $provider[] = array('@AnnotationWithConstants(ClassWithConstants::OTHER_KEY_2)', \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::OTHER_KEY_2);
+        $provider[] = array('@AnnotationWithConstants(Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithConstants::SOME_VALUE)', \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_VALUE);
+        $provider[] = array('@AnnotationWithConstants(IntefaceWithConstants::SOME_VALUE)', \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_VALUE);
+        $provider[] = array('@AnnotationWithConstants(\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\IntefaceWithConstants::SOME_VALUE)', \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_VALUE);
+        $provider[] = array('@AnnotationWithConstants({AnnotationWithConstants::STRING, AnnotationWithConstants::INTEGER, AnnotationWithConstants::FLOAT})', array(\_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::STRING, \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER, \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::FLOAT));
         $provider[] = array('@AnnotationWithConstants({
                 AnnotationWithConstants::STRING = AnnotationWithConstants::INTEGER
-             })', array(\_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::STRING => \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER));
+             })', array(\_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::STRING => \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER));
         $provider[] = array('@AnnotationWithConstants({
                 Doctrine\\Tests\\Common\\Annotations\\Fixtures\\IntefaceWithConstants::SOME_KEY = AnnotationWithConstants::INTEGER
-             })', array(\_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_KEY => \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER));
+             })', array(\_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_KEY => \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER));
         $provider[] = array('@AnnotationWithConstants({
                 \\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\IntefaceWithConstants::SOME_KEY = AnnotationWithConstants::INTEGER
-             })', array(\_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_KEY => \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER));
+             })', array(\_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_KEY => \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER));
         $provider[] = array('@AnnotationWithConstants({
                 AnnotationWithConstants::STRING = AnnotationWithConstants::INTEGER,
                 ClassWithConstants::SOME_KEY = ClassWithConstants::SOME_VALUE,
                 Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithConstants::SOME_KEY = IntefaceWithConstants::SOME_VALUE
-             })', array(\_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::STRING => \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER, \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_KEY => \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_VALUE, \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_KEY => \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_VALUE));
-        $provider[] = array('@AnnotationWithConstants(AnnotationWithConstants::class)', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants');
-        $provider[] = array('@AnnotationWithConstants({AnnotationWithConstants::class = AnnotationWithConstants::class})', array('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants' => '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants'));
-        $provider[] = array('@AnnotationWithConstants(Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants::class)', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants');
-        $provider[] = array('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants(Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants::class)', '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants');
+             })', array(\_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::STRING => \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithConstants::INTEGER, \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_KEY => \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_VALUE, \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\ClassWithConstants::SOME_KEY => \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\IntefaceWithConstants::SOME_VALUE));
+        $provider[] = array('@AnnotationWithConstants(AnnotationWithConstants::class)', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants');
+        $provider[] = array('@AnnotationWithConstants({AnnotationWithConstants::class = AnnotationWithConstants::class})', array('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants' => '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants'));
+        $provider[] = array('@AnnotationWithConstants(Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants::class)', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants');
+        $provider[] = array('@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants(Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants::class)', '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants');
         return $provider;
     }
     /**
@@ -600,9 +600,9 @@ DOCBLOCK;
     public function testSupportClassConstants($docblock, $expected)
     {
         $parser = $this->createTestParser();
-        $parser->setImports(array('classwithconstants' => '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithConstants', 'intefacewithconstants' => '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\IntefaceWithConstants', 'annotationwithconstants' => '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants'));
+        $parser->setImports(array('classwithconstants' => '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassWithConstants', 'intefacewithconstants' => '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\IntefaceWithConstants', 'annotationwithconstants' => '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants'));
         $result = $parser->parse($docblock);
-        $this->assertInstanceOf('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants', $annotation = $result[0]);
+        $this->assertInstanceOf('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithConstants', $annotation = $result[0]);
         $this->assertEquals($expected, $annotation->value);
     }
     /**
@@ -617,7 +617,7 @@ DOCBLOCK;
  * @SomeAnnotationClassNameWithoutConstructorAndProperties("Foo")
  */
 DOCBLOCK;
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
         $parser->parse($docblock);
     }
     /**
@@ -632,7 +632,7 @@ DOCBLOCK;
  * @SomeAnnotationClassNameWithoutConstructorAndProperties(value = "Foo")
  */
 DOCBLOCK;
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
         $parser->parse($docblock);
     }
     /**
@@ -648,7 +648,7 @@ DOCBLOCK;
  * @Doctrine\\Tests\\Common\\Annotations\\Fixtures\\AnnotationWithTargetSyntaxError()
  */
 DOCBLOCK;
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
         $parser->parse($docblock, $context);
     }
     /**
@@ -664,7 +664,7 @@ DOCBLOCK;
  * @AnnotationWithInvalidTargetDeclaration()
  */
 DOCBLOCK;
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
         $parser->parse($docblock, $context);
     }
     /**
@@ -680,7 +680,7 @@ DOCBLOCK;
  * @AnnotationWithTargetEmpty()
  */
 DOCBLOCK;
-        $parser->setTarget(\_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
+        $parser->setTarget(\_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
         $parser->parse($docblock, $context);
     }
     /**
@@ -697,7 +697,7 @@ DOCBLOCK;
  */
 DOCBLOCK;
         $result = $parser->parse($docblock);
-        $this->assertInstanceOf("_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Name", $result[0]);
+        $this->assertInstanceOf("_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Name", $result[0]);
         $docblock = <<<DOCBLOCK
 /**
  * @Name
@@ -707,14 +707,14 @@ DOCBLOCK;
  */
 DOCBLOCK;
         $result = $parser->parse($docblock);
-        $this->assertInstanceOf("_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Name", $result[0]);
+        $this->assertInstanceOf("_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Name", $result[0]);
     }
     /**
      * @group DDC-77
      */
     public function testAnnotationWithoutClassIsIgnoredWithoutWarning()
     {
-        $parser = new \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\DocParser();
+        $parser = new \_PhpScoper13133e188f67\Doctrine\Common\Annotations\DocParser();
         $parser->setIgnoreNotImportedAnnotations(\true);
         $result = $parser->parse("@param");
         $this->assertEquals(0, \count($result));
@@ -724,7 +724,7 @@ DOCBLOCK;
      */
     public function testNotAnAnnotationClassIsIgnoredWithoutWarning()
     {
-        $parser = new \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\DocParser();
+        $parser = new \_PhpScoper13133e188f67\Doctrine\Common\Annotations\DocParser();
         $parser->setIgnoreNotImportedAnnotations(\true);
         $parser->setIgnoredAnnotationNames(array('PHPUnit_Framework_TestCase' => \true));
         $result = $parser->parse('@PHPUnit_Framework_TestCase');
@@ -744,7 +744,7 @@ DOCBLOCK;
      */
     public function testAnnotationDoesntThrowExceptionWhenAtSignIsNotFollowedByIdentifier()
     {
-        $parser = new \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\DocParser();
+        $parser = new \_PhpScoper13133e188f67\Doctrine\Common\Annotations\DocParser();
         $result = $parser->parse("'@'");
         $this->assertEquals(0, \count($result));
     }
@@ -754,7 +754,7 @@ DOCBLOCK;
      */
     public function testAnnotationThrowsExceptionWhenAtSignIsNotFollowedByIdentifierInNestedAnnotation()
     {
-        $parser = new \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\DocParser();
+        $parser = new \_PhpScoper13133e188f67\Doctrine\Common\Annotations\DocParser();
         $parser->parse("@Doctrine\\Tests\\Common\\Annotations\\Name(@')");
     }
     /**
@@ -762,19 +762,19 @@ DOCBLOCK;
      */
     public function testAutoloadAnnotation()
     {
-        $this->assertFalse(\class_exists('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixture\\Annotation\\Autoload', \false), 'Pre-condition: Doctrine\\Tests\\Common\\Annotations\\Fixture\\Annotation\\Autoload not allowed to be loaded.');
-        $parser = new \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\DocParser();
-        \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation', __DIR__ . '/../../../../');
-        $parser->setImports(array('autoload' => '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Autoload'));
+        $this->assertFalse(\class_exists('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixture\\Annotation\\Autoload', \false), 'Pre-condition: Doctrine\\Tests\\Common\\Annotations\\Fixture\\Annotation\\Autoload not allowed to be loaded.');
+        $parser = new \_PhpScoper13133e188f67\Doctrine\Common\Annotations\DocParser();
+        \_PhpScoper13133e188f67\Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation', __DIR__ . '/../../../../');
+        $parser->setImports(array('autoload' => '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Autoload'));
         $annotations = $parser->parse('@Autoload');
         $this->assertEquals(1, \count($annotations));
-        $this->assertInstanceOf('_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Autoload', $annotations[0]);
+        $this->assertInstanceOf('_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Autoload', $annotations[0]);
     }
     public function createTestParser()
     {
-        $parser = new \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\DocParser();
+        $parser = new \_PhpScoper13133e188f67\Doctrine\Common\Annotations\DocParser();
         $parser->setIgnoreNotImportedAnnotations(\true);
-        $parser->setImports(array('name' => '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations\\Name', '__NAMESPACE__' => '_PhpScoper7312d63d356f\\Doctrine\\Tests\\Common\\Annotations'));
+        $parser->setImports(array('name' => '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations\\Name', '__NAMESPACE__' => '_PhpScoper13133e188f67\\Doctrine\\Tests\\Common\\Annotations'));
         return $parser;
     }
     /**
@@ -785,7 +785,7 @@ DOCBLOCK;
     public function testSyntaxErrorWithContextDescription()
     {
         $parser = $this->createTestParser();
-        $parser->parse("@Name(foo='bar')", "_PhpScoper7312d63d356f\\class \\Doctrine\\Tests\\Common\\Annotations\\Name");
+        $parser->parse("@Name(foo='bar')", "_PhpScoper13133e188f67\\class \\Doctrine\\Tests\\Common\\Annotations\\Name");
     }
     /**
      * @group DDC-183
@@ -874,18 +874,18 @@ DOCBLOCK;
     public function testReservedKeywordsInAnnotations()
     {
         $parser = $this->createTestParser();
-        $result = $parser->parse('_PhpScoper7312d63d356f\\@Doctrine\\Tests\\Common\\Annotations\\True');
-        $this->assertTrue($result[0] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\True);
-        $result = $parser->parse('_PhpScoper7312d63d356f\\@Doctrine\\Tests\\Common\\Annotations\\False');
-        $this->assertTrue($result[0] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\False);
-        $result = $parser->parse('_PhpScoper7312d63d356f\\@Doctrine\\Tests\\Common\\Annotations\\Null');
-        $this->assertTrue($result[0] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Null);
+        $result = $parser->parse('_PhpScoper13133e188f67\\@Doctrine\\Tests\\Common\\Annotations\\True');
+        $this->assertTrue($result[0] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\True);
+        $result = $parser->parse('_PhpScoper13133e188f67\\@Doctrine\\Tests\\Common\\Annotations\\False');
+        $this->assertTrue($result[0] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\False);
+        $result = $parser->parse('_PhpScoper13133e188f67\\@Doctrine\\Tests\\Common\\Annotations\\Null');
+        $this->assertTrue($result[0] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Null);
         $result = $parser->parse('@True');
-        $this->assertTrue($result[0] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\True);
+        $this->assertTrue($result[0] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\True);
         $result = $parser->parse('@False');
-        $this->assertTrue($result[0] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\False);
+        $this->assertTrue($result[0] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\False);
         $result = $parser->parse('@Null');
-        $this->assertTrue($result[0] instanceof \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Null);
+        $this->assertTrue($result[0] instanceof \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Null);
     }
     /**
      * @expectedException \Doctrine\Common\Annotations\AnnotationException
@@ -922,7 +922,7 @@ DOCBLOCK;
     public function testDefaultAnnotationValueIsNotOverwritten()
     {
         $parser = $this->createTestParser();
-        $annots = $parser->parse('_PhpScoper7312d63d356f\\@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\AnnotWithDefaultValue');
+        $annots = $parser->parse('_PhpScoper13133e188f67\\@Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\AnnotWithDefaultValue');
         $this->assertEquals(1, \count($annots));
         $this->assertEquals('bar', $annots[0]->foo);
     }
@@ -1004,11 +1004,11 @@ class AnnotationWithTargetEmpty
 {
 }
 /** @Annotation */
-class AnnotationExtendsAnnotationTargetAll extends \_PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAll
+class AnnotationExtendsAnnotationTargetAll extends \_PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAll
 {
 }
 /** @Annotation */
-class Name extends \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation
+class Name extends \_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation
 {
     public $foo;
 }
@@ -1029,9 +1029,9 @@ class False
 class Null
 {
 }
-namespace _PhpScoper7312d63d356f\Doctrine\Tests\Common\Annotations\FooBar;
+namespace _PhpScoper13133e188f67\Doctrine\Tests\Common\Annotations\FooBar;
 
 /** @Annotation */
-class Name extends \_PhpScoper7312d63d356f\Doctrine\Common\Annotations\Annotation
+class Name extends \_PhpScoper13133e188f67\Doctrine\Common\Annotations\Annotation
 {
 }
