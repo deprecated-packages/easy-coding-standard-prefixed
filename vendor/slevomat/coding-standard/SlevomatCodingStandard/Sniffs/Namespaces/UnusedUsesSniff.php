@@ -5,8 +5,8 @@ namespace SlevomatCodingStandard\Sniffs\Namespaces;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScoperaa402dd1b1f1\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
-use _PhpScoperaa402dd1b1f1\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperdc8fbcd7c69d\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
+use _PhpScoperdc8fbcd7c69d\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\GenericAnnotation;
 use SlevomatCodingStandard\Helpers\Annotation\MethodAnnotation;
 use SlevomatCodingStandard\Helpers\Annotation\ParameterAnnotation;
@@ -37,10 +37,10 @@ use function preg_match;
 use function preg_quote;
 use function preg_split;
 use function sprintf;
-use const _PhpScoperaa402dd1b1f1\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoperdc8fbcd7c69d\T_DOC_COMMENT_OPEN_TAG;
 use const T_NAMESPACE;
 use const T_OPEN_TAG;
-use const _PhpScoperaa402dd1b1f1\T_SEMICOLON;
+use const _PhpScoperdc8fbcd7c69d\T_SEMICOLON;
 class UnusedUsesSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_UNUSED_USE = 'UnusedUse';
@@ -156,7 +156,7 @@ class UnusedUsesSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                             if (!$annotation instanceof \SlevomatCodingStandard\Helpers\Annotation\GenericAnnotation) {
                                 foreach (\SlevomatCodingStandard\Helpers\AnnotationHelper::getAnnotationTypes($annotation) as $annotationType) {
                                     foreach (\SlevomatCodingStandard\Helpers\AnnotationTypeHelper::getIdentifierTypeNodes($annotationType) as $typeNode) {
-                                        if (!$typeNode instanceof \_PhpScoperaa402dd1b1f1\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+                                        if (!$typeNode instanceof \_PhpScoperdc8fbcd7c69d\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
                                             continue;
                                         }
                                         if (\SlevomatCodingStandard\Helpers\TypeHintHelper::isSimpleTypeHint($typeNode->name) || \SlevomatCodingStandard\Helpers\TypeHintHelper::isSimpleUnofficialTypeHints($typeNode->name) || !\SlevomatCodingStandard\Helpers\TypeHelper::isTypeName($typeNode->name)) {
@@ -166,7 +166,7 @@ class UnusedUsesSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                                     }
                                 }
                                 foreach (\SlevomatCodingStandard\Helpers\AnnotationHelper::getAnnotationConstantExpressions($annotation) as $annotationConstantExpression) {
-                                    $contentsToCheck = \array_merge($contentsToCheck, \array_map(static function (\_PhpScoperaa402dd1b1f1\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode $constFetchNode) : string {
+                                    $contentsToCheck = \array_merge($contentsToCheck, \array_map(static function (\_PhpScoperdc8fbcd7c69d\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode $constFetchNode) : string {
                                         return $constFetchNode->className;
                                     }, \SlevomatCodingStandard\Helpers\AnnotationConstantExpressionHelper::getConstantFetchNodes($annotationConstantExpression)));
                                 }

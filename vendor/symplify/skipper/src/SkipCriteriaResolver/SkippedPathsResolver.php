@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\SkipCriteriaResolver;
 
-use _PhpScoperaa402dd1b1f1\Nette\Utils\Strings;
+use _PhpScoperdc8fbcd7c69d\Nette\Utils\Strings;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\Skipper\ValueObject\Option;
 final class SkippedPathsResolver
@@ -34,7 +34,7 @@ final class SkippedPathsResolver
                 $this->skippedPaths[] = $value;
                 continue;
             }
-            if (\_PhpScoperaa402dd1b1f1\Nette\Utils\Strings::contains($value, '*')) {
+            if (\_PhpScoperdc8fbcd7c69d\Nette\Utils\Strings::contains($value, '*')) {
                 $this->skippedPaths[] = $value;
                 continue;
             }

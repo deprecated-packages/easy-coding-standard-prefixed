@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation;
+namespace _PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation;
 
 /**
  * HeaderBag is a container for HTTP headers.
@@ -260,7 +260,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
     protected function getCacheControlHeader()
     {
         \ksort($this->cacheControl);
-        return \_PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->cacheControl, ',');
+        return \_PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->cacheControl, ',');
     }
     /**
      * Parses a Cache-Control HTTP header.
@@ -271,7 +271,7 @@ class HeaderBag implements \IteratorAggregate, \Countable
      */
     protected function parseCacheControl($header)
     {
-        $parts = \_PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation\HeaderUtils::split($header, ',=');
-        return \_PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
+        $parts = \_PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation\HeaderUtils::split($header, ',=');
+        return \_PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
     }
 }

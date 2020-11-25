@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaa402dd1b1f1\Symfony\Component\Yaml\Exception;
+namespace _PhpScoperdc8fbcd7c69d\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception class thrown when an error occurs during dumping.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class DumpException extends \_PhpScoperaa402dd1b1f1\Symfony\Component\Yaml\Exception\RuntimeException
+class DumpException extends \_PhpScoperdc8fbcd7c69d\Symfony\Component\Yaml\Exception\RuntimeException
 {
 }

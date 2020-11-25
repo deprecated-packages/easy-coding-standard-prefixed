@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Report;
 
-use _PhpScoperaa402dd1b1f1\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperdc8fbcd7c69d\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Kévin Gomez <contact@kevingomez.fr>
  *
@@ -46,7 +46,7 @@ final class CheckstyleReporter implements \PhpCsFixer\Report\ReporterInterface
             }
         }
         $dom->formatOutput = \true;
-        return $reportSummary->isDecoratedOutput() ? \_PhpScoperaa402dd1b1f1\Symfony\Component\Console\Formatter\OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
+        return $reportSummary->isDecoratedOutput() ? \_PhpScoperdc8fbcd7c69d\Symfony\Component\Console\Formatter\OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
     }
     /**
      * @param string $appliedFixer

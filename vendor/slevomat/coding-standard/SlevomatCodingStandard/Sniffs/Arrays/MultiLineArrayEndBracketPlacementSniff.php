@@ -6,7 +6,7 @@ namespace SlevomatCodingStandard\Sniffs\Arrays;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
-use const _PhpScoperaa402dd1b1f1\T_OPEN_SHORT_ARRAY;
+use const _PhpScoperdc8fbcd7c69d\T_OPEN_SHORT_ARRAY;
 class MultiLineArrayEndBracketPlacementSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_ARRAY_END_WRONG_PLACEMENT = 'ArrayEndWrongPlacement';

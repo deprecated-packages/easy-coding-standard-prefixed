@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation\Session\Storage;
+namespace _PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation\Session\Storage;
 
-use _PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
+use _PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
 /**
  * Allows session to be started by PHP and managed by Symfony.
  *
  * @author Drak <drak@zikula.org>
  */
-class PhpBridgeSessionStorage extends \_PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage
+class PhpBridgeSessionStorage extends \_PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage
 {
     /**
      * @param AbstractProxy|\SessionHandlerInterface|null $handler
      */
-    public function __construct($handler = null, \_PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct($handler = null, \_PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         if (!\extension_loaded('session')) {
             throw new \LogicException('PHP extension "session" is required.');

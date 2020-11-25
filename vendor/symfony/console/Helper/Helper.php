@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaa402dd1b1f1\Symfony\Component\Console\Helper;
+namespace _PhpScoperdc8fbcd7c69d\Symfony\Component\Console\Helper;
 
-use _PhpScoperaa402dd1b1f1\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoperdc8fbcd7c69d\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * Helper is the base class for all helper classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Helper implements \_PhpScoperaa402dd1b1f1\Symfony\Component\Console\Helper\HelperInterface
+abstract class Helper implements \_PhpScoperdc8fbcd7c69d\Symfony\Component\Console\Helper\HelperInterface
 {
     protected $helperSet = null;
     /**
      * {@inheritdoc}
      */
-    public function setHelperSet(\_PhpScoperaa402dd1b1f1\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
+    public function setHelperSet(\_PhpScoperdc8fbcd7c69d\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
     {
         $this->helperSet = $helperSet;
     }
@@ -90,11 +90,11 @@ abstract class Helper implements \_PhpScoperaa402dd1b1f1\Symfony\Component\Conso
         }
         return \sprintf('%d B', $memory);
     }
-    public static function strlenWithoutDecoration(\_PhpScoperaa402dd1b1f1\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, $string)
+    public static function strlenWithoutDecoration(\_PhpScoperdc8fbcd7c69d\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, $string)
     {
         return self::strlen(self::removeDecoration($formatter, $string));
     }
-    public static function removeDecoration(\_PhpScoperaa402dd1b1f1\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, $string)
+    public static function removeDecoration(\_PhpScoperdc8fbcd7c69d\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, $string)
     {
         $isDecorated = $formatter->isDecorated();
         $formatter->setDecorated(\false);

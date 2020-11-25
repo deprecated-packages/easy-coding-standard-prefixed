@@ -9,7 +9,7 @@ use function array_keys;
 use function count;
 use function in_array;
 use function sprintf;
-use const _PhpScoperaa402dd1b1f1\T_ANON_CLASS;
+use const _PhpScoperdc8fbcd7c69d\T_ANON_CLASS;
 use const T_CLASS;
 use const T_CONST;
 use const T_FUNCTION;

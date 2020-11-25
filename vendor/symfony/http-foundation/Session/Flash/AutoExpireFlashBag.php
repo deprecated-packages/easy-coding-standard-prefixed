@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation\Session\Flash;
+namespace _PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation\Session\Flash;
 
 /**
  * AutoExpireFlashBag flash message container.
  *
  * @author Drak <drak@zikula.org>
  */
-class AutoExpireFlashBag implements \_PhpScoperaa402dd1b1f1\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
+class AutoExpireFlashBag implements \_PhpScoperdc8fbcd7c69d\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
 {
     private $name = 'flashes';
     private $flashes = ['display' => [], 'new' => []];

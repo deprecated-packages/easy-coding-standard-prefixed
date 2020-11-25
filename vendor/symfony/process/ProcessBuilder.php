@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaa402dd1b1f1\Symfony\Component\Process;
+namespace _PhpScoperdc8fbcd7c69d\Symfony\Component\Process;
 
-use _PhpScoperaa402dd1b1f1\Symfony\Component\Process\Exception\InvalidArgumentException;
-use _PhpScoperaa402dd1b1f1\Symfony\Component\Process\Exception\LogicException;
+use _PhpScoperdc8fbcd7c69d\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScoperdc8fbcd7c69d\Symfony\Component\Process\Exception\LogicException;
 /**
  * Process builder.
  *
@@ -159,7 +159,7 @@ class ProcessBuilder
      */
     public function setInput($input)
     {
-        $this->input = \_PhpScoperaa402dd1b1f1\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
+        $this->input = \_PhpScoperdc8fbcd7c69d\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
         return $this;
     }
     /**
@@ -181,7 +181,7 @@ class ProcessBuilder
         }
         $timeout = (float) $timeout;
         if ($timeout < 0) {
-            throw new \_PhpScoperaa402dd1b1f1\Symfony\Component\Process\Exception\InvalidArgumentException('The timeout value must be a valid positive integer or float number.');
+            throw new \_PhpScoperdc8fbcd7c69d\Symfony\Component\Process\Exception\InvalidArgumentException('The timeout value must be a valid positive integer or float number.');
         }
         $this->timeout = $timeout;
         return $this;
@@ -232,10 +232,10 @@ class ProcessBuilder
     public function getProcess()
     {
         if (0 === \count($this->prefix) && 0 === \count($this->arguments)) {
-            throw new \_PhpScoperaa402dd1b1f1\Symfony\Component\Process\Exception\LogicException('You must add() command arguments before calling getProcess().');
+            throw new \_PhpScoperdc8fbcd7c69d\Symfony\Component\Process\Exception\LogicException('You must add() command arguments before calling getProcess().');
         }
         $arguments = \array_merge($this->prefix, $this->arguments);
-        $process = new \_PhpScoperaa402dd1b1f1\Symfony\Component\Process\Process($arguments, $this->cwd, $this->env, $this->input, $this->timeout, $this->options);
+        $process = new \_PhpScoperdc8fbcd7c69d\Symfony\Component\Process\Process($arguments, $this->cwd, $this->env, $this->input, $this->timeout, $this->options);
         if ($this->inheritEnv) {
             $process->inheritEnvironmentVariables();
         }

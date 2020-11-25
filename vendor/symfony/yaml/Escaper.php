@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaa402dd1b1f1\Symfony\Component\Yaml;
+namespace _PhpScoperdc8fbcd7c69d\Symfony\Component\Yaml;
 
 /**
  * Escaper encapsulates escaping rules for single and double-quoted
