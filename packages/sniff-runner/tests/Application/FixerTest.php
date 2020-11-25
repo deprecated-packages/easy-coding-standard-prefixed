@@ -54,7 +54,7 @@ final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
         $this->assertSame('A\\', $token);
         $this->fixer->addContent(14, 'B');
         $token = $this->fixer->getTokenContent(14);
-        $this->assertSame('_PhpScoper2a48669dad72\\A\\B', $token);
+        $this->assertSame('_PhpScoperaac5f7c652e4\\A\\B', $token);
     }
     public function testChangesets() : void
     {
@@ -66,7 +66,7 @@ final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
         $this->assertSame('A\\', $this->fixer->getTokenContent(14));
         // during the changeset, you are free to modify current token as you wish...
         $this->fixer->addContent(14, 'B');
-        $this->assertSame('_PhpScoper2a48669dad72\\A\\B', $this->fixer->getTokenContent(14));
+        $this->assertSame('_PhpScoperaac5f7c652e4\\A\\B', $this->fixer->getTokenContent(14));
         // you can also rollback the changes...
         $this->fixer->rollbackChangeset();
         $this->assertSame('\\', $this->fixer->getTokenContent(14));
