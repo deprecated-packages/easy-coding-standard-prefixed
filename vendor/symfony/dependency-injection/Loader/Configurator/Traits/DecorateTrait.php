@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8acb416c2f5a\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScoper8acb416c2f5a\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper8acb416c2f5a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait DecorateTrait
 {
     /**
@@ -23,7 +23,7 @@ trait DecorateTrait
      *
      * @throws InvalidArgumentException in case the decorated service id and the new decorated service id are equals
      */
-    public final function decorate(?string $id, string $renamedId = null, int $priority = 0, int $invalidBehavior = \_PhpScoper8acb416c2f5a\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE) : self
+    public final function decorate(?string $id, string $renamedId = null, int $priority = 0, int $invalidBehavior = \_PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE) : self
     {
         $this->definition->setDecoratedService($id, $renamedId, $priority, $invalidBehavior);
         return $this;
