@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper4a718ec9156e\\PhpParser\\": "lib\/PhpParser"
+            "_PhpScoper7c3fefba1fb9\\PhpParser\\": "lib\/PhpParser"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoper4a718ec9156e\\PhpParser\\": "test\/PhpParser\/"
+            "_PhpScoper7c3fefba1fb9\\PhpParser\\": "test\/PhpParser\/"
         }
     },
     "bin": [

@@ -9,17 +9,17 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4a718ec9156e\SebastianBergmann\Diff\Output;
+namespace _PhpScoper7c3fefba1fb9\SebastianBergmann\Diff\Output;
 
-use _PhpScoper4a718ec9156e\PHPUnit\Framework\TestCase;
-use _PhpScoper4a718ec9156e\SebastianBergmann\Diff\Differ;
+use _PhpScoper7c3fefba1fb9\PHPUnit\Framework\TestCase;
+use _PhpScoper7c3fefba1fb9\SebastianBergmann\Diff\Differ;
 /**
  * @covers SebastianBergmann\Diff\Output\DiffOnlyOutputBuilder
  *
  * @uses SebastianBergmann\Diff\Differ
  * @uses SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator
  */
-final class DiffOnlyOutputBuilderTest extends \_PhpScoper4a718ec9156e\PHPUnit\Framework\TestCase
+final class DiffOnlyOutputBuilderTest extends \_PhpScoper7c3fefba1fb9\PHPUnit\Framework\TestCase
 {
     /**
      * @param string $expected
@@ -31,7 +31,7 @@ final class DiffOnlyOutputBuilderTest extends \_PhpScoper4a718ec9156e\PHPUnit\Fr
      */
     public function testDiffDoNotShowNonDiffLines(string $expected, string $from, string $to, string $header = '') : void
     {
-        $differ = new \_PhpScoper4a718ec9156e\SebastianBergmann\Diff\Differ(new \_PhpScoper4a718ec9156e\SebastianBergmann\Diff\Output\DiffOnlyOutputBuilder($header));
+        $differ = new \_PhpScoper7c3fefba1fb9\SebastianBergmann\Diff\Differ(new \_PhpScoper7c3fefba1fb9\SebastianBergmann\Diff\Output\DiffOnlyOutputBuilder($header));
         $this->assertSame($expected, $differ->diff($from, $to));
     }
     public function textForNoNonDiffLinesProvider() : array

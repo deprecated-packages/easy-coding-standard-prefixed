@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper4a718ec9156e\\Symfony\\Component\\VarExporter\\": ""
+            "_PhpScoper7c3fefba1fb9\\Symfony\\Component\\VarExporter\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

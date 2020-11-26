@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4a718ec9156e\PhpParser\Node\Expr\BinaryOp;
+namespace _PhpScoper7c3fefba1fb9\PhpParser\Node\Expr\BinaryOp;
 
-use _PhpScoper4a718ec9156e\PhpParser\Node\Expr\BinaryOp;
-class Concat extends \_PhpScoper4a718ec9156e\PhpParser\Node\Expr\BinaryOp
+use _PhpScoper7c3fefba1fb9\PhpParser\Node\Expr\BinaryOp;
+class Concat extends \_PhpScoper7c3fefba1fb9\PhpParser\Node\Expr\BinaryOp
 {
     public function getOperatorSigil() : string
     {

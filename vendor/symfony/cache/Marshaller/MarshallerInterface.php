@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4a718ec9156e\Symfony\Component\Cache\Marshaller;
+namespace _PhpScoper7c3fefba1fb9\Symfony\Component\Cache\Marshaller;
 
 /**
  * Serializes/unserializes PHP values.
