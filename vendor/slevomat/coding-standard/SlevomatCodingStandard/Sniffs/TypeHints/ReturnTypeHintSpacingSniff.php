@@ -11,8 +11,8 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_merge;
 use function sprintf;
 use function str_repeat;
-use const _PhpScoper167729fa1dde\T_CLOSE_PARENTHESIS;
-use const _PhpScoper167729fa1dde\T_NULLABLE;
+use const _PhpScopercb217fd4e736\T_CLOSE_PARENTHESIS;
+use const _PhpScopercb217fd4e736\T_NULLABLE;
 use const T_WHITESPACE;
 class ReturnTypeHintSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

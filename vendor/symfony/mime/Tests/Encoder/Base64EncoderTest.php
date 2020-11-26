@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper167729fa1dde\Symfony\Component\Mime\Tests\Encoder;
+namespace _PhpScopercb217fd4e736\Symfony\Component\Mime\Tests\Encoder;
 
-use _PhpScoper167729fa1dde\PHPUnit\Framework\TestCase;
-use _PhpScoper167729fa1dde\Symfony\Component\Mime\Encoder\Base64Encoder;
-class Base64EncoderTest extends \_PhpScoper167729fa1dde\PHPUnit\Framework\TestCase
+use _PhpScopercb217fd4e736\PHPUnit\Framework\TestCase;
+use _PhpScopercb217fd4e736\Symfony\Component\Mime\Encoder\Base64Encoder;
+class Base64EncoderTest extends \_PhpScopercb217fd4e736\PHPUnit\Framework\TestCase
 {
     /*
     There's really no point in testing the entire base64 encoding to the
@@ -30,7 +30,7 @@ class Base64EncoderTest extends \_PhpScoper167729fa1dde\PHPUnit\Framework\TestCa
         These 24 bits are then treated as 4 concatenated 6-bit groups, each
         of which is translated into a single digit in the base64 alphabet.
         */
-        $encoder = new \_PhpScoper167729fa1dde\Symfony\Component\Mime\Encoder\Base64Encoder();
+        $encoder = new \_PhpScopercb217fd4e736\Symfony\Component\Mime\Encoder\Base64Encoder();
         $this->assertEquals('MTIz', $encoder->encodeString('123'), '3 bytes of input should yield 4 bytes of output');
         $this->assertEquals('MTIzNDU2', $encoder->encodeString('123456'), '6 bytes in input should yield 8 bytes of output');
         $this->assertEquals('MTIzNDU2Nzg5', $encoder->encodeString('123456789'), '%s: 9 bytes in input should yield 12 bytes of output');
@@ -56,7 +56,7 @@ class Base64EncoderTest extends \_PhpScoper167729fa1dde\PHPUnit\Framework\TestCa
         exactly 16 bits; here, the final unit of encoded output will be three
         characters followed by one "=" padding character.
         */
-        $encoder = new \_PhpScoper167729fa1dde\Symfony\Component\Mime\Encoder\Base64Encoder();
+        $encoder = new \_PhpScopercb217fd4e736\Symfony\Component\Mime\Encoder\Base64Encoder();
         for ($i = 0; $i < 30; ++$i) {
             $input = \pack('C', \random_int(0, 255));
             $this->assertRegExp('~^[a-zA-Z0-9/\\+]{2}==$~', $encoder->encodeString($input), 'A single byte should have 2 bytes of padding');
@@ -80,7 +80,7 @@ class Base64EncoderTest extends \_PhpScoper167729fa1dde\PHPUnit\Framework\TestCa
         $input = 'abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '1234567890' . 'abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '1234567890' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $output = 'YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQk' . 'NERUZHSElKS0xNTk9QUVJTVFVWV1hZWjEyMzQ1' . "\r\n" . 'Njc4OTBhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3' . 'h5ekFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFla' . "\r\n" . 'MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1OT1BRUl' . 'NUVVZXWFla';
         //48
-        $encoder = new \_PhpScoper167729fa1dde\Symfony\Component\Mime\Encoder\Base64Encoder();
+        $encoder = new \_PhpScopercb217fd4e736\Symfony\Component\Mime\Encoder\Base64Encoder();
         $this->assertEquals($output, $encoder->encodeString($input), 'Lines should be no more than 76 characters');
     }
     public function testMaximumLineLengthCanBeSpecified()
@@ -88,7 +88,7 @@ class Base64EncoderTest extends \_PhpScoper167729fa1dde\PHPUnit\Framework\TestCa
         $input = 'abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '1234567890' . 'abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '1234567890' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $output = 'YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQk' . 'NERUZHSElKS0' . "\r\n" . 'xNTk9QUVJTVFVWV1hZWjEyMzQ1Njc4OTBhYmNk' . 'ZWZnaGlqa2xt' . "\r\n" . 'bm9wcXJzdHV2d3h5ekFCQ0RFRkdISUpLTE1OT1' . 'BRUlNUVVZXWF' . "\r\n" . 'laMTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1OT1BR' . 'UlNUVVZXWFla';
         //50 *
-        $encoder = new \_PhpScoper167729fa1dde\Symfony\Component\Mime\Encoder\Base64Encoder();
+        $encoder = new \_PhpScopercb217fd4e736\Symfony\Component\Mime\Encoder\Base64Encoder();
         $this->assertEquals($output, $encoder->encodeString($input, 'utf-8', 0, 50), 'Lines should be no more than 100 characters');
     }
     public function testFirstLineLengthCanBeDifferent()
@@ -96,7 +96,7 @@ class Base64EncoderTest extends \_PhpScoper167729fa1dde\PHPUnit\Framework\TestCa
         $input = 'abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '1234567890' . 'abcdefghijklmnopqrstuvwxyz' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' . '1234567890' . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $output = 'YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQk' . 'NERUZHSElKS0xNTk9QU' . "\r\n" . 'VJTVFVWV1hZWjEyMzQ1Njc4OTBhYmNkZWZnaGl' . 'qa2xtbm9wcXJzdHV2d3h5ekFCQ0RFRkdISUpLT' . "\r\n" . 'E1OT1BRUlNUVVZXWFlaMTIzNDU2Nzg5MEFCQ0R' . 'FRkdISUpLTE1OT1BRUlNUVVZXWFla';
         //67
-        $encoder = new \_PhpScoper167729fa1dde\Symfony\Component\Mime\Encoder\Base64Encoder();
+        $encoder = new \_PhpScopercb217fd4e736\Symfony\Component\Mime\Encoder\Base64Encoder();
         $this->assertEquals($output, $encoder->encodeString($input, 'utf-8', 19), 'First line offset is 19 so first line should be 57 chars long');
     }
 }

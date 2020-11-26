@@ -1,10 +1,10 @@
 <?php
 
-namespace _PhpScoper167729fa1dde\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScopercb217fd4e736\Doctrine\Tests\Common\Annotations\Fixtures;
 
 // Include a class named Api
 require_once __DIR__ . '/Api.php';
-use _PhpScoper167729fa1dde\Doctrine\Tests\Common\Annotations\DummyAnnotationWithIgnoredAnnotation;
+use _PhpScopercb217fd4e736\Doctrine\Tests\Common\Annotations\DummyAnnotationWithIgnoredAnnotation;
 /**
  * @DummyAnnotationWithIgnoredAnnotation(dummyValue="hello")
  */
