@@ -3875,7 +3875,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/skipper",
-                "reference": "9f3f0aefb1f69d3301a18b5ae5c1cf4e4378e66c"
+                "reference": "565fd1381dc133bdc4fcc34c37386d80f2dfe185"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3910,7 +3910,7 @@
             "license": [
                 "MIT"
             ],
-            "description": "Skip files by rule, directory, fnmatch or regex",
+            "description": "Skip files by rule class, directory, file or fnmatch",
             "transport-options": {
                 "symlink": false,
                 "relative": true

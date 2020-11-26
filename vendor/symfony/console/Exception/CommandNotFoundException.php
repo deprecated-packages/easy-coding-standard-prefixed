@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb2e2c0c42e71\Symfony\Component\Console\Exception;
+namespace _PhpScoper614deab2c612\Symfony\Component\Console\Exception;
 
 /**
  * Represents an incorrect command name typed in the console.
  *
  * @author Jérôme Tamarelle <jerome@tamarelle.net>
  */
-class CommandNotFoundException extends \InvalidArgumentException implements \_PhpScoperb2e2c0c42e71\Symfony\Component\Console\Exception\ExceptionInterface
+class CommandNotFoundException extends \InvalidArgumentException implements \_PhpScoper614deab2c612\Symfony\Component\Console\Exception\ExceptionInterface
 {
     private $alternatives;
     /**

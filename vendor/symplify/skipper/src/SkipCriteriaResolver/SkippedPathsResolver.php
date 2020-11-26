@@ -3,9 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\SkipCriteriaResolver;
 
-use _PhpScoperb2e2c0c42e71\Nette\Utils\Strings;
+use _PhpScoper614deab2c612\Nette\Utils\Strings;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\Skipper\ValueObject\Option;
+use Symplify\SmartFileSystem\Normalizer\PathNormalizer;
+/**
+ * @see \Symplify\Skipper\Tests\SkipCriteriaResolver\SkippedPathsResolver\SkippedPathsResolverTest
+ */
 final class SkippedPathsResolver
 {
     /**
@@ -16,26 +20,34 @@ final class SkippedPathsResolver
      * @var string[]
      */
     private $skippedPaths = [];
-    public function __construct(\Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider)
+    /**
+     * @var PathNormalizer
+     */
+    private $pathNormalizer;
+    public function __construct(\Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider, \Symplify\SmartFileSystem\Normalizer\PathNormalizer $pathNormalizer)
     {
         $this->parameterProvider = $parameterProvider;
+        $this->pathNormalizer = $pathNormalizer;
     }
     /**
      * @return string[]
      */
     public function resolve() : array
     {
+        if ($this->skippedPaths !== []) {
+            return $this->skippedPaths;
+        }
         $skip = $this->parameterProvider->provideArrayParameter(\Symplify\Skipper\ValueObject\Option::SKIP);
         foreach ($skip as $key => $value) {
             if (!\is_int($key)) {
                 continue;
             }
             if (\file_exists($value)) {
-                $this->skippedPaths[] = $value;
+                $this->skippedPaths[] = $this->pathNormalizer->normalizePath($value);
                 continue;
             }
-            if (\_PhpScoperb2e2c0c42e71\Nette\Utils\Strings::contains($value, '*')) {
-                $this->skippedPaths[] = $value;
+            if (\_PhpScoper614deab2c612\Nette\Utils\Strings::contains($value, '*')) {
+                $this->skippedPaths[] = $this->pathNormalizer->normalizePath($value);
                 continue;
             }
         }

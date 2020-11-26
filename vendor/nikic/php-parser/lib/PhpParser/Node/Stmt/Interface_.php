@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb2e2c0c42e71\PhpParser\Node\Stmt;
+namespace _PhpScoper614deab2c612\PhpParser\Node\Stmt;
 
-use _PhpScoperb2e2c0c42e71\PhpParser\Node;
-class Interface_ extends \_PhpScoperb2e2c0c42e71\PhpParser\Node\Stmt\ClassLike
+use _PhpScoper614deab2c612\PhpParser\Node;
+class Interface_ extends \_PhpScoper614deab2c612\PhpParser\Node\Stmt\ClassLike
 {
     /** @var Node\Name[] Extended interfaces */
     public $extends;
@@ -21,7 +21,7 @@ class Interface_ extends \_PhpScoperb2e2c0c42e71\PhpParser\Node\Stmt\ClassLike
     public function __construct($name, array $subNodes = [], array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \_PhpScoperb2e2c0c42e71\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScoper614deab2c612\PhpParser\Node\Identifier($name) : $name;
         $this->extends = $subNodes['extends'] ?? [];
         $this->stmts = $subNodes['stmts'] ?? [];
         $this->attrGroups = $subNodes['attrGroups'] ?? [];

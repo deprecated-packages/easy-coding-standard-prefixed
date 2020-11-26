@@ -4,8 +4,8 @@ declare (strict_types=1);
 namespace SlevomatCodingStandard\Helpers\Annotation;
 
 use InvalidArgumentException;
-use _PhpScoperb2e2c0c42e71\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode;
-use _PhpScoperb2e2c0c42e71\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoper614deab2c612\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode;
+use _PhpScoper614deab2c612\PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use function in_array;
 use function sprintf;
@@ -16,7 +16,7 @@ class TemplateAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Anno
 {
     /** @var TemplateTagValueNode|null */
     private $contentNode;
-    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoperb2e2c0c42e71\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode $contentNode)
+    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoper614deab2c612\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode $contentNode)
     {
         if (!\in_array($name, ['@template', '@psalm-template', '@phpstan-template', '@template-covariant', '@psalm-template-covariant', '@phpstan-template-covariant'], \true)) {
             throw new \InvalidArgumentException(\sprintf('Unsupported annotation %s.', $name));
@@ -28,7 +28,7 @@ class TemplateAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Anno
     {
         return $this->contentNode === null;
     }
-    public function getContentNode() : \_PhpScoperb2e2c0c42e71\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode
+    public function getContentNode() : \_PhpScoper614deab2c612\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode
     {
         $this->errorWhenInvalid();
         return $this->contentNode;
@@ -47,7 +47,7 @@ class TemplateAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Anno
         $this->errorWhenInvalid();
         return $this->contentNode->name;
     }
-    public function getBound() : ?\_PhpScoperb2e2c0c42e71\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public function getBound() : ?\_PhpScoper614deab2c612\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         $this->errorWhenInvalid();
         return $this->contentNode->bound;

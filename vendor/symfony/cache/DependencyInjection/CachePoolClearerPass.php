@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb2e2c0c42e71\Symfony\Component\Cache\DependencyInjection;
+namespace _PhpScoper614deab2c612\Symfony\Component\Cache\DependencyInjection;
 
-use _PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper614deab2c612\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper614deab2c612\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper614deab2c612\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CachePoolClearerPass implements \_PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CachePoolClearerPass implements \_PhpScoper614deab2c612\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $cachePoolClearerTag;
     public function __construct(string $cachePoolClearerTag = 'cache.pool.clearer')
@@ -26,7 +26,7 @@ class CachePoolClearerPass implements \_PhpScoperb2e2c0c42e71\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoper614deab2c612\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $container->getParameterBag()->remove('cache.prefix.seed');
         foreach ($container->findTaggedServiceIds($this->cachePoolClearerTag) as $id => $attr) {
@@ -34,7 +34,7 @@ class CachePoolClearerPass implements \_PhpScoperb2e2c0c42e71\Symfony\Component\
             $pools = [];
             foreach ($clearer->getArgument(0) as $name => $ref) {
                 if ($container->hasDefinition($ref)) {
-                    $pools[$name] = new \_PhpScoperb2e2c0c42e71\Symfony\Component\DependencyInjection\Reference($ref);
+                    $pools[$name] = new \_PhpScoper614deab2c612\Symfony\Component\DependencyInjection\Reference($ref);
                 }
             }
             $clearer->replaceArgument(0, $pools);

@@ -19,7 +19,7 @@ final class SkipSkipperTest extends \Symplify\PackageBuilder\Testing\AbstractKer
     private $skipper;
     protected function setUp() : void
     {
-        $this->bootKernelWithConfigs(\Symplify\Skipper\HttpKernel\SkipperKernel::class, [__DIR__ . '/config.php']);
+        $this->bootKernelWithConfigs(\Symplify\Skipper\HttpKernel\SkipperKernel::class, [__DIR__ . '/config/config.php']);
         $this->skipper = self::$container->get(\Symplify\Skipper\Skipper\Skipper::class);
     }
     /**

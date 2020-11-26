@@ -5,21 +5,21 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperb2e2c0c42e71\Nette\Neon;
+namespace _PhpScoper614deab2c612\Nette\Neon;
 
 /**
  * Simple parser & generator for Nette Object Notation.
  */
 final class Neon
 {
-    public const BLOCK = \_PhpScoperb2e2c0c42e71\Nette\Neon\Encoder::BLOCK;
+    public const BLOCK = \_PhpScoper614deab2c612\Nette\Neon\Encoder::BLOCK;
     public const CHAIN = '!!chain';
     /**
      * Returns the NEON representation of a value.
      */
     public static function encode($var, int $flags = 0) : string
     {
-        $encoder = new \_PhpScoperb2e2c0c42e71\Nette\Neon\Encoder();
+        $encoder = new \_PhpScoper614deab2c612\Nette\Neon\Encoder();
         return $encoder->encode($var, $flags);
     }
     /**
@@ -28,7 +28,7 @@ final class Neon
      */
     public static function decode(string $input)
     {
-        $decoder = new \_PhpScoperb2e2c0c42e71\Nette\Neon\Decoder();
+        $decoder = new \_PhpScoper614deab2c612\Nette\Neon\Decoder();
         return $decoder->decode($input);
     }
 }

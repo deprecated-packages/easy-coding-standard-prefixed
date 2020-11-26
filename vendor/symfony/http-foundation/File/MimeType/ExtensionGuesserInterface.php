@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb2e2c0c42e71\Symfony\Component\HttpFoundation\File\MimeType;
+namespace _PhpScoper614deab2c612\Symfony\Component\HttpFoundation\File\MimeType;
 
-use _PhpScoperb2e2c0c42e71\Symfony\Component\Mime\MimeTypesInterface;
+use _PhpScoper614deab2c612\Symfony\Component\Mime\MimeTypesInterface;
 /**
  * Guesses the file extension corresponding to a given mime type.
  *
