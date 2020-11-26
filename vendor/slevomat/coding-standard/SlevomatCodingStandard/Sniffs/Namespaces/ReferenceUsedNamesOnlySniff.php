@@ -5,8 +5,8 @@ namespace SlevomatCodingStandard\Sniffs\Namespaces;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScoperd301db66c80c\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
-use _PhpScoperd301db66c80c\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoper5cb8aea05893\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
+use _PhpScoper5cb8aea05893\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\GenericAnnotation;
 use SlevomatCodingStandard\Helpers\AnnotationConstantExpressionHelper;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
@@ -40,13 +40,13 @@ use function in_array;
 use function sprintf;
 use function strtolower;
 use function substr;
-use const _PhpScoperd301db66c80c\T_COMMA;
+use const _PhpScoper5cb8aea05893\T_COMMA;
 use const T_DECLARE;
-use const _PhpScoperd301db66c80c\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoper5cb8aea05893\T_DOC_COMMENT_OPEN_TAG;
 use const T_NAMESPACE;
-use const _PhpScoperd301db66c80c\T_OPEN_CURLY_BRACKET;
+use const _PhpScoper5cb8aea05893\T_OPEN_CURLY_BRACKET;
 use const T_OPEN_TAG;
-use const _PhpScoperd301db66c80c\T_SEMICOLON;
+use const _PhpScoper5cb8aea05893\T_SEMICOLON;
 use const T_WHITESPACE;
 class ReferenceUsedNamesOnlySniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
@@ -194,13 +194,13 @@ class ReferenceUsedNamesOnlySniff implements \PHP_CodeSniffer\Sniffs\Sniff
                         if ($fix) {
                             $phpcsFile->fixer->beginChangeset();
                             if ($reference->source === self::SOURCE_ANNOTATION) {
-                                $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $reference->annotation, $reference->nameNode, new \_PhpScoperd301db66c80c\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode(\substr($reference->name, 1)));
+                                $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $reference->annotation, $reference->nameNode, new \_PhpScoper5cb8aea05893\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode(\substr($reference->name, 1)));
                                 $phpcsFile->fixer->replaceToken($startPointer, $fixedAnnotationContent);
                                 for ($i = $startPointer + 1; $i <= $reference->endPointer; $i++) {
                                     $phpcsFile->fixer->replaceToken($i, '');
                                 }
                             } elseif ($reference->source === self::SOURCE_ANNOTATION_CONSTANT_FETCH) {
-                                $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationConstantFetchNode($phpcsFile, $reference->annotation, $reference->constantFetchNode, new \_PhpScoperd301db66c80c\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode(\substr($reference->name, 1), $reference->constantFetchNode->name));
+                                $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationConstantFetchNode($phpcsFile, $reference->annotation, $reference->constantFetchNode, new \_PhpScoper5cb8aea05893\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode(\substr($reference->name, 1), $reference->constantFetchNode->name));
                                 $phpcsFile->fixer->replaceToken($startPointer, $fixedAnnotationContent);
                                 for ($i = $startPointer + 1; $i <= $reference->endPointer; $i++) {
                                     $phpcsFile->fixer->replaceToken($i, '');
@@ -296,10 +296,10 @@ class ReferenceUsedNamesOnlySniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 $alreadyAddedUses[$reference->type][] = $canonicalName;
             }
             if ($reference->source === self::SOURCE_ANNOTATION) {
-                $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $reference->annotation, $reference->nameNode, new \_PhpScoperd301db66c80c\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($nameToReference));
+                $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $reference->annotation, $reference->nameNode, new \_PhpScoper5cb8aea05893\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($nameToReference));
                 $phpcsFile->fixer->replaceToken($startPointer, $fixedAnnotationContent);
             } elseif ($reference->source === self::SOURCE_ANNOTATION_CONSTANT_FETCH) {
-                $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationConstantFetchNode($phpcsFile, $reference->annotation, $reference->constantFetchNode, new \_PhpScoperd301db66c80c\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode($nameToReference, $reference->constantFetchNode->name));
+                $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationConstantFetchNode($phpcsFile, $reference->annotation, $reference->constantFetchNode, new \_PhpScoper5cb8aea05893\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode($nameToReference, $reference->constantFetchNode->name));
                 $phpcsFile->fixer->replaceToken($startPointer, $fixedAnnotationContent);
             } else {
                 $phpcsFile->fixer->replaceToken($startPointer, $nameToReference);

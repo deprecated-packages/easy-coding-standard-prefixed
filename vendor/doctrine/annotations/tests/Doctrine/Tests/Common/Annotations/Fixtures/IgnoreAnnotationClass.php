@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperd301db66c80c\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper5cb8aea05893\Doctrine\Tests\Common\Annotations\Fixtures;
 
 class IgnoreAnnotationClass
 {

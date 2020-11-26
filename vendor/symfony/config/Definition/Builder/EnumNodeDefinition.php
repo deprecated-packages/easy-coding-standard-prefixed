@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd301db66c80c\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper5cb8aea05893\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoperd301db66c80c\Symfony\Component\Config\Definition\EnumNode;
+use _PhpScoper5cb8aea05893\Symfony\Component\Config\Definition\EnumNode;
 /**
  * Enum Node Definition.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class EnumNodeDefinition extends \_PhpScoperd301db66c80c\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+class EnumNodeDefinition extends \_PhpScoper5cb8aea05893\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
 {
     private $values;
     /**
@@ -43,6 +43,6 @@ class EnumNodeDefinition extends \_PhpScoperd301db66c80c\Symfony\Component\Confi
         if (null === $this->values) {
             throw new \RuntimeException('You must call ->values() on enum nodes.');
         }
-        return new \_PhpScoperd301db66c80c\Symfony\Component\Config\Definition\EnumNode($this->name, $this->parent, $this->values, $this->pathSeparator);
+        return new \_PhpScoper5cb8aea05893\Symfony\Component\Config\Definition\EnumNode($this->name, $this->parent, $this->values, $this->pathSeparator);
     }
 }

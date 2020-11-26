@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd301db66c80c\Symfony\Component\Mime\Tests\Encoder;
+namespace _PhpScoper5cb8aea05893\Symfony\Component\Mime\Tests\Encoder;
 
-use _PhpScoperd301db66c80c\PHPUnit\Framework\TestCase;
-use _PhpScoperd301db66c80c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder;
-class QpMimeHeaderEncoderTest extends \_PhpScoperd301db66c80c\PHPUnit\Framework\TestCase
+use _PhpScoper5cb8aea05893\PHPUnit\Framework\TestCase;
+use _PhpScoper5cb8aea05893\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder;
+class QpMimeHeaderEncoderTest extends \_PhpScoper5cb8aea05893\PHPUnit\Framework\TestCase
 {
     public function testNameIsQ()
     {
-        $encoder = new \_PhpScoperd301db66c80c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
+        $encoder = new \_PhpScoper5cb8aea05893\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
         $this->assertEquals('Q', $encoder->getName());
     }
     public function testSpaceAndTabNeverAppear()
@@ -26,7 +26,7 @@ class QpMimeHeaderEncoderTest extends \_PhpScoperd301db66c80c\PHPUnit\Framework\
            'encoded-text'.  Space and tab characters are not allowed, so that
            the beginning and end of an 'encoded-word' are obvious.
            */
-        $encoder = new \_PhpScoperd301db66c80c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
+        $encoder = new \_PhpScoper5cb8aea05893\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
         $this->assertNotRegExp('~[ \\t]~', $encoder->encodeString("a \t b"), 'encoded-words in headers cannot contain LWSP as per RFC 2047.');
     }
     public function testSpaceIsRepresentedByUnderscore()
@@ -40,7 +40,7 @@ class QpMimeHeaderEncoderTest extends \_PhpScoperd301db66c80c\PHPUnit\Framework\
            always represents hexadecimal 20, even if the SPACE character
            occupies a different code position in the character set in use.
            */
-        $encoder = new \_PhpScoperd301db66c80c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
+        $encoder = new \_PhpScoper5cb8aea05893\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
         $this->assertEquals('a_b', $encoder->encodeString('a b'), 'Spaces can be represented by more readable underscores as per RFC 2047.');
     }
     public function testEqualsAndQuestionAndUnderscoreAreEncoded()
@@ -52,7 +52,7 @@ class QpMimeHeaderEncoderTest extends \_PhpScoperd301db66c80c\PHPUnit\Framework\
            particular, SPACE and TAB MUST NOT be represented as themselves
            within encoded words.
            */
-        $encoder = new \_PhpScoperd301db66c80c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
+        $encoder = new \_PhpScoper5cb8aea05893\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
         $this->assertEquals('=3D=3F=5F', $encoder->encodeString('=?_'), 'Chars =, ? and _ (underscore) may not appear as per RFC 2047.');
     }
     public function testParensAndQuotesAreEncoded()
@@ -61,7 +61,7 @@ class QpMimeHeaderEncoderTest extends \_PhpScoperd301db66c80c\PHPUnit\Framework\
             A "Q"-encoded 'encoded-word' which appears in a 'comment' MUST NOT
            contain the characters "(", ")" or "
            */
-        $encoder = new \_PhpScoperd301db66c80c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
+        $encoder = new \_PhpScoper5cb8aea05893\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
         $this->assertEquals('=28=22=29', $encoder->encodeString('(")'), 'Chars (, " (DQUOTE) and ) may not appear as per RFC 2047.');
     }
     public function testOnlyCharactersAllowedInPhrasesAreUsed()
@@ -81,7 +81,7 @@ class QpMimeHeaderEncoderTest extends \_PhpScoperd301db66c80c\PHPUnit\Framework\
                 'special' by 'linear-white-space'.
                 */
         $allowedBytes = \array_merge(\range(\ord('a'), \ord('z')), \range(\ord('A'), \ord('Z')), \range(\ord('0'), \ord('9')), [\ord('!'), \ord('*'), \ord('+'), \ord('-'), \ord('/')]);
-        $encoder = new \_PhpScoperd301db66c80c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
+        $encoder = new \_PhpScoper5cb8aea05893\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
         foreach (\range(0x0, 0xff) as $byte) {
             $char = \pack('C', $byte);
             $encodedChar = $encoder->encodeString($char, 'iso-8859-1');
@@ -116,7 +116,7 @@ class QpMimeHeaderEncoderTest extends \_PhpScoperd301db66c80c\PHPUnit\Framework\
             }
             $output .= 'a';
         }
-        $encoder = new \_PhpScoperd301db66c80c\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
+        $encoder = new \_PhpScoper5cb8aea05893\Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder();
         $this->assertEquals($output, $encoder->encodeString($input));
     }
 }
