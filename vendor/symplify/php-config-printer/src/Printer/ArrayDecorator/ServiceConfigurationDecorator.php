@@ -3,15 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Printer\ArrayDecorator;
 
-use _PhpScoper5cb8aea05893\PhpParser\Node\Arg;
-use _PhpScoper5cb8aea05893\PhpParser\Node\Expr\Array_;
-use _PhpScoper5cb8aea05893\PhpParser\Node\Expr\ArrayItem;
-use _PhpScoper5cb8aea05893\PhpParser\Node\Expr\FuncCall;
-use _PhpScoper5cb8aea05893\PhpParser\Node\Name\FullyQualified;
-use Symplify\PackageBuilder\Parameter\ParameterProvider;
+use _PhpScoper4a718ec9156e\PhpParser\Node\Arg;
+use _PhpScoper4a718ec9156e\PhpParser\Node\Expr\Array_;
+use _PhpScoper4a718ec9156e\PhpParser\Node\Expr\ArrayItem;
+use _PhpScoper4a718ec9156e\PhpParser\Node\Expr\StaticCall;
+use _PhpScoper4a718ec9156e\PhpParser\Node\Name\FullyQualified;
 use Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory;
 use Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver;
-use Symplify\PhpConfigPrinter\ValueObject\Option;
+use Symplify\SymfonyPhpConfig\ValueObjectInliner;
 final class ServiceConfigurationDecorator
 {
     /**
@@ -22,15 +21,10 @@ final class ServiceConfigurationDecorator
      * @var NewValueObjectFactory
      */
     private $newValueObjectFactory;
-    /**
-     * @var ParameterProvider
-     */
-    private $parameterProvider;
-    public function __construct(\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver, \Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory $newValueObjectFactory, \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider)
+    public function __construct(\Symplify\PhpConfigPrinter\Reflection\ConstantNameFromValueResolver $constantNameFromValueResolver, \Symplify\PhpConfigPrinter\NodeFactory\NewValueObjectFactory $newValueObjectFactory)
     {
         $this->constantNameFromValueResolver = $constantNameFromValueResolver;
         $this->newValueObjectFactory = $newValueObjectFactory;
-        $this->parameterProvider = $parameterProvider;
     }
     /**
      * @param mixed|mixed[] $configuration
@@ -68,24 +62,22 @@ final class ServiceConfigurationDecorator
         }
         return $configuration;
     }
-    private function decorateValueObject(object $value) : \_PhpScoper5cb8aea05893\PhpParser\Node\Expr\FuncCall
+    private function decorateValueObject(object $value) : \_PhpScoper4a718ec9156e\PhpParser\Node\Expr\StaticCall
     {
         $new = $this->newValueObjectFactory->create($value);
-        $args = [new \_PhpScoper5cb8aea05893\PhpParser\Node\Arg($new)];
-        $functionName = $this->parameterProvider->provideStringParameter(\Symplify\PhpConfigPrinter\ValueObject\Option::INLINE_VALUE_OBJECT_FUNC_CALL_NAME);
-        return new \_PhpScoper5cb8aea05893\PhpParser\Node\Expr\FuncCall(new \_PhpScoper5cb8aea05893\PhpParser\Node\Name\FullyQualified($functionName), $args);
+        $args = [new \_PhpScoper4a718ec9156e\PhpParser\Node\Arg($new)];
+        return $this->createInlineStaticCall($args);
     }
-    private function decorateValueObjects(array $values) : \_PhpScoper5cb8aea05893\PhpParser\Node\Expr\FuncCall
+    private function decorateValueObjects(array $values) : \_PhpScoper4a718ec9156e\PhpParser\Node\Expr\StaticCall
     {
         $arrayItems = [];
         foreach ($values as $value) {
             $new = $this->newValueObjectFactory->create($value);
-            $arrayItems[] = new \_PhpScoper5cb8aea05893\PhpParser\Node\Expr\ArrayItem($new);
+            $arrayItems[] = new \_PhpScoper4a718ec9156e\PhpParser\Node\Expr\ArrayItem($new);
         }
-        $array = new \_PhpScoper5cb8aea05893\PhpParser\Node\Expr\Array_($arrayItems);
-        $args = [new \_PhpScoper5cb8aea05893\PhpParser\Node\Arg($array)];
-        $functionName = $this->parameterProvider->provideStringParameter(\Symplify\PhpConfigPrinter\ValueObject\Option::INLINE_VALUE_OBJECTS_FUNC_CALL_NAME);
-        return new \_PhpScoper5cb8aea05893\PhpParser\Node\Expr\FuncCall(new \_PhpScoper5cb8aea05893\PhpParser\Node\Name\FullyQualified($functionName), $args);
+        $array = new \_PhpScoper4a718ec9156e\PhpParser\Node\Expr\Array_($arrayItems);
+        $args = [new \_PhpScoper4a718ec9156e\PhpParser\Node\Arg($array)];
+        return $this->createInlineStaticCall($args);
     }
     private function isArrayOfObjects($values) : bool
     {
@@ -101,5 +93,15 @@ final class ServiceConfigurationDecorator
             }
         }
         return \true;
+    }
+    /**
+     * Depends on symplify/symfony-php-config
+     *
+     * @param Arg[] $args
+     */
+    private function createInlineStaticCall(array $args) : \_PhpScoper4a718ec9156e\PhpParser\Node\Expr\StaticCall
+    {
+        $fullyQualified = new \_PhpScoper4a718ec9156e\PhpParser\Node\Name\FullyQualified(\Symplify\SymfonyPhpConfig\ValueObjectInliner::class);
+        return new \_PhpScoper4a718ec9156e\PhpParser\Node\Expr\StaticCall($fullyQualified, 'inline', $args);
     }
 }
