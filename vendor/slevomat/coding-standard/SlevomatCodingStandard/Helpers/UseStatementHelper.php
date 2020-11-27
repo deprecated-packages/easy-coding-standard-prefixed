@@ -9,13 +9,13 @@ use function array_reverse;
 use function count;
 use function current;
 use function in_array;
-use const _PhpScoper08748c77fa1c\T_ANON_CLASS;
+use const _PhpScoper578a67c80b2b\T_ANON_CLASS;
 use const T_AS;
-use const _PhpScoper08748c77fa1c\T_COMMA;
+use const _PhpScoper578a67c80b2b\T_COMMA;
 use const T_NAMESPACE;
-use const _PhpScoper08748c77fa1c\T_OPEN_PARENTHESIS;
+use const _PhpScoper578a67c80b2b\T_OPEN_PARENTHESIS;
 use const T_OPEN_TAG;
-use const _PhpScoper08748c77fa1c\T_SEMICOLON;
+use const _PhpScoper578a67c80b2b\T_SEMICOLON;
 use const T_STRING;
 use const T_USE;
 class UseStatementHelper
