@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper776637f3d3c3\PhpParser\Node\Expr\Cast;
+namespace _PhpScoper08748c77fa1c\PhpParser\Node\Expr\Cast;
 
-use _PhpScoper776637f3d3c3\PhpParser\Node\Expr\Cast;
-class Double extends \_PhpScoper776637f3d3c3\PhpParser\Node\Expr\Cast
+use _PhpScoper08748c77fa1c\PhpParser\Node\Expr\Cast;
+class Double extends \_PhpScoper08748c77fa1c\PhpParser\Node\Expr\Cast
 {
     // For use in "kind" attribute
     const KIND_DOUBLE = 1;

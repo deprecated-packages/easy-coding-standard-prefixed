@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper776637f3d3c3\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper08748c77fa1c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper776637f3d3c3\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper08748c77fa1c\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * This is a directed graph of your services.
  *
@@ -36,10 +36,10 @@ class ServiceReferenceGraph
      *
      * @throws InvalidArgumentException if no node matches the supplied identifier
      */
-    public function getNode(string $id) : \_PhpScoper776637f3d3c3\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
+    public function getNode(string $id) : \_PhpScoper08748c77fa1c\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
     {
         if (!isset($this->nodes[$id])) {
-            throw new \_PhpScoper776637f3d3c3\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('There is no node with id "%s".', $id));
+            throw new \_PhpScoper08748c77fa1c\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('There is no node with id "%s".', $id));
         }
         return $this->nodes[$id];
     }
@@ -72,15 +72,15 @@ class ServiceReferenceGraph
         }
         $sourceNode = $this->createNode($sourceId, $sourceValue);
         $destNode = $this->createNode($destId, $destValue);
-        $edge = new \_PhpScoper776637f3d3c3\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge($sourceNode, $destNode, $reference, $lazy, $weak, $byConstructor);
+        $edge = new \_PhpScoper08748c77fa1c\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge($sourceNode, $destNode, $reference, $lazy, $weak, $byConstructor);
         $sourceNode->addOutEdge($edge);
         $destNode->addInEdge($edge);
     }
-    private function createNode(string $id, $value) : \_PhpScoper776637f3d3c3\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
+    private function createNode(string $id, $value) : \_PhpScoper08748c77fa1c\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
     {
         if (isset($this->nodes[$id]) && $this->nodes[$id]->getValue() === $value) {
             return $this->nodes[$id];
         }
-        return $this->nodes[$id] = new \_PhpScoper776637f3d3c3\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode($id, $value);
+        return $this->nodes[$id] = new \_PhpScoper08748c77fa1c\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode($id, $value);
     }
 }
