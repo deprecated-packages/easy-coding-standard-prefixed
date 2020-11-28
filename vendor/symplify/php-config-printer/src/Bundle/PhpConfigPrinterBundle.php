@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Bundle;
 
-use _PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoperfcce67077a55\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoperc8b83ee8976a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperc8b83ee8976a\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoperc8b83ee8976a\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 use Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
@@ -16,18 +16,18 @@ use Symplify\PhpConfigPrinter\Dummy\DummyYamlFileContentProvider;
  * This class is dislocated in non-standard location, so it's not added by symfony/flex
  * to bundles.php and cause app to crash. See https://github.com/symplify/symplify/issues/1952#issuecomment-628765364
  */
-final class PhpConfigPrinterBundle extends \_PhpScoperfcce67077a55\Symfony\Component\HttpKernel\Bundle\Bundle
+final class PhpConfigPrinterBundle extends \_PhpScoperc8b83ee8976a\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    public function build(\_PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScoperc8b83ee8976a\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $this->registerDefaultImplementations($containerBuilder);
         $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : ?\_PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScoperc8b83ee8976a\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
         return new \Symplify\PhpConfigPrinter\DependencyInjection\Extension\PhpConfigPrinterExtension();
     }
-    private function registerDefaultImplementations(\_PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    private function registerDefaultImplementations(\_PhpScoperc8b83ee8976a\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         // set default implementations, if none provided - for better developer experience out of the box
         if (!$containerBuilder->has(\Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface::class)) {

@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfcce67077a55\PhpParser\Node\Stmt;
+namespace _PhpScoperc8b83ee8976a\PhpParser\Node\Stmt;
 
-use _PhpScoperfcce67077a55\PhpParser\Node;
+use _PhpScoperc8b83ee8976a\PhpParser\Node;
 /**
  * Represents statements of type "expr;"
  */
-class Expression extends \_PhpScoperfcce67077a55\PhpParser\Node\Stmt
+class Expression extends \_PhpScoperc8b83ee8976a\PhpParser\Node\Stmt
 {
     /** @var Node\Expr Expression */
     public $expr;
@@ -17,7 +17,7 @@ class Expression extends \_PhpScoperfcce67077a55\PhpParser\Node\Stmt
      * @param Node\Expr $expr       Expression
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperfcce67077a55\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\_PhpScoperc8b83ee8976a\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

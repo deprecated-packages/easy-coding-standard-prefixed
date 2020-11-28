@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcce67077a55\SebastianBergmann\Diff;
+namespace _PhpScoperc8b83ee8976a\SebastianBergmann\Diff;
 
 interface LongestCommonSubsequenceCalculator
 {

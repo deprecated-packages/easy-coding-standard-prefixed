@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfcce67077a55;
+namespace _PhpScoperc8b83ee8976a;
 
-use _PhpScoperfcce67077a55\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoperfcce67077a55\Psr\SimpleCache\CacheInterface;
-use _PhpScoperfcce67077a55\Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use _PhpScoperfcce67077a55\Symfony\Component\Cache\Adapter\TagAwareAdapter;
-use _PhpScoperfcce67077a55\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use _PhpScoperfcce67077a55\Symfony\Component\Cache\Psr16Cache;
-use _PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoperc8b83ee8976a\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoperc8b83ee8976a\Psr\SimpleCache\CacheInterface;
+use _PhpScoperc8b83ee8976a\Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use _PhpScoperc8b83ee8976a\Symfony\Component\Cache\Adapter\TagAwareAdapter;
+use _PhpScoperc8b83ee8976a\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use _PhpScoperc8b83ee8976a\Symfony\Component\Cache\Psr16Cache;
+use _PhpScoperc8b83ee8976a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoperc8b83ee8976a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();
-    $services->set(\_PhpScoperfcce67077a55\Symfony\Component\Cache\Psr16Cache::class);
-    $services->alias(\_PhpScoperfcce67077a55\Psr\SimpleCache\CacheInterface::class, \_PhpScoperfcce67077a55\Symfony\Component\Cache\Psr16Cache::class);
-    $services->set(\_PhpScoperfcce67077a55\Symfony\Component\Cache\Adapter\FilesystemAdapter::class)->args(['$namespace' => '%cache_namespace%', '$defaultLifetime' => 0, '$directory' => '%cache_directory%']);
-    $services->alias(\_PhpScoperfcce67077a55\Psr\Cache\CacheItemPoolInterface::class, \_PhpScoperfcce67077a55\Symfony\Component\Cache\Adapter\FilesystemAdapter::class);
-    $services->alias(\_PhpScoperfcce67077a55\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface::class, \_PhpScoperfcce67077a55\Symfony\Component\Cache\Adapter\TagAwareAdapter::class);
+    $services->set(\_PhpScoperc8b83ee8976a\Symfony\Component\Cache\Psr16Cache::class);
+    $services->alias(\_PhpScoperc8b83ee8976a\Psr\SimpleCache\CacheInterface::class, \_PhpScoperc8b83ee8976a\Symfony\Component\Cache\Psr16Cache::class);
+    $services->set(\_PhpScoperc8b83ee8976a\Symfony\Component\Cache\Adapter\FilesystemAdapter::class)->args(['$namespace' => '%cache_namespace%', '$defaultLifetime' => 0, '$directory' => '%cache_directory%']);
+    $services->alias(\_PhpScoperc8b83ee8976a\Psr\Cache\CacheItemPoolInterface::class, \_PhpScoperc8b83ee8976a\Symfony\Component\Cache\Adapter\FilesystemAdapter::class);
+    $services->alias(\_PhpScoperc8b83ee8976a\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface::class, \_PhpScoperc8b83ee8976a\Symfony\Component\Cache\Adapter\TagAwareAdapter::class);
 };

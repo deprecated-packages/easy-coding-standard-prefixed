@@ -1,14 +1,14 @@
 <?php
 
-namespace _PhpScoperfcce67077a55\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoperc8b83ee8976a\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoperfcce67077a55\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+use _PhpScoperc8b83ee8976a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
 class DifferentNamespacesPerFileWithClassAsFirst
 {
 }
-namespace _PhpScoperfcce67077a55;
+namespace _PhpScoperc8b83ee8976a;
 
-use _PhpScoperfcce67077a55\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
-namespace _PhpScoperfcce67077a55\Doctrine\Tests\Common\Annotations\Fixtures\Foo;
+use _PhpScoperc8b83ee8976a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+namespace _PhpScoperc8b83ee8976a\Doctrine\Tests\Common\Annotations\Fixtures\Foo;
 
-use _PhpScoperfcce67077a55\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
+use _PhpScoperc8b83ee8976a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
