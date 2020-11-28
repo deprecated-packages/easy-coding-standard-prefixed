@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper578a67c80b2b\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoperfcce67077a55\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoper578a67c80b2b\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use _PhpScoper578a67c80b2b\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper578a67c80b2b\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperfcce67077a55\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use _PhpScoperfcce67077a55\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperfcce67077a55\Symfony\Component\HttpFoundation\Response;
 /**
  * ExceptionDataCollector.
  *
@@ -20,18 +20,18 @@ use _PhpScoper578a67c80b2b\Symfony\Component\HttpFoundation\Response;
  *
  * @final since Symfony 4.4
  */
-class ExceptionDataCollector extends \_PhpScoper578a67c80b2b\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class ExceptionDataCollector extends \_PhpScoperfcce67077a55\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
     /**
      * {@inheritdoc}
      *
      * @param \Throwable|null $exception
      */
-    public function collect(\_PhpScoper578a67c80b2b\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper578a67c80b2b\Symfony\Component\HttpFoundation\Response $response)
+    public function collect(\_PhpScoperfcce67077a55\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperfcce67077a55\Symfony\Component\HttpFoundation\Response $response)
     {
         $exception = 2 < \func_num_args() ? \func_get_arg(2) : null;
         if (null !== $exception) {
-            $this->data = ['exception' => \_PhpScoper578a67c80b2b\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)];
+            $this->data = ['exception' => \_PhpScoperfcce67077a55\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)];
         }
     }
     /**

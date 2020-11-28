@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Set;
 
-use _PhpScoper578a67c80b2b\Nette\Utils\Strings;
+use _PhpScoperfcce67077a55\Nette\Utils\Strings;
 use ReflectionClass;
 use Symplify\SetConfigResolver\ValueObject\Set;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -35,7 +35,7 @@ final class ConstantReflectionSetFactory
             }
             $setName = $this->constantToDashes($name);
             // back compatible names without "-"
-            $setName = \_PhpScoper578a67c80b2b\Nette\Utils\Strings::replace($setName, self::REMOVE_DASH_BEFORE_NUMBER_REGEX, '$1$2');
+            $setName = \_PhpScoperfcce67077a55\Nette\Utils\Strings::replace($setName, self::REMOVE_DASH_BEFORE_NUMBER_REGEX, '$1$2');
             $sets[] = new \Symplify\SetConfigResolver\ValueObject\Set($setName, new \Symplify\SmartFileSystem\SmartFileInfo($setPath));
         }
         return $sets;
@@ -43,6 +43,6 @@ final class ConstantReflectionSetFactory
     private function constantToDashes(string $string) : string
     {
         $string = \strtolower($string);
-        return \_PhpScoper578a67c80b2b\Nette\Utils\Strings::replace($string, self::UNDERSCORE_REGEX, '-');
+        return \_PhpScoperfcce67077a55\Nette\Utils\Strings::replace($string, self::UNDERSCORE_REGEX, '-');
     }
 }

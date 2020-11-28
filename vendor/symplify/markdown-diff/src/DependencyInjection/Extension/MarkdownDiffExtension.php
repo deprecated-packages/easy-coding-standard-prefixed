@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\MarkdownDiff\DependencyInjection\Extension;
 
-use _PhpScoper578a67c80b2b\Symfony\Component\Config\FileLocator;
-use _PhpScoper578a67c80b2b\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper578a67c80b2b\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoper578a67c80b2b\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class MarkdownDiffExtension extends \_PhpScoper578a67c80b2b\Symfony\Component\DependencyInjection\Extension\Extension
+use _PhpScoperfcce67077a55\Symfony\Component\Config\FileLocator;
+use _PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class MarkdownDiffExtension extends \_PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\Extension\Extension
 {
-    public function load(array $configs, \_PhpScoper578a67c80b2b\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, \_PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
-        $phpFileLoader = new \_PhpScoper578a67c80b2b\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoper578a67c80b2b\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \_PhpScoperfcce67077a55\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperfcce67077a55\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');
     }
 }

@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoper578a67c80b2b;
+namespace _PhpScoperfcce67077a55;
 
-return \_PhpScoper578a67c80b2b\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone \_PhpScoper578a67c80b2b\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Symfony\\Component\\VarExporter\\Tests\\MyWakeup'] ?? \_PhpScoper578a67c80b2b\Symfony\Component\VarExporter\Internal\Registry::p('_PhpScoper578a67c80b2b\\Symfony\\Component\\VarExporter\\Tests\\MyWakeup')], null, [], $o[0], [1 => 0]);
+return \_PhpScoperfcce67077a55\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone \_PhpScoperfcce67077a55\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Symfony\\Component\\VarExporter\\Tests\\MyWakeup'] ?? \_PhpScoperfcce67077a55\Symfony\Component\VarExporter\Internal\Registry::p('_PhpScoperfcce67077a55\\Symfony\\Component\\VarExporter\\Tests\\MyWakeup')], null, [], $o[0], [1 => 0]);

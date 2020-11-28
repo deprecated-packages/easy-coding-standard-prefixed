@@ -1,10 +1,10 @@
 <?php
 
-namespace _PhpScoper578a67c80b2b\Doctrine\Tests;
+namespace _PhpScoperfcce67077a55\Doctrine\Tests;
 
 /**
  * Base testcase class for all Doctrine testcases.
  */
-abstract class DoctrineTestCase extends \_PhpScoper578a67c80b2b\PHPUnit_Framework_TestCase
+abstract class DoctrineTestCase extends \_PhpScoperfcce67077a55\PHPUnit_Framework_TestCase
 {
 }
