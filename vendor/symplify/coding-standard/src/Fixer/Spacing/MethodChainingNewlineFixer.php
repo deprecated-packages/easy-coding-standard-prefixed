@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Spacing;
 
-use _PhpScopercae980ebf12d\Nette\Utils\Strings;
+use _PhpScoper9d73a84b09ad\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -159,7 +159,7 @@ CODE_SAMPLE
         if (!$currentToken->isWhitespace()) {
             return \false;
         }
-        return \_PhpScopercae980ebf12d\Nette\Utils\Strings::contains($currentToken->getContent(), "\n");
+        return \_PhpScoper9d73a84b09ad\Nette\Utils\Strings::contains($currentToken->getContent(), "\n");
     }
     /**
      * Matches e.g.:

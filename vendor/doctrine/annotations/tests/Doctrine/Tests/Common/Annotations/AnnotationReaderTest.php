@@ -1,13 +1,13 @@
 <?php
 
-namespace _PhpScopercae980ebf12d\Doctrine\Tests\Common\Annotations;
+namespace _PhpScoper9d73a84b09ad\Doctrine\Tests\Common\Annotations;
 
-use _PhpScopercae980ebf12d\Doctrine\Common\Annotations\AnnotationReader;
-class AnnotationReaderTest extends \_PhpScopercae980ebf12d\Doctrine\Tests\Common\Annotations\AbstractReaderTest
+use _PhpScoper9d73a84b09ad\Doctrine\Common\Annotations\AnnotationReader;
+class AnnotationReaderTest extends \_PhpScoper9d73a84b09ad\Doctrine\Tests\Common\Annotations\AbstractReaderTest
 {
     protected function getReader()
     {
-        return new \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\AnnotationReader();
+        return new \_PhpScoper9d73a84b09ad\Doctrine\Common\Annotations\AnnotationReader();
     }
     public function testMethodAnnotationFromTrait()
     {
@@ -15,11 +15,11 @@ class AnnotationReaderTest extends \_PhpScopercae980ebf12d\Doctrine\Tests\Common
             $this->markTestSkipped('This test requires PHP 5.4 or later.');
         }
         $reader = $this->getReader();
-        $ref = new \ReflectionClass('_PhpScopercae980ebf12d\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassUsesTrait');
+        $ref = new \ReflectionClass('_PhpScoper9d73a84b09ad\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassUsesTrait');
         $annotations = $reader->getMethodAnnotations($ref->getMethod('someMethod'));
-        $this->assertInstanceOf('_PhpScopercae980ebf12d\\Doctrine\\Tests\\Common\\Annotations\\Bar\\Autoload', $annotations[0]);
+        $this->assertInstanceOf('_PhpScoper9d73a84b09ad\\Doctrine\\Tests\\Common\\Annotations\\Bar\\Autoload', $annotations[0]);
         $annotations = $reader->getMethodAnnotations($ref->getMethod('traitMethod'));
-        $this->assertInstanceOf('_PhpScopercae980ebf12d\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Autoload', $annotations[0]);
+        $this->assertInstanceOf('_PhpScoper9d73a84b09ad\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Autoload', $annotations[0]);
     }
     public function testMethodAnnotationFromOverwrittenTrait()
     {
@@ -27,9 +27,9 @@ class AnnotationReaderTest extends \_PhpScopercae980ebf12d\Doctrine\Tests\Common
             $this->markTestSkipped('This test requires PHP 5.4 or later.');
         }
         $reader = $this->getReader();
-        $ref = new \ReflectionClass('_PhpScopercae980ebf12d\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassOverwritesTrait');
+        $ref = new \ReflectionClass('_PhpScoper9d73a84b09ad\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassOverwritesTrait');
         $annotations = $reader->getMethodAnnotations($ref->getMethod('traitMethod'));
-        $this->assertInstanceOf('_PhpScopercae980ebf12d\\Doctrine\\Tests\\Common\\Annotations\\Bar2\\Autoload', $annotations[0]);
+        $this->assertInstanceOf('_PhpScoper9d73a84b09ad\\Doctrine\\Tests\\Common\\Annotations\\Bar2\\Autoload', $annotations[0]);
     }
     public function testPropertyAnnotationFromTrait()
     {
@@ -37,10 +37,10 @@ class AnnotationReaderTest extends \_PhpScopercae980ebf12d\Doctrine\Tests\Common
             $this->markTestSkipped('This test requires PHP 5.4 or later.');
         }
         $reader = $this->getReader();
-        $ref = new \ReflectionClass('_PhpScopercae980ebf12d\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassUsesTrait');
+        $ref = new \ReflectionClass('_PhpScoper9d73a84b09ad\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassUsesTrait');
         $annotations = $reader->getPropertyAnnotations($ref->getProperty('aProperty'));
-        $this->assertInstanceOf('_PhpScopercae980ebf12d\\Doctrine\\Tests\\Common\\Annotations\\Bar\\Autoload', $annotations[0]);
+        $this->assertInstanceOf('_PhpScoper9d73a84b09ad\\Doctrine\\Tests\\Common\\Annotations\\Bar\\Autoload', $annotations[0]);
         $annotations = $reader->getPropertyAnnotations($ref->getProperty('traitProperty'));
-        $this->assertInstanceOf('_PhpScopercae980ebf12d\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Autoload', $annotations[0]);
+        $this->assertInstanceOf('_PhpScoper9d73a84b09ad\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Autoload', $annotations[0]);
     }
 }

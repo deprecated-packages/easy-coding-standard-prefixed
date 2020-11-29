@@ -13,9 +13,9 @@ namespace PhpCsFixer\Linter;
 
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FileRemoval;
-use _PhpScopercae980ebf12d\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScopercae980ebf12d\Symfony\Component\Process\PhpExecutableFinder;
-use _PhpScopercae980ebf12d\Symfony\Component\Process\Process;
+use _PhpScoper9d73a84b09ad\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper9d73a84b09ad\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScoper9d73a84b09ad\Symfony\Component\Process\Process;
 /**
  * Handle PHP code linting using separated process of `php -l _file_`.
  *
@@ -45,7 +45,7 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
     public function __construct($executable = null)
     {
         if (null === $executable) {
-            $executableFinder = new \_PhpScopercae980ebf12d\Symfony\Component\Process\PhpExecutableFinder();
+            $executableFinder = new \_PhpScoper9d73a84b09ad\Symfony\Component\Process\PhpExecutableFinder();
             $executable = $executableFinder->find(\false);
             if (\false === $executable) {
                 throw new \PhpCsFixer\Linter\UnavailableLinterException('Cannot find PHP executable.');
@@ -121,7 +121,7 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
             $this->fileRemoval->observe($this->temporaryFile);
         }
         if (\false === @\file_put_contents($this->temporaryFile, $source)) {
-            throw new \_PhpScopercae980ebf12d\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s".', $this->temporaryFile), 0, null, $this->temporaryFile);
+            throw new \_PhpScoper9d73a84b09ad\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s".', $this->temporaryFile), 0, null, $this->temporaryFile);
         }
         return $this->createProcessForFile($this->temporaryFile);
     }

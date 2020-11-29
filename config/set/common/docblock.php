@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercae980ebf12d;
+namespace _PhpScoper9d73a84b09ad;
 
 use PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoEmptyPhpdocFixer;
@@ -15,8 +15,8 @@ use PhpCsFixer\Fixer\Phpdoc\PhpdocTrimFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocTypesFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocVarWithoutNameFixer;
 use SlevomatCodingStandard\Sniffs\TypeHints\NullTypeHintOnLastPositionSniff;
-use _PhpScopercae980ebf12d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScopercae980ebf12d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoper9d73a84b09ad\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoper9d73a84b09ad\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocLineSpanFixer::class);
     $services->set(\SlevomatCodingStandard\Sniffs\TypeHints\NullTypeHintOnLastPositionSniff::class);

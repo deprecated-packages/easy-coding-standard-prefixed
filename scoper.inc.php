@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercae980ebf12d;
+namespace _PhpScoper9d73a84b09ad;
 
 return ['files-whitelist' => [
     // do not prefix "trigger_deprecatoin" from symfony - https://github.com/symfony/symfony/commit/0032b2a2893d3be592d4312b7b098fb9d71aca03
@@ -13,6 +13,6 @@ return ['files-whitelist' => [
     'PhpCsFixer\\*',
     'PHP_CodeSniffer\\*',
     'SlevomatCodingStandard\\*',
-    '_PhpScopercae980ebf12d\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
-    '_PhpScopercae980ebf12d\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
+    '_PhpScoper9d73a84b09ad\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
+    '_PhpScoper9d73a84b09ad\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
 ]];

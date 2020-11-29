@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae980ebf12d\Symfony\Component\DependencyInjection;
+namespace _PhpScoper9d73a84b09ad\Symfony\Component\DependencyInjection;
 
 /**
  * ContainerAwareInterface should be implemented by classes that depends on a Container.
@@ -20,5 +20,5 @@ interface ContainerAwareInterface
     /**
      * Sets the container.
      */
-    public function setContainer(\_PhpScopercae980ebf12d\Symfony\Component\DependencyInjection\ContainerInterface $container = null);
+    public function setContainer(\_PhpScoper9d73a84b09ad\Symfony\Component\DependencyInjection\ContainerInterface $container = null);
 }

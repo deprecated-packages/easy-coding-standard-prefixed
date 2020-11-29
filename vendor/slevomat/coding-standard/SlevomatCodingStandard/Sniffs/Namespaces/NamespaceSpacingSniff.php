@@ -16,7 +16,7 @@ use function substr;
 use function substr_count;
 use const T_NAMESPACE;
 use const T_OPEN_TAG;
-use const _PhpScopercae980ebf12d\T_SEMICOLON;
+use const _PhpScoper9d73a84b09ad\T_SEMICOLON;
 use const T_WHITESPACE;
 class NamespaceSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

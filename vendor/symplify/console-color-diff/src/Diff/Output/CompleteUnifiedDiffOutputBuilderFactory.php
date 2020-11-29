@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\Diff\Output;
 
-use _PhpScopercae980ebf12d\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use _PhpScoper9d73a84b09ad\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 /**
  * Creates @see UnifiedDiffOutputBuilder with "$contextLines = 1000;"
@@ -21,9 +21,9 @@ final class CompleteUnifiedDiffOutputBuilderFactory
     /**
      * @api
      */
-    public function create() : \_PhpScopercae980ebf12d\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
+    public function create() : \_PhpScoper9d73a84b09ad\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
     {
-        $unifiedDiffOutputBuilder = new \_PhpScopercae980ebf12d\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder('');
+        $unifiedDiffOutputBuilder = new \_PhpScoper9d73a84b09ad\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder('');
         $this->privatesAccessor->setPrivateProperty($unifiedDiffOutputBuilder, 'contextLines', 10000);
         return $unifiedDiffOutputBuilder;
     }

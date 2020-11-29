@@ -17,7 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScopercae980ebf12d\Doctrine\Common\Lexer;
+namespace _PhpScoper9d73a84b09ad\Doctrine\Common\Lexer;
 
 /**
  * Base class for writing simple lexers, i.e. for creating small DSLs.

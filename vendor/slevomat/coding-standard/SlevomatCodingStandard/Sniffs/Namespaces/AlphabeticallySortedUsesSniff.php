@@ -21,7 +21,7 @@ use function strcasecmp;
 use function strcmp;
 use function uasort;
 use const T_OPEN_TAG;
-use const _PhpScopercae980ebf12d\T_SEMICOLON;
+use const _PhpScoper9d73a84b09ad\T_SEMICOLON;
 class AlphabeticallySortedUsesSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_INCORRECT_ORDER = 'IncorrectlyOrderedUses';
