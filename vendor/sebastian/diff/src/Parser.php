@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc8b83ee8976a\SebastianBergmann\Diff;
+namespace _PhpScopercae980ebf12d\SebastianBergmann\Diff;
 
 /**
  * Unified diff parser.
@@ -38,7 +38,7 @@ final class Parser
                     $diffs[] = $diff;
                     $collected = [];
                 }
-                $diff = new \_PhpScoperc8b83ee8976a\SebastianBergmann\Diff\Diff($fromMatch['file'], $toMatch['file']);
+                $diff = new \_PhpScopercae980ebf12d\SebastianBergmann\Diff\Diff($fromMatch['file'], $toMatch['file']);
                 ++$i;
             } else {
                 if (\preg_match('/^(?:diff --git |index [\\da-f\\.]+|[+-]{3} [ab])/', $lines[$i])) {
@@ -53,25 +53,25 @@ final class Parser
         }
         return $diffs;
     }
-    private function parseFileDiff(\_PhpScoperc8b83ee8976a\SebastianBergmann\Diff\Diff $diff, array $lines) : void
+    private function parseFileDiff(\_PhpScopercae980ebf12d\SebastianBergmann\Diff\Diff $diff, array $lines) : void
     {
         $chunks = [];
         $chunk = null;
         foreach ($lines as $line) {
             if (\preg_match('/^@@\\s+-(?P<start>\\d+)(?:,\\s*(?P<startrange>\\d+))?\\s+\\+(?P<end>\\d+)(?:,\\s*(?P<endrange>\\d+))?\\s+@@/', $line, $match)) {
-                $chunk = new \_PhpScoperc8b83ee8976a\SebastianBergmann\Diff\Chunk((int) $match['start'], isset($match['startrange']) ? \max(1, (int) $match['startrange']) : 1, (int) $match['end'], isset($match['endrange']) ? \max(1, (int) $match['endrange']) : 1);
+                $chunk = new \_PhpScopercae980ebf12d\SebastianBergmann\Diff\Chunk((int) $match['start'], isset($match['startrange']) ? \max(1, (int) $match['startrange']) : 1, (int) $match['end'], isset($match['endrange']) ? \max(1, (int) $match['endrange']) : 1);
                 $chunks[] = $chunk;
                 $diffLines = [];
                 continue;
             }
             if (\preg_match('/^(?P<type>[+ -])?(?P<line>.*)/', $line, $match)) {
-                $type = \_PhpScoperc8b83ee8976a\SebastianBergmann\Diff\Line::UNCHANGED;
+                $type = \_PhpScopercae980ebf12d\SebastianBergmann\Diff\Line::UNCHANGED;
                 if ($match['type'] === '+') {
-                    $type = \_PhpScoperc8b83ee8976a\SebastianBergmann\Diff\Line::ADDED;
+                    $type = \_PhpScopercae980ebf12d\SebastianBergmann\Diff\Line::ADDED;
                 } elseif ($match['type'] === '-') {
-                    $type = \_PhpScoperc8b83ee8976a\SebastianBergmann\Diff\Line::REMOVED;
+                    $type = \_PhpScopercae980ebf12d\SebastianBergmann\Diff\Line::REMOVED;
                 }
-                $diffLines[] = new \_PhpScoperc8b83ee8976a\SebastianBergmann\Diff\Line($type, $match['line']);
+                $diffLines[] = new \_PhpScopercae980ebf12d\SebastianBergmann\Diff\Line($type, $match['line']);
                 if (null !== $chunk) {
                     $chunk->setLines($diffLines);
                 }

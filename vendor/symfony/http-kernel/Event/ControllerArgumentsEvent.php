@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc8b83ee8976a\Symfony\Component\HttpKernel\Event;
+namespace _PhpScopercae980ebf12d\Symfony\Component\HttpKernel\Event;
 
 /**
  * Allows filtering of controller arguments.
@@ -24,6 +24,6 @@ namespace _PhpScoperc8b83ee8976a\Symfony\Component\HttpKernel\Event;
  *
  * @final since Symfony 4.4
  */
-class ControllerArgumentsEvent extends \_PhpScoperc8b83ee8976a\Symfony\Component\HttpKernel\Event\FilterControllerArgumentsEvent
+class ControllerArgumentsEvent extends \_PhpScopercae980ebf12d\Symfony\Component\HttpKernel\Event\FilterControllerArgumentsEvent
 {
 }

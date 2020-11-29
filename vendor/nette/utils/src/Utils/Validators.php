@@ -5,17 +5,17 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperc8b83ee8976a\Nette\Utils;
+namespace _PhpScopercae980ebf12d\Nette\Utils;
 
-use _PhpScoperc8b83ee8976a\Nette;
+use _PhpScopercae980ebf12d\Nette;
 /**
  * Validation utilities.
  */
 class Validators
 {
     use Nette\StaticClass;
-    protected static $validators = ['bool' => 'is_bool', 'boolean' => 'is_bool', 'int' => 'is_int', 'integer' => 'is_int', 'float' => 'is_float', 'number' => [__CLASS__, 'isNumber'], 'numeric' => [__CLASS__, 'isNumeric'], 'numericint' => [__CLASS__, 'isNumericInt'], 'string' => 'is_string', 'unicode' => [__CLASS__, 'isUnicode'], 'array' => 'is_array', 'list' => [\_PhpScoperc8b83ee8976a\Nette\Utils\Arrays::class, 'isList'], 'object' => 'is_object', 'resource' => 'is_resource', 'scalar' => 'is_scalar', 'callable' => [__CLASS__, 'isCallable'], 'null' => 'is_null', 'email' => [__CLASS__, 'isEmail'], 'url' => [__CLASS__, 'isUrl'], 'uri' => [__CLASS__, 'isUri'], 'none' => [__CLASS__, 'isNone'], 'type' => [__CLASS__, 'isType'], 'identifier' => [__CLASS__, 'isPhpIdentifier'], 'pattern' => null, 'alnum' => 'ctype_alnum', 'alpha' => 'ctype_alpha', 'digit' => 'ctype_digit', 'lower' => 'ctype_lower', 'upper' => 'ctype_upper', 'space' => 'ctype_space', 'xdigit' => 'ctype_xdigit', 'iterable' => 'is_iterable'];
-    protected static $counters = ['string' => 'strlen', 'unicode' => [\_PhpScoperc8b83ee8976a\Nette\Utils\Strings::class, 'length'], 'array' => 'count', 'list' => 'count', 'alnum' => 'strlen', 'alpha' => 'strlen', 'digit' => 'strlen', 'lower' => 'strlen', 'space' => 'strlen', 'upper' => 'strlen', 'xdigit' => 'strlen'];
+    protected static $validators = ['bool' => 'is_bool', 'boolean' => 'is_bool', 'int' => 'is_int', 'integer' => 'is_int', 'float' => 'is_float', 'number' => [__CLASS__, 'isNumber'], 'numeric' => [__CLASS__, 'isNumeric'], 'numericint' => [__CLASS__, 'isNumericInt'], 'string' => 'is_string', 'unicode' => [__CLASS__, 'isUnicode'], 'array' => 'is_array', 'list' => [\_PhpScopercae980ebf12d\Nette\Utils\Arrays::class, 'isList'], 'object' => 'is_object', 'resource' => 'is_resource', 'scalar' => 'is_scalar', 'callable' => [__CLASS__, 'isCallable'], 'null' => 'is_null', 'email' => [__CLASS__, 'isEmail'], 'url' => [__CLASS__, 'isUrl'], 'uri' => [__CLASS__, 'isUri'], 'none' => [__CLASS__, 'isNone'], 'type' => [__CLASS__, 'isType'], 'identifier' => [__CLASS__, 'isPhpIdentifier'], 'pattern' => null, 'alnum' => 'ctype_alnum', 'alpha' => 'ctype_alpha', 'digit' => 'ctype_digit', 'lower' => 'ctype_lower', 'upper' => 'ctype_upper', 'space' => 'ctype_space', 'xdigit' => 'ctype_xdigit', 'iterable' => 'is_iterable'];
+    protected static $counters = ['string' => 'strlen', 'unicode' => [\_PhpScopercae980ebf12d\Nette\Utils\Strings::class, 'length'], 'array' => 'count', 'list' => 'count', 'alnum' => 'strlen', 'alpha' => 'strlen', 'digit' => 'strlen', 'lower' => 'strlen', 'space' => 'strlen', 'upper' => 'strlen', 'xdigit' => 'strlen'];
     /**
      * Throws exception if a variable is of unexpected type (separated by pipe).
      */
@@ -32,7 +32,7 @@ class Validators
             } else {
                 $type = \gettype($value);
             }
-            throw new \_PhpScoperc8b83ee8976a\Nette\Utils\AssertionException("The {$label} expects to be {$expected}, {$type} given.");
+            throw new \_PhpScopercae980ebf12d\Nette\Utils\AssertionException("The {$label} expects to be {$expected}, {$type} given.");
         }
     }
     /**
@@ -41,7 +41,7 @@ class Validators
     public static function assertField(array $arr, $field, string $expected = null, string $label = "item '%' in array") : void
     {
         if (!\array_key_exists($field, $arr)) {
-            throw new \_PhpScoperc8b83ee8976a\Nette\Utils\AssertionException('Missing ' . \str_replace('%', $field, $label) . '.');
+            throw new \_PhpScopercae980ebf12d\Nette\Utils\AssertionException('Missing ' . \str_replace('%', $field, $label) . '.');
         } elseif ($expected) {
             static::assert($arr[$field], $expected, \str_replace('%', $field, $label));
         }
@@ -148,7 +148,7 @@ class Validators
      */
     public static function isList($value) : bool
     {
-        return \_PhpScoperc8b83ee8976a\Nette\Utils\Arrays::isList($value);
+        return \_PhpScopercae980ebf12d\Nette\Utils\Arrays::isList($value);
     }
     /**
      * Is a value in specified min and max value pair?

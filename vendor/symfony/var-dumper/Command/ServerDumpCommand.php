@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Command;
+namespace _PhpScopercae980ebf12d\Symfony\Component\VarDumper\Command;
 
-use _PhpScoperc8b83ee8976a\Symfony\Component\Console\Command\Command;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor;
-use _PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface;
-use _PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor;
-use _PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Dumper\CliDumper;
-use _PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use _PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Server\DumpServer;
+use _PhpScopercae980ebf12d\Symfony\Component\Console\Command\Command;
+use _PhpScopercae980ebf12d\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScopercae980ebf12d\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopercae980ebf12d\Symfony\Component\Console\Input\InputOption;
+use _PhpScopercae980ebf12d\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopercae980ebf12d\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopercae980ebf12d\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScopercae980ebf12d\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor;
+use _PhpScopercae980ebf12d\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface;
+use _PhpScopercae980ebf12d\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor;
+use _PhpScopercae980ebf12d\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScopercae980ebf12d\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use _PhpScopercae980ebf12d\Symfony\Component\VarDumper\Server\DumpServer;
 /**
  * Starts a dump server to collect and output dumps on a single place with multiple formats support.
  *
@@ -30,22 +30,22 @@ use _PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Server\DumpServer;
  *
  * @final
  */
-class ServerDumpCommand extends \_PhpScoperc8b83ee8976a\Symfony\Component\Console\Command\Command
+class ServerDumpCommand extends \_PhpScopercae980ebf12d\Symfony\Component\Console\Command\Command
 {
     protected static $defaultName = 'server:dump';
     private $server;
     /** @var DumpDescriptorInterface[] */
     private $descriptors;
-    public function __construct(\_PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Server\DumpServer $server, array $descriptors = [])
+    public function __construct(\_PhpScopercae980ebf12d\Symfony\Component\VarDumper\Server\DumpServer $server, array $descriptors = [])
     {
         $this->server = $server;
-        $this->descriptors = $descriptors + ['cli' => new \_PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor(new \_PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Dumper\CliDumper()), 'html' => new \_PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor(new \_PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Dumper\HtmlDumper())];
+        $this->descriptors = $descriptors + ['cli' => new \_PhpScopercae980ebf12d\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor(new \_PhpScopercae980ebf12d\Symfony\Component\VarDumper\Dumper\CliDumper()), 'html' => new \_PhpScopercae980ebf12d\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor(new \_PhpScopercae980ebf12d\Symfony\Component\VarDumper\Dumper\HtmlDumper())];
         parent::__construct();
     }
     protected function configure()
     {
         $availableFormats = \implode(', ', \array_keys($this->descriptors));
-        $this->addOption('format', null, \_PhpScoperc8b83ee8976a\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, \sprintf('The output format (%s)', $availableFormats), 'cli')->setDescription('Starts a dump server that collects and displays dumps in a single place')->setHelp(<<<'EOF'
+        $this->addOption('format', null, \_PhpScopercae980ebf12d\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, \sprintf('The output format (%s)', $availableFormats), 'cli')->setDescription('Starts a dump server that collects and displays dumps in a single place')->setHelp(<<<'EOF'
 <info>%command.name%</info> starts a dump server that collects and displays
 dumps in a single place for debugging you application:
 
@@ -59,19 +59,19 @@ and redirecting the output to a file:
 EOF
 );
     }
-    protected function execute(\_PhpScoperc8b83ee8976a\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperc8b83ee8976a\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScopercae980ebf12d\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopercae980ebf12d\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
-        $io = new \_PhpScoperc8b83ee8976a\Symfony\Component\Console\Style\SymfonyStyle($input, $output);
+        $io = new \_PhpScopercae980ebf12d\Symfony\Component\Console\Style\SymfonyStyle($input, $output);
         $format = $input->getOption('format');
         if (!($descriptor = $this->descriptors[$format] ?? null)) {
-            throw new \_PhpScoperc8b83ee8976a\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unsupported format "%s".', $format));
+            throw new \_PhpScopercae980ebf12d\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unsupported format "%s".', $format));
         }
         $errorIo = $io->getErrorStyle();
         $errorIo->title('Symfony Var Dumper Server');
         $this->server->start();
         $errorIo->success(\sprintf('Server listening on %s', $this->server->getHost()));
         $errorIo->comment('Quit the server with CONTROL-C.');
-        $this->server->listen(function (\_PhpScoperc8b83ee8976a\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) use($descriptor, $io) {
+        $this->server->listen(function (\_PhpScopercae980ebf12d\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) use($descriptor, $io) {
             $descriptor->describe($io, $data, $context, $clientId);
         });
     }

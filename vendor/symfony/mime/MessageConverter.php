@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc8b83ee8976a\Symfony\Component\Mime;
+namespace _PhpScopercae980ebf12d\Symfony\Component\Mime;
 
-use _PhpScoperc8b83ee8976a\Symfony\Component\Mime\Exception\RuntimeException;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\DataPart;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\AlternativePart;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\MixedPart;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\RelatedPart;
-use _PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\TextPart;
+use _PhpScopercae980ebf12d\Symfony\Component\Mime\Exception\RuntimeException;
+use _PhpScopercae980ebf12d\Symfony\Component\Mime\Part\DataPart;
+use _PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\AlternativePart;
+use _PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\MixedPart;
+use _PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\RelatedPart;
+use _PhpScopercae980ebf12d\Symfony\Component\Mime\Part\TextPart;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
@@ -26,76 +26,76 @@ final class MessageConverter
     /**
      * @throws RuntimeException when unable to convert the message to an email
      */
-    public static function toEmail(\_PhpScoperc8b83ee8976a\Symfony\Component\Mime\RawMessage $message) : \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email
+    public static function toEmail(\_PhpScopercae980ebf12d\Symfony\Component\Mime\RawMessage $message) : \_PhpScopercae980ebf12d\Symfony\Component\Mime\Email
     {
-        if ($message instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email) {
+        if ($message instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Email) {
             return $message;
         }
-        if (\_PhpScoperc8b83ee8976a\Symfony\Component\Mime\RawMessage::class === \get_class($message)) {
+        if (\_PhpScopercae980ebf12d\Symfony\Component\Mime\RawMessage::class === \get_class($message)) {
             // FIXME: parse the raw message to create the envelope?
-            throw new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as it is not supported yet.', \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\RawMessage::class));
+            throw new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as it is not supported yet.', \_PhpScopercae980ebf12d\Symfony\Component\Mime\RawMessage::class));
         }
         // try to convert to a "simple" Email instance
         $body = $message->getBody();
-        if ($body instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\TextPart) {
+        if ($body instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\TextPart) {
             return self::createEmailFromTextPart($message, $body);
         }
-        if ($body instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\AlternativePart) {
+        if ($body instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\AlternativePart) {
             return self::createEmailFromAlternativePart($message, $body);
         }
-        if ($body instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\RelatedPart) {
+        if ($body instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\RelatedPart) {
             return self::createEmailFromRelatedPart($message, $body);
         }
-        if ($body instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\MixedPart) {
+        if ($body instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\MixedPart) {
             $parts = $body->getParts();
-            if ($parts[0] instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\RelatedPart) {
+            if ($parts[0] instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\RelatedPart) {
                 $email = self::createEmailFromRelatedPart($message, $parts[0]);
-            } elseif ($parts[0] instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\AlternativePart) {
+            } elseif ($parts[0] instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\AlternativePart) {
                 $email = self::createEmailFromAlternativePart($message, $parts[0]);
-            } elseif ($parts[0] instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\TextPart) {
+            } elseif ($parts[0] instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\TextPart) {
                 $email = self::createEmailFromTextPart($message, $parts[0]);
             } else {
-                throw new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
+                throw new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
             }
             return self::attachParts($email, \array_slice($parts, 1));
         }
-        throw new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
+        throw new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
     }
-    private static function createEmailFromTextPart(\_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Message $message, \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\TextPart $part) : \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email
+    private static function createEmailFromTextPart(\_PhpScopercae980ebf12d\Symfony\Component\Mime\Message $message, \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\TextPart $part) : \_PhpScopercae980ebf12d\Symfony\Component\Mime\Email
     {
         if ('text' === $part->getMediaType() && 'plain' === $part->getMediaSubtype()) {
-            return (new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email(clone $message->getHeaders()))->text($part->getBody(), $part->getPreparedHeaders()->getHeaderParameter('Content-Type', 'charset') ?: 'utf-8');
+            return (new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Email(clone $message->getHeaders()))->text($part->getBody(), $part->getPreparedHeaders()->getHeaderParameter('Content-Type', 'charset') ?: 'utf-8');
         }
         if ('text' === $part->getMediaType() && 'html' === $part->getMediaSubtype()) {
-            return (new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email(clone $message->getHeaders()))->html($part->getBody(), $part->getPreparedHeaders()->getHeaderParameter('Content-Type', 'charset') ?: 'utf-8');
+            return (new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Email(clone $message->getHeaders()))->html($part->getBody(), $part->getPreparedHeaders()->getHeaderParameter('Content-Type', 'charset') ?: 'utf-8');
         }
-        throw new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
+        throw new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
     }
-    private static function createEmailFromAlternativePart(\_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Message $message, \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\AlternativePart $part) : \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email
+    private static function createEmailFromAlternativePart(\_PhpScopercae980ebf12d\Symfony\Component\Mime\Message $message, \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\AlternativePart $part) : \_PhpScopercae980ebf12d\Symfony\Component\Mime\Email
     {
         $parts = $part->getParts();
-        if (2 === \count($parts) && $parts[0] instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\TextPart && 'text' === $parts[0]->getMediaType() && 'plain' === $parts[0]->getMediaSubtype() && $parts[1] instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\TextPart && 'text' === $parts[1]->getMediaType() && 'html' === $parts[1]->getMediaSubtype()) {
-            return (new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email(clone $message->getHeaders()))->text($parts[0]->getBody(), $parts[0]->getPreparedHeaders()->getHeaderParameter('Content-Type', 'charset') ?: 'utf-8')->html($parts[1]->getBody(), $parts[1]->getPreparedHeaders()->getHeaderParameter('Content-Type', 'charset') ?: 'utf-8');
+        if (2 === \count($parts) && $parts[0] instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\TextPart && 'text' === $parts[0]->getMediaType() && 'plain' === $parts[0]->getMediaSubtype() && $parts[1] instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\TextPart && 'text' === $parts[1]->getMediaType() && 'html' === $parts[1]->getMediaSubtype()) {
+            return (new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Email(clone $message->getHeaders()))->text($parts[0]->getBody(), $parts[0]->getPreparedHeaders()->getHeaderParameter('Content-Type', 'charset') ?: 'utf-8')->html($parts[1]->getBody(), $parts[1]->getPreparedHeaders()->getHeaderParameter('Content-Type', 'charset') ?: 'utf-8');
         }
-        throw new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
+        throw new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
     }
-    private static function createEmailFromRelatedPart(\_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Message $message, \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\RelatedPart $part) : \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email
+    private static function createEmailFromRelatedPart(\_PhpScopercae980ebf12d\Symfony\Component\Mime\Message $message, \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\RelatedPart $part) : \_PhpScopercae980ebf12d\Symfony\Component\Mime\Email
     {
         $parts = $part->getParts();
-        if ($parts[0] instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\Multipart\AlternativePart) {
+        if ($parts[0] instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\Multipart\AlternativePart) {
             $email = self::createEmailFromAlternativePart($message, $parts[0]);
-        } elseif ($parts[0] instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\TextPart) {
+        } elseif ($parts[0] instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\TextPart) {
             $email = self::createEmailFromTextPart($message, $parts[0]);
         } else {
-            throw new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
+            throw new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($message)));
         }
         return self::attachParts($email, \array_slice($parts, 1));
     }
-    private static function attachParts(\_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email $email, array $parts) : \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Email
+    private static function attachParts(\_PhpScopercae980ebf12d\Symfony\Component\Mime\Email $email, array $parts) : \_PhpScopercae980ebf12d\Symfony\Component\Mime\Email
     {
         foreach ($parts as $part) {
-            if (!$part instanceof \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Part\DataPart) {
-                throw new \_PhpScoperc8b83ee8976a\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($email)));
+            if (!$part instanceof \_PhpScopercae980ebf12d\Symfony\Component\Mime\Part\DataPart) {
+                throw new \_PhpScopercae980ebf12d\Symfony\Component\Mime\Exception\RuntimeException(\sprintf('Unable to create an Email from an instance of "%s" as the body is too complex.', \get_class($email)));
             }
             $headers = $part->getPreparedHeaders();
             $method = 'inline' === $headers->getHeaderBody('Content-Disposition') ? 'embed' : 'attach';

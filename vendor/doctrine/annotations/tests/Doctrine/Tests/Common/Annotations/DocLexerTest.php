@@ -1,13 +1,13 @@
 <?php
 
-namespace _PhpScoperc8b83ee8976a\Doctrine\Tests\Common\Annotations;
+namespace _PhpScopercae980ebf12d\Doctrine\Tests\Common\Annotations;
 
-use _PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer;
-class DocLexerTest extends \_PhpScoperc8b83ee8976a\PHPUnit_Framework_TestCase
+use _PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer;
+class DocLexerTest extends \_PhpScopercae980ebf12d\PHPUnit_Framework_TestCase
 {
     public function testMarkerAnnotation()
     {
-        $lexer = new \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer();
+        $lexer = new \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer();
         $lexer->setInput("@Name");
         $this->assertNull($lexer->token);
         $this->assertNull($lexer->lookahead);
@@ -21,9 +21,9 @@ class DocLexerTest extends \_PhpScoperc8b83ee8976a\PHPUnit_Framework_TestCase
     }
     public function testScannerTokenizesDocBlockWhitConstants()
     {
-        $lexer = new \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer();
+        $lexer = new \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer();
         $docblock = '@AnnotationWithConstants(PHP_EOL, ClassWithConstants::SOME_VALUE, ClassWithConstants::CONSTANT_, ClassWithConstants::CONST_ANT3, \\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\IntefaceWithConstants::SOME_VALUE)';
-        $tokens = array(array('value' => '@', 'position' => 0, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_AT), array('value' => 'AnnotationWithConstants', 'position' => 1, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => '(', 'position' => 24, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS), array('value' => 'PHP_EOL', 'position' => 25, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ',', 'position' => 32, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_COMMA), array('value' => 'ClassWithConstants::SOME_VALUE', 'position' => 34, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ',', 'position' => 64, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_COMMA), array('value' => 'ClassWithConstants::CONSTANT_', 'position' => 66, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ',', 'position' => 95, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_COMMA), array('value' => 'ClassWithConstants::CONST_ANT3', 'position' => 97, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ',', 'position' => 127, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_COMMA), array('value' => '\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\IntefaceWithConstants::SOME_VALUE', 'position' => 129, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ')', 'position' => 206, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS));
+        $tokens = array(array('value' => '@', 'position' => 0, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_AT), array('value' => 'AnnotationWithConstants', 'position' => 1, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => '(', 'position' => 24, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS), array('value' => 'PHP_EOL', 'position' => 25, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ',', 'position' => 32, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_COMMA), array('value' => 'ClassWithConstants::SOME_VALUE', 'position' => 34, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ',', 'position' => 64, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_COMMA), array('value' => 'ClassWithConstants::CONSTANT_', 'position' => 66, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ',', 'position' => 95, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_COMMA), array('value' => 'ClassWithConstants::CONST_ANT3', 'position' => 97, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ',', 'position' => 127, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_COMMA), array('value' => '\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\IntefaceWithConstants::SOME_VALUE', 'position' => 129, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => ')', 'position' => 206, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS));
         $lexer->setInput($docblock);
         foreach ($tokens as $expected) {
             $lexer->moveNext();
@@ -36,9 +36,9 @@ class DocLexerTest extends \_PhpScoperc8b83ee8976a\PHPUnit_Framework_TestCase
     }
     public function testScannerTokenizesDocBlockWhitInvalidIdentifier()
     {
-        $lexer = new \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer();
+        $lexer = new \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer();
         $docblock = '@Foo\\3.42';
-        $tokens = array(array('value' => '@', 'position' => 0, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_AT), array('value' => 'Foo', 'position' => 1, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => '\\', 'position' => 4, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_NAMESPACE_SEPARATOR), array('value' => 3.42, 'position' => 5, 'type' => \_PhpScoperc8b83ee8976a\Doctrine\Common\Annotations\DocLexer::T_FLOAT));
+        $tokens = array(array('value' => '@', 'position' => 0, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_AT), array('value' => 'Foo', 'position' => 1, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER), array('value' => '\\', 'position' => 4, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_NAMESPACE_SEPARATOR), array('value' => 3.42, 'position' => 5, 'type' => \_PhpScopercae980ebf12d\Doctrine\Common\Annotations\DocLexer::T_FLOAT));
         $lexer->setInput($docblock);
         foreach ($tokens as $expected) {
             $lexer->moveNext();
