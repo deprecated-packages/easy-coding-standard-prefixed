@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9d73a84b09ad\Symfony\Component\EventDispatcher\Debug;
+namespace _PhpScoper28ab463fc3ba\Symfony\Component\EventDispatcher\Debug;
 
-use _PhpScoper9d73a84b09ad\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScoper9d73a84b09ad\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper9d73a84b09ad\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper28ab463fc3ba\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper28ab463fc3ba\Symfony\Contracts\Service\ResetInterface;
 /**
  * @deprecated since Symfony 4.1
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface TraceableEventDispatcherInterface extends \_PhpScoper9d73a84b09ad\Symfony\Component\EventDispatcher\EventDispatcherInterface, \_PhpScoper9d73a84b09ad\Symfony\Contracts\Service\ResetInterface
+interface TraceableEventDispatcherInterface extends \_PhpScoper28ab463fc3ba\Symfony\Component\EventDispatcher\EventDispatcherInterface, \_PhpScoper28ab463fc3ba\Symfony\Contracts\Service\ResetInterface
 {
     /**
      * Gets the called listeners.

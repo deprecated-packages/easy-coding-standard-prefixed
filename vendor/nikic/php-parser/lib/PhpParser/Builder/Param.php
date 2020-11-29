@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper9d73a84b09ad\PhpParser\Builder;
+namespace _PhpScoper28ab463fc3ba\PhpParser\Builder;
 
-use _PhpScoper9d73a84b09ad\PhpParser;
-use _PhpScoper9d73a84b09ad\PhpParser\BuilderHelpers;
-use _PhpScoper9d73a84b09ad\PhpParser\Node;
-class Param implements \_PhpScoper9d73a84b09ad\PhpParser\Builder
+use _PhpScoper28ab463fc3ba\PhpParser;
+use _PhpScoper28ab463fc3ba\PhpParser\BuilderHelpers;
+use _PhpScoper28ab463fc3ba\PhpParser\Node;
+class Param implements \_PhpScoper28ab463fc3ba\PhpParser\Builder
 {
     protected $name;
     protected $default = null;
@@ -32,7 +32,7 @@ class Param implements \_PhpScoper9d73a84b09ad\PhpParser\Builder
      */
     public function setDefault($value)
     {
-        $this->default = \_PhpScoper9d73a84b09ad\PhpParser\BuilderHelpers::normalizeValue($value);
+        $this->default = \_PhpScoper28ab463fc3ba\PhpParser\BuilderHelpers::normalizeValue($value);
         return $this;
     }
     /**
@@ -44,7 +44,7 @@ class Param implements \_PhpScoper9d73a84b09ad\PhpParser\Builder
      */
     public function setType($type)
     {
-        $this->type = \_PhpScoper9d73a84b09ad\PhpParser\BuilderHelpers::normalizeType($type);
+        $this->type = \_PhpScoper28ab463fc3ba\PhpParser\BuilderHelpers::normalizeType($type);
         if ($this->type == 'void') {
             throw new \LogicException('Parameter type cannot be void');
         }
@@ -88,8 +88,8 @@ class Param implements \_PhpScoper9d73a84b09ad\PhpParser\Builder
      *
      * @return Node\Param The built parameter node
      */
-    public function getNode() : \_PhpScoper9d73a84b09ad\PhpParser\Node
+    public function getNode() : \_PhpScoper28ab463fc3ba\PhpParser\Node
     {
-        return new \_PhpScoper9d73a84b09ad\PhpParser\Node\Param(new \_PhpScoper9d73a84b09ad\PhpParser\Node\Expr\Variable($this->name), $this->default, $this->type, $this->byRef, $this->variadic);
+        return new \_PhpScoper28ab463fc3ba\PhpParser\Node\Param(new \_PhpScoper28ab463fc3ba\PhpParser\Node\Expr\Variable($this->name), $this->default, $this->type, $this->byRef, $this->variadic);
     }
 }

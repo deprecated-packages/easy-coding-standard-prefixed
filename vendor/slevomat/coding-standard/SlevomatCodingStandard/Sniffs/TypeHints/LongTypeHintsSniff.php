@@ -5,13 +5,13 @@ namespace SlevomatCodingStandard\Sniffs\TypeHints;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScoper9d73a84b09ad\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoper28ab463fc3ba\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\GenericAnnotation;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use function sprintf;
 use function strtolower;
-use const _PhpScoper9d73a84b09ad\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoper28ab463fc3ba\T_DOC_COMMENT_OPEN_TAG;
 class LongTypeHintsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_USED_LONG_TYPE_HINT = 'UsedLongTypeHint';
@@ -55,7 +55,7 @@ class LongTypeHintsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                         if (!$fix) {
                             continue;
                         }
-                        $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $annotation, $typeHintNode, new \_PhpScoper9d73a84b09ad\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($shortTypeHint));
+                        $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $annotation, $typeHintNode, new \_PhpScoper28ab463fc3ba\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($shortTypeHint));
                         $phpcsFile->fixer->beginChangeset();
                         $phpcsFile->fixer->replaceToken($annotation->getStartPointer(), $fixedAnnotationContent);
                         for ($i = $annotation->getStartPointer() + 1; $i <= $annotation->getEndPointer(); $i++) {

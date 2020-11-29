@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9d73a84b09ad\Symfony\Component\Cache\Simple;
+namespace _PhpScoper28ab463fc3ba\Symfony\Component\Cache\Simple;
 
-use _PhpScoper9d73a84b09ad\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
-use _PhpScoper9d73a84b09ad\Symfony\Component\Cache\Adapter\ChainAdapter;
-use _PhpScoper9d73a84b09ad\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper9d73a84b09ad\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper9d73a84b09ad\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper9d73a84b09ad\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoper9d73a84b09ad\Symfony\Contracts\Service\ResetInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper9d73a84b09ad\Symfony\Component\Cache\Simple\ChainCache::class, \_PhpScoper9d73a84b09ad\Symfony\Component\Cache\Adapter\ChainAdapter::class, \_PhpScoper9d73a84b09ad\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoper28ab463fc3ba\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
+use _PhpScoper28ab463fc3ba\Symfony\Component\Cache\Adapter\ChainAdapter;
+use _PhpScoper28ab463fc3ba\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper28ab463fc3ba\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper28ab463fc3ba\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper28ab463fc3ba\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper28ab463fc3ba\Symfony\Contracts\Service\ResetInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper28ab463fc3ba\Symfony\Component\Cache\Simple\ChainCache::class, \_PhpScoper28ab463fc3ba\Symfony\Component\Cache\Adapter\ChainAdapter::class, \_PhpScoper28ab463fc3ba\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * Chains several caches together.
  *
@@ -26,7 +26,7 @@ use _PhpScoper9d73a84b09ad\Symfony\Contracts\Service\ResetInterface;
  *
  * @deprecated since Symfony 4.3, use ChainAdapter and type-hint for CacheInterface instead.
  */
-class ChainCache implements \_PhpScoper9d73a84b09ad\Psr\SimpleCache\CacheInterface, \_PhpScoper9d73a84b09ad\Symfony\Component\Cache\PruneableInterface, \_PhpScoper9d73a84b09ad\Symfony\Component\Cache\ResettableInterface
+class ChainCache implements \_PhpScoper28ab463fc3ba\Psr\SimpleCache\CacheInterface, \_PhpScoper28ab463fc3ba\Symfony\Component\Cache\PruneableInterface, \_PhpScoper28ab463fc3ba\Symfony\Component\Cache\ResettableInterface
 {
     private $miss;
     private $caches = [];
@@ -39,11 +39,11 @@ class ChainCache implements \_PhpScoper9d73a84b09ad\Psr\SimpleCache\CacheInterfa
     public function __construct(array $caches, int $defaultLifetime = 0)
     {
         if (!$caches) {
-            throw new \_PhpScoper9d73a84b09ad\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one cache must be specified.');
+            throw new \_PhpScoper28ab463fc3ba\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one cache must be specified.');
         }
         foreach ($caches as $cache) {
-            if (!$cache instanceof \_PhpScoper9d73a84b09ad\Psr\SimpleCache\CacheInterface) {
-                throw new \_PhpScoper9d73a84b09ad\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('The class "%s" does not implement the "%s" interface.', \get_class($cache), \_PhpScoper9d73a84b09ad\Psr\SimpleCache\CacheInterface::class));
+            if (!$cache instanceof \_PhpScoper28ab463fc3ba\Psr\SimpleCache\CacheInterface) {
+                throw new \_PhpScoper28ab463fc3ba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('The class "%s" does not implement the "%s" interface.', \get_class($cache), \_PhpScoper28ab463fc3ba\Psr\SimpleCache\CacheInterface::class));
             }
         }
         $this->miss = new \stdClass();
@@ -211,7 +211,7 @@ class ChainCache implements \_PhpScoper9d73a84b09ad\Psr\SimpleCache\CacheInterfa
     {
         $pruned = \true;
         foreach ($this->caches as $cache) {
-            if ($cache instanceof \_PhpScoper9d73a84b09ad\Symfony\Component\Cache\PruneableInterface) {
+            if ($cache instanceof \_PhpScoper28ab463fc3ba\Symfony\Component\Cache\PruneableInterface) {
                 $pruned = $cache->prune() && $pruned;
             }
         }
@@ -223,7 +223,7 @@ class ChainCache implements \_PhpScoper9d73a84b09ad\Psr\SimpleCache\CacheInterfa
     public function reset()
     {
         foreach ($this->caches as $cache) {
-            if ($cache instanceof \_PhpScoper9d73a84b09ad\Symfony\Contracts\Service\ResetInterface) {
+            if ($cache instanceof \_PhpScoper28ab463fc3ba\Symfony\Contracts\Service\ResetInterface) {
                 $cache->reset();
             }
         }

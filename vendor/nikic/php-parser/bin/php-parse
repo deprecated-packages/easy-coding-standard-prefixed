@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoper9d73a84b09ad;
+namespace _PhpScoper28ab463fc3ba;
 
 foreach ([__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoload.php'] as $file) {
     if (\file_exists($file)) {
@@ -13,20 +13,20 @@ foreach ([__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoload.php
 \ini_set('xdebug.var_display_max_children', -1);
 \ini_set('xdebug.var_display_max_data', -1);
 \ini_set('xdebug.var_display_max_depth', -1);
-list($operations, $files, $attributes) = \_PhpScoper9d73a84b09ad\parseArgs($argv);
+list($operations, $files, $attributes) = \_PhpScoper28ab463fc3ba\parseArgs($argv);
 /* Dump nodes by default */
 if (empty($operations)) {
     $operations[] = 'dump';
 }
 if (empty($files)) {
-    \_PhpScoper9d73a84b09ad\showHelp("Must specify at least one file.");
+    \_PhpScoper28ab463fc3ba\showHelp("Must specify at least one file.");
 }
-$lexer = new \_PhpScoper9d73a84b09ad\PhpParser\Lexer\Emulative(['usedAttributes' => ['startLine', 'endLine', 'startFilePos', 'endFilePos', 'comments']]);
-$parser = (new \_PhpScoper9d73a84b09ad\PhpParser\ParserFactory())->create(\_PhpScoper9d73a84b09ad\PhpParser\ParserFactory::PREFER_PHP7, $lexer);
-$dumper = new \_PhpScoper9d73a84b09ad\PhpParser\NodeDumper(['dumpComments' => \true, 'dumpPositions' => $attributes['with-positions']]);
-$prettyPrinter = new \_PhpScoper9d73a84b09ad\PhpParser\PrettyPrinter\Standard();
-$traverser = new \_PhpScoper9d73a84b09ad\PhpParser\NodeTraverser();
-$traverser->addVisitor(new \_PhpScoper9d73a84b09ad\PhpParser\NodeVisitor\NameResolver());
+$lexer = new \_PhpScoper28ab463fc3ba\PhpParser\Lexer\Emulative(['usedAttributes' => ['startLine', 'endLine', 'startFilePos', 'endFilePos', 'comments']]);
+$parser = (new \_PhpScoper28ab463fc3ba\PhpParser\ParserFactory())->create(\_PhpScoper28ab463fc3ba\PhpParser\ParserFactory::PREFER_PHP7, $lexer);
+$dumper = new \_PhpScoper28ab463fc3ba\PhpParser\NodeDumper(['dumpComments' => \true, 'dumpPositions' => $attributes['with-positions']]);
+$prettyPrinter = new \_PhpScoper28ab463fc3ba\PhpParser\PrettyPrinter\Standard();
+$traverser = new \_PhpScoper28ab463fc3ba\PhpParser\NodeTraverser();
+$traverser->addVisitor(new \_PhpScoper28ab463fc3ba\PhpParser\NodeVisitor\NameResolver());
 foreach ($files as $file) {
     if (\strpos($file, '<?php') === 0) {
         $code = $file;
@@ -40,10 +40,10 @@ foreach ($files as $file) {
         \fwrite(\STDERR, "====> File {$file}:\n");
     }
     if ($attributes['with-recovery']) {
-        $errorHandler = new \_PhpScoper9d73a84b09ad\PhpParser\ErrorHandler\Collecting();
+        $errorHandler = new \_PhpScoper28ab463fc3ba\PhpParser\ErrorHandler\Collecting();
         $stmts = $parser->parse($code, $errorHandler);
         foreach ($errorHandler->getErrors() as $error) {
-            $message = \_PhpScoper9d73a84b09ad\formatErrorMessage($error, $code, $attributes['with-column-info']);
+            $message = \_PhpScoper28ab463fc3ba\formatErrorMessage($error, $code, $attributes['with-column-info']);
             \fwrite(\STDERR, $message . "\n");
         }
         if (null === $stmts) {
@@ -52,8 +52,8 @@ foreach ($files as $file) {
     } else {
         try {
             $stmts = $parser->parse($code);
-        } catch (\_PhpScoper9d73a84b09ad\PhpParser\Error $error) {
-            $message = \_PhpScoper9d73a84b09ad\formatErrorMessage($error, $code, $attributes['with-column-info']);
+        } catch (\_PhpScoper28ab463fc3ba\PhpParser\Error $error) {
+            $message = \_PhpScoper28ab463fc3ba\formatErrorMessage($error, $code, $attributes['with-column-info']);
             \fwrite(\STDERR, $message . "\n");
             exit(1);
         }
@@ -77,7 +77,7 @@ foreach ($files as $file) {
         }
     }
 }
-function formatErrorMessage(\_PhpScoper9d73a84b09ad\PhpParser\Error $e, $code, $withColumnInfo)
+function formatErrorMessage(\_PhpScoper28ab463fc3ba\PhpParser\Error $e, $code, $withColumnInfo)
 {
     if ($withColumnInfo && $e->hasColumnInfo()) {
         return $e->getMessageWithColumnInfo($code);
@@ -163,14 +163,14 @@ function parseArgs($args)
                 break;
             case '--help':
             case '-h':
-                \_PhpScoper9d73a84b09ad\showHelp();
+                \_PhpScoper28ab463fc3ba\showHelp();
                 break;
             case '--':
                 $parseOptions = \false;
                 break;
             default:
                 if ($arg[0] === '-') {
-                    \_PhpScoper9d73a84b09ad\showHelp("Invalid operation {$arg}.");
+                    \_PhpScoper28ab463fc3ba\showHelp("Invalid operation {$arg}.");
                 } else {
                     $files[] = $arg;
                 }
