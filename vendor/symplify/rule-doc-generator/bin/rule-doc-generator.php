@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera09818bc50da;
+namespace _PhpScoper2637e9a72c68;
 
 use Symplify\RuleDocGenerator\HttpKernel\RuleDocGeneratorKernel;
 use Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;

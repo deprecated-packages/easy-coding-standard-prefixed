@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScopera09818bc50da\\Psr\\Container\\": "src\/"
+            "_PhpScoper2637e9a72c68\\Psr\\Container\\": "src\/"
         }
     },
     "extra": {

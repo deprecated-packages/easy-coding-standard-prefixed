@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera09818bc50da\Symfony\Component\Config\Definition\Exception;
+namespace _PhpScoper2637e9a72c68\Symfony\Component\Config\Definition\Exception;
 
 /**
  * This exception is thrown when a configuration path is overwritten from a
@@ -16,6 +16,6 @@ namespace _PhpScopera09818bc50da\Symfony\Component\Config\Definition\Exception;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ForbiddenOverwriteException extends \_PhpScopera09818bc50da\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+class ForbiddenOverwriteException extends \_PhpScoper2637e9a72c68\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 {
 }

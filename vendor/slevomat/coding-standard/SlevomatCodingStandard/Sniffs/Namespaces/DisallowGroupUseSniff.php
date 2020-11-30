@@ -5,7 +5,7 @@ namespace SlevomatCodingStandard\Sniffs\Namespaces;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use const _PhpScopera09818bc50da\T_OPEN_USE_GROUP;
+use const _PhpScoper2637e9a72c68\T_OPEN_USE_GROUP;
 class DisallowGroupUseSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_DISALLOWED_GROUP_USE = 'DisallowedGroupUse';

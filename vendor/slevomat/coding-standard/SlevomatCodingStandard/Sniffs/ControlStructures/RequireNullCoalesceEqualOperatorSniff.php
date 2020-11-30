@@ -10,8 +10,8 @@ use SlevomatCodingStandard\Helpers\IdentificatorHelper;
 use SlevomatCodingStandard\Helpers\SniffSettingsHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use const T_COALESCE;
-use const _PhpScopera09818bc50da\T_EQUAL;
-use const _PhpScopera09818bc50da\T_SEMICOLON;
+use const _PhpScoper2637e9a72c68\T_EQUAL;
+use const _PhpScoper2637e9a72c68\T_SEMICOLON;
 class RequireNullCoalesceEqualOperatorSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_REQUIRED_NULL_COALESCE_EQUAL_OPERATOR = 'RequiredNullCoalesceEqualOperator';

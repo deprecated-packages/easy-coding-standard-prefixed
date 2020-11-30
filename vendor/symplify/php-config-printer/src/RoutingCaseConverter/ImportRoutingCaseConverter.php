@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\RoutingCaseConverter;
 
-use _PhpScopera09818bc50da\PhpParser\Node\Arg;
-use _PhpScopera09818bc50da\PhpParser\Node\Expr\MethodCall;
-use _PhpScopera09818bc50da\PhpParser\Node\Expr\Variable;
-use _PhpScopera09818bc50da\PhpParser\Node\Stmt\Expression;
+use _PhpScoper2637e9a72c68\PhpParser\Node\Arg;
+use _PhpScoper2637e9a72c68\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper2637e9a72c68\PhpParser\Node\Expr\Variable;
+use _PhpScoper2637e9a72c68\PhpParser\Node\Stmt\Expression;
 use Symplify\PackageBuilder\Strings\StringFormatConverter;
 use Symplify\PhpConfigPrinter\Contract\RoutingCaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
@@ -66,15 +66,15 @@ final class ImportRoutingCaseConverter implements \Symplify\PhpConfigPrinter\Con
     {
         return isset($values[self::RESOURCE]);
     }
-    public function convertToMethodCall(string $key, $values) : \_PhpScopera09818bc50da\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall(string $key, $values) : \_PhpScoper2637e9a72c68\PhpParser\Node\Stmt\Expression
     {
-        $variable = new \_PhpScopera09818bc50da\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
+        $variable = new \_PhpScoper2637e9a72c68\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
         $args = $this->createAddArgs(self::IMPORT_ARGS, $values);
-        $methodCall = new \_PhpScopera09818bc50da\PhpParser\Node\Expr\MethodCall($variable, 'import', $args);
+        $methodCall = new \_PhpScoper2637e9a72c68\PhpParser\Node\Expr\MethodCall($variable, 'import', $args);
         // Handle prefix independently as it has specific args
         if (isset($values[self::PREFIX])) {
             $args = $this->createAddArgs(self::PREFIX_ARGS, $values);
-            $methodCall = new \_PhpScopera09818bc50da\PhpParser\Node\Expr\MethodCall($methodCall, self::PREFIX, $args);
+            $methodCall = new \_PhpScoper2637e9a72c68\PhpParser\Node\Expr\MethodCall($methodCall, self::PREFIX, $args);
         }
         foreach (self::NESTED_KEYS as $nestedKey) {
             if (!isset($values[$nestedKey])) {
@@ -87,9 +87,9 @@ final class ImportRoutingCaseConverter implements \Symplify\PhpConfigPrinter\Con
             }
             $args = $this->argsNodeFactory->createFromValues([$nestedValues]);
             $name = $this->stringFormatConverter->underscoreAndHyphenToCamelCase($nestedKey);
-            $methodCall = new \_PhpScopera09818bc50da\PhpParser\Node\Expr\MethodCall($methodCall, $name, $args);
+            $methodCall = new \_PhpScoper2637e9a72c68\PhpParser\Node\Expr\MethodCall($methodCall, $name, $args);
         }
-        return new \_PhpScopera09818bc50da\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \_PhpScoper2637e9a72c68\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @param string[] $argsNames

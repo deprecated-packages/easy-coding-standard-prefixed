@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera09818bc50da\Symfony\Component\Config\Resource;
+namespace _PhpScoper2637e9a72c68\Symfony\Component\Config\Resource;
 
 /**
  * ComposerResource tracks the PHP version and Composer dependencies.
@@ -17,7 +17,7 @@ namespace _PhpScopera09818bc50da\Symfony\Component\Config\Resource;
  *
  * @final
  */
-class ComposerResource implements \_PhpScopera09818bc50da\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class ComposerResource implements \_PhpScoper2637e9a72c68\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $vendors;
     private static $runtimeVendors;

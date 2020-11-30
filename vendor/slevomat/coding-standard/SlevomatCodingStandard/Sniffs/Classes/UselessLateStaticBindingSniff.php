@@ -9,7 +9,7 @@ use SlevomatCodingStandard\Helpers\ClassHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_reverse;
 use function in_array;
-use const _PhpScopera09818bc50da\T_ANON_CLASS;
+use const _PhpScoper2637e9a72c68\T_ANON_CLASS;
 use const T_CLASS;
 use const T_DOUBLE_COLON;
 use const T_INTERFACE;

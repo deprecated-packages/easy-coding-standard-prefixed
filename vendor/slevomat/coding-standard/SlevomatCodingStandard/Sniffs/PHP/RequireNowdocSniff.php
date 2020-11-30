@@ -9,7 +9,7 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use function preg_match;
 use function preg_replace;
 use const T_END_HEREDOC;
-use const _PhpScopera09818bc50da\T_HEREDOC;
+use const _PhpScoper2637e9a72c68\T_HEREDOC;
 use const T_START_HEREDOC;
 class RequireNowdocSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

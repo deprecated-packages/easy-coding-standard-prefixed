@@ -10,7 +10,7 @@ use function array_key_exists;
 use function count;
 use function sprintf;
 use function strtolower;
-use const _PhpScopera09818bc50da\T_COMMA;
+use const _PhpScoper2637e9a72c68\T_COMMA;
 class UselessParameterDefaultValueSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_USELESS_PARAMETER_DEFAULT_VALUE = 'UselessParameterDefaultValue';
