@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation;
+namespace _PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation;
 
 /**
  * Response represents an HTTP response in JSON format.
@@ -21,7 +21,7 @@ namespace _PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation;
  *
  * @author Igor Wiedler <igor@wiedler.ch>
  */
-class JsonResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\Response
+class JsonResponse extends \_PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation\Response
 {
     protected $data;
     protected $callback;
@@ -56,9 +56,12 @@ class JsonResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundat
      * @param array $headers An array of response headers
      *
      * @return static
+     *
+     * @deprecated since Symfony 5.1, use __construct() instead.
      */
-    public static function create($data = null, $status = 200, $headers = [])
+    public static function create($data = null, int $status = 200, array $headers = [])
     {
+        trigger_deprecation('symfony/http-foundation', '5.1', 'The "%s()" method is deprecated, use "new %s()" instead.', __METHOD__, \get_called_class());
         return new static($data, $status, $headers);
     }
     /**
@@ -75,7 +78,7 @@ class JsonResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundat
      *
      * @return static
      */
-    public static function fromJsonString($data = null, $status = 200, $headers = [])
+    public static function fromJsonString(string $data = null, int $status = 200, array $headers = [])
     {
         return new static($data, $status, $headers, \true);
     }
@@ -88,7 +91,7 @@ class JsonResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundat
      *
      * @throws \InvalidArgumentException When the callback name is not valid
      */
-    public function setCallback($callback = null)
+    public function setCallback(string $callback = null)
     {
         if (null !== $callback) {
             // partially taken from https://geekality.net/2011/08/03/valid-javascript-identifier/
@@ -110,13 +113,11 @@ class JsonResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundat
     /**
      * Sets a raw string containing a JSON document to be sent.
      *
-     * @param string $json
-     *
      * @return $this
      *
      * @throws \InvalidArgumentException
      */
-    public function setJson($json)
+    public function setJson(string $json)
     {
         $this->data = $json;
         return $this->update();
@@ -160,13 +161,11 @@ class JsonResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundat
     /**
      * Sets options used while encoding data to JSON.
      *
-     * @param int $encodingOptions
-     *
      * @return $this
      */
-    public function setEncodingOptions($encodingOptions)
+    public function setEncodingOptions(int $encodingOptions)
     {
-        $this->encodingOptions = (int) $encodingOptions;
+        $this->encodingOptions = $encodingOptions;
         return $this->setData(\json_decode($this->data));
     }
     /**

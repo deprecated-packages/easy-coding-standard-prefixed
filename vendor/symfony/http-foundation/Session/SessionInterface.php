@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\Session;
+namespace _PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation\Session;
 
-use _PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
+use _PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
 /**
  * Interface for the session.
  *
@@ -34,10 +34,8 @@ interface SessionInterface
     public function getId();
     /**
      * Sets the session ID.
-     *
-     * @param string $id
      */
-    public function setId($id);
+    public function setId(string $id);
     /**
      * Returns the session name.
      *
@@ -46,10 +44,8 @@ interface SessionInterface
     public function getName();
     /**
      * Sets the session name.
-     *
-     * @param string $name
      */
-    public function setName($name);
+    public function setName(string $name);
     /**
      * Invalidates the current session.
      *
@@ -63,7 +59,7 @@ interface SessionInterface
      *
      * @return bool
      */
-    public function invalidate($lifetime = null);
+    public function invalidate(int $lifetime = null);
     /**
      * Migrates the current session to a new session id while maintaining all
      * session attributes.
@@ -76,7 +72,7 @@ interface SessionInterface
      *
      * @return bool
      */
-    public function migrate($destroy = \false, $lifetime = null);
+    public function migrate(bool $destroy = \false, int $lifetime = null);
     /**
      * Force the session to be saved and closed.
      *
@@ -88,27 +84,23 @@ interface SessionInterface
     /**
      * Checks if an attribute is defined.
      *
-     * @param string $name The attribute name
-     *
      * @return bool
      */
-    public function has($name);
+    public function has(string $name);
     /**
      * Returns an attribute.
      *
-     * @param string $name    The attribute name
-     * @param mixed  $default The default value if not found
+     * @param mixed $default The default value if not found
      *
      * @return mixed
      */
-    public function get($name, $default = null);
+    public function get(string $name, $default = null);
     /**
      * Sets an attribute.
      *
-     * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
      */
-    public function set($name, $value);
+    public function set(string $name, $value);
     /**
      * Returns attributes.
      *
@@ -122,11 +114,9 @@ interface SessionInterface
     /**
      * Removes an attribute.
      *
-     * @param string $name
-     *
      * @return mixed The removed value or null when it does not exist
      */
-    public function remove($name);
+    public function remove(string $name);
     /**
      * Clears all attributes.
      */
@@ -140,15 +130,13 @@ interface SessionInterface
     /**
      * Registers a SessionBagInterface with the session.
      */
-    public function registerBag(\_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag);
+    public function registerBag(\_PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag);
     /**
      * Gets a bag instance by name.
      *
-     * @param string $name
-     *
      * @return SessionBagInterface
      */
-    public function getBag($name);
+    public function getBag(string $name);
     /**
      * Gets session meta.
      *

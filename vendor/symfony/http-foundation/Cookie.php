@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation;
+namespace _PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation;
 
 /**
  * Represents a cookie.
@@ -36,19 +36,16 @@ class Cookie
     /**
      * Creates cookie from raw header string.
      *
-     * @param string $cookie
-     * @param bool   $decode
-     *
      * @return static
      */
-    public static function fromString($cookie, $decode = \false)
+    public static function fromString(string $cookie, bool $decode = \false)
     {
         $data = ['expires' => 0, 'path' => '/', 'domain' => null, 'secure' => \false, 'httponly' => \false, 'raw' => !$decode, 'samesite' => null];
-        $parts = \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\HeaderUtils::split($cookie, ';=');
+        $parts = \_PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation\HeaderUtils::split($cookie, ';=');
         $part = \array_shift($parts);
         $name = $decode ? \urldecode($part[0]) : $part[0];
         $value = isset($part[1]) ? $decode ? \urldecode($part[1]) : $part[1] : null;
-        $data = \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts) + $data;
+        $data = \_PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts) + $data;
         if (isset($data['max-age'])) {
             $data['expires'] = \time() + (int) $data['max-age'];
         }
@@ -71,11 +68,8 @@ class Cookie
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(string $name, string $value = null, $expire = 0, ?string $path = '/', string $domain = null, ?bool $secure = \false, bool $httpOnly = \true, bool $raw = \false, string $sameSite = null)
+    public function __construct(string $name, string $value = null, $expire = 0, ?string $path = '/', string $domain = null, bool $secure = null, bool $httpOnly = \true, bool $raw = \false, ?string $sameSite = 'lax')
     {
-        if (9 > \func_num_args()) {
-            @\trigger_error(\sprintf('The default value of the "$secure" and "$samesite" arguments of "%s"\'s constructor will respectively change from "false" to "null" and from "null" to "lax" in Symfony 5.0, you should define their values explicitly or use "Cookie::create()" instead.', __METHOD__), \E_USER_DEPRECATED);
-        }
         // from PHP source code
         if ($raw && \false !== \strpbrk($name, self::$reservedCharsList)) {
             throw new \InvalidArgumentException(\sprintf('The cookie name "%s" contains invalid characters.', $name));
@@ -83,6 +77,47 @@ class Cookie
         if (empty($name)) {
             throw new \InvalidArgumentException('The cookie name cannot be empty.');
         }
+        $this->name = $name;
+        $this->value = $value;
+        $this->domain = $domain;
+        $this->expire = $this->withExpires($expire)->expire;
+        $this->path = empty($path) ? '/' : $path;
+        $this->secure = $secure;
+        $this->httpOnly = $httpOnly;
+        $this->raw = $raw;
+        $this->sameSite = $this->withSameSite($sameSite)->sameSite;
+    }
+    /**
+     * Creates a cookie copy with a new value.
+     *
+     * @return static
+     */
+    public function withValue(?string $value) : self
+    {
+        $cookie = clone $this;
+        $cookie->value = $value;
+        return $cookie;
+    }
+    /**
+     * Creates a cookie copy with a new domain that the cookie is available to.
+     *
+     * @return static
+     */
+    public function withDomain(?string $domain) : self
+    {
+        $cookie = clone $this;
+        $cookie->domain = $domain;
+        return $cookie;
+    }
+    /**
+     * Creates a cookie copy with a new time the cookie expires.
+     *
+     * @param int|string|\DateTimeInterface $expire
+     *
+     * @return static
+     */
+    public function withExpires($expire = 0) : self
+    {
         // convert expiration time to a Unix timestamp
         if ($expire instanceof \DateTimeInterface) {
             $expire = $expire->format('U');
@@ -92,14 +127,64 @@ class Cookie
                 throw new \InvalidArgumentException('The cookie expiration time is not valid.');
             }
         }
-        $this->name = $name;
-        $this->value = $value;
-        $this->domain = $domain;
-        $this->expire = 0 < $expire ? (int) $expire : 0;
-        $this->path = empty($path) ? '/' : $path;
-        $this->secure = $secure;
-        $this->httpOnly = $httpOnly;
-        $this->raw = $raw;
+        $cookie = clone $this;
+        $cookie->expire = 0 < $expire ? (int) $expire : 0;
+        return $cookie;
+    }
+    /**
+     * Creates a cookie copy with a new path on the server in which the cookie will be available on.
+     *
+     * @return static
+     */
+    public function withPath(string $path) : self
+    {
+        $cookie = clone $this;
+        $cookie->path = '' === $path ? '/' : $path;
+        return $cookie;
+    }
+    /**
+     * Creates a cookie copy that only be transmitted over a secure HTTPS connection from the client.
+     *
+     * @return static
+     */
+    public function withSecure(bool $secure = \true) : self
+    {
+        $cookie = clone $this;
+        $cookie->secure = $secure;
+        return $cookie;
+    }
+    /**
+     * Creates a cookie copy that be accessible only through the HTTP protocol.
+     *
+     * @return static
+     */
+    public function withHttpOnly(bool $httpOnly = \true) : self
+    {
+        $cookie = clone $this;
+        $cookie->httpOnly = $httpOnly;
+        return $cookie;
+    }
+    /**
+     * Creates a cookie copy that uses no url encoding.
+     *
+     * @return static
+     */
+    public function withRaw(bool $raw = \true) : self
+    {
+        if ($raw && \false !== \strpbrk($this->name, self::$reservedCharsList)) {
+            throw new \InvalidArgumentException(\sprintf('The cookie name "%s" contains invalid characters.', $this->name));
+        }
+        $cookie = clone $this;
+        $cookie->raw = $raw;
+        return $cookie;
+    }
+    /**
+     * Creates a cookie copy with SameSite attribute.
+     *
+     * @return static
+     */
+    public function withSameSite(?string $sameSite) : self
+    {
         if ('' === $sameSite) {
             $sameSite = null;
         } elseif (null !== $sameSite) {
@@ -108,7 +193,9 @@ class Cookie
         if (!\in_array($sameSite, [self::SAMESITE_LAX, self::SAMESITE_STRICT, self::SAMESITE_NONE, null], \true)) {
             throw new \InvalidArgumentException('The "sameSite" parameter value is not valid.');
         }
-        $this->sameSite = $sameSite;
+        $cookie = clone $this;
+        $cookie->sameSite = $sameSite;
+        return $cookie;
     }
     /**
      * Returns the cookie as a string.

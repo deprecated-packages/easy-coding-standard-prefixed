@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation;
+namespace _PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation;
 
 /**
  * RedirectResponse represents an HTTP response doing a redirect.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class RedirectResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\Response
+class RedirectResponse extends \_PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation\Response
 {
     protected $targetUrl;
     /**
@@ -30,12 +30,8 @@ class RedirectResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFou
      *
      * @see https://tools.ietf.org/html/rfc2616#section-10.3
      */
-    public function __construct(?string $url, int $status = 302, array $headers = [])
+    public function __construct(string $url, int $status = 302, array $headers = [])
     {
-        if (null === $url) {
-            @\trigger_error(\sprintf('Passing a null url when instantiating a "%s" is deprecated since Symfony 4.4.', __CLASS__), \E_USER_DEPRECATED);
-            $url = '';
-        }
         parent::__construct('', $status, $headers);
         $this->setTargetUrl($url);
         if (!$this->isRedirect()) {
@@ -48,14 +44,15 @@ class RedirectResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFou
     /**
      * Factory method for chainability.
      *
-     * @param string $url     The url to redirect to
-     * @param int    $status  The response status code
-     * @param array  $headers An array of response headers
+     * @param string $url The URL to redirect to
      *
      * @return static
+     *
+     * @deprecated since Symfony 5.1, use __construct() instead.
      */
-    public static function create($url = '', $status = 302, $headers = [])
+    public static function create($url = '', int $status = 302, array $headers = [])
     {
+        trigger_deprecation('symfony/http-foundation', '5.1', 'The "%s()" method is deprecated, use "new %s()" instead.', __METHOD__, \get_called_class());
         return new static($url, $status, $headers);
     }
     /**
@@ -70,15 +67,13 @@ class RedirectResponse extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFou
     /**
      * Sets the redirect target of this response.
      *
-     * @param string $url The URL to redirect to
-     *
      * @return $this
      *
      * @throws \InvalidArgumentException
      */
-    public function setTargetUrl($url)
+    public function setTargetUrl(string $url)
     {
-        if ('' === ($url ?? '')) {
+        if ('' === $url) {
             throw new \InvalidArgumentException('Cannot redirect to an empty URL.');
         }
         $this->targetUrl = $url;

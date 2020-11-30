@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper28ab463fc3ba\Symfony\Component\OptionsResolver\Exception;
+namespace _PhpScoper246d7c16d32f\Symfony\Component\OptionsResolver\Exception;
 
 /**
  * Thrown when an argument is invalid.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class InvalidArgumentException extends \InvalidArgumentException implements \_PhpScoper28ab463fc3ba\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements \_PhpScoper246d7c16d32f\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
 {
 }

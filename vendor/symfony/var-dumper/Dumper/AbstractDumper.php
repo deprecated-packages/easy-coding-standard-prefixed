@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper28ab463fc3ba\Symfony\Component\VarDumper\Dumper;
+namespace _PhpScoper246d7c16d32f\Symfony\Component\VarDumper\Dumper;
 
-use _PhpScoper28ab463fc3ba\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoper28ab463fc3ba\Symfony\Component\VarDumper\Cloner\DumperInterface;
+use _PhpScoper246d7c16d32f\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper246d7c16d32f\Symfony\Component\VarDumper\Cloner\DumperInterface;
 /**
  * Abstract mechanism for dumping a Data object.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-abstract class AbstractDumper implements \_PhpScoper28ab463fc3ba\Symfony\Component\VarDumper\Dumper\DataDumperInterface, \_PhpScoper28ab463fc3ba\Symfony\Component\VarDumper\Cloner\DumperInterface
+abstract class AbstractDumper implements \_PhpScoper246d7c16d32f\Symfony\Component\VarDumper\Dumper\DataDumperInterface, \_PhpScoper246d7c16d32f\Symfony\Component\VarDumper\Cloner\DumperInterface
 {
     const DUMP_LIGHT_ARRAY = 1;
     const DUMP_STRING_LENGTH = 2;
@@ -73,11 +73,9 @@ abstract class AbstractDumper implements \_PhpScoper28ab463fc3ba\Symfony\Compone
     /**
      * Sets the default character encoding to use for non-UTF8 strings.
      *
-     * @param string $charset The default character encoding to use for non-UTF8 strings
-     *
      * @return string The previous charset
      */
-    public function setCharset($charset)
+    public function setCharset(string $charset)
     {
         $prev = $this->charset;
         $charset = \strtoupper($charset);
@@ -92,7 +90,7 @@ abstract class AbstractDumper implements \_PhpScoper28ab463fc3ba\Symfony\Compone
      *
      * @return string The previous indent pad
      */
-    public function setIndentPad($pad)
+    public function setIndentPad(string $pad)
     {
         $prev = $this->indentPad;
         $this->indentPad = $pad;
@@ -105,7 +103,7 @@ abstract class AbstractDumper implements \_PhpScoper28ab463fc3ba\Symfony\Compone
      *
      * @return string|null The dump as string when $output is true
      */
-    public function dump(\_PhpScoper28ab463fc3ba\Symfony\Component\VarDumper\Cloner\Data $data, $output = null)
+    public function dump(\_PhpScoper246d7c16d32f\Symfony\Component\VarDumper\Cloner\Data $data, $output = null)
     {
         $this->decimalPoint = \localeconv();
         $this->decimalPoint = $this->decimalPoint['decimal_point'];
@@ -142,19 +140,15 @@ abstract class AbstractDumper implements \_PhpScoper28ab463fc3ba\Symfony\Compone
      * @param int $depth The recursive depth in the dumped structure for the line being dumped,
      *                   or -1 to signal the end-of-dump to the line dumper callable
      */
-    protected function dumpLine($depth)
+    protected function dumpLine(int $depth)
     {
         ($this->lineDumper)($this->line, $depth, $this->indentPad);
         $this->line = '';
     }
     /**
      * Generic line dumper callback.
-     *
-     * @param string $line      The line to write
-     * @param int    $depth     The recursive depth in the dumped structure
-     * @param string $indentPad The line indent pad
      */
-    protected function echoLine($line, $depth, $indentPad)
+    protected function echoLine(string $line, int $depth, string $indentPad)
     {
         if (-1 !== $depth) {
             \fwrite($this->outputStream, \str_repeat($indentPad, $depth) . $line . "\n");
@@ -163,11 +157,9 @@ abstract class AbstractDumper implements \_PhpScoper28ab463fc3ba\Symfony\Compone
     /**
      * Converts a non-UTF-8 string to UTF-8.
      *
-     * @param string|null $s The non-UTF-8 string to convert
-     *
      * @return string|null The string converted to UTF-8
      */
-    protected function utf8Encode($s)
+    protected function utf8Encode(?string $s)
     {
         if (null === $s || \preg_match('//u', $s)) {
             return $s;

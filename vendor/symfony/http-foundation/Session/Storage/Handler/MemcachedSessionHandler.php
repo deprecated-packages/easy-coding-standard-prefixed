@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Memcached based session storage handler based on the Memcached class
@@ -18,7 +18,7 @@ namespace _PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\Session\Storag
  *
  * @author Drak <drak@zikula.org>
  */
-class MemcachedSessionHandler extends \_PhpScoper28ab463fc3ba\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class MemcachedSessionHandler extends \_PhpScoper246d7c16d32f\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $memcached;
     /**
@@ -42,7 +42,7 @@ class MemcachedSessionHandler extends \_PhpScoper28ab463fc3ba\Symfony\Component\
     {
         $this->memcached = $memcached;
         if ($diff = \array_diff(\array_keys($options), ['prefix', 'expiretime'])) {
-            throw new \InvalidArgumentException(\sprintf('The following options are not supported "%s"', \implode(', ', $diff)));
+            throw new \InvalidArgumentException(\sprintf('The following options are not supported "%s".', \implode(', ', $diff)));
         }
         $this->ttl = isset($options['expiretime']) ? (int) $options['expiretime'] : 86400;
         $this->prefix = isset($options['prefix']) ? $options['prefix'] : 'sf2s';
@@ -57,7 +57,7 @@ class MemcachedSessionHandler extends \_PhpScoper28ab463fc3ba\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    protected function doRead($sessionId)
+    protected function doRead(string $sessionId)
     {
         return $this->memcached->get($this->prefix . $sessionId) ?: '';
     }
@@ -72,14 +72,14 @@ class MemcachedSessionHandler extends \_PhpScoper28ab463fc3ba\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    protected function doWrite($sessionId, $data)
+    protected function doWrite(string $sessionId, string $data)
     {
         return $this->memcached->set($this->prefix . $sessionId, $data, \time() + $this->ttl);
     }
     /**
      * {@inheritdoc}
      */
-    protected function doDestroy($sessionId)
+    protected function doDestroy(string $sessionId)
     {
         $result = $this->memcached->delete($this->prefix . $sessionId);
         return $result || \Memcached::RES_NOTFOUND == $this->memcached->getResultCode();
