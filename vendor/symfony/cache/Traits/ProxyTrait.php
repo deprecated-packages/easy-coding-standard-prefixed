@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper246d7c16d32f\Symfony\Component\Cache\Traits;
+namespace _PhpScopera09818bc50da\Symfony\Component\Cache\Traits;
 
-use _PhpScoper246d7c16d32f\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper246d7c16d32f\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopera09818bc50da\Symfony\Component\Cache\PruneableInterface;
+use _PhpScopera09818bc50da\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -25,14 +25,14 @@ trait ProxyTrait
      */
     public function prune()
     {
-        return $this->pool instanceof \_PhpScoper246d7c16d32f\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
+        return $this->pool instanceof \_PhpScopera09818bc50da\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
     }
     /**
      * {@inheritdoc}
      */
     public function reset()
     {
-        if ($this->pool instanceof \_PhpScoper246d7c16d32f\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->pool instanceof \_PhpScopera09818bc50da\Symfony\Contracts\Service\ResetInterface) {
             $this->pool->reset();
         }
     }

@@ -1,21 +1,21 @@
 <?php
 
-namespace _PhpScoper246d7c16d32f\Jean85;
+namespace _PhpScopera09818bc50da\Jean85;
 
-use _PhpScoper246d7c16d32f\PackageVersions\Versions;
+use _PhpScopera09818bc50da\PackageVersions\Versions;
 class PrettyVersions
 {
     const SHORT_COMMIT_LENGTH = 7;
-    public static function getVersion(string $packageName) : \_PhpScoper246d7c16d32f\Jean85\Version
+    public static function getVersion(string $packageName) : \_PhpScopera09818bc50da\Jean85\Version
     {
-        return new \_PhpScoper246d7c16d32f\Jean85\Version($packageName, \_PhpScoper246d7c16d32f\PackageVersions\Versions::getVersion($packageName));
+        return new \_PhpScopera09818bc50da\Jean85\Version($packageName, \_PhpScopera09818bc50da\PackageVersions\Versions::getVersion($packageName));
     }
     public static function getRootPackageName() : string
     {
-        return \_PhpScoper246d7c16d32f\PackageVersions\Versions::ROOT_PACKAGE_NAME;
+        return \_PhpScopera09818bc50da\PackageVersions\Versions::ROOT_PACKAGE_NAME;
     }
-    public static function getRootPackageVersion() : \_PhpScoper246d7c16d32f\Jean85\Version
+    public static function getRootPackageVersion() : \_PhpScopera09818bc50da\Jean85\Version
     {
-        return self::getVersion(\_PhpScoper246d7c16d32f\PackageVersions\Versions::ROOT_PACKAGE_NAME);
+        return self::getVersion(\_PhpScopera09818bc50da\PackageVersions\Versions::ROOT_PACKAGE_NAME);
     }
 }

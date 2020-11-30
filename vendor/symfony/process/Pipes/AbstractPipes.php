@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper246d7c16d32f\Symfony\Component\Process\Pipes;
+namespace _PhpScopera09818bc50da\Symfony\Component\Process\Pipes;
 
-use _PhpScoper246d7c16d32f\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScopera09818bc50da\Symfony\Component\Process\Exception\InvalidArgumentException;
 /**
  * @author Romain Neutron <imprec@gmail.com>
  *
  * @internal
  */
-abstract class AbstractPipes implements \_PhpScoper246d7c16d32f\Symfony\Component\Process\Pipes\PipesInterface
+abstract class AbstractPipes implements \_PhpScopera09818bc50da\Symfony\Component\Process\Pipes\PipesInterface
 {
     /** @var array */
     public $pipes = array();
@@ -92,7 +92,7 @@ abstract class AbstractPipes implements \_PhpScoper246d7c16d32f\Symfony\Componen
             } elseif (!isset($this->inputBuffer[0])) {
                 if (!\is_string($input)) {
                     if (!\is_scalar($input)) {
-                        throw new \_PhpScoper246d7c16d32f\Symfony\Component\Process\Exception\InvalidArgumentException(\sprintf('%s yielded a value of type "%s", but only scalars and stream resources are supported', \get_class($this->input), \gettype($input)));
+                        throw new \_PhpScopera09818bc50da\Symfony\Component\Process\Exception\InvalidArgumentException(\sprintf('%s yielded a value of type "%s", but only scalars and stream resources are supported', \get_class($this->input), \gettype($input)));
                     }
                     $input = (string) $input;
                 }

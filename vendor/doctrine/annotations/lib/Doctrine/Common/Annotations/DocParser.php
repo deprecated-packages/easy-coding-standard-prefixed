@@ -17,13 +17,13 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScoper246d7c16d32f\Doctrine\Common\Annotations;
+namespace _PhpScopera09818bc50da\Doctrine\Common\Annotations;
 
-use _PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Attribute;
+use _PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Attribute;
 use ReflectionClass;
-use _PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Enum;
-use _PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target;
-use _PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Attributes;
+use _PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Enum;
+use _PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target;
+use _PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Attributes;
 /**
  * A parser for docblock annotations.
  *
@@ -43,7 +43,7 @@ final class DocParser
      *
      * @var array
      */
-    private static $classIdentifiers = array(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER, \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_TRUE, \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_FALSE, \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_NULL);
+    private static $classIdentifiers = array(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER, \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_TRUE, \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_FALSE, \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_NULL);
     /**
      * The lexer.
      *
@@ -112,7 +112,7 @@ final class DocParser
      *
      * @var array
      */
-    private static $annotationMetadata = array('_PhpScoper246d7c16d32f\\Doctrine\\Common\\Annotations\\Annotation\\Target' => array('is_annotation' => \true, 'has_constructor' => \true, 'properties' => array(), 'targets_literal' => 'ANNOTATION_CLASS', 'targets' => \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS, 'default_property' => 'value', 'attribute_types' => array('value' => array('required' => \false, 'type' => 'array', 'array_type' => 'string', 'value' => 'array<string>'))), '_PhpScoper246d7c16d32f\\Doctrine\\Common\\Annotations\\Annotation\\Attribute' => array('is_annotation' => \true, 'has_constructor' => \false, 'targets_literal' => 'ANNOTATION_ANNOTATION', 'targets' => \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target::TARGET_ANNOTATION, 'default_property' => 'name', 'properties' => array('name' => 'name', 'type' => 'type', 'required' => 'required'), 'attribute_types' => array('value' => array('required' => \true, 'type' => 'string', 'value' => 'string'), 'type' => array('required' => \true, 'type' => 'string', 'value' => 'string'), 'required' => array('required' => \false, 'type' => 'boolean', 'value' => 'boolean'))), '_PhpScoper246d7c16d32f\\Doctrine\\Common\\Annotations\\Annotation\\Attributes' => array('is_annotation' => \true, 'has_constructor' => \false, 'targets_literal' => 'ANNOTATION_CLASS', 'targets' => \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS, 'default_property' => 'value', 'properties' => array('value' => 'value'), 'attribute_types' => array('value' => array('type' => 'array', 'required' => \true, 'array_type' => '_PhpScoper246d7c16d32f\\Doctrine\\Common\\Annotations\\Annotation\\Attribute', 'value' => 'array<Doctrine\\Common\\Annotations\\Annotation\\Attribute>'))), '_PhpScoper246d7c16d32f\\Doctrine\\Common\\Annotations\\Annotation\\Enum' => array('is_annotation' => \true, 'has_constructor' => \true, 'targets_literal' => 'ANNOTATION_PROPERTY', 'targets' => \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY, 'default_property' => 'value', 'properties' => array('value' => 'value'), 'attribute_types' => array('value' => array('type' => 'array', 'required' => \true), 'literal' => array('type' => 'array', 'required' => \false))));
+    private static $annotationMetadata = array('_PhpScopera09818bc50da\\Doctrine\\Common\\Annotations\\Annotation\\Target' => array('is_annotation' => \true, 'has_constructor' => \true, 'properties' => array(), 'targets_literal' => 'ANNOTATION_CLASS', 'targets' => \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS, 'default_property' => 'value', 'attribute_types' => array('value' => array('required' => \false, 'type' => 'array', 'array_type' => 'string', 'value' => 'array<string>'))), '_PhpScopera09818bc50da\\Doctrine\\Common\\Annotations\\Annotation\\Attribute' => array('is_annotation' => \true, 'has_constructor' => \false, 'targets_literal' => 'ANNOTATION_ANNOTATION', 'targets' => \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target::TARGET_ANNOTATION, 'default_property' => 'name', 'properties' => array('name' => 'name', 'type' => 'type', 'required' => 'required'), 'attribute_types' => array('value' => array('required' => \true, 'type' => 'string', 'value' => 'string'), 'type' => array('required' => \true, 'type' => 'string', 'value' => 'string'), 'required' => array('required' => \false, 'type' => 'boolean', 'value' => 'boolean'))), '_PhpScopera09818bc50da\\Doctrine\\Common\\Annotations\\Annotation\\Attributes' => array('is_annotation' => \true, 'has_constructor' => \false, 'targets_literal' => 'ANNOTATION_CLASS', 'targets' => \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS, 'default_property' => 'value', 'properties' => array('value' => 'value'), 'attribute_types' => array('value' => array('type' => 'array', 'required' => \true, 'array_type' => '_PhpScopera09818bc50da\\Doctrine\\Common\\Annotations\\Annotation\\Attribute', 'value' => 'array<Doctrine\\Common\\Annotations\\Annotation\\Attribute>'))), '_PhpScopera09818bc50da\\Doctrine\\Common\\Annotations\\Annotation\\Enum' => array('is_annotation' => \true, 'has_constructor' => \true, 'targets_literal' => 'ANNOTATION_PROPERTY', 'targets' => \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY, 'default_property' => 'value', 'properties' => array('value' => 'value'), 'attribute_types' => array('value' => array('type' => 'array', 'required' => \true), 'literal' => array('type' => 'array', 'required' => \false))));
     /**
      * Hash-map for handle types declaration.
      *
@@ -130,7 +130,7 @@ final class DocParser
      */
     public function __construct()
     {
-        $this->lexer = new \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer();
+        $this->lexer = new \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer();
     }
     /**
      * Sets the annotation names that are ignored during the parsing process.
@@ -291,7 +291,7 @@ final class DocParser
             $message .= ' in ' . $this->context;
         }
         $message .= '.';
-        throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::syntaxError($message);
+        throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::syntaxError($message);
     }
     /**
      * Attempts to check if a class exists or not. This never goes through the PHP autoloading mechanism
@@ -311,7 +311,7 @@ final class DocParser
             return $this->classExists[$fqcn] = \true;
         }
         // final check, does this class exist?
-        return $this->classExists[$fqcn] = \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationRegistry::loadAnnotationClass($fqcn);
+        return $this->classExists[$fqcn] = \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationRegistry::loadAnnotationClass($fqcn);
     }
     /**
      * Collects parsing metadata for a given annotation class
@@ -326,26 +326,26 @@ final class DocParser
             self::$metadataParser = new self();
             self::$metadataParser->setIgnoreNotImportedAnnotations(\true);
             self::$metadataParser->setIgnoredAnnotationNames($this->ignoredAnnotationNames);
-            self::$metadataParser->setImports(array('enum' => '_PhpScoper246d7c16d32f\\Doctrine\\Common\\Annotations\\Annotation\\Enum', 'target' => '_PhpScoper246d7c16d32f\\Doctrine\\Common\\Annotations\\Annotation\\Target', 'attribute' => '_PhpScoper246d7c16d32f\\Doctrine\\Common\\Annotations\\Annotation\\Attribute', 'attributes' => '_PhpScoper246d7c16d32f\\Doctrine\\Common\\Annotations\\Annotation\\Attributes'));
-            \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Enum.php');
-            \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Target.php');
-            \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Attribute.php');
-            \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Attributes.php');
+            self::$metadataParser->setImports(array('enum' => '_PhpScopera09818bc50da\\Doctrine\\Common\\Annotations\\Annotation\\Enum', 'target' => '_PhpScopera09818bc50da\\Doctrine\\Common\\Annotations\\Annotation\\Target', 'attribute' => '_PhpScopera09818bc50da\\Doctrine\\Common\\Annotations\\Annotation\\Attribute', 'attributes' => '_PhpScopera09818bc50da\\Doctrine\\Common\\Annotations\\Annotation\\Attributes'));
+            \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Enum.php');
+            \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Target.php');
+            \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Attribute.php');
+            \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationRegistry::registerFile(__DIR__ . '/Annotation/Attributes.php');
         }
         $class = new \ReflectionClass($name);
         $docComment = $class->getDocComment();
         // Sets default values for annotation metadata
-        $metadata = array('default_property' => null, 'has_constructor' => null !== ($constructor = $class->getConstructor()) && $constructor->getNumberOfParameters() > 0, 'properties' => array(), 'property_types' => array(), 'attribute_types' => array(), 'targets_literal' => null, 'targets' => \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target::TARGET_ALL, 'is_annotation' => \false !== \strpos($docComment, '@Annotation'));
+        $metadata = array('default_property' => null, 'has_constructor' => null !== ($constructor = $class->getConstructor()) && $constructor->getNumberOfParameters() > 0, 'properties' => array(), 'property_types' => array(), 'attribute_types' => array(), 'targets_literal' => null, 'targets' => \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target::TARGET_ALL, 'is_annotation' => \false !== \strpos($docComment, '@Annotation'));
         // verify that the class is really meant to be an annotation
         if ($metadata['is_annotation']) {
-            self::$metadataParser->setTarget(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
+            self::$metadataParser->setTarget(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target::TARGET_CLASS);
             foreach (self::$metadataParser->parse($docComment, 'class @' . $name) as $annotation) {
-                if ($annotation instanceof \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target) {
+                if ($annotation instanceof \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target) {
                     $metadata['targets'] = $annotation->targets;
                     $metadata['targets_literal'] = $annotation->literal;
                     continue;
                 }
-                if ($annotation instanceof \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Attributes) {
+                if ($annotation instanceof \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Attributes) {
                     foreach ($annotation->value as $attribute) {
                         $this->collectAttributeTypeMetadata($metadata, $attribute);
                     }
@@ -359,7 +359,7 @@ final class DocParser
                     if (\false === ($propertyComment = $property->getDocComment())) {
                         continue;
                     }
-                    $attribute = new \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Attribute();
+                    $attribute = new \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Attribute();
                     $attribute->required = \false !== \strpos($propertyComment, '@Required');
                     $attribute->name = $property->name;
                     $attribute->type = \false !== \strpos($propertyComment, '@var') && \preg_match('/@var\\s+([^\\s]+)/', $propertyComment, $matches) ? $matches[1] : 'mixed';
@@ -367,9 +367,9 @@ final class DocParser
                     // checks if the property has @Enum
                     if (\false !== \strpos($propertyComment, '@Enum')) {
                         $context = 'property ' . $class->name . "::\$" . $property->name;
-                        self::$metadataParser->setTarget(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
+                        self::$metadataParser->setTarget(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target::TARGET_PROPERTY);
                         foreach (self::$metadataParser->parse($propertyComment, $context) as $annotation) {
-                            if (!$annotation instanceof \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Enum) {
+                            if (!$annotation instanceof \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Enum) {
                                 continue;
                             }
                             $metadata['enum'][$property->name]['value'] = $annotation->value;
@@ -391,7 +391,7 @@ final class DocParser
      *
      * @return void
      */
-    private function collectAttributeTypeMetadata(&$metadata, \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Attribute $attribute)
+    private function collectAttributeTypeMetadata(&$metadata, \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Attribute $attribute)
     {
         // handle internal type declaration
         $type = isset(self::$typeMap[$attribute->type]) ? self::$typeMap[$attribute->type] : $attribute->type;
@@ -433,7 +433,7 @@ final class DocParser
     {
         $annotations = array();
         while (null !== $this->lexer->lookahead) {
-            if (\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_AT !== $this->lexer->lookahead['type']) {
+            if (\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_AT !== $this->lexer->lookahead['type']) {
                 $this->lexer->moveNext();
                 continue;
             }
@@ -444,7 +444,7 @@ final class DocParser
             }
             // make sure the @ is followed by either a namespace separator, or
             // an identifier token
-            if (null === ($peek = $this->lexer->glimpse()) || \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_NAMESPACE_SEPARATOR !== $peek['type'] && !\in_array($peek['type'], self::$classIdentifiers, \true) || $peek['position'] !== $this->lexer->lookahead['position'] + 1) {
+            if (null === ($peek = $this->lexer->glimpse()) || \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_NAMESPACE_SEPARATOR !== $peek['type'] && !\in_array($peek['type'], self::$classIdentifiers, \true) || $peek['position'] !== $this->lexer->lookahead['position'] + 1) {
                 $this->lexer->moveNext();
                 continue;
             }
@@ -468,7 +468,7 @@ final class DocParser
      */
     private function Annotation()
     {
-        $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_AT);
+        $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_AT);
         // check if we have an annotation
         $name = $this->Identifier();
         // only process names which are not fully qualified, yet
@@ -498,11 +498,11 @@ final class DocParser
                 if ($this->ignoreNotImportedAnnotations || isset($this->ignoredAnnotationNames[$name])) {
                     return \false;
                 }
-                throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::semanticalError(\sprintf('The annotation "@%s" in %s was never imported. Did you maybe forget to add a "use" statement for this annotation?', $name, $this->context));
+                throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::semanticalError(\sprintf('The annotation "@%s" in %s was never imported. Did you maybe forget to add a "use" statement for this annotation?', $name, $this->context));
             }
         }
         if (!$this->classExists($name)) {
-            throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::semanticalError(\sprintf('The annotation "@%s" in %s does not exist, or could not be auto-loaded.', $name, $this->context));
+            throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::semanticalError(\sprintf('The annotation "@%s" in %s does not exist, or could not be auto-loaded.', $name, $this->context));
         }
         // at this point, $name contains the fully qualified class name of the
         // annotation, and it is also guaranteed that this class exists, and
@@ -516,15 +516,15 @@ final class DocParser
             if (isset($this->ignoredAnnotationNames[$originalName])) {
                 return \false;
             }
-            throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::semanticalError(\sprintf('The class "%s" is not annotated with @Annotation. Are you sure this class can be used as annotation? If so, then you need to add @Annotation to the _class_ doc comment of "%s". If it is indeed no annotation, then you need to add @IgnoreAnnotation("%s") to the _class_ doc comment of %s.', $name, $name, $originalName, $this->context));
+            throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::semanticalError(\sprintf('The class "%s" is not annotated with @Annotation. Are you sure this class can be used as annotation? If so, then you need to add @Annotation to the _class_ doc comment of "%s". If it is indeed no annotation, then you need to add @IgnoreAnnotation("%s") to the _class_ doc comment of %s.', $name, $name, $originalName, $this->context));
         }
         //if target is nested annotation
-        $target = $this->isNestedAnnotation ? \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\Annotation\Target::TARGET_ANNOTATION : $this->target;
+        $target = $this->isNestedAnnotation ? \_PhpScopera09818bc50da\Doctrine\Common\Annotations\Annotation\Target::TARGET_ANNOTATION : $this->target;
         // Next will be nested
         $this->isNestedAnnotation = \true;
         //if annotation does not support current target
         if (0 === (self::$annotationMetadata[$name]['targets'] & $target) && $target) {
-            throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::semanticalError(\sprintf('Annotation @%s is not allowed to be declared on %s. You may only use this annotation on these code elements: %s.', $originalName, $this->context, self::$annotationMetadata[$name]['targets_literal']));
+            throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::semanticalError(\sprintf('Annotation @%s is not allowed to be declared on %s. You may only use this annotation on these code elements: %s.', $originalName, $this->context, self::$annotationMetadata[$name]['targets_literal']));
         }
         $values = $this->MethodCall();
         if (isset(self::$annotationMetadata[$name]['enum'])) {
@@ -532,7 +532,7 @@ final class DocParser
             foreach (self::$annotationMetadata[$name]['enum'] as $property => $enum) {
                 // checks if the attribute is a valid enumerator
                 if (isset($values[$property]) && !\in_array($values[$property], $enum['value'])) {
-                    throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::enumeratorError($property, $name, $this->context, $enum['literal'], $values[$property]);
+                    throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::enumeratorError($property, $name, $this->context, $enum['literal'], $values[$property]);
                 }
             }
         }
@@ -544,7 +544,7 @@ final class DocParser
             // handle a not given attribute or null value
             if (!isset($values[$property])) {
                 if ($type['required']) {
-                    throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::requiredError($property, $originalName, $this->context, 'a(n) ' . $type['value']);
+                    throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::requiredError($property, $originalName, $this->context, 'a(n) ' . $type['value']);
                 }
                 continue;
             }
@@ -557,12 +557,12 @@ final class DocParser
                 if (isset($type['array_type'])) {
                     foreach ($values[$property] as $item) {
                         if (\gettype($item) !== $type['array_type'] && !$item instanceof $type['array_type']) {
-                            throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::attributeTypeError($property, $originalName, $this->context, 'either a(n) ' . $type['array_type'] . ', or an array of ' . $type['array_type'] . 's', $item);
+                            throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::attributeTypeError($property, $originalName, $this->context, 'either a(n) ' . $type['array_type'] . ', or an array of ' . $type['array_type'] . 's', $item);
                         }
                     }
                 }
             } elseif (\gettype($values[$property]) !== $type['type'] && !$values[$property] instanceof $type['type']) {
-                throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::attributeTypeError($property, $originalName, $this->context, 'a(n) ' . $type['value'], $values[$property]);
+                throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::attributeTypeError($property, $originalName, $this->context, 'a(n) ' . $type['value'], $values[$property]);
             }
         }
         // check if the annotation expects values via the constructor,
@@ -574,11 +574,11 @@ final class DocParser
         foreach ($values as $property => $value) {
             if (!isset(self::$annotationMetadata[$name]['properties'][$property])) {
                 if ('value' !== $property) {
-                    throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::creationError(\sprintf('The annotation @%s declared on %s does not have a property named "%s". Available properties: %s', $originalName, $this->context, $property, \implode(', ', self::$annotationMetadata[$name]['properties'])));
+                    throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::creationError(\sprintf('The annotation @%s declared on %s does not have a property named "%s". Available properties: %s', $originalName, $this->context, $property, \implode(', ', self::$annotationMetadata[$name]['properties'])));
                 }
                 // handle the case if the property has no annotations
                 if (!($property = self::$annotationMetadata[$name]['default_property'])) {
-                    throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::creationError(\sprintf('The annotation @%s declared on %s does not accept any values, but got %s.', $originalName, $this->context, \json_encode($values)));
+                    throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::creationError(\sprintf('The annotation @%s declared on %s does not accept any values, but got %s.', $originalName, $this->context, \json_encode($values)));
                 }
             }
             $instance->{$property} = $value;
@@ -593,14 +593,14 @@ final class DocParser
     private function MethodCall()
     {
         $values = array();
-        if (!$this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS)) {
+        if (!$this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS)) {
             return $values;
         }
-        $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS);
-        if (!$this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS)) {
+        $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS);
+        if (!$this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS)) {
             $values = $this->Values();
         }
-        $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS);
+        $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS);
         return $values;
     }
     /**
@@ -612,14 +612,14 @@ final class DocParser
     {
         $values = array();
         // Handle the case of a single array as value, i.e. @Foo({....})
-        if ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES)) {
+        if ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES)) {
             $values['value'] = $this->Value();
             return $values;
         }
         $values[] = $this->Value();
-        while ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_COMMA)) {
-            $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_COMMA);
-            if ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS)) {
+        while ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_COMMA)) {
+            $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_COMMA);
+            if ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS)) {
                 break;
             }
             $token = $this->lexer->lookahead;
@@ -694,7 +694,7 @@ final class DocParser
             return \substr($identifier, 0, $classPos);
         }
         if (!\defined($identifier)) {
-            throw \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\AnnotationException::semanticalErrorConstants($identifier, $this->context);
+            throw \_PhpScopera09818bc50da\Doctrine\Common\Annotations\AnnotationException::semanticalErrorConstants($identifier, $this->context);
         }
         return \constant($identifier);
     }
@@ -711,8 +711,8 @@ final class DocParser
         }
         $this->lexer->moveNext();
         $className = $this->lexer->token['value'];
-        while ($this->lexer->lookahead['position'] === $this->lexer->token['position'] + \strlen($this->lexer->token['value']) && $this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_NAMESPACE_SEPARATOR)) {
-            $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_NAMESPACE_SEPARATOR);
+        while ($this->lexer->lookahead['position'] === $this->lexer->token['position'] + \strlen($this->lexer->token['value']) && $this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_NAMESPACE_SEPARATOR)) {
+            $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_NAMESPACE_SEPARATOR);
             $this->matchAny(self::$classIdentifiers);
             $className .= '\\' . $this->lexer->token['value'];
         }
@@ -726,7 +726,7 @@ final class DocParser
     private function Value()
     {
         $peek = $this->lexer->glimpse();
-        if (\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_EQUALS === $peek['type']) {
+        if (\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_EQUALS === $peek['type']) {
             return $this->FieldAssignment();
         }
         return $this->PlainValue();
@@ -738,33 +738,33 @@ final class DocParser
      */
     private function PlainValue()
     {
-        if ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES)) {
+        if ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES)) {
             return $this->Arrayx();
         }
-        if ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_AT)) {
+        if ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_AT)) {
             return $this->Annotation();
         }
-        if ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER)) {
+        if ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER)) {
             return $this->Constant();
         }
         switch ($this->lexer->lookahead['type']) {
-            case \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_STRING:
-                $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_STRING);
+            case \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_STRING:
+                $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_STRING);
                 return $this->lexer->token['value'];
-            case \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_INTEGER:
-                $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_INTEGER);
+            case \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_INTEGER:
+                $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_INTEGER);
                 return (int) $this->lexer->token['value'];
-            case \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_FLOAT:
-                $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_FLOAT);
+            case \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_FLOAT:
+                $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_FLOAT);
                 return (float) $this->lexer->token['value'];
-            case \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_TRUE:
-                $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_TRUE);
+            case \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_TRUE:
+                $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_TRUE);
                 return \true;
-            case \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_FALSE:
-                $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_FALSE);
+            case \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_FALSE:
+                $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_FALSE);
                 return \false;
-            case \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_NULL:
-                $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_NULL);
+            case \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_NULL:
+                $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_NULL);
                 return null;
             default:
                 $this->syntaxError('PlainValue');
@@ -778,9 +778,9 @@ final class DocParser
      */
     private function FieldAssignment()
     {
-        $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER);
+        $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER);
         $fieldName = $this->lexer->token['value'];
-        $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_EQUALS);
+        $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_EQUALS);
         $item = new \stdClass();
         $item->name = $fieldName;
         $item->value = $this->PlainValue();
@@ -794,22 +794,22 @@ final class DocParser
     private function Arrayx()
     {
         $array = $values = array();
-        $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES);
+        $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES);
         // If the array is empty, stop parsing and return.
-        if ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES)) {
-            $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES);
+        if ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES)) {
+            $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES);
             return $array;
         }
         $values[] = $this->ArrayEntry();
-        while ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_COMMA)) {
-            $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_COMMA);
+        while ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_COMMA)) {
+            $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_COMMA);
             // optional trailing comma
-            if ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES)) {
+            if ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES)) {
                 break;
             }
             $values[] = $this->ArrayEntry();
         }
-        $this->match(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES);
+        $this->match(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES);
         foreach ($values as $value) {
             list($key, $val) = $value;
             if ($key !== null) {
@@ -830,14 +830,14 @@ final class DocParser
     private function ArrayEntry()
     {
         $peek = $this->lexer->glimpse();
-        if (\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_EQUALS === $peek['type'] || \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_COLON === $peek['type']) {
-            if ($this->lexer->isNextToken(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER)) {
+        if (\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_EQUALS === $peek['type'] || \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_COLON === $peek['type']) {
+            if ($this->lexer->isNextToken(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_IDENTIFIER)) {
                 $key = $this->Constant();
             } else {
-                $this->matchAny(array(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_INTEGER, \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_STRING));
+                $this->matchAny(array(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_INTEGER, \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_STRING));
                 $key = $this->lexer->token['value'];
             }
-            $this->matchAny(array(\_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_EQUALS, \_PhpScoper246d7c16d32f\Doctrine\Common\Annotations\DocLexer::T_COLON));
+            $this->matchAny(array(\_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_EQUALS, \_PhpScopera09818bc50da\Doctrine\Common\Annotations\DocLexer::T_COLON));
             return array($key, $this->PlainValue());
         }
         return array(null, $this->Value());

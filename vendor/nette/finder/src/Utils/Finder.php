@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper246d7c16d32f\Nette\Utils;
+namespace _PhpScopera09818bc50da\Nette\Utils;
 
-use _PhpScoper246d7c16d32f\Nette;
+use _PhpScopera09818bc50da\Nette;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 /**
@@ -98,7 +98,7 @@ class Finder implements \IteratorAggregate, \Countable
     public function from(...$paths) : self
     {
         if ($this->paths) {
-            throw new \_PhpScoper246d7c16d32f\Nette\InvalidStateException('Directory to search has already been specified.');
+            throw new \_PhpScopera09818bc50da\Nette\InvalidStateException('Directory to search has already been specified.');
         }
         $this->paths = \is_array($paths[0]) ? $paths[0] : $paths;
         $this->cursor =& $this->exclude;
@@ -149,7 +149,7 @@ class Finder implements \IteratorAggregate, \Countable
     public function getIterator() : \Iterator
     {
         if (!$this->paths) {
-            throw new \_PhpScoper246d7c16d32f\Nette\InvalidStateException('Call in() or from() to specify directory to search.');
+            throw new \_PhpScopera09818bc50da\Nette\InvalidStateException('Call in() or from() to specify directory to search.');
         } elseif (\count($this->paths) === 1) {
             return $this->buildIterator((string) $this->paths[0]);
         } else {
@@ -245,7 +245,7 @@ class Finder implements \IteratorAggregate, \Countable
         if (\func_num_args() === 1) {
             // in $operator is predicate
             if (!\preg_match('#^(?:([=<>!]=?|<>)\\s*)?((?:\\d*\\.)?\\d+)\\s*(K|M|G|)B?\\z#i', $operator, $matches)) {
-                throw new \_PhpScoper246d7c16d32f\Nette\InvalidArgumentException('Invalid size predicate format.');
+                throw new \_PhpScopera09818bc50da\Nette\InvalidArgumentException('Invalid size predicate format.');
             }
             [, $operator, $size, $unit] = $matches;
             static $units = ['' => 1, 'k' => 1000.0, 'm' => 1000000.0, 'g' => 1000000000.0];
@@ -267,12 +267,12 @@ class Finder implements \IteratorAggregate, \Countable
         if (\func_num_args() === 1) {
             // in $operator is predicate
             if (!\preg_match('#^(?:([=<>!]=?|<>)\\s*)?(.+)\\z#i', $operator, $matches)) {
-                throw new \_PhpScoper246d7c16d32f\Nette\InvalidArgumentException('Invalid date predicate format.');
+                throw new \_PhpScopera09818bc50da\Nette\InvalidArgumentException('Invalid date predicate format.');
             }
             [, $operator, $date] = $matches;
             $operator = $operator ?: '=';
         }
-        $date = \_PhpScoper246d7c16d32f\Nette\Utils\DateTime::from($date)->format('U');
+        $date = \_PhpScopera09818bc50da\Nette\Utils\DateTime::from($date)->format('U');
         return $this->filter(function (\RecursiveDirectoryIterator $file) use($operator, $date) : bool {
             return self::compare($file->getMTime(), $operator, $date);
         });
@@ -299,7 +299,7 @@ class Finder implements \IteratorAggregate, \Countable
             case '<>':
                 return $l != $r;
             default:
-                throw new \_PhpScoper246d7c16d32f\Nette\InvalidArgumentException("Unknown operator {$operator}.");
+                throw new \_PhpScopera09818bc50da\Nette\InvalidArgumentException("Unknown operator {$operator}.");
         }
     }
     /********************* extension methods ****************d*g**/
