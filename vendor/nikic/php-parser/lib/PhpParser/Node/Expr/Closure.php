@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper96382aaac118\PhpParser\Node\Expr;
+namespace _PhpScoper4972b76c81a2\PhpParser\Node\Expr;
 
-use _PhpScoper96382aaac118\PhpParser\Node;
-use _PhpScoper96382aaac118\PhpParser\Node\Expr;
-use _PhpScoper96382aaac118\PhpParser\Node\FunctionLike;
-class Closure extends \_PhpScoper96382aaac118\PhpParser\Node\Expr implements \_PhpScoper96382aaac118\PhpParser\Node\FunctionLike
+use _PhpScoper4972b76c81a2\PhpParser\Node;
+use _PhpScoper4972b76c81a2\PhpParser\Node\Expr;
+use _PhpScoper4972b76c81a2\PhpParser\Node\FunctionLike;
+class Closure extends \_PhpScoper4972b76c81a2\PhpParser\Node\Expr implements \_PhpScoper4972b76c81a2\PhpParser\Node\FunctionLike
 {
     /** @var bool Whether the closure is static */
     public $static;
@@ -43,7 +43,7 @@ class Closure extends \_PhpScoper96382aaac118\PhpParser\Node\Expr implements \_P
         $this->params = $subNodes['params'] ?? [];
         $this->uses = $subNodes['uses'] ?? [];
         $returnType = $subNodes['returnType'] ?? null;
-        $this->returnType = \is_string($returnType) ? new \_PhpScoper96382aaac118\PhpParser\Node\Identifier($returnType) : $returnType;
+        $this->returnType = \is_string($returnType) ? new \_PhpScoper4972b76c81a2\PhpParser\Node\Identifier($returnType) : $returnType;
         $this->stmts = $subNodes['stmts'] ?? [];
         $this->attrGroups = $subNodes['attrGroups'] ?? [];
     }
