@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Report;
 
-use _PhpScoper9613f3fac51d\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperd74b3ed28382\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * Generates a report according to gitlabs subset of codeclimate json files.
  *
@@ -41,6 +41,6 @@ final class GitlabReporter implements \PhpCsFixer\Report\ReporterInterface
             }
         }
         $jsonString = \json_encode($report);
-        return $reportSummary->isDecoratedOutput() ? \_PhpScoper9613f3fac51d\Symfony\Component\Console\Formatter\OutputFormatter::escape($jsonString) : $jsonString;
+        return $reportSummary->isDecoratedOutput() ? \_PhpScoperd74b3ed28382\Symfony\Component\Console\Formatter\OutputFormatter::escape($jsonString) : $jsonString;
     }
 }

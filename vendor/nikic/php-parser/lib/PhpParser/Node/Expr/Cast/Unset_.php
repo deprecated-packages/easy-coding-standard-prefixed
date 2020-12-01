@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper9613f3fac51d\PhpParser\Node\Expr\Cast;
+namespace _PhpScoperd74b3ed28382\PhpParser\Node\Expr\Cast;
 
-use _PhpScoper9613f3fac51d\PhpParser\Node\Expr\Cast;
-class Unset_ extends \_PhpScoper9613f3fac51d\PhpParser\Node\Expr\Cast
+use _PhpScoperd74b3ed28382\PhpParser\Node\Expr\Cast;
+class Unset_ extends \_PhpScoperd74b3ed28382\PhpParser\Node\Expr\Cast
 {
     public function getType() : string
     {

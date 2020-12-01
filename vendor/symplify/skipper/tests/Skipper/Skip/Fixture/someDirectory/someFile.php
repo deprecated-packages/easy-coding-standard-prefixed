@@ -1,6 +1,6 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper9613f3fac51d;
+namespace _PhpScoperd74b3ed28382;
 
 echo 'hello';

@@ -5,14 +5,14 @@ namespace Symplify\EasyCodingStandard\Console\Reporter;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpCsFixer\Fixer\FixerInterface;
-use _PhpScoper9613f3fac51d\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoperd74b3ed28382\Symfony\Component\Console\Style\SymfonyStyle;
 final class CheckerListReporter
 {
     /**
      * @var SymfonyStyle
      */
     private $symfonyStyle;
-    public function __construct(\_PhpScoper9613f3fac51d\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
+    public function __construct(\_PhpScoperd74b3ed28382\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
     {
         $this->symfonyStyle = $symfonyStyle;
     }

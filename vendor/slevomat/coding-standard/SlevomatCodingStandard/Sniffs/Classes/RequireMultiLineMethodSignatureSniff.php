@@ -13,7 +13,7 @@ use function count;
 use function preg_match;
 use function sprintf;
 use function strlen;
-use const _PhpScoper9613f3fac51d\T_COMMA;
+use const _PhpScoperd74b3ed28382\T_COMMA;
 use const T_WHITESPACE;
 class RequireMultiLineMethodSignatureSniff extends \SlevomatCodingStandard\Sniffs\Classes\AbstractMethodSignature
 {

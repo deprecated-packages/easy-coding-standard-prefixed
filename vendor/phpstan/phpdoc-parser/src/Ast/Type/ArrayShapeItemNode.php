@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper9613f3fac51d\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoperd74b3ed28382\PHPStan\PhpDocParser\Ast\Type;
 
-use _PhpScoper9613f3fac51d\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode;
-use _PhpScoper9613f3fac51d\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode;
-class ArrayShapeItemNode implements \_PhpScoper9613f3fac51d\PHPStan\PhpDocParser\Ast\Type\TypeNode
+use _PhpScoperd74b3ed28382\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode;
+use _PhpScoperd74b3ed28382\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode;
+class ArrayShapeItemNode implements \_PhpScoperd74b3ed28382\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     /** @var ConstExprIntegerNode|ConstExprStringNode|IdentifierTypeNode|null */
     public $keyName;
@@ -16,7 +16,7 @@ class ArrayShapeItemNode implements \_PhpScoper9613f3fac51d\PHPStan\PhpDocParser
     /**
      * @param ConstExprIntegerNode|ConstExprStringNode|IdentifierTypeNode|null $keyName
      */
-    public function __construct($keyName, bool $optional, \_PhpScoper9613f3fac51d\PHPStan\PhpDocParser\Ast\Type\TypeNode $valueType)
+    public function __construct($keyName, bool $optional, \_PhpScoperd74b3ed28382\PHPStan\PhpDocParser\Ast\Type\TypeNode $valueType)
     {
         $this->keyName = $keyName;
         $this->optional = $optional;

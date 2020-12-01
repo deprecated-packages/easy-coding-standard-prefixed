@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Finder;
 
-use _PhpScoper9613f3fac51d\Symfony\Component\Finder\Finder;
+use _PhpScoperd74b3ed28382\Symfony\Component\Finder\Finder;
 use Symplify\EasyCodingStandard\Git\GitDiffProvider;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -57,7 +57,7 @@ final class SourceFinder
     private function processDirectory(string $directory) : array
     {
         $normalizedFileExtensions = $this->normalizeFileExtensions($this->fileExtensions);
-        $finder = \_PhpScoper9613f3fac51d\Symfony\Component\Finder\Finder::create()->files()->name($normalizedFileExtensions)->in($directory)->exclude('vendor')->sortByName();
+        $finder = \_PhpScoperd74b3ed28382\Symfony\Component\Finder\Finder::create()->files()->name($normalizedFileExtensions)->in($directory)->exclude('vendor')->sortByName();
         return $this->finderSanitizer->sanitize($finder);
     }
     /**

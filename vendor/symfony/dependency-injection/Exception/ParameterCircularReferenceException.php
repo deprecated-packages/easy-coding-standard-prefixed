@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9613f3fac51d\Symfony\Component\DependencyInjection\Exception;
+namespace _PhpScoperd74b3ed28382\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * This exception is thrown when a circular reference in a parameter is detected.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterCircularReferenceException extends \_PhpScoper9613f3fac51d\Symfony\Component\DependencyInjection\Exception\RuntimeException
+class ParameterCircularReferenceException extends \_PhpScoperd74b3ed28382\Symfony\Component\DependencyInjection\Exception\RuntimeException
 {
     private $parameters;
     public function __construct(array $parameters, \Throwable $previous = null)
