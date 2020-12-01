@@ -6,7 +6,7 @@
     <title>Welcome to Symfony!</title>
     <style>
         <?php 
-namespace _PhpScoperb36402634947;
+namespace _PhpScoper6dbb854503f8;
 
 $hue = \random_int(0, 360);
 ?>

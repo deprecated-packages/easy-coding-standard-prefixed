@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb36402634947\Symfony\Component\DependencyInjection\Extension;
+namespace _PhpScoper6dbb854503f8\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScoperb36402634947\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScoperb36402634947\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper6dbb854503f8\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoper6dbb854503f8\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ConfigurationExtensionInterface is the interface implemented by container extension classes.
  *
@@ -24,5 +24,5 @@ interface ConfigurationExtensionInterface
      *
      * @return ConfigurationInterface|null The configuration or null
      */
-    public function getConfiguration(array $config, \_PhpScoperb36402634947\Symfony\Component\DependencyInjection\ContainerBuilder $container);
+    public function getConfiguration(array $config, \_PhpScoper6dbb854503f8\Symfony\Component\DependencyInjection\ContainerBuilder $container);
 }

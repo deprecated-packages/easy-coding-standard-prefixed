@@ -5,16 +5,16 @@ namespace SlevomatCodingStandard\Sniffs\TypeHints;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
-use _PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
+use _PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\ParameterAnnotation;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
@@ -37,9 +37,9 @@ use function in_array;
 use function lcfirst;
 use function sprintf;
 use function strtolower;
-use const _PhpScoperb36402634947\T_BITWISE_AND;
-use const _PhpScoperb36402634947\T_DOC_COMMENT_CLOSE_TAG;
-use const _PhpScoperb36402634947\T_DOC_COMMENT_STAR;
+use const _PhpScoper6dbb854503f8\T_BITWISE_AND;
+use const _PhpScoper6dbb854503f8\T_DOC_COMMENT_CLOSE_TAG;
+use const _PhpScoper6dbb854503f8\T_DOC_COMMENT_STAR;
 use const T_ELLIPSIS;
 use const T_FUNCTION;
 use const T_VARIABLE;
@@ -111,11 +111,11 @@ class ParameterTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 continue;
             }
             $parameterTypeNode = $parametersAnnotations[$parameterName]->getType();
-            if ($parameterTypeNode instanceof \_PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($parameterTypeNode->name) === 'null') {
+            if ($parameterTypeNode instanceof \_PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($parameterTypeNode->name) === 'null') {
                 continue;
             }
             $originalParameterTypeNode = $parameterTypeNode;
-            if ($parameterTypeNode instanceof \_PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+            if ($parameterTypeNode instanceof \_PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
                 $parameterTypeNode = $parameterTypeNode->type;
             }
             $typeHints = [];
@@ -124,7 +124,7 @@ class ParameterTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 /** @var ArrayTypeNode|ArrayShapeNode|IdentifierTypeNode|ThisTypeNode|GenericTypeNode|CallableTypeNode|ConstTypeNode $parameterTypeNode */
                 $parameterTypeNode = $parameterTypeNode;
                 $typeHints[] = \SlevomatCodingStandard\Helpers\AnnotationTypeHelper::getTypeHintFromOneType($parameterTypeNode);
-            } elseif ($parameterTypeNode instanceof \_PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $parameterTypeNode instanceof \_PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+            } elseif ($parameterTypeNode instanceof \_PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $parameterTypeNode instanceof \_PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
                 $traversableTypeHints = [];
                 foreach ($parameterTypeNode->types as $typeNode) {
                     if (!\SlevomatCodingStandard\Helpers\AnnotationTypeHelper::containsOneType($typeNode)) {
@@ -141,7 +141,7 @@ class ParameterTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                     if (!$isTraversable && \count($traversableTypeHints) > 0) {
                         continue 2;
                     }
-                    if (!$typeNode instanceof \_PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && !$typeNode instanceof \_PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode && $isTraversable) {
+                    if (!$typeNode instanceof \_PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && !$typeNode instanceof \_PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode && $isTraversable) {
                         $traversableTypeHints[] = $typeHint;
                     }
                     $typeHints[] = $typeHint;
@@ -171,7 +171,7 @@ class ParameterTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             if (!\SlevomatCodingStandard\Helpers\TypeHintHelper::isValidTypeHint($possibleParameterTypeHint, $this->enableObjectTypeHint)) {
                 continue;
             }
-            if ($originalParameterTypeNode instanceof \_PhpScoperb36402634947\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+            if ($originalParameterTypeNode instanceof \_PhpScoper6dbb854503f8\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
                 $nullableParameterTypeHint = \true;
             }
             $fix = $phpcsFile->addFixableError(\sprintf('%s %s() does not have native type hint for its parameter %s but it should be possible to add it based on @param annotation "%s".', \SlevomatCodingStandard\Helpers\FunctionHelper::getTypeLabel($phpcsFile, $functionPointer), \SlevomatCodingStandard\Helpers\FunctionHelper::getFullyQualifiedName($phpcsFile, $functionPointer), $parameterName, \SlevomatCodingStandard\Helpers\AnnotationTypeHelper::export($parameterTypeNode)), $functionPointer, self::CODE_MISSING_NATIVE_TYPE_HINT);

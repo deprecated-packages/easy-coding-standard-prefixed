@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoperb36402634947\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper6dbb854503f8\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoperb36402634947\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+use _PhpScoper6dbb854503f8\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
 interface TestInterface
 {
     /**
