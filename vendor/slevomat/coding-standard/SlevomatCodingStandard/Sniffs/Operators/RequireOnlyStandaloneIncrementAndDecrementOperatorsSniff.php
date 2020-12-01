@@ -9,15 +9,15 @@ use SlevomatCodingStandard\Helpers\IdentificatorHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_key_exists;
 use function in_array;
-use const _PhpScoper6dbb854503f8\T_CLOSE_CURLY_BRACKET;
-use const _PhpScoper6dbb854503f8\T_CLOSE_PARENTHESIS;
-use const _PhpScoper6dbb854503f8\T_COLON;
+use const _PhpScoperad68e34a80c5\T_CLOSE_CURLY_BRACKET;
+use const _PhpScoperad68e34a80c5\T_CLOSE_PARENTHESIS;
+use const _PhpScoperad68e34a80c5\T_COLON;
 use const T_DEC;
 use const T_FOR;
 use const T_INC;
-use const _PhpScoper6dbb854503f8\T_OPEN_CURLY_BRACKET;
+use const _PhpScoperad68e34a80c5\T_OPEN_CURLY_BRACKET;
 use const T_OPEN_TAG;
-use const _PhpScoper6dbb854503f8\T_SEMICOLON;
+use const _PhpScoperad68e34a80c5\T_SEMICOLON;
 use const T_WHILE;
 class RequireOnlyStandaloneIncrementAndDecrementOperatorsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

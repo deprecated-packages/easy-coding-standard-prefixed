@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper6dbb854503f8\PhpParser\Node\Expr\BinaryOp;
+namespace _PhpScoperad68e34a80c5\PhpParser\Node\Expr\BinaryOp;
 
-use _PhpScoper6dbb854503f8\PhpParser\Node\Expr\BinaryOp;
-class Spaceship extends \_PhpScoper6dbb854503f8\PhpParser\Node\Expr\BinaryOp
+use _PhpScoperad68e34a80c5\PhpParser\Node\Expr\BinaryOp;
+class Spaceship extends \_PhpScoperad68e34a80c5\PhpParser\Node\Expr\BinaryOp
 {
     public function getOperatorSigil() : string
     {

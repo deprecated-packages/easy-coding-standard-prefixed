@@ -12,7 +12,9 @@ final class ConstantNameFromValueResolver
     public function resolveFromValueAndClass($constantValue, string $class) : ?string
     {
         $reflectionClass = new \ReflectionClass($class);
-        foreach ($reflectionClass->getConstants() as $name => $value) {
+        /** @var array<string, mixed> $constants */
+        $constants = $reflectionClass->getConstants();
+        foreach ($constants as $name => $value) {
             if ($value === $constantValue) {
                 return $name;
             }

@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6dbb854503f8\Symfony\Component\Cache\Traits;
+namespace _PhpScoperad68e34a80c5\Symfony\Component\Cache\Traits;
 
-use _PhpScoper6dbb854503f8\Doctrine\DBAL\Connection;
-use _PhpScoper6dbb854503f8\Doctrine\DBAL\DBALException;
-use _PhpScoper6dbb854503f8\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use _PhpScoper6dbb854503f8\Doctrine\DBAL\DriverManager;
-use _PhpScoper6dbb854503f8\Doctrine\DBAL\Exception\TableNotFoundException;
-use _PhpScoper6dbb854503f8\Doctrine\DBAL\Schema\Schema;
-use _PhpScoper6dbb854503f8\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper6dbb854503f8\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoper6dbb854503f8\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperad68e34a80c5\Doctrine\DBAL\Connection;
+use _PhpScoperad68e34a80c5\Doctrine\DBAL\DBALException;
+use _PhpScoperad68e34a80c5\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
+use _PhpScoperad68e34a80c5\Doctrine\DBAL\DriverManager;
+use _PhpScoperad68e34a80c5\Doctrine\DBAL\Exception\TableNotFoundException;
+use _PhpScoperad68e34a80c5\Doctrine\DBAL\Schema\Schema;
+use _PhpScoperad68e34a80c5\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperad68e34a80c5\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScoperad68e34a80c5\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @internal
  */
@@ -38,22 +38,22 @@ trait PdoTrait
     private $password = '';
     private $connectionOptions = [];
     private $namespace;
-    private function init($connOrDsn, string $namespace, int $defaultLifetime, array $options, ?\_PhpScoper6dbb854503f8\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
+    private function init($connOrDsn, string $namespace, int $defaultLifetime, array $options, ?\_PhpScoperad68e34a80c5\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
     {
         if (isset($namespace[0]) && \preg_match('#[^-+.A-Za-z0-9]#', $namespace, $match)) {
-            throw new \_PhpScoper6dbb854503f8\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+.A-Za-z0-9] are allowed.', $match[0]));
+            throw new \_PhpScoperad68e34a80c5\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+.A-Za-z0-9] are allowed.', $match[0]));
         }
         if ($connOrDsn instanceof \PDO) {
             if (\PDO::ERRMODE_EXCEPTION !== $connOrDsn->getAttribute(\PDO::ATTR_ERRMODE)) {
-                throw new \_PhpScoper6dbb854503f8\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION))', __CLASS__));
+                throw new \_PhpScoperad68e34a80c5\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION))', __CLASS__));
             }
             $this->conn = $connOrDsn;
-        } elseif ($connOrDsn instanceof \_PhpScoper6dbb854503f8\Doctrine\DBAL\Connection) {
+        } elseif ($connOrDsn instanceof \_PhpScoperad68e34a80c5\Doctrine\DBAL\Connection) {
             $this->conn = $connOrDsn;
         } elseif (\is_string($connOrDsn)) {
             $this->dsn = $connOrDsn;
         } else {
-            throw new \_PhpScoper6dbb854503f8\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO or Doctrine\\DBAL\\Connection instance or DSN string as first argument, "%s" given.', __CLASS__, \is_object($connOrDsn) ? \get_class($connOrDsn) : \gettype($connOrDsn)));
+            throw new \_PhpScoperad68e34a80c5\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" requires PDO or Doctrine\\DBAL\\Connection instance or DSN string as first argument, "%s" given.', __CLASS__, \is_object($connOrDsn) ? \get_class($connOrDsn) : \gettype($connOrDsn)));
         }
         $this->table = isset($options['db_table']) ? $options['db_table'] : $this->table;
         $this->idCol = isset($options['db_id_col']) ? $options['db_id_col'] : $this->idCol;
@@ -64,7 +64,7 @@ trait PdoTrait
         $this->password = isset($options['db_password']) ? $options['db_password'] : $this->password;
         $this->connectionOptions = isset($options['db_connection_options']) ? $options['db_connection_options'] : $this->connectionOptions;
         $this->namespace = $namespace;
-        $this->marshaller = $marshaller ?? new \_PhpScoper6dbb854503f8\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \_PhpScoperad68e34a80c5\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         parent::__construct($namespace, $defaultLifetime);
     }
     /**
@@ -81,12 +81,12 @@ trait PdoTrait
     {
         // connect if we are not yet
         $conn = $this->getConnection();
-        if ($conn instanceof \_PhpScoper6dbb854503f8\Doctrine\DBAL\Connection) {
+        if ($conn instanceof \_PhpScoperad68e34a80c5\Doctrine\DBAL\Connection) {
             $types = ['mysql' => 'binary', 'sqlite' => 'text', 'pgsql' => 'string', 'oci' => 'string', 'sqlsrv' => 'string'];
             if (!isset($types[$this->driver])) {
                 throw new \DomainException(\sprintf('Creating the cache table is currently not implemented for PDO driver "%s".', $this->driver));
             }
-            $schema = new \_PhpScoper6dbb854503f8\Doctrine\DBAL\Schema\Schema();
+            $schema = new \_PhpScoperad68e34a80c5\Doctrine\DBAL\Schema\Schema();
             $table = $schema->createTable($this->table);
             $table->addColumn($this->idCol, $types[$this->driver], ['length' => 255]);
             $table->addColumn($this->dataCol, 'blob', ['length' => 16777215]);
@@ -135,7 +135,7 @@ trait PdoTrait
         }
         try {
             $delete = $this->getConnection()->prepare($deleteSql);
-        } catch (\_PhpScoper6dbb854503f8\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\_PhpScoperad68e34a80c5\Doctrine\DBAL\Exception\TableNotFoundException $e) {
             return \true;
         } catch (\PDOException $e) {
             return \true;
@@ -146,7 +146,7 @@ trait PdoTrait
         }
         try {
             return $delete->execute();
-        } catch (\_PhpScoper6dbb854503f8\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\_PhpScoperad68e34a80c5\Doctrine\DBAL\Exception\TableNotFoundException $e) {
             return \true;
         } catch (\PDOException $e) {
             return \true;
@@ -214,7 +214,7 @@ trait PdoTrait
         }
         try {
             $conn->exec($sql);
-        } catch (\_PhpScoper6dbb854503f8\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\_PhpScoperad68e34a80c5\Doctrine\DBAL\Exception\TableNotFoundException $e) {
         } catch (\PDOException $e) {
         }
         return \true;
@@ -229,7 +229,7 @@ trait PdoTrait
         try {
             $stmt = $this->getConnection()->prepare($sql);
             $stmt->execute(\array_values($ids));
-        } catch (\_PhpScoper6dbb854503f8\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\_PhpScoperad68e34a80c5\Doctrine\DBAL\Exception\TableNotFoundException $e) {
         } catch (\PDOException $e) {
         }
         return \true;
@@ -273,7 +273,7 @@ trait PdoTrait
         $lifetime = $lifetime ?: null;
         try {
             $stmt = $conn->prepare($sql);
-        } catch (\_PhpScoper6dbb854503f8\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+        } catch (\_PhpScoperad68e34a80c5\Doctrine\DBAL\Exception\TableNotFoundException $e) {
             if (!$conn->isTransactionActive() || \in_array($this->driver, ['pgsql', 'sqlite', 'sqlsrv'], \true)) {
                 $this->createTable();
             }
@@ -309,7 +309,7 @@ trait PdoTrait
         foreach ($values as $id => $data) {
             try {
                 $stmt->execute();
-            } catch (\_PhpScoper6dbb854503f8\Doctrine\DBAL\Exception\TableNotFoundException $e) {
+            } catch (\_PhpScoperad68e34a80c5\Doctrine\DBAL\Exception\TableNotFoundException $e) {
                 if (!$conn->isTransactionActive() || \in_array($this->driver, ['pgsql', 'sqlite', 'sqlsrv'], \true)) {
                     $this->createTable();
                 }
@@ -323,7 +323,7 @@ trait PdoTrait
             if (null === $driver && !$stmt->rowCount()) {
                 try {
                     $insertStmt->execute();
-                } catch (\_PhpScoper6dbb854503f8\Doctrine\DBAL\DBALException $e) {
+                } catch (\_PhpScoperad68e34a80c5\Doctrine\DBAL\DBALException $e) {
                 } catch (\PDOException $e) {
                     // A concurrent write won, let it be
                 }
@@ -338,10 +338,10 @@ trait PdoTrait
     {
         if (null === $this->conn) {
             if (\strpos($this->dsn, '://')) {
-                if (!\class_exists(\_PhpScoper6dbb854503f8\Doctrine\DBAL\DriverManager::class)) {
-                    throw new \_PhpScoper6dbb854503f8\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Failed to parse the DSN "%s". Try running "composer require doctrine/dbal".', $this->dsn));
+                if (!\class_exists(\_PhpScoperad68e34a80c5\Doctrine\DBAL\DriverManager::class)) {
+                    throw new \_PhpScoperad68e34a80c5\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Failed to parse the DSN "%s". Try running "composer require doctrine/dbal".', $this->dsn));
                 }
-                $this->conn = \_PhpScoper6dbb854503f8\Doctrine\DBAL\DriverManager::getConnection(['url' => $this->dsn]);
+                $this->conn = \_PhpScoperad68e34a80c5\Doctrine\DBAL\DriverManager::getConnection(['url' => $this->dsn]);
             } else {
                 $this->conn = new \PDO($this->dsn, $this->username, $this->password, $this->connectionOptions);
                 $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -381,7 +381,7 @@ trait PdoTrait
             $conn = $this->conn instanceof \PDO ? $this->conn : $this->conn->getWrappedConnection();
             if ($conn instanceof \PDO) {
                 $this->serverVersion = $conn->getAttribute(\PDO::ATTR_SERVER_VERSION);
-            } elseif ($conn instanceof \_PhpScoper6dbb854503f8\Doctrine\DBAL\Driver\ServerInfoAwareConnection) {
+            } elseif ($conn instanceof \_PhpScoperad68e34a80c5\Doctrine\DBAL\Driver\ServerInfoAwareConnection) {
                 $this->serverVersion = $conn->getServerVersion();
             } else {
                 $this->serverVersion = '0';
