@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2637e9a72c68\Symfony\Component\Config;
+namespace _PhpScoperb36402634947\Symfony\Component\Config;
 
-use _PhpScoper2637e9a72c68\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use _PhpScoperb36402634947\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */

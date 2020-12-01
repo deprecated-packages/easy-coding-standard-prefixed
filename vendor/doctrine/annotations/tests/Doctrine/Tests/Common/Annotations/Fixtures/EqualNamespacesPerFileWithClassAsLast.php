@@ -1,12 +1,12 @@
 <?php
 
-namespace _PhpScoper2637e9a72c68\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoperb36402634947\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper2637e9a72c68\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
-namespace _PhpScoper2637e9a72c68\Doctrine\Tests\Common\Annotations\Fixtures;
+use _PhpScoperb36402634947\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+namespace _PhpScoperb36402634947\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper2637e9a72c68\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
-use _PhpScoper2637e9a72c68\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
+use _PhpScoperb36402634947\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoperb36402634947\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
 class EqualNamespacesPerFileWithClassAsLast
 {
 }

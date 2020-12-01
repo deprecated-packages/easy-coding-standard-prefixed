@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2637e9a72c68\Symfony\Component\Process\Tests;
+namespace _PhpScoperb36402634947\Symfony\Component\Process\Tests;
 
-use _PhpScoper2637e9a72c68\PHPUnit\Framework\TestCase;
-use _PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder;
-class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestCase
+use _PhpScoperb36402634947\PHPUnit\Framework\TestCase;
+use _PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder;
+class ProcessBuilderTest extends \_PhpScoperb36402634947\PHPUnit\Framework\TestCase
 {
     /**
      * @group legacy
      */
     public function testInheritEnvironmentVars()
     {
-        $proc = \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder::create()->add('foo')->getProcess();
+        $proc = \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder::create()->add('foo')->getProcess();
         $this->assertTrue($proc->areEnvironmentVariablesInherited());
-        $proc = \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder::create()->add('foo')->inheritEnvironmentVariables(\false)->getProcess();
+        $proc = \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder::create()->add('foo')->inheritEnvironmentVariables(\false)->getProcess();
         $this->assertFalse($proc->areEnvironmentVariablesInherited());
     }
     public function testAddEnvironmentVariables()
     {
-        $pb = new \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder();
+        $pb = new \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder();
         $env = array('foo' => 'bar', 'foo2' => 'bar2');
         $proc = $pb->add('command')->setEnv('foo', 'bar2')->addEnvironmentVariables($env)->getProcess();
         $this->assertSame($env, $proc->getEnv());
@@ -36,12 +36,12 @@ class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestC
      */
     public function testNegativeTimeoutFromSetter()
     {
-        $pb = new \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder();
+        $pb = new \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder();
         $pb->setTimeout(-1);
     }
     public function testNullTimeout()
     {
-        $pb = new \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder();
+        $pb = new \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder();
         $pb->setTimeout(10);
         $pb->setTimeout(null);
         $r = new \ReflectionObject($pb);
@@ -51,14 +51,14 @@ class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestC
     }
     public function testShouldSetArguments()
     {
-        $pb = new \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder(array('initial'));
+        $pb = new \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder(array('initial'));
         $pb->setArguments(array('second'));
         $proc = $pb->getProcess();
         $this->assertContains('second', $proc->getCommandLine());
     }
     public function testPrefixIsPrependedToAllGeneratedProcess()
     {
-        $pb = new \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder();
+        $pb = new \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder();
         $pb->setPrefix('/usr/bin/php');
         $proc = $pb->setArguments(array('-v'))->getProcess();
         if ('\\' === \DIRECTORY_SEPARATOR) {
@@ -75,7 +75,7 @@ class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestC
     }
     public function testArrayPrefixesArePrependedToAllGeneratedProcess()
     {
-        $pb = new \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder();
+        $pb = new \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder();
         $pb->setPrefix(array('/usr/bin/php', 'composer.phar'));
         $proc = $pb->setArguments(array('-v'))->getProcess();
         if ('\\' === \DIRECTORY_SEPARATOR) {
@@ -92,7 +92,7 @@ class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestC
     }
     public function testShouldEscapeArguments()
     {
-        $pb = new \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder(array('%path%', 'foo " bar', '%baz%baz'));
+        $pb = new \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder(array('%path%', 'foo " bar', '%baz%baz'));
         $proc = $pb->getProcess();
         if ('\\' === \DIRECTORY_SEPARATOR) {
             $this->assertSame('""^%"path"^%"" "foo "" bar" ""^%"baz"^%"baz"', $proc->getCommandLine());
@@ -102,7 +102,7 @@ class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestC
     }
     public function testShouldEscapeArgumentsAndPrefix()
     {
-        $pb = new \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder(array('arg'));
+        $pb = new \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder(array('arg'));
         $pb->setPrefix('%prefix%');
         $proc = $pb->getProcess();
         if ('\\' === \DIRECTORY_SEPARATOR) {
@@ -116,11 +116,11 @@ class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestC
      */
     public function testShouldThrowALogicExceptionIfNoPrefixAndNoArgument()
     {
-        \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder::create()->getProcess();
+        \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder::create()->getProcess();
     }
     public function testShouldNotThrowALogicExceptionIfNoArgument()
     {
-        $process = \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder::create()->setPrefix('/usr/bin/php')->getProcess();
+        $process = \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder::create()->setPrefix('/usr/bin/php')->getProcess();
         if ('\\' === \DIRECTORY_SEPARATOR) {
             $this->assertEquals('"/usr/bin/php"', $process->getCommandLine());
         } else {
@@ -129,7 +129,7 @@ class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestC
     }
     public function testShouldNotThrowALogicExceptionIfNoPrefix()
     {
-        $process = \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder::create(array('/usr/bin/php'))->getProcess();
+        $process = \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder::create(array('/usr/bin/php'))->getProcess();
         if ('\\' === \DIRECTORY_SEPARATOR) {
             $this->assertEquals('"/usr/bin/php"', $process->getCommandLine());
         } else {
@@ -138,12 +138,12 @@ class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestC
     }
     public function testShouldReturnProcessWithDisabledOutput()
     {
-        $process = \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder::create(array('/usr/bin/php'))->disableOutput()->getProcess();
+        $process = \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder::create(array('/usr/bin/php'))->disableOutput()->getProcess();
         $this->assertTrue($process->isOutputDisabled());
     }
     public function testShouldReturnProcessWithEnabledOutput()
     {
-        $process = \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder::create(array('/usr/bin/php'))->disableOutput()->enableOutput()->getProcess();
+        $process = \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder::create(array('/usr/bin/php'))->disableOutput()->enableOutput()->getProcess();
         $this->assertFalse($process->isOutputDisabled());
     }
     /**
@@ -152,7 +152,7 @@ class ProcessBuilderTest extends \_PhpScoper2637e9a72c68\PHPUnit\Framework\TestC
      */
     public function testInvalidInput()
     {
-        $builder = \_PhpScoper2637e9a72c68\Symfony\Component\Process\ProcessBuilder::create();
+        $builder = \_PhpScoperb36402634947\Symfony\Component\Process\ProcessBuilder::create();
         $builder->setInput(array());
     }
 }
