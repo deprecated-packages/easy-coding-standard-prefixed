@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperad68e34a80c5\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoper96382aaac118\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use _PhpScoperad68e34a80c5\PHPStan\PhpDocParser\Ast\Node;
-interface PhpDocChildNode extends \_PhpScoperad68e34a80c5\PHPStan\PhpDocParser\Ast\Node
+use _PhpScoper96382aaac118\PHPStan\PhpDocParser\Ast\Node;
+interface PhpDocChildNode extends \_PhpScoper96382aaac118\PHPStan\PhpDocParser\Ast\Node
 {
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperad68e34a80c5\Doctrine\Tests\Common\Annotations\Fixtures\Annotation;
+namespace _PhpScoper96382aaac118\Doctrine\Tests\Common\Annotations\Fixtures\Annotation;
 
 /** @Annotation */
 class AnnotWithDefaultValue

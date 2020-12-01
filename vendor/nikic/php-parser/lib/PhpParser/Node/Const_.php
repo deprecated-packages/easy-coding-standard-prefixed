@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperad68e34a80c5\PhpParser\Node;
+namespace _PhpScoper96382aaac118\PhpParser\Node;
 
-use _PhpScoperad68e34a80c5\PhpParser\NodeAbstract;
+use _PhpScoper96382aaac118\PhpParser\NodeAbstract;
 /**
  * @property Name $namespacedName Namespaced name (for global constants, if using NameResolver)
  */
-class Const_ extends \_PhpScoperad68e34a80c5\PhpParser\NodeAbstract
+class Const_ extends \_PhpScoper96382aaac118\PhpParser\NodeAbstract
 {
     /** @var Identifier Name */
     public $name;
@@ -20,10 +20,10 @@ class Const_ extends \_PhpScoperad68e34a80c5\PhpParser\NodeAbstract
      * @param Expr              $value      Value
      * @param array             $attributes Additional attributes
      */
-    public function __construct($name, \_PhpScoperad68e34a80c5\PhpParser\Node\Expr $value, array $attributes = [])
+    public function __construct($name, \_PhpScoper96382aaac118\PhpParser\Node\Expr $value, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \_PhpScoperad68e34a80c5\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScoper96382aaac118\PhpParser\Node\Identifier($name) : $name;
         $this->value = $value;
     }
     public function getSubNodeNames() : array
