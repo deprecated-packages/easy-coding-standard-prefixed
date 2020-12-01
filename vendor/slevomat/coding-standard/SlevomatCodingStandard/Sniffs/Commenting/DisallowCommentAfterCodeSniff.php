@@ -13,12 +13,12 @@ use function array_merge;
 use function in_array;
 use function strlen;
 use function substr;
-use const _PhpScoper4972b76c81a2\T_CLOSE_CURLY_BRACKET;
-use const _PhpScoper4972b76c81a2\T_CLOSURE;
-use const _PhpScoper4972b76c81a2\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoper9613f3fac51d\T_CLOSE_CURLY_BRACKET;
+use const _PhpScoper9613f3fac51d\T_CLOSURE;
+use const _PhpScoper9613f3fac51d\T_DOC_COMMENT_OPEN_TAG;
 use const T_ELSE;
 use const T_ELSEIF;
-use const _PhpScoper4972b76c81a2\T_OPEN_CURLY_BRACKET;
+use const _PhpScoper9613f3fac51d\T_OPEN_CURLY_BRACKET;
 use const T_WHITESPACE;
 class DisallowCommentAfterCodeSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

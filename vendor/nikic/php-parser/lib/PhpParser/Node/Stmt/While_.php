@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4972b76c81a2\PhpParser\Node\Stmt;
+namespace _PhpScoper9613f3fac51d\PhpParser\Node\Stmt;
 
-use _PhpScoper4972b76c81a2\PhpParser\Node;
-class While_ extends \_PhpScoper4972b76c81a2\PhpParser\Node\Stmt
+use _PhpScoper9613f3fac51d\PhpParser\Node;
+class While_ extends \_PhpScoper9613f3fac51d\PhpParser\Node\Stmt
 {
     /** @var Node\Expr Condition */
     public $cond;
@@ -17,7 +17,7 @@ class While_ extends \_PhpScoper4972b76c81a2\PhpParser\Node\Stmt
      * @param Node\Stmt[] $stmts      Statements
      * @param array       $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper4972b76c81a2\PhpParser\Node\Expr $cond, array $stmts = [], array $attributes = [])
+    public function __construct(\_PhpScoper9613f3fac51d\PhpParser\Node\Expr $cond, array $stmts = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;

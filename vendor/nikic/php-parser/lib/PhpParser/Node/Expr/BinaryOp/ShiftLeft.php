@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4972b76c81a2\PhpParser\Node\Expr\BinaryOp;
+namespace _PhpScoper9613f3fac51d\PhpParser\Node\Expr\BinaryOp;
 
-use _PhpScoper4972b76c81a2\PhpParser\Node\Expr\BinaryOp;
-class ShiftLeft extends \_PhpScoper4972b76c81a2\PhpParser\Node\Expr\BinaryOp
+use _PhpScoper9613f3fac51d\PhpParser\Node\Expr\BinaryOp;
+class ShiftLeft extends \_PhpScoper9613f3fac51d\PhpParser\Node\Expr\BinaryOp
 {
     public function getOperatorSigil() : string
     {
