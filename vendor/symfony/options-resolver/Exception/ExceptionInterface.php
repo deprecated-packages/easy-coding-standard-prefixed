@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2d2a405cc0f8\Symfony\Component\OptionsResolver\Exception;
+namespace _PhpScoperfaaf57618f34\Symfony\Component\OptionsResolver\Exception;
 
 /**
  * Marker interface for all exceptions thrown by the OptionsResolver component.

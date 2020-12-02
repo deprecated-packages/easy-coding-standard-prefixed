@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\FileSystem;
 
-use _PhpScoper2d2a405cc0f8\Nette\Utils\Json;
+use _PhpScoperfaaf57618f34\Nette\Utils\Json;
 use Symplify\ComposerJsonManipulator\Json\JsonCleaner;
 use Symplify\ComposerJsonManipulator\Json\JsonInliner;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
@@ -38,7 +38,7 @@ final class JsonFileManager
      */
     public function loadFromFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : array
     {
-        return \_PhpScoper2d2a405cc0f8\Nette\Utils\Json::decode($smartFileInfo->getContents(), \_PhpScoper2d2a405cc0f8\Nette\Utils\Json::FORCE_ARRAY);
+        return \_PhpScoperfaaf57618f34\Nette\Utils\Json::decode($smartFileInfo->getContents(), \_PhpScoperfaaf57618f34\Nette\Utils\Json::FORCE_ARRAY);
     }
     /**
      * @return mixed[]
@@ -46,7 +46,7 @@ final class JsonFileManager
     public function loadFromFilePath(string $filePath) : array
     {
         $fileContent = $this->smartFileSystem->readFile($filePath);
-        return \_PhpScoper2d2a405cc0f8\Nette\Utils\Json::decode($fileContent, \_PhpScoper2d2a405cc0f8\Nette\Utils\Json::FORCE_ARRAY);
+        return \_PhpScoperfaaf57618f34\Nette\Utils\Json::decode($fileContent, \_PhpScoperfaaf57618f34\Nette\Utils\Json::FORCE_ARRAY);
     }
     /**
      * @param mixed[] $json
@@ -70,7 +70,7 @@ final class JsonFileManager
     {
         // Empty arrays may lead to bad encoding since we can't be sure whether they need to be arrays or objects.
         $json = $this->jsonCleaner->removeEmptyKeysFromJsonArray($json);
-        $jsonContent = \_PhpScoper2d2a405cc0f8\Nette\Utils\Json::encode($json, \_PhpScoper2d2a405cc0f8\Nette\Utils\Json::PRETTY) . \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar();
+        $jsonContent = \_PhpScoperfaaf57618f34\Nette\Utils\Json::encode($json, \_PhpScoperfaaf57618f34\Nette\Utils\Json::PRETTY) . \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar();
         return $this->jsonInliner->inlineSections($jsonContent);
     }
 }
