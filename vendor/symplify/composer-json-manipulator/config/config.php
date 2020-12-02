@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper992f4af8b9e0;
+namespace _PhpScoperf62d28230928;
 
-use _PhpScoper992f4af8b9e0\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper992f4af8b9e0\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoperf62d28230928\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\ComposerJsonManipulator\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 use Symplify\SmartFileSystem\SmartFileSystem;
-use function _PhpScoper992f4af8b9e0\Symfony\Component\DependencyInjection\Loader\Configurator\service;
-return static function (\_PhpScoper992f4af8b9e0\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use function _PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+return static function (\_PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $parameters = $containerConfigurator->parameters();
     $parameters->set(\Symplify\ComposerJsonManipulator\ValueObject\Option::INLINE_SECTIONS, ['keywords']);
     $services = $containerConfigurator->services();
@@ -18,5 +18,5 @@ return static function (\_PhpScoper992f4af8b9e0\Symfony\Component\DependencyInje
     $services->load('Symplify\\ComposerJsonManipulator\\', __DIR__ . '/../src');
     $services->set(\Symplify\SmartFileSystem\SmartFileSystem::class);
     $services->set(\Symplify\PackageBuilder\Reflection\PrivatesCaller::class);
-    $services->set(\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\_PhpScoper992f4af8b9e0\Symfony\Component\DependencyInjection\Loader\Configurator\service(\_PhpScoper992f4af8b9e0\Symfony\Component\DependencyInjection\ContainerInterface::class)]);
+    $services->set(\Symplify\PackageBuilder\Parameter\ParameterProvider::class)->args([\_PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\service(\_PhpScoperf62d28230928\Symfony\Component\DependencyInjection\ContainerInterface::class)]);
 };

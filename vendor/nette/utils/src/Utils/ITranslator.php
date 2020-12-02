@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper992f4af8b9e0\Nette\Localization;
+namespace _PhpScoperf62d28230928\Nette\Localization;
 
 /**
  * Translator adapter.

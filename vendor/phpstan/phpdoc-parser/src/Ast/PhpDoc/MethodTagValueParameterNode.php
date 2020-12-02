@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper992f4af8b9e0\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoperf62d28230928\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use _PhpScoper992f4af8b9e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
-use _PhpScoper992f4af8b9e0\PHPStan\PhpDocParser\Ast\Node;
-use _PhpScoper992f4af8b9e0\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-class MethodTagValueParameterNode implements \_PhpScoper992f4af8b9e0\PHPStan\PhpDocParser\Ast\Node
+use _PhpScoperf62d28230928\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
+use _PhpScoperf62d28230928\PHPStan\PhpDocParser\Ast\Node;
+use _PhpScoperf62d28230928\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+class MethodTagValueParameterNode implements \_PhpScoperf62d28230928\PHPStan\PhpDocParser\Ast\Node
 {
     /** @var TypeNode|null */
     public $type;
@@ -18,7 +18,7 @@ class MethodTagValueParameterNode implements \_PhpScoper992f4af8b9e0\PHPStan\Php
     public $parameterName;
     /** @var ConstExprNode|null */
     public $defaultValue;
-    public function __construct(?\_PhpScoper992f4af8b9e0\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, ?\_PhpScoper992f4af8b9e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $defaultValue)
+    public function __construct(?\_PhpScoperf62d28230928\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, ?\_PhpScoperf62d28230928\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $defaultValue)
     {
         $this->type = $type;
         $this->isReference = $isReference;

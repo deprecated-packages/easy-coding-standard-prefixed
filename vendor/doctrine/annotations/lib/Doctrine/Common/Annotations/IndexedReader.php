@@ -17,14 +17,14 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScoper992f4af8b9e0\Doctrine\Common\Annotations;
+namespace _PhpScoperf62d28230928\Doctrine\Common\Annotations;
 
 /**
  * Allows the reader to be used in-place of Doctrine's reader.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class IndexedReader implements \_PhpScoper992f4af8b9e0\Doctrine\Common\Annotations\Reader
+class IndexedReader implements \_PhpScoperf62d28230928\Doctrine\Common\Annotations\Reader
 {
     /**
      * @var Reader
@@ -35,7 +35,7 @@ class IndexedReader implements \_PhpScoper992f4af8b9e0\Doctrine\Common\Annotatio
      *
      * @param Reader $reader
      */
-    public function __construct(\_PhpScoper992f4af8b9e0\Doctrine\Common\Annotations\Reader $reader)
+    public function __construct(\_PhpScoperf62d28230928\Doctrine\Common\Annotations\Reader $reader)
     {
         $this->delegate = $reader;
     }

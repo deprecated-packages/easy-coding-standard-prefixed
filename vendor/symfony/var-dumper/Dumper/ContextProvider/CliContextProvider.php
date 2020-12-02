@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper992f4af8b9e0\Symfony\Component\VarDumper\Dumper\ContextProvider;
+namespace _PhpScoperf62d28230928\Symfony\Component\VarDumper\Dumper\ContextProvider;
 
 /**
  * Tries to provide context on CLI.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-final class CliContextProvider implements \_PhpScoper992f4af8b9e0\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
+final class CliContextProvider implements \_PhpScoperf62d28230928\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
 {
     public function getContext() : ?array
     {
