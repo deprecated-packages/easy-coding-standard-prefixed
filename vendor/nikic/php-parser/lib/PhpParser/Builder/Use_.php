@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperd74b3ed28382\PhpParser\Builder;
+namespace _PhpScoper2d2a405cc0f8\PhpParser\Builder;
 
-use _PhpScoperd74b3ed28382\PhpParser\Builder;
-use _PhpScoperd74b3ed28382\PhpParser\BuilderHelpers;
-use _PhpScoperd74b3ed28382\PhpParser\Node;
-use _PhpScoperd74b3ed28382\PhpParser\Node\Stmt;
-class Use_ implements \_PhpScoperd74b3ed28382\PhpParser\Builder
+use _PhpScoper2d2a405cc0f8\PhpParser\Builder;
+use _PhpScoper2d2a405cc0f8\PhpParser\BuilderHelpers;
+use _PhpScoper2d2a405cc0f8\PhpParser\Node;
+use _PhpScoper2d2a405cc0f8\PhpParser\Node\Stmt;
+class Use_ implements \_PhpScoper2d2a405cc0f8\PhpParser\Builder
 {
     protected $name;
     protected $type;
@@ -20,7 +20,7 @@ class Use_ implements \_PhpScoperd74b3ed28382\PhpParser\Builder
      */
     public function __construct($name, int $type)
     {
-        $this->name = \_PhpScoperd74b3ed28382\PhpParser\BuilderHelpers::normalizeName($name);
+        $this->name = \_PhpScoper2d2a405cc0f8\PhpParser\BuilderHelpers::normalizeName($name);
         $this->type = $type;
     }
     /**
@@ -40,8 +40,8 @@ class Use_ implements \_PhpScoperd74b3ed28382\PhpParser\Builder
      *
      * @return Node The built node
      */
-    public function getNode() : \_PhpScoperd74b3ed28382\PhpParser\Node
+    public function getNode() : \_PhpScoper2d2a405cc0f8\PhpParser\Node
     {
-        return new \_PhpScoperd74b3ed28382\PhpParser\Node\Stmt\Use_([new \_PhpScoperd74b3ed28382\PhpParser\Node\Stmt\UseUse($this->name, $this->alias)], $this->type);
+        return new \_PhpScoper2d2a405cc0f8\PhpParser\Node\Stmt\Use_([new \_PhpScoper2d2a405cc0f8\PhpParser\Node\Stmt\UseUse($this->name, $this->alias)], $this->type);
     }
 }

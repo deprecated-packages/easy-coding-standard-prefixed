@@ -13,7 +13,7 @@ use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 /**
- * @requires PHP >= 7.3
+ * @requires PHP 7.3
  * For testing approach @see https://github.com/symplify/easy-testing
  */
 final class Php73Test extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase

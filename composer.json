@@ -3,7 +3,7 @@
     "description": "Prefixed scoped version of symplify/easy-coding-standard package",
     "license": "MIT",
     "require": {
-        "php": ">=7.2"
+        "php": ">=7.3"
     },
     "bin": [
         "bin/ecs"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dce050edf39747e25c20802c4c75f7ab",
+    "content-hash": "b0c3b94b4529b8dac1446d0302908e71",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -3202,11 +3202,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/autowire-array-parameter",
-                "reference": "f23d16261bf25200742f0ec50123719ecc4ea917"
+                "reference": "b8f4146e6cd2bae562d302f33448c7e62a1a6aba"
             },
             "require": {
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/dependency-injection": "^5.1",
                 "symplify/package-builder": "dev-master"
             },
@@ -3244,13 +3244,13 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "2547074b667748b9462e217f71780a98e40b7b7e"
+                "reference": "00478627e16683a312b82e5e038d3d4c1a134d8d"
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "nette/finder": "^2.5",
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "slevomat/coding-standard": "^6.4",
                 "squizlabs/php_codesniffer": "^3.5",
                 "symplify/autowire-array-parameter": "dev-master",
@@ -3300,11 +3300,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/composer-json-manipulator",
-                "reference": "9920d1017e64f9deac0c9b5c7ae4bedb1968e651"
+                "reference": "a37ec6318cbf4e7bf07f53eadf9e61e658d6955b"
             },
             "require": {
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/config": "^4.4|^5.1",
                 "symfony/dependency-injection": "^5.1",
                 "symfony/filesystem": "^4.4|^5.1",
@@ -3346,11 +3346,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/console-color-diff",
-                "reference": "f7e3b2e202de08deaac7aad45947cfef0f873449"
+                "reference": "594f22577ca1c5cc23cce21dffcef47c16e92a51"
             },
             "require": {
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "sebastian/diff": "^3.0|^4.0",
                 "symfony/console": "^4.4|^5.1",
                 "symfony/dependency-injection": "^5.1",
@@ -3391,11 +3391,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-testing",
-                "reference": "170ee891547dde4d63bc29b00afa22884c6df25c"
+                "reference": "bb74f60b300396cba2a527a3190b7ab28bca0328"
             },
             "require": {
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/finder": "^4.4|^5.1",
                 "symplify/package-builder": "dev-master",
                 "symplify/smart-file-system": "dev-master",
@@ -3435,11 +3435,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/markdown-diff",
-                "reference": "92d484c06a76031d7dc0e9e3998bdeecddda21a4"
+                "reference": "e240f7e752c65f922d33dea59b0f46a06b57cb30"
             },
             "require": {
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "sebastian/diff": "^3.0|^4.0",
                 "symfony/dependency-injection": "^5.1",
                 "symfony/http-kernel": "^4.4|^5.1",
@@ -3479,13 +3479,13 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/package-builder",
-                "reference": "e4094c248504b34b0cfc624e320c3acfc0ceafbb"
+                "reference": "3a2a7de3bd1cac885df903d7228eff94968c8da1"
             },
             "require": {
                 "nette/finder": "^2.5",
                 "nette/neon": "^3.2",
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/config": "^4.4|^5.1",
                 "symfony/console": "^4.4|^5.1",
                 "symfony/dependency-injection": "^5.1",
@@ -3529,12 +3529,12 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/php-config-printer",
-                "reference": "79d557daabb9876358d08f4df306a621f6a0322b"
+                "reference": "2809da933aa6c43af8b2cd4e86c558f11b02b517"
             },
             "require": {
                 "nette/utils": "^3.0",
                 "nikic/php-parser": "^4.10.2",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/http-kernel": "^4.4|^5.1",
                 "symplify/symplify-kernel": "dev-master"
             },
@@ -3577,12 +3577,12 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "9725bef13482a0349ca292a807ce4add3e6b479b"
+                "reference": "bb4ae2b5461d610162bb3b426c314915951caf89"
             },
             "require": {
                 "nette/neon": "^3.2",
                 "nette/robot-loader": "^3.2",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/console": "^4.4|^5.1",
                 "symfony/dependency-injection": "^5.1",
                 "symplify/markdown-diff": "dev-master",
@@ -3632,11 +3632,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/set-config-resolver",
-                "reference": "57b22ea7ed019d5f682d44a23cf401ed9ed04f7f"
+                "reference": "c201f96d48130ab31d2cca06a8e937c4189d6fbd"
             },
             "require": {
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/config": "^4.4|^5.1",
                 "symfony/console": "^4.4|^5.1",
                 "symfony/dependency-injection": "^5.1",
@@ -3680,11 +3680,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/skipper",
-                "reference": "565fd1381dc133bdc4fcc34c37386d80f2dfe185"
+                "reference": "71f5728353c1fbf1a3a7f28efdcd88e978bc9a7a"
             },
             "require": {
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/config": "^4.4|^5.1",
                 "symfony/dependency-injection": "^5.1",
                 "symfony/filesystem": "^4.4|^5.1",
@@ -3727,11 +3727,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/smart-file-system",
-                "reference": "abc529006989de756721cb1ec21a3791b7f1bd68"
+                "reference": "adf3cc1da5c7073366ac2dd2f97abd342a4d5354"
             },
             "require": {
                 "nette/utils": "^3.0",
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/filesystem": "^4.4|^5.1",
                 "symfony/finder": "^4.4|^5.1"
             },
@@ -3770,10 +3770,10 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/symplify-kernel",
-                "reference": "1bc647c23f9f6f702ae3c9eedb90bf2a4c930a6e"
+                "reference": "e7d4923286ab62f6980e61ba4ce5f2a6674df771"
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "symfony/console": "^4.4|^5.1",
                 "symfony/dependency-injection": "^5.1",
                 "symfony/http-kernel": "^4.4|^5.1",
@@ -5179,10 +5179,10 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-coding-standard-tester",
-                "reference": "224b26922a630fe70b67ae76803c5f847589ceac"
+                "reference": "535f26b970c80f1d31398b4788ae65631c31dfa3"
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "phpunit/phpunit": "^8.5|^9.4",
                 "symplify/easy-coding-standard": "dev-master",
                 "symplify/easy-testing": "dev-master",
@@ -5278,7 +5278,7 @@
     "prefer-stable": true,
     "prefer-lowest": true,
     "platform": {
-        "php": ">=7.2"
+        "php": ">=7.3"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

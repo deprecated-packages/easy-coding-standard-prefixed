@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd74b3ed28382\Symfony\Component\Console\Input;
+namespace _PhpScoper2d2a405cc0f8\Symfony\Component\Console\Input;
 
 /**
  * InputAwareInterface should be implemented by classes that depends on the
@@ -21,5 +21,5 @@ interface InputAwareInterface
     /**
      * Sets the Console Input.
      */
-    public function setInput(\_PhpScoperd74b3ed28382\Symfony\Component\Console\Input\InputInterface $input);
+    public function setInput(\_PhpScoper2d2a405cc0f8\Symfony\Component\Console\Input\InputInterface $input);
 }
