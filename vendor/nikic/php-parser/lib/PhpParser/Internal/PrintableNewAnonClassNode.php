@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc95ae4bf942a\PhpParser\Internal;
+namespace _PhpScopera23ebff5477f\PhpParser\Internal;
 
-use _PhpScoperc95ae4bf942a\PhpParser\Node;
-use _PhpScoperc95ae4bf942a\PhpParser\Node\Expr;
+use _PhpScopera23ebff5477f\PhpParser\Node;
+use _PhpScopera23ebff5477f\PhpParser\Node\Expr;
 /**
  * This node is used internally by the format-preserving pretty printer to print anonymous classes.
  *
@@ -15,7 +15,7 @@ use _PhpScoperc95ae4bf942a\PhpParser\Node\Expr;
  *
  * @internal
  */
-class PrintableNewAnonClassNode extends \_PhpScoperc95ae4bf942a\PhpParser\Node\Expr
+class PrintableNewAnonClassNode extends \_PhpScopera23ebff5477f\PhpParser\Node\Expr
 {
     /** @var Node\AttributeGroup[] PHP attribute groups */
     public $attrGroups;
@@ -27,7 +27,7 @@ class PrintableNewAnonClassNode extends \_PhpScoperc95ae4bf942a\PhpParser\Node\E
     public $implements;
     /** @var Node\Stmt[] Statements */
     public $stmts;
-    public function __construct(array $attrGroups, array $args, \_PhpScoperc95ae4bf942a\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
+    public function __construct(array $attrGroups, array $args, \_PhpScopera23ebff5477f\PhpParser\Node\Name $extends = null, array $implements, array $stmts, array $attributes)
     {
         parent::__construct($attributes);
         $this->attrGroups = $attrGroups;
@@ -36,10 +36,10 @@ class PrintableNewAnonClassNode extends \_PhpScoperc95ae4bf942a\PhpParser\Node\E
         $this->implements = $implements;
         $this->stmts = $stmts;
     }
-    public static function fromNewNode(\_PhpScoperc95ae4bf942a\PhpParser\Node\Expr\New_ $newNode)
+    public static function fromNewNode(\_PhpScopera23ebff5477f\PhpParser\Node\Expr\New_ $newNode)
     {
         $class = $newNode->class;
-        \assert($class instanceof \_PhpScoperc95ae4bf942a\PhpParser\Node\Stmt\Class_);
+        \assert($class instanceof \_PhpScopera23ebff5477f\PhpParser\Node\Stmt\Class_);
         // We don't assert that $class->name is null here, to allow consumers to assign unique names
         // to anonymous classes for their own purposes. We simplify ignore the name here.
         return new self($class->attrGroups, $newNode->args, $class->extends, $class->implements, $class->stmts, $newNode->getAttributes());

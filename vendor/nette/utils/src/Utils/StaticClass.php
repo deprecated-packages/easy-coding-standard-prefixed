@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperc95ae4bf942a\Nette;
+namespace _PhpScopera23ebff5477f\Nette;
 
 /**
  * Static class.
@@ -25,6 +25,6 @@ trait StaticClass
      */
     public static function __callStatic(string $name, array $args)
     {
-        \_PhpScoperc95ae4bf942a\Nette\Utils\ObjectHelpers::strictStaticCall(static::class, $name);
+        \_PhpScopera23ebff5477f\Nette\Utils\ObjectHelpers::strictStaticCall(static::class, $name);
     }
 }

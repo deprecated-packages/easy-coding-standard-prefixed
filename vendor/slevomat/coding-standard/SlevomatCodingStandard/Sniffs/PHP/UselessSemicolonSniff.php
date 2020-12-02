@@ -9,15 +9,15 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_key_exists;
 use function count;
 use function in_array;
-use const _PhpScoperc95ae4bf942a\T_ANON_CLASS;
-use const _PhpScoperc95ae4bf942a\T_CLOSE_CURLY_BRACKET;
-use const _PhpScoperc95ae4bf942a\T_CLOSE_PARENTHESIS;
-use const _PhpScoperc95ae4bf942a\T_CLOSURE;
-use const _PhpScoperc95ae4bf942a\T_FN;
+use const _PhpScopera23ebff5477f\T_ANON_CLASS;
+use const _PhpScopera23ebff5477f\T_CLOSE_CURLY_BRACKET;
+use const _PhpScopera23ebff5477f\T_CLOSE_PARENTHESIS;
+use const _PhpScopera23ebff5477f\T_CLOSURE;
+use const _PhpScopera23ebff5477f\T_FN;
 use const T_FOR;
-use const _PhpScoperc95ae4bf942a\T_OPEN_CURLY_BRACKET;
+use const _PhpScopera23ebff5477f\T_OPEN_CURLY_BRACKET;
 use const T_OPEN_TAG;
-use const _PhpScoperc95ae4bf942a\T_SEMICOLON;
+use const _PhpScopera23ebff5477f\T_SEMICOLON;
 use const T_WHITESPACE;
 class UselessSemicolonSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

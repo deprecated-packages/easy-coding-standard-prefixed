@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc95ae4bf942a\PhpParser;
+namespace _PhpScopera23ebff5477f\PhpParser;
 
 class Error extends \RuntimeException
 {

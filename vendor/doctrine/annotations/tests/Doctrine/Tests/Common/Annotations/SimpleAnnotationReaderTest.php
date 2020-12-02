@@ -1,9 +1,9 @@
 <?php
 
-namespace _PhpScoperc95ae4bf942a\Doctrine\Tests\Common\Annotations;
+namespace _PhpScopera23ebff5477f\Doctrine\Tests\Common\Annotations;
 
-use _PhpScoperc95ae4bf942a\Doctrine\Common\Annotations\SimpleAnnotationReader;
-class SimpleAnnotationReaderTest extends \_PhpScoperc95ae4bf942a\Doctrine\Tests\Common\Annotations\AbstractReaderTest
+use _PhpScopera23ebff5477f\Doctrine\Common\Annotations\SimpleAnnotationReader;
+class SimpleAnnotationReaderTest extends \_PhpScopera23ebff5477f\Doctrine\Tests\Common\Annotations\AbstractReaderTest
 {
     /**
      * Contrary to the behavior of the default annotation reader, we do just ignore
@@ -73,15 +73,15 @@ class SimpleAnnotationReaderTest extends \_PhpScoperc95ae4bf942a\Doctrine\Tests\
     public function testInvalidAnnotationButIgnored()
     {
         $reader = $this->getReader();
-        $class = new \ReflectionClass('_PhpScoperc95ae4bf942a\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassDDC1660');
-        $this->assertTrue(\class_exists('_PhpScoperc95ae4bf942a\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Version'));
+        $class = new \ReflectionClass('_PhpScopera23ebff5477f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\ClassDDC1660');
+        $this->assertTrue(\class_exists('_PhpScopera23ebff5477f\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Version'));
         $this->assertCount(1, $reader->getClassAnnotations($class));
         $this->assertCount(1, $reader->getMethodAnnotations($class->getMethod('bar')));
         $this->assertCount(1, $reader->getPropertyAnnotations($class->getProperty('foo')));
     }
     protected function getReader()
     {
-        $reader = new \_PhpScoperc95ae4bf942a\Doctrine\Common\Annotations\SimpleAnnotationReader();
+        $reader = new \_PhpScopera23ebff5477f\Doctrine\Common\Annotations\SimpleAnnotationReader();
         $reader->addNamespace(__NAMESPACE__);
         $reader->addNamespace(__NAMESPACE__ . '\\Fixtures');
         $reader->addNamespace(__NAMESPACE__ . '\\Fixtures\\Annotation');

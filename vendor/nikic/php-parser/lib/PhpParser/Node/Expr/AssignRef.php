@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc95ae4bf942a\PhpParser\Node\Expr;
+namespace _PhpScopera23ebff5477f\PhpParser\Node\Expr;
 
-use _PhpScoperc95ae4bf942a\PhpParser\Node\Expr;
-class AssignRef extends \_PhpScoperc95ae4bf942a\PhpParser\Node\Expr
+use _PhpScopera23ebff5477f\PhpParser\Node\Expr;
+class AssignRef extends \_PhpScopera23ebff5477f\PhpParser\Node\Expr
 {
     /** @var Expr Variable reference is assigned to */
     public $var;
@@ -17,7 +17,7 @@ class AssignRef extends \_PhpScoperc95ae4bf942a\PhpParser\Node\Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperc95ae4bf942a\PhpParser\Node\Expr $var, \_PhpScoperc95ae4bf942a\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\_PhpScopera23ebff5477f\PhpParser\Node\Expr $var, \_PhpScopera23ebff5477f\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;
