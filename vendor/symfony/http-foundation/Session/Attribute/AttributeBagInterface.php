@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf62d28230928\Symfony\Component\HttpFoundation\Session\Attribute;
+namespace _PhpScoperc95ae4bf942a\Symfony\Component\HttpFoundation\Session\Attribute;
 
-use _PhpScoperf62d28230928\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use _PhpScoperc95ae4bf942a\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * Attributes store.
  *
  * @author Drak <drak@zikula.org>
  */
-interface AttributeBagInterface extends \_PhpScoperf62d28230928\Symfony\Component\HttpFoundation\Session\SessionBagInterface
+interface AttributeBagInterface extends \_PhpScoperc95ae4bf942a\Symfony\Component\HttpFoundation\Session\SessionBagInterface
 {
     /**
      * Checks if an attribute is defined.

@@ -7,222 +7,222 @@ $loader = require_once __DIR__.'/autoload.php';
 // Aliases for the whitelisted classes. For more information see:
 // https://github.com/humbug/php-scoper/blob/master/README.md#class-whitelisting
 if (!class_exists('AutoloadIncluder', false) && !interface_exists('AutoloadIncluder', false) && !trait_exists('AutoloadIncluder', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\AutoloadIncluder');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\AutoloadIncluder');
 }
 if (!class_exists('SomeClass', false) && !interface_exists('SomeClass', false) && !trait_exists('SomeClass', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\SomeClass');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\SomeClass');
 }
-if (!class_exists('ComposerAutoloaderInitc9e5e61d1549f10f580d36b709da8782', false) && !interface_exists('ComposerAutoloaderInitc9e5e61d1549f10f580d36b709da8782', false) && !trait_exists('ComposerAutoloaderInitc9e5e61d1549f10f580d36b709da8782', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\ComposerAutoloaderInitc9e5e61d1549f10f580d36b709da8782');
+if (!class_exists('ComposerAutoloaderInit0e8283b014ea85c708e3ec16048dfe3a', false) && !interface_exists('ComposerAutoloaderInit0e8283b014ea85c708e3ec16048dfe3a', false) && !trait_exists('ComposerAutoloaderInit0e8283b014ea85c708e3ec16048dfe3a', false)) {
+    spl_autoload_call('_PhpScoperc95ae4bf942a\ComposerAutoloaderInit0e8283b014ea85c708e3ec16048dfe3a');
 }
 if (!class_exists('Api', false) && !interface_exists('Api', false) && !trait_exists('Api', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\Api');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\Api');
 }
 if (!class_exists('Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment', false) && !interface_exists('Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment', false) && !trait_exists('Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment');
 }
 if (!class_exists('GlobalNamespacesPerFileWithClassAsFirst', false) && !interface_exists('GlobalNamespacesPerFileWithClassAsFirst', false) && !trait_exists('GlobalNamespacesPerFileWithClassAsFirst', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\GlobalNamespacesPerFileWithClassAsFirst');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\GlobalNamespacesPerFileWithClassAsFirst');
 }
 if (!class_exists('GlobalNamespacesPerFileWithClassAsLast', false) && !interface_exists('GlobalNamespacesPerFileWithClassAsLast', false) && !trait_exists('GlobalNamespacesPerFileWithClassAsLast', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\GlobalNamespacesPerFileWithClassAsLast');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\GlobalNamespacesPerFileWithClassAsLast');
 }
 if (!class_exists('AnnotationsTestsFixturesNonNamespacedClass', false) && !interface_exists('AnnotationsTestsFixturesNonNamespacedClass', false) && !trait_exists('AnnotationsTestsFixturesNonNamespacedClass', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\AnnotationsTestsFixturesNonNamespacedClass');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\AnnotationsTestsFixturesNonNamespacedClass');
 }
 if (!class_exists('SingleClassLOC1000', false) && !interface_exists('SingleClassLOC1000', false) && !trait_exists('SingleClassLOC1000', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\SingleClassLOC1000');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\SingleClassLOC1000');
 }
 if (!class_exists('Entity', false) && !interface_exists('Entity', false) && !trait_exists('Entity', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\Entity');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\Entity');
 }
 if (!class_exists('TopLevelAnnotation', false) && !interface_exists('TopLevelAnnotation', false) && !trait_exists('TopLevelAnnotation', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\TopLevelAnnotation');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\TopLevelAnnotation');
 }
 if (!class_exists('Throwable', false) && !interface_exists('Throwable', false) && !trait_exists('Throwable', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\Throwable');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\Throwable');
 }
 if (!class_exists('Error', false) && !interface_exists('Error', false) && !trait_exists('Error', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\Error');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\Error');
 }
 if (!class_exists('TypeError', false) && !interface_exists('TypeError', false) && !trait_exists('TypeError', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\TypeError');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\TypeError');
 }
 if (!class_exists('DieHardTest', false) && !interface_exists('DieHardTest', false) && !trait_exists('DieHardTest', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\DieHardTest');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\DieHardTest');
 }
 if (!class_exists('StatTest', false) && !interface_exists('StatTest', false) && !trait_exists('StatTest', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\StatTest');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\StatTest');
 }
 if (!class_exists('RandomBytesTest', false) && !interface_exists('RandomBytesTest', false) && !trait_exists('RandomBytesTest', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\RandomBytesTest');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\RandomBytesTest');
 }
 if (!class_exists('RandomIntTest', false) && !interface_exists('RandomIntTest', false) && !trait_exists('RandomIntTest', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\RandomIntTest');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\RandomIntTest');
 }
 if (!class_exists('ValidatePEARPackageXML', false) && !interface_exists('ValidatePEARPackageXML', false) && !trait_exists('ValidatePEARPackageXML', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\ValidatePEARPackageXML');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\ValidatePEARPackageXML');
 }
 if (!class_exists('Symfony\Component\DependencyInjection\Extension\ExtensionInterface', false) && !interface_exists('Symfony\Component\DependencyInjection\Extension\ExtensionInterface', false) && !trait_exists('Symfony\Component\DependencyInjection\Extension\ExtensionInterface', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Extension\ExtensionInterface');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\Symfony\Component\DependencyInjection\Extension\ExtensionInterface');
 }
 if (!class_exists('Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator', false) && !interface_exists('Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator', false) && !trait_exists('Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator');
 }
 if (!class_exists('ArithmeticError', false) && !interface_exists('ArithmeticError', false) && !trait_exists('ArithmeticError', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\ArithmeticError');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\ArithmeticError');
 }
 if (!class_exists('AssertionError', false) && !interface_exists('AssertionError', false) && !trait_exists('AssertionError', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\AssertionError');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\AssertionError');
 }
 if (!class_exists('DivisionByZeroError', false) && !interface_exists('DivisionByZeroError', false) && !trait_exists('DivisionByZeroError', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\DivisionByZeroError');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\DivisionByZeroError');
 }
 if (!class_exists('ParseError', false) && !interface_exists('ParseError', false) && !trait_exists('ParseError', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\ParseError');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\ParseError');
 }
 if (!class_exists('Stringable', false) && !interface_exists('Stringable', false) && !trait_exists('Stringable', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\Stringable');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\Stringable');
 }
 if (!class_exists('ValueError', false) && !interface_exists('ValueError', false) && !trait_exists('ValueError', false)) {
-    spl_autoload_call('_PhpScoperf62d28230928\ValueError');
+    spl_autoload_call('_PhpScoperc95ae4bf942a\ValueError');
 }
 
 // Functions whitelisting. For more information see:
 // https://github.com/humbug/php-scoper/blob/master/README.md#functions-whitelisting
-if (!function_exists('composerRequirec9e5e61d1549f10f580d36b709da8782')) {
-    function composerRequirec9e5e61d1549f10f580d36b709da8782() {
-        return \_PhpScoperf62d28230928\composerRequirec9e5e61d1549f10f580d36b709da8782(...func_get_args());
+if (!function_exists('composerRequire0e8283b014ea85c708e3ec16048dfe3a')) {
+    function composerRequire0e8283b014ea85c708e3ec16048dfe3a() {
+        return \_PhpScoperc95ae4bf942a\composerRequire0e8283b014ea85c708e3ec16048dfe3a(...func_get_args());
     }
 }
 if (!function_exists('convertAppVersionToAliasedVersion')) {
     function convertAppVersionToAliasedVersion() {
-        return \_PhpScoperf62d28230928\convertAppVersionToAliasedVersion(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\convertAppVersionToAliasedVersion(...func_get_args());
     }
 }
 if (!function_exists('sample')) {
     function sample() {
-        return \_PhpScoperf62d28230928\sample(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\sample(...func_get_args());
     }
 }
 if (!function_exists('foo')) {
     function foo() {
-        return \_PhpScoperf62d28230928\foo(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\foo(...func_get_args());
     }
 }
 if (!function_exists('bar')) {
     function bar() {
-        return \_PhpScoperf62d28230928\bar(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\bar(...func_get_args());
     }
 }
 if (!function_exists('baz')) {
     function baz() {
-        return \_PhpScoperf62d28230928\baz(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\baz(...func_get_args());
     }
 }
 if (!function_exists('xyz')) {
     function xyz() {
-        return \_PhpScoperf62d28230928\xyz(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\xyz(...func_get_args());
     }
 }
 if (!function_exists('parseArgs')) {
     function parseArgs() {
-        return \_PhpScoperf62d28230928\parseArgs(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\parseArgs(...func_get_args());
     }
 }
 if (!function_exists('showHelp')) {
     function showHelp() {
-        return \_PhpScoperf62d28230928\showHelp(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\showHelp(...func_get_args());
     }
 }
 if (!function_exists('formatErrorMessage')) {
     function formatErrorMessage() {
-        return \_PhpScoperf62d28230928\formatErrorMessage(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\formatErrorMessage(...func_get_args());
     }
 }
 if (!function_exists('resolveNodes')) {
     function resolveNodes() {
-        return \_PhpScoperf62d28230928\resolveNodes(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\resolveNodes(...func_get_args());
     }
 }
 if (!function_exists('resolveMacros')) {
     function resolveMacros() {
-        return \_PhpScoperf62d28230928\resolveMacros(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\resolveMacros(...func_get_args());
     }
 }
 if (!function_exists('resolveStackAccess')) {
     function resolveStackAccess() {
-        return \_PhpScoperf62d28230928\resolveStackAccess(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\resolveStackAccess(...func_get_args());
     }
 }
 if (!function_exists('execCmd')) {
     function execCmd() {
-        return \_PhpScoperf62d28230928\execCmd(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\execCmd(...func_get_args());
     }
 }
 if (!function_exists('removeTrailingWhitespace')) {
     function removeTrailingWhitespace() {
-        return \_PhpScoperf62d28230928\removeTrailingWhitespace(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\removeTrailingWhitespace(...func_get_args());
     }
 }
 if (!function_exists('ensureDirExists')) {
     function ensureDirExists() {
-        return \_PhpScoperf62d28230928\ensureDirExists(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\ensureDirExists(...func_get_args());
     }
 }
 if (!function_exists('magicSplit')) {
     function magicSplit() {
-        return \_PhpScoperf62d28230928\magicSplit(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\magicSplit(...func_get_args());
     }
 }
 if (!function_exists('assertArgs')) {
     function assertArgs() {
-        return \_PhpScoperf62d28230928\assertArgs(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\assertArgs(...func_get_args());
     }
 }
 if (!function_exists('regex')) {
     function regex() {
-        return \_PhpScoperf62d28230928\regex(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\regex(...func_get_args());
     }
 }
 if (!function_exists('RandomCompat_strlen')) {
     function RandomCompat_strlen() {
-        return \_PhpScoperf62d28230928\RandomCompat_strlen(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\RandomCompat_strlen(...func_get_args());
     }
 }
 if (!function_exists('RandomCompat_substr')) {
     function RandomCompat_substr() {
-        return \_PhpScoperf62d28230928\RandomCompat_substr(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\RandomCompat_substr(...func_get_args());
     }
 }
 if (!function_exists('printPHPCodeSnifferTestOutput')) {
     function printPHPCodeSnifferTestOutput() {
-        return \_PhpScoperf62d28230928\printPHPCodeSnifferTestOutput(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\printPHPCodeSnifferTestOutput(...func_get_args());
     }
 }
 if (!function_exists('setproctitle')) {
     function setproctitle() {
-        return \_PhpScoperf62d28230928\setproctitle(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\setproctitle(...func_get_args());
     }
 }
 if (!function_exists('handleSignal')) {
     function handleSignal() {
-        return \_PhpScoperf62d28230928\handleSignal(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\handleSignal(...func_get_args());
     }
 }
 if (!function_exists('includeIfExists')) {
     function includeIfExists() {
-        return \_PhpScoperf62d28230928\includeIfExists(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\includeIfExists(...func_get_args());
     }
 }
 if (!function_exists('dump')) {
     function dump() {
-        return \_PhpScoperf62d28230928\dump(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\dump(...func_get_args());
     }
 }
 if (!function_exists('dd')) {
     function dd() {
-        return \_PhpScoperf62d28230928\dd(...func_get_args());
+        return \_PhpScoperc95ae4bf942a\dd(...func_get_args());
     }
 }
 

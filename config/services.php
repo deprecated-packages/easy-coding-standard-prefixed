@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf62d28230928;
+namespace _PhpScoperc95ae4bf942a;
 
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScoperf62d28230928\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoperf62d28230928\Symfony\Component\Console\Terminal;
-use _PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoperc95ae4bf942a\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoperc95ae4bf942a\Symfony\Component\Console\Terminal;
+use _PhpScoperc95ae4bf942a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\Bootstrap\NoCheckersLoaderReporter;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyleFactory;
@@ -17,8 +17,8 @@ use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileSystem;
-use function _PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\service;
-return static function (\_PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use function _PhpScoperc95ae4bf942a\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+return static function (\_PhpScoperc95ae4bf942a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(__DIR__ . '/services/services_cache.php');
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
@@ -30,15 +30,15 @@ return static function (\_PhpScoperf62d28230928\Symfony\Component\DependencyInje
         __DIR__ . '/../src/Exception',
         __DIR__ . '/../src/ValueObject',
     ]);
-    $services->set(\_PhpScoperf62d28230928\Symfony\Component\Console\Terminal::class);
+    $services->set(\_PhpScoperc95ae4bf942a\Symfony\Component\Console\Terminal::class);
     $services->set(\Symplify\SmartFileSystem\FileSystemGuard::class);
     $services->set(\Symplify\SmartFileSystem\Finder\FinderSanitizer::class);
     $services->set(\Symplify\SmartFileSystem\SmartFileSystem::class);
     $services->set(\Symplify\SmartFileSystem\Finder\SmartFinder::class);
     $services->set(\Symplify\SmartFileSystem\FileSystemFilter::class);
     $services->set(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class);
-    $services->set(\_PhpScoperf62d28230928\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\_PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
-    $services->set(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class)->factory([\_PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyleFactory::class), 'create']);
-    $services->set(\PhpCsFixer\WhitespacesFixerConfig::class)->factory([\_PhpScoperf62d28230928\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\EasyCodingStandard\FixerRunner\WhitespacesFixerConfigFactory::class), 'create']);
+    $services->set(\_PhpScoperc95ae4bf942a\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\_PhpScoperc95ae4bf942a\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
+    $services->set(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class)->factory([\_PhpScoperc95ae4bf942a\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyleFactory::class), 'create']);
+    $services->set(\PhpCsFixer\WhitespacesFixerConfig::class)->factory([\_PhpScoperc95ae4bf942a\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\EasyCodingStandard\FixerRunner\WhitespacesFixerConfigFactory::class), 'create']);
     $services->set(\Symplify\EasyCodingStandard\Bootstrap\NoCheckersLoaderReporter::class);
 };
