@@ -13,12 +13,12 @@ use function array_key_exists;
 use function in_array;
 use function sprintf;
 use function substr;
-use const _PhpScoper6a0a7eb6e565\T_COMMA;
+use const _PhpScoper992f4af8b9e0\T_COMMA;
 use const T_ELLIPSIS;
 use const T_FUNCTION;
 use const T_NEW;
 use const T_OBJECT_OPERATOR;
-use const _PhpScoper6a0a7eb6e565\T_OPEN_PARENTHESIS;
+use const _PhpScoper992f4af8b9e0\T_OPEN_PARENTHESIS;
 class OptimizedFunctionsWithoutUnpackingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_UNPACKING_USED = 'UnpackingUsed';
