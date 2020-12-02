@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfaaf57618f34;
+namespace _PhpScoper6a0a7eb6e565;
 
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff;
@@ -25,13 +25,16 @@ use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff;
-use _PhpScoperfaaf57618f34\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoperfaaf57618f34\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoper6a0a7eb6e565\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoper6a0a7eb6e565\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff::class);
     $services->set(\SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff::class);
     $services->set(\PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer::class)->call('configure', [['elements' => ['const', 'property', 'method']]]);
+    // breaks on PHP 8
+    if (\PHP_VERSION_ID < 80000) {
+        $services->set(\PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer::class)->call('configure', [['elements' => ['const', 'property', 'method']]]);
+    }
     $services->set(\PhpCsFixer\Fixer\Operator\ConcatSpaceFixer::class)->call('configure', [['spacing' => 'one']]);
     $services->set(\PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer::class);
     $services->set(\PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff::class)->property('ignoreBlankLines', \false);

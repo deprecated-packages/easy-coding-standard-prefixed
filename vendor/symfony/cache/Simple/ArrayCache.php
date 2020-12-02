@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfaaf57618f34\Symfony\Component\Cache\Simple;
+namespace _PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Simple;
 
-use _PhpScoperfaaf57618f34\Psr\Log\LoggerAwareInterface;
-use _PhpScoperfaaf57618f34\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
-use _PhpScoperfaaf57618f34\Symfony\Component\Cache\Adapter\ArrayAdapter;
-use _PhpScoperfaaf57618f34\Symfony\Component\Cache\CacheItem;
-use _PhpScoperfaaf57618f34\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperfaaf57618f34\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperfaaf57618f34\Symfony\Component\Cache\Traits\ArrayTrait;
-use _PhpScoperfaaf57618f34\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperfaaf57618f34\Symfony\Component\Cache\Simple\ArrayCache::class, \_PhpScoperfaaf57618f34\Symfony\Component\Cache\Adapter\ArrayAdapter::class, \_PhpScoperfaaf57618f34\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoper6a0a7eb6e565\Psr\Log\LoggerAwareInterface;
+use _PhpScoper6a0a7eb6e565\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
+use _PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Adapter\ArrayAdapter;
+use _PhpScoper6a0a7eb6e565\Symfony\Component\Cache\CacheItem;
+use _PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper6a0a7eb6e565\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Traits\ArrayTrait;
+use _PhpScoper6a0a7eb6e565\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Simple\ArrayCache::class, \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Adapter\ArrayAdapter::class, \_PhpScoper6a0a7eb6e565\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use ArrayAdapter and type-hint for CacheInterface instead.
  */
-class ArrayCache implements \_PhpScoperfaaf57618f34\Psr\SimpleCache\CacheInterface, \_PhpScoperfaaf57618f34\Psr\Log\LoggerAwareInterface, \_PhpScoperfaaf57618f34\Symfony\Component\Cache\ResettableInterface
+class ArrayCache implements \_PhpScoper6a0a7eb6e565\Psr\SimpleCache\CacheInterface, \_PhpScoper6a0a7eb6e565\Psr\Log\LoggerAwareInterface, \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\ResettableInterface
 {
     use ArrayTrait {
         ArrayTrait::deleteItem as delete;
@@ -43,7 +43,7 @@ class ArrayCache implements \_PhpScoperfaaf57618f34\Psr\SimpleCache\CacheInterfa
     public function get($key, $default = null)
     {
         if (!\is_string($key) || !isset($this->expiries[$key])) {
-            \_PhpScoperfaaf57618f34\Symfony\Component\Cache\CacheItem::validateKey($key);
+            \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\CacheItem::validateKey($key);
         }
         if (!($isHit = isset($this->expiries[$key]) && ($this->expiries[$key] > \microtime(\true) || !$this->delete($key)))) {
             $this->values[$key] = null;
@@ -65,11 +65,11 @@ class ArrayCache implements \_PhpScoperfaaf57618f34\Psr\SimpleCache\CacheInterfa
         if ($keys instanceof \Traversable) {
             $keys = \iterator_to_array($keys, \false);
         } elseif (!\is_array($keys)) {
-            throw new \_PhpScoperfaaf57618f34\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
+            throw new \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
         }
         foreach ($keys as $key) {
             if (!\is_string($key) || !isset($this->expiries[$key])) {
-                \_PhpScoperfaaf57618f34\Symfony\Component\Cache\CacheItem::validateKey($key);
+                \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\CacheItem::validateKey($key);
             }
         }
         return $this->generateItems($keys, \microtime(\true), function ($k, $v, $hit) use($default) {
@@ -84,7 +84,7 @@ class ArrayCache implements \_PhpScoperfaaf57618f34\Psr\SimpleCache\CacheInterfa
     public function deleteMultiple($keys)
     {
         if (!\is_array($keys) && !$keys instanceof \Traversable) {
-            throw new \_PhpScoperfaaf57618f34\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
+            throw new \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
         }
         foreach ($keys as $key) {
             $this->delete($key);
@@ -99,7 +99,7 @@ class ArrayCache implements \_PhpScoperfaaf57618f34\Psr\SimpleCache\CacheInterfa
     public function set($key, $value, $ttl = null)
     {
         if (!\is_string($key)) {
-            \_PhpScoperfaaf57618f34\Symfony\Component\Cache\CacheItem::validateKey($key);
+            \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\CacheItem::validateKey($key);
         }
         return $this->setMultiple([$key => $value], $ttl);
     }
@@ -111,12 +111,12 @@ class ArrayCache implements \_PhpScoperfaaf57618f34\Psr\SimpleCache\CacheInterfa
     public function setMultiple($values, $ttl = null)
     {
         if (!\is_array($values) && !$values instanceof \Traversable) {
-            throw new \_PhpScoperfaaf57618f34\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache values must be array or Traversable, "%s" given', \is_object($values) ? \get_class($values) : \gettype($values)));
+            throw new \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache values must be array or Traversable, "%s" given', \is_object($values) ? \get_class($values) : \gettype($values)));
         }
         $valuesArray = [];
         foreach ($values as $key => $value) {
             if (!\is_int($key) && !(\is_string($key) && isset($this->expiries[$key]))) {
-                \_PhpScoperfaaf57618f34\Symfony\Component\Cache\CacheItem::validateKey($key);
+                \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\CacheItem::validateKey($key);
             }
             $valuesArray[$key] = $value;
         }
@@ -144,6 +144,6 @@ class ArrayCache implements \_PhpScoperfaaf57618f34\Psr\SimpleCache\CacheInterfa
         if (\is_int($ttl)) {
             return 0 < $ttl ? $ttl : \false;
         }
-        throw new \_PhpScoperfaaf57618f34\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must be an integer, a DateInterval or null, "%s" given', \is_object($ttl) ? \get_class($ttl) : \gettype($ttl)));
+        throw new \_PhpScoper6a0a7eb6e565\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must be an integer, a DateInterval or null, "%s" given', \is_object($ttl) ? \get_class($ttl) : \gettype($ttl)));
     }
 }

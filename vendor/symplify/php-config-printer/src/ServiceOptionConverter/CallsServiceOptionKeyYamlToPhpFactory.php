@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoperfaaf57618f34\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper6a0a7eb6e565\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\Service\SingleServicePhpNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
@@ -17,7 +17,7 @@ final class CallsServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpConfig
     {
         $this->singleServicePhpNodeFactory = $singleServicePhpNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperfaaf57618f34\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperfaaf57618f34\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper6a0a7eb6e565\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper6a0a7eb6e565\PhpParser\Node\Expr\MethodCall
     {
         return $this->singleServicePhpNodeFactory->createCalls($methodCall, $yaml);
     }

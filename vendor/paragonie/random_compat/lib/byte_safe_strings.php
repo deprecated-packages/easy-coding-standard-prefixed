@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperfaaf57618f34;
+namespace _PhpScoper6a0a7eb6e565;
 
 /**
  * Random_* Compatibility Library
@@ -28,7 +28,7 @@ namespace _PhpScoperfaaf57618f34;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-if (!\function_exists('_PhpScoperfaaf57618f34\\RandomCompat_strlen')) {
+if (!\function_exists('_PhpScoper6a0a7eb6e565\\RandomCompat_strlen')) {
     if (\ini_get('mbstring.func_overload') & \MB_OVERLOAD_STRING) {
         /**
          * strlen() implementation that isn't brittle to mbstring.func_overload
@@ -70,7 +70,7 @@ if (!\function_exists('_PhpScoperfaaf57618f34\\RandomCompat_strlen')) {
         }
     }
 }
-if (!\function_exists('_PhpScoperfaaf57618f34\\RandomCompat_substr')) {
+if (!\function_exists('_PhpScoper6a0a7eb6e565\\RandomCompat_substr')) {
     if (\ini_get('mbstring.func_overload') & \MB_OVERLOAD_STRING) {
         /**
          * substr() implementation that isn't brittle to mbstring.func_overload
@@ -99,7 +99,7 @@ if (!\function_exists('_PhpScoperfaaf57618f34\\RandomCompat_substr')) {
                  * mb_substr($str, 0, NULL, '8bit') returns an empty string on
                  * PHP 5.3, so we have to find the length ourselves.
                  */
-                $length = \_PhpScoperfaaf57618f34\RandomCompat_strlen($length) - $start;
+                $length = \_PhpScoper6a0a7eb6e565\RandomCompat_strlen($length) - $start;
             } elseif (!\is_int($length)) {
                 throw new \TypeError('RandomCompat_substr(): Third argument should be an integer, or omitted');
             }

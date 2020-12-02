@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfaaf57618f34\Symfony\Component\OptionsResolver\Exception;
+namespace _PhpScoper6a0a7eb6e565\Symfony\Component\OptionsResolver\Exception;
 
 /**
  * Exception thrown when an undefined option is passed.
@@ -18,6 +18,6 @@ namespace _PhpScoperfaaf57618f34\Symfony\Component\OptionsResolver\Exception;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class UndefinedOptionsException extends \_PhpScoperfaaf57618f34\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException
+class UndefinedOptionsException extends \_PhpScoper6a0a7eb6e565\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException
 {
 }
