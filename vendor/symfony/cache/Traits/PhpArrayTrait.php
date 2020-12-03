@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5c006f5f032f\Symfony\Component\Cache\Traits;
+namespace _PhpScoperba5852cc6147\Symfony\Component\Cache\Traits;
 
-use _PhpScoper5c006f5f032f\Symfony\Component\Cache\Adapter\AdapterInterface;
-use _PhpScoper5c006f5f032f\Symfony\Component\Cache\CacheItem;
-use _PhpScoper5c006f5f032f\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper5c006f5f032f\Symfony\Component\VarExporter\VarExporter;
+use _PhpScoperba5852cc6147\Symfony\Component\Cache\Adapter\AdapterInterface;
+use _PhpScoperba5852cc6147\Symfony\Component\Cache\CacheItem;
+use _PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperba5852cc6147\Symfony\Component\VarExporter\VarExporter;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
@@ -35,18 +35,18 @@ trait PhpArrayTrait
     {
         if (\file_exists($this->file)) {
             if (!\is_file($this->file)) {
-                throw new \_PhpScoper5c006f5f032f\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache path exists and is not a file: %s.', $this->file));
+                throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache path exists and is not a file: %s.', $this->file));
             }
             if (!\is_writable($this->file)) {
-                throw new \_PhpScoper5c006f5f032f\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache file is not writable: %s.', $this->file));
+                throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache file is not writable: %s.', $this->file));
             }
         } else {
             $directory = \dirname($this->file);
             if (!\is_dir($directory) && !@\mkdir($directory, 0777, \true)) {
-                throw new \_PhpScoper5c006f5f032f\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory does not exist and cannot be created: %s.', $directory));
+                throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory does not exist and cannot be created: %s.', $directory));
             }
             if (!\is_writable($directory)) {
-                throw new \_PhpScoper5c006f5f032f\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory is not writable: %s.', $directory));
+                throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory is not writable: %s.', $directory));
             }
         }
         $dumpedValues = '';
@@ -61,15 +61,15 @@ return [[
 
 EOF;
         foreach ($values as $key => $value) {
-            \_PhpScoper5c006f5f032f\Symfony\Component\Cache\CacheItem::validateKey(\is_int($key) ? (string) $key : $key);
+            \_PhpScoperba5852cc6147\Symfony\Component\Cache\CacheItem::validateKey(\is_int($key) ? (string) $key : $key);
             $isStaticValue = \true;
             if (null === $value) {
                 $value = "'N;'";
             } elseif (\is_object($value) || \is_array($value)) {
                 try {
-                    $value = \_PhpScoper5c006f5f032f\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
+                    $value = \_PhpScoperba5852cc6147\Symfony\Component\VarExporter\VarExporter::export($value, $isStaticValue);
                 } catch (\Exception $e) {
-                    throw new \_PhpScoper5c006f5f032f\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable %s value.', $key, \is_object($value) ? \get_class($value) : 'array'), 0, $e);
+                    throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable %s value.', $key, \is_object($value) ? \get_class($value) : 'array'), 0, $e);
                 }
             } elseif (\is_string($value)) {
                 // Wrap "N;" in a closure to not confuse it with an encoded `null`
@@ -78,7 +78,7 @@ EOF;
                 }
                 $value = \var_export($value, \true);
             } elseif (!\is_scalar($value)) {
-                throw new \_PhpScoper5c006f5f032f\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable %s value.', $key, \gettype($value)));
+                throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" has non-serializable %s value.', $key, \gettype($value)));
             } else {
                 $value = \var_export($value, \true);
             }
@@ -113,7 +113,7 @@ EOF;
         $prefix = 0 < \func_num_args() ? (string) \func_get_arg(0) : '';
         $this->keys = $this->values = [];
         $cleared = @\unlink($this->file) || !\file_exists($this->file);
-        if ($this->pool instanceof \_PhpScoper5c006f5f032f\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \_PhpScoperba5852cc6147\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($prefix) && $cleared;
         }
         return $this->pool->clear() && $cleared;

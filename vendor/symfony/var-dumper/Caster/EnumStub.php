@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5c006f5f032f\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoperba5852cc6147\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper5c006f5f032f\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoperba5852cc6147\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Represents an enumeration of values.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EnumStub extends \_PhpScoper5c006f5f032f\Symfony\Component\VarDumper\Cloner\Stub
+class EnumStub extends \_PhpScoperba5852cc6147\Symfony\Component\VarDumper\Cloner\Stub
 {
     public $dumpKeys = \true;
     public function __construct(array $values, bool $dumpKeys = \true)

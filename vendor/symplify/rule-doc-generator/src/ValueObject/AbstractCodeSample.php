@@ -17,8 +17,8 @@ abstract class AbstractCodeSample implements \Symplify\RuleDocGenerator\Contract
     private $badCode;
     public function __construct(string $badCode, string $goodCode)
     {
-        if ($goodCode === '') {
-            throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException('Code sample good code cannot be empty');
+        if ($badCode === '') {
+            throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException('Bad sample good code cannot be empty');
         }
         if ($goodCode === $badCode) {
             $errorMessage = \sprintf('Good and bad code cannot be identical: "%s"', $goodCode);

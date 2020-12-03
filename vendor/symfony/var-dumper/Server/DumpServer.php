@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5c006f5f032f\Symfony\Component\VarDumper\Server;
+namespace _PhpScoperba5852cc6147\Symfony\Component\VarDumper\Server;
 
-use _PhpScoper5c006f5f032f\Psr\Log\LoggerInterface;
-use _PhpScoper5c006f5f032f\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoper5c006f5f032f\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoperba5852cc6147\Psr\Log\LoggerInterface;
+use _PhpScoperba5852cc6147\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoperba5852cc6147\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * A server collecting Data clones sent by a ServerDumper.
  *
@@ -25,7 +25,7 @@ class DumpServer
     private $host;
     private $socket;
     private $logger;
-    public function __construct(string $host, \_PhpScoper5c006f5f032f\Psr\Log\LoggerInterface $logger = null)
+    public function __construct(string $host, \_PhpScoperba5852cc6147\Psr\Log\LoggerInterface $logger = null)
     {
         if (\false === \strpos($host, '://')) {
             $host = 'tcp://' . $host;
@@ -45,7 +45,7 @@ class DumpServer
             $this->start();
         }
         foreach ($this->getMessages() as $clientId => $message) {
-            $payload = @\unserialize(\base64_decode($message), ['allowed_classes' => [\_PhpScoper5c006f5f032f\Symfony\Component\VarDumper\Cloner\Data::class, \_PhpScoper5c006f5f032f\Symfony\Component\VarDumper\Cloner\Stub::class]]);
+            $payload = @\unserialize(\base64_decode($message), ['allowed_classes' => [\_PhpScoperba5852cc6147\Symfony\Component\VarDumper\Cloner\Data::class, \_PhpScoperba5852cc6147\Symfony\Component\VarDumper\Cloner\Stub::class]]);
             // Impossible to decode the message, give up.
             if (\false === $payload) {
                 if ($this->logger) {
@@ -53,7 +53,7 @@ class DumpServer
                 }
                 continue;
             }
-            if (!\is_array($payload) || \count($payload) < 2 || !$payload[0] instanceof \_PhpScoper5c006f5f032f\Symfony\Component\VarDumper\Cloner\Data || !\is_array($payload[1])) {
+            if (!\is_array($payload) || \count($payload) < 2 || !$payload[0] instanceof \_PhpScoperba5852cc6147\Symfony\Component\VarDumper\Cloner\Data || !\is_array($payload[1])) {
                 if ($this->logger) {
                     $this->logger->warning('Invalid payload from {clientId} client. Expected an array of two elements (Data $data, array $context)', ['clientId' => $clientId]);
                 }
