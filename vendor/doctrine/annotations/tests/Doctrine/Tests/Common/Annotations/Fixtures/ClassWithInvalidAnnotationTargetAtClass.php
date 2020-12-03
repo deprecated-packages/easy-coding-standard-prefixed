@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScopera34ae19e8d40\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper5465fda93cc7\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScopera34ae19e8d40\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetPropertyMethod;
+use _PhpScoper5465fda93cc7\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetPropertyMethod;
 /**
  * @AnnotationTargetPropertyMethod("Some data")
  */

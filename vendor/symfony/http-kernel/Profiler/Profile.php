@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera34ae19e8d40\Symfony\Component\HttpKernel\Profiler;
+namespace _PhpScoper5465fda93cc7\Symfony\Component\HttpKernel\Profiler;
 
-use _PhpScopera34ae19e8d40\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
+use _PhpScoper5465fda93cc7\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 /**
  * Profile.
  *
@@ -241,7 +241,7 @@ class Profile
     /**
      * Adds a Collector.
      */
-    public function addCollector(\_PhpScopera34ae19e8d40\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface $collector)
+    public function addCollector(\_PhpScoper5465fda93cc7\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface $collector)
     {
         $this->collectors[$collector->getName()] = $collector;
     }
