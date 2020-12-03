@@ -37,7 +37,7 @@ final class BacktickToShellExecFixer extends \PhpCsFixer\AbstractFixer
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Converts backtick operators to `shell_exec` calls.', [new \PhpCsFixer\FixerDefinition\CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScoper5465fda93cc7;
+namespace _PhpScoper6c2f17c43d2d;
 
 $plain = `ls -lah`;
 $withVar = `ls -lah {$var1} {$var2} {$var3} {$var4[0]} {$var5->call()}`;

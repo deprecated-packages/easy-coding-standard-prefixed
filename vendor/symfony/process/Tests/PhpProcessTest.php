@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5465fda93cc7\Symfony\Component\Process\Tests;
+namespace _PhpScoper6c2f17c43d2d\Symfony\Component\Process\Tests;
 
-use _PhpScoper5465fda93cc7\PHPUnit\Framework\TestCase;
-use _PhpScoper5465fda93cc7\Symfony\Component\Process\PhpProcess;
-class PhpProcessTest extends \_PhpScoper5465fda93cc7\PHPUnit\Framework\TestCase
+use _PhpScoper6c2f17c43d2d\PHPUnit\Framework\TestCase;
+use _PhpScoper6c2f17c43d2d\Symfony\Component\Process\PhpProcess;
+class PhpProcessTest extends \_PhpScoper6c2f17c43d2d\PHPUnit\Framework\TestCase
 {
     public function testNonBlockingWorks()
     {
         $expected = 'hello world!';
-        $process = new \_PhpScoper5465fda93cc7\Symfony\Component\Process\PhpProcess(<<<PHP
+        $process = new \_PhpScoper6c2f17c43d2d\Symfony\Component\Process\PhpProcess(<<<PHP
 <?php echo '{$expected}';
 PHP
 );
@@ -27,10 +27,10 @@ PHP
     }
     public function testCommandLine()
     {
-        $process = new \_PhpScoper5465fda93cc7\Symfony\Component\Process\PhpProcess(<<<'PHP'
+        $process = new \_PhpScoper6c2f17c43d2d\Symfony\Component\Process\PhpProcess(<<<'PHP'
 <?php
 
-namespace _PhpScoper5465fda93cc7;
+namespace _PhpScoper6c2f17c43d2d;
 
 echo \phpversion() . \PHP_SAPI;
 PHP

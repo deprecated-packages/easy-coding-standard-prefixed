@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5465fda93cc7\PhpParser\Node\Stmt\TraitUseAdaptation;
+namespace _PhpScoper6c2f17c43d2d\PhpParser\Node\Stmt\TraitUseAdaptation;
 
-use _PhpScoper5465fda93cc7\PhpParser\Node;
-class Alias extends \_PhpScoper5465fda93cc7\PhpParser\Node\Stmt\TraitUseAdaptation
+use _PhpScoper6c2f17c43d2d\PhpParser\Node;
+class Alias extends \_PhpScoper6c2f17c43d2d\PhpParser\Node\Stmt\TraitUseAdaptation
 {
     /** @var null|int New modifier */
     public $newModifier;
@@ -23,9 +23,9 @@ class Alias extends \_PhpScoper5465fda93cc7\PhpParser\Node\Stmt\TraitUseAdaptati
     {
         $this->attributes = $attributes;
         $this->trait = $trait;
-        $this->method = \is_string($method) ? new \_PhpScoper5465fda93cc7\PhpParser\Node\Identifier($method) : $method;
+        $this->method = \is_string($method) ? new \_PhpScoper6c2f17c43d2d\PhpParser\Node\Identifier($method) : $method;
         $this->newModifier = $newModifier;
-        $this->newName = \is_string($newName) ? new \_PhpScoper5465fda93cc7\PhpParser\Node\Identifier($newName) : $newName;
+        $this->newName = \is_string($newName) ? new \_PhpScoper6c2f17c43d2d\PhpParser\Node\Identifier($newName) : $newName;
     }
     public function getSubNodeNames() : array
     {
