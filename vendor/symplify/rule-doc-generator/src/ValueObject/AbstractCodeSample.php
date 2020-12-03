@@ -15,7 +15,7 @@ abstract class AbstractCodeSample implements \Symplify\RuleDocGenerator\Contract
      * @var string
      */
     private $badCode;
-    public function __construct(string $goodCode, string $badCode)
+    public function __construct(string $badCode, string $goodCode)
     {
         if ($goodCode === '') {
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException('Code sample good code cannot be empty');

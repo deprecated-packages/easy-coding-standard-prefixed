@@ -21,10 +21,10 @@ final class BadGoodCodeSamplePrinter
     public function print(\Symplify\RuleDocGenerator\Contract\CodeSampleInterface $codeSample) : array
     {
         $lines = [];
-        $lines[] = $this->markdownCodeWrapper->printPhpCode($codeSample->getGoodCode());
+        $lines[] = $this->markdownCodeWrapper->printPhpCode($codeSample->getBadCode());
         $lines[] = ':x:';
         $lines[] = '<br>';
-        $lines[] = $this->markdownCodeWrapper->printPhpCode($codeSample->getBadCode());
+        $lines[] = $this->markdownCodeWrapper->printPhpCode($codeSample->getGoodCode());
         $lines[] = ':+1:';
         return $lines;
     }
