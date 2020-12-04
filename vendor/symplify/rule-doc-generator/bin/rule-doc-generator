@@ -1,5 +1,5 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoperc233426b15e0;
+namespace _PhpScopera4fc793dae73;
 
 require __DIR__ . '/rule-doc-generator.php';

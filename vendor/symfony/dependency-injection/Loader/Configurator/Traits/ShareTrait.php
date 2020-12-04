@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc233426b15e0\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScopera4fc793dae73\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait ShareTrait
 {

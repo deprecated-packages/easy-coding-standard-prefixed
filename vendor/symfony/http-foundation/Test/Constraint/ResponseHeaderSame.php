@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc233426b15e0\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace _PhpScopera4fc793dae73\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use _PhpScoperc233426b15e0\PHPUnit\Framework\Constraint\Constraint;
-use _PhpScoperc233426b15e0\Symfony\Component\HttpFoundation\Response;
-final class ResponseHeaderSame extends \_PhpScoperc233426b15e0\PHPUnit\Framework\Constraint\Constraint
+use _PhpScopera4fc793dae73\PHPUnit\Framework\Constraint\Constraint;
+use _PhpScopera4fc793dae73\Symfony\Component\HttpFoundation\Response;
+final class ResponseHeaderSame extends \_PhpScopera4fc793dae73\PHPUnit\Framework\Constraint\Constraint
 {
     private $headerName;
     private $expectedValue;
