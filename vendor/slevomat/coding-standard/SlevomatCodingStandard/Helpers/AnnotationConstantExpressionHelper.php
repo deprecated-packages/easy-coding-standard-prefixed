@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace SlevomatCodingStandard\Helpers;
 
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayItemNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayItemNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
 use function array_merge;
 /**
  * @internal
@@ -17,45 +17,45 @@ class AnnotationConstantExpressionHelper
      * @param ConstExprNode $contantExpressionNode
      * @return array<int, ConstFetchNode>
      */
-    public static function getConstantFetchNodes(\_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $contantExpressionNode) : array
+    public static function getConstantFetchNodes(\_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $contantExpressionNode) : array
     {
-        if ($contantExpressionNode instanceof \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode) {
+        if ($contantExpressionNode instanceof \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode) {
             $constantFetchNodes = [];
             foreach ($contantExpressionNode->items as $itemConstantExpressionNode) {
                 $constantFetchNodes = \array_merge($constantFetchNodes, self::getConstantFetchNodes($itemConstantExpressionNode));
             }
             return $constantFetchNodes;
         }
-        if ($contantExpressionNode instanceof \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayItemNode) {
+        if ($contantExpressionNode instanceof \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayItemNode) {
             $constantFetchNodes = self::getConstantFetchNodes($contantExpressionNode->value);
             if ($contantExpressionNode->key !== null) {
                 $constantFetchNodes = \array_merge($constantFetchNodes, self::getConstantFetchNodes($contantExpressionNode->key));
             }
             return $constantFetchNodes;
         }
-        if ($contantExpressionNode instanceof \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode) {
+        if ($contantExpressionNode instanceof \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode) {
             return [$contantExpressionNode];
         }
         return [];
     }
-    public static function change(\_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $masterNode, \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $nodeToChange, \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $changedNode) : \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
+    public static function change(\_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $masterNode, \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $nodeToChange, \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $changedNode) : \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
     {
         if ($masterNode === $nodeToChange) {
             return $changedNode;
         }
-        if ($masterNode instanceof \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode) {
+        if ($masterNode instanceof \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode) {
             $items = [];
             foreach ($masterNode->items as $itemNode) {
                 /** @var ConstExprArrayItemNode $changedItemNode */
                 $changedItemNode = self::change($itemNode, $nodeToChange, $changedNode);
                 $items[] = $changedItemNode;
             }
-            return new \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode($items);
+            return new \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode($items);
         }
-        if ($masterNode instanceof \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayItemNode) {
+        if ($masterNode instanceof \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayItemNode) {
             $key = $masterNode->key !== null ? self::change($masterNode->key, $nodeToChange, $changedNode) : null;
             $value = self::change($masterNode->value, $nodeToChange, $changedNode);
-            return new \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayItemNode($key, $value);
+            return new \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayItemNode($key, $value);
         }
         return clone $masterNode;
     }

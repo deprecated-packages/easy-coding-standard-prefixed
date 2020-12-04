@@ -8,40 +8,40 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperba5852cc6147\Symfony\Component\Cache;
+namespace _PhpScoperc233426b15e0\Symfony\Component\Cache;
 
-use _PhpScoperba5852cc6147\Psr\Cache\CacheException as Psr6CacheException;
-use _PhpScoperba5852cc6147\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoperba5852cc6147\Psr\SimpleCache\CacheException as SimpleCacheException;
-use _PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterface;
-use _PhpScoperba5852cc6147\Symfony\Component\Cache\Adapter\AdapterInterface;
-use _PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperba5852cc6147\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScoperc233426b15e0\Psr\Cache\CacheException as Psr6CacheException;
+use _PhpScoperc233426b15e0\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoperc233426b15e0\Psr\SimpleCache\CacheException as SimpleCacheException;
+use _PhpScoperc233426b15e0\Psr\SimpleCache\CacheInterface;
+use _PhpScoperc233426b15e0\Symfony\Component\Cache\Adapter\AdapterInterface;
+use _PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperc233426b15e0\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-6 cache into a PSR-16 one.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterface, \_PhpScoperba5852cc6147\Symfony\Component\Cache\PruneableInterface, \_PhpScoperba5852cc6147\Symfony\Component\Cache\ResettableInterface
+class Psr16Cache implements \_PhpScoperc233426b15e0\Psr\SimpleCache\CacheInterface, \_PhpScoperc233426b15e0\Symfony\Component\Cache\PruneableInterface, \_PhpScoperc233426b15e0\Symfony\Component\Cache\ResettableInterface
 {
     use ProxyTrait;
     private const METADATA_EXPIRY_OFFSET = 1527506807;
     private $createCacheItem;
     private $cacheItemPrototype;
-    public function __construct(\_PhpScoperba5852cc6147\Psr\Cache\CacheItemPoolInterface $pool)
+    public function __construct(\_PhpScoperc233426b15e0\Psr\Cache\CacheItemPoolInterface $pool)
     {
         $this->pool = $pool;
-        if (!$pool instanceof \_PhpScoperba5852cc6147\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if (!$pool instanceof \_PhpScoperc233426b15e0\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return;
         }
         $cacheItemPrototype =& $this->cacheItemPrototype;
         $createCacheItem = \Closure::bind(static function ($key, $value, $allowInt = \false) use(&$cacheItemPrototype) {
             $item = clone $cacheItemPrototype;
-            $item->key = $allowInt && \is_int($key) ? (string) $key : \_PhpScoperba5852cc6147\Symfony\Component\Cache\CacheItem::validateKey($key);
+            $item->key = $allowInt && \is_int($key) ? (string) $key : \_PhpScoperc233426b15e0\Symfony\Component\Cache\CacheItem::validateKey($key);
             $item->value = $value;
             $item->isHit = \false;
             return $item;
-        }, null, \_PhpScoperba5852cc6147\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoperc233426b15e0\Symfony\Component\Cache\CacheItem::class);
         $this->createCacheItem = function ($key, $value, $allowInt = \false) use($createCacheItem) {
             if (null === $this->cacheItemPrototype) {
                 $this->get($allowInt && \is_int($key) ? (string) $key : $key);
@@ -57,10 +57,10 @@ class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterfa
     {
         try {
             $item = $this->pool->getItem($key);
-        } catch (\_PhpScoperba5852cc6147\Psr\SimpleCache\CacheException $e) {
+        } catch (\_PhpScoperc233426b15e0\Psr\SimpleCache\CacheException $e) {
             throw $e;
-        } catch (\_PhpScoperba5852cc6147\Psr\Cache\CacheException $e) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        } catch (\_PhpScoperc233426b15e0\Psr\Cache\CacheException $e) {
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
         if (null === $this->cacheItemPrototype) {
             $this->cacheItemPrototype = clone $item;
@@ -81,10 +81,10 @@ class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterfa
             } else {
                 $item = $this->pool->getItem($key)->set($value);
             }
-        } catch (\_PhpScoperba5852cc6147\Psr\SimpleCache\CacheException $e) {
+        } catch (\_PhpScoperc233426b15e0\Psr\SimpleCache\CacheException $e) {
             throw $e;
-        } catch (\_PhpScoperba5852cc6147\Psr\Cache\CacheException $e) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        } catch (\_PhpScoperc233426b15e0\Psr\Cache\CacheException $e) {
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
         if (null !== $ttl) {
             $item->expiresAfter($ttl);
@@ -100,10 +100,10 @@ class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterfa
     {
         try {
             return $this->pool->deleteItem($key);
-        } catch (\_PhpScoperba5852cc6147\Psr\SimpleCache\CacheException $e) {
+        } catch (\_PhpScoperc233426b15e0\Psr\SimpleCache\CacheException $e) {
             throw $e;
-        } catch (\_PhpScoperba5852cc6147\Psr\Cache\CacheException $e) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        } catch (\_PhpScoperc233426b15e0\Psr\Cache\CacheException $e) {
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
     }
     /**
@@ -125,17 +125,17 @@ class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterfa
         if ($keys instanceof \Traversable) {
             $keys = \iterator_to_array($keys, \false);
         } elseif (!\is_array($keys)) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
         }
         try {
             $items = $this->pool->getItems($keys);
-        } catch (\_PhpScoperba5852cc6147\Psr\SimpleCache\CacheException $e) {
+        } catch (\_PhpScoperc233426b15e0\Psr\SimpleCache\CacheException $e) {
             throw $e;
-        } catch (\_PhpScoperba5852cc6147\Psr\Cache\CacheException $e) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        } catch (\_PhpScoperc233426b15e0\Psr\Cache\CacheException $e) {
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
         $values = [];
-        if (!$this->pool instanceof \_PhpScoperba5852cc6147\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if (!$this->pool instanceof \_PhpScoperc233426b15e0\Symfony\Component\Cache\Adapter\AdapterInterface) {
             foreach ($items as $key => $item) {
                 $values[$key] = $item->isHit() ? $item->get() : $default;
             }
@@ -150,9 +150,9 @@ class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterfa
             if (!($metadata = $item->getMetadata())) {
                 continue;
             }
-            unset($metadata[\_PhpScoperba5852cc6147\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
+            unset($metadata[\_PhpScoperc233426b15e0\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
             if ($metadata) {
-                $values[$key] = ["" . \pack('VN', (int) (0.1 + $metadata[\_PhpScoperba5852cc6147\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[\_PhpScoperba5852cc6147\Symfony\Component\Cache\CacheItem::METADATA_CTIME]) . "_" => $values[$key]];
+                $values[$key] = ["" . \pack('VN', (int) (0.1 + $metadata[\_PhpScoperc233426b15e0\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[\_PhpScoperc233426b15e0\Symfony\Component\Cache\CacheItem::METADATA_CTIME]) . "_" => $values[$key]];
             }
         }
         return $values;
@@ -166,7 +166,7 @@ class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterfa
     {
         $valuesIsArray = \is_array($values);
         if (!$valuesIsArray && !$values instanceof \Traversable) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache values must be array or Traversable, "%s" given', \is_object($values) ? \get_class($values) : \gettype($values)));
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache values must be array or Traversable, "%s" given', \is_object($values) ? \get_class($values) : \gettype($values)));
         }
         $items = [];
         try {
@@ -189,10 +189,10 @@ class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterfa
                     $items[$key] = $this->pool->getItem($key)->set($value);
                 }
             }
-        } catch (\_PhpScoperba5852cc6147\Psr\SimpleCache\CacheException $e) {
+        } catch (\_PhpScoperc233426b15e0\Psr\SimpleCache\CacheException $e) {
             throw $e;
-        } catch (\_PhpScoperba5852cc6147\Psr\Cache\CacheException $e) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        } catch (\_PhpScoperc233426b15e0\Psr\Cache\CacheException $e) {
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
         $ok = \true;
         foreach ($items as $key => $item) {
@@ -216,14 +216,14 @@ class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterfa
         if ($keys instanceof \Traversable) {
             $keys = \iterator_to_array($keys, \false);
         } elseif (!\is_array($keys)) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
         }
         try {
             return $this->pool->deleteItems($keys);
-        } catch (\_PhpScoperba5852cc6147\Psr\SimpleCache\CacheException $e) {
+        } catch (\_PhpScoperc233426b15e0\Psr\SimpleCache\CacheException $e) {
             throw $e;
-        } catch (\_PhpScoperba5852cc6147\Psr\Cache\CacheException $e) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        } catch (\_PhpScoperc233426b15e0\Psr\Cache\CacheException $e) {
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
     }
     /**
@@ -235,10 +235,10 @@ class Psr16Cache implements \_PhpScoperba5852cc6147\Psr\SimpleCache\CacheInterfa
     {
         try {
             return $this->pool->hasItem($key);
-        } catch (\_PhpScoperba5852cc6147\Psr\SimpleCache\CacheException $e) {
+        } catch (\_PhpScoperc233426b15e0\Psr\SimpleCache\CacheException $e) {
             throw $e;
-        } catch (\_PhpScoperba5852cc6147\Psr\Cache\CacheException $e) {
-            throw new \_PhpScoperba5852cc6147\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        } catch (\_PhpScoperc233426b15e0\Psr\Cache\CacheException $e) {
+            throw new \_PhpScoperc233426b15e0\Symfony\Component\Cache\Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

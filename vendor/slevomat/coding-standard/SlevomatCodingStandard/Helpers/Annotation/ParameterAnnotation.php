@@ -4,18 +4,18 @@ declare (strict_types=1);
 namespace SlevomatCodingStandard\Helpers\Annotation;
 
 use InvalidArgumentException;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use _PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use function in_array;
 use function sprintf;
@@ -26,7 +26,7 @@ class ParameterAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Ann
 {
     /** @var ParamTagValueNode|null */
     private $contentNode;
-    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode $contentNode)
+    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode $contentNode)
     {
         if (!\in_array($name, ['@param', '@psalm-param', '@phpstan-param'], \true)) {
             throw new \InvalidArgumentException(\sprintf('Unsupported annotation %s.', $name));
@@ -38,7 +38,7 @@ class ParameterAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Ann
     {
         return $this->contentNode === null;
     }
-    public function getContentNode() : \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode
+    public function getContentNode() : \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode
     {
         $this->errorWhenInvalid();
         return $this->contentNode;
@@ -60,7 +60,7 @@ class ParameterAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Ann
     /**
      * @return GenericTypeNode|CallableTypeNode|IntersectionTypeNode|UnionTypeNode|ArrayTypeNode|ArrayShapeNode|IdentifierTypeNode|ThisTypeNode|NullableTypeNode|ConstTypeNode
      */
-    public function getType() : \_PhpScoperba5852cc6147\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public function getType() : \_PhpScoperc233426b15e0\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         $this->errorWhenInvalid();
         /** @var GenericTypeNode|CallableTypeNode|IntersectionTypeNode|UnionTypeNode|ArrayTypeNode|ArrayShapeNode|IdentifierTypeNode|ThisTypeNode|NullableTypeNode|ConstTypeNode $type */

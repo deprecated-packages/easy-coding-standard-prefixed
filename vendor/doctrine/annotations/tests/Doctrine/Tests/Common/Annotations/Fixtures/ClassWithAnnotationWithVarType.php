@@ -1,10 +1,10 @@
 <?php
 
-namespace _PhpScoperba5852cc6147\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoperc233426b15e0\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoperba5852cc6147\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithVarType;
-use _PhpScoperba5852cc6147\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAll;
-use _PhpScoperba5852cc6147\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAnnotation;
+use _PhpScoperc233426b15e0\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationWithVarType;
+use _PhpScoperc233426b15e0\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAll;
+use _PhpScoperc233426b15e0\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetAnnotation;
 class ClassWithAnnotationWithVarType
 {
     /**

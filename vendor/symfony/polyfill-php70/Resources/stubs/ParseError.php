@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoperba5852cc6147;
+namespace _PhpScoperc233426b15e0;
 
 class ParseError extends \Error
 {
 }
-\class_alias('_PhpScoperba5852cc6147\\ParseError', 'ParseError', \false);
+\class_alias('_PhpScoperc233426b15e0\\ParseError', 'ParseError', \false);
