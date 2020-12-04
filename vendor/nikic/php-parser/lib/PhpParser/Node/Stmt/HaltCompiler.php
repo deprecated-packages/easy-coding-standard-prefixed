@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera4fc793dae73\PhpParser\Node\Stmt;
+namespace _PhpScopera04bf8e97c06\PhpParser\Node\Stmt;
 
-use _PhpScopera4fc793dae73\PhpParser\Node\Stmt;
-class HaltCompiler extends \_PhpScopera4fc793dae73\PhpParser\Node\Stmt
+use _PhpScopera04bf8e97c06\PhpParser\Node\Stmt;
+class HaltCompiler extends \_PhpScopera04bf8e97c06\PhpParser\Node\Stmt
 {
     /** @var string Remaining text after halt compiler statement. */
     public $remaining;

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera4fc793dae73\Symfony\Component\Console\Descriptor;
+namespace _PhpScopera04bf8e97c06\Symfony\Component\Console\Descriptor;
 
-use _PhpScopera4fc793dae73\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopera04bf8e97c06\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Descriptor interface.
  *
@@ -23,5 +23,5 @@ interface DescriptorInterface
      *
      * @param object $object
      */
-    public function describe(\_PhpScopera4fc793dae73\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = []);
+    public function describe(\_PhpScopera04bf8e97c06\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = []);
 }
