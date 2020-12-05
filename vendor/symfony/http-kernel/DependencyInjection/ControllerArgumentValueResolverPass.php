@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper02b5d1bf8fec\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoperaba240c3d5f1\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
-use _PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper02b5d1bf8fec\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver;
-use _PhpScoper02b5d1bf8fec\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
+use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperaba240c3d5f1\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver;
+use _PhpScoperaba240c3d5f1\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * Gathers and configures the argument value resolvers.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-class ControllerArgumentValueResolverPass implements \_PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ControllerArgumentValueResolverPass implements \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
     private $argumentResolverService;
@@ -34,18 +34,18 @@ class ControllerArgumentValueResolverPass implements \_PhpScoper02b5d1bf8fec\Sym
         $this->argumentValueResolverTag = $argumentValueResolverTag;
         $this->traceableResolverStopwatch = $traceableResolverStopwatch;
     }
-    public function process(\_PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->argumentResolverService)) {
             return;
         }
         $resolvers = $this->findAndSortTaggedServices($this->argumentValueResolverTag, $container);
-        if ($container->getParameter('kernel.debug') && \class_exists(\_PhpScoper02b5d1bf8fec\Symfony\Component\Stopwatch\Stopwatch::class) && $container->has($this->traceableResolverStopwatch)) {
+        if ($container->getParameter('kernel.debug') && \class_exists(\_PhpScoperaba240c3d5f1\Symfony\Component\Stopwatch\Stopwatch::class) && $container->has($this->traceableResolverStopwatch)) {
             foreach ($resolvers as $resolverReference) {
                 $id = (string) $resolverReference;
-                $container->register("debug.{$id}", \_PhpScoper02b5d1bf8fec\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver::class)->setDecoratedService($id)->setArguments([new \_PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\Reference("debug.{$id}.inner"), new \_PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\Reference($this->traceableResolverStopwatch)]);
+                $container->register("debug.{$id}", \_PhpScoperaba240c3d5f1\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver::class)->setDecoratedService($id)->setArguments([new \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Reference("debug.{$id}.inner"), new \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Reference($this->traceableResolverStopwatch)]);
             }
         }
-        $container->getDefinition($this->argumentResolverService)->replaceArgument(1, new \_PhpScoper02b5d1bf8fec\Symfony\Component\DependencyInjection\Argument\IteratorArgument($resolvers));
+        $container->getDefinition($this->argumentResolverService)->replaceArgument(1, new \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Argument\IteratorArgument($resolvers));
     }
 }

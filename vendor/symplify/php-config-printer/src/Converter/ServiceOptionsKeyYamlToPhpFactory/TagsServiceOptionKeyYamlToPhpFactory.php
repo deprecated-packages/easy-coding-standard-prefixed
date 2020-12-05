@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory;
 
-use _PhpScoper02b5d1bf8fec\PhpParser\BuilderHelpers;
-use _PhpScoper02b5d1bf8fec\PhpParser\Node\Arg;
-use _PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper02b5d1bf8fec\PhpParser\Node\Scalar\String_;
+use _PhpScoperaba240c3d5f1\PhpParser\BuilderHelpers;
+use _PhpScoperaba240c3d5f1\PhpParser\Node\Arg;
+use _PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperaba240c3d5f1\PhpParser\Node\Scalar\String_;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
@@ -24,24 +24,24 @@ final class TagsServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpConfigP
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall
     {
         /** @var mixed[] $yaml */
         if (\count($yaml) === 1 && \is_string($yaml[0])) {
-            $string = new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Scalar\String_($yaml[0]);
-            return new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, [new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Arg($string)]);
+            $string = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Scalar\String_($yaml[0]);
+            return new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, [new \_PhpScoperaba240c3d5f1\PhpParser\Node\Arg($string)]);
         }
         foreach ($yaml as $singleValue) {
             $args = [];
             foreach ($singleValue as $singleNestedKey => $singleNestedValue) {
                 if ($singleNestedKey === 'name') {
-                    $args[] = new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Arg(\_PhpScoper02b5d1bf8fec\PhpParser\BuilderHelpers::normalizeValue($singleNestedValue));
+                    $args[] = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Arg(\_PhpScoperaba240c3d5f1\PhpParser\BuilderHelpers::normalizeValue($singleNestedValue));
                     unset($singleValue[$singleNestedKey]);
                 }
             }
             $restArgs = $this->argsNodeFactory->createFromValuesAndWrapInArray($singleValue);
             $args = \array_merge($args, $restArgs);
-            $methodCall = new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, $args);
+            $methodCall = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall($methodCall, self::TAG, $args);
         }
         return $methodCall;
     }

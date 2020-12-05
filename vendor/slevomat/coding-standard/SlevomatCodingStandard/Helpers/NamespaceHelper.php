@@ -14,7 +14,7 @@ use function in_array;
 use function ltrim;
 use function sprintf;
 use function strpos;
-use const _PhpScoper02b5d1bf8fec\T_NAME_FULLY_QUALIFIED;
+use const _PhpScoperaba240c3d5f1\T_NAME_FULLY_QUALIFIED;
 use const T_NAMESPACE;
 use const T_NS_SEPARATOR;
 /**

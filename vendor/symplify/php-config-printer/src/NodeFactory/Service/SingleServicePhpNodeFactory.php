@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use _PhpScoper02b5d1bf8fec\PhpParser\BuilderHelpers;
-use _PhpScoper02b5d1bf8fec\PhpParser\Node\Arg;
-use _PhpScoper02b5d1bf8fec\PhpParser\Node\Expr;
-use _PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper02b5d1bf8fec\PhpParser\Node\Scalar\String_;
-use _PhpScoper02b5d1bf8fec\Symfony\Component\Yaml\Tag\TaggedValue;
+use _PhpScoperaba240c3d5f1\PhpParser\BuilderHelpers;
+use _PhpScoperaba240c3d5f1\PhpParser\Node\Arg;
+use _PhpScoperaba240c3d5f1\PhpParser\Node\Expr;
+use _PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperaba240c3d5f1\PhpParser\Node\Scalar\String_;
+use _PhpScoperaba240c3d5f1\Symfony\Component\Yaml\Tag\TaggedValue;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 final class SingleServicePhpNodeFactory
 {
@@ -23,52 +23,52 @@ final class SingleServicePhpNodeFactory
     /**
      * @see https://symfony.com/doc/current/service_container/injection_types.html
      */
-    public function createProperties(\_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall $methodCall, array $properties) : \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall
+    public function createProperties(\_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall $methodCall, array $properties) : \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall
     {
         foreach ($properties as $name => $value) {
             $args = $this->argsNodeFactory->createFromValues([$name, $value]);
-            $methodCall = new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall($methodCall, 'property', $args);
+            $methodCall = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall($methodCall, 'property', $args);
         }
         return $methodCall;
     }
     /**
      * @see https://symfony.com/doc/current/service_container/injection_types.html
      */
-    public function createCalls(\_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall $methodCall, array $calls) : \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall
+    public function createCalls(\_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall $methodCall, array $calls) : \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall
     {
         foreach ($calls as $call) {
             // @todo can be more items
             $args = [];
             $methodName = $this->resolveCallMethod($call);
-            $args[] = new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Arg($methodName);
+            $args[] = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Arg($methodName);
             $argumentsExpr = $this->resolveCallArguments($call);
-            $args[] = new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Arg($argumentsExpr);
+            $args[] = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Arg($argumentsExpr);
             $returnCloneExpr = $this->resolveCallReturnClone($call);
             if ($returnCloneExpr !== null) {
-                $args[] = new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Arg($returnCloneExpr);
+                $args[] = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Arg($returnCloneExpr);
             }
             $currentArray = \current($call);
-            if ($currentArray instanceof \_PhpScoper02b5d1bf8fec\Symfony\Component\Yaml\Tag\TaggedValue) {
-                $args[] = new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Arg(\_PhpScoper02b5d1bf8fec\PhpParser\BuilderHelpers::normalizeValue(\true));
+            if ($currentArray instanceof \_PhpScoperaba240c3d5f1\Symfony\Component\Yaml\Tag\TaggedValue) {
+                $args[] = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Arg(\_PhpScoperaba240c3d5f1\PhpParser\BuilderHelpers::normalizeValue(\true));
             }
-            $methodCall = new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr\MethodCall($methodCall, 'call', $args);
+            $methodCall = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall($methodCall, 'call', $args);
         }
         return $methodCall;
     }
-    private function resolveCallMethod($call) : \_PhpScoper02b5d1bf8fec\PhpParser\Node\Scalar\String_
+    private function resolveCallMethod($call) : \_PhpScoperaba240c3d5f1\PhpParser\Node\Scalar\String_
     {
-        return new \_PhpScoper02b5d1bf8fec\PhpParser\Node\Scalar\String_($call[0] ?? $call['method'] ?? \key($call));
+        return new \_PhpScoperaba240c3d5f1\PhpParser\Node\Scalar\String_($call[0] ?? $call['method'] ?? \key($call));
     }
-    private function resolveCallArguments($call) : \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr
+    private function resolveCallArguments($call) : \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr
     {
         $arguments = $call[1] ?? $call['arguments'] ?? \current($call);
         return $this->argsNodeFactory->resolveExpr($arguments);
     }
-    private function resolveCallReturnClone(array $call) : ?\_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr
+    private function resolveCallReturnClone(array $call) : ?\_PhpScoperaba240c3d5f1\PhpParser\Node\Expr
     {
         if (isset($call[2]) || isset($call['returns_clone'])) {
             $returnsCloneValue = $call[2] ?? $call['returns_clone'];
-            return \_PhpScoper02b5d1bf8fec\PhpParser\BuilderHelpers::normalizeValue($returnsCloneValue);
+            return \_PhpScoperaba240c3d5f1\PhpParser\BuilderHelpers::normalizeValue($returnsCloneValue);
         }
         return null;
     }
