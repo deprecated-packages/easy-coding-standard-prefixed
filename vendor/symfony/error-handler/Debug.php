@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper81b3ff5ab9fe\Symfony\Component\ErrorHandler;
+namespace _PhpScoper02b5d1bf8fec\Symfony\Component\ErrorHandler;
 
 /**
  * Registers all the debug tools.
@@ -17,7 +17,7 @@ namespace _PhpScoper81b3ff5ab9fe\Symfony\Component\ErrorHandler;
  */
 class Debug
 {
-    public static function enable() : \_PhpScoper81b3ff5ab9fe\Symfony\Component\ErrorHandler\ErrorHandler
+    public static function enable() : \_PhpScoper02b5d1bf8fec\Symfony\Component\ErrorHandler\ErrorHandler
     {
         \error_reporting(-1);
         if (!\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true)) {
@@ -26,7 +26,7 @@ class Debug
             // CLI - display errors only if they're not already logged to STDERR
             \ini_set('display_errors', 1);
         }
-        \_PhpScoper81b3ff5ab9fe\Symfony\Component\ErrorHandler\DebugClassLoader::enable();
-        return \_PhpScoper81b3ff5ab9fe\Symfony\Component\ErrorHandler\ErrorHandler::register(new \_PhpScoper81b3ff5ab9fe\Symfony\Component\ErrorHandler\ErrorHandler(new \_PhpScoper81b3ff5ab9fe\Symfony\Component\ErrorHandler\BufferingLogger()));
+        \_PhpScoper02b5d1bf8fec\Symfony\Component\ErrorHandler\DebugClassLoader::enable();
+        return \_PhpScoper02b5d1bf8fec\Symfony\Component\ErrorHandler\ErrorHandler::register(new \_PhpScoper02b5d1bf8fec\Symfony\Component\ErrorHandler\ErrorHandler(new \_PhpScoper02b5d1bf8fec\Symfony\Component\ErrorHandler\BufferingLogger()));
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper81b3ff5ab9fe\PhpParser\Node\Expr;
+namespace _PhpScoper02b5d1bf8fec\PhpParser\Node\Expr;
 
-use _PhpScoper81b3ff5ab9fe\PhpParser\Node\Expr;
-class Yield_ extends \_PhpScoper81b3ff5ab9fe\PhpParser\Node\Expr
+use _PhpScoper02b5d1bf8fec\PhpParser\Node\Expr;
+class Yield_ extends \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr
 {
     /** @var null|Expr Key expression */
     public $key;
@@ -17,7 +17,7 @@ class Yield_ extends \_PhpScoper81b3ff5ab9fe\PhpParser\Node\Expr
      * @param null|Expr $key        Key expression
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper81b3ff5ab9fe\PhpParser\Node\Expr $value = null, \_PhpScoper81b3ff5ab9fe\PhpParser\Node\Expr $key = null, array $attributes = [])
+    public function __construct(\_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr $value = null, \_PhpScoper02b5d1bf8fec\PhpParser\Node\Expr $key = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->key = $key;

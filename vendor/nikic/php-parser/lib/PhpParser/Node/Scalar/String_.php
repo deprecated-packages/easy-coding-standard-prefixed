@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper81b3ff5ab9fe\PhpParser\Node\Scalar;
+namespace _PhpScoper02b5d1bf8fec\PhpParser\Node\Scalar;
 
-use _PhpScoper81b3ff5ab9fe\PhpParser\Error;
-use _PhpScoper81b3ff5ab9fe\PhpParser\Node\Scalar;
-class String_ extends \_PhpScoper81b3ff5ab9fe\PhpParser\Node\Scalar
+use _PhpScoper02b5d1bf8fec\PhpParser\Error;
+use _PhpScoper02b5d1bf8fec\PhpParser\Node\Scalar;
+class String_ extends \_PhpScoper02b5d1bf8fec\PhpParser\Node\Scalar
 {
     /* For use in "kind" attribute */
     const KIND_SINGLE_QUOTED = 1;
@@ -106,7 +106,7 @@ class String_ extends \_PhpScoper81b3ff5ab9fe\PhpParser\Node\Scalar
         if ($num <= 0x1fffff) {
             return \chr(($num >> 18) + 0xf0) . \chr(($num >> 12 & 0x3f) + 0x80) . \chr(($num >> 6 & 0x3f) + 0x80) . \chr(($num & 0x3f) + 0x80);
         }
-        throw new \_PhpScoper81b3ff5ab9fe\PhpParser\Error('Invalid UTF-8 codepoint escape sequence: Codepoint too large');
+        throw new \_PhpScoper02b5d1bf8fec\PhpParser\Error('Invalid UTF-8 codepoint escape sequence: Codepoint too large');
     }
     public function getType() : string
     {

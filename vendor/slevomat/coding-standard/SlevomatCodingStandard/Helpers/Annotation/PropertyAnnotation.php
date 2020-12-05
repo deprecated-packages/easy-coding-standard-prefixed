@@ -4,16 +4,16 @@ declare (strict_types=1);
 namespace SlevomatCodingStandard\Helpers\Annotation;
 
 use InvalidArgumentException;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use _PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use function in_array;
 use function sprintf;
@@ -24,7 +24,7 @@ class PropertyAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Anno
 {
     /** @var PropertyTagValueNode|null */
     private $contentNode;
-    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode $contentNode)
+    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode $contentNode)
     {
         if (!\in_array($name, ['@property', '@property-read', '@property-write', '@psalm-property', '@psalm-property-read', '@psalm-property-write', '@phpstan-property', '@phpstan-property-read', '@phpstan-property-write'], \true)) {
             throw new \InvalidArgumentException(\sprintf('Unsupported annotation %s.', $name));
@@ -36,7 +36,7 @@ class PropertyAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Anno
     {
         return $this->contentNode === null;
     }
-    public function getContentNode() : \_PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode
+    public function getContentNode() : \_PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode
     {
         $this->errorWhenInvalid();
         return $this->contentNode;
@@ -58,7 +58,7 @@ class PropertyAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Anno
     /**
      * @return GenericTypeNode|CallableTypeNode|IntersectionTypeNode|UnionTypeNode|ArrayTypeNode|IdentifierTypeNode|ThisTypeNode|NullableTypeNode
      */
-    public function getType() : \_PhpScoper81b3ff5ab9fe\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public function getType() : \_PhpScoper02b5d1bf8fec\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         $this->errorWhenInvalid();
         /** @var GenericTypeNode|CallableTypeNode|IntersectionTypeNode|UnionTypeNode|ArrayTypeNode|IdentifierTypeNode|ThisTypeNode|NullableTypeNode $type */
