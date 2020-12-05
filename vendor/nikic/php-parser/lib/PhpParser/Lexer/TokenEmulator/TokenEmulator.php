@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperbaf90856897c\PhpParser\Lexer\TokenEmulator;
+namespace _PhpScoper59ccd3f8e121\PhpParser\Lexer\TokenEmulator;
 
 /** @internal */
 abstract class TokenEmulator

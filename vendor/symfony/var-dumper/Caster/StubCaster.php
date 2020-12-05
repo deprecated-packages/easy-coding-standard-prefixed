@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperbaf90856897c\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts a caster's Stub.
  *
@@ -20,7 +20,7 @@ use _PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class StubCaster
 {
-    public static function castStub(\_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub $c, array $a, \_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
+    public static function castStub(\_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Cloner\Stub $c, array $a, \_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
     {
         if ($isNested) {
             $stub->type = $c->type;
@@ -29,19 +29,19 @@ class StubCaster
             $stub->handle = $c->handle;
             $stub->cut = $c->cut;
             $stub->attr = $c->attr;
-            if (\_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub::TYPE_REF === $c->type && !$c->class && \is_string($c->value) && !\preg_match('//u', $c->value)) {
-                $stub->type = \_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub::TYPE_STRING;
-                $stub->class = \_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub::STRING_BINARY;
+            if (\_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Cloner\Stub::TYPE_REF === $c->type && !$c->class && \is_string($c->value) && !\preg_match('//u', $c->value)) {
+                $stub->type = \_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Cloner\Stub::TYPE_STRING;
+                $stub->class = \_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Cloner\Stub::STRING_BINARY;
             }
             $a = [];
         }
         return $a;
     }
-    public static function castCutArray(\_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Caster\CutArrayStub $c, array $a, \_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
+    public static function castCutArray(\_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Caster\CutArrayStub $c, array $a, \_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
     {
         return $isNested ? $c->preservedSubset : $a;
     }
-    public static function cutInternals($obj, array $a, \_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
+    public static function cutInternals($obj, array $a, \_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
     {
         if ($isNested) {
             $stub->cut += \count($a);
@@ -49,7 +49,7 @@ class StubCaster
         }
         return $a;
     }
-    public static function castEnum(\_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Caster\EnumStub $c, array $a, \_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
+    public static function castEnum(\_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Caster\EnumStub $c, array $a, \_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
     {
         if ($isNested) {
             $stub->class = $c->dumpKeys ? '' : null;
@@ -60,7 +60,7 @@ class StubCaster
             $a = [];
             if ($c->value) {
                 foreach (\array_keys($c->value) as $k) {
-                    $keys[] = !isset($k[0]) || "\0" !== $k[0] ? \_PhpScoperbaf90856897c\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k : $k;
+                    $keys[] = !isset($k[0]) || "\0" !== $k[0] ? \_PhpScoper59ccd3f8e121\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k : $k;
                 }
                 // Preserve references with array_combine()
                 $a = \array_combine($keys, $c->value);

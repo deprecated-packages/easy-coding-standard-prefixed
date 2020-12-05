@@ -9,9 +9,9 @@
  */
 namespace PHP_CodeSniffer\Tests;
 
-use _PhpScoperbaf90856897c\PHPUnit\Framework\TestSuite as PHPUnit_TestSuite;
-use _PhpScoperbaf90856897c\PHPUnit\Framework\TestResult;
-class TestSuite extends \_PhpScoperbaf90856897c\PHPUnit\Framework\TestSuite
+use _PhpScoper59ccd3f8e121\PHPUnit\Framework\TestSuite as PHPUnit_TestSuite;
+use _PhpScoper59ccd3f8e121\PHPUnit\Framework\TestResult;
+class TestSuite extends \_PhpScoper59ccd3f8e121\PHPUnit\Framework\TestSuite
 {
     /**
      * Runs the tests and collects their result in a TestResult.
@@ -20,7 +20,7 @@ class TestSuite extends \_PhpScoperbaf90856897c\PHPUnit\Framework\TestSuite
      *
      * @return \PHPUnit\Framework\TestResult
      */
-    public function run(\_PhpScoperbaf90856897c\PHPUnit\Framework\TestResult $result = null) : \_PhpScoperbaf90856897c\PHPUnit\Framework\TestResult
+    public function run(\_PhpScoper59ccd3f8e121\PHPUnit\Framework\TestResult $result = null) : \_PhpScoper59ccd3f8e121\PHPUnit\Framework\TestResult
     {
         $result = parent::run($result);
         printPHPCodeSnifferTestOutput();
