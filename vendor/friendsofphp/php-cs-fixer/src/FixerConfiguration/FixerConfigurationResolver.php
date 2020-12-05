@@ -11,8 +11,8 @@
  */
 namespace PhpCsFixer\FixerConfiguration;
 
-use _PhpScoperaba240c3d5f1\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoperaba240c3d5f1\Symfony\Component\OptionsResolver\OptionsResolver;
+use _PhpScoperc83f84c90b60\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoperc83f84c90b60\Symfony\Component\OptionsResolver\OptionsResolver;
 final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
 {
     /**
@@ -47,14 +47,14 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
      */
     public function resolve(array $options)
     {
-        $resolver = new \_PhpScoperaba240c3d5f1\Symfony\Component\OptionsResolver\OptionsResolver();
+        $resolver = new \_PhpScoperc83f84c90b60\Symfony\Component\OptionsResolver\OptionsResolver();
         foreach ($this->options as $option) {
             $name = $option->getName();
             if ($option instanceof \PhpCsFixer\FixerConfiguration\AliasedFixerOption) {
                 $alias = $option->getAlias();
                 if (\array_key_exists($alias, $options)) {
                     if (\array_key_exists($name, $options)) {
-                        throw new \_PhpScoperaba240c3d5f1\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Aliased option %s/%s is passed multiple times.', $name, $alias));
+                        throw new \_PhpScoperc83f84c90b60\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Aliased option %s/%s is passed multiple times.', $name, $alias));
                     }
                     @\trigger_error(\sprintf('Option "%s" is deprecated, use "%s" instead.', $alias, $name), \E_USER_DEPRECATED);
                     $options[$name] = $options[$alias];

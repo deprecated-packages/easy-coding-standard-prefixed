@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoperaba240c3d5f1\Composer\XdebugHandler;
+namespace _PhpScoperc83f84c90b60\Composer\XdebugHandler;
 
-use _PhpScoperaba240c3d5f1\Psr\Log\LoggerInterface;
-use _PhpScoperaba240c3d5f1\Psr\Log\LogLevel;
+use _PhpScoperc83f84c90b60\Psr\Log\LoggerInterface;
+use _PhpScoperc83f84c90b60\Psr\Log\LogLevel;
 /**
  * @author John Stevenson <john-stevenson@blueyonder.co.uk>
  * @internal
@@ -40,7 +40,7 @@ class Status
     public function __construct($envAllowXdebug, $debug)
     {
         $start = \getenv(self::ENV_RESTART);
-        \_PhpScoperaba240c3d5f1\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART);
+        \_PhpScoperc83f84c90b60\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART);
         $this->time = $start ? \round((\microtime(\true) - $start) * 1000) : 0;
         $this->envAllowXdebug = $envAllowXdebug;
         $this->debug = $debug && \defined('STDERR');
@@ -48,7 +48,7 @@ class Status
     /**
      * @param LoggerInterface $logger
      */
-    public function setLogger(\_PhpScoperaba240c3d5f1\Psr\Log\LoggerInterface $logger)
+    public function setLogger(\_PhpScoperc83f84c90b60\Psr\Log\LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -73,7 +73,7 @@ class Status
     private function output($text, $level = null)
     {
         if ($this->logger) {
-            $this->logger->log($level ?: \_PhpScoperaba240c3d5f1\Psr\Log\LogLevel::DEBUG, $text);
+            $this->logger->log($level ?: \_PhpScoperc83f84c90b60\Psr\Log\LogLevel::DEBUG, $text);
         }
         if ($this->debug) {
             \fwrite(\STDERR, \sprintf('xdebug-handler[%d] %s', \getmypid(), $text . \PHP_EOL));
@@ -86,7 +86,7 @@ class Status
     }
     private function reportError($error)
     {
-        $this->output(\sprintf('No restart (%s)', $error), \_PhpScoperaba240c3d5f1\Psr\Log\LogLevel::WARNING);
+        $this->output(\sprintf('No restart (%s)', $error), \_PhpScoperc83f84c90b60\Psr\Log\LogLevel::WARNING);
     }
     private function reportInfo($info)
     {
@@ -106,13 +106,13 @@ class Status
     private function reportRestart()
     {
         $this->output($this->getLoadedMessage());
-        \_PhpScoperaba240c3d5f1\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART, (string) \microtime(\true));
+        \_PhpScoperc83f84c90b60\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART, (string) \microtime(\true));
     }
     private function reportRestarted()
     {
         $loaded = $this->getLoadedMessage();
         $text = \sprintf('Restarted (%d ms). %s', $this->time, $loaded);
-        $level = $this->loaded ? \_PhpScoperaba240c3d5f1\Psr\Log\LogLevel::WARNING : null;
+        $level = $this->loaded ? \_PhpScoperc83f84c90b60\Psr\Log\LogLevel::WARNING : null;
         $this->output($text, $level);
     }
     private function reportRestarting($command)

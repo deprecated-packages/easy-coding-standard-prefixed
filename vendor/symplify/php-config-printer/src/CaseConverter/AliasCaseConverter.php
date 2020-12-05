@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoperaba240c3d5f1\Nette\Utils\Strings;
-use _PhpScoperaba240c3d5f1\PhpParser\Node\Arg;
-use _PhpScoperaba240c3d5f1\PhpParser\Node\Expr\BinaryOp\Concat;
-use _PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperaba240c3d5f1\PhpParser\Node\Expr\Variable;
-use _PhpScoperaba240c3d5f1\PhpParser\Node\Scalar\String_;
-use _PhpScoperaba240c3d5f1\PhpParser\Node\Stmt\Expression;
+use _PhpScoperc83f84c90b60\Nette\Utils\Strings;
+use _PhpScoperc83f84c90b60\PhpParser\Node\Arg;
+use _PhpScoperc83f84c90b60\PhpParser\Node\Expr\BinaryOp\Concat;
+use _PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperc83f84c90b60\PhpParser\Node\Expr\Variable;
+use _PhpScoperc83f84c90b60\PhpParser\Node\Scalar\String_;
+use _PhpScoperc83f84c90b60\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
@@ -54,39 +54,39 @@ final class AliasCaseConverter implements \Symplify\PhpConfigPrinter\Contract\Ca
         $this->argsNodeFactory = $argsNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoperaba240c3d5f1\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperc83f84c90b60\PhpParser\Node\Stmt\Expression
     {
         if (!\is_string($key)) {
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
-        $servicesVariable = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $servicesVariable = new \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
         if (\class_exists($key) || \interface_exists($key)) {
             $classReference = $this->commonNodeFactory->createClassReference($key);
             $argValues = [];
             $argValues[] = $classReference;
             $argValues[] = $values[\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS] ?? $values;
             $args = $this->argsNodeFactory->createFromValues($argValues, \true);
-            $methodCall = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
-            return new \_PhpScoperaba240c3d5f1\PhpParser\Node\Stmt\Expression($methodCall);
+            $methodCall = new \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+            return new \_PhpScoperc83f84c90b60\PhpParser\Node\Stmt\Expression($methodCall);
         }
         // handles: "SomeClass $someVariable: ..."
-        $fullClassName = \_PhpScoperaba240c3d5f1\Nette\Utils\Strings::before($key, ' $');
+        $fullClassName = \_PhpScoperc83f84c90b60\Nette\Utils\Strings::before($key, ' $');
         if ($fullClassName !== null) {
             $methodCall = $this->createAliasNode($key, $fullClassName, $values);
-            return new \_PhpScoperaba240c3d5f1\PhpParser\Node\Stmt\Expression($methodCall);
+            return new \_PhpScoperc83f84c90b60\PhpParser\Node\Stmt\Expression($methodCall);
         }
         $methodCall = null;
         if (isset($values[\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS])) {
             $className = $values[\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS];
             $classReference = $this->commonNodeFactory->createClassReference($className);
             $args = $this->argsNodeFactory->createFromValues([$key, $classReference]);
-            $methodCall = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+            $methodCall = new \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
             unset($values[\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS]);
         }
         /** @var string|mixed[] $values */
         if (\is_string($values) && $values[0] === '@') {
             $args = $this->argsNodeFactory->createFromValues([$values], \true);
-            $methodCall = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+            $methodCall = new \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
         } elseif (\is_array($values)) {
             if ($methodCall === null) {
                 throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
@@ -97,7 +97,7 @@ final class AliasCaseConverter implements \Symplify\PhpConfigPrinter\Contract\Ca
         if ($methodCall === null) {
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
-        return new \_PhpScoperaba240c3d5f1\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \_PhpScoperc83f84c90b60\PhpParser\Node\Stmt\Expression($methodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {
@@ -107,21 +107,21 @@ final class AliasCaseConverter implements \Symplify\PhpConfigPrinter\Contract\Ca
         if (isset($values[\Symplify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS])) {
             return \true;
         }
-        if (\_PhpScoperaba240c3d5f1\Nette\Utils\Strings::match($key, self::NAMED_ALIAS_REGEX)) {
+        if (\_PhpScoperc83f84c90b60\Nette\Utils\Strings::match($key, self::NAMED_ALIAS_REGEX)) {
             return \true;
         }
         return \is_string($values) && $values[0] === '@';
     }
-    private function createAliasNode(string $key, string $fullClassName, $serviceValues) : \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall
+    private function createAliasNode(string $key, string $fullClassName, $serviceValues) : \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall
     {
         $args = [];
         $classConstFetch = $this->commonNodeFactory->createClassReference($fullClassName);
-        \_PhpScoperaba240c3d5f1\Nette\Utils\Strings::match($key, self::ARGUMENT_NAME_REGEX);
-        $argumentName = '$' . \_PhpScoperaba240c3d5f1\Nette\Utils\Strings::after($key, '$');
-        $concat = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\BinaryOp\Concat($classConstFetch, new \_PhpScoperaba240c3d5f1\PhpParser\Node\Scalar\String_(' ' . $argumentName));
-        $args[] = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Arg($concat);
+        \_PhpScoperc83f84c90b60\Nette\Utils\Strings::match($key, self::ARGUMENT_NAME_REGEX);
+        $argumentName = '$' . \_PhpScoperc83f84c90b60\Nette\Utils\Strings::after($key, '$');
+        $concat = new \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\BinaryOp\Concat($classConstFetch, new \_PhpScoperc83f84c90b60\PhpParser\Node\Scalar\String_(' ' . $argumentName));
+        $args[] = new \_PhpScoperc83f84c90b60\PhpParser\Node\Arg($concat);
         $serviceName = \ltrim($serviceValues, '@');
-        $args[] = new \_PhpScoperaba240c3d5f1\PhpParser\Node\Arg(new \_PhpScoperaba240c3d5f1\PhpParser\Node\Scalar\String_($serviceName));
-        return new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\MethodCall(new \_PhpScoperaba240c3d5f1\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+        $args[] = new \_PhpScoperc83f84c90b60\PhpParser\Node\Arg(new \_PhpScoperc83f84c90b60\PhpParser\Node\Scalar\String_($serviceName));
+        return new \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall(new \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
     }
 }

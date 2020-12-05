@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperaba240c3d5f1\Doctrine\Tests\Common\Annotations\Fixtures\Annotation;
+namespace _PhpScoperc83f84c90b60\Doctrine\Tests\Common\Annotations\Fixtures\Annotation;
 
 /** @Annotation */
 class Secure

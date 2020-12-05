@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Extension;
+namespace _PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScoperaba240c3d5f1\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScoperaba240c3d5f1\Symfony\Component\Config\Definition\Processor;
-use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Container;
-use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoperc83f84c90b60\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoperc83f84c90b60\Symfony\Component\Config\Definition\Processor;
+use _PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Container;
+use _PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
+use _PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Exception\LogicException;
 /**
  * Provides useful features shared by many extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Extension implements \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+abstract class Extension implements \_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
 {
     private $processedConfigs = [];
     /**
@@ -63,15 +63,15 @@ abstract class Extension implements \_PhpScoperaba240c3d5f1\Symfony\Component\De
     {
         $className = static::class;
         if ('Extension' != \substr($className, -9)) {
-            throw new \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Exception\BadMethodCallException('This extension does not follow the naming convention; you must overwrite the getAlias() method.');
+            throw new \_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Exception\BadMethodCallException('This extension does not follow the naming convention; you must overwrite the getAlias() method.');
         }
         $classBaseName = \substr(\strrchr($className, '\\'), 1, -9);
-        return \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Container::underscore($classBaseName);
+        return \_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Container::underscore($classBaseName);
     }
     /**
      * {@inheritdoc}
      */
-    public function getConfiguration(array $config, \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function getConfiguration(array $config, \_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $class = static::class;
         if (\false !== \strpos($class, "\0")) {
@@ -83,17 +83,17 @@ abstract class Extension implements \_PhpScoperaba240c3d5f1\Symfony\Component\De
         if (!$class) {
             return null;
         }
-        if (!$class->implementsInterface(\_PhpScoperaba240c3d5f1\Symfony\Component\Config\Definition\ConfigurationInterface::class)) {
-            throw new \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('The extension configuration class "%s" must implement "%s".', $class->getName(), \_PhpScoperaba240c3d5f1\Symfony\Component\Config\Definition\ConfigurationInterface::class));
+        if (!$class->implementsInterface(\_PhpScoperc83f84c90b60\Symfony\Component\Config\Definition\ConfigurationInterface::class)) {
+            throw new \_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('The extension configuration class "%s" must implement "%s".', $class->getName(), \_PhpScoperc83f84c90b60\Symfony\Component\Config\Definition\ConfigurationInterface::class));
         }
         if (!($constructor = $class->getConstructor()) || !$constructor->getNumberOfRequiredParameters()) {
             return $class->newInstance();
         }
         return null;
     }
-    protected final function processConfiguration(\_PhpScoperaba240c3d5f1\Symfony\Component\Config\Definition\ConfigurationInterface $configuration, array $configs) : array
+    protected final function processConfiguration(\_PhpScoperc83f84c90b60\Symfony\Component\Config\Definition\ConfigurationInterface $configuration, array $configs) : array
     {
-        $processor = new \_PhpScoperaba240c3d5f1\Symfony\Component\Config\Definition\Processor();
+        $processor = new \_PhpScoperc83f84c90b60\Symfony\Component\Config\Definition\Processor();
         return $this->processedConfigs[] = $processor->processConfiguration($configuration, $configs);
     }
     /**
@@ -112,10 +112,10 @@ abstract class Extension implements \_PhpScoperaba240c3d5f1\Symfony\Component\De
      *
      * @throws InvalidArgumentException When the config is not enableable
      */
-    protected function isConfigEnabled(\_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $config)
+    protected function isConfigEnabled(\_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $config)
     {
         if (!\array_key_exists('enabled', $config)) {
-            throw new \_PhpScoperaba240c3d5f1\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException("The config array has no 'enabled' key.");
+            throw new \_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException("The config array has no 'enabled' key.");
         }
         return (bool) $container->getParameterBag()->resolveValue($config['enabled']);
     }
