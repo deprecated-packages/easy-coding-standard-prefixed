@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScopera04bf8e97c06\Nette\Utils;
+namespace _PhpScoper87c77ad5700d\Nette\Utils;
 
-use _PhpScopera04bf8e97c06\Nette;
+use _PhpScoper87c77ad5700d\Nette;
 use function is_array, is_int, is_object;
 /**
  * Array tools library.
@@ -28,7 +28,7 @@ class Arrays
                 $arr = $arr[$k];
             } else {
                 if (\func_num_args() < 3) {
-                    throw new \_PhpScopera04bf8e97c06\Nette\InvalidArgumentException("Missing item '{$k}'.");
+                    throw new \_PhpScoper87c77ad5700d\Nette\InvalidArgumentException("Missing item '{$k}'.");
                 }
                 return $default;
             }
@@ -47,7 +47,7 @@ class Arrays
             if (\is_array($arr) || $arr === null) {
                 $arr =& $arr[$k];
             } else {
-                throw new \_PhpScopera04bf8e97c06\Nette\InvalidArgumentException('Traversed item is not an array.');
+                throw new \_PhpScoper87c77ad5700d\Nette\InvalidArgumentException('Traversed item is not an array.');
             }
         }
         return $arr;
@@ -108,7 +108,7 @@ class Arrays
      */
     public static function grep(array $arr, string $pattern, int $flags = 0) : array
     {
-        return \_PhpScopera04bf8e97c06\Nette\Utils\Strings::pcre('preg_grep', [$pattern, $arr, $flags]);
+        return \_PhpScoper87c77ad5700d\Nette\Utils\Strings::pcre('preg_grep', [$pattern, $arr, $flags]);
     }
     /**
      * Returns flattened array.
@@ -139,7 +139,7 @@ class Arrays
     {
         $parts = \is_array($path) ? $path : \preg_split('#(\\[\\]|->|=|\\|)#', $path, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
         if (!$parts || $parts[0] === '=' || $parts[0] === '|' || $parts === ['->']) {
-            throw new \_PhpScopera04bf8e97c06\Nette\InvalidArgumentException("Invalid path '{$path}'.");
+            throw new \_PhpScoper87c77ad5700d\Nette\InvalidArgumentException("Invalid path '{$path}'.");
         }
         $res = $parts[0] === '->' ? new \stdClass() : [];
         foreach ($arr as $rowOrig) {
@@ -194,7 +194,7 @@ class Arrays
             unset($arr[$key]);
             return $value;
         } elseif (\func_num_args() < 3) {
-            throw new \_PhpScopera04bf8e97c06\Nette\InvalidArgumentException("Missing item '{$key}'.");
+            throw new \_PhpScoper87c77ad5700d\Nette\InvalidArgumentException("Missing item '{$key}'.");
         } else {
             return $default;
         }

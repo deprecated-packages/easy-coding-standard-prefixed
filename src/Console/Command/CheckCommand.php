@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScopera04bf8e97c06\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopera04bf8e97c06\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper87c77ad5700d\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper87c77ad5700d\Symfony\Component\Console\Output\OutputInterface;
 final class CheckCommand extends \Symplify\EasyCodingStandard\Console\Command\AbstractCheckCommand
 {
     protected function configure() : void
@@ -12,7 +12,7 @@ final class CheckCommand extends \Symplify\EasyCodingStandard\Console\Command\Ab
         $this->setDescription('Check coding standard in one or more directories.');
         parent::configure();
     }
-    protected function execute(\_PhpScopera04bf8e97c06\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopera04bf8e97c06\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoper87c77ad5700d\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper87c77ad5700d\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $this->configuration->resolveFromInput($input);
         // CLI paths override parameter paths
