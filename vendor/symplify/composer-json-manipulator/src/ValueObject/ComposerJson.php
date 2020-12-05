@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\ValueObject;
 
-use _PhpScoper87c77ad5700d\Nette\Utils\Arrays;
-use _PhpScoper87c77ad5700d\Nette\Utils\Strings;
+use _PhpScoperbaf90856897c\Nette\Utils\Arrays;
+use _PhpScoperbaf90856897c\Nette\Utils\Strings;
 use Symplify\ComposerJsonManipulator\Sorter\ComposerPackageSorter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -123,6 +123,10 @@ final class ComposerJson
     public function getRequire() : array
     {
         return $this->require;
+    }
+    public function getRequirePhpVersion() : ?string
+    {
+        return $this->require['php'] ?? null;
     }
     /**
      * @return array<string, string>
@@ -277,7 +281,7 @@ final class ComposerJson
         if ($this->name === null) {
             return null;
         }
-        return \_PhpScoper87c77ad5700d\Nette\Utils\Strings::after($this->name, '/', -1);
+        return \_PhpScoperbaf90856897c\Nette\Utils\Strings::after($this->name, '/', -1);
     }
     /**
      * @return string[]
@@ -477,7 +481,7 @@ final class ComposerJson
     private function getAutoloadDirectories() : array
     {
         $autoloadDirectories = \array_merge($this->getPsr4AndClassmapDirectories(), $this->getPsr4AndClassmapDevDirectories());
-        return \_PhpScoper87c77ad5700d\Nette\Utils\Arrays::flatten($autoloadDirectories);
+        return \_PhpScoperbaf90856897c\Nette\Utils\Arrays::flatten($autoloadDirectories);
     }
     /**
      * @return string[]

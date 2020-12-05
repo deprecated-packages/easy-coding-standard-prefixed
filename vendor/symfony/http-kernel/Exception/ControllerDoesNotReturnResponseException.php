@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper87c77ad5700d\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoperbaf90856897c\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>

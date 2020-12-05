@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper87c77ad5700d\Symfony\Component\HttpKernel\CacheClearer;
+namespace _PhpScoperbaf90856897c\Symfony\Component\HttpKernel\CacheClearer;
 
 /**
  * ChainCacheClearer.
@@ -17,7 +17,7 @@ namespace _PhpScoper87c77ad5700d\Symfony\Component\HttpKernel\CacheClearer;
  *
  * @final
  */
-class ChainCacheClearer implements \_PhpScoper87c77ad5700d\Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
+class ChainCacheClearer implements \_PhpScoperbaf90856897c\Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
 {
     private $clearers;
     public function __construct(iterable $clearers = [])

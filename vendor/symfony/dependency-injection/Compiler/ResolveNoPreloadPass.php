@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper87c77ad5700d\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperbaf90856897c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper87c77ad5700d\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper87c77ad5700d\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper87c77ad5700d\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperbaf90856897c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperbaf90856897c\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperbaf90856897c\Symfony\Component\DependencyInjection\Reference;
 /**
  * Propagate the "container.no_preload" tag.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveNoPreloadPass extends \_PhpScoper87c77ad5700d\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveNoPreloadPass extends \_PhpScoperbaf90856897c\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private const DO_PRELOAD_TAG = '.container.do_preload';
     private $tagName;
@@ -30,7 +30,7 @@ class ResolveNoPreloadPass extends \_PhpScoper87c77ad5700d\Symfony\Component\Dep
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoper87c77ad5700d\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperbaf90856897c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->container = $container;
         try {
@@ -63,7 +63,7 @@ class ResolveNoPreloadPass extends \_PhpScoper87c77ad5700d\Symfony\Component\Dep
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if ($value instanceof \_PhpScoper87c77ad5700d\Symfony\Component\DependencyInjection\Reference && \_PhpScoper87c77ad5700d\Symfony\Component\DependencyInjection\ContainerBuilder::IGNORE_ON_UNINITIALIZED_REFERENCE !== $value->getInvalidBehavior() && $this->container->hasDefinition($id = (string) $value)) {
+        if ($value instanceof \_PhpScoperbaf90856897c\Symfony\Component\DependencyInjection\Reference && \_PhpScoperbaf90856897c\Symfony\Component\DependencyInjection\ContainerBuilder::IGNORE_ON_UNINITIALIZED_REFERENCE !== $value->getInvalidBehavior() && $this->container->hasDefinition($id = (string) $value)) {
             $definition = $this->container->getDefinition($id);
             if (!isset($this->resolvedIds[$id]) && (!$definition->isPublic() || $definition->isPrivate())) {
                 $this->resolvedIds[$id] = \true;
@@ -71,7 +71,7 @@ class ResolveNoPreloadPass extends \_PhpScoper87c77ad5700d\Symfony\Component\Dep
             }
             return $value;
         }
-        if (!$value instanceof \_PhpScoper87c77ad5700d\Symfony\Component\DependencyInjection\Definition) {
+        if (!$value instanceof \_PhpScoperbaf90856897c\Symfony\Component\DependencyInjection\Definition) {
             return parent::processValue($value, $isRoot);
         }
         if ($value->hasTag($this->tagName) || $value->isDeprecated() || $value->hasErrors()) {

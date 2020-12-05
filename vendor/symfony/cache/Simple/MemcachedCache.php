@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper87c77ad5700d\Symfony\Component\Cache\Simple;
+namespace _PhpScoperbaf90856897c\Symfony\Component\Cache\Simple;
 
-use _PhpScoper87c77ad5700d\Symfony\Component\Cache\Adapter\MemcachedAdapter;
-use _PhpScoper87c77ad5700d\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper87c77ad5700d\Symfony\Component\Cache\Traits\MemcachedTrait;
-use _PhpScoper87c77ad5700d\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper87c77ad5700d\Symfony\Component\Cache\Simple\MemcachedCache::class, \_PhpScoper87c77ad5700d\Symfony\Component\Cache\Adapter\MemcachedAdapter::class, \_PhpScoper87c77ad5700d\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoperbaf90856897c\Symfony\Component\Cache\Adapter\MemcachedAdapter;
+use _PhpScoperbaf90856897c\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperbaf90856897c\Symfony\Component\Cache\Traits\MemcachedTrait;
+use _PhpScoperbaf90856897c\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperbaf90856897c\Symfony\Component\Cache\Simple\MemcachedCache::class, \_PhpScoperbaf90856897c\Symfony\Component\Cache\Adapter\MemcachedAdapter::class, \_PhpScoperbaf90856897c\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use MemcachedAdapter and type-hint for CacheInterface instead.
  */
-class MemcachedCache extends \_PhpScoper87c77ad5700d\Symfony\Component\Cache\Simple\AbstractCache
+class MemcachedCache extends \_PhpScoperbaf90856897c\Symfony\Component\Cache\Simple\AbstractCache
 {
     use MemcachedTrait;
     protected $maxIdLength = 250;
-    public function __construct(\Memcached $client, string $namespace = '', int $defaultLifetime = 0, \_PhpScoper87c77ad5700d\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(\Memcached $client, string $namespace = '', int $defaultLifetime = 0, \_PhpScoperbaf90856897c\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         $this->init($client, $namespace, $defaultLifetime, $marshaller);
     }

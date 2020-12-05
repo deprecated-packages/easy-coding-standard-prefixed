@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper87c77ad5700d\PhpParser\Node\Expr;
+namespace _PhpScoperbaf90856897c\PhpParser\Node\Expr;
 
-use _PhpScoper87c77ad5700d\PhpParser\Node;
-use _PhpScoper87c77ad5700d\PhpParser\Node\Expr;
-use _PhpScoper87c77ad5700d\PhpParser\Node\Identifier;
-class StaticCall extends \_PhpScoper87c77ad5700d\PhpParser\Node\Expr
+use _PhpScoperbaf90856897c\PhpParser\Node;
+use _PhpScoperbaf90856897c\PhpParser\Node\Expr;
+use _PhpScoperbaf90856897c\PhpParser\Node\Identifier;
+class StaticCall extends \_PhpScoperbaf90856897c\PhpParser\Node\Expr
 {
     /** @var Node\Name|Expr Class name */
     public $class;
@@ -26,7 +26,7 @@ class StaticCall extends \_PhpScoper87c77ad5700d\PhpParser\Node\Expr
     {
         $this->attributes = $attributes;
         $this->class = $class;
-        $this->name = \is_string($name) ? new \_PhpScoper87c77ad5700d\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScoperbaf90856897c\PhpParser\Node\Identifier($name) : $name;
         $this->args = $args;
     }
     public function getSubNodeNames() : array

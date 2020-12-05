@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper87c77ad5700d\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer\/"
+            "_PhpScoperbaf90856897c\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer\/"
         }
     }
 }

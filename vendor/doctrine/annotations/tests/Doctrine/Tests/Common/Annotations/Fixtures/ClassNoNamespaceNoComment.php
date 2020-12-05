@@ -1,9 +1,9 @@
 <?php
 
-namespace _PhpScoper87c77ad5700d;
+namespace _PhpScoperbaf90856897c;
 
-use _PhpScoper87c77ad5700d\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetClass;
+use _PhpScoperbaf90856897c\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetClass;
 class Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment
 {
 }
-\class_alias('_PhpScoper87c77ad5700d\\Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment', 'Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment', \false);
+\class_alias('_PhpScoperbaf90856897c\\Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment', 'Doctrine_Tests_Common_Annotations_Fixtures_ClassNoNamespaceNoComment', \false);

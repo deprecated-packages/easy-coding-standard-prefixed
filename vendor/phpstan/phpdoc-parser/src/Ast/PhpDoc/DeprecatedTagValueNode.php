@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper87c77ad5700d\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoperbaf90856897c\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-class DeprecatedTagValueNode implements \_PhpScoper87c77ad5700d\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class DeprecatedTagValueNode implements \_PhpScoperbaf90856897c\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     /** @var string (may be empty) */
     public $description;

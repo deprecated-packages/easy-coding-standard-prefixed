@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper87c77ad5700d;
+namespace _PhpScoperbaf90856897c;
 
 if (\defined('SLEVOMAT_PHPCS_AUTOLOAD_SET') === \false) {
     // Check if this is a stand-alone installation.

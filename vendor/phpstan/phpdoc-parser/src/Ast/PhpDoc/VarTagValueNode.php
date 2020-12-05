@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper87c77ad5700d\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoperbaf90856897c\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use _PhpScoper87c77ad5700d\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-class VarTagValueNode implements \_PhpScoper87c77ad5700d\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+use _PhpScoperbaf90856897c\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+class VarTagValueNode implements \_PhpScoperbaf90856897c\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     /** @var TypeNode */
     public $type;
@@ -12,7 +12,7 @@ class VarTagValueNode implements \_PhpScoper87c77ad5700d\PHPStan\PhpDocParser\As
     public $variableName;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(\_PhpScoper87c77ad5700d\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, string $variableName, string $description)
+    public function __construct(\_PhpScoperbaf90856897c\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, string $variableName, string $description)
     {
         $this->type = $type;
         $this->variableName = $variableName;
