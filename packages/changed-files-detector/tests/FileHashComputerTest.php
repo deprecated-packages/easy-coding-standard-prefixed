@@ -30,9 +30,9 @@ final class FileHashComputerTest extends \Symplify\PackageBuilder\Testing\Abstra
     protected function setUp() : void
     {
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $this->fileHashComputer = self::$container->get(\Symplify\EasyCodingStandard\ChangedFilesDetector\FileHashComputer::class);
-        $this->smartFileSystem = self::$container->get(\Symplify\SmartFileSystem\SmartFileSystem::class);
-        $this->yamlToPhpConverter = self::$container->get(\Symplify\PhpConfigPrinter\YamlToPhpConverter::class);
+        $this->fileHashComputer = $this->getService(\Symplify\EasyCodingStandard\ChangedFilesDetector\FileHashComputer::class);
+        $this->smartFileSystem = $this->getService(\Symplify\SmartFileSystem\SmartFileSystem::class);
+        $this->yamlToPhpConverter = $this->getService(\Symplify\PhpConfigPrinter\YamlToPhpConverter::class);
     }
     public function testInvalidateCacheOnConfigurationChange() : void
     {

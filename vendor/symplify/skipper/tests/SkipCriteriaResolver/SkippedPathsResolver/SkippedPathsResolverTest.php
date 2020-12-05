@@ -15,7 +15,7 @@ final class SkippedPathsResolverTest extends \Symplify\PackageBuilder\Testing\Ab
     protected function setUp() : void
     {
         $this->bootKernelWithConfigs(\Symplify\Skipper\HttpKernel\SkipperKernel::class, [__DIR__ . '/config/config.php']);
-        $this->skippedPathsResolver = self::$container->get(\Symplify\Skipper\SkipCriteriaResolver\SkippedPathsResolver::class);
+        $this->skippedPathsResolver = $this->getService(\Symplify\Skipper\SkipCriteriaResolver\SkippedPathsResolver::class);
     }
     public function test() : void
     {

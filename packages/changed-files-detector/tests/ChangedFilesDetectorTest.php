@@ -21,7 +21,7 @@ final class ChangedFilesDetectorTest extends \Symplify\PackageBuilder\Testing\Ab
     {
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
         $this->smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/ChangedFilesDetectorSource/OneClass.php');
-        $this->changedFilesDetector = self::$container->get(\Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector::class);
+        $this->changedFilesDetector = $this->getService(\Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector::class);
         $this->changedFilesDetector->changeConfigurationFile(__DIR__ . '/ChangedFilesDetectorSource/easy-coding-standard.php');
     }
     public function testAddFile() : void

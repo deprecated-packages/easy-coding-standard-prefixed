@@ -12,17 +12,17 @@ final class ConfigurationFileTest extends \Symplify\PackageBuilder\Testing\Abstr
     public function testEmptyConfig() : void
     {
         $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/ConfigurationFileSource/empty-config.php']);
-        $fixerFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
+        $fixerFileProcessor = $this->getService(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
         $this->assertCount(0, $fixerFileProcessor->getCheckers());
-        $sniffFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
+        $sniffFileProcessor = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
         $this->assertCount(0, $sniffFileProcessor->getCheckers());
     }
     public function testIncludeConfig() : void
     {
         $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/ConfigurationFileSource/include-another-config.php']);
-        $fixerFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
+        $fixerFileProcessor = $this->getService(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
         $this->assertCount(1, $fixerFileProcessor->getCheckers());
-        $sniffFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
+        $sniffFileProcessor = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
         $this->assertCount(1, $sniffFileProcessor->getCheckers());
     }
 }

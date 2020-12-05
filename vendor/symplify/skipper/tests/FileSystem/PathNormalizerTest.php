@@ -16,7 +16,7 @@ final class PathNormalizerTest extends \Symplify\PackageBuilder\Testing\Abstract
     protected function setUp() : void
     {
         $this->bootKernel(\Symplify\Skipper\HttpKernel\SkipperKernel::class);
-        $this->pathNormalizer = self::$container->get(\Symplify\Skipper\FileSystem\PathNormalizer::class);
+        $this->pathNormalizer = $this->getService(\Symplify\Skipper\FileSystem\PathNormalizer::class);
     }
     /**
      * @dataProvider providePaths

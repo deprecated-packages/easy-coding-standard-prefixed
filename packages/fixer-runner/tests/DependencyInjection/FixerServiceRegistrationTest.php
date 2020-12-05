@@ -22,7 +22,7 @@ final class FixerServiceRegistrationTest extends \Symplify\PackageBuilder\Testin
     public function test() : void
     {
         $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/FixerServiceRegistrationSource/easy-coding-standard.php']);
-        $fixerFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
+        $fixerFileProcessor = $this->getService(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
         $checkers = $fixerFileProcessor->getCheckers();
         $this->assertCount(2, $checkers);
         /** @var ArraySyntaxFixer $arraySyntaxFixer */

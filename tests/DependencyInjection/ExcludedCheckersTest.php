@@ -14,7 +14,7 @@ final class ExcludedCheckersTest extends \Symplify\PackageBuilder\Testing\Abstra
     }
     public function test() : void
     {
-        $fixerFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
+        $fixerFileProcessor = $this->getService(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
         $this->assertCount(0, $fixerFileProcessor->getCheckers());
     }
 }

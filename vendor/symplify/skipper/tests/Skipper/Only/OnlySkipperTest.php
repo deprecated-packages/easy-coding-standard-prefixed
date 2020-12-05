@@ -21,7 +21,7 @@ final class OnlySkipperTest extends \Symplify\PackageBuilder\Testing\AbstractKer
     protected function setUp() : void
     {
         $this->bootKernelWithConfigs(\Symplify\Skipper\HttpKernel\SkipperKernel::class, [__DIR__ . '/config/config.php']);
-        $this->skipper = self::$container->get(\Symplify\Skipper\Skipper\Skipper::class);
+        $this->skipper = $this->getService(\Symplify\Skipper\Skipper\Skipper::class);
     }
     /**
      * @dataProvider provideCheckerAndFile()

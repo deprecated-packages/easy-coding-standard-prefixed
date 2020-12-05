@@ -25,8 +25,8 @@ final class FileTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTest
     protected function setUp() : void
     {
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $this->errorAndDiffCollector = self::$container->get(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
-        $fileFactory = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\File\FileFactory::class);
+        $this->errorAndDiffCollector = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
+        $fileFactory = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\File\FileFactory::class);
         $fileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/FileSource/SomeFile.php');
         $this->file = $fileFactory->createFromFileInfo($fileInfo);
         $this->file->processWithTokenListenersAndFileInfo([], $fileInfo);

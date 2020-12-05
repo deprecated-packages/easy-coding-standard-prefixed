@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\Reference;
 /**
  * Replaces aliases with actual service definitions, effectively removing these
  * aliases.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ReplaceAliasByActualDefinitionPass extends \_PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ReplaceAliasByActualDefinitionPass extends \_PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $replacements;
     /**
@@ -28,7 +28,7 @@ class ReplaceAliasByActualDefinitionPass extends \_PhpScoperb6ccec8ab642\Symfony
      *
      * @throws InvalidArgumentException if the service definition does not exist
      */
-    public function process(\_PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         // First collect all alias targets that need to be replaced
         $seenAliasTargets = [];
@@ -51,9 +51,9 @@ class ReplaceAliasByActualDefinitionPass extends \_PhpScoperb6ccec8ab642\Symfony
             $seenAliasTargets[$targetId] = \true;
             try {
                 $definition = $container->getDefinition($targetId);
-            } catch (\_PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
+            } catch (\_PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
                 if ('' !== $e->getId() && '@' === $e->getId()[0]) {
-                    throw new \_PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($e->getId(), $e->getSourceId(), null, [\substr($e->getId(), 1)]);
+                    throw new \_PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($e->getId(), $e->getSourceId(), null, [\substr($e->getId(), 1)]);
                 }
                 throw $e;
             }
@@ -76,10 +76,10 @@ class ReplaceAliasByActualDefinitionPass extends \_PhpScoperb6ccec8ab642\Symfony
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if ($value instanceof \_PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\Reference && isset($this->replacements[$referenceId = (string) $value])) {
+        if ($value instanceof \_PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\Reference && isset($this->replacements[$referenceId = (string) $value])) {
             // Perform the replacement
             $newId = $this->replacements[$referenceId];
-            $value = new \_PhpScoperb6ccec8ab642\Symfony\Component\DependencyInjection\Reference($newId, $value->getInvalidBehavior());
+            $value = new \_PhpScoper56c9df53a081\Symfony\Component\DependencyInjection\Reference($newId, $value->getInvalidBehavior());
             $this->container->log($this, \sprintf('Changed reference of service "%s" previously pointing to "%s" to "%s".', $this->currentId, $referenceId, $newId));
         }
         return parent::processValue($value, $isRoot);

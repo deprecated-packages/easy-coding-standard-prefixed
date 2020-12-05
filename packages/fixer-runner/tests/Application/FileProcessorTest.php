@@ -18,7 +18,7 @@ final class FileProcessorTest extends \Symplify\PackageBuilder\Testing\AbstractK
     protected function setUp() : void
     {
         static::bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/FileProcessorSource/easy-coding-standard.php']);
-        $this->fixerFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
+        $this->fixerFileProcessor = $this->getService(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
     }
     public function testGetSortedCheckers() : void
     {

@@ -11,7 +11,7 @@ final class SourceFinderTest extends \Symplify\PackageBuilder\Testing\AbstractKe
     public function test() : void
     {
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $sourceFinder = self::$container->get(\Symplify\EasyCodingStandard\Finder\SourceFinder::class);
+        $sourceFinder = $this->getService(\Symplify\EasyCodingStandard\Finder\SourceFinder::class);
         $foundFiles = $sourceFinder->find([__DIR__ . '/SourceFinderSource/Source']);
         $this->assertCount(1, $foundFiles);
         $foundFiles = $sourceFinder->find([__DIR__ . '/SourceFinderSource/Source/SomeClass.php.inc']);

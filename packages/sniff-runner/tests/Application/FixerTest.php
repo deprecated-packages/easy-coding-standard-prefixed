@@ -22,9 +22,9 @@ final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
     protected function setUp() : void
     {
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $fileFactory = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\File\FileFactory::class);
+        $fileFactory = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\File\FileFactory::class);
         $this->file = $fileFactory->createFromFileInfo(new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/FixerSource/SomeFile.php'));
-        $this->fixer = self::$container->get(\PHP_CodeSniffer\Fixer::class);
+        $this->fixer = $this->getService(\PHP_CodeSniffer\Fixer::class);
     }
     public function testStartFile() : void
     {
@@ -54,7 +54,7 @@ final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
         $this->assertSame('A\\', $token);
         $this->fixer->addContent(14, 'B');
         $token = $this->fixer->getTokenContent(14);
-        $this->assertSame('_PhpScoperb6ccec8ab642\\A\\B', $token);
+        $this->assertSame('_PhpScoper56c9df53a081\\A\\B', $token);
     }
     public function testChangesets() : void
     {
@@ -66,7 +66,7 @@ final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
         $this->assertSame('A\\', $this->fixer->getTokenContent(14));
         // during the changeset, you are free to modify current token as you wish...
         $this->fixer->addContent(14, 'B');
-        $this->assertSame('_PhpScoperb6ccec8ab642\\A\\B', $this->fixer->getTokenContent(14));
+        $this->assertSame('_PhpScoper56c9df53a081\\A\\B', $this->fixer->getTokenContent(14));
         // you can also rollback the changes...
         $this->fixer->rollbackChangeset();
         $this->assertSame('\\', $this->fixer->getTokenContent(14));

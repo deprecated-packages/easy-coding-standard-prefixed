@@ -12,9 +12,9 @@ final class MutualExcludedCheckersTest extends \Symplify\PackageBuilder\Testing\
     public function test() : void
     {
         $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/MutualExcludedCheckersSource/config.php']);
-        $fixerFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
+        $fixerFileProcessor = $this->getService(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
         $this->assertCount(2, $fixerFileProcessor->getCheckers());
-        $sniffFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
+        $sniffFileProcessor = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
         $this->assertCount(0, $sniffFileProcessor->getCheckers());
     }
 }

@@ -12,7 +12,7 @@ final class AutowireArrayParameterCompilerPassTest extends \Symplify\PackageBuil
     {
         $this->bootKernel(\Symplify\AutowireArrayParameter\Tests\HttpKernel\AutowireArrayParameterHttpKernel::class);
         /** @var SomeCollector $someCollector */
-        $someCollector = self::$container->get(\Symplify\AutowireArrayParameter\Tests\Source\SomeCollector::class);
+        $someCollector = $this->getService(\Symplify\AutowireArrayParameter\Tests\Source\SomeCollector::class);
         $this->assertCount(2, $someCollector->getCollected());
     }
 }

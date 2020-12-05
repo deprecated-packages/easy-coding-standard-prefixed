@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb6ccec8ab642\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper56c9df53a081\Symfony\Component\HttpKernel\Event;
 
 /**
  * Allows to create a response for a request.
@@ -19,6 +19,6 @@ namespace _PhpScoperb6ccec8ab642\Symfony\Component\HttpKernel\Event;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class RequestEvent extends \_PhpScoperb6ccec8ab642\Symfony\Component\HttpKernel\Event\GetResponseEvent
+class RequestEvent extends \_PhpScoper56c9df53a081\Symfony\Component\HttpKernel\Event\GetResponseEvent
 {
 }

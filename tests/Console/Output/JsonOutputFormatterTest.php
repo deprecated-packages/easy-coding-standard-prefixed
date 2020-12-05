@@ -28,9 +28,9 @@ final class JsonOutputFormatterTest extends \Symplify\PackageBuilder\Testing\Abs
     protected function setUp() : void
     {
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $this->jsonOutputFormatter = self::$container->get(\Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter::class);
-        $this->errorAndDiffCollector = self::$container->get(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
-        $this->errorAndDiffResultFactory = self::$container->get(\Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory::class);
+        $this->jsonOutputFormatter = $this->getService(\Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter::class);
+        $this->errorAndDiffCollector = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
+        $this->errorAndDiffResultFactory = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory::class);
     }
     public function test() : void
     {

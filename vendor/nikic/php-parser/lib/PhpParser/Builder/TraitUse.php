@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6ccec8ab642\PhpParser\Builder;
+namespace _PhpScoper56c9df53a081\PhpParser\Builder;
 
-use _PhpScoperb6ccec8ab642\PhpParser\Builder;
-use _PhpScoperb6ccec8ab642\PhpParser\BuilderHelpers;
-use _PhpScoperb6ccec8ab642\PhpParser\Node;
-use _PhpScoperb6ccec8ab642\PhpParser\Node\Stmt;
-class TraitUse implements \_PhpScoperb6ccec8ab642\PhpParser\Builder
+use _PhpScoper56c9df53a081\PhpParser\Builder;
+use _PhpScoper56c9df53a081\PhpParser\BuilderHelpers;
+use _PhpScoper56c9df53a081\PhpParser\Node;
+use _PhpScoper56c9df53a081\PhpParser\Node\Stmt;
+class TraitUse implements \_PhpScoper56c9df53a081\PhpParser\Builder
 {
     protected $traits = [];
     protected $adaptations = [];
@@ -31,7 +31,7 @@ class TraitUse implements \_PhpScoperb6ccec8ab642\PhpParser\Builder
      */
     public function and($trait)
     {
-        $this->traits[] = \_PhpScoperb6ccec8ab642\PhpParser\BuilderHelpers::normalizeName($trait);
+        $this->traits[] = \_PhpScoper56c9df53a081\PhpParser\BuilderHelpers::normalizeName($trait);
         return $this;
     }
     /**
@@ -43,8 +43,8 @@ class TraitUse implements \_PhpScoperb6ccec8ab642\PhpParser\Builder
      */
     public function with($adaptation)
     {
-        $adaptation = \_PhpScoperb6ccec8ab642\PhpParser\BuilderHelpers::normalizeNode($adaptation);
-        if (!$adaptation instanceof \_PhpScoperb6ccec8ab642\PhpParser\Node\Stmt\TraitUseAdaptation) {
+        $adaptation = \_PhpScoper56c9df53a081\PhpParser\BuilderHelpers::normalizeNode($adaptation);
+        if (!$adaptation instanceof \_PhpScoper56c9df53a081\PhpParser\Node\Stmt\TraitUseAdaptation) {
             throw new \LogicException('Adaptation must have type TraitUseAdaptation');
         }
         $this->adaptations[] = $adaptation;
@@ -55,8 +55,8 @@ class TraitUse implements \_PhpScoperb6ccec8ab642\PhpParser\Builder
      *
      * @return Node The built node
      */
-    public function getNode() : \_PhpScoperb6ccec8ab642\PhpParser\Node
+    public function getNode() : \_PhpScoper56c9df53a081\PhpParser\Node
     {
-        return new \_PhpScoperb6ccec8ab642\PhpParser\Node\Stmt\TraitUse($this->traits, $this->adaptations);
+        return new \_PhpScoper56c9df53a081\PhpParser\Node\Stmt\TraitUse($this->traits, $this->adaptations);
     }
 }

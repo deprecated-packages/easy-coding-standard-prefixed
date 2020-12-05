@@ -27,10 +27,10 @@ final class SniffFileProcessorTest extends \Symplify\PackageBuilder\Testing\Abst
     protected function setUp() : void
     {
         $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/SniffRunnerSource/easy-coding-standard.php']);
-        $this->errorAndDiffCollector = self::$container->get(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
-        $this->errorAndDiffResultFactory = self::$container->get(\Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory::class);
-        $this->sniffFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
-        $changedFilesDetector = self::$container->get(\Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector::class);
+        $this->errorAndDiffCollector = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
+        $this->errorAndDiffResultFactory = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory::class);
+        $this->sniffFileProcessor = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
+        $changedFilesDetector = $this->getService(\Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector::class);
         $changedFilesDetector->clearCache();
     }
     public function test() : void

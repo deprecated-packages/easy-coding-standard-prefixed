@@ -16,7 +16,7 @@ final class ChangesetTest extends \Symplify\PackageBuilder\Testing\AbstractKerne
     protected function setUp() : void
     {
         static::bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/FileProcessorSource/ReferenceUsedNamesOnlySniff/easy-coding-standard.php']);
-        $this->sniffFileProcessor = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
+        $this->sniffFileProcessor = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
     }
     public function testFileProvingNeedOfProperSupportOfChangesets() : void
     {

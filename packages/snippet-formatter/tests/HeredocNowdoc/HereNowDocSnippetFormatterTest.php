@@ -24,10 +24,10 @@ final class HereNowDocSnippetFormatterTest extends \Symplify\PackageBuilder\Test
     protected function setUp() : void
     {
         $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/config/array_fixer.php']);
-        $this->snippetFormatter = self::$container->get(\Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter::class);
+        $this->snippetFormatter = $this->getService(\Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter::class);
         // enable fixing
         /** @var Configuration $configuration */
-        $configuration = self::$container->get(\Symplify\EasyCodingStandard\Configuration\Configuration::class);
+        $configuration = $this->getService(\Symplify\EasyCodingStandard\Configuration\Configuration::class);
         $configuration->enableFixing();
     }
     /**

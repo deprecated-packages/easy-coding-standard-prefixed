@@ -15,7 +15,7 @@ final class ApplicationTest extends \Symplify\PackageBuilder\Testing\AbstractKer
     protected function setUp() : void
     {
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $this->easyCodingStandardApplication = self::$container->get(\Symplify\EasyCodingStandard\Application\EasyCodingStandardApplication::class);
+        $this->easyCodingStandardApplication = $this->getService(\Symplify\EasyCodingStandard\Application\EasyCodingStandardApplication::class);
     }
     /**
      * @doesNotPerformAssertions

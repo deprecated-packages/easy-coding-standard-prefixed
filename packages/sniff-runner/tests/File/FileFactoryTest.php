@@ -19,7 +19,7 @@ final class FileFactoryTest extends \Symplify\PackageBuilder\Testing\AbstractKer
     protected function setUp() : void
     {
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $this->fileFactory = self::$container->get(\Symplify\EasyCodingStandard\SniffRunner\File\FileFactory::class);
+        $this->fileFactory = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\File\FileFactory::class);
     }
     public function test() : void
     {
