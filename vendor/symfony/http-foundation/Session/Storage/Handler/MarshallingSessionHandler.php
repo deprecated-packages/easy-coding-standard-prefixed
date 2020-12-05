@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper56c9df53a081\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper81b3ff5ab9fe\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use _PhpScoper56c9df53a081\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper81b3ff5ab9fe\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Ahmed TAILOULOUTE <ahmed.tailouloute@gmail.com>
  */
@@ -18,7 +18,7 @@ class MarshallingSessionHandler implements \SessionHandlerInterface, \SessionUpd
 {
     private $handler;
     private $marshaller;
-    public function __construct(\_PhpScoper56c9df53a081\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler $handler, \_PhpScoper56c9df53a081\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
+    public function __construct(\_PhpScoper81b3ff5ab9fe\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler $handler, \_PhpScoper81b3ff5ab9fe\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
     {
         $this->handler = $handler;
         $this->marshaller = $marshaller;
