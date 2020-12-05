@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoper59ccd3f8e121\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperb6ccec8ab642\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
@@ -17,7 +17,7 @@ final class DeprecatedServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpC
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper59ccd3f8e121\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper59ccd3f8e121\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperb6ccec8ab642\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperb6ccec8ab642\PhpParser\Node\Expr\MethodCall
     {
         // the old, simple format
         if (!\is_array($yaml)) {
@@ -26,7 +26,7 @@ final class DeprecatedServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpC
             $items = [$yaml['package'] ?? '', $yaml['version'] ?? '', $yaml['message'] ?? ''];
             $args = $this->argsNodeFactory->createFromValues($items);
         }
-        return new \_PhpScoper59ccd3f8e121\PhpParser\Node\Expr\MethodCall($methodCall, 'deprecate', $args);
+        return new \_PhpScoperb6ccec8ab642\PhpParser\Node\Expr\MethodCall($methodCall, 'deprecate', $args);
     }
     public function isMatch($key, $values) : bool
     {
