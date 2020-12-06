@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper3e8786a75afe\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
@@ -17,10 +17,10 @@ final class FactoryConfiguratorServiceOptionKeyYamlToPhpFactory implements \Symp
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper3e8786a75afe\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper3e8786a75afe\PhpParser\Node\Expr\MethodCall
     {
         $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($yaml);
-        return new \_PhpScoperc83f84c90b60\PhpParser\Node\Expr\MethodCall($methodCall, 'factory', $args);
+        return new \_PhpScoper3e8786a75afe\PhpParser\Node\Expr\MethodCall($methodCall, 'factory', $args);
     }
     public function isMatch($key, $values) : bool
     {

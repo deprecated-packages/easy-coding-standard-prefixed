@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc83f84c90b60\Symfony\Component\Cache\Simple;
+namespace _PhpScoper3e8786a75afe\Symfony\Component\Cache\Simple;
 
-use _PhpScoperc83f84c90b60\Doctrine\Common\Cache\CacheProvider;
-use _PhpScoperc83f84c90b60\Symfony\Component\Cache\Adapter\DoctrineAdapter;
-use _PhpScoperc83f84c90b60\Symfony\Component\Cache\Traits\DoctrineTrait;
-use _PhpScoperc83f84c90b60\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperc83f84c90b60\Symfony\Component\Cache\Simple\DoctrineCache::class, \_PhpScoperc83f84c90b60\Symfony\Component\Cache\Adapter\DoctrineAdapter::class, \_PhpScoperc83f84c90b60\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoper3e8786a75afe\Doctrine\Common\Cache\CacheProvider;
+use _PhpScoper3e8786a75afe\Symfony\Component\Cache\Adapter\DoctrineAdapter;
+use _PhpScoper3e8786a75afe\Symfony\Component\Cache\Traits\DoctrineTrait;
+use _PhpScoper3e8786a75afe\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper3e8786a75afe\Symfony\Component\Cache\Simple\DoctrineCache::class, \_PhpScoper3e8786a75afe\Symfony\Component\Cache\Adapter\DoctrineAdapter::class, \_PhpScoper3e8786a75afe\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use DoctrineAdapter and type-hint for CacheInterface instead.
  */
-class DoctrineCache extends \_PhpScoperc83f84c90b60\Symfony\Component\Cache\Simple\AbstractCache
+class DoctrineCache extends \_PhpScoper3e8786a75afe\Symfony\Component\Cache\Simple\AbstractCache
 {
     use DoctrineTrait;
-    public function __construct(\_PhpScoperc83f84c90b60\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
+    public function __construct(\_PhpScoper3e8786a75afe\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
     {
         parent::__construct('', $defaultLifetime);
         $this->provider = $provider;

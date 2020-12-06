@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc83f84c90b60\Symfony\Component\Console\Question;
+namespace _PhpScoper3e8786a75afe\Symfony\Component\Console\Question;
 
-use _PhpScoperc83f84c90b60\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoperc83f84c90b60\Symfony\Component\Console\Exception\LogicException;
+use _PhpScoper3e8786a75afe\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper3e8786a75afe\Symfony\Component\Console\Exception\LogicException;
 /**
  * Represents a Question.
  *
@@ -76,7 +76,7 @@ class Question
     public function setHidden($hidden)
     {
         if ($this->autocompleterCallback) {
-            throw new \_PhpScoperc83f84c90b60\Symfony\Component\Console\Exception\LogicException('A hidden question cannot use the autocompleter.');
+            throw new \_PhpScoper3e8786a75afe\Symfony\Component\Console\Exception\LogicException('A hidden question cannot use the autocompleter.');
         }
         $this->hidden = (bool) $hidden;
         return $this;
@@ -137,7 +137,7 @@ class Question
         } elseif (null === $values) {
             $callback = null;
         } else {
-            throw new \_PhpScoperc83f84c90b60\Symfony\Component\Console\Exception\InvalidArgumentException('Autocompleter values can be either an array, "null" or a "Traversable" object.');
+            throw new \_PhpScoper3e8786a75afe\Symfony\Component\Console\Exception\InvalidArgumentException('Autocompleter values can be either an array, "null" or a "Traversable" object.');
         }
         return $this->setAutocompleterCallback($callback);
     }
@@ -158,7 +158,7 @@ class Question
     public function setAutocompleterCallback(callable $callback = null) : self
     {
         if ($this->hidden && null !== $callback) {
-            throw new \_PhpScoperc83f84c90b60\Symfony\Component\Console\Exception\LogicException('A hidden question cannot use the autocompleter.');
+            throw new \_PhpScoper3e8786a75afe\Symfony\Component\Console\Exception\LogicException('A hidden question cannot use the autocompleter.');
         }
         $this->autocompleterCallback = $callback;
         return $this;
@@ -196,7 +196,7 @@ class Question
     public function setMaxAttempts($attempts)
     {
         if (null !== $attempts && $attempts < 1) {
-            throw new \_PhpScoperc83f84c90b60\Symfony\Component\Console\Exception\InvalidArgumentException('Maximum number of attempts must be a positive value.');
+            throw new \_PhpScoper3e8786a75afe\Symfony\Component\Console\Exception\InvalidArgumentException('Maximum number of attempts must be a positive value.');
         }
         $this->attempts = $attempts;
         return $this;

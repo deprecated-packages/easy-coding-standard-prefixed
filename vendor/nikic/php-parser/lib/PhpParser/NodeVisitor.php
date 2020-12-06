@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc83f84c90b60\PhpParser;
+namespace _PhpScoper3e8786a75afe\PhpParser;
 
 interface NodeVisitor
 {
@@ -34,7 +34,7 @@ interface NodeVisitor
      *
      * @return null|int|Node Replacement node (or special return value)
      */
-    public function enterNode(\_PhpScoperc83f84c90b60\PhpParser\Node $node);
+    public function enterNode(\_PhpScoper3e8786a75afe\PhpParser\Node $node);
     /**
      * Called when leaving a node.
      *
@@ -54,7 +54,7 @@ interface NodeVisitor
      *
      * @return null|int|Node|Node[] Replacement node (or special return value)
      */
-    public function leaveNode(\_PhpScoperc83f84c90b60\PhpParser\Node $node);
+    public function leaveNode(\_PhpScoper3e8786a75afe\PhpParser\Node $node);
     /**
      * Called once after traversal.
      *

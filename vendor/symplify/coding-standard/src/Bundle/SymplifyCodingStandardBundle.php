@@ -3,22 +3,22 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Bundle;
 
-use _PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoperc83f84c90b60\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper3e8786a75afe\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper3e8786a75afe\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper3e8786a75afe\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 use Symplify\CodingStandard\DependencyInjection\Extension\SymplifyCodingStandardExtension;
 /**
  * This class is dislocated in non-standard location, so it's not added by symfony/flex
  * to bundles.php and cause app to crash. See https://github.com/symplify/symplify/issues/1952#issuecomment-628765364
  */
-final class SymplifyCodingStandardBundle extends \_PhpScoperc83f84c90b60\Symfony\Component\HttpKernel\Bundle\Bundle
+final class SymplifyCodingStandardBundle extends \_PhpScoper3e8786a75afe\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    public function build(\_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScoper3e8786a75afe\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : ?\_PhpScoperc83f84c90b60\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScoper3e8786a75afe\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
         return new \Symplify\CodingStandard\DependencyInjection\Extension\SymplifyCodingStandardExtension();
     }

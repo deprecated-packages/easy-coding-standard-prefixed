@@ -11,12 +11,12 @@
  */
 namespace PhpCsFixer\FixerConfiguration;
 
-use _PhpScoperc83f84c90b60\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper3e8786a75afe\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @internal
  */
-final class InvalidOptionsForEnvException extends \_PhpScoperc83f84c90b60\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+final class InvalidOptionsForEnvException extends \_PhpScoper3e8786a75afe\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
 {
 }
