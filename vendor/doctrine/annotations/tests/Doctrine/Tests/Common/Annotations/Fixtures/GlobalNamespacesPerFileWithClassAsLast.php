@@ -1,13 +1,13 @@
 <?php
 
-namespace _PhpScoper18bd934c069f;
+namespace _PhpScoperfa521053d812;
 
-use _PhpScoper18bd934c069f\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
-namespace _PhpScoper18bd934c069f;
+use _PhpScoperfa521053d812\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+namespace _PhpScoperfa521053d812;
 
-use _PhpScoper18bd934c069f\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
-use _PhpScoper18bd934c069f\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
+use _PhpScoperfa521053d812\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoperfa521053d812\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
 class GlobalNamespacesPerFileWithClassAsLast
 {
 }
-\class_alias('_PhpScoper18bd934c069f\\GlobalNamespacesPerFileWithClassAsLast', 'GlobalNamespacesPerFileWithClassAsLast', \false);
+\class_alias('_PhpScoperfa521053d812\\GlobalNamespacesPerFileWithClassAsLast', 'GlobalNamespacesPerFileWithClassAsLast', \false);

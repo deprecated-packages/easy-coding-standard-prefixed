@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper18bd934c069f\Symfony\Component\Process\Exception;
+namespace _PhpScoperfa521053d812\Symfony\Component\Process\Exception;
 
 /**
  * Marker Interface for the Process Component.

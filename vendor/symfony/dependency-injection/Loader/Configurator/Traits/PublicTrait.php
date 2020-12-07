@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper18bd934c069f\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoperfa521053d812\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait PublicTrait
 {
