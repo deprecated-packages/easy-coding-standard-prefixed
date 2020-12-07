@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper89ec3c69e67d\Symfony\Component\Console\Event;
+namespace _PhpScoper18bd934c069f\Symfony\Component\Console\Event;
 
-use _PhpScoper89ec3c69e67d\Symfony\Component\Console\Command\Command;
-use _PhpScoper89ec3c69e67d\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper89ec3c69e67d\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper18bd934c069f\Symfony\Component\Console\Command\Command;
+use _PhpScoper18bd934c069f\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper18bd934c069f\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Allows to handle throwables thrown while running a command.
  *
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
-final class ConsoleErrorEvent extends \_PhpScoper89ec3c69e67d\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleErrorEvent extends \_PhpScoper18bd934c069f\Symfony\Component\Console\Event\ConsoleEvent
 {
     private $error;
     private $exitCode;
-    public function __construct(\_PhpScoper89ec3c69e67d\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper89ec3c69e67d\Symfony\Component\Console\Output\OutputInterface $output, \Throwable $error, \_PhpScoper89ec3c69e67d\Symfony\Component\Console\Command\Command $command = null)
+    public function __construct(\_PhpScoper18bd934c069f\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper18bd934c069f\Symfony\Component\Console\Output\OutputInterface $output, \Throwable $error, \_PhpScoper18bd934c069f\Symfony\Component\Console\Command\Command $command = null)
     {
         parent::__construct($command, $input, $output);
         $this->error = $error;

@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer;
 
-use _PhpScoper89ec3c69e67d\Symfony\Component\EventDispatcher\Event;
+use _PhpScoper18bd934c069f\Symfony\Component\EventDispatcher\Event;
 /**
  * Event that is fired when file was processed by Fixer.
  *
@@ -19,7 +19,7 @@ use _PhpScoper89ec3c69e67d\Symfony\Component\EventDispatcher\Event;
  *
  * @internal
  */
-final class FixerFileProcessedEvent extends \_PhpScoper89ec3c69e67d\Symfony\Component\EventDispatcher\Event
+final class FixerFileProcessedEvent extends \_PhpScoper18bd934c069f\Symfony\Component\EventDispatcher\Event
 {
     /**
      * Event name.

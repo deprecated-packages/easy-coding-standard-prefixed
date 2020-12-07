@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use _PhpScoper89ec3c69e67d\PhpParser\Node\Arg;
-use _PhpScoper89ec3c69e67d\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper89ec3c69e67d\PhpParser\Node\Expr\Variable;
-use _PhpScoper89ec3c69e67d\PhpParser\Node\Scalar\String_;
-use _PhpScoper89ec3c69e67d\PhpParser\Node\Stmt\Expression;
+use _PhpScoper18bd934c069f\PhpParser\Node\Arg;
+use _PhpScoper18bd934c069f\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper18bd934c069f\PhpParser\Node\Expr\Variable;
+use _PhpScoper18bd934c069f\PhpParser\Node\Scalar\String_;
+use _PhpScoper18bd934c069f\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
@@ -35,12 +35,12 @@ final class ServicesPhpNodeFactory
         $this->argsNodeFactory = $argsNodeFactory;
         $this->autoBindNodeFactory = $autoBindNodeFactory;
     }
-    public function createResource(string $serviceKey, array $serviceValues) : \_PhpScoper89ec3c69e67d\PhpParser\Node\Stmt\Expression
+    public function createResource(string $serviceKey, array $serviceValues) : \_PhpScoper18bd934c069f\PhpParser\Node\Stmt\Expression
     {
         $servicesLoadMethodCall = $this->createServicesLoadMethodCall($serviceKey, $serviceValues);
         $servicesLoadMethodCall = $this->autoBindNodeFactory->createAutoBindCalls($serviceValues, $servicesLoadMethodCall, \Symplify\PhpConfigPrinter\NodeFactory\Service\AutoBindNodeFactory::TYPE_SERVICE);
         if (!isset($serviceValues[self::EXCLUDE])) {
-            return new \_PhpScoper89ec3c69e67d\PhpParser\Node\Stmt\Expression($servicesLoadMethodCall);
+            return new \_PhpScoper18bd934c069f\PhpParser\Node\Stmt\Expression($servicesLoadMethodCall);
         }
         $exclude = $serviceValues[self::EXCLUDE];
         if (!\is_array($exclude)) {
@@ -51,16 +51,16 @@ final class ServicesPhpNodeFactory
             $excludeValue[$key] = $this->commonNodeFactory->createAbsoluteDirExpr($singleExclude);
         }
         $args = $this->argsNodeFactory->createFromValues([$excludeValue]);
-        $excludeMethodCall = new \_PhpScoper89ec3c69e67d\PhpParser\Node\Expr\MethodCall($servicesLoadMethodCall, self::EXCLUDE, $args);
-        return new \_PhpScoper89ec3c69e67d\PhpParser\Node\Stmt\Expression($excludeMethodCall);
+        $excludeMethodCall = new \_PhpScoper18bd934c069f\PhpParser\Node\Expr\MethodCall($servicesLoadMethodCall, self::EXCLUDE, $args);
+        return new \_PhpScoper18bd934c069f\PhpParser\Node\Stmt\Expression($excludeMethodCall);
     }
-    private function createServicesLoadMethodCall(string $serviceKey, $serviceValues) : \_PhpScoper89ec3c69e67d\PhpParser\Node\Expr\MethodCall
+    private function createServicesLoadMethodCall(string $serviceKey, $serviceValues) : \_PhpScoper18bd934c069f\PhpParser\Node\Expr\MethodCall
     {
-        $servicesVariable = new \_PhpScoper89ec3c69e67d\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $servicesVariable = new \_PhpScoper18bd934c069f\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
         $resource = $serviceValues['resource'];
         $args = [];
-        $args[] = new \_PhpScoper89ec3c69e67d\PhpParser\Node\Arg(new \_PhpScoper89ec3c69e67d\PhpParser\Node\Scalar\String_($serviceKey));
-        $args[] = new \_PhpScoper89ec3c69e67d\PhpParser\Node\Arg($this->commonNodeFactory->createAbsoluteDirExpr($resource));
-        return new \_PhpScoper89ec3c69e67d\PhpParser\Node\Expr\MethodCall($servicesVariable, 'load', $args);
+        $args[] = new \_PhpScoper18bd934c069f\PhpParser\Node\Arg(new \_PhpScoper18bd934c069f\PhpParser\Node\Scalar\String_($serviceKey));
+        $args[] = new \_PhpScoper18bd934c069f\PhpParser\Node\Arg($this->commonNodeFactory->createAbsoluteDirExpr($resource));
+        return new \_PhpScoper18bd934c069f\PhpParser\Node\Expr\MethodCall($servicesVariable, 'load', $args);
     }
 }
