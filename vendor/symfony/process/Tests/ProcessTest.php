@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb73f9e44f4eb\Symfony\Component\Process\Tests;
+namespace _PhpScoperb83706991c7f\Symfony\Component\Process\Tests;
 
-use _PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\LogicException;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\ProcessTimedOutException;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Process\InputStream;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Process\PhpExecutableFinder;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Process\Pipes\PipesInterface;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process;
+use _PhpScoperb83706991c7f\PHPUnit\Framework\TestCase;
+use _PhpScoperb83706991c7f\Symfony\Component\Process\Exception\LogicException;
+use _PhpScoperb83706991c7f\Symfony\Component\Process\Exception\ProcessTimedOutException;
+use _PhpScoperb83706991c7f\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScoperb83706991c7f\Symfony\Component\Process\InputStream;
+use _PhpScoperb83706991c7f\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScoperb83706991c7f\Symfony\Component\Process\Pipes\PipesInterface;
+use _PhpScoperb83706991c7f\Symfony\Component\Process\Process;
 /**
  * @author Robert Schönthal <seroscho@googlemail.com>
  */
-class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
+class ProcessTest extends \_PhpScoperb83706991c7f\PHPUnit\Framework\TestCase
 {
     private static $phpBin;
     private static $process;
@@ -29,7 +29,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     private static $notEnhancedSigchild = \false;
     public static function setUpBeforeClass()
     {
-        $phpBin = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\PhpExecutableFinder();
+        $phpBin = new \_PhpScoperb83706991c7f\Symfony\Component\Process\PhpExecutableFinder();
         self::$phpBin = \getenv('SYMFONY_PROCESS_PHP_TEST_BINARY') ?: ('phpdbg' === \PHP_SAPI ? 'php' : $phpBin->find());
         \ob_start();
         \phpinfo(\INFO_GENERAL);
@@ -103,7 +103,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
         // generated output, but this is non-deterministic so we must count it as
         // a possibility.  therefore we need 2 * PipesInterface::CHUNK_SIZE plus
         // another byte which will never be read.
-        $expectedOutputSize = \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Pipes\PipesInterface::CHUNK_SIZE * 2 + 2;
+        $expectedOutputSize = \_PhpScoperb83706991c7f\Symfony\Component\Process\Pipes\PipesInterface::CHUNK_SIZE * 2 + 2;
         $code = \sprintf('echo str_repeat(\'*\', %d);', $expectedOutputSize);
         $p = $this->getProcessForCode($code);
         $p->start();
@@ -198,7 +198,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
             $process->setInput('foobar');
             $process->stop();
             $this->fail('A LogicException should have been raised.');
-        } catch (\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\LogicException $e) {
+        } catch (\_PhpScoperb83706991c7f\Symfony\Component\Process\Exception\LogicException $e) {
         }
         $process->stop();
         throw $e;
@@ -215,7 +215,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     }
     public function provideInvalidInputValues()
     {
-        return array(array(array()), array(new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Tests\NonStringifiable()));
+        return array(array(array()), array(new \_PhpScoperb83706991c7f\Symfony\Component\Process\Tests\NonStringifiable()));
     }
     /**
      * @dataProvider provideInputValues
@@ -347,7 +347,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
         $process->start();
         $this->assertTrue($process->isRunning());
         $process->wait();
-        $this->assertSame(\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process::STATUS_TERMINATED, $process->getStatus());
+        $this->assertSame(\_PhpScoperb83706991c7f\Symfony\Component\Process\Process::STATUS_TERMINATED, $process->getStatus());
     }
     public function testTTYCommandExitCode()
     {
@@ -381,13 +381,13 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     }
     public function testPTYCommand()
     {
-        if (!\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process::isPtySupported()) {
+        if (!\_PhpScoperb83706991c7f\Symfony\Component\Process\Process::isPtySupported()) {
             $this->markTestSkipped('PTY is not supported on this operating system.');
         }
         $process = $this->getProcess('echo "foo"');
         $process->setPty(\true);
         $process->run();
-        $this->assertSame(\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process::STATUS_TERMINATED, $process->getStatus());
+        $this->assertSame(\_PhpScoperb83706991c7f\Symfony\Component\Process\Process::STATUS_TERMINATED, $process->getStatus());
         $this->assertEquals("foo\r\n", $process->getOutput());
     }
     public function testMustRun()
@@ -471,17 +471,17 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
         $this->assertFalse($process->isRunning());
         $this->assertFalse($process->isStarted());
         $this->assertFalse($process->isTerminated());
-        $this->assertSame(\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process::STATUS_READY, $process->getStatus());
+        $this->assertSame(\_PhpScoperb83706991c7f\Symfony\Component\Process\Process::STATUS_READY, $process->getStatus());
         $process->start();
         $this->assertTrue($process->isRunning());
         $this->assertTrue($process->isStarted());
         $this->assertFalse($process->isTerminated());
-        $this->assertSame(\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process::STATUS_STARTED, $process->getStatus());
+        $this->assertSame(\_PhpScoperb83706991c7f\Symfony\Component\Process\Process::STATUS_STARTED, $process->getStatus());
         $process->wait();
         $this->assertFalse($process->isRunning());
         $this->assertTrue($process->isStarted());
         $this->assertTrue($process->isTerminated());
-        $this->assertSame(\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process::STATUS_TERMINATED, $process->getStatus());
+        $this->assertSame(\_PhpScoperb83706991c7f\Symfony\Component\Process\Process::STATUS_TERMINATED, $process->getStatus());
     }
     public function testStop()
     {
@@ -590,7 +590,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
         try {
             $process->run();
             $this->fail('A RuntimeException should have been raised');
-        } catch (\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\RuntimeException $e) {
+        } catch (\_PhpScoperb83706991c7f\Symfony\Component\Process\Exception\RuntimeException $e) {
         }
         $this->assertLessThan(15, \microtime(\true) - $start);
         throw $e;
@@ -609,7 +609,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
             foreach ($process as $buffer) {
             }
             $this->fail('A RuntimeException should have been raised');
-        } catch (\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\RuntimeException $e) {
+        } catch (\_PhpScoperb83706991c7f\Symfony\Component\Process\Exception\RuntimeException $e) {
         }
         $this->assertLessThan(15, \microtime(\true) - $start);
         throw $e;
@@ -641,7 +641,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
                 \usleep(100000);
             }
             $this->fail('A ProcessTimedOutException should have been raised');
-        } catch (\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\ProcessTimedOutException $e) {
+        } catch (\_PhpScoperb83706991c7f\Symfony\Component\Process\Exception\ProcessTimedOutException $e) {
         }
         $this->assertLessThan(15, \microtime(\true) - $start);
         throw $e;
@@ -654,7 +654,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
         try {
             $process->run();
             $this->fail('A timeout exception was expected.');
-        } catch (\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\ProcessTimedOutException $e) {
+        } catch (\_PhpScoperb83706991c7f\Symfony\Component\Process\Exception\ProcessTimedOutException $e) {
             $this->assertTrue($e->isIdleTimeout());
             $this->assertFalse($e->isGeneralTimeout());
             $this->assertEquals(0.1, $e->getExceededTimeout());
@@ -672,7 +672,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
         try {
             $process->wait();
             $this->fail('A timeout exception was expected.');
-        } catch (\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\ProcessTimedOutException $e) {
+        } catch (\_PhpScoperb83706991c7f\Symfony\Component\Process\Exception\ProcessTimedOutException $e) {
             $this->assertTrue($e->isGeneralTimeout(), 'A general timeout is expected.');
             $this->assertFalse($e->isIdleTimeout(), 'No idle timeout is expected.');
             $this->assertEquals(1, $e->getExceededTimeout());
@@ -689,7 +689,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
         try {
             $process->run();
             $this->fail('A ProcessTimedOutException should have been raised.');
-        } catch (\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\ProcessTimedOutException $e) {
+        } catch (\_PhpScoperb83706991c7f\Symfony\Component\Process\Exception\ProcessTimedOutException $e) {
         }
         $this->assertFalse($process->isRunning());
         $process->start();
@@ -763,10 +763,10 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     {
         $process = $this->getProcess('foo');
         if (\method_exists($this, 'expectException')) {
-            $this->expectException('_PhpScoperb73f9e44f4eb\\Symfony\\Component\\Process\\Exception\\LogicException');
+            $this->expectException('_PhpScoperb83706991c7f\\Symfony\\Component\\Process\\Exception\\LogicException');
             $this->expectExceptionMessage(\sprintf('Process must be started before calling %s.', $method));
         } else {
-            $this->setExpectedException('_PhpScoperb73f9e44f4eb\\Symfony\\Component\\Process\\Exception\\LogicException', \sprintf('Process must be started before calling %s.', $method));
+            $this->setExpectedException('_PhpScoperb83706991c7f\\Symfony\\Component\\Process\\Exception\\LogicException', \sprintf('Process must be started before calling %s.', $method));
         }
         $process->{$method}();
     }
@@ -810,7 +810,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
         try {
             $process->signal($signal);
             $this->fail('A RuntimeException must have been thrown');
-        } catch (\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\RuntimeException $e) {
+        } catch (\_PhpScoperb83706991c7f\Symfony\Component\Process\Exception\RuntimeException $e) {
             $process->stop(0);
         }
         throw $e;
@@ -984,7 +984,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     }
     public function testSimpleInputStream()
     {
-        $input = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\InputStream();
+        $input = new \_PhpScoperb83706991c7f\Symfony\Component\Process\InputStream();
         $process = $this->getProcessForCode('echo \'ping\'; stream_copy_to_stream(STDIN, STDOUT);');
         $process->setInput($input);
         $process->start(function ($type, $data) use($input) {
@@ -1010,7 +1010,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
                 return $stream;
             }
         };
-        $input = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\InputStream();
+        $input = new \_PhpScoperb83706991c7f\Symfony\Component\Process\InputStream();
         $input->onEmpty($stream);
         $input->write($stream());
         $process = $this->getProcessForCode('echo fread(STDIN, 3);');
@@ -1023,7 +1023,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     }
     public function testInputStreamWithGenerator()
     {
-        $input = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\InputStream();
+        $input = new \_PhpScoperb83706991c7f\Symfony\Component\Process\InputStream();
         $input->onEmpty(function ($input) {
             (yield 'pong');
             $input->close();
@@ -1038,7 +1038,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     public function testInputStreamOnEmpty()
     {
         $i = 0;
-        $input = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\InputStream();
+        $input = new \_PhpScoperb83706991c7f\Symfony\Component\Process\InputStream();
         $input->onEmpty(function () use(&$i) {
             ++$i;
         });
@@ -1055,7 +1055,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     }
     public function testIteratorOutput()
     {
-        $input = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\InputStream();
+        $input = new \_PhpScoperb83706991c7f\Symfony\Component\Process\InputStream();
         $process = $this->getProcessForCode('fwrite(STDOUT, 123); fwrite(STDERR, 234); flush(); usleep(10000); fwrite(STDOUT, fread(STDIN, 3)); fwrite(STDERR, 456);');
         $process->setInput($input);
         $process->start();
@@ -1077,7 +1077,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     }
     public function testNonBlockingNorClearingIteratorOutput()
     {
-        $input = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\InputStream();
+        $input = new \_PhpScoperb83706991c7f\Symfony\Component\Process\InputStream();
         $process = $this->getProcessForCode('fwrite(STDOUT, fread(STDIN, 3));');
         $process->setInput($input);
         $process->start();
@@ -1157,7 +1157,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     }
     public function testGetCommandLine()
     {
-        $p = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process(array('/usr/bin/php'));
+        $p = new \_PhpScoperb83706991c7f\Symfony\Component\Process\Process(array('/usr/bin/php'));
         $expected = '\\' === \DIRECTORY_SEPARATOR ? '"/usr/bin/php"' : "'/usr/bin/php'";
         $this->assertSame($expected, $p->getCommandLine());
     }
@@ -1166,7 +1166,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
      */
     public function testEscapeArgument($arg)
     {
-        $p = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process(array(self::$phpBin, '-r', 'echo $argv[1];', $arg));
+        $p = new \_PhpScoperb83706991c7f\Symfony\Component\Process\Process(array(self::$phpBin, '-r', 'echo $argv[1];', $arg));
         $p->run();
         $this->assertSame($arg, $p->getOutput());
     }
@@ -1176,7 +1176,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
      */
     public function testEscapeArgumentWhenInheritEnvDisabled($arg)
     {
-        $p = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process(array(self::$phpBin, '-r', 'echo $argv[1];', $arg), null, array('BAR' => 'BAZ'));
+        $p = new \_PhpScoperb83706991c7f\Symfony\Component\Process\Process(array(self::$phpBin, '-r', 'echo $argv[1];', $arg), null, array('BAR' => 'BAZ'));
         $p->inheritEnvironmentVariables(\false);
         $p->run();
         $this->assertSame($arg, $p->getOutput());
@@ -1195,7 +1195,7 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
     {
         $env = array('FOO' => 'Foo', 'BAR' => 'Bar');
         $cmd = '\\' === \DIRECTORY_SEPARATOR ? 'echo !FOO! !BAR! !BAZ!' : 'echo $FOO $BAR $BAZ';
-        $p = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process($cmd, null, $env);
+        $p = new \_PhpScoperb83706991c7f\Symfony\Component\Process\Process($cmd, null, $env);
         $p->run(null, array('BAR' => 'baR', 'BAZ' => 'baZ'));
         $this->assertSame('Foo baR baZ', \rtrim($p->getOutput()));
         $this->assertSame($env, $p->getEnv());
@@ -1212,14 +1212,14 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
      */
     private function getProcess($commandline, $cwd = null, array $env = null, $input = null, $timeout = 60)
     {
-        $process = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Process($commandline, $cwd, $env, $input, $timeout);
+        $process = new \_PhpScoperb83706991c7f\Symfony\Component\Process\Process($commandline, $cwd, $env, $input, $timeout);
         $process->inheritEnvironmentVariables();
         if (\false !== ($enhance = \getenv('ENHANCE_SIGCHLD'))) {
             try {
                 $process->setEnhanceSigchildCompatibility(\false);
                 $process->getExitCode();
                 $this->fail('ENHANCE_SIGCHLD must be used together with a sigchild-enabled PHP.');
-            } catch (\_PhpScoperb73f9e44f4eb\Symfony\Component\Process\Exception\RuntimeException $e) {
+            } catch (\_PhpScoperb83706991c7f\Symfony\Component\Process\Exception\RuntimeException $e) {
                 $this->assertSame('This PHP has been compiled with --enable-sigchild. You must use setEnhanceSigchildCompatibility() to use this method.', $e->getMessage());
                 if ($enhance) {
                     $process->setEnhanceSigchildCompatibility(\true);
@@ -1247,10 +1247,10 @@ class ProcessTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
                 $this->markTestSkipped('PHP is compiled with --enable-sigchild.');
             } elseif (self::$notEnhancedSigchild) {
                 if (\method_exists($this, 'expectException')) {
-                    $this->expectException('_PhpScoperb73f9e44f4eb\\Symfony\\Component\\Process\\Exception\\RuntimeException');
+                    $this->expectException('_PhpScoperb83706991c7f\\Symfony\\Component\\Process\\Exception\\RuntimeException');
                     $this->expectExceptionMessage('This PHP has been compiled with --enable-sigchild.');
                 } else {
-                    $this->setExpectedException('_PhpScoperb73f9e44f4eb\\Symfony\\Component\\Process\\Exception\\RuntimeException', 'This PHP has been compiled with --enable-sigchild.');
+                    $this->setExpectedException('_PhpScoperb83706991c7f\\Symfony\\Component\\Process\\Exception\\RuntimeException', 'This PHP has been compiled with --enable-sigchild.');
                 }
             }
         }

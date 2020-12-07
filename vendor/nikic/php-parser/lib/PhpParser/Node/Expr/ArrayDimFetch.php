@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb73f9e44f4eb\PhpParser\Node\Expr;
+namespace _PhpScoperb83706991c7f\PhpParser\Node\Expr;
 
-use _PhpScoperb73f9e44f4eb\PhpParser\Node\Expr;
-class ArrayDimFetch extends \_PhpScoperb73f9e44f4eb\PhpParser\Node\Expr
+use _PhpScoperb83706991c7f\PhpParser\Node\Expr;
+class ArrayDimFetch extends \_PhpScoperb83706991c7f\PhpParser\Node\Expr
 {
     /** @var Expr Variable */
     public $var;
@@ -17,7 +17,7 @@ class ArrayDimFetch extends \_PhpScoperb73f9e44f4eb\PhpParser\Node\Expr
      * @param null|Expr $dim        Array index / dim
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperb73f9e44f4eb\PhpParser\Node\Expr $var, \_PhpScoperb73f9e44f4eb\PhpParser\Node\Expr $dim = null, array $attributes = [])
+    public function __construct(\_PhpScoperb83706991c7f\PhpParser\Node\Expr $var, \_PhpScoperb83706991c7f\PhpParser\Node\Expr $dim = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;

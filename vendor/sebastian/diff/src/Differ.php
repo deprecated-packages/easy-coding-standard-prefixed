@@ -9,10 +9,10 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb73f9e44f4eb\SebastianBergmann\Diff;
+namespace _PhpScoperb83706991c7f\SebastianBergmann\Diff;
 
-use _PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface;
-use _PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use _PhpScoperb83706991c7f\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface;
+use _PhpScoperb83706991c7f\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 /**
  * Diff implementation.
  */
@@ -34,17 +34,17 @@ final class Differ
      */
     public function __construct($outputBuilder = null)
     {
-        if ($outputBuilder instanceof \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface) {
+        if ($outputBuilder instanceof \_PhpScoperb83706991c7f\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface) {
             $this->outputBuilder = $outputBuilder;
         } elseif (null === $outputBuilder) {
-            $this->outputBuilder = new \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder();
+            $this->outputBuilder = new \_PhpScoperb83706991c7f\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder();
         } elseif (\is_string($outputBuilder)) {
             // PHPUnit 6.1.4, 6.2.0, 6.2.1, 6.2.2, and 6.2.3 support
             // @see https://github.com/sebastianbergmann/phpunit/issues/2734#issuecomment-314514056
             // @deprecated
-            $this->outputBuilder = new \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder($outputBuilder);
+            $this->outputBuilder = new \_PhpScoperb83706991c7f\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder($outputBuilder);
         } else {
-            throw new \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\InvalidArgumentException(\sprintf('Expected builder to be an instance of DiffOutputBuilderInterface, <null> or a string, got %s.', \is_object($outputBuilder) ? 'instance of "' . \get_class($outputBuilder) . '"' : \gettype($outputBuilder) . ' "' . $outputBuilder . '"'));
+            throw new \_PhpScoperb83706991c7f\SebastianBergmann\Diff\InvalidArgumentException(\sprintf('Expected builder to be an instance of DiffOutputBuilderInterface, <null> or a string, got %s.', \is_object($outputBuilder) ? 'instance of "' . \get_class($outputBuilder) . '"' : \gettype($outputBuilder) . ' "' . $outputBuilder . '"'));
         }
     }
     /**
@@ -56,7 +56,7 @@ final class Differ
      *
      * @return string
      */
-    public function diff($from, $to, \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator $lcs = null) : string
+    public function diff($from, $to, \_PhpScoperb83706991c7f\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator $lcs = null) : string
     {
         $diff = $this->diffToArray($this->normalizeDiffInput($from), $this->normalizeDiffInput($to), $lcs);
         return $this->outputBuilder->getDiff($diff);
@@ -78,17 +78,17 @@ final class Differ
      *
      * @return array
      */
-    public function diffToArray($from, $to, \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator $lcs = null) : array
+    public function diffToArray($from, $to, \_PhpScoperb83706991c7f\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator $lcs = null) : array
     {
         if (\is_string($from)) {
             $from = $this->splitStringByLines($from);
         } elseif (!\is_array($from)) {
-            throw new \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\InvalidArgumentException('"from" must be an array or string.');
+            throw new \_PhpScoperb83706991c7f\SebastianBergmann\Diff\InvalidArgumentException('"from" must be an array or string.');
         }
         if (\is_string($to)) {
             $to = $this->splitStringByLines($to);
         } elseif (!\is_array($to)) {
-            throw new \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\InvalidArgumentException('"to" must be an array or string.');
+            throw new \_PhpScoperb83706991c7f\SebastianBergmann\Diff\InvalidArgumentException('"to" must be an array or string.');
         }
         [$from, $to, $start, $end] = self::getArrayDiffParted($from, $to);
         if ($lcs === null) {
@@ -157,7 +157,7 @@ final class Differ
      *
      * @return LongestCommonSubsequenceCalculator
      */
-    private function selectLcsImplementation(array $from, array $to) : \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
+    private function selectLcsImplementation(array $from, array $to) : \_PhpScoperb83706991c7f\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
     {
         // We do not want to use the time-efficient implementation if its memory
         // footprint will probably exceed this value. Note that the footprint
@@ -165,9 +165,9 @@ final class Differ
         // will typically allocate a bit more memory than this.
         $memoryLimit = 100 * 1024 * 1024;
         if ($this->calculateEstimatedFootprint($from, $to) > $memoryLimit) {
-            return new \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator();
+            return new \_PhpScoperb83706991c7f\SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator();
         }
-        return new \_PhpScoperb73f9e44f4eb\SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator();
+        return new \_PhpScoperb83706991c7f\SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator();
     }
     /**
      * Calculates the estimated memory footprint for the DP-based method.

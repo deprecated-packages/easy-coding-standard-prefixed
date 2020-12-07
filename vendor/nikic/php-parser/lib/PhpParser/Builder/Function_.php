@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb73f9e44f4eb\PhpParser\Builder;
+namespace _PhpScoperb83706991c7f\PhpParser\Builder;
 
-use _PhpScoperb73f9e44f4eb\PhpParser;
-use _PhpScoperb73f9e44f4eb\PhpParser\BuilderHelpers;
-use _PhpScoperb73f9e44f4eb\PhpParser\Node;
-use _PhpScoperb73f9e44f4eb\PhpParser\Node\Stmt;
-class Function_ extends \_PhpScoperb73f9e44f4eb\PhpParser\Builder\FunctionLike
+use _PhpScoperb83706991c7f\PhpParser;
+use _PhpScoperb83706991c7f\PhpParser\BuilderHelpers;
+use _PhpScoperb83706991c7f\PhpParser\Node;
+use _PhpScoperb83706991c7f\PhpParser\Node\Stmt;
+class Function_ extends \_PhpScoperb83706991c7f\PhpParser\Builder\FunctionLike
 {
     protected $name;
     protected $stmts = [];
@@ -29,7 +29,7 @@ class Function_ extends \_PhpScoperb73f9e44f4eb\PhpParser\Builder\FunctionLike
      */
     public function addStmt($stmt)
     {
-        $this->stmts[] = \_PhpScoperb73f9e44f4eb\PhpParser\BuilderHelpers::normalizeStmt($stmt);
+        $this->stmts[] = \_PhpScoperb83706991c7f\PhpParser\BuilderHelpers::normalizeStmt($stmt);
         return $this;
     }
     /**
@@ -37,8 +37,8 @@ class Function_ extends \_PhpScoperb73f9e44f4eb\PhpParser\Builder\FunctionLike
      *
      * @return Stmt\Function_ The built function node
      */
-    public function getNode() : \_PhpScoperb73f9e44f4eb\PhpParser\Node
+    public function getNode() : \_PhpScoperb83706991c7f\PhpParser\Node
     {
-        return new \_PhpScoperb73f9e44f4eb\PhpParser\Node\Stmt\Function_($this->name, ['byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts], $this->attributes);
+        return new \_PhpScoperb83706991c7f\PhpParser\Node\Stmt\Function_($this->name, ['byRef' => $this->returnByRef, 'params' => $this->params, 'returnType' => $this->returnType, 'stmts' => $this->stmts], $this->attributes);
     }
 }

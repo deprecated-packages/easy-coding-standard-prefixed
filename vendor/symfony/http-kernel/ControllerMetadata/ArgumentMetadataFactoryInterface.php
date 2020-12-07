@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\ControllerMetadata;
+namespace _PhpScoperb83706991c7f\Symfony\Component\HttpKernel\ControllerMetadata;
 
 /**
  * Builds method argument data.

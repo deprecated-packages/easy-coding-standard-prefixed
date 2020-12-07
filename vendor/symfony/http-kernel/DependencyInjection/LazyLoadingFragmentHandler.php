@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoperb83706991c7f\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoperb73f9e44f4eb\Psr\Container\ContainerInterface;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Fragment\FragmentHandler;
+use _PhpScoperb83706991c7f\Psr\Container\ContainerInterface;
+use _PhpScoperb83706991c7f\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoperb83706991c7f\Symfony\Component\HttpKernel\Fragment\FragmentHandler;
 /**
  * Lazily loads fragment renderers from the dependency injection container.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class LazyLoadingFragmentHandler extends \_PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Fragment\FragmentHandler
+class LazyLoadingFragmentHandler extends \_PhpScoperb83706991c7f\Symfony\Component\HttpKernel\Fragment\FragmentHandler
 {
     private $container;
     private $initialized = [];
-    public function __construct(\_PhpScoperb73f9e44f4eb\Psr\Container\ContainerInterface $container, \_PhpScoperb73f9e44f4eb\Symfony\Component\HttpFoundation\RequestStack $requestStack, bool $debug = \false)
+    public function __construct(\_PhpScoperb83706991c7f\Psr\Container\ContainerInterface $container, \_PhpScoperb83706991c7f\Symfony\Component\HttpFoundation\RequestStack $requestStack, bool $debug = \false)
     {
         $this->container = $container;
         parent::__construct($requestStack, [], $debug);

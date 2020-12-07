@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb73f9e44f4eb\PhpParser\Node\Stmt;
+namespace _PhpScoperb83706991c7f\PhpParser\Node\Stmt;
 
-use _PhpScoperb73f9e44f4eb\PhpParser\Node;
-use _PhpScoperb73f9e44f4eb\PhpParser\Node\Identifier;
-class UseUse extends \_PhpScoperb73f9e44f4eb\PhpParser\Node\Stmt
+use _PhpScoperb83706991c7f\PhpParser\Node;
+use _PhpScoperb83706991c7f\PhpParser\Node\Identifier;
+class UseUse extends \_PhpScoperb83706991c7f\PhpParser\Node\Stmt
 {
     /** @var int One of the Stmt\Use_::TYPE_* constants. Will only differ from TYPE_UNKNOWN for mixed group uses */
     public $type;
@@ -21,12 +21,12 @@ class UseUse extends \_PhpScoperb73f9e44f4eb\PhpParser\Node\Stmt
      * @param int                    $type       Type of the use element (for mixed group use only)
      * @param array                  $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperb73f9e44f4eb\PhpParser\Node\Name $name, $alias = null, int $type = \_PhpScoperb73f9e44f4eb\PhpParser\Node\Stmt\Use_::TYPE_UNKNOWN, array $attributes = [])
+    public function __construct(\_PhpScoperb83706991c7f\PhpParser\Node\Name $name, $alias = null, int $type = \_PhpScoperb83706991c7f\PhpParser\Node\Stmt\Use_::TYPE_UNKNOWN, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->type = $type;
         $this->name = $name;
-        $this->alias = \is_string($alias) ? new \_PhpScoperb73f9e44f4eb\PhpParser\Node\Identifier($alias) : $alias;
+        $this->alias = \is_string($alias) ? new \_PhpScoperb83706991c7f\PhpParser\Node\Identifier($alias) : $alias;
     }
     public function getSubNodeNames() : array
     {
@@ -37,12 +37,12 @@ class UseUse extends \_PhpScoperb73f9e44f4eb\PhpParser\Node\Stmt
      *
      * @return Identifier
      */
-    public function getAlias() : \_PhpScoperb73f9e44f4eb\PhpParser\Node\Identifier
+    public function getAlias() : \_PhpScoperb83706991c7f\PhpParser\Node\Identifier
     {
         if (null !== $this->alias) {
             return $this->alias;
         }
-        return new \_PhpScoperb73f9e44f4eb\PhpParser\Node\Identifier($this->name->getLast());
+        return new \_PhpScoperb83706991c7f\PhpParser\Node\Identifier($this->name->getLast());
     }
     public function getType() : string
     {

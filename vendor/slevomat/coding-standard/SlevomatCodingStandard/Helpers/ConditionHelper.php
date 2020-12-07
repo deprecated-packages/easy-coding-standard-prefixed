@@ -12,14 +12,14 @@ use function preg_replace;
 use function sprintf;
 use function strtolower;
 use function trim;
-use const _PhpScoperb73f9e44f4eb\T_BITWISE_AND;
+use const _PhpScoperb83706991c7f\T_BITWISE_AND;
 use const T_BOOLEAN_AND;
-use const _PhpScoperb73f9e44f4eb\T_BOOLEAN_NOT;
+use const _PhpScoperb83706991c7f\T_BOOLEAN_NOT;
 use const T_BOOLEAN_OR;
-use const _PhpScoperb73f9e44f4eb\T_CLOSE_PARENTHESIS;
+use const _PhpScoperb83706991c7f\T_CLOSE_PARENTHESIS;
 use const T_COALESCE;
-use const _PhpScoperb73f9e44f4eb\T_GREATER_THAN;
-use const _PhpScoperb73f9e44f4eb\T_INLINE_THEN;
+use const _PhpScoperb83706991c7f\T_GREATER_THAN;
+use const _PhpScoperb83706991c7f\T_INLINE_THEN;
 use const T_INSTANCEOF;
 use const T_IS_EQUAL;
 use const T_IS_GREATER_OR_EQUAL;
@@ -27,11 +27,11 @@ use const T_IS_IDENTICAL;
 use const T_IS_NOT_EQUAL;
 use const T_IS_NOT_IDENTICAL;
 use const T_IS_SMALLER_OR_EQUAL;
-use const _PhpScoperb73f9e44f4eb\T_LESS_THAN;
+use const _PhpScoperb83706991c7f\T_LESS_THAN;
 use const T_LOGICAL_AND;
 use const T_LOGICAL_OR;
 use const T_LOGICAL_XOR;
-use const _PhpScoperb73f9e44f4eb\T_OPEN_PARENTHESIS;
+use const _PhpScoperb83706991c7f\T_OPEN_PARENTHESIS;
 class ConditionHelper
 {
     public static function conditionReturnsBoolean(\PHP_CodeSniffer\Files\File $phpcsFile, int $conditionBoundaryStartPointer, int $conditionBoundaryEndPointer) : bool

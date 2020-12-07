@@ -12,8 +12,8 @@ use function sprintf;
 use function str_repeat;
 use function strlen;
 use function strpos;
-use const _PhpScoperb73f9e44f4eb\T_FN;
-use const _PhpScoperb73f9e44f4eb\T_FN_ARROW;
+use const _PhpScoperb83706991c7f\T_FN;
+use const _PhpScoperb83706991c7f\T_FN_ARROW;
 use const T_WHITESPACE;
 class ArrowFunctionDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

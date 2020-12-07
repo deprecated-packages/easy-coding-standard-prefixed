@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Tests;
+namespace _PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Tests;
 
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * StopwatchTest.
  *
@@ -18,47 +18,47 @@ use _PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch;
  *
  * @group time-sensitive
  */
-class StopwatchTest extends \_PhpScoperb73f9e44f4eb\PHPUnit_Framework_TestCase
+class StopwatchTest extends \_PhpScoperb83706991c7f\PHPUnit_Framework_TestCase
 {
     const DELTA = 20;
     public function testStart()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
         $event = $stopwatch->start('foo', 'cat');
-        $this->assertInstanceOf('_PhpScoperb73f9e44f4eb\\Symfony\\Component\\Stopwatch\\StopwatchEvent', $event);
+        $this->assertInstanceOf('_PhpScoperb83706991c7f\\Symfony\\Component\\Stopwatch\\StopwatchEvent', $event);
         $this->assertEquals('cat', $event->getCategory());
         $this->assertSame($event, $stopwatch->getEvent('foo'));
     }
     public function testIsStarted()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
         $stopwatch->start('foo', 'cat');
         $this->assertTrue($stopwatch->isStarted('foo'));
     }
     public function testIsNotStarted()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
         $this->assertFalse($stopwatch->isStarted('foo'));
     }
     public function testIsNotStartedEvent()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
-        $sections = new \ReflectionProperty('_PhpScoperb73f9e44f4eb\\Symfony\\Component\\Stopwatch\\Stopwatch', 'sections');
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
+        $sections = new \ReflectionProperty('_PhpScoperb83706991c7f\\Symfony\\Component\\Stopwatch\\Stopwatch', 'sections');
         $sections->setAccessible(\true);
         $section = $sections->getValue($stopwatch);
-        $events = new \ReflectionProperty('_PhpScoperb73f9e44f4eb\\Symfony\\Component\\Stopwatch\\Section', 'events');
+        $events = new \ReflectionProperty('_PhpScoperb83706991c7f\\Symfony\\Component\\Stopwatch\\Section', 'events');
         $events->setAccessible(\true);
-        $stopwatchMockEvent = $this->getMockBuilder('_PhpScoperb73f9e44f4eb\\Symfony\\Component\\Stopwatch\\StopwatchEvent')->setConstructorArgs(array(\microtime(\true) * 1000))->getMock();
+        $stopwatchMockEvent = $this->getMockBuilder('_PhpScoperb83706991c7f\\Symfony\\Component\\Stopwatch\\StopwatchEvent')->setConstructorArgs(array(\microtime(\true) * 1000))->getMock();
         $events->setValue(\end($section), array('foo' => $stopwatchMockEvent));
         $this->assertFalse($stopwatch->isStarted('foo'));
     }
     public function testStop()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
         $stopwatch->start('foo', 'cat');
         \usleep(200000);
         $event = $stopwatch->stop('foo');
-        $this->assertInstanceOf('_PhpScoperb73f9e44f4eb\\Symfony\\Component\\Stopwatch\\StopwatchEvent', $event);
+        $this->assertInstanceOf('_PhpScoperb83706991c7f\\Symfony\\Component\\Stopwatch\\StopwatchEvent', $event);
         $this->assertEquals(200, $event->getDuration(), null, self::DELTA);
     }
     /**
@@ -66,7 +66,7 @@ class StopwatchTest extends \_PhpScoperb73f9e44f4eb\PHPUnit_Framework_TestCase
      */
     public function testUnknownEvent()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
         $stopwatch->getEvent('foo');
     }
     /**
@@ -74,12 +74,12 @@ class StopwatchTest extends \_PhpScoperb73f9e44f4eb\PHPUnit_Framework_TestCase
      */
     public function testStopWithoutStart()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
         $stopwatch->stop('foo');
     }
     public function testSection()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
         $stopwatch->openSection();
         $stopwatch->start('foo', 'cat');
         $stopwatch->stop('foo');
@@ -101,7 +101,7 @@ class StopwatchTest extends \_PhpScoperb73f9e44f4eb\PHPUnit_Framework_TestCase
     }
     public function testReopenASection()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
         $stopwatch->openSection();
         $stopwatch->start('foo', 'cat');
         $stopwatch->stopSection('section');
@@ -117,7 +117,7 @@ class StopwatchTest extends \_PhpScoperb73f9e44f4eb\PHPUnit_Framework_TestCase
      */
     public function testReopenANewSectionShouldThrowAnException()
     {
-        $stopwatch = new \_PhpScoperb73f9e44f4eb\Symfony\Component\Stopwatch\Stopwatch();
+        $stopwatch = new \_PhpScoperb83706991c7f\Symfony\Component\Stopwatch\Stopwatch();
         $stopwatch->openSection('section');
     }
 }

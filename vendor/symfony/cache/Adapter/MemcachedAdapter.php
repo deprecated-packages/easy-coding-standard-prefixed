@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperb83706991c7f\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Traits\MemcachedTrait;
-class MemcachedAdapter extends \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Adapter\AbstractAdapter
+use _PhpScoperb83706991c7f\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperb83706991c7f\Symfony\Component\Cache\Traits\MemcachedTrait;
+class MemcachedAdapter extends \_PhpScoperb83706991c7f\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     use MemcachedTrait;
     protected $maxIdLength = 250;
@@ -26,7 +26,7 @@ class MemcachedAdapter extends \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\A
      *
      * Using a MemcachedAdapter as a pure items store is fine.
      */
-    public function __construct(\Memcached $client, string $namespace = '', int $defaultLifetime = 0, \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(\Memcached $client, string $namespace = '', int $defaultLifetime = 0, \_PhpScoperb83706991c7f\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         $this->init($client, $namespace, $defaultLifetime, $marshaller);
     }
