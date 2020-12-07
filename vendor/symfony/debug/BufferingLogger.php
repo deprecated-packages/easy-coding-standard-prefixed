@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e8786a75afe\Symfony\Component\Debug;
+namespace _PhpScoperda2604e33acb\Symfony\Component\Debug;
 
-use _PhpScoper3e8786a75afe\Psr\Log\AbstractLogger;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoper3e8786a75afe\Symfony\Component\Debug\BufferingLogger::class, \_PhpScoper3e8786a75afe\Symfony\Component\ErrorHandler\BufferingLogger::class), \E_USER_DEPRECATED);
+use _PhpScoperda2604e33acb\Psr\Log\AbstractLogger;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoperda2604e33acb\Symfony\Component\Debug\BufferingLogger::class, \_PhpScoperda2604e33acb\Symfony\Component\ErrorHandler\BufferingLogger::class), \E_USER_DEPRECATED);
 /**
  * A buffering logger that stacks logs for later.
  *
@@ -19,7 +19,7 @@ use _PhpScoper3e8786a75afe\Psr\Log\AbstractLogger;
  *
  * @deprecated since Symfony 4.4, use Symfony\Component\ErrorHandler\BufferingLogger instead.
  */
-class BufferingLogger extends \_PhpScoper3e8786a75afe\Psr\Log\AbstractLogger
+class BufferingLogger extends \_PhpScoperda2604e33acb\Psr\Log\AbstractLogger
 {
     private $logs = [];
     /**

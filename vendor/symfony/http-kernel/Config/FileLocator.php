@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e8786a75afe\Symfony\Component\HttpKernel\Config;
+namespace _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Config;
 
-use _PhpScoper3e8786a75afe\Symfony\Component\Config\FileLocator as BaseFileLocator;
-use _PhpScoper3e8786a75afe\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoperda2604e33acb\Symfony\Component\Config\FileLocator as BaseFileLocator;
+use _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\KernelInterface;
 /**
  * FileLocator uses the KernelInterface to locate resources in bundles.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FileLocator extends \_PhpScoper3e8786a75afe\Symfony\Component\Config\FileLocator
+class FileLocator extends \_PhpScoperda2604e33acb\Symfony\Component\Config\FileLocator
 {
     private $kernel;
     /**
      * @deprecated since Symfony 4.4
      */
     private $path;
-    public function __construct(\_PhpScoper3e8786a75afe\Symfony\Component\HttpKernel\KernelInterface $kernel)
+    public function __construct(\_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\KernelInterface $kernel)
     {
         $this->kernel = $kernel;
         if (2 <= \func_num_args()) {

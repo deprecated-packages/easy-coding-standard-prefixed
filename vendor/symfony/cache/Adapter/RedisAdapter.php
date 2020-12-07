@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e8786a75afe\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperda2604e33acb\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper3e8786a75afe\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper3e8786a75afe\Symfony\Component\Cache\Traits\RedisTrait;
-class RedisAdapter extends \_PhpScoper3e8786a75afe\Symfony\Component\Cache\Adapter\AbstractAdapter
+use _PhpScoperda2604e33acb\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperda2604e33acb\Symfony\Component\Cache\Traits\RedisTrait;
+class RedisAdapter extends \_PhpScoperda2604e33acb\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     use RedisTrait;
     /**
@@ -20,7 +20,7 @@ class RedisAdapter extends \_PhpScoper3e8786a75afe\Symfony\Component\Cache\Adapt
      * @param string                                                   $namespace       The default namespace
      * @param int                                                      $defaultLifetime The default lifetime
      */
-    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \_PhpScoper3e8786a75afe\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \_PhpScoperda2604e33acb\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         $this->init($redisClient, $namespace, $defaultLifetime, $marshaller);
     }

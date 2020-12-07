@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoper3e8786a75afe\Nette\Utils\Strings;
-use _PhpScoper3e8786a75afe\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper3e8786a75afe\PhpParser\Node\Expr\Variable;
-use _PhpScoper3e8786a75afe\PhpParser\Node\Stmt\Expression;
+use _PhpScoperda2604e33acb\Nette\Utils\Strings;
+use _PhpScoperda2604e33acb\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperda2604e33acb\PhpParser\Node\Expr\Variable;
+use _PhpScoperda2604e33acb\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
@@ -34,16 +34,16 @@ final class ConfiguredServiceCaseConverter implements \Symplify\PhpConfigPrinter
         $this->argsNodeFactory = $argsNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoper3e8786a75afe\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperda2604e33acb\PhpParser\Node\Stmt\Expression
     {
         $valuesForArgs = [$key];
         if (isset($values[\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY])) {
             $valuesForArgs[] = $values[\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY];
         }
         $args = $this->argsNodeFactory->createFromValues($valuesForArgs);
-        $methodCall = new \_PhpScoper3e8786a75afe\PhpParser\Node\Expr\MethodCall(new \_PhpScoper3e8786a75afe\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
+        $methodCall = new \_PhpScoperda2604e33acb\PhpParser\Node\Expr\MethodCall(new \_PhpScoperda2604e33acb\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
         $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $methodCall);
-        return new \_PhpScoper3e8786a75afe\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \_PhpScoperda2604e33acb\PhpParser\Node\Stmt\Expression($methodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {
@@ -73,6 +73,6 @@ final class ConfiguredServiceCaseConverter implements \Symplify\PhpConfigPrinter
         if (isset($values[\Symplify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS])) {
             return \true;
         }
-        return \is_string($values) && \_PhpScoper3e8786a75afe\Nette\Utils\Strings::startsWith($values, '@');
+        return \is_string($values) && \_PhpScoperda2604e33acb\Nette\Utils\Strings::startsWith($values, '@');
     }
 }

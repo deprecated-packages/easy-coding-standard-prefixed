@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e8786a75afe\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class LengthRequiredHttpException extends \_PhpScoper3e8786a75afe\Symfony\Component\HttpKernel\Exception\HttpException
+class LengthRequiredHttpException extends \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string     $message  The internal exception message

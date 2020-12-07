@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e8786a75afe\Symfony\Polyfill\Mbstring;
+namespace _PhpScoperda2604e33acb\Symfony\Polyfill\Mbstring;
 
 /**
  * Partial mbstring implementation in PHP, iconv based, UTF-8 centric.
@@ -101,7 +101,7 @@ final class Mbstring
         $vars = array(&$a, &$b, &$c, &$d, &$e, &$f);
         $ok = \true;
         \array_walk_recursive($vars, function (&$v) use(&$ok, $toEncoding, $fromEncoding) {
-            if (\false === ($v = \_PhpScoper3e8786a75afe\Symfony\Polyfill\Mbstring\Mbstring::mb_convert_encoding($v, $toEncoding, $fromEncoding))) {
+            if (\false === ($v = \_PhpScoperda2604e33acb\Symfony\Polyfill\Mbstring\Mbstring::mb_convert_encoding($v, $toEncoding, $fromEncoding))) {
                 $ok = \false;
             }
         });

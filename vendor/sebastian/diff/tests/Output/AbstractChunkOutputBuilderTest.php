@@ -9,10 +9,10 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e8786a75afe\SebastianBergmann\Diff\Output;
+namespace _PhpScoperda2604e33acb\SebastianBergmann\Diff\Output;
 
-use _PhpScoper3e8786a75afe\PHPUnit\Framework\TestCase;
-use _PhpScoper3e8786a75afe\SebastianBergmann\Diff\Differ;
+use _PhpScoperda2604e33acb\PHPUnit\Framework\TestCase;
+use _PhpScoperda2604e33acb\SebastianBergmann\Diff\Differ;
 /**
  * @covers SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
  *
@@ -20,7 +20,7 @@ use _PhpScoper3e8786a75afe\SebastianBergmann\Diff\Differ;
  * @uses SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
  * @uses SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator
  */
-final class AbstractChunkOutputBuilderTest extends \_PhpScoper3e8786a75afe\PHPUnit\Framework\TestCase
+final class AbstractChunkOutputBuilderTest extends \_PhpScoperda2604e33acb\PHPUnit\Framework\TestCase
 {
     /**
      * @param array  $expected
@@ -32,7 +32,7 @@ final class AbstractChunkOutputBuilderTest extends \_PhpScoper3e8786a75afe\PHPUn
      */
     public function testGetCommonChunks(array $expected, string $from, string $to, int $lineThreshold = 5) : void
     {
-        $output = new class extends \_PhpScoper3e8786a75afe\SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
+        $output = new class extends \_PhpScoperda2604e33acb\SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
         {
             public function getDiff(array $diff) : string
             {
@@ -43,7 +43,7 @@ final class AbstractChunkOutputBuilderTest extends \_PhpScoper3e8786a75afe\PHPUn
                 return $this->getCommonChunks($diff, $lineThreshold);
             }
         };
-        $this->assertSame($expected, $output->getChunks((new \_PhpScoper3e8786a75afe\SebastianBergmann\Diff\Differ())->diffToArray($from, $to), $lineThreshold));
+        $this->assertSame($expected, $output->getChunks((new \_PhpScoperda2604e33acb\SebastianBergmann\Diff\Differ())->diffToArray($from, $to), $lineThreshold));
     }
     public function provideGetCommonChunks() : array
     {

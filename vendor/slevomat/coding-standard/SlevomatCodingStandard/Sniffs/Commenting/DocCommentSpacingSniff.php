@@ -33,10 +33,10 @@ use function substr;
 use function substr_count;
 use function uasort;
 use function usort;
-use const _PhpScoper3e8786a75afe\T_DOC_COMMENT_OPEN_TAG;
-use const _PhpScoper3e8786a75afe\T_DOC_COMMENT_STAR;
-use const _PhpScoper3e8786a75afe\T_DOC_COMMENT_STRING;
-use const _PhpScoper3e8786a75afe\T_DOC_COMMENT_WHITESPACE;
+use const _PhpScoperda2604e33acb\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoperda2604e33acb\T_DOC_COMMENT_STAR;
+use const _PhpScoperda2604e33acb\T_DOC_COMMENT_STRING;
+use const _PhpScoperda2604e33acb\T_DOC_COMMENT_WHITESPACE;
 class DocCommentSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_INCORRECT_LINES_COUNT_BEFORE_FIRST_CONTENT = 'IncorrectLinesCountBeforeFirstContent';

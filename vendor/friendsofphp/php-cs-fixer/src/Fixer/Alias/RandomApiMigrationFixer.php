@@ -20,7 +20,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper3e8786a75afe\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoperda2604e33acb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Vladimir Reznichenko <kalessil@gmail.com>
  */
@@ -95,10 +95,10 @@ final class RandomApiMigrationFixer extends \PhpCsFixer\AbstractFunctionReferenc
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('replacements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('replacements', 'Mapping between replaced functions with the new ones.'))->setAllowedTypes(['array'])->setAllowedValues([static function ($value) {
             foreach ($value as $functionName => $replacement) {
                 if (!\array_key_exists($functionName, self::$argumentCounts)) {
-                    throw new \_PhpScoper3e8786a75afe\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Function "%s" is not handled by the fixer.', $functionName));
+                    throw new \_PhpScoperda2604e33acb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Function "%s" is not handled by the fixer.', $functionName));
                 }
                 if (!\is_string($replacement)) {
-                    throw new \_PhpScoper3e8786a75afe\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Replacement for function "%s" must be a string, "%s" given.', $functionName, \is_object($replacement) ? \get_class($replacement) : \gettype($replacement)));
+                    throw new \_PhpScoperda2604e33acb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Replacement for function "%s" must be a string, "%s" given.', $functionName, \is_object($replacement) ? \get_class($replacement) : \gettype($replacement)));
                 }
             }
             return \true;

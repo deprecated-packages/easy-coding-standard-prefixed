@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
-use _PhpScoper3e8786a75afe\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper3e8786a75afe\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern;
 final class CheckMarkdownCommand extends \Symplify\EasyCodingStandard\SnippetFormatter\Command\AbstractSnippetFormatterCommand
 {
@@ -13,7 +13,7 @@ final class CheckMarkdownCommand extends \Symplify\EasyCodingStandard\SnippetFor
         $this->setDescription('Format Markdown PHP code');
         parent::configure();
     }
-    protected function execute(\_PhpScoper3e8786a75afe\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper3e8786a75afe\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         return $this->doExecuteSnippetFormatterWithFileNamesAndSnippetPattern($input, '*.md', \Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern::MARKDOWN_PHP_SNIPPET_REGEX, 'markdown');
     }
