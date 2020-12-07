@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\HttpKernel;
 
-use _PhpScoperfa521053d812\Symfony\Component\Config\Loader\DelegatingLoader;
-use _PhpScoperfa521053d812\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperfa521053d812\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperfa521053d812\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\Config\Loader\DelegatingLoader;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\CodingStandard\Bundle\SymplifyCodingStandardBundle;
 use Symplify\ConsoleColorDiff\Bundle\ConsoleColorDiffBundle;
 use Symplify\EasyCodingStandard\Bundle\EasyCodingStandardBundle;
@@ -31,7 +31,7 @@ final class EasyCodingStandardKernel extends \Symplify\SymplifyKernel\HttpKernel
     /**
      * @param ContainerInterface|ContainerBuilder $container
      */
-    protected function getContainerLoader(\_PhpScoperfa521053d812\Symfony\Component\DependencyInjection\ContainerInterface $container) : \_PhpScoperfa521053d812\Symfony\Component\Config\Loader\DelegatingLoader
+    protected function getContainerLoader(\_PhpScoperb73f9e44f4eb\Symfony\Component\DependencyInjection\ContainerInterface $container) : \_PhpScoperb73f9e44f4eb\Symfony\Component\Config\Loader\DelegatingLoader
     {
         $delegatingLoaderFactory = new \Symplify\EasyCodingStandard\DependencyInjection\DelegatingLoaderFactory();
         return $delegatingLoaderFactory->createFromContainerBuilderAndKernel($container, $this);

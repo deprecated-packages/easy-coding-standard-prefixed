@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Command;
 
-use _PhpScoperfa521053d812\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperfa521053d812\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperfa521053d812\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperfa521053d812\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\Console\Input\InputOption;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\RuleDocGenerator\DirectoryToMarkdownPrinter;
@@ -26,11 +26,11 @@ final class GenerateCommand extends \Symplify\PackageBuilder\Console\Command\Abs
     protected function configure() : void
     {
         $this->setDescription('Generated Markdown documentation based on documented rules found in directory');
-        $this->addArgument(\Symplify\RuleDocGenerator\ValueObject\Option::PATHS, \_PhpScoperfa521053d812\Symfony\Component\Console\Input\InputArgument::REQUIRED | \_PhpScoperfa521053d812\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Path to directory of your project');
-        $this->addOption(\Symplify\RuleDocGenerator\ValueObject\Option::OUTPUT_FILE, null, \_PhpScoperfa521053d812\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Path to output generated markdown file', \getcwd() . '/docs/rules_overview.md');
-        $this->addOption(\Symplify\RuleDocGenerator\ValueObject\Option::CATEGORIZE, null, \_PhpScoperfa521053d812\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Group in categories');
+        $this->addArgument(\Symplify\RuleDocGenerator\ValueObject\Option::PATHS, \_PhpScoperb73f9e44f4eb\Symfony\Component\Console\Input\InputArgument::REQUIRED | \_PhpScoperb73f9e44f4eb\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Path to directory of your project');
+        $this->addOption(\Symplify\RuleDocGenerator\ValueObject\Option::OUTPUT_FILE, null, \_PhpScoperb73f9e44f4eb\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Path to output generated markdown file', \getcwd() . '/docs/rules_overview.md');
+        $this->addOption(\Symplify\RuleDocGenerator\ValueObject\Option::CATEGORIZE, null, \_PhpScoperb73f9e44f4eb\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Group in categories');
     }
-    protected function execute(\_PhpScoperfa521053d812\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperfa521053d812\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoperb73f9e44f4eb\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperb73f9e44f4eb\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $paths = (array) $input->getArgument(\Symplify\RuleDocGenerator\ValueObject\Option::PATHS);
         $shouldCategorize = (bool) $input->getOption(\Symplify\RuleDocGenerator\ValueObject\Option::CATEGORIZE);

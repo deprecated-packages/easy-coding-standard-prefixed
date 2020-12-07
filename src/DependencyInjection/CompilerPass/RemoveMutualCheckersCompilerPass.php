@@ -74,9 +74,9 @@ use SlevomatCodingStandard\Sniffs\Operators\DisallowEqualOperatorsSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\LongTypeHintsSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSpacingSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSpacingSniff;
-use _PhpScoperfa521053d812\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperfa521053d812\Symfony\Component\DependencyInjection\ContainerBuilder;
-final class RemoveMutualCheckersCompilerPass implements \_PhpScoperfa521053d812\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+use _PhpScoperb73f9e44f4eb\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\DependencyInjection\ContainerBuilder;
+final class RemoveMutualCheckersCompilerPass implements \_PhpScoperb73f9e44f4eb\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * List of checkers with the same functionality.
@@ -131,7 +131,7 @@ final class RemoveMutualCheckersCompilerPass implements \_PhpScoperfa521053d812\
         [\PhpCsFixer\Fixer\Operator\IncrementStyleFixer::class, \PhpCsFixer\Fixer\Operator\PreIncrementFixer::class],
         [\PhpCsFixer\Fixer\Comment\SingleLineCommentStyleFixer::class, \PhpCsFixer\Fixer\Comment\HashToSlashCommentFixer::class],
     ];
-    public function process(\_PhpScoperfa521053d812\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function process(\_PhpScoperb73f9e44f4eb\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $checkersToRemove = $this->resolveCheckersToRemove($containerBuilder->getServiceIds());
         $definitions = $containerBuilder->getDefinitions();

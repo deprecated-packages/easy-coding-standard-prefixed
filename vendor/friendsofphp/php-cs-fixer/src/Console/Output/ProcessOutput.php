@@ -12,8 +12,8 @@
 namespace PhpCsFixer\Console\Output;
 
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScoperfa521053d812\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperfa521053d812\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Output writer to show the process of a FixCommand.
  *
@@ -53,7 +53,7 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
      * @param null|int $width
      * @param null|int $nbFiles
      */
-    public function __construct(\_PhpScoperfa521053d812\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoperfa521053d812\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher, $width, $nbFiles)
+    public function __construct(\_PhpScoperb73f9e44f4eb\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoperb73f9e44f4eb\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher, $width, $nbFiles)
     {
         $this->output = $output;
         $this->eventDispatcher = $dispatcher;

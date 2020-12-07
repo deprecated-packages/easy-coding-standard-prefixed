@@ -8,37 +8,37 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScoperfa521053d812\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver;
-use _PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver;
-use _PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver;
-use _PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver;
-use _PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver;
-use _PhpScoperfa521053d812\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory;
-use _PhpScoperfa521053d812\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface;
 /**
  * Responsible for resolving the arguments passed to an action.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class ArgumentResolver implements \_PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
+final class ArgumentResolver implements \_PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
 {
     private $argumentMetadataFactory;
     /**
      * @var iterable|ArgumentValueResolverInterface[]
      */
     private $argumentValueResolvers;
-    public function __construct(\_PhpScoperfa521053d812\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface $argumentMetadataFactory = null, iterable $argumentValueResolvers = [])
+    public function __construct(\_PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface $argumentMetadataFactory = null, iterable $argumentValueResolvers = [])
     {
-        $this->argumentMetadataFactory = $argumentMetadataFactory ?: new \_PhpScoperfa521053d812\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory();
+        $this->argumentMetadataFactory = $argumentMetadataFactory ?: new \_PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory();
         $this->argumentValueResolvers = $argumentValueResolvers ?: self::getDefaultArgumentValueResolvers();
     }
     /**
      * {@inheritdoc}
      */
-    public function getArguments(\_PhpScoperfa521053d812\Symfony\Component\HttpFoundation\Request $request, $controller) : array
+    public function getArguments(\_PhpScoperb73f9e44f4eb\Symfony\Component\HttpFoundation\Request $request, $controller) : array
     {
         $arguments = [];
         foreach ($this->argumentMetadataFactory->createArgumentMetadata($controller) as $metadata) {
@@ -70,6 +70,6 @@ final class ArgumentResolver implements \_PhpScoperfa521053d812\Symfony\Componen
     }
     public static function getDefaultArgumentValueResolvers() : iterable
     {
-        return [new \_PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver(), new \_PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver(), new \_PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver(), new \_PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver(), new \_PhpScoperfa521053d812\Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver()];
+        return [new \_PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver(), new \_PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver(), new \_PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver(), new \_PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver(), new \_PhpScoperb73f9e44f4eb\Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver()];
     }
 }

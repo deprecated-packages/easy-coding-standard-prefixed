@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfa521053d812\Symfony\Component\Process\Tests;
+namespace _PhpScoperb73f9e44f4eb\Symfony\Component\Process\Tests;
 
-use _PhpScoperfa521053d812\PHPUnit\Framework\TestCase;
-use _PhpScoperfa521053d812\Symfony\Component\Process\ProcessUtils;
+use _PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\Process\ProcessUtils;
 /**
  * @group legacy
  */
-class ProcessUtilsTest extends \_PhpScoperfa521053d812\PHPUnit\Framework\TestCase
+class ProcessUtilsTest extends \_PhpScoperb73f9e44f4eb\PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider dataArguments
      */
     public function testEscapeArgument($result, $argument)
     {
-        $this->assertSame($result, \_PhpScoperfa521053d812\Symfony\Component\Process\ProcessUtils::escapeArgument($argument));
+        $this->assertSame($result, \_PhpScoperb73f9e44f4eb\Symfony\Component\Process\ProcessUtils::escapeArgument($argument));
     }
     public function dataArguments()
     {

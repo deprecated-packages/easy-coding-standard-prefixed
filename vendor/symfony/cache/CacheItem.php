@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfa521053d812\Symfony\Component\Cache;
+namespace _PhpScoperb73f9e44f4eb\Symfony\Component\Cache;
 
-use _PhpScoperfa521053d812\Psr\Log\LoggerInterface;
-use _PhpScoperfa521053d812\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperfa521053d812\Symfony\Component\Cache\Exception\LogicException;
-use _PhpScoperfa521053d812\Symfony\Contracts\Cache\ItemInterface;
+use _PhpScoperb73f9e44f4eb\Psr\Log\LoggerInterface;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\LogicException;
+use _PhpScoperb73f9e44f4eb\Symfony\Contracts\Cache\ItemInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-final class CacheItem implements \_PhpScoperfa521053d812\Symfony\Contracts\Cache\ItemInterface
+final class CacheItem implements \_PhpScoperb73f9e44f4eb\Symfony\Contracts\Cache\ItemInterface
 {
     private const METADATA_EXPIRY_OFFSET = 1527506807;
     protected $key;
@@ -73,7 +73,7 @@ final class CacheItem implements \_PhpScoperfa521053d812\Symfony\Contracts\Cache
         } elseif ($expiration instanceof \DateTimeInterface) {
             $this->expiry = (float) $expiration->format('U.u');
         } else {
-            throw new \_PhpScoperfa521053d812\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must implement DateTimeInterface or be null, "%s" given', \is_object($expiration) ? \get_class($expiration) : \gettype($expiration)));
+            throw new \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must implement DateTimeInterface or be null, "%s" given', \is_object($expiration) ? \get_class($expiration) : \gettype($expiration)));
         }
         return $this;
     }
@@ -91,33 +91,33 @@ final class CacheItem implements \_PhpScoperfa521053d812\Symfony\Contracts\Cache
         } elseif (\is_int($time)) {
             $this->expiry = $time + \microtime(\true);
         } else {
-            throw new \_PhpScoperfa521053d812\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must be an integer, a DateInterval or null, "%s" given', \is_object($time) ? \get_class($time) : \gettype($time)));
+            throw new \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Expiration date must be an integer, a DateInterval or null, "%s" given', \is_object($time) ? \get_class($time) : \gettype($time)));
         }
         return $this;
     }
     /**
      * {@inheritdoc}
      */
-    public function tag($tags) : \_PhpScoperfa521053d812\Symfony\Contracts\Cache\ItemInterface
+    public function tag($tags) : \_PhpScoperb73f9e44f4eb\Symfony\Contracts\Cache\ItemInterface
     {
         if (!$this->isTaggable) {
-            throw new \_PhpScoperfa521053d812\Symfony\Component\Cache\Exception\LogicException(\sprintf('Cache item "%s" comes from a non tag-aware pool: you cannot tag it.', $this->key));
+            throw new \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\LogicException(\sprintf('Cache item "%s" comes from a non tag-aware pool: you cannot tag it.', $this->key));
         }
         if (!\is_iterable($tags)) {
             $tags = [$tags];
         }
         foreach ($tags as $tag) {
             if (!\is_string($tag)) {
-                throw new \_PhpScoperfa521053d812\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache tag must be string, "%s" given', \is_object($tag) ? \get_class($tag) : \gettype($tag)));
+                throw new \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache tag must be string, "%s" given', \is_object($tag) ? \get_class($tag) : \gettype($tag)));
             }
             if (isset($this->newMetadata[self::METADATA_TAGS][$tag])) {
                 continue;
             }
             if ('' === $tag) {
-                throw new \_PhpScoperfa521053d812\Symfony\Component\Cache\Exception\InvalidArgumentException('Cache tag length must be greater than zero');
+                throw new \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\InvalidArgumentException('Cache tag length must be greater than zero');
             }
             if (\false !== \strpbrk($tag, self::RESERVED_CHARACTERS)) {
-                throw new \_PhpScoperfa521053d812\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache tag "%s" contains reserved characters %s', $tag, self::RESERVED_CHARACTERS));
+                throw new \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache tag "%s" contains reserved characters %s', $tag, self::RESERVED_CHARACTERS));
             }
             $this->newMetadata[self::METADATA_TAGS][$tag] = $tag;
         }
@@ -150,13 +150,13 @@ final class CacheItem implements \_PhpScoperfa521053d812\Symfony\Contracts\Cache
     public static function validateKey($key) : string
     {
         if (!\is_string($key)) {
-            throw new \_PhpScoperfa521053d812\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given', \is_object($key) ? \get_class($key) : \gettype($key)));
+            throw new \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given', \is_object($key) ? \get_class($key) : \gettype($key)));
         }
         if ('' === $key) {
-            throw new \_PhpScoperfa521053d812\Symfony\Component\Cache\Exception\InvalidArgumentException('Cache key length must be greater than zero');
+            throw new \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\InvalidArgumentException('Cache key length must be greater than zero');
         }
         if (\false !== \strpbrk($key, self::RESERVED_CHARACTERS)) {
-            throw new \_PhpScoperfa521053d812\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" contains reserved characters %s', $key, self::RESERVED_CHARACTERS));
+            throw new \_PhpScoperb73f9e44f4eb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key "%s" contains reserved characters %s', $key, self::RESERVED_CHARACTERS));
         }
         return $key;
     }
@@ -165,7 +165,7 @@ final class CacheItem implements \_PhpScoperfa521053d812\Symfony\Contracts\Cache
      *
      * @internal
      */
-    public static function log(?\_PhpScoperfa521053d812\Psr\Log\LoggerInterface $logger, string $message, array $context = [])
+    public static function log(?\_PhpScoperb73f9e44f4eb\Psr\Log\LoggerInterface $logger, string $message, array $context = [])
     {
         if ($logger) {
             $logger->warning($message, $context);
