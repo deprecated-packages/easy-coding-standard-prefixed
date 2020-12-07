@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb8678af2407\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper89ec3c69e67d\Symfony\Component\Cache\Adapter;
 
-@\trigger_error(\sprintf('The "%s" class is @deprecated since Symfony 4.3, use "Psr16Adapter" instead.', \_PhpScopereb8678af2407\Symfony\Component\Cache\Adapter\SimpleCacheAdapter::class), \E_USER_DEPRECATED);
+@\trigger_error(\sprintf('The "%s" class is @deprecated since Symfony 4.3, use "Psr16Adapter" instead.', \_PhpScoper89ec3c69e67d\Symfony\Component\Cache\Adapter\SimpleCacheAdapter::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use Psr16Adapter instead.
  */
-class SimpleCacheAdapter extends \_PhpScopereb8678af2407\Symfony\Component\Cache\Adapter\Psr16Adapter
+class SimpleCacheAdapter extends \_PhpScoper89ec3c69e67d\Symfony\Component\Cache\Adapter\Psr16Adapter
 {
 }

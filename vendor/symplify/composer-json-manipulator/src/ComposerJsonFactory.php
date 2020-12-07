@@ -51,6 +51,9 @@ final class ComposerJsonFactory
         if (isset($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::TYPE])) {
             $composerJson->setType($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::TYPE]);
         }
+        if (isset($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTHORS])) {
+            $composerJson->setAuthors($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTHORS]);
+        }
         if (isset($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::DESCRIPTION])) {
             $composerJson->setDescription($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::DESCRIPTION]);
         }

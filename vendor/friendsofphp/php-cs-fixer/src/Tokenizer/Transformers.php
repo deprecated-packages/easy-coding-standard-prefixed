@@ -12,8 +12,8 @@
 namespace PhpCsFixer\Tokenizer;
 
 use PhpCsFixer\Utils;
-use _PhpScopereb8678af2407\Symfony\Component\Finder\Finder;
-use _PhpScopereb8678af2407\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper89ec3c69e67d\Symfony\Component\Finder\Finder;
+use _PhpScoper89ec3c69e67d\Symfony\Component\Finder\SplFileInfo;
 /**
  * Collection of Transformer classes.
  *
@@ -89,7 +89,7 @@ final class Transformers
     private function findBuiltInTransformers()
     {
         /** @var SplFileInfo $file */
-        foreach (\_PhpScopereb8678af2407\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Transformer') as $file) {
+        foreach (\_PhpScoper89ec3c69e67d\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Transformer') as $file) {
             $relativeNamespace = $file->getRelativePath();
             $class = __NAMESPACE__ . '\\Transformer\\' . ($relativeNamespace ? $relativeNamespace . '\\' : '') . $file->getBasename('.php');
             (yield new $class());

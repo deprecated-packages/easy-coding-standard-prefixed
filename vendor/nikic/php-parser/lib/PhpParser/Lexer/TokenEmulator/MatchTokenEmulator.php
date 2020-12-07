@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopereb8678af2407\PhpParser\Lexer\TokenEmulator;
+namespace _PhpScoper89ec3c69e67d\PhpParser\Lexer\TokenEmulator;
 
-use _PhpScopereb8678af2407\PhpParser\Lexer\Emulative;
-final class MatchTokenEmulator extends \_PhpScopereb8678af2407\PhpParser\Lexer\TokenEmulator\KeywordEmulator
+use _PhpScoper89ec3c69e67d\PhpParser\Lexer\Emulative;
+final class MatchTokenEmulator extends \_PhpScoper89ec3c69e67d\PhpParser\Lexer\TokenEmulator\KeywordEmulator
 {
     public function getPhpVersion() : string
     {
-        return \_PhpScopereb8678af2407\PhpParser\Lexer\Emulative::PHP_8_0;
+        return \_PhpScoper89ec3c69e67d\PhpParser\Lexer\Emulative::PHP_8_0;
     }
     public function getKeywordString() : string
     {

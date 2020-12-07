@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Exception;
+namespace _PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * This exception is thrown when an environment variable is not found.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EnvNotFoundException extends \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+class EnvNotFoundException extends \_PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
 {
 }

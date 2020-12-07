@@ -3,22 +3,22 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\DependencyInjection\FileLoader;
 
-use _PhpScopereb8678af2407\Symfony\Component\Config\FileLocatorInterface;
-use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoper89ec3c69e67d\Symfony\Component\Config\FileLocatorInterface;
+use _PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symplify\PackageBuilder\Yaml\ParametersMerger;
 /**
  * The need:
  * - https://github.com/symfony/symfony/issues/26713
  * - https://github.com/symfony/symfony/pull/21313#issuecomment-372037445
  */
-final class ParameterMergingPhpFileLoader extends \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+final class ParameterMergingPhpFileLoader extends \_PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader
 {
     /**
      * @var ParametersMerger
      */
     private $parametersMerger;
-    public function __construct(\_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \_PhpScopereb8678af2407\Symfony\Component\Config\FileLocatorInterface $fileLocator)
+    public function __construct(\_PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder, \_PhpScoper89ec3c69e67d\Symfony\Component\Config\FileLocatorInterface $fileLocator)
     {
         $this->parametersMerger = new \Symplify\PackageBuilder\Yaml\ParametersMerger();
         parent::__construct($containerBuilder, $fileLocator);

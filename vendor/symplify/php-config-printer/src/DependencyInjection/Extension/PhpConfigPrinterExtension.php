@@ -3,16 +3,16 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\DependencyInjection\Extension;
 
-use _PhpScopereb8678af2407\Symfony\Component\Config\FileLocator;
-use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class PhpConfigPrinterExtension extends \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Extension\Extension
+use _PhpScoper89ec3c69e67d\Symfony\Component\Config\FileLocator;
+use _PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class PhpConfigPrinterExtension extends \_PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\Extension\Extension
 {
-    public function load(array $configs, \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, \_PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         // needed for parameter shifting of sniff/fixer params
-        $phpFileLoader = new \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScopereb8678af2407\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \_PhpScoper89ec3c69e67d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoper89ec3c69e67d\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');
     }
 }

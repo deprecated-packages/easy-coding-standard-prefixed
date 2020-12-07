@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb8678af2407\Symfony\Component\Console\Exception;
+namespace _PhpScoper89ec3c69e67d\Symfony\Component\Console\Exception;
 
 /**
  * @author Jérôme Tamarelle <jerome@tamarelle.net>
  */
-class RuntimeException extends \RuntimeException implements \_PhpScopereb8678af2407\Symfony\Component\Console\Exception\ExceptionInterface
+class RuntimeException extends \RuntimeException implements \_PhpScoper89ec3c69e67d\Symfony\Component\Console\Exception\ExceptionInterface
 {
 }
