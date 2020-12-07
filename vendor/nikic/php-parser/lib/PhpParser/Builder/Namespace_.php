@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperda2604e33acb\PhpParser\Builder;
+namespace _PhpScopereb8678af2407\PhpParser\Builder;
 
-use _PhpScoperda2604e33acb\PhpParser;
-use _PhpScoperda2604e33acb\PhpParser\BuilderHelpers;
-use _PhpScoperda2604e33acb\PhpParser\Node;
-use _PhpScoperda2604e33acb\PhpParser\Node\Stmt;
-class Namespace_ extends \_PhpScoperda2604e33acb\PhpParser\Builder\Declaration
+use _PhpScopereb8678af2407\PhpParser;
+use _PhpScopereb8678af2407\PhpParser\BuilderHelpers;
+use _PhpScopereb8678af2407\PhpParser\Node;
+use _PhpScopereb8678af2407\PhpParser\Node\Stmt;
+class Namespace_ extends \_PhpScopereb8678af2407\PhpParser\Builder\Declaration
 {
     private $name;
     private $stmts = [];
@@ -18,7 +18,7 @@ class Namespace_ extends \_PhpScoperda2604e33acb\PhpParser\Builder\Declaration
      */
     public function __construct($name)
     {
-        $this->name = null !== $name ? \_PhpScoperda2604e33acb\PhpParser\BuilderHelpers::normalizeName($name) : null;
+        $this->name = null !== $name ? \_PhpScopereb8678af2407\PhpParser\BuilderHelpers::normalizeName($name) : null;
     }
     /**
      * Adds a statement.
@@ -29,7 +29,7 @@ class Namespace_ extends \_PhpScoperda2604e33acb\PhpParser\Builder\Declaration
      */
     public function addStmt($stmt)
     {
-        $this->stmts[] = \_PhpScoperda2604e33acb\PhpParser\BuilderHelpers::normalizeStmt($stmt);
+        $this->stmts[] = \_PhpScopereb8678af2407\PhpParser\BuilderHelpers::normalizeStmt($stmt);
         return $this;
     }
     /**
@@ -37,8 +37,8 @@ class Namespace_ extends \_PhpScoperda2604e33acb\PhpParser\Builder\Declaration
      *
      * @return Node The built node
      */
-    public function getNode() : \_PhpScoperda2604e33acb\PhpParser\Node
+    public function getNode() : \_PhpScopereb8678af2407\PhpParser\Node
     {
-        return new \_PhpScoperda2604e33acb\PhpParser\Node\Stmt\Namespace_($this->name, $this->stmts, $this->attributes);
+        return new \_PhpScopereb8678af2407\PhpParser\Node\Stmt\Namespace_($this->name, $this->stmts, $this->attributes);
     }
 }

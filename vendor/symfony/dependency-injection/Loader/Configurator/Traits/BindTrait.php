@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
-use _PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
-use _PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
+use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
+use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Reference;
 trait BindTrait
 {
     /**
@@ -32,12 +32,12 @@ trait BindTrait
     public final function bind(string $nameOrFqcn, $valueOrRef) : self
     {
         $valueOrRef = static::processValue($valueOrRef, \true);
-        if (!\preg_match('/^(?:(?:array|bool|float|int|string)[ \\t]*+)?\\$/', $nameOrFqcn) && !$valueOrRef instanceof \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Reference) {
-            throw new \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid binding for service "%s": named arguments must start with a "$", and FQCN must map to references. Neither applies to binding "%s".', $this->id, $nameOrFqcn));
+        if (!\preg_match('/^(?:(?:array|bool|float|int|string)[ \\t]*+)?\\$/', $nameOrFqcn) && !$valueOrRef instanceof \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Reference) {
+            throw new \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid binding for service "%s": named arguments must start with a "$", and FQCN must map to references. Neither applies to binding "%s".', $this->id, $nameOrFqcn));
         }
         $bindings = $this->definition->getBindings();
-        $type = $this instanceof \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator ? \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING : ($this instanceof \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator ? \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING : \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Argument\BoundArgument::SERVICE_BINDING);
-        $bindings[$nameOrFqcn] = new \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Argument\BoundArgument($valueOrRef, \true, $type, $this->path ?? null);
+        $type = $this instanceof \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator ? \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Argument\BoundArgument::DEFAULTS_BINDING : ($this instanceof \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator ? \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Argument\BoundArgument::INSTANCEOF_BINDING : \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Argument\BoundArgument::SERVICE_BINDING);
+        $bindings[$nameOrFqcn] = new \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Argument\BoundArgument($valueOrRef, \true, $type, $this->path ?? null);
         $this->definition->setBindings($bindings);
         return $this;
     }

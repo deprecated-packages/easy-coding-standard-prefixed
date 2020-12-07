@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperda2604e33acb\PhpParser\Node\Expr;
+namespace _PhpScopereb8678af2407\PhpParser\Node\Expr;
 
-use _PhpScoperda2604e33acb\PhpParser\Node\Expr;
-class BooleanNot extends \_PhpScoperda2604e33acb\PhpParser\Node\Expr
+use _PhpScopereb8678af2407\PhpParser\Node\Expr;
+class BooleanNot extends \_PhpScopereb8678af2407\PhpParser\Node\Expr
 {
     /** @var Expr Expression */
     public $expr;
@@ -14,7 +14,7 @@ class BooleanNot extends \_PhpScoperda2604e33acb\PhpParser\Node\Expr
      * @param Expr $expr       Expression
      * @param array               $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperda2604e33acb\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\_PhpScopereb8678af2407\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\ParameterBag;
+namespace _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\ParameterBag;
 
-use _PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Exception\LogicException;
 /**
  * Holds read-only parameters.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FrozenParameterBag extends \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+class FrozenParameterBag extends \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
 {
     /**
      * For performance reasons, the constructor assumes that
@@ -36,27 +36,27 @@ class FrozenParameterBag extends \_PhpScoperda2604e33acb\Symfony\Component\Depen
      */
     public function clear()
     {
-        throw new \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call clear() on a frozen ParameterBag.');
+        throw new \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call clear() on a frozen ParameterBag.');
     }
     /**
      * {@inheritdoc}
      */
     public function add(array $parameters)
     {
-        throw new \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call add() on a frozen ParameterBag.');
+        throw new \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call add() on a frozen ParameterBag.');
     }
     /**
      * {@inheritdoc}
      */
     public function set(string $name, $value)
     {
-        throw new \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call set() on a frozen ParameterBag.');
+        throw new \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call set() on a frozen ParameterBag.');
     }
     /**
      * {@inheritdoc}
      */
     public function remove(string $name)
     {
-        throw new \_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call remove() on a frozen ParameterBag.');
+        throw new \_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Exception\LogicException('Impossible to call remove() on a frozen ParameterBag.');
     }
 }

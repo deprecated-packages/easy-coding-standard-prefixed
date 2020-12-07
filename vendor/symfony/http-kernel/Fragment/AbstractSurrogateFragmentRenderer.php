@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScopereb8678af2407\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoperda2604e33acb\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperda2604e33acb\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
-use _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\UriSigner;
+use _PhpScopereb8678af2407\Symfony\Component\HttpFoundation\Request;
+use _PhpScopereb8678af2407\Symfony\Component\HttpFoundation\Response;
+use _PhpScopereb8678af2407\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScopereb8678af2407\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
+use _PhpScopereb8678af2407\Symfony\Component\HttpKernel\UriSigner;
 /**
  * Implements Surrogate rendering strategy.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class AbstractSurrogateFragmentRenderer extends \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
+abstract class AbstractSurrogateFragmentRenderer extends \_PhpScopereb8678af2407\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
 {
     private $surrogate;
     private $inlineStrategy;
@@ -31,7 +31,7 @@ abstract class AbstractSurrogateFragmentRenderer extends \_PhpScoperda2604e33acb
      *
      * @param FragmentRendererInterface $inlineStrategy The inline strategy to use when the surrogate is not supported
      */
-    public function __construct(\_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate = null, \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $inlineStrategy, \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\UriSigner $signer = null)
+    public function __construct(\_PhpScopereb8678af2407\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate = null, \_PhpScopereb8678af2407\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $inlineStrategy, \_PhpScopereb8678af2407\Symfony\Component\HttpKernel\UriSigner $signer = null)
     {
         $this->surrogate = $surrogate;
         $this->inlineStrategy = $inlineStrategy;
@@ -53,25 +53,25 @@ abstract class AbstractSurrogateFragmentRenderer extends \_PhpScoperda2604e33acb
      *
      * @see Symfony\Component\HttpKernel\HttpCache\SurrogateInterface
      */
-    public function render($uri, \_PhpScoperda2604e33acb\Symfony\Component\HttpFoundation\Request $request, array $options = [])
+    public function render($uri, \_PhpScopereb8678af2407\Symfony\Component\HttpFoundation\Request $request, array $options = [])
     {
         if (!$this->surrogate || !$this->surrogate->hasSurrogateCapability($request)) {
-            if ($uri instanceof \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Controller\ControllerReference && $this->containsNonScalars($uri->attributes)) {
+            if ($uri instanceof \_PhpScopereb8678af2407\Symfony\Component\HttpKernel\Controller\ControllerReference && $this->containsNonScalars($uri->attributes)) {
                 throw new \InvalidArgumentException('Passing non-scalar values as part of URI attributes to the ESI and SSI rendering strategies is not supported. Use a different rendering strategy or pass scalar values.');
             }
             return $this->inlineStrategy->render($uri, $request, $options);
         }
-        if ($uri instanceof \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Controller\ControllerReference) {
+        if ($uri instanceof \_PhpScopereb8678af2407\Symfony\Component\HttpKernel\Controller\ControllerReference) {
             $uri = $this->generateSignedFragmentUri($uri, $request);
         }
         $alt = isset($options['alt']) ? $options['alt'] : null;
-        if ($alt instanceof \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Controller\ControllerReference) {
+        if ($alt instanceof \_PhpScopereb8678af2407\Symfony\Component\HttpKernel\Controller\ControllerReference) {
             $alt = $this->generateSignedFragmentUri($alt, $request);
         }
         $tag = $this->surrogate->renderIncludeTag($uri, $alt, isset($options['ignore_errors']) ? $options['ignore_errors'] : \false, isset($options['comment']) ? $options['comment'] : '');
-        return new \_PhpScoperda2604e33acb\Symfony\Component\HttpFoundation\Response($tag);
+        return new \_PhpScopereb8678af2407\Symfony\Component\HttpFoundation\Response($tag);
     }
-    private function generateSignedFragmentUri(\_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Controller\ControllerReference $uri, \_PhpScoperda2604e33acb\Symfony\Component\HttpFoundation\Request $request) : string
+    private function generateSignedFragmentUri(\_PhpScopereb8678af2407\Symfony\Component\HttpKernel\Controller\ControllerReference $uri, \_PhpScopereb8678af2407\Symfony\Component\HttpFoundation\Request $request) : string
     {
         if (null === $this->signer) {
             throw new \LogicException('You must use a URI when using the ESI rendering strategy or set a URL signer.');

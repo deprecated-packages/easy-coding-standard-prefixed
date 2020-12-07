@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperda2604e33acb\Symfony\Component\Console\Output;
+namespace _PhpScopereb8678af2407\Symfony\Component\Console\Output;
 
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Exception\RuntimeException;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Exception\RuntimeException;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * StreamOutput writes the output to a given stream.
  *
@@ -26,7 +26,7 @@ use _PhpScoperda2604e33acb\Symfony\Component\Console\Formatter\OutputFormatterIn
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StreamOutput extends \_PhpScoperda2604e33acb\Symfony\Component\Console\Output\Output
+class StreamOutput extends \_PhpScopereb8678af2407\Symfony\Component\Console\Output\Output
 {
     private $stream;
     /**
@@ -37,10 +37,10 @@ class StreamOutput extends \_PhpScoperda2604e33acb\Symfony\Component\Console\Out
      *
      * @throws InvalidArgumentException When first argument is not a real stream
      */
-    public function __construct($stream, int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = null, \_PhpScoperda2604e33acb\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter = null)
+    public function __construct($stream, int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = null, \_PhpScopereb8678af2407\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter = null)
     {
         if (!\is_resource($stream) || 'stream' !== \get_resource_type($stream)) {
-            throw new \_PhpScoperda2604e33acb\Symfony\Component\Console\Exception\InvalidArgumentException('The StreamOutput class needs a stream as its first argument.');
+            throw new \_PhpScopereb8678af2407\Symfony\Component\Console\Exception\InvalidArgumentException('The StreamOutput class needs a stream as its first argument.');
         }
         $this->stream = $stream;
         if (null === $decorated) {
@@ -67,7 +67,7 @@ class StreamOutput extends \_PhpScoperda2604e33acb\Symfony\Component\Console\Out
         }
         if (\false === @\fwrite($this->stream, $message)) {
             // should never happen
-            throw new \_PhpScoperda2604e33acb\Symfony\Component\Console\Exception\RuntimeException('Unable to write output.');
+            throw new \_PhpScopereb8678af2407\Symfony\Component\Console\Exception\RuntimeException('Unable to write output.');
         }
         \fflush($this->stream);
     }

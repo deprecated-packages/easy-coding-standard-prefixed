@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperda2604e33acb\Symfony\Component\Console\Command;
+namespace _PhpScopereb8678af2407\Symfony\Component\Console\Command;
 
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Helper\DescriptorHelper;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Helper\DescriptorHelper;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Input\InputArgument;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Input\InputOption;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Output\OutputInterface;
 /**
  * HelpCommand displays the help for a given command.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class HelpCommand extends \_PhpScoperda2604e33acb\Symfony\Component\Console\Command\Command
+class HelpCommand extends \_PhpScopereb8678af2407\Symfony\Component\Console\Command\Command
 {
     private $command;
     /**
@@ -29,7 +29,7 @@ class HelpCommand extends \_PhpScoperda2604e33acb\Symfony\Component\Console\Comm
     protected function configure()
     {
         $this->ignoreValidationErrors();
-        $this->setName('help')->setDefinition([new \_PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputArgument('command_name', \_PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputArgument::OPTIONAL, 'The command name', 'help'), new \_PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputOption('format', null, \_PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The output format (txt, xml, json, or md)', 'txt'), new \_PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputOption('raw', null, \_PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'To output raw command help')])->setDescription('Displays help for a command')->setHelp(<<<'EOF'
+        $this->setName('help')->setDefinition([new \_PhpScopereb8678af2407\Symfony\Component\Console\Input\InputArgument('command_name', \_PhpScopereb8678af2407\Symfony\Component\Console\Input\InputArgument::OPTIONAL, 'The command name', 'help'), new \_PhpScopereb8678af2407\Symfony\Component\Console\Input\InputOption('format', null, \_PhpScopereb8678af2407\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The output format (txt, xml, json, or md)', 'txt'), new \_PhpScopereb8678af2407\Symfony\Component\Console\Input\InputOption('raw', null, \_PhpScopereb8678af2407\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'To output raw command help')])->setDescription('Displays help for a command')->setHelp(<<<'EOF'
 The <info>%command.name%</info> command displays help for a given command:
 
   <info>php %command.full_name% list</info>
@@ -42,19 +42,19 @@ To display the list of available commands, please use the <info>list</info> comm
 EOF
 );
     }
-    public function setCommand(\_PhpScoperda2604e33acb\Symfony\Component\Console\Command\Command $command)
+    public function setCommand(\_PhpScopereb8678af2407\Symfony\Component\Console\Command\Command $command)
     {
         $this->command = $command;
     }
     /**
      * {@inheritdoc}
      */
-    protected function execute(\_PhpScoperda2604e33acb\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function execute(\_PhpScopereb8678af2407\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopereb8678af2407\Symfony\Component\Console\Output\OutputInterface $output)
     {
         if (null === $this->command) {
             $this->command = $this->getApplication()->find($input->getArgument('command_name'));
         }
-        $helper = new \_PhpScoperda2604e33acb\Symfony\Component\Console\Helper\DescriptorHelper();
+        $helper = new \_PhpScopereb8678af2407\Symfony\Component\Console\Helper\DescriptorHelper();
         $helper->describe($output, $this->command, ['format' => $input->getOption('format'), 'raw_text' => $input->getOption('raw')]);
         $this->command = null;
         return 0;

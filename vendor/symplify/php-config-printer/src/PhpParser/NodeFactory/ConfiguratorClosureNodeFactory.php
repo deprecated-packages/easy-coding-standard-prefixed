@@ -3,21 +3,21 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\PhpParser\NodeFactory;
 
-use _PhpScoperda2604e33acb\PhpParser\Node;
-use _PhpScoperda2604e33acb\PhpParser\Node\Expr\Closure;
-use _PhpScoperda2604e33acb\PhpParser\Node\Expr\Variable;
-use _PhpScoperda2604e33acb\PhpParser\Node\Identifier;
-use _PhpScoperda2604e33acb\PhpParser\Node\Name\FullyQualified;
-use _PhpScoperda2604e33acb\PhpParser\Node\Param;
-use _PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use _PhpScoperda2604e33acb\Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use _PhpScopereb8678af2407\PhpParser\Node;
+use _PhpScopereb8678af2407\PhpParser\Node\Expr\Closure;
+use _PhpScopereb8678af2407\PhpParser\Node\Expr\Variable;
+use _PhpScopereb8678af2407\PhpParser\Node\Identifier;
+use _PhpScopereb8678af2407\PhpParser\Node\Name\FullyQualified;
+use _PhpScopereb8678af2407\PhpParser\Node\Param;
+use _PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScopereb8678af2407\Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
 final class ConfiguratorClosureNodeFactory
 {
     /**
      * @param Node[] $stmts
      */
-    public function createContainerClosureFromStmts(array $stmts) : \_PhpScoperda2604e33acb\PhpParser\Node\Expr\Closure
+    public function createContainerClosureFromStmts(array $stmts) : \_PhpScopereb8678af2407\PhpParser\Node\Expr\Closure
     {
         $param = $this->createContainerConfiguratorParam();
         return $this->createClosureFromParamAndStmts($param, $stmts);
@@ -25,27 +25,27 @@ final class ConfiguratorClosureNodeFactory
     /**
      * @param Node[] $stmts
      */
-    public function createRoutingClosureFromStmts(array $stmts) : \_PhpScoperda2604e33acb\PhpParser\Node\Expr\Closure
+    public function createRoutingClosureFromStmts(array $stmts) : \_PhpScopereb8678af2407\PhpParser\Node\Expr\Closure
     {
         $param = $this->createRoutingConfiguratorParam();
         return $this->createClosureFromParamAndStmts($param, $stmts);
     }
-    private function createContainerConfiguratorParam() : \_PhpScoperda2604e33acb\PhpParser\Node\Param
+    private function createContainerConfiguratorParam() : \_PhpScopereb8678af2407\PhpParser\Node\Param
     {
-        $containerConfiguratorVariable = new \_PhpScoperda2604e33acb\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
-        return new \_PhpScoperda2604e33acb\PhpParser\Node\Param($containerConfiguratorVariable, null, new \_PhpScoperda2604e33acb\PhpParser\Node\Name\FullyQualified(\_PhpScoperda2604e33acb\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator::class));
+        $containerConfiguratorVariable = new \_PhpScopereb8678af2407\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        return new \_PhpScopereb8678af2407\PhpParser\Node\Param($containerConfiguratorVariable, null, new \_PhpScopereb8678af2407\PhpParser\Node\Name\FullyQualified(\_PhpScopereb8678af2407\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator::class));
     }
-    private function createRoutingConfiguratorParam() : \_PhpScoperda2604e33acb\PhpParser\Node\Param
+    private function createRoutingConfiguratorParam() : \_PhpScopereb8678af2407\PhpParser\Node\Param
     {
-        $containerConfiguratorVariable = new \_PhpScoperda2604e33acb\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
-        return new \_PhpScoperda2604e33acb\PhpParser\Node\Param($containerConfiguratorVariable, null, new \_PhpScoperda2604e33acb\PhpParser\Node\Name\FullyQualified(\_PhpScoperda2604e33acb\Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator::class));
+        $containerConfiguratorVariable = new \_PhpScopereb8678af2407\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::ROUTING_CONFIGURATOR);
+        return new \_PhpScopereb8678af2407\PhpParser\Node\Param($containerConfiguratorVariable, null, new \_PhpScopereb8678af2407\PhpParser\Node\Name\FullyQualified(\_PhpScopereb8678af2407\Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator::class));
     }
-    private function createClosureFromParamAndStmts(\_PhpScoperda2604e33acb\PhpParser\Node\Param $param, array $stmts) : \_PhpScoperda2604e33acb\PhpParser\Node\Expr\Closure
+    private function createClosureFromParamAndStmts(\_PhpScopereb8678af2407\PhpParser\Node\Param $param, array $stmts) : \_PhpScopereb8678af2407\PhpParser\Node\Expr\Closure
     {
-        $closure = new \_PhpScoperda2604e33acb\PhpParser\Node\Expr\Closure(['params' => [$param], 'stmts' => $stmts, 'static' => \true]);
+        $closure = new \_PhpScopereb8678af2407\PhpParser\Node\Expr\Closure(['params' => [$param], 'stmts' => $stmts, 'static' => \true]);
         // is PHP 7.1? → add "void" return type
         if (\version_compare(\PHP_VERSION, '7.1.0') >= 0) {
-            $closure->returnType = new \_PhpScoperda2604e33acb\PhpParser\Node\Identifier('void');
+            $closure->returnType = new \_PhpScopereb8678af2407\PhpParser\Node\Identifier('void');
         }
         return $closure;
     }

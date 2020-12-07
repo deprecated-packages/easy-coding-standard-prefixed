@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperda2604e33acb\Symfony\Component\Console\Helper;
+namespace _PhpScopereb8678af2407\Symfony\Component\Console\Helper;
 
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Exception\LogicException;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperda2604e33acb\Symfony\Component\Console\Terminal;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Exception\LogicException;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopereb8678af2407\Symfony\Component\Console\Terminal;
 /**
  * The ProgressBar provides helpers to display progress output.
  *
@@ -50,14 +50,14 @@ final class ProgressBar
     /**
      * @param int $max Maximum steps (0 if unknown)
      */
-    public function __construct(\_PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface $output, int $max = 0, float $minSecondsBetweenRedraws = 0.1)
+    public function __construct(\_PhpScopereb8678af2407\Symfony\Component\Console\Output\OutputInterface $output, int $max = 0, float $minSecondsBetweenRedraws = 0.1)
     {
-        if ($output instanceof \_PhpScoperda2604e33acb\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+        if ($output instanceof \_PhpScopereb8678af2407\Symfony\Component\Console\Output\ConsoleOutputInterface) {
             $output = $output->getErrorOutput();
         }
         $this->output = $output;
         $this->setMaxSteps($max);
-        $this->terminal = new \_PhpScoperda2604e33acb\Symfony\Component\Console\Terminal();
+        $this->terminal = new \_PhpScopereb8678af2407\Symfony\Component\Console\Terminal();
         if (0 < $minSecondsBetweenRedraws) {
             $this->redrawFreq = null;
             $this->minSecondsBetweenRedraws = $minSecondsBetweenRedraws;
@@ -303,7 +303,7 @@ final class ProgressBar
     {
         $this->format = null;
         $this->max = \max(0, $max);
-        $this->stepWidth = $this->max ? \_PhpScoperda2604e33acb\Symfony\Component\Console\Helper\Helper::strlen((string) $this->max) : 4;
+        $this->stepWidth = $this->max ? \_PhpScopereb8678af2407\Symfony\Component\Console\Helper\Helper::strlen((string) $this->max) : 4;
     }
     /**
      * Finishes the progress output.
@@ -324,7 +324,7 @@ final class ProgressBar
      */
     public function display() : void
     {
-        if (\_PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET === $this->output->getVerbosity()) {
+        if (\_PhpScopereb8678af2407\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_QUIET === $this->output->getVerbosity()) {
             return;
         }
         if (null === $this->format) {
@@ -372,8 +372,8 @@ final class ProgressBar
         $originalMessage = $message;
         if ($this->overwrite) {
             if (null !== $this->previousMessage) {
-                if ($this->output instanceof \_PhpScoperda2604e33acb\Symfony\Component\Console\Output\ConsoleSectionOutput) {
-                    $lines = \floor(\_PhpScoperda2604e33acb\Symfony\Component\Console\Helper\Helper::strlen($message) / $this->terminal->getWidth()) + $this->formatLineCount + 1;
+                if ($this->output instanceof \_PhpScopereb8678af2407\Symfony\Component\Console\Output\ConsoleSectionOutput) {
+                    $lines = \floor(\_PhpScopereb8678af2407\Symfony\Component\Console\Helper\Helper::strlen($message) / $this->terminal->getWidth()) + $this->formatLineCount + 1;
                     $this->output->clear($lines);
                 } else {
                     // Erase previous lines
@@ -396,11 +396,11 @@ final class ProgressBar
     {
         switch ($this->output->getVerbosity()) {
             // OutputInterface::VERBOSITY_QUIET: display is disabled anyway
-            case \_PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE:
+            case \_PhpScopereb8678af2407\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE:
                 return $this->max ? 'verbose' : 'verbose_nomax';
-            case \_PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE:
+            case \_PhpScopereb8678af2407\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE:
                 return $this->max ? 'very_verbose' : 'very_verbose_nomax';
-            case \_PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG:
+            case \_PhpScopereb8678af2407\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG:
                 return $this->max ? 'debug' : 'debug_nomax';
             default:
                 return $this->max ? 'normal' : 'normal_nomax';
@@ -408,38 +408,38 @@ final class ProgressBar
     }
     private static function initPlaceholderFormatters() : array
     {
-        return ['bar' => function (self $bar, \_PhpScoperda2604e33acb\Symfony\Component\Console\Output\OutputInterface $output) {
+        return ['bar' => function (self $bar, \_PhpScopereb8678af2407\Symfony\Component\Console\Output\OutputInterface $output) {
             $completeBars = $bar->getBarOffset();
             $display = \str_repeat($bar->getBarCharacter(), $completeBars);
             if ($completeBars < $bar->getBarWidth()) {
-                $emptyBars = $bar->getBarWidth() - $completeBars - \_PhpScoperda2604e33acb\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($output->getFormatter(), $bar->getProgressCharacter());
+                $emptyBars = $bar->getBarWidth() - $completeBars - \_PhpScopereb8678af2407\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($output->getFormatter(), $bar->getProgressCharacter());
                 $display .= $bar->getProgressCharacter() . \str_repeat($bar->getEmptyBarCharacter(), $emptyBars);
             }
             return $display;
         }, 'elapsed' => function (self $bar) {
-            return \_PhpScoperda2604e33acb\Symfony\Component\Console\Helper\Helper::formatTime(\time() - $bar->getStartTime());
+            return \_PhpScopereb8678af2407\Symfony\Component\Console\Helper\Helper::formatTime(\time() - $bar->getStartTime());
         }, 'remaining' => function (self $bar) {
             if (!$bar->getMaxSteps()) {
-                throw new \_PhpScoperda2604e33acb\Symfony\Component\Console\Exception\LogicException('Unable to display the remaining time if the maximum number of steps is not set.');
+                throw new \_PhpScopereb8678af2407\Symfony\Component\Console\Exception\LogicException('Unable to display the remaining time if the maximum number of steps is not set.');
             }
             if (!$bar->getProgress()) {
                 $remaining = 0;
             } else {
                 $remaining = \round((\time() - $bar->getStartTime()) / $bar->getProgress() * ($bar->getMaxSteps() - $bar->getProgress()));
             }
-            return \_PhpScoperda2604e33acb\Symfony\Component\Console\Helper\Helper::formatTime($remaining);
+            return \_PhpScopereb8678af2407\Symfony\Component\Console\Helper\Helper::formatTime($remaining);
         }, 'estimated' => function (self $bar) {
             if (!$bar->getMaxSteps()) {
-                throw new \_PhpScoperda2604e33acb\Symfony\Component\Console\Exception\LogicException('Unable to display the estimated time if the maximum number of steps is not set.');
+                throw new \_PhpScopereb8678af2407\Symfony\Component\Console\Exception\LogicException('Unable to display the estimated time if the maximum number of steps is not set.');
             }
             if (!$bar->getProgress()) {
                 $estimated = 0;
             } else {
                 $estimated = \round((\time() - $bar->getStartTime()) / $bar->getProgress() * $bar->getMaxSteps());
             }
-            return \_PhpScoperda2604e33acb\Symfony\Component\Console\Helper\Helper::formatTime($estimated);
+            return \_PhpScopereb8678af2407\Symfony\Component\Console\Helper\Helper::formatTime($estimated);
         }, 'memory' => function (self $bar) {
-            return \_PhpScoperda2604e33acb\Symfony\Component\Console\Helper\Helper::formatMemory(\memory_get_usage(\true));
+            return \_PhpScopereb8678af2407\Symfony\Component\Console\Helper\Helper::formatMemory(\memory_get_usage(\true));
         }, 'current' => function (self $bar) {
             return \str_pad($bar->getProgress(), $bar->getStepWidth(), ' ', \STR_PAD_LEFT);
         }, 'max' => function (self $bar) {
@@ -471,7 +471,7 @@ final class ProgressBar
         $line = \preg_replace_callback($regex, $callback, $this->format);
         // gets string length for each sub line with multiline format
         $linesLength = \array_map(function ($subLine) {
-            return \_PhpScoperda2604e33acb\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($this->output->getFormatter(), \rtrim($subLine, "\r"));
+            return \_PhpScopereb8678af2407\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($this->output->getFormatter(), \rtrim($subLine, "\r"));
         }, \explode("\n", $line));
         $linesWidth = \max($linesLength);
         $terminalWidth = $this->terminal->getWidth();

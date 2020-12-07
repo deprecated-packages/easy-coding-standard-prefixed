@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScopereb8678af2407\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoperda2604e33acb\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperda2604e33acb\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use _PhpScoperda2604e33acb\Symfony\Component\HttpKernel\UriSigner;
-use _PhpScoperda2604e33acb\Symfony\Component\Templating\EngineInterface;
-use _PhpScoperda2604e33acb\Twig\Environment;
-use _PhpScoperda2604e33acb\Twig\Error\LoaderError;
-use _PhpScoperda2604e33acb\Twig\Loader\ExistsLoaderInterface;
-use _PhpScoperda2604e33acb\Twig\Loader\SourceContextLoaderInterface;
+use _PhpScopereb8678af2407\Symfony\Component\HttpFoundation\Request;
+use _PhpScopereb8678af2407\Symfony\Component\HttpFoundation\Response;
+use _PhpScopereb8678af2407\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScopereb8678af2407\Symfony\Component\HttpKernel\UriSigner;
+use _PhpScopereb8678af2407\Symfony\Component\Templating\EngineInterface;
+use _PhpScopereb8678af2407\Twig\Environment;
+use _PhpScopereb8678af2407\Twig\Error\LoaderError;
+use _PhpScopereb8678af2407\Twig\Loader\ExistsLoaderInterface;
+use _PhpScopereb8678af2407\Twig\Loader\SourceContextLoaderInterface;
 /**
  * Implements the Hinclude rendering strategy.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class HIncludeFragmentRenderer extends \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
+class HIncludeFragmentRenderer extends \_PhpScopereb8678af2407\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
 {
     private $globalDefaultTemplate;
     private $signer;
@@ -34,7 +34,7 @@ class HIncludeFragmentRenderer extends \_PhpScoperda2604e33acb\Symfony\Component
      * @param EngineInterface|Environment $templating            An EngineInterface or a Twig instance
      * @param string                      $globalDefaultTemplate The global default content (it can be a template name or the content)
      */
-    public function __construct($templating = null, \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\UriSigner $signer = null, string $globalDefaultTemplate = null, string $charset = 'utf-8')
+    public function __construct($templating = null, \_PhpScopereb8678af2407\Symfony\Component\HttpKernel\UriSigner $signer = null, string $globalDefaultTemplate = null, string $charset = 'utf-8')
     {
         $this->setTemplating($templating);
         $this->globalDefaultTemplate = $globalDefaultTemplate;
@@ -52,11 +52,11 @@ class HIncludeFragmentRenderer extends \_PhpScoperda2604e33acb\Symfony\Component
      */
     public function setTemplating($templating)
     {
-        if (null !== $templating && !$templating instanceof \_PhpScoperda2604e33acb\Symfony\Component\Templating\EngineInterface && !$templating instanceof \_PhpScoperda2604e33acb\Twig\Environment) {
-            throw new \InvalidArgumentException('_PhpScoperda2604e33acb\\The hinclude rendering strategy needs an instance of Twig\\Environment or Symfony\\Component\\Templating\\EngineInterface');
+        if (null !== $templating && !$templating instanceof \_PhpScopereb8678af2407\Symfony\Component\Templating\EngineInterface && !$templating instanceof \_PhpScopereb8678af2407\Twig\Environment) {
+            throw new \InvalidArgumentException('_PhpScopereb8678af2407\\The hinclude rendering strategy needs an instance of Twig\\Environment or Symfony\\Component\\Templating\\EngineInterface');
         }
-        if ($templating instanceof \_PhpScoperda2604e33acb\Symfony\Component\Templating\EngineInterface) {
-            @\trigger_error(\sprintf('Using a "%s" instance for "%s" is deprecated since version 4.3; use a \\Twig\\Environment instance instead.', \_PhpScoperda2604e33acb\Symfony\Component\Templating\EngineInterface::class, __CLASS__), \E_USER_DEPRECATED);
+        if ($templating instanceof \_PhpScopereb8678af2407\Symfony\Component\Templating\EngineInterface) {
+            @\trigger_error(\sprintf('Using a "%s" instance for "%s" is deprecated since version 4.3; use a \\Twig\\Environment instance instead.', \_PhpScopereb8678af2407\Symfony\Component\Templating\EngineInterface::class, __CLASS__), \E_USER_DEPRECATED);
         }
         $this->templating = $templating;
     }
@@ -78,9 +78,9 @@ class HIncludeFragmentRenderer extends \_PhpScoperda2604e33acb\Symfony\Component
      *  * id:         An optional hx:include tag id attribute
      *  * attributes: An optional array of hx:include tag attributes
      */
-    public function render($uri, \_PhpScoperda2604e33acb\Symfony\Component\HttpFoundation\Request $request, array $options = [])
+    public function render($uri, \_PhpScopereb8678af2407\Symfony\Component\HttpFoundation\Request $request, array $options = [])
     {
-        if ($uri instanceof \_PhpScoperda2604e33acb\Symfony\Component\HttpKernel\Controller\ControllerReference) {
+        if ($uri instanceof \_PhpScopereb8678af2407\Symfony\Component\HttpKernel\Controller\ControllerReference) {
             if (null === $this->signer) {
                 throw new \LogicException('You must use a proper URI when using the Hinclude rendering strategy or set a URL signer.');
             }
@@ -106,11 +106,11 @@ class HIncludeFragmentRenderer extends \_PhpScoperda2604e33acb\Symfony\Component
                 $renderedAttributes .= \sprintf(' %s="%s"', \htmlspecialchars($attribute, $flags, $this->charset, \false), \htmlspecialchars($value, $flags, $this->charset, \false));
             }
         }
-        return new \_PhpScoperda2604e33acb\Symfony\Component\HttpFoundation\Response(\sprintf('<hx:include src="%s"%s>%s</hx:include>', $uri, $renderedAttributes, $content));
+        return new \_PhpScopereb8678af2407\Symfony\Component\HttpFoundation\Response(\sprintf('<hx:include src="%s"%s>%s</hx:include>', $uri, $renderedAttributes, $content));
     }
     private function templateExists(string $template) : bool
     {
-        if ($this->templating instanceof \_PhpScoperda2604e33acb\Symfony\Component\Templating\EngineInterface) {
+        if ($this->templating instanceof \_PhpScopereb8678af2407\Symfony\Component\Templating\EngineInterface) {
             try {
                 return $this->templating->exists($template);
             } catch (\Exception $e) {
@@ -118,15 +118,15 @@ class HIncludeFragmentRenderer extends \_PhpScoperda2604e33acb\Symfony\Component
             }
         }
         $loader = $this->templating->getLoader();
-        if (1 === \_PhpScoperda2604e33acb\Twig\Environment::MAJOR_VERSION && !$loader instanceof \_PhpScoperda2604e33acb\Twig\Loader\ExistsLoaderInterface) {
+        if (1 === \_PhpScopereb8678af2407\Twig\Environment::MAJOR_VERSION && !$loader instanceof \_PhpScopereb8678af2407\Twig\Loader\ExistsLoaderInterface) {
             try {
-                if ($loader instanceof \_PhpScoperda2604e33acb\Twig\Loader\SourceContextLoaderInterface) {
+                if ($loader instanceof \_PhpScopereb8678af2407\Twig\Loader\SourceContextLoaderInterface) {
                     $loader->getSourceContext($template);
                 } else {
                     $loader->getSource($template);
                 }
                 return \true;
-            } catch (\_PhpScoperda2604e33acb\Twig\Error\LoaderError $e) {
+            } catch (\_PhpScopereb8678af2407\Twig\Error\LoaderError $e) {
             }
             return \false;
         }
