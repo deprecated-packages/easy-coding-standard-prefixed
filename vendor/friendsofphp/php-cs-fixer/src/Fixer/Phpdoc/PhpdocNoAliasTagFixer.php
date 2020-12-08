@@ -21,8 +21,8 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoperf053e888b664\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoperf053e888b664\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper5ea36b274140\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper5ea36b274140\Symfony\Component\OptionsResolver\Options;
 /**
  * Case sensitive tag replace fixer (does not process inline tags like {@inheritdoc}).
  *
@@ -100,23 +100,23 @@ final class Example
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('replacements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('replacements', 'Mapping between replaced annotations with new ones.'))->setAllowedTypes(['array'])->setNormalizer(static function (\_PhpScoperf053e888b664\Symfony\Component\OptionsResolver\Options $options, $value) {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('replacements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('replacements', 'Mapping between replaced annotations with new ones.'))->setAllowedTypes(['array'])->setNormalizer(static function (\_PhpScoper5ea36b274140\Symfony\Component\OptionsResolver\Options $options, $value) {
             $normalizedValue = [];
             foreach ($value as $from => $to) {
                 if (!\is_string($from)) {
-                    throw new \_PhpScoperf053e888b664\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException('Tag to replace must be a string.');
+                    throw new \_PhpScoper5ea36b274140\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException('Tag to replace must be a string.');
                 }
                 if (!\is_string($to)) {
-                    throw new \_PhpScoperf053e888b664\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Tag to replace to from "%s" must be a string.', $from));
+                    throw new \_PhpScoper5ea36b274140\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Tag to replace to from "%s" must be a string.', $from));
                 }
                 if (1 !== \PhpCsFixer\Preg::match('#^\\S+$#', $to) || \false !== \strpos($to, '*/')) {
-                    throw new \_PhpScoperf053e888b664\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Tag "%s" cannot be replaced by invalid tag "%s".', $from, $to));
+                    throw new \_PhpScoper5ea36b274140\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Tag "%s" cannot be replaced by invalid tag "%s".', $from, $to));
                 }
                 $normalizedValue[\trim($from)] = \trim($to);
             }
             foreach ($normalizedValue as $from => $to) {
                 if (isset($normalizedValue[$to])) {
-                    throw new \_PhpScoperf053e888b664\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Cannot change tag "%1$s" to tag "%2$s", as the tag "%2$s" is configured to be replaced to "%3$s".', $from, $to, $normalizedValue[$to]));
+                    throw new \_PhpScoper5ea36b274140\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Cannot change tag "%1$s" to tag "%2$s", as the tag "%2$s" is configured to be replaced to "%3$s".', $from, $to, $normalizedValue[$to]));
                 }
             }
             return $normalizedValue;

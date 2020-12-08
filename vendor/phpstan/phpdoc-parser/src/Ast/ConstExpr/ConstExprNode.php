@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf053e888b664\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace _PhpScoper5ea36b274140\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-use _PhpScoperf053e888b664\PHPStan\PhpDocParser\Ast\Node;
-interface ConstExprNode extends \_PhpScoperf053e888b664\PHPStan\PhpDocParser\Ast\Node
+use _PhpScoper5ea36b274140\PHPStan\PhpDocParser\Ast\Node;
+interface ConstExprNode extends \_PhpScoper5ea36b274140\PHPStan\PhpDocParser\Ast\Node
 {
 }

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf053e888b664\PhpParser\Node\Scalar;
+namespace _PhpScoper5ea36b274140\PhpParser\Node\Scalar;
 
-use _PhpScoperf053e888b664\PhpParser\Node\Expr;
-use _PhpScoperf053e888b664\PhpParser\Node\Scalar;
-class Encapsed extends \_PhpScoperf053e888b664\PhpParser\Node\Scalar
+use _PhpScoper5ea36b274140\PhpParser\Node\Expr;
+use _PhpScoper5ea36b274140\PhpParser\Node\Scalar;
+class Encapsed extends \_PhpScoper5ea36b274140\PhpParser\Node\Scalar
 {
     /** @var Expr[] list of string parts */
     public $parts;
