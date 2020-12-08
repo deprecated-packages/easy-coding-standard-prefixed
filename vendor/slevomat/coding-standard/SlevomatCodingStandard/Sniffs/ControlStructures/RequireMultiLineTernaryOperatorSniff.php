@@ -11,18 +11,18 @@ use function array_merge;
 use function in_array;
 use function strlen;
 use function substr;
-use const _PhpScoperb83706991c7f\T_CLOSE_PARENTHESIS;
-use const _PhpScoperb83706991c7f\T_CLOSE_SHORT_ARRAY;
-use const _PhpScoperb83706991c7f\T_CLOSE_SQUARE_BRACKET;
+use const _PhpScoperf3f1be0d8a30\T_CLOSE_PARENTHESIS;
+use const _PhpScoperf3f1be0d8a30\T_CLOSE_SHORT_ARRAY;
+use const _PhpScoperf3f1be0d8a30\T_CLOSE_SQUARE_BRACKET;
 use const T_CLOSE_TAG;
 use const T_COALESCE;
-use const _PhpScoperb83706991c7f\T_COMMA;
+use const _PhpScoperf3f1be0d8a30\T_COMMA;
 use const T_DOUBLE_ARROW;
-use const _PhpScoperb83706991c7f\T_INLINE_ELSE;
-use const _PhpScoperb83706991c7f\T_INLINE_THEN;
+use const _PhpScoperf3f1be0d8a30\T_INLINE_ELSE;
+use const _PhpScoperf3f1be0d8a30\T_INLINE_THEN;
 use const T_OPEN_TAG;
 use const T_OPEN_TAG_WITH_ECHO;
-use const _PhpScoperb83706991c7f\T_SEMICOLON;
+use const _PhpScoperf3f1be0d8a30\T_SEMICOLON;
 use const T_WHITESPACE;
 class RequireMultiLineTernaryOperatorSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

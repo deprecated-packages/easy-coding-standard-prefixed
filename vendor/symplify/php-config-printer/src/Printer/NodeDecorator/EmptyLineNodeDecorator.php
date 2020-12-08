@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Printer\NodeDecorator;
 
-use _PhpScoperb83706991c7f\PhpParser\Node;
-use _PhpScoperb83706991c7f\PhpParser\Node\Expr\Assign;
-use _PhpScoperb83706991c7f\PhpParser\Node\Expr\Closure;
-use _PhpScoperb83706991c7f\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperb83706991c7f\PhpParser\Node\Stmt;
-use _PhpScoperb83706991c7f\PhpParser\Node\Stmt\Expression;
-use _PhpScoperb83706991c7f\PhpParser\Node\Stmt\Nop;
-use _PhpScoperb83706991c7f\PhpParser\NodeFinder;
+use _PhpScoperf3f1be0d8a30\PhpParser\Node;
+use _PhpScoperf3f1be0d8a30\PhpParser\Node\Expr\Assign;
+use _PhpScoperf3f1be0d8a30\PhpParser\Node\Expr\Closure;
+use _PhpScoperf3f1be0d8a30\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperf3f1be0d8a30\PhpParser\Node\Stmt;
+use _PhpScoperf3f1be0d8a30\PhpParser\Node\Stmt\Expression;
+use _PhpScoperf3f1be0d8a30\PhpParser\Node\Stmt\Nop;
+use _PhpScoperf3f1be0d8a30\PhpParser\NodeFinder;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class EmptyLineNodeDecorator
 {
@@ -18,7 +18,7 @@ final class EmptyLineNodeDecorator
      * @var NodeFinder
      */
     private $nodeFinder;
-    public function __construct(\_PhpScoperb83706991c7f\PhpParser\NodeFinder $nodeFinder)
+    public function __construct(\_PhpScoperf3f1be0d8a30\PhpParser\NodeFinder $nodeFinder)
     {
         $this->nodeFinder = $nodeFinder;
     }
@@ -28,32 +28,32 @@ final class EmptyLineNodeDecorator
     public function decorate(array $stmts) : void
     {
         /** @var Closure|null $closure */
-        $closure = $this->nodeFinder->findFirstInstanceOf($stmts, \_PhpScoperb83706991c7f\PhpParser\Node\Expr\Closure::class);
+        $closure = $this->nodeFinder->findFirstInstanceOf($stmts, \_PhpScoperf3f1be0d8a30\PhpParser\Node\Expr\Closure::class);
         if ($closure === null) {
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         $newStmts = [];
         foreach ($closure->stmts as $key => $closureStmt) {
             if ($this->shouldAddEmptyLineBeforeStatement($key, $closureStmt)) {
-                $newStmts[] = new \_PhpScoperb83706991c7f\PhpParser\Node\Stmt\Nop();
+                $newStmts[] = new \_PhpScoperf3f1be0d8a30\PhpParser\Node\Stmt\Nop();
             }
             $newStmts[] = $closureStmt;
         }
         $closure->stmts = $newStmts;
     }
-    private function shouldAddEmptyLineBeforeStatement(int $key, \_PhpScoperb83706991c7f\PhpParser\Node\Stmt $stmt) : bool
+    private function shouldAddEmptyLineBeforeStatement(int $key, \_PhpScoperf3f1be0d8a30\PhpParser\Node\Stmt $stmt) : bool
     {
         // do not add space before first item
         if ($key === 0) {
             return \false;
         }
-        if (!$stmt instanceof \_PhpScoperb83706991c7f\PhpParser\Node\Stmt\Expression) {
+        if (!$stmt instanceof \_PhpScoperf3f1be0d8a30\PhpParser\Node\Stmt\Expression) {
             return \false;
         }
         $expr = $stmt->expr;
-        if ($expr instanceof \_PhpScoperb83706991c7f\PhpParser\Node\Expr\Assign) {
+        if ($expr instanceof \_PhpScoperf3f1be0d8a30\PhpParser\Node\Expr\Assign) {
             return \true;
         }
-        return $expr instanceof \_PhpScoperb83706991c7f\PhpParser\Node\Expr\MethodCall;
+        return $expr instanceof \_PhpScoperf3f1be0d8a30\PhpParser\Node\Expr\MethodCall;
     }
 }

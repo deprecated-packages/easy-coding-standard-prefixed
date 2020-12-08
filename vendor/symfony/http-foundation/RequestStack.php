@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb83706991c7f\Symfony\Component\HttpFoundation;
+namespace _PhpScoperf3f1be0d8a30\Symfony\Component\HttpFoundation;
 
 /**
  * Request stack that controls the lifecycle of requests.
@@ -27,7 +27,7 @@ class RequestStack
      * This method should generally not be called directly as the stack
      * management should be taken care of by the application itself.
      */
-    public function push(\_PhpScoperb83706991c7f\Symfony\Component\HttpFoundation\Request $request)
+    public function push(\_PhpScoperf3f1be0d8a30\Symfony\Component\HttpFoundation\Request $request)
     {
         $this->requests[] = $request;
     }
