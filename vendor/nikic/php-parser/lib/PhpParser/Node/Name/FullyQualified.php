@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf3f1be0d8a30\PhpParser\Node\Name;
+namespace _PhpScoperf053e888b664\PhpParser\Node\Name;
 
-class FullyQualified extends \_PhpScoperf3f1be0d8a30\PhpParser\Node\Name
+class FullyQualified extends \_PhpScoperf053e888b664\PhpParser\Node\Name
 {
     /**
      * Checks whether the name is unqualified. (E.g. Name)

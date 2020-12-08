@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf3f1be0d8a30\PhpParser\Internal;
+namespace _PhpScoperf053e888b664\PhpParser\Internal;
 
 /**
  * Provides operations on token streams, for use by pretty printer.
