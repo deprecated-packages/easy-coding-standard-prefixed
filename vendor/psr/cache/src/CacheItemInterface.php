@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper5ea36b274140\Psr\Cache;
+namespace _PhpScoperf65af7a6d9a0\Psr\Cache;
 
 /**
  * CacheItemInterface defines an interface for interacting with objects inside a cache.
