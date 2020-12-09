@@ -11,19 +11,19 @@
  */
 namespace PhpCsFixer\Tests;
 
-use _PhpScoperf65af7a6d9a0\PHPUnit\Framework\TestCase as BaseTestCase;
-use _PhpScoperf65af7a6d9a0\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
-use _PhpScoperf65af7a6d9a0\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
-use _PhpScoperf65af7a6d9a0\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
-use _PhpScoperf65af7a6d9a0\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
-use _PhpScoperf65af7a6d9a0\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
-if (\trait_exists(\_PhpScoperf65af7a6d9a0\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait::class)) {
+use _PhpScoperdf15f2b748e9\PHPUnit\Framework\TestCase as BaseTestCase;
+use _PhpScoperdf15f2b748e9\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
+use _PhpScoperdf15f2b748e9\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
+use _PhpScoperdf15f2b748e9\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
+use _PhpScoperdf15f2b748e9\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
+use _PhpScoperdf15f2b748e9\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
+if (\trait_exists(\_PhpScoperdf15f2b748e9\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait::class)) {
     /**
      * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
      *
      * @internal
      */
-    abstract class TestCase extends \_PhpScoperf65af7a6d9a0\PHPUnit\Framework\TestCase
+    abstract class TestCase extends \_PhpScoperdf15f2b748e9\PHPUnit\Framework\TestCase
     {
         use ExpectationViaCodeOverAnnotationTrait;
         use ExpectOverSetExceptionTrait;
@@ -41,7 +41,7 @@ if (\trait_exists(\_PhpScoperf65af7a6d9a0\PHPUnitGoodPractices\Traits\Prophesize
      *
      * @todo 3.0 To be removed when we clean up composer prod-autoloader from dev-packages.
      */
-    abstract class TestCase extends \_PhpScoperf65af7a6d9a0\PHPUnit\Framework\TestCase
+    abstract class TestCase extends \_PhpScoperdf15f2b748e9\PHPUnit\Framework\TestCase
     {
     }
 }

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf65af7a6d9a0\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoperdf15f2b748e9\Symfony\Component\VarDumper\Caster;
 
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
-class ImgStub extends \_PhpScoperf65af7a6d9a0\Symfony\Component\VarDumper\Caster\ConstStub
+class ImgStub extends \_PhpScoperdf15f2b748e9\Symfony\Component\VarDumper\Caster\ConstStub
 {
     public function __construct(string $data, string $contentType, string $size)
     {

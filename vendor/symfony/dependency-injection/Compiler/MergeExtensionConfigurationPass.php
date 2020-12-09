@@ -8,37 +8,37 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperf65af7a6d9a0\Symfony\Component\Config\Definition\BaseNode;
-use _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Exception\LogicException;
-use _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use _PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use _PhpScoperdf15f2b748e9\Symfony\Component\Config\Definition\BaseNode;
+use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 /**
  * Merges extension configs into the container builder.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class MergeExtensionConfigurationPass implements \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class MergeExtensionConfigurationPass implements \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $parameters = $container->getParameterBag()->all();
         $definitions = $container->getDefinitions();
         $aliases = $container->getAliases();
         $exprLangProviders = $container->getExpressionLanguageProviders();
-        $configAvailable = \class_exists(\_PhpScoperf65af7a6d9a0\Symfony\Component\Config\Definition\BaseNode::class);
+        $configAvailable = \class_exists(\_PhpScoperdf15f2b748e9\Symfony\Component\Config\Definition\BaseNode::class);
         foreach ($container->getExtensions() as $extension) {
-            if ($extension instanceof \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface) {
+            if ($extension instanceof \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface) {
                 $extension->prepend($container);
             }
         }
@@ -48,19 +48,19 @@ class MergeExtensionConfigurationPass implements \_PhpScoperf65af7a6d9a0\Symfony
                 continue;
             }
             $resolvingBag = $container->getParameterBag();
-            if ($resolvingBag instanceof \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag && $extension instanceof \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\Extension) {
+            if ($resolvingBag instanceof \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag && $extension instanceof \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\Extension) {
                 // create a dedicated bag so that we can track env vars per-extension
-                $resolvingBag = new \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag($resolvingBag);
+                $resolvingBag = new \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag($resolvingBag);
                 if ($configAvailable) {
-                    \_PhpScoperf65af7a6d9a0\Symfony\Component\Config\Definition\BaseNode::setPlaceholderUniquePrefix($resolvingBag->getEnvPlaceholderUniquePrefix());
+                    \_PhpScoperdf15f2b748e9\Symfony\Component\Config\Definition\BaseNode::setPlaceholderUniquePrefix($resolvingBag->getEnvPlaceholderUniquePrefix());
                 }
             }
             $config = $resolvingBag->resolveValue($config);
             try {
-                $tmpContainer = new \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationContainerBuilder($extension, $resolvingBag);
+                $tmpContainer = new \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationContainerBuilder($extension, $resolvingBag);
                 $tmpContainer->setResourceTracking($container->isTrackingResources());
                 $tmpContainer->addObjectResource($extension);
-                if ($extension instanceof \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface && null !== ($configuration = $extension->getConfiguration($config, $tmpContainer))) {
+                if ($extension instanceof \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface && null !== ($configuration = $extension->getConfiguration($config, $tmpContainer))) {
                     $tmpContainer->addObjectResource($configuration);
                 }
                 foreach ($exprLangProviders as $provider) {
@@ -68,16 +68,16 @@ class MergeExtensionConfigurationPass implements \_PhpScoperf65af7a6d9a0\Symfony
                 }
                 $extension->load($config, $tmpContainer);
             } catch (\Exception $e) {
-                if ($resolvingBag instanceof \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag) {
+                if ($resolvingBag instanceof \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag) {
                     $container->getParameterBag()->mergeEnvPlaceholders($resolvingBag);
                 }
                 throw $e;
             } finally {
                 if ($configAvailable) {
-                    \_PhpScoperf65af7a6d9a0\Symfony\Component\Config\Definition\BaseNode::resetPlaceholders();
+                    \_PhpScoperdf15f2b748e9\Symfony\Component\Config\Definition\BaseNode::resetPlaceholders();
                 }
             }
-            if ($resolvingBag instanceof \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag) {
+            if ($resolvingBag instanceof \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationParameterBag) {
                 // don't keep track of env vars that are *overridden* when configs are merged
                 $resolvingBag->freezeAfterProcessing($extension, $tmpContainer);
             }
@@ -91,7 +91,7 @@ class MergeExtensionConfigurationPass implements \_PhpScoperf65af7a6d9a0\Symfony
 /**
  * @internal
  */
-class MergeExtensionConfigurationParameterBag extends \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
+class MergeExtensionConfigurationParameterBag extends \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
 {
     private $processedEnvPlaceholders;
     public function __construct(parent $parameterBag)
@@ -99,7 +99,7 @@ class MergeExtensionConfigurationParameterBag extends \_PhpScoperf65af7a6d9a0\Sy
         parent::__construct($parameterBag->all());
         $this->mergeEnvPlaceholders($parameterBag);
     }
-    public function freezeAfterProcessing(\_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\Extension $extension, \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function freezeAfterProcessing(\_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\Extension $extension, \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!($config = $extension->getProcessedConfigs())) {
             // Extension::processConfiguration() wasn't called, we cannot know how configs were merged
@@ -134,10 +134,10 @@ class MergeExtensionConfigurationParameterBag extends \_PhpScoperf65af7a6d9a0\Sy
  *
  * @internal
  */
-class MergeExtensionConfigurationContainerBuilder extends \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ContainerBuilder
+class MergeExtensionConfigurationContainerBuilder extends \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ContainerBuilder
 {
     private $extensionClass;
-    public function __construct(\_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension, \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag = null)
+    public function __construct(\_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension, \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag = null)
     {
         parent::__construct($parameterBag);
         $this->extensionClass = \get_class($extension);
@@ -145,23 +145,23 @@ class MergeExtensionConfigurationContainerBuilder extends \_PhpScoperf65af7a6d9a
     /**
      * {@inheritdoc}
      */
-    public function addCompilerPass(\_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, string $type = \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, int $priority = 0) : self
+    public function addCompilerPass(\_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, string $type = \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, int $priority = 0) : self
     {
-        throw new \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('You cannot add compiler pass "%s" from extension "%s". Compiler passes must be registered before the container is compiled.', \get_debug_type($pass), $this->extensionClass));
+        throw new \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('You cannot add compiler pass "%s" from extension "%s". Compiler passes must be registered before the container is compiled.', \get_debug_type($pass), $this->extensionClass));
     }
     /**
      * {@inheritdoc}
      */
-    public function registerExtension(\_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension)
+    public function registerExtension(\_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension)
     {
-        throw new \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('You cannot register extension "%s" from "%s". Extensions must be registered before the container is compiled.', \get_debug_type($extension), $this->extensionClass));
+        throw new \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('You cannot register extension "%s" from "%s". Extensions must be registered before the container is compiled.', \get_debug_type($extension), $this->extensionClass));
     }
     /**
      * {@inheritdoc}
      */
     public function compile(bool $resolveEnvPlaceholders = \false)
     {
-        throw new \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('Cannot compile the container in extension "%s".', $this->extensionClass));
+        throw new \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Exception\LogicException(\sprintf('Cannot compile the container in extension "%s".', $this->extensionClass));
     }
     /**
      * {@inheritdoc}
@@ -173,7 +173,7 @@ class MergeExtensionConfigurationContainerBuilder extends \_PhpScoperf65af7a6d9a
         }
         $bag = $this->getParameterBag();
         $value = $bag->resolveValue($value);
-        if (!$bag instanceof \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag) {
+        if (!$bag instanceof \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag) {
             return parent::resolveEnvPlaceholders($value, $format, $usedEnvs);
         }
         foreach ($bag->getEnvPlaceholders() as $env => $placeholders) {
@@ -182,7 +182,7 @@ class MergeExtensionConfigurationContainerBuilder extends \_PhpScoperf65af7a6d9a
             }
             foreach ($placeholders as $placeholder) {
                 if (\false !== \stripos($value, $placeholder)) {
-                    throw new \_PhpScoperf65af7a6d9a0\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Using a cast in "env(%s)" is incompatible with resolution at compile time in "%s". The logic in the extension should be moved to a compiler pass, or an env parameter with no cast should be used instead.', $env, $this->extensionClass));
+                    throw new \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Exception\RuntimeException(\sprintf('Using a cast in "env(%s)" is incompatible with resolution at compile time in "%s". The logic in the extension should be moved to a compiler pass, or an env parameter with no cast should be used instead.', $env, $this->extensionClass));
                 }
             }
         }

@@ -5,15 +5,15 @@ namespace SlevomatCodingStandard\Sniffs\TypeHints;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
-use _PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
-use _PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
-use _PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
-use _PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
-use _PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
-use _PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
+use _PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
+use _PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
+use _PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
+use _PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
+use _PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
+use _PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\VariableAnnotation;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
@@ -33,15 +33,15 @@ use function in_array;
 use function sprintf;
 use function strtolower;
 use const T_AS;
-use const _PhpScoperf65af7a6d9a0\T_COMMA;
+use const _PhpScoperdf15f2b748e9\T_COMMA;
 use const T_CONST;
-use const _PhpScoperf65af7a6d9a0\T_DOC_COMMENT_CLOSE_TAG;
-use const _PhpScoperf65af7a6d9a0\T_DOC_COMMENT_STAR;
+use const _PhpScoperdf15f2b748e9\T_DOC_COMMENT_CLOSE_TAG;
+use const _PhpScoperdf15f2b748e9\T_DOC_COMMENT_STAR;
 use const T_FUNCTION;
 use const T_PRIVATE;
 use const T_PROTECTED;
 use const T_PUBLIC;
-use const _PhpScoperf65af7a6d9a0\T_SEMICOLON;
+use const _PhpScoperdf15f2b748e9\T_SEMICOLON;
 use const T_STATIC;
 use const T_VAR;
 use const T_VARIABLE;
@@ -127,7 +127,7 @@ class PropertyTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         }
         $typeNode = $propertyAnnotation->getType();
         $originalTypeNode = $typeNode;
-        if ($typeNode instanceof \_PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+        if ($typeNode instanceof \_PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
             $typeNode = $typeNode->type;
         }
         $typeHints = [];
@@ -136,7 +136,7 @@ class PropertyTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             /** @var ArrayTypeNode|ArrayShapeNode|IdentifierTypeNode|ThisTypeNode|GenericTypeNode|CallableTypeNode $typeNode */
             $typeNode = $typeNode;
             $typeHints[] = \SlevomatCodingStandard\Helpers\AnnotationTypeHelper::getTypeHintFromOneType($typeNode);
-        } elseif ($typeNode instanceof \_PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        } elseif ($typeNode instanceof \_PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $typeNode instanceof \_PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             $traversableTypeHints = [];
             foreach ($typeNode->types as $innerTypeNode) {
                 if (!\SlevomatCodingStandard\Helpers\AnnotationTypeHelper::containsOneType($innerTypeNode)) {
@@ -153,7 +153,7 @@ class PropertyTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 if (!$isTraversable && \count($traversableTypeHints) > 0) {
                     return;
                 }
-                if (!$innerTypeNode instanceof \_PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && !$innerTypeNode instanceof \_PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode && $isTraversable) {
+                if (!$innerTypeNode instanceof \_PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && !$innerTypeNode instanceof \_PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode && $isTraversable) {
                     $traversableTypeHints[] = $typeHint;
                 }
                 $typeHints[] = $typeHint;
@@ -186,7 +186,7 @@ class PropertyTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         if (!\SlevomatCodingStandard\Helpers\TypeHintHelper::isValidTypeHint($possibleTypeHint, \true)) {
             return;
         }
-        if ($originalTypeNode instanceof \_PhpScoperf65af7a6d9a0\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+        if ($originalTypeNode instanceof \_PhpScoperdf15f2b748e9\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
             $nullableTypeHint = \true;
         }
         $fix = $phpcsFile->addFixableError(\sprintf('Property %s does not have native type hint for its value but it should be possible to add it based on @var annotation "%s".', \SlevomatCodingStandard\Helpers\PropertyHelper::getFullyQualifiedName($phpcsFile, $propertyPointer), \SlevomatCodingStandard\Helpers\AnnotationTypeHelper::export($typeNode)), $propertyPointer, self::CODE_MISSING_NATIVE_TYPE_HINT);

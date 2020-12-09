@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoperf65af7a6d9a0\PhpParser\Node\Expr;
-use _PhpScoperf65af7a6d9a0\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperf65af7a6d9a0\PhpParser\Node\Expr\Variable;
-use _PhpScoperf65af7a6d9a0\PhpParser\Node\Stmt\Expression;
+use _PhpScoperdf15f2b748e9\PhpParser\Node\Expr;
+use _PhpScoperdf15f2b748e9\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperdf15f2b748e9\PhpParser\Node\Expr\Variable;
+use _PhpScoperdf15f2b748e9\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
@@ -47,7 +47,7 @@ final class ParameterCaseConverter implements \Symplify\PhpConfigPrinter\Contrac
     {
         return $rootKey === \Symplify\PhpConfigPrinter\ValueObject\YamlKey::PARAMETERS;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoperf65af7a6d9a0\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperdf15f2b748e9\PhpParser\Node\Stmt\Expression
     {
         if (\is_string($values)) {
             $values = $this->prefixWithDirConstantIfExistingPath($values);
@@ -61,9 +61,9 @@ final class ParameterCaseConverter implements \Symplify\PhpConfigPrinter\Contrac
             }
         }
         $args = $this->argsNodeFactory->createFromValues([$key, $values]);
-        $parametersVariable = new \_PhpScoperf65af7a6d9a0\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::PARAMETERS);
-        $methodCall = new \_PhpScoperf65af7a6d9a0\PhpParser\Node\Expr\MethodCall($parametersVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
-        return new \_PhpScoperf65af7a6d9a0\PhpParser\Node\Stmt\Expression($methodCall);
+        $parametersVariable = new \_PhpScoperdf15f2b748e9\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::PARAMETERS);
+        $methodCall = new \_PhpScoperdf15f2b748e9\PhpParser\Node\Expr\MethodCall($parametersVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
+        return new \_PhpScoperdf15f2b748e9\PhpParser\Node\Stmt\Expression($methodCall);
     }
     /**
      * @return Expr|string
