@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
-use _PhpScoperdf15f2b748e9\Nette\Utils\Strings;
+use _PhpScoper31ba553edf97\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -68,7 +68,7 @@ final class FirstLineLengthResolver
         if (!isset($tokens[$position])) {
             throw new \Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException($position);
         }
-        if (\_PhpScoperdf15f2b748e9\Nette\Utils\Strings::startsWith($tokens[$position]->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
+        if (\_PhpScoper31ba553edf97\Nette\Utils\Strings::startsWith($tokens[$position]->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
             return \true;
         }
         return $tokens[$position]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA);

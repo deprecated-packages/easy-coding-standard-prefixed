@@ -1,26 +1,26 @@
 <?php
 
-namespace _PhpScoperdf15f2b748e9\Doctrine\Tests\Common\Annotations;
+namespace _PhpScoper31ba553edf97\Doctrine\Tests\Common\Annotations;
 
-use _PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\FileCacheReader;
-use _PhpScoperdf15f2b748e9\Doctrine\Common\Cache\ArrayCache;
-use _PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\CachedReader;
-use _PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\DocLexer;
-use _PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\DocParser;
-use _PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\PhpParser;
-use _PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\AnnotationReader;
+use _PhpScoper31ba553edf97\Doctrine\Common\Annotations\FileCacheReader;
+use _PhpScoper31ba553edf97\Doctrine\Common\Cache\ArrayCache;
+use _PhpScoper31ba553edf97\Doctrine\Common\Annotations\CachedReader;
+use _PhpScoper31ba553edf97\Doctrine\Common\Annotations\DocLexer;
+use _PhpScoper31ba553edf97\Doctrine\Common\Annotations\DocParser;
+use _PhpScoper31ba553edf97\Doctrine\Common\Annotations\PhpParser;
+use _PhpScoper31ba553edf97\Doctrine\Common\Annotations\AnnotationReader;
 require_once __DIR__ . '/Fixtures/Annotation/Route.php';
 require_once __DIR__ . '/Fixtures/Annotation/Template.php';
 require_once __DIR__ . '/Fixtures/Annotation/Secure.php';
 require_once __DIR__ . '/Fixtures/SingleClassLOC1000.php';
-class PerformanceTest extends \_PhpScoperdf15f2b748e9\PHPUnit_Framework_TestCase
+class PerformanceTest extends \_PhpScoper31ba553edf97\PHPUnit_Framework_TestCase
 {
     /**
      * @group performance
      */
     public function testCachedReadPerformanceWithInMemory()
     {
-        $reader = new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\CachedReader(new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\AnnotationReader(), new \_PhpScoperdf15f2b748e9\Doctrine\Common\Cache\ArrayCache());
+        $reader = new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\CachedReader(new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\AnnotationReader(), new \_PhpScoper31ba553edf97\Doctrine\Common\Cache\ArrayCache());
         $method = $this->getMethod();
         $time = \microtime(\true);
         for ($i = 0, $c = 500; $i < $c; $i++) {
@@ -36,11 +36,11 @@ class PerformanceTest extends \_PhpScoperdf15f2b748e9\PHPUnit_Framework_TestCase
     {
         $method = $this->getMethod();
         // prime cache
-        $reader = new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\FileCacheReader(new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\AnnotationReader(), \sys_get_temp_dir());
+        $reader = new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\FileCacheReader(new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\AnnotationReader(), \sys_get_temp_dir());
         $reader->getMethodAnnotations($method);
         $time = \microtime(\true);
         for ($i = 0, $c = 500; $i < $c; $i++) {
-            $reader = new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\FileCacheReader(new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\AnnotationReader(), \sys_get_temp_dir());
+            $reader = new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\FileCacheReader(new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\AnnotationReader(), \sys_get_temp_dir());
             $reader->getMethodAnnotations($method);
             \clearstatcache();
         }
@@ -55,7 +55,7 @@ class PerformanceTest extends \_PhpScoperdf15f2b748e9\PHPUnit_Framework_TestCase
         $method = $this->getMethod();
         $time = \microtime(\true);
         for ($i = 0, $c = 150; $i < $c; $i++) {
-            $reader = new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\AnnotationReader();
+            $reader = new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\AnnotationReader();
             $reader->getMethodAnnotations($method);
         }
         $time = \microtime(\true) - $time;
@@ -66,14 +66,14 @@ class PerformanceTest extends \_PhpScoperdf15f2b748e9\PHPUnit_Framework_TestCase
      */
     public function testDocParsePerformance()
     {
-        $imports = array('ignorephpdoc' => '_PhpScoperdf15f2b748e9\\Annotations\\Annotation\\IgnorePhpDoc', 'ignoreannotation' => '_PhpScoperdf15f2b748e9\\Annotations\\Annotation\\IgnoreAnnotation', 'route' => '_PhpScoperdf15f2b748e9\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Route', 'template' => '_PhpScoperdf15f2b748e9\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Template', '__NAMESPACE__' => '_PhpScoperdf15f2b748e9\\Doctrine\\Tests\\Common\\Annotations\\Fixtures');
+        $imports = array('ignorephpdoc' => '_PhpScoper31ba553edf97\\Annotations\\Annotation\\IgnorePhpDoc', 'ignoreannotation' => '_PhpScoper31ba553edf97\\Annotations\\Annotation\\IgnoreAnnotation', 'route' => '_PhpScoper31ba553edf97\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Route', 'template' => '_PhpScoper31ba553edf97\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Annotation\\Template', '__NAMESPACE__' => '_PhpScoper31ba553edf97\\Doctrine\\Tests\\Common\\Annotations\\Fixtures');
         $ignored = array('access', 'author', 'copyright', 'deprecated', 'example', 'ignore', 'internal', 'link', 'see', 'since', 'tutorial', 'version', 'package', 'subpackage', 'name', 'global', 'param', 'return', 'staticvar', 'static', 'var', 'throws', 'inheritdoc');
         $method = $this->getMethod();
         $methodComment = $method->getDocComment();
         $classComment = $method->getDeclaringClass()->getDocComment();
         $time = \microtime(\true);
         for ($i = 0, $c = 200; $i < $c; $i++) {
-            $parser = new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\DocParser();
+            $parser = new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\DocParser();
             $parser->setImports($imports);
             $parser->setIgnoredAnnotationNames($ignored);
             $parser->setIgnoreNotImportedAnnotations(\true);
@@ -93,7 +93,7 @@ class PerformanceTest extends \_PhpScoperdf15f2b748e9\PHPUnit_Framework_TestCase
         $classComment = $method->getDeclaringClass()->getDocComment();
         $time = \microtime(\true);
         for ($i = 0, $c = 500; $i < $c; $i++) {
-            $lexer = new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\DocLexer();
+            $lexer = new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\DocLexer();
             $lexer->setInput($methodComment);
             $lexer->setInput($classComment);
         }
@@ -105,10 +105,10 @@ class PerformanceTest extends \_PhpScoperdf15f2b748e9\PHPUnit_Framework_TestCase
      */
     public function testPhpParserPerformanceWithShortCut()
     {
-        $class = new \ReflectionClass('_PhpScoperdf15f2b748e9\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\NamespacedSingleClassLOC1000');
+        $class = new \ReflectionClass('_PhpScoper31ba553edf97\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\NamespacedSingleClassLOC1000');
         $time = \microtime(\true);
         for ($i = 0, $c = 500; $i < $c; $i++) {
-            $parser = new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\PhpParser();
+            $parser = new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\PhpParser();
             $parser->parseClass($class);
         }
         $time = \microtime(\true) - $time;
@@ -122,7 +122,7 @@ class PerformanceTest extends \_PhpScoperdf15f2b748e9\PHPUnit_Framework_TestCase
         $class = new \ReflectionClass('SingleClassLOC1000');
         $time = \microtime(\true);
         for ($i = 0, $c = 500; $i < $c; $i++) {
-            $parser = new \_PhpScoperdf15f2b748e9\Doctrine\Common\Annotations\PhpParser();
+            $parser = new \_PhpScoper31ba553edf97\Doctrine\Common\Annotations\PhpParser();
             $parser->parseClass($class);
         }
         $time = \microtime(\true) - $time;
@@ -130,7 +130,7 @@ class PerformanceTest extends \_PhpScoperdf15f2b748e9\PHPUnit_Framework_TestCase
     }
     private function getMethod()
     {
-        return new \ReflectionMethod('_PhpScoperdf15f2b748e9\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Controller', 'helloAction');
+        return new \ReflectionMethod('_PhpScoper31ba553edf97\\Doctrine\\Tests\\Common\\Annotations\\Fixtures\\Controller', 'helloAction');
     }
     private function printResults($test, $time, $iterations)
     {

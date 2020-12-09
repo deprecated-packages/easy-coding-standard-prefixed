@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a505346081d54b69a5368a8d507ababc",
+    "content-hash": "b66e576dc5d83ad540d81ab39675c3ff",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -3202,7 +3202,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/autowire-array-parameter",
-                "reference": "b8f4146e6cd2bae562d302f33448c7e62a1a6aba"
+                "reference": "0770f91073783a4af56e23804e3098fa8cca785c"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3216,7 +3216,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3244,7 +3244,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "00478627e16683a312b82e5e038d3d4c1a134d8d"
+                "reference": "bbf9ec13f9aa9a3743593ee9bb76afd638617fd1"
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.16",
@@ -3272,7 +3272,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3300,7 +3300,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/composer-json-manipulator",
-                "reference": "a37ec6318cbf4e7bf07f53eadf9e61e658d6955b"
+                "reference": "fdfaf018fffbe55a26c1aff2f3cbc5856110975a"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3318,7 +3318,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3346,7 +3346,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/console-color-diff",
-                "reference": "594f22577ca1c5cc23cce21dffcef47c16e92a51"
+                "reference": "a10a7dbf697202829c4f556520df89b7bdb1f515"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3363,7 +3363,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3391,7 +3391,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-testing",
-                "reference": "bb74f60b300396cba2a527a3190b7ab28bca0328"
+                "reference": "fc8b8d4b7ccb1e610ab598eb56539bdaba1fdaae"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3407,7 +3407,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3435,7 +3435,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/markdown-diff",
-                "reference": "e240f7e752c65f922d33dea59b0f46a06b57cb30"
+                "reference": "2467709469f0e2db0133d332c735e9c1f0f1b056"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3451,7 +3451,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3479,7 +3479,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/package-builder",
-                "reference": "3a2a7de3bd1cac885df903d7228eff94968c8da1"
+                "reference": "231b057354234a7e2720134dfd01d42211825ba3"
             },
             "require": {
                 "nette/finder": "^2.5",
@@ -3501,7 +3501,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3529,7 +3529,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/php-config-printer",
-                "reference": "2809da933aa6c43af8b2cd4e86c558f11b02b517"
+                "reference": "d76780e6a8bfbce25d69a10f479ba723539c8ee9"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3545,7 +3545,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3577,7 +3577,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "bb4ae2b5461d610162bb3b426c314915951caf89"
+                "reference": "7037c73e084af6a3eede9d1c106b458eac6a9e01"
             },
             "require": {
                 "nette/neon": "^3.2",
@@ -3601,7 +3601,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3632,7 +3632,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/set-config-resolver",
-                "reference": "c201f96d48130ab31d2cca06a8e937c4189d6fbd"
+                "reference": "6f8cef4e56994d7f899651d3353af11dac1889e9"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3652,7 +3652,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3680,7 +3680,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/skipper",
-                "reference": "71f5728353c1fbf1a3a7f28efdcd88e978bc9a7a"
+                "reference": "0142c1b9bef3fa7d9dd34c239f8bed6801de73c2"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3699,7 +3699,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3727,7 +3727,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/smart-file-system",
-                "reference": "adf3cc1da5c7073366ac2dd2f97abd342a4d5354"
+                "reference": "15091e502b1b3c6a0e8eb609a6d9e34014d54176"
             },
             "require": {
                 "nette/utils": "^3.0",
@@ -3742,7 +3742,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -3770,7 +3770,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/symplify-kernel",
-                "reference": "e7d4923286ab62f6980e61ba4ce5f2a6674df771"
+                "reference": "45dcd2d79e4858eb8099ca72f3a21c083d3bc5c4"
             },
             "require": {
                 "php": ">=7.3",
@@ -3788,7 +3788,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {
@@ -5179,7 +5179,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-coding-standard-tester",
-                "reference": "535f26b970c80f1d31398b4788ae65631c31dfa3"
+                "reference": "d6df311a54dec1e610433c5c81cae9fd8eee9ccc"
             },
             "require": {
                 "php": ">=7.3",
@@ -5193,7 +5193,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.0-dev"
+                    "dev-master": "9.1-dev"
                 }
             },
             "autoload": {

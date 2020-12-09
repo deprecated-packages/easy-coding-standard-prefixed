@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdf15f2b748e9\Symfony\Component\HttpKernel\Bundle;
+namespace _PhpScoper31ba553edf97\Symfony\Component\HttpKernel\Bundle;
 
-use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper31ba553edf97\Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use _PhpScoper31ba553edf97\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper31ba553edf97\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 /**
  * BundleInterface.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface BundleInterface extends \_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ContainerAwareInterface
+interface BundleInterface extends \_PhpScoper31ba553edf97\Symfony\Component\DependencyInjection\ContainerAwareInterface
 {
     /**
      * Boots the Bundle.
@@ -33,7 +33,7 @@ interface BundleInterface extends \_PhpScoperdf15f2b748e9\Symfony\Component\Depe
      *
      * It is only ever called once when the cache is empty.
      */
-    public function build(\_PhpScoperdf15f2b748e9\Symfony\Component\DependencyInjection\ContainerBuilder $container);
+    public function build(\_PhpScoper31ba553edf97\Symfony\Component\DependencyInjection\ContainerBuilder $container);
     /**
      * Returns the container extension that should be implicitly loaded.
      *
