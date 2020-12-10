@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper58a0a169dcfb\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoper9ef667a5e42c\PHPStan\PhpDocParser\Ast\Type;
 
-class IntersectionTypeNode implements \_PhpScoper58a0a169dcfb\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class IntersectionTypeNode implements \_PhpScoper9ef667a5e42c\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     /** @var TypeNode[] */
     public $types;

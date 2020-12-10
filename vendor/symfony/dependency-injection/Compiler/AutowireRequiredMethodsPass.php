@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Definition;
 /**
  * Looks for definitions with autowiring enabled and registers their corresponding "@required" methods as setters.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AutowireRequiredMethodsPass extends \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class AutowireRequiredMethodsPass extends \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}
@@ -24,7 +24,7 @@ class AutowireRequiredMethodsPass extends \_PhpScoper58a0a169dcfb\Symfony\Compon
     protected function processValue($value, bool $isRoot = \false)
     {
         $value = parent::processValue($value, $isRoot);
-        if (!$value instanceof \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Definition || !$value->isAutowired() || $value->isAbstract() || !$value->getClass()) {
+        if (!$value instanceof \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Definition || !$value->isAutowired() || $value->isAbstract() || !$value->getClass()) {
             return $value;
         }
         if (!($reflectionClass = $this->container->getReflectionClass($value->getClass(), \false))) {

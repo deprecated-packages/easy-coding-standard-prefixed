@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\HttpKernel;
 
-use _PhpScoper58a0a169dcfb\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoper58a0a169dcfb\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper9ef667a5e42c\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper9ef667a5e42c\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\MarkdownDiff\Bundle\MarkdownDiffBundle;
 use Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
 use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
 final class RuleDocGeneratorKernel extends \Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
 {
-    public function registerContainerConfiguration(\_PhpScoper58a0a169dcfb\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(\_PhpScoper9ef667a5e42c\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
         parent::registerContainerConfiguration($loader);

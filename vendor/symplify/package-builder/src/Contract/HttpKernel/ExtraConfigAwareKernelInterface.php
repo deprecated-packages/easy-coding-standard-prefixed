@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Contract\HttpKernel;
 
-use _PhpScoper58a0a169dcfb\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoper9ef667a5e42c\Symfony\Component\HttpKernel\KernelInterface;
 use Symplify\SmartFileSystem\SmartFileInfo;
-interface ExtraConfigAwareKernelInterface extends \_PhpScoper58a0a169dcfb\Symfony\Component\HttpKernel\KernelInterface
+interface ExtraConfigAwareKernelInterface extends \_PhpScoper9ef667a5e42c\Symfony\Component\HttpKernel\KernelInterface
 {
     /**
      * @param string[]|SmartFileInfo[] $configs

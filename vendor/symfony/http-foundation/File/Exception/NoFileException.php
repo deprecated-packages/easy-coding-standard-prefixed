@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper58a0a169dcfb\Symfony\Component\HttpFoundation\File\Exception;
+namespace _PhpScoper9ef667a5e42c\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an UPLOAD_ERR_NO_FILE error occurred with UploadedFile.
  *
  * @author Florent Mata <florentmata@gmail.com>
  */
-class NoFileException extends \_PhpScoper58a0a169dcfb\Symfony\Component\HttpFoundation\File\Exception\FileException
+class NoFileException extends \_PhpScoper9ef667a5e42c\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
 }

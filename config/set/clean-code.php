@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper58a0a169dcfb;
+namespace _PhpScoper9ef667a5e42c;
 
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ClassNotation\ProtectedToPrivateFixer;
@@ -19,9 +19,9 @@ use SlevomatCodingStandard\Sniffs\PHP\UselessParenthesesSniff;
 use SlevomatCodingStandard\Sniffs\PHP\UselessSemicolonSniff;
 use SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff;
 use SlevomatCodingStandard\Sniffs\Variables\UselessVariableSniff;
-use _PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer;
-return static function (\_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\SlevomatCodingStandard\Sniffs\PHP\DisallowDirectMagicInvokeCallSniff::class);
     $services->set(\Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer::class);

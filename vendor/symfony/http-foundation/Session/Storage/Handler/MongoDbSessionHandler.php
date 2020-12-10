@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper58a0a169dcfb\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper9ef667a5e42c\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Session handler using the mongodb/mongodb package and MongoDB driver extension.
@@ -18,7 +18,7 @@ namespace _PhpScoper58a0a169dcfb\Symfony\Component\HttpFoundation\Session\Storag
  * @see https://packagist.org/packages/mongodb/mongodb
  * @see https://php.net/mongodb
  */
-class MongoDbSessionHandler extends \_PhpScoper58a0a169dcfb\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class MongoDbSessionHandler extends \_PhpScoper9ef667a5e42c\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $mongo;
     /**
@@ -59,7 +59,7 @@ class MongoDbSessionHandler extends \_PhpScoper58a0a169dcfb\Symfony\Component\Ht
      *
      * @throws \InvalidArgumentException When "database" or "collection" not provided
      */
-    public function __construct(\_PhpScoper58a0a169dcfb\MongoDB\Client $mongo, array $options)
+    public function __construct(\_PhpScoper9ef667a5e42c\MongoDB\Client $mongo, array $options)
     {
         if (!isset($options['database']) || !isset($options['collection'])) {
             throw new \InvalidArgumentException('You must provide the "database" and "collection" option for MongoDBSessionHandler.');
@@ -120,7 +120,7 @@ class MongoDbSessionHandler extends \_PhpScoper58a0a169dcfb\Symfony\Component\Ht
         }
         return $dbData[$this->options['data_field']]->getData();
     }
-    private function getCollection() : \_PhpScoper58a0a169dcfb\MongoDB\Collection
+    private function getCollection() : \_PhpScoper9ef667a5e42c\MongoDB\Collection
     {
         if (null === $this->collection) {
             $this->collection = $this->mongo->selectCollection($this->options['database'], $this->options['collection']);

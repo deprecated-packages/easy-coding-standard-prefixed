@@ -9,7 +9,7 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use SlevomatCodingStandard\Helpers\YodaHelper;
 use function array_keys;
 use function count;
-use const _PhpScoper58a0a169dcfb\T_EQUAL;
+use const _PhpScoper9ef667a5e42c\T_EQUAL;
 use const T_IS_EQUAL;
 use const T_IS_IDENTICAL;
 use const T_IS_NOT_EQUAL;

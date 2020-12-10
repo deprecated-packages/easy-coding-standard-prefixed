@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper58a0a169dcfb\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoper9ef667a5e42c\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use _PhpScoper58a0a169dcfb\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-class TemplateTagValueNode implements \_PhpScoper58a0a169dcfb\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+use _PhpScoper9ef667a5e42c\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+class TemplateTagValueNode implements \_PhpScoper9ef667a5e42c\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     /** @var string */
     public $name;
@@ -12,7 +12,7 @@ class TemplateTagValueNode implements \_PhpScoper58a0a169dcfb\PHPStan\PhpDocPars
     public $bound;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(string $name, ?\_PhpScoper58a0a169dcfb\PHPStan\PhpDocParser\Ast\Type\TypeNode $bound, string $description)
+    public function __construct(string $name, ?\_PhpScoper9ef667a5e42c\PHPStan\PhpDocParser\Ast\Type\TypeNode $bound, string $description)
     {
         $this->name = $name;
         $this->bound = $bound;

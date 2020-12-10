@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper58a0a169dcfb\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper9ef667a5e42c\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use _PhpScoper58a0a169dcfb\Symfony\Component\HttpFoundation\Session\SessionUtils;
+use _PhpScoper9ef667a5e42c\Symfony\Component\HttpFoundation\Session\SessionUtils;
 /**
  * This abstract session handler provides a generic implementation
  * of the PHP 7.0 SessionUpdateTimestampHandlerInterface,
@@ -107,7 +107,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
             if (!$this->sessionName) {
                 throw new \LogicException(\sprintf('Session name cannot be empty, did you forget to call "parent::open()" in "%s"?.', static::class));
             }
-            $cookie = \_PhpScoper58a0a169dcfb\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie($this->sessionName, $sessionId);
+            $cookie = \_PhpScoper9ef667a5e42c\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie($this->sessionName, $sessionId);
             /*
              * We send an invalidation Set-Cookie header (zero lifetime)
              * when either the session was started or a cookie with

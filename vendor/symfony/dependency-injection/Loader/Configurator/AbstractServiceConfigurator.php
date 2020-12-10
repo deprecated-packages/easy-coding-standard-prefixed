@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-abstract class AbstractServiceConfigurator extends \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+use _PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+abstract class AbstractServiceConfigurator extends \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     protected $parent;
     protected $id;
     private $defaultTags = [];
-    public function __construct(\_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Definition $definition, string $id = null, array $defaultTags = [])
+    public function __construct(\_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Definition $definition, string $id = null, array $defaultTags = [])
     {
         $this->parent = $parent;
         $this->definition = $definition;
@@ -37,7 +37,7 @@ abstract class AbstractServiceConfigurator extends \_PhpScoper58a0a169dcfb\Symfo
     /**
      * Registers a service.
      */
-    public final function set(?string $id, string $class = null) : \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
+    public final function set(?string $id, string $class = null) : \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
     {
         $this->__destruct();
         return $this->parent->set($id, $class);
@@ -45,7 +45,7 @@ abstract class AbstractServiceConfigurator extends \_PhpScoper58a0a169dcfb\Symfo
     /**
      * Creates an alias.
      */
-    public final function alias(string $id, string $referencedId) : \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator
+    public final function alias(string $id, string $referencedId) : \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator
     {
         $this->__destruct();
         return $this->parent->alias($id, $referencedId);
@@ -53,7 +53,7 @@ abstract class AbstractServiceConfigurator extends \_PhpScoper58a0a169dcfb\Symfo
     /**
      * Registers a PSR-4 namespace using a glob pattern.
      */
-    public final function load(string $namespace, string $resource) : \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\PrototypeConfigurator
+    public final function load(string $namespace, string $resource) : \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\PrototypeConfigurator
     {
         $this->__destruct();
         return $this->parent->load($namespace, $resource);
@@ -63,7 +63,7 @@ abstract class AbstractServiceConfigurator extends \_PhpScoper58a0a169dcfb\Symfo
      *
      * @throws ServiceNotFoundException if the service definition does not exist
      */
-    public final function get(string $id) : \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
+    public final function get(string $id) : \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
     {
         $this->__destruct();
         return $this->parent->get($id);
@@ -73,7 +73,7 @@ abstract class AbstractServiceConfigurator extends \_PhpScoper58a0a169dcfb\Symfo
      *
      * @param InlineServiceConfigurator[]|ReferenceConfigurator[] $services
      */
-    public final function stack(string $id, array $services) : \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator
+    public final function stack(string $id, array $services) : \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator
     {
         $this->__destruct();
         return $this->parent->stack($id, $services);
@@ -81,7 +81,7 @@ abstract class AbstractServiceConfigurator extends \_PhpScoper58a0a169dcfb\Symfo
     /**
      * Registers a service.
      */
-    public final function __invoke(string $id, string $class = null) : \_PhpScoper58a0a169dcfb\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
+    public final function __invoke(string $id, string $class = null) : \_PhpScoper9ef667a5e42c\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
     {
         $this->__destruct();
         return $this->parent->set($id, $class);

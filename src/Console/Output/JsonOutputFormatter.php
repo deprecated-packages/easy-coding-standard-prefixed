@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Output;
 
-use _PhpScoper58a0a169dcfb\Jean85\PrettyVersions;
-use _PhpScoper58a0a169dcfb\Nette\Utils\Json;
+use _PhpScoper9ef667a5e42c\Jean85\PrettyVersions;
+use _PhpScoper9ef667a5e42c\Nette\Utils\Json;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface;
@@ -58,14 +58,14 @@ final class JsonOutputFormatter implements \Symplify\EasyCodingStandard\Contract
         foreach ($fileDiffs as $fileDiff) {
             $errorsArray['files'][$fileDiff->getRelativeFilePathFromCwd()]['diffs'][] = ['diff' => $fileDiff->getDiff(), 'applied_checkers' => $fileDiff->getAppliedCheckers()];
         }
-        return \_PhpScoper58a0a169dcfb\Nette\Utils\Json::encode($errorsArray, \_PhpScoper58a0a169dcfb\Nette\Utils\Json::PRETTY);
+        return \_PhpScoper9ef667a5e42c\Nette\Utils\Json::encode($errorsArray, \_PhpScoper9ef667a5e42c\Nette\Utils\Json::PRETTY);
     }
     /**
      * @return mixed[]
      */
     private function createBaseErrorsArray(\Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult) : array
     {
-        $version = \_PhpScoper58a0a169dcfb\Jean85\PrettyVersions::getVersion('symplify/easy-coding-standard');
+        $version = \_PhpScoper9ef667a5e42c\Jean85\PrettyVersions::getVersion('symplify/easy-coding-standard');
         return ['meta' => ['version' => $version->getPrettyVersion() ?: 'Unknown'], 'totals' => ['errors' => $errorAndDiffResult->getErrorCount(), 'diffs' => $errorAndDiffResult->getFileDiffsCount()], 'files' => []];
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper58a0a169dcfb\PhpParser\NodeVisitor;
+namespace _PhpScoper9ef667a5e42c\PhpParser\NodeVisitor;
 
-use _PhpScoper58a0a169dcfb\PhpParser\Node;
-use _PhpScoper58a0a169dcfb\PhpParser\NodeVisitorAbstract;
+use _PhpScoper9ef667a5e42c\PhpParser\Node;
+use _PhpScoper9ef667a5e42c\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor that connects a child node to its parent node
  * as well as its sibling nodes.
@@ -14,7 +14,7 @@ use _PhpScoper58a0a169dcfb\PhpParser\NodeVisitorAbstract;
  * node can be accessed through <code>$node->getAttribute('previous')</code>,
  * and the next node can be accessed through <code>$node->getAttribute('next')</code>.
  */
-final class NodeConnectingVisitor extends \_PhpScoper58a0a169dcfb\PhpParser\NodeVisitorAbstract
+final class NodeConnectingVisitor extends \_PhpScoper9ef667a5e42c\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var Node[]
@@ -29,7 +29,7 @@ final class NodeConnectingVisitor extends \_PhpScoper58a0a169dcfb\PhpParser\Node
         $this->stack = [];
         $this->previous = null;
     }
-    public function enterNode(\_PhpScoper58a0a169dcfb\PhpParser\Node $node)
+    public function enterNode(\_PhpScoper9ef667a5e42c\PhpParser\Node $node)
     {
         if (!empty($this->stack)) {
             $node->setAttribute('parent', $this->stack[\count($this->stack) - 1]);
@@ -40,7 +40,7 @@ final class NodeConnectingVisitor extends \_PhpScoper58a0a169dcfb\PhpParser\Node
         }
         $this->stack[] = $node;
     }
-    public function leaveNode(\_PhpScoper58a0a169dcfb\PhpParser\Node $node)
+    public function leaveNode(\_PhpScoper9ef667a5e42c\PhpParser\Node $node)
     {
         $this->previous = $node;
         \array_pop($this->stack);
