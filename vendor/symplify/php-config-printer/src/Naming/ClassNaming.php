@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Naming;
 
-use _PhpScoper908feaf49cd8\Nette\Utils\Strings;
+use _PhpScoper21c6ce8bfe5d\Nette\Utils\Strings;
 final class ClassNaming
 {
     public function getShortName(string $class) : string
     {
-        if (\_PhpScoper908feaf49cd8\Nette\Utils\Strings::contains($class, '\\')) {
-            return (string) \_PhpScoper908feaf49cd8\Nette\Utils\Strings::after($class, '\\', -1);
+        if (\_PhpScoper21c6ce8bfe5d\Nette\Utils\Strings::contains($class, '\\')) {
+            return (string) \_PhpScoper21c6ce8bfe5d\Nette\Utils\Strings::after($class, '\\', -1);
         }
         return $class;
     }

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper908feaf49cd8\Symfony\Component\Config\Util\Exception;
+namespace _PhpScoper21c6ce8bfe5d\Symfony\Component\Config\Util\Exception;
 
 /**
  * Exception class for when XML cannot be parsed properly.

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper908feaf49cd8\PhpParser\Internal;
+namespace _PhpScoper21c6ce8bfe5d\PhpParser\Internal;
 
 /**
  * @internal

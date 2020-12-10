@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper908feaf49cd8\Symfony\Component\Config\Exception;
+namespace _PhpScoper21c6ce8bfe5d\Symfony\Component\Config\Exception;
 
 /**
  * Exception class for when a circular reference is detected when importing resources.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FileLoaderImportCircularReferenceException extends \_PhpScoper908feaf49cd8\Symfony\Component\Config\Exception\LoaderLoadException
+class FileLoaderImportCircularReferenceException extends \_PhpScoper21c6ce8bfe5d\Symfony\Component\Config\Exception\LoaderLoadException
 {
     public function __construct(array $resources, int $code = null, \Throwable $previous = null)
     {
