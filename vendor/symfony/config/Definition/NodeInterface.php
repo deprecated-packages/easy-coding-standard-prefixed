@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper21c6ce8bfe5d\Symfony\Component\Config\Definition;
+namespace _PhpScoper17bb67c99ade\Symfony\Component\Config\Definition;
 
-use _PhpScoper21c6ce8bfe5d\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
-use _PhpScoper21c6ce8bfe5d\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use _PhpScoper21c6ce8bfe5d\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScoper17bb67c99ade\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
+use _PhpScoper17bb67c99ade\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use _PhpScoper17bb67c99ade\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 /**
  * Common Interface among all nodes.
  *

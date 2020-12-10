@@ -14,12 +14,12 @@ use function sprintf;
 use function str_repeat;
 use function strlen;
 use const T_AS;
-use const _PhpScoper21c6ce8bfe5d\T_BITWISE_AND;
-use const _PhpScoper21c6ce8bfe5d\T_COMMA;
+use const _PhpScoper17bb67c99ade\T_BITWISE_AND;
+use const _PhpScoper17bb67c99ade\T_COMMA;
 use const T_DOUBLE_ARROW;
-use const _PhpScoper21c6ce8bfe5d\T_EQUAL;
-use const _PhpScoper21c6ce8bfe5d\T_OPEN_PARENTHESIS;
-use const _PhpScoper21c6ce8bfe5d\T_OPEN_SHORT_ARRAY;
+use const _PhpScoper17bb67c99ade\T_EQUAL;
+use const _PhpScoper17bb67c99ade\T_OPEN_PARENTHESIS;
+use const _PhpScoper17bb67c99ade\T_OPEN_SHORT_ARRAY;
 use const T_USE;
 use const T_WHITESPACE;
 class ReferenceSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff

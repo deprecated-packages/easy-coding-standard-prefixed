@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper21c6ce8bfe5d\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoper17bb67c99ade\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait AbstractTrait
 {
