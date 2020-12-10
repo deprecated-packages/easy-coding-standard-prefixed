@@ -3,19 +3,19 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Http;
 
-use _PhpScoper3a22e8e0bd94\GuzzleHttp\ClientInterface;
-use _PhpScoper3a22e8e0bd94\GuzzleHttp\Exception\BadResponseException;
-use _PhpScoper3a22e8e0bd94\GuzzleHttp\Psr7\Request;
-use _PhpScoper3a22e8e0bd94\Nette\Utils\Json;
-use _PhpScoper3a22e8e0bd94\Nette\Utils\JsonException;
-use _PhpScoper3a22e8e0bd94\Psr\Http\Message\ResponseInterface;
+use _PhpScoper908feaf49cd8\GuzzleHttp\ClientInterface;
+use _PhpScoper908feaf49cd8\GuzzleHttp\Exception\BadResponseException;
+use _PhpScoper908feaf49cd8\GuzzleHttp\Psr7\Request;
+use _PhpScoper908feaf49cd8\Nette\Utils\Json;
+use _PhpScoper908feaf49cd8\Nette\Utils\JsonException;
+use _PhpScoper908feaf49cd8\Psr\Http\Message\ResponseInterface;
 final class BetterGuzzleClient
 {
     /**
      * @var ClientInterface
      */
     private $client;
-    public function __construct(\_PhpScoper3a22e8e0bd94\GuzzleHttp\ClientInterface $client)
+    public function __construct(\_PhpScoper908feaf49cd8\GuzzleHttp\ClientInterface $client)
     {
         $this->client = $client;
     }
@@ -25,22 +25,22 @@ final class BetterGuzzleClient
      */
     public function requestToJson(string $url) : array
     {
-        $request = new \_PhpScoper3a22e8e0bd94\GuzzleHttp\Psr7\Request('GET', $url);
+        $request = new \_PhpScoper908feaf49cd8\GuzzleHttp\Psr7\Request('GET', $url);
         $response = $this->client->send($request);
         if (!$this->isSuccessCode($response)) {
-            throw \_PhpScoper3a22e8e0bd94\GuzzleHttp\Exception\BadResponseException::create($request, $response);
+            throw \_PhpScoper908feaf49cd8\GuzzleHttp\Exception\BadResponseException::create($request, $response);
         }
         $content = (string) $response->getBody();
         if ($content === '') {
             return [];
         }
         try {
-            return \_PhpScoper3a22e8e0bd94\Nette\Utils\Json::decode($content, \_PhpScoper3a22e8e0bd94\Nette\Utils\Json::FORCE_ARRAY);
-        } catch (\_PhpScoper3a22e8e0bd94\Nette\Utils\JsonException $jsonException) {
-            throw new \_PhpScoper3a22e8e0bd94\Nette\Utils\JsonException('Syntax error while decoding:' . $content, $jsonException->getLine(), $jsonException);
+            return \_PhpScoper908feaf49cd8\Nette\Utils\Json::decode($content, \_PhpScoper908feaf49cd8\Nette\Utils\Json::FORCE_ARRAY);
+        } catch (\_PhpScoper908feaf49cd8\Nette\Utils\JsonException $jsonException) {
+            throw new \_PhpScoper908feaf49cd8\Nette\Utils\JsonException('Syntax error while decoding:' . $content, $jsonException->getLine(), $jsonException);
         }
     }
-    private function isSuccessCode(\_PhpScoper3a22e8e0bd94\Psr\Http\Message\ResponseInterface $response) : bool
+    private function isSuccessCode(\_PhpScoper908feaf49cd8\Psr\Http\Message\ResponseInterface $response) : bool
     {
         return $response->getStatusCode() >= 200 && $response->getStatusCode() < 300;
     }

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3a22e8e0bd94\PhpParser;
+namespace _PhpScoper908feaf49cd8\PhpParser;
 
 interface Builder
 {
@@ -10,5 +10,5 @@ interface Builder
      *
      * @return Node The built node
      */
-    public function getNode() : \_PhpScoper3a22e8e0bd94\PhpParser\Node;
+    public function getNode() : \_PhpScoper908feaf49cd8\PhpParser\Node;
 }

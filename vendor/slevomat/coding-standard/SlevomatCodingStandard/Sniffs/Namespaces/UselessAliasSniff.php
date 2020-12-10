@@ -12,7 +12,7 @@ use function count;
 use function sprintf;
 use const T_AS;
 use const T_OPEN_TAG;
-use const _PhpScoper3a22e8e0bd94\T_SEMICOLON;
+use const _PhpScoper908feaf49cd8\T_SEMICOLON;
 class UselessAliasSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_USELESS_ALIAS = 'UselessAlias';

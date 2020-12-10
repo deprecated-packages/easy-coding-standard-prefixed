@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Fixer\DoctrineAnnotation;
 
-use _PhpScoper3a22e8e0bd94\Doctrine\Common\Annotations\DocLexer;
+use _PhpScoper908feaf49cd8\Doctrine\Common\Annotations\DocLexer;
 use PhpCsFixer\AbstractDoctrineAnnotationFixer;
 use PhpCsFixer\Doctrine\Annotation\Tokens;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
@@ -55,19 +55,19 @@ final class DoctrineAnnotationArrayAssignmentFixer extends \PhpCsFixer\AbstractD
     {
         $scopes = [];
         foreach ($tokens as $token) {
-            if ($token->isType(\_PhpScoper3a22e8e0bd94\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS)) {
+            if ($token->isType(\_PhpScoper908feaf49cd8\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS)) {
                 $scopes[] = 'annotation';
                 continue;
             }
-            if ($token->isType(\_PhpScoper3a22e8e0bd94\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES)) {
+            if ($token->isType(\_PhpScoper908feaf49cd8\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES)) {
                 $scopes[] = 'array';
                 continue;
             }
-            if ($token->isType([\_PhpScoper3a22e8e0bd94\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, \_PhpScoper3a22e8e0bd94\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES])) {
+            if ($token->isType([\_PhpScoper908feaf49cd8\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, \_PhpScoper908feaf49cd8\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES])) {
                 \array_pop($scopes);
                 continue;
             }
-            if ('array' === \end($scopes) && $token->isType([\_PhpScoper3a22e8e0bd94\Doctrine\Common\Annotations\DocLexer::T_EQUALS, \_PhpScoper3a22e8e0bd94\Doctrine\Common\Annotations\DocLexer::T_COLON])) {
+            if ('array' === \end($scopes) && $token->isType([\_PhpScoper908feaf49cd8\Doctrine\Common\Annotations\DocLexer::T_EQUALS, \_PhpScoper908feaf49cd8\Doctrine\Common\Annotations\DocLexer::T_COLON])) {
                 $token->setContent($this->configuration['operator']);
             }
         }

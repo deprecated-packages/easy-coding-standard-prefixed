@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3a22e8e0bd94\PhpParser\Node\Scalar;
+namespace _PhpScoper908feaf49cd8\PhpParser\Node\Scalar;
 
-use _PhpScoper3a22e8e0bd94\PhpParser\Node\Scalar;
-class DNumber extends \_PhpScoper3a22e8e0bd94\PhpParser\Node\Scalar
+use _PhpScoper908feaf49cd8\PhpParser\Node\Scalar;
+class DNumber extends \_PhpScoper908feaf49cd8\PhpParser\Node\Scalar
 {
     /** @var float Number value */
     public $value;
