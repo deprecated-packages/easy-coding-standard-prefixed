@@ -17,12 +17,12 @@ use function str_repeat;
 use function str_replace;
 use function strlen;
 use const PREG_OFFSET_CAPTURE;
-use const _PhpScoper9b9ddfd01528\T_DOC_COMMENT_CLOSE_TAG;
-use const _PhpScoper9b9ddfd01528\T_DOC_COMMENT_OPEN_TAG;
-use const _PhpScoper9b9ddfd01528\T_DOC_COMMENT_STAR;
-use const _PhpScoper9b9ddfd01528\T_DOC_COMMENT_STRING;
-use const _PhpScoper9b9ddfd01528\T_DOC_COMMENT_TAG;
-use const _PhpScoper9b9ddfd01528\T_DOC_COMMENT_WHITESPACE;
+use const _PhpScoper58a0a169dcfb\T_DOC_COMMENT_CLOSE_TAG;
+use const _PhpScoper58a0a169dcfb\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoper58a0a169dcfb\T_DOC_COMMENT_STAR;
+use const _PhpScoper58a0a169dcfb\T_DOC_COMMENT_STRING;
+use const _PhpScoper58a0a169dcfb\T_DOC_COMMENT_TAG;
+use const _PhpScoper58a0a169dcfb\T_DOC_COMMENT_WHITESPACE;
 use const T_VARIABLE;
 use const T_WHITESPACE;
 class DuplicateSpacesSniff implements \PHP_CodeSniffer\Sniffs\Sniff
