@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb458b528613f\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoper3ba93baeac18\PHPStan\PhpDocParser\Ast\Type;
 
-class ThisTypeNode implements \_PhpScoperb458b528613f\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class ThisTypeNode implements \_PhpScoper3ba93baeac18\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     public function __toString() : string
     {

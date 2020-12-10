@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb458b528613f\Symfony\Component\HttpFoundation;
+namespace _PhpScoper3ba93baeac18\Symfony\Component\HttpFoundation;
 
-use _PhpScoperb458b528613f\Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use _PhpScoper3ba93baeac18\Symfony\Component\HttpFoundation\Exception\BadRequestException;
 /**
  * InputBag is a container for user input values such as $_GET, $_POST, $_REQUEST, and $_COOKIE.
  *
  * @author Saif Eddin Gmati <saif.gmati@symfony.com>
  */
-final class InputBag extends \_PhpScoperb458b528613f\Symfony\Component\HttpFoundation\ParameterBag
+final class InputBag extends \_PhpScoper3ba93baeac18\Symfony\Component\HttpFoundation\ParameterBag
 {
     /**
      * Returns a string input value by name.
@@ -32,7 +32,7 @@ final class InputBag extends \_PhpScoperb458b528613f\Symfony\Component\HttpFound
         }
         $value = parent::get($key, $this);
         if (null !== $value && $this !== $value && !\is_scalar($value) && !(\is_object($value) && \method_exists($value, '__toString'))) {
-            trigger_deprecation('symfony/http-foundation', '5.1', 'Retrieving a non-string value from "%s()" is deprecated, and will throw a "%s" exception in Symfony 6.0, use "%s::all()" instead.', __METHOD__, \_PhpScoperb458b528613f\Symfony\Component\HttpFoundation\Exception\BadRequestException::class, __CLASS__);
+            trigger_deprecation('symfony/http-foundation', '5.1', 'Retrieving a non-string value from "%s()" is deprecated, and will throw a "%s" exception in Symfony 6.0, use "%s::all()" instead.', __METHOD__, \_PhpScoper3ba93baeac18\Symfony\Component\HttpFoundation\Exception\BadRequestException::class, __CLASS__);
         }
         return $this === $value ? $default : $value;
     }
@@ -48,7 +48,7 @@ final class InputBag extends \_PhpScoperb458b528613f\Symfony\Component\HttpFound
         }
         $value = $this->parameters[$key] ?? [];
         if (!\is_array($value)) {
-            throw new \_PhpScoperb458b528613f\Symfony\Component\HttpFoundation\Exception\BadRequestException(\sprintf('Unexpected value for "%s" input, expecting "array", got "%s".', $key, \get_debug_type($value)));
+            throw new \_PhpScoper3ba93baeac18\Symfony\Component\HttpFoundation\Exception\BadRequestException(\sprintf('Unexpected value for "%s" input, expecting "array", got "%s".', $key, \get_debug_type($value)));
         }
         return $value;
     }

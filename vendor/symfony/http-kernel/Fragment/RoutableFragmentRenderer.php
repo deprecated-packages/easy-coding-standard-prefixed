@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb458b528613f\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScoper3ba93baeac18\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoperb458b528613f\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperb458b528613f\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use _PhpScoperb458b528613f\Symfony\Component\HttpKernel\EventListener\FragmentListener;
+use _PhpScoper3ba93baeac18\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper3ba93baeac18\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScoper3ba93baeac18\Symfony\Component\HttpKernel\EventListener\FragmentListener;
 /**
  * Adds the possibility to generate a fragment URI for a given Controller.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class RoutableFragmentRenderer implements \_PhpScoperb458b528613f\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
+abstract class RoutableFragmentRenderer implements \_PhpScoper3ba93baeac18\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
 {
     private $fragmentPath = '/_fragment';
     /**
@@ -40,7 +40,7 @@ abstract class RoutableFragmentRenderer implements \_PhpScoperb458b528613f\Symfo
      *
      * @return string A fragment URI
      */
-    protected function generateFragmentUri(\_PhpScoperb458b528613f\Symfony\Component\HttpKernel\Controller\ControllerReference $reference, \_PhpScoperb458b528613f\Symfony\Component\HttpFoundation\Request $request, $absolute = \false, $strict = \true)
+    protected function generateFragmentUri(\_PhpScoper3ba93baeac18\Symfony\Component\HttpKernel\Controller\ControllerReference $reference, \_PhpScoper3ba93baeac18\Symfony\Component\HttpFoundation\Request $request, $absolute = \false, $strict = \true)
     {
         if ($strict) {
             $this->checkNonScalar($reference->attributes);

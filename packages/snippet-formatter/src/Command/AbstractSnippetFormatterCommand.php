@@ -3,13 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
-use _PhpScoperb458b528613f\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Console\Command\AbstractCheckCommand;
 use Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter;
 use Symplify\PackageBuilder\Console\ShellCode;
-use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
-use Symplify\SmartFileSystem\SmartFileSystem;
 abstract class AbstractSnippetFormatterCommand extends \Symplify\EasyCodingStandard\Console\Command\AbstractCheckCommand
 {
     /**
@@ -17,23 +15,13 @@ abstract class AbstractSnippetFormatterCommand extends \Symplify\EasyCodingStand
      */
     private $snippetFormatter;
     /**
-     * @var SmartFileSystem
-     */
-    private $smartFileSystem;
-    /**
-     * @var SmartFinder
-     */
-    private $smartFinder;
-    /**
      * @required
      */
-    public function autowireAbstractSnippetFormatterCommand(\Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter $snippetFormatter, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \Symplify\SmartFileSystem\Finder\SmartFinder $smartFinder) : void
+    public function autowireAbstractSnippetFormatterCommand(\Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter $snippetFormatter) : void
     {
         $this->snippetFormatter = $snippetFormatter;
-        $this->smartFileSystem = $smartFileSystem;
-        $this->smartFinder = $smartFinder;
     }
-    protected function doExecuteSnippetFormatterWithFileNamesAndSnippetPattern(\_PhpScoperb458b528613f\Symfony\Component\Console\Input\InputInterface $input, string $fileNames, string $snippetPattern, string $kind) : int
+    protected function doExecuteSnippetFormatterWithFileNamesAndSnippetPattern(\_PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputInterface $input, string $fileNames, string $snippetPattern, string $kind) : int
     {
         $this->configuration->resolveFromInput($input);
         $sources = $this->configuration->getSources();

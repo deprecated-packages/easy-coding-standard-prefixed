@@ -3,20 +3,20 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Bundle;
 
-use _PhpScoperb458b528613f\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperb458b528613f\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoperb458b528613f\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper3ba93baeac18\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper3ba93baeac18\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper3ba93baeac18\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 use Symplify\SymplifyKernel\DependencyInjection\CompilerPass\PrepareConsoleApplicationCompilerPass;
 use Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension;
-final class SymplifyKernelBundle extends \_PhpScoperb458b528613f\Symfony\Component\HttpKernel\Bundle\Bundle
+final class SymplifyKernelBundle extends \_PhpScoper3ba93baeac18\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    public function build(\_PhpScoperb458b528613f\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScoper3ba93baeac18\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->addCompilerPass(new \Symplify\SymplifyKernel\DependencyInjection\CompilerPass\PrepareConsoleApplicationCompilerPass());
         $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : ?\_PhpScoperb458b528613f\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScoper3ba93baeac18\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
         return new \Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension();
     }

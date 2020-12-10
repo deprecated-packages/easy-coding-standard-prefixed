@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperb458b528613f;
+namespace _PhpScoper3ba93baeac18;
 
 /*
  * This file is part of the Symfony package.
@@ -10,7 +10,7 @@ namespace _PhpScoperb458b528613f;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoperb458b528613f\Symfony\Polyfill\Php72 as p;
+use _PhpScoper3ba93baeac18\Symfony\Polyfill\Php72 as p;
 if ('\\' === \DIRECTORY_SEPARATOR && !\function_exists('sapi_windows_vt100_support')) {
     function sapi_windows_vt100_support()
     {
@@ -26,10 +26,10 @@ if (!\function_exists('stream_isatty')) {
 if (!\function_exists('utf8_encode')) {
     function utf8_encode($s)
     {
-        return \_PhpScoperb458b528613f\Symfony\Polyfill\Php72\Php72::utf8_encode($s);
+        return \_PhpScoper3ba93baeac18\Symfony\Polyfill\Php72\Php72::utf8_encode($s);
     }
     function utf8_decode($s)
     {
-        return \_PhpScoperb458b528613f\Symfony\Polyfill\Php72\Php72::utf8_decode($s);
+        return \_PhpScoper3ba93baeac18\Symfony\Polyfill\Php72\Php72::utf8_decode($s);
     }
 }

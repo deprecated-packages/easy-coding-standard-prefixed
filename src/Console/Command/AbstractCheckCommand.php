@@ -3,11 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScoperb458b528613f\Symfony\Component\Console\Command\Command;
-use _PhpScoperb458b528613f\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperb458b528613f\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperb458b528613f\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperb458b528613f\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper3ba93baeac18\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Application\EasyCodingStandardApplication;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
 use Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter;
@@ -17,7 +16,8 @@ use Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector;
 use Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory;
 use Symplify\EasyCodingStandard\Guard\LoadedCheckersGuard;
 use Symplify\EasyCodingStandard\ValueObject\Option;
-abstract class AbstractCheckCommand extends \_PhpScoperb458b528613f\Symfony\Component\Console\Command\Command
+use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
+abstract class AbstractCheckCommand extends \Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
 {
     /**
      * @var Configuration
@@ -65,17 +65,17 @@ abstract class AbstractCheckCommand extends \_PhpScoperb458b528613f\Symfony\Comp
         $this->addArgument(
             \Symplify\EasyCodingStandard\ValueObject\Option::PATHS,
             // optional is on purpose here, since path from ecs.php can se ubsed
-            \_PhpScoperb458b528613f\Symfony\Component\Console\Input\InputArgument::OPTIONAL | \_PhpScoperb458b528613f\Symfony\Component\Console\Input\InputArgument::IS_ARRAY,
+            \_PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputArgument::OPTIONAL | \_PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputArgument::IS_ARRAY,
             'The path(s) to be checked.'
         );
         $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::FIX, null, null, 'Fix found violations.');
         $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::CLEAR_CACHE, null, null, 'Clear cache for already checked files.');
-        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::NO_PROGRESS_BAR, null, \_PhpScoperb458b528613f\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Hide progress bar. Useful e.g. for nicer CI output.');
-        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::NO_ERROR_TABLE, null, \_PhpScoperb458b528613f\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Hide error table. Useful e.g. for fast check of error count.');
-        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT, null, \_PhpScoperb458b528613f\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Select output format', \Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter::NAME);
-        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::MATCH_GIT_DIFF, null, \_PhpScoperb458b528613f\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Execute only on file(s) matching the git diff.');
+        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::NO_PROGRESS_BAR, null, \_PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Hide progress bar. Useful e.g. for nicer CI output.');
+        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::NO_ERROR_TABLE, null, \_PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Hide error table. Useful e.g. for fast check of error count.');
+        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT, null, \_PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Select output format', \Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter::NAME);
+        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::MATCH_GIT_DIFF, null, \_PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Execute only on file(s) matching the git diff.');
     }
-    protected function initialize(\_PhpScoperb458b528613f\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperb458b528613f\Symfony\Component\Console\Output\OutputInterface $output) : void
+    protected function initialize(\_PhpScoper3ba93baeac18\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper3ba93baeac18\Symfony\Component\Console\Output\OutputInterface $output) : void
     {
         $this->loadedCheckersGuard->ensureSomeCheckersAreRegistered();
     }
