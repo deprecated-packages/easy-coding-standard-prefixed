@@ -17,7 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScopera1a51450b61d\Doctrine\Common\Annotations\Annotation;
+namespace _PhpScoper2731c1906fe4\Doctrine\Common\Annotations\Annotation;
 
 /**
  * Annotation that can be used to signal to the parser to ignore specific

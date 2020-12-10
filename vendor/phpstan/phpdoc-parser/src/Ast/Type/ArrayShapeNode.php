@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera1a51450b61d\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoper2731c1906fe4\PHPStan\PhpDocParser\Ast\Type;
 
-class ArrayShapeNode implements \_PhpScopera1a51450b61d\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class ArrayShapeNode implements \_PhpScoper2731c1906fe4\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     /** @var ArrayShapeItemNode[] */
     public $items;

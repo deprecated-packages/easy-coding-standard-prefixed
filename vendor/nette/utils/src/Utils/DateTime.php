@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScopera1a51450b61d\Nette\Utils;
+namespace _PhpScoper2731c1906fe4\Nette\Utils;
 
-use _PhpScopera1a51450b61d\Nette;
+use _PhpScoper2731c1906fe4\Nette;
 /**
  * DateTime.
  */
@@ -53,7 +53,7 @@ class DateTime extends \DateTime implements \JsonSerializable
     {
         $s = \sprintf('%04d-%02d-%02d %02d:%02d:%02.5f', $year, $month, $day, $hour, $minute, $second);
         if (!\checkdate($month, $day, $year) || $hour < 0 || $hour > 23 || $minute < 0 || $minute > 59 || $second < 0 || $second >= 60) {
-            throw new \_PhpScopera1a51450b61d\Nette\InvalidArgumentException("Invalid date '{$s}'");
+            throw new \_PhpScoper2731c1906fe4\Nette\InvalidArgumentException("Invalid date '{$s}'");
         }
         return new static($s);
     }
@@ -71,7 +71,7 @@ class DateTime extends \DateTime implements \JsonSerializable
         } elseif (\is_string($timezone)) {
             $timezone = new \DateTimeZone($timezone);
         } elseif (!$timezone instanceof \DateTimeZone) {
-            throw new \_PhpScopera1a51450b61d\Nette\InvalidArgumentException('Invalid timezone given');
+            throw new \_PhpScoper2731c1906fe4\Nette\InvalidArgumentException('Invalid timezone given');
         }
         $date = parent::createFromFormat($format, $time, $timezone);
         return $date ? static::from($date) : \false;

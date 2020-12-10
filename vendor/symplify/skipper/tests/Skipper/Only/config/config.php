@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera1a51450b61d;
+namespace _PhpScoper2731c1906fe4;
 
-use _PhpScopera1a51450b61d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper2731c1906fe4\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\Skipper\Tests\Skipper\Only\Source\IncludeThisClass;
 use Symplify\Skipper\Tests\Skipper\Only\Source\SkipCompletely;
 use Symplify\Skipper\Tests\Skipper\Only\Source\SkipCompletelyToo;
 use Symplify\Skipper\ValueObject\Option;
-return static function (\_PhpScopera1a51450b61d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper2731c1906fe4\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $parameters = $containerConfigurator->parameters();
     $parameters->set(\Symplify\Skipper\ValueObject\Option::ONLY, [
         \Symplify\Skipper\Tests\Skipper\Only\Source\IncludeThisClass::class => ['SomeFileToOnlyInclude.php'],

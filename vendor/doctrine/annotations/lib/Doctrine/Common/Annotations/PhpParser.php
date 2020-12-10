@@ -17,7 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScopera1a51450b61d\Doctrine\Common\Annotations;
+namespace _PhpScoper2731c1906fe4\Doctrine\Common\Annotations;
 
 use SplFileObject;
 /**
@@ -49,7 +49,7 @@ final class PhpParser
         }
         $namespace = \preg_quote($class->getNamespaceName());
         $content = \preg_replace('/^.*?(\\bnamespace\\s+' . $namespace . '\\s*[;{].*)$/s', '\\1', $content);
-        $tokenizer = new \_PhpScopera1a51450b61d\Doctrine\Common\Annotations\TokenParser('<?php ' . $content);
+        $tokenizer = new \_PhpScoper2731c1906fe4\Doctrine\Common\Annotations\TokenParser('<?php ' . $content);
         $statements = $tokenizer->parseUseStatements($class->getNamespaceName());
         return $statements;
     }

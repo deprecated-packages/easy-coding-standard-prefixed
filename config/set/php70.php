@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera1a51450b61d;
+namespace _PhpScoper2731c1906fe4;
 
 use PhpCsFixer\Fixer\Alias\RandomApiMigrationFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
@@ -10,9 +10,9 @@ use PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer;
 use PhpCsFixer\Fixer\Operator\TernaryToNullCoalescingFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 use SlevomatCodingStandard\Sniffs\Exceptions\ReferenceThrowableOnlySniff;
-use _PhpScopera1a51450b61d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper2731c1906fe4\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\Strict\BlankLineAfterStrictTypesFixer;
-return static function (\_PhpScopera1a51450b61d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper2731c1906fe4\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer::class)->call('configure', [['syntax' => 'short']]);
     $services->set(\PhpCsFixer\Fixer\Alias\RandomApiMigrationFixer::class)->call('configure', [['mt_rand' => 'random_int', 'rand' => 'random_int']]);

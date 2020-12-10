@@ -13,7 +13,7 @@ use function sprintf;
 use function strlen;
 use function strrpos;
 use const T_COMMENT;
-use const _PhpScopera1a51450b61d\T_DOC_COMMENT_STRING;
+use const _PhpScoper2731c1906fe4\T_DOC_COMMENT_STRING;
 use const T_OPEN_TAG;
 class LineLengthSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

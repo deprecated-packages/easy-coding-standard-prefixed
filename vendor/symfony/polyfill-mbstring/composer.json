@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScopera1a51450b61d\\Symfony\\Polyfill\\Mbstring\\": ""
+            "_PhpScoper2731c1906fe4\\Symfony\\Polyfill\\Mbstring\\": ""
         },
         "files": [
             "bootstrap.php"

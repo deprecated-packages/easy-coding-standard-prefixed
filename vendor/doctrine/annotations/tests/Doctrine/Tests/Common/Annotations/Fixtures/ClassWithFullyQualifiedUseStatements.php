@@ -1,9 +1,9 @@
 <?php
 
-namespace _PhpScopera1a51450b61d\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper2731c1906fe4\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScopera1a51450b61d\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure, _PhpScopera1a51450b61d\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
-use _PhpScopera1a51450b61d\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
+use _PhpScoper2731c1906fe4\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure, _PhpScoper2731c1906fe4\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoper2731c1906fe4\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
 class ClassWithFullyQualifiedUseStatements
 {
 }

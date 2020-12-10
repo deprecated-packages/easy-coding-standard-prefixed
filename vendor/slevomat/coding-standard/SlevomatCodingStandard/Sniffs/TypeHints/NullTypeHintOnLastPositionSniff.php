@@ -5,15 +5,15 @@ namespace SlevomatCodingStandard\Sniffs\TypeHints;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScopera1a51450b61d\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScopera1a51450b61d\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoper2731c1906fe4\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoper2731c1906fe4\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\GenericAnnotation;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use function count;
 use function sprintf;
 use function strtolower;
-use const _PhpScopera1a51450b61d\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoper2731c1906fe4\T_DOC_COMMENT_OPEN_TAG;
 class NullTypeHintOnLastPositionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_NULL_TYPE_HINT_NOT_ON_LAST_POSITION = 'NullTypeHintNotOnLastPosition';
@@ -46,7 +46,7 @@ class NullTypeHintOnLastPositionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                         $nullPosition = 0;
                         $position = 0;
                         foreach ($unionTypeNode->types as $typeNode) {
-                            if ($typeNode instanceof \_PhpScopera1a51450b61d\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($typeNode->name) === 'null') {
+                            if ($typeNode instanceof \_PhpScoper2731c1906fe4\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($typeNode->name) === 'null') {
                                 $nullTypeNode = $typeNode;
                                 $nullPosition = $position;
                                 break;
@@ -75,7 +75,7 @@ class NullTypeHintOnLastPositionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                             $fixedTypeNodes[] = $typeNode;
                         }
                         $fixedTypeNodes[] = $nullTypeNode;
-                        $fixedUnionTypeNode = new \_PhpScopera1a51450b61d\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode($fixedTypeNodes);
+                        $fixedUnionTypeNode = new \_PhpScoper2731c1906fe4\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode($fixedTypeNodes);
                         $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $annotation, $unionTypeNode, $fixedUnionTypeNode);
                         $phpcsFile->fixer->replaceToken($annotation->getStartPointer(), $fixedAnnotationContent);
                         for ($i = $annotation->getStartPointer() + 1; $i <= $annotation->getEndPointer(); $i++) {
