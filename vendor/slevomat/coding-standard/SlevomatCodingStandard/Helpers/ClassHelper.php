@@ -7,7 +7,7 @@ use PHP_CodeSniffer\Files\File;
 use function array_merge;
 use function array_reverse;
 use function sprintf;
-use const _PhpScoper6250f8d25076\T_ANON_CLASS;
+use const _PhpScoper3a22e8e0bd94\T_ANON_CLASS;
 use const T_FINAL;
 use const T_STRING;
 use const T_USE;
