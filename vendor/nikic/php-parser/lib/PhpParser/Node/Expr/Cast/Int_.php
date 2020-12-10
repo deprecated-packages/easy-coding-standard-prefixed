@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3ba93baeac18\PhpParser\Node\Expr\Cast;
+namespace _PhpScoperfab1bfb7ec99\PhpParser\Node\Expr\Cast;
 
-use _PhpScoper3ba93baeac18\PhpParser\Node\Expr\Cast;
-class Int_ extends \_PhpScoper3ba93baeac18\PhpParser\Node\Expr\Cast
+use _PhpScoperfab1bfb7ec99\PhpParser\Node\Expr\Cast;
+class Int_ extends \_PhpScoperfab1bfb7ec99\PhpParser\Node\Expr\Cast
 {
     public function getType() : string
     {

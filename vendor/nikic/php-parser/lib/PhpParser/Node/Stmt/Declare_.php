@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3ba93baeac18\PhpParser\Node\Stmt;
+namespace _PhpScoperfab1bfb7ec99\PhpParser\Node\Stmt;
 
-use _PhpScoper3ba93baeac18\PhpParser\Node;
-class Declare_ extends \_PhpScoper3ba93baeac18\PhpParser\Node\Stmt
+use _PhpScoperfab1bfb7ec99\PhpParser\Node;
+class Declare_ extends \_PhpScoperfab1bfb7ec99\PhpParser\Node\Stmt
 {
     /** @var DeclareDeclare[] List of declares */
     public $declares;

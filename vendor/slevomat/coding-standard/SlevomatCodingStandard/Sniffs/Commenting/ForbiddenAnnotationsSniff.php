@@ -11,11 +11,11 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use function in_array;
 use function sprintf;
 use function trim;
-use const _PhpScoper3ba93baeac18\T_DOC_COMMENT_CLOSE_TAG;
-use const _PhpScoper3ba93baeac18\T_DOC_COMMENT_OPEN_TAG;
-use const _PhpScoper3ba93baeac18\T_DOC_COMMENT_STAR;
-use const _PhpScoper3ba93baeac18\T_DOC_COMMENT_TAG;
-use const _PhpScoper3ba93baeac18\T_DOC_COMMENT_WHITESPACE;
+use const _PhpScoperfab1bfb7ec99\T_DOC_COMMENT_CLOSE_TAG;
+use const _PhpScoperfab1bfb7ec99\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoperfab1bfb7ec99\T_DOC_COMMENT_STAR;
+use const _PhpScoperfab1bfb7ec99\T_DOC_COMMENT_TAG;
+use const _PhpScoperfab1bfb7ec99\T_DOC_COMMENT_WHITESPACE;
 class ForbiddenAnnotationsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_ANNOTATION_FORBIDDEN = 'AnnotationForbidden';

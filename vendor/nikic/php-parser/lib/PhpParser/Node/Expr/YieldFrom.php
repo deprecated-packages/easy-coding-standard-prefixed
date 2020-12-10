@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3ba93baeac18\PhpParser\Node\Expr;
+namespace _PhpScoperfab1bfb7ec99\PhpParser\Node\Expr;
 
-use _PhpScoper3ba93baeac18\PhpParser\Node\Expr;
-class YieldFrom extends \_PhpScoper3ba93baeac18\PhpParser\Node\Expr
+use _PhpScoperfab1bfb7ec99\PhpParser\Node\Expr;
+class YieldFrom extends \_PhpScoperfab1bfb7ec99\PhpParser\Node\Expr
 {
     /** @var Expr Expression to yield from */
     public $expr;
@@ -14,7 +14,7 @@ class YieldFrom extends \_PhpScoper3ba93baeac18\PhpParser\Node\Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper3ba93baeac18\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\_PhpScoperfab1bfb7ec99\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

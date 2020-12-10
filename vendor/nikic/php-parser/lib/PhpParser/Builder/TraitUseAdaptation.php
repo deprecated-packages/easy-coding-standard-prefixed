@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3ba93baeac18\PhpParser\Builder;
+namespace _PhpScoperfab1bfb7ec99\PhpParser\Builder;
 
-use _PhpScoper3ba93baeac18\PhpParser\Builder;
-use _PhpScoper3ba93baeac18\PhpParser\BuilderHelpers;
-use _PhpScoper3ba93baeac18\PhpParser\Node;
-use _PhpScoper3ba93baeac18\PhpParser\Node\Stmt;
-class TraitUseAdaptation implements \_PhpScoper3ba93baeac18\PhpParser\Builder
+use _PhpScoperfab1bfb7ec99\PhpParser\Builder;
+use _PhpScoperfab1bfb7ec99\PhpParser\BuilderHelpers;
+use _PhpScoperfab1bfb7ec99\PhpParser\Node;
+use _PhpScoperfab1bfb7ec99\PhpParser\Node\Stmt;
+class TraitUseAdaptation implements \_PhpScoperfab1bfb7ec99\PhpParser\Builder
 {
     const TYPE_UNDEFINED = 0;
     const TYPE_ALIAS = 1;
@@ -28,8 +28,8 @@ class TraitUseAdaptation implements \_PhpScoper3ba93baeac18\PhpParser\Builder
     public function __construct($trait, $method)
     {
         $this->type = self::TYPE_UNDEFINED;
-        $this->trait = \is_null($trait) ? null : \_PhpScoper3ba93baeac18\PhpParser\BuilderHelpers::normalizeName($trait);
-        $this->method = \_PhpScoper3ba93baeac18\PhpParser\BuilderHelpers::normalizeIdentifier($method);
+        $this->trait = \is_null($trait) ? null : \_PhpScoperfab1bfb7ec99\PhpParser\BuilderHelpers::normalizeName($trait);
+        $this->method = \_PhpScoperfab1bfb7ec99\PhpParser\BuilderHelpers::normalizeIdentifier($method);
     }
     /**
      * Sets alias of method.
@@ -56,7 +56,7 @@ class TraitUseAdaptation implements \_PhpScoper3ba93baeac18\PhpParser\Builder
      */
     public function makePublic()
     {
-        $this->setModifier(\_PhpScoper3ba93baeac18\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
+        $this->setModifier(\_PhpScoperfab1bfb7ec99\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC);
         return $this;
     }
     /**
@@ -66,7 +66,7 @@ class TraitUseAdaptation implements \_PhpScoper3ba93baeac18\PhpParser\Builder
      */
     public function makeProtected()
     {
-        $this->setModifier(\_PhpScoper3ba93baeac18\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        $this->setModifier(\_PhpScoperfab1bfb7ec99\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
         return $this;
     }
     /**
@@ -76,7 +76,7 @@ class TraitUseAdaptation implements \_PhpScoper3ba93baeac18\PhpParser\Builder
      */
     public function makePrivate()
     {
-        $this->setModifier(\_PhpScoper3ba93baeac18\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        $this->setModifier(\_PhpScoperfab1bfb7ec99\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
         return $this;
     }
     /**
@@ -98,7 +98,7 @@ class TraitUseAdaptation implements \_PhpScoper3ba93baeac18\PhpParser\Builder
             throw new \LogicException('Cannot add overwritten traits for not precedence adaptation buider');
         }
         foreach ($traits as $trait) {
-            $this->insteadof[] = \_PhpScoper3ba93baeac18\PhpParser\BuilderHelpers::normalizeName($trait);
+            $this->insteadof[] = \_PhpScoperfab1bfb7ec99\PhpParser\BuilderHelpers::normalizeName($trait);
         }
         return $this;
     }
@@ -121,13 +121,13 @@ class TraitUseAdaptation implements \_PhpScoper3ba93baeac18\PhpParser\Builder
      *
      * @return Node The built node
      */
-    public function getNode() : \_PhpScoper3ba93baeac18\PhpParser\Node
+    public function getNode() : \_PhpScoperfab1bfb7ec99\PhpParser\Node
     {
         switch ($this->type) {
             case self::TYPE_ALIAS:
-                return new \_PhpScoper3ba93baeac18\PhpParser\Node\Stmt\TraitUseAdaptation\Alias($this->trait, $this->method, $this->modifier, $this->alias);
+                return new \_PhpScoperfab1bfb7ec99\PhpParser\Node\Stmt\TraitUseAdaptation\Alias($this->trait, $this->method, $this->modifier, $this->alias);
             case self::TYPE_PRECEDENCE:
-                return new \_PhpScoper3ba93baeac18\PhpParser\Node\Stmt\TraitUseAdaptation\Precedence($this->trait, $this->method, $this->insteadof);
+                return new \_PhpScoperfab1bfb7ec99\PhpParser\Node\Stmt\TraitUseAdaptation\Precedence($this->trait, $this->method, $this->insteadof);
             default:
                 throw new \LogicException('Type of adaptation is not defined');
         }
