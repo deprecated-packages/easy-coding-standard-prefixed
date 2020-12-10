@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Differ;
 
 use PhpCsFixer\Preg;
-use _PhpScoper4edd80b4ab80\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper8dd2e1c340b1\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -58,10 +58,10 @@ final class DiffConsoleFormatter
                     } else {
                         $colour = 'cyan';
                     }
-                    return \sprintf('<fg=%s>%s</fg=%s>', $colour, \_PhpScoper4edd80b4ab80\Symfony\Component\Console\Formatter\OutputFormatter::escape($matches[0]), $colour);
+                    return \sprintf('<fg=%s>%s</fg=%s>', $colour, \_PhpScoper8dd2e1c340b1\Symfony\Component\Console\Formatter\OutputFormatter::escape($matches[0]), $colour);
                 }, $line, 1, $count);
                 if (0 === $count) {
-                    $line = \_PhpScoper4edd80b4ab80\Symfony\Component\Console\Formatter\OutputFormatter::escape($line);
+                    $line = \_PhpScoper8dd2e1c340b1\Symfony\Component\Console\Formatter\OutputFormatter::escape($line);
                 }
             }
             return \sprintf($lineTemplate, $line);

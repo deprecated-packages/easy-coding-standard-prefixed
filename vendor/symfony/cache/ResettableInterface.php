@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4edd80b4ab80\Symfony\Component\Cache;
+namespace _PhpScoper8dd2e1c340b1\Symfony\Component\Cache;
 
-use _PhpScoper4edd80b4ab80\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper8dd2e1c340b1\Symfony\Contracts\Service\ResetInterface;
 /**
  * Resets a pool's local state.
  */
-interface ResettableInterface extends \_PhpScoper4edd80b4ab80\Symfony\Contracts\Service\ResetInterface
+interface ResettableInterface extends \_PhpScoper8dd2e1c340b1\Symfony\Contracts\Service\ResetInterface
 {
 }

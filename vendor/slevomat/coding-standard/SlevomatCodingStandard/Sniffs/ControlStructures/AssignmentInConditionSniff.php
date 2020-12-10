@@ -11,7 +11,7 @@ use function max;
 use function sprintf;
 use const T_DO;
 use const T_ELSEIF;
-use const _PhpScoper4edd80b4ab80\T_EQUAL;
+use const _PhpScoper8dd2e1c340b1\T_EQUAL;
 use const T_IF;
 use const T_WHILE;
 class AssignmentInConditionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
