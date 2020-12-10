@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfab1bfb7ec99\PhpParser\Builder;
+namespace _PhpScopera40fc53e636b\PhpParser\Builder;
 
-use _PhpScoperfab1bfb7ec99\PhpParser\BuilderHelpers;
-use _PhpScoperfab1bfb7ec99\PhpParser\Node;
-abstract class FunctionLike extends \_PhpScoperfab1bfb7ec99\PhpParser\Builder\Declaration
+use _PhpScopera40fc53e636b\PhpParser\BuilderHelpers;
+use _PhpScopera40fc53e636b\PhpParser\Node;
+abstract class FunctionLike extends \_PhpScopera40fc53e636b\PhpParser\Builder\Declaration
 {
     protected $returnByRef = \false;
     protected $params = [];
@@ -30,8 +30,8 @@ abstract class FunctionLike extends \_PhpScoperfab1bfb7ec99\PhpParser\Builder\De
      */
     public function addParam($param)
     {
-        $param = \_PhpScoperfab1bfb7ec99\PhpParser\BuilderHelpers::normalizeNode($param);
-        if (!$param instanceof \_PhpScoperfab1bfb7ec99\PhpParser\Node\Param) {
+        $param = \_PhpScopera40fc53e636b\PhpParser\BuilderHelpers::normalizeNode($param);
+        if (!$param instanceof \_PhpScopera40fc53e636b\PhpParser\Node\Param) {
             throw new \LogicException(\sprintf('Expected parameter node, got "%s"', $param->getType()));
         }
         $this->params[] = $param;
@@ -61,7 +61,7 @@ abstract class FunctionLike extends \_PhpScoperfab1bfb7ec99\PhpParser\Builder\De
      */
     public function setReturnType($type)
     {
-        $this->returnType = \_PhpScoperfab1bfb7ec99\PhpParser\BuilderHelpers::normalizeType($type);
+        $this->returnType = \_PhpScopera40fc53e636b\PhpParser\BuilderHelpers::normalizeType($type);
         return $this;
     }
 }

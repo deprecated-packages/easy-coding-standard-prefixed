@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Tests;
+namespace _PhpScopera40fc53e636b\Symfony\Component\VarExporter\Tests;
 
-use _PhpScoperfab1bfb7ec99\PHPUnit\Framework\TestCase;
-use _PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Instantiator;
-class InstantiatorTest extends \_PhpScoperfab1bfb7ec99\PHPUnit\Framework\TestCase
+use _PhpScopera40fc53e636b\PHPUnit\Framework\TestCase;
+use _PhpScopera40fc53e636b\Symfony\Component\VarExporter\Instantiator;
+class InstantiatorTest extends \_PhpScopera40fc53e636b\PHPUnit\Framework\TestCase
 {
     /**
      * @expectedException \Symfony\Component\VarExporter\Exception\ClassNotFoundException
@@ -20,7 +20,7 @@ class InstantiatorTest extends \_PhpScoperfab1bfb7ec99\PHPUnit\Framework\TestCas
      */
     public function testNotFoundClass()
     {
-        \_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Instantiator::instantiate('SomeNotExistingClass');
+        \_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Instantiator::instantiate('SomeNotExistingClass');
     }
     /**
      * @dataProvider provideFailingInstantiation
@@ -29,7 +29,7 @@ class InstantiatorTest extends \_PhpScoperfab1bfb7ec99\PHPUnit\Framework\TestCas
      */
     public function testFailingInstantiation(string $class)
     {
-        \_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Instantiator::instantiate($class);
+        \_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Instantiator::instantiate($class);
     }
     public function provideFailingInstantiation()
     {
@@ -41,12 +41,12 @@ class InstantiatorTest extends \_PhpScoperfab1bfb7ec99\PHPUnit\Framework\TestCas
     }
     public function testInstantiate()
     {
-        $this->assertEquals((object) array('p' => 123), \_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Instantiator::instantiate('stdClass', array('p' => 123)));
-        $this->assertEquals((object) array('p' => 123), \_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Instantiator::instantiate('STDcLASS', array('p' => 123)));
-        $this->assertEquals(new \ArrayObject(array(123)), \_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Instantiator::instantiate(\ArrayObject::class, array("\0" => array(array(123)))));
+        $this->assertEquals((object) array('p' => 123), \_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Instantiator::instantiate('stdClass', array('p' => 123)));
+        $this->assertEquals((object) array('p' => 123), \_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Instantiator::instantiate('STDcLASS', array('p' => 123)));
+        $this->assertEquals(new \ArrayObject(array(123)), \_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Instantiator::instantiate(\ArrayObject::class, array("\0" => array(array(123)))));
         $expected = array("\0" . __NAMESPACE__ . "\\Bar\0priv" => 123, "\0" . __NAMESPACE__ . "\\Foo\0priv" => 234);
-        $this->assertSame($expected, (array) \_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Instantiator::instantiate(\_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Tests\Bar::class, array('priv' => 123), array(\_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Tests\Foo::class => array('priv' => 234))));
-        $e = \_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Instantiator::instantiate('Exception', array('foo' => 123, 'trace' => array(234)));
+        $this->assertSame($expected, (array) \_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Instantiator::instantiate(\_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Tests\Bar::class, array('priv' => 123), array(\_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Tests\Foo::class => array('priv' => 234))));
+        $e = \_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Instantiator::instantiate('Exception', array('foo' => 123, 'trace' => array(234)));
         $this->assertSame(123, $e->foo);
         $this->assertSame(array(234), $e->getTrace());
     }
@@ -55,7 +55,7 @@ class Foo
 {
     private $priv;
 }
-class Bar extends \_PhpScoperfab1bfb7ec99\Symfony\Component\VarExporter\Tests\Foo
+class Bar extends \_PhpScopera40fc53e636b\Symfony\Component\VarExporter\Tests\Foo
 {
     private $priv;
 }

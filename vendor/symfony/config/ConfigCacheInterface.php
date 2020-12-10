@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfab1bfb7ec99\Symfony\Component\Config;
+namespace _PhpScopera40fc53e636b\Symfony\Component\Config;
 
-use _PhpScoperfab1bfb7ec99\Symfony\Component\Config\Resource\ResourceInterface;
+use _PhpScopera40fc53e636b\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Interface for ConfigCache.
  *

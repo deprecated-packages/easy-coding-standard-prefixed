@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfab1bfb7ec99\Symfony\Component\VarDumper\Server;
+namespace _PhpScopera40fc53e636b\Symfony\Component\VarDumper\Server;
 
-use _PhpScoperfab1bfb7ec99\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoperfab1bfb7ec99\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
+use _PhpScopera40fc53e636b\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScopera40fc53e636b\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
 /**
  * Forwards serialized Data clones to a server.
  *
@@ -38,7 +38,7 @@ class Connection
     {
         return $this->contextProviders;
     }
-    public function write(\_PhpScoperfab1bfb7ec99\Symfony\Component\VarDumper\Cloner\Data $data) : bool
+    public function write(\_PhpScopera40fc53e636b\Symfony\Component\VarDumper\Cloner\Data $data) : bool
     {
         $socketIsFresh = !$this->socket;
         if (!($this->socket = $this->socket ?: $this->createSocket())) {
