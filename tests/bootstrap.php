@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera40fc53e636b;
+namespace _PhpScoper4edd80b4ab80;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../vendor/squizlabs/php_codesniffer/autoload.php';

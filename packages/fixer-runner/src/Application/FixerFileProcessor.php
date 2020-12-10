@@ -5,6 +5,7 @@ namespace Symplify\EasyCodingStandard\FixerRunner\Application;
 
 use PhpCsFixer\Differ\DifferInterface;
 use PhpCsFixer\Fixer\FixerInterface;
+use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer;
 use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
@@ -25,6 +26,10 @@ use Throwable;
  */
 final class FixerFileProcessor extends \Symplify\EasyCodingStandard\Application\AbstractFileProcessor
 {
+    /**
+     * @var string[]
+     */
+    private const MARKDOWN_EXCLUDED_FIXERS = [\PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer::class, \PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer::class, \PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer::class, \PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer::class, \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::class];
     /**
      * @var class-string[]
      */
@@ -161,15 +166,11 @@ final class FixerFileProcessor extends \Symplify\EasyCodingStandard\Application\
         if ($this->currentParentFileInfoProvider->provide() === null) {
             return \false;
         }
-        if ($fixer instanceof \PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer) {
-            return \true;
+        foreach (self::MARKDOWN_EXCLUDED_FIXERS as $markdownExcludedFixer) {
+            if (\is_a($fixer, $markdownExcludedFixer, \true)) {
+                return \true;
+            }
         }
-        if ($fixer instanceof \PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer) {
-            return \true;
-        }
-        if ($fixer instanceof \PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer) {
-            return \true;
-        }
-        return $fixer instanceof \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
+        return \false;
     }
 }

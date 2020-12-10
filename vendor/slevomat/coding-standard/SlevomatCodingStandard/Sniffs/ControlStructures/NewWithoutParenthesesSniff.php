@@ -6,18 +6,18 @@ namespace SlevomatCodingStandard\Sniffs\ControlStructures;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
-use const _PhpScopera40fc53e636b\T_ANON_CLASS;
-use const _PhpScopera40fc53e636b\T_CLOSE_PARENTHESIS;
-use const _PhpScopera40fc53e636b\T_CLOSE_SHORT_ARRAY;
-use const _PhpScopera40fc53e636b\T_CLOSE_SQUARE_BRACKET;
+use const _PhpScoper4edd80b4ab80\T_ANON_CLASS;
+use const _PhpScoper4edd80b4ab80\T_CLOSE_PARENTHESIS;
+use const _PhpScoper4edd80b4ab80\T_CLOSE_SHORT_ARRAY;
+use const _PhpScoper4edd80b4ab80\T_CLOSE_SQUARE_BRACKET;
 use const T_COALESCE;
-use const _PhpScopera40fc53e636b\T_COMMA;
+use const _PhpScoper4edd80b4ab80\T_COMMA;
 use const T_DOUBLE_ARROW;
-use const _PhpScopera40fc53e636b\T_INLINE_ELSE;
-use const _PhpScopera40fc53e636b\T_INLINE_THEN;
+use const _PhpScoper4edd80b4ab80\T_INLINE_ELSE;
+use const _PhpScoper4edd80b4ab80\T_INLINE_THEN;
 use const T_NEW;
-use const _PhpScopera40fc53e636b\T_OPEN_PARENTHESIS;
-use const _PhpScopera40fc53e636b\T_SEMICOLON;
+use const _PhpScoper4edd80b4ab80\T_OPEN_PARENTHESIS;
+use const _PhpScoper4edd80b4ab80\T_SEMICOLON;
 use const T_WHITESPACE;
 class NewWithoutParenthesesSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

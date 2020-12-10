@@ -9,15 +9,15 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera40fc53e636b\SebastianBergmann\Diff;
+namespace _PhpScoper4edd80b4ab80\SebastianBergmann\Diff;
 
 /**
  * @covers SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator
  */
-final class MemoryEfficientImplementationTest extends \_PhpScopera40fc53e636b\SebastianBergmann\Diff\LongestCommonSubsequenceTest
+final class MemoryEfficientImplementationTest extends \_PhpScoper4edd80b4ab80\SebastianBergmann\Diff\LongestCommonSubsequenceTest
 {
-    protected function createImplementation() : \_PhpScopera40fc53e636b\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
+    protected function createImplementation() : \_PhpScoper4edd80b4ab80\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
     {
-        return new \_PhpScopera40fc53e636b\SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator();
+        return new \_PhpScoper4edd80b4ab80\SebastianBergmann\Diff\MemoryEfficientLongestCommonSubsequenceCalculator();
     }
 }

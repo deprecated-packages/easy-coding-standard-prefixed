@@ -38,7 +38,7 @@ class FindImplementedInterfaceNamesTest extends \PHP_CodeSniffer\Tests\Core\Abst
      */
     public function dataImplementedInterface()
     {
-        return [['/* testImplementedClass */', ['testFIINInterface']], ['/* testMultiImplementedClass */', ['testFIINInterface', 'testFIINInterface2']], ['/* testNamespacedClass */', ['\\PHP_CodeSniffer\\Tests\\Core\\File\\testFIINInterface']], ['/* testNonImplementedClass */', \false], ['/* testInterface */', \false], ['/* testClassThatExtendsAndImplements */', ['InterfaceA', '_PhpScopera40fc53e636b\\NameSpaced\\Cat\\InterfaceB']], ['/* testClassThatImplementsAndExtends */', ['\\InterfaceA', 'InterfaceB']]];
+        return [['/* testImplementedClass */', ['testFIINInterface']], ['/* testMultiImplementedClass */', ['testFIINInterface', 'testFIINInterface2']], ['/* testNamespacedClass */', ['\\PHP_CodeSniffer\\Tests\\Core\\File\\testFIINInterface']], ['/* testNonImplementedClass */', \false], ['/* testInterface */', \false], ['/* testClassThatExtendsAndImplements */', ['InterfaceA', '_PhpScoper4edd80b4ab80\\NameSpaced\\Cat\\InterfaceB']], ['/* testClassThatImplementsAndExtends */', ['\\InterfaceA', 'InterfaceB']]];
     }
     //end dataImplementedInterface()
 }

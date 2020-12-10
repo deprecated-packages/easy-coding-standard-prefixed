@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera40fc53e636b;
+namespace _PhpScoper4edd80b4ab80;
 
-use _PhpScopera40fc53e636b\PhpParser\BuilderFactory;
-use _PhpScopera40fc53e636b\PhpParser\NodeFinder;
-use _PhpScopera40fc53e636b\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use _PhpScopera40fc53e636b\Symfony\Component\Yaml\Parser;
+use _PhpScoper4edd80b4ab80\PhpParser\BuilderFactory;
+use _PhpScoper4edd80b4ab80\PhpParser\NodeFinder;
+use _PhpScoper4edd80b4ab80\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper4edd80b4ab80\Symfony\Component\Yaml\Parser;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
-return static function (\_PhpScopera40fc53e636b\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper4edd80b4ab80\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
     $services->load('Symplify\\PhpConfigPrinter\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/Dummy', __DIR__ . '/../src/Bundle']);
-    $services->set(\_PhpScopera40fc53e636b\PhpParser\NodeFinder::class);
-    $services->set(\_PhpScopera40fc53e636b\Symfony\Component\Yaml\Parser::class);
-    $services->set(\_PhpScopera40fc53e636b\PhpParser\BuilderFactory::class);
+    $services->set(\_PhpScoper4edd80b4ab80\PhpParser\NodeFinder::class);
+    $services->set(\_PhpScoper4edd80b4ab80\Symfony\Component\Yaml\Parser::class);
+    $services->set(\_PhpScoper4edd80b4ab80\PhpParser\BuilderFactory::class);
     $services->set(\Symplify\PackageBuilder\Parameter\ParameterProvider::class);
 };

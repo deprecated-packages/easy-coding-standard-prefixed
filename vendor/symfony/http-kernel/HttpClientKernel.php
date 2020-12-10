@@ -8,33 +8,33 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera40fc53e636b\Symfony\Component\HttpKernel;
+namespace _PhpScoper4edd80b4ab80\Symfony\Component\HttpKernel;
 
-use _PhpScopera40fc53e636b\Symfony\Component\HttpClient\HttpClient;
-use _PhpScopera40fc53e636b\Symfony\Component\HttpFoundation\Request;
-use _PhpScopera40fc53e636b\Symfony\Component\HttpFoundation\Response;
-use _PhpScopera40fc53e636b\Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use _PhpScopera40fc53e636b\Symfony\Component\Mime\Part\AbstractPart;
-use _PhpScopera40fc53e636b\Symfony\Component\Mime\Part\DataPart;
-use _PhpScopera40fc53e636b\Symfony\Component\Mime\Part\Multipart\FormDataPart;
-use _PhpScopera40fc53e636b\Symfony\Component\Mime\Part\TextPart;
-use _PhpScopera40fc53e636b\Symfony\Contracts\HttpClient\HttpClientInterface;
+use _PhpScoper4edd80b4ab80\Symfony\Component\HttpClient\HttpClient;
+use _PhpScoper4edd80b4ab80\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper4edd80b4ab80\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper4edd80b4ab80\Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use _PhpScoper4edd80b4ab80\Symfony\Component\Mime\Part\AbstractPart;
+use _PhpScoper4edd80b4ab80\Symfony\Component\Mime\Part\DataPart;
+use _PhpScoper4edd80b4ab80\Symfony\Component\Mime\Part\Multipart\FormDataPart;
+use _PhpScoper4edd80b4ab80\Symfony\Component\Mime\Part\TextPart;
+use _PhpScoper4edd80b4ab80\Symfony\Contracts\HttpClient\HttpClientInterface;
 /**
  * An implementation of a Symfony HTTP kernel using a "real" HTTP client.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-final class HttpClientKernel implements \_PhpScopera40fc53e636b\Symfony\Component\HttpKernel\HttpKernelInterface
+final class HttpClientKernel implements \_PhpScoper4edd80b4ab80\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     private $client;
-    public function __construct(\_PhpScopera40fc53e636b\Symfony\Contracts\HttpClient\HttpClientInterface $client = null)
+    public function __construct(\_PhpScoper4edd80b4ab80\Symfony\Contracts\HttpClient\HttpClientInterface $client = null)
     {
-        if (!\class_exists(\_PhpScopera40fc53e636b\Symfony\Component\HttpClient\HttpClient::class)) {
+        if (!\class_exists(\_PhpScoper4edd80b4ab80\Symfony\Component\HttpClient\HttpClient::class)) {
             throw new \LogicException(\sprintf('You cannot use "%s" as the HttpClient component is not installed. Try running "composer require symfony/http-client".', __CLASS__));
         }
-        $this->client = $client ?? \_PhpScopera40fc53e636b\Symfony\Component\HttpClient\HttpClient::create();
+        $this->client = $client ?? \_PhpScoper4edd80b4ab80\Symfony\Component\HttpClient\HttpClient::create();
     }
-    public function handle(\_PhpScopera40fc53e636b\Symfony\Component\HttpFoundation\Request $request, $type = \_PhpScopera40fc53e636b\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, $catch = \true) : \_PhpScopera40fc53e636b\Symfony\Component\HttpFoundation\Response
+    public function handle(\_PhpScoper4edd80b4ab80\Symfony\Component\HttpFoundation\Request $request, $type = \_PhpScoper4edd80b4ab80\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, $catch = \true) : \_PhpScoper4edd80b4ab80\Symfony\Component\HttpFoundation\Response
     {
         $headers = $this->getHeaders($request);
         $body = '';
@@ -43,8 +43,8 @@ final class HttpClientKernel implements \_PhpScopera40fc53e636b\Symfony\Componen
             $body = $part->bodyToIterable();
         }
         $response = $this->client->request($request->getMethod(), $request->getUri(), ['headers' => $headers, 'body' => $body, 'max_redirects' => 0] + $request->attributes->get('http_client_options', []));
-        $response = new \_PhpScopera40fc53e636b\Symfony\Component\HttpFoundation\Response($response->getContent(!$catch), $response->getStatusCode(), $response->getHeaders(!$catch));
-        $response->headers = new class($response->headers->all()) extends \_PhpScopera40fc53e636b\Symfony\Component\HttpFoundation\ResponseHeaderBag
+        $response = new \_PhpScoper4edd80b4ab80\Symfony\Component\HttpFoundation\Response($response->getContent(!$catch), $response->getStatusCode(), $response->getHeaders(!$catch));
+        $response->headers = new class($response->headers->all()) extends \_PhpScoper4edd80b4ab80\Symfony\Component\HttpFoundation\ResponseHeaderBag
         {
             protected function computeCacheControlValue() : string
             {
@@ -54,24 +54,24 @@ final class HttpClientKernel implements \_PhpScopera40fc53e636b\Symfony\Componen
         };
         return $response;
     }
-    private function getBody(\_PhpScopera40fc53e636b\Symfony\Component\HttpFoundation\Request $request) : ?\_PhpScopera40fc53e636b\Symfony\Component\Mime\Part\AbstractPart
+    private function getBody(\_PhpScoper4edd80b4ab80\Symfony\Component\HttpFoundation\Request $request) : ?\_PhpScoper4edd80b4ab80\Symfony\Component\Mime\Part\AbstractPart
     {
         if (\in_array($request->getMethod(), ['GET', 'HEAD'])) {
             return null;
         }
-        if (!\class_exists(\_PhpScopera40fc53e636b\Symfony\Component\Mime\Part\AbstractPart::class)) {
+        if (!\class_exists(\_PhpScoper4edd80b4ab80\Symfony\Component\Mime\Part\AbstractPart::class)) {
             throw new \LogicException('You cannot pass non-empty bodies as the Mime component is not installed. Try running "composer require symfony/mime".');
         }
         if ($content = $request->getContent()) {
-            return new \_PhpScopera40fc53e636b\Symfony\Component\Mime\Part\TextPart($content, 'utf-8', 'plain', '8bit');
+            return new \_PhpScoper4edd80b4ab80\Symfony\Component\Mime\Part\TextPart($content, 'utf-8', 'plain', '8bit');
         }
         $fields = $request->request->all();
         foreach ($request->files->all() as $name => $file) {
-            $fields[$name] = \_PhpScopera40fc53e636b\Symfony\Component\Mime\Part\DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType());
+            $fields[$name] = \_PhpScoper4edd80b4ab80\Symfony\Component\Mime\Part\DataPart::fromPath($file->getPathname(), $file->getClientOriginalName(), $file->getClientMimeType());
         }
-        return new \_PhpScopera40fc53e636b\Symfony\Component\Mime\Part\Multipart\FormDataPart($fields);
+        return new \_PhpScoper4edd80b4ab80\Symfony\Component\Mime\Part\Multipart\FormDataPart($fields);
     }
-    private function getHeaders(\_PhpScopera40fc53e636b\Symfony\Component\HttpFoundation\Request $request) : array
+    private function getHeaders(\_PhpScoper4edd80b4ab80\Symfony\Component\HttpFoundation\Request $request) : array
     {
         $headers = [];
         foreach ($request->headers as $key => $value) {
