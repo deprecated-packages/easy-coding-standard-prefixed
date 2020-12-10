@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8dd2e1c340b1\Symfony\Component\HttpFoundation\File\Exception;
+namespace _PhpScopera1a51450b61d\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an error occurred during file upload.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class UploadException extends \_PhpScoper8dd2e1c340b1\Symfony\Component\HttpFoundation\File\Exception\FileException
+class UploadException extends \_PhpScopera1a51450b61d\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
 }

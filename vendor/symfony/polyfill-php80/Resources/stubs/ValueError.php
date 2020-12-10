@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper8dd2e1c340b1;
+namespace _PhpScopera1a51450b61d;
 
 class ValueError extends \Error
 {
 }
-\class_alias('_PhpScoper8dd2e1c340b1\\ValueError', 'ValueError', \false);
+\class_alias('_PhpScopera1a51450b61d\\ValueError', 'ValueError', \false);

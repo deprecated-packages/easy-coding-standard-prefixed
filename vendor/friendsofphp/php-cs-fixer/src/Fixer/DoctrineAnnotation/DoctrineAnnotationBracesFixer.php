@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Fixer\DoctrineAnnotation;
 
-use _PhpScoper8dd2e1c340b1\Doctrine\Common\Annotations\DocLexer;
+use _PhpScopera1a51450b61d\Doctrine\Common\Annotations\DocLexer;
 use PhpCsFixer\AbstractDoctrineAnnotationFixer;
 use PhpCsFixer\Doctrine\Annotation\Token;
 use PhpCsFixer\Doctrine\Annotation\Tokens;
@@ -52,35 +52,35 @@ final class DoctrineAnnotationBracesFixer extends \PhpCsFixer\AbstractDoctrineAn
     private function addBracesToAnnotations(\PhpCsFixer\Doctrine\Annotation\Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
-            if (!$tokens[$index]->isType(\_PhpScoper8dd2e1c340b1\Doctrine\Common\Annotations\DocLexer::T_AT)) {
+            if (!$tokens[$index]->isType(\_PhpScopera1a51450b61d\Doctrine\Common\Annotations\DocLexer::T_AT)) {
                 continue;
             }
             $braceIndex = $tokens->getNextMeaningfulToken($index + 1);
-            if (null !== $braceIndex && $tokens[$braceIndex]->isType(\_PhpScoper8dd2e1c340b1\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS)) {
+            if (null !== $braceIndex && $tokens[$braceIndex]->isType(\_PhpScopera1a51450b61d\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS)) {
                 continue;
             }
-            $tokens->insertAt($index + 2, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper8dd2e1c340b1\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS, '('));
-            $tokens->insertAt($index + 3, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper8dd2e1c340b1\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, ')'));
+            $tokens->insertAt($index + 2, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScopera1a51450b61d\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS, '('));
+            $tokens->insertAt($index + 3, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScopera1a51450b61d\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, ')'));
         }
     }
     private function removesBracesFromAnnotations(\PhpCsFixer\Doctrine\Annotation\Tokens $tokens)
     {
         for ($index = 0, $max = \count($tokens); $index < $max; ++$index) {
-            if (!$tokens[$index]->isType(\_PhpScoper8dd2e1c340b1\Doctrine\Common\Annotations\DocLexer::T_AT)) {
+            if (!$tokens[$index]->isType(\_PhpScopera1a51450b61d\Doctrine\Common\Annotations\DocLexer::T_AT)) {
                 continue;
             }
             $openBraceIndex = $tokens->getNextMeaningfulToken($index + 1);
             if (null === $openBraceIndex) {
                 continue;
             }
-            if (!$tokens[$openBraceIndex]->isType(\_PhpScoper8dd2e1c340b1\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS)) {
+            if (!$tokens[$openBraceIndex]->isType(\_PhpScopera1a51450b61d\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS)) {
                 continue;
             }
             $closeBraceIndex = $tokens->getNextMeaningfulToken($openBraceIndex);
             if (null === $closeBraceIndex) {
                 continue;
             }
-            if (!$tokens[$closeBraceIndex]->isType(\_PhpScoper8dd2e1c340b1\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS)) {
+            if (!$tokens[$closeBraceIndex]->isType(\_PhpScopera1a51450b61d\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS)) {
                 continue;
             }
             for ($currentIndex = $index + 2; $currentIndex <= $closeBraceIndex; ++$currentIndex) {
