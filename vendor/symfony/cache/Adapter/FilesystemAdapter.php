@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper17bb67c99ade\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperb458b528613f\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper17bb67c99ade\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoper17bb67c99ade\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper17bb67c99ade\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper17bb67c99ade\Symfony\Component\Cache\Traits\FilesystemTrait;
-class FilesystemAdapter extends \_PhpScoper17bb67c99ade\Symfony\Component\Cache\Adapter\AbstractAdapter implements \_PhpScoper17bb67c99ade\Symfony\Component\Cache\PruneableInterface
+use _PhpScoperb458b528613f\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScoperb458b528613f\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperb458b528613f\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoperb458b528613f\Symfony\Component\Cache\Traits\FilesystemTrait;
+class FilesystemAdapter extends \_PhpScoperb458b528613f\Symfony\Component\Cache\Adapter\AbstractAdapter implements \_PhpScoperb458b528613f\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemTrait;
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \_PhpScoper17bb67c99ade\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \_PhpScoperb458b528613f\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        $this->marshaller = $marshaller ?? new \_PhpScoper17bb67c99ade\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \_PhpScoperb458b528613f\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
     }

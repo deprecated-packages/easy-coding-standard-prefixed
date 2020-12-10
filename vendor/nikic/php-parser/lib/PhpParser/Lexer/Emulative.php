@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper17bb67c99ade\PhpParser\Lexer;
+namespace _PhpScoperb458b528613f\PhpParser\Lexer;
 
-use _PhpScoper17bb67c99ade\PhpParser\Error;
-use _PhpScoper17bb67c99ade\PhpParser\ErrorHandler;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\AttributeEmulator;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\FnTokenEmulator;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\ReverseEmulator;
-use _PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\TokenEmulator;
-use _PhpScoper17bb67c99ade\PhpParser\Parser\Tokens;
-class Emulative extends \_PhpScoper17bb67c99ade\PhpParser\Lexer
+use _PhpScoperb458b528613f\PhpParser\Error;
+use _PhpScoperb458b528613f\PhpParser\ErrorHandler;
+use _PhpScoperb458b528613f\PhpParser\Lexer;
+use _PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\AttributeEmulator;
+use _PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator;
+use _PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator;
+use _PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\FnTokenEmulator;
+use _PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator;
+use _PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator;
+use _PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator;
+use _PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\ReverseEmulator;
+use _PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\TokenEmulator;
+use _PhpScoperb458b528613f\PhpParser\Parser\Tokens;
+class Emulative extends \_PhpScoperb458b528613f\PhpParser\Lexer
 {
     const PHP_7_3 = '7.3dev';
     const PHP_7_4 = '7.4dev';
@@ -34,10 +34,10 @@ class Emulative extends \_PhpScoper17bb67c99ade\PhpParser\Lexer
      */
     public function __construct(array $options = [])
     {
-        $this->targetPhpVersion = $options['phpVersion'] ?? \_PhpScoper17bb67c99ade\PhpParser\Lexer\Emulative::PHP_8_0;
+        $this->targetPhpVersion = $options['phpVersion'] ?? \_PhpScoperb458b528613f\PhpParser\Lexer\Emulative::PHP_8_0;
         unset($options['phpVersion']);
         parent::__construct($options);
-        $emulators = [new \_PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator(), new \_PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\FnTokenEmulator(), new \_PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator(), new \_PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator(), new \_PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator(), new \_PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator(), new \_PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\AttributeEmulator()];
+        $emulators = [new \_PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\FlexibleDocStringEmulator(), new \_PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\FnTokenEmulator(), new \_PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\MatchTokenEmulator(), new \_PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\CoaleseEqualTokenEmulator(), new \_PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\NumericLiteralSeparatorEmulator(), new \_PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\NullsafeTokenEmulator(), new \_PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\AttributeEmulator()];
         // Collect emulators that are relevant for the PHP version we're running
         // and the PHP version we're targeting for emulation.
         foreach ($emulators as $emulator) {
@@ -46,12 +46,12 @@ class Emulative extends \_PhpScoper17bb67c99ade\PhpParser\Lexer
                 $this->emulators[] = $emulator;
             } else {
                 if ($this->isReverseEmulationNeeded($emulatorPhpVersion)) {
-                    $this->emulators[] = new \_PhpScoper17bb67c99ade\PhpParser\Lexer\TokenEmulator\ReverseEmulator($emulator);
+                    $this->emulators[] = new \_PhpScoperb458b528613f\PhpParser\Lexer\TokenEmulator\ReverseEmulator($emulator);
                 }
             }
         }
     }
-    public function startLexing(string $code, \_PhpScoper17bb67c99ade\PhpParser\ErrorHandler $errorHandler = null)
+    public function startLexing(string $code, \_PhpScoperb458b528613f\PhpParser\ErrorHandler $errorHandler = null)
     {
         $emulators = \array_filter($this->emulators, function ($emulator) use($code) {
             return $emulator->isEmulationNeeded($code);
@@ -65,7 +65,7 @@ class Emulative extends \_PhpScoper17bb67c99ade\PhpParser\Lexer
         foreach ($emulators as $emulator) {
             $code = $emulator->preprocessCode($code, $this->patches);
         }
-        $collector = new \_PhpScoper17bb67c99ade\PhpParser\ErrorHandler\Collecting();
+        $collector = new \_PhpScoperb458b528613f\PhpParser\ErrorHandler\Collecting();
         parent::startLexing($code, $collector);
         $this->sortPatches();
         $this->fixupTokens();

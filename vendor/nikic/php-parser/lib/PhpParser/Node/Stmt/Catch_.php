@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper17bb67c99ade\PhpParser\Node\Stmt;
+namespace _PhpScoperb458b528613f\PhpParser\Node\Stmt;
 
-use _PhpScoper17bb67c99ade\PhpParser\Node;
-use _PhpScoper17bb67c99ade\PhpParser\Node\Expr;
-class Catch_ extends \_PhpScoper17bb67c99ade\PhpParser\Node\Stmt
+use _PhpScoperb458b528613f\PhpParser\Node;
+use _PhpScoperb458b528613f\PhpParser\Node\Expr;
+class Catch_ extends \_PhpScoperb458b528613f\PhpParser\Node\Stmt
 {
     /** @var Node\Name[] Types of exceptions to catch */
     public $types;
@@ -21,7 +21,7 @@ class Catch_ extends \_PhpScoper17bb67c99ade\PhpParser\Node\Stmt
      * @param Node\Stmt[]           $stmts      Statements
      * @param array                 $attributes Additional attributes
      */
-    public function __construct(array $types, \_PhpScoper17bb67c99ade\PhpParser\Node\Expr\Variable $var = null, array $stmts = [], array $attributes = [])
+    public function __construct(array $types, \_PhpScoperb458b528613f\PhpParser\Node\Expr\Variable $var = null, array $stmts = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->types = $types;

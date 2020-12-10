@@ -11,12 +11,12 @@
  */
 namespace PhpCsFixer;
 
-use _PhpScoper17bb67c99ade\Symfony\Component\Finder\Finder as BaseFinder;
+use _PhpScoperb458b528613f\Symfony\Component\Finder\Finder as BaseFinder;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-class Finder extends \_PhpScoper17bb67c99ade\Symfony\Component\Finder\Finder
+class Finder extends \_PhpScoperb458b528613f\Symfony\Component\Finder\Finder
 {
     public function __construct()
     {

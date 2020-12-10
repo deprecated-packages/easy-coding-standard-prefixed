@@ -11,7 +11,7 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_key_exists;
 use function count;
 use const T_CONST;
-use const _PhpScoper17bb67c99ade\T_DOC_COMMENT_WHITESPACE;
+use const _PhpScoperb458b528613f\T_DOC_COMMENT_WHITESPACE;
 use const T_WHITESPACE;
 class UselessConstantTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
