@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\ValueObject;
 
-use _PhpScoper9ef667a5e42c\Nette\Utils\Arrays;
-use _PhpScoper9ef667a5e42c\Nette\Utils\Strings;
+use _PhpScoper6250f8d25076\Nette\Utils\Arrays;
+use _PhpScoper6250f8d25076\Nette\Utils\Strings;
 use Symplify\ComposerJsonManipulator\Sorter\ComposerPackageSorter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -285,7 +285,7 @@ final class ComposerJson
         if ($this->name === null) {
             return null;
         }
-        return \_PhpScoper9ef667a5e42c\Nette\Utils\Strings::after($this->name, '/', -1);
+        return \_PhpScoper6250f8d25076\Nette\Utils\Strings::after($this->name, '/', -1);
     }
     /**
      * @return string[]
@@ -325,11 +325,20 @@ final class ComposerJson
         if ($this->license !== null) {
             $array[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::LICENSE] = $this->license;
         }
+        if ($this->authors !== null) {
+            $array[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTHORS] = $this->authors;
+        }
+        if ($this->type !== null) {
+            $array[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::TYPE] = $this->type;
+        }
         if ($this->require !== []) {
             $array[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REQUIRE] = $this->require;
         }
         if ($this->requireDev !== []) {
             $array[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REQUIRE_DEV] = $this->requireDev;
+        }
+        if ($this->conflicting !== []) {
+            $array[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::CONFLICTING] = $this->conflicting;
         }
         if ($this->autoload !== []) {
             $array[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTOLOAD] = $this->autoload;
@@ -499,7 +508,7 @@ final class ComposerJson
     private function getAutoloadDirectories() : array
     {
         $autoloadDirectories = \array_merge($this->getPsr4AndClassmapDirectories(), $this->getPsr4AndClassmapDevDirectories());
-        return \_PhpScoper9ef667a5e42c\Nette\Utils\Arrays::flatten($autoloadDirectories);
+        return \_PhpScoper6250f8d25076\Nette\Utils\Arrays::flatten($autoloadDirectories);
     }
     /**
      * @return string[]

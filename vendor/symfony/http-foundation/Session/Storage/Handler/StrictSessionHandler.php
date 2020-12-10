@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9ef667a5e42c\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper6250f8d25076\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Adds basic `SessionUpdateTimestampHandlerInterface` behaviors to another `SessionHandlerInterface`.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class StrictSessionHandler extends \_PhpScoper9ef667a5e42c\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class StrictSessionHandler extends \_PhpScoper6250f8d25076\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $handler;
     private $doDestroy;

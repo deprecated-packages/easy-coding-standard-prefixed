@@ -5,6 +5,9 @@
     "require": {
         "php": ">=7.3"
     },
+    "conflicting": [
+        "symplify/easy-coding-standard"
+    ],
     "bin": [
         "bin/ecs"
     ],

@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function strtolower;
 use const T_DOUBLE_COLON;
-use const _PhpScoper9ef667a5e42c\T_OPEN_PARENTHESIS;
+use const _PhpScoper6250f8d25076\T_OPEN_PARENTHESIS;
 use const T_STATIC;
 use const T_STRING;
 class DisallowLateStaticBindingForConstantsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
