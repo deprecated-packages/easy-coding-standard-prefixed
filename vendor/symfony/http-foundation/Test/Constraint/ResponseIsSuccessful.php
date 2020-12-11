@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3b1d73f28e67\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace _PhpScoper23ef26a4fb01\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use _PhpScoper3b1d73f28e67\PHPUnit\Framework\Constraint\Constraint;
-use _PhpScoper3b1d73f28e67\Symfony\Component\HttpFoundation\Response;
-final class ResponseIsSuccessful extends \_PhpScoper3b1d73f28e67\PHPUnit\Framework\Constraint\Constraint
+use _PhpScoper23ef26a4fb01\PHPUnit\Framework\Constraint\Constraint;
+use _PhpScoper23ef26a4fb01\Symfony\Component\HttpFoundation\Response;
+final class ResponseIsSuccessful extends \_PhpScoper23ef26a4fb01\PHPUnit\Framework\Constraint\Constraint
 {
     /**
      * {@inheritdoc}
