@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf7b66f9e3817\PhpParser\Node\Stmt;
+namespace _PhpScoperea337ed74749\PhpParser\Node\Stmt;
 
-use _PhpScoperf7b66f9e3817\PhpParser\Node;
-class For_ extends \_PhpScoperf7b66f9e3817\PhpParser\Node\Stmt
+use _PhpScoperea337ed74749\PhpParser\Node;
+class For_ extends \_PhpScoperea337ed74749\PhpParser\Node\Stmt
 {
     /** @var Node\Expr[] Init expressions */
     public $init;

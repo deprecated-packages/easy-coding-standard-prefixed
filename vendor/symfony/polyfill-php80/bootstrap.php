@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperf7b66f9e3817;
+namespace _PhpScoperea337ed74749;
 
 /*
  * This file is part of the Symfony package.
@@ -10,24 +10,24 @@ namespace _PhpScoperf7b66f9e3817;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoperf7b66f9e3817\Symfony\Polyfill\Php80 as p;
+use _PhpScoperea337ed74749\Symfony\Polyfill\Php80 as p;
 if (\PHP_VERSION_ID < 80000) {
     if (!\function_exists('fdiv')) {
         function fdiv(float $dividend, float $divisor) : float
         {
-            return \_PhpScoperf7b66f9e3817\Symfony\Polyfill\Php80\Php80::fdiv($dividend, $divisor);
+            return \_PhpScoperea337ed74749\Symfony\Polyfill\Php80\Php80::fdiv($dividend, $divisor);
         }
     }
     if (!\function_exists('preg_last_error_msg')) {
         function preg_last_error_msg() : string
         {
-            return \_PhpScoperf7b66f9e3817\Symfony\Polyfill\Php80\Php80::preg_last_error_msg();
+            return \_PhpScoperea337ed74749\Symfony\Polyfill\Php80\Php80::preg_last_error_msg();
         }
     }
     if (!\function_exists('str_contains')) {
         function str_contains(string $haystack, string $needle) : bool
         {
-            return \_PhpScoperf7b66f9e3817\Symfony\Polyfill\Php80\Php80::str_contains($haystack, $needle);
+            return \_PhpScoperea337ed74749\Symfony\Polyfill\Php80\Php80::str_contains($haystack, $needle);
         }
     }
     if (!\defined('FILTER_VALIDATE_BOOL') && \defined('FILTER_VALIDATE_BOOLEAN')) {
@@ -36,7 +36,7 @@ if (\PHP_VERSION_ID < 80000) {
     if (!\function_exists('get_debug_type')) {
         function get_debug_type($value) : string
         {
-            return \_PhpScoperf7b66f9e3817\Symfony\Polyfill\Php80\Php80::get_debug_type($value);
+            return \_PhpScoperea337ed74749\Symfony\Polyfill\Php80\Php80::get_debug_type($value);
         }
     }
 }

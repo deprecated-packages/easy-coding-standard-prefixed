@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperf7b66f9e3817\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoperea337ed74749\Doctrine\Tests\Common\Annotations\Fixtures;
 
 class NoAnnotation
 {

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf7b66f9e3817\Symfony\Component\DependencyInjection\Loader;
+namespace _PhpScoperea337ed74749\Symfony\Component\DependencyInjection\Loader;
 
-use _PhpScoperf7b66f9e3817\Symfony\Component\Config\Loader\Loader;
-use _PhpScoperf7b66f9e3817\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperea337ed74749\Symfony\Component\Config\Loader\Loader;
+use _PhpScoperea337ed74749\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ClosureLoader loads service definitions from a PHP closure.
  *
@@ -19,10 +19,10 @@ use _PhpScoperf7b66f9e3817\Symfony\Component\DependencyInjection\ContainerBuilde
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ClosureLoader extends \_PhpScoperf7b66f9e3817\Symfony\Component\Config\Loader\Loader
+class ClosureLoader extends \_PhpScoperea337ed74749\Symfony\Component\Config\Loader\Loader
 {
     private $container;
-    public function __construct(\_PhpScoperf7b66f9e3817\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function __construct(\_PhpScoperea337ed74749\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->container = $container;
     }
