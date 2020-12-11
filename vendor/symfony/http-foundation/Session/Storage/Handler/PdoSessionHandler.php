@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperea337ed74749\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Session handler using a PDO connection to read and write data.
@@ -37,7 +37,7 @@ namespace _PhpScoperea337ed74749\Symfony\Component\HttpFoundation\Session\Storag
  * @author Michael Williams <michael.williams@funsational.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class PdoSessionHandler extends \_PhpScoperea337ed74749\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class PdoSessionHandler extends \_PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     /**
      * No locking is done. This means sessions are prone to loss of data due to
@@ -153,7 +153,7 @@ class PdoSessionHandler extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     {
         if ($pdoOrDsn instanceof \PDO) {
             if (\PDO::ERRMODE_EXCEPTION !== $pdoOrDsn->getAttribute(\PDO::ATTR_ERRMODE)) {
-                throw new \InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION)).', __CLASS__));
+                throw new \InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION))', __CLASS__));
             }
             $this->pdo = $pdoOrDsn;
             $this->driver = $this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
@@ -194,7 +194,7 @@ class PdoSessionHandler extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
                 // - trailing space removal
                 // - case-insensitivity
                 // - language processing like é == e
-                $sql = "CREATE TABLE {$this->table} ({$this->idCol} VARBINARY(128) NOT NULL PRIMARY KEY, {$this->dataCol} BLOB NOT NULL, {$this->lifetimeCol} INTEGER UNSIGNED NOT NULL, {$this->timeCol} INTEGER UNSIGNED NOT NULL) COLLATE utf8mb4_bin, ENGINE = InnoDB";
+                $sql = "CREATE TABLE {$this->table} ({$this->idCol} VARBINARY(128) NOT NULL PRIMARY KEY, {$this->dataCol} BLOB NOT NULL, {$this->lifetimeCol} INTEGER UNSIGNED NOT NULL, {$this->timeCol} INTEGER UNSIGNED NOT NULL) COLLATE utf8_bin, ENGINE = InnoDB";
                 break;
             case 'sqlite':
                 $sql = "CREATE TABLE {$this->table} ({$this->idCol} TEXT NOT NULL PRIMARY KEY, {$this->dataCol} BLOB NOT NULL, {$this->lifetimeCol} INTEGER NOT NULL, {$this->timeCol} INTEGER NOT NULL)";
@@ -266,7 +266,7 @@ class PdoSessionHandler extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     /**
      * {@inheritdoc}
      */
-    protected function doDestroy(string $sessionId)
+    protected function doDestroy($sessionId)
     {
         // delete the record associated with this id
         $sql = "DELETE FROM {$this->table} WHERE {$this->idCol} = :id";
@@ -283,7 +283,7 @@ class PdoSessionHandler extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     /**
      * {@inheritdoc}
      */
-    protected function doWrite(string $sessionId, string $data)
+    protected function doWrite($sessionId, $data)
     {
         $maxlifetime = (int) \ini_get('session.gc_maxlifetime');
         try {
@@ -403,7 +403,7 @@ class PdoSessionHandler extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
             $this->password = $params['pass'];
         }
         if (!isset($params['scheme'])) {
-            throw new \InvalidArgumentException('URLs without scheme are not supported to configure the PdoSessionHandler.');
+            throw new \InvalidArgumentException('URLs without scheme are not supported to configure the PdoSessionHandler');
         }
         $driverAliasMap = [
             'mssql' => 'sqlsrv',
@@ -524,9 +524,11 @@ class PdoSessionHandler extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
      * We need to make sure we do not return session data that is already considered garbage according
      * to the session.gc_maxlifetime setting because gc() is called after read() and only sometimes.
      *
-     * @return string
+     * @param string $sessionId Session ID
+     *
+     * @return string The session data
      */
-    protected function doRead(string $sessionId)
+    protected function doRead($sessionId)
     {
         if (self::LOCK_ADVISORY === $this->lockMode) {
             $this->unlockStatements[] = $this->doAdvisoryLock($sessionId);
@@ -750,10 +752,10 @@ class PdoSessionHandler extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
             $mergeStmt->bindParam(2, $sessionId, \PDO::PARAM_STR);
             $mergeStmt->bindParam(3, $data, \PDO::PARAM_LOB);
             $mergeStmt->bindValue(4, \time() + $maxlifetime, \PDO::PARAM_INT);
-            $mergeStmt->bindValue(5, \time(), \PDO::PARAM_INT);
-            $mergeStmt->bindParam(6, $data, \PDO::PARAM_LOB);
-            $mergeStmt->bindValue(7, \time() + $maxlifetime, \PDO::PARAM_INT);
-            $mergeStmt->bindValue(8, \time(), \PDO::PARAM_INT);
+            $mergeStmt->bindValue(4, \time(), \PDO::PARAM_INT);
+            $mergeStmt->bindParam(5, $data, \PDO::PARAM_LOB);
+            $mergeStmt->bindValue(6, \time() + $maxlifetime, \PDO::PARAM_INT);
+            $mergeStmt->bindValue(6, \time(), \PDO::PARAM_INT);
         } else {
             $mergeStmt->bindParam(':id', $sessionId, \PDO::PARAM_STR);
             $mergeStmt->bindParam(':data', $data, \PDO::PARAM_LOB);

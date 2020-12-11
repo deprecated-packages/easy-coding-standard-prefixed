@@ -1,9 +1,9 @@
 <?php
 
-namespace _PhpScoperea337ed74749;
+namespace _PhpScopere4fa57261c04;
 
-use _PhpScoperea337ed74749\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
-use _PhpScoperea337ed74749\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScopere4fa57261c04\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
+use _PhpScopere4fa57261c04\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
 /**
  * @Route("foo")
  * @Template
@@ -15,4 +15,4 @@ class AnnotationsTestsFixturesNonNamespacedClass
  * @Route("foo")
  * @Template
  */
-\class_alias('_PhpScoperea337ed74749\\AnnotationsTestsFixturesNonNamespacedClass', 'AnnotationsTestsFixturesNonNamespacedClass', \false);
+\class_alias('_PhpScopere4fa57261c04\\AnnotationsTestsFixturesNonNamespacedClass', 'AnnotationsTestsFixturesNonNamespacedClass', \false);

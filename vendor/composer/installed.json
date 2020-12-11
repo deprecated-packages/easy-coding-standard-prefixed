@@ -38,7 +38,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\PackageVersions\\": "src\/PackageVersions"
+                    "_PhpScopere4fa57261c04\\PackageVersions\\": "src\/PackageVersions"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -103,7 +103,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Composer\\Semver\\": "src"
+                    "_PhpScopere4fa57261c04\\Composer\\Semver\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -168,7 +168,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Composer\\XdebugHandler\\": "src"
+                    "_PhpScopere4fa57261c04\\Composer\\XdebugHandler\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -226,7 +226,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\": "src\/"
+                    "_PhpScopere4fa57261c04\\Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -299,7 +299,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations\/"
+                    "_PhpScopere4fa57261c04\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -368,7 +368,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer\/"
+                    "_PhpScopere4fa57261c04\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -531,7 +531,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Jean85\\": "src\/"
+                    "_PhpScopere4fa57261c04\\Jean85\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -852,17 +852,17 @@
         },
         {
             "name": "nikic\/php-parser",
-            "version": "v4.10.2",
-            "version_normalized": "4.10.2.0",
+            "version": "v4.10.3",
+            "version_normalized": "4.10.3.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/nikic\/PHP-Parser.git",
-                "reference": "658f1be311a230e0907f5dfe0213742aff0596de"
+                "reference": "dbe56d23de8fcb157bbc0cfb3ad7c7de0cfb0984"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/nikic\/PHP-Parser\/zipball\/658f1be311a230e0907f5dfe0213742aff0596de",
-                "reference": "658f1be311a230e0907f5dfe0213742aff0596de",
+                "url": "https:\/\/api.github.com\/repos\/nikic\/PHP-Parser\/zipball\/dbe56d23de8fcb157bbc0cfb3ad7c7de0cfb0984",
+                "reference": "dbe56d23de8fcb157bbc0cfb3ad7c7de0cfb0984",
                 "shasum": ""
             },
             "require": {
@@ -873,7 +873,7 @@
                 "ircmaxell\/php-yacc": "^0.0.7",
                 "phpunit\/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
             },
-            "time": "2020-09-26T10:30:38+00:00",
+            "time": "2020-12-03T17:45:45+00:00",
             "bin": [
                 "bin\/php-parse"
             ],
@@ -886,7 +886,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\PhpParser\\": "lib\/PhpParser"
+                    "_PhpScopere4fa57261c04\\PhpParser\\": "lib\/PhpParser"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -905,7 +905,7 @@
             ],
             "support": {
                 "issues": "https:\/\/github.com\/nikic\/PHP-Parser\/issues",
-                "source": "https:\/\/github.com\/nikic\/PHP-Parser\/tree\/v4.10.2"
+                "source": "https:\/\/github.com\/nikic\/PHP-Parser\/tree\/v4.10.3"
             },
             "install-path": "..\/nikic\/php-parser"
         },
@@ -1057,7 +1057,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\PHPStan\\PhpDocParser\\": [
+                    "_PhpScopere4fa57261c04\\PHPStan\\PhpDocParser\\": [
                         "src\/"
                     ]
                 }
@@ -1101,7 +1101,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Psr\\Cache\\": "src\/"
+                    "_PhpScopere4fa57261c04\\Psr\\Cache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1154,7 +1154,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Psr\\Container\\": "src\/"
+                    "_PhpScopere4fa57261c04\\Psr\\Container\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1202,7 +1202,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Psr\\Log\\": "\/Psr\/Log\/"
+                    "_PhpScopere4fa57261c04\\Psr\\Log\\": "\/Psr\/Log\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1255,7 +1255,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Psr\\SimpleCache\\": "src\/"
+                    "_PhpScopere4fa57261c04\\Psr\\SimpleCache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1283,31 +1283,31 @@
         },
         {
             "name": "sebastian\/diff",
-            "version": "3.0.2",
-            "version_normalized": "3.0.2.0",
+            "version": "4.0.3",
+            "version_normalized": "4.0.3.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/sebastianbergmann\/diff.git",
-                "reference": "720fcc7e9b5cf384ea68d9d930d480907a0c1a29"
+                "reference": "ffc949a1a2aae270ea064453d7535b82e4c32092"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/sebastianbergmann\/diff\/zipball\/720fcc7e9b5cf384ea68d9d930d480907a0c1a29",
-                "reference": "720fcc7e9b5cf384ea68d9d930d480907a0c1a29",
+                "url": "https:\/\/api.github.com\/repos\/sebastianbergmann\/diff\/zipball\/ffc949a1a2aae270ea064453d7535b82e4c32092",
+                "reference": "ffc949a1a2aae270ea064453d7535b82e4c32092",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1"
+                "php": ">=7.3"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^7.5 || ^8.0",
-                "symfony\/process": "^2 || ^3.3 || ^4"
+                "phpunit\/phpunit": "^9.3",
+                "symfony\/process": "^4.2 || ^5"
             },
-            "time": "2019-02-04T06:01:07+00:00",
+            "time": "2020-09-28T05:32:55+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "installation-source": "dist",
@@ -1322,12 +1322,12 @@
             ],
             "authors": [
                 {
-                    "name": "Kore Nordmann",
-                    "email": "mail@kore-nordmann.de"
-                },
-                {
                     "name": "Sebastian Bergmann",
                     "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Kore Nordmann",
+                    "email": "mail@kore-nordmann.de"
                 }
             ],
             "description": "Diff implementation",
@@ -1340,8 +1340,14 @@
             ],
             "support": {
                 "issues": "https:\/\/github.com\/sebastianbergmann\/diff\/issues",
-                "source": "https:\/\/github.com\/sebastianbergmann\/diff\/tree\/master"
+                "source": "https:\/\/github.com\/sebastianbergmann\/diff\/tree\/4.0.3"
             },
+            "funding": [
+                {
+                    "url": "https:\/\/github.com\/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
             "install-path": "..\/sebastian\/diff"
         },
         {
@@ -1521,7 +1527,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\Cache\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Cache\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1584,7 +1590,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Contracts\\Cache\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Contracts\\Cache\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1661,7 +1667,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\Config\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Config\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1757,7 +1763,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\Console\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Console\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1819,7 +1825,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\Debug\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Debug\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1900,7 +1906,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\DependencyInjection\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\DependencyInjection\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2042,7 +2048,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\ErrorHandler\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\ErrorHandler\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2119,7 +2125,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\EventDispatcher\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\EventDispatcher\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2178,7 +2184,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Contracts\\EventDispatcher\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Contracts\\EventDispatcher\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2239,7 +2245,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\Filesystem\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Filesystem\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2294,7 +2300,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\Finder\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Finder\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2323,45 +2329,39 @@
         },
         {
             "name": "symfony\/http-foundation",
-            "version": "v5.1.0",
-            "version_normalized": "5.1.0.0",
+            "version": "v4.4.0",
+            "version_normalized": "4.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/http-foundation.git",
-                "reference": "e0d853bddc2b2cfb0d67b0b4496c03fffe1d37fa"
+                "reference": "502040dd2b0cf0a292defeb6145f4d7a4753c99c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/http-foundation\/zipball\/e0d853bddc2b2cfb0d67b0b4496c03fffe1d37fa",
-                "reference": "e0d853bddc2b2cfb0d67b0b4496c03fffe1d37fa",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/http-foundation\/zipball\/502040dd2b0cf0a292defeb6145f4d7a4753c99c",
+                "reference": "502040dd2b0cf0a292defeb6145f4d7a4753c99c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.5",
-                "symfony\/deprecation-contracts": "^2.1",
-                "symfony\/polyfill-mbstring": "~1.1",
-                "symfony\/polyfill-php80": "^1.15"
+                "php": "^7.1.3",
+                "symfony\/mime": "^4.3|^5.0",
+                "symfony\/polyfill-mbstring": "~1.1"
             },
             "require-dev": {
                 "predis\/predis": "~1.0",
-                "symfony\/cache": "^4.4|^5.0",
-                "symfony\/expression-language": "^4.4|^5.0",
-                "symfony\/mime": "^4.4|^5.0"
+                "symfony\/expression-language": "^3.4|^4.0|^5.0"
             },
-            "suggest": {
-                "symfony\/mime": "To use the file extension guesser"
-            },
-            "time": "2020-05-24T12:18:07+00:00",
+            "time": "2019-11-17T10:10:42+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.1-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\HttpFoundation\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\HttpFoundation\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2384,22 +2384,8 @@
             "description": "Symfony HttpFoundation Component",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/http-foundation\/tree\/5.1"
+                "source": "https:\/\/github.com\/symfony\/http-foundation\/tree\/4.4"
             },
-            "funding": [
-                {
-                    "url": "https:\/\/symfony.com\/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https:\/\/github.com\/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https:\/\/tidelift.com\/funding\/github\/packagist\/symfony\/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "install-path": "..\/symfony\/http-foundation"
         },
         {
@@ -2471,7 +2457,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\HttpKernel\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\HttpKernel\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2497,6 +2483,71 @@
                 "source": "https:\/\/github.com\/symfony\/http-kernel\/tree\/v4.4.0"
             },
             "install-path": "..\/symfony\/http-kernel"
+        },
+        {
+            "name": "symfony\/mime",
+            "version": "v4.3.0",
+            "version_normalized": "4.3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/symfony\/mime.git",
+                "reference": "0b166aee243364cd9de05755d2e9651876090abb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/mime\/zipball\/0b166aee243364cd9de05755d2e9651876090abb",
+                "reference": "0b166aee243364cd9de05755d2e9651876090abb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony\/polyfill-intl-idn": "^1.10",
+                "symfony\/polyfill-mbstring": "^1.0"
+            },
+            "require-dev": {
+                "egulias\/email-validator": "^2.0",
+                "symfony\/dependency-injection": "~3.4|^4.1"
+            },
+            "time": "2019-05-22T13:16:28+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Mime\\": ""
+                },
+                "exclude-from-classmap": [
+                    "\/Tests\/"
+                ]
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https:\/\/symfony.com\/contributors"
+                }
+            ],
+            "description": "A library to manipulate MIME messages",
+            "homepage": "https:\/\/symfony.com",
+            "keywords": [
+                "mime",
+                "mime-type"
+            ],
+            "support": {
+                "source": "https:\/\/github.com\/symfony\/mime\/tree\/4.3"
+            },
+            "install-path": "..\/symfony\/mime"
         },
         {
             "name": "symfony\/options-resolver",
@@ -2526,7 +2577,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\OptionsResolver\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\OptionsResolver\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2586,7 +2637,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Polyfill\\Ctype\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Polyfill\\Ctype\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2620,6 +2671,165 @@
             "install-path": "..\/symfony\/polyfill-ctype"
         },
         {
+            "name": "symfony\/polyfill-intl-idn",
+            "version": "v1.20.0",
+            "version_normalized": "1.20.0.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/symfony\/polyfill-intl-idn.git",
+                "reference": "3b75acd829741c768bc8b1f84eb33265e7cc5117"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-intl-idn\/zipball\/3b75acd829741c768bc8b1f84eb33265e7cc5117",
+                "reference": "3b75acd829741c768bc8b1f84eb33265e7cc5117",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "symfony\/polyfill-intl-normalizer": "^1.10",
+                "symfony\/polyfill-php72": "^1.10"
+            },
+            "suggest": {
+                "ext-intl": "For best performance"
+            },
+            "time": "2020-10-23T14:02:19+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.20-dev"
+                },
+                "thanks": {
+                    "name": "symfony\/polyfill",
+                    "url": "https:\/\/github.com\/symfony\/polyfill"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "_PhpScopere4fa57261c04\\Symfony\\Polyfill\\Intl\\Idn\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Laurent Bassin",
+                    "email": "laurent@bassin.info"
+                },
+                {
+                    "name": "Trevor Rowbotham",
+                    "email": "trevor.rowbotham@pm.me"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https:\/\/symfony.com\/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
+            "homepage": "https:\/\/symfony.com",
+            "keywords": [
+                "compatibility",
+                "idn",
+                "intl",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https:\/\/github.com\/symfony\/polyfill-intl-idn\/tree\/v1.20.0"
+            },
+            "funding": [
+                {
+                    "url": "https:\/\/symfony.com\/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https:\/\/github.com\/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https:\/\/tidelift.com\/funding\/github\/packagist\/symfony\/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "install-path": "..\/symfony\/polyfill-intl-idn"
+        },
+        {
+            "name": "symfony\/polyfill-intl-normalizer",
+            "version": "v1.10.0",
+            "version_normalized": "1.10.0.0",
+            "source": {
+                "type": "git",
+                "url": "https:\/\/github.com\/symfony\/polyfill-intl-normalizer.git",
+                "reference": "f8ed52909fc049b42a772c64ec1e6b31792abad6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-intl-normalizer\/zipball\/f8ed52909fc049b42a772c64ec1e6b31792abad6",
+                "reference": "f8ed52909fc049b42a772c64ec1e6b31792abad6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-intl": "For best performance"
+            },
+            "time": "2018-09-21T06:26:08+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "_PhpScopere4fa57261c04\\Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources\/stubs"
+                ]
+            },
+            "notification-url": "https:\/\/packagist.org\/downloads\/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https:\/\/symfony.com\/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's Normalizer class and related functions",
+            "homepage": "https:\/\/symfony.com",
+            "keywords": [
+                "compatibility",
+                "intl",
+                "normalizer",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https:\/\/github.com\/symfony\/polyfill-intl-normalizer\/tree\/master"
+            },
+            "install-path": "..\/symfony\/polyfill-intl-normalizer"
+        },
+        {
             "name": "symfony\/polyfill-mbstring",
             "version": "v1.1.0",
             "version_normalized": "1.1.0.0",
@@ -2650,7 +2860,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Polyfill\\Mbstring\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Polyfill\\Mbstring\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2713,7 +2923,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Polyfill\\Php70\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Polyfill\\Php70\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2751,33 +2961,33 @@
         },
         {
             "name": "symfony\/polyfill-php72",
-            "version": "v1.4.0",
-            "version_normalized": "1.4.0.0",
+            "version": "v1.10.0",
+            "version_normalized": "1.10.0.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/polyfill-php72.git",
-                "reference": "d3a71580c1e2cab33b6d705f0ec40e9015e14d5c"
+                "reference": "9050816e2ca34a8e916c3a0ae8b9c2fccf68b631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-php72\/zipball\/d3a71580c1e2cab33b6d705f0ec40e9015e14d5c",
-                "reference": "d3a71580c1e2cab33b6d705f0ec40e9015e14d5c",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-php72\/zipball\/9050816e2ca34a8e916c3a0ae8b9c2fccf68b631",
+                "reference": "9050816e2ca34a8e916c3a0ae8b9c2fccf68b631",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2017-06-09T08:25:21+00:00",
+            "time": "2018-09-21T13:07:52+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Polyfill\\Php72\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Polyfill\\Php72\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2806,7 +3016,6 @@
                 "shim"
             ],
             "support": {
-                "issues": "https:\/\/github.com\/symfony\/polyfill-php72\/issues",
                 "source": "https:\/\/github.com\/symfony\/polyfill-php72\/tree\/master"
             },
             "install-path": "..\/symfony\/polyfill-php72"
@@ -2839,7 +3048,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Polyfill\\Php73\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Polyfill\\Php73\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2900,7 +3109,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Polyfill\\Php80\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Polyfill\\Php80\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2982,7 +3191,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\Process\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Process\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3041,7 +3250,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Contracts\\Service\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Contracts\\Service\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -3101,7 +3310,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\Stopwatch\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Stopwatch\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3130,46 +3339,47 @@
         },
         {
             "name": "symfony\/var-dumper",
-            "version": "v5.0.0",
-            "version_normalized": "5.0.0.0",
+            "version": "v4.4.0",
+            "version_normalized": "4.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/var-dumper.git",
-                "reference": "956b8b6e4c52186695f592286414601abfcec284"
+                "reference": "eade2890f8b0eeb279b6cf41b50a10007294490f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/var-dumper\/zipball\/956b8b6e4c52186695f592286414601abfcec284",
-                "reference": "956b8b6e4c52186695f592286414601abfcec284",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/var-dumper\/zipball\/eade2890f8b0eeb279b6cf41b50a10007294490f",
+                "reference": "eade2890f8b0eeb279b6cf41b50a10007294490f",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.5",
-                "symfony\/polyfill-mbstring": "~1.0"
+                "php": "^7.1.3",
+                "symfony\/polyfill-mbstring": "~1.0",
+                "symfony\/polyfill-php72": "~1.5"
             },
             "conflict": {
-                "phpunit\/phpunit": "<5.4.3",
-                "symfony\/console": "<4.4"
+                "phpunit\/phpunit": "<4.8.35|<5.4.3,>=5.0",
+                "symfony\/console": "<3.4"
             },
             "require-dev": {
                 "ext-iconv": "*",
-                "symfony\/console": "^4.4|^5.0",
+                "symfony\/console": "^3.4|^4.0|^5.0",
                 "symfony\/process": "^4.4|^5.0",
-                "twig\/twig": "^2.4|^3.0"
+                "twig\/twig": "^1.34|^2.4|^3.0"
             },
             "suggest": {
                 "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony\/polyfill-iconv in case ext-iconv cannot be used).",
                 "ext-intl": "To show region name in time zone dump",
                 "symfony\/console": "To use the ServerDumpCommand and\/or the bin\/var-dump-server script"
             },
-            "time": "2019-11-18T17:27:11+00:00",
+            "time": "2019-11-12T14:51:11+00:00",
             "bin": [
                 "Resources\/bin\/var-dump-server"
             ],
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -3178,7 +3388,7 @@
                     "Resources\/functions\/dump.php"
                 ],
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\VarDumper\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\VarDumper\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3205,7 +3415,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/var-dumper\/tree\/v5.0.0"
+                "source": "https:\/\/github.com\/symfony\/var-dumper\/tree\/4.4"
             },
             "install-path": "..\/symfony\/var-dumper"
         },
@@ -3240,7 +3450,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\VarExporter\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\VarExporter\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3313,7 +3523,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoperea337ed74749\\Symfony\\Component\\Yaml\\": ""
+                    "_PhpScopere4fa57261c04\\Symfony\\Component\\Yaml\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3347,7 +3557,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/autowire-array-parameter",
-                "reference": "0770f91073783a4af56e23804e3098fa8cca785c"
+                "reference": "5b94a52bbf62eb1ab84e99a845548e25ab39b12c"
             },
             "require": {
                 "nette\/utils": "^3.0",
@@ -3356,7 +3566,7 @@
                 "symplify\/package-builder": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {
@@ -3392,7 +3602,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/coding-standard",
-                "reference": "bbf9ec13f9aa9a3743593ee9bb76afd638617fd1"
+                "reference": "93c33bcc64cddedbc5fc045afdea600b54ab4145"
             },
             "require": {
                 "friendsofphp\/php-cs-fixer": "^2.16",
@@ -3410,7 +3620,7 @@
                 "doctrine\/orm": "^2.7",
                 "nette\/application": "^3.0.7",
                 "nette\/bootstrap": "^3.0",
-                "phpunit\/phpunit": "^8.5|^9.4",
+                "phpunit\/phpunit": "^9.5",
                 "symfony\/framework-bundle": "^4.4|^5.1",
                 "symfony\/http-kernel": "^4.4|^5.1",
                 "symplify\/easy-coding-standard-tester": "dev-master",
@@ -3451,7 +3661,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/composer-json-manipulator",
-                "reference": "fdfaf018fffbe55a26c1aff2f3cbc5856110975a"
+                "reference": "f682db521aa0f7597023c1876995e4393681c0ae"
             },
             "require": {
                 "nette\/utils": "^3.0",
@@ -3464,7 +3674,7 @@
                 "symplify\/smart-file-system": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3500,7 +3710,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/console-color-diff",
-                "reference": "a10a7dbf697202829c4f556520df89b7bdb1f515"
+                "reference": "4c0b38dbb383da58b2e4d4faf2fb9c3d7978bc47"
             },
             "require": {
                 "nette\/utils": "^3.0",
@@ -3512,7 +3722,7 @@
                 "symplify\/package-builder": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {
@@ -3548,7 +3758,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/easy-testing",
-                "reference": "fc8b8d4b7ccb1e610ab598eb56539bdaba1fdaae"
+                "reference": "b46bd7638ffd84e1a6a72757b45c4e51c049ea35"
             },
             "require": {
                 "nette\/utils": "^3.0",
@@ -3559,7 +3769,7 @@
                 "symplify\/symplify-kernel": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3595,7 +3805,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/markdown-diff",
-                "reference": "2467709469f0e2db0133d332c735e9c1f0f1b056"
+                "reference": "c43ae41935693693a5bd83f44fc36a0fe701abb4"
             },
             "require": {
                 "nette\/utils": "^3.0",
@@ -3606,7 +3816,7 @@
                 "symplify\/package-builder": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {
@@ -3642,7 +3852,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/package-builder",
-                "reference": "231b057354234a7e2720134dfd01d42211825ba3"
+                "reference": "f1ff447df233c2f739c2ddde560832d99c19fb28"
             },
             "require": {
                 "nette\/finder": "^2.5",
@@ -3659,7 +3869,7 @@
                 "symplify\/symplify-kernel": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {
@@ -3695,17 +3905,17 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/php-config-printer",
-                "reference": "d76780e6a8bfbce25d69a10f479ba723539c8ee9"
+                "reference": "ad20cea3e02905a294b5e6619523f4b4e4a8339b"
             },
             "require": {
                 "nette\/utils": "^3.0",
-                "nikic\/php-parser": "^4.10.2",
+                "nikic\/php-parser": "^4.10.3",
                 "php": ">=7.3",
                 "symfony\/http-kernel": "^4.4|^5.1",
                 "symplify\/symplify-kernel": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4",
+                "phpunit\/phpunit": "^9.5",
                 "symplify\/easy-testing": "dev-master"
             },
             "type": "library",
@@ -3746,7 +3956,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/rule-doc-generator",
-                "reference": "7037c73e084af6a3eede9d1c106b458eac6a9e01"
+                "reference": "952c75357bb59255913021a693e162ca54c5f6c4"
             },
             "require": {
                 "nette\/neon": "^3.2",
@@ -3761,8 +3971,8 @@
             },
             "require-dev": {
                 "friendsofphp\/php-cs-fixer": "^2.16",
-                "phpstan\/phpstan": "^0.12.57",
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpstan\/phpstan": "^0.12.59",
+                "phpunit\/phpunit": "^9.5"
             },
             "bin": [
                 "bin\/rule-doc-generator"
@@ -3804,7 +4014,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/set-config-resolver",
-                "reference": "6f8cef4e56994d7f899651d3353af11dac1889e9"
+                "reference": "6b0d5aa187556389c80df92cb67a5f862156935f"
             },
             "require": {
                 "nette\/utils": "^3.0",
@@ -3819,7 +4029,7 @@
                 "symplify\/symplify-kernel": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {
@@ -3855,7 +4065,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/skipper",
-                "reference": "0142c1b9bef3fa7d9dd34c239f8bed6801de73c2"
+                "reference": "47bd62ec9aeaa8ec214e4eeecda29b26032a848a"
             },
             "require": {
                 "nette\/utils": "^3.0",
@@ -3869,7 +4079,7 @@
                 "symplify\/symplify-kernel": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {
@@ -3905,7 +4115,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/smart-file-system",
-                "reference": "15091e502b1b3c6a0e8eb609a6d9e34014d54176"
+                "reference": "a2a5b85c5eaacf31496f55efbc393e24cd59ff92"
             },
             "require": {
                 "nette\/utils": "^3.0",
@@ -3915,7 +4125,7 @@
             },
             "require-dev": {
                 "nette\/finder": "^2.5",
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {
@@ -3951,7 +4161,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/symplify-kernel",
-                "reference": "45dcd2d79e4858eb8099ca72f3a21c083d3bc5c4"
+                "reference": "06eef0c69100cb1ea158f02fcf4211779c7886fe"
             },
             "require": {
                 "php": ">=7.3",
@@ -3964,7 +4174,7 @@
                 "symplify\/smart-file-system": "dev-master"
             },
             "require-dev": {
-                "phpunit\/phpunit": "^8.5|^9.4"
+                "phpunit\/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {

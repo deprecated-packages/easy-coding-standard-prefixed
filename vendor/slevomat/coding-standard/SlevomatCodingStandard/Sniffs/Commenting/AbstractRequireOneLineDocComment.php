@@ -8,10 +8,10 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\DocCommentHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function rtrim;
-use const _PhpScoperea337ed74749\T_DOC_COMMENT_CLOSE_TAG;
-use const _PhpScoperea337ed74749\T_DOC_COMMENT_OPEN_TAG;
-use const _PhpScoperea337ed74749\T_DOC_COMMENT_STAR;
-use const _PhpScoperea337ed74749\T_DOC_COMMENT_WHITESPACE;
+use const _PhpScopere4fa57261c04\T_DOC_COMMENT_CLOSE_TAG;
+use const _PhpScopere4fa57261c04\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScopere4fa57261c04\T_DOC_COMMENT_STAR;
+use const _PhpScopere4fa57261c04\T_DOC_COMMENT_WHITESPACE;
 /**
  * @internal
  */

@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoperea337ed74749\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScopere4fa57261c04\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoperea337ed74749\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Autoload;
+use _PhpScopere4fa57261c04\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Autoload;
 trait TraitWithAnnotatedMethod
 {
     /**

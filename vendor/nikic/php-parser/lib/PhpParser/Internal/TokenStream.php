@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperea337ed74749\PhpParser\Internal;
+namespace _PhpScopere4fa57261c04\PhpParser\Internal;
 
 /**
  * Provides operations on token streams, for use by pretty printer.
@@ -46,7 +46,7 @@ class TokenStream
      */
     public function haveBraces(int $startPos, int $endPos) : bool
     {
-        return $this->haveTokenImmediatelyBefore($startPos, '{') && $this->haveTokenImmediatelyAfter($endPos, '}');
+        return ($this->haveTokenImmediatelyBefore($startPos, '{') || $this->haveTokenImmediatelyBefore($startPos, \T_CURLY_OPEN)) && $this->haveTokenImmediatelyAfter($endPos, '}');
     }
     /**
      * Check whether the position is directly preceded by a certain token type.
@@ -191,7 +191,7 @@ class TokenStream
     }
     public function haveBracesInRange(int $startPos, int $endPos)
     {
-        return $this->haveTokenInRange($startPos, $endPos, '{') || $this->haveTokenInRange($startPos, $endPos, '}');
+        return $this->haveTokenInRange($startPos, $endPos, '{') || $this->haveTokenInRange($startPos, $endPos, \T_CURLY_OPEN) || $this->haveTokenInRange($startPos, $endPos, '}');
     }
     /**
      * Get indentation before token position.

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperea337ed74749\Symfony\Component\HttpFoundation\Session\Storage;
+namespace _PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\Session\Storage;
 
-use _PhpScoperea337ed74749\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use _PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * StorageInterface.
  *
@@ -41,18 +41,22 @@ interface SessionStorageInterface
     public function getId();
     /**
      * Sets the session ID.
+     *
+     * @param string $id
      */
-    public function setId(string $id);
+    public function setId($id);
     /**
      * Returns the session name.
      *
-     * @return string The session name
+     * @return mixed The session name
      */
     public function getName();
     /**
      * Sets the session name.
+     *
+     * @param string $name
      */
-    public function setName(string $name);
+    public function setName($name);
     /**
      * Regenerates id that represents this storage.
      *
@@ -82,7 +86,7 @@ interface SessionStorageInterface
      *
      * @throws \RuntimeException If an error occurs while regenerating this storage
      */
-    public function regenerate(bool $destroy = \false, int $lifetime = null);
+    public function regenerate($destroy = \false, $lifetime = null);
     /**
      * Force the session to be saved and closed.
      *
@@ -102,15 +106,17 @@ interface SessionStorageInterface
     /**
      * Gets a SessionBagInterface by name.
      *
+     * @param string $name
+     *
      * @return SessionBagInterface
      *
      * @throws \InvalidArgumentException If the bag does not exist
      */
-    public function getBag(string $name);
+    public function getBag($name);
     /**
      * Registers a SessionBagInterface for use.
      */
-    public function registerBag(\_PhpScoperea337ed74749\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag);
+    public function registerBag(\_PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag);
     /**
      * @return MetadataBag
      */

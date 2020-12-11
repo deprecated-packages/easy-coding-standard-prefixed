@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperea337ed74749\Symfony\Component\HttpFoundation;
+namespace _PhpScopere4fa57261c04\Symfony\Component\HttpFoundation;
 
 /**
  * ResponseHeaderBag is a container for Response HTTP headers.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFoundation\HeaderBag
+class ResponseHeaderBag extends \_PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\HeaderBag
 {
     const COOKIES_FLAT = 'flat';
     const COOKIES_ARRAY = 'array';
@@ -72,11 +72,13 @@ class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     }
     /**
      * {@inheritdoc}
+     *
+     * @param string|null $key The name of the headers to return or null to get them all
      */
-    public function all(string $key = null)
+    public function all()
     {
         $headers = parent::all();
-        if (null !== $key) {
+        if (1 <= \func_num_args() && null !== ($key = \func_get_arg(0))) {
             $key = \strtr($key, self::UPPER, self::LOWER);
             return 'set-cookie' !== $key ? $headers[$key] ?? [] : \array_map('strval', $this->getCookies());
         }
@@ -88,7 +90,7 @@ class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     /**
      * {@inheritdoc}
      */
-    public function set(string $key, $values, bool $replace = \true)
+    public function set($key, $values, $replace = \true)
     {
         $uniqueKey = \strtr($key, self::UPPER, self::LOWER);
         if ('set-cookie' === $uniqueKey) {
@@ -96,7 +98,7 @@ class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
                 $this->cookies = [];
             }
             foreach ((array) $values as $cookie) {
-                $this->setCookie(\_PhpScoperea337ed74749\Symfony\Component\HttpFoundation\Cookie::fromString($cookie));
+                $this->setCookie(\_PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\Cookie::fromString($cookie));
             }
             $this->headerNames[$uniqueKey] = $key;
             return;
@@ -113,7 +115,7 @@ class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     /**
      * {@inheritdoc}
      */
-    public function remove(string $key)
+    public function remove($key)
     {
         $uniqueKey = \strtr($key, self::UPPER, self::LOWER);
         unset($this->headerNames[$uniqueKey]);
@@ -132,26 +134,30 @@ class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     /**
      * {@inheritdoc}
      */
-    public function hasCacheControlDirective(string $key)
+    public function hasCacheControlDirective($key)
     {
         return \array_key_exists($key, $this->computedCacheControl);
     }
     /**
      * {@inheritdoc}
      */
-    public function getCacheControlDirective(string $key)
+    public function getCacheControlDirective($key)
     {
         return \array_key_exists($key, $this->computedCacheControl) ? $this->computedCacheControl[$key] : null;
     }
-    public function setCookie(\_PhpScoperea337ed74749\Symfony\Component\HttpFoundation\Cookie $cookie)
+    public function setCookie(\_PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\Cookie $cookie)
     {
         $this->cookies[$cookie->getDomain()][$cookie->getPath()][$cookie->getName()] = $cookie;
         $this->headerNames['set-cookie'] = 'Set-Cookie';
     }
     /**
      * Removes a cookie from the array, but does not unset it in the browser.
+     *
+     * @param string $name
+     * @param string $path
+     * @param string $domain
      */
-    public function removeCookie(string $name, ?string $path = '/', string $domain = null)
+    public function removeCookie($name, $path = '/', $domain = null)
     {
         if (null === $path) {
             $path = '/';
@@ -170,11 +176,13 @@ class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     /**
      * Returns an array with all cookies.
      *
+     * @param string $format
+     *
      * @return Cookie[]
      *
      * @throws \InvalidArgumentException When the $format is invalid
      */
-    public function getCookies(string $format = self::COOKIES_FLAT)
+    public function getCookies($format = self::COOKIES_FLAT)
     {
         if (!\in_array($format, [self::COOKIES_FLAT, self::COOKIES_ARRAY])) {
             throw new \InvalidArgumentException(\sprintf('Format "%s" invalid (%s).', $format, \implode(', ', [self::COOKIES_FLAT, self::COOKIES_ARRAY])));
@@ -194,17 +202,23 @@ class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     }
     /**
      * Clears a cookie in the browser.
+     *
+     * @param string $name
+     * @param string $path
+     * @param string $domain
+     * @param bool   $secure
+     * @param bool   $httpOnly
      */
-    public function clearCookie(string $name, ?string $path = '/', string $domain = null, bool $secure = \false, bool $httpOnly = \true, string $sameSite = null)
+    public function clearCookie($name, $path = '/', $domain = null, $secure = \false, $httpOnly = \true)
     {
-        $this->setCookie(new \_PhpScoperea337ed74749\Symfony\Component\HttpFoundation\Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, \false, $sameSite));
+        $this->setCookie(new \_PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, \false, null));
     }
     /**
      * @see HeaderUtils::makeDisposition()
      */
-    public function makeDisposition(string $disposition, string $filename, string $filenameFallback = '')
+    public function makeDisposition($disposition, $filename, $filenameFallback = '')
     {
-        return \_PhpScoperea337ed74749\Symfony\Component\HttpFoundation\HeaderUtils::makeDisposition($disposition, $filename, $filenameFallback);
+        return \_PhpScopere4fa57261c04\Symfony\Component\HttpFoundation\HeaderUtils::makeDisposition((string) $disposition, (string) $filename, (string) $filenameFallback);
     }
     /**
      * Returns the calculated value of the cache-control header.
@@ -216,13 +230,12 @@ class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
      */
     protected function computeCacheControlValue()
     {
-        if (!$this->cacheControl) {
-            if ($this->has('Last-Modified') || $this->has('Expires')) {
-                return 'private, must-revalidate';
-                // allows for heuristic expiration (RFC 7234 Section 4.2.2) in the case of "Last-Modified"
-            }
-            // conservative by default
+        if (!$this->cacheControl && !$this->has('ETag') && !$this->has('Last-Modified') && !$this->has('Expires')) {
             return 'no-cache, private';
+        }
+        if (!$this->cacheControl) {
+            // conservative by default
+            return 'private, must-revalidate';
         }
         $header = $this->getCacheControlHeader();
         if (isset($this->cacheControl['public']) || isset($this->cacheControl['private'])) {
@@ -236,6 +249,8 @@ class ResponseHeaderBag extends \_PhpScoperea337ed74749\Symfony\Component\HttpFo
     }
     private function initDate() : void
     {
-        $this->set('Date', \gmdate('D, d M Y H:i:s') . ' GMT');
+        $now = \DateTime::createFromFormat('U', \time());
+        $now->setTimezone(new \DateTimeZone('UTC'));
+        $this->set('Date', $now->format('D, d M Y H:i:s') . ' GMT');
     }
 }
