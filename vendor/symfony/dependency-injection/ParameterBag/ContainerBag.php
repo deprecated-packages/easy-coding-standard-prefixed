@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera061b8a47e36\Symfony\Component\DependencyInjection\ParameterBag;
+namespace _PhpScoper3b1d73f28e67\Symfony\Component\DependencyInjection\ParameterBag;
 
-use _PhpScopera061b8a47e36\Symfony\Component\DependencyInjection\Container;
+use _PhpScoper3b1d73f28e67\Symfony\Component\DependencyInjection\Container;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ContainerBag extends \_PhpScopera061b8a47e36\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \_PhpScopera061b8a47e36\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
+class ContainerBag extends \_PhpScoper3b1d73f28e67\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \_PhpScoper3b1d73f28e67\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
 {
     private $container;
-    public function __construct(\_PhpScopera061b8a47e36\Symfony\Component\DependencyInjection\Container $container)
+    public function __construct(\_PhpScoper3b1d73f28e67\Symfony\Component\DependencyInjection\Container $container)
     {
         $this->container = $container;
     }

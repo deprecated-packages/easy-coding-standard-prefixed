@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Contract;
 
-use _PhpScopera061b8a47e36\PhpParser\Node\Stmt\Expression;
+use _PhpScoper3b1d73f28e67\PhpParser\Node\Stmt\Expression;
 interface RoutingCaseConverterInterface
 {
     public function match(string $key, $values) : bool;
-    public function convertToMethodCall(string $key, $values) : \_PhpScopera061b8a47e36\PhpParser\Node\Stmt\Expression;
+    public function convertToMethodCall(string $key, $values) : \_PhpScoper3b1d73f28e67\PhpParser\Node\Stmt\Expression;
 }
