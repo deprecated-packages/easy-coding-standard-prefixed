@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb26833cc184d\PhpParser\Node\Stmt;
+namespace _PhpScoper1e80a2e03314\PhpParser\Node\Stmt;
 
-use _PhpScoperb26833cc184d\PhpParser\Node;
-class Global_ extends \_PhpScoperb26833cc184d\PhpParser\Node\Stmt
+use _PhpScoper1e80a2e03314\PhpParser\Node;
+class Global_ extends \_PhpScoper1e80a2e03314\PhpParser\Node\Stmt
 {
     /** @var Node\Expr[] Variables */
     public $vars;

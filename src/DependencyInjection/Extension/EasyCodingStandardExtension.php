@@ -3,16 +3,16 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection\Extension;
 
-use _PhpScoperb26833cc184d\Symfony\Component\Config\FileLocator;
-use _PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class EasyCodingStandardExtension extends \_PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\Extension\Extension
+use _PhpScoper1e80a2e03314\Symfony\Component\Config\FileLocator;
+use _PhpScoper1e80a2e03314\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper1e80a2e03314\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoper1e80a2e03314\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class EasyCodingStandardExtension extends \_PhpScoper1e80a2e03314\Symfony\Component\DependencyInjection\Extension\Extension
 {
-    public function load(array $configs, \_PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, \_PhpScoper1e80a2e03314\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         // needed for parameter shifting of sniff/fixer params
-        $phpFileLoader = new \_PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperb26833cc184d\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \_PhpScoper1e80a2e03314\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoper1e80a2e03314\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');
     }
 }

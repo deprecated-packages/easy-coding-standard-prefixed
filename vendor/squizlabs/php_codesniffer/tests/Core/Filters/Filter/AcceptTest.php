@@ -13,8 +13,8 @@ namespace PHP_CodeSniffer\Tests\Core\Filters\Filter;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
-use _PhpScoperb26833cc184d\PHPUnit\Framework\TestCase;
-class AcceptTest extends \_PhpScoperb26833cc184d\PHPUnit\Framework\TestCase
+use _PhpScoper1e80a2e03314\PHPUnit\Framework\TestCase;
+class AcceptTest extends \_PhpScoper1e80a2e03314\PHPUnit\Framework\TestCase
 {
     /**
      * The Config object.

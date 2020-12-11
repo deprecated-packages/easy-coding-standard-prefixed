@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb26833cc184d\PhpParser\Node\Stmt;
+namespace _PhpScoper1e80a2e03314\PhpParser\Node\Stmt;
 
-use _PhpScoperb26833cc184d\PhpParser\Node\Stmt;
-class InlineHTML extends \_PhpScoperb26833cc184d\PhpParser\Node\Stmt
+use _PhpScoper1e80a2e03314\PhpParser\Node\Stmt;
+class InlineHTML extends \_PhpScoper1e80a2e03314\PhpParser\Node\Stmt
 {
     /** @var string String */
     public $value;
