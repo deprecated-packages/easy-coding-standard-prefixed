@@ -12,9 +12,9 @@ use function str_repeat;
 use function strlen;
 use function substr;
 use const T_END_HEREDOC;
-use const _PhpScoper23ef26a4fb01\T_END_NOWDOC;
+use const _PhpScoperc7c7dddc9238\T_END_NOWDOC;
 use const T_START_HEREDOC;
-use const _PhpScoper23ef26a4fb01\T_START_NOWDOC;
+use const _PhpScoperc7c7dddc9238\T_START_NOWDOC;
 /**
  * @internal
  */

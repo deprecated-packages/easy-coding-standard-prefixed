@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper23ef26a4fb01\Symfony\Component\Console\Helper;
+namespace _PhpScoperc7c7dddc9238\Symfony\Component\Console\Helper;
 
-use _PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\DescriptorInterface;
-use _PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\JsonDescriptor;
-use _PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
-use _PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\TextDescriptor;
-use _PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\XmlDescriptor;
-use _PhpScoper23ef26a4fb01\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper23ef26a4fb01\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\DescriptorInterface;
+use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\JsonDescriptor;
+use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
+use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\TextDescriptor;
+use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\XmlDescriptor;
+use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface;
 /**
  * This class adds helper method to describe objects in various formats.
  *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class DescriptorHelper extends \_PhpScoper23ef26a4fb01\Symfony\Component\Console\Helper\Helper
+class DescriptorHelper extends \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Helper\Helper
 {
     /**
      * @var DescriptorInterface[]
@@ -30,7 +30,7 @@ class DescriptorHelper extends \_PhpScoper23ef26a4fb01\Symfony\Component\Console
     private $descriptors = [];
     public function __construct()
     {
-        $this->register('txt', new \_PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\TextDescriptor())->register('xml', new \_PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\XmlDescriptor())->register('json', new \_PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\JsonDescriptor())->register('md', new \_PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\MarkdownDescriptor());
+        $this->register('txt', new \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\TextDescriptor())->register('xml', new \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\XmlDescriptor())->register('json', new \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\JsonDescriptor())->register('md', new \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\MarkdownDescriptor());
     }
     /**
      * Describes an object if supported.
@@ -43,11 +43,11 @@ class DescriptorHelper extends \_PhpScoper23ef26a4fb01\Symfony\Component\Console
      *
      * @throws InvalidArgumentException when the given format is not supported
      */
-    public function describe(\_PhpScoper23ef26a4fb01\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = [])
+    public function describe(\_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = [])
     {
         $options = \array_merge(['raw_text' => \false, 'format' => 'txt'], $options);
         if (!isset($this->descriptors[$options['format']])) {
-            throw new \_PhpScoper23ef26a4fb01\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unsupported format "%s".', $options['format']));
+            throw new \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unsupported format "%s".', $options['format']));
         }
         $descriptor = $this->descriptors[$options['format']];
         $descriptor->describe($output, $object, $options);
@@ -59,7 +59,7 @@ class DescriptorHelper extends \_PhpScoper23ef26a4fb01\Symfony\Component\Console
      *
      * @return $this
      */
-    public function register($format, \_PhpScoper23ef26a4fb01\Symfony\Component\Console\Descriptor\DescriptorInterface $descriptor)
+    public function register($format, \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Descriptor\DescriptorInterface $descriptor)
     {
         $this->descriptors[$format] = $descriptor;
         return $this;

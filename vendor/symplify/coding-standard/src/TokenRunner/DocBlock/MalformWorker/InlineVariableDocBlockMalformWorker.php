@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper23ef26a4fb01\Nette\Utils\Strings;
+use _PhpScoperc7c7dddc9238\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\PackageBuilder\Configuration\StaticEolConfiguration;
@@ -34,11 +34,11 @@ final class InlineVariableDocBlockMalformWorker extends \Symplify\CodingStandard
             return $docContent;
         }
         // asterisk start
-        $docContent = \_PhpScoper23ef26a4fb01\Nette\Utils\Strings::replace($docContent, self::SINGLE_ASTERISK_START_REGEX, '/**$1');
+        $docContent = \_PhpScoperc7c7dddc9238\Nette\Utils\Strings::replace($docContent, self::SINGLE_ASTERISK_START_REGEX, '/**$1');
         // inline
-        $docContent = \_PhpScoper23ef26a4fb01\Nette\Utils\Strings::replace($docContent, self::SPACE_REGEX, ' ');
+        $docContent = \_PhpScoperc7c7dddc9238\Nette\Utils\Strings::replace($docContent, self::SPACE_REGEX, ' ');
         // remove asterisk leftover
-        return \_PhpScoper23ef26a4fb01\Nette\Utils\Strings::replace($docContent, self::ASTERISK_LEFTOVERS_REGEX, '$1');
+        return \_PhpScoperc7c7dddc9238\Nette\Utils\Strings::replace($docContent, self::ASTERISK_LEFTOVERS_REGEX, '$1');
     }
     private function isVariableComment(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
     {

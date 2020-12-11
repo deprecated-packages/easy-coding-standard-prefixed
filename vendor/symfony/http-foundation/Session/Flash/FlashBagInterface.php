@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper23ef26a4fb01\Symfony\Component\HttpFoundation\Session\Flash;
+namespace _PhpScoperc7c7dddc9238\Symfony\Component\HttpFoundation\Session\Flash;
 
-use _PhpScoper23ef26a4fb01\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use _PhpScoperc7c7dddc9238\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * FlashBagInterface.
  *
  * @author Drak <drak@zikula.org>
  */
-interface FlashBagInterface extends \_PhpScoper23ef26a4fb01\Symfony\Component\HttpFoundation\Session\SessionBagInterface
+interface FlashBagInterface extends \_PhpScoperc7c7dddc9238\Symfony\Component\HttpFoundation\Session\SessionBagInterface
 {
     /**
      * Adds a flash message for the given type.
