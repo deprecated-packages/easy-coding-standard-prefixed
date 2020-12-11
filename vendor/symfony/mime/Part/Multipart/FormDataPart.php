@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere4fa57261c04\Symfony\Component\Mime\Part\Multipart;
+namespace _PhpScopera061b8a47e36\Symfony\Component\Mime\Part\Multipart;
 
-use _PhpScopere4fa57261c04\Symfony\Component\Mime\Exception\InvalidArgumentException;
-use _PhpScopere4fa57261c04\Symfony\Component\Mime\Part\AbstractMultipartPart;
-use _PhpScopere4fa57261c04\Symfony\Component\Mime\Part\DataPart;
-use _PhpScopere4fa57261c04\Symfony\Component\Mime\Part\TextPart;
+use _PhpScopera061b8a47e36\Symfony\Component\Mime\Exception\InvalidArgumentException;
+use _PhpScopera061b8a47e36\Symfony\Component\Mime\Part\AbstractMultipartPart;
+use _PhpScopera061b8a47e36\Symfony\Component\Mime\Part\DataPart;
+use _PhpScopera061b8a47e36\Symfony\Component\Mime\Part\TextPart;
 /**
  * Implements RFC 7578.
  *
@@ -21,7 +21,7 @@ use _PhpScopere4fa57261c04\Symfony\Component\Mime\Part\TextPart;
  *
  * @experimental in 4.3
  */
-final class FormDataPart extends \_PhpScopere4fa57261c04\Symfony\Component\Mime\Part\AbstractMultipartPart
+final class FormDataPart extends \_PhpScopera061b8a47e36\Symfony\Component\Mime\Part\AbstractMultipartPart
 {
     private $fields = [];
     /**
@@ -31,8 +31,8 @@ final class FormDataPart extends \_PhpScopere4fa57261c04\Symfony\Component\Mime\
     {
         parent::__construct();
         foreach ($fields as $name => $value) {
-            if (!\is_string($value) && !\is_array($value) && !$value instanceof \_PhpScopere4fa57261c04\Symfony\Component\Mime\Part\TextPart) {
-                throw new \_PhpScopere4fa57261c04\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('A form field value can only be a string, an array, or an instance of TextPart ("%s" given).', \is_object($value) ? \get_class($value) : \gettype($value)));
+            if (!\is_string($value) && !\is_array($value) && !$value instanceof \_PhpScopera061b8a47e36\Symfony\Component\Mime\Part\TextPart) {
+                throw new \_PhpScopera061b8a47e36\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('A form field value can only be a string, an array, or an instance of TextPart ("%s" given).', \is_object($value) ? \get_class($value) : \gettype($value)));
             }
             $this->fields[$name] = $value;
         }
@@ -57,18 +57,18 @@ final class FormDataPart extends \_PhpScopere4fa57261c04\Symfony\Component\Mime\
         });
         return $values;
     }
-    private function preparePart($name, $value) : \_PhpScopere4fa57261c04\Symfony\Component\Mime\Part\TextPart
+    private function preparePart($name, $value) : \_PhpScopera061b8a47e36\Symfony\Component\Mime\Part\TextPart
     {
         if (\is_string($value)) {
-            return $this->configurePart($name, new \_PhpScopere4fa57261c04\Symfony\Component\Mime\Part\TextPart($value, 'utf-8', 'plain', '8bit'));
+            return $this->configurePart($name, new \_PhpScopera061b8a47e36\Symfony\Component\Mime\Part\TextPart($value, 'utf-8', 'plain', '8bit'));
         }
         return $this->configurePart($name, $value);
     }
-    private function configurePart(string $name, \_PhpScopere4fa57261c04\Symfony\Component\Mime\Part\TextPart $part) : \_PhpScopere4fa57261c04\Symfony\Component\Mime\Part\TextPart
+    private function configurePart(string $name, \_PhpScopera061b8a47e36\Symfony\Component\Mime\Part\TextPart $part) : \_PhpScopera061b8a47e36\Symfony\Component\Mime\Part\TextPart
     {
         static $r;
         if (null === $r) {
-            $r = new \ReflectionProperty(\_PhpScopere4fa57261c04\Symfony\Component\Mime\Part\TextPart::class, 'encoding');
+            $r = new \ReflectionProperty(\_PhpScopera061b8a47e36\Symfony\Component\Mime\Part\TextPart::class, 'encoding');
             $r->setAccessible(\true);
         }
         $part->setDisposition('form-data');

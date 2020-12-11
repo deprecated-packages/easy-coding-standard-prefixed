@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere4fa57261c04\Symfony\Component\Cache\Adapter;
+namespace _PhpScopera061b8a47e36\Symfony\Component\Cache\Adapter;
 
-use _PhpScopere4fa57261c04\Symfony\Component\Cache\Traits\ApcuTrait;
-class ApcuAdapter extends \_PhpScopere4fa57261c04\Symfony\Component\Cache\Adapter\AbstractAdapter
+use _PhpScopera061b8a47e36\Symfony\Component\Cache\Traits\ApcuTrait;
+class ApcuAdapter extends \_PhpScopera061b8a47e36\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     use ApcuTrait;
     /**

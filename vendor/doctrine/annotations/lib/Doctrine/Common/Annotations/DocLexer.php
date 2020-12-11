@@ -17,9 +17,9 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScopere4fa57261c04\Doctrine\Common\Annotations;
+namespace _PhpScopera061b8a47e36\Doctrine\Common\Annotations;
 
-use _PhpScopere4fa57261c04\Doctrine\Common\Lexer\AbstractLexer;
+use _PhpScopera061b8a47e36\Doctrine\Common\Lexer\AbstractLexer;
 /**
  * Simple lexer for docblock annotations.
  *
@@ -29,7 +29,7 @@ use _PhpScopere4fa57261c04\Doctrine\Common\Lexer\AbstractLexer;
  * @author Roman Borschel <roman@code-factory.org>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-final class DocLexer extends \_PhpScopere4fa57261c04\Doctrine\Common\Lexer\AbstractLexer
+final class DocLexer extends \_PhpScopera061b8a47e36\Doctrine\Common\Lexer\AbstractLexer
 {
     const T_NONE = 1;
     const T_INTEGER = 2;

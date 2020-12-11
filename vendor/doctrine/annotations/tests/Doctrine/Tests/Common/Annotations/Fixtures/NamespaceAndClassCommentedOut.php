@@ -1,16 +1,16 @@
 <?php
 
 // namespace Doctrine\Tests\Common\Annotations\Fixtures;
-namespace _PhpScopere4fa57261c04\Doctrine\Tests\Common\Annotations\Fixtures\Foo;
+namespace _PhpScopera061b8a47e36\Doctrine\Tests\Common\Annotations\Fixtures\Foo;
 
-use _PhpScopere4fa57261c04\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+use _PhpScopera061b8a47e36\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
 // class NamespaceAndClassCommentedOut {}
-namespace _PhpScopere4fa57261c04\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScopera061b8a47e36\Doctrine\Tests\Common\Annotations\Fixtures;
 
 // class NamespaceAndClassCommentedOut {}
-use _PhpScopere4fa57261c04\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScopera061b8a47e36\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
 // namespace Doctrine\Tests\Common\Annotations\Fixtures;
-use _PhpScopere4fa57261c04\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
+use _PhpScopera061b8a47e36\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
 class NamespaceAndClassCommentedOut
 {
 }

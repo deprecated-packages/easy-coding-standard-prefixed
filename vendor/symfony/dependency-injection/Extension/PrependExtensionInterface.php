@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere4fa57261c04\Symfony\Component\DependencyInjection\Extension;
+namespace _PhpScopera061b8a47e36\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScopere4fa57261c04\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera061b8a47e36\Symfony\Component\DependencyInjection\ContainerBuilder;
 interface PrependExtensionInterface
 {
     /**
      * Allow an extension to prepend the extension configurations.
      */
-    public function prepend(\_PhpScopere4fa57261c04\Symfony\Component\DependencyInjection\ContainerBuilder $container);
+    public function prepend(\_PhpScopera061b8a47e36\Symfony\Component\DependencyInjection\ContainerBuilder $container);
 }
