@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Config;
 
-use _PhpScoperc7c7dddc9238\Symfony\Component\Config\FileLocator;
-use _PhpScoperc7c7dddc9238\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperc7c7dddc9238\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use _PhpScoperc7c7dddc9238\Symfony\Component\Yaml\Yaml;
+use _PhpScoperb26833cc184d\Symfony\Component\Config\FileLocator;
+use _PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoperb26833cc184d\Symfony\Component\Yaml\Yaml;
 use Symplify\SetConfigResolver\SetResolver;
 use Symplify\SmartFileSystem\SmartFileInfo;
 final class SetsParameterResolver
@@ -53,7 +53,7 @@ final class SetsParameterResolver
      */
     private function resolveSetsParameterFromYamlFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $configFileInfo) : array
     {
-        $configContent = \_PhpScoperc7c7dddc9238\Symfony\Component\Yaml\Yaml::parse($configFileInfo->getContents());
+        $configContent = \_PhpScoperb26833cc184d\Symfony\Component\Yaml\Yaml::parse($configFileInfo->getContents());
         return (array) ($configContent['parameters'][self::SETS] ?? []);
     }
     /**
@@ -62,8 +62,8 @@ final class SetsParameterResolver
     private function resolveSetsParameterFromPhpFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $configFileInfo) : array
     {
         // php file loader
-        $containerBuilder = new \_PhpScoperc7c7dddc9238\Symfony\Component\DependencyInjection\ContainerBuilder();
-        $phpFileLoader = new \_PhpScoperc7c7dddc9238\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperc7c7dddc9238\Symfony\Component\Config\FileLocator());
+        $containerBuilder = new \_PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\ContainerBuilder();
+        $phpFileLoader = new \_PhpScoperb26833cc184d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperb26833cc184d\Symfony\Component\Config\FileLocator());
         $phpFileLoader->load($configFileInfo->getRealPath());
         if (!$containerBuilder->hasParameter(self::SETS)) {
             return [];

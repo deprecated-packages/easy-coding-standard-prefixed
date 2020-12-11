@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc7c7dddc9238\PhpParser\Node\Expr;
+namespace _PhpScoperb26833cc184d\PhpParser\Node\Expr;
 
-use _PhpScoperc7c7dddc9238\PhpParser\Node\Expr;
-use _PhpScoperc7c7dddc9238\PhpParser\Node\Identifier;
-use _PhpScoperc7c7dddc9238\PhpParser\Node\Name;
-class ClassConstFetch extends \_PhpScoperc7c7dddc9238\PhpParser\Node\Expr
+use _PhpScoperb26833cc184d\PhpParser\Node\Expr;
+use _PhpScoperb26833cc184d\PhpParser\Node\Identifier;
+use _PhpScoperb26833cc184d\PhpParser\Node\Name;
+class ClassConstFetch extends \_PhpScoperb26833cc184d\PhpParser\Node\Expr
 {
     /** @var Name|Expr Class name */
     public $class;
@@ -23,7 +23,7 @@ class ClassConstFetch extends \_PhpScoperc7c7dddc9238\PhpParser\Node\Expr
     {
         $this->attributes = $attributes;
         $this->class = $class;
-        $this->name = \is_string($name) ? new \_PhpScoperc7c7dddc9238\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScoperb26833cc184d\PhpParser\Node\Identifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {

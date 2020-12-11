@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc7c7dddc9238\Symfony\Component\Console\Logger;
+namespace _PhpScoperb26833cc184d\Symfony\Component\Console\Logger;
 
-use _PhpScoperc7c7dddc9238\Psr\Log\AbstractLogger;
-use _PhpScoperc7c7dddc9238\Psr\Log\InvalidArgumentException;
-use _PhpScoperc7c7dddc9238\Psr\Log\LogLevel;
-use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperb26833cc184d\Psr\Log\AbstractLogger;
+use _PhpScoperb26833cc184d\Psr\Log\InvalidArgumentException;
+use _PhpScoperb26833cc184d\Psr\Log\LogLevel;
+use _PhpScoperb26833cc184d\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface;
 /**
  * PSR-3 compliant console logger.
  *
@@ -22,15 +22,15 @@ use _PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface;
  *
  * @see https://www.php-fig.org/psr/psr-3/
  */
-class ConsoleLogger extends \_PhpScoperc7c7dddc9238\Psr\Log\AbstractLogger
+class ConsoleLogger extends \_PhpScoperb26833cc184d\Psr\Log\AbstractLogger
 {
     const INFO = 'info';
     const ERROR = 'error';
     private $output;
-    private $verbosityLevelMap = [\_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::EMERGENCY => \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::ALERT => \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::CRITICAL => \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::ERROR => \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::WARNING => \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::NOTICE => \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::INFO => \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::DEBUG => \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG];
-    private $formatLevelMap = [\_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::EMERGENCY => self::ERROR, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::ALERT => self::ERROR, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::CRITICAL => self::ERROR, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::ERROR => self::ERROR, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::WARNING => self::INFO, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::NOTICE => self::INFO, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::INFO => self::INFO, \_PhpScoperc7c7dddc9238\Psr\Log\LogLevel::DEBUG => self::INFO];
+    private $verbosityLevelMap = [\_PhpScoperb26833cc184d\Psr\Log\LogLevel::EMERGENCY => \_PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::ALERT => \_PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::CRITICAL => \_PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::ERROR => \_PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::WARNING => \_PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_NORMAL, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::NOTICE => \_PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::INFO => \_PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::DEBUG => \_PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG];
+    private $formatLevelMap = [\_PhpScoperb26833cc184d\Psr\Log\LogLevel::EMERGENCY => self::ERROR, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::ALERT => self::ERROR, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::CRITICAL => self::ERROR, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::ERROR => self::ERROR, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::WARNING => self::INFO, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::NOTICE => self::INFO, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::INFO => self::INFO, \_PhpScoperb26833cc184d\Psr\Log\LogLevel::DEBUG => self::INFO];
     private $errored = \false;
-    public function __construct(\_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\OutputInterface $output, array $verbosityLevelMap = [], array $formatLevelMap = [])
+    public function __construct(\_PhpScoperb26833cc184d\Symfony\Component\Console\Output\OutputInterface $output, array $verbosityLevelMap = [], array $formatLevelMap = [])
     {
         $this->output = $output;
         $this->verbosityLevelMap = $verbosityLevelMap + $this->verbosityLevelMap;
@@ -44,12 +44,12 @@ class ConsoleLogger extends \_PhpScoperc7c7dddc9238\Psr\Log\AbstractLogger
     public function log($level, $message, array $context = [])
     {
         if (!isset($this->verbosityLevelMap[$level])) {
-            throw new \_PhpScoperc7c7dddc9238\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $level));
+            throw new \_PhpScoperb26833cc184d\Psr\Log\InvalidArgumentException(\sprintf('The log level "%s" does not exist.', $level));
         }
         $output = $this->output;
         // Write to the error output if necessary and available
         if (self::ERROR === $this->formatLevelMap[$level]) {
-            if ($this->output instanceof \_PhpScoperc7c7dddc9238\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+            if ($this->output instanceof \_PhpScoperb26833cc184d\Symfony\Component\Console\Output\ConsoleOutputInterface) {
                 $output = $output->getErrorOutput();
             }
             $this->errored = \true;
