@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoperbd5c5a045153;
+namespace _PhpScoper326bba7310a2;
 
-return \_PhpScoperbd5c5a045153\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [], [$r = [], $r[1] = [&$r[1]]], [], [&$r[1]], []);
+return \_PhpScoper326bba7310a2\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [], [$r = [], $r[1] = [&$r[1]]], [], [&$r[1]], []);

@@ -1,10 +1,10 @@
 <?php
 
-namespace _PhpScoperbd5c5a045153\Jean85;
+namespace _PhpScoper326bba7310a2\Jean85;
 
 class Version
 {
-    const SHORT_COMMIT_LENGTH = \_PhpScoperbd5c5a045153\Jean85\PrettyVersions::SHORT_COMMIT_LENGTH;
+    const SHORT_COMMIT_LENGTH = \_PhpScoper326bba7310a2\Jean85\PrettyVersions::SHORT_COMMIT_LENGTH;
     /** @var string */
     private $packageName;
     /** @var string */

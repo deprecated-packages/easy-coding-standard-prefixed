@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperbd5c5a045153;
+namespace _PhpScoper326bba7310a2;
 
 // decoupled in own "*.php" file, so ECS, Rector and PHPStan works out of the box here
 use PHP_CodeSniffer\Util\Tokens;
-use _PhpScoperbd5c5a045153\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScoper326bba7310a2\Symfony\Component\Console\Input\ArgvInput;
 use Symplify\EasyCodingStandard\Bootstrap\ConfigHasher;
 use Symplify\EasyCodingStandard\Bootstrap\ConfigShifter;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
@@ -23,7 +23,7 @@ use Symplify\SetConfigResolver\SetAwareConfigResolver;
 // performance boost
 \gc_disable();
 # 1. autoload
-$autoloadIncluder = new \_PhpScoperbd5c5a045153\AutoloadIncluder();
+$autoloadIncluder = new \_PhpScoper326bba7310a2\AutoloadIncluder();
 $autoloadIncluder->includeCwdVendorAutoloadIfExists();
 $autoloadIncluder->autoloadProjectAutoloaderFile('/../../autoload.php');
 $autoloadIncluder->includeDependencyOrRepositoryVendorAutoloadIfExists();
@@ -35,7 +35,7 @@ try {
     $configFileInfos = [];
     // 1. --config CLI option or default
     $configResolver = new \Symplify\SetConfigResolver\SetAwareConfigResolver(new \Symplify\EasyCodingStandard\Set\EasyCodingStandardSetProvider(new \Symplify\EasyCodingStandard\Set\ConstantReflectionSetFactory()));
-    $input = new \_PhpScoperbd5c5a045153\Symfony\Component\Console\Input\ArgvInput();
+    $input = new \_PhpScoper326bba7310a2\Symfony\Component\Console\Input\ArgvInput();
     $inputConfigFileInfo = $configResolver->resolveFromInputWithFallback($input, ['ecs.php']);
     if ($inputConfigFileInfo !== null) {
         $configFileInfos[] = $inputConfigFileInfo;
@@ -150,4 +150,4 @@ final class AutoloadIncluder
 /**
  * Inspired by https://github.com/rectorphp/rector/pull/2373/files#diff-0fc04a2bb7928cac4ae339d5a8bf67f3
  */
-\class_alias('_PhpScoperbd5c5a045153\\AutoloadIncluder', 'AutoloadIncluder', \false);
+\class_alias('_PhpScoper326bba7310a2\\AutoloadIncluder', 'AutoloadIncluder', \false);

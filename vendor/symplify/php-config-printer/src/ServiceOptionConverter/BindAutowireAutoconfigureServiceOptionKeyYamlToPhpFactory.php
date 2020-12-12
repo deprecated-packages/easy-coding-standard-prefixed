@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoperbd5c5a045153\PhpParser\Node\Arg;
-use _PhpScoperbd5c5a045153\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper326bba7310a2\PhpParser\Node\Arg;
+use _PhpScoper326bba7310a2\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlKey;
@@ -19,15 +19,15 @@ final class BindAutowireAutoconfigureServiceOptionKeyYamlToPhpFactory implements
     {
         $this->commonNodeFactory = $commonNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperbd5c5a045153\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperbd5c5a045153\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper326bba7310a2\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper326bba7310a2\PhpParser\Node\Expr\MethodCall
     {
         $method = $key;
         if ($key === 'shared') {
             $method = 'share';
         }
-        $methodCall = new \_PhpScoperbd5c5a045153\PhpParser\Node\Expr\MethodCall($methodCall, $method);
+        $methodCall = new \_PhpScoper326bba7310a2\PhpParser\Node\Expr\MethodCall($methodCall, $method);
         if ($yaml === \false) {
-            $methodCall->args[] = new \_PhpScoperbd5c5a045153\PhpParser\Node\Arg($this->commonNodeFactory->createFalse());
+            $methodCall->args[] = new \_PhpScoper326bba7310a2\PhpParser\Node\Arg($this->commonNodeFactory->createFalse());
         }
         return $methodCall;
     }

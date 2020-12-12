@@ -15,8 +15,8 @@ use PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
-use _PhpScoperbd5c5a045153\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoperbd5c5a045153\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper326bba7310a2\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper326bba7310a2\Symfony\Component\Finder\SplFileInfo;
 /**
  * Class provides a way to create a group of fixers.
  *
@@ -83,7 +83,7 @@ final class FixerFactory
         if (null === $builtInFixers) {
             $builtInFixers = [];
             /** @var SplFileInfo $file */
-            foreach (\_PhpScoperbd5c5a045153\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Fixer') as $file) {
+            foreach (\_PhpScoper326bba7310a2\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Fixer') as $file) {
                 $relativeNamespace = $file->getRelativePath();
                 $fixerClass = 'PhpCsFixer\\Fixer\\' . ($relativeNamespace ? $relativeNamespace . '\\' : '') . $file->getBasename('.php');
                 if ('Fixer' === \substr($fixerClass, -5)) {
