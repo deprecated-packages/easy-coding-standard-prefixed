@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Cache;
 
-use _PhpScoper8a05d21c15c9\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper79449c4e744b\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * @author Andreas Möller <am@localheinz.com>
  *
@@ -52,10 +52,10 @@ final class FileHandler implements \PhpCsFixer\Cache\FileHandlerInterface
         $content = $cache->toJson();
         if (\file_exists($this->file)) {
             if (\is_dir($this->file)) {
-                throw new \_PhpScoper8a05d21c15c9\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write cache file "%s" as the location exists as directory.', \realpath($this->file)), 0, null, $this->file);
+                throw new \_PhpScoper79449c4e744b\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write cache file "%s" as the location exists as directory.', \realpath($this->file)), 0, null, $this->file);
             }
             if (!\is_writable($this->file)) {
-                throw new \_PhpScoper8a05d21c15c9\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write to file "%s" as it is not writable.', \realpath($this->file)), 0, null, $this->file);
+                throw new \_PhpScoper79449c4e744b\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write to file "%s" as it is not writable.', \realpath($this->file)), 0, null, $this->file);
             }
         } else {
             @\touch($this->file);
@@ -64,7 +64,7 @@ final class FileHandler implements \PhpCsFixer\Cache\FileHandlerInterface
         $bytesWritten = @\file_put_contents($this->file, $content);
         if (\false === $bytesWritten) {
             $error = \error_get_last();
-            throw new \_PhpScoper8a05d21c15c9\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s", "%s".', $this->file, isset($error['message']) ? $error['message'] : 'no reason available'), 0, null, $this->file);
+            throw new \_PhpScoper79449c4e744b\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s", "%s".', $this->file, isset($error['message']) ? $error['message'] : 'no reason available'), 0, null, $this->file);
         }
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Parser;
+namespace _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser;
 
-use _PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer;
+use _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer;
 class TokenIterator
 {
     /** @var mixed[][] */
@@ -16,38 +16,38 @@ class TokenIterator
     {
         $this->tokens = $tokens;
         $this->index = $index;
-        if ($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] !== \_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
+        if ($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] !== \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
             return;
         }
         $this->index++;
     }
     public function currentTokenValue() : string
     {
-        return $this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET];
+        return $this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET];
     }
     public function currentTokenType() : int
     {
-        return $this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET];
+        return $this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET];
     }
     public function currentTokenOffset() : int
     {
         $offset = 0;
         for ($i = 0; $i < $this->index; $i++) {
-            $offset += \strlen($this->tokens[$i][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET]);
+            $offset += \strlen($this->tokens[$i][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET]);
         }
         return $offset;
     }
     public function isCurrentTokenValue(string $tokenValue) : bool
     {
-        return $this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET] === $tokenValue;
+        return $this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET] === $tokenValue;
     }
     public function isCurrentTokenType(int $tokenType) : bool
     {
-        return $this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] === $tokenType;
+        return $this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] === $tokenType;
     }
     public function isPrecededByHorizontalWhitespace() : bool
     {
-        return ($this->tokens[$this->index - 1][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] ?? -1) === \_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS;
+        return ($this->tokens[$this->index - 1][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] ?? -1) === \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS;
     }
     /**
      * @param  string $tokenValue
@@ -55,11 +55,11 @@ class TokenIterator
      */
     public function consumeTokenValue(string $tokenValue) : void
     {
-        if ($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET] !== $tokenValue) {
+        if ($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET] !== $tokenValue) {
             $this->throwError(null, $tokenValue);
         }
         $this->index++;
-        if (($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] ?? -1) !== \_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
+        if (($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] ?? -1) !== \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
             return;
         }
         $this->index++;
@@ -70,56 +70,56 @@ class TokenIterator
      */
     public function consumeTokenType(int $tokenType) : void
     {
-        if ($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] !== $tokenType) {
+        if ($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] !== $tokenType) {
             $this->throwError($tokenType, null);
         }
         $this->index++;
-        if (($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] ?? -1) !== \_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
+        if (($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] ?? -1) !== \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
             return;
         }
         $this->index++;
     }
     public function tryConsumeTokenValue(string $tokenValue) : bool
     {
-        if ($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET] !== $tokenValue) {
+        if ($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET] !== $tokenValue) {
             return \false;
         }
         $this->index++;
-        if ($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] === \_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
+        if ($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] === \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
             $this->index++;
         }
         return \true;
     }
     public function tryConsumeTokenType(int $tokenType) : bool
     {
-        if ($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] !== $tokenType) {
+        if ($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] !== $tokenType) {
             return \false;
         }
         $this->index++;
-        if ($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] === \_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
+        if ($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] === \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
             $this->index++;
         }
         return \true;
     }
     public function getSkippedHorizontalWhiteSpaceIfAny() : string
     {
-        if ($this->tokens[$this->index - 1][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] === \_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
-            return $this->tokens[$this->index - 1][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET];
+        if ($this->tokens[$this->index - 1][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] === \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
+            return $this->tokens[$this->index - 1][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET];
         }
         return '';
     }
     public function joinUntil(int ...$tokenType) : string
     {
         $s = '';
-        while (!\in_array($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET], $tokenType, \true)) {
-            $s .= $this->tokens[$this->index++][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET];
+        while (!\in_array($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET], $tokenType, \true)) {
+            $s .= $this->tokens[$this->index++][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::VALUE_OFFSET];
         }
         return $s;
     }
     public function next() : void
     {
         $this->index++;
-        if ($this->tokens[$this->index][\_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] !== \_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
+        if ($this->tokens[$this->index][\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TYPE_OFFSET] !== \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_HORIZONTAL_WS) {
             return;
         }
         $this->index++;
@@ -145,6 +145,6 @@ class TokenIterator
      */
     private function throwError(?int $expectedTokenType, ?string $expectedTokenValue) : void
     {
-        throw new \_PhpScoper8a05d21c15c9\PHPStan\PhpDocParser\Parser\ParserException($this->currentTokenValue(), $this->currentTokenType(), $this->currentTokenOffset(), $expectedTokenType, $expectedTokenValue);
+        throw new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\ParserException($this->currentTokenValue(), $this->currentTokenType(), $this->currentTokenOffset(), $expectedTokenType, $expectedTokenValue);
     }
 }

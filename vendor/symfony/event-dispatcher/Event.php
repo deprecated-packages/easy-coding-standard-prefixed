@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a05d21c15c9\Symfony\Component\EventDispatcher;
+namespace _PhpScoper79449c4e744b\Symfony\Component\EventDispatcher;
 
 /**
  * @deprecated since Symfony 4.3, use "Symfony\Contracts\EventDispatcher\Event" instead

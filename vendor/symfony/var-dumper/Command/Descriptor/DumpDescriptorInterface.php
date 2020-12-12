@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a05d21c15c9\Symfony\Component\VarDumper\Command\Descriptor;
+namespace _PhpScoper79449c4e744b\Symfony\Component\VarDumper\Command\Descriptor;
 
-use _PhpScoper8a05d21c15c9\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper8a05d21c15c9\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper79449c4e744b\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper79449c4e744b\Symfony\Component\VarDumper\Cloner\Data;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
 interface DumpDescriptorInterface
 {
-    public function describe(\_PhpScoper8a05d21c15c9\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper8a05d21c15c9\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) : void;
+    public function describe(\_PhpScoper79449c4e744b\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper79449c4e744b\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) : void;
 }
