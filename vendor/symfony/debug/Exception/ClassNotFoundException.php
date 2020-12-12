@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper04022cd986ec\Symfony\Component\Debug\Exception;
+namespace _PhpScoper11a6395266c4\Symfony\Component\Debug\Exception;
 
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoper04022cd986ec\Symfony\Component\Debug\Exception\ClassNotFoundException::class, \_PhpScoper04022cd986ec\Symfony\Component\ErrorHandler\Error\ClassNotFoundError::class), \E_USER_DEPRECATED);
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoper11a6395266c4\Symfony\Component\Debug\Exception\ClassNotFoundException::class, \_PhpScoper11a6395266c4\Symfony\Component\ErrorHandler\Error\ClassNotFoundError::class), \E_USER_DEPRECATED);
 /**
  * Class (or Trait or Interface) Not Found Exception.
  *
@@ -18,7 +18,7 @@ namespace _PhpScoper04022cd986ec\Symfony\Component\Debug\Exception;
  *
  * @deprecated since Symfony 4.4, use Symfony\Component\ErrorHandler\Error\ClassNotFoundError instead.
  */
-class ClassNotFoundException extends \_PhpScoper04022cd986ec\Symfony\Component\Debug\Exception\FatalErrorException
+class ClassNotFoundException extends \_PhpScoper11a6395266c4\Symfony\Component\Debug\Exception\FatalErrorException
 {
     public function __construct(string $message, \ErrorException $previous)
     {

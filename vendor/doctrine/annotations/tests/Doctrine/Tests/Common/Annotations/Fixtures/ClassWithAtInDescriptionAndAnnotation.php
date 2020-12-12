@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper04022cd986ec\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper11a6395266c4\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper04022cd986ec\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetPropertyMethod;
+use _PhpScoper11a6395266c4\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationTargetPropertyMethod;
 class ClassWithAtInDescriptionAndAnnotation
 {
     /**

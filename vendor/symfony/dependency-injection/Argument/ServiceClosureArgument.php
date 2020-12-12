@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper04022cd986ec\Symfony\Component\DependencyInjection\Argument;
+namespace _PhpScoper11a6395266c4\Symfony\Component\DependencyInjection\Argument;
 
-use _PhpScoper04022cd986ec\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper04022cd986ec\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper11a6395266c4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper11a6395266c4\Symfony\Component\DependencyInjection\Reference;
 /**
  * Represents a service wrapped in a memoizing closure.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceClosureArgument implements \_PhpScoper04022cd986ec\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+class ServiceClosureArgument implements \_PhpScoper11a6395266c4\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
 {
     private $values;
-    public function __construct(\_PhpScoper04022cd986ec\Symfony\Component\DependencyInjection\Reference $reference)
+    public function __construct(\_PhpScoper11a6395266c4\Symfony\Component\DependencyInjection\Reference $reference)
     {
         $this->values = [$reference];
     }
@@ -36,8 +36,8 @@ class ServiceClosureArgument implements \_PhpScoper04022cd986ec\Symfony\Componen
      */
     public function setValues(array $values)
     {
-        if ([0] !== \array_keys($values) || !($values[0] instanceof \_PhpScoper04022cd986ec\Symfony\Component\DependencyInjection\Reference || null === $values[0])) {
-            throw new \_PhpScoper04022cd986ec\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('A ServiceClosureArgument must hold one and only one Reference.');
+        if ([0] !== \array_keys($values) || !($values[0] instanceof \_PhpScoper11a6395266c4\Symfony\Component\DependencyInjection\Reference || null === $values[0])) {
+            throw new \_PhpScoper11a6395266c4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('A ServiceClosureArgument must hold one and only one Reference.');
         }
         $this->values = $values;
     }

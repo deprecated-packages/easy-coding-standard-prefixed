@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper04022cd986ec\Symfony\Component\HttpKernel;
+namespace _PhpScoper11a6395266c4\Symfony\Component\HttpKernel;
 
 /**
  * Allows the Kernel to be rebooted using a temporary cache directory.
