@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1e80a2e03314\Symfony\Component\Debug\FatalErrorHandler;
+namespace _PhpScoper8a05d21c15c9\Symfony\Component\Debug\FatalErrorHandler;
 
-use _PhpScoper1e80a2e03314\Symfony\Component\Debug\Exception\FatalErrorException;
-use _PhpScoper1e80a2e03314\Symfony\Component\Debug\Exception\UndefinedMethodException;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoper1e80a2e03314\Symfony\Component\Debug\FatalErrorHandler\UndefinedMethodFatalErrorHandler::class, \_PhpScoper1e80a2e03314\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedMethodErrorEnhancer::class), \E_USER_DEPRECATED);
+use _PhpScoper8a05d21c15c9\Symfony\Component\Debug\Exception\FatalErrorException;
+use _PhpScoper8a05d21c15c9\Symfony\Component\Debug\Exception\UndefinedMethodException;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoper8a05d21c15c9\Symfony\Component\Debug\FatalErrorHandler\UndefinedMethodFatalErrorHandler::class, \_PhpScoper8a05d21c15c9\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedMethodErrorEnhancer::class), \E_USER_DEPRECATED);
 /**
  * ErrorHandler for undefined methods.
  *
@@ -20,12 +20,12 @@ use _PhpScoper1e80a2e03314\Symfony\Component\Debug\Exception\UndefinedMethodExce
  *
  * @deprecated since Symfony 4.4, use Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedMethodErrorEnhancer instead.
  */
-class UndefinedMethodFatalErrorHandler implements \_PhpScoper1e80a2e03314\Symfony\Component\Debug\FatalErrorHandler\FatalErrorHandlerInterface
+class UndefinedMethodFatalErrorHandler implements \_PhpScoper8a05d21c15c9\Symfony\Component\Debug\FatalErrorHandler\FatalErrorHandlerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function handleError(array $error, \_PhpScoper1e80a2e03314\Symfony\Component\Debug\Exception\FatalErrorException $exception)
+    public function handleError(array $error, \_PhpScoper8a05d21c15c9\Symfony\Component\Debug\Exception\FatalErrorException $exception)
     {
         \preg_match('/^Call to undefined method (.*)::(.*)\\(\\)$/', $error['message'], $matches);
         if (!$matches) {
@@ -36,7 +36,7 @@ class UndefinedMethodFatalErrorHandler implements \_PhpScoper1e80a2e03314\Symfon
         $message = \sprintf('Attempted to call an undefined method named "%s" of class "%s".', $methodName, $className);
         if (!\class_exists($className) || null === ($methods = \get_class_methods($className))) {
             // failed to get the class or its methods on which an unknown method was called (for example on an anonymous class)
-            return new \_PhpScoper1e80a2e03314\Symfony\Component\Debug\Exception\UndefinedMethodException($message, $exception);
+            return new \_PhpScoper8a05d21c15c9\Symfony\Component\Debug\Exception\UndefinedMethodException($message, $exception);
         }
         $candidates = [];
         foreach ($methods as $definedMethodName) {
@@ -55,6 +55,6 @@ class UndefinedMethodFatalErrorHandler implements \_PhpScoper1e80a2e03314\Symfon
             }
             $message .= "\nDid you mean to call " . $candidates;
         }
-        return new \_PhpScoper1e80a2e03314\Symfony\Component\Debug\Exception\UndefinedMethodException($message, $exception);
+        return new \_PhpScoper8a05d21c15c9\Symfony\Component\Debug\Exception\UndefinedMethodException($message, $exception);
     }
 }

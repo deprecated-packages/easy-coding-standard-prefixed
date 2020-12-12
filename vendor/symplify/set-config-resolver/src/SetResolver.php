@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver;
 
-use _PhpScoper1e80a2e03314\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper8a05d21c15c9\Symfony\Component\Console\Input\InputInterface;
 use Symplify\SetConfigResolver\Console\Option\OptionName;
 use Symplify\SetConfigResolver\Console\OptionValueResolver;
 use Symplify\SetConfigResolver\Contract\SetProviderInterface;
@@ -24,7 +24,7 @@ final class SetResolver
         $this->optionValueResolver = new \Symplify\SetConfigResolver\Console\OptionValueResolver();
         $this->setProvider = $setProvider;
     }
-    public function detectFromInput(\_PhpScoper1e80a2e03314\Symfony\Component\Console\Input\InputInterface $input) : ?\Symplify\SmartFileSystem\SmartFileInfo
+    public function detectFromInput(\_PhpScoper8a05d21c15c9\Symfony\Component\Console\Input\InputInterface $input) : ?\Symplify\SmartFileSystem\SmartFileInfo
     {
         $setName = $this->optionValueResolver->getOptionValue($input, \Symplify\SetConfigResolver\Console\Option\OptionName::SET);
         if ($setName === null) {

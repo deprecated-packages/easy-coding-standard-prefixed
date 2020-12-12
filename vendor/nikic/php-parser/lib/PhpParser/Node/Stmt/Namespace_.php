@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper1e80a2e03314\PhpParser\Node\Stmt;
+namespace _PhpScoper8a05d21c15c9\PhpParser\Node\Stmt;
 
-use _PhpScoper1e80a2e03314\PhpParser\Node;
-class Namespace_ extends \_PhpScoper1e80a2e03314\PhpParser\Node\Stmt
+use _PhpScoper8a05d21c15c9\PhpParser\Node;
+class Namespace_ extends \_PhpScoper8a05d21c15c9\PhpParser\Node\Stmt
 {
     /* For use in the "kind" attribute */
     const KIND_SEMICOLON = 1;
@@ -20,7 +20,7 @@ class Namespace_ extends \_PhpScoper1e80a2e03314\PhpParser\Node\Stmt
      * @param null|Node\Stmt[] $stmts      Statements
      * @param array            $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper1e80a2e03314\PhpParser\Node\Name $name = null, $stmts = [], array $attributes = [])
+    public function __construct(\_PhpScoper8a05d21c15c9\PhpParser\Node\Name $name = null, $stmts = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->name = $name;

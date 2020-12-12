@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1e80a2e03314\Symfony\Component\Config\Definition\Exception;
+namespace _PhpScoper8a05d21c15c9\Symfony\Component\Config\Definition\Exception;
 
 /**
  * A very general exception which can be thrown whenever non of the more specific
@@ -16,7 +16,7 @@ namespace _PhpScoper1e80a2e03314\Symfony\Component\Config\Definition\Exception;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class InvalidConfigurationException extends \_PhpScoper1e80a2e03314\Symfony\Component\Config\Definition\Exception\Exception
+class InvalidConfigurationException extends \_PhpScoper8a05d21c15c9\Symfony\Component\Config\Definition\Exception\Exception
 {
     private $path;
     private $containsHints = \false;
