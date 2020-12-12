@@ -27,13 +27,6 @@ final class ArrayTypehintTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getRequiredPhpVersionId()
     {
         return 50000;
@@ -51,5 +44,12 @@ final class ArrayTypehintTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
         if (!$nextToken->equals('(')) {
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, $token->getContent()]);
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT];
     }
 }

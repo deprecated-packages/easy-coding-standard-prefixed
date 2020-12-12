@@ -26,10 +26,12 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
     const TYPE_SLASH_ASTERISK = 3;
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoExtraBlankLinesFixer, NoTrailingWhitespaceFixer, NoWhitespaceInBlankLineFixer.
+     * Must run after PhpdocToCommentFixer.
      */
     public function getPriority()
     {
-        // should be run after PhpdocToCommentFixer and before NoExtraBlankLinesFixer, NoTrailingWhitespaceFixer and NoWhitespaceInBlankLineFixer.
         return 2;
     }
     /**
@@ -75,6 +77,9 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
     {
         $commentType = $this->getCommentType($tokens[$index]->getContent());
         $empty = $this->isEmptyComment($tokens[$index]->getContent());
+        if (self::TYPE_SLASH_ASTERISK === $commentType) {
+            return [$index, $index, $empty];
+        }
         $start = $index;
         $count = \count($tokens);
         ++$index;
@@ -134,7 +139,7 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
         static $mapper = [
             self::TYPE_HASH => '|^#\\s*$|',
             // single line comment starting with '#'
-            self::TYPE_SLASH_ASTERISK => '|^/\\*\\s*\\*/$|',
+            self::TYPE_SLASH_ASTERISK => '|^/\\*[\\s\\*]*\\*+/$|',
             // comment starting with '/*' and ending with '*/' (but not a PHPDoc)
             self::TYPE_DOUBLE_SLASH => '|^//\\s*$|',
         ];

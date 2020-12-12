@@ -27,13 +27,6 @@ final class NullableTypeTransformer extends \PhpCsFixer\Tokenizer\AbstractTransf
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getPriority()
     {
         // needs to run after TypeColonTransformer
@@ -56,8 +49,15 @@ final class NullableTypeTransformer extends \PhpCsFixer\Tokenizer\AbstractTransf
         }
         $prevIndex = $tokens->getPrevMeaningfulToken($index);
         $prevToken = $tokens[$prevIndex];
-        if ($prevToken->equalsAny(['(', ',', [\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON], [\T_PRIVATE], [\T_PROTECTED], [\T_PUBLIC], [\T_VAR]])) {
+        if ($prevToken->equalsAny(['(', ',', [\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON], [\T_PRIVATE], [\T_PROTECTED], [\T_PUBLIC], [\T_VAR], [\T_STATIC]])) {
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, '?']);
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE];
     }
 }

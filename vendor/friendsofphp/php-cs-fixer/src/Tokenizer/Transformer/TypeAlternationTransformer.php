@@ -27,13 +27,6 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getRequiredPhpVersionId()
     {
         return 70100;
@@ -65,5 +58,12 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
             }
             break;
         } while (\true);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION];
     }
 }

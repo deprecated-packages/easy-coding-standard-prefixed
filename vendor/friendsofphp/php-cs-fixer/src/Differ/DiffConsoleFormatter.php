@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Differ;
 
 use PhpCsFixer\Preg;
-use _PhpScoperef870243cfdb\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperdaf95aff095b\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -50,7 +50,7 @@ final class DiffConsoleFormatter
         return \sprintf($template, \implode(\PHP_EOL, \array_map(static function ($line) use($isDecorated, $lineTemplate) {
             if ($isDecorated) {
                 $count = 0;
-                $line = \PhpCsFixer\Preg::replaceCallback(['/^(\\+.*)/', '/^(\\-.*)/', '/^(@.*)/'], function ($matches) {
+                $line = \PhpCsFixer\Preg::replaceCallback(['/^(\\+.*)/', '/^(\\-.*)/', '/^(@.*)/'], static function ($matches) {
                     if ('+' === $matches[0][0]) {
                         $colour = 'green';
                     } elseif ('-' === $matches[0][0]) {
@@ -58,10 +58,10 @@ final class DiffConsoleFormatter
                     } else {
                         $colour = 'cyan';
                     }
-                    return \sprintf('<fg=%s>%s</fg=%s>', $colour, \_PhpScoperef870243cfdb\Symfony\Component\Console\Formatter\OutputFormatter::escape($matches[0]), $colour);
+                    return \sprintf('<fg=%s>%s</fg=%s>', $colour, \_PhpScoperdaf95aff095b\Symfony\Component\Console\Formatter\OutputFormatter::escape($matches[0]), $colour);
                 }, $line, 1, $count);
                 if (0 === $count) {
-                    $line = \_PhpScoperef870243cfdb\Symfony\Component\Console\Formatter\OutputFormatter::escape($line);
+                    $line = \_PhpScoperdaf95aff095b\Symfony\Component\Console\Formatter\OutputFormatter::escape($line);
                 }
             }
             return \sprintf($lineTemplate, $line);

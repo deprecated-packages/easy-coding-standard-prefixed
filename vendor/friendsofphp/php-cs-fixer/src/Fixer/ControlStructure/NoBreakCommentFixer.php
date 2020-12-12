@@ -21,8 +21,8 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Options;
+use _PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Options;
 /**
  * Fixer for rule defined in PSR2 ¶5.2.
  */
@@ -44,7 +44,14 @@ switch ($foo) {
     case 3:
         baz();
 }
-')], 'Adds a "no break" comment before fall-through cases, and removes it if there is no fall-through.');
+'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+switch ($foo) {
+    case 1:
+        foo();
+    case 2:
+        foo();
+}
+', ['comment_text' => 'some comment'])], 'Adds a "no break" comment before fall-through cases, and removes it if there is no fall-through.');
     }
     /**
      * {@inheritdoc}
@@ -55,15 +62,24 @@ switch ($foo) {
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after NoUselessElseFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     protected function createConfigurationDefinition()
     {
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('comment_text', 'The text to use in the added comment and to detect it.'))->setAllowedTypes(['string'])->setAllowedValues([static function ($value) {
             if (\is_string($value) && \PhpCsFixer\Preg::match('/\\R/', $value)) {
-                throw new \_PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException('The comment text must not contain new lines.');
+                throw new \_PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException('The comment text must not contain new lines.');
             }
             return \true;
-        }])->setNormalizer(static function (\_PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Options $options, $value) {
+        }])->setNormalizer(static function (\_PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Options $options, $value) {
             return \rtrim($value);
         })->setDefault('no break')->getOption()]);
     }
@@ -86,14 +102,22 @@ switch ($foo) {
         $empty = \true;
         $fallThrough = \true;
         $commentPosition = null;
-        for ($i = $tokens->getNextTokenOfKind($casePosition, [':', ';']) + 1, $max = \count($tokens); $i < $max; ++$i) {
+        $caseColonIndex = $tokens->getNextTokenOfKind($casePosition, [':', ';']);
+        for ($i = $caseColonIndex + 1, $max = \count($tokens); $i < $max; ++$i) {
             if ($tokens[$i]->isGivenKind([\T_SWITCH, \T_IF, \T_ELSE, \T_ELSEIF, \T_FOR, \T_FOREACH, \T_WHILE, \T_DO, \T_FUNCTION, \T_CLASS])) {
                 $empty = \false;
                 $i = $this->getStructureEnd($tokens, $i);
                 continue;
             }
-            if ($tokens[$i]->isGivenKind([\T_BREAK, \T_CONTINUE, \T_RETURN, \T_EXIT, \T_THROW, \T_GOTO])) {
+            if ($tokens[$i]->isGivenKind([\T_BREAK, \T_CONTINUE, \T_RETURN, \T_EXIT, \T_GOTO])) {
                 $fallThrough = \false;
+                continue;
+            }
+            if ($tokens[$i]->isGivenKind([\T_THROW])) {
+                $previousIndex = $tokens->getPrevMeaningfulToken($i);
+                if ($previousIndex === $caseColonIndex || $tokens[$previousIndex]->equalsAny(['{', ';', '}', [\T_OPEN_TAG]])) {
+                    $fallThrough = \false;
+                }
                 continue;
             }
             if ($tokens[$i]->equals('}') || $tokens[$i]->isGivenKind(\T_ENDSWITCH)) {
@@ -158,7 +182,7 @@ switch ($foo) {
             }
         }
         if ($nbNewlines > 1) {
-            \PhpCsFixer\Preg::match('/^(.*?)(\\R[ \\t]*)$/s', $newlineToken->getContent(), $matches);
+            \PhpCsFixer\Preg::match('/^(.*?)(\\R\\h*)$/s', $newlineToken->getContent(), $matches);
             $indent = $this->getIndentAt($tokens, $newlinePosition - 1);
             $tokens[$newlinePosition] = new \PhpCsFixer\Tokenizer\Token([$newlineToken->getId(), $matches[1] . $lineEnding . $indent]);
             $tokens->insertAt(++$newlinePosition, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $matches[2]]));
@@ -204,10 +228,10 @@ switch ($foo) {
     {
         if ($tokens[$tokens->getPrevNonWhitespace($commentPosition)]->isGivenKind(\T_OPEN_TAG)) {
             $whitespacePosition = $commentPosition + 1;
-            $regex = '/^\\R[ \\t]*/';
+            $regex = '/^\\R\\h*/';
         } else {
             $whitespacePosition = $commentPosition - 1;
-            $regex = '/\\R[ \\t]*$/';
+            $regex = '/\\R\\h*$/';
         }
         $whitespaceToken = $tokens[$whitespacePosition];
         if ($whitespaceToken->isGivenKind(\T_WHITESPACE)) {
@@ -237,7 +261,7 @@ switch ($foo) {
             if ($prevToken->isGivenKind(\T_OPEN_TAG) && \PhpCsFixer\Preg::match('/\\R$/', $prevToken->getContent())) {
                 $content = $this->whitespacesConfig->getLineEnding() . $content;
             }
-            if (\PhpCsFixer\Preg::match('/\\R([ \\t]*)$/', $content, $matches)) {
+            if (\PhpCsFixer\Preg::match('/\\R(\\h*)$/', $content, $matches)) {
                 return $matches[1];
             }
         }

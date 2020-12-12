@@ -30,7 +30,7 @@ final class SelfStaticAccessorFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Inside a final class or anonymous class `self` should be preferred to `static`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Inside a `final` class or anonymous class `self` should be preferred to `static`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 final class Sample
 {
     private static $A = 1;
@@ -77,9 +77,13 @@ $a = new class() {
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_STATIC]) && $tokens->isAnyTokenKindsFound([\T_DOUBLE_COLON, \T_NEW, \T_INSTANCEOF]);
     }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run after FinalInternalClassFixer, FunctionToConstantFixer, PhpUnitTestCaseStaticMethodCallsFixer.
+     */
     public function getPriority()
     {
-        // must be run after FinalInternalClassFixer, FunctionToConstantFixer and PhpUnitTestCaseStaticMethodCallsFixer
         return -10;
     }
     /**

@@ -46,8 +46,24 @@ function sample($a, $b, $c)
 {
     return sample2($a, $b, $c);
 }
-')]);
+'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+/**
+ * @param integer $a
+ * @param boolean $b
+ * @param real $c
+ */
+function sample($a, $b, $c)
+{
+    return sample2($a, $b, $c);
+}
+', ['types' => ['boolean']])]);
     }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run before GeneralPhpdocAnnotationRemoveFixer, GeneralPhpdocTagRenameFixer, NoBlankLinesAfterPhpdocFixer, NoEmptyPhpdocFixer, NoSuperfluousPhpdocTagsFixer, PhpdocAddMissingParamAnnotationFixer, PhpdocAlignFixer, PhpdocAlignFixer, PhpdocInlineTagFixer, PhpdocInlineTagNormalizerFixer, PhpdocLineSpanFixer, PhpdocNoAccessFixer, PhpdocNoAliasTagFixer, PhpdocNoEmptyReturnFixer, PhpdocNoPackageFixer, PhpdocNoUselessInheritdocFixer, PhpdocOrderByValueFixer, PhpdocOrderFixer, PhpdocReturnSelfReferenceFixer, PhpdocSeparationFixer, PhpdocSingleLineVarSpacingFixer, PhpdocSummaryFixer, PhpdocTagCasingFixer, PhpdocTagTypeFixer, PhpdocToParamTypeFixer, PhpdocToReturnTypeFixer, PhpdocToReturnTypeFixer, PhpdocTrimConsecutiveBlankLineSeparationFixer, PhpdocTrimFixer, PhpdocTypesOrderFixer, PhpdocVarAnnotationCorrectOrderFixer, PhpdocVarWithoutNameFixer.
+     * Must run after PhpdocTypesFixer.
+     */
     public function getPriority()
     {
         /*

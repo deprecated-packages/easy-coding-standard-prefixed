@@ -14,6 +14,7 @@ namespace PhpCsFixer\Fixer\LanguageConstruct;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -41,6 +42,15 @@ $className = Baz::class;
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoUnusedImportsFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
@@ -51,35 +61,14 @@ $className = Baz::class;
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        $this->replaceClassKeywords($tokens);
-    }
-    /**
-     * Replaces ::class keyword, namespace by namespace.
-     *
-     * It uses recursive method to get rid of token index changes.
-     *
-     * @param int $namespaceNumber
-     */
-    private function replaceClassKeywords(\PhpCsFixer\Tokenizer\Tokens $tokens, $namespaceNumber = -1)
-    {
-        $namespaceIndexes = \array_keys($tokens->findGivenKind(\T_NAMESPACE));
-        // Namespace blocks
-        if (\count($namespaceIndexes) && isset($namespaceIndexes[$namespaceNumber])) {
-            $startIndex = $namespaceIndexes[$namespaceNumber];
-            $namespaceBlockStartIndex = $tokens->getNextTokenOfKind($startIndex, [';', '{']);
-            $endIndex = $tokens[$namespaceBlockStartIndex]->equals('{') ? $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $namespaceBlockStartIndex) : $tokens->getNextTokenOfKind($namespaceBlockStartIndex, [\T_NAMESPACE]);
-            $endIndex = $endIndex ?: $tokens->count() - 1;
-        } elseif (-1 === $namespaceNumber) {
-            // Out of any namespace block
-            $startIndex = 0;
-            $endIndex = \count($namespaceIndexes) ? $namespaceIndexes[0] : $tokens->count() - 1;
-        } else {
-            return;
+        $namespacesAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer();
+        $previousNamespaceScopeEndIndex = 0;
+        foreach ($namespacesAnalyzer->getDeclarations($tokens) as $declaration) {
+            $this->replaceClassKeywordsSection($tokens, '', $previousNamespaceScopeEndIndex, $declaration->getStartIndex());
+            $this->replaceClassKeywordsSection($tokens, $declaration->getFullName(), $declaration->getStartIndex(), $declaration->getScopeEndIndex());
+            $previousNamespaceScopeEndIndex = $declaration->getScopeEndIndex();
         }
-        $this->storeImports($tokens, $startIndex, $endIndex);
-        $tokens->rewind();
-        $this->replaceClassKeywordsSection($tokens, $startIndex, $endIndex);
-        $this->replaceClassKeywords($tokens, $namespaceNumber + 1);
+        $this->replaceClassKeywordsSection($tokens, '', $previousNamespaceScopeEndIndex, $tokens->count() - 1);
     }
     /**
      * @param int $startIndex
@@ -89,6 +78,7 @@ $className = Baz::class;
     {
         $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         $this->imports = [];
+        /** @var int $index */
         foreach ($tokensAnalyzer->getImportUseIndexes() as $index) {
             if ($index < $startIndex || $index > $endIndex) {
                 continue;
@@ -126,23 +116,32 @@ $className = Baz::class;
         }
     }
     /**
-     * @param int $startIndex
-     * @param int $endIndex
+     * @param string $namespace
+     * @param int    $startIndex
+     * @param int    $endIndex
      */
-    private function replaceClassKeywordsSection(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
+    private function replaceClassKeywordsSection(\PhpCsFixer\Tokenizer\Tokens $tokens, $namespace, $startIndex, $endIndex)
     {
+        if ($endIndex - $startIndex < 3) {
+            return;
+        }
+        $this->storeImports($tokens, $startIndex, $endIndex);
         $ctClassTokens = $tokens->findGivenKind(\PhpCsFixer\Tokenizer\CT::T_CLASS_CONSTANT, $startIndex, $endIndex);
         foreach (\array_reverse(\array_keys($ctClassTokens)) as $classIndex) {
-            $this->replaceClassKeyword($tokens, $classIndex);
+            $this->replaceClassKeyword($tokens, $namespace, $classIndex);
         }
     }
     /**
-     * @param int $classIndex
+     * @param string $namespacePrefix
+     * @param int    $classIndex
      */
-    private function replaceClassKeyword(\PhpCsFixer\Tokenizer\Tokens $tokens, $classIndex)
+    private function replaceClassKeyword(\PhpCsFixer\Tokenizer\Tokens $tokens, $namespacePrefix, $classIndex)
     {
         $classEndIndex = $tokens->getPrevMeaningfulToken($classIndex);
         $classEndIndex = $tokens->getPrevMeaningfulToken($classEndIndex);
+        if (!$tokens[$classEndIndex]->isGivenKind(\T_STRING)) {
+            return;
+        }
         if ($tokens[$classEndIndex]->equalsAny([[\T_STRING, 'self'], [\T_STATIC, 'static'], [\T_STRING, 'parent']], \false)) {
             return;
         }
@@ -156,16 +155,20 @@ $className = Baz::class;
         }
         $classString = $tokens->generatePartialCode($tokens[$classBeginIndex]->isGivenKind(\T_NS_SEPARATOR) ? $tokens->getNextMeaningfulToken($classBeginIndex) : $classBeginIndex, $classEndIndex);
         $classImport = \false;
-        foreach ($this->imports as $alias => $import) {
-            if ($classString === $alias) {
-                $classImport = $import;
-                break;
-            }
-            $classStringArray = \explode('\\', $classString);
-            $namespaceToTest = $classStringArray[0];
-            if (0 === \strcmp($namespaceToTest, \substr($import, -\strlen($namespaceToTest)))) {
-                $classImport = $import;
-                break;
+        if ($tokens[$classBeginIndex]->isGivenKind(\T_NS_SEPARATOR)) {
+            $namespacePrefix = '';
+        } else {
+            foreach ($this->imports as $alias => $import) {
+                if ($classString === $alias) {
+                    $classImport = $import;
+                    break;
+                }
+                $classStringArray = \explode('\\', $classString);
+                $namespaceToTest = $classStringArray[0];
+                if (0 === \strcmp($namespaceToTest, \substr($import, -\strlen($namespaceToTest)))) {
+                    $classImport = $import;
+                    break;
+                }
             }
         }
         for ($i = $classBeginIndex; $i <= $classIndex; ++$i) {
@@ -173,18 +176,19 @@ $className = Baz::class;
                 $tokens->clearAt($i);
             }
         }
-        $tokens->insertAt($classBeginIndex, new \PhpCsFixer\Tokenizer\Token([\T_CONSTANT_ENCAPSED_STRING, "'" . $this->makeClassFQN($classImport, $classString) . "'"]));
+        $tokens->insertAt($classBeginIndex, new \PhpCsFixer\Tokenizer\Token([\T_CONSTANT_ENCAPSED_STRING, "'" . $this->makeClassFQN($namespacePrefix, $classImport, $classString) . "'"]));
     }
     /**
+     * @param string       $namespacePrefix
      * @param false|string $classImport
      * @param string       $classString
      *
      * @return string
      */
-    private function makeClassFQN($classImport, $classString)
+    private function makeClassFQN($namespacePrefix, $classImport, $classString)
     {
         if (\false === $classImport) {
-            return $classString;
+            return ('' !== $namespacePrefix ? $namespacePrefix . '\\' : '') . $classString;
         }
         $classStringArray = \explode('\\', $classString);
         $classStringLength = \count($classStringArray);

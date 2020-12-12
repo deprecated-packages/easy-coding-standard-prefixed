@@ -33,11 +33,12 @@ final class MethodChainingIndentationFixer extends \PhpCsFixer\AbstractFixer imp
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before ArrayIndentationFixer, MethodArgumentSpaceFixer.
+     * Must run after BracesFixer.
      */
     public function getPriority()
     {
-        // Should run after BracesFixer
-        // Should run before ArrayIndentationFixer
         return -29;
     }
     /**
@@ -127,7 +128,7 @@ final class MethodChainingIndentationFixer extends \PhpCsFixer\AbstractFixer imp
      */
     private function getIndentAt(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
-        if (1 === \PhpCsFixer\Preg::match('/\\R{1}([ \\t]*)$/', $this->getIndentContentAt($tokens, $index), $matches)) {
+        if (1 === \PhpCsFixer\Preg::match('/\\R{1}(\\h*)$/', $this->getIndentContentAt($tokens, $index), $matches)) {
             return $matches[1];
         }
         return null;

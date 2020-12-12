@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoperef870243cfdb;
+namespace _PhpScoperdaf95aff095b;
 
 /*
  * This file is part of PHP CS Fixer.
@@ -11,12 +11,8 @@ namespace _PhpScoperef870243cfdb;
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-/**
- * @author Fabien Potencier <fabien@symfony.com>
- * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
- */
 if (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
-    \error_reporting(-1);
+    \error_reporting(\E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED);
 }
 if (\defined('HHVM_VERSION_ID')) {
     \fwrite(\STDERR, "HHVM is not supported.\n");
@@ -25,15 +21,26 @@ if (\defined('HHVM_VERSION_ID')) {
     } else {
         exit(1);
     }
-} elseif (!\defined('PHP_VERSION_ID') || \PHP_VERSION_ID < 50600 || \PHP_VERSION_ID >= 70400) {
-    \fwrite(\STDERR, "PHP needs to be a minimum version of PHP 5.6.0 and maximum version of PHP 7.3.*.\n");
+} elseif (!\defined('PHP_VERSION_ID') || \PHP_VERSION_ID < 50600 || \PHP_VERSION_ID >= 70500) {
+    \fwrite(\STDERR, "PHP needs to be a minimum version of PHP 5.6.0 and maximum version of PHP 7.4.*.\n");
     if (\getenv('PHP_CS_FIXER_IGNORE_ENV')) {
         \fwrite(\STDERR, "Ignoring environment requirements because `PHP_CS_FIXER_IGNORE_ENV` is set. Execution may be unstable.\n");
     } else {
         exit(1);
     }
 }
-\set_error_handler(function ($severity, $message, $file, $line) {
+foreach (['json', 'tokenizer'] as $extension) {
+    if (!\extension_loaded($extension)) {
+        \fwrite(\STDERR, \sprintf("PHP extension ext-%s is missing from your system. Install or enable it.\n", $extension));
+        if (\getenv('PHP_CS_FIXER_IGNORE_ENV')) {
+            \fwrite(\STDERR, "Ignoring environment requirements because `PHP_CS_FIXER_IGNORE_ENV` is set. Execution may be unstable.\n");
+        } else {
+            exit(1);
+        }
+    }
+}
+unset($extension);
+\set_error_handler(static function ($severity, $message, $file, $line) {
     if ($severity & \error_reporting()) {
         throw new \ErrorException($message, 0, $severity, $file, $line);
     }
@@ -65,10 +72,10 @@ if ($require) {
     unset($possibleFiles, $possibleFile, $file);
 }
 unset($require);
-use _PhpScoperef870243cfdb\Composer\XdebugHandler\XdebugHandler;
+use _PhpScoperdaf95aff095b\Composer\XdebugHandler\XdebugHandler;
 use PhpCsFixer\Console\Application;
 // Restart if xdebug is loaded, unless the environment variable PHP_CS_FIXER_ALLOW_XDEBUG is set.
-$xdebug = new \_PhpScoperef870243cfdb\Composer\XdebugHandler\XdebugHandler('PHP_CS_FIXER', '--ansi');
+$xdebug = new \_PhpScoperdaf95aff095b\Composer\XdebugHandler\XdebugHandler('PHP_CS_FIXER', '--ansi');
 $xdebug->check();
 unset($xdebug);
 $application = new \PhpCsFixer\Console\Application();

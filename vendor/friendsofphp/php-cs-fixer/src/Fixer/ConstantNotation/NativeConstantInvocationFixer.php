@@ -23,7 +23,7 @@ use PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
@@ -53,10 +53,11 @@ namespace {
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before GlobalNamespaceImportFixer.
      */
     public function getPriority()
     {
-        // must be run before GlobalNamespaceImportFixer
         return 10;
     }
     /**
@@ -100,7 +101,7 @@ namespace {
                 unset($constantsToEscape[$constantIndex]);
             }
         }
-        $caseInsensitiveConstantsToEscape = \array_diff(\array_unique($caseInsensitiveConstantsToEscape), \array_map(function ($function) {
+        $caseInsensitiveConstantsToEscape = \array_diff(\array_unique($caseInsensitiveConstantsToEscape), \array_map(static function ($function) {
             return \strtolower($function);
         }, $uniqueConfiguredExclude));
         // Store the cache
@@ -136,18 +137,18 @@ namespace {
         $constantChecker = static function ($value) {
             foreach ($value as $constantName) {
                 if (!\is_string($constantName) || '' === \trim($constantName) || \trim($constantName) !== $constantName) {
-                    throw new \_PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Each element must be a non-empty, trimmed string, got "%s" instead.', \is_object($constantName) ? \get_class($constantName) : \gettype($constantName)));
+                    throw new \_PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Each element must be a non-empty, trimmed string, got "%s" instead.', \is_object($constantName) ? \get_class($constantName) : \gettype($constantName)));
                 }
             }
             return \true;
         };
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('fix_built_in', 'Whether to fix constants returned by `get_defined_constants`. User constants are not accounted in this list and must be specified in the include one.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('include', 'List of additional constants to fix.'))->setAllowedTypes(['array'])->setAllowedValues([$constantChecker])->setDefault([])->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('exclude', 'List of constants to ignore.'))->setAllowedTypes(['array'])->setAllowedValues([$constantChecker])->setDefault(['null', 'false', 'true'])->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('scope', 'Only fix constant invocations that are made within a namespace or fix all.'))->setAllowedValues(['all', 'namespaced'])->setDefault('all')->getOption()]);
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('fix_built_in', 'Whether to fix constants returned by `get_defined_constants`. User constants are not accounted in this list and must be specified in the include one.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('include', 'List of additional constants to fix.'))->setAllowedTypes(['array'])->setAllowedValues([$constantChecker])->setDefault([])->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('exclude', 'List of constants to ignore.'))->setAllowedTypes(['array'])->setAllowedValues([$constantChecker])->setDefault(['null', 'false', 'true'])->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('scope', 'Only fix constant invocations that are made within a namespace or fix all.'))->setAllowedValues(['all', 'namespaced'])->setDefault('all')->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('strict', 'Whether leading `\\` of constant invocation not meant to have it should be removed.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
     }
     /**
-     * @param int $start
-     * @param int $end
+     * @param int $startIndex
+     * @param int $endIndex
      */
-    private function fixConstantInvocations(\PhpCsFixer\Tokenizer\Tokens $tokens, $start, $end)
+    private function fixConstantInvocations(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
     {
         $useDeclarations = (new \PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
         $useConstantDeclarations = [];
@@ -157,31 +158,37 @@ namespace {
             }
         }
         $tokenAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
-        $indexes = [];
-        for ($index = $start; $index < $end; ++$index) {
+        for ($index = $endIndex; $index > $startIndex; --$index) {
             $token = $tokens[$index];
             // test if we are at a constant call
             if (!$token->isGivenKind(\T_STRING)) {
                 continue;
             }
+            if (!$tokenAnalyzer->isConstantInvocation($index)) {
+                continue;
+            }
             $tokenContent = $token->getContent();
+            $prevIndex = $tokens->getPrevMeaningfulToken($index);
             if (!isset($this->constantsToEscape[$tokenContent]) && !isset($this->caseInsensitiveConstantsToEscape[\strtolower($tokenContent)])) {
+                if (!$this->configuration['strict']) {
+                    continue;
+                }
+                if (!$tokens[$prevIndex]->isGivenKind(\T_NS_SEPARATOR)) {
+                    continue;
+                }
+                $prevPrevIndex = $tokens->getPrevMeaningfulToken($prevIndex);
+                if ($tokens[$prevPrevIndex]->isGivenKind(\T_STRING)) {
+                    continue;
+                }
+                $tokens->clearTokenAndMergeSurroundingWhitespace($prevIndex);
                 continue;
             }
             if (isset($useConstantDeclarations[$tokenContent])) {
                 continue;
             }
-            $prevIndex = $tokens->getPrevMeaningfulToken($index);
             if ($tokens[$prevIndex]->isGivenKind(\T_NS_SEPARATOR)) {
                 continue;
             }
-            if (!$tokenAnalyzer->isConstantInvocation($index)) {
-                continue;
-            }
-            $indexes[] = $index;
-        }
-        $indexes = \array_reverse($indexes);
-        foreach ($indexes as $index) {
             $tokens->insertAt($index, new \PhpCsFixer\Tokenizer\Token([\T_NS_SEPARATOR, '\\']));
         }
     }

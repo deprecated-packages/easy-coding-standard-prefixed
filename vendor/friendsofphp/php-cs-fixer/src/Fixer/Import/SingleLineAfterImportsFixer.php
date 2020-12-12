@@ -61,6 +61,15 @@ final class Example
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after NoUnusedImportsFixer.
+     */
+    public function getPriority()
+    {
+        return -11;
+    }
+    /**
+     * {@inheritdoc}
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
@@ -105,9 +114,12 @@ final class Example
                 }
                 if ($tokens[$insertIndex]->isWhitespace()) {
                     $nextToken = $tokens[$insertIndex];
+                    if (2 === \substr_count($nextToken->getContent(), "\n")) {
+                        continue;
+                    }
                     $nextMeaningfulAfterUseIndex = $tokens->getNextMeaningfulToken($insertIndex);
                     if (null !== $nextMeaningfulAfterUseIndex && $tokens[$nextMeaningfulAfterUseIndex]->isGivenKind(\T_USE)) {
-                        if (\substr_count($nextToken->getContent(), "\n") < 2) {
+                        if (\substr_count($nextToken->getContent(), "\n") < 1) {
                             $tokens[$insertIndex] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $newline . $indent . \ltrim($nextToken->getContent())]);
                         }
                     } else {

@@ -12,30 +12,45 @@
 namespace PhpCsFixer\Fixer\ClassNotation;
 
 use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class NoUnneededFinalMethodFixer extends \PhpCsFixer\AbstractFixer
+final class NoUnneededFinalMethodFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('A final class must not have final methods.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
-final class Foo {
-    final public function foo() {}
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition('A `final` class must not have `final` methods and `private` methods must not be `final`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+final class Foo
+{
+    final public function foo1() {}
     final protected function bar() {}
     final private function baz() {}
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
-class Foo {
-    final private function bar() {}
+
+class Bar
+{
+    final private function bar1() {}
 }
-')]);
+'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+final class Foo
+{
+    final private function baz() {}
+}
+
+class Bar
+{
+    final private function bar1() {}
+}
+', ['private_methods' => \false])], null, 'Risky when child class overrides a `private` method.');
     }
     /**
      * {@inheritdoc}
@@ -43,6 +58,10 @@ class Foo {
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_FINAL]);
+    }
+    public function isRisky()
+    {
+        return \true;
     }
     /**
      * {@inheritdoc}
@@ -59,6 +78,13 @@ class Foo {
             $classIsFinal = $prevToken->isGivenKind(\T_FINAL);
             $this->fixClass($tokens, $classOpen, $classIsFinal);
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function createConfigurationDefinition()
+    {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('private_methods', 'Private methods of non-`final` classes must not be declared `final`.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
     /**
      * @param int  $classOpenIndex
@@ -80,13 +106,13 @@ class Foo {
             if (!$tokens[$index]->isGivenKind(\T_FINAL)) {
                 continue;
             }
-            if (!$classIsFinal && !$this->isPrivateMethod($tokens, $index, $classOpenIndex)) {
+            if (!$classIsFinal && (!$this->isPrivateMethodOtherThanConstructor($tokens, $index, $classOpenIndex) || !$this->configuration['private_methods'])) {
                 continue;
             }
             $tokens->clearAt($index);
-            $nextTokenIndex = $index + 1;
-            if ($tokens[$nextTokenIndex]->isWhitespace()) {
-                $tokens->clearAt($nextTokenIndex);
+            ++$index;
+            if ($tokens[$index]->isWhitespace()) {
+                $tokens->clearAt($index);
             }
         }
     }
@@ -96,15 +122,16 @@ class Foo {
      *
      * @return bool
      */
-    private function isPrivateMethod(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $classOpenIndex)
+    private function isPrivateMethodOtherThanConstructor(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $classOpenIndex)
     {
         $index = \max($classOpenIndex + 1, $tokens->getPrevTokenOfKind($index, [';', '{', '}']));
+        $private = \false;
         while (!$tokens[$index]->isGivenKind(\T_FUNCTION)) {
             if ($tokens[$index]->isGivenKind(\T_PRIVATE)) {
-                return \true;
+                $private = \true;
             }
-            ++$index;
+            $index = $tokens->getNextMeaningfulToken($index);
         }
-        return \false;
+        return $private && '__construct' !== \strtolower($tokens[$tokens->getNextMeaningfulToken($index)]->getContent());
     }
 }

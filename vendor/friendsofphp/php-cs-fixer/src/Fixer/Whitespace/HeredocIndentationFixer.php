@@ -12,7 +12,10 @@
 namespace PhpCsFixer\Fixer\Whitespace;
 
 use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
@@ -22,7 +25,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Gregor Harlan
  */
-final class HeredocIndentationFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class HeredocIndentationFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
@@ -32,7 +35,7 @@ final class HeredocIndentationFixer extends \PhpCsFixer\AbstractFixer implements
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Heredoc/nowdoc content must be properly indented. Requires PHP >= 7.3.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScoperef870243cfdb;
+namespace _PhpScoperdaf95aff095b;
 
 $a = <<<EOD
 abc
@@ -44,7 +47,7 @@ SAMPLE
 , new \PhpCsFixer\FixerDefinition\VersionSpecification(70300)), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScoperef870243cfdb;
+namespace _PhpScoperdaf95aff095b;
 
 $a = <<<'EOD'
 abc
@@ -53,7 +56,19 @@ EOD
 ;
 
 SAMPLE
-, new \PhpCsFixer\FixerDefinition\VersionSpecification(70300))]);
+, new \PhpCsFixer\FixerDefinition\VersionSpecification(70300)), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample(<<<'SAMPLE'
+<?php
+
+namespace _PhpScoperdaf95aff095b;
+
+$a = <<<'EOD'
+abc
+    def
+EOD
+;
+
+SAMPLE
+, new \PhpCsFixer\FixerDefinition\VersionSpecification(70300), ['indentation' => 'same_as_start'])]);
     }
     /**
      * {@inheritdoc}
@@ -61,6 +76,13 @@ SAMPLE
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return \PHP_VERSION_ID >= 70300 && $tokens->isTokenKindFound(\T_START_HEREDOC);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function createConfigurationDefinition()
+    {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('indentation', 'Whether the indentation should be the same as in the start token line or one level more.'))->setAllowedValues(['start_plus_one', 'same_as_start'])->setDefault('start_plus_one')->getOption()]);
     }
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
@@ -79,8 +101,11 @@ SAMPLE
      */
     private function fixIndentation(\PhpCsFixer\Tokenizer\Tokens $tokens, $start, $end)
     {
-        $indent = $this->getIndentAt($tokens, $start) . $this->whitespacesConfig->getIndent();
-        \PhpCsFixer\Preg::match('/^[ \\t]*/', $tokens[$end]->getContent(), $matches);
+        $indent = $this->getIndentAt($tokens, $start);
+        if ('start_plus_one' === $this->configuration['indentation']) {
+            $indent .= $this->whitespacesConfig->getIndent();
+        }
+        \PhpCsFixer\Preg::match('/^\\h*/', $tokens[$end]->getContent(), $matches);
         $currentIndent = $matches[0];
         $currentIndentLength = \strlen($currentIndent);
         $content = $indent . \substr($tokens[$end]->getContent(), $currentIndentLength);
@@ -94,7 +119,7 @@ SAMPLE
             }
             $content = $tokens[$index]->getContent();
             if ('' !== $currentIndent) {
-                $content = \PhpCsFixer\Preg::replace('/(?<=\\v)(?!' . $currentIndent . ')[ \\t]+/', '', $content);
+                $content = \PhpCsFixer\Preg::replace('/(?<=\\v)(?!' . $currentIndent . ')\\h+/', '', $content);
             }
             $regexEnd = $last && !$currentIndent ? '(?!\\v|$)' : '(?!\\v)';
             $content = \PhpCsFixer\Preg::replace('/(?<=\\v)' . $currentIndent . $regexEnd . '/', $indent, $content);
@@ -109,7 +134,7 @@ SAMPLE
         if (!\in_array($content[0], ["\r", "\n"], \true) && (!$currentIndent || $currentIndent === \substr($content, 0, $currentIndentLength))) {
             $content = $indent . \substr($content, $currentIndentLength);
         } elseif ($currentIndent) {
-            $content = \PhpCsFixer\Preg::replace('/^(?!' . $currentIndent . ')[ \\t]+/', '', $content);
+            $content = \PhpCsFixer\Preg::replace('/^(?!' . $currentIndent . ')\\h+/', '', $content);
         }
         $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_ENCAPSED_AND_WHITESPACE, $content]);
     }
@@ -128,7 +153,7 @@ SAMPLE
             if ($tokens[$index]->isWhitespace() && $tokens[$index - 1]->isGivenKind(\T_OPEN_TAG)) {
                 $content = $tokens[$index - 1]->getContent() . $content;
             }
-            if (1 === \PhpCsFixer\Preg::match('/\\R([ \\t]*)$/', $content, $matches)) {
+            if (1 === \PhpCsFixer\Preg::match('/\\R(\\h*)$/', $content, $matches)) {
                 return $matches[1];
             }
         }

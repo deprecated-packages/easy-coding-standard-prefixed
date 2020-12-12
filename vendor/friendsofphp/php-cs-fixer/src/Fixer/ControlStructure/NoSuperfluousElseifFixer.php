@@ -35,6 +35,16 @@ final class NoSuperfluousElseifFixer extends \PhpCsFixer\AbstractNoUselessElseFi
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before SimplifiedIfReturnFixer.
+     * Must run after NoAlternativeSyntaxFixer.
+     */
+    public function getPriority()
+    {
+        return parent::getPriority();
+    }
+    /**
+     * {@inheritdoc}
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
@@ -51,10 +61,7 @@ final class NoSuperfluousElseifFixer extends \PhpCsFixer\AbstractNoUselessElseFi
      */
     private function isElseif(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
-        if ($tokens[$index]->isGivenKind(\T_ELSEIF)) {
-            return \true;
-        }
-        return $tokens[$index]->isGivenKind(\T_ELSE) && $tokens[$tokens->getNextMeaningfulToken($index)]->isGivenKind(\T_IF);
+        return $tokens[$index]->isGivenKind(\T_ELSEIF) || $tokens[$index]->isGivenKind(\T_ELSE) && $tokens[$tokens->getNextMeaningfulToken($index)]->isGivenKind(\T_IF);
     }
     /**
      * @param int $index
@@ -73,6 +80,9 @@ final class NoSuperfluousElseifFixer extends \PhpCsFixer\AbstractNoUselessElseFi
                 $whitespace = $matches[1];
                 break;
             }
+        }
+        if ('' === $whitespace) {
+            return;
         }
         $previousToken = $tokens[$index - 1];
         if (!$previousToken->isWhitespace()) {

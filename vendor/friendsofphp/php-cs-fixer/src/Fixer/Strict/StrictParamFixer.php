@@ -45,6 +45,15 @@ final class StrictParamFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NativeFunctionInvocationFixer.
+     */
+    public function getPriority()
+    {
+        return 11;
+    }
+    /**
+     * {@inheritdoc}
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
@@ -110,7 +119,11 @@ final class StrictParamFixer extends \PhpCsFixer\AbstractFixer
                 $tokensToInsert[] = clone $param;
             }
         }
-        $beforeEndBraceIndex = $tokens->getTokenNotOfKindSibling($endBraceIndex, -1, [[\T_WHITESPACE], ',']);
+        $beforeEndBraceIndex = $tokens->getPrevMeaningfulToken($endBraceIndex);
+        if ($tokens[$beforeEndBraceIndex]->equals(',')) {
+            \array_shift($tokensToInsert);
+            $tokensToInsert[] = new \PhpCsFixer\Tokenizer\Token(',');
+        }
         $tokens->insertAt($beforeEndBraceIndex + 1, $tokensToInsert);
     }
 }

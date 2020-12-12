@@ -11,23 +11,25 @@
  */
 namespace PhpCsFixer\Tests;
 
-use _PhpScoperef870243cfdb\PHPUnit\Framework\TestCase as BaseTestCase;
-use _PhpScoperef870243cfdb\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
-use _PhpScoperef870243cfdb\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
-use _PhpScoperef870243cfdb\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
-use _PhpScoperef870243cfdb\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
-use _PhpScoperef870243cfdb\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
-if (\trait_exists(\_PhpScoperef870243cfdb\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait::class)) {
+use _PhpScoperdaf95aff095b\PHPUnit\Framework\TestCase as BaseTestCase;
+use _PhpScoperdaf95aff095b\PHPUnitGoodPractices\Polyfill\PolyfillTrait;
+use _PhpScoperdaf95aff095b\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
+use _PhpScoperdaf95aff095b\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
+use _PhpScoperdaf95aff095b\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
+use _PhpScoperdaf95aff095b\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
+use _PhpScoperdaf95aff095b\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
+if (\trait_exists(\_PhpScoperdaf95aff095b\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait::class)) {
     /**
      * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
      *
      * @internal
      */
-    abstract class TestCase extends \_PhpScoperef870243cfdb\PHPUnit\Framework\TestCase
+    abstract class TestCase extends \_PhpScoperdaf95aff095b\PHPUnit\Framework\TestCase
     {
         use ExpectationViaCodeOverAnnotationTrait;
         use ExpectOverSetExceptionTrait;
         use IdentityOverEqualityTrait;
+        use PolyfillTrait;
         use ProphecyOverMockObjectTrait;
         use ProphesizeOnlyInterfaceTrait;
     }
@@ -41,7 +43,7 @@ if (\trait_exists(\_PhpScoperef870243cfdb\PHPUnitGoodPractices\Traits\Prophesize
      *
      * @todo 3.0 To be removed when we clean up composer prod-autoloader from dev-packages.
      */
-    abstract class TestCase extends \_PhpScoperef870243cfdb\PHPUnit\Framework\TestCase
+    abstract class TestCase extends \_PhpScoperdaf95aff095b\PHPUnit\Framework\TestCase
     {
     }
 }

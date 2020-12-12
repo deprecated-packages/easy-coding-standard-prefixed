@@ -38,13 +38,6 @@ final class MultilineWhitespaceBeforeSemicolonsFixer extends \PhpCsFixer\Abstrac
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
-    {
-        return $tokens->isTokenKindFound(';');
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Forbid multi-line whitespace before the closing semicolon or move the semicolon to the new line for chained calls.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
@@ -58,6 +51,23 @@ function foo () {
                             ->method(3);
                     ?>
 ', ['strategy' => self::STRATEGY_NEW_LINE_FOR_CHAINED_CALLS])]);
+    }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run before SpaceAfterSemicolonFixer.
+     * Must run after CombineConsecutiveIssetsFixer, NoEmptyStatementFixer, SingleImportPerStatementFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    {
+        return $tokens->isTokenKindFound(';');
     }
     /**
      * {@inheritdoc}
@@ -224,7 +234,7 @@ function foo () {
         if ($tokens[$index]->isGivenKind(\T_OPEN_TAG)) {
             $content = $tokens[$index]->getContent() . $content;
         }
-        if (1 === \PhpCsFixer\Preg::match('/\\R{1}([ \\t]*)$/', $content, $matches)) {
+        if (1 === \PhpCsFixer\Preg::match('/\\R{1}(\\h*)$/', $content, $matches)) {
             return $matches[1];
         }
         return null;

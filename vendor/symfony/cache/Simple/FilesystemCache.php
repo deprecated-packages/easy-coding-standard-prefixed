@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef870243cfdb\Symfony\Component\Cache\Simple;
+namespace _PhpScoperdaf95aff095b\Symfony\Component\Cache\Simple;
 
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\Traits\FilesystemTrait;
-use _PhpScoperef870243cfdb\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperef870243cfdb\Symfony\Component\Cache\Simple\FilesystemCache::class, \_PhpScoperef870243cfdb\Symfony\Component\Cache\Adapter\FilesystemAdapter::class, \_PhpScoperef870243cfdb\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\Traits\FilesystemTrait;
+use _PhpScoperdaf95aff095b\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Simple\FilesystemCache::class, \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Adapter\FilesystemAdapter::class, \_PhpScoperdaf95aff095b\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use FilesystemAdapter and type-hint for CacheInterface instead.
  */
-class FilesystemCache extends \_PhpScoperef870243cfdb\Symfony\Component\Cache\Simple\AbstractCache implements \_PhpScoperef870243cfdb\Symfony\Component\Cache\PruneableInterface
+class FilesystemCache extends \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Simple\AbstractCache implements \_PhpScoperdaf95aff095b\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemTrait;
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \_PhpScoperef870243cfdb\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        $this->marshaller = $marshaller ?? new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
     }

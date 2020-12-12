@@ -47,6 +47,15 @@ final class ConcatSpaceFixer extends \PhpCsFixer\AbstractFixer implements \PhpCs
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after SingleLineThrowFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {

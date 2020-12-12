@@ -30,10 +30,12 @@ final class CombineConsecutiveUnsetsFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoExtraBlankLinesFixer, NoTrailingWhitespaceFixer, NoWhitespaceInBlankLineFixer, SpaceAfterSemicolonFixer.
+     * Must run after NoEmptyStatementFixer, NoUnsetOnPropertyFixer, NoUselessElseFixer.
      */
     public function getPriority()
     {
-        // should be run before SpaceAfterSemicolonFixer, NoWhitespaceInBlankLineFixer, NoTrailingWhitespaceFixer and NoExtraBlankLinesFixer and after NoEmptyStatementFixer.
         return 24;
     }
     /**

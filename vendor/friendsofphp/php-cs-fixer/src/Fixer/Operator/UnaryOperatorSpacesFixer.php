@@ -30,6 +30,15 @@ final class UnaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NotOperatorWithSpaceFixer, NotOperatorWithSuccessorSpaceFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {

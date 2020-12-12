@@ -34,7 +34,7 @@ final class FileLintingIterator extends \IteratorIterator
         $this->linter = $linter;
     }
     /**
-     * @return null|LinterInterface
+     * @return null|LintingResultInterface
      */
     public function currentLintingResult()
     {

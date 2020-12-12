@@ -63,7 +63,7 @@ final class ErrorSuppressionFixer extends \PhpCsFixer\AbstractFixer implements \
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
-        $excludedFunctions = \array_map(function ($function) {
+        $excludedFunctions = \array_map(static function ($function) {
             return \strtolower($function);
         }, $this->configuration[self::OPTION_NOISE_REMAINING_USAGES_EXCLUDE]);
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {

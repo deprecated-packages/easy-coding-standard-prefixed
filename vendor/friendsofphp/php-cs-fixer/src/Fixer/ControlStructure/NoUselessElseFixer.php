@@ -36,6 +36,16 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before BracesFixer, CombineConsecutiveUnsetsFixer, NoBreakCommentFixer, NoExtraBlankLinesFixer, NoTrailingWhitespaceFixer, NoUselessReturnFixer, NoWhitespaceInBlankLineFixer, SimplifiedIfReturnFixer.
+     * Must run after NoAlternativeSyntaxFixer, NoEmptyStatementFixer, NoUnneededCurlyBracesFixer.
+     */
+    public function getPriority()
+    {
+        return parent::getPriority();
+    }
+    /**
+     * {@inheritdoc}
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {

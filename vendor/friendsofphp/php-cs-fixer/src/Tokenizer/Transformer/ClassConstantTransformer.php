@@ -27,13 +27,6 @@ final class ClassConstantTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_CLASS_CONSTANT];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getRequiredPhpVersionId()
     {
         return 50500;
@@ -51,5 +44,12 @@ final class ClassConstantTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
         if ($prevToken->isGivenKind(\T_DOUBLE_COLON)) {
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_CLASS_CONSTANT, $token->getContent()]);
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_CLASS_CONSTANT];
     }
 }

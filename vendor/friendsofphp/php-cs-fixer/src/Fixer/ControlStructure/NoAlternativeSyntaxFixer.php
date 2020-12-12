@@ -33,15 +33,16 @@ final class NoAlternativeSyntaxFixer extends \PhpCsFixer\AbstractFixer
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound([\T_ENDIF, \T_ENDWHILE, \T_ENDFOREACH, \T_ENDFOR]);
+        return $tokens->hasAlternativeSyntax();
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before BracesFixer, ElseifFixer, NoSuperfluousElseifFixer, NoUselessElseFixer, SwitchContinueToBreakFixer.
      */
     public function getPriority()
     {
-        // Should run before BracesFixer and ElseifFixer
-        return 1;
+        return 26;
     }
     /**
      * {@inheritdoc}
@@ -75,10 +76,10 @@ final class NoAlternativeSyntaxFixer extends \PhpCsFixer\AbstractFixer
      */
     private function fixOpenCloseControls($index, \PhpCsFixer\Tokenizer\Token $token, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        if ($token->isGivenKind([\T_IF, \T_FOREACH, \T_WHILE, \T_FOR])) {
+        if ($token->isGivenKind([\T_IF, \T_FOREACH, \T_WHILE, \T_FOR, \T_SWITCH, \T_DECLARE])) {
             $openIndex = $tokens->getNextTokenOfKind($index, ['(']);
             $closeIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openIndex);
-            $afterParenthesisIndex = $tokens->getNextNonWhitespace($closeIndex);
+            $afterParenthesisIndex = $tokens->getNextMeaningfulToken($closeIndex);
             $afterParenthesis = $tokens[$afterParenthesisIndex];
             if (!$afterParenthesis->equals(':')) {
                 return;
@@ -94,7 +95,7 @@ final class NoAlternativeSyntaxFixer extends \PhpCsFixer\AbstractFixer
             $tokens->clearAt($afterParenthesisIndex);
             $tokens->insertAt($afterParenthesisIndex, $items);
         }
-        if (!$token->isGivenKind([\T_ENDIF, \T_ENDFOREACH, \T_ENDWHILE, \T_ENDFOR])) {
+        if (!$token->isGivenKind([\T_ENDIF, \T_ENDFOREACH, \T_ENDWHILE, \T_ENDFOR, \T_ENDSWITCH, \T_ENDDECLARE])) {
             return;
         }
         $nextTokenIndex = $tokens->getNextMeaningfulToken($index);
@@ -105,7 +106,7 @@ final class NoAlternativeSyntaxFixer extends \PhpCsFixer\AbstractFixer
         }
     }
     /**
-     * Handle the else:.
+     * Handle the else: cases.
      *
      * @param int    $index  the index of the token being processed
      * @param Token  $token  the token being processed
@@ -144,7 +145,7 @@ final class NoAlternativeSyntaxFixer extends \PhpCsFixer\AbstractFixer
         $this->addBraces($tokens, new \PhpCsFixer\Tokenizer\Token([\T_ELSEIF, 'elseif']), $index, $tokenAfterParenthesisIndex);
     }
     /**
-     * Add opening and closing braces to the else: and elseif: .
+     * Add opening and closing braces to the else: and elseif: cases.
      *
      * @param Tokens $tokens     the tokens collection
      * @param Token  $token      the current token

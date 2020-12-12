@@ -46,6 +46,15 @@ final class Sample
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after OrderedClassElementsFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {

@@ -35,13 +35,6 @@ final class CurlyBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfor
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_CURLY_CLOSE, \PhpCsFixer\Tokenizer\CT::T_DOLLAR_CLOSE_CURLY_BRACES, \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_CLOSE];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getRequiredPhpVersionId()
     {
         return 50000;
@@ -59,6 +52,13 @@ final class CurlyBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfor
         if (\PHP_VERSION_ID >= 70000) {
             $this->transformIntoGroupUseBraces($tokens, $token, $index);
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_CURLY_CLOSE, \PhpCsFixer\Tokenizer\CT::T_DOLLAR_CLOSE_CURLY_BRACES, \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_CLOSE];
     }
     /**
      * Transform closing `}` for T_CURLY_OPEN into CT::T_CURLY_CLOSE.

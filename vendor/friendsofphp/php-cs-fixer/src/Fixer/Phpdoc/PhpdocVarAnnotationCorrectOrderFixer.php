@@ -29,6 +29,16 @@ final class PhpdocVarAnnotationCorrectOrderFixer extends \PhpCsFixer\AbstractFix
 $foo = 2 + 2;
 ')]);
     }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run before PhpdocAlignFixer.
+     * Must run after CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
@@ -42,7 +52,7 @@ $foo = 2 + 2;
             if (\false === \stripos($token->getContent(), '@var') && \false === \stripos($token->getContent(), '@type')) {
                 continue;
             }
-            $newContent = \PhpCsFixer\Preg::replace('/(@(?:type|var)\\s*)(\\$\\S+)(\\s+)([^\\$](?:[^<\\s]|<[^>]*>)*)(\\s|\\*)/i', '$1$4$3$2$5', $token->getContent());
+            $newContent = \PhpCsFixer\Preg::replace('/(@(?:type|var)\\s*)(\\$\\S+)(\\h+)([^\\$](?:[^<\\s]|<[^>]*>)*)(\\s|\\*)/i', '$1$4$3$2$5', $token->getContent());
             if ($newContent === $token->getContent()) {
                 continue;
             }

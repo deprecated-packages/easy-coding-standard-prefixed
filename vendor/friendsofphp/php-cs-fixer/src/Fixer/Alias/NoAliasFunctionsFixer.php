@@ -18,6 +18,7 @@ use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer;
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,7 +28,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
-    /** @var array<string, string> stores alias (key) - master (value) functions mapping */
+    /** @var array<string, array<int|string>|string> stores alias (key) - master (value) functions mapping */
     private $aliases = [];
     /** @var array<string, string> stores alias (key) - master (value) functions mapping */
     private static $internalSet = ['chop' => 'rtrim', 'close' => 'closedir', 'doubleval' => 'floatval', 'fputs' => 'fwrite', 'get_required_files' => 'get_included_files', 'ini_alter' => 'ini_set', 'is_double' => 'is_float', 'is_integer' => 'is_int', 'is_long' => 'is_int', 'is_real' => 'is_float', 'is_writeable' => 'is_writable', 'join' => 'implode', 'key_exists' => 'array_key_exists', 'magic_quotes_runtime' => 'set_magic_quotes_runtime', 'pos' => 'current', 'show_source' => 'highlight_file', 'sizeof' => 'count', 'strchr' => 'strstr', 'user_error' => 'trigger_error'];
@@ -35,6 +36,8 @@ final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \
     private static $imapSet = ['imap_create' => 'imap_createmailbox', 'imap_fetchtext' => 'imap_body', 'imap_header' => 'imap_headerinfo', 'imap_listmailbox' => 'imap_list', 'imap_listsubscribed' => 'imap_lsub', 'imap_rename' => 'imap_renamemailbox', 'imap_scan' => 'imap_listscan', 'imap_scanmailbox' => 'imap_listscan'];
     /** @var array<string, string> stores alias (key) - master (value) functions mapping */
     private static $mbregSet = ['mbereg' => 'mb_ereg', 'mbereg_match' => 'mb_ereg_match', 'mbereg_replace' => 'mb_ereg_replace', 'mbereg_search' => 'mb_ereg_search', 'mbereg_search_getpos' => 'mb_ereg_search_getpos', 'mbereg_search_getregs' => 'mb_ereg_search_getregs', 'mbereg_search_init' => 'mb_ereg_search_init', 'mbereg_search_pos' => 'mb_ereg_search_pos', 'mbereg_search_regs' => 'mb_ereg_search_regs', 'mbereg_search_setpos' => 'mb_ereg_search_setpos', 'mberegi' => 'mb_eregi', 'mberegi_replace' => 'mb_eregi_replace', 'mbregex_encoding' => 'mb_regex_encoding', 'mbsplit' => 'mb_split'];
+    private static $exifSet = ['read_exif_data' => 'exif_read_data'];
+    private static $timeSet = ['mktime' => ['time', 0], 'gmmktime' => ['time', 0]];
     public function configure(array $configuration = null)
     {
         parent::configure($configuration);
@@ -44,6 +47,8 @@ final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \
                 $this->aliases = self::$internalSet;
                 $this->aliases = \array_merge($this->aliases, self::$imapSet);
                 $this->aliases = \array_merge($this->aliases, self::$mbregSet);
+                $this->aliases = \array_merge($this->aliases, self::$timeSet);
+                $this->aliases = \array_merge($this->aliases, self::$exifSet);
                 break;
             }
             if ('@internal' === $set) {
@@ -52,6 +57,10 @@ final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \
                 $this->aliases = \array_merge($this->aliases, self::$imapSet);
             } elseif ('@mbreg' === $set) {
                 $this->aliases = \array_merge($this->aliases, self::$mbregSet);
+            } elseif ('@time' === $set) {
+                $this->aliases = \array_merge($this->aliases, self::$timeSet);
+            } elseif ('@exif' === $set) {
+                $this->aliases = \array_merge($this->aliases, self::$exifSet);
             }
         }
     }
@@ -89,6 +98,15 @@ mbereg_search_getregs();
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before ImplodeCallFixer, PhpUnitDedicateAssertFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
@@ -107,7 +125,8 @@ mbereg_search_getregs();
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
-        /** @var \PhpCsFixer\Tokenizer\Token $token */
+        $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
+        /** @var Token $token */
         foreach ($tokens->findGivenKind(\T_STRING) as $index => $token) {
             // check mapping hit
             $tokenContent = \strtolower($token->getContent());
@@ -115,14 +134,23 @@ mbereg_search_getregs();
                 continue;
             }
             // skip expressions without parameters list
-            $nextToken = $tokens[$tokens->getNextMeaningfulToken($index)];
-            if (!$nextToken->equals('(')) {
+            $openParenthesis = $tokens->getNextMeaningfulToken($index);
+            if (!$tokens[$openParenthesis]->equals('(')) {
                 continue;
             }
             if (!$functionsAnalyzer->isGlobalFunctionCall($tokens, $index)) {
                 continue;
             }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $this->aliases[$tokenContent]]);
+            if (\is_array($this->aliases[$tokenContent])) {
+                list($alias, $numberOfArguments) = $this->aliases[$tokenContent];
+                $count = $argumentsAnalyzer->countArguments($tokens, $openParenthesis, $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis));
+                if ($numberOfArguments !== $count) {
+                    continue;
+                }
+            } else {
+                $alias = $this->aliases[$tokenContent];
+            }
+            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $alias]);
         }
     }
     /**
@@ -130,7 +158,7 @@ mbereg_search_getregs();
      */
     protected function createConfigurationDefinition()
     {
-        $sets = ['@internal', '@IMAP', '@mbreg', '@all'];
+        $sets = ['@internal', '@IMAP', '@mbreg', '@all', '@time', '@exif'];
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('sets', 'List of sets to fix. Defined sets are `@internal` (native functions), `@IMAP` (IMAP functions), `@mbreg` (from `ext-mbstring`) `@all` (all listed sets).'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset($sets)])->setDefault(['@internal', '@IMAP'])->getOption()]);
     }
 }

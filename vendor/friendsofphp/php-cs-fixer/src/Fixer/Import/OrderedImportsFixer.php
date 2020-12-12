@@ -26,7 +26,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Sebastiaan Stok <s.stok@rollerscapes.net>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -98,10 +98,11 @@ use Bar;
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after GlobalNamespaceImportFixer, NoLeadingImportSlashFixer.
      */
     public function getPriority()
     {
-        // should be run after the NoLeadingImportSlashFixer
         return -30;
     }
     /**
@@ -163,11 +164,11 @@ use Bar;
             if (null !== $value) {
                 $missing = \array_diff($supportedSortTypes, $value);
                 if (\count($missing)) {
-                    throw new \_PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Missing sort %s "%s".', 1 === \count($missing) ? 'type' : 'types', \implode('", "', $missing)));
+                    throw new \_PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Missing sort %s "%s".', 1 === \count($missing) ? 'type' : 'types', \implode('", "', $missing)));
                 }
                 $unknown = \array_diff($value, $supportedSortTypes);
                 if (\count($unknown)) {
-                    throw new \_PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unknown sort %s "%s".', 1 === \count($unknown) ? 'type' : 'types', \implode('", "', $unknown)));
+                    throw new \_PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unknown sort %s "%s".', 1 === \count($unknown) ? 'type' : 'types', \implode('", "', $unknown)));
                 }
             }
             return \true;
@@ -234,7 +235,7 @@ use Bar;
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         for ($i = \count($uses) - 1; $i >= 0; --$i) {
             $index = $uses[$i];
-            $startIndex = $tokens->getTokenNotOfKindSibling($index + 1, 1, [[\T_WHITESPACE]]);
+            $startIndex = $tokens->getTokenNotOfKindsSibling($index + 1, 1, [\T_WHITESPACE]);
             $endIndex = $tokens->getNextTokenOfKind($startIndex, [';', [\T_CLOSE_TAG]]);
             $previous = $tokens->getPrevMeaningfulToken($endIndex);
             $group = $tokens[$previous]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_CLOSE);
@@ -269,6 +270,7 @@ use Bar;
                         $firstIndent = '';
                         $separator = ', ';
                         $lastIndent = '';
+                        $hasGroupTrailingComma = \false;
                         for ($k1 = $k + 1; $k1 < $namespaceTokensCount; ++$k1) {
                             $comment = '';
                             $namespacePart = '';
@@ -289,6 +291,10 @@ use Bar;
                                 $namespacePart .= $namespaceTokens[$k2]->getContent();
                             }
                             $namespacePart = \trim($namespacePart);
+                            if ('' === $namespacePart) {
+                                $hasGroupTrailingComma = \true;
+                                continue;
+                            }
                             $comment = \trim($comment);
                             if ('' !== $comment) {
                                 $namespacePart .= ' ' . $comment;
@@ -302,7 +308,7 @@ use Bar;
                         if ($sortedParts === $parts) {
                             $namespace = \PhpCsFixer\Tokenizer\Tokens::fromArray($namespaceTokens)->generateCode();
                         } else {
-                            $namespace .= $firstIndent . \implode($separator, $parts) . $lastIndent . '}';
+                            $namespace .= $firstIndent . \implode($separator, $parts) . ($hasGroupTrailingComma ? ',' : '') . $lastIndent . '}';
                         }
                     } else {
                         $namespace = \PhpCsFixer\Tokenizer\Tokens::fromArray($namespaceTokens)->generateCode();

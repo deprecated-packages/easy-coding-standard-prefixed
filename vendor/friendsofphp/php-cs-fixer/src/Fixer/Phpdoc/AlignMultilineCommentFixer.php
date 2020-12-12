@@ -64,10 +64,12 @@ with a line not prefixed with asterisk
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before PhpdocTrimConsecutiveBlankLineSeparationFixer.
+     * Must run after ArrayIndentationFixer.
      */
     public function getPriority()
     {
-        // Should run after ArrayIndentationFixer
         return -40;
     }
     /**
@@ -96,7 +98,7 @@ with a line not prefixed with asterisk
             if ($tokens[$previousIndex]->isGivenKind(\T_OPEN_TAG)) {
                 $whitespace = \PhpCsFixer\Preg::replace('/\\S/', '', $tokens[$previousIndex]->getContent()) . $whitespace;
             }
-            if (1 !== \PhpCsFixer\Preg::match('/\\R([ \\t]*)$/', $whitespace, $matches)) {
+            if (1 !== \PhpCsFixer\Preg::match('/\\R(\\h*)$/', $whitespace, $matches)) {
                 continue;
             }
             if ($token->isGivenKind(\T_COMMENT) && 'all_multiline' !== $this->configuration['comment_type'] && 1 === \PhpCsFixer\Preg::match('/\\R(?:\\R|\\s*[^\\s\\*])/', $token->getContent())) {

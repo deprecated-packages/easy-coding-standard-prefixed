@@ -27,13 +27,6 @@ final class TypeColonTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getPriority()
     {
         // needs to run after ReturnRefTransformer and UseTransformer
@@ -68,10 +61,17 @@ final class TypeColonTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
         }
         $prevKinds = [\T_FUNCTION, \PhpCsFixer\Tokenizer\CT::T_RETURN_REF, \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA];
         if (\PHP_VERSION_ID >= 70400) {
-            $prevKinds[] = T_FN;
+            $prevKinds[] = \T_FN;
         }
         if ($prevToken->isGivenKind($prevKinds)) {
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON, ':']);
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON];
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperef870243cfdb\PhpParser;
+namespace _PhpScoperdaf95aff095b\PhpParser;
 
-use _PhpScoperef870243cfdb\PhpParser\Node\Expr;
-use _PhpScoperef870243cfdb\PhpParser\Node\Identifier;
-use _PhpScoperef870243cfdb\PhpParser\Node\Name;
-use _PhpScoperef870243cfdb\PhpParser\Node\NullableType;
-use _PhpScoperef870243cfdb\PhpParser\Node\Scalar;
-use _PhpScoperef870243cfdb\PhpParser\Node\Stmt;
-use _PhpScoperef870243cfdb\PhpParser\Node\UnionType;
+use _PhpScoperdaf95aff095b\PhpParser\Node\Expr;
+use _PhpScoperdaf95aff095b\PhpParser\Node\Identifier;
+use _PhpScoperdaf95aff095b\PhpParser\Node\Name;
+use _PhpScoperdaf95aff095b\PhpParser\Node\NullableType;
+use _PhpScoperdaf95aff095b\PhpParser\Node\Scalar;
+use _PhpScoperdaf95aff095b\PhpParser\Node\Stmt;
+use _PhpScoperdaf95aff095b\PhpParser\Node\UnionType;
 /**
  * This class defines helpers used in the implementation of builders. Don't use it directly.
  *
@@ -24,11 +24,11 @@ final class BuilderHelpers
      *
      * @return Node The normalized node
      */
-    public static function normalizeNode($node) : \_PhpScoperef870243cfdb\PhpParser\Node
+    public static function normalizeNode($node) : \_PhpScoperdaf95aff095b\PhpParser\Node
     {
-        if ($node instanceof \_PhpScoperef870243cfdb\PhpParser\Builder) {
+        if ($node instanceof \_PhpScoperdaf95aff095b\PhpParser\Builder) {
             return $node->getNode();
-        } elseif ($node instanceof \_PhpScoperef870243cfdb\PhpParser\Node) {
+        } elseif ($node instanceof \_PhpScoperdaf95aff095b\PhpParser\Node) {
             return $node;
         }
         throw new \LogicException('Expected node or builder object');
@@ -42,14 +42,14 @@ final class BuilderHelpers
      *
      * @return Stmt The normalized statement node
      */
-    public static function normalizeStmt($node) : \_PhpScoperef870243cfdb\PhpParser\Node\Stmt
+    public static function normalizeStmt($node) : \_PhpScoperdaf95aff095b\PhpParser\Node\Stmt
     {
         $node = self::normalizeNode($node);
-        if ($node instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Stmt) {
+        if ($node instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Stmt) {
             return $node;
         }
-        if ($node instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Expr) {
-            return new \_PhpScoperef870243cfdb\PhpParser\Node\Stmt\Expression($node);
+        if ($node instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Expr) {
+            return new \_PhpScoperdaf95aff095b\PhpParser\Node\Stmt\Expression($node);
         }
         throw new \LogicException('Expected statement or expression node');
     }
@@ -60,15 +60,15 @@ final class BuilderHelpers
      *
      * @return Identifier The normalized identifier
      */
-    public static function normalizeIdentifier($name) : \_PhpScoperef870243cfdb\PhpParser\Node\Identifier
+    public static function normalizeIdentifier($name) : \_PhpScoperdaf95aff095b\PhpParser\Node\Identifier
     {
-        if ($name instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Identifier) {
+        if ($name instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Identifier) {
             return $name;
         }
         if (\is_string($name)) {
-            return new \_PhpScoperef870243cfdb\PhpParser\Node\Identifier($name);
+            return new \_PhpScoperdaf95aff095b\PhpParser\Node\Identifier($name);
         }
-        throw new \LogicException('_PhpScoperef870243cfdb\\Expected string or instance of Node\\Identifier');
+        throw new \LogicException('_PhpScoperdaf95aff095b\\Expected string or instance of Node\\Identifier');
     }
     /**
      * Normalizes strings to Identifier, also allowing expressions.
@@ -79,13 +79,13 @@ final class BuilderHelpers
      */
     public static function normalizeIdentifierOrExpr($name)
     {
-        if ($name instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Identifier || $name instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Expr) {
+        if ($name instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Identifier || $name instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Expr) {
             return $name;
         }
         if (\is_string($name)) {
-            return new \_PhpScoperef870243cfdb\PhpParser\Node\Identifier($name);
+            return new \_PhpScoperdaf95aff095b\PhpParser\Node\Identifier($name);
         }
-        throw new \LogicException('_PhpScoperef870243cfdb\\Expected string or instance of Node\\Identifier or Node\\Expr');
+        throw new \LogicException('_PhpScoperdaf95aff095b\\Expected string or instance of Node\\Identifier or Node\\Expr');
     }
     /**
      * Normalizes a name: Converts string names to Name nodes.
@@ -94,7 +94,7 @@ final class BuilderHelpers
      *
      * @return Name The normalized name
      */
-    public static function normalizeName($name) : \_PhpScoperef870243cfdb\PhpParser\Node\Name
+    public static function normalizeName($name) : \_PhpScoperdaf95aff095b\PhpParser\Node\Name
     {
         return self::normalizeNameCommon($name, \false);
     }
@@ -119,27 +119,27 @@ final class BuilderHelpers
      */
     private static function normalizeNameCommon($name, bool $allowExpr)
     {
-        if ($name instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Name) {
+        if ($name instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Name) {
             return $name;
         } elseif (\is_string($name)) {
             if (!$name) {
                 throw new \LogicException('Name cannot be empty');
             }
             if ($name[0] === '\\') {
-                return new \_PhpScoperef870243cfdb\PhpParser\Node\Name\FullyQualified(\substr($name, 1));
+                return new \_PhpScoperdaf95aff095b\PhpParser\Node\Name\FullyQualified(\substr($name, 1));
             } elseif (0 === \strpos($name, 'namespace\\')) {
-                return new \_PhpScoperef870243cfdb\PhpParser\Node\Name\Relative(\substr($name, \strlen('namespace\\')));
+                return new \_PhpScoperdaf95aff095b\PhpParser\Node\Name\Relative(\substr($name, \strlen('namespace\\')));
             } else {
-                return new \_PhpScoperef870243cfdb\PhpParser\Node\Name($name);
+                return new \_PhpScoperdaf95aff095b\PhpParser\Node\Name($name);
             }
         }
         if ($allowExpr) {
-            if ($name instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Expr) {
+            if ($name instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Expr) {
                 return $name;
             }
-            throw new \LogicException('_PhpScoperef870243cfdb\\Name must be a string or an instance of Node\\Name or Node\\Expr');
+            throw new \LogicException('_PhpScoperdaf95aff095b\\Name must be a string or an instance of Node\\Name or Node\\Expr');
         } else {
-            throw new \LogicException('_PhpScoperef870243cfdb\\Name must be a string or an instance of Node\\Name');
+            throw new \LogicException('_PhpScoperdaf95aff095b\\Name must be a string or an instance of Node\\Name');
         }
     }
     /**
@@ -155,7 +155,7 @@ final class BuilderHelpers
     public static function normalizeType($type)
     {
         if (!\is_string($type)) {
-            if (!$type instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Name && !$type instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Identifier && !$type instanceof \_PhpScoperef870243cfdb\PhpParser\Node\NullableType && !$type instanceof \_PhpScoperef870243cfdb\PhpParser\Node\UnionType) {
+            if (!$type instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Name && !$type instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Identifier && !$type instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\NullableType && !$type instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\UnionType) {
                 throw new \LogicException('Type must be a string, or an instance of Name, Identifier, NullableType or UnionType');
             }
             return $type;
@@ -168,7 +168,7 @@ final class BuilderHelpers
         $builtinTypes = ['array', 'callable', 'string', 'int', 'float', 'bool', 'iterable', 'void', 'object', 'mixed'];
         $lowerType = \strtolower($type);
         if (\in_array($lowerType, $builtinTypes)) {
-            $type = new \_PhpScoperef870243cfdb\PhpParser\Node\Identifier($lowerType);
+            $type = new \_PhpScoperdaf95aff095b\PhpParser\Node\Identifier($lowerType);
         } else {
             $type = self::normalizeName($type);
         }
@@ -178,7 +178,7 @@ final class BuilderHelpers
         if ($nullable && (string) $type === 'mixed') {
             throw new \LogicException('mixed type cannot be nullable');
         }
-        return $nullable ? new \_PhpScoperef870243cfdb\PhpParser\Node\NullableType($type) : $type;
+        return $nullable ? new \_PhpScoperdaf95aff095b\PhpParser\Node\NullableType($type) : $type;
     }
     /**
      * Normalizes a value: Converts nulls, booleans, integers,
@@ -188,33 +188,33 @@ final class BuilderHelpers
      *
      * @return Expr The normalized value
      */
-    public static function normalizeValue($value) : \_PhpScoperef870243cfdb\PhpParser\Node\Expr
+    public static function normalizeValue($value) : \_PhpScoperdaf95aff095b\PhpParser\Node\Expr
     {
-        if ($value instanceof \_PhpScoperef870243cfdb\PhpParser\Node\Expr) {
+        if ($value instanceof \_PhpScoperdaf95aff095b\PhpParser\Node\Expr) {
             return $value;
         } elseif (\is_null($value)) {
-            return new \_PhpScoperef870243cfdb\PhpParser\Node\Expr\ConstFetch(new \_PhpScoperef870243cfdb\PhpParser\Node\Name('null'));
+            return new \_PhpScoperdaf95aff095b\PhpParser\Node\Expr\ConstFetch(new \_PhpScoperdaf95aff095b\PhpParser\Node\Name('null'));
         } elseif (\is_bool($value)) {
-            return new \_PhpScoperef870243cfdb\PhpParser\Node\Expr\ConstFetch(new \_PhpScoperef870243cfdb\PhpParser\Node\Name($value ? 'true' : 'false'));
+            return new \_PhpScoperdaf95aff095b\PhpParser\Node\Expr\ConstFetch(new \_PhpScoperdaf95aff095b\PhpParser\Node\Name($value ? 'true' : 'false'));
         } elseif (\is_int($value)) {
-            return new \_PhpScoperef870243cfdb\PhpParser\Node\Scalar\LNumber($value);
+            return new \_PhpScoperdaf95aff095b\PhpParser\Node\Scalar\LNumber($value);
         } elseif (\is_float($value)) {
-            return new \_PhpScoperef870243cfdb\PhpParser\Node\Scalar\DNumber($value);
+            return new \_PhpScoperdaf95aff095b\PhpParser\Node\Scalar\DNumber($value);
         } elseif (\is_string($value)) {
-            return new \_PhpScoperef870243cfdb\PhpParser\Node\Scalar\String_($value);
+            return new \_PhpScoperdaf95aff095b\PhpParser\Node\Scalar\String_($value);
         } elseif (\is_array($value)) {
             $items = [];
             $lastKey = -1;
             foreach ($value as $itemKey => $itemValue) {
                 // for consecutive, numeric keys don't generate keys
                 if (null !== $lastKey && ++$lastKey === $itemKey) {
-                    $items[] = new \_PhpScoperef870243cfdb\PhpParser\Node\Expr\ArrayItem(self::normalizeValue($itemValue));
+                    $items[] = new \_PhpScoperdaf95aff095b\PhpParser\Node\Expr\ArrayItem(self::normalizeValue($itemValue));
                 } else {
                     $lastKey = null;
-                    $items[] = new \_PhpScoperef870243cfdb\PhpParser\Node\Expr\ArrayItem(self::normalizeValue($itemValue), self::normalizeValue($itemKey));
+                    $items[] = new \_PhpScoperdaf95aff095b\PhpParser\Node\Expr\ArrayItem(self::normalizeValue($itemValue), self::normalizeValue($itemKey));
                 }
             }
-            return new \_PhpScoperef870243cfdb\PhpParser\Node\Expr\Array_($items);
+            return new \_PhpScoperdaf95aff095b\PhpParser\Node\Expr\Array_($items);
         } else {
             throw new \LogicException('Invalid value');
         }
@@ -226,14 +226,14 @@ final class BuilderHelpers
      *
      * @return Comment\Doc The normalized doc comment
      */
-    public static function normalizeDocComment($docComment) : \_PhpScoperef870243cfdb\PhpParser\Comment\Doc
+    public static function normalizeDocComment($docComment) : \_PhpScoperdaf95aff095b\PhpParser\Comment\Doc
     {
-        if ($docComment instanceof \_PhpScoperef870243cfdb\PhpParser\Comment\Doc) {
+        if ($docComment instanceof \_PhpScoperdaf95aff095b\PhpParser\Comment\Doc) {
             return $docComment;
         } elseif (\is_string($docComment)) {
-            return new \_PhpScoperef870243cfdb\PhpParser\Comment\Doc($docComment);
+            return new \_PhpScoperdaf95aff095b\PhpParser\Comment\Doc($docComment);
         } else {
-            throw new \LogicException('_PhpScoperef870243cfdb\\Doc comment must be a string or an instance of PhpParser\\Comment\\Doc');
+            throw new \LogicException('_PhpScoperdaf95aff095b\\Doc comment must be a string or an instance of PhpParser\\Comment\\Doc');
         }
     }
     /**
@@ -246,7 +246,7 @@ final class BuilderHelpers
      */
     public static function addModifier(int $modifiers, int $modifier) : int
     {
-        \_PhpScoperef870243cfdb\PhpParser\Node\Stmt\Class_::verifyModifier($modifiers, $modifier);
+        \_PhpScoperdaf95aff095b\PhpParser\Node\Stmt\Class_::verifyModifier($modifiers, $modifier);
         return $modifiers | $modifier;
     }
 }

@@ -36,6 +36,15 @@ final class BlankLineBeforeReturnFixer extends \PhpCsFixer\AbstractProxyFixer im
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after NoUselessReturnFixer.
+     */
+    public function getPriority()
+    {
+        return parent::getPriority();
+    }
+    /**
+     * {@inheritdoc}
      */
     public function getSuccessorsNames()
     {

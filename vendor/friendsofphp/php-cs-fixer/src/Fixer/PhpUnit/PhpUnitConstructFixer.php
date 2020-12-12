@@ -11,28 +11,22 @@
  */
 namespace PhpCsFixer\Fixer\PhpUnit;
 
-use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\Fixer\AbstractPhpUnitFixer;
 use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\AllowedValueSubset;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpUnitConstructFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpUnitConstructFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     private static $assertionFixers = ['assertSame' => 'fixAssertPositive', 'assertEquals' => 'fixAssertPositive', 'assertNotEquals' => 'fixAssertNegative', 'assertNotSame' => 'fixAssertNegative'];
-    /**
-     * {@inheritdoc}
-     */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
-    {
-        return $tokens->isTokenKindFound(\T_STRING);
-    }
     /**
      * {@inheritdoc}
      */
@@ -46,29 +40,38 @@ final class PhpUnitConstructFixer extends \PhpCsFixer\AbstractFixer implements \
     public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('PHPUnit assertion method calls like `->assertSame(true, $foo)` should be written with dedicated method like `->assertTrue($foo)`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
-$this->assertEquals(false, $b);
-$this->assertSame(true, $a);
-$this->assertNotEquals(null, $c);
-$this->assertNotSame(null, $d);
+final class FooTest extends \\PHPUnit_Framework_TestCase {
+    public function testSomething() {
+        $this->assertEquals(false, $b);
+        $this->assertSame(true, $a);
+        $this->assertNotEquals(null, $c);
+        $this->assertNotSame(null, $d);
+    }
+}
 '), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
-$this->assertEquals(false, $b);
-$this->assertSame(true, $a);
-$this->assertNotEquals(null, $c);
-$this->assertNotSame(null, $d);
+final class FooTest extends \\PHPUnit_Framework_TestCase {
+    public function testSomething() {
+        $this->assertEquals(false, $b);
+        $this->assertSame(true, $a);
+        $this->assertNotEquals(null, $c);
+        $this->assertNotSame(null, $d);
+    }
+}
 ', ['assertions' => ['assertSame', 'assertNotSame']])], null, 'Fixer could be risky if one is overriding PHPUnit\'s native methods.');
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before PhpUnitDedicateAssertFixer.
      */
     public function getPriority()
     {
-        // should be run after the PhpUnitStrictFixer and before PhpUnitDedicateAssertFixer.
         return -10;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
     {
         // no assertions to be fixed - fast return
         if (empty($this->configuration['assertions'])) {
@@ -76,7 +79,7 @@ $this->assertNotSame(null, $d);
         }
         foreach ($this->configuration['assertions'] as $assertionMethod) {
             $assertionFixer = self::$assertionFixers[$assertionMethod];
-            for ($index = 0, $limit = $tokens->count(); $index < $limit; ++$index) {
+            for ($index = $startIndex; $index < $endIndex; ++$index) {
                 $index = $this->{$assertionFixer}($tokens, $index, $assertionMethod);
                 if (null === $index) {
                     break;
@@ -122,14 +125,13 @@ $this->assertNotSame(null, $d);
      */
     private function fixAssert(array $map, \PhpCsFixer\Tokenizer\Tokens $tokens, $index, $method)
     {
+        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
         $sequence = $tokens->findSequence([[\T_STRING, $method], '('], $index);
         if (null === $sequence) {
             return null;
         }
         $sequenceIndexes = \array_keys($sequence);
-        $operatorIndex = $tokens->getPrevMeaningfulToken($sequenceIndexes[0]);
-        $referenceIndex = $tokens->getPrevMeaningfulToken($operatorIndex);
-        if (!($tokens[$operatorIndex]->equals([\T_OBJECT_OPERATOR, '->']) && $tokens[$referenceIndex]->equals([\T_VARIABLE, '$this'])) && !($tokens[$operatorIndex]->equals([\T_DOUBLE_COLON, '::']) && $tokens[$referenceIndex]->equals([\T_STRING, 'self'])) && !($tokens[$operatorIndex]->equals([\T_DOUBLE_COLON, '::']) && $tokens[$referenceIndex]->equals([\T_STATIC, 'static']))) {
+        if (!$functionsAnalyzer->isTheSameClassCall($tokens, $sequenceIndexes[0])) {
             return null;
         }
         $sequenceIndexes[2] = $tokens->getNextMeaningfulToken($sequenceIndexes[1]);

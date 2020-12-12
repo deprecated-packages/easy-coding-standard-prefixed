@@ -31,7 +31,7 @@ final class SingleBlankLineAtEofFixer extends \PhpCsFixer\AbstractFixer implemen
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('A PHP file without end tag must always end with a single empty line feed.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = 1;")]);
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition('A PHP file without end tag must always end with a single empty line feed.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = 1;"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = 1;\n\n")]);
     }
     /**
      * {@inheritdoc}

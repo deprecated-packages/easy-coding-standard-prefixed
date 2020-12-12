@@ -28,7 +28,7 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        // minimal candidate to fix is seven tokens: pow(x,x);
+        // minimal candidate to fix is seven tokens: pow(x,y);
         return $tokens->count() > 7 && $tokens->isTokenKindFound(\T_STRING);
     }
     /**
@@ -40,10 +40,11 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before BinaryOperatorSpacesFixer, MethodArgumentSpaceFixer, NativeFunctionCasingFixer, NoSpacesAfterFunctionNameFixer, NoSpacesInsideParenthesisFixer.
      */
     public function getPriority()
     {
-        // must be run before BinaryOperatorSpacesFixer
         return 3;
     }
     /**
@@ -70,6 +71,11 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
             if (2 !== \count($arguments)) {
                 continue;
             }
+            for ($i = $candidate[1]; $i < $candidate[2]; ++$i) {
+                if ($tokens[$i]->isGivenKind(\T_ELLIPSIS)) {
+                    continue 2;
+                }
+            }
             $numberOfTokensAdded += $this->fixPowToExponentiation(
                 $tokens,
                 $candidate[0],
@@ -88,7 +94,7 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
     private function findPowCalls(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $candidates = [];
-        // Minimal candidate to fix is seven tokens: pow(x,x);
+        // Minimal candidate to fix is seven tokens: pow(x,y);
         $end = \count($tokens) - 6;
         // First possible location is after the open token: 1
         for ($i = 1; $i < $end; ++$i) {
@@ -134,9 +140,9 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
         // clean up the function call tokens prt. II
         $tokens->clearAt($openParenthesisIndex);
         $tokens->clearAt($functionNameIndex);
-        $prev = $tokens->getPrevMeaningfulToken($functionNameIndex);
-        if ($tokens[$prev]->isGivenKind(\T_NS_SEPARATOR)) {
-            $tokens->clearAt($prev);
+        $prevMeaningfulTokenIndex = $tokens->getPrevMeaningfulToken($functionNameIndex);
+        if ($tokens[$prevMeaningfulTokenIndex]->isGivenKind(\T_NS_SEPARATOR)) {
+            $tokens->clearAt($prevMeaningfulTokenIndex);
         }
         return $added;
     }
@@ -153,7 +159,8 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
             if ($tokens[$i]->isGivenKind($allowedKinds) || $tokens->isEmptyAt($i)) {
                 continue;
             }
-            if (null !== ($blockType = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($tokens[$i]))) {
+            $blockType = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($tokens[$i]);
+            if (null !== $blockType) {
                 $i = $tokens->findBlockEnd($blockType['type'], $i);
                 continue;
             }

@@ -27,13 +27,6 @@ final class ReturnRefTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_RETURN_REF];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getRequiredPhpVersionId()
     {
         return 50000;
@@ -45,10 +38,17 @@ final class ReturnRefTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
     {
         $prevKinds = [\T_FUNCTION];
         if (\PHP_VERSION_ID >= 70400) {
-            $prevKinds[] = T_FN;
+            $prevKinds[] = \T_FN;
         }
         if ($token->equals('&') && $tokens[$tokens->getPrevMeaningfulToken($index)]->isGivenKind($prevKinds)) {
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_RETURN_REF, '&']);
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_RETURN_REF];
     }
 }

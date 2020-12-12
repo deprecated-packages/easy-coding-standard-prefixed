@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef870243cfdb\Symfony\Component\Cache\Simple;
+namespace _PhpScoperdaf95aff095b\Symfony\Component\Cache\Simple;
 
-use _PhpScoperef870243cfdb\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\Adapter\PhpArrayAdapter;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\Traits\PhpArrayTrait;
-use _PhpScoperef870243cfdb\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperef870243cfdb\Symfony\Component\Cache\Simple\PhpArrayCache::class, \_PhpScoperef870243cfdb\Symfony\Component\Cache\Adapter\PhpArrayAdapter::class, \_PhpScoperef870243cfdb\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoperdaf95aff095b\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\Adapter\PhpArrayAdapter;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\Traits\PhpArrayTrait;
+use _PhpScoperdaf95aff095b\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Simple\PhpArrayCache::class, \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Adapter\PhpArrayAdapter::class, \_PhpScoperdaf95aff095b\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use PhpArrayAdapter and type-hint for CacheInterface instead.
  */
-class PhpArrayCache implements \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInterface, \_PhpScoperef870243cfdb\Symfony\Component\Cache\PruneableInterface, \_PhpScoperef870243cfdb\Symfony\Component\Cache\ResettableInterface
+class PhpArrayCache implements \_PhpScoperdaf95aff095b\Psr\SimpleCache\CacheInterface, \_PhpScoperdaf95aff095b\Symfony\Component\Cache\PruneableInterface, \_PhpScoperdaf95aff095b\Symfony\Component\Cache\ResettableInterface
 {
     use PhpArrayTrait;
     /**
      * @param string              $file         The PHP file were values are cached
      * @param Psr16CacheInterface $fallbackPool A pool to fallback on when an item is not hit
      */
-    public function __construct(string $file, \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInterface $fallbackPool)
+    public function __construct(string $file, \_PhpScoperdaf95aff095b\Psr\SimpleCache\CacheInterface $fallbackPool)
     {
         $this->file = $file;
         $this->pool = $fallbackPool;
@@ -40,7 +40,7 @@ class PhpArrayCache implements \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInte
      *
      * @return Psr16CacheInterface
      */
-    public static function create($file, \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInterface $fallbackPool)
+    public static function create($file, \_PhpScoperdaf95aff095b\Psr\SimpleCache\CacheInterface $fallbackPool)
     {
         // Shared memory is available in PHP 7.0+ with OPCache enabled
         if (\filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOLEAN)) {
@@ -54,7 +54,7 @@ class PhpArrayCache implements \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInte
     public function get($key, $default = null)
     {
         if (!\is_string($key)) {
-            throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+            throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -85,11 +85,11 @@ class PhpArrayCache implements \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInte
         if ($keys instanceof \Traversable) {
             $keys = \iterator_to_array($keys, \false);
         } elseif (!\is_array($keys)) {
-            throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
+            throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
         }
         foreach ($keys as $key) {
             if (!\is_string($key)) {
-                throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+                throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
             }
         }
         if (null === $this->values) {
@@ -105,7 +105,7 @@ class PhpArrayCache implements \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInte
     public function has($key)
     {
         if (!\is_string($key)) {
-            throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+            throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -120,7 +120,7 @@ class PhpArrayCache implements \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInte
     public function delete($key)
     {
         if (!\is_string($key)) {
-            throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+            throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -135,13 +135,13 @@ class PhpArrayCache implements \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInte
     public function deleteMultiple($keys)
     {
         if (!\is_array($keys) && !$keys instanceof \Traversable) {
-            throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
+            throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache keys must be array or Traversable, "%s" given', \is_object($keys) ? \get_class($keys) : \gettype($keys)));
         }
         $deleted = \true;
         $fallbackKeys = [];
         foreach ($keys as $key) {
             if (!\is_string($key)) {
-                throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+                throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
             }
             if (isset($this->keys[$key])) {
                 $deleted = \false;
@@ -165,7 +165,7 @@ class PhpArrayCache implements \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInte
     public function set($key, $value, $ttl = null)
     {
         if (!\is_string($key)) {
-            throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+            throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -180,13 +180,13 @@ class PhpArrayCache implements \_PhpScoperef870243cfdb\Psr\SimpleCache\CacheInte
     public function setMultiple($values, $ttl = null)
     {
         if (!\is_array($values) && !$values instanceof \Traversable) {
-            throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache values must be array or Traversable, "%s" given', \is_object($values) ? \get_class($values) : \gettype($values)));
+            throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache values must be array or Traversable, "%s" given', \is_object($values) ? \get_class($values) : \gettype($values)));
         }
         $saved = \true;
         $fallbackValues = [];
         foreach ($values as $key => $value) {
             if (!\is_string($key) && !\is_int($key)) {
-                throw new \_PhpScoperef870243cfdb\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+                throw new \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
             }
             if (isset($this->keys[$key])) {
                 $saved = \false;

@@ -16,7 +16,6 @@ use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis;
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
-use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -35,7 +34,7 @@ final class FunctionTypehintSpaceFixer extends \PhpCsFixer\AbstractFixer
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(T_FN)) {
+        if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
             return \true;
         }
         return $tokens->isTokenKindFound(\T_FUNCTION);
@@ -48,7 +47,7 @@ final class FunctionTypehintSpaceFixer extends \PhpCsFixer\AbstractFixer
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             $token = $tokens[$index];
-            if (!$token->isGivenKind(\T_FUNCTION) && (\PHP_VERSION_ID < 70400 || !$token->isGivenKind(T_FN))) {
+            if (!$token->isGivenKind(\T_FUNCTION) && (\PHP_VERSION_ID < 70400 || !$token->isGivenKind(\T_FN))) {
                 continue;
             }
             $arguments = $functionsAnalyzer->getFunctionArguments($tokens, $index);
@@ -57,14 +56,7 @@ final class FunctionTypehintSpaceFixer extends \PhpCsFixer\AbstractFixer
                 if (!$type instanceof \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis) {
                     continue;
                 }
-                $whitespaceTokenIndex = $type->getEndIndex() + 1;
-                if ($tokens[$whitespaceTokenIndex]->equals([\T_WHITESPACE])) {
-                    if (' ' === $tokens[$whitespaceTokenIndex]->getContent()) {
-                        continue;
-                    }
-                    $tokens->clearAt($whitespaceTokenIndex);
-                }
-                $tokens->insertAt($whitespaceTokenIndex, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
+                $tokens->ensureWhitespaceAtIndex($type->getEndIndex() + 1, 0, ' ');
             }
         }
     }

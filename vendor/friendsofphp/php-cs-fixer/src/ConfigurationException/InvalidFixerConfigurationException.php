@@ -27,10 +27,11 @@ class InvalidFixerConfigurationException extends \PhpCsFixer\ConfigurationExcept
      */
     private $fixerName;
     /**
-     * @param string $fixerName
-     * @param string $message
+     * @param string          $fixerName
+     * @param string          $message
+     * @param null|\Throwable $previous
      */
-    public function __construct($fixerName, $message, \Exception $previous = null)
+    public function __construct($fixerName, $message, $previous = null)
     {
         parent::__construct(\sprintf('[%s] %s', $fixerName, $message), \PhpCsFixer\Console\Command\FixCommandExitStatusCalculator::EXIT_STATUS_FLAG_HAS_INVALID_FIXER_CONFIG, $previous);
         $this->fixerName = $fixerName;

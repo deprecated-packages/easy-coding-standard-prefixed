@@ -60,7 +60,7 @@ final class FixerConfigurationResolverRootless implements \PhpCsFixer\FixerConfi
     public function resolve(array $options)
     {
         if (!empty($options) && !\array_key_exists($this->root, $options)) {
-            $names = \array_map(function (\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option) {
+            $names = \array_map(static function (\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option) {
                 return $option->getName();
             }, $this->resolver->getOptions());
             $passedNames = \array_keys($options);

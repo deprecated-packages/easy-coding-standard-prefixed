@@ -11,20 +11,21 @@
  */
 namespace PhpCsFixer\Fixer\PhpUnit;
 
-use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\Fixer\AbstractPhpUnitFixer;
 use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\AllowedValueSubset;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpUnitDedicateAssertFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpUnitDedicateAssertFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     private static $fixMap = ['array_key_exists' => ['assertArrayNotHasKey', 'assertArrayHasKey'], 'empty' => ['assertNotEmpty', 'assertEmpty'], 'file_exists' => ['assertFileNotExists', 'assertFileExists'], 'is_array' => \true, 'is_bool' => \true, 'is_callable' => \true, 'is_dir' => ['assertDirectoryNotExists', 'assertDirectoryExists'], 'is_double' => \true, 'is_float' => \true, 'is_infinite' => ['assertFinite', 'assertInfinite'], 'is_int' => \true, 'is_integer' => \true, 'is_long' => \true, 'is_nan' => [\false, 'assertNan'], 'is_null' => ['assertNotNull', 'assertNull'], 'is_numeric' => \true, 'is_object' => \true, 'is_readable' => ['assertNotIsReadable', 'assertIsReadable'], 'is_real' => \true, 'is_resource' => \true, 'is_scalar' => \true, 'is_string' => \true, 'is_writable' => ['assertNotIsWritable', 'assertIsWritable']];
     /**
@@ -59,13 +60,6 @@ final class PhpUnitDedicateAssertFixer extends \PhpCsFixer\AbstractFixer impleme
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
-    {
-        return $tokens->isTokenKindFound(\T_STRING);
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function isRisky()
     {
         return \true;
@@ -76,28 +70,42 @@ final class PhpUnitDedicateAssertFixer extends \PhpCsFixer\AbstractFixer impleme
     public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('PHPUnit assertions like `assertInternalType`, `assertFileExists`, should be used over `assertTrue`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
-$this->assertTrue(is_float( $a), "my message");
-$this->assertTrue(is_nan($a));
+final class MyTest extends \\PHPUnit_Framework_TestCase
+{
+    public function testSomeTest()
+    {
+        $this->assertTrue(is_float( $a), "my message");
+        $this->assertTrue(is_nan($a));
+    }
+}
 '), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
-$this->assertTrue(is_dir($a));
-$this->assertTrue(is_writable($a));
-$this->assertTrue(is_readable($a));
+final class MyTest extends \\PHPUnit_Framework_TestCase
+{
+    public function testSomeTest()
+    {
+        $this->assertTrue(is_dir($a));
+        $this->assertTrue(is_writable($a));
+        $this->assertTrue(is_readable($a));
+    }
+}
 ', ['target' => \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_6])], null, 'Fixer could be risky if one is overriding PHPUnit\'s native methods.');
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before PhpUnitDedicateAssertInternalTypeFixer.
+     * Must run after NoAliasFunctionsFixer, PhpUnitConstructFixer.
      */
     public function getPriority()
     {
-        // should be run after the PhpUnitConstructFixer.
         return -15;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
     {
-        foreach ($this->getPreviousAssertCall($tokens) as $assertCall) {
+        foreach ($this->getPreviousAssertCall($tokens, $startIndex, $endIndex) as $assertCall) {
             // test and fix for assertTrue/False to dedicated asserts
             if ('asserttrue' === $assertCall['loweredName'] || 'assertfalse' === $assertCall['loweredName']) {
                 $this->fixAssertTrueFalse($tokens, $assertCall);
@@ -211,9 +219,14 @@ $this->assertTrue(is_readable($a));
         $this->removeFunctionCall($tokens, $defaultNamespaceTokenIndex, $countCallIndex, $countCallOpenBraceIndex, $countCallCloseBraceIndex);
         $tokens[$assertCall['index']] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, \false === \strpos($assertCall['loweredName'], 'not', 6) ? 'assertCount' : 'assertNotCount']);
     }
-    private function getPreviousAssertCall(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    /**
+     * @param int $startIndex
+     * @param int $endIndex
+     */
+    private function getPreviousAssertCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
     {
-        for ($index = $tokens->count(); $index > 0; --$index) {
+        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
+        for ($index = $endIndex; $index > $startIndex; --$index) {
             $index = $tokens->getPrevTokenOfKind($index, [[\T_STRING]]);
             if (null === $index) {
                 return;
@@ -228,9 +241,7 @@ $this->assertTrue(is_readable($a));
             if (!$tokens[$openBraceIndex]->equals('(')) {
                 continue;
             }
-            $operatorIndex = $tokens->getPrevMeaningfulToken($index);
-            $referenceIndex = $tokens->getPrevMeaningfulToken($operatorIndex);
-            if (!($tokens[$operatorIndex]->equals([\T_OBJECT_OPERATOR, '->']) && $tokens[$referenceIndex]->equals([\T_VARIABLE, '$this'])) && !($tokens[$operatorIndex]->equals([\T_DOUBLE_COLON, '::']) && $tokens[$referenceIndex]->equals([\T_STRING, 'self'])) && !($tokens[$operatorIndex]->equals([\T_DOUBLE_COLON, '::']) && $tokens[$referenceIndex]->equals([\T_STATIC, 'static']))) {
+            if (!$functionsAnalyzer->isTheSameClassCall($tokens, $index)) {
                 continue;
             }
             (yield ['index' => $index, 'loweredName' => $loweredContent, 'openBraceIndex' => $openBraceIndex, 'closeBraceIndex' => $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openBraceIndex)]);

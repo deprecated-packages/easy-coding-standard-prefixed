@@ -71,11 +71,12 @@ if (count($x)) {
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoUnusedImportsFixer, OrderedImportsFixer.
+     * Must run after NativeConstantInvocationFixer, NativeFunctionInvocationFixer.
      */
     public function getPriority()
     {
-        // must be run after NativeConstantInvocationFixer, NativeFunctionInvocationFixer
-        // must be run before NoUnusedImportsFixer, OrderedImportsFixer
         return 0;
     }
     /**
@@ -83,14 +84,15 @@ if (count($x)) {
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound([\T_USE, \T_NS_SEPARATOR]) && (\PhpCsFixer\Tokenizer\Tokens::isLegacyMode() || $tokens->countTokenKind(\T_NAMESPACE) < 2) && $tokens->isMonolithicPhp();
+        return $tokens->isAnyTokenKindsFound([\T_DOC_COMMENT, \T_NS_SEPARATOR, \T_USE]) && $tokens->isTokenKindFound(\T_NAMESPACE) && (\PhpCsFixer\Tokenizer\Tokens::isLegacyMode() || 1 === $tokens->countTokenKind(\T_NAMESPACE)) && $tokens->isMonolithicPhp();
     }
     /**
      * {@inheritdoc}
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        if (\PhpCsFixer\Tokenizer\Tokens::isLegacyMode() && $tokens->isTokenKindFound(\T_NAMESPACE) && \count((new \PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer())->getDeclarations($tokens)) > 1) {
+        $namespaceAnalyses = (new \PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer())->getDeclarations($tokens);
+        if (1 !== \count($namespaceAnalyses) || '' === $namespaceAnalyses[0]->getFullName()) {
             return;
         }
         $useDeclarations = (new \PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
@@ -233,9 +235,13 @@ if (count($x)) {
             $token = $tokens[$index];
             if ($token->isGivenKind(\T_DOC_COMMENT)) {
                 $docBlocks[$index] = new \PhpCsFixer\DocBlock\DocBlock($token->getContent());
-                $this->traverseDocBlockTypes($docBlocks[$index], static function ($type) use(&$other) {
-                    if (\false === \strpos($type, '\\')) {
-                        $other[\strtolower($type)] = \true;
+                $this->traverseDocBlockTypes($docBlocks[$index], static function ($type) use($global, &$other) {
+                    if (\false !== \strpos($type, '\\')) {
+                        return;
+                    }
+                    $name = \strtolower($type);
+                    if (!isset($global[$name])) {
+                        $other[$name] = \true;
                     }
                 });
             }

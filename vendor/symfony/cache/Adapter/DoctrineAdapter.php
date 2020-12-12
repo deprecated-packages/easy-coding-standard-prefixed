@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef870243cfdb\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperdaf95aff095b\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperef870243cfdb\Doctrine\Common\Cache\CacheProvider;
-use _PhpScoperef870243cfdb\Symfony\Component\Cache\Traits\DoctrineTrait;
-class DoctrineAdapter extends \_PhpScoperef870243cfdb\Symfony\Component\Cache\Adapter\AbstractAdapter
+use _PhpScoperdaf95aff095b\Doctrine\Common\Cache\CacheProvider;
+use _PhpScoperdaf95aff095b\Symfony\Component\Cache\Traits\DoctrineTrait;
+class DoctrineAdapter extends \_PhpScoperdaf95aff095b\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     use DoctrineTrait;
-    public function __construct(\_PhpScoperef870243cfdb\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
+    public function __construct(\_PhpScoperdaf95aff095b\Doctrine\Common\Cache\CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
     {
         parent::__construct('', $defaultLifetime);
         $this->provider = $provider;

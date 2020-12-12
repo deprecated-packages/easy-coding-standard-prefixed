@@ -45,6 +45,10 @@ final class LinebreakAfterOpeningTagFixer extends \PhpCsFixer\AbstractFixer impl
         if (!$tokens[0]->isGivenKind(\T_OPEN_TAG) || !$tokens->isMonolithicPhp()) {
             return;
         }
+        // ignore if linebreak already present
+        if (\false !== \strpos($tokens[0]->getContent(), "\n")) {
+            return;
+        }
         $newlineFound = \false;
         foreach ($tokens as $token) {
             if ($token->isWhitespace() && \false !== \strpos($token->getContent(), "\n")) {
@@ -56,7 +60,6 @@ final class LinebreakAfterOpeningTagFixer extends \PhpCsFixer\AbstractFixer impl
         if (!$newlineFound) {
             return;
         }
-        $token = $tokens[0];
-        $tokens[0] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \rtrim($token->getContent()) . $this->whitespacesConfig->getLineEnding()]);
+        $tokens[0] = new \PhpCsFixer\Tokenizer\Token([\T_OPEN_TAG, \rtrim($tokens[0]->getContent()) . $this->whitespacesConfig->getLineEnding()]);
     }
 }

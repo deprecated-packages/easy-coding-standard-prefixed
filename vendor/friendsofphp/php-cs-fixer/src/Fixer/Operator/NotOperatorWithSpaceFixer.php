@@ -35,10 +35,11 @@ if (!$bar) {
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after UnaryOperatorSpacesFixer.
      */
     public function getPriority()
     {
-        // should be run after the UnaryOperatorSpacesFixer
         return -10;
     }
     /**

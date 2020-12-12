@@ -36,6 +36,15 @@ final class ReturnTypeDeclarationFixer extends \PhpCsFixer\AbstractFixer impleme
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after PhpdocToReturnTypeFixer, VoidReturnFixer.
+     */
+    public function getPriority()
+    {
+        return -17;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {

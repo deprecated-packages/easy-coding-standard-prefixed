@@ -30,7 +30,7 @@ final class HeredocToNowdocFixer extends \PhpCsFixer\AbstractFixer
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Convert `heredoc` to `nowdoc` where possible.', [new \PhpCsFixer\FixerDefinition\CodeSample(<<<'EOF'
 <?php
 
-namespace _PhpScoperef870243cfdb;
+namespace _PhpScoperdaf95aff095b;
 
 $a = <<<TEST
 Foo
@@ -39,6 +39,15 @@ TEST
 
 EOF
 )]);
+    }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run after EscapeImplicitBackslashesFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
     }
     /**
      * {@inheritdoc}
@@ -80,6 +89,6 @@ EOF
      */
     private function convertToNowdoc(\PhpCsFixer\Tokenizer\Token $token)
     {
-        return new \PhpCsFixer\Tokenizer\Token([$token->getId(), \PhpCsFixer\Preg::replace('/^([Bb]?<<<)([ \\t]*)"?([^\\s"]+)"?/', '$1$2\'$3\'', $token->getContent())]);
+        return new \PhpCsFixer\Tokenizer\Token([$token->getId(), \PhpCsFixer\Preg::replace('/^([Bb]?<<<)(\\h*)"?([^\\s"]+)"?/', '$1$2\'$3\'', $token->getContent())]);
     }
 }

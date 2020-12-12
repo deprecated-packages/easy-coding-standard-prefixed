@@ -33,13 +33,22 @@ final class SingleQuoteFixer extends \PhpCsFixer\AbstractFixer implements \PhpCs
         $codeSample = <<<'EOF'
 <?php
 
-namespace _PhpScoperef870243cfdb;
+namespace _PhpScoperdaf95aff095b;
 
 $a = "sample";
 $b = "sample with 'single-quotes'";
 
 EOF;
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Convert double quotes to single quotes for simple strings.', [new \PhpCsFixer\FixerDefinition\CodeSample($codeSample), new \PhpCsFixer\FixerDefinition\CodeSample($codeSample, ['strings_containing_single_quote_chars' => \true])]);
+    }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run after BacktickToShellExecFixer, EscapeImplicitBackslashesFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
     }
     /**
      * {@inheritdoc}

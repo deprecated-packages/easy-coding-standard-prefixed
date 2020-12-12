@@ -36,8 +36,23 @@ final class CommentsAnalyzer
         if (!$tokens[$index]->isGivenKind([\T_COMMENT, \T_DOC_COMMENT])) {
             throw new \InvalidArgumentException('Given index must point to a comment.');
         }
-        $prevIndex = $tokens->getPrevMeaningfulToken($index);
-        return $tokens[$prevIndex]->isGivenKind(\T_OPEN_TAG) && null !== $tokens->getNextMeaningfulToken($index);
+        if (null === $tokens->getNextMeaningfulToken($index)) {
+            return \false;
+        }
+        $prevIndex = $tokens->getPrevNonWhitespace($index);
+        if ($tokens[$prevIndex]->equals(';')) {
+            $braceCloseIndex = $tokens->getPrevMeaningfulToken($prevIndex);
+            if (!$tokens[$braceCloseIndex]->equals(')')) {
+                return \false;
+            }
+            $braceOpenIndex = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $braceCloseIndex);
+            $declareIndex = $tokens->getPrevMeaningfulToken($braceOpenIndex);
+            if (!$tokens[$declareIndex]->isGivenKind(\T_DECLARE)) {
+                return \false;
+            }
+            $prevIndex = $tokens->getPrevNonWhitespace($declareIndex);
+        }
+        return $tokens[$prevIndex]->isGivenKind(\T_OPEN_TAG);
     }
     /**
      * Check if comment at given index precedes structural element.

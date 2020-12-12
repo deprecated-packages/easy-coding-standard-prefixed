@@ -24,8 +24,8 @@ use PhpCsFixer\FixerConfiguration\DeprecatedFixerOption;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\InvalidOptionsForEnvException;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
-use _PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
+use _PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
+use _PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -116,7 +116,7 @@ abstract class AbstractFixer implements \PhpCsFixer\Fixer\FixerInterface, \PhpCs
             }
             $name = $option->getName();
             if (\array_key_exists($name, $configuration)) {
-                $message = \sprintf('Option "%s" for rule "%s" is deprecated and will be removed in version %d.0. %s', $name, $this->getName(), (int) \PhpCsFixer\Console\Application::VERSION + 1, \str_replace('`', '"', $option->getDeprecationMessage()));
+                $message = \sprintf('Option "%s" for rule "%s" is deprecated and will be removed in version %d.0. %s', $name, $this->getName(), \PhpCsFixer\Console\Application::getMajorVersion() + 1, \str_replace('`', '"', $option->getDeprecationMessage()));
                 if (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
                     throw new \InvalidArgumentException("{$message} This check was performed as `PHP_CS_FIXER_FUTURE_MODE` env var is set.");
                 }
@@ -125,11 +125,11 @@ abstract class AbstractFixer implements \PhpCsFixer\Fixer\FixerInterface, \PhpCs
         }
         try {
             $this->configuration = $this->getConfigurationDefinition()->resolve($configuration);
-        } catch (\_PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\MissingOptionsException $exception) {
+        } catch (\_PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\MissingOptionsException $exception) {
             throw new \PhpCsFixer\ConfigurationException\RequiredFixerConfigurationException($this->getName(), \sprintf('Missing required configuration: %s', $exception->getMessage()), $exception);
         } catch (\PhpCsFixer\FixerConfiguration\InvalidOptionsForEnvException $exception) {
             throw new \PhpCsFixer\ConfigurationException\InvalidForEnvFixerConfigurationException($this->getName(), \sprintf('Invalid configuration for env: %s', $exception->getMessage()), $exception);
-        } catch (\_PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Exception\ExceptionInterface $exception) {
+        } catch (\_PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Exception\ExceptionInterface $exception) {
             throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($this->getName(), \sprintf('Invalid configuration: %s', $exception->getMessage()), $exception);
         }
     }

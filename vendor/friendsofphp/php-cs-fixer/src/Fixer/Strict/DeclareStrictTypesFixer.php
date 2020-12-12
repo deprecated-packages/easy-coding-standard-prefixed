@@ -33,10 +33,11 @@ final class DeclareStrictTypesFixer extends \PhpCsFixer\AbstractFixer implements
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before BlankLineAfterOpeningTagFixer, DeclareEqualNormalizeFixer, HeaderCommentFixer.
      */
     public function getPriority()
     {
-        // must run before BlankLineAfterOpeningTagFixer and DeclareEqualNormalizeFixer.
         return 2;
     }
     /**
@@ -44,7 +45,7 @@ final class DeclareStrictTypesFixer extends \PhpCsFixer\AbstractFixer implements
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        return \PHP_VERSION_ID >= 70000 && $tokens[0]->isGivenKind(\T_OPEN_TAG);
+        return \PHP_VERSION_ID >= 70000 && isset($tokens[0]) && $tokens[0]->isGivenKind(\T_OPEN_TAG);
     }
     /**
      * {@inheritdoc}
@@ -65,48 +66,35 @@ final class DeclareStrictTypesFixer extends \PhpCsFixer\AbstractFixer implements
             // declaration not found, insert one
             return;
         }
-        $sequence = $this->getDeclareStrictTypeSequence();
-        $sequenceLocation = $tokens->findSequence($sequence, $searchIndex, null, \false);
+        $sequenceLocation = $tokens->findSequence([[\T_DECLARE, 'declare'], '(', [\T_STRING, 'strict_types'], '=', [\T_LNUMBER], ')'], $searchIndex, null, \false);
         if (null === $sequenceLocation) {
             $this->insertSequence($tokens);
             // declaration not found, insert one
             return;
         }
-        $this->fixStrictTypesCasing($tokens, $sequenceLocation);
-    }
-    /**
-     * @return Token[]
-     */
-    private function getDeclareStrictTypeSequence()
-    {
-        static $sequence = null;
-        // do not look for open tag, closing semicolon or empty lines;
-        // - open tag is tested by isCandidate
-        // - semicolon or end tag must be there to be valid PHP
-        // - empty tokens and comments are dealt with later
-        if (null === $sequence) {
-            $sequence = [new \PhpCsFixer\Tokenizer\Token([\T_DECLARE, 'declare']), new \PhpCsFixer\Tokenizer\Token('('), new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'strict_types']), new \PhpCsFixer\Tokenizer\Token('='), new \PhpCsFixer\Tokenizer\Token([\T_LNUMBER, '1']), new \PhpCsFixer\Tokenizer\Token(')')];
-        }
-        return $sequence;
+        $this->fixStrictTypesCasingAndValue($tokens, $sequenceLocation);
     }
     /**
      * @param array<int, Token> $sequence
      */
-    private function fixStrictTypesCasing(\PhpCsFixer\Tokenizer\Tokens $tokens, array $sequence)
+    private function fixStrictTypesCasingAndValue(\PhpCsFixer\Tokenizer\Tokens $tokens, array $sequence)
     {
         /** @var int $index */
         /** @var Token $token */
         foreach ($sequence as $index => $token) {
             if ($token->isGivenKind(\T_STRING)) {
                 $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, \strtolower($token->getContent())]);
+                continue;
+            }
+            if ($token->isGivenKind(\T_LNUMBER)) {
+                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_LNUMBER, '1']);
                 break;
             }
         }
     }
     private function insertSequence(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        $sequence = $this->getDeclareStrictTypeSequence();
-        $sequence[] = new \PhpCsFixer\Tokenizer\Token(';');
+        $sequence = [new \PhpCsFixer\Tokenizer\Token([\T_DECLARE, 'declare']), new \PhpCsFixer\Tokenizer\Token('('), new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'strict_types']), new \PhpCsFixer\Tokenizer\Token('='), new \PhpCsFixer\Tokenizer\Token([\T_LNUMBER, '1']), new \PhpCsFixer\Tokenizer\Token(')'), new \PhpCsFixer\Tokenizer\Token(';')];
         $endIndex = \count($sequence);
         $tokens->insertAt(1, $sequence);
         // start index of the sequence is always 1 here, 0 is always open tag

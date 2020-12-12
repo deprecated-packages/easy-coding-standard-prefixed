@@ -31,6 +31,15 @@ final class NativeFunctionCasingFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after FunctionToConstantFixer, NoUselessSprintfFixer, PowToExponentiationFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {

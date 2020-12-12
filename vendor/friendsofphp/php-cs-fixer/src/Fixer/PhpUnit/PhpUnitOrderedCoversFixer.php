@@ -11,17 +11,19 @@
  */
 namespace PhpCsFixer\Fixer\PhpUnit;
 
-use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\DocBlock\DocBlock;
+use PhpCsFixer\AbstractProxyFixer;
+use PhpCsFixer\Fixer\DeprecatedFixerInterface;
+use PhpCsFixer\Fixer\Phpdoc\PhpdocOrderByValueFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\Preg;
-use PhpCsFixer\Tokenizer\Token;
-use PhpCsFixer\Tokenizer\Tokens;
 /**
+ * @deprecated since 2.16, replaced by PhpdocOrderByValueFixer
+ *
+ * @todo To be removed at 3.0
+ *
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class PhpUnitOrderedCoversFixer extends \PhpCsFixer\AbstractFixer
+final class PhpUnitOrderedCoversFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
 {
     /**
      * {@inheritdoc}
@@ -37,48 +39,14 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
 {}
 ')]);
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
+    public function getSuccessorsNames()
     {
-        // should be run after PhpUnitFqcnAnnotationFixer
-        return -10;
+        return \array_keys($this->proxyFixers);
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function createProxyFixers()
     {
-        return $tokens->isAllTokenKindsFound([\T_CLASS, \T_DOC_COMMENT]);
-    }
-    /**
-     * {@inheritdoc}
-     */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
-    {
-        for ($index = $tokens->count() - 1; $index > 0; --$index) {
-            if (!$tokens[$index]->isGivenKind(\T_DOC_COMMENT) || 0 === \PhpCsFixer\Preg::match('/@covers\\s.+@covers\\s/s', $tokens[$index]->getContent())) {
-                continue;
-            }
-            $docBlock = new \PhpCsFixer\DocBlock\DocBlock($tokens[$index]->getContent());
-            $covers = $docBlock->getAnnotationsOfType('covers');
-            $coversMap = [];
-            foreach ($covers as $annotation) {
-                $rawContent = $annotation->getContent();
-                $comparableContent = \PhpCsFixer\Preg::replace('/\\*\\s*@covers\\s+(.+)/', '\\1', \strtolower(\trim($rawContent)));
-                $coversMap[$comparableContent] = $rawContent;
-            }
-            $orderedCoversMap = $coversMap;
-            \ksort($orderedCoversMap, \SORT_STRING);
-            if ($orderedCoversMap === $coversMap) {
-                continue;
-            }
-            $lines = $docBlock->getLines();
-            foreach (\array_reverse($covers) as $annotation) {
-                \array_splice($lines, $annotation->getStart(), $annotation->getEnd() - $annotation->getStart() + 1, \array_pop($orderedCoversMap));
-            }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, \implode('', $lines)]);
-        }
+        $fixer = new \PhpCsFixer\Fixer\Phpdoc\PhpdocOrderByValueFixer();
+        $fixer->configure(['annotations' => ['covers']]);
+        return [$fixer];
     }
 }

@@ -25,7 +25,7 @@ final class TokenizerLinter implements \PhpCsFixer\Linter\LinterInterface
 {
     public function __construct()
     {
-        if (\false === \defined('TOKEN_PARSE')) {
+        if (\false === \defined('TOKEN_PARSE') || \false === \class_exists(\CompileError::class)) {
             throw new \PhpCsFixer\Linter\UnavailableLinterException('Cannot use tokenizer as linter.');
         }
     }
@@ -50,7 +50,7 @@ final class TokenizerLinter implements \PhpCsFixer\Linter\LinterInterface
     {
         try {
             // To lint, we will parse the source into Tokens.
-            // During that process, it might throw ParseError.
+            // During that process, it might throw a ParseError or CompileError.
             // If it won't, cache of tokenized version of source will be kept, which is great for Runner.
             // Yet, first we need to clear already existing cache to not hit it and lint the code indeed.
             $codeHash = \PhpCsFixer\Tokenizer\CodeHasher::calculateCodeHash($source);
@@ -58,6 +58,8 @@ final class TokenizerLinter implements \PhpCsFixer\Linter\LinterInterface
             \PhpCsFixer\Tokenizer\Tokens::fromCode($source);
             return new \PhpCsFixer\Linter\TokenizerLintingResult();
         } catch (\ParseError $e) {
+            return new \PhpCsFixer\Linter\TokenizerLintingResult($e);
+        } catch (\CompileError $e) {
             return new \PhpCsFixer\Linter\TokenizerLintingResult($e);
         }
     }

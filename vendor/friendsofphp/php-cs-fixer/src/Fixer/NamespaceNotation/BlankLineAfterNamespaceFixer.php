@@ -34,10 +34,11 @@ final class BlankLineAfterNamespaceFixer extends \PhpCsFixer\AbstractFixer imple
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after NoUnusedImportsFixer.
      */
     public function getPriority()
     {
-        // should be run after the NoUnusedImportsFixer
         return -20;
     }
     /**

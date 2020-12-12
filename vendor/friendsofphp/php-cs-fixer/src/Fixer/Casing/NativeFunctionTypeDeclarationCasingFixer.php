@@ -28,16 +28,18 @@ final class NativeFunctionTypeDeclarationCasingFixer extends \PhpCsFixer\Abstrac
     /**
      * https://secure.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.
      *
-     * self     PHP 5.0.0
-     * array    PHP 5.1.0
-     * callable PHP 5.4.0
-     * bool     PHP 7.0.0
-     * float    PHP 7.0.0
-     * int      PHP 7.0.0
-     * string   PHP 7.0.0
-     * iterable PHP 7.1.0
-     * void     PHP 7.1.0
-     * object   PHP 7.2.0
+     * self     PHP 5.0
+     * array    PHP 5.1
+     * callable PHP 5.4
+     * bool     PHP 7.0
+     * float    PHP 7.0
+     * int      PHP 7.0
+     * string   PHP 7.0
+     * iterable PHP 7.1
+     * void     PHP 7.1
+     * object   PHP 7.2
+     * static   PHP 8.0 (return type only)
+     * mixed    PHP 8.0
      *
      * @var array<string, true>
      */
@@ -58,6 +60,10 @@ final class NativeFunctionTypeDeclarationCasingFixer extends \PhpCsFixer\Abstrac
         }
         if (\PHP_VERSION_ID >= 70200) {
             $this->hints = \array_merge($this->hints, ['object' => \true]);
+        }
+        if (\PHP_VERSION_ID >= 80000) {
+            $this->hints = \array_merge($this->hints, ['static' => \true]);
+            $this->hints = \array_merge($this->hints, ['mixed' => \true]);
         }
         $this->functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
     }
@@ -110,16 +116,17 @@ final class NativeFunctionTypeDeclarationCasingFixer extends \PhpCsFixer\Abstrac
         if (null === $type) {
             return;
         }
-        $argumentIndex = $type->getStartIndex();
-        if ($argumentIndex !== $type->getEndIndex()) {
+        $argumentStartIndex = $type->getStartIndex();
+        $argumentExpectedEndIndex = $type->isNullable() ? $tokens->getNextMeaningfulToken($argumentStartIndex) : $argumentStartIndex;
+        if ($argumentExpectedEndIndex !== $type->getEndIndex()) {
             return;
-            // the type to fix are always unqualified and so are always composed as one token
+            // the type to fix is always unqualified and so is always composed of one token and possible a nullable '?' one
         }
         $lowerCasedName = \strtolower($type->getName());
         if (!isset($this->hints[$lowerCasedName])) {
             return;
             // check of type is of interest based on name (slower check than previous index based)
         }
-        $tokens[$argumentIndex] = new \PhpCsFixer\Tokenizer\Token([$tokens[$argumentIndex]->getId(), $lowerCasedName]);
+        $tokens[$argumentExpectedEndIndex] = new \PhpCsFixer\Tokenizer\Token([$tokens[$argumentExpectedEndIndex]->getId(), $lowerCasedName]);
     }
 }

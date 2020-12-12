@@ -16,7 +16,6 @@ use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\AllowedValueSubset;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
-use PhpCsFixer\FixerConfiguration\InvalidOptionsForEnvException;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
@@ -25,7 +24,6 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Options;
 /**
  * Fixer for rules defined in PSR2 ¶4.3, ¶4.5.
  *
@@ -68,12 +66,7 @@ class Sample
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('elements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('elements', 'The structural elements to fix (PHP >= 7.1 required for `const`).'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(['property', 'method', 'const'])])->setNormalizer(static function (\_PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Options $options, $value) {
-            if (\PHP_VERSION_ID < 70100 && \in_array('const', $value, \true)) {
-                throw new \PhpCsFixer\FixerConfiguration\InvalidOptionsForEnvException('"const" option can only be enabled with PHP 7.1+.');
-            }
-            return $value;
-        })->setDefault(['property', 'method'])->getOption()], $this->getName());
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('elements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('elements', 'The structural elements to fix (PHP >= 7.1 required for `const`).'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(['property', 'method', 'const'])])->setDefault(['property', 'method'])->getOption()], $this->getName());
     }
     /**
      * {@inheritdoc}
@@ -82,8 +75,12 @@ class Sample
     {
         $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         $elements = $tokensAnalyzer->getClassyElements();
+        $propertyTypeDeclarationKinds = [\T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT];
         foreach (\array_reverse($elements, \true) as $index => $element) {
             if (!\in_array($element['type'], $this->configuration['elements'], \true)) {
+                continue;
+            }
+            if (\PHP_VERSION_ID < 70100 && 'const' === $element['type']) {
                 continue;
             }
             $abstractFinalIndex = null;
@@ -93,14 +90,14 @@ class Sample
             $prevIndex = $tokens->getPrevMeaningfulToken($index);
             $expectedKinds = [\T_ABSTRACT, \T_FINAL, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC, \T_STATIC, \T_VAR];
             if ('property' === $element['type']) {
-                $expectedKinds = \array_merge($expectedKinds, [\T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE]);
+                $expectedKinds = \array_merge($expectedKinds, $propertyTypeDeclarationKinds);
             }
             while ($tokens[$prevIndex]->isGivenKind($expectedKinds)) {
                 if ($tokens[$prevIndex]->isGivenKind([\T_ABSTRACT, \T_FINAL])) {
                     $abstractFinalIndex = $prevIndex;
                 } elseif ($tokens[$prevIndex]->isGivenKind(\T_STATIC)) {
                     $staticIndex = $prevIndex;
-                } elseif ($tokens[$prevIndex]->isGivenKind([\T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE])) {
+                } elseif ($tokens[$prevIndex]->isGivenKind($propertyTypeDeclarationKinds)) {
                     $typeIndex = $prevIndex;
                 } else {
                     $visibilityIndex = $prevIndex;

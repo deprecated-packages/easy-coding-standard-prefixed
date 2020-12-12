@@ -23,10 +23,11 @@ final class NoShortBoolCastFixer extends \PhpCsFixer\AbstractFixer
 {
     /**
      * {@inheritdoc}
+     *
+     * Must run before CastSpacesFixer.
      */
     public function getPriority()
     {
-        // should be run before the CastSpacesFixer
         return -9;
     }
     /**

@@ -27,13 +27,6 @@ final class NamespaceOperatorTransformer extends \PhpCsFixer\Tokenizer\AbstractT
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_NAMESPACE_OPERATOR];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getRequiredPhpVersionId()
     {
         return 50300;
@@ -47,9 +40,15 @@ final class NamespaceOperatorTransformer extends \PhpCsFixer\Tokenizer\AbstractT
             return;
         }
         $nextIndex = $tokens->getNextMeaningfulToken($index);
-        $nextToken = $tokens[$nextIndex];
-        if ($nextToken->isGivenKind(\T_NS_SEPARATOR)) {
+        if ($tokens[$nextIndex]->isGivenKind(\T_NS_SEPARATOR)) {
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_NAMESPACE_OPERATOR, $token->getContent()]);
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_NAMESPACE_OPERATOR];
     }
 }

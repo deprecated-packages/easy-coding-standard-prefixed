@@ -84,7 +84,7 @@ final class ModernizeTypesCastingFixer extends \PhpCsFixer\AbstractFunctionRefer
                 $preserveParenthesises = $countParamTokens > 1;
                 $afterCloseParenthesisIndex = $tokens->getNextMeaningfulToken($closeParenthesis);
                 $afterCloseParenthesisToken = $tokens[$afterCloseParenthesisIndex];
-                $wrapInParenthesises = $afterCloseParenthesisToken->equals('[') || $afterCloseParenthesisToken->isGivenKind(\T_POW);
+                $wrapInParenthesises = $afterCloseParenthesisToken->equalsAny(['[', '{']) || $afterCloseParenthesisToken->isGivenKind(\T_POW);
                 // analyse namespace specification (root one or none) and decide what to do
                 $prevTokenIndex = $tokens->getPrevMeaningfulToken($functionName);
                 if ($tokens[$prevTokenIndex]->isGivenKind(\T_NS_SEPARATOR)) {

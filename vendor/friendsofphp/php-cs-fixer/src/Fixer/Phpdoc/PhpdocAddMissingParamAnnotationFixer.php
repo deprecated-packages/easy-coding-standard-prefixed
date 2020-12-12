@@ -59,11 +59,12 @@ function f9(string $foo, $bar, $baz) {}
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoEmptyPhpdocFixer, NoSuperfluousPhpdocTagsFixer, PhpdocAlignFixer, PhpdocAlignFixer, PhpdocOrderFixer.
+     * Must run after CommentToPhpdocFixer, GeneralPhpdocTagRenameFixer, PhpdocIndentFixer, PhpdocNoAliasTagFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
     public function getPriority()
     {
-        // must be run after PhpdocNoAliasTagFixer
-        // must be run before PhpdocAlignFixer and PhpdocNoEmptyReturnFixer
         return 10;
     }
     /**
@@ -76,18 +77,10 @@ function f9(string $foo, $bar, $baz) {}
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
-    {
-        return \false;
-    }
-    /**
-     * {@inheritdoc}
-     */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
         for ($index = 0, $limit = $tokens->count(); $index < $limit; ++$index) {
-            $mainIndex = $index;
             $token = $tokens[$index];
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
                 continue;
@@ -100,6 +93,7 @@ function f9(string $foo, $bar, $baz) {}
             if (\false === \strpos($tokenContent, "\n")) {
                 continue;
             }
+            $mainIndex = $index;
             $index = $tokens->getNextMeaningfulToken($index);
             if (null === $index) {
                 return;

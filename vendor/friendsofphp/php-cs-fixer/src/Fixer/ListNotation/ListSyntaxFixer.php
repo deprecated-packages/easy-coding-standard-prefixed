@@ -49,10 +49,11 @@ final class ListSyntaxFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsF
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before BinaryOperatorSpacesFixer, TernaryOperatorSpacesFixer.
      */
     public function getPriority()
     {
-        // should be run before the BinaryOperatorSpacesFixer and TernaryOperatorSpacesFixer.
         return 1;
     }
     /**
@@ -89,7 +90,7 @@ final class ListSyntaxFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsF
      */
     private function fixToLongSyntax(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
-        static $typesOfInterest = [[\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE], [\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN]];
+        static $typesOfInterest = [[\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE], '['];
         $closeIndex = $tokens->getNextTokenOfKind($index, $typesOfInterest);
         if (!$tokens[$closeIndex]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE)) {
             return;

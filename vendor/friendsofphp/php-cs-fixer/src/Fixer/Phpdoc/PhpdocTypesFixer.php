@@ -40,7 +40,7 @@ final class PhpdocTypesFixer extends \PhpCsFixer\AbstractPhpdocTypesFixer implem
     public function configure(array $configuration = null)
     {
         parent::configure($configuration);
-        $this->typesToFix = \array_merge(...\array_map(function ($group) {
+        $this->typesToFix = \array_merge(...\array_map(static function ($group) {
             return self::$possibleTypes[$group];
         }, $this->configuration['groups']));
     }
@@ -55,8 +55,20 @@ final class PhpdocTypesFixer extends \PhpCsFixer\AbstractPhpdocTypesFixer implem
  *
  * @return inT[]
  */
-')]);
+'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+/**
+ * @param BOOL $foo
+ *
+ * @return MIXED
+ */
+', ['groups' => ['simple', 'alias']])]);
     }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run before GeneralPhpdocAnnotationRemoveFixer, GeneralPhpdocTagRenameFixer, NoBlankLinesAfterPhpdocFixer, NoEmptyPhpdocFixer, NoSuperfluousPhpdocTagsFixer, PhpdocAddMissingParamAnnotationFixer, PhpdocAlignFixer, PhpdocAlignFixer, PhpdocInlineTagFixer, PhpdocInlineTagNormalizerFixer, PhpdocLineSpanFixer, PhpdocNoAccessFixer, PhpdocNoAliasTagFixer, PhpdocNoEmptyReturnFixer, PhpdocNoPackageFixer, PhpdocNoUselessInheritdocFixer, PhpdocOrderByValueFixer, PhpdocOrderFixer, PhpdocReturnSelfReferenceFixer, PhpdocScalarFixer, PhpdocSeparationFixer, PhpdocSingleLineVarSpacingFixer, PhpdocSummaryFixer, PhpdocTagCasingFixer, PhpdocTagTypeFixer, PhpdocToParamTypeFixer, PhpdocToReturnTypeFixer, PhpdocToReturnTypeFixer, PhpdocTrimConsecutiveBlankLineSeparationFixer, PhpdocTrimFixer, PhpdocTypesOrderFixer, PhpdocVarAnnotationCorrectOrderFixer, PhpdocVarWithoutNameFixer.
+     * Must run after PhpdocAnnotationWithoutDotFixer, PhpdocIndentFixer.
+     */
     public function getPriority()
     {
         /*

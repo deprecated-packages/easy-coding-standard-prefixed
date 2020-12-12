@@ -30,14 +30,24 @@ final class ExplicitStringVariableFixer extends \PhpCsFixer\AbstractFixer
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Converts implicit variables into explicit ones in double-quoted strings or heredoc syntax.', [new \PhpCsFixer\FixerDefinition\CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScoperef870243cfdb;
+namespace _PhpScoperdaf95aff095b;
 
 $a = "My name is {$name} !";
 $b = "I live in {$state->country} !";
 $c = "I have {$farm[0]} chickens !";
 
 EOT
-)], 'The reasoning behind this rule is the following:' . "\n" . '- When there are two valid ways of doing the same thing, using both is confusing, there should be a coding standard to follow' . "\n" . '- PHP manual marks `"$var"` syntax as implicit and `"${var}"` syntax as explicit: explicit code should always be preferred' . "\n" . '- Explicit syntax allows word concatenation inside strings, e.g. `"${var}IsAVar"`, implicit doesn\'t' . "\n" . '- Explicit syntax is easier to detect for IDE/editors and therefore has colors/hightlight with higher contrast, which is easier to read' . "\n" . 'Backtick operator is skipped because it is harder to handle; you can use `backtick_to_shell_exec` fixer to normalize backticks to strings');
+)], 'The reasoning behind this rule is the following:' . "\n" . '- When there are two valid ways of doing the same thing, using both is confusing, there should be a coding standard to follow' . "\n" . '- PHP manual marks `"$var"` syntax as implicit and `"${var}"` syntax as explicit: explicit code should always be preferred' . "\n" . '- Explicit syntax allows word concatenation inside strings, e.g. `"${var}IsAVar"`, implicit doesn\'t' . "\n" . '- Explicit syntax is easier to detect for IDE/editors and therefore has colors/highlight with higher contrast, which is easier to read' . "\n" . 'Backtick operator is skipped because it is harder to handle; you can use `backtick_to_shell_exec` fixer to normalize backticks to strings');
+    }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run before SimpleToComplexStringVariableFixer.
+     * Must run after BacktickToShellExecFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
     }
     /**
      * {@inheritdoc}
@@ -70,7 +80,9 @@ EOT
             $nextIndex = $index + 1;
             $squareBracketCount = 0;
             while (!$this->isStringPartToken($tokens[$nextIndex])) {
-                if ($tokens[$nextIndex]->isGivenKind(\T_VARIABLE) && 1 !== $squareBracketCount) {
+                if ($tokens[$nextIndex]->isGivenKind(\T_CURLY_OPEN)) {
+                    $nextIndex = $tokens->getNextTokenOfKind($nextIndex, [[\PhpCsFixer\Tokenizer\CT::T_CURLY_CLOSE]]);
+                } elseif ($tokens[$nextIndex]->isGivenKind(\T_VARIABLE) && 1 !== $squareBracketCount) {
                     $distinctVariableIndex = $nextIndex;
                     $variableTokens[$distinctVariableIndex] = ['tokens' => [$nextIndex => $tokens[$nextIndex]], 'firstVariableTokenIndex' => $nextIndex, 'lastVariableTokenIndex' => $nextIndex];
                 } else {

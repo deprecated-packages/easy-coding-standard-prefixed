@@ -5,11 +5,11 @@ namespace SlevomatCodingStandard\Sniffs\PHP;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
-use _PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
-use _PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use _PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
+use _PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
+use _PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\VariableAnnotation;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
 use SlevomatCodingStandard\Helpers\IndentationHelper;
@@ -26,12 +26,12 @@ use function in_array;
 use function sprintf;
 use function trim;
 use const T_AS;
-use const _PhpScoperef870243cfdb\T_DOC_COMMENT_OPEN_TAG;
-use const _PhpScoperef870243cfdb\T_EQUAL;
+use const _PhpScoperdaf95aff095b\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoperdaf95aff095b\T_EQUAL;
 use const T_FOREACH;
 use const T_LIST;
-use const _PhpScoperef870243cfdb\T_OPEN_SHORT_ARRAY;
-use const _PhpScoperef870243cfdb\T_SEMICOLON;
+use const _PhpScoperdaf95aff095b\T_OPEN_SHORT_ARRAY;
+use const _PhpScoperdaf95aff095b\T_SEMICOLON;
 use const T_VARIABLE;
 use const T_WHILE;
 use const T_WHITESPACE;
@@ -76,7 +76,7 @@ class RequireExplicitAssertionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 continue;
             }
             $variableAnnotationType = $variableAnnotation->getType();
-            if ($variableAnnotationType instanceof \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $variableAnnotationType instanceof \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+            if ($variableAnnotationType instanceof \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $variableAnnotationType instanceof \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
                 foreach ($variableAnnotationType->types as $typeNode) {
                     if (!$this->isValidTypeNode($typeNode)) {
                         continue 2;
@@ -170,12 +170,12 @@ class RequireExplicitAssertionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             $phpcsFile->fixer->endChangeset();
         }
     }
-    private function isValidTypeNode(\_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
+    private function isValidTypeNode(\_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : bool
     {
-        if ($typeNode instanceof \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
+        if ($typeNode instanceof \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
             return \true;
         }
-        if (!$typeNode instanceof \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+        if (!$typeNode instanceof \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
             return \false;
         }
         return !\in_array($typeNode->name, ['mixed', 'static'], \true);
@@ -197,10 +197,10 @@ class RequireExplicitAssertionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      * @param IdentifierTypeNode|ThisTypeNode|UnionTypeNode|IntersectionTypeNode $typeNode
      * @return string
      */
-    private function createAssert(string $variableName, \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : string
+    private function createAssert(string $variableName, \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : string
     {
         $conditions = [];
-        if ($typeNode instanceof \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode || $typeNode instanceof \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
+        if ($typeNode instanceof \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode || $typeNode instanceof \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
             $conditions = $this->createConditions($variableName, $typeNode);
         } else {
             /** @var IdentifierTypeNode|ThisTypeNode $innerTypeNode */
@@ -208,7 +208,7 @@ class RequireExplicitAssertionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 $conditions = \array_merge($conditions, $this->createConditions($variableName, $innerTypeNode));
             }
         }
-        $operator = $typeNode instanceof \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode ? '&&' : '||';
+        $operator = $typeNode instanceof \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode ? '&&' : '||';
         return \sprintf('\\assert(%s);', \implode(\sprintf(' %s ', $operator), \array_unique($conditions)));
     }
     /**
@@ -216,9 +216,9 @@ class RequireExplicitAssertionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      * @param IdentifierTypeNode|ThisTypeNode $typeNode
      * @return string[]
      */
-    private function createConditions(string $variableName, \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
+    private function createConditions(string $variableName, \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\TypeNode $typeNode) : array
     {
-        if ($typeNode instanceof \_PhpScoperef870243cfdb\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
+        if ($typeNode instanceof \_PhpScoperdaf95aff095b\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode) {
             return [\sprintf('%s instanceof $this', $variableName)];
         }
         if ($typeNode->name === 'self') {

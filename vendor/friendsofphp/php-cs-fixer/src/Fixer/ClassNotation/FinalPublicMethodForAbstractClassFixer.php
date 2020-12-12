@@ -30,14 +30,14 @@ final class FinalPublicMethodForAbstractClassFixer extends \PhpCsFixer\AbstractF
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('All public methods of abstract classes should be final.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition('All `public` methods of `abstract` classes should be `final`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 
 abstract class AbstractMachine
 {
     public function start()
     {}
 }
-')], 'Enforce API encapsulation in an inheritance architecture. ' . 'If you want to override a method, use the Template method pattern.', 'Risky when overriding public methods of abstract classes');
+')], 'Enforce API encapsulation in an inheritance architecture. ' . 'If you want to override a method, use the Template method pattern.', 'Risky when overriding `public` methods of `abstract` classes.');
     }
     /**
      * {@inheritdoc}
@@ -61,7 +61,7 @@ abstract class AbstractMachine
         $classes = \array_keys($tokens->findGivenKind(\T_CLASS));
         while ($classIndex = \array_pop($classes)) {
             $prevToken = $tokens[$tokens->getPrevMeaningfulToken($classIndex)];
-            if (!$prevToken->isGivenKind([\T_ABSTRACT])) {
+            if (!$prevToken->isGivenKind(\T_ABSTRACT)) {
                 continue;
             }
             $classOpen = $tokens->getNextTokenOfKind($classIndex, ['{']);
@@ -108,8 +108,8 @@ abstract class AbstractMachine
                 $prevIndex = $tokens->getPrevMeaningfulToken($index);
                 $prevToken = $tokens[$prevIndex];
             }
-            // skip already final methods
-            if ($prevToken->isGivenKind([\T_FINAL])) {
+            // skip abstract or already final methods
+            if ($prevToken->isGivenKind([\T_ABSTRACT, \T_FINAL])) {
                 $index = $prevIndex;
                 continue;
             }

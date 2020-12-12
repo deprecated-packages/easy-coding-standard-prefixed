@@ -34,10 +34,11 @@ final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before YodaStyleFixer.
      */
     public function getPriority()
     {
-        // must be run before YodaStyleFixer
         return 1;
     }
     /**

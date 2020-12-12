@@ -17,6 +17,8 @@ use PhpCsFixer\Preg;
  *
  * @author Graham Campbell <graham@alt-three.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ *
+ * @final
  */
 class Annotation
 {
@@ -204,7 +206,21 @@ class Annotation
     public function remove()
     {
         foreach ($this->lines as $line) {
-            $line->remove();
+            if ($line->isTheStart() && $line->isTheEnd()) {
+                // Single line doc block, remove entirely
+                $line->remove();
+            } elseif ($line->isTheStart()) {
+                // Multi line doc block, but start is on the same line as the first annotation, keep only the start
+                $content = \PhpCsFixer\Preg::replace('#(\\s*/\\*\\*).*#', '$1', $line->getContent());
+                $line->setContent($content);
+            } elseif ($line->isTheEnd()) {
+                // Multi line doc block, but end is on the same line as the last annotation, keep only the end
+                $content = \PhpCsFixer\Preg::replace('#(\\s*)\\S.*(\\*/.*)#', '$1$2', $line->getContent());
+                $line->setContent($content);
+            } else {
+                // Multi line doc block, neither start nor end on this line, can be removed safely
+                $line->remove();
+            }
         }
         $this->clearCache();
     }
@@ -235,7 +251,7 @@ class Annotation
             if (!$this->supportTypes()) {
                 throw new \RuntimeException('This tag does not support types.');
             }
-            $matchingResult = \PhpCsFixer\Preg::match('{^(?:\\s*\\*|/\\*\\*)\\s*@' . $name . '\\s+' . self::REGEX_TYPES . '(?:[ \\t].*)?$}sx', $this->lines[0]->getContent(), $matches);
+            $matchingResult = \PhpCsFixer\Preg::match('{^(?:\\s*\\*|/\\*\\*)\\s*@' . $name . '\\s+' . self::REGEX_TYPES . '(?:[*\\h\\v].*)?\\r?$}sx', $this->lines[0]->getContent(), $matches);
             $this->typesContent = 1 === $matchingResult ? $matches['types'] : '';
         }
         return $this->typesContent;

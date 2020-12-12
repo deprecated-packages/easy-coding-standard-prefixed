@@ -11,15 +11,14 @@
  */
 namespace PhpCsFixer\Fixer\PhpUnit;
 
-use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\DocBlock\Line;
+use PhpCsFixer\Fixer\AbstractPhpUnitFixer;
 use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\Indicator\PhpUnitTestCaseIndicator;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -28,7 +27,7 @@ use PhpCsFixer\Utils;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class PhpUnitMethodCasingFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpUnitMethodCasingFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     /**
      * @internal
@@ -57,20 +56,12 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after PhpUnitTestAnnotationFixer.
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function getPriority()
     {
-        return $tokens->isAllTokenKindsFound([\T_CLASS, \T_FUNCTION]);
-    }
-    /**
-     * {@inheritdoc}
-     */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
-    {
-        $phpUnitTestCaseIndicator = new \PhpCsFixer\Indicator\PhpUnitTestCaseIndicator();
-        foreach ($phpUnitTestCaseIndicator->findPhpUnitClasses($tokens) as $indexes) {
-            $this->applyCasing($tokens, $indexes[0], $indexes[1]);
-        }
+        return 0;
     }
     /**
      * {@inheritdoc}
@@ -80,10 +71,9 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('case', 'Apply camel or snake case to test methods'))->setAllowedValues([self::CAMEL_CASE, self::SNAKE_CASE])->setDefault(self::CAMEL_CASE)->getOption()]);
     }
     /**
-     * @param int $startIndex
-     * @param int $endIndex
+     * {@inheritdoc}
      */
-    private function applyCasing(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
+    protected function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
     {
         for ($index = $endIndex - 1; $index > $startIndex; --$index) {
             if (!$this->isTestMethod($tokens, $index)) {
@@ -96,7 +86,7 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
                 $tokens[$functionNameIndex] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $newFunctionName]);
             }
             $docBlockIndex = $this->getDocBlockIndex($tokens, $index);
-            if ($this->hasDocBlock($tokens, $index)) {
+            if ($this->isPHPDoc($tokens, $docBlockIndex)) {
                 $this->updateDocBlock($tokens, $docBlockIndex);
             }
         }
@@ -135,16 +125,8 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
         if ($this->startsWith('test', $functionName)) {
             return \true;
         }
-        // If the function doesn't have test in its name, and no doc block, it's not a test
-        if (!$this->hasDocBlock($tokens, $index)) {
-            return \false;
-        }
         $docBlockIndex = $this->getDocBlockIndex($tokens, $index);
-        $doc = $tokens[$docBlockIndex]->getContent();
-        if (\false === \strpos($doc, '@test')) {
-            return \false;
-        }
-        return \true;
+        return $this->isPHPDoc($tokens, $docBlockIndex) && \false !== \strpos($tokens[$docBlockIndex]->getContent(), '@test');
     }
     /**
      * @param int $index
@@ -167,35 +149,13 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
         return \substr($haystack, 0, \strlen($needle)) === $needle;
     }
     /**
-     * @param int $index
-     *
-     * @return bool
-     */
-    private function hasDocBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
-    {
-        $docBlockIndex = $this->getDocBlockIndex($tokens, $index);
-        return $tokens[$docBlockIndex]->isGivenKind(\T_DOC_COMMENT);
-    }
-    /**
-     * @param int $index
-     *
-     * @return int
-     */
-    private function getDocBlockIndex(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
-    {
-        do {
-            $index = $tokens->getPrevNonWhitespace($index);
-        } while ($tokens[$index]->isGivenKind([\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_FINAL, \T_ABSTRACT, \T_COMMENT]));
-        return $index;
-    }
-    /**
      * @param int $docBlockIndex
      */
     private function updateDocBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, $docBlockIndex)
     {
         $doc = new \PhpCsFixer\DocBlock\DocBlock($tokens[$docBlockIndex]->getContent());
         $lines = $doc->getLines();
-        $docBlockNeesUpdate = \false;
+        $docBlockNeedsUpdate = \false;
         for ($inc = 0; $inc < \count($lines); ++$inc) {
             $lineContent = $lines[$inc]->getContent();
             if (\false === \strpos($lineContent, '@depends')) {
@@ -206,10 +166,10 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
             }, $lineContent);
             if ($newLineContent !== $lineContent) {
                 $lines[$inc] = new \PhpCsFixer\DocBlock\Line($newLineContent);
-                $docBlockNeesUpdate = \true;
+                $docBlockNeedsUpdate = \true;
             }
         }
-        if ($docBlockNeesUpdate) {
+        if ($docBlockNeedsUpdate) {
             $lines = \implode('', $lines);
             $tokens[$docBlockIndex] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $lines]);
         }

@@ -12,8 +12,8 @@
 namespace PhpCsFixer\Tokenizer;
 
 use PhpCsFixer\Utils;
-use _PhpScoperef870243cfdb\Symfony\Component\Finder\Finder;
-use _PhpScoperef870243cfdb\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoperdaf95aff095b\Symfony\Component\Finder\Finder;
+use _PhpScoperdaf95aff095b\Symfony\Component\Finder\SplFileInfo;
 /**
  * Collection of Transformer classes.
  *
@@ -37,6 +37,7 @@ final class Transformers
         $this->registerBuiltInTransformers();
         \usort($this->items, static function (\PhpCsFixer\Tokenizer\TransformerInterface $a, \PhpCsFixer\Tokenizer\TransformerInterface $b) {
             return \PhpCsFixer\Utils::cmpInt($b->getPriority(), $a->getPriority());
+            // TODO: update to use spaceship operator (PHP 7.0 required)
         });
     }
     /**
@@ -89,7 +90,7 @@ final class Transformers
     private function findBuiltInTransformers()
     {
         /** @var SplFileInfo $file */
-        foreach (\_PhpScoperef870243cfdb\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Transformer') as $file) {
+        foreach (\_PhpScoperdaf95aff095b\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Transformer') as $file) {
             $relativeNamespace = $file->getRelativePath();
             $class = __NAMESPACE__ . '\\Transformer\\' . ($relativeNamespace ? $relativeNamespace . '\\' : '') . $file->getBasename('.php');
             (yield new $class());

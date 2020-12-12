@@ -46,11 +46,12 @@ final class ImplodeCallFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before MethodArgumentSpaceFixer.
+     * Must run after NoAliasFunctionsFixer.
      */
     public function getPriority()
     {
-        // must be run after NoAliasFunctionsFixer
-        // must be run before MethodArgumentSpaceFixer
         return -1;
     }
     /**
@@ -59,7 +60,7 @@ final class ImplodeCallFixer extends \PhpCsFixer\AbstractFixer
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
-        foreach ($tokens as $index => $token) {
+        for ($index = \count($tokens) - 1; $index > 0; --$index) {
             if (!$tokens[$index]->equals([\T_STRING, 'implode'], \false)) {
                 continue;
             }

@@ -16,6 +16,8 @@ use PhpCsFixer\Preg;
  * This represents a line of a docblock.
  *
  * @author Graham Campbell <graham@alt-three.com>
+ *
+ * @final
  */
 class Line
 {
@@ -61,7 +63,7 @@ class Line
      */
     public function containsUsefulContent()
     {
-        return 0 !== \PhpCsFixer\Preg::match('/\\*\\s*\\S+/', $this->content) && !$this->isTheStart() && !$this->isTheEnd();
+        return 0 !== \PhpCsFixer\Preg::match('/\\*\\s*\\S+/', $this->content) && '' !== \trim(\str_replace(['/', '*'], ' ', $this->content));
     }
     /**
      * Does the line contain a tag?
@@ -121,7 +123,7 @@ class Line
      */
     public function addBlank()
     {
-        $matched = \PhpCsFixer\Preg::match('/^([ \\t]*\\*)[^\\r\\n]*(\\r?\\n)$/', $this->content, $matches);
+        $matched = \PhpCsFixer\Preg::match('/^(\\h*\\*)[^\\r\\n]*(\\r?\\n)$/', $this->content, $matches);
         if (1 !== $matched) {
             return;
         }

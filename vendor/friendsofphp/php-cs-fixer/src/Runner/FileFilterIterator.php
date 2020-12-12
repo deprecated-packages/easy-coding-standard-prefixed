@@ -12,10 +12,10 @@
 namespace PhpCsFixer\Runner;
 
 use PhpCsFixer\Cache\CacheManagerInterface;
+use PhpCsFixer\Event\Event;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\Event;
-use _PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -35,8 +35,11 @@ final class FileFilterIterator extends \FilterIterator
      * @var array<string,bool>
      */
     private $visitedElements = [];
-    public function __construct(\Iterator $iterator, \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager)
+    public function __construct(\Traversable $iterator, \_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager)
     {
+        if (!$iterator instanceof \Iterator) {
+            $iterator = new \IteratorIterator($iterator);
+        }
         parent::__construct($iterator);
         $this->eventDispatcher = $eventDispatcher;
         $this->cacheManager = $cacheManager;
@@ -66,13 +69,13 @@ final class FileFilterIterator extends \FilterIterator
     /**
      * @param string $name
      */
-    private function dispatchEvent($name, \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\Event $event)
+    private function dispatchEvent($name, \PhpCsFixer\Event\Event $event)
     {
         if (null === $this->eventDispatcher) {
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoperef870243cfdb\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScoperdaf95aff095b\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

@@ -29,13 +29,6 @@ final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getPriority()
     {
         // Should run after CurlyBraceTransformer and before TypeColonTransformer
@@ -78,6 +71,13 @@ final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
                 $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, $token->getContent()]);
             }
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA];
     }
     /**
      * Check if token under given index is `use` statement for lambda function.

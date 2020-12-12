@@ -42,10 +42,7 @@ final class NoClosingTagFixer extends \PhpCsFixer\AbstractFixer
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        if (\count($tokens) < 2 || !$tokens->isMonolithicPhp()) {
-            return;
-        }
-        if (!$tokens->isTokenKindFound(\T_CLOSE_TAG)) {
+        if (\count($tokens) < 2 || !$tokens->isMonolithicPhp() || !$tokens->isTokenKindFound(\T_CLOSE_TAG)) {
             return;
         }
         $closeTags = $tokens->findGivenKind(\T_CLOSE_TAG);

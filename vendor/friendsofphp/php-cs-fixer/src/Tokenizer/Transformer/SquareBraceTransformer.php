@@ -32,16 +32,9 @@ final class SquareBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfo
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getPriority()
     {
-        // must run after CurlyBraceTransformer
+        // must run after CurlyBraceTransformer and AttributeTransformer
         return -1;
     }
     /**
@@ -66,6 +59,13 @@ final class SquareBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfo
         if ($this->isShortArray($tokens, $index)) {
             $this->transformIntoArraySquareBrace($tokens, $index);
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE];
     }
     /**
      * @param int $index

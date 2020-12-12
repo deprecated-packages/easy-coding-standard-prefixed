@@ -11,47 +11,45 @@
  */
 namespace PhpCsFixer\Fixer\PhpTag;
 
-use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\AbstractProxyFixer;
+use PhpCsFixer\Fixer\DeprecatedFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\Tokenizer\Token;
-use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Vincent Klaiber <hello@vinkla.com>
+ *
+ * @deprecated proxy to EchoTagSyntaxFixer
  */
-final class NoShortEchoTagFixer extends \PhpCsFixer\AbstractFixer
+final class NoShortEchoTagFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replace short-echo `<?=` with long format `<?php echo` syntax.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?= \"foo\";\n")]);
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replaces short-echo `<?=` with long format `<?php echo` syntax.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?= \"foo\";\n")]);
+    }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run before NoMixedEchoPrintFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function getSuccessorsNames()
     {
-        return $tokens->isTokenKindFound(\T_OPEN_TAG_WITH_ECHO);
+        return \array_keys($this->proxyFixers);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function createProxyFixers()
     {
-        $i = \count($tokens);
-        while ($i--) {
-            $token = $tokens[$i];
-            if (!$token->isGivenKind(\T_OPEN_TAG_WITH_ECHO)) {
-                continue;
-            }
-            $nextIndex = $i + 1;
-            $tokens[$i] = new \PhpCsFixer\Tokenizer\Token([\T_OPEN_TAG, '<?php ']);
-            if (!$tokens[$nextIndex]->isWhitespace()) {
-                $tokens->insertAt($nextIndex, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
-            }
-            $tokens->insertAt($nextIndex, new \PhpCsFixer\Tokenizer\Token([\T_ECHO, 'echo']));
-        }
+        return [new \PhpCsFixer\Fixer\PhpTag\EchoTagSyntaxFixer()];
     }
 }

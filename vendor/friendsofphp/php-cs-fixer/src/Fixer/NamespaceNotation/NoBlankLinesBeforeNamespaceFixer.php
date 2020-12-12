@@ -36,6 +36,15 @@ final class NoBlankLinesBeforeNamespaceFixer extends \PhpCsFixer\AbstractLinesBe
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after BlankLineAfterOpeningTagFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {

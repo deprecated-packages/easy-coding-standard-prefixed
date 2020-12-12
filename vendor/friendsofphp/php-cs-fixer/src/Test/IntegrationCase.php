@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Test;
 
-use PhpCsFixer\RuleSet;
+use PhpCsFixer\RuleSet\RuleSet;
 use PhpCsFixer\Tests\Test\IntegrationCase as BaseIntegrationCase;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -32,7 +32,7 @@ final class IntegrationCase
      * @param string      $expectedCode
      * @param null|string $inputCode
      */
-    public function __construct($fileName, $title, array $settings, array $requirements, array $config, \PhpCsFixer\RuleSet $ruleset, $expectedCode, $inputCode)
+    public function __construct($fileName, $title, array $settings, array $requirements, array $config, \PhpCsFixer\RuleSet\RuleSet $ruleset, $expectedCode, $inputCode)
     {
         $this->base = new \PhpCsFixer\Tests\Test\IntegrationCase($fileName, $title, $settings, $requirements, $config, $ruleset, $expectedCode, $inputCode);
         @\trigger_error(\sprintf('The "%s" class is deprecated. You should stop using it, as it will be removed in 3.0 version.', __CLASS__), \E_USER_DEPRECATED);

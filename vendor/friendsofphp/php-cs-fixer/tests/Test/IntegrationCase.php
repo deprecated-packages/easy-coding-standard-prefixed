@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Tests\Test;
 
-use PhpCsFixer\RuleSet;
+use PhpCsFixer\RuleSet\RuleSet;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -58,7 +58,7 @@ final class IntegrationCase
      * @param string      $expectedCode
      * @param null|string $inputCode
      */
-    public function __construct($fileName, $title, array $settings, array $requirements, array $config, \PhpCsFixer\RuleSet $ruleset, $expectedCode, $inputCode)
+    public function __construct($fileName, $title, array $settings, array $requirements, array $config, \PhpCsFixer\RuleSet\RuleSet $ruleset, $expectedCode, $inputCode)
     {
         $this->fileName = $fileName;
         $this->title = $title;
@@ -96,9 +96,6 @@ final class IntegrationCase
      */
     public function getRequirement($name)
     {
-        if (!\is_string($name)) {
-            throw new \InvalidArgumentException(\sprintf('Requirement key must be a string, got "%s".', \is_object($name) ? \get_class($name) : \gettype($name) . '#' . $name));
-        }
         if (!\array_key_exists($name, $this->requirements)) {
             throw new \InvalidArgumentException(\sprintf('Unknown requirement key "%s", expected any of "%s".', $name, \implode('","', \array_keys($this->requirements))));
         }

@@ -30,6 +30,15 @@ final class SemicolonAfterInstructionFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before SimplifiedIfReturnFixer.
+     */
+    public function getPriority()
+    {
+        return 2;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {

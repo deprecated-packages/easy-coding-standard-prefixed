@@ -11,12 +11,9 @@
  */
 namespace PhpCsFixer\Fixer\FunctionNotation;
 
-use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\AbstractPhpdocToTypeDeclarationFixer;
 use PhpCsFixer\DocBlock\Annotation;
 use PhpCsFixer\DocBlock\DocBlock;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
@@ -27,20 +24,20 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Jan Gantzert <jan@familie-gantzert.de>
  */
-final class PhpdocToParamTypeFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpdocToParamTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDeclarationFixer
 {
     /** @internal */
     const CLASS_REGEX = '/^\\\\?[a-zA-Z_\\x7f-\\xff](?:\\\\?[a-zA-Z0-9_\\x7f-\\xff]+)*(?<array>\\[\\])*$/';
     /** @internal */
     const MINIMUM_PHP_VERSION = 70000;
     /**
-     * @var array<int, string>
+     * @var array{int, string}[]
      */
-    private $blacklistFuncNames = [[\T_STRING, '__clone'], [\T_STRING, '__destruct']];
+    private $excludeFuncNames = [[\T_STRING, '__clone'], [\T_STRING, '__destruct']];
     /**
      * @var array<string, true>
      */
-    private $skippedTypes = ['mixed' => \true, 'resource' => \true, 'static' => \true];
+    private $skippedTypes = ['mixed' => \true, 'resource' => \true, 'static' => \true, 'void' => \true];
     /**
      * {@inheritdoc}
      */
@@ -56,7 +53,7 @@ function my_foo($bar)
 /** @param string|null $bar */
 function my_foo($bar)
 {}
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70100))], null, '[1] This rule is EXPERIMENTAL and is not covered with backward compatibility promise. [2] `@param` annotation is mandatory for the fixer to make changes, signatures of methods without it (no docblock, inheritdocs) will not be fixed. [3] Manual actions are required if inherited signatures are not properly documented.');
+', new \PhpCsFixer\FixerDefinition\VersionSpecification(70100))], null, 'This rule is EXPERIMENTAL and [1] is not covered with backward compatibility promise. [2] `@param` annotation is mandatory for the fixer to make changes, signatures of methods without it (no docblock, inheritdocs) will not be fixed. [3] Manual actions are required if inherited signatures are not properly documented.');
     }
     /**
      * {@inheritdoc}
@@ -67,10 +64,12 @@ function my_foo($bar)
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoSuperfluousPhpdocTagsFixer, PhpdocAlignFixer.
+     * Must run after CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
     public function getPriority()
     {
-        // should be run before NoSuperfluousPhpdocTagsFixer
         return 8;
     }
     /**
@@ -83,13 +82,6 @@ function my_foo($bar)
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
-    {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('scalar_types', 'Fix also scalar types; may have unexpected behaviour due to PHP bad type coercion system.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
-    }
-    /**
-     * {@inheritdoc}
-     */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         for ($index = $tokens->count() - 1; 0 < $index; --$index) {
@@ -97,7 +89,7 @@ function my_foo($bar)
                 continue;
             }
             $funcName = $tokens->getNextMeaningfulToken($index);
-            if ($tokens[$funcName]->equalsAny($this->blacklistFuncNames, \false)) {
+            if ($tokens[$funcName]->equalsAny($this->excludeFuncNames, \false)) {
                 continue;
             }
             $paramTypeAnnotations = $this->findParamAnnotations($tokens, $index);
@@ -112,7 +104,6 @@ function my_foo($bar)
                 }
                 $hasIterable = \false;
                 $hasNull = \false;
-                $hasVoid = \false;
                 $hasArray = \false;
                 $hasString = \false;
                 $hasInt = \false;
@@ -138,10 +129,6 @@ function my_foo($bar)
                         $hasNull = \true;
                         unset($types[$key]);
                         $minimumTokenPhpVersion = 70100;
-                    }
-                    if ('void' === $type) {
-                        $hasVoid = \true;
-                        unset($types[$key]);
                     }
                     if ('string' === $type) {
                         $hasString = \true;
@@ -190,10 +177,17 @@ function my_foo($bar)
                 if (null === $variableIndex) {
                     continue;
                 }
+                $byRefIndex = $tokens->getPrevMeaningfulToken($variableIndex);
+                if ($tokens[$byRefIndex]->equals('&')) {
+                    $variableIndex = $byRefIndex;
+                }
                 if (!('(' === $tokens[$variableIndex - 1]->getContent()) && $this->hasParamTypeHint($tokens, $variableIndex - 2)) {
                     continue;
                 }
-                $this->fixFunctionDefinition($paramType, $tokens, $variableIndex, $hasNull, $hasArray, $hasIterable, $hasVoid, $hasString, $hasInt, $hasFloat, $hasBool, $hasCallable, $hasObject);
+                if (!$this->isValidSyntax(\sprintf('<?php function f(%s $x) {}', $paramType))) {
+                    continue;
+                }
+                $this->fixFunctionDefinition($paramType, $tokens, $variableIndex, $hasNull, $hasArray, $hasIterable, $hasString, $hasInt, $hasFloat, $hasBool, $hasCallable, $hasObject);
             }
         }
     }
@@ -255,7 +249,6 @@ function my_foo($bar)
      * @param bool   $hasNull
      * @param bool   $hasArray
      * @param bool   $hasIterable
-     * @param bool   $hasVoid
      * @param bool   $hasString
      * @param bool   $hasInt
      * @param bool   $hasFloat
@@ -263,38 +256,30 @@ function my_foo($bar)
      * @param bool   $hasCallable
      * @param bool   $hasObject
      */
-    private function fixFunctionDefinition($paramType, \PhpCsFixer\Tokenizer\Tokens $tokens, $index, $hasNull, $hasArray, $hasIterable, $hasVoid, $hasString, $hasInt, $hasFloat, $hasBool, $hasCallable, $hasObject)
+    private function fixFunctionDefinition($paramType, \PhpCsFixer\Tokenizer\Tokens $tokens, $index, $hasNull, $hasArray, $hasIterable, $hasString, $hasInt, $hasFloat, $hasBool, $hasCallable, $hasObject)
     {
-        if (\true === $hasNull) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, '?']);
-        }
-        if (\true === $hasVoid) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token('void');
-        }
+        $newTokens = [];
         if (\true === $hasIterable && \true === $hasArray) {
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, 'array']);
         } elseif (\true === $hasIterable) {
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'iterable']);
         } elseif (\true === $hasArray) {
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, 'array']);
-        }
-        if (\true === $hasString) {
+        } elseif (\true === $hasString) {
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'string']);
-        }
-        if (\true === $hasInt) {
+        } elseif (\true === $hasInt) {
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'int']);
-        }
-        if (\true === $hasFloat) {
+        } elseif (\true === $hasFloat) {
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'float']);
-        }
-        if (\true === $hasBool) {
+        } elseif (\true === $hasBool) {
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'bool']);
-        }
-        if (\true === $hasCallable) {
+        } elseif (\true === $hasCallable) {
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_CALLABLE, 'callable']);
-        }
-        if (\true === $hasObject) {
+        } elseif (\true === $hasObject) {
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'object']);
+        }
+        if ('' !== $paramType && [] !== $newTokens) {
+            return;
         }
         foreach (\explode('\\', $paramType) as $nsIndex => $value) {
             if (0 === $nsIndex && '' === $value) {
@@ -304,6 +289,9 @@ function my_foo($bar)
                 $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_NS_SEPARATOR, '\\']);
             }
             $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $value]);
+        }
+        if (\true === $hasNull) {
+            \array_unshift($newTokens, new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, '?']));
         }
         $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
         $tokens->insertAt($index, $newTokens);

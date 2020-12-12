@@ -40,14 +40,24 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends \PhpCsFixer\
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        return \PHP_VERSION_ID >= 70100 && $tokens->isAllTokenKindsFound([\T_FUNCTION, \T_VARIABLE]);
+        if (\PHP_VERSION_ID < 70100) {
+            return \false;
+        }
+        if (!$tokens->isTokenKindFound(\T_VARIABLE)) {
+            return \false;
+        }
+        if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
+            return \true;
+        }
+        return $tokens->isTokenKindFound(\T_FUNCTION);
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoUnreachableDefaultArgumentValueFixer.
      */
     public function getPriority()
     {
-        // Should run before NoUnreachableDefaultArgumentValueFixer
         return 1;
     }
     /**
@@ -63,9 +73,13 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends \PhpCsFixer\
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
+        $tokenKinds = [\T_FUNCTION];
+        if (\PHP_VERSION_ID >= 70400) {
+            $tokenKinds[] = \T_FN;
+        }
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             $token = $tokens[$index];
-            if (!$token->isGivenKind(\T_FUNCTION)) {
+            if (!$token->isGivenKind($tokenKinds)) {
                 continue;
             }
             $arguments = $functionsAnalyzer->getFunctionArguments($tokens, $index);
@@ -79,7 +93,7 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends \PhpCsFixer\
     {
         foreach (\array_reverse($arguments) as $argumentInfo) {
             // If the parameter doesn't have a type declaration or a default value null we can continue
-            if (!$argumentInfo->hasTypeAnalysis() || 'null' !== $argumentInfo->getDefault()) {
+            if (!$argumentInfo->hasTypeAnalysis() || !$argumentInfo->hasDefault() || 'null' !== \strtolower($argumentInfo->getDefault())) {
                 continue;
             }
             $argumentTypeInfo = $argumentInfo->getTypeAnalysis();

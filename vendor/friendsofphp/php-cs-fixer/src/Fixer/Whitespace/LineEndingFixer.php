@@ -43,6 +43,15 @@ final class LineEndingFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsF
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before BracesFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
@@ -51,12 +60,12 @@ final class LineEndingFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsF
             $token = $tokens[$index];
             if ($token->isGivenKind(\T_ENCAPSED_AND_WHITESPACE)) {
                 if ($tokens[$tokens->getNextMeaningfulToken($index)]->isGivenKind(\T_END_HEREDOC)) {
-                    $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \PhpCsFixer\Preg::replace("#\r\n|\n#", $ending, $token->getContent())]);
+                    $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \PhpCsFixer\Preg::replace('#\\R#', $ending, $token->getContent())]);
                 }
                 continue;
             }
-            if ($token->isGivenKind([\T_OPEN_TAG, \T_WHITESPACE, \T_COMMENT, \T_DOC_COMMENT, \T_START_HEREDOC])) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \PhpCsFixer\Preg::replace("#\r\n|\n#", $ending, $token->getContent())]);
+            if ($token->isGivenKind([\T_CLOSE_TAG, \T_COMMENT, \T_DOC_COMMENT, \T_OPEN_TAG, \T_START_HEREDOC, \T_WHITESPACE])) {
+                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \PhpCsFixer\Preg::replace('#\\R#', $ending, $token->getContent())]);
             }
         }
     }

@@ -31,10 +31,12 @@ final class BlankLineAfterOpeningTagFixer extends \PhpCsFixer\AbstractFixer impl
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoBlankLinesBeforeNamespaceFixer.
+     * Must run after DeclareStrictTypesFixer.
      */
     public function getPriority()
     {
-        // should be run before the NoBlankLinesBeforeNamespaceFixer
         return 1;
     }
     /**

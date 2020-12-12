@@ -39,7 +39,7 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Throwing exception must be done in single line.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nthrow new Exception(\n    'Error',\n    500\n);\n")]);
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Throwing exception must be done in single line.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nthrow new Exception(\n    'Error.',\n    500\n);\n")]);
     }
     /**
      * {@inheritdoc}
@@ -50,6 +50,8 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before ConcatSpaceFixer.
      */
     public function getPriority()
     {
@@ -109,11 +111,9 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
                 continue;
             }
             $nextIndex = $tokens->getNonEmptySibling($index, 1);
-            if ($tokens[$nextIndex]->equalsAny(\array_merge(self::REMOVE_WHITESPACE_AROUND_TOKENS, self::REMOVE_WHITESPACE_BEFORE_TOKENS))) {
-                if (!$tokens[$prevIndex]->isGivenKind(\T_FUNCTION)) {
-                    $tokens->clearAt($index);
-                    continue;
-                }
+            if ($tokens[$nextIndex]->equalsAny(\array_merge(self::REMOVE_WHITESPACE_AROUND_TOKENS, self::REMOVE_WHITESPACE_BEFORE_TOKENS)) && !$tokens[$prevIndex]->isGivenKind(\T_FUNCTION)) {
+                $tokens->clearAt($index);
+                continue;
             }
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
         }

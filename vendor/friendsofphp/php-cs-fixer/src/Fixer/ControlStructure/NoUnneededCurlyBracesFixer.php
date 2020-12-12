@@ -12,13 +12,17 @@
 namespace PhpCsFixer\Fixer\ControlStructure;
 
 use PhpCsFixer\AbstractFixer;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class NoUnneededCurlyBracesFixer extends \PhpCsFixer\AbstractFixer
+final class NoUnneededCurlyBracesFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
@@ -34,14 +38,19 @@ switch ($b) {
         break;
     }
 }
-')]);
+'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+namespace Foo {
+    function Bar(){}
+}
+', ['namespaces' => \true])]);
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoUselessElseFixer, NoUselessReturnFixer, ReturnAssignmentFixer, SimplifiedIfReturnFixer.
      */
     public function getPriority()
     {
-        // must be run before NoUselessElseFixer and NoUselessReturnFixer.
         return 26;
     }
     /**
@@ -61,6 +70,16 @@ switch ($b) {
                 $this->clearOverCompleteBraces($tokens, $index, $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $index));
             }
         }
+        if ($this->configuration['namespaces']) {
+            $this->clearIfIsOverCompleteNamespaceBlock($tokens);
+        }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function createConfigurationDefinition()
+    {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('namespaces', 'Remove unneeded curly braces from bracketed namespaces.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
     }
     /**
      * @param int $openIndex  index of `{` token
@@ -86,7 +105,39 @@ switch ($b) {
      */
     private function isOverComplete(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
-        static $whiteList = ['{', '}', [\T_OPEN_TAG], ':', ';'];
-        return $tokens[$tokens->getPrevMeaningfulToken($index)]->equalsAny($whiteList);
+        static $include = ['{', '}', [\T_OPEN_TAG], ':', ';'];
+        return $tokens[$tokens->getPrevMeaningfulToken($index)]->equalsAny($include);
+    }
+    private function clearIfIsOverCompleteNamespaceBlock(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    {
+        if (\PhpCsFixer\Tokenizer\Tokens::isLegacyMode()) {
+            $index = $tokens->getNextTokenOfKind(0, [[\T_NAMESPACE]]);
+            $secondNamespaceIndex = $tokens->getNextTokenOfKind($index, [[\T_NAMESPACE]]);
+            if (null !== $secondNamespaceIndex) {
+                return;
+            }
+        } elseif (1 !== $tokens->countTokenKind(\T_NAMESPACE)) {
+            return;
+            // fast check, we never fix if multiple namespaces are defined
+        }
+        $index = $tokens->getNextTokenOfKind(0, [[\T_NAMESPACE]]);
+        do {
+            $index = $tokens->getNextMeaningfulToken($index);
+        } while ($tokens[$index]->isGivenKind([\T_STRING, \T_NS_SEPARATOR]));
+        if (!$tokens[$index]->equals('{')) {
+            return;
+            // `;`
+        }
+        $closeIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
+        $afterCloseIndex = $tokens->getNextMeaningfulToken($closeIndex);
+        if (null !== $afterCloseIndex && (!$tokens[$afterCloseIndex]->isGivenKind(\T_CLOSE_TAG) || null !== $tokens->getNextMeaningfulToken($afterCloseIndex))) {
+            return;
+        }
+        // clear up
+        $tokens->clearTokenAndMergeSurroundingWhitespace($closeIndex);
+        $tokens[$index] = new \PhpCsFixer\Tokenizer\Token(';');
+        if ($tokens[$index - 1]->isWhitespace(" \t") && !$tokens[$index - 2]->isComment()) {
+            $tokens->clearTokenAndMergeSurroundingWhitespace($index - 1);
+        }
     }
 }

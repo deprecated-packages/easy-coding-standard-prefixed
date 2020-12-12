@@ -34,6 +34,15 @@ final class NoTrailingWhitespaceInCommentFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after PhpdocNoUselessInheritdocFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
@@ -46,12 +55,12 @@ final class NoTrailingWhitespaceInCommentFixer extends \PhpCsFixer\AbstractFixer
     {
         foreach ($tokens as $index => $token) {
             if ($token->isGivenKind(\T_DOC_COMMENT)) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, \PhpCsFixer\Preg::replace('/(*ANY)[ \\t]+$/m', '', $token->getContent())]);
+                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, \PhpCsFixer\Preg::replace('/(*ANY)[\\h]+$/m', '', $token->getContent())]);
                 continue;
             }
             if ($token->isGivenKind(\T_COMMENT)) {
                 if ('/*' === \substr($token->getContent(), 0, 2)) {
-                    $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_COMMENT, \PhpCsFixer\Preg::replace('/(*ANY)[ \\t]+$/m', '', $token->getContent())]);
+                    $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_COMMENT, \PhpCsFixer\Preg::replace('/(*ANY)[\\h]+$/m', '', $token->getContent())]);
                 } elseif (isset($tokens[$index + 1]) && $tokens[$index + 1]->isWhitespace()) {
                     $trimmedContent = \ltrim($tokens[$index + 1]->getContent(), " \t");
                     if ('' !== $trimmedContent) {

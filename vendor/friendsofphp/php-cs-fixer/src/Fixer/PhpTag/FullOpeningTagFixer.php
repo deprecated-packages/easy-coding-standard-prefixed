@@ -66,7 +66,6 @@ echo "Hello!";
          * > echo '<?php ';
          */
         $tokens = \PhpCsFixer\Tokenizer\Tokens::fromCode($newContent);
-        $tokensOldContent = '';
         $tokensOldContentLength = 0;
         foreach ($tokens as $index => $token) {
             if ($token->isGivenKind(\T_OPEN_TAG)) {
@@ -74,7 +73,6 @@ echo "Hello!";
                 if ('<?php' !== \strtolower(\substr($content, $tokensOldContentLength, 5))) {
                     $tokenContent = '<? ';
                 }
-                $tokensOldContent .= $tokenContent;
                 $tokensOldContentLength += \strlen($tokenContent);
                 continue;
             }
@@ -100,7 +98,6 @@ echo "Hello!";
                 $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), $tokenContent]);
                 $token = $tokens[$index];
             }
-            $tokensOldContent .= $token->getContent();
             $tokensOldContentLength += \strlen($token->getContent());
         }
         $tokensOrg->overrideRange(0, $tokensOrg->count() - 1, $tokens);

@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\DependencyInjection;
+namespace _PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\DependencyInjection;
 
-use _PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\Event as LegacyEvent;
-use _PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\EventDispatcher;
-use _PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperef870243cfdb\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\Event as LegacyEvent;
+use _PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\EventDispatcher;
+use _PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoperdaf95aff095b\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Compiler pass to register tagged services for an event dispatcher.
  */
-class RegisterListenersPass implements \_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RegisterListenersPass implements \_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     protected $dispatcherService;
     protected $listenerTag;
@@ -43,7 +43,7 @@ class RegisterListenersPass implements \_PhpScoperef870243cfdb\Symfony\Component
         $this->hotPathTagName = $tagName;
         return $this;
     }
-    public function process(\_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->dispatcherService) && !$container->hasAlias($this->dispatcherService)) {
             return;
@@ -75,42 +75,42 @@ class RegisterListenersPass implements \_PhpScoperef870243cfdb\Symfony\Component
                         $event['method'] = '__invoke';
                     }
                 }
-                $definition->addMethodCall('addListener', [$event['event'], [new \_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument(new \_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Reference($id)), $event['method']], $priority]);
+                $definition->addMethodCall('addListener', [$event['event'], [new \_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument(new \_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Reference($id)), $event['method']], $priority]);
                 if (isset($this->hotPathEvents[$event['event']])) {
                     $container->getDefinition($id)->addTag($this->hotPathTagName);
                 }
             }
         }
-        $extractingDispatcher = new \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher();
+        $extractingDispatcher = new \_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher();
         foreach ($container->findTaggedServiceIds($this->subscriberTag, \true) as $id => $attributes) {
             $def = $container->getDefinition($id);
             // We must assume that the class value has been correctly filled, even if the service is created by a factory
             $class = $def->getClass();
             if (!($r = $container->getReflectionClass($class))) {
-                throw new \_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                throw new \_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
             }
-            if (!$r->isSubclassOf(\_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\EventSubscriberInterface::class)) {
-                throw new \_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must implement interface "%s".', $id, \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\EventSubscriberInterface::class));
+            if (!$r->isSubclassOf(\_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\EventSubscriberInterface::class)) {
+                throw new \_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must implement interface "%s".', $id, \_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\EventSubscriberInterface::class));
             }
             $class = $r->name;
-            \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = $aliases;
-            \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$subscriber = $class;
+            \_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = $aliases;
+            \_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$subscriber = $class;
             $extractingDispatcher->addSubscriber($extractingDispatcher);
             foreach ($extractingDispatcher->listeners as $args) {
-                $args[1] = [new \_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument(new \_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Reference($id)), $args[1]];
+                $args[1] = [new \_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument(new \_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Reference($id)), $args[1]];
                 $definition->addMethodCall('addListener', $args);
                 if (isset($this->hotPathEvents[$args[0]])) {
                     $container->getDefinition($id)->addTag($this->hotPathTagName);
                 }
             }
             $extractingDispatcher->listeners = [];
-            \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = [];
+            \_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = [];
         }
     }
-    private function getEventFromTypeDeclaration(\_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $id, string $method) : string
+    private function getEventFromTypeDeclaration(\_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\ContainerBuilder $container, string $id, string $method) : string
     {
-        if (null === ($class = $container->getDefinition($id)->getClass()) || !($r = $container->getReflectionClass($class, \false)) || !$r->hasMethod($method) || 1 > ($m = $r->getMethod($method))->getNumberOfParameters() || !($type = $m->getParameters()[0]->getType()) || $type->isBuiltin() || \_PhpScoperef870243cfdb\Symfony\Contracts\EventDispatcher\Event::class === ($name = $type->getName()) || \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\Event::class === $name) {
-            throw new \_PhpScoperef870243cfdb\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must define the "event" attribute on "%s" tags.', $id, $this->listenerTag));
+        if (null === ($class = $container->getDefinition($id)->getClass()) || !($r = $container->getReflectionClass($class, \false)) || !$r->hasMethod($method) || 1 > ($m = $r->getMethod($method))->getNumberOfParameters() || !($type = $m->getParameters()[0]->getType()) || $type->isBuiltin() || \_PhpScoperdaf95aff095b\Symfony\Contracts\EventDispatcher\Event::class === ($name = $type->getName()) || \_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\Event::class === $name) {
+            throw new \_PhpScoperdaf95aff095b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must define the "event" attribute on "%s" tags.', $id, $this->listenerTag));
         }
         return $name;
     }
@@ -118,7 +118,7 @@ class RegisterListenersPass implements \_PhpScoperef870243cfdb\Symfony\Component
 /**
  * @internal
  */
-class ExtractingEventDispatcher extends \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\EventDispatcher implements \_PhpScoperef870243cfdb\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class ExtractingEventDispatcher extends \_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\EventDispatcher implements \_PhpScoperdaf95aff095b\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     public $listeners = [];
     public static $aliases = [];

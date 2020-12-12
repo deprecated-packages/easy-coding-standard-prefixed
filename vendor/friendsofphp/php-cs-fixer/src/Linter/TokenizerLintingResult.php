@@ -19,10 +19,10 @@ namespace PhpCsFixer\Linter;
 final class TokenizerLintingResult implements \PhpCsFixer\Linter\LintingResultInterface
 {
     /**
-     * @var null|\ParseError
+     * @var null|\Error
      */
     private $error;
-    public function __construct(\ParseError $error = null)
+    public function __construct(\Error $error = null)
     {
         $this->error = $error;
     }
@@ -32,7 +32,11 @@ final class TokenizerLintingResult implements \PhpCsFixer\Linter\LintingResultIn
     public function check()
     {
         if (null !== $this->error) {
-            throw new \PhpCsFixer\Linter\LintingException(\sprintf('PHP Parse error: %s on line %d.', $this->error->getMessage(), $this->error->getLine()), $this->error->getCode(), $this->error);
+            throw new \PhpCsFixer\Linter\LintingException(\sprintf('%s: %s on line %d.', $this->getMessagePrefix(), $this->error->getMessage(), $this->error->getLine()), $this->error->getCode(), $this->error);
         }
+    }
+    private function getMessagePrefix()
+    {
+        return $this->error instanceof \ParseError ? 'Parse error' : 'Fatal error';
     }
 }

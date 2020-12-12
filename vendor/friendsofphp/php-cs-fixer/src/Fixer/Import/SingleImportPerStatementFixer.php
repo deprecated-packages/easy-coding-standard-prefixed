@@ -34,9 +34,13 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('There MUST be one use keyword per declaration.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nuse Foo, Sample, Sample\\Sample as Sample2;\n")]);
     }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run before MultilineWhitespaceBeforeSemicolonsFixer, NoLeadingImportSlashFixer, NoSinglelineWhitespaceBeforeSemicolonsFixer, NoUnusedImportsFixer, SpaceAfterSemicolonFixer.
+     */
     public function getPriority()
     {
-        // must be run before NoLeadingImportSlashFixer, NoSinglelineWhitespaceBeforeSemicolonsFixer, SpaceAfterSemicolonFixer, MultilineWhitespaceBeforeSemicolonsFixer, NoLeadingImportSlashFixer.
         return 1;
     }
     /**

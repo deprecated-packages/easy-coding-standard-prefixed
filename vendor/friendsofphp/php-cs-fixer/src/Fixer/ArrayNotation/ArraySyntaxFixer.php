@@ -50,10 +50,11 @@ final class ArraySyntaxFixer extends \PhpCsFixer\AbstractFixer implements \PhpCs
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before BinaryOperatorSpacesFixer, TernaryOperatorSpacesFixer.
      */
     public function getPriority()
     {
-        // should be run before the BinaryOperatorSpacesFixer and TernaryOperatorSpacesFixer.
         return 1;
     }
     /**

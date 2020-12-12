@@ -38,6 +38,9 @@ final class IndentationTypeFixer extends \PhpCsFixer\AbstractFixer implements \P
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before PhpdocIndentFixer.
+     * Must run after ClassAttributesSeparationFixer, MethodSeparationFixer.
      */
     public function getPriority()
     {

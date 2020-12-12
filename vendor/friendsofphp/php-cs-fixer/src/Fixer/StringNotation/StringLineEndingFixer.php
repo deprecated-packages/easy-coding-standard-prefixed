@@ -30,7 +30,7 @@ final class StringLineEndingFixer extends \PhpCsFixer\AbstractFixer implements \
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound([\T_CONSTANT_ENCAPSED_STRING, \T_ENCAPSED_AND_WHITESPACE]);
+        return $tokens->isAnyTokenKindsFound([\T_CONSTANT_ENCAPSED_STRING, \T_ENCAPSED_AND_WHITESPACE, \T_INLINE_HTML]);
     }
     /**
      * {@inheritdoc}
@@ -53,7 +53,7 @@ final class StringLineEndingFixer extends \PhpCsFixer\AbstractFixer implements \
     {
         $ending = $this->whitespacesConfig->getLineEnding();
         foreach ($tokens as $tokenIndex => $token) {
-            if (!$token->isGivenKind([\T_CONSTANT_ENCAPSED_STRING, \T_ENCAPSED_AND_WHITESPACE])) {
+            if (!$token->isGivenKind([\T_CONSTANT_ENCAPSED_STRING, \T_ENCAPSED_AND_WHITESPACE, \T_INLINE_HTML])) {
                 continue;
             }
             $tokens[$tokenIndex] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \PhpCsFixer\Preg::replace('#\\R#u', $ending, $token->getContent())]);

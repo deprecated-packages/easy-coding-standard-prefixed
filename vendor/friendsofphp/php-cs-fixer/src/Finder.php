@@ -11,16 +11,16 @@
  */
 namespace PhpCsFixer;
 
-use _PhpScoperef870243cfdb\Symfony\Component\Finder\Finder as BaseFinder;
+use _PhpScoperdaf95aff095b\Symfony\Component\Finder\Finder as BaseFinder;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-class Finder extends \_PhpScoperef870243cfdb\Symfony\Component\Finder\Finder
+class Finder extends \_PhpScoperdaf95aff095b\Symfony\Component\Finder\Finder
 {
     public function __construct()
     {
         parent::__construct();
-        $this->files()->name('*.php')->name('*.phpt')->ignoreDotFiles(\true)->ignoreVCS(\true)->exclude('vendor');
+        $this->files()->name('*.php')->exclude('vendor');
     }
 }

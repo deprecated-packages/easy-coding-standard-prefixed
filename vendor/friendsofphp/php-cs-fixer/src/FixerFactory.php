@@ -15,8 +15,9 @@ use PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
-use _PhpScoperef870243cfdb\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoperef870243cfdb\Symfony\Component\Finder\SplFileInfo;
+use PhpCsFixer\RuleSet\RuleSetInterface;
+use _PhpScoperdaf95aff095b\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoperdaf95aff095b\Symfony\Component\Finder\SplFileInfo;
 /**
  * Class provides a way to create a group of fixers.
  *
@@ -83,7 +84,7 @@ final class FixerFactory
         if (null === $builtInFixers) {
             $builtInFixers = [];
             /** @var SplFileInfo $file */
-            foreach (\_PhpScoperef870243cfdb\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Fixer') as $file) {
+            foreach (\_PhpScoperdaf95aff095b\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Fixer')->depth(1) as $file) {
                 $relativeNamespace = $file->getRelativePath();
                 $fixerClass = 'PhpCsFixer\\Fixer\\' . ($relativeNamespace ? $relativeNamespace . '\\' : '') . $file->getBasename('.php');
                 if ('Fixer' === \substr($fixerClass, -5)) {
@@ -131,7 +132,7 @@ final class FixerFactory
      *
      * @return $this
      */
-    public function useRuleSet(\PhpCsFixer\RuleSetInterface $ruleSet)
+    public function useRuleSet(\PhpCsFixer\RuleSet\RuleSetInterface $ruleSet)
     {
         $fixers = [];
         $fixersByName = [];
@@ -183,7 +184,7 @@ final class FixerFactory
      */
     private function getFixersConflicts(\PhpCsFixer\Fixer\FixerInterface $fixer)
     {
-        static $conflictMap = ['no_blank_lines_before_namespace' => ['single_blank_line_before_namespace']];
+        static $conflictMap = ['no_blank_lines_before_namespace' => ['single_blank_line_before_namespace'], 'single_import_per_statement' => ['group_import']];
         $fixerName = $fixer->getName();
         return \array_key_exists($fixerName, $conflictMap) ? $conflictMap[$fixerName] : [];
     }

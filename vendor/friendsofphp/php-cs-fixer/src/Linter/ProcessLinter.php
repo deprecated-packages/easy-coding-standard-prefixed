@@ -13,9 +13,9 @@ namespace PhpCsFixer\Linter;
 
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FileRemoval;
-use _PhpScoperef870243cfdb\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScoperef870243cfdb\Symfony\Component\Process\PhpExecutableFinder;
-use _PhpScoperef870243cfdb\Symfony\Component\Process\Process;
+use _PhpScoperdaf95aff095b\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoperdaf95aff095b\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScoperdaf95aff095b\Symfony\Component\Process\Process;
 /**
  * Handle PHP code linting using separated process of `php -l _file_`.
  *
@@ -45,7 +45,7 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
     public function __construct($executable = null)
     {
         if (null === $executable) {
-            $executableFinder = new \_PhpScoperef870243cfdb\Symfony\Component\Process\PhpExecutableFinder();
+            $executableFinder = new \_PhpScoperdaf95aff095b\Symfony\Component\Process\PhpExecutableFinder();
             $executable = $executableFinder->find(\false);
             if (\false === $executable) {
                 throw new \PhpCsFixer\Linter\UnavailableLinterException('Cannot find PHP executable.');
@@ -82,14 +82,14 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
      */
     public function lintFile($path)
     {
-        return new \PhpCsFixer\Linter\ProcessLintingResult($this->createProcessForFile($path));
+        return new \PhpCsFixer\Linter\ProcessLintingResult($this->createProcessForFile($path), $path);
     }
     /**
      * {@inheritdoc}
      */
     public function lintSource($source)
     {
-        return new \PhpCsFixer\Linter\ProcessLintingResult($this->createProcessForSource($source));
+        return new \PhpCsFixer\Linter\ProcessLintingResult($this->createProcessForSource($source), $this->temporaryFile);
     }
     /**
      * @param string $path path to file
@@ -117,11 +117,11 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
     private function createProcessForSource($source)
     {
         if (null === $this->temporaryFile) {
-            $this->temporaryFile = \tempnam('.', 'cs_fixer_tmp_');
+            $this->temporaryFile = \tempnam(\sys_get_temp_dir(), 'cs_fixer_tmp_');
             $this->fileRemoval->observe($this->temporaryFile);
         }
         if (\false === @\file_put_contents($this->temporaryFile, $source)) {
-            throw new \_PhpScoperef870243cfdb\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s".', $this->temporaryFile), 0, null, $this->temporaryFile);
+            throw new \_PhpScoperdaf95aff095b\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s".', $this->temporaryFile), 0, null, $this->temporaryFile);
         }
         return $this->createProcessForFile($this->temporaryFile);
     }

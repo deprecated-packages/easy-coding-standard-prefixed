@@ -34,10 +34,19 @@ function example($foo = "two words", $bar) {}
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after NullableTypeDeclarationForDefaultNullValueFixer.
+     */
+    public function getPriority()
+    {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(T_FN)) {
+        if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
             return \true;
         }
         return $tokens->isTokenKindFound(\T_FUNCTION);
@@ -55,7 +64,7 @@ function example($foo = "two words", $bar) {}
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         for ($i = 0, $l = $tokens->count(); $i < $l; ++$i) {
-            if (!$tokens[$i]->isGivenKind(\T_FUNCTION) && (\PHP_VERSION_ID < 70400 || !$tokens[$i]->isGivenKind(T_FN))) {
+            if (!$tokens[$i]->isGivenKind(\T_FUNCTION) && (\PHP_VERSION_ID < 70400 || !$tokens[$i]->isGivenKind(\T_FN))) {
                 continue;
             }
             $startIndex = $tokens->getNextTokenOfKind($i, ['(']);
@@ -105,6 +114,7 @@ function example($foo = "two words", $bar) {}
                 return $i;
             }
         }
+        return null;
     }
     /**
      * @param int $variableIndex

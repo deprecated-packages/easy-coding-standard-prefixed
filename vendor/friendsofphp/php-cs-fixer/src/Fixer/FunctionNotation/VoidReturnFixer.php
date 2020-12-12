@@ -35,11 +35,13 @@ final class VoidReturnFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before PhpdocNoEmptyReturnFixer, ReturnTypeDeclarationFixer.
+     * Must run after NoSuperfluousPhpdocTagsFixer, SimplifiedNullReturnFixer.
      */
     public function getPriority()
     {
-        // must run before ReturnTypeDeclarationFixer and PhpdocNoEmptyReturnFixer
-        return 15;
+        return 5;
     }
     /**
      * {@inheritdoc}
@@ -61,13 +63,13 @@ final class VoidReturnFixer extends \PhpCsFixer\AbstractFixer
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         // These cause syntax errors.
-        static $blacklistFuncNames = [[\T_STRING, '__construct'], [\T_STRING, '__destruct'], [\T_STRING, '__clone']];
+        static $excludeFuncNames = [[\T_STRING, '__construct'], [\T_STRING, '__destruct'], [\T_STRING, '__clone']];
         for ($index = $tokens->count() - 1; 0 <= $index; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_FUNCTION)) {
                 continue;
             }
             $funcName = $tokens->getNextMeaningfulToken($index);
-            if ($tokens[$funcName]->equalsAny($blacklistFuncNames, \false)) {
+            if ($tokens[$funcName]->equalsAny($excludeFuncNames, \false)) {
                 continue;
             }
             $startIndex = $tokens->getNextTokenOfKind($index, ['{', ';']);

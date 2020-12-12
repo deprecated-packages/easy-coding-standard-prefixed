@@ -25,7 +25,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Options;
+use _PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
@@ -171,10 +171,12 @@ switch($a) {
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before BlankLineBeforeStatementFixer.
+     * Must run after CombineConsecutiveUnsetsFixer, FunctionToConstantFixer, NoEmptyCommentFixer, NoEmptyPhpdocFixer, NoEmptyStatementFixer, NoUnusedImportsFixer, NoUselessElseFixer, NoUselessReturnFixer, NoUselessSprintfFixer.
      */
     public function getPriority()
     {
-        // should be run after the NoUnusedImportsFixer, NoEmptyPhpdocFixer, CombineConsecutiveUnsetsFixer and NoUselessElseFixer
         return -20;
     }
     /**
@@ -201,7 +203,7 @@ switch($a) {
     protected function createConfigurationDefinition()
     {
         $that = $this;
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('tokens', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tokens', 'List of tokens to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(self::$availableTokens)])->setNormalizer(static function (\_PhpScoperef870243cfdb\Symfony\Component\OptionsResolver\Options $options, $tokens) use($that) {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('tokens', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tokens', 'List of tokens to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(self::$availableTokens)])->setNormalizer(static function (\_PhpScoperdaf95aff095b\Symfony\Component\OptionsResolver\Options $options, $tokens) use($that) {
             foreach ($tokens as &$token) {
                 if ('useTrait' === $token) {
                     $message = "Token \"useTrait\" in option \"tokens\" for rule \"{$that->getName()}\" is deprecated and will be removed in 3.0, use \"use_trait\" instead.";
@@ -240,7 +242,7 @@ switch($a) {
             return;
         }
         $nextUseCandidate = $this->tokens->getNextMeaningfulToken($next);
-        if (null === $nextUseCandidate || 1 === $nextUseCandidate - $next || !$this->tokens[$nextUseCandidate]->isGivenKind($this->tokens[$index]->getId())) {
+        if (null === $nextUseCandidate || !$this->tokens[$nextUseCandidate]->isGivenKind($this->tokens[$index]->getId()) || !$this->containsLinebreak($index, $nextUseCandidate)) {
             return;
         }
         return $this->removeEmptyLinesAfterLineWithTokenAt($next);
@@ -315,5 +317,20 @@ switch($a) {
             }
             $this->tokens[$i] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $newContent]);
         }
+    }
+    /**
+     * @param int $startIndex
+     * @param int $endIndex
+     *
+     * @return bool
+     */
+    private function containsLinebreak($startIndex, $endIndex)
+    {
+        for ($i = $endIndex; $i > $startIndex; --$i) {
+            if (\PhpCsFixer\Preg::match('/\\R/', $this->tokens[$i]->getContent())) {
+                return \true;
+            }
+        }
+        return \false;
     }
 }

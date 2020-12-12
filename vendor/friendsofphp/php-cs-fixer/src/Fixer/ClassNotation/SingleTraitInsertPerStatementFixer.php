@@ -14,6 +14,7 @@ namespace PhpCsFixer\Fixer\ClassNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -31,9 +32,13 @@ final class Example
 }
 ')]);
     }
+    /**
+     * {@inheritdoc}
+     *
+     * Must run before BracesFixer, SpaceAfterSemicolonFixer.
+     */
     public function getPriority()
     {
-        // must be run before Braces and SpaceAfterSemicolonFixer
         return 1;
     }
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
@@ -46,22 +51,28 @@ final class Example
             if ($tokens[$index]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT)) {
                 $candidates = $this->getCandidates($tokens, $index);
                 if (\count($candidates) > 0) {
-                    $this->fixTraitUse($tokens, \array_reverse($candidates));
+                    $this->fixTraitUse($tokens, $index, $candidates);
                 }
             }
         }
     }
     /**
-     * @param int[] $candidates ',' indexes to fix
+     * @param int   $useTraitIndex
+     * @param int[] $candidates    ',' indexes to fix
      */
-    private function fixTraitUse(\PhpCsFixer\Tokenizer\Tokens $tokens, array $candidates)
+    private function fixTraitUse(\PhpCsFixer\Tokenizer\Tokens $tokens, $useTraitIndex, array $candidates)
     {
-        foreach ($candidates as $nextInsertIndex) {
-            $tokens[$nextInsertIndex] = new \PhpCsFixer\Tokenizer\Token(';');
-            $tokens->insertAt($nextInsertIndex + 1, new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, 'use']));
-            if (!$tokens[$nextInsertIndex + 2]->isWhitespace()) {
-                $tokens->insertAt($nextInsertIndex + 2, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
+        foreach ($candidates as $commaIndex) {
+            $inserts = [new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, 'use']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])];
+            $nextImportStartIndex = $tokens->getNextMeaningfulToken($commaIndex);
+            if ($tokens[$nextImportStartIndex - 1]->isWhitespace()) {
+                if (1 === \PhpCsFixer\Preg::match('/\\R/', $tokens[$nextImportStartIndex - 1]->getContent())) {
+                    \array_unshift($inserts, clone $tokens[$useTraitIndex - 1]);
+                }
+                $tokens->clearAt($nextImportStartIndex - 1);
             }
+            $tokens[$commaIndex] = new \PhpCsFixer\Tokenizer\Token(';');
+            $tokens->insertAt($nextImportStartIndex, $inserts);
         }
     }
     /**
@@ -81,6 +92,6 @@ final class Example
             $indexes[] = $index;
             $index = $tokens->getNextTokenOfKind($index, [',', ';', '{']);
         }
-        return $indexes;
+        return \array_reverse($indexes);
     }
 }

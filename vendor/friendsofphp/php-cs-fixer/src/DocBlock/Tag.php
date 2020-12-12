@@ -16,6 +16,8 @@ use PhpCsFixer\Preg;
  * This represents a tag, as defined by the proposed PSR PHPDoc standard.
  *
  * @author Graham Campbell <graham@alt-three.com>
+ *
+ * @final
  */
 class Tag
 {
@@ -66,7 +68,7 @@ class Tag
     /**
      * Set the tag name.
      *
-     * This will also be persisted to the upsteam line and annotation.
+     * This will also be persisted to the upstream line and annotation.
      *
      * @param string $name
      */

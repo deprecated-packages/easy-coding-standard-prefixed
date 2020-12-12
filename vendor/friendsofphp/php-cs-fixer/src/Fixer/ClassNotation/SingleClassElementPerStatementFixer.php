@@ -42,6 +42,15 @@ final class SingleClassElementPerStatementFixer extends \PhpCsFixer\AbstractFixe
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before ClassAttributesSeparationFixer.
+     */
+    public function getPriority()
+    {
+        return 56;
+    }
+    /**
+     * {@inheritdoc}
      */
     public function getDefinition()
     {
@@ -163,7 +172,7 @@ final class Example
     private function getModifiersSequences(\PhpCsFixer\Tokenizer\Tokens $tokens, $type, $startIndex, $endIndex)
     {
         if ('property' === $type) {
-            $tokenKinds = [\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_STATIC, \T_VAR, \T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE];
+            $tokenKinds = [\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_STATIC, \T_VAR, \T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT];
         } else {
             $tokenKinds = [\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_CONST];
         }

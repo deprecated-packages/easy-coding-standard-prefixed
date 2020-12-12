@@ -66,7 +66,7 @@ final class TypeShortNameResolver
      */
     private function getNamespacesFromTokens(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
-        return \array_map(function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis $info) {
+        return \array_map(static function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis $info) {
             return $info->getFullName();
         }, (new \PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer())->getDeclarations($tokens));
     }

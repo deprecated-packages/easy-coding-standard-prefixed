@@ -33,7 +33,7 @@ final class NoSuperfluousPhpdocTagsFixer extends \PhpCsFixer\AbstractFixer imple
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Removes `@param` and `@return` tags that don\'t provide any useful information.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Removes `@param`, `@return` and `@var` tags that don\'t provide any useful information.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 class Foo {
     /**
      * @param Bar $bar
@@ -79,10 +79,12 @@ class Foo {
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before NoEmptyPhpdocFixer, PhpdocAlignFixer, VoidReturnFixer.
+     * Must run after CommentToPhpdocFixer, FullyQualifiedStrictTypesFixer, PhpdocAddMissingParamAnnotationFixer, PhpdocIndentFixer, PhpdocReturnSelfReferenceFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocToParamTypeFixer, PhpdocToReturnTypeFixer, PhpdocTypesFixer.
      */
     public function getPriority()
     {
-        // should run before NoEmptyPhpdocFixer and after PhpdocToParamTypeFixer
         return 6;
     }
     /**
@@ -112,11 +114,16 @@ class Foo {
                 continue;
             }
             $token = $tokens[$documentedElementIndex];
-            if ($token->isGivenKind(\T_FUNCTION)) {
-                $content = $this->fixFunctionDocComment($content, $tokens, $index, $shortNames);
-            }
             if ($this->configuration['remove_inheritdoc']) {
                 $content = $this->removeSuperfluousInheritDoc($content);
+            }
+            if ($token->isGivenKind(\T_FUNCTION)) {
+                $content = $this->fixFunctionDocComment($content, $tokens, $index, $shortNames);
+            } elseif ($token->isGivenKind(\T_VARIABLE)) {
+                $content = $this->fixPropertyDocComment($content, $tokens, $index, $shortNames);
+            }
+            if ('' === $content) {
+                $content = '/**  */';
             }
             if ($content !== $initialContent) {
                 $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $content]);
@@ -128,7 +135,7 @@ class Foo {
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('allow_mixed', 'Whether type `mixed` without description is allowed (`true`) or considered superfluous (`false`)'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('remove_inheritdoc', 'Remove `@inheritDoc` tags'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('allow_unused_params', 'Whether `param` annontation without actual signature is allowed (`true`) or considered superfluous (`false`)'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('allow_mixed', 'Whether type `mixed` without description is allowed (`true`) or considered superfluous (`false`)'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('remove_inheritdoc', 'Remove `@inheritDoc` tags'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('allow_unused_params', 'Whether `param` annotation without actual signature is allowed (`true`) or considered superfluous (`false`)'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
     }
     /**
      * @param int $docCommentIndex
@@ -145,7 +152,7 @@ class Foo {
             }
         } while ($tokens[$index]->isGivenKind([\T_ABSTRACT, \T_FINAL, \T_STATIC, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC]));
         $index = $tokens->getNextMeaningfulToken($docCommentIndex);
-        $kindsBeforeProperty = [\T_STATIC, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC];
+        $kindsBeforeProperty = [\T_STATIC, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \T_STRING, \T_NS_SEPARATOR];
         if (!$tokens[$index]->isGivenKind($kindsBeforeProperty)) {
             return null;
         }
@@ -184,6 +191,26 @@ class Foo {
         $returnTypeInfo = $this->getReturnTypeInfo($tokens, $closingParenthesisIndex);
         foreach ($docBlock->getAnnotationsOfType('return') as $annotation) {
             if ($this->annotationIsSuperfluous($annotation, $returnTypeInfo, $shortNames)) {
+                $annotation->remove();
+            }
+        }
+        return $docBlock->getContent();
+    }
+    /**
+     * @param string $content
+     * @param int    $index   Index of the DocComment token
+     *
+     * @return string
+     */
+    private function fixPropertyDocComment($content, \PhpCsFixer\Tokenizer\Tokens $tokens, $index, array $shortNames)
+    {
+        $docBlock = new \PhpCsFixer\DocBlock\DocBlock($content);
+        do {
+            $index = $tokens->getNextMeaningfulToken($index);
+        } while ($tokens[$index]->isGivenKind([\T_STATIC, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC]));
+        $propertyTypeInfo = $this->getPropertyTypeInfo($tokens, $index);
+        foreach ($docBlock->getAnnotationsOfType('var') as $annotation) {
+            if ($this->annotationIsSuperfluous($annotation, $propertyTypeInfo, $shortNames)) {
                 $annotation->remove();
             }
         }
@@ -233,6 +260,18 @@ class Foo {
      *
      * @return array
      */
+    private function getPropertyTypeInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    {
+        if ($tokens[$index]->isGivenKind(\T_VARIABLE)) {
+            return ['type' => null, 'allows_null' => \true];
+        }
+        return $this->parseTypeHint($tokens, $index);
+    }
+    /**
+     * @param int $index The index of the first token of the type hint
+     *
+     * @return array
+     */
     private function parseTypeHint(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $allowsNull = \false;
@@ -245,7 +284,7 @@ class Foo {
             $type .= $tokens[$index]->getContent();
             $index = $tokens->getNextMeaningfulToken($index);
         }
-        return ['type' => $type, 'allows_null' => $allowsNull];
+        return ['type' => '' === $type ? null : $type, 'allows_null' => $allowsNull];
     }
     /**
      * @param array<string, string> $symbolShortNames
@@ -255,7 +294,9 @@ class Foo {
     private function annotationIsSuperfluous(\PhpCsFixer\DocBlock\Annotation $annotation, array $info, array $symbolShortNames)
     {
         if ('param' === $annotation->getTag()->getName()) {
-            $regex = '/@param\\s+(?:\\S|\\s(?!\\$))+\\s\\$\\S+\\s+\\S/';
+            $regex = '/@param\\s+(?:\\S|\\s(?!\\$))++\\s\\$\\S+\\s+\\S/';
+        } elseif ('var' === $annotation->getTag()->getName()) {
+            $regex = '/@var\\s+\\S+(\\s+\\$\\S+)?(\\s+)(?!\\*+\\/)([^$\\s]+)/';
         } else {
             $regex = '/@return\\s+\\S+\\s+\\S/';
         }

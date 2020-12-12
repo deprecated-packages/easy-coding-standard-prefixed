@@ -103,10 +103,12 @@ class Foo
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before ArrayIndentationFixer, MethodArgumentSpaceFixer, MethodChainingIndentationFixer.
+     * Must run after ClassAttributesSeparationFixer, ElseifFixer, LineEndingFixer, MethodSeparationFixer, NoAlternativeSyntaxFixer, NoEmptyStatementFixer, NoUselessElseFixer, SingleTraitInsertPerStatementFixer.
      */
     public function getPriority()
     {
-        // should be run after the ElseIfFixer, LineEndingFixer, NoEmptyStatementFixer and NoUselessElseFixer
         return -25;
     }
     /**
@@ -133,7 +135,7 @@ class Foo
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('allow_single_line_closure', 'Whether single line lambda notation should be allowed.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position_after_functions_and_oop_constructs', 'whether the opening brace should be placed on "next" or "same" line after classy constructs (non-anonymous classes, interfaces, traits, methods and non-lambda functions).'))->setAllowedValues([self::LINE_NEXT, self::LINE_SAME])->setDefault(self::LINE_NEXT)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position_after_control_structures', 'whether the opening brace should be placed on "next" or "same" line after control structures.'))->setAllowedValues([self::LINE_NEXT, self::LINE_SAME])->setDefault(self::LINE_SAME)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position_after_anonymous_constructs', 'whether the opening brace should be placed on "next" or "same" line after anonymous constructs (anonymous classes and lambda functions).'))->setAllowedValues([self::LINE_NEXT, self::LINE_SAME])->setDefault(self::LINE_SAME)->getOption()]);
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('allow_single_line_anonymous_class_with_empty_body', 'Whether single line anonymous class with empty body notation should be allowed.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('allow_single_line_closure', 'Whether single line lambda notation should be allowed.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position_after_functions_and_oop_constructs', 'whether the opening brace should be placed on "next" or "same" line after classy constructs (non-anonymous classes, interfaces, traits, methods and non-lambda functions).'))->setAllowedValues([self::LINE_NEXT, self::LINE_SAME])->setDefault(self::LINE_NEXT)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position_after_control_structures', 'whether the opening brace should be placed on "next" or "same" line after control structures.'))->setAllowedValues([self::LINE_NEXT, self::LINE_SAME])->setDefault(self::LINE_SAME)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position_after_anonymous_constructs', 'whether the opening brace should be placed on "next" or "same" line after anonymous constructs (anonymous classes and lambda functions).'))->setAllowedValues([self::LINE_NEXT, self::LINE_SAME])->setDefault(self::LINE_SAME)->getOption()]);
     }
     private function fixCommentBeforeBrace(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
@@ -159,11 +161,14 @@ class Foo
             if (!$braceToken->equals('{')) {
                 continue;
             }
+            /** @var Token $tokenTmp */
             $tokenTmp = $tokens[$braceIndex];
             $newBraceIndex = $prevIndex + 1;
             for ($i = $braceIndex; $i > $newBraceIndex; --$i) {
                 // we might be moving one white space next to another, these have to be merged
-                $tokens[$i] = $tokens[$i - 1];
+                /** @var Token $previousToken */
+                $previousToken = $tokens[$i - 1];
+                $tokens[$i] = $previousToken;
                 if ($tokens[$i]->isWhitespace() && $tokens[$i + 1]->isWhitespace()) {
                     $tokens[$i] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $tokens[$i]->getContent() . $tokens[$i + 1]->getContent()]);
                     $tokens->clearAt($i + 1);
@@ -229,6 +234,17 @@ class Foo
             // do not change indent for `while` in `do ... while ...`
             if ($token->isGivenKind(\T_WHILE) && $tokensAnalyzer->isWhilePartOfDoWhile($index)) {
                 continue;
+            }
+            if ($this->configuration['allow_single_line_anonymous_class_with_empty_body'] && $token->isGivenKind(\T_CLASS)) {
+                $prevIndex = $tokens->getPrevMeaningfulToken($index);
+                if ($tokens[$prevIndex]->isGivenKind(\T_NEW)) {
+                    $braceStartIndex = $tokens->getNextTokenOfKind($index, ['{']);
+                    $braceEndIndex = $tokens->getNextMeaningfulToken($braceStartIndex);
+                    if ('}' === $tokens[$braceEndIndex]->getContent() && !$this->isMultilined($tokens, $index, $braceEndIndex)) {
+                        $index = $braceEndIndex;
+                        continue;
+                    }
+                }
             }
             if ($this->configuration['allow_single_line_closure'] && $token->isGivenKind(\T_FUNCTION) && $tokensAnalyzer->isLambda($index)) {
                 $braceEndIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $tokens->getNextTokenOfKind($index, ['{']));
@@ -315,7 +331,7 @@ class Foo
                             }
                             $whitespace = $nextWhitespace . $this->whitespacesConfig->getLineEnding() . $indent;
                             if (!$nextNonWhitespaceNestToken->equals('}')) {
-                                $determineIsIndentableBlockContent = function ($contentIndex) use($tokens) {
+                                $determineIsIndentableBlockContent = static function ($contentIndex) use($tokens) {
                                     if (!$tokens[$contentIndex]->isComment()) {
                                         return \true;
                                     }
@@ -405,7 +421,8 @@ class Foo
                 continue;
             }
             $parenthesisEndIndex = $this->findParenthesisEnd($tokens, $index);
-            $tokenAfterParenthesis = $tokens[$tokens->getNextMeaningfulToken($parenthesisEndIndex)];
+            $nextAfterParenthesisEndIndex = $tokens->getNextMeaningfulToken($parenthesisEndIndex);
+            $tokenAfterParenthesis = $tokens[$nextAfterParenthesisEndIndex];
             // if Token after parenthesis is { then we do not need to insert brace, but to fix whitespace before it
             if ($tokenAfterParenthesis->equals('{') && self::LINE_SAME === $this->configuration['position_after_control_structures']) {
                 $tokens->ensureWhitespaceAtIndex($parenthesisEndIndex + 1, 0, ' ');
@@ -416,6 +433,18 @@ class Foo
             // - structure with block, e.g. while ($i) {...}, while ($i) : {...} endwhile;
             if ($tokenAfterParenthesis->equalsAny([';', '{', ':'])) {
                 continue;
+            }
+            // do not add for short 'if' followed by alternative loop,
+            // for example: if ($a) while ($b): ? > X < ?php endwhile; ? >
+            if ($tokenAfterParenthesis->isGivenKind([\T_FOR, \T_FOREACH, \T_SWITCH, \T_WHILE])) {
+                $tokenAfterParenthesisBlockEnd = $tokens->findBlockEnd(
+                    // go to ')'
+                    \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE,
+                    $tokens->getNextMeaningfulToken($nextAfterParenthesisEndIndex)
+                );
+                if ($tokens[$tokens->getNextMeaningfulToken($tokenAfterParenthesisBlockEnd)]->equals(':')) {
+                    continue;
+                }
             }
             $statementEndIndex = $this->findStatementEnd($tokens, $parenthesisEndIndex);
             // insert closing brace
@@ -540,7 +569,6 @@ class Foo
                 return $tokens->getPrevNonWhitespace($index);
             }
         }
-        throw new \RuntimeException('Statement end not found.');
     }
     private function getControlTokens()
     {
@@ -622,7 +650,7 @@ class Foo
             if ($previousToken->isWhitespace() && 1 === \PhpCsFixer\Preg::match('/\\R$/', $previousToken->getContent()) && (0 === \strpos($nextTokenContent, '//' . $this->whitespacesConfig->getIndent()) || '//' === $nextTokenContent || (0 === \strpos($nextTokenContent, '#' . $this->whitespacesConfig->getIndent()) || '#' === $nextTokenContent))) {
                 return;
             }
-            $tokens[$nextTokenIndex] = new \PhpCsFixer\Tokenizer\Token([$nextToken->getId(), \PhpCsFixer\Preg::replace('/(\\R)' . $this->detectIndent($tokens, $nextTokenIndex) . '/', '$1' . \PhpCsFixer\Preg::replace('/^.*\\R([ \\t]*)$/s', '$1', $whitespace), $nextToken->getContent())]);
+            $tokens[$nextTokenIndex] = new \PhpCsFixer\Tokenizer\Token([$nextToken->getId(), \PhpCsFixer\Preg::replace('/(\\R)' . $this->detectIndent($tokens, $nextTokenIndex) . '(\\h*\\S+.*)/', '$1' . \PhpCsFixer\Preg::replace('/^.*\\R(\\h*)$/s', '$1', $whitespace) . '$2', $nextToken->getContent())]);
         }
         $tokens->ensureWhitespaceAtIndex($index, 0, $whitespace);
     }
@@ -697,11 +725,7 @@ class Foo
     {
         $siblingIndex = $index;
         do {
-            if ($after) {
-                $siblingIndex = $tokens->getNextTokenOfKind($siblingIndex, [[\T_COMMENT]]);
-            } else {
-                $siblingIndex = $tokens->getPrevTokenOfKind($siblingIndex, [[\T_COMMENT]]);
-            }
+            $siblingIndex = $tokens->getTokenOfKindSibling($siblingIndex, $after ? 1 : -1, [[\T_COMMENT]]);
             if (null === $siblingIndex) {
                 return null;
             }

@@ -37,10 +37,11 @@ final class CastSpacesFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsF
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run after NoShortBoolCastFixer.
      */
     public function getPriority()
     {
-        // should be run after the NoShortBoolCastFixer
         return -10;
     }
     /**

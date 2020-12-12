@@ -33,7 +33,7 @@ final class EscapeImplicitBackslashesFixer extends \PhpCsFixer\AbstractFixer imp
         $codeSample = <<<'EOF'
 <?php
 
-namespace _PhpScoperef870243cfdb;
+namespace _PhpScoperdaf95aff095b;
 
 $singleQuoted = 'String with \\" and My\\Prefix\\';
 $doubleQuoted = "Interpret my \n but not my \\a";
@@ -54,10 +54,12 @@ EOF;
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before HeredocToNowdocFixer, SingleQuoteFixer.
+     * Must run after BacktickToShellExecFixer.
      */
     public function getPriority()
     {
-        // Should run before single_quote and heredoc_to_nowdoc
         return 1;
     }
     /**

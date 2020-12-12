@@ -35,10 +35,12 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     *
+     * Must run before BlankLineAfterNamespaceFixer, NoExtraBlankLinesFixer, NoLeadingImportSlashFixer, SingleLineAfterImportsFixer.
+     * Must run after ClassKeywordRemoveFixer, GlobalNamespaceImportFixer, PhpUnitFqcnAnnotationFixer, SingleImportPerStatementFixer.
      */
     public function getPriority()
     {
-        // should be run after the SingleImportPerStatementFixer
         return -10;
     }
     /**
@@ -114,7 +116,7 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
                 }
                 continue;
             }
-            if ($token->isComment() && \PhpCsFixer\Preg::match('/(?<![[:alnum:]])(?<!\\\\)' . $shortName . '(?![[:alnum:]])/i', $token->getContent())) {
+            if ($token->isComment() && \PhpCsFixer\Preg::match('/(?<![[:alnum:]\\$])(?<!\\\\)' . $shortName . '(?![[:alnum:]])/i', $token->getContent())) {
                 return \true;
             }
         }

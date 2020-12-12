@@ -26,13 +26,6 @@ final class WhitespacyCommentTransformer extends \PhpCsFixer\Tokenizer\AbstractT
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        return [];
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function getRequiredPhpVersionId()
     {
         return 50000;
@@ -58,5 +51,12 @@ final class WhitespacyCommentTransformer extends \PhpCsFixer\Tokenizer\AbstractT
         } else {
             $tokens->insertAt($index + 1, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $whitespaces]));
         }
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDeprecatedCustomTokens()
+    {
+        return [];
     }
 }
