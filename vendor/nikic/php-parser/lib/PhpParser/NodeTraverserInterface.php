@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3e7ab659bd82\PhpParser;
+namespace _PhpScoper04022cd986ec\PhpParser;
 
 interface NodeTraverserInterface
 {
@@ -10,13 +10,13 @@ interface NodeTraverserInterface
      *
      * @param NodeVisitor $visitor Visitor to add
      */
-    public function addVisitor(\_PhpScoper3e7ab659bd82\PhpParser\NodeVisitor $visitor);
+    public function addVisitor(\_PhpScoper04022cd986ec\PhpParser\NodeVisitor $visitor);
     /**
      * Removes an added visitor.
      *
      * @param NodeVisitor $visitor
      */
-    public function removeVisitor(\_PhpScoper3e7ab659bd82\PhpParser\NodeVisitor $visitor);
+    public function removeVisitor(\_PhpScoper04022cd986ec\PhpParser\NodeVisitor $visitor);
     /**
      * Traverses an array of nodes using the registered visitors.
      *

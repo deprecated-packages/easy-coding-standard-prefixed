@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper3e7ab659bd82\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper04022cd986ec\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper3e7ab659bd82\Doctrine\Tests\Common\Annotations\Bar2\Autoload;
+use _PhpScoper04022cd986ec\Doctrine\Tests\Common\Annotations\Bar2\Autoload;
 class ClassOverwritesTrait
 {
     use TraitWithAnnotatedMethod;
@@ -13,7 +13,7 @@ class ClassOverwritesTrait
     {
     }
 }
-namespace _PhpScoper3e7ab659bd82\Doctrine\Tests\Common\Annotations\Bar2;
+namespace _PhpScoper04022cd986ec\Doctrine\Tests\Common\Annotations\Bar2;
 
 /** @Annotation */
 class Autoload

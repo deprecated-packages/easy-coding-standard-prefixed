@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3e7ab659bd82\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper04022cd986ec\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper3e7ab659bd82\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScoper3e7ab659bd82\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper3e7ab659bd82\Symfony\Component\Cache\Traits\PhpFilesTrait;
-class PhpFilesAdapter extends \_PhpScoper3e7ab659bd82\Symfony\Component\Cache\Adapter\AbstractAdapter implements \_PhpScoper3e7ab659bd82\Symfony\Component\Cache\PruneableInterface
+use _PhpScoper04022cd986ec\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper04022cd986ec\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper04022cd986ec\Symfony\Component\Cache\Traits\PhpFilesTrait;
+class PhpFilesAdapter extends \_PhpScoper04022cd986ec\Symfony\Component\Cache\Adapter\AbstractAdapter implements \_PhpScoper04022cd986ec\Symfony\Component\Cache\PruneableInterface
 {
     use PhpFilesTrait;
     /**

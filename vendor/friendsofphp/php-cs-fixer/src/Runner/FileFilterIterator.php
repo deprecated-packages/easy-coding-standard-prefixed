@@ -14,8 +14,8 @@ namespace PhpCsFixer\Runner;
 use PhpCsFixer\Cache\CacheManagerInterface;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScoper3e7ab659bd82\Symfony\Component\EventDispatcher\Event;
-use _PhpScoper3e7ab659bd82\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper04022cd986ec\Symfony\Component\EventDispatcher\Event;
+use _PhpScoper04022cd986ec\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -35,7 +35,7 @@ final class FileFilterIterator extends \FilterIterator
      * @var array<string,bool>
      */
     private $visitedElements = [];
-    public function __construct(\Iterator $iterator, \_PhpScoper3e7ab659bd82\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager)
+    public function __construct(\Iterator $iterator, \_PhpScoper04022cd986ec\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager)
     {
         parent::__construct($iterator);
         $this->eventDispatcher = $eventDispatcher;
@@ -66,13 +66,13 @@ final class FileFilterIterator extends \FilterIterator
     /**
      * @param string $name
      */
-    private function dispatchEvent($name, \_PhpScoper3e7ab659bd82\Symfony\Component\EventDispatcher\Event $event)
+    private function dispatchEvent($name, \_PhpScoper04022cd986ec\Symfony\Component\EventDispatcher\Event $event)
     {
         if (null === $this->eventDispatcher) {
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoper3e7ab659bd82\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScoper04022cd986ec\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }
