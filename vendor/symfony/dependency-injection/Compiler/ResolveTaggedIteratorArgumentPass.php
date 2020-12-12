@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper79449c4e744b\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperbd5c5a045153\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper79449c4e744b\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScoperbd5c5a045153\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
 /**
  * Resolves all TaggedIteratorArgument arguments.
  *
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class ResolveTaggedIteratorArgumentPass extends \_PhpScoper79449c4e744b\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveTaggedIteratorArgumentPass extends \_PhpScoperbd5c5a045153\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     use PriorityTaggedServiceTrait;
     /**
@@ -24,7 +24,7 @@ class ResolveTaggedIteratorArgumentPass extends \_PhpScoper79449c4e744b\Symfony\
      */
     protected function processValue($value, bool $isRoot = \false)
     {
-        if (!$value instanceof \_PhpScoper79449c4e744b\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
+        if (!$value instanceof \_PhpScoperbd5c5a045153\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument) {
             return parent::processValue($value, $isRoot);
         }
         $value->setValues($this->findAndSortTaggedServices($value, $this->container));

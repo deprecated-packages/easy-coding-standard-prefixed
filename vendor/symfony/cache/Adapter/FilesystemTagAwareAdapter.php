@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper79449c4e744b\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperbd5c5a045153\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper79449c4e744b\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper79449c4e744b\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use _PhpScoper79449c4e744b\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper79449c4e744b\Symfony\Component\Cache\Traits\FilesystemTrait;
+use _PhpScoperbd5c5a045153\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperbd5c5a045153\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use _PhpScoperbd5c5a045153\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoperbd5c5a045153\Symfony\Component\Cache\Traits\FilesystemTrait;
 /**
  * Stores tag id <> cache id relationship as a symlink, and lookup on invalidation calls.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class FilesystemTagAwareAdapter extends \_PhpScoper79449c4e744b\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \_PhpScoper79449c4e744b\Symfony\Component\Cache\PruneableInterface
+class FilesystemTagAwareAdapter extends \_PhpScoperbd5c5a045153\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \_PhpScoperbd5c5a045153\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemTrait {
         doClear as private doClearCache;
@@ -30,9 +30,9 @@ class FilesystemTagAwareAdapter extends \_PhpScoper79449c4e744b\Symfony\Componen
      * Folder used for tag symlinks.
      */
     private const TAG_FOLDER = 'tags';
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \_PhpScoper79449c4e744b\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \_PhpScoperbd5c5a045153\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        $this->marshaller = new \_PhpScoper79449c4e744b\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
+        $this->marshaller = new \_PhpScoperbd5c5a045153\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
     }

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper79449c4e744b\Symfony\Component\Mime\Header;
+namespace _PhpScoperbd5c5a045153\Symfony\Component\Mime\Header;
 
-use _PhpScoper79449c4e744b\Symfony\Component\Mime\Address;
-use _PhpScoper79449c4e744b\Symfony\Component\Mime\Exception\RfcComplianceException;
-use _PhpScoper79449c4e744b\Symfony\Component\Mime\NamedAddress;
+use _PhpScoperbd5c5a045153\Symfony\Component\Mime\Address;
+use _PhpScoperbd5c5a045153\Symfony\Component\Mime\Exception\RfcComplianceException;
+use _PhpScoperbd5c5a045153\Symfony\Component\Mime\NamedAddress;
 /**
  * A Mailbox list MIME Header for something like From, To, Cc, and Bcc (one or more named addresses).
  *
@@ -20,7 +20,7 @@ use _PhpScoper79449c4e744b\Symfony\Component\Mime\NamedAddress;
  *
  * @experimental in 4.3
  */
-final class MailboxListHeader extends \_PhpScoper79449c4e744b\Symfony\Component\Mime\Header\AbstractHeader
+final class MailboxListHeader extends \_PhpScoperbd5c5a045153\Symfony\Component\Mime\Header\AbstractHeader
 {
     private $addresses = [];
     /**
@@ -77,7 +77,7 @@ final class MailboxListHeader extends \_PhpScoper79449c4e744b\Symfony\Component\
     /**
      * @throws RfcComplianceException
      */
-    public function addAddress(\_PhpScoper79449c4e744b\Symfony\Component\Mime\Address $address)
+    public function addAddress(\_PhpScoperbd5c5a045153\Symfony\Component\Mime\Address $address)
     {
         $this->addresses[] = $address;
     }
@@ -100,7 +100,7 @@ final class MailboxListHeader extends \_PhpScoper79449c4e744b\Symfony\Component\
         $strings = [];
         foreach ($this->addresses as $address) {
             $str = $address->getEncodedAddress();
-            if ($address instanceof \_PhpScoper79449c4e744b\Symfony\Component\Mime\NamedAddress && ($name = $address->getName())) {
+            if ($address instanceof \_PhpScoperbd5c5a045153\Symfony\Component\Mime\NamedAddress && ($name = $address->getName())) {
                 $str = $this->createPhrase($this, $name, $this->getCharset(), empty($strings)) . ' <' . $str . '>';
             }
             $strings[] = $str;

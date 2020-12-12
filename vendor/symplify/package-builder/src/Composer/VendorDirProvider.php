@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Composer;
 
-use _PhpScoper79449c4e744b\Composer\Autoload\ClassLoader;
-use _PhpScoper79449c4e744b\Nette\Utils\Strings;
+use _PhpScoperbd5c5a045153\Composer\Autoload\ClassLoader;
+use _PhpScoperbd5c5a045153\Nette\Utils\Strings;
 use ReflectionClass;
 /**
  * @see \Symplify\PackageBuilder\Tests\Composer\VendorDirProviderTest
@@ -15,7 +15,7 @@ final class VendorDirProvider
     {
         $rootFolder = \getenv('SystemDrive', \true) . \DIRECTORY_SEPARATOR;
         $path = __DIR__;
-        while (!\_PhpScoper79449c4e744b\Nette\Utils\Strings::endsWith($path, 'vendor') && $path !== $rootFolder) {
+        while (!\_PhpScoperbd5c5a045153\Nette\Utils\Strings::endsWith($path, 'vendor') && $path !== $rootFolder) {
             $path = \dirname($path);
         }
         if ($path !== $rootFolder) {
@@ -25,7 +25,7 @@ final class VendorDirProvider
     }
     private function reflectionFallback() : string
     {
-        $reflectionClass = new \ReflectionClass(\_PhpScoper79449c4e744b\Composer\Autoload\ClassLoader::class);
+        $reflectionClass = new \ReflectionClass(\_PhpScoperbd5c5a045153\Composer\Autoload\ClassLoader::class);
         return \dirname($reflectionClass->getFileName(), 2);
     }
 }

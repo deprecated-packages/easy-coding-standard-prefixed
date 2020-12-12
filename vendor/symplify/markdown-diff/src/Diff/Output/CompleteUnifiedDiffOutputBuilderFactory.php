@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\MarkdownDiff\Diff\Output;
 
-use _PhpScoper79449c4e744b\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use _PhpScoperbd5c5a045153\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 /**
  * Creates @see UnifiedDiffOutputBuilder with "$contextLines = 1000;"
@@ -21,9 +21,9 @@ final class CompleteUnifiedDiffOutputBuilderFactory
     /**
      * @api
      */
-    public function create() : \_PhpScoper79449c4e744b\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
+    public function create() : \_PhpScoperbd5c5a045153\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder
     {
-        $unifiedDiffOutputBuilder = new \_PhpScoper79449c4e744b\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder('');
+        $unifiedDiffOutputBuilder = new \_PhpScoperbd5c5a045153\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder('');
         $this->privatesAccessor->setPrivateProperty($unifiedDiffOutputBuilder, 'contextLines', 10000);
         return $unifiedDiffOutputBuilder;
     }

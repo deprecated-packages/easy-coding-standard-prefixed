@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-class InvalidTagValueNode implements \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+class InvalidTagValueNode implements \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     /** @var string (may be empty) */
     public $value;
     /** @var \PHPStan\PhpDocParser\Parser\ParserException */
     public $exception;
-    public function __construct(string $value, \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\ParserException $exception)
+    public function __construct(string $value, \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\ParserException $exception)
     {
         $this->value = $value;
         $this->exception = $exception;

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper79449c4e744b\PhpParser\Node\Scalar;
+namespace _PhpScoperbd5c5a045153\PhpParser\Node\Scalar;
 
-use _PhpScoper79449c4e744b\PhpParser\Node\Scalar;
-abstract class MagicConst extends \_PhpScoper79449c4e744b\PhpParser\Node\Scalar
+use _PhpScoperbd5c5a045153\PhpParser\Node\Scalar;
+abstract class MagicConst extends \_PhpScoperbd5c5a045153\PhpParser\Node\Scalar
 {
     /**
      * Constructs a magic constant node.

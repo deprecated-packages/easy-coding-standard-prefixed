@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper79449c4e744b\PhpParser\Builder;
+namespace _PhpScoperbd5c5a045153\PhpParser\Builder;
 
-use _PhpScoper79449c4e744b\PhpParser;
-use _PhpScoper79449c4e744b\PhpParser\BuilderHelpers;
-use _PhpScoper79449c4e744b\PhpParser\Node\Name;
-use _PhpScoper79449c4e744b\PhpParser\Node\Stmt;
-class Interface_ extends \_PhpScoper79449c4e744b\PhpParser\Builder\Declaration
+use _PhpScoperbd5c5a045153\PhpParser;
+use _PhpScoperbd5c5a045153\PhpParser\BuilderHelpers;
+use _PhpScoperbd5c5a045153\PhpParser\Node\Name;
+use _PhpScoperbd5c5a045153\PhpParser\Node\Stmt;
+class Interface_ extends \_PhpScoperbd5c5a045153\PhpParser\Builder\Declaration
 {
     protected $name;
     protected $extends = [];
@@ -32,7 +32,7 @@ class Interface_ extends \_PhpScoper79449c4e744b\PhpParser\Builder\Declaration
     public function extend(...$interfaces)
     {
         foreach ($interfaces as $interface) {
-            $this->extends[] = \_PhpScoper79449c4e744b\PhpParser\BuilderHelpers::normalizeName($interface);
+            $this->extends[] = \_PhpScoperbd5c5a045153\PhpParser\BuilderHelpers::normalizeName($interface);
         }
         return $this;
     }
@@ -45,10 +45,10 @@ class Interface_ extends \_PhpScoper79449c4e744b\PhpParser\Builder\Declaration
      */
     public function addStmt($stmt)
     {
-        $stmt = \_PhpScoper79449c4e744b\PhpParser\BuilderHelpers::normalizeNode($stmt);
-        if ($stmt instanceof \_PhpScoper79449c4e744b\PhpParser\Node\Stmt\ClassConst) {
+        $stmt = \_PhpScoperbd5c5a045153\PhpParser\BuilderHelpers::normalizeNode($stmt);
+        if ($stmt instanceof \_PhpScoperbd5c5a045153\PhpParser\Node\Stmt\ClassConst) {
             $this->constants[] = $stmt;
-        } elseif ($stmt instanceof \_PhpScoper79449c4e744b\PhpParser\Node\Stmt\ClassMethod) {
+        } elseif ($stmt instanceof \_PhpScoperbd5c5a045153\PhpParser\Node\Stmt\ClassMethod) {
             // we erase all statements in the body of an interface method
             $stmt->stmts = null;
             $this->methods[] = $stmt;
@@ -62,8 +62,8 @@ class Interface_ extends \_PhpScoper79449c4e744b\PhpParser\Builder\Declaration
      *
      * @return Stmt\Interface_ The built interface node
      */
-    public function getNode() : \_PhpScoper79449c4e744b\PhpParser\Node
+    public function getNode() : \_PhpScoperbd5c5a045153\PhpParser\Node
     {
-        return new \_PhpScoper79449c4e744b\PhpParser\Node\Stmt\Interface_($this->name, ['extends' => $this->extends, 'stmts' => \array_merge($this->constants, $this->methods)], $this->attributes);
+        return new \_PhpScoperbd5c5a045153\PhpParser\Node\Stmt\Interface_($this->name, ['extends' => $this->extends, 'stmts' => \array_merge($this->constants, $this->methods)], $this->attributes);
     }
 }

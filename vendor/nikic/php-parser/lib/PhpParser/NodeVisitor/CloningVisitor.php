@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper79449c4e744b\PhpParser\NodeVisitor;
+namespace _PhpScoperbd5c5a045153\PhpParser\NodeVisitor;
 
-use _PhpScoper79449c4e744b\PhpParser\Node;
-use _PhpScoper79449c4e744b\PhpParser\NodeVisitorAbstract;
+use _PhpScoperbd5c5a045153\PhpParser\Node;
+use _PhpScoperbd5c5a045153\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor cloning all nodes and linking to the original nodes using an attribute.
  *
  * This visitor is required to perform format-preserving pretty prints.
  */
-class CloningVisitor extends \_PhpScoper79449c4e744b\PhpParser\NodeVisitorAbstract
+class CloningVisitor extends \_PhpScoperbd5c5a045153\PhpParser\NodeVisitorAbstract
 {
-    public function enterNode(\_PhpScoper79449c4e744b\PhpParser\Node $origNode)
+    public function enterNode(\_PhpScoperbd5c5a045153\PhpParser\Node $origNode)
     {
         $node = clone $origNode;
         $node->setAttribute('origNode', $origNode);

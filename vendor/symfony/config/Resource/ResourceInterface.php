@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper79449c4e744b\Symfony\Component\Config\Resource;
+namespace _PhpScoperbd5c5a045153\Symfony\Component\Config\Resource;
 
 /**
  * ResourceInterface is the interface that must be implemented by all Resource classes.

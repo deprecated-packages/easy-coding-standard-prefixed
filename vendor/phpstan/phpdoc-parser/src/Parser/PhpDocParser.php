@@ -1,60 +1,60 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser;
+namespace _PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser;
 
-use _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast;
-use _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer;
+use _PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast;
+use _PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer;
 class PhpDocParser
 {
-    private const DISALLOWED_DESCRIPTION_START_TOKENS = [\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_UNION, \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_INTERSECTION, \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OPEN_ANGLE_BRACKET];
+    private const DISALLOWED_DESCRIPTION_START_TOKENS = [\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_UNION, \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_INTERSECTION, \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OPEN_ANGLE_BRACKET];
     /** @var TypeParser */
     private $typeParser;
     /** @var ConstExprParser */
     private $constantExprParser;
-    public function __construct(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TypeParser $typeParser, \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\ConstExprParser $constantExprParser)
+    public function __construct(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TypeParser $typeParser, \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\ConstExprParser $constantExprParser)
     {
         $this->typeParser = $typeParser;
         $this->constantExprParser = $constantExprParser;
     }
-    public function parse(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode
+    public function parse(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode
     {
-        $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OPEN_PHPDOC);
-        $tokens->tryConsumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL);
+        $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OPEN_PHPDOC);
+        $tokens->tryConsumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL);
         $children = [];
-        if (!$tokens->isCurrentTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PHPDOC)) {
+        if (!$tokens->isCurrentTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PHPDOC)) {
             $children[] = $this->parseChild($tokens);
-            while ($tokens->tryConsumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL) && !$tokens->isCurrentTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PHPDOC)) {
+            while ($tokens->tryConsumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL) && !$tokens->isCurrentTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PHPDOC)) {
                 $children[] = $this->parseChild($tokens);
             }
         }
-        $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PHPDOC);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode(\array_values($children));
+        $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PHPDOC);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode(\array_values($children));
     }
-    private function parseChild(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
+    private function parseChild(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
     {
-        if ($tokens->isCurrentTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_TAG)) {
+        if ($tokens->isCurrentTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_TAG)) {
             return $this->parseTag($tokens);
         }
         return $this->parseText($tokens);
     }
-    private function parseText(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode
+    private function parseText(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode
     {
         $text = '';
         while (\true) {
             // If we received a Lexer::TOKEN_PHPDOC_EOL, exit early to prevent
             // them from being processed.
             $currentTokenType = $tokens->currentTokenType();
-            if ($currentTokenType === \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL) {
+            if ($currentTokenType === \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL) {
                 break;
             }
-            $text .= $tokens->joinUntil(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL, \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PHPDOC, \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_END);
+            $text .= $tokens->joinUntil(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL, \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PHPDOC, \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_END);
             $text = \rtrim($text, " \t");
             // If we joined until TOKEN_PHPDOC_EOL, peak at the next tokens to see
             // if we have a multiline string to join.
             $currentTokenType = $tokens->currentTokenType();
-            if ($currentTokenType !== \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL) {
+            if ($currentTokenType !== \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_PHPDOC_EOL) {
                 break;
             }
             // Peek at the next token to determine if it is more text that needs
@@ -62,7 +62,7 @@ class PhpDocParser
             $tokens->pushSavePoint();
             $tokens->next();
             $currentTokenType = $tokens->currentTokenType();
-            if ($currentTokenType !== \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER) {
+            if ($currentTokenType !== \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER) {
                 $tokens->rollback();
                 break;
             }
@@ -70,16 +70,16 @@ class PhpDocParser
             $text .= "\n";
         }
         $text = \trim($text, " \t");
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode($text);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode($text);
     }
-    public function parseTag(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode
+    public function parseTag(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode
     {
         $tag = $tokens->currentTokenValue();
         $tokens->next();
         $value = $this->parseTagValue($tokens, $tag);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode($tag, $value);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode($tag, $value);
     }
-    public function parseTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens, string $tag) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+    public function parseTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens, string $tag) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
     {
         try {
             $tokens->pushSavePoint();
@@ -148,146 +148,146 @@ class PhpDocParser
                     $tagValue = $this->parseExtendsTagValue('@use', $tokens);
                     break;
                 default:
-                    $tagValue = new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode($this->parseOptionalDescription($tokens));
+                    $tagValue = new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\GenericTagValueNode($this->parseOptionalDescription($tokens));
                     break;
             }
             $tokens->dropSavePoint();
-        } catch (\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\ParserException $e) {
+        } catch (\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\ParserException $e) {
             $tokens->rollback();
-            $tagValue = new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\InvalidTagValueNode($this->parseOptionalDescription($tokens), $e);
+            $tagValue = new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\InvalidTagValueNode($this->parseOptionalDescription($tokens), $e);
         }
         return $tagValue;
     }
-    private function parseParamTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode
+    private function parseParamTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode
     {
         $type = $this->typeParser->parse($tokens);
-        $isVariadic = $tokens->tryConsumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIADIC);
+        $isVariadic = $tokens->tryConsumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIADIC);
         $parameterName = $this->parseRequiredVariableName($tokens);
         $description = $this->parseOptionalDescription($tokens);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode($type, $isVariadic, $parameterName, $description);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode($type, $isVariadic, $parameterName, $description);
     }
-    private function parseVarTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\VarTagValueNode
+    private function parseVarTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\VarTagValueNode
     {
         $type = $this->typeParser->parse($tokens);
         $variableName = $this->parseOptionalVariableName($tokens);
         $description = $this->parseOptionalDescription($tokens, $variableName === '');
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\VarTagValueNode($type, $variableName, $description);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\VarTagValueNode($type, $variableName, $description);
     }
-    private function parseReturnTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ReturnTagValueNode
+    private function parseReturnTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ReturnTagValueNode
     {
         $type = $this->typeParser->parse($tokens);
         $description = $this->parseOptionalDescription($tokens, \true);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ReturnTagValueNode($type, $description);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ReturnTagValueNode($type, $description);
     }
-    private function parseThrowsTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode
+    private function parseThrowsTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode
     {
         $type = $this->typeParser->parse($tokens);
         $description = $this->parseOptionalDescription($tokens, \true);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode($type, $description);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode($type, $description);
     }
-    private function parseMixinTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode
+    private function parseMixinTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode
     {
         $type = $this->typeParser->parse($tokens);
         $description = $this->parseOptionalDescription($tokens, \true);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode($type, $description);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\MixinTagValueNode($type, $description);
     }
-    private function parseDeprecatedTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\DeprecatedTagValueNode
+    private function parseDeprecatedTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\DeprecatedTagValueNode
     {
         $description = $this->parseOptionalDescription($tokens);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\DeprecatedTagValueNode($description);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\DeprecatedTagValueNode($description);
     }
-    private function parsePropertyTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode
+    private function parsePropertyTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode
     {
         $type = $this->typeParser->parse($tokens);
         $parameterName = $this->parseRequiredVariableName($tokens);
         $description = $this->parseOptionalDescription($tokens);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode($type, $parameterName, $description);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PropertyTagValueNode($type, $parameterName, $description);
     }
-    private function parseMethodTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode
+    private function parseMethodTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode
     {
         $isStatic = $tokens->tryConsumeTokenValue('static');
         $returnTypeOrMethodName = $this->typeParser->parse($tokens);
-        if ($tokens->isCurrentTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER)) {
+        if ($tokens->isCurrentTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER)) {
             $returnType = $returnTypeOrMethodName;
             $methodName = $tokens->currentTokenValue();
             $tokens->next();
-        } elseif ($returnTypeOrMethodName instanceof \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
-            $returnType = $isStatic ? new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode('static') : null;
+        } elseif ($returnTypeOrMethodName instanceof \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode) {
+            $returnType = $isStatic ? new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode('static') : null;
             $methodName = $returnTypeOrMethodName->name;
             $isStatic = \false;
         } else {
-            $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER);
+            $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER);
             // will throw exception
             exit;
         }
         $parameters = [];
-        $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OPEN_PARENTHESES);
-        if (!$tokens->isCurrentTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PARENTHESES)) {
+        $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OPEN_PARENTHESES);
+        if (!$tokens->isCurrentTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PARENTHESES)) {
             $parameters[] = $this->parseMethodTagValueParameter($tokens);
-            while ($tokens->tryConsumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_COMMA)) {
+            while ($tokens->tryConsumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_COMMA)) {
                 $parameters[] = $this->parseMethodTagValueParameter($tokens);
             }
         }
-        $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PARENTHESES);
+        $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_CLOSE_PARENTHESES);
         $description = $this->parseOptionalDescription($tokens);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode($isStatic, $returnType, $methodName, $parameters, $description);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueNode($isStatic, $returnType, $methodName, $parameters, $description);
     }
-    private function parseMethodTagValueParameter(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueParameterNode
+    private function parseMethodTagValueParameter(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueParameterNode
     {
         switch ($tokens->currentTokenType()) {
-            case \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER:
-            case \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OPEN_PARENTHESES:
-            case \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_NULLABLE:
+            case \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER:
+            case \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OPEN_PARENTHESES:
+            case \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_NULLABLE:
                 $parameterType = $this->typeParser->parse($tokens);
                 break;
             default:
                 $parameterType = null;
         }
-        $isReference = $tokens->tryConsumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_REFERENCE);
-        $isVariadic = $tokens->tryConsumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIADIC);
+        $isReference = $tokens->tryConsumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_REFERENCE);
+        $isVariadic = $tokens->tryConsumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIADIC);
         $parameterName = $tokens->currentTokenValue();
-        $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIABLE);
-        if ($tokens->tryConsumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_EQUAL)) {
+        $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIABLE);
+        if ($tokens->tryConsumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_EQUAL)) {
             $defaultValue = $this->constantExprParser->parse($tokens);
         } else {
             $defaultValue = null;
         }
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueParameterNode($parameterType, $isReference, $isVariadic, $parameterName, $defaultValue);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\MethodTagValueParameterNode($parameterType, $isReference, $isVariadic, $parameterName, $defaultValue);
     }
-    private function parseTemplateTagValue(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode
+    private function parseTemplateTagValue(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode
     {
         $name = $tokens->currentTokenValue();
-        $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER);
+        $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER);
         if ($tokens->tryConsumeTokenValue('of') || $tokens->tryConsumeTokenValue('as')) {
             $bound = $this->typeParser->parse($tokens);
         } else {
             $bound = null;
         }
         $description = $this->parseOptionalDescription($tokens);
-        return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode($name, $bound, $description);
+        return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode($name, $bound, $description);
     }
-    private function parseExtendsTagValue(string $tagName, \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+    private function parseExtendsTagValue(string $tagName, \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
     {
-        $baseType = new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($tokens->currentTokenValue());
-        $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER);
+        $baseType = new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($tokens->currentTokenValue());
+        $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_IDENTIFIER);
         $type = $this->typeParser->parseGeneric($tokens, $baseType);
         $description = $this->parseOptionalDescription($tokens);
         switch ($tagName) {
             case '@extends':
-                return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ExtendsTagValueNode($type, $description);
+                return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ExtendsTagValueNode($type, $description);
             case '@implements':
-                return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ImplementsTagValueNode($type, $description);
+                return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ImplementsTagValueNode($type, $description);
             case '@use':
-                return new \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\UsesTagValueNode($type, $description);
+                return new \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\UsesTagValueNode($type, $description);
         }
-        throw new \_PhpScoper79449c4e744b\PHPStan\ShouldNotHappenException();
+        throw new \_PhpScoperbd5c5a045153\PHPStan\ShouldNotHappenException();
     }
-    private function parseOptionalVariableName(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : string
+    private function parseOptionalVariableName(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : string
     {
-        if ($tokens->isCurrentTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIABLE)) {
+        if ($tokens->isCurrentTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIABLE)) {
             $parameterName = $tokens->currentTokenValue();
             $tokens->next();
-        } elseif ($tokens->isCurrentTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_THIS_VARIABLE)) {
+        } elseif ($tokens->isCurrentTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_THIS_VARIABLE)) {
             $parameterName = '$this';
             $tokens->next();
         } else {
@@ -295,20 +295,20 @@ class PhpDocParser
         }
         return $parameterName;
     }
-    private function parseRequiredVariableName(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : string
+    private function parseRequiredVariableName(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens) : string
     {
         $parameterName = $tokens->currentTokenValue();
-        $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIABLE);
+        $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_VARIABLE);
         return $parameterName;
     }
-    private function parseOptionalDescription(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Parser\TokenIterator $tokens, bool $limitStartToken = \false) : string
+    private function parseOptionalDescription(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Parser\TokenIterator $tokens, bool $limitStartToken = \false) : string
     {
         if ($limitStartToken) {
             foreach (self::DISALLOWED_DESCRIPTION_START_TOKENS as $disallowedStartToken) {
                 if (!$tokens->isCurrentTokenType($disallowedStartToken)) {
                     continue;
                 }
-                $tokens->consumeTokenType(\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OTHER);
+                $tokens->consumeTokenType(\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Lexer\Lexer::TOKEN_OTHER);
                 // will throw exception
             }
         }

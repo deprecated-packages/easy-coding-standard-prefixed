@@ -5,7 +5,7 @@ namespace SlevomatCodingStandard\Sniffs\Functions;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use const _PhpScoper79449c4e744b\T_FN;
+use const _PhpScoperbd5c5a045153\T_FN;
 class DisallowArrowFunctionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_DISALLOWED_ARROW_FUNCTION = 'DisallowedArrowFunction';

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper79449c4e744b;
+namespace _PhpScoperbd5c5a045153;
 
 use PhpCsFixer\Fixer\Alias\EregToPregFixer;
 use PhpCsFixer\Fixer\Alias\NoAliasFunctionsFixer;
@@ -23,8 +23,8 @@ use PhpCsFixer\Fixer\LanguageConstruct\IsNullFixer;
 use PhpCsFixer\Fixer\Naming\NoHomoglyphNamesFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitConstructFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMockShortWillReturnFixer;
-use _PhpScoper79449c4e744b\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoper79449c4e744b\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoperbd5c5a045153\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoperbd5c5a045153\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\LanguageConstruct\DirConstantFixer::class);
     $services->set(\PhpCsFixer\Fixer\Alias\EregToPregFixer::class);

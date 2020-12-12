@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper79449c4e744b\Symfony\Polyfill\Intl\Normalizer;
+namespace _PhpScoperbd5c5a045153\Symfony\Polyfill\Intl\Normalizer;
 
 /**
  * Normalizer is a PHP fallback implementation of the Normalizer class provided by the intl extension.

@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper79449c4e744b\PhpParser\ErrorHandler;
+namespace _PhpScoperbd5c5a045153\PhpParser\ErrorHandler;
 
-use _PhpScoper79449c4e744b\PhpParser\Error;
-use _PhpScoper79449c4e744b\PhpParser\ErrorHandler;
+use _PhpScoperbd5c5a045153\PhpParser\Error;
+use _PhpScoperbd5c5a045153\PhpParser\ErrorHandler;
 /**
  * Error handler that handles all errors by throwing them.
  *
  * This is the default strategy used by all components.
  */
-class Throwing implements \_PhpScoper79449c4e744b\PhpParser\ErrorHandler
+class Throwing implements \_PhpScoperbd5c5a045153\PhpParser\ErrorHandler
 {
-    public function handleError(\_PhpScoper79449c4e744b\PhpParser\Error $error)
+    public function handleError(\_PhpScoperbd5c5a045153\PhpParser\Error $error)
     {
         throw $error;
     }

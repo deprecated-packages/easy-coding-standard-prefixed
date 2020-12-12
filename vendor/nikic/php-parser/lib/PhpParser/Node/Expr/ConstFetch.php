@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper79449c4e744b\PhpParser\Node\Expr;
+namespace _PhpScoperbd5c5a045153\PhpParser\Node\Expr;
 
-use _PhpScoper79449c4e744b\PhpParser\Node\Expr;
-use _PhpScoper79449c4e744b\PhpParser\Node\Name;
-class ConstFetch extends \_PhpScoper79449c4e744b\PhpParser\Node\Expr
+use _PhpScoperbd5c5a045153\PhpParser\Node\Expr;
+use _PhpScoperbd5c5a045153\PhpParser\Node\Name;
+class ConstFetch extends \_PhpScoperbd5c5a045153\PhpParser\Node\Expr
 {
     /** @var Name Constant name */
     public $name;
@@ -15,7 +15,7 @@ class ConstFetch extends \_PhpScoper79449c4e744b\PhpParser\Node\Expr
      * @param Name  $name       Constant name
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper79449c4e744b\PhpParser\Node\Name $name, array $attributes = [])
+    public function __construct(\_PhpScoperbd5c5a045153\PhpParser\Node\Name $name, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->name = $name;

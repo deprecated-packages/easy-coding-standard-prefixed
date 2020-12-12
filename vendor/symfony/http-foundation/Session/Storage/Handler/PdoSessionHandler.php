@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper79449c4e744b\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoperbd5c5a045153\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Session handler using a PDO connection to read and write data.
@@ -37,7 +37,7 @@ namespace _PhpScoper79449c4e744b\Symfony\Component\HttpFoundation\Session\Storag
  * @author Michael Williams <michael.williams@funsational.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class PdoSessionHandler extends \_PhpScoper79449c4e744b\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class PdoSessionHandler extends \_PhpScoperbd5c5a045153\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     /**
      * No locking is done. This means sessions are prone to loss of data due to

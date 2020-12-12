@@ -4,10 +4,10 @@ declare (strict_types=1);
 namespace SlevomatCodingStandard\Helpers\Annotation;
 
 use InvalidArgumentException;
-use _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode;
-use _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use _PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode;
+use _PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use function in_array;
 use function sprintf;
@@ -18,7 +18,7 @@ class ThrowsAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Annota
 {
     /** @var ThrowsTagValueNode|null */
     private $contentNode;
-    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode $contentNode)
+    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode $contentNode)
     {
         if (!\in_array($name, ['@throws', '@phpstan-throws'], \true)) {
             throw new \InvalidArgumentException(\sprintf('Unsupported annotation %s.', $name));
@@ -30,7 +30,7 @@ class ThrowsAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Annota
     {
         return $this->contentNode === null;
     }
-    public function getContentNode() : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode
+    public function getContentNode() : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode
     {
         $this->errorWhenInvalid();
         return $this->contentNode;
@@ -47,7 +47,7 @@ class ThrowsAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\Annota
     /**
      * @return UnionTypeNode|IdentifierTypeNode
      */
-    public function getType() : \_PhpScoper79449c4e744b\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    public function getType() : \_PhpScoperbd5c5a045153\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         $this->errorWhenInvalid();
         /** @var UnionTypeNode|IdentifierTypeNode $type */

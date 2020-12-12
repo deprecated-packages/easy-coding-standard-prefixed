@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper79449c4e744b\Composer\XdebugHandler;
+namespace _PhpScoperbd5c5a045153\Composer\XdebugHandler;
 
 /**
  * @author John Stevenson <john-stevenson@blueyonder.co.uk>
@@ -45,8 +45,8 @@ class PhpConfig
     public function usePersistent()
     {
         if ($data = $this->getDataAndReset()) {
-            \_PhpScoper79449c4e744b\Composer\XdebugHandler\Process::setEnv('PHPRC', $data['tmpIni']);
-            \_PhpScoper79449c4e744b\Composer\XdebugHandler\Process::setEnv('PHP_INI_SCAN_DIR', '');
+            \_PhpScoperbd5c5a045153\Composer\XdebugHandler\Process::setEnv('PHPRC', $data['tmpIni']);
+            \_PhpScoperbd5c5a045153\Composer\XdebugHandler\Process::setEnv('PHP_INI_SCAN_DIR', '');
         }
         return array();
     }
@@ -57,9 +57,9 @@ class PhpConfig
      */
     private function getDataAndReset()
     {
-        if ($data = \_PhpScoper79449c4e744b\Composer\XdebugHandler\XdebugHandler::getRestartSettings()) {
-            \_PhpScoper79449c4e744b\Composer\XdebugHandler\Process::setEnv('PHPRC', $data['phprc']);
-            \_PhpScoper79449c4e744b\Composer\XdebugHandler\Process::setEnv('PHP_INI_SCAN_DIR', $data['scanDir']);
+        if ($data = \_PhpScoperbd5c5a045153\Composer\XdebugHandler\XdebugHandler::getRestartSettings()) {
+            \_PhpScoperbd5c5a045153\Composer\XdebugHandler\Process::setEnv('PHPRC', $data['phprc']);
+            \_PhpScoperbd5c5a045153\Composer\XdebugHandler\Process::setEnv('PHP_INI_SCAN_DIR', $data['scanDir']);
         }
         return $data;
     }
