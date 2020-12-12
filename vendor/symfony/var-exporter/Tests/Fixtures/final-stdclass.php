@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoper83b3b9a317c0;
+namespace _PhpScoperef870243cfdb;
 
-return \_PhpScoper83b3b9a317c0\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [(\_PhpScoper83b3b9a317c0\Symfony\Component\VarExporter\Internal\Registry::$factories['Symfony\\Component\\VarExporter\\Tests\\FinalStdClass'] ?? \_PhpScoper83b3b9a317c0\Symfony\Component\VarExporter\Internal\Registry::f('_PhpScoper83b3b9a317c0\\Symfony\\Component\\VarExporter\\Tests\\FinalStdClass'))()], null, [], $o[0], []);
+return \_PhpScoperef870243cfdb\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [(\_PhpScoperef870243cfdb\Symfony\Component\VarExporter\Internal\Registry::$factories['Symfony\\Component\\VarExporter\\Tests\\FinalStdClass'] ?? \_PhpScoperef870243cfdb\Symfony\Component\VarExporter\Internal\Registry::f('_PhpScoperef870243cfdb\\Symfony\\Component\\VarExporter\\Tests\\FinalStdClass'))()], null, [], $o[0], []);

@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper83b3b9a317c0\PhpParser\Node;
+namespace _PhpScoperef870243cfdb\PhpParser\Node;
 
-use _PhpScoper83b3b9a317c0\PhpParser\NodeAbstract;
+use _PhpScoperef870243cfdb\PhpParser\NodeAbstract;
 /**
  * Represents a non-namespaced name. Namespaced names are represented using Name nodes.
  */
-class Identifier extends \_PhpScoper83b3b9a317c0\PhpParser\NodeAbstract
+class Identifier extends \_PhpScoperef870243cfdb\PhpParser\NodeAbstract
 {
     /** @var string Identifier as string */
     public $name;
