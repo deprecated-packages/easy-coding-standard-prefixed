@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8db4616aa69d\Symfony\Contracts\Cache;
+namespace _PhpScoperd3d57724c802\Symfony\Contracts\Cache;
 
-use _PhpScoper8db4616aa69d\Psr\Cache\CacheException;
-use _PhpScoper8db4616aa69d\Psr\Cache\CacheItemInterface;
-use _PhpScoper8db4616aa69d\Psr\Cache\InvalidArgumentException;
+use _PhpScoperd3d57724c802\Psr\Cache\CacheException;
+use _PhpScoperd3d57724c802\Psr\Cache\CacheItemInterface;
+use _PhpScoperd3d57724c802\Psr\Cache\InvalidArgumentException;
 /**
  * Augments PSR-6's CacheItemInterface with support for tags and metadata.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface ItemInterface extends \_PhpScoper8db4616aa69d\Psr\Cache\CacheItemInterface
+interface ItemInterface extends \_PhpScoperd3d57724c802\Psr\Cache\CacheItemInterface
 {
     /**
      * References the Unix timestamp stating when the item will expire.

@@ -26,8 +26,8 @@ use PhpCsFixer\Linter\LinterInterface;
 use PhpCsFixer\Linter\LintingException;
 use PhpCsFixer\Linter\LintingResultInterface;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper8db4616aa69d\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScoper8db4616aa69d\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoperd3d57724c802\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoperd3d57724c802\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
@@ -73,7 +73,7 @@ final class Runner
      * @var bool
      */
     private $stopOnViolation;
-    public function __construct($finder, array $fixers, \PhpCsFixer\Differ\DifferInterface $differ, \_PhpScoper8db4616aa69d\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Error\ErrorsManager $errorsManager, \PhpCsFixer\Linter\LinterInterface $linter, $isDryRun, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager, \PhpCsFixer\Cache\DirectoryInterface $directory = null, $stopOnViolation = \false)
+    public function __construct($finder, array $fixers, \PhpCsFixer\Differ\DifferInterface $differ, \_PhpScoperd3d57724c802\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Error\ErrorsManager $errorsManager, \PhpCsFixer\Linter\LinterInterface $linter, $isDryRun, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager, \PhpCsFixer\Cache\DirectoryInterface $directory = null, $stopOnViolation = \false)
     {
         $this->finder = $finder;
         $this->fixers = $fixers;
@@ -173,17 +173,17 @@ final class Runner
             if (!$this->isDryRun) {
                 $fileName = $file->getRealPath();
                 if (!\file_exists($fileName)) {
-                    throw new \_PhpScoper8db4616aa69d\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s" (no longer) exists.', $file->getPathname()), 0, null, $file->getPathname());
+                    throw new \_PhpScoperd3d57724c802\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s" (no longer) exists.', $file->getPathname()), 0, null, $file->getPathname());
                 }
                 if (\is_dir($fileName)) {
-                    throw new \_PhpScoper8db4616aa69d\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write file "%s" as the location exists as directory.', $fileName), 0, null, $fileName);
+                    throw new \_PhpScoperd3d57724c802\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write file "%s" as the location exists as directory.', $fileName), 0, null, $fileName);
                 }
                 if (!\is_writable($fileName)) {
-                    throw new \_PhpScoper8db4616aa69d\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write to file "%s" as it is not writable.', $fileName), 0, null, $fileName);
+                    throw new \_PhpScoperd3d57724c802\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write to file "%s" as it is not writable.', $fileName), 0, null, $fileName);
                 }
                 if (\false === @\file_put_contents($fileName, $new)) {
                     $error = \error_get_last();
-                    throw new \_PhpScoper8db4616aa69d\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s", "%s".', $fileName, $error ? $error['message'] : 'no reason available'), 0, null, $file);
+                    throw new \_PhpScoperd3d57724c802\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s", "%s".', $fileName, $error ? $error['message'] : 'no reason available'), 0, null, $file);
                 }
             }
         }
@@ -211,7 +211,7 @@ final class Runner
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoper8db4616aa69d\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScoperd3d57724c802\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

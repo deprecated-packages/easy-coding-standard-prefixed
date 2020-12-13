@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper8db4616aa69d\PhpParser\Builder;
+namespace _PhpScoperd3d57724c802\PhpParser\Builder;
 
-use _PhpScoper8db4616aa69d\PhpParser;
-use _PhpScoper8db4616aa69d\PhpParser\BuilderHelpers;
-use _PhpScoper8db4616aa69d\PhpParser\Node\Stmt;
-class Trait_ extends \_PhpScoper8db4616aa69d\PhpParser\Builder\Declaration
+use _PhpScoperd3d57724c802\PhpParser;
+use _PhpScoperd3d57724c802\PhpParser\BuilderHelpers;
+use _PhpScoperd3d57724c802\PhpParser\Node\Stmt;
+class Trait_ extends \_PhpScoperd3d57724c802\PhpParser\Builder\Declaration
 {
     protected $name;
     protected $uses = [];
@@ -30,12 +30,12 @@ class Trait_ extends \_PhpScoper8db4616aa69d\PhpParser\Builder\Declaration
      */
     public function addStmt($stmt)
     {
-        $stmt = \_PhpScoper8db4616aa69d\PhpParser\BuilderHelpers::normalizeNode($stmt);
-        if ($stmt instanceof \_PhpScoper8db4616aa69d\PhpParser\Node\Stmt\Property) {
+        $stmt = \_PhpScoperd3d57724c802\PhpParser\BuilderHelpers::normalizeNode($stmt);
+        if ($stmt instanceof \_PhpScoperd3d57724c802\PhpParser\Node\Stmt\Property) {
             $this->properties[] = $stmt;
-        } elseif ($stmt instanceof \_PhpScoper8db4616aa69d\PhpParser\Node\Stmt\ClassMethod) {
+        } elseif ($stmt instanceof \_PhpScoperd3d57724c802\PhpParser\Node\Stmt\ClassMethod) {
             $this->methods[] = $stmt;
-        } elseif ($stmt instanceof \_PhpScoper8db4616aa69d\PhpParser\Node\Stmt\TraitUse) {
+        } elseif ($stmt instanceof \_PhpScoperd3d57724c802\PhpParser\Node\Stmt\TraitUse) {
             $this->uses[] = $stmt;
         } else {
             throw new \LogicException(\sprintf('Unexpected node of type "%s"', $stmt->getType()));
@@ -47,8 +47,8 @@ class Trait_ extends \_PhpScoper8db4616aa69d\PhpParser\Builder\Declaration
      *
      * @return Stmt\Trait_ The built interface node
      */
-    public function getNode() : \_PhpScoper8db4616aa69d\PhpParser\Node
+    public function getNode() : \_PhpScoperd3d57724c802\PhpParser\Node
     {
-        return new \_PhpScoper8db4616aa69d\PhpParser\Node\Stmt\Trait_($this->name, ['stmts' => \array_merge($this->uses, $this->properties, $this->methods)], $this->attributes);
+        return new \_PhpScoperd3d57724c802\PhpParser\Node\Stmt\Trait_($this->name, ['stmts' => \array_merge($this->uses, $this->properties, $this->methods)], $this->attributes);
     }
 }

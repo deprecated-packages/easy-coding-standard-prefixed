@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper8db4616aa69d\PhpParser\Node\Stmt;
+namespace _PhpScoperd3d57724c802\PhpParser\Node\Stmt;
 
-use _PhpScoper8db4616aa69d\PhpParser\Node;
-class Unset_ extends \_PhpScoper8db4616aa69d\PhpParser\Node\Stmt
+use _PhpScoperd3d57724c802\PhpParser\Node;
+class Unset_ extends \_PhpScoperd3d57724c802\PhpParser\Node\Stmt
 {
     /** @var Node\Expr[] Variables to unset */
     public $vars;

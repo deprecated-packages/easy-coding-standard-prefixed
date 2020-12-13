@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dumper;
+namespace _PhpScoperd3d57724c802\Symfony\Component\VarDumper\Dumper;
 
-use _PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor;
-use _PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor;
+use _PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * CliDumper dumps variables for command line output.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dumper\AbstractDumper
+class CliDumper extends \_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Dumper\AbstractDumper
 {
     public static $defaultColors;
     public static $defaultOutput = 'php://stdout';
@@ -95,7 +95,7 @@ class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dump
     /**
      * {@inheritdoc}
      */
-    public function dumpScalar(\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $type, $value)
+    public function dumpScalar(\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $type, $value)
     {
         $this->dumpKey($cursor);
         $style = 'const';
@@ -144,7 +144,7 @@ class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dump
     /**
      * {@inheritdoc}
      */
-    public function dumpString(\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $str, $bin, $cut)
+    public function dumpString(\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $str, $bin, $cut)
     {
         $this->dumpKey($cursor);
         $attr = $cursor->attr;
@@ -223,7 +223,7 @@ class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dump
     /**
      * {@inheritdoc}
      */
-    public function enterHash(\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $type, $class, $hasChild)
+    public function enterHash(\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $type, $class, $hasChild)
     {
         $this->dumpKey($cursor);
         $attr = $cursor->attr;
@@ -232,18 +232,18 @@ class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dump
             $this->collapseNextHash = $hasChild = \false;
         }
         $class = $this->utf8Encode($class);
-        if (\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type) {
+        if (\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type) {
             $prefix = $class && 'stdClass' !== $class ? $this->style('note', $class, $attr) . (empty($attr['cut_hash']) ? ' {' : '') : '{';
-        } elseif (\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type) {
+        } elseif (\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type) {
             $prefix = $this->style('note', $class . ' resource', $attr) . ($hasChild ? ' {' : ' ');
         } else {
             $prefix = $class && !(self::DUMP_LIGHT_ARRAY & $this->flags) ? $this->style('note', 'array:' . $class, $attr) . ' [' : '[';
         }
         if (($cursor->softRefCount || 0 < $cursor->softRefHandle) && empty($attr['cut_hash'])) {
-            $prefix .= $this->style('ref', (\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type ? '@' : '#') . (0 < $cursor->softRefHandle ? $cursor->softRefHandle : $cursor->softRefTo), ['count' => $cursor->softRefCount]);
+            $prefix .= $this->style('ref', (\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type ? '@' : '#') . (0 < $cursor->softRefHandle ? $cursor->softRefHandle : $cursor->softRefTo), ['count' => $cursor->softRefCount]);
         } elseif ($cursor->hardRefTo && !$cursor->refIndex && $class) {
             $prefix .= $this->style('ref', '&' . $cursor->hardRefTo, ['count' => $cursor->hardRefCount]);
-        } elseif (!$hasChild && \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type) {
+        } elseif (!$hasChild && \_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE === $type) {
             $prefix = \substr($prefix, 0, -1);
         }
         $this->line .= $prefix;
@@ -254,11 +254,11 @@ class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dump
     /**
      * {@inheritdoc}
      */
-    public function leaveHash(\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $type, $class, $hasChild, $cut)
+    public function leaveHash(\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $type, $class, $hasChild, $cut)
     {
         if (empty($cursor->attr['cut_hash'])) {
             $this->dumpEllipsis($cursor, $hasChild, $cut);
-            $this->line .= \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type ? '}' : (\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE !== $type ? ']' : ($hasChild ? '}' : ''));
+            $this->line .= \_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT === $type ? '}' : (\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE !== $type ? ']' : ($hasChild ? '}' : ''));
         }
         $this->endValue($cursor);
     }
@@ -268,7 +268,7 @@ class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dump
      * @param bool $hasChild When the dump of the hash has child item
      * @param int  $cut      The number of items the hash has been cut by
      */
-    protected function dumpEllipsis(\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $hasChild, $cut)
+    protected function dumpEllipsis(\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor $cursor, $hasChild, $cut)
     {
         if ($cut) {
             $this->line .= ' …';
@@ -283,7 +283,7 @@ class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dump
     /**
      * Dumps a key in a hash structure.
      */
-    protected function dumpKey(\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor $cursor)
+    protected function dumpKey(\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor $cursor)
     {
         if (null !== ($key = $cursor->hashKey)) {
             if ($cursor->hashKeyIsBinary) {
@@ -294,23 +294,23 @@ class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dump
             $style = 'key';
             switch ($cursor->hashType) {
                 default:
-                case \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_INDEXED:
+                case \_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_INDEXED:
                     if (self::DUMP_LIGHT_ARRAY & $this->flags) {
                         break;
                     }
                     $style = 'index';
                 // no break
-                case \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_ASSOC:
+                case \_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_ASSOC:
                     if (\is_int($key)) {
                         $this->line .= $this->style($style, $key) . ' => ';
                     } else {
                         $this->line .= $bin . '"' . $this->style($style, $key) . '" => ';
                     }
                     break;
-                case \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE:
+                case \_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_RESOURCE:
                     $key = "\0~\0" . $key;
                 // no break
-                case \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT:
+                case \_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor::HASH_OBJECT:
                     if (!isset($key[0]) || "\0" !== $key[0]) {
                         $this->line .= '+' . $bin . $this->style('public', $key) . ': ';
                     } elseif (0 < \strpos($key, "\0", 1)) {
@@ -474,12 +474,12 @@ class CliDumper extends \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Dump
         }
         parent::dumpLine($depth);
     }
-    protected function endValue(\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Cursor $cursor)
+    protected function endValue(\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Cursor $cursor)
     {
         if (-1 === $cursor->hashType) {
             return;
         }
-        if (\_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_INDEXED === $cursor->hashType || \_PhpScoper8db4616aa69d\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_ASSOC === $cursor->hashType) {
+        if (\_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_INDEXED === $cursor->hashType || \_PhpScoperd3d57724c802\Symfony\Component\VarDumper\Cloner\Stub::ARRAY_ASSOC === $cursor->hashType) {
             if (self::DUMP_TRAILING_COMMA & $this->flags && 0 < $cursor->depth) {
                 $this->line .= ',';
             } elseif (self::DUMP_COMMA_SEPARATOR & $this->flags && 1 < $cursor->hashLength - $cursor->hashIndex) {
