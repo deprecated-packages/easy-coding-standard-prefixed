@@ -15,14 +15,14 @@ use function ltrim;
 use function sprintf;
 use function strlen;
 use function trim;
-use const _PhpScoperdaf95aff095b\T_CLOSE_PARENTHESIS;
-use const _PhpScoperdaf95aff095b\T_CLOSE_SHORT_ARRAY;
-use const _PhpScoperdaf95aff095b\T_COMMA;
+use const _PhpScoper4298f97f3cb3\T_CLOSE_PARENTHESIS;
+use const _PhpScoper4298f97f3cb3\T_CLOSE_SHORT_ARRAY;
+use const _PhpScoper4298f97f3cb3\T_COMMA;
 use const T_DOUBLE_COLON;
 use const T_NEW;
 use const T_OBJECT_OPERATOR;
-use const _PhpScoperdaf95aff095b\T_OPEN_PARENTHESIS;
-use const _PhpScoperdaf95aff095b\T_OPEN_SHORT_ARRAY;
+use const _PhpScoper4298f97f3cb3\T_OPEN_PARENTHESIS;
+use const _PhpScoper4298f97f3cb3\T_OPEN_SHORT_ARRAY;
 class RequireMultiLineCallSniff extends \SlevomatCodingStandard\Sniffs\Functions\AbstractLineCall
 {
     public const CODE_REQUIRED_MULTI_LINE_CALL = 'RequiredMultiLineCall';

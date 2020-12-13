@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperdaf95aff095b\PhpParser\Node\Stmt;
+namespace _PhpScoper4298f97f3cb3\PhpParser\Node\Stmt;
 
-use _PhpScoperdaf95aff095b\PhpParser\Node;
-class Const_ extends \_PhpScoperdaf95aff095b\PhpParser\Node\Stmt
+use _PhpScoper4298f97f3cb3\PhpParser\Node;
+class Const_ extends \_PhpScoper4298f97f3cb3\PhpParser\Node\Stmt
 {
     /** @var Node\Const_[] Constant declarations */
     public $consts;

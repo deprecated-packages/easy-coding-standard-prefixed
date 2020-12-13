@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoperdaf95aff095b\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper4298f97f3cb3\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoperdaf95aff095b\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationEnum;
+use _PhpScoper4298f97f3cb3\Doctrine\Tests\Common\Annotations\Fixtures\AnnotationEnum;
 class ClassWithAnnotationEnum
 {
     /**

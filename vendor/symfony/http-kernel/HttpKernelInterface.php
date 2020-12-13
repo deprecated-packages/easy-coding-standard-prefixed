@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdaf95aff095b\Symfony\Component\HttpKernel;
+namespace _PhpScoper4298f97f3cb3\Symfony\Component\HttpKernel;
 
-use _PhpScoperdaf95aff095b\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperdaf95aff095b\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper4298f97f3cb3\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper4298f97f3cb3\Symfony\Component\HttpFoundation\Response;
 /**
  * HttpKernelInterface handles a Request to convert it to a Response.
  *
@@ -35,5 +35,5 @@ interface HttpKernelInterface
      *
      * @throws \Exception When an Exception occurs during processing
      */
-    public function handle(\_PhpScoperdaf95aff095b\Symfony\Component\HttpFoundation\Request $request, $type = self::MASTER_REQUEST, $catch = \true);
+    public function handle(\_PhpScoper4298f97f3cb3\Symfony\Component\HttpFoundation\Request $request, $type = self::MASTER_REQUEST, $catch = \true);
 }
