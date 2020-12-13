@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper78af57a363a0\Symfony\Component\Cache\DataCollector;
+namespace _PhpScoper8db4616aa69d\Symfony\Component\Cache\DataCollector;
 
-use _PhpScoper78af57a363a0\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use _PhpScoper78af57a363a0\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
-use _PhpScoper78af57a363a0\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper78af57a363a0\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper78af57a363a0\Symfony\Component\HttpKernel\DataCollector\DataCollector;
-use _PhpScoper78af57a363a0\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
+use _PhpScoper8db4616aa69d\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use _PhpScoper8db4616aa69d\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
+use _PhpScoper8db4616aa69d\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper8db4616aa69d\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper8db4616aa69d\Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use _PhpScoper8db4616aa69d\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
 /**
  * @author Aaron Scherer <aequasi@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  *
  * @final since Symfony 4.4
  */
-class CacheDataCollector extends \_PhpScoper78af57a363a0\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper78af57a363a0\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class CacheDataCollector extends \_PhpScoper8db4616aa69d\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper8db4616aa69d\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     /**
      * @var TraceableAdapter[]
@@ -31,7 +31,7 @@ class CacheDataCollector extends \_PhpScoper78af57a363a0\Symfony\Component\HttpK
     /**
      * @param string $name
      */
-    public function addInstance($name, \_PhpScoper78af57a363a0\Symfony\Component\Cache\Adapter\TraceableAdapter $instance)
+    public function addInstance($name, \_PhpScoper8db4616aa69d\Symfony\Component\Cache\Adapter\TraceableAdapter $instance)
     {
         $this->instances[$name] = $instance;
     }
@@ -40,7 +40,7 @@ class CacheDataCollector extends \_PhpScoper78af57a363a0\Symfony\Component\HttpK
      *
      * @param \Throwable|null $exception
      */
-    public function collect(\_PhpScoper78af57a363a0\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper78af57a363a0\Symfony\Component\HttpFoundation\Response $response)
+    public function collect(\_PhpScoper8db4616aa69d\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper8db4616aa69d\Symfony\Component\HttpFoundation\Response $response)
     {
         $empty = ['calls' => [], 'config' => [], 'options' => [], 'statistics' => []];
         $this->data = ['instances' => $empty, 'total' => $empty];
