@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4298f97f3cb3\Symfony\Component\DependencyInjection\ParameterBag;
+namespace _PhpScoper78af57a363a0\Symfony\Component\DependencyInjection\ParameterBag;
 
-use _PhpScoper4298f97f3cb3\Psr\Container\ContainerInterface;
-use _PhpScoper4298f97f3cb3\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScoper78af57a363a0\Psr\Container\ContainerInterface;
+use _PhpScoper78af57a363a0\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 /**
  * ContainerBagInterface is the interface implemented by objects that manage service container parameters.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface ContainerBagInterface extends \_PhpScoper4298f97f3cb3\Psr\Container\ContainerInterface
+interface ContainerBagInterface extends \_PhpScoper78af57a363a0\Psr\Container\ContainerInterface
 {
     /**
      * Gets the service container parameters.

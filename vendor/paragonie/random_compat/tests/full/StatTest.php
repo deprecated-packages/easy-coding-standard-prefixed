@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper4298f97f3cb3;
+namespace _PhpScoper78af57a363a0;
 
-class StatTest extends \_PhpScoper4298f97f3cb3\PHPUnit_Framework_TestCase
+class StatTest extends \_PhpScoper78af57a363a0\PHPUnit_Framework_TestCase
 {
     /**
      * All possible values should be > 30% but less than 170%
@@ -50,4 +50,4 @@ class StatTest extends \_PhpScoper4298f97f3cb3\PHPUnit_Framework_TestCase
         $this->assertTrue($length >= 65000 && $length <= 67000);
     }
 }
-\class_alias('_PhpScoper4298f97f3cb3\\StatTest', 'StatTest', \false);
+\class_alias('_PhpScoper78af57a363a0\\StatTest', 'StatTest', \false);

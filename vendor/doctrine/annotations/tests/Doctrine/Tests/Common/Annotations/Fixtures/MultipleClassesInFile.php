@@ -1,9 +1,9 @@
 <?php
 
-namespace _PhpScoper4298f97f3cb3\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper78af57a363a0\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper4298f97f3cb3\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
-use _PhpScoper4298f97f3cb3\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoper78af57a363a0\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+use _PhpScoper78af57a363a0\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
 class AnotherClass
 {
 }

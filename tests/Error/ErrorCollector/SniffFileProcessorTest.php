@@ -38,7 +38,7 @@ final class SniffFileProcessorTest extends \Symplify\PackageBuilder\Testing\Abst
         $smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/ErrorCollectorSource/NotPsr2Class.php.inc');
         $this->sniffFileProcessor->processFile($smartFileInfo);
         $errorAndDiffResult = $this->errorAndDiffResultFactory->create($this->errorAndDiffCollector);
-        $this->assertSame(3, $errorAndDiffResult->getErrorCount());
+        $this->assertSame(1, $errorAndDiffResult->getErrorCount());
         $this->assertSame(0, $errorAndDiffResult->getFileDiffsCount());
     }
 }

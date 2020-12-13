@@ -3454,7 +3454,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "07907840996fde3588b38093cf57cd8597c491ce"
+                "reference": "1edcdd26edac968e66d7ba4d6ea318901c821926"
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.17.1",
@@ -3462,7 +3462,6 @@
                 "nette/utils": "^3.0",
                 "php": ">=7.3",
                 "slevomat/coding-standard": "^6.4",
-                "squizlabs/php_codesniffer": "^3.5",
                 "symplify/autowire-array-parameter": "dev-master",
                 "symplify/package-builder": "dev-master",
                 "symplify/rule-doc-generator": "dev-master",
