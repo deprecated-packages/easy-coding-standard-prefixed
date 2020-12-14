@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd3d57724c802\Symfony\Component\Cache\Traits;
+namespace _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Traits;
 
-use _PhpScoperd3d57724c802\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Exception\CacheException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
@@ -88,7 +88,7 @@ trait FilesystemTrait
             }
         }
         if ($failed && !\is_writable($this->directory)) {
-            throw new \_PhpScoperd3d57724c802\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s)', $this->directory));
+            throw new \_PhpScoperc64a4ac1af35\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s)', $this->directory));
         }
         return $failed;
     }

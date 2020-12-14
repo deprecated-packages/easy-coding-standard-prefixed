@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\MimeType;
+namespace _PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\MimeType;
 
-use _PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
-use _PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use _PhpScoperd3d57724c802\Symfony\Component\Mime\MimeTypes;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" instead.', \_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser::class, \_PhpScoperd3d57724c802\Symfony\Component\Mime\MimeTypes::class), \E_USER_DEPRECATED);
+use _PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use _PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use _PhpScoperc64a4ac1af35\Symfony\Component\Mime\MimeTypes;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" instead.', \_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser::class, \_PhpScoperc64a4ac1af35\Symfony\Component\Mime\MimeTypes::class), \E_USER_DEPRECATED);
 /**
  * A singleton mime type guesser.
  *
@@ -37,7 +37,7 @@ use _PhpScoperd3d57724c802\Symfony\Component\Mime\MimeTypes;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class MimeTypeGuesser implements \_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface
+class MimeTypeGuesser implements \_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface
 {
     /**
      * The singleton instance.
@@ -75,15 +75,15 @@ class MimeTypeGuesser implements \_PhpScoperd3d57724c802\Symfony\Component\HttpF
      */
     private function __construct()
     {
-        $this->register(new \_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\MimeType\FileBinaryMimeTypeGuesser());
-        $this->register(new \_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser());
+        $this->register(new \_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\MimeType\FileBinaryMimeTypeGuesser());
+        $this->register(new \_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser());
     }
     /**
      * Registers a new mime type guesser.
      *
      * When guessing, this guesser is preferred over previously registered ones.
      */
-    public function register(\_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $guesser)
+    public function register(\_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $guesser)
     {
         \array_unshift($this->guessers, $guesser);
     }
@@ -106,17 +106,17 @@ class MimeTypeGuesser implements \_PhpScoperd3d57724c802\Symfony\Component\HttpF
     public function guess($path)
     {
         if (!\is_file($path)) {
-            throw new \_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
+            throw new \_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
         }
         if (!\is_readable($path)) {
-            throw new \_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException($path);
+            throw new \_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException($path);
         }
         foreach ($this->guessers as $guesser) {
             if (null !== ($mimeType = $guesser->guess($path))) {
                 return $mimeType;
             }
         }
-        if (2 === \count($this->guessers) && !\_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\MimeType\FileBinaryMimeTypeGuesser::isSupported() && !\_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser::isSupported()) {
+        if (2 === \count($this->guessers) && !\_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\MimeType\FileBinaryMimeTypeGuesser::isSupported() && !\_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser::isSupported()) {
             throw new \LogicException('Unable to guess the mime type as no guessers are available (Did you enable the php_fileinfo extension?)');
         }
         return null;

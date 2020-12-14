@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
-use _PhpScoperd3d57724c802\Nette\Utils\Strings;
+use _PhpScoperc64a4ac1af35\Nette\Utils\Strings;
 /**
  * Heavily inspired by
  * @see https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/Squiz/Sniffs/PHP/CommentedOutCodeSniff.php
@@ -17,7 +17,7 @@ final class CommentedLineTrimmer
     public function trim(string $tokenContent) : string
     {
         foreach (self::OPENING_LINE as $openingLine) {
-            if (!\_PhpScoperd3d57724c802\Nette\Utils\Strings::startsWith($tokenContent, $openingLine)) {
+            if (!\_PhpScoperc64a4ac1af35\Nette\Utils\Strings::startsWith($tokenContent, $openingLine)) {
                 continue;
             }
             return \substr($tokenContent, \strlen($openingLine));

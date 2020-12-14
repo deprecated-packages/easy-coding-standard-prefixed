@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\Exception;
+namespace _PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\Exception;
 
-class UnexpectedTypeException extends \_PhpScoperd3d57724c802\Symfony\Component\HttpFoundation\File\Exception\FileException
+class UnexpectedTypeException extends \_PhpScoperc64a4ac1af35\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
     public function __construct($value, string $expectedType)
     {

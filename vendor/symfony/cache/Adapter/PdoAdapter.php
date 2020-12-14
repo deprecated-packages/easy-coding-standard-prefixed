@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd3d57724c802\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperd3d57724c802\Doctrine\DBAL\Connection;
-use _PhpScoperd3d57724c802\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperd3d57724c802\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoperd3d57724c802\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperd3d57724c802\Symfony\Component\Cache\Traits\PdoTrait;
-class PdoAdapter extends \_PhpScoperd3d57724c802\Symfony\Component\Cache\Adapter\AbstractAdapter implements \_PhpScoperd3d57724c802\Symfony\Component\Cache\PruneableInterface
+use _PhpScoperc64a4ac1af35\Doctrine\DBAL\Connection;
+use _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperc64a4ac1af35\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Traits\PdoTrait;
+class PdoAdapter extends \_PhpScoperc64a4ac1af35\Symfony\Component\Cache\Adapter\AbstractAdapter implements \_PhpScoperc64a4ac1af35\Symfony\Component\Cache\PruneableInterface
 {
     use PdoTrait;
     protected $maxIdLength = 255;
@@ -43,7 +43,7 @@ class PdoAdapter extends \_PhpScoperd3d57724c802\Symfony\Component\Cache\Adapter
      * @throws InvalidArgumentException When PDO error mode is not PDO::ERRMODE_EXCEPTION
      * @throws InvalidArgumentException When namespace contains invalid characters
      */
-    public function __construct($connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], \_PhpScoperd3d57724c802\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], \_PhpScoperc64a4ac1af35\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         $this->init($connOrDsn, $namespace, $defaultLifetime, $options, $marshaller);
     }

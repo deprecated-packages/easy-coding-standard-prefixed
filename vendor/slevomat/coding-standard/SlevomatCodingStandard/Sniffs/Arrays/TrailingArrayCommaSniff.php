@@ -8,10 +8,10 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\SniffSettingsHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function in_array;
-use const _PhpScoperd3d57724c802\T_COMMA;
+use const _PhpScoperc64a4ac1af35\T_COMMA;
 use const T_END_HEREDOC;
-use const _PhpScoperd3d57724c802\T_END_NOWDOC;
-use const _PhpScoperd3d57724c802\T_OPEN_SHORT_ARRAY;
+use const _PhpScoperc64a4ac1af35\T_END_NOWDOC;
+use const _PhpScoperc64a4ac1af35\T_OPEN_SHORT_ARRAY;
 class TrailingArrayCommaSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_MISSING_TRAILING_COMMA = 'MissingTrailingComma';

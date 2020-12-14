@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd3d57724c802\Symfony\Component\HttpKernel\CacheClearer;
+namespace _PhpScoperc64a4ac1af35\Symfony\Component\HttpKernel\CacheClearer;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Psr6CacheClearer implements \_PhpScoperd3d57724c802\Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
+class Psr6CacheClearer implements \_PhpScoperc64a4ac1af35\Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
 {
     private $pools = [];
     public function __construct(array $pools = [])

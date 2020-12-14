@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd3d57724c802\Symfony\Component\Cache\Simple;
+namespace _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Simple;
 
-use _PhpScoperd3d57724c802\Symfony\Component\Cache\Adapter\PdoAdapter;
-use _PhpScoperd3d57724c802\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoperd3d57724c802\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperd3d57724c802\Symfony\Component\Cache\Traits\PdoTrait;
-use _PhpScoperd3d57724c802\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperd3d57724c802\Symfony\Component\Cache\Simple\PdoCache::class, \_PhpScoperd3d57724c802\Symfony\Component\Cache\Adapter\PdoAdapter::class, \_PhpScoperd3d57724c802\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Adapter\PdoAdapter;
+use _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperc64a4ac1af35\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoperc64a4ac1af35\Symfony\Component\Cache\Traits\PdoTrait;
+use _PhpScoperc64a4ac1af35\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperc64a4ac1af35\Symfony\Component\Cache\Simple\PdoCache::class, \_PhpScoperc64a4ac1af35\Symfony\Component\Cache\Adapter\PdoAdapter::class, \_PhpScoperc64a4ac1af35\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use PdoAdapter and type-hint for CacheInterface instead.
  */
-class PdoCache extends \_PhpScoperd3d57724c802\Symfony\Component\Cache\Simple\AbstractCache implements \_PhpScoperd3d57724c802\Symfony\Component\Cache\PruneableInterface
+class PdoCache extends \_PhpScoperc64a4ac1af35\Symfony\Component\Cache\Simple\AbstractCache implements \_PhpScoperc64a4ac1af35\Symfony\Component\Cache\PruneableInterface
 {
     use PdoTrait;
     protected $maxIdLength = 255;
@@ -47,7 +47,7 @@ class PdoCache extends \_PhpScoperd3d57724c802\Symfony\Component\Cache\Simple\Ab
      * @throws InvalidArgumentException When PDO error mode is not PDO::ERRMODE_EXCEPTION
      * @throws InvalidArgumentException When namespace contains invalid characters
      */
-    public function __construct($connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], \_PhpScoperd3d57724c802\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], \_PhpScoperc64a4ac1af35\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         $this->init($connOrDsn, $namespace, $defaultLifetime, $options, $marshaller);
     }

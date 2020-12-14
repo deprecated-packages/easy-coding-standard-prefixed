@@ -7,7 +7,7 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use const T_LIST;
-use const _PhpScoperd3d57724c802\T_OPEN_PARENTHESIS;
+use const _PhpScoperc64a4ac1af35\T_OPEN_PARENTHESIS;
 class ShortListSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_LONG_LIST_USED = 'LongListUsed';

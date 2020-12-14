@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd3d57724c802\Symfony\Component\Config;
+namespace _PhpScoperc64a4ac1af35\Symfony\Component\Config;
 
 /**
  * Basic implementation of ConfigCacheFactoryInterface that
@@ -19,7 +19,7 @@ namespace _PhpScoperd3d57724c802\Symfony\Component\Config;
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ConfigCacheFactory implements \_PhpScoperd3d57724c802\Symfony\Component\Config\ConfigCacheFactoryInterface
+class ConfigCacheFactory implements \_PhpScoperc64a4ac1af35\Symfony\Component\Config\ConfigCacheFactoryInterface
 {
     private $debug;
     /**
@@ -34,7 +34,7 @@ class ConfigCacheFactory implements \_PhpScoperd3d57724c802\Symfony\Component\Co
      */
     public function cache(string $file, callable $callback)
     {
-        $cache = new \_PhpScoperd3d57724c802\Symfony\Component\Config\ConfigCache($file, $this->debug);
+        $cache = new \_PhpScoperc64a4ac1af35\Symfony\Component\Config\ConfigCache($file, $this->debug);
         if (!$cache->isFresh()) {
             $callback($cache);
         }
