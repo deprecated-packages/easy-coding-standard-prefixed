@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoperc64a4ac1af35;
+namespace _PhpScoper6224e3b16fcc;
 
 return [123, ['abc']];

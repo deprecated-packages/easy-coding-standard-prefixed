@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc64a4ac1af35\Symfony\Component\VarExporter\Exception;
+namespace _PhpScoper6224e3b16fcc\Symfony\Component\VarExporter\Exception;
 
 interface ExceptionInterface extends \Throwable
 {
