@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a0112f19f39\Symfony\Component\Mime\Part;
+namespace _PhpScoper4e47e3b12394\Symfony\Component\Mime\Part;
 
-use _PhpScoper8a0112f19f39\Symfony\Component\Mime\Exception\InvalidArgumentException;
-use _PhpScoper8a0112f19f39\Symfony\Component\Mime\Header\Headers;
-use _PhpScoper8a0112f19f39\Symfony\Component\Mime\MimeTypes;
+use _PhpScoper4e47e3b12394\Symfony\Component\Mime\Exception\InvalidArgumentException;
+use _PhpScoper4e47e3b12394\Symfony\Component\Mime\Header\Headers;
+use _PhpScoper4e47e3b12394\Symfony\Component\Mime\MimeTypes;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @experimental in 4.3
  */
-class DataPart extends \_PhpScoper8a0112f19f39\Symfony\Component\Mime\Part\TextPart
+class DataPart extends \_PhpScoper4e47e3b12394\Symfony\Component\Mime\Part\TextPart
 {
     private static $mimeTypes;
     private $filename;
@@ -45,12 +45,12 @@ class DataPart extends \_PhpScoper8a0112f19f39\Symfony\Component\Mime\Part\TextP
         if (null === $contentType) {
             $ext = \strtolower(\substr($path, \strrpos($path, '.') + 1));
             if (null === self::$mimeTypes) {
-                self::$mimeTypes = new \_PhpScoper8a0112f19f39\Symfony\Component\Mime\MimeTypes();
+                self::$mimeTypes = new \_PhpScoper4e47e3b12394\Symfony\Component\Mime\MimeTypes();
             }
             $contentType = self::$mimeTypes->getMimeTypes($ext)[0] ?? 'application/octet-stream';
         }
         if (\false === ($handle = @\fopen($path, 'r', \false))) {
-            throw new \_PhpScoper8a0112f19f39\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('Unable to open path "%s"', $path));
+            throw new \_PhpScoper4e47e3b12394\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('Unable to open path "%s"', $path));
         }
         $p = new self($handle, $name ?: \basename($path), $contentType);
         $p->handle = $handle;
@@ -75,7 +75,7 @@ class DataPart extends \_PhpScoper8a0112f19f39\Symfony\Component\Mime\Part\TextP
     {
         return $this->mediaType;
     }
-    public function getPreparedHeaders() : \_PhpScoper8a0112f19f39\Symfony\Component\Mime\Header\Headers
+    public function getPreparedHeaders() : \_PhpScoper4e47e3b12394\Symfony\Component\Mime\Header\Headers
     {
         $headers = parent::getPreparedHeaders();
         if (null !== $this->cid) {
@@ -102,7 +102,7 @@ class DataPart extends \_PhpScoper8a0112f19f39\Symfony\Component\Mime\Part\TextP
         parent::__sleep();
         $this->_parent = [];
         foreach (['body', 'charset', 'subtype', 'disposition', 'name', 'encoding'] as $name) {
-            $r = new \ReflectionProperty(\_PhpScoper8a0112f19f39\Symfony\Component\Mime\Part\TextPart::class, $name);
+            $r = new \ReflectionProperty(\_PhpScoper4e47e3b12394\Symfony\Component\Mime\Part\TextPart::class, $name);
             $r->setAccessible(\true);
             $this->_parent[$name] = $r->getValue($this);
         }
@@ -111,12 +111,12 @@ class DataPart extends \_PhpScoper8a0112f19f39\Symfony\Component\Mime\Part\TextP
     }
     public function __wakeup()
     {
-        $r = new \ReflectionProperty(\_PhpScoper8a0112f19f39\Symfony\Component\Mime\Part\AbstractPart::class, 'headers');
+        $r = new \ReflectionProperty(\_PhpScoper4e47e3b12394\Symfony\Component\Mime\Part\AbstractPart::class, 'headers');
         $r->setAccessible(\true);
         $r->setValue($this, $this->_headers);
         unset($this->_headers);
         foreach (['body', 'charset', 'subtype', 'disposition', 'name', 'encoding'] as $name) {
-            $r = new \ReflectionProperty(\_PhpScoper8a0112f19f39\Symfony\Component\Mime\Part\TextPart::class, $name);
+            $r = new \ReflectionProperty(\_PhpScoper4e47e3b12394\Symfony\Component\Mime\Part\TextPart::class, $name);
             $r->setAccessible(\true);
             $r->setValue($this, $this->_parent[$name]);
         }
