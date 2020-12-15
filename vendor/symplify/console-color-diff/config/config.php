@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper47644ab3aa9a;
+namespace _PhpScoper37a255897161;
 
-use _PhpScoper47644ab3aa9a\SebastianBergmann\Diff\Differ;
-use _PhpScoper47644ab3aa9a\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoper47644ab3aa9a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper37a255897161\SebastianBergmann\Diff\Differ;
+use _PhpScoper37a255897161\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper37a255897161\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
-use function _PhpScoper47644ab3aa9a\Symfony\Component\DependencyInjection\Loader\Configurator\service;
-return static function (\_PhpScoper47644ab3aa9a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use function _PhpScoper37a255897161\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+return static function (\_PhpScoper37a255897161\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
     $services->load('Symplify\\ConsoleColorDiff\\', __DIR__ . '/../src');
-    $services->set(\_PhpScoper47644ab3aa9a\SebastianBergmann\Diff\Differ::class);
+    $services->set(\_PhpScoper37a255897161\SebastianBergmann\Diff\Differ::class);
     $services->set(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class);
-    $services->set(\_PhpScoper47644ab3aa9a\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\_PhpScoper47644ab3aa9a\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
+    $services->set(\_PhpScoper37a255897161\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\_PhpScoper37a255897161\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
     $services->set(\Symplify\PackageBuilder\Reflection\PrivatesAccessor::class);
 };
