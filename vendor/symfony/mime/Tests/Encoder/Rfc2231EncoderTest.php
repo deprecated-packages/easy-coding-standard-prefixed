@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6a1dd9b8a650\Symfony\Component\Mime\Tests\Encoder;
+namespace _PhpScoper80dbed43490f\Symfony\Component\Mime\Tests\Encoder;
 
-use _PhpScoper6a1dd9b8a650\PHPUnit\Framework\TestCase;
-use _PhpScoper6a1dd9b8a650\Symfony\Component\Mime\Encoder\Rfc2231Encoder;
-class Rfc2231EncoderTest extends \_PhpScoper6a1dd9b8a650\PHPUnit\Framework\TestCase
+use _PhpScoper80dbed43490f\PHPUnit\Framework\TestCase;
+use _PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\Rfc2231Encoder;
+class Rfc2231EncoderTest extends \_PhpScoper80dbed43490f\PHPUnit\Framework\TestCase
 {
     private $rfc2045Token = '/^[\\x21\\x23-\\x27\\x2A\\x2B\\x2D\\x2E\\x30-\\x39\\x41-\\x5A\\x5E-\\x7E]+$/D';
     /* --
@@ -30,7 +30,7 @@ class Rfc2231EncoderTest extends \_PhpScoper6a1dd9b8a650\PHPUnit\Framework\TestC
             $char = \pack('C', $octet);
             $string .= $char;
         }
-        $encoder = new \_PhpScoper6a1dd9b8a650\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
+        $encoder = new \_PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
         $encoded = $encoder->encodeString($string);
         foreach (\explode("\r\n", $encoded) as $line) {
             $this->assertRegExp($this->rfc2045Token, $line, 'Encoder should always return a valid RFC 2045 token.');
@@ -43,7 +43,7 @@ class Rfc2231EncoderTest extends \_PhpScoper6a1dd9b8a650\PHPUnit\Framework\TestC
             $char = \pack('C', $octet);
             $string .= $char;
         }
-        $encoder = new \_PhpScoper6a1dd9b8a650\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
+        $encoder = new \_PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
         $encoded = $encoder->encodeString($string);
         foreach (\explode("\r\n", $encoded) as $line) {
             $this->assertRegExp($this->rfc2045Token, $line, 'Encoder should always return a valid RFC 2045 token.');
@@ -56,7 +56,7 @@ class Rfc2231EncoderTest extends \_PhpScoper6a1dd9b8a650\PHPUnit\Framework\TestC
             $char = 'a';
             $string .= $char;
         }
-        $encoder = new \_PhpScoper6a1dd9b8a650\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
+        $encoder = new \_PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
         $encoded = $encoder->encodeString($string, 'utf-8', 0, 75);
         // 72 here and not 75 as we read 4 chars at a time
         $this->assertEquals(\str_repeat('a', 72) . "\r\n" . \str_repeat('a', 72) . "\r\n" . \str_repeat('a', 56), $encoded, 'Lines should be wrapped at each 72 characters');
@@ -68,7 +68,7 @@ class Rfc2231EncoderTest extends \_PhpScoper6a1dd9b8a650\PHPUnit\Framework\TestC
             $char = 'a';
             $string .= $char;
         }
-        $encoder = new \_PhpScoper6a1dd9b8a650\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
+        $encoder = new \_PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
         $encoded = $encoder->encodeString($string, 'utf-8', 24, 72);
         $this->assertEquals(\str_repeat('a', 48) . "\r\n" . \str_repeat('a', 72) . "\r\n" . \str_repeat('a', 72) . "\r\n" . \str_repeat('a', 8), $encoded, 'First line should be 24 bytes shorter than the others.');
     }
@@ -80,7 +80,7 @@ class Rfc2231EncoderTest extends \_PhpScoper6a1dd9b8a650\PHPUnit\Framework\TestC
             if ('.' == \substr($encoding, 0, 1)) {
                 continue;
             }
-            $encoder = new \_PhpScoper6a1dd9b8a650\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
+            $encoder = new \_PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\Rfc2231Encoder();
             if (\is_dir($dir . '/' . $encoding)) {
                 $fileFp = \opendir($dir . '/' . $encoding);
                 while (\false !== ($sampleFile = \readdir($fileFp))) {
