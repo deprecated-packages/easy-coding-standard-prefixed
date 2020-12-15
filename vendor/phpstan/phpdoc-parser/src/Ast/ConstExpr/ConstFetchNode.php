@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper839420027581\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace _PhpScoper47644ab3aa9a\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-class ConstFetchNode implements \_PhpScoper839420027581\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
+class ConstFetchNode implements \_PhpScoper47644ab3aa9a\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
 {
     /** @var string class name for class constants or empty string for non-class constants */
     public $className;

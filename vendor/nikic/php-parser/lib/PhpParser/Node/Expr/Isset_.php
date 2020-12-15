@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper839420027581\PhpParser\Node\Expr;
+namespace _PhpScoper47644ab3aa9a\PhpParser\Node\Expr;
 
-use _PhpScoper839420027581\PhpParser\Node\Expr;
-class Isset_ extends \_PhpScoper839420027581\PhpParser\Node\Expr
+use _PhpScoper47644ab3aa9a\PhpParser\Node\Expr;
+class Isset_ extends \_PhpScoper47644ab3aa9a\PhpParser\Node\Expr
 {
     /** @var Expr[] Variables */
     public $vars;

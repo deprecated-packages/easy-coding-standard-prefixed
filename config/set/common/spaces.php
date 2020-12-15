@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper839420027581;
+namespace _PhpScoper47644ab3aa9a;
 
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff;
@@ -25,8 +25,8 @@ use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff;
-use _PhpScoper839420027581\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoper839420027581\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoper47644ab3aa9a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoper47644ab3aa9a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff::class);
     $services->set(\SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff::class);
@@ -39,7 +39,7 @@ return static function (\_PhpScoper839420027581\Symfony\Component\DependencyInje
     $services->set(\PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer::class);
     $services->set(\PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff::class)->property('ignoreBlankLines', \false);
     $services->set(\PhpCsFixer\Fixer\CastNotation\CastSpacesFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer::class)->call('configure', [['align_double_arrow' => \false, 'align_equals' => \false]]);
+    $services->set(\PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer::class)->call('configure', [['operators' => ['=>' => 'single_space', '=' => 'single_space']]]);
     $services->set(\PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer::class);
     $services->set(\PhpCsFixer\Fixer\ClassNotation\NoBlankLinesAfterClassOpeningFixer::class);
     $services->set(\PhpCsFixer\Fixer\Semicolon\NoSinglelineWhitespaceBeforeSemicolonsFixer::class);
