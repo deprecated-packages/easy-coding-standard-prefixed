@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperdeea1786e972\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoper839420027581\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-class PhpDocTagNode implements \_PhpScoperdeea1786e972\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
+class PhpDocTagNode implements \_PhpScoper839420027581\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
 {
     /** @var string */
     public $name;
     /** @var PhpDocTagValueNode */
     public $value;
-    public function __construct(string $name, \_PhpScoperdeea1786e972\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode $value)
+    public function __construct(string $name, \_PhpScoper839420027581\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode $value)
     {
         $this->name = $name;
         $this->value = $value;

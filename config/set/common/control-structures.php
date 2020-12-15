@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperdeea1786e972;
+namespace _PhpScoper839420027581;
 
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
@@ -22,9 +22,9 @@ use SlevomatCodingStandard\Sniffs\Classes\DisallowMultiConstantDefinitionSniff;
 use SlevomatCodingStandard\Sniffs\Classes\DisallowMultiPropertyDefinitionSniff;
 use SlevomatCodingStandard\Sniffs\Classes\ModernClassNameReferenceSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseDeclarationSniff;
-use _PhpScoperdeea1786e972\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper839420027581\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
-return static function (\_PhpScoperdeea1786e972\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper839420027581\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\SlevomatCodingStandard\Sniffs\Classes\DisallowMultiConstantDefinitionSniff::class);
     // breaks on PHP 8

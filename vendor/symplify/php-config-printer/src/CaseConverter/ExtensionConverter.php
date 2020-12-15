@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoperdeea1786e972\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperdeea1786e972\PhpParser\Node\Expr\Variable;
-use _PhpScoperdeea1786e972\PhpParser\Node\Stmt\Expression;
+use _PhpScoper839420027581\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper839420027581\PhpParser\Node\Expr\Variable;
+use _PhpScoper839420027581\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\MethodName;
@@ -36,12 +36,12 @@ final class ExtensionConverter implements \Symplify\PhpConfigPrinter\Contract\Ca
         $this->argsNodeFactory = $argsNodeFactory;
         $this->yamlKey = $yamlKey;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoperdeea1786e972\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoper839420027581\PhpParser\Node\Stmt\Expression
     {
         $args = $this->argsNodeFactory->createFromValues([$this->rootKey, [$key => $values]]);
-        $containerConfiguratorVariable = new \_PhpScoperdeea1786e972\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
-        $methodCall = new \_PhpScoperdeea1786e972\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::EXTENSION, $args);
-        return new \_PhpScoperdeea1786e972\PhpParser\Node\Stmt\Expression($methodCall);
+        $containerConfiguratorVariable = new \_PhpScoper839420027581\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $methodCall = new \_PhpScoper839420027581\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::EXTENSION, $args);
+        return new \_PhpScoper839420027581\PhpParser\Node\Stmt\Expression($methodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {

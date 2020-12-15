@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperdeea1786e972\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoper839420027581\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-use _PhpScoperdeea1786e972\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-class PropertyTagValueNode implements \_PhpScoperdeea1786e972\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
+use _PhpScoper839420027581\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+class PropertyTagValueNode implements \_PhpScoper839420027581\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagValueNode
 {
     /** @var TypeNode */
     public $type;
@@ -12,7 +12,7 @@ class PropertyTagValueNode implements \_PhpScoperdeea1786e972\PHPStan\PhpDocPars
     public $propertyName;
     /** @var string (may be empty) */
     public $description;
-    public function __construct(\_PhpScoperdeea1786e972\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, string $propertyName, string $description)
+    public function __construct(\_PhpScoper839420027581\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, string $propertyName, string $description)
     {
         $this->type = $type;
         $this->propertyName = $propertyName;
