@@ -32,18 +32,18 @@ use PhpCsFixer\StdinFileInfo;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Utils;
 use PhpCsFixer\WordMatcher;
-use _PhpScoperd35c27cd4b09\Symfony\Component\Console\Command\Command;
-use _PhpScoperd35c27cd4b09\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoperd35c27cd4b09\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperd35c27cd4b09\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperd35c27cd4b09\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperb6a8e65b492c\Symfony\Component\Console\Command\Command;
+use _PhpScoperb6a8e65b492c\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperb6a8e65b492c\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoperb6a8e65b492c\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperb6a8e65b492c\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
  *
  * @internal
  */
-final class DescribeCommand extends \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Command\Command
+final class DescribeCommand extends \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Command\Command
 {
     protected static $defaultName = 'describe';
     /**
@@ -72,12 +72,12 @@ final class DescribeCommand extends \_PhpScoperd35c27cd4b09\Symfony\Component\Co
      */
     protected function configure()
     {
-        $this->setDefinition([new \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Input\InputArgument('name', \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Name of rule / set.')])->setDescription('Describe rule / ruleset.');
+        $this->setDefinition([new \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Input\InputArgument('name', \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Name of rule / set.')])->setDescription('Describe rule / ruleset.');
     }
     /**
      * {@inheritdoc}
      */
-    protected function execute(\_PhpScoperd35c27cd4b09\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function execute(\_PhpScoperb6a8e65b492c\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $name = $input->getArgument('name');
         try {
@@ -97,7 +97,7 @@ final class DescribeCommand extends \_PhpScoperd35c27cd4b09\Symfony\Component\Co
     /**
      * @param string $name
      */
-    private function describeRule(\_PhpScoperd35c27cd4b09\Symfony\Component\Console\Output\OutputInterface $output, $name)
+    private function describeRule(\_PhpScoperb6a8e65b492c\Symfony\Component\Console\Output\OutputInterface $output, $name)
     {
         $fixers = $this->getFixers();
         if (!isset($fixers[$name])) {
@@ -118,7 +118,7 @@ final class DescribeCommand extends \_PhpScoperd35c27cd4b09\Symfony\Component\Co
             $description .= \sprintf(' <error>DEPRECATED</error>: %s.', $message);
         }
         $output->writeln(\sprintf('<info>Description of</info> %s <info>rule</info>.', $name));
-        if ($output->getVerbosity() >= \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE) {
+        if ($output->getVerbosity() >= \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE) {
             $output->writeln(\sprintf('Fixer class: <comment>%s</comment>.', \get_class($fixer)));
         }
         $output->writeln($description);
@@ -138,7 +138,7 @@ final class DescribeCommand extends \_PhpScoperd35c27cd4b09\Symfony\Component\Co
             $options = $configurationDefinition->getOptions();
             $output->writeln(\sprintf('Fixer is configurable using following option%s:', 1 === \count($options) ? '' : 's'));
             foreach ($options as $option) {
-                $line = '* <info>' . \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getName()) . '</info>';
+                $line = '* <info>' . \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getName()) . '</info>';
                 $allowed = \PhpCsFixer\Console\Command\HelpCommand::getDisplayableAllowedValues($option);
                 if (null !== $allowed) {
                     foreach ($allowed as &$value) {
@@ -156,7 +156,7 @@ final class DescribeCommand extends \_PhpScoperd35c27cd4b09\Symfony\Component\Co
                 if (null !== $allowed) {
                     $line .= ' (' . \implode(', ', $allowed) . ')';
                 }
-                $description = \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDescription()));
+                $description = \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDescription()));
                 $line .= ': ' . \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', $description)) . '; ';
                 if ($option->hasDefault()) {
                     $line .= \sprintf('defaults to <comment>%s</comment>', \PhpCsFixer\Console\Command\HelpCommand::toString($option->getDefault()));
@@ -164,7 +164,7 @@ final class DescribeCommand extends \_PhpScoperd35c27cd4b09\Symfony\Component\Co
                     $line .= '<comment>required</comment>';
                 }
                 if ($option instanceof \PhpCsFixer\FixerConfiguration\DeprecatedFixerOption) {
-                    $line .= '. <error>DEPRECATED</error>: ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Formatter\OutputFormatter::escape(\lcfirst($option->getDeprecationMessage())));
+                    $line .= '. <error>DEPRECATED</error>: ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Formatter\OutputFormatter::escape(\lcfirst($option->getDeprecationMessage())));
                 }
                 if ($option instanceof \PhpCsFixer\FixerConfiguration\AliasedFixerOption) {
                     $line .= '; <error>DEPRECATED</error> alias: <comment>' . $option->getAlias() . '</comment>';
@@ -222,7 +222,7 @@ final class DescribeCommand extends \_PhpScoperd35c27cd4b09\Symfony\Component\Co
     /**
      * @param string $name
      */
-    private function describeSet(\_PhpScoperd35c27cd4b09\Symfony\Component\Console\Output\OutputInterface $output, $name)
+    private function describeSet(\_PhpScoperb6a8e65b492c\Symfony\Component\Console\Output\OutputInterface $output, $name)
     {
         if (!\in_array($name, $this->getSetNames(), \true)) {
             throw new \PhpCsFixer\Console\Command\DescribeNameNotFoundException($name, 'set');
@@ -281,11 +281,11 @@ final class DescribeCommand extends \_PhpScoperd35c27cd4b09\Symfony\Component\Co
     /**
      * @param string $type 'rule'|'set'
      */
-    private function describeList(\_PhpScoperd35c27cd4b09\Symfony\Component\Console\Output\OutputInterface $output, $type)
+    private function describeList(\_PhpScoperb6a8e65b492c\Symfony\Component\Console\Output\OutputInterface $output, $type)
     {
-        if ($output->getVerbosity() >= \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE) {
+        if ($output->getVerbosity() >= \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE) {
             $describe = ['set' => $this->getSetNames(), 'rules' => $this->getFixers()];
-        } elseif ($output->getVerbosity() >= \_PhpScoperd35c27cd4b09\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE) {
+        } elseif ($output->getVerbosity() >= \_PhpScoperb6a8e65b492c\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE) {
             $describe = 'set' === $type ? ['set' => $this->getSetNames()] : ['rules' => $this->getFixers()];
         } else {
             return;

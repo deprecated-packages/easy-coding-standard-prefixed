@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\HttpKernel;
 
-use _PhpScoperd35c27cd4b09\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoperd35c27cd4b09\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoperb6a8e65b492c\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoperb6a8e65b492c\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
 use Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
@@ -14,7 +14,7 @@ final class PhpConfigPrinterKernel extends \Symplify\SymplifyKernel\HttpKernel\A
      * @var string[]
      */
     private $configs = [];
-    public function registerContainerConfiguration(\_PhpScoperd35c27cd4b09\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(\_PhpScoperb6a8e65b492c\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
         foreach ($this->configs as $config) {

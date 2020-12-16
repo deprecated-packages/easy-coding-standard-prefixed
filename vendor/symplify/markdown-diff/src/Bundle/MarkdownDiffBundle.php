@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\MarkdownDiff\Bundle;
 
-use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoperd35c27cd4b09\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoperb6a8e65b492c\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\MarkdownDiff\DependencyInjection\Extension\MarkdownDiffExtension;
-final class MarkdownDiffBundle extends \_PhpScoperd35c27cd4b09\Symfony\Component\HttpKernel\Bundle\Bundle
+final class MarkdownDiffBundle extends \_PhpScoperb6a8e65b492c\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    protected function createContainerExtension() : ?\_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
         return new \Symplify\MarkdownDiff\DependencyInjection\Extension\MarkdownDiffExtension();
     }

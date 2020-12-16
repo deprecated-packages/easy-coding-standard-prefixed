@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperd35c27cd4b09\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoperb6a8e65b492c\Doctrine\Tests\Common\Annotations\Fixtures;
 
 class ClassWithConstants
 {

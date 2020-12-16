@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\ChangedFilesDetector;
 
-use _PhpScoperd35c27cd4b09\Symfony\Component\Config\FileLocator;
-use _PhpScoperd35c27cd4b09\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoperd35c27cd4b09\Symfony\Component\Config\Loader\LoaderResolver;
-use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
+use _PhpScoperb6a8e65b492c\Symfony\Component\Config\FileLocator;
+use _PhpScoperb6a8e65b492c\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoperb6a8e65b492c\Symfony\Component\Config\Loader\LoaderResolver;
+use _PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
 use Symplify\EasyCodingStandard\Exception\Configuration\FileNotFoundException;
 use Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -18,7 +18,7 @@ final class FileHashComputer
 {
     public function computeConfig(string $filePath) : string
     {
-        $containerBuilder = new \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ContainerBuilder();
+        $containerBuilder = new \_PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\ContainerBuilder();
         $loader = $this->createLoader($filePath, $containerBuilder);
         $loader->load($filePath);
         $parameterBag = $containerBuilder->getParameterBag();
@@ -39,11 +39,11 @@ final class FileHashComputer
     {
         return \md5(\serialize($array));
     }
-    private function createLoader(string $filePath, \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : \_PhpScoperd35c27cd4b09\Symfony\Component\Config\Loader\LoaderInterface
+    private function createLoader(string $filePath, \_PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : \_PhpScoperb6a8e65b492c\Symfony\Component\Config\Loader\LoaderInterface
     {
-        $fileLocator = new \_PhpScoperd35c27cd4b09\Symfony\Component\Config\FileLocator([\dirname($filePath)]);
-        $loaders = [new \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Loader\GlobFileLoader($containerBuilder, $fileLocator), new \Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader($containerBuilder, $fileLocator)];
-        $loaderResolver = new \_PhpScoperd35c27cd4b09\Symfony\Component\Config\Loader\LoaderResolver($loaders);
+        $fileLocator = new \_PhpScoperb6a8e65b492c\Symfony\Component\Config\FileLocator([\dirname($filePath)]);
+        $loaders = [new \_PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Loader\GlobFileLoader($containerBuilder, $fileLocator), new \Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader($containerBuilder, $fileLocator)];
+        $loaderResolver = new \_PhpScoperb6a8e65b492c\Symfony\Component\Config\Loader\LoaderResolver($loaders);
         $loader = $loaderResolver->resolve($filePath);
         if (!$loader) {
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
