@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper80dbed43490f\PhpParser\Node\Scalar;
+namespace _PhpScoperc75fd40d7a6e\PhpParser\Node\Scalar;
 
-use _PhpScoper80dbed43490f\PhpParser\Node\Scalar;
-class EncapsedStringPart extends \_PhpScoper80dbed43490f\PhpParser\Node\Scalar
+use _PhpScoperc75fd40d7a6e\PhpParser\Node\Scalar;
+class EncapsedStringPart extends \_PhpScoperc75fd40d7a6e\PhpParser\Node\Scalar
 {
     /** @var string String value */
     public $value;

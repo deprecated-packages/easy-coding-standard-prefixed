@@ -13,9 +13,9 @@ use function rtrim;
 use function sprintf;
 use function trim;
 use const T_FUNCTION;
-use const _PhpScoper80dbed43490f\T_OPEN_PARENTHESIS;
-use const _PhpScoper80dbed43490f\T_PARENT;
-use const _PhpScoper80dbed43490f\T_SELF;
+use const _PhpScoperc75fd40d7a6e\T_OPEN_PARENTHESIS;
+use const _PhpScoperc75fd40d7a6e\T_PARENT;
+use const _PhpScoperc75fd40d7a6e\T_SELF;
 use const T_STATIC;
 abstract class AbstractLineCall implements \PHP_CodeSniffer\Sniffs\Sniff
 {

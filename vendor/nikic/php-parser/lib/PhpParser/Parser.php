@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper80dbed43490f\PhpParser;
+namespace _PhpScoperc75fd40d7a6e\PhpParser;
 
 interface Parser
 {
@@ -15,5 +15,5 @@ interface Parser
      * @return Node\Stmt[]|null Array of statements (or null non-throwing error handler is used and
      *                          the parser was unable to recover from an error).
      */
-    public function parse(string $code, \_PhpScoper80dbed43490f\PhpParser\ErrorHandler $errorHandler = null);
+    public function parse(string $code, \_PhpScoperc75fd40d7a6e\PhpParser\ErrorHandler $errorHandler = null);
 }

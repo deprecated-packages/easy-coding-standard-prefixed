@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper80dbed43490f\PhpParser\Node\Expr;
+namespace _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr;
 
-use _PhpScoper80dbed43490f\PhpParser\Node\Expr;
-use _PhpScoper80dbed43490f\PhpParser\Node\Name;
-use _PhpScoper80dbed43490f\PhpParser\Node\VarLikeIdentifier;
-class StaticPropertyFetch extends \_PhpScoper80dbed43490f\PhpParser\Node\Expr
+use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr;
+use _PhpScoperc75fd40d7a6e\PhpParser\Node\Name;
+use _PhpScoperc75fd40d7a6e\PhpParser\Node\VarLikeIdentifier;
+class StaticPropertyFetch extends \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr
 {
     /** @var Name|Expr Class name */
     public $class;
@@ -23,7 +23,7 @@ class StaticPropertyFetch extends \_PhpScoper80dbed43490f\PhpParser\Node\Expr
     {
         $this->attributes = $attributes;
         $this->class = $class;
-        $this->name = \is_string($name) ? new \_PhpScoper80dbed43490f\PhpParser\Node\VarLikeIdentifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScoperc75fd40d7a6e\PhpParser\Node\VarLikeIdentifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {

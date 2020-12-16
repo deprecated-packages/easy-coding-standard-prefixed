@@ -1,20 +1,20 @@
 <?php
 
-namespace _PhpScoper80dbed43490f\Doctrine\Tests\Common\Annotations\Ticket;
+namespace _PhpScoperc75fd40d7a6e\Doctrine\Tests\Common\Annotations\Ticket;
 
-use _PhpScoper80dbed43490f\Doctrine\Common\Annotations\AnnotationReader;
-use _PhpScoper80dbed43490f\Doctrine\Common\Annotations\DocParser;
-use _PhpScoper80dbed43490f\Doctrine\Common\Annotations\SimpleAnnotationReader;
+use _PhpScoperc75fd40d7a6e\Doctrine\Common\Annotations\AnnotationReader;
+use _PhpScoperc75fd40d7a6e\Doctrine\Common\Annotations\DocParser;
+use _PhpScoperc75fd40d7a6e\Doctrine\Common\Annotations\SimpleAnnotationReader;
 //Some class named Entity in the global namespace
 include __DIR__ . '/DCOM58Entity.php';
 /**
  * @group DCOM58
  */
-class DCOM58Test extends \_PhpScoper80dbed43490f\PHPUnit_Framework_TestCase
+class DCOM58Test extends \_PhpScoperc75fd40d7a6e\PHPUnit_Framework_TestCase
 {
     public function testIssue()
     {
-        $reader = new \_PhpScoper80dbed43490f\Doctrine\Common\Annotations\AnnotationReader();
+        $reader = new \_PhpScoperc75fd40d7a6e\Doctrine\Common\Annotations\AnnotationReader();
         $result = $reader->getClassAnnotations(new \ReflectionClass(__NAMESPACE__ . "\\MappedClass"));
         foreach ($result as $annot) {
             $classAnnotations[\get_class($annot)] = $annot;
@@ -24,35 +24,35 @@ class DCOM58Test extends \_PhpScoper80dbed43490f\PHPUnit_Framework_TestCase
     public function testIssueGlobalNamespace()
     {
         $docblock = "@Entity";
-        $parser = new \_PhpScoper80dbed43490f\Doctrine\Common\Annotations\DocParser();
-        $parser->setImports(array("__NAMESPACE__" => "_PhpScoper80dbed43490f\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping"));
+        $parser = new \_PhpScoperc75fd40d7a6e\Doctrine\Common\Annotations\DocParser();
+        $parser->setImports(array("__NAMESPACE__" => "_PhpScoperc75fd40d7a6e\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping"));
         $annots = $parser->parse($docblock);
         $this->assertEquals(1, \count($annots));
-        $this->assertInstanceOf("_PhpScoper80dbed43490f\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping\\Entity", $annots[0]);
+        $this->assertInstanceOf("_PhpScoperc75fd40d7a6e\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping\\Entity", $annots[0]);
     }
     public function testIssueNamespaces()
     {
         $docblock = "@Entity";
-        $parser = new \_PhpScoper80dbed43490f\Doctrine\Common\Annotations\DocParser();
-        $parser->addNamespace("_PhpScoper80dbed43490f\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM");
+        $parser = new \_PhpScoperc75fd40d7a6e\Doctrine\Common\Annotations\DocParser();
+        $parser->addNamespace("_PhpScoperc75fd40d7a6e\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM");
         $annots = $parser->parse($docblock);
         $this->assertEquals(1, \count($annots));
-        $this->assertInstanceOf("_PhpScoper80dbed43490f\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Entity", $annots[0]);
+        $this->assertInstanceOf("_PhpScoperc75fd40d7a6e\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Entity", $annots[0]);
     }
     public function testIssueMultipleNamespaces()
     {
         $docblock = "@Entity";
-        $parser = new \_PhpScoper80dbed43490f\Doctrine\Common\Annotations\DocParser();
-        $parser->addNamespace("_PhpScoper80dbed43490f\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping");
-        $parser->addNamespace("_PhpScoper80dbed43490f\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM");
+        $parser = new \_PhpScoperc75fd40d7a6e\Doctrine\Common\Annotations\DocParser();
+        $parser->addNamespace("_PhpScoperc75fd40d7a6e\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping");
+        $parser->addNamespace("_PhpScoperc75fd40d7a6e\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM");
         $annots = $parser->parse($docblock);
         $this->assertEquals(1, \count($annots));
-        $this->assertInstanceOf("_PhpScoper80dbed43490f\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping\\Entity", $annots[0]);
+        $this->assertInstanceOf("_PhpScoperc75fd40d7a6e\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping\\Entity", $annots[0]);
     }
     public function testIssueWithNamespacesOrImports()
     {
         $docblock = "@Entity";
-        $parser = new \_PhpScoper80dbed43490f\Doctrine\Common\Annotations\DocParser();
+        $parser = new \_PhpScoperc75fd40d7a6e\Doctrine\Common\Annotations\DocParser();
         $annots = $parser->parse($docblock);
         $this->assertEquals(1, \count($annots));
         $this->assertInstanceOf("Entity", $annots[0]);
@@ -60,11 +60,11 @@ class DCOM58Test extends \_PhpScoper80dbed43490f\PHPUnit_Framework_TestCase
     }
     public function testIssueSimpleAnnotationReader()
     {
-        $reader = new \_PhpScoper80dbed43490f\Doctrine\Common\Annotations\SimpleAnnotationReader();
-        $reader->addNamespace('_PhpScoper80dbed43490f\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping');
+        $reader = new \_PhpScoperc75fd40d7a6e\Doctrine\Common\Annotations\SimpleAnnotationReader();
+        $reader->addNamespace('_PhpScoperc75fd40d7a6e\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping');
         $annots = $reader->getClassAnnotations(new \ReflectionClass(__NAMESPACE__ . "\\MappedClass"));
         $this->assertEquals(1, \count($annots));
-        $this->assertInstanceOf("_PhpScoper80dbed43490f\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping\\Entity", $annots[0]);
+        $this->assertInstanceOf("_PhpScoperc75fd40d7a6e\\Doctrine\\Tests\\Common\\Annotations\\Ticket\\Doctrine\\ORM\\Mapping\\Entity", $annots[0]);
     }
 }
 /**
@@ -73,7 +73,7 @@ class DCOM58Test extends \_PhpScoper80dbed43490f\PHPUnit_Framework_TestCase
 class MappedClass
 {
 }
-namespace _PhpScoper80dbed43490f\Doctrine\Tests\Common\Annotations\Ticket\Doctrine\ORM\Mapping;
+namespace _PhpScoperc75fd40d7a6e\Doctrine\Tests\Common\Annotations\Ticket\Doctrine\ORM\Mapping;
 
 /**
 * @Annotation
@@ -81,7 +81,7 @@ namespace _PhpScoper80dbed43490f\Doctrine\Tests\Common\Annotations\Ticket\Doctri
 class Entity
 {
 }
-namespace _PhpScoper80dbed43490f\Doctrine\Tests\Common\Annotations\Ticket\Doctrine\ORM;
+namespace _PhpScoperc75fd40d7a6e\Doctrine\Tests\Common\Annotations\Ticket\Doctrine\ORM;
 
 /**
 * @Annotation

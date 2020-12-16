@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper80dbed43490f\PhpParser\Node\Expr;
+namespace _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr;
 
-use _PhpScoper80dbed43490f\PhpParser\Node\Expr;
-class Variable extends \_PhpScoper80dbed43490f\PhpParser\Node\Expr
+use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr;
+class Variable extends \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr
 {
     /** @var string|Expr Name */
     public $name;

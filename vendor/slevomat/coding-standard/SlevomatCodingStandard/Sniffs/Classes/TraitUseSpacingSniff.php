@@ -13,11 +13,11 @@ use function count;
 use function in_array;
 use function sprintf;
 use function substr_count;
-use const _PhpScoper80dbed43490f\T_ANON_CLASS;
+use const _PhpScoperc75fd40d7a6e\T_ANON_CLASS;
 use const T_CLASS;
-use const _PhpScoper80dbed43490f\T_CLOSE_CURLY_BRACKET;
-use const _PhpScoper80dbed43490f\T_OPEN_CURLY_BRACKET;
-use const _PhpScoper80dbed43490f\T_SEMICOLON;
+use const _PhpScoperc75fd40d7a6e\T_CLOSE_CURLY_BRACKET;
+use const _PhpScoperc75fd40d7a6e\T_OPEN_CURLY_BRACKET;
+use const _PhpScoperc75fd40d7a6e\T_SEMICOLON;
 use const T_TRAIT;
 use const T_WHITESPACE;
 class TraitUseSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff

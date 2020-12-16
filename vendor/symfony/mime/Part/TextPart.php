@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper80dbed43490f\Symfony\Component\Mime\Part;
+namespace _PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Part;
 
-use _PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\Base64ContentEncoder;
-use _PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\ContentEncoderInterface;
-use _PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\EightBitContentEncoder;
-use _PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\QpContentEncoder;
-use _PhpScoper80dbed43490f\Symfony\Component\Mime\Exception\InvalidArgumentException;
-use _PhpScoper80dbed43490f\Symfony\Component\Mime\Header\Headers;
+use _PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Encoder\Base64ContentEncoder;
+use _PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Encoder\ContentEncoderInterface;
+use _PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Encoder\EightBitContentEncoder;
+use _PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Encoder\QpContentEncoder;
+use _PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Exception\InvalidArgumentException;
+use _PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Header\Headers;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @experimental in 4.3
  */
-class TextPart extends \_PhpScoper80dbed43490f\Symfony\Component\Mime\Part\AbstractPart
+class TextPart extends \_PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Part\AbstractPart
 {
     private static $encoders = [];
     private $body;
@@ -46,7 +46,7 @@ class TextPart extends \_PhpScoper80dbed43490f\Symfony\Component\Mime\Part\Abstr
             $this->encoding = $this->chooseEncoding();
         } else {
             if ('quoted-printable' !== $encoding && 'base64' !== $encoding && '8bit' !== $encoding) {
-                throw new \_PhpScoper80dbed43490f\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('The encoding must be one of "quoted-printable", "base64", or "8bit" ("%s" given).', $encoding));
+                throw new \_PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('The encoding must be one of "quoted-printable", "base64", or "8bit" ("%s" given).', $encoding));
             }
             $this->encoding = $encoding;
         }
@@ -104,7 +104,7 @@ class TextPart extends \_PhpScoper80dbed43490f\Symfony\Component\Mime\Part\Abstr
             (yield $this->getEncoder()->encodeString($this->body));
         }
     }
-    public function getPreparedHeaders() : \_PhpScoper80dbed43490f\Symfony\Component\Mime\Header\Headers
+    public function getPreparedHeaders() : \_PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Header\Headers
     {
         $headers = parent::getPreparedHeaders();
         $headers->setHeaderBody('Parameterized', 'Content-Type', $this->getMediaType() . '/' . $this->getMediaSubtype());
@@ -123,15 +123,15 @@ class TextPart extends \_PhpScoper80dbed43490f\Symfony\Component\Mime\Part\Abstr
         }
         return $headers;
     }
-    private function getEncoder() : \_PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\ContentEncoderInterface
+    private function getEncoder() : \_PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Encoder\ContentEncoderInterface
     {
         if ('8bit' === $this->encoding) {
-            return self::$encoders[$this->encoding] ?? (self::$encoders[$this->encoding] = new \_PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\EightBitContentEncoder());
+            return self::$encoders[$this->encoding] ?? (self::$encoders[$this->encoding] = new \_PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Encoder\EightBitContentEncoder());
         }
         if ('quoted-printable' === $this->encoding) {
-            return self::$encoders[$this->encoding] ?? (self::$encoders[$this->encoding] = new \_PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\QpContentEncoder());
+            return self::$encoders[$this->encoding] ?? (self::$encoders[$this->encoding] = new \_PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Encoder\QpContentEncoder());
         }
-        return self::$encoders[$this->encoding] ?? (self::$encoders[$this->encoding] = new \_PhpScoper80dbed43490f\Symfony\Component\Mime\Encoder\Base64ContentEncoder());
+        return self::$encoders[$this->encoding] ?? (self::$encoders[$this->encoding] = new \_PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Encoder\Base64ContentEncoder());
     }
     private function chooseEncoding() : string
     {
@@ -151,7 +151,7 @@ class TextPart extends \_PhpScoper80dbed43490f\Symfony\Component\Mime\Part\Abstr
     }
     public function __wakeup()
     {
-        $r = new \ReflectionProperty(\_PhpScoper80dbed43490f\Symfony\Component\Mime\Part\AbstractPart::class, 'headers');
+        $r = new \ReflectionProperty(\_PhpScoperc75fd40d7a6e\Symfony\Component\Mime\Part\AbstractPart::class, 'headers');
         $r->setAccessible(\true);
         $r->setValue($this, $this->_headers);
         unset($this->_headers);

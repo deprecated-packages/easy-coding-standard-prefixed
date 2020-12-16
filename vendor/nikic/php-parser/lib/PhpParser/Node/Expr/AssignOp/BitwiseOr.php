@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper80dbed43490f\PhpParser\Node\Expr\AssignOp;
+namespace _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\AssignOp;
 
-use _PhpScoper80dbed43490f\PhpParser\Node\Expr\AssignOp;
-class BitwiseOr extends \_PhpScoper80dbed43490f\PhpParser\Node\Expr\AssignOp
+use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\AssignOp;
+class BitwiseOr extends \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {

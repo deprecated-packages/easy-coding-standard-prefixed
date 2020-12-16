@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper80dbed43490f\Symfony\Contracts\Cache;
+namespace _PhpScoperc75fd40d7a6e\Symfony\Contracts\Cache;
 
-use _PhpScoper80dbed43490f\Psr\Cache\CacheItemInterface;
+use _PhpScoperc75fd40d7a6e\Psr\Cache\CacheItemInterface;
 /**
  * Computes and returns the cached value of an item.
  *
@@ -24,5 +24,5 @@ interface CallbackInterface
      *
      * @return mixed The computed value for the passed item
      */
-    public function __invoke(\_PhpScoper80dbed43490f\Psr\Cache\CacheItemInterface $item, bool &$save);
+    public function __invoke(\_PhpScoperc75fd40d7a6e\Psr\Cache\CacheItemInterface $item, bool &$save);
 }

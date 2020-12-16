@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Contract\Converter;
 
-use _PhpScoper80dbed43490f\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\MethodCall;
 interface ServiceOptionsKeyYamlToPhpFactoryInterface
 {
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper80dbed43490f\PhpParser\Node\Expr\MethodCall $serviceMethodCall) : \_PhpScoper80dbed43490f\PhpParser\Node\Expr\MethodCall;
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\MethodCall $serviceMethodCall) : \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\MethodCall;
     public function isMatch($key, $values) : bool;
 }
