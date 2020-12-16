@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc75fd40d7a6e\Symfony\Component\HttpFoundation\File\MimeType;
+namespace _PhpScoperd35c27cd4b09\Symfony\Component\HttpFoundation\File\MimeType;
 
-use _PhpScoperc75fd40d7a6e\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\Mime\FileBinaryMimeTypeGuesser as NewFileBinaryMimeTypeGuesser;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" instead.', \_PhpScoperc75fd40d7a6e\Symfony\Component\HttpFoundation\File\MimeType\FileBinaryMimeTypeGuesser::class, \_PhpScoperc75fd40d7a6e\Symfony\Component\Mime\FileBinaryMimeTypeGuesser::class), \E_USER_DEPRECATED);
+use _PhpScoperd35c27cd4b09\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use _PhpScoperd35c27cd4b09\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use _PhpScoperd35c27cd4b09\Symfony\Component\Mime\FileBinaryMimeTypeGuesser as NewFileBinaryMimeTypeGuesser;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" instead.', \_PhpScoperd35c27cd4b09\Symfony\Component\HttpFoundation\File\MimeType\FileBinaryMimeTypeGuesser::class, \_PhpScoperd35c27cd4b09\Symfony\Component\Mime\FileBinaryMimeTypeGuesser::class), \E_USER_DEPRECATED);
 /**
  * Guesses the mime type with the binary "file" (only available on *nix).
  *
@@ -21,7 +21,7 @@ use _PhpScoperc75fd40d7a6e\Symfony\Component\Mime\FileBinaryMimeTypeGuesser as N
  *
  * @deprecated since Symfony 4.3, use {@link NewFileBinaryMimeTypeGuesser} instead
  */
-class FileBinaryMimeTypeGuesser implements \_PhpScoperc75fd40d7a6e\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface
+class FileBinaryMimeTypeGuesser implements \_PhpScoperd35c27cd4b09\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface
 {
     private $cmd;
     /**
@@ -61,10 +61,10 @@ class FileBinaryMimeTypeGuesser implements \_PhpScoperc75fd40d7a6e\Symfony\Compo
     public function guess($path)
     {
         if (!\is_file($path)) {
-            throw new \_PhpScoperc75fd40d7a6e\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
+            throw new \_PhpScoperd35c27cd4b09\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
         }
         if (!\is_readable($path)) {
-            throw new \_PhpScoperc75fd40d7a6e\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException($path);
+            throw new \_PhpScoperd35c27cd4b09\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException($path);
         }
         if (!self::isSupported()) {
             return null;

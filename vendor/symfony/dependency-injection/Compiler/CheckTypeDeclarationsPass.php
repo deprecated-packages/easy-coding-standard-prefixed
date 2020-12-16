@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Container;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\ServiceLocator;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Container;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ServiceLocator;
+use _PhpScoperd35c27cd4b09\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * Checks whether injected parameters are compatible with type declarations.
  *
@@ -37,7 +37,7 @@ use _PhpScoperc75fd40d7a6e\Symfony\Component\ExpressionLanguage\Expression;
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Julien Maulny <jmaulny@darkmira.fr>
  */
-final class CheckTypeDeclarationsPass extends \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+final class CheckTypeDeclarationsPass extends \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private const SCALAR_TYPES = ['int' => \true, 'float' => \true, 'bool' => \true, 'string' => \true];
     private const BUILTIN_TYPES = ['array' => \true, 'bool' => \true, 'callable' => \true, 'float' => \true, 'int' => \true, 'iterable' => \true, 'object' => \true, 'string' => \true];
@@ -62,13 +62,13 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperc75fd40d7a6e\Symfony\Co
         if (isset($this->skippedIds[$this->currentId])) {
             return $value;
         }
-        if (!$value instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Definition || $value->hasErrors()) {
+        if (!$value instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Definition || $value->hasErrors()) {
             return parent::processValue($value, $isRoot);
         }
         if (!$this->autoload && !\class_exists($class = $value->getClass(), \false) && !\interface_exists($class, \false)) {
             return parent::processValue($value, $isRoot);
         }
-        if (\_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\ServiceLocator::class === $value->getClass()) {
+        if (\_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ServiceLocator::class === $value->getClass()) {
             return parent::processValue($value, $isRoot);
         }
         if ($constructor = $this->getConstructor($value, \false)) {
@@ -77,7 +77,7 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperc75fd40d7a6e\Symfony\Co
         foreach ($value->getMethodCalls() as $methodCall) {
             try {
                 $reflectionMethod = $this->getReflectionMethod($value, $methodCall[0]);
-            } catch (\_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
+            } catch (\_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Exception\RuntimeException $e) {
                 if ($value->getFactory()) {
                     continue;
                 }
@@ -90,15 +90,15 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperc75fd40d7a6e\Symfony\Co
     /**
      * @throws InvalidArgumentException When not enough parameters are defined for the method
      */
-    private function checkTypeDeclarations(\_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Definition $checkedDefinition, \ReflectionFunctionAbstract $reflectionFunction, array $values) : void
+    private function checkTypeDeclarations(\_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Definition $checkedDefinition, \ReflectionFunctionAbstract $reflectionFunction, array $values) : void
     {
         $numberOfRequiredParameters = $reflectionFunction->getNumberOfRequiredParameters();
         if (\count($values) < $numberOfRequiredParameters) {
-            throw new \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid definition for service "%s": "%s::%s()" requires %d arguments, %d passed.', $this->currentId, $reflectionFunction->class, $reflectionFunction->name, $numberOfRequiredParameters, \count($values)));
+            throw new \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Invalid definition for service "%s": "%s::%s()" requires %d arguments, %d passed.', $this->currentId, $reflectionFunction->class, $reflectionFunction->name, $numberOfRequiredParameters, \count($values)));
         }
         $reflectionParameters = $reflectionFunction->getParameters();
         $checksCount = \min($reflectionFunction->getNumberOfParameters(), \count($values));
-        $envPlaceholderUniquePrefix = $this->container->getParameterBag() instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag ? $this->container->getParameterBag()->getEnvPlaceholderUniquePrefix() : null;
+        $envPlaceholderUniquePrefix = $this->container->getParameterBag() instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag ? $this->container->getParameterBag()->getEnvPlaceholderUniquePrefix() : null;
         for ($i = 0; $i < $checksCount; ++$i) {
             if (!$reflectionParameters[$i]->hasType() || $reflectionParameters[$i]->isVariadic()) {
                 continue;
@@ -115,14 +115,14 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperc75fd40d7a6e\Symfony\Co
     /**
      * @throws InvalidParameterTypeException When a parameter is not compatible with the declared type
      */
-    private function checkType(\_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Definition $checkedDefinition, $value, \ReflectionParameter $parameter, ?string $envPlaceholderUniquePrefix) : void
+    private function checkType(\_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Definition $checkedDefinition, $value, \ReflectionParameter $parameter, ?string $envPlaceholderUniquePrefix) : void
     {
         $type = $parameter->getType()->getName();
-        if ($value instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Reference) {
+        if ($value instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Reference) {
             if (!$this->container->has($value = (string) $value)) {
                 return;
             }
-            if ('service_container' === $value && \is_a($type, \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Container::class, \true)) {
+            if ('service_container' === $value && \is_a($type, \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Container::class, \true)) {
                 return;
             }
             $value = $this->container->findDefinition($value);
@@ -134,16 +134,16 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperc75fd40d7a6e\Symfony\Co
             $type = $checkedDefinition->getClass();
         }
         $class = null;
-        if ($value instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Definition) {
+        if ($value instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Definition) {
             $class = $value->getClass();
             if (isset(self::BUILTIN_TYPES[\strtolower($class)])) {
                 $class = \strtolower($class);
             } elseif (!$class || !$this->autoload && !\class_exists($class, \false) && !\interface_exists($class, \false)) {
                 return;
             }
-        } elseif ($value instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Parameter) {
+        } elseif ($value instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Parameter) {
             $value = $this->container->getParameter($value);
-        } elseif ($value instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\ExpressionLanguage\Expression) {
+        } elseif ($value instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\ExpressionLanguage\Expression) {
             try {
                 $value = $this->getExpressionLanguage()->evaluate($value, ['container' => $this->container]);
             } catch (\Exception $e) {
@@ -171,12 +171,12 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperc75fd40d7a6e\Symfony\Co
             return;
         }
         if (null === $class) {
-            if ($value instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Argument\IteratorArgument) {
-                $class = \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Argument\RewindableGenerator::class;
-            } elseif ($value instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument) {
+            if ($value instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Argument\IteratorArgument) {
+                $class = \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Argument\RewindableGenerator::class;
+            } elseif ($value instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument) {
                 $class = \Closure::class;
-            } elseif ($value instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
-                $class = \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\ServiceLocator::class;
+            } elseif ($value instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument) {
+                $class = \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ServiceLocator::class;
             } elseif (\is_object($value)) {
                 $class = \get_class($value);
             } else {
@@ -193,7 +193,7 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperc75fd40d7a6e\Symfony\Co
         if ('callable' === $type && (\Closure::class === $class || \method_exists($class, '__invoke'))) {
             return;
         }
-        if ('callable' === $type && \is_array($value) && isset($value[0]) && ($value[0] instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Reference || $value[0] instanceof \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Definition || \is_string($value[0]))) {
+        if ('callable' === $type && \is_array($value) && isset($value[0]) && ($value[0] instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Reference || $value[0] instanceof \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Definition || \is_string($value[0]))) {
             return;
         }
         if ('iterable' === $type && (\is_array($value) || 'array' === $class || \is_subclass_of($class, \Traversable::class))) {
@@ -210,13 +210,13 @@ final class CheckTypeDeclarationsPass extends \_PhpScoperc75fd40d7a6e\Symfony\Co
         }
         $checkFunction = \sprintf('is_%s', $parameter->getType()->getName());
         if (!$parameter->getType()->isBuiltin() || !$checkFunction($value)) {
-            throw new \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException($this->currentId, \is_object($value) ? $class : \get_debug_type($value), $parameter);
+            throw new \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException($this->currentId, \is_object($value) ? $class : \get_debug_type($value), $parameter);
         }
     }
-    private function getExpressionLanguage() : \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\ExpressionLanguage
+    private function getExpressionLanguage() : \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ExpressionLanguage
     {
         if (null === $this->expressionLanguage) {
-            $this->expressionLanguage = new \_PhpScoperc75fd40d7a6e\Symfony\Component\DependencyInjection\ExpressionLanguage(null, $this->container->getExpressionLanguageProviders());
+            $this->expressionLanguage = new \_PhpScoperd35c27cd4b09\Symfony\Component\DependencyInjection\ExpressionLanguage(null, $this->container->getExpressionLanguageProviders());
         }
         return $this->expressionLanguage;
     }

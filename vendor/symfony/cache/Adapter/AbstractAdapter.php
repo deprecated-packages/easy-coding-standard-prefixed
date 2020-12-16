@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperd35c27cd4b09\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperc75fd40d7a6e\Psr\Log\LoggerAwareInterface;
-use _PhpScoperc75fd40d7a6e\Psr\Log\LoggerInterface;
-use _PhpScoperc75fd40d7a6e\Psr\Log\NullLogger;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use _PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoperc75fd40d7a6e\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoperd35c27cd4b09\Psr\Log\LoggerAwareInterface;
+use _PhpScoperd35c27cd4b09\Psr\Log\LoggerInterface;
+use _PhpScoperd35c27cd4b09\Psr\Log\NullLogger;
+use _PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem;
+use _PhpScoperd35c27cd4b09\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperd35c27cd4b09\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoperd35c27cd4b09\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
+use _PhpScoperd35c27cd4b09\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoperd35c27cd4b09\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-abstract class AbstractAdapter implements \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScoperc75fd40d7a6e\Symfony\Contracts\Cache\CacheInterface, \_PhpScoperc75fd40d7a6e\Psr\Log\LoggerAwareInterface, \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\ResettableInterface
+abstract class AbstractAdapter implements \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScoperd35c27cd4b09\Symfony\Contracts\Cache\CacheInterface, \_PhpScoperd35c27cd4b09\Psr\Log\LoggerAwareInterface, \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\ResettableInterface
 {
     /**
      * @internal
@@ -34,12 +34,12 @@ abstract class AbstractAdapter implements \_PhpScoperc75fd40d7a6e\Symfony\Compon
     private static $phpFilesSupported;
     protected function __construct(string $namespace = '', int $defaultLifetime = 0)
     {
-        $this->namespace = '' === $namespace ? '' : \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::validateKey($namespace) . static::NS_SEPARATOR;
+        $this->namespace = '' === $namespace ? '' : \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::validateKey($namespace) . static::NS_SEPARATOR;
         if (null !== $this->maxIdLength && \strlen($namespace) > $this->maxIdLength - 24) {
-            throw new \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace must be %d chars max, %d given ("%s")', $this->maxIdLength - 24, \strlen($namespace), $namespace));
+            throw new \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace must be %d chars max, %d given ("%s")', $this->maxIdLength - 24, \strlen($namespace), $namespace));
         }
         $this->createCacheItem = \Closure::bind(static function ($key, $value, $isHit) use($defaultLifetime) {
-            $item = new \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem();
+            $item = new \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->value = $v = $value;
             $item->isHit = $isHit;
@@ -50,11 +50,11 @@ abstract class AbstractAdapter implements \_PhpScoperc75fd40d7a6e\Symfony\Compon
             if (\is_array($v) && 1 === \count($v) && 10 === \strlen($k = \key($v)) && "" === $k[0] && "\0" === $k[5] && "_" === $k[9]) {
                 $item->value = $v[$k];
                 $v = \unpack('Ve/Nc', \substr($k, 1, -1));
-                $item->metadata[\_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $v['e'] + \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY_OFFSET;
-                $item->metadata[\_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $v['c'];
+                $item->metadata[\_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $v['e'] + \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY_OFFSET;
+                $item->metadata[\_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $v['c'];
             }
             return $item;
-        }, null, \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::class);
         $getId = \Closure::fromCallable([$this, 'getId']);
         $this->mergeByLifetime = \Closure::bind(static function ($deferred, $namespace, &$expiredIds) use($getId) {
             $byLifetime = [];
@@ -68,14 +68,14 @@ abstract class AbstractAdapter implements \_PhpScoperc75fd40d7a6e\Symfony\Compon
                     $expiredIds[] = $getId($key);
                     continue;
                 }
-                if (isset(($metadata = $item->newMetadata)[\_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::METADATA_TAGS])) {
-                    unset($metadata[\_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
+                if (isset(($metadata = $item->newMetadata)[\_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::METADATA_TAGS])) {
+                    unset($metadata[\_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
                 }
                 // For compactness, expiry and creation duration are packed in the key of an array, using magic numbers as separators
                 $byLifetime[$ttl][$getId($key)] = $metadata ? ["" . \pack('VN', (int) (0.1 + $metadata[self::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[self::METADATA_CTIME]) . "_" => $item->value] : $item->value;
             }
             return $byLifetime;
-        }, null, \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::class);
     }
     /**
      * Returns the best possible adapter that your runtime supports.
@@ -89,35 +89,35 @@ abstract class AbstractAdapter implements \_PhpScoperc75fd40d7a6e\Symfony\Compon
      *
      * @return AdapterInterface
      */
-    public static function createSystemCache($namespace, $defaultLifetime, $version, $directory, \_PhpScoperc75fd40d7a6e\Psr\Log\LoggerInterface $logger = null)
+    public static function createSystemCache($namespace, $defaultLifetime, $version, $directory, \_PhpScoperd35c27cd4b09\Psr\Log\LoggerInterface $logger = null)
     {
-        $opcache = new \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Adapter\PhpFilesAdapter($namespace, $defaultLifetime, $directory, \true);
+        $opcache = new \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Adapter\PhpFilesAdapter($namespace, $defaultLifetime, $directory, \true);
         if (null !== $logger) {
             $opcache->setLogger($logger);
         }
-        if (!(self::$apcuSupported = self::$apcuSupported ?? \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Adapter\ApcuAdapter::isSupported())) {
+        if (!(self::$apcuSupported = self::$apcuSupported ?? \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Adapter\ApcuAdapter::isSupported())) {
             return $opcache;
         }
-        $apcu = new \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Adapter\ApcuAdapter($namespace, (int) $defaultLifetime / 5, $version);
+        $apcu = new \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Adapter\ApcuAdapter($namespace, (int) $defaultLifetime / 5, $version);
         if ('cli' === \PHP_SAPI && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
-            $apcu->setLogger(new \_PhpScoperc75fd40d7a6e\Psr\Log\NullLogger());
+            $apcu->setLogger(new \_PhpScoperd35c27cd4b09\Psr\Log\NullLogger());
         } elseif (null !== $logger) {
             $apcu->setLogger($logger);
         }
-        return new \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Adapter\ChainAdapter([$apcu, $opcache]);
+        return new \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Adapter\ChainAdapter([$apcu, $opcache]);
     }
     public static function createConnection($dsn, array $options = [])
     {
         if (!\is_string($dsn)) {
-            throw new \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('The %s() method expect argument #1 to be string, %s given.', __METHOD__, \gettype($dsn)));
+            throw new \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('The %s() method expect argument #1 to be string, %s given.', __METHOD__, \gettype($dsn)));
         }
         if (0 === \strpos($dsn, 'redis:') || 0 === \strpos($dsn, 'rediss:')) {
-            return \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Adapter\RedisAdapter::createConnection($dsn, $options);
+            return \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Adapter\RedisAdapter::createConnection($dsn, $options);
         }
         if (0 === \strpos($dsn, 'memcached:')) {
-            return \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Adapter\MemcachedAdapter::createConnection($dsn, $options);
+            return \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Adapter\MemcachedAdapter::createConnection($dsn, $options);
         }
-        throw new \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Unsupported DSN: %s.', $dsn));
+        throw new \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Unsupported DSN: %s.', $dsn));
     }
     /**
      * {@inheritdoc}
@@ -147,7 +147,7 @@ abstract class AbstractAdapter implements \_PhpScoperc75fd40d7a6e\Symfony\Compon
                     $v = $values[$id];
                     $type = \is_object($v) ? \get_class($v) : \gettype($v);
                     $message = \sprintf('Failed to save key "{key}" of type %s%s', $type, $e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-                    \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => \substr($id, \strlen($this->namespace)), 'exception' => $e instanceof \Exception ? $e : null]);
+                    \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => \substr($id, \strlen($this->namespace)), 'exception' => $e instanceof \Exception ? $e : null]);
                 }
             } else {
                 foreach ($values as $id => $v) {
@@ -169,7 +169,7 @@ abstract class AbstractAdapter implements \_PhpScoperc75fd40d7a6e\Symfony\Compon
                 $ok = \false;
                 $type = \is_object($v) ? \get_class($v) : \gettype($v);
                 $message = \sprintf('Failed to save key "{key}" of type %s%s', $type, $e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-                \_PhpScoperc75fd40d7a6e\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => \substr($id, \strlen($this->namespace)), 'exception' => $e instanceof \Exception ? $e : null]);
+                \_PhpScoperd35c27cd4b09\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => \substr($id, \strlen($this->namespace)), 'exception' => $e instanceof \Exception ? $e : null]);
             }
         }
         return $ok;

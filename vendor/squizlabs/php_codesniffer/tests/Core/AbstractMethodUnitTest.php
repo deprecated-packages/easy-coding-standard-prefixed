@@ -12,8 +12,8 @@ namespace PHP_CodeSniffer\Tests\Core;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
-use _PhpScoperc75fd40d7a6e\PHPUnit\Framework\TestCase;
-abstract class AbstractMethodUnitTest extends \_PhpScoperc75fd40d7a6e\PHPUnit\Framework\TestCase
+use _PhpScoperd35c27cd4b09\PHPUnit\Framework\TestCase;
+abstract class AbstractMethodUnitTest extends \_PhpScoperd35c27cd4b09\PHPUnit\Framework\TestCase
 {
     /**
      * The file extension of the test case file (without leading dot).

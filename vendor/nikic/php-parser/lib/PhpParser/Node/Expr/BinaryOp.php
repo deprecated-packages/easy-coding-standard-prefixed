@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr;
+namespace _PhpScoperd35c27cd4b09\PhpParser\Node\Expr;
 
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr;
-abstract class BinaryOp extends \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Expr;
+abstract class BinaryOp extends \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr
 {
     /** @var Expr The left hand side expression */
     public $left;
@@ -17,7 +17,7 @@ abstract class BinaryOp extends \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr
      * @param Expr  $right      The right hand side expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr $left, \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr $right, array $attributes = [])
+    public function __construct(\_PhpScoperd35c27cd4b09\PhpParser\Node\Expr $left, \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr $right, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->left = $left;

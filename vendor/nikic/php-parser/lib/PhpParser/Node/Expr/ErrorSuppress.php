@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr;
+namespace _PhpScoperd35c27cd4b09\PhpParser\Node\Expr;
 
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr;
-class ErrorSuppress extends \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Expr;
+class ErrorSuppress extends \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr
 {
     /** @var Expr Expression */
     public $expr;
@@ -14,7 +14,7 @@ class ErrorSuppress extends \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr
      * @param Expr  $expr       Expression
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr $expr, array $attributes = [])
+    public function __construct(\_PhpScoperd35c27cd4b09\PhpParser\Node\Expr $expr, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

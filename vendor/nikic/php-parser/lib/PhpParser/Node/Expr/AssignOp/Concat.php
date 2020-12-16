@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\AssignOp;
+namespace _PhpScoperd35c27cd4b09\PhpParser\Node\Expr\AssignOp;
 
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\AssignOp;
-class Concat extends \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\AssignOp
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Expr\AssignOp;
+class Concat extends \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr\AssignOp
 {
     public function getType() : string
     {

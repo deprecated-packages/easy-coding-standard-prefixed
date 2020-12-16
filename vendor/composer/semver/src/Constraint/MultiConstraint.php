@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoperc75fd40d7a6e\Composer\Semver\Constraint;
+namespace _PhpScoperd35c27cd4b09\Composer\Semver\Constraint;
 
 /**
  * Defines a conjunctive or disjunctive set of constraints.
  */
-class MultiConstraint implements \_PhpScoperc75fd40d7a6e\Composer\Semver\Constraint\ConstraintInterface
+class MultiConstraint implements \_PhpScoperd35c27cd4b09\Composer\Semver\Constraint\ConstraintInterface
 {
     /** @var ConstraintInterface[] */
     protected $constraints;
@@ -56,7 +56,7 @@ class MultiConstraint implements \_PhpScoperc75fd40d7a6e\Composer\Semver\Constra
      *
      * @return bool
      */
-    public function matches(\_PhpScoperc75fd40d7a6e\Composer\Semver\Constraint\ConstraintInterface $provider)
+    public function matches(\_PhpScoperd35c27cd4b09\Composer\Semver\Constraint\ConstraintInterface $provider)
     {
         if (\false === $this->conjunctive) {
             foreach ($this->constraints as $constraint) {

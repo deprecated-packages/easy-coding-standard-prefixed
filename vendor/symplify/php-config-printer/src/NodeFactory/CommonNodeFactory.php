@@ -3,42 +3,42 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoperc75fd40d7a6e\PhpParser\BuilderHelpers;
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr;
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\BinaryOp\Concat;
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\ClassConstFetch;
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\ConstFetch;
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Name;
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Name\FullyQualified;
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Scalar\MagicConst\Dir;
-use _PhpScoperc75fd40d7a6e\PhpParser\Node\Scalar\String_;
+use _PhpScoperd35c27cd4b09\PhpParser\BuilderHelpers;
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Expr;
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Expr\BinaryOp\Concat;
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Expr\ClassConstFetch;
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Expr\ConstFetch;
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Name;
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Name\FullyQualified;
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Scalar\MagicConst\Dir;
+use _PhpScoperd35c27cd4b09\PhpParser\Node\Scalar\String_;
 final class CommonNodeFactory
 {
-    public function createAbsoluteDirExpr($argument) : \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr
+    public function createAbsoluteDirExpr($argument) : \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr
     {
         if ($argument === '') {
-            return new \_PhpScoperc75fd40d7a6e\PhpParser\Node\Scalar\String_('');
+            return new \_PhpScoperd35c27cd4b09\PhpParser\Node\Scalar\String_('');
         }
         if (\is_string($argument)) {
             // preslash with dir
             $argument = '/' . $argument;
         }
-        $argumentValue = \_PhpScoperc75fd40d7a6e\PhpParser\BuilderHelpers::normalizeValue($argument);
-        if ($argumentValue instanceof \_PhpScoperc75fd40d7a6e\PhpParser\Node\Scalar\String_) {
-            $argumentValue = new \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\BinaryOp\Concat(new \_PhpScoperc75fd40d7a6e\PhpParser\Node\Scalar\MagicConst\Dir(), $argumentValue);
+        $argumentValue = \_PhpScoperd35c27cd4b09\PhpParser\BuilderHelpers::normalizeValue($argument);
+        if ($argumentValue instanceof \_PhpScoperd35c27cd4b09\PhpParser\Node\Scalar\String_) {
+            $argumentValue = new \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr\BinaryOp\Concat(new \_PhpScoperd35c27cd4b09\PhpParser\Node\Scalar\MagicConst\Dir(), $argumentValue);
         }
         return $argumentValue;
     }
-    public function createClassReference(string $className) : \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\ClassConstFetch
+    public function createClassReference(string $className) : \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr\ClassConstFetch
     {
         return $this->createConstFetch($className, 'class');
     }
-    public function createConstFetch(string $className, string $constantName) : \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\ClassConstFetch
+    public function createConstFetch(string $className, string $constantName) : \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr\ClassConstFetch
     {
-        return new \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\ClassConstFetch(new \_PhpScoperc75fd40d7a6e\PhpParser\Node\Name\FullyQualified($className), $constantName);
+        return new \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr\ClassConstFetch(new \_PhpScoperd35c27cd4b09\PhpParser\Node\Name\FullyQualified($className), $constantName);
     }
-    public function createFalse() : \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\ConstFetch
+    public function createFalse() : \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr\ConstFetch
     {
-        return new \_PhpScoperc75fd40d7a6e\PhpParser\Node\Expr\ConstFetch(new \_PhpScoperc75fd40d7a6e\PhpParser\Node\Name('false'));
+        return new \_PhpScoperd35c27cd4b09\PhpParser\Node\Expr\ConstFetch(new \_PhpScoperd35c27cd4b09\PhpParser\Node\Name('false'));
     }
 }
