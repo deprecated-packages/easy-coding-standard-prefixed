@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6a8e65b492c\PhpParser\Node;
+namespace _PhpScoperfa7254c25e18\PhpParser\Node;
 
-use _PhpScoperb6a8e65b492c\PhpParser\NodeAbstract;
-class Name extends \_PhpScoperb6a8e65b492c\PhpParser\NodeAbstract
+use _PhpScoperfa7254c25e18\PhpParser\NodeAbstract;
+class Name extends \_PhpScoperfa7254c25e18\PhpParser\NodeAbstract
 {
     /** @var string[] Parts of the name */
     public $parts;

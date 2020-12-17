@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\ValueObject;
 
-use _PhpScoperb6a8e65b492c\Symfony\Component\Console\Application;
-use _PhpScoperb6a8e65b492c\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoperfa7254c25e18\Symfony\Component\Console\Application;
+use _PhpScoperfa7254c25e18\Symfony\Component\HttpKernel\KernelInterface;
 use Symplify\PackageBuilder\Console\Input\StaticInputDetector;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
@@ -42,7 +42,7 @@ final class KernelBootAndApplicationRun
             exit(\Symplify\PackageBuilder\Console\ShellCode::ERROR);
         }
     }
-    private function createKernel() : \_PhpScoperb6a8e65b492c\Symfony\Component\HttpKernel\KernelInterface
+    private function createKernel() : \_PhpScoperfa7254c25e18\Symfony\Component\HttpKernel\KernelInterface
     {
         // random has is needed, so cache is invalidated and changes from config are loaded
         $environment = 'prod' . \random_int(1, 100000);
@@ -60,10 +60,10 @@ final class KernelBootAndApplicationRun
         $kernel->boot();
         $container = $kernel->getContainer();
         /** @var Application $application */
-        $application = $container->get(\_PhpScoperb6a8e65b492c\Symfony\Component\Console\Application::class);
+        $application = $container->get(\_PhpScoperfa7254c25e18\Symfony\Component\Console\Application::class);
         exit($application->run());
     }
-    private function setExtraConfigs(\_PhpScoperb6a8e65b492c\Symfony\Component\HttpKernel\KernelInterface $kernel, string $kernelClass) : void
+    private function setExtraConfigs(\_PhpScoperfa7254c25e18\Symfony\Component\HttpKernel\KernelInterface $kernel, string $kernelClass) : void
     {
         if ($this->extraConfigs === []) {
             return;
@@ -81,8 +81,8 @@ final class KernelBootAndApplicationRun
      */
     private function setKernelClass(string $kernelClass) : void
     {
-        if (!\is_a($kernelClass, \_PhpScoperb6a8e65b492c\Symfony\Component\HttpKernel\KernelInterface::class, \true)) {
-            $message = \sprintf('Class "%s" must by type of "%s"', $kernelClass, \_PhpScoperb6a8e65b492c\Symfony\Component\HttpKernel\KernelInterface::class);
+        if (!\is_a($kernelClass, \_PhpScoperfa7254c25e18\Symfony\Component\HttpKernel\KernelInterface::class, \true)) {
+            $message = \sprintf('Class "%s" must by type of "%s"', $kernelClass, \_PhpScoperfa7254c25e18\Symfony\Component\HttpKernel\KernelInterface::class);
             throw new \Symplify\SymplifyKernel\Exception\BootException($message);
         }
         $this->kernelClass = $kernelClass;

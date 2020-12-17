@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter;
 
-use _PhpScoperb6a8e65b492c\Symfony\Component\Yaml\Parser;
-use _PhpScoperb6a8e65b492c\Symfony\Component\Yaml\Yaml;
+use _PhpScoperfa7254c25e18\Symfony\Component\Yaml\Parser;
+use _PhpScoperfa7254c25e18\Symfony\Component\Yaml\Yaml;
 use Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory;
@@ -43,7 +43,7 @@ final class YamlToPhpConverter
      * @var RoutingConfiguratorReturnClosureFactory
      */
     private $routingConfiguratorReturnClosureFactory;
-    public function __construct(\_PhpScoperb6a8e65b492c\Symfony\Component\Yaml\Parser $yamlParser, \Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $returnClosureNodesFactory, \Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, \Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface $yamlFileContentProvider, \Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter $checkerServiceParametersShifter)
+    public function __construct(\_PhpScoperfa7254c25e18\Symfony\Component\Yaml\Parser $yamlParser, \Symplify\PhpConfigPrinter\Printer\PhpParserPhpConfigPrinter $phpParserPhpConfigPrinter, \Symplify\PhpConfigPrinter\NodeFactory\ContainerConfiguratorReturnClosureFactory $returnClosureNodesFactory, \Symplify\PhpConfigPrinter\NodeFactory\RoutingConfiguratorReturnClosureFactory $routingConfiguratorReturnClosureFactory, \Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface $yamlFileContentProvider, \Symplify\PhpConfigPrinter\Yaml\CheckerServiceParametersShifter $checkerServiceParametersShifter)
     {
         $this->yamlParser = $yamlParser;
         $this->phpParserPhpConfigPrinter = $phpParserPhpConfigPrinter;
@@ -56,7 +56,7 @@ final class YamlToPhpConverter
     {
         $this->yamlFileContentProvider->setContent($yaml);
         /** @var mixed[]|null $yamlArray */
-        $yamlArray = $this->yamlParser->parse($yaml, \_PhpScoperb6a8e65b492c\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS | \_PhpScoperb6a8e65b492c\Symfony\Component\Yaml\Yaml::PARSE_CONSTANT);
+        $yamlArray = $this->yamlParser->parse($yaml, \_PhpScoperfa7254c25e18\Symfony\Component\Yaml\Yaml::PARSE_CUSTOM_TAGS | \_PhpScoperfa7254c25e18\Symfony\Component\Yaml\Yaml::PARSE_CONSTANT);
         if ($yamlArray === null) {
             return '';
         }

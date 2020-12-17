@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Console;
 
-use _PhpScoperb6a8e65b492c\Symfony\Component\Console\Command\Command;
+use _PhpScoperfa7254c25e18\Symfony\Component\Console\Command\Command;
 /**
  * @see \Symplify\SymplifyKernel\Tests\Console\AbstractSymplifyConsoleApplication\AutowiredConsoleApplicationTest
  */

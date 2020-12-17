@@ -15,7 +15,7 @@ use function sprintf;
 use function trim;
 use const T_ELSEIF;
 use const T_IF;
-use const _PhpScoperb6a8e65b492c\T_OPEN_CURLY_BRACKET;
+use const _PhpScoperfa7254c25e18\T_OPEN_CURLY_BRACKET;
 use const T_WHILE;
 abstract class AbstractLineCondition implements \PHP_CodeSniffer\Sniffs\Sniff
 {

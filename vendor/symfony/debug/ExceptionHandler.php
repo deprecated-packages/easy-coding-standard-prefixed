@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb6a8e65b492c\Symfony\Component\Debug;
+namespace _PhpScoperfa7254c25e18\Symfony\Component\Debug;
 
-use _PhpScoperb6a8e65b492c\Symfony\Component\Debug\Exception\FlattenException;
-use _PhpScoperb6a8e65b492c\Symfony\Component\Debug\Exception\OutOfMemoryException;
-use _PhpScoperb6a8e65b492c\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoperb6a8e65b492c\Symfony\Component\Debug\ExceptionHandler::class, \_PhpScoperb6a8e65b492c\Symfony\Component\ErrorHandler\ErrorHandler::class), \E_USER_DEPRECATED);
+use _PhpScoperfa7254c25e18\Symfony\Component\Debug\Exception\FlattenException;
+use _PhpScoperfa7254c25e18\Symfony\Component\Debug\Exception\OutOfMemoryException;
+use _PhpScoperfa7254c25e18\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoperfa7254c25e18\Symfony\Component\Debug\ExceptionHandler::class, \_PhpScoperfa7254c25e18\Symfony\Component\ErrorHandler\ErrorHandler::class), \E_USER_DEPRECATED);
 /**
  * ExceptionHandler converts an exception to a Response object.
  *
@@ -61,7 +61,7 @@ class ExceptionHandler
     {
         $handler = new static($debug, $charset, $fileLinkFormat);
         $prev = \set_exception_handler([$handler, 'handle']);
-        if (\is_array($prev) && $prev[0] instanceof \_PhpScoperb6a8e65b492c\Symfony\Component\Debug\ErrorHandler) {
+        if (\is_array($prev) && $prev[0] instanceof \_PhpScoperfa7254c25e18\Symfony\Component\Debug\ErrorHandler) {
             \restore_exception_handler();
             $prev[0]->setExceptionHandler([$handler, 'handle']);
         }
@@ -103,7 +103,7 @@ class ExceptionHandler
      */
     public function handle(\Exception $exception)
     {
-        if (null === $this->handler || $exception instanceof \_PhpScoperb6a8e65b492c\Symfony\Component\Debug\Exception\OutOfMemoryException) {
+        if (null === $this->handler || $exception instanceof \_PhpScoperfa7254c25e18\Symfony\Component\Debug\Exception\OutOfMemoryException) {
             $this->sendPhpResponse($exception);
             return;
         }
@@ -152,7 +152,7 @@ class ExceptionHandler
     public function sendPhpResponse($exception)
     {
         if ($exception instanceof \Throwable) {
-            $exception = \_PhpScoperb6a8e65b492c\Symfony\Component\Debug\Exception\FlattenException::createFromThrowable($exception);
+            $exception = \_PhpScoperfa7254c25e18\Symfony\Component\Debug\Exception\FlattenException::createFromThrowable($exception);
         }
         if (!\headers_sent()) {
             \header(\sprintf('HTTP/1.0 %s', $exception->getStatusCode()));
@@ -172,8 +172,8 @@ class ExceptionHandler
      */
     public function getHtml($exception)
     {
-        if (!$exception instanceof \_PhpScoperb6a8e65b492c\Symfony\Component\Debug\Exception\FlattenException) {
-            $exception = \_PhpScoperb6a8e65b492c\Symfony\Component\Debug\Exception\FlattenException::create($exception);
+        if (!$exception instanceof \_PhpScoperfa7254c25e18\Symfony\Component\Debug\Exception\FlattenException) {
+            $exception = \_PhpScoperfa7254c25e18\Symfony\Component\Debug\Exception\FlattenException::create($exception);
         }
         return $this->decorate($this->getContent($exception), $this->getStylesheet($exception));
     }
@@ -182,7 +182,7 @@ class ExceptionHandler
      *
      * @return string The content as a string
      */
-    public function getContent(\_PhpScoperb6a8e65b492c\Symfony\Component\Debug\Exception\FlattenException $exception)
+    public function getContent(\_PhpScoperfa7254c25e18\Symfony\Component\Debug\Exception\FlattenException $exception)
     {
         switch ($exception->getStatusCode()) {
             case 404:
@@ -234,7 +234,7 @@ EOF
         } catch (\Exception $e) {
             // something nasty happened and we cannot throw an exception anymore
             if ($this->debug) {
-                $e = \_PhpScoperb6a8e65b492c\Symfony\Component\Debug\Exception\FlattenException::create($e);
+                $e = \_PhpScoperfa7254c25e18\Symfony\Component\Debug\Exception\FlattenException::create($e);
                 $title = \sprintf('Exception thrown when handling an exception (%s: %s)', $e->getClass(), $this->escapeHtml($e->getMessage()));
             } else {
                 $title = 'Whoops, looks like something went wrong.';
@@ -261,7 +261,7 @@ EOF;
      *
      * @return string The stylesheet as a string
      */
-    public function getStylesheet(\_PhpScoperb6a8e65b492c\Symfony\Component\Debug\Exception\FlattenException $exception)
+    public function getStylesheet(\_PhpScoperfa7254c25e18\Symfony\Component\Debug\Exception\FlattenException $exception)
     {
         if (!$this->debug) {
             return <<<'EOF'

@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6a8e65b492c\PHPStan\PhpDocParser\Ast\PhpDoc;
+namespace _PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\PhpDoc;
 
-class PhpDocTextNode implements \_PhpScoperb6a8e65b492c\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
+class PhpDocTextNode implements \_PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocChildNode
 {
     /** @var string */
     public $text;

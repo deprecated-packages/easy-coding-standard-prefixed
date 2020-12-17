@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6a8e65b492c\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\Type;
 
-class CallableTypeNode implements \_PhpScoperb6a8e65b492c\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class CallableTypeNode implements \_PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     /** @var IdentifierTypeNode */
     public $identifier;
@@ -11,7 +11,7 @@ class CallableTypeNode implements \_PhpScoperb6a8e65b492c\PHPStan\PhpDocParser\A
     public $parameters;
     /** @var TypeNode */
     public $returnType;
-    public function __construct(\_PhpScoperb6a8e65b492c\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $identifier, array $parameters, \_PhpScoperb6a8e65b492c\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType)
+    public function __construct(\_PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode $identifier, array $parameters, \_PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\Type\TypeNode $returnType)
     {
         $this->identifier = $identifier;
         $this->parameters = $parameters;

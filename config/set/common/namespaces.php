@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6a8e65b492c;
+namespace _PhpScoperfa7254c25e18;
 
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer;
 use SlevomatCodingStandard\Sniffs\Namespaces\UselessAliasSniff;
-use _PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoperfa7254c25e18\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoperfa7254c25e18\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\SlevomatCodingStandard\Sniffs\Namespaces\UselessAliasSniff::class);
     $services->set(\PhpCsFixer\Fixer\Import\NoUnusedImportsFixer::class);

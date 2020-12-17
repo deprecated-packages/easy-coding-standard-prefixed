@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb6a8e65b492c;
+namespace _PhpScoperfa7254c25e18;
 
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
@@ -20,11 +20,10 @@ use PhpCsFixer\Fixer\StringNotation\ExplicitStringVariableFixer;
 use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
 use SlevomatCodingStandard\Sniffs\Classes\DisallowMultiConstantDefinitionSniff;
 use SlevomatCodingStandard\Sniffs\Classes\DisallowMultiPropertyDefinitionSniff;
-use SlevomatCodingStandard\Sniffs\Classes\ModernClassNameReferenceSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseDeclarationSniff;
-use _PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoperfa7254c25e18\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
-return static function (\_PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoperfa7254c25e18\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\SlevomatCodingStandard\Sniffs\Classes\DisallowMultiConstantDefinitionSniff::class);
     // breaks on PHP 8
@@ -32,7 +31,6 @@ return static function (\_PhpScoperb6a8e65b492c\Symfony\Component\DependencyInje
         $services->set(\SlevomatCodingStandard\Sniffs\Classes\DisallowMultiPropertyDefinitionSniff::class);
     }
     $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitMethodCasingFixer::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\Classes\ModernClassNameReferenceSniff::class);
     $services->set(\PhpCsFixer\Fixer\LanguageConstruct\FunctionToConstantFixer::class);
     $services->set(\PhpCsFixer\Fixer\StringNotation\ExplicitStringVariableFixer::class);
     $services->set(\PhpCsFixer\Fixer\LanguageConstruct\ExplicitIndirectVariableFixer::class);

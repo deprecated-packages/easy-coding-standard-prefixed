@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperfa7254c25e18\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperfa7254c25e18\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Removes abstract Definitions.
  */
-class RemoveAbstractDefinitionsPass implements \_PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RemoveAbstractDefinitionsPass implements \_PhpScoperfa7254c25e18\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * Removes abstract definitions from the ContainerBuilder.
      */
-    public function process(\_PhpScoperb6a8e65b492c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperfa7254c25e18\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         foreach ($container->getDefinitions() as $id => $definition) {
             if ($definition->isAbstract()) {

@@ -25,7 +25,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoperb6a8e65b492c\Symfony\Component\OptionsResolver\Options;
+use _PhpScoperfa7254c25e18\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
@@ -203,7 +203,7 @@ switch($a) {
     protected function createConfigurationDefinition()
     {
         $that = $this;
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('tokens', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tokens', 'List of tokens to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(self::$availableTokens)])->setNormalizer(static function (\_PhpScoperb6a8e65b492c\Symfony\Component\OptionsResolver\Options $options, $tokens) use($that) {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('tokens', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tokens', 'List of tokens to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(self::$availableTokens)])->setNormalizer(static function (\_PhpScoperfa7254c25e18\Symfony\Component\OptionsResolver\Options $options, $tokens) use($that) {
             foreach ($tokens as &$token) {
                 if ('useTrait' === $token) {
                     $message = "Token \"useTrait\" in option \"tokens\" for rule \"{$that->getName()}\" is deprecated and will be removed in 3.0, use \"use_trait\" instead.";

@@ -8,17 +8,17 @@ final class FunctionName
     /**
      * @var string
      */
-    public const INLINE_SERVICE = '_PhpScoperb6a8e65b492c\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\inline_service';
+    public const INLINE_SERVICE = '_PhpScoperfa7254c25e18\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\inline_service';
     /**
      * @var string
      */
-    public const SERVICE = '_PhpScoperb6a8e65b492c\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service';
+    public const SERVICE = '_PhpScoperfa7254c25e18\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\service';
     /**
      * @var string
      */
-    public const REF = '_PhpScoperb6a8e65b492c\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ref';
+    public const REF = '_PhpScoperfa7254c25e18\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ref';
     /**
      * @var string
      */
-    public const EXPR = '_PhpScoperb6a8e65b492c\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\expr';
+    public const EXPR = '_PhpScoperfa7254c25e18\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\expr';
 }

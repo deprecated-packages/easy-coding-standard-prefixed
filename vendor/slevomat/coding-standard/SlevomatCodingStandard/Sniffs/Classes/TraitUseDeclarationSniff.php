@@ -7,11 +7,11 @@ use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\ClassHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
-use const _PhpScoperb6a8e65b492c\T_ANON_CLASS;
+use const _PhpScoperfa7254c25e18\T_ANON_CLASS;
 use const T_CLASS;
-use const _PhpScoperb6a8e65b492c\T_COMMA;
-use const _PhpScoperb6a8e65b492c\T_OPEN_CURLY_BRACKET;
-use const _PhpScoperb6a8e65b492c\T_SEMICOLON;
+use const _PhpScoperfa7254c25e18\T_COMMA;
+use const _PhpScoperfa7254c25e18\T_OPEN_CURLY_BRACKET;
+use const _PhpScoperfa7254c25e18\T_SEMICOLON;
 use const T_TRAIT;
 use const T_WHITESPACE;
 class TraitUseDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff

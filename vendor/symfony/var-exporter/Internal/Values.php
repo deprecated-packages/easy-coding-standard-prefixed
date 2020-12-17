@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb6a8e65b492c\Symfony\Component\VarExporter\Internal;
+namespace _PhpScoperfa7254c25e18\Symfony\Component\VarExporter\Internal;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>
