@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfa7254c25e18\Symfony\Component\Config\Definition;
+namespace _PhpScopercf909b66eba8\Symfony\Component\Config\Definition;
 
-use _PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\Exception;
-use _PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
-use _PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use _PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
-use _PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use _PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\Exception;
+use _PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
+use _PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use _PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * The base node class.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class BaseNode implements \_PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\NodeInterface
+abstract class BaseNode implements \_PhpScopercf909b66eba8\Symfony\Component\Config\Definition\NodeInterface
 {
     const DEFAULT_PATH_SEPARATOR = '.';
     private static $placeholderUniquePrefix;
@@ -39,7 +39,7 @@ abstract class BaseNode implements \_PhpScoperfa7254c25e18\Symfony\Component\Con
     /**
      * @throws \InvalidArgumentException if the name contains a period
      */
-    public function __construct(?string $name, \_PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\NodeInterface $parent = null, string $pathSeparator = self::DEFAULT_PATH_SEPARATOR)
+    public function __construct(?string $name, \_PhpScopercf909b66eba8\Symfony\Component\Config\Definition\NodeInterface $parent = null, string $pathSeparator = self::DEFAULT_PATH_SEPARATOR)
     {
         if (\false !== \strpos($name = (string) $name, $pathSeparator)) {
             throw new \InvalidArgumentException('The name must not contain ".' . $pathSeparator . '".');
@@ -287,7 +287,7 @@ abstract class BaseNode implements \_PhpScoperfa7254c25e18\Symfony\Component\Con
     public final function merge($leftSide, $rightSide)
     {
         if (!$this->allowOverwrite) {
-            throw new \_PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException(\sprintf('Configuration path "%s" cannot be overwritten. You have to define all options for this path, and any of its sub-paths in one configuration section.', $this->getPath()));
+            throw new \_PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException(\sprintf('Configuration path "%s" cannot be overwritten. You have to define all options for this path, and any of its sub-paths in one configuration section.', $this->getPath()));
         }
         if ($leftSide !== ($leftPlaceholders = self::resolvePlaceholderValue($leftSide))) {
             foreach ($leftPlaceholders as $leftPlaceholder) {
@@ -391,13 +391,13 @@ abstract class BaseNode implements \_PhpScoperfa7254c25e18\Symfony\Component\Con
         foreach ($this->finalValidationClosures as $closure) {
             try {
                 $value = $closure($value);
-            } catch (\_PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\Exception $e) {
-                if ($e instanceof \_PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\UnsetKeyException && null !== $this->handlingPlaceholder) {
+            } catch (\_PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\Exception $e) {
+                if ($e instanceof \_PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\UnsetKeyException && null !== $this->handlingPlaceholder) {
                     continue;
                 }
                 throw $e;
             } catch (\Exception $e) {
-                throw new \_PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('Invalid configuration for path "%s": ', $this->getPath()) . $e->getMessage(), $e->getCode(), $e);
+                throw new \_PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException(\sprintf('Invalid configuration for path "%s": ', $this->getPath()) . $e->getMessage(), $e->getCode(), $e);
             }
         }
         return $value;
@@ -471,7 +471,7 @@ abstract class BaseNode implements \_PhpScoperfa7254c25e18\Symfony\Component\Con
     private function doValidateType($value) : void
     {
         if (null !== $this->handlingPlaceholder && !$this->allowPlaceholders()) {
-            $e = new \_PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('A dynamic value is not compatible with a "%s" node type at path "%s".', static::class, $this->getPath()));
+            $e = new \_PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('A dynamic value is not compatible with a "%s" node type at path "%s".', static::class, $this->getPath()));
             $e->setPath($this->getPath());
             throw $e;
         }
@@ -482,7 +482,7 @@ abstract class BaseNode implements \_PhpScoperfa7254c25e18\Symfony\Component\Con
         $knownTypes = \array_keys(self::$placeholders[$this->handlingPlaceholder]);
         $validTypes = $this->getValidPlaceholderTypes();
         if ($validTypes && \array_diff($knownTypes, $validTypes)) {
-            $e = new \_PhpScoperfa7254c25e18\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected %s, but got %s.', $this->getPath(), 1 === \count($validTypes) ? '"' . \reset($validTypes) . '"' : 'one of "' . \implode('", "', $validTypes) . '"', 1 === \count($knownTypes) ? '"' . \reset($knownTypes) . '"' : 'one of "' . \implode('", "', $knownTypes) . '"'));
+            $e = new \_PhpScopercf909b66eba8\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected %s, but got %s.', $this->getPath(), 1 === \count($validTypes) ? '"' . \reset($validTypes) . '"' : 'one of "' . \implode('", "', $validTypes) . '"', 1 === \count($knownTypes) ? '"' . \reset($knownTypes) . '"' : 'one of "' . \implode('", "', $knownTypes) . '"'));
             if ($hint = $this->getInfo()) {
                 $e->addHint($hint);
             }

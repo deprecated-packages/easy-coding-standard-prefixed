@@ -4,8 +4,8 @@ declare (strict_types=1);
 namespace SlevomatCodingStandard\Helpers\Annotation;
 
 use InvalidArgumentException;
-use _PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\PhpDoc\ImplementsTagValueNode;
-use _PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScopercf909b66eba8\PHPStan\PhpDocParser\Ast\PhpDoc\ImplementsTagValueNode;
+use _PhpScopercf909b66eba8\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
 use function in_array;
 use function sprintf;
@@ -16,7 +16,7 @@ class ImplementsAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\An
 {
     /** @var ImplementsTagValueNode|null */
     private $contentNode;
-    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\PhpDoc\ImplementsTagValueNode $contentNode)
+    public function __construct(string $name, int $startPointer, int $endPointer, ?string $content, ?\_PhpScopercf909b66eba8\PHPStan\PhpDocParser\Ast\PhpDoc\ImplementsTagValueNode $contentNode)
     {
         if (!\in_array($name, ['@implements', '@template-implements', '@phpstan-implements'], \true)) {
             throw new \InvalidArgumentException(\sprintf('Unsupported annotation %s.', $name));
@@ -28,7 +28,7 @@ class ImplementsAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\An
     {
         return $this->contentNode === null;
     }
-    public function getContentNode() : \_PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\PhpDoc\ImplementsTagValueNode
+    public function getContentNode() : \_PhpScopercf909b66eba8\PHPStan\PhpDocParser\Ast\PhpDoc\ImplementsTagValueNode
     {
         $this->errorWhenInvalid();
         return $this->contentNode;
@@ -42,7 +42,7 @@ class ImplementsAnnotation extends \SlevomatCodingStandard\Helpers\Annotation\An
         $this->errorWhenInvalid();
         return $this->contentNode->description !== '' ? $this->contentNode->description : null;
     }
-    public function getType() : \_PhpScoperfa7254c25e18\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode
+    public function getType() : \_PhpScopercf909b66eba8\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode
     {
         $this->errorWhenInvalid();
         return $this->contentNode->type;

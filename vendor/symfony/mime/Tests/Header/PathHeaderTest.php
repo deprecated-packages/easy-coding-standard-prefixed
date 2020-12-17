@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfa7254c25e18\Symfony\Component\Mime\Tests\Header;
+namespace _PhpScopercf909b66eba8\Symfony\Component\Mime\Tests\Header;
 
-use _PhpScoperfa7254c25e18\PHPUnit\Framework\TestCase;
-use _PhpScoperfa7254c25e18\Symfony\Component\Mime\Address;
-use _PhpScoperfa7254c25e18\Symfony\Component\Mime\Header\PathHeader;
-class PathHeaderTest extends \_PhpScoperfa7254c25e18\PHPUnit\Framework\TestCase
+use _PhpScopercf909b66eba8\PHPUnit\Framework\TestCase;
+use _PhpScopercf909b66eba8\Symfony\Component\Mime\Address;
+use _PhpScopercf909b66eba8\Symfony\Component\Mime\Header\PathHeader;
+class PathHeaderTest extends \_PhpScopercf909b66eba8\PHPUnit\Framework\TestCase
 {
     public function testSingleAddressCanBeSetAndFetched()
     {
-        $header = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Header\PathHeader('Return-Path', $address = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Address('chris@swiftmailer.org'));
+        $header = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Header\PathHeader('Return-Path', $address = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Address('chris@swiftmailer.org'));
         $this->assertEquals($address, $header->getAddress());
     }
     /**
@@ -25,7 +25,7 @@ class PathHeaderTest extends \_PhpScoperfa7254c25e18\PHPUnit\Framework\TestCase
      */
     public function testAddressMustComplyWithRfc2822()
     {
-        $header = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Address('chr is@swiftmailer.org'));
+        $header = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Address('chr is@swiftmailer.org'));
     }
     public function testValueIsAngleAddrWithValidAddress()
     {
@@ -36,12 +36,12 @@ class PathHeaderTest extends \_PhpScoperfa7254c25e18\PHPUnit\Framework\TestCase
                     path            =       ([CFWS] "<" ([CFWS] / addr-spec) ">" [CFWS]) /
                                                                     obs-path
                  */
-        $header = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Address('chris@swiftmailer.org'));
+        $header = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Address('chris@swiftmailer.org'));
         $this->assertEquals('<chris@swiftmailer.org>', $header->getBodyAsString());
     }
     public function testAddressIsIdnEncoded()
     {
-        $header = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Address('chris@swïftmailer.org'));
+        $header = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Address('chris@swïftmailer.org'));
         $this->assertEquals('<chris@xn--swftmailer-78a.org>', $header->getBodyAsString());
     }
     /**
@@ -49,23 +49,23 @@ class PathHeaderTest extends \_PhpScoperfa7254c25e18\PHPUnit\Framework\TestCase
      */
     public function testAddressMustBeEncodable()
     {
-        $header = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Address('chrïs@swiftmailer.org'));
+        $header = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Address('chrïs@swiftmailer.org'));
         $header->getBodyAsString();
     }
     public function testSetBody()
     {
-        $header = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Address('foo@example.com'));
-        $header->setBody($address = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Address('foo@bar.tld'));
+        $header = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Address('foo@example.com'));
+        $header->setBody($address = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Address('foo@bar.tld'));
         $this->assertEquals($address, $header->getAddress());
     }
     public function testGetBody()
     {
-        $header = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Header\PathHeader('Return-Path', $address = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Address('foo@bar.tld'));
+        $header = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Header\PathHeader('Return-Path', $address = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Address('foo@bar.tld'));
         $this->assertEquals($address, $header->getBody());
     }
     public function testToString()
     {
-        $header = new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScoperfa7254c25e18\Symfony\Component\Mime\Address('chris@swiftmailer.org'));
+        $header = new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Header\PathHeader('Return-Path', new \_PhpScopercf909b66eba8\Symfony\Component\Mime\Address('chris@swiftmailer.org'));
         $this->assertEquals('Return-Path: <chris@swiftmailer.org>', $header->toString());
     }
 }
