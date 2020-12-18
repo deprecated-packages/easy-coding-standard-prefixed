@@ -6,18 +6,18 @@ namespace SlevomatCodingStandard\Sniffs\ControlStructures;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
-use const _PhpScopercf909b66eba8\T_ANON_CLASS;
-use const _PhpScopercf909b66eba8\T_CLOSE_PARENTHESIS;
-use const _PhpScopercf909b66eba8\T_CLOSE_SHORT_ARRAY;
-use const _PhpScopercf909b66eba8\T_CLOSE_SQUARE_BRACKET;
+use const _PhpScoperd8b12759ee0d\T_ANON_CLASS;
+use const _PhpScoperd8b12759ee0d\T_CLOSE_PARENTHESIS;
+use const _PhpScoperd8b12759ee0d\T_CLOSE_SHORT_ARRAY;
+use const _PhpScoperd8b12759ee0d\T_CLOSE_SQUARE_BRACKET;
 use const T_COALESCE;
-use const _PhpScopercf909b66eba8\T_COMMA;
+use const _PhpScoperd8b12759ee0d\T_COMMA;
 use const T_DOUBLE_ARROW;
-use const _PhpScopercf909b66eba8\T_INLINE_ELSE;
-use const _PhpScopercf909b66eba8\T_INLINE_THEN;
+use const _PhpScoperd8b12759ee0d\T_INLINE_ELSE;
+use const _PhpScoperd8b12759ee0d\T_INLINE_THEN;
 use const T_NEW;
-use const _PhpScopercf909b66eba8\T_OPEN_PARENTHESIS;
-use const _PhpScopercf909b66eba8\T_SEMICOLON;
+use const _PhpScoperd8b12759ee0d\T_OPEN_PARENTHESIS;
+use const _PhpScoperd8b12759ee0d\T_SEMICOLON;
 class NewWithParenthesesSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_MISSING_PARENTHESES = 'MissingParentheses';

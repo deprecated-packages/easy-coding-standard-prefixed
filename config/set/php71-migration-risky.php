@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercf909b66eba8;
+namespace _PhpScoperd8b12759ee0d;
 
 use PhpCsFixer\Fixer\Alias\BacktickToShellExecFixer;
 use PhpCsFixer\Fixer\Alias\PowToExponentiationFixer;
@@ -10,8 +10,8 @@ use PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer;
 use PhpCsFixer\Fixer\FunctionNotation\CombineNestedDirnameFixer;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
-use _PhpScopercf909b66eba8\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScopercf909b66eba8\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoperd8b12759ee0d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoperd8b12759ee0d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\FunctionNotation\CombineNestedDirnameFixer::class);
     $services->set(\PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer::class);

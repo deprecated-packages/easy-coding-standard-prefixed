@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercf909b66eba8\Symfony\Component\Cache\Simple;
+namespace _PhpScoperd8b12759ee0d\Symfony\Component\Cache\Simple;
 
-use _PhpScopercf909b66eba8\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
-use _PhpScopercf909b66eba8\Symfony\Component\Cache\Adapter\NullAdapter;
-use _PhpScopercf909b66eba8\Symfony\Contracts\Cache\CacheInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScopercf909b66eba8\Symfony\Component\Cache\Simple\NullCache::class, \_PhpScopercf909b66eba8\Symfony\Component\Cache\Adapter\NullAdapter::class, \_PhpScopercf909b66eba8\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoperd8b12759ee0d\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
+use _PhpScoperd8b12759ee0d\Symfony\Component\Cache\Adapter\NullAdapter;
+use _PhpScoperd8b12759ee0d\Symfony\Contracts\Cache\CacheInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoperd8b12759ee0d\Symfony\Component\Cache\Simple\NullCache::class, \_PhpScoperd8b12759ee0d\Symfony\Component\Cache\Adapter\NullAdapter::class, \_PhpScoperd8b12759ee0d\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use NullAdapter and type-hint for CacheInterface instead.
  */
-class NullCache implements \_PhpScopercf909b66eba8\Psr\SimpleCache\CacheInterface
+class NullCache implements \_PhpScoperd8b12759ee0d\Psr\SimpleCache\CacheInterface
 {
     /**
      * {@inheritdoc}

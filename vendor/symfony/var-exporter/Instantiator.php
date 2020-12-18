@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercf909b66eba8\Symfony\Component\VarExporter;
+namespace _PhpScoperd8b12759ee0d\Symfony\Component\VarExporter;
 
-use _PhpScopercf909b66eba8\Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use _PhpScopercf909b66eba8\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
-use _PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Hydrator;
-use _PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Registry;
+use _PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use _PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use _PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Hydrator;
+use _PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Registry;
 /**
  * A utility class to create objects without calling their constructor.
  *
@@ -57,13 +57,13 @@ final class Instantiator
      */
     public static function instantiate(string $class, array $properties = array(), array $privateProperties = array())
     {
-        $reflector = \_PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \_PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
-        if (\_PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
-            $wrappedInstance = array(clone \_PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class]);
-        } elseif (\_PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class]) {
+        $reflector = \_PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \_PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
+        if (\_PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
+            $wrappedInstance = array(clone \_PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class]);
+        } elseif (\_PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class]) {
             $wrappedInstance = array($reflector->newInstanceWithoutConstructor());
-        } elseif (null === \_PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class]) {
-            throw new \_PhpScopercf909b66eba8\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+        } elseif (null === \_PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class]) {
+            throw new \_PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
         } elseif ($reflector->implementsInterface('Serializable')) {
             $wrappedInstance = array(\unserialize('C:' . \strlen($class) . ':"' . $class . '":0:{}'));
         } else {
@@ -81,7 +81,7 @@ final class Instantiator
                 // deal with array of instances, so we need to wrap values
                 $properties[$name] = array($value);
             }
-            (\_PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Hydrator::$hydrators[$class] ?? \_PhpScopercf909b66eba8\Symfony\Component\VarExporter\Internal\Hydrator::getHydrator($class))($properties, $wrappedInstance);
+            (\_PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Hydrator::$hydrators[$class] ?? \_PhpScoperd8b12759ee0d\Symfony\Component\VarExporter\Internal\Hydrator::getHydrator($class))($properties, $wrappedInstance);
         }
         return $wrappedInstance[0];
     }

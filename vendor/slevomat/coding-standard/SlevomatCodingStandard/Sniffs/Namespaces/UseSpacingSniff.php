@@ -17,7 +17,7 @@ use function count;
 use function in_array;
 use function sprintf;
 use const T_OPEN_TAG;
-use const _PhpScopercf909b66eba8\T_SEMICOLON;
+use const _PhpScoperd8b12759ee0d\T_SEMICOLON;
 use const T_WHITESPACE;
 class UseSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

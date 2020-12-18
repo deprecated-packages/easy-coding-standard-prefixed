@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScopercf909b66eba8\Composer\Semver\Constraint;
+namespace _PhpScoperd8b12759ee0d\Composer\Semver\Constraint;
 
 /**
  * Defines the absence of a constraint.
  */
-class EmptyConstraint implements \_PhpScopercf909b66eba8\Composer\Semver\Constraint\ConstraintInterface
+class EmptyConstraint implements \_PhpScoperd8b12759ee0d\Composer\Semver\Constraint\ConstraintInterface
 {
     /** @var string */
     protected $prettyString;
@@ -22,7 +22,7 @@ class EmptyConstraint implements \_PhpScopercf909b66eba8\Composer\Semver\Constra
      *
      * @return bool
      */
-    public function matches(\_PhpScopercf909b66eba8\Composer\Semver\Constraint\ConstraintInterface $provider)
+    public function matches(\_PhpScoperd8b12759ee0d\Composer\Semver\Constraint\ConstraintInterface $provider)
     {
         return \true;
     }

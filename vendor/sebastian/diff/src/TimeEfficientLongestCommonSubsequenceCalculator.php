@@ -9,13 +9,13 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercf909b66eba8\SebastianBergmann\Diff;
+namespace _PhpScoperd8b12759ee0d\SebastianBergmann\Diff;
 
 use function array_reverse;
 use function count;
 use function max;
 use SplFixedArray;
-final class TimeEfficientLongestCommonSubsequenceCalculator implements \_PhpScopercf909b66eba8\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
+final class TimeEfficientLongestCommonSubsequenceCalculator implements \_PhpScoperd8b12759ee0d\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
 {
     /**
      * {@inheritdoc}
