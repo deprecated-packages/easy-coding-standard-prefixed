@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd8b12759ee0d\Symfony\Component\EventDispatcher;
+namespace _PhpScoper4d3fa30a680b\Symfony\Component\EventDispatcher;
 
 /**
  * A read-only proxy for an event dispatcher.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class ImmutableEventDispatcher implements \_PhpScoperd8b12759ee0d\Symfony\Component\EventDispatcher\EventDispatcherInterface
+class ImmutableEventDispatcher implements \_PhpScoper4d3fa30a680b\Symfony\Component\EventDispatcher\EventDispatcherInterface
 {
     private $dispatcher;
-    public function __construct(\_PhpScoperd8b12759ee0d\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher)
+    public function __construct(\_PhpScoper4d3fa30a680b\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher)
     {
-        $this->dispatcher = \_PhpScoperd8b12759ee0d\Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy::decorate($dispatcher);
+        $this->dispatcher = \_PhpScoper4d3fa30a680b\Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy::decorate($dispatcher);
     }
     /**
      * {@inheritdoc}
@@ -33,7 +33,7 @@ class ImmutableEventDispatcher implements \_PhpScoperd8b12759ee0d\Symfony\Compon
         if (\is_scalar($event)) {
             // deprecated
             $swap = $event;
-            $event = $eventName ?? new \_PhpScoperd8b12759ee0d\Symfony\Component\EventDispatcher\Event();
+            $event = $eventName ?? new \_PhpScoper4d3fa30a680b\Symfony\Component\EventDispatcher\Event();
             $eventName = $swap;
         }
         return $this->dispatcher->dispatch($event, $eventName);
@@ -48,7 +48,7 @@ class ImmutableEventDispatcher implements \_PhpScoperd8b12759ee0d\Symfony\Compon
     /**
      * {@inheritdoc}
      */
-    public function addSubscriber(\_PhpScoperd8b12759ee0d\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function addSubscriber(\_PhpScoper4d3fa30a680b\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
     }
@@ -62,7 +62,7 @@ class ImmutableEventDispatcher implements \_PhpScoperd8b12759ee0d\Symfony\Compon
     /**
      * {@inheritdoc}
      */
-    public function removeSubscriber(\_PhpScoperd8b12759ee0d\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function removeSubscriber(\_PhpScoper4d3fa30a680b\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         throw new \BadMethodCallException('Unmodifiable event dispatchers must not be modified.');
     }

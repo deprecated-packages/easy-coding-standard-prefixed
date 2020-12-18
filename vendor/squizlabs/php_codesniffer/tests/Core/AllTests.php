@@ -11,8 +11,8 @@
 namespace PHP_CodeSniffer\Tests\Core;
 
 use PHP_CodeSniffer\Tests\FileList;
-use _PhpScoperd8b12759ee0d\PHPUnit\TextUI\TestRunner;
-use _PhpScoperd8b12759ee0d\PHPUnit\Framework\TestSuite;
+use _PhpScoper4d3fa30a680b\PHPUnit\TextUI\TestRunner;
+use _PhpScoper4d3fa30a680b\PHPUnit\Framework\TestSuite;
 class AllTests
 {
     /**
@@ -22,7 +22,7 @@ class AllTests
      */
     public static function main()
     {
-        \_PhpScoperd8b12759ee0d\PHPUnit\TextUI\TestRunner::run(self::suite());
+        \_PhpScoper4d3fa30a680b\PHPUnit\TextUI\TestRunner::run(self::suite());
     }
     //end main()
     /**
@@ -32,7 +32,7 @@ class AllTests
      */
     public static function suite()
     {
-        $suite = new \_PhpScoperd8b12759ee0d\PHPUnit\Framework\TestSuite('PHP CodeSniffer Core');
+        $suite = new \_PhpScoper4d3fa30a680b\PHPUnit\Framework\TestSuite('PHP CodeSniffer Core');
         $testFileIterator = new \PHP_CodeSniffer\Tests\FileList(__DIR__, '', '`Test\\.php$`Di');
         foreach ($testFileIterator->fileIterator as $file) {
             if (\strpos($file, 'AbstractMethodUnitTest.php') !== \false) {

@@ -13,7 +13,7 @@ use function is_array;
 use function preg_match;
 use function preg_replace;
 use function sprintf;
-use const _PhpScoperd8b12759ee0d\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoper4d3fa30a680b\T_DOC_COMMENT_OPEN_TAG;
 class ForbiddenCommentsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_COMMENT_FORBIDDEN = 'CommentForbidden';
