@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Contract;
 
-use _PhpScoper8751341571b5\PhpParser\Node\Stmt\Expression;
+use _PhpScoper065e4ba46e6d\PhpParser\Node\Stmt\Expression;
 interface CaseConverterInterface
 {
     public function match(string $rootKey, $key, $values) : bool;
-    public function convertToMethodCall($key, $values) : \_PhpScoper8751341571b5\PhpParser\Node\Stmt\Expression;
+    public function convertToMethodCall($key, $values) : \_PhpScoper065e4ba46e6d\PhpParser\Node\Stmt\Expression;
 }

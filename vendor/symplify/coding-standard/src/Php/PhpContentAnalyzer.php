@@ -82,7 +82,7 @@ final class PhpContentAnalyzer
                     if ($nextToken === [] || !\is_array($nextToken)) {
                         return \false;
                     }
-                    if ($nextToken[0][0] === \T_STRING) {
+                    if ($nextToken[0] === \T_STRING) {
                         return \false;
                     }
                 }
