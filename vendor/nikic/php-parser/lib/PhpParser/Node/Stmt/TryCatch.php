@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4d3fa30a680b\PhpParser\Node\Stmt;
+namespace _PhpScoper13160cf3462c\PhpParser\Node\Stmt;
 
-use _PhpScoper4d3fa30a680b\PhpParser\Node;
-class TryCatch extends \_PhpScoper4d3fa30a680b\PhpParser\Node\Stmt
+use _PhpScoper13160cf3462c\PhpParser\Node;
+class TryCatch extends \_PhpScoper13160cf3462c\PhpParser\Node\Stmt
 {
     /** @var Node\Stmt[] Statements */
     public $stmts;
@@ -20,7 +20,7 @@ class TryCatch extends \_PhpScoper4d3fa30a680b\PhpParser\Node\Stmt
      * @param null|Finally_ $finally    Optional finally node
      * @param array         $attributes Additional attributes
      */
-    public function __construct(array $stmts, array $catches, \_PhpScoper4d3fa30a680b\PhpParser\Node\Stmt\Finally_ $finally = null, array $attributes = [])
+    public function __construct(array $stmts, array $catches, \_PhpScoper13160cf3462c\PhpParser\Node\Stmt\Finally_ $finally = null, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->stmts = $stmts;

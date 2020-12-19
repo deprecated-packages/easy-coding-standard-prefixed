@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4d3fa30a680b\PhpParser\Node;
+namespace _PhpScoper13160cf3462c\PhpParser\Node;
 
-use _PhpScoper4d3fa30a680b\PhpParser\NodeAbstract;
-class NullableType extends \_PhpScoper4d3fa30a680b\PhpParser\NodeAbstract
+use _PhpScoper13160cf3462c\PhpParser\NodeAbstract;
+class NullableType extends \_PhpScoper13160cf3462c\PhpParser\NodeAbstract
 {
     /** @var Identifier|Name Type */
     public $type;
@@ -17,7 +17,7 @@ class NullableType extends \_PhpScoper4d3fa30a680b\PhpParser\NodeAbstract
     public function __construct($type, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->type = \is_string($type) ? new \_PhpScoper4d3fa30a680b\PhpParser\Node\Identifier($type) : $type;
+        $this->type = \is_string($type) ? new \_PhpScoper13160cf3462c\PhpParser\Node\Identifier($type) : $type;
     }
     public function getSubNodeNames() : array
     {

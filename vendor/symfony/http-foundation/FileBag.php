@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4d3fa30a680b\Symfony\Component\HttpFoundation;
+namespace _PhpScoper13160cf3462c\Symfony\Component\HttpFoundation;
 
-use _PhpScoper4d3fa30a680b\Symfony\Component\HttpFoundation\File\UploadedFile;
+use _PhpScoper13160cf3462c\Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * FileBag is a container for uploaded files.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
  */
-class FileBag extends \_PhpScoper4d3fa30a680b\Symfony\Component\HttpFoundation\ParameterBag
+class FileBag extends \_PhpScoper13160cf3462c\Symfony\Component\HttpFoundation\ParameterBag
 {
     private static $fileKeys = ['error', 'name', 'size', 'tmp_name', 'type'];
     /**
@@ -40,7 +40,7 @@ class FileBag extends \_PhpScoper4d3fa30a680b\Symfony\Component\HttpFoundation\P
      */
     public function set($key, $value)
     {
-        if (!\is_array($value) && !$value instanceof \_PhpScoper4d3fa30a680b\Symfony\Component\HttpFoundation\File\UploadedFile) {
+        if (!\is_array($value) && !$value instanceof \_PhpScoper13160cf3462c\Symfony\Component\HttpFoundation\File\UploadedFile) {
             throw new \InvalidArgumentException('An uploaded file must be an array or an instance of UploadedFile.');
         }
         parent::set($key, $this->convertFileInformation($value));
@@ -63,7 +63,7 @@ class FileBag extends \_PhpScoper4d3fa30a680b\Symfony\Component\HttpFoundation\P
      */
     protected function convertFileInformation($file)
     {
-        if ($file instanceof \_PhpScoper4d3fa30a680b\Symfony\Component\HttpFoundation\File\UploadedFile) {
+        if ($file instanceof \_PhpScoper13160cf3462c\Symfony\Component\HttpFoundation\File\UploadedFile) {
             return $file;
         }
         if (\is_array($file)) {
@@ -74,7 +74,7 @@ class FileBag extends \_PhpScoper4d3fa30a680b\Symfony\Component\HttpFoundation\P
                 if (\UPLOAD_ERR_NO_FILE == $file['error']) {
                     $file = null;
                 } else {
-                    $file = new \_PhpScoper4d3fa30a680b\Symfony\Component\HttpFoundation\File\UploadedFile($file['tmp_name'], $file['name'], $file['type'], $file['error'], \false);
+                    $file = new \_PhpScoper13160cf3462c\Symfony\Component\HttpFoundation\File\UploadedFile($file['tmp_name'], $file['name'], $file['type'], $file['error'], \false);
                 }
             } else {
                 $file = \array_map([$this, 'convertFileInformation'], $file);

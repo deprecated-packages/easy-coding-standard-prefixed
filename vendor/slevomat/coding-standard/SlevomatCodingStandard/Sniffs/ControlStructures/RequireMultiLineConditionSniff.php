@@ -13,8 +13,8 @@ use function count;
 use function in_array;
 use function sprintf;
 use function strlen;
-use const _PhpScoper4d3fa30a680b\T_CLOSE_PARENTHESIS;
-use const _PhpScoper4d3fa30a680b\T_OPEN_PARENTHESIS;
+use const _PhpScoper13160cf3462c\T_CLOSE_PARENTHESIS;
+use const _PhpScoper13160cf3462c\T_OPEN_PARENTHESIS;
 class RequireMultiLineConditionSniff extends \SlevomatCodingStandard\Sniffs\ControlStructures\AbstractLineCondition
 {
     public const CODE_REQUIRED_MULTI_LINE_CONDITION = 'RequiredMultiLineCondition';
