@@ -1,23 +1,23 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperd1a5bf00e83e;
+namespace _PhpScoper9f8d5dcff860;
 
-use _PhpScoperd1a5bf00e83e\SebastianBergmann\Diff\Differ;
-use _PhpScoperd1a5bf00e83e\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
-use _PhpScoperd1a5bf00e83e\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper9f8d5dcff860\SebastianBergmann\Diff\Differ;
+use _PhpScoper9f8d5dcff860\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use _PhpScoper9f8d5dcff860\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\MarkdownDiff\Diff\Output\CompleteUnifiedDiffOutputBuilderFactory;
 use Symplify\MarkdownDiff\Differ\MarkdownDiffer;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
-use function _PhpScoperd1a5bf00e83e\Symfony\Component\DependencyInjection\Loader\Configurator\service;
-return static function (\_PhpScoperd1a5bf00e83e\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use function _PhpScoper9f8d5dcff860\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+return static function (\_PhpScoper9f8d5dcff860\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
     $services->load('Symplify\\MarkdownDiff\\', __DIR__ . '/../src');
-    $services->set(\_PhpScoperd1a5bf00e83e\SebastianBergmann\Diff\Differ::class);
+    $services->set(\_PhpScoper9f8d5dcff860\SebastianBergmann\Diff\Differ::class);
     // markdown
-    $services->set('markdownDiffOutputBuilder', \_PhpScoperd1a5bf00e83e\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder::class)->factory([\_PhpScoperd1a5bf00e83e\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\MarkdownDiff\Diff\Output\CompleteUnifiedDiffOutputBuilderFactory::class), 'create']);
-    $services->set('markdownDiffer', \_PhpScoperd1a5bf00e83e\SebastianBergmann\Diff\Differ::class)->arg('$outputBuilder', \_PhpScoperd1a5bf00e83e\Symfony\Component\DependencyInjection\Loader\Configurator\service('markdownDiffOutputBuilder'));
-    $services->set(\Symplify\MarkdownDiff\Differ\MarkdownDiffer::class)->arg('$markdownDiffer', \_PhpScoperd1a5bf00e83e\Symfony\Component\DependencyInjection\Loader\Configurator\service('markdownDiffer'));
+    $services->set('markdownDiffOutputBuilder', \_PhpScoper9f8d5dcff860\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder::class)->factory([\_PhpScoper9f8d5dcff860\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\MarkdownDiff\Diff\Output\CompleteUnifiedDiffOutputBuilderFactory::class), 'create']);
+    $services->set('markdownDiffer', \_PhpScoper9f8d5dcff860\SebastianBergmann\Diff\Differ::class)->arg('$outputBuilder', \_PhpScoper9f8d5dcff860\Symfony\Component\DependencyInjection\Loader\Configurator\service('markdownDiffOutputBuilder'));
+    $services->set(\Symplify\MarkdownDiff\Differ\MarkdownDiffer::class)->arg('$markdownDiffer', \_PhpScoper9f8d5dcff860\Symfony\Component\DependencyInjection\Loader\Configurator\service('markdownDiffer'));
     $services->set(\Symplify\PackageBuilder\Reflection\PrivatesAccessor::class);
 };

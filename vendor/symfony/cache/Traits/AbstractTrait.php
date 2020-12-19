@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Traits;
+namespace _PhpScoper9f8d5dcff860\Symfony\Component\Cache\Traits;
 
-use _PhpScoperd1a5bf00e83e\Psr\Log\LoggerAwareTrait;
-use _PhpScoperd1a5bf00e83e\Symfony\Component\Cache\CacheItem;
+use _PhpScoper9f8d5dcff860\Psr\Log\LoggerAwareTrait;
+use _PhpScoper9f8d5dcff860\Symfony\Component\Cache\CacheItem;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -84,7 +84,7 @@ trait AbstractTrait
         try {
             return $this->doHave($id);
         } catch (\Exception $e) {
-            \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to check if key "{key}" is cached: ' . $e->getMessage(), ['key' => $key, 'exception' => $e]);
+            \_PhpScoper9f8d5dcff860\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to check if key "{key}" is cached: ' . $e->getMessage(), ['key' => $key, 'exception' => $e]);
             return \false;
         }
     }
@@ -114,7 +114,7 @@ trait AbstractTrait
         try {
             return $this->doClear($this->namespace . $prefix) || $cleared;
         } catch (\Exception $e) {
-            \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to clear the cache: ' . $e->getMessage(), ['exception' => $e]);
+            \_PhpScoper9f8d5dcff860\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to clear the cache: ' . $e->getMessage(), ['exception' => $e]);
             return \false;
         }
     }
@@ -156,7 +156,7 @@ trait AbstractTrait
             } catch (\Exception $e) {
             }
             $message = 'Failed to delete key "{key}"' . ($e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-            \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e]);
+            \_PhpScoper9f8d5dcff860\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e]);
             $ok = \false;
         }
         return $ok;
@@ -240,7 +240,7 @@ trait AbstractTrait
         if (\is_string($key) && isset($this->ids[$key])) {
             return $this->namespace . $this->namespaceVersion . $this->ids[$key];
         }
-        \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\CacheItem::validateKey($key);
+        \_PhpScoper9f8d5dcff860\Symfony\Component\Cache\CacheItem::validateKey($key);
         $this->ids[$key] = $key;
         if (null === $this->maxIdLength) {
             return $this->namespace . $this->namespaceVersion . $key;

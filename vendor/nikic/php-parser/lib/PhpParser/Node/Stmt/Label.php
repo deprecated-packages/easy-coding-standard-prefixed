@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperd1a5bf00e83e\PhpParser\Node\Stmt;
+namespace _PhpScoper9f8d5dcff860\PhpParser\Node\Stmt;
 
-use _PhpScoperd1a5bf00e83e\PhpParser\Node\Identifier;
-use _PhpScoperd1a5bf00e83e\PhpParser\Node\Stmt;
-class Label extends \_PhpScoperd1a5bf00e83e\PhpParser\Node\Stmt
+use _PhpScoper9f8d5dcff860\PhpParser\Node\Identifier;
+use _PhpScoper9f8d5dcff860\PhpParser\Node\Stmt;
+class Label extends \_PhpScoper9f8d5dcff860\PhpParser\Node\Stmt
 {
     /** @var Identifier Name */
     public $name;
@@ -18,7 +18,7 @@ class Label extends \_PhpScoperd1a5bf00e83e\PhpParser\Node\Stmt
     public function __construct($name, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \_PhpScoperd1a5bf00e83e\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScoper9f8d5dcff860\PhpParser\Node\Identifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {

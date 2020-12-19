@@ -9,11 +9,11 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use SlevomatCodingStandard\Helpers\VariableHelper;
 use function in_array;
 use function sprintf;
-use const _PhpScoperd1a5bf00e83e\T_BITWISE_AND;
-use const _PhpScoperd1a5bf00e83e\T_CLOSE_PARENTHESIS;
-use const _PhpScoperd1a5bf00e83e\T_CLOSURE;
-use const _PhpScoperd1a5bf00e83e\T_COMMA;
-use const _PhpScoperd1a5bf00e83e\T_OPEN_PARENTHESIS;
+use const _PhpScoper9f8d5dcff860\T_BITWISE_AND;
+use const _PhpScoper9f8d5dcff860\T_CLOSE_PARENTHESIS;
+use const _PhpScoper9f8d5dcff860\T_CLOSURE;
+use const _PhpScoper9f8d5dcff860\T_COMMA;
+use const _PhpScoper9f8d5dcff860\T_OPEN_PARENTHESIS;
 use const T_USE;
 use const T_VARIABLE;
 class UnusedInheritedVariablePassedToClosureSniff implements \PHP_CodeSniffer\Sniffs\Sniff

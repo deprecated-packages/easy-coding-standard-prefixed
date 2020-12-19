@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd1a5bf00e83e\Symfony\Component\Mime\Part\Multipart;
+namespace _PhpScoper9f8d5dcff860\Symfony\Component\Mime\Part\Multipart;
 
-use _PhpScoperd1a5bf00e83e\Symfony\Component\Mime\Part\AbstractMultipartPart;
+use _PhpScoper9f8d5dcff860\Symfony\Component\Mime\Part\AbstractMultipartPart;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @experimental in 4.3
  */
-final class MixedPart extends \_PhpScoperd1a5bf00e83e\Symfony\Component\Mime\Part\AbstractMultipartPart
+final class MixedPart extends \_PhpScoper9f8d5dcff860\Symfony\Component\Mime\Part\AbstractMultipartPart
 {
     public function getMediaSubtype() : string
     {

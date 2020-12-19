@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperd1a5bf00e83e\PHPStan\PhpDocParser\Ast\ConstExpr;
+namespace _PhpScoper9f8d5dcff860\PHPStan\PhpDocParser\Ast\ConstExpr;
 
-class ConstExprArrayItemNode implements \_PhpScoperd1a5bf00e83e\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
+class ConstExprArrayItemNode implements \_PhpScoper9f8d5dcff860\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode
 {
     /** @var ConstExprNode|null */
     public $key;
     /** @var ConstExprNode */
     public $value;
-    public function __construct(?\_PhpScoperd1a5bf00e83e\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $key, \_PhpScoperd1a5bf00e83e\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $value)
+    public function __construct(?\_PhpScoper9f8d5dcff860\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $key, \_PhpScoper9f8d5dcff860\PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNode $value)
     {
         $this->key = $key;
         $this->value = $value;

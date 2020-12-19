@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\MarkdownDiff\Differ;
 
-use _PhpScoperd1a5bf00e83e\Nette\Utils\Strings;
-use _PhpScoperd1a5bf00e83e\SebastianBergmann\Diff\Differ;
+use _PhpScoper9f8d5dcff860\Nette\Utils\Strings;
+use _PhpScoper9f8d5dcff860\SebastianBergmann\Diff\Differ;
 /**
  * @see \Symplify\MarkdownDiff\Tests\Differ\MarkdownDifferTest
  */
@@ -24,7 +24,7 @@ final class MarkdownDiffer
      * @var Differ
      */
     private $markdownDiffer;
-    public function __construct(\_PhpScoperd1a5bf00e83e\SebastianBergmann\Diff\Differ $markdownDiffer)
+    public function __construct(\_PhpScoper9f8d5dcff860\SebastianBergmann\Diff\Differ $markdownDiffer)
     {
         $this->markdownDiffer = $markdownDiffer;
     }
@@ -43,7 +43,7 @@ final class MarkdownDiffer
      */
     private function removeTrailingWhitespaces(string $diff) : string
     {
-        $diff = \_PhpScoperd1a5bf00e83e\Nette\Utils\Strings::replace($diff, self::SPACE_AND_NEWLINE_REGEX, \PHP_EOL);
+        $diff = \_PhpScoper9f8d5dcff860\Nette\Utils\Strings::replace($diff, self::SPACE_AND_NEWLINE_REGEX, \PHP_EOL);
         return \rtrim($diff);
     }
     private function warpToDiffCode(string $content) : string
@@ -52,6 +52,6 @@ final class MarkdownDiffer
     }
     private function clearUnifiedDiffOutputFirstLine(string $diff) : string
     {
-        return \_PhpScoperd1a5bf00e83e\Nette\Utils\Strings::replace($diff, self::METADATA_REGEX, '');
+        return \_PhpScoper9f8d5dcff860\Nette\Utils\Strings::replace($diff, self::METADATA_REGEX, '');
     }
 }

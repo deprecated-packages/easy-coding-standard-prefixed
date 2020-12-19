@@ -15,10 +15,10 @@ use PhpCsFixer\Console\SelfUpdate\NewVersionCheckerInterface;
 use PhpCsFixer\PharCheckerInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\ToolInfoInterface;
-use _PhpScoperd1a5bf00e83e\Symfony\Component\Console\Command\Command;
-use _PhpScoperd1a5bf00e83e\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperd1a5bf00e83e\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperd1a5bf00e83e\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper9f8d5dcff860\Symfony\Component\Console\Command\Command;
+use _PhpScoper9f8d5dcff860\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper9f8d5dcff860\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper9f8d5dcff860\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Igor Wiedler <igor@wiedler.ch>
  * @author Stephane PY <py.stephane1@gmail.com>
@@ -28,7 +28,7 @@ use _PhpScoperd1a5bf00e83e\Symfony\Component\Console\Output\OutputInterface;
  *
  * @internal
  */
-final class SelfUpdateCommand extends \_PhpScoperd1a5bf00e83e\Symfony\Component\Console\Command\Command
+final class SelfUpdateCommand extends \_PhpScoper9f8d5dcff860\Symfony\Component\Console\Command\Command
 {
     protected static $defaultName = 'self-update';
     /**
@@ -55,7 +55,7 @@ final class SelfUpdateCommand extends \_PhpScoperd1a5bf00e83e\Symfony\Component\
      */
     protected function configure()
     {
-        $this->setAliases(['selfupdate'])->setDefinition([new \_PhpScoperd1a5bf00e83e\Symfony\Component\Console\Input\InputOption('--force', '-f', \_PhpScoperd1a5bf00e83e\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Force update to next major version if available.')])->setDescription('Update php-cs-fixer.phar to the latest stable version.')->setHelp(<<<'EOT'
+        $this->setAliases(['selfupdate'])->setDefinition([new \_PhpScoper9f8d5dcff860\Symfony\Component\Console\Input\InputOption('--force', '-f', \_PhpScoper9f8d5dcff860\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Force update to next major version if available.')])->setDescription('Update php-cs-fixer.phar to the latest stable version.')->setHelp(<<<'EOT'
 The <info>%command.name%</info> command replace your php-cs-fixer.phar by the
 latest version released on:
 <comment>https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases</comment>
@@ -68,7 +68,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(\_PhpScoperd1a5bf00e83e\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperd1a5bf00e83e\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function execute(\_PhpScoper9f8d5dcff860\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper9f8d5dcff860\Symfony\Component\Console\Output\OutputInterface $output)
     {
         if (!$this->toolInfo->isInstalledAsPhar()) {
             $output->writeln('<error>Self-update is available only for PHAR version.</error>');

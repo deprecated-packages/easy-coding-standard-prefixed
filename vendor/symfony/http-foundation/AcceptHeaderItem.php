@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd1a5bf00e83e\Symfony\Component\HttpFoundation;
+namespace _PhpScoper9f8d5dcff860\Symfony\Component\HttpFoundation;
 
 /**
  * Represents an Accept-* header item.
@@ -37,9 +37,9 @@ class AcceptHeaderItem
      */
     public static function fromString($itemValue)
     {
-        $parts = \_PhpScoperd1a5bf00e83e\Symfony\Component\HttpFoundation\HeaderUtils::split($itemValue, ';=');
+        $parts = \_PhpScoper9f8d5dcff860\Symfony\Component\HttpFoundation\HeaderUtils::split($itemValue, ';=');
         $part = \array_shift($parts);
-        $attributes = \_PhpScoperd1a5bf00e83e\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
+        $attributes = \_PhpScoper9f8d5dcff860\Symfony\Component\HttpFoundation\HeaderUtils::combine($parts);
         return new self($part[0], $attributes);
     }
     /**
@@ -51,7 +51,7 @@ class AcceptHeaderItem
     {
         $string = $this->value . ($this->quality < 1 ? ';q=' . $this->quality : '');
         if (\count($this->attributes) > 0) {
-            $string .= '; ' . \_PhpScoperd1a5bf00e83e\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->attributes, ';');
+            $string .= '; ' . \_PhpScoper9f8d5dcff860\Symfony\Component\HttpFoundation\HeaderUtils::toString($this->attributes, ';');
         }
         return $string;
     }
