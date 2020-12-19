@@ -15,7 +15,7 @@ use PhpCsFixer\Cache\CacheManagerInterface;
 use PhpCsFixer\Event\Event;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScoper8b97b0dd6f5b\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper8751341571b5\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -35,7 +35,7 @@ final class FileFilterIterator extends \FilterIterator
      * @var array<string,bool>
      */
     private $visitedElements = [];
-    public function __construct(\Traversable $iterator, \_PhpScoper8b97b0dd6f5b\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager)
+    public function __construct(\Traversable $iterator, \_PhpScoper8751341571b5\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager)
     {
         if (!$iterator instanceof \Iterator) {
             $iterator = new \IteratorIterator($iterator);
@@ -75,7 +75,7 @@ final class FileFilterIterator extends \FilterIterator
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoper8b97b0dd6f5b\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScoper8751341571b5\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

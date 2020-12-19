@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8b97b0dd6f5b\Symfony\Component\Config\Exception;
+namespace _PhpScoper8751341571b5\Symfony\Component\Config\Exception;
 
 /**
  * File locator exception if a file does not exist.

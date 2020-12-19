@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper8b97b0dd6f5b\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoper8751341571b5\PHPStan\PhpDocParser\Ast\Type;
 
-class UnionTypeNode implements \_PhpScoper8b97b0dd6f5b\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class UnionTypeNode implements \_PhpScoper8751341571b5\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     /** @var TypeNode[] */
     public $types;
