@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper9f8d5dcff860\PhpParser;
+namespace _PhpScoper8b97b0dd6f5b\PhpParser;
 
 interface Node
 {
@@ -96,7 +96,7 @@ interface Node
      *
      * @param Comment\Doc $docComment Doc comment to set
      */
-    public function setDocComment(\_PhpScoper9f8d5dcff860\PhpParser\Comment\Doc $docComment);
+    public function setDocComment(\_PhpScoper8b97b0dd6f5b\PhpParser\Comment\Doc $docComment);
     /**
      * Sets an attribute on a node.
      *
