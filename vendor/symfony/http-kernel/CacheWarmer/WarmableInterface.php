@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper269dc521b0fa\Symfony\Component\HttpKernel\CacheWarmer;
+namespace _PhpScoper59da9ac954a6\Symfony\Component\HttpKernel\CacheWarmer;
 
 /**
  * Interface for classes that support warming their cache.

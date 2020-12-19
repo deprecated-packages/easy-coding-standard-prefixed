@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console\Command;
 
-use _PhpScoper269dc521b0fa\Symfony\Component\Console\Command\Command;
-use _PhpScoper269dc521b0fa\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper269dc521b0fa\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper59da9ac954a6\Symfony\Component\Console\Command\Command;
+use _PhpScoper59da9ac954a6\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper59da9ac954a6\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\ValueObject\Option;
 use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileSystem;
-abstract class AbstractSymplifyCommand extends \_PhpScoper269dc521b0fa\Symfony\Component\Console\Command\Command
+abstract class AbstractSymplifyCommand extends \_PhpScoper59da9ac954a6\Symfony\Component\Console\Command\Command
 {
     /**
      * @var SymfonyStyle
@@ -31,12 +31,12 @@ abstract class AbstractSymplifyCommand extends \_PhpScoper269dc521b0fa\Symfony\C
     public function __construct()
     {
         parent::__construct();
-        $this->addOption(\Symplify\PackageBuilder\ValueObject\Option::CONFIG, 'c', \_PhpScoper269dc521b0fa\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Path to config file');
+        $this->addOption(\Symplify\PackageBuilder\ValueObject\Option::CONFIG, 'c', \_PhpScoper59da9ac954a6\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Path to config file');
     }
     /**
      * @required
      */
-    public function autowireAbstractSymplifyCommand(\_PhpScoper269dc521b0fa\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \Symplify\SmartFileSystem\Finder\SmartFinder $smartFinder, \Symplify\SmartFileSystem\FileSystemGuard $fileSystemGuard) : void
+    public function autowireAbstractSymplifyCommand(\_PhpScoper59da9ac954a6\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \Symplify\SmartFileSystem\Finder\SmartFinder $smartFinder, \Symplify\SmartFileSystem\FileSystemGuard $fileSystemGuard) : void
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;

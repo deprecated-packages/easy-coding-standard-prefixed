@@ -3,7 +3,6 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\RuleCodeSamplePrinter;
 
-use Symplify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\Contract\RuleCodeSamplePrinterInterface;
 use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter;
@@ -23,19 +22,19 @@ final class RectorRuleCodeSamplePrinter implements \Symplify\RuleDocGenerator\Co
      */
     private $markdownCodeWrapper;
     /**
-     * @var SmartPhpConfigPrinter
+     * @var ConfiguredCodeSamplerPrinter
      */
-    private $smartPhpConfigPrinter;
-    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter $diffCodeSamplePrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \Symplify\PhpConfigPrinter\Printer\SmartPhpConfigPrinter $smartPhpConfigPrinter)
+    private $configuredCodeSamplerPrinter;
+    public function __construct(\Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\DiffCodeSamplePrinter $diffCodeSamplePrinter, \Symplify\RuleDocGenerator\Printer\MarkdownCodeWrapper $markdownCodeWrapper, \Symplify\RuleDocGenerator\RuleCodeSamplePrinter\ConfiguredCodeSamplerPrinter $configuredCodeSamplerPrinter)
     {
         $this->diffCodeSamplePrinter = $diffCodeSamplePrinter;
         $this->markdownCodeWrapper = $markdownCodeWrapper;
-        $this->smartPhpConfigPrinter = $smartPhpConfigPrinter;
+        $this->configuredCodeSamplerPrinter = $configuredCodeSamplerPrinter;
     }
     public function isMatch(string $class) : bool
     {
         /** @noRector */
-        return \is_a($class, '_PhpScoper269dc521b0fa\\Rector\\Core\\Contract\\Rector\\RectorInterface', \true);
+        return \is_a($class, '_PhpScoper59da9ac954a6\\Rector\\Core\\Contract\\Rector\\RectorInterface', \true);
     }
     /**
      * @return string[]
@@ -49,21 +48,9 @@ final class RectorRuleCodeSamplePrinter implements \Symplify\RuleDocGenerator\Co
             return $this->printComposerJsonAwareCodeSample($codeSample);
         }
         if ($codeSample instanceof \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample) {
-            return $this->printConfiguredCodeSample($ruleDefinition, $codeSample);
+            return $this->configuredCodeSamplerPrinter->printConfiguredCodeSample($ruleDefinition, $codeSample);
         }
         return $this->diffCodeSamplePrinter->print($codeSample);
-    }
-    /**
-     * @return string[]
-     */
-    private function printConfiguredCodeSample(\Symplify\RuleDocGenerator\ValueObject\RuleDefinition $ruleDefinition, \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample $configuredCodeSample) : array
-    {
-        $lines = [];
-        $configPhpCode = $this->smartPhpConfigPrinter->printConfiguredServices([$ruleDefinition->getRuleClass() => $configuredCodeSample->getConfiguration()]);
-        $lines[] = $this->markdownCodeWrapper->printPhpCode($configPhpCode);
-        $lines[] = '↓';
-        $newLines = $this->diffCodeSamplePrinter->print($configuredCodeSample);
-        return \array_merge($lines, $newLines);
     }
     /**
      * @return string[]

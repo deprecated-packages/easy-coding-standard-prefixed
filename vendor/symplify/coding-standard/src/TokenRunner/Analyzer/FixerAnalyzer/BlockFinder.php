@@ -25,11 +25,14 @@ final class BlockFinder
      */
     public function findInTokensByEdge(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : ?\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
     {
-        /** @var Token $token */
         $token = $tokens[$position];
+        if (!$token instanceof \PhpCsFixer\Tokenizer\Token) {
+            return null;
+        }
         // shift "array" to "(", event its position
         if ($token->isGivenKind(\T_ARRAY)) {
             $position = $tokens->getNextMeaningfulToken($position);
+            /** @var Token $token */
             $token = $tokens[$position];
         }
         if ($token->isGivenKind([\T_FUNCTION, \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA, \T_NEW])) {
@@ -45,8 +48,37 @@ final class BlockFinder
         if ($position === null) {
             return null;
         }
-        /** @var Token $token */
         $blockType = $this->getBlockTypeByToken($token);
+        return $this->createBlockInfo($token, $position, $tokens, $blockType);
+    }
+    public function findInTokensByPositionAndContent(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position, string $content) : ?\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
+    {
+        $blockStart = $tokens->getNextTokenOfKind($position, [$content]);
+        if ($blockStart === null) {
+            return null;
+        }
+        $blockType = $this->getBlockTypeByContent($content);
+        return new \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo($blockStart, $tokens->findBlockEnd($blockType, $blockStart));
+    }
+    public function getBlockTypeByContent(string $content) : int
+    {
+        if (isset(self::CONTENT_TO_BLOCK_TYPE[$content])) {
+            return self::CONTENT_TO_BLOCK_TYPE[$content];
+        }
+        throw new \Symplify\CodingStandard\TokenRunner\Exception\MissingImplementationException(\sprintf('Implementation is missing for "%s" in "%s". Just add it to "%s" property with proper block type', $content, __METHOD__, '$contentToBlockType'));
+    }
+    private function getBlockTypeByToken(\PhpCsFixer\Tokenizer\Token $token) : int
+    {
+        if ($token->isArray()) {
+            if (\in_array($token->getContent(), ['[', ']'], \true)) {
+                return \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE;
+            }
+            return \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE;
+        }
+        return $this->getBlockTypeByContent($token->getContent());
+    }
+    private function createBlockInfo(\PhpCsFixer\Tokenizer\Token $token, int $position, \PhpCsFixer\Tokenizer\Tokens $tokens, int $blockType) : ?\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
+    {
         try {
             if (\in_array($token->getContent(), self::START_EDGES, \true)) {
                 $blockStart = $position;
@@ -60,31 +92,5 @@ final class BlockFinder
             return null;
         }
         return new \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo($blockStart, $blockEnd);
-    }
-    public function findInTokensByPositionAndContent(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position, string $content) : ?\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
-    {
-        $blockStart = $tokens->getNextTokenOfKind($position, [$content]);
-        if ($blockStart === null) {
-            return null;
-        }
-        $blockType = $this->getBlockTypeByContent($content);
-        return new \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo($blockStart, $tokens->findBlockEnd($blockType, $blockStart));
-    }
-    private function getBlockTypeByToken(\PhpCsFixer\Tokenizer\Token $token) : int
-    {
-        if ($token->isArray()) {
-            if (\in_array($token->getContent(), ['[', ']'], \true)) {
-                return \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE;
-            }
-            return \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE;
-        }
-        return $this->getBlockTypeByContent($token->getContent());
-    }
-    private function getBlockTypeByContent(string $content) : int
-    {
-        if (isset(self::CONTENT_TO_BLOCK_TYPE[$content])) {
-            return self::CONTENT_TO_BLOCK_TYPE[$content];
-        }
-        throw new \Symplify\CodingStandard\TokenRunner\Exception\MissingImplementationException(\sprintf('Implementation is missing for "%s" in "%s". Just add it to "%s" property with proper block type', $content, __METHOD__, '$contentToBlockType'));
     }
 }
