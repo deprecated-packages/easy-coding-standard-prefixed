@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfb2c402b972b\PhpParser\Node\Expr;
+namespace _PhpScopera8f555a7493c\PhpParser\Node\Expr;
 
-use _PhpScoperfb2c402b972b\PhpParser\Node;
-use _PhpScoperfb2c402b972b\PhpParser\Node\Expr;
-class FuncCall extends \_PhpScoperfb2c402b972b\PhpParser\Node\Expr
+use _PhpScopera8f555a7493c\PhpParser\Node;
+use _PhpScopera8f555a7493c\PhpParser\Node\Expr;
+class FuncCall extends \_PhpScopera8f555a7493c\PhpParser\Node\Expr
 {
     /** @var Node\Name|Expr Function name */
     public $name;

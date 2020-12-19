@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScopera8f555a7493c\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera8f555a7493c\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class InlineServiceConfigurator extends \_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class InlineServiceConfigurator extends \_PhpScopera8f555a7493c\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     const FACTORY = 'service';
     use Traits\ArgumentTrait;
@@ -31,7 +31,7 @@ class InlineServiceConfigurator extends \_PhpScoperfb2c402b972b\Symfony\Componen
     private $id = '[inline]';
     private $allowParent = \true;
     private $path = null;
-    public function __construct(\_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Definition $definition)
+    public function __construct(\_PhpScopera8f555a7493c\Symfony\Component\DependencyInjection\Definition $definition)
     {
         $this->definition = $definition;
     }

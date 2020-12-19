@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfb2c402b972b\PhpParser\Node\Expr;
+namespace _PhpScopera8f555a7493c\PhpParser\Node\Expr;
 
-use _PhpScoperfb2c402b972b\PhpParser\Node\Expr;
-use _PhpScoperfb2c402b972b\PhpParser\Node\Identifier;
-class PropertyFetch extends \_PhpScoperfb2c402b972b\PhpParser\Node\Expr
+use _PhpScopera8f555a7493c\PhpParser\Node\Expr;
+use _PhpScopera8f555a7493c\PhpParser\Node\Identifier;
+class PropertyFetch extends \_PhpScopera8f555a7493c\PhpParser\Node\Expr
 {
     /** @var Expr Variable holding object */
     public $var;
@@ -18,11 +18,11 @@ class PropertyFetch extends \_PhpScoperfb2c402b972b\PhpParser\Node\Expr
      * @param string|Identifier|Expr $name       Property name
      * @param array                  $attributes Additional attributes
      */
-    public function __construct(\_PhpScoperfb2c402b972b\PhpParser\Node\Expr $var, $name, array $attributes = [])
+    public function __construct(\_PhpScopera8f555a7493c\PhpParser\Node\Expr $var, $name, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;
-        $this->name = \is_string($name) ? new \_PhpScoperfb2c402b972b\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScopera8f555a7493c\PhpParser\Node\Identifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {

@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoperfb2c402b972b\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperfb2c402b972b\PhpParser\Node\Expr\Variable;
-use _PhpScoperfb2c402b972b\PhpParser\Node\Stmt\Expression;
+use _PhpScopera8f555a7493c\PhpParser\Node\Expr\MethodCall;
+use _PhpScopera8f555a7493c\PhpParser\Node\Expr\Variable;
+use _PhpScopera8f555a7493c\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\Service\ServiceOptionNodeFactory;
@@ -34,13 +34,13 @@ final class ClassServiceCaseConverter implements \Symplify\PhpConfigPrinter\Cont
         $this->argsNodeFactory = $argsNodeFactory;
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoperfb2c402b972b\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScopera8f555a7493c\PhpParser\Node\Stmt\Expression
     {
         $args = $this->argsNodeFactory->createFromValues([$key, $values[\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY]]);
-        $setMethodCall = new \_PhpScoperfb2c402b972b\PhpParser\Node\Expr\MethodCall(new \_PhpScoperfb2c402b972b\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
+        $setMethodCall = new \_PhpScopera8f555a7493c\PhpParser\Node\Expr\MethodCall(new \_PhpScopera8f555a7493c\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \Symplify\PhpConfigPrinter\ValueObject\MethodName::SET, $args);
         unset($values[\Symplify\PhpConfigPrinter\ValueObject\YamlKey::CLASS_KEY]);
         $setMethodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $setMethodCall);
-        return new \_PhpScoperfb2c402b972b\PhpParser\Node\Stmt\Expression($setMethodCall);
+        return new \_PhpScopera8f555a7493c\PhpParser\Node\Stmt\Expression($setMethodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfb2c402b972b;
+namespace _PhpScopera8f555a7493c;
 
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
@@ -23,9 +23,9 @@ use PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
 use PhpCsFixer\Fixer\Semicolon\NoSinglelineWhitespaceBeforeSemicolonsFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
-use _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScopera8f555a7493c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
-return static function (\_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScopera8f555a7493c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(__DIR__ . '/php_cs_fixer/php-cs-fixer-psr2.php');
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer::class);

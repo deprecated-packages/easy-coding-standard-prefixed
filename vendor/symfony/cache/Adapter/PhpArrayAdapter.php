@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter;
+namespace _PhpScopera8f555a7493c\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperfb2c402b972b\Psr\Cache\CacheItemInterface;
-use _PhpScoperfb2c402b972b\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoperfb2c402b972b\Symfony\Component\Cache\CacheItem;
-use _PhpScoperfb2c402b972b\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperfb2c402b972b\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperfb2c402b972b\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperfb2c402b972b\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoperfb2c402b972b\Symfony\Component\Cache\Traits\PhpArrayTrait;
-use _PhpScoperfb2c402b972b\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScopera8f555a7493c\Psr\Cache\CacheItemInterface;
+use _PhpScopera8f555a7493c\Psr\Cache\CacheItemPoolInterface;
+use _PhpScopera8f555a7493c\Symfony\Component\Cache\CacheItem;
+use _PhpScopera8f555a7493c\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScopera8f555a7493c\Symfony\Component\Cache\PruneableInterface;
+use _PhpScopera8f555a7493c\Symfony\Component\Cache\ResettableInterface;
+use _PhpScopera8f555a7493c\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScopera8f555a7493c\Symfony\Component\Cache\Traits\PhpArrayTrait;
+use _PhpScopera8f555a7493c\Symfony\Contracts\Cache\CacheInterface;
 /**
  * Caches items at warm up time using a PHP array that is stored in shared memory by OPCache since PHP 7.0.
  * Warmed up items are read-only and run-time discovered items are cached using a fallback adapter.
@@ -26,7 +26,7 @@ use _PhpScoperfb2c402b972b\Symfony\Contracts\Cache\CacheInterface;
  * @author Titouan Galopin <galopintitouan@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScoperfb2c402b972b\Symfony\Contracts\Cache\CacheInterface, \_PhpScoperfb2c402b972b\Symfony\Component\Cache\PruneableInterface, \_PhpScoperfb2c402b972b\Symfony\Component\Cache\ResettableInterface
+class PhpArrayAdapter implements \_PhpScopera8f555a7493c\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScopera8f555a7493c\Symfony\Contracts\Cache\CacheInterface, \_PhpScopera8f555a7493c\Symfony\Component\Cache\PruneableInterface, \_PhpScopera8f555a7493c\Symfony\Component\Cache\ResettableInterface
 {
     use PhpArrayTrait;
     use ContractsTrait;
@@ -35,17 +35,17 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
      * @param string           $file         The PHP file were values are cached
      * @param AdapterInterface $fallbackPool A pool to fallback on when an item is not hit
      */
-    public function __construct(string $file, \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\AdapterInterface $fallbackPool)
+    public function __construct(string $file, \_PhpScopera8f555a7493c\Symfony\Component\Cache\Adapter\AdapterInterface $fallbackPool)
     {
         $this->file = $file;
         $this->pool = $fallbackPool;
         $this->createCacheItem = \Closure::bind(static function ($key, $value, $isHit) {
-            $item = new \_PhpScoperfb2c402b972b\Symfony\Component\Cache\CacheItem();
+            $item = new \_PhpScopera8f555a7493c\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->value = $value;
             $item->isHit = $isHit;
             return $item;
-        }, null, \_PhpScoperfb2c402b972b\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScopera8f555a7493c\Symfony\Component\Cache\CacheItem::class);
     }
     /**
      * This adapter takes advantage of how PHP stores arrays in its latest versions.
@@ -55,12 +55,12 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
      *
      * @return CacheItemPoolInterface
      */
-    public static function create($file, \_PhpScoperfb2c402b972b\Psr\Cache\CacheItemPoolInterface $fallbackPool)
+    public static function create($file, \_PhpScopera8f555a7493c\Psr\Cache\CacheItemPoolInterface $fallbackPool)
     {
         // Shared memory is available in PHP 7.0+ with OPCache enabled
         if (\filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOLEAN)) {
-            if (!$fallbackPool instanceof \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\AdapterInterface) {
-                $fallbackPool = new \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\ProxyAdapter($fallbackPool);
+            if (!$fallbackPool instanceof \_PhpScopera8f555a7493c\Symfony\Component\Cache\Adapter\AdapterInterface) {
+                $fallbackPool = new \_PhpScopera8f555a7493c\Symfony\Component\Cache\Adapter\ProxyAdapter($fallbackPool);
             }
             return new static($file, $fallbackPool);
         }
@@ -76,7 +76,7 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
         }
         if (!isset($this->keys[$key])) {
             get_from_pool:
-            if ($this->pool instanceof \_PhpScoperfb2c402b972b\Symfony\Contracts\Cache\CacheInterface) {
+            if ($this->pool instanceof \_PhpScopera8f555a7493c\Symfony\Contracts\Cache\CacheInterface) {
                 return $this->pool->get($key, $callback, $beta, $metadata);
             }
             return $this->doGet($this->pool, $key, $callback, $beta, $metadata);
@@ -101,7 +101,7 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
     public function getItem($key)
     {
         if (!\is_string($key)) {
-            throw new \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+            throw new \_PhpScopera8f555a7493c\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -131,7 +131,7 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
     {
         foreach ($keys as $key) {
             if (!\is_string($key)) {
-                throw new \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+                throw new \_PhpScopera8f555a7493c\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
             }
         }
         if (null === $this->values) {
@@ -147,7 +147,7 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
     public function hasItem($key)
     {
         if (!\is_string($key)) {
-            throw new \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+            throw new \_PhpScopera8f555a7493c\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -162,7 +162,7 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
     public function deleteItem($key)
     {
         if (!\is_string($key)) {
-            throw new \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+            throw new \_PhpScopera8f555a7493c\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
         }
         if (null === $this->values) {
             $this->initialize();
@@ -180,7 +180,7 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
         $fallbackKeys = [];
         foreach ($keys as $key) {
             if (!\is_string($key)) {
-                throw new \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
+                throw new \_PhpScopera8f555a7493c\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \is_object($key) ? \get_class($key) : \gettype($key)));
             }
             if (isset($this->keys[$key])) {
                 $deleted = \false;
@@ -201,7 +201,7 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
      *
      * @return bool
      */
-    public function save(\_PhpScoperfb2c402b972b\Psr\Cache\CacheItemInterface $item)
+    public function save(\_PhpScopera8f555a7493c\Psr\Cache\CacheItemInterface $item)
     {
         if (null === $this->values) {
             $this->initialize();
@@ -213,7 +213,7 @@ class PhpArrayAdapter implements \_PhpScoperfb2c402b972b\Symfony\Component\Cache
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScoperfb2c402b972b\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\_PhpScopera8f555a7493c\Psr\Cache\CacheItemInterface $item)
     {
         if (null === $this->values) {
             $this->initialize();

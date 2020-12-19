@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb2c402b972b\Symfony\Component\Config;
+namespace _PhpScopera8f555a7493c\Symfony\Component\Config;
 
 /**
  * Interface for a ConfigCache factory. This factory creates

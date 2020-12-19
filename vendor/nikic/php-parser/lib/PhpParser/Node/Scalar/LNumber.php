@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfb2c402b972b\PhpParser\Node\Scalar;
+namespace _PhpScopera8f555a7493c\PhpParser\Node\Scalar;
 
-use _PhpScoperfb2c402b972b\PhpParser\Error;
-use _PhpScoperfb2c402b972b\PhpParser\Node\Scalar;
-class LNumber extends \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar
+use _PhpScopera8f555a7493c\PhpParser\Error;
+use _PhpScopera8f555a7493c\PhpParser\Node\Scalar;
+class LNumber extends \_PhpScopera8f555a7493c\PhpParser\Node\Scalar
 {
     /* For use in "kind" attribute */
     const KIND_BIN = 2;
@@ -38,27 +38,27 @@ class LNumber extends \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar
      *
      * @return LNumber The constructed LNumber, including kind attribute
      */
-    public static function fromString(string $str, array $attributes = [], bool $allowInvalidOctal = \false) : \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar\LNumber
+    public static function fromString(string $str, array $attributes = [], bool $allowInvalidOctal = \false) : \_PhpScopera8f555a7493c\PhpParser\Node\Scalar\LNumber
     {
         $str = \str_replace('_', '', $str);
         if ('0' !== $str[0] || '0' === $str) {
-            $attributes['kind'] = \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar\LNumber::KIND_DEC;
-            return new \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar\LNumber((int) $str, $attributes);
+            $attributes['kind'] = \_PhpScopera8f555a7493c\PhpParser\Node\Scalar\LNumber::KIND_DEC;
+            return new \_PhpScopera8f555a7493c\PhpParser\Node\Scalar\LNumber((int) $str, $attributes);
         }
         if ('x' === $str[1] || 'X' === $str[1]) {
-            $attributes['kind'] = \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar\LNumber::KIND_HEX;
-            return new \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar\LNumber(\hexdec($str), $attributes);
+            $attributes['kind'] = \_PhpScopera8f555a7493c\PhpParser\Node\Scalar\LNumber::KIND_HEX;
+            return new \_PhpScopera8f555a7493c\PhpParser\Node\Scalar\LNumber(\hexdec($str), $attributes);
         }
         if ('b' === $str[1] || 'B' === $str[1]) {
-            $attributes['kind'] = \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar\LNumber::KIND_BIN;
-            return new \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar\LNumber(\bindec($str), $attributes);
+            $attributes['kind'] = \_PhpScopera8f555a7493c\PhpParser\Node\Scalar\LNumber::KIND_BIN;
+            return new \_PhpScopera8f555a7493c\PhpParser\Node\Scalar\LNumber(\bindec($str), $attributes);
         }
         if (!$allowInvalidOctal && \strpbrk($str, '89')) {
-            throw new \_PhpScoperfb2c402b972b\PhpParser\Error('Invalid numeric literal', $attributes);
+            throw new \_PhpScopera8f555a7493c\PhpParser\Error('Invalid numeric literal', $attributes);
         }
         // use intval instead of octdec to get proper cutting behavior with malformed numbers
-        $attributes['kind'] = \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar\LNumber::KIND_OCT;
-        return new \_PhpScoperfb2c402b972b\PhpParser\Node\Scalar\LNumber(\intval($str, 8), $attributes);
+        $attributes['kind'] = \_PhpScopera8f555a7493c\PhpParser\Node\Scalar\LNumber::KIND_OCT;
+        return new \_PhpScopera8f555a7493c\PhpParser\Node\Scalar\LNumber(\intval($str, 8), $attributes);
     }
     public function getType() : string
     {

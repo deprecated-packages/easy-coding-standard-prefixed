@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfb2c402b972b;
+namespace _PhpScopera8f555a7493c;
 
-use _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScopera8f555a7493c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\Skipper\Tests\Skipper\Skipper\Fixture\Element\FifthElement;
 use Symplify\Skipper\Tests\Skipper\Skipper\Fixture\Element\SixthSense;
 use Symplify\Skipper\ValueObject\Option;
-return static function (\_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScopera8f555a7493c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $parameters = $containerConfigurator->parameters();
     $parameters->set(\Symplify\Skipper\ValueObject\Option::SKIP, [
         // windows like path

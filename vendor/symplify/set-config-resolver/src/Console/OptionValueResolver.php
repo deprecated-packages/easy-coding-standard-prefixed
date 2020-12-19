@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Console;
 
-use _PhpScoperfb2c402b972b\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopera8f555a7493c\Symfony\Component\Console\Input\InputInterface;
 final class OptionValueResolver
 {
     /**
      * @param string[] $optionNames
      */
-    public function getOptionValue(\_PhpScoperfb2c402b972b\Symfony\Component\Console\Input\InputInterface $input, array $optionNames) : ?string
+    public function getOptionValue(\_PhpScopera8f555a7493c\Symfony\Component\Console\Input\InputInterface $input, array $optionNames) : ?string
     {
         foreach ($optionNames as $optionName) {
             if ($input->hasParameterOption($optionName, \true)) {

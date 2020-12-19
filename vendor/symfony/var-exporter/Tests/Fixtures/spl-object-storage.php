@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoperfb2c402b972b;
+namespace _PhpScopera8f555a7493c;
 
-return \_PhpScoperfb2c402b972b\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone ($p =& \_PhpScoperfb2c402b972b\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['SplObjectStorage'] ?? \_PhpScoperfb2c402b972b\Symfony\Component\VarExporter\Internal\Registry::p('SplObjectStorage'), clone $p['stdClass'] ?? \_PhpScoperfb2c402b972b\Symfony\Component\VarExporter\Internal\Registry::p('stdClass')], null, ['SplObjectStorage' => ["\0" => [[$o[1], 345]]]], $o[0], []);
+return \_PhpScopera8f555a7493c\Symfony\Component\VarExporter\Internal\Hydrator::hydrate($o = [clone ($p =& \_PhpScopera8f555a7493c\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['SplObjectStorage'] ?? \_PhpScopera8f555a7493c\Symfony\Component\VarExporter\Internal\Registry::p('SplObjectStorage'), clone $p['stdClass'] ?? \_PhpScopera8f555a7493c\Symfony\Component\VarExporter\Internal\Registry::p('stdClass')], null, ['SplObjectStorage' => ["\0" => [[$o[1], 345]]]], $o[0], []);

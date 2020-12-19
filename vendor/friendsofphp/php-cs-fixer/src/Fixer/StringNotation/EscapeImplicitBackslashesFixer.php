@@ -33,7 +33,7 @@ final class EscapeImplicitBackslashesFixer extends \PhpCsFixer\AbstractFixer imp
         $codeSample = <<<'EOF'
 <?php
 
-namespace _PhpScoperfb2c402b972b;
+namespace _PhpScopera8f555a7493c;
 
 $singleQuoted = 'String with \\" and My\\Prefix\\';
 $doubleQuoted = "Interpret my \n but not my \\a";

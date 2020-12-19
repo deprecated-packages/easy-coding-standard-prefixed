@@ -35,7 +35,7 @@ final class RectorRuleCodeSamplePrinter implements \Symplify\RuleDocGenerator\Co
     public function isMatch(string $class) : bool
     {
         /** @noRector */
-        return \is_a($class, '_PhpScoperfb2c402b972b\\Rector\\Core\\Contract\\Rector\\RectorInterface', \true);
+        return \is_a($class, '_PhpScopera8f555a7493c\\Rector\\Core\\Contract\\Rector\\RectorInterface', \true);
     }
     /**
      * @return string[]

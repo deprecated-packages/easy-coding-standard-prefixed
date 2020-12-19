@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Bootstrap;
 
-use _PhpScoperfb2c402b972b\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopera8f555a7493c\Symfony\Component\Console\Style\SymfonyStyle;
 final class NoCheckersLoaderReporter
 {
     /**
      * @var SymfonyStyle
      */
     private $symfonyStyle;
-    public function __construct(\_PhpScoperfb2c402b972b\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
+    public function __construct(\_PhpScopera8f555a7493c\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
     {
         $this->symfonyStyle = $symfonyStyle;
     }

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb2c402b972b\Symfony\Component\Mime\Encoder;
+namespace _PhpScopera8f555a7493c\Symfony\Component\Mime\Encoder;
 
 /**
  * @author Chris Corbyn
  *
  * @experimental in 4.3
  */
-final class QpMimeHeaderEncoder extends \_PhpScoperfb2c402b972b\Symfony\Component\Mime\Encoder\QpEncoder implements \_PhpScoperfb2c402b972b\Symfony\Component\Mime\Encoder\MimeHeaderEncoderInterface
+final class QpMimeHeaderEncoder extends \_PhpScopera8f555a7493c\Symfony\Component\Mime\Encoder\QpEncoder implements \_PhpScopera8f555a7493c\Symfony\Component\Mime\Encoder\MimeHeaderEncoderInterface
 {
     protected function initSafeMap() : void
     {

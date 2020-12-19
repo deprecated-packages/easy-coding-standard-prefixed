@@ -18,7 +18,7 @@ use function defined;
 use function in_array;
 use function sprintf;
 use function ucfirst;
-use const _PhpScoperfb2c402b972b\T_COMMA;
+use const _PhpScopera8f555a7493c\T_COMMA;
 use const T_IMPLEMENTS;
 use const T_NAMESPACE;
 use const T_USE;

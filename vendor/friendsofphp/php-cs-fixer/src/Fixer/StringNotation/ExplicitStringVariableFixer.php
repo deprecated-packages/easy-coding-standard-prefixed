@@ -30,7 +30,7 @@ final class ExplicitStringVariableFixer extends \PhpCsFixer\AbstractFixer
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Converts implicit variables into explicit ones in double-quoted strings or heredoc syntax.', [new \PhpCsFixer\FixerDefinition\CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScoperfb2c402b972b;
+namespace _PhpScopera8f555a7493c;
 
 $a = "My name is {$name} !";
 $b = "I live in {$state->country} !";

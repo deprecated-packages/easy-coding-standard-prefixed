@@ -13,10 +13,10 @@ use function count;
 use function in_array;
 use function sprintf;
 use function trim;
-use const _PhpScoperfb2c402b972b\T_COMMA;
+use const _PhpScopera8f555a7493c\T_COMMA;
 use const T_CONST;
-use const _PhpScoperfb2c402b972b\T_OPEN_SHORT_ARRAY;
-use const _PhpScoperfb2c402b972b\T_SEMICOLON;
+use const _PhpScopera8f555a7493c\T_OPEN_SHORT_ARRAY;
+use const _PhpScopera8f555a7493c\T_SEMICOLON;
 class DisallowMultiConstantDefinitionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_DISALLOWED_MULTI_CONSTANT_DEFINITION = 'DisallowedMultiConstantDefinition';

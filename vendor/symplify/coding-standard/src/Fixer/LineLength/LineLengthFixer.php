@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoperfb2c402b972b\Nette\Utils\Strings;
+use _PhpScopera8f555a7493c\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -219,7 +219,7 @@ CODE_SAMPLE
         $nextTokenPosition = $tokens->getNextMeaningfulToken($blockInfo->getStart());
         /** @var Token $nextToken */
         $nextToken = $tokens[$nextTokenPosition];
-        if (\_PhpScoperfb2c402b972b\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<')) {
+        if (\_PhpScopera8f555a7493c\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<')) {
             return \true;
         }
         // is array with indexed values "=>"

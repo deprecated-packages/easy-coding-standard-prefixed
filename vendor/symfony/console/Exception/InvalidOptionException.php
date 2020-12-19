@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb2c402b972b\Symfony\Component\Console\Exception;
+namespace _PhpScopera8f555a7493c\Symfony\Component\Console\Exception;
 
 /**
  * Represents an incorrect option name typed in the console.
  *
  * @author Jérôme Tamarelle <jerome@tamarelle.net>
  */
-class InvalidOptionException extends \InvalidArgumentException implements \_PhpScoperfb2c402b972b\Symfony\Component\Console\Exception\ExceptionInterface
+class InvalidOptionException extends \InvalidArgumentException implements \_PhpScopera8f555a7493c\Symfony\Component\Console\Exception\ExceptionInterface
 {
 }
