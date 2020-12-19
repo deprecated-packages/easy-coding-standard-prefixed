@@ -49,7 +49,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper13160cf3462c\\Symfony\\Component\\Cache\\": ""
+            "_PhpScopera6f918786d5c\\Symfony\\Component\\Cache\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

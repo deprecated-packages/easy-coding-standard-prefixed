@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper13160cf3462c\Nette\Neon;
+namespace _PhpScopera6f918786d5c\Nette\Neon;
 
 /**
  * The exception that indicates error of NEON processing.

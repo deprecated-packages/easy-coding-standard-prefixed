@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper13160cf3462c\Composer\Semver;
+namespace _PhpScopera6f918786d5c\Composer\Semver;
 
-use _PhpScoper13160cf3462c\Composer\Semver\Constraint\Constraint;
+use _PhpScopera6f918786d5c\Composer\Semver\Constraint\Constraint;
 class Semver
 {
     const SORT_ASC = 1;
@@ -28,10 +28,10 @@ class Semver
     public static function satisfies($version, $constraints)
     {
         if (null === self::$versionParser) {
-            self::$versionParser = new \_PhpScoper13160cf3462c\Composer\Semver\VersionParser();
+            self::$versionParser = new \_PhpScopera6f918786d5c\Composer\Semver\VersionParser();
         }
         $versionParser = self::$versionParser;
-        $provider = new \_PhpScoper13160cf3462c\Composer\Semver\Constraint\Constraint('==', $versionParser->normalize($version));
+        $provider = new \_PhpScopera6f918786d5c\Composer\Semver\Constraint\Constraint('==', $versionParser->normalize($version));
         $constraints = $versionParser->parseConstraints($constraints);
         return $constraints->matches($provider);
     }
@@ -46,7 +46,7 @@ class Semver
     public static function satisfiedBy(array $versions, $constraints)
     {
         $versions = \array_filter($versions, function ($version) use($constraints) {
-            return \_PhpScoper13160cf3462c\Composer\Semver\Semver::satisfies($version, $constraints);
+            return \_PhpScopera6f918786d5c\Composer\Semver\Semver::satisfies($version, $constraints);
         });
         return \array_values($versions);
     }
@@ -81,7 +81,7 @@ class Semver
     private static function usort(array $versions, $direction)
     {
         if (null === self::$versionParser) {
-            self::$versionParser = new \_PhpScoper13160cf3462c\Composer\Semver\VersionParser();
+            self::$versionParser = new \_PhpScopera6f918786d5c\Composer\Semver\VersionParser();
         }
         $versionParser = self::$versionParser;
         $normalized = array();
@@ -94,7 +94,7 @@ class Semver
             if ($left[0] === $right[0]) {
                 return 0;
             }
-            if (\_PhpScoper13160cf3462c\Composer\Semver\Comparator::lessThan($left[0], $right[0])) {
+            if (\_PhpScopera6f918786d5c\Composer\Semver\Comparator::lessThan($left[0], $right[0])) {
                 return -$direction;
             }
             return $direction;

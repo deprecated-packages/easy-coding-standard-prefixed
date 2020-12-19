@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper13160cf3462c\Symfony\Component\Cache;
+namespace _PhpScopera6f918786d5c\Symfony\Component\Cache;
 
-use _PhpScoper13160cf3462c\Psr\Log\LoggerInterface;
-use _PhpScoper13160cf3462c\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoper13160cf3462c\Symfony\Contracts\Cache\ItemInterface;
+use _PhpScopera6f918786d5c\Psr\Log\LoggerInterface;
+use _PhpScopera6f918786d5c\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScopera6f918786d5c\Symfony\Contracts\Cache\ItemInterface;
 /**
  * LockRegistry is used internally by existing adapters to protect against cache stampede.
  *
@@ -48,7 +48,7 @@ final class LockRegistry
         self::$openedFiles = self::$lockedFiles = [];
         return $previousFiles;
     }
-    public static function compute(callable $callback, \_PhpScoper13160cf3462c\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \_PhpScoper13160cf3462c\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata = null, \_PhpScoper13160cf3462c\Psr\Log\LoggerInterface $logger = null)
+    public static function compute(callable $callback, \_PhpScopera6f918786d5c\Symfony\Contracts\Cache\ItemInterface $item, bool &$save, \_PhpScopera6f918786d5c\Symfony\Contracts\Cache\CacheInterface $pool, \Closure $setMetadata = null, \_PhpScopera6f918786d5c\Psr\Log\LoggerInterface $logger = null)
     {
         $key = self::$files ? \crc32($item->getKey()) % \count(self::$files) : -1;
         if ($key < 0 || (self::$lockedFiles[$key] ?? \false) || !($lock = self::open($key))) {

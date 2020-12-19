@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper13160cf3462c\Symfony\Component\VarDumper\Caster;
+namespace _PhpScopera6f918786d5c\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper13160cf3462c\Imagine\Image\ImageInterface;
-use _PhpScoper13160cf3462c\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScopera6f918786d5c\Imagine\Image\ImageInterface;
+use _PhpScopera6f918786d5c\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
 final class ImagineCaster
 {
-    public static function castImage(\_PhpScoper13160cf3462c\Imagine\Image\ImageInterface $c, array $a, \_PhpScoper13160cf3462c\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castImage(\_PhpScopera6f918786d5c\Imagine\Image\ImageInterface $c, array $a, \_PhpScopera6f918786d5c\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
         $imgData = $c->get('png');
         if (\strlen($imgData) > 1 * 1000 * 1000) {
-            $a += [\_PhpScoper13160cf3462c\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'image' => new \_PhpScoper13160cf3462c\Symfony\Component\VarDumper\Caster\ConstStub($c->getSize())];
+            $a += [\_PhpScopera6f918786d5c\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'image' => new \_PhpScopera6f918786d5c\Symfony\Component\VarDumper\Caster\ConstStub($c->getSize())];
         } else {
-            $a += [\_PhpScoper13160cf3462c\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'image' => new \_PhpScoper13160cf3462c\Symfony\Component\VarDumper\Caster\ImgStub($imgData, 'image/png', $c->getSize())];
+            $a += [\_PhpScopera6f918786d5c\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'image' => new \_PhpScopera6f918786d5c\Symfony\Component\VarDumper\Caster\ImgStub($imgData, 'image/png', $c->getSize())];
         }
         return $a;
     }

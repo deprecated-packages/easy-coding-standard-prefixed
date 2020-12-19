@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper13160cf3462c\Symfony\Component\Mime\Tests\Part;
+namespace _PhpScopera6f918786d5c\Symfony\Component\Mime\Tests\Part;
 
-use _PhpScoper13160cf3462c\PHPUnit\Framework\TestCase;
-use _PhpScoper13160cf3462c\Symfony\Component\Mime\Header\Headers;
-use _PhpScoper13160cf3462c\Symfony\Component\Mime\Header\IdentificationHeader;
-use _PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader;
-use _PhpScoper13160cf3462c\Symfony\Component\Mime\Header\UnstructuredHeader;
-use _PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart;
-class DataPartTest extends \_PhpScoper13160cf3462c\PHPUnit\Framework\TestCase
+use _PhpScopera6f918786d5c\PHPUnit\Framework\TestCase;
+use _PhpScopera6f918786d5c\Symfony\Component\Mime\Header\Headers;
+use _PhpScopera6f918786d5c\Symfony\Component\Mime\Header\IdentificationHeader;
+use _PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader;
+use _PhpScopera6f918786d5c\Symfony\Component\Mime\Header\UnstructuredHeader;
+use _PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart;
+class DataPartTest extends \_PhpScopera6f918786d5c\PHPUnit\Framework\TestCase
 {
     public function testConstructor()
     {
-        $p = new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart('content');
+        $p = new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart('content');
         $this->assertEquals('content', $p->getBody());
         $this->assertEquals(\base64_encode('content'), $p->bodyToString());
         $this->assertEquals(\base64_encode('content'), \implode('', \iterator_to_array($p->bodyToIterable())));
@@ -28,7 +28,7 @@ class DataPartTest extends \_PhpScoper13160cf3462c\PHPUnit\Framework\TestCase
         $this->assertEquals(\base64_encode('content'), \implode('', \iterator_to_array($p->bodyToIterable())));
         $this->assertEquals('application', $p->getMediaType());
         $this->assertEquals('octet-stream', $p->getMediaSubType());
-        $p = new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart('content', null, 'text/html');
+        $p = new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart('content', null, 'text/html');
         $this->assertEquals('text', $p->getMediaType());
         $this->assertEquals('html', $p->getMediaSubType());
     }
@@ -37,7 +37,7 @@ class DataPartTest extends \_PhpScoper13160cf3462c\PHPUnit\Framework\TestCase
         $f = \fopen('php://memory', 'r+', \false);
         \fwrite($f, 'content');
         \rewind($f);
-        $p = new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart($f);
+        $p = new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart($f);
         $this->assertEquals('content', $p->getBody());
         $this->assertEquals(\base64_encode('content'), $p->bodyToString());
         $this->assertEquals(\base64_encode('content'), \implode('', \iterator_to_array($p->bodyToIterable())));
@@ -46,53 +46,53 @@ class DataPartTest extends \_PhpScoper13160cf3462c\PHPUnit\Framework\TestCase
     public function testConstructorWithNonStringOrResource()
     {
         $this->expectException(\TypeError::class);
-        new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart(new \stdClass());
+        new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart(new \stdClass());
     }
     public function testHeaders()
     {
-        $p = new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart('content');
-        $this->assertEquals(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\Headers(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'application/octet-stream'), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment')), $p->getPreparedHeaders());
-        $p = new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart('content', 'photo.jpg', 'text/html');
-        $this->assertEquals(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\Headers(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html', ['name' => 'photo.jpg']), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment', ['name' => 'photo.jpg', 'filename' => 'photo.jpg'])), $p->getPreparedHeaders());
+        $p = new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart('content');
+        $this->assertEquals(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\Headers(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'application/octet-stream'), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment')), $p->getPreparedHeaders());
+        $p = new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart('content', 'photo.jpg', 'text/html');
+        $this->assertEquals(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\Headers(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html', ['name' => 'photo.jpg']), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment', ['name' => 'photo.jpg', 'filename' => 'photo.jpg'])), $p->getPreparedHeaders());
     }
     public function testAsInline()
     {
-        $p = new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart('content', 'photo.jpg', 'text/html');
+        $p = new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart('content', 'photo.jpg', 'text/html');
         $p->asInline();
-        $this->assertEquals(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\Headers(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html', ['name' => 'photo.jpg']), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'inline', ['name' => 'photo.jpg', 'filename' => 'photo.jpg'])), $p->getPreparedHeaders());
+        $this->assertEquals(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\Headers(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html', ['name' => 'photo.jpg']), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'inline', ['name' => 'photo.jpg', 'filename' => 'photo.jpg'])), $p->getPreparedHeaders());
     }
     public function testAsInlineWithCID()
     {
-        $p = new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart('content', 'photo.jpg', 'text/html');
+        $p = new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart('content', 'photo.jpg', 'text/html');
         $p->asInline();
         $cid = $p->getContentId();
-        $this->assertEquals(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\Headers(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html', ['name' => 'photo.jpg']), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'inline', ['name' => 'photo.jpg', 'filename' => 'photo.jpg']), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\IdentificationHeader('Content-ID', $cid)), $p->getPreparedHeaders());
+        $this->assertEquals(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\Headers(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'text/html', ['name' => 'photo.jpg']), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'inline', ['name' => 'photo.jpg', 'filename' => 'photo.jpg']), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\IdentificationHeader('Content-ID', $cid)), $p->getPreparedHeaders());
     }
     public function testFromPath()
     {
-        $p = \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart::fromPath($file = __DIR__ . '/../Fixtures/mimetypes/test.gif');
+        $p = \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart::fromPath($file = __DIR__ . '/../Fixtures/mimetypes/test.gif');
         $content = \file_get_contents($file);
         $this->assertEquals($content, $p->getBody());
         $this->assertEquals(\base64_encode($content), $p->bodyToString());
         $this->assertEquals(\base64_encode($content), \implode('', \iterator_to_array($p->bodyToIterable())));
         $this->assertEquals('image', $p->getMediaType());
         $this->assertEquals('gif', $p->getMediaSubType());
-        $this->assertEquals(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\Headers(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'image/gif', ['name' => 'test.gif']), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment', ['name' => 'test.gif', 'filename' => 'test.gif'])), $p->getPreparedHeaders());
+        $this->assertEquals(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\Headers(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'image/gif', ['name' => 'test.gif']), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment', ['name' => 'test.gif', 'filename' => 'test.gif'])), $p->getPreparedHeaders());
     }
     public function testFromPathWithMeta()
     {
-        $p = \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart::fromPath($file = __DIR__ . '/../Fixtures/mimetypes/test.gif', 'photo.gif', 'image/jpeg');
+        $p = \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart::fromPath($file = __DIR__ . '/../Fixtures/mimetypes/test.gif', 'photo.gif', 'image/jpeg');
         $content = \file_get_contents($file);
         $this->assertEquals($content, $p->getBody());
         $this->assertEquals(\base64_encode($content), $p->bodyToString());
         $this->assertEquals(\base64_encode($content), \implode('', \iterator_to_array($p->bodyToIterable())));
         $this->assertEquals('image', $p->getMediaType());
         $this->assertEquals('jpeg', $p->getMediaSubType());
-        $this->assertEquals(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\Headers(new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'image/jpeg', ['name' => 'photo.gif']), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment', ['name' => 'photo.gif', 'filename' => 'photo.gif'])), $p->getPreparedHeaders());
+        $this->assertEquals(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\Headers(new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Type', 'image/jpeg', ['name' => 'photo.gif']), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\UnstructuredHeader('Content-Transfer-Encoding', 'base64'), new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Header\ParameterizedHeader('Content-Disposition', 'attachment', ['name' => 'photo.gif', 'filename' => 'photo.gif'])), $p->getPreparedHeaders());
     }
     public function testHasContentId()
     {
-        $p = new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart('content');
+        $p = new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart('content');
         $this->assertFalse($p->hasContentId());
         $p->getContentId();
         $this->assertTrue($p->hasContentId());
@@ -102,7 +102,7 @@ class DataPartTest extends \_PhpScoper13160cf3462c\PHPUnit\Framework\TestCase
         $r = \fopen('php://memory', 'r+', \false);
         \fwrite($r, 'Text content');
         \rewind($r);
-        $p = new \_PhpScoper13160cf3462c\Symfony\Component\Mime\Part\DataPart($r);
+        $p = new \_PhpScopera6f918786d5c\Symfony\Component\Mime\Part\DataPart($r);
         $p->getHeaders()->addTextHeader('foo', 'bar');
         $expected = clone $p;
         $this->assertEquals($expected->toString(), \unserialize(\serialize($p))->toString());
