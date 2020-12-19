@@ -11,20 +11,20 @@
  */
 namespace PhpCsFixer\Tests;
 
-use _PhpScoper59da9ac954a6\PHPUnit\Framework\TestCase as BaseTestCase;
-use _PhpScoper59da9ac954a6\PHPUnitGoodPractices\Polyfill\PolyfillTrait;
-use _PhpScoper59da9ac954a6\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
-use _PhpScoper59da9ac954a6\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
-use _PhpScoper59da9ac954a6\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
-use _PhpScoper59da9ac954a6\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
-use _PhpScoper59da9ac954a6\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
-if (\trait_exists(\_PhpScoper59da9ac954a6\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait::class)) {
+use _PhpScoperd1a5bf00e83e\PHPUnit\Framework\TestCase as BaseTestCase;
+use _PhpScoperd1a5bf00e83e\PHPUnitGoodPractices\Polyfill\PolyfillTrait;
+use _PhpScoperd1a5bf00e83e\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
+use _PhpScoperd1a5bf00e83e\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
+use _PhpScoperd1a5bf00e83e\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
+use _PhpScoperd1a5bf00e83e\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
+use _PhpScoperd1a5bf00e83e\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
+if (\trait_exists(\_PhpScoperd1a5bf00e83e\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait::class)) {
     /**
      * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
      *
      * @internal
      */
-    abstract class TestCase extends \_PhpScoper59da9ac954a6\PHPUnit\Framework\TestCase
+    abstract class TestCase extends \_PhpScoperd1a5bf00e83e\PHPUnit\Framework\TestCase
     {
         use ExpectationViaCodeOverAnnotationTrait;
         use ExpectOverSetExceptionTrait;
@@ -43,7 +43,7 @@ if (\trait_exists(\_PhpScoper59da9ac954a6\PHPUnitGoodPractices\Traits\Prophesize
      *
      * @todo 3.0 To be removed when we clean up composer prod-autoloader from dev-packages.
      */
-    abstract class TestCase extends \_PhpScoper59da9ac954a6\PHPUnit\Framework\TestCase
+    abstract class TestCase extends \_PhpScoperd1a5bf00e83e\PHPUnit\Framework\TestCase
     {
     }
 }

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper59da9ac954a6\Symfony\Component\Debug\Exception;
+namespace _PhpScoperd1a5bf00e83e\Symfony\Component\Debug\Exception;
 
-use _PhpScoper59da9ac954a6\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
-use _PhpScoper59da9ac954a6\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use _PhpScoperd1a5bf00e83e\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
+use _PhpScoperd1a5bf00e83e\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 /**
  * FlattenException wraps a PHP Error or Exception to be able to serialize it.
  *
@@ -48,10 +48,10 @@ class FlattenException
         $e = new static();
         $e->setMessage($exception->getMessage());
         $e->setCode($exception->getCode());
-        if ($exception instanceof \_PhpScoper59da9ac954a6\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+        if ($exception instanceof \_PhpScoperd1a5bf00e83e\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
             $statusCode = $exception->getStatusCode();
             $headers = \array_merge($headers, $exception->getHeaders());
-        } elseif ($exception instanceof \_PhpScoper59da9ac954a6\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
+        } elseif ($exception instanceof \_PhpScoperd1a5bf00e83e\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
             $statusCode = 400;
         }
         if (null === $statusCode) {
@@ -60,7 +60,7 @@ class FlattenException
         $e->setStatusCode($statusCode);
         $e->setHeaders($headers);
         $e->setTraceFromThrowable($exception);
-        $e->setClass($exception instanceof \_PhpScoper59da9ac954a6\Symfony\Component\Debug\Exception\FatalThrowableError ? $exception->getOriginalClassName() : \get_class($exception));
+        $e->setClass($exception instanceof \_PhpScoperd1a5bf00e83e\Symfony\Component\Debug\Exception\FatalThrowableError ? $exception->getOriginalClassName() : \get_class($exception));
         $e->setFile($exception->getFile());
         $e->setLine($exception->getLine());
         $previous = $exception->getPrevious();

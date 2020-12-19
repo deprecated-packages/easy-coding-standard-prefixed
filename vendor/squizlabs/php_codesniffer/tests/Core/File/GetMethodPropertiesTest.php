@@ -129,7 +129,7 @@ class GetMethodPropertiesTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
      */
     public function testReturnNamespace()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper59da9ac954a6\\MyNamespace\\MyClass', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoperd1a5bf00e83e\\MyNamespace\\MyClass', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testReturnNamespace()
@@ -140,7 +140,7 @@ class GetMethodPropertiesTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
      */
     public function testReturnMultilineNamespace()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper59da9ac954a6\\MyNamespace\\MyClass\\Foo', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoperd1a5bf00e83e\\MyNamespace\\MyClass\\Foo', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testReturnMultilineNamespace()

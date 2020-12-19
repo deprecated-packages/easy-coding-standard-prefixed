@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper59da9ac954a6\Composer\Semver;
+namespace _PhpScoperd1a5bf00e83e\Composer\Semver;
 
-use _PhpScoper59da9ac954a6\Composer\Semver\Constraint\Constraint;
+use _PhpScoperd1a5bf00e83e\Composer\Semver\Constraint\Constraint;
 class Comparator
 {
     /**
@@ -96,7 +96,7 @@ class Comparator
      */
     public static function compare($version1, $operator, $version2)
     {
-        $constraint = new \_PhpScoper59da9ac954a6\Composer\Semver\Constraint\Constraint($operator, $version2);
-        return $constraint->matches(new \_PhpScoper59da9ac954a6\Composer\Semver\Constraint\Constraint('==', $version1));
+        $constraint = new \_PhpScoperd1a5bf00e83e\Composer\Semver\Constraint\Constraint($operator, $version2);
+        return $constraint->matches(new \_PhpScoperd1a5bf00e83e\Composer\Semver\Constraint\Constraint('==', $version1));
     }
 }

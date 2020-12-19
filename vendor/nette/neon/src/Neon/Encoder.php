@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper59da9ac954a6\Nette\Neon;
+namespace _PhpScoperd1a5bf00e83e\Nette\Neon;
 
 /**
  * Simple generator for Nette Object Notation.
@@ -20,8 +20,8 @@ final class Encoder
     {
         if ($var instanceof \DateTimeInterface) {
             return $var->format('Y-m-d H:i:s O');
-        } elseif ($var instanceof \_PhpScoper59da9ac954a6\Nette\Neon\Entity) {
-            if ($var->value === \_PhpScoper59da9ac954a6\Nette\Neon\Neon::CHAIN) {
+        } elseif ($var instanceof \_PhpScoperd1a5bf00e83e\Nette\Neon\Entity) {
+            if ($var->value === \_PhpScoperd1a5bf00e83e\Nette\Neon\Neon::CHAIN) {
                 return \implode('', \array_map([$this, 'encode'], $var->attributes));
             }
             return $this->encode($var->value) . '(' . (\is_array($var->attributes) ? \substr($this->encode($var->attributes), 1, -1) : '') . ')';
@@ -51,15 +51,15 @@ final class Encoder
                 }
                 return ($isList ? '[' : '{') . \substr($s, 0, -2) . ($isList ? ']' : '}');
             }
-        } elseif (\is_string($var) && !\preg_match('~[\\x00-\\x1F]|^[+-.]?\\d|^(true|false|yes|no|on|off|null)$~Di', $var) && \preg_match('~^' . \_PhpScoper59da9ac954a6\Nette\Neon\Decoder::PATTERNS[1] . '$~Dx', $var)) {
+        } elseif (\is_string($var) && !\preg_match('~[\\x00-\\x1F]|^[+-.]?\\d|^(true|false|yes|no|on|off|null)$~Di', $var) && \preg_match('~^' . \_PhpScoperd1a5bf00e83e\Nette\Neon\Decoder::PATTERNS[1] . '$~Dx', $var)) {
             return $var;
         } elseif (\is_string($var)) {
-            if (!\preg_match('~[\\x00-\\x1F]|^[+-.]?\\d|^(true|false|yes|no|on|off|null)$~Di', $var) && \preg_match('~^' . \_PhpScoper59da9ac954a6\Nette\Neon\Decoder::PATTERNS[1] . '$~Dx', $var)) {
+            if (!\preg_match('~[\\x00-\\x1F]|^[+-.]?\\d|^(true|false|yes|no|on|off|null)$~Di', $var) && \preg_match('~^' . \_PhpScoperd1a5bf00e83e\Nette\Neon\Decoder::PATTERNS[1] . '$~Dx', $var)) {
                 return $var;
             }
             $res = \json_encode($var, \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
             if ($res === \false) {
-                throw new \_PhpScoper59da9ac954a6\Nette\Neon\Exception('Invalid UTF-8 sequence: ' . $var);
+                throw new \_PhpScoperd1a5bf00e83e\Nette\Neon\Exception('Invalid UTF-8 sequence: ' . $var);
             }
             if (\strpos($var, "\n") !== \false) {
                 $res = \preg_replace_callback('#[^\\\\]|\\\\(.)#s', function ($m) {

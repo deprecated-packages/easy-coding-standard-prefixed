@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper59da9ac954a6\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper59da9ac954a6\Predis\Connection\Aggregate\ClusterInterface;
-use _PhpScoper59da9ac954a6\Predis\Connection\Aggregate\PredisCluster;
-use _PhpScoper59da9ac954a6\Predis\Response\Status;
-use _PhpScoper59da9ac954a6\Symfony\Component\Cache\CacheItem;
-use _PhpScoper59da9ac954a6\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper59da9ac954a6\Symfony\Component\Cache\Marshaller\DeflateMarshaller;
-use _PhpScoper59da9ac954a6\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper59da9ac954a6\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use _PhpScoper59da9ac954a6\Symfony\Component\Cache\Traits\RedisTrait;
+use _PhpScoperd1a5bf00e83e\Predis\Connection\Aggregate\ClusterInterface;
+use _PhpScoperd1a5bf00e83e\Predis\Connection\Aggregate\PredisCluster;
+use _PhpScoperd1a5bf00e83e\Predis\Response\Status;
+use _PhpScoperd1a5bf00e83e\Symfony\Component\Cache\CacheItem;
+use _PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Marshaller\DeflateMarshaller;
+use _PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use _PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Traits\RedisTrait;
 /**
  * Stores tag id <> cache id relationship as a Redis Set, lookup on invalidation using RENAME+SMEMBERS.
  *
@@ -42,7 +42,7 @@ use _PhpScoper59da9ac954a6\Symfony\Component\Cache\Traits\RedisTrait;
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class RedisTagAwareAdapter extends \_PhpScoper59da9ac954a6\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter
+class RedisTagAwareAdapter extends \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter
 {
     use RedisTrait;
     /**
@@ -63,20 +63,20 @@ class RedisTagAwareAdapter extends \_PhpScoper59da9ac954a6\Symfony\Component\Cac
      * @param string                                                   $namespace       The default namespace
      * @param int                                                      $defaultLifetime The default lifetime
      */
-    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \_PhpScoper59da9ac954a6\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        if ($redisClient instanceof \_PhpScoper59da9ac954a6\Predis\ClientInterface && $redisClient->getConnection() instanceof \_PhpScoper59da9ac954a6\Predis\Connection\Aggregate\ClusterInterface && !$redisClient->getConnection() instanceof \_PhpScoper59da9ac954a6\Predis\Connection\Aggregate\PredisCluster) {
-            throw new \_PhpScoper59da9ac954a6\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Unsupported Predis cluster connection: only "%s" is, "%s" given.', \_PhpScoper59da9ac954a6\Predis\Connection\Aggregate\PredisCluster::class, \get_class($redisClient->getConnection())));
+        if ($redisClient instanceof \_PhpScoperd1a5bf00e83e\Predis\ClientInterface && $redisClient->getConnection() instanceof \_PhpScoperd1a5bf00e83e\Predis\Connection\Aggregate\ClusterInterface && !$redisClient->getConnection() instanceof \_PhpScoperd1a5bf00e83e\Predis\Connection\Aggregate\PredisCluster) {
+            throw new \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Unsupported Predis cluster connection: only "%s" is, "%s" given.', \_PhpScoperd1a5bf00e83e\Predis\Connection\Aggregate\PredisCluster::class, \get_class($redisClient->getConnection())));
         }
         if (\defined('Redis::OPT_COMPRESSION') && ($redisClient instanceof \Redis || $redisClient instanceof \RedisArray || $redisClient instanceof \RedisCluster)) {
             $compression = $redisClient->getOption(\Redis::OPT_COMPRESSION);
             foreach (\is_array($compression) ? $compression : [$compression] as $c) {
                 if (\Redis::COMPRESSION_NONE !== $c) {
-                    throw new \_PhpScoper59da9ac954a6\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('phpredis compression must be disabled when using "%s", use "%s" instead.', \get_class($this), \_PhpScoper59da9ac954a6\Symfony\Component\Cache\Marshaller\DeflateMarshaller::class));
+                    throw new \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('phpredis compression must be disabled when using "%s", use "%s" instead.', \get_class($this), \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Marshaller\DeflateMarshaller::class));
                 }
             }
         }
-        $this->init($redisClient, $namespace, $defaultLifetime, new \_PhpScoper59da9ac954a6\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller));
+        $this->init($redisClient, $namespace, $defaultLifetime, new \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller));
     }
     /**
      * {@inheritdoc}
@@ -85,7 +85,7 @@ class RedisTagAwareAdapter extends \_PhpScoper59da9ac954a6\Symfony\Component\Cac
     {
         $eviction = $this->getRedisEvictionPolicy();
         if ('noeviction' !== $eviction && 0 !== \strpos($eviction, 'volatile-')) {
-            \_PhpScoper59da9ac954a6\Symfony\Component\Cache\CacheItem::log($this->logger, \sprintf('Redis maxmemory-policy setting "%s" is *not* supported by RedisTagAwareAdapter, use "noeviction" or  "volatile-*" eviction policies', $eviction));
+            \_PhpScoperd1a5bf00e83e\Symfony\Component\Cache\CacheItem::log($this->logger, \sprintf('Redis maxmemory-policy setting "%s" is *not* supported by RedisTagAwareAdapter, use "noeviction" or  "volatile-*" eviction policies', $eviction));
             return \false;
         }
         // serialize values
@@ -116,7 +116,7 @@ class RedisTagAwareAdapter extends \_PhpScoper59da9ac954a6\Symfony\Component\Cac
                 continue;
             }
             // setEx results
-            if (\true !== $result && (!$result instanceof \_PhpScoper59da9ac954a6\Predis\Response\Status || \_PhpScoper59da9ac954a6\Predis\Response\Status::get('OK') !== $result)) {
+            if (\true !== $result && (!$result instanceof \_PhpScoperd1a5bf00e83e\Predis\Response\Status || \_PhpScoperd1a5bf00e83e\Predis\Response\Status::get('OK') !== $result)) {
                 $failed[] = $id;
             }
         }
@@ -137,7 +137,7 @@ class RedisTagAwareAdapter extends \_PhpScoper59da9ac954a6\Symfony\Component\Cac
 
             return v:sub(14, 13 + v:byte(13) + v:byte(12) * 256 + v:byte(11) * 65536)
 EOLUA;
-        if ($this->redis instanceof \_PhpScoper59da9ac954a6\Predis\ClientInterface) {
+        if ($this->redis instanceof \_PhpScoperd1a5bf00e83e\Predis\ClientInterface) {
             $evalArgs = [$lua, 1, &$id];
         } else {
             $evalArgs = [$lua, [&$id], 1];
@@ -173,7 +173,7 @@ EOLUA;
      */
     protected function doInvalidate(array $tagIds) : bool
     {
-        if (!$this->redis instanceof \_PhpScoper59da9ac954a6\Predis\ClientInterface || !$this->redis->getConnection() instanceof \_PhpScoper59da9ac954a6\Predis\Connection\Aggregate\PredisCluster) {
+        if (!$this->redis instanceof \_PhpScoperd1a5bf00e83e\Predis\ClientInterface || !$this->redis->getConnection() instanceof \_PhpScoperd1a5bf00e83e\Predis\Connection\Aggregate\PredisCluster) {
             $movedTagSetIds = $this->renameKeys($this->redis, $tagIds);
         } else {
             $clusterConnection = $this->redis->getConnection();
@@ -227,7 +227,7 @@ EOLUA;
             }
         }, $redis);
         foreach ($results as $id => $result) {
-            if (\true === $result || $result instanceof \_PhpScoper59da9ac954a6\Predis\Response\Status && \_PhpScoper59da9ac954a6\Predis\Response\Status::get('OK') === $result) {
+            if (\true === $result || $result instanceof \_PhpScoperd1a5bf00e83e\Predis\Response\Status && \_PhpScoperd1a5bf00e83e\Predis\Response\Status::get('OK') === $result) {
                 // Only take into account if ok (key existed), will be false on phpredis if it did not exist
                 $newIds[] = '{' . $id . '}' . $uniqueToken;
             }
