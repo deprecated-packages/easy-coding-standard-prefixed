@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera6f918786d5c\PhpParser\Node\Stmt;
+namespace _PhpScoperfb2c402b972b\PhpParser\Node\Stmt;
 
-use _PhpScopera6f918786d5c\PhpParser\Node;
-class ClassConst extends \_PhpScopera6f918786d5c\PhpParser\Node\Stmt
+use _PhpScoperfb2c402b972b\PhpParser\Node;
+class ClassConst extends \_PhpScoperfb2c402b972b\PhpParser\Node\Stmt
 {
     /** @var int Modifiers */
     public $flags;
@@ -38,7 +38,7 @@ class ClassConst extends \_PhpScopera6f918786d5c\PhpParser\Node\Stmt
      */
     public function isPublic() : bool
     {
-        return ($this->flags & \_PhpScopera6f918786d5c\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \_PhpScopera6f918786d5c\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
+        return ($this->flags & \_PhpScoperfb2c402b972b\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) !== 0 || ($this->flags & \_PhpScoperfb2c402b972b\PhpParser\Node\Stmt\Class_::VISIBILITY_MODIFIER_MASK) === 0;
     }
     /**
      * Whether constant is protected.
@@ -47,7 +47,7 @@ class ClassConst extends \_PhpScopera6f918786d5c\PhpParser\Node\Stmt
      */
     public function isProtected() : bool
     {
-        return (bool) ($this->flags & \_PhpScopera6f918786d5c\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
+        return (bool) ($this->flags & \_PhpScoperfb2c402b972b\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED);
     }
     /**
      * Whether constant is private.
@@ -56,7 +56,7 @@ class ClassConst extends \_PhpScopera6f918786d5c\PhpParser\Node\Stmt
      */
     public function isPrivate() : bool
     {
-        return (bool) ($this->flags & \_PhpScopera6f918786d5c\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
+        return (bool) ($this->flags & \_PhpScoperfb2c402b972b\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE);
     }
     public function getType() : string
     {

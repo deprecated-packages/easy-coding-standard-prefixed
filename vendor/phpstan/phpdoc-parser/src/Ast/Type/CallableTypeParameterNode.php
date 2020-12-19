@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera6f918786d5c\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoperfb2c402b972b\PHPStan\PhpDocParser\Ast\Type;
 
-use _PhpScopera6f918786d5c\PHPStan\PhpDocParser\Ast\Node;
-class CallableTypeParameterNode implements \_PhpScopera6f918786d5c\PHPStan\PhpDocParser\Ast\Node
+use _PhpScoperfb2c402b972b\PHPStan\PhpDocParser\Ast\Node;
+class CallableTypeParameterNode implements \_PhpScoperfb2c402b972b\PHPStan\PhpDocParser\Ast\Node
 {
     /** @var TypeNode */
     public $type;
@@ -16,7 +16,7 @@ class CallableTypeParameterNode implements \_PhpScopera6f918786d5c\PHPStan\PhpDo
     public $parameterName;
     /** @var bool */
     public $isOptional;
-    public function __construct(\_PhpScopera6f918786d5c\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, bool $isOptional)
+    public function __construct(\_PhpScoperfb2c402b972b\PHPStan\PhpDocParser\Ast\Type\TypeNode $type, bool $isReference, bool $isVariadic, string $parameterName, bool $isOptional)
     {
         $this->type = $type;
         $this->isReference = $isReference;

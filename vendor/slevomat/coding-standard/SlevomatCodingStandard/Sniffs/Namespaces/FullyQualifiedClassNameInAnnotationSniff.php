@@ -5,8 +5,8 @@ namespace SlevomatCodingStandard\Sniffs\Namespaces;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScopera6f918786d5c\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
-use _PhpScopera6f918786d5c\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoperfb2c402b972b\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode;
+use _PhpScoperfb2c402b972b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\GenericAnnotation;
 use SlevomatCodingStandard\Helpers\AnnotationConstantExpressionHelper;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
@@ -15,7 +15,7 @@ use SlevomatCodingStandard\Helpers\TypeHelper;
 use SlevomatCodingStandard\Helpers\TypeHintHelper;
 use function sprintf;
 use function strtolower;
-use const _PhpScopera6f918786d5c\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoperfb2c402b972b\T_DOC_COMMENT_OPEN_TAG;
 class FullyQualifiedClassNameInAnnotationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_NON_FULLY_QUALIFIED_CLASS_NAME = 'NonFullyQualifiedClassName';
@@ -57,7 +57,7 @@ class FullyQualifiedClassNameInAnnotationSniff implements \PHP_CodeSniffer\Sniff
                         if (!$fix) {
                             continue;
                         }
-                        $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $annotation, $typeHintNode, new \_PhpScopera6f918786d5c\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($fullyQualifiedTypeHint));
+                        $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationType($phpcsFile, $annotation, $typeHintNode, new \_PhpScoperfb2c402b972b\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode($fullyQualifiedTypeHint));
                         $phpcsFile->fixer->beginChangeset();
                         $phpcsFile->fixer->replaceToken($annotation->getStartPointer(), $fixedAnnotationContent);
                         for ($i = $annotation->getStartPointer() + 1; $i <= $annotation->getEndPointer(); $i++) {
@@ -77,7 +77,7 @@ class FullyQualifiedClassNameInAnnotationSniff implements \PHP_CodeSniffer\Sniff
                         if (!$fix) {
                             continue;
                         }
-                        $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationConstantFetchNode($phpcsFile, $annotation, $constantFetchNode, new \_PhpScopera6f918786d5c\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode($fullyQualifiedTypeHint, $constantFetchNode->name));
+                        $fixedAnnotationContent = \SlevomatCodingStandard\Helpers\AnnotationHelper::fixAnnotationConstantFetchNode($phpcsFile, $annotation, $constantFetchNode, new \_PhpScoperfb2c402b972b\PHPStan\PhpDocParser\Ast\ConstExpr\ConstFetchNode($fullyQualifiedTypeHint, $constantFetchNode->name));
                         $phpcsFile->fixer->beginChangeset();
                         $phpcsFile->fixer->replaceToken($annotation->getStartPointer(), $fixedAnnotationContent);
                         for ($i = $annotation->getStartPointer() + 1; $i <= $annotation->getEndPointer(); $i++) {

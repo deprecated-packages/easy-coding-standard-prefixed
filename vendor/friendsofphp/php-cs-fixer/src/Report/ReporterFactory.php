@@ -11,8 +11,8 @@
  */
 namespace PhpCsFixer\Report;
 
-use _PhpScopera6f918786d5c\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScopera6f918786d5c\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoperfb2c402b972b\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoperfb2c402b972b\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *
@@ -33,7 +33,7 @@ final class ReporterFactory
         if (null === $builtInReporters) {
             $builtInReporters = [];
             /** @var SplFileInfo $file */
-            foreach (\_PhpScopera6f918786d5c\Symfony\Component\Finder\Finder::create()->files()->name('*Reporter.php')->in(__DIR__) as $file) {
+            foreach (\_PhpScoperfb2c402b972b\Symfony\Component\Finder\Finder::create()->files()->name('*Reporter.php')->in(__DIR__) as $file) {
                 $relativeNamespace = $file->getRelativePath();
                 $builtInReporters[] = \sprintf('%s\\%s%s', __NAMESPACE__, $relativeNamespace ? $relativeNamespace . '\\' : '', $file->getBasename('.php'));
             }

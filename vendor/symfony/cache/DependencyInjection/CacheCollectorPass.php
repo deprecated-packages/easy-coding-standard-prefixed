@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera6f918786d5c\Symfony\Component\Cache\DependencyInjection;
+namespace _PhpScoperfb2c402b972b\Symfony\Component\Cache\DependencyInjection;
 
-use _PhpScopera6f918786d5c\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use _PhpScopera6f918786d5c\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use _PhpScopera6f918786d5c\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
-use _PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use _PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use _PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
+use _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Reference;
 /**
  * Inject a data collector to all the cache services to be able to get detailed statistics.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class CacheCollectorPass implements \_PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CacheCollectorPass implements \_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $dataCollectorCacheId;
     private $cachePoolTag;
@@ -36,7 +36,7 @@ class CacheCollectorPass implements \_PhpScopera6f918786d5c\Symfony\Component\De
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->dataCollectorCacheId)) {
             return;
@@ -47,16 +47,16 @@ class CacheCollectorPass implements \_PhpScopera6f918786d5c\Symfony\Component\De
             if ($definition->isAbstract()) {
                 continue;
             }
-            $recorder = new \_PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Definition(\is_subclass_of($definition->getClass(), \_PhpScopera6f918786d5c\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface::class) ? \_PhpScopera6f918786d5c\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter::class : \_PhpScopera6f918786d5c\Symfony\Component\Cache\Adapter\TraceableAdapter::class);
+            $recorder = new \_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Definition(\is_subclass_of($definition->getClass(), \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface::class) ? \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter::class : \_PhpScoperfb2c402b972b\Symfony\Component\Cache\Adapter\TraceableAdapter::class);
             $recorder->setTags($definition->getTags());
             $recorder->setPublic($definition->isPublic());
-            $recorder->setArguments([new \_PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Reference($innerId = $id . $this->cachePoolRecorderInnerSuffix)]);
+            $recorder->setArguments([new \_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Reference($innerId = $id . $this->cachePoolRecorderInnerSuffix)]);
             $definition->setTags([]);
             $definition->setPublic(\false);
             $container->setDefinition($innerId, $definition);
             $container->setDefinition($id, $recorder);
             // Tell the collector to add the new instance
-            $collectorDefinition->addMethodCall('addInstance', [$id, new \_PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Reference($id)]);
+            $collectorDefinition->addMethodCall('addInstance', [$id, new \_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Reference($id)]);
             $collectorDefinition->setPublic(\false);
         }
     }

@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Yaml;
 
-use _PhpScopera6f918786d5c\Nette\Utils\Strings;
+use _PhpScoperfb2c402b972b\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
 use ReflectionClass;
-use _PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symplify\PackageBuilder\Strings\StringFormatConverter;
 /**
  * @copy of https://github.com/symplify/symplify/blob/d4beda1b1af847599aa035ead755e03db81c7247/packages/easy-coding-standard/src/Yaml/CheckerServiceParametersShifter.php
@@ -78,10 +78,10 @@ final class CheckerServiceParametersShifter
             if (!$this->isCheckerClass($serviceName) || $serviceDefinition === null || $serviceDefinition === []) {
                 continue;
             }
-            if (\_PhpScopera6f918786d5c\Nette\Utils\Strings::endsWith($serviceName, 'Fixer')) {
+            if (\_PhpScoperfb2c402b972b\Nette\Utils\Strings::endsWith($serviceName, 'Fixer')) {
                 $services = $this->processFixer($services, $serviceName, $serviceDefinition);
             }
-            if (\_PhpScopera6f918786d5c\Nette\Utils\Strings::endsWith($serviceName, 'Sniff')) {
+            if (\_PhpScoperfb2c402b972b\Nette\Utils\Strings::endsWith($serviceName, 'Sniff')) {
                 $services = $this->processSniff($services, $serviceName, $serviceDefinition);
             }
             // cleanup parameters
@@ -91,7 +91,7 @@ final class CheckerServiceParametersShifter
     }
     private function isCheckerClass(string $checker) : bool
     {
-        return \_PhpScopera6f918786d5c\Nette\Utils\Strings::endsWith($checker, 'Fixer') || \_PhpScopera6f918786d5c\Nette\Utils\Strings::endsWith($checker, 'Sniff');
+        return \_PhpScoperfb2c402b972b\Nette\Utils\Strings::endsWith($checker, 'Fixer') || \_PhpScoperfb2c402b972b\Nette\Utils\Strings::endsWith($checker, 'Sniff');
     }
     /**
      * @param mixed[] $services
@@ -178,11 +178,11 @@ final class CheckerServiceParametersShifter
             }
             return $value;
         }
-        return \_PhpScopera6f918786d5c\Nette\Utils\Strings::replace($value, '#^@#', '@@');
+        return \_PhpScoperfb2c402b972b\Nette\Utils\Strings::replace($value, '#^@#', '@@');
     }
     private function initializeServiceKeywords() : void
     {
-        $reflectionClass = new \ReflectionClass(\_PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Loader\YamlFileLoader::class);
+        $reflectionClass = new \ReflectionClass(\_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Loader\YamlFileLoader::class);
         /** @var array<string, mixed> $staticProperties */
         $staticProperties = (array) $reflectionClass->getStaticProperties();
         /** @var string[] $serviceKeywordsProperty */

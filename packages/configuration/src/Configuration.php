@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Configuration;
 
-use _PhpScopera6f918786d5c\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperfb2c402b972b\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter;
 use Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter;
 use Symplify\EasyCodingStandard\Exception\Configuration\SourceNotFoundException;
@@ -55,7 +55,7 @@ final class Configuration
     /**
      * Needs to run in the start of the life cycle, since the rest of workflow uses it.
      */
-    public function resolveFromInput(\_PhpScopera6f918786d5c\Symfony\Component\Console\Input\InputInterface $input) : void
+    public function resolveFromInput(\_PhpScoperfb2c402b972b\Symfony\Component\Console\Input\InputInterface $input) : void
     {
         /** @var string[] $paths */
         $paths = (array) $input->getArgument(\Symplify\EasyCodingStandard\ValueObject\Option::PATHS);
@@ -141,7 +141,7 @@ final class Configuration
     {
         return $this->doesMatchGitDiff;
     }
-    private function canShowProgressBar(\_PhpScopera6f918786d5c\Symfony\Component\Console\Input\InputInterface $input) : bool
+    private function canShowProgressBar(\_PhpScoperfb2c402b972b\Symfony\Component\Console\Input\InputInterface $input) : bool
     {
         $notJsonOutput = $input->getOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT) !== \Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter::NAME;
         $progressBarEnabled = !(bool) $input->getOption(\Symplify\EasyCodingStandard\ValueObject\Option::NO_PROGRESS_BAR);
@@ -170,7 +170,7 @@ final class Configuration
         }
         return $sources;
     }
-    private function setOutputFormat(\_PhpScopera6f918786d5c\Symfony\Component\Console\Input\InputInterface $input) : void
+    private function setOutputFormat(\_PhpScoperfb2c402b972b\Symfony\Component\Console\Input\InputInterface $input) : void
     {
         $outputFormat = (string) $input->getOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT);
         // Backwards compatibility with older version

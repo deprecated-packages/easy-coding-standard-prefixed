@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\Bundle;
 
-use _PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScopera6f918786d5c\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoperfb2c402b972b\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\Skipper\DependencyInjection\Extension\SkipperExtension;
-final class SkipperBundle extends \_PhpScopera6f918786d5c\Symfony\Component\HttpKernel\Bundle\Bundle
+final class SkipperBundle extends \_PhpScoperfb2c402b972b\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    protected function createContainerExtension() : ?\_PhpScopera6f918786d5c\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : ?\_PhpScoperfb2c402b972b\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
     {
         return new \Symplify\Skipper\DependencyInjection\Extension\SkipperExtension();
     }

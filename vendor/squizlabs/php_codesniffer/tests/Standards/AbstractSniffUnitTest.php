@@ -18,8 +18,8 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Util\Common;
-use _PhpScopera6f918786d5c\PHPUnit\Framework\TestCase;
-abstract class AbstractSniffUnitTest extends \_PhpScopera6f918786d5c\PHPUnit\Framework\TestCase
+use _PhpScoperfb2c402b972b\PHPUnit\Framework\TestCase;
+abstract class AbstractSniffUnitTest extends \_PhpScoperfb2c402b972b\PHPUnit\Framework\TestCase
 {
     /**
      * Enable or disable the backup and restoration of the $GLOBALS array.
