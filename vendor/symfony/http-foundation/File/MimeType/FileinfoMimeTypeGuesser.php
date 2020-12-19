@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera8f555a7493c\Symfony\Component\HttpFoundation\File\MimeType;
+namespace _PhpScoper269dc521b0fa\Symfony\Component\HttpFoundation\File\MimeType;
 
-use _PhpScopera8f555a7493c\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
-use _PhpScopera8f555a7493c\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use _PhpScopera8f555a7493c\Symfony\Component\Mime\FileinfoMimeTypeGuesser as NewFileinfoMimeTypeGuesser;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" instead.', \_PhpScopera8f555a7493c\Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser::class, \_PhpScopera8f555a7493c\Symfony\Component\Mime\FileinfoMimeTypeGuesser::class), \E_USER_DEPRECATED);
+use _PhpScoper269dc521b0fa\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use _PhpScoper269dc521b0fa\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use _PhpScoper269dc521b0fa\Symfony\Component\Mime\FileinfoMimeTypeGuesser as NewFileinfoMimeTypeGuesser;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" instead.', \_PhpScoper269dc521b0fa\Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser::class, \_PhpScoper269dc521b0fa\Symfony\Component\Mime\FileinfoMimeTypeGuesser::class), \E_USER_DEPRECATED);
 /**
  * Guesses the mime type using the PECL extension FileInfo.
  *
@@ -21,7 +21,7 @@ use _PhpScopera8f555a7493c\Symfony\Component\Mime\FileinfoMimeTypeGuesser as New
  *
  * @deprecated since Symfony 4.3, use {@link NewFileinfoMimeTypeGuesser} instead
  */
-class FileinfoMimeTypeGuesser implements \_PhpScopera8f555a7493c\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface
+class FileinfoMimeTypeGuesser implements \_PhpScoper269dc521b0fa\Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface
 {
     private $magicFile;
     /**
@@ -48,10 +48,10 @@ class FileinfoMimeTypeGuesser implements \_PhpScopera8f555a7493c\Symfony\Compone
     public function guess($path)
     {
         if (!\is_file($path)) {
-            throw new \_PhpScopera8f555a7493c\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
+            throw new \_PhpScoper269dc521b0fa\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException($path);
         }
         if (!\is_readable($path)) {
-            throw new \_PhpScopera8f555a7493c\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException($path);
+            throw new \_PhpScoper269dc521b0fa\Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException($path);
         }
         if (!self::isSupported()) {
             return null;
