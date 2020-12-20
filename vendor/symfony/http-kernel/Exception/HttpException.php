@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper57210e33e43a\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoper967d20dce97a\Symfony\Component\HttpKernel\Exception;
 
 /**
  * HttpException.
  *
  * @author Kris Wallsmith <kris@symfony.com>
  */
-class HttpException extends \RuntimeException implements \_PhpScoper57210e33e43a\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
+class HttpException extends \RuntimeException implements \_PhpScoper967d20dce97a\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
 {
     private $statusCode;
     private $headers;

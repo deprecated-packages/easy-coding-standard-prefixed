@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper57210e33e43a\Nette\Utils\Strings;
+use _PhpScoper967d20dce97a\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 final class InlineVarMalformWorker extends \Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker\AbstractMalformWorker
@@ -20,6 +20,6 @@ final class InlineVarMalformWorker extends \Symplify\CodingStandard\TokenRunner\
         if (!$token->isGivenKind(\T_COMMENT)) {
             return $docContent;
         }
-        return \_PhpScoper57210e33e43a\Nette\Utils\Strings::replace($docContent, self::SINGLE_ASTERISK_START_REGEX, '/**$1');
+        return \_PhpScoper967d20dce97a\Nette\Utils\Strings::replace($docContent, self::SINGLE_ASTERISK_START_REGEX, '/**$1');
     }
 }

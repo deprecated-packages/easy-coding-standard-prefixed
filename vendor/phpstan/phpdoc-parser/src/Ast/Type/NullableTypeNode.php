@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper57210e33e43a\PHPStan\PhpDocParser\Ast\Type;
+namespace _PhpScoper967d20dce97a\PHPStan\PhpDocParser\Ast\Type;
 
-class NullableTypeNode implements \_PhpScoper57210e33e43a\PHPStan\PhpDocParser\Ast\Type\TypeNode
+class NullableTypeNode implements \_PhpScoper967d20dce97a\PHPStan\PhpDocParser\Ast\Type\TypeNode
 {
     /** @var TypeNode */
     public $type;
-    public function __construct(\_PhpScoper57210e33e43a\PHPStan\PhpDocParser\Ast\Type\TypeNode $type)
+    public function __construct(\_PhpScoper967d20dce97a\PHPStan\PhpDocParser\Ast\Type\TypeNode $type)
     {
         $this->type = $type;
     }

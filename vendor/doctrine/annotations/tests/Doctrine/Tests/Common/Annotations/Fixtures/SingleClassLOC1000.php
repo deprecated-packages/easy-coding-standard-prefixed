@@ -1,9 +1,9 @@
 <?php
 
-namespace _PhpScoper57210e33e43a;
+namespace _PhpScoper967d20dce97a;
 
-use _PhpScoper57210e33e43a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
-use _PhpScoper57210e33e43a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoper967d20dce97a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Secure;
+use _PhpScoper967d20dce97a\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
 class SingleClassLOC1000
 {
     const TEST1 = 1234567890;
@@ -844,4 +844,4 @@ class SingleClassLOC1000
         return $val;
     }
 }
-\class_alias('_PhpScoper57210e33e43a\\SingleClassLOC1000', 'SingleClassLOC1000', \false);
+\class_alias('_PhpScoper967d20dce97a\\SingleClassLOC1000', 'SingleClassLOC1000', \false);
