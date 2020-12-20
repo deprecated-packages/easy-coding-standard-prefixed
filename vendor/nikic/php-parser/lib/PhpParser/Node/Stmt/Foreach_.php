@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper967d20dce97a\PhpParser\Node\Stmt;
+namespace _PhpScopere205696a9dd6\PhpParser\Node\Stmt;
 
-use _PhpScoper967d20dce97a\PhpParser\Node;
-class Foreach_ extends \_PhpScoper967d20dce97a\PhpParser\Node\Stmt
+use _PhpScopere205696a9dd6\PhpParser\Node;
+class Foreach_ extends \_PhpScopere205696a9dd6\PhpParser\Node\Stmt
 {
     /** @var Node\Expr Expression to iterate */
     public $expr;
@@ -27,7 +27,7 @@ class Foreach_ extends \_PhpScoper967d20dce97a\PhpParser\Node\Stmt
      *                              'stmts'  => array(): Statements
      * @param array     $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper967d20dce97a\PhpParser\Node\Expr $expr, \_PhpScoper967d20dce97a\PhpParser\Node\Expr $valueVar, array $subNodes = [], array $attributes = [])
+    public function __construct(\_PhpScopere205696a9dd6\PhpParser\Node\Expr $expr, \_PhpScopere205696a9dd6\PhpParser\Node\Expr $valueVar, array $subNodes = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->expr = $expr;

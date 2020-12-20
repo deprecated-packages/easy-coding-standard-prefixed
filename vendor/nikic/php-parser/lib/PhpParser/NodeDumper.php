@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper967d20dce97a\PhpParser;
+namespace _PhpScopere205696a9dd6\PhpParser;
 
-use _PhpScoper967d20dce97a\PhpParser\Node\Expr\Include_;
-use _PhpScoper967d20dce97a\PhpParser\Node\Stmt\Class_;
-use _PhpScoper967d20dce97a\PhpParser\Node\Stmt\GroupUse;
-use _PhpScoper967d20dce97a\PhpParser\Node\Stmt\Use_;
-use _PhpScoper967d20dce97a\PhpParser\Node\Stmt\UseUse;
+use _PhpScopere205696a9dd6\PhpParser\Node\Expr\Include_;
+use _PhpScopere205696a9dd6\PhpParser\Node\Stmt\Class_;
+use _PhpScopere205696a9dd6\PhpParser\Node\Stmt\GroupUse;
+use _PhpScopere205696a9dd6\PhpParser\Node\Stmt\Use_;
+use _PhpScopere205696a9dd6\PhpParser\Node\Stmt\UseUse;
 class NodeDumper
 {
     private $dumpComments;
@@ -45,7 +45,7 @@ class NodeDumper
     }
     protected function dumpRecursive($node)
     {
-        if ($node instanceof \_PhpScoper967d20dce97a\PhpParser\Node) {
+        if ($node instanceof \_PhpScopere205696a9dd6\PhpParser\Node) {
             $r = $node->getType();
             if ($this->dumpPositions && null !== ($p = $this->dumpPosition($node))) {
                 $r .= $p;
@@ -63,9 +63,9 @@ class NodeDumper
                 } elseif (\is_scalar($value)) {
                     if ('flags' === $key || 'newModifier' === $key) {
                         $r .= $this->dumpFlags($value);
-                    } elseif ('type' === $key && $node instanceof \_PhpScoper967d20dce97a\PhpParser\Node\Expr\Include_) {
+                    } elseif ('type' === $key && $node instanceof \_PhpScopere205696a9dd6\PhpParser\Node\Expr\Include_) {
                         $r .= $this->dumpIncludeType($value);
-                    } elseif ('type' === $key && ($node instanceof \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Use_ || $node instanceof \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\UseUse || $node instanceof \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\GroupUse)) {
+                    } elseif ('type' === $key && ($node instanceof \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Use_ || $node instanceof \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\UseUse || $node instanceof \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\GroupUse)) {
                         $r .= $this->dumpUseType($value);
                     } else {
                         $r .= $value;
@@ -93,7 +93,7 @@ class NodeDumper
                     $r .= \str_replace("\n", "\n    ", $this->dumpRecursive($value));
                 }
             }
-        } elseif ($node instanceof \_PhpScoper967d20dce97a\PhpParser\Comment) {
+        } elseif ($node instanceof \_PhpScopere205696a9dd6\PhpParser\Comment) {
             return $node->getReformattedText();
         } else {
             throw new \InvalidArgumentException('Can only dump nodes and arrays.');
@@ -103,22 +103,22 @@ class NodeDumper
     protected function dumpFlags($flags)
     {
         $strs = [];
-        if ($flags & \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) {
+        if ($flags & \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Class_::MODIFIER_PUBLIC) {
             $strs[] = 'MODIFIER_PUBLIC';
         }
-        if ($flags & \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED) {
+        if ($flags & \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Class_::MODIFIER_PROTECTED) {
             $strs[] = 'MODIFIER_PROTECTED';
         }
-        if ($flags & \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE) {
+        if ($flags & \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Class_::MODIFIER_PRIVATE) {
             $strs[] = 'MODIFIER_PRIVATE';
         }
-        if ($flags & \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT) {
+        if ($flags & \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT) {
             $strs[] = 'MODIFIER_ABSTRACT';
         }
-        if ($flags & \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC) {
+        if ($flags & \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Class_::MODIFIER_STATIC) {
             $strs[] = 'MODIFIER_STATIC';
         }
-        if ($flags & \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL) {
+        if ($flags & \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL) {
             $strs[] = 'MODIFIER_FINAL';
         }
         if ($strs) {
@@ -129,7 +129,7 @@ class NodeDumper
     }
     protected function dumpIncludeType($type)
     {
-        $map = [\_PhpScoper967d20dce97a\PhpParser\Node\Expr\Include_::TYPE_INCLUDE => 'TYPE_INCLUDE', \_PhpScoper967d20dce97a\PhpParser\Node\Expr\Include_::TYPE_INCLUDE_ONCE => 'TYPE_INCLUDE_ONCE', \_PhpScoper967d20dce97a\PhpParser\Node\Expr\Include_::TYPE_REQUIRE => 'TYPE_REQUIRE', \_PhpScoper967d20dce97a\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE => 'TYPE_REQUIRE_ONCE'];
+        $map = [\_PhpScopere205696a9dd6\PhpParser\Node\Expr\Include_::TYPE_INCLUDE => 'TYPE_INCLUDE', \_PhpScopere205696a9dd6\PhpParser\Node\Expr\Include_::TYPE_INCLUDE_ONCE => 'TYPE_INCLUDE_ONCE', \_PhpScopere205696a9dd6\PhpParser\Node\Expr\Include_::TYPE_REQUIRE => 'TYPE_REQUIRE', \_PhpScopere205696a9dd6\PhpParser\Node\Expr\Include_::TYPE_REQUIRE_ONCE => 'TYPE_REQUIRE_ONCE'];
         if (!isset($map[$type])) {
             return $type;
         }
@@ -137,7 +137,7 @@ class NodeDumper
     }
     protected function dumpUseType($type)
     {
-        $map = [\_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Use_::TYPE_UNKNOWN => 'TYPE_UNKNOWN', \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Use_::TYPE_NORMAL => 'TYPE_NORMAL', \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION => 'TYPE_FUNCTION', \_PhpScoper967d20dce97a\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT => 'TYPE_CONSTANT'];
+        $map = [\_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Use_::TYPE_UNKNOWN => 'TYPE_UNKNOWN', \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Use_::TYPE_NORMAL => 'TYPE_NORMAL', \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Use_::TYPE_FUNCTION => 'TYPE_FUNCTION', \_PhpScopere205696a9dd6\PhpParser\Node\Stmt\Use_::TYPE_CONSTANT => 'TYPE_CONSTANT'];
         if (!isset($map[$type])) {
             return $type;
         }
@@ -150,7 +150,7 @@ class NodeDumper
      *
      * @return string|null Dump of position, or null if position information not available
      */
-    protected function dumpPosition(\_PhpScoper967d20dce97a\PhpParser\Node $node)
+    protected function dumpPosition(\_PhpScopere205696a9dd6\PhpParser\Node $node)
     {
         if (!$node->hasAttribute('startLine') || !$node->hasAttribute('endLine')) {
             return null;

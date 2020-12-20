@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper967d20dce97a\Symfony\Component\Process;
+namespace _PhpScopere205696a9dd6\Symfony\Component\Process;
 
-use _PhpScoper967d20dce97a\Symfony\Component\Process\Exception\InvalidArgumentException;
-use _PhpScoper967d20dce97a\Symfony\Component\Process\Exception\LogicException;
-use _PhpScoper967d20dce97a\Symfony\Component\Process\Exception\ProcessFailedException;
-use _PhpScoper967d20dce97a\Symfony\Component\Process\Exception\ProcessTimedOutException;
-use _PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScoper967d20dce97a\Symfony\Component\Process\Pipes\PipesInterface;
-use _PhpScoper967d20dce97a\Symfony\Component\Process\Pipes\UnixPipes;
-use _PhpScoper967d20dce97a\Symfony\Component\Process\Pipes\WindowsPipes;
+use _PhpScopere205696a9dd6\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScopere205696a9dd6\Symfony\Component\Process\Exception\LogicException;
+use _PhpScopere205696a9dd6\Symfony\Component\Process\Exception\ProcessFailedException;
+use _PhpScopere205696a9dd6\Symfony\Component\Process\Exception\ProcessTimedOutException;
+use _PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScopere205696a9dd6\Symfony\Component\Process\Pipes\PipesInterface;
+use _PhpScopere205696a9dd6\Symfony\Component\Process\Pipes\UnixPipes;
+use _PhpScopere205696a9dd6\Symfony\Component\Process\Pipes\WindowsPipes;
 /**
  * Process is a thin wrapper around proc_* functions to easily
  * start independent PHP processes.
@@ -138,7 +138,7 @@ class Process implements \IteratorAggregate
     public function __construct($commandline, $cwd = null, array $env = null, $input = null, $timeout = 60, array $options = null)
     {
         if (!\function_exists('proc_open')) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('The Process class relies on proc_open, which is not available on your PHP installation.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('The Process class relies on proc_open, which is not available on your PHP installation.');
         }
         $this->commandline = $commandline;
         $this->cwd = $cwd;
@@ -217,11 +217,11 @@ class Process implements \IteratorAggregate
     public function mustRun(callable $callback = null)
     {
         if (!$this->enhanceSigchildCompatibility && $this->isSigchildEnabled()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('This PHP has been compiled with --enable-sigchild. You must use setEnhanceSigchildCompatibility() to use this method.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('This PHP has been compiled with --enable-sigchild. You must use setEnhanceSigchildCompatibility() to use this method.');
         }
         $env = 1 < \func_num_args() ? \func_get_arg(1) : null;
         if (0 !== $this->run($callback, $env)) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\ProcessFailedException($this);
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\ProcessFailedException($this);
         }
         return $this;
     }
@@ -248,7 +248,7 @@ class Process implements \IteratorAggregate
     public function start(callable $callback = null)
     {
         if ($this->isRunning()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('Process is already running');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('Process is already running');
         }
         if (2 <= \func_num_args()) {
             $env = \func_get_arg(1);
@@ -310,7 +310,7 @@ class Process implements \IteratorAggregate
             \putenv(\false === $v ? $k : "{$k}={$v}");
         }
         if (!\is_resource($this->process)) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('Unable to launch a new process.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('Unable to launch a new process.');
         }
         $this->status = self::STATUS_STARTED;
         if (isset($descriptors[3])) {
@@ -343,7 +343,7 @@ class Process implements \IteratorAggregate
     public function restart(callable $callback = null)
     {
         if ($this->isRunning()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('Process is already running');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('Process is already running');
         }
         $env = 1 < \func_num_args() ? \func_get_arg(1) : null;
         $process = clone $this;
@@ -385,7 +385,7 @@ class Process implements \IteratorAggregate
             \usleep(1000);
         }
         if ($this->processInformation['signaled'] && $this->processInformation['termsig'] !== $this->latestSignal) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException(\sprintf('The process has been signaled with signal "%s".', $this->processInformation['termsig']));
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException(\sprintf('The process has been signaled with signal "%s".', $this->processInformation['termsig']));
         }
         return $this->exitcode;
     }
@@ -425,10 +425,10 @@ class Process implements \IteratorAggregate
     public function disableOutput()
     {
         if ($this->isRunning()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('Disabling output while the process is running is not possible.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('Disabling output while the process is running is not possible.');
         }
         if (null !== $this->idleTimeout) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\LogicException('Output can not be disabled while an idle timeout is set.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\LogicException('Output can not be disabled while an idle timeout is set.');
         }
         $this->outputDisabled = \true;
         return $this;
@@ -443,7 +443,7 @@ class Process implements \IteratorAggregate
     public function enableOutput()
     {
         if ($this->isRunning()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('Enabling output while the process is running is not possible.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('Enabling output while the process is running is not possible.');
         }
         $this->outputDisabled = \false;
         return $this;
@@ -613,7 +613,7 @@ class Process implements \IteratorAggregate
     public function getExitCode()
     {
         if (!$this->enhanceSigchildCompatibility && $this->isSigchildEnabled()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('This PHP has been compiled with --enable-sigchild. You must use setEnhanceSigchildCompatibility() to use this method.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('This PHP has been compiled with --enable-sigchild. You must use setEnhanceSigchildCompatibility() to use this method.');
         }
         $this->updateStatus(\false);
         return $this->exitcode;
@@ -659,7 +659,7 @@ class Process implements \IteratorAggregate
     {
         $this->requireProcessIsTerminated(__FUNCTION__);
         if (!$this->enhanceSigchildCompatibility && $this->isSigchildEnabled()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('This PHP has been compiled with --enable-sigchild. Term signal can not be retrieved.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('This PHP has been compiled with --enable-sigchild. Term signal can not be retrieved.');
         }
         return $this->processInformation['signaled'];
     }
@@ -677,7 +677,7 @@ class Process implements \IteratorAggregate
     {
         $this->requireProcessIsTerminated(__FUNCTION__);
         if ($this->isSigchildEnabled() && (!$this->enhanceSigchildCompatibility || -1 === $this->processInformation['termsig'])) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('This PHP has been compiled with --enable-sigchild. Term signal can not be retrieved.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('This PHP has been compiled with --enable-sigchild. Term signal can not be retrieved.');
         }
         return $this->processInformation['termsig'];
     }
@@ -883,7 +883,7 @@ class Process implements \IteratorAggregate
     public function setIdleTimeout($timeout)
     {
         if (null !== $timeout && $this->outputDisabled) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\LogicException('Idle timeout can not be set while the output is disabled.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\LogicException('Idle timeout can not be set while the output is disabled.');
         }
         $this->idleTimeout = $this->validateTimeout($timeout);
         return $this;
@@ -900,7 +900,7 @@ class Process implements \IteratorAggregate
     public function setTty($tty)
     {
         if ('\\' === \DIRECTORY_SEPARATOR && $tty) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('TTY mode is not supported on Windows platform.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('TTY mode is not supported on Windows platform.');
         }
         if ($tty) {
             static $isTtySupported;
@@ -908,7 +908,7 @@ class Process implements \IteratorAggregate
                 $isTtySupported = (bool) @\proc_open('echo 1 >/dev/null', array(array('file', '/dev/tty', 'r'), array('file', '/dev/tty', 'w'), array('file', '/dev/tty', 'w')), $pipes);
             }
             if (!$isTtySupported) {
-                throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException('TTY mode requires /dev/tty to be read/writable.');
+                throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException('TTY mode requires /dev/tty to be read/writable.');
             }
         }
         $this->tty = (bool) $tty;
@@ -1026,9 +1026,9 @@ class Process implements \IteratorAggregate
     public function setInput($input)
     {
         if ($this->isRunning()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\LogicException('Input can not be set while the process is running.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\LogicException('Input can not be set while the process is running.');
         }
-        $this->input = \_PhpScoper967d20dce97a\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
+        $this->input = \_PhpScopere205696a9dd6\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
         return $this;
     }
     /**
@@ -1160,11 +1160,11 @@ class Process implements \IteratorAggregate
         }
         if (null !== $this->timeout && $this->timeout < \microtime(\true) - $this->starttime) {
             $this->stop(0);
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\ProcessTimedOutException($this, \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\ProcessTimedOutException::TYPE_GENERAL);
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\ProcessTimedOutException($this, \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\ProcessTimedOutException::TYPE_GENERAL);
         }
         if (null !== $this->idleTimeout && $this->idleTimeout < \microtime(\true) - $this->lastOutputTime) {
             $this->stop(0);
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\ProcessTimedOutException($this, \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\ProcessTimedOutException::TYPE_IDLE);
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\ProcessTimedOutException($this, \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\ProcessTimedOutException::TYPE_IDLE);
         }
     }
     /**
@@ -1194,9 +1194,9 @@ class Process implements \IteratorAggregate
             $this->input->rewind();
         }
         if ('\\' === \DIRECTORY_SEPARATOR) {
-            $this->processPipes = new \_PhpScoper967d20dce97a\Symfony\Component\Process\Pipes\WindowsPipes($this->input, !$this->outputDisabled || $this->hasCallback);
+            $this->processPipes = new \_PhpScopere205696a9dd6\Symfony\Component\Process\Pipes\WindowsPipes($this->input, !$this->outputDisabled || $this->hasCallback);
         } else {
-            $this->processPipes = new \_PhpScoper967d20dce97a\Symfony\Component\Process\Pipes\UnixPipes($this->isTty(), $this->isPty(), $this->input, !$this->outputDisabled || $this->hasCallback);
+            $this->processPipes = new \_PhpScopere205696a9dd6\Symfony\Component\Process\Pipes\UnixPipes($this->isTty(), $this->isPty(), $this->input, !$this->outputDisabled || $this->hasCallback);
         }
         return $this->processPipes->getDescriptors();
     }
@@ -1279,7 +1279,7 @@ class Process implements \IteratorAggregate
     private function readPipesForOutput($caller, $blocking = \false)
     {
         if ($this->outputDisabled) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\LogicException('Output has been disabled.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\LogicException('Output has been disabled.');
         }
         $this->requireProcessIsStarted($caller);
         $this->updateStatus($blocking);
@@ -1299,7 +1299,7 @@ class Process implements \IteratorAggregate
         if (0.0 === $timeout) {
             $timeout = null;
         } elseif ($timeout < 0) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\InvalidArgumentException('The timeout value must be a valid positive integer or float number.');
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\InvalidArgumentException('The timeout value must be a valid positive integer or float number.');
         }
         return $timeout;
     }
@@ -1383,7 +1383,7 @@ class Process implements \IteratorAggregate
     {
         if (null === ($pid = $this->getPid())) {
             if ($throwException) {
-                throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\LogicException('Can not send signal on a non running process.');
+                throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\LogicException('Can not send signal on a non running process.');
             }
             return \false;
         }
@@ -1391,7 +1391,7 @@ class Process implements \IteratorAggregate
             \exec(\sprintf('taskkill /F /T /PID %d 2>&1', $pid), $output, $exitCode);
             if ($exitCode && $this->isRunning()) {
                 if ($throwException) {
-                    throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException(\sprintf('Unable to kill the process (%s).', \implode(' ', $output)));
+                    throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException(\sprintf('Unable to kill the process (%s).', \implode(' ', $output)));
                 }
                 return \false;
             }
@@ -1405,7 +1405,7 @@ class Process implements \IteratorAggregate
             }
             if (!$ok) {
                 if ($throwException) {
-                    throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\RuntimeException(\sprintf('Error while sending signal `%s`.', $signal));
+                    throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\RuntimeException(\sprintf('Error while sending signal `%s`.', $signal));
                 }
                 return \false;
             }
@@ -1464,7 +1464,7 @@ class Process implements \IteratorAggregate
     private function requireProcessIsStarted($functionName)
     {
         if (!$this->isStarted()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\LogicException(\sprintf('Process must be started before calling %s.', $functionName));
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\LogicException(\sprintf('Process must be started before calling %s.', $functionName));
         }
     }
     /**
@@ -1477,7 +1477,7 @@ class Process implements \IteratorAggregate
     private function requireProcessIsTerminated($functionName)
     {
         if (!$this->isTerminated()) {
-            throw new \_PhpScoper967d20dce97a\Symfony\Component\Process\Exception\LogicException(\sprintf('Process must be terminated before calling %s.', $functionName));
+            throw new \_PhpScopere205696a9dd6\Symfony\Component\Process\Exception\LogicException(\sprintf('Process must be terminated before calling %s.', $functionName));
         }
     }
     /**

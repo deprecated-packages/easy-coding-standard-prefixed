@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper967d20dce97a\Symfony\Component\ErrorHandler\ErrorEnhancer;
+namespace _PhpScopere205696a9dd6\Symfony\Component\ErrorHandler\ErrorEnhancer;
 
-use _PhpScoper967d20dce97a\Composer\Autoload\ClassLoader as ComposerClassLoader;
-use _PhpScoper967d20dce97a\Symfony\Component\ClassLoader\ClassLoader as SymfonyClassLoader;
-use _PhpScoper967d20dce97a\Symfony\Component\ErrorHandler\DebugClassLoader;
-use _PhpScoper967d20dce97a\Symfony\Component\ErrorHandler\Error\ClassNotFoundError;
-use _PhpScoper967d20dce97a\Symfony\Component\ErrorHandler\Error\FatalError;
+use _PhpScopere205696a9dd6\Composer\Autoload\ClassLoader as ComposerClassLoader;
+use _PhpScopere205696a9dd6\Symfony\Component\ClassLoader\ClassLoader as SymfonyClassLoader;
+use _PhpScopere205696a9dd6\Symfony\Component\ErrorHandler\DebugClassLoader;
+use _PhpScopere205696a9dd6\Symfony\Component\ErrorHandler\Error\ClassNotFoundError;
+use _PhpScopere205696a9dd6\Symfony\Component\ErrorHandler\Error\FatalError;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ClassNotFoundErrorEnhancer implements \_PhpScoper967d20dce97a\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
+class ClassNotFoundErrorEnhancer implements \_PhpScopere205696a9dd6\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
 {
     /**
      * {@inheritdoc}
@@ -26,7 +26,7 @@ class ClassNotFoundErrorEnhancer implements \_PhpScoper967d20dce97a\Symfony\Comp
     public function enhance(\Throwable $error) : ?\Throwable
     {
         // Some specific versions of PHP produce a fatal error when extending a not found class.
-        $message = !$error instanceof \_PhpScoper967d20dce97a\Symfony\Component\ErrorHandler\Error\FatalError ? $error->getMessage() : $error->getError()['message'];
+        $message = !$error instanceof \_PhpScopere205696a9dd6\Symfony\Component\ErrorHandler\Error\FatalError ? $error->getMessage() : $error->getError()['message'];
         $messageLen = \strlen($message);
         $notFoundSuffix = '\' not found';
         $notFoundSuffixLen = \strlen($notFoundSuffix);
@@ -62,7 +62,7 @@ class ClassNotFoundErrorEnhancer implements \_PhpScoper967d20dce97a\Symfony\Comp
                 }
             }
             $message .= "\nDid you forget a \"use\" statement" . $tail;
-            return new \_PhpScoper967d20dce97a\Symfony\Component\ErrorHandler\Error\ClassNotFoundError($message, $error);
+            return new \_PhpScopere205696a9dd6\Symfony\Component\ErrorHandler\Error\ClassNotFoundError($message, $error);
         }
         return null;
     }
@@ -88,20 +88,20 @@ class ClassNotFoundErrorEnhancer implements \_PhpScoper967d20dce97a\Symfony\Comp
                 continue;
             }
             // get class loaders wrapped by DebugClassLoader
-            if ($function[0] instanceof \_PhpScoper967d20dce97a\Symfony\Component\ErrorHandler\DebugClassLoader) {
+            if ($function[0] instanceof \_PhpScopere205696a9dd6\Symfony\Component\ErrorHandler\DebugClassLoader) {
                 $function = $function[0]->getClassLoader();
                 if (!\is_array($function)) {
                     continue;
                 }
             }
-            if ($function[0] instanceof \_PhpScoper967d20dce97a\Composer\Autoload\ClassLoader || $function[0] instanceof \_PhpScoper967d20dce97a\Symfony\Component\ClassLoader\ClassLoader) {
+            if ($function[0] instanceof \_PhpScopere205696a9dd6\Composer\Autoload\ClassLoader || $function[0] instanceof \_PhpScopere205696a9dd6\Symfony\Component\ClassLoader\ClassLoader) {
                 foreach ($function[0]->getPrefixes() as $prefix => $paths) {
                     foreach ($paths as $path) {
                         $classes = \array_merge($classes, $this->findClassInPath($path, $class, $prefix));
                     }
                 }
             }
-            if ($function[0] instanceof \_PhpScoper967d20dce97a\Composer\Autoload\ClassLoader) {
+            if ($function[0] instanceof \_PhpScopere205696a9dd6\Composer\Autoload\ClassLoader) {
                 foreach ($function[0]->getPrefixesPsr4() as $prefix => $paths) {
                     foreach ($paths as $path) {
                         $classes = \array_merge($classes, $this->findClassInPath($path, $class, $prefix));

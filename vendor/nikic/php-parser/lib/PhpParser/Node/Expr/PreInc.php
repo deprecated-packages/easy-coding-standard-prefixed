@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper967d20dce97a\PhpParser\Node\Expr;
+namespace _PhpScopere205696a9dd6\PhpParser\Node\Expr;
 
-use _PhpScoper967d20dce97a\PhpParser\Node\Expr;
-class PreInc extends \_PhpScoper967d20dce97a\PhpParser\Node\Expr
+use _PhpScopere205696a9dd6\PhpParser\Node\Expr;
+class PreInc extends \_PhpScopere205696a9dd6\PhpParser\Node\Expr
 {
     /** @var Expr Variable */
     public $var;
@@ -14,7 +14,7 @@ class PreInc extends \_PhpScoper967d20dce97a\PhpParser\Node\Expr
      * @param Expr  $var        Variable
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper967d20dce97a\PhpParser\Node\Expr $var, array $attributes = [])
+    public function __construct(\_PhpScopere205696a9dd6\PhpParser\Node\Expr $var, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;
