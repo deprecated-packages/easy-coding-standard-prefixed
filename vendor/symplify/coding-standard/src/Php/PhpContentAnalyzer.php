@@ -12,6 +12,10 @@ final class PhpContentAnalyzer
      */
     private const STMT_OPENING_TYPES = [\T_IF, \T_WHILE, \T_DO, \T_FOR, \T_SWITCH];
     /**
+     * @var int[]
+     */
+    private const END_SEMI_COLON_TYPES = [\T_INCLUDE, \T_EMPTY, \T_USE];
+    /**
      * @var TokenFinder
      */
     private $tokenFinder;
@@ -50,7 +54,7 @@ final class PhpContentAnalyzer
                 if ($tokenKind === \T_CONSTANT_ENCAPSED_STRING) {
                     return \false;
                 }
-                if ($tokenKind === \T_INCLUDE || $tokenKind === \T_EMPTY) {
+                if (\in_array($tokenKind, self::END_SEMI_COLON_TYPES, \true)) {
                     $lastLineToken = $this->tokenFinder->getSameRowLastToken($rawTokens, $i + 1);
                     if ($lastLineToken !== ';') {
                         return \false;

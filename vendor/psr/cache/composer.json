@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper9885c8c176c7\\Psr\\Cache\\": "src\/"
+            "_PhpScopera51a90153f58\\Psr\\Cache\\": "src\/"
         }
     },
     "extra": {
