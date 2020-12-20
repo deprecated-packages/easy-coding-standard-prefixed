@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoper065e4ba46e6d\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper065e4ba46e6d\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperba24099fc6fd\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\ContainerInterface;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
@@ -42,11 +42,11 @@ final class DecoratesServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpCo
         $this->yamlArgumentSorter = $yamlArgumentSorter;
         $this->commonNodeFactory = $commonNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper065e4ba46e6d\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper065e4ba46e6d\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperba24099fc6fd\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperba24099fc6fd\PhpParser\Node\Expr\MethodCall
     {
         $arguments = $this->yamlArgumentSorter->sortArgumentsByKeyIfExists($values, [self::DECORATION_INNER_NAME => null, self::DECORATION_PRIORITY => 0, self::DECORATION_ON_INVALID => null]);
         if (isset($arguments[self::DECORATION_ON_INVALID])) {
-            $arguments[self::DECORATION_ON_INVALID] = $arguments[self::DECORATION_ON_INVALID] === 'exception' ? $this->commonNodeFactory->createConstFetch(\_PhpScoper065e4ba46e6d\Symfony\Component\DependencyInjection\ContainerInterface::class, 'EXCEPTION_ON_INVALID_REFERENCE') : $this->commonNodeFactory->createConstFetch(\_PhpScoper065e4ba46e6d\Symfony\Component\DependencyInjection\ContainerInterface::class, 'IGNORE_ON_INVALID_REFERENCE');
+            $arguments[self::DECORATION_ON_INVALID] = $arguments[self::DECORATION_ON_INVALID] === 'exception' ? $this->commonNodeFactory->createConstFetch(\_PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\ContainerInterface::class, 'EXCEPTION_ON_INVALID_REFERENCE') : $this->commonNodeFactory->createConstFetch(\_PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\ContainerInterface::class, 'IGNORE_ON_INVALID_REFERENCE');
         }
         // Don't write the next arguments if they are null.
         if ($arguments[self::DECORATION_ON_INVALID] === null && $arguments[self::DECORATION_PRIORITY] === 0) {
@@ -57,7 +57,7 @@ final class DecoratesServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpCo
         }
         \array_unshift($arguments, $values['decorates']);
         $args = $this->argsNodeFactory->createFromValues($arguments);
-        return new \_PhpScoper065e4ba46e6d\PhpParser\Node\Expr\MethodCall($methodCall, 'decorate', $args);
+        return new \_PhpScoperba24099fc6fd\PhpParser\Node\Expr\MethodCall($methodCall, 'decorate', $args);
     }
     public function isMatch($key, $values) : bool
     {

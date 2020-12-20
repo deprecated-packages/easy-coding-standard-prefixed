@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper065e4ba46e6d\Symfony\Component\Mime;
+namespace _PhpScoperba24099fc6fd\Symfony\Component\Mime;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @experimental in 4.3
  */
-final class NamedAddress extends \_PhpScoper065e4ba46e6d\Symfony\Component\Mime\Address
+final class NamedAddress extends \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Address
 {
     private $name;
     public function __construct(string $address, string $name)

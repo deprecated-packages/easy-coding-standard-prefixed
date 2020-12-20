@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper065e4ba46e6d\Symfony\Component\Console\Helper;
+namespace _PhpScoperba24099fc6fd\Symfony\Component\Console\Helper;
 
 /**
  * HelperInterface is the interface all helpers must implement.
@@ -20,7 +20,7 @@ interface HelperInterface
     /**
      * Sets the helper set associated with this helper.
      */
-    public function setHelperSet(\_PhpScoper065e4ba46e6d\Symfony\Component\Console\Helper\HelperSet $helperSet = null);
+    public function setHelperSet(\_PhpScoperba24099fc6fd\Symfony\Component\Console\Helper\HelperSet $helperSet = null);
     /**
      * Gets the helper set associated with this helper.
      *

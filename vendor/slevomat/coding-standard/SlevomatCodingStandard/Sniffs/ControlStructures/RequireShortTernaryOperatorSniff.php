@@ -11,17 +11,17 @@ use function in_array;
 use function sprintf;
 use function strlen;
 use function trim;
-use const _PhpScoper065e4ba46e6d\T_BOOLEAN_NOT;
-use const _PhpScoper065e4ba46e6d\T_CLOSE_PARENTHESIS;
-use const _PhpScoper065e4ba46e6d\T_CLOSE_SHORT_ARRAY;
-use const _PhpScoper065e4ba46e6d\T_CLOSE_SQUARE_BRACKET;
+use const _PhpScoperba24099fc6fd\T_BOOLEAN_NOT;
+use const _PhpScoperba24099fc6fd\T_CLOSE_PARENTHESIS;
+use const _PhpScoperba24099fc6fd\T_CLOSE_SHORT_ARRAY;
+use const _PhpScoperba24099fc6fd\T_CLOSE_SQUARE_BRACKET;
 use const T_CLOSE_TAG;
 use const T_COALESCE;
-use const _PhpScoper065e4ba46e6d\T_COMMA;
+use const _PhpScoperba24099fc6fd\T_COMMA;
 use const T_DOUBLE_ARROW;
-use const _PhpScoper065e4ba46e6d\T_INLINE_ELSE;
-use const _PhpScoper065e4ba46e6d\T_INLINE_THEN;
-use const _PhpScoper065e4ba46e6d\T_SEMICOLON;
+use const _PhpScoperba24099fc6fd\T_INLINE_ELSE;
+use const _PhpScoperba24099fc6fd\T_INLINE_THEN;
+use const _PhpScoperba24099fc6fd\T_SEMICOLON;
 class RequireShortTernaryOperatorSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     public const CODE_REQUIRED_SHORT_TERNARY_OPERATOR = 'RequiredShortTernaryOperator';
