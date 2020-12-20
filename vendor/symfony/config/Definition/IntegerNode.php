@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper611f49771945\Symfony\Component\Config\Definition;
+namespace _PhpScoper9885c8c176c7\Symfony\Component\Config\Definition;
 
-use _PhpScoper611f49771945\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScoper9885c8c176c7\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 /**
  * This node represents an integer value in the config tree.
  *
  * @author Jeanmonod David <david.jeanmonod@gmail.com>
  */
-class IntegerNode extends \_PhpScoper611f49771945\Symfony\Component\Config\Definition\NumericNode
+class IntegerNode extends \_PhpScoper9885c8c176c7\Symfony\Component\Config\Definition\NumericNode
 {
     /**
      * {@inheritdoc}
@@ -24,7 +24,7 @@ class IntegerNode extends \_PhpScoper611f49771945\Symfony\Component\Config\Defin
     protected function validateType($value)
     {
         if (!\is_int($value)) {
-            $ex = new \_PhpScoper611f49771945\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected "int", but got "%s".', $this->getPath(), \get_debug_type($value)));
+            $ex = new \_PhpScoper9885c8c176c7\Symfony\Component\Config\Definition\Exception\InvalidTypeException(\sprintf('Invalid type for path "%s". Expected "int", but got "%s".', $this->getPath(), \get_debug_type($value)));
             if ($hint = $this->getInfo()) {
                 $ex->addHint($hint);
             }
