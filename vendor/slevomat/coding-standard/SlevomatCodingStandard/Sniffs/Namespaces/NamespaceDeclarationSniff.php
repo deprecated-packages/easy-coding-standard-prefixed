@@ -11,7 +11,7 @@ use function sprintf;
 use function strlen;
 use const T_NAMESPACE;
 use const T_NS_SEPARATOR;
-use const _PhpScoperba24099fc6fd\T_SEMICOLON;
+use const _PhpScoper611f49771945\T_SEMICOLON;
 use const T_WHITESPACE;
 class NamespaceDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

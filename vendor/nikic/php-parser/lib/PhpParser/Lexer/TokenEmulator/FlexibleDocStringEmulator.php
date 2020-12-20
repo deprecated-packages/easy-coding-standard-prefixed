@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperba24099fc6fd\PhpParser\Lexer\TokenEmulator;
+namespace _PhpScoper611f49771945\PhpParser\Lexer\TokenEmulator;
 
-use _PhpScoperba24099fc6fd\PhpParser\Lexer\Emulative;
-final class FlexibleDocStringEmulator extends \_PhpScoperba24099fc6fd\PhpParser\Lexer\TokenEmulator\TokenEmulator
+use _PhpScoper611f49771945\PhpParser\Lexer\Emulative;
+final class FlexibleDocStringEmulator extends \_PhpScoper611f49771945\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     const FLEXIBLE_DOC_STRING_REGEX = <<<'REGEX'
 /<<<[ \t]*(['"]?)([a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*)\1\r?\n
@@ -13,7 +13,7 @@ final class FlexibleDocStringEmulator extends \_PhpScoperba24099fc6fd\PhpParser\
 REGEX;
     public function getPhpVersion() : string
     {
-        return \_PhpScoperba24099fc6fd\PhpParser\Lexer\Emulative::PHP_7_3;
+        return \_PhpScoper611f49771945\PhpParser\Lexer\Emulative::PHP_7_3;
     }
     public function isEmulationNeeded(string $code) : bool
     {

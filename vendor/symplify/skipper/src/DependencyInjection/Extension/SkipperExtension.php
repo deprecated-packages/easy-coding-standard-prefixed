@@ -3,16 +3,16 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\DependencyInjection\Extension;
 
-use _PhpScoperba24099fc6fd\Symfony\Component\Config\FileLocator;
-use _PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class SkipperExtension extends \_PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\Extension\Extension
+use _PhpScoper611f49771945\Symfony\Component\Config\FileLocator;
+use _PhpScoper611f49771945\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper611f49771945\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoper611f49771945\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class SkipperExtension extends \_PhpScoper611f49771945\Symfony\Component\DependencyInjection\Extension\Extension
 {
-    public function load(array $configs, \_PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, \_PhpScoper611f49771945\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         // needed for parameter shifting of sniff/fixer params
-        $phpFileLoader = new \_PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperba24099fc6fd\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \_PhpScoper611f49771945\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoper611f49771945\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');
     }
 }

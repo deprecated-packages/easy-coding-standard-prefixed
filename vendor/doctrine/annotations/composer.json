@@ -41,7 +41,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperba24099fc6fd\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations\/"
+            "_PhpScoper611f49771945\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations\/"
         }
     },
     "extra": {

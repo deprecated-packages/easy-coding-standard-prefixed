@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperba24099fc6fd\Symfony\Component\EventDispatcher;
+namespace _PhpScoper611f49771945\Symfony\Component\EventDispatcher;
 
-use _PhpScoperba24099fc6fd\Symfony\Contracts\EventDispatcher\EventDispatcherInterface as ContractsEventDispatcherInterface;
+use _PhpScoper611f49771945\Symfony\Contracts\EventDispatcher\EventDispatcherInterface as ContractsEventDispatcherInterface;
 /**
  * The EventDispatcherInterface is the central point of Symfony's event listener system.
  * Listeners are registered on the manager and events are dispatched through the
@@ -18,7 +18,7 @@ use _PhpScoperba24099fc6fd\Symfony\Contracts\EventDispatcher\EventDispatcherInte
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-interface EventDispatcherInterface extends \_PhpScoperba24099fc6fd\Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+interface EventDispatcherInterface extends \_PhpScoper611f49771945\Symfony\Contracts\EventDispatcher\EventDispatcherInterface
 {
     /**
      * Adds an event listener that listens on the specified events.
@@ -35,7 +35,7 @@ interface EventDispatcherInterface extends \_PhpScoperba24099fc6fd\Symfony\Contr
      * The subscriber is asked for all the events it is
      * interested in and added as a listener for these events.
      */
-    public function addSubscriber(\_PhpScoperba24099fc6fd\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber);
+    public function addSubscriber(\_PhpScoper611f49771945\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber);
     /**
      * Removes an event listener from the specified events.
      *
@@ -43,7 +43,7 @@ interface EventDispatcherInterface extends \_PhpScoperba24099fc6fd\Symfony\Contr
      * @param callable $listener  The listener to remove
      */
     public function removeListener($eventName, $listener);
-    public function removeSubscriber(\_PhpScoperba24099fc6fd\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber);
+    public function removeSubscriber(\_PhpScoper611f49771945\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber);
     /**
      * Gets the listeners of a specific event or all listeners sorted by descending priority.
      *

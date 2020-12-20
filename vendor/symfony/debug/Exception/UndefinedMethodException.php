@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperba24099fc6fd\Symfony\Component\Debug\Exception;
+namespace _PhpScoper611f49771945\Symfony\Component\Debug\Exception;
 
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoperba24099fc6fd\Symfony\Component\Debug\Exception\UndefinedMethodException::class, \_PhpScoperba24099fc6fd\Symfony\Component\ErrorHandler\Error\UndefinedMethodError::class), \E_USER_DEPRECATED);
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.4, use "%s" instead.', \_PhpScoper611f49771945\Symfony\Component\Debug\Exception\UndefinedMethodException::class, \_PhpScoper611f49771945\Symfony\Component\ErrorHandler\Error\UndefinedMethodError::class), \E_USER_DEPRECATED);
 /**
  * Undefined Method Exception.
  *
@@ -18,7 +18,7 @@ namespace _PhpScoperba24099fc6fd\Symfony\Component\Debug\Exception;
  *
  * @deprecated since Symfony 4.4, use Symfony\Component\ErrorHandler\Error\UndefinedMethodError instead.
  */
-class UndefinedMethodException extends \_PhpScoperba24099fc6fd\Symfony\Component\Debug\Exception\FatalErrorException
+class UndefinedMethodException extends \_PhpScoper611f49771945\Symfony\Component\Debug\Exception\FatalErrorException
 {
     public function __construct(string $message, \ErrorException $previous)
     {

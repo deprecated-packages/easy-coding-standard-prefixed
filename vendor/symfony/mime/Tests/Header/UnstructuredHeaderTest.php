@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperba24099fc6fd\Symfony\Component\Mime\Tests\Header;
+namespace _PhpScoper611f49771945\Symfony\Component\Mime\Tests\Header;
 
-use _PhpScoperba24099fc6fd\PHPUnit\Framework\TestCase;
-use _PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader;
-class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\TestCase
+use _PhpScoper611f49771945\PHPUnit\Framework\TestCase;
+use _PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader;
+class UnstructuredHeaderTest extends \_PhpScoper611f49771945\PHPUnit\Framework\TestCase
 {
     private $charset = 'utf-8';
     public function testGetNameReturnsNameVerbatim()
     {
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', '');
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', '');
         $this->assertEquals('Subject', $header->getName());
     }
     public function testGetValueReturnsValueVerbatim()
     {
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', 'Test');
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', 'Test');
         $this->assertEquals('Test', $header->getValue());
     }
     public function testBasicStructureIsKeyValuePair()
@@ -31,7 +31,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
            Header fields are lines composed of a field name, followed by a colon
            (":"), followed by a field body, and terminated by CRLF.
            */
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', 'Test');
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', 'Test');
         $this->assertEquals('Subject: Test', $header->toString());
     }
     public function testLongHeadersAreFoldedAtWordBoundary()
@@ -46,7 +46,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
            simply WSP characters), a CRLF may be inserted before any WSP.
            */
         $value = 'The quick brown fox jumped over the fence, he was a very very ' . 'scary brown fox with a bushy tail';
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-Custom-Header', $value);
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-Custom-Header', $value);
         /*
             X-Custom-Header: The quick brown fox jumped over the fence, he was a very very
             scary brown fox with a bushy tail
@@ -62,7 +62,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
            except for CR and LF.
            */
         $nonAsciiChar = \pack('C', 0x8f);
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $nonAsciiChar);
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $nonAsciiChar);
         $this->assertRegExp('~^[^:\\x00-\\x20\\x80-\\xFF]+: [^\\x80-\\xFF\\r\\n]+$~s', $header->toString());
     }
     public function testEncodedWordsFollowGeneralStructure()
@@ -73,7 +73,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
            between.
            */
         $nonAsciiChar = \pack('C', 0x8f);
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $nonAsciiChar);
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $nonAsciiChar);
         $this->assertRegExp('~^X-Test: \\=?.*?\\?.*?\\?.*?\\?=$~s', $header->toString());
     }
     public function testEncodedWordIncludesCharsetAndEncodingMethodAndText()
@@ -86,7 +86,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
                 encoded-word = "=?" charset "?" encoding "?" encoded-text "?="
                 */
         $nonAsciiChar = \pack('C', 0x8f);
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $nonAsciiChar);
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $nonAsciiChar);
         $header->setCharset('iso-8859-1');
         $this->assertEquals('X-Test: =?' . $header->getCharset() . '?Q?=8F?=', $header->toString());
     }
@@ -97,7 +97,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
         foreach ($nonPrintableBytes as $byte) {
             $char = \pack('C', $byte);
             $encodedChar = \sprintf('=%02X', $byte);
-            $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-A', $char);
+            $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-A', $char);
             $header->setCharset('iso-8859-1');
             $this->assertEquals('X-A: =?' . $header->getCharset() . '?Q?' . $encodedChar . '?=', $header->toString(), 'Non-printable ascii should be encoded');
         }
@@ -107,7 +107,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
         foreach (\range(0x80, 0xff) as $byte) {
             $char = \pack('C', $byte);
             $encodedChar = \sprintf('=%02X', $byte);
-            $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-A', $char);
+            $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-A', $char);
             $header->setCharset('iso-8859-1');
             $this->assertEquals('X-A: =?' . $header->getCharset() . '?Q?' . $encodedChar . '?=', $header->toString(), '8-bit octets should be encoded');
         }
@@ -128,7 +128,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
         //Note that multi-line headers begin with LWSP which makes 75 + 1 = 76
         //Note also that =?utf-8?q??= is 12 chars which makes 75 - 12 = 63
         //* X-Test: is 8 chars
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $nonAsciiChar);
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $nonAsciiChar);
         $header->setCharset('iso-8859-1');
         $this->assertEquals('X-Test: =?' . $header->getCharset() . '?Q?=8F?=', $header->toString());
     }
@@ -142,7 +142,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
         // Note that multi-line headers begin with LWSP which makes 75 + 1 = 76
         // Note also that =?utf-8?q??= is 12 chars which makes 75 - 12 = 63
         //* X-Test: is 8 chars
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', \pack('C', 0x8f) . 'line_one_here' . "\r\n" . 'line_two_here');
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', \pack('C', 0x8f) . 'line_one_here' . "\r\n" . 'line_two_here');
         $header->setCharset('iso-8859-1');
         $this->assertEquals('X-Test: =?' . $header->getCharset() . '?Q?=8Fline=5Fone=5Fhere?=' . "\r\n" . ' =?' . $header->getCharset() . '?Q?line=5Ftwo=5Fhere?=', $header->toString());
     }
@@ -165,7 +165,7 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
         $word = 'w' . \pack('C', 0x8f) . 'rd';
         $text = 'start ' . $word . ' ' . $word . ' then ' . $word;
         // 'start', ' word word', ' and end', ' word'
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $text);
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', $text);
         $header->setCharset('iso-8859-1');
         $this->assertEquals('X-Test: start =?' . $header->getCharset() . '?Q?' . 'w=8Frd_w=8Frd?= then =?' . $header->getCharset() . '?Q?' . 'w=8Frd?=', $header->toString(), 'Adjacent encoded words should appear grouped with WSP encoded');
     }
@@ -188,20 +188,20 @@ class UnstructuredHeaderTest extends \_PhpScoperba24099fc6fd\PHPUnit\Framework\T
                             From: =?US-ASCII*EN?Q?Keith_Moore?= <moore@cs.utk.edu>
                 */
         $value = 'fo' . \pack('C', 0x8f) . 'bar';
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', $value);
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', $value);
         $header->setLanguage('en');
         $header->setCharset('iso-8859-1');
         $this->assertEquals('Subject: =?iso-8859-1*en?Q?fo=8Fbar?=', $header->toString());
     }
     public function testSetBody()
     {
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', '');
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('X-Test', '');
         $header->setBody('test');
         $this->assertEquals('test', $header->getValue());
     }
     public function testGetBody()
     {
-        $header = new \_PhpScoperba24099fc6fd\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', 'test');
+        $header = new \_PhpScoper611f49771945\Symfony\Component\Mime\Header\UnstructuredHeader('Subject', 'test');
         $this->assertEquals('test', $header->getBody());
     }
 }

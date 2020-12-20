@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoperba24099fc6fd\Nette\Utils\Strings;
-use _PhpScoperba24099fc6fd\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper611f49771945\Nette\Utils\Strings;
+use _PhpScoper611f49771945\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
@@ -18,15 +18,15 @@ final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpCo
     {
         $this->argsNodeFactory = $argsNodeFactory;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoperba24099fc6fd\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperba24099fc6fd\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper611f49771945\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper611f49771945\PhpParser\Node\Expr\MethodCall
     {
         if (!$this->hasNamedArguments($yaml)) {
             $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($yaml);
-            return new \_PhpScoperba24099fc6fd\PhpParser\Node\Expr\MethodCall($methodCall, 'args', $args);
+            return new \_PhpScoper611f49771945\PhpParser\Node\Expr\MethodCall($methodCall, 'args', $args);
         }
         foreach ($yaml as $key => $value) {
             $args = $this->argsNodeFactory->createFromValues([$key, $value], \false, \true);
-            $methodCall = new \_PhpScoperba24099fc6fd\PhpParser\Node\Expr\MethodCall($methodCall, 'arg', $args);
+            $methodCall = new \_PhpScoper611f49771945\PhpParser\Node\Expr\MethodCall($methodCall, 'arg', $args);
         }
         return $methodCall;
     }
@@ -40,7 +40,7 @@ final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpCo
             return \false;
         }
         foreach (\array_keys($data) as $key) {
-            if (!\_PhpScoperba24099fc6fd\Nette\Utils\Strings::startsWith((string) $key, '$')) {
+            if (!\_PhpScoper611f49771945\Nette\Utils\Strings::startsWith((string) $key, '$')) {
                 return \false;
             }
         }

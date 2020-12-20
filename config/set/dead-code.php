@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperba24099fc6fd;
+namespace _PhpScoper611f49771945;
 
 use SlevomatCodingStandard\Sniffs\Functions\UnusedInheritedVariablePassedToClosureSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff;
-use _PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper611f49771945\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
-return static function (\_PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper611f49771945\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\SlevomatCodingStandard\Sniffs\Functions\UnusedInheritedVariablePassedToClosureSniff::class);
     $services->set(\SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff::class);

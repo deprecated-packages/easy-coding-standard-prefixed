@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperba24099fc6fd;
+namespace _PhpScoper611f49771945;
 
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer;
@@ -10,10 +10,10 @@ use PhpCsFixer\Fixer\ArrayNotation\TrailingCommaInMultilineArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
-use _PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper611f49771945\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\ArrayNotation\ArrayListItemNewlineFixer;
 use Symplify\CodingStandard\Fixer\ArrayNotation\ArrayOpenerAndCloserNewlineFixer;
-return static function (\_PhpScoperba24099fc6fd\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper611f49771945\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer::class);
     $services->set(\Symplify\CodingStandard\Fixer\ArrayNotation\ArrayOpenerAndCloserNewlineFixer::class);
