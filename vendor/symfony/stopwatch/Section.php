@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7574e8786845\Symfony\Component\Stopwatch;
+namespace _PhpScoper32136251d417\Symfony\Component\Stopwatch;
 
 /**
  * Stopwatch section.
@@ -101,7 +101,7 @@ class Section
     public function startEvent($name, $category)
     {
         if (!isset($this->events[$name])) {
-            $this->events[$name] = new \_PhpScoper7574e8786845\Symfony\Component\Stopwatch\StopwatchEvent($this->origin ?: \microtime(\true) * 1000, $category);
+            $this->events[$name] = new \_PhpScoper32136251d417\Symfony\Component\Stopwatch\StopwatchEvent($this->origin ?: \microtime(\true) * 1000, $category);
         }
         return $this->events[$name]->start();
     }

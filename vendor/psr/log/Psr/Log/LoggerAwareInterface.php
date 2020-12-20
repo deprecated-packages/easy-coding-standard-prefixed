@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper7574e8786845\Psr\Log;
+namespace _PhpScoper32136251d417\Psr\Log;
 
 /**
  * Describes a logger-aware instance
@@ -13,5 +13,5 @@ interface LoggerAwareInterface
      * @param LoggerInterface $logger
      * @return null
      */
-    public function setLogger(\_PhpScoper7574e8786845\Psr\Log\LoggerInterface $logger);
+    public function setLogger(\_PhpScoper32136251d417\Psr\Log\LoggerInterface $logger);
 }
