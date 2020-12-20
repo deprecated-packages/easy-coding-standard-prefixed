@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere205696a9dd6\Symfony\Component\Cache\Exception;
+namespace _PhpScoper7574e8786845\Symfony\Component\Cache\Exception;
 
-use _PhpScopere205696a9dd6\Psr\Cache\InvalidArgumentException as Psr6CacheInterface;
-use _PhpScopere205696a9dd6\Psr\SimpleCache\InvalidArgumentException as SimpleCacheInterface;
-if (\interface_exists(\_PhpScopere205696a9dd6\Psr\SimpleCache\InvalidArgumentException::class)) {
-    class InvalidArgumentException extends \InvalidArgumentException implements \_PhpScopere205696a9dd6\Psr\Cache\InvalidArgumentException, \_PhpScopere205696a9dd6\Psr\SimpleCache\InvalidArgumentException
+use _PhpScoper7574e8786845\Psr\Cache\InvalidArgumentException as Psr6CacheInterface;
+use _PhpScoper7574e8786845\Psr\SimpleCache\InvalidArgumentException as SimpleCacheInterface;
+if (\interface_exists(\_PhpScoper7574e8786845\Psr\SimpleCache\InvalidArgumentException::class)) {
+    class InvalidArgumentException extends \InvalidArgumentException implements \_PhpScoper7574e8786845\Psr\Cache\InvalidArgumentException, \_PhpScoper7574e8786845\Psr\SimpleCache\InvalidArgumentException
     {
     }
 } else {
-    class InvalidArgumentException extends \InvalidArgumentException implements \_PhpScopere205696a9dd6\Psr\Cache\InvalidArgumentException
+    class InvalidArgumentException extends \InvalidArgumentException implements \_PhpScoper7574e8786845\Psr\Cache\InvalidArgumentException
     {
     }
 }

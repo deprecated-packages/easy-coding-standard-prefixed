@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopere205696a9dd6\PhpParser;
+namespace _PhpScoper7574e8786845\PhpParser;
 
-class NodeTraverser implements \_PhpScopere205696a9dd6\PhpParser\NodeTraverserInterface
+class NodeTraverser implements \_PhpScoper7574e8786845\PhpParser\NodeTraverserInterface
 {
     /**
      * If NodeVisitor::enterNode() returns DONT_TRAVERSE_CHILDREN, child nodes
@@ -49,7 +49,7 @@ class NodeTraverser implements \_PhpScopere205696a9dd6\PhpParser\NodeTraverserIn
      *
      * @param NodeVisitor $visitor Visitor to add
      */
-    public function addVisitor(\_PhpScopere205696a9dd6\PhpParser\NodeVisitor $visitor)
+    public function addVisitor(\_PhpScoper7574e8786845\PhpParser\NodeVisitor $visitor)
     {
         $this->visitors[] = $visitor;
     }
@@ -58,7 +58,7 @@ class NodeTraverser implements \_PhpScopere205696a9dd6\PhpParser\NodeTraverserIn
      *
      * @param NodeVisitor $visitor
      */
-    public function removeVisitor(\_PhpScopere205696a9dd6\PhpParser\NodeVisitor $visitor)
+    public function removeVisitor(\_PhpScoper7574e8786845\PhpParser\NodeVisitor $visitor)
     {
         foreach ($this->visitors as $index => $storedVisitor) {
             if ($storedVisitor === $visitor) {
@@ -97,7 +97,7 @@ class NodeTraverser implements \_PhpScopere205696a9dd6\PhpParser\NodeTraverserIn
      *
      * @return Node Result of traversal (may be original node or new one)
      */
-    protected function traverseNode(\_PhpScopere205696a9dd6\PhpParser\Node $node) : \_PhpScopere205696a9dd6\PhpParser\Node
+    protected function traverseNode(\_PhpScoper7574e8786845\PhpParser\Node $node) : \_PhpScoper7574e8786845\PhpParser\Node
     {
         foreach ($node->getSubNodeNames() as $name) {
             $subNode =& $node->{$name};
@@ -106,13 +106,13 @@ class NodeTraverser implements \_PhpScopere205696a9dd6\PhpParser\NodeTraverserIn
                 if ($this->stopTraversal) {
                     break;
                 }
-            } elseif ($subNode instanceof \_PhpScopere205696a9dd6\PhpParser\Node) {
+            } elseif ($subNode instanceof \_PhpScoper7574e8786845\PhpParser\Node) {
                 $traverseChildren = \true;
                 $breakVisitorIndex = null;
                 foreach ($this->visitors as $visitorIndex => $visitor) {
                     $return = $visitor->enterNode($subNode);
                     if (null !== $return) {
-                        if ($return instanceof \_PhpScopere205696a9dd6\PhpParser\Node) {
+                        if ($return instanceof \_PhpScoper7574e8786845\PhpParser\Node) {
                             $this->ensureReplacementReasonable($subNode, $return);
                             $subNode = $return;
                         } elseif (self::DONT_TRAVERSE_CHILDREN === $return) {
@@ -138,7 +138,7 @@ class NodeTraverser implements \_PhpScopere205696a9dd6\PhpParser\NodeTraverserIn
                 foreach ($this->visitors as $visitorIndex => $visitor) {
                     $return = $visitor->leaveNode($subNode);
                     if (null !== $return) {
-                        if ($return instanceof \_PhpScopere205696a9dd6\PhpParser\Node) {
+                        if ($return instanceof \_PhpScoper7574e8786845\PhpParser\Node) {
                             $this->ensureReplacementReasonable($subNode, $return);
                             $subNode = $return;
                         } elseif (self::STOP_TRAVERSAL === $return) {
@@ -169,13 +169,13 @@ class NodeTraverser implements \_PhpScopere205696a9dd6\PhpParser\NodeTraverserIn
     {
         $doNodes = [];
         foreach ($nodes as $i => &$node) {
-            if ($node instanceof \_PhpScopere205696a9dd6\PhpParser\Node) {
+            if ($node instanceof \_PhpScoper7574e8786845\PhpParser\Node) {
                 $traverseChildren = \true;
                 $breakVisitorIndex = null;
                 foreach ($this->visitors as $visitorIndex => $visitor) {
                     $return = $visitor->enterNode($node);
                     if (null !== $return) {
-                        if ($return instanceof \_PhpScopere205696a9dd6\PhpParser\Node) {
+                        if ($return instanceof \_PhpScoper7574e8786845\PhpParser\Node) {
                             $this->ensureReplacementReasonable($node, $return);
                             $node = $return;
                         } elseif (self::DONT_TRAVERSE_CHILDREN === $return) {
@@ -201,7 +201,7 @@ class NodeTraverser implements \_PhpScopere205696a9dd6\PhpParser\NodeTraverserIn
                 foreach ($this->visitors as $visitorIndex => $visitor) {
                     $return = $visitor->leaveNode($node);
                     if (null !== $return) {
-                        if ($return instanceof \_PhpScopere205696a9dd6\PhpParser\Node) {
+                        if ($return instanceof \_PhpScoper7574e8786845\PhpParser\Node) {
                             $this->ensureReplacementReasonable($node, $return);
                             $node = $return;
                         } elseif (\is_array($return)) {
@@ -236,10 +236,10 @@ class NodeTraverser implements \_PhpScopere205696a9dd6\PhpParser\NodeTraverserIn
     }
     private function ensureReplacementReasonable($old, $new)
     {
-        if ($old instanceof \_PhpScopere205696a9dd6\PhpParser\Node\Stmt && $new instanceof \_PhpScopere205696a9dd6\PhpParser\Node\Expr) {
+        if ($old instanceof \_PhpScoper7574e8786845\PhpParser\Node\Stmt && $new instanceof \_PhpScoper7574e8786845\PhpParser\Node\Expr) {
             throw new \LogicException("Trying to replace statement ({$old->getType()}) " . "with expression ({$new->getType()}). Are you missing a " . "Stmt_Expression wrapper?");
         }
-        if ($old instanceof \_PhpScopere205696a9dd6\PhpParser\Node\Expr && $new instanceof \_PhpScopere205696a9dd6\PhpParser\Node\Stmt) {
+        if ($old instanceof \_PhpScoper7574e8786845\PhpParser\Node\Expr && $new instanceof \_PhpScoper7574e8786845\PhpParser\Node\Stmt) {
             throw new \LogicException("Trying to replace expression ({$old->getType()}) " . "with statement ({$new->getType()})");
         }
     }
