@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera51a90153f58\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoper57210e33e43a\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class NotAcceptableHttpException extends \_PhpScopera51a90153f58\Symfony\Component\HttpKernel\Exception\HttpException
+class NotAcceptableHttpException extends \_PhpScoper57210e33e43a\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string     $message  The internal exception message

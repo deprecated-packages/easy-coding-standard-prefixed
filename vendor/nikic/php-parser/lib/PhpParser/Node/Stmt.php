@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera51a90153f58\PhpParser\Node;
+namespace _PhpScoper57210e33e43a\PhpParser\Node;
 
-use _PhpScopera51a90153f58\PhpParser\NodeAbstract;
-abstract class Stmt extends \_PhpScopera51a90153f58\PhpParser\NodeAbstract
+use _PhpScoper57210e33e43a\PhpParser\NodeAbstract;
+abstract class Stmt extends \_PhpScoper57210e33e43a\PhpParser\NodeAbstract
 {
 }
