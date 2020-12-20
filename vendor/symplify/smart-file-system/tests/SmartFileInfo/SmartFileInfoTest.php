@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\SmartFileInfo;
 
-use _PhpScoper32136251d417\PHPUnit\Framework\TestCase;
+use _PhpScoperab9510cd5d97\PHPUnit\Framework\TestCase;
 use Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class SmartFileInfoTest extends \_PhpScoper32136251d417\PHPUnit\Framework\TestCase
+final class SmartFileInfoTest extends \_PhpScoperab9510cd5d97\PHPUnit\Framework\TestCase
 {
     public function testInvalidPath() : void
     {
