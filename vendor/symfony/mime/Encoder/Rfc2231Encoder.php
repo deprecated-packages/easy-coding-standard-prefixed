@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcf15c26e033\Symfony\Component\Mime\Encoder;
+namespace _PhpScoperb730595bc9f4\Symfony\Component\Mime\Encoder;
 
-use _PhpScoperfcf15c26e033\Symfony\Component\Mime\CharacterStream;
+use _PhpScoperb730595bc9f4\Symfony\Component\Mime\CharacterStream;
 /**
  * @author Chris Corbyn
  *
  * @experimental in 4.3
  */
-final class Rfc2231Encoder implements \_PhpScoperfcf15c26e033\Symfony\Component\Mime\Encoder\EncoderInterface
+final class Rfc2231Encoder implements \_PhpScoperb730595bc9f4\Symfony\Component\Mime\Encoder\EncoderInterface
 {
     /**
      * Takes an unencoded string and produces a string encoded according to RFC 2231 from it.
@@ -30,7 +30,7 @@ final class Rfc2231Encoder implements \_PhpScoperfcf15c26e033\Symfony\Component\
         if (0 >= $maxLineLength) {
             $maxLineLength = 75;
         }
-        $charStream = new \_PhpScoperfcf15c26e033\Symfony\Component\Mime\CharacterStream($string, $charset);
+        $charStream = new \_PhpScoperb730595bc9f4\Symfony\Component\Mime\CharacterStream($string, $charset);
         $thisLineLength = $maxLineLength - $firstLineOffset;
         while (null !== ($char = $charStream->read(4))) {
             $encodedChar = \rawurlencode($char);

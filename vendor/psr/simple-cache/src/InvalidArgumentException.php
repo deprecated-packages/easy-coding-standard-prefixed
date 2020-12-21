@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperfcf15c26e033\Psr\SimpleCache;
+namespace _PhpScoperb730595bc9f4\Psr\SimpleCache;
 
 /**
  * Exception interface for invalid cache arguments.
@@ -8,6 +8,6 @@ namespace _PhpScoperfcf15c26e033\Psr\SimpleCache;
  * When an invalid argument is passed it must throw an exception which implements
  * this interface
  */
-interface InvalidArgumentException extends \_PhpScoperfcf15c26e033\Psr\SimpleCache\CacheException
+interface InvalidArgumentException extends \_PhpScoperb730595bc9f4\Psr\SimpleCache\CacheException
 {
 }

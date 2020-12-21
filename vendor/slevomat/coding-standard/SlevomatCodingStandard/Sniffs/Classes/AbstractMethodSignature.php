@@ -14,8 +14,8 @@ use function rtrim;
 use function sprintf;
 use function str_replace;
 use const T_FUNCTION;
-use const _PhpScoperfcf15c26e033\T_OPEN_CURLY_BRACKET;
-use const _PhpScoperfcf15c26e033\T_SEMICOLON;
+use const _PhpScoperb730595bc9f4\T_OPEN_CURLY_BRACKET;
+use const _PhpScoperb730595bc9f4\T_SEMICOLON;
 /**
  * @internal
  */

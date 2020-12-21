@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcf15c26e033\Symfony\Component\Mime\Tests;
+namespace _PhpScoperb730595bc9f4\Symfony\Component\Mime\Tests;
 
-use _PhpScoperfcf15c26e033\Symfony\Component\Mime\Exception\RuntimeException;
-use _PhpScoperfcf15c26e033\Symfony\Component\Mime\MimeTypeGuesserInterface;
-use _PhpScoperfcf15c26e033\Symfony\Component\Mime\MimeTypes;
+use _PhpScoperb730595bc9f4\Symfony\Component\Mime\Exception\RuntimeException;
+use _PhpScoperb730595bc9f4\Symfony\Component\Mime\MimeTypeGuesserInterface;
+use _PhpScoperb730595bc9f4\Symfony\Component\Mime\MimeTypes;
 /**
  * @requires extension fileinfo
  */
-class MimeTypesTest extends \_PhpScoperfcf15c26e033\Symfony\Component\Mime\Tests\AbstractMimeTypeGuesserTest
+class MimeTypesTest extends \_PhpScoperb730595bc9f4\Symfony\Component\Mime\Tests\AbstractMimeTypeGuesserTest
 {
-    protected function getGuesser() : \_PhpScoperfcf15c26e033\Symfony\Component\Mime\MimeTypeGuesserInterface
+    protected function getGuesser() : \_PhpScoperb730595bc9f4\Symfony\Component\Mime\MimeTypeGuesserInterface
     {
-        return new \_PhpScoperfcf15c26e033\Symfony\Component\Mime\MimeTypes();
+        return new \_PhpScoperb730595bc9f4\Symfony\Component\Mime\MimeTypes();
     }
     public function testUnsupportedGuesser()
     {
         $guesser = $this->getGuesser();
-        $guesser->registerGuesser(new class implements \_PhpScoperfcf15c26e033\Symfony\Component\Mime\MimeTypeGuesserInterface
+        $guesser->registerGuesser(new class implements \_PhpScoperb730595bc9f4\Symfony\Component\Mime\MimeTypeGuesserInterface
         {
             public function isGuesserSupported() : bool
             {
@@ -33,21 +33,21 @@ class MimeTypesTest extends \_PhpScoperfcf15c26e033\Symfony\Component\Mime\Tests
             }
             public function guessMimeType(string $mimeType) : ?string
             {
-                throw new \_PhpScoperfcf15c26e033\Symfony\Component\Mime\Exception\RuntimeException('Should never be called.');
+                throw new \_PhpScoperb730595bc9f4\Symfony\Component\Mime\Exception\RuntimeException('Should never be called.');
             }
         });
         $this->assertEquals('image/gif', $guesser->guessMimeType(__DIR__ . '/Fixtures/mimetypes/test'));
     }
     public function testGetExtensions()
     {
-        $mt = new \_PhpScoperfcf15c26e033\Symfony\Component\Mime\MimeTypes();
+        $mt = new \_PhpScoperb730595bc9f4\Symfony\Component\Mime\MimeTypes();
         $this->assertSame(['mbox'], $mt->getExtensions('application/mbox'));
         $this->assertSame(['ai', 'eps', 'ps'], $mt->getExtensions('application/postscript'));
         $this->assertSame([], $mt->getExtensions('application/whatever-symfony'));
     }
     public function testGetMimeTypes()
     {
-        $mt = new \_PhpScoperfcf15c26e033\Symfony\Component\Mime\MimeTypes();
+        $mt = new \_PhpScoperb730595bc9f4\Symfony\Component\Mime\MimeTypes();
         $this->assertSame(['application/mbox'], $mt->getMimeTypes('mbox'));
         $this->assertContains('application/postscript', $mt->getMimeTypes('ai'));
         $this->assertContains('application/postscript', $mt->getMimeTypes('ps'));

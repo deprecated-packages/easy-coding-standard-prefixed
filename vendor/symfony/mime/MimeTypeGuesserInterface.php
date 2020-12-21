@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcf15c26e033\Symfony\Component\Mime;
+namespace _PhpScoperb730595bc9f4\Symfony\Component\Mime;
 
 /**
  * Guesses the MIME type of a file.

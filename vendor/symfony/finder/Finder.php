@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcf15c26e033\Symfony\Component\Finder;
+namespace _PhpScoperb730595bc9f4\Symfony\Component\Finder;
 
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Comparator\DateComparator;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Comparator\NumberComparator;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Exception\DirectoryNotFoundException;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\CustomFilterIterator;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\DateRangeFilterIterator;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\DepthRangeFilterIterator;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\FilecontentFilterIterator;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\FilenameFilterIterator;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SizeRangeFilterIterator;
-use _PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SortableIterator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Comparator\DateComparator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Comparator\NumberComparator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Exception\DirectoryNotFoundException;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\CustomFilterIterator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\DateRangeFilterIterator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\DepthRangeFilterIterator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\FilecontentFilterIterator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\FilenameFilterIterator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SizeRangeFilterIterator;
+use _PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SortableIterator;
 /**
  * Finder allows to build rules to find files and directories.
  *
@@ -79,7 +79,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function directories()
     {
-        $this->mode = \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\FileTypeFilterIterator::ONLY_DIRECTORIES;
+        $this->mode = \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\FileTypeFilterIterator::ONLY_DIRECTORIES;
         return $this;
     }
     /**
@@ -89,7 +89,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function files()
     {
-        $this->mode = \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\FileTypeFilterIterator::ONLY_FILES;
+        $this->mode = \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\FileTypeFilterIterator::ONLY_FILES;
         return $this;
     }
     /**
@@ -111,7 +111,7 @@ class Finder implements \IteratorAggregate, \Countable
     public function depth($levels)
     {
         foreach ((array) $levels as $level) {
-            $this->depths[] = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Comparator\NumberComparator($level);
+            $this->depths[] = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Comparator\NumberComparator($level);
         }
         return $this;
     }
@@ -137,7 +137,7 @@ class Finder implements \IteratorAggregate, \Countable
     public function date($dates)
     {
         foreach ((array) $dates as $date) {
-            $this->dates[] = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Comparator\DateComparator($date);
+            $this->dates[] = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Comparator\DateComparator($date);
         }
         return $this;
     }
@@ -278,7 +278,7 @@ class Finder implements \IteratorAggregate, \Countable
     public function size($sizes)
     {
         foreach ((array) $sizes as $size) {
-            $this->sizes[] = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Comparator\NumberComparator($size);
+            $this->sizes[] = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Comparator\NumberComparator($size);
         }
         return $this;
     }
@@ -399,11 +399,11 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function sortByName()
     {
-        if (\func_num_args() < 1 && __CLASS__ !== \get_class($this) && __CLASS__ !== (new \ReflectionMethod($this, __FUNCTION__))->getDeclaringClass()->getName() && !$this instanceof \_PhpScoperfcf15c26e033\PHPUnit\Framework\MockObject\MockObject && !$this instanceof \_PhpScoperfcf15c26e033\Prophecy\Prophecy\ProphecySubjectInterface) {
+        if (\func_num_args() < 1 && __CLASS__ !== \get_class($this) && __CLASS__ !== (new \ReflectionMethod($this, __FUNCTION__))->getDeclaringClass()->getName() && !$this instanceof \_PhpScoperb730595bc9f4\PHPUnit\Framework\MockObject\MockObject && !$this instanceof \_PhpScoperb730595bc9f4\Prophecy\Prophecy\ProphecySubjectInterface) {
             @\trigger_error(\sprintf('The "%s()" method will have a new "bool $useNaturalSort = false" argument in version 5.0, not defining it is deprecated since Symfony 4.2.', __METHOD__), \E_USER_DEPRECATED);
         }
         $useNaturalSort = 0 < \func_num_args() && \func_get_arg(0);
-        $this->sort = $useNaturalSort ? \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_NAME_NATURAL : \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_NAME;
+        $this->sort = $useNaturalSort ? \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_NAME_NATURAL : \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_NAME;
         return $this;
     }
     /**
@@ -417,7 +417,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function sortByType()
     {
-        $this->sort = \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_TYPE;
+        $this->sort = \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_TYPE;
         return $this;
     }
     /**
@@ -433,7 +433,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function sortByAccessedTime()
     {
-        $this->sort = \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_ACCESSED_TIME;
+        $this->sort = \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_ACCESSED_TIME;
         return $this;
     }
     /**
@@ -461,7 +461,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function sortByChangedTime()
     {
-        $this->sort = \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_CHANGED_TIME;
+        $this->sort = \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_CHANGED_TIME;
         return $this;
     }
     /**
@@ -477,7 +477,7 @@ class Finder implements \IteratorAggregate, \Countable
      */
     public function sortByModifiedTime()
     {
-        $this->sort = \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_MODIFIED_TIME;
+        $this->sort = \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SortableIterator::SORT_BY_MODIFIED_TIME;
         return $this;
     }
     /**
@@ -538,7 +538,7 @@ class Finder implements \IteratorAggregate, \Countable
                 \sort($glob);
                 $resolvedDirs = \array_merge($resolvedDirs, \array_map([$this, 'normalizeDir'], $glob));
             } else {
-                throw new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Exception\DirectoryNotFoundException(\sprintf('The "%s" directory does not exist.', $dir));
+                throw new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Exception\DirectoryNotFoundException(\sprintf('The "%s" directory does not exist.', $dir));
             }
         }
         $this->dirs = \array_merge($this->dirs, $resolvedDirs);
@@ -634,7 +634,7 @@ class Finder implements \IteratorAggregate, \Countable
             if (!\is_readable($gitignoreFilePath)) {
                 throw new \RuntimeException(\sprintf('The "ignoreVCSIgnored" option cannot be used by the Finder as the "%s" file is not readable.', $gitignoreFilePath));
             }
-            $notPaths = \array_merge($notPaths, [\_PhpScoperfcf15c26e033\Symfony\Component\Finder\Gitignore::toRegex(\file_get_contents($gitignoreFilePath))]);
+            $notPaths = \array_merge($notPaths, [\_PhpScoperb730595bc9f4\Symfony\Component\Finder\Gitignore::toRegex(\file_get_contents($gitignoreFilePath))]);
         }
         $minDepth = 0;
         $maxDepth = \PHP_INT_MAX;
@@ -660,37 +660,37 @@ class Finder implements \IteratorAggregate, \Countable
         if ($this->followLinks) {
             $flags |= \RecursiveDirectoryIterator::FOLLOW_SYMLINKS;
         }
-        $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator($dir, $flags, $this->ignoreUnreadableDirs);
+        $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator($dir, $flags, $this->ignoreUnreadableDirs);
         if ($exclude) {
-            $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator($iterator, $exclude);
+            $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator($iterator, $exclude);
         }
         $iterator = new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::SELF_FIRST);
         if ($minDepth > 0 || $maxDepth < \PHP_INT_MAX) {
-            $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\DepthRangeFilterIterator($iterator, $minDepth, $maxDepth);
+            $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\DepthRangeFilterIterator($iterator, $minDepth, $maxDepth);
         }
         if ($this->mode) {
-            $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\FileTypeFilterIterator($iterator, $this->mode);
+            $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\FileTypeFilterIterator($iterator, $this->mode);
         }
         if ($this->names || $this->notNames) {
-            $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\FilenameFilterIterator($iterator, $this->names, $this->notNames);
+            $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\FilenameFilterIterator($iterator, $this->names, $this->notNames);
         }
         if ($this->contains || $this->notContains) {
-            $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\FilecontentFilterIterator($iterator, $this->contains, $this->notContains);
+            $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\FilecontentFilterIterator($iterator, $this->contains, $this->notContains);
         }
         if ($this->sizes) {
-            $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SizeRangeFilterIterator($iterator, $this->sizes);
+            $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SizeRangeFilterIterator($iterator, $this->sizes);
         }
         if ($this->dates) {
-            $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\DateRangeFilterIterator($iterator, $this->dates);
+            $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\DateRangeFilterIterator($iterator, $this->dates);
         }
         if ($this->filters) {
-            $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\CustomFilterIterator($iterator, $this->filters);
+            $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\CustomFilterIterator($iterator, $this->filters);
         }
         if ($this->paths || $notPaths) {
-            $iterator = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\PathFilterIterator($iterator, $this->paths, $notPaths);
+            $iterator = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\PathFilterIterator($iterator, $this->paths, $notPaths);
         }
         if ($this->sort || $this->reverseSorting) {
-            $iteratorAggregate = new \_PhpScoperfcf15c26e033\Symfony\Component\Finder\Iterator\SortableIterator($iterator, $this->sort, $this->reverseSorting);
+            $iteratorAggregate = new \_PhpScoperb730595bc9f4\Symfony\Component\Finder\Iterator\SortableIterator($iterator, $this->sort, $this->reverseSorting);
             $iterator = $iteratorAggregate->getIterator();
         }
         return $iterator;
