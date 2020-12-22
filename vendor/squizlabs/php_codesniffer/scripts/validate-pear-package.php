@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoper68a3a2539032;
+namespace _PhpScoper57272265e1c9;
 
 /**
  * Validate the PHP_CodeSniffer PEAR package.xml file.
@@ -15,5 +15,5 @@ namespace _PhpScoper68a3a2539032;
  */
 require_once \dirname(__DIR__) . '/tests/FileList.php';
 require_once __DIR__ . '/ValidatePEAR/ValidatePEARPackageXML.php';
-$validate = new \_PhpScoper68a3a2539032\ValidatePEARPackageXML();
+$validate = new \_PhpScoper57272265e1c9\ValidatePEARPackageXML();
 $validate->validate();

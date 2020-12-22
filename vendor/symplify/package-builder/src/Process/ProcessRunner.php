@@ -3,16 +3,16 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Process;
 
-use _PhpScoper68a3a2539032\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper68a3a2539032\Symfony\Component\Process\Process;
+use _PhpScoper57272265e1c9\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper57272265e1c9\Symfony\Component\Process\Process;
 final class ProcessRunner
 {
     /**
      * @param string[] $command
      */
-    public function createAndRun(array $command, string $cwd, \_PhpScoper68a3a2539032\Symfony\Component\Console\Output\OutputInterface $output) : void
+    public function createAndRun(array $command, string $cwd, \_PhpScoper57272265e1c9\Symfony\Component\Console\Output\OutputInterface $output) : void
     {
-        $process = new \_PhpScoper68a3a2539032\Symfony\Component\Process\Process($command, $cwd, null, null, null);
+        $process = new \_PhpScoper57272265e1c9\Symfony\Component\Process\Process($command, $cwd, null, null, null);
         $process->mustRun(static function (string $type, string $buffer) use($output) : void {
             $output->write($buffer);
         });
