@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper57272265e1c9\Symfony\Component\Finder\Iterator;
+namespace _PhpScoper5813f9b171f8\Symfony\Component\Finder\Iterator;
 
 /**
  * PathFilterIterator filters files by path patterns (e.g. some/special/dir).
@@ -16,7 +16,7 @@ namespace _PhpScoper57272265e1c9\Symfony\Component\Finder\Iterator;
  * @author Fabien Potencier  <fabien@symfony.com>
  * @author Włodzimierz Gajda <gajdaw@gajdaw.pl>
  */
-class PathFilterIterator extends \_PhpScoper57272265e1c9\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
+class PathFilterIterator extends \_PhpScoper5813f9b171f8\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
 {
     /**
      * Filters the iterator values.

@@ -23,7 +23,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper57272265e1c9\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper5813f9b171f8\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Antonio J. García Lagar <aj@garcialagar.es>
  * @author SpacePossum
@@ -137,7 +137,7 @@ echo 1;
     protected function createConfigurationDefinition()
     {
         $fixerName = $this->getName();
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('header', 'Proper header content.'))->setAllowedTypes(['string'])->setNormalizer(static function (\_PhpScoper57272265e1c9\Symfony\Component\OptionsResolver\Options $options, $value) use($fixerName) {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('header', 'Proper header content.'))->setAllowedTypes(['string'])->setNormalizer(static function (\_PhpScoper5813f9b171f8\Symfony\Component\OptionsResolver\Options $options, $value) use($fixerName) {
             if ('' === \trim($value)) {
                 return '';
             }
