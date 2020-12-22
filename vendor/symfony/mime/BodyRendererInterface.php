@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb730595bc9f4\Symfony\Component\Mime;
+namespace _PhpScoper68a3a2539032\Symfony\Component\Mime;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>
@@ -17,5 +17,5 @@ namespace _PhpScoperb730595bc9f4\Symfony\Component\Mime;
  */
 interface BodyRendererInterface
 {
-    public function render(\_PhpScoperb730595bc9f4\Symfony\Component\Mime\Message $message) : void;
+    public function render(\_PhpScoper68a3a2539032\Symfony\Component\Mime\Message $message) : void;
 }

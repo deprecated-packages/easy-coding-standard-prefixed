@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb730595bc9f4\Rector\Core\Contract\Rector;
+namespace _PhpScoper68a3a2539032\Rector\Core\Contract\Rector;
 
-if (\interface_exists('_PhpScoperb730595bc9f4\\Rector\\Core\\Contract\\Rector\\RectorInterface')) {
+if (\interface_exists('_PhpScoper68a3a2539032\\Rector\\Core\\Contract\\Rector\\RectorInterface')) {
     return;
 }
 interface RectorInterface

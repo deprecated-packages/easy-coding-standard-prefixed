@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb730595bc9f4\PhpParser\Node\Stmt;
+namespace _PhpScoper68a3a2539032\PhpParser\Node\Stmt;
 
-use _PhpScoperb730595bc9f4\PhpParser\Node\Identifier;
-use _PhpScoperb730595bc9f4\PhpParser\Node\Stmt;
-class Goto_ extends \_PhpScoperb730595bc9f4\PhpParser\Node\Stmt
+use _PhpScoper68a3a2539032\PhpParser\Node\Identifier;
+use _PhpScoper68a3a2539032\PhpParser\Node\Stmt;
+class Goto_ extends \_PhpScoper68a3a2539032\PhpParser\Node\Stmt
 {
     /** @var Identifier Name of label to jump to */
     public $name;
@@ -18,7 +18,7 @@ class Goto_ extends \_PhpScoperb730595bc9f4\PhpParser\Node\Stmt
     public function __construct($name, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->name = \is_string($name) ? new \_PhpScoperb730595bc9f4\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScoper68a3a2539032\PhpParser\Node\Identifier($name) : $name;
     }
     public function getSubNodeNames() : array
     {
