@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\DependencyInjection\Extension;
 
-use _PhpScoperd9fcac9e904f\Symfony\Component\Config\FileLocator;
-use _PhpScoperd9fcac9e904f\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperd9fcac9e904f\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoperd9fcac9e904f\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-final class ConsoleColorDiffExtension extends \_PhpScoperd9fcac9e904f\Symfony\Component\DependencyInjection\Extension\Extension
+use _PhpScoper14cb6de5473d\Symfony\Component\Config\FileLocator;
+use _PhpScoper14cb6de5473d\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper14cb6de5473d\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoper14cb6de5473d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+final class ConsoleColorDiffExtension extends \_PhpScoper14cb6de5473d\Symfony\Component\DependencyInjection\Extension\Extension
 {
-    public function load(array $configs, \_PhpScoperd9fcac9e904f\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, \_PhpScoper14cb6de5473d\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
-        $phpFileLoader = new \_PhpScoperd9fcac9e904f\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperd9fcac9e904f\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
+        $phpFileLoader = new \_PhpScoper14cb6de5473d\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoper14cb6de5473d\Symfony\Component\Config\FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');
     }
 }

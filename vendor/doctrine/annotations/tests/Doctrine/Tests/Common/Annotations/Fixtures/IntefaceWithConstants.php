@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperd9fcac9e904f\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper14cb6de5473d\Doctrine\Tests\Common\Annotations\Fixtures;
 
 interface IntefaceWithConstants
 {

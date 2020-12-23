@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperd9fcac9e904f;
+namespace _PhpScoper14cb6de5473d;
 
 /*
  * This file is part of the Symfony package.
@@ -10,24 +10,24 @@ namespace _PhpScoperd9fcac9e904f;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoperd9fcac9e904f\Symfony\Polyfill\Php70 as p;
+use _PhpScoper14cb6de5473d\Symfony\Polyfill\Php70 as p;
 if (\PHP_VERSION_ID < 70000) {
     if (!\function_exists('intdiv')) {
         function intdiv($dividend, $divisor)
         {
-            return \_PhpScoperd9fcac9e904f\Symfony\Polyfill\Php70\Php70::intdiv($dividend, $divisor);
+            return \_PhpScoper14cb6de5473d\Symfony\Polyfill\Php70\Php70::intdiv($dividend, $divisor);
         }
     }
     if (!\function_exists('preg_replace_callback_array')) {
         function preg_replace_callback_array(array $patterns, $subject, $limit = -1, &$count = 0)
         {
-            return \_PhpScoperd9fcac9e904f\Symfony\Polyfill\Php70\Php70::preg_replace_callback_array($patterns, $subject, $limit, $count);
+            return \_PhpScoper14cb6de5473d\Symfony\Polyfill\Php70\Php70::preg_replace_callback_array($patterns, $subject, $limit, $count);
         }
     }
     if (!\function_exists('error_clear_last')) {
         function error_clear_last()
         {
-            return \_PhpScoperd9fcac9e904f\Symfony\Polyfill\Php70\Php70::error_clear_last();
+            return \_PhpScoper14cb6de5473d\Symfony\Polyfill\Php70\Php70::error_clear_last();
         }
     }
 }
