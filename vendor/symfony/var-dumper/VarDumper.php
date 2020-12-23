@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5813f9b171f8\Symfony\Component\VarDumper;
+namespace _PhpScoperd9fcac9e904f\Symfony\Component\VarDumper;
 
-use _PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use _PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\CliDumper;
-use _PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
-use _PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\ContextualizedDumper;
-use _PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use _PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use _PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
+use _PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\ContextualizedDumper;
+use _PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\HtmlDumper;
 // Load the global dump() function
 require_once __DIR__ . '/Resources/functions/dump.php';
 /**
@@ -27,14 +27,14 @@ class VarDumper
     public static function dump($var)
     {
         if (null === self::$handler) {
-            $cloner = new \_PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Cloner\VarCloner();
-            $cloner->addCasters(\_PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
+            $cloner = new \_PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Cloner\VarCloner();
+            $cloner->addCasters(\_PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
             if (isset($_SERVER['VAR_DUMPER_FORMAT'])) {
-                $dumper = 'html' === $_SERVER['VAR_DUMPER_FORMAT'] ? new \_PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\HtmlDumper() : new \_PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\CliDumper();
+                $dumper = 'html' === $_SERVER['VAR_DUMPER_FORMAT'] ? new \_PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\HtmlDumper() : new \_PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\CliDumper();
             } else {
-                $dumper = \in_array(\PHP_SAPI, ['cli', 'phpdbg']) ? new \_PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\CliDumper() : new \_PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\HtmlDumper();
+                $dumper = \in_array(\PHP_SAPI, ['cli', 'phpdbg']) ? new \_PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\CliDumper() : new \_PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\HtmlDumper();
             }
-            $dumper = new \_PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\ContextualizedDumper($dumper, [new \_PhpScoper5813f9b171f8\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider()]);
+            $dumper = new \_PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\ContextualizedDumper($dumper, [new \_PhpScoperd9fcac9e904f\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider()]);
             self::$handler = function ($var) use($cloner, $dumper) {
                 $dumper->dump($cloner->cloneVar($var));
             };

@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5813f9b171f8\PhpParser\Node\Expr;
+namespace _PhpScoperd9fcac9e904f\PhpParser\Node\Expr;
 
-use _PhpScoper5813f9b171f8\PhpParser\Node\Expr;
+use _PhpScoperd9fcac9e904f\PhpParser\Node\Expr;
 /**
  * Error node used during parsing with error recovery.
  *
  * An error node may be placed at a position where an expression is required, but an error occurred.
  * Error nodes will not be present if the parser is run in throwOnError mode (the default).
  */
-class Error extends \_PhpScoper5813f9b171f8\PhpParser\Node\Expr
+class Error extends \_PhpScoperd9fcac9e904f\PhpParser\Node\Expr
 {
     /**
      * Constructs an error node.

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\DocBlock;
 
-use _PhpScoper5813f9b171f8\Nette\Utils\Strings;
+use _PhpScoperd9fcac9e904f\Nette\Utils\Strings;
 use Symplify\CodingStandard\Tokens\CommentedLineTrimmer;
 /**
  * Heavily inspired by
@@ -40,6 +40,6 @@ final class Decommenter
      */
     private function clearContent(string $content) : string
     {
-        return \_PhpScoper5813f9b171f8\Nette\Utils\Strings::replace($content, self::LINE_BREAKER_REGEX, '-');
+        return \_PhpScoperd9fcac9e904f\Nette\Utils\Strings::replace($content, self::LINE_BREAKER_REGEX, '-');
     }
 }

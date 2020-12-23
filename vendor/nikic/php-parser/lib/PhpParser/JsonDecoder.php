@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5813f9b171f8\PhpParser;
+namespace _PhpScoperd9fcac9e904f\PhpParser;
 
 class JsonDecoder
 {
@@ -36,7 +36,7 @@ class JsonDecoder
         }
         return $decodedArray;
     }
-    private function decodeNode(array $value) : \_PhpScoper5813f9b171f8\PhpParser\Node
+    private function decodeNode(array $value) : \_PhpScoperd9fcac9e904f\PhpParser\Node
     {
         $nodeType = $value['nodeType'];
         if (!\is_string($nodeType)) {
@@ -59,9 +59,9 @@ class JsonDecoder
         }
         return $node;
     }
-    private function decodeComment(array $value) : \_PhpScoper5813f9b171f8\PhpParser\Comment
+    private function decodeComment(array $value) : \_PhpScoperd9fcac9e904f\PhpParser\Comment
     {
-        $className = $value['nodeType'] === 'Comment' ? \_PhpScoper5813f9b171f8\PhpParser\Comment::class : \_PhpScoper5813f9b171f8\PhpParser\Comment\Doc::class;
+        $className = $value['nodeType'] === 'Comment' ? \_PhpScoperd9fcac9e904f\PhpParser\Comment::class : \_PhpScoperd9fcac9e904f\PhpParser\Comment\Doc::class;
         if (!isset($value['text'])) {
             throw new \RuntimeException('Comment must have text');
         }
