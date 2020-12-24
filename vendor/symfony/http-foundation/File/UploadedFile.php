@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File;
+namespace _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File;
 
-use _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException;
-use _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
-use _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException;
-use _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException;
-use _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\NoFileException;
-use _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException;
-use _PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\PartialFileException;
-use _PhpScoper629192f0909b\Symfony\Component\Mime\MimeTypes;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\NoFileException;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\PartialFileException;
+use _PhpScopera37d6fb0b1ab\Symfony\Component\Mime\MimeTypes;
 /**
  * A file uploaded through a form.
  *
@@ -27,7 +27,7 @@ use _PhpScoper629192f0909b\Symfony\Component\Mime\MimeTypes;
  * @author Florian Eckerstorfer <florian@eckerstorfer.org>
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class UploadedFile extends \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\File
+class UploadedFile extends \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\File
 {
     private $test = \false;
     private $originalName;
@@ -130,7 +130,7 @@ class UploadedFile extends \_PhpScoper629192f0909b\Symfony\Component\HttpFoundat
      */
     public function guessClientExtension()
     {
-        return \_PhpScoper629192f0909b\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getClientMimeType())[0] ?? null;
+        return \_PhpScopera37d6fb0b1ab\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getClientMimeType())[0] ?? null;
     }
     /**
      * Returns the file size.
@@ -192,28 +192,28 @@ class UploadedFile extends \_PhpScoper629192f0909b\Symfony\Component\HttpFoundat
             $moved = \move_uploaded_file($this->getPathname(), $target);
             \restore_error_handler();
             if (!$moved) {
-                throw new \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s)', $this->getPathname(), $target, \strip_tags($error)));
+                throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s)', $this->getPathname(), $target, \strip_tags($error)));
             }
             @\chmod($target, 0666 & ~\umask());
             return $target;
         }
         switch ($this->error) {
             case \UPLOAD_ERR_INI_SIZE:
-                throw new \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException($this->getErrorMessage());
+                throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException($this->getErrorMessage());
             case \UPLOAD_ERR_FORM_SIZE:
-                throw new \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException($this->getErrorMessage());
+                throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException($this->getErrorMessage());
             case \UPLOAD_ERR_PARTIAL:
-                throw new \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\PartialFileException($this->getErrorMessage());
+                throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\PartialFileException($this->getErrorMessage());
             case \UPLOAD_ERR_NO_FILE:
-                throw new \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\NoFileException($this->getErrorMessage());
+                throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\NoFileException($this->getErrorMessage());
             case \UPLOAD_ERR_CANT_WRITE:
-                throw new \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException($this->getErrorMessage());
+                throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException($this->getErrorMessage());
             case \UPLOAD_ERR_NO_TMP_DIR:
-                throw new \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException($this->getErrorMessage());
+                throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException($this->getErrorMessage());
             case \UPLOAD_ERR_EXTENSION:
-                throw new \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException($this->getErrorMessage());
+                throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException($this->getErrorMessage());
         }
-        throw new \_PhpScoper629192f0909b\Symfony\Component\HttpFoundation\File\Exception\FileException($this->getErrorMessage());
+        throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\HttpFoundation\File\Exception\FileException($this->getErrorMessage());
     }
     /**
      * Returns the maximum size of an uploaded file as configured in php.ini.
