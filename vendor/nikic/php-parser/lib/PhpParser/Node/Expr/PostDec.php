@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5ca2d8bcb02c\PhpParser\Node\Expr;
+namespace _PhpScopere106f9fd4493\PhpParser\Node\Expr;
 
-use _PhpScoper5ca2d8bcb02c\PhpParser\Node\Expr;
-class PostDec extends \_PhpScoper5ca2d8bcb02c\PhpParser\Node\Expr
+use _PhpScopere106f9fd4493\PhpParser\Node\Expr;
+class PostDec extends \_PhpScopere106f9fd4493\PhpParser\Node\Expr
 {
     /** @var Expr Variable */
     public $var;
@@ -14,7 +14,7 @@ class PostDec extends \_PhpScoper5ca2d8bcb02c\PhpParser\Node\Expr
      * @param Expr  $var        Variable
      * @param array $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper5ca2d8bcb02c\PhpParser\Node\Expr $var, array $attributes = [])
+    public function __construct(\_PhpScopere106f9fd4493\PhpParser\Node\Expr $var, array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->var = $var;

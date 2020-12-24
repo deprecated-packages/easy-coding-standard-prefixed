@@ -10,12 +10,12 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_key_exists;
 use function in_array;
 use const T_AS;
-use const _PhpScoper5ca2d8bcb02c\T_BITWISE_AND;
-use const _PhpScoper5ca2d8bcb02c\T_COMMA;
+use const _PhpScopere106f9fd4493\T_BITWISE_AND;
+use const _PhpScopere106f9fd4493\T_COMMA;
 use const T_DOUBLE_ARROW;
-use const _PhpScoper5ca2d8bcb02c\T_EQUAL;
-use const _PhpScoper5ca2d8bcb02c\T_OPEN_PARENTHESIS;
-use const _PhpScoper5ca2d8bcb02c\T_OPEN_SHORT_ARRAY;
+use const _PhpScopere106f9fd4493\T_EQUAL;
+use const _PhpScopere106f9fd4493\T_OPEN_PARENTHESIS;
+use const _PhpScopere106f9fd4493\T_OPEN_SHORT_ARRAY;
 use const T_USE;
 class DisallowReferenceSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

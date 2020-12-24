@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5ca2d8bcb02c\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScopere106f9fd4493\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper5ca2d8bcb02c\Symfony\Component\Console\ConsoleEvents;
-use _PhpScoper5ca2d8bcb02c\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper5ca2d8bcb02c\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use _PhpScoper5ca2d8bcb02c\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
-use _PhpScoper5ca2d8bcb02c\Symfony\Component\VarDumper\Server\Connection;
-use _PhpScoper5ca2d8bcb02c\Symfony\Component\VarDumper\VarDumper;
+use _PhpScopere106f9fd4493\Symfony\Component\Console\ConsoleEvents;
+use _PhpScopere106f9fd4493\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScopere106f9fd4493\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use _PhpScopere106f9fd4493\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
+use _PhpScopere106f9fd4493\Symfony\Component\VarDumper\Server\Connection;
+use _PhpScopere106f9fd4493\Symfony\Component\VarDumper\VarDumper;
 /**
  * Configures dump() handler.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DumpListener implements \_PhpScoper5ca2d8bcb02c\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class DumpListener implements \_PhpScopere106f9fd4493\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $cloner;
     private $dumper;
     private $connection;
-    public function __construct(\_PhpScoper5ca2d8bcb02c\Symfony\Component\VarDumper\Cloner\ClonerInterface $cloner, \_PhpScoper5ca2d8bcb02c\Symfony\Component\VarDumper\Dumper\DataDumperInterface $dumper, \_PhpScoper5ca2d8bcb02c\Symfony\Component\VarDumper\Server\Connection $connection = null)
+    public function __construct(\_PhpScopere106f9fd4493\Symfony\Component\VarDumper\Cloner\ClonerInterface $cloner, \_PhpScopere106f9fd4493\Symfony\Component\VarDumper\Dumper\DataDumperInterface $dumper, \_PhpScopere106f9fd4493\Symfony\Component\VarDumper\Server\Connection $connection = null)
     {
         $this->cloner = $cloner;
         $this->dumper = $dumper;
@@ -37,7 +37,7 @@ class DumpListener implements \_PhpScoper5ca2d8bcb02c\Symfony\Component\EventDis
         $cloner = $this->cloner;
         $dumper = $this->dumper;
         $connection = $this->connection;
-        \_PhpScoper5ca2d8bcb02c\Symfony\Component\VarDumper\VarDumper::setHandler(static function ($var) use($cloner, $dumper, $connection) {
+        \_PhpScopere106f9fd4493\Symfony\Component\VarDumper\VarDumper::setHandler(static function ($var) use($cloner, $dumper, $connection) {
             $data = $cloner->cloneVar($var);
             if (!$connection || !$connection->write($data)) {
                 $dumper->dump($data);
@@ -46,10 +46,10 @@ class DumpListener implements \_PhpScoper5ca2d8bcb02c\Symfony\Component\EventDis
     }
     public static function getSubscribedEvents()
     {
-        if (!\class_exists(\_PhpScoper5ca2d8bcb02c\Symfony\Component\Console\ConsoleEvents::class)) {
+        if (!\class_exists(\_PhpScopere106f9fd4493\Symfony\Component\Console\ConsoleEvents::class)) {
             return [];
         }
         // Register early to have a working dump() as early as possible
-        return [\_PhpScoper5ca2d8bcb02c\Symfony\Component\Console\ConsoleEvents::COMMAND => ['configure', 1024]];
+        return [\_PhpScopere106f9fd4493\Symfony\Component\Console\ConsoleEvents::COMMAND => ['configure', 1024]];
     }
 }

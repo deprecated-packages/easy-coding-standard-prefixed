@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5ca2d8bcb02c\PhpParser\Node\Stmt;
+namespace _PhpScopere106f9fd4493\PhpParser\Node\Stmt;
 
-use _PhpScoper5ca2d8bcb02c\PhpParser\Node;
-class Do_ extends \_PhpScoper5ca2d8bcb02c\PhpParser\Node\Stmt
+use _PhpScopere106f9fd4493\PhpParser\Node;
+class Do_ extends \_PhpScopere106f9fd4493\PhpParser\Node\Stmt
 {
     /** @var Node\Stmt[] Statements */
     public $stmts;
@@ -17,7 +17,7 @@ class Do_ extends \_PhpScoper5ca2d8bcb02c\PhpParser\Node\Stmt
      * @param Node\Stmt[] $stmts      Statements
      * @param array       $attributes Additional attributes
      */
-    public function __construct(\_PhpScoper5ca2d8bcb02c\PhpParser\Node\Expr $cond, array $stmts = [], array $attributes = [])
+    public function __construct(\_PhpScopere106f9fd4493\PhpParser\Node\Expr $cond, array $stmts = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->cond = $cond;

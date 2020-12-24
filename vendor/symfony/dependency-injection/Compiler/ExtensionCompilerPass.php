@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * A pass to automatically process extensions if they implement
  * CompilerPassInterface.
  *
  * @author Wouter J <wouter@wouterj.nl>
  */
-class ExtensionCompilerPass implements \_PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ExtensionCompilerPass implements \_PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         foreach ($container->getExtensions() as $extension) {
-            if (!$extension instanceof \_PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface) {
+            if (!$extension instanceof \_PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface) {
                 continue;
             }
             $extension->process($container);

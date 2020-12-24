@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper5ca2d8bcb02c\Nette\Utils;
+namespace _PhpScopere106f9fd4493\Nette\Utils;
 
-use _PhpScoper5ca2d8bcb02c\Nette;
-use _PhpScoper5ca2d8bcb02c\Nette\MemberAccessException;
+use _PhpScopere106f9fd4493\Nette;
+use _PhpScopere106f9fd4493\Nette\MemberAccessException;
 /**
  * Nette\SmartObject helpers.
  */
@@ -24,7 +24,7 @@ final class ObjectHelpers
         $hint = self::getSuggestion(\array_merge(\array_filter($rc->getProperties(\ReflectionProperty::IS_PUBLIC), function ($p) {
             return !$p->isStatic();
         }), self::parseFullDoc($rc, '~^[ \\t*]*@property(?:-read)?[ \\t]+(?:\\S+[ \\t]+)??\\$(\\w+)~m')), $name);
-        throw new \_PhpScoper5ca2d8bcb02c\Nette\MemberAccessException("Cannot read an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
+        throw new \_PhpScopere106f9fd4493\Nette\MemberAccessException("Cannot read an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
     }
     /**
      * @throws MemberAccessException
@@ -35,7 +35,7 @@ final class ObjectHelpers
         $hint = self::getSuggestion(\array_merge(\array_filter($rc->getProperties(\ReflectionProperty::IS_PUBLIC), function ($p) {
             return !$p->isStatic();
         }), self::parseFullDoc($rc, '~^[ \\t*]*@property(?:-write)?[ \\t]+(?:\\S+[ \\t]+)??\\$(\\w+)~m')), $name);
-        throw new \_PhpScoper5ca2d8bcb02c\Nette\MemberAccessException("Cannot write to an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
+        throw new \_PhpScopere106f9fd4493\Nette\MemberAccessException("Cannot write to an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
     }
     /**
      * @throws MemberAccessException
@@ -47,7 +47,7 @@ final class ObjectHelpers
             // called parent::$method()
             $class = 'parent';
         }
-        throw new \_PhpScoper5ca2d8bcb02c\Nette\MemberAccessException("Call to undefined method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
+        throw new \_PhpScopere106f9fd4493\Nette\MemberAccessException("Call to undefined method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
     }
     /**
      * @throws MemberAccessException
@@ -57,7 +57,7 @@ final class ObjectHelpers
         $hint = self::getSuggestion(\array_filter((new \ReflectionClass($class))->getMethods(\ReflectionMethod::IS_PUBLIC), function ($m) {
             return $m->isStatic();
         }), $method);
-        throw new \_PhpScoper5ca2d8bcb02c\Nette\MemberAccessException("Call to undefined static method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
+        throw new \_PhpScopere106f9fd4493\Nette\MemberAccessException("Call to undefined static method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
     }
     /**
      * Returns array of magic properties defined by annotation @property.

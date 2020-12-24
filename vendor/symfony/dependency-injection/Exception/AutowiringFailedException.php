@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Exception;
+namespace _PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Thrown when a definition cannot be autowired.
  */
-class AutowiringFailedException extends \_PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Exception\RuntimeException
+class AutowiringFailedException extends \_PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Exception\RuntimeException
 {
     private $serviceId;
     private $messageCallback;

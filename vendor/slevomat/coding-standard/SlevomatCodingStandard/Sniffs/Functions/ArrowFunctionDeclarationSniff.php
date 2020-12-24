@@ -13,7 +13,7 @@ use function str_repeat;
 use function strlen;
 use function strpos;
 use const T_FN;
-use const _PhpScoper5ca2d8bcb02c\T_FN_ARROW;
+use const _PhpScopere106f9fd4493\T_FN_ARROW;
 use const T_WHITESPACE;
 class ArrowFunctionDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Alias;
+use _PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Alias;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AliasConfigurator extends \_PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class AliasConfigurator extends \_PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     const FACTORY = 'alias';
     use Traits\DeprecateTrait;
     use Traits\PublicTrait;
-    public function __construct(\_PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScoper5ca2d8bcb02c\Symfony\Component\DependencyInjection\Alias $alias)
+    public function __construct(\_PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Alias $alias)
     {
         $this->parent = $parent;
         $this->definition = $alias;

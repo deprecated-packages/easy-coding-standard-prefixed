@@ -23,8 +23,8 @@ if (\is_file(__DIR__ . '/../autoload.php') === \true) {
 // older PHPUnit versions due to return type hints, so maintain
 // two different suite objects.
 $phpunit7 = \false;
-if (\class_exists('_PhpScoper5ca2d8bcb02c\\PHPUnit\\Runner\\Version') === \true) {
-    $version = \_PhpScoper5ca2d8bcb02c\PHPUnit\Runner\Version::id();
+if (\class_exists('_PhpScopere106f9fd4493\\PHPUnit\\Runner\\Version') === \true) {
+    $version = \_PhpScopere106f9fd4493\PHPUnit\Runner\Version::id();
     if ($version[0] === '7') {
         $phpunit7 = \true;
     }
