@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera37d6fb0b1ab\Symfony\Component\Mime;
+namespace _PhpScoper5ca2d8bcb02c\Symfony\Component\Mime;
 
-use _PhpScopera37d6fb0b1ab\Symfony\Component\Mime\Exception\InvalidArgumentException;
-use _PhpScopera37d6fb0b1ab\Symfony\Component\Mime\Exception\LogicException;
+use _PhpScoper5ca2d8bcb02c\Symfony\Component\Mime\Exception\InvalidArgumentException;
+use _PhpScoper5ca2d8bcb02c\Symfony\Component\Mime\Exception\LogicException;
 /**
  * Guesses the MIME type using the PECL extension FileInfo.
  *
@@ -19,7 +19,7 @@ use _PhpScopera37d6fb0b1ab\Symfony\Component\Mime\Exception\LogicException;
  *
  * @experimental in 4.3
  */
-class FileinfoMimeTypeGuesser implements \_PhpScopera37d6fb0b1ab\Symfony\Component\Mime\MimeTypeGuesserInterface
+class FileinfoMimeTypeGuesser implements \_PhpScoper5ca2d8bcb02c\Symfony\Component\Mime\MimeTypeGuesserInterface
 {
     private $magicFile;
     /**
@@ -44,10 +44,10 @@ class FileinfoMimeTypeGuesser implements \_PhpScopera37d6fb0b1ab\Symfony\Compone
     public function guessMimeType(string $path) : ?string
     {
         if (!\is_file($path) || !\is_readable($path)) {
-            throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('The "%s" file does not exist or is not readable.', $path));
+            throw new \_PhpScoper5ca2d8bcb02c\Symfony\Component\Mime\Exception\InvalidArgumentException(\sprintf('The "%s" file does not exist or is not readable.', $path));
         }
         if (!$this->isGuesserSupported()) {
-            throw new \_PhpScopera37d6fb0b1ab\Symfony\Component\Mime\Exception\LogicException(\sprintf('The "%s" guesser is not supported.', __CLASS__));
+            throw new \_PhpScoper5ca2d8bcb02c\Symfony\Component\Mime\Exception\LogicException(\sprintf('The "%s" guesser is not supported.', __CLASS__));
         }
         if (\false === ($finfo = new \finfo(\FILEINFO_MIME_TYPE, $this->magicFile))) {
             return null;

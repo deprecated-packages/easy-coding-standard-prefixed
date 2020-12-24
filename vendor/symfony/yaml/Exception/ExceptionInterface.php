@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera37d6fb0b1ab\Symfony\Component\Yaml\Exception;
+namespace _PhpScoper5ca2d8bcb02c\Symfony\Component\Yaml\Exception;
 
 /**
  * Exception interface for all exceptions thrown by the component.
