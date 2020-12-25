@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper64ca614e27fd\Symfony\Component\Finder;
+namespace _PhpScoper745103eaabcd\Symfony\Component\Finder;
 
 /**
  * Glob matches globbing patterns against text.

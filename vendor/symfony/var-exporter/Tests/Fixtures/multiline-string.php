@@ -1,5 +1,5 @@
 <?php
 
-namespace _PhpScoper64ca614e27fd;
+namespace _PhpScoper745103eaabcd;
 
 return ["\0\0\r\n" . 'A' => 'B' . "\r" . 'C' . "\n" . "\n"];

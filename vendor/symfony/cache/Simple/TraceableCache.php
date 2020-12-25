@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper64ca614e27fd\Symfony\Component\Cache\Simple;
+namespace _PhpScoper745103eaabcd\Symfony\Component\Cache\Simple;
 
-use _PhpScoper64ca614e27fd\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
-use _PhpScoper64ca614e27fd\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper64ca614e27fd\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper64ca614e27fd\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoper64ca614e27fd\Symfony\Contracts\Service\ResetInterface;
-@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper64ca614e27fd\Symfony\Component\Cache\Simple\TraceableCache::class, \_PhpScoper64ca614e27fd\Symfony\Component\Cache\Simple\TraceableAdapter::class, \_PhpScoper64ca614e27fd\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
+use _PhpScoper745103eaabcd\Psr\SimpleCache\CacheInterface as Psr16CacheInterface;
+use _PhpScoper745103eaabcd\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper745103eaabcd\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper745103eaabcd\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper745103eaabcd\Symfony\Contracts\Service\ResetInterface;
+@\trigger_error(\sprintf('The "%s" class is deprecated since Symfony 4.3, use "%s" and type-hint for "%s" instead.', \_PhpScoper745103eaabcd\Symfony\Component\Cache\Simple\TraceableCache::class, \_PhpScoper745103eaabcd\Symfony\Component\Cache\Simple\TraceableAdapter::class, \_PhpScoper745103eaabcd\Symfony\Contracts\Cache\CacheInterface::class), \E_USER_DEPRECATED);
 /**
  * @deprecated since Symfony 4.3, use TraceableAdapter and type-hint for CacheInterface instead.
  */
-class TraceableCache implements \_PhpScoper64ca614e27fd\Psr\SimpleCache\CacheInterface, \_PhpScoper64ca614e27fd\Symfony\Component\Cache\PruneableInterface, \_PhpScoper64ca614e27fd\Symfony\Component\Cache\ResettableInterface
+class TraceableCache implements \_PhpScoper745103eaabcd\Psr\SimpleCache\CacheInterface, \_PhpScoper745103eaabcd\Symfony\Component\Cache\PruneableInterface, \_PhpScoper745103eaabcd\Symfony\Component\Cache\ResettableInterface
 {
     private $pool;
     private $miss;
     private $calls = [];
-    public function __construct(\_PhpScoper64ca614e27fd\Psr\SimpleCache\CacheInterface $pool)
+    public function __construct(\_PhpScoper745103eaabcd\Psr\SimpleCache\CacheInterface $pool)
     {
         $this->pool = $pool;
         $this->miss = new \stdClass();
@@ -183,7 +183,7 @@ class TraceableCache implements \_PhpScoper64ca614e27fd\Psr\SimpleCache\CacheInt
      */
     public function prune()
     {
-        if (!$this->pool instanceof \_PhpScoper64ca614e27fd\Symfony\Component\Cache\PruneableInterface) {
+        if (!$this->pool instanceof \_PhpScoper745103eaabcd\Symfony\Component\Cache\PruneableInterface) {
             return \false;
         }
         $event = $this->start(__FUNCTION__);
@@ -198,7 +198,7 @@ class TraceableCache implements \_PhpScoper64ca614e27fd\Psr\SimpleCache\CacheInt
      */
     public function reset()
     {
-        if (!$this->pool instanceof \_PhpScoper64ca614e27fd\Symfony\Contracts\Service\ResetInterface) {
+        if (!$this->pool instanceof \_PhpScoper745103eaabcd\Symfony\Contracts\Service\ResetInterface) {
             return;
         }
         $event = $this->start(__FUNCTION__);
@@ -216,9 +216,9 @@ class TraceableCache implements \_PhpScoper64ca614e27fd\Psr\SimpleCache\CacheInt
             $this->calls = [];
         }
     }
-    private function start(string $name) : \_PhpScoper64ca614e27fd\Symfony\Component\Cache\Simple\TraceableCacheEvent
+    private function start(string $name) : \_PhpScoper745103eaabcd\Symfony\Component\Cache\Simple\TraceableCacheEvent
     {
-        $this->calls[] = $event = new \_PhpScoper64ca614e27fd\Symfony\Component\Cache\Simple\TraceableCacheEvent();
+        $this->calls[] = $event = new \_PhpScoper745103eaabcd\Symfony\Component\Cache\Simple\TraceableCacheEvent();
         $event->name = $name;
         $event->start = \microtime(\true);
         return $event;
