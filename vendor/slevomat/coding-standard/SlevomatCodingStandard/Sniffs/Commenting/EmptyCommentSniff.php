@@ -13,7 +13,7 @@ use function preg_replace;
 use function strlen;
 use function substr;
 use const T_COMMENT;
-use const _PhpScoper7c1f54fd2f3a\T_DOC_COMMENT_OPEN_TAG;
+use const _PhpScoperc8fea59b0cb1\T_DOC_COMMENT_OPEN_TAG;
 use const T_WHITESPACE;
 class EmptyCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

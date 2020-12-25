@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7c1f54fd2f3a\Symfony\Component\Mime;
+namespace _PhpScoperc8fea59b0cb1\Symfony\Component\Mime;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @experimental in 4.3
  */
-interface MimeTypesInterface extends \_PhpScoper7c1f54fd2f3a\Symfony\Component\Mime\MimeTypeGuesserInterface
+interface MimeTypesInterface extends \_PhpScoperc8fea59b0cb1\Symfony\Component\Mime\MimeTypeGuesserInterface
 {
     /**
      * Gets the extensions for the given MIME type.

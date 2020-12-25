@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7c1f54fd2f3a\Symfony\Component\Config\Resource;
+namespace _PhpScoperc8fea59b0cb1\Symfony\Component\Config\Resource;
 
 /**
  * Interface for Resources that can check for freshness autonomously,
@@ -16,7 +16,7 @@ namespace _PhpScoper7c1f54fd2f3a\Symfony\Component\Config\Resource;
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-interface SelfCheckingResourceInterface extends \_PhpScoper7c1f54fd2f3a\Symfony\Component\Config\Resource\ResourceInterface
+interface SelfCheckingResourceInterface extends \_PhpScoperc8fea59b0cb1\Symfony\Component\Config\Resource\ResourceInterface
 {
     /**
      * Returns true if the resource has not been updated since the given timestamp.

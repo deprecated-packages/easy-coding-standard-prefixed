@@ -7,14 +7,14 @@
     <code_comparison>
         <code title="Valid: One blank line after the namespace declaration.">
         <![CDATA[
-namespace \_PhpScoper7c1f54fd2f3a\Foo\Bar;
+namespace \_PhpScoperc8fea59b0cb1\Foo\Bar;
 <em></em>
 use \Baz;
         ]]>
         </code>
         <code title="Invalid: No blank line after the namespace declaration.">
         <![CDATA[
-namespace \_PhpScoper7c1f54fd2f3a\Foo\Bar;
+namespace \_PhpScoperc8fea59b0cb1\Foo\Bar;
 use \Baz;
         ]]>
         </code>

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Descriptor;
+namespace _PhpScoperc8fea59b0cb1\Symfony\Component\Console\Descriptor;
 
-use _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Application;
-use _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Command\Command;
-use _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Helper\Helper;
-use _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperc8fea59b0cb1\Symfony\Component\Console\Application;
+use _PhpScoperc8fea59b0cb1\Symfony\Component\Console\Command\Command;
+use _PhpScoperc8fea59b0cb1\Symfony\Component\Console\Helper\Helper;
+use _PhpScoperc8fea59b0cb1\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoperc8fea59b0cb1\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoperc8fea59b0cb1\Symfony\Component\Console\Input\InputOption;
+use _PhpScoperc8fea59b0cb1\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Markdown descriptor.
  *
@@ -24,12 +24,12 @@ use _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Output\OutputInterface;
  *
  * @internal
  */
-class MarkdownDescriptor extends \_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Descriptor\Descriptor
+class MarkdownDescriptor extends \_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Descriptor\Descriptor
 {
     /**
      * {@inheritdoc}
      */
-    public function describe(\_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = [])
+    public function describe(\_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = [])
     {
         $decorated = $output->isDecorated();
         $output->setDecorated(\false);
@@ -46,14 +46,14 @@ class MarkdownDescriptor extends \_PhpScoper7c1f54fd2f3a\Symfony\Component\Conso
     /**
      * {@inheritdoc}
      */
-    protected function describeInputArgument(\_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Input\InputArgument $argument, array $options = [])
+    protected function describeInputArgument(\_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Input\InputArgument $argument, array $options = [])
     {
         $this->write('#### `' . ($argument->getName() ?: '<none>') . "`\n\n" . ($argument->getDescription() ? \preg_replace('/\\s*[\\r\\n]\\s*/', "\n", $argument->getDescription()) . "\n\n" : '') . '* Is required: ' . ($argument->isRequired() ? 'yes' : 'no') . "\n" . '* Is array: ' . ($argument->isArray() ? 'yes' : 'no') . "\n" . '* Default: `' . \str_replace("\n", '', \var_export($argument->getDefault(), \true)) . '`');
     }
     /**
      * {@inheritdoc}
      */
-    protected function describeInputOption(\_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Input\InputOption $option, array $options = [])
+    protected function describeInputOption(\_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Input\InputOption $option, array $options = [])
     {
         $name = '--' . $option->getName();
         if ($option->getShortcut()) {
@@ -64,7 +64,7 @@ class MarkdownDescriptor extends \_PhpScoper7c1f54fd2f3a\Symfony\Component\Conso
     /**
      * {@inheritdoc}
      */
-    protected function describeInputDefinition(\_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Input\InputDefinition $definition, array $options = [])
+    protected function describeInputDefinition(\_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Input\InputDefinition $definition, array $options = [])
     {
         if ($showArguments = \count($definition->getArguments()) > 0) {
             $this->write('### Arguments');
@@ -87,11 +87,11 @@ class MarkdownDescriptor extends \_PhpScoper7c1f54fd2f3a\Symfony\Component\Conso
     /**
      * {@inheritdoc}
      */
-    protected function describeCommand(\_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Command\Command $command, array $options = [])
+    protected function describeCommand(\_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Command\Command $command, array $options = [])
     {
         $command->getSynopsis();
         $command->mergeApplicationDefinition(\false);
-        $this->write('`' . $command->getName() . "`\n" . \str_repeat('-', \_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Helper\Helper::strlen($command->getName()) + 2) . "\n\n" . ($command->getDescription() ? $command->getDescription() . "\n\n" : '') . '### Usage' . "\n\n" . \array_reduce(\array_merge([$command->getSynopsis()], $command->getAliases(), $command->getUsages()), function ($carry, $usage) {
+        $this->write('`' . $command->getName() . "`\n" . \str_repeat('-', \_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Helper\Helper::strlen($command->getName()) + 2) . "\n\n" . ($command->getDescription() ? $command->getDescription() . "\n\n" : '') . '### Usage' . "\n\n" . \array_reduce(\array_merge([$command->getSynopsis()], $command->getAliases(), $command->getUsages()), function ($carry, $usage) {
             return $carry . '* `' . $usage . '`' . "\n";
         }));
         if ($help = $command->getProcessedHelp()) {
@@ -106,14 +106,14 @@ class MarkdownDescriptor extends \_PhpScoper7c1f54fd2f3a\Symfony\Component\Conso
     /**
      * {@inheritdoc}
      */
-    protected function describeApplication(\_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Application $application, array $options = [])
+    protected function describeApplication(\_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Application $application, array $options = [])
     {
         $describedNamespace = isset($options['namespace']) ? $options['namespace'] : null;
-        $description = new \_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
+        $description = new \_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
         $title = $this->getApplicationTitle($application);
-        $this->write($title . "\n" . \str_repeat('=', \_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Helper\Helper::strlen($title)));
+        $this->write($title . "\n" . \str_repeat('=', \_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Helper\Helper::strlen($title)));
         foreach ($description->getNamespaces() as $namespace) {
-            if (\_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
+            if (\_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
                 $this->write("\n\n");
                 $this->write('**' . $namespace['id'] . ':**');
             }
@@ -127,7 +127,7 @@ class MarkdownDescriptor extends \_PhpScoper7c1f54fd2f3a\Symfony\Component\Conso
             $this->write($this->describeCommand($command));
         }
     }
-    private function getApplicationTitle(\_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Application $application) : string
+    private function getApplicationTitle(\_PhpScoperc8fea59b0cb1\Symfony\Component\Console\Application $application) : string
     {
         if ('UNKNOWN' !== $application->getName()) {
             if ('UNKNOWN' !== $application->getVersion()) {

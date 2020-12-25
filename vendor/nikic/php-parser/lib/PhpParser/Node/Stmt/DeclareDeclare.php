@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7c1f54fd2f3a\PhpParser\Node\Stmt;
+namespace _PhpScoperc8fea59b0cb1\PhpParser\Node\Stmt;
 
-use _PhpScoper7c1f54fd2f3a\PhpParser\Node;
-class DeclareDeclare extends \_PhpScoper7c1f54fd2f3a\PhpParser\Node\Stmt
+use _PhpScoperc8fea59b0cb1\PhpParser\Node;
+class DeclareDeclare extends \_PhpScoperc8fea59b0cb1\PhpParser\Node\Stmt
 {
     /** @var Node\Identifier Key */
     public $key;
@@ -17,10 +17,10 @@ class DeclareDeclare extends \_PhpScoper7c1f54fd2f3a\PhpParser\Node\Stmt
      * @param Node\Expr              $value      Value
      * @param array                  $attributes Additional attributes
      */
-    public function __construct($key, \_PhpScoper7c1f54fd2f3a\PhpParser\Node\Expr $value, array $attributes = [])
+    public function __construct($key, \_PhpScoperc8fea59b0cb1\PhpParser\Node\Expr $value, array $attributes = [])
     {
         $this->attributes = $attributes;
-        $this->key = \is_string($key) ? new \_PhpScoper7c1f54fd2f3a\PhpParser\Node\Identifier($key) : $key;
+        $this->key = \is_string($key) ? new \_PhpScoperc8fea59b0cb1\PhpParser\Node\Identifier($key) : $key;
         $this->value = $value;
     }
     public function getSubNodeNames() : array

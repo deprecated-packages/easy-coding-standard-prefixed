@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7c1f54fd2f3a\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoperc8fea59b0cb1\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Memcached based session storage handler based on the Memcached class
@@ -18,7 +18,7 @@ namespace _PhpScoper7c1f54fd2f3a\Symfony\Component\HttpFoundation\Session\Storag
  *
  * @author Drak <drak@zikula.org>
  */
-class MemcachedSessionHandler extends \_PhpScoper7c1f54fd2f3a\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class MemcachedSessionHandler extends \_PhpScoperc8fea59b0cb1\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $memcached;
     /**

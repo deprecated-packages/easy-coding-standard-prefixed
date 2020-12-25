@@ -5,7 +5,7 @@ namespace SlevomatCodingStandard\Helpers;
 
 use PHP_CodeSniffer\Files\File;
 use function array_merge;
-use const _PhpScoper7c1f54fd2f3a\T_BITWISE_OR;
+use const _PhpScoperc8fea59b0cb1\T_BITWISE_OR;
 class CatchHelper
 {
     /**
