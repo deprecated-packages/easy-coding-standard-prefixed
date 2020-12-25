@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper15c5423f4731\PhpParser\Node\Stmt;
+namespace _PhpScoper9e3283ae8193\PhpParser\Node\Stmt;
 
-use _PhpScoper15c5423f4731\PhpParser\Node;
-class Case_ extends \_PhpScoper15c5423f4731\PhpParser\Node\Stmt
+use _PhpScoper9e3283ae8193\PhpParser\Node;
+class Case_ extends \_PhpScoper9e3283ae8193\PhpParser\Node\Stmt
 {
     /** @var null|Node\Expr Condition (null for default) */
     public $cond;

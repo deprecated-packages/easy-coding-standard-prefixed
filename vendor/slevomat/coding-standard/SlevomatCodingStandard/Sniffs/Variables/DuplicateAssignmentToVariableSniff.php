@@ -9,7 +9,7 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use function in_array;
 use function sprintf;
 use const T_DOUBLE_COLON;
-use const _PhpScoper15c5423f4731\T_EQUAL;
+use const _PhpScoper9e3283ae8193\T_EQUAL;
 use const T_OBJECT_OPERATOR;
 use const T_VARIABLE;
 class DuplicateAssignmentToVariableSniff implements \PHP_CodeSniffer\Sniffs\Sniff

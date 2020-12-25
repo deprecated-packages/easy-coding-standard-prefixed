@@ -1,9 +1,9 @@
 <?php
 
-namespace _PhpScoper15c5423f4731\Doctrine\Tests\Common\Annotations\Fixtures;
+namespace _PhpScoper9e3283ae8193\Doctrine\Tests\Common\Annotations\Fixtures;
 
-use _PhpScoper15c5423f4731\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
-use _PhpScoper15c5423f4731\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
+use _PhpScoper9e3283ae8193\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Template;
+use _PhpScoper9e3283ae8193\Doctrine\Tests\Common\Annotations\Fixtures\Annotation\Route;
 /**
  * @Route("/someprefix")
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
@@ -32,12 +32,12 @@ class Controller
      */
     public function contactAction()
     {
-        $form = \_PhpScoper15c5423f4731\Doctrine\Tests\Common\Annotations\Fixtures\ContactForm::create($this->get('form.context'), 'contact');
+        $form = \_PhpScoper9e3283ae8193\Doctrine\Tests\Common\Annotations\Fixtures\ContactForm::create($this->get('form.context'), 'contact');
         $form->bind($this->container->get('request'), $form);
         if ($form->isValid()) {
             $form->send($this->get('mailer'));
             $this->get('session')->setFlash('notice', 'Message sent!');
-            return new \_PhpScoper15c5423f4731\Doctrine\Tests\Common\Annotations\Fixtures\RedirectResponse($this->generateUrl('_demo'));
+            return new \_PhpScoper9e3283ae8193\Doctrine\Tests\Common\Annotations\Fixtures\RedirectResponse($this->generateUrl('_demo'));
         }
         return array('form' => $form);
     }
@@ -47,7 +47,7 @@ class Controller
      * @param ObjectIdentityInterface $oid
      * @return void
      */
-    private function createObjectIdentity(\_PhpScoper15c5423f4731\Doctrine\Tests\Common\Annotations\Fixtures\ObjectIdentityInterface $oid)
+    private function createObjectIdentity(\_PhpScoper9e3283ae8193\Doctrine\Tests\Common\Annotations\Fixtures\ObjectIdentityInterface $oid)
     {
         $classId = $this->createOrRetrieveClassId($oid->getType());
         $this->connection->executeQuery($this->getInsertObjectIdentitySql($oid->getIdentifier(), $classId, \true));
@@ -77,7 +77,7 @@ class Controller
      * @param SecurityIdentityInterface $sid
      * @return integer
      */
-    private function createOrRetrieveSecurityIdentityId(\_PhpScoper15c5423f4731\Doctrine\Tests\Common\Annotations\Fixtures\SecurityIdentityInterface $sid)
+    private function createOrRetrieveSecurityIdentityId(\_PhpScoper9e3283ae8193\Doctrine\Tests\Common\Annotations\Fixtures\SecurityIdentityInterface $sid)
     {
         if (\false !== ($id = $this->connection->executeQuery($this->getSelectSecurityIdentityIdSql($sid))->fetchColumn())) {
             return $id;
@@ -121,7 +121,7 @@ class Controller
      * @param AclInterface $acl
      * @return void
      */
-    private function regenerateAncestorRelations(\_PhpScoper15c5423f4731\Doctrine\Tests\Common\Annotations\Fixtures\AclInterface $acl)
+    private function regenerateAncestorRelations(\_PhpScoper9e3283ae8193\Doctrine\Tests\Common\Annotations\Fixtures\AclInterface $acl)
     {
         $pk = $acl->getId();
         $this->connection->executeQuery($this->getDeleteObjectIdentityRelationsSql($pk));
@@ -163,7 +163,7 @@ class Controller
                     $this->connection->executeQuery($this->getInsertAccessControlEntrySql($classId, $objectIdentityId, $field, $i, $sid, $ace->getStrategy(), $ace->getMask(), $ace->isGranting(), $ace->isAuditSuccess(), $ace->isAuditFailure()));
                     $aceId = $this->connection->executeQuery($this->getSelectAccessControlEntryIdSql($classId, $objectIdentityId, $field, $i))->fetchColumn();
                     $this->loadedAces[$aceId] = $ace;
-                    $aceIdProperty = new \ReflectionProperty('_PhpScoper15c5423f4731\\Symfony\\Component\\Security\\Acl\\Domain\\Entry', 'id');
+                    $aceIdProperty = new \ReflectionProperty('_PhpScoper9e3283ae8193\\Symfony\\Component\\Security\\Acl\\Domain\\Entry', 'id');
                     $aceIdProperty->setAccessible(\true);
                     $aceIdProperty->setValue($ace, \intval($aceId));
                 } else {
