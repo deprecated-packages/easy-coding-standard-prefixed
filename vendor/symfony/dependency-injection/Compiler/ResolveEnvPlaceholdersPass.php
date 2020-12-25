@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc8fea59b0cb1\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperb44a315fec16\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperc8fea59b0cb1\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperb44a315fec16\Symfony\Component\DependencyInjection\Definition;
 /**
  * Replaces env var placeholders by their current values.
  */
-class ResolveEnvPlaceholdersPass extends \_PhpScoperc8fea59b0cb1\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveEnvPlaceholdersPass extends \_PhpScoperb44a315fec16\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     protected function processValue($value, bool $isRoot = \false)
     {
         if (\is_string($value)) {
             return $this->container->resolveEnvPlaceholders($value, \true);
         }
-        if ($value instanceof \_PhpScoperc8fea59b0cb1\Symfony\Component\DependencyInjection\Definition) {
+        if ($value instanceof \_PhpScoperb44a315fec16\Symfony\Component\DependencyInjection\Definition) {
             $changes = $value->getChanges();
             if (isset($changes['class'])) {
                 $value->setClass($this->container->resolveEnvPlaceholders($value->getClass(), \true));

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc8fea59b0cb1\Symfony\Component\Config;
+namespace _PhpScoperb44a315fec16\Symfony\Component\Config;
 
-use _PhpScoperc8fea59b0cb1\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use _PhpScoperb44a315fec16\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
 /**
  * FileLocator uses an array of pre-defined paths to find files.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FileLocator implements \_PhpScoperc8fea59b0cb1\Symfony\Component\Config\FileLocatorInterface
+class FileLocator implements \_PhpScoperb44a315fec16\Symfony\Component\Config\FileLocatorInterface
 {
     protected $paths;
     /**
@@ -36,7 +36,7 @@ class FileLocator implements \_PhpScoperc8fea59b0cb1\Symfony\Component\Config\Fi
         }
         if ($this->isAbsolutePath($name)) {
             if (!\file_exists($name)) {
-                throw new \_PhpScoperc8fea59b0cb1\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException(\sprintf('The file "%s" does not exist.', $name), 0, null, [$name]);
+                throw new \_PhpScoperb44a315fec16\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException(\sprintf('The file "%s" does not exist.', $name), 0, null, [$name]);
             }
             return $name;
         }
@@ -57,7 +57,7 @@ class FileLocator implements \_PhpScoperc8fea59b0cb1\Symfony\Component\Config\Fi
             }
         }
         if (!$filepaths) {
-            throw new \_PhpScoperc8fea59b0cb1\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException(\sprintf('The file "%s" does not exist (in: "%s").', $name, \implode('", "', $paths)), 0, null, $notfound);
+            throw new \_PhpScoperb44a315fec16\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException(\sprintf('The file "%s" does not exist (in: "%s").', $name, \implode('", "', $paths)), 0, null, $notfound);
         }
         return $filepaths;
     }

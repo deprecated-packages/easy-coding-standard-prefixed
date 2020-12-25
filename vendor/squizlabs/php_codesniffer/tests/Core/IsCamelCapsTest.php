@@ -10,8 +10,8 @@
 namespace PHP_CodeSniffer\Tests\Core;
 
 use PHP_CodeSniffer\Util\Common;
-use _PhpScoperc8fea59b0cb1\PHPUnit\Framework\TestCase;
-class IsCamelCapsTest extends \_PhpScoperc8fea59b0cb1\PHPUnit\Framework\TestCase
+use _PhpScoperb44a315fec16\PHPUnit\Framework\TestCase;
+class IsCamelCapsTest extends \_PhpScoperb44a315fec16\PHPUnit\Framework\TestCase
 {
     /**
      * Test valid public function/method names.

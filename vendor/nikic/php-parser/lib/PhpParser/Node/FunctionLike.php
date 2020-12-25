@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc8fea59b0cb1\PhpParser\Node;
+namespace _PhpScoperb44a315fec16\PhpParser\Node;
 
-use _PhpScoperc8fea59b0cb1\PhpParser\Node;
-interface FunctionLike extends \_PhpScoperc8fea59b0cb1\PhpParser\Node
+use _PhpScoperb44a315fec16\PhpParser\Node;
+interface FunctionLike extends \_PhpScoperb44a315fec16\PhpParser\Node
 {
     /**
      * Whether to return by reference
