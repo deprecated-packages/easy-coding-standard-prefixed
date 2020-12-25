@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
-use _PhpScoper745103eaabcd\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Console\Command\AbstractCheckCommand;
 use Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter;
 use Symplify\PackageBuilder\Console\ShellCode;
@@ -21,7 +21,7 @@ abstract class AbstractSnippetFormatterCommand extends \Symplify\EasyCodingStand
     {
         $this->snippetFormatter = $snippetFormatter;
     }
-    protected function doExecuteSnippetFormatterWithFileNamesAndSnippetPattern(\_PhpScoper745103eaabcd\Symfony\Component\Console\Input\InputInterface $input, string $fileNames, string $snippetPattern, string $kind) : int
+    protected function doExecuteSnippetFormatterWithFileNamesAndSnippetPattern(\_PhpScoper7c1f54fd2f3a\Symfony\Component\Console\Input\InputInterface $input, string $fileNames, string $snippetPattern, string $kind) : int
     {
         $this->configuration->resolveFromInput($input);
         $sources = $this->configuration->getSources();

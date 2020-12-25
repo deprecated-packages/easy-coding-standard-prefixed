@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper745103eaabcd\Nette\Utils\Strings;
+use _PhpScoper7c1f54fd2f3a\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\Tokenizer\Tokens;
 final class DuplicatedArrayMalformWorker extends \Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker\AbstractMalformWorker
@@ -23,8 +23,8 @@ final class DuplicatedArrayMalformWorker extends \Symplify\CodingStandard\TokenR
         $docBlock = new \PhpCsFixer\DocBlock\DocBlock($docContent);
         $lines = $docBlock->getLines();
         foreach ($lines as $line) {
-            $newContent = \_PhpScoper745103eaabcd\Nette\Utils\Strings::replace($line->getContent(), self::IMPLICIT_ARRAY_WITH_ARRAY_LEFT_REGEX, '$1');
-            $newContent = \_PhpScoper745103eaabcd\Nette\Utils\Strings::replace($newContent, self::IMPLICIT_ARRAY_WITH_ARRAY_RIGHT_REGEX, '$1');
+            $newContent = \_PhpScoper7c1f54fd2f3a\Nette\Utils\Strings::replace($line->getContent(), self::IMPLICIT_ARRAY_WITH_ARRAY_LEFT_REGEX, '$1');
+            $newContent = \_PhpScoper7c1f54fd2f3a\Nette\Utils\Strings::replace($newContent, self::IMPLICIT_ARRAY_WITH_ARRAY_RIGHT_REGEX, '$1');
             $line->setContent($newContent);
         }
         return $docBlock->getContent();

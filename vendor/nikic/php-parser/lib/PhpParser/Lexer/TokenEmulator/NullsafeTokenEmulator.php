@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper745103eaabcd\PhpParser\Lexer\TokenEmulator;
+namespace _PhpScoper7c1f54fd2f3a\PhpParser\Lexer\TokenEmulator;
 
-use _PhpScoper745103eaabcd\PhpParser\Lexer\Emulative;
-final class NullsafeTokenEmulator extends \_PhpScoper745103eaabcd\PhpParser\Lexer\TokenEmulator\TokenEmulator
+use _PhpScoper7c1f54fd2f3a\PhpParser\Lexer\Emulative;
+final class NullsafeTokenEmulator extends \_PhpScoper7c1f54fd2f3a\PhpParser\Lexer\TokenEmulator\TokenEmulator
 {
     public function getPhpVersion() : string
     {
-        return \_PhpScoper745103eaabcd\PhpParser\Lexer\Emulative::PHP_8_0;
+        return \_PhpScoper7c1f54fd2f3a\PhpParser\Lexer\Emulative::PHP_8_0;
     }
     public function isEmulationNeeded(string $code) : bool
     {

@@ -3,18 +3,18 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoper745103eaabcd\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper7c1f54fd2f3a\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\Exception\NotImplementedYetException;
 final class SharedPublicServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper745103eaabcd\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper745103eaabcd\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper7c1f54fd2f3a\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper7c1f54fd2f3a\PhpParser\Node\Expr\MethodCall
     {
         if ($key === 'public') {
             if ($yaml === \false) {
-                return new \_PhpScoper745103eaabcd\PhpParser\Node\Expr\MethodCall($methodCall, 'private');
+                return new \_PhpScoper7c1f54fd2f3a\PhpParser\Node\Expr\MethodCall($methodCall, 'private');
             }
-            return new \_PhpScoper745103eaabcd\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
+            return new \_PhpScoper7c1f54fd2f3a\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
         }
         throw new \Symplify\PhpConfigPrinter\Exception\NotImplementedYetException();
     }

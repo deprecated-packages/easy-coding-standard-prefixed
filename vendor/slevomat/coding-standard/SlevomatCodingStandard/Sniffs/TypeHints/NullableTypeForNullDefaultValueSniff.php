@@ -10,12 +10,12 @@ use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_merge;
 use function in_array;
 use function sprintf;
-use const _PhpScoper745103eaabcd\T_BITWISE_AND;
+use const _PhpScoper7c1f54fd2f3a\T_BITWISE_AND;
 use const T_ELLIPSIS;
-use const _PhpScoper745103eaabcd\T_EQUAL;
-use const _PhpScoper745103eaabcd\T_INLINE_THEN;
-use const _PhpScoper745103eaabcd\T_NULL;
-use const _PhpScoper745103eaabcd\T_NULLABLE;
+use const _PhpScoper7c1f54fd2f3a\T_EQUAL;
+use const _PhpScoper7c1f54fd2f3a\T_INLINE_THEN;
+use const _PhpScoper7c1f54fd2f3a\T_NULL;
+use const _PhpScoper7c1f54fd2f3a\T_NULLABLE;
 use const T_VARIABLE;
 class NullableTypeForNullDefaultValueSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
