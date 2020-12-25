@@ -5,17 +5,17 @@ namespace SlevomatCodingStandard\Sniffs\TypeHints;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\TypeNode;
-use _PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\CallableTypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\ConstTypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\TypeNode;
+use _PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation;
 use SlevomatCodingStandard\Helpers\AnnotationHelper;
 use SlevomatCodingStandard\Helpers\AnnotationTypeHelper;
@@ -35,9 +35,9 @@ use function count;
 use function lcfirst;
 use function sprintf;
 use function strtolower;
-use const _PhpScoper92597f5b42a7\T_CLOSURE;
-use const _PhpScoper92597f5b42a7\T_DOC_COMMENT_CLOSE_TAG;
-use const _PhpScoper92597f5b42a7\T_DOC_COMMENT_STAR;
+use const _PhpScoper15c5423f4731\T_CLOSURE;
+use const _PhpScoper15c5423f4731\T_DOC_COMMENT_CLOSE_TAG;
+use const _PhpScoper15c5423f4731\T_DOC_COMMENT_STAR;
 use const T_FUNCTION;
 class ReturnTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
@@ -103,7 +103,7 @@ class ReturnTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         }
         $hasReturnAnnotation = $this->hasReturnAnnotation($returnAnnotation);
         $returnTypeNode = $this->getReturnTypeNode($returnAnnotation);
-        $isAnnotationReturnTypeVoid = $returnTypeNode instanceof \_PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($returnTypeNode->name) === 'void';
+        $isAnnotationReturnTypeVoid = $returnTypeNode instanceof \_PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode && \strtolower($returnTypeNode->name) === 'void';
         $isAbstract = \SlevomatCodingStandard\Helpers\FunctionHelper::isAbstract($phpcsFile, $functionPointer);
         $returnsValue = $isAbstract ? $hasReturnAnnotation && !$isAnnotationReturnTypeVoid : \SlevomatCodingStandard\Helpers\FunctionHelper::returnsValue($phpcsFile, $functionPointer);
         if ($returnsValue && !$hasReturnAnnotation) {
@@ -132,14 +132,14 @@ class ReturnTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         $typeHints = [];
         $nullableReturnTypeHint = \false;
         $originalReturnTypeNode = $returnTypeNode;
-        if ($returnTypeNode instanceof \_PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+        if ($returnTypeNode instanceof \_PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
             $returnTypeNode = $returnTypeNode->type;
         }
         if (\SlevomatCodingStandard\Helpers\AnnotationTypeHelper::containsOneType($returnTypeNode)) {
             /** @var ArrayTypeNode|ArrayShapeNode|IdentifierTypeNode|ThisTypeNode|GenericTypeNode|CallableTypeNode $returnTypeNode */
             $returnTypeNode = $returnTypeNode;
             $typeHints[] = \SlevomatCodingStandard\Helpers\AnnotationTypeHelper::getTypeHintFromOneType($returnTypeNode);
-        } elseif ($returnTypeNode instanceof \_PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $returnTypeNode instanceof \_PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
+        } elseif ($returnTypeNode instanceof \_PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\UnionTypeNode || $returnTypeNode instanceof \_PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode) {
             $traversableTypeHints = [];
             foreach ($returnTypeNode->types as $typeNode) {
                 if (!\SlevomatCodingStandard\Helpers\AnnotationTypeHelper::containsOneType($typeNode)) {
@@ -156,7 +156,7 @@ class ReturnTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 if (!$isTraversable && \count($traversableTypeHints) > 0) {
                     return;
                 }
-                if (!$typeNode instanceof \_PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && !$typeNode instanceof \_PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode && $isTraversable) {
+                if (!$typeNode instanceof \_PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode && !$typeNode instanceof \_PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode && $isTraversable) {
                     $traversableTypeHints[] = $typeHint;
                 }
                 $typeHints[] = $typeHint;
@@ -186,7 +186,7 @@ class ReturnTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         if (!\SlevomatCodingStandard\Helpers\TypeHintHelper::isValidTypeHint($possibleReturnTypeHint, $this->enableObjectTypeHint)) {
             return;
         }
-        if ($originalReturnTypeNode instanceof \_PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
+        if ($originalReturnTypeNode instanceof \_PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\NullableTypeNode) {
             $nullableReturnTypeHint = \true;
         }
         $fix = $phpcsFile->addFixableError(\sprintf('%s %s() does not have native return type hint for its return value but it should be possible to add it based on @return annotation "%s".', \SlevomatCodingStandard\Helpers\FunctionHelper::getTypeLabel($phpcsFile, $functionPointer), \SlevomatCodingStandard\Helpers\FunctionHelper::getFullyQualifiedName($phpcsFile, $functionPointer), \SlevomatCodingStandard\Helpers\AnnotationTypeHelper::export($returnTypeNode)), $functionPointer, self::CODE_MISSING_NATIVE_TYPE_HINT);
@@ -281,7 +281,7 @@ class ReturnTypeHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      * @param ReturnAnnotation|null $returnAnnotation
      * @return GenericTypeNode|CallableTypeNode|IntersectionTypeNode|UnionTypeNode|ArrayTypeNode|ArrayShapeNode|IdentifierTypeNode|ThisTypeNode|NullableTypeNode|ConstTypeNode|null
      */
-    private function getReturnTypeNode(?\SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation $returnAnnotation) : ?\_PhpScoper92597f5b42a7\PHPStan\PhpDocParser\Ast\Type\TypeNode
+    private function getReturnTypeNode(?\SlevomatCodingStandard\Helpers\Annotation\ReturnAnnotation $returnAnnotation) : ?\_PhpScoper15c5423f4731\PHPStan\PhpDocParser\Ast\Type\TypeNode
     {
         if ($this->hasReturnAnnotation($returnAnnotation)) {
             return $returnAnnotation->getType();

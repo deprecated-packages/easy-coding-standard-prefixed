@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper92597f5b42a7\Symfony\Component\HttpFoundation;
+namespace _PhpScoper15c5423f4731\Symfony\Component\HttpFoundation;
 
 /**
  * HTTP header utility functions.
