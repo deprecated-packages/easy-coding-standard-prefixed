@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper9e3283ae8193;
+namespace _PhpScoper64ca614e27fd;
 
 /*
  * This file is part of the Symfony package.
@@ -10,19 +10,19 @@ namespace _PhpScoper9e3283ae8193;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoper9e3283ae8193\Symfony\Polyfill\Php73 as p;
+use _PhpScoper64ca614e27fd\Symfony\Polyfill\Php73 as p;
 if (\PHP_VERSION_ID < 70300) {
     if (!\function_exists('is_countable')) {
         function is_countable($var)
         {
-            return \is_array($var) || $var instanceof \Countable || $var instanceof \ResourceBundle || $var instanceof \_PhpScoper9e3283ae8193\SimpleXmlElement;
+            return \is_array($var) || $var instanceof \Countable || $var instanceof \ResourceBundle || $var instanceof \_PhpScoper64ca614e27fd\SimpleXmlElement;
         }
     }
     if (!\function_exists('hrtime')) {
-        \_PhpScoper9e3283ae8193\Symfony\Polyfill\Php73\Php73::$startAt = (int) \microtime(\true);
+        \_PhpScoper64ca614e27fd\Symfony\Polyfill\Php73\Php73::$startAt = (int) \microtime(\true);
         function hrtime($asNum = \false)
         {
-            return \_PhpScoper9e3283ae8193\Symfony\Polyfill\Php73\Php73::hrtime($asNum);
+            return \_PhpScoper64ca614e27fd\Symfony\Polyfill\Php73\Php73::hrtime($asNum);
         }
     }
     if (!\function_exists('array_key_first')) {

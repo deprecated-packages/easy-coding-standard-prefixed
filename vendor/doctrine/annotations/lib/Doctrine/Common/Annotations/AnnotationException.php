@@ -17,7 +17,7 @@
  * and is licensed under the MIT license. For more information, see
  * <http://www.doctrine-project.org>.
  */
-namespace _PhpScoper9e3283ae8193\Doctrine\Common\Annotations;
+namespace _PhpScoper64ca614e27fd\Doctrine\Common\Annotations;
 
 /**
  * Description of AnnotationException
