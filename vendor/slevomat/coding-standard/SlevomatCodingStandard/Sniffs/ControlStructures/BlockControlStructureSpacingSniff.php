@@ -8,7 +8,7 @@ use SlevomatCodingStandard\Helpers\SniffSettingsHelper;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function array_key_exists;
 use const T_CASE;
-use const _PhpScopere106f9fd4493\T_CLOSE_CURLY_BRACKET;
+use const _PhpScoper592524ba34f0\T_CLOSE_CURLY_BRACKET;
 use const T_DEFAULT;
 use const T_DO;
 use const T_FOR;

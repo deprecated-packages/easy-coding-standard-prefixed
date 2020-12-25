@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere106f9fd4493\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper592524ba34f0\Symfony\Component\VarDumper\Caster;
 
 /**
  * Represents a cut array.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CutArrayStub extends \_PhpScopere106f9fd4493\Symfony\Component\VarDumper\Caster\CutStub
+class CutArrayStub extends \_PhpScoper592524ba34f0\Symfony\Component\VarDumper\Caster\CutStub
 {
     public $preservedSubset;
     public function __construct(array $value, array $preservedKeys)

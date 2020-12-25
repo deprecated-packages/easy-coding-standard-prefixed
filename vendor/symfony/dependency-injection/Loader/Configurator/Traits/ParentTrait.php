@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoper592524ba34f0\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper592524ba34f0\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper592524ba34f0\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait ParentTrait
 {
     /**
@@ -24,9 +24,9 @@ trait ParentTrait
     public final function parent(string $parent) : self
     {
         if (!$this->allowParent) {
-            throw new \_PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('A parent cannot be defined when either "_instanceof" or "_defaults" are also defined for service prototype "%s".', $this->id));
+            throw new \_PhpScoper592524ba34f0\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('A parent cannot be defined when either "_instanceof" or "_defaults" are also defined for service prototype "%s".', $this->id));
         }
-        if ($this->definition instanceof \_PhpScopere106f9fd4493\Symfony\Component\DependencyInjection\ChildDefinition) {
+        if ($this->definition instanceof \_PhpScoper592524ba34f0\Symfony\Component\DependencyInjection\ChildDefinition) {
             $this->definition->setParent($parent);
         } else {
             // cast Definition to ChildDefinition

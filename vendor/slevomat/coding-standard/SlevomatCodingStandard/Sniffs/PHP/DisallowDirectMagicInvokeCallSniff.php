@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use SlevomatCodingStandard\Helpers\TokenHelper;
 use function strtolower;
 use const T_OBJECT_OPERATOR;
-use const _PhpScopere106f9fd4493\T_OPEN_PARENTHESIS;
+use const _PhpScoper592524ba34f0\T_OPEN_PARENTHESIS;
 use const T_STRING;
 class DisallowDirectMagicInvokeCallSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {

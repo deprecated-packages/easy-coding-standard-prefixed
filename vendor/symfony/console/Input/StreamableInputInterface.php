@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere106f9fd4493\Symfony\Component\Console\Input;
+namespace _PhpScoper592524ba34f0\Symfony\Component\Console\Input;
 
 /**
  * StreamableInputInterface is the interface implemented by all input classes
@@ -16,7 +16,7 @@ namespace _PhpScopere106f9fd4493\Symfony\Component\Console\Input;
  *
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-interface StreamableInputInterface extends \_PhpScopere106f9fd4493\Symfony\Component\Console\Input\InputInterface
+interface StreamableInputInterface extends \_PhpScoper592524ba34f0\Symfony\Component\Console\Input\InputInterface
 {
     /**
      * Sets the input stream to read from when interacting with the user.

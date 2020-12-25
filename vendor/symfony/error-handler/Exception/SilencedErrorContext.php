@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere106f9fd4493\Symfony\Component\ErrorHandler\Exception;
+namespace _PhpScoper592524ba34f0\Symfony\Component\ErrorHandler\Exception;
 
 /**
  * Data Object that represents a Silenced Error.

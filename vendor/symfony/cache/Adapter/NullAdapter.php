@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere106f9fd4493\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper592524ba34f0\Symfony\Component\Cache\Adapter;
 
-use _PhpScopere106f9fd4493\Psr\Cache\CacheItemInterface;
-use _PhpScopere106f9fd4493\Symfony\Component\Cache\CacheItem;
-use _PhpScopere106f9fd4493\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper592524ba34f0\Psr\Cache\CacheItemInterface;
+use _PhpScoper592524ba34f0\Symfony\Component\Cache\CacheItem;
+use _PhpScoper592524ba34f0\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class NullAdapter implements \_PhpScopere106f9fd4493\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScopere106f9fd4493\Symfony\Contracts\Cache\CacheInterface
+class NullAdapter implements \_PhpScoper592524ba34f0\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScoper592524ba34f0\Symfony\Contracts\Cache\CacheInterface
 {
     private $createCacheItem;
     public function __construct()
     {
         $this->createCacheItem = \Closure::bind(function ($key) {
-            $item = new \_PhpScopere106f9fd4493\Symfony\Component\Cache\CacheItem();
+            $item = new \_PhpScoper592524ba34f0\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->isHit = \false;
             return $item;
-        }, $this, \_PhpScopere106f9fd4493\Symfony\Component\Cache\CacheItem::class);
+        }, $this, \_PhpScoper592524ba34f0\Symfony\Component\Cache\CacheItem::class);
     }
     /**
      * {@inheritdoc}
@@ -94,7 +94,7 @@ class NullAdapter implements \_PhpScopere106f9fd4493\Symfony\Component\Cache\Ada
      *
      * @return bool
      */
-    public function save(\_PhpScopere106f9fd4493\Psr\Cache\CacheItemInterface $item)
+    public function save(\_PhpScoper592524ba34f0\Psr\Cache\CacheItemInterface $item)
     {
         return \false;
     }
@@ -103,7 +103,7 @@ class NullAdapter implements \_PhpScopere106f9fd4493\Symfony\Component\Cache\Ada
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScopere106f9fd4493\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\_PhpScoper592524ba34f0\Psr\Cache\CacheItemInterface $item)
     {
         return \false;
     }
