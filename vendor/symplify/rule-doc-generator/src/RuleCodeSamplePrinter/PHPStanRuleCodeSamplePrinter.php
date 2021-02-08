@@ -33,7 +33,7 @@ final class PHPStanRuleCodeSamplePrinter implements \Symplify\RuleDocGenerator\C
     public function isMatch(string $class) : bool
     {
         /** @noRector */
-        return \is_a($class, '_PhpScoper326af2119eba\\PHPStan\\Rules\\Rule', \true);
+        return \is_a($class, '_PhpScoper7faa8deb0d3c\\PHPStan\\Rules\\Rule', \true);
     }
     /**
      * @return string[]

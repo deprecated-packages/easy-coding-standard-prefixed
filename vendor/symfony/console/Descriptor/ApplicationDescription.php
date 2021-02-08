@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper326af2119eba\Symfony\Component\Console\Descriptor;
+namespace _PhpScoper7faa8deb0d3c\Symfony\Component\Console\Descriptor;
 
-use _PhpScoper326af2119eba\Symfony\Component\Console\Application;
-use _PhpScoper326af2119eba\Symfony\Component\Console\Command\Command;
-use _PhpScoper326af2119eba\Symfony\Component\Console\Exception\CommandNotFoundException;
+use _PhpScoper7faa8deb0d3c\Symfony\Component\Console\Application;
+use _PhpScoper7faa8deb0d3c\Symfony\Component\Console\Command\Command;
+use _PhpScoper7faa8deb0d3c\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *
@@ -36,7 +36,7 @@ class ApplicationDescription
      * @var Command[]
      */
     private $aliases;
-    public function __construct(\_PhpScoper326af2119eba\Symfony\Component\Console\Application $application, string $namespace = null, bool $showHidden = \false)
+    public function __construct(\_PhpScoper7faa8deb0d3c\Symfony\Component\Console\Application $application, string $namespace = null, bool $showHidden = \false)
     {
         $this->application = $application;
         $this->namespace = $namespace;
@@ -62,10 +62,10 @@ class ApplicationDescription
     /**
      * @throws CommandNotFoundException
      */
-    public function getCommand(string $name) : \_PhpScoper326af2119eba\Symfony\Component\Console\Command\Command
+    public function getCommand(string $name) : \_PhpScoper7faa8deb0d3c\Symfony\Component\Console\Command\Command
     {
         if (!isset($this->commands[$name]) && !isset($this->aliases[$name])) {
-            throw new \_PhpScoper326af2119eba\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
+            throw new \_PhpScoper7faa8deb0d3c\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
         }
         return $this->commands[$name] ?? $this->aliases[$name];
     }

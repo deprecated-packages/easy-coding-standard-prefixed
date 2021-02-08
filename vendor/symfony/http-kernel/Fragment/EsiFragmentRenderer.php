@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper326af2119eba\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScoper7faa8deb0d3c\Symfony\Component\HttpKernel\Fragment;
 
 /**
  * Implements the ESI rendering strategy.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class EsiFragmentRenderer extends \_PhpScoper326af2119eba\Symfony\Component\HttpKernel\Fragment\AbstractSurrogateFragmentRenderer
+class EsiFragmentRenderer extends \_PhpScoper7faa8deb0d3c\Symfony\Component\HttpKernel\Fragment\AbstractSurrogateFragmentRenderer
 {
     /**
      * {@inheritdoc}

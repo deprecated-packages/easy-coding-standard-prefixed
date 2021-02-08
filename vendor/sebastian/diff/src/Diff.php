@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper326af2119eba\SebastianBergmann\Diff;
+namespace _PhpScoper7faa8deb0d3c\SebastianBergmann\Diff;
 
 final class Diff
 {

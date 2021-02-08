@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper326af2119eba\Symfony\Component\EventDispatcher;
+namespace _PhpScoper7faa8deb0d3c\Symfony\Component\EventDispatcher;
 
-use _PhpScoper326af2119eba\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-trigger_deprecation('symfony/event-dispatcher', '5.1', '%s is deprecated, use the event dispatcher without the proxy.', \_PhpScoper326af2119eba\Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy::class);
+use _PhpScoper7faa8deb0d3c\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+trigger_deprecation('symfony/event-dispatcher', '5.1', '%s is deprecated, use the event dispatcher without the proxy.', \_PhpScoper7faa8deb0d3c\Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy::class);
 /**
  * A helper class to provide BC/FC with the legacy signature of EventDispatcherInterface::dispatch().
  *
@@ -21,7 +21,7 @@ trigger_deprecation('symfony/event-dispatcher', '5.1', '%s is deprecated, use th
  */
 final class LegacyEventDispatcherProxy
 {
-    public static function decorate(?\_PhpScoper326af2119eba\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher) : ?\_PhpScoper326af2119eba\Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+    public static function decorate(?\_PhpScoper7faa8deb0d3c\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher) : ?\_PhpScoper7faa8deb0d3c\Symfony\Contracts\EventDispatcher\EventDispatcherInterface
     {
         return $dispatcher;
     }

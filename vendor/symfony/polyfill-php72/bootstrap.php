@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper326af2119eba;
+namespace _PhpScoper7faa8deb0d3c;
 
 /*
  * This file is part of the Symfony package.
@@ -10,7 +10,7 @@ namespace _PhpScoper326af2119eba;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoper326af2119eba\Symfony\Polyfill\Php72 as p;
+use _PhpScoper7faa8deb0d3c\Symfony\Polyfill\Php72 as p;
 if (\PHP_VERSION_ID >= 70200) {
     return;
 }
@@ -27,48 +27,48 @@ if (!\defined('PHP_FLOAT_MAX')) {
     \define('PHP_FLOAT_MAX', 1.7976931348623157E+308);
 }
 if (!\defined('PHP_OS_FAMILY')) {
-    \define('PHP_OS_FAMILY', \_PhpScoper326af2119eba\Symfony\Polyfill\Php72\Php72::php_os_family());
+    \define('PHP_OS_FAMILY', \_PhpScoper7faa8deb0d3c\Symfony\Polyfill\Php72\Php72::php_os_family());
 }
 if ('\\' === \DIRECTORY_SEPARATOR && !\function_exists('sapi_windows_vt100_support')) {
     function sapi_windows_vt100_support($stream, $enable = null)
     {
-        return \_PhpScoper326af2119eba\Symfony\Polyfill\Php72\Php72::sapi_windows_vt100_support($stream, $enable);
+        return \_PhpScoper7faa8deb0d3c\Symfony\Polyfill\Php72\Php72::sapi_windows_vt100_support($stream, $enable);
     }
 }
 if (!\function_exists('stream_isatty')) {
     function stream_isatty($stream)
     {
-        return \_PhpScoper326af2119eba\Symfony\Polyfill\Php72\Php72::stream_isatty($stream);
+        return \_PhpScoper7faa8deb0d3c\Symfony\Polyfill\Php72\Php72::stream_isatty($stream);
     }
 }
 if (!\function_exists('utf8_encode')) {
     function utf8_encode($string)
     {
-        return \_PhpScoper326af2119eba\Symfony\Polyfill\Php72\Php72::utf8_encode($string);
+        return \_PhpScoper7faa8deb0d3c\Symfony\Polyfill\Php72\Php72::utf8_encode($string);
     }
 }
 if (!\function_exists('utf8_decode')) {
     function utf8_decode($string)
     {
-        return \_PhpScoper326af2119eba\Symfony\Polyfill\Php72\Php72::utf8_decode($string);
+        return \_PhpScoper7faa8deb0d3c\Symfony\Polyfill\Php72\Php72::utf8_decode($string);
     }
 }
 if (!\function_exists('spl_object_id')) {
     function spl_object_id($object)
     {
-        return \_PhpScoper326af2119eba\Symfony\Polyfill\Php72\Php72::spl_object_id($object);
+        return \_PhpScoper7faa8deb0d3c\Symfony\Polyfill\Php72\Php72::spl_object_id($object);
     }
 }
 if (!\function_exists('mb_ord')) {
     function mb_ord($string, $encoding = null)
     {
-        return \_PhpScoper326af2119eba\Symfony\Polyfill\Php72\Php72::mb_ord($string, $encoding);
+        return \_PhpScoper7faa8deb0d3c\Symfony\Polyfill\Php72\Php72::mb_ord($string, $encoding);
     }
 }
 if (!\function_exists('mb_chr')) {
     function mb_chr($codepoint, $encoding = null)
     {
-        return \_PhpScoper326af2119eba\Symfony\Polyfill\Php72\Php72::mb_chr($codepoint, $encoding);
+        return \_PhpScoper7faa8deb0d3c\Symfony\Polyfill\Php72\Php72::mb_chr($codepoint, $encoding);
     }
 }
 if (!\function_exists('mb_scrub')) {

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\DocBlock;
 
-use _PhpScoper326af2119eba\Nette\Utils\Strings;
+use _PhpScoper7faa8deb0d3c\Nette\Utils\Strings;
 /**
  * @see \Symplify\AutowireArrayParameter\Tests\DocBlock\ParamTypeDocBlockResolverTest
  */
@@ -37,7 +37,7 @@ final class ParamTypeDocBlockResolver
     {
         foreach (self::ARRAY_REGEXES as $arrayRegexWithPlaceholder) {
             $arrayRegex = \str_replace(self::NAME_PLACEHOLDER, $parameterName, $arrayRegexWithPlaceholder);
-            $result = \_PhpScoper326af2119eba\Nette\Utils\Strings::match($docBlock, $arrayRegex);
+            $result = \_PhpScoper7faa8deb0d3c\Nette\Utils\Strings::match($docBlock, $arrayRegex);
             if (isset($result[self::TYPE_PART])) {
                 return $result[self::TYPE_PART];
             }

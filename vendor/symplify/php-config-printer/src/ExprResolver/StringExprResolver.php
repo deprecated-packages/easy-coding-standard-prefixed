@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use _PhpScoper326af2119eba\Nette\Utils\Strings;
-use _PhpScoper326af2119eba\PhpParser\BuilderHelpers;
-use _PhpScoper326af2119eba\PhpParser\Node\Arg;
-use _PhpScoper326af2119eba\PhpParser\Node\Expr;
-use _PhpScoper326af2119eba\PhpParser\Node\Expr\ClassConstFetch;
-use _PhpScoper326af2119eba\PhpParser\Node\Expr\FuncCall;
-use _PhpScoper326af2119eba\PhpParser\Node\Name\FullyQualified;
-use _PhpScoper326af2119eba\PhpParser\Node\Scalar\String_;
-use _PhpScoper326af2119eba\Rector\NodeTypeResolver\Node\AttributeKey;
+use _PhpScoper7faa8deb0d3c\Nette\Utils\Strings;
+use _PhpScoper7faa8deb0d3c\PhpParser\BuilderHelpers;
+use _PhpScoper7faa8deb0d3c\PhpParser\Node\Arg;
+use _PhpScoper7faa8deb0d3c\PhpParser\Node\Expr;
+use _PhpScoper7faa8deb0d3c\PhpParser\Node\Expr\ClassConstFetch;
+use _PhpScoper7faa8deb0d3c\PhpParser\Node\Expr\FuncCall;
+use _PhpScoper7faa8deb0d3c\PhpParser\Node\Name\FullyQualified;
+use _PhpScoper7faa8deb0d3c\PhpParser\Node\Scalar\String_;
+use _PhpScoper7faa8deb0d3c\Rector\NodeTypeResolver\Node\AttributeKey;
 use Symplify\PhpConfigPrinter\Configuration\SymfonyFunctionNameProvider;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\ConstantNodeFactory;
@@ -41,10 +41,10 @@ final class StringExprResolver
         $this->commonNodeFactory = $commonNodeFactory;
         $this->symfonyFunctionNameProvider = $symfonyFunctionNameProvider;
     }
-    public function resolve(string $value, bool $skipServiceReference, bool $skipClassesToConstantReference) : \_PhpScoper326af2119eba\PhpParser\Node\Expr
+    public function resolve(string $value, bool $skipServiceReference, bool $skipClassesToConstantReference) : \_PhpScoper7faa8deb0d3c\PhpParser\Node\Expr
     {
         if ($value === '') {
-            return new \_PhpScoper326af2119eba\PhpParser\Node\Scalar\String_($value);
+            return new \_PhpScoper7faa8deb0d3c\PhpParser\Node\Scalar\String_($value);
         }
         $constFetch = $this->constantNodeFactory->createConstantIfValue($value);
         if ($constFetch !== null) {
@@ -58,28 +58,28 @@ final class StringExprResolver
         if ($this->isClassType($value)) {
             return $this->resolveClassType($skipClassesToConstantReference, $value);
         }
-        if (\_PhpScoper326af2119eba\Nette\Utils\Strings::startsWith($value, '@=')) {
+        if (\_PhpScoper7faa8deb0d3c\Nette\Utils\Strings::startsWith($value, '@=')) {
             $value = \ltrim($value, '@=');
             $expr = $this->resolve($value, $skipServiceReference, $skipClassesToConstantReference);
-            $args = [new \_PhpScoper326af2119eba\PhpParser\Node\Arg($expr)];
-            return new \_PhpScoper326af2119eba\PhpParser\Node\Expr\FuncCall(new \_PhpScoper326af2119eba\PhpParser\Node\Name\FullyQualified(\Symplify\PhpConfigPrinter\ValueObject\FunctionName::EXPR), $args);
+            $args = [new \_PhpScoper7faa8deb0d3c\PhpParser\Node\Arg($expr)];
+            return new \_PhpScoper7faa8deb0d3c\PhpParser\Node\Expr\FuncCall(new \_PhpScoper7faa8deb0d3c\PhpParser\Node\Name\FullyQualified(\Symplify\PhpConfigPrinter\ValueObject\FunctionName::EXPR), $args);
         }
         // is service reference
-        if (\_PhpScoper326af2119eba\Nette\Utils\Strings::startsWith($value, '@') && !$this->isFilePath($value)) {
+        if (\_PhpScoper7faa8deb0d3c\Nette\Utils\Strings::startsWith($value, '@') && !$this->isFilePath($value)) {
             $refOrServiceFunctionName = $this->symfonyFunctionNameProvider->provideRefOrService();
             return $this->resolveServiceReferenceExpr($value, $skipServiceReference, $refOrServiceFunctionName);
         }
-        return \_PhpScoper326af2119eba\PhpParser\BuilderHelpers::normalizeValue($value);
+        return \_PhpScoper7faa8deb0d3c\PhpParser\BuilderHelpers::normalizeValue($value);
     }
-    private function keepNewline(string $value) : \_PhpScoper326af2119eba\PhpParser\Node\Scalar\String_
+    private function keepNewline(string $value) : \_PhpScoper7faa8deb0d3c\PhpParser\Node\Scalar\String_
     {
-        $string = new \_PhpScoper326af2119eba\PhpParser\Node\Scalar\String_($value);
-        $string->setAttribute(\_PhpScoper326af2119eba\Rector\NodeTypeResolver\Node\AttributeKey::KIND, \_PhpScoper326af2119eba\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED);
+        $string = new \_PhpScoper7faa8deb0d3c\PhpParser\Node\Scalar\String_($value);
+        $string->setAttribute(\_PhpScoper7faa8deb0d3c\Rector\NodeTypeResolver\Node\AttributeKey::KIND, \_PhpScoper7faa8deb0d3c\PhpParser\Node\Scalar\String_::KIND_DOUBLE_QUOTED);
         return $string;
     }
     private function isFilePath(string $value) : bool
     {
-        return (bool) \_PhpScoper326af2119eba\Nette\Utils\Strings::match($value, self::TWIG_HTML_XML_SUFFIX_REGEX);
+        return (bool) \_PhpScoper7faa8deb0d3c\Nette\Utils\Strings::match($value, self::TWIG_HTML_XML_SUFFIX_REGEX);
     }
     /**
      * @return String_|ClassConstFetch
@@ -87,7 +87,7 @@ final class StringExprResolver
     private function resolveClassType(bool $skipClassesToConstantReference, string $value)
     {
         if ($skipClassesToConstantReference) {
-            return new \_PhpScoper326af2119eba\PhpParser\Node\Scalar\String_($value);
+            return new \_PhpScoper7faa8deb0d3c\PhpParser\Node\Scalar\String_($value);
         }
         return $this->commonNodeFactory->createClassReference($value);
     }
@@ -101,14 +101,14 @@ final class StringExprResolver
         }
         return \interface_exists($value);
     }
-    private function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : \_PhpScoper326af2119eba\PhpParser\Node\Expr
+    private function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : \_PhpScoper7faa8deb0d3c\PhpParser\Node\Expr
     {
         $value = \ltrim($value, '@');
         $expr = $this->resolve($value, $skipServiceReference, \false);
         if ($skipServiceReference) {
             return $expr;
         }
-        $args = [new \_PhpScoper326af2119eba\PhpParser\Node\Arg($expr)];
-        return new \_PhpScoper326af2119eba\PhpParser\Node\Expr\FuncCall(new \_PhpScoper326af2119eba\PhpParser\Node\Name\FullyQualified($functionName), $args);
+        $args = [new \_PhpScoper7faa8deb0d3c\PhpParser\Node\Arg($expr)];
+        return new \_PhpScoper7faa8deb0d3c\PhpParser\Node\Expr\FuncCall(new \_PhpScoper7faa8deb0d3c\PhpParser\Node\Name\FullyQualified($functionName), $args);
     }
 }

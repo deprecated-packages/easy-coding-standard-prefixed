@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace _PhpScoper7faa8deb0d3c\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use _PhpScoper326af2119eba\PHPUnit\Framework\Constraint\Constraint;
-use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Cookie;
-use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Response;
-final class ResponseCookieValueSame extends \_PhpScoper326af2119eba\PHPUnit\Framework\Constraint\Constraint
+use _PhpScoper7faa8deb0d3c\PHPUnit\Framework\Constraint\Constraint;
+use _PhpScoper7faa8deb0d3c\Symfony\Component\HttpFoundation\Cookie;
+use _PhpScoper7faa8deb0d3c\Symfony\Component\HttpFoundation\Response;
+final class ResponseCookieValueSame extends \_PhpScoper7faa8deb0d3c\PHPUnit\Framework\Constraint\Constraint
 {
     private $name;
     private $value;
@@ -63,10 +63,10 @@ final class ResponseCookieValueSame extends \_PhpScoper326af2119eba\PHPUnit\Fram
     {
         return 'the Response ' . $this->toString();
     }
-    protected function getCookie(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Response $response) : ?\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Cookie
+    protected function getCookie(\_PhpScoper7faa8deb0d3c\Symfony\Component\HttpFoundation\Response $response) : ?\_PhpScoper7faa8deb0d3c\Symfony\Component\HttpFoundation\Cookie
     {
         $cookies = $response->headers->getCookies();
-        $filteredCookies = \array_filter($cookies, function (\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Cookie $cookie) {
+        $filteredCookies = \array_filter($cookies, function (\_PhpScoper7faa8deb0d3c\Symfony\Component\HttpFoundation\Cookie $cookie) {
             return $cookie->getName() === $this->name && $cookie->getPath() === $this->path && $cookie->getDomain() === $this->domain;
         });
         return \reset($filteredCookies) ?: null;

@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper326af2119eba\\Symfony\\Component\\Stopwatch\\": ""
+            "_PhpScoper7faa8deb0d3c\\Symfony\\Component\\Stopwatch\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"
