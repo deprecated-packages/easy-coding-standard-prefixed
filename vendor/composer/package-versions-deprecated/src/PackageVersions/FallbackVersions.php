@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper069ebd53a518\PackageVersions;
+namespace _PhpScoper326af2119eba\PackageVersions;
 
 use Generator;
 use OutOfBoundsException;
@@ -84,7 +84,7 @@ final class FallbackVersions
         if ($packageData !== []) {
             return \array_merge(...$packageData);
         }
-        throw new \UnexpectedValueException(\sprintf('PackageVersions could not locate the `vendor/composer/installed.json` or your `composer.lock` ' . 'location. This is assumed to be in %s. If you customized your composer vendor directory and ran composer ' . 'installation with --no-scripts or if you deployed without the required composer files, then you are on ' . 'your own, and we can\'t really help you. Fix your shit and cut the tooling some slack.', \json_encode($checkedPaths)));
+        throw new \UnexpectedValueException(\sprintf('PackageVersions could not locate the `vendor/composer/installed.json` or your `composer.lock` ' . 'location. This is assumed to be in %s. If you customized your composer vendor directory and ran composer ' . 'installation with --no-scripts, or if you deployed without the required composer files, PackageVersions ' . 'can\'t detect installed versions.', \json_encode($checkedPaths)));
     }
     /**
      * @param mixed[] $packageData

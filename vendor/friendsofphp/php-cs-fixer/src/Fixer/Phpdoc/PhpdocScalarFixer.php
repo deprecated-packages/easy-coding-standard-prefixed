@@ -82,7 +82,7 @@ function sample($a, $b, $c)
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('types', 'A map of types to fix.'))->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(\array_keys(self::$types))])->setDefault(['boolean', 'double', 'integer', 'real', 'str'])->getOption()]);
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('types', 'A list of types to fix.'))->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(\array_keys(self::$types))])->setDefault(['boolean', 'double', 'integer', 'real', 'str'])->getOption()]);
     }
     /**
      * {@inheritdoc}

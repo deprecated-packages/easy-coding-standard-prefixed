@@ -98,7 +98,7 @@ final class IndentationTypeFixer extends \PhpCsFixer\AbstractFixer implements \P
     {
         $content = $tokens[$index]->getContent();
         $previousTokenHasTrailingLinebreak = \false;
-        // @TODO 3.0 this can be removed when we have a transformer for "T_OPEN_TAG" to "T_OPEN_TAG + T_WHITESPACE"
+        // @TODO this can be removed when we have a transformer for "T_OPEN_TAG" to "T_OPEN_TAG + T_WHITESPACE"
         if (\false !== \strpos($tokens[$index - 1]->getContent(), "\n")) {
             $content = "\n" . $content;
             $previousTokenHasTrailingLinebreak = \true;

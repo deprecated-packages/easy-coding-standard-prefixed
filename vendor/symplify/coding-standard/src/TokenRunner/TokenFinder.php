@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -35,7 +35,8 @@ final class TokenFinder
     public function getNextMeaninfulTokens(array $tokens, int $position, int $count) : array
     {
         $foundTokens = [];
-        for ($i = $position; $i < \count($tokens); ++$i) {
+        $tokensCount = \count($tokens);
+        for ($i = $position; $i < $tokensCount; ++$i) {
             $token = $tokens[$i];
             if ($token[0] === \T_WHITESPACE) {
                 continue;
@@ -54,9 +55,10 @@ final class TokenFinder
     public function getSameRowLastToken(array $rawTokens, int $position)
     {
         $lastToken = null;
-        for ($i = $position; $i < \count($rawTokens); ++$i) {
+        $rawTokensCount = \count($rawTokens);
+        for ($i = $position; $i < $rawTokensCount; ++$i) {
             $token = $rawTokens[$i];
-            if (\is_array($token) && \_PhpScoper069ebd53a518\Nette\Utils\Strings::contains($token[1], \PHP_EOL)) {
+            if (\is_array($token) && \_PhpScoper326af2119eba\Nette\Utils\Strings::contains($token[1], \PHP_EOL)) {
                 break;
             }
             $lastToken = $token;

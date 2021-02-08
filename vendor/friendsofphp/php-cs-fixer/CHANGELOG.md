@@ -3,6 +3,114 @@ CHANGELOG for PHP CS Fixer
 
 This file contains changelogs for stable releases only.
 
+Changelog for v2.18.2
+---------------------
+
+* bug #5466 Fix runtime check of PHP version (keradus)
+* minor #4250 POC Tokens::insertSlices (keradus)
+
+Changelog for v2.18.1
+---------------------
+
+* bug #5447 switch_case_semicolon_to_colon should skip match/default statements (derrabus)
+* bug #5453 SingleSpaceAfterConstructFixer - better handling of closing parenthesis and brace (keradus)
+* bug #5454 NullableTypeDeclarationForDefaultNullValueFixer - support property promotion via constructor (keradus)
+* bug #5455 PhpdocToCommentFixer - add support for attributes (keradus)
+* bug #5462 NullableTypeDeclarationForDefaultNullValueFixer - support union types (keradus)
+* minor #5444 Fix PHP version number in PHP54MigrationSet description (jdreesen, keradus)
+* minor #5445 DX: update usage of old TraversableContains in tests (keradus)
+* minor #5456 DX: Fix CiIntegrationTest (keradus)
+* minor #5457 CI: fix params order (keradus)
+* minor #5458 CI: fix migration workflow (keradus)
+* minor #5459 DX: cleanup PHP Migration rulesets (keradus)
+
+Changelog for v2.18.0
+---------------------
+
+* feature #4943 Add PSR12 ruleset (julienfalque, keradus)
+* feature #5426 Update Symfony ruleset (keradus)
+* feature #5428 Add/Change PHP.MigrationSet to update array/list syntax to short one (keradus)
+* minor #5441 Allow execution under PHP 8 (keradus)
+
+Changelog for v2.17.5
+---------------------
+
+* bug #5447 switch_case_semicolon_to_colon should skip match/default statements (derrabus)
+* bug #5453 SingleSpaceAfterConstructFixer - better handling of closing parenthesis and brace (keradus)
+* bug #5454 NullableTypeDeclarationForDefaultNullValueFixer - support property promotion via constructor (keradus)
+* bug #5455 PhpdocToCommentFixer - add support for attributes (keradus)
+* bug #5462 NullableTypeDeclarationForDefaultNullValueFixer - support union types (keradus)
+* minor #5445 DX: update usage of old TraversableContains in tests (keradus)
+* minor #5456 DX: Fix CiIntegrationTest (keradus)
+* minor #5457 CI: fix params order (keradus)
+* minor #5459 DX: cleanup PHP Migration rulesets (keradus)
+
+Changelog for v2.17.4
+---------------------
+
+* bug #5379 PhpUnitMethodCasingFixer - Do not modify class name (localheinz)
+* bug #5404 NullableTypeTransformer - constructor property promotion support (Wirone)
+* bug #5433 PhpUnitTestCaseStaticMethodCallsFixer - fix for abstract static method (kubawerlos)
+* minor #5234 DX: Add Docker dev setup (julienfalque, keradus)
+* minor #5391 PhpdocOrderByValueFixer - Add additional annotations to sort (localheinz)
+* minor #5392 PhpdocScalarFixer - Fix description (localheinz)
+* minor #5397 NoExtraBlankLinesFixer - PHP8 throw support (SpacePossum)
+* minor #5399 Add PHP8 integration test (keradus)
+* minor #5405 TypeAlternationTransformer - add support for PHP8 (SpacePossum)
+* minor #5406 SingleSpaceAfterConstructFixer - Attributes, comments and PHPDoc support (SpacePossum)
+* minor #5407 TokensAnalyzer::getClassyElements - return trait imports (SpacePossum)
+* minor #5410 minors (SpacePossum)
+* minor #5411 bump year in LICENSE file (SpacePossum)
+* minor #5414 TypeAlternationTransformer - T_FN support (SpacePossum)
+* minor #5415 Forbid execution under PHP 8.0.0 (keradus)
+* minor #5416 Drop Travis CI (keradus)
+* minor #5419 CI: separate SCA checks to dedicated jobs (keradus)
+* minor #5420 DX: unblock PHPUnit 9.5 (keradus)
+* minor #5423 DX: PHPUnit - disable verbose by default (keradus)
+* minor #5425 Cleanup 3.0 todos (keradus)
+* minor #5427 Plan changing defaults for array_syntax and list_syntax in 3.0 release (keradus)
+* minor #5429 DX: Drop speedtrap PHPUnit listener (keradus)
+* minor #5432 Don't allow unserializing classes with a destructor (jderusse)
+* minor #5435 DX: PHPUnit - groom configuration of time limits (keradus)
+* minor #5439 VisibilityRequiredFixer - support type alternation for properties (keradus)
+* minor #5442 DX: FunctionsAnalyzerTest - add missing 7.0 requirement (keradus)
+
+Changelog for v2.17.3
+---------------------
+
+* bug #5384 PsrAutoloadingFixer - do not remove directory structure from the Class name (kubawerlos, keradus)
+* bug #5385 SingleLineCommentStyleFixer- run before NoUselessReturnFixer (kubawerlos)
+* bug #5387 SingleSpaceAfterConstructFixer - do not touch multi line implements (SpacePossum)
+* minor #5329 DX: collect coverage with Github Actions (kubawerlos)
+* minor #5380 PhpdocOrderByValueFixer - Allow sorting of throws annotations by value (localheinz, keradus)
+* minor #5383 DX: fail PHPUnit tests on warning (kubawerlos)
+* minor #5386 DX: remove incorrect priority relations (kubawerlos)
+
+Changelog for v2.17.2
+---------------------
+
+* bug #5345 CleanNamespaceFixer - preserve traling comments (SpacePossum)
+* bug #5348 PsrAutoloadingFixer - fix for class without namespace (kubawerlos)
+* bug #5362 SingleSpaceAfterConstructFixer: Do not adjust whitespace before multiple multi-line extends (localheinz, SpacePossum)
+* minor #5314 Enable testing with PHPUnit 9.x (sanmai)
+* minor #5319 Clean ups (SpacePossum)
+* minor #5338 clean ups (SpacePossum)
+* minor #5339 NoEmptyStatementFixer - fix more cases (SpacePossum)
+* minor #5340 NamedArgumentTransformer - Introduction (SpacePossum)
+* minor #5344 Update docs: do not use deprecated create method (SpacePossum)
+* minor #5353 Fix typo in issue template (stof)
+* minor #5355 OrderedTraitsFixer - mark as risky (SpacePossum)
+* minor #5356 RuleSet description fixes (SpacePossum)
+* minor #5359 Add application version to "fix" out put when verbosity flag is set (SpacePossum)
+* minor #5360 DX: clean up detectIndent methods (kubawerlos)
+* minor #5363 Added missing self return type to ConfigInterface::registerCustomFixers() (vudaltsov)
+* minor #5366 PhpUnitDedicateAssertInternalTypeFixer - recover target option (keradus)
+* minor #5368 DX: PHPUnit 9 compatibility for 2.17 (keradus)
+* minor #5370 DX: update PHPUnit usage to use external Prophecy trait and solve warning (keradus)
+* minor #5371 Update documentation about PHP_CS_FIXER_IGNORE_ENV (SanderSander, keradus)
+* minor #5373 DX: MagicMethodCasingFixerTest - fix test case description (keradus)
+* minor #5374 DX: PhpUnitDedicateAssertInternalTypeFixer - add code sample for non-default config (keradus)
+
 Changelog for v2.17.1
 ---------------------
 
@@ -79,14 +187,20 @@ Changelog for v2.17.0
 * minor #5323 NoUselessSprintfFixer - Fix test on PHP5.6 (SpacePossum)
 * minor #5326 DX: relax composer requirements to not block installation under PHP v8, support for PHP v8 is not yet ready (keradus)
 
-Changelog for v2.16.8
----------------------
 
-* bug #5325 NoBreakCommentFixer - better throw handling (SpacePossum)
-* bug #5327 StaticLambdaFixer - fix for arrow function used in class with $this (kubawerlos, SpacePossum)
-* bug #5333 Fix file missing for php8 (jderusse)
-* minor #5328 Fixed deprecation message version (GrahamCampbell)
-* minor #5330 DX: cleanup Github Actions configs (kubawerlos)
+Changelog for v2.16.10
+----------------------
+
+* minor #5314 Enable testing with PHPUnit 9.x (sanmai)
+* minor #5338 clean ups (SpacePossum)
+* minor #5339 NoEmptyStatementFixer - fix more cases (SpacePossum)
+* minor #5340 NamedArgumentTransformer - Introduction (SpacePossum)
+* minor #5344 Update docs: do not use deprecated create method (SpacePossum)
+* minor #5356 RuleSet description fixes (SpacePossum)
+* minor #5360 DX: clean up detectIndent methods (kubawerlos)
+* minor #5370 DX: update PHPUnit usage to use external Prophecy trait and solve warning (keradus)
+* minor #5373 DX: MagicMethodCasingFixerTest - fix test case description (keradus)
+* minor #5374 DX: PhpUnitDedicateAssertInternalTypeFixer - add code sample for non-default config (keradus)
 
 Changelog for v2.16.9
 ---------------------
@@ -133,6 +247,15 @@ Changelog for v2.16.9
 * minor #5311 OrderedClassElementsFixer - PHPUnit Bridge support (ktomk)
 * minor #5316 PHP8 - Attribute support (SpacePossum)
 * minor #5321 DX: little code grooming (keradus)
+
+Changelog for v2.16.8
+---------------------
+
+* bug #5325 NoBreakCommentFixer - better throw handling (SpacePossum)
+* bug #5327 StaticLambdaFixer - fix for arrow function used in class with $this (kubawerlos, SpacePossum)
+* bug #5333 Fix file missing for php8 (jderusse)
+* minor #5328 Fixed deprecation message version (GrahamCampbell)
+* minor #5330 DX: cleanup Github Actions configs (kubawerlos)
 
 Changelog for v2.16.5
 ---------------------

@@ -54,28 +54,34 @@ final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
         $this->assertSame('A\\', $token);
         $this->fixer->addContent(14, 'B');
         $token = $this->fixer->getTokenContent(14);
-        $this->assertSame('_PhpScoper069ebd53a518\\A\\B', $token);
+        $this->assertSame('_PhpScoper326af2119eba\\A\\B', $token);
     }
     public function testChangesets() : void
     {
         $this->file->parse();
         $this->fixer->startFile($this->file);
         $this->fixer->beginChangeSet();
-        $this->assertSame('\\', $this->fixer->getTokenContent(14));
+        $tokenContent = $this->fixer->getTokenContent(14);
+        $this->assertSame('\\', $tokenContent);
         $this->fixer->addContentBefore(14, 'A');
-        $this->assertSame('A\\', $this->fixer->getTokenContent(14));
+        $tokenContent = $this->fixer->getTokenContent(14);
+        $this->assertSame('A\\', $tokenContent);
         // during the changeset, you are free to modify current token as you wish...
         $this->fixer->addContent(14, 'B');
-        $this->assertSame('_PhpScoper069ebd53a518\\A\\B', $this->fixer->getTokenContent(14));
+        $tokenContent = $this->fixer->getTokenContent(14);
+        $this->assertSame('_PhpScoper326af2119eba\\A\\B', $tokenContent);
         // you can also rollback the changes...
         $this->fixer->rollbackChangeset();
-        $this->assertSame('\\', $this->fixer->getTokenContent(14));
+        $tokenContent = $this->fixer->getTokenContent(14);
+        $this->assertSame('\\', $tokenContent);
         $this->fixer->addContent(14, 'B');
         $this->fixer->endChangeSet();
-        $this->assertSame('\\B', $this->fixer->getTokenContent(14));
+        $tokenContent = $this->fixer->getTokenContent(14);
+        $this->assertSame('\\B', $tokenContent);
         // ...that stops being the case after changeset is committed
         $this->fixer->addContent(14, 'C');
-        $this->assertSame('\\B', $this->fixer->getTokenContent(14));
+        $tokenContent = $this->fixer->getTokenContent(14);
+        $this->assertSame('\\B', $tokenContent);
     }
     public function testAddNewline() : void
     {

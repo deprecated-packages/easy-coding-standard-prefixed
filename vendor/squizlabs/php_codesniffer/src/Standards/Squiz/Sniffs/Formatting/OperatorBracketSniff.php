@@ -85,7 +85,7 @@ class OperatorBracketSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         if ($previousToken !== \false) {
             // A list of tokens that indicate that the token is not
             // part of an arithmetic operation.
-            $invalidTokens = [T_COMMA => \true, T_COLON => \true, T_OPEN_PARENTHESIS => \true, T_OPEN_SQUARE_BRACKET => \true, T_OPEN_CURLY_BRACKET => \true, T_OPEN_SHORT_ARRAY => \true, \T_CASE => \true];
+            $invalidTokens = [T_COMMA => \true, T_COLON => \true, T_OPEN_PARENTHESIS => \true, T_OPEN_SQUARE_BRACKET => \true, T_OPEN_CURLY_BRACKET => \true, T_OPEN_SHORT_ARRAY => \true, \T_CASE => \true, \T_EXIT => \true];
             if (isset($invalidTokens[$tokens[$previousToken]['code']]) === \true) {
                 return;
             }
@@ -100,7 +100,7 @@ class OperatorBracketSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             }
         }
         // Tokens that are allowed inside a bracketed operation.
-        $allowed = [\T_VARIABLE, \T_LNUMBER, \T_DNUMBER, \T_STRING, \T_WHITESPACE, \T_NS_SEPARATOR, T_THIS, T_SELF, \T_STATIC, \T_OBJECT_OPERATOR, \T_DOUBLE_COLON, T_OPEN_SQUARE_BRACKET, T_CLOSE_SQUARE_BRACKET, T_MODULUS, T_NONE, T_BITWISE_NOT];
+        $allowed = [\T_VARIABLE, \T_LNUMBER, \T_DNUMBER, \T_STRING, \T_WHITESPACE, \T_NS_SEPARATOR, T_THIS, T_SELF, \T_STATIC, \T_OBJECT_OPERATOR, \T_NULLSAFE_OBJECT_OPERATOR, \T_DOUBLE_COLON, T_OPEN_SQUARE_BRACKET, T_CLOSE_SQUARE_BRACKET, T_MODULUS, T_NONE, T_BITWISE_NOT];
         $allowed += \PHP_CodeSniffer\Util\Tokens::$operators;
         $lastBracket = \false;
         if (isset($tokens[$stackPtr]['nested_parenthesis']) === \true) {
@@ -208,7 +208,7 @@ class OperatorBracketSniff implements \PHP_CodeSniffer\Sniffs\Sniff
     public function addMissingBracketsError($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $allowed = [\T_VARIABLE => \true, \T_LNUMBER => \true, \T_DNUMBER => \true, \T_STRING => \true, \T_CONSTANT_ENCAPSED_STRING => \true, T_DOUBLE_QUOTED_STRING => \true, \T_WHITESPACE => \true, \T_NS_SEPARATOR => \true, T_THIS => \true, T_SELF => \true, \T_STATIC => \true, \T_OBJECT_OPERATOR => \true, \T_DOUBLE_COLON => \true, T_MODULUS => \true, \T_ISSET => \true, \T_ARRAY => \true, T_NONE => \true, T_BITWISE_NOT => \true];
+        $allowed = [\T_VARIABLE => \true, \T_LNUMBER => \true, \T_DNUMBER => \true, \T_STRING => \true, \T_CONSTANT_ENCAPSED_STRING => \true, T_DOUBLE_QUOTED_STRING => \true, \T_WHITESPACE => \true, \T_NS_SEPARATOR => \true, T_THIS => \true, T_SELF => \true, \T_STATIC => \true, \T_OBJECT_OPERATOR => \true, \T_NULLSAFE_OBJECT_OPERATOR => \true, \T_DOUBLE_COLON => \true, T_MODULUS => \true, \T_ISSET => \true, \T_ARRAY => \true, T_NONE => \true, T_BITWISE_NOT => \true];
         // Find the first token in the expression.
         for ($before = $stackPtr - 1; $before > 0; $before--) {
             // Special case for plus operators because we can't tell if they are used

@@ -1,12 +1,13 @@
 <?php
 
-namespace _PhpScoper069ebd53a518;
+namespace _PhpScoper326af2119eba;
 
-interface Stringable
-{
-    /**
-     * @return string
-     */
-    public function __toString();
+if (\PHP_VERSION_ID < 80000) {
+    interface Stringable
+    {
+        /**
+         * @return string
+         */
+        public function __toString();
+    }
 }
-\class_alias('_PhpScoper069ebd53a518\\Stringable', 'Stringable', \false);

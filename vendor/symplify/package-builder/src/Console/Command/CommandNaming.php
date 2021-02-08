@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console\Command;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Command\Command;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Command\Command;
 /**
  * @see \Symplify\PackageBuilder\Tests\Console\Command\CommandNamingTest
  */
@@ -20,7 +20,7 @@ final class CommandNaming
      *  "SomeClass\SomeSuperCommand" → "some-super"
      *  "SomeClass\SOMESuperCommand" → "some-super"
      */
-    public function resolveFromCommand(\_PhpScoper069ebd53a518\Symfony\Component\Console\Command\Command $command) : string
+    public function resolveFromCommand(\_PhpScoper326af2119eba\Symfony\Component\Console\Command\Command $command) : string
     {
         $commandClass = \get_class($command);
         return self::classToName($commandClass);
@@ -33,8 +33,8 @@ final class CommandNaming
     public static function classToName(string $class) : string
     {
         /** @var string $shortClassName */
-        $shortClassName = self::getShortClassName($class);
-        $rawCommandName = \_PhpScoper069ebd53a518\Nette\Utils\Strings::substring($shortClassName, 0, -\strlen('Command'));
+        $shortClassName = self::resolveShortName($class);
+        $rawCommandName = \_PhpScoper326af2119eba\Nette\Utils\Strings::substring($shortClassName, 0, -\strlen('Command'));
         // ECSCommand => ecs
         for ($i = 0; $i < \strlen($rawCommandName); ++$i) {
             if (\ctype_upper($rawCommandName[$i]) && self::isFollowedByUpperCaseLetterOrNothing($rawCommandName, $i)) {
@@ -44,14 +44,14 @@ final class CommandNaming
             }
         }
         $rawCommandName = \lcfirst($rawCommandName);
-        return \_PhpScoper069ebd53a518\Nette\Utils\Strings::replace($rawCommandName, self::BIG_LETTER_REGEX, function (array $matches) : string {
+        return \_PhpScoper326af2119eba\Nette\Utils\Strings::replace($rawCommandName, self::BIG_LETTER_REGEX, function (array $matches) : string {
             return '-' . \strtolower($matches[0]);
         });
     }
-    private static function getShortClassName(string $class) : string
+    private static function resolveShortName(string $class) : string
     {
         $classParts = \explode('\\', $class);
-        return (string) \array_pop($classParts);
+        return \array_pop($classParts);
     }
     private static function isFollowedByUpperCaseLetterOrNothing(string $string, int $position) : bool
     {

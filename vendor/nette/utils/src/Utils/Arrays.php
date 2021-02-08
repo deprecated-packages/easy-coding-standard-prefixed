@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper069ebd53a518\Nette\Utils;
+namespace _PhpScoper326af2119eba\Nette\Utils;
 
-use _PhpScoper069ebd53a518\Nette;
-use function is_array, is_int, is_object;
+use _PhpScoper326af2119eba\Nette;
+use function is_array, is_int, is_object, count;
 /**
  * Array tools library.
  */
@@ -16,104 +16,149 @@ class Arrays
 {
     use Nette\StaticClass;
     /**
-     * Returns item from array or $default if item is not set.
-     * @param  string|int|array $key one or more keys
+     * Returns item from array. If it does not exist, it throws an exception, unless a default value is set.
+     * @param  string|int|array  $key one or more keys
+     * @param  mixed  $default
      * @return mixed
      * @throws Nette\InvalidArgumentException if item does not exist and default value is not provided
      */
-    public static function get(array $arr, $key, $default = null)
+    public static function get(array $array, $key, $default = null)
     {
         foreach (\is_array($key) ? $key : [$key] as $k) {
-            if (\is_array($arr) && \array_key_exists($k, $arr)) {
-                $arr = $arr[$k];
+            if (\is_array($array) && \array_key_exists($k, $array)) {
+                $array = $array[$k];
             } else {
                 if (\func_num_args() < 3) {
-                    throw new \_PhpScoper069ebd53a518\Nette\InvalidArgumentException("Missing item '{$k}'.");
+                    throw new \_PhpScoper326af2119eba\Nette\InvalidArgumentException("Missing item '{$k}'.");
                 }
                 return $default;
             }
         }
-        return $arr;
+        return $array;
     }
     /**
-     * Returns reference to array item.
-     * @param  string|int|array $key one or more keys
+     * Returns reference to array item. If the index does not exist, new one is created with value null.
+     * @param  string|int|array  $key one or more keys
      * @return mixed
      * @throws Nette\InvalidArgumentException if traversed item is not an array
      */
-    public static function &getRef(array &$arr, $key)
+    public static function &getRef(array &$array, $key)
     {
         foreach (\is_array($key) ? $key : [$key] as $k) {
-            if (\is_array($arr) || $arr === null) {
-                $arr =& $arr[$k];
+            if (\is_array($array) || $array === null) {
+                $array =& $array[$k];
             } else {
-                throw new \_PhpScoper069ebd53a518\Nette\InvalidArgumentException('Traversed item is not an array.');
+                throw new \_PhpScoper326af2119eba\Nette\InvalidArgumentException('Traversed item is not an array.');
             }
         }
-        return $arr;
+        return $array;
     }
     /**
-     * Recursively appends elements of remaining keys from the second array to the first.
+     * Recursively merges two fields. It is useful, for example, for merging tree structures. It behaves as
+     * the + operator for array, ie. it adds a key/value pair from the second array to the first one and retains
+     * the value from the first array in the case of a key collision.
      */
-    public static function mergeTree(array $arr1, array $arr2) : array
+    public static function mergeTree(array $array1, array $array2) : array
     {
-        $res = $arr1 + $arr2;
-        foreach (\array_intersect_key($arr1, $arr2) as $k => $v) {
-            if (\is_array($v) && \is_array($arr2[$k])) {
-                $res[$k] = self::mergeTree($v, $arr2[$k]);
+        $res = $array1 + $array2;
+        foreach (\array_intersect_key($array1, $array2) as $k => $v) {
+            if (\is_array($v) && \is_array($array2[$k])) {
+                $res[$k] = self::mergeTree($v, $array2[$k]);
             }
         }
         return $res;
     }
     /**
-     * Searches the array for a given key and returns the offset if successful.
+     * Returns zero-indexed position of given array key. Returns null if key is not found.
+     * @param  string|int  $key
      * @return int|null offset if it is found, null otherwise
      */
-    public static function searchKey(array $arr, $key) : ?int
+    public static function getKeyOffset(array $array, $key) : ?int
     {
-        $foo = [$key => null];
-        return ($tmp = \array_search(\key($foo), \array_keys($arr), \true)) === \false ? null : $tmp;
+        return \_PhpScoper326af2119eba\Nette\Utils\Helpers::falseToNull(\array_search(self::toKey($key), \array_keys($array), \true));
     }
     /**
-     * Inserts new array before item specified by key.
+     * @deprecated  use  getKeyOffset()
      */
-    public static function insertBefore(array &$arr, $key, array $inserted) : void
+    public static function searchKey(array $array, $key) : ?int
     {
-        $offset = (int) self::searchKey($arr, $key);
-        $arr = \array_slice($arr, 0, $offset, \true) + $inserted + \array_slice($arr, $offset, \count($arr), \true);
+        return self::getKeyOffset($array, $key);
     }
     /**
-     * Inserts new array after item specified by key.
+     * Tests an array for the presence of value.
+     * @param  mixed  $value
      */
-    public static function insertAfter(array &$arr, $key, array $inserted) : void
+    public static function contains(array $array, $value) : bool
     {
-        $offset = self::searchKey($arr, $key);
-        $offset = $offset === null ? \count($arr) : $offset + 1;
-        $arr = \array_slice($arr, 0, $offset, \true) + $inserted + \array_slice($arr, $offset, \count($arr), \true);
+        return \in_array($value, $array, \true);
+    }
+    /**
+     * Returns the first item from the array or null if array is empty.
+     * @return mixed
+     */
+    public static function first(array $array)
+    {
+        return \count($array) ? \reset($array) : null;
+    }
+    /**
+     * Returns the last item from the array or null if array is empty.
+     * @return mixed
+     */
+    public static function last(array $array)
+    {
+        return \count($array) ? \end($array) : null;
+    }
+    /**
+     * Inserts the contents of the $inserted array into the $array immediately after the $key.
+     * If $key is null (or does not exist), it is inserted at the beginning.
+     * @param  string|int|null  $key
+     */
+    public static function insertBefore(array &$array, $key, array $inserted) : void
+    {
+        $offset = (int) self::searchKey($array, $key);
+        $array = \array_slice($array, 0, $offset, \true) + $inserted + \array_slice($array, $offset, \count($array), \true);
+    }
+    /**
+     * Inserts the contents of the $inserted array into the $array before the $key.
+     * If $key is null (or does not exist), it is inserted at the end.
+     * @param  string|int|null  $key
+     */
+    public static function insertAfter(array &$array, $key, array $inserted) : void
+    {
+        $offset = self::searchKey($array, $key);
+        $offset = $offset === null ? \count($array) : $offset + 1;
+        $array = \array_slice($array, 0, $offset, \true) + $inserted + \array_slice($array, $offset, \count($array), \true);
     }
     /**
      * Renames key in array.
+     * @param  string|int  $oldKey
+     * @param  string|int  $newKey
      */
-    public static function renameKey(array &$arr, $oldKey, $newKey) : void
+    public static function renameKey(array &$array, $oldKey, $newKey) : bool
     {
-        $offset = self::searchKey($arr, $oldKey);
-        if ($offset !== null) {
-            $keys = \array_keys($arr);
-            $keys[$offset] = $newKey;
-            $arr = \array_combine($keys, $arr);
+        $offset = self::searchKey($array, $oldKey);
+        if ($offset === null) {
+            return \false;
         }
+        $val =& $array[$oldKey];
+        $keys = \array_keys($array);
+        $keys[$offset] = $newKey;
+        $array = \array_combine($keys, $array);
+        $array[$newKey] =& $val;
+        return \true;
     }
     /**
-     * Returns array entries that match the pattern.
+     * Returns only those array items, which matches a regular expression $pattern.
+     * @throws Nette\RegexpException  on compilation or runtime error
      */
-    public static function grep(array $arr, string $pattern, int $flags = 0) : array
+    public static function grep(array $array, string $pattern, int $flags = 0) : array
     {
-        return \_PhpScoper069ebd53a518\Nette\Utils\Strings::pcre('preg_grep', [$pattern, $arr, $flags]);
+        return \_PhpScoper326af2119eba\Nette\Utils\Strings::pcre('preg_grep', [$pattern, $array, $flags]);
     }
     /**
-     * Returns flattened array.
+     * Transforms multidimensional array to flat array.
      */
-    public static function flatten(array $arr, bool $preserveKeys = \false) : array
+    public static function flatten(array $array, bool $preserveKeys = \false) : array
     {
         $res = [];
         $cb = $preserveKeys ? function ($v, $k) use(&$res) : void {
@@ -121,11 +166,12 @@ class Arrays
         } : function ($v) use(&$res) : void {
             $res[] = $v;
         };
-        \array_walk_recursive($arr, $cb);
+        \array_walk_recursive($array, $cb);
         return $res;
     }
     /**
-     * Finds whether a variable is a zero-based integer indexed array.
+     * Checks if the array is indexed in ascending order of numeric keys from zero, a.k.a list.
+     * @param  mixed  $value
      */
     public static function isList($value) : bool
     {
@@ -133,16 +179,17 @@ class Arrays
     }
     /**
      * Reformats table to associative tree. Path looks like 'field|field[]field->field=field'.
+     * @param  string|string[]  $path
      * @return array|\stdClass
      */
-    public static function associate(array $arr, $path)
+    public static function associate(array $array, $path)
     {
         $parts = \is_array($path) ? $path : \preg_split('#(\\[\\]|->|=|\\|)#', $path, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
-        if (!$parts || $parts[0] === '=' || $parts[0] === '|' || $parts === ['->']) {
-            throw new \_PhpScoper069ebd53a518\Nette\InvalidArgumentException("Invalid path '{$path}'.");
+        if (!$parts || $parts === ['->'] || $parts[0] === '=' || $parts[0] === '|') {
+            throw new \_PhpScoper326af2119eba\Nette\InvalidArgumentException("Invalid path '{$path}'.");
         }
         $res = $parts[0] === '->' ? new \stdClass() : [];
-        foreach ($arr as $rowOrig) {
+        foreach ($array as $rowOrig) {
             $row = (array) $rowOrig;
             $x =& $res;
             for ($i = 0; $i < \count($parts); $i++) {
@@ -156,6 +203,9 @@ class Arrays
                     }
                 } elseif ($part === '->') {
                     if (isset($parts[++$i])) {
+                        if ($x === null) {
+                            $x = new \stdClass();
+                        }
                         $x =& $x->{$row[$parts[$i]]};
                     } else {
                         $row = \is_object($rowOrig) ? $rowOrig : (object) $row;
@@ -171,67 +221,118 @@ class Arrays
         return $res;
     }
     /**
-     * Normalizes to associative array.
+     * Normalizes array to associative array. Replace numeric keys with their values, the new value will be $filling.
+     * @param  mixed  $filling
      */
-    public static function normalize(array $arr, $filling = null) : array
+    public static function normalize(array $array, $filling = null) : array
     {
         $res = [];
-        foreach ($arr as $k => $v) {
+        foreach ($array as $k => $v) {
             $res[\is_int($k) ? $v : $k] = \is_int($k) ? $filling : $v;
         }
         return $res;
     }
     /**
-     * Picks element from the array by key and return its value.
-     * @param  string|int $key array key
+     * Returns and removes the value of an item from an array. If it does not exist, it throws an exception,
+     * or returns $default, if provided.
+     * @param  string|int  $key
+     * @param  mixed  $default
      * @return mixed
      * @throws Nette\InvalidArgumentException if item does not exist and default value is not provided
      */
-    public static function pick(array &$arr, $key, $default = null)
+    public static function pick(array &$array, $key, $default = null)
     {
-        if (\array_key_exists($key, $arr)) {
-            $value = $arr[$key];
-            unset($arr[$key]);
+        if (\array_key_exists($key, $array)) {
+            $value = $array[$key];
+            unset($array[$key]);
             return $value;
         } elseif (\func_num_args() < 3) {
-            throw new \_PhpScoper069ebd53a518\Nette\InvalidArgumentException("Missing item '{$key}'.");
+            throw new \_PhpScoper326af2119eba\Nette\InvalidArgumentException("Missing item '{$key}'.");
         } else {
             return $default;
         }
     }
     /**
-     * Tests whether some element in the array passes the callback test.
+     * Tests whether at least one element in the array passes the test implemented by the
+     * provided callback with signature `function ($value, $key, array $array): bool`.
      */
-    public static function some(array $arr, callable $callback) : bool
+    public static function some(iterable $array, callable $callback) : bool
     {
-        foreach ($arr as $k => $v) {
-            if ($callback($v, $k, $arr)) {
+        foreach ($array as $k => $v) {
+            if ($callback($v, $k, $array)) {
                 return \true;
             }
         }
         return \false;
     }
     /**
-     * Tests whether all elements in the array pass the callback test.
+     * Tests whether all elements in the array pass the test implemented by the provided function,
+     * which has the signature `function ($value, $key, array $array): bool`.
      */
-    public static function every(array $arr, callable $callback) : bool
+    public static function every(iterable $array, callable $callback) : bool
     {
-        foreach ($arr as $k => $v) {
-            if (!$callback($v, $k, $arr)) {
+        foreach ($array as $k => $v) {
+            if (!$callback($v, $k, $array)) {
                 return \false;
             }
         }
         return \true;
     }
     /**
-     * Applies the callback to the elements of the array.
+     * Calls $callback on all elements in the array and returns the array of return values.
+     * The callback has the signature `function ($value, $key, array $array): bool`.
      */
-    public static function map(array $arr, callable $callback) : array
+    public static function map(iterable $array, callable $callback) : array
     {
         $res = [];
-        foreach ($arr as $k => $v) {
-            $res[$k] = $callback($v, $k, $arr);
+        foreach ($array as $k => $v) {
+            $res[$k] = $callback($v, $k, $array);
         }
         return $res;
+    }
+    /**
+     * Invokes all callbacks and returns array of results.
+     * @param  callable[]  $callbacks
+     */
+    public static function invoke(iterable $callbacks, ...$args) : array
+    {
+        $res = [];
+        foreach ($callbacks as $k => $cb) {
+            $res[$k] = $cb(...$args);
+        }
+        return $res;
+    }
+    /**
+     * Invokes method on every object in an array and returns array of results.
+     * @param  object[]  $objects
+     */
+    public static function invokeMethod(iterable $objects, string $method, ...$args) : array
+    {
+        $res = [];
+        foreach ($objects as $k => $obj) {
+            $res[$k] = $obj->{$method}(...$args);
+        }
+        return $res;
+    }
+    /**
+     * Copies the elements of the $array array to the $object object and then returns it.
+     * @param  object  $object
+     * @return object
+     */
+    public static function toObject(iterable $array, $object)
+    {
+        foreach ($array as $k => $v) {
+            $object->{$k} = $v;
+        }
+        return $object;
+    }
+    /**
+     * Converts value to array key.
+     * @param  mixed  $value
+     * @return int|string
+     */
+    public static function toKey($value)
+    {
+        return \key([$value => null]);
     }
 }

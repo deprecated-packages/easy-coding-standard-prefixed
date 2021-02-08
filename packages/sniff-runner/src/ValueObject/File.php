@@ -170,7 +170,7 @@ final class File extends \PHP_CodeSniffer\Files\File
         if (!$isError) {
             return \false;
         }
-        $message = \count($data) > 0 ? \vsprintf($message, $data) : $message;
+        $message = $data !== [] ? \vsprintf($message, $data) : $message;
         if ($isFixable) {
             return $isFixable;
         }
@@ -210,7 +210,7 @@ final class File extends \PHP_CodeSniffer\Files\File
         if ($this->skipper->shouldSkipElementAndFileInfo($fullyQualifiedCode, $this->fileInfo)) {
             return \true;
         }
-        $message = \count($data) > 0 ? \vsprintf($error, $data) : $error;
+        $message = $data !== [] ? \vsprintf($error, $data) : $error;
         return $this->skipper->shouldSkipElementAndFileInfo($message, $this->fileInfo);
     }
     private function isSniffClassWarningAllowed(string $sniffClass) : bool

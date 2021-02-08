@@ -137,7 +137,7 @@ class SideEffectsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             } else {
                 if ($tokens[$i]['code'] === \T_STRING && \strtolower($tokens[$i]['content']) === 'define') {
                     $prev = $phpcsFile->findPrevious(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $i - 1, null, \true);
-                    if ($tokens[$prev]['code'] !== \T_OBJECT_OPERATOR && $tokens[$prev]['code'] !== \T_DOUBLE_COLON && $tokens[$prev]['code'] !== \T_FUNCTION) {
+                    if ($tokens[$prev]['code'] !== \T_OBJECT_OPERATOR && $tokens[$prev]['code'] !== \T_NULLSAFE_OBJECT_OPERATOR && $tokens[$prev]['code'] !== \T_DOUBLE_COLON && $tokens[$prev]['code'] !== \T_FUNCTION) {
                         if ($firstSymbol === null) {
                             $firstSymbol = $i;
                         }
@@ -155,9 +155,9 @@ class SideEffectsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             // doesn't need to use a full conditional block.
             if ($tokens[$i]['code'] === \T_STRING && \strtolower($tokens[$i]['content']) === 'defined') {
                 $openBracket = $phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $i + 1, null, \true);
-                if ($tokens[$openBracket]['code'] === T_OPEN_PARENTHESIS && isset($tokens[$openBracket]['parenthesis_closer']) === \true) {
+                if ($openBracket !== \false && $tokens[$openBracket]['code'] === T_OPEN_PARENTHESIS && isset($tokens[$openBracket]['parenthesis_closer']) === \true) {
                     $prev = $phpcsFile->findPrevious(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $i - 1, null, \true);
-                    if ($tokens[$prev]['code'] !== \T_OBJECT_OPERATOR && $tokens[$prev]['code'] !== \T_DOUBLE_COLON && $tokens[$prev]['code'] !== \T_FUNCTION) {
+                    if ($tokens[$prev]['code'] !== \T_OBJECT_OPERATOR && $tokens[$prev]['code'] !== \T_NULLSAFE_OBJECT_OPERATOR && $tokens[$prev]['code'] !== \T_DOUBLE_COLON && $tokens[$prev]['code'] !== \T_FUNCTION) {
                         $i = $tokens[$openBracket]['parenthesis_closer'];
                         continue;
                     }

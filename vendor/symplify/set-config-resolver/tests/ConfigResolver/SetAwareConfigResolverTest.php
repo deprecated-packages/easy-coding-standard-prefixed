@@ -4,14 +4,14 @@ declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Tests\ConfigResolver;
 
 use Iterator;
-use _PhpScoper069ebd53a518\PHPUnit\Framework\TestCase;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Input\ArrayInput;
+use _PhpScoper326af2119eba\PHPUnit\Framework\TestCase;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Input\ArrayInput;
 use Symplify\SetConfigResolver\Exception\SetNotFoundException;
 use Symplify\SetConfigResolver\SetAwareConfigResolver;
 use Symplify\SetConfigResolver\Tests\ConfigResolver\Source\DummySetProvider;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class SetAwareConfigResolverTest extends \_PhpScoper069ebd53a518\PHPUnit\Framework\TestCase
+final class SetAwareConfigResolverTest extends \_PhpScoper326af2119eba\PHPUnit\Framework\TestCase
 {
     /**
      * @var SetAwareConfigResolver
@@ -27,7 +27,7 @@ final class SetAwareConfigResolverTest extends \_PhpScoper069ebd53a518\PHPUnit\F
      */
     public function testDetectFromInputAndProvideWithAbsolutePath(array $options, ?string $expectedConfig) : void
     {
-        $resolvedConfigFileInfo = $this->setAwareConfigResolver->resolveFromInput(new \_PhpScoper069ebd53a518\Symfony\Component\Console\Input\ArrayInput($options));
+        $resolvedConfigFileInfo = $this->setAwareConfigResolver->resolveFromInput(new \_PhpScoper326af2119eba\Symfony\Component\Console\Input\ArrayInput($options));
         if ($expectedConfig === null) {
             $this->assertNull($resolvedConfigFileInfo);
         } else {
@@ -44,8 +44,8 @@ final class SetAwareConfigResolverTest extends \_PhpScoper069ebd53a518\PHPUnit\F
     }
     public function testSetsNotFound() : void
     {
-        $basicConfigFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/Fixture/missing_set_config.php');
         $this->expectException(\Symplify\SetConfigResolver\Exception\SetNotFoundException::class);
+        $basicConfigFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/Fixture/missing_set_config.php');
         $this->setAwareConfigResolver->resolveFromParameterSetsFromConfigFiles([$basicConfigFileInfo]);
     }
     public function testPhpSetsFileInfos() : void
@@ -60,7 +60,7 @@ final class SetAwareConfigResolverTest extends \_PhpScoper069ebd53a518\PHPUnit\F
     public function testMissingFileInInput() : void
     {
         $this->expectException(\Symplify\SmartFileSystem\Exception\FileNotFoundException::class);
-        $arrayInput = new \_PhpScoper069ebd53a518\Symfony\Component\Console\Input\ArrayInput(['--config' => 'someFile.yml']);
+        $arrayInput = new \_PhpScoper326af2119eba\Symfony\Component\Console\Input\ArrayInput(['--config' => 'someFile.yml']);
         $this->setAwareConfigResolver->resolveFromInput($arrayInput);
     }
 }

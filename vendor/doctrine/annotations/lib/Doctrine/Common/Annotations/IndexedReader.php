@@ -1,41 +1,20 @@
 <?php
 
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <http://www.doctrine-project.org>.
- */
-namespace _PhpScoper069ebd53a518\Doctrine\Common\Annotations;
+namespace _PhpScoper326af2119eba\Doctrine\Common\Annotations;
 
+use ReflectionClass;
+use ReflectionMethod;
+use ReflectionProperty;
+use function call_user_func_array;
+use function get_class;
 /**
  * Allows the reader to be used in-place of Doctrine's reader.
- *
- * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class IndexedReader implements \_PhpScoper069ebd53a518\Doctrine\Common\Annotations\Reader
+class IndexedReader implements \_PhpScoper326af2119eba\Doctrine\Common\Annotations\Reader
 {
-    /**
-     * @var Reader
-     */
+    /** @var Reader */
     private $delegate;
-    /**
-     * Constructor.
-     *
-     * @param Reader $reader
-     */
-    public function __construct(\_PhpScoper069ebd53a518\Doctrine\Common\Annotations\Reader $reader)
+    public function __construct(\_PhpScoper326af2119eba\Doctrine\Common\Annotations\Reader $reader)
     {
         $this->delegate = $reader;
     }
@@ -44,7 +23,7 @@ class IndexedReader implements \_PhpScoper069ebd53a518\Doctrine\Common\Annotatio
      */
     public function getClassAnnotations(\ReflectionClass $class)
     {
-        $annotations = array();
+        $annotations = [];
         foreach ($this->delegate->getClassAnnotations($class) as $annot) {
             $annotations[\get_class($annot)] = $annot;
         }
@@ -62,7 +41,7 @@ class IndexedReader implements \_PhpScoper069ebd53a518\Doctrine\Common\Annotatio
      */
     public function getMethodAnnotations(\ReflectionMethod $method)
     {
-        $annotations = array();
+        $annotations = [];
         foreach ($this->delegate->getMethodAnnotations($method) as $annot) {
             $annotations[\get_class($annot)] = $annot;
         }
@@ -80,7 +59,7 @@ class IndexedReader implements \_PhpScoper069ebd53a518\Doctrine\Common\Annotatio
      */
     public function getPropertyAnnotations(\ReflectionProperty $property)
     {
-        $annotations = array();
+        $annotations = [];
         foreach ($this->delegate->getPropertyAnnotations($property) as $annot) {
             $annotations[\get_class($annot)] = $annot;
         }
@@ -96,13 +75,13 @@ class IndexedReader implements \_PhpScoper069ebd53a518\Doctrine\Common\Annotatio
     /**
      * Proxies all methods to the delegate.
      *
-     * @param string $method
-     * @param array  $args
+     * @param string  $method
+     * @param mixed[] $args
      *
      * @return mixed
      */
     public function __call($method, $args)
     {
-        return \call_user_func_array(array($this->delegate, $method), $args);
+        return \call_user_func_array([$this->delegate, $method], $args);
     }
 }

@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper069ebd53a518\PhpParser\Node\Stmt;
+namespace _PhpScoper326af2119eba\PhpParser\Node\Stmt;
 
-use _PhpScoper069ebd53a518\PhpParser\Node;
-use _PhpScoper069ebd53a518\PhpParser\Node\FunctionLike;
+use _PhpScoper326af2119eba\PhpParser\Node;
+use _PhpScoper326af2119eba\PhpParser\Node\FunctionLike;
 /**
  * @property Node\Name $namespacedName Namespaced name (if using NameResolver)
  */
-class Function_ extends \_PhpScoper069ebd53a518\PhpParser\Node\Stmt implements \_PhpScoper069ebd53a518\PhpParser\Node\FunctionLike
+class Function_ extends \_PhpScoper326af2119eba\PhpParser\Node\Stmt implements \_PhpScoper326af2119eba\PhpParser\Node\FunctionLike
 {
     /** @var bool Whether function returns by reference */
     public $byRef;
@@ -38,10 +38,10 @@ class Function_ extends \_PhpScoper069ebd53a518\PhpParser\Node\Stmt implements \
     {
         $this->attributes = $attributes;
         $this->byRef = $subNodes['byRef'] ?? \false;
-        $this->name = \is_string($name) ? new \_PhpScoper069ebd53a518\PhpParser\Node\Identifier($name) : $name;
+        $this->name = \is_string($name) ? new \_PhpScoper326af2119eba\PhpParser\Node\Identifier($name) : $name;
         $this->params = $subNodes['params'] ?? [];
         $returnType = $subNodes['returnType'] ?? null;
-        $this->returnType = \is_string($returnType) ? new \_PhpScoper069ebd53a518\PhpParser\Node\Identifier($returnType) : $returnType;
+        $this->returnType = \is_string($returnType) ? new \_PhpScoper326af2119eba\PhpParser\Node\Identifier($returnType) : $returnType;
         $this->stmts = $subNodes['stmts'] ?? [];
         $this->attrGroups = $subNodes['attrGroups'] ?? [];
     }

@@ -11,7 +11,7 @@ final class SniffServiceRegistrationTest extends \Symplify\PackageBuilder\Testin
 {
     public function test() : void
     {
-        static::bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/SniffServiceRegistrationSource/easy-coding-standard.php']);
+        $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/config/ecs.php']);
         $sniffFileProcessor = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
         /** @var LineLengthSniff $lineLengthSniff */
         $lineLengthSniff = $sniffFileProcessor->getCheckers()[0];

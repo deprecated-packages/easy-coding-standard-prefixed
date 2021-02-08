@@ -3,11 +3,18 @@
     "description": "Testing made easy",
     "license": "MIT",
     "type": "symfony-bundle",
+    "bin": [
+        "bin\/easy-testing"
+    ],
     "require": {
         "php": ">=7.3",
         "nette\/utils": "^3.0",
         "symfony\/finder": "^4.4|^5.1",
+        "symfony\/http-kernel": "^4.4|^5.1",
+        "symfony\/console": "^4.4|^5.1",
+        "symfony\/dependency-injection": "^5.1",
         "symplify\/package-builder": "dev-master",
+        "symplify\/console-package-builder": "dev-master",
         "symplify\/smart-file-system": "dev-master",
         "symplify\/symplify-kernel": "dev-master"
     },
@@ -26,7 +33,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "9.1-dev"
+            "dev-master": "9.2-dev"
         }
     },
     "minimum-stability": "dev",

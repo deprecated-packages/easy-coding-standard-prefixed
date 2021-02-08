@@ -19,7 +19,7 @@ final class PHP56MigrationSet extends \PhpCsFixer\RuleSet\AbstractRuleSetDescrip
 {
     public function getRules()
     {
-        return [];
+        return ['@PHP54Migration' => \true];
     }
     public function getDescription()
     {

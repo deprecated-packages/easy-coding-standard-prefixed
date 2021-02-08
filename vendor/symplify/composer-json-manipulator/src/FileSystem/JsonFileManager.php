@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\FileSystem;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Json;
+use _PhpScoper326af2119eba\Nette\Utils\Json;
 use Symplify\ComposerJsonManipulator\Json\JsonCleaner;
 use Symplify\ComposerJsonManipulator\Json\JsonInliner;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
@@ -27,6 +27,10 @@ final class JsonFileManager
      * @var JsonInliner
      */
     private $jsonInliner;
+    /**
+     * @var mixed[]
+     */
+    private $cachedJSONFiles = [];
     public function __construct(\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \Symplify\ComposerJsonManipulator\Json\JsonCleaner $jsonCleaner, \Symplify\ComposerJsonManipulator\Json\JsonInliner $jsonInliner)
     {
         $this->smartFileSystem = $smartFileSystem;
@@ -38,7 +42,11 @@ final class JsonFileManager
      */
     public function loadFromFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : array
     {
-        return \_PhpScoper069ebd53a518\Nette\Utils\Json::decode($smartFileInfo->getContents(), \_PhpScoper069ebd53a518\Nette\Utils\Json::FORCE_ARRAY);
+        $realPath = $smartFileInfo->getRealPath();
+        if (!isset($this->cachedJSONFiles[$realPath])) {
+            $this->cachedJSONFiles[$realPath] = \_PhpScoper326af2119eba\Nette\Utils\Json::decode($smartFileInfo->getContents(), \_PhpScoper326af2119eba\Nette\Utils\Json::FORCE_ARRAY);
+        }
+        return $this->cachedJSONFiles[$realPath];
     }
     /**
      * @return mixed[]
@@ -46,7 +54,7 @@ final class JsonFileManager
     public function loadFromFilePath(string $filePath) : array
     {
         $fileContent = $this->smartFileSystem->readFile($filePath);
-        return \_PhpScoper069ebd53a518\Nette\Utils\Json::decode($fileContent, \_PhpScoper069ebd53a518\Nette\Utils\Json::FORCE_ARRAY);
+        return \_PhpScoper326af2119eba\Nette\Utils\Json::decode($fileContent, \_PhpScoper326af2119eba\Nette\Utils\Json::FORCE_ARRAY);
     }
     /**
      * @param mixed[] $json
@@ -70,7 +78,7 @@ final class JsonFileManager
     {
         // Empty arrays may lead to bad encoding since we can't be sure whether they need to be arrays or objects.
         $json = $this->jsonCleaner->removeEmptyKeysFromJsonArray($json);
-        $jsonContent = \_PhpScoper069ebd53a518\Nette\Utils\Json::encode($json, \_PhpScoper069ebd53a518\Nette\Utils\Json::PRETTY) . \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar();
+        $jsonContent = \_PhpScoper326af2119eba\Nette\Utils\Json::encode($json, \_PhpScoper326af2119eba\Nette\Utils\Json::PRETTY) . \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar();
         return $this->jsonInliner->inlineSections($jsonContent);
     }
 }

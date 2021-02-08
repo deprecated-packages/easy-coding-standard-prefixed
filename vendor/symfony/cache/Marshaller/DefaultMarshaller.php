@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller;
+namespace _PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller;
 
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Serializes/unserializes values using igbinary_serialize() if available, serialize() otherwise.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DefaultMarshaller implements \_PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class DefaultMarshaller implements \_PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $useIgbinarySerialize = \true;
     public function __construct(bool $useIgbinarySerialize = null)
     {
         if (null === $useIgbinarySerialize) {
-            $useIgbinarySerialize = \extension_loaded('igbinary') && \PHP_VERSION_ID < 70400;
-        } elseif ($useIgbinarySerialize && (!\extension_loaded('igbinary') || \PHP_VERSION_ID >= 70400)) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\CacheException('The "igbinary" PHP extension is not ' . (\PHP_VERSION_ID >= 70400 ? 'compatible with PHP 7.4.' : 'loaded.'));
+            $useIgbinarySerialize = \extension_loaded('igbinary') && (\PHP_VERSION_ID < 70400 || \version_compare('3.1.6', \phpversion('igbinary'), '<='));
+        } elseif ($useIgbinarySerialize && (!\extension_loaded('igbinary') || \PHP_VERSION_ID >= 70400 && \version_compare('3.1.6', \phpversion('igbinary'), '>'))) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\CacheException(\extension_loaded('igbinary') && \PHP_VERSION_ID >= 70400 ? 'Please upgrade the "igbinary" PHP extension to v3.1.6 or higher.' : 'The "igbinary" PHP extension is not loaded.');
         }
         $this->useIgbinarySerialize = $useIgbinarySerialize;
     }
@@ -59,7 +59,7 @@ class DefaultMarshaller implements \_PhpScoper069ebd53a518\Symfony\Component\Cac
             return null;
         }
         static $igbinaryNull;
-        if ($value === ($igbinaryNull ?? ($igbinaryNull = \extension_loaded('igbinary') && \PHP_VERSION_ID < 70400 ? \igbinary_serialize(null) : \false))) {
+        if ($value === ($igbinaryNull ?? ($igbinaryNull = \extension_loaded('igbinary') ? \igbinary_serialize(null) : \false))) {
             return null;
         }
         $unserializeCallbackHandler = \ini_set('unserialize_callback_func', __CLASS__ . '::handleUnserializeCallback');
@@ -83,7 +83,7 @@ class DefaultMarshaller implements \_PhpScoper069ebd53a518\Symfony\Component\Cac
     /**
      * @internal
      */
-    public static function handleUnserializeCallback($class)
+    public static function handleUnserializeCallback(string $class)
     {
         throw new \DomainException('Class not found: ' . $class);
     }

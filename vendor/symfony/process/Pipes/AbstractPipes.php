@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Process\Pipes;
+namespace _PhpScoper326af2119eba\Symfony\Component\Process\Pipes;
 
-use _PhpScoper069ebd53a518\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScoper326af2119eba\Symfony\Component\Process\Exception\InvalidArgumentException;
 /**
  * @author Romain Neutron <imprec@gmail.com>
  *
  * @internal
  */
-abstract class AbstractPipes implements \_PhpScoper069ebd53a518\Symfony\Component\Process\Pipes\PipesInterface
+abstract class AbstractPipes implements \_PhpScoper326af2119eba\Symfony\Component\Process\Pipes\PipesInterface
 {
-    /** @var array */
-    public $pipes = array();
-    /** @var string */
+    public $pipes = [];
     private $inputBuffer = '';
-    /** @var resource|scalar|\Iterator|null */
     private $input;
-    /** @var bool */
     private $blocked = \true;
+    private $lastError;
+    /**
+     * @param resource|string|int|float|bool|\Iterator|null $input
+     */
     public function __construct($input)
     {
         if (\is_resource($input) || $input instanceof \Iterator) {
@@ -44,18 +44,17 @@ abstract class AbstractPipes implements \_PhpScoper069ebd53a518\Symfony\Componen
         foreach ($this->pipes as $pipe) {
             \fclose($pipe);
         }
-        $this->pipes = array();
+        $this->pipes = [];
     }
     /**
      * Returns true if a system call has been interrupted.
-     *
-     * @return bool
      */
-    protected function hasSystemCallBeenInterrupted()
+    protected function hasSystemCallBeenInterrupted() : bool
     {
-        $lastError = \error_get_last();
+        $lastError = $this->lastError;
+        $this->lastError = null;
         // stream_select returns false when the `select` system call is interrupted by an incoming signal
-        return isset($lastError['message']) && \false !== \stripos($lastError['message'], 'interrupted system call');
+        return null !== $lastError && \false !== \stripos($lastError, 'interrupted system call');
     }
     /**
      * Unblocks streams.
@@ -78,10 +77,10 @@ abstract class AbstractPipes implements \_PhpScoper069ebd53a518\Symfony\Componen
      *
      * @throws InvalidArgumentException When an input iterator yields a non supported value
      */
-    protected function write()
+    protected function write() : ?array
     {
         if (!isset($this->pipes[0])) {
-            return;
+            return null;
         }
         $input = $this->input;
         if ($input instanceof \Iterator) {
@@ -92,7 +91,7 @@ abstract class AbstractPipes implements \_PhpScoper069ebd53a518\Symfony\Componen
             } elseif (!isset($this->inputBuffer[0])) {
                 if (!\is_string($input)) {
                     if (!\is_scalar($input)) {
-                        throw new \_PhpScoper069ebd53a518\Symfony\Component\Process\Exception\InvalidArgumentException(\sprintf('%s yielded a value of type "%s", but only scalars and stream resources are supported', \get_class($this->input), \gettype($input)));
+                        throw new \_PhpScoper326af2119eba\Symfony\Component\Process\Exception\InvalidArgumentException(\sprintf('"%s" yielded a value of type "%s", but only scalars and stream resources are supported.', \get_debug_type($this->input), \get_debug_type($input)));
                     }
                     $input = (string) $input;
                 }
@@ -103,18 +102,18 @@ abstract class AbstractPipes implements \_PhpScoper069ebd53a518\Symfony\Componen
                 $input = null;
             }
         }
-        $r = $e = array();
-        $w = array($this->pipes[0]);
+        $r = $e = [];
+        $w = [$this->pipes[0]];
         // let's have a look if something changed in streams
-        if (\false === ($n = @\stream_select($r, $w, $e, 0, 0))) {
-            return;
+        if (\false === @\stream_select($r, $w, $e, 0, 0)) {
+            return null;
         }
         foreach ($w as $stdin) {
             if (isset($this->inputBuffer[0])) {
                 $written = \fwrite($stdin, $this->inputBuffer);
                 $this->inputBuffer = \substr($this->inputBuffer, $written);
                 if (isset($this->inputBuffer[0])) {
-                    return array($this->pipes[0]);
+                    return [$this->pipes[0]];
                 }
             }
             if ($input) {
@@ -127,7 +126,7 @@ abstract class AbstractPipes implements \_PhpScoper069ebd53a518\Symfony\Componen
                     $data = \substr($data, $written);
                     if (isset($data[0])) {
                         $this->inputBuffer = $data;
-                        return array($this->pipes[0]);
+                        return [$this->pipes[0]];
                     }
                 }
                 if (\feof($input)) {
@@ -145,7 +144,15 @@ abstract class AbstractPipes implements \_PhpScoper069ebd53a518\Symfony\Componen
             \fclose($this->pipes[0]);
             unset($this->pipes[0]);
         } elseif (!$w) {
-            return array($this->pipes[0]);
+            return [$this->pipes[0]];
         }
+        return null;
+    }
+    /**
+     * @internal
+     */
+    public function handleError($type, $msg)
+    {
+        $this->lastError = $msg;
     }
 }

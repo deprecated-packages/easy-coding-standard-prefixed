@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper069ebd53a518\Nette\Loaders;
+namespace _PhpScoper326af2119eba\Nette\Loaders;
 
-use _PhpScoper069ebd53a518\Nette;
+use _PhpScoper326af2119eba\Nette;
 use SplFileInfo;
 /**
  * Nette auto loader is responsible for loading classes and interfaces.
@@ -24,20 +24,22 @@ class RobotLoader
 {
     use Nette\SmartObject;
     private const RETRY_LIMIT = 3;
-    /** @var array */
+    /** @var string[] */
     public $ignoreDirs = ['.*', '*.old', '*.bak', '*.tmp', 'temp'];
-    /** @var array */
+    /** @var string[] */
     public $acceptFiles = ['*.php'];
     /** @var bool */
     private $autoRebuild = \true;
     /** @var bool */
     private $reportParseErrors = \true;
-    /** @var array */
+    /** @var string[] */
     private $scanPaths = [];
-    /** @var array */
+    /** @var string[] */
     private $excludeDirs = [];
     /** @var array of class => [file, time] */
     private $classes = [];
+    /** @var bool */
+    private $cacheLoaded = \false;
     /** @var bool */
     private $refreshed = \false;
     /** @var array of missing classes */
@@ -47,7 +49,7 @@ class RobotLoader
     public function __construct()
     {
         if (!\extension_loaded('tokenizer')) {
-            throw new \_PhpScoper069ebd53a518\Nette\NotSupportedException('PHP extension Tokenizer is not loaded.');
+            throw new \_PhpScoper326af2119eba\Nette\NotSupportedException('PHP extension Tokenizer is not loaded.');
         }
     }
     /**
@@ -55,7 +57,6 @@ class RobotLoader
      */
     public function register(bool $prepend = \false) : self
     {
-        $this->loadCache();
         \spl_autoload_register([$this, 'tryLoad'], \true, $prepend);
         return $this;
     }
@@ -64,6 +65,7 @@ class RobotLoader
      */
     public function tryLoad(string $type) : void
     {
+        $this->loadCache();
         $type = \ltrim($type, '\\');
         // PHP namespace bug #49143
         $info = $this->classes[$type] ?? null;
@@ -88,7 +90,7 @@ class RobotLoader
             $info = $this->classes[$type] ?? null;
         }
         if ($info) {
-            (function ($file) {
+            (static function ($file) {
                 require $file;
             })($info['file']);
         }
@@ -99,7 +101,7 @@ class RobotLoader
      */
     public function addDirectory(...$paths) : self
     {
-        if (\is_array($paths[0])) {
+        if (\is_array($paths[0] ?? null)) {
             \trigger_error(__METHOD__ . '() use variadics ...$paths to add an array of paths.', \E_USER_WARNING);
             $paths = $paths[0];
         }
@@ -108,7 +110,7 @@ class RobotLoader
     }
     public function reportParseErrors(bool $on = \true) : self
     {
-        $this->reportParseErrors = (bool) $on;
+        $this->reportParseErrors = $on;
         return $this;
     }
     /**
@@ -117,7 +119,7 @@ class RobotLoader
      */
     public function excludeDirectory(...$paths) : self
     {
-        if (\is_array($paths[0])) {
+        if (\is_array($paths[0] ?? null)) {
             \trigger_error(__METHOD__ . '() use variadics ...$paths to add an array of paths.', \E_USER_WARNING);
             $paths = $paths[0];
         }
@@ -129,6 +131,7 @@ class RobotLoader
      */
     public function getIndexedClasses() : array
     {
+        $this->loadCache();
         $res = [];
         foreach ($this->classes as $class => $info) {
             $res[$class] = $info['file'];
@@ -140,6 +143,7 @@ class RobotLoader
      */
     public function rebuild() : void
     {
+        $this->cacheLoaded = \true;
         $this->classes = $this->missing = [];
         $this->refreshClasses();
         if ($this->tempDirectory) {
@@ -183,7 +187,7 @@ class RobotLoader
                 foreach ($classes as $class) {
                     $info =& $this->classes[$class];
                     if (isset($info['file'])) {
-                        throw new \_PhpScoper069ebd53a518\Nette\InvalidStateException("Ambiguous class {$class} resolution; defined in {$info['file']} and in {$file}.");
+                        throw new \_PhpScoper326af2119eba\Nette\InvalidStateException("Ambiguous class {$class} resolution; defined in {$info['file']} and in {$file}.");
                     }
                     $info = ['file' => $file, 'time' => \filemtime($file)];
                     unset($this->missing[$class]);
@@ -195,12 +199,12 @@ class RobotLoader
      * Creates an iterator scaning directory for PHP files, subdirectories and 'netterobots.txt' files.
      * @throws Nette\IOException if path is not found
      */
-    private function createFileIterator(string $dir) : \_PhpScoper069ebd53a518\Nette\Utils\Finder
+    private function createFileIterator(string $dir) : \_PhpScoper326af2119eba\Nette\Utils\Finder
     {
         if (!\is_dir($dir)) {
-            throw new \_PhpScoper069ebd53a518\Nette\IOException("File or directory '{$dir}' not found.");
+            throw new \_PhpScoper326af2119eba\Nette\IOException("File or directory '{$dir}' not found.");
         }
-        if (!\is_array($ignoreDirs = $this->ignoreDirs)) {
+        if (\is_string($ignoreDirs = $this->ignoreDirs)) {
             \trigger_error(__CLASS__ . ': $ignoreDirs must be an array.', \E_USER_WARNING);
             $ignoreDirs = \preg_split('#[,\\s]+#', $ignoreDirs);
         }
@@ -210,13 +214,16 @@ class RobotLoader
                 $disallow[\str_replace('\\', '/', $item)] = \true;
             }
         }
-        if (!\is_array($acceptFiles = $this->acceptFiles)) {
+        if (\is_string($acceptFiles = $this->acceptFiles)) {
             \trigger_error(__CLASS__ . ': $acceptFiles must be an array.', \E_USER_WARNING);
             $acceptFiles = \preg_split('#[,\\s]+#', $acceptFiles);
         }
-        $iterator = \_PhpScoper069ebd53a518\Nette\Utils\Finder::findFiles($acceptFiles)->filter(function (\SplFileInfo $file) use(&$disallow) {
-            return !isset($disallow[\str_replace('\\', '/', $file->getRealPath())]);
+        $iterator = \_PhpScoper326af2119eba\Nette\Utils\Finder::findFiles($acceptFiles)->filter(function (\SplFileInfo $file) use(&$disallow) {
+            return $file->getRealPath() === \false ? \true : !isset($disallow[\str_replace('\\', '/', $file->getRealPath())]);
         })->from($dir)->exclude($ignoreDirs)->filter($filter = function (\SplFileInfo $dir) use(&$disallow) {
+            if ($dir->getRealPath() === \false) {
+                return \true;
+            }
             $path = \str_replace('\\', '/', $dir->getRealPath());
             if (\is_file("{$path}/netterobots.txt")) {
                 foreach (\file("{$path}/netterobots.txt") as $s) {
@@ -246,7 +253,7 @@ class RobotLoader
                 $info =& $this->classes[$class];
             }
             if (isset($info['file'])) {
-                throw new \_PhpScoper069ebd53a518\Nette\InvalidStateException("Ambiguous class {$class} resolution; defined in {$info['file']} and in {$file}.");
+                throw new \_PhpScoper326af2119eba\Nette\InvalidStateException("Ambiguous class {$class} resolution; defined in {$info['file']} and in {$file}.");
             }
             $info = ['file' => $file, 'time' => \filemtime($file)];
         }
@@ -259,15 +266,9 @@ class RobotLoader
     {
         $code = \file_get_contents($file);
         $expected = \false;
-        $namespace = '';
+        $namespace = $name = '';
         $level = $minLevel = 0;
         $classes = [];
-        if (\preg_match('#//nette' . 'loader=(\\S*)#', $code, $matches)) {
-            foreach (\explode(',', $matches[1]) as $name) {
-                $classes[] = $name;
-            }
-            return $classes;
-        }
         try {
             $tokens = \token_get_all($code, \TOKEN_PARSE);
         } catch (\ParseError $e) {
@@ -286,8 +287,8 @@ class RobotLoader
                     case \T_DOC_COMMENT:
                     case \T_WHITESPACE:
                         continue 2;
-                    case \T_NS_SEPARATOR:
                     case \T_STRING:
+                    case \PHP_VERSION_ID < 80000 ? \T_NS_SEPARATOR : \T_NAME_QUALIFIED:
                         if ($expected) {
                             $name .= $token[1];
                         }
@@ -333,7 +334,7 @@ class RobotLoader
      */
     public function setAutoRefresh(bool $on = \true) : self
     {
-        $this->autoRebuild = (bool) $on;
+        $this->autoRebuild = $on;
         return $this;
     }
     /**
@@ -341,7 +342,7 @@ class RobotLoader
      */
     public function setTempDirectory(string $dir) : self
     {
-        \_PhpScoper069ebd53a518\Nette\Utils\FileSystem::createDir($dir);
+        \_PhpScoper326af2119eba\Nette\Utils\FileSystem::createDir($dir);
         $this->tempDirectory = $dir;
         return $this;
     }
@@ -350,43 +351,72 @@ class RobotLoader
      */
     private function loadCache() : void
     {
-        $file = $this->getCacheFile();
-        [$this->classes, $this->missing] = @(include $file);
-        // @ file may not exist
-        if (\is_array($this->classes)) {
+        if ($this->cacheLoaded) {
             return;
         }
-        $handle = \fopen("{$file}.lock", 'c+');
-        if (!$handle || !\flock($handle, \LOCK_EX)) {
-            throw new \RuntimeException("Unable to create or acquire exclusive lock on file '{$file}.lock'.");
-        }
-        [$this->classes, $this->missing] = @(include $file);
+        $this->cacheLoaded = \true;
+        $file = $this->getCacheFile();
+        // Solving atomicity to work everywhere is really pain in the ass.
+        // 1) We want to do as little as possible IO calls on production and also directory and file can be not writable (#19)
+        // so on Linux we include the file directly without shared lock, therefore, the file must be created atomically by renaming.
+        // 2) On Windows file cannot be renamed-to while is open (ie by include() #11), so we have to acquire a lock.
+        $lock = \defined('PHP_WINDOWS_VERSION_BUILD') ? $this->acquireLock("{$file}.lock", \LOCK_SH) : null;
+        $data = @(include $file);
         // @ file may not exist
-        if (!\is_array($this->classes)) {
-            $this->rebuild();
+        if (\is_array($data)) {
+            [$this->classes, $this->missing] = $data;
+            return;
         }
-        \flock($handle, \LOCK_UN);
-        \fclose($handle);
-        @\unlink("{$file}.lock");
-        // @ file may become locked on Windows
+        if ($lock) {
+            \flock($lock, \LOCK_UN);
+            // release shared lock so we can get exclusive
+        }
+        $lock = $this->acquireLock("{$file}.lock", \LOCK_EX);
+        // while waiting for exclusive lock, someone might have already created the cache
+        $data = @(include $file);
+        // @ file may not exist
+        if (\is_array($data)) {
+            [$this->classes, $this->missing] = $data;
+            return;
+        }
+        $this->classes = $this->missing = [];
+        $this->refreshClasses();
+        $this->saveCache($lock);
+        // On Windows concurrent creation and deletion of a file can cause a error 'permission denied',
+        // therefore, we will not delete the lock file. Windows is peace of shit.
     }
     /**
      * Writes class list to cache.
      */
-    private function saveCache() : void
+    private function saveCache($lock = null) : void
     {
+        // we have to acquire a lock to be able safely rename file
+        // on Linux: that another thread does not rename the same named file earlier
+        // on Windows: that the file is not read by another thread
         $file = $this->getCacheFile();
-        $tempFile = $file . \uniqid('', \true) . '.tmp';
+        $lock = $lock ?: $this->acquireLock("{$file}.lock", \LOCK_EX);
         $code = "<?php\nreturn " . \var_export([$this->classes, $this->missing], \true) . ";\n";
-        if (\file_put_contents($tempFile, $code) !== \strlen($code) || !\rename($tempFile, $file)) {
-            @\unlink($tempFile);
-            // @ - file may not exist
+        if (\file_put_contents("{$file}.tmp", $code) !== \strlen($code) || !\rename("{$file}.tmp", $file)) {
+            @\unlink("{$file}.tmp");
+            // @ file may not exist
             throw new \RuntimeException("Unable to create '{$file}'.");
         }
         if (\function_exists('opcache_invalidate')) {
             @\opcache_invalidate($file, \true);
             // @ can be restricted
         }
+    }
+    private function acquireLock(string $file, int $mode)
+    {
+        $handle = @\fopen($file, 'w');
+        // @ is escalated to exception
+        if (!$handle) {
+            throw new \RuntimeException("Unable to create file '{$file}'. " . \error_get_last()['message']);
+        } elseif (!@\flock($handle, $mode)) {
+            // @ is escalated to exception
+            throw new \RuntimeException('Unable to acquire ' . ($mode & \LOCK_EX ? 'exclusive' : 'shared') . " lock on file '{$file}'. " . \error_get_last()['message']);
+        }
+        return $handle;
     }
     private function getCacheFile() : string
     {

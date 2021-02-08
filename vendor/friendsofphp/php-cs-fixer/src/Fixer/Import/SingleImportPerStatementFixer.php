@@ -15,6 +15,7 @@ use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -66,20 +67,6 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
                 $this->fixMultipleUse($tokens, $index, $endIndex);
             }
         }
-    }
-    /**
-     * @param int $index
-     *
-     * @return string
-     */
-    private function detectIndent(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
-    {
-        if (!$tokens[$index - 1]->isWhitespace()) {
-            return '';
-            // cannot detect indent
-        }
-        $explodedContent = \explode("\n", $tokens[$index - 1]->getContent());
-        return \end($explodedContent);
     }
     /**
      * @param int $index
@@ -192,7 +179,7 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
             $i = $tokens->getNextMeaningfulToken($i);
             $tokens->insertAt($i, new \PhpCsFixer\Tokenizer\Token([\T_USE, 'use']));
             $tokens->insertAt($i + 1, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
-            $indent = $this->detectIndent($tokens, $index);
+            $indent = \PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer::detectIndent($tokens, $index);
             if ($tokens[$i - 1]->isWhitespace()) {
                 $tokens[$i - 1] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $ending . $indent]);
                 continue;

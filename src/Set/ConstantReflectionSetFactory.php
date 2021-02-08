@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Set;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
 use ReflectionClass;
 use Symplify\SetConfigResolver\ValueObject\Set;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -28,7 +28,7 @@ final class ConstantReflectionSetFactory
         $sets = [];
         // new kind of paths sets
         /** @var array<string, mixed> $constants */
-        $constants = (array) $setListReflectionClass->getConstants();
+        $constants = $setListReflectionClass->getConstants();
         foreach ($constants as $name => $setPath) {
             if (!\file_exists($setPath)) {
                 $message = \sprintf('Set file "%s" not found. Check %s::%s', $setPath, $setClassName, $name);
@@ -36,7 +36,7 @@ final class ConstantReflectionSetFactory
             }
             $setName = $this->constantToDashes($name);
             // back compatible names without "-"
-            $setName = \_PhpScoper069ebd53a518\Nette\Utils\Strings::replace($setName, self::REMOVE_DASH_BEFORE_NUMBER_REGEX, '$1$2');
+            $setName = \_PhpScoper326af2119eba\Nette\Utils\Strings::replace($setName, self::REMOVE_DASH_BEFORE_NUMBER_REGEX, '$1$2');
             $sets[] = new \Symplify\SetConfigResolver\ValueObject\Set($setName, new \Symplify\SmartFileSystem\SmartFileInfo($setPath));
         }
         return $sets;
@@ -44,6 +44,6 @@ final class ConstantReflectionSetFactory
     private function constantToDashes(string $string) : string
     {
         $string = \strtolower($string);
-        return \_PhpScoper069ebd53a518\Nette\Utils\Strings::replace($string, self::UNDERSCORE_REGEX, '-');
+        return \_PhpScoper326af2119eba\Nette\Utils\Strings::replace($string, self::UNDERSCORE_REGEX, '-');
     }
 }

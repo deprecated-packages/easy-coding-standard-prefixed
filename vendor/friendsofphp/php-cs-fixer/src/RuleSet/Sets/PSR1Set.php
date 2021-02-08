@@ -23,6 +23,6 @@ final class PSR1Set extends \PhpCsFixer\RuleSet\AbstractRuleSetDescription
     }
     public function getDescription()
     {
-        return 'Rules that follow `PSR-1 <https://www.php-fig.org/psr/psr-1/>`_ standard';
+        return 'Rules that follow `PSR-1 <https://www.php-fig.org/psr/psr-1/>`_ standard.';
     }
 }

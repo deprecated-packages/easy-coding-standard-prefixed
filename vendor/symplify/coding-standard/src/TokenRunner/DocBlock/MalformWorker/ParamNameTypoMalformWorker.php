@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\Annotation;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -24,25 +24,19 @@ final class ParamNameTypoMalformWorker extends \Symplify\CodingStandard\TokenRun
         // remove correct params
         foreach ($argumentNames as $key => $argumentName) {
             if (\in_array($argumentName, $paramNames, \true)) {
-                unset($paramNames[\array_search($argumentName, $paramNames, \true)]);
+                $paramPosition = \array_search($argumentName, $paramNames, \true);
+                unset($paramNames[$paramPosition]);
                 unset($argumentNames[$key]);
             }
         }
         // nothing to edit, all arguments are correct or there are no more @param annotations
-        if ($argumentNames === [] || $paramNames === []) {
+        if ($argumentNames === []) {
             return $docContent;
         }
-        // let's try to fix the typos
-        foreach ($argumentNames as $key => $argumentName) {
-            // 1. the same position
-            if (isset($paramNames[$key])) {
-                $typoName = $paramNames[$key];
-                $replacePattern = '#@param(.*?)' . \preg_quote($typoName, '#') . '#';
-                $docContent = \_PhpScoper069ebd53a518\Nette\Utils\Strings::replace($docContent, $replacePattern, '@param$1' . $argumentName);
-            }
-            // @todo other cases
+        if ($paramNames === []) {
+            return $docContent;
         }
-        return $docContent;
+        return $this->fixTypos($argumentNames, $paramNames, $docContent);
     }
     /**
      * @return string[]
@@ -52,7 +46,7 @@ final class ParamNameTypoMalformWorker extends \Symplify\CodingStandard\TokenRun
         $paramAnnotations = $this->getAnnotationsOfType($docContent, 'param');
         $paramNames = [];
         foreach ($paramAnnotations as $paramAnnotation) {
-            $match = \_PhpScoper069ebd53a518\Nette\Utils\Strings::match($paramAnnotation->getContent(), self::PARAM_NAME_REGEX);
+            $match = \_PhpScoper326af2119eba\Nette\Utils\Strings::match($paramAnnotation->getContent(), self::PARAM_NAME_REGEX);
             if (isset($match['paramName'])) {
                 $paramNames[] = $match['paramName'];
             }
@@ -66,5 +60,22 @@ final class ParamNameTypoMalformWorker extends \Symplify\CodingStandard\TokenRun
     {
         $docBlock = new \PhpCsFixer\DocBlock\DocBlock($docContent);
         return $docBlock->getAnnotationsOfType($type);
+    }
+    /**
+     * @param string[] $argumentNames
+     * @param string[] $paramNames
+     */
+    private function fixTypos(array $argumentNames, array $paramNames, string $docContent) : string
+    {
+        foreach ($argumentNames as $key => $argumentName) {
+            // 1. the same position
+            if (!isset($paramNames[$key])) {
+                continue;
+            }
+            $typoName = $paramNames[$key];
+            $replacePattern = '#@param(.*?)' . \preg_quote($typoName, '#') . '#';
+            $docContent = \_PhpScoper326af2119eba\Nette\Utils\Strings::replace($docContent, $replacePattern, '@param$1' . $argumentName);
+        }
+        return $docContent;
     }
 }

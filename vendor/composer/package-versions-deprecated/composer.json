@@ -14,11 +14,11 @@
         }
     ],
     "require": {
-        "php": "^7",
+        "php": "^7 || ^8",
         "composer-plugin-api": "^1.1.0 || ^2.0"
     },
     "replace": {
-        "ocramius\/package-versions": "1.2 - 1.8.99"
+        "ocramius\/package-versions": "1.11.99"
     },
     "require-dev": {
         "phpunit\/phpunit": "^6.5 || ^7",
@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper069ebd53a518\\PackageVersions\\": "src\/PackageVersions"
+            "_PhpScoper326af2119eba\\PackageVersions\\": "src\/PackageVersions"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoper069ebd53a518\\PackageVersionsTest\\": "test\/PackageVersionsTest"
+            "_PhpScoper326af2119eba\\PackageVersionsTest\\": "test\/PackageVersionsTest"
         }
     },
     "extra": {

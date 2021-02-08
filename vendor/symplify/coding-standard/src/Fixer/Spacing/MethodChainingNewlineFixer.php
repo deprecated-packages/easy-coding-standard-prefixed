@@ -3,7 +3,6 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Spacing;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -13,7 +12,10 @@ use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
 use SplFileInfo;
 use Symplify\CodingStandard\Fixer\AbstractSymplifyFixer;
+use Symplify\CodingStandard\TokenAnalyzer\ChainMethodCallAnalyzer;
+use Symplify\CodingStandard\TokenAnalyzer\NewlineAnalyzer;
 use Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder;
+use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -38,10 +40,20 @@ final class MethodChainingNewlineFixer extends \Symplify\CodingStandard\Fixer\Ab
      * @var int
      */
     private $bracketNesting = 0;
-    public function __construct(\PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig, \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder)
+    /**
+     * @var ChainMethodCallAnalyzer
+     */
+    private $chainMethodCallAnalyzer;
+    /**
+     * @var NewlineAnalyzer
+     */
+    private $newlineAnalyzer;
+    public function __construct(\PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig, \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder, \Symplify\CodingStandard\TokenAnalyzer\ChainMethodCallAnalyzer $chainMethodCallAnalyzer, \Symplify\CodingStandard\TokenAnalyzer\NewlineAnalyzer $newlineAnalyzer)
     {
         $this->whitespacesFixerConfig = $whitespacesFixerConfig;
         $this->blockFinder = $blockFinder;
+        $this->chainMethodCallAnalyzer = $chainMethodCallAnalyzer;
+        $this->newlineAnalyzer = $newlineAnalyzer;
     }
     public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
@@ -119,7 +131,7 @@ CODE_SAMPLE
             /** @var Token $currentToken */
             $currentToken = $tokens[$i];
             // break
-            if ($this->isNewlineToken($currentToken)) {
+            if ($this->newlineAnalyzer->isNewlineToken($currentToken)) {
                 return \false;
             }
             if ($this->isBreakingChar($currentToken)) {
@@ -132,36 +144,6 @@ CODE_SAMPLE
         return \false;
     }
     /**
-     * Matches e..g:
-     * - return app()->some()
-     * - app()->some()
-     * - (clone app)->some()
-     */
-    private function isPreceededByFuncCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
-    {
-        for ($i = $position; $i >= 0; --$i) {
-            /** @var Token $currentToken */
-            $currentToken = $tokens[$i];
-            if ($currentToken->getContent() === 'clone') {
-                return \true;
-            }
-            if ($currentToken->getContent() === '(') {
-                return $this->doesContentBeforeBracketRequireNewline($tokens, $i);
-            }
-            if ($this->isNewlineToken($currentToken)) {
-                return \false;
-            }
-        }
-        return \false;
-    }
-    private function isNewlineToken(\PhpCsFixer\Tokenizer\Token $currentToken) : bool
-    {
-        if (!$currentToken->isWhitespace()) {
-            return \false;
-        }
-        return \_PhpScoper069ebd53a518\Nette\Utils\Strings::contains($currentToken->getContent(), "\n");
-    }
-    /**
      * Matches e.g.:
      * - app([
      *   ])->some()
@@ -169,7 +151,7 @@ CODE_SAMPLE
     private function isPreceededByOpenedCallInAnotherBracket(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
     {
         $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
-        if ($blockInfo === null) {
+        if (!$blockInfo instanceof \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo) {
             return \false;
         }
         return $tokens->isPartialCodeMultiline($blockInfo->getStart(), $blockInfo->getEnd());
@@ -182,7 +164,7 @@ CODE_SAMPLE
         if ($this->isPartOfMethodCallOrArray($tokens, $position)) {
             return \false;
         }
-        if ($this->isPreceededByFuncCall($tokens, $position)) {
+        if ($this->chainMethodCallAnalyzer->isPreceededByFuncCall($tokens, $position)) {
             return \false;
         }
         if ($this->isPreceededByOpenedCallInAnotherBracket($tokens, $position)) {
@@ -215,26 +197,5 @@ CODE_SAMPLE
             return \true;
         }
         return \false;
-    }
-    private function doesContentBeforeBracketRequireNewline(\PhpCsFixer\Tokenizer\Tokens $tokens, int $i) : bool
-    {
-        $previousMeaningfulTokenPosition = $tokens->getPrevNonWhitespace($i);
-        if ($previousMeaningfulTokenPosition === null) {
-            return \false;
-        }
-        $previousToken = $tokens[$previousMeaningfulTokenPosition];
-        if (!$previousToken->isGivenKind(\T_STRING)) {
-            return \false;
-        }
-        $previousPreviousMeaningfulTokenPosition = $tokens->getPrevNonWhitespace($previousMeaningfulTokenPosition);
-        if ($previousPreviousMeaningfulTokenPosition === null) {
-            return \false;
-        }
-        $previousPreviousToken = $tokens[$previousPreviousMeaningfulTokenPosition];
-        if ($previousPreviousToken->getContent() === '{') {
-            return \true;
-        }
-        // is a function
-        return $previousPreviousToken->isGivenKind([\T_RETURN, \T_DOUBLE_COLON, T_OPEN_CURLY_BRACKET]);
     }
 }

@@ -109,10 +109,10 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
         return $candidates;
     }
     /**
-     * @param int            $functionNameIndex
-     * @param int            $openParenthesisIndex
-     * @param int            $closeParenthesisIndex
-     * @param array<int,int> $arguments
+     * @param int             $functionNameIndex
+     * @param int             $openParenthesisIndex
+     * @param int             $closeParenthesisIndex
+     * @param array<int, int> $arguments
      *
      * @return int number of tokens added to the collection
      */

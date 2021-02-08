@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper069ebd53a518;
+namespace _PhpScoper326af2119eba;
 
 /*
  * This file is part of the Symfony package.
@@ -10,14 +10,19 @@ namespace _PhpScoper069ebd53a518;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoper069ebd53a518\Symfony\Polyfill\Intl\Normalizer as p;
+use _PhpScoper326af2119eba\Symfony\Polyfill\Intl\Normalizer as p;
+if (\PHP_VERSION_ID >= 80000) {
+    return require __DIR__ . '/bootstrap80.php';
+}
 if (!\function_exists('normalizer_is_normalized')) {
-    function normalizer_is_normalized($s, $form = \_PhpScoper069ebd53a518\Symfony\Polyfill\Intl\Normalizer\Normalizer::NFC)
+    function normalizer_is_normalized($string, $form = \_PhpScoper326af2119eba\Symfony\Polyfill\Intl\Normalizer\Normalizer::FORM_C)
     {
-        return \_PhpScoper069ebd53a518\Symfony\Polyfill\Intl\Normalizer\Normalizer::isNormalized($s, $form);
+        return \_PhpScoper326af2119eba\Symfony\Polyfill\Intl\Normalizer\Normalizer::isNormalized($string, $form);
     }
-    function normalizer_normalize($s, $form = \_PhpScoper069ebd53a518\Symfony\Polyfill\Intl\Normalizer\Normalizer::NFC)
+}
+if (!\function_exists('normalizer_normalize')) {
+    function normalizer_normalize($string, $form = \_PhpScoper326af2119eba\Symfony\Polyfill\Intl\Normalizer\Normalizer::FORM_C)
     {
-        return \_PhpScoper069ebd53a518\Symfony\Polyfill\Intl\Normalizer\Normalizer::normalize($s, $form);
+        return \_PhpScoper326af2119eba\Symfony\Polyfill\Intl\Normalizer\Normalizer::normalize($string, $form);
     }
 }

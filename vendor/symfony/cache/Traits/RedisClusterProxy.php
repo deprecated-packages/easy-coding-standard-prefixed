@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Cache\Traits;
+namespace _PhpScoper326af2119eba\Symfony\Component\Cache\Traits;
 
 /**
  * @author Alessandro Chitolina <alekitto@gmail.com>
@@ -23,7 +23,7 @@ class RedisClusterProxy
     {
         $this->initializer = $initializer;
     }
-    public function __call($method, array $args)
+    public function __call(string $method, array $args)
     {
         $this->redis ?: ($this->redis = $this->initializer->__invoke());
         return $this->redis->{$method}(...$args);

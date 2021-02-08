@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\SebastianBergmann\Diff;
+namespace _PhpScoper326af2119eba\SebastianBergmann\Diff;
 
 use function array_pop;
 use function count;
@@ -35,13 +35,13 @@ final class Parser
         $diff = null;
         $collected = [];
         for ($i = 0; $i < $lineCount; ++$i) {
-            if (\preg_match('(^---\\s+(?P<file>\\S+))', $lines[$i], $fromMatch) && \preg_match('(^\\+\\+\\+\\s+(?P<file>\\S+))', $lines[$i + 1], $toMatch)) {
+            if (\preg_match('#^---\\h+"?(?P<file>[^\\v\\t"]+)#', $lines[$i], $fromMatch) && \preg_match('#^\\+\\+\\+\\h+"?(?P<file>[^\\v\\t"]+)#', $lines[$i + 1], $toMatch)) {
                 if ($diff !== null) {
                     $this->parseFileDiff($diff, $collected);
                     $diffs[] = $diff;
                     $collected = [];
                 }
-                $diff = new \_PhpScoper069ebd53a518\SebastianBergmann\Diff\Diff($fromMatch['file'], $toMatch['file']);
+                $diff = new \_PhpScoper326af2119eba\SebastianBergmann\Diff\Diff($fromMatch['file'], $toMatch['file']);
                 ++$i;
             } else {
                 if (\preg_match('/^(?:diff --git |index [\\da-f\\.]+|[+-]{3} [ab])/', $lines[$i])) {
@@ -56,26 +56,26 @@ final class Parser
         }
         return $diffs;
     }
-    private function parseFileDiff(\_PhpScoper069ebd53a518\SebastianBergmann\Diff\Diff $diff, array $lines) : void
+    private function parseFileDiff(\_PhpScoper326af2119eba\SebastianBergmann\Diff\Diff $diff, array $lines) : void
     {
         $chunks = [];
         $chunk = null;
         $diffLines = [];
         foreach ($lines as $line) {
             if (\preg_match('/^@@\\s+-(?P<start>\\d+)(?:,\\s*(?P<startrange>\\d+))?\\s+\\+(?P<end>\\d+)(?:,\\s*(?P<endrange>\\d+))?\\s+@@/', $line, $match)) {
-                $chunk = new \_PhpScoper069ebd53a518\SebastianBergmann\Diff\Chunk((int) $match['start'], isset($match['startrange']) ? \max(1, (int) $match['startrange']) : 1, (int) $match['end'], isset($match['endrange']) ? \max(1, (int) $match['endrange']) : 1);
+                $chunk = new \_PhpScoper326af2119eba\SebastianBergmann\Diff\Chunk((int) $match['start'], isset($match['startrange']) ? \max(1, (int) $match['startrange']) : 1, (int) $match['end'], isset($match['endrange']) ? \max(1, (int) $match['endrange']) : 1);
                 $chunks[] = $chunk;
                 $diffLines = [];
                 continue;
             }
             if (\preg_match('/^(?P<type>[+ -])?(?P<line>.*)/', $line, $match)) {
-                $type = \_PhpScoper069ebd53a518\SebastianBergmann\Diff\Line::UNCHANGED;
+                $type = \_PhpScoper326af2119eba\SebastianBergmann\Diff\Line::UNCHANGED;
                 if ($match['type'] === '+') {
-                    $type = \_PhpScoper069ebd53a518\SebastianBergmann\Diff\Line::ADDED;
+                    $type = \_PhpScoper326af2119eba\SebastianBergmann\Diff\Line::ADDED;
                 } elseif ($match['type'] === '-') {
-                    $type = \_PhpScoper069ebd53a518\SebastianBergmann\Diff\Line::REMOVED;
+                    $type = \_PhpScoper326af2119eba\SebastianBergmann\Diff\Line::REMOVED;
                 }
-                $diffLines[] = new \_PhpScoper069ebd53a518\SebastianBergmann\Diff\Line($type, $match['line']);
+                $diffLines[] = new \_PhpScoper326af2119eba\SebastianBergmann\Diff\Line($type, $match['line']);
                 if (null !== $chunk) {
                     $chunk->setLines($diffLines);
                 }

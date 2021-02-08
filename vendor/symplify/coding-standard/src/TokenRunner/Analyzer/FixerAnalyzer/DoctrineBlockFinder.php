@@ -35,7 +35,6 @@ final class DoctrineBlockFinder
     {
         /** @var Token $token */
         $token = $tokens[$position];
-        /** @var Token $token */
         $blockType = $this->getBlockTypeByToken($token);
         if (\in_array($token->getContent(), self::START_EDGES, \true)) {
             $blockStart = $position;

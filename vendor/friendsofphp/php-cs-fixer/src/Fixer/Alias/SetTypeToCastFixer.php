@@ -55,7 +55,7 @@ settype($bar, "null");
                 // function must be overridden or used incorrectly
             }
             $prev = $tokens->getPrevMeaningfulToken($functionNameIndex);
-            if (!$tokens[$prev]->isGivenKind(\T_OPEN_TAG) && !$tokens[$prev]->equalsAny([';', '{'])) {
+            if (!$tokens[$prev]->equalsAny([';', '{', '}', [\T_OPEN_TAG]])) {
                 continue;
                 // return value of the function is used
             }

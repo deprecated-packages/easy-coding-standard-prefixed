@@ -23,7 +23,7 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Trait `use` statements must be sorted alphabetically.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php class Foo { \nuse Z; use A; }\n")]);
+        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Trait `use` statements must be sorted alphabetically.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php class Foo { \nuse Z; use A; }\n")], null, 'Risky when depending on order of the imports.');
     }
     /**
      * {@inheritdoc}
@@ -31,6 +31,13 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function isRisky()
+    {
+        return \true;
     }
     /**
      * {@inheritdoc}

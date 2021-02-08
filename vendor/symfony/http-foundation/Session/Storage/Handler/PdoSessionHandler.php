@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Session handler using a PDO connection to read and write data.
@@ -37,7 +37,7 @@ namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storag
  * @author Michael Williams <michael.williams@funsational.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class PdoSessionHandler extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     /**
      * No locking is done. This means sessions are prone to loss of data due to
@@ -45,7 +45,7 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
      * write will win in this case. It might be useful when you implement your own
      * logic to deal with this like an optimistic approach.
      */
-    const LOCK_NONE = 0;
+    public const LOCK_NONE = 0;
     /**
      * Creates an application-level lock on a session. The disadvantage is that the
      * lock is not enforced by the database and thus other, unaware parts of the
@@ -53,14 +53,14 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
      * does not require a transaction.
      * This mode is not available for SQLite and not yet implemented for oci and sqlsrv.
      */
-    const LOCK_ADVISORY = 1;
+    public const LOCK_ADVISORY = 1;
     /**
      * Issues a real row lock. Since it uses a transaction between opening and
      * closing a session, you have to be careful when you use same database connection
      * that you also use for your application logic. This mode is the default because
      * it's the only reliable solution across DBMSs.
      */
-    const LOCK_TRANSACTIONAL = 2;
+    public const LOCK_TRANSACTIONAL = 2;
     private const MAX_LIFETIME = 315576000;
     /**
      * @var \PDO|null PDO instance or null when not connected yet
@@ -153,7 +153,7 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
     {
         if ($pdoOrDsn instanceof \PDO) {
             if (\PDO::ERRMODE_EXCEPTION !== $pdoOrDsn->getAttribute(\PDO::ATTR_ERRMODE)) {
-                throw new \InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION))', __CLASS__));
+                throw new \InvalidArgumentException(\sprintf('"%s" requires PDO error mode attribute be set to throw Exceptions (i.e. $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION)).', __CLASS__));
             }
             $this->pdo = $pdoOrDsn;
             $this->driver = $this->pdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
@@ -162,15 +162,15 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
         } else {
             $this->dsn = $pdoOrDsn;
         }
-        $this->table = isset($options['db_table']) ? $options['db_table'] : $this->table;
-        $this->idCol = isset($options['db_id_col']) ? $options['db_id_col'] : $this->idCol;
-        $this->dataCol = isset($options['db_data_col']) ? $options['db_data_col'] : $this->dataCol;
-        $this->lifetimeCol = isset($options['db_lifetime_col']) ? $options['db_lifetime_col'] : $this->lifetimeCol;
-        $this->timeCol = isset($options['db_time_col']) ? $options['db_time_col'] : $this->timeCol;
-        $this->username = isset($options['db_username']) ? $options['db_username'] : $this->username;
-        $this->password = isset($options['db_password']) ? $options['db_password'] : $this->password;
-        $this->connectionOptions = isset($options['db_connection_options']) ? $options['db_connection_options'] : $this->connectionOptions;
-        $this->lockMode = isset($options['lock_mode']) ? $options['lock_mode'] : $this->lockMode;
+        $this->table = $options['db_table'] ?? $this->table;
+        $this->idCol = $options['db_id_col'] ?? $this->idCol;
+        $this->dataCol = $options['db_data_col'] ?? $this->dataCol;
+        $this->lifetimeCol = $options['db_lifetime_col'] ?? $this->lifetimeCol;
+        $this->timeCol = $options['db_time_col'] ?? $this->timeCol;
+        $this->username = $options['db_username'] ?? $this->username;
+        $this->password = $options['db_password'] ?? $this->password;
+        $this->connectionOptions = $options['db_connection_options'] ?? $this->connectionOptions;
+        $this->lockMode = $options['lock_mode'] ?? $this->lockMode;
     }
     /**
      * Creates the table to store sessions which can be called once for setup.
@@ -194,7 +194,7 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
                 // - trailing space removal
                 // - case-insensitivity
                 // - language processing like é == e
-                $sql = "CREATE TABLE {$this->table} ({$this->idCol} VARBINARY(128) NOT NULL PRIMARY KEY, {$this->dataCol} BLOB NOT NULL, {$this->lifetimeCol} INTEGER UNSIGNED NOT NULL, {$this->timeCol} INTEGER UNSIGNED NOT NULL) COLLATE utf8_bin, ENGINE = InnoDB";
+                $sql = "CREATE TABLE {$this->table} ({$this->idCol} VARBINARY(128) NOT NULL PRIMARY KEY, {$this->dataCol} BLOB NOT NULL, {$this->lifetimeCol} INTEGER UNSIGNED NOT NULL, {$this->timeCol} INTEGER UNSIGNED NOT NULL) COLLATE utf8mb4_bin, ENGINE = InnoDB";
                 break;
             case 'sqlite':
                 $sql = "CREATE TABLE {$this->table} ({$this->idCol} TEXT NOT NULL PRIMARY KEY, {$this->dataCol} BLOB NOT NULL, {$this->lifetimeCol} INTEGER NOT NULL, {$this->timeCol} INTEGER NOT NULL)";
@@ -266,7 +266,7 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
     /**
      * {@inheritdoc}
      */
-    protected function doDestroy($sessionId)
+    protected function doDestroy(string $sessionId)
     {
         // delete the record associated with this id
         $sql = "DELETE FROM {$this->table} WHERE {$this->idCol} = :id";
@@ -283,7 +283,7 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
     /**
      * {@inheritdoc}
      */
-    protected function doWrite($sessionId, $data)
+    protected function doWrite(string $sessionId, string $data)
     {
         $maxlifetime = (int) \ini_get('session.gc_maxlifetime');
         try {
@@ -403,7 +403,7 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
             $this->password = $params['pass'];
         }
         if (!isset($params['scheme'])) {
-            throw new \InvalidArgumentException('URLs without scheme are not supported to configure the PdoSessionHandler');
+            throw new \InvalidArgumentException('URLs without scheme are not supported to configure the PdoSessionHandler.');
         }
         $driverAliasMap = [
             'mssql' => 'sqlsrv',
@@ -413,7 +413,7 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
             'postgresql' => 'pgsql',
             'sqlite3' => 'sqlite',
         ];
-        $driver = isset($driverAliasMap[$params['scheme']]) ? $driverAliasMap[$params['scheme']] : $params['scheme'];
+        $driver = $driverAliasMap[$params['scheme']] ?? $params['scheme'];
         // Doctrine DBAL supports passing its internal pdo_* driver names directly too (allowing both dashes and underscores). This allows supporting the same here.
         if (0 === \strpos($driver, 'pdo_') || 0 === \strpos($driver, 'pdo-')) {
             $driver = \substr($driver, 4);
@@ -524,11 +524,9 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
      * We need to make sure we do not return session data that is already considered garbage according
      * to the session.gc_maxlifetime setting because gc() is called after read() and only sometimes.
      *
-     * @param string $sessionId Session ID
-     *
-     * @return string The session data
+     * @return string
      */
-    protected function doRead($sessionId)
+    protected function doRead(string $sessionId)
     {
         if (self::LOCK_ADVISORY === $this->lockMode) {
             $this->unlockStatements[] = $this->doAdvisoryLock($sessionId);
@@ -752,10 +750,10 @@ class PdoSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFo
             $mergeStmt->bindParam(2, $sessionId, \PDO::PARAM_STR);
             $mergeStmt->bindParam(3, $data, \PDO::PARAM_LOB);
             $mergeStmt->bindValue(4, \time() + $maxlifetime, \PDO::PARAM_INT);
-            $mergeStmt->bindValue(4, \time(), \PDO::PARAM_INT);
-            $mergeStmt->bindParam(5, $data, \PDO::PARAM_LOB);
-            $mergeStmt->bindValue(6, \time() + $maxlifetime, \PDO::PARAM_INT);
-            $mergeStmt->bindValue(6, \time(), \PDO::PARAM_INT);
+            $mergeStmt->bindValue(5, \time(), \PDO::PARAM_INT);
+            $mergeStmt->bindParam(6, $data, \PDO::PARAM_LOB);
+            $mergeStmt->bindValue(7, \time() + $maxlifetime, \PDO::PARAM_INT);
+            $mergeStmt->bindValue(8, \time(), \PDO::PARAM_INT);
         } else {
             $mergeStmt->bindParam(':id', $sessionId, \PDO::PARAM_STR);
             $mergeStmt->bindParam(':data', $data, \PDO::PARAM_LOB);

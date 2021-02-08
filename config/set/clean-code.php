@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper069ebd53a518;
+namespace _PhpScoper326af2119eba;
 
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ClassNotation\ProtectedToPrivateFixer;
@@ -11,25 +11,11 @@ use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
 use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
 use PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer;
-use SlevomatCodingStandard\Sniffs\ControlStructures\RequireShortTernaryOperatorSniff;
-use SlevomatCodingStandard\Sniffs\Functions\UnusedInheritedVariablePassedToClosureSniff;
-use SlevomatCodingStandard\Sniffs\Operators\RequireCombinedAssignmentOperatorSniff;
-use SlevomatCodingStandard\Sniffs\PHP\DisallowDirectMagicInvokeCallSniff;
-use SlevomatCodingStandard\Sniffs\PHP\UselessParenthesesSniff;
-use SlevomatCodingStandard\Sniffs\PHP\UselessSemicolonSniff;
-use SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff;
-use SlevomatCodingStandard\Sniffs\Variables\UselessVariableSniff;
-use _PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper326af2119eba\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer;
-return static function (\_PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper326af2119eba\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
-    $services->set(\SlevomatCodingStandard\Sniffs\PHP\DisallowDirectMagicInvokeCallSniff::class);
     $services->set(\Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\Variables\UselessVariableSniff::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\Functions\UnusedInheritedVariablePassedToClosureSniff::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\PHP\UselessSemicolonSniff::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\PHP\UselessParenthesesSniff::class);
     $services->set(\PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer::class)->call('configure', [['syntax' => 'short']]);
     $services->set(\PhpCsFixer\Fixer\Import\NoUnusedImportsFixer::class);
     $services->set(\PhpCsFixer\Fixer\Import\OrderedImportsFixer::class);
@@ -38,6 +24,4 @@ return static function (\_PhpScoper069ebd53a518\Symfony\Component\DependencyInje
     $services->set(\PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer::class);
     $services->set(\PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer::class);
     $services->set(\PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\ControlStructures\RequireShortTernaryOperatorSniff::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\Operators\RequireCombinedAssignmentOperatorSniff::class);
 };

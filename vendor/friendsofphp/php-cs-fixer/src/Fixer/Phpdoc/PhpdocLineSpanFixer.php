@@ -19,6 +19,7 @@ use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -71,7 +72,7 @@ final class PhpdocLineSpanFixer extends \PhpCsFixer\AbstractFixer implements \Ph
             $docIndex = $this->getDocBlockIndex($tokens, $index);
             $doc = new \PhpCsFixer\DocBlock\DocBlock($tokens[$docIndex]->getContent());
             if ('multi' === $this->configuration[$type]) {
-                $doc->makeMultiLine($originalIndent = $this->detectIndent($tokens, $docIndex), $this->whitespacesConfig->getLineEnding());
+                $doc->makeMultiLine($originalIndent = \PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer::detectIndent($tokens, $docIndex), $this->whitespacesConfig->getLineEnding());
             } else {
                 $doc->makeSingleLine();
             }
@@ -99,19 +100,5 @@ final class PhpdocLineSpanFixer extends \PhpCsFixer\AbstractFixer implements \Ph
             $index = $tokens->getPrevNonWhitespace($index);
         } while ($tokens[$index]->isGivenKind([\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_FINAL, \T_ABSTRACT, \T_COMMENT, \T_VAR, \T_STATIC, \T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE]));
         return $index;
-    }
-    /**
-     * @param int $index
-     *
-     * @return string
-     */
-    private function detectIndent(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
-    {
-        if (!$tokens[$index - 1]->isWhitespace()) {
-            return '';
-            // cannot detect indent
-        }
-        $explodedContent = \explode($this->whitespacesConfig->getLineEnding(), $tokens[$index - 1]->getContent());
-        return \end($explodedContent);
     }
 }

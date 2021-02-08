@@ -1,48 +1,28 @@
 <?php
 
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <http://www.doctrine-project.org>.
- */
-namespace _PhpScoper069ebd53a518\Doctrine\Common\Annotations;
+namespace _PhpScoper326af2119eba\Doctrine\Common\Annotations;
 
+use ReflectionClass;
+use ReflectionMethod;
+use ReflectionProperty;
 /**
  * Simple Annotation Reader.
  *
  * This annotation reader is intended to be used in projects where you have
  * full-control over all annotations that are available.
  *
- * @since  2.2
- * @author Johannes M. Schmitt <schmittjoh@gmail.com>
- * @author Fabio B. Silva <fabio.bat.silva@gmail.com>
+ * @deprecated Deprecated in favour of using AnnotationReader
  */
-class SimpleAnnotationReader implements \_PhpScoper069ebd53a518\Doctrine\Common\Annotations\Reader
+class SimpleAnnotationReader implements \_PhpScoper326af2119eba\Doctrine\Common\Annotations\Reader
 {
-    /**
-     * @var DocParser
-     */
+    /** @var DocParser */
     private $parser;
     /**
-     * Constructor.
-     *
      * Initializes a new SimpleAnnotationReader.
      */
     public function __construct()
     {
-        $this->parser = new \_PhpScoper069ebd53a518\Doctrine\Common\Annotations\DocParser();
+        $this->parser = new \_PhpScoper326af2119eba\Doctrine\Common\Annotations\DocParser();
         $this->parser->setIgnoreNotImportedAnnotations(\true);
     }
     /**

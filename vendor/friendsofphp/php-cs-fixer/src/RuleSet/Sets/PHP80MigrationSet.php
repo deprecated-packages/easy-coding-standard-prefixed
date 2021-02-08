@@ -19,7 +19,7 @@ final class PHP80MigrationSet extends \PhpCsFixer\RuleSet\AbstractRuleSetDescrip
 {
     public function getRules()
     {
-        return ['@PHP73Migration' => \true, 'clean_namespace' => \true, 'no_unset_cast' => \true, 'normalize_index_brace' => \true];
+        return ['@PHP74Migration' => \true, 'clean_namespace' => \true, 'no_unset_cast' => \true];
     }
     public function getDescription()
     {

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\SessionUtils;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\SessionUtils;
 /**
  * This abstract session handler provides a generic implementation
  * of the PHP 7.0 SessionUpdateTimestampHandlerInterface,
@@ -37,24 +37,17 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
         return \true;
     }
     /**
-     * @param string $sessionId
-     *
      * @return string
      */
-    protected abstract function doRead($sessionId);
+    protected abstract function doRead(string $sessionId);
     /**
-     * @param string $sessionId
-     * @param string $data
-     *
      * @return bool
      */
-    protected abstract function doWrite($sessionId, $data);
+    protected abstract function doWrite(string $sessionId, string $data);
     /**
-     * @param string $sessionId
-     *
      * @return bool
      */
-    protected abstract function doDestroy($sessionId);
+    protected abstract function doDestroy(string $sessionId);
     /**
      * @return bool
      */
@@ -62,6 +55,14 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     {
         $this->prefetchData = $this->read($sessionId);
         $this->prefetchId = $sessionId;
+        if (\PHP_VERSION_ID < 70317 || 70400 <= \PHP_VERSION_ID && \PHP_VERSION_ID < 70405) {
+            // work around https://bugs.php.net/79413
+            foreach (\debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS) as $frame) {
+                if (!isset($frame['class']) && isset($frame['function']) && \in_array($frame['function'], ['session_regenerate_id', 'session_create_id'], \true)) {
+                    return '' === $this->prefetchData;
+                }
+            }
+        }
         return '' !== $this->prefetchData;
     }
     /**
@@ -104,9 +105,9 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     {
         if (!\headers_sent() && \filter_var(\ini_get('session.use_cookies'), \FILTER_VALIDATE_BOOLEAN)) {
             if (!$this->sessionName) {
-                throw new \LogicException(\sprintf('Session name cannot be empty, did you forget to call "parent::open()" in "%s"?.', \get_class($this)));
+                throw new \LogicException(\sprintf('Session name cannot be empty, did you forget to call "parent::open()" in "%s"?.', static::class));
             }
-            $cookie = \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie($this->sessionName, $sessionId);
+            $cookie = \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\SessionUtils::popSessionCookie($this->sessionName, $sessionId);
             /*
              * We send an invalidation Set-Cookie header (zero lifetime)
              * when either the session was started or a cookie with

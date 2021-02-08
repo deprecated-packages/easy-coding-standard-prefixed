@@ -27,6 +27,14 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
     /**
      * {@inheritdoc}
      */
+    public function getPriority()
+    {
+        // needs to run after TypeColonTransformer
+        return -15;
+    }
+    /**
+     * {@inheritdoc}
+     */
     public function getRequiredPhpVersionId()
     {
         return 70100;
@@ -40,24 +48,57 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
             return;
         }
         $prevIndex = $tokens->getPrevMeaningfulToken($index);
-        $prevToken = $tokens[$prevIndex];
-        if (!$prevToken->isGivenKind(\T_STRING)) {
+        if (!$tokens[$prevIndex]->isGivenKind(\T_STRING)) {
             return;
         }
         do {
             $prevIndex = $tokens->getPrevMeaningfulToken($prevIndex);
             if (null === $prevIndex) {
+                return;
+            }
+            if (!$tokens[$prevIndex]->isGivenKind([\T_NS_SEPARATOR, \T_STRING])) {
                 break;
             }
-            $prevToken = $tokens[$prevIndex];
-            if ($prevToken->isGivenKind([\T_NS_SEPARATOR, \T_STRING])) {
-                continue;
-            }
-            if ($prevToken->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION) || $prevToken->equals('(') && $tokens[$tokens->getPrevMeaningfulToken($prevIndex)]->isGivenKind(\T_CATCH)) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION, '|']);
-            }
-            break;
         } while (\true);
+        /** @var Token $prevToken */
+        $prevToken = $tokens[$prevIndex];
+        if ($prevToken->isGivenKind([
+            \PhpCsFixer\Tokenizer\CT::T_TYPE_COLON,
+            // `|` is part of a function return type union `foo(): A|B`
+            \PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION,
+            // `|` is part of a union (chain) `| X | Y`
+            \T_VAR,
+            \T_PUBLIC,
+            \T_PROTECTED,
+            \T_PRIVATE,
+        ])) {
+            $this->replaceToken($tokens, $index);
+            return;
+        }
+        if (!$prevToken->equals('(')) {
+            return;
+        }
+        $prevPrevTokenIndex = $tokens->getPrevMeaningfulToken($prevIndex);
+        /** @var Token $prePrevToken */
+        $prePrevToken = $tokens[$prevPrevTokenIndex];
+        if ($prePrevToken->isGivenKind([
+            \T_CATCH,
+            // `|` is part of catch `catch(X |`
+            \T_FUNCTION,
+        ])) {
+            $this->replaceToken($tokens, $index);
+            return;
+        }
+        if (\PHP_VERSION_ID >= 70400 && $prePrevToken->isGivenKind(\T_FN)) {
+            $this->replaceToken($tokens, $index);
+            // `|` is part of an array function variable `fn(int|null`
+            return;
+        }
+        if ($prePrevToken->isGivenKind(\T_STRING) && $tokens[$tokens->getPrevMeaningfulToken($prevPrevTokenIndex)]->isGivenKind(\T_FUNCTION)) {
+            // `|` is part of function variable `function Foo (X|Y`
+            $this->replaceToken($tokens, $index);
+            return;
+        }
     }
     /**
      * {@inheritdoc}
@@ -65,5 +106,9 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
     protected function getDeprecatedCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION];
+    }
+    private function replaceToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    {
+        $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION, '|']);
     }
 }

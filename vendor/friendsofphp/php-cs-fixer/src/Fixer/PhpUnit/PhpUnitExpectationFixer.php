@@ -19,6 +19,7 @@ use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer;
+use PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -161,7 +162,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             $arguments = $argumentsAnalyzer->getArguments($tokens, $openIndex, $closeIndex);
             $argumentsCnt = \count($arguments);
             $argumentsReplacements = ['expectException', $this->methodMap[$tokens[$index]->getContent()], 'expectExceptionCode'];
-            $indent = $this->whitespacesConfig->getLineEnding() . $this->detectIndent($tokens, $thisIndex);
+            $indent = $this->whitespacesConfig->getLineEnding() . \PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer::detectIndent($tokens, $thisIndex);
             $isMultilineWhitespace = \false;
             for ($cnt = $argumentsCnt - 1; $cnt >= 1; --$cnt) {
                 $argStart = \array_keys($arguments)[$cnt];
@@ -198,19 +199,5 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             }
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $methodName]);
         }
-    }
-    /**
-     * @param int $index
-     *
-     * @return string
-     */
-    private function detectIndent(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
-    {
-        if (!$tokens[$index - 1]->isWhitespace()) {
-            return '';
-            // cannot detect indent
-        }
-        $explodedContent = \explode("\n", $tokens[$index - 1]->getContent());
-        return \end($explodedContent);
     }
 }

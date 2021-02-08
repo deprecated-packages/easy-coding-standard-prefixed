@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Stopwatch;
+namespace _PhpScoper326af2119eba\Symfony\Component\Stopwatch;
 
 /**
  * Represents an Period for an Event.
@@ -21,21 +21,20 @@ class StopwatchPeriod
     private $end;
     private $memory;
     /**
-     * Constructor.
-     *
-     * @param int $start The relative time of the start of the period (in milliseconds)
-     * @param int $end   The relative time of the end of the period (in milliseconds)
+     * @param int|float $start         The relative time of the start of the period (in milliseconds)
+     * @param int|float $end           The relative time of the end of the period (in milliseconds)
+     * @param bool      $morePrecision If true, time is stored as float to keep the original microsecond precision
      */
-    public function __construct($start, $end)
+    public function __construct($start, $end, bool $morePrecision = \false)
     {
-        $this->start = (int) $start;
-        $this->end = (int) $end;
+        $this->start = $morePrecision ? (float) $start : (int) $start;
+        $this->end = $morePrecision ? (float) $end : (int) $end;
         $this->memory = \memory_get_usage(\true);
     }
     /**
      * Gets the relative time of the start of the period.
      *
-     * @return int The time (in milliseconds)
+     * @return int|float The time (in milliseconds)
      */
     public function getStartTime()
     {
@@ -44,7 +43,7 @@ class StopwatchPeriod
     /**
      * Gets the relative time of the end of the period.
      *
-     * @return int The time (in milliseconds)
+     * @return int|float The time (in milliseconds)
      */
     public function getEndTime()
     {
@@ -53,7 +52,7 @@ class StopwatchPeriod
     /**
      * Gets the time spent in this period.
      *
-     * @return int The period duration (in milliseconds)
+     * @return int|float The period duration (in milliseconds)
      */
     public function getDuration()
     {
@@ -67,5 +66,9 @@ class StopwatchPeriod
     public function getMemory()
     {
         return $this->memory;
+    }
+    public function __toString() : string
+    {
+        return \sprintf('%.2F MiB - %d ms', $this->getMemory() / 1024 / 1024, $this->getDuration());
     }
 }

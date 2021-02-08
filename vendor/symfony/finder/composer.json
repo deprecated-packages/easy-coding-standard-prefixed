@@ -1,7 +1,7 @@
 {
     "name": "symfony\/finder",
     "type": "library",
-    "description": "Symfony Finder Component",
+    "description": "Finds files and directories via an intuitive fluent interface",
     "keywords": [],
     "homepage": "https:\/\/symfony.com",
     "license": "MIT",
@@ -16,20 +16,15 @@
         }
     ],
     "require": {
-        "php": "^7.1.3"
+        "php": ">=7.2.5"
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper069ebd53a518\\Symfony\\Component\\Finder\\": ""
+            "_PhpScoper326af2119eba\\Symfony\\Component\\Finder\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"
         ]
     },
-    "minimum-stability": "dev",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "4.4-dev"
-        }
-    }
+    "minimum-stability": "dev"
 }

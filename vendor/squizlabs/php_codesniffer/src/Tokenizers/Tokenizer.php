@@ -337,10 +337,10 @@ abstract class Tokenizer
                                     }
                                     $disabledSniffs = [];
                                     $additionalText = \substr($commentText, 14);
-                                    if ($additionalText === \false) {
+                                    if (empty($additionalText) === \true) {
                                         $ignoring = ['.all' => \true];
                                     } else {
-                                        $parts = \explode(',', \substr($commentText, 13));
+                                        $parts = \explode(',', $additionalText);
                                         foreach ($parts as $sniffCode) {
                                             $sniffCode = \trim($sniffCode);
                                             $disabledSniffs[$sniffCode] = \true;
@@ -369,10 +369,10 @@ abstract class Tokenizer
                                         if ($ignoring !== null) {
                                             $enabledSniffs = [];
                                             $additionalText = \substr($commentText, 13);
-                                            if ($additionalText === \false) {
+                                            if (empty($additionalText) === \true) {
                                                 $ignoring = null;
                                             } else {
-                                                $parts = \explode(',', \substr($commentText, 13));
+                                                $parts = \explode(',', $additionalText);
                                                 foreach ($parts as $sniffCode) {
                                                     $sniffCode = \trim($sniffCode);
                                                     $enabledSniffs[$sniffCode] = \true;
@@ -423,10 +423,10 @@ abstract class Tokenizer
                                         if (\substr($commentTextLower, 0, 12) === 'phpcs:ignore') {
                                             $ignoreRules = [];
                                             $additionalText = \substr($commentText, 13);
-                                            if ($additionalText === \false) {
+                                            if (empty($additionalText) === \true) {
                                                 $ignoreRules = ['.all' => \true];
                                             } else {
-                                                $parts = \explode(',', \substr($commentText, 13));
+                                                $parts = \explode(',', $additionalText);
                                                 foreach ($parts as $sniffCode) {
                                                     $ignoreRules[\trim($sniffCode)] = \true;
                                                 }
@@ -955,6 +955,12 @@ abstract class Tokenizer
                         // So if we find them nested inside another opener, just skip them.
                         continue;
                     }
+                    if ($tokenType === \T_NAMESPACE) {
+                        // PHP namespace keywords are special because they can be
+                        // used as blocks but also inline as operators.
+                        // So if we find them nested inside another opener, just skip them.
+                        continue;
+                    }
                     if ($tokenType === \T_FUNCTION && $this->tokens[$stackPtr]['code'] !== \T_FUNCTION) {
                         // Probably a closure, so process it manually.
                         if (PHP_CODESNIFFER_VERBOSITY > 1) {
@@ -1098,7 +1104,7 @@ abstract class Tokenizer
                                 // brace is a string offset, or this brace is mid-way through
                                 // a new statement, it isn't a scope opener.
                                 $disallowed = \PHP_CodeSniffer\Util\Tokens::$assignmentTokens;
-                                $disallowed += [T_DOLLAR => \true, \T_VARIABLE => \true, \T_OBJECT_OPERATOR => \true, T_COMMA => \true, T_OPEN_PARENTHESIS => \true];
+                                $disallowed += [T_DOLLAR => \true, \T_VARIABLE => \true, \T_OBJECT_OPERATOR => \true, \T_NULLSAFE_OBJECT_OPERATOR => \true, T_COMMA => \true, T_OPEN_PARENTHESIS => \true];
                                 if (isset($disallowed[$this->tokens[$x]['code']]) === \true) {
                                     if (PHP_CODESNIFFER_VERBOSITY > 1) {
                                         echo \str_repeat("\t", $depth);

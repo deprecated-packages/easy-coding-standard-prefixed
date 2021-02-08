@@ -32,7 +32,7 @@ final class ExpectedAndOutputFileInfoPair
      */
     public function getOutputFileContent() : string
     {
-        if ($this->outputFileInfo === null) {
+        if (!$this->outputFileInfo instanceof \Symplify\SmartFileSystem\SmartFileInfo) {
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         return $this->outputFileInfo->getContents();

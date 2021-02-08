@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php 
+namespace _PhpScoper326af2119eba;
+
+require __DIR__ . '/easy-testing.php';

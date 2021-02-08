@@ -71,9 +71,8 @@ CODE_SAMPLE
     private function handleArrayCloser(\PhpCsFixer\Tokenizer\Tokens $tokens, int $arrayCloserPosition) : void
     {
         $preArrayCloserPosition = $arrayCloserPosition - 1;
-        /** @var Token|null $previousCloserToken */
         $previousCloserToken = $tokens[$preArrayCloserPosition] ?? null;
-        if ($previousCloserToken === null) {
+        if (!$previousCloserToken instanceof \PhpCsFixer\Tokenizer\Token) {
             return;
         }
         // already whitespace
@@ -85,9 +84,8 @@ CODE_SAMPLE
     private function handleArrayOpener(\PhpCsFixer\Tokenizer\Tokens $tokens, int $arrayOpenerPosition) : void
     {
         $postArrayOpenerPosition = $arrayOpenerPosition + 1;
-        /** @var Token|null $nextToken */
         $nextToken = $tokens[$postArrayOpenerPosition] ?? null;
-        if ($nextToken === null) {
+        if (!$nextToken instanceof \PhpCsFixer\Tokenizer\Token) {
             return;
         }
         // already is whitespace

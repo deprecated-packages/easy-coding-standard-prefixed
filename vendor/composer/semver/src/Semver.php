@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Composer\Semver;
+namespace _PhpScoper326af2119eba\Composer\Semver;
 
-use _PhpScoper069ebd53a518\Composer\Semver\Constraint\Constraint;
+use _PhpScoper326af2119eba\Composer\Semver\Constraint\Constraint;
 class Semver
 {
     const SORT_ASC = 1;
@@ -28,17 +28,17 @@ class Semver
     public static function satisfies($version, $constraints)
     {
         if (null === self::$versionParser) {
-            self::$versionParser = new \_PhpScoper069ebd53a518\Composer\Semver\VersionParser();
+            self::$versionParser = new \_PhpScoper326af2119eba\Composer\Semver\VersionParser();
         }
         $versionParser = self::$versionParser;
-        $provider = new \_PhpScoper069ebd53a518\Composer\Semver\Constraint\Constraint('==', $versionParser->normalize($version));
-        $constraints = $versionParser->parseConstraints($constraints);
-        return $constraints->matches($provider);
+        $provider = new \_PhpScoper326af2119eba\Composer\Semver\Constraint\Constraint('==', $versionParser->normalize($version));
+        $parsedConstraints = $versionParser->parseConstraints($constraints);
+        return $parsedConstraints->matches($provider);
     }
     /**
      * Return all versions that satisfy given constraints.
      *
-     * @param array $versions
+     * @param array  $versions
      * @param string $constraints
      *
      * @return array
@@ -46,7 +46,7 @@ class Semver
     public static function satisfiedBy(array $versions, $constraints)
     {
         $versions = \array_filter($versions, function ($version) use($constraints) {
-            return \_PhpScoper069ebd53a518\Composer\Semver\Semver::satisfies($version, $constraints);
+            return \_PhpScoper326af2119eba\Composer\Semver\Semver::satisfies($version, $constraints);
         });
         return \array_values($versions);
     }
@@ -74,27 +74,29 @@ class Semver
     }
     /**
      * @param array $versions
-     * @param int $direction
+     * @param int   $direction
      *
      * @return array
      */
     private static function usort(array $versions, $direction)
     {
         if (null === self::$versionParser) {
-            self::$versionParser = new \_PhpScoper069ebd53a518\Composer\Semver\VersionParser();
+            self::$versionParser = new \_PhpScoper326af2119eba\Composer\Semver\VersionParser();
         }
         $versionParser = self::$versionParser;
         $normalized = array();
         // Normalize outside of usort() scope for minor performance increase.
         // Creates an array of arrays: [[normalized, key], ...]
         foreach ($versions as $key => $version) {
-            $normalized[] = array($versionParser->normalize($version), $key);
+            $normalizedVersion = $versionParser->normalize($version);
+            $normalizedVersion = $versionParser->normalizeDefaultBranch($normalizedVersion);
+            $normalized[] = array($normalizedVersion, $key);
         }
         \usort($normalized, function (array $left, array $right) use($direction) {
             if ($left[0] === $right[0]) {
                 return 0;
             }
-            if (\_PhpScoper069ebd53a518\Composer\Semver\Comparator::lessThan($left[0], $right[0])) {
+            if (\_PhpScoper326af2119eba\Composer\Semver\Comparator::lessThan($left[0], $right[0])) {
                 return -$direction;
             }
             return $direction;

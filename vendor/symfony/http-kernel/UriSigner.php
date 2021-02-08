@@ -8,8 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpKernel;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpKernel;
 
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Request;
 /**
  * Signs URIs.
  *
@@ -34,11 +35,9 @@ class UriSigner
      * The given URI is signed by adding the query string parameter
      * which value depends on the URI and the secret.
      *
-     * @param string $uri A URI to sign
-     *
      * @return string The signed URI
      */
-    public function sign($uri)
+    public function sign(string $uri)
     {
         $url = \parse_url($uri);
         if (isset($url['query'])) {
@@ -53,11 +52,9 @@ class UriSigner
     /**
      * Checks that a URI contains the correct hash.
      *
-     * @param string $uri A signed URI
-     *
      * @return bool True if the URI is signed correctly, false otherwise
      */
-    public function check($uri)
+    public function check(string $uri)
     {
         $url = \parse_url($uri);
         if (isset($url['query'])) {
@@ -72,6 +69,12 @@ class UriSigner
         unset($params[$this->parameter]);
         return \hash_equals($this->computeHash($this->buildUrl($url, $params)), $hash);
     }
+    public function checkRequest(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Request $request) : bool
+    {
+        $qs = ($qs = $request->server->get('QUERY_STRING')) ? '?' . $qs : '';
+        // we cannot use $request->getUri() here as we want to work with the original URI (no query string reordering)
+        return $this->check($request->getSchemeAndHttpHost() . $request->getBaseUrl() . $request->getPathInfo() . $qs);
+    }
     private function computeHash(string $uri) : string
     {
         return \base64_encode(\hash_hmac('sha256', $uri, $this->secret, \true));
@@ -81,12 +84,12 @@ class UriSigner
         \ksort($params, \SORT_STRING);
         $url['query'] = \http_build_query($params, '', '&');
         $scheme = isset($url['scheme']) ? $url['scheme'] . '://' : '';
-        $host = isset($url['host']) ? $url['host'] : '';
+        $host = $url['host'] ?? '';
         $port = isset($url['port']) ? ':' . $url['port'] : '';
-        $user = isset($url['user']) ? $url['user'] : '';
+        $user = $url['user'] ?? '';
         $pass = isset($url['pass']) ? ':' . $url['pass'] : '';
         $pass = $user || $pass ? "{$pass}@" : '';
-        $path = isset($url['path']) ? $url['path'] : '';
+        $path = $url['path'] ?? '';
         $query = isset($url['query']) && $url['query'] ? '?' . $url['query'] : '';
         $fragment = isset($url['fragment']) ? '#' . $url['fragment'] : '';
         return $scheme . $user . $pass . $host . $port . $path . $query . $fragment;

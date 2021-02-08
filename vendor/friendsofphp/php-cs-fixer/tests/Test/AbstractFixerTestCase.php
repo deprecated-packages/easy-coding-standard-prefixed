@@ -27,12 +27,13 @@ use PhpCsFixer\Linter\CachingLinter;
 use PhpCsFixer\Linter\Linter;
 use PhpCsFixer\Linter\LinterInterface;
 use PhpCsFixer\Linter\ProcessLinter;
+use PhpCsFixer\Preg;
 use PhpCsFixer\StdinFileInfo;
 use PhpCsFixer\Tests\Test\Assert\AssertTokensTrait;
 use PhpCsFixer\Tests\TestCase;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper069ebd53a518\Prophecy\Argument;
+use _PhpScoper326af2119eba\Prophecy\Argument;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -54,9 +55,9 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
     private $allowedRequiredOptions = ['header_comment' => ['header' => \true]];
     // do not modify this structure without prior discussion
     private $allowedFixersWithoutDefaultCodeSample = ['general_phpdoc_annotation_remove' => \true, 'general_phpdoc_tag_rename' => \true];
-    protected function setUp()
+    protected function doSetUp()
     {
-        parent::setUp();
+        parent::doSetUp();
         $this->linter = $this->getLinter();
         $this->fixer = $this->createFixer();
         // @todo remove at 3.0 together with env var itself
@@ -64,9 +65,9 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
             \PhpCsFixer\Tokenizer\Tokens::setLegacyMode(\true);
         }
     }
-    protected function tearDown()
+    protected function doTearDown()
     {
-        parent::tearDown();
+        parent::doTearDown();
         $this->linter = null;
         $this->fixer = null;
         // @todo remove at 3.0
@@ -143,8 +144,6 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
             $fixerNamesWithKnownMissingSamplesWithConfig = [
                 // @TODO 3.0 - remove this
                 'is_null',
-                // has only one option which is deprecated
-                'php_unit_dedicate_assert_internal_type',
             ];
             if (\count($configSamplesProvided) < 2) {
                 if (\in_array($fixerName, $fixerNamesWithKnownMissingSamplesWithConfig, \true)) {
@@ -156,10 +155,6 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
             }
             $options = $this->fixer->getConfigurationDefinition()->getOptions();
             foreach ($options as $option) {
-                // @TODO 2.17 adjust fixers to use new casing and deprecate old one
-                if (\in_array($fixerName, ['final_internal_class', 'ordered_class_elements'], \true)) {
-                    static::markTestIncomplete(\sprintf('Rule "%s" is not following new option casing yet, please help.', $fixerName));
-                }
                 static::assertMatchesRegularExpression('/^[a-z_]+[a-z]$/', $option->getName(), \sprintf('[%s] Option %s is not snake_case.', $fixerName, $option->getName()));
             }
         }
@@ -194,6 +189,72 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
         } elseif (\is_string($comment)) {
             static::assertStringNotContainsString('@deprecated', $comment);
         }
+    }
+    /**
+     * Blur filter that find candidate fixer for performance optimization to use only `insertSlices` instead of multiple `insertAt` if there is no other collection manipulation.
+     */
+    public function testFixerUseInsertSlicesWhenOnlyInsertionsArePerformed()
+    {
+        $reflection = new \ReflectionClass($this->fixer);
+        $tokens = \PhpCsFixer\Tokenizer\Tokens::fromCode(\file_get_contents($reflection->getFileName()));
+        $sequences = $this->findAllTokenSequences($tokens, [[\T_VARIABLE, '$tokens'], [\T_OBJECT_OPERATOR], [\T_STRING]]);
+        $usedMethods = \array_unique(\array_map(function (array $sequence) {
+            $last = \end($sequence);
+            return $last->getContent();
+        }, $sequences));
+        // if there is no `insertAt`, it's not a candidate
+        if (!\in_array('insertAt', $usedMethods, \true)) {
+            $this->addToAssertionCount(1);
+            return;
+        }
+        $usedMethods = \array_filter($usedMethods, function ($method) {
+            return 0 === \PhpCsFixer\Preg::match('/^(count|find|generate|get|is|rewind)/', $method);
+        });
+        $allowedMethods = ['insertAt'];
+        $nonAllowedMethods = \array_diff($usedMethods, $allowedMethods);
+        if ([] === $nonAllowedMethods) {
+            $fixerName = $this->fixer->getName();
+            if (\in_array($fixerName, [
+                // DO NOT add anything to this list at ease, align with core contributors whether it makes sense to insert tokens individually or by bulk for your case.
+                // The original list of the fixers being exceptions and insert tokens individually came from legacy reasons when it was the only available methods to insert tokens.
+                'blank_line_after_namespace',
+                'blank_line_after_opening_tag',
+                'blank_line_before_statement',
+                'class_attributes_separation',
+                'date_time_immutable',
+                'declare_strict_types',
+                'doctrine_annotation_braces',
+                'doctrine_annotation_spaces',
+                'final_internal_class',
+                'final_public_method_for_abstract_class',
+                'function_typehint_space',
+                'heredoc_indentation',
+                'method_chaining_indentation',
+                'native_constant_invocation',
+                'new_with_braces',
+                'no_short_echo_tag',
+                'not_operator_with_space',
+                'not_operator_with_successor_space',
+                'php_unit_internal_class',
+                'php_unit_no_expectation_annotation',
+                'php_unit_set_up_tear_down_visibility',
+                'php_unit_size_class',
+                'php_unit_test_annotation',
+                'php_unit_test_class_requires_covers',
+                'phpdoc_to_param_type',
+                'phpdoc_to_return_type',
+                'random_api_migration',
+                'semicolon_after_instruction',
+                'single_line_after_imports',
+                'static_lambda',
+                'strict_param',
+                'void_return',
+            ], \true)) {
+                static::markTestIncomplete(\sprintf('Fixer "%s" may be optimized to use `Tokens::insertSlices` instead of `%s`, please help and optimize it.', $fixerName, \implode(', ', $allowedMethods)));
+            }
+            static::fail(\sprintf('Fixer "%s" shall be optimized to use `Tokens::insertSlices` instead of `%s`.', $fixerName, \implode(', ', $allowedMethods)));
+        }
+        $this->addToAssertionCount(1);
     }
     public final function testFixerConfigurationDefinitions()
     {
@@ -323,7 +384,7 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
         if (null === $linter) {
             if (\getenv('SKIP_LINT_TEST_CASES')) {
                 $linterProphecy = $this->prophesize(\PhpCsFixer\Linter\LinterInterface::class);
-                $linterProphecy->lintSource(\_PhpScoper069ebd53a518\Prophecy\Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
+                $linterProphecy->lintSource(\_PhpScoper326af2119eba\Prophecy\Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
                 $linter = $linterProphecy->reveal();
             } else {
                 $linter = new \PhpCsFixer\Linter\CachingLinter(\getenv('FAST_LINT_TEST_CASES') ? new \PhpCsFixer\Linter\Linter() : new \PhpCsFixer\Linter\ProcessLinter());
@@ -353,5 +414,16 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
     private static function assertCorrectCasing($needle, $haystack, $message)
     {
         static::assertSame(\substr_count(\strtolower($haystack), \strtolower($needle)), \substr_count($haystack, $needle), $message);
+    }
+    private function findAllTokenSequences($tokens, $sequence)
+    {
+        $lastIndex = 0;
+        $sequences = [];
+        while ($found = $tokens->findSequence($sequence, $lastIndex)) {
+            $keys = \array_keys($found);
+            $sequences[] = $found;
+            $lastIndex = $keys[2];
+        }
+        return $sequences;
     }
 }

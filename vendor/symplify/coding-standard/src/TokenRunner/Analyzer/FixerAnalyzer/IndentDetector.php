@@ -23,8 +23,11 @@ final class IndentDetector
             /** @var Token $token */
             $token = $tokens[$i];
             $lastNewlinePos = \strrpos($token->getContent(), "\n");
-            if ($token->isWhitespace() && $token->getContent() !== ' ' || $lastNewlinePos !== \false) {
+            if ($token->isWhitespace() && $token->getContent() !== ' ') {
                 return \substr_count($token->getContent(), $indent, (int) $lastNewlinePos);
+            }
+            if ($lastNewlinePos !== \false) {
+                return \substr_count($token->getContent(), $indent, $lastNewlinePos);
             }
         }
         return 0;

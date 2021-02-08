@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Session handler using the mongodb/mongodb package and MongoDB driver extension.
@@ -18,7 +18,7 @@ namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storag
  * @see https://packagist.org/packages/mongodb/mongodb
  * @see https://php.net/mongodb
  */
-class MongoDbSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class MongoDbSessionHandler extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $mongo;
     /**
@@ -59,10 +59,10 @@ class MongoDbSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\Ht
      *
      * @throws \InvalidArgumentException When "database" or "collection" not provided
      */
-    public function __construct(\_PhpScoper069ebd53a518\MongoDB\Client $mongo, array $options)
+    public function __construct(\_PhpScoper326af2119eba\MongoDB\Client $mongo, array $options)
     {
         if (!isset($options['database']) || !isset($options['collection'])) {
-            throw new \InvalidArgumentException('You must provide the "database" and "collection" option for MongoDBSessionHandler');
+            throw new \InvalidArgumentException('You must provide the "database" and "collection" option for MongoDBSessionHandler.');
         }
         $this->mongo = $mongo;
         $this->options = \array_merge(['id_field' => '_id', 'data_field' => 'data', 'time_field' => 'time', 'expiry_field' => 'expires_at'], $options);
@@ -77,7 +77,7 @@ class MongoDbSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\Ht
     /**
      * {@inheritdoc}
      */
-    protected function doDestroy($sessionId)
+    protected function doDestroy(string $sessionId)
     {
         $this->getCollection()->deleteOne([$this->options['id_field'] => $sessionId]);
         return \true;
@@ -93,7 +93,7 @@ class MongoDbSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\Ht
     /**
      * {@inheritdoc}
      */
-    protected function doWrite($sessionId, $data)
+    protected function doWrite(string $sessionId, string $data)
     {
         $expiry = new \MongoDB\BSON\UTCDateTime((\time() + (int) \ini_get('session.gc_maxlifetime')) * 1000);
         $fields = [$this->options['time_field'] => new \MongoDB\BSON\UTCDateTime(), $this->options['expiry_field'] => $expiry, $this->options['data_field'] => new \MongoDB\BSON\Binary($data, \MongoDB\BSON\Binary::TYPE_OLD_BINARY)];
@@ -112,7 +112,7 @@ class MongoDbSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\Ht
     /**
      * {@inheritdoc}
      */
-    protected function doRead($sessionId)
+    protected function doRead(string $sessionId)
     {
         $dbData = $this->getCollection()->findOne([$this->options['id_field'] => $sessionId, $this->options['expiry_field'] => ['$gte' => new \MongoDB\BSON\UTCDateTime()]]);
         if (null === $dbData) {
@@ -120,7 +120,7 @@ class MongoDbSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\Ht
         }
         return $dbData[$this->options['data_field']]->getData();
     }
-    private function getCollection() : \_PhpScoper069ebd53a518\MongoDB\Collection
+    private function getCollection() : \_PhpScoper326af2119eba\MongoDB\Collection
     {
         if (null === $this->collection) {
             $this->collection = $this->mongo->selectCollection($this->options['database'], $this->options['collection']);

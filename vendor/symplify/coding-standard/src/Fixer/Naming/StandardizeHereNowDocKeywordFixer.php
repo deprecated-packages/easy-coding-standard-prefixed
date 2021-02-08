@@ -3,7 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Naming;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -17,13 +18,17 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\CodingStandard\Tests\Fixer\Naming\StandardizeHereNowDocKeywordFixer\StandardizeHereNowDocKeywordFixerTest
  */
-final class StandardizeHereNowDocKeywordFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface, \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
+final class StandardizeHereNowDocKeywordFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface, \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface, \PhpCsFixer\Fixer\ConfigurableFixerInterface
 {
     /**
      * @api
      * @var string
      */
     public const KEYWORD = 'keyword';
+    /**
+     * @var string
+     */
+    private const ERROR_MESSAGE = 'Use configured nowdoc and heredoc keyword';
     /**
      * @api
      * @var string
@@ -34,10 +39,6 @@ final class StandardizeHereNowDocKeywordFixer extends \Symplify\CodingStandard\F
      * @var string
      */
     private const START_HEREDOC_NOWDOC_NAME_REGEX = '#(<<<(\')?)(?<name>.*?)((\')?\\s)#';
-    /**
-     * @var string
-     */
-    private const ERROR_MESSAGE = 'Use configured nowdoc and heredoc keyword';
     /**
      * @var string
      */
@@ -64,13 +65,6 @@ final class StandardizeHereNowDocKeywordFixer extends \Symplify\CodingStandard\F
             }
         }
     }
-    /**
-     * @param mixed[]|null $configuration
-     */
-    public function configure(?array $configuration = null) : void
-    {
-        $this->keyword = $configuration[self::KEYWORD] ?? self::DEFAULT_KEYWORD;
-    }
     public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
     {
         return new \Symplify\RuleDocGenerator\ValueObject\RuleDefinition(self::ERROR_MESSAGE, [new \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample(<<<'CODE_SAMPLE'
@@ -85,13 +79,20 @@ $value = <<<'CODE_SNIPPET'
 CODE_SAMPLE
 , [self::KEYWORD => 'CODE_SNIPPET'])]);
     }
+    /**
+     * @param mixed[]|null $configuration
+     */
+    public function configure(?array $configuration = null) : void
+    {
+        $this->keyword = $configuration[self::KEYWORD] ?? self::DEFAULT_KEYWORD;
+    }
     private function fixStartToken(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $position) : void
     {
-        $match = \_PhpScoper069ebd53a518\Nette\Utils\Strings::match($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX);
+        $match = \_PhpScoper326af2119eba\Nette\Utils\Strings::match($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX);
         if (!isset($match['name'])) {
             return;
         }
-        $newContent = \_PhpScoper069ebd53a518\Nette\Utils\Strings::replace($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX, '$1' . $this->keyword . '$4');
+        $newContent = \_PhpScoper326af2119eba\Nette\Utils\Strings::replace($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX, '$1' . $this->keyword . '$4');
         $tokens[$position] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), $newContent]);
     }
     private function fixEndToken(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $position) : void

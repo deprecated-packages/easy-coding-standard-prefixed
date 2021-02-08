@@ -8,8 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation;
 
+// Help opcache.preload discover always-needed symbols
+\class_exists(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeaderItem::class);
 /**
  * Represents an Accept-* header.
  *
@@ -40,18 +42,16 @@ class AcceptHeader
     /**
      * Builds an AcceptHeader instance from a string.
      *
-     * @param string $headerValue
-     *
      * @return self
      */
-    public static function fromString($headerValue)
+    public static function fromString(?string $headerValue)
     {
         $index = 0;
-        $parts = \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\HeaderUtils::split((string) $headerValue, ',;=');
+        $parts = \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderUtils::split($headerValue ?? '', ',;=');
         return new self(\array_map(function ($subParts) use(&$index) {
             $part = \array_shift($subParts);
-            $attributes = \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\HeaderUtils::combine($subParts);
-            $item = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\AcceptHeaderItem($part[0], $attributes);
+            $attributes = \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderUtils::combine($subParts);
+            $item = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeaderItem($part[0], $attributes);
             $item->setIndex($index++);
             return $item;
         }, $parts));
@@ -68,22 +68,18 @@ class AcceptHeader
     /**
      * Tests if header has given value.
      *
-     * @param string $value
-     *
      * @return bool
      */
-    public function has($value)
+    public function has(string $value)
     {
         return isset($this->items[$value]);
     }
     /**
      * Returns given value's item, if exists.
      *
-     * @param string $value
-     *
      * @return AcceptHeaderItem|null
      */
-    public function get($value)
+    public function get(string $value)
     {
         return $this->items[$value] ?? $this->items[\explode('/', $value)[0] . '/*'] ?? $this->items['*/*'] ?? $this->items['*'] ?? null;
     }
@@ -92,7 +88,7 @@ class AcceptHeader
      *
      * @return $this
      */
-    public function add(\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\AcceptHeaderItem $item)
+    public function add(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeaderItem $item)
     {
         $this->items[$item->getValue()] = $item;
         $this->sorted = \false;
@@ -111,13 +107,11 @@ class AcceptHeader
     /**
      * Filters items on their value using given regex.
      *
-     * @param string $pattern
-     *
      * @return self
      */
-    public function filter($pattern)
+    public function filter(string $pattern)
     {
-        return new self(\array_filter($this->items, function (\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\AcceptHeaderItem $item) use($pattern) {
+        return new self(\array_filter($this->items, function (\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeaderItem $item) use($pattern) {
             return \preg_match($pattern, $item->getValue());
         }));
     }
@@ -137,7 +131,7 @@ class AcceptHeader
     private function sort() : void
     {
         if (!$this->sorted) {
-            \uasort($this->items, function (\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\AcceptHeaderItem $a, \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\AcceptHeaderItem $b) {
+            \uasort($this->items, function (\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeaderItem $a, \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeaderItem $b) {
                 $qA = $a->getQuality();
                 $qB = $b->getQuality();
                 if ($qA === $qB) {

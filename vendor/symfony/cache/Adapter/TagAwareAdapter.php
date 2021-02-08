@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper326af2119eba\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper069ebd53a518\Psr\Cache\CacheItemInterface;
-use _PhpScoper069ebd53a518\Psr\Cache\InvalidArgumentException;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Traits\ProxyTrait;
-use _PhpScoper069ebd53a518\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use _PhpScoper326af2119eba\Psr\Cache\CacheItemInterface;
+use _PhpScoper326af2119eba\Psr\Cache\InvalidArgumentException;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScoper326af2119eba\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \_PhpScoper069ebd53a518\Symfony\Contracts\Cache\TagAwareCacheInterface, \_PhpScoper069ebd53a518\Symfony\Component\Cache\PruneableInterface, \_PhpScoper069ebd53a518\Symfony\Component\Cache\ResettableInterface
+class TagAwareAdapter implements \_PhpScoper326af2119eba\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \_PhpScoper326af2119eba\Symfony\Contracts\Cache\TagAwareCacheInterface, \_PhpScoper326af2119eba\Symfony\Component\Cache\PruneableInterface, \_PhpScoper326af2119eba\Symfony\Component\Cache\ResettableInterface
 {
-    const TAGS_PREFIX = "\0tags\0";
-    use ProxyTrait;
+    public const TAGS_PREFIX = "\0tags\0";
     use ContractsTrait;
+    use ProxyTrait;
     private $deferred = [];
     private $createCacheItem;
     private $setCacheItemTags;
@@ -34,28 +34,27 @@ class TagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache
     private $tags;
     private $knownTagVersions = [];
     private $knownTagVersionsTtl;
-    public function __construct(\_PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \_PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
+    public function __construct(\_PhpScoper326af2119eba\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \_PhpScoper326af2119eba\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
     {
         $this->pool = $itemsPool;
         $this->tags = $tagsPool ?: $itemsPool;
         $this->knownTagVersionsTtl = $knownTagVersionsTtl;
-        $this->createCacheItem = \Closure::bind(static function ($key, $value, \_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem $protoItem) {
-            $item = new \_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem();
+        $this->createCacheItem = \Closure::bind(static function ($key, $value, \_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem $protoItem) {
+            $item = new \_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->value = $value;
-            $item->defaultLifetime = $protoItem->defaultLifetime;
             $item->expiry = $protoItem->expiry;
             $item->poolHash = $protoItem->poolHash;
             return $item;
-        }, null, \_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem::class);
-        $this->setCacheItemTags = \Closure::bind(static function (\_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem $item, $key, array &$itemTags) {
+        }, null, \_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem::class);
+        $this->setCacheItemTags = \Closure::bind(static function (\_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem $item, $key, array &$itemTags) {
             $item->isTaggable = \true;
             if (!$item->isHit) {
                 return $item;
             }
             if (isset($itemTags[$key])) {
                 foreach ($itemTags[$key] as $tag => $version) {
-                    $item->metadata[\_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem::METADATA_TAGS][$tag] = $tag;
+                    $item->metadata[\_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem::METADATA_TAGS][$tag] = $tag;
                 }
                 unset($itemTags[$key]);
             } else {
@@ -63,22 +62,21 @@ class TagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache
                 $item->isHit = \false;
             }
             return $item;
-        }, null, \_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem::class);
         $this->getTagsByKey = \Closure::bind(static function ($deferred) {
             $tagsByKey = [];
             foreach ($deferred as $key => $item) {
-                $tagsByKey[$key] = $item->newMetadata[\_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
+                $tagsByKey[$key] = $item->newMetadata[\_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
             }
             return $tagsByKey;
-        }, null, \_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem::class);
-        $this->invalidateTags = \Closure::bind(static function (\_PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
+        }, null, \_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem::class);
+        $this->invalidateTags = \Closure::bind(static function (\_PhpScoper326af2119eba\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
             foreach ($tags as $v) {
-                $v->defaultLifetime = 0;
-                $v->expiry = null;
+                $v->expiry = 0;
                 $tagsAdapter->saveDeferred($v);
             }
             return $tagsAdapter->commit();
-        }, null, \_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem::class);
     }
     /**
      * {@inheritdoc}
@@ -89,7 +87,7 @@ class TagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache
         $tagsByKey = [];
         $invalidatedTags = [];
         foreach ($tags as $tag) {
-            \_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem::validateKey($tag);
+            \_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem::validateKey($tag);
             $invalidatedTags[$tag] = 0;
         }
         if ($this->deferred) {
@@ -170,7 +168,7 @@ class TagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache
         }
         try {
             $items = $this->pool->getItems($tagKeys + $keys);
-        } catch (\_PhpScoper069ebd53a518\Psr\Cache\InvalidArgumentException $e) {
+        } catch (\_PhpScoper326af2119eba\Psr\Cache\InvalidArgumentException $e) {
             $this->pool->getItems($keys);
             // Should throw an exception
             throw $e;
@@ -180,13 +178,10 @@ class TagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache
     /**
      * {@inheritdoc}
      *
-     * @param string $prefix
-     *
      * @return bool
      */
-    public function clear()
+    public function clear(string $prefix = '')
     {
-        $prefix = 0 < \func_num_args() ? (string) \func_get_arg(0) : '';
         if ('' !== $prefix) {
             foreach ($this->deferred as $key => $item) {
                 if (0 === \strpos($key, $prefix)) {
@@ -196,7 +191,7 @@ class TagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache
         } else {
             $this->deferred = [];
         }
-        if ($this->pool instanceof \_PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \_PhpScoper326af2119eba\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($prefix);
         }
         return $this->pool->clear();
@@ -229,9 +224,9 @@ class TagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache
      *
      * @return bool
      */
-    public function save(\_PhpScoper069ebd53a518\Psr\Cache\CacheItemInterface $item)
+    public function save(\_PhpScoper326af2119eba\Psr\Cache\CacheItemInterface $item)
     {
-        if (!$item instanceof \_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;
@@ -242,9 +237,9 @@ class TagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScoper069ebd53a518\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\_PhpScoper326af2119eba\Psr\Cache\CacheItemInterface $item)
     {
-        if (!$item instanceof \_PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \_PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $this->deferred[$item->getKey()] = $item;

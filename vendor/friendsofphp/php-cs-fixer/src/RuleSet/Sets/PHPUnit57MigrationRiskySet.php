@@ -23,6 +23,6 @@ final class PHPUnit57MigrationRiskySet extends \PhpCsFixer\RuleSet\AbstractRuleS
     }
     public function getDescription()
     {
-        return 'Rules to improve tests code for PHPUnit 5.7 compatibility';
+        return 'Rules to improve tests code for PHPUnit 5.7 compatibility.';
     }
 }

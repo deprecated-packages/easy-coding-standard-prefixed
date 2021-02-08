@@ -52,8 +52,36 @@ class ArrayIndentSniff extends \PHP_CodeSniffer\Sniffs\AbstractArraySniff
     public function processMultiLineArray($phpcsFile, $stackPtr, $arrayStart, $arrayEnd, $indices)
     {
         $tokens = $phpcsFile->getTokens();
+        // Determine how far indented the entire array declaration should be.
+        $ignore = \PHP_CodeSniffer\Util\Tokens::$emptyTokens;
+        $ignore[] = \T_DOUBLE_ARROW;
+        $ignore[] = T_COMMA;
+        $prev = $phpcsFile->findPrevious($ignore, $stackPtr - 1, null, \true);
+        $start = $phpcsFile->findStartOfStatement($prev);
+        $first = $phpcsFile->findFirstOnLine(\T_WHITESPACE, $start, \true);
+        $baseIndent = $tokens[$first]['column'] - 1;
         $first = $phpcsFile->findFirstOnLine(\T_WHITESPACE, $stackPtr, \true);
-        $expectedIndent = $tokens[$first]['column'] - 1 + $this->indent;
+        $startIndent = $tokens[$first]['column'] - 1;
+        // If the open brace is not indented to at least to the level of the start
+        // of the statement, the sniff will conflict with other sniffs trying to
+        // check indent levels because it's not valid. But we don't enforce exactly
+        // how far indented it should be.
+        if ($startIndent < $baseIndent) {
+            $error = 'Array open brace not indented correctly; expected at least %s spaces but found %s';
+            $data = [$baseIndent, $startIndent];
+            $fix = $phpcsFile->addFixableError($error, $stackPtr, 'OpenBraceIncorrect', $data);
+            if ($fix === \true) {
+                $padding = \str_repeat(' ', $baseIndent);
+                if ($startIndent === 0) {
+                    $phpcsFile->fixer->addContentBefore($first, $padding);
+                } else {
+                    $phpcsFile->fixer->replaceToken($first - 1, $padding);
+                }
+            }
+            return;
+        }
+        //end if
+        $expectedIndent = $startIndent + $this->indent;
         foreach ($indices as $index) {
             if (isset($index['index_start']) === \true) {
                 $start = $index['index_start'];

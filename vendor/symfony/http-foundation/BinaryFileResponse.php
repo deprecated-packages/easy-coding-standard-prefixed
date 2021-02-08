@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation;
 
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\File;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\File;
 /**
  * BinaryFileResponse represents an HTTP response delivering a file.
  *
@@ -21,7 +21,7 @@ use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\File;
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  * @author Sergey Linnik <linniksa@gmail.com>
  */
-class BinaryFileResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Response
+class BinaryFileResponse extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Response
 {
     protected static $trustXSendfileTypeHeader = \false;
     /**
@@ -58,34 +58,34 @@ class BinaryFileResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpF
      * @param bool                $autoLastModified   Whether the Last-Modified header should be automatically set
      *
      * @return static
+     *
+     * @deprecated since Symfony 5.2, use __construct() instead.
      */
-    public static function create($file = null, $status = 200, $headers = [], $public = \true, $contentDisposition = null, $autoEtag = \false, $autoLastModified = \true)
+    public static function create($file = null, int $status = 200, array $headers = [], bool $public = \true, string $contentDisposition = null, bool $autoEtag = \false, bool $autoLastModified = \true)
     {
+        trigger_deprecation('symfony/http-foundation', '5.2', 'The "%s()" method is deprecated, use "new %s()" instead.', __METHOD__, static::class);
         return new static($file, $status, $headers, $public, $contentDisposition, $autoEtag, $autoLastModified);
     }
     /**
      * Sets the file to stream.
      *
-     * @param \SplFileInfo|string $file               The file to stream
-     * @param string              $contentDisposition
-     * @param bool                $autoEtag
-     * @param bool                $autoLastModified
+     * @param \SplFileInfo|string $file The file to stream
      *
      * @return $this
      *
      * @throws FileException
      */
-    public function setFile($file, $contentDisposition = null, $autoEtag = \false, $autoLastModified = \true)
+    public function setFile($file, string $contentDisposition = null, bool $autoEtag = \false, bool $autoLastModified = \true)
     {
-        if (!$file instanceof \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\File) {
+        if (!$file instanceof \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\File) {
             if ($file instanceof \SplFileInfo) {
-                $file = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\File($file->getPathname());
+                $file = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\File($file->getPathname());
             } else {
-                $file = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\File((string) $file);
+                $file = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\File((string) $file);
             }
         }
         if (!$file->isReadable()) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\FileException('File must be readable.');
+            throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\FileException('File must be readable.');
         }
         $this->file = $file;
         if ($autoEtag) {
@@ -133,7 +133,7 @@ class BinaryFileResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpF
      *
      * @return $this
      */
-    public function setContentDisposition($disposition, $filename = '', $filenameFallback = '')
+    public function setContentDisposition(string $disposition, string $filename = '', string $filenameFallback = '')
     {
         if ('' === $filename) {
             $filename = $this->file->getFilename();
@@ -156,7 +156,7 @@ class BinaryFileResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpF
     /**
      * {@inheritdoc}
      */
-    public function prepare(\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Request $request)
+    public function prepare(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Request $request)
     {
         if (!$this->headers->has('Content-Type')) {
             $this->headers->set('Content-Type', $this->file->getMimeType() ?: 'application/octet-stream');
@@ -185,10 +185,10 @@ class BinaryFileResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpF
             }
             if ('x-accel-redirect' === \strtolower($type)) {
                 // Do X-Accel-Mapping substitutions.
-                // @link http://wiki.nginx.org/X-accel#X-Accel-Redirect
-                $parts = \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
+                // @link https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/#x-accel-redirect
+                $parts = \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
                 foreach ($parts as $part) {
-                    list($pathPrefix, $location) = $part;
+                    [$pathPrefix, $location] = $part;
                     if (\substr($path, 0, \strlen($pathPrefix)) === $pathPrefix) {
                         $path = $location . \substr($path, \strlen($pathPrefix));
                         // Only set X-Accel-Redirect header if a valid URI can be produced
@@ -202,28 +202,31 @@ class BinaryFileResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpF
                 $this->headers->set($type, $path);
                 $this->maxlen = 0;
             }
-        } elseif ($request->headers->has('Range')) {
+        } elseif ($request->headers->has('Range') && $request->isMethod('GET')) {
             // Process the range headers.
             if (!$request->headers->has('If-Range') || $this->hasValidIfRangeHeader($request->headers->get('If-Range'))) {
                 $range = $request->headers->get('Range');
-                list($start, $end) = \explode('-', \substr($range, 6), 2) + [0];
-                $end = '' === $end ? $fileSize - 1 : (int) $end;
-                if ('' === $start) {
-                    $start = $fileSize - $end;
-                    $end = $fileSize - 1;
-                } else {
-                    $start = (int) $start;
-                }
-                if ($start <= $end) {
-                    if ($start < 0 || $end > $fileSize - 1) {
-                        $this->setStatusCode(416);
-                        $this->headers->set('Content-Range', \sprintf('bytes */%s', $fileSize));
-                    } elseif (0 !== $start || $end !== $fileSize - 1) {
-                        $this->maxlen = $end < $fileSize ? $end - $start + 1 : -1;
-                        $this->offset = $start;
-                        $this->setStatusCode(206);
-                        $this->headers->set('Content-Range', \sprintf('bytes %s-%s/%s', $start, $end, $fileSize));
-                        $this->headers->set('Content-Length', $end - $start + 1);
+                if (0 === \strpos($range, 'bytes=')) {
+                    [$start, $end] = \explode('-', \substr($range, 6), 2) + [0];
+                    $end = '' === $end ? $fileSize - 1 : (int) $end;
+                    if ('' === $start) {
+                        $start = $fileSize - $end;
+                        $end = $fileSize - 1;
+                    } else {
+                        $start = (int) $start;
+                    }
+                    if ($start <= $end) {
+                        $end = \min($end, $fileSize - 1);
+                        if ($start < 0 || $start > $end) {
+                            $this->setStatusCode(416);
+                            $this->headers->set('Content-Range', \sprintf('bytes */%s', $fileSize));
+                        } elseif ($end - $start < $fileSize - 1) {
+                            $this->maxlen = $end < $fileSize ? $end - $start + 1 : -1;
+                            $this->offset = $start;
+                            $this->setStatusCode(206);
+                            $this->headers->set('Content-Range', \sprintf('bytes %s-%s/%s', $start, $end, $fileSize));
+                            $this->headers->set('Content-Length', $end - $start + 1);
+                        }
                     }
                 }
             }
@@ -253,12 +256,12 @@ class BinaryFileResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpF
         if (0 === $this->maxlen) {
             return $this;
         }
-        $out = \fopen('php://output', 'wb');
-        $file = \fopen($this->file->getPathname(), 'rb');
+        $out = \fopen('php://output', 'w');
+        $file = \fopen($this->file->getPathname(), 'r');
         \stream_copy_to_stream($file, $out, $this->maxlen, $this->offset);
         \fclose($out);
         \fclose($file);
-        if ($this->deleteFileAfterSend && \file_exists($this->file->getPathname())) {
+        if ($this->deleteFileAfterSend && \is_file($this->file->getPathname())) {
             \unlink($this->file->getPathname());
         }
         return $this;
@@ -268,7 +271,7 @@ class BinaryFileResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpF
      *
      * @throws \LogicException when the content is not null
      */
-    public function setContent($content)
+    public function setContent(?string $content)
     {
         if (null !== $content) {
             throw new \LogicException('The content cannot be set on a BinaryFileResponse instance.');
@@ -290,14 +293,12 @@ class BinaryFileResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpF
         self::$trustXSendfileTypeHeader = \true;
     }
     /**
-     * If this is set to true, the file will be unlinked after the request is send
+     * If this is set to true, the file will be unlinked after the request is sent
      * Note: If the X-Sendfile header is used, the deleteFileAfterSend setting will not be used.
-     *
-     * @param bool $shouldDelete
      *
      * @return $this
      */
-    public function deleteFileAfterSend($shouldDelete = \true)
+    public function deleteFileAfterSend(bool $shouldDelete = \true)
     {
         $this->deleteFileAfterSend = $shouldDelete;
         return $this;

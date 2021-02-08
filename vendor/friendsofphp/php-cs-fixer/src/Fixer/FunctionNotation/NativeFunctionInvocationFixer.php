@@ -22,7 +22,7 @@ use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
 use PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Andreas Möller <am@localheinz.com>
  * @author SpacePossum
@@ -158,18 +158,18 @@ $c = get_class($d);
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('exclude', 'List of functions to ignore.'))->setAllowedTypes(['array'])->setAllowedValues([static function (array $value) {
             foreach ($value as $functionName) {
                 if (!\is_string($functionName) || '' === \trim($functionName) || \trim($functionName) !== $functionName) {
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Each element must be a non-empty, trimmed string, got "%s" instead.', \is_object($functionName) ? \get_class($functionName) : \gettype($functionName)));
+                    throw new \_PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Each element must be a non-empty, trimmed string, got "%s" instead.', \is_object($functionName) ? \get_class($functionName) : \gettype($functionName)));
                 }
             }
             return \true;
         }])->setDefault([])->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('include', 'List of function names or sets to fix. Defined sets are `@internal` (all native functions), `@all` (all global functions) and `@compiler_optimized` (functions that are specially optimized by Zend).'))->setAllowedTypes(['array'])->setAllowedValues([static function (array $value) {
             foreach ($value as $functionName) {
                 if (!\is_string($functionName) || '' === \trim($functionName) || \trim($functionName) !== $functionName) {
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Each element must be a non-empty, trimmed string, got "%s" instead.', \is_object($functionName) ? \get_class($functionName) : \gettype($functionName)));
+                    throw new \_PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Each element must be a non-empty, trimmed string, got "%s" instead.', \is_object($functionName) ? \get_class($functionName) : \gettype($functionName)));
                 }
                 $sets = [self::SET_ALL, self::SET_INTERNAL, self::SET_COMPILER_OPTIMIZED];
                 if ('@' === $functionName[0] && !\in_array($functionName, $sets, \true)) {
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unknown set "%s", known sets are "%s".', $functionName, \implode('", "', $sets)));
+                    throw new \_PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unknown set "%s", known sets are "%s".', $functionName, \implode('", "', $sets)));
                 }
             }
             return \true;
@@ -183,7 +183,7 @@ $c = get_class($d);
     private function fixFunctionCalls(\PhpCsFixer\Tokenizer\Tokens $tokens, callable $functionFilter, $start, $end, $tryToRemove)
     {
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
-        $insertAtIndexes = [];
+        $tokensToInsert = [];
         for ($index = $start; $index < $end; ++$index) {
             if (!$functionsAnalyzer->isGlobalFunctionCall($tokens, $index)) {
                 continue;
@@ -202,11 +202,9 @@ $c = get_class($d);
                 continue;
                 // do not bother if previous token is already namespace separator
             }
-            $insertAtIndexes[] = $index;
+            $tokensToInsert[$index] = new \PhpCsFixer\Tokenizer\Token([\T_NS_SEPARATOR, '\\']);
         }
-        foreach (\array_reverse($insertAtIndexes) as $index) {
-            $tokens->insertAt($index, new \PhpCsFixer\Tokenizer\Token([\T_NS_SEPARATOR, '\\']));
-        }
+        $tokens->insertSlices($tokensToInsert);
     }
     /**
      * @return callable

@@ -92,8 +92,7 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends \PhpCsFixer\
     private function fixFunctionParameters(\PhpCsFixer\Tokenizer\Tokens $tokens, array $arguments)
     {
         foreach (\array_reverse($arguments) as $argumentInfo) {
-            // If the parameter doesn't have a type declaration or a default value null we can continue
-            if (!$argumentInfo->hasTypeAnalysis() || !$argumentInfo->hasDefault() || 'null' !== \strtolower($argumentInfo->getDefault())) {
+            if (!$argumentInfo->hasTypeAnalysis() || \false !== \strpos($argumentInfo->getTypeAnalysis()->getName(), '|') || !$argumentInfo->hasDefault() || 'null' !== \strtolower($argumentInfo->getDefault())) {
                 continue;
             }
             $argumentTypeInfo = $argumentInfo->getTypeAnalysis();

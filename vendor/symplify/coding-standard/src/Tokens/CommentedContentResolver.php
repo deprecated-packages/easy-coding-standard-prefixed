@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\ValueObject\StartAndEnd;
@@ -53,8 +53,8 @@ final class CommentedContentResolver
             $lastLineSeen = $tokenLine;
             // Trim as much off the comment as possible so we don't, have additional whitespace tokens or comment tokens
             $tokenContent = \trim($token->getContent());
-            $hasBlockCommentCloser = \_PhpScoper069ebd53a518\Nette\Utils\Strings::endsWith($tokenContent, '*/');
-            if ($hasBlockCommentCloser === \true) {
+            $hasBlockCommentCloser = \_PhpScoper326af2119eba\Nette\Utils\Strings::endsWith($tokenContent, '*/');
+            if ($hasBlockCommentCloser) {
                 // Closer of a block comment found
                 break;
             }
@@ -63,15 +63,13 @@ final class CommentedContentResolver
     }
     private function shouldBreak(int $lastLineSeen, int $tokenLine, \PhpCsFixer\Tokenizer\Token $token) : bool
     {
-        if ($lastLineSeen + 1 <= $tokenLine && \_PhpScoper069ebd53a518\Nette\Utils\Strings::startsWith($token->getContent(), '/*')) {
+        if ($lastLineSeen + 1 <= $tokenLine && \_PhpScoper326af2119eba\Nette\Utils\Strings::startsWith($token->getContent(), '/*')) {
             // First non-whitespace token on a new line is start of a different style comment.
             return \true;
         }
-        if ($lastLineSeen < $tokenLine) {
-            // next line is not a comment
-            if (!\_PhpScoper069ebd53a518\Nette\Utils\Strings::startsWith($token->getContent(), '//')) {
-                return \true;
-            }
+        // next line is not a comment
+        if ($lastLineSeen < $tokenLine && !\_PhpScoper326af2119eba\Nette\Utils\Strings::startsWith($token->getContent(), '//')) {
+            return \true;
         }
         // Blank line breaks a '//' style comment block.
         return $lastLineSeen + 1 < $tokenLine;

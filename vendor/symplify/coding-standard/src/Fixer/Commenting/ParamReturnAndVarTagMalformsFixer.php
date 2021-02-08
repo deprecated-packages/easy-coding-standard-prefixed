@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -59,7 +59,10 @@ final class ParamReturnAndVarTagMalformsFixer extends \Symplify\CodingStandard\F
     }
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
-        return $tokens->isAnyTokenKindsFound([\T_DOC_COMMENT, \T_COMMENT]) && $tokens->isAnyTokenKindsFound([\T_FUNCTION, \T_VARIABLE]);
+        if (!$tokens->isAnyTokenKindsFound([\T_DOC_COMMENT, \T_COMMENT])) {
+            return \false;
+        }
+        return $tokens->isAnyTokenKindsFound([\T_FUNCTION, \T_VARIABLE]);
     }
     public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
@@ -69,7 +72,7 @@ final class ParamReturnAndVarTagMalformsFixer extends \Symplify\CodingStandard\F
                 continue;
             }
             $docContent = $token->getContent();
-            if (!\_PhpScoper069ebd53a518\Nette\Utils\Strings::match($docContent, self::TYPE_ANNOTATION_REGEX)) {
+            if (!\_PhpScoper326af2119eba\Nette\Utils\Strings::match($docContent, self::TYPE_ANNOTATION_REGEX)) {
                 continue;
             }
             $originalDocContent = $docContent;

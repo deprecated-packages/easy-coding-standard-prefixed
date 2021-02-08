@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Flash;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Flash;
 
 /**
  * AutoExpireFlashBag flash message container.
  *
  * @author Drak <drak@zikula.org>
  */
-class AutoExpireFlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
+class AutoExpireFlashBag implements \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
 {
     private $name = 'flashes';
     private $flashes = ['display' => [], 'new' => []];
@@ -34,7 +34,7 @@ class AutoExpireFlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\Ht
     {
         return $this->name;
     }
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -53,14 +53,14 @@ class AutoExpireFlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\Ht
     /**
      * {@inheritdoc}
      */
-    public function add($type, $message)
+    public function add(string $type, $message)
     {
         $this->flashes['new'][$type][] = $message;
     }
     /**
      * {@inheritdoc}
      */
-    public function peek($type, array $default = [])
+    public function peek(string $type, array $default = [])
     {
         return $this->has($type) ? $this->flashes['display'][$type] : $default;
     }
@@ -74,7 +74,7 @@ class AutoExpireFlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\Ht
     /**
      * {@inheritdoc}
      */
-    public function get($type, array $default = [])
+    public function get(string $type, array $default = [])
     {
         $return = $default;
         if (!$this->has($type)) {
@@ -105,14 +105,14 @@ class AutoExpireFlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\Ht
     /**
      * {@inheritdoc}
      */
-    public function set($type, $messages)
+    public function set(string $type, $messages)
     {
         $this->flashes['new'][$type] = (array) $messages;
     }
     /**
      * {@inheritdoc}
      */
-    public function has($type)
+    public function has(string $type)
     {
         return \array_key_exists($type, $this->flashes['display']) && $this->flashes['display'][$type];
     }

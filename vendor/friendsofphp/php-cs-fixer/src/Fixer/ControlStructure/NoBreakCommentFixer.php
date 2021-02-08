@@ -19,10 +19,11 @@ use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
+use PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Options;
 /**
  * Fixer for rule defined in PSR2 ¶5.2.
  */
@@ -76,10 +77,10 @@ switch ($foo) {
     {
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('comment_text', 'The text to use in the added comment and to detect it.'))->setAllowedTypes(['string'])->setAllowedValues([static function ($value) {
             if (\is_string($value) && \PhpCsFixer\Preg::match('/\\R/', $value)) {
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException('The comment text must not contain new lines.');
+                throw new \_PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException('The comment text must not contain new lines.');
             }
             return \true;
-        }])->setNormalizer(static function (\_PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Options $options, $value) {
+        }])->setNormalizer(static function (\_PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Options $options, $value) {
             return \rtrim($value);
         })->setDefault('no break')->getOption()]);
     }
@@ -183,7 +184,7 @@ switch ($foo) {
         }
         if ($nbNewlines > 1) {
             \PhpCsFixer\Preg::match('/^(.*?)(\\R\\h*)$/s', $newlineToken->getContent(), $matches);
-            $indent = $this->getIndentAt($tokens, $newlinePosition - 1);
+            $indent = \PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer::detectIndent($tokens, $newlinePosition - 1);
             $tokens[$newlinePosition] = new \PhpCsFixer\Tokenizer\Token([$newlineToken->getId(), $matches[1] . $lineEnding . $indent]);
             $tokens->insertAt(++$newlinePosition, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $matches[2]]));
         }
@@ -198,7 +199,7 @@ switch ($foo) {
     private function ensureNewLineAt(\PhpCsFixer\Tokenizer\Tokens $tokens, $position)
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
-        $content = $lineEnding . $this->getIndentAt($tokens, $position);
+        $content = $lineEnding . \PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer::detectIndent($tokens, $position);
         $whitespaceToken = $tokens[$position - 1];
         if (!$whitespaceToken->isGivenKind(\T_WHITESPACE)) {
             if ($whitespaceToken->isGivenKind(\T_OPEN_TAG)) {
@@ -243,29 +244,6 @@ switch ($foo) {
             }
         }
         $tokens->clearTokenAndMergeSurroundingWhitespace($commentPosition);
-    }
-    /**
-     * @param int $position
-     *
-     * @return string
-     */
-    private function getIndentAt(\PhpCsFixer\Tokenizer\Tokens $tokens, $position)
-    {
-        while (\true) {
-            $position = $tokens->getPrevTokenOfKind($position, [[\T_WHITESPACE]]);
-            if (null === $position) {
-                break;
-            }
-            $content = $tokens[$position]->getContent();
-            $prevToken = $tokens[$position - 1];
-            if ($prevToken->isGivenKind(\T_OPEN_TAG) && \PhpCsFixer\Preg::match('/\\R$/', $prevToken->getContent())) {
-                $content = $this->whitespacesConfig->getLineEnding() . $content;
-            }
-            if (\PhpCsFixer\Preg::match('/\\R(\\h*)$/', $content, $matches)) {
-                return $matches[1];
-            }
-        }
-        return '';
     }
     /**
      * @param int $position

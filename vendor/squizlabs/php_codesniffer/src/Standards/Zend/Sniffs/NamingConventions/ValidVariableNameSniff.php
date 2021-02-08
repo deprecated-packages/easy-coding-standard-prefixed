@@ -33,7 +33,7 @@ class ValidVariableNameSniff extends \PHP_CodeSniffer\Sniffs\AbstractVariableSni
             return;
         }
         $objOperator = $phpcsFile->findNext([\T_WHITESPACE], $stackPtr + 1, null, \true);
-        if ($tokens[$objOperator]['code'] === \T_OBJECT_OPERATOR) {
+        if ($tokens[$objOperator]['code'] === \T_OBJECT_OPERATOR || $tokens[$objOperator]['code'] === \T_NULLSAFE_OBJECT_OPERATOR) {
             // Check to see if we are using a variable from an object.
             $var = $phpcsFile->findNext([\T_WHITESPACE], $objOperator + 1, null, \true);
             if ($tokens[$var]['code'] === \T_STRING) {

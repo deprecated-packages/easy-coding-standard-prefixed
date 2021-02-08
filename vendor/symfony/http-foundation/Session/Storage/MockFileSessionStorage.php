@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage;
 
 /**
  * MockFileSessionStorage is used to mock sessions for
@@ -21,20 +21,19 @@ namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storag
  *
  * @author Drak <drak@zikula.org>
  */
-class MockFileSessionStorage extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage
+class MockFileSessionStorage extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage
 {
     private $savePath;
     /**
      * @param string $savePath Path of directory to save session files
-     * @param string $name     Session name
      */
-    public function __construct(string $savePath = null, string $name = 'MOCKSESSID', \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(string $savePath = null, string $name = 'MOCKSESSID', \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         if (null === $savePath) {
             $savePath = \sys_get_temp_dir();
         }
         if (!\is_dir($savePath) && !@\mkdir($savePath, 0777, \true) && !\is_dir($savePath)) {
-            throw new \RuntimeException(\sprintf('Session Storage was not able to create directory "%s"', $savePath));
+            throw new \RuntimeException(\sprintf('Session Storage was not able to create directory "%s".', $savePath));
         }
         $this->savePath = $savePath;
         parent::__construct($name, $metaBag);
@@ -57,7 +56,7 @@ class MockFileSessionStorage extends \_PhpScoper069ebd53a518\Symfony\Component\H
     /**
      * {@inheritdoc}
      */
-    public function regenerate($destroy = \false, $lifetime = null)
+    public function regenerate(bool $destroy = \false, int $lifetime = null)
     {
         if (!$this->started) {
             $this->start();
@@ -73,7 +72,7 @@ class MockFileSessionStorage extends \_PhpScoper069ebd53a518\Symfony\Component\H
     public function save()
     {
         if (!$this->started) {
-            throw new \RuntimeException('Trying to save a session that was not started yet or was already closed');
+            throw new \RuntimeException('Trying to save a session that was not started yet or was already closed.');
         }
         $data = $this->data;
         foreach ($this->bags as $bag) {
@@ -86,7 +85,10 @@ class MockFileSessionStorage extends \_PhpScoper069ebd53a518\Symfony\Component\H
         }
         try {
             if ($data) {
-                \file_put_contents($this->getFilePath(), \serialize($data));
+                $path = $this->getFilePath();
+                $tmp = $path . \bin2hex(\random_bytes(6));
+                \file_put_contents($tmp, \serialize($data));
+                \rename($tmp, $path);
             } else {
                 $this->destroy();
             }
@@ -104,8 +106,12 @@ class MockFileSessionStorage extends \_PhpScoper069ebd53a518\Symfony\Component\H
      */
     private function destroy() : void
     {
-        if (\is_file($this->getFilePath())) {
+        \set_error_handler(static function () {
+        });
+        try {
             \unlink($this->getFilePath());
+        } finally {
+            \restore_error_handler();
         }
     }
     /**
@@ -120,8 +126,14 @@ class MockFileSessionStorage extends \_PhpScoper069ebd53a518\Symfony\Component\H
      */
     private function read() : void
     {
-        $filePath = $this->getFilePath();
-        $this->data = \is_readable($filePath) && \is_file($filePath) ? \unserialize(\file_get_contents($filePath)) : [];
+        \set_error_handler(static function () {
+        });
+        try {
+            $data = \file_get_contents($this->getFilePath());
+        } finally {
+            \restore_error_handler();
+        }
+        $this->data = $data ? \unserialize($data) : [];
         $this->loadSession();
     }
 }

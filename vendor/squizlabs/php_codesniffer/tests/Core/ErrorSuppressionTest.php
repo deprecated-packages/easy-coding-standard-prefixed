@@ -12,8 +12,8 @@ namespace PHP_CodeSniffer\Tests\Core;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
-use _PhpScoper069ebd53a518\PHPUnit\Framework\TestCase;
-class ErrorSuppressionTest extends \_PhpScoper069ebd53a518\PHPUnit\Framework\TestCase
+use _PhpScoper326af2119eba\PHPUnit\Framework\TestCase;
+class ErrorSuppressionTest extends \_PhpScoper326af2119eba\PHPUnit\Framework\TestCase
 {
     /**
      * Test suppressing a single error.

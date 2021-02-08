@@ -22,7 +22,7 @@ class ClassInstantiationUnitTest extends \PHP_CodeSniffer\Tests\Standards\Abstra
      */
     public function getErrorList()
     {
-        return [3 => 1, 4 => 1, 9 => 1, 11 => 1, 14 => 1, 16 => 1, 20 => 1, 21 => 1, 22 => 1, 24 => 1, 25 => 1, 30 => 1, 32 => 1, 33 => 1, 34 => 1];
+        return [3 => 1, 4 => 1, 9 => 1, 11 => 1, 14 => 1, 16 => 1, 20 => 1, 21 => 1, 22 => 1, 24 => 1, 25 => 1, 30 => 1, 32 => 1, 33 => 1, 34 => 1, 37 => 1, 38 => 1];
     }
     //end getErrorList()
     /**

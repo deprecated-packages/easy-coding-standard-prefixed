@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Flash;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Flash;
 
 /**
  * FlashBag flash message container.
  *
  * @author Drak <drak@zikula.org>
  */
-class FlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
+class FlashBag implements \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
 {
     private $name = 'flashes';
     private $flashes = [];
@@ -34,7 +34,7 @@ class FlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundati
     {
         return $this->name;
     }
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -48,14 +48,14 @@ class FlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundati
     /**
      * {@inheritdoc}
      */
-    public function add($type, $message)
+    public function add(string $type, $message)
     {
         $this->flashes[$type][] = $message;
     }
     /**
      * {@inheritdoc}
      */
-    public function peek($type, array $default = [])
+    public function peek(string $type, array $default = [])
     {
         return $this->has($type) ? $this->flashes[$type] : $default;
     }
@@ -69,7 +69,7 @@ class FlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundati
     /**
      * {@inheritdoc}
      */
-    public function get($type, array $default = [])
+    public function get(string $type, array $default = [])
     {
         if (!$this->has($type)) {
             return $default;
@@ -90,7 +90,7 @@ class FlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundati
     /**
      * {@inheritdoc}
      */
-    public function set($type, $messages)
+    public function set(string $type, $messages)
     {
         $this->flashes[$type] = (array) $messages;
     }
@@ -104,7 +104,7 @@ class FlashBag implements \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundati
     /**
      * {@inheritdoc}
      */
-    public function has($type)
+    public function has(string $type)
     {
         return \array_key_exists($type, $this->flashes) && $this->flashes[$type];
     }

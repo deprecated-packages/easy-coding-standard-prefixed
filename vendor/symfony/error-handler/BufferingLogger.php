@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\ErrorHandler;
+namespace _PhpScoper326af2119eba\Symfony\Component\ErrorHandler;
 
-use _PhpScoper069ebd53a518\Psr\Log\AbstractLogger;
+use _PhpScoper326af2119eba\Psr\Log\AbstractLogger;
 /**
  * A buffering logger that stacks logs for later.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class BufferingLogger extends \_PhpScoper069ebd53a518\Psr\Log\AbstractLogger
+class BufferingLogger extends \_PhpScoper326af2119eba\Psr\Log\AbstractLogger
 {
     private $logs = [];
     public function log($level, $message, array $context = []) : void
@@ -28,6 +28,14 @@ class BufferingLogger extends \_PhpScoper069ebd53a518\Psr\Log\AbstractLogger
         $logs = $this->logs;
         $this->logs = [];
         return $logs;
+    }
+    public function __sleep()
+    {
+        throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
+    }
+    public function __wakeup()
+    {
+        throw new \BadMethodCallException('Cannot unserialize ' . __CLASS__);
     }
     public function __destruct()
     {

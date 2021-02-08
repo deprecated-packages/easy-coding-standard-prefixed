@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.1"
+        "php": ">=7.1"
     },
     "autoload": {
         "files": [
@@ -25,7 +25,11 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1-dev"
+            "dev-master": "2.2-dev"
+        },
+        "thanks": {
+            "name": "symfony\/contracts",
+            "url": "https:\/\/github.com\/symfony\/contracts"
         }
     }
 }

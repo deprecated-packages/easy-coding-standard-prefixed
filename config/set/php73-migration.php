@@ -1,14 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper069ebd53a518;
+namespace _PhpScoper326af2119eba;
 
 use PhpCsFixer\Fixer\Alias\BacktickToShellExecFixer;
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Operator\TernaryToNullCoalescingFixer;
 use PhpCsFixer\Fixer\Whitespace\HeredocIndentationFixer;
-use _PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoper326af2119eba\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoper326af2119eba\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+    \trigger_error('ECS set PHP_73_MIGRATION is deprecated. Use more advanced and precise Rector instead (http://github.com/rectorphp/rector)');
+    \sleep(3);
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\Whitespace\HeredocIndentationFixer::class);
     $services->set(\PhpCsFixer\Fixer\Operator\TernaryToNullCoalescingFixer::class);

@@ -1,10 +1,10 @@
 <?php
 
-namespace _PhpScoper069ebd53a518\Jean85;
+namespace _PhpScoper326af2119eba\Jean85;
 
 class Version
 {
-    const SHORT_COMMIT_LENGTH = \_PhpScoper069ebd53a518\Jean85\PrettyVersions::SHORT_COMMIT_LENGTH;
+    const SHORT_COMMIT_LENGTH = \_PhpScoper326af2119eba\Jean85\PrettyVersions::SHORT_COMMIT_LENGTH;
     /** @var string */
     private $packageName;
     /** @var string */
@@ -32,9 +32,16 @@ class Version
     {
         return $this->getShortVersion() . '@' . $this->getCommitHash();
     }
-    public function getVersionWithShortCommit() : string
+    public function getVersionWithShortReference() : string
     {
         return $this->getShortVersion() . '@' . $this->getShortCommitHash();
+    }
+    /**
+     * @deprecated since 1.6, use getVersionWithShortReference instead
+     */
+    public function getVersionWithShortCommit() : string
+    {
+        return $this->getVersionWithShortReference();
     }
     public function getPackageName() : string
     {
@@ -44,13 +51,27 @@ class Version
     {
         return $this->shortVersion;
     }
-    public function getCommitHash() : string
+    public function getReference() : string
     {
         return $this->commitHash;
     }
-    public function getShortCommitHash() : string
+    /**
+     * @deprecated since 1.6, use getReference instead
+     */
+    public function getCommitHash() : string
+    {
+        return $this->getReference();
+    }
+    public function getShortReference() : string
     {
         return \substr($this->commitHash, 0, self::SHORT_COMMIT_LENGTH);
+    }
+    /**
+     * @deprecated since 1.6, use getShortReference instead
+     */
+    public function getShortCommitHash() : string
+    {
+        return $this->getShortReference();
     }
     public function __toString() : string
     {

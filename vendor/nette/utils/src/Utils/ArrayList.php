@@ -5,15 +5,16 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper069ebd53a518\Nette\Utils;
+namespace _PhpScoper326af2119eba\Nette\Utils;
 
-use _PhpScoper069ebd53a518\Nette;
+use _PhpScoper326af2119eba\Nette;
 /**
  * Provides the base class for a generic list (items can be accessed by index).
  */
 class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     use Nette\SmartObject;
+    /** @var mixed[] */
     private $list = [];
     /**
      * Returns an iterator over all items.
@@ -32,6 +33,7 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Replaces or appends a item.
      * @param  int|null  $index
+     * @param  mixed  $value
      * @throws Nette\OutOfRangeException
      */
     public function offsetSet($index, $value) : void
@@ -39,7 +41,7 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
         if ($index === null) {
             $this->list[] = $value;
         } elseif (!\is_int($index) || $index < 0 || $index >= \count($this->list)) {
-            throw new \_PhpScoper069ebd53a518\Nette\OutOfRangeException('Offset invalid or out of range');
+            throw new \_PhpScoper326af2119eba\Nette\OutOfRangeException('Offset invalid or out of range');
         } else {
             $this->list[$index] = $value;
         }
@@ -53,7 +55,7 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
     public function offsetGet($index)
     {
         if (!\is_int($index) || $index < 0 || $index >= \count($this->list)) {
-            throw new \_PhpScoper069ebd53a518\Nette\OutOfRangeException('Offset invalid or out of range');
+            throw new \_PhpScoper326af2119eba\Nette\OutOfRangeException('Offset invalid or out of range');
         }
         return $this->list[$index];
     }
@@ -73,12 +75,13 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
     public function offsetUnset($index) : void
     {
         if (!\is_int($index) || $index < 0 || $index >= \count($this->list)) {
-            throw new \_PhpScoper069ebd53a518\Nette\OutOfRangeException('Offset invalid or out of range');
+            throw new \_PhpScoper326af2119eba\Nette\OutOfRangeException('Offset invalid or out of range');
         }
         \array_splice($this->list, $index, 1);
     }
     /**
      * Prepends a item.
+     * @param  mixed  $value
      */
     public function prepend($value) : void
     {

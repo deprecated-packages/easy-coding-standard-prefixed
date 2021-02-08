@@ -7,6 +7,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException;
+use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class TokenSkipper
 {
@@ -26,14 +27,14 @@ final class TokenSkipper
         $token = $tokens[$position];
         if ($token->getContent() === '{') {
             $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
-            if ($blockInfo === null) {
+            if (!$blockInfo instanceof \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo) {
                 return $position;
             }
             return $blockInfo->getEnd();
         }
         if ($token->isGivenKind([\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN, \T_ARRAY])) {
             $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
-            if ($blockInfo === null) {
+            if (!$blockInfo instanceof \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo) {
                 return $position;
             }
             return $blockInfo->getEnd();
@@ -48,7 +49,7 @@ final class TokenSkipper
             return $position;
         }
         $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
-        if ($blockInfo === null) {
+        if (!$blockInfo instanceof \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo) {
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         return $blockInfo->getStart();

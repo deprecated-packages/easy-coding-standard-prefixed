@@ -3,15 +3,15 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\Finder\FinderSanitizer;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Finder as NetteFinder;
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
-use _PhpScoper069ebd53a518\PHPUnit\Framework\TestCase;
+use _PhpScoper326af2119eba\Nette\Utils\Finder as NetteFinder;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\PHPUnit\Framework\TestCase;
 use SplFileInfo;
-use _PhpScoper069ebd53a518\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoper069ebd53a518\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
+use _PhpScoper326af2119eba\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper326af2119eba\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class FinderSanitizerTest extends \_PhpScoper069ebd53a518\PHPUnit\Framework\TestCase
+final class FinderSanitizerTest extends \_PhpScoper326af2119eba\PHPUnit\Framework\TestCase
 {
     /**
      * @var FinderSanitizer
@@ -24,11 +24,12 @@ final class FinderSanitizerTest extends \_PhpScoper069ebd53a518\PHPUnit\Framewor
     public function testValidTypes() : void
     {
         $files = [new \SplFileInfo(__DIR__ . '/Source/MissingFile.php')];
-        $this->assertCount(0, $this->finderSanitizer->sanitize($files));
+        $sanitizedFiles = $this->finderSanitizer->sanitize($files);
+        $this->assertCount(0, $sanitizedFiles);
     }
     public function testSymfonyFinder() : void
     {
-        $symfonyFinder = \_PhpScoper069ebd53a518\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Source');
+        $symfonyFinder = \_PhpScoper326af2119eba\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Source');
         $fileInfos = \iterator_to_array($symfonyFinder->getIterator());
         $this->assertCount(2, $fileInfos);
         $files = $this->finderSanitizer->sanitize($symfonyFinder);
@@ -37,7 +38,7 @@ final class FinderSanitizerTest extends \_PhpScoper069ebd53a518\PHPUnit\Framewor
     }
     public function testNetteFinder() : void
     {
-        $netteFinder = \_PhpScoper069ebd53a518\Nette\Utils\Finder::findFiles('*')->from(__DIR__ . '/Source');
+        $netteFinder = \_PhpScoper326af2119eba\Nette\Utils\Finder::findFiles('*')->from(__DIR__ . '/Source');
         $fileInfos = \iterator_to_array($netteFinder->getIterator());
         $this->assertCount(2, $fileInfos);
         $files = $this->finderSanitizer->sanitize($netteFinder);
@@ -53,11 +54,11 @@ final class FinderSanitizerTest extends \_PhpScoper069ebd53a518\PHPUnit\Framewor
         $this->assertFileIsFromFixtureDirAndHasCorrectClass($firstSmartFileInfo);
         $this->assertFileIsFromFixtureDirAndHasCorrectClass($secondSmartFileInfo);
         // order agnostic file check
-        $this->assertTrue(\_PhpScoper069ebd53a518\Nette\Utils\Strings::endsWith($firstSmartFileInfo->getRelativeFilePath(), 'NestedDirectory/FileWithClass.php') && \_PhpScoper069ebd53a518\Nette\Utils\Strings::endsWith($secondSmartFileInfo->getRelativeFilePath(), 'NestedDirectory/EmptyFile.php') || \_PhpScoper069ebd53a518\Nette\Utils\Strings::endsWith($firstSmartFileInfo->getRelativeFilePath(), 'NestedDirectory/EmptyFile.php') && \_PhpScoper069ebd53a518\Nette\Utils\Strings::endsWith($secondSmartFileInfo->getRelativeFilePath(), 'NestedDirectory/FileWithClass.php'));
+        $this->assertTrue(\_PhpScoper326af2119eba\Nette\Utils\Strings::endsWith($firstSmartFileInfo->getRelativeFilePath(), 'NestedDirectory/FileWithClass.php') && \_PhpScoper326af2119eba\Nette\Utils\Strings::endsWith($secondSmartFileInfo->getRelativeFilePath(), 'NestedDirectory/EmptyFile.php') || \_PhpScoper326af2119eba\Nette\Utils\Strings::endsWith($firstSmartFileInfo->getRelativeFilePath(), 'NestedDirectory/EmptyFile.php') && \_PhpScoper326af2119eba\Nette\Utils\Strings::endsWith($secondSmartFileInfo->getRelativeFilePath(), 'NestedDirectory/FileWithClass.php'));
     }
     private function assertFileIsFromFixtureDirAndHasCorrectClass(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : void
     {
-        $this->assertInstanceOf(\_PhpScoper069ebd53a518\Symfony\Component\Finder\SplFileInfo::class, $smartFileInfo);
+        $this->assertInstanceOf(\_PhpScoper326af2119eba\Symfony\Component\Finder\SplFileInfo::class, $smartFileInfo);
         $this->assertStringEndsWith('NestedDirectory', $smartFileInfo->getRelativeDirectoryPath());
     }
 }

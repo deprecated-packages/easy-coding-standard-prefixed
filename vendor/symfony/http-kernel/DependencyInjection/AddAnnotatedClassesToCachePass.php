@@ -8,34 +8,34 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper069ebd53a518\Composer\Autoload\ClassLoader;
-use _PhpScoper069ebd53a518\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
-use _PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper069ebd53a518\Symfony\Component\ErrorHandler\DebugClassLoader;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper326af2119eba\Composer\Autoload\ClassLoader;
+use _PhpScoper326af2119eba\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
+use _PhpScoper326af2119eba\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper326af2119eba\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper326af2119eba\Symfony\Component\ErrorHandler\DebugClassLoader;
+use _PhpScoper326af2119eba\Symfony\Component\HttpKernel\Kernel;
 /**
  * Sets the classes to compile in the cache for the container.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class AddAnnotatedClassesToCachePass implements \_PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class AddAnnotatedClassesToCachePass implements \_PhpScoper326af2119eba\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $kernel;
-    public function __construct(\_PhpScoper069ebd53a518\Symfony\Component\HttpKernel\Kernel $kernel)
+    public function __construct(\_PhpScoper326af2119eba\Symfony\Component\HttpKernel\Kernel $kernel)
     {
         $this->kernel = $kernel;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoper326af2119eba\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $annotatedClasses = $this->kernel->getAnnotatedClassesToCompile();
         foreach ($container->getExtensions() as $extension) {
-            if ($extension instanceof \_PhpScoper069ebd53a518\Symfony\Component\HttpKernel\DependencyInjection\Extension) {
+            if ($extension instanceof \_PhpScoper326af2119eba\Symfony\Component\HttpKernel\DependencyInjection\Extension) {
                 $annotatedClasses = \array_merge($annotatedClasses, $extension->getAnnotatedClassesToCompile());
             }
         }
@@ -76,10 +76,10 @@ class AddAnnotatedClassesToCachePass implements \_PhpScoper069ebd53a518\Symfony\
             if (!\is_array($function)) {
                 continue;
             }
-            if ($function[0] instanceof \_PhpScoper069ebd53a518\Symfony\Component\ErrorHandler\DebugClassLoader || $function[0] instanceof \_PhpScoper069ebd53a518\Symfony\Component\Debug\DebugClassLoader) {
+            if ($function[0] instanceof \_PhpScoper326af2119eba\Symfony\Component\ErrorHandler\DebugClassLoader || $function[0] instanceof \_PhpScoper326af2119eba\Symfony\Component\Debug\DebugClassLoader) {
                 $function = $function[0]->getClassLoader();
             }
-            if (\is_array($function) && $function[0] instanceof \_PhpScoper069ebd53a518\Composer\Autoload\ClassLoader) {
+            if (\is_array($function) && $function[0] instanceof \_PhpScoper326af2119eba\Composer\Autoload\ClassLoader) {
                 $classes += \array_filter($function[0]->getClassMap());
             }
         }
@@ -103,9 +103,9 @@ class AddAnnotatedClassesToCachePass implements \_PhpScoper069ebd53a518\Symfony\
     }
     private function matchAnyRegexps(string $class, array $regexps) : bool
     {
-        $blacklisted = \false !== \strpos($class, 'Test');
+        $isTest = \false !== \strpos($class, 'Test');
         foreach ($regexps as $regex) {
-            if ($blacklisted && \false === \strpos($regex, 'Test')) {
+            if ($isTest && \false === \strpos($regex, 'Test')) {
                 continue;
             }
             if (\preg_match($regex, '\\' . $class)) {

@@ -25,6 +25,8 @@ final class OutputFormatterCollector
         if (isset($this->outputFormatters[$name])) {
             return $this->outputFormatters[$name];
         }
-        throw new \Symplify\EasyCodingStandard\Configuration\Exception\OutputFormatterNotFoundException(\sprintf('Output formatter "%s" not found. Use one of: "%s".', $name, \implode('", "', \array_keys($this->outputFormatters))));
+        $outputFormatterKeys = \array_keys($this->outputFormatters);
+        $errorMessage = \sprintf('Output formatter "%s" not found. Use one of: "%s".', $name, \implode('", "', $outputFormatterKeys));
+        throw new \Symplify\EasyCodingStandard\Configuration\Exception\OutputFormatterNotFoundException($errorMessage);
     }
 }

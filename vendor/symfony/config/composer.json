@@ -1,7 +1,7 @@
 {
     "name": "symfony\/config",
     "type": "library",
-    "description": "Symfony Config Component",
+    "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
     "keywords": [],
     "homepage": "https:\/\/symfony.com",
     "license": "MIT",
@@ -37,16 +37,11 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper069ebd53a518\\Symfony\\Component\\Config\\": ""
+            "_PhpScoper326af2119eba\\Symfony\\Component\\Config\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"
         ]
     },
-    "minimum-stability": "dev",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "5.1-dev"
-        }
-    }
+    "minimum-stability": "dev"
 }

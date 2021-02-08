@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation;
 
 /**
  * StreamedResponse represents a streamed HTTP response.
@@ -23,16 +23,11 @@ namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StreamedResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Response
+class StreamedResponse extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Response
 {
     protected $callback;
     protected $streamed;
     private $headersSent;
-    /**
-     * @param callable|null $callback A valid PHP callback or null to set it later
-     * @param int           $status   The response status code
-     * @param array         $headers  An array of response headers
-     */
     public function __construct(callable $callback = null, int $status = 200, array $headers = [])
     {
         parent::__construct(null, $status, $headers);
@@ -46,13 +41,14 @@ class StreamedResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFou
      * Factory method for chainability.
      *
      * @param callable|null $callback A valid PHP callback or null to set it later
-     * @param int           $status   The response status code
-     * @param array         $headers  An array of response headers
      *
      * @return static
+     *
+     * @deprecated since Symfony 5.1, use __construct() instead.
      */
-    public static function create($callback = null, $status = 200, $headers = [])
+    public static function create($callback = null, int $status = 200, array $headers = [])
     {
+        trigger_deprecation('symfony/http-foundation', '5.1', 'The "%s()" method is deprecated, use "new %s()" instead.', __METHOD__, static::class);
         return new static($callback, $status, $headers);
     }
     /**
@@ -106,7 +102,7 @@ class StreamedResponse extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFou
      *
      * @return $this
      */
-    public function setContent($content)
+    public function setContent(?string $content)
     {
         if (null !== $content) {
             throw new \LogicException('The content cannot be set on a StreamedResponse instance.');

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Attribute;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Attribute;
 
 /**
  * This class provides structured storage of session attributes using
@@ -16,7 +16,7 @@ namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Attrib
  *
  * @author Drak <drak@zikula.org>
  */
-class NamespacedAttributeBag extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
+class NamespacedAttributeBag extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
 {
     private $namespaceCharacter;
     /**
@@ -31,7 +31,7 @@ class NamespacedAttributeBag extends \_PhpScoper069ebd53a518\Symfony\Component\H
     /**
      * {@inheritdoc}
      */
-    public function has($name)
+    public function has(string $name)
     {
         // reference mismatch: if fixed, re-introduced in array_key_exists; keep as it is
         $attributes = $this->resolveAttributePath($name);
@@ -44,7 +44,7 @@ class NamespacedAttributeBag extends \_PhpScoper069ebd53a518\Symfony\Component\H
     /**
      * {@inheritdoc}
      */
-    public function get($name, $default = null)
+    public function get(string $name, $default = null)
     {
         // reference mismatch: if fixed, re-introduced in array_key_exists; keep as it is
         $attributes = $this->resolveAttributePath($name);
@@ -57,7 +57,7 @@ class NamespacedAttributeBag extends \_PhpScoper069ebd53a518\Symfony\Component\H
     /**
      * {@inheritdoc}
      */
-    public function set($name, $value)
+    public function set(string $name, $value)
     {
         $attributes =& $this->resolveAttributePath($name, \true);
         $name = $this->resolveKey($name);
@@ -66,7 +66,7 @@ class NamespacedAttributeBag extends \_PhpScoper069ebd53a518\Symfony\Component\H
     /**
      * {@inheritdoc}
      */
-    public function remove($name)
+    public function remove(string $name)
     {
         $retval = null;
         $attributes =& $this->resolveAttributePath($name);
@@ -87,7 +87,7 @@ class NamespacedAttributeBag extends \_PhpScoper069ebd53a518\Symfony\Component\H
      *
      * @return array|null
      */
-    protected function &resolveAttributePath($name, $writeContext = \false)
+    protected function &resolveAttributePath(string $name, bool $writeContext = \false)
     {
         $array =& $this->attributes;
         $name = 0 === \strpos($name, $this->namespaceCharacter) ? \substr($name, 1) : $name;
@@ -121,11 +121,9 @@ class NamespacedAttributeBag extends \_PhpScoper069ebd53a518\Symfony\Component\H
      *
      * This is the last part in a dot separated string.
      *
-     * @param string $name
-     *
      * @return string
      */
-    protected function resolveKey($name)
+    protected function resolveKey(string $name)
     {
         if (\false !== ($pos = \strrpos($name, $this->namespaceCharacter))) {
             $name = \substr($name, $pos + 1);

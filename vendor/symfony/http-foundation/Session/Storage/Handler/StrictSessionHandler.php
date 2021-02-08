@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
 /**
  * Adds basic `SessionUpdateTimestampHandlerInterface` behaviors to another `SessionHandlerInterface`.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class StrictSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class StrictSessionHandler extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $handler;
     private $doDestroy;
     public function __construct(\SessionHandlerInterface $handler)
     {
         if ($handler instanceof \SessionUpdateTimestampHandlerInterface) {
-            throw new \LogicException(\sprintf('"%s" is already an instance of "SessionUpdateTimestampHandlerInterface", you cannot wrap it with "%s".', \get_class($handler), self::class));
+            throw new \LogicException(\sprintf('"%s" is already an instance of "SessionUpdateTimestampHandlerInterface", you cannot wrap it with "%s".', \get_debug_type($handler), self::class));
         }
         $this->handler = $handler;
     }
@@ -37,7 +37,7 @@ class StrictSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\Htt
     /**
      * {@inheritdoc}
      */
-    protected function doRead($sessionId)
+    protected function doRead(string $sessionId)
     {
         return $this->handler->read($sessionId);
     }
@@ -51,7 +51,7 @@ class StrictSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\Htt
     /**
      * {@inheritdoc}
      */
-    protected function doWrite($sessionId, $data)
+    protected function doWrite(string $sessionId, string $data)
     {
         return $this->handler->write($sessionId, $data);
     }
@@ -67,7 +67,7 @@ class StrictSessionHandler extends \_PhpScoper069ebd53a518\Symfony\Component\Htt
     /**
      * {@inheritdoc}
      */
-    protected function doDestroy($sessionId)
+    protected function doDestroy(string $sessionId)
     {
         $this->doDestroy = \false;
         return $this->handler->destroy($sessionId);

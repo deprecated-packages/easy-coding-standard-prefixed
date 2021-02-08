@@ -5,14 +5,14 @@ namespace Symplify\EasyCodingStandard\Console\Reporter;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpCsFixer\Fixer\FixerInterface;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Style\SymfonyStyle;
 final class CheckerListReporter
 {
     /**
      * @var SymfonyStyle
      */
     private $symfonyStyle;
-    public function __construct(\_PhpScoper069ebd53a518\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
+    public function __construct(\_PhpScoper326af2119eba\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
     {
         $this->symfonyStyle = $symfonyStyle;
     }
@@ -21,7 +21,7 @@ final class CheckerListReporter
      */
     public function report(array $checkers, string $type) : void
     {
-        if (\count($checkers) === 0) {
+        if ($checkers === []) {
             return;
         }
         $checkerNames = \array_map(function ($fixer) : string {

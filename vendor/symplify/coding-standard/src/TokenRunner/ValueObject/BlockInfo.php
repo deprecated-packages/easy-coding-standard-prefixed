@@ -28,6 +28,9 @@ final class BlockInfo
     }
     public function contains(int $position) : bool
     {
-        return $position >= $this->start && $position <= $this->end;
+        if ($position < $this->start) {
+            return \false;
+        }
+        return $position <= $this->end;
     }
 }

@@ -3,17 +3,17 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
 final class InitCommand extends \Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
 {
     protected function configure() : void
     {
-        $this->setDescription('Generate rector.php configuration file');
+        $this->setDescription('Generate ecs.php configuration file');
     }
-    protected function execute(\_PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper069ebd53a518\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoper326af2119eba\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper326af2119eba\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $rectorConfigFiles = $this->smartFileSystem->exists(\getcwd() . '/ecs.php');
         if (!$rectorConfigFiles) {

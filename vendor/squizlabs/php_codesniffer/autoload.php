@@ -68,7 +68,7 @@ if (\class_exists('PHP_CodeSniffer\\Autoload', \false) === \false) {
                 }
                 if (\strpos(__DIR__, 'phar://') !== 0 && @\file_exists(__DIR__ . '/../../autoload.php') === \true) {
                     self::$composerAutoloader = (include __DIR__ . '/../../autoload.php');
-                    if (self::$composerAutoloader instanceof \_PhpScoper069ebd53a518\Composer\Autoload\ClassLoader) {
+                    if (self::$composerAutoloader instanceof \_PhpScoper326af2119eba\Composer\Autoload\ClassLoader) {
                         self::$composerAutoloader->unregister();
                         self::$composerAutoloader->register();
                     } else {
@@ -139,12 +139,34 @@ if (\class_exists('PHP_CodeSniffer\\Autoload', \false) === \false) {
             if (isset(self::$loadedClasses[$path]) === \true) {
                 return self::$loadedClasses[$path];
             }
-            $classes = \get_declared_classes();
-            $interfaces = \get_declared_interfaces();
-            $traits = \get_declared_traits();
+            $classesBeforeLoad = ['classes' => \get_declared_classes(), 'interfaces' => \get_declared_interfaces(), 'traits' => \get_declared_traits()];
             include $path;
+            $classesAfterLoad = ['classes' => \get_declared_classes(), 'interfaces' => \get_declared_interfaces(), 'traits' => \get_declared_traits()];
+            $className = self::determineLoadedClass($classesBeforeLoad, $classesAfterLoad);
+            self::$loadedClasses[$path] = $className;
+            self::$loadedFiles[$className] = $path;
+            return self::$loadedClasses[$path];
+        }
+        //end loadFile()
+        /**
+         * Determine which class was loaded based on the before and after lists of loaded classes.
+         *
+         * @param array $classesBeforeLoad The classes/interfaces/traits before the file was included.
+         * @param array $classesAfterLoad  The classes/interfaces/traits after the file was included.
+         *
+         * @return string The fully qualified name of the class in the loaded file.
+         */
+        public static function determineLoadedClass($classesBeforeLoad, $classesAfterLoad)
+        {
             $className = null;
-            $newClasses = \array_reverse(\array_diff(\get_declared_classes(), $classes));
+            $newClasses = \array_diff($classesAfterLoad['classes'], $classesBeforeLoad['classes']);
+            // Since PHP 7.4 get_declared_classes() does not guarantee any order, making
+            // it impossible to use order to determine which is the parent an which is the child.
+            // Let's reduce the list of candidates by removing all the classes known to be "parents".
+            // That way, at the end, only the "main" class just included will remain.
+            $newClasses = \array_reduce($newClasses, function ($remaining, $current) {
+                return \array_diff($remaining, \class_parents($current));
+            }, $newClasses);
             foreach ($newClasses as $name) {
                 if (isset(self::$loadedFiles[$name]) === \false) {
                     $className = $name;
@@ -152,7 +174,7 @@ if (\class_exists('PHP_CodeSniffer\\Autoload', \false) === \false) {
                 }
             }
             if ($className === null) {
-                $newClasses = \array_reverse(\array_diff(\get_declared_interfaces(), $interfaces));
+                $newClasses = \array_reverse(\array_diff($classesAfterLoad['interfaces'], $classesBeforeLoad['interfaces']));
                 foreach ($newClasses as $name) {
                     if (isset(self::$loadedFiles[$name]) === \false) {
                         $className = $name;
@@ -161,7 +183,7 @@ if (\class_exists('PHP_CodeSniffer\\Autoload', \false) === \false) {
                 }
             }
             if ($className === null) {
-                $newClasses = \array_reverse(\array_diff(\get_declared_traits(), $traits));
+                $newClasses = \array_reverse(\array_diff($classesAfterLoad['traits'], $classesBeforeLoad['traits']));
                 foreach ($newClasses as $name) {
                     if (isset(self::$loadedFiles[$name]) === \false) {
                         $className = $name;
@@ -169,11 +191,9 @@ if (\class_exists('PHP_CodeSniffer\\Autoload', \false) === \false) {
                     }
                 }
             }
-            self::$loadedClasses[$path] = $className;
-            self::$loadedFiles[$className] = $path;
-            return self::$loadedClasses[$path];
+            return $className;
         }
-        //end loadFile()
+        //end determineLoadedClass()
         /**
          * Adds a directory to search during autoloading.
          *

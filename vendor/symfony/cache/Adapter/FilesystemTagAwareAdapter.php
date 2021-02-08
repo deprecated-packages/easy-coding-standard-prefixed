@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper326af2119eba\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Traits\FilesystemTrait;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Traits\FilesystemTrait;
 /**
  * Stores tag id <> cache id relationship as a symlink, and lookup on invalidation calls.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class FilesystemTagAwareAdapter extends \_PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \_PhpScoper069ebd53a518\Symfony\Component\Cache\PruneableInterface
+class FilesystemTagAwareAdapter extends \_PhpScoper326af2119eba\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements \_PhpScoper326af2119eba\Symfony\Component\Cache\PruneableInterface
 {
     use FilesystemTrait {
         doClear as private doClearCache;
@@ -30,16 +30,16 @@ class FilesystemTagAwareAdapter extends \_PhpScoper069ebd53a518\Symfony\Componen
      * Folder used for tag symlinks.
      */
     private const TAG_FOLDER = 'tags';
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \_PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, \_PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
-        $this->marshaller = new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
+        $this->marshaller = new \_PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller\TagAwareMarshaller($marshaller);
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
     }
     /**
      * {@inheritdoc}
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $ok = $this->doClearCache($namespace);
         if ('' !== $namespace) {
@@ -57,11 +57,11 @@ class FilesystemTagAwareAdapter extends \_PhpScoper069ebd53a518\Symfony\Componen
                     $renamed = null;
                 }
                 for ($i = 0; $i < 38; ++$i) {
-                    if (!\file_exists($dir . $chars[$i])) {
+                    if (!\is_dir($dir . $chars[$i])) {
                         continue;
                     }
                     for ($j = 0; $j < 38; ++$j) {
-                        if (!\file_exists($d = $dir . $chars[$i] . \DIRECTORY_SEPARATOR . $chars[$j])) {
+                        if (!\is_dir($d = $dir . $chars[$i] . \DIRECTORY_SEPARATOR . $chars[$j])) {
                             continue;
                         }
                         foreach (\scandir($d, \SCANDIR_SORT_NONE) ?: [] as $link) {
@@ -83,7 +83,7 @@ class FilesystemTagAwareAdapter extends \_PhpScoper069ebd53a518\Symfony\Componen
     /**
      * {@inheritdoc}
      */
-    protected function doSave(array $values, ?int $lifetime, array $addTagData = [], array $removeTagData = []) : array
+    protected function doSave(array $values, int $lifetime, array $addTagData = [], array $removeTagData = []) : array
     {
         $failed = $this->doSaveCache($values, $lifetime);
         // Add Tags as symlinks
@@ -94,7 +94,7 @@ class FilesystemTagAwareAdapter extends \_PhpScoper069ebd53a518\Symfony\Componen
                     continue;
                 }
                 $file = $this->getFile($id);
-                if (!@\symlink($file, $this->getFile($id, \true, $tagFolder))) {
+                if (!@\symlink($file, $tagLink = $this->getFile($id, \true, $tagFolder)) && !\is_link($tagLink)) {
                     @\unlink($file);
                     $failed[] = $id;
                 }
@@ -119,7 +119,7 @@ class FilesystemTagAwareAdapter extends \_PhpScoper069ebd53a518\Symfony\Componen
     {
         foreach ($ids as $id) {
             $file = $this->getFile($id);
-            if (!\file_exists($file) || !($h = @\fopen($file, 'rb'))) {
+            if (!\is_file($file) || !($h = @\fopen($file, 'r'))) {
                 continue;
             }
             if ((\PHP_VERSION_ID >= 70300 || '\\' !== \DIRECTORY_SEPARATOR) && !@\unlink($file)) {
@@ -166,7 +166,7 @@ class FilesystemTagAwareAdapter extends \_PhpScoper069ebd53a518\Symfony\Componen
     protected function doInvalidate(array $tagIds) : bool
     {
         foreach ($tagIds as $tagId) {
-            if (!\file_exists($tagFolder = $this->getTagFolder($tagId))) {
+            if (!\is_dir($tagFolder = $this->getTagFolder($tagId))) {
                 continue;
             }
             \set_error_handler(static function () {

@@ -15,13 +15,13 @@ final class ChangesetTest extends \Symplify\PackageBuilder\Testing\AbstractKerne
     private $sniffFileProcessor;
     protected function setUp() : void
     {
-        static::bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/FileProcessorSource/ReferenceUsedNamesOnlySniff/easy-coding-standard.php']);
+        $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/FileProcessorSource/ReferenceUsedNamesOnlySniff/easy-coding-standard.php']);
         $this->sniffFileProcessor = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
     }
     public function testFileProvingNeedOfProperSupportOfChangesets() : void
     {
-        $smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/FileProcessorSource/ReferenceUsedNamesOnlySniff/FileProvingNeedOfProperSupportOfChangesets.php.inc');
+        $smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/FileProcessorSource/ReferenceUsedNamesOnlySniff/FileProveNeedSupportChangesets.php.inc');
         $changedContent = $this->sniffFileProcessor->processFile($smartFileInfo);
-        $this->assertStringEqualsFile(__DIR__ . '/FileProcessorSource/ReferenceUsedNamesOnlySniff/FileProvingNeedOfProperSupportOfChangesets-fixed.php.inc', $changedContent);
+        $this->assertStringEqualsFile(__DIR__ . '/FileProcessorSource/ReferenceUsedNamesOnlySniff/FileProveNeedSupportChangesets-fix.php.inc', $changedContent);
     }
 }

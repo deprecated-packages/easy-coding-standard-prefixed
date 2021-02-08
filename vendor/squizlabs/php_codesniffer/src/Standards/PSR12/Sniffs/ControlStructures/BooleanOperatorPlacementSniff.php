@@ -66,42 +66,68 @@ class BooleanOperatorPlacementSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             if ($operator === \false) {
                 break;
             }
-            $operators[] = $operator;
             $prev = $phpcsFile->findPrevious(\T_WHITESPACE, $operator - 1, $parenOpener, \true);
             if ($prev === \false) {
                 // Parse error.
                 return;
-            }
-            if ($tokens[$prev]['line'] < $tokens[$operator]['line']) {
-                // The boolean operator is the first content on the line.
-                if ($position === null) {
-                    $position = 'first';
-                }
-                if ($position !== 'first') {
-                    $error = \true;
-                }
-                continue;
             }
             $next = $phpcsFile->findNext(\T_WHITESPACE, $operator + 1, $parenCloser, \true);
             if ($next === \false) {
                 // Parse error.
                 return;
             }
+            $firstOnLine = \false;
+            $lastOnLine = \false;
+            if ($tokens[$prev]['line'] < $tokens[$operator]['line']) {
+                // The boolean operator is the first content on the line.
+                $firstOnLine = \true;
+            }
             if ($tokens[$next]['line'] > $tokens[$operator]['line']) {
                 // The boolean operator is the last content on the line.
+                $lastOnLine = \true;
+            }
+            if ($firstOnLine === \true && $lastOnLine === \true) {
+                // The operator is the only content on the line.
+                // Don't record it because we can't determine
+                // placement information from looking at it.
+                continue;
+            }
+            $operators[] = $operator;
+            if ($firstOnLine === \false && $lastOnLine === \false) {
+                // It's in the middle of content, so we can't determine
+                // placement information from looking at it, but we may
+                // still need to process it.
+                continue;
+            }
+            if ($firstOnLine === \true) {
+                if ($position === null) {
+                    $position = 'first';
+                }
+                if ($position !== 'first') {
+                    $error = \true;
+                }
+            } else {
                 if ($position === null) {
                     $position = 'last';
                 }
                 if ($position !== 'last') {
                     $error = \true;
                 }
-                continue;
             }
         } while ($operator !== \false);
         if ($error === \false) {
             return;
         }
-        $error = 'Boolean operators between conditions must be at the beginning or end of the line, but not both';
+        switch ($this->allowOnly) {
+            case 'first':
+                $error = 'Boolean operators between conditions must be at the beginning of the line';
+                break;
+            case 'last':
+                $error = 'Boolean operators between conditions must be at the end of the line';
+                break;
+            default:
+                $error = 'Boolean operators between conditions must be at the beginning or end of the line, but not both';
+        }
         $fix = $phpcsFile->addFixableError($error, $stackPtr, 'FoundMixed');
         if ($fix === \false) {
             return;

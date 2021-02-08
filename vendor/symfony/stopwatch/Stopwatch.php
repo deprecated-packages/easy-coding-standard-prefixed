@@ -8,15 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Stopwatch;
+namespace _PhpScoper326af2119eba\Symfony\Component\Stopwatch;
 
+use _PhpScoper326af2119eba\Symfony\Contracts\Service\ResetInterface;
+// Help opcache.preload discover always-needed symbols
+\class_exists(\_PhpScoper326af2119eba\Symfony\Component\Stopwatch\Section::class);
 /**
  * Stopwatch provides a way to profile code.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Stopwatch
+class Stopwatch implements \_PhpScoper326af2119eba\Symfony\Contracts\Service\ResetInterface
 {
+    /**
+     * @var bool
+     */
+    private $morePrecision;
     /**
      * @var Section[]
      */
@@ -25,9 +32,13 @@ class Stopwatch
      * @var Section[]
      */
     private $activeSections;
-    public function __construct()
+    /**
+     * @param bool $morePrecision If true, time is stored as float to keep the original microsecond precision
+     */
+    public function __construct(bool $morePrecision = \false)
     {
-        $this->sections = $this->activeSections = array('__root__' => new \_PhpScoper069ebd53a518\Symfony\Component\Stopwatch\Section('__root__'));
+        $this->morePrecision = $morePrecision;
+        $this->reset();
     }
     /**
      * @return Section[]
@@ -43,7 +54,7 @@ class Stopwatch
      *
      * @throws \LogicException When the section to re-open is not reachable
      */
-    public function openSection($id = null)
+    public function openSection(string $id = null)
     {
         $current = \end($this->activeSections);
         if (null !== $id && null === $current->get($id)) {
@@ -60,11 +71,9 @@ class Stopwatch
      *
      * @see getSectionEvents()
      *
-     * @param string $id The identifier of the section
-     *
      * @throws \LogicException When there's no started section to be stopped
      */
-    public function stopSection($id)
+    public function stopSection(string $id)
     {
         $this->stop('__section__');
         if (1 == \count($this->activeSections)) {
@@ -76,68 +85,62 @@ class Stopwatch
     /**
      * Starts an event.
      *
-     * @param string $name     The event name
-     * @param string $category The event category
-     *
-     * @return StopwatchEvent A StopwatchEvent instance
+     * @return StopwatchEvent
      */
-    public function start($name, $category = null)
+    public function start(string $name, string $category = null)
     {
         return \end($this->activeSections)->startEvent($name, $category);
     }
     /**
      * Checks if the event was started.
      *
-     * @param string $name The event name
-     *
      * @return bool
      */
-    public function isStarted($name)
+    public function isStarted(string $name)
     {
         return \end($this->activeSections)->isEventStarted($name);
     }
     /**
      * Stops an event.
      *
-     * @param string $name The event name
-     *
-     * @return StopwatchEvent A StopwatchEvent instance
+     * @return StopwatchEvent
      */
-    public function stop($name)
+    public function stop(string $name)
     {
         return \end($this->activeSections)->stopEvent($name);
     }
     /**
      * Stops then restarts an event.
      *
-     * @param string $name The event name
-     *
-     * @return StopwatchEvent A StopwatchEvent instance
+     * @return StopwatchEvent
      */
-    public function lap($name)
+    public function lap(string $name)
     {
         return \end($this->activeSections)->stopEvent($name)->start();
     }
     /**
      * Returns a specific event by name.
      *
-     * @param string $name The event name
-     *
-     * @return StopwatchEvent A StopwatchEvent instance
+     * @return StopwatchEvent
      */
-    public function getEvent($name)
+    public function getEvent(string $name)
     {
         return \end($this->activeSections)->getEvent($name);
     }
     /**
      * Gets all events for a given section.
      *
-     * @param string $id A section identifier
-     *
-     * @return StopwatchEvent[] An array of StopwatchEvent instances
+     * @return StopwatchEvent[]
      */
-    public function getSectionEvents($id)
+    public function getSectionEvents(string $id)
     {
-        return isset($this->sections[$id]) ? $this->sections[$id]->getEvents() : array();
+        return isset($this->sections[$id]) ? $this->sections[$id]->getEvents() : [];
+    }
+    /**
+     * Resets the stopwatch to its original state.
+     */
+    public function reset()
+    {
+        $this->sections = $this->activeSections = ['__root__' => new \_PhpScoper326af2119eba\Symfony\Component\Stopwatch\Section(null, $this->morePrecision)];
     }
 }

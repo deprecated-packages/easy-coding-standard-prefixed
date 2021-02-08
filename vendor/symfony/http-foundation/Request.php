@@ -8,11 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation;
 
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\JsonException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\SessionInterface;
+// Help opcache.preload discover always-needed symbols
+\class_exists(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeader::class);
+\class_exists(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\FileBag::class);
+\class_exists(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderBag::class);
+\class_exists(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderUtils::class);
+\class_exists(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\InputBag::class);
+\class_exists(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ParameterBag::class);
+\class_exists(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ServerBag::class);
 /**
  * Request represents an HTTP request.
  *
@@ -28,26 +37,30 @@ use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\SessionInter
  */
 class Request
 {
-    const HEADER_FORWARDED = 0b1;
+    public const HEADER_FORWARDED = 0b1;
     // When using RFC 7239
-    const HEADER_X_FORWARDED_FOR = 0b10;
-    const HEADER_X_FORWARDED_HOST = 0b100;
-    const HEADER_X_FORWARDED_PROTO = 0b1000;
-    const HEADER_X_FORWARDED_PORT = 0b10000;
-    const HEADER_X_FORWARDED_ALL = 0b11110;
-    // All "X-Forwarded-*" headers
-    const HEADER_X_FORWARDED_AWS_ELB = 0b11010;
+    public const HEADER_X_FORWARDED_FOR = 0b10;
+    public const HEADER_X_FORWARDED_HOST = 0b100;
+    public const HEADER_X_FORWARDED_PROTO = 0b1000;
+    public const HEADER_X_FORWARDED_PORT = 0b10000;
+    public const HEADER_X_FORWARDED_PREFIX = 0b100000;
+    /** @deprecated since Symfony 5.2, use either "HEADER_X_FORWARDED_FOR | HEADER_X_FORWARDED_HOST | HEADER_X_FORWARDED_PORT | HEADER_X_FORWARDED_PROTO" or "HEADER_X_FORWARDED_AWS_ELB" or "HEADER_X_FORWARDED_TRAEFIK" constants instead. */
+    public const HEADER_X_FORWARDED_ALL = 0b1011110;
+    // All "X-Forwarded-*" headers sent by "usual" reverse proxy
+    public const HEADER_X_FORWARDED_AWS_ELB = 0b11010;
     // AWS ELB doesn't send X-Forwarded-Host
-    const METHOD_HEAD = 'HEAD';
-    const METHOD_GET = 'GET';
-    const METHOD_POST = 'POST';
-    const METHOD_PUT = 'PUT';
-    const METHOD_PATCH = 'PATCH';
-    const METHOD_DELETE = 'DELETE';
-    const METHOD_PURGE = 'PURGE';
-    const METHOD_OPTIONS = 'OPTIONS';
-    const METHOD_TRACE = 'TRACE';
-    const METHOD_CONNECT = 'CONNECT';
+    public const HEADER_X_FORWARDED_TRAEFIK = 0b111110;
+    // All "X-Forwarded-*" headers sent by Traefik reverse proxy
+    public const METHOD_HEAD = 'HEAD';
+    public const METHOD_GET = 'GET';
+    public const METHOD_POST = 'POST';
+    public const METHOD_PUT = 'PUT';
+    public const METHOD_PATCH = 'PATCH';
+    public const METHOD_DELETE = 'DELETE';
+    public const METHOD_PURGE = 'PURGE';
+    public const METHOD_OPTIONS = 'OPTIONS';
+    public const METHOD_TRACE = 'TRACE';
+    public const METHOD_CONNECT = 'CONNECT';
     /**
      * @var string[]
      */
@@ -70,13 +83,13 @@ class Request
     /**
      * Request body parameters ($_POST).
      *
-     * @var ParameterBag
+     * @var InputBag|ParameterBag
      */
     public $request;
     /**
      * Query string parameters ($_GET).
      *
-     * @var ParameterBag
+     * @var InputBag
      */
     public $query;
     /**
@@ -94,7 +107,7 @@ class Request
     /**
      * Cookies ($_COOKIE).
      *
-     * @var ParameterBag
+     * @var InputBag
      */
     public $cookies;
     /**
@@ -148,7 +161,7 @@ class Request
      */
     protected $format;
     /**
-     * @var SessionInterface
+     * @var SessionInterface|callable
      */
     protected $session;
     /**
@@ -170,8 +183,12 @@ class Request
     private $preferredFormat;
     private $isHostValid = \true;
     private $isForwardedValid = \true;
+    /**
+     * @var bool|null
+     */
+    private $isSafeContentPreferred;
     private static $trustedHeaderSet = -1;
-    private static $forwardedParams = [self::HEADER_X_FORWARDED_FOR => 'for', self::HEADER_X_FORWARDED_HOST => 'host', self::HEADER_X_FORWARDED_PROTO => 'proto', self::HEADER_X_FORWARDED_PORT => 'host'];
+    private const FORWARDED_PARAMS = [self::HEADER_X_FORWARDED_FOR => 'for', self::HEADER_X_FORWARDED_HOST => 'host', self::HEADER_X_FORWARDED_PROTO => 'proto', self::HEADER_X_FORWARDED_PORT => 'host'];
     /**
      * Names for headers that can be trusted when
      * using trusted proxies.
@@ -181,7 +198,7 @@ class Request
      * The other headers are non-standard, but widely used
      * by popular reverse proxies (like Apache mod_proxy or Amazon EC2).
      */
-    private static $trustedHeaders = [self::HEADER_FORWARDED => 'FORWARDED', self::HEADER_X_FORWARDED_FOR => 'X_FORWARDED_FOR', self::HEADER_X_FORWARDED_HOST => 'X_FORWARDED_HOST', self::HEADER_X_FORWARDED_PROTO => 'X_FORWARDED_PROTO', self::HEADER_X_FORWARDED_PORT => 'X_FORWARDED_PORT'];
+    private const TRUSTED_HEADERS = [self::HEADER_FORWARDED => 'FORWARDED', self::HEADER_X_FORWARDED_FOR => 'X_FORWARDED_FOR', self::HEADER_X_FORWARDED_HOST => 'X_FORWARDED_HOST', self::HEADER_X_FORWARDED_PROTO => 'X_FORWARDED_PROTO', self::HEADER_X_FORWARDED_PORT => 'X_FORWARDED_PORT', self::HEADER_X_FORWARDED_PREFIX => 'X_FORWARDED_PREFIX'];
     /**
      * @param array                $query      The GET parameters
      * @param array                $request    The POST parameters
@@ -210,13 +227,13 @@ class Request
      */
     public function initialize(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
     {
-        $this->request = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag($request);
-        $this->query = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag($query);
-        $this->attributes = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag($attributes);
-        $this->cookies = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag($cookies);
-        $this->files = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\FileBag($files);
-        $this->server = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ServerBag($server);
-        $this->headers = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\HeaderBag($this->server->getHeaders());
+        $this->request = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ParameterBag($request);
+        $this->query = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\InputBag($query);
+        $this->attributes = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ParameterBag($attributes);
+        $this->cookies = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\InputBag($cookies);
+        $this->files = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\FileBag($files);
+        $this->server = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ServerBag($server);
+        $this->headers = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderBag($this->server->getHeaders());
         $this->content = $content;
         $this->languages = null;
         $this->charsets = null;
@@ -237,9 +254,11 @@ class Request
     public static function createFromGlobals()
     {
         $request = self::createRequestFromFactory($_GET, $_POST, [], $_COOKIE, $_FILES, $_SERVER);
-        if (0 === \strpos($request->headers->get('CONTENT_TYPE'), 'application/x-www-form-urlencoded') && \in_array(\strtoupper($request->server->get('REQUEST_METHOD', 'GET')), ['PUT', 'DELETE', 'PATCH'])) {
+        if ($_POST) {
+            $request->request = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\InputBag($_POST);
+        } elseif (0 === \strpos($request->headers->get('CONTENT_TYPE'), 'application/x-www-form-urlencoded') && \in_array(\strtoupper($request->server->get('REQUEST_METHOD', 'GET')), ['PUT', 'DELETE', 'PATCH'])) {
             \parse_str($request->getContent(), $data);
-            $request->request = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag($data);
+            $request->request = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\InputBag($data);
         }
         return $request;
     }
@@ -259,7 +278,7 @@ class Request
      *
      * @return static
      */
-    public static function create($uri, $method = 'GET', $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
+    public static function create(string $uri, string $method = 'GET', array $parameters = [], array $cookies = [], array $files = [], array $server = [], $content = null)
     {
         $server = \array_replace(['SERVER_NAME' => 'localhost', 'SERVER_PORT' => 80, 'HTTP_HOST' => 'localhost', 'HTTP_USER_AGENT' => 'Symfony', 'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'HTTP_ACCEPT_LANGUAGE' => 'en-us,en;q=0.5', 'HTTP_ACCEPT_CHARSET' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.7', 'REMOTE_ADDR' => '127.0.0.1', 'SCRIPT_NAME' => '', 'SCRIPT_FILENAME' => '', 'SERVER_PROTOCOL' => 'HTTP/1.1', 'REQUEST_TIME' => \time()], $server);
         $server['PATH_INFO'] = '';
@@ -331,10 +350,8 @@ class Request
      * This is mainly useful when you need to override the Request class
      * to keep BC with an existing system. It should not be used for any
      * other purpose.
-     *
-     * @param callable|null $callable A PHP callable
      */
-    public static function setFactory($callable)
+    public static function setFactory(?callable $callable)
     {
         self::$requestFactory = $callable;
     }
@@ -354,23 +371,23 @@ class Request
     {
         $dup = clone $this;
         if (null !== $query) {
-            $dup->query = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag($query);
+            $dup->query = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\InputBag($query);
         }
         if (null !== $request) {
-            $dup->request = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag($request);
+            $dup->request = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ParameterBag($request);
         }
         if (null !== $attributes) {
-            $dup->attributes = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag($attributes);
+            $dup->attributes = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ParameterBag($attributes);
         }
         if (null !== $cookies) {
-            $dup->cookies = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag($cookies);
+            $dup->cookies = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\InputBag($cookies);
         }
         if (null !== $files) {
-            $dup->files = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\FileBag($files);
+            $dup->files = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\FileBag($files);
         }
         if (null !== $server) {
-            $dup->server = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ServerBag($server);
-            $dup->headers = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\HeaderBag($dup->server->getHeaders());
+            $dup->server = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ServerBag($server);
+            $dup->headers = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderBag($dup->server->getHeaders());
         }
         $dup->languages = null;
         $dup->charsets = null;
@@ -413,14 +430,7 @@ class Request
      */
     public function __toString()
     {
-        try {
-            $content = $this->getContent();
-        } catch (\LogicException $e) {
-            if (\PHP_VERSION_ID >= 70400) {
-                throw $e;
-            }
-            return \trigger_error($e, \E_USER_ERROR);
-        }
+        $content = $this->getContent();
         $cookieHeader = '';
         $cookies = [];
         foreach ($this->cookies as $k => $v) {
@@ -468,11 +478,12 @@ class Request
      *
      * @param array $proxies          A list of trusted proxies, the string 'REMOTE_ADDR' will be replaced with $_SERVER['REMOTE_ADDR']
      * @param int   $trustedHeaderSet A bit field of Request::HEADER_*, to set which headers to trust from your proxies
-     *
-     * @throws \InvalidArgumentException When $trustedHeaderSet is invalid
      */
     public static function setTrustedProxies(array $proxies, int $trustedHeaderSet)
     {
+        if (self::HEADER_X_FORWARDED_ALL === $trustedHeaderSet) {
+            trigger_deprecation('symfony/http-foundation', '5.2', 'The "HEADER_X_FORWARDED_ALL" constant is deprecated, use either "HEADER_X_FORWARDED_FOR | HEADER_X_FORWARDED_HOST | HEADER_X_FORWARDED_PORT | HEADER_X_FORWARDED_PROTO" or "HEADER_X_FORWARDED_AWS_ELB" or "HEADER_X_FORWARDED_TRAEFIK" constants instead.');
+        }
         self::$trustedProxies = \array_reduce($proxies, function ($proxies, $proxy) {
             if ('REMOTE_ADDR' !== $proxy) {
                 $proxies[] = $proxy;
@@ -531,16 +542,14 @@ class Request
      * It builds a normalized query string, where keys/value pairs are alphabetized,
      * have consistent escaping and unneeded delimiters are removed.
      *
-     * @param string $qs Query string
-     *
      * @return string A normalized query string for the Request
      */
-    public static function normalizeQueryString($qs)
+    public static function normalizeQueryString(?string $qs)
     {
         if ('' === ($qs ?? '')) {
             return '';
         }
-        \parse_str($qs, $qs);
+        $qs = \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderUtils::parseQuery($qs);
         \ksort($qs);
         return \http_build_query($qs, '', '&', \PHP_QUERY_RFC3986);
     }
@@ -577,21 +586,20 @@ class Request
      *
      * Order of precedence: PATH (routing placeholders or custom attributes), GET, BODY
      *
-     * @param string $key     The key
-     * @param mixed  $default The default value if the parameter key does not exist
+     * @param mixed $default The default value if the parameter key does not exist
      *
      * @return mixed
      */
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
         if ($this !== ($result = $this->attributes->get($key, $this))) {
             return $result;
         }
-        if ($this !== ($result = $this->query->get($key, $this))) {
-            return $result;
+        if ($this->query->has($key)) {
+            return $this->query->all()[$key];
         }
-        if ($this !== ($result = $this->request->get($key, $this))) {
-            return $result;
+        if ($this->request->has($key)) {
+            return $this->request->all()[$key];
         }
         return $default;
     }
@@ -603,12 +611,11 @@ class Request
     public function getSession()
     {
         $session = $this->session;
-        if (!$session instanceof \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\SessionInterface && null !== $session) {
+        if (!$session instanceof \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\SessionInterface && null !== $session) {
             $this->setSession($session = $session());
         }
         if (null === $session) {
-            @\trigger_error(\sprintf('Calling "%s()" when no session has been set is deprecated since Symfony 4.1 and will throw an exception in 5.0. Use "hasSession()" instead.', __METHOD__), \E_USER_DEPRECATED);
-            // throw new \BadMethodCallException('Session has not been set');
+            throw new \BadMethodCallException('Session has not been set.');
         }
         return $session;
     }
@@ -636,7 +643,7 @@ class Request
     {
         return null !== $this->session;
     }
-    public function setSession(\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Session\SessionInterface $session)
+    public function setSession(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Session\SessionInterface $session)
     {
         $this->session = $session;
     }
@@ -751,6 +758,21 @@ class Request
      * @return string The raw URL (i.e. not urldecoded)
      */
     public function getBaseUrl()
+    {
+        $trustedPrefix = '';
+        // the proxy prefix must be prepended to any prefix being needed at the webserver level
+        if ($this->isFromTrustedProxy() && ($trustedPrefixValues = $this->getTrustedValues(self::HEADER_X_FORWARDED_PREFIX))) {
+            $trustedPrefix = \rtrim($trustedPrefixValues[0], '/');
+        }
+        return $trustedPrefix . $this->getBaseUrlReal();
+    }
+    /**
+     * Returns the real base URL received by the webserver from which this request is executed.
+     * The URL does not include trusted reverse proxy prefix.
+     *
+     * @return string The raw URL (i.e. not urldecoded)
+     */
+    private function getBaseUrlReal()
     {
         if (null === $this->baseUrl) {
             $this->baseUrl = $this->prepareBaseUrl();
@@ -888,7 +910,7 @@ class Request
      *
      * @return string The normalized URI for the path
      */
-    public function getUriForPath($path)
+    public function getUriForPath(string $path)
     {
         return $this->getSchemeAndHttpHost() . $this->getBaseUrl() . $path;
     }
@@ -907,11 +929,9 @@ class Request
      * - "/a/b/c/other" -> "other"
      * - "/a/x/y"       -> "../../x/y"
      *
-     * @param string $path The target path
-     *
      * @return string The relative target path
      */
-    public function getRelativeUriForPath($path)
+    public function getRelativeUriForPath(string $path)
     {
         // be sure that we are dealing with an absolute path
         if (!isset($path[0]) || '/' !== $path[0]) {
@@ -1002,7 +1022,7 @@ class Request
                 return '';
             }
             $this->isHostValid = \false;
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException(\sprintf('Invalid Host "%s".', $host));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException(\sprintf('Invalid Host "%s".', $host));
         }
         if (\count(self::$trustedHostPatterns) > 0) {
             // to avoid host header injection attacks, you should provide a list of trusted host patterns
@@ -1019,16 +1039,14 @@ class Request
                 return '';
             }
             $this->isHostValid = \false;
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException(\sprintf('Untrusted Host "%s".', $host));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException(\sprintf('Untrusted Host "%s".', $host));
         }
         return $host;
     }
     /**
      * Sets the request method.
-     *
-     * @param string $method
      */
-    public function setMethod($method)
+    public function setMethod(string $method)
     {
         $this->method = null;
         $this->server->set('REQUEST_METHOD', $method);
@@ -1069,7 +1087,7 @@ class Request
             return $this->method = $method;
         }
         if (!\preg_match('/^[A-Z]++$/D', $method)) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException(\sprintf('Invalid method override "%s".', $method));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException(\sprintf('Invalid method override "%s".', $method));
         }
         return $this->method = $method;
     }
@@ -1087,11 +1105,9 @@ class Request
     /**
      * Gets the mime type associated with the format.
      *
-     * @param string $format The format
-     *
      * @return string|null The associated mime type (null if not found)
      */
-    public function getMimeType($format)
+    public function getMimeType(string $format)
     {
         if (null === static::$formats) {
             static::initializeFormats();
@@ -1101,25 +1117,21 @@ class Request
     /**
      * Gets the mime types associated with the format.
      *
-     * @param string $format The format
-     *
      * @return array The associated mime types
      */
-    public static function getMimeTypes($format)
+    public static function getMimeTypes(string $format)
     {
         if (null === static::$formats) {
             static::initializeFormats();
         }
-        return isset(static::$formats[$format]) ? static::$formats[$format] : [];
+        return static::$formats[$format] ?? [];
     }
     /**
      * Gets the format associated with the mime type.
      *
-     * @param string $mimeType The associated mime type
-     *
      * @return string|null The format (null if not found)
      */
-    public function getFormat($mimeType)
+    public function getFormat(?string $mimeType)
     {
         $canonicalMimeType = null;
         if (\false !== ($pos = \strpos($mimeType, ';'))) {
@@ -1141,10 +1153,9 @@ class Request
     /**
      * Associates a format with mime types.
      *
-     * @param string       $format    The format
      * @param string|array $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
      */
-    public function setFormat($format, $mimeTypes)
+    public function setFormat(?string $format, $mimeTypes)
     {
         if (null === static::$formats) {
             static::initializeFormats();
@@ -1162,11 +1173,9 @@ class Request
      *
      * @see getPreferredFormat
      *
-     * @param string|null $default The default format
-     *
      * @return string|null The request format
      */
-    public function getRequestFormat($default = 'html')
+    public function getRequestFormat(?string $default = 'html')
     {
         if (null === $this->format) {
             $this->format = $this->attributes->get('_format');
@@ -1175,10 +1184,8 @@ class Request
     }
     /**
      * Sets the request format.
-     *
-     * @param string $format The request format
      */
-    public function setRequestFormat($format)
+    public function setRequestFormat(?string $format)
     {
         $this->format = $format;
     }
@@ -1193,10 +1200,8 @@ class Request
     }
     /**
      * Sets the default locale.
-     *
-     * @param string $locale
      */
-    public function setDefaultLocale($locale)
+    public function setDefaultLocale(string $locale)
     {
         $this->defaultLocale = $locale;
         if (null === $this->locale) {
@@ -1214,10 +1219,8 @@ class Request
     }
     /**
      * Sets the locale.
-     *
-     * @param string $locale
      */
-    public function setLocale($locale)
+    public function setLocale(string $locale)
     {
         $this->setPhpDefaultLocale($this->locale = $locale);
     }
@@ -1237,7 +1240,7 @@ class Request
      *
      * @return bool
      */
-    public function isMethod($method)
+    public function isMethod(string $method)
     {
         return $this->getMethod() === \strtoupper($method);
     }
@@ -1250,9 +1253,6 @@ class Request
      */
     public function isMethodSafe()
     {
-        if (\func_num_args() > 0) {
-            @\trigger_error(\sprintf('Passing arguments to "%s()" has been deprecated since Symfony 4.4; use "%s::isMethodCacheable()" to check if the method is cacheable instead.', __METHOD__, __CLASS__), \E_USER_DEPRECATED);
-        }
         return \in_array($this->getMethod(), ['GET', 'HEAD', 'OPTIONS', 'TRACE']);
     }
     /**
@@ -1302,10 +1302,8 @@ class Request
      * @param bool $asResource If true, a resource will be returned
      *
      * @return string|resource The request body content or a resource to read the body stream
-     *
-     * @throws \LogicException
      */
-    public function getContent($asResource = \false)
+    public function getContent(bool $asResource = \false)
     {
         $currentContentIsResource = \is_resource($this->content);
         if (\true === $asResource) {
@@ -1321,7 +1319,7 @@ class Request
                 return $resource;
             }
             $this->content = \false;
-            return \fopen('php://input', 'rb');
+            return \fopen('php://input', 'r');
         }
         if ($currentContentIsResource) {
             \rewind($this->content);
@@ -1331,6 +1329,31 @@ class Request
             $this->content = \file_get_contents('php://input');
         }
         return $this->content;
+    }
+    /**
+     * Gets the request body decoded as array, typically from a JSON payload.
+     *
+     * @throws JsonException When the body cannot be decoded to an array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        if ('' === ($content = $this->getContent())) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\JsonException('Response body is empty.');
+        }
+        try {
+            $content = \json_decode($content, \true, 512, \JSON_BIGINT_AS_STRING | (\PHP_VERSION_ID >= 70300 ? \JSON_THROW_ON_ERROR : 0));
+        } catch (\JsonException $e) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\JsonException('Could not decode request body.', $e->getCode(), $e);
+        }
+        if (\PHP_VERSION_ID < 70300 && \JSON_ERROR_NONE !== \json_last_error()) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\JsonException('Could not decode request body: ' . \json_last_error_msg(), \json_last_error());
+        }
+        if (!\is_array($content)) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\JsonException(\sprintf('JSON content was expected to decode to an array, "%s" returned.', \get_debug_type($content)));
+        }
+        return $content;
     }
     /**
      * Gets the Etags.
@@ -1350,23 +1373,23 @@ class Request
     }
     /**
      * Gets the preferred format for the response by inspecting, in the following order:
-     *   * the request format set using setRequestFormat
-     *   * the values of the Accept HTTP header
-     *   * the content type of the body of the request.
+     *   * the request format set using setRequestFormat;
+     *   * the values of the Accept HTTP header.
+     *
+     * Note that if you use this method, you should send the "Vary: Accept" header
+     * in the response to prevent any issues with intermediary HTTP caches.
      */
     public function getPreferredFormat(?string $default = 'html') : ?string
     {
-        if (null !== $this->preferredFormat) {
+        if (null !== $this->preferredFormat || null !== ($this->preferredFormat = $this->getRequestFormat(null))) {
             return $this->preferredFormat;
         }
-        $preferredFormat = null;
-        foreach ($this->getAcceptableContentTypes() as $contentType) {
-            if ($preferredFormat = $this->getFormat($contentType)) {
-                break;
+        foreach ($this->getAcceptableContentTypes() as $mimeType) {
+            if ($this->preferredFormat = $this->getFormat($mimeType)) {
+                return $this->preferredFormat;
             }
         }
-        $this->preferredFormat = $this->getRequestFormat($preferredFormat ?: $this->getContentType());
-        return $this->preferredFormat ?: $default;
+        return $default;
     }
     /**
      * Returns the preferred language.
@@ -1379,7 +1402,7 @@ class Request
     {
         $preferredLanguages = $this->getLanguages();
         if (empty($locales)) {
-            return isset($preferredLanguages[0]) ? $preferredLanguages[0] : null;
+            return $preferredLanguages[0] ?? null;
         }
         if (!$preferredLanguages) {
             return $locales[0];
@@ -1395,7 +1418,7 @@ class Request
             }
         }
         $preferredLanguages = \array_values(\array_intersect($extendedPreferredLanguages, $locales));
-        return isset($preferredLanguages[0]) ? $preferredLanguages[0] : $locales[0];
+        return $preferredLanguages[0] ?? $locales[0];
     }
     /**
      * Gets a list of languages acceptable by the client browser.
@@ -1407,7 +1430,7 @@ class Request
         if (null !== $this->languages) {
             return $this->languages;
         }
-        $languages = \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\AcceptHeader::fromString($this->headers->get('Accept-Language'))->all();
+        $languages = \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeader::fromString($this->headers->get('Accept-Language'))->all();
         $this->languages = [];
         foreach ($languages as $lang => $acceptHeaderItem) {
             if (\false !== \strpos($lang, '-')) {
@@ -1443,7 +1466,7 @@ class Request
         if (null !== $this->charsets) {
             return $this->charsets;
         }
-        return $this->charsets = \array_keys(\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\AcceptHeader::fromString($this->headers->get('Accept-Charset'))->all());
+        return $this->charsets = \array_keys(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeader::fromString($this->headers->get('Accept-Charset'))->all());
     }
     /**
      * Gets a list of encodings acceptable by the client browser.
@@ -1455,7 +1478,7 @@ class Request
         if (null !== $this->encodings) {
             return $this->encodings;
         }
-        return $this->encodings = \array_keys(\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\AcceptHeader::fromString($this->headers->get('Accept-Encoding'))->all());
+        return $this->encodings = \array_keys(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeader::fromString($this->headers->get('Accept-Encoding'))->all());
     }
     /**
      * Gets a list of content types acceptable by the client browser.
@@ -1467,7 +1490,7 @@ class Request
         if (null !== $this->acceptableContentTypes) {
             return $this->acceptableContentTypes;
         }
-        return $this->acceptableContentTypes = \array_keys(\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\AcceptHeader::fromString($this->headers->get('Accept'))->all());
+        return $this->acceptableContentTypes = \array_keys(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeader::fromString($this->headers->get('Accept'))->all());
     }
     /**
      * Returns true if the request is a XMLHttpRequest.
@@ -1482,6 +1505,24 @@ class Request
     public function isXmlHttpRequest()
     {
         return 'XMLHttpRequest' == $this->headers->get('X-Requested-With');
+    }
+    /**
+     * Checks whether the client browser prefers safe content or not according to RFC8674.
+     *
+     * @see https://tools.ietf.org/html/rfc8674
+     */
+    public function preferSafeContent() : bool
+    {
+        if (null !== $this->isSafeContentPreferred) {
+            return $this->isSafeContentPreferred;
+        }
+        if (!$this->isSecure()) {
+            // see https://tools.ietf.org/html/rfc8674#section-3
+            $this->isSafeContentPreferred = \false;
+            return $this->isSafeContentPreferred;
+        }
+        $this->isSafeContentPreferred = \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\AcceptHeader::fromString($this->headers->get('Prefer'))->has('safe');
+        return $this->isSafeContentPreferred;
     }
     /*
      * The following methods are derived from code of the Zend Framework (1.10dev - 2010-01-24)
@@ -1628,7 +1669,7 @@ class Request
         if ('' !== $requestUri && '/' !== $requestUri[0]) {
             $requestUri = '/' . $requestUri;
         }
-        if (null === ($baseUrl = $this->getBaseUrl())) {
+        if (null === ($baseUrl = $this->getBaseUrlReal())) {
             return $requestUri;
         }
         $pathInfo = \substr($requestUri, \strlen($baseUrl));
@@ -1651,7 +1692,7 @@ class Request
         // setting the default locale, the intl module is not installed, and
         // the call can be ignored:
         try {
-            if (\class_exists('Locale', \false)) {
+            if (\class_exists(\Locale::class, \false)) {
                 \Locale::setDefault($locale);
             }
         } catch (\Exception $e) {
@@ -1693,24 +1734,24 @@ class Request
      */
     public function isFromTrustedProxy()
     {
-        return self::$trustedProxies && \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\IpUtils::checkIp($this->server->get('REMOTE_ADDR'), self::$trustedProxies);
+        return self::$trustedProxies && \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\IpUtils::checkIp($this->server->get('REMOTE_ADDR'), self::$trustedProxies);
     }
     private function getTrustedValues(int $type, string $ip = null) : array
     {
         $clientValues = [];
         $forwardedValues = [];
-        if (self::$trustedHeaderSet & $type && $this->headers->has(self::$trustedHeaders[$type])) {
-            foreach (\explode(',', $this->headers->get(self::$trustedHeaders[$type])) as $v) {
+        if (self::$trustedHeaderSet & $type && $this->headers->has(self::TRUSTED_HEADERS[$type])) {
+            foreach (\explode(',', $this->headers->get(self::TRUSTED_HEADERS[$type])) as $v) {
                 $clientValues[] = (self::HEADER_X_FORWARDED_PORT === $type ? '0.0.0.0:' : '') . \trim($v);
             }
         }
-        if (self::$trustedHeaderSet & self::HEADER_FORWARDED && $this->headers->has(self::$trustedHeaders[self::HEADER_FORWARDED])) {
-            $forwarded = $this->headers->get(self::$trustedHeaders[self::HEADER_FORWARDED]);
-            $parts = \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\HeaderUtils::split($forwarded, ',;=');
+        if (self::$trustedHeaderSet & self::HEADER_FORWARDED && isset(self::FORWARDED_PARAMS[$type]) && $this->headers->has(self::TRUSTED_HEADERS[self::HEADER_FORWARDED])) {
+            $forwarded = $this->headers->get(self::TRUSTED_HEADERS[self::HEADER_FORWARDED]);
+            $parts = \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderUtils::split($forwarded, ',;=');
             $forwardedValues = [];
-            $param = self::$forwardedParams[$type];
+            $param = self::FORWARDED_PARAMS[$type];
             foreach ($parts as $subParts) {
-                if (null === ($v = \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\HeaderUtils::combine($subParts)[$param] ?? null)) {
+                if (null === ($v = \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\HeaderUtils::combine($subParts)[$param] ?? null)) {
                     continue;
                 }
                 if (self::HEADER_X_FORWARDED_PORT === $type) {
@@ -1736,7 +1777,7 @@ class Request
             return null !== $ip ? ['0.0.0.0', $ip] : [];
         }
         $this->isForwardedValid = \false;
-        throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException(\sprintf('The request has both a trusted "%s" header and a trusted "%s" header, conflicting with each other. You should either configure your proxy to remove one of them, or configure your project to distrust the offending one.', self::$trustedHeaders[self::HEADER_FORWARDED], self::$trustedHeaders[$type]));
+        throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException(\sprintf('The request has both a trusted "%s" header and a trusted "%s" header, conflicting with each other. You should either configure your proxy to remove one of them, or configure your project to distrust the offending one.', self::TRUSTED_HEADERS[self::HEADER_FORWARDED], self::TRUSTED_HEADERS[$type]));
     }
     private function normalizeAndFilterClientIps(array $clientIps, string $ip) : array
     {
@@ -1763,7 +1804,7 @@ class Request
                 unset($clientIps[$key]);
                 continue;
             }
-            if (\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\IpUtils::checkIp($clientIp, self::$trustedProxies)) {
+            if (\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\IpUtils::checkIp($clientIp, self::$trustedProxies)) {
                 unset($clientIps[$key]);
                 // Fallback to this when the client IP falls into the range of trusted proxies
                 if (null === $firstTrustedIp) {

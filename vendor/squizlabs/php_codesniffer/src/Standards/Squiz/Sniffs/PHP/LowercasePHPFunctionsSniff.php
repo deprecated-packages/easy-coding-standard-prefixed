@@ -102,7 +102,7 @@ class LowercasePHPFunctionsSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             // Object creation, not an inbuilt function.
             return;
         }
-        if ($tokens[$prev]['code'] === \T_OBJECT_OPERATOR) {
+        if ($tokens[$prev]['code'] === \T_OBJECT_OPERATOR || $tokens[$prev]['code'] === \T_NULLSAFE_OBJECT_OPERATOR) {
             // Not an inbuilt function.
             return;
         }

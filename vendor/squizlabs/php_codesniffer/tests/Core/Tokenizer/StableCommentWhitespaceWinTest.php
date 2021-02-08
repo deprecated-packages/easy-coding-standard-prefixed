@@ -75,6 +75,19 @@ class StableCommentWhitespaceWinTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
 '], ['type' => 'T_PHPCS_IGNORE', 'content' => '// phpcs:ignore Stnd.Cat
 '], ['type' => 'T_WHITESPACE', 'content' => '
 ']]], ['/* testSingleLineSlashCommentNoNewLineAtEnd */', [['type' => 'T_COMMENT', 'content' => '// Slash '], ['type' => 'T_CLOSE_TAG', 'content' => '?>
+']]], ['/* testSingleLineHashComment */', [['type' => 'T_COMMENT', 'content' => '# Comment
+'], ['type' => 'T_WHITESPACE', 'content' => '
+']]], ['/* testSingleLineHashCommentTrailing */', [['type' => 'T_COMMENT', 'content' => '# Comment
+'], ['type' => 'T_WHITESPACE', 'content' => '
+']]], ['/* testMultiLineHashComment */', [['type' => 'T_COMMENT', 'content' => '# Comment1
+'], ['type' => 'T_COMMENT', 'content' => '# Comment2
+'], ['type' => 'T_COMMENT', 'content' => '# Comment3
+'], ['type' => 'T_WHITESPACE', 'content' => '
+']]], ['/* testMultiLineHashCommentWithIndent */', [['type' => 'T_COMMENT', 'content' => '# Comment1
+'], ['type' => 'T_WHITESPACE', 'content' => '    '], ['type' => 'T_COMMENT', 'content' => '# Comment2
+'], ['type' => 'T_WHITESPACE', 'content' => '    '], ['type' => 'T_COMMENT', 'content' => '# Comment3
+'], ['type' => 'T_WHITESPACE', 'content' => '
+']]], ['/* testSingleLineHashCommentNoNewLineAtEnd */', [['type' => 'T_COMMENT', 'content' => '# Hash '], ['type' => 'T_CLOSE_TAG', 'content' => '?>
 ']]], ['/* testCommentAtEndOfFile */', [['type' => 'T_COMMENT', 'content' => '/* Comment']]]];
     }
     //end dataCommentTokenization()

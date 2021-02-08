@@ -55,10 +55,10 @@ final class UnifiedDiffOutputBuilder extends \PhpCsFixer\Diff\v3_0\Output\Abstra
         }
         $diff = \stream_get_contents($buffer, -1, 0);
         \fclose($buffer);
-        // If the last char is not a linebreak: add it.
+        // If the diff is non-empty and a linebreak: add it.
         // This might happen when both the `from` and `to` do not have a trailing linebreak
         $last = \substr($diff, -1);
-        return "\n" !== $last && "\r" !== $last ? $diff . "\n" : $diff;
+        return 0 !== \strlen($diff) && "\n" !== $last && "\r" !== $last ? $diff . "\n" : $diff;
     }
     private function writeDiffHunks($output, array $diff)
     {

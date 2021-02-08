@@ -12,23 +12,21 @@ use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer;
 use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
-use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
-use _PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper326af2119eba\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper326af2119eba\Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\EasyCodingStandard\Configuration\Exception\ConflictingCheckersLoadedException;
-final class ConflictingCheckersCompilerPass implements \_PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+final class ConflictingCheckersCompilerPass implements \_PhpScoper326af2119eba\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * These groups do the opposite of each other, e.g. Yoda vs NoYoda.
      *
      * @var string[][]
      */
-    private const CONFLICTING_CHECKER_GROUPS = [[\SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff::class, \PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer::class], [\PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseConstantSniff::class, \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff::class], [\PhpCsFixer\Fixer\Casing\LowercaseConstantsFixer::class, \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff::class], [\PhpCsFixer\Fixer\Casing\ConstantCaseFixer::class, \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff::class], [\SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff::class, \PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer::class], [\SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff::class, \PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer::class], [\PHP_CodeSniffer\Standards\PSR12\Sniffs\Files\FileHeaderSniff::class, \PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer::class]];
-    public function process(\_PhpScoper069ebd53a518\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    private const CONFLICTING_CHECKER_GROUPS = [['SlevomatCodingStandard\\Sniffs\\ControlStructures\\DisallowYodaComparisonSniff', \PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer::class], [\PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseConstantSniff::class, \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff::class], [\PhpCsFixer\Fixer\Casing\LowercaseConstantsFixer::class, \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff::class], [\PhpCsFixer\Fixer\Casing\ConstantCaseFixer::class, \PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff::class], ['SlevomatCodingStandard\\Sniffs\\TypeHints\\DeclareStrictTypesSniff', \PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer::class], ['SlevomatCodingStandard\\Sniffs\\TypeHints\\DeclareStrictTypesSniff', \PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer::class], [\PHP_CodeSniffer\Standards\PSR12\Sniffs\Files\FileHeaderSniff::class, \PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer::class]];
+    public function process(\_PhpScoper326af2119eba\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $checkers = $containerBuilder->getServiceIds();
-        if (\count($checkers) === 0) {
+        if ($checkers === []) {
             return;
         }
         foreach (self::CONFLICTING_CHECKER_GROUPS as $viceVersaMatchingCheckerGroup) {
@@ -46,6 +44,7 @@ final class ConflictingCheckersCompilerPass implements \_PhpScoper069ebd53a518\S
     {
         $checkers = \array_flip($checkers);
         $matchingCheckerGroup = \array_flip($matchingCheckerGroup);
-        return \count(\array_intersect_key($matchingCheckerGroup, $checkers)) === \count($matchingCheckerGroup);
+        $foundCheckers = \array_intersect_key($matchingCheckerGroup, $checkers);
+        return \count($foundCheckers) === \count($matchingCheckerGroup);
     }
 }

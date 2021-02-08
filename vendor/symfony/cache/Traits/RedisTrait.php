@@ -8,15 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Cache\Traits;
+namespace _PhpScoper326af2119eba\Symfony\Component\Cache\Traits;
 
-use _PhpScoper069ebd53a518\Predis\Connection\Aggregate\ClusterInterface;
-use _PhpScoper069ebd53a518\Predis\Connection\Aggregate\RedisCluster;
-use _PhpScoper069ebd53a518\Predis\Response\Status;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper326af2119eba\Predis\Command\Redis\UNLINK;
+use _PhpScoper326af2119eba\Predis\Connection\Aggregate\ClusterInterface;
+use _PhpScoper326af2119eba\Predis\Connection\Aggregate\RedisCluster;
+use _PhpScoper326af2119eba\Predis\Response\Status;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Aurimas Niekis <aurimas@niekis.lt>
  * @author Nicolas Grekas <p@tchwork.com>
@@ -31,16 +32,16 @@ trait RedisTrait
     /**
      * @param \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface $redisClient
      */
-    private function init($redisClient, string $namespace, int $defaultLifetime, ?\_PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
+    private function init($redisClient, string $namespace, int $defaultLifetime, ?\_PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
     {
         parent::__construct($namespace, $defaultLifetime);
         if (\preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('RedisAdapter namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('RedisAdapter namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
         }
-        if (!$redisClient instanceof \Redis && !$redisClient instanceof \RedisArray && !$redisClient instanceof \RedisCluster && !$redisClient instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface && !$redisClient instanceof \_PhpScoper069ebd53a518\Symfony\Component\Cache\Traits\RedisProxy && !$redisClient instanceof \_PhpScoper069ebd53a518\Symfony\Component\Cache\Traits\RedisClusterProxy) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('%s() expects parameter 1 to be Redis, RedisArray, RedisCluster or Predis\\ClientInterface, %s given.', __METHOD__, \is_object($redisClient) ? \get_class($redisClient) : \gettype($redisClient)));
+        if (!$redisClient instanceof \Redis && !$redisClient instanceof \RedisArray && !$redisClient instanceof \RedisCluster && !$redisClient instanceof \_PhpScoper326af2119eba\Predis\ClientInterface && !$redisClient instanceof \_PhpScoper326af2119eba\Symfony\Component\Cache\Traits\RedisProxy && !$redisClient instanceof \_PhpScoper326af2119eba\Symfony\Component\Cache\Traits\RedisClusterProxy) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s()" expects parameter 1 to be Redis, RedisArray, RedisCluster or Predis\\ClientInterface, "%s" given.', __METHOD__, \get_debug_type($redisClient)));
         }
-        if ($redisClient instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface && $redisClient->getOptions()->exceptions) {
+        if ($redisClient instanceof \_PhpScoper326af2119eba\Predis\ClientInterface && $redisClient->getOptions()->exceptions) {
             $options = clone $redisClient->getOptions();
             \Closure::bind(function () {
                 $this->options['exceptions'] = \false;
@@ -48,7 +49,7 @@ trait RedisTrait
             $redisClient = new $redisClient($redisClient->getConnection(), $options);
         }
         $this->redis = $redisClient;
-        $this->marshaller = $marshaller ?? new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \_PhpScoper326af2119eba\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
     }
     /**
      * Creates a Redis connection using a DSN configuration.
@@ -65,7 +66,7 @@ trait RedisTrait
      *
      * @throws InvalidArgumentException when the DSN is invalid
      *
-     * @return \Redis|\RedisCluster|\Predis\ClientInterface According to the "class" option
+     * @return \Redis|\RedisCluster|RedisClusterProxy|RedisProxy|\Predis\ClientInterface According to the "class" option
      */
     public static function createConnection($dsn, array $options = [])
     {
@@ -74,26 +75,29 @@ trait RedisTrait
         } elseif (0 === \strpos($dsn, 'rediss:')) {
             $scheme = 'rediss';
         } else {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: %s does not start with "redis:" or "rediss".', $dsn));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s" does not start with "redis:" or "rediss".', $dsn));
         }
-        if (!\extension_loaded('redis') && !\class_exists(\_PhpScoper069ebd53a518\Predis\Client::class)) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cannot find the "redis" extension nor the "predis/predis" package: %s', $dsn));
+        if (!\extension_loaded('redis') && !\class_exists(\_PhpScoper326af2119eba\Predis\Client::class)) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cannot find the "redis" extension nor the "predis/predis" package: "%s".', $dsn));
         }
         $params = \preg_replace_callback('#^' . $scheme . ':(//)?(?:(?:[^:@]*+:)?([^@]*+)@)?#', function ($m) use(&$auth) {
             if (isset($m[2])) {
                 $auth = $m[2];
+                if ('' === $auth) {
+                    $auth = null;
+                }
             }
             return 'file:' . ($m[1] ?? '');
         }, $dsn);
         if (\false === ($params = \parse_url($params))) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: %s', $dsn));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s".', $dsn));
         }
         $query = $hosts = [];
         if (isset($params['query'])) {
             \parse_str($params['query'], $query);
             if (isset($query['host'])) {
                 if (!\is_array($hosts = $query['host'])) {
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: %s', $dsn));
+                    throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s".', $dsn));
                 }
                 foreach ($hosts as $host => $parameters) {
                     if (\is_string($parameters)) {
@@ -122,46 +126,46 @@ trait RedisTrait
             }
         }
         if (!$hosts) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: %s', $dsn));
-        }
-        if (isset($params['redis_sentinel']) && !\class_exists(\_PhpScoper069ebd53a518\Predis\Client::class)) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\CacheException(\sprintf('Redis Sentinel support requires the "predis/predis" package: %s', $dsn));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Invalid Redis DSN: "%s".', $dsn));
         }
         $params += $query + $options + self::$defaultConnectionOptions;
+        if (isset($params['redis_sentinel']) && !\class_exists(\_PhpScoper326af2119eba\Predis\Client::class)) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\CacheException(\sprintf('Redis Sentinel support requires the "predis/predis" package: "%s".', $dsn));
+        }
         if (null === $params['class'] && !isset($params['redis_sentinel']) && \extension_loaded('redis')) {
             $class = $params['redis_cluster'] ? \RedisCluster::class : (1 < \count($hosts) ? \RedisArray::class : \Redis::class);
         } else {
-            $class = null === $params['class'] ? \_PhpScoper069ebd53a518\Predis\Client::class : $params['class'];
+            $class = null === $params['class'] ? \_PhpScoper326af2119eba\Predis\Client::class : $params['class'];
         }
         if (\is_a($class, \Redis::class, \true)) {
             $connect = $params['persistent'] || $params['persistent_id'] ? 'pconnect' : 'connect';
             $redis = new $class();
-            $initializer = function ($redis) use($connect, $params, $dsn, $auth, $hosts) {
+            $initializer = static function ($redis) use($connect, $params, $dsn, $auth, $hosts) {
                 try {
-                    @$redis->{$connect}($hosts[0]['host'] ?? $hosts[0]['path'], $hosts[0]['port'] ?? null, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval']);
+                    @$redis->{$connect}($hosts[0]['host'] ?? $hosts[0]['path'], $hosts[0]['port'] ?? null, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout']);
+                    \set_error_handler(function ($type, $msg) use(&$error) {
+                        $error = $msg;
+                    });
+                    $isConnected = $redis->isConnected();
+                    \restore_error_handler();
+                    if (!$isConnected) {
+                        $error = \preg_match('/^Redis::p?connect\\(\\): (.*)/', $error, $error) ? \sprintf(' (%s)', $error[1]) : '';
+                        throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $error . '.');
+                    }
+                    if (null !== $auth && !$redis->auth($auth) || $params['dbindex'] && !$redis->select($params['dbindex'])) {
+                        $e = \preg_replace('/^ERR /', '', $redis->getLastError());
+                        throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e . '.');
+                    }
+                    if (0 < $params['tcp_keepalive'] && \defined('Redis::OPT_TCP_KEEPALIVE')) {
+                        $redis->setOption(\Redis::OPT_TCP_KEEPALIVE, $params['tcp_keepalive']);
+                    }
                 } catch (\RedisException $e) {
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection failed (%s): %s', $e->getMessage(), $dsn));
-                }
-                \set_error_handler(function ($type, $msg) use(&$error) {
-                    $error = $msg;
-                });
-                $isConnected = $redis->isConnected();
-                \restore_error_handler();
-                if (!$isConnected) {
-                    $error = \preg_match('/^Redis::p?connect\\(\\): (.*)/', $error, $error) ? \sprintf(' (%s)', $error[1]) : '';
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection failed%s: %s', $error, $dsn));
-                }
-                if (null !== $auth && !$redis->auth($auth) || $params['dbindex'] && !$redis->select($params['dbindex']) || $params['read_timeout'] && !$redis->setOption(\Redis::OPT_READ_TIMEOUT, $params['read_timeout'])) {
-                    $e = \preg_replace('/^ERR /', '', $redis->getLastError());
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection failed (%s): %s', $e, $dsn));
-                }
-                if (0 < $params['tcp_keepalive'] && \defined('Redis::OPT_TCP_KEEPALIVE')) {
-                    $redis->setOption(\Redis::OPT_TCP_KEEPALIVE, $params['tcp_keepalive']);
+                    throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e->getMessage());
                 }
                 return \true;
             };
             if ($params['lazy']) {
-                $redis = new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Traits\RedisProxy($redis, $initializer);
+                $redis = new \_PhpScoper326af2119eba\Symfony\Component\Cache\Traits\RedisProxy($redis, $initializer);
             } else {
                 $initializer($redis);
             }
@@ -174,20 +178,20 @@ trait RedisTrait
             try {
                 $redis = new $class($hosts, $params);
             } catch (\RedisClusterException $e) {
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection failed (%s): %s', $e->getMessage(), $dsn));
+                throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e->getMessage());
             }
             if (0 < $params['tcp_keepalive'] && \defined('Redis::OPT_TCP_KEEPALIVE')) {
                 $redis->setOption(\Redis::OPT_TCP_KEEPALIVE, $params['tcp_keepalive']);
             }
         } elseif (\is_a($class, \RedisCluster::class, \true)) {
-            $initializer = function () use($class, $params, $dsn, $hosts) {
+            $initializer = static function () use($class, $params, $dsn, $hosts) {
                 foreach ($hosts as $i => $host) {
                     $hosts[$i] = 'tcp' === $host['scheme'] ? $host['host'] . ':' . $host['port'] : $host['path'];
                 }
                 try {
-                    $redis = new $class(null, $hosts, $params['timeout'], $params['read_timeout'], (bool) $params['persistent']);
+                    $redis = new $class(null, $hosts, $params['timeout'], $params['read_timeout'], (bool) $params['persistent'], $params['auth'] ?? '');
                 } catch (\RedisClusterException $e) {
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection failed (%s): %s', $e->getMessage(), $dsn));
+                    throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Redis connection "%s" failed: ', $dsn) . $e->getMessage());
                 }
                 if (0 < $params['tcp_keepalive'] && \defined('Redis::OPT_TCP_KEEPALIVE')) {
                     $redis->setOption(\Redis::OPT_TCP_KEEPALIVE, $params['tcp_keepalive']);
@@ -205,12 +209,12 @@ trait RedisTrait
                 }
                 return $redis;
             };
-            $redis = $params['lazy'] ? new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Traits\RedisClusterProxy($initializer) : $initializer();
-        } elseif (\is_a($class, \_PhpScoper069ebd53a518\Predis\ClientInterface::class, \true)) {
+            $redis = $params['lazy'] ? new \_PhpScoper326af2119eba\Symfony\Component\Cache\Traits\RedisClusterProxy($initializer) : $initializer();
+        } elseif (\is_a($class, \_PhpScoper326af2119eba\Predis\ClientInterface::class, \true)) {
             if ($params['redis_cluster']) {
                 $params['cluster'] = 'redis';
                 if (isset($params['redis_sentinel'])) {
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cannot use both "redis_cluster" and "redis_sentinel" at the same time: %s', $dsn));
+                    throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cannot use both "redis_cluster" and "redis_sentinel" at the same time: "%s".', $dsn));
                 }
             } elseif (isset($params['redis_sentinel'])) {
                 $params['replication'] = 'sentinel';
@@ -236,9 +240,9 @@ trait RedisTrait
                 $redis->getConnection()->setSentinelTimeout($params['timeout']);
             }
         } elseif (\class_exists($class, \false)) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" is not a subclass of "Redis", "RedisArray", "RedisCluster" nor "Predis\\ClientInterface".', $class));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('"%s" is not a subclass of "Redis", "RedisArray", "RedisCluster" nor "Predis\\ClientInterface".', $class));
         } else {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Class "%s" does not exist.', $class));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Class "%s" does not exist.', $class));
         }
         return $redis;
     }
@@ -251,14 +255,18 @@ trait RedisTrait
             return [];
         }
         $result = [];
-        if ($this->redis instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface && $this->redis->getConnection() instanceof \_PhpScoper069ebd53a518\Predis\Connection\Aggregate\ClusterInterface) {
+        if ($this->redis instanceof \_PhpScoper326af2119eba\Predis\ClientInterface && $this->redis->getConnection() instanceof \_PhpScoper326af2119eba\Predis\Connection\Aggregate\ClusterInterface) {
             $values = $this->pipeline(function () use($ids) {
                 foreach ($ids as $id) {
                     (yield 'get' => [$id]);
                 }
             });
         } else {
-            $values = \array_combine($ids, $this->redis->mget($ids));
+            $values = $this->redis->mget($ids);
+            if (!\is_array($values) || \count($values) !== \count($ids)) {
+                return [];
+            }
+            $values = \array_combine($ids, $values);
         }
         foreach ($values as $id => $v) {
             if ($v) {
@@ -270,17 +278,17 @@ trait RedisTrait
     /**
      * {@inheritdoc}
      */
-    protected function doHave($id)
+    protected function doHave(string $id)
     {
         return (bool) $this->redis->exists($id);
     }
     /**
      * {@inheritdoc}
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $cleared = \true;
-        if ($this->redis instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface) {
+        if ($this->redis instanceof \_PhpScoper326af2119eba\Predis\ClientInterface) {
             $evalArgs = [0, $namespace];
         } else {
             $evalArgs = [[$namespace], 0];
@@ -291,17 +299,18 @@ trait RedisTrait
                 continue;
             }
             $info = $host->info('Server');
-            $info = isset($info['Server']) ? $info['Server'] : $info;
+            $info = $info['Server'] ?? $info;
             if (!\version_compare($info['redis_version'], '2.8', '>=')) {
                 // As documented in Redis documentation (http://redis.io/commands/keys) using KEYS
                 // can hang your server when it is executed against large databases (millions of items).
                 // Whenever you hit this scale, you should really consider upgrading to Redis 2.8 or above.
-                $cleared = $host->eval("local keys=redis.call('KEYS',ARGV[1]..'*') for i=1,#keys,5000 do redis.call('DEL',unpack(keys,i,math.min(i+4999,#keys))) end return 1", $evalArgs[0], $evalArgs[1]) && $cleared;
+                $unlink = \version_compare($info['redis_version'], '4.0', '>=') ? 'UNLINK' : 'DEL';
+                $cleared = $host->eval("local keys=redis.call('KEYS',ARGV[1]..'*') for i=1,#keys,5000 do redis.call('{$unlink}',unpack(keys,i,math.min(i+4999,#keys))) end return 1", $evalArgs[0], $evalArgs[1]) && $cleared;
                 continue;
             }
             $cursor = null;
             do {
-                $keys = $host instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface ? $host->scan($cursor, 'MATCH', $namespace . '*', 'COUNT', 1000) : $host->scan($cursor, $namespace . '*', 1000);
+                $keys = $host instanceof \_PhpScoper326af2119eba\Predis\ClientInterface ? $host->scan($cursor, 'MATCH', $namespace . '*', 'COUNT', 1000) : $host->scan($cursor, $namespace . '*', 1000);
                 if (isset($keys[1]) && \is_array($keys[1])) {
                     $cursor = $keys[0];
                     $keys = $keys[1];
@@ -321,21 +330,33 @@ trait RedisTrait
         if (!$ids) {
             return \true;
         }
-        if ($this->redis instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface && $this->redis->getConnection() instanceof \_PhpScoper069ebd53a518\Predis\Connection\Aggregate\ClusterInterface) {
-            $this->pipeline(function () use($ids) {
+        if ($this->redis instanceof \_PhpScoper326af2119eba\Predis\ClientInterface && $this->redis->getConnection() instanceof \_PhpScoper326af2119eba\Predis\Connection\Aggregate\ClusterInterface) {
+            static $del;
+            $del = $del ?? (\class_exists(\_PhpScoper326af2119eba\Predis\Command\Redis\UNLINK::class) ? 'unlink' : 'del');
+            $this->pipeline(function () use($ids, $del) {
                 foreach ($ids as $id) {
-                    (yield 'del' => [$id]);
+                    (yield $del => [$id]);
                 }
             })->rewind();
         } else {
-            $this->redis->del($ids);
+            static $unlink = \true;
+            if ($unlink) {
+                try {
+                    $unlink = \false !== $this->redis->unlink($ids);
+                } catch (\Throwable $e) {
+                    $unlink = \false;
+                }
+            }
+            if (!$unlink) {
+                $this->redis->del($ids);
+            }
         }
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function doSave(array $values, $lifetime)
+    protected function doSave(array $values, int $lifetime)
     {
         if (!($values = $this->marshaller->marshall($values, $failed))) {
             return $failed;
@@ -350,7 +371,7 @@ trait RedisTrait
             }
         });
         foreach ($results as $id => $result) {
-            if (\true !== $result && (!$result instanceof \_PhpScoper069ebd53a518\Predis\Response\Status || \_PhpScoper069ebd53a518\Predis\Response\Status::get('OK') !== $result)) {
+            if (\true !== $result && (!$result instanceof \_PhpScoper326af2119eba\Predis\Response\Status || \_PhpScoper326af2119eba\Predis\Response\Status::get('OK') !== $result)) {
                 $failed[] = $id;
             }
         }
@@ -360,16 +381,16 @@ trait RedisTrait
     {
         $ids = [];
         $redis = $redis ?? $this->redis;
-        if ($redis instanceof \_PhpScoper069ebd53a518\Symfony\Component\Cache\Traits\RedisClusterProxy || $redis instanceof \RedisCluster || $redis instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface && $redis->getConnection() instanceof \_PhpScoper069ebd53a518\Predis\Connection\Aggregate\RedisCluster) {
+        if ($redis instanceof \_PhpScoper326af2119eba\Symfony\Component\Cache\Traits\RedisClusterProxy || $redis instanceof \RedisCluster || $redis instanceof \_PhpScoper326af2119eba\Predis\ClientInterface && $redis->getConnection() instanceof \_PhpScoper326af2119eba\Predis\Connection\Aggregate\RedisCluster) {
             // phpredis & predis don't support pipelining with RedisCluster
             // see https://github.com/phpredis/phpredis/blob/develop/cluster.markdown#pipelining
             // see https://github.com/nrk/predis/issues/267#issuecomment-123781423
             $results = [];
             foreach ($generator() as $command => $args) {
                 $results[] = $redis->{$command}(...$args);
-                $ids[] = 'eval' === $command ? $redis instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface ? $args[2] : $args[1][0] : $args[0];
+                $ids[] = 'eval' === $command ? $redis instanceof \_PhpScoper326af2119eba\Predis\ClientInterface ? $args[2] : $args[1][0] : $args[0];
             }
-        } elseif ($redis instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface) {
+        } elseif ($redis instanceof \_PhpScoper326af2119eba\Predis\ClientInterface) {
             $results = $redis->pipeline(static function ($redis) use($generator, &$ids) {
                 foreach ($generator() as $command => $args) {
                     $redis->{$command}(...$args);
@@ -391,7 +412,7 @@ trait RedisTrait
             foreach ($connections as $h => $c) {
                 $connections[$h] = $c[0]->exec();
             }
-            foreach ($results as $k => list($h, $c)) {
+            foreach ($results as $k => [$h, $c]) {
                 $results[$k] = $connections[$h][$c];
             }
         } else {
@@ -409,12 +430,12 @@ trait RedisTrait
     private function getHosts() : array
     {
         $hosts = [$this->redis];
-        if ($this->redis instanceof \_PhpScoper069ebd53a518\Predis\ClientInterface) {
+        if ($this->redis instanceof \_PhpScoper326af2119eba\Predis\ClientInterface) {
             $connection = $this->redis->getConnection();
-            if ($connection instanceof \_PhpScoper069ebd53a518\Predis\Connection\Aggregate\ClusterInterface && $connection instanceof \Traversable) {
+            if ($connection instanceof \_PhpScoper326af2119eba\Predis\Connection\Aggregate\ClusterInterface && $connection instanceof \Traversable) {
                 $hosts = [];
                 foreach ($connection as $c) {
-                    $hosts[] = new \_PhpScoper069ebd53a518\Predis\Client($c);
+                    $hosts[] = new \_PhpScoper326af2119eba\Predis\Client($c);
                 }
             }
         } elseif ($this->redis instanceof \RedisArray) {
@@ -422,7 +443,7 @@ trait RedisTrait
             foreach ($this->redis->_hosts() as $host) {
                 $hosts[] = $this->redis->_instance($host);
             }
-        } elseif ($this->redis instanceof \_PhpScoper069ebd53a518\Symfony\Component\Cache\Traits\RedisClusterProxy || $this->redis instanceof \RedisCluster) {
+        } elseif ($this->redis instanceof \_PhpScoper326af2119eba\Symfony\Component\Cache\Traits\RedisClusterProxy || $this->redis instanceof \RedisCluster) {
             $hosts = [];
             foreach ($this->redis->_masters() as $host) {
                 $hosts[] = $h = new \Redis();

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper069ebd53a518\Psr\Cache;
+namespace _PhpScoper326af2119eba\Psr\Cache;
 
 /**
  * CacheItemPoolInterface generates CacheItemInterface objects.
@@ -10,7 +10,6 @@ namespace _PhpScoper069ebd53a518\Psr\Cache;
  * It is also the primary point of interaction with the entire cache collection.
  * All configuration and initialization of the Pool is left up to an
  * Implementing Library.
- *
  */
 interface CacheItemPoolInterface
 {
@@ -34,8 +33,8 @@ interface CacheItemPoolInterface
     /**
      * Returns a traversable set of cache items.
      *
-     * @param array $keys
-     * An indexed array of keys of items to retrieve.
+     * @param string[] $keys
+     *   An indexed array of keys of items to retrieve.
      *
      * @throws InvalidArgumentException
      *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
@@ -56,14 +55,14 @@ interface CacheItemPoolInterface
      * such situation use CacheItemInterface::isHit() instead.
      *
      * @param string $key
-     *    The key for which to check existence.
+     *   The key for which to check existence.
      *
      * @throws InvalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown.
      *
      * @return bool
-     *  True if item exists in the cache, false otherwise.
+     *   True if item exists in the cache, false otherwise.
      */
     public function hasItem($key);
     /**
@@ -77,7 +76,7 @@ interface CacheItemPoolInterface
      * Removes the item from the pool.
      *
      * @param string $key
-     *   The key for which to delete
+     *   The key to delete.
      *
      * @throws InvalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
@@ -90,7 +89,7 @@ interface CacheItemPoolInterface
     /**
      * Removes multiple items from the pool.
      *
-     * @param array $keys
+     * @param string[] $keys
      *   An array of keys that should be removed from the pool.
      * @throws InvalidArgumentException
      *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
@@ -109,7 +108,7 @@ interface CacheItemPoolInterface
      * @return bool
      *   True if the item was successfully persisted. False if there was an error.
      */
-    public function save(\_PhpScoper069ebd53a518\Psr\Cache\CacheItemInterface $item);
+    public function save(\_PhpScoper326af2119eba\Psr\Cache\CacheItemInterface $item);
     /**
      * Sets a cache item to be persisted later.
      *
@@ -119,7 +118,7 @@ interface CacheItemPoolInterface
      * @return bool
      *   False if the item could not be queued or if a commit was attempted and failed. True otherwise.
      */
-    public function saveDeferred(\_PhpScoper069ebd53a518\Psr\Cache\CacheItemInterface $item);
+    public function saveDeferred(\_PhpScoper326af2119eba\Psr\Cache\CacheItemInterface $item);
     /**
      * Persists any deferred cache items.
      *

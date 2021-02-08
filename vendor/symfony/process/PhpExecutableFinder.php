@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Process;
+namespace _PhpScoper326af2119eba\Symfony\Component\Process;
 
 /**
  * An executable finder specifically designed for the PHP executable.
@@ -21,39 +21,49 @@ class PhpExecutableFinder
     private $executableFinder;
     public function __construct()
     {
-        $this->executableFinder = new \_PhpScoper069ebd53a518\Symfony\Component\Process\ExecutableFinder();
+        $this->executableFinder = new \_PhpScoper326af2119eba\Symfony\Component\Process\ExecutableFinder();
     }
     /**
      * Finds The PHP executable.
      *
-     * @param bool $includeArgs Whether or not include command arguments
-     *
      * @return string|false The PHP executable path or false if it cannot be found
      */
-    public function find($includeArgs = \true)
+    public function find(bool $includeArgs = \true)
     {
+        if ($php = \getenv('PHP_BINARY')) {
+            if (!\is_executable($php)) {
+                $command = '\\' === \DIRECTORY_SEPARATOR ? 'where' : 'command -v';
+                if ($php = \strtok(\exec($command . ' ' . \escapeshellarg($php)), \PHP_EOL)) {
+                    if (!\is_executable($php)) {
+                        return \false;
+                    }
+                } else {
+                    return \false;
+                }
+            }
+            return $php;
+        }
         $args = $this->findArguments();
         $args = $includeArgs && $args ? ' ' . \implode(' ', $args) : '';
-        // HHVM support
-        if (\defined('HHVM_VERSION')) {
-            return (\getenv('PHP_BINARY') ?: \PHP_BINARY) . $args;
-        }
         // PHP_BINARY return the current sapi executable
-        if (\PHP_BINARY && \in_array(\PHP_SAPI, array('cli', 'cli-server', 'phpdbg')) && \is_file(\PHP_BINARY)) {
+        if (\PHP_BINARY && \in_array(\PHP_SAPI, ['cgi-fcgi', 'cli', 'cli-server', 'phpdbg'], \true)) {
             return \PHP_BINARY . $args;
         }
         if ($php = \getenv('PHP_PATH')) {
-            if (!\is_executable($php)) {
+            if (!@\is_executable($php)) {
                 return \false;
             }
             return $php;
         }
         if ($php = \getenv('PHP_PEAR_PHP_BIN')) {
-            if (\is_executable($php)) {
+            if (@\is_executable($php)) {
                 return $php;
             }
         }
-        $dirs = array(\PHP_BINDIR);
+        if (@\is_executable($php = \PHP_BINDIR . ('\\' === \DIRECTORY_SEPARATOR ? '\\php.exe' : '/php'))) {
+            return $php;
+        }
+        $dirs = [\PHP_BINDIR];
         if ('\\' === \DIRECTORY_SEPARATOR) {
             $dirs[] = 'C:\\xampp\\php\\';
         }
@@ -66,10 +76,8 @@ class PhpExecutableFinder
      */
     public function findArguments()
     {
-        $arguments = array();
-        if (\defined('HHVM_VERSION')) {
-            $arguments[] = '--php';
-        } elseif ('phpdbg' === \PHP_SAPI) {
+        $arguments = [];
+        if ('phpdbg' === \PHP_SAPI) {
             $arguments[] = '-qrr';
         }
         return $arguments;

@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File;
 
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\NoFileException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException;
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\PartialFileException;
-use _PhpScoper069ebd53a518\Symfony\Component\Mime\MimeTypes;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\NoFileException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\PartialFileException;
+use _PhpScoper326af2119eba\Symfony\Component\Mime\MimeTypes;
 /**
  * A file uploaded through a form.
  *
@@ -27,9 +27,9 @@ use _PhpScoper069ebd53a518\Symfony\Component\Mime\MimeTypes;
  * @author Florian Eckerstorfer <florian@eckerstorfer.org>
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class UploadedFile extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\File
+class UploadedFile extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\File
 {
-    private $test = \false;
+    private $test;
     private $originalName;
     private $mimeType;
     private $error;
@@ -57,15 +57,10 @@ class UploadedFile extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundat
      * @throws FileException         If file_uploads is disabled
      * @throws FileNotFoundException If the file does not exist
      */
-    public function __construct(string $path, string $originalName, string $mimeType = null, int $error = null, $test = \false)
+    public function __construct(string $path, string $originalName, string $mimeType = null, int $error = null, bool $test = \false)
     {
         $this->originalName = $this->getName($originalName);
         $this->mimeType = $mimeType ?: 'application/octet-stream';
-        if (4 < \func_num_args() ? !\is_bool($test) : null !== $error && @\filesize($path) === $error) {
-            @\trigger_error(\sprintf('Passing a size as 4th argument to the constructor of "%s" is deprecated since Symfony 4.1.', __CLASS__), \E_USER_DEPRECATED);
-            $error = $test;
-            $test = 5 < \func_num_args() ? \func_get_arg(5) : \false;
-        }
         $this->error = $error ?: \UPLOAD_ERR_OK;
         $this->test = $test;
         parent::__construct($path, \UPLOAD_ERR_OK === $this->error);
@@ -76,7 +71,7 @@ class UploadedFile extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundat
      * It is extracted from the request from which the file has been uploaded.
      * Then it should not be considered as a safe value.
      *
-     * @return string|null The original name
+     * @return string The original name
      */
     public function getClientOriginalName()
     {
@@ -103,7 +98,7 @@ class UploadedFile extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundat
      * For a trusted mime type, use getMimeType() instead (which guesses the mime
      * type based on the file content).
      *
-     * @return string|null The mime type
+     * @return string The mime type
      *
      * @see getMimeType()
      */
@@ -130,22 +125,10 @@ class UploadedFile extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundat
      */
     public function guessClientExtension()
     {
-        return \_PhpScoper069ebd53a518\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getClientMimeType())[0] ?? null;
-    }
-    /**
-     * Returns the file size.
-     *
-     * It is extracted from the request from which the file has been uploaded.
-     * Then it should not be considered as a safe value.
-     *
-     * @deprecated since Symfony 4.1, use getSize() instead.
-     *
-     * @return int|null The file sizes
-     */
-    public function getClientSize()
-    {
-        @\trigger_error(\sprintf('The "%s()" method is deprecated since Symfony 4.1. Use getSize() instead.', __METHOD__), \E_USER_DEPRECATED);
-        return $this->getSize();
+        if (!\class_exists(\_PhpScoper326af2119eba\Symfony\Component\Mime\MimeTypes::class)) {
+            throw new \LogicException('You cannot guess the extension as the Mime component is not installed. Try running "composer require symfony/mime".');
+        }
+        return \_PhpScoper326af2119eba\Symfony\Component\Mime\MimeTypes::getDefault()->getExtensions($this->getClientMimeType())[0] ?? null;
     }
     /**
      * Returns the upload error.
@@ -172,14 +155,11 @@ class UploadedFile extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundat
     /**
      * Moves the file to a new location.
      *
-     * @param string $directory The destination folder
-     * @param string $name      The new file name
-     *
      * @return File A File object representing the new file
      *
      * @throws FileException if, for any reason, the file could not have been moved
      */
-    public function move($directory, $name = null)
+    public function move(string $directory, string $name = null)
     {
         if ($this->isValid()) {
             if ($this->test) {
@@ -192,33 +172,33 @@ class UploadedFile extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundat
             $moved = \move_uploaded_file($this->getPathname(), $target);
             \restore_error_handler();
             if (!$moved) {
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s)', $this->getPathname(), $target, \strip_tags($error)));
+                throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\FileException(\sprintf('Could not move the file "%s" to "%s" (%s).', $this->getPathname(), $target, \strip_tags($error)));
             }
             @\chmod($target, 0666 & ~\umask());
             return $target;
         }
         switch ($this->error) {
             case \UPLOAD_ERR_INI_SIZE:
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException($this->getErrorMessage());
+                throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException($this->getErrorMessage());
             case \UPLOAD_ERR_FORM_SIZE:
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException($this->getErrorMessage());
+                throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException($this->getErrorMessage());
             case \UPLOAD_ERR_PARTIAL:
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\PartialFileException($this->getErrorMessage());
+                throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\PartialFileException($this->getErrorMessage());
             case \UPLOAD_ERR_NO_FILE:
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\NoFileException($this->getErrorMessage());
+                throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\NoFileException($this->getErrorMessage());
             case \UPLOAD_ERR_CANT_WRITE:
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException($this->getErrorMessage());
+                throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException($this->getErrorMessage());
             case \UPLOAD_ERR_NO_TMP_DIR:
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException($this->getErrorMessage());
+                throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException($this->getErrorMessage());
             case \UPLOAD_ERR_EXTENSION:
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException($this->getErrorMessage());
+                throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException($this->getErrorMessage());
         }
-        throw new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\Exception\FileException($this->getErrorMessage());
+        throw new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\Exception\FileException($this->getErrorMessage());
     }
     /**
      * Returns the maximum size of an uploaded file as configured in php.ini.
      *
-     * @return int The maximum size of an uploaded file in bytes
+     * @return int|float The maximum size of an uploaded file in bytes (returns float if size > PHP_INT_MAX)
      */
     public static function getMaxFilesize()
     {
@@ -228,8 +208,10 @@ class UploadedFile extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundat
     }
     /**
      * Returns the given size from an ini value in bytes.
+     *
+     * @return int|float Returns float if size > PHP_INT_MAX
      */
-    private static function parseFilesize($size) : int
+    private static function parseFilesize($size)
     {
         if ('' === $size) {
             return 0;
@@ -268,7 +250,7 @@ class UploadedFile extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundat
         static $errors = [\UPLOAD_ERR_INI_SIZE => 'The file "%s" exceeds your upload_max_filesize ini directive (limit is %d KiB).', \UPLOAD_ERR_FORM_SIZE => 'The file "%s" exceeds the upload limit defined in your form.', \UPLOAD_ERR_PARTIAL => 'The file "%s" was only partially uploaded.', \UPLOAD_ERR_NO_FILE => 'No file was uploaded.', \UPLOAD_ERR_CANT_WRITE => 'The file "%s" could not be written on disk.', \UPLOAD_ERR_NO_TMP_DIR => 'File could not be uploaded: missing temporary directory.', \UPLOAD_ERR_EXTENSION => 'File upload was stopped by a PHP extension.'];
         $errorCode = $this->error;
         $maxFilesize = \UPLOAD_ERR_INI_SIZE === $errorCode ? self::getMaxFilesize() / 1024 : 0;
-        $message = isset($errors[$errorCode]) ? $errors[$errorCode] : 'The file "%s" was not uploaded due to an unknown error.';
+        $message = $errors[$errorCode] ?? 'The file "%s" was not uploaded due to an unknown error.';
         return \sprintf($message, $this->getClientOriginalName(), $maxFilesize);
     }
 }

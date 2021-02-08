@@ -30,6 +30,7 @@ final class TypeColonTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
     public function getPriority()
     {
         // needs to run after ReturnRefTransformer and UseTransformer
+        // and before TypeAlternationTransformer
         return -10;
     }
     /**

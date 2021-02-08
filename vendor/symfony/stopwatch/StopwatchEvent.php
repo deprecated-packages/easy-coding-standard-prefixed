@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Stopwatch;
+namespace _PhpScoper326af2119eba\Symfony\Component\Stopwatch;
 
 /**
  * Represents an Event managed by Stopwatch.
@@ -20,7 +20,7 @@ class StopwatchEvent
     /**
      * @var StopwatchPeriod[]
      */
-    private $periods = array();
+    private $periods = [];
     /**
      * @var float
      */
@@ -30,21 +30,31 @@ class StopwatchEvent
      */
     private $category;
     /**
+     * @var bool
+     */
+    private $morePrecision;
+    /**
      * @var float[]
      */
-    private $started = array();
+    private $started = [];
     /**
-     * Constructor.
-     *
-     * @param float       $origin   The origin time in milliseconds
-     * @param string|null $category The event category or null to use the default
+     * @var string
+     */
+    private $name;
+    /**
+     * @param float       $origin        The origin time in milliseconds
+     * @param string|null $category      The event category or null to use the default
+     * @param bool        $morePrecision If true, time is stored as float to keep the original microsecond precision
+     * @param string|null $name          The event name or null to define the name as default
      *
      * @throws \InvalidArgumentException When the raw time is not valid
      */
-    public function __construct($origin, $category = null)
+    public function __construct(float $origin, string $category = null, bool $morePrecision = \false, string $name = null)
     {
         $this->origin = $this->formatTime($origin);
         $this->category = \is_string($category) ? $category : 'default';
+        $this->morePrecision = $morePrecision;
+        $this->name = $name ?? 'default';
     }
     /**
      * Gets the category.
@@ -67,7 +77,7 @@ class StopwatchEvent
     /**
      * Starts a new event period.
      *
-     * @return StopwatchEvent The event
+     * @return $this
      */
     public function start()
     {
@@ -77,9 +87,7 @@ class StopwatchEvent
     /**
      * Stops the last started event period.
      *
-     * @throws \LogicException When start wasn't called before stopping
-     *
-     * @return StopwatchEvent The event
+     * @return $this
      *
      * @throws \LogicException When stop() is called without a matching call to start()
      */
@@ -88,7 +96,7 @@ class StopwatchEvent
         if (!\count($this->started)) {
             throw new \LogicException('stop() called but start() has not been called before.');
         }
-        $this->periods[] = new \_PhpScoper069ebd53a518\Symfony\Component\Stopwatch\StopwatchPeriod(\array_pop($this->started), $this->getNow());
+        $this->periods[] = new \_PhpScoper326af2119eba\Symfony\Component\Stopwatch\StopwatchPeriod(\array_pop($this->started), $this->getNow(), $this->morePrecision);
         return $this;
     }
     /**
@@ -103,7 +111,7 @@ class StopwatchEvent
     /**
      * Stops the current period and then starts a new one.
      *
-     * @return StopwatchEvent The event
+     * @return $this
      */
     public function lap()
     {
@@ -130,16 +138,22 @@ class StopwatchEvent
     /**
      * Gets the relative time of the start of the first period.
      *
-     * @return int The time (in milliseconds)
+     * @return int|float The time (in milliseconds)
      */
     public function getStartTime()
     {
-        return isset($this->periods[0]) ? $this->periods[0]->getStartTime() : 0;
+        if (isset($this->periods[0])) {
+            return $this->periods[0]->getStartTime();
+        }
+        if ($this->started) {
+            return $this->started[0];
+        }
+        return 0;
     }
     /**
      * Gets the relative time of the end of the last period.
      *
-     * @return int The time (in milliseconds)
+     * @return int|float The time (in milliseconds)
      */
     public function getEndTime()
     {
@@ -149,16 +163,14 @@ class StopwatchEvent
     /**
      * Gets the duration of the events (including all periods).
      *
-     * @return int The duration (in milliseconds)
+     * @return int|float The duration (in milliseconds)
      */
     public function getDuration()
     {
         $periods = $this->periods;
-        $stopped = \count($periods);
-        $left = \count($this->started) - $stopped;
-        for ($i = 0; $i < $left; ++$i) {
-            $index = $stopped + $i;
-            $periods[] = new \_PhpScoper069ebd53a518\Symfony\Component\Stopwatch\StopwatchPeriod($this->started[$index], $this->getNow());
+        $left = \count($this->started);
+        for ($i = $left - 1; $i >= 0; --$i) {
+            $periods[] = new \_PhpScoper326af2119eba\Symfony\Component\Stopwatch\StopwatchPeriod($this->started[$i], $this->getNow(), $this->morePrecision);
         }
         $total = 0;
         foreach ($periods as $period) {
@@ -193,24 +205,21 @@ class StopwatchEvent
     /**
      * Formats a time.
      *
-     * @param int|float $time A raw time
-     *
-     * @return float The formatted time
-     *
      * @throws \InvalidArgumentException When the raw time is not valid
      */
-    private function formatTime($time)
+    private function formatTime(float $time) : float
     {
-        if (!\is_numeric($time)) {
-            throw new \InvalidArgumentException('The time must be a numerical value');
-        }
         return \round($time, 1);
     }
     /**
-     * @return string
+     * Gets the event name.
      */
-    public function __toString()
+    public function getName() : string
     {
-        return \sprintf('%s: %.2F MiB - %d ms', $this->getCategory(), $this->getMemory() / 1024 / 1024, $this->getDuration());
+        return $this->name;
+    }
+    public function __toString() : string
+    {
+        return \sprintf('%s/%s: %.2F MiB - %d ms', $this->getCategory(), $this->getName(), $this->getMemory() / 1024 / 1024, $this->getDuration());
     }
 }

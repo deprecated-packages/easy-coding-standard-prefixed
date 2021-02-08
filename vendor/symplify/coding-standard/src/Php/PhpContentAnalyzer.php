@@ -49,7 +49,7 @@ final class PhpContentAnalyzer
             if (!isset($rawToken[2])) {
                 continue;
             }
-            if ($firstInLineLintedCorrectly === \false) {
+            if (!$firstInLineLintedCorrectly) {
                 $tokenKind = $rawToken[0];
                 if ($tokenKind === \T_CONSTANT_ENCAPSED_STRING) {
                     return \false;
@@ -82,7 +82,10 @@ final class PhpContentAnalyzer
                 }
                 if ($tokenKind === \T_VARIABLE) {
                     $nextToken = $this->tokenFinder->getNextMeaninfulToken($rawTokens, $i + 1);
-                    if ($nextToken === [] || !\is_array($nextToken)) {
+                    if ($nextToken === []) {
+                        return \false;
+                    }
+                    if (!\is_array($nextToken)) {
                         return \false;
                     }
                     if ($nextToken[0] === \T_STRING) {
@@ -102,12 +105,10 @@ final class PhpContentAnalyzer
                     return \false;
                 }
             }
-            if ($rawToken[0] === \T_FUNCTION) {
-                if (!$this->isFunctionStart($rawTokens, $i)) {
-                    return \false;
-                }
+            if ($rawToken[0] === \T_FUNCTION && !$this->isFunctionStart($rawTokens, $i)) {
+                return \false;
             }
-            if ($firstInLineLintedCorrectly === \false) {
+            if (!$firstInLineLintedCorrectly) {
                 $firstInLineLintedCorrectly = \true;
             }
             // is comment content
@@ -155,6 +156,10 @@ final class PhpContentAnalyzer
         }
         return \false;
     }
+    /**
+     * @noRector
+     * @return string[][]|int[][]|string[]
+     */
     private function parseCodeToTokens(string $content) : array
     {
         $phpContent = '<?php ' . \PHP_EOL . $content;

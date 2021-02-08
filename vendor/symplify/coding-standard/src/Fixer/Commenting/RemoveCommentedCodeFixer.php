@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -62,7 +62,7 @@ final class RemoveCommentedCodeFixer extends \Symplify\CodingStandard\Fixer\Abst
             if (!$token->isGivenKind(\T_COMMENT)) {
                 continue;
             }
-            if (!\_PhpScoper069ebd53a518\Nette\Utils\Strings::startsWith($token->getContent(), '//')) {
+            if (!\_PhpScoper326af2119eba\Nette\Utils\Strings::startsWith($token->getContent(), '//')) {
                 continue;
             }
             $startAndEnd = $this->commentedContentResolver->resolve($tokens, $i);
@@ -97,16 +97,16 @@ CODE_SAMPLE
     /**
      * Remove the indent space ahead of comments
      */
-    private function resolveRealStart(\Symplify\CodingStandard\ValueObject\StartAndEnd $contentWithPosition, \PhpCsFixer\Tokenizer\Tokens $tokens) : int
+    private function resolveRealStart(\Symplify\CodingStandard\ValueObject\StartAndEnd $startAndEnd, \PhpCsFixer\Tokenizer\Tokens $tokens) : int
     {
-        $preStartPosition = $contentWithPosition->getStart() - 1;
+        $preStartPosition = $startAndEnd->getStart() - 1;
         /** @var Token $preStartToken */
         $preStartToken = $tokens[$preStartPosition];
-        $realStart = $contentWithPosition->getStart();
+        $realStart = $startAndEnd->getStart();
         if ($preStartToken->getContent() === \PHP_EOL) {
             return $realStart - 1;
         }
-        if (\_PhpScoper069ebd53a518\Nette\Utils\Strings::endsWith($preStartToken->getContent(), '    ')) {
+        if (\_PhpScoper326af2119eba\Nette\Utils\Strings::endsWith($preStartToken->getContent(), '    ')) {
             return $realStart - 1;
         }
         return $realStart;

@@ -3,8 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
@@ -24,7 +25,7 @@ use Throwable;
  * @see \Symplify\CodingStandard\Tests\Fixer\LineLength\LineLengthFixer\LineLengthFixerTest
  * @see \Symplify\CodingStandard\Tests\Fixer\LineLength\LineLengthFixer\ConfiguredLineLengthFixerTest
  */
-final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface, \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
+final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface, \PhpCsFixer\Fixer\ConfigurableFixerInterface, \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
 {
     /**
      * @api
@@ -158,7 +159,7 @@ CODE_SAMPLE
             return;
         }
         $blockInfo = $this->blockFinder->findInTokensByPositionAndContent($tokens, $methodNamePosition, '(');
-        if ($blockInfo === null) {
+        if (!$blockInfo instanceof \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo) {
             return;
         }
         // has comments => dangerous to change: https://github.com/symplify/symplify/issues/973
@@ -171,7 +172,7 @@ CODE_SAMPLE
     private function processFunctionOrArray(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : void
     {
         $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
-        if ($blockInfo === null) {
+        if (!$blockInfo instanceof \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo) {
             return;
         }
         if ($this->shouldSkip($tokens, $blockInfo)) {
@@ -215,11 +216,7 @@ CODE_SAMPLE
         if ($blockInfo->getEnd() - $blockInfo->getStart() <= 1) {
             return \true;
         }
-        // heredoc/nowdoc => skip
-        $nextTokenPosition = $tokens->getNextMeaningfulToken($blockInfo->getStart());
-        /** @var Token $nextToken */
-        $nextToken = $tokens[$nextTokenPosition];
-        if (\_PhpScoper069ebd53a518\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<')) {
+        if ($this->isHerenowDoc($tokens, $blockInfo)) {
             return \true;
         }
         // is array with indexed values "=>"
@@ -229,5 +226,13 @@ CODE_SAMPLE
         }
         // has comments => dangerous to change: https://github.com/symplify/symplify/issues/973
         return (bool) $tokens->findGivenKind(\T_COMMENT, $blockInfo->getStart(), $blockInfo->getEnd());
+    }
+    private function isHerenowDoc(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
+    {
+        // heredoc/nowdoc => skip
+        $nextTokenPosition = $tokens->getNextMeaningfulToken($blockInfo->getStart());
+        /** @var Token $nextToken */
+        $nextToken = $tokens[$nextTokenPosition];
+        return \_PhpScoper326af2119eba\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
     }
 }

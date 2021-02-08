@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Cache\Traits;
+namespace _PhpScoper326af2119eba\Symfony\Component\Cache\Traits;
 
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -29,24 +29,26 @@ trait FilesystemCommonTrait
         }
         if (isset($namespace[0])) {
             if (\preg_match('#[^-+_.A-Za-z0-9]#', $namespace, $match)) {
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
+                throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+_.A-Za-z0-9] are allowed.', $match[0]));
             }
             $directory .= \DIRECTORY_SEPARATOR . $namespace;
+        } else {
+            $directory .= \DIRECTORY_SEPARATOR . '@';
         }
-        if (!\file_exists($directory)) {
+        if (!\is_dir($directory)) {
             @\mkdir($directory, 0777, \true);
         }
         $directory .= \DIRECTORY_SEPARATOR;
         // On Windows the whole path is limited to 258 chars
         if ('\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory too long (%s)', $directory));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Cache directory too long (%s).', $directory));
         }
         $this->directory = $directory;
     }
     /**
      * {@inheritdoc}
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $ok = \true;
         foreach ($this->scanHashDir($this->directory) as $file) {
@@ -65,7 +67,7 @@ trait FilesystemCommonTrait
         $ok = \true;
         foreach ($ids as $id) {
             $file = $this->getFile($id);
-            $ok = (!\file_exists($file) || $this->doUnlink($file) || !\file_exists($file)) && $ok;
+            $ok = (!\is_file($file) || $this->doUnlink($file) || !\file_exists($file)) && $ok;
         }
         return $ok;
     }
@@ -78,9 +80,19 @@ trait FilesystemCommonTrait
         \set_error_handler(__CLASS__ . '::throwError');
         try {
             if (null === $this->tmp) {
-                $this->tmp = $this->directory . \uniqid('', \true);
+                $this->tmp = $this->directory . \bin2hex(\random_bytes(6));
             }
-            \file_put_contents($this->tmp, $data);
+            try {
+                $h = \fopen($this->tmp, 'x');
+            } catch (\ErrorException $e) {
+                if (\false === \strpos($e->getMessage(), 'File exists')) {
+                    throw $e;
+                }
+                $this->tmp = $this->directory . \bin2hex(\random_bytes(6));
+                $h = \fopen($this->tmp, 'x');
+            }
+            \fwrite($h, $data);
+            \fclose($h);
             if (null !== $expiresAt) {
                 \touch($this->tmp, $expiresAt);
             }
@@ -94,7 +106,7 @@ trait FilesystemCommonTrait
         // Use MD5 to favor speed over security, which is not an issue here
         $hash = \str_replace('/', '-', \base64_encode(\hash('md5', static::class . $id, \true)));
         $dir = ($directory ?? $this->directory) . \strtoupper($hash[0] . \DIRECTORY_SEPARATOR . $hash[1] . \DIRECTORY_SEPARATOR);
-        if ($mkdir && !\file_exists($dir)) {
+        if ($mkdir && !\is_dir($dir)) {
             @\mkdir($dir, 0777, \true);
         }
         return $dir . \substr($hash, 2, 20);
@@ -105,16 +117,16 @@ trait FilesystemCommonTrait
     }
     private function scanHashDir(string $directory) : \Generator
     {
-        if (!\file_exists($directory)) {
+        if (!\is_dir($directory)) {
             return;
         }
         $chars = '+-ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         for ($i = 0; $i < 38; ++$i) {
-            if (!\file_exists($directory . $chars[$i])) {
+            if (!\is_dir($directory . $chars[$i])) {
                 continue;
             }
             for ($j = 0; $j < 38; ++$j) {
-                if (!\file_exists($dir = $directory . $chars[$i] . \DIRECTORY_SEPARATOR . $chars[$j])) {
+                if (!\is_dir($dir = $directory . $chars[$i] . \DIRECTORY_SEPARATOR . $chars[$j])) {
                     continue;
                 }
                 foreach (@\scandir($dir, \SCANDIR_SORT_NONE) ?: [] as $file) {
@@ -148,7 +160,7 @@ trait FilesystemCommonTrait
         if (\method_exists(parent::class, '__destruct')) {
             parent::__destruct();
         }
-        if (null !== $this->tmp && \file_exists($this->tmp)) {
+        if (null !== $this->tmp && \is_file($this->tmp)) {
             \unlink($this->tmp);
         }
     }

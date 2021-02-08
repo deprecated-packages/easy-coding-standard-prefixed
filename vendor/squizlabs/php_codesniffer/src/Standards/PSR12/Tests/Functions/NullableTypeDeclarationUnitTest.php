@@ -22,7 +22,7 @@ class NullableTypeDeclarationUnitTest extends \PHP_CodeSniffer\Tests\Standards\A
      */
     protected function getErrorList()
     {
-        return [23 => 1, 24 => 1, 25 => 1, 30 => 1, 31 => 1, 32 => 1, 43 => 2, 48 => 1, 50 => 1, 51 => 1, 53 => 1, 57 => 2, 58 => 2, 59 => 2];
+        return [23 => 1, 24 => 1, 25 => 1, 30 => 1, 31 => 1, 32 => 1, 43 => 2, 48 => 1, 50 => 1, 51 => 1, 53 => 1, 57 => 2, 58 => 2, 59 => 2, 87 => 1];
     }
     //end getErrorList()
     /**

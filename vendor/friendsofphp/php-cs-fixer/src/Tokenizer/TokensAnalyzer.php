@@ -11,6 +11,7 @@
  */
 namespace PhpCsFixer\Tokenizer;
 
+use PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer;
 /**
  * Analyzer of Tokens collection.
  *
@@ -30,6 +31,10 @@ final class TokensAnalyzer
      * @var Tokens
      */
     private $tokens;
+    /**
+     * @var ?GotoLabelAnalyzer
+     */
+    private $gotoLabelAnalyzer;
     public function __construct(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $this->tokens = $tokens;
@@ -37,14 +42,16 @@ final class TokensAnalyzer
     /**
      * Get indexes of methods and properties in classy code (classes, interfaces and traits).
      *
+     * @param bool $returnTraitsImports TODO on v3 remove flag and return the imports
+     *
      * @return array[]
      */
-    public function getClassyElements()
+    public function getClassyElements($returnTraitsImports = \false)
     {
         $elements = [];
         for ($index = 1, $count = \count($this->tokens) - 2; $index < $count; ++$index) {
             if ($this->tokens[$index]->isClassy()) {
-                list($index, $newElements) = $this->findClassyElements($index, $index);
+                list($index, $newElements) = $this->findClassyElements($index, $index, $returnTraitsImports);
                 $elements += $newElements;
             }
         }
@@ -277,8 +284,13 @@ final class TokensAnalyzer
             }
         }
         // check for goto label
-        if ($this->tokens[$nextIndex]->equals(':') && $this->tokens[$prevIndex]->equalsAny([';', '}', [\T_OPEN_TAG], [\T_OPEN_TAG_WITH_ECHO]])) {
-            return \false;
+        if ($this->tokens[$nextIndex]->equals(':')) {
+            if (null === $this->gotoLabelAnalyzer) {
+                $this->gotoLabelAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer();
+            }
+            if ($this->gotoLabelAnalyzer->belongsToGoToLabel($this->tokens, $nextIndex)) {
+                return \false;
+            }
         }
         return \true;
     }
@@ -480,12 +492,13 @@ final class TokensAnalyzer
      * Searches in tokens from the classy (start) index till the end (index) of the classy.
      * Returns an array; first value is the index until the method has analysed (int), second the found classy elements (array).
      *
-     * @param int $classIndex classy index
-     * @param int $index
+     * @param int  $classIndex          classy index
+     * @param int  $index
+     * @param bool $returnTraitsImports
      *
      * @return array
      */
-    private function findClassyElements($classIndex, $index)
+    private function findClassyElements($classIndex, $index, $returnTraitsImports = \false)
     {
         $elements = [];
         $curlyBracesLevel = 0;
@@ -516,7 +529,7 @@ final class TokensAnalyzer
                         if ($token->equals(')')) {
                             --$nestedBracesLevel;
                             if (0 === $nestedBracesLevel) {
-                                list($index, $newElements) = $this->findClassyElements($nestedClassIndex, $index);
+                                list($index, $newElements) = $this->findClassyElements($nestedClassIndex, $index, $returnTraitsImports);
                                 $elements += $newElements;
                                 break;
                             }
@@ -524,12 +537,12 @@ final class TokensAnalyzer
                         }
                         if ($token->isClassy()) {
                             // anonymous class in class
-                            list($index, $newElements) = $this->findClassyElements($index, $index);
+                            list($index, $newElements) = $this->findClassyElements($index, $index, $returnTraitsImports);
                             $elements += $newElements;
                         }
                     }
                 } else {
-                    list($index, $newElements) = $this->findClassyElements($nestedClassIndex, $nestedClassIndex);
+                    list($index, $newElements) = $this->findClassyElements($nestedClassIndex, $nestedClassIndex, $returnTraitsImports);
                     $elements += $newElements;
                 }
                 continue;
@@ -564,6 +577,8 @@ final class TokensAnalyzer
                 $elements[$index] = ['token' => $token, 'type' => 'method', 'classIndex' => $classIndex];
             } elseif ($token->isGivenKind(\T_CONST)) {
                 $elements[$index] = ['token' => $token, 'type' => 'const', 'classIndex' => $classIndex];
+            } elseif ($returnTraitsImports && $token->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT)) {
+                $elements[$index] = ['token' => $token, 'type' => 'trait_import', 'classIndex' => $classIndex];
             }
         }
         return [$index, $elements];

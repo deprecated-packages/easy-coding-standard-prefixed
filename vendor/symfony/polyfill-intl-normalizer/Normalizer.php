@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Polyfill\Intl\Normalizer;
+namespace _PhpScoper326af2119eba\Symfony\Polyfill\Intl\Normalizer;
 
 /**
  * Normalizer is a PHP fallback implementation of the Normalizer class provided by the intl extension.
@@ -22,45 +22,39 @@ namespace _PhpScoper069ebd53a518\Symfony\Polyfill\Intl\Normalizer;
  */
 class Normalizer
 {
-    const NONE = 1;
-    const FORM_D = 2;
-    const FORM_KD = 3;
-    const FORM_C = 4;
-    const FORM_KC = 5;
-    const NFD = 2;
-    const NFKD = 3;
-    const NFC = 4;
-    const NFKC = 5;
+    public const FORM_D = \Normalizer::FORM_D;
+    public const FORM_KD = \Normalizer::FORM_KD;
+    public const FORM_C = \Normalizer::FORM_C;
+    public const FORM_KC = \Normalizer::FORM_KC;
+    public const NFD = \Normalizer::NFD;
+    public const NFKD = \Normalizer::NFKD;
+    public const NFC = \Normalizer::NFC;
+    public const NFKC = \Normalizer::NFKC;
     private static $C;
     private static $D;
     private static $KD;
     private static $cC;
-    private static $ulenMask = array("À" => 2, "Ð" => 2, "à" => 3, "ð" => 4);
+    private static $ulenMask = ["À" => 2, "Ð" => 2, "à" => 3, "ð" => 4];
     private static $ASCII = " eiasntrolud][cmp'\ng|hv.fb,:=-q10C2*yx)(L9AS/P\"EjMIk3>5T<D4}B{8FwR67UGN;JzV#HOW_&!K?XQ%Y\\\tZ+~^\$@`\0\1\2\3\4\5\6\7\10\v\f\r\16\17\20\21\22\23\24\25\26\27\30\31\32\33\34\35\36\37";
-    public static function isNormalized($s, $form = self::NFC)
+    public static function isNormalized(string $s, int $form = self::FORM_C)
     {
-        if ($form <= self::NONE || self::NFKC < $form) {
+        if (!\in_array($form, [self::NFD, self::NFKD, self::NFC, self::NFKC])) {
             return \false;
         }
-        $s = (string) $s;
         if (!isset($s[\strspn($s, self::$ASCII)])) {
             return \true;
         }
-        if (self::NFC === $form && \preg_match('//u', $s) && !\preg_match('/[^\\x00-\\x{2FF}]/u', $s)) {
+        if (self::NFC == $form && \preg_match('//u', $s) && !\preg_match('/[^\\x00-\\x{2FF}]/u', $s)) {
             return \true;
         }
-        return \false;
-        // Pretend false as quick checks implementented in PHP won't be so quick
+        return self::normalize($s, $form) === $s;
     }
-    public static function normalize($s, $form = self::NFC)
+    public static function normalize(string $s, int $form = self::FORM_C)
     {
-        $s = (string) $s;
         if (!\preg_match('//u', $s)) {
             return \false;
         }
         switch ($form) {
-            case self::NONE:
-                return $s;
             case self::NFC:
                 $C = \true;
                 $K = \false;
@@ -78,7 +72,13 @@ class Normalizer
                 $K = \true;
                 break;
             default:
-                return \false;
+                if (\defined('Normalizer::NONE') && \Normalizer::NONE == $form) {
+                    return $s;
+                }
+                if (80000 > \PHP_VERSION_ID) {
+                    return \false;
+                }
+                throw new \ValueError('normalizer_normalize(): Argument #2 ($form) must be a a valid normalization form');
         }
         if ('' === $s) {
             return '';
@@ -137,7 +137,7 @@ class Normalizer
             $uchr = \substr($s, $i, $ulen);
             if ($lastUchr < "á„€" || "á„’" < $lastUchr || $uchr < "á…¡" || "á…µ" < $uchr || $lastUcls) {
                 // Table lookup and combining chars composition
-                $ucls = isset($combClass[$uchr]) ? $combClass[$uchr] : 0;
+                $ucls = $combClass[$uchr] ?? 0;
                 if (isset($compMap[$lastUchr . $uchr]) && (!$lastUcls || $lastUcls < $ucls)) {
                     $lastUchr = $compMap[$lastUchr . $uchr];
                 } elseif ($lastUcls = $ucls) {
@@ -178,7 +178,7 @@ class Normalizer
         if ($c) {
             $compatMap = self::$KD;
         }
-        $c = array();
+        $c = [];
         $i = 0;
         $len = \strlen($s);
         while ($i < $len) {
@@ -187,7 +187,7 @@ class Normalizer
                 if ($c) {
                     \ksort($c);
                     $result .= \implode('', $c);
-                    $c = array();
+                    $c = [];
                 }
                 $j = 1 + \strspn($s, $ASCII, $i + 1);
                 $result .= \substr($s, $i, $j);
@@ -199,7 +199,7 @@ class Normalizer
             $i += $ulen;
             if ($uchr < "ê°€" || "íž£" < $uchr) {
                 // Table lookup
-                if ($uchr !== ($j = isset($compatMap[$uchr]) ? $compatMap[$uchr] : (isset($decompMap[$uchr]) ? $decompMap[$uchr] : $uchr))) {
+                if ($uchr !== ($j = $compatMap[$uchr] ?? $decompMap[$uchr] ?? $uchr)) {
                     $uchr = $j;
                     $j = \strlen($uchr);
                     $ulen = $uchr[0] < "€" ? 1 : $ulenMask[$uchr[0] & "ð"];
@@ -238,7 +238,7 @@ class Normalizer
             if ($c) {
                 \ksort($c);
                 $result .= \implode('', $c);
-                $c = array();
+                $c = [];
             }
             $result .= $uchr;
         }

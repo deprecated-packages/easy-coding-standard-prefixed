@@ -43,9 +43,12 @@ final class SmartPhpConfigPrinter
     /**
      * @param mixed[]|null $configuration
      */
-    private function createServiceConfiguration($configuration, string $class) : ?array
+    private function createServiceConfiguration(?array $configuration, string $class) : ?array
     {
-        if ($configuration === null || $configuration === []) {
+        if ($configuration === null) {
+            return null;
+        }
+        if ($configuration === []) {
             return null;
         }
         $configuration = $this->serviceConfigurationDecorator->decorate($configuration, $class);

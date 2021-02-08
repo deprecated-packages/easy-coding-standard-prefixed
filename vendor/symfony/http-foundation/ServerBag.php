@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation;
 
 /**
  * ServerBag is a container for HTTP headers from the $_SERVER variable.
@@ -17,7 +17,7 @@ namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation;
  * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
  * @author Robert Kiss <kepten@gmail.com>
  */
-class ServerBag extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag
+class ServerBag extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ParameterBag
 {
     /**
      * Gets the HTTP headers.
@@ -36,18 +36,18 @@ class ServerBag extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation
         }
         if (isset($this->parameters['PHP_AUTH_USER'])) {
             $headers['PHP_AUTH_USER'] = $this->parameters['PHP_AUTH_USER'];
-            $headers['PHP_AUTH_PW'] = isset($this->parameters['PHP_AUTH_PW']) ? $this->parameters['PHP_AUTH_PW'] : '';
+            $headers['PHP_AUTH_PW'] = $this->parameters['PHP_AUTH_PW'] ?? '';
         } else {
             /*
              * php-cgi under Apache does not pass HTTP Basic user/pass to PHP by default
              * For this workaround to work, add these lines to your .htaccess file:
-             * RewriteCond %{HTTP:Authorization} ^(.+)$
-             * RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+             * RewriteCond %{HTTP:Authorization} .+
+             * RewriteRule ^ - [E=HTTP_AUTHORIZATION:%0]
              *
              * A sample .htaccess file:
              * RewriteEngine On
-             * RewriteCond %{HTTP:Authorization} ^(.+)$
-             * RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+             * RewriteCond %{HTTP:Authorization} .+
+             * RewriteRule ^ - [E=HTTP_AUTHORIZATION:%0]
              * RewriteCond %{REQUEST_FILENAME} !-f
              * RewriteRule ^(.*)$ app.php [QSA,L]
              */
@@ -62,7 +62,7 @@ class ServerBag extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation
                     // Decode AUTHORIZATION header into PHP_AUTH_USER and PHP_AUTH_PW when authorization header is basic
                     $exploded = \explode(':', \base64_decode(\substr($authorizationHeader, 6)), 2);
                     if (2 == \count($exploded)) {
-                        list($headers['PHP_AUTH_USER'], $headers['PHP_AUTH_PW']) = $exploded;
+                        [$headers['PHP_AUTH_USER'], $headers['PHP_AUTH_PW']] = $exploded;
                     }
                 } elseif (empty($this->parameters['PHP_AUTH_DIGEST']) && 0 === \stripos($authorizationHeader, 'digest ')) {
                     // In some circumstances PHP_AUTH_DIGEST needs to be set

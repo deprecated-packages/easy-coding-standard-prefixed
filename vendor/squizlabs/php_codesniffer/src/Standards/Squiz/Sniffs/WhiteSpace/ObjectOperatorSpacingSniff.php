@@ -26,7 +26,7 @@ class ObjectOperatorSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      */
     public function register()
     {
-        return [\T_OBJECT_OPERATOR, \T_DOUBLE_COLON];
+        return [\T_OBJECT_OPERATOR, \T_DOUBLE_COLON, \T_NULLSAFE_OBJECT_OPERATOR];
     }
     //end register()
     /**

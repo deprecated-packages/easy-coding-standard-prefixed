@@ -25,7 +25,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
@@ -59,7 +59,7 @@ final class NoExtraBlankLinesFixer extends \PhpCsFixer\AbstractFixer implements 
     {
         parent::configure($configuration);
         static $reprToTokenMap = ['break' => \T_BREAK, 'case' => \T_CASE, 'continue' => \T_CONTINUE, 'curly_brace_block' => '{', 'default' => \T_DEFAULT, 'extra' => \T_WHITESPACE, 'parenthesis_brace_block' => '(', 'return' => \T_RETURN, 'square_brace_block' => \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN, 'switch' => \T_SWITCH, 'throw' => \T_THROW, 'use' => \T_USE, 'use_trait' => \PhpCsFixer\Tokenizer\CT::T_USE_TRAIT];
-        static $tokenKindCallbackMap = [\T_BREAK => 'fixAfterToken', \T_CASE => 'fixAfterToken', \T_CONTINUE => 'fixAfterToken', \T_DEFAULT => 'fixAfterToken', \T_RETURN => 'fixAfterToken', \T_SWITCH => 'fixAfterToken', \T_THROW => 'fixAfterToken', \T_USE => 'removeBetweenUse', \T_WHITESPACE => 'removeMultipleBlankLines', \PhpCsFixer\Tokenizer\CT::T_USE_TRAIT => 'removeBetweenUse', \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN => 'fixStructureOpenCloseIfMultiLine'];
+        static $tokenKindCallbackMap = [\T_BREAK => 'fixAfterToken', \T_CASE => 'fixAfterToken', \T_CONTINUE => 'fixAfterToken', \T_DEFAULT => 'fixAfterToken', \T_RETURN => 'fixAfterToken', \T_SWITCH => 'fixAfterToken', \T_THROW => 'fixAfterThrowToken', \T_USE => 'removeBetweenUse', \T_WHITESPACE => 'removeMultipleBlankLines', \PhpCsFixer\Tokenizer\CT::T_USE_TRAIT => 'removeBetweenUse', \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN => 'fixStructureOpenCloseIfMultiLine'];
         static $tokenEqualsMap = [
             '{' => 'fixStructureOpenCloseIfMultiLine',
             // i.e. not: CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN
@@ -203,7 +203,7 @@ switch($a) {
     protected function createConfigurationDefinition()
     {
         $that = $this;
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('tokens', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tokens', 'List of tokens to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(self::$availableTokens)])->setNormalizer(static function (\_PhpScoper069ebd53a518\Symfony\Component\OptionsResolver\Options $options, $tokens) use($that) {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('tokens', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tokens', 'List of tokens to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(self::$availableTokens)])->setNormalizer(static function (\_PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Options $options, $tokens) use($that) {
             foreach ($tokens as &$token) {
                 if ('useTrait' === $token) {
                     $message = "Token \"useTrait\" in option \"tokens\" for rule \"{$that->getName()}\" is deprecated and will be removed in 3.0, use \"use_trait\" instead.";
@@ -270,6 +270,12 @@ switch($a) {
             }
         }
         $this->removeEmptyLinesAfterLineWithTokenAt($index);
+    }
+    private function fixAfterThrowToken($index)
+    {
+        if ($this->tokens[$this->tokens->getPrevMeaningfulToken($index)]->equalsAny([';', '{', '}', ':', [\T_OPEN_TAG]])) {
+            $this->fixAfterToken($index);
+        }
     }
     /**
      * Remove white line(s) after the index of a block type,

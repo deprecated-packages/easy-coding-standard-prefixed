@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Stopwatch;
+namespace _PhpScoper326af2119eba\Symfony\Component\Stopwatch;
 
 /**
  * Stopwatch section.
@@ -20,11 +20,15 @@ class Section
     /**
      * @var StopwatchEvent[]
      */
-    private $events = array();
+    private $events = [];
     /**
-     * @var null|float
+     * @var float|null
      */
     private $origin;
+    /**
+     * @var bool
+     */
+    private $morePrecision;
     /**
      * @var string
      */
@@ -32,42 +36,41 @@ class Section
     /**
      * @var Section[]
      */
-    private $children = array();
+    private $children = [];
     /**
-     * Constructor.
-     *
-     * @param float|null $origin Set the origin of the events in this section, use null to set their origin to their start time
+     * @param float|null $origin        Set the origin of the events in this section, use null to set their origin to their start time
+     * @param bool       $morePrecision If true, time is stored as float to keep the original microsecond precision
      */
-    public function __construct($origin = null)
+    public function __construct(float $origin = null, bool $morePrecision = \false)
     {
-        $this->origin = \is_numeric($origin) ? $origin : null;
+        $this->origin = $origin;
+        $this->morePrecision = $morePrecision;
     }
     /**
      * Returns the child section.
      *
-     * @param string $id The child section identifier
-     *
-     * @return Section|null The child section or null when none found
+     * @return self|null The child section or null when none found
      */
-    public function get($id)
+    public function get(string $id)
     {
         foreach ($this->children as $child) {
             if ($id === $child->getId()) {
                 return $child;
             }
         }
+        return null;
     }
     /**
      * Creates or re-opens a child section.
      *
-     * @param string|null $id null to create a new section, the identifier to re-open an existing one.
+     * @param string|null $id Null to create a new section, the identifier to re-open an existing one
      *
-     * @return Section A child section
+     * @return self
      */
-    public function open($id)
+    public function open(?string $id)
     {
-        if (null === ($session = $this->get($id))) {
-            $session = $this->children[] = new self(\microtime(\true) * 1000);
+        if (null === $id || null === ($session = $this->get($id))) {
+            $session = $this->children[] = new self(\microtime(\true) * 1000, $this->morePrecision);
         }
         return $session;
     }
@@ -81,11 +84,9 @@ class Section
     /**
      * Sets the session identifier.
      *
-     * @param string $id The session identifier
-     *
-     * @return Section The current section
+     * @return $this
      */
-    public function setId($id)
+    public function setId(string $id)
     {
         $this->id = $id;
         return $this;
@@ -93,39 +94,32 @@ class Section
     /**
      * Starts an event.
      *
-     * @param string $name     The event name
-     * @param string $category The event category
-     *
      * @return StopwatchEvent The event
      */
-    public function startEvent($name, $category)
+    public function startEvent(string $name, ?string $category)
     {
         if (!isset($this->events[$name])) {
-            $this->events[$name] = new \_PhpScoper069ebd53a518\Symfony\Component\Stopwatch\StopwatchEvent($this->origin ?: \microtime(\true) * 1000, $category);
+            $this->events[$name] = new \_PhpScoper326af2119eba\Symfony\Component\Stopwatch\StopwatchEvent($this->origin ?: \microtime(\true) * 1000, $category, $this->morePrecision, $name);
         }
         return $this->events[$name]->start();
     }
     /**
      * Checks if the event was started.
      *
-     * @param string $name The event name
-     *
      * @return bool
      */
-    public function isEventStarted($name)
+    public function isEventStarted(string $name)
     {
         return isset($this->events[$name]) && $this->events[$name]->isStarted();
     }
     /**
      * Stops an event.
      *
-     * @param string $name The event name
-     *
      * @return StopwatchEvent The event
      *
      * @throws \LogicException When the event has not been started
      */
-    public function stopEvent($name)
+    public function stopEvent(string $name)
     {
         if (!isset($this->events[$name])) {
             throw new \LogicException(\sprintf('Event "%s" is not started.', $name));
@@ -135,26 +129,22 @@ class Section
     /**
      * Stops then restarts an event.
      *
-     * @param string $name The event name
-     *
      * @return StopwatchEvent The event
      *
      * @throws \LogicException When the event has not been started
      */
-    public function lap($name)
+    public function lap(string $name)
     {
         return $this->stopEvent($name)->start();
     }
     /**
      * Returns a specific event by name.
      *
-     * @param string $name The event name
-     *
      * @return StopwatchEvent The event
      *
      * @throws \LogicException When the event is not known
      */
-    public function getEvent($name)
+    public function getEvent(string $name)
     {
         if (!isset($this->events[$name])) {
             throw new \LogicException(\sprintf('Event "%s" is not known.', $name));

@@ -74,9 +74,8 @@ class Sample
     protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
-        $elements = $tokensAnalyzer->getClassyElements();
-        $propertyTypeDeclarationKinds = [\T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT];
-        foreach (\array_reverse($elements, \true) as $index => $element) {
+        $propertyTypeDeclarationKinds = [\T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION];
+        foreach (\array_reverse($tokensAnalyzer->getClassyElements(), \true) as $index => $element) {
             if (!\in_array($element['type'], $this->configuration['elements'], \true)) {
                 continue;
             }

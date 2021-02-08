@@ -20,8 +20,7 @@ final class PHP80MigrationRiskySet extends \PhpCsFixer\RuleSet\AbstractRuleSetDe
     public function getRules()
     {
         return [
-            '@PHP71Migration:risky' => \true,
-            'implode_call' => \true,
+            '@PHP74Migration:risky' => \true,
             'no_alias_functions' => ['sets' => ['@all']],
             'no_php4_constructor' => \true,
             'no_unneeded_final_method' => \true,

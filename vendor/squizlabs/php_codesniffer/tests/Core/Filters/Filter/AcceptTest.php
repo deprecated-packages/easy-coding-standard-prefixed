@@ -13,8 +13,8 @@ namespace PHP_CodeSniffer\Tests\Core\Filters\Filter;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
-use _PhpScoper069ebd53a518\PHPUnit\Framework\TestCase;
-class AcceptTest extends \_PhpScoper069ebd53a518\PHPUnit\Framework\TestCase
+use _PhpScoper326af2119eba\PHPUnit\Framework\TestCase;
+class AcceptTest extends \_PhpScoper326af2119eba\PHPUnit\Framework\TestCase
 {
     /**
      * The Config object.
@@ -92,7 +92,7 @@ class AcceptTest extends \_PhpScoper069ebd53a518\PHPUnit\Framework\TestCase
     {
         $testCases = [
             // Test top-level exclude patterns.
-            [['/path/to/src/Main.php', '/path/to/src/Something/Main.php', '/path/to/src/Somethingelse/Main.php', '/path/to/src/Other/Main.php'], ['/path/to/src/Main.php']],
+            [['/path/to/src/Main.php', '/path/to/src/Something/Main.php', '/path/to/src/Somethingelse/Main.php', '/path/to/src/SomethingelseEvenLonger/Main.php', '/path/to/src/Other/Main.php'], ['/path/to/src/Main.php', '/path/to/src/SomethingelseEvenLonger/Main.php']],
             // Test ignoring standard/sniff specific exclude patterns.
             [['/path/to/src/generic-project/Main.php', '/path/to/src/generic/Main.php', '/path/to/src/anything-generic/Main.php'], ['/path/to/src/generic-project/Main.php', '/path/to/src/generic/Main.php', '/path/to/src/anything-generic/Main.php']],
         ];

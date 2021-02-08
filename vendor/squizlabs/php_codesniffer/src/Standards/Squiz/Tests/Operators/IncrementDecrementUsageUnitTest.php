@@ -22,7 +22,7 @@ class IncrementDecrementUsageUnitTest extends \PHP_CodeSniffer\Tests\Standards\A
      */
     public function getErrorList()
     {
-        return [2 => 1, 6 => 1, 12 => 1, 16 => 1, 25 => 1, 26 => 1, 27 => 1, 29 => 1, 31 => 1];
+        return [2 => 1, 6 => 1, 12 => 1, 16 => 1, 25 => 1, 26 => 1, 27 => 1, 29 => 1, 31 => 1, 41 => 1, 42 => 1];
     }
     //end getErrorList()
     /**

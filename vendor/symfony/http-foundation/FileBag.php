@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpFoundation;
 
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\UploadedFile;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * FileBag is a container for uploaded files.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
  */
-class FileBag extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\ParameterBag
+class FileBag extends \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\ParameterBag
 {
-    private static $fileKeys = ['error', 'name', 'size', 'tmp_name', 'type'];
+    private const FILE_KEYS = ['error', 'name', 'size', 'tmp_name', 'type'];
     /**
      * @param array|UploadedFile[] $parameters An array of HTTP files
      */
@@ -38,9 +38,9 @@ class FileBag extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\P
     /**
      * {@inheritdoc}
      */
-    public function set($key, $value)
+    public function set(string $key, $value)
     {
-        if (!\is_array($value) && !$value instanceof \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\UploadedFile) {
+        if (!\is_array($value) && !$value instanceof \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\UploadedFile) {
             throw new \InvalidArgumentException('An uploaded file must be an array or an instance of UploadedFile.');
         }
         parent::set($key, $this->convertFileInformation($value));
@@ -63,18 +63,18 @@ class FileBag extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\P
      */
     protected function convertFileInformation($file)
     {
-        if ($file instanceof \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\UploadedFile) {
+        if ($file instanceof \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\UploadedFile) {
             return $file;
         }
         if (\is_array($file)) {
             $file = $this->fixPhpFilesArray($file);
             $keys = \array_keys($file);
             \sort($keys);
-            if ($keys == self::$fileKeys) {
+            if (self::FILE_KEYS == $keys) {
                 if (\UPLOAD_ERR_NO_FILE == $file['error']) {
                     $file = null;
                 } else {
-                    $file = new \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\File\UploadedFile($file['tmp_name'], $file['name'], $file['type'], $file['error'], \false);
+                    $file = new \_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\File\UploadedFile($file['tmp_name'], $file['name'], $file['type'], $file['error'], \false);
                 }
             } else {
                 $file = \array_map([$this, 'convertFileInformation'], $file);
@@ -105,11 +105,11 @@ class FileBag extends \_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\P
     {
         $keys = \array_keys($data);
         \sort($keys);
-        if (self::$fileKeys != $keys || !isset($data['name']) || !\is_array($data['name'])) {
+        if (self::FILE_KEYS != $keys || !isset($data['name']) || !\is_array($data['name'])) {
             return $data;
         }
         $files = $data;
-        foreach (self::$fileKeys as $k) {
+        foreach (self::FILE_KEYS as $k) {
             unset($files[$k]);
         }
         foreach ($data['name'] as $key => $name) {

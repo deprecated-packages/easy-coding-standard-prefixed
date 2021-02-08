@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Finder\Exception;
+namespace _PhpScoper326af2119eba\Symfony\Component\Finder\Exception;
 
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>

@@ -1,32 +1,15 @@
 <?php
 
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <http://www.doctrine-project.org>.
- */
-namespace _PhpScoper069ebd53a518\Doctrine\Common\Annotations;
+namespace _PhpScoper326af2119eba\Doctrine\Common\Annotations;
 
+use Exception;
+use function get_class;
+use function gettype;
+use function implode;
+use function is_object;
+use function sprintf;
 /**
  * Description of AnnotationException
- *
- * @since  2.0
- * @author Benjamin Eberlei <kontakt@beberlei.de>
- * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
- * @author Jonathan Wage <jonwage@gmail.com>
- * @author Roman Borschel <roman@code-factory.org>
  */
 class AnnotationException extends \Exception
 {
@@ -56,8 +39,6 @@ class AnnotationException extends \Exception
      * Creates a new AnnotationException describing an error which occurred during
      * the creation of the annotation.
      *
-     * @since 2.2
-     *
      * @param string $message
      *
      * @return AnnotationException
@@ -68,8 +49,6 @@ class AnnotationException extends \Exception
     }
     /**
      * Creates a new AnnotationException describing a type error.
-     *
-     * @since 1.1
      *
      * @param string $message
      *
@@ -82,8 +61,6 @@ class AnnotationException extends \Exception
     /**
      * Creates a new AnnotationException describing a constant semantical error.
      *
-     * @since 2.3
-     *
      * @param string $identifier
      * @param string $context
      *
@@ -95,8 +72,6 @@ class AnnotationException extends \Exception
     }
     /**
      * Creates a new AnnotationException describing an type error of an attribute.
-     *
-     * @since 2.2
      *
      * @param string $attributeName
      * @param string $annotationName
@@ -113,8 +88,6 @@ class AnnotationException extends \Exception
     /**
      * Creates a new AnnotationException describing an required error of an attribute.
      *
-     * @since 2.2
-     *
      * @param string $attributeName
      * @param string $annotationName
      * @param string $context
@@ -129,25 +102,31 @@ class AnnotationException extends \Exception
     /**
      * Creates a new AnnotationException describing a invalid enummerator.
      *
-     * @since 2.4
-     *
-     * @param string $attributeName
-     * @param string $annotationName
-     * @param string $context
-     * @param array  $available
-     * @param mixed  $given
+     * @param string              $attributeName
+     * @param string              $annotationName
+     * @param string              $context
+     * @param object|class-string $given
      *
      * @return AnnotationException
+     *
+     * @phpstan-param list<string>        $available
      */
     public static function enumeratorError($attributeName, $annotationName, $context, $available, $given)
     {
-        return new self(\sprintf('[Enum Error] Attribute "%s" of @%s declared on %s accept only [%s], but got %s.', $attributeName, $annotationName, $context, \implode(', ', $available), \is_object($given) ? \get_class($given) : $given));
+        return new self(\sprintf('[Enum Error] Attribute "%s" of @%s declared on %s accepts only [%s], but got %s.', $attributeName, $annotationName, $context, \implode(', ', $available), \is_object($given) ? \get_class($given) : $given));
     }
     /**
      * @return AnnotationException
      */
     public static function optimizerPlusSaveComments()
     {
-        return new self("You have to enable opcache.save_comments=1 or zend_optimizerplus.save_comments=1.");
+        return new self('You have to enable opcache.save_comments=1 or zend_optimizerplus.save_comments=1.');
+    }
+    /**
+     * @return AnnotationException
+     */
+    public static function optimizerPlusLoadComments()
+    {
+        return new self('You have to enable opcache.load_comments=1 or zend_optimizerplus.load_comments=1.');
     }
 }

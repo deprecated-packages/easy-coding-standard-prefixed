@@ -8,8 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\VarExporter\Internal;
+namespace _PhpScoper326af2119eba\Symfony\Component\VarExporter\Internal;
 
+use _PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -17,13 +18,13 @@ namespace _PhpScoper069ebd53a518\Symfony\Component\VarExporter\Internal;
  */
 class Hydrator
 {
-    public static $hydrators = array();
+    public static $hydrators = [];
     public $registry;
     public $values;
     public $properties;
     public $value;
     public $wakeups;
-    public function __construct(?\_PhpScoper069ebd53a518\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScoper069ebd53a518\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
+    public function __construct(?\_PhpScoper326af2119eba\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScoper326af2119eba\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
     {
         $this->registry = $registry;
         $this->values = $values;
@@ -36,8 +37,12 @@ class Hydrator
         foreach ($properties as $class => $vars) {
             (self::$hydrators[$class] ?? self::getHydrator($class))($vars, $objects);
         }
-        foreach ($wakeups as $i) {
-            $objects[$i]->__wakeup();
+        foreach ($wakeups as $k => $v) {
+            if (\is_array($v)) {
+                $objects[-$k]->__unserialize($v);
+            } else {
+                $objects[$v]->__wakeup();
+            }
         }
         return $value;
     }
@@ -52,7 +57,10 @@ class Hydrator
                 }
             };
         }
-        $classReflector = \_PhpScoper069ebd53a518\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \_PhpScoper069ebd53a518\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
+        if (!\class_exists($class) && !\interface_exists($class, \false) && !\trait_exists($class, \false)) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
+        }
+        $classReflector = new \ReflectionClass($class);
         if (!$classReflector->isInternal()) {
             return self::$hydrators[$class] = (self::$hydrators['stdClass'] ?? self::getHydrator('stdClass'))->bindTo(null, $class);
         }
@@ -62,7 +70,7 @@ class Hydrator
         switch ($class) {
             case 'ArrayIterator':
             case 'ArrayObject':
-                $constructor = \Closure::fromCallable(array($classReflector->getConstructor(), 'invokeArgs'));
+                $constructor = \Closure::fromCallable([$classReflector->getConstructor(), 'invokeArgs']);
                 return self::$hydrators[$class] = static function ($properties, $objects) use($constructor) {
                     foreach ($properties as $name => $values) {
                         if ("\0" !== $name) {
@@ -71,7 +79,7 @@ class Hydrator
                             }
                         }
                     }
-                    foreach ($properties["\0"] ?? array() as $i => $v) {
+                    foreach ($properties["\0"] ?? [] as $i => $v) {
                         $constructor($objects[$i], $v);
                     }
                 };
@@ -100,11 +108,11 @@ class Hydrator
                     }
                 };
         }
-        $propertySetters = array();
+        $propertySetters = [];
         foreach ($classReflector->getProperties() as $propertyReflector) {
             if (!$propertyReflector->isStatic()) {
                 $propertyReflector->setAccessible(\true);
-                $propertySetters[$propertyReflector->name] = \Closure::fromCallable(array($propertyReflector, 'setValue'));
+                $propertySetters[$propertyReflector->name] = \Closure::fromCallable([$propertyReflector, 'setValue']);
             }
         }
         if (!$propertySetters) {

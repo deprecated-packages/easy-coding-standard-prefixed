@@ -9,7 +9,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\Fixer\AbstractArrayFixer;
-use Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthTransformer;
+use Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\TokensNewliner;
 use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
 use Symplify\CodingStandard\TokenRunner\ValueObject\LineKind;
 use Symplify\CodingStandard\TokenRunner\Wrapper\FixerWrapper\ArrayWrapperFactory;
@@ -26,17 +26,17 @@ final class StandaloneLineInMultilineArrayFixer extends \Symplify\CodingStandard
      */
     private const ERROR_MESSAGE = 'Indexed arrays must have 1 item per line';
     /**
-     * @var LineLengthTransformer
-     */
-    private $lineLengthTransformer;
-    /**
      * @var ArrayWrapperFactory
      */
     private $arrayWrapperFactory;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthTransformer $lineLengthTransformer, \Symplify\CodingStandard\TokenRunner\Wrapper\FixerWrapper\ArrayWrapperFactory $arrayWrapperFactory)
+    /**
+     * @var TokensNewliner
+     */
+    private $tokensNewliner;
+    public function __construct(\Symplify\CodingStandard\TokenRunner\Wrapper\FixerWrapper\ArrayWrapperFactory $arrayWrapperFactory, \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\TokensNewliner $tokensNewliner)
     {
-        $this->lineLengthTransformer = $lineLengthTransformer;
         $this->arrayWrapperFactory = $arrayWrapperFactory;
+        $this->tokensNewliner = $tokensNewliner;
     }
     public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
@@ -47,7 +47,7 @@ final class StandaloneLineInMultilineArrayFixer extends \Symplify\CodingStandard
         if ($this->shouldSkip($tokens, $blockInfo)) {
             return;
         }
-        $this->lineLengthTransformer->breakItems($blockInfo, $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\LineKind::ARRAYS);
+        $this->tokensNewliner->breakItems($blockInfo, $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\LineKind::ARRAYS);
     }
     public function getPriority() : int
     {

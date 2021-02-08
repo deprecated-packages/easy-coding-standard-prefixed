@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScoper326af2119eba\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Response;
 /**
  * ResponseCacheStrategy knows how to compute the Response cache HTTP header
  * based on the different response cache headers.
@@ -20,16 +20,16 @@ use _PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Response;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ResponseCacheStrategy implements \_PhpScoper069ebd53a518\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategyInterface
+class ResponseCacheStrategy implements \_PhpScoper326af2119eba\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategyInterface
 {
     /**
      * Cache-Control headers that are sent to the final response if they appear in ANY of the responses.
      */
-    private static $overrideDirectives = ['private', 'no-cache', 'no-store', 'no-transform', 'must-revalidate', 'proxy-revalidate'];
+    private const OVERRIDE_DIRECTIVES = ['private', 'no-cache', 'no-store', 'no-transform', 'must-revalidate', 'proxy-revalidate'];
     /**
      * Cache-Control headers that are sent to the final response if they appear in ALL of the responses.
      */
-    private static $inheritDirectives = ['public', 'immutable'];
+    private const INHERIT_DIRECTIVES = ['public', 'immutable'];
     private $embeddedResponses = 0;
     private $isNotCacheableResponseEmbedded = \false;
     private $age = 0;
@@ -38,15 +38,15 @@ class ResponseCacheStrategy implements \_PhpScoper069ebd53a518\Symfony\Component
     /**
      * {@inheritdoc}
      */
-    public function add(\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Response $response)
+    public function add(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Response $response)
     {
         ++$this->embeddedResponses;
-        foreach (self::$overrideDirectives as $directive) {
+        foreach (self::OVERRIDE_DIRECTIVES as $directive) {
             if ($response->headers->hasCacheControlDirective($directive)) {
                 $this->flagDirectives[$directive] = \true;
             }
         }
-        foreach (self::$inheritDirectives as $directive) {
+        foreach (self::INHERIT_DIRECTIVES as $directive) {
             if (\false !== $this->flagDirectives[$directive]) {
                 $this->flagDirectives[$directive] = $response->headers->hasCacheControlDirective($directive);
             }
@@ -66,7 +66,7 @@ class ResponseCacheStrategy implements \_PhpScoper069ebd53a518\Symfony\Component
     /**
      * {@inheritdoc}
      */
-    public function update(\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Response $response)
+    public function update(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Response $response)
     {
         // if we have no embedded Response, do nothing
         if (0 === $this->embeddedResponses) {
@@ -80,7 +80,6 @@ class ResponseCacheStrategy implements \_PhpScoper069ebd53a518\Symfony\Component
         $this->add($response);
         $response->headers->set('Age', $this->age);
         if ($this->isNotCacheableResponseEmbedded) {
-            $response->setExpires($response->getDate());
             if ($this->flagDirectives['no-store']) {
                 $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
             } else {
@@ -115,7 +114,7 @@ class ResponseCacheStrategy implements \_PhpScoper069ebd53a518\Symfony\Component
      *
      * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.4
      */
-    private function willMakeFinalResponseUncacheable(\_PhpScoper069ebd53a518\Symfony\Component\HttpFoundation\Response $response) : bool
+    private function willMakeFinalResponseUncacheable(\_PhpScoper326af2119eba\Symfony\Component\HttpFoundation\Response $response) : bool
     {
         // RFC2616: A response received with a status code of 200, 203, 300, 301 or 410
         // MAY be stored by a cache […] unless a cache-control directive prohibits caching.

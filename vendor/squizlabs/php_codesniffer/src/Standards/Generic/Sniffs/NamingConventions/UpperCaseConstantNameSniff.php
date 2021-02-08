@@ -64,7 +64,7 @@ class UpperCaseConstantNameSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         }
         // Make sure this is not a method call.
         $prev = $phpcsFile->findPrevious(\T_WHITESPACE, $stackPtr - 1, null, \true);
-        if ($tokens[$prev]['code'] === \T_OBJECT_OPERATOR || $tokens[$prev]['code'] === \T_DOUBLE_COLON) {
+        if ($tokens[$prev]['code'] === \T_OBJECT_OPERATOR || $tokens[$prev]['code'] === \T_DOUBLE_COLON || $tokens[$prev]['code'] === \T_NULLSAFE_OBJECT_OPERATOR) {
             return;
         }
         // If the next non-whitespace token after this token

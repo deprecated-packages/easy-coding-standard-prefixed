@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Finder\Comparator;
+namespace _PhpScoper326af2119eba\Symfony\Component\Finder\Comparator;
 
 /**
  * DateCompare compiles date comparisons.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class DateComparator extends \_PhpScoper069ebd53a518\Symfony\Component\Finder\Comparator\Comparator
+class DateComparator extends \_PhpScoper326af2119eba\Symfony\Component\Finder\Comparator\Comparator
 {
     /**
      * @param string $test A comparison string
@@ -33,7 +33,7 @@ class DateComparator extends \_PhpScoper069ebd53a518\Symfony\Component\Finder\Co
         } catch (\Exception $e) {
             throw new \InvalidArgumentException(\sprintf('"%s" is not a valid date.', $matches[2]));
         }
-        $operator = isset($matches[1]) ? $matches[1] : '==';
+        $operator = $matches[1] ?? '==';
         if ('since' === $operator || 'after' === $operator) {
             $operator = '>';
         }

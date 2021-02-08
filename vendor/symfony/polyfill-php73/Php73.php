@@ -1,6 +1,14 @@
 <?php
 
-namespace _PhpScoper069ebd53a518\Symfony\Polyfill\Php73;
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+namespace _PhpScoper326af2119eba\Symfony\Polyfill\Php73;
 
 /**
  * @author Gabriel Caruso <carusogabriel34@gmail.com>
@@ -25,6 +33,6 @@ final class Php73
             $ns += $s * 1000000000.0;
             return \PHP_INT_SIZE === 4 ? $ns : (int) $ns;
         }
-        return array($s, (int) $ns);
+        return [$s, (int) $ns];
     }
 }

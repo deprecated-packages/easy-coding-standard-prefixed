@@ -3,11 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Html;
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
-use _PhpScoper069ebd53a518\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScoper069ebd53a518\Symfony\Component\Filesystem\Filesystem;
-final class SmartFileSystem extends \_PhpScoper069ebd53a518\Symfony\Component\Filesystem\Filesystem
+use _PhpScoper326af2119eba\Nette\Utils\Html;
+use _PhpScoper326af2119eba\Nette\Utils\Strings;
+use _PhpScoper326af2119eba\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper326af2119eba\Symfony\Component\Filesystem\Filesystem;
+/**
+ * @see \Symplify\SmartFileSystem\Tests\SmartFileSystem\SmartFileSystemTest
+ */
+final class SmartFileSystem extends \_PhpScoper326af2119eba\Symfony\Component\Filesystem\Filesystem
 {
     /**
      * @var string
@@ -22,7 +25,7 @@ final class SmartFileSystem extends \_PhpScoper069ebd53a518\Symfony\Component\Fi
         $source = @\file_get_contents($filename);
         if (!$source) {
             $message = \sprintf('Failed to read "%s" file: "%s"', $filename, $this->getLastError());
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Filesystem\Exception\IOException($message, 0, null, $filename);
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Filesystem\Exception\IOException($message, 0, null, $filename);
         }
         return $source;
     }
@@ -36,7 +39,20 @@ final class SmartFileSystem extends \_PhpScoper069ebd53a518\Symfony\Component\Fi
      */
     public function htmlToText(string $html) : string
     {
-        return \html_entity_decode(\strip_tags($html), \ENT_QUOTES | \ENT_HTML5, 'UTF-8');
+        $content = \strip_tags($html);
+        return \html_entity_decode($content, \ENT_QUOTES | \ENT_HTML5, 'UTF-8');
+    }
+    /**
+     * @param SmartFileInfo[] $fileInfos
+     * @return string[]
+     */
+    public function resolveFilePathsFromFileInfos(array $fileInfos) : array
+    {
+        $filePaths = [];
+        foreach ($fileInfos as $fileInfo) {
+            $filePaths[] = $fileInfo->getRelativeFilePathFromCwd();
+        }
+        return $filePaths;
     }
     /**
      * Returns the last PHP error as plain string.
@@ -46,6 +62,6 @@ final class SmartFileSystem extends \_PhpScoper069ebd53a518\Symfony\Component\Fi
     {
         $message = \error_get_last()['message'] ?? '';
         $message = \ini_get('html_errors') ? $this->htmlToText($message) : $message;
-        return \_PhpScoper069ebd53a518\Nette\Utils\Strings::replace($message, self::BEFORE_COLLON_REGEX, '');
+        return \_PhpScoper326af2119eba\Nette\Utils\Strings::replace($message, self::BEFORE_COLLON_REGEX, '');
     }
 }

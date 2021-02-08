@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionConverter;
 
-use _PhpScoper069ebd53a518\Nette\Utils\Strings;
-use _PhpScoper069ebd53a518\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper326af2119eba\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
+use Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
 final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface
 {
@@ -14,36 +14,29 @@ final class ArgumentsServiceOptionKeyYamlToPhpFactory implements \Symplify\PhpCo
      * @var ArgsNodeFactory
      */
     private $argsNodeFactory;
-    public function __construct(\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory)
+    /**
+     * @var ServiceOptionAnalyzer
+     */
+    private $serviceOptionAnalyzer;
+    public function __construct(\Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory $argsNodeFactory, \Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer $serviceOptionAnalyzer)
     {
         $this->argsNodeFactory = $argsNodeFactory;
+        $this->serviceOptionAnalyzer = $serviceOptionAnalyzer;
     }
-    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper069ebd53a518\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper069ebd53a518\PhpParser\Node\Expr\MethodCall
+    public function decorateServiceMethodCall($key, $yaml, $values, \_PhpScoper326af2119eba\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper326af2119eba\PhpParser\Node\Expr\MethodCall
     {
-        if (!$this->hasNamedArguments($yaml)) {
+        if (!$this->serviceOptionAnalyzer->hasNamedArguments($yaml)) {
             $args = $this->argsNodeFactory->createFromValuesAndWrapInArray($yaml);
-            return new \_PhpScoper069ebd53a518\PhpParser\Node\Expr\MethodCall($methodCall, 'args', $args);
+            return new \_PhpScoper326af2119eba\PhpParser\Node\Expr\MethodCall($methodCall, 'args', $args);
         }
         foreach ($yaml as $key => $value) {
             $args = $this->argsNodeFactory->createFromValues([$key, $value], \false, \true);
-            $methodCall = new \_PhpScoper069ebd53a518\PhpParser\Node\Expr\MethodCall($methodCall, 'arg', $args);
+            $methodCall = new \_PhpScoper326af2119eba\PhpParser\Node\Expr\MethodCall($methodCall, 'arg', $args);
         }
         return $methodCall;
     }
     public function isMatch($key, $values) : bool
     {
         return $key === \Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::ARGUMENTS;
-    }
-    private function hasNamedArguments(array $data) : bool
-    {
-        if (\count($data) === 0) {
-            return \false;
-        }
-        foreach (\array_keys($data) as $key) {
-            if (!\_PhpScoper069ebd53a518\Nette\Utils\Strings::startsWith((string) $key, '$')) {
-                return \false;
-            }
-        }
-        return \true;
     }
 }

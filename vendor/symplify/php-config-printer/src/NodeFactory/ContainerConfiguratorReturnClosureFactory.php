@@ -3,14 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoper069ebd53a518\PhpParser\Node;
-use _PhpScoper069ebd53a518\PhpParser\Node\Expr\Assign;
-use _PhpScoper069ebd53a518\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper069ebd53a518\PhpParser\Node\Expr\Variable;
-use _PhpScoper069ebd53a518\PhpParser\Node\Stmt\Expression;
-use _PhpScoper069ebd53a518\PhpParser\Node\Stmt\Return_;
+use _PhpScoper326af2119eba\PhpParser\Node;
+use _PhpScoper326af2119eba\PhpParser\Node\Expr\Assign;
+use _PhpScoper326af2119eba\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper326af2119eba\PhpParser\Node\Expr\Variable;
+use _PhpScoper326af2119eba\PhpParser\Node\Stmt\Expression;
+use _PhpScoper326af2119eba\PhpParser\Node\Stmt\Return_;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
-use Symplify\PhpConfigPrinter\Contract\NestedCaseConverterInterface;
 use Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\MethodName;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
@@ -26,24 +25,23 @@ final class ContainerConfiguratorReturnClosureFactory
      */
     private $caseConverters = [];
     /**
-     * @var NestedCaseConverterInterface[]
+     * @var ContainerNestedNodesFactory
      */
-    private $nestedCaseConverters = [];
+    private $containerNestedNodesFactory;
     /**
      * @param CaseConverterInterface[] $caseConverters
-     * @param NestedCaseConverterInterface[] $nestedCaseConverters
      */
-    public function __construct(\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $configuratorClosureNodeFactory, array $caseConverters, array $nestedCaseConverters)
+    public function __construct(\Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory $configuratorClosureNodeFactory, array $caseConverters, \Symplify\PhpConfigPrinter\NodeFactory\ContainerNestedNodesFactory $containerNestedNodesFactory)
     {
         $this->configuratorClosureNodeFactory = $configuratorClosureNodeFactory;
         $this->caseConverters = $caseConverters;
-        $this->nestedCaseConverters = $nestedCaseConverters;
+        $this->containerNestedNodesFactory = $containerNestedNodesFactory;
     }
-    public function createFromYamlArray(array $arrayData) : \_PhpScoper069ebd53a518\PhpParser\Node\Stmt\Return_
+    public function createFromYamlArray(array $arrayData) : \_PhpScoper326af2119eba\PhpParser\Node\Stmt\Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->configuratorClosureNodeFactory->createContainerClosureFromStmts($stmts);
-        return new \_PhpScoper069ebd53a518\PhpParser\Node\Stmt\Return_($closure);
+        return new \_PhpScoper326af2119eba\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
      * @return Node[]
@@ -63,32 +61,16 @@ final class ContainerConfiguratorReturnClosureFactory
         foreach ($yamlData as $key => $values) {
             $nodes = $this->createInitializeNode($key, $nodes);
             foreach ($values as $nestedKey => $nestedValues) {
-                $expression = null;
                 $nestedNodes = [];
                 if (\is_array($nestedValues)) {
-                    foreach ($nestedValues as $subNestedKey => $subNestedValue) {
-                        foreach ($this->nestedCaseConverters as $nestedCaseConverter) {
-                            if (!$nestedCaseConverter->match($key, $nestedKey)) {
-                                continue;
-                            }
-                            $expression = $nestedCaseConverter->convertToMethodCall($subNestedKey, $subNestedValue);
-                            $nestedNodes[] = $expression;
-                        }
-                    }
+                    $nestedNodes = $this->containerNestedNodesFactory->createFromValues($nestedValues, $key, $nestedKey);
                 }
                 if ($nestedNodes !== []) {
                     $nodes = \array_merge($nodes, $nestedNodes);
                     continue;
                 }
-                foreach ($this->caseConverters as $caseConverter) {
-                    if (!$caseConverter->match($key, $nestedKey, $nestedValues)) {
-                        continue;
-                    }
-                    /** @var string $nestedKey */
-                    $expression = $caseConverter->convertToMethodCall($nestedKey, $nestedValues);
-                    break;
-                }
-                if ($expression === null) {
+                $expression = $this->resolveExpression($key, $nestedKey, $nestedValues);
+                if (!$expression instanceof \_PhpScoper326af2119eba\PhpParser\Node\Stmt\Expression) {
                     continue;
                 }
                 $nodes[] = $expression;
@@ -96,13 +78,16 @@ final class ContainerConfiguratorReturnClosureFactory
         }
         return $nodes;
     }
-    private function createInitializeAssign(string $variableName, string $methodName) : \_PhpScoper069ebd53a518\PhpParser\Node\Stmt\Expression
+    private function createInitializeAssign(string $variableName, string $methodName) : \_PhpScoper326af2119eba\PhpParser\Node\Stmt\Expression
     {
-        $servicesVariable = new \_PhpScoper069ebd53a518\PhpParser\Node\Expr\Variable($variableName);
-        $containerConfiguratorVariable = new \_PhpScoper069ebd53a518\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
-        $assign = new \_PhpScoper069ebd53a518\PhpParser\Node\Expr\Assign($servicesVariable, new \_PhpScoper069ebd53a518\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, $methodName));
-        return new \_PhpScoper069ebd53a518\PhpParser\Node\Stmt\Expression($assign);
+        $servicesVariable = new \_PhpScoper326af2119eba\PhpParser\Node\Expr\Variable($variableName);
+        $containerConfiguratorVariable = new \_PhpScoper326af2119eba\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $assign = new \_PhpScoper326af2119eba\PhpParser\Node\Expr\Assign($servicesVariable, new \_PhpScoper326af2119eba\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, $methodName));
+        return new \_PhpScoper326af2119eba\PhpParser\Node\Stmt\Expression($assign);
     }
+    /**
+     * @return mixed[]
+     */
     private function createInitializeNode(string $key, array $nodes) : array
     {
         if ($key === \Symplify\PhpConfigPrinter\ValueObject\YamlKey::SERVICES) {
@@ -112,5 +97,20 @@ final class ContainerConfiguratorReturnClosureFactory
             $nodes[] = $this->createInitializeAssign(\Symplify\PhpConfigPrinter\ValueObject\VariableName::PARAMETERS, \Symplify\PhpConfigPrinter\ValueObject\MethodName::PARAMETERS);
         }
         return $nodes;
+    }
+    /**
+     * @param int|string $nestedKey
+     * @param mixed|mixed[] $nestedValues
+     */
+    private function resolveExpression(string $key, $nestedKey, $nestedValues) : ?\_PhpScoper326af2119eba\PhpParser\Node\Stmt\Expression
+    {
+        foreach ($this->caseConverters as $caseConverter) {
+            if (!$caseConverter->match($key, $nestedKey, $nestedValues)) {
+                continue;
+            }
+            /** @var string $nestedKey */
+            return $caseConverter->convertToMethodCall($nestedKey, $nestedValues);
+        }
+        return null;
     }
 }

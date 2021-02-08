@@ -81,9 +81,13 @@ final class EasyCodingStandardApplication
                 $this->easyCodingStandardStyle->writeln(' [file] ' . $fileInfo->getRelativeFilePathFromCwd());
             }
             $this->singleFileProcessor->processFileInfo($fileInfo);
-            if (!$this->easyCodingStandardStyle->isDebug() && $this->configuration->shouldShowProgressBar()) {
-                $this->easyCodingStandardStyle->progressAdvance();
+            if ($this->easyCodingStandardStyle->isDebug()) {
+                continue;
             }
+            if (!$this->configuration->shouldShowProgressBar()) {
+                continue;
+            }
+            $this->easyCodingStandardStyle->progressAdvance();
         }
     }
 }

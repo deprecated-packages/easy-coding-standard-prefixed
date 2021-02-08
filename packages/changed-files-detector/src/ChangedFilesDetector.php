@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\ChangedFilesDetector;
 
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\CacheItem;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\CacheItem;
 use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\EasyCodingStandard\ChangedFilesDetector\Tests\ChangedFilesDetectorTest
@@ -14,7 +14,7 @@ final class ChangedFilesDetector
     /**
      * @var string
      */
-    public const CHANGED_FILES_CACHE_TAG = 'changed_files';
+    private const CHANGED_FILES_CACHE_TAG = 'changed_files';
     /**
      * @var string
      */
@@ -27,7 +27,7 @@ final class ChangedFilesDetector
      * @var TagAwareAdapterInterface
      */
     private $tagAwareAdapter;
-    public function __construct(\Symplify\EasyCodingStandard\ChangedFilesDetector\FileHashComputer $fileHashComputer, \_PhpScoper069ebd53a518\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $tagAwareAdapter)
+    public function __construct(\Symplify\EasyCodingStandard\ChangedFilesDetector\FileHashComputer $fileHashComputer, \_PhpScoper326af2119eba\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $tagAwareAdapter)
     {
         $this->fileHashComputer = $fileHashComputer;
         $this->tagAwareAdapter = $tagAwareAdapter;
@@ -65,11 +65,12 @@ final class ChangedFilesDetector
     }
     /**
      * For cache invalidation
+     * @api
      * @param SmartFileInfo[] $configFileInfos
      */
     public function setUsedConfigs(array $configFileInfos) : void
     {
-        if (\count($configFileInfos) === 0) {
+        if ($configFileInfos === []) {
             return;
         }
         // the first config is core to all → if it was changed, just invalidate it

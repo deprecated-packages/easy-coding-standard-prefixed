@@ -129,7 +129,7 @@ class GetMethodPropertiesTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
      */
     public function testReturnNamespace()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper069ebd53a518\\MyNamespace\\MyClass', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper326af2119eba\\MyNamespace\\MyClass', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testReturnNamespace()
@@ -140,7 +140,7 @@ class GetMethodPropertiesTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
      */
     public function testReturnMultilineNamespace()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper069ebd53a518\\MyNamespace\\MyClass\\Foo', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper326af2119eba\\MyNamespace\\MyClass\\Foo', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testReturnMultilineNamespace()
@@ -221,6 +221,17 @@ class GetMethodPropertiesTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testPHP8MixedTypeHintNullable()
+    /**
+     * Test a function with return type using the namespace operator.
+     *
+     * @return void
+     */
+    public function testNamespaceOperatorTypeHint()
+    {
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper326af2119eba\\?namespace\\Name', 'nullable_return_type' => \true, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
+    }
+    //end testNamespaceOperatorTypeHint()
     /**
      * Test helper.
      *

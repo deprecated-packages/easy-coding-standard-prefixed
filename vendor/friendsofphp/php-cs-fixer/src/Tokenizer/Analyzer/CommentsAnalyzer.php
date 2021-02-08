@@ -72,6 +72,12 @@ final class CommentsAnalyzer
         $nextIndex = $index;
         do {
             $nextIndex = $tokens->getNextMeaningfulToken($nextIndex);
+            if (\defined('T_ATTRIBUTE')) {
+                while (null !== $nextIndex && $tokens[$nextIndex]->isGivenKind(\T_ATTRIBUTE)) {
+                    $nextIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ATTRIBUTE, $nextIndex);
+                    $nextIndex = $tokens->getNextMeaningfulToken($nextIndex);
+                }
+            }
         } while (null !== $nextIndex && $tokens[$nextIndex]->equals('('));
         if (null === $nextIndex || $tokens[$nextIndex]->equals('}')) {
             return \false;

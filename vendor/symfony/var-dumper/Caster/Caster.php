@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper326af2119eba\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper069ebd53a518\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper326af2119eba\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Helper for filtering out properties in casters.
  *
@@ -20,39 +20,47 @@ use _PhpScoper069ebd53a518\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class Caster
 {
-    const EXCLUDE_VERBOSE = 1;
-    const EXCLUDE_VIRTUAL = 2;
-    const EXCLUDE_DYNAMIC = 4;
-    const EXCLUDE_PUBLIC = 8;
-    const EXCLUDE_PROTECTED = 16;
-    const EXCLUDE_PRIVATE = 32;
-    const EXCLUDE_NULL = 64;
-    const EXCLUDE_EMPTY = 128;
-    const EXCLUDE_NOT_IMPORTANT = 256;
-    const EXCLUDE_STRICT = 512;
-    const PREFIX_VIRTUAL = "\0~\0";
-    const PREFIX_DYNAMIC = "\0+\0";
-    const PREFIX_PROTECTED = "\0*\0";
+    public const EXCLUDE_VERBOSE = 1;
+    public const EXCLUDE_VIRTUAL = 2;
+    public const EXCLUDE_DYNAMIC = 4;
+    public const EXCLUDE_PUBLIC = 8;
+    public const EXCLUDE_PROTECTED = 16;
+    public const EXCLUDE_PRIVATE = 32;
+    public const EXCLUDE_NULL = 64;
+    public const EXCLUDE_EMPTY = 128;
+    public const EXCLUDE_NOT_IMPORTANT = 256;
+    public const EXCLUDE_STRICT = 512;
+    public const PREFIX_VIRTUAL = "\0~\0";
+    public const PREFIX_DYNAMIC = "\0+\0";
+    public const PREFIX_PROTECTED = "\0*\0";
     /**
      * Casts objects to arrays and adds the dynamic property prefix.
      *
-     * @param object $obj          The object to cast
-     * @param bool   $hasDebugInfo Whether the __debugInfo method exists on $obj or not
+     * @param bool $hasDebugInfo Whether the __debugInfo method exists on $obj or not
      *
      * @return array The array-cast of the object, with prefixed dynamic properties
      */
-    public static function castObject($obj, string $class, bool $hasDebugInfo = \false) : array
+    public static function castObject(object $obj, string $class, bool $hasDebugInfo = \false, string $debugClass = null) : array
     {
+        if ($hasDebugInfo) {
+            try {
+                $debugInfo = $obj->__debugInfo();
+            } catch (\Exception $e) {
+                // ignore failing __debugInfo()
+                $hasDebugInfo = \false;
+            }
+        }
         $a = $obj instanceof \Closure ? [] : (array) $obj;
         if ($obj instanceof \__PHP_Incomplete_Class) {
             return $a;
         }
         if ($a) {
             static $publicProperties = [];
+            $debugClass = $debugClass ?? \get_debug_type($obj);
             $i = 0;
             $prefixedKeys = [];
             foreach ($a as $k => $v) {
-                if (isset($k[0]) ? "\0" !== $k[0] : \PHP_VERSION_ID >= 70200) {
+                if ("\0" !== ($k[0] ?? '')) {
                     if (!isset($publicProperties[$class])) {
                         foreach ((new \ReflectionClass($class))->getProperties(\ReflectionProperty::IS_PUBLIC) as $prop) {
                             $publicProperties[$class][$prop->name] = \true;
@@ -61,8 +69,8 @@ class Caster
                     if (!isset($publicProperties[$class][$k])) {
                         $prefixedKeys[$i] = self::PREFIX_DYNAMIC . $k;
                     }
-                } elseif (isset($k[16]) && "\0" === $k[16] && 0 === \strpos($k, "\0class@anonymous\0")) {
-                    $prefixedKeys[$i] = "\0" . \get_parent_class($class) . '@anonymous' . \strrchr($k, "\0");
+                } elseif ($debugClass !== $class && 1 === \strpos($k, $class)) {
+                    $prefixedKeys[$i] = "\0" . $debugClass . \strrchr($k, "\0");
                 }
                 ++$i;
             }
@@ -74,9 +82,12 @@ class Caster
                 $a = \array_combine($keys, $a);
             }
         }
-        if ($hasDebugInfo && \is_array($debugInfo = $obj->__debugInfo())) {
+        if ($hasDebugInfo && \is_array($debugInfo)) {
             foreach ($debugInfo as $k => $v) {
                 if (!isset($k[0]) || "\0" !== $k[0]) {
+                    if (\array_key_exists(self::PREFIX_DYNAMIC . $k, $a)) {
+                        continue;
+                    }
                     $k = self::PREFIX_VIRTUAL . $k;
                 }
                 unset($a[$k]);
@@ -133,7 +144,7 @@ class Caster
         }
         return $a;
     }
-    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, \_PhpScoper069ebd53a518\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, \_PhpScoper326af2119eba\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
         if (isset($a['__PHP_Incomplete_Class_Name'])) {
             $stub->class .= '(' . $a['__PHP_Incomplete_Class_Name'] . ')';

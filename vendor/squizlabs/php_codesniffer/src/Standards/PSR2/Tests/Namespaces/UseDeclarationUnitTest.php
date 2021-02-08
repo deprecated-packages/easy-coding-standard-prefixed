@@ -26,7 +26,7 @@ class UseDeclarationUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSn
     {
         switch ($testFile) {
             case 'UseDeclarationUnitTest.2.inc':
-                return [4 => 1, 5 => 1, 6 => 1, 7 => 1, 12 => 1];
+                return [4 => 1, 5 => 1, 6 => 1, 7 => 1, 9 => 1, 10 => 1, 11 => 1, 16 => 1];
             case 'UseDeclarationUnitTest.3.inc':
                 return [4 => 1, 6 => 1];
             case 'UseDeclarationUnitTest.5.inc':

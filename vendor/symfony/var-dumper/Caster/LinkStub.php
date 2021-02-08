@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper326af2119eba\Symfony\Component\VarDumper\Caster;
 
 /**
  * Represents a file or a URL.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class LinkStub extends \_PhpScoper069ebd53a518\Symfony\Component\VarDumper\Caster\ConstStub
+class LinkStub extends \_PhpScoper326af2119eba\Symfony\Component\VarDumper\Caster\ConstStub
 {
     public $inVendor = \false;
     private static $vendorRoots;
@@ -38,7 +38,7 @@ class LinkStub extends \_PhpScoper069ebd53a518\Symfony\Component\VarDumper\Caste
             $this->attr['href'] = $href;
             return;
         }
-        if (!\file_exists($href)) {
+        if (!\is_file($href)) {
             return;
         }
         if ($line) {
@@ -65,7 +65,7 @@ class LinkStub extends \_PhpScoper069ebd53a518\Symfony\Component\VarDumper\Caste
                 if ('C' === $class[0] && 0 === \strpos($class, 'ComposerAutoloaderInit')) {
                     $r = new \ReflectionClass($class);
                     $v = \dirname($r->getFileName(), 2);
-                    if (\file_exists($v . '/composer/installed.json')) {
+                    if (\is_file($v . '/composer/installed.json')) {
                         self::$vendorRoots[] = $v . \DIRECTORY_SEPARATOR;
                     }
                 }
@@ -81,7 +81,7 @@ class LinkStub extends \_PhpScoper069ebd53a518\Symfony\Component\VarDumper\Caste
             }
         }
         $parent = $dir;
-        while (!@\file_exists($parent . '/composer.json')) {
+        while (!@\is_file($parent . '/composer.json')) {
             if (!@\file_exists($parent)) {
                 // open_basedir restriction in effect
                 break;

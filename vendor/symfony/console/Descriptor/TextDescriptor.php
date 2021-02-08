@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Console\Descriptor;
+namespace _PhpScoper326af2119eba\Symfony\Component\Console\Descriptor;
 
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Application;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Command\Command;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Application;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Command\Command;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Input\InputOption;
 /**
  * Text descriptor.
  *
@@ -24,19 +24,19 @@ use _PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputOption;
  *
  * @internal
  */
-class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\Descriptor\Descriptor
+class TextDescriptor extends \_PhpScoper326af2119eba\Symfony\Component\Console\Descriptor\Descriptor
 {
     /**
      * {@inheritdoc}
      */
-    protected function describeInputArgument(\_PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputArgument $argument, array $options = [])
+    protected function describeInputArgument(\_PhpScoper326af2119eba\Symfony\Component\Console\Input\InputArgument $argument, array $options = [])
     {
         if (null !== $argument->getDefault() && (!\is_array($argument->getDefault()) || \count($argument->getDefault()))) {
             $default = \sprintf('<comment> [default: %s]</comment>', $this->formatDefaultValue($argument->getDefault()));
         } else {
             $default = '';
         }
-        $totalWidth = isset($options['total_width']) ? $options['total_width'] : \_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($argument->getName());
+        $totalWidth = $options['total_width'] ?? \_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($argument->getName());
         $spacingWidth = $totalWidth - \strlen($argument->getName());
         $this->writeText(\sprintf(
             '  <info>%s</info>  %s%s%s',
@@ -50,7 +50,7 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
     /**
      * {@inheritdoc}
      */
-    protected function describeInputOption(\_PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputOption $option, array $options = [])
+    protected function describeInputOption(\_PhpScoper326af2119eba\Symfony\Component\Console\Input\InputOption $option, array $options = [])
     {
         if ($option->acceptValue() && null !== $option->getDefault() && (!\is_array($option->getDefault()) || \count($option->getDefault()))) {
             $default = \sprintf('<comment> [default: %s]</comment>', $this->formatDefaultValue($option->getDefault()));
@@ -64,9 +64,9 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
                 $value = '[' . $value . ']';
             }
         }
-        $totalWidth = isset($options['total_width']) ? $options['total_width'] : $this->calculateTotalWidthForOptions([$option]);
+        $totalWidth = $options['total_width'] ?? $this->calculateTotalWidthForOptions([$option]);
         $synopsis = \sprintf('%s%s', $option->getShortcut() ? \sprintf('-%s, ', $option->getShortcut()) : '    ', \sprintf('--%s%s', $option->getName(), $value));
-        $spacingWidth = $totalWidth - \_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($synopsis);
+        $spacingWidth = $totalWidth - \_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($synopsis);
         $this->writeText(\sprintf(
             '  <info>%s</info>  %s%s%s%s',
             $synopsis,
@@ -80,11 +80,11 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
     /**
      * {@inheritdoc}
      */
-    protected function describeInputDefinition(\_PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputDefinition $definition, array $options = [])
+    protected function describeInputDefinition(\_PhpScoper326af2119eba\Symfony\Component\Console\Input\InputDefinition $definition, array $options = [])
     {
         $totalWidth = $this->calculateTotalWidthForOptions($definition->getOptions());
         foreach ($definition->getArguments() as $argument) {
-            $totalWidth = \max($totalWidth, \_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($argument->getName()));
+            $totalWidth = \max($totalWidth, \_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($argument->getName()));
         }
         if ($definition->getArguments()) {
             $this->writeText('<comment>Arguments:</comment>', $options);
@@ -117,10 +117,8 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
     /**
      * {@inheritdoc}
      */
-    protected function describeCommand(\_PhpScoper069ebd53a518\Symfony\Component\Console\Command\Command $command, array $options = [])
+    protected function describeCommand(\_PhpScoper326af2119eba\Symfony\Component\Console\Command\Command $command, array $options = [])
     {
-        $command->getSynopsis(\true);
-        $command->getSynopsis(\false);
         $command->mergeApplicationDefinition(\false);
         if ($description = $command->getDescription()) {
             $this->writeText('<comment>Description:</comment>', $options);
@@ -131,10 +129,10 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
         $this->writeText('<comment>Usage:</comment>', $options);
         foreach (\array_merge([$command->getSynopsis(\true)], $command->getAliases(), $command->getUsages()) as $usage) {
             $this->writeText("\n");
-            $this->writeText('  ' . \_PhpScoper069ebd53a518\Symfony\Component\Console\Formatter\OutputFormatter::escape($usage), $options);
+            $this->writeText('  ' . \_PhpScoper326af2119eba\Symfony\Component\Console\Formatter\OutputFormatter::escape($usage), $options);
         }
         $this->writeText("\n");
-        $definition = $command->getNativeDefinition();
+        $definition = $command->getDefinition();
         if ($definition->getOptions() || $definition->getArguments()) {
             $this->writeText("\n");
             $this->describeInputDefinition($definition, $options);
@@ -152,10 +150,10 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
     /**
      * {@inheritdoc}
      */
-    protected function describeApplication(\_PhpScoper069ebd53a518\Symfony\Component\Console\Application $application, array $options = [])
+    protected function describeApplication(\_PhpScoper326af2119eba\Symfony\Component\Console\Application $application, array $options = [])
     {
-        $describedNamespace = isset($options['namespace']) ? $options['namespace'] : null;
-        $description = new \_PhpScoper069ebd53a518\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
+        $describedNamespace = $options['namespace'] ?? null;
+        $description = new \_PhpScoper326af2119eba\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
         if (isset($options['raw_text']) && $options['raw_text']) {
             $width = $this->getColumnWidth($description->getCommands());
             foreach ($description->getCommands() as $command) {
@@ -168,7 +166,7 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
             }
             $this->writeText("<comment>Usage:</comment>\n", $options);
             $this->writeText("  command [options] [arguments]\n\n", $options);
-            $this->describeInputDefinition(new \_PhpScoper069ebd53a518\Symfony\Component\Console\Input\InputDefinition($application->getDefinition()->getOptions()), $options);
+            $this->describeInputDefinition(new \_PhpScoper326af2119eba\Symfony\Component\Console\Input\InputDefinition($application->getDefinition()->getOptions()), $options);
             $this->writeText("\n");
             $this->writeText("\n");
             $commands = $description->getCommands();
@@ -183,7 +181,7 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
             // calculate max. width based on available commands per namespace
             $width = $this->getColumnWidth(\array_merge(...\array_values(\array_map(function ($namespace) use($commands) {
                 return \array_intersect($namespace['commands'], \array_keys($commands));
-            }, $namespaces))));
+            }, \array_values($namespaces)))));
             if ($describedNamespace) {
                 $this->writeText(\sprintf('<comment>Available commands for the "%s" namespace:</comment>', $describedNamespace), $options);
             } else {
@@ -196,13 +194,13 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
                 if (!$namespace['commands']) {
                     continue;
                 }
-                if (!$describedNamespace && \_PhpScoper069ebd53a518\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
+                if (!$describedNamespace && \_PhpScoper326af2119eba\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
                     $this->writeText("\n");
                     $this->writeText(' <comment>' . $namespace['id'] . '</comment>', $options);
                 }
                 foreach ($namespace['commands'] as $name) {
                     $this->writeText("\n");
-                    $spacingWidth = $width - \_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($name);
+                    $spacingWidth = $width - \_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($name);
                     $command = $commands[$name];
                     $commandAliases = $name === $command->getName() ? $this->getCommandAliasesText($command) : '';
                     $this->writeText(\sprintf('  <info>%s</info>%s%s', $name, \str_repeat(' ', $spacingWidth), $commandAliases . $command->getDescription()), $options);
@@ -221,7 +219,7 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
     /**
      * Formats command aliases to show them in the command description.
      */
-    private function getCommandAliasesText(\_PhpScoper069ebd53a518\Symfony\Component\Console\Command\Command $command) : string
+    private function getCommandAliasesText(\_PhpScoper326af2119eba\Symfony\Component\Console\Command\Command $command) : string
     {
         $text = '';
         $aliases = $command->getAliases();
@@ -241,11 +239,11 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
             return 'INF';
         }
         if (\is_string($default)) {
-            $default = \_PhpScoper069ebd53a518\Symfony\Component\Console\Formatter\OutputFormatter::escape($default);
+            $default = \_PhpScoper326af2119eba\Symfony\Component\Console\Formatter\OutputFormatter::escape($default);
         } elseif (\is_array($default)) {
             foreach ($default as $key => $value) {
                 if (\is_string($value)) {
-                    $default[$key] = \_PhpScoper069ebd53a518\Symfony\Component\Console\Formatter\OutputFormatter::escape($value);
+                    $default[$key] = \_PhpScoper326af2119eba\Symfony\Component\Console\Formatter\OutputFormatter::escape($value);
                 }
             }
         }
@@ -258,13 +256,13 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
     {
         $widths = [];
         foreach ($commands as $command) {
-            if ($command instanceof \_PhpScoper069ebd53a518\Symfony\Component\Console\Command\Command) {
-                $widths[] = \_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($command->getName());
+            if ($command instanceof \_PhpScoper326af2119eba\Symfony\Component\Console\Command\Command) {
+                $widths[] = \_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($command->getName());
                 foreach ($command->getAliases() as $alias) {
-                    $widths[] = \_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($alias);
+                    $widths[] = \_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($alias);
                 }
             } else {
-                $widths[] = \_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($command);
+                $widths[] = \_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($command);
             }
         }
         return $widths ? \max($widths) + 2 : 0;
@@ -277,9 +275,9 @@ class TextDescriptor extends \_PhpScoper069ebd53a518\Symfony\Component\Console\D
         $totalWidth = 0;
         foreach ($options as $option) {
             // "-" + shortcut + ", --" + name
-            $nameLength = 1 + \max(\_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($option->getShortcut()), 1) + 4 + \_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($option->getName());
+            $nameLength = 1 + \max(\_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($option->getShortcut()), 1) + 4 + \_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($option->getName());
             if ($option->acceptValue()) {
-                $valueLength = 1 + \_PhpScoper069ebd53a518\Symfony\Component\Console\Helper\Helper::strlen($option->getName());
+                $valueLength = 1 + \_PhpScoper326af2119eba\Symfony\Component\Console\Helper\Helper::strlen($option->getName());
                 // = + value
                 $valueLength += $option->isValueOptional() ? 2 : 0;
                 // [ + ]

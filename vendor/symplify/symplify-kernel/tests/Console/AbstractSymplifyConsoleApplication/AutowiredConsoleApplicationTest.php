@@ -3,18 +3,18 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Tests\Console\AbstractSymplifyConsoleApplication;
 
-use _PhpScoper069ebd53a518\Symfony\Component\Console\Application;
+use _PhpScoper326af2119eba\Symfony\Component\Console\Application;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
-use Symplify\SymplifyKernel\Tests\HttpKernel\PackageBuilderTestingKernel;
+use Symplify\SymplifyKernel\Tests\HttpKernel\OnlyForTestsKernel;
 final class AutowiredConsoleApplicationTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
 {
     protected function setUp() : void
     {
-        $this->bootKernel(\Symplify\SymplifyKernel\Tests\HttpKernel\PackageBuilderTestingKernel::class);
+        $this->bootKernel(\Symplify\SymplifyKernel\Tests\HttpKernel\OnlyForTestsKernel::class);
     }
     public function test() : void
     {
-        $application = $this->getService(\_PhpScoper069ebd53a518\Symfony\Component\Console\Application::class);
-        $this->assertInstanceOf(\_PhpScoper069ebd53a518\Symfony\Component\Console\Application::class, $application);
+        $application = $this->getService(\_PhpScoper326af2119eba\Symfony\Component\Console\Application::class);
+        $this->assertInstanceOf(\_PhpScoper326af2119eba\Symfony\Component\Console\Application::class, $application);
     }
 }

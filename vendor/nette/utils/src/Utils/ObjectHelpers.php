@@ -5,41 +5,35 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper069ebd53a518\Nette\Utils;
+namespace _PhpScoper326af2119eba\Nette\Utils;
 
-use _PhpScoper069ebd53a518\Nette;
-use _PhpScoper069ebd53a518\Nette\MemberAccessException;
+use _PhpScoper326af2119eba\Nette;
+use _PhpScoper326af2119eba\Nette\MemberAccessException;
 /**
  * Nette\SmartObject helpers.
  */
 final class ObjectHelpers
 {
     use Nette\StaticClass;
-    /**
-     * @throws MemberAccessException
-     */
+    /** @throws MemberAccessException */
     public static function strictGet(string $class, string $name) : void
     {
         $rc = new \ReflectionClass($class);
         $hint = self::getSuggestion(\array_merge(\array_filter($rc->getProperties(\ReflectionProperty::IS_PUBLIC), function ($p) {
             return !$p->isStatic();
         }), self::parseFullDoc($rc, '~^[ \\t*]*@property(?:-read)?[ \\t]+(?:\\S+[ \\t]+)??\\$(\\w+)~m')), $name);
-        throw new \_PhpScoper069ebd53a518\Nette\MemberAccessException("Cannot read an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
+        throw new \_PhpScoper326af2119eba\Nette\MemberAccessException("Cannot read an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
     }
-    /**
-     * @throws MemberAccessException
-     */
+    /** @throws MemberAccessException */
     public static function strictSet(string $class, string $name) : void
     {
         $rc = new \ReflectionClass($class);
         $hint = self::getSuggestion(\array_merge(\array_filter($rc->getProperties(\ReflectionProperty::IS_PUBLIC), function ($p) {
             return !$p->isStatic();
         }), self::parseFullDoc($rc, '~^[ \\t*]*@property(?:-write)?[ \\t]+(?:\\S+[ \\t]+)??\\$(\\w+)~m')), $name);
-        throw new \_PhpScoper069ebd53a518\Nette\MemberAccessException("Cannot write to an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
+        throw new \_PhpScoper326af2119eba\Nette\MemberAccessException("Cannot write to an undeclared property {$class}::\${$name}" . ($hint ? ", did you mean \${$hint}?" : '.'));
     }
-    /**
-     * @throws MemberAccessException
-     */
+    /** @throws MemberAccessException */
     public static function strictCall(string $class, string $method, array $additionalMethods = []) : void
     {
         $hint = self::getSuggestion(\array_merge(\get_class_methods($class), self::parseFullDoc(new \ReflectionClass($class), '~^[ \\t*]*@method[ \\t]+(?:\\S+[ \\t]+)??(\\w+)\\(~m'), $additionalMethods), $method);
@@ -47,17 +41,15 @@ final class ObjectHelpers
             // called parent::$method()
             $class = 'parent';
         }
-        throw new \_PhpScoper069ebd53a518\Nette\MemberAccessException("Call to undefined method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
+        throw new \_PhpScoper326af2119eba\Nette\MemberAccessException("Call to undefined method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
     }
-    /**
-     * @throws MemberAccessException
-     */
+    /** @throws MemberAccessException */
     public static function strictStaticCall(string $class, string $method) : void
     {
         $hint = self::getSuggestion(\array_filter((new \ReflectionClass($class))->getMethods(\ReflectionMethod::IS_PUBLIC), function ($m) {
             return $m->isStatic();
         }), $method);
-        throw new \_PhpScoper069ebd53a518\Nette\MemberAccessException("Call to undefined static method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
+        throw new \_PhpScoper326af2119eba\Nette\MemberAccessException("Call to undefined static method {$class}::{$method}()" . ($hint ? ", did you mean {$hint}()?" : '.'));
     }
     /**
      * Returns array of magic properties defined by annotation @property.
@@ -76,14 +68,14 @@ final class ObjectHelpers
         $props = [];
         foreach ($matches as [, $type, $name]) {
             $uname = \ucfirst($name);
-            $write = $type !== '-read' && $rc->hasMethod($nm = 'set' . $uname) && ($rm = $rc->getMethod($nm)) && $rm->getName() === $nm && !$rm->isPrivate() && !$rm->isStatic();
-            $read = $type !== '-write' && ($rc->hasMethod($nm = 'get' . $uname) || $rc->hasMethod($nm = 'is' . $uname)) && ($rm = $rc->getMethod($nm)) && $rm->getName() === $nm && !$rm->isPrivate() && !$rm->isStatic();
+            $write = $type !== '-read' && $rc->hasMethod($nm = 'set' . $uname) && ($rm = $rc->getMethod($nm))->name === $nm && !$rm->isPrivate() && !$rm->isStatic();
+            $read = $type !== '-write' && ($rc->hasMethod($nm = 'get' . $uname) || $rc->hasMethod($nm = 'is' . $uname)) && ($rm = $rc->getMethod($nm))->name === $nm && !$rm->isPrivate() && !$rm->isStatic();
             if ($read || $write) {
                 $props[$name] = $read << 0 | ($nm[0] === 'g') << 1 | $rm->returnsReference() << 2 | $write << 3;
             }
         }
         foreach ($rc->getTraits() as $trait) {
-            $props += self::getMagicProperties($trait->getName());
+            $props += self::getMagicProperties($trait->name);
         }
         if ($parent = \get_parent_class($class)) {
             $props += self::getMagicProperties($parent);
@@ -97,12 +89,12 @@ final class ObjectHelpers
      */
     public static function getSuggestion(array $possibilities, string $value) : ?string
     {
-        $norm = \preg_replace($re = '#^(get|set|has|is|add)(?=[A-Z])#', '', $value);
+        $norm = \preg_replace($re = '#^(get|set|has|is|add)(?=[A-Z])#', '+', $value);
         $best = null;
         $min = (\strlen($value) / 4 + 1) * 10 + 0.1;
         foreach (\array_unique($possibilities, \SORT_REGULAR) as $item) {
-            $item = $item instanceof \Reflector ? $item->getName() : $item;
-            if ($item !== $value && (($len = \levenshtein($item, $value, 10, 11, 10)) < $min || ($len = \levenshtein(\preg_replace($re, '', $item), $norm, 10, 11, 10) + 20) < $min)) {
+            $item = $item instanceof \Reflector ? $item->name : $item;
+            if ($item !== $value && (($len = \levenshtein($item, $value, 10, 11, 10)) < $min || ($len = \levenshtein(\preg_replace($re, '*', $item), $norm, 10, 11, 10)) < $min)) {
                 $min = $len;
                 $best = $item;
             }

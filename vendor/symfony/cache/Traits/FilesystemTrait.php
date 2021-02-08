@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\Cache\Traits;
+namespace _PhpScoper326af2119eba\Symfony\Component\Cache\Traits;
 
-use _PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper326af2119eba\Symfony\Component\Cache\Exception\CacheException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
@@ -29,7 +29,7 @@ trait FilesystemTrait
         $time = \time();
         $pruned = \true;
         foreach ($this->scanHashDir($this->directory) as $file) {
-            if (!($h = @\fopen($file, 'rb'))) {
+            if (!($h = @\fopen($file, 'r'))) {
                 continue;
             }
             if (($expiresAt = (int) \fgets($h)) && $time >= $expiresAt) {
@@ -50,7 +50,7 @@ trait FilesystemTrait
         $now = \time();
         foreach ($ids as $id) {
             $file = $this->getFile($id);
-            if (!\file_exists($file) || !($h = @\fopen($file, 'rb'))) {
+            if (!\is_file($file) || !($h = @\fopen($file, 'r'))) {
                 continue;
             }
             if (($expiresAt = (int) \fgets($h)) && $now >= $expiresAt) {
@@ -70,15 +70,15 @@ trait FilesystemTrait
     /**
      * {@inheritdoc}
      */
-    protected function doHave($id)
+    protected function doHave(string $id)
     {
         $file = $this->getFile($id);
-        return \file_exists($file) && (@\filemtime($file) > \time() || $this->doFetch([$id]));
+        return \is_file($file) && (@\filemtime($file) > \time() || $this->doFetch([$id]));
     }
     /**
      * {@inheritdoc}
      */
-    protected function doSave(array $values, $lifetime)
+    protected function doSave(array $values, int $lifetime)
     {
         $expiresAt = $lifetime ? \time() + $lifetime : 0;
         $values = $this->marshaller->marshall($values, $failed);
@@ -88,13 +88,13 @@ trait FilesystemTrait
             }
         }
         if ($failed && !\is_writable($this->directory)) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s)', $this->directory));
+            throw new \_PhpScoper326af2119eba\Symfony\Component\Cache\Exception\CacheException(\sprintf('Cache directory is not writable (%s).', $this->directory));
         }
         return $failed;
     }
     private function getFileKey(string $file) : string
     {
-        if (!($h = @\fopen($file, 'rb'))) {
+        if (!($h = @\fopen($file, 'r'))) {
             return '';
         }
         \fgets($h);

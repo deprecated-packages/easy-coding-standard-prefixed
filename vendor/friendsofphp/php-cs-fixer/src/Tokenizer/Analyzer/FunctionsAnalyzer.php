@@ -126,7 +126,7 @@ final class FunctionsAnalyzer
         $argumentsStart = $tokens->getNextTokenOfKind($methodIndex, ['(']);
         $argumentsEnd = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
         $typeColonIndex = $tokens->getNextMeaningfulToken($argumentsEnd);
-        if (':' !== $tokens[$typeColonIndex]->getContent()) {
+        if (!$tokens[$typeColonIndex]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON)) {
             return null;
         }
         $type = '';

@@ -22,6 +22,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
+use _PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  * @author Andreas Möller <am@localheinz.com>
@@ -75,7 +76,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             return;
         }
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
-            foreach ($this->configuration['annotations'] as $type) {
+            foreach ($this->configuration['annotations'] as $type => $typeLowerCase) {
                 $findPattern = \sprintf('/@%s\\s.+@%s\\s/s', $type, $type);
                 if (!$tokens[$index]->isGivenKind(\T_DOC_COMMENT) || 0 === \PhpCsFixer\Preg::match($findPattern, $tokens[$index]->getContent())) {
                     continue;
@@ -83,10 +84,19 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
                 $docBlock = new \PhpCsFixer\DocBlock\DocBlock($tokens[$index]->getContent());
                 $annotations = $docBlock->getAnnotationsOfType($type);
                 $annotationMap = [];
-                $replacePattern = \sprintf('/\\*\\s*@%s\\s+(.+)/', $type);
+                if (\in_array($type, ['property', 'property-read', 'property-write'], \true)) {
+                    $replacePattern = \sprintf('/(?s)\\*\\s*@%s\\s+(?P<optionalTypes>.+\\s+)?\\$(?P<comparableContent>[^\\s]+).*/', $type);
+                    $replacement = '\\2';
+                } elseif ('method' === $type) {
+                    $replacePattern = '/(?s)\\*\\s*@method\\s+(?P<optionalReturnTypes>.+\\s+)?(?P<comparableContent>.+)\\(.*/';
+                    $replacement = '\\2';
+                } else {
+                    $replacePattern = \sprintf('/\\*\\s*@%s\\s+(?P<comparableContent>.+)/', $typeLowerCase);
+                    $replacement = '\\1';
+                }
                 foreach ($annotations as $annotation) {
                     $rawContent = $annotation->getContent();
-                    $comparableContent = \PhpCsFixer\Preg::replace($replacePattern, '\\1', \strtolower(\trim($rawContent)));
+                    $comparableContent = \PhpCsFixer\Preg::replace($replacePattern, $replacement, \strtolower(\trim($rawContent)));
                     $annotationMap[$comparableContent] = $rawContent;
                 }
                 $orderedAnnotationMap = $annotationMap;
@@ -104,7 +114,15 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     }
     protected function createConfigurationDefinition()
     {
-        $allowedValues = ['author', 'covers', 'coversNothing', 'dataProvider', 'depends', 'group', 'internal', 'requires', 'uses'];
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('annotations', 'List of annotations to order, e.g. `["covers"]`.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset($allowedValues)])->setDefault(['covers'])->getOption()]);
+        $allowedValues = ['author', 'covers', 'coversNothing', 'dataProvider', 'depends', 'group', 'internal', 'method', 'property', 'property-read', 'property-write', 'requires', 'throws', 'uses'];
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('annotations', 'List of annotations to order, e.g. `["covers"]`.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset($allowedValues)])->setNormalizer(function (\_PhpScoper326af2119eba\Symfony\Component\OptionsResolver\Options $options, $value) {
+            $normalized = [];
+            foreach ($value as $index => $annotation) {
+                // since we will be using strtolower on the input annotations when building the sorting
+                // map we must match the type in lower case as well
+                $normalized[$annotation] = \strtolower($annotation);
+            }
+            return $normalized;
+        })->setDefault(['covers'])->getOption()]);
     }
 }

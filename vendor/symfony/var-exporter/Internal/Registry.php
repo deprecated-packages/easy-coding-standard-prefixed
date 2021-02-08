@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper069ebd53a518\Symfony\Component\VarExporter\Internal;
+namespace _PhpScoper326af2119eba\Symfony\Component\VarExporter\Internal;
 
-use _PhpScoper069ebd53a518\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
-use _PhpScoper069ebd53a518\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use _PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use _PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -19,11 +19,11 @@ use _PhpScoper069ebd53a518\Symfony\Component\VarExporter\Exception\NotInstantiab
  */
 class Registry
 {
-    public static $reflectors = array();
-    public static $prototypes = array();
-    public static $factories = array();
-    public static $cloneable = array();
-    public static $instantiableWithoutConstructor = array();
+    public static $reflectors = [];
+    public static $prototypes = [];
+    public static $factories = [];
+    public static $cloneable = [];
+    public static $instantiableWithoutConstructor = [];
     public function __construct(array $classes)
     {
         foreach ($classes as $i => $class) {
@@ -50,20 +50,20 @@ class Registry
     public static function f($class)
     {
         $reflector = self::$reflectors[$class] ?? self::getClassReflector($class, \true, \false);
-        return self::$factories[$class] = \Closure::fromCallable(array($reflector, 'newInstanceWithoutConstructor'));
+        return self::$factories[$class] = \Closure::fromCallable([$reflector, 'newInstanceWithoutConstructor']);
     }
     public static function getClassReflector($class, $instantiableWithoutConstructor = \false, $cloneable = null)
     {
-        if (!\class_exists($class) && !\interface_exists($class, \false) && !\trait_exists($class, \false)) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
+        if (!($isClass = \class_exists($class)) && !\interface_exists($class, \false) && !\trait_exists($class, \false)) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
         }
         $reflector = new \ReflectionClass($class);
         if ($instantiableWithoutConstructor) {
             $proto = $reflector->newInstanceWithoutConstructor();
-        } elseif (!$reflector->isInstantiable()) {
-            throw new \_PhpScoper069ebd53a518\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+        } elseif (!$isClass || $reflector->isAbstract()) {
+            throw new \_PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
         } elseif ($reflector->name !== $class) {
-            $reflector = self::$reflectors[$name = $reflector->name] ?? self::getClassReflector($name, $instantiableWithoutConstructor, $cloneable);
+            $reflector = self::$reflectors[$name = $reflector->name] ?? self::getClassReflector($name, \false, $cloneable);
             self::$cloneable[$class] = self::$cloneable[$name];
             self::$instantiableWithoutConstructor[$class] = self::$instantiableWithoutConstructor[$name];
             self::$prototypes[$class] = self::$prototypes[$name];
@@ -73,30 +73,34 @@ class Registry
                 $proto = $reflector->newInstanceWithoutConstructor();
                 $instantiableWithoutConstructor = \true;
             } catch (\ReflectionException $e) {
-                $proto = $reflector->implementsInterface('Serializable') ? 'C:' : 'O:';
+                $proto = $reflector->implementsInterface('Serializable') && !\method_exists($class, '__unserialize') ? 'C:' : 'O:';
                 if ('C:' === $proto && !$reflector->getMethod('unserialize')->isInternal()) {
                     $proto = null;
-                } elseif (\false === ($proto = @\unserialize($proto . \strlen($class) . ':"' . $class . '":0:{}'))) {
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+                } else {
+                    try {
+                        $proto = @\unserialize($proto . \strlen($class) . ':"' . $class . '":0:{}');
+                    } catch (\Exception $e) {
+                        if (__FILE__ !== $e->getFile()) {
+                            throw $e;
+                        }
+                        throw new \_PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class, $e);
+                    }
+                    if (\false === $proto) {
+                        throw new \_PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+                    }
                 }
             }
-            if (null !== $proto && !$proto instanceof \Throwable) {
+            if (null !== $proto && !$proto instanceof \Throwable && !$proto instanceof \Serializable && !\method_exists($class, '__sleep') && (\PHP_VERSION_ID < 70400 || !\method_exists($class, '__serialize'))) {
                 try {
-                    if (!$proto instanceof \Serializable && !\method_exists($class, '__sleep')) {
-                        \serialize($proto);
-                    } elseif ($instantiableWithoutConstructor) {
-                        \serialize($reflector->newInstanceWithoutConstructor());
-                    } else {
-                        \serialize(\unserialize(($proto instanceof \Serializable ? 'C:' : 'O:') . \strlen($class) . ':"' . $class . '":0:{}'));
-                    }
+                    \serialize($proto);
                 } catch (\Exception $e) {
-                    throw new \_PhpScoper069ebd53a518\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class, $e);
+                    throw new \_PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class, $e);
                 }
             }
         }
         if (null === $cloneable) {
-            if (($proto instanceof \Reflector || $proto instanceof \ReflectionGenerator || $proto instanceof \ReflectionType || $proto instanceof \IteratorIterator || $proto instanceof \RecursiveIteratorIterator) && (!$proto instanceof \Serializable && !\method_exists($proto, '__wakeup'))) {
-                throw new \_PhpScoper069ebd53a518\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
+            if (($proto instanceof \Reflector || $proto instanceof \ReflectionGenerator || $proto instanceof \ReflectionType || $proto instanceof \IteratorIterator || $proto instanceof \RecursiveIteratorIterator) && (!$proto instanceof \Serializable && !\method_exists($proto, '__wakeup') && (\PHP_VERSION_ID < 70400 || !\method_exists($class, '__unserialize')))) {
+                throw new \_PhpScoper326af2119eba\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException($class);
             }
             $cloneable = $reflector->isCloneable() && !$reflector->hasMethod('__clone');
         }
@@ -106,13 +110,13 @@ class Registry
         if ($proto instanceof \Throwable) {
             static $setTrace;
             if (null === $setTrace) {
-                $setTrace = array(new \ReflectionProperty(\Error::class, 'trace'), new \ReflectionProperty(\Exception::class, 'trace'));
+                $setTrace = [new \ReflectionProperty(\Error::class, 'trace'), new \ReflectionProperty(\Exception::class, 'trace')];
                 $setTrace[0]->setAccessible(\true);
                 $setTrace[1]->setAccessible(\true);
-                $setTrace[0] = \Closure::fromCallable(array($setTrace[0], 'setValue'));
-                $setTrace[1] = \Closure::fromCallable(array($setTrace[1], 'setValue'));
+                $setTrace[0] = \Closure::fromCallable([$setTrace[0], 'setValue']);
+                $setTrace[1] = \Closure::fromCallable([$setTrace[1], 'setValue']);
             }
-            $setTrace[$proto instanceof \Exception]($proto, array());
+            $setTrace[$proto instanceof \Exception]($proto, []);
         }
         return self::$reflectors[$class] = $reflector;
     }

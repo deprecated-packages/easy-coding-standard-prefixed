@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Output;
 
-use _PhpScoper069ebd53a518\Jean85\PrettyVersions;
-use _PhpScoper069ebd53a518\Nette\Utils\Json;
+use _PhpScoper326af2119eba\Jean85\PrettyVersions;
+use _PhpScoper326af2119eba\Nette\Utils\Json;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface;
@@ -19,6 +19,10 @@ final class JsonOutputFormatter implements \Symplify\EasyCodingStandard\Contract
      * @var string
      */
     public const NAME = 'json';
+    /**
+     * @var string
+     */
+    private const FILES = 'files';
     /**
      * @var Configuration
      */
@@ -52,20 +56,20 @@ final class JsonOutputFormatter implements \Symplify\EasyCodingStandard\Contract
         }
         $codingStandardErrors = $errorAndDiffResult->getErrors();
         foreach ($codingStandardErrors as $codingStandardError) {
-            $errorsArray['files'][$codingStandardError->getRelativeFilePathFromCwd()]['errors'][] = ['line' => $codingStandardError->getLine(), 'file_path' => $codingStandardError->getRelativeFilePathFromCwd(), 'message' => $codingStandardError->getMessage(), 'source_class' => $codingStandardError->getCheckerClass()];
+            $errorsArray[self::FILES][$codingStandardError->getRelativeFilePathFromCwd()]['errors'][] = ['line' => $codingStandardError->getLine(), 'file_path' => $codingStandardError->getRelativeFilePathFromCwd(), 'message' => $codingStandardError->getMessage(), 'source_class' => $codingStandardError->getCheckerClass()];
         }
         $fileDiffs = $errorAndDiffResult->getFileDiffs();
         foreach ($fileDiffs as $fileDiff) {
-            $errorsArray['files'][$fileDiff->getRelativeFilePathFromCwd()]['diffs'][] = ['diff' => $fileDiff->getDiff(), 'applied_checkers' => $fileDiff->getAppliedCheckers()];
+            $errorsArray[self::FILES][$fileDiff->getRelativeFilePathFromCwd()]['diffs'][] = ['diff' => $fileDiff->getDiff(), 'applied_checkers' => $fileDiff->getAppliedCheckers()];
         }
-        return \_PhpScoper069ebd53a518\Nette\Utils\Json::encode($errorsArray, \_PhpScoper069ebd53a518\Nette\Utils\Json::PRETTY);
+        return \_PhpScoper326af2119eba\Nette\Utils\Json::encode($errorsArray, \_PhpScoper326af2119eba\Nette\Utils\Json::PRETTY);
     }
     /**
      * @return mixed[]
      */
     private function createBaseErrorsArray(\Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult) : array
     {
-        $version = \_PhpScoper069ebd53a518\Jean85\PrettyVersions::getVersion('symplify/easy-coding-standard');
-        return ['meta' => ['version' => $version->getPrettyVersion() ?: 'Unknown'], 'totals' => ['errors' => $errorAndDiffResult->getErrorCount(), 'diffs' => $errorAndDiffResult->getFileDiffsCount()], 'files' => []];
+        $version = \_PhpScoper326af2119eba\Jean85\PrettyVersions::getVersion('symplify/easy-coding-standard');
+        return ['meta' => ['version' => $version->getPrettyVersion() ?: 'Unknown'], 'totals' => ['errors' => $errorAndDiffResult->getErrorCount(), 'diffs' => $errorAndDiffResult->getFileDiffsCount()], self::FILES => []];
     }
 }

@@ -98,15 +98,18 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
      */
     private function updateMethodCasing($functionName)
     {
+        $parts = \explode('::', $functionName);
+        $functionNamePart = \array_pop($parts);
         if (self::CAMEL_CASE === $this->configuration['case']) {
-            $newFunctionName = $functionName;
-            $newFunctionName = \ucwords($newFunctionName, '_');
-            $newFunctionName = \str_replace('_', '', $newFunctionName);
-            $newFunctionName = \lcfirst($newFunctionName);
+            $newFunctionNamePart = $functionNamePart;
+            $newFunctionNamePart = \ucwords($newFunctionNamePart, '_');
+            $newFunctionNamePart = \str_replace('_', '', $newFunctionNamePart);
+            $newFunctionNamePart = \lcfirst($newFunctionNamePart);
         } else {
-            $newFunctionName = \PhpCsFixer\Utils::camelCaseToUnderscore($functionName);
+            $newFunctionNamePart = \PhpCsFixer\Utils::camelCaseToUnderscore($functionNamePart);
         }
-        return $newFunctionName;
+        $parts[] = $newFunctionNamePart;
+        return \implode('::', $parts);
     }
     /**
      * @param int $index

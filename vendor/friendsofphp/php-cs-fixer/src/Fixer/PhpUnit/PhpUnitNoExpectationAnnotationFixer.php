@@ -21,6 +21,7 @@ use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
+use PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
@@ -142,7 +143,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             if (!$this->fixMessageRegExp && isset($annotations['expectedExceptionMessageRegExp'])) {
                 continue;
             }
-            $originalIndent = $this->detectIndent($tokens, $docBlockIndex);
+            $originalIndent = \PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer::detectIndent($tokens, $docBlockIndex);
             $paramList = $this->annotationsToParamList($annotations);
             $newMethodsCode = '<?php $this->' . (isset($annotations['expectedExceptionMessageRegExp']) ? 'setExpectedExceptionRegExp' : 'setExpectedException') . '(' . \implode(', ', $paramList) . ');';
             $newMethods = \PhpCsFixer\Tokenizer\Tokens::fromCode($newMethodsCode);
@@ -158,20 +159,6 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             $tokens[$whitespaceIndex] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $this->whitespacesConfig->getLineEnding() . $tokens[$whitespaceIndex]->getContent()]);
             $i = $docBlockIndex;
         }
-    }
-    /**
-     * @param int $index
-     *
-     * @return string
-     */
-    private function detectIndent(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
-    {
-        if (!$tokens[$index - 1]->isWhitespace()) {
-            return '';
-            // cannot detect indent
-        }
-        $explodedContent = \explode("\n", $tokens[$index - 1]->getContent());
-        return \end($explodedContent);
     }
     /**
      * @return string

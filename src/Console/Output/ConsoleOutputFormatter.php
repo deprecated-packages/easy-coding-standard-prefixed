@@ -50,7 +50,7 @@ final class ConsoleOutputFormatter implements \Symplify\EasyCodingStandard\Contr
      */
     private function reportFileDiffs(array $fileDiffs) : void
     {
-        if (\count($fileDiffs) === 0) {
+        if ($fileDiffs === []) {
             return;
         }
         $this->easyCodingStandardStyle->newLine(1);
@@ -85,7 +85,7 @@ final class ConsoleOutputFormatter implements \Symplify\EasyCodingStandard\Contr
     {
         if ($this->configuration->shouldShowErrorTable()) {
             $errors = $errorAndDiffResult->getErrors();
-            if (\count($errors) > 0) {
+            if ($errors !== []) {
                 $this->easyCodingStandardStyle->newLine();
                 $this->easyCodingStandardStyle->printErrors($errors);
             }
@@ -105,7 +105,10 @@ final class ConsoleOutputFormatter implements \Symplify\EasyCodingStandard\Contr
             $errorMessage = \sprintf('Found %d error%s that need%s to be fixed manually.', $errorCount, $errorCount === 1 ? '' : 's', $errorCount === 1 ? 's' : '');
             $this->easyCodingStandardStyle->error($errorMessage);
         }
-        if (!$fileDiffsCount || $this->configuration->isFixer()) {
+        if ($fileDiffsCount === 0) {
+            return;
+        }
+        if ($this->configuration->isFixer()) {
             return;
         }
         $fixableMessage = \sprintf('%s%d %s fixable! Just add "--fix" to console command and rerun to apply.', $errorCount !== 0 ? 'Good news is that ' : '', $fileDiffsCount, $fileDiffsCount === 1 ? 'error is' : 'errors are');

@@ -19,7 +19,7 @@ final class PHP71MigrationSet extends \PhpCsFixer\RuleSet\AbstractRuleSetDescrip
 {
     public function getRules()
     {
-        return ['@PHP70Migration' => \true, 'visibility_required' => ['elements' => ['const', 'method', 'property']]];
+        return ['@PHP70Migration' => \true, 'list_syntax' => ['syntax' => 'short'], 'visibility_required' => ['elements' => ['const', 'method', 'property']]];
     }
     public function getDescription()
     {

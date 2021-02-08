@@ -18,8 +18,8 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Util\Common;
-use _PhpScoper069ebd53a518\PHPUnit\Framework\TestCase;
-abstract class AbstractSniffUnitTest extends \_PhpScoper069ebd53a518\PHPUnit\Framework\TestCase
+use _PhpScoper326af2119eba\PHPUnit\Framework\TestCase;
+abstract class AbstractSniffUnitTest extends \_PhpScoper326af2119eba\PHPUnit\Framework\TestCase
 {
     /**
      * Enable or disable the backup and restoration of the $GLOBALS array.
@@ -252,6 +252,13 @@ abstract class AbstractSniffUnitTest extends \_PhpScoper069ebd53a518\PHPUnit\Fra
                 $warningsTemp = [];
                 foreach ($warnings as $warning) {
                     $warningsTemp[] = $warning['message'] . ' (' . $warning['source'] . ')';
+                    $source = $warning['source'];
+                    if (\in_array($source, $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'], \true) === \false) {
+                        $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'][] = $source;
+                    }
+                    if ($warning['fixable'] === \true && \in_array($source, $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'], \true) === \false) {
+                        $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'][] = $source;
+                    }
                 }
                 $allProblems[$line]['found_warnings'] = \array_merge($foundWarningsTemp, $warningsTemp);
             }

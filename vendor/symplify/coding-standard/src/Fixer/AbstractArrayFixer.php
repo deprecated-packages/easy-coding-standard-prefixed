@@ -11,6 +11,7 @@ use Symplify\CodingStandard\Contract\ArrayFixerInterface;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\ArrayAnalyzer;
 use Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder;
+use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
 abstract class AbstractArrayFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\CodingStandard\Contract\ArrayFixerInterface
 {
     /**
@@ -40,7 +41,10 @@ abstract class AbstractArrayFixer extends \Symplify\CodingStandard\Fixer\Abstrac
     }
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
-        return $tokens->isAnyTokenKindsFound(self::ARRAY_OPEN_TOKENS) && $tokens->isTokenKindFound(\T_DOUBLE_ARROW);
+        if (!$tokens->isAnyTokenKindsFound(self::ARRAY_OPEN_TOKENS)) {
+            return \false;
+        }
+        return $tokens->isTokenKindFound(\T_DOUBLE_ARROW);
     }
     public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
@@ -50,7 +54,7 @@ abstract class AbstractArrayFixer extends \Symplify\CodingStandard\Fixer\Abstrac
                 continue;
             }
             $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $index);
-            if ($blockInfo === null) {
+            if (!$blockInfo instanceof \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo) {
                 continue;
             }
             $this->fixArrayOpener($tokens, $blockInfo, $index);
