@@ -3,23 +3,23 @@
 declare (strict_types=1);
 namespace Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass;
 
-use _PhpScoper7faa8deb0d3c\Symfony\Component\Console\Command\Command;
-use _PhpScoper7faa8deb0d3c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper7faa8deb0d3c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper807f8e74693b\Symfony\Component\Console\Command\Command;
+use _PhpScoper807f8e74693b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper807f8e74693b\Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 /**
  * @see \Symplify\ConsolePackageBuilder\Tests\DependencyInjection\CompilerPass\NamelessConsoleCommandCompilerPassTest
  */
-final class NamelessConsoleCommandCompilerPass implements \_PhpScoper7faa8deb0d3c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+final class NamelessConsoleCommandCompilerPass implements \_PhpScoper807f8e74693b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
-    public function process(\_PhpScoper7faa8deb0d3c\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function process(\_PhpScoper807f8e74693b\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         foreach ($containerBuilder->getDefinitions() as $definition) {
             $definitionClass = $definition->getClass();
             if ($definitionClass === null) {
                 continue;
             }
-            if (!\is_a($definitionClass, \_PhpScoper7faa8deb0d3c\Symfony\Component\Console\Command\Command::class, \true)) {
+            if (!\is_a($definitionClass, \_PhpScoper807f8e74693b\Symfony\Component\Console\Command\Command::class, \true)) {
                 continue;
             }
             $commandName = \Symplify\PackageBuilder\Console\Command\CommandNaming::classToName($definitionClass);

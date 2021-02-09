@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver;
 
-use _PhpScoper7faa8deb0d3c\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper807f8e74693b\Symfony\Component\Console\Input\InputInterface;
 use Symplify\SetConfigResolver\Config\SetsParameterResolver;
 use Symplify\SetConfigResolver\Contract\SetProviderInterface;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -37,7 +37,7 @@ final class SetAwareConfigResolver extends \Symplify\SetConfigResolver\AbstractC
     /**
      * @api
      */
-    public function resolveSetFromInput(\_PhpScoper7faa8deb0d3c\Symfony\Component\Console\Input\InputInterface $input) : ?\Symplify\SmartFileSystem\SmartFileInfo
+    public function resolveSetFromInput(\_PhpScoper807f8e74693b\Symfony\Component\Console\Input\InputInterface $input) : ?\Symplify\SmartFileSystem\SmartFileInfo
     {
         return $this->setResolver->detectFromInput($input);
     }
