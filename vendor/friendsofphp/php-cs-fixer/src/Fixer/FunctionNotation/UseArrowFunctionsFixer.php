@@ -32,9 +32,9 @@ final class UseArrowFunctionsFixer extends \PhpCsFixer\AbstractFixer
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Anonymous functions with one-liner return statement must use arrow functions.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScoper807f8e74693b;
+namespace _PhpScoperef5048aa2573;
 
-\_PhpScoper807f8e74693b\foo(function ($a) use($b) {
+\_PhpScoperef5048aa2573\foo(function ($a) use($b) {
     return $a + $b;
 });
 

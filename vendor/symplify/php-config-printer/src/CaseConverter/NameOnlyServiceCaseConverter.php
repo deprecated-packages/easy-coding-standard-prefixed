@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoper807f8e74693b\PhpParser\Node\Arg;
-use _PhpScoper807f8e74693b\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper807f8e74693b\PhpParser\Node\Expr\Variable;
-use _PhpScoper807f8e74693b\PhpParser\Node\Stmt\Expression;
+use _PhpScoperef5048aa2573\PhpParser\Node\Arg;
+use _PhpScoperef5048aa2573\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperef5048aa2573\PhpParser\Node\Expr\Variable;
+use _PhpScoperef5048aa2573\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\CommonNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\VariableName;
@@ -27,11 +27,11 @@ final class NameOnlyServiceCaseConverter implements \Symplify\PhpConfigPrinter\C
     {
         $this->commonNodeFactory = $commonNodeFactory;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoper807f8e74693b\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScoperef5048aa2573\PhpParser\Node\Stmt\Expression
     {
         $classConstFetch = $this->commonNodeFactory->createClassReference($key);
-        $setMethodCall = new \_PhpScoper807f8e74693b\PhpParser\Node\Expr\MethodCall(new \_PhpScoper807f8e74693b\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), 'set', [new \_PhpScoper807f8e74693b\PhpParser\Node\Arg($classConstFetch)]);
-        return new \_PhpScoper807f8e74693b\PhpParser\Node\Stmt\Expression($setMethodCall);
+        $setMethodCall = new \_PhpScoperef5048aa2573\PhpParser\Node\Expr\MethodCall(new \_PhpScoperef5048aa2573\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), 'set', [new \_PhpScoperef5048aa2573\PhpParser\Node\Arg($classConstFetch)]);
+        return new \_PhpScoperef5048aa2573\PhpParser\Node\Stmt\Expression($setMethodCall);
     }
     public function match(string $rootKey, $key, $values) : bool
     {

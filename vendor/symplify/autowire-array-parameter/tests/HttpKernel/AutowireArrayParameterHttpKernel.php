@@ -3,19 +3,19 @@
 declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\Tests\HttpKernel;
 
-use _PhpScoper807f8e74693b\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoper807f8e74693b\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper807f8e74693b\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use _PhpScoper807f8e74693b\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoperef5048aa2573\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoperef5048aa2573\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperef5048aa2573\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoperef5048aa2573\Symfony\Component\HttpKernel\Kernel;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-final class AutowireArrayParameterHttpKernel extends \_PhpScoper807f8e74693b\Symfony\Component\HttpKernel\Kernel
+final class AutowireArrayParameterHttpKernel extends \_PhpScoperef5048aa2573\Symfony\Component\HttpKernel\Kernel
 {
     public function __construct()
     {
         // to invoke container override for test re-run
         parent::__construct('dev' . \random_int(0, 10000), \true);
     }
-    public function registerContainerConfiguration(\_PhpScoper807f8e74693b\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(\_PhpScoperef5048aa2573\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../config/autowire_array_parameter.php');
     }
@@ -34,7 +34,7 @@ final class AutowireArrayParameterHttpKernel extends \_PhpScoper807f8e74693b\Sym
     {
         return [];
     }
-    protected function build(\_PhpScoper807f8e74693b\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    protected function build(\_PhpScoperef5048aa2573\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }

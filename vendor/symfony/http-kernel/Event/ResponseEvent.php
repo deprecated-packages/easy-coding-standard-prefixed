@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper807f8e74693b\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoperef5048aa2573\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoper807f8e74693b\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper807f8e74693b\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper807f8e74693b\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoperef5048aa2573\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperef5048aa2573\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperef5048aa2573\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows to filter a Response object.
  *
@@ -22,19 +22,19 @@ use _PhpScoper807f8e74693b\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class ResponseEvent extends \_PhpScoper807f8e74693b\Symfony\Component\HttpKernel\Event\KernelEvent
+final class ResponseEvent extends \_PhpScoperef5048aa2573\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
-    public function __construct(\_PhpScoper807f8e74693b\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \_PhpScoper807f8e74693b\Symfony\Component\HttpFoundation\Request $request, int $requestType, \_PhpScoper807f8e74693b\Symfony\Component\HttpFoundation\Response $response)
+    public function __construct(\_PhpScoperef5048aa2573\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \_PhpScoperef5048aa2573\Symfony\Component\HttpFoundation\Request $request, int $requestType, \_PhpScoperef5048aa2573\Symfony\Component\HttpFoundation\Response $response)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->setResponse($response);
     }
-    public function getResponse() : \_PhpScoper807f8e74693b\Symfony\Component\HttpFoundation\Response
+    public function getResponse() : \_PhpScoperef5048aa2573\Symfony\Component\HttpFoundation\Response
     {
         return $this->response;
     }
-    public function setResponse(\_PhpScoper807f8e74693b\Symfony\Component\HttpFoundation\Response $response) : void
+    public function setResponse(\_PhpScoperef5048aa2573\Symfony\Component\HttpFoundation\Response $response) : void
     {
         $this->response = $response;
     }

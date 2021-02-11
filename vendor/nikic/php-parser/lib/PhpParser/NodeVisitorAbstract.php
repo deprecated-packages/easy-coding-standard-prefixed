@@ -1,22 +1,22 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper807f8e74693b\PhpParser;
+namespace _PhpScoperef5048aa2573\PhpParser;
 
 /**
  * @codeCoverageIgnore
  */
-class NodeVisitorAbstract implements \_PhpScoper807f8e74693b\PhpParser\NodeVisitor
+class NodeVisitorAbstract implements \_PhpScoperef5048aa2573\PhpParser\NodeVisitor
 {
     public function beforeTraverse(array $nodes)
     {
         return null;
     }
-    public function enterNode(\_PhpScoper807f8e74693b\PhpParser\Node $node)
+    public function enterNode(\_PhpScoperef5048aa2573\PhpParser\Node $node)
     {
         return null;
     }
-    public function leaveNode(\_PhpScoper807f8e74693b\PhpParser\Node $node)
+    public function leaveNode(\_PhpScoperef5048aa2573\PhpParser\Node $node)
     {
         return null;
     }

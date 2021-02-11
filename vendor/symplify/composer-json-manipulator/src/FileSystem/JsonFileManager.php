@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\FileSystem;
 
-use _PhpScoper807f8e74693b\Nette\Utils\Json;
+use _PhpScoperef5048aa2573\Nette\Utils\Json;
 use Symplify\ComposerJsonManipulator\Json\JsonCleaner;
 use Symplify\ComposerJsonManipulator\Json\JsonInliner;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
@@ -44,7 +44,7 @@ final class JsonFileManager
     {
         $realPath = $smartFileInfo->getRealPath();
         if (!isset($this->cachedJSONFiles[$realPath])) {
-            $this->cachedJSONFiles[$realPath] = \_PhpScoper807f8e74693b\Nette\Utils\Json::decode($smartFileInfo->getContents(), \_PhpScoper807f8e74693b\Nette\Utils\Json::FORCE_ARRAY);
+            $this->cachedJSONFiles[$realPath] = \_PhpScoperef5048aa2573\Nette\Utils\Json::decode($smartFileInfo->getContents(), \_PhpScoperef5048aa2573\Nette\Utils\Json::FORCE_ARRAY);
         }
         return $this->cachedJSONFiles[$realPath];
     }
@@ -54,7 +54,7 @@ final class JsonFileManager
     public function loadFromFilePath(string $filePath) : array
     {
         $fileContent = $this->smartFileSystem->readFile($filePath);
-        return \_PhpScoper807f8e74693b\Nette\Utils\Json::decode($fileContent, \_PhpScoper807f8e74693b\Nette\Utils\Json::FORCE_ARRAY);
+        return \_PhpScoperef5048aa2573\Nette\Utils\Json::decode($fileContent, \_PhpScoperef5048aa2573\Nette\Utils\Json::FORCE_ARRAY);
     }
     /**
      * @param mixed[] $json
@@ -78,7 +78,7 @@ final class JsonFileManager
     {
         // Empty arrays may lead to bad encoding since we can't be sure whether they need to be arrays or objects.
         $json = $this->jsonCleaner->removeEmptyKeysFromJsonArray($json);
-        $jsonContent = \_PhpScoper807f8e74693b\Nette\Utils\Json::encode($json, \_PhpScoper807f8e74693b\Nette\Utils\Json::PRETTY) . \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar();
+        $jsonContent = \_PhpScoperef5048aa2573\Nette\Utils\Json::encode($json, \_PhpScoperef5048aa2573\Nette\Utils\Json::PRETTY) . \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar();
         return $this->jsonInliner->inlineSections($jsonContent);
     }
 }

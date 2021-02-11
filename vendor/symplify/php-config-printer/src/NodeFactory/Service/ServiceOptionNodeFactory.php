@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use _PhpScoper807f8e74693b\Nette\Utils\Strings;
-use _PhpScoper807f8e74693b\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperef5048aa2573\Nette\Utils\Strings;
+use _PhpScoperef5048aa2573\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
@@ -26,12 +26,12 @@ final class ServiceOptionNodeFactory
         $this->serviceOptionKeyYamlToPhpFactories = $serviceOptionKeyYamlToPhpFactories;
         $this->serviceOptionAnalyzer = $serviceOptionAnalyzer;
     }
-    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScoper807f8e74693b\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper807f8e74693b\PhpParser\Node\Expr\MethodCall
+    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScoperef5048aa2573\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperef5048aa2573\PhpParser\Node\Expr\MethodCall
     {
         $servicesValues = $this->unNestArguments($servicesValues);
         foreach ($servicesValues as $key => $value) {
             // options started by decoration_<option> are used as options of the method decorate().
-            if (\_PhpScoper807f8e74693b\Nette\Utils\Strings::startsWith($key, 'decoration_') || $key === 'alias') {
+            if (\_PhpScoperef5048aa2573\Nette\Utils\Strings::startsWith($key, 'decoration_') || $key === 'alias') {
                 continue;
             }
             foreach ($this->serviceOptionKeyYamlToPhpFactories as $serviceOptionKeyYamlToPhpFactory) {
