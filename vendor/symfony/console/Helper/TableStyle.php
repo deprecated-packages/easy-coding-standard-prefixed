@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef5048aa2573\Symfony\Component\Console\Helper;
+namespace _PhpScoper4fc0030e9d22\Symfony\Component\Console\Helper;
 
-use _PhpScoperef5048aa2573\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoperef5048aa2573\Symfony\Component\Console\Exception\LogicException;
+use _PhpScoper4fc0030e9d22\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper4fc0030e9d22\Symfony\Component\Console\Exception\LogicException;
 /**
  * Defines the styles for a Table.
  *
@@ -53,7 +53,7 @@ class TableStyle
     public function setPaddingChar(string $paddingChar)
     {
         if (!$paddingChar) {
-            throw new \_PhpScoperef5048aa2573\Symfony\Component\Console\Exception\LogicException('The padding char must not be empty.');
+            throw new \_PhpScoper4fc0030e9d22\Symfony\Component\Console\Exception\LogicException('The padding char must not be empty.');
         }
         $this->paddingChar = $paddingChar;
         return $this;
@@ -273,7 +273,7 @@ class TableStyle
     public function setPadType(int $padType)
     {
         if (!\in_array($padType, [\STR_PAD_LEFT, \STR_PAD_RIGHT, \STR_PAD_BOTH], \true)) {
-            throw new \_PhpScoperef5048aa2573\Symfony\Component\Console\Exception\InvalidArgumentException('Invalid padding type. Expected one of (STR_PAD_LEFT, STR_PAD_RIGHT, STR_PAD_BOTH).');
+            throw new \_PhpScoper4fc0030e9d22\Symfony\Component\Console\Exception\InvalidArgumentException('Invalid padding type. Expected one of (STR_PAD_LEFT, STR_PAD_RIGHT, STR_PAD_BOTH).');
         }
         $this->padType = $padType;
         return $this;

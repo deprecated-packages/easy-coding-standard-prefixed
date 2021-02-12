@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperef5048aa2573;
+namespace _PhpScoper4fc0030e9d22;
 
 /*
  * This file is part of the Symfony package.
@@ -10,7 +10,7 @@ namespace _PhpScoperef5048aa2573;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme as p;
+use _PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme as p;
 if (\extension_loaded('intl')) {
     return;
 }
@@ -29,54 +29,54 @@ if (!\defined('GRAPHEME_EXTR_MAXCHARS')) {
 if (!\function_exists('grapheme_extract')) {
     function grapheme_extract($haystack, $size, $type = 0, $start = 0, &$next = 0)
     {
-        return \_PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_extract($haystack, $size, $type, $start, $next);
+        return \_PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_extract($haystack, $size, $type, $start, $next);
     }
 }
 if (!\function_exists('grapheme_stripos')) {
     function grapheme_stripos($haystack, $needle, $offset = 0)
     {
-        return \_PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_stripos($haystack, $needle, $offset);
+        return \_PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_stripos($haystack, $needle, $offset);
     }
 }
 if (!\function_exists('grapheme_stristr')) {
     function grapheme_stristr($haystack, $needle, $beforeNeedle = \false)
     {
-        return \_PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_stristr($haystack, $needle, $beforeNeedle);
+        return \_PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_stristr($haystack, $needle, $beforeNeedle);
     }
 }
 if (!\function_exists('grapheme_strlen')) {
     function grapheme_strlen($input)
     {
-        return \_PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strlen($input);
+        return \_PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strlen($input);
     }
 }
 if (!\function_exists('grapheme_strpos')) {
     function grapheme_strpos($haystack, $needle, $offset = 0)
     {
-        return \_PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strpos($haystack, $needle, $offset);
+        return \_PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strpos($haystack, $needle, $offset);
     }
 }
 if (!\function_exists('grapheme_strripos')) {
     function grapheme_strripos($haystack, $needle, $offset = 0)
     {
-        return \_PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strripos($haystack, $needle, $offset);
+        return \_PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strripos($haystack, $needle, $offset);
     }
 }
 if (!\function_exists('grapheme_strrpos')) {
     function grapheme_strrpos($haystack, $needle, $offset = 0)
     {
-        return \_PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strrpos($haystack, $needle, $offset);
+        return \_PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strrpos($haystack, $needle, $offset);
     }
 }
 if (!\function_exists('grapheme_strstr')) {
     function grapheme_strstr($haystack, $needle, $beforeNeedle = \false)
     {
-        return \_PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strstr($haystack, $needle, $beforeNeedle);
+        return \_PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_strstr($haystack, $needle, $beforeNeedle);
     }
 }
 if (!\function_exists('grapheme_substr')) {
     function grapheme_substr($string, $offset, $length = null)
     {
-        return \_PhpScoperef5048aa2573\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_substr($string, $offset, $length);
+        return \_PhpScoper4fc0030e9d22\Symfony\Polyfill\Intl\Grapheme\Grapheme::grapheme_substr($string, $offset, $length);
     }
 }

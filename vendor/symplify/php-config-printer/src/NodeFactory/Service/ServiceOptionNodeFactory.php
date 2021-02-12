@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use _PhpScoperef5048aa2573\Nette\Utils\Strings;
-use _PhpScoperef5048aa2573\PhpParser\Node\Expr\MethodCall;
+use _PhpScoper4fc0030e9d22\Nette\Utils\Strings;
+use _PhpScoper4fc0030e9d22\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
@@ -26,12 +26,14 @@ final class ServiceOptionNodeFactory
         $this->serviceOptionKeyYamlToPhpFactories = $serviceOptionKeyYamlToPhpFactories;
         $this->serviceOptionAnalyzer = $serviceOptionAnalyzer;
     }
-    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScoperef5048aa2573\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperef5048aa2573\PhpParser\Node\Expr\MethodCall
+    /**
+     * @param mixed[] $servicesValues
+     */
+    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScoper4fc0030e9d22\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoper4fc0030e9d22\PhpParser\Node\Expr\MethodCall
     {
         $servicesValues = $this->unNestArguments($servicesValues);
         foreach ($servicesValues as $key => $value) {
-            // options started by decoration_<option> are used as options of the method decorate().
-            if (\_PhpScoperef5048aa2573\Nette\Utils\Strings::startsWith($key, 'decoration_') || $key === 'alias') {
+            if ($this->shouldSkip($key)) {
                 continue;
             }
             foreach ($this->serviceOptionKeyYamlToPhpFactories as $serviceOptionKeyYamlToPhpFactory) {
@@ -53,5 +55,13 @@ final class ServiceOptionNodeFactory
             return $servicesValues;
         }
         return [\Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey::ARGUMENTS => $servicesValues];
+    }
+    private function shouldSkip(string $key) : bool
+    {
+        // options started by decoration_<option> are used as options of the method decorate().
+        if (\_PhpScoper4fc0030e9d22\Nette\Utils\Strings::startsWith($key, 'decoration_')) {
+            return \true;
+        }
+        return $key === 'alias';
     }
 }

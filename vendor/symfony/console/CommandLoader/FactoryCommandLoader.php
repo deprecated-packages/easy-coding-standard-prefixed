@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef5048aa2573\Symfony\Component\Console\CommandLoader;
+namespace _PhpScoper4fc0030e9d22\Symfony\Component\Console\CommandLoader;
 
-use _PhpScoperef5048aa2573\Symfony\Component\Console\Exception\CommandNotFoundException;
+use _PhpScoper4fc0030e9d22\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * A simple command loader using factories to instantiate commands lazily.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class FactoryCommandLoader implements \_PhpScoperef5048aa2573\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+class FactoryCommandLoader implements \_PhpScoper4fc0030e9d22\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
 {
     private $factories;
     /**
@@ -39,7 +39,7 @@ class FactoryCommandLoader implements \_PhpScoperef5048aa2573\Symfony\Component\
     public function get(string $name)
     {
         if (!isset($this->factories[$name])) {
-            throw new \_PhpScoperef5048aa2573\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
+            throw new \_PhpScoper4fc0030e9d22\Symfony\Component\Console\Exception\CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
         }
         $factory = $this->factories[$name];
         return $factory();

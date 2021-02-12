@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef5048aa2573\Symfony\Component\VarDumper\Dumper;
+namespace _PhpScoper4fc0030e9d22\Symfony\Component\VarDumper\Dumper;
 
-use _PhpScoperef5048aa2573\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper4fc0030e9d22\Symfony\Component\VarDumper\Cloner\Data;
 /**
  * DataDumperInterface for dumping Data objects.
  *
@@ -18,5 +18,5 @@ use _PhpScoperef5048aa2573\Symfony\Component\VarDumper\Cloner\Data;
  */
 interface DataDumperInterface
 {
-    public function dump(\_PhpScoperef5048aa2573\Symfony\Component\VarDumper\Cloner\Data $data);
+    public function dump(\_PhpScoper4fc0030e9d22\Symfony\Component\VarDumper\Cloner\Data $data);
 }

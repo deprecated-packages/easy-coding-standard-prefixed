@@ -4,9 +4,9 @@
     "license": "MIT",
     "require": {
         "php": ">=7.3",
-        "symfony\/console": "^4.4|^5.1",
-        "symfony\/http-kernel": "^4.4|^5.1",
-        "symfony\/dependency-injection": "^5.1",
+        "symfony\/console": "^4.4|^5.2",
+        "symfony\/http-kernel": "^4.4|^5.2",
+        "symfony\/dependency-injection": "^5.2",
         "symplify\/smart-file-system": "dev-master",
         "symplify\/autowire-array-parameter": "dev-master",
         "symplify\/composer-json-manipulator": "dev-master",
