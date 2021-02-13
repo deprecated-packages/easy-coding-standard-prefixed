@@ -1,20 +1,20 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper4fc0030e9d22\PhpParser\ErrorHandler;
+namespace _PhpScoper3f3a54dd086f\PhpParser\ErrorHandler;
 
-use _PhpScoper4fc0030e9d22\PhpParser\Error;
-use _PhpScoper4fc0030e9d22\PhpParser\ErrorHandler;
+use _PhpScoper3f3a54dd086f\PhpParser\Error;
+use _PhpScoper3f3a54dd086f\PhpParser\ErrorHandler;
 /**
  * Error handler that collects all errors into an array.
  *
  * This allows graceful handling of errors.
  */
-class Collecting implements \_PhpScoper4fc0030e9d22\PhpParser\ErrorHandler
+class Collecting implements \_PhpScoper3f3a54dd086f\PhpParser\ErrorHandler
 {
     /** @var Error[] Collected errors */
     private $errors = [];
-    public function handleError(\_PhpScoper4fc0030e9d22\PhpParser\Error $error)
+    public function handleError(\_PhpScoper3f3a54dd086f\PhpParser\Error $error)
     {
         $this->errors[] = $error;
     }
