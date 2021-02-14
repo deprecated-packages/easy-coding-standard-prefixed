@@ -14,16 +14,16 @@ namespace PhpCsFixer\Console\Command;
 use PhpCsFixer\Documentation\DocumentationGenerator;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\RuleSet\RuleSets;
-use _PhpScoper3f3a54dd086f\Symfony\Component\Console\Command\Command;
-use _PhpScoper3f3a54dd086f\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper3f3a54dd086f\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper3f3a54dd086f\Symfony\Component\Filesystem\Filesystem;
-use _PhpScoper3f3a54dd086f\Symfony\Component\Finder\Finder;
-use _PhpScoper3f3a54dd086f\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoperf361a7d70552\Symfony\Component\Console\Command\Command;
+use _PhpScoperf361a7d70552\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperf361a7d70552\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperf361a7d70552\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoperf361a7d70552\Symfony\Component\Finder\Finder;
+use _PhpScoperf361a7d70552\Symfony\Component\Finder\SplFileInfo;
 /**
  * @internal
  */
-final class DocumentationCommand extends \_PhpScoper3f3a54dd086f\Symfony\Component\Console\Command\Command
+final class DocumentationCommand extends \_PhpScoperf361a7d70552\Symfony\Component\Console\Command\Command
 {
     protected static $defaultName = 'documentation';
     /**
@@ -39,7 +39,7 @@ final class DocumentationCommand extends \_PhpScoper3f3a54dd086f\Symfony\Compone
     {
         $this->setAliases(['doc'])->setDescription('Dumps the documentation of the project into its /doc directory.');
     }
-    protected function execute(\_PhpScoper3f3a54dd086f\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper3f3a54dd086f\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function execute(\_PhpScoperf361a7d70552\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperf361a7d70552\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $fixerFactory = new \PhpCsFixer\FixerFactory();
         $fixerFactory->registerBuiltInFixers();
@@ -51,7 +51,7 @@ final class DocumentationCommand extends \_PhpScoper3f3a54dd086f\Symfony\Compone
     }
     private function generateFixersDocs(array $fixers)
     {
-        $filesystem = new \_PhpScoper3f3a54dd086f\Symfony\Component\Filesystem\Filesystem();
+        $filesystem = new \_PhpScoperf361a7d70552\Symfony\Component\Filesystem\Filesystem();
         // Array of existing fixer docs.
         // We first override existing files, and then we will delete files that are no longer needed.
         // We cannot remove all files first, as generation of docs is re-using existing docs to extract code-samples for
@@ -62,7 +62,7 @@ final class DocumentationCommand extends \_PhpScoper3f3a54dd086f\Symfony\Compone
             $filesystem->dumpFile($this->generator->getFixerDocumentationFilePath($fixer), $this->generator->generateFixerDocumentation($fixer));
         }
         /** @var SplFileInfo $file */
-        foreach ((new \_PhpScoper3f3a54dd086f\Symfony\Component\Finder\Finder())->files()->in($this->generator->getFixersDocumentationDirectoryPath())->notPath($docForFixerRelativePaths) as $file) {
+        foreach ((new \_PhpScoperf361a7d70552\Symfony\Component\Finder\Finder())->files()->in($this->generator->getFixersDocumentationDirectoryPath())->notPath($docForFixerRelativePaths) as $file) {
             $filesystem->remove($file->getPathname());
         }
         $index = $this->generator->getFixersDocumentationIndexFilePath();
@@ -72,9 +72,9 @@ final class DocumentationCommand extends \_PhpScoper3f3a54dd086f\Symfony\Compone
     }
     private function generateRuleSetsDocs(array $fixers)
     {
-        $filesystem = new \_PhpScoper3f3a54dd086f\Symfony\Component\Filesystem\Filesystem();
+        $filesystem = new \_PhpScoperf361a7d70552\Symfony\Component\Filesystem\Filesystem();
         /** @var SplFileInfo $file */
-        foreach ((new \_PhpScoper3f3a54dd086f\Symfony\Component\Finder\Finder())->files()->in($this->generator->getRuleSetsDocumentationDirectoryPath()) as $file) {
+        foreach ((new \_PhpScoperf361a7d70552\Symfony\Component\Finder\Finder())->files()->in($this->generator->getRuleSetsDocumentationDirectoryPath()) as $file) {
             $filesystem->remove($file->getPathname());
         }
         $index = $this->generator->getRuleSetsDocumentationIndexFilePath();

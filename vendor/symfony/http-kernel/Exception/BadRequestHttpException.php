@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3f3a54dd086f\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoperf361a7d70552\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class BadRequestHttpException extends \_PhpScoper3f3a54dd086f\Symfony\Component\HttpKernel\Exception\HttpException
+class BadRequestHttpException extends \_PhpScoperf361a7d70552\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string     $message  The internal exception message

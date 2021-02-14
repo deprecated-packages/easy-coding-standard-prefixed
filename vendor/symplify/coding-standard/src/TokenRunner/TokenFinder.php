@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner;
 
-use _PhpScoper3f3a54dd086f\Nette\Utils\Strings;
+use _PhpScoperf361a7d70552\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -58,7 +58,7 @@ final class TokenFinder
         $rawTokensCount = \count($rawTokens);
         for ($i = $position; $i < $rawTokensCount; ++$i) {
             $token = $rawTokens[$i];
-            if (\is_array($token) && \_PhpScoper3f3a54dd086f\Nette\Utils\Strings::contains($token[1], \PHP_EOL)) {
+            if (\is_array($token) && \_PhpScoperf361a7d70552\Nette\Utils\Strings::contains($token[1], \PHP_EOL)) {
                 break;
             }
             $lastToken = $token;

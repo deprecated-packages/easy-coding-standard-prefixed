@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper3f3a54dd086f;
+namespace _PhpScoperf361a7d70552;
 
 /*
  * This file is part of the Symfony package.
@@ -10,70 +10,70 @@ namespace _PhpScoper3f3a54dd086f;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype as p;
+use _PhpScoperf361a7d70552\Symfony\Polyfill\Ctype as p;
 if (!\function_exists('ctype_alnum')) {
     function ctype_alnum(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_alnum($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_alnum($text);
     }
 }
 if (!\function_exists('ctype_alpha')) {
     function ctype_alpha(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_alpha($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_alpha($text);
     }
 }
 if (!\function_exists('ctype_cntrl')) {
     function ctype_cntrl(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_cntrl($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_cntrl($text);
     }
 }
 if (!\function_exists('ctype_digit')) {
     function ctype_digit(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_digit($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_digit($text);
     }
 }
 if (!\function_exists('ctype_graph')) {
     function ctype_graph(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_graph($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_graph($text);
     }
 }
 if (!\function_exists('ctype_lower')) {
     function ctype_lower(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_lower($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_lower($text);
     }
 }
 if (!\function_exists('ctype_print')) {
     function ctype_print(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_print($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_print($text);
     }
 }
 if (!\function_exists('ctype_punct')) {
     function ctype_punct(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_punct($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_punct($text);
     }
 }
 if (!\function_exists('ctype_space')) {
     function ctype_space(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_space($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_space($text);
     }
 }
 if (!\function_exists('ctype_upper')) {
     function ctype_upper(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_upper($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_upper($text);
     }
 }
 if (!\function_exists('ctype_xdigit')) {
     function ctype_xdigit(mixed $text) : bool
     {
-        return \_PhpScoper3f3a54dd086f\Symfony\Polyfill\Ctype\Ctype::ctype_xdigit($text);
+        return \_PhpScoperf361a7d70552\Symfony\Polyfill\Ctype\Ctype::ctype_xdigit($text);
     }
 }
