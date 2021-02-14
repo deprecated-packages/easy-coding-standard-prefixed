@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperf361a7d70552\Psr\SimpleCache;
+namespace _PhpScoper89c09b8e7101\Psr\SimpleCache;
 
 interface CacheInterface
 {

@@ -48,8 +48,8 @@ abstract class AbstractArrayFixer extends \Symplify\CodingStandard\Fixer\Abstrac
     }
     public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
-        $reverseTokens = $this->reverseTokens($tokens);
-        foreach ($reverseTokens as $index => $token) {
+        $reversedTokens = $this->reverseTokens($tokens);
+        foreach ($reversedTokens as $index => $token) {
             if (!$token->isGivenKind(self::ARRAY_OPEN_TOKENS)) {
                 continue;
             }

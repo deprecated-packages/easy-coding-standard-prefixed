@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoperf361a7d70552\Nette\Utils\Strings;
+use _PhpScoper89c09b8e7101\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -230,9 +230,10 @@ CODE_SAMPLE
     private function isHerenowDoc(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
     {
         // heredoc/nowdoc => skip
-        $nextTokenPosition = $tokens->getNextMeaningfulToken($blockInfo->getStart());
-        /** @var Token $nextToken */
-        $nextToken = $tokens[$nextTokenPosition];
-        return \_PhpScoperf361a7d70552\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
+        $nextToken = $this->getNextMeaningfulToken($tokens, $blockInfo->getStart());
+        if (!$nextToken instanceof \PhpCsFixer\Tokenizer\Token) {
+            return \false;
+        }
+        return \_PhpScoper89c09b8e7101\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
     }
 }

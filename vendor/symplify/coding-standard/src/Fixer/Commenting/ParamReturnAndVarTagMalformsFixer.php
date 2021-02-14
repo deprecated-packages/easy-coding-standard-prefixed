@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScoperf361a7d70552\Nette\Utils\Strings;
+use _PhpScoper89c09b8e7101\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -66,13 +66,13 @@ final class ParamReturnAndVarTagMalformsFixer extends \Symplify\CodingStandard\F
     }
     public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
-        $reverseTokens = $this->reverseTokens($tokens);
-        foreach ($reverseTokens as $index => $token) {
+        $reversedTokens = $this->reverseTokens($tokens);
+        foreach ($reversedTokens as $index => $token) {
             if (!$token->isGivenKind([\T_DOC_COMMENT, \T_COMMENT])) {
                 continue;
             }
             $docContent = $token->getContent();
-            if (!\_PhpScoperf361a7d70552\Nette\Utils\Strings::match($docContent, self::TYPE_ANNOTATION_REGEX)) {
+            if (!\_PhpScoper89c09b8e7101\Nette\Utils\Strings::match($docContent, self::TYPE_ANNOTATION_REGEX)) {
                 continue;
             }
             $originalDocContent = $docContent;

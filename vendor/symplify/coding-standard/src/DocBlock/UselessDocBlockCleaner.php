@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\DocBlock;
 
-use _PhpScoperf361a7d70552\Nette\Utils\Strings;
+use _PhpScoper89c09b8e7101\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 final class UselessDocBlockCleaner
 {
@@ -49,43 +49,43 @@ final class UselessDocBlockCleaner
     public function clearDocTokenContent(array $tokens, int $position, string $docContent) : string
     {
         foreach (self::CLEANING_REGEXES as $cleaningRegex) {
-            $docContent = \_PhpScoperf361a7d70552\Nette\Utils\Strings::replace($docContent, $cleaningRegex, '');
+            $docContent = \_PhpScoper89c09b8e7101\Nette\Utils\Strings::replace($docContent, $cleaningRegex, '');
         }
         return $this->cleanClassMethodCommentMimicMethodName($tokens, $position, $docContent);
     }
     /**
-     * @param Token[] $reverseTokens
+     * @param Token[] $reversedTokens
      */
-    private function cleanClassMethodCommentMimicMethodName(array $reverseTokens, int $index, string $docContent) : string
+    private function cleanClassMethodCommentMimicMethodName(array $reversedTokens, int $index, string $docContent) : string
     {
-        $matchMethodClass = \_PhpScoperf361a7d70552\Nette\Utils\Strings::match($docContent, self::COMMENT_METHOD_CLASS_REGEX);
+        $matchMethodClass = \_PhpScoper89c09b8e7101\Nette\Utils\Strings::match($docContent, self::COMMENT_METHOD_CLASS_REGEX);
         if ($matchMethodClass) {
             return $docContent;
         }
-        if (!$this->isNextFunction($reverseTokens, $index)) {
+        if (!$this->isNextFunction($reversedTokens, $index)) {
             return $docContent;
         }
-        $matchAnyMethodClass = \_PhpScoperf361a7d70552\Nette\Utils\Strings::match($docContent, self::COMMENT_ANY_METHOD_CLASS_REGEX);
+        $matchAnyMethodClass = \_PhpScoper89c09b8e7101\Nette\Utils\Strings::match($docContent, self::COMMENT_ANY_METHOD_CLASS_REGEX);
         if (!$matchAnyMethodClass) {
             return $docContent;
         }
         $obviousMethodComment = $matchAnyMethodClass['obvious_method_comment'];
         $obviousMethodComment = $this->removeSpaces($obviousMethodComment);
-        $methodNameContent = $reverseTokens[$index + 6]->getContent();
+        $methodNameContent = $reversedTokens[$index + 6]->getContent();
         if (\strtolower($obviousMethodComment) !== \strtolower($methodNameContent)) {
             return $docContent;
         }
-        return \_PhpScoperf361a7d70552\Nette\Utils\Strings::replace($docContent, self::COMMENT_ANY_METHOD_CLASS_REGEX, '');
+        return \_PhpScoper89c09b8e7101\Nette\Utils\Strings::replace($docContent, self::COMMENT_ANY_METHOD_CLASS_REGEX, '');
     }
-    private function isNextFunction(array $reverseTokens, int $index) : bool
+    private function isNextFunction(array $reversedTokens, int $index) : bool
     {
-        if (!isset($reverseTokens[$index + 4])) {
+        if (!isset($reversedTokens[$index + 4])) {
             return \false;
         }
-        return $reverseTokens[$index + 4]->getContent() === 'function';
+        return $reversedTokens[$index + 4]->getContent() === 'function';
     }
     private function removeSpaces(string $content) : string
     {
-        return \_PhpScoperf361a7d70552\Nette\Utils\Strings::replace($content, self::SPACE_STAR_SLASH_REGEX, '');
+        return \_PhpScoper89c09b8e7101\Nette\Utils\Strings::replace($content, self::SPACE_STAR_SLASH_REGEX, '');
     }
 }

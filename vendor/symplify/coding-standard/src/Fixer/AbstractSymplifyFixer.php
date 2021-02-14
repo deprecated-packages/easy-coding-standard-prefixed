@@ -48,4 +48,20 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
         $fixer = $reflectionClass->newInstanceWithoutConstructor();
         return $fixer->getPriority() + 5;
     }
+    protected function getNextMeaningfulToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : ?\PhpCsFixer\Tokenizer\Token
+    {
+        $nextMeaninfulTokenPosition = $tokens->getNextMeaningfulToken($index);
+        if ($nextMeaninfulTokenPosition === null) {
+            return null;
+        }
+        return $tokens[$nextMeaninfulTokenPosition];
+    }
+    protected function getPreviousToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : ?\PhpCsFixer\Tokenizer\Token
+    {
+        $previousIndex = $index - 1;
+        if (!isset($tokens[$previousIndex])) {
+            return null;
+        }
+        return $tokens[$previousIndex];
+    }
 }

@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\FileSystemFilter;
 
-use _PhpScoperf361a7d70552\PHPUnit\Framework\TestCase;
+use _PhpScoper89c09b8e7101\PHPUnit\Framework\TestCase;
 use Symplify\SmartFileSystem\FileSystemFilter;
-final class FileSystemFilterTest extends \_PhpScoperf361a7d70552\PHPUnit\Framework\TestCase
+final class FileSystemFilterTest extends \_PhpScoper89c09b8e7101\PHPUnit\Framework\TestCase
 {
     /**
      * @var FileSystemFilter
