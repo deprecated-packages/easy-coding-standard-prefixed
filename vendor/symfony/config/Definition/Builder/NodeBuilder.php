@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder;
 
 /**
  * This class provides a fluent interface for building a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class NodeBuilder implements \_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\NodeParentInterface
+class NodeBuilder implements \_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\NodeParentInterface
 {
     protected $parent;
     protected $nodeMapping;
     public function __construct()
     {
-        $this->nodeMapping = ['variable' => \_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::class, 'scalar' => \_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition::class, 'boolean' => \_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\BooleanNodeDefinition::class, 'integer' => \_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\IntegerNodeDefinition::class, 'float' => \_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\FloatNodeDefinition::class, 'array' => \_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition::class, 'enum' => \_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\EnumNodeDefinition::class];
+        $this->nodeMapping = ['variable' => \_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::class, 'scalar' => \_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition::class, 'boolean' => \_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\BooleanNodeDefinition::class, 'integer' => \_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\IntegerNodeDefinition::class, 'float' => \_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\FloatNodeDefinition::class, 'array' => \_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition::class, 'enum' => \_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\EnumNodeDefinition::class];
     }
     /**
      * Set the parent node.
      *
      * @return $this
      */
-    public function setParent(\_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface $parent = null)
+    public function setParent(\_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface $parent = null)
     {
         $this->parent = $parent;
         return $this;
@@ -135,9 +135,9 @@ class NodeBuilder implements \_PhpScoperfcee700af3df\Symfony\Component\Config\De
      *
      * @return $this
      */
-    public function append(\_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function append(\_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
-        if ($node instanceof \_PhpScoperfcee700af3df\Symfony\Component\Config\Definition\Builder\BuilderAwareInterface) {
+        if ($node instanceof \_PhpScoper10b1b2c5ca55\Symfony\Component\Config\Definition\Builder\BuilderAwareInterface) {
             $builder = clone $this;
             $builder->setParent(null);
             $node->setBuilder($builder);

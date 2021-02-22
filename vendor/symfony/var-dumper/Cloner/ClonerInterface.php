@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcee700af3df\Symfony\Component\VarDumper\Cloner;
+namespace _PhpScoper10b1b2c5ca55\Symfony\Component\VarDumper\Cloner;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>

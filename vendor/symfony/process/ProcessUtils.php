@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcee700af3df\Symfony\Component\Process;
+namespace _PhpScoper10b1b2c5ca55\Symfony\Component\Process;
 
-use _PhpScoperfcee700af3df\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScoper10b1b2c5ca55\Symfony\Component\Process\Exception\InvalidArgumentException;
 /**
  * ProcessUtils is a bunch of utility methods.
  *
@@ -48,7 +48,7 @@ class ProcessUtils
             if (\is_scalar($input)) {
                 return (string) $input;
             }
-            if ($input instanceof \_PhpScoperfcee700af3df\Symfony\Component\Process\Process) {
+            if ($input instanceof \_PhpScoper10b1b2c5ca55\Symfony\Component\Process\Process) {
                 return $input->getIterator($input::ITER_SKIP_ERR);
             }
             if ($input instanceof \Iterator) {
@@ -57,7 +57,7 @@ class ProcessUtils
             if ($input instanceof \Traversable) {
                 return new \IteratorIterator($input);
             }
-            throw new \_PhpScoperfcee700af3df\Symfony\Component\Process\Exception\InvalidArgumentException(\sprintf('"%s" only accepts strings, Traversable objects or stream resources.', $caller));
+            throw new \_PhpScoper10b1b2c5ca55\Symfony\Component\Process\Exception\InvalidArgumentException(\sprintf('"%s" only accepts strings, Traversable objects or stream resources.', $caller));
         }
         return $input;
     }

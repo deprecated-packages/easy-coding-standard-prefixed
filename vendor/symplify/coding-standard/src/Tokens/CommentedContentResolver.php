@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
-use _PhpScoperfcee700af3df\Nette\Utils\Strings;
+use _PhpScoper10b1b2c5ca55\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\ValueObject\StartAndEnd;
@@ -53,7 +53,7 @@ final class CommentedContentResolver
             $lastLineSeen = $tokenLine;
             // Trim as much off the comment as possible so we don't, have additional whitespace tokens or comment tokens
             $tokenContent = \trim($token->getContent());
-            $hasBlockCommentCloser = \_PhpScoperfcee700af3df\Nette\Utils\Strings::endsWith($tokenContent, '*/');
+            $hasBlockCommentCloser = \_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::endsWith($tokenContent, '*/');
             if ($hasBlockCommentCloser) {
                 // Closer of a block comment found
                 break;
@@ -63,15 +63,21 @@ final class CommentedContentResolver
     }
     private function shouldBreak(int $lastLineSeen, int $tokenLine, \PhpCsFixer\Tokenizer\Token $token) : bool
     {
-        if ($lastLineSeen + 1 <= $tokenLine && \_PhpScoperfcee700af3df\Nette\Utils\Strings::startsWith($token->getContent(), '/*')) {
+        if ($lastLineSeen + 1 <= $tokenLine && \_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::startsWith($token->getContent(), '/*')) {
             // First non-whitespace token on a new line is start of a different style comment.
             return \true;
         }
-        // next line is not a comment
-        if ($lastLineSeen < $tokenLine && !\_PhpScoperfcee700af3df\Nette\Utils\Strings::startsWith($token->getContent(), '//')) {
+        if ($this->isNextLineNotComment($lastLineSeen, $tokenLine, $token)) {
             return \true;
         }
         // Blank line breaks a '//' style comment block.
         return $lastLineSeen + 1 < $tokenLine;
+    }
+    private function isNextLineNotComment(int $lastLineSeen, int $tokenLine, \PhpCsFixer\Tokenizer\Token $token) : bool
+    {
+        if ($lastLineSeen >= $tokenLine) {
+            return \false;
+        }
+        return !\_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::startsWith($token->getContent(), '//');
     }
 }

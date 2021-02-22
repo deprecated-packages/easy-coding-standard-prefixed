@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "628d6979156df17b2a9c4b6109ef1acd",
+    "content-hash": "bbf9d3703a58904a5672c28c56dacb17",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -3652,7 +3652,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/autowire-array-parameter",
-                "reference": "92ad4cd3718a6ad7f143940df7b1b149ccd20d58"
+                "reference": "a7489ba83be18ac56e5daba8750c4ee6d2c9c3ad"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -3666,7 +3666,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3694,10 +3694,10 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "b5baa7ade91b4e6c0d86f4b9b4f512823bfb6abf"
+                "reference": "e7b582ad14b1aaa17c692346b76cb1e9d39fb3be"
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "^2.17.3",
+                "friendsofphp/php-cs-fixer": "^2.18.2",
                 "nette/utils": "^3.2",
                 "php": ">=7.3",
                 "symplify/autowire-array-parameter": "dev-master",
@@ -3719,7 +3719,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3747,7 +3747,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/composer-json-manipulator",
-                "reference": "d113f57a9ed82f126628587c833fa9587e39ef58"
+                "reference": "5ede6694fd2283aa4111cfc6139c928e0202a484"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -3765,7 +3765,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3793,7 +3793,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/console-color-diff",
-                "reference": "0614fa1527a5175d262619db42bf5cc6c7aa6de7"
+                "reference": "fc571261ab0c1cbcd24c2701e0657fa10f37b583"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -3810,7 +3810,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3838,7 +3838,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/console-package-builder",
-                "reference": "dea70cfc0e5b106893515a51eef385554bbaa4a1"
+                "reference": "60d90f851bbca1d6a1af516568cd3a7def89b2d0"
             },
             "require": {
                 "php": ">=7.3",
@@ -3854,7 +3854,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3882,7 +3882,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-testing",
-                "reference": "078db818579ac92bd2b81e0e33ff28f37e4da7ba"
+                "reference": "7fac77bf7dc7815d3c5c54d441f5f862d30ca0aa"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -3905,7 +3905,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3933,7 +3933,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/markdown-diff",
-                "reference": "4ae3b5c7350298f731cb89d9d3fce79a3d0fd0f7"
+                "reference": "108732c878b9dd793d7297589067383801a00b6a"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -3949,7 +3949,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3977,7 +3977,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/package-builder",
-                "reference": "cf3252b5d051019c415bdd7f81ddaf749f78645e"
+                "reference": "ce4b25a90657b2fb23ccb46d6be4e67fa59a83aa"
             },
             "require": {
                 "nette/neon": "^3.2",
@@ -3998,7 +3998,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4026,7 +4026,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/php-config-printer",
-                "reference": "317005a42192a503773dabba324f48f0d46859bd"
+                "reference": "14edd8073f284a22f0b1c4354fd151c9787ed7f4"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -4042,7 +4042,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4074,7 +4074,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "618b088bc14b219fcc95a20a40584bd59deae71f"
+                "reference": "1cfd0ac4fa34bb6f76d26e3f67d283b140961480"
             },
             "require": {
                 "nette/neon": "^3.2",
@@ -4089,7 +4089,7 @@
                 "symplify/symplify-kernel": "dev-master"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.17.3",
+                "friendsofphp/php-cs-fixer": "^2.18.2",
                 "phpstan/phpstan": "^0.12.69",
                 "phpunit/phpunit": "^9.5"
             },
@@ -4099,7 +4099,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4130,7 +4130,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/set-config-resolver",
-                "reference": "80c167c8d11e1ad923e2fbfc31f84f7d63e4326c"
+                "reference": "8dd8ab8c1eeec19e365c354c6ace3f90097357d7"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -4150,7 +4150,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4178,7 +4178,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/skipper",
-                "reference": "bc4152b6e12f1baca6b87a5c2f45fd729e954f7a"
+                "reference": "834a9b6f87961ef39a6d52e4ecefb4eebe88d9de"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -4197,7 +4197,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4225,7 +4225,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/smart-file-system",
-                "reference": "037f66ada0d72db2d9f26fab36ade35c24f5586f"
+                "reference": "7cf078d07233031a3af3428d05605bf291627926"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -4240,7 +4240,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4268,7 +4268,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/symplify-kernel",
-                "reference": "613f8ee0b225f57f6185eb546a3faedac10e7b4d"
+                "reference": "6b5c40536e082d49c8d78f5155a4c2ac10b8f94f"
             },
             "require": {
                 "php": ">=7.3",
@@ -4286,7 +4286,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {
@@ -6098,7 +6098,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-coding-standard-tester",
-                "reference": "39cf53cb54e77b597946be611f8899ea725c879e"
+                "reference": "b02e9d741704cf226e5af4f93cbf31fb16a75b46"
             },
             "require": {
                 "php": ">=7.3",
@@ -6112,7 +6112,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.2-dev"
+                    "dev-master": "9.3-dev"
                 }
             },
             "autoload": {

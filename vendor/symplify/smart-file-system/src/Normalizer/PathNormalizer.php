@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Normalizer;
 
-use _PhpScoperfcee700af3df\Nette\Utils\Strings;
+use _PhpScoper10b1b2c5ca55\Nette\Utils\Strings;
 /**
  * Used from https://github.com/phpstan/phpstan-src/blob/02425e61aa48f0668b4efb3e73d52ad544048f65/src/File/FileHelper.php#L40,
  * with custom modifications
@@ -28,7 +28,7 @@ final class PathNormalizer
     private const SCHEME_UNDEFINED = 'undefined';
     public function normalizePath(string $originalPath, string $directorySeparator = \DIRECTORY_SEPARATOR) : string
     {
-        $matches = \_PhpScoperfcee700af3df\Nette\Utils\Strings::match($originalPath, self::SCHEME_PATH_REGEX);
+        $matches = \_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::match($originalPath, self::SCHEME_PATH_REGEX);
         if ($matches !== null) {
             [, $scheme, $path] = $matches;
         } else {
@@ -36,7 +36,7 @@ final class PathNormalizer
             $path = $originalPath;
         }
         $path = \str_replace('\\', '/', $path);
-        $path = \_PhpScoperfcee700af3df\Nette\Utils\Strings::replace($path, self::TWO_AND_MORE_SLASHES_REGEX, '/');
+        $path = \_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::replace($path, self::TWO_AND_MORE_SLASHES_REGEX, '/');
         $pathRoot = \strpos($path, '/') === 0 ? $directorySeparator : '';
         $pathParts = \explode('/', \trim($path, '/'));
         $normalizedPathParts = $this->normalizePathParts($pathParts, $scheme);
@@ -60,9 +60,13 @@ final class PathNormalizer
             }
             /** @var string $removedPart */
             $removedPart = \array_pop($normalizedPathParts);
-            if ($scheme === 'phar' && \substr($removedPart, -5) === '.phar') {
-                $scheme = self::SCHEME_UNDEFINED;
+            if ($scheme !== 'phar') {
+                continue;
             }
+            if (!\_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::endsWith($removedPart, '.phar')) {
+                continue;
+            }
+            $scheme = self::SCHEME_UNDEFINED;
         }
         return $normalizedPathParts;
     }

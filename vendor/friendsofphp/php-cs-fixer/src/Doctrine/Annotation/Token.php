@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Doctrine\Annotation;
 
-use _PhpScoperfcee700af3df\Doctrine\Common\Annotations\DocLexer;
+use _PhpScoper10b1b2c5ca55\Doctrine\Common\Annotations\DocLexer;
 /**
  * A Doctrine annotation token.
  *
@@ -31,7 +31,7 @@ final class Token
      * @param int    $type    The type
      * @param string $content The content
      */
-    public function __construct($type = \_PhpScoperfcee700af3df\Doctrine\Common\Annotations\DocLexer::T_NONE, $content = '')
+    public function __construct($type = \_PhpScoper10b1b2c5ca55\Doctrine\Common\Annotations\DocLexer::T_NONE, $content = '')
     {
         $this->type = $type;
         $this->content = $content;

@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use _PhpScoperfcee700af3df\PhpParser\Node\Expr\Array_;
-use _PhpScoperfcee700af3df\PhpParser\Node\Expr\ArrayItem;
-use _PhpScoperfcee700af3df\Symfony\Component\Yaml\Tag\TaggedValue;
+use _PhpScoper10b1b2c5ca55\PhpParser\Node\Expr\Array_;
+use _PhpScoper10b1b2c5ca55\PhpParser\Node\Expr\ArrayItem;
+use _PhpScoper10b1b2c5ca55\Symfony\Component\Yaml\Tag\TaggedValue;
 use Symplify\PhpConfigPrinter\Configuration\SymfonyFunctionNameProvider;
 final class TaggedReturnsCloneResolver
 {
@@ -22,11 +22,11 @@ final class TaggedReturnsCloneResolver
         $this->serviceReferenceExprResolver = $serviceReferenceExprResolver;
         $this->symfonyFunctionNameProvider = $symfonyFunctionNameProvider;
     }
-    public function resolve(\_PhpScoperfcee700af3df\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \_PhpScoperfcee700af3df\PhpParser\Node\Expr\Array_
+    public function resolve(\_PhpScoper10b1b2c5ca55\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \_PhpScoper10b1b2c5ca55\PhpParser\Node\Expr\Array_
     {
         $serviceName = $taggedValue->getValue()[0];
         $functionName = $this->symfonyFunctionNameProvider->provideRefOrService();
         $funcCall = $this->serviceReferenceExprResolver->resolveServiceReferenceExpr($serviceName, \false, $functionName);
-        return new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\Array_([new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\ArrayItem($funcCall)]);
+        return new \_PhpScoper10b1b2c5ca55\PhpParser\Node\Expr\Array_([new \_PhpScoper10b1b2c5ca55\PhpParser\Node\Expr\ArrayItem($funcCall)]);
     }
 }

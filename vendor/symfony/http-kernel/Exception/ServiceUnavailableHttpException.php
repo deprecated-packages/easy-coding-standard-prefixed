@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcee700af3df\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoper10b1b2c5ca55\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class ServiceUnavailableHttpException extends \_PhpScoperfcee700af3df\Symfony\Component\HttpKernel\Exception\HttpException
+class ServiceUnavailableHttpException extends \_PhpScoper10b1b2c5ca55\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param int|string $retryAfter The number of seconds or HTTP-date after which the request may be retried

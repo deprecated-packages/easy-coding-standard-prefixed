@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfcee700af3df\Symfony\Component\Console\DependencyInjection;
+namespace _PhpScoper10b1b2c5ca55\Symfony\Component\Console\DependencyInjection;
 
-use _PhpScoperfcee700af3df\Symfony\Component\Console\Command\Command;
-use _PhpScoperfcee700af3df\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
-use _PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use _PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoper10b1b2c5ca55\Symfony\Component\Console\Command\Command;
+use _PhpScoper10b1b2c5ca55\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use _PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use _PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Registers console commands.
  *
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
-class AddConsoleCommandPass implements \_PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class AddConsoleCommandPass implements \_PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $commandLoaderServiceId;
     private $commandTag;
@@ -35,7 +35,7 @@ class AddConsoleCommandPass implements \_PhpScoperfcee700af3df\Symfony\Component
         $this->noPreloadTag = $noPreloadTag;
         $this->privateTagName = $privateTagName;
     }
-    public function process(\_PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $commandServices = $container->findTaggedServiceIds($this->commandTag, \true);
         $lazyCommandMap = [];
@@ -49,10 +49,10 @@ class AddConsoleCommandPass implements \_PhpScoperfcee700af3df\Symfony\Component
                 $commandName = $tags[0]['command'];
             } else {
                 if (!($r = $container->getReflectionClass($class))) {
-                    throw new \_PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                    throw new \_PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
                 }
-                if (!$r->isSubclassOf(\_PhpScoperfcee700af3df\Symfony\Component\Console\Command\Command::class)) {
-                    throw new \_PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The service "%s" tagged "%s" must be a subclass of "%s".', $id, $this->commandTag, \_PhpScoperfcee700af3df\Symfony\Component\Console\Command\Command::class));
+                if (!$r->isSubclassOf(\_PhpScoper10b1b2c5ca55\Symfony\Component\Console\Command\Command::class)) {
+                    throw new \_PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('The service "%s" tagged "%s" must be a subclass of "%s".', $id, $this->commandTag, \_PhpScoper10b1b2c5ca55\Symfony\Component\Console\Command\Command::class));
                 }
                 $commandName = $class::getDefaultName();
             }
@@ -67,7 +67,7 @@ class AddConsoleCommandPass implements \_PhpScoperfcee700af3df\Symfony\Component
             }
             unset($tags[0]);
             $lazyCommandMap[$commandName] = $id;
-            $lazyCommandRefs[$id] = new \_PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\TypedReference($id, $class);
+            $lazyCommandRefs[$id] = new \_PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\TypedReference($id, $class);
             $aliases = [];
             foreach ($tags as $tag) {
                 if (isset($tag['command'])) {
@@ -80,7 +80,7 @@ class AddConsoleCommandPass implements \_PhpScoperfcee700af3df\Symfony\Component
                 $definition->addMethodCall('setAliases', [$aliases]);
             }
         }
-        $container->register($this->commandLoaderServiceId, \_PhpScoperfcee700af3df\Symfony\Component\Console\CommandLoader\ContainerCommandLoader::class)->setPublic(\true)->addTag($this->noPreloadTag)->setArguments([\_PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($container, $lazyCommandRefs), $lazyCommandMap]);
+        $container->register($this->commandLoaderServiceId, \_PhpScoper10b1b2c5ca55\Symfony\Component\Console\CommandLoader\ContainerCommandLoader::class)->setPublic(\true)->addTag($this->noPreloadTag)->setArguments([\_PhpScoper10b1b2c5ca55\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($container, $lazyCommandRefs), $lazyCommandMap]);
         $container->setParameter('console.command.ids', $serviceIds);
     }
 }

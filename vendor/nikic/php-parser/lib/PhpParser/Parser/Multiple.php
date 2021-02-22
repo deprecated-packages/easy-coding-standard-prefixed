@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperfcee700af3df\PhpParser\Parser;
+namespace _PhpScoper10b1b2c5ca55\PhpParser\Parser;
 
-use _PhpScoperfcee700af3df\PhpParser\Error;
-use _PhpScoperfcee700af3df\PhpParser\ErrorHandler;
-use _PhpScoperfcee700af3df\PhpParser\Parser;
-class Multiple implements \_PhpScoperfcee700af3df\PhpParser\Parser
+use _PhpScoper10b1b2c5ca55\PhpParser\Error;
+use _PhpScoper10b1b2c5ca55\PhpParser\ErrorHandler;
+use _PhpScoper10b1b2c5ca55\PhpParser\Parser;
+class Multiple implements \_PhpScoper10b1b2c5ca55\PhpParser\Parser
 {
     /** @var Parser[] List of parsers to try, in order of preference */
     private $parsers;
@@ -23,10 +23,10 @@ class Multiple implements \_PhpScoperfcee700af3df\PhpParser\Parser
     {
         $this->parsers = $parsers;
     }
-    public function parse(string $code, \_PhpScoperfcee700af3df\PhpParser\ErrorHandler $errorHandler = null)
+    public function parse(string $code, \_PhpScoper10b1b2c5ca55\PhpParser\ErrorHandler $errorHandler = null)
     {
         if (null === $errorHandler) {
-            $errorHandler = new \_PhpScoperfcee700af3df\PhpParser\ErrorHandler\Throwing();
+            $errorHandler = new \_PhpScoper10b1b2c5ca55\PhpParser\ErrorHandler\Throwing();
         }
         list($firstStmts, $firstError) = $this->tryParse($this->parsers[0], $errorHandler, $code);
         if ($firstError === null) {
@@ -40,13 +40,13 @@ class Multiple implements \_PhpScoperfcee700af3df\PhpParser\Parser
         }
         throw $firstError;
     }
-    private function tryParse(\_PhpScoperfcee700af3df\PhpParser\Parser $parser, \_PhpScoperfcee700af3df\PhpParser\ErrorHandler $errorHandler, $code)
+    private function tryParse(\_PhpScoper10b1b2c5ca55\PhpParser\Parser $parser, \_PhpScoper10b1b2c5ca55\PhpParser\ErrorHandler $errorHandler, $code)
     {
         $stmts = null;
         $error = null;
         try {
             $stmts = $parser->parse($code, $errorHandler);
-        } catch (\_PhpScoperfcee700af3df\PhpParser\Error $error) {
+        } catch (\_PhpScoper10b1b2c5ca55\PhpParser\Error $error) {
         }
         return [$stmts, $error];
     }
