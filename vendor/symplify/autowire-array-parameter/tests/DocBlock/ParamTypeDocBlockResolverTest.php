@@ -4,9 +4,9 @@ declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\Tests\DocBlock;
 
 use Iterator;
-use _PhpScoper89c09b8e7101\PHPUnit\Framework\TestCase;
+use _PhpScoperfcee700af3df\PHPUnit\Framework\TestCase;
 use Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
-final class ParamTypeDocBlockResolverTest extends \_PhpScoper89c09b8e7101\PHPUnit\Framework\TestCase
+final class ParamTypeDocBlockResolverTest extends \_PhpScoperfcee700af3df\PHPUnit\Framework\TestCase
 {
     /**
      * @var ParamTypeDocBlockResolver
@@ -19,7 +19,7 @@ final class ParamTypeDocBlockResolverTest extends \_PhpScoper89c09b8e7101\PHPUni
     /**
      * @dataProvider provideData()
      */
-    public function test(string $docBlock, string $parameterName, ?string $expectedType) : void
+    public function test(string $docBlock, string $parameterName, string $expectedType) : void
     {
         $resolvedType = $this->paramTypeDocBlockResolver->resolve($docBlock, $parameterName);
         $this->assertSame($expectedType, $resolvedType);
@@ -27,8 +27,19 @@ final class ParamTypeDocBlockResolverTest extends \_PhpScoper89c09b8e7101\PHPUni
     public function provideData() : \Iterator
     {
         (yield ['/** @param Type[] $name */', 'name', 'Type']);
-        (yield ['/** @param Type[] $name */', '___not', null]);
         (yield ['/** @param array<Type> $name */', 'name', 'Type']);
         (yield ['/** @param iterable<Type> $name */', 'name', 'Type']);
+    }
+    /**
+     * @dataProvider provideDataMissmatchName()
+     */
+    public function testMissmatchName(string $docBlock, string $parameterName) : void
+    {
+        $resolvedType = $this->paramTypeDocBlockResolver->resolve($docBlock, $parameterName);
+        $this->assertNull($resolvedType);
+    }
+    public function provideDataMissmatchName() : \Iterator
+    {
+        (yield ['/** @param Type[] $name */', '___not']);
     }
 }

@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper89c09b8e7101\\Psr\\Log\\": "Psr\/Log\/"
+            "_PhpScoperfcee700af3df\\Psr\\Log\\": "Psr\/Log\/"
         }
     },
     "extra": {

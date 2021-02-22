@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper89c09b8e7101\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoperfcee700af3df\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoper89c09b8e7101\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper89c09b8e7101\Symfony\Component\HttpKernel\HttpKernelInterface;
-use _PhpScoper89c09b8e7101\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScoperfcee700af3df\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperfcee700af3df\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoperfcee700af3df\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Base class for events thrown in the HttpKernel component.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class KernelEvent extends \_PhpScoper89c09b8e7101\Symfony\Contracts\EventDispatcher\Event
+class KernelEvent extends \_PhpScoperfcee700af3df\Symfony\Contracts\EventDispatcher\Event
 {
     private $kernel;
     private $request;
@@ -27,7 +27,7 @@ class KernelEvent extends \_PhpScoper89c09b8e7101\Symfony\Contracts\EventDispatc
      * @param int $requestType The request type the kernel is currently processing; one of
      *                         HttpKernelInterface::MASTER_REQUEST or HttpKernelInterface::SUB_REQUEST
      */
-    public function __construct(\_PhpScoper89c09b8e7101\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \_PhpScoper89c09b8e7101\Symfony\Component\HttpFoundation\Request $request, ?int $requestType)
+    public function __construct(\_PhpScoperfcee700af3df\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, \_PhpScoperfcee700af3df\Symfony\Component\HttpFoundation\Request $request, ?int $requestType)
     {
         $this->kernel = $kernel;
         $this->request = $request;
@@ -68,6 +68,6 @@ class KernelEvent extends \_PhpScoper89c09b8e7101\Symfony\Contracts\EventDispatc
      */
     public function isMasterRequest()
     {
-        return \_PhpScoper89c09b8e7101\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST === $this->requestType;
+        return \_PhpScoperfcee700af3df\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST === $this->requestType;
     }
 }

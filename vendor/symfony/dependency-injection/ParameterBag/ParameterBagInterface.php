@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper89c09b8e7101\Symfony\Component\DependencyInjection\ParameterBag;
+namespace _PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\ParameterBag;
 
-use _PhpScoper89c09b8e7101\Symfony\Component\DependencyInjection\Exception\LogicException;
-use _PhpScoper89c09b8e7101\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoperfcee700af3df\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 /**
  * ParameterBagInterface is the interface implemented by objects that manage service container parameters.
  *

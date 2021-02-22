@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper89c09b8e7101\PhpParser\Node;
+namespace _PhpScoperfcee700af3df\PhpParser\Node;
 
-use _PhpScoper89c09b8e7101\PhpParser\Node;
-use _PhpScoper89c09b8e7101\PhpParser\NodeAbstract;
-class AttributeGroup extends \_PhpScoper89c09b8e7101\PhpParser\NodeAbstract
+use _PhpScoperfcee700af3df\PhpParser\Node;
+use _PhpScoperfcee700af3df\PhpParser\NodeAbstract;
+class AttributeGroup extends \_PhpScoperfcee700af3df\PhpParser\NodeAbstract
 {
     /** @var Attribute[] Attributes */
     public $attrs;

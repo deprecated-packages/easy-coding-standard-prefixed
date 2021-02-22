@@ -3,17 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver;
 
-use _PhpScoper89c09b8e7101\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperfcee700af3df\Symfony\Component\Console\Input\InputInterface;
 use Symplify\SetConfigResolver\Console\Option\OptionName;
 use Symplify\SetConfigResolver\Console\OptionValueResolver;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 use Symplify\SmartFileSystem\SmartFileInfo;
 abstract class AbstractConfigResolver
 {
-    /**
-     * @var SmartFileInfo|null
-     */
-    private $firstResolvedConfigFileInfo;
     /**
      * @var OptionValueResolver
      */
@@ -22,7 +18,7 @@ abstract class AbstractConfigResolver
     {
         $this->optionValueResolver = new \Symplify\SetConfigResolver\Console\OptionValueResolver();
     }
-    public function resolveFromInput(\_PhpScoper89c09b8e7101\Symfony\Component\Console\Input\InputInterface $input) : ?\Symplify\SmartFileSystem\SmartFileInfo
+    public function resolveFromInput(\_PhpScoperfcee700af3df\Symfony\Component\Console\Input\InputInterface $input) : ?\Symplify\SmartFileSystem\SmartFileInfo
     {
         $configValue = $this->optionValueResolver->getOptionValue($input, \Symplify\SetConfigResolver\Console\Option\OptionName::CONFIG);
         if ($configValue !== null) {
@@ -37,17 +33,13 @@ abstract class AbstractConfigResolver
     /**
      * @param string[] $fallbackFiles
      */
-    public function resolveFromInputWithFallback(\_PhpScoper89c09b8e7101\Symfony\Component\Console\Input\InputInterface $input, array $fallbackFiles) : ?\Symplify\SmartFileSystem\SmartFileInfo
+    public function resolveFromInputWithFallback(\_PhpScoperfcee700af3df\Symfony\Component\Console\Input\InputInterface $input, array $fallbackFiles) : ?\Symplify\SmartFileSystem\SmartFileInfo
     {
         $configFileInfo = $this->resolveFromInput($input);
         if ($configFileInfo !== null) {
             return $configFileInfo;
         }
         return $this->createFallbackFileInfoIfFound($fallbackFiles);
-    }
-    public function getFirstResolvedConfigFileInfo() : ?\Symplify\SmartFileSystem\SmartFileInfo
-    {
-        return $this->firstResolvedConfigFileInfo;
     }
     /**
      * @param string[] $fallbackFiles
@@ -64,8 +56,6 @@ abstract class AbstractConfigResolver
     }
     private function createFileInfo(string $configValue) : \Symplify\SmartFileSystem\SmartFileInfo
     {
-        $configFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo($configValue);
-        $this->firstResolvedConfigFileInfo = $configFileInfo;
-        return $configFileInfo;
+        return new \Symplify\SmartFileSystem\SmartFileInfo($configValue);
     }
 }

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject;
 
-use _PhpScoper89c09b8e7101\Nette\Utils\Strings;
+use _PhpScoperfcee700af3df\Nette\Utils\Strings;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
@@ -18,6 +18,10 @@ final class RuleDefinition
      * @var string
      */
     private $ruleClass;
+    /**
+     * @var string
+     */
+    private $ruleFilePath;
     /**
      * @var CodeSampleInterface[]
      */
@@ -48,9 +52,20 @@ final class RuleDefinition
         }
         return $this->ruleClass;
     }
+    public function setRuleFilePath(string $ruleFilePath) : void
+    {
+        $this->ruleFilePath = '/' . \ltrim($ruleFilePath, '/');
+    }
+    public function getRuleFilePath() : string
+    {
+        if ($this->ruleFilePath === null) {
+            throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+        }
+        return $this->ruleFilePath;
+    }
     public function getRuleShortClass() : string
     {
-        return (string) \_PhpScoper89c09b8e7101\Nette\Utils\Strings::after($this->ruleClass, '\\', -1);
+        return (string) \_PhpScoperfcee700af3df\Nette\Utils\Strings::after($this->ruleClass, '\\', -1);
     }
     /**
      * @return CodeSampleInterface[]

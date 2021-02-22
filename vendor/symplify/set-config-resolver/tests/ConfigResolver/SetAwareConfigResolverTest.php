@@ -4,14 +4,14 @@ declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Tests\ConfigResolver;
 
 use Iterator;
-use _PhpScoper89c09b8e7101\PHPUnit\Framework\TestCase;
-use _PhpScoper89c09b8e7101\Symfony\Component\Console\Input\ArrayInput;
+use _PhpScoperfcee700af3df\PHPUnit\Framework\TestCase;
+use _PhpScoperfcee700af3df\Symfony\Component\Console\Input\ArrayInput;
 use Symplify\SetConfigResolver\Exception\SetNotFoundException;
 use Symplify\SetConfigResolver\SetAwareConfigResolver;
 use Symplify\SetConfigResolver\Tests\ConfigResolver\Source\DummySetProvider;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class SetAwareConfigResolverTest extends \_PhpScoper89c09b8e7101\PHPUnit\Framework\TestCase
+final class SetAwareConfigResolverTest extends \_PhpScoperfcee700af3df\PHPUnit\Framework\TestCase
 {
     /**
      * @var SetAwareConfigResolver
@@ -25,14 +25,10 @@ final class SetAwareConfigResolverTest extends \_PhpScoper89c09b8e7101\PHPUnit\F
      * @dataProvider provideOptionsAndExpectedConfig()
      * @param mixed[] $options
      */
-    public function testDetectFromInputAndProvideWithAbsolutePath(array $options, ?string $expectedConfig) : void
+    public function testDetectFromInputAndProvideWithAbsolutePath(array $options, string $expectedConfig) : void
     {
-        $resolvedConfigFileInfo = $this->setAwareConfigResolver->resolveFromInput(new \_PhpScoper89c09b8e7101\Symfony\Component\Console\Input\ArrayInput($options));
-        if ($expectedConfig === null) {
-            $this->assertNull($resolvedConfigFileInfo);
-        } else {
-            $this->assertSame($expectedConfig, $resolvedConfigFileInfo->getRealPath());
-        }
+        $resolvedConfigFileInfo = $this->setAwareConfigResolver->resolveFromInput(new \_PhpScoperfcee700af3df\Symfony\Component\Console\Input\ArrayInput($options));
+        $this->assertSame($expectedConfig, $resolvedConfigFileInfo->getRealPath());
     }
     public function provideOptionsAndExpectedConfig() : \Iterator
     {
@@ -40,6 +36,18 @@ final class SetAwareConfigResolverTest extends \_PhpScoper89c09b8e7101\PHPUnit\F
         (yield [['-c' => 'README.md'], \getcwd() . '/README.md']);
         (yield [['--config' => \getcwd() . '/README.md'], \getcwd() . '/README.md']);
         (yield [['-c' => \getcwd() . '/README.md'], \getcwd() . '/README.md']);
+    }
+    /**
+     * @dataProvider provideDataForEmptyConfig()
+     * @param mixed[] $options
+     */
+    public function testDetectFromInputAndProvideWithEmptyConfig(array $options) : void
+    {
+        $resolvedConfigFileInfo = $this->setAwareConfigResolver->resolveFromInput(new \_PhpScoperfcee700af3df\Symfony\Component\Console\Input\ArrayInput($options));
+        $this->assertNull($resolvedConfigFileInfo);
+    }
+    public function provideDataForEmptyConfig() : \Iterator
+    {
         (yield [['--', 'sh', '-c' => '/bin/true'], null]);
     }
     public function testSetsNotFound() : void
@@ -60,7 +68,7 @@ final class SetAwareConfigResolverTest extends \_PhpScoper89c09b8e7101\PHPUnit\F
     public function testMissingFileInInput() : void
     {
         $this->expectException(\Symplify\SmartFileSystem\Exception\FileNotFoundException::class);
-        $arrayInput = new \_PhpScoper89c09b8e7101\Symfony\Component\Console\Input\ArrayInput(['--config' => 'someFile.yml']);
+        $arrayInput = new \_PhpScoperfcee700af3df\Symfony\Component\Console\Input\ArrayInput(['--config' => 'someFile.yml']);
         $this->setAwareConfigResolver->resolveFromInput($arrayInput);
     }
 }

@@ -38,7 +38,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\PackageVersions\\": "src\/PackageVersions"
+                    "_PhpScoperfcee700af3df\\PackageVersions\\": "src\/PackageVersions"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -108,7 +108,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Composer\\Semver\\": "src"
+                    "_PhpScoperfcee700af3df\\Composer\\Semver\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -187,7 +187,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Composer\\XdebugHandler\\": "src"
+                    "_PhpScoperfcee700af3df\\Composer\\XdebugHandler\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -228,17 +228,17 @@
         },
         {
             "name": "doctrine\/annotations",
-            "version": "1.11.1",
-            "version_normalized": "1.11.1.0",
+            "version": "1.12.1",
+            "version_normalized": "1.12.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/doctrine\/annotations.git",
-                "reference": "ce77a7ba1770462cd705a91a151b6c3746f9c6ad"
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/doctrine\/annotations\/zipball\/ce77a7ba1770462cd705a91a151b6c3746f9c6ad",
-                "reference": "ce77a7ba1770462cd705a91a151b6c3746f9c6ad",
+                "url": "https:\/\/api.github.com\/repos\/doctrine\/annotations\/zipball\/b17c5014ef81d212ac539f07a1001832df1b6d3b",
+                "reference": "b17c5014ef81d212ac539f07a1001832df1b6d3b",
                 "shasum": ""
             },
             "require": {
@@ -252,17 +252,12 @@
                 "phpstan\/phpstan": "^0.12.20",
                 "phpunit\/phpunit": "^7.5 || ^9.1.5"
             },
-            "time": "2020-10-26T10:28:16+00:00",
+            "time": "2021-02-21T21:00:45+00:00",
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.11.x-dev"
-                }
-            },
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
+                    "_PhpScoperfcee700af3df\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -300,7 +295,7 @@
             ],
             "support": {
                 "issues": "https:\/\/github.com\/doctrine\/annotations\/issues",
-                "source": "https:\/\/github.com\/doctrine\/annotations\/tree\/1.11.1"
+                "source": "https:\/\/github.com\/doctrine\/annotations\/tree\/1.12.1"
             },
             "install-path": "..\/doctrine\/annotations"
         },
@@ -337,7 +332,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
+                    "_PhpScoperfcee700af3df\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -525,7 +520,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Jean85\\": "src\/"
+                    "_PhpScoperfcee700af3df\\Jean85\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -884,7 +879,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\PhpParser\\": "lib\/PhpParser"
+                    "_PhpScoperfcee700af3df\\PhpParser\\": "lib\/PhpParser"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -993,7 +988,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Psr\\Cache\\": "src\/"
+                    "_PhpScoperfcee700af3df\\Psr\\Cache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1045,7 +1040,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Psr\\Container\\": "src\/"
+                    "_PhpScoperfcee700af3df\\Psr\\Container\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1101,7 +1096,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Psr\\EventDispatcher\\": "src\/"
+                    "_PhpScoperfcee700af3df\\Psr\\EventDispatcher\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1154,7 +1149,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Psr\\Log\\": "Psr\/Log\/"
+                    "_PhpScoperfcee700af3df\\Psr\\Log\\": "Psr\/Log\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1207,7 +1202,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Psr\\SimpleCache\\": "src\/"
+                    "_PhpScoperfcee700af3df\\Psr\\SimpleCache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1414,7 +1409,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\Cache\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\Cache\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1495,7 +1490,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Contracts\\Cache\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Contracts\\Cache\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1581,7 +1576,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\Config\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\Config\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1675,7 +1670,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\Console\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\Console\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1771,7 +1766,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\DependencyInjection\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\DependencyInjection\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1913,7 +1908,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\ErrorHandler\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\ErrorHandler\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2001,7 +1996,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\EventDispatcher\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\EventDispatcher\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2078,7 +2073,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Contracts\\EventDispatcher\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Contracts\\EventDispatcher\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2148,7 +2143,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\Filesystem\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\Filesystem\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2212,7 +2207,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\Finder\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\Finder\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2289,7 +2284,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Contracts\\HttpClient\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Contracts\\HttpClient\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2370,7 +2365,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\HttpFoundation\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\HttpFoundation\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2485,7 +2480,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\HttpKernel\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\HttpKernel\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2552,7 +2547,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\OptionsResolver\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\OptionsResolver\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2600,8 +2595,8 @@
         },
         {
             "name": "symfony\/polyfill-ctype",
-            "version": "v1.22.0",
-            "version_normalized": "1.22.0.0",
+            "version": "v1.22.1",
+            "version_normalized": "1.22.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/polyfill-ctype.git",
@@ -2633,7 +2628,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Polyfill\\Ctype\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Polyfill\\Ctype\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2662,7 +2657,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/polyfill-ctype\/tree\/v1.22.0"
+                "source": "https:\/\/github.com\/symfony\/polyfill-ctype\/tree\/v1.22.1"
             },
             "funding": [
                 {
@@ -2682,17 +2677,17 @@
         },
         {
             "name": "symfony\/polyfill-intl-grapheme",
-            "version": "v1.22.0",
-            "version_normalized": "1.22.0.0",
+            "version": "v1.22.1",
+            "version_normalized": "1.22.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/polyfill-intl-grapheme.git",
-                "reference": "267a9adeb8ecb8071040a740930e077cdfb987af"
+                "reference": "5601e09b69f26c1828b13b6bb87cb07cddba3170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-intl-grapheme\/zipball\/267a9adeb8ecb8071040a740930e077cdfb987af",
-                "reference": "267a9adeb8ecb8071040a740930e077cdfb987af",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-intl-grapheme\/zipball\/5601e09b69f26c1828b13b6bb87cb07cddba3170",
+                "reference": "5601e09b69f26c1828b13b6bb87cb07cddba3170",
                 "shasum": ""
             },
             "require": {
@@ -2701,7 +2696,7 @@
             "suggest": {
                 "ext-intl": "For best performance"
             },
-            "time": "2021-01-07T16:49:33+00:00",
+            "time": "2021-01-22T09:19:47+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2715,7 +2710,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Polyfill\\Intl\\Grapheme\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Polyfill\\Intl\\Grapheme\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2746,7 +2741,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/polyfill-intl-grapheme\/tree\/v1.22.0"
+                "source": "https:\/\/github.com\/symfony\/polyfill-intl-grapheme\/tree\/v1.22.1"
             },
             "funding": [
                 {
@@ -2766,17 +2761,17 @@
         },
         {
             "name": "symfony\/polyfill-intl-normalizer",
-            "version": "v1.22.0",
-            "version_normalized": "1.22.0.0",
+            "version": "v1.22.1",
+            "version_normalized": "1.22.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/polyfill-intl-normalizer.git",
-                "reference": "6e971c891537eb617a00bb07a43d182a6915faba"
+                "reference": "43a0283138253ed1d48d352ab6d0bdb3f809f248"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-intl-normalizer\/zipball\/6e971c891537eb617a00bb07a43d182a6915faba",
-                "reference": "6e971c891537eb617a00bb07a43d182a6915faba",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-intl-normalizer\/zipball\/43a0283138253ed1d48d352ab6d0bdb3f809f248",
+                "reference": "43a0283138253ed1d48d352ab6d0bdb3f809f248",
                 "shasum": ""
             },
             "require": {
@@ -2785,7 +2780,7 @@
             "suggest": {
                 "ext-intl": "For best performance"
             },
-            "time": "2021-01-07T17:09:11+00:00",
+            "time": "2021-01-22T09:19:47+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2799,7 +2794,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Polyfill\\Intl\\Normalizer\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2833,7 +2828,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/polyfill-intl-normalizer\/tree\/v1.22.0"
+                "source": "https:\/\/github.com\/symfony\/polyfill-intl-normalizer\/tree\/v1.22.1"
             },
             "funding": [
                 {
@@ -2853,17 +2848,17 @@
         },
         {
             "name": "symfony\/polyfill-mbstring",
-            "version": "v1.22.0",
-            "version_normalized": "1.22.0.0",
+            "version": "v1.22.1",
+            "version_normalized": "1.22.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/polyfill-mbstring.git",
-                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13"
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-mbstring\/zipball\/f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
-                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-mbstring\/zipball\/5232de97ee3b75b0360528dae24e73db49566ab1",
+                "reference": "5232de97ee3b75b0360528dae24e73db49566ab1",
                 "shasum": ""
             },
             "require": {
@@ -2872,7 +2867,7 @@
             "suggest": {
                 "ext-mbstring": "For best performance"
             },
-            "time": "2021-01-07T16:49:33+00:00",
+            "time": "2021-01-22T09:19:47+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2886,7 +2881,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Polyfill\\Mbstring\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Polyfill\\Mbstring\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2916,7 +2911,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/polyfill-mbstring\/tree\/v1.22.0"
+                "source": "https:\/\/github.com\/symfony\/polyfill-mbstring\/tree\/v1.22.1"
             },
             "funding": [
                 {
@@ -3006,8 +3001,8 @@
         },
         {
             "name": "symfony\/polyfill-php72",
-            "version": "v1.22.0",
-            "version_normalized": "1.22.0.0",
+            "version": "v1.22.1",
+            "version_normalized": "1.22.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/polyfill-php72.git",
@@ -3036,7 +3031,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Polyfill\\Php72\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Polyfill\\Php72\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -3065,7 +3060,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/polyfill-php72\/tree\/v1.22.0"
+                "source": "https:\/\/github.com\/symfony\/polyfill-php72\/tree\/v1.22.1"
             },
             "funding": [
                 {
@@ -3085,8 +3080,8 @@
         },
         {
             "name": "symfony\/polyfill-php73",
-            "version": "v1.22.0",
-            "version_normalized": "1.22.0.0",
+            "version": "v1.22.1",
+            "version_normalized": "1.22.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/polyfill-php73.git",
@@ -3115,7 +3110,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Polyfill\\Php73\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Polyfill\\Php73\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -3147,7 +3142,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/polyfill-php73\/tree\/v1.22.0"
+                "source": "https:\/\/github.com\/symfony\/polyfill-php73\/tree\/v1.22.1"
             },
             "funding": [
                 {
@@ -3167,8 +3162,8 @@
         },
         {
             "name": "symfony\/polyfill-php80",
-            "version": "v1.22.0",
-            "version_normalized": "1.22.0.0",
+            "version": "v1.22.1",
+            "version_normalized": "1.22.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/polyfill-php80.git",
@@ -3197,7 +3192,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Polyfill\\Php80\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Polyfill\\Php80\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -3233,7 +3228,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/polyfill-php80\/tree\/v1.22.0"
+                "source": "https:\/\/github.com\/symfony\/polyfill-php80\/tree\/v1.22.1"
             },
             "funding": [
                 {
@@ -3275,7 +3270,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\Process\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\Process\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3352,7 +3347,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Contracts\\Service\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Contracts\\Service\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -3422,7 +3417,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\Stopwatch\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\Stopwatch\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3497,7 +3492,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\String\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\String\\": ""
                 },
                 "files": [
                     "Resources\/functions.php"
@@ -3595,7 +3590,7 @@
                     "Resources\/functions\/dump.php"
                 ],
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\VarDumper\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\VarDumper\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3667,7 +3662,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\VarExporter\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\VarExporter\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3753,7 +3748,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper89c09b8e7101\\Symfony\\Component\\Yaml\\": ""
+                    "_PhpScoperfcee700af3df\\Symfony\\Component\\Yaml\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -4250,7 +4245,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/rule-doc-generator",
-                "reference": "662978148beeb1a5a64e8fa5fa68e16bc9c49beb"
+                "reference": "618b088bc14b219fcc95a20a40584bd59deae71f"
             },
             "require": {
                 "nette\/neon": "^3.2",
@@ -4261,6 +4256,7 @@
                 "symplify\/markdown-diff": "dev-master",
                 "symplify\/package-builder": "dev-master",
                 "symplify\/php-config-printer": "dev-master",
+                "symplify\/smart-file-system": "dev-master",
                 "symplify\/symplify-kernel": "dev-master"
             },
             "require-dev": {

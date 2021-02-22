@@ -1,10 +1,13 @@
 <?php
 
-namespace _PhpScoper89c09b8e7101\Doctrine\Common\Annotations;
+namespace _PhpScoperfcee700af3df\Doctrine\Common\Annotations;
 
 /**
  * Marker interface for PHP7/PHP8 compatible support
  * for named arguments (and constructor property promotion).
+ *
+ * @deprecated Implementing this interface is deprecated
+ *             Use the Annotation @NamedArgumentConstructor instead
  */
 interface NamedArgumentConstructorAnnotation
 {

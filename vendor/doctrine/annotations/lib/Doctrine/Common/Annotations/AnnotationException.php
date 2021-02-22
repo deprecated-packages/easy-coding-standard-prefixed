@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper89c09b8e7101\Doctrine\Common\Annotations;
+namespace _PhpScoperfcee700af3df\Doctrine\Common\Annotations;
 
 use Exception;
 use function get_class;
@@ -102,10 +102,10 @@ class AnnotationException extends \Exception
     /**
      * Creates a new AnnotationException describing a invalid enummerator.
      *
-     * @param string              $attributeName
-     * @param string              $annotationName
-     * @param string              $context
-     * @param object|class-string $given
+     * @param string $attributeName
+     * @param string $annotationName
+     * @param string $context
+     * @param mixed  $given
      *
      * @return AnnotationException
      *

@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use _PhpScoper89c09b8e7101\PhpParser\Node\Arg;
-use _PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall;
+use _PhpScoperfcee700af3df\PhpParser\Node\Arg;
+use _PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\SymfonyVersionFeatureGuardInterface;
 use Symplify\PhpConfigPrinter\Converter\ServiceOptionsKeyYamlToPhpFactory\TagsServiceOptionKeyYamlToPhpFactory;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
@@ -50,7 +50,7 @@ final class AutoBindNodeFactory
      * ->autoconfigure()
      * ->bind()
      */
-    public function createAutoBindCalls(array $yaml, \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall
+    public function createAutoBindCalls(array $yaml, \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall
     {
         foreach ($yaml as $key => $value) {
             if ($key === \Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE) {
@@ -71,54 +71,54 @@ final class AutoBindNodeFactory
         }
         return $methodCall;
     }
-    private function createBindMethodCall(\_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall $methodCall, array $bindValues) : \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall
+    private function createBindMethodCall(\_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall $methodCall, array $bindValues) : \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall
     {
         foreach ($bindValues as $key => $value) {
             $args = $this->argsNodeFactory->createFromValues([$key, $value]);
-            $methodCall = new \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::BIND, $args);
+            $methodCall = new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::BIND, $args);
         }
         return $methodCall;
     }
-    private function createAutowire($value, \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall
+    private function createAutowire($value, \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall
     {
         if ($value === \true) {
-            return new \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE);
+            return new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE);
         }
         // skip default false
         if ($type === self::TYPE_DEFAULTS) {
             return $methodCall;
         }
-        $args = [new \_PhpScoper89c09b8e7101\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
-        return new \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE, $args);
+        $args = [new \_PhpScoperfcee700af3df\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
+        return new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOWIRE, $args);
     }
-    private function createAutoconfigure($value, \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall
+    private function createAutoconfigure($value, \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall
     {
         if ($value === \true) {
-            return new \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE);
+            return new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE);
         }
         // skip default false
         if ($type === self::TYPE_DEFAULTS) {
             return $methodCall;
         }
-        $args = [new \_PhpScoper89c09b8e7101\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
-        return new \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE, $args);
+        $args = [new \_PhpScoperfcee700af3df\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
+        return new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall($methodCall, \Symplify\PhpConfigPrinter\ValueObject\YamlKey::AUTOCONFIGURE, $args);
     }
-    private function createPublicPrivate($value, \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall
+    private function createPublicPrivate($value, \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall $methodCall, string $type) : \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall
     {
         if ($value !== \false) {
-            return new \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
+            return new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall($methodCall, 'public');
         }
         // default value
         if ($type === self::TYPE_DEFAULTS) {
             if ($this->symfonyVersionFeatureGuard->isAtLeastSymfonyVersion(\Symplify\PhpConfigPrinter\ValueObject\SymfonyVersionFeature::PRIVATE_SERVICES_BY_DEFAULT)) {
                 return $methodCall;
             }
-            return new \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall($methodCall, 'private');
+            return new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall($methodCall, 'private');
         }
-        $args = [new \_PhpScoper89c09b8e7101\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
-        return new \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall($methodCall, 'public', $args);
+        $args = [new \_PhpScoperfcee700af3df\PhpParser\Node\Arg($this->commonNodeFactory->createFalse())];
+        return new \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall($methodCall, 'public', $args);
     }
-    private function createTagsMethodCall(\_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall $methodCall, $value) : \_PhpScoper89c09b8e7101\PhpParser\Node\Expr\MethodCall
+    private function createTagsMethodCall(\_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall $methodCall, $value) : \_PhpScoperfcee700af3df\PhpParser\Node\Expr\MethodCall
     {
         return $this->tagsServiceOptionKeyYamlToPhpFactory->decorateServiceMethodCall(null, $value, [], $methodCall);
     }

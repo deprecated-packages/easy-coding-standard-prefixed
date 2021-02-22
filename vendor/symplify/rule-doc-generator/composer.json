@@ -14,7 +14,8 @@
         "symplify\/markdown-diff": "dev-master",
         "symplify\/package-builder": "dev-master",
         "nette\/neon": "^3.2",
-        "symplify\/php-config-printer": "dev-master"
+        "symplify\/php-config-printer": "dev-master",
+        "symplify\/smart-file-system": "dev-master"
     },
     "require-dev": {
         "phpunit\/phpunit": "^9.5",

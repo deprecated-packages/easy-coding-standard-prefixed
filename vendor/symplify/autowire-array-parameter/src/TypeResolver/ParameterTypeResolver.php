@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\TypeResolver;
 
-use _PhpScoper89c09b8e7101\Nette\Utils\Reflection;
+use _PhpScoperfcee700af3df\Nette\Utils\Reflection;
 use ReflectionMethod;
 use Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
 final class ParameterTypeResolver
@@ -39,7 +39,7 @@ final class ParameterTypeResolver
         if (\ctype_lower($resolvedType[0])) {
             return null;
         }
-        $resolvedClass = \_PhpScoper89c09b8e7101\Nette\Utils\Reflection::expandClassName($resolvedType, $declaringClassReflection);
+        $resolvedClass = \_PhpScoperfcee700af3df\Nette\Utils\Reflection::expandClassName($resolvedType, $declaringClassReflection);
         $this->resolvedParameterTypesCached[$uniqueKey] = $resolvedClass;
         return $resolvedClass;
     }

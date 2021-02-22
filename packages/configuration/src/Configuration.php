@@ -3,13 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Configuration;
 
-use _PhpScoper89c09b8e7101\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperfcee700af3df\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter;
 use Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter;
 use Symplify\EasyCodingStandard\Exception\Configuration\SourceNotFoundException;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
-use Symplify\SmartFileSystem\SmartFileInfo;
 final class Configuration
 {
     /**
@@ -28,10 +27,6 @@ final class Configuration
      * @var bool
      */
     private $showErrorTable = \true;
-    /**
-     * @var SmartFileInfo|null
-     */
-    private $firstResolvedConfigFileInfo;
     /**
      * @var string[]
      */
@@ -55,7 +50,7 @@ final class Configuration
     /**
      * Needs to run in the start of the life cycle, since the rest of workflow uses it.
      */
-    public function resolveFromInput(\_PhpScoper89c09b8e7101\Symfony\Component\Console\Input\InputInterface $input) : void
+    public function resolveFromInput(\_PhpScoperfcee700af3df\Symfony\Component\Console\Input\InputInterface $input) : void
     {
         /** @var string[] $paths */
         $paths = (array) $input->getArgument(\Symplify\EasyCodingStandard\ValueObject\Option::PATHS);
@@ -96,17 +91,6 @@ final class Configuration
         return $this->showErrorTable;
     }
     /**
-     * @api
-     */
-    public function setFirstResolvedConfigFileInfo(?\Symplify\SmartFileSystem\SmartFileInfo $firstResolverConfigFileInfo) : void
-    {
-        $this->firstResolvedConfigFileInfo = $firstResolverConfigFileInfo;
-    }
-    public function getFirstResolvedConfigFileInfo() : ?\Symplify\SmartFileSystem\SmartFileInfo
-    {
-        return $this->firstResolvedConfigFileInfo;
-    }
-    /**
      * @param string[] $sources
      */
     public function setSources(array $sources) : void
@@ -137,7 +121,7 @@ final class Configuration
     {
         return $this->doesMatchGitDiff;
     }
-    private function canShowProgressBar(\_PhpScoper89c09b8e7101\Symfony\Component\Console\Input\InputInterface $input) : bool
+    private function canShowProgressBar(\_PhpScoperfcee700af3df\Symfony\Component\Console\Input\InputInterface $input) : bool
     {
         $notJsonOutput = $input->getOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT) !== \Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter::NAME;
         if (!$notJsonOutput) {
@@ -168,7 +152,7 @@ final class Configuration
         }
         return $sources;
     }
-    private function setOutputFormat(\_PhpScoper89c09b8e7101\Symfony\Component\Console\Input\InputInterface $input) : void
+    private function setOutputFormat(\_PhpScoperfcee700af3df\Symfony\Component\Console\Input\InputInterface $input) : void
     {
         $outputFormat = (string) $input->getOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT);
         // Backwards compatibility with older version

@@ -7,10 +7,11 @@ use PHP_CodeSniffer\Fixer;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 use PhpCsFixer\Differ\DifferInterface;
-use Symplify\EasyCodingStandard\Application\AbstractFileProcessor;
 use Symplify\EasyCodingStandard\Application\AppliedCheckersCollector;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
+use Symplify\EasyCodingStandard\Contract\Application\FileProcessorInterface;
 use Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector;
+use Symplify\EasyCodingStandard\FileSystem\TargetFileInfoResolver;
 use Symplify\EasyCodingStandard\SniffRunner\File\FileFactory;
 use Symplify\EasyCodingStandard\SniffRunner\ValueObject\File;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -18,7 +19,7 @@ use Symplify\SmartFileSystem\SmartFileSystem;
 /**
  * @see \Symplify\EasyCodingStandard\Tests\Error\ErrorCollector\SniffFileProcessorTest
  */
-final class SniffFileProcessor extends \Symplify\EasyCodingStandard\Application\AbstractFileProcessor
+final class SniffFileProcessor implements \Symplify\EasyCodingStandard\Contract\Application\FileProcessorInterface
 {
     /**
      * @var Sniff[]
@@ -57,9 +58,13 @@ final class SniffFileProcessor extends \Symplify\EasyCodingStandard\Application\
      */
     private $smartFileSystem;
     /**
+     * @var TargetFileInfoResolver
+     */
+    private $targetFileInfoResolver;
+    /**
      * @param Sniff[] $sniffs
      */
-    public function __construct(\PHP_CodeSniffer\Fixer $fixer, \Symplify\EasyCodingStandard\SniffRunner\File\FileFactory $fileFactory, \Symplify\EasyCodingStandard\Configuration\Configuration $configuration, \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector, \PhpCsFixer\Differ\DifferInterface $differ, \Symplify\EasyCodingStandard\Application\AppliedCheckersCollector $appliedCheckersCollector, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, array $sniffs = [])
+    public function __construct(\PHP_CodeSniffer\Fixer $fixer, \Symplify\EasyCodingStandard\SniffRunner\File\FileFactory $fileFactory, \Symplify\EasyCodingStandard\Configuration\Configuration $configuration, \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector, \PhpCsFixer\Differ\DifferInterface $differ, \Symplify\EasyCodingStandard\Application\AppliedCheckersCollector $appliedCheckersCollector, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \Symplify\EasyCodingStandard\FileSystem\TargetFileInfoResolver $targetFileInfoResolver, array $sniffs = [])
     {
         $this->fixer = $fixer;
         $this->fileFactory = $fileFactory;
@@ -72,6 +77,7 @@ final class SniffFileProcessor extends \Symplify\EasyCodingStandard\Application\
             $this->addSniff($sniff);
         }
         $this->smartFileSystem = $smartFileSystem;
+        $this->targetFileInfoResolver = $targetFileInfoResolver;
     }
     public function addSniff(\PHP_CodeSniffer\Sniffs\Sniff $sniff) : void
     {
@@ -98,7 +104,7 @@ final class SniffFileProcessor extends \Symplify\EasyCodingStandard\Application\
         // add diff
         if ($smartFileInfo->getContents() !== $this->fixer->getContents()) {
             $diff = $this->differ->diff($smartFileInfo->getContents(), $this->fixer->getContents());
-            $targetFileInfo = $this->resolveTargetFileInfo($smartFileInfo);
+            $targetFileInfo = $this->targetFileInfoResolver->resolveTargetFileInfo($smartFileInfo);
             $this->errorAndDiffCollector->addDiffForFileInfo($targetFileInfo, $diff, $this->appliedCheckersCollector->getAppliedCheckersPerFileInfo($smartFileInfo));
         }
         // 4. save file content (faster without changes check)

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper89c09b8e7101\Composer\Semver;
+namespace _PhpScoperfcee700af3df\Composer\Semver;
 
-use _PhpScoper89c09b8e7101\Composer\Semver\Constraint\Constraint;
-use _PhpScoper89c09b8e7101\Composer\Semver\Constraint\ConstraintInterface;
+use _PhpScoperfcee700af3df\Composer\Semver\Constraint\Constraint;
+use _PhpScoperfcee700af3df\Composer\Semver\Constraint\ConstraintInterface;
 /**
  * Helper class to evaluate constraint by compiling and reusing the code to evaluate
  */
@@ -22,7 +22,7 @@ class CompilingMatcher
     /**
      * @phpstan-var array<Constraint::OP_*, string>
      */
-    private static $transOpInt = array(\_PhpScoper89c09b8e7101\Composer\Semver\Constraint\Constraint::OP_EQ => '==', \_PhpScoper89c09b8e7101\Composer\Semver\Constraint\Constraint::OP_LT => '<', \_PhpScoper89c09b8e7101\Composer\Semver\Constraint\Constraint::OP_LE => '<=', \_PhpScoper89c09b8e7101\Composer\Semver\Constraint\Constraint::OP_GT => '>', \_PhpScoper89c09b8e7101\Composer\Semver\Constraint\Constraint::OP_GE => '>=', \_PhpScoper89c09b8e7101\Composer\Semver\Constraint\Constraint::OP_NE => '!=');
+    private static $transOpInt = array(\_PhpScoperfcee700af3df\Composer\Semver\Constraint\Constraint::OP_EQ => '==', \_PhpScoperfcee700af3df\Composer\Semver\Constraint\Constraint::OP_LT => '<', \_PhpScoperfcee700af3df\Composer\Semver\Constraint\Constraint::OP_LE => '<=', \_PhpScoperfcee700af3df\Composer\Semver\Constraint\Constraint::OP_GT => '>', \_PhpScoperfcee700af3df\Composer\Semver\Constraint\Constraint::OP_GE => '>=', \_PhpScoperfcee700af3df\Composer\Semver\Constraint\Constraint::OP_NE => '!=');
     /**
      * Evaluates the expression: $constraint match $operator $version
      *
@@ -33,13 +33,13 @@ class CompilingMatcher
      *
      * @return mixed
      */
-    public static function match(\_PhpScoper89c09b8e7101\Composer\Semver\Constraint\ConstraintInterface $constraint, $operator, $version)
+    public static function match(\_PhpScoperfcee700af3df\Composer\Semver\Constraint\ConstraintInterface $constraint, $operator, $version)
     {
         if (self::$enabled === null) {
             self::$enabled = !\in_array('eval', \explode(',', \ini_get('disable_functions')), \true);
         }
         if (!self::$enabled) {
-            return $constraint->matches(new \_PhpScoper89c09b8e7101\Composer\Semver\Constraint\Constraint(self::$transOpInt[$operator], $version));
+            return $constraint->matches(new \_PhpScoperfcee700af3df\Composer\Semver\Constraint\Constraint(self::$transOpInt[$operator], $version));
         }
         $cacheKey = $operator . $constraint;
         if (!isset(self::$compiledCheckerCache[$cacheKey])) {

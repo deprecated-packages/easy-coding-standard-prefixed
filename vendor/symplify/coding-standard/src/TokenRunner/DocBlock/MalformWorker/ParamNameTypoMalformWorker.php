@@ -3,21 +3,31 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper89c09b8e7101\Nette\Utils\Strings;
+use _PhpScoperfcee700af3df\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\Annotation;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\Tokenizer\Tokens;
-final class ParamNameTypoMalformWorker extends \Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker\AbstractMalformWorker
+use Symplify\CodingStandard\TokenAnalyzer\DocblockRelatedParamNamesResolver;
+use Symplify\CodingStandard\TokenRunner\Contract\DocBlock\MalformWorkerInterface;
+final class ParamNameTypoMalformWorker implements \Symplify\CodingStandard\TokenRunner\Contract\DocBlock\MalformWorkerInterface
 {
     /**
      * @var string
      * @see https://regex101.com/r/5szHlw/1
      */
     private const PARAM_NAME_REGEX = '#@param(.*?)(?<paramName>\\$\\w+)#';
+    /**
+     * @var DocblockRelatedParamNamesResolver
+     */
+    private $docblockRelatedParamNamesResolver;
+    public function __construct(\Symplify\CodingStandard\TokenAnalyzer\DocblockRelatedParamNamesResolver $docblockRelatedParamNamesResolver)
+    {
+        $this->docblockRelatedParamNamesResolver = $docblockRelatedParamNamesResolver;
+    }
     public function work(string $docContent, \PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : string
     {
-        $argumentNames = $this->getDocRelatedArgumentNames($tokens, $position);
-        if ($argumentNames === null) {
+        $argumentNames = $this->docblockRelatedParamNamesResolver->resolve($tokens, $position);
+        if ($argumentNames === []) {
             return $docContent;
         }
         $paramNames = $this->getParamNames($docContent);
@@ -46,7 +56,7 @@ final class ParamNameTypoMalformWorker extends \Symplify\CodingStandard\TokenRun
         $paramAnnotations = $this->getAnnotationsOfType($docContent, 'param');
         $paramNames = [];
         foreach ($paramAnnotations as $paramAnnotation) {
-            $match = \_PhpScoper89c09b8e7101\Nette\Utils\Strings::match($paramAnnotation->getContent(), self::PARAM_NAME_REGEX);
+            $match = \_PhpScoperfcee700af3df\Nette\Utils\Strings::match($paramAnnotation->getContent(), self::PARAM_NAME_REGEX);
             if (isset($match['paramName'])) {
                 $paramNames[] = $match['paramName'];
             }
@@ -74,7 +84,7 @@ final class ParamNameTypoMalformWorker extends \Symplify\CodingStandard\TokenRun
             }
             $typoName = $paramNames[$key];
             $replacePattern = '#@param(.*?)' . \preg_quote($typoName, '#') . '#';
-            $docContent = \_PhpScoper89c09b8e7101\Nette\Utils\Strings::replace($docContent, $replacePattern, '@param$1' . $argumentName);
+            $docContent = \_PhpScoperfcee700af3df\Nette\Utils\Strings::replace($docContent, $replacePattern, '@param$1' . $argumentName);
         }
         return $docContent;
     }
