@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4ea0f0bd23f\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class PrototypeConfigurator extends \_PhpScoperc4ea0f0bd23f\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class PrototypeConfigurator extends \_PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     public const FACTORY = 'load';
     use Traits\AbstractTrait;
@@ -37,9 +37,9 @@ class PrototypeConfigurator extends \_PhpScoperc4ea0f0bd23f\Symfony\Component\De
     private $resource;
     private $excludes;
     private $allowParent;
-    public function __construct(\_PhpScoperc4ea0f0bd23f\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScoperc4ea0f0bd23f\Symfony\Component\DependencyInjection\Loader\PhpFileLoader $loader, \_PhpScoperc4ea0f0bd23f\Symfony\Component\DependencyInjection\Definition $defaults, string $namespace, string $resource, bool $allowParent)
+    public function __construct(\_PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\PhpFileLoader $loader, \_PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Definition $defaults, string $namespace, string $resource, bool $allowParent)
     {
-        $definition = new \_PhpScoperc4ea0f0bd23f\Symfony\Component\DependencyInjection\Definition();
+        $definition = new \_PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Definition();
         if (!$defaults->isPublic() || !$defaults->isPrivate()) {
             $definition->setPublic($defaults->isPublic());
         }

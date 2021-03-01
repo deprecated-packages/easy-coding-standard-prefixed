@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4ea0f0bd23f\Symfony\Component\OptionsResolver\Debug;
+namespace _PhpScoperf3dc21757def\Symfony\Component\OptionsResolver\Debug;
 
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\OptionsResolver\Exception\NoConfigurationException;
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\OptionsResolver\OptionsResolver;
+use _PhpScoperf3dc21757def\Symfony\Component\OptionsResolver\Exception\NoConfigurationException;
+use _PhpScoperf3dc21757def\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
+use _PhpScoperf3dc21757def\Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  *
@@ -21,15 +21,15 @@ use _PhpScoperc4ea0f0bd23f\Symfony\Component\OptionsResolver\OptionsResolver;
 class OptionsResolverIntrospector
 {
     private $get;
-    public function __construct(\_PhpScoperc4ea0f0bd23f\Symfony\Component\OptionsResolver\OptionsResolver $optionsResolver)
+    public function __construct(\_PhpScoperf3dc21757def\Symfony\Component\OptionsResolver\OptionsResolver $optionsResolver)
     {
         $this->get = \Closure::bind(function ($property, $option, $message) {
             /** @var OptionsResolver $this */
             if (!$this->isDefined($option)) {
-                throw new \_PhpScoperc4ea0f0bd23f\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist.', $option));
+                throw new \_PhpScoperf3dc21757def\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist.', $option));
             }
             if (!\array_key_exists($option, $this->{$property})) {
-                throw new \_PhpScoperc4ea0f0bd23f\Symfony\Component\OptionsResolver\Exception\NoConfigurationException($message);
+                throw new \_PhpScoperf3dc21757def\Symfony\Component\OptionsResolver\Exception\NoConfigurationException($message);
             }
             return $this->{$property}[$option];
         }, $optionsResolver, $optionsResolver);

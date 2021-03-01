@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperc4ea0f0bd23f\Nette\Utils;
+namespace _PhpScoperf3dc21757def\Nette\Utils;
 
-use _PhpScoperc4ea0f0bd23f\Nette;
-use _PhpScoperc4ea0f0bd23f\Nette\HtmlStringable;
+use _PhpScoperf3dc21757def\Nette;
+use _PhpScoperf3dc21757def\Nette\HtmlStringable;
 use function is_array, is_float, is_object, is_string;
 /**
  * HTML helper.
@@ -227,7 +227,7 @@ use function is_array, is_float, is_object, is_string;
  * @method self width(?int $val)
  * @method self wrap(?string $val)
  */
-class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc4ea0f0bd23f\Nette\HtmlStringable
+class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperf3dc21757def\Nette\HtmlStringable
 {
     use Nette\SmartObject;
     /** @var array<string, mixed>  element's attributes */
@@ -258,7 +258,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
             $el->setText($attrs);
         }
         if (isset($parts[1])) {
-            foreach (\_PhpScoperc4ea0f0bd23f\Nette\Utils\Strings::matchAll($parts[1] . ' ', '#([a-z0-9:-]+)(?:=(["\'])?(.*?)(?(2)\\2|\\s))?#i') as $m) {
+            foreach (\_PhpScoperf3dc21757def\Nette\Utils\Strings::matchAll($parts[1] . ' ', '#([a-z0-9:-]+)(?:=(["\'])?(.*?)(?(2)\\2|\\s))?#i') as $m) {
                 $el->attrs[$m[1]] = $m[3] ?? \true;
             }
         }
@@ -502,7 +502,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
      */
     public final function setText($text)
     {
-        if (!$text instanceof \_PhpScoperc4ea0f0bd23f\Nette\HtmlStringable) {
+        if (!$text instanceof \_PhpScoperf3dc21757def\Nette\HtmlStringable) {
             $text = \htmlspecialchars((string) $text, \ENT_NOQUOTES, 'UTF-8');
         }
         $this->children = [(string) $text];
@@ -531,7 +531,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
      */
     public function addText($text)
     {
-        if (!$text instanceof \_PhpScoperc4ea0f0bd23f\Nette\HtmlStringable) {
+        if (!$text instanceof \_PhpScoperf3dc21757def\Nette\HtmlStringable) {
             $text = \htmlspecialchars((string) $text, \ENT_NOQUOTES, 'UTF-8');
         }
         return $this->insert(null, $text);
@@ -702,7 +702,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
                 continue;
             } elseif (\is_array($value)) {
                 if (\strncmp($key, 'data-', 5) === 0) {
-                    $value = \_PhpScoperc4ea0f0bd23f\Nette\Utils\Json::encode($value);
+                    $value = \_PhpScoperf3dc21757def\Nette\Utils\Json::encode($value);
                 } else {
                     $tmp = null;
                     foreach ($value as $k => $v) {

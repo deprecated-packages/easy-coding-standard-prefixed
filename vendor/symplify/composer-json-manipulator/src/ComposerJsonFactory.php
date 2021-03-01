@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator;
 
-use _PhpScoperc4ea0f0bd23f\Nette\Utils\Json;
+use _PhpScoperf3dc21757def\Nette\Utils\Json;
 use Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
@@ -23,7 +23,7 @@ final class ComposerJsonFactory
     }
     public function createFromString(string $jsonString) : \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson
     {
-        $jsonArray = \_PhpScoperc4ea0f0bd23f\Nette\Utils\Json::decode($jsonString, \_PhpScoperc4ea0f0bd23f\Nette\Utils\Json::FORCE_ARRAY);
+        $jsonArray = \_PhpScoperf3dc21757def\Nette\Utils\Json::decode($jsonString, \_PhpScoperf3dc21757def\Nette\Utils\Json::FORCE_ARRAY);
         return $this->createFromArray($jsonArray);
     }
     public function createFromFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson

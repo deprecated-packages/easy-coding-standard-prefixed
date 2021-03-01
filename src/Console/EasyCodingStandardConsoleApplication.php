@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console;
 
-use _PhpScoperc4ea0f0bd23f\Composer\XdebugHandler\XdebugHandler;
-use _PhpScoperc4ea0f0bd23f\Jean85\PrettyVersions;
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Command\Command;
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperf3dc21757def\Composer\XdebugHandler\XdebugHandler;
+use _PhpScoperf3dc21757def\Jean85\PrettyVersions;
+use _PhpScoperf3dc21757def\Symfony\Component\Console\Command\Command;
+use _PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputOption;
+use _PhpScoperf3dc21757def\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Bootstrap\NoCheckersLoaderReporter;
 use Symplify\EasyCodingStandard\Configuration\Exception\NoCheckersLoadedException;
 use Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter;
@@ -27,16 +27,16 @@ final class EasyCodingStandardConsoleApplication extends \Symplify\SymplifyKerne
      */
     public function __construct(\Symplify\EasyCodingStandard\Bootstrap\NoCheckersLoaderReporter $noCheckersLoaderReporter, array $commands)
     {
-        $version = \_PhpScoperc4ea0f0bd23f\Jean85\PrettyVersions::getVersion('symplify/easy-coding-standard');
+        $version = \_PhpScoperf3dc21757def\Jean85\PrettyVersions::getVersion('symplify/easy-coding-standard');
         parent::__construct($commands, 'EasyCodingStandard', $version->getPrettyVersion());
         $this->noCheckersLoaderReporter = $noCheckersLoaderReporter;
     }
-    public function doRun(\_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Output\OutputInterface $output) : int
+    public function doRun(\_PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperf3dc21757def\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         // @fixes https://github.com/rectorphp/rector/issues/2205
         $isXdebugAllowed = $input->hasParameterOption('--xdebug');
         if (!$isXdebugAllowed && !\defined('PHPUNIT_COMPOSER_INSTALL')) {
-            $xdebugHandler = new \_PhpScoperc4ea0f0bd23f\Composer\XdebugHandler\XdebugHandler('ecs', '--ansi');
+            $xdebugHandler = new \_PhpScoperf3dc21757def\Composer\XdebugHandler\XdebugHandler('ecs', '--ansi');
             $xdebugHandler->check();
             unset($xdebugHandler);
         }
@@ -46,7 +46,7 @@ final class EasyCodingStandardConsoleApplication extends \Symplify\SymplifyKerne
         }
         return parent::doRun($input, $output);
     }
-    public function renderThrowable(\Throwable $throwable, \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Output\OutputInterface $output) : void
+    public function renderThrowable(\Throwable $throwable, \_PhpScoperf3dc21757def\Symfony\Component\Console\Output\OutputInterface $output) : void
     {
         if (\is_a($throwable, \Symplify\EasyCodingStandard\Configuration\Exception\NoCheckersLoadedException::class)) {
             $this->noCheckersLoaderReporter->report();
@@ -54,13 +54,13 @@ final class EasyCodingStandardConsoleApplication extends \Symplify\SymplifyKerne
         }
         parent::renderThrowable($throwable, $output);
     }
-    protected function getDefaultInputDefinition() : \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputDefinition
+    protected function getDefaultInputDefinition() : \_PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputDefinition
     {
         $inputDefinition = parent::getDefaultInputDefinition();
         $this->addExtraOptions($inputDefinition);
         return $inputDefinition;
     }
-    private function shouldPrintMetaInformation(\_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputInterface $input) : bool
+    private function shouldPrintMetaInformation(\_PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputInterface $input) : bool
     {
         $hasNoArguments = $input->getFirstArgument() === null;
         $hasVersionOption = $input->hasParameterOption('--version');
@@ -73,9 +73,9 @@ final class EasyCodingStandardConsoleApplication extends \Symplify\SymplifyKerne
         $outputFormat = $input->getParameterOption('--' . \Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT);
         return $outputFormat === \Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter::NAME;
     }
-    private function addExtraOptions(\_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputDefinition $inputDefinition) : void
+    private function addExtraOptions(\_PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputDefinition $inputDefinition) : void
     {
-        $inputDefinition->addOption(new \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputOption(\Symplify\EasyCodingStandard\ValueObject\Option::XDEBUG, null, \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Allow running xdebug'));
-        $inputDefinition->addOption(new \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputOption(\Symplify\EasyCodingStandard\ValueObject\Option::DEBUG, null, \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Run in debug mode (alias for "-vvv")'));
+        $inputDefinition->addOption(new \_PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputOption(\Symplify\EasyCodingStandard\ValueObject\Option::XDEBUG, null, \_PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Allow running xdebug'));
+        $inputDefinition->addOption(new \_PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputOption(\Symplify\EasyCodingStandard\ValueObject\Option::DEBUG, null, \_PhpScoperf3dc21757def\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Run in debug mode (alias for "-vvv")'));
     }
 }

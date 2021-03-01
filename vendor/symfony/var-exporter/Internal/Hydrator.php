@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc4ea0f0bd23f\Symfony\Component\VarExporter\Internal;
+namespace _PhpScoperf3dc21757def\Symfony\Component\VarExporter\Internal;
 
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use _PhpScoperf3dc21757def\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -24,7 +24,7 @@ class Hydrator
     public $properties;
     public $value;
     public $wakeups;
-    public function __construct(?\_PhpScoperc4ea0f0bd23f\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScoperc4ea0f0bd23f\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
+    public function __construct(?\_PhpScoperf3dc21757def\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScoperf3dc21757def\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
     {
         $this->registry = $registry;
         $this->values = $values;
@@ -58,7 +58,7 @@ class Hydrator
             };
         }
         if (!\class_exists($class) && !\interface_exists($class, \false) && !\trait_exists($class, \false)) {
-            throw new \_PhpScoperc4ea0f0bd23f\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
+            throw new \_PhpScoperf3dc21757def\Symfony\Component\VarExporter\Exception\ClassNotFoundException($class);
         }
         $classReflector = new \ReflectionClass($class);
         if (!$classReflector->isInternal()) {

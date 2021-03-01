@@ -11,17 +11,17 @@
  */
 namespace PhpCsFixer\Event;
 
-use _PhpScoperc4ea0f0bd23f\Symfony\Component\EventDispatcher\EventDispatcher;
-use _PhpScoperc4ea0f0bd23f\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use _PhpScoperf3dc21757def\Symfony\Component\EventDispatcher\EventDispatcher;
+use _PhpScoperf3dc21757def\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 // Since PHP-CS-FIXER is PHP 5.6 compliant we can't always use Symfony Contracts (currently needs PHP ^7.1.3)
 // This conditional inheritance will be useless when PHP-CS-FIXER no longer supports PHP versions
 // inferior to Symfony/Contracts PHP minimal version
-if (\is_subclass_of(\_PhpScoperc4ea0f0bd23f\Symfony\Component\EventDispatcher\EventDispatcher::class, \_PhpScoperc4ea0f0bd23f\Symfony\Contracts\EventDispatcher\EventDispatcherInterface::class)) {
-    class Event extends \_PhpScoperc4ea0f0bd23f\Symfony\Contracts\EventDispatcher\Event
+if (\is_subclass_of(\_PhpScoperf3dc21757def\Symfony\Component\EventDispatcher\EventDispatcher::class, \_PhpScoperf3dc21757def\Symfony\Contracts\EventDispatcher\EventDispatcherInterface::class)) {
+    class Event extends \_PhpScoperf3dc21757def\Symfony\Contracts\EventDispatcher\Event
     {
     }
 } else {
-    class Event extends \_PhpScoperc4ea0f0bd23f\Symfony\Component\EventDispatcher\Event
+    class Event extends \_PhpScoperf3dc21757def\Symfony\Component\EventDispatcher\Event
     {
     }
 }
