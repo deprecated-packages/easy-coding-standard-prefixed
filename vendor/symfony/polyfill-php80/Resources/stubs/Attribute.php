@@ -1,7 +1,5 @@
 <?php
 
-namespace _PhpScoper06c5fb6c14ed;
-
 #[Attribute(Attribute::TARGET_CLASS)]
 final class Attribute
 {
@@ -13,12 +11,12 @@ final class Attribute
     public const TARGET_PARAMETER = 32;
     public const TARGET_ALL = 63;
     public const IS_REPEATABLE = 64;
+
     /** @var int */
     public $flags;
+
     public function __construct(int $flags = self::TARGET_ALL)
     {
         $this->flags = $flags;
     }
 }
-#[Attribute(Attribute::TARGET_CLASS)]
-\class_alias('_PhpScoper06c5fb6c14ed\\Attribute', 'Attribute', \false);

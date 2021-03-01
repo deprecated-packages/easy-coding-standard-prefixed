@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper06c5fb6c14ed\Doctrine\Common\Annotations;
+namespace _PhpScoperc4ea0f0bd23f\Doctrine\Common\Annotations;
 
 use Exception;
 use function get_class;

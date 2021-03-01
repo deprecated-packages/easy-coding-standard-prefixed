@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper06c5fb6c14ed\Symfony\Component\Console\Descriptor;
+namespace _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Descriptor;
 
-use _PhpScoper06c5fb6c14ed\Symfony\Component\Console\Application;
-use _PhpScoper06c5fb6c14ed\Symfony\Component\Console\Command\Command;
-use _PhpScoper06c5fb6c14ed\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper06c5fb6c14ed\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper06c5fb6c14ed\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoper06c5fb6c14ed\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper06c5fb6c14ed\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Application;
+use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Command\Command;
+use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputOption;
+use _PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *
  * @internal
  */
-abstract class Descriptor implements \_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Descriptor\DescriptorInterface
+abstract class Descriptor implements \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Descriptor\DescriptorInterface
 {
     /**
      * @var OutputInterface
@@ -31,27 +31,27 @@ abstract class Descriptor implements \_PhpScoper06c5fb6c14ed\Symfony\Component\C
     /**
      * {@inheritdoc}
      */
-    public function describe(\_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = [])
+    public function describe(\_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Output\OutputInterface $output, $object, array $options = [])
     {
         $this->output = $output;
         switch (\true) {
-            case $object instanceof \_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Input\InputArgument:
+            case $object instanceof \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputArgument:
                 $this->describeInputArgument($object, $options);
                 break;
-            case $object instanceof \_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Input\InputOption:
+            case $object instanceof \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputOption:
                 $this->describeInputOption($object, $options);
                 break;
-            case $object instanceof \_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Input\InputDefinition:
+            case $object instanceof \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputDefinition:
                 $this->describeInputDefinition($object, $options);
                 break;
-            case $object instanceof \_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Command\Command:
+            case $object instanceof \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Command\Command:
                 $this->describeCommand($object, $options);
                 break;
-            case $object instanceof \_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Application:
+            case $object instanceof \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Application:
                 $this->describeApplication($object, $options);
                 break;
             default:
-                throw new \_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Object of type "%s" is not describable.', \get_debug_type($object)));
+                throw new \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Object of type "%s" is not describable.', \get_debug_type($object)));
         }
     }
     /**
@@ -59,36 +59,36 @@ abstract class Descriptor implements \_PhpScoper06c5fb6c14ed\Symfony\Component\C
      */
     protected function write(string $content, bool $decorated = \false)
     {
-        $this->output->write($content, \false, $decorated ? \_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Output\OutputInterface::OUTPUT_NORMAL : \_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW);
+        $this->output->write($content, \false, $decorated ? \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Output\OutputInterface::OUTPUT_NORMAL : \_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW);
     }
     /**
      * Describes an InputArgument instance.
      *
      * @return string|mixed
      */
-    protected abstract function describeInputArgument(\_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Input\InputArgument $argument, array $options = []);
+    protected abstract function describeInputArgument(\_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputArgument $argument, array $options = []);
     /**
      * Describes an InputOption instance.
      *
      * @return string|mixed
      */
-    protected abstract function describeInputOption(\_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Input\InputOption $option, array $options = []);
+    protected abstract function describeInputOption(\_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputOption $option, array $options = []);
     /**
      * Describes an InputDefinition instance.
      *
      * @return string|mixed
      */
-    protected abstract function describeInputDefinition(\_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Input\InputDefinition $definition, array $options = []);
+    protected abstract function describeInputDefinition(\_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Input\InputDefinition $definition, array $options = []);
     /**
      * Describes a Command instance.
      *
      * @return string|mixed
      */
-    protected abstract function describeCommand(\_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Command\Command $command, array $options = []);
+    protected abstract function describeCommand(\_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Command\Command $command, array $options = []);
     /**
      * Describes an Application instance.
      *
      * @return string|mixed
      */
-    protected abstract function describeApplication(\_PhpScoper06c5fb6c14ed\Symfony\Component\Console\Application $application, array $options = []);
+    protected abstract function describeApplication(\_PhpScoperc4ea0f0bd23f\Symfony\Component\Console\Application $application, array $options = []);
 }

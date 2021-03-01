@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper06c5fb6c14ed\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoperc4ea0f0bd23f\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper06c5fb6c14ed\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoperc4ea0f0bd23f\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Represents the main properties of a PHP variable, pre-casted by a caster.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CutStub extends \_PhpScoper06c5fb6c14ed\Symfony\Component\VarDumper\Cloner\Stub
+class CutStub extends \_PhpScoperc4ea0f0bd23f\Symfony\Component\VarDumper\Cloner\Stub
 {
     public function __construct($value)
     {
@@ -26,7 +26,7 @@ class CutStub extends \_PhpScoper06c5fb6c14ed\Symfony\Component\VarDumper\Cloner
                 $this->type = self::TYPE_OBJECT;
                 $this->class = \get_class($value);
                 if ($value instanceof \Closure) {
-                    \_PhpScoper06c5fb6c14ed\Symfony\Component\VarDumper\Caster\ReflectionCaster::castClosure($value, [], $this, \true, \_PhpScoper06c5fb6c14ed\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE);
+                    \_PhpScoperc4ea0f0bd23f\Symfony\Component\VarDumper\Caster\ReflectionCaster::castClosure($value, [], $this, \true, \_PhpScoperc4ea0f0bd23f\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE);
                 }
                 $this->cut = -1;
                 break;
