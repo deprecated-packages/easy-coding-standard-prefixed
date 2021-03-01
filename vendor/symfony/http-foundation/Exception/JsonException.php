@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper10b1b2c5ca55\Symfony\Component\HttpFoundation\Exception;
+namespace _PhpScoper06c5fb6c14ed\Symfony\Component\HttpFoundation\Exception;
 
 /**
  * Thrown by Request::toArray() when the content cannot be JSON-decoded.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-final class JsonException extends \UnexpectedValueException implements \_PhpScoper10b1b2c5ca55\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
+final class JsonException extends \UnexpectedValueException implements \_PhpScoper06c5fb6c14ed\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
 {
 }

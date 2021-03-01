@@ -4,9 +4,10 @@ declare (strict_types=1);
 namespace Symplify\EasyTesting\DataProvider;
 
 use Iterator;
-use _PhpScoper10b1b2c5ca55\Nette\Utils\Strings;
-use _PhpScoper10b1b2c5ca55\Symfony\Component\Finder\Finder;
-use _PhpScoper10b1b2c5ca55\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper06c5fb6c14ed\Nette\Utils\Strings;
+use _PhpScoper06c5fb6c14ed\Symfony\Component\Finder\Finder;
+use _PhpScoper06c5fb6c14ed\Symfony\Component\Finder\SplFileInfo;
+use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 /**
@@ -17,15 +18,48 @@ final class StaticFixtureFinder
     public static function yieldDirectory(string $directory, string $suffix = '*.php.inc') : \Iterator
     {
         $fileInfos = self::findFilesInDirectory($directory, $suffix);
-        foreach ($fileInfos as $fileInfo) {
-            (yield [new \Symplify\SmartFileSystem\SmartFileInfo($fileInfo->getRealPath())]);
-        }
+        return self::yieldFileInfos($fileInfos);
     }
     public static function yieldDirectoryExclusively(string $directory, string $suffix = '*.php.inc') : \Iterator
     {
         $fileInfos = self::findFilesInDirectoryExclusively($directory, $suffix);
+        return self::yieldFileInfos($fileInfos);
+    }
+    public static function yieldDirectoryWithRelativePathname(string $directory, string $suffix = '*.php.inc') : \Iterator
+    {
+        $fileInfos = self::findFilesInDirectory($directory, $suffix);
+        return self::yieldFileInfosWithRelativePathname($fileInfos);
+    }
+    public static function yieldDirectoryExclusivelyWithRelativePathname(string $directory, string $suffix = '*.php.inc') : \Iterator
+    {
+        $fileInfos = self::findFilesInDirectoryExclusively($directory, $suffix);
+        return self::yieldFileInfosWithRelativePathname($fileInfos);
+    }
+    /**
+     * @param SplFileInfo[] $fileInfos
+     */
+    private static function yieldFileInfos(array $fileInfos) : \Iterator
+    {
         foreach ($fileInfos as $fileInfo) {
-            (yield [new \Symplify\SmartFileSystem\SmartFileInfo($fileInfo->getRealPath())]);
+            try {
+                $smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo($fileInfo->getRealPath());
+                (yield [$smartFileInfo]);
+            } catch (\Symplify\SmartFileSystem\Exception\FileNotFoundException $fileNotFoundException) {
+            }
+        }
+    }
+    /**
+     * @param SplFileInfo[] $fileInfos
+     * @return Iterator<string, array<int, SplFileInfo>>
+     */
+    private static function yieldFileInfosWithRelativePathname(array $fileInfos) : \Iterator
+    {
+        foreach ($fileInfos as $fileInfo) {
+            try {
+                $smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo($fileInfo->getRealPath());
+                (yield $fileInfo->getRelativePathname() => [$smartFileInfo]);
+            } catch (\Symplify\SmartFileSystem\Exception\FileNotFoundException $e) {
+            }
         }
     }
     /**
@@ -33,7 +67,7 @@ final class StaticFixtureFinder
      */
     private static function findFilesInDirectory(string $directory, string $suffix) : array
     {
-        $finder = \_PhpScoper10b1b2c5ca55\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
+        $finder = \_PhpScoper06c5fb6c14ed\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
         $fileInfos = \iterator_to_array($finder);
         return \array_values($fileInfos);
     }
@@ -43,16 +77,16 @@ final class StaticFixtureFinder
     private static function findFilesInDirectoryExclusively(string $directory, string $suffix) : array
     {
         self::ensureNoOtherFileName($directory, $suffix);
-        $finder = \_PhpScoper10b1b2c5ca55\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
+        $finder = \_PhpScoper06c5fb6c14ed\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
         $fileInfos = \iterator_to_array($finder->getIterator());
         return \array_values($fileInfos);
     }
     private static function ensureNoOtherFileName(string $directory, string $suffix) : void
     {
-        $iterator = \_PhpScoper10b1b2c5ca55\Symfony\Component\Finder\Finder::create()->in($directory)->files()->notName($suffix)->getIterator();
+        $iterator = \_PhpScoper06c5fb6c14ed\Symfony\Component\Finder\Finder::create()->in($directory)->files()->notName($suffix)->getIterator();
         $relativeFilePaths = [];
         foreach ($iterator as $fileInfo) {
-            $relativeFilePaths[] = \_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::substring($fileInfo->getRealPath(), \strlen(\getcwd()) + 1);
+            $relativeFilePaths[] = \_PhpScoper06c5fb6c14ed\Nette\Utils\Strings::substring($fileInfo->getRealPath(), \strlen(\getcwd()) + 1);
         }
         if ($relativeFilePaths === []) {
             return;

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper10b1b2c5ca55\Nette\Utils\Strings;
+use _PhpScoper06c5fb6c14ed\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\DocBlock\Line;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -57,7 +57,7 @@ final class MissingParamNameMalformWorker implements \Symplify\CodingStandard\To
     {
         foreach ($functionArgumentNames as $key => $functionArgumentName) {
             $pattern = '# ' . \preg_quote($functionArgumentName, '#') . '\\b#';
-            if (\_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::match($docContent, $pattern)) {
+            if (\_PhpScoper06c5fb6c14ed\Nette\Utils\Strings::match($docContent, $pattern)) {
                 unset($functionArgumentNames[$key]);
             }
         }
@@ -94,14 +94,14 @@ final class MissingParamNameMalformWorker implements \Symplify\CodingStandard\To
     }
     private function shouldSkipLine(\PhpCsFixer\DocBlock\Line $line) : bool
     {
-        if (!\_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::contains($line->getContent(), self::PARAM_ANNOTATOIN_START_REGEX)) {
+        if (!\_PhpScoper06c5fb6c14ed\Nette\Utils\Strings::contains($line->getContent(), self::PARAM_ANNOTATOIN_START_REGEX)) {
             return \true;
         }
         // already has a param name
-        if (\_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::match($line->getContent(), self::PARAM_WITH_NAME_REGEX)) {
+        if (\_PhpScoper06c5fb6c14ed\Nette\Utils\Strings::match($line->getContent(), self::PARAM_WITH_NAME_REGEX)) {
             return \true;
         }
-        $match = \_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::match($line->getContent(), self::PARAM_WITHOUT_NAME_REGEX);
+        $match = \_PhpScoper06c5fb6c14ed\Nette\Utils\Strings::match($line->getContent(), self::PARAM_WITHOUT_NAME_REGEX);
         return $match === null;
     }
     private function createNewLineContent(string $newArgumentName, \PhpCsFixer\DocBlock\Line $line) : string
@@ -109,10 +109,10 @@ final class MissingParamNameMalformWorker implements \Symplify\CodingStandard\To
         // @see https://regex101.com/r/4FL49H/1
         $missingDollarSignPattern = '#(@param\\s+([\\w\\|\\[\\]\\\\]+\\s)?)(' . \ltrim($newArgumentName, '$') . ')#';
         // missing \$ case - possibly own worker
-        if (\_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::match($line->getContent(), $missingDollarSignPattern)) {
-            return \_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::replace($line->getContent(), $missingDollarSignPattern, '$1$$3');
+        if (\_PhpScoper06c5fb6c14ed\Nette\Utils\Strings::match($line->getContent(), $missingDollarSignPattern)) {
+            return \_PhpScoper06c5fb6c14ed\Nette\Utils\Strings::replace($line->getContent(), $missingDollarSignPattern, '$1$$3');
         }
         $replacement = '@param $1 ' . $newArgumentName . '$2' . \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar();
-        return \_PhpScoper10b1b2c5ca55\Nette\Utils\Strings::replace($line->getContent(), self::PARAM_WITHOUT_NAME_REGEX, $replacement);
+        return \_PhpScoper06c5fb6c14ed\Nette\Utils\Strings::replace($line->getContent(), self::PARAM_WITHOUT_NAME_REGEX, $replacement);
     }
 }

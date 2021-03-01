@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper10b1b2c5ca55\Nette\Neon;
+namespace _PhpScoper06c5fb6c14ed\Nette\Neon;
 
 /**
- * Representation of 'foo(bar=1)' literal
+ * Representation of NEON entity 'foo(bar=1)'
  */
 final class Entity extends \stdClass
 {
