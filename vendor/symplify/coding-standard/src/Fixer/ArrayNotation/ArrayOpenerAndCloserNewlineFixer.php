@@ -7,41 +7,47 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use Symplify\CodingStandard\Fixer\AbstractArrayFixer;
+use PhpCsFixer\WhitespacesFixerConfig;
+use SplFileInfo;
+use Symplify\CodingStandard\Fixer\AbstractSymplifyFixer;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
+use Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\ArrayAnalyzer;
+use Symplify\CodingStandard\TokenRunner\Traverser\ArrayBlockInfoFinder;
 use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
+use Symplify\CodingStandard\TokenRunner\ValueObject\TokenKinds;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\CodingStandard\Tests\Fixer\ArrayNotation\ArrayOpenerAndCloserNewlineFixer\ArrayOpenerAndCloserNewlineFixerTest
  */
-final class ArrayOpenerAndCloserNewlineFixer extends \Symplify\CodingStandard\Fixer\AbstractArrayFixer implements \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
+final class ArrayOpenerAndCloserNewlineFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
 {
     /**
      * @var string
      */
     private const ERROR_MESSAGE = 'Indexed PHP array opener [ and closer ] must be on own line';
+    /**
+     * @var ArrayBlockInfoFinder
+     */
+    private $arrayBlockInfoFinder;
+    /**
+     * @var WhitespacesFixerConfig
+     */
+    private $whitespacesFixerConfig;
+    /**
+     * @var ArrayAnalyzer
+     */
+    private $arrayAnalyzer;
+    public function __construct(\Symplify\CodingStandard\TokenRunner\Traverser\ArrayBlockInfoFinder $arrayBlockInfoFinder, \PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig, \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\ArrayAnalyzer $arrayAnalyzer)
+    {
+        $this->arrayBlockInfoFinder = $arrayBlockInfoFinder;
+        $this->whitespacesFixerConfig = $whitespacesFixerConfig;
+        $this->arrayAnalyzer = $arrayAnalyzer;
+    }
     public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
-    }
-    public function fixArrayOpener(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo, int $index) : void
-    {
-        if ($this->isNextTokenAlsoArrayOpener($tokens, $index)) {
-            return;
-        }
-        // no items
-        $itemCount = $this->arrayAnalyzer->getItemCount($tokens, $blockInfo);
-        if ($itemCount === 0) {
-            return;
-        }
-        if (!$this->arrayAnalyzer->isIndexedList($tokens, $blockInfo)) {
-            return;
-        }
-        // closer must run before the opener, as tokens as added by traversing up
-        $this->handleArrayCloser($tokens, $blockInfo->getEnd());
-        $this->handleArrayOpener($tokens, $index);
     }
     public function getPriority() : int
     {
@@ -59,13 +65,44 @@ $items = [
 CODE_SAMPLE
 )]);
     }
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    {
+        if (!$tokens->isAnyTokenKindsFound(\Symplify\CodingStandard\TokenRunner\ValueObject\TokenKinds::ARRAY_OPEN_TOKENS)) {
+            return \false;
+        }
+        return $tokens->isTokenKindFound(\T_DOUBLE_ARROW);
+    }
+    public function fix(\SplFileInfo $fileInfo, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    {
+        $blockInfos = $this->arrayBlockInfoFinder->findArrayOpenerBlockInfos($tokens);
+        foreach ($blockInfos as $blockInfo) {
+            $this->fixArrayOpener($tokens, $blockInfo);
+        }
+    }
+    private function fixArrayOpener(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : void
+    {
+        if ($this->isNextTokenAlsoArrayOpener($tokens, $blockInfo->getStart())) {
+            return;
+        }
+        // no items
+        $itemCount = $this->arrayAnalyzer->getItemCount($tokens, $blockInfo);
+        if ($itemCount === 0) {
+            return;
+        }
+        if (!$this->arrayAnalyzer->isIndexedList($tokens, $blockInfo)) {
+            return;
+        }
+        // closer must run before the opener, as tokens as added by traversing up
+        $this->handleArrayCloser($tokens, $blockInfo->getEnd());
+        $this->handleArrayOpener($tokens, $blockInfo->getStart());
+    }
     private function isNextTokenAlsoArrayOpener(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
     {
         $nextToken = $this->getNextMeaningfulToken($tokens, $index);
         if (!$nextToken instanceof \PhpCsFixer\Tokenizer\Token) {
             return \false;
         }
-        return $nextToken->isGivenKind(self::ARRAY_OPEN_TOKENS);
+        return $nextToken->isGivenKind(\Symplify\CodingStandard\TokenRunner\ValueObject\TokenKinds::ARRAY_OPEN_TOKENS);
     }
     private function handleArrayCloser(\PhpCsFixer\Tokenizer\Tokens $tokens, int $arrayCloserPosition) : void
     {

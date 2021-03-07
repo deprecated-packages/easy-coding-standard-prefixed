@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Console;
 
-use _PhpScoperf3dc21757def\Symfony\Component\Console\Application;
-use _PhpScoperf3dc21757def\Symfony\Component\Console\Command\Command;
+use _PhpScoper6625323d9c29\Symfony\Component\Console\Application;
+use _PhpScoper6625323d9c29\Symfony\Component\Console\Command\Command;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
-abstract class AbstractSymplifyConsoleApplication extends \_PhpScoperf3dc21757def\Symfony\Component\Console\Application
+abstract class AbstractSymplifyConsoleApplication extends \_PhpScoper6625323d9c29\Symfony\Component\Console\Application
 {
     /**
      * @var CommandNaming
@@ -23,6 +23,7 @@ abstract class AbstractSymplifyConsoleApplication extends \_PhpScoperf3dc21757de
     }
     /**
      * Add names to all commands by class-name convention
+     *
      * @param Command[] $commands
      */
     public function addCommands(array $commands) : void

@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\ValueObject;
 
-use _PhpScoperf3dc21757def\Nette\Utils\Arrays;
-use _PhpScoperf3dc21757def\Nette\Utils\Strings;
+use _PhpScoper6625323d9c29\Nette\Utils\Arrays;
+use _PhpScoper6625323d9c29\Nette\Utils\Strings;
 use Symplify\ComposerJsonManipulator\Sorter\ComposerPackageSorter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -304,7 +304,7 @@ final class ComposerJson
         if ($this->name === null) {
             return null;
         }
-        return \_PhpScoperf3dc21757def\Nette\Utils\Strings::after($this->name, '/', -1);
+        return \_PhpScoper6625323d9c29\Nette\Utils\Strings::after($this->name, '/', -1);
     }
     /**
      * @return string[]
@@ -572,7 +572,7 @@ final class ComposerJson
     public function getAutoloadDirectories() : array
     {
         $autoloadDirectories = \array_merge($this->getPsr4AndClassmapDirectories(), $this->getPsr4AndClassmapDevDirectories());
-        return \_PhpScoperf3dc21757def\Nette\Utils\Arrays::flatten($autoloadDirectories);
+        return \_PhpScoper6625323d9c29\Nette\Utils\Arrays::flatten($autoloadDirectories);
     }
     /**
      * @return string[]
@@ -616,6 +616,7 @@ final class ComposerJson
     }
     /**
      * 2. sort item by prescribed key order
+     *
      * @see https://www.designcise.com/web/tutorial/how-to-sort-an-array-by-keys-based-on-order-in-a-secondary-array-in-php
      * @param mixed[] $contentItems
      * @param string[] $orderedVisibleItems

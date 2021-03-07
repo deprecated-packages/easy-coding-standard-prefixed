@@ -20,8 +20,8 @@ final class BlockFinder
      */
     private const START_EDGES = ['(', '[', '{'];
     /**
-     * Accepts position to both start and end token, e.g. (, ), [, ], {, }
-     * also to: "array"(, "function" ...(, "use"(, "new" ...(
+     * Accepts position to both start and end token, e.g. (, ), [, ], {, } also to: "array"(, "function" ...(, "use"(,
+     * "new" ...(
      */
     public function findInTokensByEdge(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : ?\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
     {

@@ -90,7 +90,8 @@ final class File extends \PHP_CodeSniffer\Files\File
         $this->easyCodingStandardStyle = $easyCodingStandardStyle;
     }
     /**
-     * Mimics @see https://github.com/squizlabs/PHP_CodeSniffer/blob/e4da24f399d71d1077f93114a72e305286020415/src/Files/File.php#L310
+     * Mimics @see
+     * https://github.com/squizlabs/PHP_CodeSniffer/blob/e4da24f399d71d1077f93114a72e305286020415/src/Files/File.php#L310
      */
     public function process() : void
     {

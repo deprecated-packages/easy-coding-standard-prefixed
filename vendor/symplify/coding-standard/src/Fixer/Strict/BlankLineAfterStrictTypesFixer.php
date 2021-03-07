@@ -31,6 +31,7 @@ final class BlankLineAfterStrictTypesFixer extends \Symplify\CodingStandard\Fixe
     private $whitespacesFixerConfig;
     /**
      * Generates: "declare(strict_types=1);"
+     *
      * @var Token[]
      */
     private $declareStrictTypeTokens = [];

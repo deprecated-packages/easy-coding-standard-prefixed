@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperf3dc21757def\\Symfony\\Component\\ErrorHandler\\": ""
+            "_PhpScoper6625323d9c29\\Symfony\\Component\\ErrorHandler\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

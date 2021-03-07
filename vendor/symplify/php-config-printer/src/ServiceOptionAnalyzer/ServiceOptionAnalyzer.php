@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ServiceOptionAnalyzer;
 
-use _PhpScoperf3dc21757def\Nette\Utils\Strings;
+use _PhpScoper6625323d9c29\Nette\Utils\Strings;
 final class ServiceOptionAnalyzer
 {
     public function hasNamedArguments(array $data) : bool
@@ -12,7 +12,7 @@ final class ServiceOptionAnalyzer
             return \false;
         }
         foreach (\array_keys($data) as $key) {
-            if (!\_PhpScoperf3dc21757def\Nette\Utils\Strings::startsWith((string) $key, '$')) {
+            if (!\_PhpScoper6625323d9c29\Nette\Utils\Strings::startsWith((string) $key, '$')) {
                 return \false;
             }
         }

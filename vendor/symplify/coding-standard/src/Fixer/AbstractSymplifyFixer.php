@@ -35,8 +35,7 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
         return \array_reverse($tokens->toArray(), \true);
     }
     /**
-     * Helper method to run this before specified fixer,
-     * works even in case of change.
+     * Helper method to run this before specified fixer, works even in case of change.
      */
     protected function getPriorityBefore(string $fixerClass) : int
     {

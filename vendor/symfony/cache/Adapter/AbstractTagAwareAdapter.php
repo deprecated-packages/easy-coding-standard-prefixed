@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf3dc21757def\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper6625323d9c29\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperf3dc21757def\Psr\Log\LoggerAwareInterface;
-use _PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem;
-use _PhpScoperf3dc21757def\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperf3dc21757def\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperf3dc21757def\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use _PhpScoperf3dc21757def\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoperf3dc21757def\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use _PhpScoper6625323d9c29\Psr\Log\LoggerAwareInterface;
+use _PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem;
+use _PhpScoper6625323d9c29\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper6625323d9c29\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper6625323d9c29\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
+use _PhpScoper6625323d9c29\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoper6625323d9c29\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * Abstract for native TagAware adapters.
  *
@@ -28,19 +28,19 @@ use _PhpScoperf3dc21757def\Symfony\Contracts\Cache\TagAwareCacheInterface;
  *
  * @internal
  */
-abstract class AbstractTagAwareAdapter implements \_PhpScoperf3dc21757def\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \_PhpScoperf3dc21757def\Symfony\Contracts\Cache\TagAwareCacheInterface, \_PhpScoperf3dc21757def\Psr\Log\LoggerAwareInterface, \_PhpScoperf3dc21757def\Symfony\Component\Cache\ResettableInterface
+abstract class AbstractTagAwareAdapter implements \_PhpScoper6625323d9c29\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, \_PhpScoper6625323d9c29\Symfony\Contracts\Cache\TagAwareCacheInterface, \_PhpScoper6625323d9c29\Psr\Log\LoggerAwareInterface, \_PhpScoper6625323d9c29\Symfony\Component\Cache\ResettableInterface
 {
     use AbstractAdapterTrait;
     use ContractsTrait;
     private const TAGS_PREFIX = "\0tags\0";
     protected function __construct(string $namespace = '', int $defaultLifetime = 0)
     {
-        $this->namespace = '' === $namespace ? '' : \_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::validateKey($namespace) . ':';
+        $this->namespace = '' === $namespace ? '' : \_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::validateKey($namespace) . ':';
         if (null !== $this->maxIdLength && \strlen($namespace) > $this->maxIdLength - 24) {
-            throw new \_PhpScoperf3dc21757def\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace must be %d chars max, %d given ("%s").', $this->maxIdLength - 24, \strlen($namespace), $namespace));
+            throw new \_PhpScoper6625323d9c29\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Namespace must be %d chars max, %d given ("%s").', $this->maxIdLength - 24, \strlen($namespace), $namespace));
         }
         $this->createCacheItem = \Closure::bind(static function ($key, $value, $isHit) {
-            $item = new \_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem();
+            $item = new \_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->isTaggable = \true;
             // If structure does not match what we expect return item as is (no value and not a hit)
@@ -50,15 +50,15 @@ abstract class AbstractTagAwareAdapter implements \_PhpScoperf3dc21757def\Symfon
             $item->isHit = $isHit;
             // Extract value, tags and meta data from the cache value
             $item->value = $value['value'];
-            $item->metadata[\_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::METADATA_TAGS] = $value['tags'] ?? [];
+            $item->metadata[\_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::METADATA_TAGS] = $value['tags'] ?? [];
             if (isset($value['meta'])) {
                 // For compactness these values are packed, & expiry is offset to reduce size
                 $v = \unpack('Ve/Nc', $value['meta']);
-                $item->metadata[\_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $v['e'] + \_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY_OFFSET;
-                $item->metadata[\_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $v['c'];
+                $item->metadata[\_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $v['e'] + \_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY_OFFSET;
+                $item->metadata[\_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = $v['c'];
             }
             return $item;
-        }, null, \_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::class);
         $getId = \Closure::fromCallable([$this, 'getId']);
         $tagPrefix = self::TAGS_PREFIX;
         $this->mergeByLifetime = \Closure::bind(static function ($deferred, &$expiredIds) use($getId, $tagPrefix, $defaultLifetime) {
@@ -76,9 +76,9 @@ abstract class AbstractTagAwareAdapter implements \_PhpScoperf3dc21757def\Symfon
                     continue;
                 }
                 // Store Value and Tags on the cache value
-                if (isset(($metadata = $item->newMetadata)[\_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::METADATA_TAGS])) {
-                    $value = ['value' => $item->value, 'tags' => $metadata[\_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::METADATA_TAGS]];
-                    unset($metadata[\_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
+                if (isset(($metadata = $item->newMetadata)[\_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::METADATA_TAGS])) {
+                    $value = ['value' => $item->value, 'tags' => $metadata[\_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::METADATA_TAGS]];
+                    unset($metadata[\_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
                 } else {
                     $value = ['value' => $item->value, 'tags' => []];
                 }
@@ -88,7 +88,7 @@ abstract class AbstractTagAwareAdapter implements \_PhpScoperf3dc21757def\Symfon
                 }
                 // Extract tag changes, these should be removed from values in doSave()
                 $value['tag-operations'] = ['add' => [], 'remove' => []];
-                $oldTags = $item->metadata[\_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
+                $oldTags = $item->metadata[\_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::METADATA_TAGS] ?? [];
                 foreach (\array_diff($value['tags'], $oldTags) as $addedTag) {
                     $value['tag-operations']['add'][] = $getId($tagPrefix . $addedTag);
                 }
@@ -96,9 +96,10 @@ abstract class AbstractTagAwareAdapter implements \_PhpScoperf3dc21757def\Symfon
                     $value['tag-operations']['remove'][] = $getId($tagPrefix . $removedTag);
                 }
                 $byLifetime[$ttl][$getId($key)] = $value;
+                $item->metadata = $item->newMetadata;
             }
             return $byLifetime;
-        }, null, \_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::class);
     }
     /**
      * Persists several cache items immediately.
@@ -171,7 +172,7 @@ abstract class AbstractTagAwareAdapter implements \_PhpScoperf3dc21757def\Symfon
                     $v = $values[$id];
                     $type = \get_debug_type($v);
                     $message = \sprintf('Failed to save key "{key}" of type %s%s', $type, $e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-                    \_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => \substr($id, \strlen($this->namespace)), 'exception' => $e instanceof \Exception ? $e : null, 'cache-adapter' => \get_debug_type($this)]);
+                    \_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => \substr($id, \strlen($this->namespace)), 'exception' => $e instanceof \Exception ? $e : null, 'cache-adapter' => \get_debug_type($this)]);
                 }
             } else {
                 foreach ($values as $id => $v) {
@@ -194,7 +195,7 @@ abstract class AbstractTagAwareAdapter implements \_PhpScoperf3dc21757def\Symfon
                 $ok = \false;
                 $type = \get_debug_type($v);
                 $message = \sprintf('Failed to save key "{key}" of type %s%s', $type, $e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-                \_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => \substr($id, \strlen($this->namespace)), 'exception' => $e instanceof \Exception ? $e : null, 'cache-adapter' => \get_debug_type($this)]);
+                \_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => \substr($id, \strlen($this->namespace)), 'exception' => $e instanceof \Exception ? $e : null, 'cache-adapter' => \get_debug_type($this)]);
             }
         }
         return $ok;
@@ -239,7 +240,7 @@ abstract class AbstractTagAwareAdapter implements \_PhpScoperf3dc21757def\Symfon
             } catch (\Exception $e) {
             }
             $message = 'Failed to delete key "{key}"' . ($e instanceof \Exception ? ': ' . $e->getMessage() : '.');
-            \_PhpScoperf3dc21757def\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+            \_PhpScoper6625323d9c29\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
             $ok = \false;
         }
         return $ok;

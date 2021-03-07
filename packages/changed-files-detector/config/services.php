@@ -1,16 +1,16 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf3dc21757def;
+namespace _PhpScoper6625323d9c29;
 
-use _PhpScoperf3dc21757def\Symfony\Component\Cache\Adapter\Psr16Adapter;
-use _PhpScoperf3dc21757def\Symfony\Component\Cache\Adapter\TagAwareAdapter;
-use _PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function _PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\Configurator\service;
-return static function (\_PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoper6625323d9c29\Symfony\Component\Cache\Adapter\Psr16Adapter;
+use _PhpScoper6625323d9c29\Symfony\Component\Cache\Adapter\TagAwareAdapter;
+use _PhpScoper6625323d9c29\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use function _PhpScoper6625323d9c29\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+return static function (\_PhpScoper6625323d9c29\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();
     $services->load('Symplify\\EasyCodingStandard\\ChangedFilesDetector\\', __DIR__ . '/../src');
-    $services->set(\_PhpScoperf3dc21757def\Symfony\Component\Cache\Adapter\Psr16Adapter::class);
-    $services->set(\_PhpScoperf3dc21757def\Symfony\Component\Cache\Adapter\TagAwareAdapter::class)->args(['$itemsPool' => \_PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\Configurator\service(\_PhpScoperf3dc21757def\Symfony\Component\Cache\Adapter\Psr16Adapter::class), '$tagsPool' => \_PhpScoperf3dc21757def\Symfony\Component\DependencyInjection\Loader\Configurator\service(\_PhpScoperf3dc21757def\Symfony\Component\Cache\Adapter\Psr16Adapter::class)]);
+    $services->set(\_PhpScoper6625323d9c29\Symfony\Component\Cache\Adapter\Psr16Adapter::class);
+    $services->set(\_PhpScoper6625323d9c29\Symfony\Component\Cache\Adapter\TagAwareAdapter::class)->args(['$itemsPool' => \_PhpScoper6625323d9c29\Symfony\Component\DependencyInjection\Loader\Configurator\service(\_PhpScoper6625323d9c29\Symfony\Component\Cache\Adapter\Psr16Adapter::class), '$tagsPool' => \_PhpScoper6625323d9c29\Symfony\Component\DependencyInjection\Loader\Configurator\service(\_PhpScoper6625323d9c29\Symfony\Component\Cache\Adapter\Psr16Adapter::class)]);
 };

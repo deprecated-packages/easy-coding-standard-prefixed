@@ -3,13 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
-use _PhpScoperf3dc21757def\Nette\Utils\Strings;
+use _PhpScoper6625323d9c29\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\ValueObject\StartAndEnd;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 /**
  * Heavily inspired by
+ *
  * @see https://github.com/squizlabs/PHP_CodeSniffer/blob/master/src/Standards/Squiz/Sniffs/PHP/CommentedOutCodeSniff.php
  */
 final class CommentedContentResolver
@@ -53,7 +54,7 @@ final class CommentedContentResolver
             $lastLineSeen = $tokenLine;
             // Trim as much off the comment as possible so we don't, have additional whitespace tokens or comment tokens
             $tokenContent = \trim($token->getContent());
-            $hasBlockCommentCloser = \_PhpScoperf3dc21757def\Nette\Utils\Strings::endsWith($tokenContent, '*/');
+            $hasBlockCommentCloser = \_PhpScoper6625323d9c29\Nette\Utils\Strings::endsWith($tokenContent, '*/');
             if ($hasBlockCommentCloser) {
                 // Closer of a block comment found
                 break;
@@ -63,7 +64,7 @@ final class CommentedContentResolver
     }
     private function shouldBreak(int $lastLineSeen, int $tokenLine, \PhpCsFixer\Tokenizer\Token $token) : bool
     {
-        if ($lastLineSeen + 1 <= $tokenLine && \_PhpScoperf3dc21757def\Nette\Utils\Strings::startsWith($token->getContent(), '/*')) {
+        if ($lastLineSeen + 1 <= $tokenLine && \_PhpScoper6625323d9c29\Nette\Utils\Strings::startsWith($token->getContent(), '/*')) {
             // First non-whitespace token on a new line is start of a different style comment.
             return \true;
         }
@@ -78,6 +79,6 @@ final class CommentedContentResolver
         if ($lastLineSeen >= $tokenLine) {
             return \false;
         }
-        return !\_PhpScoperf3dc21757def\Nette\Utils\Strings::startsWith($token->getContent(), '//');
+        return !\_PhpScoper6625323d9c29\Nette\Utils\Strings::startsWith($token->getContent(), '//');
     }
 }

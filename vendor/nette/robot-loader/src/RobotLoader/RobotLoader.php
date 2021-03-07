@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperf3dc21757def\Nette\Loaders;
+namespace _PhpScoper6625323d9c29\Nette\Loaders;
 
-use _PhpScoperf3dc21757def\Nette;
+use _PhpScoper6625323d9c29\Nette;
 use SplFileInfo;
 /**
  * Nette auto loader is responsible for loading classes and interfaces.
@@ -49,7 +49,7 @@ class RobotLoader
     public function __construct()
     {
         if (!\extension_loaded('tokenizer')) {
-            throw new \_PhpScoperf3dc21757def\Nette\NotSupportedException('PHP extension Tokenizer is not loaded.');
+            throw new \_PhpScoper6625323d9c29\Nette\NotSupportedException('PHP extension Tokenizer is not loaded.');
         }
     }
     /**
@@ -66,28 +66,33 @@ class RobotLoader
     public function tryLoad(string $type) : void
     {
         $this->loadCache();
-        $type = \ltrim($type, '\\');
-        // PHP namespace bug #49143
+        $missing = $this->missing[$type] ?? null;
+        if ($missing >= self::RETRY_LIMIT) {
+            return;
+        }
         $info = $this->classes[$type] ?? null;
         if ($this->autoRebuild) {
-            if (!$info || !\is_file($info['file'])) {
-                $missing =& $this->missing[$type];
-                $missing++;
-                if (!$this->refreshed && $missing <= self::RETRY_LIMIT) {
+            $save = \false;
+            if (!$this->refreshed) {
+                if (!$info || !\is_file($info['file'])) {
                     $this->refreshClasses();
-                    $this->saveCache();
-                } elseif ($info) {
-                    unset($this->classes[$type]);
-                    $this->saveCache();
+                    $info = $this->classes[$type] ?? null;
+                    $save = \true;
+                } elseif (\filemtime($info['file']) !== $info['time']) {
+                    $this->updateFile($info['file']);
+                    $info = $this->classes[$type] ?? null;
+                    $save = \true;
                 }
-            } elseif (!$this->refreshed && \filemtime($info['file']) !== $info['time']) {
-                $this->updateFile($info['file']);
-                if (empty($this->classes[$type])) {
-                    $this->missing[$type] = 0;
-                }
+            }
+            if (!$info || !\is_file($info['file'])) {
+                $this->missing[$type] = ++$missing;
+                $save = $save || $info || $missing <= self::RETRY_LIMIT;
+                unset($this->classes[$type]);
+                $info = null;
+            }
+            if ($save) {
                 $this->saveCache();
             }
-            $info = $this->classes[$type] ?? null;
         }
         if ($info) {
             (static function ($file) {
@@ -178,16 +183,12 @@ class RobotLoader
             $iterator = \is_file($path) ? [new \SplFileInfo($path)] : $this->createFileIterator($path);
             foreach ($iterator as $file) {
                 $file = $file->getPathname();
-                if (isset($files[$file]) && $files[$file]['time'] == \filemtime($file)) {
-                    $classes = $files[$file]['classes'];
-                } else {
-                    $classes = $this->scanPhp($file);
-                }
+                $classes = isset($files[$file]) && $files[$file]['time'] == \filemtime($file) ? $files[$file]['classes'] : $this->scanPhp($file);
                 $files[$file] = ['classes' => [], 'time' => \filemtime($file)];
                 foreach ($classes as $class) {
                     $info =& $this->classes[$class];
                     if (isset($info['file'])) {
-                        throw new \_PhpScoperf3dc21757def\Nette\InvalidStateException("Ambiguous class {$class} resolution; defined in {$info['file']} and in {$file}.");
+                        throw new \_PhpScoper6625323d9c29\Nette\InvalidStateException("Ambiguous class {$class} resolution; defined in {$info['file']} and in {$file}.");
                     }
                     $info = ['file' => $file, 'time' => \filemtime($file)];
                     unset($this->missing[$class]);
@@ -199,13 +200,13 @@ class RobotLoader
      * Creates an iterator scaning directory for PHP files, subdirectories and 'netterobots.txt' files.
      * @throws Nette\IOException if path is not found
      */
-    private function createFileIterator(string $dir) : \_PhpScoperf3dc21757def\Nette\Utils\Finder
+    private function createFileIterator(string $dir) : \_PhpScoper6625323d9c29\Nette\Utils\Finder
     {
         if (!\is_dir($dir)) {
-            throw new \_PhpScoperf3dc21757def\Nette\IOException("File or directory '{$dir}' not found.");
+            throw new \_PhpScoper6625323d9c29\Nette\IOException("File or directory '{$dir}' not found.");
         }
         if (\is_string($ignoreDirs = $this->ignoreDirs)) {
-            \trigger_error(__CLASS__ . ': $ignoreDirs must be an array.', \E_USER_WARNING);
+            \trigger_error(self::class . ': $ignoreDirs must be an array.', \E_USER_WARNING);
             $ignoreDirs = \preg_split('#[,\\s]+#', $ignoreDirs);
         }
         $disallow = [];
@@ -215,10 +216,10 @@ class RobotLoader
             }
         }
         if (\is_string($acceptFiles = $this->acceptFiles)) {
-            \trigger_error(__CLASS__ . ': $acceptFiles must be an array.', \E_USER_WARNING);
+            \trigger_error(self::class . ': $acceptFiles must be an array.', \E_USER_WARNING);
             $acceptFiles = \preg_split('#[,\\s]+#', $acceptFiles);
         }
-        $iterator = \_PhpScoperf3dc21757def\Nette\Utils\Finder::findFiles($acceptFiles)->filter(function (\SplFileInfo $file) use(&$disallow) {
+        $iterator = \_PhpScoper6625323d9c29\Nette\Utils\Finder::findFiles($acceptFiles)->filter(function (\SplFileInfo $file) use(&$disallow) {
             return $file->getRealPath() === \false ? \true : !isset($disallow[\str_replace('\\', '/', $file->getRealPath())]);
         })->from($dir)->exclude($ignoreDirs)->filter($filter = function (\SplFileInfo $dir) use(&$disallow) {
             if ($dir->getRealPath() === \false) {
@@ -253,7 +254,7 @@ class RobotLoader
                 $info =& $this->classes[$class];
             }
             if (isset($info['file'])) {
-                throw new \_PhpScoperf3dc21757def\Nette\InvalidStateException("Ambiguous class {$class} resolution; defined in {$info['file']} and in {$file}.");
+                throw new \_PhpScoper6625323d9c29\Nette\InvalidStateException("Ambiguous class {$class} resolution; defined in {$info['file']} and in {$file}.");
             }
             $info = ['file' => $file, 'time' => \filemtime($file)];
         }
@@ -342,7 +343,7 @@ class RobotLoader
      */
     public function setTempDirectory(string $dir) : self
     {
-        \_PhpScoperf3dc21757def\Nette\Utils\FileSystem::createDir($dir);
+        \_PhpScoper6625323d9c29\Nette\Utils\FileSystem::createDir($dir);
         $this->tempDirectory = $dir;
         return $this;
     }

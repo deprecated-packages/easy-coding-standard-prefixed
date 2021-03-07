@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console\Command;
 
-use _PhpScoperf3dc21757def\Nette\Utils\Strings;
-use _PhpScoperf3dc21757def\Symfony\Component\Console\Command\Command;
+use _PhpScoper6625323d9c29\Nette\Utils\Strings;
+use _PhpScoper6625323d9c29\Symfony\Component\Console\Command\Command;
 /**
  * @see \Symplify\PackageBuilder\Tests\Console\Command\CommandNamingTest
  */
@@ -17,24 +17,24 @@ final class CommandNaming
     private const BIG_LETTER_REGEX = '#[A-Z]#';
     /**
      * Converts:
-     *  "SomeClass\SomeSuperCommand" → "some-super"
-     *  "SomeClass\SOMESuperCommand" → "some-super"
+     * - "SomeClass\SomeSuperCommand" → "some-super"
+     * - "SomeClass\SOMESuperCommand" → "some-super"
      */
-    public function resolveFromCommand(\_PhpScoperf3dc21757def\Symfony\Component\Console\Command\Command $command) : string
+    public function resolveFromCommand(\_PhpScoper6625323d9c29\Symfony\Component\Console\Command\Command $command) : string
     {
         $commandClass = \get_class($command);
         return self::classToName($commandClass);
     }
     /**
      * Converts:
-     *  "SomeClass\SomeSuperCommand" → "some-super"
-     *  "SomeClass\SOMESuperCommand" → "some-super"
+     * - "SomeClass\SomeSuperCommand" → "some-super"
+     * - "SomeClass\SOMESuperCommand" → "some-super"
      */
     public static function classToName(string $class) : string
     {
         /** @var string $shortClassName */
         $shortClassName = self::resolveShortName($class);
-        $rawCommandName = \_PhpScoperf3dc21757def\Nette\Utils\Strings::substring($shortClassName, 0, -\strlen('Command'));
+        $rawCommandName = \_PhpScoper6625323d9c29\Nette\Utils\Strings::substring($shortClassName, 0, -\strlen('Command'));
         // ECSCommand => ecs
         for ($i = 0; $i < \strlen($rawCommandName); ++$i) {
             if (\ctype_upper($rawCommandName[$i]) && self::isFollowedByUpperCaseLetterOrNothing($rawCommandName, $i)) {
@@ -44,7 +44,7 @@ final class CommandNaming
             }
         }
         $rawCommandName = \lcfirst($rawCommandName);
-        return \_PhpScoperf3dc21757def\Nette\Utils\Strings::replace($rawCommandName, self::BIG_LETTER_REGEX, function (array $matches) : string {
+        return \_PhpScoper6625323d9c29\Nette\Utils\Strings::replace($rawCommandName, self::BIG_LETTER_REGEX, function (array $matches) : string {
             return '-' . \strtolower($matches[0]);
         });
     }

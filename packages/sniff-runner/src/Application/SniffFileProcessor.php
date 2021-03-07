@@ -97,9 +97,6 @@ final class SniffFileProcessor implements \Symplify\EasyCodingStandard\Contract\
     public function processFile(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : string
     {
         $file = $this->fileFactory->createFromFileInfo($smartFileInfo);
-        // mimic original behavior
-        /** mimics @see \PHP_CodeSniffer\Files\File::process() */
-        /** mimics @see \PHP_CodeSniffer\Fixer::fixFile() */
         $this->fixFile($file, $this->fixer, $smartFileInfo, $this->tokenListeners);
         // add diff
         if ($smartFileInfo->getContents() !== $this->fixer->getContents()) {
@@ -121,6 +118,10 @@ final class SniffFileProcessor implements \Symplify\EasyCodingStandard\Contract\
         }
     }
     /**
+     * Mimics @see \PHP_CodeSniffer\Files\File::process()
+     *
+     * @see \PHP_CodeSniffer\Fixer::fixFile()
+     *
      * @param Sniff[][] $tokenListeners
      */
     private function fixFile(\Symplify\EasyCodingStandard\SniffRunner\ValueObject\File $file, \PHP_CodeSniffer\Fixer $fixer, \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo, array $tokenListeners) : void

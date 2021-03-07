@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoperf3dc21757def\Nette\Utils\Strings;
+use _PhpScoper6625323d9c29\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -13,6 +13,7 @@ use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 use Symplify\CodingStandard\Fixer\AbstractSymplifyFixer;
+use Symplify\CodingStandard\TokenAnalyzer\FunctionCallNameMatcher;
 use Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder;
 use Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthTransformer;
 use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
@@ -20,7 +21,6 @@ use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
-use Throwable;
 /**
  * @see \Symplify\CodingStandard\Tests\Fixer\LineLength\LineLengthFixer\LineLengthFixerTest
  * @see \Symplify\CodingStandard\Tests\Fixer\LineLength\LineLengthFixer\ConfiguredLineLengthFixerTest
@@ -49,7 +49,11 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
     /**
      * @var int
      */
-    private $lineLength = 120;
+    private const DEFAULT_LINE_LENGHT = 120;
+    /**
+     * @var int
+     */
+    private $lineLength = self::DEFAULT_LINE_LENGHT;
     /**
      * @var bool
      */
@@ -66,10 +70,15 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
      * @var BlockFinder
      */
     private $blockFinder;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthTransformer $lineLengthTransformer, \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder)
+    /**
+     * @var FunctionCallNameMatcher
+     */
+    private $functionCallNameMatcher;
+    public function __construct(\Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthTransformer $lineLengthTransformer, \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder, \Symplify\CodingStandard\TokenAnalyzer\FunctionCallNameMatcher $functionCallNameMatcher)
     {
         $this->lineLengthTransformer = $lineLengthTransformer;
         $this->blockFinder = $blockFinder;
+        $this->functionCallNameMatcher = $functionCallNameMatcher;
     }
     public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
@@ -113,19 +122,6 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
             }
         }
     }
-    public function getPriority() : int
-    {
-        return $this->getPriorityBefore(\PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer::class);
-    }
-    /**
-     * @param mixed[]|null $configuration
-     */
-    public function configure(?array $configuration = null) : void
-    {
-        $this->lineLength = $configuration[self::LINE_LENGTH] ?? 120;
-        $this->breakLongLines = $configuration[self::BREAK_LONG_LINES] ?? \true;
-        $this->inlineShortLines = $configuration[self::INLINE_SHORT_LINES] ?? \true;
-    }
     public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
     {
         return new \Symplify\RuleDocGenerator\ValueObject\RuleDefinition(self::ERROR_MESSAGE, [new \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample(<<<'CODE_SAMPLE'
@@ -152,9 +148,22 @@ function another($short, $now) {
 CODE_SAMPLE
 , [self::LINE_LENGTH => 40])]);
     }
+    public function getPriority() : int
+    {
+        return $this->getPriorityBefore(\PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer::class);
+    }
+    /**
+     * @param mixed[]|null $configuration
+     */
+    public function configure(?array $configuration = null) : void
+    {
+        $this->lineLength = $configuration[self::LINE_LENGTH] ?? self::DEFAULT_LINE_LENGHT;
+        $this->breakLongLines = $configuration[self::BREAK_LONG_LINES] ?? \true;
+        $this->inlineShortLines = $configuration[self::INLINE_SHORT_LINES] ?? \true;
+    }
     private function processMethodCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : void
     {
-        $methodNamePosition = $this->matchNamePositionForEndOfFunctionCall($tokens, $position);
+        $methodNamePosition = $this->functionCallNameMatcher->matchName($tokens, $position);
         if ($methodNamePosition === null) {
             return;
         }
@@ -180,36 +189,6 @@ CODE_SAMPLE
         }
         $this->lineLengthTransformer->fixStartPositionToEndPosition($blockInfo, $tokens, $this->lineLength, $this->breakLongLines, $this->inlineShortLines);
     }
-    /**
-     * We go through tokens from down to up,
-     * so we need to find ")" and then the start of function
-     */
-    private function matchNamePositionForEndOfFunctionCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : ?int
-    {
-        try {
-            $blockStart = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $position);
-        } catch (\Throwable $throwable) {
-            // not a block start
-            return null;
-        }
-        $previousTokenPosition = $blockStart - 1;
-        /** @var Token $possibleMethodNameToken */
-        $possibleMethodNameToken = $tokens[$previousTokenPosition];
-        // not a "methodCall()"
-        if (!$possibleMethodNameToken->isGivenKind(\T_STRING)) {
-            return null;
-        }
-        // starts with small letter?
-        $content = $possibleMethodNameToken->getContent();
-        if (!\ctype_lower($content[0])) {
-            return null;
-        }
-        // is "someCall()"? we don't care, there are no arguments
-        if ($tokens[$blockStart + 1]->equals(')')) {
-            return null;
-        }
-        return $previousTokenPosition;
-    }
     private function shouldSkip(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
     {
         // no items inside => skip
@@ -234,6 +213,6 @@ CODE_SAMPLE
         if (!$nextToken instanceof \PhpCsFixer\Tokenizer\Token) {
             return \false;
         }
-        return \_PhpScoperf3dc21757def\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
+        return \_PhpScoper6625323d9c29\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
     }
 }

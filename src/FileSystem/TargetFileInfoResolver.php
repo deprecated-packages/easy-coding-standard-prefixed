@@ -16,8 +16,8 @@ final class TargetFileInfoResolver
         $this->currentParentFileInfoProvider = $currentParentFileInfoProvider;
     }
     /**
-     * Useful for @see \Symplify\EasyCodingStandard\SnippetFormatter\Command\CheckMarkdownCommand
-     * Where the $smartFileInfo is only temporary snippet, so original markdown file should be used
+     * Useful for @see \Symplify\EasyCodingStandard\SnippetFormatter\Command\CheckMarkdownCommand Where the
+     * $smartFileInfo is only temporary snippet, so original markdown file should be used
      */
     public function resolveTargetFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \Symplify\SmartFileSystem\SmartFileInfo
     {
