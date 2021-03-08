@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use _PhpScoper6625323d9c29\PhpParser\Node\Expr;
-use _PhpScoper6625323d9c29\Symfony\Component\Yaml\Tag\TaggedValue;
+use _PhpScoper4f42ead57614\PhpParser\Node\Expr;
+use _PhpScoper4f42ead57614\Symfony\Component\Yaml\Tag\TaggedValue;
 use Symplify\PhpConfigPrinter\ValueObject\FunctionName;
 final class TaggedServiceResolver
 {
@@ -16,7 +16,7 @@ final class TaggedServiceResolver
     {
         $this->serviceReferenceExprResolver = $serviceReferenceExprResolver;
     }
-    public function resolve(\_PhpScoper6625323d9c29\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \_PhpScoper6625323d9c29\PhpParser\Node\Expr
+    public function resolve(\_PhpScoper4f42ead57614\Symfony\Component\Yaml\Tag\TaggedValue $taggedValue) : \_PhpScoper4f42ead57614\PhpParser\Node\Expr
     {
         $serviceName = $taggedValue->getValue()['class'];
         $functionName = \Symplify\PhpConfigPrinter\ValueObject\FunctionName::INLINE_SERVICE;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b32dc412d6dab985eb8e83ce9db2023b",
+    "content-hash": "909b3a2a5ab11062df248a730ab44279",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -665,16 +665,16 @@
         },
         {
             "name": "nette/robot-loader",
-            "version": "v3.3.2",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/robot-loader.git",
-                "reference": "9ad3afdd0d2422db7a58aee76e8b3b7a82f31af5"
+                "reference": "3973cf3970d1de7b30888fd10b92dac9e0c2fd82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/9ad3afdd0d2422db7a58aee76e8b3b7a82f31af5",
-                "reference": "9ad3afdd0d2422db7a58aee76e8b3b7a82f31af5",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/3973cf3970d1de7b30888fd10b92dac9e0c2fd82",
+                "reference": "3973cf3970d1de7b30888fd10b92dac9e0c2fd82",
                 "shasum": ""
             },
             "require": {
@@ -691,7 +691,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -726,9 +726,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/robot-loader/issues",
-                "source": "https://github.com/nette/robot-loader/tree/v3.3.2"
+                "source": "https://github.com/nette/robot-loader/tree/v3.4.0"
             },
-            "time": "2021-03-06T15:56:17+00:00"
+            "time": "2021-03-07T15:12:01+00:00"
         },
         {
             "name": "nette/utils",
@@ -3688,7 +3688,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "e7b582ad14b1aaa17c692346b76cb1e9d39fb3be"
+                "reference": "28e182ac158f75c2eb2ac23e33fa3912d057a70e"
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.18.2",
@@ -3701,8 +3701,8 @@
             },
             "require-dev": {
                 "doctrine/orm": "^2.7",
-                "nette/application": "^3.0.7",
-                "nette/bootstrap": "^3.0",
+                "nette/application": "^3.1",
+                "nette/bootstrap": "^3.1",
                 "phpunit/phpunit": "^9.5",
                 "symfony/framework-bundle": "^4.4|^5.2",
                 "symfony/http-kernel": "^4.4|^5.2",
@@ -4068,7 +4068,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "1cfd0ac4fa34bb6f76d26e3f67d283b140961480"
+                "reference": "105f83ca73208eafd1511384e8e12aa8347e1e27"
             },
             "require": {
                 "nette/neon": "^3.2",
@@ -4084,7 +4084,7 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.18.2",
-                "phpstan/phpstan": "^0.12.69",
+                "phpstan/phpstan": "^0.12.80",
                 "phpunit/phpunit": "^9.5"
             },
             "bin": [
