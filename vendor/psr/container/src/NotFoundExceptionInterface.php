@@ -1,10 +1,10 @@
 <?php
 
-namespace _PhpScopere050faf861e6\Psr\Container;
+namespace _PhpScopera1f11cc38772\Psr\Container;
 
 /**
  * No entry was found in the container.
  */
-interface NotFoundExceptionInterface extends \_PhpScopere050faf861e6\Psr\Container\ContainerExceptionInterface
+interface NotFoundExceptionInterface extends \_PhpScopera1f11cc38772\Psr\Container\ContainerExceptionInterface
 {
 }

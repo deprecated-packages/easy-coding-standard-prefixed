@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere050faf861e6\Symfony\Component\Console\Helper;
+namespace _PhpScopera1f11cc38772\Symfony\Component\Console\Helper;
 
-use _PhpScopere050faf861e6\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScopere050faf861e6\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopere050faf861e6\Symfony\Component\Console\Question\ChoiceQuestion;
-use _PhpScopere050faf861e6\Symfony\Component\Console\Question\ConfirmationQuestion;
-use _PhpScopere050faf861e6\Symfony\Component\Console\Question\Question;
-use _PhpScopere050faf861e6\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopera1f11cc38772\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScopera1f11cc38772\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopera1f11cc38772\Symfony\Component\Console\Question\ChoiceQuestion;
+use _PhpScopera1f11cc38772\Symfony\Component\Console\Question\ConfirmationQuestion;
+use _PhpScopera1f11cc38772\Symfony\Component\Console\Question\Question;
+use _PhpScopera1f11cc38772\Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Symfony Style Guide compliant question helper.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class SymfonyQuestionHelper extends \_PhpScopere050faf861e6\Symfony\Component\Console\Helper\QuestionHelper
+class SymfonyQuestionHelper extends \_PhpScopera1f11cc38772\Symfony\Component\Console\Helper\QuestionHelper
 {
     /**
      * {@inheritdoc}
      */
-    protected function writePrompt(\_PhpScopere050faf861e6\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScopere050faf861e6\Symfony\Component\Console\Question\Question $question)
+    protected function writePrompt(\_PhpScopera1f11cc38772\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScopera1f11cc38772\Symfony\Component\Console\Question\Question $question)
     {
-        $text = \_PhpScopere050faf861e6\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash($question->getQuestion());
+        $text = \_PhpScopera1f11cc38772\Symfony\Component\Console\Formatter\OutputFormatter::escapeTrailingBackslash($question->getQuestion());
         $default = $question->getDefault();
         if ($question->isMultiline()) {
             $text .= \sprintf(' (press %s to continue)', $this->getEofShortcut());
@@ -37,27 +37,27 @@ class SymfonyQuestionHelper extends \_PhpScopere050faf861e6\Symfony\Component\Co
             case null === $default:
                 $text = \sprintf(' <info>%s</info>:', $text);
                 break;
-            case $question instanceof \_PhpScopere050faf861e6\Symfony\Component\Console\Question\ConfirmationQuestion:
+            case $question instanceof \_PhpScopera1f11cc38772\Symfony\Component\Console\Question\ConfirmationQuestion:
                 $text = \sprintf(' <info>%s (yes/no)</info> [<comment>%s</comment>]:', $text, $default ? 'yes' : 'no');
                 break;
-            case $question instanceof \_PhpScopere050faf861e6\Symfony\Component\Console\Question\ChoiceQuestion && $question->isMultiselect():
+            case $question instanceof \_PhpScopera1f11cc38772\Symfony\Component\Console\Question\ChoiceQuestion && $question->isMultiselect():
                 $choices = $question->getChoices();
                 $default = \explode(',', $default);
                 foreach ($default as $key => $value) {
                     $default[$key] = $choices[\trim($value)];
                 }
-                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, \_PhpScopere050faf861e6\Symfony\Component\Console\Formatter\OutputFormatter::escape(\implode(', ', $default)));
+                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, \_PhpScopera1f11cc38772\Symfony\Component\Console\Formatter\OutputFormatter::escape(\implode(', ', $default)));
                 break;
-            case $question instanceof \_PhpScopere050faf861e6\Symfony\Component\Console\Question\ChoiceQuestion:
+            case $question instanceof \_PhpScopera1f11cc38772\Symfony\Component\Console\Question\ChoiceQuestion:
                 $choices = $question->getChoices();
-                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, \_PhpScopere050faf861e6\Symfony\Component\Console\Formatter\OutputFormatter::escape($choices[$default] ?? $default));
+                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, \_PhpScopera1f11cc38772\Symfony\Component\Console\Formatter\OutputFormatter::escape($choices[$default] ?? $default));
                 break;
             default:
-                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, \_PhpScopere050faf861e6\Symfony\Component\Console\Formatter\OutputFormatter::escape($default));
+                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, \_PhpScopera1f11cc38772\Symfony\Component\Console\Formatter\OutputFormatter::escape($default));
         }
         $output->writeln($text);
         $prompt = ' > ';
-        if ($question instanceof \_PhpScopere050faf861e6\Symfony\Component\Console\Question\ChoiceQuestion) {
+        if ($question instanceof \_PhpScopera1f11cc38772\Symfony\Component\Console\Question\ChoiceQuestion) {
             $output->writeln($this->formatChoiceQuestionChoices($question, 'comment'));
             $prompt = $question->getPrompt();
         }
@@ -66,9 +66,9 @@ class SymfonyQuestionHelper extends \_PhpScopere050faf861e6\Symfony\Component\Co
     /**
      * {@inheritdoc}
      */
-    protected function writeError(\_PhpScopere050faf861e6\Symfony\Component\Console\Output\OutputInterface $output, \Exception $error)
+    protected function writeError(\_PhpScopera1f11cc38772\Symfony\Component\Console\Output\OutputInterface $output, \Exception $error)
     {
-        if ($output instanceof \_PhpScopere050faf861e6\Symfony\Component\Console\Style\SymfonyStyle) {
+        if ($output instanceof \_PhpScopera1f11cc38772\Symfony\Component\Console\Style\SymfonyStyle) {
             $output->newLine();
             $output->error($error->getMessage());
             return;

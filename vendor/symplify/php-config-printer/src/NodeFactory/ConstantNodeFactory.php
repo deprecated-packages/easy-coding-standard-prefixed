@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScopere050faf861e6\Nette\Utils\Strings;
-use _PhpScopere050faf861e6\PhpParser\Node\Expr;
-use _PhpScopere050faf861e6\PhpParser\Node\Expr\ClassConstFetch;
-use _PhpScopere050faf861e6\PhpParser\Node\Expr\ConstFetch;
-use _PhpScopere050faf861e6\PhpParser\Node\Name;
-use _PhpScopere050faf861e6\PhpParser\Node\Name\FullyQualified;
+use _PhpScopera1f11cc38772\Nette\Utils\Strings;
+use _PhpScopera1f11cc38772\PhpParser\Node\Expr;
+use _PhpScopera1f11cc38772\PhpParser\Node\Expr\ClassConstFetch;
+use _PhpScopera1f11cc38772\PhpParser\Node\Expr\ConstFetch;
+use _PhpScopera1f11cc38772\PhpParser\Node\Name;
+use _PhpScopera1f11cc38772\PhpParser\Node\Name\FullyQualified;
 use Symplify\PhpConfigPrinter\Contract\YamlFileContentProviderInterface;
 /**
  * Hacking constants @solve better in the future now it's hardcoded very deep in yaml parser, so unable to detected:
@@ -29,15 +29,15 @@ final class ConstantNodeFactory
     /**
      * @return ConstFetch|ClassConstFetch|null
      */
-    public function createConstantIfValue(string $value) : ?\_PhpScopere050faf861e6\PhpParser\Node\Expr
+    public function createConstantIfValue(string $value) : ?\_PhpScopera1f11cc38772\PhpParser\Node\Expr
     {
-        if (\_PhpScopere050faf861e6\Nette\Utils\Strings::contains($value, '::')) {
+        if (\_PhpScopera1f11cc38772\Nette\Utils\Strings::contains($value, '::')) {
             [$class, $constant] = \explode('::', $value);
             // not uppercase → probably not a constant
             if (\strtoupper($constant) !== $constant) {
                 return null;
             }
-            return new \_PhpScopere050faf861e6\PhpParser\Node\Expr\ClassConstFetch(new \_PhpScopere050faf861e6\PhpParser\Node\Name\FullyQualified($class), $constant);
+            return new \_PhpScopera1f11cc38772\PhpParser\Node\Expr\ClassConstFetch(new \_PhpScopera1f11cc38772\PhpParser\Node\Name\FullyQualified($class), $constant);
         }
         $definedConstants = \get_defined_constants();
         foreach (\array_keys($definedConstants) as $constantName) {
@@ -46,10 +46,10 @@ final class ConstantNodeFactory
             }
             $yamlContent = $this->yamlFileContentProvider->getYamlContent();
             $constantDefinitionPattern = '#' . \preg_quote('!php/const', '#') . '(\\s)+' . $constantName . '#';
-            if (!\_PhpScopere050faf861e6\Nette\Utils\Strings::match($yamlContent, $constantDefinitionPattern)) {
+            if (!\_PhpScopera1f11cc38772\Nette\Utils\Strings::match($yamlContent, $constantDefinitionPattern)) {
                 continue;
             }
-            return new \_PhpScopere050faf861e6\PhpParser\Node\Expr\ConstFetch(new \_PhpScopere050faf861e6\PhpParser\Node\Name($constantName));
+            return new \_PhpScopera1f11cc38772\PhpParser\Node\Expr\ConstFetch(new \_PhpScopera1f11cc38772\PhpParser\Node\Name($constantName));
         }
         return null;
     }

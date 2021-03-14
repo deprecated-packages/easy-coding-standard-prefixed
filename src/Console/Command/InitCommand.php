@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScopere050faf861e6\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopere050faf861e6\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopera1f11cc38772\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopera1f11cc38772\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
 final class InitCommand extends \Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
@@ -13,7 +13,7 @@ final class InitCommand extends \Symplify\PackageBuilder\Console\Command\Abstrac
     {
         $this->setDescription('Generate ecs.php configuration file');
     }
-    protected function execute(\_PhpScopere050faf861e6\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopere050faf861e6\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScopera1f11cc38772\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopera1f11cc38772\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $rectorConfigFiles = $this->smartFileSystem->exists(\getcwd() . '/ecs.php');
         if (!$rectorConfigFiles) {

@@ -20,8 +20,8 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScopere050faf861e6\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScopere050faf861e6\Symfony\Component\OptionsResolver\Options;
+use _PhpScopera1f11cc38772\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScopera1f11cc38772\Symfony\Component\OptionsResolver\Options;
 /**
  * @author SpacePossum
  */
@@ -93,11 +93,11 @@ final class PhpdocTagTypeFixer extends \PhpCsFixer\AbstractFixer implements \Php
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tags', 'The list of tags to fix'))->setAllowedTypes(['array'])->setAllowedValues([function ($value) {
             foreach ($value as $type) {
                 if (!\in_array($type, ['annotation', 'inline'], \true)) {
-                    throw new \_PhpScopere050faf861e6\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException("Unknown tag type \"{$type}\".");
+                    throw new \_PhpScopera1f11cc38772\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException("Unknown tag type \"{$type}\".");
                 }
             }
             return \true;
-        }])->setDefault(['api' => 'annotation', 'author' => 'annotation', 'copyright' => 'annotation', 'deprecated' => 'annotation', 'example' => 'annotation', 'global' => 'annotation', 'inheritDoc' => 'annotation', 'internal' => 'annotation', 'license' => 'annotation', 'method' => 'annotation', 'package' => 'annotation', 'param' => 'annotation', 'property' => 'annotation', 'return' => 'annotation', 'see' => 'annotation', 'since' => 'annotation', 'throws' => 'annotation', 'todo' => 'annotation', 'uses' => 'annotation', 'var' => 'annotation', 'version' => 'annotation'])->setNormalizer(function (\_PhpScopere050faf861e6\Symfony\Component\OptionsResolver\Options $options, $value) {
+        }])->setDefault(['api' => 'annotation', 'author' => 'annotation', 'copyright' => 'annotation', 'deprecated' => 'annotation', 'example' => 'annotation', 'global' => 'annotation', 'inheritDoc' => 'annotation', 'internal' => 'annotation', 'license' => 'annotation', 'method' => 'annotation', 'package' => 'annotation', 'param' => 'annotation', 'property' => 'annotation', 'return' => 'annotation', 'see' => 'annotation', 'since' => 'annotation', 'throws' => 'annotation', 'todo' => 'annotation', 'uses' => 'annotation', 'var' => 'annotation', 'version' => 'annotation'])->setNormalizer(function (\_PhpScopera1f11cc38772\Symfony\Component\OptionsResolver\Options $options, $value) {
             $normalized = [];
             foreach ($value as $tag => $type) {
                 $normalized[\strtolower($tag)] = $type;

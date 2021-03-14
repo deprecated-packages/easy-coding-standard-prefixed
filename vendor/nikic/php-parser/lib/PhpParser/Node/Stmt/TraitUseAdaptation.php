@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopere050faf861e6\PhpParser\Node\Stmt;
+namespace _PhpScopera1f11cc38772\PhpParser\Node\Stmt;
 
-use _PhpScopere050faf861e6\PhpParser\Node;
-abstract class TraitUseAdaptation extends \_PhpScopere050faf861e6\PhpParser\Node\Stmt
+use _PhpScopera1f11cc38772\PhpParser\Node;
+abstract class TraitUseAdaptation extends \_PhpScopera1f11cc38772\PhpParser\Node\Stmt
 {
     /** @var Node\Name|null Trait name */
     public $trait;

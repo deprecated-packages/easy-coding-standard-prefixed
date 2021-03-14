@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere050faf861e6\Symfony\Component\DependencyInjection;
+namespace _PhpScopera1f11cc38772\Symfony\Component\DependencyInjection;
 
-use _PhpScopere050faf861e6\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScopera1f11cc38772\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * The EnvVarProcessorInterface is implemented by objects that manage environment-like variables.
  *
