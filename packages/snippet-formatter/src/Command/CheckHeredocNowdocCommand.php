@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
-use _PhpScopera1f11cc38772\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopera1f11cc38772\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper3d66e802e797\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper3d66e802e797\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Command\AbstractCheckCommand;
 use Symplify\EasyCodingStandard\SnippetFormatter\Application\SnippetFormatterApplication;
 use Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern;
@@ -24,7 +24,7 @@ final class CheckHeredocNowdocCommand extends \Symplify\EasyCodingStandard\Conso
         $this->setDescription('Format Heredoc/Nowdoc PHP snippets in PHP files');
         parent::configure();
     }
-    protected function execute(\_PhpScopera1f11cc38772\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopera1f11cc38772\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoper3d66e802e797\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper3d66e802e797\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $this->configuration->resolveFromInput($input);
         $sources = $this->configuration->getSources();

@@ -4,9 +4,9 @@ declare (strict_types=1);
 namespace Symplify\EasyTesting\DataProvider;
 
 use Iterator;
-use _PhpScopera1f11cc38772\Nette\Utils\Strings;
-use _PhpScopera1f11cc38772\Symfony\Component\Finder\Finder;
-use _PhpScopera1f11cc38772\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper3d66e802e797\Nette\Utils\Strings;
+use _PhpScoper3d66e802e797\Symfony\Component\Finder\Finder;
+use _PhpScoper3d66e802e797\Symfony\Component\Finder\SplFileInfo;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -80,7 +80,7 @@ final class StaticFixtureFinder
      */
     private static function findFilesInDirectory(string $directory, string $suffix) : array
     {
-        $finder = \_PhpScopera1f11cc38772\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
+        $finder = \_PhpScoper3d66e802e797\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
         $fileInfos = \iterator_to_array($finder);
         return \array_values($fileInfos);
     }
@@ -90,16 +90,16 @@ final class StaticFixtureFinder
     private static function findFilesInDirectoryExclusively(string $directory, string $suffix) : array
     {
         self::ensureNoOtherFileName($directory, $suffix);
-        $finder = \_PhpScopera1f11cc38772\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
+        $finder = \_PhpScoper3d66e802e797\Symfony\Component\Finder\Finder::create()->in($directory)->files()->name($suffix);
         $fileInfos = \iterator_to_array($finder->getIterator());
         return \array_values($fileInfos);
     }
     private static function ensureNoOtherFileName(string $directory, string $suffix) : void
     {
-        $iterator = \_PhpScopera1f11cc38772\Symfony\Component\Finder\Finder::create()->in($directory)->files()->notName($suffix)->getIterator();
+        $iterator = \_PhpScoper3d66e802e797\Symfony\Component\Finder\Finder::create()->in($directory)->files()->notName($suffix)->getIterator();
         $relativeFilePaths = [];
         foreach ($iterator as $fileInfo) {
-            $relativeFilePaths[] = \_PhpScopera1f11cc38772\Nette\Utils\Strings::substring($fileInfo->getRealPath(), \strlen(\getcwd()) + 1);
+            $relativeFilePaths[] = \_PhpScoper3d66e802e797\Nette\Utils\Strings::substring($fileInfo->getRealPath(), \strlen(\getcwd()) + 1);
         }
         if ($relativeFilePaths === []) {
             return;

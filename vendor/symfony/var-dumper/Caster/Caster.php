@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera1f11cc38772\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper3d66e802e797\Symfony\Component\VarDumper\Caster;
 
-use _PhpScopera1f11cc38772\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper3d66e802e797\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Helper for filtering out properties in casters.
  *
@@ -144,7 +144,7 @@ class Caster
         }
         return $a;
     }
-    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, \_PhpScopera1f11cc38772\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, \_PhpScoper3d66e802e797\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
         if (isset($a['__PHP_Incomplete_Class_Name'])) {
             $stub->class .= '(' . $a['__PHP_Incomplete_Class_Name'] . ')';

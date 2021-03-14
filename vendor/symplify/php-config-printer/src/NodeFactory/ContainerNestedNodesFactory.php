@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScopera1f11cc38772\PhpParser\Node\Stmt\Expression;
+use _PhpScoper3d66e802e797\PhpParser\Node\Stmt\Expression;
 use Symplify\PhpConfigPrinter\CaseConverter\InstanceOfNestedCaseConverter;
 final class ContainerNestedNodesFactory
 {

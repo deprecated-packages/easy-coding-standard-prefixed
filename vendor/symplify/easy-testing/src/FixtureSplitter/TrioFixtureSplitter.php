@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\FixtureSplitter;
 
-use _PhpScopera1f11cc38772\Nette\Utils\Strings;
+use _PhpScoper3d66e802e797\Nette\Utils\Strings;
 use Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent;
 use Symplify\EasyTesting\ValueObject\SplitLine;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -12,7 +12,7 @@ final class TrioFixtureSplitter
 {
     public function splitFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent
     {
-        $parts = \_PhpScopera1f11cc38772\Nette\Utils\Strings::split($smartFileInfo->getContents(), \Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX);
+        $parts = \_PhpScoper3d66e802e797\Nette\Utils\Strings::split($smartFileInfo->getContents(), \Symplify\EasyTesting\ValueObject\SplitLine::SPLIT_LINE_REGEX);
         $this->ensureHasThreeParts($parts, $smartFileInfo);
         return new \Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent($parts[0], $parts[1], $parts[2]);
     }

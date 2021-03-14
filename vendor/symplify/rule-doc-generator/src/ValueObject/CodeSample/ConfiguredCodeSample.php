@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject\CodeSample;
 
-use _PhpScopera1f11cc38772\Rector\Core\Exception\Configuration\InvalidConfigurationException;
+use _PhpScoper3d66e802e797\Rector\Core\Exception\Configuration\InvalidConfigurationException;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\ValueObject\AbstractCodeSample;
 final class ConfiguredCodeSample extends \Symplify\RuleDocGenerator\ValueObject\AbstractCodeSample implements \Symplify\RuleDocGenerator\Contract\CodeSampleInterface
@@ -19,7 +19,7 @@ final class ConfiguredCodeSample extends \Symplify\RuleDocGenerator\ValueObject\
     {
         if ($configuration === []) {
             $message = \sprintf('Configuration cannot be empty. Look for "%s"', $badCode);
-            throw new \_PhpScopera1f11cc38772\Rector\Core\Exception\Configuration\InvalidConfigurationException($message);
+            throw new \_PhpScoper3d66e802e797\Rector\Core\Exception\Configuration\InvalidConfigurationException($message);
         }
         $this->configuration = $configuration;
         parent::__construct($badCode, $goodCode);

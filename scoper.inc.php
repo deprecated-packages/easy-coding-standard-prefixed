@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera1f11cc38772;
+namespace _PhpScoper3d66e802e797;
 
-use _PhpScopera1f11cc38772\Isolated\Symfony\Component\Finder\Finder;
-$symfonyPolyfillPhpFilesFinder = \_PhpScopera1f11cc38772\Isolated\Symfony\Component\Finder\Finder::create();
+use _PhpScoper3d66e802e797\Isolated\Symfony\Component\Finder\Finder;
+$symfonyPolyfillPhpFilesFinder = \_PhpScoper3d66e802e797\Isolated\Symfony\Component\Finder\Finder::create();
 $symfonyPolyfillPhpFilesFinder = $symfonyPolyfillPhpFilesFinder->files();
 $symfonyPolyfillPhpFilesFinder = $symfonyPolyfillPhpFilesFinder->in(__DIR__ . '/vendor/symfony/polyfill-*');
 $symfonyPolyfillPhpFilesFinder = $symfonyPolyfillPhpFilesFinder->name('*.php');
@@ -23,7 +23,7 @@ return ['files-whitelist' => [
     'PhpCsFixer\\*',
     'PHP_CodeSniffer\\*',
     'SlevomatCodingStandard\\*',
-    '_PhpScopera1f11cc38772\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
-    '_PhpScopera1f11cc38772\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
+    '_PhpScoper3d66e802e797\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
+    '_PhpScoper3d66e802e797\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
     'Symfony\\Polyfill\\*',
 ]];

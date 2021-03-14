@@ -168,7 +168,7 @@ class GetMethodParametersTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
     public function testNamespaceOperatorTypeHint()
     {
         $expected = [];
-        $expected[0] = ['name' => '$var1', 'content' => '?namespace\\Name $var1', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScopera1f11cc38772\\?namespace\\Name', 'nullable_type' => \true];
+        $expected[0] = ['name' => '$var1', 'content' => '?namespace\\Name $var1', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScoper3d66e802e797\\?namespace\\Name', 'nullable_type' => \true];
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testNamespaceOperatorTypeHint()

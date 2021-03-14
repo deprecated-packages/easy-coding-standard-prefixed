@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\SmartFileSystem;
 
-use _PhpScopera1f11cc38772\PHPUnit\Framework\TestCase;
+use _PhpScoper3d66e802e797\PHPUnit\Framework\TestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SmartFileSystem\SmartFileSystem;
-final class SmartFileSystemTest extends \_PhpScopera1f11cc38772\PHPUnit\Framework\TestCase
+final class SmartFileSystemTest extends \_PhpScoper3d66e802e797\PHPUnit\Framework\TestCase
 {
     /**
      * @var SmartFileSystem

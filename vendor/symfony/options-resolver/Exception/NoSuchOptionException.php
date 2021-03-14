@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera1f11cc38772\Symfony\Component\OptionsResolver\Exception;
+namespace _PhpScoper3d66e802e797\Symfony\Component\OptionsResolver\Exception;
 
 /**
  * Thrown when trying to read an option that has no value set.
@@ -20,6 +20,6 @@ namespace _PhpScopera1f11cc38772\Symfony\Component\OptionsResolver\Exception;
  *
  * @author Tobias Schultze <http://tobion.de>
  */
-class NoSuchOptionException extends \OutOfBoundsException implements \_PhpScopera1f11cc38772\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
+class NoSuchOptionException extends \OutOfBoundsException implements \_PhpScoper3d66e802e797\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
 {
 }
