@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Output;
 
-use _PhpScoper4f42ead57614\Jean85\PrettyVersions;
-use _PhpScoper4f42ead57614\Nette\Utils\Json;
+use _PhpScoperfb0714773dc5\Nette\Utils\Json;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface;
 use Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult;
+use Symplify\PackageBuilder\Composer\PackageVersionProvider;
 use Symplify\PackageBuilder\Console\ShellCode;
 /**
  * @see \Symplify\EasyCodingStandard\Tests\Console\Output\JsonOutputFormatterTest
@@ -52,14 +52,15 @@ final class JsonOutputFormatter implements \Symplify\EasyCodingStandard\Contract
         foreach ($fileDiffs as $fileDiff) {
             $errorsArray[self::FILES][$fileDiff->getRelativeFilePathFromCwd()]['diffs'][] = ['diff' => $fileDiff->getDiff(), 'applied_checkers' => $fileDiff->getAppliedCheckers()];
         }
-        return \_PhpScoper4f42ead57614\Nette\Utils\Json::encode($errorsArray, \_PhpScoper4f42ead57614\Nette\Utils\Json::PRETTY);
+        return \_PhpScoperfb0714773dc5\Nette\Utils\Json::encode($errorsArray, \_PhpScoperfb0714773dc5\Nette\Utils\Json::PRETTY);
     }
     /**
      * @return mixed[]
      */
     private function createBaseErrorsArray(\Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult) : array
     {
-        $version = \_PhpScoper4f42ead57614\Jean85\PrettyVersions::getVersion('symplify/easy-coding-standard');
-        return ['meta' => ['version' => $version->getPrettyVersion() ?: 'Unknown'], 'totals' => ['errors' => $errorAndDiffResult->getErrorCount(), 'diffs' => $errorAndDiffResult->getFileDiffsCount()], self::FILES => []];
+        $packageVersionProvider = new \Symplify\PackageBuilder\Composer\PackageVersionProvider();
+        $version = $packageVersionProvider->provide('symplify/easy-coding-standard');
+        return ['meta' => ['version' => $version], 'totals' => ['errors' => $errorAndDiffResult->getErrorCount(), 'diffs' => $errorAndDiffResult->getFileDiffsCount()], self::FILES => []];
     }
 }

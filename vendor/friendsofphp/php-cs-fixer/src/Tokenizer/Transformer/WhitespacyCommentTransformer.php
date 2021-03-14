@@ -55,7 +55,7 @@ final class WhitespacyCommentTransformer extends \PhpCsFixer\Tokenizer\AbstractT
     /**
      * {@inheritdoc}
      */
-    protected function getDeprecatedCustomTokens()
+    public function getCustomTokens()
     {
         return [];
     }

@@ -18,6 +18,9 @@ final class LineLengthOpenerTransformer
     {
         $this->callAnalyzer = $callAnalyzer;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function insertNewlineAfterOpeningIfNeeded(\PhpCsFixer\Tokenizer\Tokens $tokens, int $blockStartIndex, string $newlineIndentWhitespace) : void
     {
         if (!isset($tokens[$blockStartIndex + 1])) {

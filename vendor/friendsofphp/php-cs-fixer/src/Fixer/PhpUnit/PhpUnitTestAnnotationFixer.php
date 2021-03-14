@@ -280,14 +280,14 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
         return [new \PhpCsFixer\DocBlock\Line('/**' . $lineEnd), new \PhpCsFixer\DocBlock\Line($originalIndent . ' * ' . $lineContent . $lineEnd), new \PhpCsFixer\DocBlock\Line($originalIndent . ' */')];
     }
     /**
-     * @param Line []$line
+     * @param Line[] $lines
      *
      * @return string
      */
-    private function getSingleLineDocBlockEntry($line)
+    private function getSingleLineDocBlockEntry(array $lines)
     {
-        $line = $line[0];
-        $line = \str_replace('*/', '', $line);
+        $line = $lines[0];
+        $line = \str_replace('*/', '', $line->getContent());
         $line = \trim($line);
         $line = \str_split($line);
         $i = \count($line);

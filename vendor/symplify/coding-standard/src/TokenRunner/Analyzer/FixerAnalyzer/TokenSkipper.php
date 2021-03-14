@@ -19,6 +19,9 @@ final class TokenSkipper
     {
         $this->blockFinder = $blockFinder;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function skipBlocks(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : int
     {
         if (!isset($tokens[$position])) {
@@ -41,6 +44,9 @@ final class TokenSkipper
         }
         return $position;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function skipBlocksReversed(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : int
     {
         /** @var Token $token */

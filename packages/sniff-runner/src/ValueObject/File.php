@@ -111,14 +111,14 @@ final class File extends \PHP_CodeSniffer\Files\File
         }
         $this->fixedCount += $this->fixer->getFixCount();
     }
-    public function getErrorCount() : int
+    public function getErrorCount() : void
     {
         throw new \Symplify\EasyCodingStandard\SniffRunner\Exception\File\NotImplementedException(\sprintf('Method "%s" is not needed to be public. Use "%s" service.', __METHOD__, \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class));
     }
     /**
      * @return mixed[]
      */
-    public function getErrors() : array
+    public function getErrors() : void
     {
         throw new \Symplify\EasyCodingStandard\SniffRunner\Exception\File\NotImplementedException(\sprintf('Method "%s" is not needed to be public. Use "%s" service.', __METHOD__, \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class));
     }

@@ -3,20 +3,19 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Bundle;
 
-use _PhpScoper4f42ead57614\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper4f42ead57614\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoper4f42ead57614\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoperfb0714773dc5\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 use Symplify\SymplifyKernel\DependencyInjection\CompilerPass\PrepareConsoleApplicationCompilerPass;
 use Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension;
-final class SymplifyKernelBundle extends \_PhpScoper4f42ead57614\Symfony\Component\HttpKernel\Bundle\Bundle
+final class SymplifyKernelBundle extends \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    public function build(\_PhpScoper4f42ead57614\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScoperfb0714773dc5\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->addCompilerPass(new \Symplify\SymplifyKernel\DependencyInjection\CompilerPass\PrepareConsoleApplicationCompilerPass());
         $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : ?\_PhpScoper4f42ead57614\Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+    protected function createContainerExtension() : \Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension
     {
         return new \Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension();
     }

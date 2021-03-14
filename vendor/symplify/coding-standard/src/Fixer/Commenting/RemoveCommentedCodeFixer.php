@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScoper4f42ead57614\Nette\Utils\Strings;
+use _PhpScoperfb0714773dc5\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -50,10 +50,16 @@ final class RemoveCommentedCodeFixer extends \Symplify\CodingStandard\Fixer\Abst
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_COMMENT);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         $contentWithPositions = [];
@@ -62,7 +68,7 @@ final class RemoveCommentedCodeFixer extends \Symplify\CodingStandard\Fixer\Abst
             if (!$token->isGivenKind(\T_COMMENT)) {
                 continue;
             }
-            if (!\_PhpScoper4f42ead57614\Nette\Utils\Strings::startsWith($token->getContent(), '//')) {
+            if (!\_PhpScoperfb0714773dc5\Nette\Utils\Strings::startsWith($token->getContent(), '//')) {
                 continue;
             }
             $startAndEnd = $this->commentedContentResolver->resolve($tokens, $i);
@@ -96,6 +102,8 @@ CODE_SAMPLE
     }
     /**
      * Remove the indent space ahead of comments
+     *
+     * @param Tokens<Token> $tokens
      */
     private function resolveRealStart(\Symplify\CodingStandard\ValueObject\StartAndEnd $startAndEnd, \PhpCsFixer\Tokenizer\Tokens $tokens) : int
     {
@@ -106,7 +114,7 @@ CODE_SAMPLE
         if ($preStartToken->getContent() === \PHP_EOL) {
             return $realStart - 1;
         }
-        if (\_PhpScoper4f42ead57614\Nette\Utils\Strings::endsWith($preStartToken->getContent(), '    ')) {
+        if (\_PhpScoperfb0714773dc5\Nette\Utils\Strings::endsWith($preStartToken->getContent(), '    ')) {
             return $realStart - 1;
         }
         return $realStart;

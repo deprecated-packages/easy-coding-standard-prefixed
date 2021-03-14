@@ -43,10 +43,16 @@ final class StandaloneLinePromotedPropertyFixer extends \Symplify\CodingStandard
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE]);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function fix(\SplFileInfo $splFileInfo, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         // function arguments, function call parameters, lambda use()
@@ -85,6 +91,9 @@ final class PromotedProperties
 CODE_SAMPLE
 )]);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function processFunction(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : void
     {
         $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
@@ -93,6 +102,9 @@ CODE_SAMPLE
         }
         $this->tokensNewliner->breakItems($blockInfo, $tokens);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function getFunctionName(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : ?string
     {
         $nextToken = $this->getNextMeaningfulToken($tokens, $position);

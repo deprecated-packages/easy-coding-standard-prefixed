@@ -10,12 +10,12 @@
         "symfony\/dependency-injection": "^5.2",
         "symfony\/console": "^4.4|^5.2",
         "nette\/robot-loader": "^3.3",
-        "symplify\/symplify-kernel": "dev-master",
-        "symplify\/markdown-diff": "dev-master",
-        "symplify\/package-builder": "dev-master",
+        "symplify\/symplify-kernel": "dev-main",
+        "symplify\/markdown-diff": "dev-main",
+        "symplify\/package-builder": "dev-main",
         "nette\/neon": "^3.2",
-        "symplify\/php-config-printer": "dev-master",
-        "symplify\/smart-file-system": "dev-master"
+        "symplify\/php-config-printer": "dev-main",
+        "symplify\/smart-file-system": "dev-main"
     },
     "require-dev": {
         "phpunit\/phpunit": "^9.5",
@@ -37,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "9.3-dev"
+            "dev-main": "9.3-dev"
         }
     },
     "minimum-stability": "dev",

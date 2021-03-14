@@ -16,6 +16,9 @@ final class IndentDetector
     {
         $this->whitespacesFixerConfig = $whitespacesFixerConfig;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function detectOnPosition(\PhpCsFixer\Tokenizer\Tokens $tokens, int $startIndex) : int
     {
         $indent = $this->whitespacesFixerConfig->getIndent();

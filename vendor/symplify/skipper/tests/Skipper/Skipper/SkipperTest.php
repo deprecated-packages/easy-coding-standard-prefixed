@@ -37,6 +37,7 @@ final class SkipperTest extends \Symplify\PackageBuilder\Testing\AbstractKernelT
         (yield [__DIR__ . '/Fixture/SomeSkipped/any.txt', \true]);
     }
     /**
+     * @param object|class-string $element
      * @dataProvider provideDataShouldSkipElement()
      */
     public function testSkipElement($element, bool $expectedSkip) : void

@@ -30,6 +30,8 @@ final class DoctrineBlockFinder
     }
     /**
      * Accepts position to both start and end token, e.g. (, ), {, }
+     *
+     * @param Tokens<Token> $tokens
      */
     public function findInTokensByEdge(\PhpCsFixer\Doctrine\Annotation\Tokens $tokens, int $position) : \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
     {
@@ -50,6 +52,8 @@ final class DoctrineBlockFinder
         return $this->blockFinder->getBlockTypeByContent($token->getContent());
     }
     /**
+     * @param Tokens<Token> $tokens
+     *
      * @copied from
      * @see \PhpCsFixer\Tokenizer\Tokens::findBlockEnd()
      */
@@ -64,6 +68,9 @@ final class DoctrineBlockFinder
         $message = \sprintf('Invalid param type: "%s".', $type);
         throw new \Symplify\CodingStandard\Exception\EdgeFindingException($message);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function resolveIndexForBlockLevel(int $startIndex, int $endIndex, \PhpCsFixer\Doctrine\Annotation\Tokens $tokens, string $startEdge, string $endEdge, int $indexOffset) : int
     {
         $blockLevel = 0;
@@ -84,6 +91,9 @@ final class DoctrineBlockFinder
         }
         return $index;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function ensureStartTokenIsNotStartEdge(\PhpCsFixer\Doctrine\Annotation\Tokens $tokens, int $startIndex, string $startEdge, bool $findEnd) : void
     {
         /** @var Token $startToken */
@@ -92,6 +102,9 @@ final class DoctrineBlockFinder
             throw new \Symplify\CodingStandard\Exception\EdgeFindingException(\sprintf('Invalid param $startIndex - not a proper block "%s".', $findEnd ? 'start' : 'end'));
         }
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function resolveDocBlockEdgeByType(\Symplify\CodingStandard\TokenRunner\ValueObject\DocBlockEdgeDefinition $docBlockEdgeDefinition, int $searchIndex, \PhpCsFixer\Doctrine\Annotation\Tokens $tokens, bool $findEnd) : int
     {
         $startChart = $docBlockEdgeDefinition->getStartChar();

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\ArrayNotation;
 
-use _PhpScoper4f42ead57614\Nette\Utils\Strings;
+use _PhpScoperfb0714773dc5\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -49,6 +49,9 @@ final class ArrayListItemNewlineFixer extends \Symplify\CodingStandard\Fixer\Abs
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         if (!$tokens->isAnyTokenKindsFound(\Symplify\CodingStandard\TokenRunner\ValueObject\TokenKinds::ARRAY_OPEN_TOKENS)) {
@@ -56,7 +59,10 @@ final class ArrayListItemNewlineFixer extends \Symplify\CodingStandard\Fixer\Abs
         }
         return $tokens->isTokenKindFound(\T_DOUBLE_ARROW);
     }
-    public function fix(\SplFileInfo $fileInfo, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    /**
+     * @param Tokens<Token> $tokens
+     */
+    public function fix(\SplFileInfo $fileInfo, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         $arrayBlockInfos = $this->arrayBlockInfoFinder->findArrayOpenerBlockInfos($tokens);
         foreach ($arrayBlockInfos as $arrayBlockInfo) {
@@ -74,6 +80,9 @@ $value = ['simple' => 1,
 CODE_SAMPLE
 )]);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function fixArrayOpener(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : void
     {
         if (!$this->arrayAnalyzer->isIndexedList($tokens, $blockInfo)) {
@@ -88,7 +97,7 @@ CODE_SAMPLE
             if (!$nextToken instanceof \PhpCsFixer\Tokenizer\Token) {
                 return;
             }
-            if (\_PhpScoper4f42ead57614\Nette\Utils\Strings::contains($nextToken->getContent(), "\n")) {
+            if (\_PhpScoperfb0714773dc5\Nette\Utils\Strings::contains($nextToken->getContent(), "\n")) {
                 return;
             }
             $tokens->ensureWhitespaceAtIndex($nextTokenPosition, 0, $this->whitespacesFixerConfig->getLineEnding());

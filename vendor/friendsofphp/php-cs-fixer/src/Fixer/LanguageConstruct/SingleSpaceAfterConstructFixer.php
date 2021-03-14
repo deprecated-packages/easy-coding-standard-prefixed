@@ -43,9 +43,11 @@ final class SingleSpaceAfterConstructFixer extends \PhpCsFixer\AbstractFixer imp
     public function configure(array $configuration = null)
     {
         parent::configure($configuration);
+        // @TODO: drop condition when PHP 7.0+ is required
         if (\defined('T_YIELD_FROM')) {
             self::$tokenMap['yield_from'] = \T_YIELD_FROM;
         }
+        // @TODO: drop condition when PHP 8.0+ is required
         if (\defined('T_MATCH')) {
             self::$tokenMap['match'] = \T_MATCH;
         }

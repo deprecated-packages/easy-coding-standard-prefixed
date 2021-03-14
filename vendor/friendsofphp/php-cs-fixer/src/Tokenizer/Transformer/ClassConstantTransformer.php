@@ -48,7 +48,7 @@ final class ClassConstantTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
     /**
      * {@inheritdoc}
      */
-    protected function getDeprecatedCustomTokens()
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_CLASS_CONSTANT];
     }

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper4f42ead57614\Nette\Utils\Strings;
+use _PhpScoperfb0714773dc5\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\Contract\DocBlock\MalformWorkerInterface;
@@ -14,19 +14,25 @@ final class MissingVarNameMalformWorker implements \Symplify\CodingStandard\Toke
      * @see https://regex101.com/r/QtWnWv/3
      */
     private const VAR_WITHOUT_NAME_REGEX = '#^(?<open>\\/\\*\\* @var )(?<type>[\\\\\\w\\|]+)(?<close>\\s+\\*\\/)$#';
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function work(string $docContent, \PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : string
     {
-        if (!\_PhpScoper4f42ead57614\Nette\Utils\Strings::match($docContent, self::VAR_WITHOUT_NAME_REGEX)) {
+        if (!\_PhpScoperfb0714773dc5\Nette\Utils\Strings::match($docContent, self::VAR_WITHOUT_NAME_REGEX)) {
             return $docContent;
         }
         $nextVariableToken = $this->getNextVariableToken($tokens, $position);
         if (!$nextVariableToken instanceof \PhpCsFixer\Tokenizer\Token) {
             return $docContent;
         }
-        return \_PhpScoper4f42ead57614\Nette\Utils\Strings::replace($docContent, self::VAR_WITHOUT_NAME_REGEX, function (array $match) use($nextVariableToken) : string {
+        return \_PhpScoperfb0714773dc5\Nette\Utils\Strings::replace($docContent, self::VAR_WITHOUT_NAME_REGEX, function (array $match) use($nextVariableToken) : string {
             return $match['open'] . $match['type'] . ' ' . $nextVariableToken->getContent() . $match['close'];
         });
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function getNextVariableToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : ?\PhpCsFixer\Tokenizer\Token
     {
         $nextMeaningfulTokenPosition = $tokens->getNextMeaningfulToken($position);

@@ -16,8 +16,8 @@ use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\Tokenizer\CT;
-use PhpCsFixer\Tokenizer\Token as PhpToken;
-use PhpCsFixer\Tokenizer\Tokens as PhpTokens;
+use PhpCsFixer\Tokenizer\Token;
+use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @internal
@@ -38,19 +38,19 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $phpTokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         // fetch indexes one time, this is safe as we never add or remove a token during fixing
-        $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($phpTokens);
+        $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         $this->classyElements = $analyzer->getClassyElements();
-        /** @var PhpToken $docCommentToken */
-        foreach ($phpTokens->findGivenKind(\T_DOC_COMMENT) as $index => $docCommentToken) {
-            if (!$this->nextElementAcceptsDoctrineAnnotations($phpTokens, $index)) {
+        /** @var Token $docCommentToken */
+        foreach ($tokens->findGivenKind(\T_DOC_COMMENT) as $index => $docCommentToken) {
+            if (!$this->nextElementAcceptsDoctrineAnnotations($tokens, $index)) {
                 continue;
             }
-            $tokens = \PhpCsFixer\Doctrine\Annotation\Tokens::createFromDocComment($docCommentToken, $this->configuration['ignored_tags']);
-            $this->fixAnnotations($tokens);
-            $phpTokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $tokens->getCode()]);
+            $doctrineAnnotationTokens = \PhpCsFixer\Doctrine\Annotation\Tokens::createFromDocComment($docCommentToken, $this->configuration['ignored_tags']);
+            $this->fixAnnotations($doctrineAnnotationTokens);
+            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $doctrineAnnotationTokens->getCode()]);
         }
     }
     /**

@@ -12,7 +12,7 @@ use Throwable;
 final class BlockFinder
 {
     /**
-     * @var int[]
+     * @var array<string, int>
      */
     private const CONTENT_TO_BLOCK_TYPE = ['(' => \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, ')' => \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, '[' => \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, ']' => \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, '{' => \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, '}' => \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE];
     /**
@@ -22,6 +22,8 @@ final class BlockFinder
     /**
      * Accepts position to both start and end token, e.g. (, ), [, ], {, } also to: "array"(, "function" ...(, "use"(,
      * "new" ...(
+     *
+     * @param Tokens<Token> $tokens
      */
     public function findInTokensByEdge(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : ?\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
     {
@@ -51,6 +53,9 @@ final class BlockFinder
         $blockType = $this->getBlockTypeByToken($token);
         return $this->createBlockInfo($token, $position, $tokens, $blockType);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function findInTokensByPositionAndContent(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position, string $content) : ?\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
     {
         $blockStart = $tokens->getNextTokenOfKind($position, [$content]);
@@ -77,6 +82,9 @@ final class BlockFinder
         }
         return $this->getBlockTypeByContent($token->getContent());
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function createBlockInfo(\PhpCsFixer\Tokenizer\Token $token, int $position, \PhpCsFixer\Tokenizer\Tokens $tokens, int $blockType) : ?\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
     {
         try {

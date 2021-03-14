@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner;
 
-use _PhpScoper4f42ead57614\Nette\Utils\Strings;
+use _PhpScoperfb0714773dc5\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -11,6 +11,7 @@ final class TokenFinder
 {
     /**
      * @param int|Token $position
+     * @param Tokens<Token> $tokens
      */
     public function getPreviousMeaningfulToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $position) : \PhpCsFixer\Tokenizer\Token
     {
@@ -58,13 +59,16 @@ final class TokenFinder
         $rawTokensCount = \count($rawTokens);
         for ($i = $position; $i < $rawTokensCount; ++$i) {
             $token = $rawTokens[$i];
-            if (\is_array($token) && \_PhpScoper4f42ead57614\Nette\Utils\Strings::contains($token[1], \PHP_EOL)) {
+            if (\is_array($token) && \_PhpScoperfb0714773dc5\Nette\Utils\Strings::contains($token[1], \PHP_EOL)) {
                 break;
             }
             $lastToken = $token;
         }
         return $lastToken;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function findPreviousTokenByPosition(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : \PhpCsFixer\Tokenizer\Token
     {
         $previousPosition = $position - 1;
@@ -77,11 +81,17 @@ final class TokenFinder
         }
         return $previousToken;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function findPreviousTokenByToken(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $positionToken) : \PhpCsFixer\Tokenizer\Token
     {
         $position = $this->resolvePositionByToken($tokens, $positionToken);
         return $this->findPreviousTokenByPosition($tokens, $position - 1);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function resolvePositionByToken(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $positionToken) : int
     {
         foreach ($tokens as $position => $token) {

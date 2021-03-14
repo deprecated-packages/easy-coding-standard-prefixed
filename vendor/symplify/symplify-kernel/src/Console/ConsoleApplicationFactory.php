@@ -3,13 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Console;
 
-use _PhpScoper4f42ead57614\Jean85\PrettyVersions;
-use _PhpScoper4f42ead57614\Symfony\Component\Console\Command\Command;
+use _PhpScoperfb0714773dc5\Symfony\Component\Console\Command\Command;
 use Symplify\ComposerJsonManipulator\ComposerJsonFactory;
+use Symplify\PackageBuilder\Composer\PackageVersionProvider;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SmartFileSystem\SmartFileSystem;
 use Symplify\SymplifyKernel\Strings\StringsConverter;
-use Throwable;
 final class ConsoleApplicationFactory
 {
     /**
@@ -69,16 +68,8 @@ final class ConsoleApplicationFactory
         if ($packageName === null) {
             return;
         }
-        $packageVersion = $this->resolveVersionFromPackageName($packageName);
-        $autowiredConsoleApplication->setVersion($packageVersion);
-    }
-    private function resolveVersionFromPackageName(string $packageName) : string
-    {
-        try {
-            $version = \_PhpScoper4f42ead57614\Jean85\PrettyVersions::getVersion($packageName);
-            return $version->getPrettyVersion();
-        } catch (\Throwable $throwable) {
-            return 'Unknown';
-        }
+        $packageVersionProvider = new \Symplify\PackageBuilder\Composer\PackageVersionProvider();
+        $version = $packageVersionProvider->provide($packageName);
+        $autowiredConsoleApplication->setVersion($version);
     }
 }

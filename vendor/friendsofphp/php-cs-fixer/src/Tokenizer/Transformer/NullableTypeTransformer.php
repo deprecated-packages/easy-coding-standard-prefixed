@@ -56,7 +56,7 @@ final class NullableTypeTransformer extends \PhpCsFixer\Tokenizer\AbstractTransf
     /**
      * {@inheritdoc}
      */
-    protected function getDeprecatedCustomTokens()
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE];
     }

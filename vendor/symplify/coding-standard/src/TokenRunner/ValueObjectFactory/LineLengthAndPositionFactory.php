@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\ValueObjectFactory;
 
-use _PhpScoper4f42ead57614\Nette\Utils\Strings;
+use _PhpScoperfb0714773dc5\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException;
@@ -11,6 +11,9 @@ use Symplify\CodingStandard\TokenRunner\ValueObject\LineLengthAndPosition;
 use Symplify\PackageBuilder\Configuration\StaticEolConfiguration;
 final class LineLengthAndPositionFactory
 {
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function createFromTokensAndLineStartPosition(\PhpCsFixer\Tokenizer\Tokens $tokens, int $currentPosition) : \Symplify\CodingStandard\TokenRunner\ValueObject\LineLengthAndPosition
     {
         $length = 0;
@@ -44,7 +47,7 @@ final class LineLengthAndPositionFactory
         if (!isset($tokens[$position])) {
             throw new \Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException($position);
         }
-        if (\_PhpScoper4f42ead57614\Nette\Utils\Strings::startsWith($tokens[$position]->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
+        if (\_PhpScoperfb0714773dc5\Nette\Utils\Strings::startsWith($tokens[$position]->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
             return \true;
         }
         return $tokens[$position]->isGivenKind(\T_OPEN_TAG);

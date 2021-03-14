@@ -477,7 +477,11 @@ class Token
         } else {
             $options = \PhpCsFixer\Utils::calculateBitmask($options);
         }
-        return \json_encode($this->toArray(), $options);
+        $jsonResult = \json_encode($this->toArray(), $options);
+        if (\JSON_ERROR_NONE !== \json_last_error()) {
+            $jsonResult = \json_encode(['errorDescription' => 'Can not encode Tokens to JSON.', 'rawErrorMessage' => \json_last_error_msg()], $options);
+        }
+        return $jsonResult;
     }
     /**
      * @param string[] $tokenNames

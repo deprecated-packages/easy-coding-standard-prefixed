@@ -40,6 +40,9 @@ final class HereNowDocSnippetFormatterTest extends \Symplify\PackageBuilder\Test
         $expectedFileContent = $inputAndExpectedFileInfos->getExpectedFileContent();
         $this->assertSame($expectedFileContent, $changedContent, $fixtureFileInfo->getRelativeFilePathFromCwd());
     }
+    /**
+     * @return Iterator<mixed, SmartFileInfo[]>
+     */
     public function provideData() : \Iterator
     {
         return \Symplify\EasyTesting\DataProvider\StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture', '*.php.inc');

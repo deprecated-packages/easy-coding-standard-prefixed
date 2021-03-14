@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoper4f42ead57614\Nette\Utils\Strings;
+use _PhpScoperfb0714773dc5\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -84,6 +84,9 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([
@@ -101,6 +104,9 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
             \T_NEW,
         ]);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         // function arguments, function call parameters, lambda use()
@@ -161,6 +167,9 @@ CODE_SAMPLE
         $this->breakLongLines = $configuration[self::BREAK_LONG_LINES] ?? \true;
         $this->inlineShortLines = $configuration[self::INLINE_SHORT_LINES] ?? \true;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function processMethodCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : void
     {
         $methodNamePosition = $this->functionCallNameMatcher->matchName($tokens, $position);
@@ -178,6 +187,9 @@ CODE_SAMPLE
         }
         $this->lineLengthTransformer->fixStartPositionToEndPosition($blockInfo, $tokens, $this->lineLength, $this->breakLongLines, $this->inlineShortLines);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function processFunctionOrArray(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : void
     {
         $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
@@ -189,6 +201,9 @@ CODE_SAMPLE
         }
         $this->lineLengthTransformer->fixStartPositionToEndPosition($blockInfo, $tokens, $this->lineLength, $this->breakLongLines, $this->inlineShortLines);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function shouldSkip(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
     {
         // no items inside => skip
@@ -206,6 +221,9 @@ CODE_SAMPLE
         // has comments => dangerous to change: https://github.com/symplify/symplify/issues/973
         return (bool) $tokens->findGivenKind(\T_COMMENT, $blockInfo->getStart(), $blockInfo->getEnd());
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function isHerenowDoc(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
     {
         // heredoc/nowdoc => skip
@@ -213,6 +231,6 @@ CODE_SAMPLE
         if (!$nextToken instanceof \PhpCsFixer\Tokenizer\Token) {
             return \false;
         }
-        return \_PhpScoper4f42ead57614\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
+        return \_PhpScoperfb0714773dc5\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
     }
 }

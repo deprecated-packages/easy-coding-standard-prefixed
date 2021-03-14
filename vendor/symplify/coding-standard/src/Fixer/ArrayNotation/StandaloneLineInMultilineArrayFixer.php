@@ -67,6 +67,9 @@ $friends = [
 CODE_SAMPLE
 )]);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         if (!$tokens->isAnyTokenKindsFound(\Symplify\CodingStandard\TokenRunner\ValueObject\TokenKinds::ARRAY_OPEN_TOKENS)) {
@@ -74,6 +77,9 @@ CODE_SAMPLE
         }
         return $tokens->isTokenKindFound(\T_DOUBLE_ARROW);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function fix(\SplFileInfo $fileInfo, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
@@ -90,6 +96,9 @@ CODE_SAMPLE
             $this->tokensNewliner->breakItems($blockInfo, $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\LineKind::ARRAYS);
         }
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function shouldSkipNestedArrayValue(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
     {
         $arrayWrapper = $this->arrayWrapperFactory->createFromTokensAndBlockInfo($tokens, $blockInfo);

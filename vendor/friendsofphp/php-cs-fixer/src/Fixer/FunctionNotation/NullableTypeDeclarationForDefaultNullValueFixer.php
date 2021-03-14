@@ -97,7 +97,7 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends \PhpCsFixer\
             }
             $argumentTypeInfo = $argumentInfo->getTypeAnalysis();
             if (\true === $this->configuration['use_nullable_type_declaration']) {
-                if (!$argumentTypeInfo->isNullable()) {
+                if (!$argumentTypeInfo->isNullable() && 'mixed' !== $argumentTypeInfo->getName()) {
                     $tokens->insertAt($argumentTypeInfo->getStartIndex(), new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, '?']));
                 }
             } else {

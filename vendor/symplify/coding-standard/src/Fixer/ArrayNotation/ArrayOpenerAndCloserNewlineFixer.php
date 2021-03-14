@@ -65,6 +65,9 @@ $items = [
 CODE_SAMPLE
 )]);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         if (!$tokens->isAnyTokenKindsFound(\Symplify\CodingStandard\TokenRunner\ValueObject\TokenKinds::ARRAY_OPEN_TOKENS)) {
@@ -72,13 +75,19 @@ CODE_SAMPLE
         }
         return $tokens->isTokenKindFound(\T_DOUBLE_ARROW);
     }
-    public function fix(\SplFileInfo $fileInfo, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    /**
+     * @param Tokens<Token> $tokens
+     */
+    public function fix(\SplFileInfo $fileInfo, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         $blockInfos = $this->arrayBlockInfoFinder->findArrayOpenerBlockInfos($tokens);
         foreach ($blockInfos as $blockInfo) {
             $this->fixArrayOpener($tokens, $blockInfo);
         }
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function fixArrayOpener(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : void
     {
         if ($this->isNextTokenAlsoArrayOpener($tokens, $blockInfo->getStart())) {
@@ -96,6 +105,9 @@ CODE_SAMPLE
         $this->handleArrayCloser($tokens, $blockInfo->getEnd());
         $this->handleArrayOpener($tokens, $blockInfo->getStart());
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function isNextTokenAlsoArrayOpener(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
     {
         $nextToken = $this->getNextMeaningfulToken($tokens, $index);
@@ -104,6 +116,9 @@ CODE_SAMPLE
         }
         return $nextToken->isGivenKind(\Symplify\CodingStandard\TokenRunner\ValueObject\TokenKinds::ARRAY_OPEN_TOKENS);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function handleArrayCloser(\PhpCsFixer\Tokenizer\Tokens $tokens, int $arrayCloserPosition) : void
     {
         $preArrayCloserPosition = $arrayCloserPosition - 1;
@@ -117,6 +132,9 @@ CODE_SAMPLE
         }
         $tokens->ensureWhitespaceAtIndex($preArrayCloserPosition, 1, $this->whitespacesFixerConfig->getLineEnding());
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function handleArrayOpener(\PhpCsFixer\Tokenizer\Tokens $tokens, int $arrayOpenerPosition) : void
     {
         $postArrayOpenerPosition = $arrayOpenerPosition + 1;

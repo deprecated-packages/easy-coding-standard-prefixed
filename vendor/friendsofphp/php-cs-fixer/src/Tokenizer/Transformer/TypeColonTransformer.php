@@ -71,7 +71,7 @@ final class TypeColonTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
     /**
      * {@inheritdoc}
      */
-    protected function getDeprecatedCustomTokens()
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON];
     }

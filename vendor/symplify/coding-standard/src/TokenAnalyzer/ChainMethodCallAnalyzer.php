@@ -22,6 +22,8 @@ final class ChainMethodCallAnalyzer
     }
     /**
      * Matches e.g: return app()->some(), app()->some(), (clone app)->some()
+     *
+     * @param Tokens<Token> $tokens
      */
     public function isPreceededByFuncCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
     {
@@ -42,6 +44,8 @@ final class ChainMethodCallAnalyzer
     }
     /**
      * Matches e.g. someMethod($this->some()->method()), [$this->some()->method()]
+     *
+     * @param Tokens<Token> $tokens
      */
     public function isPartOfMethodCallOrArray(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
     {

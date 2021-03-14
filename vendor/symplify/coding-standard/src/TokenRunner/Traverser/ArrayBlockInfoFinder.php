@@ -20,6 +20,7 @@ final class ArrayBlockInfoFinder
     }
     /**
      * @return BlockInfo[]
+     * @param Tokens<Token> $tokens
      */
     public function findArrayOpenerBlockInfos(\PhpCsFixer\Tokenizer\Tokens $tokens) : array
     {
@@ -39,6 +40,7 @@ final class ArrayBlockInfoFinder
     }
     /**
      * @return Token[]
+     * @param Tokens<Token> $tokens
      */
     private function reverseTokens(\PhpCsFixer\Tokenizer\Tokens $tokens) : array
     {

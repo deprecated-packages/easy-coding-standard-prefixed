@@ -52,10 +52,16 @@ final class MethodChainingNewlineFixer extends \Symplify\CodingStandard\Fixer\Ab
     {
         return $this->getPriorityBefore(\PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer::class);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_OBJECT_OPERATOR]);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         // function arguments, function call parameters, lambda use()
@@ -82,6 +88,9 @@ $someClass->firstCall()
 CODE_SAMPLE
 )]);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function shouldPrefixNewline(\PhpCsFixer\Tokenizer\Tokens $tokens, int $objectOperatorIndex) : bool
     {
         for ($i = $objectOperatorIndex; $i >= 0; --$i) {
@@ -99,6 +108,9 @@ CODE_SAMPLE
         }
         return \false;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function isDoubleBracket(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
     {
         /** @var int $nextTokenPosition */
@@ -109,6 +121,8 @@ CODE_SAMPLE
     }
     /**
      * Matches e.g.: - app([ ])->some()
+     *
+     * @param Tokens<Token> $tokens
      */
     private function isPreceededByOpenedCallInAnotherBracket(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
     {
@@ -118,6 +132,9 @@ CODE_SAMPLE
         }
         return $tokens->isPartialCodeMultiline($blockInfo->getStart(), $blockInfo->getEnd());
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     private function shouldBracketPrefix(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position, int $objectOperatorIndex) : bool
     {
         if ($this->isDoubleBracket($tokens, $position)) {

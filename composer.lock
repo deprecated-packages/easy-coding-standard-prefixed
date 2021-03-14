@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "909b3a2a5ab11062df248a730ab44279",
+    "content-hash": "8323d08c5dc1a4736ff2153a7adf2d73",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -375,16 +375,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.18.2",
+            "version": "v2.18.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "18f8c9d184ba777380794a389fabc179896ba913"
+                "reference": "ab99202fccff2a9f97592fbe1b5c76dd06df3513"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/18f8c9d184ba777380794a389fabc179896ba913",
-                "reference": "18f8c9d184ba777380794a389fabc179896ba913",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/ab99202fccff2a9f97592fbe1b5c76dd06df3513",
+                "reference": "ab99202fccff2a9f97592fbe1b5c76dd06df3513",
                 "shasum": ""
             },
             "require": {
@@ -446,6 +446,7 @@
                     "tests/Test/IntegrationCaseFactoryInterface.php",
                     "tests/Test/InternalIntegrationCaseFactory.php",
                     "tests/Test/IsIdenticalConstraint.php",
+                    "tests/Test/TokensWithObservedTransformers.php",
                     "tests/TestCase.php"
                 ]
             },
@@ -466,7 +467,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.2"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.3"
             },
             "funding": [
                 {
@@ -474,28 +475,32 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-26T00:22:21+00:00"
+            "time": "2021-03-10T19:39:05+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
-            "version": "1.6.0",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Jean85/pretty-package-versions.git",
-                "reference": "1e0104b46f045868f11942aea058cd7186d6c303"
+                "reference": "b2c4ec2033a0196317a467cb197c7c843b794ddf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/1e0104b46f045868f11942aea058cd7186d6c303",
-                "reference": "1e0104b46f045868f11942aea058cd7186d6c303",
+                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/b2c4ec2033a0196317a467cb197c7c843b794ddf",
+                "reference": "b2c4ec2033a0196317a467cb197c7c843b794ddf",
                 "shasum": ""
             },
             "require": {
-                "composer/package-versions-deprecated": "^1.8.0",
-                "php": "^7.0|^8.0"
+                "composer-runtime-api": "^2.0.0",
+                "php": "^7.1|^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.0|^8.5|^9.2"
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "jean85/composer-provided-replaced-stub-package": "^1.0",
+                "phpstan/phpstan": "^0.12.66",
+                "phpunit/phpunit": "^7.5|^8.5|^9.4",
+                "vimeo/psalm": "^4.3"
             },
             "type": "library",
             "extra": {
@@ -518,7 +523,7 @@
                     "email": "alessandro.lai85@gmail.com"
                 }
             ],
-            "description": "A wrapper for ocramius/package-versions to get pretty versions strings",
+            "description": "A library to get pretty versions strings of installed dependencies",
             "keywords": [
                 "composer",
                 "package",
@@ -527,9 +532,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Jean85/pretty-package-versions/issues",
-                "source": "https://github.com/Jean85/pretty-package-versions/tree/1.6.0"
+                "source": "https://github.com/Jean85/pretty-package-versions/tree/2.0.3"
             },
-            "time": "2021-02-04T16:20:16+00:00"
+            "time": "2021-02-22T10:52:38+00:00"
         },
         {
             "name": "nette/finder",
@@ -1550,16 +1555,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.2.4",
+            "version": "v5.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "d6d0cc30d8c0fda4e7b213c20509b0159a8f4556"
+                "reference": "938ebbadae1b0a9c9d1ec313f87f9708609f1b79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/d6d0cc30d8c0fda4e7b213c20509b0159a8f4556",
-                "reference": "d6d0cc30d8c0fda4e7b213c20509b0159a8f4556",
+                "url": "https://api.github.com/repos/symfony/console/zipball/938ebbadae1b0a9c9d1ec313f87f9708609f1b79",
+                "reference": "938ebbadae1b0a9c9d1ec313f87f9708609f1b79",
                 "shasum": ""
             },
             "require": {
@@ -1627,7 +1632,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.2.4"
+                "source": "https://github.com/symfony/console/tree/v5.2.5"
             },
             "funding": [
                 {
@@ -1643,20 +1648,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-23T10:08:49+00:00"
+            "time": "2021-03-06T13:42:15+00:00"
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v5.2.4",
+            "version": "v5.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "f7d89110c55d88620dc811f342f94393b8a045d4"
+                "reference": "be0c7926f5729b15e4e79fd2bf917cac584b1970"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/f7d89110c55d88620dc811f342f94393b8a045d4",
-                "reference": "f7d89110c55d88620dc811f342f94393b8a045d4",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/be0c7926f5729b15e4e79fd2bf917cac584b1970",
+                "reference": "be0c7926f5729b15e4e79fd2bf917cac584b1970",
                 "shasum": ""
             },
             "require": {
@@ -1714,7 +1719,7 @@
             "description": "Allows you to standardize and centralize the way objects are constructed in your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/dependency-injection/tree/v5.2.4"
+                "source": "https://github.com/symfony/dependency-injection/tree/v5.2.5"
             },
             "funding": [
                 {
@@ -1730,7 +1735,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-04T15:41:09+00:00"
+            "time": "2021-03-05T20:13:41+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2309,16 +2314,16 @@
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v5.2.4",
+            "version": "v5.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "c452dbe4f385f030c3957821bf921b13815d6140"
+                "reference": "b8c63ef63c2364e174c3b3e0ba0bf83455f97f73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/c452dbe4f385f030c3957821bf921b13815d6140",
-                "reference": "c452dbe4f385f030c3957821bf921b13815d6140",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/b8c63ef63c2364e174c3b3e0ba0bf83455f97f73",
+                "reference": "b8c63ef63c2364e174c3b3e0ba0bf83455f97f73",
                 "shasum": ""
             },
             "require": {
@@ -2401,7 +2406,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-kernel/tree/v5.2.4"
+                "source": "https://github.com/symfony/http-kernel/tree/v5.2.5"
             },
             "funding": [
                 {
@@ -2417,7 +2422,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-04T18:05:55+00:00"
+            "time": "2021-03-10T17:07:35+00:00"
         },
         {
             "name": "symfony/options-resolver",
@@ -3406,16 +3411,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v5.2.4",
+            "version": "v5.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "6a81fec0628c468cf6d5c87a4d003725e040e223"
+                "reference": "002ab5a36702adf0c9a11e6d8836623253e9045e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/6a81fec0628c468cf6d5c87a4d003725e040e223",
-                "reference": "6a81fec0628c468cf6d5c87a4d003725e040e223",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/002ab5a36702adf0c9a11e6d8836623253e9045e",
+                "reference": "002ab5a36702adf0c9a11e6d8836623253e9045e",
                 "shasum": ""
             },
             "require": {
@@ -3474,7 +3479,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v5.2.4"
+                "source": "https://github.com/symfony/var-dumper/tree/v5.2.5"
             },
             "funding": [
                 {
@@ -3490,7 +3495,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-18T23:11:19+00:00"
+            "time": "2021-03-06T07:59:01+00:00"
         },
         {
             "name": "symfony/var-exporter",
@@ -3567,16 +3572,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v5.2.4",
+            "version": "v5.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "7d6ae0cce3c33965af681a4355f1c4de326ed277"
+                "reference": "298a08ddda623485208506fcee08817807a251dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/7d6ae0cce3c33965af681a4355f1c4de326ed277",
-                "reference": "7d6ae0cce3c33965af681a4355f1c4de326ed277",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/298a08ddda623485208506fcee08817807a251dd",
+                "reference": "298a08ddda623485208506fcee08817807a251dd",
                 "shasum": ""
             },
             "require": {
@@ -3622,7 +3627,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v5.2.4"
+                "source": "https://github.com/symfony/yaml/tree/v5.2.5"
             },
             "funding": [
                 {
@@ -3638,21 +3643,21 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-22T15:48:39+00:00"
+            "time": "2021-03-06T07:59:01+00:00"
         },
         {
             "name": "symplify/autowire-array-parameter",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/autowire-array-parameter",
-                "reference": "a7489ba83be18ac56e5daba8750c4ee6d2c9c3ad"
+                "reference": "725320a48156f3972d7d766b70257de1dd86af07"
             },
             "require": {
                 "nette/utils": "^3.2",
                 "php": ">=7.3",
                 "symfony/dependency-injection": "^5.2",
-                "symplify/package-builder": "dev-master"
+                "symplify/package-builder": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
@@ -3660,7 +3665,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3684,20 +3689,20 @@
         },
         {
             "name": "symplify/coding-standard",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "28e182ac158f75c2eb2ac23e33fa3912d057a70e"
+                "reference": "6bfc2bb8422269c0143a6c6e77ca663122ab391e"
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.18.2",
                 "nette/utils": "^3.2",
                 "php": ">=7.3",
-                "symplify/autowire-array-parameter": "dev-master",
-                "symplify/package-builder": "dev-master",
-                "symplify/rule-doc-generator": "dev-master",
-                "symplify/symplify-kernel": "dev-master"
+                "symplify/autowire-array-parameter": "dev-main",
+                "symplify/package-builder": "dev-main",
+                "symplify/rule-doc-generator": "dev-main",
+                "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
                 "doctrine/orm": "^2.7",
@@ -3706,14 +3711,14 @@
                 "phpunit/phpunit": "^9.5",
                 "symfony/framework-bundle": "^4.4|^5.2",
                 "symfony/http-kernel": "^4.4|^5.2",
-                "symplify/easy-coding-standard-tester": "dev-master",
-                "symplify/php-config-printer": "dev-master",
-                "symplify/smart-file-system": "dev-master"
+                "symplify/easy-coding-standard-tester": "dev-main",
+                "symplify/php-config-printer": "dev-main",
+                "symplify/smart-file-system": "dev-main"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3737,11 +3742,11 @@
         },
         {
             "name": "symplify/composer-json-manipulator",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/composer-json-manipulator",
-                "reference": "5ede6694fd2283aa4111cfc6139c928e0202a484"
+                "reference": "1d07d185c603ac1b1641d4be6009820a6b8bb5ec"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -3750,8 +3755,8 @@
                 "symfony/dependency-injection": "^5.2",
                 "symfony/filesystem": "^4.4|^5.2",
                 "symfony/http-kernel": "^4.4|^5.2",
-                "symplify/package-builder": "dev-master",
-                "symplify/smart-file-system": "dev-master"
+                "symplify/package-builder": "dev-main",
+                "symplify/smart-file-system": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
@@ -3759,7 +3764,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3783,11 +3788,11 @@
         },
         {
             "name": "symplify/console-color-diff",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/console-color-diff",
-                "reference": "fc571261ab0c1cbcd24c2701e0657fa10f37b583"
+                "reference": "92bda09955c8aa0465323996011217a7ad9d9f95"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -3796,7 +3801,7 @@
                 "symfony/console": "^4.4|^5.2",
                 "symfony/dependency-injection": "^5.2",
                 "symfony/http-kernel": "^4.4|^5.2",
-                "symplify/package-builder": "dev-master"
+                "symplify/package-builder": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
@@ -3804,7 +3809,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3828,27 +3833,27 @@
         },
         {
             "name": "symplify/console-package-builder",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/console-package-builder",
-                "reference": "60d90f851bbca1d6a1af516568cd3a7def89b2d0"
+                "reference": "e196e95414e643ad86b82abaa742148fbb588f48"
             },
             "require": {
                 "php": ">=7.3",
                 "symfony/console": "^4.4|^5.2",
                 "symfony/dependency-injection": "^5.2",
-                "symplify/symplify-kernel": "dev-master"
+                "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5",
                 "symfony/http-kernel": "^4.4|^5.2",
-                "symplify/package-builder": "dev-master"
+                "symplify/package-builder": "dev-main"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3872,11 +3877,11 @@
         },
         {
             "name": "symplify/easy-testing",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-testing",
-                "reference": "7fac77bf7dc7815d3c5c54d441f5f862d30ca0aa"
+                "reference": "25aad51cc54f9fc5fff7aec46b360c41bb913025"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -3885,10 +3890,10 @@
                 "symfony/dependency-injection": "^5.2",
                 "symfony/finder": "^4.4|^5.2",
                 "symfony/http-kernel": "^4.4|^5.2",
-                "symplify/console-package-builder": "dev-master",
-                "symplify/package-builder": "dev-master",
-                "symplify/smart-file-system": "dev-master",
-                "symplify/symplify-kernel": "dev-master"
+                "symplify/console-package-builder": "dev-main",
+                "symplify/package-builder": "dev-main",
+                "symplify/smart-file-system": "dev-main",
+                "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
@@ -3899,7 +3904,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3923,11 +3928,11 @@
         },
         {
             "name": "symplify/markdown-diff",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/markdown-diff",
-                "reference": "108732c878b9dd793d7297589067383801a00b6a"
+                "reference": "b637fc80f9ee7eb19b11bf0399803739e7954712"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -3935,7 +3940,7 @@
                 "sebastian/diff": "^3.0|^4.0",
                 "symfony/dependency-injection": "^5.2",
                 "symfony/http-kernel": "^4.4|^5.2",
-                "symplify/package-builder": "dev-master"
+                "symplify/package-builder": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
@@ -3943,7 +3948,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -3967,11 +3972,11 @@
         },
         {
             "name": "symplify/package-builder",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/package-builder",
-                "reference": "ce4b25a90657b2fb23ccb46d6be4e67fa59a83aa"
+                "reference": "564c584afdb8627db1d62e4f21c9f527e32fd655"
             },
             "require": {
                 "nette/neon": "^3.2",
@@ -3983,8 +3988,8 @@
                 "symfony/finder": "^4.4|^5.2",
                 "symfony/http-kernel": "^4.4|^5.2",
                 "symfony/yaml": "^4.4|^5.2",
-                "symplify/easy-testing": "dev-master",
-                "symplify/symplify-kernel": "dev-master"
+                "symplify/easy-testing": "dev-main",
+                "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
@@ -3992,7 +3997,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4016,27 +4021,27 @@
         },
         {
             "name": "symplify/php-config-printer",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/php-config-printer",
-                "reference": "14edd8073f284a22f0b1c4354fd151c9787ed7f4"
+                "reference": "9437191718f8c391164702e38b97307078b3cfaa"
             },
             "require": {
                 "nette/utils": "^3.2",
                 "nikic/php-parser": "^4.10.4",
                 "php": ">=7.3",
                 "symfony/http-kernel": "^4.4|^5.2",
-                "symplify/symplify-kernel": "dev-master"
+                "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5",
-                "symplify/easy-testing": "dev-master"
+                "symplify/easy-testing": "dev-main"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4064,11 +4069,11 @@
         },
         {
             "name": "symplify/rule-doc-generator",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/rule-doc-generator",
-                "reference": "105f83ca73208eafd1511384e8e12aa8347e1e27"
+                "reference": "e57f62ccfce3910cc1d0b729b387a5da811c4ea1"
             },
             "require": {
                 "nette/neon": "^3.2",
@@ -4076,11 +4081,11 @@
                 "php": ">=7.3",
                 "symfony/console": "^4.4|^5.2",
                 "symfony/dependency-injection": "^5.2",
-                "symplify/markdown-diff": "dev-master",
-                "symplify/package-builder": "dev-master",
-                "symplify/php-config-printer": "dev-master",
-                "symplify/smart-file-system": "dev-master",
-                "symplify/symplify-kernel": "dev-master"
+                "symplify/markdown-diff": "dev-main",
+                "symplify/package-builder": "dev-main",
+                "symplify/php-config-printer": "dev-main",
+                "symplify/smart-file-system": "dev-main",
+                "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.18.2",
@@ -4093,7 +4098,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4120,11 +4125,11 @@
         },
         {
             "name": "symplify/set-config-resolver",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/set-config-resolver",
-                "reference": "8dd8ab8c1eeec19e365c354c6ace3f90097357d7"
+                "reference": "c3ccd7344d375af0072b3e246dd54c3877e52049"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -4135,8 +4140,8 @@
                 "symfony/filesystem": "^4.4|^5.2",
                 "symfony/finder": "^4.4|^5.2",
                 "symfony/yaml": "^4.4|^5.2",
-                "symplify/smart-file-system": "dev-master",
-                "symplify/symplify-kernel": "dev-master"
+                "symplify/smart-file-system": "dev-main",
+                "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
@@ -4144,7 +4149,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4168,11 +4173,11 @@
         },
         {
             "name": "symplify/skipper",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/skipper",
-                "reference": "834a9b6f87961ef39a6d52e4ecefb4eebe88d9de"
+                "reference": "b7ef6bd5188f29ec5632e9c6586a647e022c9f9f"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -4181,9 +4186,9 @@
                 "symfony/dependency-injection": "^5.2",
                 "symfony/filesystem": "^4.4|^5.2",
                 "symfony/finder": "^4.4|^5.2",
-                "symplify/package-builder": "dev-master",
-                "symplify/smart-file-system": "dev-master",
-                "symplify/symplify-kernel": "dev-master"
+                "symplify/package-builder": "dev-main",
+                "symplify/smart-file-system": "dev-main",
+                "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
@@ -4191,7 +4196,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4215,11 +4220,11 @@
         },
         {
             "name": "symplify/smart-file-system",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/smart-file-system",
-                "reference": "7cf078d07233031a3af3428d05605bf291627926"
+                "reference": "0cab2a1255cdeb0840c16f8d25df02818bf0089c"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -4234,7 +4239,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -4258,21 +4263,22 @@
         },
         {
             "name": "symplify/symplify-kernel",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/symplify-kernel",
-                "reference": "6b5c40536e082d49c8d78f5155a4c2ac10b8f94f"
+                "reference": "242e94bb3e45b8079f8d43cdfc26e072778067af"
             },
             "require": {
+                "jean85/pretty-package-versions": "^1.6|^2.0.1",
                 "php": ">=7.3",
                 "symfony/console": "^4.4|^5.2",
                 "symfony/dependency-injection": "^5.2",
                 "symfony/http-kernel": "^4.4|^5.2",
-                "symplify/autowire-array-parameter": "dev-master",
-                "symplify/composer-json-manipulator": "dev-master",
-                "symplify/package-builder": "dev-master",
-                "symplify/smart-file-system": "dev-master"
+                "symplify/autowire-array-parameter": "dev-main",
+                "symplify/composer-json-manipulator": "dev-main",
+                "symplify/package-builder": "dev-main",
+                "symplify/smart-file-system": "dev-main"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.5"
@@ -4280,7 +4286,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -6088,25 +6094,25 @@
         },
         {
             "name": "symplify/easy-coding-standard-tester",
-            "version": "dev-master",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-coding-standard-tester",
-                "reference": "b02e9d741704cf226e5af4f93cbf31fb16a75b46"
+                "reference": "6a72025bd5828cc123de586a849296b33167328e"
             },
             "require": {
                 "php": ">=7.3",
                 "phpunit/phpunit": "^9.5",
-                "symplify/easy-coding-standard": "dev-master",
-                "symplify/easy-testing": "dev-master",
-                "symplify/package-builder": "dev-master",
-                "symplify/skipper": "dev-master",
-                "symplify/smart-file-system": "dev-master"
+                "symplify/easy-coding-standard": "dev-main",
+                "symplify/easy-testing": "dev-main",
+                "symplify/package-builder": "dev-main",
+                "symplify/skipper": "dev-main",
+                "symplify/smart-file-system": "dev-main"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.3-dev"
+                    "dev-main": "9.3-dev"
                 }
             },
             "autoload": {
@@ -6180,30 +6186,35 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.9.1",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozarts/assert.git",
-                "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
+                "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
-                "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/6964c76c7804814a842473e0c8fd15bab0f18e25",
+                "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0 || ^8.0",
+                "php": "^7.2 || ^8.0",
                 "symfony/polyfill-ctype": "^1.8"
             },
             "conflict": {
                 "phpstan/phpstan": "<0.12.20",
-                "vimeo/psalm": "<3.9.1"
+                "vimeo/psalm": "<4.6.1 || 4.6.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.36 || ^7.5.13"
+                "phpunit/phpunit": "^8.5.13"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.10-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Webmozart\\Assert\\": "src/"
@@ -6227,9 +6238,9 @@
             ],
             "support": {
                 "issues": "https://github.com/webmozarts/assert/issues",
-                "source": "https://github.com/webmozarts/assert/tree/1.9.1"
+                "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
-            "time": "2020-07-08T17:02:28+00:00"
+            "time": "2021-03-09T10:59:23+00:00"
         }
     ],
     "aliases": [],

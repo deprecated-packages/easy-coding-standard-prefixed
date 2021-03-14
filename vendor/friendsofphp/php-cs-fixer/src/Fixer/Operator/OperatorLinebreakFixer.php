@@ -65,13 +65,6 @@ function foo() {
     /**
      * {@inheritdoc}
      */
-    public function getConfigurationDefinition()
-    {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('only_booleans', 'whether to limit operators to only boolean ones'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position', 'whether to place operators at the beginning or at the end of the line'))->setAllowedValues(['beginning', 'end'])->setDefault($this->position)->getOption()]);
-    }
-    /**
-     * {@inheritdoc}
-     */
     public function configure(array $configuration = null)
     {
         parent::configure($configuration);
@@ -91,6 +84,13 @@ function foo() {
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return \true;
+    }
+    /**
+     * {@inheritdoc}
+     */
+    protected function createConfigurationDefinition()
+    {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('only_booleans', 'whether to limit operators to only boolean ones'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position', 'whether to place operators at the beginning or at the end of the line'))->setAllowedValues(['beginning', 'end'])->setDefault($this->position)->getOption()]);
     }
     /**
      * {@inheritdoc}

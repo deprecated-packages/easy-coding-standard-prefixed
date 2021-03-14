@@ -40,6 +40,9 @@ final class MarkdownSnippetFormatterTest extends \Symplify\PackageBuilder\Testin
         $expectedFileContent = $inputAndExpectedFileInfos->getExpectedFileContent();
         $this->assertSame($expectedFileContent, $changedContent, $fixtureFileInfo->getRelativeFilePathFromCwd());
     }
+    /**
+     * @return Iterator<mixed, SmartFileInfo[]>
+     */
     public function provideData() : \Iterator
     {
         return \Symplify\EasyTesting\DataProvider\StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture', '*.md');

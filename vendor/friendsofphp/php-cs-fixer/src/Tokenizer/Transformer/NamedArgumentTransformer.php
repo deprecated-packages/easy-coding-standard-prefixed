@@ -64,7 +64,7 @@ final class NamedArgumentTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
     /**
      * {@inheritdoc}
      */
-    protected function getDeprecatedCustomTokens()
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_NAMED_ARGUMENT_COLON, \PhpCsFixer\Tokenizer\CT::T_NAMED_ARGUMENT_NAME];
     }

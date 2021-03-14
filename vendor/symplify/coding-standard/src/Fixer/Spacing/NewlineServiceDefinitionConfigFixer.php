@@ -25,7 +25,7 @@ final class NewlineServiceDefinitionConfigFixer extends \Symplify\CodingStandard
      */
     private const ERROR_MESSAGE = 'Add newline for a fluent call on service definition in Symfony config';
     /**
-     * @var string
+     * @var string[]
      */
     private const FLUENT_METHOD_NAMES = ['call', 'property', 'args', 'arg'];
     /**
@@ -45,10 +45,16 @@ final class NewlineServiceDefinitionConfigFixer extends \Symplify\CodingStandard
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isAllTokenKindsFound([\T_RETURN, \T_STATIC, \T_FUNCTION, \T_VARIABLE, \T_STRING, \T_OBJECT_OPERATOR]);
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         if (!$this->symfonyClosureAnalyzer->isContainerConfiguratorClosure($tokens)) {
@@ -102,6 +108,7 @@ CODE_SAMPLE
     }
     /**
      * @param string[] $methodNames
+     * @param Tokens<Token> $tokens
      */
     private function isNextTokenMethodCallNamed(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, array $methodNames) : bool
     {

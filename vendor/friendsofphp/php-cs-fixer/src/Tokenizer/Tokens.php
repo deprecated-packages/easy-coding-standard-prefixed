@@ -204,6 +204,7 @@ class Tokens extends \SplFixedArray
     public static function getBlockEdgeDefinitions()
     {
         $definitions = [self::BLOCK_TYPE_CURLY_BRACE => ['start' => '{', 'end' => '}'], self::BLOCK_TYPE_PARENTHESIS_BRACE => ['start' => '(', 'end' => ')'], self::BLOCK_TYPE_INDEX_SQUARE_BRACE => ['start' => '[', 'end' => ']'], self::BLOCK_TYPE_ARRAY_SQUARE_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN, '['], 'end' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE, ']']], self::BLOCK_TYPE_DYNAMIC_PROP_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_OPEN, '{'], 'end' => [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_CLOSE, '}']], self::BLOCK_TYPE_DYNAMIC_VAR_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_OPEN, '{'], 'end' => [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_CLOSE, '}']], self::BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN, '{'], 'end' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE, '}']], self::BLOCK_TYPE_GROUP_IMPORT_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_OPEN, '{'], 'end' => [\PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_CLOSE, '}']], self::BLOCK_TYPE_DESTRUCTURING_SQUARE_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN, '['], 'end' => [\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE, ']']], self::BLOCK_TYPE_BRACE_CLASS_INSTANTIATION => ['start' => [\PhpCsFixer\Tokenizer\CT::T_BRACE_CLASS_INSTANTIATION_OPEN, '('], 'end' => [\PhpCsFixer\Tokenizer\CT::T_BRACE_CLASS_INSTANTIATION_CLOSE, ')']]];
+        // @TODO: drop condition when PHP 8.0+ is required
         if (\defined('T_ATTRIBUTE')) {
             $definitions[self::BLOCK_TYPE_ATTRIBUTE] = ['start' => [\T_ATTRIBUTE, '#['], 'end' => [\PhpCsFixer\Tokenizer\CT::T_ATTRIBUTE_CLOSE, ']']];
         }
@@ -213,13 +214,16 @@ class Tokens extends \SplFixedArray
      * Set new size of collection.
      *
      * @param int $size
+     *
+     * @return bool
      */
     public function setSize($size)
     {
         if ($this->getSize() !== $size) {
             $this->changed = \true;
-            parent::setSize($size);
+            return parent::setSize($size);
         }
+        return \true;
     }
     /**
      * Unset collection item.
@@ -887,8 +891,7 @@ class Tokens extends \SplFixedArray
         foreach ($tokens as $index => $token) {
             $this[$index] = new \PhpCsFixer\Tokenizer\Token($token);
         }
-        $transformers = \PhpCsFixer\Tokenizer\Transformers::create();
-        $transformers->transform($this);
+        $this->applyTransformers();
         $this->foundTokenKinds = [];
         foreach ($this as $token) {
             $this->registerFoundToken($token);
@@ -1101,6 +1104,14 @@ class Tokens extends \SplFixedArray
     {
         $this->warnPhp8SplFixerArrayChange(__METHOD__);
         return parent::valid();
+    }
+    /**
+     * @internal
+     */
+    protected function applyTransformers()
+    {
+        $transformers = \PhpCsFixer\Tokenizer\Transformers::create();
+        $transformers->transform($this);
     }
     private function warnPhp8SplFixerArrayChange($method)
     {

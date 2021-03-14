@@ -18,6 +18,9 @@ final class Issue777Test extends \Symplify\EasyCodingStandardTester\Testing\Abst
     {
         $this->doTestFileInfo($fileInfo);
     }
+    /**
+     * @return Iterator<SmartFileInfo[]>
+     */
     public function provideData() : \Iterator
     {
         (yield [new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/Fixture/fixture777.php.inc')]);

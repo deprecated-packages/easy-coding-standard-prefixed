@@ -103,7 +103,7 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
     /**
      * {@inheritdoc}
      */
-    protected function getDeprecatedCustomTokens()
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION];
     }

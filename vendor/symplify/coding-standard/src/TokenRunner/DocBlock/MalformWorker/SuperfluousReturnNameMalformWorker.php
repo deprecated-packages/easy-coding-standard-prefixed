@@ -3,8 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper4f42ead57614\Nette\Utils\Strings;
+use _PhpScoperfb0714773dc5\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\DocBlock;
+use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\Contract\DocBlock\MalformWorkerInterface;
 final class SuperfluousReturnNameMalformWorker implements \Symplify\CodingStandard\TokenRunner\Contract\DocBlock\MalformWorkerInterface
@@ -27,19 +28,22 @@ final class SuperfluousReturnNameMalformWorker implements \Symplify\CodingStanda
      * @var string
      */
     private const VARIABLE_NAME_PART = 'variableName';
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function work(string $docContent, \PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : string
     {
         $docBlock = new \PhpCsFixer\DocBlock\DocBlock($docContent);
         $lines = $docBlock->getLines();
         foreach ($lines as $line) {
-            $match = \_PhpScoper4f42ead57614\Nette\Utils\Strings::match($line->getContent(), self::RETURN_VARIABLE_NAME_REGEX);
+            $match = \_PhpScoperfb0714773dc5\Nette\Utils\Strings::match($line->getContent(), self::RETURN_VARIABLE_NAME_REGEX);
             if ($match === null) {
                 continue;
             }
             if ($this->shouldSkip($match, $line->getContent())) {
                 continue;
             }
-            $newLineContent = \_PhpScoper4f42ead57614\Nette\Utils\Strings::replace($line->getContent(), self::RETURN_VARIABLE_NAME_REGEX, function (array $match) {
+            $newLineContent = \_PhpScoperfb0714773dc5\Nette\Utils\Strings::replace($line->getContent(), self::RETURN_VARIABLE_NAME_REGEX, function (array $match) {
                 $replacement = $match['tag'];
                 if ($match['type'] !== []) {
                     $replacement .= $match['type'];
@@ -59,6 +63,6 @@ final class SuperfluousReturnNameMalformWorker implements \Symplify\CodingStanda
             return \true;
         }
         // has multiple return values? "@return array $one, $two"
-        return \count(\_PhpScoper4f42ead57614\Nette\Utils\Strings::matchAll($content, self::VARIABLE_NAME_REGEX)) >= 2;
+        return \count(\_PhpScoperfb0714773dc5\Nette\Utils\Strings::matchAll($content, self::VARIABLE_NAME_REGEX)) >= 2;
     }
 }

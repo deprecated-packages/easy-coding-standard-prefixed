@@ -17,6 +17,9 @@ final class ArrayAnalyzer
     {
         $this->tokenSkipper = $tokenSkipper;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function getItemCount(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : int
     {
         $nextMeanninfulPosition = $tokens->getNextMeaningfulToken($blockInfo->getStart());
@@ -37,6 +40,9 @@ final class ArrayAnalyzer
         });
         return $itemCount;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isIndexedList(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
     {
         $isIndexedList = \false;
@@ -47,6 +53,9 @@ final class ArrayAnalyzer
         });
         return $isIndexedList;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function traverseArrayWithoutNesting(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo, callable $callable) : void
     {
         for ($i = $blockInfo->getEnd() - 1; $i >= $blockInfo->getStart() + 1; --$i) {

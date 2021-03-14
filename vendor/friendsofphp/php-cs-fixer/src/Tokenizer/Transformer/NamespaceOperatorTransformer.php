@@ -47,7 +47,7 @@ final class NamespaceOperatorTransformer extends \PhpCsFixer\Tokenizer\AbstractT
     /**
      * {@inheritdoc}
      */
-    protected function getDeprecatedCustomTokens()
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_NAMESPACE_OPERATOR];
     }

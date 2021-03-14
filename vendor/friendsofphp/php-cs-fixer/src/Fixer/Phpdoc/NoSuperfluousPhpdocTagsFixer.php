@@ -280,7 +280,7 @@ class Foo {
             $index = $tokens->getNextMeaningfulToken($index);
         }
         $type = '';
-        while ($tokens[$index]->isGivenKind([\T_NS_SEPARATOR, \T_STRING, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \T_CALLABLE])) {
+        while ($tokens[$index]->isGivenKind([\T_NS_SEPARATOR, \T_STATIC, \T_STRING, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \T_CALLABLE])) {
             $type .= $tokens[$index]->getContent();
             $index = $tokens->getNextMeaningfulToken($index);
         }

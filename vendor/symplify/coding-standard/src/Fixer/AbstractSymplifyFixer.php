@@ -29,6 +29,7 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
     }
     /**
      * @return Token[]
+     * @param Tokens<Token> $tokens
      */
     protected function reverseTokens(\PhpCsFixer\Tokenizer\Tokens $tokens) : array
     {
@@ -47,6 +48,9 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
         $fixer = $reflectionClass->newInstanceWithoutConstructor();
         return $fixer->getPriority() + 5;
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     protected function getNextMeaningfulToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : ?\PhpCsFixer\Tokenizer\Token
     {
         $nextMeaninfulTokenPosition = $tokens->getNextMeaningfulToken($index);
@@ -55,6 +59,9 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
         }
         return $tokens[$nextMeaninfulTokenPosition];
     }
+    /**
+     * @param Tokens<Token> $tokens
+     */
     protected function getPreviousToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : ?\PhpCsFixer\Tokenizer\Token
     {
         $previousIndex = $index - 1;

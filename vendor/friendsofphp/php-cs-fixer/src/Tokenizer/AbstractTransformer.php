@@ -38,13 +38,5 @@ abstract class AbstractTransformer implements \PhpCsFixer\Tokenizer\TransformerI
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
-    {
-        @\trigger_error(\sprintf('%s is deprecated and will be removed in 3.0.', __METHOD__), \E_USER_DEPRECATED);
-        return $this->getDeprecatedCustomTokens();
-    }
-    /**
-     * @return int[]
-     */
-    protected abstract function getDeprecatedCustomTokens();
+    public abstract function getCustomTokens();
 }

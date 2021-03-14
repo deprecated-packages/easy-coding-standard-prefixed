@@ -16,6 +16,9 @@ final class Psr12Test extends \Symplify\EasyCodingStandardTester\Testing\Abstrac
     {
         $this->doTestFileInfo($fileInfo);
     }
+    /**
+     * @return Iterator<mixed, SmartFileInfo[]>
+     */
     public function provideData() : \Iterator
     {
         return \Symplify\EasyTesting\DataProvider\StaticFixtureFinder::yieldDirectory(__DIR__ . '/Fixture');

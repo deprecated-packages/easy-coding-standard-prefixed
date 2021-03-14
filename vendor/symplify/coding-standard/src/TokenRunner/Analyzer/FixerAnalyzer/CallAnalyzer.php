@@ -7,6 +7,9 @@ use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 final class CallAnalyzer
 {
+    /**
+     * @param Tokens<Token> $tokens
+     */
     public function isMethodCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $bracketPosition) : bool
     {
         $objectToken = new \PhpCsFixer\Tokenizer\Token([\T_OBJECT_OPERATOR, '->']);

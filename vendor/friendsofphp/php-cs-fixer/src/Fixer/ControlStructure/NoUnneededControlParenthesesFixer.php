@@ -34,10 +34,11 @@ final class NoUnneededControlParenthesesFixer extends \PhpCsFixer\AbstractFixer 
     public function __construct()
     {
         parent::__construct();
-        // To be moved back to compile time property declaration when PHP support of PHP CS Fixer will be 7.0+
+        // @TODO: To be moved back to compile time property declaration when PHP support of PHP CS Fixer will be 7.0+
         if (\defined('T_COALESCE')) {
             self::$loops['clone']['forbiddenContents'][] = [\T_COALESCE, '??'];
         }
+        // @TODO: To be moved back to compile time property declaration when PHP support of PHP CS Fixer will be 7.0+
         if (\defined('T_YIELD_FROM')) {
             self::$loops['yield_from'] = ['lookupTokens' => \T_YIELD_FROM, 'neededSuccessors' => [';', ')']];
         }

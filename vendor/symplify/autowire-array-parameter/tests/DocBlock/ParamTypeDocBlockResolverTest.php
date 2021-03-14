@@ -4,9 +4,9 @@ declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\Tests\DocBlock;
 
 use Iterator;
-use _PhpScoper4f42ead57614\PHPUnit\Framework\TestCase;
+use _PhpScoperfb0714773dc5\PHPUnit\Framework\TestCase;
 use Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
-final class ParamTypeDocBlockResolverTest extends \_PhpScoper4f42ead57614\PHPUnit\Framework\TestCase
+final class ParamTypeDocBlockResolverTest extends \_PhpScoperfb0714773dc5\PHPUnit\Framework\TestCase
 {
     /**
      * @var ParamTypeDocBlockResolver
@@ -38,6 +38,9 @@ final class ParamTypeDocBlockResolverTest extends \_PhpScoper4f42ead57614\PHPUni
         $resolvedType = $this->paramTypeDocBlockResolver->resolve($docBlock, $parameterName);
         $this->assertNull($resolvedType);
     }
+    /**
+     * @return Iterator<string[]>
+     */
     public function provideDataMissmatchName() : \Iterator
     {
         (yield ['/** @param Type[] $name */', '___not']);

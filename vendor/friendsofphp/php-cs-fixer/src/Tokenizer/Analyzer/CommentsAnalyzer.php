@@ -72,6 +72,7 @@ final class CommentsAnalyzer
         $nextIndex = $index;
         do {
             $nextIndex = $tokens->getNextMeaningfulToken($nextIndex);
+            // @TODO: drop condition when PHP 8.0+ is required
             if (\defined('T_ATTRIBUTE')) {
                 while (null !== $nextIndex && $tokens[$nextIndex]->isGivenKind(\T_ATTRIBUTE)) {
                     $nextIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ATTRIBUTE, $nextIndex);
