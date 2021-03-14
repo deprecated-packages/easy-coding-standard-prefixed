@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb0714773dc5\Symfony\Contracts\HttpClient\Test;
+namespace _PhpScopere050faf861e6\Symfony\Contracts\HttpClient\Test;
 
-use _PhpScoperfb0714773dc5\Symfony\Component\Process\PhpExecutableFinder;
-use _PhpScoperfb0714773dc5\Symfony\Component\Process\Process;
+use _PhpScopere050faf861e6\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScopere050faf861e6\Symfony\Component\Process\Process;
 class TestHttpServer
 {
     private static $process = [];
@@ -24,8 +24,8 @@ class TestHttpServer
                 self::$process[$port]->stop();
             });
         }
-        $finder = new \_PhpScoperfb0714773dc5\Symfony\Component\Process\PhpExecutableFinder();
-        $process = new \_PhpScoperfb0714773dc5\Symfony\Component\Process\Process(\array_merge([$finder->find(\false)], $finder->findArguments(), ['-dopcache.enable=0', '-dvariables_order=EGPCS', '-S', '127.0.0.1:' . $port]));
+        $finder = new \_PhpScopere050faf861e6\Symfony\Component\Process\PhpExecutableFinder();
+        $process = new \_PhpScopere050faf861e6\Symfony\Component\Process\Process(\array_merge([$finder->find(\false)], $finder->findArguments(), ['-dopcache.enable=0', '-dvariables_order=EGPCS', '-S', '127.0.0.1:' . $port]));
         $process->setWorkingDirectory(__DIR__ . '/Fixtures/web');
         $process->start();
         self::$process[$port] = $process;

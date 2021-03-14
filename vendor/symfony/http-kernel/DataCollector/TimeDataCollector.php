@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScopere050faf861e6\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\KernelInterface;
-use _PhpScoperfb0714773dc5\Symfony\Component\Stopwatch\Stopwatch;
-use _PhpScoperfb0714773dc5\Symfony\Component\Stopwatch\StopwatchEvent;
+use _PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Request;
+use _PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScopere050faf861e6\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScopere050faf861e6\Symfony\Component\Stopwatch\StopwatchEvent;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @final
  */
-class TimeDataCollector extends \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class TimeDataCollector extends \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     protected $kernel;
     protected $stopwatch;
-    public function __construct(\_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\KernelInterface $kernel = null, \_PhpScoperfb0714773dc5\Symfony\Component\Stopwatch\Stopwatch $stopwatch = null)
+    public function __construct(\_PhpScopere050faf861e6\Symfony\Component\HttpKernel\KernelInterface $kernel = null, \_PhpScopere050faf861e6\Symfony\Component\Stopwatch\Stopwatch $stopwatch = null)
     {
         $this->kernel = $kernel;
         $this->stopwatch = $stopwatch;
@@ -32,14 +32,14 @@ class TimeDataCollector extends \_PhpScoperfb0714773dc5\Symfony\Component\HttpKe
     /**
      * {@inheritdoc}
      */
-    public function collect(\_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
+    public function collect(\_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Request $request, \_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
     {
         if (null !== $this->kernel) {
             $startTime = $this->kernel->getStartTime();
         } else {
             $startTime = $request->server->get('REQUEST_TIME_FLOAT');
         }
-        $this->data = ['token' => $response->headers->get('X-Debug-Token'), 'start_time' => $startTime * 1000, 'events' => [], 'stopwatch_installed' => \class_exists(\_PhpScoperfb0714773dc5\Symfony\Component\Stopwatch\Stopwatch::class, \false)];
+        $this->data = ['token' => $response->headers->get('X-Debug-Token'), 'start_time' => $startTime * 1000, 'events' => [], 'stopwatch_installed' => \class_exists(\_PhpScopere050faf861e6\Symfony\Component\Stopwatch\Stopwatch::class, \false)];
     }
     /**
      * {@inheritdoc}

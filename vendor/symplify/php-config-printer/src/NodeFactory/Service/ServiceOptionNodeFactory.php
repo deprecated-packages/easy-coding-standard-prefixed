@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory\Service;
 
-use _PhpScoperfb0714773dc5\Nette\Utils\Strings;
-use _PhpScoperfb0714773dc5\PhpParser\Node\Expr\MethodCall;
+use _PhpScopere050faf861e6\Nette\Utils\Strings;
+use _PhpScopere050faf861e6\PhpParser\Node\Expr\MethodCall;
 use Symplify\PhpConfigPrinter\Contract\Converter\ServiceOptionsKeyYamlToPhpFactoryInterface;
 use Symplify\PhpConfigPrinter\ServiceOptionAnalyzer\ServiceOptionAnalyzer;
 use Symplify\PhpConfigPrinter\ValueObject\YamlServiceKey;
@@ -29,7 +29,7 @@ final class ServiceOptionNodeFactory
     /**
      * @param mixed[] $servicesValues
      */
-    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScoperfb0714773dc5\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScoperfb0714773dc5\PhpParser\Node\Expr\MethodCall
+    public function convertServiceOptionsToNodes(array $servicesValues, \_PhpScopere050faf861e6\PhpParser\Node\Expr\MethodCall $methodCall) : \_PhpScopere050faf861e6\PhpParser\Node\Expr\MethodCall
     {
         $servicesValues = $this->unNestArguments($servicesValues);
         foreach ($servicesValues as $key => $value) {
@@ -59,7 +59,7 @@ final class ServiceOptionNodeFactory
     private function shouldSkip(string $key) : bool
     {
         // options started by decoration_<option> are used as options of the method decorate().
-        if (\_PhpScoperfb0714773dc5\Nette\Utils\Strings::startsWith($key, 'decoration_')) {
+        if (\_PhpScopere050faf861e6\Nette\Utils\Strings::startsWith($key, 'decoration_')) {
             return \true;
         }
         return $key === 'alias';

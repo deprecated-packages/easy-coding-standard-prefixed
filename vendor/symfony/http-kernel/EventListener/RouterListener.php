@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScopere050faf861e6\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperfb0714773dc5\Psr\Log\LoggerInterface;
-use _PhpScoperfb0714773dc5\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Kernel;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScoperfb0714773dc5\Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use _PhpScoperfb0714773dc5\Symfony\Component\Routing\Exception\NoConfigurationException;
-use _PhpScoperfb0714773dc5\Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use _PhpScoperfb0714773dc5\Symfony\Component\Routing\Matcher\RequestMatcherInterface;
-use _PhpScoperfb0714773dc5\Symfony\Component\Routing\Matcher\UrlMatcherInterface;
-use _PhpScoperfb0714773dc5\Symfony\Component\Routing\RequestContext;
-use _PhpScoperfb0714773dc5\Symfony\Component\Routing\RequestContextAwareInterface;
+use _PhpScopere050faf861e6\Psr\Log\LoggerInterface;
+use _PhpScopere050faf861e6\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Request;
+use _PhpScopere050faf861e6\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\Kernel;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScopere050faf861e6\Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use _PhpScopere050faf861e6\Symfony\Component\Routing\Exception\NoConfigurationException;
+use _PhpScopere050faf861e6\Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use _PhpScopere050faf861e6\Symfony\Component\Routing\Matcher\RequestMatcherInterface;
+use _PhpScopere050faf861e6\Symfony\Component\Routing\Matcher\UrlMatcherInterface;
+use _PhpScopere050faf861e6\Symfony\Component\Routing\RequestContext;
+use _PhpScopere050faf861e6\Symfony\Component\Routing\RequestContextAwareInterface;
 /**
  * Initializes the context from the request and sets request attributes based on a matching route.
  *
@@ -38,7 +38,7 @@ use _PhpScoperfb0714773dc5\Symfony\Component\Routing\RequestContextAwareInterfac
  *
  * @final
  */
-class RouterListener implements \_PhpScoperfb0714773dc5\Symfony\Component\EventDispatcher\EventSubscriberInterface
+class RouterListener implements \_PhpScopere050faf861e6\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $matcher;
     private $context;
@@ -53,12 +53,12 @@ class RouterListener implements \_PhpScoperfb0714773dc5\Symfony\Component\EventD
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($matcher, \_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\RequestStack $requestStack, \_PhpScoperfb0714773dc5\Symfony\Component\Routing\RequestContext $context = null, \_PhpScoperfb0714773dc5\Psr\Log\LoggerInterface $logger = null, string $projectDir = null, bool $debug = \true)
+    public function __construct($matcher, \_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\RequestStack $requestStack, \_PhpScopere050faf861e6\Symfony\Component\Routing\RequestContext $context = null, \_PhpScopere050faf861e6\Psr\Log\LoggerInterface $logger = null, string $projectDir = null, bool $debug = \true)
     {
-        if (!$matcher instanceof \_PhpScoperfb0714773dc5\Symfony\Component\Routing\Matcher\UrlMatcherInterface && !$matcher instanceof \_PhpScoperfb0714773dc5\Symfony\Component\Routing\Matcher\RequestMatcherInterface) {
+        if (!$matcher instanceof \_PhpScopere050faf861e6\Symfony\Component\Routing\Matcher\UrlMatcherInterface && !$matcher instanceof \_PhpScopere050faf861e6\Symfony\Component\Routing\Matcher\RequestMatcherInterface) {
             throw new \InvalidArgumentException('Matcher must either implement UrlMatcherInterface or RequestMatcherInterface.');
         }
-        if (null === $context && !$matcher instanceof \_PhpScoperfb0714773dc5\Symfony\Component\Routing\RequestContextAwareInterface) {
+        if (null === $context && !$matcher instanceof \_PhpScopere050faf861e6\Symfony\Component\Routing\RequestContextAwareInterface) {
             throw new \InvalidArgumentException('You must either pass a RequestContext or the matcher must implement RequestContextAwareInterface.');
         }
         $this->matcher = $matcher;
@@ -68,13 +68,13 @@ class RouterListener implements \_PhpScoperfb0714773dc5\Symfony\Component\EventD
         $this->projectDir = $projectDir;
         $this->debug = $debug;
     }
-    private function setCurrentRequest(\_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Request $request = null)
+    private function setCurrentRequest(\_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Request $request = null)
     {
         if (null !== $request) {
             try {
                 $this->context->fromRequest($request);
             } catch (\UnexpectedValueException $e) {
-                throw new \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Exception\BadRequestHttpException($e->getMessage(), $e, $e->getCode());
+                throw new \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Exception\BadRequestHttpException($e->getMessage(), $e, $e->getCode());
             }
         }
     }
@@ -82,11 +82,11 @@ class RouterListener implements \_PhpScoperfb0714773dc5\Symfony\Component\EventD
      * After a sub-request is done, we need to reset the routing context to the parent request so that the URL generator
      * operates on the correct context again.
      */
-    public function onKernelFinishRequest(\_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event)
+    public function onKernelFinishRequest(\_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event)
     {
         $this->setCurrentRequest($this->requestStack->getParentRequest());
     }
-    public function onKernelRequest(\_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Event\RequestEvent $event)
+    public function onKernelRequest(\_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Event\RequestEvent $event)
     {
         $request = $event->getRequest();
         $this->setCurrentRequest($request);
@@ -97,7 +97,7 @@ class RouterListener implements \_PhpScoperfb0714773dc5\Symfony\Component\EventD
         // add attributes based on the request (routing)
         try {
             // matching a request is more powerful than matching a URL path + context, so try that first
-            if ($this->matcher instanceof \_PhpScoperfb0714773dc5\Symfony\Component\Routing\Matcher\RequestMatcherInterface) {
+            if ($this->matcher instanceof \_PhpScopere050faf861e6\Symfony\Component\Routing\Matcher\RequestMatcherInterface) {
                 $parameters = $this->matcher->matchRequest($request);
             } else {
                 $parameters = $this->matcher->match($request->getPathInfo());
@@ -108,37 +108,37 @@ class RouterListener implements \_PhpScoperfb0714773dc5\Symfony\Component\EventD
             $request->attributes->add($parameters);
             unset($parameters['_route'], $parameters['_controller']);
             $request->attributes->set('_route_params', $parameters);
-        } catch (\_PhpScoperfb0714773dc5\Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
+        } catch (\_PhpScopere050faf861e6\Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
             $message = \sprintf('No route found for "%s %s"', $request->getMethod(), $request->getPathInfo());
             if ($referer = $request->headers->get('referer')) {
                 $message .= \sprintf(' (from "%s")', $referer);
             }
-            throw new \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Exception\NotFoundHttpException($message, $e);
-        } catch (\_PhpScoperfb0714773dc5\Symfony\Component\Routing\Exception\MethodNotAllowedException $e) {
+            throw new \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Exception\NotFoundHttpException($message, $e);
+        } catch (\_PhpScopere050faf861e6\Symfony\Component\Routing\Exception\MethodNotAllowedException $e) {
             $message = \sprintf('No route found for "%s %s": Method Not Allowed (Allow: %s)', $request->getMethod(), $request->getPathInfo(), \implode(', ', $e->getAllowedMethods()));
-            throw new \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException($e->getAllowedMethods(), $message, $e);
+            throw new \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException($e->getAllowedMethods(), $message, $e);
         }
     }
-    public function onKernelException(\_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Event\ExceptionEvent $event)
+    public function onKernelException(\_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Event\ExceptionEvent $event)
     {
-        if (!$this->debug || !($e = $event->getThrowable()) instanceof \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+        if (!$this->debug || !($e = $event->getThrowable()) instanceof \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
             return;
         }
-        if ($e->getPrevious() instanceof \_PhpScoperfb0714773dc5\Symfony\Component\Routing\Exception\NoConfigurationException) {
+        if ($e->getPrevious() instanceof \_PhpScopere050faf861e6\Symfony\Component\Routing\Exception\NoConfigurationException) {
             $event->setResponse($this->createWelcomeResponse());
         }
     }
     public static function getSubscribedEvents() : array
     {
-        return [\_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 32]], \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', 0]], \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\KernelEvents::EXCEPTION => ['onKernelException', -64]];
+        return [\_PhpScopere050faf861e6\Symfony\Component\HttpKernel\KernelEvents::REQUEST => [['onKernelRequest', 32]], \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', 0]], \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\KernelEvents::EXCEPTION => ['onKernelException', -64]];
     }
-    private function createWelcomeResponse() : \_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response
+    private function createWelcomeResponse() : \_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response
     {
-        $version = \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Kernel::VERSION;
+        $version = \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Kernel::VERSION;
         $projectDir = \realpath($this->projectDir) . \DIRECTORY_SEPARATOR;
-        $docVersion = \substr(\_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Kernel::VERSION, 0, 3);
+        $docVersion = \substr(\_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Kernel::VERSION, 0, 3);
         \ob_start();
         include \dirname(__DIR__) . '/Resources/welcome.html.php';
-        return new \_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response(\ob_get_clean(), \_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response::HTTP_NOT_FOUND);
+        return new \_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response(\ob_get_clean(), \_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response::HTTP_NOT_FOUND);
     }
 }

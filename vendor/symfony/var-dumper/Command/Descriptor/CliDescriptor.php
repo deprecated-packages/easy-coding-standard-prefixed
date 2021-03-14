@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb0714773dc5\Symfony\Component\VarDumper\Command\Descriptor;
+namespace _PhpScopere050faf861e6\Symfony\Component\VarDumper\Command\Descriptor;
 
-use _PhpScoperfb0714773dc5\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use _PhpScoperfb0714773dc5\Symfony\Component\Console\Input\ArrayInput;
-use _PhpScoperfb0714773dc5\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperfb0714773dc5\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoperfb0714773dc5\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoperfb0714773dc5\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScopere050faf861e6\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use _PhpScopere050faf861e6\Symfony\Component\Console\Input\ArrayInput;
+use _PhpScopere050faf861e6\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere050faf861e6\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopere050faf861e6\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScopere050faf861e6\Symfony\Component\VarDumper\Dumper\CliDumper;
 /**
  * Describe collected data clones for cli output.
  *
@@ -23,19 +23,19 @@ use _PhpScoperfb0714773dc5\Symfony\Component\VarDumper\Dumper\CliDumper;
  *
  * @final
  */
-class CliDescriptor implements \_PhpScoperfb0714773dc5\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
+class CliDescriptor implements \_PhpScopere050faf861e6\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
 {
     private $dumper;
     private $lastIdentifier;
     private $supportsHref;
-    public function __construct(\_PhpScoperfb0714773dc5\Symfony\Component\VarDumper\Dumper\CliDumper $dumper)
+    public function __construct(\_PhpScopere050faf861e6\Symfony\Component\VarDumper\Dumper\CliDumper $dumper)
     {
         $this->dumper = $dumper;
-        $this->supportsHref = \method_exists(\_PhpScoperfb0714773dc5\Symfony\Component\Console\Formatter\OutputFormatterStyle::class, 'setHref');
+        $this->supportsHref = \method_exists(\_PhpScopere050faf861e6\Symfony\Component\Console\Formatter\OutputFormatterStyle::class, 'setHref');
     }
-    public function describe(\_PhpScoperfb0714773dc5\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoperfb0714773dc5\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) : void
+    public function describe(\_PhpScopere050faf861e6\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScopere050faf861e6\Symfony\Component\VarDumper\Cloner\Data $data, array $context, int $clientId) : void
     {
-        $io = $output instanceof \_PhpScoperfb0714773dc5\Symfony\Component\Console\Style\SymfonyStyle ? $output : new \_PhpScoperfb0714773dc5\Symfony\Component\Console\Style\SymfonyStyle(new \_PhpScoperfb0714773dc5\Symfony\Component\Console\Input\ArrayInput([]), $output);
+        $io = $output instanceof \_PhpScopere050faf861e6\Symfony\Component\Console\Style\SymfonyStyle ? $output : new \_PhpScopere050faf861e6\Symfony\Component\Console\Style\SymfonyStyle(new \_PhpScopere050faf861e6\Symfony\Component\Console\Input\ArrayInput([]), $output);
         $this->dumper->setColors($output->isDecorated());
         $rows = [['date', \date('r', $context['timestamp'])]];
         $lastIdentifier = $this->lastIdentifier;

@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\NodeFactory;
 
-use _PhpScoperfb0714773dc5\PhpParser\Node;
-use _PhpScoperfb0714773dc5\PhpParser\Node\Expr\Assign;
-use _PhpScoperfb0714773dc5\PhpParser\Node\Expr\MethodCall;
-use _PhpScoperfb0714773dc5\PhpParser\Node\Expr\Variable;
-use _PhpScoperfb0714773dc5\PhpParser\Node\Stmt\Expression;
-use _PhpScoperfb0714773dc5\PhpParser\Node\Stmt\Return_;
+use _PhpScopere050faf861e6\PhpParser\Node;
+use _PhpScopere050faf861e6\PhpParser\Node\Expr\Assign;
+use _PhpScopere050faf861e6\PhpParser\Node\Expr\MethodCall;
+use _PhpScopere050faf861e6\PhpParser\Node\Expr\Variable;
+use _PhpScopere050faf861e6\PhpParser\Node\Stmt\Expression;
+use _PhpScopere050faf861e6\PhpParser\Node\Stmt\Return_;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\PhpParser\NodeFactory\ConfiguratorClosureNodeFactory;
 use Symplify\PhpConfigPrinter\ValueObject\MethodName;
@@ -37,11 +37,11 @@ final class ContainerConfiguratorReturnClosureFactory
         $this->caseConverters = $caseConverters;
         $this->containerNestedNodesFactory = $containerNestedNodesFactory;
     }
-    public function createFromYamlArray(array $arrayData) : \_PhpScoperfb0714773dc5\PhpParser\Node\Stmt\Return_
+    public function createFromYamlArray(array $arrayData) : \_PhpScopere050faf861e6\PhpParser\Node\Stmt\Return_
     {
         $stmts = $this->createClosureStmts($arrayData);
         $closure = $this->configuratorClosureNodeFactory->createContainerClosureFromStmts($stmts);
-        return new \_PhpScoperfb0714773dc5\PhpParser\Node\Stmt\Return_($closure);
+        return new \_PhpScopere050faf861e6\PhpParser\Node\Stmt\Return_($closure);
     }
     /**
      * @return Node[]
@@ -70,7 +70,7 @@ final class ContainerConfiguratorReturnClosureFactory
                     continue;
                 }
                 $expression = $this->resolveExpression($key, $nestedKey, $nestedValues);
-                if (!$expression instanceof \_PhpScoperfb0714773dc5\PhpParser\Node\Stmt\Expression) {
+                if (!$expression instanceof \_PhpScopere050faf861e6\PhpParser\Node\Stmt\Expression) {
                     continue;
                 }
                 $nodes[] = $expression;
@@ -78,12 +78,12 @@ final class ContainerConfiguratorReturnClosureFactory
         }
         return $nodes;
     }
-    private function createInitializeAssign(string $variableName, string $methodName) : \_PhpScoperfb0714773dc5\PhpParser\Node\Stmt\Expression
+    private function createInitializeAssign(string $variableName, string $methodName) : \_PhpScopere050faf861e6\PhpParser\Node\Stmt\Expression
     {
-        $servicesVariable = new \_PhpScoperfb0714773dc5\PhpParser\Node\Expr\Variable($variableName);
-        $containerConfiguratorVariable = new \_PhpScoperfb0714773dc5\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
-        $assign = new \_PhpScoperfb0714773dc5\PhpParser\Node\Expr\Assign($servicesVariable, new \_PhpScoperfb0714773dc5\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, $methodName));
-        return new \_PhpScoperfb0714773dc5\PhpParser\Node\Stmt\Expression($assign);
+        $servicesVariable = new \_PhpScopere050faf861e6\PhpParser\Node\Expr\Variable($variableName);
+        $containerConfiguratorVariable = new \_PhpScopere050faf861e6\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::CONTAINER_CONFIGURATOR);
+        $assign = new \_PhpScopere050faf861e6\PhpParser\Node\Expr\Assign($servicesVariable, new \_PhpScopere050faf861e6\PhpParser\Node\Expr\MethodCall($containerConfiguratorVariable, $methodName));
+        return new \_PhpScopere050faf861e6\PhpParser\Node\Stmt\Expression($assign);
     }
     /**
      * @return mixed[]
@@ -102,7 +102,7 @@ final class ContainerConfiguratorReturnClosureFactory
      * @param int|string $nestedKey
      * @param mixed|mixed[] $nestedValues
      */
-    private function resolveExpression(string $key, $nestedKey, $nestedValues) : ?\_PhpScoperfb0714773dc5\PhpParser\Node\Stmt\Expression
+    private function resolveExpression(string $key, $nestedKey, $nestedValues) : ?\_PhpScopere050faf861e6\PhpParser\Node\Stmt\Expression
     {
         foreach ($this->caseConverters as $caseConverter) {
             if (!$caseConverter->match($key, $nestedKey, $nestedValues)) {

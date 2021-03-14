@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\Command;
 
-use _PhpScoperfb0714773dc5\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperfb0714773dc5\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperfb0714773dc5\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere050faf861e6\Symfony\Component\Console\Input\InputArgument;
+use _PhpScopere050faf861e6\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopere050faf861e6\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyTesting\Finder\FixtureFinder;
 use Symplify\EasyTesting\MissplacedSkipPrefixResolver;
 use Symplify\EasyTesting\ValueObject\Option;
@@ -29,10 +29,10 @@ final class ValidateFixtureSkipNamingCommand extends \Symplify\PackageBuilder\Co
     }
     protected function configure() : void
     {
-        $this->addArgument(\Symplify\EasyTesting\ValueObject\Option::SOURCE, \_PhpScoperfb0714773dc5\Symfony\Component\Console\Input\InputArgument::REQUIRED | \_PhpScoperfb0714773dc5\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Paths to analyse');
+        $this->addArgument(\Symplify\EasyTesting\ValueObject\Option::SOURCE, \_PhpScopere050faf861e6\Symfony\Component\Console\Input\InputArgument::REQUIRED | \_PhpScopere050faf861e6\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'Paths to analyse');
         $this->setDescription('Check that skipped fixture files (without `-----` separator) have a "skip" prefix');
     }
-    protected function execute(\_PhpScoperfb0714773dc5\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperfb0714773dc5\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScopere050faf861e6\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopere050faf861e6\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $source = (array) $input->getArgument(\Symplify\EasyTesting\ValueObject\Option::SOURCE);
         $fixtureFileInfos = $this->fixtureFinder->find($source);

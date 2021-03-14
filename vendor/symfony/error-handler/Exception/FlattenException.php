@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfb0714773dc5\Symfony\Component\ErrorHandler\Exception;
+namespace _PhpScopere050faf861e6\Symfony\Component\ErrorHandler\Exception;
 
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use _PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
+use _PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response;
+use _PhpScopere050faf861e6\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 /**
  * FlattenException wraps a PHP Error or Exception to be able to serialize it.
  *
@@ -49,17 +49,17 @@ class FlattenException
         $e = new static();
         $e->setMessage($exception->getMessage());
         $e->setCode($exception->getCode());
-        if ($exception instanceof \_PhpScoperfb0714773dc5\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
+        if ($exception instanceof \_PhpScopere050faf861e6\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface) {
             $statusCode = $exception->getStatusCode();
             $headers = \array_merge($headers, $exception->getHeaders());
-        } elseif ($exception instanceof \_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
+        } elseif ($exception instanceof \_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface) {
             $statusCode = 400;
         }
         if (null === $statusCode) {
             $statusCode = 500;
         }
-        if (\class_exists(\_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response::class) && isset(\_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode])) {
-            $statusText = \_PhpScoperfb0714773dc5\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode];
+        if (\class_exists(\_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response::class) && isset(\_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode])) {
+            $statusText = \_PhpScopere050faf861e6\Symfony\Component\HttpFoundation\Response::$statusTexts[$statusCode];
         } else {
             $statusText = 'Whoops, looks like something went wrong.';
         }
