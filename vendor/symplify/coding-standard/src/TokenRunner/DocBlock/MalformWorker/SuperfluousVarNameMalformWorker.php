@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper8a7636b3fdaf\Nette\Utils\Strings;
+use _PhpScoper971ef29294dd\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -31,16 +31,16 @@ final class SuperfluousVarNameMalformWorker implements \Symplify\CodingStandard\
         $docBlock = new \PhpCsFixer\DocBlock\DocBlock($docContent);
         $lines = $docBlock->getLines();
         foreach ($lines as $line) {
-            $match = \_PhpScoper8a7636b3fdaf\Nette\Utils\Strings::match($line->getContent(), self::VAR_VARIABLE_NAME_REGEX);
+            $match = \_PhpScoper971ef29294dd\Nette\Utils\Strings::match($line->getContent(), self::VAR_VARIABLE_NAME_REGEX);
             if ($match === null) {
                 continue;
             }
-            $newLineContent = \_PhpScoper8a7636b3fdaf\Nette\Utils\Strings::replace($line->getContent(), self::VAR_VARIABLE_NAME_REGEX, function (array $match) : string {
+            $newLineContent = \_PhpScoper971ef29294dd\Nette\Utils\Strings::replace($line->getContent(), self::VAR_VARIABLE_NAME_REGEX, function (array $match) : string {
                 $replacement = $match['tag'];
                 if ($match['type'] !== []) {
                     $replacement .= $match['type'];
                 }
-                if (\_PhpScoper8a7636b3fdaf\Nette\Utils\Strings::match($match['propertyName'], self::THIS_VARIABLE_REGEX)) {
+                if (\_PhpScoper971ef29294dd\Nette\Utils\Strings::match($match['propertyName'], self::THIS_VARIABLE_REGEX)) {
                     return $match['tag'] . ' self';
                 }
                 return $replacement;

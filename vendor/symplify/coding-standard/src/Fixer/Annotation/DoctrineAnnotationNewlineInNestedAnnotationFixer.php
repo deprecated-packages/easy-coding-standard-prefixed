@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Annotation;
 
-use _PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\DocLexer;
-use _PhpScoper8a7636b3fdaf\Nette\Utils\Strings;
+use _PhpScoper971ef29294dd\Doctrine\Common\Annotations\DocLexer;
+use _PhpScoper971ef29294dd\Nette\Utils\Strings;
 use PhpCsFixer\AbstractDoctrineAnnotationFixer;
 use PhpCsFixer\Doctrine\Annotation\Token;
 use PhpCsFixer\Doctrine\Annotation\Tokens;
@@ -86,7 +86,7 @@ CODE_SAMPLE
         for ($index = 0; $index < $tokenCount; ++$index) {
             /** @var Token $currentToken */
             $currentToken = $tokens[$index];
-            if (!$currentToken->isType(\_PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\DocLexer::T_AT)) {
+            if (!$currentToken->isType(\_PhpScoper971ef29294dd\Doctrine\Common\Annotations\DocLexer::T_AT)) {
                 continue;
             }
             /** @var Token|null $previousToken */
@@ -98,9 +98,9 @@ CODE_SAMPLE
             if ($this->shouldSkip($index, $tokens, $previousToken)) {
                 continue;
             }
-            $tokens->insertAt($index, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\DocLexer::T_NONE, ' * '));
-            $tokens->insertAt($index, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\DocLexer::T_NONE, "\n"));
-            $tNone = $previousToken->isType(\_PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\DocLexer::T_NONE);
+            $tokens->insertAt($index, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper971ef29294dd\Doctrine\Common\Annotations\DocLexer::T_NONE, ' * '));
+            $tokens->insertAt($index, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper971ef29294dd\Doctrine\Common\Annotations\DocLexer::T_NONE, "\n"));
+            $tNone = $previousToken->isType(\_PhpScoper971ef29294dd\Doctrine\Common\Annotations\DocLexer::T_NONE);
             // remove redundant space
             if ($tNone) {
                 $tokens->offsetUnset($previousTokenPosition);
@@ -110,8 +110,8 @@ CODE_SAMPLE
     }
     private function isDocOpener(\PhpCsFixer\Doctrine\Annotation\Token $token) : bool
     {
-        if ($token->isType(\_PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\DocLexer::T_NONE)) {
-            return \_PhpScoper8a7636b3fdaf\Nette\Utils\Strings::contains($token->getContent(), '*');
+        if ($token->isType(\_PhpScoper971ef29294dd\Doctrine\Common\Annotations\DocLexer::T_NONE)) {
+            return \_PhpScoper971ef29294dd\Nette\Utils\Strings::contains($token->getContent(), '*');
         }
         return \false;
     }
@@ -123,7 +123,7 @@ CODE_SAMPLE
         /** @var Token $previousToken */
         $previousToken = $tokens->offsetGet($previousTokenPosition);
         // already a space → skip
-        if ($previousToken->isType(\_PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\DocLexer::T_NONE)) {
+        if ($previousToken->isType(\_PhpScoper971ef29294dd\Doctrine\Common\Annotations\DocLexer::T_NONE)) {
             return;
         }
         // reset
@@ -135,8 +135,8 @@ CODE_SAMPLE
             $this->currentBlockInfo = $this->doctrineBlockFinder->findInTokensByEdge($tokens, $previousTokenPosition);
         }
         if ($this->currentBlockInfo !== null) {
-            $tokens->insertAt($this->currentBlockInfo->getEnd(), new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\DocLexer::T_NONE, ' * '));
-            $tokens->insertAt($this->currentBlockInfo->getEnd(), new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\DocLexer::T_NONE, "\n"));
+            $tokens->insertAt($this->currentBlockInfo->getEnd(), new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper971ef29294dd\Doctrine\Common\Annotations\DocLexer::T_NONE, ' * '));
+            $tokens->insertAt($this->currentBlockInfo->getEnd(), new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScoper971ef29294dd\Doctrine\Common\Annotations\DocLexer::T_NONE, "\n"));
         }
     }
     /**
@@ -153,7 +153,7 @@ CODE_SAMPLE
         if (!$nextToken instanceof \PhpCsFixer\Doctrine\Annotation\Token) {
             return \true;
         }
-        if (!\_PhpScoper8a7636b3fdaf\Nette\Utils\Strings::startsWith($nextToken->getContent(), 'ORM')) {
+        if (!\_PhpScoper971ef29294dd\Nette\Utils\Strings::startsWith($nextToken->getContent(), 'ORM')) {
             return \true;
         }
         // not an entity annotation, just some comment

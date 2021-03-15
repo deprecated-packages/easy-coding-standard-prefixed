@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a7636b3fdaf\Symfony\Component\String\Inflector;
+namespace _PhpScoper971ef29294dd\Symfony\Component\String\Inflector;
 
 /**
  * French inflector.
  *
  * This class does only inflect nouns; not adjectives nor composed words like "soixante-dix".
  */
-final class FrenchInflector implements \_PhpScoper8a7636b3fdaf\Symfony\Component\String\Inflector\InflectorInterface
+final class FrenchInflector implements \_PhpScoper971ef29294dd\Symfony\Component\String\Inflector\InflectorInterface
 {
     /**
      * A list of all rules for pluralise.
@@ -50,8 +50,8 @@ final class FrenchInflector implements \_PhpScoper8a7636b3fdaf\Symfony\Component
         // Invariable words
         ['/^(cinquante|soixante|mille)$/i', '\\1'],
         // French titles
-        ['/^(mon|ma)(sieur|dame|demoiselle|seigneur)$/', '_PhpScoper8a7636b3fdaf\\mes\\2s'],
-        ['/^(Mon|Ma)(sieur|dame|demoiselle|seigneur)$/', '_PhpScoper8a7636b3fdaf\\Mes\\2s'],
+        ['/^(mon|ma)(sieur|dame|demoiselle|seigneur)$/', '_PhpScoper971ef29294dd\\mes\\2s'],
+        ['/^(Mon|Ma)(sieur|dame|demoiselle|seigneur)$/', '_PhpScoper971ef29294dd\\Mes\\2s'],
     ];
     /**
      * A list of all rules for singularize.
@@ -77,10 +77,10 @@ final class FrenchInflector implements \_PhpScoper8a7636b3fdaf\Symfony\Component
         // Les mots finissant par "ou" prennent un "s" sauf bijou, caillou, chou, genou, hibou, joujou, pou
         ['/(bij|caill|ch|gen|hib|jouj|p)oux$/i', '\\1ou'],
         // French titles
-        ['/^mes(dame|demoiselle)s$/', '_PhpScoper8a7636b3fdaf\\ma\\1'],
-        ['/^Mes(dame|demoiselle)s$/', '_PhpScoper8a7636b3fdaf\\Ma\\1'],
-        ['/^mes(sieur|seigneur)s$/', '_PhpScoper8a7636b3fdaf\\mon\\1'],
-        ['/^Mes(sieur|seigneur)s$/', '_PhpScoper8a7636b3fdaf\\Mon\\1'],
+        ['/^mes(dame|demoiselle)s$/', '_PhpScoper971ef29294dd\\ma\\1'],
+        ['/^Mes(dame|demoiselle)s$/', '_PhpScoper971ef29294dd\\Ma\\1'],
+        ['/^mes(sieur|seigneur)s$/', '_PhpScoper971ef29294dd\\mon\\1'],
+        ['/^Mes(sieur|seigneur)s$/', '_PhpScoper971ef29294dd\\Mon\\1'],
         //Default rule
         ['/s$/i', ''],
     ];

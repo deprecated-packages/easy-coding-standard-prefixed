@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a7636b3fdaf\Symfony\Component\Finder\Iterator;
+namespace _PhpScoper971ef29294dd\Symfony\Component\Finder\Iterator;
 
-use _PhpScoper8a7636b3fdaf\Symfony\Component\Finder\Exception\AccessDeniedException;
-use _PhpScoper8a7636b3fdaf\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper971ef29294dd\Symfony\Component\Finder\Exception\AccessDeniedException;
+use _PhpScoper971ef29294dd\Symfony\Component\Finder\SplFileInfo;
 /**
  * Extends the \RecursiveDirectoryIterator to support relative paths.
  *
@@ -64,7 +64,7 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
         if ('/' !== ($basePath = $this->rootPath)) {
             $basePath .= $this->directorySeparator;
         }
-        return new \_PhpScoper8a7636b3fdaf\Symfony\Component\Finder\SplFileInfo($basePath . $subPathname, $this->subPath, $subPathname);
+        return new \_PhpScoper971ef29294dd\Symfony\Component\Finder\SplFileInfo($basePath . $subPathname, $this->subPath, $subPathname);
     }
     /**
      * @return \RecursiveIterator
@@ -88,7 +88,7 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
                 // If directory is unreadable and finder is set to ignore it, a fake empty content is returned.
                 return new \RecursiveArrayIterator([]);
             } else {
-                throw new \_PhpScoper8a7636b3fdaf\Symfony\Component\Finder\Exception\AccessDeniedException($e->getMessage(), $e->getCode(), $e);
+                throw new \_PhpScoper971ef29294dd\Symfony\Component\Finder\Exception\AccessDeniedException($e->getMessage(), $e->getCode(), $e);
             }
         }
     }
