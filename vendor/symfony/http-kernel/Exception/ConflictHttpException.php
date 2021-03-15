@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class ConflictHttpException extends \_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Exception\HttpException
+class ConflictHttpException extends \_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string|null     $message  The internal exception message

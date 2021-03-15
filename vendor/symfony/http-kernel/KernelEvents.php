@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3d66e802e797\Symfony\Component\HttpKernel;
+namespace _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel;
 
-use _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ControllerEvent;
-use _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\TerminateEvent;
-use _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ViewEvent;
+use _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\TerminateEvent;
+use _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ViewEvent;
 /**
  * Contains all events thrown in the HttpKernel component.
  *
@@ -105,5 +105,5 @@ final class KernelEvents
      *
      * These aliases can be consumed by RegisterListenersPass.
      */
-    public const ALIASES = [\_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent::class => self::CONTROLLER_ARGUMENTS, \_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ControllerEvent::class => self::CONTROLLER, \_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ResponseEvent::class => self::RESPONSE, \_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\FinishRequestEvent::class => self::FINISH_REQUEST, \_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\RequestEvent::class => self::REQUEST, \_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ViewEvent::class => self::VIEW, \_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\ExceptionEvent::class => self::EXCEPTION, \_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Event\TerminateEvent::class => self::TERMINATE];
+    public const ALIASES = [\_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent::class => self::CONTROLLER_ARGUMENTS, \_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ControllerEvent::class => self::CONTROLLER, \_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ResponseEvent::class => self::RESPONSE, \_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\FinishRequestEvent::class => self::FINISH_REQUEST, \_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\RequestEvent::class => self::REQUEST, \_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ViewEvent::class => self::VIEW, \_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\ExceptionEvent::class => self::EXCEPTION, \_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Event\TerminateEvent::class => self::TERMINATE];
 }

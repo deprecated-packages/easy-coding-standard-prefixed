@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace Symplify\EasyCodingStandard\ChangedFilesDetector\Tests;
+namespace Symplify\EasyCodingStandard\ChangedFilesDetector\Tests\ChangedFilesDetector;
 
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
@@ -20,9 +20,9 @@ final class ChangedFilesDetectorTest extends \Symplify\PackageBuilder\Testing\Ab
     protected function setUp() : void
     {
         $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $this->smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/ChangedFilesDetectorSource/OneClass.php');
+        $this->smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/Source/OneClass.php');
         $this->changedFilesDetector = $this->getService(\Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector::class);
-        $this->changedFilesDetector->changeConfigurationFile(__DIR__ . '/ChangedFilesDetectorSource/easy-coding-standard.php');
+        $this->changedFilesDetector->changeConfigurationFile(__DIR__ . '/Source/easy-coding-standard.php');
     }
     public function testAddFile() : void
     {
@@ -38,7 +38,7 @@ final class ChangedFilesDetectorTest extends \Symplify\PackageBuilder\Testing\Ab
     {
         $this->changedFilesDetector->addFileInfo($this->smartFileInfo);
         $this->assertFileHasNotChanged($this->smartFileInfo);
-        $this->changedFilesDetector->changeConfigurationFile(__DIR__ . '/ChangedFilesDetectorSource/another-configuration.php');
+        $this->changedFilesDetector->changeConfigurationFile(__DIR__ . '/Source/another-configuration.php');
         $this->assertFileHasChanged($this->smartFileInfo);
     }
     private function assertFileHasChanged(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : void

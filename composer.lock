@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0dfc615b6a661bd479f0df7ab7e9d88c",
+    "content-hash": "c1fa47680b23d9881bb866e9521db302",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -3976,7 +3976,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/package-builder",
-                "reference": "564c584afdb8627db1d62e4f21c9f527e32fd655"
+                "reference": "0846abe46364a9885a91b0523543cac7646022cf"
             },
             "require": {
                 "nette/neon": "^3.2",
@@ -3987,7 +3987,6 @@
                 "symfony/dependency-injection": "^5.2",
                 "symfony/finder": "^4.4|^5.2",
                 "symfony/http-kernel": "^4.4|^5.2",
-                "symfony/yaml": "^4.4|^5.2",
                 "symplify/easy-testing": "dev-main",
                 "symplify/symplify-kernel": "dev-main"
             },
@@ -4025,13 +4024,14 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/php-config-printer",
-                "reference": "9437191718f8c391164702e38b97307078b3cfaa"
+                "reference": "0f4b573fa10a054f3ce650403e94720c46955a27"
             },
             "require": {
                 "nette/utils": "^3.2",
                 "nikic/php-parser": "^4.10.4",
                 "php": ">=7.3",
                 "symfony/http-kernel": "^4.4|^5.2",
+                "symfony/yaml": "^4.4|^5.2",
                 "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
@@ -4129,7 +4129,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/set-config-resolver",
-                "reference": "c3ccd7344d375af0072b3e246dd54c3877e52049"
+                "reference": "903b9eb865a456cf52e1af96038f576dfa81adb5"
             },
             "require": {
                 "nette/utils": "^3.2",
@@ -4139,7 +4139,6 @@
                 "symfony/dependency-injection": "^5.2",
                 "symfony/filesystem": "^4.4|^5.2",
                 "symfony/finder": "^4.4|^5.2",
-                "symfony/yaml": "^4.4|^5.2",
                 "symplify/smart-file-system": "dev-main",
                 "symplify/symplify-kernel": "dev-main"
             },

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Kris Wallsmith <kris@symfony.com>
  */
-class MethodNotAllowedHttpException extends \_PhpScoper3d66e802e797\Symfony\Component\HttpKernel\Exception\HttpException
+class MethodNotAllowedHttpException extends \_PhpScoper8163b0b2b8f3\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string[]        $allow    An array of allowed methods

@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\RuleSet;
 
-use _PhpScoper3d66e802e797\Symfony\Component\Finder\Finder;
+use _PhpScoper8163b0b2b8f3\Symfony\Component\Finder\Finder;
 /**
  * Set of rule sets to be used by fixer.
  *
@@ -29,7 +29,7 @@ final class RuleSets
     {
         if (null === self::$setDefinitions) {
             self::$setDefinitions = [];
-            foreach (\_PhpScoper3d66e802e797\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Sets') as $file) {
+            foreach (\_PhpScoper8163b0b2b8f3\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Sets') as $file) {
                 $class = 'PhpCsFixer\\RuleSet\\Sets\\' . $file->getBasename('.php');
                 $set = new $class();
                 self::$setDefinitions[$set->getName()] = $set;

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3d66e802e797\Symfony\Component\OptionsResolver\Exception;
+namespace _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception;
 
 /**
  * Thrown when trying to read an option outside of or write it inside of
@@ -16,6 +16,6 @@ namespace _PhpScoper3d66e802e797\Symfony\Component\OptionsResolver\Exception;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class AccessException extends \LogicException implements \_PhpScoper3d66e802e797\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
+class AccessException extends \LogicException implements \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
 {
 }

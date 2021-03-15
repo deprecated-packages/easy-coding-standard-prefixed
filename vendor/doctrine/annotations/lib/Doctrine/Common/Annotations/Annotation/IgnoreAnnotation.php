@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper3d66e802e797\Doctrine\Common\Annotations\Annotation;
+namespace _PhpScoper8163b0b2b8f3\Doctrine\Common\Annotations\Annotation;
 
 use RuntimeException;
 use function is_array;

@@ -15,7 +15,6 @@ final class DummySetProvider extends \Symplify\SetConfigResolver\Provider\Abstra
     private $sets = [];
     public function __construct()
     {
-        $this->sets[] = new \Symplify\SetConfigResolver\ValueObject\Set('some_set', new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/../Source/some_set.yaml'));
         $this->sets[] = new \Symplify\SetConfigResolver\ValueObject\Set('some_php_set', new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/../Source/some_php_set.php'));
     }
     /**
