@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper64e7ad844899\PhpParser;
+namespace _PhpScoper8a7636b3fdaf\PhpParser;
 
 interface ErrorHandler
 {
@@ -10,5 +10,5 @@ interface ErrorHandler
      *
      * @param Error $error The error that needs to be handled
      */
-    public function handleError(\_PhpScoper64e7ad844899\PhpParser\Error $error);
+    public function handleError(\_PhpScoper8a7636b3fdaf\PhpParser\Error $error);
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper64e7ad844899\Doctrine\Common\Annotations\Annotation;
+namespace _PhpScoper8a7636b3fdaf\Doctrine\Common\Annotations\Annotation;
 
 use InvalidArgumentException;
 use function get_class;
