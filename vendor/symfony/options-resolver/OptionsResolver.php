@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver;
+namespace _PhpScoper64e7ad844899\Symfony\Component\OptionsResolver;
 
-use _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException;
-use _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
-use _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\NoSuchOptionException;
-use _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException;
-use _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
+use _PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException;
+use _PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
+use _PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
+use _PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\NoSuchOptionException;
+use _PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException;
+use _PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 /**
  * Validates options and merges them with default values.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Options
+class OptionsResolver implements \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Options
 {
     private const VALIDATION_FUNCTIONS = ['bool' => 'is_bool', 'boolean' => 'is_bool', 'int' => 'is_int', 'integer' => 'is_int', 'long' => 'is_int', 'float' => 'is_float', 'double' => 'is_float', 'real' => 'is_float', 'numeric' => 'is_numeric', 'string' => 'is_string', 'scalar' => 'is_scalar', 'array' => 'is_array', 'iterable' => 'is_iterable', 'countable' => 'is_countable', 'callable' => 'is_callable', 'object' => 'is_object', 'resource' => 'is_resource'];
     /**
@@ -154,14 +154,14 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
         // options could manipulate the state of the object, leading to
         // inconsistent results.
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Default values cannot be set from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Default values cannot be set from a lazy option or normalizer.');
         }
         // If an option is a closure that should be evaluated lazily, store it
         // in the "lazy" property.
         if ($value instanceof \Closure) {
             $reflClosure = new \ReflectionFunction($value);
             $params = $reflClosure->getParameters();
-            if (isset($params[0]) && \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Options::class === $this->getParameterClassName($params[0])) {
+            if (isset($params[0]) && \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Options::class === $this->getParameterClassName($params[0])) {
                 // Initialize the option if no previous value exists
                 if (!isset($this->defaults[$option])) {
                     $this->defaults[$option] = null;
@@ -177,7 +177,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
                 unset($this->resolved[$option], $this->nested[$option]);
                 return $this;
             }
-            if (isset($params[0]) && null !== ($type = $params[0]->getType()) && self::class === $type->getName() && (!isset($params[1]) || ($type = $params[1]->getType()) instanceof \ReflectionNamedType && \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Options::class === $type->getName())) {
+            if (isset($params[0]) && null !== ($type = $params[0]->getType()) && self::class === $type->getName() && (!isset($params[1]) || ($type = $params[1]->getType()) instanceof \ReflectionNamedType && \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Options::class === $type->getName())) {
                 // Store closure for later evaluation
                 $this->nested[$option][] = $value;
                 $this->defaults[$option] = [];
@@ -242,7 +242,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function setRequired($optionNames)
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be made required from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be made required from a lazy option or normalizer.');
         }
         foreach ((array) $optionNames as $option) {
             $this->defined[$option] = \true;
@@ -316,7 +316,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function setDefined($optionNames)
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be defined from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be defined from a lazy option or normalizer.');
         }
         foreach ((array) $optionNames as $option) {
             $this->defined[$option] = \true;
@@ -376,10 +376,10 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function setDeprecated(string $option) : self
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be deprecated from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be deprecated from a lazy option or normalizer.');
         }
         if (!isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist, defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist, defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         $args = \func_get_args();
         if (\func_num_args() < 3) {
@@ -392,7 +392,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
             $message = $args[3] ?? 'The option "%name%" is deprecated.';
         }
         if (!\is_string($message) && !$message instanceof \Closure) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException(\sprintf('Invalid type for deprecation message argument, expected string or \\Closure, but got "%s".', \get_debug_type($message)));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException(\sprintf('Invalid type for deprecation message argument, expected string or \\Closure, but got "%s".', \get_debug_type($message)));
         }
         // ignore if empty string
         if ('' === $message) {
@@ -436,10 +436,10 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function setNormalizer(string $option, \Closure $normalizer)
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Normalizers cannot be set from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Normalizers cannot be set from a lazy option or normalizer.');
         }
         if (!isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         $this->normalizers[$option] = [$normalizer];
         // Make sure the option is processed
@@ -476,10 +476,10 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function addNormalizer(string $option, \Closure $normalizer, bool $forcePrepend = \false) : self
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Normalizers cannot be set from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Normalizers cannot be set from a lazy option or normalizer.');
         }
         if (!isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         if ($forcePrepend) {
             $this->normalizers[$option] = $this->normalizers[$option] ?? [];
@@ -515,10 +515,10 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function setAllowedValues(string $option, $allowedValues)
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Allowed values cannot be set from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Allowed values cannot be set from a lazy option or normalizer.');
         }
         if (!isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         $this->allowedValues[$option] = \is_array($allowedValues) ? $allowedValues : [$allowedValues];
         // Make sure the option is processed
@@ -551,10 +551,10 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function addAllowedValues(string $option, $allowedValues)
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Allowed values cannot be added from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Allowed values cannot be added from a lazy option or normalizer.');
         }
         if (!isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         if (!\is_array($allowedValues)) {
             $allowedValues = [$allowedValues];
@@ -586,10 +586,10 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function setAllowedTypes(string $option, $allowedTypes)
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Allowed types cannot be set from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Allowed types cannot be set from a lazy option or normalizer.');
         }
         if (!isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         $this->allowedTypes[$option] = (array) $allowedTypes;
         // Make sure the option is processed
@@ -616,10 +616,10 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function addAllowedTypes(string $option, $allowedTypes)
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Allowed types cannot be added from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Allowed types cannot be added from a lazy option or normalizer.');
         }
         if (!isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         if (!isset($this->allowedTypes[$option])) {
             $this->allowedTypes[$option] = (array) $allowedTypes;
@@ -633,12 +633,12 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     /**
      * Defines an option configurator with the given name.
      */
-    public function define(string $option) : \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\OptionConfigurator
+    public function define(string $option) : \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\OptionConfigurator
     {
         if (isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The option "%s" is already defined.', $option));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The option "%s" is already defined.', $option));
         }
-        return new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\OptionConfigurator($option, $this);
+        return new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\OptionConfigurator($option, $this);
     }
     /**
      * Sets an info message for an option.
@@ -651,10 +651,10 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function setInfo(string $option, string $info) : self
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('The Info message cannot be set from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('The Info message cannot be set from a lazy option or normalizer.');
         }
         if (!isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         $this->info[$option] = $info;
         return $this;
@@ -665,7 +665,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function getInfo(string $option) : ?string
     {
         if (!isset($this->defined[$option])) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         return $this->info[$option] ?? null;
     }
@@ -683,7 +683,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function remove($optionNames)
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be removed from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be removed from a lazy option or normalizer.');
         }
         foreach ((array) $optionNames as $option) {
             unset($this->defined[$option], $this->defaults[$option], $this->required[$option], $this->resolved[$option]);
@@ -701,7 +701,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function clear()
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be cleared from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be cleared from a lazy option or normalizer.');
         }
         $this->defined = [];
         $this->defaults = [];
@@ -743,7 +743,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function resolve(array $options = [])
     {
         if ($this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be resolved from a lazy option or normalizer.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Options cannot be resolved from a lazy option or normalizer.');
         }
         // Allow this method to be called multiple times
         $clone = clone $this;
@@ -752,7 +752,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
         if (\count($diff) > 0) {
             \ksort($clone->defined);
             \ksort($diff);
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf((\count($diff) > 1 ? 'The options "%s" do not exist.' : 'The option "%s" does not exist.') . ' Defined options are: "%s".', $this->formatOptions(\array_keys($diff)), \implode('", "', \array_keys($clone->defined))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException(\sprintf((\count($diff) > 1 ? 'The options "%s" do not exist.' : 'The option "%s" does not exist.') . ' Defined options are: "%s".', $this->formatOptions(\array_keys($diff)), \implode('", "', \array_keys($clone->defined))));
         }
         // Override options set by the user
         foreach ($options as $option => $value) {
@@ -764,7 +764,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
         $diff = \array_diff_key($clone->required, $clone->defaults);
         if (\count($diff) > 0) {
             \ksort($diff);
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\MissingOptionsException(\sprintf(\count($diff) > 1 ? 'The required options "%s" are missing.' : 'The required option "%s" is missing.', $this->formatOptions(\array_keys($diff))));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\MissingOptionsException(\sprintf(\count($diff) > 1 ? 'The required options "%s" are missing.' : 'The required option "%s" is missing.', $this->formatOptions(\array_keys($diff))));
         }
         // Lock the container
         $clone->locked = \true;
@@ -794,7 +794,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function offsetGet($option, bool $triggerDeprecation = \true)
     {
         if (!$this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Array access is only supported within closures of lazy options and normalizers.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Array access is only supported within closures of lazy options and normalizers.');
         }
         // Shortcut for resolved options
         if (isset($this->resolved[$option]) || \array_key_exists($option, $this->resolved)) {
@@ -806,19 +806,19 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
         // Check whether the option is set at all
         if (!isset($this->defaults[$option]) && !\array_key_exists($option, $this->defaults)) {
             if (!isset($this->defined[$option])) {
-                throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\NoSuchOptionException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
+                throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\NoSuchOptionException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
             }
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\NoSuchOptionException(\sprintf('The optional option "%s" has no value set. You should make sure it is set with "isset" before reading it.', $this->formatOptions([$option])));
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\NoSuchOptionException(\sprintf('The optional option "%s" has no value set. You should make sure it is set with "isset" before reading it.', $this->formatOptions([$option])));
         }
         $value = $this->defaults[$option];
         // Resolve the option if it is a nested definition
         if (isset($this->nested[$option])) {
             // If the closure is already being called, we have a cyclic dependency
             if (isset($this->calling[$option])) {
-                throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The options "%s" have a cyclic dependency.', $this->formatOptions(\array_keys($this->calling))));
+                throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The options "%s" have a cyclic dependency.', $this->formatOptions(\array_keys($this->calling))));
             }
             if (!\is_array($value)) {
-                throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('The nested option "%s" with value %s is expected to be of type array, but is of type "%s".', $this->formatOptions([$option]), $this->formatValue($value), \get_debug_type($value)));
+                throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('The nested option "%s" with value %s is expected to be of type array, but is of type "%s".', $this->formatOptions([$option]), $this->formatValue($value), \get_debug_type($value)));
             }
             // The following section must be protected from cyclic calls.
             $this->calling[$option] = \true;
@@ -839,7 +839,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
             // If the closure is already being called, we have a cyclic
             // dependency
             if (isset($this->calling[$option])) {
-                throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The options "%s" have a cyclic dependency.', $this->formatOptions(\array_keys($this->calling))));
+                throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The options "%s" have a cyclic dependency.', $this->formatOptions(\array_keys($this->calling))));
             }
             // The following section must be protected from cyclic
             // calls. Set $calling for the current $option to detect a cyclic
@@ -872,9 +872,9 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
                     return '[]' === \substr($item, -2);
                 })) > 0;
                 if (\is_array($value) && $allowedContainsArrayType) {
-                    throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('The option "%s" with value %s is expected to be of type "%s", but one of the elements is of type "%s".', $this->formatOptions([$option]), $fmtActualValue, $fmtAllowedTypes, $fmtProvidedTypes));
+                    throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('The option "%s" with value %s is expected to be of type "%s", but one of the elements is of type "%s".', $this->formatOptions([$option]), $fmtActualValue, $fmtAllowedTypes, $fmtProvidedTypes));
                 }
-                throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('The option "%s" with value %s is expected to be of type "%s", but is of type "%s".', $this->formatOptions([$option]), $fmtActualValue, $fmtAllowedTypes, $fmtProvidedTypes));
+                throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('The option "%s" with value %s is expected to be of type "%s", but is of type "%s".', $this->formatOptions([$option]), $fmtActualValue, $fmtAllowedTypes, $fmtProvidedTypes));
             }
         }
         // Validate the value of the resolved option
@@ -904,7 +904,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
                 if (isset($this->info[$option])) {
                     $message .= \sprintf(' Info: %s.', $this->info[$option]);
                 }
-                throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException($message);
+                throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException($message);
             }
         }
         // Check whether the option is deprecated
@@ -915,12 +915,12 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
             if ($message instanceof \Closure) {
                 // If the closure is already being called, we have a cyclic dependency
                 if (isset($this->calling[$option])) {
-                    throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The options "%s" have a cyclic dependency.', $this->formatOptions(\array_keys($this->calling))));
+                    throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The options "%s" have a cyclic dependency.', $this->formatOptions(\array_keys($this->calling))));
                 }
                 $this->calling[$option] = \true;
                 try {
                     if (!\is_string($message = $message($this, $value))) {
-                        throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Invalid type for deprecation message, expected string but got "%s", return an empty string to ignore.', \get_debug_type($message)));
+                        throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Invalid type for deprecation message, expected string but got "%s", return an empty string to ignore.', \get_debug_type($message)));
                     }
                 } finally {
                     unset($this->calling[$option]);
@@ -935,7 +935,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
             // If the closure is already being called, we have a cyclic
             // dependency
             if (isset($this->calling[$option])) {
-                throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The options "%s" have a cyclic dependency.', $this->formatOptions(\array_keys($this->calling))));
+                throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException(\sprintf('The options "%s" have a cyclic dependency.', $this->formatOptions(\array_keys($this->calling))));
             }
             // The following section must be protected from cyclic
             // calls. Set $calling for the current $option to detect a cyclic
@@ -989,7 +989,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function offsetExists($option)
     {
         if (!$this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Array access is only supported within closures of lazy options and normalizers.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Array access is only supported within closures of lazy options and normalizers.');
         }
         return \array_key_exists($option, $this->defaults);
     }
@@ -1000,7 +1000,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
      */
     public function offsetSet($option, $value)
     {
-        throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Setting options via array access is not supported. Use setDefault() instead.');
+        throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Setting options via array access is not supported. Use setDefault() instead.');
     }
     /**
      * Not supported.
@@ -1009,7 +1009,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
      */
     public function offsetUnset($option)
     {
-        throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Removing options via array access is not supported. Use remove() instead.');
+        throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Removing options via array access is not supported. Use remove() instead.');
     }
     /**
      * Returns the number of set options.
@@ -1025,7 +1025,7 @@ class OptionsResolver implements \_PhpScoper8163b0b2b8f3\Symfony\Component\Optio
     public function count()
     {
         if (!$this->locked) {
-            throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\AccessException('Counting is only supported within closures of lazy options and normalizers.');
+            throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\AccessException('Counting is only supported within closures of lazy options and normalizers.');
         }
         return \count($this->defaults);
     }

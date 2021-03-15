@@ -26,7 +26,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Sebastiaan Stok <s.stok@rollerscapes.net>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -164,11 +164,11 @@ use Bar;
             if (null !== $value) {
                 $missing = \array_diff($supportedSortTypes, $value);
                 if (\count($missing)) {
-                    throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Missing sort %s "%s".', 1 === \count($missing) ? 'type' : 'types', \implode('", "', $missing)));
+                    throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Missing sort %s "%s".', 1 === \count($missing) ? 'type' : 'types', \implode('", "', $missing)));
                 }
                 $unknown = \array_diff($value, $supportedSortTypes);
                 if (\count($unknown)) {
-                    throw new \_PhpScoper8163b0b2b8f3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unknown sort %s "%s".', 1 === \count($unknown) ? 'type' : 'types', \implode('", "', $unknown)));
+                    throw new \_PhpScoper64e7ad844899\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unknown sort %s "%s".', 1 === \count($unknown) ? 'type' : 'types', \implode('", "', $unknown)));
                 }
             }
             return \true;
