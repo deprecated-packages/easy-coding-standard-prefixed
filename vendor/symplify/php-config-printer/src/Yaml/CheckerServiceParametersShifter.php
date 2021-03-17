@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\Yaml;
 
-use _PhpScoper842c7347e6be\Nette\Utils\Strings;
+use _PhpScoper0c0702cca4ac\Nette\Utils\Strings;
 use Symplify\PackageBuilder\Strings\StringFormatConverter;
 /**
  * @copy of https://github.com/symplify/symplify/blob/d4beda1b1af847599aa035ead755e03db81c7247/packages/easy-coding-standard/src/Yaml/CheckerServiceParametersShifter.php
@@ -80,10 +80,10 @@ final class CheckerServiceParametersShifter
             if ($serviceDefinition === []) {
                 continue;
             }
-            if (\_PhpScoper842c7347e6be\Nette\Utils\Strings::endsWith($serviceName, 'Fixer')) {
+            if (\_PhpScoper0c0702cca4ac\Nette\Utils\Strings::endsWith($serviceName, 'Fixer')) {
                 $services = $this->processFixer($services, $serviceName, $serviceDefinition);
             }
-            if (\_PhpScoper842c7347e6be\Nette\Utils\Strings::endsWith($serviceName, 'Sniff')) {
+            if (\_PhpScoper0c0702cca4ac\Nette\Utils\Strings::endsWith($serviceName, 'Sniff')) {
                 $services = $this->processSniff($services, $serviceName, $serviceDefinition);
             }
             // cleanup parameters
@@ -93,10 +93,10 @@ final class CheckerServiceParametersShifter
     }
     private function isCheckerClass(string $checker) : bool
     {
-        if (\_PhpScoper842c7347e6be\Nette\Utils\Strings::endsWith($checker, 'Fixer')) {
+        if (\_PhpScoper0c0702cca4ac\Nette\Utils\Strings::endsWith($checker, 'Fixer')) {
             return \true;
         }
-        return \_PhpScoper842c7347e6be\Nette\Utils\Strings::endsWith($checker, 'Sniff');
+        return \_PhpScoper0c0702cca4ac\Nette\Utils\Strings::endsWith($checker, 'Sniff');
     }
     /**
      * @param mixed[] $services
@@ -170,6 +170,6 @@ final class CheckerServiceParametersShifter
             }
             return $value;
         }
-        return \_PhpScoper842c7347e6be\Nette\Utils\Strings::replace($value, '#^@#', '@@');
+        return \_PhpScoper0c0702cca4ac\Nette\Utils\Strings::replace($value, '#^@#', '@@');
     }
 }

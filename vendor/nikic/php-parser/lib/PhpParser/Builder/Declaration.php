@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper842c7347e6be\PhpParser\Builder;
+namespace _PhpScoper0c0702cca4ac\PhpParser\Builder;
 
-use _PhpScoper842c7347e6be\PhpParser;
-use _PhpScoper842c7347e6be\PhpParser\BuilderHelpers;
-abstract class Declaration implements \_PhpScoper842c7347e6be\PhpParser\Builder
+use _PhpScoper0c0702cca4ac\PhpParser;
+use _PhpScoper0c0702cca4ac\PhpParser\BuilderHelpers;
+abstract class Declaration implements \_PhpScoper0c0702cca4ac\PhpParser\Builder
 {
     protected $attributes = [];
     public abstract function addStmt($stmt);
@@ -32,7 +32,7 @@ abstract class Declaration implements \_PhpScoper842c7347e6be\PhpParser\Builder
      */
     public function setDocComment($docComment)
     {
-        $this->attributes['comments'] = [\_PhpScoper842c7347e6be\PhpParser\BuilderHelpers::normalizeDocComment($docComment)];
+        $this->attributes['comments'] = [\_PhpScoper0c0702cca4ac\PhpParser\BuilderHelpers::normalizeDocComment($docComment)];
         return $this;
     }
 }

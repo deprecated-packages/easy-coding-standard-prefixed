@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper842c7347e6be\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper0c0702cca4ac\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper842c7347e6be\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoper842c7347e6be\Symfony\Component\Cache\CacheItem;
+use _PhpScoper0c0702cca4ac\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper0c0702cca4ac\Symfony\Component\Cache\CacheItem;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\_PhpScoper842c7347e6be\Symfony\Component\Cache\CacheItem::class);
+\class_exists(\_PhpScoper0c0702cca4ac\Symfony\Component\Cache\CacheItem::class);
 /**
  * Interface for adapters managing instances of Symfony's CacheItem.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-interface AdapterInterface extends \_PhpScoper842c7347e6be\Psr\Cache\CacheItemPoolInterface
+interface AdapterInterface extends \_PhpScoper0c0702cca4ac\Psr\Cache\CacheItemPoolInterface
 {
     /**
      * {@inheritdoc}

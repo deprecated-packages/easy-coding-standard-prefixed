@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper842c7347e6be\Symfony\Component\HttpFoundation\Exception;
+namespace _PhpScoper0c0702cca4ac\Symfony\Component\HttpFoundation\Exception;
 
 /**
  * Raised when a user sends a malformed request.
  */
-class BadRequestException extends \UnexpectedValueException implements \_PhpScoper842c7347e6be\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
+class BadRequestException extends \UnexpectedValueException implements \_PhpScoper0c0702cca4ac\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
 {
 }

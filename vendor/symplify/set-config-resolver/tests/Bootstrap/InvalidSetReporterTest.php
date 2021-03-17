@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Tests\Bootstrap;
 
-use _PhpScoper842c7347e6be\PHPUnit\Framework\TestCase;
+use _PhpScoper0c0702cca4ac\PHPUnit\Framework\TestCase;
 use Symplify\SetConfigResolver\Bootstrap\InvalidSetReporter;
 use Symplify\SetConfigResolver\Exception\SetNotFoundException;
-final class InvalidSetReporterTest extends \_PhpScoper842c7347e6be\PHPUnit\Framework\TestCase
+final class InvalidSetReporterTest extends \_PhpScoper0c0702cca4ac\PHPUnit\Framework\TestCase
 {
     /**
      * @var InvalidSetReporter
