@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper971ef29294dd\Symfony\Component\Console\Event;
+namespace _PhpScoper4e2df00556a9\Symfony\Component\Console\Event;
 
-use _PhpScoper971ef29294dd\Symfony\Component\Console\Command\Command;
-use _PhpScoper971ef29294dd\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper971ef29294dd\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper4e2df00556a9\Symfony\Component\Console\Command\Command;
+use _PhpScoper4e2df00556a9\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper4e2df00556a9\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author marie <marie@users.noreply.github.com>
  */
-final class ConsoleSignalEvent extends \_PhpScoper971ef29294dd\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleSignalEvent extends \_PhpScoper4e2df00556a9\Symfony\Component\Console\Event\ConsoleEvent
 {
     private $handlingSignal;
-    public function __construct(\_PhpScoper971ef29294dd\Symfony\Component\Console\Command\Command $command, \_PhpScoper971ef29294dd\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper971ef29294dd\Symfony\Component\Console\Output\OutputInterface $output, int $handlingSignal)
+    public function __construct(\_PhpScoper4e2df00556a9\Symfony\Component\Console\Command\Command $command, \_PhpScoper4e2df00556a9\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper4e2df00556a9\Symfony\Component\Console\Output\OutputInterface $output, int $handlingSignal)
     {
         parent::__construct($command, $input, $output);
         $this->handlingSignal = $handlingSignal;

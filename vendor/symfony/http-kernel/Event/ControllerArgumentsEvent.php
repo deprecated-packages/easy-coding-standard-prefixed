@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper971ef29294dd\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper4e2df00556a9\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoper971ef29294dd\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper971ef29294dd\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoper4e2df00556a9\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper4e2df00556a9\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows filtering of controller arguments.
  *
@@ -24,11 +24,11 @@ use _PhpScoper971ef29294dd\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
-final class ControllerArgumentsEvent extends \_PhpScoper971ef29294dd\Symfony\Component\HttpKernel\Event\KernelEvent
+final class ControllerArgumentsEvent extends \_PhpScoper4e2df00556a9\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $controller;
     private $arguments;
-    public function __construct(\_PhpScoper971ef29294dd\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, callable $controller, array $arguments, \_PhpScoper971ef29294dd\Symfony\Component\HttpFoundation\Request $request, ?int $requestType)
+    public function __construct(\_PhpScoper4e2df00556a9\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, callable $controller, array $arguments, \_PhpScoper4e2df00556a9\Symfony\Component\HttpFoundation\Request $request, ?int $requestType)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->controller = $controller;

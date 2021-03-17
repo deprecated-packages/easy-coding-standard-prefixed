@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper971ef29294dd\PhpParser\Node;
+namespace _PhpScoper4e2df00556a9\PhpParser\Node;
 
-use _PhpScoper971ef29294dd\PhpParser\Node;
-use _PhpScoper971ef29294dd\PhpParser\NodeAbstract;
-class Attribute extends \_PhpScoper971ef29294dd\PhpParser\NodeAbstract
+use _PhpScoper4e2df00556a9\PhpParser\Node;
+use _PhpScoper4e2df00556a9\PhpParser\NodeAbstract;
+class Attribute extends \_PhpScoper4e2df00556a9\PhpParser\NodeAbstract
 {
     /** @var Name Attribute name */
     public $name;
@@ -16,7 +16,7 @@ class Attribute extends \_PhpScoper971ef29294dd\PhpParser\NodeAbstract
      * @param Arg[]     $args       Attribute arguments
      * @param array     $attributes Additional node attributes
      */
-    public function __construct(\_PhpScoper971ef29294dd\PhpParser\Node\Name $name, array $args = [], array $attributes = [])
+    public function __construct(\_PhpScoper4e2df00556a9\PhpParser\Node\Name $name, array $args = [], array $attributes = [])
     {
         $this->attributes = $attributes;
         $this->name = $name;

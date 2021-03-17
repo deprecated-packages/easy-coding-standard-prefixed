@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper971ef29294dd\Nette\Iterators;
+namespace _PhpScoper4e2df00556a9\Nette\Iterators;
 
 /**
  * Applies the callback to the elements of the inner iterator.

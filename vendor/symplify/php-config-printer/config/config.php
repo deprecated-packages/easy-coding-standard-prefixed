@@ -1,21 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper971ef29294dd;
+namespace _PhpScoper4e2df00556a9;
 
-use _PhpScoper971ef29294dd\PhpParser\BuilderFactory;
-use _PhpScoper971ef29294dd\PhpParser\NodeFinder;
-use _PhpScoper971ef29294dd\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use _PhpScoper971ef29294dd\Symfony\Component\Yaml\Parser;
+use _PhpScoper4e2df00556a9\PhpParser\BuilderFactory;
+use _PhpScoper4e2df00556a9\PhpParser\NodeFinder;
+use _PhpScoper4e2df00556a9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper4e2df00556a9\Symfony\Component\Yaml\Parser;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
-return static function (\_PhpScoper971ef29294dd\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (\_PhpScoper4e2df00556a9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
     $services->load('Symplify\\PhpConfigPrinter\\', __DIR__ . '/../src')->exclude([__DIR__ . '/../src/HttpKernel', __DIR__ . '/../src/Dummy', __DIR__ . '/../src/Bundle']);
-    $services->set(\_PhpScoper971ef29294dd\PhpParser\NodeFinder::class);
-    $services->set(\_PhpScoper971ef29294dd\Symfony\Component\Yaml\Parser::class);
-    $services->set(\_PhpScoper971ef29294dd\PhpParser\BuilderFactory::class);
+    $services->set(\_PhpScoper4e2df00556a9\PhpParser\NodeFinder::class);
+    $services->set(\_PhpScoper4e2df00556a9\Symfony\Component\Yaml\Parser::class);
+    $services->set(\_PhpScoper4e2df00556a9\PhpParser\BuilderFactory::class);
     $services->set(\Symplify\PackageBuilder\Parameter\ParameterProvider::class);
     $services->set(\Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker::class);
 };
