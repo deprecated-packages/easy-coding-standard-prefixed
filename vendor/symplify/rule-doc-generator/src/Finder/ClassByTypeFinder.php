@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Finder;
 
-use _PhpScoper246d3630afdd\Nette\Loaders\RobotLoader;
+use _PhpScoper842c7347e6be\Nette\Loaders\RobotLoader;
 use ReflectionClass;
 use Symplify\RuleDocGenerator\ValueObject\RuleClassWithFilePath;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -15,7 +15,7 @@ final class ClassByTypeFinder
      */
     public function findByType(string $workingDirectory, array $directories, string $type) : array
     {
-        $robotLoader = new \_PhpScoper246d3630afdd\Nette\Loaders\RobotLoader();
+        $robotLoader = new \_PhpScoper842c7347e6be\Nette\Loaders\RobotLoader();
         $robotLoader->setTempDirectory(\sys_get_temp_dir() . '/robot_loader_temp');
         $robotLoader->addDirectory(...$directories);
         $robotLoader->ignoreDirs[] = '*tests*';

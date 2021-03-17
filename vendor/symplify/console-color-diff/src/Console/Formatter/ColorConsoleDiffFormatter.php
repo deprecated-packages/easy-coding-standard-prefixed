@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\Console\Formatter;
 
-use _PhpScoper246d3630afdd\Nette\Utils\Strings;
-use _PhpScoper246d3630afdd\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper842c7347e6be\Nette\Utils\Strings;
+use _PhpScoper842c7347e6be\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * Most is copy-pasted from https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/src/Differ/DiffConsoleFormatter.php
  * to be used as standalone class, without need to require whole package.
@@ -48,8 +48,8 @@ final class ColorConsoleDiffFormatter
     }
     private function formatWithTemplate(string $diff, string $template) : string
     {
-        $escapedDiff = \_PhpScoper246d3630afdd\Symfony\Component\Console\Formatter\OutputFormatter::escape(\rtrim($diff));
-        $escapedDiffLines = \_PhpScoper246d3630afdd\Nette\Utils\Strings::split($escapedDiff, self::NEWLINES_REGEX);
+        $escapedDiff = \_PhpScoper842c7347e6be\Symfony\Component\Console\Formatter\OutputFormatter::escape(\rtrim($diff));
+        $escapedDiffLines = \_PhpScoper842c7347e6be\Nette\Utils\Strings::split($escapedDiff, self::NEWLINES_REGEX);
         $coloredLines = \array_map(function (string $string) : string {
             $string = $this->makePlusLinesGreen($string);
             $string = $this->makeMinusLinesRed($string);
@@ -63,14 +63,14 @@ final class ColorConsoleDiffFormatter
     }
     private function makePlusLinesGreen(string $string) : string
     {
-        return \_PhpScoper246d3630afdd\Nette\Utils\Strings::replace($string, self::PLUS_START_REGEX, '<fg=green>$1</fg=green>');
+        return \_PhpScoper842c7347e6be\Nette\Utils\Strings::replace($string, self::PLUS_START_REGEX, '<fg=green>$1</fg=green>');
     }
     private function makeMinusLinesRed(string $string) : string
     {
-        return \_PhpScoper246d3630afdd\Nette\Utils\Strings::replace($string, self::MINUT_START_REGEX, '<fg=red>$1</fg=red>');
+        return \_PhpScoper842c7347e6be\Nette\Utils\Strings::replace($string, self::MINUT_START_REGEX, '<fg=red>$1</fg=red>');
     }
     private function makeAtNoteCyan(string $string) : string
     {
-        return \_PhpScoper246d3630afdd\Nette\Utils\Strings::replace($string, self::AT_START_REGEX, '<fg=cyan>$1</fg=cyan>');
+        return \_PhpScoper842c7347e6be\Nette\Utils\Strings::replace($string, self::AT_START_REGEX, '<fg=cyan>$1</fg=cyan>');
     }
 }

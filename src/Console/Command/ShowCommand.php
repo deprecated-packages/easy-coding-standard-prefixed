@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScoper246d3630afdd\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper246d3630afdd\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper842c7347e6be\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper842c7347e6be\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Reporter\CheckerListReporter;
 use Symplify\EasyCodingStandard\Console\Reporter\SetsReporter;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
@@ -47,7 +47,7 @@ final class ShowCommand extends \Symplify\PackageBuilder\Console\Command\Abstrac
     {
         $this->setDescription('Show loaded checkers');
     }
-    protected function execute(\_PhpScoper246d3630afdd\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper246d3630afdd\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(\_PhpScoper842c7347e6be\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper842c7347e6be\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
         $totalCheckerCount = \count($this->sniffFileProcessor->getCheckers()) + \count($this->fixerFileProcessor->getCheckers());
         $this->checkerListReporter->report($this->sniffFileProcessor->getCheckers(), 'PHP_CodeSniffer');

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper246d3630afdd\Doctrine\Common\Annotations;
+namespace _PhpScoper842c7347e6be\Doctrine\Common\Annotations;
 
 use ReflectionClass;
 use ReflectionMethod;

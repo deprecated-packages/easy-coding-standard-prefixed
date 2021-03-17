@@ -1,13 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper246d3630afdd\PhpParser\Builder;
+namespace _PhpScoper842c7347e6be\PhpParser\Builder;
 
-use _PhpScoper246d3630afdd\PhpParser;
-use _PhpScoper246d3630afdd\PhpParser\BuilderHelpers;
-use _PhpScoper246d3630afdd\PhpParser\Node\Name;
-use _PhpScoper246d3630afdd\PhpParser\Node\Stmt;
-class Class_ extends \_PhpScoper246d3630afdd\PhpParser\Builder\Declaration
+use _PhpScoper842c7347e6be\PhpParser;
+use _PhpScoper842c7347e6be\PhpParser\BuilderHelpers;
+use _PhpScoper842c7347e6be\PhpParser\Node\Name;
+use _PhpScoper842c7347e6be\PhpParser\Node\Stmt;
+class Class_ extends \_PhpScoper842c7347e6be\PhpParser\Builder\Declaration
 {
     protected $name;
     protected $extends = null;
@@ -35,7 +35,7 @@ class Class_ extends \_PhpScoper246d3630afdd\PhpParser\Builder\Declaration
      */
     public function extend($class)
     {
-        $this->extends = \_PhpScoper246d3630afdd\PhpParser\BuilderHelpers::normalizeName($class);
+        $this->extends = \_PhpScoper842c7347e6be\PhpParser\BuilderHelpers::normalizeName($class);
         return $this;
     }
     /**
@@ -48,7 +48,7 @@ class Class_ extends \_PhpScoper246d3630afdd\PhpParser\Builder\Declaration
     public function implement(...$interfaces)
     {
         foreach ($interfaces as $interface) {
-            $this->implements[] = \_PhpScoper246d3630afdd\PhpParser\BuilderHelpers::normalizeName($interface);
+            $this->implements[] = \_PhpScoper842c7347e6be\PhpParser\BuilderHelpers::normalizeName($interface);
         }
         return $this;
     }
@@ -59,7 +59,7 @@ class Class_ extends \_PhpScoper246d3630afdd\PhpParser\Builder\Declaration
      */
     public function makeAbstract()
     {
-        $this->flags = \_PhpScoper246d3630afdd\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper246d3630afdd\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT);
+        $this->flags = \_PhpScoper842c7347e6be\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper842c7347e6be\PhpParser\Node\Stmt\Class_::MODIFIER_ABSTRACT);
         return $this;
     }
     /**
@@ -69,7 +69,7 @@ class Class_ extends \_PhpScoper246d3630afdd\PhpParser\Builder\Declaration
      */
     public function makeFinal()
     {
-        $this->flags = \_PhpScoper246d3630afdd\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper246d3630afdd\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
+        $this->flags = \_PhpScoper842c7347e6be\PhpParser\BuilderHelpers::addModifier($this->flags, \_PhpScoper842c7347e6be\PhpParser\Node\Stmt\Class_::MODIFIER_FINAL);
         return $this;
     }
     /**
@@ -81,8 +81,8 @@ class Class_ extends \_PhpScoper246d3630afdd\PhpParser\Builder\Declaration
      */
     public function addStmt($stmt)
     {
-        $stmt = \_PhpScoper246d3630afdd\PhpParser\BuilderHelpers::normalizeNode($stmt);
-        $targets = [\_PhpScoper246d3630afdd\PhpParser\Node\Stmt\TraitUse::class => &$this->uses, \_PhpScoper246d3630afdd\PhpParser\Node\Stmt\ClassConst::class => &$this->constants, \_PhpScoper246d3630afdd\PhpParser\Node\Stmt\Property::class => &$this->properties, \_PhpScoper246d3630afdd\PhpParser\Node\Stmt\ClassMethod::class => &$this->methods];
+        $stmt = \_PhpScoper842c7347e6be\PhpParser\BuilderHelpers::normalizeNode($stmt);
+        $targets = [\_PhpScoper842c7347e6be\PhpParser\Node\Stmt\TraitUse::class => &$this->uses, \_PhpScoper842c7347e6be\PhpParser\Node\Stmt\ClassConst::class => &$this->constants, \_PhpScoper842c7347e6be\PhpParser\Node\Stmt\Property::class => &$this->properties, \_PhpScoper842c7347e6be\PhpParser\Node\Stmt\ClassMethod::class => &$this->methods];
         $class = \get_class($stmt);
         if (!isset($targets[$class])) {
             throw new \LogicException(\sprintf('Unexpected node of type "%s"', $stmt->getType()));
@@ -95,8 +95,8 @@ class Class_ extends \_PhpScoper246d3630afdd\PhpParser\Builder\Declaration
      *
      * @return Stmt\Class_ The built class node
      */
-    public function getNode() : \_PhpScoper246d3630afdd\PhpParser\Node
+    public function getNode() : \_PhpScoper842c7347e6be\PhpParser\Node
     {
-        return new \_PhpScoper246d3630afdd\PhpParser\Node\Stmt\Class_($this->name, ['flags' => $this->flags, 'extends' => $this->extends, 'implements' => $this->implements, 'stmts' => \array_merge($this->uses, $this->constants, $this->properties, $this->methods)], $this->attributes);
+        return new \_PhpScoper842c7347e6be\PhpParser\Node\Stmt\Class_($this->name, ['flags' => $this->flags, 'extends' => $this->extends, 'implements' => $this->implements, 'stmts' => \array_merge($this->uses, $this->constants, $this->properties, $this->methods)], $this->attributes);
     }
 }
