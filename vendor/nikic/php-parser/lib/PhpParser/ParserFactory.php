@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera3425146d487\PhpParser;
+namespace _PhpScoper246d3630afdd\PhpParser;
 
 class ParserFactory
 {
@@ -18,20 +18,20 @@ class ParserFactory
      *
      * @return Parser The parser instance
      */
-    public function create(int $kind, \_PhpScopera3425146d487\PhpParser\Lexer $lexer = null, array $parserOptions = []) : \_PhpScopera3425146d487\PhpParser\Parser
+    public function create(int $kind, \_PhpScoper246d3630afdd\PhpParser\Lexer $lexer = null, array $parserOptions = []) : \_PhpScoper246d3630afdd\PhpParser\Parser
     {
         if (null === $lexer) {
-            $lexer = new \_PhpScopera3425146d487\PhpParser\Lexer\Emulative();
+            $lexer = new \_PhpScoper246d3630afdd\PhpParser\Lexer\Emulative();
         }
         switch ($kind) {
             case self::PREFER_PHP7:
-                return new \_PhpScopera3425146d487\PhpParser\Parser\Multiple([new \_PhpScopera3425146d487\PhpParser\Parser\Php7($lexer, $parserOptions), new \_PhpScopera3425146d487\PhpParser\Parser\Php5($lexer, $parserOptions)]);
+                return new \_PhpScoper246d3630afdd\PhpParser\Parser\Multiple([new \_PhpScoper246d3630afdd\PhpParser\Parser\Php7($lexer, $parserOptions), new \_PhpScoper246d3630afdd\PhpParser\Parser\Php5($lexer, $parserOptions)]);
             case self::PREFER_PHP5:
-                return new \_PhpScopera3425146d487\PhpParser\Parser\Multiple([new \_PhpScopera3425146d487\PhpParser\Parser\Php5($lexer, $parserOptions), new \_PhpScopera3425146d487\PhpParser\Parser\Php7($lexer, $parserOptions)]);
+                return new \_PhpScoper246d3630afdd\PhpParser\Parser\Multiple([new \_PhpScoper246d3630afdd\PhpParser\Parser\Php5($lexer, $parserOptions), new \_PhpScoper246d3630afdd\PhpParser\Parser\Php7($lexer, $parserOptions)]);
             case self::ONLY_PHP7:
-                return new \_PhpScopera3425146d487\PhpParser\Parser\Php7($lexer, $parserOptions);
+                return new \_PhpScoper246d3630afdd\PhpParser\Parser\Php7($lexer, $parserOptions);
             case self::ONLY_PHP5:
-                return new \_PhpScopera3425146d487\PhpParser\Parser\Php5($lexer, $parserOptions);
+                return new \_PhpScoper246d3630afdd\PhpParser\Parser\Php5($lexer, $parserOptions);
             default:
                 throw new \LogicException('Kind must be one of ::PREFER_PHP7, ::PREFER_PHP5, ::ONLY_PHP7 or ::ONLY_PHP5');
         }

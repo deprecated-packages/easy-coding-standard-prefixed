@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera3425146d487\Symfony\Component\OptionsResolver\Exception;
+namespace _PhpScoper246d3630afdd\Symfony\Component\OptionsResolver\Exception;
 
 /**
  * Thrown when two lazy options have a cyclic dependency.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class OptionDefinitionException extends \LogicException implements \_PhpScopera3425146d487\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
+class OptionDefinitionException extends \LogicException implements \_PhpScoper246d3630afdd\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
 {
 }

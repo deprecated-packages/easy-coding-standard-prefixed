@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera3425146d487\Symfony\Component\HttpKernel\Attribute;
+namespace _PhpScoper246d3630afdd\Symfony\Component\HttpKernel\Attribute;
 
 /**
  * Marker interface for controller argument attributes.
