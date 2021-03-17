@@ -16,7 +16,7 @@ final class SymfonyClosureAnalyzer
         $this->symfonyClosureContainerConfiguratorFunctionTokens = [new \PhpCsFixer\Tokenizer\Token('('), new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'ContainerConfigurator']), new \PhpCsFixer\Tokenizer\Token([\T_VARIABLE, '$containerConfigurator']), new \PhpCsFixer\Tokenizer\Token(')')];
     }
     /**
-     * @param Tokens&iterable<Token> $tokens
+     * @param Tokens<Token> $tokens
      */
     public function isContainerConfiguratorClosure(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {

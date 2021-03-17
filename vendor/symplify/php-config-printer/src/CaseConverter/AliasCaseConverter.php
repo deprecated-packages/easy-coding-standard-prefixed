@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\CaseConverter;
 
-use _PhpScoper4e2df00556a9\Nette\Utils\Strings;
-use _PhpScoper4e2df00556a9\PhpParser\Node\Arg;
-use _PhpScoper4e2df00556a9\PhpParser\Node\Expr\BinaryOp\Concat;
-use _PhpScoper4e2df00556a9\PhpParser\Node\Expr\MethodCall;
-use _PhpScoper4e2df00556a9\PhpParser\Node\Expr\Variable;
-use _PhpScoper4e2df00556a9\PhpParser\Node\Scalar\String_;
-use _PhpScoper4e2df00556a9\PhpParser\Node\Stmt\Expression;
+use _PhpScopera3425146d487\Nette\Utils\Strings;
+use _PhpScopera3425146d487\PhpParser\Node\Arg;
+use _PhpScopera3425146d487\PhpParser\Node\Expr\BinaryOp\Concat;
+use _PhpScopera3425146d487\PhpParser\Node\Expr\MethodCall;
+use _PhpScopera3425146d487\PhpParser\Node\Expr\Variable;
+use _PhpScopera3425146d487\PhpParser\Node\Scalar\String_;
+use _PhpScopera3425146d487\PhpParser\Node\Stmt\Expression;
 use Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker;
 use Symplify\PhpConfigPrinter\Contract\CaseConverterInterface;
 use Symplify\PhpConfigPrinter\NodeFactory\ArgsNodeFactory;
@@ -54,25 +54,25 @@ final class AliasCaseConverter implements \Symplify\PhpConfigPrinter\Contract\Ca
         $this->serviceOptionNodeFactory = $serviceOptionNodeFactory;
         $this->classLikeExistenceChecker = $classLikeExistenceChecker;
     }
-    public function convertToMethodCall($key, $values) : \_PhpScoper4e2df00556a9\PhpParser\Node\Stmt\Expression
+    public function convertToMethodCall($key, $values) : \_PhpScopera3425146d487\PhpParser\Node\Stmt\Expression
     {
         if (!\is_string($key)) {
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
-        $servicesVariable = new \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
+        $servicesVariable = new \_PhpScopera3425146d487\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES);
         if ($this->classLikeExistenceChecker->doesClassLikeExist($key)) {
             return $this->createFromClassLike($key, $values, $servicesVariable);
         }
         // handles: "SomeClass $someVariable: ..."
-        $fullClassName = \_PhpScoper4e2df00556a9\Nette\Utils\Strings::before($key, ' $');
+        $fullClassName = \_PhpScopera3425146d487\Nette\Utils\Strings::before($key, ' $');
         if ($fullClassName !== null) {
             $methodCall = $this->createAliasNode($key, $fullClassName, $values);
-            return new \_PhpScoper4e2df00556a9\PhpParser\Node\Stmt\Expression($methodCall);
+            return new \_PhpScopera3425146d487\PhpParser\Node\Stmt\Expression($methodCall);
         }
         if (\is_string($values) && $values[0] === '@') {
             $args = $this->argsNodeFactory->createFromValues([$values], \true);
-            $methodCall = new \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
-            return new \_PhpScoper4e2df00556a9\PhpParser\Node\Stmt\Expression($methodCall);
+            $methodCall = new \_PhpScopera3425146d487\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+            return new \_PhpScopera3425146d487\PhpParser\Node\Stmt\Expression($methodCall);
         }
         if (\is_array($values)) {
             return $this->createFromArrayValues($values, $key, $servicesVariable);
@@ -87,7 +87,7 @@ final class AliasCaseConverter implements \Symplify\PhpConfigPrinter\Contract\Ca
         if (isset($values[\Symplify\PhpConfigPrinter\ValueObject\YamlKey::ALIAS])) {
             return \true;
         }
-        if (\_PhpScoper4e2df00556a9\Nette\Utils\Strings::match($key, self::NAMED_ALIAS_REGEX)) {
+        if (\_PhpScopera3425146d487\Nette\Utils\Strings::match($key, self::NAMED_ALIAS_REGEX)) {
             return \true;
         }
         if (!\is_string($values)) {
@@ -95,41 +95,41 @@ final class AliasCaseConverter implements \Symplify\PhpConfigPrinter\Contract\Ca
         }
         return $values[0] === '@';
     }
-    private function createAliasNode(string $key, string $fullClassName, $serviceValues) : \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\MethodCall
+    private function createAliasNode(string $key, string $fullClassName, $serviceValues) : \_PhpScopera3425146d487\PhpParser\Node\Expr\MethodCall
     {
         $args = [];
         $classConstFetch = $this->commonNodeFactory->createClassReference($fullClassName);
-        \_PhpScoper4e2df00556a9\Nette\Utils\Strings::match($key, self::ARGUMENT_NAME_REGEX);
-        $argumentName = '$' . \_PhpScoper4e2df00556a9\Nette\Utils\Strings::after($key, '$');
-        $concat = new \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\BinaryOp\Concat($classConstFetch, new \_PhpScoper4e2df00556a9\PhpParser\Node\Scalar\String_(' ' . $argumentName));
-        $args[] = new \_PhpScoper4e2df00556a9\PhpParser\Node\Arg($concat);
+        \_PhpScopera3425146d487\Nette\Utils\Strings::match($key, self::ARGUMENT_NAME_REGEX);
+        $argumentName = '$' . \_PhpScopera3425146d487\Nette\Utils\Strings::after($key, '$');
+        $concat = new \_PhpScopera3425146d487\PhpParser\Node\Expr\BinaryOp\Concat($classConstFetch, new \_PhpScopera3425146d487\PhpParser\Node\Scalar\String_(' ' . $argumentName));
+        $args[] = new \_PhpScopera3425146d487\PhpParser\Node\Arg($concat);
         $serviceName = \ltrim($serviceValues, '@');
-        $args[] = new \_PhpScoper4e2df00556a9\PhpParser\Node\Arg(new \_PhpScoper4e2df00556a9\PhpParser\Node\Scalar\String_($serviceName));
-        return new \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\MethodCall(new \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+        $args[] = new \_PhpScopera3425146d487\PhpParser\Node\Arg(new \_PhpScopera3425146d487\PhpParser\Node\Scalar\String_($serviceName));
+        return new \_PhpScopera3425146d487\PhpParser\Node\Expr\MethodCall(new \_PhpScopera3425146d487\PhpParser\Node\Expr\Variable(\Symplify\PhpConfigPrinter\ValueObject\VariableName::SERVICES), \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
     }
     /**
      * @param mixed $values
      */
-    private function createFromClassLike(string $key, $values, \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\Variable $servicesVariable) : \_PhpScoper4e2df00556a9\PhpParser\Node\Stmt\Expression
+    private function createFromClassLike(string $key, $values, \_PhpScopera3425146d487\PhpParser\Node\Expr\Variable $servicesVariable) : \_PhpScopera3425146d487\PhpParser\Node\Stmt\Expression
     {
         $classReference = $this->commonNodeFactory->createClassReference($key);
         $argValues = [];
         $argValues[] = $classReference;
         $argValues[] = $values[\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS] ?? $values;
         $args = $this->argsNodeFactory->createFromValues($argValues, \true);
-        $methodCall = new \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
-        return new \_PhpScoper4e2df00556a9\PhpParser\Node\Stmt\Expression($methodCall);
+        $methodCall = new \_PhpScopera3425146d487\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+        return new \_PhpScopera3425146d487\PhpParser\Node\Stmt\Expression($methodCall);
     }
-    private function createFromAlias(string $className, string $key, \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\Variable $servicesVariable) : \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\MethodCall
+    private function createFromAlias(string $className, string $key, \_PhpScopera3425146d487\PhpParser\Node\Expr\Variable $servicesVariable) : \_PhpScopera3425146d487\PhpParser\Node\Expr\MethodCall
     {
         $classReference = $this->commonNodeFactory->createClassReference($className);
         $args = $this->argsNodeFactory->createFromValues([$key, $classReference]);
-        return new \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
+        return new \_PhpScopera3425146d487\PhpParser\Node\Expr\MethodCall($servicesVariable, \Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS, $args);
     }
     /**
      * @param mixed[] $values
      */
-    private function createFromArrayValues(array $values, string $key, \_PhpScoper4e2df00556a9\PhpParser\Node\Expr\Variable $servicesVariable) : \_PhpScoper4e2df00556a9\PhpParser\Node\Stmt\Expression
+    private function createFromArrayValues(array $values, string $key, \_PhpScopera3425146d487\PhpParser\Node\Expr\Variable $servicesVariable) : \_PhpScopera3425146d487\PhpParser\Node\Stmt\Expression
     {
         if (isset($values[\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS])) {
             $methodCall = $this->createFromAlias($values[\Symplify\PhpConfigPrinter\ValueObject\MethodName::ALIAS], $key, $servicesVariable);
@@ -139,6 +139,6 @@ final class AliasCaseConverter implements \Symplify\PhpConfigPrinter\Contract\Ca
         }
         /** @var MethodCall $methodCall */
         $methodCall = $this->serviceOptionNodeFactory->convertServiceOptionsToNodes($values, $methodCall);
-        return new \_PhpScoper4e2df00556a9\PhpParser\Node\Stmt\Expression($methodCall);
+        return new \_PhpScopera3425146d487\PhpParser\Node\Stmt\Expression($methodCall);
     }
 }
