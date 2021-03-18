@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5f6e904600e7\Symfony\Component\Config\Loader;
+namespace _PhpScoperf53473b45c36\Symfony\Component\Config\Loader;
 
 /**
  * GlobFileLoader loads files from a glob pattern.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class GlobFileLoader extends \_PhpScoper5f6e904600e7\Symfony\Component\Config\Loader\FileLoader
+class GlobFileLoader extends \_PhpScoperf53473b45c36\Symfony\Component\Config\Loader\FileLoader
 {
     /**
      * {@inheritdoc}

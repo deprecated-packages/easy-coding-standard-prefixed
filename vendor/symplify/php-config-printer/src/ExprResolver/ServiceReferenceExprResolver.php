@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\PhpConfigPrinter\ExprResolver;
 
-use _PhpScoper5f6e904600e7\PhpParser\Node\Arg;
-use _PhpScoper5f6e904600e7\PhpParser\Node\Expr;
-use _PhpScoper5f6e904600e7\PhpParser\Node\Expr\FuncCall;
-use _PhpScoper5f6e904600e7\PhpParser\Node\Name\FullyQualified;
+use _PhpScoperf53473b45c36\PhpParser\Node\Arg;
+use _PhpScoperf53473b45c36\PhpParser\Node\Expr;
+use _PhpScoperf53473b45c36\PhpParser\Node\Expr\FuncCall;
+use _PhpScoperf53473b45c36\PhpParser\Node\Name\FullyQualified;
 final class ServiceReferenceExprResolver
 {
     /**
@@ -17,14 +17,14 @@ final class ServiceReferenceExprResolver
     {
         $this->stringExprResolver = $stringExprResolver;
     }
-    public function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : \_PhpScoper5f6e904600e7\PhpParser\Node\Expr
+    public function resolveServiceReferenceExpr(string $value, bool $skipServiceReference, string $functionName) : \_PhpScoperf53473b45c36\PhpParser\Node\Expr
     {
         $value = \ltrim($value, '@');
         $expr = $this->stringExprResolver->resolve($value, $skipServiceReference, \false);
         if ($skipServiceReference) {
             return $expr;
         }
-        $args = [new \_PhpScoper5f6e904600e7\PhpParser\Node\Arg($expr)];
-        return new \_PhpScoper5f6e904600e7\PhpParser\Node\Expr\FuncCall(new \_PhpScoper5f6e904600e7\PhpParser\Node\Name\FullyQualified($functionName), $args);
+        $args = [new \_PhpScoperf53473b45c36\PhpParser\Node\Arg($expr)];
+        return new \_PhpScoperf53473b45c36\PhpParser\Node\Expr\FuncCall(new \_PhpScoperf53473b45c36\PhpParser\Node\Name\FullyQualified($functionName), $args);
     }
 }

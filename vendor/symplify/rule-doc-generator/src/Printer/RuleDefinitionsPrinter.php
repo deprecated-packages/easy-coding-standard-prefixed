@@ -3,11 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Printer;
 
-use _PhpScoper5f6e904600e7\Nette\Utils\Strings;
+use _PhpScoperf53473b45c36\Nette\Utils\Strings;
 use Symplify\RuleDocGenerator\Category\CategoryResolver;
 use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter;
 use Symplify\RuleDocGenerator\Text\KeywordHighlighter;
-use Symplify\RuleDocGenerator\ValueObject\Lines;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RuleDefinitionsPrinter
 {
@@ -98,7 +97,7 @@ final class RuleDefinitionsPrinter
         $lines[] = '<br>';
         $lines[] = '## Categories';
         foreach ($ruleDefinitionsByCategory as $category => $ruleDefinitions) {
-            $lines[] = \sprintf('- [%s](#%s) (%d)', $category, \_PhpScoper5f6e904600e7\Nette\Utils\Strings::webalize($category), \count($ruleDefinitions));
+            $lines[] = \sprintf('- [%s](#%s) (%d)', $category, \_PhpScoperf53473b45c36\Nette\Utils\Strings::webalize($category), \count($ruleDefinitions));
         }
         $lines[] = '<br>';
         return $lines;

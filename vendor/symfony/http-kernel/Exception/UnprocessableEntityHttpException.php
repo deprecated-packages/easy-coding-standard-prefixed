@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5f6e904600e7\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoperf53473b45c36\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Steve Hutchins <hutchinsteve@gmail.com>
  */
-class UnprocessableEntityHttpException extends \_PhpScoper5f6e904600e7\Symfony\Component\HttpKernel\Exception\HttpException
+class UnprocessableEntityHttpException extends \_PhpScoperf53473b45c36\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string|null     $message  The internal exception message

@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5f6e904600e7\PhpParser\NodeVisitor;
+namespace _PhpScoperf53473b45c36\PhpParser\NodeVisitor;
 
 use function array_pop;
 use function count;
-use _PhpScoper5f6e904600e7\PhpParser\Node;
-use _PhpScoper5f6e904600e7\PhpParser\NodeVisitorAbstract;
+use _PhpScoperf53473b45c36\PhpParser\Node;
+use _PhpScoperf53473b45c36\PhpParser\NodeVisitorAbstract;
 /**
  * Visitor that connects a child node to its parent node.
  *
  * On the child node, the parent node can be accessed through
  * <code>$node->getAttribute('parent')</code>.
  */
-final class ParentConnectingVisitor extends \_PhpScoper5f6e904600e7\PhpParser\NodeVisitorAbstract
+final class ParentConnectingVisitor extends \_PhpScoperf53473b45c36\PhpParser\NodeVisitorAbstract
 {
     /**
      * @var Node[]
@@ -23,14 +23,14 @@ final class ParentConnectingVisitor extends \_PhpScoper5f6e904600e7\PhpParser\No
     {
         $this->stack = [];
     }
-    public function enterNode(\_PhpScoper5f6e904600e7\PhpParser\Node $node)
+    public function enterNode(\_PhpScoperf53473b45c36\PhpParser\Node $node)
     {
         if (!empty($this->stack)) {
             $node->setAttribute('parent', $this->stack[\count($this->stack) - 1]);
         }
         $this->stack[] = $node;
     }
-    public function leaveNode(\_PhpScoper5f6e904600e7\PhpParser\Node $node)
+    public function leaveNode(\_PhpScoperf53473b45c36\PhpParser\Node $node)
     {
         \array_pop($this->stack);
     }
