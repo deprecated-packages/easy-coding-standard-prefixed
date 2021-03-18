@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf53473b45c36\Symfony\Component\HttpKernel;
+namespace _PhpScoper0ba97041430d\Symfony\Component\HttpKernel;
 
-use _PhpScoperf53473b45c36\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoperf53473b45c36\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperf53473b45c36\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper0ba97041430d\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper0ba97041430d\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper0ba97041430d\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 /**
  * The Kernel is the heart of the Symfony system.
  *
@@ -24,7 +24,7 @@ use _PhpScoperf53473b45c36\Symfony\Component\HttpKernel\Bundle\BundleInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface KernelInterface extends \_PhpScoperf53473b45c36\Symfony\Component\HttpKernel\HttpKernelInterface
+interface KernelInterface extends \_PhpScoper0ba97041430d\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     /**
      * Returns an array of bundles to register.
@@ -35,7 +35,7 @@ interface KernelInterface extends \_PhpScoperf53473b45c36\Symfony\Component\Http
     /**
      * Loads the container configuration.
      */
-    public function registerContainerConfiguration(\_PhpScoperf53473b45c36\Symfony\Component\Config\Loader\LoaderInterface $loader);
+    public function registerContainerConfiguration(\_PhpScoper0ba97041430d\Symfony\Component\Config\Loader\LoaderInterface $loader);
     /**
      * Boots the current kernel.
      */

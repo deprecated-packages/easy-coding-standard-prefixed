@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf53473b45c36\PhpParser\Node\Expr;
+namespace _PhpScoper0ba97041430d\PhpParser\Node\Expr;
 
-use _PhpScoperf53473b45c36\PhpParser\Node\Expr;
-class List_ extends \_PhpScoperf53473b45c36\PhpParser\Node\Expr
+use _PhpScoper0ba97041430d\PhpParser\Node\Expr;
+class List_ extends \_PhpScoper0ba97041430d\PhpParser\Node\Expr
 {
     /** @var (ArrayItem|null)[] List of items to assign to */
     public $items;
