@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0c0702cca4ac\Symfony\Contracts\HttpClient\Exception;
+namespace _PhpScoper5f6e904600e7\Symfony\Contracts\HttpClient\Exception;
 
 /**
  * When a 5xx response is returned.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface ServerExceptionInterface extends \_PhpScoper0c0702cca4ac\Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
+interface ServerExceptionInterface extends \_PhpScoper5f6e904600e7\Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
 {
 }

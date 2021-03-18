@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection;
 
-use _PhpScoper0c0702cca4ac\Psr\Container\ContainerInterface;
-use _PhpScoper0c0702cca4ac\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper5f6e904600e7\Psr\Container\ContainerInterface;
+use _PhpScoper5f6e904600e7\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Bootstrap\ECSConfigsResolver;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
@@ -12,13 +12,13 @@ use Symplify\PackageBuilder\Console\Input\StaticInputDetector;
 use Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs;
 final class EasyCodingStandardContainerFactory
 {
-    public function createFromFromInput(\_PhpScoper0c0702cca4ac\Symfony\Component\Console\Input\InputInterface $input) : \_PhpScoper0c0702cca4ac\Psr\Container\ContainerInterface
+    public function createFromFromInput(\_PhpScoper5f6e904600e7\Symfony\Component\Console\Input\InputInterface $input) : \_PhpScoper5f6e904600e7\Psr\Container\ContainerInterface
     {
         $ecsConfigsResolver = new \Symplify\EasyCodingStandard\Bootstrap\ECSConfigsResolver();
         $bootstrapConfigs = $ecsConfigsResolver->resolveFromInput($input);
         return $this->createFromFromBootstrapConfigs($bootstrapConfigs);
     }
-    public function createFromFromBootstrapConfigs(\Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs $bootstrapConfigs) : \_PhpScoper0c0702cca4ac\Psr\Container\ContainerInterface
+    public function createFromFromBootstrapConfigs(\Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs $bootstrapConfigs) : \_PhpScoper5f6e904600e7\Psr\Container\ContainerInterface
     {
         $environment = 'prod' . \random_int(1, 100000);
         $easyCodingStandardKernel = new \Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel($environment, \Symplify\PackageBuilder\Console\Input\StaticInputDetector::isDebug());

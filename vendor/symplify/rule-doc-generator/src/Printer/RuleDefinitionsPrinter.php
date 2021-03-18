@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\Printer;
 
-use _PhpScoper0c0702cca4ac\Nette\Utils\Strings;
+use _PhpScoper5f6e904600e7\Nette\Utils\Strings;
 use Symplify\RuleDocGenerator\Category\CategoryResolver;
 use Symplify\RuleDocGenerator\Printer\CodeSamplePrinter\CodeSamplePrinter;
 use Symplify\RuleDocGenerator\Text\KeywordHighlighter;
@@ -80,7 +80,7 @@ final class RuleDefinitionsPrinter
             }
             $lines[] = $this->keywordHighlighter->highlight($ruleDefinition->getDescription());
             if ($ruleDefinition->isConfigurable()) {
-                $lines[] = \Symplify\RuleDocGenerator\ValueObject\Lines::CONFIGURE_IT;
+                $lines[] = ':wrench: **configure it!**';
             }
             $lines[] = '- class: [`' . $ruleDefinition->getRuleClass() . '`](' . $ruleDefinition->getRuleFilePath() . ')';
             $codeSampleLines = $this->codeSamplePrinter->print($ruleDefinition);
@@ -98,7 +98,7 @@ final class RuleDefinitionsPrinter
         $lines[] = '<br>';
         $lines[] = '## Categories';
         foreach ($ruleDefinitionsByCategory as $category => $ruleDefinitions) {
-            $lines[] = \sprintf('- [%s](#%s) (%d)', $category, \_PhpScoper0c0702cca4ac\Nette\Utils\Strings::webalize($category), \count($ruleDefinitions));
+            $lines[] = \sprintf('- [%s](#%s) (%d)', $category, \_PhpScoper5f6e904600e7\Nette\Utils\Strings::webalize($category), \count($ruleDefinitions));
         }
         $lines[] = '<br>';
         return $lines;

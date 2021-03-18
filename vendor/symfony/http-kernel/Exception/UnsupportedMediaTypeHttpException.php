@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0c0702cca4ac\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoper5f6e904600e7\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class UnsupportedMediaTypeHttpException extends \_PhpScoper0c0702cca4ac\Symfony\Component\HttpKernel\Exception\HttpException
+class UnsupportedMediaTypeHttpException extends \_PhpScoper5f6e904600e7\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string|null     $message  The internal exception message
