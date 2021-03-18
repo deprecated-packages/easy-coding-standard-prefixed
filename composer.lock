@@ -821,62 +821,6 @@
             "time": "2021-03-03T22:53:25+00:00"
         },
         {
-            "name": "nikic/php-parser",
-            "version": "v4.10.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c6d052fc58cb876152f89f532b95a8d7907e7f0e",
-                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.10.4"
-            },
-            "time": "2020-12-20T10:01:03+00:00"
-        },
-        {
             "name": "php-cs-fixer/diff",
             "version": "v1.3.1",
             "source": {
@@ -3571,81 +3515,6 @@
             "time": "2021-01-27T10:01:46+00:00"
         },
         {
-            "name": "symfony/yaml",
-            "version": "v5.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "298a08ddda623485208506fcee08817807a251dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/298a08ddda623485208506fcee08817807a251dd",
-                "reference": "298a08ddda623485208506fcee08817807a251dd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.5",
-                "symfony/deprecation-contracts": "^2.1",
-                "symfony/polyfill-ctype": "~1.8"
-            },
-            "conflict": {
-                "symfony/console": "<4.4"
-            },
-            "require-dev": {
-                "symfony/console": "^4.4|^5.0"
-            },
-            "suggest": {
-                "symfony/console": "For validating YAML files using the lint command"
-            },
-            "bin": [
-                "Resources/bin/yaml-lint"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Loads and dumps YAML files",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/yaml/tree/v5.2.5"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2021-03-06T07:59:01+00:00"
-        },
-        {
             "name": "symplify/autowire-array-parameter",
             "version": "dev-main",
             "dist": {
@@ -3693,7 +3562,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "6bfc2bb8422269c0143a6c6e77ca663122ab391e"
+                "reference": "a0cf55a1827c52d22e54e475278fe260b45aa41a"
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^2.18.2",
@@ -3701,7 +3570,7 @@
                 "php": ">=7.3",
                 "symplify/autowire-array-parameter": "dev-main",
                 "symplify/package-builder": "dev-main",
-                "symplify/rule-doc-generator": "dev-main",
+                "symplify/rule-doc-generator-contracts": "dev-main",
                 "symplify/symplify-kernel": "dev-main"
             },
             "require-dev": {
@@ -3713,6 +3582,7 @@
                 "symfony/http-kernel": "^4.4|^5.2",
                 "symplify/easy-coding-standard-tester": "dev-main",
                 "symplify/php-config-printer": "dev-main",
+                "symplify/rule-doc-generator": "dev-main",
                 "symplify/smart-file-system": "dev-main"
             },
             "type": "library",
@@ -3927,50 +3797,6 @@
             }
         },
         {
-            "name": "symplify/markdown-diff",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../../packages/markdown-diff",
-                "reference": "b637fc80f9ee7eb19b11bf0399803739e7954712"
-            },
-            "require": {
-                "nette/utils": "^3.2",
-                "php": ">=7.3",
-                "sebastian/diff": "^3.0|^4.0",
-                "symfony/dependency-injection": "^5.2",
-                "symfony/http-kernel": "^4.4|^5.2",
-                "symplify/package-builder": "dev-main"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "9.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symplify\\MarkdownDiff\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Symplify\\MarkdownDiff\\Tests\\": "tests"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Package to print diffs for Markdown",
-            "transport-options": {
-                "symlink": false,
-                "relative": true
-            }
-        },
-        {
             "name": "symplify/package-builder",
             "version": "dev-main",
             "dist": {
@@ -4019,82 +3845,17 @@
             }
         },
         {
-            "name": "symplify/php-config-printer",
+            "name": "symplify/rule-doc-generator-contracts",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../../packages/php-config-printer",
-                "reference": "0f4b573fa10a054f3ce650403e94720c46955a27"
+                "url": "../../packages/rule-doc-generator-contracts",
+                "reference": "3cca32a431202b6187430c96bbb66421586795d4"
             },
             "require": {
                 "nette/utils": "^3.2",
-                "nikic/php-parser": "^4.10.4",
-                "php": ">=7.3",
-                "symfony/http-kernel": "^4.4|^5.2",
-                "symfony/yaml": "^4.4|^5.2",
-                "symplify/symplify-kernel": "dev-main"
+                "php": ">=7.3"
             },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5",
-                "symplify/easy-testing": "dev-main"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "9.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symplify\\PhpConfigPrinter\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Symplify\\PhpConfigPrinter\\Tests\\": "tests"
-                },
-                "files": [
-                    "tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_objects_function.php",
-                    "tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_object_function.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Print Symfony services array with configuration to to plain PHP file format thanks to this simple php-parser wrapper",
-            "transport-options": {
-                "symlink": false,
-                "relative": true
-            }
-        },
-        {
-            "name": "symplify/rule-doc-generator",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../../packages/rule-doc-generator",
-                "reference": "e57f62ccfce3910cc1d0b729b387a5da811c4ea1"
-            },
-            "require": {
-                "nette/neon": "^3.2",
-                "nette/robot-loader": "^3.3",
-                "php": ">=7.3",
-                "symfony/console": "^4.4|^5.2",
-                "symfony/dependency-injection": "^5.2",
-                "symplify/markdown-diff": "dev-main",
-                "symplify/package-builder": "dev-main",
-                "symplify/php-config-printer": "dev-main",
-                "symplify/smart-file-system": "dev-main",
-                "symplify/symplify-kernel": "dev-main"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.18.2",
-                "phpstan/phpstan": "^0.12.80",
-                "phpunit/phpunit": "^9.5"
-            },
-            "bin": [
-                "bin/rule-doc-generator"
-            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -4106,18 +3867,10 @@
                     "Symplify\\RuleDocGenerator\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Symplify\\RuleDocGenerator\\Tests\\": "tests"
-                },
-                "classmap": [
-                    "stubs"
-                ]
-            },
             "license": [
                 "MIT"
             ],
-            "description": "Documentation generator for coding standard or static analysis rules",
+            "description": "Contracts for production code of RuleDocGenerator",
             "transport-options": {
                 "symlink": false,
                 "relative": true
@@ -4435,6 +4188,62 @@
                 }
             ],
             "time": "2020-11-13T09:40:50+00:00"
+        },
+        {
+            "name": "nikic/php-parser",
+            "version": "v4.10.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c6d052fc58cb876152f89f532b95a8d7907e7f0e",
+                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "ircmaxell/php-yacc": "^0.0.7",
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
+            },
+            "bin": [
+                "bin/php-parse"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpParser\\": "lib/PhpParser"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov"
+                }
+            ],
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/nikic/PHP-Parser/issues",
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.10.4"
+            },
+            "time": "2020-12-20T10:01:03+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -6092,6 +5901,81 @@
             "time": "2020-09-28T06:39:44+00:00"
         },
         {
+            "name": "symfony/yaml",
+            "version": "v5.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "298a08ddda623485208506fcee08817807a251dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/298a08ddda623485208506fcee08817807a251dd",
+                "reference": "298a08ddda623485208506fcee08817807a251dd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1",
+                "symfony/polyfill-ctype": "~1.8"
+            },
+            "conflict": {
+                "symfony/console": "<4.4"
+            },
+            "require-dev": {
+                "symfony/console": "^4.4|^5.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "bin": [
+                "Resources/bin/yaml-lint"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Loads and dumps YAML files",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v5.2.5"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-03-06T07:59:01+00:00"
+        },
+        {
             "name": "symplify/easy-coding-standard-tester",
             "version": "dev-main",
             "dist": {
@@ -6128,6 +6012,55 @@
                 "MIT"
             ],
             "description": "The Best Way to Test Sniffs and Fixers",
+            "transport-options": {
+                "symlink": false,
+                "relative": true
+            }
+        },
+        {
+            "name": "symplify/php-config-printer",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../../packages/php-config-printer",
+                "reference": "0f4b573fa10a054f3ce650403e94720c46955a27"
+            },
+            "require": {
+                "nette/utils": "^3.2",
+                "nikic/php-parser": "^4.10.4",
+                "php": ">=7.3",
+                "symfony/http-kernel": "^4.4|^5.2",
+                "symfony/yaml": "^4.4|^5.2",
+                "symplify/symplify-kernel": "dev-main"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "symplify/easy-testing": "dev-main"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "9.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symplify\\PhpConfigPrinter\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Symplify\\PhpConfigPrinter\\Tests\\": "tests"
+                },
+                "files": [
+                    "tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_objects_function.php",
+                    "tests/Printer/SmartPhpConfigPrinter/Source/custom_inline_object_function.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Print Symfony services array with configuration to to plain PHP file format thanks to this simple php-parser wrapper",
             "transport-options": {
                 "symlink": false,
                 "relative": true

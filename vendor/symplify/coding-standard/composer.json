@@ -9,7 +9,7 @@
         "symplify\/symplify-kernel": "dev-main",
         "symplify\/package-builder": "dev-main",
         "symplify\/autowire-array-parameter": "dev-main",
-        "symplify\/rule-doc-generator": "dev-main"
+        "symplify\/rule-doc-generator-contracts": "dev-main"
     },
     "require-dev": {
         "nette\/application": "^3.1",
@@ -20,7 +20,8 @@
         "symplify\/smart-file-system": "dev-main",
         "symfony\/framework-bundle": "^4.4|^5.2",
         "symplify\/php-config-printer": "dev-main",
-        "phpunit\/phpunit": "^9.5"
+        "phpunit\/phpunit": "^9.5",
+        "symplify\/rule-doc-generator": "dev-main"
     },
     "autoload": {
         "psr-4": {

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0ba97041430d\Symfony\Component\Console\Command;
+namespace _PhpScoper0b185984cfb7\Symfony\Component\Console\Command;
 
 /**
  * Interface for command reacting to signal.

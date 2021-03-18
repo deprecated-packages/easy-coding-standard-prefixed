@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\PHPUnit\Behavior;
 
-use _PhpScoper0ba97041430d\Symfony\Component\Finder\Finder;
+use _PhpScoper0b185984cfb7\Symfony\Component\Finder\Finder;
 use Symplify\EasyTesting\ValueObject\ExpectedAndOutputFileInfoPair;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -36,7 +36,7 @@ trait DirectoryAssertableTrait
      */
     private function findFileInfosInDirectory(string $directory) : array
     {
-        $firstDirectoryFinder = new \_PhpScoper0ba97041430d\Symfony\Component\Finder\Finder();
+        $firstDirectoryFinder = new \_PhpScoper0b185984cfb7\Symfony\Component\Finder\Finder();
         $firstDirectoryFinder->files()->in($directory);
         $finderSanitizer = new \Symplify\SmartFileSystem\Finder\FinderSanitizer();
         return $finderSanitizer->sanitize($firstDirectoryFinder);
