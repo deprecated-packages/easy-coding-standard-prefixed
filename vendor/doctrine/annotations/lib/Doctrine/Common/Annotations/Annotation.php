@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper0b185984cfb7\Doctrine\Common\Annotations;
+namespace _PhpScoperd47a2fa2a77e\Doctrine\Common\Annotations;
 
 use BadMethodCallException;
 use function sprintf;

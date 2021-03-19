@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0b185984cfb7\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoperd47a2fa2a77e\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper0b185984cfb7\Psr\Container\ContainerInterface;
-use _PhpScoper0b185984cfb7\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScoper0b185984cfb7\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
-use _PhpScoper0b185984cfb7\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoperd47a2fa2a77e\Psr\Container\ContainerInterface;
+use _PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
+use _PhpScoperd47a2fa2a77e\Symfony\Component\HttpKernel\Event\RequestEvent;
 /**
  * Sets the session in the request.
  *
@@ -25,23 +25,23 @@ use _PhpScoper0b185984cfb7\Symfony\Component\HttpKernel\Event\RequestEvent;
  *
  * @final
  */
-class SessionListener extends \_PhpScoper0b185984cfb7\Symfony\Component\HttpKernel\EventListener\AbstractSessionListener
+class SessionListener extends \_PhpScoperd47a2fa2a77e\Symfony\Component\HttpKernel\EventListener\AbstractSessionListener
 {
-    public function __construct(\_PhpScoper0b185984cfb7\Psr\Container\ContainerInterface $container, bool $debug = \false)
+    public function __construct(\_PhpScoperd47a2fa2a77e\Psr\Container\ContainerInterface $container, bool $debug = \false)
     {
         parent::__construct($container, $debug);
     }
-    public function onKernelRequest(\_PhpScoper0b185984cfb7\Symfony\Component\HttpKernel\Event\RequestEvent $event)
+    public function onKernelRequest(\_PhpScoperd47a2fa2a77e\Symfony\Component\HttpKernel\Event\RequestEvent $event)
     {
         parent::onKernelRequest($event);
         if (!$event->isMasterRequest() || !$this->container->has('session')) {
             return;
         }
-        if ($this->container->has('session_storage') && ($storage = $this->container->get('session_storage')) instanceof \_PhpScoper0b185984cfb7\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage && ($masterRequest = $this->container->get('request_stack')->getMasterRequest()) && $masterRequest->isSecure()) {
+        if ($this->container->has('session_storage') && ($storage = $this->container->get('session_storage')) instanceof \_PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage && ($masterRequest = $this->container->get('request_stack')->getMasterRequest()) && $masterRequest->isSecure()) {
             $storage->setOptions(['cookie_secure' => \true]);
         }
     }
-    protected function getSession() : ?\_PhpScoper0b185984cfb7\Symfony\Component\HttpFoundation\Session\SessionInterface
+    protected function getSession() : ?\_PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\Session\SessionInterface
     {
         if (!$this->container->has('session')) {
             return null;

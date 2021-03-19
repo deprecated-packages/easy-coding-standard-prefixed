@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0b185984cfb7\Symfony\Component\Console;
+namespace _PhpScoperd47a2fa2a77e\Symfony\Component\Console;
 
-use _PhpScoper0b185984cfb7\Symfony\Component\Console\Event\ConsoleCommandEvent;
-use _PhpScoper0b185984cfb7\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use _PhpScoper0b185984cfb7\Symfony\Component\Console\Event\ConsoleSignalEvent;
-use _PhpScoper0b185984cfb7\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use _PhpScoperd47a2fa2a77e\Symfony\Component\Console\Event\ConsoleCommandEvent;
+use _PhpScoperd47a2fa2a77e\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use _PhpScoperd47a2fa2a77e\Symfony\Component\Console\Event\ConsoleSignalEvent;
+use _PhpScoperd47a2fa2a77e\Symfony\Component\Console\Event\ConsoleTerminateEvent;
 /**
  * Contains all events dispatched by an Application.
  *
@@ -57,5 +57,5 @@ final class ConsoleEvents
      *
      * These aliases can be consumed by RegisterListenersPass.
      */
-    public const ALIASES = [\_PhpScoper0b185984cfb7\Symfony\Component\Console\Event\ConsoleCommandEvent::class => self::COMMAND, \_PhpScoper0b185984cfb7\Symfony\Component\Console\Event\ConsoleErrorEvent::class => self::ERROR, \_PhpScoper0b185984cfb7\Symfony\Component\Console\Event\ConsoleSignalEvent::class => self::SIGNAL, \_PhpScoper0b185984cfb7\Symfony\Component\Console\Event\ConsoleTerminateEvent::class => self::TERMINATE];
+    public const ALIASES = [\_PhpScoperd47a2fa2a77e\Symfony\Component\Console\Event\ConsoleCommandEvent::class => self::COMMAND, \_PhpScoperd47a2fa2a77e\Symfony\Component\Console\Event\ConsoleErrorEvent::class => self::ERROR, \_PhpScoperd47a2fa2a77e\Symfony\Component\Console\Event\ConsoleSignalEvent::class => self::SIGNAL, \_PhpScoperd47a2fa2a77e\Symfony\Component\Console\Event\ConsoleTerminateEvent::class => self::TERMINATE];
 }

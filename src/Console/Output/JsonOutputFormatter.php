@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Output;
 
-use _PhpScoper0b185984cfb7\Nette\Utils\Json;
+use _PhpScoperd47a2fa2a77e\Nette\Utils\Json;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface;
 use Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult;
@@ -52,7 +52,7 @@ final class JsonOutputFormatter implements \Symplify\EasyCodingStandard\Contract
         foreach ($fileDiffs as $fileDiff) {
             $errorsArray[self::FILES][$fileDiff->getRelativeFilePathFromCwd()]['diffs'][] = ['diff' => $fileDiff->getDiff(), 'applied_checkers' => $fileDiff->getAppliedCheckers()];
         }
-        return \_PhpScoper0b185984cfb7\Nette\Utils\Json::encode($errorsArray, \_PhpScoper0b185984cfb7\Nette\Utils\Json::PRETTY);
+        return \_PhpScoperd47a2fa2a77e\Nette\Utils\Json::encode($errorsArray, \_PhpScoperd47a2fa2a77e\Nette\Utils\Json::PRETTY);
     }
     /**
      * @return mixed[]

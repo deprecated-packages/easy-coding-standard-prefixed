@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper0b185984cfb7\Nette\Utils;
+namespace _PhpScoperd47a2fa2a77e\Nette\Utils;
 
-use _PhpScoper0b185984cfb7\Nette;
+use _PhpScoperd47a2fa2a77e\Nette;
 /**
  * Floating-point numbers comparison.
  */
