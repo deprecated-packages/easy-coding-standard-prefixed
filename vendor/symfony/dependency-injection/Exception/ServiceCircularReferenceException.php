@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Exception;
+namespace _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * This exception is thrown when a circular reference is detected.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ServiceCircularReferenceException extends \_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Exception\RuntimeException
+class ServiceCircularReferenceException extends \_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Exception\RuntimeException
 {
     private $serviceId;
     private $path;

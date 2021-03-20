@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd47a2fa2a77e\Symfony\Contracts\HttpClient\Exception;
+namespace _PhpScoperb0c6500a504c\Symfony\Contracts\HttpClient\Exception;
 
 /**
  * When a content-type cannot be decoded to the expected representation.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface DecodingExceptionInterface extends \_PhpScoperd47a2fa2a77e\Symfony\Contracts\HttpClient\Exception\ExceptionInterface
+interface DecodingExceptionInterface extends \_PhpScoperb0c6500a504c\Symfony\Contracts\HttpClient\Exception\ExceptionInterface
 {
 }

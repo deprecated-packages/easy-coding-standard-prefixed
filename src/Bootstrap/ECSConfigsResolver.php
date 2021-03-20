@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Bootstrap;
 
-use _PhpScoperd47a2fa2a77e\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperb0c6500a504c\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Set\ConstantReflectionSetFactory;
 use Symplify\EasyCodingStandard\Set\EasyCodingStandardSetProvider;
 use Symplify\SetConfigResolver\SetAwareConfigResolver;
@@ -19,7 +19,7 @@ final class ECSConfigsResolver
         $easyCodingStandardSetProvider = new \Symplify\EasyCodingStandard\Set\EasyCodingStandardSetProvider(new \Symplify\EasyCodingStandard\Set\ConstantReflectionSetFactory());
         $this->setAwareConfigResolver = new \Symplify\SetConfigResolver\SetAwareConfigResolver($easyCodingStandardSetProvider);
     }
-    public function resolveFromInput(\_PhpScoperd47a2fa2a77e\Symfony\Component\Console\Input\InputInterface $input) : \Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs
+    public function resolveFromInput(\_PhpScoperb0c6500a504c\Symfony\Component\Console\Input\InputInterface $input) : \Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs
     {
         $configFileInfos = [];
         $mainConfigFileInfo = $this->setAwareConfigResolver->resolveFromInputWithFallback($input, ['ecs.php']);

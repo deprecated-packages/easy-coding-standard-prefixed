@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\RateLimiter;
+namespace _PhpScoperb0c6500a504c\Symfony\Component\HttpFoundation\RateLimiter;
 
-use _PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperd47a2fa2a77e\Symfony\Component\RateLimiter\LimiterInterface;
-use _PhpScoperd47a2fa2a77e\Symfony\Component\RateLimiter\Policy\NoLimiter;
-use _PhpScoperd47a2fa2a77e\Symfony\Component\RateLimiter\RateLimit;
+use _PhpScoperb0c6500a504c\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperb0c6500a504c\Symfony\Component\RateLimiter\LimiterInterface;
+use _PhpScoperb0c6500a504c\Symfony\Component\RateLimiter\Policy\NoLimiter;
+use _PhpScoperb0c6500a504c\Symfony\Component\RateLimiter\RateLimit;
 /**
  * An implementation of RequestRateLimiterInterface that
  * fits most use-cases.
@@ -22,13 +22,13 @@ use _PhpScoperd47a2fa2a77e\Symfony\Component\RateLimiter\RateLimit;
  *
  * @experimental in 5.2
  */
-abstract class AbstractRequestRateLimiter implements \_PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface
+abstract class AbstractRequestRateLimiter implements \_PhpScoperb0c6500a504c\Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface
 {
-    public function consume(\_PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\Request $request) : \_PhpScoperd47a2fa2a77e\Symfony\Component\RateLimiter\RateLimit
+    public function consume(\_PhpScoperb0c6500a504c\Symfony\Component\HttpFoundation\Request $request) : \_PhpScoperb0c6500a504c\Symfony\Component\RateLimiter\RateLimit
     {
         $limiters = $this->getLimiters($request);
         if (0 === \count($limiters)) {
-            $limiters = [new \_PhpScoperd47a2fa2a77e\Symfony\Component\RateLimiter\Policy\NoLimiter()];
+            $limiters = [new \_PhpScoperb0c6500a504c\Symfony\Component\RateLimiter\Policy\NoLimiter()];
         }
         $minimalRateLimit = null;
         foreach ($limiters as $limiter) {
@@ -39,7 +39,7 @@ abstract class AbstractRequestRateLimiter implements \_PhpScoperd47a2fa2a77e\Sym
         }
         return $minimalRateLimit;
     }
-    public function reset(\_PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\Request $request) : void
+    public function reset(\_PhpScoperb0c6500a504c\Symfony\Component\HttpFoundation\Request $request) : void
     {
         foreach ($this->getLimiters($request) as $limiter) {
             $limiter->reset();
@@ -48,5 +48,5 @@ abstract class AbstractRequestRateLimiter implements \_PhpScoperd47a2fa2a77e\Sym
     /**
      * @return LimiterInterface[] a set of limiters using keys extracted from the request
      */
-    protected abstract function getLimiters(\_PhpScoperd47a2fa2a77e\Symfony\Component\HttpFoundation\Request $request) : array;
+    protected abstract function getLimiters(\_PhpScoperb0c6500a504c\Symfony\Component\HttpFoundation\Request $request) : array;
 }

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceConfigurator extends \_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class ServiceConfigurator extends \_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     public const FACTORY = 'services';
     use Traits\AbstractTrait;
@@ -41,7 +41,7 @@ class ServiceConfigurator extends \_PhpScoperd47a2fa2a77e\Symfony\Component\Depe
     private $instanceof;
     private $allowParent;
     private $path;
-    public function __construct(\_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Definition $definition, $id, array $defaultTags, string $path = null)
+    public function __construct(\_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerBuilder $container, array $instanceof, bool $allowParent, \_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, \_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Definition $definition, $id, array $defaultTags, string $path = null)
     {
         $this->container = $container;
         $this->instanceof = $instanceof;

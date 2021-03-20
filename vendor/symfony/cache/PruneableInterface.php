@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd47a2fa2a77e\Symfony\Component\Cache;
+namespace _PhpScoperb0c6500a504c\Symfony\Component\Cache;
 
 /**
  * Interface extends psr-6 and psr-16 caches to allow for pruning (deletion) of all expired cache items.

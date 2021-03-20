@@ -60,9 +60,9 @@ use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraConsecutiveBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
-use _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerBuilder;
-final class RemoveMutualCheckersCompilerPass implements \_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerBuilder;
+final class RemoveMutualCheckersCompilerPass implements \_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * List of checkers with the same functionality. If found, only the first one is used.
@@ -116,7 +116,7 @@ final class RemoveMutualCheckersCompilerPass implements \_PhpScoperd47a2fa2a77e\
         [\PhpCsFixer\Fixer\Operator\IncrementStyleFixer::class, \PhpCsFixer\Fixer\Operator\PreIncrementFixer::class],
         [\PhpCsFixer\Fixer\Comment\SingleLineCommentStyleFixer::class, \PhpCsFixer\Fixer\Comment\HashToSlashCommentFixer::class],
     ];
-    public function process(\_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function process(\_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $checkersToRemove = $this->resolveCheckersToRemove($containerBuilder->getServiceIds());
         $definitions = $containerBuilder->getDefinitions();

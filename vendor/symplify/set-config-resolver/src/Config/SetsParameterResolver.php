@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Config;
 
-use _PhpScoperd47a2fa2a77e\Symfony\Component\Config\FileLocator;
-use _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoperb0c6500a504c\Symfony\Component\Config\FileLocator;
+use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symplify\Astral\Exception\ShouldNotHappenException;
 use Symplify\SetConfigResolver\SetResolver;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -54,8 +54,8 @@ final class SetsParameterResolver
     private function resolveSetsParameterFromPhpFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $configFileInfo) : array
     {
         // php file loader
-        $containerBuilder = new \_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerBuilder();
-        $phpFileLoader = new \_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperd47a2fa2a77e\Symfony\Component\Config\FileLocator());
+        $containerBuilder = new \_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerBuilder();
+        $phpFileLoader = new \_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Loader\PhpFileLoader($containerBuilder, new \_PhpScoperb0c6500a504c\Symfony\Component\Config\FileLocator());
         $phpFileLoader->load($configFileInfo->getRealPath());
         if (!$containerBuilder->hasParameter(self::SETS)) {
             return [];

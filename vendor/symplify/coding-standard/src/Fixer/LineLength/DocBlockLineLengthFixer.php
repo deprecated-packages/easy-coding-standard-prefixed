@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoperd47a2fa2a77e\Nette\Utils\Strings;
+use _PhpScoperb0c6500a504c\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -137,7 +137,7 @@ CODE_SAMPLE
     }
     private function resolveIndentationStringFor(string $docBlock) : string
     {
-        $matches = \_PhpScoperd47a2fa2a77e\Nette\Utils\Strings::match($docBlock, self::INDENTATION_BEFORE_ASTERISK_REGEX);
+        $matches = \_PhpScoperb0c6500a504c\Nette\Utils\Strings::match($docBlock, self::INDENTATION_BEFORE_ASTERISK_REGEX);
         return $matches[self::INDENTATION_PART] ?? '';
     }
     private function formatLinesAsDocBlockContent(array $docBlockLines, string $indentationString) : string

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\LazyProxy\Instantiator;
+namespace _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\LazyProxy\Instantiator;
 
-use _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Definition;
 /**
  * Lazy proxy instantiator, capable of instantiating a proxy given a container, the
  * service definitions and a callback that produces the real service instance.
@@ -28,5 +28,5 @@ interface InstantiatorInterface
      *
      * @return object
      */
-    public function instantiateProxy(\_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerInterface $container, \_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Definition $definition, string $id, callable $realInstantiator);
+    public function instantiateProxy(\_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerInterface $container, \_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Definition $definition, string $id, callable $realInstantiator);
 }

@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd47a2fa2a77e\SebastianBergmann\Diff;
+namespace _PhpScoperb0c6500a504c\SebastianBergmann\Diff;
 
 use function array_fill;
 use function array_merge;
@@ -18,7 +18,7 @@ use function array_slice;
 use function count;
 use function in_array;
 use function max;
-final class MemoryEfficientLongestCommonSubsequenceCalculator implements \_PhpScoperd47a2fa2a77e\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
+final class MemoryEfficientLongestCommonSubsequenceCalculator implements \_PhpScoperb0c6500a504c\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
 {
     /**
      * {@inheritdoc}

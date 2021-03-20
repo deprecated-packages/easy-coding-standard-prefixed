@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd47a2fa2a77e\Symfony\Component\Console;
+namespace _PhpScoperb0c6500a504c\Symfony\Component\Console;
 
-use _PhpScoperd47a2fa2a77e\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  */
@@ -18,7 +18,7 @@ final class Cursor
 {
     private $output;
     private $input;
-    public function __construct(\_PhpScoperd47a2fa2a77e\Symfony\Component\Console\Output\OutputInterface $output, $input = null)
+    public function __construct(\_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface $output, $input = null)
     {
         $this->output = $output;
         $this->input = $input ?? (\defined('STDIN') ? \STDIN : \fopen('php://input', 'r+'));

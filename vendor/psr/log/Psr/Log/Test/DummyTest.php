@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperd47a2fa2a77e\Psr\Log\Test;
+namespace _PhpScoperb0c6500a504c\Psr\Log\Test;
 
 /**
  * This class is internal and does not follow the BC promise.

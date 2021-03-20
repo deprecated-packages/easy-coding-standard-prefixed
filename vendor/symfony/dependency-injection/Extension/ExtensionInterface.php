@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\Extension;
+namespace _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ExtensionInterface is the interface implemented by container extension classes.
  *
@@ -23,7 +23,7 @@ interface ExtensionInterface
      *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
      */
-    public function load(array $configs, \_PhpScoperd47a2fa2a77e\Symfony\Component\DependencyInjection\ContainerBuilder $container);
+    public function load(array $configs, \_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\ContainerBuilder $container);
     /**
      * Returns the namespace to be used for this extension (XML namespace).
      *
@@ -50,4 +50,4 @@ interface ExtensionInterface
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-\class_alias('_PhpScoperd47a2fa2a77e\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface', 'Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface', \false);
+\class_alias('_PhpScoperb0c6500a504c\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface', 'Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface', \false);
