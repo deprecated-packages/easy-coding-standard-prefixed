@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,23 +13,21 @@
 namespace PhpCsFixer\Fixer\LanguageConstruct;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Vladimir Reznichenko <kalessil@gmail.com>
  */
-final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class IsNullFixer extends \PhpCsFixer\AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replaces `is_null($var)` expression with `null === $var`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = is_null(\$b);\n")], null, 'Risky when the function `is_null` is overridden.');
     }
@@ -37,28 +36,28 @@ final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer
      *
      * Must run before YodaStyleFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         static $sequenceNeeded = [[\T_STRING, 'is_null'], '('];
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
@@ -125,32 +124,13 @@ final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer
             }
             // sequence which we'll use as a replacement
             $replacement = [new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'null']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']), new \PhpCsFixer\Tokenizer\Token($isInvertedNullCheck ? [\T_IS_NOT_IDENTICAL, '!=='] : [\T_IS_IDENTICAL, '===']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])];
-            if (\true === $this->configuration['use_yoda_style']) {
-                if ($wrapIntoParentheses) {
-                    \array_unshift($replacement, new \PhpCsFixer\Tokenizer\Token('('));
-                    $tokens->insertAt($referenceEnd + 1, new \PhpCsFixer\Tokenizer\Token(')'));
-                }
-                $tokens->overrideRange($isNullIndex, $isNullIndex, $replacement);
-            } else {
-                $replacement = \array_reverse($replacement);
-                if ($wrapIntoParentheses) {
-                    $replacement[] = new \PhpCsFixer\Tokenizer\Token(')');
-                    $tokens[$isNullIndex] = new \PhpCsFixer\Tokenizer\Token('(');
-                } else {
-                    $tokens->clearAt($isNullIndex);
-                }
-                $tokens->insertAt($referenceEnd + 1, $replacement);
+            if ($wrapIntoParentheses) {
+                \array_unshift($replacement, new \PhpCsFixer\Tokenizer\Token('('));
+                $tokens->insertAt($referenceEnd + 1, new \PhpCsFixer\Tokenizer\Token(')'));
             }
+            $tokens->overrideRange($isNullIndex, $isNullIndex, $replacement);
             // nested is_null calls support
             $currIndex = $isNullIndex;
         }
-    }
-    /**
-     * {@inheritdoc}
-     */
-    protected function createConfigurationDefinition()
-    {
-        // @todo 3.0 drop `ConfigurationDefinitionFixerInterface`
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('use_yoda_style', 'Whether Yoda style conditions should be used.'))->setAllowedTypes(['bool'])->setDefault(\true)->setDeprecationMessage('Use `yoda_style` fixer instead.')->getOption()]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,6 +16,7 @@ use PhpCsFixer\AbstractPhpdocToTypeDeclarationFixer;
 use PhpCsFixer\DocBlock\Annotation;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Preg;
@@ -27,9 +29,9 @@ use PhpCsFixer\Tokenizer\Tokens;
 final class PhpdocToParamTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDeclarationFixer
 {
     /** @internal */
-    const CLASS_REGEX = '/^\\\\?[a-zA-Z_\\x7f-\\xff](?:\\\\?[a-zA-Z0-9_\\x7f-\\xff]+)*(?<array>\\[\\])*$/';
+    public const CLASS_REGEX = '/^\\\\?[a-zA-Z_\\x7f-\\xff](?:\\\\?[a-zA-Z0-9_\\x7f-\\xff]+)*(?<array>\\[\\])*$/';
     /** @internal */
-    const MINIMUM_PHP_VERSION = 70000;
+    public const MINIMUM_PHP_VERSION = 70000;
     /**
      * @var array{int, string}[]
      */
@@ -41,7 +43,7 @@ final class PhpdocToParamTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDecla
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('EXPERIMENTAL: Takes `@param` annotations of non-mixed types and adjusts accordingly the function signature. Requires PHP >= 7.0.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
 
@@ -58,7 +60,7 @@ function my_foo($bar)
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return \PHP_VERSION_ID >= self::MINIMUM_PHP_VERSION && $tokens->isTokenKindFound(\T_FUNCTION);
     }
@@ -66,23 +68,23 @@ function my_foo($bar)
      * {@inheritdoc}
      *
      * Must run before NoSuperfluousPhpdocTagsFixer, PhpdocAlignFixer.
-     * Must run after CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
+     * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 8;
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; 0 < $index; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_FUNCTION)) {
@@ -198,7 +200,7 @@ function my_foo($bar)
      *
      * @return Annotation[]
      */
-    private function findParamAnnotations(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function findParamAnnotations(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : array
     {
         do {
             $index = $tokens->getPrevNonWhitespace($index);
@@ -209,13 +211,7 @@ function my_foo($bar)
         $doc = new \PhpCsFixer\DocBlock\DocBlock($tokens[$index]->getContent());
         return $doc->getAnnotationsOfType('param');
     }
-    /**
-     * @param int        $index
-     * @param Annotation $paramTypeAnnotation
-     *
-     * @return null|int
-     */
-    private function findCorrectVariable(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $paramTypeAnnotation)
+    private function findCorrectVariable(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, \PhpCsFixer\DocBlock\Annotation $paramTypeAnnotation) : ?int
     {
         $nextFunction = $tokens->getNextTokenOfKind($index, [[\T_FUNCTION]]);
         $variableIndex = $tokens->getNextTokenOfKind($index, [[\T_VARIABLE]]);
@@ -236,27 +232,15 @@ function my_foo($bar)
      * Determine whether the function already has a param type hint.
      *
      * @param int $index The index of the end of the function definition line, EG at { or ;
-     *
-     * @return bool
      */
-    private function hasParamTypeHint(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function hasParamTypeHint(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
     {
         return $tokens[$index]->isGivenKind([\T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \T_CALLABLE, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE]);
     }
     /**
-     * @param string $paramType
-     * @param int    $index       The index of the end of the function definition line, EG at { or ;
-     * @param bool   $hasNull
-     * @param bool   $hasArray
-     * @param bool   $hasIterable
-     * @param bool   $hasString
-     * @param bool   $hasInt
-     * @param bool   $hasFloat
-     * @param bool   $hasBool
-     * @param bool   $hasCallable
-     * @param bool   $hasObject
+     * @param int $index The index of the end of the function definition line, EG at { or ;
      */
-    private function fixFunctionDefinition($paramType, \PhpCsFixer\Tokenizer\Tokens $tokens, $index, $hasNull, $hasArray, $hasIterable, $hasString, $hasInt, $hasFloat, $hasBool, $hasCallable, $hasObject)
+    private function fixFunctionDefinition(string $paramType, \PhpCsFixer\Tokenizer\Tokens $tokens, int $index, bool $hasNull, bool $hasArray, bool $hasIterable, bool $hasString, bool $hasInt, bool $hasFloat, bool $hasBool, bool $hasCallable, bool $hasObject) : void
     {
         $newTokens = [];
         if (\true === $hasIterable && \true === $hasArray) {

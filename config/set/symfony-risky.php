@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperb0c6500a504c;
+namespace _PhpScoper8583deb8ab74;
 
 use PhpCsFixer\Fixer\Alias\EregToPregFixer;
 use PhpCsFixer\Fixer\Alias\NoAliasFunctionsFixer;
@@ -23,8 +23,8 @@ use PhpCsFixer\Fixer\LanguageConstruct\IsNullFixer;
 use PhpCsFixer\Fixer\Naming\NoHomoglyphNamesFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitConstructFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMockShortWillReturnFixer;
-use _PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoperb0c6500a504c\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoper8583deb8ab74\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoper8583deb8ab74\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\LanguageConstruct\DirConstantFixer::class);
     $services->set(\PhpCsFixer\Fixer\Alias\EregToPregFixer::class);
@@ -43,7 +43,6 @@ return static function (\_PhpScoperb0c6500a504c\Symfony\Component\DependencyInje
     $services->set(\PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer::class);
     $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitConstructFixer::class);
     $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitMockShortWillReturnFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Basic\Psr4Fixer::class);
     $services->set(\PhpCsFixer\Fixer\ClassNotation\SelfAccessorFixer::class);
     $services->set(\PhpCsFixer\Fixer\Alias\SetTypeToCastFixer::class);
 };

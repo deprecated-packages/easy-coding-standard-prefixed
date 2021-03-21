@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\LanguageConstruct;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -25,21 +27,21 @@ final class NoUnsetOnPropertyFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Properties should be set to `null` instead of using `unset`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nunset(\$this->a);\n")], null, 'Risky when relying on attributes to be removed using `unset` rather than be set to `null`.' . ' Changing variables to `null` instead of unsetting means these still show up when looping over class variables' . ' and reference properties remain unbroken.' . ' With PHP 7.4, this rule might introduce `null` assignments to properties whose type declaration does not allow it.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_UNSET) && $tokens->isAnyTokenKindsFound([\T_OBJECT_OPERATOR, \T_PAAMAYIM_NEKUDOTAYIM]);
     }
@@ -48,11 +50,11 @@ final class NoUnsetOnPropertyFixer extends \PhpCsFixer\AbstractFixer
      *
      * Must run before CombineConsecutiveUnsetsFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 25;
     }
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_UNSET)) {
@@ -71,11 +73,9 @@ final class NoUnsetOnPropertyFixer extends \PhpCsFixer\AbstractFixer
         }
     }
     /**
-     * @param int $index
-     *
      * @return array<array<string, bool|int>>
      */
-    private function getUnsetsInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getUnsetsInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : array
     {
         $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
         $unsetStart = $tokens->getNextTokenOfKind($index, ['(']);
@@ -90,13 +90,7 @@ final class NoUnsetOnPropertyFixer extends \PhpCsFixer\AbstractFixer
         }
         return $unsets;
     }
-    /**
-     * @param int $index
-     * @param int $endIndex
-     *
-     * @return bool
-     */
-    private function isProperty(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $endIndex)
+    private function isProperty(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, int $endIndex) : bool
     {
         if ($tokens[$index]->isGivenKind(\T_VARIABLE)) {
             $nextIndex = $tokens->getNextMeaningfulToken($index);
@@ -122,10 +116,8 @@ final class NoUnsetOnPropertyFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * @param array<array<string, bool|int>> $unsetsInfo
-     *
-     * @return bool
      */
-    private function isAnyUnsetToTransform(array $unsetsInfo)
+    private function isAnyUnsetToTransform(array $unsetsInfo) : bool
     {
         foreach ($unsetsInfo as $unsetInfo) {
             if ($unsetInfo['isToTransform']) {
@@ -136,9 +128,8 @@ final class NoUnsetOnPropertyFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * @param array<string, bool|int> $unsetInfo
-     * @param bool                    $isLastUnset
      */
-    private function updateTokens(\PhpCsFixer\Tokenizer\Tokens $tokens, array $unsetInfo, $isLastUnset)
+    private function updateTokens(\PhpCsFixer\Tokenizer\Tokens $tokens, array $unsetInfo, bool $isLastUnset) : void
     {
         // if entry is first and to be transform we remove leading "unset("
         if ($unsetInfo['isFirst'] && $unsetInfo['isToTransform']) {

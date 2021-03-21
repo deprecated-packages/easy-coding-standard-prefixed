@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\Operator;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -30,7 +32,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
      *
      * @var array
      */
-    const VALID_BEFORE_ENDTYPES = [
+    public const VALID_BEFORE_ENDTYPES = [
         '=',
         [\T_OPEN_TAG],
         [\T_OPEN_TAG_WITH_ECHO],
@@ -68,7 +70,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Use the Elvis operator `?:` where possible.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$foo = \$foo ? \$foo : 1;\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$foo = \$bar[a()] ? \$bar[a()] : 1; # \"risky\" sample, \"a()\" only gets called once after fixing\n")], null, 'Risky when relying on functions called on both sides of the `?` operator.');
     }
@@ -77,28 +79,28 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
      *
      * Must run before NoTrailingWhitespaceFixer, TernaryOperatorSpacesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound('?');
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         $blockEdgeDefinitions = \PhpCsFixer\Tokenizer\Tokens::getBlockEdgeDefinitions();
         for ($index = \count($tokens) - 5; $index > 1; --$index) {
@@ -125,11 +127,9 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
         }
     }
     /**
-     * @param int $index
-     *
      * @return null|array null if contains ++/-- operator
      */
-    private function getBeforeOperator(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, array $blockEdgeDefinitions)
+    private function getBeforeOperator(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, array $blockEdgeDefinitions) : ?array
     {
         $index = $tokens->getPrevMeaningfulToken($index);
         $before = ['end' => $index];
@@ -166,12 +166,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
         }
         return $before;
     }
-    /**
-     * @param int $index
-     *
-     * @return array
-     */
-    private function getAfterOperator(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getAfterOperator(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : array
     {
         $index = $tokens->getNextMeaningfulToken($index);
         $after = ['start' => $index];
@@ -187,10 +182,8 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * Meaningful compare of tokens within ranges.
-     *
-     * @return bool
      */
-    private function rangeEqualsRange(\PhpCsFixer\Tokenizer\Tokens $tokens, array $range1, array $range2)
+    private function rangeEqualsRange(\PhpCsFixer\Tokenizer\Tokens $tokens, array $range1, array $range2) : bool
     {
         $leftStart = $range1['start'];
         $leftEnd = $range1['end'];
@@ -213,7 +206,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
         }
         return $leftStart > $leftEnd && $rightStart > $rightEnd;
     }
-    private function clearMeaningfulFromRange(\PhpCsFixer\Tokenizer\Tokens $tokens, array $range)
+    private function clearMeaningfulFromRange(\PhpCsFixer\Tokenizer\Tokens $tokens, array $range) : void
     {
         // $range['end'] must be meaningful!
         for ($i = $range['end']; $i >= $range['start']; $i = $tokens->getPrevMeaningfulToken($i)) {

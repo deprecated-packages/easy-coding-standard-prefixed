@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -11,7 +12,7 @@
  */
 namespace PhpCsFixer\Report;
 
-use _PhpScoperb0c6500a504c\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Kévin Gomez <contact@kevingomez.fr>
  *
@@ -22,14 +23,14 @@ final class CheckstyleReporter implements \PhpCsFixer\Report\ReporterInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormat()
+    public function getFormat() : string
     {
         return 'checkstyle';
     }
     /**
      * {@inheritdoc}
      */
-    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary)
+    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary) : string
     {
         if (!\extension_loaded('dom')) {
             throw new \RuntimeException('Cannot generate report! `ext-dom` is not available!');
@@ -46,14 +47,9 @@ final class CheckstyleReporter implements \PhpCsFixer\Report\ReporterInterface
             }
         }
         $dom->formatOutput = \true;
-        return $reportSummary->isDecoratedOutput() ? \_PhpScoperb0c6500a504c\Symfony\Component\Console\Formatter\OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
+        return $reportSummary->isDecoratedOutput() ? \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
     }
-    /**
-     * @param string $appliedFixer
-     *
-     * @return \DOMElement
-     */
-    private function createError(\DOMDocument $dom, $appliedFixer)
+    private function createError(\DOMDocument $dom, string $appliedFixer) : \DOMElement
     {
         $error = $dom->createElement('error');
         $error->setAttribute('severity', 'warning');

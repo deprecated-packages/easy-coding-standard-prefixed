@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,8 +15,6 @@ namespace PhpCsFixer\Console\Command;
 use PhpCsFixer\Differ\DiffConsoleFormatter;
 use PhpCsFixer\Differ\FullDiffer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
-use PhpCsFixer\Fixer\DefinedFixerInterface;
 use PhpCsFixer\Fixer\DeprecatedFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerConfiguration\AliasedFixerOption;
@@ -23,7 +22,6 @@ use PhpCsFixer\FixerConfiguration\AllowedValueSubset;
 use PhpCsFixer\FixerConfiguration\DeprecatedFixerOption;
 use PhpCsFixer\FixerDefinition\CodeSampleInterface;
 use PhpCsFixer\FixerDefinition\FileSpecificCodeSampleInterface;
-use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSampleInterface;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\Preg;
@@ -32,19 +30,19 @@ use PhpCsFixer\StdinFileInfo;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Utils;
 use PhpCsFixer\WordMatcher;
-use _PhpScoperb0c6500a504c\Symfony\Component\Console\Command\Command;
-use _PhpScoperb0c6500a504c\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoperb0c6500a504c\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperb0c6500a504c\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperb0c6500a504c\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper8583deb8ab74\Symfony\Component\Console\Command\Command;
+use _PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper8583deb8ab74\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper8583deb8ab74\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper8583deb8ab74\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
  *
  * @internal
  */
-final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Console\Command\Command
+final class DescribeCommand extends \_PhpScoper8583deb8ab74\Symfony\Component\Console\Command\Command
 {
     protected static $defaultName = 'describe';
     /**
@@ -71,16 +69,16 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
-        $this->setDefinition([new \_PhpScoperb0c6500a504c\Symfony\Component\Console\Input\InputArgument('name', \_PhpScoperb0c6500a504c\Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Name of rule / set.')])->setDescription('Describe rule / ruleset.');
+        $this->setDefinition([new \_PhpScoper8583deb8ab74\Symfony\Component\Console\Input\InputArgument('name', \_PhpScoper8583deb8ab74\Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Name of rule / set.')])->setDescription('Describe rule / ruleset.');
     }
     /**
      * {@inheritdoc}
      */
-    protected function execute(\_PhpScoperb0c6500a504c\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function execute(\_PhpScoper8583deb8ab74\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface $output) : int
     {
-        if (\_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity() && $output instanceof \_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+        if (\_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity() && $output instanceof \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\ConsoleOutputInterface) {
             $stdErr = $output->getErrorOutput();
             $stdErr->writeln($this->getApplication()->getLongVersion());
             $stdErr->writeln(\sprintf('Runtime: <info>PHP %s</info>', \PHP_VERSION));
@@ -100,10 +98,7 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
         }
         return 0;
     }
-    /**
-     * @param string $name
-     */
-    private function describeRule(\_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface $output, $name)
+    private function describeRule(\_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface $output, string $name) : void
     {
         $fixers = $this->getFixers();
         if (!isset($fixers[$name])) {
@@ -111,11 +106,7 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
         }
         /** @var FixerInterface $fixer */
         $fixer = $fixers[$name];
-        if ($fixer instanceof \PhpCsFixer\Fixer\DefinedFixerInterface) {
-            $definition = $fixer->getDefinition();
-        } else {
-            $definition = new \PhpCsFixer\FixerDefinition\FixerDefinition('Description is not available.', []);
-        }
+        $definition = $fixer->getDefinition();
         $description = $definition->getSummary();
         if ($fixer instanceof \PhpCsFixer\Fixer\DeprecatedFixerInterface) {
             $successors = $fixer->getSuccessorsNames();
@@ -124,7 +115,7 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
             $description .= \sprintf(' <error>DEPRECATED</error>: %s.', $message);
         }
         $output->writeln(\sprintf('<info>Description of</info> %s <info>rule</info>.', $name));
-        if ($output->getVerbosity() >= \_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE) {
+        if ($output->getVerbosity() >= \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE) {
             $output->writeln(\sprintf('Fixer class: <comment>%s</comment>.', \get_class($fixer)));
         }
         $output->writeln($description);
@@ -139,12 +130,12 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
             }
             $output->writeln('');
         }
-        if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface) {
+        if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
             $configurationDefinition = $fixer->getConfigurationDefinition();
             $options = $configurationDefinition->getOptions();
             $output->writeln(\sprintf('Fixer is configurable using following option%s:', 1 === \count($options) ? '' : 's'));
             foreach ($options as $option) {
-                $line = '* <info>' . \_PhpScoperb0c6500a504c\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getName()) . '</info>';
+                $line = '* <info>' . \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getName()) . '</info>';
                 $allowed = \PhpCsFixer\Console\Command\HelpCommand::getDisplayableAllowedValues($option);
                 if (null !== $allowed) {
                     foreach ($allowed as &$value) {
@@ -155,14 +146,14 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
                         }
                     }
                 } else {
-                    $allowed = \array_map(static function ($type) {
+                    $allowed = \array_map(static function (string $type) {
                         return '<comment>' . $type . '</comment>';
                     }, $option->getAllowedTypes());
                 }
                 if (null !== $allowed) {
                     $line .= ' (' . \implode(', ', $allowed) . ')';
                 }
-                $description = \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \_PhpScoperb0c6500a504c\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDescription()));
+                $description = \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDescription()));
                 $line .= ': ' . \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', $description)) . '; ';
                 if ($option->hasDefault()) {
                     $line .= \sprintf('defaults to <comment>%s</comment>', \PhpCsFixer\Console\Command\HelpCommand::toString($option->getDefault()));
@@ -170,21 +161,12 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
                     $line .= '<comment>required</comment>';
                 }
                 if ($option instanceof \PhpCsFixer\FixerConfiguration\DeprecatedFixerOption) {
-                    $line .= '. <error>DEPRECATED</error>: ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \_PhpScoperb0c6500a504c\Symfony\Component\Console\Formatter\OutputFormatter::escape(\lcfirst($option->getDeprecationMessage())));
+                    $line .= '. <error>DEPRECATED</error>: ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape(\lcfirst($option->getDeprecationMessage())));
                 }
                 if ($option instanceof \PhpCsFixer\FixerConfiguration\AliasedFixerOption) {
                     $line .= '; <error>DEPRECATED</error> alias: <comment>' . $option->getAlias() . '</comment>';
                 }
                 $output->writeln($line);
-            }
-            $output->writeln('');
-        } elseif ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
-            $output->writeln('<comment>Fixer is configurable.</comment>');
-            if ($definition->getConfigurationDescription()) {
-                $output->writeln($definition->getConfigurationDescription());
-            }
-            if ($definition->getDefaultConfiguration()) {
-                $output->writeln(\sprintf('Default configuration: <comment>%s</comment>.', \PhpCsFixer\Console\Command\HelpCommand::toString($definition->getDefaultConfiguration())));
             }
             $output->writeln('');
         }
@@ -224,10 +206,7 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
             }
         }
     }
-    /**
-     * @param string $name
-     */
-    private function describeSet(\_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface $output, $name)
+    private function describeSet(\_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface $output, string $name) : void
     {
         if (!\in_array($name, $this->getSetNames(), \true)) {
             throw new \PhpCsFixer\Console\Command\DescribeNameNotFoundException($name, 'set');
@@ -247,10 +226,8 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
                 $help .= \sprintf(" * <info>%s</info>%s\n   | %s\n\n", $rule, $set->isRisky() ? ' <error>risky</error>' : '', $this->replaceRstLinks($set->getDescription()));
                 continue;
             }
+            /** @var FixerInterface $fixer */
             $fixer = $fixers[$rule];
-            if (!$fixer instanceof \PhpCsFixer\Fixer\DefinedFixerInterface) {
-                throw new \RuntimeException(\sprintf('Cannot describe rule %s, the fixer does not implement "%s".', $rule, \PhpCsFixer\Fixer\DefinedFixerInterface::class));
-            }
             $definition = $fixer->getDefinition();
             $help .= \sprintf(" * <info>%s</info>%s\n   | %s\n%s\n", $rule, $fixer->isRisky() ? ' <error>risky</error>' : '', $definition->getSummary(), \true !== $config ? \sprintf("   <comment>| Configuration: %s</comment>\n", \PhpCsFixer\Console\Command\HelpCommand::toString($config)) : '');
         }
@@ -259,7 +236,7 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
     /**
      * @return array<string, FixerInterface>
      */
-    private function getFixers()
+    private function getFixers() : array
     {
         if (null !== $this->fixers) {
             return $this->fixers;
@@ -275,7 +252,7 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
     /**
      * @return string[]
      */
-    private function getSetNames()
+    private function getSetNames() : array
     {
         if (null !== $this->setNames) {
             return $this->setNames;
@@ -286,11 +263,11 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
     /**
      * @param string $type 'rule'|'set'
      */
-    private function describeList(\_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface $output, $type)
+    private function describeList(\_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface $output, string $type) : void
     {
-        if ($output->getVerbosity() >= \_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE) {
+        if ($output->getVerbosity() >= \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE) {
             $describe = ['sets' => $this->getSetNames(), 'rules' => $this->getFixers()];
-        } elseif ($output->getVerbosity() >= \_PhpScoperb0c6500a504c\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE) {
+        } elseif ($output->getVerbosity() >= \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE) {
             $describe = 'set' === $type ? ['sets' => $this->getSetNames()] : ['rules' => $this->getFixers()];
         } else {
             return;
@@ -303,12 +280,7 @@ final class DescribeCommand extends \_PhpScoperb0c6500a504c\Symfony\Component\Co
             }
         }
     }
-    /**
-     * @param string $content
-     *
-     * @return string
-     */
-    private function replaceRstLinks($content)
+    private function replaceRstLinks(string $content) : string
     {
         return \PhpCsFixer\Preg::replaceCallback('/(`[^<]+<[^>]+>`_)/', static function (array $matches) {
             return \PhpCsFixer\Preg::replaceCallback('/`(.*)<(.*)>`_/', static function (array $matches) {

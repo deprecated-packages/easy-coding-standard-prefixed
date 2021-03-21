@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -16,11 +17,11 @@ interface FixerConfigurationResolverInterface
     /**
      * @return FixerOptionInterface[]
      */
-    public function getOptions();
+    public function getOptions() : array;
     /**
      * @param array<string, mixed> $configuration
      *
      * @return array<string, mixed>
      */
-    public function resolve(array $configuration);
+    public function resolve(array $configuration) : array;
 }

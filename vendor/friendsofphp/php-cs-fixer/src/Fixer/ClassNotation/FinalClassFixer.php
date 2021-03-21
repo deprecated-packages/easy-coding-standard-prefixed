@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\ClassNotation;
 use PhpCsFixer\AbstractProxyFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
@@ -22,7 +24,7 @@ final class FinalClassFixer extends \PhpCsFixer\AbstractProxyFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('All classes must be final, except abstract ones and Doctrine entities.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 class MyApp {}
@@ -31,7 +33,7 @@ class MyApp {}
     /**
      * {@inheritdoc}
      */
-    protected function createProxyFixers()
+    protected function createProxyFixers() : array
     {
         $fixer = new \PhpCsFixer\Fixer\ClassNotation\FinalInternalClassFixer();
         $fixer->configure(['annotation_include' => [], 'consider_absent_docblock_as_internal_class' => \true]);

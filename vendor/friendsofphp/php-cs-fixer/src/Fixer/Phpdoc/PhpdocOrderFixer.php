@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,6 +16,7 @@ use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -25,14 +27,14 @@ final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Annotations in PHPDoc should be ordered so that `@param` annotations come first, then `@throws` annotations, then `@return` annotations.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 /**
@@ -50,16 +52,16 @@ final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
      * {@inheritdoc}
      *
      * Must run before PhpdocAlignFixer, PhpdocSeparationFixer, PhpdocTrimFixer.
-     * Must run after CommentToPhpdocFixer, PhpdocAddMissingParamAnnotationFixer, PhpdocIndentFixer, PhpdocNoEmptyReturnFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
+     * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocAddMissingParamAnnotationFixer, PhpdocIndentFixer, PhpdocNoEmptyReturnFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -2;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -77,12 +79,8 @@ final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * Move all param annotations in before throws and return annotations.
-     *
-     * @param string $content
-     *
-     * @return string
      */
-    private function moveParamAnnotations($content)
+    private function moveParamAnnotations(string $content) : string
     {
         $doc = new \PhpCsFixer\DocBlock\DocBlock($content);
         $params = $doc->getAnnotationsOfType('param');
@@ -109,12 +107,8 @@ final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * Move all return annotations after param and throws annotations.
-     *
-     * @param string $content
-     *
-     * @return string
      */
-    private function moveReturnAnnotations($content)
+    private function moveReturnAnnotations(string $content) : string
     {
         $doc = new \PhpCsFixer\DocBlock\DocBlock($content);
         $returns = $doc->getAnnotationsOfType('return');

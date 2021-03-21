@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -17,6 +18,7 @@ use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\DocBlock\TagComparator;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -27,7 +29,7 @@ final class PhpdocSeparationFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Annotations in PHPDoc should be grouped together so that annotations of the same type immediately follow each other, and annotations of a different type are separated by a single blank line.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 /**
@@ -46,23 +48,23 @@ function fnc($foo, $bar) {}
      * {@inheritdoc}
      *
      * Must run before PhpdocAlignFixer.
-     * Must run after CommentToPhpdocFixer, GeneralPhpdocAnnotationRemoveFixer, PhpdocIndentFixer, PhpdocNoAccessFixer, PhpdocNoEmptyReturnFixer, PhpdocNoPackageFixer, PhpdocOrderFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
+     * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, GeneralPhpdocAnnotationRemoveFixer, PhpdocIndentFixer, PhpdocNoAccessFixer, PhpdocNoEmptyReturnFixer, PhpdocNoPackageFixer, PhpdocOrderFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -3;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -77,7 +79,7 @@ function fnc($foo, $bar) {}
     /**
      * Make sure the description is separated from the annotations.
      */
-    private function fixDescription(\PhpCsFixer\DocBlock\DocBlock $doc)
+    private function fixDescription(\PhpCsFixer\DocBlock\DocBlock $doc) : void
     {
         foreach ($doc->getLines() as $index => $line) {
             if ($line->containsATag()) {
@@ -94,10 +96,8 @@ function fnc($foo, $bar) {}
     }
     /**
      * Make sure the annotations are correctly separated.
-     *
-     * @return string
      */
-    private function fixAnnotations(\PhpCsFixer\DocBlock\DocBlock $doc)
+    private function fixAnnotations(\PhpCsFixer\DocBlock\DocBlock $doc) : string
     {
         foreach ($doc->getAnnotations() as $index => $annotation) {
             $next = $doc->getAnnotation($index + 1);
@@ -117,7 +117,7 @@ function fnc($foo, $bar) {}
     /**
      * Force the given annotations to immediately follow each other.
      */
-    private function ensureAreTogether(\PhpCsFixer\DocBlock\DocBlock $doc, \PhpCsFixer\DocBlock\Annotation $first, \PhpCsFixer\DocBlock\Annotation $second)
+    private function ensureAreTogether(\PhpCsFixer\DocBlock\DocBlock $doc, \PhpCsFixer\DocBlock\Annotation $first, \PhpCsFixer\DocBlock\Annotation $second) : void
     {
         $pos = $first->getEnd();
         $final = $second->getStart();
@@ -128,7 +128,7 @@ function fnc($foo, $bar) {}
     /**
      * Force the given annotations to have one empty line between each other.
      */
-    private function ensureAreSeparate(\PhpCsFixer\DocBlock\DocBlock $doc, \PhpCsFixer\DocBlock\Annotation $first, \PhpCsFixer\DocBlock\Annotation $second)
+    private function ensureAreSeparate(\PhpCsFixer\DocBlock\DocBlock $doc, \PhpCsFixer\DocBlock\Annotation $first, \PhpCsFixer\DocBlock\Annotation $second) : void
     {
         $pos = $first->getEnd();
         $final = $second->getStart() - 1;

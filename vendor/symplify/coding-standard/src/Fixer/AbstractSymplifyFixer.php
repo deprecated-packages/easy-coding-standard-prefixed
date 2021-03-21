@@ -3,13 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer;
 
-use PhpCsFixer\Fixer\DefinedFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use ReflectionClass;
 use SplFileInfo;
-abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerInterface
+abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\FixerInterface
 {
     public function getPriority() : int
     {

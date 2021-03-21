@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -11,7 +12,7 @@
  */
 namespace PhpCsFixer;
 
-use PhpCsFixer\Event\Event;
+use _PhpScoper8583deb8ab74\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Event that is fired when file was processed by Fixer.
  *
@@ -19,34 +20,28 @@ use PhpCsFixer\Event\Event;
  *
  * @internal
  */
-final class FixerFileProcessedEvent extends \PhpCsFixer\Event\Event
+final class FixerFileProcessedEvent extends \_PhpScoper8583deb8ab74\Symfony\Contracts\EventDispatcher\Event
 {
     /**
      * Event name.
      */
-    const NAME = 'fixer.file_processed';
-    const STATUS_UNKNOWN = 0;
-    const STATUS_INVALID = 1;
-    const STATUS_SKIPPED = 2;
-    const STATUS_NO_CHANGES = 3;
-    const STATUS_FIXED = 4;
-    const STATUS_EXCEPTION = 5;
-    const STATUS_LINT = 6;
+    public const NAME = 'fixer.file_processed';
+    public const STATUS_UNKNOWN = 0;
+    public const STATUS_INVALID = 1;
+    public const STATUS_SKIPPED = 2;
+    public const STATUS_NO_CHANGES = 3;
+    public const STATUS_FIXED = 4;
+    public const STATUS_EXCEPTION = 5;
+    public const STATUS_LINT = 6;
     /**
      * @var int
      */
     private $status;
-    /**
-     * @param int $status
-     */
-    public function __construct($status)
+    public function __construct(int $status)
     {
         $this->status = $status;
     }
-    /**
-     * @return int
-     */
-    public function getStatus()
+    public function getStatus() : int
     {
         return $this->status;
     }

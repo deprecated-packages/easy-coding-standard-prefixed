@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,6 +14,7 @@ namespace PhpCsFixer\Fixer\FunctionNotation;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Tokenizer\CT;
@@ -27,14 +29,14 @@ final class UseArrowFunctionsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Anonymous functions with one-liner return statement must use arrow functions.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScoperb0c6500a504c;
+namespace _PhpScoper8583deb8ab74;
 
-\_PhpScoperb0c6500a504c\foo(function ($a) use($b) {
+\_PhpScoper8583deb8ab74\foo(function ($a) use($b) {
     return $a + $b;
 });
 
@@ -44,21 +46,21 @@ SAMPLE
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return \PHP_VERSION_ID >= 70400 && $tokens->isAllTokenKindsFound([\T_FUNCTION, \T_RETURN]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
@@ -128,13 +130,7 @@ SAMPLE
             $this->transform($tokens, $index, $useStart, $useEnd, $braceOpen, $return, $semicolon, $braceClose);
         }
     }
-    /**
-     * @param int $start
-     * @param int $end
-     *
-     * @return bool
-     */
-    private function isMultilined(\PhpCsFixer\Tokenizer\Tokens $tokens, $start, $end)
+    private function isMultilined(\PhpCsFixer\Tokenizer\Tokens $tokens, int $start, int $end) : bool
     {
         for ($i = $start; $i < $end; ++$i) {
             if (\false !== \strpos($tokens[$i]->getContent(), "\n")) {
@@ -143,16 +139,7 @@ SAMPLE
         }
         return \false;
     }
-    /**
-     * @param int      $index
-     * @param null|int $useStart
-     * @param null|int $useEnd
-     * @param int      $braceOpen
-     * @param int      $return
-     * @param int      $semicolon
-     * @param int      $braceClose
-     */
-    private function transform(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $useStart, $useEnd, $braceOpen, $return, $semicolon, $braceClose)
+    private function transform(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, ?int $useStart, ?int $useEnd, int $braceOpen, int $return, int $semicolon, int $braceClose) : void
     {
         $tokens->clearRange($semicolon, $braceClose);
         $tokens->clearRange($braceOpen + 1, $return);

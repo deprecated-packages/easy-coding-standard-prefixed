@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -11,8 +12,8 @@
  */
 namespace PhpCsFixer\FixerConfiguration;
 
-use _PhpScoperb0c6500a504c\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoperb0c6500a504c\Symfony\Component\OptionsResolver\OptionsResolver;
+use _PhpScoper8583deb8ab74\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper8583deb8ab74\Symfony\Component\OptionsResolver\OptionsResolver;
 final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
 {
     /**
@@ -26,7 +27,7 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
     /**
      * @param iterable<FixerOptionInterface> $options
      */
-    public function __construct($options)
+    public function __construct(iterable $options)
     {
         foreach ($options as $option) {
             $this->addOption($option);
@@ -38,23 +39,23 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
     /**
      * {@inheritdoc}
      */
-    public function getOptions()
+    public function getOptions() : array
     {
         return $this->options;
     }
     /**
      * {@inheritdoc}
      */
-    public function resolve(array $options)
+    public function resolve(array $options) : array
     {
-        $resolver = new \_PhpScoperb0c6500a504c\Symfony\Component\OptionsResolver\OptionsResolver();
+        $resolver = new \_PhpScoper8583deb8ab74\Symfony\Component\OptionsResolver\OptionsResolver();
         foreach ($this->options as $option) {
             $name = $option->getName();
             if ($option instanceof \PhpCsFixer\FixerConfiguration\AliasedFixerOption) {
                 $alias = $option->getAlias();
                 if (\array_key_exists($alias, $options)) {
                     if (\array_key_exists($name, $options)) {
-                        throw new \_PhpScoperb0c6500a504c\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Aliased option "%s"/"%s" is passed multiple times.', $name, $alias));
+                        throw new \_PhpScoper8583deb8ab74\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Aliased option "%s"/"%s" is passed multiple times.', $name, $alias));
                     }
                     @\trigger_error(\sprintf('Option "%s" is deprecated, use "%s" instead.', $alias, $name), \E_USER_DEPRECATED);
                     $options[$name] = $options[$alias];
@@ -93,7 +94,7 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
      *
      * @return $this
      */
-    private function addOption(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option)
+    private function addOption(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option) : self
     {
         $name = $option->getName();
         if (\in_array($name, $this->registeredNames, \true)) {

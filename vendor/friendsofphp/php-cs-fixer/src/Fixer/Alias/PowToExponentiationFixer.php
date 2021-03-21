@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\Alias;
 use PhpCsFixer\AbstractFunctionReferenceFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
@@ -26,7 +28,7 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         // minimal candidate to fix is seven tokens: pow(x,y);
         return $tokens->count() > 7 && $tokens->isTokenKindFound(\T_STRING);
@@ -34,7 +36,7 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Converts `pow` to the `**` operator.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n pow(\$a, 1);\n")], null, 'Risky when the function `pow` is overridden.');
     }
@@ -43,14 +45,14 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
      *
      * Must run before BinaryOperatorSpacesFixer, MethodArgumentSpaceFixer, NativeFunctionCasingFixer, NoSpacesAfterFunctionNameFixer, NoSpacesInsideParenthesisFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
-        return 3;
+        return 32;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         $candidates = $this->findPowCalls($tokens);
         $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
@@ -91,7 +93,7 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
     /**
      * @return array[]
      */
-    private function findPowCalls(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function findPowCalls(\PhpCsFixer\Tokenizer\Tokens $tokens) : array
     {
         $candidates = [];
         // Minimal candidate to fix is seven tokens: pow(x,y);
@@ -109,14 +111,11 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
         return $candidates;
     }
     /**
-     * @param int             $functionNameIndex
-     * @param int             $openParenthesisIndex
-     * @param int             $closeParenthesisIndex
      * @param array<int, int> $arguments
      *
      * @return int number of tokens added to the collection
      */
-    private function fixPowToExponentiation(\PhpCsFixer\Tokenizer\Tokens $tokens, $functionNameIndex, $openParenthesisIndex, $closeParenthesisIndex, array $arguments)
+    private function fixPowToExponentiation(\PhpCsFixer\Tokenizer\Tokens $tokens, int $functionNameIndex, int $openParenthesisIndex, int $closeParenthesisIndex, array $arguments) : int
     {
         // find the argument separator ',' directly after the last token of the first argument;
         // replace it with T_POW '**'
@@ -146,13 +145,7 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
         }
         return $added;
     }
-    /**
-     * @param int $argumentStartIndex
-     * @param int $argumentEndIndex
-     *
-     * @return bool
-     */
-    private function isParenthesisNeeded(\PhpCsFixer\Tokenizer\Tokens $tokens, $argumentStartIndex, $argumentEndIndex)
+    private function isParenthesisNeeded(\PhpCsFixer\Tokenizer\Tokens $tokens, int $argumentStartIndex, int $argumentEndIndex) : bool
     {
         static $allowedKinds = [\T_DNUMBER, \T_LNUMBER, \T_VARIABLE, \T_STRING, \T_OBJECT_OPERATOR, \T_CONSTANT_ENCAPSED_STRING, \T_DOUBLE_CAST, \T_INT_CAST, \T_INC, \T_DEC, \T_NS_SEPARATOR, \T_WHITESPACE, \T_DOUBLE_COLON, \T_LINE, \T_COMMENT, \T_DOC_COMMENT, \PhpCsFixer\Tokenizer\CT::T_NAMESPACE_OPERATOR];
         for ($i = $argumentStartIndex; $i <= $argumentEndIndex; ++$i) {

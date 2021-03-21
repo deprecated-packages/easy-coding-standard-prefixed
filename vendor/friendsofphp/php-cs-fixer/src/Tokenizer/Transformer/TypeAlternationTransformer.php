@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,7 +28,7 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         // needs to run after TypeColonTransformer
         return -15;
@@ -35,14 +36,14 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId()
+    public function getRequiredPhpVersionId() : int
     {
         return 70100;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
+    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $index) : void
     {
         if (!$token->equals('|')) {
             return;
@@ -64,9 +65,10 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
         $prevToken = $tokens[$prevIndex];
         if ($prevToken->isGivenKind([
             \PhpCsFixer\Tokenizer\CT::T_TYPE_COLON,
-            // `|` is part of a function return type union `foo(): A|B`
+            // `:` is part of a function return type `foo(): A`
             \PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION,
-            // `|` is part of a union (chain) `| X | Y`
+            // `|` is part of a union (chain) `X | Y`
+            \T_STATIC,
             \T_VAR,
             \T_PUBLIC,
             \T_PROTECTED,
@@ -103,11 +105,11 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
+    public function getCustomTokens() : array
     {
         return [\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION];
     }
-    private function replaceToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function replaceToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
     {
         $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION, '|']);
     }

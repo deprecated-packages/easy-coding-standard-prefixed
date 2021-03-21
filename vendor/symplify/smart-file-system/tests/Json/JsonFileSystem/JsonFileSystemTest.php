@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\Json\JsonFileSystem;
 
-use _PhpScoperb0c6500a504c\PHPUnit\Framework\TestCase;
+use _PhpScoper8583deb8ab74\PHPUnit\Framework\TestCase;
 use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Json\JsonFileSystem;
 use Symplify\SmartFileSystem\SmartFileSystem;
-final class JsonFileSystemTest extends \_PhpScoperb0c6500a504c\PHPUnit\Framework\TestCase
+final class JsonFileSystemTest extends \_PhpScoper8583deb8ab74\PHPUnit\Framework\TestCase
 {
     /**
      * @var string

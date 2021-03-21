@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\LanguageConstruct;
 use PhpCsFixer\AbstractFunctionReferenceFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -24,14 +26,14 @@ final class DirConstantFixer extends \PhpCsFixer\AbstractFunctionReferenceFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = dirname(__FILE__);\n")], null, 'Risky when the function `dirname` is overridden.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_FILE);
     }
@@ -40,14 +42,14 @@ final class DirConstantFixer extends \PhpCsFixer\AbstractFunctionReferenceFixer
      *
      * Must run before CombineNestedDirnameFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
-        return 4;
+        return 40;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         $currIndex = 0;
         while (null !== $currIndex) {

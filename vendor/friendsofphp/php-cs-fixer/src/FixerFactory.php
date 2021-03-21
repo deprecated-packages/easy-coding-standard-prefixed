@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -16,8 +17,8 @@ use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\RuleSet\RuleSetInterface;
-use _PhpScoperb0c6500a504c\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoperb0c6500a504c\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper8583deb8ab74\Symfony\Component\Finder\SplFileInfo;
 /**
  * Class provides a way to create a group of fixers.
  *
@@ -51,14 +52,12 @@ final class FixerFactory
     }
     /**
      * Create instance.
-     *
-     * @return FixerFactory
      */
-    public static function create()
+    public static function create() : self
     {
         return new self();
     }
-    public function setWhitespacesConfig(\PhpCsFixer\WhitespacesFixerConfig $config)
+    public function setWhitespacesConfig(\PhpCsFixer\WhitespacesFixerConfig $config) : self
     {
         foreach ($this->fixers as $fixer) {
             if ($fixer instanceof \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface) {
@@ -70,7 +69,7 @@ final class FixerFactory
     /**
      * @return FixerInterface[]
      */
-    public function getFixers()
+    public function getFixers() : array
     {
         $this->fixers = \PhpCsFixer\Utils::sortFixers($this->fixers);
         return $this->fixers;
@@ -78,13 +77,13 @@ final class FixerFactory
     /**
      * @return $this
      */
-    public function registerBuiltInFixers()
+    public function registerBuiltInFixers() : self
     {
         static $builtInFixers = null;
         if (null === $builtInFixers) {
             $builtInFixers = [];
             /** @var SplFileInfo $file */
-            foreach (\_PhpScoperb0c6500a504c\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Fixer')->depth(1) as $file) {
+            foreach (\_PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Fixer')->depth(1) as $file) {
                 $relativeNamespace = $file->getRelativePath();
                 $fixerClass = 'PhpCsFixer\\Fixer\\' . ($relativeNamespace ? $relativeNamespace . '\\' : '') . $file->getBasename('.php');
                 if ('Fixer' === \substr($fixerClass, -5)) {
@@ -102,7 +101,7 @@ final class FixerFactory
      *
      * @return $this
      */
-    public function registerCustomFixers(array $fixers)
+    public function registerCustomFixers(iterable $fixers) : self
     {
         foreach ($fixers as $fixer) {
             $this->registerFixer($fixer, \true);
@@ -110,11 +109,9 @@ final class FixerFactory
         return $this;
     }
     /**
-     * @param bool $isCustom
-     *
      * @return $this
      */
-    public function registerFixer(\PhpCsFixer\Fixer\FixerInterface $fixer, $isCustom)
+    public function registerFixer(\PhpCsFixer\Fixer\FixerInterface $fixer, bool $isCustom) : self
     {
         $name = $fixer->getName();
         if (isset($this->fixersByName[$name])) {
@@ -132,7 +129,7 @@ final class FixerFactory
      *
      * @return $this
      */
-    public function useRuleSet(\PhpCsFixer\RuleSet\RuleSetInterface $ruleSet)
+    public function useRuleSet(\PhpCsFixer\RuleSet\RuleSetInterface $ruleSet) : self
     {
         $fixers = [];
         $fixersByName = [];
@@ -170,19 +167,15 @@ final class FixerFactory
     }
     /**
      * Check if fixer exists.
-     *
-     * @param string $name
-     *
-     * @return bool
      */
-    public function hasRule($name)
+    public function hasRule(string $name) : bool
     {
         return isset($this->fixersByName[$name]);
     }
     /**
      * @return null|string[]
      */
-    private function getFixersConflicts(\PhpCsFixer\Fixer\FixerInterface $fixer)
+    private function getFixersConflicts(\PhpCsFixer\Fixer\FixerInterface $fixer) : ?array
     {
         static $conflictMap = ['no_blank_lines_before_namespace' => ['single_blank_line_before_namespace'], 'single_import_per_statement' => ['group_import']];
         $fixerName = $fixer->getName();
@@ -190,16 +183,14 @@ final class FixerFactory
     }
     /**
      * @param array<string, string[]> $fixerConflicts
-     *
-     * @return string
      */
-    private function generateConflictMessage(array $fixerConflicts)
+    private function generateConflictMessage(array $fixerConflicts) : string
     {
         $message = 'Rule contains conflicting fixers:';
         $report = [];
         foreach ($fixerConflicts as $fixer => $fixers) {
             // filter mutual conflicts
-            $report[$fixer] = \array_filter($fixers, static function ($candidate) use($report, $fixer) {
+            $report[$fixer] = \array_filter($fixers, static function (string $candidate) use($report, $fixer) {
                 return !\array_key_exists($candidate, $report) || !\in_array($fixer, $report[$candidate], \true);
             });
             if (\count($report[$fixer]) > 0) {

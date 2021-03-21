@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\Semicolon;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
@@ -25,7 +27,7 @@ final class NoEmptyStatementFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Remove useless (semicolon) statements.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$a = 1;;\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php echo 1;2;\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php while(foo()){\n    continue 1;\n}\n")]);
     }
@@ -35,21 +37,21 @@ final class NoEmptyStatementFixer extends \PhpCsFixer\AbstractFixer
      * Must run before BracesFixer, CombineConsecutiveUnsetsFixer, MultilineWhitespaceBeforeSemicolonsFixer, NoExtraBlankLinesFixer, NoSinglelineWhitespaceBeforeSemicolonsFixer, NoTrailingWhitespaceFixer, NoUselessElseFixer, NoUselessReturnFixer, NoWhitespaceInBlankLineFixer, ReturnAssignmentFixer, SpaceAfterSemicolonFixer, SwitchCaseSemicolonToColonFixer.
      * Must run after NoUselessSprintfFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
-        return 26;
+        return 40;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(';');
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         for ($index = 0, $count = $tokens->count(); $index < $count; ++$index) {
             if ($tokens[$index]->isGivenKind([\T_BREAK, \T_CONTINUE])) {
@@ -100,10 +102,9 @@ final class NoEmptyStatementFixer extends \PhpCsFixer\AbstractFixer
      * - declare (with '{' '}')
      * - namespace (with '{' '}')
      *
-     * @param int $index           Semicolon index
-     * @param int $curlyCloseIndex
+     * @param int $index Semicolon index
      */
-    private function fixSemicolonAfterCurlyBraceClose(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $curlyCloseIndex)
+    private function fixSemicolonAfterCurlyBraceClose(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, int $curlyCloseIndex) : void
     {
         static $beforeCurlyOpeningKinds = null;
         if (null === $beforeCurlyOpeningKinds) {

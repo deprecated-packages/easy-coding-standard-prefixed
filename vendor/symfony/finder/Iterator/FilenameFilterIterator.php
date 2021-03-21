@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb0c6500a504c\Symfony\Component\Finder\Iterator;
+namespace _PhpScoper8583deb8ab74\Symfony\Component\Finder\Iterator;
 
-use _PhpScoperb0c6500a504c\Symfony\Component\Finder\Glob;
+use _PhpScoper8583deb8ab74\Symfony\Component\Finder\Glob;
 /**
  * FilenameFilterIterator filters files by patterns (a regexp, a glob, or a string).
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FilenameFilterIterator extends \_PhpScoperb0c6500a504c\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
+class FilenameFilterIterator extends \_PhpScoper8583deb8ab74\Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
 {
     /**
      * Filters the iterator values.
@@ -39,6 +39,6 @@ class FilenameFilterIterator extends \_PhpScoperb0c6500a504c\Symfony\Component\F
      */
     protected function toRegex(string $str)
     {
-        return $this->isRegex($str) ? $str : \_PhpScoperb0c6500a504c\Symfony\Component\Finder\Glob::toRegex($str);
+        return $this->isRegex($str) ? $str : \_PhpScoper8583deb8ab74\Symfony\Component\Finder\Glob::toRegex($str);
     }
 }

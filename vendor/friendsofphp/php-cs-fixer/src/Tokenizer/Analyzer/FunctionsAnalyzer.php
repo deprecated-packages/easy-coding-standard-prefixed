@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,12 +29,8 @@ final class FunctionsAnalyzer
     private $functionsAnalysis = ['tokens' => '', 'imports' => [], 'declarations' => []];
     /**
      * Important: risky because of the limited (file) scope of the tool.
-     *
-     * @param int $index
-     *
-     * @return bool
      */
-    public function isGlobalFunctionCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    public function isGlobalFunctionCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
     {
         if (!$tokens[$index]->isGivenKind(\T_STRING)) {
             return \false;
@@ -48,7 +45,12 @@ final class FunctionsAnalyzer
             $previousIsNamespaceSeparator = \true;
             $prevIndex = $tokens->getPrevMeaningfulToken($prevIndex);
         }
-        if ($tokens[$prevIndex]->isGivenKind([\T_DOUBLE_COLON, \T_FUNCTION, \PhpCsFixer\Tokenizer\CT::T_NAMESPACE_OPERATOR, \T_NEW, \T_OBJECT_OPERATOR, \PhpCsFixer\Tokenizer\CT::T_RETURN_REF, \T_STRING])) {
+        $possibleKind = [\T_DOUBLE_COLON, \T_FUNCTION, \PhpCsFixer\Tokenizer\CT::T_NAMESPACE_OPERATOR, \T_NEW, \T_OBJECT_OPERATOR, \PhpCsFixer\Tokenizer\CT::T_RETURN_REF, \T_STRING];
+        // @TODO: drop condition when PHP 8.0+ is required
+        if (\defined('T_ATTRIBUTE')) {
+            $possibleKind[] = \T_ATTRIBUTE;
+        }
+        if ($tokens[$prevIndex]->isGivenKind($possibleKind)) {
             return \false;
         }
         if ($previousIsNamespaceSeparator) {
@@ -100,11 +102,9 @@ final class FunctionsAnalyzer
         return \true;
     }
     /**
-     * @param int $methodIndex
-     *
      * @return ArgumentAnalysis[]
      */
-    public function getFunctionArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, $methodIndex)
+    public function getFunctionArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, int $methodIndex) : array
     {
         $argumentsStart = $tokens->getNextTokenOfKind($methodIndex, ['(']);
         $argumentsEnd = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
@@ -116,12 +116,7 @@ final class FunctionsAnalyzer
         }
         return $arguments;
     }
-    /**
-     * @param int $methodIndex
-     *
-     * @return null|TypeAnalysis
-     */
-    public function getFunctionReturnType(\PhpCsFixer\Tokenizer\Tokens $tokens, $methodIndex)
+    public function getFunctionReturnType(\PhpCsFixer\Tokenizer\Tokens $tokens, int $methodIndex) : ?\PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis
     {
         $argumentsStart = $tokens->getNextTokenOfKind($methodIndex, ['(']);
         $argumentsEnd = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
@@ -142,12 +137,7 @@ final class FunctionsAnalyzer
         }
         return new \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis($type, $typeStartIndex, $typeEndIndex);
     }
-    /**
-     * @param int $index
-     *
-     * @return bool
-     */
-    public function isTheSameClassCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    public function isTheSameClassCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
     {
         if (!$tokens->offsetExists($index)) {
             return \false;
@@ -162,7 +152,7 @@ final class FunctionsAnalyzer
         }
         return $tokens[$operatorIndex]->equals([\T_OBJECT_OPERATOR, '->']) && $tokens[$referenceIndex]->equals([\T_VARIABLE, '$this'], \false) || $tokens[$operatorIndex]->equals([\T_DOUBLE_COLON, '::']) && $tokens[$referenceIndex]->equals([\T_STRING, 'self'], \false) || $tokens[$operatorIndex]->equals([\T_DOUBLE_COLON, '::']) && $tokens[$referenceIndex]->equals([\T_STATIC, 'static'], \false);
     }
-    private function buildFunctionsAnalysis(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function buildFunctionsAnalysis(\PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         $this->functionsAnalysis = ['tokens' => $tokens->getCodeHash(), 'imports' => [], 'declarations' => []];
         // find declarations

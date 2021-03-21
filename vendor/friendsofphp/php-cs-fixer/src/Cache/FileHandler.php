@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -11,7 +12,7 @@
  */
 namespace PhpCsFixer\Cache;
 
-use _PhpScoperb0c6500a504c\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * @author Andreas Möller <am@localheinz.com>
  *
@@ -23,18 +24,15 @@ final class FileHandler implements \PhpCsFixer\Cache\FileHandlerInterface
      * @var string
      */
     private $file;
-    /**
-     * @param string $file
-     */
-    public function __construct($file)
+    public function __construct(string $file)
     {
         $this->file = $file;
     }
-    public function getFile()
+    public function getFile() : string
     {
         return $this->file;
     }
-    public function read()
+    public function read() : ?\PhpCsFixer\Cache\CacheInterface
     {
         if (!\file_exists($this->file)) {
             return null;
@@ -47,20 +45,20 @@ final class FileHandler implements \PhpCsFixer\Cache\FileHandlerInterface
         }
         return $cache;
     }
-    public function write(\PhpCsFixer\Cache\CacheInterface $cache)
+    public function write(\PhpCsFixer\Cache\CacheInterface $cache) : void
     {
         $content = $cache->toJson();
         if (\file_exists($this->file)) {
             if (\is_dir($this->file)) {
-                throw new \_PhpScoperb0c6500a504c\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write cache file "%s" as the location exists as directory.', \realpath($this->file)), 0, null, $this->file);
+                throw new \_PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write cache file "%s" as the location exists as directory.', \realpath($this->file)), 0, null, $this->file);
             }
             if (!\is_writable($this->file)) {
-                throw new \_PhpScoperb0c6500a504c\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write to file "%s" as it is not writable.', \realpath($this->file)), 0, null, $this->file);
+                throw new \_PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write to file "%s" as it is not writable.', \realpath($this->file)), 0, null, $this->file);
             }
         } else {
             $dir = \dirname($this->file);
             if (!\is_dir($dir)) {
-                throw new \_PhpScoperb0c6500a504c\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Directory of cache file "%s" does not exists.', $this->file), 0, null, $this->file);
+                throw new \_PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Directory of cache file "%s" does not exists.', $this->file), 0, null, $this->file);
             }
             @\touch($this->file);
             @\chmod($this->file, 0666);
@@ -68,7 +66,7 @@ final class FileHandler implements \PhpCsFixer\Cache\FileHandlerInterface
         $bytesWritten = @\file_put_contents($this->file, $content);
         if (\false === $bytesWritten) {
             $error = \error_get_last();
-            throw new \_PhpScoperb0c6500a504c\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s", "%s".', $this->file, isset($error['message']) ? $error['message'] : 'no reason available'), 0, null, $this->file);
+            throw new \_PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s", "%s".', $this->file, isset($error['message']) ? $error['message'] : 'no reason available'), 0, null, $this->file);
         }
     }
 }

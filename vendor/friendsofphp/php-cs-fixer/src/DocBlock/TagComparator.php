@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -19,7 +20,7 @@ namespace PhpCsFixer\DocBlock;
  *
  * @final
  */
-class TagComparator
+final class TagComparator
 {
     /**
      * Groups of tags that should be allowed to immediately follow each other.
@@ -29,10 +30,8 @@ class TagComparator
     private static $groups = [['deprecated', 'link', 'see', 'since'], ['author', 'copyright', 'license'], ['category', 'package', 'subpackage'], ['property', 'property-read', 'property-write']];
     /**
      * Should the given tags be kept together, or kept apart?
-     *
-     * @return bool
      */
-    public static function shouldBeTogether(\PhpCsFixer\DocBlock\Tag $first, \PhpCsFixer\DocBlock\Tag $second)
+    public static function shouldBeTogether(\PhpCsFixer\DocBlock\Tag $first, \PhpCsFixer\DocBlock\Tag $second) : bool
     {
         $firstName = $first->getName();
         $secondName = $second->getName();

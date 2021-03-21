@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -16,5 +17,5 @@ namespace PhpCsFixer\Console\Output;
  */
 interface ProcessOutputInterface
 {
-    public function printLegend();
+    public function printLegend() : void;
 }

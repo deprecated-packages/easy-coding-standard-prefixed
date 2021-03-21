@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -22,14 +23,11 @@ final class Directory implements \PhpCsFixer\Cache\DirectoryInterface
      * @var string
      */
     private $directoryName;
-    /**
-     * @param string $directoryName
-     */
-    public function __construct($directoryName)
+    public function __construct(string $directoryName)
     {
         $this->directoryName = $directoryName;
     }
-    public function getRelativePathTo($file)
+    public function getRelativePathTo(string $file) : string
     {
         $file = $this->normalizePath($file);
         if ('' === $this->directoryName || 0 !== \stripos($file, $this->directoryName . \DIRECTORY_SEPARATOR)) {
@@ -37,7 +35,7 @@ final class Directory implements \PhpCsFixer\Cache\DirectoryInterface
         }
         return \substr($file, \strlen($this->directoryName) + 1);
     }
-    private function normalizePath($path)
+    private function normalizePath(string $path) : string
     {
         return \str_replace(['\\', '/'], \DIRECTORY_SEPARATOR, $path);
     }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -21,7 +22,7 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends \PhpCsFixer\Abstract
      * @var array<string, bool>
      */
     private static $syntaxValidationCache = [];
-    protected final function isValidSyntax($code)
+    protected final function isValidSyntax(string $code) : bool
     {
         if (!isset(self::$syntaxValidationCache[$code])) {
             try {

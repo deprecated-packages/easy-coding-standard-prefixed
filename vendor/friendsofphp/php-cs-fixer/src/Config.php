@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -29,40 +30,30 @@ class Config implements \PhpCsFixer\ConfigInterface
     private $lineEnding = "\n";
     private $name;
     private $phpExecutable;
-    private $rules = ['@PSR2' => \true];
+    private $rules = ['@PSR12' => \true];
     private $usingCache = \true;
-    public function __construct($name = 'default')
+    public function __construct(string $name = 'default')
     {
         $this->name = $name;
     }
     /**
-     * @return static
-     *
-     * @deprecated since 2.17
-     */
-    public static function create()
-    {
-        @\trigger_error(__METHOD__ . ' is deprecated since 2.17 and will be removed in 3.0.', \E_USER_DEPRECATED);
-        return new static();
-    }
-    /**
      * {@inheritdoc}
      */
-    public function getCacheFile()
+    public function getCacheFile() : string
     {
         return $this->cacheFile;
     }
     /**
      * {@inheritdoc}
      */
-    public function getCustomFixers()
+    public function getCustomFixers() : array
     {
         return $this->customFixers;
     }
     /**
      * @return Finder
      */
-    public function getFinder()
+    public function getFinder() : iterable
     {
         if (null === $this->finder) {
             $this->finder = new \PhpCsFixer\Finder();
@@ -72,74 +63,71 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormat()
+    public function getFormat() : string
     {
         return $this->format;
     }
     /**
      * {@inheritdoc}
      */
-    public function getHideProgress()
+    public function getHideProgress() : bool
     {
         return $this->hideProgress;
     }
     /**
      * {@inheritdoc}
      */
-    public function getIndent()
+    public function getIndent() : string
     {
         return $this->indent;
     }
     /**
      * {@inheritdoc}
      */
-    public function getLineEnding()
+    public function getLineEnding() : string
     {
         return $this->lineEnding;
     }
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
     /**
      * {@inheritdoc}
      */
-    public function getPhpExecutable()
+    public function getPhpExecutable() : ?string
     {
         return $this->phpExecutable;
     }
     /**
      * {@inheritdoc}
      */
-    public function getRiskyAllowed()
+    public function getRiskyAllowed() : bool
     {
         return $this->isRiskyAllowed;
     }
     /**
      * {@inheritdoc}
      */
-    public function getRules()
+    public function getRules() : array
     {
         return $this->rules;
     }
     /**
      * {@inheritdoc}
      */
-    public function getUsingCache()
+    public function getUsingCache() : bool
     {
         return $this->usingCache;
     }
     /**
      * {@inheritdoc}
      */
-    public function registerCustomFixers($fixers)
+    public function registerCustomFixers(iterable $fixers) : \PhpCsFixer\ConfigInterface
     {
-        if (\false === \is_array($fixers) && \false === $fixers instanceof \Traversable) {
-            throw new \InvalidArgumentException(\sprintf('Argument must be an array or a Traversable, got "%s".', \is_object($fixers) ? \get_class($fixers) : \gettype($fixers)));
-        }
         foreach ($fixers as $fixer) {
             $this->addCustomFixer($fixer);
         }
@@ -148,7 +136,7 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setCacheFile($cacheFile)
+    public function setCacheFile(string $cacheFile) : \PhpCsFixer\ConfigInterface
     {
         $this->cacheFile = $cacheFile;
         return $this;
@@ -156,18 +144,15 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setFinder($finder)
+    public function setFinder(iterable $finder) : \PhpCsFixer\ConfigInterface
     {
-        if (\false === \is_array($finder) && \false === $finder instanceof \Traversable) {
-            throw new \InvalidArgumentException(\sprintf('Argument must be an array or a Traversable, got "%s".', \is_object($finder) ? \get_class($finder) : \gettype($finder)));
-        }
         $this->finder = $finder;
         return $this;
     }
     /**
      * {@inheritdoc}
      */
-    public function setFormat($format)
+    public function setFormat(string $format) : \PhpCsFixer\ConfigInterface
     {
         $this->format = $format;
         return $this;
@@ -175,7 +160,7 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setHideProgress($hideProgress)
+    public function setHideProgress(bool $hideProgress) : \PhpCsFixer\ConfigInterface
     {
         $this->hideProgress = $hideProgress;
         return $this;
@@ -183,7 +168,7 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setIndent($indent)
+    public function setIndent(string $indent) : \PhpCsFixer\ConfigInterface
     {
         $this->indent = $indent;
         return $this;
@@ -191,7 +176,7 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setLineEnding($lineEnding)
+    public function setLineEnding(string $lineEnding) : \PhpCsFixer\ConfigInterface
     {
         $this->lineEnding = $lineEnding;
         return $this;
@@ -199,7 +184,7 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setPhpExecutable($phpExecutable)
+    public function setPhpExecutable(?string $phpExecutable) : \PhpCsFixer\ConfigInterface
     {
         $this->phpExecutable = $phpExecutable;
         return $this;
@@ -207,7 +192,7 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setRiskyAllowed($isRiskyAllowed)
+    public function setRiskyAllowed(bool $isRiskyAllowed) : \PhpCsFixer\ConfigInterface
     {
         $this->isRiskyAllowed = $isRiskyAllowed;
         return $this;
@@ -215,7 +200,7 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setRules(array $rules)
+    public function setRules(array $rules) : \PhpCsFixer\ConfigInterface
     {
         $this->rules = $rules;
         return $this;
@@ -223,12 +208,12 @@ class Config implements \PhpCsFixer\ConfigInterface
     /**
      * {@inheritdoc}
      */
-    public function setUsingCache($usingCache)
+    public function setUsingCache(bool $usingCache) : \PhpCsFixer\ConfigInterface
     {
         $this->usingCache = $usingCache;
         return $this;
     }
-    private function addCustomFixer(\PhpCsFixer\Fixer\FixerInterface $fixer)
+    private function addCustomFixer(\PhpCsFixer\Fixer\FixerInterface $fixer) : void
     {
         $this->customFixers[] = $fixer;
     }

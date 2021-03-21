@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,10 +27,8 @@ final class Utils
      * Calculate a bitmask for given constant names.
      *
      * @param string[] $options constant names
-     *
-     * @return int
      */
-    public static function calculateBitmask(array $options)
+    public static function calculateBitmask(array $options) : int
     {
         $bitmask = 0;
         foreach ($options as $optionName) {
@@ -41,12 +40,8 @@ final class Utils
     }
     /**
      * Converts a camel cased string to a snake cased string.
-     *
-     * @param string $string
-     *
-     * @return string
      */
-    public static function camelCaseToUnderscore($string)
+    public static function camelCaseToUnderscore(string $string) : string
     {
         return \strtolower(\PhpCsFixer\Preg::replace('/(?<!^)((?=[A-Z][^A-Z])|(?<![A-Z])(?=[A-Z]))/', '_', $string));
     }
@@ -55,13 +50,8 @@ final class Utils
      *
      * We'll return 0 if they're equal, 1 if the first is bigger than the
      * second, and -1 if the second is bigger than the first.
-     *
-     * @param int $a
-     * @param int $b
-     *
-     * @return int
      */
-    public static function cmpInt($a, $b)
+    public static function cmpInt(int $a, int $b) : int
     {
         if ($a === $b) {
             return 0;
@@ -72,10 +62,8 @@ final class Utils
      * Calculate the trailing whitespace.
      *
      * What we're doing here is grabbing everything after the final newline.
-     *
-     * @return string
      */
-    public static function calculateTrailingWhitespaceIndent(\PhpCsFixer\Tokenizer\Token $token)
+    public static function calculateTrailingWhitespaceIndent(\PhpCsFixer\Tokenizer\Token $token) : string
     {
         if (!$token->isWhitespace()) {
             throw new \InvalidArgumentException(\sprintf('The given token must be whitespace, got "%s".', $token->getName()));
@@ -97,9 +85,9 @@ final class Utils
      *
      * @return mixed[]
      */
-    public static function stableSort(array $elements, callable $getComparedValue, callable $compareValues)
+    public static function stableSort(array $elements, callable $getComparedValue, callable $compareValues) : array
     {
-        \array_walk($elements, static function (&$element, $index) use($getComparedValue) {
+        \array_walk($elements, static function (&$element, int $index) use($getComparedValue) : void {
             $element = [$element, $index, $getComparedValue($element)];
         });
         \usort($elements, static function ($a, $b) use($compareValues) {
@@ -120,13 +108,13 @@ final class Utils
      *
      * @return FixerInterface[]
      */
-    public static function sortFixers(array $fixers)
+    public static function sortFixers(array $fixers) : array
     {
         // Schwartzian transform is used to improve the efficiency and avoid
         // `usort(): Array was modified by the user comparison function` warning for mocked objects.
         return self::stableSort($fixers, static function (\PhpCsFixer\Fixer\FixerInterface $fixer) {
             return $fixer->getPriority();
-        }, static function ($a, $b) {
+        }, static function (int $a, int $b) {
             return self::cmpInt($b, $a);
         });
     }
@@ -136,15 +124,13 @@ final class Utils
      * @param string[] $names
      *
      * @throws \InvalidArgumentException
-     *
-     * @return string
      */
-    public static function naturalLanguageJoinWithBackticks(array $names)
+    public static function naturalLanguageJoinWithBackticks(array $names) : string
     {
         if (empty($names)) {
             throw new \InvalidArgumentException('Array of names cannot be empty.');
         }
-        $names = \array_map(static function ($name) {
+        $names = \array_map(static function (string $name) {
             return \sprintf('`%s`', $name);
         }, $names);
         $last = \array_pop($names);

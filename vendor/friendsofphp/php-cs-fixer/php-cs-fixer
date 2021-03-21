@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoperb0c6500a504c;
+namespace _PhpScoper8583deb8ab74;
 
 /*
  * This file is part of PHP CS Fixer.
@@ -11,9 +11,7 @@ namespace _PhpScoperb0c6500a504c;
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-if (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
-    \error_reporting(\E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED);
-}
+\error_reporting(\E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED);
 if (\defined('HHVM_VERSION_ID')) {
     \fwrite(\STDERR, "HHVM is not supported.\n");
     if (\getenv('PHP_CS_FIXER_IGNORE_ENV')) {
@@ -21,8 +19,8 @@ if (\defined('HHVM_VERSION_ID')) {
     } else {
         exit(1);
     }
-} elseif (!\defined('PHP_VERSION_ID') || \PHP_VERSION_ID === 80000 || \PHP_VERSION_ID < 50600 || \PHP_VERSION_ID >= 80100) {
-    \fwrite(\STDERR, "PHP needs to be a minimum version of PHP 5.6.0 and maximum version of PHP 8.0.*.\n");
+} elseif (!\defined('PHP_VERSION_ID') || \PHP_VERSION_ID === 80000 || \PHP_VERSION_ID < 70103 || \PHP_VERSION_ID >= 80100) {
+    \fwrite(\STDERR, "PHP needs to be a minimum version of PHP 7.1.3 and maximum version of PHP 8.0.*.\n");
     \fwrite(\STDERR, 'Current PHP version: ' . \PHP_VERSION . ".\n");
     if (\defined('PHP_VERSION_ID') && \PHP_VERSION_ID === 80000) {
         \fwrite(\STDERR, "PHP CS Fixer is not able run on PHP 8.0.0 due to bug in PHP tokenizer (https://bugs.php.net/bug.php?id=80462).\n");
@@ -81,10 +79,10 @@ if ($require) {
     unset($possibleFiles, $possibleFile, $file);
 }
 unset($require);
-use _PhpScoperb0c6500a504c\Composer\XdebugHandler\XdebugHandler;
+use _PhpScoper8583deb8ab74\Composer\XdebugHandler\XdebugHandler;
 use PhpCsFixer\Console\Application;
 // Restart if xdebug is loaded, unless the environment variable PHP_CS_FIXER_ALLOW_XDEBUG is set.
-$xdebug = new \_PhpScoperb0c6500a504c\Composer\XdebugHandler\XdebugHandler('PHP_CS_FIXER', '--ansi');
+$xdebug = new \_PhpScoper8583deb8ab74\Composer\XdebugHandler\XdebugHandler('PHP_CS_FIXER', '--ansi');
 $xdebug->check();
 unset($xdebug);
 $application = new \PhpCsFixer\Console\Application();

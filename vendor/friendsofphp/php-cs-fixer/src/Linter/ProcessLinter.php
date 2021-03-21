@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,9 +14,9 @@ namespace PhpCsFixer\Linter;
 
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FileRemoval;
-use _PhpScoperb0c6500a504c\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScoperb0c6500a504c\Symfony\Component\Process\PhpExecutableFinder;
-use _PhpScoperb0c6500a504c\Symfony\Component\Process\Process;
+use _PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper8583deb8ab74\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScoper8583deb8ab74\Symfony\Component\Process\Process;
 /**
  * Handle PHP code linting using separated process of `php -l _file_`.
  *
@@ -42,10 +43,10 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
     /**
      * @param null|string $executable PHP executable, null for autodetection
      */
-    public function __construct($executable = null)
+    public function __construct(?string $executable = null)
     {
         if (null === $executable) {
-            $executableFinder = new \_PhpScoperb0c6500a504c\Symfony\Component\Process\PhpExecutableFinder();
+            $executableFinder = new \_PhpScoper8583deb8ab74\Symfony\Component\Process\PhpExecutableFinder();
             $executable = $executableFinder->find(\false);
             if (\false === $executable) {
                 throw new \PhpCsFixer\Linter\UnavailableLinterException('Cannot find PHP executable.');
@@ -74,7 +75,7 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
      * This class is not intended to be serialized,
      * and cannot be deserialized (see __wakeup method).
      */
-    public function __sleep()
+    public function __sleep() : array
     {
         throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
     }
@@ -84,37 +85,35 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
      *
      * @see https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection
      */
-    public function __wakeup()
+    public function __wakeup() : void
     {
         throw new \BadMethodCallException('Cannot unserialize ' . __CLASS__);
     }
     /**
      * {@inheritdoc}
      */
-    public function isAsync()
+    public function isAsync() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function lintFile($path)
+    public function lintFile(string $path) : \PhpCsFixer\Linter\LintingResultInterface
     {
         return new \PhpCsFixer\Linter\ProcessLintingResult($this->createProcessForFile($path), $path);
     }
     /**
      * {@inheritdoc}
      */
-    public function lintSource($source)
+    public function lintSource(string $source) : \PhpCsFixer\Linter\LintingResultInterface
     {
         return new \PhpCsFixer\Linter\ProcessLintingResult($this->createProcessForSource($source), $this->temporaryFile);
     }
     /**
      * @param string $path path to file
-     *
-     * @return Process
      */
-    private function createProcessForFile($path)
+    private function createProcessForFile(string $path) : \_PhpScoper8583deb8ab74\Symfony\Component\Process\Process
     {
         // in case php://stdin
         if (!\is_file($path)) {
@@ -129,17 +128,15 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
      * Create process that lint PHP code.
      *
      * @param string $source code
-     *
-     * @return Process
      */
-    private function createProcessForSource($source)
+    private function createProcessForSource(string $source) : \_PhpScoper8583deb8ab74\Symfony\Component\Process\Process
     {
         if (null === $this->temporaryFile) {
             $this->temporaryFile = \tempnam(\sys_get_temp_dir(), 'cs_fixer_tmp_');
             $this->fileRemoval->observe($this->temporaryFile);
         }
         if (\false === @\file_put_contents($this->temporaryFile, $source)) {
-            throw new \_PhpScoperb0c6500a504c\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s".', $this->temporaryFile), 0, null, $this->temporaryFile);
+            throw new \_PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s".', $this->temporaryFile), 0, null, $this->temporaryFile);
         }
         return $this->createProcessForFile($this->temporaryFile);
     }

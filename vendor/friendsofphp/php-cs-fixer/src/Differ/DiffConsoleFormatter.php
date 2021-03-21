@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,7 +13,7 @@
 namespace PhpCsFixer\Differ;
 
 use PhpCsFixer\Preg;
-use _PhpScoperb0c6500a504c\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -28,29 +29,19 @@ final class DiffConsoleFormatter
      * @var string
      */
     private $template;
-    /**
-     * @param bool   $isDecoratedOutput
-     * @param string $template
-     */
-    public function __construct($isDecoratedOutput, $template = '%s')
+    public function __construct(bool $isDecoratedOutput, string $template = '%s')
     {
         $this->isDecoratedOutput = $isDecoratedOutput;
         $this->template = $template;
     }
-    /**
-     * @param string $diff
-     * @param string $lineTemplate
-     *
-     * @return string
-     */
-    public function format($diff, $lineTemplate = '%s')
+    public function format(string $diff, string $lineTemplate = '%s') : string
     {
         $isDecorated = $this->isDecoratedOutput;
         $template = $isDecorated ? $this->template : \PhpCsFixer\Preg::replace('/<[^<>]+>/', '', $this->template);
-        return \sprintf($template, \implode(\PHP_EOL, \array_map(static function ($line) use($isDecorated, $lineTemplate) {
+        return \sprintf($template, \implode(\PHP_EOL, \array_map(static function (string $line) use($isDecorated, $lineTemplate) {
             if ($isDecorated) {
                 $count = 0;
-                $line = \PhpCsFixer\Preg::replaceCallback(['/^(\\+.*)/', '/^(\\-.*)/', '/^(@.*)/'], static function ($matches) {
+                $line = \PhpCsFixer\Preg::replaceCallback(['/^(\\+.*)/', '/^(\\-.*)/', '/^(@.*)/'], static function (array $matches) {
                     if ('+' === $matches[0][0]) {
                         $colour = 'green';
                     } elseif ('-' === $matches[0][0]) {
@@ -58,10 +49,10 @@ final class DiffConsoleFormatter
                     } else {
                         $colour = 'cyan';
                     }
-                    return \sprintf('<fg=%s>%s</fg=%s>', $colour, \_PhpScoperb0c6500a504c\Symfony\Component\Console\Formatter\OutputFormatter::escape($matches[0]), $colour);
+                    return \sprintf('<fg=%s>%s</fg=%s>', $colour, \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($matches[0]), $colour);
                 }, $line, 1, $count);
                 if (0 === $count) {
-                    $line = \_PhpScoperb0c6500a504c\Symfony\Component\Console\Formatter\OutputFormatter::escape($line);
+                    $line = \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($line);
                 }
             }
             return \sprintf($lineTemplate, $line);

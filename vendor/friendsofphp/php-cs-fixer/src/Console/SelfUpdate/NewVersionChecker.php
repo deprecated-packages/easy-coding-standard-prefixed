@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -11,9 +12,9 @@
  */
 namespace PhpCsFixer\Console\SelfUpdate;
 
-use _PhpScoperb0c6500a504c\Composer\Semver\Comparator;
-use _PhpScoperb0c6500a504c\Composer\Semver\Semver;
-use _PhpScoperb0c6500a504c\Composer\Semver\VersionParser;
+use _PhpScoper8583deb8ab74\Composer\Semver\Comparator;
+use _PhpScoper8583deb8ab74\Composer\Semver\Semver;
+use _PhpScoper8583deb8ab74\Composer\Semver\VersionParser;
 /**
  * @internal
  */
@@ -34,12 +35,12 @@ final class NewVersionChecker implements \PhpCsFixer\Console\SelfUpdate\NewVersi
     public function __construct(\PhpCsFixer\Console\SelfUpdate\GithubClientInterface $githubClient)
     {
         $this->githubClient = $githubClient;
-        $this->versionParser = new \_PhpScoperb0c6500a504c\Composer\Semver\VersionParser();
+        $this->versionParser = new \_PhpScoper8583deb8ab74\Composer\Semver\VersionParser();
     }
     /**
      * {@inheritdoc}
      */
-    public function getLatestVersion()
+    public function getLatestVersion() : string
     {
         $this->retrieveAvailableVersions();
         return $this->availableVersions[0];
@@ -47,12 +48,12 @@ final class NewVersionChecker implements \PhpCsFixer\Console\SelfUpdate\NewVersi
     /**
      * {@inheritdoc}
      */
-    public function getLatestVersionOfMajor($majorVersion)
+    public function getLatestVersionOfMajor(int $majorVersion) : ?string
     {
         $this->retrieveAvailableVersions();
         $semverConstraint = '^' . $majorVersion;
         foreach ($this->availableVersions as $availableVersion) {
-            if (\_PhpScoperb0c6500a504c\Composer\Semver\Semver::satisfies($availableVersion, $semverConstraint)) {
+            if (\_PhpScoper8583deb8ab74\Composer\Semver\Semver::satisfies($availableVersion, $semverConstraint)) {
                 return $availableVersion;
             }
         }
@@ -61,19 +62,19 @@ final class NewVersionChecker implements \PhpCsFixer\Console\SelfUpdate\NewVersi
     /**
      * {@inheritdoc}
      */
-    public function compareVersions($versionA, $versionB)
+    public function compareVersions(string $versionA, string $versionB) : int
     {
         $versionA = $this->versionParser->normalize($versionA);
         $versionB = $this->versionParser->normalize($versionB);
-        if (\_PhpScoperb0c6500a504c\Composer\Semver\Comparator::lessThan($versionA, $versionB)) {
+        if (\_PhpScoper8583deb8ab74\Composer\Semver\Comparator::lessThan($versionA, $versionB)) {
             return -1;
         }
-        if (\_PhpScoperb0c6500a504c\Composer\Semver\Comparator::greaterThan($versionA, $versionB)) {
+        if (\_PhpScoper8583deb8ab74\Composer\Semver\Comparator::greaterThan($versionA, $versionB)) {
             return 1;
         }
         return 0;
     }
-    private function retrieveAvailableVersions()
+    private function retrieveAvailableVersions() : void
     {
         if (null !== $this->availableVersions) {
             return;
@@ -82,13 +83,13 @@ final class NewVersionChecker implements \PhpCsFixer\Console\SelfUpdate\NewVersi
             $version = $tag['name'];
             try {
                 $this->versionParser->normalize($version);
-                if ('stable' === \_PhpScoperb0c6500a504c\Composer\Semver\VersionParser::parseStability($version)) {
+                if ('stable' === \_PhpScoper8583deb8ab74\Composer\Semver\VersionParser::parseStability($version)) {
                     $this->availableVersions[] = $version;
                 }
             } catch (\UnexpectedValueException $exception) {
                 // not a valid version tag
             }
         }
-        $this->availableVersions = \_PhpScoperb0c6500a504c\Composer\Semver\Semver::rsort($this->availableVersions);
+        $this->availableVersions = \_PhpScoper8583deb8ab74\Composer\Semver\Semver::rsort($this->availableVersions);
     }
 }
