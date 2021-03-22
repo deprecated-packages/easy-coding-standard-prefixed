@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -16,7 +15,6 @@ use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
@@ -32,14 +30,14 @@ final class SingleLineAfterImportsFixer extends \PhpCsFixer\AbstractFixer implem
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Each namespace use MUST go on its own line and there MUST be one blank line after the use statements block.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 namespace Foo;
@@ -66,14 +64,14 @@ final class Example
      *
      * Must run after NoUnusedImportsFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -11;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $ending = $this->whitespacesConfig->getLineEnding();
         $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);

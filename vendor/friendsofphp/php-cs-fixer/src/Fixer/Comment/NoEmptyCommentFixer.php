@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Comment;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -23,46 +21,37 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
 {
-    /**
-     * @internal
-     */
-    public const TYPE_HASH = 1;
-    /**
-     * @internal
-     */
-    public const TYPE_DOUBLE_SLASH = 2;
-    /**
-     * @internal
-     */
-    public const TYPE_SLASH_ASTERISK = 3;
+    const TYPE_HASH = 1;
+    const TYPE_DOUBLE_SLASH = 2;
+    const TYPE_SLASH_ASTERISK = 3;
     /**
      * {@inheritdoc}
      *
      * Must run before NoExtraBlankLinesFixer, NoTrailingWhitespaceFixer, NoWhitespaceInBlankLineFixer.
      * Must run after PhpdocToCommentFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 2;
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('There should not be any empty comments.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n//\n#\n/* */\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         for ($index = 1, $count = \count($tokens); $index < $count; ++$index) {
             if (!$tokens[$index]->isGivenKind(\T_COMMENT)) {
@@ -81,8 +70,10 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
      * Return the start index, end index and a flag stating if the comment block is empty.
      *
      * @param int $index T_COMMENT index
+     *
+     * @return array
      */
-    private function getCommentBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : array
+    private function getCommentBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $commentType = $this->getCommentType($tokens[$index]->getContent());
         $empty = $this->isEmptyComment($tokens[$index]->getContent());
@@ -109,7 +100,12 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
         }
         return [$start, $index - 1, $empty];
     }
-    private function getCommentType(string $content) : int
+    /**
+     * @param string $content
+     *
+     * @return int
+     */
+    private function getCommentType($content)
     {
         if ('#' === $content[0]) {
             return self::TYPE_HASH;
@@ -119,7 +115,13 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
         }
         return self::TYPE_DOUBLE_SLASH;
     }
-    private function getLineBreakCount(\PhpCsFixer\Tokenizer\Tokens $tokens, int $whiteStart, int $whiteEnd) : int
+    /**
+     * @param int $whiteStart
+     * @param int $whiteEnd
+     *
+     * @return int
+     */
+    private function getLineBreakCount(\PhpCsFixer\Tokenizer\Tokens $tokens, $whiteStart, $whiteEnd)
     {
         $lineCount = 0;
         for ($i = $whiteStart; $i < $whiteEnd; ++$i) {
@@ -127,7 +129,12 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
         }
         return $lineCount;
     }
-    private function isEmptyComment(string $content) : bool
+    /**
+     * @param string $content
+     *
+     * @return bool
+     */
+    private function isEmptyComment($content)
     {
         static $mapper = [
             self::TYPE_HASH => '|^#\\s*$|',

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -21,12 +20,17 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         // should be run before NoWhitespaceInBlankLineFixer, NoExtraBlankLinesFixer, BracesFixer and after NoEmptyStatementFixer.
         return 39;
     }
-    protected function isSuperfluousElse(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    /**
+     * @param int $index
+     *
+     * @return bool
+     */
+    protected function isSuperfluousElse(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $previousBlockStart = $index;
         do {
@@ -68,7 +72,7 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return int[]
      */
-    private function getPreviousBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : array
+    private function getPreviousBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $close = $previous = $tokens->getPrevMeaningfulToken($index);
         // short 'if' detection
@@ -87,8 +91,10 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param int $index           Index of the token to check
      * @param int $lowerLimitIndex Lower limit index. Since the token to check will always be in a conditional we must stop checking at this index
+     *
+     * @return bool
      */
-    private function isInConditional(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, int $lowerLimitIndex) : bool
+    private function isInConditional(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $lowerLimitIndex)
     {
         $candidateIndex = $tokens->getPrevTokenOfKind($index, [')', ';', ':']);
         if ($tokens[$candidateIndex]->equals(':')) {
@@ -111,9 +117,12 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
      * without {}. Assumes not passing the last `;`/close tag of the statement, not
      * out of range index, etc.
      *
-     * @param int $index Index of the token to check
+     * @param int $index           Index of the token to check
+     * @param int $lowerLimitIndex
+     *
+     * @return bool
      */
-    private function isInConditionWithoutBraces(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, int $lowerLimitIndex) : bool
+    private function isInConditionWithoutBraces(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $lowerLimitIndex)
     {
         do {
             if ($tokens[$index]->isComment() || $tokens[$index]->isWhitespace()) {

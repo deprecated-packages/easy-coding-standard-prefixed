@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Phpdoc;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,7 +25,7 @@ final class PhpdocTrimFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('PHPDoc should start and end with content, excluding the very first and last line of the docblocks.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 /**
@@ -45,21 +43,21 @@ final class Foo {}
      * Must run before PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, GeneralPhpdocAnnotationRemoveFixer, PhpUnitTestAnnotationFixer, PhpdocIndentFixer, PhpdocNoAccessFixer, PhpdocNoEmptyReturnFixer, PhpdocNoPackageFixer, PhpdocOrderFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -5;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -75,8 +73,12 @@ final class Foo {}
     }
     /**
      * Make sure the first useful line starts immediately after the first line.
+     *
+     * @param string $content
+     *
+     * @return string
      */
-    private function fixStart(string $content) : string
+    private function fixStart($content)
     {
         return \PhpCsFixer\Preg::replace('~
                 (^/\\*\\*)            # DocComment begin
@@ -89,8 +91,12 @@ final class Foo {}
     }
     /**
      * Make sure the last useful line is immediately before the final line.
+     *
+     * @param string $content
+     *
+     * @return string
      */
-    private function fixEnd(string $content) : string
+    private function fixEnd($content)
     {
         return \PhpCsFixer\Preg::replace('~
                 (\\R\\h*(?:\\*\\h*)?\\S.*?) # last line with useful content

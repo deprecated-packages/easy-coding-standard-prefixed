@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,14 +26,14 @@ final class WhitespacyCommentTransformer extends \PhpCsFixer\Tokenizer\AbstractT
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId() : int
+    public function getRequiredPhpVersionId()
     {
         return 50000;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $index) : void
+    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
     {
         if (!$token->isComment()) {
             return;
@@ -56,7 +55,7 @@ final class WhitespacyCommentTransformer extends \PhpCsFixer\Tokenizer\AbstractT
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens() : array
+    public function getCustomTokens()
     {
         return [];
     }

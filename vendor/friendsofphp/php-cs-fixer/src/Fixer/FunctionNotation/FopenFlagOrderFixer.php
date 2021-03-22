@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\FunctionNotation;
 use PhpCsFixer\AbstractFopenFlagFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,11 +25,15 @@ final class FopenFlagOrderFixer extends \PhpCsFixer\AbstractFopenFlagFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Order the flags in `fopen` calls, `b` and `t` must be last.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = fopen(\$foo, 'br+');\n")], null, 'Risky when the function `fopen` is overridden.');
     }
-    protected function fixFopenFlagToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $argumentStartIndex, int $argumentEndIndex) : void
+    /**
+     * @param int $argumentStartIndex
+     * @param int $argumentEndIndex
+     */
+    protected function fixFopenFlagToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $argumentStartIndex, $argumentEndIndex)
     {
         $argumentFlagIndex = null;
         for ($i = $argumentStartIndex; $i <= $argumentEndIndex; ++$i) {
@@ -79,9 +81,9 @@ final class FopenFlagOrderFixer extends \PhpCsFixer\AbstractFopenFlagFixer
      *
      * @return string[]
      */
-    private function sortFlags(array $flags) : array
+    private function sortFlags(array $flags)
     {
-        \usort($flags, static function (string $flag1, string $flag2) {
+        \usort($flags, static function ($flag1, $flag2) {
             if ($flag1 === $flag2) {
                 return 0;
             }

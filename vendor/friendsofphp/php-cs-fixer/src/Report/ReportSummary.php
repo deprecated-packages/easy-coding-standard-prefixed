@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -44,10 +43,13 @@ final class ReportSummary
      */
     private $time;
     /**
-     * @param int $time   duration in milliseconds
-     * @param int $memory memory usage in bytes
+     * @param int  $time              duration in milliseconds
+     * @param int  $memory            memory usage in bytes
+     * @param bool $addAppliedFixers
+     * @param bool $isDryRun
+     * @param bool $isDecoratedOutput
      */
-    public function __construct(array $changed, int $time, int $memory, bool $addAppliedFixers, bool $isDryRun, bool $isDecoratedOutput)
+    public function __construct(array $changed, $time, $memory, $addAppliedFixers, $isDryRun, $isDecoratedOutput)
     {
         $this->changed = $changed;
         $this->time = $time;
@@ -56,27 +58,45 @@ final class ReportSummary
         $this->isDryRun = $isDryRun;
         $this->isDecoratedOutput = $isDecoratedOutput;
     }
-    public function isDecoratedOutput() : bool
+    /**
+     * @return bool
+     */
+    public function isDecoratedOutput()
     {
         return $this->isDecoratedOutput;
     }
-    public function isDryRun() : bool
+    /**
+     * @return bool
+     */
+    public function isDryRun()
     {
         return $this->isDryRun;
     }
-    public function getChanged() : array
+    /**
+     * @return array
+     */
+    public function getChanged()
     {
         return $this->changed;
     }
-    public function getMemory() : int
+    /**
+     * @return int
+     */
+    public function getMemory()
     {
         return $this->memory;
     }
-    public function getTime() : int
+    /**
+     * @return int
+     */
+    public function getTime()
     {
         return $this->time;
     }
-    public function shouldAddAppliedFixers() : bool
+    /**
+     * @return bool
+     */
+    public function shouldAddAppliedFixers()
     {
         return $this->addAppliedFixers;
     }

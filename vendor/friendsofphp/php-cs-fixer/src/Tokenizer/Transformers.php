@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,8 +12,8 @@ declare (strict_types=1);
 namespace PhpCsFixer\Tokenizer;
 
 use PhpCsFixer\Utils;
-use _PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder;
-use _PhpScoper8583deb8ab74\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper82aa0193482e\Symfony\Component\Finder\Finder;
+use _PhpScoper82aa0193482e\Symfony\Component\Finder\SplFileInfo;
 /**
  * Collection of Transformer classes.
  *
@@ -41,7 +40,10 @@ final class Transformers
             // TODO: update to use spaceship operator (PHP 7.0 required)
         });
     }
-    public static function create() : self
+    /**
+     * @return Transformers
+     */
+    public static function create()
     {
         static $instance = null;
         if (!$instance) {
@@ -54,7 +56,7 @@ final class Transformers
      *
      * @param Tokens $tokens Tokens collection
      */
-    public function transform(\PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    public function transform(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         foreach ($this->items as $transformer) {
             foreach ($tokens as $index => $token) {
@@ -65,13 +67,13 @@ final class Transformers
     /**
      * @param TransformerInterface $transformer Transformer
      */
-    private function registerTransformer(\PhpCsFixer\Tokenizer\TransformerInterface $transformer) : void
+    private function registerTransformer(\PhpCsFixer\Tokenizer\TransformerInterface $transformer)
     {
         if (\PHP_VERSION_ID >= $transformer->getRequiredPhpVersionId()) {
             $this->items[] = $transformer;
         }
     }
-    private function registerBuiltInTransformers() : void
+    private function registerBuiltInTransformers()
     {
         static $registered = \false;
         if ($registered) {
@@ -85,10 +87,10 @@ final class Transformers
     /**
      * @return \Generator|TransformerInterface[]
      */
-    private function findBuiltInTransformers() : iterable
+    private function findBuiltInTransformers()
     {
         /** @var SplFileInfo $file */
-        foreach (\_PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Transformer') as $file) {
+        foreach (\_PhpScoper82aa0193482e\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Transformer') as $file) {
             $relativeNamespace = $file->getRelativePath();
             $class = __NAMESPACE__ . '\\Transformer\\' . ($relativeNamespace ? $relativeNamespace . '\\' : '') . $file->getBasename('.php');
             (yield new $class());

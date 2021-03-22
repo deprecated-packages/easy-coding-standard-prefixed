@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\CastNotation;
 use PhpCsFixer\AbstractFunctionReferenceFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,7 +25,7 @@ final class ModernizeTypesCastingFixer extends \PhpCsFixer\AbstractFunctionRefer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replaces `intval`, `floatval`, `doubleval`, `strval` and `boolval` function calls with according type casting operator.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
     $a = intval($b);
@@ -40,14 +38,14 @@ final class ModernizeTypesCastingFixer extends \PhpCsFixer\AbstractFunctionRefer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         // replacement patterns
         static $replacement = ['intval' => [\T_INT_CAST, '(int)'], 'floatval' => [\T_DOUBLE_CAST, '(float)'], 'doubleval' => [\T_DOUBLE_CAST, '(float)'], 'strval' => [\T_STRING_CAST, '(string)'], 'boolval' => [\T_BOOL_CAST, '(bool)']];

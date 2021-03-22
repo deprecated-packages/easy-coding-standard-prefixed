@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,10 +12,10 @@ declare (strict_types=1);
 namespace PhpCsFixer\Runner;
 
 use PhpCsFixer\Cache\CacheManagerInterface;
+use PhpCsFixer\Event\Event;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScoper8583deb8ab74\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScoper8583deb8ab74\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScoper82aa0193482e\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -36,7 +35,7 @@ final class FileFilterIterator extends \FilterIterator
      * @var array<string,bool>
      */
     private $visitedElements = [];
-    public function __construct(\Traversable $iterator, \_PhpScoper8583deb8ab74\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager)
+    public function __construct(\Traversable $iterator, \_PhpScoper82aa0193482e\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager)
     {
         if (!$iterator instanceof \Iterator) {
             $iterator = new \IteratorIterator($iterator);
@@ -45,7 +44,7 @@ final class FileFilterIterator extends \FilterIterator
         $this->eventDispatcher = $eventDispatcher;
         $this->cacheManager = $cacheManager;
     }
-    public function accept() : bool
+    public function accept()
     {
         $file = $this->current();
         if (!$file instanceof \SplFileInfo) {
@@ -67,13 +66,16 @@ final class FileFilterIterator extends \FilterIterator
         }
         return \true;
     }
-    private function dispatchEvent(string $name, \_PhpScoper8583deb8ab74\Symfony\Contracts\EventDispatcher\Event $event) : void
+    /**
+     * @param string $name
+     */
+    private function dispatchEvent($name, \PhpCsFixer\Event\Event $event)
     {
         if (null === $this->eventDispatcher) {
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoper8583deb8ab74\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScoper82aa0193482e\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

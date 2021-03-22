@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,7 +13,6 @@ namespace PhpCsFixer\Fixer\Import;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis;
@@ -30,21 +28,21 @@ final class GroupImportFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('There MUST be group use for the same namespaces.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample("<?php\nuse Foo\\Bar;\nuse Foo\\Baz;\n", new \PhpCsFixer\FixerDefinition\VersionSpecification(70000))]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return \PHP_VERSION_ID >= 70000 && $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $useWithSameNamespaces = $this->getSameNamespaces($tokens);
         if ([] === $useWithSameNamespaces) {
@@ -58,7 +56,7 @@ final class GroupImportFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return NamespaceUseAnalysis[]
      */
-    private function getSameNamespaces(\PhpCsFixer\Tokenizer\Tokens $tokens) : array
+    private function getSameNamespaces(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $useDeclarations = (new \PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
         if (0 === \count($useDeclarations)) {
@@ -67,11 +65,11 @@ final class GroupImportFixer extends \PhpCsFixer\AbstractFixer
         $allNamespaces = \array_map(function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration) {
             return $this->getNamespaceNameWithSlash($useDeclaration);
         }, $useDeclarations);
-        $sameNamespaces = \array_filter(\array_count_values($allNamespaces), function (int $count) {
+        $sameNamespaces = \array_filter(\array_count_values($allNamespaces), function ($count) {
             return $count > 1;
         });
         $sameNamespaces = \array_keys($sameNamespaces);
-        $sameNamespaceAnalysis = \array_filter($useDeclarations, function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration) use($sameNamespaces) {
+        $sameNamespaceAnalysis = \array_filter($useDeclarations, function ($useDeclaration) use($sameNamespaces) {
             $namespaceName = $this->getNamespaceNameWithSlash($useDeclaration);
             return \in_array($namespaceName, $sameNamespaces, \true);
         });
@@ -81,7 +79,7 @@ final class GroupImportFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param NamespaceUseAnalysis[] $statements
      */
-    private function removeSingleUseStatements(array $statements, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    private function removeSingleUseStatements(array $statements, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         foreach ($statements as $useDeclaration) {
             $index = $useDeclaration->getStartIndex();
@@ -105,7 +103,7 @@ final class GroupImportFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param NamespaceUseAnalysis[] $statements
      */
-    private function addGroupUseStatements(array $statements, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    private function addGroupUseStatements(array $statements, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $currentNamespace = '';
         $insertIndex = \array_slice($statements, -1)[0]->getEndIndex();
@@ -139,14 +137,21 @@ final class GroupImportFixer extends \PhpCsFixer\AbstractFixer
             }
         }
     }
-    private function getNamespaceNameWithSlash(\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration) : string
+    /**
+     * @return string
+     */
+    private function getNamespaceNameWithSlash(\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration)
     {
         return \substr($useDeclaration->getFullName(), 0, \strripos($useDeclaration->getFullName(), '\\') + 1);
     }
     /**
      * Insert use with alias to the group.
+     *
+     * @param int $insertIndex
+     *
+     * @return int
      */
-    private function insertToGroupUseWithAlias(\PhpCsFixer\Tokenizer\Tokens $tokens, int $insertIndex, \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration) : int
+    private function insertToGroupUseWithAlias(\PhpCsFixer\Tokenizer\Tokens $tokens, $insertIndex, \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration)
     {
         $newTokens = [new \PhpCsFixer\Tokenizer\Token([\T_STRING, \substr($useDeclaration->getFullName(), \strripos($useDeclaration->getFullName(), '\\') + 1)]), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']), new \PhpCsFixer\Tokenizer\Token([\T_AS, 'as']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])];
         $tokens->insertAt($insertIndex, $newTokens);
@@ -154,8 +159,13 @@ final class GroupImportFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * Creates new use statement group.
+     *
+     * @param int    $insertIndex
+     * @param string $currentNamespace
+     *
+     * @return int
      */
-    private function createNewGroup(\PhpCsFixer\Tokenizer\Tokens $tokens, int $insertIndex, \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration, string $currentNamespace) : int
+    private function createNewGroup(\PhpCsFixer\Tokenizer\Tokens $tokens, $insertIndex, \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration, $currentNamespace)
     {
         $insertedTokens = 0;
         if (\count($tokens) === $insertIndex) {

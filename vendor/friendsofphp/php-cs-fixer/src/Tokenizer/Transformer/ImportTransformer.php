@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -32,14 +31,14 @@ final class ImportTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId() : int
+    public function getRequiredPhpVersionId()
     {
         return 50600;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $index) : void
+    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
     {
         if (!$token->isGivenKind([\T_CONST, \T_FUNCTION])) {
             return;
@@ -52,7 +51,7 @@ final class ImportTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens() : array
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_CONST_IMPORT, \PhpCsFixer\Tokenizer\CT::T_FUNCTION_IMPORT];
     }

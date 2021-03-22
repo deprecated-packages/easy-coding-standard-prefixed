@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,14 +27,14 @@ final class ArrayTypehintTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId() : int
+    public function getRequiredPhpVersionId()
     {
         return 50000;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $index) : void
+    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
     {
         if (!$token->isGivenKind(\T_ARRAY)) {
             return;
@@ -49,7 +48,7 @@ final class ArrayTypehintTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens() : array
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT];
     }

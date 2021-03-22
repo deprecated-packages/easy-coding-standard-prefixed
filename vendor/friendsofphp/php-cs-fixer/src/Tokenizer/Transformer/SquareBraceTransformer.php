@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -33,7 +32,7 @@ final class SquareBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfo
     /**
      * {@inheritdoc}
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         // must run after CurlyBraceTransformer and AttributeTransformer
         return -1;
@@ -41,7 +40,7 @@ final class SquareBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfo
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId() : int
+    public function getRequiredPhpVersionId()
     {
         // Short array syntax was introduced in PHP 5.4, but the fixer is smart
         // enough to handle it even before 5.4.
@@ -51,7 +50,7 @@ final class SquareBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfo
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $index) : void
+    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
     {
         if ($this->isArrayDestructing($tokens, $index)) {
             $this->transformIntoDestructuringSquareBrace($tokens, $index);
@@ -64,17 +63,23 @@ final class SquareBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfo
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens() : array
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN, \PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE];
     }
-    private function transformIntoArraySquareBrace(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
+    /**
+     * @param int $index
+     */
+    private function transformIntoArraySquareBrace(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $endIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_INDEX_SQUARE_BRACE, $index);
         $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN, '[']);
         $tokens[$endIndex] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE, ']']);
     }
-    private function transformIntoDestructuringSquareBrace(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
+    /**
+     * @param int $index
+     */
+    private function transformIntoDestructuringSquareBrace(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $endIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_INDEX_SQUARE_BRACE, $index);
         $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN, '[']);
@@ -92,8 +97,12 @@ final class SquareBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfo
     }
     /**
      * Check if token under given index is short array opening.
+     *
+     * @param int $index
+     *
+     * @return bool
      */
-    private function isShortArray(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    private function isShortArray(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         if (!$tokens[$index]->equals('[')) {
             return \false;
@@ -109,7 +118,12 @@ final class SquareBraceTransformer extends \PhpCsFixer\Tokenizer\AbstractTransfo
         }
         return !$this->isArrayDestructing($tokens, $index);
     }
-    private function isArrayDestructing(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    /**
+     * @param int $index
+     *
+     * @return bool
+     */
+    private function isArrayDestructing(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         if (\PHP_VERSION_ID < 70100 || !$tokens[$index]->equals('[')) {
             return \false;

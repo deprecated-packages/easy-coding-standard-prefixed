@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -29,7 +28,7 @@ final class BraceClassInstantiationTransformer extends \PhpCsFixer\Tokenizer\Abs
     /**
      * {@inheritdoc}
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         // must run after CurlyBraceTransformer and SquareBraceTransformer
         return -2;
@@ -37,14 +36,14 @@ final class BraceClassInstantiationTransformer extends \PhpCsFixer\Tokenizer\Abs
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId() : int
+    public function getRequiredPhpVersionId()
     {
         return 50000;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $index) : void
+    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
     {
         if (!$tokens[$index]->equals('(') || !$tokens[$tokens->getNextMeaningfulToken($index)]->equals([\T_NEW])) {
             return;
@@ -59,7 +58,7 @@ final class BraceClassInstantiationTransformer extends \PhpCsFixer\Tokenizer\Abs
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens() : array
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_BRACE_CLASS_INSTANTIATION_OPEN, \PhpCsFixer\Tokenizer\CT::T_BRACE_CLASS_INSTANTIATION_CLOSE];
     }

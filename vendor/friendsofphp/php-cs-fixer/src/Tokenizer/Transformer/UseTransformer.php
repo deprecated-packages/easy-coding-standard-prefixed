@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,7 +29,7 @@ final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         // Should run after CurlyBraceTransformer and before TypeColonTransformer
         return -5;
@@ -38,14 +37,14 @@ final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId() : int
+    public function getRequiredPhpVersionId()
     {
         return 50300;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $index) : void
+    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
     {
         if ($token->isGivenKind(\T_USE) && $this->isUseForLambda($tokens, $index)) {
             $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA, $token->getContent()]);
@@ -76,14 +75,18 @@ final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens() : array
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA];
     }
     /**
      * Check if token under given index is `use` statement for lambda function.
+     *
+     * @param int $index
+     *
+     * @return bool
      */
-    private function isUseForLambda(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    private function isUseForLambda(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $nextToken = $tokens[$tokens->getNextMeaningfulToken($index)];
         // test `function () use ($foo) {}` case

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\StringNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,28 +25,28 @@ final class NoTrailingWhitespaceInStringFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_CONSTANT_ENCAPSED_STRING, \T_ENCAPSED_AND_WHITESPACE, \T_INLINE_HTML]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('There must be no trailing whitespace in strings.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$a = '  \n    foo \n';\n")], null, 'Changing the whitespaces in strings might affect string comparisons and outputs.');
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         for ($index = $tokens->count() - 1, $last = \true; $index >= 0; --$index, $last = \false) {
             /** @var Token $token */
@@ -75,7 +73,11 @@ final class NoTrailingWhitespaceInStringFixer extends \PhpCsFixer\AbstractFixer
             $this->updateContent($tokens, $index, $content);
         }
     }
-    private function updateContent(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, string $content) : void
+    /**
+     * @param int    $index
+     * @param string $content
+     */
+    private function updateContent(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $content)
     {
         if ('' === $content) {
             $tokens->clearAt($index);

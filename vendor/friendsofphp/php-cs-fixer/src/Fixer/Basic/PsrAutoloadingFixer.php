@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,13 +12,11 @@ declare (strict_types=1);
 namespace PhpCsFixer\Fixer\Basic;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\FileSpecificCodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\StdinFileInfo;
 use PhpCsFixer\Tokenizer\Token;
@@ -31,12 +28,12 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Graham Campbell <graham@alt-three.com>
  * @author Kuba Werłos <werlos@gmail.com>
  */
-final class PsrAutoloadingFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface
+final class PsrAutoloadingFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.', [new \PhpCsFixer\FixerDefinition\FileSpecificCodeSample('<?php
 namespace PhpCsFixer\\FIXER\\Basic;
@@ -49,7 +46,7 @@ class InvalidName {}
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null) : void
+    public function configure(array $configuration = null)
     {
         parent::configure($configuration);
         if (null !== $this->configuration['dir']) {
@@ -59,28 +56,28 @@ class InvalidName {}
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound(\PhpCsFixer\Tokenizer\Token::getClassyTokenKinds());
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -10;
     }
     /**
      * {@inheritdoc}
      */
-    public function supports(\SplFileInfo $file) : bool
+    public function supports(\SplFileInfo $file)
     {
         if ($file instanceof \PhpCsFixer\StdinFileInfo) {
             return \false;
@@ -104,14 +101,14 @@ class InvalidName {}
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition() : \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('dir', 'If provided, the directory where the project code is placed.'))->setAllowedTypes(['null', 'string'])->setDefault(null)->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         if (null !== $this->configuration['dir'] && 0 !== \strpos($file->getRealPath(), $this->configuration['dir'])) {
             return;
@@ -169,7 +166,13 @@ class InvalidName {}
             $tokens->insertAt($namespaceStartIndex, $newNamespace);
         }
     }
-    private function calculateClassyName(\SplFileInfo $file, ?string $namespace, string $currentName) : string
+    /**
+     * @param null|string $namespace
+     * @param string      $currentName
+     *
+     * @return string
+     */
+    private function calculateClassyName(\SplFileInfo $file, $namespace, $currentName)
     {
         $name = $file->getBasename('.php');
         $maxNamespace = $this->calculateMaxNamespace($file, $namespace);
@@ -186,7 +189,12 @@ class InvalidName {}
         }
         return $name;
     }
-    private function calculateMaxNamespace(\SplFileInfo $file, ?string $namespace) : string
+    /**
+     * @param null|string $namespace
+     *
+     * @return string
+     */
+    private function calculateMaxNamespace(\SplFileInfo $file, $namespace)
     {
         if (null === $this->configuration['dir']) {
             $root = \dirname($file->getRealPath());

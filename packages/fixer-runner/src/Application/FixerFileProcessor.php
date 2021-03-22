@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\FixerRunner\Application;
 
 use PhpCsFixer\Differ\DifferInterface;
+use PhpCsFixer\Fixer\DefinedFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer;
@@ -31,7 +32,7 @@ use Throwable;
 final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\Application\FileProcessorInterface
 {
     /**
-     * @var array<class-string<FixerInterface>>
+     * @var array<class-string<DefinedFixerInterface>>
      */
     private const MARKDOWN_EXCLUDED_FIXERS = [\PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer::class, \PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer::class, \PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer::class, \PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer::class, \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::class, \Symplify\CodingStandard\Fixer\Commenting\RemoveCommentedCodeFixer::class];
     /**

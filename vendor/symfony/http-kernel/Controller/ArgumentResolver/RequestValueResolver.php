@@ -8,29 +8,29 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8583deb8ab74\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScoper82aa0193482e\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoper8583deb8ab74\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper8583deb8ab74\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoper8583deb8ab74\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoper82aa0193482e\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper82aa0193482e\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields the same instance as the request object passed along.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class RequestValueResolver implements \_PhpScoper8583deb8ab74\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class RequestValueResolver implements \_PhpScoper82aa0193482e\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function supports(\_PhpScoper8583deb8ab74\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper8583deb8ab74\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
+    public function supports(\_PhpScoper82aa0193482e\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper82aa0193482e\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
     {
-        return \_PhpScoper8583deb8ab74\Symfony\Component\HttpFoundation\Request::class === $argument->getType() || \is_subclass_of($argument->getType(), \_PhpScoper8583deb8ab74\Symfony\Component\HttpFoundation\Request::class);
+        return \_PhpScoper82aa0193482e\Symfony\Component\HttpFoundation\Request::class === $argument->getType() || \is_subclass_of($argument->getType(), \_PhpScoper82aa0193482e\Symfony\Component\HttpFoundation\Request::class);
     }
     /**
      * {@inheritdoc}
      */
-    public function resolve(\_PhpScoper8583deb8ab74\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper8583deb8ab74\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
+    public function resolve(\_PhpScoper82aa0193482e\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper82aa0193482e\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
     {
         (yield $request);
     }

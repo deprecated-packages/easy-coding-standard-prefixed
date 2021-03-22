@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -41,34 +40,57 @@ final class ArgumentAnalysis
      * @var null|TypeAnalysis
      */
     private $typeAnalysis;
-    public function __construct(string $name, int $nameIndex, ?string $default, \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis $typeAnalysis = null)
+    /**
+     * @param string      $name
+     * @param int         $nameIndex
+     * @param null|string $default
+     */
+    public function __construct($name, $nameIndex, $default, \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis $typeAnalysis = null)
     {
         $this->name = $name;
         $this->nameIndex = $nameIndex;
         $this->default = $default ?: null;
         $this->typeAnalysis = $typeAnalysis ?: null;
     }
-    public function getDefault() : ?string
+    /**
+     * @return null|string
+     */
+    public function getDefault()
     {
         return $this->default;
     }
-    public function hasDefault() : bool
+    /**
+     * @return bool
+     */
+    public function hasDefault()
     {
         return null !== $this->default;
     }
-    public function getName() : string
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return $this->name;
     }
-    public function getNameIndex() : int
+    /**
+     * @return int
+     */
+    public function getNameIndex()
     {
         return $this->nameIndex;
     }
-    public function getTypeAnalysis() : ?\PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis
+    /**
+     * @return null|TypeAnalysis
+     */
+    public function getTypeAnalysis()
     {
         return $this->typeAnalysis;
     }
-    public function hasTypeAnalysis() : bool
+    /**
+     * @return bool
+     */
+    public function hasTypeAnalysis()
     {
         return null !== $this->typeAnalysis;
     }

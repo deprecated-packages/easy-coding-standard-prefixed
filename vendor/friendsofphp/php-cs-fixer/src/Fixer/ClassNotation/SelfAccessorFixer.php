@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\ClassNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer;
 use PhpCsFixer\Tokenizer\CT;
@@ -30,7 +28,7 @@ final class SelfAccessorFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Inside class or interface element `self` should be preferred to the class name itself.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 class Sample
@@ -48,21 +46,21 @@ class Sample
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_CLASS, \T_INTERFACE]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         foreach ((new \PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer())->getDeclarations($tokens) as $namespace) {
@@ -81,8 +79,13 @@ class Sample
     }
     /**
      * Replace occurrences of the name of the classy element by "self" (if possible).
+     *
+     * @param string $namespace
+     * @param string $name
+     * @param int    $startIndex
+     * @param int    $endIndex
      */
-    private function replaceNameOccurrences(\PhpCsFixer\Tokenizer\Tokens $tokens, string $namespace, string $name, int $startIndex, int $endIndex) : void
+    private function replaceNameOccurrences(\PhpCsFixer\Tokenizer\Tokens $tokens, $namespace, $name, $startIndex, $endIndex)
     {
         $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         $insideMethodSignatureUntil = null;
@@ -129,7 +132,7 @@ class Sample
             }
         }
     }
-    private function getClassStart(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, string $namespace) : ?int
+    private function getClassStart(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $namespace)
     {
         $namespace = ('' !== $namespace ? '\\' . $namespace : '') . '\\';
         foreach (\array_reverse(\PhpCsFixer\Preg::split('/(\\\\)/', $namespace, -1, \PREG_SPLIT_NO_EMPTY | \PREG_SPLIT_DELIM_CAPTURE)) as $piece) {

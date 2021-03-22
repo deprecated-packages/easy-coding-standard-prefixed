@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -22,8 +21,8 @@ use PhpCsFixer\Console\Application;
  */
 final class ToolInfo implements \PhpCsFixer\ToolInfoInterface
 {
-    public const COMPOSER_PACKAGE_NAME = 'friendsofphp/php-cs-fixer';
-    public const COMPOSER_LEGACY_PACKAGE_NAME = 'fabpot/php-cs-fixer';
+    const COMPOSER_PACKAGE_NAME = 'friendsofphp/php-cs-fixer';
+    const COMPOSER_LEGACY_PACKAGE_NAME = 'fabpot/php-cs-fixer';
     /**
      * @var null|array
      */
@@ -32,7 +31,7 @@ final class ToolInfo implements \PhpCsFixer\ToolInfoInterface
      * @var null|bool
      */
     private $isInstalledByComposer;
-    public function getComposerInstallationDetails() : array
+    public function getComposerInstallationDetails()
     {
         if (!$this->isInstalledByComposer()) {
             throw new \LogicException('Cannot get composer version for tool not installed by composer.');
@@ -49,7 +48,7 @@ final class ToolInfo implements \PhpCsFixer\ToolInfoInterface
         }
         return $this->composerInstallationDetails;
     }
-    public function getComposerVersion() : string
+    public function getComposerVersion()
     {
         $package = $this->getComposerInstallationDetails();
         $versionSuffix = '';
@@ -58,29 +57,29 @@ final class ToolInfo implements \PhpCsFixer\ToolInfoInterface
         }
         return $package['version'] . $versionSuffix;
     }
-    public function getVersion() : string
+    public function getVersion()
     {
         if ($this->isInstalledByComposer()) {
             return \PhpCsFixer\Console\Application::VERSION . ':' . $this->getComposerVersion();
         }
         return \PhpCsFixer\Console\Application::VERSION;
     }
-    public function isInstalledAsPhar() : bool
+    public function isInstalledAsPhar()
     {
         return 'phar://' === \substr(__DIR__, 0, 7);
     }
-    public function isInstalledByComposer() : bool
+    public function isInstalledByComposer()
     {
         if (null === $this->isInstalledByComposer) {
             $this->isInstalledByComposer = !$this->isInstalledAsPhar() && \file_exists($this->getComposerInstalledFile());
         }
         return $this->isInstalledByComposer;
     }
-    public function getPharDownloadUri(string $version) : string
+    public function getPharDownloadUri($version)
     {
         return \sprintf('https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/%s/php-cs-fixer.phar', $version);
     }
-    private function getComposerInstalledFile() : string
+    private function getComposerInstalledFile()
     {
         return __DIR__ . '/../../../composer/installed.json';
     }

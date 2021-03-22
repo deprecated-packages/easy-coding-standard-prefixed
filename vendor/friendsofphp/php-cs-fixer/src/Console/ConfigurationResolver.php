@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -23,6 +22,7 @@ use PhpCsFixer\ConfigInterface;
 use PhpCsFixer\ConfigurationException\InvalidConfigurationException;
 use PhpCsFixer\Differ\DifferInterface;
 use PhpCsFixer\Differ\NullDiffer;
+use PhpCsFixer\Differ\SebastianBergmannDiffer;
 use PhpCsFixer\Differ\UnifiedDiffer;
 use PhpCsFixer\Finder;
 use PhpCsFixer\Fixer\DeprecatedFixerInterface;
@@ -33,15 +33,14 @@ use PhpCsFixer\Linter\LinterInterface;
 use PhpCsFixer\Report\ReporterFactory;
 use PhpCsFixer\Report\ReporterInterface;
 use PhpCsFixer\RuleSet\RuleSet;
-use PhpCsFixer\RuleSet\RuleSetInterface;
 use PhpCsFixer\StdinFileInfo;
 use PhpCsFixer\ToolInfoInterface;
 use PhpCsFixer\Utils;
 use PhpCsFixer\WhitespacesFixerConfig;
 use PhpCsFixer\WordMatcher;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Filesystem;
-use _PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper82aa0193482e\Symfony\Component\Finder\Finder as SymfonyFinder;
 /**
  * The resolver that resolves configuration to use by command line options and config.
  *
@@ -53,8 +52,8 @@ use _PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder as SymfonyFinder;
  */
 final class ConfigurationResolver
 {
-    public const PATH_MODE_OVERRIDE = 'override';
-    public const PATH_MODE_INTERSECTION = 'intersection';
+    const PATH_MODE_OVERRIDE = 'override';
+    const PATH_MODE_INTERSECTION = 'intersection';
     /**
      * @var null|bool
      */
@@ -102,7 +101,7 @@ final class ConfigurationResolver
     /**
      * @var array
      */
-    private $options = ['allow-risky' => null, 'cache-file' => null, 'config' => null, 'diff' => null, 'dry-run' => null, 'format' => null, 'path' => [], 'path-mode' => self::PATH_MODE_OVERRIDE, 'rules' => null, 'show-progress' => null, 'stop-on-violation' => null, 'using-cache' => null, 'verbosity' => null];
+    private $options = ['allow-risky' => null, 'cache-file' => null, 'config' => null, 'diff' => null, 'diff-format' => null, 'dry-run' => null, 'format' => null, 'path' => [], 'path-mode' => self::PATH_MODE_OVERRIDE, 'rules' => null, 'show-progress' => null, 'stop-on-violation' => null, 'using-cache' => null, 'verbosity' => null];
     private $cacheFile;
     private $cacheManager;
     private $differ;
@@ -118,7 +117,10 @@ final class ConfigurationResolver
      * @var FixerFactory
      */
     private $fixerFactory;
-    public function __construct(\PhpCsFixer\ConfigInterface $config, array $options, string $cwd, \PhpCsFixer\ToolInfoInterface $toolInfo)
+    /**
+     * @param string $cwd
+     */
+    public function __construct(\PhpCsFixer\ConfigInterface $config, array $options, $cwd, \PhpCsFixer\ToolInfoInterface $toolInfo)
     {
         $this->cwd = $cwd;
         $this->defaultConfig = $config;
@@ -127,7 +129,10 @@ final class ConfigurationResolver
             $this->setOption($name, $value);
         }
     }
-    public function getCacheFile() : ?string
+    /**
+     * @return null|string
+     */
+    public function getCacheFile()
     {
         if (!$this->getUsingCache()) {
             return null;
@@ -141,7 +146,10 @@ final class ConfigurationResolver
         }
         return $this->cacheFile;
     }
-    public function getCacheManager() : \PhpCsFixer\Cache\CacheManagerInterface
+    /**
+     * @return CacheManagerInterface
+     */
+    public function getCacheManager()
     {
         if (null === $this->cacheManager) {
             $cacheFile = $this->getCacheFile();
@@ -153,14 +161,22 @@ final class ConfigurationResolver
         }
         return $this->cacheManager;
     }
-    public function getConfig() : \PhpCsFixer\ConfigInterface
+    /**
+     * @return ConfigInterface
+     */
+    public function getConfig()
     {
         if (null === $this->config) {
             foreach ($this->computeConfigFiles() as $configFile) {
                 if (!\file_exists($configFile)) {
                     continue;
                 }
-                $this->config = self::separatedContextLessInclude($configFile);
+                $config = self::separatedContextLessInclude($configFile);
+                // verify that the config has an instance of Config
+                if (!$config instanceof \PhpCsFixer\ConfigInterface) {
+                    throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException(\sprintf('The config file: "%s" does not return a "PhpCsFixer\\ConfigInterface" instance. Got: "%s".', $configFile, \is_object($config) ? \get_class($config) : \gettype($config)));
+                }
+                $this->config = $config;
                 $this->configFile = $configFile;
                 break;
             }
@@ -170,32 +186,62 @@ final class ConfigurationResolver
         }
         return $this->config;
     }
-    public function getConfigFile() : ?string
+    /**
+     * @return null|string
+     */
+    public function getConfigFile()
     {
         if (null === $this->configFile) {
             $this->getConfig();
         }
         return $this->configFile;
     }
-    public function getDiffer() : \PhpCsFixer\Differ\DifferInterface
+    /**
+     * @return DifferInterface
+     */
+    public function getDiffer()
     {
         if (null === $this->differ) {
-            if ($this->options['diff']) {
-                $this->differ = new \PhpCsFixer\Differ\UnifiedDiffer();
+            $mapper = ['null' => static function () {
+                return new \PhpCsFixer\Differ\NullDiffer();
+            }, 'sbd' => static function () {
+                return new \PhpCsFixer\Differ\SebastianBergmannDiffer();
+            }, 'udiff' => static function () {
+                return new \PhpCsFixer\Differ\UnifiedDiffer();
+            }];
+            if (!$this->options['diff']) {
+                $defaultOption = 'null';
+            } elseif (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
+                $defaultOption = 'udiff';
             } else {
-                $this->differ = new \PhpCsFixer\Differ\NullDiffer();
+                $defaultOption = 'sbd';
+                // @TODO: 3.0 change to udiff as default
+            }
+            $option = isset($this->options['diff-format']) ? $this->options['diff-format'] : $defaultOption;
+            if (!\is_string($option)) {
+                throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException(\sprintf('"diff-format" must be a string, "%s" given.', \gettype($option)));
+            }
+            if (\is_subclass_of($option, \PhpCsFixer\Differ\DifferInterface::class)) {
+                $this->differ = new $option();
+            } elseif (!isset($mapper[$option])) {
+                throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException(\sprintf('"diff-format" must be any of "%s", got "%s".', \implode('", "', \array_keys($mapper)), $option));
+            } else {
+                $this->differ = $mapper[$option]();
             }
         }
         return $this->differ;
     }
-    public function getDirectory() : \PhpCsFixer\Cache\DirectoryInterface
+    /**
+     * @return DirectoryInterface
+     */
+    public function getDirectory()
     {
         if (null === $this->directory) {
             $path = $this->getCacheFile();
             if (null === $path) {
                 $absolutePath = $this->cwd;
             } else {
-                $filesystem = new \_PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Filesystem();
+                $filesystem = new \_PhpScoper82aa0193482e\Symfony\Component\Filesystem\Filesystem();
                 $absolutePath = $filesystem->isAbsolutePath($path) ? $path : $this->cwd . \DIRECTORY_SEPARATOR . $path;
             }
             $this->directory = new \PhpCsFixer\Cache\Directory(\dirname($absolutePath));
@@ -205,7 +251,7 @@ final class ConfigurationResolver
     /**
      * @return FixerInterface[] An array of FixerInterface
      */
-    public function getFixers() : array
+    public function getFixers()
     {
         if (null === $this->fixers) {
             $this->fixers = $this->createFixerFactory()->useRuleSet($this->getRuleSet())->setWhitespacesConfig(new \PhpCsFixer\WhitespacesFixerConfig($this->config->getIndent(), $this->config->getLineEnding()))->getFixers();
@@ -222,7 +268,10 @@ final class ConfigurationResolver
         }
         return $this->fixers;
     }
-    public function getLinter() : \PhpCsFixer\Linter\LinterInterface
+    /**
+     * @return LinterInterface
+     */
+    public function getLinter()
     {
         if (null === $this->linter) {
             $this->linter = new \PhpCsFixer\Linter\Linter($this->getConfig()->getPhpExecutable());
@@ -234,15 +283,15 @@ final class ConfigurationResolver
      *
      * @return string[]
      */
-    public function getPath() : array
+    public function getPath()
     {
         if (null === $this->path) {
-            $filesystem = new \_PhpScoper8583deb8ab74\Symfony\Component\Filesystem\Filesystem();
+            $filesystem = new \_PhpScoper82aa0193482e\Symfony\Component\Filesystem\Filesystem();
             $cwd = $this->cwd;
             if (1 === \count($this->options['path']) && '-' === $this->options['path'][0]) {
                 $this->path = $this->options['path'];
             } else {
-                $this->path = \array_map(static function (string $rawPath) use($cwd, $filesystem) {
+                $this->path = \array_map(static function ($rawPath) use($cwd, $filesystem) {
                     $path = \trim($rawPath);
                     if ('' === $path) {
                         throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException("Invalid path: \"{$rawPath}\".");
@@ -259,17 +308,29 @@ final class ConfigurationResolver
     }
     /**
      * @throws InvalidConfigurationException
+     *
+     * @return string
      */
-    public function getProgress() : string
+    public function getProgress()
     {
         if (null === $this->progress) {
-            if (\_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $this->options['verbosity'] && 'txt' === $this->getFormat()) {
+            if (\_PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $this->options['verbosity'] && 'txt' === $this->getFormat()) {
                 $progressType = $this->options['show-progress'];
-                $progressTypes = ['none', 'dots'];
+                $progressTypes = ['none', 'run-in', 'estimating', 'estimating-max', 'dots'];
                 if (null === $progressType) {
-                    $progressType = $this->getConfig()->getHideProgress() ? 'none' : 'dots';
+                    $default = 'run-in';
+                    if (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
+                        $default = 'dots';
+                    }
+                    $progressType = $this->getConfig()->getHideProgress() ? 'none' : $default;
                 } elseif (!\in_array($progressType, $progressTypes, \true)) {
                     throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException(\sprintf('The progress type "%s" is not defined, supported are "%s".', $progressType, \implode('", "', $progressTypes)));
+                } elseif (\in_array($progressType, ['estimating', 'estimating-max', 'run-in'], \true)) {
+                    $message = 'Passing `estimating`, `estimating-max` or `run-in` is deprecated and will not be supported in 3.0, use `none` or `dots` instead.';
+                    if (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
+                        throw new \InvalidArgumentException("{$message} This check was performed as `PHP_CS_FIXER_FUTURE_MODE` env var is set.");
+                    }
+                    @\trigger_error($message, \E_USER_DEPRECATED);
                 }
                 $this->progress = $progressType;
             } else {
@@ -278,7 +339,10 @@ final class ConfigurationResolver
         }
         return $this->progress;
     }
-    public function getReporter() : \PhpCsFixer\Report\ReporterInterface
+    /**
+     * @return ReporterInterface
+     */
+    public function getReporter()
     {
         if (null === $this->reporter) {
             $reporterFactory = \PhpCsFixer\Report\ReporterFactory::create();
@@ -294,7 +358,10 @@ final class ConfigurationResolver
         }
         return $this->reporter;
     }
-    public function getRiskyAllowed() : bool
+    /**
+     * @return bool
+     */
+    public function getRiskyAllowed()
     {
         if (null === $this->allowRisky) {
             if (null === $this->options['allow-risky']) {
@@ -307,12 +374,17 @@ final class ConfigurationResolver
     }
     /**
      * Returns rules.
+     *
+     * @return array
      */
-    public function getRules() : array
+    public function getRules()
     {
         return $this->getRuleSet()->getRules();
     }
-    public function getUsingCache() : bool
+    /**
+     * @return bool
+     */
+    public function getUsingCache()
     {
         if (null === $this->usingCache) {
             if (null === $this->options['using-cache']) {
@@ -324,7 +396,7 @@ final class ConfigurationResolver
         $this->usingCache = $this->usingCache && ($this->toolInfo->isInstalledAsPhar() || $this->toolInfo->isInstalledByComposer());
         return $this->usingCache;
     }
-    public function getFinder() : iterable
+    public function getFinder()
     {
         if (null === $this->finder) {
             $this->finder = $this->resolveFinder();
@@ -333,8 +405,10 @@ final class ConfigurationResolver
     }
     /**
      * Returns dry-run flag.
+     *
+     * @return bool
      */
-    public function isDryRun() : bool
+    public function isDryRun()
     {
         if (null === $this->isDryRun) {
             if ($this->isStdIn()) {
@@ -346,11 +420,14 @@ final class ConfigurationResolver
         }
         return $this->isDryRun;
     }
-    public function shouldStopOnViolation() : bool
+    public function shouldStopOnViolation()
     {
         return $this->options['stop-on-violation'];
     }
-    public function configFinderIsOverridden() : bool
+    /**
+     * @return bool
+     */
+    public function configFinderIsOverridden()
     {
         if (null === $this->configFinderIsOverridden) {
             $this->resolveFinder();
@@ -362,7 +439,7 @@ final class ConfigurationResolver
      *
      * @return string[]
      */
-    private function computeConfigFiles() : array
+    private function computeConfigFiles()
     {
         $configFile = $this->options['config'];
         if (null !== $configFile) {
@@ -389,7 +466,10 @@ final class ConfigurationResolver
         }
         return $candidates;
     }
-    private function createFixerFactory() : \PhpCsFixer\FixerFactory
+    /**
+     * @return FixerFactory
+     */
+    private function createFixerFactory()
     {
         if (null === $this->fixerFactory) {
             $fixerFactory = new \PhpCsFixer\FixerFactory();
@@ -399,14 +479,17 @@ final class ConfigurationResolver
         }
         return $this->fixerFactory;
     }
-    private function getFormat() : string
+    /**
+     * @return string
+     */
+    private function getFormat()
     {
         if (null === $this->format) {
             $this->format = null === $this->options['format'] ? $this->getConfig()->getFormat() : $this->options['format'];
         }
         return $this->format;
     }
-    private function getRuleSet() : \PhpCsFixer\RuleSet\RuleSetInterface
+    private function getRuleSet()
     {
         if (null === $this->ruleSet) {
             $rules = $this->parseRules();
@@ -415,21 +498,31 @@ final class ConfigurationResolver
         }
         return $this->ruleSet;
     }
-    private function isStdIn() : bool
+    /**
+     * @return bool
+     */
+    private function isStdIn()
     {
         if (null === $this->isStdIn) {
             $this->isStdIn = 1 === \count($this->options['path']) && '-' === $this->options['path'][0];
         }
         return $this->isStdIn;
     }
-    private function iterableToTraversable(iterable $iterable) : \Traversable
+    /**
+     * @param iterable $iterable
+     *
+     * @return \Traversable
+     */
+    private function iterableToTraversable($iterable)
     {
         return \is_array($iterable) ? new \ArrayIterator($iterable) : $iterable;
     }
     /**
      * Compute rules.
+     *
+     * @return array
      */
-    private function parseRules() : array
+    private function parseRules()
     {
         if (null === $this->options['rules']) {
             return $this->getConfig()->getRules();
@@ -462,7 +555,7 @@ final class ConfigurationResolver
     /**
      * @throws InvalidConfigurationException
      */
-    private function validateRules(array $rules) : void
+    private function validateRules(array $rules)
     {
         /**
          * Create a ruleset that contains all configured rules, even when they originally have been disabled.
@@ -510,7 +603,7 @@ final class ConfigurationResolver
     /**
      * Apply path on config instance.
      */
-    private function resolveFinder() : iterable
+    private function resolveFinder()
     {
         $this->configFinderIsOverridden = \false;
         if ($this->isStdIn()) {
@@ -521,7 +614,7 @@ final class ConfigurationResolver
             throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException(\sprintf('The path-mode "%s" is not defined, supported are "%s".', $this->options['path-mode'], \implode('", "', $modes)));
         }
         $isIntersectionPathMode = self::PATH_MODE_INTERSECTION === $this->options['path-mode'];
-        $paths = \array_filter(\array_map(static function (string $path) {
+        $paths = \array_filter(\array_map(static function ($path) {
             return \realpath($path);
         }, $this->getPath()));
         if (!\count($paths)) {
@@ -564,7 +657,7 @@ final class ConfigurationResolver
         if (null !== $this->getConfigFile() && null !== $nestedFinder) {
             $this->configFinderIsOverridden = \true;
         }
-        if ($currentFinder instanceof \_PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder && null === $nestedFinder) {
+        if ($currentFinder instanceof \_PhpScoper82aa0193482e\Symfony\Component\Finder\Finder && null === $nestedFinder) {
             // finder from configuration Symfony finder and it is not fully defined, we may fulfill it
             return $currentFinder->in($pathsByType['dir'])->append($pathsByType['file']);
         }
@@ -573,18 +666,27 @@ final class ConfigurationResolver
     /**
      * Set option that will be resolved.
      *
-     * @param mixed $value
+     * @param string $name
+     * @param mixed  $value
      */
-    private function setOption(string $name, $value) : void
+    private function setOption($name, $value)
     {
         if (!\array_key_exists($name, $this->options)) {
             throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException(\sprintf('Unknown option name: "%s".', $name));
         }
         $this->options[$name] = $value;
     }
-    private function resolveOptionBooleanValue(string $optionName) : bool
+    /**
+     * @param string $optionName
+     *
+     * @return bool
+     */
+    private function resolveOptionBooleanValue($optionName)
     {
         $value = $this->options[$optionName];
+        if (\is_bool($value)) {
+            return $value;
+        }
         if (!\is_string($value)) {
             throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException(\sprintf('Expected boolean or string value for option "%s".', $optionName));
         }
@@ -594,15 +696,15 @@ final class ConfigurationResolver
         if ('no' === $value) {
             return \false;
         }
-        throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException(\sprintf('Expected "yes" or "no" for option "%s", got "%s".', $optionName, $value));
-    }
-    private static function separatedContextLessInclude(string $path) : \PhpCsFixer\ConfigInterface
-    {
-        $config = (include $path);
-        // verify that the config has an instance of Config
-        if (!$config instanceof \PhpCsFixer\ConfigInterface) {
-            throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException(\sprintf('The config file: "%s" does not return a "PhpCsFixer\\ConfigInterface" instance. Got: "%s".', $path, \is_object($config) ? \get_class($config) : \gettype($config)));
+        $message = \sprintf('Expected "yes" or "no" for option "%s", other values are deprecated and support will be removed in 3.0. Got "%s", this implicitly set the option to "false".', $optionName, $value);
+        if (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
+            throw new \PhpCsFixer\ConfigurationException\InvalidConfigurationException("{$message} This check was performed as `PHP_CS_FIXER_FUTURE_MODE` env var is set.");
         }
-        return $config;
+        @\trigger_error($message, \E_USER_DEPRECATED);
+        return \false;
+    }
+    private static function separatedContextLessInclude($path)
+    {
+        return include $path;
     }
 }

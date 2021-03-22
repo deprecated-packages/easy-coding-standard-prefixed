@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -22,7 +21,12 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class SwitchAnalyzer
 {
-    public function getSwitchAnalysis(\PhpCsFixer\Tokenizer\Tokens $tokens, int $switchIndex) : \PhpCsFixer\Tokenizer\Analyzer\Analysis\SwitchAnalysis
+    /**
+     * @param int $switchIndex
+     *
+     * @return SwitchAnalysis
+     */
+    public function getSwitchAnalysis(\PhpCsFixer\Tokenizer\Tokens $tokens, $switchIndex)
     {
         if (!$tokens[$switchIndex]->isGivenKind(\T_SWITCH)) {
             throw new \InvalidArgumentException(\sprintf('Index %d is not "switch".', $switchIndex));
@@ -41,7 +45,12 @@ final class SwitchAnalyzer
         }
         return new \PhpCsFixer\Tokenizer\Analyzer\Analysis\SwitchAnalysis($casesStartIndex, $casesEndIndex, $cases);
     }
-    private function getCasesStart(\PhpCsFixer\Tokenizer\Tokens $tokens, int $switchIndex) : int
+    /**
+     * @param int $switchIndex
+     *
+     * @return int
+     */
+    private function getCasesStart(\PhpCsFixer\Tokenizer\Tokens $tokens, $switchIndex)
     {
         /** @var int $parenthesisStartIndex */
         $parenthesisStartIndex = $tokens->getNextMeaningfulToken($switchIndex);
@@ -50,7 +59,12 @@ final class SwitchAnalyzer
         \assert(\is_int($casesStartIndex));
         return $casesStartIndex;
     }
-    private function getCasesEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, int $casesStartIndex) : int
+    /**
+     * @param int $casesStartIndex
+     *
+     * @return int
+     */
+    private function getCasesEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, $casesStartIndex)
     {
         if ($tokens[$casesStartIndex]->equals('{')) {
             return $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $casesStartIndex);
@@ -66,7 +80,12 @@ final class SwitchAnalyzer
         $afterEndswitchToken = $tokens[$afterEndswitchIndex];
         return $afterEndswitchToken->equalsAny([';', [\T_CLOSE_TAG]]) ? $afterEndswitchIndex : $index;
     }
-    private function getCaseAnalysis(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : \PhpCsFixer\Tokenizer\Analyzer\Analysis\CaseAnalysis
+    /**
+     * @param int $index
+     *
+     * @return CaseAnalysis
+     */
+    private function getCaseAnalysis(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         while ($index < $tokens->count()) {
             $index = $this->getNextSameLevelToken($tokens, $index);
@@ -76,7 +95,12 @@ final class SwitchAnalyzer
         }
         return new \PhpCsFixer\Tokenizer\Analyzer\Analysis\CaseAnalysis($index);
     }
-    private function getNextSameLevelToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : int
+    /**
+     * @param int $index
+     *
+     * @return int
+     */
+    private function getNextSameLevelToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $index = $tokens->getNextMeaningfulToken($index);
         if ($tokens[$index]->isGivenKind(\T_SWITCH)) {

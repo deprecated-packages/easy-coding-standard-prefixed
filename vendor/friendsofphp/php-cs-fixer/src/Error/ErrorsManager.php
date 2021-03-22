@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,7 +29,7 @@ final class ErrorsManager
      *
      * @return Error[]
      */
-    public function getInvalidErrors() : array
+    public function getInvalidErrors()
     {
         return \array_filter($this->errors, static function (\PhpCsFixer\Error\Error $error) {
             return \PhpCsFixer\Error\Error::TYPE_INVALID === $error->getType();
@@ -41,7 +40,7 @@ final class ErrorsManager
      *
      * @return Error[]
      */
-    public function getExceptionErrors() : array
+    public function getExceptionErrors()
     {
         return \array_filter($this->errors, static function (\PhpCsFixer\Error\Error $error) {
             return \PhpCsFixer\Error\Error::TYPE_EXCEPTION === $error->getType();
@@ -52,7 +51,7 @@ final class ErrorsManager
      *
      * @return Error[]
      */
-    public function getLintErrors() : array
+    public function getLintErrors()
     {
         return \array_filter($this->errors, static function (\PhpCsFixer\Error\Error $error) {
             return \PhpCsFixer\Error\Error::TYPE_LINT === $error->getType();
@@ -60,12 +59,14 @@ final class ErrorsManager
     }
     /**
      * Returns true if no errors were reported.
+     *
+     * @return bool
      */
-    public function isEmpty() : bool
+    public function isEmpty()
     {
         return empty($this->errors);
     }
-    public function report(\PhpCsFixer\Error\Error $error) : void
+    public function report(\PhpCsFixer\Error\Error $error)
     {
         $this->errors[] = $error;
     }

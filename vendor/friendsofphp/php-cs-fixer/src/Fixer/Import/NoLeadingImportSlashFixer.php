@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Import;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -28,7 +26,7 @@ final class NoLeadingImportSlashFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Remove leading slashes in `use` clauses.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nnamespace Foo;\nuse \\Bar;\n")]);
     }
@@ -38,21 +36,21 @@ final class NoLeadingImportSlashFixer extends \PhpCsFixer\AbstractFixer
      * Must run before OrderedImportsFixer.
      * Must run after NoUnusedImportsFixer, SingleImportPerStatementFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -20;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         $usesIndexes = $tokensAnalyzer->getImportUseIndexes();
@@ -69,7 +67,10 @@ final class NoLeadingImportSlashFixer extends \PhpCsFixer\AbstractFixer
             }
         }
     }
-    private function removeLeadingImportSlash(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
+    /**
+     * @param int $index
+     */
+    private function removeLeadingImportSlash(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $previousIndex = $tokens->getPrevNonWhitespace($index);
         if ($previousIndex < $index - 1 || $tokens[$previousIndex]->isComment()) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\StringNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,12 +25,12 @@ final class ExplicitStringVariableFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Converts implicit variables into explicit ones in double-quoted strings or heredoc syntax.', [new \PhpCsFixer\FixerDefinition\CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScoper8583deb8ab74;
+namespace _PhpScoper82aa0193482e;
 
 $a = "My name is {$name} !";
 $b = "I live in {$state->country} !";
@@ -47,21 +45,21 @@ EOT
      * Must run before SimpleToComplexStringVariableFixer.
      * Must run after BacktickToShellExecFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_VARIABLE);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $backtickStarted = \false;
         for ($index = \count($tokens) - 1; $index > 0; --$index) {
@@ -122,8 +120,10 @@ EOT
      * Check if token is a part of a string.
      *
      * @param Token $token The token to check
+     *
+     * @return bool
      */
-    private function isStringPartToken(\PhpCsFixer\Tokenizer\Token $token) : bool
+    private function isStringPartToken(\PhpCsFixer\Tokenizer\Token $token)
     {
         return $token->isGivenKind(\T_ENCAPSED_AND_WHITESPACE) || $token->isGivenKind(\T_START_HEREDOC) || '"' === $token->getContent() || 'b"' === \strtolower($token->getContent());
     }

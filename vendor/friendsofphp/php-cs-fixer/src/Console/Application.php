@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -20,43 +19,49 @@ use PhpCsFixer\Console\SelfUpdate\GithubClient;
 use PhpCsFixer\Console\SelfUpdate\NewVersionChecker;
 use PhpCsFixer\PharChecker;
 use PhpCsFixer\ToolInfo;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Application as BaseApplication;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Command\ListCommand;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Application as BaseApplication;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Command\ListCommand;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @internal
  */
-final class Application extends \_PhpScoper8583deb8ab74\Symfony\Component\Console\Application
+final class Application extends \_PhpScoper82aa0193482e\Symfony\Component\Console\Application
 {
-    public const VERSION = '3.0.0-beta.1';
-    public const VERSION_CODENAME = '';
+    const VERSION = '2.18.4-DEV';
+    const VERSION_CODENAME = 'Remote Void';
     /**
      * @var ToolInfo
      */
     private $toolInfo;
     public function __construct()
     {
+        if (!\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
+            \error_reporting(\E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED);
+        }
         parent::__construct('PHP CS Fixer', self::VERSION);
         $this->toolInfo = new \PhpCsFixer\ToolInfo();
         $this->add(new \PhpCsFixer\Console\Command\DescribeCommand());
         $this->add(new \PhpCsFixer\Console\Command\FixCommand($this->toolInfo));
         $this->add(new \PhpCsFixer\Console\Command\SelfUpdateCommand(new \PhpCsFixer\Console\SelfUpdate\NewVersionChecker(new \PhpCsFixer\Console\SelfUpdate\GithubClient()), $this->toolInfo, new \PhpCsFixer\PharChecker()));
     }
-    public static function getMajorVersion() : int
+    /**
+     * @return int
+     */
+    public static function getMajorVersion()
     {
         return (int) \explode('.', self::VERSION)[0];
     }
     /**
      * {@inheritdoc}
      */
-    public function doRun(\_PhpScoper8583deb8ab74\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface $output) : int
+    public function doRun(\_PhpScoper82aa0193482e\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface $output)
     {
-        $stdErr = $output instanceof \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\ConsoleOutputInterface ? $output->getErrorOutput() : ($input->hasParameterOption('--format', \true) && 'txt' !== $input->getParameterOption('--format', null, \true) ? null : $output);
+        $stdErr = $output instanceof \_PhpScoper82aa0193482e\Symfony\Component\Console\Output\ConsoleOutputInterface ? $output->getErrorOutput() : ($input->hasParameterOption('--format', \true) && 'txt' !== $input->getParameterOption('--format', null, \true) ? null : $output);
         if (null !== $stdErr) {
             $warningsDetector = new \PhpCsFixer\Console\WarningsDetector($this->toolInfo);
             $warningsDetector->detectOldVendor();
@@ -70,7 +75,7 @@ final class Application extends \_PhpScoper8583deb8ab74\Symfony\Component\Consol
     /**
      * {@inheritdoc}
      */
-    public function getLongVersion() : string
+    public function getLongVersion()
     {
         $version = \sprintf('%s <info>%s</info> by <comment>Fabien Potencier</comment> and <comment>Dariusz Ruminski</comment>', parent::getLongVersion(), self::VERSION_CODENAME);
         $commit = '@git-commit@';
@@ -82,8 +87,8 @@ final class Application extends \_PhpScoper8583deb8ab74\Symfony\Component\Consol
     /**
      * {@inheritdoc}
      */
-    protected function getDefaultCommands() : array
+    protected function getDefaultCommands()
     {
-        return [new \PhpCsFixer\Console\Command\HelpCommand(), new \_PhpScoper8583deb8ab74\Symfony\Component\Console\Command\ListCommand()];
+        return [new \PhpCsFixer\Console\Command\HelpCommand(), new \_PhpScoper82aa0193482e\Symfony\Component\Console\Command\ListCommand()];
     }
 }

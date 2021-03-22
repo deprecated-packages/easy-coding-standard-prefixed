@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\ClassNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
 final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
@@ -23,28 +21,28 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Trait `use` statements must be sorted alphabetically.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php class Foo { \nuse Z; use A; }\n")], null, 'Risky when depending on order of the imports.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         foreach ($this->findUseStatementsGroups($tokens) as $uses) {
             $this->sortUseStatements($tokens, $uses);
@@ -53,7 +51,7 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @return iterable<array<int, Tokens>>
      */
-    private function findUseStatementsGroups(\PhpCsFixer\Tokenizer\Tokens $tokens) : iterable
+    private function findUseStatementsGroups(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $uses = [];
         for ($index = 1, $max = \count($tokens); $index < $max; ++$index) {
@@ -83,14 +81,14 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param array<int, Tokens> $uses
      */
-    private function sortUseStatements(\PhpCsFixer\Tokenizer\Tokens $tokens, array $uses) : void
+    private function sortUseStatements(\PhpCsFixer\Tokenizer\Tokens $tokens, array $uses)
     {
         foreach ($uses as $use) {
             $this->sortMultipleTraitsInStatement($use);
         }
         $this->sort($tokens, $uses);
     }
-    private function sortMultipleTraitsInStatement(\PhpCsFixer\Tokenizer\Tokens $use) : void
+    private function sortMultipleTraitsInStatement(\PhpCsFixer\Tokenizer\Tokens $use)
     {
         $traits = [];
         $indexOfName = null;
@@ -118,7 +116,7 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param array<int, Tokens> $elements
      */
-    private function sort(\PhpCsFixer\Tokenizer\Tokens $tokens, array $elements) : void
+    private function sort(\PhpCsFixer\Tokenizer\Tokens $tokens, array $elements)
     {
         /**
          * @return string

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\ClassNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Tokenizer\Token;
@@ -30,7 +28,7 @@ final class SelfStaticAccessorFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Inside a `final` class or anonymous class `self` should be preferred to `static`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 final class Sample
@@ -75,7 +73,7 @@ $a = new class() {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_STATIC]) && $tokens->isAnyTokenKindsFound([\T_DOUBLE_COLON, \T_NEW, \T_INSTANCEOF]);
     }
@@ -84,14 +82,14 @@ $a = new class() {
      *
      * Must run after FinalInternalClassFixer, FunctionToConstantFixer, PhpUnitTestCaseStaticMethodCallsFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -10;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $this->tokensAnalyzer = $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         $classIndex = $tokens->getNextTokenOfKind(0, [[\T_CLASS]]);
@@ -102,7 +100,12 @@ $a = new class() {
             $classIndex = $tokens->getNextTokenOfKind($classIndex, [[\T_CLASS]]);
         }
     }
-    private function fixClass(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : int
+    /**
+     * @param int $index
+     *
+     * @return int
+     */
+    private function fixClass(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $index = $tokens->getNextTokenOfKind($index, ['{']);
         $classOpenCount = 1;

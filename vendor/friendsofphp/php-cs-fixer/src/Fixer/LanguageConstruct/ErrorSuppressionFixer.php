@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,13 +12,11 @@ declare (strict_types=1);
 namespace PhpCsFixer\Fixer\LanguageConstruct;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,46 +24,46 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Jules Pietri <jules@heahprod.com>
  * @author Kuba Werłos <werlos@gmail.com>
  */
-final class ErrorSuppressionFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface
+final class ErrorSuppressionFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
-    public const OPTION_MUTE_DEPRECATION_ERROR = 'mute_deprecation_error';
-    public const OPTION_NOISE_REMAINING_USAGES = 'noise_remaining_usages';
-    public const OPTION_NOISE_REMAINING_USAGES_EXCLUDE = 'noise_remaining_usages_exclude';
+    const OPTION_MUTE_DEPRECATION_ERROR = 'mute_deprecation_error';
+    const OPTION_NOISE_REMAINING_USAGES = 'noise_remaining_usages';
+    const OPTION_NOISE_REMAINING_USAGES_EXCLUDE = 'noise_remaining_usages_exclude';
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Error control operator should be added to deprecation notices and/or removed from other cases.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\ntrigger_error('Warning.', E_USER_DEPRECATED);\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n@mkdir(\$dir);\n@unlink(\$path);\n", [self::OPTION_NOISE_REMAINING_USAGES => \true]), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n@mkdir(\$dir);\n@unlink(\$path);\n", [self::OPTION_NOISE_REMAINING_USAGES => \true, self::OPTION_NOISE_REMAINING_USAGES_EXCLUDE => ['unlink']])], null, 'Risky because adding/removing `@` might cause changes to code behaviour or if `trigger_error` function is overridden.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound(['@', \T_STRING]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition() : \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder(self::OPTION_MUTE_DEPRECATION_ERROR, 'Whether to add `@` in deprecation notices.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder(self::OPTION_NOISE_REMAINING_USAGES, 'Whether to remove `@` in remaining usages.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder(self::OPTION_NOISE_REMAINING_USAGES_EXCLUDE, 'List of global functions to exclude from removing `@`'))->setAllowedTypes(['array'])->setDefault([])->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
-        $excludedFunctions = \array_map(static function (string $function) {
+        $excludedFunctions = \array_map(static function ($function) {
             return \strtolower($function);
         }, $this->configuration[self::OPTION_NOISE_REMAINING_USAGES_EXCLUDE]);
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
@@ -104,7 +101,12 @@ final class ErrorSuppressionFixer extends \PhpCsFixer\AbstractFixer implements \
             }
         }
     }
-    private function isDeprecationErrorCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    /**
+     * @param int $index
+     *
+     * @return bool
+     */
+    private function isDeprecationErrorCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         if ('trigger_error' !== \strtolower($tokens[$index]->getContent())) {
             return \false;

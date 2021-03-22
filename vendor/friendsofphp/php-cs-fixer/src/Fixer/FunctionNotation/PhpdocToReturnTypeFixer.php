@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,12 +14,10 @@ namespace PhpCsFixer\Fixer\FunctionNotation;
 use PhpCsFixer\AbstractPhpdocToTypeDeclarationFixer;
 use PhpCsFixer\DocBlock\Annotation;
 use PhpCsFixer\DocBlock\DocBlock;
-use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Preg;
@@ -30,7 +27,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class PhpdocToReturnTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDeclarationFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface
+final class PhpdocToReturnTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDeclarationFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     /**
      * @var array<int, array<int, int|string>>
@@ -55,7 +52,7 @@ final class PhpdocToReturnTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDecl
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('EXPERIMENTAL: Takes `@return` annotation of non-mixed types and adjusts accordingly the function signature. Requires PHP >= 7.0.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
 
@@ -91,7 +88,7 @@ final class Foo {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
             return \true;
@@ -104,28 +101,28 @@ final class Foo {
      * Must run before FullyQualifiedStrictTypesFixer, NoSuperfluousPhpdocTagsFixer, PhpdocAlignFixer, ReturnTypeDeclarationFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer, PhpdocTypesFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 13;
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition() : \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('scalar_types', 'Fix also scalar types; may have unexpected behaviour due to PHP bad type coercion system.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         if (\PHP_VERSION_ID >= 80000) {
             unset($this->skippedTypes['mixed']);
@@ -204,17 +201,21 @@ final class Foo {
      * Determine whether the function already has a return type hint.
      *
      * @param int $index The index of the end of the function definition line, EG at { or ;
+     *
+     * @return bool
      */
-    private function hasReturnTypeHint(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    private function hasReturnTypeHint(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $endFuncIndex = $tokens->getPrevTokenOfKind($index, [')']);
         $nextIndex = $tokens->getNextMeaningfulToken($endFuncIndex);
         return $tokens[$nextIndex]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON);
     }
     /**
-     * @param int $index The index of the end of the function definition line, EG at { or ;
+     * @param int    $index      The index of the end of the function definition line, EG at { or ;
+     * @param bool   $isNullable
+     * @param string $returnType
      */
-    private function fixFunctionDefinition(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, bool $isNullable, string $returnType) : void
+    private function fixFunctionDefinition(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $isNullable, $returnType)
     {
         static $specialTypes = ['array' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, 'array'], 'callable' => [\T_CALLABLE, 'callable'], 'static' => [\T_STATIC, 'static']];
         $newTokens = [new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON, ':']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])];
@@ -250,7 +251,7 @@ final class Foo {
      *
      * @return Annotation[]
      */
-    private function findReturnAnnotations(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : array
+    private function findReturnAnnotations(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         do {
             $index = $tokens->getPrevNonWhitespace($index);

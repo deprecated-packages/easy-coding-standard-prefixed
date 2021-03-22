@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,7 +11,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Report;
 
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * Generates a report according to gitlabs subset of codeclimate json files.
  *
@@ -24,14 +23,16 @@ use _PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter;
  */
 final class GitlabReporter implements \PhpCsFixer\Report\ReporterInterface
 {
-    public function getFormat() : string
+    public function getFormat()
     {
         return 'gitlab';
     }
     /**
      * Process changed files array. Returns generated report.
+     *
+     * @return string
      */
-    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary) : string
+    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary)
     {
         $report = [];
         foreach ($reportSummary->getChanged() as $fileName => $change) {
@@ -40,6 +41,6 @@ final class GitlabReporter implements \PhpCsFixer\Report\ReporterInterface
             }
         }
         $jsonString = \json_encode($report);
-        return $reportSummary->isDecoratedOutput() ? \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($jsonString) : $jsonString;
+        return $reportSummary->isDecoratedOutput() ? \_PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter::escape($jsonString) : $jsonString;
     }
 }

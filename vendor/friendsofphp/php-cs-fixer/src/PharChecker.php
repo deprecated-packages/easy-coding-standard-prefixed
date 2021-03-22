@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -20,7 +19,7 @@ final class PharChecker implements \PhpCsFixer\PharCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function checkFileValidity(string $filename) : ?string
+    public function checkFileValidity($filename)
     {
         try {
             $phar = new \Phar($filename);

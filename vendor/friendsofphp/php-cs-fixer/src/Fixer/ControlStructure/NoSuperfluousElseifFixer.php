@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\ControlStructure;
 use PhpCsFixer\AbstractNoUselessElseFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -24,14 +22,14 @@ final class NoSuperfluousElseifFixer extends \PhpCsFixer\AbstractNoUselessElseFi
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_ELSE, \T_ELSEIF]);
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replaces superfluous `elseif` with `if`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nif (\$a) {\n    return 1;\n} elseif (\$b) {\n    return 2;\n}\n")]);
     }
@@ -41,14 +39,14 @@ final class NoSuperfluousElseifFixer extends \PhpCsFixer\AbstractNoUselessElseFi
      * Must run before SimplifiedIfReturnFixer.
      * Must run after NoAlternativeSyntaxFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return parent::getPriority();
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if ($this->isElseif($tokens, $index) && $this->isSuperfluousElse($tokens, $index)) {
@@ -56,11 +54,19 @@ final class NoSuperfluousElseifFixer extends \PhpCsFixer\AbstractNoUselessElseFi
             }
         }
     }
-    private function isElseif(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    /**
+     * @param int $index
+     *
+     * @return bool
+     */
+    private function isElseif(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         return $tokens[$index]->isGivenKind(\T_ELSEIF) || $tokens[$index]->isGivenKind(\T_ELSE) && $tokens[$tokens->getNextMeaningfulToken($index)]->isGivenKind(\T_IF);
     }
-    private function convertElseifToIf(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
+    /**
+     * @param int $index
+     */
+    private function convertElseifToIf(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         if ($tokens[$index]->isGivenKind(\T_ELSE)) {
             $tokens->clearTokenAndMergeSurroundingWhitespace($index);

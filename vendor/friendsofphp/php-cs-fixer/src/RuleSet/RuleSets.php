@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,7 +11,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\RuleSet;
 
-use _PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder;
+use _PhpScoper82aa0193482e\Symfony\Component\Finder\Finder;
 /**
  * Set of rule sets to be used by fixer.
  *
@@ -26,11 +25,11 @@ final class RuleSets
     /**
      * @return array<string, RuleSetDescriptionInterface>
      */
-    public static function getSetDefinitions() : array
+    public static function getSetDefinitions()
     {
         if (null === self::$setDefinitions) {
             self::$setDefinitions = [];
-            foreach (\_PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Sets') as $file) {
+            foreach (\_PhpScoper82aa0193482e\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Sets') as $file) {
                 $class = 'PhpCsFixer\\RuleSet\\Sets\\' . $file->getBasename('.php');
                 $set = new $class();
                 self::$setDefinitions[$set->getName()] = $set;
@@ -42,11 +41,16 @@ final class RuleSets
     /**
      * @return string[]
      */
-    public static function getSetDefinitionNames() : array
+    public static function getSetDefinitionNames()
     {
         return \array_keys(self::getSetDefinitions());
     }
-    public static function getSetDefinition(string $name) : \PhpCsFixer\RuleSet\RuleSetDescriptionInterface
+    /**
+     * @param string $name
+     *
+     * @return RuleSetDescriptionInterface
+     */
+    public static function getSetDefinition($name)
     {
         $definitions = self::getSetDefinitions();
         if (!isset($definitions[$name])) {

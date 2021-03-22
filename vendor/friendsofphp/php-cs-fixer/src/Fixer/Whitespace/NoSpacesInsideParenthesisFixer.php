@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Whitespace;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * Fixer for rules defined in PSR2 ¶4.3, ¶4.6, ¶5.
@@ -28,7 +26,7 @@ final class NoSpacesInsideParenthesisFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('There MUST NOT be a space after the opening parenthesis. There MUST NOT be a space before the closing parenthesis.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nif ( \$a ) {\n    foo( );\n}\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nfunction foo( \$bar, \$baz )\n{\n}\n")]);
     }
@@ -38,21 +36,21 @@ final class NoSpacesInsideParenthesisFixer extends \PhpCsFixer\AbstractFixer
      * Must run before FunctionToConstantFixer.
      * Must run after CombineConsecutiveIssetsFixer, CombineNestedDirnameFixer, LambdaNotUsedImportFixer, NoUselessSprintfFixer, PowToExponentiationFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 2;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound('(');
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->equals('(')) {
@@ -76,8 +74,10 @@ final class NoSpacesInsideParenthesisFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * Remove spaces from token at a given index.
+     *
+     * @param int $index
      */
-    private function removeSpaceAroundToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
+    private function removeSpaceAroundToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $token = $tokens[$index];
         if ($token->isWhitespace() && \false === \strpos($token->getContent(), "\n")) {

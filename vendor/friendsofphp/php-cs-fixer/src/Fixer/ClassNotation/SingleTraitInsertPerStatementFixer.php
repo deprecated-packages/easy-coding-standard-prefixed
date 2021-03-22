@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\ClassNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
@@ -25,7 +23,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class SingleTraitInsertPerStatementFixer extends \PhpCsFixer\AbstractFixer
 {
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Each trait `use` must be done as single statement.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 final class Example
@@ -39,15 +37,15 @@ final class Example
      *
      * Must run before BracesFixer, SpaceAfterSemicolonFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 36;
     }
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT);
     }
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         for ($index = \count($tokens) - 1; 1 < $index; --$index) {
             if ($tokens[$index]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT)) {
@@ -59,9 +57,10 @@ final class Example
         }
     }
     /**
-     * @param int[] $candidates ',' indexes to fix
+     * @param int   $useTraitIndex
+     * @param int[] $candidates    ',' indexes to fix
      */
-    private function fixTraitUse(\PhpCsFixer\Tokenizer\Tokens $tokens, int $useTraitIndex, array $candidates) : void
+    private function fixTraitUse(\PhpCsFixer\Tokenizer\Tokens $tokens, $useTraitIndex, array $candidates)
     {
         foreach ($candidates as $commaIndex) {
             $inserts = [new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, 'use']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])];
@@ -77,9 +76,11 @@ final class Example
         }
     }
     /**
+     * @param int $index
+     *
      * @return int[]
      */
-    private function getCandidates(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : array
+    private function getCandidates(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $indexes = [];
         $index = $tokens->getNextTokenOfKind($index, [',', ';', '{']);

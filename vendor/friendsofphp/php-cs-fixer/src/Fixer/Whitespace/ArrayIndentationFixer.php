@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -16,7 +15,6 @@ use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
@@ -26,14 +24,14 @@ final class ArrayIndentationFixer extends \PhpCsFixer\AbstractFixer implements \
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Each element of an array must be indented exactly once.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$foo = [\n   'bar' => [\n    'baz' => true,\n  ],\n];\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_ARRAY, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN]);
     }
@@ -43,11 +41,11 @@ final class ArrayIndentationFixer extends \PhpCsFixer\AbstractFixer implements \
      * Must run before AlignMultilineCommentFixer, BinaryOperatorSpacesFixer.
      * Must run after BracesFixer, MethodArgumentSpaceFixer, MethodChainingIndentationFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 29;
     }
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $scopes = [];
         $previousLineInitialIndent = '';
@@ -106,7 +104,7 @@ final class ArrayIndentationFixer extends \PhpCsFixer\AbstractFixer implements \
             }
         }
     }
-    private function findExpressionEndIndex(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, int $parentScopeEndIndex) : int
+    private function findExpressionEndIndex(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $parentScopeEndIndex)
     {
         $endIndex = null;
         for ($searchEndIndex = $index + 1; $searchEndIndex < $parentScopeEndIndex; ++$searchEndIndex) {
@@ -126,7 +124,7 @@ final class ArrayIndentationFixer extends \PhpCsFixer\AbstractFixer implements \
         }
         return $tokens->getPrevMeaningfulToken($parentScopeEndIndex);
     }
-    private function getLineIndentation(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : string
+    private function getLineIndentation(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $newlineTokenIndex = $this->getPreviousNewlineTokenIndex($tokens, $index);
         if (null === $newlineTokenIndex) {
@@ -134,14 +132,14 @@ final class ArrayIndentationFixer extends \PhpCsFixer\AbstractFixer implements \
         }
         return $this->extractIndent($this->computeNewLineContent($tokens, $newlineTokenIndex));
     }
-    private function extractIndent(string $content) : string
+    private function extractIndent($content)
     {
         if (\PhpCsFixer\Preg::match('/\\R(\\h*)[^\\r\\n]*$/D', $content, $matches)) {
             return $matches[1];
         }
         return '';
     }
-    private function getPreviousNewlineTokenIndex(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : ?int
+    private function getPreviousNewlineTokenIndex(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         while ($index > 0) {
             $index = $tokens->getPrevTokenOfKind($index, [[\T_WHITESPACE], [\T_INLINE_HTML]]);
@@ -154,14 +152,14 @@ final class ArrayIndentationFixer extends \PhpCsFixer\AbstractFixer implements \
         }
         return null;
     }
-    private function isNewLineToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    private function isNewLineToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind([\T_WHITESPACE, \T_INLINE_HTML])) {
             return \false;
         }
         return (bool) \PhpCsFixer\Preg::match('/\\R/', $this->computeNewLineContent($tokens, $index));
     }
-    private function computeNewLineContent(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : string
+    private function computeNewLineContent(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $content = $tokens[$index]->getContent();
         if (0 !== $index && $tokens[$index - 1]->equalsAny([[\T_OPEN_TAG], [\T_CLOSE_TAG]])) {

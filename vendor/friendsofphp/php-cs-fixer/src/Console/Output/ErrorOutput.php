@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,8 +14,8 @@ namespace PhpCsFixer\Console\Output;
 use PhpCsFixer\Differ\DiffConsoleFormatter;
 use PhpCsFixer\Error\Error;
 use PhpCsFixer\Linter\LintingException;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author SpacePossum
  *
@@ -32,19 +31,20 @@ final class ErrorOutput
      * @var bool
      */
     private $isDecorated;
-    public function __construct(\_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface $output)
+    public function __construct(\_PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $this->output = $output;
         $this->isDecorated = $output->isDecorated();
     }
     /**
+     * @param string  $process
      * @param Error[] $errors
      */
-    public function listErrors(string $process, array $errors) : void
+    public function listErrors($process, array $errors)
     {
         $this->output->writeln(['', \sprintf('Files that were not fixed due to errors reported during %s:', $process)]);
-        $showDetails = $this->output->getVerbosity() >= \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE;
-        $showTrace = $this->output->getVerbosity() >= \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG;
+        $showDetails = $this->output->getVerbosity() >= \_PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE;
+        $showTrace = $this->output->getVerbosity() >= \_PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG;
         foreach ($errors as $i => $error) {
             $this->output->writeln(\sprintf('%4d) %s', $i + 1, $error->getFilePath()));
             $e = $error->getSource();
@@ -71,7 +71,7 @@ final class ErrorOutput
                 $this->output->writeln('');
                 $stackTrace = $e->getTrace();
                 foreach ($stackTrace as $trace) {
-                    if (isset($trace['class'], $trace['function']) && \_PhpScoper8583deb8ab74\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
+                    if (isset($trace['class'], $trace['function']) && \_PhpScoper82aa0193482e\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
                         $this->output->writeln('      [ ... ]');
                         break;
                     }
@@ -89,7 +89,7 @@ final class ErrorOutput
             }
         }
     }
-    private function outputTrace(array $trace) : void
+    private function outputTrace(array $trace)
     {
         if (isset($trace['class'], $trace['type'], $trace['function'])) {
             $this->output->writeln(\sprintf('      <comment>%s</comment>%s<comment>%s()</comment>', $this->prepareOutput($trace['class']), $this->prepareOutput($trace['type']), $this->prepareOutput($trace['function'])));
@@ -100,8 +100,13 @@ final class ErrorOutput
             $this->output->writeln(\sprintf('        in <info>%s</info> at line <info>%d</info>', $this->prepareOutput($trace['file']), $trace['line']));
         }
     }
-    private function prepareOutput(string $string) : string
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    private function prepareOutput($string)
     {
-        return $this->isDecorated ? \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($string) : $string;
+        return $this->isDecorated ? \_PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter::escape($string) : $string;
     }
 }

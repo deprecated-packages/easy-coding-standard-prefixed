@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Operator;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\Analysis\CaseAnalysis;
 use PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer;
 use PhpCsFixer\Tokenizer\Analyzer\SwitchAnalyzer;
@@ -29,7 +27,7 @@ final class TernaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Standardize spaces around ternary operator.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$a = \$a   ?1 :0;\n")]);
     }
@@ -38,21 +36,21 @@ final class TernaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
      *
      * Must run after ArraySyntaxFixer, ListSyntaxFixer, TernaryToElvisOperatorFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound(['?', ':']);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $gotoLabelAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer();
         $ternaryOperatorIndices = [];
@@ -102,7 +100,12 @@ final class TernaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
             }
         }
     }
-    private function belongsToAlternativeSyntax(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    /**
+     * @param int $index
+     *
+     * @return bool
+     */
+    private function belongsToAlternativeSyntax(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         if (!$tokens[$index]->equals(':')) {
             return \false;
@@ -119,15 +122,21 @@ final class TernaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
         return $tokens[$alternativeControlStructureIndex]->isGivenKind([\T_DECLARE, \T_ELSEIF, \T_FOR, \T_FOREACH, \T_IF, \T_SWITCH, \T_WHILE]);
     }
     /**
+     * @param int $switchIndex
+     *
      * @return int[]
      */
-    private function getColonIndicesForSwitch(\PhpCsFixer\Tokenizer\Tokens $tokens, int $switchIndex) : array
+    private function getColonIndicesForSwitch(\PhpCsFixer\Tokenizer\Tokens $tokens, $switchIndex)
     {
         return \array_map(static function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\CaseAnalysis $caseAnalysis) {
             return $caseAnalysis->getColonIndex();
         }, (new \PhpCsFixer\Tokenizer\Analyzer\SwitchAnalyzer())->getSwitchAnalysis($tokens, $switchIndex)->getCases());
     }
-    private function ensureWhitespaceExistence(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, bool $after) : void
+    /**
+     * @param int  $index
+     * @param bool $after
+     */
+    private function ensureWhitespaceExistence(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $after)
     {
         if ($tokens[$index]->isWhitespace()) {
             if (\false === \strpos($tokens[$index]->getContent(), "\n") && !$tokens[$index - 1]->isComment()) {

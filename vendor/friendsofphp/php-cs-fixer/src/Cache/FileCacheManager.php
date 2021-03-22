@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -50,7 +49,10 @@ final class FileCacheManager implements \PhpCsFixer\Cache\CacheManagerInterface
      * @var DirectoryInterface
      */
     private $cacheDirectory;
-    public function __construct(\PhpCsFixer\Cache\FileHandlerInterface $handler, \PhpCsFixer\Cache\SignatureInterface $signature, bool $isDryRun = \false, \PhpCsFixer\Cache\DirectoryInterface $cacheDirectory = null)
+    /**
+     * @param bool $isDryRun
+     */
+    public function __construct(\PhpCsFixer\Cache\FileHandlerInterface $handler, \PhpCsFixer\Cache\SignatureInterface $signature, $isDryRun = \false, \PhpCsFixer\Cache\DirectoryInterface $cacheDirectory = null)
     {
         $this->handler = $handler;
         $this->signature = $signature;
@@ -66,7 +68,7 @@ final class FileCacheManager implements \PhpCsFixer\Cache\CacheManagerInterface
      * This class is not intended to be serialized,
      * and cannot be deserialized (see __wakeup method).
      */
-    public function __sleep() : array
+    public function __sleep()
     {
         throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
     }
@@ -76,16 +78,16 @@ final class FileCacheManager implements \PhpCsFixer\Cache\CacheManagerInterface
      *
      * @see https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection
      */
-    public function __wakeup() : void
+    public function __wakeup()
     {
         throw new \BadMethodCallException('Cannot unserialize ' . __CLASS__);
     }
-    public function needFixing(string $file, string $fileContent) : bool
+    public function needFixing($file, $fileContent)
     {
         $file = $this->cacheDirectory->getRelativePathTo($file);
         return !$this->cache->has($file) || $this->cache->get($file) !== $this->calcHash($fileContent);
     }
-    public function setFile(string $file, string $fileContent) : void
+    public function setFile($file, $fileContent)
     {
         $file = $this->cacheDirectory->getRelativePathTo($file);
         $hash = $this->calcHash($fileContent);
@@ -95,7 +97,7 @@ final class FileCacheManager implements \PhpCsFixer\Cache\CacheManagerInterface
         }
         $this->cache->set($file, $hash);
     }
-    private function readCache() : void
+    private function readCache()
     {
         $cache = $this->handler->read();
         if (!$cache || !$this->signature->equals($cache->getSignature())) {
@@ -103,11 +105,11 @@ final class FileCacheManager implements \PhpCsFixer\Cache\CacheManagerInterface
         }
         $this->cache = $cache;
     }
-    private function writeCache() : void
+    private function writeCache()
     {
         $this->handler->write($this->cache);
     }
-    private function calcHash(string $content) : int
+    private function calcHash($content)
     {
         return \crc32($content);
     }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -19,5 +18,8 @@ namespace PhpCsFixer\FixerDefinition;
  */
 interface FileSpecificCodeSampleInterface extends \PhpCsFixer\FixerDefinition\CodeSampleInterface
 {
-    public function getSplFileInfo() : \SplFileInfo;
+    /**
+     * @return \SplFileInfo
+     */
+    public function getSplFileInfo();
 }

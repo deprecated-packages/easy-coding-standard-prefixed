@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -19,7 +18,7 @@ use PhpCsFixer\Utils;
  *
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class Token
+class Token
 {
     /**
      * Content of token prototype.
@@ -76,7 +75,7 @@ final class Token
     /**
      * @return int[]
      */
-    public static function getCastTokenKinds() : array
+    public static function getCastTokenKinds()
     {
         static $castTokens = [\T_ARRAY_CAST, \T_BOOL_CAST, \T_DOUBLE_CAST, \T_INT_CAST, \T_OBJECT_CAST, \T_STRING_CAST, \T_UNSET_CAST];
         return $castTokens;
@@ -86,10 +85,36 @@ final class Token
      *
      * @return int[]
      */
-    public static function getClassyTokenKinds() : array
+    public static function getClassyTokenKinds()
     {
         static $classTokens = [\T_CLASS, \T_TRAIT, \T_INTERFACE];
         return $classTokens;
+    }
+    /**
+     * Clear token at given index.
+     *
+     * Clearing means override token by empty string.
+     *
+     * @deprecated since 2.4
+     */
+    public function clear()
+    {
+        @\trigger_error(__METHOD__ . ' is deprecated and will be removed in 3.0.', \E_USER_DEPRECATED);
+        \PhpCsFixer\Tokenizer\Tokens::setLegacyMode(\true);
+        $this->content = '';
+        $this->id = null;
+        $this->isArray = \false;
+    }
+    /**
+     * Clear internal flag if token was changed.
+     *
+     * @deprecated since 2.4
+     */
+    public function clearChanged()
+    {
+        @\trigger_error(__METHOD__ . ' is deprecated and will be removed in 3.0.', \E_USER_DEPRECATED);
+        \PhpCsFixer\Tokenizer\Tokens::setLegacyMode(\true);
+        $this->changed = \false;
     }
     /**
      * Check if token is equals to given one.
@@ -98,8 +123,10 @@ final class Token
      *
      * @param array|string|Token $other         token or it's prototype
      * @param bool               $caseSensitive perform a case sensitive comparison
+     *
+     * @return bool
      */
-    public function equals($other, bool $caseSensitive = \true) : bool
+    public function equals($other, $caseSensitive = \true)
     {
         if ($other instanceof self) {
             // Inlined getPrototype() on this very hot path.
@@ -140,8 +167,10 @@ final class Token
      *
      * @param array $others        array of tokens or token prototypes
      * @param bool  $caseSensitive perform a case sensitive comparison
+     *
+     * @return bool
      */
-    public function equalsAny(array $others, bool $caseSensitive = \true) : bool
+    public function equalsAny(array $others, $caseSensitive = \true)
     {
         foreach ($others as $other) {
             if ($this->equals($other, $caseSensitive)) {
@@ -157,8 +186,10 @@ final class Token
      *                                             the ones used in $others. If any is missing, the default case-sensitive
      *                                             comparison is used
      * @param int                   $key           the key of the token that has to be looked up
+     *
+     * @return bool
      */
-    public static function isKeyCaseSensitive($caseSensitive, int $key) : bool
+    public static function isKeyCaseSensitive($caseSensitive, $key)
     {
         if (\is_array($caseSensitive)) {
             return isset($caseSensitive[$key]) ? $caseSensitive[$key] : \true;
@@ -179,8 +210,10 @@ final class Token
      * Get token's content.
      *
      * It shall be used only for getting the content of token, not for checking it against excepted value.
+     *
+     * @return string
      */
-    public function getContent() : string
+    public function getContent()
     {
         return $this->content;
     }
@@ -188,8 +221,10 @@ final class Token
      * Get token's id.
      *
      * It shall be used only for getting the internal id of token, not for checking it against excepted value.
+     *
+     * @return null|int
      */
-    public function getId() : ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -200,7 +235,7 @@ final class Token
      *
      * @return null|string token name
      */
-    public function getName() : ?string
+    public function getName()
     {
         if (null === $this->id) {
             return null;
@@ -212,9 +247,11 @@ final class Token
      *
      * It shall be used only for getting the name of token, not for checking it against excepted value.
      *
+     * @param int $id
+     *
      * @return null|string token name
      */
-    public static function getNameForId(int $id) : ?string
+    public static function getNameForId($id)
     {
         if (\PhpCsFixer\Tokenizer\CT::has($id)) {
             return \PhpCsFixer\Tokenizer\CT::getName($id);
@@ -227,7 +264,7 @@ final class Token
      *
      * @return array<int, int>
      */
-    public static function getKeywords() : array
+    public static function getKeywords()
     {
         static $keywords = null;
         if (null === $keywords) {
@@ -242,7 +279,7 @@ final class Token
      *
      * @return array<int, int>
      */
-    public static function getMagicConstants() : array
+    public static function getMagicConstants()
     {
         static $magicConstants = null;
         if (null === $magicConstants) {
@@ -255,53 +292,89 @@ final class Token
      *
      * @return bool is array
      */
-    public function isArray() : bool
+    public function isArray()
     {
         return $this->isArray;
     }
     /**
      * Check if token is one of type cast tokens.
+     *
+     * @return bool
      */
-    public function isCast() : bool
+    public function isCast()
     {
         return $this->isGivenKind(self::getCastTokenKinds());
     }
     /**
-     * Check if token is one of classy tokens: T_CLASS, T_INTERFACE or T_TRAIT.
+     * Check if token was changed.
+     *
+     * @return bool
+     *
+     * @deprecated since 2.4
      */
-    public function isClassy() : bool
+    public function isChanged()
+    {
+        @\trigger_error(__METHOD__ . ' is deprecated and will be removed in 3.0.', \E_USER_DEPRECATED);
+        return $this->changed;
+    }
+    /**
+     * Check if token is one of classy tokens: T_CLASS, T_INTERFACE or T_TRAIT.
+     *
+     * @return bool
+     */
+    public function isClassy()
     {
         return $this->isGivenKind(self::getClassyTokenKinds());
     }
     /**
      * Check if token is one of comment tokens: T_COMMENT or T_DOC_COMMENT.
+     *
+     * @return bool
      */
-    public function isComment() : bool
+    public function isComment()
     {
         static $commentTokens = [\T_COMMENT, \T_DOC_COMMENT];
         return $this->isGivenKind($commentTokens);
     }
     /**
+     * Check if token is empty, e.g. because of clearing.
+     *
+     * @return bool
+     *
+     * @deprecated since 2.4
+     */
+    public function isEmpty()
+    {
+        @\trigger_error(__METHOD__ . ' is deprecated and will be removed in 3.0.', \E_USER_DEPRECATED);
+        return null === $this->id && ('' === $this->content || null === $this->content);
+    }
+    /**
      * Check if token is one of given kind.
      *
      * @param int|int[] $possibleKind kind or array of kinds
+     *
+     * @return bool
      */
-    public function isGivenKind($possibleKind) : bool
+    public function isGivenKind($possibleKind)
     {
         return $this->isArray && (\is_array($possibleKind) ? \in_array($this->id, $possibleKind, \true) : $this->id === $possibleKind);
     }
     /**
      * Check if token is a keyword.
+     *
+     * @return bool
      */
-    public function isKeyword() : bool
+    public function isKeyword()
     {
         $keywords = static::getKeywords();
         return $this->isArray && isset($keywords[$this->id]);
     }
     /**
      * Check if token is a native PHP constant: true, false or null.
+     *
+     * @return bool
      */
-    public function isNativeConstant() : bool
+    public function isNativeConstant()
     {
         static $nativeConstantStrings = ['true', 'false', 'null'];
         return $this->isArray && \in_array(\strtolower($this->content), $nativeConstantStrings, \true);
@@ -310,8 +383,10 @@ final class Token
      * Returns if the token is of a Magic constants type.
      *
      * @see https://php.net/manual/en/language.constants.predefined.php
+     *
+     * @return bool
      */
-    public function isMagicConstant() : bool
+    public function isMagicConstant()
     {
         $magicConstants = static::getMagicConstants();
         return $this->isArray && isset($magicConstants[$this->id]);
@@ -320,8 +395,10 @@ final class Token
      * Check if token is whitespace.
      *
      * @param null|string $whitespaces whitespace characters, default is " \t\n\r\0\x0B"
+     *
+     * @return bool
      */
-    public function isWhitespace(?string $whitespaces = " \t\n\r\0\v") : bool
+    public function isWhitespace($whitespaces = " \t\n\r\0\v")
     {
         if (null === $whitespaces) {
             $whitespaces = " \t\n\r\0\v";
@@ -331,14 +408,65 @@ final class Token
         }
         return '' === \trim($this->content, $whitespaces);
     }
-    public function toArray() : array
+    /**
+     * Override token.
+     *
+     * If called on Token inside Tokens collection please use `Tokens::overrideAt` instead.
+     *
+     * @param array|string|Token $other token prototype
+     *
+     * @deprecated since 2.4
+     */
+    public function override($other)
+    {
+        @\trigger_error(__METHOD__ . ' is deprecated and will be removed in 3.0.', \E_USER_DEPRECATED);
+        \PhpCsFixer\Tokenizer\Tokens::setLegacyMode(\true);
+        $prototype = $other instanceof self ? $other->getPrototype() : $other;
+        if ($this->equals($prototype)) {
+            return;
+        }
+        $this->changed = \true;
+        if (\is_array($prototype)) {
+            $this->isArray = \true;
+            $this->id = $prototype[0];
+            $this->content = $prototype[1];
+            return;
+        }
+        $this->isArray = \false;
+        $this->id = null;
+        $this->content = $prototype;
+    }
+    /**
+     * @param string $content
+     *
+     * @deprecated since 2.4
+     */
+    public function setContent($content)
+    {
+        @\trigger_error(__METHOD__ . ' is deprecated and will be removed in 3.0.', \E_USER_DEPRECATED);
+        \PhpCsFixer\Tokenizer\Tokens::setLegacyMode(\true);
+        if ($this->content === $content) {
+            return;
+        }
+        $this->changed = \true;
+        $this->content = $content;
+        // setting empty content is clearing the token
+        if ('' === $content) {
+            @\trigger_error(__METHOD__ . ' shall not be used to clear token, use Tokens::clearAt instead.', \E_USER_DEPRECATED);
+            $this->id = null;
+            $this->isArray = \false;
+        }
+    }
+    public function toArray()
     {
         return ['id' => $this->id, 'name' => $this->getName(), 'content' => $this->content, 'isArray' => $this->isArray, 'changed' => $this->changed];
     }
     /**
      * @param null|string[] $options JSON encode option
+     *
+     * @return string
      */
-    public function toJson(array $options = null) : string
+    public function toJson(array $options = null)
     {
         static $defaultOptions = null;
         if (null === $options) {
@@ -360,7 +488,7 @@ final class Token
      *
      * @return array<int, int>
      */
-    private static function getTokenKindsForNames(array $tokenNames) : array
+    private static function getTokenKindsForNames(array $tokenNames)
     {
         $keywords = [];
         foreach ($tokenNames as $keywordName) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,13 +14,11 @@ namespace PhpCsFixer\Fixer\PhpUnit;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\DocBlock\Line;
 use PhpCsFixer\Fixer\AbstractPhpUnitFixer;
-use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -30,20 +27,20 @@ use PhpCsFixer\Utils;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class PhpUnitMethodCasingFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface
+final class PhpUnitMethodCasingFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     /**
      * @internal
      */
-    public const CAMEL_CASE = 'camel_case';
+    const CAMEL_CASE = 'camel_case';
     /**
      * @internal
      */
-    public const SNAKE_CASE = 'snake_case';
+    const SNAKE_CASE = 'snake_case';
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Enforce camel (or snake) case for PHPUnit test methods, following configuration.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 class MyTest extends \\PhpUnit\\FrameWork\\TestCase
@@ -62,21 +59,21 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
      *
      * Must run after PhpUnitTestAnnotationFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition() : \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('case', 'Apply camel or snake case to test methods'))->setAllowedValues([self::CAMEL_CASE, self::SNAKE_CASE])->setDefault(self::CAMEL_CASE)->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, int $startIndex, int $endIndex) : void
+    protected function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
     {
         for ($index = $endIndex - 1; $index > $startIndex; --$index) {
             if (!$this->isTestMethod($tokens, $index)) {
@@ -94,7 +91,12 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
             }
         }
     }
-    private function updateMethodCasing(string $functionName) : string
+    /**
+     * @param string $functionName
+     *
+     * @return string
+     */
+    private function updateMethodCasing($functionName)
     {
         $parts = \explode('::', $functionName);
         $functionNamePart = \array_pop($parts);
@@ -109,7 +111,12 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
         $parts[] = $newFunctionNamePart;
         return \implode('::', $parts);
     }
-    private function isTestMethod(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    /**
+     * @param int $index
+     *
+     * @return bool
+     */
+    private function isTestMethod(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         // Check if we are dealing with a (non abstract, non lambda) function
         if (!$this->isMethod($tokens, $index)) {
@@ -124,16 +131,30 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
         $docBlockIndex = $this->getDocBlockIndex($tokens, $index);
         return $this->isPHPDoc($tokens, $docBlockIndex) && \false !== \strpos($tokens[$docBlockIndex]->getContent(), '@test');
     }
-    private function isMethod(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : bool
+    /**
+     * @param int $index
+     *
+     * @return bool
+     */
+    private function isMethod(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         return $tokens[$index]->isGivenKind(\T_FUNCTION) && !$tokensAnalyzer->isLambda($index);
     }
-    private function startsWith(string $needle, string $haystack) : bool
+    /**
+     * @param string $needle
+     * @param string $haystack
+     *
+     * @return bool
+     */
+    private function startsWith($needle, $haystack)
     {
         return \substr($haystack, 0, \strlen($needle)) === $needle;
     }
-    private function updateDocBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, int $docBlockIndex) : void
+    /**
+     * @param int $docBlockIndex
+     */
+    private function updateDocBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, $docBlockIndex)
     {
         $doc = new \PhpCsFixer\DocBlock\DocBlock($tokens[$docBlockIndex]->getContent());
         $lines = $doc->getLines();

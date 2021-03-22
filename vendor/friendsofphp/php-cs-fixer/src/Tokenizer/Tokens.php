@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,22 +23,20 @@ use PhpCsFixer\Utils;
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @extends \SplFixedArray<Token>
- *
- * @final
  */
 class Tokens extends \SplFixedArray
 {
-    public const BLOCK_TYPE_PARENTHESIS_BRACE = 1;
-    public const BLOCK_TYPE_CURLY_BRACE = 2;
-    public const BLOCK_TYPE_INDEX_SQUARE_BRACE = 3;
-    public const BLOCK_TYPE_ARRAY_SQUARE_BRACE = 4;
-    public const BLOCK_TYPE_DYNAMIC_PROP_BRACE = 5;
-    public const BLOCK_TYPE_DYNAMIC_VAR_BRACE = 6;
-    public const BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE = 7;
-    public const BLOCK_TYPE_GROUP_IMPORT_BRACE = 8;
-    public const BLOCK_TYPE_DESTRUCTURING_SQUARE_BRACE = 9;
-    public const BLOCK_TYPE_BRACE_CLASS_INSTANTIATION = 10;
-    public const BLOCK_TYPE_ATTRIBUTE = 11;
+    const BLOCK_TYPE_PARENTHESIS_BRACE = 1;
+    const BLOCK_TYPE_CURLY_BRACE = 2;
+    const BLOCK_TYPE_INDEX_SQUARE_BRACE = 3;
+    const BLOCK_TYPE_ARRAY_SQUARE_BRACE = 4;
+    const BLOCK_TYPE_DYNAMIC_PROP_BRACE = 5;
+    const BLOCK_TYPE_DYNAMIC_VAR_BRACE = 6;
+    const BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE = 7;
+    const BLOCK_TYPE_GROUP_IMPORT_BRACE = 8;
+    const BLOCK_TYPE_DESTRUCTURING_SQUARE_BRACE = 9;
+    const BLOCK_TYPE_BRACE_CLASS_INSTANTIATION = 10;
+    const BLOCK_TYPE_ATTRIBUTE = 11;
     /**
      * Static class cache.
      *
@@ -77,6 +74,12 @@ class Tokens extends \SplFixedArray
      */
     private $foundTokenKinds = [];
     /**
+     * @var bool
+     *
+     * @todo remove at 3.0
+     */
+    private static $isLegacyMode = \false;
+    /**
      * Clone tokens collection.
      */
     public function __clone()
@@ -86,11 +89,36 @@ class Tokens extends \SplFixedArray
         }
     }
     /**
+     * @return bool
+     *
+     * @internal
+     *
+     * @todo remove at 3.0
+     */
+    public static function isLegacyMode()
+    {
+        return self::$isLegacyMode;
+    }
+    /**
+     * @param bool $isLegacy
+     *
+     * @internal
+     *
+     * @todo remove at 3.0
+     */
+    public static function setLegacyMode($isLegacy)
+    {
+        if (\getenv('PHP_CS_FIXER_FUTURE_MODE') && $isLegacy) {
+            throw new \RuntimeException('Cannot enable `legacy mode` when using `future mode`. This check was performed as `PHP_CS_FIXER_FUTURE_MODE` env var is set.');
+        }
+        self::$isLegacyMode = $isLegacy;
+    }
+    /**
      * Clear cache - one position or all of them.
      *
      * @param null|string $key position to clear, when null clear all
      */
-    public static function clearCache(?string $key = null) : void
+    public static function clearCache($key = null)
     {
         if (null === $key) {
             self::$cache = [];
@@ -107,7 +135,7 @@ class Tokens extends \SplFixedArray
      *
      * @return null|array array with 'type' and 'isStart' keys or null if not found
      */
-    public static function detectBlockType(\PhpCsFixer\Tokenizer\Token $token) : ?array
+    public static function detectBlockType(\PhpCsFixer\Tokenizer\Token $token)
     {
         foreach (self::getBlockEdgeDefinitions() as $type => $definition) {
             if ($token->equals($definition['start'])) {
@@ -123,9 +151,11 @@ class Tokens extends \SplFixedArray
      * Create token collection from array.
      *
      * @param Token[] $array       the array to import
-     * @param ?bool   $saveIndexes save the numeric indexes used in the original array, default is yes
+     * @param bool    $saveIndexes save the numeric indexes used in the original array, default is yes
+     *
+     * @return Tokens
      */
-    public static function fromArray($array, $saveIndexes = null) : self
+    public static function fromArray($array, $saveIndexes = null)
     {
         $tokens = new self(\count($array));
         if (null === $saveIndexes || $saveIndexes) {
@@ -147,8 +177,10 @@ class Tokens extends \SplFixedArray
      * Create token collection directly from code.
      *
      * @param string $code PHP code
+     *
+     * @return Tokens
      */
-    public static function fromCode(string $code) : self
+    public static function fromCode($code)
     {
         $codeHash = self::calculateCodeHash($code);
         if (self::hasCache($codeHash)) {
@@ -166,7 +198,10 @@ class Tokens extends \SplFixedArray
         $tokens->clearChanged();
         return $tokens;
     }
-    public static function getBlockEdgeDefinitions() : array
+    /**
+     * @return array
+     */
+    public static function getBlockEdgeDefinitions()
     {
         $definitions = [self::BLOCK_TYPE_CURLY_BRACE => ['start' => '{', 'end' => '}'], self::BLOCK_TYPE_PARENTHESIS_BRACE => ['start' => '(', 'end' => ')'], self::BLOCK_TYPE_INDEX_SQUARE_BRACE => ['start' => '[', 'end' => ']'], self::BLOCK_TYPE_ARRAY_SQUARE_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN, '['], 'end' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE, ']']], self::BLOCK_TYPE_DYNAMIC_PROP_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_OPEN, '{'], 'end' => [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_CLOSE, '}']], self::BLOCK_TYPE_DYNAMIC_VAR_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_OPEN, '{'], 'end' => [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_CLOSE, '}']], self::BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN, '{'], 'end' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE, '}']], self::BLOCK_TYPE_GROUP_IMPORT_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_OPEN, '{'], 'end' => [\PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_CLOSE, '}']], self::BLOCK_TYPE_DESTRUCTURING_SQUARE_BRACE => ['start' => [\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN, '['], 'end' => [\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE, ']']], self::BLOCK_TYPE_BRACE_CLASS_INSTANTIATION => ['start' => [\PhpCsFixer\Tokenizer\CT::T_BRACE_CLASS_INSTANTIATION_OPEN, '('], 'end' => [\PhpCsFixer\Tokenizer\CT::T_BRACE_CLASS_INSTANTIATION_CLOSE, ')']]];
         // @TODO: drop condition when PHP 8.0+ is required
@@ -179,8 +214,10 @@ class Tokens extends \SplFixedArray
      * Set new size of collection.
      *
      * @param int $size
+     *
+     * @return bool
      */
-    public function setSize($size) : bool
+    public function setSize($size)
     {
         if ($this->getSize() !== $size) {
             $this->changed = \true;
@@ -193,7 +230,7 @@ class Tokens extends \SplFixedArray
      *
      * @param int $index
      */
-    public function offsetUnset($index) : void
+    public function offsetUnset($index)
     {
         $this->changed = \true;
         $this->unregisterFoundToken($this[$index]);
@@ -207,7 +244,7 @@ class Tokens extends \SplFixedArray
      * @param int   $index
      * @param Token $newval
      */
-    public function offsetSet($index, $newval) : void
+    public function offsetSet($index, $newval)
     {
         $this->blockEndCache = [];
         if (!isset($this[$index]) || !$this[$index]->equals($newval)) {
@@ -222,16 +259,21 @@ class Tokens extends \SplFixedArray
     /**
      * Clear internal flag if collection was changed and flag for all collection's items.
      */
-    public function clearChanged() : void
+    public function clearChanged()
     {
         $this->changed = \false;
+        if (self::isLegacyMode()) {
+            foreach ($this as $token) {
+                $token->clearChanged();
+            }
+        }
     }
     /**
      * Clear empty tokens.
      *
      * Empty tokens can occur e.g. after calling clear on item of collection.
      */
-    public function clearEmptyTokens() : void
+    public function clearEmptyTokens()
     {
         $limit = $this->count();
         $index = 0;
@@ -263,9 +305,9 @@ class Tokens extends \SplFixedArray
      *
      * @return bool if new Token was added
      */
-    public function ensureWhitespaceAtIndex(int $index, int $indexOffset, string $whitespace) : bool
+    public function ensureWhitespaceAtIndex($index, $indexOffset, $whitespace)
     {
-        $removeLastCommentLine = static function (self $tokens, int $index, int $indexOffset, string $whitespace) {
+        $removeLastCommentLine = static function (self $tokens, $index, $indexOffset, $whitespace) {
             $token = $tokens[$index];
             if (1 === $indexOffset && $token->isGivenKind(\T_OPEN_TAG)) {
                 if (0 === \strpos($whitespace, "\r\n")) {
@@ -294,14 +336,22 @@ class Tokens extends \SplFixedArray
         return \true;
     }
     /**
-     * @param int $type        type of block, one of BLOCK_TYPE_*
-     * @param int $searchIndex index of opening brace
+     * @param int  $type        type of block, one of BLOCK_TYPE_*
+     * @param int  $searchIndex index of opening brace
+     * @param bool $findEnd     if method should find block's end, default true, otherwise method find block's start
      *
      * @return int index of closing brace
      */
-    public function findBlockEnd(int $type, int $searchIndex) : int
+    public function findBlockEnd($type, $searchIndex, $findEnd = \true)
     {
-        return $this->findOppositeBlockEdge($type, $searchIndex, \true);
+        if (3 === \func_num_args()) {
+            if ($findEnd) {
+                @\trigger_error('Argument #3 of Tokens::findBlockEnd is deprecated and will be removed in 3.0, you can safely drop the argument.', \E_USER_DEPRECATED);
+            } else {
+                @\trigger_error('Argument #3 of Tokens::findBlockEnd is deprecated and will be removed in 3.0, use Tokens::findBlockStart instead.', \E_USER_DEPRECATED);
+            }
+        }
+        return $this->findOppositeBlockEdge($type, $searchIndex, $findEnd);
     }
     /**
      * @param int $type        type of block, one of BLOCK_TYPE_*
@@ -309,7 +359,7 @@ class Tokens extends \SplFixedArray
      *
      * @return int index of opening brace
      */
-    public function findBlockStart(int $type, int $searchIndex) : int
+    public function findBlockStart($type, $searchIndex)
     {
         return $this->findOppositeBlockEdge($type, $searchIndex, \false);
     }
@@ -320,7 +370,7 @@ class Tokens extends \SplFixedArray
      *
      * @return array array of tokens of given kinds or assoc array of arrays
      */
-    public function findGivenKind($possibleKind, int $start = 0, ?int $end = null) : array
+    public function findGivenKind($possibleKind, $start = 0, $end = null)
     {
         if (null === $end) {
             $end = $this->count();
@@ -330,9 +380,11 @@ class Tokens extends \SplFixedArray
         foreach ($possibleKinds as $kind) {
             $elements[$kind] = [];
         }
-        $possibleKinds = \array_filter($possibleKinds, function ($kind) {
-            return $this->isTokenKindFound($kind);
-        });
+        if (!self::isLegacyMode()) {
+            $possibleKinds = \array_filter($possibleKinds, function ($kind) {
+                return $this->isTokenKindFound($kind);
+            });
+        }
         if (\count($possibleKinds)) {
             for ($i = $start; $i < $end; ++$i) {
                 $token = $this[$i];
@@ -343,7 +395,10 @@ class Tokens extends \SplFixedArray
         }
         return \is_array($possibleKind) ? $elements : $elements[$possibleKind];
     }
-    public function generateCode() : string
+    /**
+     * @return string
+     */
+    public function generateCode()
     {
         $code = $this->generatePartialCode(0, \count($this) - 1);
         $this->changeCodeHash(self::calculateCodeHash($code));
@@ -354,8 +409,10 @@ class Tokens extends \SplFixedArray
      *
      * @param int $start start index
      * @param int $end   end index
+     *
+     * @return string
      */
-    public function generatePartialCode(int $start, int $end) : string
+    public function generatePartialCode($start, $end)
     {
         $code = '';
         for ($i = $start; $i <= $end; ++$i) {
@@ -365,8 +422,10 @@ class Tokens extends \SplFixedArray
     }
     /**
      * Get hash of code.
+     *
+     * @return string
      */
-    public function getCodeHash() : string
+    public function getCodeHash()
     {
         return $this->codeHash;
     }
@@ -377,8 +436,10 @@ class Tokens extends \SplFixedArray
      *
      * @param int         $index       token index
      * @param null|string $whitespaces whitespaces characters for Token::isWhitespace
+     *
+     * @return null|int
      */
-    public function getNextNonWhitespace(int $index, ?string $whitespaces = null) : ?int
+    public function getNextNonWhitespace($index, $whitespaces = null)
     {
         return $this->getNonWhitespaceSibling($index, 1, $whitespaces);
     }
@@ -390,8 +451,10 @@ class Tokens extends \SplFixedArray
      * @param int   $index         token index
      * @param array $tokens        possible tokens
      * @param bool  $caseSensitive perform a case sensitive comparison
+     *
+     * @return null|int
      */
-    public function getNextTokenOfKind(int $index, array $tokens = [], bool $caseSensitive = \true) : ?int
+    public function getNextTokenOfKind($index, array $tokens = [], $caseSensitive = \true)
     {
         return $this->getTokenOfKindSibling($index, 1, $tokens, $caseSensitive);
     }
@@ -401,8 +464,10 @@ class Tokens extends \SplFixedArray
      * @param int         $index       token index
      * @param int         $direction   direction for looking, +1 or -1
      * @param null|string $whitespaces whitespaces characters for Token::isWhitespace
+     *
+     * @return null|int
      */
-    public function getNonWhitespaceSibling(int $index, int $direction, ?string $whitespaces = null) : ?int
+    public function getNonWhitespaceSibling($index, $direction, $whitespaces = null)
     {
         while (\true) {
             $index += $direction;
@@ -421,8 +486,10 @@ class Tokens extends \SplFixedArray
      *
      * @param int         $index       token index
      * @param null|string $whitespaces whitespaces characters for Token::isWhitespace
+     *
+     * @return null|int
      */
-    public function getPrevNonWhitespace(int $index, ?string $whitespaces = null) : ?int
+    public function getPrevNonWhitespace($index, $whitespaces = null)
     {
         return $this->getNonWhitespaceSibling($index, -1, $whitespaces);
     }
@@ -433,8 +500,10 @@ class Tokens extends \SplFixedArray
      * @param int   $index         token index
      * @param array $tokens        possible tokens
      * @param bool  $caseSensitive perform a case sensitive comparison
+     *
+     * @return null|int
      */
-    public function getPrevTokenOfKind(int $index, array $tokens = [], bool $caseSensitive = \true) : ?int
+    public function getPrevTokenOfKind($index, array $tokens = [], $caseSensitive = \true)
     {
         return $this->getTokenOfKindSibling($index, -1, $tokens, $caseSensitive);
     }
@@ -445,12 +514,16 @@ class Tokens extends \SplFixedArray
      * @param int   $direction     direction for looking, +1 or -1
      * @param array $tokens        possible tokens
      * @param bool  $caseSensitive perform a case sensitive comparison
+     *
+     * @return null|int
      */
-    public function getTokenOfKindSibling(int $index, int $direction, array $tokens = [], bool $caseSensitive = \true) : ?int
+    public function getTokenOfKindSibling($index, $direction, array $tokens = [], $caseSensitive = \true)
     {
-        $tokens = \array_filter($tokens, function ($token) {
-            return $this->isTokenKindFound($this->extractTokenKind($token));
-        });
+        if (!self::isLegacyMode()) {
+            $tokens = \array_filter($tokens, function ($token) {
+                return $this->isTokenKindFound($this->extractTokenKind($token));
+            });
+        }
         if (!\count($tokens)) {
             return null;
         }
@@ -470,10 +543,12 @@ class Tokens extends \SplFixedArray
      * @param int   $index     token index
      * @param int   $direction direction for looking, +1 or -1
      * @param array $tokens    possible tokens
+     *
+     * @return null|int
      */
-    public function getTokenNotOfKindSibling(int $index, int $direction, array $tokens = []) : ?int
+    public function getTokenNotOfKindSibling($index, $direction, array $tokens = [])
     {
-        return $this->getTokenNotOfKind($index, $direction, function (int $a) use($tokens) {
+        return $this->getTokenNotOfKind($index, $direction, function ($a) use($tokens) {
             return $this[$a]->equalsAny($tokens);
         });
     }
@@ -483,10 +558,12 @@ class Tokens extends \SplFixedArray
      * @param int   $index     token index
      * @param int   $direction direction for looking, +1 or -1
      * @param array $kinds     possible tokens kinds
+     *
+     * @return null|int
      */
-    public function getTokenNotOfKindsSibling(int $index, int $direction, array $kinds = []) : ?int
+    public function getTokenNotOfKindsSibling($index, $direction, array $kinds = [])
     {
-        return $this->getTokenNotOfKind($index, $direction, function (int $index) use($kinds) {
+        return $this->getTokenNotOfKind($index, $direction, function ($index) use($kinds) {
             return $this[$index]->isGivenKind($kinds);
         });
     }
@@ -495,8 +572,10 @@ class Tokens extends \SplFixedArray
      *
      * @param int $index     token index
      * @param int $direction direction for looking, +1 or -1
+     *
+     * @return null|int
      */
-    public function getMeaningfulTokenSibling(int $index, int $direction) : ?int
+    public function getMeaningfulTokenSibling($index, $direction)
     {
         return $this->getTokenNotOfKindsSibling($index, $direction, [\T_WHITESPACE, \T_COMMENT, \T_DOC_COMMENT]);
     }
@@ -505,8 +584,10 @@ class Tokens extends \SplFixedArray
      *
      * @param int $index     token index
      * @param int $direction direction for looking, +1 or -1
+     *
+     * @return null|int
      */
-    public function getNonEmptySibling(int $index, int $direction) : ?int
+    public function getNonEmptySibling($index, $direction)
     {
         while (\true) {
             $index += $direction;
@@ -522,8 +603,10 @@ class Tokens extends \SplFixedArray
      * Get index for closest next token that is not a whitespace or comment.
      *
      * @param int $index token index
+     *
+     * @return null|int
      */
-    public function getNextMeaningfulToken(int $index) : ?int
+    public function getNextMeaningfulToken($index)
     {
         return $this->getMeaningfulTokenSibling($index, 1);
     }
@@ -531,8 +614,10 @@ class Tokens extends \SplFixedArray
      * Get index for closest previous token that is not a whitespace or comment.
      *
      * @param int $index token index
+     *
+     * @return null|int
      */
-    public function getPrevMeaningfulToken(int $index) : ?int
+    public function getPrevMeaningfulToken($index)
     {
         return $this->getMeaningfulTokenSibling($index, -1);
     }
@@ -548,7 +633,7 @@ class Tokens extends \SplFixedArray
      *
      * @return null|array<int, Token> an array containing the tokens matching the sequence elements, indexed by their position
      */
-    public function findSequence(array $sequence, int $start = 0, int $end = null, $caseSensitive = \true) : ?array
+    public function findSequence(array $sequence, $start = 0, $end = null, $caseSensitive = \true)
     {
         $sequenceCount = \count($sequence);
         if (0 === $sequenceCount) {
@@ -578,9 +663,11 @@ class Tokens extends \SplFixedArray
                 throw new \InvalidArgumentException(\sprintf('Non-meaningful (empty) token at position: "%s".', $key));
             }
         }
-        foreach ($sequence as $token) {
-            if (!$this->isTokenKindFound($this->extractTokenKind($token))) {
-                return null;
+        if (!self::isLegacyMode()) {
+            foreach ($sequence as $token) {
+                if (!$this->isTokenKindFound($this->extractTokenKind($token))) {
+                    return null;
+                }
             }
         }
         // remove the first token from the sequence, so we can freely iterate through the sequence after a match to
@@ -629,7 +716,7 @@ class Tokens extends \SplFixedArray
      * @param int                       $index start inserting index
      * @param array<Token>|Token|Tokens $items instances of Token to insert
      */
-    public function insertAt(int $index, $items) : void
+    public function insertAt($index, $items)
     {
         $items = \is_array($items) || $items instanceof self ? $items : [$items];
         $this->insertSlices([$index => $items]);
@@ -653,7 +740,7 @@ class Tokens extends \SplFixedArray
      *
      * @param array<int, array<Token>|Token|Tokens> $slices
      */
-    public function insertSlices(array $slices) : void
+    public function insertSlices(array $slices)
     {
         $itemsCount = 0;
         foreach ($slices as $slice) {
@@ -692,22 +779,51 @@ class Tokens extends \SplFixedArray
     }
     /**
      * Check if collection was change: collection itself (like insert new tokens) or any of collection's elements.
+     *
+     * @return bool
      */
-    public function isChanged() : bool
+    public function isChanged()
     {
         if ($this->changed) {
             return \true;
         }
+        if (self::isLegacyMode()) {
+            foreach ($this as $token) {
+                if ($token->isChanged()) {
+                    return \true;
+                }
+            }
+        }
         return \false;
     }
-    public function isEmptyAt(int $index) : bool
+    /**
+     * @param int $index
+     *
+     * @return bool
+     */
+    public function isEmptyAt($index)
     {
         $token = $this[$index];
         return null === $token->getId() && '' === $token->getContent();
     }
-    public function clearAt(int $index) : void
+    public function clearAt($index)
     {
         $this[$index] = new \PhpCsFixer\Tokenizer\Token('');
+    }
+    /**
+     * Override token at given index and register it.
+     *
+     * @param int                $index
+     * @param array|string|Token $token token prototype
+     *
+     * @deprecated since 2.4, use offsetSet instead
+     */
+    public function overrideAt($index, $token)
+    {
+        @\trigger_error(__METHOD__ . ' is deprecated and will be removed in 3.0, use offsetSet instead.', \E_USER_DEPRECATED);
+        self::$isLegacyMode = \true;
+        $this[$index]->override($token);
+        $this->registerFoundToken($token);
     }
     /**
      * Override tokens at given range.
@@ -716,7 +832,7 @@ class Tokens extends \SplFixedArray
      * @param int                 $indexEnd   end overriding index
      * @param array<Token>|Tokens $items      tokens to insert
      */
-    public function overrideRange(int $indexStart, int $indexEnd, iterable $items) : void
+    public function overrideRange($indexStart, $indexEnd, $items)
     {
         $indexToChange = $indexEnd - $indexStart + 1;
         $itemsCount = \count($items);
@@ -741,16 +857,18 @@ class Tokens extends \SplFixedArray
         }
     }
     /**
+     * @param int         $index
      * @param null|string $whitespaces optional whitespaces characters for Token::isWhitespace
      */
-    public function removeLeadingWhitespace(int $index, ?string $whitespaces = null) : void
+    public function removeLeadingWhitespace($index, $whitespaces = null)
     {
         $this->removeWhitespaceSafely($index, -1, $whitespaces);
     }
     /**
+     * @param int         $index
      * @param null|string $whitespaces optional whitespaces characters for Token::isWhitespace
      */
-    public function removeTrailingWhitespace(int $index, ?string $whitespaces = null) : void
+    public function removeTrailingWhitespace($index, $whitespaces = null)
     {
         $this->removeWhitespaceSafely($index, 1, $whitespaces);
     }
@@ -759,7 +877,7 @@ class Tokens extends \SplFixedArray
      *
      * @param string $code PHP code
      */
-    public function setCode(string $code) : void
+    public function setCode($code)
     {
         // No need to work when the code is the same.
         // That is how we avoid a lot of work and setting changed flag.
@@ -768,7 +886,7 @@ class Tokens extends \SplFixedArray
         }
         // clear memory
         $this->setSize(0);
-        $tokens = \token_get_all($code, \TOKEN_PARSE);
+        $tokens = \defined('TOKEN_PARSE') ? \token_get_all($code, \TOKEN_PARSE) : \token_get_all($code);
         $this->setSize(\count($tokens));
         foreach ($tokens as $index => $token) {
             $this[$index] = new \PhpCsFixer\Tokenizer\Token($token);
@@ -784,7 +902,7 @@ class Tokens extends \SplFixedArray
         $this->changeCodeHash(self::calculateCodeHash($code));
         $this->changed = \true;
     }
-    public function toJson() : string
+    public function toJson()
     {
         static $options = null;
         if (null === $options) {
@@ -801,8 +919,10 @@ class Tokens extends \SplFixedArray
     }
     /**
      * Check if all token kinds given as argument are found.
+     *
+     * @return bool
      */
-    public function isAllTokenKindsFound(array $tokenKinds) : bool
+    public function isAllTokenKindsFound(array $tokenKinds)
     {
         foreach ($tokenKinds as $tokenKind) {
             if (empty($this->foundTokenKinds[$tokenKind])) {
@@ -813,8 +933,10 @@ class Tokens extends \SplFixedArray
     }
     /**
      * Check if any token kind given as argument is found.
+     *
+     * @return bool
      */
-    public function isAnyTokenKindsFound(array $tokenKinds) : bool
+    public function isAnyTokenKindsFound(array $tokenKinds)
     {
         foreach ($tokenKinds as $tokenKind) {
             if (!empty($this->foundTokenKinds[$tokenKind])) {
@@ -827,22 +949,32 @@ class Tokens extends \SplFixedArray
      * Check if token kind given as argument is found.
      *
      * @param int|string $tokenKind
+     *
+     * @return bool
      */
-    public function isTokenKindFound($tokenKind) : bool
+    public function isTokenKindFound($tokenKind)
     {
         return !empty($this->foundTokenKinds[$tokenKind]);
     }
     /**
      * @param int|string $tokenKind
+     *
+     * @return int
      */
-    public function countTokenKind($tokenKind) : int
+    public function countTokenKind($tokenKind)
     {
+        if (self::isLegacyMode()) {
+            throw new \RuntimeException(\sprintf('"%s" is not available in legacy mode.', __METHOD__));
+        }
         return isset($this->foundTokenKinds[$tokenKind]) ? $this->foundTokenKinds[$tokenKind] : 0;
     }
     /**
      * Clear tokens in the given range.
+     *
+     * @param int $indexStart
+     * @param int $indexEnd
      */
-    public function clearRange(int $indexStart, int $indexEnd) : void
+    public function clearRange($indexStart, $indexEnd)
     {
         for ($i = $indexStart; $i <= $indexEnd; ++$i) {
             $this->clearAt($i);
@@ -853,12 +985,26 @@ class Tokens extends \SplFixedArray
      *
      * Checks that the code is pure PHP code, in a single code block, starting
      * with an open tag.
+     *
+     * @return bool
      */
-    public function isMonolithicPhp() : bool
+    public function isMonolithicPhp()
     {
         $size = $this->count();
         if (0 === $size) {
             return \false;
+        }
+        if (self::isLegacyMode()) {
+            // If code is not monolithic there is a great chance that first or last token is `T_INLINE_HTML`:
+            if ($this[0]->isGivenKind(\T_INLINE_HTML) || $this[$size - 1]->isGivenKind(\T_INLINE_HTML)) {
+                return \false;
+            }
+            for ($index = 1; $index < $size; ++$index) {
+                if ($this[$index]->isGivenKind([\T_INLINE_HTML, \T_OPEN_TAG, \T_OPEN_TAG_WITH_ECHO])) {
+                    return \false;
+                }
+            }
+            return \true;
         }
         if ($this->isTokenKindFound(\T_INLINE_HTML)) {
             return \false;
@@ -868,8 +1014,10 @@ class Tokens extends \SplFixedArray
     /**
      * @param int $start start index
      * @param int $end   end index
+     *
+     * @return bool
      */
-    public function isPartialCodeMultiline(int $start, int $end) : bool
+    public function isPartialCodeMultiline($start, $end)
     {
         for ($i = $start; $i <= $end; ++$i) {
             if (\false !== \strpos($this[$i]->getContent(), "\n")) {
@@ -878,11 +1026,17 @@ class Tokens extends \SplFixedArray
         }
         return \false;
     }
-    public function hasAlternativeSyntax() : bool
+    /**
+     * @return bool
+     */
+    public function hasAlternativeSyntax()
     {
         return $this->isAnyTokenKindsFound([\T_ENDDECLARE, \T_ENDFOR, \T_ENDFOREACH, \T_ENDIF, \T_ENDSWITCH, \T_ENDWHILE]);
     }
-    public function clearTokenAndMergeSurroundingWhitespace(int $index) : void
+    /**
+     * @param int $index
+     */
+    public function clearTokenAndMergeSurroundingWhitespace($index)
     {
         $count = \count($this);
         $this->clearAt($index);
@@ -903,13 +1057,69 @@ class Tokens extends \SplFixedArray
     }
     /**
      * @internal
+     *
+     * @deprecated Do not call directly, not available on PHP8 and will be removed in the future
      */
-    protected function applyTransformers() : void
+    public function current()
+    {
+        $this->warnPhp8SplFixerArrayChange(__METHOD__);
+        return parent::current();
+    }
+    /**
+     * @internal
+     *
+     * @deprecated Do not call directly, not available on PHP8 and will be removed in the future
+     */
+    public function key()
+    {
+        $this->warnPhp8SplFixerArrayChange(__METHOD__);
+        return parent::key();
+    }
+    /**
+     * @internal
+     *
+     * @deprecated Do not call directly, not available on PHP8 and will be removed in the future
+     */
+    public function next()
+    {
+        $this->warnPhp8SplFixerArrayChange(__METHOD__);
+        parent::next();
+    }
+    /**
+     * @internal
+     *
+     * @deprecated Do not call directly, not available on PHP8 and will be removed in the future
+     */
+    public function rewind()
+    {
+        $this->warnPhp8SplFixerArrayChange(__METHOD__);
+        parent::rewind();
+    }
+    /**
+     * @internal
+     *
+     * @deprecated Do not call directly, not available on PHP8 and will be removed in the future
+     */
+    public function valid()
+    {
+        $this->warnPhp8SplFixerArrayChange(__METHOD__);
+        return parent::valid();
+    }
+    /**
+     * @internal
+     */
+    protected function applyTransformers()
     {
         $transformers = \PhpCsFixer\Tokenizer\Transformers::create();
         $transformers->transform($this);
     }
-    private function removeWhitespaceSafely(int $index, int $direction, ?string $whitespaces = null) : void
+    private function warnPhp8SplFixerArrayChange($method)
+    {
+        if (80000 <= \PHP_VERSION_ID) {
+            throw new \BadMethodCallException(\sprintf('"%s" has been removed on PHP8, use ::getIterator() in place.', $method));
+        }
+    }
+    private function removeWhitespaceSafely($index, $direction, $whitespaces = null)
     {
         $whitespaceIndex = $this->getNonEmptySibling($index, $direction);
         if (isset($this[$whitespaceIndex]) && $this[$whitespaceIndex]->isWhitespace()) {
@@ -940,13 +1150,13 @@ class Tokens extends \SplFixedArray
      *
      * @return int index of opposite brace
      */
-    private function findOppositeBlockEdge(int $type, int $searchIndex, bool $findEnd) : int
+    private function findOppositeBlockEdge($type, $searchIndex, $findEnd)
     {
         $blockEdgeDefinitions = self::getBlockEdgeDefinitions();
         if (!isset($blockEdgeDefinitions[$type])) {
             throw new \InvalidArgumentException(\sprintf('Invalid param type: "%s".', $type));
         }
-        if (isset($this->blockEndCache[$searchIndex])) {
+        if (!self::isLegacyMode() && isset($this->blockEndCache[$searchIndex])) {
             return $this->blockEndCache[$searchIndex];
         }
         $startEdge = $blockEdgeDefinitions[$type]['start'];
@@ -986,8 +1196,12 @@ class Tokens extends \SplFixedArray
     }
     /**
      * Calculate hash for code.
+     *
+     * @param string $code
+     *
+     * @return string
      */
-    private static function calculateCodeHash(string $code) : string
+    private static function calculateCodeHash($code)
     {
         return \PhpCsFixer\Tokenizer\CodeHasher::calculateCodeHash($code);
     }
@@ -995,8 +1209,10 @@ class Tokens extends \SplFixedArray
      * Get cache value for given key.
      *
      * @param string $key item key
+     *
+     * @return Tokens
      */
-    private static function getCache(string $key) : self
+    private static function getCache($key)
     {
         if (!self::hasCache($key)) {
             throw new \OutOfBoundsException(\sprintf('Unknown cache key: "%s".', $key));
@@ -1007,8 +1223,10 @@ class Tokens extends \SplFixedArray
      * Check if given key exists in cache.
      *
      * @param string $key item key
+     *
+     * @return bool
      */
-    private static function hasCache(string $key) : bool
+    private static function hasCache($key)
     {
         return isset(self::$cache[$key]);
     }
@@ -1016,7 +1234,7 @@ class Tokens extends \SplFixedArray
      * @param string $key   item key
      * @param Tokens $value item value
      */
-    private static function setCache(string $key, self $value) : void
+    private static function setCache($key, self $value)
     {
         self::$cache[$key] = $value;
     }
@@ -1027,7 +1245,7 @@ class Tokens extends \SplFixedArray
      *
      * @param string $codeHash new code hash
      */
-    private function changeCodeHash(string $codeHash) : void
+    private function changeCodeHash($codeHash)
     {
         if (null !== $this->codeHash) {
             self::clearCache($this->codeHash);
@@ -1040,7 +1258,7 @@ class Tokens extends \SplFixedArray
      *
      * @param array|string|Token $token token prototype
      */
-    private function registerFoundToken($token) : void
+    private function registerFoundToken($token)
     {
         // inlined extractTokenKind() call on the hot path
         $tokenKind = $token instanceof \PhpCsFixer\Tokenizer\Token ? $token->isArray() ? $token->getId() : $token->getContent() : (\is_array($token) ? $token[0] : $token);
@@ -1054,7 +1272,7 @@ class Tokens extends \SplFixedArray
      *
      * @param array|string|Token $token token prototype
      */
-    private function unregisterFoundToken($token) : void
+    private function unregisterFoundToken($token)
     {
         // inlined extractTokenKind() call on the hot path
         $tokenKind = $token instanceof \PhpCsFixer\Tokenizer\Token ? $token->isArray() ? $token->getId() : $token->getContent() : (\is_array($token) ? $token[0] : $token);
@@ -1073,10 +1291,13 @@ class Tokens extends \SplFixedArray
         return $token instanceof \PhpCsFixer\Tokenizer\Token ? $token->isArray() ? $token->getId() : $token->getContent() : (\is_array($token) ? $token[0] : $token);
     }
     /**
-     * @param int $index     token index
-     * @param int $direction direction for looking, +1 or -1
+     * @param int      $index     token index
+     * @param int      $direction direction for looking, +1 or -1
+     * @param callable $filter
+     *
+     * @return null|int
      */
-    private function getTokenNotOfKind(int $index, int $direction, callable $filter) : ?int
+    private function getTokenNotOfKind($index, $direction, $filter)
     {
         while (\true) {
             $index += $direction;

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,7 +13,6 @@ namespace PhpCsFixer\Fixer\FunctionNotation;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
@@ -28,21 +26,21 @@ final class CombineNestedDirnameFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample("<?php\ndirname(dirname(dirname(\$path)));\n", new \PhpCsFixer\FixerDefinition\VersionSpecification(70000))], null, 'Risky when the function `dirname` is overridden.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return \PHP_VERSION_ID >= 70000 && $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
@@ -52,14 +50,14 @@ final class CombineNestedDirnameFixer extends \PhpCsFixer\AbstractFixer
      * Must run before MethodArgumentSpaceFixer, NoSpacesInsideParenthesisFixer.
      * Must run after DirConstantFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 35;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         for ($index = $tokens->count() - 1; 0 <= $index; --$index) {
             $dirnameInfo = $this->getDirnameInfo($tokens, $index);
@@ -94,7 +92,7 @@ final class CombineNestedDirnameFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return array|bool `false` when it is not a (supported) `dirname` call, an array with info about the dirname call otherwise
      */
-    private function getDirnameInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, ?int $firstArgumentEndIndex = null)
+    private function getDirnameInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $firstArgumentEndIndex = null)
     {
         if (!$tokens[$index]->equals([\T_STRING, 'dirname'], \false)) {
             return \false;
@@ -153,7 +151,7 @@ final class CombineNestedDirnameFixer extends \PhpCsFixer\AbstractFixer
         $info['end'] = $next;
         return $info;
     }
-    private function combineDirnames(\PhpCsFixer\Tokenizer\Tokens $tokens, array $dirnameInfoArray) : void
+    private function combineDirnames(\PhpCsFixer\Tokenizer\Tokens $tokens, array $dirnameInfoArray)
     {
         $outerDirnameInfo = \array_pop($dirnameInfoArray);
         $levels = $outerDirnameInfo['levels'];

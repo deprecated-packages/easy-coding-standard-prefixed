@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -18,7 +17,7 @@ use PhpCsFixer\RuleSet\AbstractRuleSetDescription;
  */
 final class PhpCsFixerRiskySet extends \PhpCsFixer\RuleSet\AbstractRuleSetDescription
 {
-    public function getRules() : array
+    public function getRules()
     {
         return [
             '@Symfony:risky' => \true,
@@ -35,7 +34,7 @@ final class PhpCsFixerRiskySet extends \PhpCsFixer\RuleSet\AbstractRuleSetDescri
             'strict_param' => \true,
         ];
     }
-    public function getDescription() : string
+    public function getDescription()
     {
         return 'Rule set as used by the PHP-CS-Fixer development team, highly opinionated.';
     }

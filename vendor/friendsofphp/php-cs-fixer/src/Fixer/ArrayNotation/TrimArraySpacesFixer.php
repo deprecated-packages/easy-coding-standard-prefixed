@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\ArrayNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -26,21 +24,21 @@ final class TrimArraySpacesFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Arrays should be formatted like function/method arguments, without leading or trailing single line space.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$sample = array( );\n\$sample = array( 'a', 'b' );\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_ARRAY, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         for ($index = 0, $c = $tokens->count(); $index < $c; ++$index) {
             if ($tokens[$index]->isGivenKind([\T_ARRAY, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN])) {
@@ -50,8 +48,10 @@ final class TrimArraySpacesFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * Method to trim leading/trailing whitespace within single line arrays.
+     *
+     * @param int $index
      */
-    private static function fixArray(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
+    private static function fixArray(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $startIndex = $index;
         if ($tokens[$startIndex]->isGivenKind(\T_ARRAY)) {

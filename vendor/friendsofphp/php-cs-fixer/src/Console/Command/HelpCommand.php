@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,6 +14,7 @@ namespace PhpCsFixer\Console\Command;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Console\Application;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\Fixer\DeprecatedFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerConfiguration\AliasedFixerOption;
@@ -26,11 +26,11 @@ use PhpCsFixer\Preg;
 use PhpCsFixer\RuleSet\RuleSet;
 use PhpCsFixer\RuleSet\RuleSets;
 use PhpCsFixer\Utils;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -38,13 +38,15 @@ use _PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface;
  *
  * @internal
  */
-final class HelpCommand extends \_PhpScoper8583deb8ab74\Symfony\Component\Console\Command\HelpCommand
+final class HelpCommand extends \_PhpScoper82aa0193482e\Symfony\Component\Console\Command\HelpCommand
 {
     protected static $defaultName = 'help';
     /**
      * Returns help-copy suitable for console output.
+     *
+     * @return string
      */
-    public static function getHelpCopy() : string
+    public static function getHelpCopy()
     {
         $template = <<<'EOF'
 The <info>%command.name%</info> command tries to fix as much coding standards
@@ -79,9 +81,9 @@ NOTE: if there is an error like "errors reported during linting after fixing", y
 The <comment>--rules</comment> option limits the rules to apply to the
 project:
 
-    <info>$ php %command.full_name% /path/to/project --rules=@PSR12</info>
+    <info>$ php %command.full_name% /path/to/project --rules=@PSR2</info>
 
-By default the PSR12 rules are used.
+By default the PSR1 and PSR2 rules are used.
 
 The <comment>--rules</comment> option lets you choose the exact rules to
 apply (the rule names must be separated by a comma):
@@ -105,8 +107,10 @@ The <comment>--dry-run</comment> flag will run the fixer without making changes 
 
 The <comment>--diff</comment> flag can be used to let the fixer output all the changes it makes.
 
-* <comment>null</comment>: no diff;
-* <comment>udiff</comment>: unified diff format.
+The <comment>--diff-format</comment> option allows to specify in which format the fixer should output the changes it makes:
+
+* <comment>udiff</comment>: unified diff format;
+* <comment>sbd</comment>: Sebastianbergmann/diff format (default when using `--diff` without specifying `diff-format`).
 
 The <comment>--allow-risky</comment> option (pass `yes` or `no`) allows you to set whether risky rules may run. Default value is taken from config file.
 A rule is considered risky if it could change code behaviour. By default no risky rules are run.
@@ -116,11 +120,14 @@ The <comment>--stop-on-violation</comment> flag stops the execution upon first f
 The <comment>--show-progress</comment> option allows you to choose the way process progress is rendered:
 
 * <comment>none</comment>: disables progress output;
-* <comment>dots</comment>: multiline progress output with number of files and percentage on each line.
+* <comment>run-in</comment>: [deprecated] simple single-line progress output;
+* <comment>estimating</comment>: [deprecated] multiline progress output with number of files and percentage on each line. Note that with this option, the files list is evaluated before processing to get the total number of files and then kept in memory to avoid using the file iterator twice. This has an impact on memory usage so using this option is not recommended on very large projects;
+* <comment>estimating-max</comment>: [deprecated] same as <comment>dots</comment>;
+* <comment>dots</comment>: same as <comment>estimating</comment> but using all terminal columns instead of default 80.
 
-If the option is not provided, it defaults to <comment>dots</comment> unless a config file that disables output is used, in which case it defaults to <comment>none</comment>. This option has no effect if the verbosity of the command is less than <comment>verbose</comment>.
+If the option is not provided, it defaults to <comment>run-in</comment> unless a config file that disables output is used, in which case it defaults to <comment>none</comment>. This option has no effect if the verbosity of the command is less than <comment>verbose</comment>.
 
-    <info>$ php %command.full_name% --verbose --show-progress=dots</info>
+    <info>$ php %command.full_name% --verbose --show-progress=estimating</info>
 
 The command can also read from standard input, in which case it won't
 automatically fix anything:
@@ -128,7 +135,7 @@ automatically fix anything:
     <info>$ cat foo.php | php %command.full_name% --diff -</info>
 
 Finally, if you don't need BC kept on CLI level, you might use `PHP_CS_FIXER_FUTURE_MODE` to start using options that
-would be default in next MAJOR release and to forbid using deprecated configuration:
+would be default in next MAJOR release (unified differ, estimating, full-width progress indicator):
 
     <info>$ PHP_CS_FIXER_FUTURE_MODE=1 php %command.full_name% -v --diff</info>
 
@@ -141,7 +148,7 @@ Use the following command to quickly understand what a rule will do to your code
 
 To visualize all the rules that belong to a ruleset:
 
-    <info>$ php php-cs-fixer.phar describe @PSR12</info>
+    <info>$ php php-cs-fixer.phar describe @PSR2</info>
 
 Choose from the list of available rules:
 
@@ -165,7 +172,7 @@ is a good practice to add that file into your <comment>.gitignore</comment> file
 With the <comment>--config</comment> option you can specify the path to the
 <comment>.php_cs</comment> file.
 
-The example below will add two rules to the default list of PSR12 set rules:
+The example below will add two rules to the default list of PSR2 set rules:
 
     <?php
 
@@ -179,7 +186,7 @@ The example below will add two rules to the default list of PSR12 set rules:
 
     return $config
         ->setRules([
-            '@PSR12' => true,
+            '@PSR2' => true,
             'strict_param' => true,
             'array_syntax' => ['syntax' => 'short'],
         ])
@@ -289,21 +296,25 @@ Exit code of the fix command is built using following bit flags:
 * 64 - Exception raised within the application.
 
 EOF;
-        return \strtr($template, ['%%%CONFIG_INTERFACE_URL%%%' => \sprintf('https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/v%s/src/ConfigInterface.php', self::getLatestReleaseVersionFromChangeLog()), '%%%CI_INTEGRATION%%%' => \implode("\n", \array_map(static function (string $line) {
+        return \strtr($template, ['%%%CONFIG_INTERFACE_URL%%%' => \sprintf('https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/v%s/src/ConfigInterface.php', self::getLatestReleaseVersionFromChangeLog()), '%%%CI_INTEGRATION%%%' => \implode("\n", \array_map(static function ($line) {
             return '    $ ' . $line;
         }, \array_slice(\file(__DIR__ . '/../../../ci-integration.sh', \FILE_IGNORE_NEW_LINES), 3))), '%%%FIXERS_DETAILS%%%' => self::getFixersHelp()]);
     }
     /**
      * @param mixed $value
+     *
+     * @return string
      */
-    public static function toString($value) : string
+    public static function toString($value)
     {
         return \is_array($value) ? static::arrayToString($value) : static::scalarToString($value);
     }
     /**
      * Returns the allowed values of the given option that can be converted to a string.
+     *
+     * @return null|array
      */
-    public static function getDisplayableAllowedValues(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option) : ?array
+    public static function getDisplayableAllowedValues(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option)
     {
         $allowed = $option->getAllowedValues();
         if (null !== $allowed) {
@@ -327,8 +338,10 @@ EOF;
     }
     /**
      * @throws \RuntimeException when failing to parse the change log file
+     *
+     * @return string
      */
-    public static function getLatestReleaseVersionFromChangeLog() : string
+    public static function getLatestReleaseVersionFromChangeLog()
     {
         static $version = null;
         if (null !== $version) {
@@ -358,16 +371,22 @@ EOF;
     /**
      * {@inheritdoc}
      */
-    protected function initialize(\_PhpScoper8583deb8ab74\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface $output) : void
+    protected function initialize(\_PhpScoper82aa0193482e\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface $output)
     {
-        $output->getFormatter()->setStyle('url', new \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatterStyle('blue'));
+        $output->getFormatter()->setStyle('url', new \_PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatterStyle('blue'));
     }
-    private static function getChangeLogFile() : ?string
+    /**
+     * @return null|string
+     */
+    private static function getChangeLogFile()
     {
         $changelogFile = __DIR__ . '/../../../CHANGELOG.md';
         return \is_file($changelogFile) ? $changelogFile : null;
     }
-    private static function getFixersHelp() : string
+    /**
+     * @return string
+     */
+    private static function getFixersHelp()
     {
         $help = '';
         $fixerFactory = new \PhpCsFixer\FixerFactory();
@@ -381,7 +400,7 @@ EOF;
         foreach (\PhpCsFixer\RuleSet\RuleSets::getSetDefinitionNames() as $setName) {
             $ruleSets[$setName] = new \PhpCsFixer\RuleSet\RuleSet([$setName => \true]);
         }
-        $getSetsWithRule = static function (string $rule) use($ruleSets) {
+        $getSetsWithRule = static function ($rule) use($ruleSets) {
             $sets = [];
             foreach ($ruleSets as $setName => $ruleSet) {
                 if ($ruleSet->hasRule($rule)) {
@@ -408,7 +427,7 @@ EOF;
             if ($fixer->isRisky()) {
                 $help .= \sprintf("   | *Risky rule: %s.*\n", \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', $fixer->getDefinition()->getRiskyDescription()))));
             }
-            if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
+            if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface) {
                 $configurationDefinition = $fixer->getConfigurationDefinition();
                 $configurationDefinitionOptions = $configurationDefinition->getOptions();
                 if (\count($configurationDefinitionOptions)) {
@@ -417,7 +436,7 @@ EOF;
                         return \strcmp($optionA->getName(), $optionB->getName());
                     });
                     foreach ($configurationDefinitionOptions as $option) {
-                        $line = '<info>' . \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getName()) . '</info>';
+                        $line = '<info>' . \_PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getName()) . '</info>';
                         $allowed = self::getDisplayableAllowedValues($option);
                         if (null !== $allowed) {
                             foreach ($allowed as &$value) {
@@ -428,21 +447,21 @@ EOF;
                                 }
                             }
                         } else {
-                            $allowed = \array_map(static function (string $type) {
+                            $allowed = \array_map(static function ($type) {
                                 return '<comment>' . $type . '</comment>';
                             }, $option->getAllowedTypes());
                         }
                         if (null !== $allowed) {
                             $line .= ' (' . \implode(', ', $allowed) . ')';
                         }
-                        $line .= ': ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDescription())))) . '; ';
+                        $line .= ': ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDescription())))) . '; ';
                         if ($option->hasDefault()) {
                             $line .= 'defaults to <comment>' . self::toString($option->getDefault()) . '</comment>';
                         } else {
                             $line .= 'required';
                         }
                         if ($option instanceof \PhpCsFixer\FixerConfiguration\DeprecatedFixerOption) {
-                            $line .= '. DEPRECATED: ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDeprecationMessage()))));
+                            $line .= '. DEPRECATED: ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDeprecationMessage()))));
                         }
                         if ($option instanceof \PhpCsFixer\FixerConfiguration\AliasedFixerOption) {
                             $line .= '; DEPRECATED alias: <comment>' . $option->getAlias() . '</comment>';
@@ -465,9 +484,12 @@ EOF;
     /**
      * Wraps a string to the given number of characters, ignoring style tags.
      *
+     * @param string $string
+     * @param int    $width
+     *
      * @return string[]
      */
-    private static function wordwrap(string $string, int $width) : array
+    private static function wordwrap($string, $width)
     {
         $result = [];
         $currentLine = 0;
@@ -485,19 +507,24 @@ EOF;
             $result[$currentLine][] = $word;
             $lineLength += $wordLength;
         }
-        return \array_map(static function (array $line) {
+        return \array_map(static function ($line) {
             return \implode(' ', $line);
         }, $result);
     }
     /**
      * @param mixed $value
+     *
+     * @return string
      */
-    private static function scalarToString($value) : string
+    private static function scalarToString($value)
     {
         $str = \var_export($value, \true);
         return \PhpCsFixer\Preg::replace('/\\bNULL\\b/', 'null', $str);
     }
-    private static function arrayToString(array $value) : string
+    /**
+     * @return string
+     */
+    private static function arrayToString(array $value)
     {
         if (0 === \count($value)) {
             return '[]';
@@ -512,7 +539,10 @@ EOF;
         }
         return \substr($str, 0, -2) . ']';
     }
-    private static function isHash(array $array) : bool
+    /**
+     * @return bool
+     */
+    private static function isHash(array $array)
     {
         $i = 0;
         foreach ($array as $k => $v) {

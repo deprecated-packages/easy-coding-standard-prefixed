@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -21,14 +20,14 @@ use PhpCsFixer\Preg;
  *
  * @final
  */
-final class Annotation
+class Annotation
 {
     /**
      * Regex to match any types, shall be used with `x` modifier.
      *
      * @internal
      */
-    public const REGEX_TYPES = '
+    const REGEX_TYPES = '
     # <simple> is any non-array, non-generic, non-alternated type, eg `int` or `\\Foo`
     # <array> is array of <simple>, eg `int[]` or `\\Foo[]`
     # <generic> is generic collection type, like `array<string, int>`, `Collection<Item>` and more complex like `Collection<int, \\null|SubCollection<string>>`
@@ -113,8 +112,10 @@ final class Annotation
     }
     /**
      * Get the string representation of object.
+     *
+     * @return string
      */
-    public function __toString() : string
+    public function __toString()
     {
         return $this->getContent();
     }
@@ -123,28 +124,34 @@ final class Annotation
      *
      * @return string[]
      */
-    public static function getTagsWithTypes() : array
+    public static function getTagsWithTypes()
     {
         return self::$tags;
     }
     /**
      * Get the start position of this annotation.
+     *
+     * @return int
      */
-    public function getStart() : int
+    public function getStart()
     {
         return $this->start;
     }
     /**
      * Get the end position of this annotation.
+     *
+     * @return int
      */
-    public function getEnd() : int
+    public function getEnd()
     {
         return $this->end;
     }
     /**
      * Get the associated tag.
+     *
+     * @return Tag
      */
-    public function getTag() : \PhpCsFixer\DocBlock\Tag
+    public function getTag()
     {
         if (null === $this->tag) {
             $this->tag = new \PhpCsFixer\DocBlock\Tag($this->lines[0]);
@@ -156,7 +163,7 @@ final class Annotation
      *
      * @return string[]
      */
-    public function getTypes() : array
+    public function getTypes()
     {
         if (null === $this->types) {
             $this->types = [];
@@ -174,7 +181,7 @@ final class Annotation
      *
      * @param string[] $types
      */
-    public function setTypes(array $types) : void
+    public function setTypes(array $types)
     {
         $pattern = '/' . \preg_quote($this->getTypesContent(), '/') . '/';
         $this->lines[0]->setContent(\PhpCsFixer\Preg::replace($pattern, \implode('|', $types), $this->lines[0]->getContent(), 1));
@@ -185,9 +192,9 @@ final class Annotation
      *
      * @return string[]
      */
-    public function getNormalizedTypes() : array
+    public function getNormalizedTypes()
     {
-        $normalized = \array_map(static function (string $type) {
+        $normalized = \array_map(static function ($type) {
             return \strtolower($type);
         }, $this->getTypes());
         \sort($normalized);
@@ -196,7 +203,7 @@ final class Annotation
     /**
      * Remove this annotation by removing all its lines.
      */
-    public function remove() : void
+    public function remove()
     {
         foreach ($this->lines as $line) {
             if ($line->isTheStart() && $line->isTheEnd()) {
@@ -219,12 +226,14 @@ final class Annotation
     }
     /**
      * Get the annotation content.
+     *
+     * @return string
      */
-    public function getContent() : string
+    public function getContent()
     {
         return \implode('', $this->lines);
     }
-    public function supportTypes() : bool
+    public function supportTypes()
     {
         return \in_array($this->getTag()->getName(), self::$tags, \true);
     }
@@ -232,8 +241,10 @@ final class Annotation
      * Get the current types content.
      *
      * Be careful modifying the underlying line as that won't flush the cache.
+     *
+     * @return string
      */
-    private function getTypesContent() : string
+    private function getTypesContent()
     {
         if (null === $this->typesContent) {
             $name = $this->getTag()->getName();
@@ -245,7 +256,7 @@ final class Annotation
         }
         return $this->typesContent;
     }
-    private function clearCache() : void
+    private function clearCache()
     {
         $this->types = null;
         $this->typesContent = null;

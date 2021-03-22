@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,8 +25,13 @@ final class ArgumentsAnalyzer
 {
     /**
      * Count amount of parameters in a function/method reference.
+     *
+     * @param int $openParenthesis
+     * @param int $closeParenthesis
+     *
+     * @return int
      */
-    public function countArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, int $openParenthesis, int $closeParenthesis) : int
+    public function countArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, $openParenthesis, $closeParenthesis)
     {
         return \count($this->getArguments($tokens, $openParenthesis, $closeParenthesis));
     }
@@ -39,9 +43,12 @@ final class ArgumentsAnalyzer
      * such as comments and white space tokens, but without the separation
      * tokens like '(', ',' and ')'.
      *
+     * @param int $openParenthesis
+     * @param int $closeParenthesis
+     *
      * @return array<int, int>
      */
-    public function getArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, int $openParenthesis, int $closeParenthesis) : array
+    public function getArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, $openParenthesis, $closeParenthesis)
     {
         $arguments = [];
         $firstSensibleToken = $tokens->getNextMeaningfulToken($openParenthesis);
@@ -71,7 +78,13 @@ final class ArgumentsAnalyzer
         $arguments[$argumentsStart] = $paramContentIndex - 1;
         return $arguments;
     }
-    public function getArgumentInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, int $argumentStart, int $argumentEnd) : \PhpCsFixer\Tokenizer\Analyzer\Analysis\ArgumentAnalysis
+    /**
+     * @param int $argumentStart
+     * @param int $argumentEnd
+     *
+     * @return ArgumentAnalysis
+     */
+    public function getArgumentInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, $argumentStart, $argumentEnd)
     {
         $info = ['default' => null, 'name' => null, 'name_index' => null, 'type' => null, 'type_index_start' => null, 'type_index_end' => null];
         $sawName = \false;

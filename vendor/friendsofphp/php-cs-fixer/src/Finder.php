@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,12 +11,12 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer;
 
-use _PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder as BaseFinder;
+use _PhpScoper82aa0193482e\Symfony\Component\Finder\Finder as BaseFinder;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-class Finder extends \_PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder
+class Finder extends \_PhpScoper82aa0193482e\Symfony\Component\Finder\Finder
 {
     public function __construct()
     {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -40,7 +39,7 @@ final class FileRemoval
      * This class is not intended to be serialized,
      * and cannot be deserialized (see __wakeup method).
      */
-    public function __sleep() : array
+    public function __sleep()
     {
         throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
     }
@@ -50,21 +49,25 @@ final class FileRemoval
      *
      * @see https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection
      */
-    public function __wakeup() : void
+    public function __wakeup()
     {
         throw new \BadMethodCallException('Cannot unserialize ' . __CLASS__);
     }
     /**
      * Adds a file to be removed.
+     *
+     * @param string $path
      */
-    public function observe(string $path) : void
+    public function observe($path)
     {
         $this->files[$path] = \true;
     }
     /**
      * Removes a file from shutdown removal.
+     *
+     * @param string $path
      */
-    public function delete(string $path) : void
+    public function delete($path)
     {
         if (isset($this->files[$path])) {
             unset($this->files[$path]);
@@ -74,14 +77,14 @@ final class FileRemoval
     /**
      * Removes attached files.
      */
-    public function clean() : void
+    public function clean()
     {
         foreach ($this->files as $file => $value) {
             $this->unlink($file);
         }
         $this->files = [];
     }
-    private function unlink(string $path) : void
+    private function unlink($path)
     {
         @\unlink($path);
     }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,8 +12,8 @@ declare (strict_types=1);
 namespace PhpCsFixer\Console\Output;
 
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper8583deb8ab74\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper82aa0193482e\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Output writer to show the process of a FixCommand.
  *
@@ -37,7 +36,7 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
      */
     private $output;
     /**
-     * @var int
+     * @var null|int
      */
     private $files;
     /**
@@ -45,19 +44,28 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
      */
     private $processedFiles = 0;
     /**
-     * @var int
+     * @var null|int
      */
     private $symbolsPerLine;
-    public function __construct(\_PhpScoper8583deb8ab74\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper8583deb8ab74\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher, int $width, int $nbFiles)
+    /**
+     * @TODO 3.0 make all parameters mandatory (`null` not allowed)
+     *
+     * @param null|int $width
+     * @param null|int $nbFiles
+     */
+    public function __construct(\_PhpScoper82aa0193482e\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScoper82aa0193482e\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher, $width, $nbFiles)
     {
         $this->output = $output;
         $this->eventDispatcher = $dispatcher;
         $this->eventDispatcher->addListener(\PhpCsFixer\FixerFileProcessedEvent::NAME, [$this, 'onFixerFileProcessed']);
-        $this->files = $nbFiles;
-        //   max number of characters per line
-        // - total length x 2 (e.g. "  1 / 123" => 6 digits and padding spaces)
-        // - 11               (extra spaces, parentheses and percentage characters, e.g. " x / x (100%)")
-        $this->symbolsPerLine = \max(1, $width - \strlen((string) $this->files) * 2 - 11);
+        $this->symbolsPerLine = $width;
+        if (null !== $nbFiles) {
+            $this->files = $nbFiles;
+            //   max number of characters per line
+            // - total length x 2 (e.g. "  1 / 123" => 6 digits and padding spaces)
+            // - 11               (extra spaces, parentheses and percentage characters, e.g. " x / x (100%)")
+            $this->symbolsPerLine = \max(1, ($width ?: 80) - \strlen((string) $this->files) * 2 - 11);
+        }
     }
     public function __destruct()
     {
@@ -67,7 +75,7 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
      * This class is not intended to be serialized,
      * and cannot be deserialized (see __wakeup method).
      */
-    public function __sleep() : array
+    public function __sleep()
     {
         throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
     }
@@ -77,25 +85,30 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
      *
      * @see https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection
      */
-    public function __wakeup() : void
+    public function __wakeup()
     {
         throw new \BadMethodCallException('Cannot unserialize ' . __CLASS__);
     }
-    public function onFixerFileProcessed(\PhpCsFixer\FixerFileProcessedEvent $event) : void
+    public function onFixerFileProcessed(\PhpCsFixer\FixerFileProcessedEvent $event)
     {
+        if (null === $this->files && null !== $this->symbolsPerLine && 0 === $this->processedFiles % $this->symbolsPerLine && 0 !== $this->processedFiles) {
+            $this->output->writeln('');
+        }
         $status = self::$eventStatusMap[$event->getStatus()];
         $this->output->write($this->output->isDecorated() ? \sprintf($status['format'], $status['symbol']) : $status['symbol']);
         ++$this->processedFiles;
-        $symbolsOnCurrentLine = $this->processedFiles % $this->symbolsPerLine;
-        $isLast = $this->processedFiles === $this->files;
-        if (0 === $symbolsOnCurrentLine || $isLast) {
-            $this->output->write(\sprintf('%s %' . \strlen((string) $this->files) . 'd / %d (%3d%%)', $isLast && 0 !== $symbolsOnCurrentLine ? \str_repeat(' ', $this->symbolsPerLine - $symbolsOnCurrentLine) : '', $this->processedFiles, $this->files, \round($this->processedFiles / $this->files * 100)));
-            if (!$isLast) {
-                $this->output->writeln('');
+        if (null !== $this->files) {
+            $symbolsOnCurrentLine = $this->processedFiles % $this->symbolsPerLine;
+            $isLast = $this->processedFiles === $this->files;
+            if (0 === $symbolsOnCurrentLine || $isLast) {
+                $this->output->write(\sprintf('%s %' . \strlen((string) $this->files) . 'd / %d (%3d%%)', $isLast && 0 !== $symbolsOnCurrentLine ? \str_repeat(' ', $this->symbolsPerLine - $symbolsOnCurrentLine) : '', $this->processedFiles, $this->files, \round($this->processedFiles / $this->files * 100)));
+                if (!$isLast) {
+                    $this->output->writeln('');
+                }
             }
         }
     }
-    public function printLegend() : void
+    public function printLegend()
     {
         $symbols = [];
         foreach (self::$eventStatusMap as $status) {

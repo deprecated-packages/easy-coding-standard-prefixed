@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -45,7 +44,12 @@ final class TypeAnalysis implements \PhpCsFixer\Tokenizer\Analyzer\Analysis\Star
      * @var bool
      */
     private $nullable;
-    public function __construct(string $name, int $startIndex, int $endIndex)
+    /**
+     * @param string $name
+     * @param int    $startIndex
+     * @param int    $endIndex
+     */
+    public function __construct($name, $startIndex, $endIndex)
     {
         $this->name = $name;
         $this->nullable = \false;
@@ -56,23 +60,38 @@ final class TypeAnalysis implements \PhpCsFixer\Tokenizer\Analyzer\Analysis\Star
         $this->startIndex = $startIndex;
         $this->endIndex = $endIndex;
     }
-    public function getName() : string
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return $this->name;
     }
-    public function getStartIndex() : int
+    /**
+     * @return int
+     */
+    public function getStartIndex()
     {
         return $this->startIndex;
     }
-    public function getEndIndex() : int
+    /**
+     * @return int
+     */
+    public function getEndIndex()
     {
         return $this->endIndex;
     }
-    public function isReservedType() : bool
+    /**
+     * @return bool
+     */
+    public function isReservedType()
     {
         return \in_array($this->name, self::$reservedTypes, \true);
     }
-    public function isNullable() : bool
+    /**
+     * @return bool
+     */
+    public function isNullable()
     {
         return $this->nullable;
     }

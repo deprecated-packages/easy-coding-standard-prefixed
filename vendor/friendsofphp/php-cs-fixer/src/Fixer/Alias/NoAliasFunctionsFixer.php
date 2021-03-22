@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,14 +12,12 @@ declare (strict_types=1);
 namespace PhpCsFixer\Fixer\Alias;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\AllowedValueSubset;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer;
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
@@ -29,7 +26,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Vladimir Reznichenko <kalessil@gmail.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface
+final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     /** @var array<string, array<int|string>|string> stores alias (key) - master (value) functions mapping */
     private $aliases = [];
@@ -41,7 +38,7 @@ final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \
     private static $mbregSet = ['mbereg' => 'mb_ereg', 'mbereg_match' => 'mb_ereg_match', 'mbereg_replace' => 'mb_ereg_replace', 'mbereg_search' => 'mb_ereg_search', 'mbereg_search_getpos' => 'mb_ereg_search_getpos', 'mbereg_search_getregs' => 'mb_ereg_search_getregs', 'mbereg_search_init' => 'mb_ereg_search_init', 'mbereg_search_pos' => 'mb_ereg_search_pos', 'mbereg_search_regs' => 'mb_ereg_search_regs', 'mbereg_search_setpos' => 'mb_ereg_search_setpos', 'mberegi' => 'mb_eregi', 'mberegi_replace' => 'mb_eregi_replace', 'mbregex_encoding' => 'mb_regex_encoding', 'mbsplit' => 'mb_split'];
     private static $exifSet = ['read_exif_data' => 'exif_read_data'];
     private static $timeSet = ['mktime' => ['time', 0], 'gmmktime' => ['time', 0]];
-    public function configure(array $configuration = null) : void
+    public function configure(array $configuration = null)
     {
         parent::configure($configuration);
         $this->aliases = [];
@@ -70,7 +67,7 @@ final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Master functions shall be used instead of aliases.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 $a = chop($b);
@@ -104,28 +101,28 @@ mbereg_search_getregs();
      *
      * Must run before ImplodeCallFixer, PhpUnitDedicateAssertFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 40;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
         $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
@@ -159,7 +156,7 @@ mbereg_search_getregs();
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition() : \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         $sets = ['@internal', '@IMAP', '@mbreg', '@all', '@time', '@exif'];
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('sets', 'List of sets to fix. Defined sets are `@internal` (native functions), `@IMAP` (IMAP functions), `@mbreg` (from `ext-mbstring`) `@all` (all listed sets).'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset($sets)])->setDefault(['@internal', '@IMAP'])->getOption()]);

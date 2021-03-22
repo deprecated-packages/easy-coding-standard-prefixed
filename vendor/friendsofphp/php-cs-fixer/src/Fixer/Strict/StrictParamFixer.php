@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Strict;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,21 +25,21 @@ final class StrictParamFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Functions should be used with `$strict` param set to `true`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = array_keys(\$b);\n\$a = array_search(\$b, \$c);\n\$a = base64_decode(\$b);\n\$a = in_array(\$b, \$c);\n\$a = mb_detect_encoding(\$b, \$c);\n")], 'The functions "array_keys", "array_search", "base64_decode", "in_array" and "mb_detect_encoding" should be used with $strict param.', 'Risky when the fixed function is overridden or if the code relies on non-strict usage.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
@@ -50,14 +48,14 @@ final class StrictParamFixer extends \PhpCsFixer\AbstractFixer
      *
      * Must run before NativeFunctionInvocationFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 11;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         static $map = null;
         if (null === $map) {
@@ -76,7 +74,7 @@ final class StrictParamFixer extends \PhpCsFixer\AbstractFixer
             }
         }
     }
-    private function fixFunction(\PhpCsFixer\Tokenizer\Tokens $tokens, int $functionIndex, array $functionParams) : void
+    private function fixFunction(\PhpCsFixer\Tokenizer\Tokens $tokens, $functionIndex, array $functionParams)
     {
         $startBraceIndex = $tokens->getNextTokenOfKind($functionIndex, ['(']);
         $endBraceIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $startBraceIndex);

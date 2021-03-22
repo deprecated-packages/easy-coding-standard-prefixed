@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,13 +29,13 @@ final class TokenizerLintingResult implements \PhpCsFixer\Linter\LintingResultIn
     /**
      * {@inheritdoc}
      */
-    public function check() : void
+    public function check()
     {
         if (null !== $this->error) {
             throw new \PhpCsFixer\Linter\LintingException(\sprintf('%s: %s on line %d.', $this->getMessagePrefix(), $this->error->getMessage(), $this->error->getLine()), $this->error->getCode(), $this->error);
         }
     }
-    private function getMessagePrefix() : string
+    private function getMessagePrefix()
     {
         return $this->error instanceof \ParseError ? 'Parse error' : 'Fatal error';
     }

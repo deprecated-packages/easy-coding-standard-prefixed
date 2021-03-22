@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Alias;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\PregException;
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
@@ -39,28 +37,28 @@ final class EregToPregFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replace deprecated `ereg` regular expression functions with `preg`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$x = ereg('[A-Z]');\n")], null, 'Risky if the `ereg` function is overridden.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $end = $tokens->count() - 1;
         $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
@@ -109,8 +107,10 @@ final class EregToPregFixer extends \PhpCsFixer\AbstractFixer
      * Check the validity of a PCRE.
      *
      * @param string $pattern the regular expression
+     *
+     * @return bool
      */
-    private function checkPreg(string $pattern) : bool
+    private function checkPreg($pattern)
     {
         try {
             \PhpCsFixer\Preg::match($pattern, '');
@@ -126,7 +126,7 @@ final class EregToPregFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return string the preg delimiter
      */
-    private function getBestDelimiter(string $pattern) : string
+    private function getBestDelimiter($pattern)
     {
         // try do find something that's not used
         $delimiters = [];

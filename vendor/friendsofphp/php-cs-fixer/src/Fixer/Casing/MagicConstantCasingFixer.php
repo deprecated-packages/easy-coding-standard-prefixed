@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Casing;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,21 +25,21 @@ final class MagicConstantCasingFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Magic constants should be referred to using the correct casing.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\necho __dir__;\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound($this->getMagicConstantTokens());
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $magicConstants = $this->getMagicConstants();
         $magicConstantTokens = $this->getMagicConstantTokens();
@@ -54,7 +52,7 @@ final class MagicConstantCasingFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @return array<int, string>
      */
-    private function getMagicConstants() : array
+    private function getMagicConstants()
     {
         static $magicConstants = null;
         if (null === $magicConstants) {
@@ -65,7 +63,7 @@ final class MagicConstantCasingFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @return array<int>
      */
-    private function getMagicConstantTokens() : array
+    private function getMagicConstantTokens()
     {
         static $magicConstantTokens = null;
         if (null === $magicConstantTokens) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -23,14 +22,14 @@ final class TextReporter implements \PhpCsFixer\Report\ReporterInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormat() : string
+    public function getFormat()
     {
         return 'txt';
     }
     /**
      * {@inheritdoc}
      */
-    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary) : string
+    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary)
     {
         $output = '';
         $i = 0;
@@ -45,11 +44,21 @@ final class TextReporter implements \PhpCsFixer\Report\ReporterInterface
         }
         return $output . $this->getFooter($reportSummary->getTime(), $reportSummary->getMemory(), $reportSummary->isDryRun());
     }
-    private function getAppliedFixers(bool $isDecoratedOutput, array $fixResult) : string
+    /**
+     * @param bool $isDecoratedOutput
+     *
+     * @return string
+     */
+    private function getAppliedFixers($isDecoratedOutput, array $fixResult)
     {
         return \sprintf($isDecoratedOutput ? ' (<comment>%s</comment>)' : ' (%s)', \implode(', ', $fixResult['appliedFixers']));
     }
-    private function getDiff(bool $isDecoratedOutput, array $fixResult) : string
+    /**
+     * @param bool $isDecoratedOutput
+     *
+     * @return string
+     */
+    private function getDiff($isDecoratedOutput, array $fixResult)
     {
         if (empty($fixResult['diff'])) {
             return '';
@@ -57,7 +66,14 @@ final class TextReporter implements \PhpCsFixer\Report\ReporterInterface
         $diffFormatter = new \PhpCsFixer\Differ\DiffConsoleFormatter($isDecoratedOutput, \sprintf('<comment>      ---------- begin diff ----------</comment>%s%%s%s<comment>      ----------- end diff -----------</comment>', \PHP_EOL, \PHP_EOL));
         return \PHP_EOL . $diffFormatter->format($fixResult['diff']) . \PHP_EOL;
     }
-    private function getFooter(int $time, int $memory, bool $isDryRun) : string
+    /**
+     * @param int  $time
+     * @param int  $memory
+     * @param bool $isDryRun
+     *
+     * @return string
+     */
+    private function getFooter($time, $memory, $isDryRun)
     {
         if (0 === $time || 0 === $memory) {
             return '';

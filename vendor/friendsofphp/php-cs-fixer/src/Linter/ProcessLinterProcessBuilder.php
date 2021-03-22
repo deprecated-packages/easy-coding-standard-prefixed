@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,7 +11,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Linter;
 
-use _PhpScoper8583deb8ab74\Symfony\Component\Process\Process;
+use _PhpScoper82aa0193482e\Symfony\Component\Process\Process;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -27,12 +26,17 @@ final class ProcessLinterProcessBuilder
     /**
      * @param string $executable PHP executable
      */
-    public function __construct(string $executable)
+    public function __construct($executable)
     {
         $this->executable = $executable;
     }
-    public function build(string $path) : \_PhpScoper8583deb8ab74\Symfony\Component\Process\Process
+    /**
+     * @param string $path
+     *
+     * @return Process
+     */
+    public function build($path)
     {
-        return new \_PhpScoper8583deb8ab74\Symfony\Component\Process\Process([$this->executable, '-l', $path]);
+        return new \_PhpScoper82aa0193482e\Symfony\Component\Process\Process([$this->executable, '-l', $path]);
     }
 }

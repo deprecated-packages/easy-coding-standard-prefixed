@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,9 +13,12 @@ namespace PhpCsFixer\Documentation;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Console\Command\HelpCommand;
-use PhpCsFixer\Diff\Differ;
-use PhpCsFixer\Diff\Output\StrictUnifiedDiffOutputBuilder;
+use PhpCsFixer\Diff\GeckoPackages\DiffOutputBuilder\UnifiedDiffOutputBuilder;
+use PhpCsFixer\Diff\v2_0\Differ;
+use PhpCsFixer\Fixer\Basic\Psr0Fixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\DefinedFixerInterface;
 use PhpCsFixer\Fixer\DeprecatedFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerConfiguration\AliasedFixerOption;
@@ -44,21 +46,29 @@ final class DocumentationGenerator
     private $path;
     public function __construct()
     {
-        $this->differ = new \PhpCsFixer\Diff\Differ(new \PhpCsFixer\Diff\Output\StrictUnifiedDiffOutputBuilder(['fromFile' => 'Original', 'toFile' => 'New']));
+        $this->differ = new \PhpCsFixer\Diff\v2_0\Differ(new \PhpCsFixer\Diff\GeckoPackages\DiffOutputBuilder\UnifiedDiffOutputBuilder(['fromFile' => 'Original', 'toFile' => 'New']));
         $this->path = \dirname(__DIR__, 2) . '/doc';
     }
-    public function getFixersDocumentationDirectoryPath() : string
+    /**
+     * @return string
+     */
+    public function getFixersDocumentationDirectoryPath()
     {
         return $this->path . '/rules';
     }
-    public function getFixersDocumentationIndexFilePath() : string
+    /**
+     * @return string
+     */
+    public function getFixersDocumentationIndexFilePath()
     {
         return $this->getFixersDocumentationDirectoryPath() . '/index.rst';
     }
     /**
      * @param AbstractFixer[] $fixers
+     *
+     * @return string
      */
-    public function generateFixersDocumentationIndex(array $fixers) : string
+    public function generateFixersDocumentationIndex(array $fixers)
     {
         $overrideGroups = ['PhpUnit' => 'PHPUnit', 'PhpTag' => 'PHP Tag', 'Phpdoc' => 'PHPDoc'];
         \usort($fixers, function (\PhpCsFixer\Fixer\FixerInterface $a, \PhpCsFixer\Fixer\FixerInterface $b) {
@@ -104,17 +114,26 @@ RST;
         }
         return "{$documentation}\n";
     }
-    public function getFixerDocumentationFilePath(\PhpCsFixer\Fixer\FixerInterface $fixer) : string
+    /**
+     * @return string
+     */
+    public function getFixerDocumentationFilePath(\PhpCsFixer\Fixer\FixerInterface $fixer)
     {
         return $this->getFixersDocumentationDirectoryPath() . '/' . \PhpCsFixer\Preg::replaceCallback('/^.*\\\\(.+)\\\\(.+)Fixer$/', function (array $matches) {
             return \PhpCsFixer\Utils::camelCaseToUnderscore($matches[1]) . '/' . \PhpCsFixer\Utils::camelCaseToUnderscore($matches[2]);
         }, \get_class($fixer)) . '.rst';
     }
-    public function getFixerDocumentationFileRelativePath(\PhpCsFixer\Fixer\FixerInterface $fixer) : string
+    /**
+     * @return string
+     */
+    public function getFixerDocumentationFileRelativePath(\PhpCsFixer\Fixer\FixerInterface $fixer)
     {
         return \PhpCsFixer\Preg::replace('#^' . \preg_quote($this->getFixersDocumentationDirectoryPath(), '#') . '/#', '', $this->getFixerDocumentationFilePath($fixer));
     }
-    public function generateFixerDocumentation(\PhpCsFixer\Fixer\FixerInterface $fixer) : string
+    /**
+     * @return string
+     */
+    public function generateFixerDocumentation(\PhpCsFixer\Fixer\FixerInterface $fixer)
     {
         $name = $fixer->getName();
         $title = "Rule ``{$name}``";
@@ -129,7 +148,7 @@ RST;
         }
         $riskyDescription = null;
         $samples = [];
-        if ($fixer instanceof \PhpCsFixer\Fixer\FixerInterface) {
+        if ($fixer instanceof \PhpCsFixer\Fixer\DefinedFixerInterface) {
             $definition = $fixer->getDefinition();
             $doc .= "\n\n" . $this->toRst($definition->getSummary());
             $description = $definition->getDescription();
@@ -146,6 +165,8 @@ RST;
             }
             $riskyDescription = $definition->getRiskyDescription();
             $samples = $definition->getCodeSamples();
+        } elseif ($fixer->isRisky()) {
+            $riskyDescription = 'Changes applied by the rule to your code might change its behavior.';
         }
         if (null !== $riskyDescription) {
             $riskyDescription = $this->toRst($riskyDescription, 3);
@@ -157,7 +178,7 @@ RST;
    {$riskyDescription}
 RST;
         }
-        if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
+        if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface) {
             $doc .= <<<'RST'
 
 
@@ -203,6 +224,8 @@ RST;
                 }
                 $doc .= "\n\n{$optionInfo}";
             }
+        } elseif ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
+            $doc .= "\n\nThis rule is configurable.";
         }
         if (0 !== \count($samples)) {
             $doc .= <<<'RST'
@@ -253,7 +276,7 @@ RST;
 RST;
                 if (null !== $config) {
                     $doc .= " with the config below:\n\n  ``" . \PhpCsFixer\Console\Command\HelpCommand::toString($config) . '``';
-                } elseif ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
+                } elseif ($fixer instanceof \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface) {
                     $doc .= ' with the default config.';
                 } else {
                     $doc .= '.';
@@ -262,18 +285,26 @@ RST;
         }
         return "{$doc}\n";
     }
-    public function getRuleSetsDocumentationDirectoryPath() : string
+    /**
+     * @return string
+     */
+    public function getRuleSetsDocumentationDirectoryPath()
     {
         return $this->path . '/ruleSets';
     }
-    public function getRuleSetsDocumentationIndexFilePath() : string
+    /**
+     * @return string
+     */
+    public function getRuleSetsDocumentationIndexFilePath()
     {
         return $this->getRuleSetsDocumentationDirectoryPath() . '/index.rst';
     }
     /**
      * @param AbstractFixer[] $fixers
+     *
+     * @return string
      */
-    public function generateRuleSetsDocumentation(\PhpCsFixer\RuleSet\RuleSetDescriptionInterface $definition, array $fixers) : string
+    public function generateRuleSetsDocumentation(\PhpCsFixer\RuleSet\RuleSetDescriptionInterface $definition, array $fixers)
     {
         $fixerNames = [];
         foreach ($fixers as $fixer) {
@@ -307,11 +338,19 @@ RST;
         }
         return $doc . "\n";
     }
-    public function getRuleSetsDocumentationFilePath(string $name) : string
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    public function getRuleSetsDocumentationFilePath($name)
     {
         return $this->getRuleSetsDocumentationDirectoryPath() . '/' . \str_replace(':risky', 'Risky', \ucfirst(\substr($name, 1))) . '.rst';
     }
-    public function generateRuleSetsDocumentationIndex(array $setDefinitions) : string
+    /**
+     * @return string
+     */
+    public function generateRuleSetsDocumentationIndex(array $setDefinitions)
     {
         $documentation = <<<'RST'
 ===========================
@@ -324,7 +363,13 @@ RST;
         }
         return $documentation . "\n";
     }
-    private function generateSampleDiff(\PhpCsFixer\Fixer\FixerInterface $fixer, \PhpCsFixer\FixerDefinition\CodeSampleInterface $sample, int $sampleNumber, string $ruleName) : string
+    /**
+     * @param int    $sampleNumber
+     * @param string $ruleName
+     *
+     * @return string
+     */
+    private function generateSampleDiff(\PhpCsFixer\Fixer\FixerInterface $fixer, \PhpCsFixer\FixerDefinition\CodeSampleInterface $sample, $sampleNumber, $ruleName)
     {
         if ($sample instanceof \PhpCsFixer\FixerDefinition\VersionSpecificCodeSampleInterface && !$sample->isSuitableFor(\PHP_VERSION_ID)) {
             $existingFile = @\file_get_contents($this->getFixerDocumentationFilePath($fixer));
@@ -350,6 +395,12 @@ RST;
             if (null === $configuration) {
                 $configuration = [];
             }
+            if ($fixer instanceof \PhpCsFixer\Fixer\Basic\Psr0Fixer && isset($configuration['dir']) && 0 === \strpos($configuration['dir'], './')) {
+                // Psr0Fixer relies on realpath() which fails for directories
+                // relative to some path when the working directory is a
+                // different path. Using an absolute path prevents this issue.
+                $configuration['dir'] = \dirname(__DIR__, 2) . \substr($configuration['dir'], 1);
+            }
             $fixer->configure($configuration);
         }
         $fixer->fix($file, $tokens);
@@ -364,7 +415,13 @@ RST;
    {$this->indent($diff, 3)}
 RST;
     }
-    private function toRst(string $string, int $indent = 0) : string
+    /**
+     * @param string $string
+     * @param int    $indent
+     *
+     * @return string
+     */
+    private function toRst($string, $indent = 0)
     {
         $string = \wordwrap(\PhpCsFixer\Preg::replace('/(?<!`)(`.*?`)(?!`)/', '`$1`', $string), 80 - $indent);
         if (0 !== $indent) {
@@ -372,7 +429,13 @@ RST;
         }
         return $string;
     }
-    private function indent(string $string, int $indent) : string
+    /**
+     * @param string $string
+     * @param int    $indent
+     *
+     * @return string
+     */
+    private function indent($string, $indent)
     {
         return \PhpCsFixer\Preg::replace('/(\\n)(?!\\n|$)/', '$1' . \str_repeat(' ', $indent), $string);
     }

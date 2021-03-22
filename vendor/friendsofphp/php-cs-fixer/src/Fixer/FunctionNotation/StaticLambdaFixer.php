@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\FunctionNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -28,14 +26,14 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Lambdas not (indirect) referencing `$this` must be declared `static`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = function () use (\$b)\n{   echo \$b;\n};\n")], null, 'Risky when using `->bindTo` on lambdas without referencing to `$this`.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
             return \true;
@@ -45,14 +43,14 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         $expectedFunctionKinds = [\T_FUNCTION];
@@ -88,7 +86,12 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
             // fixed after a lambda, closes candidate is at least 4 tokens before that
         }
     }
-    private function findExpressionEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : int
+    /**
+     * @param int $index
+     *
+     * @return int
+     */
+    private function findExpressionEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $nextIndex = $tokens->getNextMeaningfulToken($index);
         while (null !== $nextIndex) {
@@ -109,8 +112,13 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * Returns 'true' if there is a possible reference to '$this' within the given tokens index range.
+     *
+     * @param int $startIndex
+     * @param int $endIndex
+     *
+     * @return bool
      */
-    private function hasPossibleReferenceToThis(\PhpCsFixer\Tokenizer\Tokens $tokens, int $startIndex, int $endIndex) : bool
+    private function hasPossibleReferenceToThis(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
     {
         for ($i = $startIndex; $i < $endIndex; ++$i) {
             if ($tokens[$i]->isGivenKind(\T_VARIABLE) && '$this' === \strtolower($tokens[$i]->getContent())) {

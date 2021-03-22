@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,7 +23,7 @@ final class NamespaceUsesAnalyzer
     /**
      * @return NamespaceUseAnalysis[]
      */
-    public function getDeclarationsFromTokens(\PhpCsFixer\Tokenizer\Tokens $tokens) : array
+    public function getDeclarationsFromTokens(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $tokenAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         $useIndexes = $tokenAnalyzer->getImportUseIndexes();
@@ -33,7 +32,7 @@ final class NamespaceUsesAnalyzer
     /**
      * @return NamespaceUseAnalysis[]
      */
-    private function getDeclarations(\PhpCsFixer\Tokenizer\Tokens $tokens, array $useIndexes) : array
+    private function getDeclarations(\PhpCsFixer\Tokenizer\Tokens $tokens, array $useIndexes)
     {
         $uses = [];
         foreach ($useIndexes as $index) {
@@ -45,7 +44,13 @@ final class NamespaceUsesAnalyzer
         }
         return $uses;
     }
-    private function parseDeclaration(\PhpCsFixer\Tokenizer\Tokens $tokens, int $startIndex, int $endIndex) : ?\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis
+    /**
+     * @param int $startIndex
+     * @param int $endIndex
+     *
+     * @return null|NamespaceUseAnalysis
+     */
+    private function parseDeclaration(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
     {
         $fullName = $shortName = '';
         $aliased = \false;

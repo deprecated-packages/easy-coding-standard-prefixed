@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,7 +27,7 @@ final class Linter implements \PhpCsFixer\Linter\LinterInterface
     /**
      * @param null|string $executable PHP executable, null for autodetection
      */
-    public function __construct(?string $executable = null)
+    public function __construct($executable = null)
     {
         try {
             $this->sublinter = new \PhpCsFixer\Linter\TokenizerLinter();
@@ -39,21 +38,21 @@ final class Linter implements \PhpCsFixer\Linter\LinterInterface
     /**
      * {@inheritdoc}
      */
-    public function isAsync() : bool
+    public function isAsync()
     {
         return $this->sublinter->isAsync();
     }
     /**
      * {@inheritdoc}
      */
-    public function lintFile(string $path) : \PhpCsFixer\Linter\LintingResultInterface
+    public function lintFile($path)
     {
         return $this->sublinter->lintFile($path);
     }
     /**
      * {@inheritdoc}
      */
-    public function lintSource(string $source) : \PhpCsFixer\Linter\LintingResultInterface
+    public function lintSource($source)
     {
         return $this->sublinter->lintSource($source);
     }

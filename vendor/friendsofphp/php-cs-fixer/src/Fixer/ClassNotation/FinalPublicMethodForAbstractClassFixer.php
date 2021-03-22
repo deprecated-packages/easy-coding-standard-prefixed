@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\ClassNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -30,7 +28,7 @@ final class FinalPublicMethodForAbstractClassFixer extends \PhpCsFixer\AbstractF
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('All `public` methods of `abstract` classes should be `final`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 
@@ -44,21 +42,21 @@ abstract class AbstractMachine
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_ABSTRACT, \T_PUBLIC, \T_FUNCTION]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $classes = \array_keys($tokens->findGivenKind(\T_CLASS));
         while ($classIndex = \array_pop($classes)) {
@@ -71,7 +69,11 @@ abstract class AbstractMachine
             $this->fixClass($tokens, $classOpen, $classClose);
         }
     }
-    private function fixClass(\PhpCsFixer\Tokenizer\Tokens $tokens, int $classOpenIndex, int $classCloseIndex) : void
+    /**
+     * @param int $classOpenIndex
+     * @param int $classCloseIndex
+     */
+    private function fixClass(\PhpCsFixer\Tokenizer\Tokens $tokens, $classOpenIndex, $classCloseIndex)
     {
         for ($index = $classCloseIndex - 1; $index > $classOpenIndex; --$index) {
             // skip method contents

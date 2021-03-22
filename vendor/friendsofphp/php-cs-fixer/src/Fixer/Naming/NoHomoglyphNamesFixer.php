@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Naming;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -49,34 +47,34 @@ final class NoHomoglyphNamesFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replace accidental usage of homoglyphs (non ascii characters) in names.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$nаmе = 'wrong \"a\" character';\n")], null, 'Renames classes and cannot rename the files. You might have string references to renamed code (`$$name`).');
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_VARIABLE, \T_STRING]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind([\T_VARIABLE, \T_STRING])) {
                 continue;
             }
-            $replaced = \PhpCsFixer\Preg::replaceCallback('/[^[:ascii:]]/u', static function (array $matches) {
+            $replaced = \PhpCsFixer\Preg::replaceCallback('/[^[:ascii:]]/u', static function ($matches) {
                 return isset(self::$replacements[$matches[0]]) ? self::$replacements[$matches[0]] : $matches[0];
             }, $token->getContent(), -1, $count);
             if ($count) {

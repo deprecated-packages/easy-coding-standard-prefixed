@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -18,11 +17,11 @@ use PhpCsFixer\RuleSet\AbstractRuleSetDescription;
  */
 final class PSR1Set extends \PhpCsFixer\RuleSet\AbstractRuleSetDescription
 {
-    public function getRules() : array
+    public function getRules()
     {
         return ['encoding' => \true, 'full_opening_tag' => \true];
     }
-    public function getDescription() : string
+    public function getDescription()
     {
         return 'Rules that follow `PSR-1 <https://www.php-fig.org/psr/psr-1/>`_ standard.';
     }

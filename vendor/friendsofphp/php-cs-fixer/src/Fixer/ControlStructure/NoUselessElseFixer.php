@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\ControlStructure;
 use PhpCsFixer\AbstractNoUselessElseFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
@@ -25,14 +23,14 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_ELSE);
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('There should not be useless `else` cases.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nif (\$a) {\n    return 1;\n} else {\n    return 2;\n}\n")]);
     }
@@ -42,14 +40,14 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
      * Must run before BracesFixer, CombineConsecutiveUnsetsFixer, NoBreakCommentFixer, NoExtraBlankLinesFixer, NoTrailingWhitespaceFixer, NoUselessReturnFixer, NoWhitespaceInBlankLineFixer, SimplifiedIfReturnFixer.
      * Must run after NoAlternativeSyntaxFixer, NoEmptyStatementFixer, NoUnneededCurlyBracesFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return parent::getPriority();
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_ELSE)) {
@@ -75,7 +73,7 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
      *
      * @param int $index T_ELSE index
      */
-    private function fixEmptyElse(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
+    private function fixEmptyElse(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $next = $tokens->getNextMeaningfulToken($index);
         if ($tokens[$next]->equals('{')) {
@@ -98,7 +96,7 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
     /**
      * @param int $index index of T_ELSE
      */
-    private function clearElse(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
+    private function clearElse(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $tokens->clearTokenAndMergeSurroundingWhitespace($index);
         // clear T_ELSE and the '{' '}' if there are any

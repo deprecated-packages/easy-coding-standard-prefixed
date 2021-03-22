@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,7 +11,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Report;
 
-use _PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *
@@ -23,14 +22,14 @@ final class JsonReporter implements \PhpCsFixer\Report\ReporterInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormat() : string
+    public function getFormat()
     {
         return 'json';
     }
     /**
      * {@inheritdoc}
      */
-    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary) : string
+    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary)
     {
         $jFiles = [];
         foreach ($reportSummary->getChanged() as $file => $fixResult) {
@@ -51,6 +50,6 @@ final class JsonReporter implements \PhpCsFixer\Report\ReporterInterface
             $json['memory'] = \round($reportSummary->getMemory() / 1024 / 1024, 3);
         }
         $json = \json_encode($json);
-        return $reportSummary->isDecoratedOutput() ? \_PhpScoper8583deb8ab74\Symfony\Component\Console\Formatter\OutputFormatter::escape($json) : $json;
+        return $reportSummary->isDecoratedOutput() ? \_PhpScoper82aa0193482e\Symfony\Component\Console\Formatter\OutputFormatter::escape($json) : $json;
     }
 }

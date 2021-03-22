@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,14 +27,14 @@ final class ReturnRefTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId() : int
+    public function getRequiredPhpVersionId()
     {
         return 50000;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $index) : void
+    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
     {
         $prevKinds = [\T_FUNCTION];
         if (\PHP_VERSION_ID >= 70400) {
@@ -48,7 +47,7 @@ final class ReturnRefTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens() : array
+    public function getCustomTokens()
     {
         return [\PhpCsFixer\Tokenizer\CT::T_RETURN_REF];
     }

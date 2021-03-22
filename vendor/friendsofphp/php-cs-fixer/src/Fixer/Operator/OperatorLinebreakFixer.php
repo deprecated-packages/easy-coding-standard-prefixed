@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,13 +12,11 @@ declare (strict_types=1);
 namespace PhpCsFixer\Fixer\Operator;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Analyzer\Analysis\CaseAnalysis;
 use PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer;
@@ -30,16 +27,16 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Kuba Werłos <werlos@gmail.com>
  */
-final class OperatorLinebreakFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface
+final class OperatorLinebreakFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     /**
      * @internal
      */
-    public const BOOLEAN_OPERATORS = [[\T_BOOLEAN_AND], [\T_BOOLEAN_OR], [\T_LOGICAL_AND], [\T_LOGICAL_OR], [\T_LOGICAL_XOR]];
+    const BOOLEAN_OPERATORS = [[\T_BOOLEAN_AND], [\T_BOOLEAN_OR], [\T_LOGICAL_AND], [\T_LOGICAL_OR], [\T_LOGICAL_XOR]];
     /**
      * @internal
      */
-    public const NON_BOOLEAN_OPERATORS = ['%', '&', '*', '+', '-', '.', '/', ':', '<', '=', '>', '?', '^', '|', [\T_AND_EQUAL], [\T_CONCAT_EQUAL], [\T_DIV_EQUAL], [\T_DOUBLE_ARROW], [\T_IS_EQUAL], [\T_IS_GREATER_OR_EQUAL], [\T_IS_IDENTICAL], [\T_IS_NOT_EQUAL], [\T_IS_NOT_IDENTICAL], [\T_IS_SMALLER_OR_EQUAL], [\T_MINUS_EQUAL], [\T_MOD_EQUAL], [\T_MUL_EQUAL], [\T_OBJECT_OPERATOR], [\T_OR_EQUAL], [\T_PAAMAYIM_NEKUDOTAYIM], [\T_PLUS_EQUAL], [\T_POW], [\T_POW_EQUAL], [\T_SL], [\T_SL_EQUAL], [\T_SR], [\T_SR_EQUAL], [\T_XOR_EQUAL]];
+    const NON_BOOLEAN_OPERATORS = ['%', '&', '*', '+', '-', '.', '/', ':', '<', '=', '>', '?', '^', '|', [\T_AND_EQUAL], [\T_CONCAT_EQUAL], [\T_DIV_EQUAL], [\T_DOUBLE_ARROW], [\T_IS_EQUAL], [\T_IS_GREATER_OR_EQUAL], [\T_IS_IDENTICAL], [\T_IS_NOT_EQUAL], [\T_IS_NOT_IDENTICAL], [\T_IS_SMALLER_OR_EQUAL], [\T_MINUS_EQUAL], [\T_MOD_EQUAL], [\T_MUL_EQUAL], [\T_OBJECT_OPERATOR], [\T_OR_EQUAL], [\T_PAAMAYIM_NEKUDOTAYIM], [\T_PLUS_EQUAL], [\T_POW], [\T_POW_EQUAL], [\T_SL], [\T_SL_EQUAL], [\T_SR], [\T_SR_EQUAL], [\T_XOR_EQUAL]];
     /**
      * @var string
      */
@@ -51,7 +48,7 @@ final class OperatorLinebreakFixer extends \PhpCsFixer\AbstractFixer implements 
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Operators - when multiline - must always be at the beginning or at the end of the line.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 function foo() {
@@ -68,7 +65,7 @@ function foo() {
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null) : void
+    public function configure(array $configuration = null)
     {
         parent::configure($configuration);
         $this->operators = self::BOOLEAN_OPERATORS;
@@ -84,21 +81,21 @@ function foo() {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition() : \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('only_booleans', 'whether to limit operators to only boolean ones'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position', 'whether to place operators at the beginning or at the end of the line'))->setAllowedValues(['beginning', 'end'])->setDefault($this->position)->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $referenceAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ReferenceAnalyzer();
         $gotoLabelAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer();
@@ -135,7 +132,7 @@ function foo() {
      *
      * @return int[]
      */
-    private function getExcludedIndices(\PhpCsFixer\Tokenizer\Tokens $tokens) : array
+    private function getExcludedIndices(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $indices = [];
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
@@ -146,9 +143,11 @@ function foo() {
         return $indices;
     }
     /**
+     * @param int $switchIndex
+     *
      * @return int[]
      */
-    private function getCasesColonsForSwitch(\PhpCsFixer\Tokenizer\Tokens $tokens, int $switchIndex) : array
+    private function getCasesColonsForSwitch(\PhpCsFixer\Tokenizer\Tokens $tokens, $switchIndex)
     {
         return \array_map(static function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\CaseAnalysis $caseAnalysis) {
             return $caseAnalysis->getColonIndex();
@@ -157,7 +156,7 @@ function foo() {
     /**
      * @param int[] $operatorIndices
      */
-    private function fixOperatorLinebreak(\PhpCsFixer\Tokenizer\Tokens $tokens, array $operatorIndices) : void
+    private function fixOperatorLinebreak(\PhpCsFixer\Tokenizer\Tokens $tokens, array $operatorIndices)
     {
         /** @var int $prevIndex */
         $prevIndex = $tokens->getPrevMeaningfulToken(\min($operatorIndices));
@@ -186,7 +185,7 @@ function foo() {
     /**
      * @param int[] $operatorIndices
      */
-    private function fixMoveToTheBeginning(\PhpCsFixer\Tokenizer\Tokens $tokens, array $operatorIndices) : void
+    private function fixMoveToTheBeginning(\PhpCsFixer\Tokenizer\Tokens $tokens, array $operatorIndices)
     {
         /** @var int $prevIndex */
         $prevIndex = $tokens->getNonEmptySibling(\min($operatorIndices), -1);
@@ -207,7 +206,7 @@ function foo() {
     /**
      * @param int[] $operatorIndices
      */
-    private function fixMoveToTheEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, array $operatorIndices) : void
+    private function fixMoveToTheEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, array $operatorIndices)
     {
         /** @var int $prevIndex */
         $prevIndex = $tokens->getPrevMeaningfulToken(\min($operatorIndices));
@@ -227,12 +226,13 @@ function foo() {
     }
     /**
      * @param int[] $indices
+     * @param int   $direction
      *
      * @return Token[]
      */
-    private function getReplacementsAndClear(\PhpCsFixer\Tokenizer\Tokens $tokens, array $indices, int $direction) : array
+    private function getReplacementsAndClear(\PhpCsFixer\Tokenizer\Tokens $tokens, array $indices, $direction)
     {
-        return \array_map(static function (int $index) use($tokens, $direction) {
+        return \array_map(static function ($index) use($tokens, $direction) {
             $clone = $tokens[$index];
             if ($tokens[$index + $direction]->isWhitespace()) {
                 $tokens->clearAt($index + $direction);
@@ -241,7 +241,13 @@ function foo() {
             return $clone;
         }, $indices);
     }
-    private function isMultiline(\PhpCsFixer\Tokenizer\Tokens $tokens, int $indexStart, int $indexEnd) : bool
+    /**
+     * @param int $indexStart
+     * @param int $indexEnd
+     *
+     * @return bool
+     */
+    private function isMultiline(\PhpCsFixer\Tokenizer\Tokens $tokens, $indexStart, $indexEnd)
     {
         for ($index = $indexStart; $index <= $indexEnd; ++$index) {
             if (\false !== \strpos($tokens[$index]->getContent(), "\n")) {

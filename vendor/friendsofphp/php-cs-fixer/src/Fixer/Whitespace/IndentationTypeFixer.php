@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -16,7 +15,6 @@ use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -34,7 +32,7 @@ final class IndentationTypeFixer extends \PhpCsFixer\AbstractFixer implements \P
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Code MUST use configured indentation type.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\nif (true) {\n\techo 'Hello!';\n}\n")]);
     }
@@ -42,23 +40,23 @@ final class IndentationTypeFixer extends \PhpCsFixer\AbstractFixer implements \P
      * {@inheritdoc}
      *
      * Must run before PhpdocIndentFixer.
-     * Must run after ClassAttributesSeparationFixer.
+     * Must run after ClassAttributesSeparationFixer, MethodSeparationFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 50;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_COMMENT, \T_DOC_COMMENT, \T_WHITESPACE]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $this->indent = $this->whitespacesConfig->getIndent();
         foreach ($tokens as $index => $token) {
@@ -72,7 +70,12 @@ final class IndentationTypeFixer extends \PhpCsFixer\AbstractFixer implements \P
             }
         }
     }
-    private function fixIndentInComment(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : \PhpCsFixer\Tokenizer\Token
+    /**
+     * @param int $index
+     *
+     * @return Token
+     */
+    private function fixIndentInComment(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $content = \PhpCsFixer\Preg::replace('/^(?:(?<! ) {1,3})?\\t/m', '\\1    ', $tokens[$index]->getContent(), -1, $count);
         // Also check for more tabs.
@@ -81,12 +84,17 @@ final class IndentationTypeFixer extends \PhpCsFixer\AbstractFixer implements \P
         }
         $indent = $this->indent;
         // change indent to expected one
-        $content = \PhpCsFixer\Preg::replaceCallback('/^(?:    )+/m', function (array $matches) use($indent) {
+        $content = \PhpCsFixer\Preg::replaceCallback('/^(?:    )+/m', function ($matches) use($indent) {
             return $this->getExpectedIndent($matches[0], $indent);
         }, $content);
         return new \PhpCsFixer\Tokenizer\Token([$tokens[$index]->getId(), $content]);
     }
-    private function fixIndentToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : \PhpCsFixer\Tokenizer\Token
+    /**
+     * @param int $index
+     *
+     * @return Token
+     */
+    private function fixIndentToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $content = $tokens[$index]->getContent();
         $previousTokenHasTrailingLinebreak = \false;
@@ -113,9 +121,12 @@ final class IndentationTypeFixer extends \PhpCsFixer\AbstractFixer implements \P
         return new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $newContent]);
     }
     /**
+     * @param string $content
+     * @param string $indent
+     *
      * @return string mixed
      */
-    private function getExpectedIndent(string $content, string $indent) : string
+    private function getExpectedIndent($content, $indent)
     {
         if ("\t" === $indent) {
             $content = \str_replace('    ', $indent, $content);

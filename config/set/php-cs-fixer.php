@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper8583deb8ab74;
+namespace _PhpScoper82aa0193482e;
 
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
@@ -139,8 +139,8 @@ use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
-use _PhpScoper8583deb8ab74\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoper8583deb8ab74\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoper82aa0193482e\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoper82aa0193482e\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(\PhpCsFixer\Fixer\Phpdoc\AlignMultilineCommentFixer::class);
     $services->set(\PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer::class);
@@ -201,6 +201,7 @@ return static function (\_PhpScoper8583deb8ab74\Symfony\Component\DependencyInje
     $services->set(\PhpCsFixer\Fixer\ArrayNotation\NoMultilineWhitespaceAroundDoubleArrowFixer::class);
     $services->set(\PhpCsFixer\Fixer\ClassNotation\NoNullPropertyInitializationFixer::class);
     $services->set(\PhpCsFixer\Fixer\CastNotation\NoShortBoolCastFixer::class);
+    $services->set(\PhpCsFixer\Fixer\PhpTag\NoShortEchoTagFixer::class);
     $services->set(\PhpCsFixer\Fixer\Semicolon\NoSinglelineWhitespaceBeforeSemicolonsFixer::class);
     $services->set(\PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer::class);
     $services->set(\PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer::class);
@@ -226,11 +227,13 @@ return static function (\_PhpScoper8583deb8ab74\Symfony\Component\DependencyInje
     $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitFqcnAnnotationFixer::class);
     $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitInternalClassFixer::class);
     $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitMethodCasingFixer::class);
+    $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitOrderedCoversFixer::class);
     $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitTestClassRequiresCoversFixer::class);
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocAddMissingParamAnnotationFixer::class);
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer::class)->call('configure', [['tags' => ['method', 'param', 'property', 'return', 'throws', 'type', 'var']]]);
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocAnnotationWithoutDotFixer::class);
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocIndentFixer::class);
+    $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocInlineTagFixer::class);
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocNoAccessFixer::class);
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocNoAliasTagFixer::class);
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocNoEmptyReturnFixer::class);

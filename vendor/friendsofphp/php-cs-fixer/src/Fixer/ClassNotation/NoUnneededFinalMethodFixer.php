@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,23 +12,21 @@ declare (strict_types=1);
 namespace PhpCsFixer\Fixer\ClassNotation;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class NoUnneededFinalMethodFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface
+final class NoUnneededFinalMethodFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('A `final` class must not have `final` methods and `private` methods must not be `final`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 final class Foo
@@ -58,18 +55,18 @@ class Bar
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_FINAL]);
     }
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $tokensCount = \count($tokens);
         for ($index = 0; $index < $tokensCount; ++$index) {
@@ -85,11 +82,15 @@ class Bar
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition() : \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('private_methods', 'Private methods of non-`final` classes must not be declared `final`.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
-    private function fixClass(\PhpCsFixer\Tokenizer\Tokens $tokens, int $classOpenIndex, bool $classIsFinal) : void
+    /**
+     * @param int  $classOpenIndex
+     * @param bool $classIsFinal
+     */
+    private function fixClass(\PhpCsFixer\Tokenizer\Tokens $tokens, $classOpenIndex, $classIsFinal)
     {
         $tokensCount = \count($tokens);
         for ($index = $classOpenIndex + 1; $index < $tokensCount; ++$index) {
@@ -115,7 +116,13 @@ class Bar
             }
         }
     }
-    private function isPrivateMethodOtherThanConstructor(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index, int $classOpenIndex) : bool
+    /**
+     * @param int $index
+     * @param int $classOpenIndex
+     *
+     * @return bool
+     */
+    private function isPrivateMethodOtherThanConstructor(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $classOpenIndex)
     {
         $index = \max($classOpenIndex + 1, $tokens->getPrevTokenOfKind($index, [';', '{', '}']));
         $private = \false;

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -31,30 +30,30 @@ final class Cache implements \PhpCsFixer\Cache\CacheInterface
     {
         $this->signature = $signature;
     }
-    public function getSignature() : \PhpCsFixer\Cache\SignatureInterface
+    public function getSignature()
     {
         return $this->signature;
     }
-    public function has(string $file) : bool
+    public function has($file)
     {
         return \array_key_exists($file, $this->hashes);
     }
-    public function get(string $file) : ?int
+    public function get($file)
     {
         if (!$this->has($file)) {
             return null;
         }
         return $this->hashes[$file];
     }
-    public function set(string $file, int $hash) : void
+    public function set($file, $hash)
     {
         $this->hashes[$file] = $hash;
     }
-    public function clear(string $file) : void
+    public function clear($file)
     {
         unset($this->hashes[$file]);
     }
-    public function toJson() : string
+    public function toJson()
     {
         $json = \json_encode(['php' => $this->getSignature()->getPhpVersion(), 'version' => $this->getSignature()->getFixerVersion(), 'indent' => $this->getSignature()->getIndent(), 'lineEnding' => $this->getSignature()->getLineEnding(), 'rules' => $this->getSignature()->getRules(), 'hashes' => $this->hashes]);
         if (\JSON_ERROR_NONE !== \json_last_error()) {
@@ -63,11 +62,13 @@ final class Cache implements \PhpCsFixer\Cache\CacheInterface
         return $json;
     }
     /**
+     * @param string $json
+     *
      * @throws \InvalidArgumentException
      *
      * @return Cache
      */
-    public static function fromJson(string $json) : self
+    public static function fromJson($json)
     {
         $data = \json_decode($json, \true);
         if (null === $data && \JSON_ERROR_NONE !== \json_last_error()) {

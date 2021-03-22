@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,29 +11,26 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Differ;
 
-use PhpCsFixer\Diff\Differ;
-use PhpCsFixer\Diff\Output\StrictUnifiedDiffOutputBuilder;
-use PhpCsFixer\Preg;
+use PhpCsFixer\Diff\v3_0\Differ;
+use PhpCsFixer\Diff\v3_0\Output\StrictUnifiedDiffOutputBuilder;
 /**
  * @author SpacePossum
  */
 final class UnifiedDiffer implements \PhpCsFixer\Differ\DifferInterface
 {
     /**
+     * @var Differ
+     */
+    private $differ;
+    public function __construct()
+    {
+        $this->differ = new \PhpCsFixer\Diff\v3_0\Differ(new \PhpCsFixer\Diff\v3_0\Output\StrictUnifiedDiffOutputBuilder(['fromFile' => 'Original', 'toFile' => 'New']));
+    }
+    /**
      * {@inheritdoc}
      */
-    public function diff(string $old, string $new, \SplFileInfo $file = null) : string
+    public function diff($old, $new)
     {
-        if (null === $file) {
-            $options = ['fromFile' => 'Original', 'toFile' => 'New'];
-        } else {
-            $filePath = $file->getRealPath();
-            if (1 === \PhpCsFixer\Preg::match('/\\s/', $filePath)) {
-                $filePath = '"' . $filePath . '"';
-            }
-            $options = ['fromFile' => $filePath, 'toFile' => $filePath];
-        }
-        $differ = new \PhpCsFixer\Diff\Differ(new \PhpCsFixer\Diff\Output\StrictUnifiedDiffOutputBuilder($options));
-        return $differ->diff($old, $new);
+        return $this->differ->diff($old, $new);
     }
 }

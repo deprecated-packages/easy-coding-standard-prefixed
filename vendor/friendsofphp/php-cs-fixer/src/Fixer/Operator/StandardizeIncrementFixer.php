@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\Operator;
 use PhpCsFixer\Fixer\AbstractIncrementOperatorFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,11 +25,11 @@ final class StandardizeIncrementFixer extends \PhpCsFixer\Fixer\AbstractIncremen
     /**
      * @internal
      */
-    public const EXPRESSION_END_TOKENS = [';', ')', ']', ',', ':', [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_CLOSE], [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_CLOSE], [\T_CLOSE_TAG]];
+    const EXPRESSION_END_TOKENS = [';', ')', ']', ',', ':', [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_CLOSE], [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_CLOSE], [\T_CLOSE_TAG]];
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Increment and decrement operators should be used if possible.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$i += 1;\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$i -= 1;\n")]);
     }
@@ -40,21 +38,21 @@ final class StandardizeIncrementFixer extends \PhpCsFixer\Fixer\AbstractIncremen
      *
      * Must run before IncrementStyleFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 1;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_PLUS_EQUAL, \T_MINUS_EQUAL]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
             $expressionEnd = $tokens[$index];
@@ -78,8 +76,11 @@ final class StandardizeIncrementFixer extends \PhpCsFixer\Fixer\AbstractIncremen
     }
     /**
      * Clear tokens in the given range unless they are comments.
+     *
+     * @param int $indexStart
+     * @param int $indexEnd
      */
-    private function clearRangeLeaveComments(\PhpCsFixer\Tokenizer\Tokens $tokens, int $indexStart, int $indexEnd) : void
+    private function clearRangeLeaveComments(\PhpCsFixer\Tokenizer\Tokens $tokens, $indexStart, $indexEnd)
     {
         for ($i = $indexStart; $i <= $indexEnd; ++$i) {
             $token = $tokens[$i];

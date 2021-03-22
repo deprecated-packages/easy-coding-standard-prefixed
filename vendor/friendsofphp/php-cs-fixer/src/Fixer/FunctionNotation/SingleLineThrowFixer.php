@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,7 +14,6 @@ namespace PhpCsFixer\Fixer\FunctionNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,26 +25,26 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @internal
      */
-    public const REMOVE_WHITESPACE_AFTER_TOKENS = ['['];
+    const REMOVE_WHITESPACE_AFTER_TOKENS = ['['];
     /**
      * @internal
      */
-    public const REMOVE_WHITESPACE_AROUND_TOKENS = ['(', [\T_OBJECT_OPERATOR], [\T_DOUBLE_COLON]];
+    const REMOVE_WHITESPACE_AROUND_TOKENS = ['(', [\T_OBJECT_OPERATOR], [\T_DOUBLE_COLON]];
     /**
      * @internal
      */
-    public const REMOVE_WHITESPACE_BEFORE_TOKENS = [')', ']', ',', ';'];
+    const REMOVE_WHITESPACE_BEFORE_TOKENS = [')', ']', ',', ';'];
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('Throwing exception must be done in single line.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nthrow new Exception(\n    'Error.',\n    500\n);\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_THROW);
     }
@@ -55,7 +53,7 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
      *
      * Must run before ConcatSpaceFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         // must be fun before ConcatSpaceFixer
         return 1;
@@ -63,7 +61,7 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         for ($index = 0, $count = $tokens->count(); $index < $count; ++$index) {
             if (!$tokens[$index]->isGivenKind(\T_THROW)) {
@@ -80,7 +78,11 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
             $this->trimNewLines($tokens, $index, $openingBraceCandidateIndex);
         }
     }
-    private function trimNewLines(\PhpCsFixer\Tokenizer\Tokens $tokens, int $startIndex, int $endIndex) : void
+    /**
+     * @param int $startIndex
+     * @param int $endIndex
+     */
+    private function trimNewLines(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
     {
         for ($index = $startIndex; $index < $endIndex; ++$index) {
             $content = $tokens[$index]->getContent();

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,15 +12,13 @@ declare (strict_types=1);
 namespace PhpCsFixer\Fixer\Whitespace;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerConfiguration\AllowedValueSubset;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
-use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
@@ -30,12 +27,36 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
  * @author Andreas Möller <am@localheinz.com>
  * @author SpacePossum
  */
-final class BlankLineBeforeStatementFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurableFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class BlankLineBeforeStatementFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
 {
     /**
      * @var array
      */
-    private static $tokenMap = ['break' => \T_BREAK, 'case' => \T_CASE, 'continue' => \T_CONTINUE, 'declare' => \T_DECLARE, 'default' => \T_DEFAULT, 'do' => \T_DO, 'exit' => \T_EXIT, 'for' => \T_FOR, 'foreach' => \T_FOREACH, 'goto' => \T_GOTO, 'if' => \T_IF, 'include' => \T_INCLUDE, 'include_once' => \T_INCLUDE_ONCE, 'require' => \T_REQUIRE, 'require_once' => \T_REQUIRE_ONCE, 'return' => \T_RETURN, 'switch' => \T_SWITCH, 'throw' => \T_THROW, 'try' => \T_TRY, 'while' => \T_WHILE, 'yield' => \T_YIELD, 'yield_from' => \T_YIELD_FROM];
+    private static $tokenMap = [
+        'break' => \T_BREAK,
+        'case' => \T_CASE,
+        'continue' => \T_CONTINUE,
+        'declare' => \T_DECLARE,
+        'default' => \T_DEFAULT,
+        'die' => \T_EXIT,
+        // TODO remove this alias 3.0, use `exit`
+        'do' => \T_DO,
+        'exit' => \T_EXIT,
+        'for' => \T_FOR,
+        'foreach' => \T_FOREACH,
+        'goto' => \T_GOTO,
+        'if' => \T_IF,
+        'include' => \T_INCLUDE,
+        'include_once' => \T_INCLUDE_ONCE,
+        'require' => \T_REQUIRE,
+        'require_once' => \T_REQUIRE_ONCE,
+        'return' => \T_RETURN,
+        'switch' => \T_SWITCH,
+        'throw' => \T_THROW,
+        'try' => \T_TRY,
+        'while' => \T_WHILE,
+        'yield' => \T_YIELD,
+    ];
     /**
      * @var array
      */
@@ -46,15 +67,22 @@ final class BlankLineBeforeStatementFixer extends \PhpCsFixer\AbstractFixer impl
     public function __construct()
     {
         parent::__construct();
+        // @TODO: To be moved back to compile time property declaration when PHP support of PHP CS Fixer will be 7.0+
+        if (\defined('T_YIELD_FROM')) {
+            self::$tokenMap['yield_from'] = \T_YIELD_FROM;
+        }
     }
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration) : void
+    public function configure(array $configuration = null)
     {
         parent::configure($configuration);
         $this->fixTokenMap = [];
         foreach ($this->configuration['statements'] as $key) {
+            if ('die' === $key) {
+                @\trigger_error('Option "die" is deprecated, use "exit" instead.', \E_USER_DEPRECATED);
+            }
             $this->fixTokenMap[$key] = self::$tokenMap[$key];
         }
         $this->fixTokenMap = \array_values($this->fixTokenMap);
@@ -62,7 +90,7 @@ final class BlankLineBeforeStatementFixer extends \PhpCsFixer\AbstractFixer impl
     /**
      * {@inheritdoc}
      */
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition()
     {
         return new \PhpCsFixer\FixerDefinition\FixerDefinition('An empty line feed must precede any configured statement.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
 function A() {
@@ -147,21 +175,21 @@ if (true) {
      *
      * Must run after NoExtraBlankLinesFixer, NoUselessReturnFixer, ReturnAssignmentFixer.
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -21;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound($this->fixTokenMap);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
     {
         $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
@@ -182,7 +210,7 @@ if (true) {
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition() : \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         $allowed = self::$tokenMap;
         $allowed['yield_from'] = \true;
@@ -191,7 +219,12 @@ if (true) {
         $allowed = \array_keys($allowed);
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('statements', 'List of statements which must be preceded by an empty line.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset($allowed)])->setDefault(['break', 'continue', 'declare', 'return', 'throw', 'try'])->getOption()]);
     }
-    private function shouldAddBlankLine(\PhpCsFixer\Tokenizer\Tokens $tokens, int $prevNonWhitespace) : bool
+    /**
+     * @param int $prevNonWhitespace
+     *
+     * @return bool
+     */
+    private function shouldAddBlankLine(\PhpCsFixer\Tokenizer\Tokens $tokens, $prevNonWhitespace)
     {
         $prevNonWhitespaceToken = $tokens[$prevNonWhitespace];
         if ($prevNonWhitespaceToken->isComment()) {
@@ -207,7 +240,10 @@ if (true) {
         }
         return $prevNonWhitespaceToken->equalsAny([';', '}']);
     }
-    private function insertBlankLine(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : void
+    /**
+     * @param int $index
+     */
+    private function insertBlankLine(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $prevIndex = $index - 1;
         $prevToken = $tokens[$prevIndex];

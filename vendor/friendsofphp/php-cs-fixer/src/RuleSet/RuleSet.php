@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -20,8 +19,11 @@ use PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException;
  * @author SpacePossum
  *
  * @internal
+ * @final
+ *
+ * TODO on 3.0 make final after PhpCsFixer\RuleSet has been removed
  */
-final class RuleSet implements \PhpCsFixer\RuleSet\RuleSetInterface
+class RuleSet implements \PhpCsFixer\RuleSet\RuleSetInterface
 {
     /**
      * Group of rules generated from input set.
@@ -42,10 +44,16 @@ final class RuleSet implements \PhpCsFixer\RuleSet\RuleSetInterface
                 throw new \InvalidArgumentException(\sprintf('Missing value for "%s" rule/set.', $value));
             }
             if (\true !== $value && \false !== $value && !\is_array($value)) {
-                $message = '@' === $name[0] ? 'Set must be enabled (true) or disabled (false). Other values are not allowed.' : 'Rule must be enabled (true), disabled (false) or configured (non-empty, assoc array). Other values are not allowed.';
+                // @TODO drop me on 3.0
                 if (null === $value) {
-                    $message .= ' To disable the ' . ('@' === $name[0] ? 'set' : 'rule') . ', use "FALSE" instead of "NULL".';
+                    $messageForNullIssue = 'To disable the rule, use "FALSE" instead of "NULL".';
+                    if (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
+                        throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($name, $messageForNullIssue);
+                    }
+                    @\trigger_error($messageForNullIssue, \E_USER_DEPRECATED);
+                    continue;
                 }
+                $message = '@' === $name[0] ? 'Set must be enabled (true) or disabled (false). Other values are not allowed.' : 'Rule must be enabled (true), disabled (false) or configured (non-empty, assoc array). Other values are not allowed.';
                 throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($name, $message);
             }
         }
@@ -54,14 +62,14 @@ final class RuleSet implements \PhpCsFixer\RuleSet\RuleSetInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRule(string $rule) : bool
+    public function hasRule($rule)
     {
         return \array_key_exists($rule, $this->rules);
     }
     /**
      * {@inheritdoc}
      */
-    public function getRuleConfiguration(string $rule) : ?array
+    public function getRuleConfiguration($rule)
     {
         if (!$this->hasRule($rule)) {
             throw new \InvalidArgumentException(\sprintf('Rule "%s" is not in the set.', $rule));
@@ -74,16 +82,32 @@ final class RuleSet implements \PhpCsFixer\RuleSet\RuleSetInterface
     /**
      * {@inheritdoc}
      */
-    public function getRules() : array
+    public function getRules()
     {
         return $this->rules;
+    }
+    /**
+     * @deprecated will be removed in 3.0 Use the constructor.
+     */
+    public static function create(array $set = [])
+    {
+        @\trigger_error(__METHOD__ . ' is deprecated and will be removed in 3.0, use the constructor.', \E_USER_DEPRECATED);
+        return new self($set);
+    }
+    /**
+     * @deprecated will be removed in 3.0 Use PhpCsFixer\RuleSet\RuleSets::getSetDefinitionNames
+     */
+    public function getSetDefinitionNames()
+    {
+        @\trigger_error(__METHOD__ . ' is deprecated and will be removed in 3.0, use PhpCsFixer\\RuleSet\\RuleSets::getSetDefinitionNames.', \E_USER_DEPRECATED);
+        return \PhpCsFixer\RuleSet\RuleSets::getSetDefinitionNames();
     }
     /**
      * Resolve input set into group of rules.
      *
      * @return $this
      */
-    private function resolveSet(array $rules) : self
+    private function resolveSet(array $rules)
     {
         $resolvedRules = [];
         // expand sets
@@ -108,8 +132,13 @@ final class RuleSet implements \PhpCsFixer\RuleSet\RuleSetInterface
      *
      * If set value is false then disable all fixers in set,
      * if not then get value from set item.
+     *
+     * @param string $setName
+     * @param bool   $setValue
+     *
+     * @return array
      */
-    private function resolveSubset(string $setName, bool $setValue) : array
+    private function resolveSubset($setName, $setValue)
     {
         $rules = \PhpCsFixer\RuleSet\RuleSets::getSetDefinition($setName)->getRules();
         foreach ($rules as $name => $value) {

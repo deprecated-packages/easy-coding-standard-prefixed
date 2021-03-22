@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,8 +11,8 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Report;
 
-use _PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoper8583deb8ab74\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper82aa0193482e\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper82aa0193482e\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *
@@ -23,18 +22,18 @@ final class ReporterFactory
 {
     /** @var ReporterInterface[] */
     private $reporters = [];
-    public static function create() : self
+    public static function create()
     {
         return new self();
     }
-    public function registerBuiltInReporters() : self
+    public function registerBuiltInReporters()
     {
         /** @var null|string[] $builtInReporters */
         static $builtInReporters;
         if (null === $builtInReporters) {
             $builtInReporters = [];
             /** @var SplFileInfo $file */
-            foreach (\_PhpScoper8583deb8ab74\Symfony\Component\Finder\Finder::create()->files()->name('*Reporter.php')->in(__DIR__) as $file) {
+            foreach (\_PhpScoper82aa0193482e\Symfony\Component\Finder\Finder::create()->files()->name('*Reporter.php')->in(__DIR__) as $file) {
                 $relativeNamespace = $file->getRelativePath();
                 $builtInReporters[] = \sprintf('%s\\%s%s', __NAMESPACE__, $relativeNamespace ? $relativeNamespace . '\\' : '', $file->getBasename('.php'));
             }
@@ -47,7 +46,7 @@ final class ReporterFactory
     /**
      * @return $this
      */
-    public function registerReporter(\PhpCsFixer\Report\ReporterInterface $reporter) : self
+    public function registerReporter(\PhpCsFixer\Report\ReporterInterface $reporter)
     {
         $format = $reporter->getFormat();
         if (isset($this->reporters[$format])) {
@@ -59,13 +58,18 @@ final class ReporterFactory
     /**
      * @return string[]
      */
-    public function getFormats() : array
+    public function getFormats()
     {
         $formats = \array_keys($this->reporters);
         \sort($formats);
         return $formats;
     }
-    public function getReporter(string $format) : \PhpCsFixer\Report\ReporterInterface
+    /**
+     * @param string $format
+     *
+     * @return ReporterInterface
+     */
+    public function getReporter($format)
     {
         if (!isset($this->reporters[$format])) {
             throw new \UnexpectedValueException(\sprintf('Reporter for format "%s" is not registered.', $format));
