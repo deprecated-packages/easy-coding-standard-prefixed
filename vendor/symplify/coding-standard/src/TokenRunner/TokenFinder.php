@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner;
 
-use _PhpScoperc7096eb2567d\Nette\Utils\Strings;
+use _PhpScoper6ae4c4f86624\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -59,7 +59,7 @@ final class TokenFinder
         $rawTokensCount = \count($rawTokens);
         for ($i = $position; $i < $rawTokensCount; ++$i) {
             $token = $rawTokens[$i];
-            if (\is_array($token) && \_PhpScoperc7096eb2567d\Nette\Utils\Strings::contains($token[1], \PHP_EOL)) {
+            if (\is_array($token) && \_PhpScoper6ae4c4f86624\Nette\Utils\Strings::contains($token[1], \PHP_EOL)) {
                 break;
             }
             $lastToken = $token;
@@ -76,9 +76,6 @@ final class TokenFinder
             throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
         }
         $previousToken = $tokens[$previousPosition];
-        if (!$previousToken instanceof \PhpCsFixer\Tokenizer\Token) {
-            throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
-        }
         return $previousToken;
     }
     /**

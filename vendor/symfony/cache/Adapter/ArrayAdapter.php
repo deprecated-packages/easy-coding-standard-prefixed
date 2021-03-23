@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc7096eb2567d\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper6ae4c4f86624\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperc7096eb2567d\Psr\Cache\CacheItemInterface;
-use _PhpScoperc7096eb2567d\Psr\Log\LoggerAwareInterface;
-use _PhpScoperc7096eb2567d\Psr\Log\LoggerAwareTrait;
-use _PhpScoperc7096eb2567d\Symfony\Component\Cache\CacheItem;
-use _PhpScoperc7096eb2567d\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperc7096eb2567d\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperc7096eb2567d\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper6ae4c4f86624\Psr\Cache\CacheItemInterface;
+use _PhpScoper6ae4c4f86624\Psr\Log\LoggerAwareInterface;
+use _PhpScoper6ae4c4f86624\Psr\Log\LoggerAwareTrait;
+use _PhpScoper6ae4c4f86624\Symfony\Component\Cache\CacheItem;
+use _PhpScoper6ae4c4f86624\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper6ae4c4f86624\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper6ae4c4f86624\Symfony\Contracts\Cache\CacheInterface;
 /**
  * An in-memory cache storage.
  *
@@ -24,7 +24,7 @@ use _PhpScoperc7096eb2567d\Symfony\Contracts\Cache\CacheInterface;
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ArrayAdapter implements \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScoperc7096eb2567d\Symfony\Contracts\Cache\CacheInterface, \_PhpScoperc7096eb2567d\Psr\Log\LoggerAwareInterface, \_PhpScoperc7096eb2567d\Symfony\Component\Cache\ResettableInterface
+class ArrayAdapter implements \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScoper6ae4c4f86624\Symfony\Contracts\Cache\CacheInterface, \_PhpScoper6ae4c4f86624\Psr\Log\LoggerAwareInterface, \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\ResettableInterface
 {
     use LoggerAwareTrait;
     private $storeSerialized;
@@ -40,22 +40,22 @@ class ArrayAdapter implements \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Ad
     public function __construct(int $defaultLifetime = 0, bool $storeSerialized = \true, float $maxLifetime = 0, int $maxItems = 0)
     {
         if (0 > $maxLifetime) {
-            throw new \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument $maxLifetime must be positive, %F passed.', $maxLifetime));
+            throw new \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument $maxLifetime must be positive, %F passed.', $maxLifetime));
         }
         if (0 > $maxItems) {
-            throw new \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument $maxItems must be a positive integer, %d passed.', $maxItems));
+            throw new \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('Argument $maxItems must be a positive integer, %d passed.', $maxItems));
         }
         $this->defaultLifetime = $defaultLifetime;
         $this->storeSerialized = $storeSerialized;
         $this->maxLifetime = $maxLifetime;
         $this->maxItems = $maxItems;
         $this->createCacheItem = \Closure::bind(static function ($key, $value, $isHit) {
-            $item = new \_PhpScoperc7096eb2567d\Symfony\Component\Cache\CacheItem();
+            $item = new \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\CacheItem();
             $item->key = $key;
             $item->value = $value;
             $item->isHit = $isHit;
             return $item;
-        }, null, \_PhpScoperc7096eb2567d\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\CacheItem::class);
     }
     /**
      * {@inheritdoc}
@@ -94,7 +94,7 @@ class ArrayAdapter implements \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Ad
             }
             return \true;
         }
-        \_PhpScoperc7096eb2567d\Symfony\Component\Cache\CacheItem::validateKey($key);
+        \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\CacheItem::validateKey($key);
         return isset($this->expiries[$key]) && !$this->deleteItem($key);
     }
     /**
@@ -121,7 +121,7 @@ class ArrayAdapter implements \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Ad
     {
         foreach ($keys as $key) {
             if (!\is_string($key) || !isset($this->expiries[$key])) {
-                \_PhpScoperc7096eb2567d\Symfony\Component\Cache\CacheItem::validateKey($key);
+                \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\CacheItem::validateKey($key);
             }
         }
         return $this->generateItems($keys, \microtime(\true), $this->createCacheItem);
@@ -134,7 +134,7 @@ class ArrayAdapter implements \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Ad
     public function deleteItem($key)
     {
         if (!\is_string($key) || !isset($this->expiries[$key])) {
-            \_PhpScoperc7096eb2567d\Symfony\Component\Cache\CacheItem::validateKey($key);
+            \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\CacheItem::validateKey($key);
         }
         unset($this->values[$key], $this->expiries[$key]);
         return \true;
@@ -156,9 +156,9 @@ class ArrayAdapter implements \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Ad
      *
      * @return bool
      */
-    public function save(\_PhpScoperc7096eb2567d\Psr\Cache\CacheItemInterface $item)
+    public function save(\_PhpScoper6ae4c4f86624\Psr\Cache\CacheItemInterface $item)
     {
-        if (!$item instanceof \_PhpScoperc7096eb2567d\Symfony\Component\Cache\CacheItem) {
+        if (!$item instanceof \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\CacheItem) {
             return \false;
         }
         $item = (array) $item;
@@ -201,7 +201,7 @@ class ArrayAdapter implements \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Ad
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScoperc7096eb2567d\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\_PhpScoper6ae4c4f86624\Psr\Cache\CacheItemInterface $item)
     {
         return $this->save($item);
     }
@@ -304,7 +304,7 @@ class ArrayAdapter implements \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Ad
             } catch (\Exception $e) {
                 $type = \get_debug_type($value);
                 $message = \sprintf('Failed to save key "{key}" of type %s: %s', $type, $e->getMessage());
-                \_PhpScoperc7096eb2567d\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+                \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
                 return;
             }
             // Keep value serialized if it contains any objects or any internal references
@@ -323,7 +323,7 @@ class ArrayAdapter implements \_PhpScoperc7096eb2567d\Symfony\Component\Cache\Ad
             try {
                 $value = \unserialize($value);
             } catch (\Exception $e) {
-                \_PhpScoperc7096eb2567d\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to unserialize key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
+                \_PhpScoper6ae4c4f86624\Symfony\Component\Cache\CacheItem::log($this->logger, 'Failed to unserialize key "{key}": ' . $e->getMessage(), ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);
                 $value = \false;
             }
             if (\false === $value) {

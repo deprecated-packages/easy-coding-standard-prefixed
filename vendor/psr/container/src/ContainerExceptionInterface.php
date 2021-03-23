@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperc7096eb2567d\Psr\Container;
+namespace _PhpScoper6ae4c4f86624\Psr\Container;
 
 /**
  * Base interface representing a generic exception in a container.
