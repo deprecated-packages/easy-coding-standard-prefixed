@@ -7,7 +7,7 @@ use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\Whitespace\IndentationTypeFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScoper870c18c2de74\Psr\Container\ContainerInterface;
+use _PhpScoper35ec99c463ee\Psr\Container\ContainerInterface;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\PackageBuilder\Configuration\StaticEolConfiguration;
@@ -43,7 +43,7 @@ final class IndentationTest extends \Symplify\PackageBuilder\Testing\AbstractKer
         $fixerWhitespaceConfig = $this->privatesAccessor->getPrivateProperty($indentationTypeFixer, 'whitespacesConfig');
         $this->assertEquals($whitespacesFixerConfig, $fixerWhitespaceConfig);
     }
-    private function getIndentationTypeFixerFromContainer(\_PhpScoper870c18c2de74\Psr\Container\ContainerInterface $container) : ?\PhpCsFixer\Fixer\FixerInterface
+    private function getIndentationTypeFixerFromContainer(\_PhpScoper35ec99c463ee\Psr\Container\ContainerInterface $container) : ?\PhpCsFixer\Fixer\FixerInterface
     {
         $fixerFileProcessor = $container->get(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
         $checkers = $fixerFileProcessor->getCheckers();

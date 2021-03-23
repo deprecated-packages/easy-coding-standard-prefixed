@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\ValueObject;
 
-use _PhpScoper870c18c2de74\Nette\Utils\Arrays;
-use _PhpScoper870c18c2de74\Nette\Utils\Strings;
+use _PhpScoper35ec99c463ee\Nette\Utils\Arrays;
+use _PhpScoper35ec99c463ee\Nette\Utils\Strings;
 use Symplify\ComposerJsonManipulator\Sorter\ComposerPackageSorter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
@@ -304,7 +304,7 @@ final class ComposerJson
         if ($this->name === null) {
             return null;
         }
-        return \_PhpScoper870c18c2de74\Nette\Utils\Strings::after($this->name, '/', -1);
+        return \_PhpScoper35ec99c463ee\Nette\Utils\Strings::after($this->name, '/', -1);
     }
     /**
      * @return string[]
@@ -334,7 +334,7 @@ final class ComposerJson
      */
     public function getJsonArray() : array
     {
-        $array = \array_filter([\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::NAME => $this->name, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::DESCRIPTION => $this->description, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::KEYWORDS => $this->keywords, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::HOMEPAGE => $this->homepage, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::LICENSE => $this->license, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTHORS => $this->authors, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::TYPE => $this->type, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REQUIRE => $this->require, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REQUIRE_DEV => $this->requireDev, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::CONFLICTS => $this->conflicts, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTOLOAD => $this->autoload, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTOLOAD_DEV => $this->autoloadDev, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REPOSITORIES => $this->repositories, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::EXTRA => $this->extra, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::BIN => $this->bin, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::SCRIPTS => $this->scripts, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::SCRIPTS_DESCRIPTIONS => $this->scriptsDescriptions, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::CONFIG => $this->config, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REPLACE => $this->replace]);
+        $array = \array_filter([\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::NAME => $this->name, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::DESCRIPTION => $this->description, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::KEYWORDS => $this->keywords, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::HOMEPAGE => $this->homepage, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::LICENSE => $this->license, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTHORS => $this->authors, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::TYPE => $this->type, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REQUIRE => $this->require, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REQUIRE_DEV => $this->requireDev, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTOLOAD => $this->autoload, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::AUTOLOAD_DEV => $this->autoloadDev, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REPOSITORIES => $this->repositories, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::EXTRA => $this->extra, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::BIN => $this->bin, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::SCRIPTS => $this->scripts, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::SCRIPTS_DESCRIPTIONS => $this->scriptsDescriptions, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::CONFIG => $this->config, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REPLACE => $this->replace, \Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::CONFLICT => $this->conflicts]);
         if ($this->minimumStability !== null) {
             $array[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::MINIMUM_STABILITY] = $this->minimumStability;
             $this->moveValueToBack(\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::MINIMUM_STABILITY);
@@ -572,7 +572,7 @@ final class ComposerJson
     public function getAutoloadDirectories() : array
     {
         $autoloadDirectories = \array_merge($this->getPsr4AndClassmapDirectories(), $this->getPsr4AndClassmapDevDirectories());
-        return \_PhpScoper870c18c2de74\Nette\Utils\Arrays::flatten($autoloadDirectories);
+        return \_PhpScoper35ec99c463ee\Nette\Utils\Arrays::flatten($autoloadDirectories);
     }
     /**
      * @return string[]
@@ -618,7 +618,7 @@ final class ComposerJson
      * 2. sort item by prescribed key order
      *
      * @see https://www.designcise.com/web/tutorial/how-to-sort-an-array-by-keys-based-on-order-in-a-secondary-array-in-php
-     * @param mixed[] $contentItems
+     * @param array<string, mixed> $contentItems
      * @param string[] $orderedVisibleItems
      * @return mixed[]
      */
@@ -627,6 +627,14 @@ final class ComposerJson
         \uksort($contentItems, function ($firstContentItem, $secondContentItem) use($orderedVisibleItems) : int {
             $firstItemPosition = \array_search($firstContentItem, $orderedVisibleItems, \true);
             $secondItemPosition = \array_search($secondContentItem, $orderedVisibleItems, \true);
+            if ($firstItemPosition === \false) {
+                // new item, put in the back
+                return -1;
+            }
+            if ($secondItemPosition === \false) {
+                // new item, put in the back
+                return -1;
+            }
             return $firstItemPosition <=> $secondItemPosition;
         });
         return $contentItems;

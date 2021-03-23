@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper870c18c2de74\Nette\Utils\Strings;
+use _PhpScoper35ec99c463ee\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\Contract\DocBlock\MalformWorkerInterface;
@@ -19,7 +19,7 @@ final class ParamNameReferenceMalformWorker implements \Symplify\CodingStandard\
      */
     public function work(string $docContent, \PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : string
     {
-        return \_PhpScoper870c18c2de74\Nette\Utils\Strings::replace($docContent, self::PARAM_NAME_REGEX, function ($match) : string {
+        return \_PhpScoper35ec99c463ee\Nette\Utils\Strings::replace($docContent, self::PARAM_NAME_REGEX, function ($match) : string {
             return $match['param'] . $match['paramName'];
         });
     }

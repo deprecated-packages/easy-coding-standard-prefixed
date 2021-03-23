@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
-use _PhpScoper870c18c2de74\Nette\Utils\Strings;
+use _PhpScoper35ec99c463ee\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
@@ -40,7 +40,7 @@ final class LineLengthResolver
     {
         /** @var Token $currentToken */
         $currentToken = $tokens[$position];
-        if (\_PhpScoper870c18c2de74\Nette\Utils\Strings::startsWith($currentToken->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
+        if (\_PhpScoper35ec99c463ee\Nette\Utils\Strings::startsWith($currentToken->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
             return \true;
         }
         return $currentToken->isGivenKind(\T_OPEN_TAG);
@@ -77,7 +77,7 @@ final class LineLengthResolver
         $end = $blockInfo->getEnd();
         /** @var Token $currentToken */
         $currentToken = $tokens[$end];
-        while (!\_PhpScoper870c18c2de74\Nette\Utils\Strings::startsWith($currentToken->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
+        while (!\_PhpScoper35ec99c463ee\Nette\Utils\Strings::startsWith($currentToken->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
             $length += \strlen($currentToken->getContent());
             ++$end;
             if (!isset($tokens[$end])) {

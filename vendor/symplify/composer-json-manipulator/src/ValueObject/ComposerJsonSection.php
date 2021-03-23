@@ -23,7 +23,7 @@ final class ComposerJsonSection
     /**
      * @var string
      */
-    public const CONFLICTS = 'conflicts';
+    public const CONFLICT = 'conflict';
     /**
      * @var string
      */
@@ -90,7 +90,15 @@ final class ComposerJsonSection
     public const AUTHORS = 'authors';
     /**
      * @var string
+     */
+    public const PROVIDES = 'provides';
+    /**
+     * @var string
      * @see https://getcomposer.org/doc/articles/scripts.md#custom-descriptions-
      */
     public const SCRIPTS_DESCRIPTIONS = 'scripts-descriptions';
+    /**
+     * @var string
+     */
+    public const SUGGESTS = 'suggests';
 }
