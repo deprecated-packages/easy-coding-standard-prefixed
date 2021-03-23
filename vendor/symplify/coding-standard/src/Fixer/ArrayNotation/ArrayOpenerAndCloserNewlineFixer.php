@@ -3,6 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\ArrayNotation;
 
+use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -10,7 +11,6 @@ use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
 use SplFileInfo;
 use Symplify\CodingStandard\Fixer\AbstractSymplifyFixer;
-use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\ArrayAnalyzer;
 use Symplify\CodingStandard\TokenRunner\Traverser\ArrayBlockInfoFinder;
 use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
@@ -51,7 +51,7 @@ final class ArrayOpenerAndCloserNewlineFixer extends \Symplify\CodingStandard\Fi
     }
     public function getPriority() : int
     {
-        return $this->getPriorityBefore(\Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer::class);
+        return $this->getPriorityBefore(\PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer::class);
     }
     public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
     {

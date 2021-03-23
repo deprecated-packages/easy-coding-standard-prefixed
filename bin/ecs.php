@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5e93f39f19fe;
+namespace _PhpScoper488221d5cc83;
 
 // decoupled in own "*.php" file, so ECS, Rector and PHPStan works out of the box here
 use PHP_CodeSniffer\Util\Tokens;
-use _PhpScoper5e93f39f19fe\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScoper488221d5cc83\Symfony\Component\Console\Input\ArgvInput;
 use Symplify\EasyCodingStandard\Console\EasyCodingStandardConsoleApplication;
 use Symplify\EasyCodingStandard\DependencyInjection\EasyCodingStandardContainerFactory;
 use Symplify\PackageBuilder\Console\ShellCode;
@@ -15,13 +15,13 @@ use Symplify\SetConfigResolver\Exception\SetNotFoundException;
 // performance boost
 \gc_disable();
 # 1. autoload
-$autoloadIncluder = new \_PhpScoper5e93f39f19fe\AutoloadIncluder();
+$autoloadIncluder = new \_PhpScoper488221d5cc83\AutoloadIncluder();
 $autoloadIncluder->includeCwdVendorAutoloadIfExists();
 $autoloadIncluder->autoloadProjectAutoloaderFile('/../../autoload.php');
 $autoloadIncluder->includeDependencyOrRepositoryVendorAutoloadIfExists();
 $autoloadIncluder->includePhpCodeSnifferAutoloadIfNotInPharAndInitliazeTokens();
 try {
-    $input = new \_PhpScoper5e93f39f19fe\Symfony\Component\Console\Input\ArgvInput();
+    $input = new \_PhpScoper488221d5cc83\Symfony\Component\Console\Input\ArgvInput();
     $ecsContainerFactory = new \Symplify\EasyCodingStandard\DependencyInjection\EasyCodingStandardContainerFactory();
     $container = $ecsContainerFactory->createFromFromInput($input);
 } catch (\Symplify\SetConfigResolver\Exception\SetNotFoundException $setNotFoundException) {
@@ -108,4 +108,4 @@ final class AutoloadIncluder
 /**
  * Inspired by https://github.com/rectorphp/rector/pull/2373/files#diff-0fc04a2bb7928cac4ae339d5a8bf67f3
  */
-\class_alias('_PhpScoper5e93f39f19fe\\AutoloadIncluder', 'AutoloadIncluder', \false);
+\class_alias('_PhpScoper488221d5cc83\\AutoloadIncluder', 'AutoloadIncluder', \false);

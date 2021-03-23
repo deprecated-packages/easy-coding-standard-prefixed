@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Error;
 
-use _PhpScoper5e93f39f19fe\Nette\Utils\Strings;
+use _PhpScoper488221d5cc83\Nette\Utils\Strings;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpCsFixer\Fixer\FixerInterface;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
@@ -112,8 +112,8 @@ final class ErrorAndDiffCollector
     private function ensureIsFixerOrChecker(string $sourceClass) : void
     {
         // remove dot suffix of "."
-        if (\_PhpScoper5e93f39f19fe\Nette\Utils\Strings::contains($sourceClass, '.')) {
-            $sourceClass = (string) \_PhpScoper5e93f39f19fe\Nette\Utils\Strings::before($sourceClass, '.', 1);
+        if (\_PhpScoper488221d5cc83\Nette\Utils\Strings::contains($sourceClass, '.')) {
+            $sourceClass = (string) \_PhpScoper488221d5cc83\Nette\Utils\Strings::before($sourceClass, '.', 1);
         }
         if (\is_a($sourceClass, \PhpCsFixer\Fixer\FixerInterface::class, \true)) {
             return;

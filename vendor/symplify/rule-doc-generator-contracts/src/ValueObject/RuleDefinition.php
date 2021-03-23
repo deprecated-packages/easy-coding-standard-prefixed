@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject;
 
-use _PhpScoper5e93f39f19fe\Nette\Utils\Strings;
+use _PhpScoper488221d5cc83\Nette\Utils\Strings;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\Exception\ShouldNotHappenException;
@@ -66,7 +66,7 @@ final class RuleDefinition
     }
     public function getRuleShortClass() : string
     {
-        return (string) \_PhpScoper5e93f39f19fe\Nette\Utils\Strings::after($this->ruleClass, '\\', -1);
+        return (string) \_PhpScoper488221d5cc83\Nette\Utils\Strings::after($this->ruleClass, '\\', -1);
     }
     /**
      * @return CodeSampleInterface[]

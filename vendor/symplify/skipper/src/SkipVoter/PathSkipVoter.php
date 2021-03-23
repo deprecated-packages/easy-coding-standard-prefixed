@@ -30,7 +30,7 @@ final class PathSkipVoter implements \Symplify\Skipper\Contract\SkipVoterInterfa
         return \true;
     }
     /**
-     * @param string $element
+     * @param string|object $element
      */
     public function shouldSkip($element, \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : bool
     {

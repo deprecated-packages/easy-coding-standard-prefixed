@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper5e93f39f19fe;
+namespace _PhpScoper488221d5cc83;
 
 use Symplify\EasyTesting\HttpKernel\EasyTestingKernel;
 use Symplify\SymplifyKernel\ValueObject\KernelBootAndApplicationRun;

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
-use _PhpScoper5e93f39f19fe\Nette\Utils\Strings;
+use _PhpScoper488221d5cc83\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
@@ -49,9 +49,10 @@ final class TokensNewliner
     {
         // from bottom top, to prevent skipping ids
         //  e.g when token is added in the middle, the end index does now point to earlier element!
+        $currentNewlineIndentWhitespace = $this->indentResolver->resolveCurrentNewlineIndentWhitespace($tokens, $blockInfo->getStart());
         $newlineIndentWhitespace = $this->indentResolver->resolveNewlineIndentWhitespace($tokens, $blockInfo->getStart());
         // 1. break before arguments closing
-        $this->lineLengthCloserTransformer->insertNewlineBeforeClosingIfNeeded($tokens, $blockInfo, $kind, $newlineIndentWhitespace, $this->indentResolver->resolveClosingBracketNewlineWhitespace($tokens, $blockInfo->getStart()));
+        $this->lineLengthCloserTransformer->insertNewlineBeforeClosingIfNeeded($tokens, $blockInfo, $kind, $currentNewlineIndentWhitespace, $this->indentResolver->resolveClosingBracketNewlineWhitespace($tokens, $blockInfo->getStart()));
         // again, from the bottom to the top
         for ($i = $blockInfo->getEnd() - 1; $i > $blockInfo->getStart(); --$i) {
             /** @var Token $currentToken */
@@ -83,7 +84,7 @@ final class TokensNewliner
             throw new \Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException($nextPosition);
         }
         $tokenContent = $tokens[$nextPosition]->getContent();
-        return \_PhpScoper5e93f39f19fe\Nette\Utils\Strings::contains($tokenContent, $this->whitespacesFixerConfig->getLineEnding());
+        return \_PhpScoper488221d5cc83\Nette\Utils\Strings::contains($tokenContent, $this->whitespacesFixerConfig->getLineEnding());
     }
     /**
      * @param Tokens|Token[] $tokens
