@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4aefa5ecccc4\Symfony\Component\HttpKernel\ControllerMetadata;
+namespace _PhpScoperc7096eb2567d\Symfony\Component\HttpKernel\ControllerMetadata;
 
-use _PhpScoper4aefa5ecccc4\Symfony\Component\HttpKernel\Attribute\ArgumentInterface;
+use _PhpScoperc7096eb2567d\Symfony\Component\HttpKernel\Attribute\ArgumentInterface;
 /**
  * Responsible for storing metadata of an argument.
  *
@@ -25,7 +25,7 @@ class ArgumentMetadata
     private $defaultValue;
     private $isNullable;
     private $attribute;
-    public function __construct(string $name, ?string $type, bool $isVariadic, bool $hasDefaultValue, $defaultValue, bool $isNullable = \false, ?\_PhpScoper4aefa5ecccc4\Symfony\Component\HttpKernel\Attribute\ArgumentInterface $attribute = null)
+    public function __construct(string $name, ?string $type, bool $isVariadic, bool $hasDefaultValue, $defaultValue, bool $isNullable = \false, ?\_PhpScoperc7096eb2567d\Symfony\Component\HttpKernel\Attribute\ArgumentInterface $attribute = null)
     {
         $this->name = $name;
         $this->type = $type;
@@ -101,7 +101,7 @@ class ArgumentMetadata
     /**
      * Returns the attribute (if any) that was set on the argument.
      */
-    public function getAttribute() : ?\_PhpScoper4aefa5ecccc4\Symfony\Component\HttpKernel\Attribute\ArgumentInterface
+    public function getAttribute() : ?\_PhpScoperc7096eb2567d\Symfony\Component\HttpKernel\Attribute\ArgumentInterface
     {
         return $this->attribute;
     }

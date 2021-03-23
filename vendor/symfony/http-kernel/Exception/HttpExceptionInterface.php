@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4aefa5ecccc4\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoperc7096eb2567d\Symfony\Component\HttpKernel\Exception;
 
 /**
  * Interface for HTTP error exceptions.

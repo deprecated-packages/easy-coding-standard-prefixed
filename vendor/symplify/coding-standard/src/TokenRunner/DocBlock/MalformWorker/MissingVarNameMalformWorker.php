@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper4aefa5ecccc4\Nette\Utils\Strings;
+use _PhpScoperc7096eb2567d\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\Contract\DocBlock\MalformWorkerInterface;
@@ -19,14 +19,14 @@ final class MissingVarNameMalformWorker implements \Symplify\CodingStandard\Toke
      */
     public function work(string $docContent, \PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : string
     {
-        if (!\_PhpScoper4aefa5ecccc4\Nette\Utils\Strings::match($docContent, self::VAR_WITHOUT_NAME_REGEX)) {
+        if (!\_PhpScoperc7096eb2567d\Nette\Utils\Strings::match($docContent, self::VAR_WITHOUT_NAME_REGEX)) {
             return $docContent;
         }
         $nextVariableToken = $this->getNextVariableToken($tokens, $position);
         if (!$nextVariableToken instanceof \PhpCsFixer\Tokenizer\Token) {
             return $docContent;
         }
-        return \_PhpScoper4aefa5ecccc4\Nette\Utils\Strings::replace($docContent, self::VAR_WITHOUT_NAME_REGEX, function (array $match) use($nextVariableToken) : string {
+        return \_PhpScoperc7096eb2567d\Nette\Utils\Strings::replace($docContent, self::VAR_WITHOUT_NAME_REGEX, function (array $match) use($nextVariableToken) : string {
             return $match['open'] . $match['type'] . ' ' . $nextVariableToken->getContent() . $match['close'];
         });
     }

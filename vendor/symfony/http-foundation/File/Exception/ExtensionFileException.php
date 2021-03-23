@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4aefa5ecccc4\Symfony\Component\HttpFoundation\File\Exception;
+namespace _PhpScoperc7096eb2567d\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an UPLOAD_ERR_EXTENSION error occurred with UploadedFile.
  *
  * @author Florent Mata <florentmata@gmail.com>
  */
-class ExtensionFileException extends \_PhpScoper4aefa5ecccc4\Symfony\Component\HttpFoundation\File\Exception\FileException
+class ExtensionFileException extends \_PhpScoperc7096eb2567d\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
 }
