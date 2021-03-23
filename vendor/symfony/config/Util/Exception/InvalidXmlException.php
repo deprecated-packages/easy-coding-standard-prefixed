@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper488221d5cc83\Symfony\Component\Config\Util\Exception;
+namespace _PhpScoper70d1796231ae\Symfony\Component\Config\Util\Exception;
 
 /**
  * Exception class for when XML parsing with an XSD schema file path or a callable validator produces errors unrelated
@@ -16,6 +16,6 @@ namespace _PhpScoper488221d5cc83\Symfony\Component\Config\Util\Exception;
  *
  * @author Ole Rößner <ole@roessner.it>
  */
-class InvalidXmlException extends \_PhpScoper488221d5cc83\Symfony\Component\Config\Util\Exception\XmlParsingException
+class InvalidXmlException extends \_PhpScoper70d1796231ae\Symfony\Component\Config\Util\Exception\XmlParsingException
 {
 }

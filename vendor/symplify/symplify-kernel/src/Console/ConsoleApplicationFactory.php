@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Console;
 
-use _PhpScoper488221d5cc83\Symfony\Component\Console\Command\Command;
+use _PhpScoper70d1796231ae\Symfony\Component\Console\Command\Command;
 use Symplify\ComposerJsonManipulator\ComposerJsonFactory;
 use Symplify\PackageBuilder\Composer\PackageVersionProvider;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
