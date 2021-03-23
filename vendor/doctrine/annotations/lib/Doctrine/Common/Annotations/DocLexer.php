@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper8ca6426d4e0c\Doctrine\Common\Annotations;
+namespace _PhpScoperf523baae4f87\Doctrine\Common\Annotations;
 
-use _PhpScoper8ca6426d4e0c\Doctrine\Common\Lexer\AbstractLexer;
+use _PhpScoperf523baae4f87\Doctrine\Common\Lexer\AbstractLexer;
 use function ctype_alpha;
 use function is_numeric;
 use function str_replace;
@@ -14,7 +14,7 @@ use function substr;
 /**
  * Simple lexer for docblock annotations.
  */
-final class DocLexer extends \_PhpScoper8ca6426d4e0c\Doctrine\Common\Lexer\AbstractLexer
+final class DocLexer extends \_PhpScoperf523baae4f87\Doctrine\Common\Lexer\AbstractLexer
 {
     public const T_NONE = 1;
     public const T_INTEGER = 2;

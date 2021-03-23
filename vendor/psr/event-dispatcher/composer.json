@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper8ca6426d4e0c\\Psr\\EventDispatcher\\": "src\/"
+            "_PhpScoperf523baae4f87\\Psr\\EventDispatcher\\": "src\/"
         }
     },
     "extra": {

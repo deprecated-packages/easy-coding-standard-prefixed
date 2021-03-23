@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8ca6426d4e0c\Symfony\Contracts\HttpClient\Exception;
+namespace _PhpScoperf523baae4f87\Symfony\Contracts\HttpClient\Exception;
 
-use _PhpScoper8ca6426d4e0c\Symfony\Contracts\HttpClient\ResponseInterface;
+use _PhpScoperf523baae4f87\Symfony\Contracts\HttpClient\ResponseInterface;
 /**
  * Base interface for HTTP-related exceptions.
  *
  * @author Anton Chernikov <anton_ch1989@mail.ru>
  */
-interface HttpExceptionInterface extends \_PhpScoper8ca6426d4e0c\Symfony\Contracts\HttpClient\Exception\ExceptionInterface
+interface HttpExceptionInterface extends \_PhpScoperf523baae4f87\Symfony\Contracts\HttpClient\Exception\ExceptionInterface
 {
-    public function getResponse() : \_PhpScoper8ca6426d4e0c\Symfony\Contracts\HttpClient\ResponseInterface;
+    public function getResponse() : \_PhpScoperf523baae4f87\Symfony\Contracts\HttpClient\ResponseInterface;
 }
