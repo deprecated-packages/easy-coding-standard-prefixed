@@ -5,13 +5,13 @@
     "require": {
         "php": ">=7.3"
     },
+    "conflict": {
+        "symplify/easy-coding-standard": "*"
+    },
     "bin": [
         "bin/ecs"
     ],
     "replace": {
         "symplify/easy-coding-standard": "self.version"
-    },
-    "conflict": {
-        "symplify/easy-coding-standard": "*"
     }
 }

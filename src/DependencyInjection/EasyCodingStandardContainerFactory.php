@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection;
 
-use _PhpScoper86aa49a51982\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper86aa49a51982\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper28625551a513\Psr\Container\ContainerInterface;
+use _PhpScoper28625551a513\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Bootstrap\ECSConfigsResolver;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
@@ -12,13 +12,13 @@ use Symplify\PackageBuilder\Console\Input\StaticInputDetector;
 use Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs;
 final class EasyCodingStandardContainerFactory
 {
-    public function createFromFromInput(\_PhpScoper86aa49a51982\Symfony\Component\Console\Input\InputInterface $input) : \_PhpScoper86aa49a51982\Symfony\Component\DependencyInjection\ContainerInterface
+    public function createFromFromInput(\_PhpScoper28625551a513\Symfony\Component\Console\Input\InputInterface $input) : \_PhpScoper28625551a513\Psr\Container\ContainerInterface
     {
         $ecsConfigsResolver = new \Symplify\EasyCodingStandard\Bootstrap\ECSConfigsResolver();
         $bootstrapConfigs = $ecsConfigsResolver->resolveFromInput($input);
         return $this->createFromFromBootstrapConfigs($bootstrapConfigs);
     }
-    public function createFromFromBootstrapConfigs(\Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs $bootstrapConfigs) : \_PhpScoper86aa49a51982\Symfony\Component\DependencyInjection\ContainerInterface
+    public function createFromFromBootstrapConfigs(\Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs $bootstrapConfigs) : \_PhpScoper28625551a513\Psr\Container\ContainerInterface
     {
         $environment = 'prod' . \random_int(1, 100000);
         $easyCodingStandardKernel = new \Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel($environment, \Symplify\PackageBuilder\Console\Input\StaticInputDetector::isDebug());

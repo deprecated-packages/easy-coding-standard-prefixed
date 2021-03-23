@@ -11,23 +11,23 @@
  */
 namespace PhpCsFixer\Tests;
 
-use _PhpScoper86aa49a51982\LegacyPHPUnit\TestCase as BaseTestCase;
-use _PhpScoper86aa49a51982\PHPUnitGoodPractices\Polyfill\PolyfillTrait;
-use _PhpScoper86aa49a51982\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
-use _PhpScoper86aa49a51982\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
-use _PhpScoper86aa49a51982\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
-use _PhpScoper86aa49a51982\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
-use _PhpScoper86aa49a51982\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
-use _PhpScoper86aa49a51982\Prophecy\PhpUnit\ProphecyTrait;
+use _PhpScoper28625551a513\LegacyPHPUnit\TestCase as BaseTestCase;
+use _PhpScoper28625551a513\PHPUnitGoodPractices\Polyfill\PolyfillTrait;
+use _PhpScoper28625551a513\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
+use _PhpScoper28625551a513\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
+use _PhpScoper28625551a513\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
+use _PhpScoper28625551a513\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
+use _PhpScoper28625551a513\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
+use _PhpScoper28625551a513\Prophecy\PhpUnit\ProphecyTrait;
 // we check single, example DEV dependency - if it's there, we have the dev dependencies, if not, we are using PHP-CS-Fixer as library and trying to use internal TestCase...
-if (\trait_exists(\_PhpScoper86aa49a51982\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait::class)) {
-    if (\trait_exists(\_PhpScoper86aa49a51982\Prophecy\PhpUnit\ProphecyTrait::class)) {
+if (\trait_exists(\_PhpScoper28625551a513\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait::class)) {
+    if (\trait_exists(\_PhpScoper28625551a513\Prophecy\PhpUnit\ProphecyTrait::class)) {
         /**
          * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
          *
          * @internal
          */
-        abstract class InterimTestCase extends \_PhpScoper86aa49a51982\LegacyPHPUnit\TestCase
+        abstract class InterimTestCase extends \_PhpScoper28625551a513\LegacyPHPUnit\TestCase
         {
             use ProphecyTrait;
         }
@@ -37,7 +37,7 @@ if (\trait_exists(\_PhpScoper86aa49a51982\PHPUnitGoodPractices\Traits\Prophesize
          *
          * @internal
          */
-        abstract class InterimTestCase extends \_PhpScoper86aa49a51982\LegacyPHPUnit\TestCase
+        abstract class InterimTestCase extends \_PhpScoper28625551a513\LegacyPHPUnit\TestCase
         {
         }
     }
@@ -65,7 +65,7 @@ if (\trait_exists(\_PhpScoper86aa49a51982\PHPUnitGoodPractices\Traits\Prophesize
      *
      * @todo 3.0 To be removed when we clean up composer prod-autoloader from dev-packages.
      */
-    abstract class TestCase extends \_PhpScoper86aa49a51982\LegacyPHPUnit\TestCase
+    abstract class TestCase extends \_PhpScoper28625551a513\LegacyPHPUnit\TestCase
     {
     }
 }
