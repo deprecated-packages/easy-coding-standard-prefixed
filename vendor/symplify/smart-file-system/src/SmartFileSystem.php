@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem;
 
-use _PhpScoper08686b2277af\Nette\Utils\Strings;
-use _PhpScoper08686b2277af\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScoper08686b2277af\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper8ca6426d4e0c\Nette\Utils\Strings;
+use _PhpScoper8ca6426d4e0c\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper8ca6426d4e0c\Symfony\Component\Filesystem\Filesystem;
 /**
  * @see \Symplify\SmartFileSystem\Tests\SmartFileSystem\SmartFileSystemTest
  */
-final class SmartFileSystem extends \_PhpScoper08686b2277af\Symfony\Component\Filesystem\Filesystem
+final class SmartFileSystem extends \_PhpScoper8ca6426d4e0c\Symfony\Component\Filesystem\Filesystem
 {
     /**
      * @var string
@@ -24,7 +24,7 @@ final class SmartFileSystem extends \_PhpScoper08686b2277af\Symfony\Component\Fi
         $source = @\file_get_contents($filename);
         if (!$source) {
             $message = \sprintf('Failed to read "%s" file: "%s"', $filename, $this->getLastError());
-            throw new \_PhpScoper08686b2277af\Symfony\Component\Filesystem\Exception\IOException($message, 0, null, $filename);
+            throw new \_PhpScoper8ca6426d4e0c\Symfony\Component\Filesystem\Exception\IOException($message, 0, null, $filename);
         }
         return $source;
     }
@@ -63,6 +63,6 @@ final class SmartFileSystem extends \_PhpScoper08686b2277af\Symfony\Component\Fi
     {
         $message = \error_get_last()['message'] ?? '';
         $message = \ini_get('html_errors') ? $this->htmlToText($message) : $message;
-        return \_PhpScoper08686b2277af\Nette\Utils\Strings::replace($message, self::BEFORE_COLLON_REGEX, '');
+        return \_PhpScoper8ca6426d4e0c\Nette\Utils\Strings::replace($message, self::BEFORE_COLLON_REGEX, '');
     }
 }
