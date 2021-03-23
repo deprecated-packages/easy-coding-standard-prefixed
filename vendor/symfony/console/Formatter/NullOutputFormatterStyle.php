@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper35ec99c463ee\Symfony\Component\Console\Formatter;
+namespace _PhpScoper86aa49a51982\Symfony\Component\Console\Formatter;
 
 /**
  * @author Tien Xuan Vo <tien.xuan.vo@gmail.com>
  */
-final class NullOutputFormatterStyle implements \_PhpScoper35ec99c463ee\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+final class NullOutputFormatterStyle implements \_PhpScoper86aa49a51982\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
 {
     /**
      * {@inheritdoc}
