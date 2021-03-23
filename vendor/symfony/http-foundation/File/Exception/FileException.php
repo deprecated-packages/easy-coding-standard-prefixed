@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82aa0193482e\Symfony\Component\HttpFoundation\File\Exception;
+namespace _PhpScoper4aefa5ecccc4\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an error occurred in the component File.

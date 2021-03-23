@@ -23,7 +23,7 @@ final class ComposerJsonSection
     /**
      * @var string
      */
-    public const CONFLICT = 'conflict';
+    public const CONFLICTS = 'conflicts';
     /**
      * @var string
      */
