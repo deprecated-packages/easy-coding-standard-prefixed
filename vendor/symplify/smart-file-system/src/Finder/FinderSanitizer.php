@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Finder;
 
-use _PhpScoper356bfb655d08\Nette\Utils\Finder as NetteFinder;
+use _PhpScoper08686b2277af\Nette\Utils\Finder as NetteFinder;
 use SplFileInfo;
-use _PhpScoper356bfb655d08\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoper356bfb655d08\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
+use _PhpScoper08686b2277af\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper08686b2277af\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
 use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\SmartFileSystem\Tests\Finder\FinderSanitizer\FinderSanitizerTest
