@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperf523baae4f87\Nette;
+namespace _PhpScoper5e93f39f19fe\Nette;
 
 /**
  * The exception that is thrown when the value of an argument is
@@ -37,7 +37,7 @@ class NotSupportedException extends \LogicException
 /**
  * The exception that is thrown when a requested method or operation is deprecated.
  */
-class DeprecatedException extends \_PhpScoperf523baae4f87\Nette\NotSupportedException
+class DeprecatedException extends \_PhpScoper5e93f39f19fe\Nette\NotSupportedException
 {
 }
 /**
@@ -55,13 +55,13 @@ class IOException extends \RuntimeException
 /**
  * The exception that is thrown when accessing a file that does not exist on disk.
  */
-class FileNotFoundException extends \_PhpScoperf523baae4f87\Nette\IOException
+class FileNotFoundException extends \_PhpScoper5e93f39f19fe\Nette\IOException
 {
 }
 /**
  * The exception that is thrown when part of a file or directory cannot be found.
  */
-class DirectoryNotFoundException extends \_PhpScoperf523baae4f87\Nette\IOException
+class DirectoryNotFoundException extends \_PhpScoper5e93f39f19fe\Nette\IOException
 {
 }
 /**

@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf523baae4f87\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScoper5e93f39f19fe\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoperf523baae4f87\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperf523baae4f87\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoperf523baae4f87\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use _PhpScoperf523baae4f87\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoper5e93f39f19fe\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper5e93f39f19fe\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScoper5e93f39f19fe\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoper5e93f39f19fe\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * Provides timing information via the stopwatch.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class TraceableValueResolver implements \_PhpScoperf523baae4f87\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class TraceableValueResolver implements \_PhpScoper5e93f39f19fe\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
 {
     private $inner;
     private $stopwatch;
-    public function __construct(\_PhpScoperf523baae4f87\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface $inner, \_PhpScoperf523baae4f87\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
+    public function __construct(\_PhpScoper5e93f39f19fe\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface $inner, \_PhpScoper5e93f39f19fe\Symfony\Component\Stopwatch\Stopwatch $stopwatch)
     {
         $this->inner = $inner;
         $this->stopwatch = $stopwatch;
@@ -31,7 +31,7 @@ final class TraceableValueResolver implements \_PhpScoperf523baae4f87\Symfony\Co
     /**
      * {@inheritdoc}
      */
-    public function supports(\_PhpScoperf523baae4f87\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperf523baae4f87\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
+    public function supports(\_PhpScoper5e93f39f19fe\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper5e93f39f19fe\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
     {
         $method = \get_class($this->inner) . '::' . __FUNCTION__;
         $this->stopwatch->start($method, 'controller.argument_value_resolver');
@@ -42,7 +42,7 @@ final class TraceableValueResolver implements \_PhpScoperf523baae4f87\Symfony\Co
     /**
      * {@inheritdoc}
      */
-    public function resolve(\_PhpScoperf523baae4f87\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperf523baae4f87\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
+    public function resolve(\_PhpScoper5e93f39f19fe\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper5e93f39f19fe\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
     {
         $method = \get_class($this->inner) . '::' . __FUNCTION__;
         $this->stopwatch->start($method, 'controller.argument_value_resolver');

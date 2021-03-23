@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf523baae4f87\Psr\EventDispatcher;
+namespace _PhpScoper5e93f39f19fe\Psr\EventDispatcher;
 
 /**
  * An Event whose processing may be interrupted when the event has been handled.
