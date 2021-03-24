@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere66f4b626446\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScopera609aff833be\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScopere66f4b626446\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopere66f4b626446\Symfony\Component\HttpFoundation\Cookie;
-use _PhpScopere66f4b626446\Symfony\Component\HttpFoundation\Session\Session;
-use _PhpScopere66f4b626446\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScopere66f4b626446\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScopere66f4b626446\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScopere66f4b626446\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScopera609aff833be\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScopera609aff833be\Symfony\Component\HttpFoundation\Cookie;
+use _PhpScopera609aff833be\Symfony\Component\HttpFoundation\Session\Session;
+use _PhpScopera609aff833be\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScopera609aff833be\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScopera609aff833be\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScopera609aff833be\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * TestSessionListener.
  *
@@ -27,7 +27,7 @@ use _PhpScopere66f4b626446\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @internal
  */
-abstract class AbstractTestSessionListener implements \_PhpScopere66f4b626446\Symfony\Component\EventDispatcher\EventSubscriberInterface
+abstract class AbstractTestSessionListener implements \_PhpScopera609aff833be\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private $sessionId;
     private $sessionOptions;
@@ -35,7 +35,7 @@ abstract class AbstractTestSessionListener implements \_PhpScopere66f4b626446\Sy
     {
         $this->sessionOptions = $sessionOptions;
     }
-    public function onKernelRequest(\_PhpScopere66f4b626446\Symfony\Component\HttpKernel\Event\RequestEvent $event)
+    public function onKernelRequest(\_PhpScopera609aff833be\Symfony\Component\HttpKernel\Event\RequestEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -54,7 +54,7 @@ abstract class AbstractTestSessionListener implements \_PhpScopere66f4b626446\Sy
      * Checks if session was initialized and saves if current request is master
      * Runs on 'kernel.response' in test environment.
      */
-    public function onKernelResponse(\_PhpScopere66f4b626446\Symfony\Component\HttpKernel\Event\ResponseEvent $event)
+    public function onKernelResponse(\_PhpScopera609aff833be\Symfony\Component\HttpKernel\Event\ResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -67,7 +67,7 @@ abstract class AbstractTestSessionListener implements \_PhpScopere66f4b626446\Sy
         if ($wasStarted = $session->isStarted()) {
             $session->save();
         }
-        if ($session instanceof \_PhpScopere66f4b626446\Symfony\Component\HttpFoundation\Session\Session ? !$session->isEmpty() || null !== $this->sessionId && $session->getId() !== $this->sessionId : $wasStarted) {
+        if ($session instanceof \_PhpScopera609aff833be\Symfony\Component\HttpFoundation\Session\Session ? !$session->isEmpty() || null !== $this->sessionId && $session->getId() !== $this->sessionId : $wasStarted) {
             $params = \session_get_cookie_params() + ['samesite' => null];
             foreach ($this->sessionOptions as $k => $v) {
                 if (0 === \strpos($k, 'cookie_')) {
@@ -79,13 +79,13 @@ abstract class AbstractTestSessionListener implements \_PhpScopere66f4b626446\Sy
                     return;
                 }
             }
-            $event->getResponse()->headers->setCookie(new \_PhpScopere66f4b626446\Symfony\Component\HttpFoundation\Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : \time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly'], \false, $params['samesite'] ?: null));
+            $event->getResponse()->headers->setCookie(new \_PhpScopera609aff833be\Symfony\Component\HttpFoundation\Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : \time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly'], \false, $params['samesite'] ?: null));
             $this->sessionId = $session->getId();
         }
     }
     public static function getSubscribedEvents() : array
     {
-        return [\_PhpScopere66f4b626446\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 192], \_PhpScopere66f4b626446\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -128]];
+        return [\_PhpScopera609aff833be\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 192], \_PhpScopera609aff833be\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -128]];
     }
     /**
      * Gets the session object.

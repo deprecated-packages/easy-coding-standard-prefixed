@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Configuration;
 
-use _PhpScopere66f4b626446\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopera609aff833be\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter;
 use Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter;
 use Symplify\EasyCodingStandard\Exception\Configuration\SourceNotFoundException;
@@ -50,7 +50,7 @@ final class Configuration
     /**
      * Needs to run in the start of the life cycle, since the rest of workflow uses it.
      */
-    public function resolveFromInput(\_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputInterface $input) : void
+    public function resolveFromInput(\_PhpScopera609aff833be\Symfony\Component\Console\Input\InputInterface $input) : void
     {
         /** @var string[] $paths */
         $paths = (array) $input->getArgument(\Symplify\EasyCodingStandard\ValueObject\Option::PATHS);
@@ -121,7 +121,7 @@ final class Configuration
     {
         return $this->doesMatchGitDiff;
     }
-    private function canShowProgressBar(\_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputInterface $input) : bool
+    private function canShowProgressBar(\_PhpScopera609aff833be\Symfony\Component\Console\Input\InputInterface $input) : bool
     {
         $notJsonOutput = $input->getOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT) !== \Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter::NAME;
         if (!$notJsonOutput) {
@@ -152,7 +152,7 @@ final class Configuration
         }
         return $sources;
     }
-    private function setOutputFormat(\_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputInterface $input) : void
+    private function setOutputFormat(\_PhpScopera609aff833be\Symfony\Component\Console\Input\InputInterface $input) : void
     {
         $outputFormat = (string) $input->getOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT);
         // Backwards compatibility with older version

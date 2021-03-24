@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere66f4b626446\Symfony\Component\ErrorHandler\ErrorRenderer;
+namespace _PhpScopera609aff833be\Symfony\Component\ErrorHandler\ErrorRenderer;
 
-use _PhpScopere66f4b626446\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use _PhpScopere66f4b626446\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScopere66f4b626446\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScopera609aff833be\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use _PhpScopera609aff833be\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScopera609aff833be\Symfony\Component\VarDumper\Dumper\CliDumper;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\_PhpScopere66f4b626446\Symfony\Component\VarDumper\Dumper\CliDumper::class);
+\class_exists(\_PhpScopera609aff833be\Symfony\Component\VarDumper\Dumper\CliDumper::class);
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CliErrorRenderer implements \_PhpScopere66f4b626446\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
+class CliErrorRenderer implements \_PhpScopera609aff833be\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function render(\Throwable $exception) : \_PhpScopere66f4b626446\Symfony\Component\ErrorHandler\Exception\FlattenException
+    public function render(\Throwable $exception) : \_PhpScopera609aff833be\Symfony\Component\ErrorHandler\Exception\FlattenException
     {
-        $cloner = new \_PhpScopere66f4b626446\Symfony\Component\VarDumper\Cloner\VarCloner();
-        $dumper = new class extends \_PhpScopere66f4b626446\Symfony\Component\VarDumper\Dumper\CliDumper
+        $cloner = new \_PhpScopera609aff833be\Symfony\Component\VarDumper\Cloner\VarCloner();
+        $dumper = new class extends \_PhpScopera609aff833be\Symfony\Component\VarDumper\Dumper\CliDumper
         {
             protected function supportsColors() : bool
             {
@@ -39,6 +39,6 @@ class CliErrorRenderer implements \_PhpScopere66f4b626446\Symfony\Component\Erro
                 }
             }
         };
-        return \_PhpScopere66f4b626446\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)->setAsString($dumper->dump($cloner->cloneVar($exception), \true));
+        return \_PhpScopera609aff833be\Symfony\Component\ErrorHandler\Exception\FlattenException::createFromThrowable($exception)->setAsString($dumper->dump($cloner->cloneVar($exception), \true));
     }
 }

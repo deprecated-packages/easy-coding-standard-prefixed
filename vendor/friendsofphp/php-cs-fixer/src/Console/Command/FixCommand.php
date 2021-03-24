@@ -21,23 +21,23 @@ use PhpCsFixer\Error\ErrorsManager;
 use PhpCsFixer\Report\ReportSummary;
 use PhpCsFixer\Runner\Runner;
 use PhpCsFixer\ToolInfoInterface;
-use _PhpScopere66f4b626446\Symfony\Component\Console\Command\Command;
-use _PhpScopere66f4b626446\Symfony\Component\Console\Input\InputArgument;
-use _PhpScopere66f4b626446\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption;
-use _PhpScopere66f4b626446\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScopere66f4b626446\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopere66f4b626446\Symfony\Component\Console\Terminal;
-use _PhpScopere66f4b626446\Symfony\Component\EventDispatcher\EventDispatcher;
-use _PhpScopere66f4b626446\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScopere66f4b626446\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScopera609aff833be\Symfony\Component\Console\Command\Command;
+use _PhpScopera609aff833be\Symfony\Component\Console\Input\InputArgument;
+use _PhpScopera609aff833be\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption;
+use _PhpScopera609aff833be\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScopera609aff833be\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopera609aff833be\Symfony\Component\Console\Terminal;
+use _PhpScopera609aff833be\Symfony\Component\EventDispatcher\EventDispatcher;
+use _PhpScopera609aff833be\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScopera609aff833be\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @internal
  */
-final class FixCommand extends \_PhpScopere66f4b626446\Symfony\Component\Console\Command\Command
+final class FixCommand extends \_PhpScopera609aff833be\Symfony\Component\Console\Command\Command
 {
     protected static $defaultName = 'fix';
     /**
@@ -65,8 +65,8 @@ final class FixCommand extends \_PhpScopere66f4b626446\Symfony\Component\Console
         parent::__construct();
         $this->defaultConfig = new \PhpCsFixer\Config();
         $this->errorsManager = new \PhpCsFixer\Error\ErrorsManager();
-        $this->eventDispatcher = new \_PhpScopere66f4b626446\Symfony\Component\EventDispatcher\EventDispatcher();
-        $this->stopwatch = new \_PhpScopere66f4b626446\Symfony\Component\Stopwatch\Stopwatch();
+        $this->eventDispatcher = new \_PhpScopera609aff833be\Symfony\Component\EventDispatcher\EventDispatcher();
+        $this->stopwatch = new \_PhpScopera609aff833be\Symfony\Component\Stopwatch\Stopwatch();
         $this->toolInfo = $toolInfo;
     }
     /**
@@ -83,21 +83,21 @@ final class FixCommand extends \_PhpScopere66f4b626446\Symfony\Component\Console
      */
     protected function configure()
     {
-        $this->setDefinition([new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputArgument('path', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'The path.'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('path-mode', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Specify path mode (can be override or intersection).', 'override'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('allow-risky', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Are risky fixers allowed (can be yes or no).'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('config', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The path to a .php_cs file.'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('dry-run', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Only shows which files would have been modified.'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('rules', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The rules.'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('using-cache', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Does cache should be used (can be yes or no).'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('cache-file', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The path to the cache file.'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('diff', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Also produce diff for each file.'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('diff-format', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Specify diff format.'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('format', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'To output results in other formats.'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('stop-on-violation', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Stop execution on first violation.'), new \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption('show-progress', '', \_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Type of progress indicator (none, run-in, estimating, estimating-max or dots).')])->setDescription('Fixes a directory or a file.');
+        $this->setDefinition([new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputArgument('path', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputArgument::IS_ARRAY, 'The path.'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('path-mode', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Specify path mode (can be override or intersection).', 'override'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('allow-risky', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Are risky fixers allowed (can be yes or no).'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('config', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The path to a .php_cs file.'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('dry-run', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Only shows which files would have been modified.'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('rules', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The rules.'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('using-cache', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Does cache should be used (can be yes or no).'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('cache-file', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The path to the cache file.'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('diff', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Also produce diff for each file.'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('diff-format', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Specify diff format.'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('format', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'To output results in other formats.'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('stop-on-violation', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Stop execution on first violation.'), new \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption('show-progress', '', \_PhpScopera609aff833be\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Type of progress indicator (none, run-in, estimating, estimating-max or dots).')])->setDescription('Fixes a directory or a file.');
     }
     /**
      * {@inheritdoc}
      */
-    protected function execute(\_PhpScopere66f4b626446\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopere66f4b626446\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function execute(\_PhpScopera609aff833be\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopera609aff833be\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $verbosity = $output->getVerbosity();
         $passedConfig = $input->getOption('config');
         $passedRules = $input->getOption('rules');
         $resolver = new \PhpCsFixer\Console\ConfigurationResolver($this->defaultConfig, ['allow-risky' => $input->getOption('allow-risky'), 'config' => $passedConfig, 'dry-run' => $input->getOption('dry-run'), 'rules' => $passedRules, 'path' => $input->getArgument('path'), 'path-mode' => $input->getOption('path-mode'), 'using-cache' => $input->getOption('using-cache'), 'cache-file' => $input->getOption('cache-file'), 'format' => $input->getOption('format'), 'diff' => $input->getOption('diff'), 'diff-format' => $input->getOption('diff-format'), 'stop-on-violation' => $input->getOption('stop-on-violation'), 'verbosity' => $verbosity, 'show-progress' => $input->getOption('show-progress')], \getcwd(), $this->toolInfo);
         $reporter = $resolver->getReporter();
-        $stdErr = $output instanceof \_PhpScopere66f4b626446\Symfony\Component\Console\Output\ConsoleOutputInterface ? $output->getErrorOutput() : ('txt' === $reporter->getFormat() ? $output : null);
+        $stdErr = $output instanceof \_PhpScopera609aff833be\Symfony\Component\Console\Output\ConsoleOutputInterface ? $output->getErrorOutput() : ('txt' === $reporter->getFormat() ? $output : null);
         if (null !== $stdErr) {
-            if (\_PhpScopere66f4b626446\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $verbosity) {
+            if (\_PhpScopera609aff833be\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $verbosity) {
                 $stdErr->writeln($this->getApplication()->getLongVersion());
                 $stdErr->writeln(\sprintf('Runtime: <info>PHP %s</info>', \PHP_VERSION));
             }
@@ -128,7 +128,7 @@ final class FixCommand extends \_PhpScopere66f4b626446\Symfony\Component\Console
             $progressOutput = new \PhpCsFixer\Console\Output\ProcessOutput($stdErr, $this->eventDispatcher, null, null);
         } else {
             $finder = new \ArrayIterator(\iterator_to_array($finder));
-            $progressOutput = new \PhpCsFixer\Console\Output\ProcessOutput($stdErr, $this->eventDispatcher, 'estimating' !== $progressType ? (new \_PhpScopere66f4b626446\Symfony\Component\Console\Terminal())->getWidth() : null, \count($finder));
+            $progressOutput = new \PhpCsFixer\Console\Output\ProcessOutput($stdErr, $this->eventDispatcher, 'estimating' !== $progressType ? (new \_PhpScopera609aff833be\Symfony\Component\Console\Terminal())->getWidth() : null, \count($finder));
         }
         $runner = new \PhpCsFixer\Runner\Runner($finder, $resolver->getFixers(), $resolver->getDiffer(), 'none' !== $progressType ? $this->eventDispatcher : null, $this->errorsManager, $resolver->getLinter(), $resolver->isDryRun(), $resolver->getCacheManager(), $resolver->getDirectory(), $resolver->shouldStopOnViolation());
         $this->stopwatch->start('fixFiles');
@@ -136,8 +136,8 @@ final class FixCommand extends \_PhpScopere66f4b626446\Symfony\Component\Console
         $this->stopwatch->stop('fixFiles');
         $progressOutput->printLegend();
         $fixEvent = $this->stopwatch->getEvent('fixFiles');
-        $reportSummary = new \PhpCsFixer\Report\ReportSummary($changed, $fixEvent->getDuration(), $fixEvent->getMemory(), \_PhpScopere66f4b626446\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $verbosity, $resolver->isDryRun(), $output->isDecorated());
-        $output->isDecorated() ? $output->write($reporter->generate($reportSummary)) : $output->write($reporter->generate($reportSummary), \false, \_PhpScopere66f4b626446\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW);
+        $reportSummary = new \PhpCsFixer\Report\ReportSummary($changed, $fixEvent->getDuration(), $fixEvent->getMemory(), \_PhpScopera609aff833be\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE <= $verbosity, $resolver->isDryRun(), $output->isDecorated());
+        $output->isDecorated() ? $output->write($reporter->generate($reportSummary)) : $output->write($reporter->generate($reportSummary), \false, \_PhpScopera609aff833be\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW);
         $invalidErrors = $this->errorsManager->getInvalidErrors();
         $exceptionErrors = $this->errorsManager->getExceptionErrors();
         $lintErrors = $this->errorsManager->getLintErrors();

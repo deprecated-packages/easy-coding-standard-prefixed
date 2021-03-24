@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere66f4b626446\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopera609aff833be\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopere66f4b626446\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopere66f4b626446\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopere66f4b626446\Symfony\Component\DependencyInjection\TypedReference;
-use _PhpScopere66f4b626446\Symfony\Contracts\Service\Attribute\Required;
+use _PhpScopera609aff833be\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopera609aff833be\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera609aff833be\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScopera609aff833be\Symfony\Contracts\Service\Attribute\Required;
 /**
  * Looks for definitions with autowiring enabled and registers their corresponding "@required" properties.
  *
  * @author Sebastien Morel (Plopix) <morel.seb@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AutowireRequiredPropertiesPass extends \_PhpScopere66f4b626446\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class AutowireRequiredPropertiesPass extends \_PhpScopera609aff833be\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}
@@ -31,7 +31,7 @@ class AutowireRequiredPropertiesPass extends \_PhpScopere66f4b626446\Symfony\Com
             return $value;
         }
         $value = parent::processValue($value, $isRoot);
-        if (!$value instanceof \_PhpScopere66f4b626446\Symfony\Component\DependencyInjection\Definition || !$value->isAutowired() || $value->isAbstract() || !$value->getClass()) {
+        if (!$value instanceof \_PhpScopera609aff833be\Symfony\Component\DependencyInjection\Definition || !$value->isAutowired() || $value->isAbstract() || !$value->getClass()) {
             return $value;
         }
         if (!($reflectionClass = $this->container->getReflectionClass($value->getClass(), \false))) {
@@ -42,14 +42,14 @@ class AutowireRequiredPropertiesPass extends \_PhpScopere66f4b626446\Symfony\Com
             if (!($type = $reflectionProperty->getType()) instanceof \ReflectionNamedType) {
                 continue;
             }
-            if ((\PHP_VERSION_ID < 80000 || !$reflectionProperty->getAttributes(\_PhpScopere66f4b626446\Symfony\Contracts\Service\Attribute\Required::class)) && (\false === ($doc = $reflectionProperty->getDocComment()) || \false === \stripos($doc, '@required') || !\preg_match('#(?:^/\\*\\*|\\n\\s*+\\*)\\s*+@required(?:\\s|\\*/$)#i', $doc))) {
+            if ((\PHP_VERSION_ID < 80000 || !$reflectionProperty->getAttributes(\_PhpScopera609aff833be\Symfony\Contracts\Service\Attribute\Required::class)) && (\false === ($doc = $reflectionProperty->getDocComment()) || \false === \stripos($doc, '@required') || !\preg_match('#(?:^/\\*\\*|\\n\\s*+\\*)\\s*+@required(?:\\s|\\*/$)#i', $doc))) {
                 continue;
             }
             if (\array_key_exists($name = $reflectionProperty->getName(), $properties)) {
                 continue;
             }
             $type = $type->getName();
-            $value->setProperty($name, new \_PhpScopere66f4b626446\Symfony\Component\DependencyInjection\TypedReference($type, $type, \_PhpScopere66f4b626446\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $name));
+            $value->setProperty($name, new \_PhpScopera609aff833be\Symfony\Component\DependencyInjection\TypedReference($type, $type, \_PhpScopera609aff833be\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $name));
         }
         return $value;
     }

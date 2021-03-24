@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScopere66f4b626446;
+namespace _PhpScopera609aff833be;
 
 /**
  * PHP_CodeSniffer detects violations of a defined coding standard.
