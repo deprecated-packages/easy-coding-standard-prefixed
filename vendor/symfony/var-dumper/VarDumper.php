@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper45e499ef5890\Symfony\Component\VarDumper;
+namespace _PhpScoperc98ae2003489\Symfony\Component\VarDumper;
 
-use _PhpScoper45e499ef5890\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper45e499ef5890\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper45e499ef5890\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
-use _PhpScoper45e499ef5890\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use _PhpScoper45e499ef5890\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\CliDumper;
-use _PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider;
-use _PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ContextProvider\RequestContextProvider;
-use _PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
-use _PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ContextualizedDumper;
-use _PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use _PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ServerDumper;
+use _PhpScoperc98ae2003489\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperc98ae2003489\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoperc98ae2003489\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
+use _PhpScoperc98ae2003489\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use _PhpScoperc98ae2003489\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider;
+use _PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ContextProvider\RequestContextProvider;
+use _PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
+use _PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ContextualizedDumper;
+use _PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use _PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ServerDumper;
 // Load the global dump() function
 require_once __DIR__ . '/Resources/functions/dump.php';
 /**
@@ -49,27 +49,27 @@ class VarDumper
     }
     private static function register() : void
     {
-        $cloner = new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Cloner\VarCloner();
-        $cloner->addCasters(\_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
+        $cloner = new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Cloner\VarCloner();
+        $cloner->addCasters(\_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
         $format = $_SERVER['VAR_DUMPER_FORMAT'] ?? null;
         switch (\true) {
             case 'html' === $format:
-                $dumper = new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\HtmlDumper();
+                $dumper = new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\HtmlDumper();
                 break;
             case 'cli' === $format:
-                $dumper = new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\CliDumper();
+                $dumper = new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\CliDumper();
                 break;
             case 'server' === $format:
             case 'tcp' === \parse_url($format, \PHP_URL_SCHEME):
                 $host = 'server' === $format ? $_SERVER['VAR_DUMPER_SERVER'] ?? '127.0.0.1:9912' : $format;
-                $dumper = \in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) ? new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\CliDumper() : new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\HtmlDumper();
-                $dumper = new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ServerDumper($host, $dumper, self::getDefaultContextProviders());
+                $dumper = \in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) ? new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\CliDumper() : new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\HtmlDumper();
+                $dumper = new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ServerDumper($host, $dumper, self::getDefaultContextProviders());
                 break;
             default:
-                $dumper = \in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) ? new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\CliDumper() : new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\HtmlDumper();
+                $dumper = \in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) ? new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\CliDumper() : new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\HtmlDumper();
         }
-        if (!$dumper instanceof \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ServerDumper) {
-            $dumper = new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ContextualizedDumper($dumper, [new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider()]);
+        if (!$dumper instanceof \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ServerDumper) {
+            $dumper = new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ContextualizedDumper($dumper, [new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider()]);
         }
         self::$handler = function ($var) use($cloner, $dumper) {
             $dumper->dump($cloner->cloneVar($var));
@@ -78,12 +78,12 @@ class VarDumper
     private static function getDefaultContextProviders() : array
     {
         $contextProviders = [];
-        if (!\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && \class_exists(\_PhpScoper45e499ef5890\Symfony\Component\HttpFoundation\Request::class)) {
-            $requestStack = new \_PhpScoper45e499ef5890\Symfony\Component\HttpFoundation\RequestStack();
-            $requestStack->push(\_PhpScoper45e499ef5890\Symfony\Component\HttpFoundation\Request::createFromGlobals());
-            $contextProviders['request'] = new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ContextProvider\RequestContextProvider($requestStack);
+        if (!\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && \class_exists(\_PhpScoperc98ae2003489\Symfony\Component\HttpFoundation\Request::class)) {
+            $requestStack = new \_PhpScoperc98ae2003489\Symfony\Component\HttpFoundation\RequestStack();
+            $requestStack->push(\_PhpScoperc98ae2003489\Symfony\Component\HttpFoundation\Request::createFromGlobals());
+            $contextProviders['request'] = new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ContextProvider\RequestContextProvider($requestStack);
         }
-        $fileLinkFormatter = \class_exists(\_PhpScoper45e499ef5890\Symfony\Component\HttpKernel\Debug\FileLinkFormatter::class) ? new \_PhpScoper45e499ef5890\Symfony\Component\HttpKernel\Debug\FileLinkFormatter(null, $requestStack ?? null) : null;
-        return $contextProviders + ['cli' => new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider(), 'source' => new \_PhpScoper45e499ef5890\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider(null, null, $fileLinkFormatter)];
+        $fileLinkFormatter = \class_exists(\_PhpScoperc98ae2003489\Symfony\Component\HttpKernel\Debug\FileLinkFormatter::class) ? new \_PhpScoperc98ae2003489\Symfony\Component\HttpKernel\Debug\FileLinkFormatter(null, $requestStack ?? null) : null;
+        return $contextProviders + ['cli' => new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider(), 'source' => new \_PhpScoperc98ae2003489\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider(null, null, $fileLinkFormatter)];
     }
 }

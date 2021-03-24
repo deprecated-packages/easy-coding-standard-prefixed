@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper45e499ef5890\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperc98ae2003489\Symfony\Component\DependencyInjection\Compiler;
 
-trigger_deprecation('symfony/dependency-injection', '5.2', 'The "%s" class is deprecated.', \_PhpScoper45e499ef5890\Symfony\Component\DependencyInjection\Compiler\ResolvePrivatesPass::class);
-use _PhpScoper45e499ef5890\Symfony\Component\DependencyInjection\ContainerBuilder;
+trigger_deprecation('symfony/dependency-injection', '5.2', 'The "%s" class is deprecated.', \_PhpScoperc98ae2003489\Symfony\Component\DependencyInjection\Compiler\ResolvePrivatesPass::class);
+use _PhpScoperc98ae2003489\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @deprecated since Symfony 5.2
  */
-class ResolvePrivatesPass implements \_PhpScoper45e499ef5890\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolvePrivatesPass implements \_PhpScoperc98ae2003489\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoper45e499ef5890\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperc98ae2003489\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         foreach ($container->getDefinitions() as $id => $definition) {
             if ($definition->isPrivate()) {

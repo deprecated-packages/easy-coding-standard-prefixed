@@ -101,4 +101,8 @@ final class ComposerJsonSection
      * @var string
      */
     public const SUGGESTS = 'suggests';
+    /**
+     * @var string
+     */
+    public const VERSION = 'version';
 }

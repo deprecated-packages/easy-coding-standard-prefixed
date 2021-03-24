@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator;
 
-use _PhpScoper45e499ef5890\Nette\Utils\Json;
+use _PhpScoperc98ae2003489\Nette\Utils\Json;
 use Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
@@ -23,7 +23,7 @@ final class ComposerJsonFactory
     }
     public function createFromString(string $jsonString) : \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson
     {
-        $jsonArray = \_PhpScoper45e499ef5890\Nette\Utils\Json::decode($jsonString, \_PhpScoper45e499ef5890\Nette\Utils\Json::FORCE_ARRAY);
+        $jsonArray = \_PhpScoperc98ae2003489\Nette\Utils\Json::decode($jsonString, \_PhpScoperc98ae2003489\Nette\Utils\Json::FORCE_ARRAY);
         return $this->createFromArray($jsonArray);
     }
     public function createFromFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson
@@ -113,6 +113,9 @@ final class ComposerJsonFactory
         }
         if (isset($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REPOSITORIES])) {
             $composerJson->setRepositories($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::REPOSITORIES]);
+        }
+        if (isset($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::VERSION])) {
+            $composerJson->setVersion($jsonArray[\Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection::VERSION]);
         }
         $orderedKeys = \array_keys($jsonArray);
         $composerJson->setOrderedKeys($orderedKeys);
