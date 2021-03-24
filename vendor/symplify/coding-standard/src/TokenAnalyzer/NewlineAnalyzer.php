@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenAnalyzer;
 
-use _PhpScoper70e3784a2d21\Nette\Utils\Strings;
+use _PhpScopere66f4b626446\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 final class NewlineAnalyzer
@@ -37,6 +37,6 @@ final class NewlineAnalyzer
         if (!$currentToken->isWhitespace()) {
             return \false;
         }
-        return \_PhpScoper70e3784a2d21\Nette\Utils\Strings::contains($currentToken->getContent(), "\n");
+        return \_PhpScopere66f4b626446\Nette\Utils\Strings::contains($currentToken->getContent(), "\n");
     }
 }
