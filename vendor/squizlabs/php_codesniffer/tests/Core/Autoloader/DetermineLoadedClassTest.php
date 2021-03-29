@@ -9,8 +9,8 @@
  */
 namespace PHP_CodeSniffer\Tests\Core\Autoloader;
 
-use _PhpScoper5e5c2222758f\PHPUnit\Framework\TestCase;
-class DetermineLoadedClassTest extends \_PhpScoper5e5c2222758f\PHPUnit\Framework\TestCase
+use _PhpScoper246439c06ab2\PHPUnit\Framework\TestCase;
+class DetermineLoadedClassTest extends \_PhpScoper246439c06ab2\PHPUnit\Framework\TestCase
 {
     /**
      * Load the test files.

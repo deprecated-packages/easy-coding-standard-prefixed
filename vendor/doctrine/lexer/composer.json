@@ -35,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper5e5c2222758f\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
+            "_PhpScoper246439c06ab2\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoper5e5c2222758f\\Doctrine\\Tests\\": "tests\/Doctrine"
+            "_PhpScoper246439c06ab2\\Doctrine\\Tests\\": "tests\/Doctrine"
         }
     },
     "extra": {
