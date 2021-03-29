@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc98ae2003489\Symfony\Component\Cache\Messenger;
+namespace _PhpScoper5e5c2222758f\Symfony\Component\Cache\Messenger;
 
-use _PhpScoperc98ae2003489\Symfony\Component\Cache\CacheItem;
-use _PhpScoperc98ae2003489\Symfony\Component\DependencyInjection\ReverseContainer;
-use _PhpScoperc98ae2003489\Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use _PhpScoper5e5c2222758f\Symfony\Component\Cache\CacheItem;
+use _PhpScoper5e5c2222758f\Symfony\Component\DependencyInjection\ReverseContainer;
+use _PhpScoper5e5c2222758f\Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /**
  * Computes cached values sent to a message bus.
  */
-class EarlyExpirationHandler implements \_PhpScoperc98ae2003489\Symfony\Component\Messenger\Handler\MessageHandlerInterface
+class EarlyExpirationHandler implements \_PhpScoper5e5c2222758f\Symfony\Component\Messenger\Handler\MessageHandlerInterface
 {
     private $reverseContainer;
     private $processedNonces = [];
-    public function __construct(\_PhpScoperc98ae2003489\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer)
+    public function __construct(\_PhpScoper5e5c2222758f\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer)
     {
         $this->reverseContainer = $reverseContainer;
     }
-    public function __invoke(\_PhpScoperc98ae2003489\Symfony\Component\Cache\Messenger\EarlyExpirationMessage $message)
+    public function __invoke(\_PhpScoper5e5c2222758f\Symfony\Component\Cache\Messenger\EarlyExpirationMessage $message)
     {
         $item = $message->getItem();
         $metadata = $item->getMetadata();
-        $expiry = $metadata[\_PhpScoperc98ae2003489\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] ?? 0;
-        $ctime = $metadata[\_PhpScoperc98ae2003489\Symfony\Component\Cache\CacheItem::METADATA_CTIME] ?? 0;
+        $expiry = $metadata[\_PhpScoper5e5c2222758f\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] ?? 0;
+        $ctime = $metadata[\_PhpScoper5e5c2222758f\Symfony\Component\Cache\CacheItem::METADATA_CTIME] ?? 0;
         if ($expiry && $ctime) {
             // skip duplicate or expired messages
             $processingNonce = [$expiry, $ctime];
@@ -47,12 +47,12 @@ class EarlyExpirationHandler implements \_PhpScoperc98ae2003489\Symfony\Componen
             }
         }
         static $setMetadata;
-        $setMetadata = $setMetadata ?? \Closure::bind(function (\_PhpScoperc98ae2003489\Symfony\Component\Cache\CacheItem $item, float $startTime) {
+        $setMetadata = $setMetadata ?? \Closure::bind(function (\_PhpScoper5e5c2222758f\Symfony\Component\Cache\CacheItem $item, float $startTime) {
             if ($item->expiry > ($endTime = \microtime(\true))) {
-                $item->newMetadata[\_PhpScoperc98ae2003489\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $item->expiry;
-                $item->newMetadata[\_PhpScoperc98ae2003489\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = (int) \ceil(1000 * ($endTime - $startTime));
+                $item->newMetadata[\_PhpScoper5e5c2222758f\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] = $item->expiry;
+                $item->newMetadata[\_PhpScoper5e5c2222758f\Symfony\Component\Cache\CacheItem::METADATA_CTIME] = (int) \ceil(1000 * ($endTime - $startTime));
             }
-        }, null, \_PhpScoperc98ae2003489\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoper5e5c2222758f\Symfony\Component\Cache\CacheItem::class);
         $startTime = \microtime(\true);
         $pool = $message->findPool($this->reverseContainer);
         $callback = $message->findCallback($this->reverseContainer);

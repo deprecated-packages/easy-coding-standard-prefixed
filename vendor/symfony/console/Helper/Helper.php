@@ -8,21 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc98ae2003489\Symfony\Component\Console\Helper;
+namespace _PhpScoper5e5c2222758f\Symfony\Component\Console\Helper;
 
-use _PhpScoperc98ae2003489\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoper5e5c2222758f\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoper5e5c2222758f\Symfony\Component\String\UnicodeString;
 /**
  * Helper is the base class for all helper classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Helper implements \_PhpScoperc98ae2003489\Symfony\Component\Console\Helper\HelperInterface
+abstract class Helper implements \_PhpScoper5e5c2222758f\Symfony\Component\Console\Helper\HelperInterface
 {
     protected $helperSet = null;
     /**
      * {@inheritdoc}
      */
-    public function setHelperSet(\_PhpScoperc98ae2003489\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
+    public function setHelperSet(\_PhpScoper5e5c2222758f\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
     {
         $this->helperSet = $helperSet;
     }
@@ -40,7 +41,10 @@ abstract class Helper implements \_PhpScoperc98ae2003489\Symfony\Component\Conso
      */
     public static function strlen(?string $string)
     {
-        $string = (string) $string;
+        $string ?? ($string = '');
+        if (\preg_match('//u', $string)) {
+            return (new \_PhpScoper5e5c2222758f\Symfony\Component\String\UnicodeString($string))->width(\false);
+        }
         if (\false === ($encoding = \mb_detect_encoding($string, null, \true))) {
             return \strlen($string);
         }
@@ -51,9 +55,9 @@ abstract class Helper implements \_PhpScoperc98ae2003489\Symfony\Component\Conso
      *
      * @return string The string subset
      */
-    public static function substr(string $string, int $from, int $length = null)
+    public static function substr(?string $string, int $from, int $length = null)
     {
-        $string = (string) $string;
+        $string ?? ($string = '');
         if (\false === ($encoding = \mb_detect_encoding($string, null, \true))) {
             return \substr($string, $from, $length);
         }
@@ -86,16 +90,20 @@ abstract class Helper implements \_PhpScoperc98ae2003489\Symfony\Component\Conso
         }
         return \sprintf('%d B', $memory);
     }
-    public static function strlenWithoutDecoration(\_PhpScoperc98ae2003489\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, $string)
+    public static function strlenWithoutDecoration(\_PhpScoper5e5c2222758f\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
     {
-        return self::strlen(self::removeDecoration($formatter, $string));
+        $string = self::removeDecoration($formatter, $string);
+        if (\preg_match('//u', $string)) {
+            return (new \_PhpScoper5e5c2222758f\Symfony\Component\String\UnicodeString($string))->width(\true);
+        }
+        return self::strlen($string);
     }
-    public static function removeDecoration(\_PhpScoperc98ae2003489\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, $string)
+    public static function removeDecoration(\_PhpScoper5e5c2222758f\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
     {
         $isDecorated = $formatter->isDecorated();
         $formatter->setDecorated(\false);
         // remove <...> formatting
-        $string = $formatter->format($string);
+        $string = $formatter->format($string ?? '');
         // remove already formatted characters
         $string = \preg_replace("/\33\\[[^m]*m/", '', $string);
         $formatter->setDecorated($isDecorated);

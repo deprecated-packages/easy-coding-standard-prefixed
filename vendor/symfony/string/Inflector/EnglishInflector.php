@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc98ae2003489\Symfony\Component\String\Inflector;
+namespace _PhpScoper5e5c2222758f\Symfony\Component\String\Inflector;
 
-final class EnglishInflector implements \_PhpScoperc98ae2003489\Symfony\Component\String\Inflector\InflectorInterface
+final class EnglishInflector implements \_PhpScoper5e5c2222758f\Symfony\Component\String\Inflector\InflectorInterface
 {
     /**
      * Map English plural to singular suffixes.
@@ -162,6 +162,8 @@ final class EnglishInflector implements \_PhpScoperc98ae2003489\Symfony\Componen
         ['nosrep', 6, \true, \true, ['persons', 'people']],
         // bacteria (bacterium), criteria (criterion), phenomena (phenomenon)
         ['noi', 3, \true, \true, 'ions'],
+        // coupon (coupons)
+        ['nop', 3, \true, \true, 'pons'],
         // seasons (season), treasons (treason), poisons (poison), lessons (lesson)
         ['nos', 3, \true, \true, 'sons'],
         // bacteria (bacterium), criteria (criterion), phenomena (phenomenon)

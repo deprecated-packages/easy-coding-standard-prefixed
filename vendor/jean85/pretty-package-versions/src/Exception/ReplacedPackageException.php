@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc98ae2003489\Jean85\Exception;
+namespace _PhpScoper5e5c2222758f\Jean85\Exception;
 
-class ReplacedPackageException extends \Exception implements \_PhpScoperc98ae2003489\Jean85\Exception\VersionMissingExceptionInterface
+class ReplacedPackageException extends \Exception implements \_PhpScoper5e5c2222758f\Jean85\Exception\VersionMissingExceptionInterface
 {
-    public static function create(string $packageName) : \_PhpScoperc98ae2003489\Jean85\Exception\VersionMissingExceptionInterface
+    public static function create(string $packageName) : \_PhpScoper5e5c2222758f\Jean85\Exception\VersionMissingExceptionInterface
     {
         return new self('Cannot retrieve a version for package ' . $packageName . ' since it is replaced by some other package');
     }
