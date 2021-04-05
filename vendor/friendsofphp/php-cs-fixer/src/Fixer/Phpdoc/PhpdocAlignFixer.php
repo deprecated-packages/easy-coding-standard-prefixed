@@ -92,7 +92,7 @@ final class PhpdocAlignFixer extends \PhpCsFixer\AbstractFixer implements \PhpCs
         $code = <<<'EOF'
 <?php
 
-namespace _PhpScoper6b644dbe715d;
+namespace _PhpScoper86aebf8cf357;
 
 /**
  * @param  EngineInterface $templating

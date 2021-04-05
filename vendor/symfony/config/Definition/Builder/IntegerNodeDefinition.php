@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6b644dbe715d\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper86aebf8cf357\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoper6b644dbe715d\Symfony\Component\Config\Definition\IntegerNode;
+use _PhpScoper86aebf8cf357\Symfony\Component\Config\Definition\IntegerNode;
 /**
  * This class provides a fluent interface for defining an integer node.
  *
  * @author Jeanmonod David <david.jeanmonod@gmail.com>
  */
-class IntegerNodeDefinition extends \_PhpScoper6b644dbe715d\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
+class IntegerNodeDefinition extends \_PhpScoper86aebf8cf357\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
 {
     /**
      * Instantiates a Node.
@@ -25,6 +25,6 @@ class IntegerNodeDefinition extends \_PhpScoper6b644dbe715d\Symfony\Component\Co
      */
     protected function instantiateNode()
     {
-        return new \_PhpScoper6b644dbe715d\Symfony\Component\Config\Definition\IntegerNode($this->name, $this->parent, $this->min, $this->max, $this->pathSeparator);
+        return new \_PhpScoper86aebf8cf357\Symfony\Component\Config\Definition\IntegerNode($this->name, $this->parent, $this->min, $this->max, $this->pathSeparator);
     }
 }

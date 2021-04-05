@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6b644dbe715d\Symfony\Component\ErrorHandler;
+namespace _PhpScoper86aebf8cf357\Symfony\Component\ErrorHandler;
 
-use _PhpScoper6b644dbe715d\Doctrine\Common\Persistence\Proxy as LegacyProxy;
-use _PhpScoper6b644dbe715d\Doctrine\Persistence\Proxy;
-use _PhpScoper6b644dbe715d\Mockery\MockInterface;
-use _PhpScoper6b644dbe715d\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
-use _PhpScoper6b644dbe715d\PHPUnit\Framework\MockObject\MockObject;
-use _PhpScoper6b644dbe715d\Prophecy\Prophecy\ProphecySubjectInterface;
-use _PhpScoper6b644dbe715d\ProxyManager\Proxy\ProxyInterface;
+use _PhpScoper86aebf8cf357\Doctrine\Common\Persistence\Proxy as LegacyProxy;
+use _PhpScoper86aebf8cf357\Doctrine\Persistence\Proxy;
+use _PhpScoper86aebf8cf357\Mockery\MockInterface;
+use _PhpScoper86aebf8cf357\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
+use _PhpScoper86aebf8cf357\PHPUnit\Framework\MockObject\MockObject;
+use _PhpScoper86aebf8cf357\Prophecy\Prophecy\ProphecySubjectInterface;
+use _PhpScoper86aebf8cf357\ProxyManager\Proxy\ProxyInterface;
 /**
  * Autoloader checking if the class is really defined in the file found.
  *
@@ -111,8 +111,8 @@ class DebugClassLoader
     public static function enable() : void
     {
         // Ensures we don't hit https://bugs.php.net/42098
-        \class_exists(\_PhpScoper6b644dbe715d\Symfony\Component\ErrorHandler\ErrorHandler::class);
-        \class_exists(\_PhpScoper6b644dbe715d\Psr\Log\LogLevel::class);
+        \class_exists(\_PhpScoper86aebf8cf357\Symfony\Component\ErrorHandler\ErrorHandler::class);
+        \class_exists(\_PhpScoper86aebf8cf357\Psr\Log\LogLevel::class);
         if (!\is_array($functions = \spl_autoload_functions())) {
             return;
         }
@@ -163,7 +163,7 @@ class DebugClassLoader
         foreach ($offsets as $getSymbols => $i) {
             $symbols = $getSymbols();
             for (; $i < \count($symbols); ++$i) {
-                if (!\is_subclass_of($symbols[$i], \_PhpScoper6b644dbe715d\PHPUnit\Framework\MockObject\MockObject::class) && !\is_subclass_of($symbols[$i], \_PhpScoper6b644dbe715d\Prophecy\Prophecy\ProphecySubjectInterface::class) && !\is_subclass_of($symbols[$i], \_PhpScoper6b644dbe715d\Doctrine\Persistence\Proxy::class) && !\is_subclass_of($symbols[$i], \_PhpScoper6b644dbe715d\ProxyManager\Proxy\ProxyInterface::class) && !\is_subclass_of($symbols[$i], \_PhpScoper6b644dbe715d\Doctrine\Common\Persistence\Proxy::class) && !\is_subclass_of($symbols[$i], \_PhpScoper6b644dbe715d\Mockery\MockInterface::class)) {
+                if (!\is_subclass_of($symbols[$i], \_PhpScoper86aebf8cf357\PHPUnit\Framework\MockObject\MockObject::class) && !\is_subclass_of($symbols[$i], \_PhpScoper86aebf8cf357\Prophecy\Prophecy\ProphecySubjectInterface::class) && !\is_subclass_of($symbols[$i], \_PhpScoper86aebf8cf357\Doctrine\Persistence\Proxy::class) && !\is_subclass_of($symbols[$i], \_PhpScoper86aebf8cf357\ProxyManager\Proxy\ProxyInterface::class) && !\is_subclass_of($symbols[$i], \_PhpScoper86aebf8cf357\Doctrine\Common\Persistence\Proxy::class) && !\is_subclass_of($symbols[$i], \_PhpScoper86aebf8cf357\Mockery\MockInterface::class)) {
                     $loader->checkClass($symbols[$i]);
                 }
             }
@@ -443,7 +443,7 @@ class DebugClassLoader
                     $finalOrInternal = \true;
                 }
             }
-            if ($finalOrInternal || $method->isConstructor() || \false === \strpos($doc, '@param') || \_PhpScoper6b644dbe715d\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation::class === $class) {
+            if ($finalOrInternal || $method->isConstructor() || \false === \strpos($doc, '@param') || \_PhpScoper86aebf8cf357\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation::class === $class) {
                 continue;
             }
             if (!\preg_match_all('#\\n\\s+\\* @param +((?(?!callable *\\().*?|callable *\\(.*\\).*?))(?<= )\\$([a-zA-Z0-9_\\x7f-\\xff]++)#', $doc, $matches, \PREG_SET_ORDER)) {
