@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Tests\Console\AbstractSymplifyConsoleApplication;
 
-use _PhpScoper7d3888cf4297\Symfony\Component\Console\Application;
+use _PhpScoperf6b7f9bf122d\Symfony\Component\Console\Application;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SymplifyKernel\Tests\HttpKernel\OnlyForTestsKernel;
 final class AutowiredConsoleApplicationTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
@@ -14,7 +14,7 @@ final class AutowiredConsoleApplicationTest extends \Symplify\PackageBuilder\Tes
     }
     public function test() : void
     {
-        $application = $this->getService(\_PhpScoper7d3888cf4297\Symfony\Component\Console\Application::class);
-        $this->assertInstanceOf(\_PhpScoper7d3888cf4297\Symfony\Component\Console\Application::class, $application);
+        $application = $this->getService(\_PhpScoperf6b7f9bf122d\Symfony\Component\Console\Application::class);
+        $this->assertInstanceOf(\_PhpScoperf6b7f9bf122d\Symfony\Component\Console\Application::class, $application);
     }
 }

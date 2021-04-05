@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7d3888cf4297\Symfony\Component\DependencyInjection;
+namespace _PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection;
 
-use _PhpScoper7d3888cf4297\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper7d3888cf4297\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
+use _PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 /**
  * This definition extends another definition.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ChildDefinition extends \_PhpScoper7d3888cf4297\Symfony\Component\DependencyInjection\Definition
+class ChildDefinition extends \_PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Definition
 {
     private $parent;
     /**
@@ -89,7 +89,7 @@ class ChildDefinition extends \_PhpScoper7d3888cf4297\Symfony\Component\Dependen
         } elseif (0 === \strpos($index, '$')) {
             $this->arguments[$index] = $value;
         } else {
-            throw new \_PhpScoper7d3888cf4297\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The argument must be an existing index or the name of a constructor\'s parameter.');
+            throw new \_PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException('The argument must be an existing index or the name of a constructor\'s parameter.');
         }
         return $this;
     }

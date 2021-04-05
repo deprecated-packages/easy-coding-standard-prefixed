@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7d3888cf4297\SebastianBergmann\Diff\Output;
+namespace _PhpScoperf6b7f9bf122d\SebastianBergmann\Diff\Output;
 
 /**
  * Defines how an output builder should take a generated
