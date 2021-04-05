@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperf5c57eca8aae;
+namespace _PhpScoper6b644dbe715d;
 
-use _PhpScoperf5c57eca8aae\Nette\Utils\Strings;
-use _PhpScoperf5c57eca8aae\Isolated\Symfony\Component\Finder\Finder;
-$finder = new \_PhpScoperf5c57eca8aae\Isolated\Symfony\Component\Finder\Finder();
+use _PhpScoper6b644dbe715d\Nette\Utils\Strings;
+use _PhpScoper6b644dbe715d\Isolated\Symfony\Component\Finder\Finder;
+$finder = new \_PhpScoper6b644dbe715d\Isolated\Symfony\Component\Finder\Finder();
 $polyfillFileInfos = $finder->files()->in(__DIR__ . '/vendor/symfony/polyfill-*')->name('*.php')->getIterator();
 $polyfillFilePaths = [];
 foreach ($polyfillFileInfos as $polyfillFileInfo) {
@@ -21,14 +21,14 @@ return ['files-whitelist' => [
     'PhpCsFixer\\*',
     'PHP_CodeSniffer\\*',
     'SlevomatCodingStandard\\*',
-    '_PhpScoperf5c57eca8aae\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
-    '_PhpScoperf5c57eca8aae\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
-    '_PhpScoperf5c57eca8aae\\Composer\\InstalledVersions',
+    '_PhpScoper6b644dbe715d\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
+    '_PhpScoper6b644dbe715d\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
+    '_PhpScoper6b644dbe715d\\Composer\\InstalledVersions',
     'Symfony\\Polyfill\\*',
 ], 'patchers' => [function (string $filePath, string $prefix, string $content) : string {
-    if (!\_PhpScoperf5c57eca8aae\Nette\Utils\Strings::endsWith($filePath, 'vendor/jean85/pretty-package-versions/src/PrettyVersions.php')) {
+    if (!\_PhpScoper6b644dbe715d\Nette\Utils\Strings::endsWith($filePath, 'vendor/jean85/pretty-package-versions/src/PrettyVersions.php')) {
         return $content;
     }
     // see https://regex101.com/r/v8zRMm/1
-    return \_PhpScoperf5c57eca8aae\Nette\Utils\Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScoperf5c57eca8aae\\Composer\\InstalledVersions');
+    return \_PhpScoper6b644dbe715d\Nette\Utils\Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScoper6b644dbe715d\\Composer\\InstalledVersions');
 }]];

@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoperf5c57eca8aae\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperf5c57eca8aae\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel;
-use _PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\KernelInterface;
-use _PhpScoperf5c57eca8aae\Symfony\Component\VarDumper\Caster\ClassStub;
+use _PhpScoper6b644dbe715d\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper6b644dbe715d\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoper6b644dbe715d\Symfony\Component\VarDumper\Caster\ClassStub;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @final
  */
-class ConfigDataCollector extends \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class ConfigDataCollector extends \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     /**
      * @var KernelInterface
@@ -29,21 +29,21 @@ class ConfigDataCollector extends \_PhpScoperf5c57eca8aae\Symfony\Component\Http
     /**
      * Sets the Kernel associated with this Request.
      */
-    public function setKernel(\_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\KernelInterface $kernel = null)
+    public function setKernel(\_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\KernelInterface $kernel = null)
     {
         $this->kernel = $kernel;
     }
     /**
      * {@inheritdoc}
      */
-    public function collect(\_PhpScoperf5c57eca8aae\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperf5c57eca8aae\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
+    public function collect(\_PhpScoper6b644dbe715d\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper6b644dbe715d\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
     {
-        $eom = \DateTime::createFromFormat('d/m/Y', '01/' . \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel::END_OF_MAINTENANCE);
-        $eol = \DateTime::createFromFormat('d/m/Y', '01/' . \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel::END_OF_LIFE);
-        $this->data = ['token' => $response->headers->get('X-Debug-Token'), 'symfony_version' => \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel::VERSION, 'symfony_minor_version' => \sprintf('%s.%s', \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel::MAJOR_VERSION, \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel::MINOR_VERSION), 'symfony_lts' => 4 === \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel::MINOR_VERSION, 'symfony_state' => $this->determineSymfonyState(), 'symfony_eom' => $eom->format('F Y'), 'symfony_eol' => $eol->format('F Y'), 'env' => isset($this->kernel) ? $this->kernel->getEnvironment() : 'n/a', 'debug' => isset($this->kernel) ? $this->kernel->isDebug() : 'n/a', 'php_version' => \PHP_VERSION, 'php_architecture' => \PHP_INT_SIZE * 8, 'php_intl_locale' => \class_exists(\Locale::class, \false) && \Locale::getDefault() ? \Locale::getDefault() : 'n/a', 'php_timezone' => \date_default_timezone_get(), 'xdebug_enabled' => \extension_loaded('xdebug'), 'apcu_enabled' => \extension_loaded('apcu') && \filter_var(\ini_get('apc.enabled'), \FILTER_VALIDATE_BOOLEAN), 'zend_opcache_enabled' => \extension_loaded('Zend OPcache') && \filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOLEAN), 'bundles' => [], 'sapi_name' => \PHP_SAPI];
+        $eom = \DateTime::createFromFormat('d/m/Y', '01/' . \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel::END_OF_MAINTENANCE);
+        $eol = \DateTime::createFromFormat('d/m/Y', '01/' . \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel::END_OF_LIFE);
+        $this->data = ['token' => $response->headers->get('X-Debug-Token'), 'symfony_version' => \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel::VERSION, 'symfony_minor_version' => \sprintf('%s.%s', \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel::MAJOR_VERSION, \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel::MINOR_VERSION), 'symfony_lts' => 4 === \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel::MINOR_VERSION, 'symfony_state' => $this->determineSymfonyState(), 'symfony_eom' => $eom->format('F Y'), 'symfony_eol' => $eol->format('F Y'), 'env' => isset($this->kernel) ? $this->kernel->getEnvironment() : 'n/a', 'debug' => isset($this->kernel) ? $this->kernel->isDebug() : 'n/a', 'php_version' => \PHP_VERSION, 'php_architecture' => \PHP_INT_SIZE * 8, 'php_intl_locale' => \class_exists(\Locale::class, \false) && \Locale::getDefault() ? \Locale::getDefault() : 'n/a', 'php_timezone' => \date_default_timezone_get(), 'xdebug_enabled' => \extension_loaded('xdebug'), 'apcu_enabled' => \extension_loaded('apcu') && \filter_var(\ini_get('apc.enabled'), \FILTER_VALIDATE_BOOLEAN), 'zend_opcache_enabled' => \extension_loaded('Zend OPcache') && \filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOLEAN), 'bundles' => [], 'sapi_name' => \PHP_SAPI];
         if (isset($this->kernel)) {
             foreach ($this->kernel->getBundles() as $name => $bundle) {
-                $this->data['bundles'][$name] = new \_PhpScoperf5c57eca8aae\Symfony\Component\VarDumper\Caster\ClassStub(\get_class($bundle));
+                $this->data['bundles'][$name] = new \_PhpScoper6b644dbe715d\Symfony\Component\VarDumper\Caster\ClassStub(\get_class($bundle));
             }
         }
         if (\preg_match('~^(\\d+(?:\\.\\d+)*)(.+)?$~', $this->data['php_version'], $matches) && isset($matches[2])) {
@@ -238,13 +238,13 @@ class ConfigDataCollector extends \_PhpScoperf5c57eca8aae\Symfony\Component\Http
     private function determineSymfonyState() : string
     {
         $now = new \DateTime();
-        $eom = \DateTime::createFromFormat('d/m/Y', '01/' . \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel::END_OF_MAINTENANCE)->modify('last day of this month');
-        $eol = \DateTime::createFromFormat('d/m/Y', '01/' . \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel::END_OF_LIFE)->modify('last day of this month');
+        $eom = \DateTime::createFromFormat('d/m/Y', '01/' . \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel::END_OF_MAINTENANCE)->modify('last day of this month');
+        $eol = \DateTime::createFromFormat('d/m/Y', '01/' . \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel::END_OF_LIFE)->modify('last day of this month');
         if ($now > $eol) {
             $versionState = 'eol';
         } elseif ($now > $eom) {
             $versionState = 'eom';
-        } elseif ('' !== \_PhpScoperf5c57eca8aae\Symfony\Component\HttpKernel\Kernel::EXTRA_VERSION) {
+        } elseif ('' !== \_PhpScoper6b644dbe715d\Symfony\Component\HttpKernel\Kernel::EXTRA_VERSION) {
             $versionState = 'dev';
         } else {
             $versionState = 'stable';

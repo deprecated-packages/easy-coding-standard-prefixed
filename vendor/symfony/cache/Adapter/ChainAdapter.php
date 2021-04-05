@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper6b644dbe715d\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperf5c57eca8aae\Psr\Cache\CacheItemInterface;
-use _PhpScoperf5c57eca8aae\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoperf5c57eca8aae\Symfony\Component\Cache\CacheItem;
-use _PhpScoperf5c57eca8aae\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperf5c57eca8aae\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperf5c57eca8aae\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperf5c57eca8aae\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoperf5c57eca8aae\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoperf5c57eca8aae\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper6b644dbe715d\Psr\Cache\CacheItemInterface;
+use _PhpScoper6b644dbe715d\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper6b644dbe715d\Symfony\Component\Cache\CacheItem;
+use _PhpScoper6b644dbe715d\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper6b644dbe715d\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper6b644dbe715d\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper6b644dbe715d\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoper6b644dbe715d\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper6b644dbe715d\Symfony\Contracts\Service\ResetInterface;
 /**
  * Chains several adapters together.
  *
@@ -27,7 +27,7 @@ use _PhpScoperf5c57eca8aae\Symfony\Contracts\Service\ResetInterface;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class ChainAdapter implements \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScoperf5c57eca8aae\Symfony\Contracts\Cache\CacheInterface, \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\PruneableInterface, \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\ResettableInterface
+class ChainAdapter implements \_PhpScoper6b644dbe715d\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScoper6b644dbe715d\Symfony\Contracts\Cache\CacheInterface, \_PhpScoper6b644dbe715d\Symfony\Component\Cache\PruneableInterface, \_PhpScoper6b644dbe715d\Symfony\Component\Cache\ResettableInterface
 {
     use ContractsTrait;
     private $adapters = [];
@@ -40,37 +40,37 @@ class ChainAdapter implements \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Ad
     public function __construct(array $adapters, int $defaultLifetime = 0)
     {
         if (!$adapters) {
-            throw new \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one adapter must be specified.');
+            throw new \_PhpScoper6b644dbe715d\Symfony\Component\Cache\Exception\InvalidArgumentException('At least one adapter must be specified.');
         }
         foreach ($adapters as $adapter) {
-            if (!$adapter instanceof \_PhpScoperf5c57eca8aae\Psr\Cache\CacheItemPoolInterface) {
-                throw new \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('The class "%s" does not implement the "%s" interface.', \get_debug_type($adapter), \_PhpScoperf5c57eca8aae\Psr\Cache\CacheItemPoolInterface::class));
+            if (!$adapter instanceof \_PhpScoper6b644dbe715d\Psr\Cache\CacheItemPoolInterface) {
+                throw new \_PhpScoper6b644dbe715d\Symfony\Component\Cache\Exception\InvalidArgumentException(\sprintf('The class "%s" does not implement the "%s" interface.', \get_debug_type($adapter), \_PhpScoper6b644dbe715d\Psr\Cache\CacheItemPoolInterface::class));
             }
-            if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && $adapter instanceof \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter\ApcuAdapter && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
+            if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && $adapter instanceof \_PhpScoper6b644dbe715d\Symfony\Component\Cache\Adapter\ApcuAdapter && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
                 continue;
                 // skip putting APCu in the chain when the backend is disabled
             }
-            if ($adapter instanceof \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($adapter instanceof \_PhpScoper6b644dbe715d\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 $this->adapters[] = $adapter;
             } else {
-                $this->adapters[] = new \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter\ProxyAdapter($adapter);
+                $this->adapters[] = new \_PhpScoper6b644dbe715d\Symfony\Component\Cache\Adapter\ProxyAdapter($adapter);
             }
         }
         $this->adapterCount = \count($this->adapters);
         $this->syncItem = \Closure::bind(static function ($sourceItem, $item, $sourceMetadata = null) use($defaultLifetime) {
             $sourceItem->isTaggable = \false;
             $sourceMetadata = $sourceMetadata ?? $sourceItem->metadata;
-            unset($sourceMetadata[\_PhpScoperf5c57eca8aae\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
+            unset($sourceMetadata[\_PhpScoper6b644dbe715d\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
             $item->value = $sourceItem->value;
             $item->isHit = $sourceItem->isHit;
             $item->metadata = $item->newMetadata = $sourceItem->metadata = $sourceMetadata;
-            if (isset($item->metadata[\_PhpScoperf5c57eca8aae\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY])) {
-                $item->expiresAt(\DateTime::createFromFormat('U.u', \sprintf('%.6F', $item->metadata[\_PhpScoperf5c57eca8aae\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY])));
+            if (isset($item->metadata[\_PhpScoper6b644dbe715d\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY])) {
+                $item->expiresAt(\DateTime::createFromFormat('U.u', \sprintf('%.6F', $item->metadata[\_PhpScoper6b644dbe715d\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY])));
             } elseif (0 < $defaultLifetime) {
                 $item->expiresAfter($defaultLifetime);
             }
             return $item;
-        }, null, \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoper6b644dbe715d\Symfony\Component\Cache\CacheItem::class);
     }
     /**
      * {@inheritdoc}
@@ -79,13 +79,13 @@ class ChainAdapter implements \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Ad
     {
         $lastItem = null;
         $i = 0;
-        $wrap = function (\_PhpScoperf5c57eca8aae\Symfony\Component\Cache\CacheItem $item = null) use($key, $callback, $beta, &$wrap, &$i, &$lastItem, &$metadata) {
+        $wrap = function (\_PhpScoper6b644dbe715d\Symfony\Component\Cache\CacheItem $item = null) use($key, $callback, $beta, &$wrap, &$i, &$lastItem, &$metadata) {
             $adapter = $this->adapters[$i];
             if (isset($this->adapters[++$i])) {
                 $callback = $wrap;
                 $beta = \INF === $beta ? \INF : 0;
             }
-            if ($adapter instanceof \_PhpScoperf5c57eca8aae\Symfony\Contracts\Cache\CacheInterface) {
+            if ($adapter instanceof \_PhpScoper6b644dbe715d\Symfony\Contracts\Cache\CacheInterface) {
                 $value = $adapter->get($key, $callback, $beta, $metadata);
             } else {
                 $value = $this->doGet($adapter, $key, $callback, $beta, $metadata);
@@ -173,7 +173,7 @@ class ChainAdapter implements \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Ad
         $cleared = \true;
         $i = $this->adapterCount;
         while ($i--) {
-            if ($this->adapters[$i] instanceof \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($this->adapters[$i] instanceof \_PhpScoper6b644dbe715d\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 $cleared = $this->adapters[$i]->clear($prefix) && $cleared;
             } else {
                 $cleared = $this->adapters[$i]->clear() && $cleared;
@@ -214,7 +214,7 @@ class ChainAdapter implements \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Ad
      *
      * @return bool
      */
-    public function save(\_PhpScoperf5c57eca8aae\Psr\Cache\CacheItemInterface $item)
+    public function save(\_PhpScoper6b644dbe715d\Psr\Cache\CacheItemInterface $item)
     {
         $saved = \true;
         $i = $this->adapterCount;
@@ -228,7 +228,7 @@ class ChainAdapter implements \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Ad
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScoperf5c57eca8aae\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\_PhpScoper6b644dbe715d\Psr\Cache\CacheItemInterface $item)
     {
         $saved = \true;
         $i = $this->adapterCount;
@@ -258,7 +258,7 @@ class ChainAdapter implements \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Ad
     {
         $pruned = \true;
         foreach ($this->adapters as $adapter) {
-            if ($adapter instanceof \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\PruneableInterface) {
+            if ($adapter instanceof \_PhpScoper6b644dbe715d\Symfony\Component\Cache\PruneableInterface) {
                 $pruned = $adapter->prune() && $pruned;
             }
         }
@@ -270,7 +270,7 @@ class ChainAdapter implements \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Ad
     public function reset()
     {
         foreach ($this->adapters as $adapter) {
-            if ($adapter instanceof \_PhpScoperf5c57eca8aae\Symfony\Contracts\Service\ResetInterface) {
+            if ($adapter instanceof \_PhpScoper6b644dbe715d\Symfony\Contracts\Service\ResetInterface) {
                 $adapter->reset();
             }
         }

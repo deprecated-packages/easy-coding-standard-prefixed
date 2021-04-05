@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf5c57eca8aae\Symfony\Component\HttpFoundation\File\Exception;
+namespace _PhpScoper6b644dbe715d\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an UPLOAD_ERR_PARTIAL error occurred with UploadedFile.
  *
  * @author Florent Mata <florentmata@gmail.com>
  */
-class PartialFileException extends \_PhpScoperf5c57eca8aae\Symfony\Component\HttpFoundation\File\Exception\FileException
+class PartialFileException extends \_PhpScoper6b644dbe715d\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
 }

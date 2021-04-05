@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Composer;
 
-use _PhpScoperf5c57eca8aae\Jean85\Exception\ReplacedPackageException;
-use _PhpScoperf5c57eca8aae\Jean85\PrettyVersions;
-use _PhpScoperf5c57eca8aae\Jean85\Version;
+use _PhpScoper6b644dbe715d\Jean85\Exception\ReplacedPackageException;
+use _PhpScoper6b644dbe715d\Jean85\PrettyVersions;
+use _PhpScoper6b644dbe715d\Jean85\Version;
 use OutOfBoundsException;
-use _PhpScoperf5c57eca8aae\PharIo\Version\InvalidVersionException;
+use _PhpScoper6b644dbe715d\PharIo\Version\InvalidVersionException;
 final class PackageVersionProvider
 {
     /**
@@ -18,7 +18,7 @@ final class PackageVersionProvider
         try {
             $version = $this->getVersion($packageName, 'symplify/symplify');
             return $version->getPrettyVersion();
-        } catch (\OutOfBoundsException|\_PhpScoperf5c57eca8aae\PharIo\Version\InvalidVersionException $exceptoin) {
+        } catch (\OutOfBoundsException|\_PhpScoper6b644dbe715d\PharIo\Version\InvalidVersionException $exceptoin) {
             return 'Unknown';
         }
     }
@@ -28,12 +28,12 @@ final class PackageVersionProvider
      * @see https://github.com/symplify/symplify/pull/2901#issuecomment-771536136
      * @see https://github.com/Jean85/pretty-package-versions/pull/16#issuecomment-620550459
      */
-    private function getVersion(string $packageName, string $replacingPackageName) : \_PhpScoperf5c57eca8aae\Jean85\Version
+    private function getVersion(string $packageName, string $replacingPackageName) : \_PhpScoper6b644dbe715d\Jean85\Version
     {
         try {
-            return \_PhpScoperf5c57eca8aae\Jean85\PrettyVersions::getVersion($packageName);
-        } catch (\OutOfBoundsException|\_PhpScoperf5c57eca8aae\Jean85\Exception\ReplacedPackageException $exception) {
-            return \_PhpScoperf5c57eca8aae\Jean85\PrettyVersions::getVersion($replacingPackageName);
+            return \_PhpScoper6b644dbe715d\Jean85\PrettyVersions::getVersion($packageName);
+        } catch (\OutOfBoundsException|\_PhpScoper6b644dbe715d\Jean85\Exception\ReplacedPackageException $exception) {
+            return \_PhpScoper6b644dbe715d\Jean85\PrettyVersions::getVersion($replacingPackageName);
         }
     }
 }
