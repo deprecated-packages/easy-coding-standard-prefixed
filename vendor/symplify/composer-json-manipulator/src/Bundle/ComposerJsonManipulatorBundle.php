@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Bundle;
 
-use _PhpScoperf6b7f9bf122d\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScopercd2fc5ef50ef\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\ComposerJsonManipulator\DependencyInjection\Extension\ComposerJsonManipulatorExtension;
-final class ComposerJsonManipulatorBundle extends \_PhpScoperf6b7f9bf122d\Symfony\Component\HttpKernel\Bundle\Bundle
+final class ComposerJsonManipulatorBundle extends \_PhpScopercd2fc5ef50ef\Symfony\Component\HttpKernel\Bundle\Bundle
 {
     protected function createContainerExtension() : \Symplify\ComposerJsonManipulator\DependencyInjection\Extension\ComposerJsonManipulatorExtension
     {

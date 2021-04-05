@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf6b7f9bf122d\Symfony\Component\Stopwatch;
+namespace _PhpScopercd2fc5ef50ef\Symfony\Component\Stopwatch;
 
-use _PhpScoperf6b7f9bf122d\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopercd2fc5ef50ef\Symfony\Contracts\Service\ResetInterface;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\_PhpScoperf6b7f9bf122d\Symfony\Component\Stopwatch\Section::class);
+\class_exists(\_PhpScopercd2fc5ef50ef\Symfony\Component\Stopwatch\Section::class);
 /**
  * Stopwatch provides a way to profile code.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Stopwatch implements \_PhpScoperf6b7f9bf122d\Symfony\Contracts\Service\ResetInterface
+class Stopwatch implements \_PhpScopercd2fc5ef50ef\Symfony\Contracts\Service\ResetInterface
 {
     /**
      * @var bool
@@ -141,6 +141,6 @@ class Stopwatch implements \_PhpScoperf6b7f9bf122d\Symfony\Contracts\Service\Res
      */
     public function reset()
     {
-        $this->sections = $this->activeSections = ['__root__' => new \_PhpScoperf6b7f9bf122d\Symfony\Component\Stopwatch\Section(null, $this->morePrecision)];
+        $this->sections = $this->activeSections = ['__root__' => new \_PhpScopercd2fc5ef50ef\Symfony\Component\Stopwatch\Section(null, $this->morePrecision)];
     }
 }

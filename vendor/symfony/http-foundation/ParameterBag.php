@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf6b7f9bf122d\Symfony\Component\HttpFoundation;
+namespace _PhpScopercd2fc5ef50ef\Symfony\Component\HttpFoundation;
 
-use _PhpScoperf6b7f9bf122d\Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use _PhpScopercd2fc5ef50ef\Symfony\Component\HttpFoundation\Exception\BadRequestException;
 /**
  * ParameterBag is a container for key/value pairs.
  *
@@ -40,7 +40,7 @@ class ParameterBag implements \IteratorAggregate, \Countable
             return $this->parameters;
         }
         if (!\is_array($value = $this->parameters[$key] ?? [])) {
-            throw new \_PhpScoperf6b7f9bf122d\Symfony\Component\HttpFoundation\Exception\BadRequestException(\sprintf('Unexpected value for parameter "%s": expecting "array", got "%s".', $key, \get_debug_type($value)));
+            throw new \_PhpScopercd2fc5ef50ef\Symfony\Component\HttpFoundation\Exception\BadRequestException(\sprintf('Unexpected value for parameter "%s": expecting "array", got "%s".', $key, \get_debug_type($value)));
         }
         return $value;
     }

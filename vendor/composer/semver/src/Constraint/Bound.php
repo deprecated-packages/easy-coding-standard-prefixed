@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoperf6b7f9bf122d\Composer\Semver\Constraint;
+namespace _PhpScopercd2fc5ef50ef\Composer\Semver\Constraint;
 
 class Bound
 {
@@ -59,7 +59,7 @@ class Bound
      *
      * @return bool
      */
-    public function compareTo(\_PhpScoperf6b7f9bf122d\Composer\Semver\Constraint\Bound $other, $operator)
+    public function compareTo(\_PhpScopercd2fc5ef50ef\Composer\Semver\Constraint\Bound $other, $operator)
     {
         if (!\in_array($operator, array('<', '>'), \true)) {
             throw new \InvalidArgumentException('Does not support any other operator other than > or <.');
@@ -85,13 +85,13 @@ class Bound
      */
     public static function zero()
     {
-        return new \_PhpScoperf6b7f9bf122d\Composer\Semver\Constraint\Bound('0.0.0.0-dev', \true);
+        return new \_PhpScopercd2fc5ef50ef\Composer\Semver\Constraint\Bound('0.0.0.0-dev', \true);
     }
     /**
      * @return self
      */
     public static function positiveInfinity()
     {
-        return new \_PhpScoperf6b7f9bf122d\Composer\Semver\Constraint\Bound(\PHP_INT_MAX . '.0.0.0', \false);
+        return new \_PhpScopercd2fc5ef50ef\Composer\Semver\Constraint\Bound(\PHP_INT_MAX . '.0.0.0', \false);
     }
 }

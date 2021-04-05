@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf6b7f9bf122d\Symfony\Component\Console\Output;
+namespace _PhpScopercd2fc5ef50ef\Symfony\Component\Console\Output;
 
-use _PhpScoperf6b7f9bf122d\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoperf6b7f9bf122d\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScopercd2fc5ef50ef\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScopercd2fc5ef50ef\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * A BufferedOutput that keeps only the last N chars.
  *
  * @author Jérémy Derussé <jeremy@derusse.com>
  */
-class TrimmedBufferOutput extends \_PhpScoperf6b7f9bf122d\Symfony\Component\Console\Output\Output
+class TrimmedBufferOutput extends \_PhpScopercd2fc5ef50ef\Symfony\Component\Console\Output\Output
 {
     private $maxLength;
     private $buffer = '';
-    public function __construct(int $maxLength, ?int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = \false, \_PhpScoperf6b7f9bf122d\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter = null)
+    public function __construct(int $maxLength, ?int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = \false, \_PhpScopercd2fc5ef50ef\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter = null)
     {
         if ($maxLength <= 0) {
-            throw new \_PhpScoperf6b7f9bf122d\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('"%s()" expects a strictly positive maxLength. Got %d.', __METHOD__, $maxLength));
+            throw new \_PhpScopercd2fc5ef50ef\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('"%s()" expects a strictly positive maxLength. Got %d.', __METHOD__, $maxLength));
         }
         parent::__construct($verbosity, $decorated, $formatter);
         $this->maxLength = $maxLength;

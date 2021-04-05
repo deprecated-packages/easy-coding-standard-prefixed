@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection;
+namespace _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection;
 
 /**
  * Represents a PHP type-hinted service reference.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TypedReference extends \_PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Reference
+class TypedReference extends \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Reference
 {
     private $type;
     private $name;
@@ -25,7 +25,7 @@ class TypedReference extends \_PhpScoperf6b7f9bf122d\Symfony\Component\Dependenc
      * @param int    $invalidBehavior The behavior when the service does not exist
      * @param string $name            The name of the argument targeting the service
      */
-    public function __construct(string $id, string $type, int $invalidBehavior = \_PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, string $name = null)
+    public function __construct(string $id, string $type, int $invalidBehavior = \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, string $name = null)
     {
         $this->name = $type === $id ? $name : null;
         parent::__construct($id, $invalidBehavior);

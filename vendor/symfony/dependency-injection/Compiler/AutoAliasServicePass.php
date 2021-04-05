@@ -8,29 +8,29 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Alias;
+use _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * Sets a service to be an alias of another one, given a format pattern.
  */
-class AutoAliasServicePass implements \_PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class AutoAliasServicePass implements \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         foreach ($container->findTaggedServiceIds('auto_alias') as $serviceId => $tags) {
             foreach ($tags as $tag) {
                 if (!isset($tag['format'])) {
-                    throw new \_PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Missing tag information "format" on auto_alias service "%s".', $serviceId));
+                    throw new \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Missing tag information "format" on auto_alias service "%s".', $serviceId));
                 }
                 $aliasId = $container->getParameterBag()->resolveValue($tag['format']);
                 if ($container->hasDefinition($aliasId) || $container->hasAlias($aliasId)) {
-                    $container->setAlias($serviceId, new \_PhpScoperf6b7f9bf122d\Symfony\Component\DependencyInjection\Alias($aliasId, \true));
+                    $container->setAlias($serviceId, new \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Alias($aliasId, \true));
                 }
             }
         }
