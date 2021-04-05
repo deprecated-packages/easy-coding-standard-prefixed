@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScopercd2fc5ef50ef\Psr\Log\Test;
+namespace _PhpScoperf5c57eca8aae\Psr\Log\Test;
 
-use _PhpScopercd2fc5ef50ef\Psr\Log\AbstractLogger;
+use _PhpScoperf5c57eca8aae\Psr\Log\AbstractLogger;
 /**
  * Used for testing purposes.
  *
@@ -53,7 +53,7 @@ use _PhpScopercd2fc5ef50ef\Psr\Log\AbstractLogger;
  * @method bool hasInfoThatPasses($message)
  * @method bool hasDebugThatPasses($message)
  */
-class TestLogger extends \_PhpScopercd2fc5ef50ef\Psr\Log\AbstractLogger
+class TestLogger extends \_PhpScoperf5c57eca8aae\Psr\Log\AbstractLogger
 {
     /**
      * @var array

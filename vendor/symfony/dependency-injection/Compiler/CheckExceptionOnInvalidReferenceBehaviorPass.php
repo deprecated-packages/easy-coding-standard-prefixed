@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\Reference;
 /**
  * Checks that all references are pointing to a valid service.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class CheckExceptionOnInvalidReferenceBehaviorPass extends \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class CheckExceptionOnInvalidReferenceBehaviorPass extends \_PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $serviceLocatorContextIds = [];
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         $this->serviceLocatorContextIds = [];
         foreach ($container->findTaggedServiceIds('container.service_locator_context') as $id => $tags) {
@@ -40,10 +40,10 @@ class CheckExceptionOnInvalidReferenceBehaviorPass extends \_PhpScopercd2fc5ef50
     }
     protected function processValue($value, bool $isRoot = \false)
     {
-        if (!$value instanceof \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Reference) {
+        if (!$value instanceof \_PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\Reference) {
             return parent::processValue($value, $isRoot);
         }
-        if (\_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE < $value->getInvalidBehavior() || $this->container->has($id = (string) $value)) {
+        if (\_PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE < $value->getInvalidBehavior() || $this->container->has($id = (string) $value)) {
             return $value;
         }
         $currentId = $this->currentId;
@@ -56,13 +56,13 @@ class CheckExceptionOnInvalidReferenceBehaviorPass extends \_PhpScopercd2fc5ef50
                     if ($k !== $id) {
                         $currentId = $k . '" in the container provided to "' . $currentId;
                     }
-                    throw new \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, $currentId, null, $this->getAlternatives($id));
+                    throw new \_PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, $currentId, null, $this->getAlternatives($id));
                 }
             }
         }
         if ('.' === $currentId[0] && $graph->hasNode($currentId)) {
             foreach ($graph->getNode($currentId)->getInEdges() as $edge) {
-                if (!$edge->getValue() instanceof \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Reference || \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE < $edge->getValue()->getInvalidBehavior()) {
+                if (!$edge->getValue() instanceof \_PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\Reference || \_PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE < $edge->getValue()->getInvalidBehavior()) {
                     continue;
                 }
                 $sourceId = $edge->getSourceNode()->getId();
@@ -72,7 +72,7 @@ class CheckExceptionOnInvalidReferenceBehaviorPass extends \_PhpScopercd2fc5ef50
                 }
             }
         }
-        throw new \_PhpScopercd2fc5ef50ef\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, $currentId, null, $this->getAlternatives($id));
+        throw new \_PhpScoperf5c57eca8aae\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException($id, $currentId, null, $this->getAlternatives($id));
     }
     private function getAlternatives(string $id) : array
     {

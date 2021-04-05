@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercd2fc5ef50ef\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter;
 
-use _PhpScopercd2fc5ef50ef\Psr\Cache\CacheItemInterface;
-use _PhpScopercd2fc5ef50ef\Symfony\Component\Cache\CacheItem;
-use _PhpScopercd2fc5ef50ef\Symfony\Component\Cache\PruneableInterface;
-use _PhpScopercd2fc5ef50ef\Symfony\Component\Cache\ResettableInterface;
-use _PhpScopercd2fc5ef50ef\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScopercd2fc5ef50ef\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoperf5c57eca8aae\Psr\Cache\CacheItemInterface;
+use _PhpScoperf5c57eca8aae\Symfony\Component\Cache\CacheItem;
+use _PhpScoperf5c57eca8aae\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoperf5c57eca8aae\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoperf5c57eca8aae\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoperf5c57eca8aae\Symfony\Contracts\Service\ResetInterface;
 /**
  * An adapter that collects data about all cache calls.
  *
@@ -23,11 +23,11 @@ use _PhpScopercd2fc5ef50ef\Symfony\Contracts\Service\ResetInterface;
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TraceableAdapter implements \_PhpScopercd2fc5ef50ef\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScopercd2fc5ef50ef\Symfony\Contracts\Cache\CacheInterface, \_PhpScopercd2fc5ef50ef\Symfony\Component\Cache\PruneableInterface, \_PhpScopercd2fc5ef50ef\Symfony\Component\Cache\ResettableInterface
+class TraceableAdapter implements \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScoperf5c57eca8aae\Symfony\Contracts\Cache\CacheInterface, \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\PruneableInterface, \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\ResettableInterface
 {
     protected $pool;
     private $calls = [];
-    public function __construct(\_PhpScopercd2fc5ef50ef\Symfony\Component\Cache\Adapter\AdapterInterface $pool)
+    public function __construct(\_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter\AdapterInterface $pool)
     {
         $this->pool = $pool;
     }
@@ -36,11 +36,11 @@ class TraceableAdapter implements \_PhpScopercd2fc5ef50ef\Symfony\Component\Cach
      */
     public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
     {
-        if (!$this->pool instanceof \_PhpScopercd2fc5ef50ef\Symfony\Contracts\Cache\CacheInterface) {
-            throw new \BadMethodCallException(\sprintf('Cannot call "%s::get()": this class doesn\'t implement "%s".', \get_debug_type($this->pool), \_PhpScopercd2fc5ef50ef\Symfony\Contracts\Cache\CacheInterface::class));
+        if (!$this->pool instanceof \_PhpScoperf5c57eca8aae\Symfony\Contracts\Cache\CacheInterface) {
+            throw new \BadMethodCallException(\sprintf('Cannot call "%s::get()": this class doesn\'t implement "%s".', \get_debug_type($this->pool), \_PhpScoperf5c57eca8aae\Symfony\Contracts\Cache\CacheInterface::class));
         }
         $isHit = \true;
-        $callback = function (\_PhpScopercd2fc5ef50ef\Symfony\Component\Cache\CacheItem $item, bool &$save) use($callback, &$isHit) {
+        $callback = function (\_PhpScoperf5c57eca8aae\Symfony\Component\Cache\CacheItem $item, bool &$save) use($callback, &$isHit) {
             $isHit = $item->isHit();
             return $callback($item, $save);
         };
@@ -109,7 +109,7 @@ class TraceableAdapter implements \_PhpScopercd2fc5ef50ef\Symfony\Component\Cach
      *
      * @return bool
      */
-    public function save(\_PhpScopercd2fc5ef50ef\Psr\Cache\CacheItemInterface $item)
+    public function save(\_PhpScoperf5c57eca8aae\Psr\Cache\CacheItemInterface $item)
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -123,7 +123,7 @@ class TraceableAdapter implements \_PhpScopercd2fc5ef50ef\Symfony\Component\Cach
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScopercd2fc5ef50ef\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(\_PhpScoperf5c57eca8aae\Psr\Cache\CacheItemInterface $item)
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -165,7 +165,7 @@ class TraceableAdapter implements \_PhpScopercd2fc5ef50ef\Symfony\Component\Cach
     {
         $event = $this->start(__FUNCTION__);
         try {
-            if ($this->pool instanceof \_PhpScopercd2fc5ef50ef\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($this->pool instanceof \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 return $event->result = $this->pool->clear($prefix);
             }
             return $event->result = $this->pool->clear();
@@ -207,7 +207,7 @@ class TraceableAdapter implements \_PhpScopercd2fc5ef50ef\Symfony\Component\Cach
      */
     public function prune()
     {
-        if (!$this->pool instanceof \_PhpScopercd2fc5ef50ef\Symfony\Component\Cache\PruneableInterface) {
+        if (!$this->pool instanceof \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\PruneableInterface) {
             return \false;
         }
         $event = $this->start(__FUNCTION__);
@@ -222,7 +222,7 @@ class TraceableAdapter implements \_PhpScopercd2fc5ef50ef\Symfony\Component\Cach
      */
     public function reset()
     {
-        if ($this->pool instanceof \_PhpScopercd2fc5ef50ef\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->pool instanceof \_PhpScoperf5c57eca8aae\Symfony\Contracts\Service\ResetInterface) {
             $this->pool->reset();
         }
         $this->clearCalls();
@@ -249,7 +249,7 @@ class TraceableAdapter implements \_PhpScopercd2fc5ef50ef\Symfony\Component\Cach
     }
     protected function start($name)
     {
-        $this->calls[] = $event = new \_PhpScopercd2fc5ef50ef\Symfony\Component\Cache\Adapter\TraceableAdapterEvent();
+        $this->calls[] = $event = new \_PhpScoperf5c57eca8aae\Symfony\Component\Cache\Adapter\TraceableAdapterEvent();
         $event->name = $name;
         $event->start = \microtime(\true);
         return $event;

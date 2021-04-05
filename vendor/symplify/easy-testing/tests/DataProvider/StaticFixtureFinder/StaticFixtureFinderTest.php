@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\Tests\DataProvider\StaticFixtureFinder;
 
-use _PhpScopercd2fc5ef50ef\PHPUnit\Framework\TestCase;
+use _PhpScoperf5c57eca8aae\PHPUnit\Framework\TestCase;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
-final class StaticFixtureFinderTest extends \_PhpScopercd2fc5ef50ef\PHPUnit\Framework\TestCase
+final class StaticFixtureFinderTest extends \_PhpScoperf5c57eca8aae\PHPUnit\Framework\TestCase
 {
     public function testYieldDirectory() : void
     {
