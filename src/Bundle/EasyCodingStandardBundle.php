@@ -5,8 +5,8 @@ namespace Symplify\EasyCodingStandard\Bundle;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpCsFixer\Fixer\FixerInterface;
-use _PhpScoper86aebf8cf357\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper86aebf8cf357\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper255a4eaff575\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper255a4eaff575\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface;
 use Symplify\EasyCodingStandard\DependencyInjection\CompilerPass\ConflictingCheckersCompilerPass;
 use Symplify\EasyCodingStandard\DependencyInjection\CompilerPass\FixerWhitespaceConfigCompilerPass;
@@ -14,12 +14,12 @@ use Symplify\EasyCodingStandard\DependencyInjection\CompilerPass\RemoveExcludedC
 use Symplify\EasyCodingStandard\DependencyInjection\CompilerPass\RemoveMutualCheckersCompilerPass;
 use Symplify\EasyCodingStandard\DependencyInjection\Extension\EasyCodingStandardExtension;
 use Symplify\PackageBuilder\DependencyInjection\CompilerPass\AutowireInterfacesCompilerPass;
-final class EasyCodingStandardBundle extends \_PhpScoper86aebf8cf357\Symfony\Component\HttpKernel\Bundle\Bundle
+final class EasyCodingStandardBundle extends \_PhpScoper255a4eaff575\Symfony\Component\HttpKernel\Bundle\Bundle
 {
     /**
      * Order of compiler passes matters!
      */
-    public function build(\_PhpScoper86aebf8cf357\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScoper255a4eaff575\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         // cleanup
         $containerBuilder->addCompilerPass(new \Symplify\EasyCodingStandard\DependencyInjection\CompilerPass\RemoveExcludedCheckersCompilerPass());

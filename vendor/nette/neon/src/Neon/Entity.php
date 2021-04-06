@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper86aebf8cf357\Nette\Neon;
+namespace _PhpScoper255a4eaff575\Nette\Neon;
 
 /**
  * Representation of NEON entity 'foo(bar=1)'

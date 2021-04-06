@@ -5,7 +5,7 @@ namespace Symplify\AutowireArrayParameter\Skipper;
 
 use ReflectionMethod;
 use ReflectionParameter;
-use _PhpScoper86aebf8cf357\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper255a4eaff575\Symfony\Component\DependencyInjection\Definition;
 use Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
 final class ParameterSkipper
 {
@@ -15,7 +15,7 @@ final class ParameterSkipper
      * @var string[]
      * @noRector
      */
-    private const DEFAULT_EXCLUDED_FATAL_CLASSES = ['_PhpScoper86aebf8cf357\\Symfony\\Component\\Form\\FormExtensionInterface', '_PhpScoper86aebf8cf357\\Symfony\\Component\\Asset\\PackageInterface', '_PhpScoper86aebf8cf357\\Symfony\\Component\\Config\\Loader\\LoaderInterface', '_PhpScoper86aebf8cf357\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', '_PhpScoper86aebf8cf357\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', '_PhpScoper86aebf8cf357\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', '_PhpScoper86aebf8cf357\\Sonata\\Doctrine\\Adapter\\AdapterChain', '_PhpScoper86aebf8cf357\\Sonata\\Twig\\Extension\\TemplateExtension'];
+    private const DEFAULT_EXCLUDED_FATAL_CLASSES = ['_PhpScoper255a4eaff575\\Symfony\\Component\\Form\\FormExtensionInterface', '_PhpScoper255a4eaff575\\Symfony\\Component\\Asset\\PackageInterface', '_PhpScoper255a4eaff575\\Symfony\\Component\\Config\\Loader\\LoaderInterface', '_PhpScoper255a4eaff575\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', '_PhpScoper255a4eaff575\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', '_PhpScoper255a4eaff575\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', '_PhpScoper255a4eaff575\\Sonata\\Doctrine\\Adapter\\AdapterChain', '_PhpScoper255a4eaff575\\Sonata\\Twig\\Extension\\TemplateExtension'];
     /**
      * @var ParameterTypeResolver
      */
@@ -32,7 +32,7 @@ final class ParameterSkipper
         $this->parameterTypeResolver = $parameterTypeResolver;
         $this->excludedFatalClasses = \array_merge(self::DEFAULT_EXCLUDED_FATAL_CLASSES, $excludedFatalClasses);
     }
-    public function shouldSkipParameter(\ReflectionMethod $reflectionMethod, \_PhpScoper86aebf8cf357\Symfony\Component\DependencyInjection\Definition $definition, \ReflectionParameter $reflectionParameter) : bool
+    public function shouldSkipParameter(\ReflectionMethod $reflectionMethod, \_PhpScoper255a4eaff575\Symfony\Component\DependencyInjection\Definition $definition, \ReflectionParameter $reflectionParameter) : bool
     {
         if (!$this->isArrayType($reflectionParameter)) {
             return \true;

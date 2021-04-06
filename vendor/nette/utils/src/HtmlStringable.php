@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper86aebf8cf357\Nette;
+namespace _PhpScoper255a4eaff575\Nette;
 
 interface HtmlStringable
 {
@@ -14,4 +14,4 @@ interface HtmlStringable
      */
     function __toString() : string;
 }
-\interface_exists(\_PhpScoper86aebf8cf357\Nette\Utils\IHtmlString::class);
+\interface_exists(\_PhpScoper255a4eaff575\Nette\Utils\IHtmlString::class);
