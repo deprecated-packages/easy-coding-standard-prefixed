@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Reporter;
 
-use _PhpScoperb6361033cf41\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper8cb97064581a\Symfony\Component\Console\Style\SymfonyStyle;
 final class SnippetReporter
 {
     /**
      * @var SymfonyStyle
      */
     private $symfonyStyle;
-    public function __construct(\_PhpScoperb6361033cf41\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
+    public function __construct(\_PhpScoper8cb97064581a\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle)
     {
         $this->symfonyStyle = $symfonyStyle;
     }

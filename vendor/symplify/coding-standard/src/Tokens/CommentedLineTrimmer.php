@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
-use _PhpScoperb6361033cf41\Nette\Utils\Strings;
+use _PhpScoper8cb97064581a\Nette\Utils\Strings;
 /**
  * Heavily inspired by
  *
@@ -18,7 +18,7 @@ final class CommentedLineTrimmer
     public function trim(string $tokenContent) : string
     {
         foreach (self::OPENING_LINE as $openingLine) {
-            if (!\_PhpScoperb6361033cf41\Nette\Utils\Strings::startsWith($tokenContent, $openingLine)) {
+            if (!\_PhpScoper8cb97064581a\Nette\Utils\Strings::startsWith($tokenContent, $openingLine)) {
                 continue;
             }
             return \substr($tokenContent, \strlen($openingLine));
