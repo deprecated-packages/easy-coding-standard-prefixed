@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper255a4eaff575;
+namespace _PhpScoperb6361033cf41;
 
 /**
  * Bootstrap file for PHP_CodeSniffer unit tests.
@@ -25,17 +25,17 @@ if (\is_file(__DIR__ . '/../autoload.php') === \true) {
 }
 $tokens = new \PHP_CodeSniffer\Util\Tokens();
 // Compatibility for PHPUnit < 6 and PHPUnit 6+.
-if (\class_exists('_PhpScoper255a4eaff575\\PHPUnit_Framework_TestSuite') === \true && \class_exists('_PhpScoper255a4eaff575\\PHPUnit\\Framework\\TestSuite') === \false) {
-    \class_alias('_PhpScoper255a4eaff575\\PHPUnit_Framework_TestSuite', 'PHPUnit' . '\\Framework\\TestSuite');
+if (\class_exists('_PhpScoperb6361033cf41\\PHPUnit_Framework_TestSuite') === \true && \class_exists('_PhpScoperb6361033cf41\\PHPUnit\\Framework\\TestSuite') === \false) {
+    \class_alias('_PhpScoperb6361033cf41\\PHPUnit_Framework_TestSuite', 'PHPUnit' . '\\Framework\\TestSuite');
 }
-if (\class_exists('_PhpScoper255a4eaff575\\PHPUnit_Framework_TestCase') === \true && \class_exists('_PhpScoper255a4eaff575\\PHPUnit\\Framework\\TestCase') === \false) {
-    \class_alias('_PhpScoper255a4eaff575\\PHPUnit_Framework_TestCase', 'PHPUnit' . '\\Framework\\TestCase');
+if (\class_exists('_PhpScoperb6361033cf41\\PHPUnit_Framework_TestCase') === \true && \class_exists('_PhpScoperb6361033cf41\\PHPUnit\\Framework\\TestCase') === \false) {
+    \class_alias('_PhpScoperb6361033cf41\\PHPUnit_Framework_TestCase', 'PHPUnit' . '\\Framework\\TestCase');
 }
-if (\class_exists('_PhpScoper255a4eaff575\\PHPUnit_TextUI_TestRunner') === \true && \class_exists('_PhpScoper255a4eaff575\\PHPUnit\\TextUI\\TestRunner') === \false) {
-    \class_alias('_PhpScoper255a4eaff575\\PHPUnit_TextUI_TestRunner', 'PHPUnit' . '\\TextUI\\TestRunner');
+if (\class_exists('_PhpScoperb6361033cf41\\PHPUnit_TextUI_TestRunner') === \true && \class_exists('_PhpScoperb6361033cf41\\PHPUnit\\TextUI\\TestRunner') === \false) {
+    \class_alias('_PhpScoperb6361033cf41\\PHPUnit_TextUI_TestRunner', 'PHPUnit' . '\\TextUI\\TestRunner');
 }
-if (\class_exists('_PhpScoper255a4eaff575\\PHPUnit_Framework_TestResult') === \true && \class_exists('_PhpScoper255a4eaff575\\PHPUnit\\Framework\\TestResult') === \false) {
-    \class_alias('_PhpScoper255a4eaff575\\PHPUnit_Framework_TestResult', 'PHPUnit' . '\\Framework\\TestResult');
+if (\class_exists('_PhpScoperb6361033cf41\\PHPUnit_Framework_TestResult') === \true && \class_exists('_PhpScoperb6361033cf41\\PHPUnit\\Framework\\TestResult') === \false) {
+    \class_alias('_PhpScoperb6361033cf41\\PHPUnit_Framework_TestResult', 'PHPUnit' . '\\Framework\\TestResult');
 }
 // Determine whether this is a PEAR install or not.
 $GLOBALS['PHP_CODESNIFFER_PEAR'] = \false;

@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper255a4eaff575\Symfony\Component\Console\Helper;
+namespace _PhpScoperb6361033cf41\Symfony\Component\Console\Helper;
 
-use _PhpScoper255a4eaff575\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScoper255a4eaff575\Symfony\Component\String\UnicodeString;
+use _PhpScoperb6361033cf41\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoperb6361033cf41\Symfony\Component\String\UnicodeString;
 /**
  * Helper is the base class for all helper classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Helper implements \_PhpScoper255a4eaff575\Symfony\Component\Console\Helper\HelperInterface
+abstract class Helper implements \_PhpScoperb6361033cf41\Symfony\Component\Console\Helper\HelperInterface
 {
     protected $helperSet = null;
     /**
      * {@inheritdoc}
      */
-    public function setHelperSet(\_PhpScoper255a4eaff575\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
+    public function setHelperSet(\_PhpScoperb6361033cf41\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
     {
         $this->helperSet = $helperSet;
     }
@@ -43,7 +43,7 @@ abstract class Helper implements \_PhpScoper255a4eaff575\Symfony\Component\Conso
     {
         $string ?? ($string = '');
         if (\preg_match('//u', $string)) {
-            return (new \_PhpScoper255a4eaff575\Symfony\Component\String\UnicodeString($string))->width(\false);
+            return (new \_PhpScoperb6361033cf41\Symfony\Component\String\UnicodeString($string))->width(\false);
         }
         if (\false === ($encoding = \mb_detect_encoding($string, null, \true))) {
             return \strlen($string);
@@ -90,15 +90,15 @@ abstract class Helper implements \_PhpScoper255a4eaff575\Symfony\Component\Conso
         }
         return \sprintf('%d B', $memory);
     }
-    public static function strlenWithoutDecoration(\_PhpScoper255a4eaff575\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
+    public static function strlenWithoutDecoration(\_PhpScoperb6361033cf41\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
     {
         $string = self::removeDecoration($formatter, $string);
         if (\preg_match('//u', $string)) {
-            return (new \_PhpScoper255a4eaff575\Symfony\Component\String\UnicodeString($string))->width(\true);
+            return (new \_PhpScoperb6361033cf41\Symfony\Component\String\UnicodeString($string))->width(\true);
         }
         return self::strlen($string);
     }
-    public static function removeDecoration(\_PhpScoper255a4eaff575\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
+    public static function removeDecoration(\_PhpScoperb6361033cf41\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter, ?string $string)
     {
         $isDecorated = $formatter->isDecorated();
         $formatter->setDecorated(\false);

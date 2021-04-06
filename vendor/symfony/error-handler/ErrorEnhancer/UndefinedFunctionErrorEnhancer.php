@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper255a4eaff575\Symfony\Component\ErrorHandler\ErrorEnhancer;
+namespace _PhpScoperb6361033cf41\Symfony\Component\ErrorHandler\ErrorEnhancer;
 
-use _PhpScoper255a4eaff575\Symfony\Component\ErrorHandler\Error\FatalError;
-use _PhpScoper255a4eaff575\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError;
+use _PhpScoperb6361033cf41\Symfony\Component\ErrorHandler\Error\FatalError;
+use _PhpScoperb6361033cf41\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class UndefinedFunctionErrorEnhancer implements \_PhpScoper255a4eaff575\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
+class UndefinedFunctionErrorEnhancer implements \_PhpScoperb6361033cf41\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function enhance(\Throwable $error) : ?\Throwable
     {
-        if ($error instanceof \_PhpScoper255a4eaff575\Symfony\Component\ErrorHandler\Error\FatalError) {
+        if ($error instanceof \_PhpScoperb6361033cf41\Symfony\Component\ErrorHandler\Error\FatalError) {
             return null;
         }
         $message = $error->getMessage();
@@ -72,6 +72,6 @@ class UndefinedFunctionErrorEnhancer implements \_PhpScoper255a4eaff575\Symfony\
             }
             $message .= "\nDid you mean to call " . $candidates;
         }
-        return new \_PhpScoper255a4eaff575\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError($message, $error);
+        return new \_PhpScoperb6361033cf41\Symfony\Component\ErrorHandler\Error\UndefinedFunctionError($message, $error);
     }
 }

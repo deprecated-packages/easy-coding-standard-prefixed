@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper255a4eaff575\Composer\Semver;
+namespace _PhpScoperb6361033cf41\Composer\Semver;
 
-use _PhpScoper255a4eaff575\Composer\Semver\Constraint\Constraint;
+use _PhpScoperb6361033cf41\Composer\Semver\Constraint\Constraint;
 class Interval
 {
     /** @var Constraint */
     private $start;
     /** @var Constraint */
     private $end;
-    public function __construct(\_PhpScoper255a4eaff575\Composer\Semver\Constraint\Constraint $start, \_PhpScoper255a4eaff575\Composer\Semver\Constraint\Constraint $end)
+    public function __construct(\_PhpScoperb6361033cf41\Composer\Semver\Constraint\Constraint $start, \_PhpScoperb6361033cf41\Composer\Semver\Constraint\Constraint $end)
     {
         $this->start = $start;
         $this->end = $end;
@@ -43,7 +43,7 @@ class Interval
     {
         static $zero;
         if (null === $zero) {
-            $zero = new \_PhpScoper255a4eaff575\Composer\Semver\Constraint\Constraint('>=', '0.0.0.0-dev');
+            $zero = new \_PhpScoperb6361033cf41\Composer\Semver\Constraint\Constraint('>=', '0.0.0.0-dev');
         }
         return $zero;
     }
@@ -54,7 +54,7 @@ class Interval
     {
         static $positiveInfinity;
         if (null === $positiveInfinity) {
-            $positiveInfinity = new \_PhpScoper255a4eaff575\Composer\Semver\Constraint\Constraint('<', \PHP_INT_MAX . '.0.0.0');
+            $positiveInfinity = new \_PhpScoperb6361033cf41\Composer\Semver\Constraint\Constraint('<', \PHP_INT_MAX . '.0.0.0');
         }
         return $positiveInfinity;
     }

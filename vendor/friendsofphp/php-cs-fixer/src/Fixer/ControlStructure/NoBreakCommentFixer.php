@@ -22,8 +22,8 @@ use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper255a4eaff575\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper255a4eaff575\Symfony\Component\OptionsResolver\Options;
+use _PhpScoperb6361033cf41\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoperb6361033cf41\Symfony\Component\OptionsResolver\Options;
 /**
  * Fixer for rule defined in PSR2 ¶5.2.
  */
@@ -77,10 +77,10 @@ switch ($foo) {
     {
         return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('comment_text', 'The text to use in the added comment and to detect it.'))->setAllowedTypes(['string'])->setAllowedValues([static function ($value) {
             if (\is_string($value) && \PhpCsFixer\Preg::match('/\\R/', $value)) {
-                throw new \_PhpScoper255a4eaff575\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException('The comment text must not contain new lines.');
+                throw new \_PhpScoperb6361033cf41\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException('The comment text must not contain new lines.');
             }
             return \true;
-        }])->setNormalizer(static function (\_PhpScoper255a4eaff575\Symfony\Component\OptionsResolver\Options $options, $value) {
+        }])->setNormalizer(static function (\_PhpScoperb6361033cf41\Symfony\Component\OptionsResolver\Options $options, $value) {
             return \rtrim($value);
         })->setDefault('no break')->getOption()]);
     }
