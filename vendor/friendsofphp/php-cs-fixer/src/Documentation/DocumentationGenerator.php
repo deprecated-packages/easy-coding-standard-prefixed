@@ -46,7 +46,12 @@ final class DocumentationGenerator
     private $path;
     public function __construct()
     {
-        $this->differ = new \PhpCsFixer\Diff\v2_0\Differ(new \PhpCsFixer\Diff\GeckoPackages\DiffOutputBuilder\UnifiedDiffOutputBuilder(['fromFile' => 'Original', 'toFile' => 'New']));
+        $this->differ = new \PhpCsFixer\Diff\v2_0\Differ(new \PhpCsFixer\Diff\GeckoPackages\DiffOutputBuilder\UnifiedDiffOutputBuilder([
+            'contextLines' => 1024,
+            // number large enough to have all lines in diff
+            'fromFile' => 'Original',
+            'toFile' => 'New',
+        ]));
         $this->path = \dirname(__DIR__, 2) . '/doc';
     }
     /**
@@ -405,6 +410,7 @@ RST;
         }
         $fixer->fix($file, $tokens);
         $diff = $this->differ->diff($old, $tokens->generateCode());
+        $diff = \PhpCsFixer\Preg::replace('/@@[ \\+\\-\\d,]+@@\\n/', '', $diff);
         $diff = \PhpCsFixer\Preg::replace('/\\r/', '^M', $diff);
         $diff = \PhpCsFixer\Preg::replace('/^ $/m', '', $diff);
         $diff = \PhpCsFixer\Preg::replace('/\\n$/', '', $diff);

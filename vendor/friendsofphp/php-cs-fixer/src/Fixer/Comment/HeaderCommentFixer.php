@@ -23,7 +23,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper8cb97064581a\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper1ed8518cf1bf\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Antonio J. García Lagar <aj@garcialagar.es>
  * @author SpacePossum
@@ -67,7 +67,17 @@ declare(strict_types=1);
 namespace A\\B;
 
 echo 1;
-', ['header' => 'Made with love.', 'comment_type' => 'comment', 'location' => 'after_declare_strict'])]);
+', ['header' => 'Made with love.', 'comment_type' => 'comment', 'location' => 'after_declare_strict']), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+declare(strict_types=1);
+
+/*
+ * Comment is not wanted here.
+ */
+
+namespace A\\B;
+
+echo 1;
+', ['header' => ''])]);
     }
     /**
      * {@inheritdoc}
@@ -137,7 +147,7 @@ echo 1;
     protected function createConfigurationDefinition()
     {
         $fixerName = $this->getName();
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('header', 'Proper header content.'))->setAllowedTypes(['string'])->setNormalizer(static function (\_PhpScoper8cb97064581a\Symfony\Component\OptionsResolver\Options $options, $value) use($fixerName) {
+        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('header', 'Proper header content.'))->setAllowedTypes(['string'])->setNormalizer(static function (\_PhpScoper1ed8518cf1bf\Symfony\Component\OptionsResolver\Options $options, $value) use($fixerName) {
             if ('' === \trim($value)) {
                 return '';
             }

@@ -4,9 +4,9 @@ declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\Tests\DocBlock;
 
 use Iterator;
-use _PhpScoper8cb97064581a\PHPUnit\Framework\TestCase;
+use _PhpScoper1ed8518cf1bf\PHPUnit\Framework\TestCase;
 use Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
-final class ParamTypeDocBlockResolverTest extends \_PhpScoper8cb97064581a\PHPUnit\Framework\TestCase
+final class ParamTypeDocBlockResolverTest extends \_PhpScoper1ed8518cf1bf\PHPUnit\Framework\TestCase
 {
     /**
      * @var ParamTypeDocBlockResolver

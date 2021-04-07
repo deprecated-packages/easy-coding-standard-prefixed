@@ -123,7 +123,7 @@ final class NoMixedEchoPrintFixer extends \PhpCsFixer\AbstractFixer implements \
     private function fixPrintToEcho(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
     {
         $prevToken = $tokens[$tokens->getPrevMeaningfulToken($index)];
-        if (!$prevToken->equalsAny([';', '{', '}', [\T_OPEN_TAG]])) {
+        if (!$prevToken->equalsAny([';', '{', '}', ')', [\T_OPEN_TAG], [\T_ELSE]])) {
             return;
         }
         $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_ECHO, 'echo']);

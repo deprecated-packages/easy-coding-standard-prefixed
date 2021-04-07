@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\ConsolePackageBuilder\Bundle;
 
-use _PhpScoper8cb97064581a\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper8cb97064581a\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper1ed8518cf1bf\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper1ed8518cf1bf\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass\NamelessConsoleCommandCompilerPass;
-final class NamelessConsoleCommandBundle extends \_PhpScoper8cb97064581a\Symfony\Component\HttpKernel\Bundle\Bundle
+final class NamelessConsoleCommandBundle extends \_PhpScoper1ed8518cf1bf\Symfony\Component\HttpKernel\Bundle\Bundle
 {
-    public function build(\_PhpScoper8cb97064581a\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(\_PhpScoper1ed8518cf1bf\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->addCompilerPass(new \Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass\NamelessConsoleCommandCompilerPass());
     }

@@ -142,7 +142,11 @@ final class GroupImportFixer extends \PhpCsFixer\AbstractFixer
      */
     private function getNamespaceNameWithSlash(\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration)
     {
-        return \substr($useDeclaration->getFullName(), 0, \strripos($useDeclaration->getFullName(), '\\') + 1);
+        $position = \strrpos($useDeclaration->getFullName(), '\\');
+        if (\false === $position || 0 === $position) {
+            return $useDeclaration->getFullName();
+        }
+        return \substr($useDeclaration->getFullName(), 0, $position + 1);
     }
     /**
      * Insert use with alias to the group.
