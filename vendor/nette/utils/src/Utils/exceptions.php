@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper9acecd3612c5\Nette\Utils;
+namespace _PhpScoper6a8174766bf7\Nette\Utils;
 
 /**
  * The exception that is thrown when an image error occurs.
@@ -16,7 +16,7 @@ class ImageException extends \Exception
 /**
  * The exception that indicates invalid image file.
  */
-class UnknownImageFileException extends \_PhpScoper9acecd3612c5\Nette\Utils\ImageException
+class UnknownImageFileException extends \_PhpScoper6a8174766bf7\Nette\Utils\ImageException
 {
 }
 /**
