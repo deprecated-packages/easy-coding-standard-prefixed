@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper14718bfcc75e\Symfony\Component\HttpFoundation\Session;
+namespace _PhpScoper57c79939064b\Symfony\Component\HttpFoundation\Session;
 
 /**
  * Session Bag store.

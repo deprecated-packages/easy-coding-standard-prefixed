@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
-use _PhpScoper14718bfcc75e\Nette\Utils\Strings;
+use _PhpScoper57c79939064b\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\ValueObject\StartAndEnd;
@@ -57,7 +57,7 @@ final class CommentedContentResolver
             $lastLineSeen = $tokenLine;
             // Trim as much off the comment as possible so we don't, have additional whitespace tokens or comment tokens
             $tokenContent = \trim($token->getContent());
-            $hasBlockCommentCloser = \_PhpScoper14718bfcc75e\Nette\Utils\Strings::endsWith($tokenContent, '*/');
+            $hasBlockCommentCloser = \_PhpScoper57c79939064b\Nette\Utils\Strings::endsWith($tokenContent, '*/');
             if ($hasBlockCommentCloser) {
                 // Closer of a block comment found
                 break;
@@ -67,7 +67,7 @@ final class CommentedContentResolver
     }
     private function shouldBreak(int $lastLineSeen, int $tokenLine, \PhpCsFixer\Tokenizer\Token $token) : bool
     {
-        if ($lastLineSeen + 1 <= $tokenLine && \_PhpScoper14718bfcc75e\Nette\Utils\Strings::startsWith($token->getContent(), '/*')) {
+        if ($lastLineSeen + 1 <= $tokenLine && \_PhpScoper57c79939064b\Nette\Utils\Strings::startsWith($token->getContent(), '/*')) {
             // First non-whitespace token on a new line is start of a different style comment.
             return \true;
         }
@@ -82,6 +82,6 @@ final class CommentedContentResolver
         if ($lastLineSeen >= $tokenLine) {
             return \false;
         }
-        return !\_PhpScoper14718bfcc75e\Nette\Utils\Strings::startsWith($token->getContent(), '//');
+        return !\_PhpScoper57c79939064b\Nette\Utils\Strings::startsWith($token->getContent(), '//');
     }
 }
