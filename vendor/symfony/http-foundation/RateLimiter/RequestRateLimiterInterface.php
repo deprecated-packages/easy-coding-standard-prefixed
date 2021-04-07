@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6a8174766bf7\Symfony\Component\HttpFoundation\RateLimiter;
+namespace _PhpScoper14718bfcc75e\Symfony\Component\HttpFoundation\RateLimiter;
 
-use _PhpScoper6a8174766bf7\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper6a8174766bf7\Symfony\Component\RateLimiter\RateLimit;
+use _PhpScoper14718bfcc75e\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper14718bfcc75e\Symfony\Component\RateLimiter\RateLimit;
 /**
  * A special type of limiter that deals with requests.
  *
@@ -24,6 +24,6 @@ use _PhpScoper6a8174766bf7\Symfony\Component\RateLimiter\RateLimit;
  */
 interface RequestRateLimiterInterface
 {
-    public function consume(\_PhpScoper6a8174766bf7\Symfony\Component\HttpFoundation\Request $request) : \_PhpScoper6a8174766bf7\Symfony\Component\RateLimiter\RateLimit;
-    public function reset(\_PhpScoper6a8174766bf7\Symfony\Component\HttpFoundation\Request $request) : void;
+    public function consume(\_PhpScoper14718bfcc75e\Symfony\Component\HttpFoundation\Request $request) : \_PhpScoper14718bfcc75e\Symfony\Component\RateLimiter\RateLimit;
+    public function reset(\_PhpScoper14718bfcc75e\Symfony\Component\HttpFoundation\Request $request) : void;
 }

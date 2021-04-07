@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Json;
 
-use _PhpScoper6a8174766bf7\Nette\Utils\Strings;
+use _PhpScoper14718bfcc75e\Nette\Utils\Strings;
 use Symplify\ComposerJsonManipulator\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 final class JsonInliner
@@ -26,8 +26,8 @@ final class JsonInliner
         $inlineSections = $this->parameterProvider->provideArrayParameter(\Symplify\ComposerJsonManipulator\ValueObject\Option::INLINE_SECTIONS);
         foreach ($inlineSections as $inlineSection) {
             $pattern = '#("' . \preg_quote($inlineSection, '#') . '": )\\[(.*?)\\](,)#ms';
-            $jsonContent = \_PhpScoper6a8174766bf7\Nette\Utils\Strings::replace($jsonContent, $pattern, function (array $match) : string {
-                $inlined = \_PhpScoper6a8174766bf7\Nette\Utils\Strings::replace($match[2], self::SPACE_REGEX, ' ');
+            $jsonContent = \_PhpScoper14718bfcc75e\Nette\Utils\Strings::replace($jsonContent, $pattern, function (array $match) : string {
+                $inlined = \_PhpScoper14718bfcc75e\Nette\Utils\Strings::replace($match[2], self::SPACE_REGEX, ' ');
                 $inlined = \trim($inlined);
                 $inlined = '[' . $inlined . ']';
                 return $match[1] . $inlined . $match[3];

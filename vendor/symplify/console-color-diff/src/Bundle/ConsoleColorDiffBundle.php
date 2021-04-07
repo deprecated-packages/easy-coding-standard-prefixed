@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\Bundle;
 
-use _PhpScoper6a8174766bf7\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper14718bfcc75e\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\ConsoleColorDiff\DependencyInjection\Extension\ConsoleColorDiffExtension;
-final class ConsoleColorDiffBundle extends \_PhpScoper6a8174766bf7\Symfony\Component\HttpKernel\Bundle\Bundle
+final class ConsoleColorDiffBundle extends \_PhpScoper14718bfcc75e\Symfony\Component\HttpKernel\Bundle\Bundle
 {
     protected function createContainerExtension() : \Symplify\ConsoleColorDiff\DependencyInjection\Extension\ConsoleColorDiffExtension
     {
