@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperd8048db577a9\Nette\Localization;
+namespace _PhpScoper9acecd3612c5\Nette\Localization;
 
 /**
  * Translator adapter.
@@ -19,4 +19,4 @@ interface Translator
      */
     function translate($message, ...$parameters) : string;
 }
-\interface_exists(\_PhpScoperd8048db577a9\Nette\Localization\Nette\Localization\ITranslator::class);
+\interface_exists(\_PhpScoper9acecd3612c5\Nette\Localization\Nette\Localization\ITranslator::class);

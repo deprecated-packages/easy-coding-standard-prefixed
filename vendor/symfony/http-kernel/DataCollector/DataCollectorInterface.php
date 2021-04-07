@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd8048db577a9\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper9acecd3612c5\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoperd8048db577a9\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperd8048db577a9\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperd8048db577a9\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper9acecd3612c5\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper9acecd3612c5\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper9acecd3612c5\Symfony\Contracts\Service\ResetInterface;
 /**
  * DataCollectorInterface.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface DataCollectorInterface extends \_PhpScoperd8048db577a9\Symfony\Contracts\Service\ResetInterface
+interface DataCollectorInterface extends \_PhpScoper9acecd3612c5\Symfony\Contracts\Service\ResetInterface
 {
     /**
      * Collects data for the given Request and Response.
      */
-    public function collect(\_PhpScoperd8048db577a9\Symfony\Component\HttpFoundation\Request $request, \_PhpScoperd8048db577a9\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null);
+    public function collect(\_PhpScoper9acecd3612c5\Symfony\Component\HttpFoundation\Request $request, \_PhpScoper9acecd3612c5\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null);
     /**
      * Returns the name of the collector.
      *
