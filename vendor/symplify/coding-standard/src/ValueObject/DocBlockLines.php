@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\ValueObject;
 
-use _PhpScoper9a024705919c\Nette\Utils\Strings;
+use _PhpScopera909b9d9be2e\Nette\Utils\Strings;
 final class DocBlockLines
 {
     /**
@@ -40,7 +40,7 @@ final class DocBlockLines
     public function hasListDescriptionLines() : bool
     {
         foreach ($this->descriptionLines as $descriptionLine) {
-            if (\_PhpScoper9a024705919c\Nette\Utils\Strings::startsWith($descriptionLine, '-')) {
+            if (\_PhpScopera909b9d9be2e\Nette\Utils\Strings::startsWith($descriptionLine, '-')) {
                 return \true;
             }
         }

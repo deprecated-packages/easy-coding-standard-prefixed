@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Sorter;
 
-use _PhpScoper9a024705919c\Nette\Utils\Strings;
+use _PhpScopera909b9d9be2e\Nette\Utils\Strings;
 /**
  * Mostly inspired by https://github.com/composer/composer/blob/master/src/Composer/Json/JsonManipulator.php
  *
@@ -39,7 +39,7 @@ final class ComposerPackageSorter
     private function createNameWithPriority(string $requirementName) : string
     {
         if ($this->isPlatformPackage($requirementName)) {
-            return \_PhpScoper9a024705919c\Nette\Utils\Strings::replace($requirementName, self::REQUIREMENT_TYPE_REGEX, function (array $match) : string {
+            return \_PhpScopera909b9d9be2e\Nette\Utils\Strings::replace($requirementName, self::REQUIREMENT_TYPE_REGEX, function (array $match) : string {
                 $name = $match['name'];
                 if ($name === 'php') {
                     return '0-' . $name;
@@ -60,6 +60,6 @@ final class ComposerPackageSorter
     }
     private function isPlatformPackage(string $name) : bool
     {
-        return (bool) \_PhpScoper9a024705919c\Nette\Utils\Strings::match($name, self::PLATFORM_PACKAGE_REGEX);
+        return (bool) \_PhpScopera909b9d9be2e\Nette\Utils\Strings::match($name, self::PLATFORM_PACKAGE_REGEX);
     }
 }

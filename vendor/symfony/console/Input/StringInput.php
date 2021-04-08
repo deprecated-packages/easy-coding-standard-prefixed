@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9a024705919c\Symfony\Component\Console\Input;
+namespace _PhpScopera909b9d9be2e\Symfony\Component\Console\Input;
 
-use _PhpScoper9a024705919c\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScopera909b9d9be2e\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * StringInput represents an input provided as a string.
  *
@@ -20,7 +20,7 @@ use _PhpScoper9a024705919c\Symfony\Component\Console\Exception\InvalidArgumentEx
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StringInput extends \_PhpScoper9a024705919c\Symfony\Component\Console\Input\ArgvInput
+class StringInput extends \_PhpScopera909b9d9be2e\Symfony\Component\Console\Input\ArgvInput
 {
     public const REGEX_STRING = '([^\\s]+?)(?:\\s|(?<!\\\\)"|(?<!\\\\)\'|$)';
     public const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')';
@@ -52,7 +52,7 @@ class StringInput extends \_PhpScoper9a024705919c\Symfony\Component\Console\Inpu
                 $tokens[] = \stripcslashes($match[1]);
             } else {
                 // should never happen
-                throw new \_PhpScoper9a024705919c\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unable to parse input near "... %s ...".', \substr($input, $cursor, 10)));
+                throw new \_PhpScopera909b9d9be2e\Symfony\Component\Console\Exception\InvalidArgumentException(\sprintf('Unable to parse input near "... %s ...".', \substr($input, $cursor, 10)));
             }
             $cursor += \strlen($match[0]);
         }

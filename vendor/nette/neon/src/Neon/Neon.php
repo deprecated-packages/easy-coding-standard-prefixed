@@ -5,7 +5,7 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper9a024705919c\Nette\Neon;
+namespace _PhpScopera909b9d9be2e\Nette\Neon;
 
 /**
  * Simple parser & generator for Nette Object Notation.
@@ -13,14 +13,14 @@ namespace _PhpScoper9a024705919c\Nette\Neon;
  */
 final class Neon
 {
-    public const BLOCK = \_PhpScoper9a024705919c\Nette\Neon\Encoder::BLOCK;
+    public const BLOCK = \_PhpScopera909b9d9be2e\Nette\Neon\Encoder::BLOCK;
     public const CHAIN = '!!chain';
     /**
      * Returns value converted to NEON. The flag can be Neon::BLOCK, which will create multiline output.
      */
     public static function encode($value, int $flags = 0) : string
     {
-        $encoder = new \_PhpScoper9a024705919c\Nette\Neon\Encoder();
+        $encoder = new \_PhpScopera909b9d9be2e\Nette\Neon\Encoder();
         return $encoder->encode($value, $flags);
     }
     /**
@@ -30,7 +30,7 @@ final class Neon
      */
     public static function decode(string $input)
     {
-        $decoder = new \_PhpScoper9a024705919c\Nette\Neon\Decoder();
+        $decoder = new \_PhpScopera909b9d9be2e\Nette\Neon\Decoder();
         return $decoder->decode($input);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper9a024705919c\Psr\Log;
+namespace _PhpScopera909b9d9be2e\Psr\Log;
 
 /**
  * This Logger can be used to avoid conditional log calls.
@@ -10,7 +10,7 @@ namespace _PhpScoper9a024705919c\Psr\Log;
  * is a good way to avoid littering your code with `if ($this->logger) { }`
  * blocks.
  */
-class NullLogger extends \_PhpScoper9a024705919c\Psr\Log\AbstractLogger
+class NullLogger extends \_PhpScopera909b9d9be2e\Psr\Log\AbstractLogger
 {
     /**
      * Logs with an arbitrary level.
