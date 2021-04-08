@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopera909b9d9be2e\Doctrine\Common\Lexer;
+namespace _PhpScoper2f04ef4e8878\Doctrine\Common\Lexer;
 
 use ReflectionClass;
 use const PREG_SPLIT_DELIM_CAPTURE;

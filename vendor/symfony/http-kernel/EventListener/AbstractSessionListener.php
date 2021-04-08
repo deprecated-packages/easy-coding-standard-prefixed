@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScopera909b9d9be2e\Psr\Container\ContainerInterface;
-use _PhpScopera909b9d9be2e\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopera909b9d9be2e\Symfony\Component\HttpFoundation\Session\Session;
-use _PhpScopera909b9d9be2e\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException;
-use _PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper2f04ef4e8878\Psr\Container\ContainerInterface;
+use _PhpScoper2f04ef4e8878\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper2f04ef4e8878\Symfony\Component\HttpFoundation\Session\Session;
+use _PhpScoper2f04ef4e8878\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException;
+use _PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Sets the session onto the request on the "kernel.request" event and saves
  * it on the "kernel.response" event.
@@ -34,18 +34,18 @@ use _PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\KernelEvents;
  *
  * @internal
  */
-abstract class AbstractSessionListener implements \_PhpScopera909b9d9be2e\Symfony\Component\EventDispatcher\EventSubscriberInterface
+abstract class AbstractSessionListener implements \_PhpScoper2f04ef4e8878\Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     public const NO_AUTO_CACHE_CONTROL_HEADER = 'Symfony-Session-NoAutoCacheControl';
     protected $container;
     private $sessionUsageStack = [];
     private $debug;
-    public function __construct(\_PhpScopera909b9d9be2e\Psr\Container\ContainerInterface $container = null, bool $debug = \false)
+    public function __construct(\_PhpScoper2f04ef4e8878\Psr\Container\ContainerInterface $container = null, bool $debug = \false)
     {
         $this->container = $container;
         $this->debug = $debug;
     }
-    public function onKernelRequest(\_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Event\RequestEvent $event)
+    public function onKernelRequest(\_PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Event\RequestEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -59,9 +59,9 @@ abstract class AbstractSessionListener implements \_PhpScopera909b9d9be2e\Symfon
             });
         }
         $session = $session ?? ($this->container && $this->container->has('initialized_session') ? $this->container->get('initialized_session') : null);
-        $this->sessionUsageStack[] = $session instanceof \_PhpScopera909b9d9be2e\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() : 0;
+        $this->sessionUsageStack[] = $session instanceof \_PhpScoper2f04ef4e8878\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() : 0;
     }
-    public function onKernelResponse(\_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Event\ResponseEvent $event)
+    public function onKernelResponse(\_PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Event\ResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -101,7 +101,7 @@ abstract class AbstractSessionListener implements \_PhpScopera909b9d9be2e\Symfon
              */
             $session->save();
         }
-        if ($session instanceof \_PhpScopera909b9d9be2e\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() === \end($this->sessionUsageStack) : !$session->isStarted()) {
+        if ($session instanceof \_PhpScoper2f04ef4e8878\Symfony\Component\HttpFoundation\Session\Session ? $session->getUsageIndex() === \end($this->sessionUsageStack) : !$session->isStarted()) {
             return;
         }
         if ($autoCacheControl) {
@@ -111,13 +111,13 @@ abstract class AbstractSessionListener implements \_PhpScopera909b9d9be2e\Symfon
             return;
         }
         if ($this->debug) {
-            throw new \_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException('Session was used while the request was declared stateless.');
+            throw new \_PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException('Session was used while the request was declared stateless.');
         }
         if ($this->container->has('logger')) {
             $this->container->get('logger')->warning('Session was used while the request was declared stateless.');
         }
     }
-    public function onFinishRequest(\_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event)
+    public function onFinishRequest(\_PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event)
     {
         if ($event->isMasterRequest()) {
             \array_pop($this->sessionUsageStack);
@@ -148,15 +148,15 @@ abstract class AbstractSessionListener implements \_PhpScopera909b9d9be2e\Symfon
         if ($session->isStarted()) {
             $session->save();
         }
-        throw new \_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException('Session was used while the request was declared stateless.');
+        throw new \_PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException('Session was used while the request was declared stateless.');
     }
     public static function getSubscribedEvents() : array
     {
         return [
-            \_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 128],
+            \_PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\KernelEvents::REQUEST => ['onKernelRequest', 128],
             // low priority to come after regular response listeners, but higher than StreamedResponseListener
-            \_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1000],
-            \_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => ['onFinishRequest'],
+            \_PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\KernelEvents::RESPONSE => ['onKernelResponse', -1000],
+            \_PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST => ['onFinishRequest'],
         ];
     }
     /**

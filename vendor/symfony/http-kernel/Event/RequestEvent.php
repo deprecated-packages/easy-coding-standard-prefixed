@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Event;
 
-use _PhpScopera909b9d9be2e\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper2f04ef4e8878\Symfony\Component\HttpFoundation\Response;
 /**
  * Allows to create a response for a request.
  *
@@ -20,7 +20,7 @@ use _PhpScopera909b9d9be2e\Symfony\Component\HttpFoundation\Response;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class RequestEvent extends \_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\Event\KernelEvent
+class RequestEvent extends \_PhpScoper2f04ef4e8878\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
     /**
@@ -35,7 +35,7 @@ class RequestEvent extends \_PhpScopera909b9d9be2e\Symfony\Component\HttpKernel\
     /**
      * Sets a response and stops event propagation.
      */
-    public function setResponse(\_PhpScopera909b9d9be2e\Symfony\Component\HttpFoundation\Response $response)
+    public function setResponse(\_PhpScoper2f04ef4e8878\Symfony\Component\HttpFoundation\Response $response)
     {
         $this->response = $response;
         $this->stopPropagation();
