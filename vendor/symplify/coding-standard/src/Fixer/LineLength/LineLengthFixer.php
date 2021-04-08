@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoper57c79939064b\Nette\Utils\Strings;
+use _PhpScoper9a024705919c\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -231,6 +231,6 @@ CODE_SAMPLE
         if (!$nextToken instanceof \PhpCsFixer\Tokenizer\Token) {
             return \false;
         }
-        return \_PhpScoper57c79939064b\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
+        return \_PhpScoper9a024705919c\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
     }
 }

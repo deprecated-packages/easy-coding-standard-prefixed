@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoper57c79939064b;
+namespace _PhpScoper9a024705919c;
 
 /**
  * Build a PHPCS phar.

@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper57c79939064b\Symfony\Component\Console\Event;
+namespace _PhpScoper9a024705919c\Symfony\Component\Console\Event;
 
-use _PhpScoper57c79939064b\Symfony\Component\Console\Command\Command;
-use _PhpScoper57c79939064b\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper57c79939064b\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper9a024705919c\Symfony\Component\Console\Command\Command;
+use _PhpScoper9a024705919c\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper9a024705919c\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Allows to manipulate the exit code of a command after its execution.
  *
  * @author Francesco Levorato <git@flevour.net>
  */
-final class ConsoleTerminateEvent extends \_PhpScoper57c79939064b\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleTerminateEvent extends \_PhpScoper9a024705919c\Symfony\Component\Console\Event\ConsoleEvent
 {
     private $exitCode;
-    public function __construct(\_PhpScoper57c79939064b\Symfony\Component\Console\Command\Command $command, \_PhpScoper57c79939064b\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper57c79939064b\Symfony\Component\Console\Output\OutputInterface $output, int $exitCode)
+    public function __construct(\_PhpScoper9a024705919c\Symfony\Component\Console\Command\Command $command, \_PhpScoper9a024705919c\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper9a024705919c\Symfony\Component\Console\Output\OutputInterface $output, int $exitCode)
     {
         parent::__construct($command, $input, $output);
         $this->setExitCode($exitCode);
