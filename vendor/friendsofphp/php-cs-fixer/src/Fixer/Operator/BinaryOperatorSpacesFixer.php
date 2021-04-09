@@ -24,7 +24,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper2f04ef4e8878\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper3a0e32c9d767\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
@@ -200,10 +200,10 @@ $array = [
             (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('operators', 'Dictionary of `binary operator` => `fix strategy` values that differ from the default strategy.'))->setAllowedTypes(['array'])->setAllowedValues([static function ($option) {
                 foreach ($option as $operator => $value) {
                     if (!\in_array($operator, self::$supportedOperators, \true)) {
-                        throw new \_PhpScoper2f04ef4e8878\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unexpected "operators" key, expected any of "%s", got "%s".', \implode('", "', self::$supportedOperators), \is_object($operator) ? \get_class($operator) : \gettype($operator) . '#' . $operator));
+                        throw new \_PhpScoper3a0e32c9d767\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unexpected "operators" key, expected any of "%s", got "%s".', \implode('", "', self::$supportedOperators), \is_object($operator) ? \get_class($operator) : \gettype($operator) . '#' . $operator));
                     }
                     if (!\in_array($value, self::$allowedValues, \true)) {
-                        throw new \_PhpScoper2f04ef4e8878\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unexpected value for operator "%s", expected any of "%s", got "%s".', $operator, \implode('", "', self::$allowedValues), \is_object($value) ? \get_class($value) : (null === $value ? 'null' : \gettype($value) . '#' . $value)));
+                        throw new \_PhpScoper3a0e32c9d767\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unexpected value for operator "%s", expected any of "%s", got "%s".', $operator, \implode('", "', self::$allowedValues), \is_object($value) ? \get_class($value) : (null === $value ? 'null' : \gettype($value) . '#' . $value)));
                     }
                 }
                 return \true;

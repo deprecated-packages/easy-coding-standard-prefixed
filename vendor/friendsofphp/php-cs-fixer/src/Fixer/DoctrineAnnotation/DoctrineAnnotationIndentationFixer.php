@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Fixer\DoctrineAnnotation;
 
-use _PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer;
+use _PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer;
 use PhpCsFixer\AbstractDoctrineAnnotationFixer;
 use PhpCsFixer\Doctrine\Annotation\Tokens;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
@@ -42,7 +42,7 @@ final class DoctrineAnnotationIndentationFixer extends \PhpCsFixer\AbstractDoctr
     {
         $annotationPositions = [];
         for ($index = 0, $max = \count($tokens); $index < $max; ++$index) {
-            if (!$tokens[$index]->isType(\_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_AT)) {
+            if (!$tokens[$index]->isType(\_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_AT)) {
                 continue;
             }
             $annotationEndIndex = $tokens->getAnnotationEnd($index);
@@ -54,7 +54,7 @@ final class DoctrineAnnotationIndentationFixer extends \PhpCsFixer\AbstractDoctr
         }
         $indentLevel = 0;
         foreach ($tokens as $index => $token) {
-            if (!$token->isType(\_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_NONE) || \false === \strpos($token->getContent(), "\n")) {
+            if (!$token->isType(\_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_NONE) || \false === \strpos($token->getContent(), "\n")) {
                 continue;
             }
             if (!$this->indentationCanBeFixed($tokens, $index, $annotationPositions)) {
@@ -87,14 +87,14 @@ final class DoctrineAnnotationIndentationFixer extends \PhpCsFixer\AbstractDoctr
         $closing = 0;
         while (isset($tokens[++$index])) {
             $token = $tokens[$index];
-            if ($token->isType(\_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_NONE) && \false !== \strpos($token->getContent(), "\n")) {
+            if ($token->isType(\_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_NONE) && \false !== \strpos($token->getContent(), "\n")) {
                 break;
             }
-            if ($token->isType([\_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS, \_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES])) {
+            if ($token->isType([\_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS, \_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES])) {
                 ++$opening;
                 continue;
             }
-            if (!$token->isType([\_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, \_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES])) {
+            if (!$token->isType([\_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, \_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES])) {
                 continue;
             }
             if ($opening > 0) {
@@ -114,13 +114,13 @@ final class DoctrineAnnotationIndentationFixer extends \PhpCsFixer\AbstractDoctr
     {
         while (isset($tokens[++$index])) {
             $token = $tokens[$index];
-            if ($token->isType(\_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_NONE)) {
+            if ($token->isType(\_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_NONE)) {
                 if (\false !== \strpos($token->getContent(), "\n")) {
                     return \false;
                 }
                 continue;
             }
-            return !$token->isType([\_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, \_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES]);
+            return !$token->isType([\_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, \_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES]);
         }
         return \false;
     }
@@ -142,7 +142,7 @@ final class DoctrineAnnotationIndentationFixer extends \PhpCsFixer\AbstractDoctr
             if (\false !== \strpos($token->getContent(), "\n")) {
                 return \false;
             }
-            return $tokens[$index]->isType(\_PhpScoper2f04ef4e8878\Doctrine\Common\Annotations\DocLexer::T_AT);
+            return $tokens[$index]->isType(\_PhpScoper3a0e32c9d767\Doctrine\Common\Annotations\DocLexer::T_AT);
         }
         return \false;
     }

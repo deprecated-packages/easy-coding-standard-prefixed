@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b30344226f62a3991748b76470cacf7a",
+    "content-hash": "434d1a351660ce29396db049a33e3aeb",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -3563,10 +3563,10 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/coding-standard",
-                "reference": "a0cf55a1827c52d22e54e475278fe260b45aa41a"
+                "reference": "c9ab602c4af100147e73a3c1dfe4e12776e008ca"
             },
             "require": {
-                "friendsofphp/php-cs-fixer": "^2.18.2",
+                "friendsofphp/php-cs-fixer": "^2.18.5",
                 "nette/utils": "^3.2",
                 "php": ">=7.3",
                 "symplify/autowire-array-parameter": "dev-main",

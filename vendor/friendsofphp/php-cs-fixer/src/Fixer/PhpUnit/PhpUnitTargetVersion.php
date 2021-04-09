@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Fixer\PhpUnit;
 
-use _PhpScoper2f04ef4e8878\Composer\Semver\Comparator;
+use _PhpScoper3a0e32c9d767\Composer\Semver\Comparator;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -51,6 +51,6 @@ final class PhpUnitTargetVersion
         if (self::VERSION_NEWEST === $candidate) {
             return \true;
         }
-        return \_PhpScoper2f04ef4e8878\Composer\Semver\Comparator::greaterThanOrEqualTo($candidate, $target);
+        return \_PhpScoper3a0e32c9d767\Composer\Semver\Comparator::greaterThanOrEqualTo($candidate, $target);
     }
 }

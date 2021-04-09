@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\Tests\StaticFixtureSplitter;
 
-use _PhpScoper2f04ef4e8878\PHPUnit\Framework\TestCase;
+use _PhpScoper3a0e32c9d767\PHPUnit\Framework\TestCase;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class StaticFixtureSplitterTest extends \_PhpScoper2f04ef4e8878\PHPUnit\Framework\TestCase
+final class StaticFixtureSplitterTest extends \_PhpScoper3a0e32c9d767\PHPUnit\Framework\TestCase
 {
     public function test() : void
     {
