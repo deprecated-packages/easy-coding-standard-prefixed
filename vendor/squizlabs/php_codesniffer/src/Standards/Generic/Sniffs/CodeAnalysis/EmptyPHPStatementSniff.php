@@ -54,7 +54,7 @@ class EmptyPHPStatementSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                         return;
                     }
                     $scopeOwner = $tokens[$tokens[$prevNonEmpty]['scope_condition']]['code'];
-                    if ($scopeOwner === T_CLOSURE || $scopeOwner === T_ANON_CLASS) {
+                    if ($scopeOwner === T_CLOSURE || $scopeOwner === T_ANON_CLASS || $scopeOwner === \T_MATCH) {
                         return;
                     }
                     // Else, it's something like `if (foo) {};` and the semi-colon is not needed.

@@ -13,6 +13,7 @@ namespace PHP_CodeSniffer\Standards\Generic\Sniffs\Debug;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Common;
 class JSHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     /**
@@ -49,9 +50,9 @@ class JSHintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             return;
         }
         $fileName = $phpcsFile->getFilename();
-        $jshintPath = \escapeshellcmd($jshintPath);
+        $jshintPath = \PHP_CodeSniffer\Util\Common::escapeshellcmd($jshintPath);
         if ($rhinoPath !== null) {
-            $rhinoPath = \escapeshellcmd($rhinoPath);
+            $rhinoPath = \PHP_CodeSniffer\Util\Common::escapeshellcmd($rhinoPath);
             $cmd = "{$rhinoPath} \"{$jshintPath}\" " . \escapeshellarg($fileName);
             \exec($cmd, $output, $retval);
             $regex = '`^(?P<error>.+)\\(.+:(?P<line>[0-9]+).*:[0-9]+\\)$`';

@@ -1,5 +1,5 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoper3a0e32c9d767;
+namespace _PhpScoper60081b922775;
 
 require __DIR__ . '/easy-testing.php';

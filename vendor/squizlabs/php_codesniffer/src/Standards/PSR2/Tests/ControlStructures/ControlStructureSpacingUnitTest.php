@@ -22,7 +22,7 @@ class ControlStructureSpacingUnitTest extends \PHP_CodeSniffer\Tests\Standards\A
      */
     public function getErrorList()
     {
-        return [4 => 1, 14 => 2, 26 => 2, 27 => 2, 31 => 1, 51 => 2, 53 => 2, 60 => 1, 64 => 1, 69 => 1];
+        return [4 => 1, 14 => 2, 26 => 2, 27 => 2, 31 => 1, 51 => 2, 53 => 2, 60 => 1, 64 => 1, 69 => 1, 73 => 2, 77 => 2, 79 => 2];
     }
     //end getErrorList()
     /**

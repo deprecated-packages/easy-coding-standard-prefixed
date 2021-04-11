@@ -38,8 +38,17 @@ class ClassCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commentin
         $type = \strtolower($tokens[$stackPtr]['content']);
         $errorData = [$type];
         $find = \PHP_CodeSniffer\Util\Tokens::$methodPrefixes;
-        $find[] = \T_WHITESPACE;
-        $commentEnd = $phpcsFile->findPrevious($find, $stackPtr - 1, null, \true);
+        $find[\T_WHITESPACE] = \T_WHITESPACE;
+        for ($commentEnd = $stackPtr - 1; $commentEnd >= 0; $commentEnd--) {
+            if (isset($find[$tokens[$commentEnd]['code']]) === \true) {
+                continue;
+            }
+            if ($tokens[$commentEnd]['code'] === T_ATTRIBUTE_END && isset($tokens[$commentEnd]['attribute_opener']) === \true) {
+                $commentEnd = $tokens[$commentEnd]['attribute_opener'];
+                continue;
+            }
+            break;
+        }
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG && $tokens[$commentEnd]['code'] !== \T_COMMENT) {
             $errorData[] = $phpcsFile->getDeclarationName($stackPtr);
             $phpcsFile->addError('Missing doc comment for %s %s', $stackPtr, 'Missing', $errorData);

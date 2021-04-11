@@ -28,7 +28,7 @@ class BooleanOperatorPlacementSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      */
     public function register()
     {
-        return [\T_IF, \T_WHILE, \T_SWITCH, \T_ELSEIF];
+        return [\T_IF, \T_WHILE, \T_SWITCH, \T_ELSEIF, \T_MATCH];
     }
     //end register()
     /**

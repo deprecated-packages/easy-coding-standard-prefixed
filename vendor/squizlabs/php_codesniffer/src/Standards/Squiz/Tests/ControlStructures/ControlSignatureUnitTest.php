@@ -51,6 +51,7 @@ class ControlSignatureUnitTest extends \PHP_CodeSniffer\Tests\Standards\Abstract
             $errors[276] = 1;
             $errors[279] = 1;
             $errors[283] = 1;
+            $errors[306] = 3;
         }
         //end if
         return $errors;

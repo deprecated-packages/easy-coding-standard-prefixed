@@ -30,6 +30,7 @@ class FileCommentUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniff
                 return [1 => 1, 22 => 2, 23 => 1, 24 => 2, 25 => 2, 26 => 1, 27 => 2, 28 => 2, 32 => 2];
             case 'FileCommentUnitTest.4.inc':
             case 'FileCommentUnitTest.6.inc':
+            case 'FileCommentUnitTest.7.inc':
                 return [1 => 1];
             case 'FileCommentUnitTest.5.inc':
                 return [2 => 1];

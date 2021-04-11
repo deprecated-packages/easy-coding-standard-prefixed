@@ -45,8 +45,21 @@ class ClassCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
     {
         $tokens = $phpcsFile->getTokens();
         $find = \PHP_CodeSniffer\Util\Tokens::$methodPrefixes;
-        $find[] = \T_WHITESPACE;
-        $commentEnd = $phpcsFile->findPrevious($find, $stackPtr - 1, null, \true);
+        $find[\T_WHITESPACE] = \T_WHITESPACE;
+        $previousContent = null;
+        for ($commentEnd = $stackPtr - 1; $commentEnd >= 0; $commentEnd--) {
+            if (isset($find[$tokens[$commentEnd]['code']]) === \true) {
+                continue;
+            }
+            if ($previousContent === null) {
+                $previousContent = $commentEnd;
+            }
+            if ($tokens[$commentEnd]['code'] === T_ATTRIBUTE_END && isset($tokens[$commentEnd]['attribute_opener']) === \true) {
+                $commentEnd = $tokens[$commentEnd]['attribute_opener'];
+                continue;
+            }
+            break;
+        }
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG && $tokens[$commentEnd]['code'] !== \T_COMMENT) {
             $class = $phpcsFile->getDeclarationName($stackPtr);
             $phpcsFile->addError('Missing doc comment for class %s', $stackPtr, 'Missing', [$class]);
@@ -58,7 +71,7 @@ class ClassCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             $phpcsFile->addError('You must use "/**" style comments for a class comment', $stackPtr, 'WrongStyle');
             return;
         }
-        if ($tokens[$commentEnd]['line'] !== $tokens[$stackPtr]['line'] - 1) {
+        if ($tokens[$previousContent]['line'] !== $tokens[$stackPtr]['line'] - 1) {
             $error = 'There must be no blank lines after the class comment';
             $phpcsFile->addError($error, $commentEnd, 'SpacingAfter');
         }

@@ -24,7 +24,7 @@ class LongConditionClosingCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @var integer[]
      */
-    private static $openers = [\T_SWITCH, \T_IF, \T_FOR, \T_FOREACH, \T_WHILE, \T_TRY, \T_CASE];
+    private static $openers = [\T_SWITCH, \T_IF, \T_FOR, \T_FOREACH, \T_WHILE, \T_TRY, \T_CASE, \T_MATCH];
     /**
      * The length that a code block must be before
      * requiring a closing comment.
@@ -120,6 +120,13 @@ class LongConditionClosingCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                     break;
                 }
             } while (isset($tokens[$nextToken]['scope_closer']) === \true);
+        }
+        if ($startCondition['code'] === \T_MATCH) {
+            // Move the stackPtr to after the semi-colon/comma if there is one.
+            $nextToken = $phpcsFile->findNext(\T_WHITESPACE, $stackPtr + 1, null, \true);
+            if ($nextToken !== \false && ($tokens[$nextToken]['code'] === T_SEMICOLON || $tokens[$nextToken]['code'] === T_COMMA)) {
+                $stackPtr = $nextToken;
+            }
         }
         $lineDifference = $endBrace['line'] - $startBrace['line'];
         $expected = \sprintf($this->commentFormat, $startCondition['content']);

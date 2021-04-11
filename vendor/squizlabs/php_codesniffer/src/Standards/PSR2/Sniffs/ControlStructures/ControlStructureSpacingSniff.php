@@ -33,7 +33,7 @@ class ControlStructureSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      */
     public function register()
     {
-        return [\T_IF, \T_WHILE, \T_FOREACH, \T_FOR, \T_SWITCH, \T_ELSE, \T_ELSEIF, \T_CATCH];
+        return [\T_IF, \T_WHILE, \T_FOREACH, \T_FOR, \T_SWITCH, \T_ELSE, \T_ELSEIF, \T_CATCH, \T_MATCH];
     }
     //end register()
     /**

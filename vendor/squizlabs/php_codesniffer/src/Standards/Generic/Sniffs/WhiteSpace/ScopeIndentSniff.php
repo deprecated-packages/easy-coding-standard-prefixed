@@ -274,7 +274,13 @@ class ScopeIndentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                         if ($this->debug === \true) {
                             echo "\t* open tag is inside condition; using open tag *" . \PHP_EOL;
                         }
-                        $checkIndent = $tokens[$lastOpenTag]['column'] - 1;
+                        $first = $phpcsFile->findFirstOnLine([\T_WHITESPACE, \T_INLINE_HTML], $lastOpenTag, \true);
+                        if ($this->debug === \true) {
+                            $line = $tokens[$first]['line'];
+                            $type = $tokens[$first]['type'];
+                            echo "\t* first token on line {$line} is {$first} ({$type}) *" . \PHP_EOL;
+                        }
+                        $checkIndent = $tokens[$first]['column'] - 1;
                         if (isset($adjustments[$condition]) === \true) {
                             $checkIndent += $adjustments[$condition];
                         }
@@ -651,6 +657,11 @@ class ScopeIndentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             //end if
             if ($checkToken !== null && isset(\PHP_CodeSniffer\Util\Tokens::$scopeOpeners[$tokens[$checkToken]['code']]) === \true && \in_array($tokens[$checkToken]['code'], $this->nonIndentingScopes, \true) === \false && isset($tokens[$checkToken]['scope_opener']) === \true) {
                 $exact = \true;
+                if ($disableExactEnd > $checkToken) {
+                    if ($tokens[$checkToken]['conditions'] === $tokens[$disableExactEnd]['conditions']) {
+                        $exact = \false;
+                    }
+                }
                 $lastOpener = null;
                 if (empty($openScopes) === \false) {
                     \end($openScopes);
@@ -688,14 +699,27 @@ class ScopeIndentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             if ($checkToken !== null && isset(\PHP_CodeSniffer\Util\Tokens::$methodPrefixes[$tokens[$checkToken]['code']]) === \true && $tokens[$checkToken + 1]['code'] !== \T_DOUBLE_COLON) {
                 $next = $phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $checkToken + 1, null, \true);
                 if ($next === \false || $tokens[$next]['code'] !== T_CLOSURE && $tokens[$next]['code'] !== \T_VARIABLE && $tokens[$next]['code'] !== \T_FN) {
-                    if ($this->debug === \true) {
-                        $line = $tokens[$checkToken]['line'];
-                        $type = $tokens[$checkToken]['type'];
-                        echo "\t* method prefix ({$type}) found on line {$line}; indent set to exact *" . \PHP_EOL;
+                    $isMethodPrefix = \true;
+                    if (isset($tokens[$checkToken]['nested_parenthesis']) === \true) {
+                        $parenthesis = \array_keys($tokens[$checkToken]['nested_parenthesis']);
+                        $deepestOpen = \array_pop($parenthesis);
+                        if (isset($tokens[$deepestOpen]['parenthesis_owner']) === \true && $tokens[$tokens[$deepestOpen]['parenthesis_owner']]['code'] === \T_FUNCTION) {
+                            // This is constructor property promotion and not a method prefix.
+                            $isMethodPrefix = \false;
+                        }
                     }
-                    $exact = \true;
+                    if ($isMethodPrefix === \true) {
+                        if ($this->debug === \true) {
+                            $line = $tokens[$checkToken]['line'];
+                            $type = $tokens[$checkToken]['type'];
+                            echo "\t* method prefix ({$type}) found on line {$line}; indent set to exact *" . \PHP_EOL;
+                        }
+                        $exact = \true;
+                    }
                 }
+                //end if
             }
+            //end if
             // JS property indentation has to be exact or else if will break
             // things like function and object indentation.
             if ($checkToken !== null && $tokens[$checkToken]['code'] === T_PROPERTY) {
@@ -761,12 +785,27 @@ class ScopeIndentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                     $type = 'Incorrect';
                 }
                 if ($this->tabIndent === \true) {
-                    $error .= '%s tabs, found %s';
-                    $data = [\floor($checkIndent / $this->tabWidth), \floor($tokenIndent / $this->tabWidth)];
+                    $expectedTabs = \floor($checkIndent / $this->tabWidth);
+                    $foundTabs = \floor($tokenIndent / $this->tabWidth);
+                    $foundSpaces = $tokenIndent - $foundTabs * $this->tabWidth;
+                    if ($foundSpaces > 0) {
+                        if ($foundTabs > 0) {
+                            $error .= '%s tabs, found %s tabs and %s spaces';
+                            $data = [$expectedTabs, $foundTabs, $foundSpaces];
+                        } else {
+                            $error .= '%s tabs, found %s spaces';
+                            $data = [$expectedTabs, $foundSpaces];
+                        }
+                    } else {
+                        $error .= '%s tabs, found %s';
+                        $data = [$expectedTabs, $foundTabs];
+                    }
+                    //end if
                 } else {
                     $error .= '%s spaces, found %s';
                     $data = [$checkIndent, $tokenIndent];
                 }
+                //end if
                 if ($this->debug === \true) {
                     $line = $tokens[$checkToken]['line'];
                     $message = \vsprintf($error, $data);
@@ -796,11 +835,12 @@ class ScopeIndentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 if ($this->debug === \true) {
                     $line = $tokens[$i]['line'];
                     $type = $tokens[$disableExactEnd]['type'];
+                    $endLine = $tokens[$disableExactEnd]['line'];
                     echo "Opening short array bracket found on line {$line}" . \PHP_EOL;
                     if ($disableExactEnd === $tokens[$i]['bracket_closer']) {
-                        echo "\t=> disabling exact indent checking until {$disableExactEnd} ({$type})" . \PHP_EOL;
+                        echo "\t=> disabling exact indent checking until {$disableExactEnd} ({$type}) on line {$endLine}" . \PHP_EOL;
                     } else {
-                        echo "\t=> continuing to disable exact indent checking until {$disableExactEnd} ({$type})" . \PHP_EOL;
+                        echo "\t=> continuing to disable exact indent checking until {$disableExactEnd} ({$type}) on line {$endLine}" . \PHP_EOL;
                     }
                 }
             }

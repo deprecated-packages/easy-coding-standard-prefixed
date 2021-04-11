@@ -27,7 +27,7 @@ class PostStatementCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @var array
      */
-    private $controlStructureExceptions = [\T_IF => \true, \T_ELSEIF => \true, \T_SWITCH => \true, \T_WHILE => \true, \T_FOR => \true, \T_FOREACH => \true];
+    private $controlStructureExceptions = [\T_IF => \true, \T_ELSEIF => \true, \T_SWITCH => \true, \T_WHILE => \true, \T_FOR => \true, \T_FOREACH => \true, \T_MATCH => \true];
     /**
      * Returns an array of tokens this test wants to listen for.
      *

@@ -18,6 +18,7 @@ namespace PHP_CodeSniffer\Reports;
 
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Common;
 class Notifysend implements \PHP_CodeSniffer\Reports\Report
 {
     /**
@@ -51,7 +52,7 @@ class Notifysend implements \PHP_CodeSniffer\Reports\Report
     {
         $path = \PHP_CodeSniffer\Config::getExecutablePath('notifysend');
         if ($path !== null) {
-            $this->path = \escapeshellcmd($path);
+            $this->path = \PHP_CodeSniffer\Util\Common::escapeshellcmd($path);
         }
         $timeout = \PHP_CodeSniffer\Config::getConfigData('notifysend_timeout');
         if ($timeout !== null) {

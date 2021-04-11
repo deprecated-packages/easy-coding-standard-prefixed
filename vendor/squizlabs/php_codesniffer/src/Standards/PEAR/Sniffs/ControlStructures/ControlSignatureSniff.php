@@ -25,7 +25,7 @@ class ControlSignatureSniff extends \PHP_CodeSniffer\Sniffs\AbstractPatternSniff
      */
     protected function getPatterns()
     {
-        return ['do {EOL...} while (...);EOL', 'while (...) {EOL', 'for (...) {EOL', 'if (...) {EOL', 'foreach (...) {EOL', '} else if (...) {EOL', '} elseif (...) {EOL', '} else {EOL', 'do {EOL'];
+        return ['do {EOL...} while (...);EOL', 'while (...) {EOL', 'for (...) {EOL', 'if (...) {EOL', 'foreach (...) {EOL', '} else if (...) {EOL', '} elseif (...) {EOL', '} else {EOL', 'do {EOL', 'match (...) {EOL'];
     }
     //end getPatterns()
 }

@@ -232,7 +232,7 @@ class FunctionCallSignatureSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         if ($spaceBeforeClose !== $requiredSpacesBeforeClose) {
             $error = 'Expected %s spaces before closing parenthesis; %s found';
             $data = [$requiredSpacesBeforeClose, $spaceBeforeClose];
-            $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceBeforeCloseBracket', $data);
+            $fix = $phpcsFile->addFixableError($error, $closer, 'SpaceBeforeCloseBracket', $data);
             if ($fix === \true) {
                 $padding = \str_repeat(' ', $requiredSpacesBeforeClose);
                 if ($spaceBeforeClose === 0) {
@@ -480,7 +480,7 @@ class FunctionCallSignatureSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 //end if
                 if ($inArg === \false) {
                     $argStart = $nextCode;
-                    $argEnd = $phpcsFile->findEndOfStatement($nextCode);
+                    $argEnd = $phpcsFile->findEndOfStatement($nextCode, [T_COLON]);
                 }
             }
             //end if
@@ -511,7 +511,7 @@ class FunctionCallSignatureSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 }
                 //end if
                 $argStart = $next;
-                $argEnd = $phpcsFile->findEndOfStatement($next);
+                $argEnd = $phpcsFile->findEndOfStatement($next, [T_COLON]);
             }
             //end if
         }

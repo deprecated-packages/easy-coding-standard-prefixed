@@ -11,6 +11,7 @@ namespace PHP_CodeSniffer\Standards\PSR2\Sniffs\Namespaces;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 class NamespaceDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     /**
@@ -35,6 +36,11 @@ class NamespaceDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
     public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
+        $nextNonEmpty = $phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $stackPtr + 1, null, \true);
+        if ($tokens[$nextNonEmpty]['code'] === \T_NS_SEPARATOR) {
+            // Namespace keyword as operator. Not a declaration.
+            return;
+        }
         $end = $phpcsFile->findEndOfStatement($stackPtr);
         for ($i = $end + 1; $i < $phpcsFile->numTokens - 1; $i++) {
             if ($tokens[$i]['line'] === $tokens[$end]['line']) {

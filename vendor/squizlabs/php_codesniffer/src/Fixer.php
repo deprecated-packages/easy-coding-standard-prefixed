@@ -218,6 +218,9 @@ class Fixer
         if (\is_file($tempName) === \true) {
             \unlink($tempName);
         }
+        if ($diff === null) {
+            return '';
+        }
         if ($colors === \false) {
             return $diff;
         }

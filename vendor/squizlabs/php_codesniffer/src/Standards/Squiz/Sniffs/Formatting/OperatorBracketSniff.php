@@ -67,7 +67,8 @@ class OperatorBracketSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                     $isAssignment = isset(\PHP_CodeSniffer\Util\Tokens::$assignmentTokens[$tokens[$previous]['code']]);
                     $isEquality = isset(\PHP_CodeSniffer\Util\Tokens::$equalityTokens[$tokens[$previous]['code']]);
                     $isComparison = isset(\PHP_CodeSniffer\Util\Tokens::$comparisonTokens[$tokens[$previous]['code']]);
-                    if ($isAssignment === \true || $isEquality === \true || $isComparison === \true) {
+                    $isUnary = isset(\PHP_CodeSniffer\Util\Tokens::$operators[$tokens[$previous]['code']]);
+                    if ($isAssignment === \true || $isEquality === \true || $isComparison === \true || $isUnary === \true) {
                         // This is a negative assignment or comparison.
                         // We need to check that the minus and the number are
                         // adjacent.
@@ -113,7 +114,7 @@ class OperatorBracketSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                     // no bracket of it's own.
                     break;
                 }
-                if ($prevCode === \T_STRING || $prevCode === \T_SWITCH) {
+                if ($prevCode === \T_STRING || $prevCode === \T_SWITCH || $prevCode === \T_MATCH) {
                     // We allow simple operations to not be bracketed.
                     // For example, ceil($one / $two).
                     for ($prev = $stackPtr - 1; $prev > $bracket; $prev--) {
@@ -147,8 +148,8 @@ class OperatorBracketSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                 if (\in_array($prevCode, \PHP_CodeSniffer\Util\Tokens::$scopeOpeners, \true) === \true) {
                     // This operation is inside a control structure like FOREACH
                     // or IF, but has no bracket of it's own.
-                    // The only control structure allowed to do this is SWITCH.
-                    if ($prevCode !== \T_SWITCH) {
+                    // The only control structures allowed to do this are SWITCH and MATCH.
+                    if ($prevCode !== \T_SWITCH && $prevCode !== \T_MATCH) {
                         break;
                     }
                 }
@@ -235,6 +236,9 @@ class OperatorBracketSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         }
         //end for
         $before = $phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $before + 1, null, \true);
+        // A few extra tokens are allowed to be on the right side of the expression.
+        $allowed[T_EQUAL] = \true;
+        $allowed[\T_NEW] = \true;
         // Find the last token in the expression.
         for ($after = $stackPtr + 1; $after < $phpcsFile->numTokens; $after++) {
             // Special case for plus operators because we can't tell if they are used

@@ -16,6 +16,12 @@ use PHP_CodeSniffer\Util\Common;
 class FunctionCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FunctionCommentSniff
 {
     /**
+     * Whether to skip inheritdoc comments.
+     *
+     * @var boolean
+     */
+    public $skipIfInheritdoc = \false;
+    /**
      * The current PHP version.
      *
      * @var integer
@@ -35,6 +41,11 @@ class FunctionCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commen
     {
         $tokens = $phpcsFile->getTokens();
         $return = null;
+        if ($this->skipIfInheritdoc === \true) {
+            if ($this->checkInheritdoc($phpcsFile, $stackPtr, $commentStart) === \true) {
+                return;
+            }
+        }
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             if ($tokens[$tag]['content'] === '@return') {
                 if ($return !== null) {
@@ -47,10 +58,7 @@ class FunctionCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commen
         }
         // Skip constructor and destructor.
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        $isSpecialMethod = $methodName === '__construct' || $methodName === '__destruct';
-        if ($isSpecialMethod === \true) {
-            return;
-        }
+        $isSpecialMethod = \in_array($methodName, $this->specialMethods, \true);
         if ($return !== null) {
             $content = $tokens[$return + 2]['content'];
             if (empty($content) === \true || $tokens[$return + 2]['code'] !== T_DOC_COMMENT_STRING) {
@@ -144,6 +152,9 @@ class FunctionCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commen
             }
             //end if
         } else {
+            if ($isSpecialMethod === \true) {
+                return;
+            }
             $error = 'Missing @return tag in function comment';
             $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
         }
@@ -163,6 +174,11 @@ class FunctionCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commen
     protected function processThrows(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr, $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
+        if ($this->skipIfInheritdoc === \true) {
+            if ($this->checkInheritdoc($phpcsFile, $stackPtr, $commentStart) === \true) {
+                return;
+            }
+        }
         foreach ($tokens[$commentStart]['comment_tags'] as $pos => $tag) {
             if ($tokens[$tag]['content'] !== '@throws') {
                 continue;
@@ -233,6 +249,11 @@ class FunctionCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commen
             }
         }
         $tokens = $phpcsFile->getTokens();
+        if ($this->skipIfInheritdoc === \true) {
+            if ($this->checkInheritdoc($phpcsFile, $stackPtr, $commentStart) === \true) {
+                return;
+            }
+        }
         $params = [];
         $maxType = 0;
         $maxVar = 0;
@@ -367,6 +388,11 @@ class FunctionCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commen
                 if ($this->phpVersion >= 70200) {
                     if ($suggestedName === 'object') {
                         $suggestedTypeHint = 'object';
+                    }
+                }
+                if ($this->phpVersion >= 80000) {
+                    if ($suggestedName === 'mixed') {
+                        $suggestedTypeHint = 'mixed';
                     }
                 }
                 if ($suggestedTypeHint !== '' && isset($realParams[$pos]) === \true) {
@@ -579,5 +605,31 @@ class FunctionCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commen
         //end if
     }
     //end checkSpacingAfterParamName()
+    /**
+     * Determines whether the whole comment is an inheritdoc comment.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile    The file being scanned.
+     * @param int                         $stackPtr     The position of the current token
+     *                                                  in the stack passed in $tokens.
+     * @param int                         $commentStart The position in the stack where the comment started.
+     *
+     * @return boolean TRUE if the docblock contains only {@inheritdoc} (case-insensitive).
+     */
+    protected function checkInheritdoc(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr, $commentStart)
+    {
+        $tokens = $phpcsFile->getTokens();
+        $allowedTokens = [T_DOC_COMMENT_OPEN_TAG, T_DOC_COMMENT_WHITESPACE, T_DOC_COMMENT_STAR];
+        for ($i = $commentStart; $i <= $tokens[$commentStart]['comment_closer']; $i++) {
+            if (\in_array($tokens[$i]['code'], $allowedTokens) === \false) {
+                $trimmedContent = \strtolower(\trim($tokens[$i]['content']));
+                if ($trimmedContent === '{@inheritdoc}') {
+                    return \true;
+                } else {
+                    return \false;
+                }
+            }
+        }
+    }
+    //end checkInheritdoc()
 }
 //end class

@@ -74,7 +74,12 @@ namespace PHP_CodeSniffer\Util;
 \define('T_CLOSE_USE_GROUP', 'PHPCS_T_CLOSE_USE_GROUP');
 \define('T_ZSR', 'PHPCS_T_ZSR');
 \define('T_ZSR_EQUAL', 'PHPCS_T_ZSR_EQUAL');
-\define('T_FN_ARROW', 'T_FN_ARROW');
+\define('T_FN_ARROW', 'PHPCS_T_FN_ARROW');
+\define('T_TYPE_UNION', 'PHPCS_T_TYPE_UNION');
+\define('T_PARAM_NAME', 'PHPCS_T_PARAM_NAME');
+\define('T_MATCH_ARROW', 'PHPCS_T_MATCH_ARROW');
+\define('T_MATCH_DEFAULT', 'PHPCS_T_MATCH_DEFAULT');
+\define('T_ATTRIBUTE_END', 'PHPCS_T_ATTRIBUTE_END');
 // Some PHP 5.5 tokens, replicated for lower versions.
 if (\defined('T_FINALLY') === \false) {
     \define('T_FINALLY', 'PHPCS_T_FINALLY');
@@ -125,6 +130,12 @@ if (\defined('T_NAME_FULLY_QUALIFIED') === \false) {
 if (\defined('T_NAME_RELATIVE') === \false) {
     \define('T_NAME_RELATIVE', 'PHPCS_T_NAME_RELATIVE');
 }
+if (\defined('T_MATCH') === \false) {
+    \define('T_MATCH', 'PHPCS_T_MATCH');
+}
+if (\defined('T_ATTRIBUTE') === \false) {
+    \define('T_ATTRIBUTE', 'PHPCS_T_ATTRIBUTE');
+}
 // Tokens used for parsing doc blocks.
 \define('T_DOC_COMMENT_STAR', 'PHPCS_T_DOC_COMMENT_STAR');
 \define('T_DOC_COMMENT_WHITESPACE', 'PHPCS_T_DOC_COMMENT_WHITESPACE');
@@ -166,6 +177,7 @@ final class Tokens
         \T_CATCH => 50,
         \T_FINALLY => 50,
         \T_SWITCH => 50,
+        \T_MATCH => 50,
         T_SELF => 25,
         T_PARENT => 25,
         /*
@@ -256,13 +268,13 @@ final class Tokens
      *
      * @var array<int|string, int|string>
      */
-    public static $parenthesisOpeners = [\T_ARRAY => \T_ARRAY, \T_LIST => \T_LIST, \T_FUNCTION => \T_FUNCTION, T_CLOSURE => T_CLOSURE, T_ANON_CLASS => T_ANON_CLASS, \T_WHILE => \T_WHILE, \T_FOR => \T_FOR, \T_FOREACH => \T_FOREACH, \T_SWITCH => \T_SWITCH, \T_IF => \T_IF, \T_ELSEIF => \T_ELSEIF, \T_CATCH => \T_CATCH, \T_DECLARE => \T_DECLARE];
+    public static $parenthesisOpeners = [\T_ARRAY => \T_ARRAY, \T_LIST => \T_LIST, \T_FUNCTION => \T_FUNCTION, T_CLOSURE => T_CLOSURE, T_ANON_CLASS => T_ANON_CLASS, \T_WHILE => \T_WHILE, \T_FOR => \T_FOR, \T_FOREACH => \T_FOREACH, \T_SWITCH => \T_SWITCH, \T_IF => \T_IF, \T_ELSEIF => \T_ELSEIF, \T_CATCH => \T_CATCH, \T_DECLARE => \T_DECLARE, \T_MATCH => \T_MATCH];
     /**
      * Tokens that are allowed to open scopes.
      *
      * @var array<int|string, int|string>
      */
-    public static $scopeOpeners = [\T_CLASS => \T_CLASS, T_ANON_CLASS => T_ANON_CLASS, \T_INTERFACE => \T_INTERFACE, \T_TRAIT => \T_TRAIT, \T_NAMESPACE => \T_NAMESPACE, \T_FUNCTION => \T_FUNCTION, T_CLOSURE => T_CLOSURE, \T_IF => \T_IF, \T_SWITCH => \T_SWITCH, \T_CASE => \T_CASE, \T_DECLARE => \T_DECLARE, \T_DEFAULT => \T_DEFAULT, \T_WHILE => \T_WHILE, \T_ELSE => \T_ELSE, \T_ELSEIF => \T_ELSEIF, \T_FOR => \T_FOR, \T_FOREACH => \T_FOREACH, \T_DO => \T_DO, \T_TRY => \T_TRY, \T_CATCH => \T_CATCH, \T_FINALLY => \T_FINALLY, T_PROPERTY => T_PROPERTY, T_OBJECT => T_OBJECT, \T_USE => \T_USE];
+    public static $scopeOpeners = [\T_CLASS => \T_CLASS, T_ANON_CLASS => T_ANON_CLASS, \T_INTERFACE => \T_INTERFACE, \T_TRAIT => \T_TRAIT, \T_NAMESPACE => \T_NAMESPACE, \T_FUNCTION => \T_FUNCTION, T_CLOSURE => T_CLOSURE, \T_IF => \T_IF, \T_SWITCH => \T_SWITCH, \T_CASE => \T_CASE, \T_DECLARE => \T_DECLARE, \T_DEFAULT => \T_DEFAULT, \T_WHILE => \T_WHILE, \T_ELSE => \T_ELSE, \T_ELSEIF => \T_ELSEIF, \T_FOR => \T_FOR, \T_FOREACH => \T_FOREACH, \T_DO => \T_DO, \T_TRY => \T_TRY, \T_CATCH => \T_CATCH, \T_FINALLY => \T_FINALLY, T_PROPERTY => T_PROPERTY, T_OBJECT => T_OBJECT, \T_USE => \T_USE, \T_MATCH => \T_MATCH];
     /**
      * Tokens that represent scope modifiers.
      *

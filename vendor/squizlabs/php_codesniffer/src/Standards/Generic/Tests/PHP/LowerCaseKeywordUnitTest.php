@@ -22,7 +22,7 @@ class LowerCaseKeywordUnitTest extends \PHP_CodeSniffer\Tests\Standards\Abstract
      */
     public function getErrorList()
     {
-        return [10 => 3, 11 => 4, 12 => 1, 13 => 3, 14 => 7, 15 => 1, 19 => 1, 20 => 1, 21 => 1, 25 => 1, 28 => 1, 31 => 1];
+        return [10 => 3, 11 => 4, 12 => 1, 13 => 3, 14 => 7, 15 => 1, 19 => 1, 20 => 1, 21 => 1, 25 => 1, 28 => 1, 31 => 1, 32 => 1, 35 => 1];
     }
     //end getErrorList()
     /**

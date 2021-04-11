@@ -48,9 +48,9 @@ class ValidVariableNameSniff extends \PHP_CodeSniffer\Sniffs\AbstractVariableSni
                         $objVarName = \substr($objVarName, 1);
                     }
                     if (\PHP_CodeSniffer\Util\Common::isCamelCaps($objVarName, \false, \true, \false) === \false) {
-                        $error = 'Variable "%s" is not in valid camel caps format';
+                        $error = 'Member variable "%s" is not in valid camel caps format';
                         $data = [$originalVarName];
-                        $phpcsFile->addError($error, $var, 'NotCamelCaps', $data);
+                        $phpcsFile->addError($error, $var, 'MemberNotCamelCaps', $data);
                     }
                 }
                 //end if
@@ -58,19 +58,27 @@ class ValidVariableNameSniff extends \PHP_CodeSniffer\Sniffs\AbstractVariableSni
             //end if
         }
         //end if
+        $objOperator = $phpcsFile->findPrevious(\T_WHITESPACE, $stackPtr - 1, null, \true);
+        if ($tokens[$objOperator]['code'] === \T_DOUBLE_COLON) {
+            // The variable lives within a class, and is referenced like
+            // this: MyClass::$_variable, so we don't know its scope.
+            $objVarName = $varName;
+            if (\substr($objVarName, 0, 1) === '_') {
+                $objVarName = \substr($objVarName, 1);
+            }
+            if (\PHP_CodeSniffer\Util\Common::isCamelCaps($objVarName, \false, \true, \false) === \false) {
+                $error = 'Member variable "%s" is not in valid camel caps format';
+                $data = [$tokens[$stackPtr]['content']];
+                $phpcsFile->addError($error, $stackPtr, 'MemberNotCamelCaps', $data);
+            }
+            return;
+        }
         // There is no way for us to know if the var is public or private,
         // so we have to ignore a leading underscore if there is one and just
         // check the main part of the variable name.
         $originalVarName = $varName;
         if (\substr($varName, 0, 1) === '_') {
-            $objOperator = $phpcsFile->findPrevious(\T_WHITESPACE, $stackPtr - 1, null, \true);
-            if ($tokens[$objOperator]['code'] === \T_DOUBLE_COLON) {
-                // The variable lives within a class, and is referenced like
-                // this: MyClass::$_variable, so we don't know its scope.
-                $inClass = \true;
-            } else {
-                $inClass = $phpcsFile->hasCondition($stackPtr, \PHP_CodeSniffer\Util\Tokens::$ooScopeTokens);
-            }
+            $inClass = $phpcsFile->hasCondition($stackPtr, \PHP_CodeSniffer\Util\Tokens::$ooScopeTokens);
             if ($inClass === \true) {
                 $varName = \substr($varName, 1);
             }

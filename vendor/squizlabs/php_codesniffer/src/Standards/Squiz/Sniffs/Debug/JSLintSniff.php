@@ -12,6 +12,7 @@ namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Debug;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Common;
 class JSLintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
 {
     /**
@@ -42,14 +43,14 @@ class JSLintSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      */
     public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
     {
-        $rhinoPath = \PHP_CodeSniffer\Config::getExecutablePath('jslint');
+        $rhinoPath = \PHP_CodeSniffer\Config::getExecutablePath('rhino');
         $jslintPath = \PHP_CodeSniffer\Config::getExecutablePath('jslint');
         if ($rhinoPath === null || $jslintPath === null) {
             return;
         }
         $fileName = $phpcsFile->getFilename();
-        $rhinoPath = \escapeshellcmd($rhinoPath);
-        $jslintPath = \escapeshellcmd($jslintPath);
+        $rhinoPath = \PHP_CodeSniffer\Util\Common::escapeshellcmd($rhinoPath);
+        $jslintPath = \PHP_CodeSniffer\Util\Common::escapeshellcmd($jslintPath);
         $cmd = "{$rhinoPath} \"{$jslintPath}\" " . \escapeshellarg($fileName);
         \exec($cmd, $output, $retval);
         if (\is_array($output) === \true) {

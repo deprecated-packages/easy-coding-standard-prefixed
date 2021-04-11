@@ -26,7 +26,7 @@ class PostStatementCommentUnitTest extends \PHP_CodeSniffer\Tests\Standards\Abst
     {
         switch ($testFile) {
             case 'PostStatementCommentUnitTest.inc':
-                return [6 => 1, 10 => 1, 18 => 1, 35 => 1];
+                return [6 => 1, 10 => 1, 18 => 1, 35 => 1, 53 => 1];
             case 'PostStatementCommentUnitTest.1.js':
                 return [1 => 1, 4 => 1, 9 => 1];
             default:

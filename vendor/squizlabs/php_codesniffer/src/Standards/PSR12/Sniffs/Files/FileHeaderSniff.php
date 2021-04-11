@@ -141,7 +141,19 @@ class FileHeaderSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                     }
                     // Make sure this is not a code-level docblock.
                     $end = $tokens[$next]['comment_closer'];
-                    $docToken = $phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $end + 1, null, \true);
+                    for ($docToken = $end + 1; $docToken < $phpcsFile->numTokens; $docToken++) {
+                        if (isset(\PHP_CodeSniffer\Util\Tokens::$emptyTokens[$tokens[$docToken]['code']]) === \true) {
+                            continue;
+                        }
+                        if ($tokens[$docToken]['code'] === \T_ATTRIBUTE && isset($tokens[$docToken]['attribute_closer']) === \true) {
+                            $docToken = $tokens[$docToken]['attribute_closer'];
+                            continue;
+                        }
+                        break;
+                    }
+                    if ($docToken === $phpcsFile->numTokens) {
+                        $docToken--;
+                    }
                     if (isset($commentOpeners[$tokens[$docToken]['code']]) === \false && isset(\PHP_CodeSniffer\Util\Tokens::$methodPrefixes[$tokens[$docToken]['code']]) === \false) {
                         // Check for an @var annotation.
                         $annotation = \false;

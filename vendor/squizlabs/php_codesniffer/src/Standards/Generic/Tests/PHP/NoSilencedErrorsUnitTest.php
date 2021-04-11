@@ -35,7 +35,7 @@ class NoSilencedErrorsUnitTest extends \PHP_CodeSniffer\Tests\Standards\Abstract
      */
     public function getWarningList()
     {
-        return [5 => 1];
+        return [5 => 1, 10 => 1];
     }
     //end getWarningList()
 }

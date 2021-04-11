@@ -113,14 +113,9 @@ class Ruleset
      */
     public function __construct(\PHP_CodeSniffer\Config $config)
     {
-        // Ignore sniff restrictions if caching is on.
-        $restrictions = [];
-        $exclusions = [];
-        if ($config->cache === \false) {
-            $restrictions = $config->sniffs;
-            $exclusions = $config->exclude;
-        }
         $this->config = $config;
+        $restrictions = $config->sniffs;
+        $exclusions = $config->exclude;
         $sniffs = [];
         $standardPaths = [];
         foreach ($config->standards as $standard) {
@@ -174,6 +169,11 @@ class Ruleset
             $sniffs = \array_merge($sniffs, $this->processRuleset($standard));
         }
         //end foreach
+        // Ignore sniff restrictions if caching is on.
+        if ($config->cache === \true) {
+            $restrictions = [];
+            $exclusions = [];
+        }
         $sniffRestrictions = [];
         foreach ($restrictions as $sniffCode) {
             $parts = \explode('.', \strtolower($sniffCode));
@@ -619,7 +619,7 @@ class Ruleset
         } else {
             // See if this is a whole standard being referenced.
             $path = \PHP_CodeSniffer\Util\Standards::getInstalledStandardPath($ref);
-            if (\PHP_CodeSniffer\Util\Common::isPharFile($path) === \true && \strpos($path, 'ruleset.xml') === \false) {
+            if ($path !== null && \PHP_CodeSniffer\Util\Common::isPharFile($path) === \true && \strpos($path, 'ruleset.xml') === \false) {
                 // If the ruleset exists inside the phar file, use it.
                 if (\file_exists($path . \DIRECTORY_SEPARATOR . 'ruleset.xml') === \true) {
                     $path .= \DIRECTORY_SEPARATOR . 'ruleset.xml';

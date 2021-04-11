@@ -35,7 +35,7 @@ class EmptyStatementSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      */
     public function register()
     {
-        return [\T_TRY, \T_CATCH, \T_FINALLY, \T_DO, \T_ELSE, \T_ELSEIF, \T_FOR, \T_FOREACH, \T_IF, \T_SWITCH, \T_WHILE];
+        return [\T_TRY, \T_CATCH, \T_FINALLY, \T_DO, \T_ELSE, \T_ELSEIF, \T_FOR, \T_FOREACH, \T_IF, \T_SWITCH, \T_WHILE, \T_MATCH];
     }
     //end register()
     /**

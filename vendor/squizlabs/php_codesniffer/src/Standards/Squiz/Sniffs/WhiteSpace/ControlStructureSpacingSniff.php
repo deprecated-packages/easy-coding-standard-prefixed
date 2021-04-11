@@ -27,7 +27,7 @@ class ControlStructureSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      */
     public function register()
     {
-        return [\T_IF, \T_WHILE, \T_FOREACH, \T_FOR, \T_SWITCH, \T_DO, \T_ELSE, \T_ELSEIF, \T_TRY, \T_CATCH, \T_FINALLY];
+        return [\T_IF, \T_WHILE, \T_FOREACH, \T_FOR, \T_SWITCH, \T_DO, \T_ELSE, \T_ELSEIF, \T_TRY, \T_CATCH, \T_FINALLY, \T_MATCH];
     }
     //end register()
     /**
@@ -157,6 +157,13 @@ class ControlStructureSpacingSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             //end if
         }
         //end if
+        if ($tokens[$stackPtr]['code'] === \T_MATCH) {
+            // Move the scope closer to the semicolon/comma.
+            $next = $phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $scopeCloser + 1, null, \true);
+            if ($next !== \false && ($tokens[$next]['code'] === T_SEMICOLON || $tokens[$next]['code'] === T_COMMA)) {
+                $scopeCloser = $next;
+            }
+        }
         $trailingContent = $phpcsFile->findNext(\T_WHITESPACE, $scopeCloser + 1, null, \true);
         if ($tokens[$trailingContent]['code'] === \T_COMMENT || isset(\PHP_CodeSniffer\Util\Tokens::$phpcsCommentTokens[$tokens[$trailingContent]['code']]) === \true) {
             // Special exception for code where the comment about

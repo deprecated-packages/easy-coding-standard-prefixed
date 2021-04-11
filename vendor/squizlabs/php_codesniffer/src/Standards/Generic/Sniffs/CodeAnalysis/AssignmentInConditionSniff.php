@@ -45,7 +45,7 @@ class AssignmentInConditionSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         $starters[T_SEMICOLON] = T_SEMICOLON;
         $starters[T_OPEN_PARENTHESIS] = T_OPEN_PARENTHESIS;
         $this->conditionStartTokens = $starters;
-        return [\T_IF, \T_ELSEIF, \T_FOR, \T_SWITCH, \T_CASE, \T_WHILE];
+        return [\T_IF, \T_ELSEIF, \T_FOR, \T_SWITCH, \T_CASE, \T_WHILE, \T_MATCH];
     }
     //end register()
     /**

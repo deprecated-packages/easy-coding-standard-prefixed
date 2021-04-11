@@ -77,7 +77,19 @@ class FileCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             }
         }
         $commentEnd = $tokens[$commentStart]['comment_closer'];
-        $nextToken = $phpcsFile->findNext(\T_WHITESPACE, $commentEnd + 1, null, \true);
+        for ($nextToken = $commentEnd + 1; $nextToken < $phpcsFile->numTokens; $nextToken++) {
+            if ($tokens[$nextToken]['code'] === \T_WHITESPACE) {
+                continue;
+            }
+            if ($tokens[$nextToken]['code'] === \T_ATTRIBUTE && isset($tokens[$nextToken]['attribute_closer']) === \true) {
+                $nextToken = $tokens[$nextToken]['attribute_closer'];
+                continue;
+            }
+            break;
+        }
+        if ($nextToken === $phpcsFile->numTokens) {
+            $nextToken--;
+        }
         $ignore = [\T_CLASS, \T_INTERFACE, \T_TRAIT, \T_FUNCTION, T_CLOSURE, \T_PUBLIC, \T_PRIVATE, \T_PROTECTED, \T_FINAL, \T_STATIC, \T_ABSTRACT, \T_CONST, T_PROPERTY];
         if (\in_array($tokens[$nextToken]['code'], $ignore, \true) === \true) {
             $phpcsFile->addError('Missing file doc comment', $stackPtr, 'Missing');

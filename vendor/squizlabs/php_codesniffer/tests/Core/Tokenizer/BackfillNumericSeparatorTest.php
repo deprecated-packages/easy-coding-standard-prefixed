@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tests the backfilling of numeric seperators to PHP < 7.4.
+ * Tests the backfilling of numeric separators to PHP < 7.4.
  *
  * @author    Greg Sherwood <gsherwood@squiz.net>
  * @copyright 2019 Squiz Pty Ltd (ABN 77 084 670 600)
@@ -13,7 +13,7 @@ use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 class BackfillNumericSeparatorTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
 {
     /**
-     * Test that numbers using numeric seperators are tokenized correctly.
+     * Test that numbers using numeric separators are tokenized correctly.
      *
      * @param array $testData The data required for the specific test case.
      *
@@ -56,7 +56,7 @@ class BackfillNumericSeparatorTest extends \PHP_CodeSniffer\Tests\Core\AbstractM
     }
     //end dataTestBackfill()
     /**
-     * Test that numbers using numeric seperators which are considered parse errors and/or
+     * Test that numbers using numeric separators which are considered parse errors and/or
      * which aren't relevant to the backfill, do not incorrectly trigger the backfill anyway.
      *
      * @param string $testMarker     The comment which prefaces the target token in the test file.

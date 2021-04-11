@@ -68,7 +68,7 @@ if (\class_exists('PHP_CodeSniffer\\Autoload', \false) === \false) {
                 }
                 if (\strpos(__DIR__, 'phar://') !== 0 && @\file_exists(__DIR__ . '/../../autoload.php') === \true) {
                     self::$composerAutoloader = (include __DIR__ . '/../../autoload.php');
-                    if (self::$composerAutoloader instanceof \_PhpScoper3a0e32c9d767\Composer\Autoload\ClassLoader) {
+                    if (self::$composerAutoloader instanceof \_PhpScoper60081b922775\Composer\Autoload\ClassLoader) {
                         self::$composerAutoloader->unregister();
                         self::$composerAutoloader->register();
                     } else {
@@ -160,6 +160,9 @@ if (\class_exists('PHP_CodeSniffer\\Autoload', \false) === \false) {
         {
             $className = null;
             $newClasses = \array_diff($classesAfterLoad['classes'], $classesBeforeLoad['classes']);
+            if (\PHP_VERSION_ID < 70400) {
+                $newClasses = \array_reverse($newClasses);
+            }
             // Since PHP 7.4 get_declared_classes() does not guarantee any order, making
             // it impossible to use order to determine which is the parent an which is the child.
             // Let's reduce the list of candidates by removing all the classes known to be "parents".

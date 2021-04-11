@@ -166,11 +166,11 @@ class NonExecutableCodeSniff implements \PHP_CodeSniffer\Sniffs\Sniff
             if ($start === $end) {
                 break;
             }
-            if ($tokens[$start]['code'] === T_OPEN_PARENTHESIS) {
+            if (isset($tokens[$start]['parenthesis_closer']) === \true && $tokens[$start]['code'] === T_OPEN_PARENTHESIS) {
                 $start = $tokens[$start]['parenthesis_closer'];
                 continue;
             }
-            if ($tokens[$start]['code'] === T_OPEN_CURLY_BRACKET) {
+            if (isset($tokens[$start]['bracket_closer']) === \true && $tokens[$start]['code'] === T_OPEN_CURLY_BRACKET) {
                 $start = $tokens[$start]['bracket_closer'];
                 continue;
             }

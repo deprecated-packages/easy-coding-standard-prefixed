@@ -20,7 +20,7 @@ class LowercaseDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      */
     public function register()
     {
-        return [\T_IF, \T_ELSE, \T_ELSEIF, \T_FOREACH, \T_FOR, \T_DO, \T_SWITCH, \T_WHILE, \T_TRY, \T_CATCH];
+        return [\T_IF, \T_ELSE, \T_ELSEIF, \T_FOREACH, \T_FOR, \T_DO, \T_SWITCH, \T_WHILE, \T_TRY, \T_CATCH, \T_MATCH];
     }
     //end register()
     /**
