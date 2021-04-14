@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper5e5ebcdbebdf\Composer\Semver;
+namespace _PhpScoper7b319b4d8e1c\Composer\Semver;
 
-use _PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\ConstraintInterface;
-use _PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\MatchAllConstraint;
-use _PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\MultiConstraint;
-use _PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint;
+use _PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\ConstraintInterface;
+use _PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\MatchAllConstraint;
+use _PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\MultiConstraint;
+use _PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint;
 /**
  * Version parser.
  *
@@ -231,11 +231,11 @@ class VersionParser
             if (1 === \count($constraintObjects)) {
                 $constraint = $constraintObjects[0];
             } else {
-                $constraint = new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\MultiConstraint($constraintObjects);
+                $constraint = new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\MultiConstraint($constraintObjects);
             }
             $orGroups[] = $constraint;
         }
-        $constraint = \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\MultiConstraint::create($orGroups, \false);
+        $constraint = \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\MultiConstraint::create($orGroups, \false);
         $constraint->setPrettyString($prettyConstraint);
         return $constraint;
     }
@@ -265,9 +265,9 @@ class VersionParser
         }
         if (\preg_match('{^(v)?[xX*](\\.[xX*])*$}i', $constraint, $match)) {
             if (!empty($match[1]) || !empty($match[2])) {
-                return array(new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('>=', '0.0.0.0-dev'));
+                return array(new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('>=', '0.0.0.0-dev'));
             }
-            return array(new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\MatchAllConstraint());
+            return array(new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\MatchAllConstraint());
         }
         $versionRegex = 'v?(\\d++)(?:\\.(\\d++))?(?:\\.(\\d++))?(?:\\.(\\d++))?(?:' . self::$modifierRegex . '|\\.([xX*][.-]?dev))(?:\\+[^\\s]+)?';
         // Tilde Range
@@ -299,12 +299,12 @@ class VersionParser
                 $stabilitySuffix .= '-dev';
             }
             $lowVersion = $this->normalize(\substr($constraint . $stabilitySuffix, 1));
-            $lowerBound = new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('>=', $lowVersion);
+            $lowerBound = new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('>=', $lowVersion);
             // For upper bound, we increment the position of one more significance,
             // but highPosition = 0 would be illegal
             $highPosition = \max(1, $position - 1);
             $highVersion = $this->manipulateVersionString($matches, $highPosition, 1) . '-dev';
-            $upperBound = new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('<', $highVersion);
+            $upperBound = new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('<', $highVersion);
             return array($lowerBound, $upperBound);
         }
         // Caret Range
@@ -327,11 +327,11 @@ class VersionParser
                 $stabilitySuffix .= '-dev';
             }
             $lowVersion = $this->normalize(\substr($constraint . $stabilitySuffix, 1));
-            $lowerBound = new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('>=', $lowVersion);
+            $lowerBound = new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('>=', $lowVersion);
             // For upper bound, we increment the position of one more significance,
             // but highPosition = 0 would be illegal
             $highVersion = $this->manipulateVersionString($matches, $position, 1) . '-dev';
-            $upperBound = new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('<', $highVersion);
+            $upperBound = new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('<', $highVersion);
             return array($lowerBound, $upperBound);
         }
         // X Range
@@ -349,9 +349,9 @@ class VersionParser
             $lowVersion = $this->manipulateVersionString($matches, $position) . '-dev';
             $highVersion = $this->manipulateVersionString($matches, $position, 1) . '-dev';
             if ($lowVersion === '0.0.0.0-dev') {
-                return array(new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('<', $highVersion));
+                return array(new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('<', $highVersion));
             }
-            return array(new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('>=', $lowVersion), new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('<', $highVersion));
+            return array(new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('>=', $lowVersion), new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('<', $highVersion));
         }
         // Hyphen Range
         //
@@ -366,19 +366,19 @@ class VersionParser
                 $lowStabilitySuffix = '-dev';
             }
             $lowVersion = $this->normalize($matches['from']);
-            $lowerBound = new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('>=', $lowVersion . $lowStabilitySuffix);
+            $lowerBound = new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('>=', $lowVersion . $lowStabilitySuffix);
             $empty = function ($x) {
                 return $x === 0 || $x === '0' ? \false : empty($x);
             };
             if (!$empty($matches[12]) && !$empty($matches[13]) || !empty($matches[15]) || !empty($matches[17]) || !empty($matches[18])) {
                 $highVersion = $this->normalize($matches['to']);
-                $upperBound = new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('<=', $highVersion);
+                $upperBound = new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('<=', $highVersion);
             } else {
                 $highMatch = array('', $matches[11], $matches[12], $matches[13], $matches[14]);
                 // validate to version
                 $this->normalize($matches['to']);
                 $highVersion = $this->manipulateVersionString($highMatch, $empty($matches[12]) ? 1 : 2, 1) . '-dev';
-                $upperBound = new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint('<', $highVersion);
+                $upperBound = new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint('<', $highVersion);
             }
             return array($lowerBound, $upperBound);
         }
@@ -406,7 +406,7 @@ class VersionParser
                         }
                     }
                 }
-                return array(new \_PhpScoper5e5ebcdbebdf\Composer\Semver\Constraint\Constraint($matches[1] ?: '=', $version));
+                return array(new \_PhpScoper7b319b4d8e1c\Composer\Semver\Constraint\Constraint($matches[1] ?: '=', $version));
             } catch (\Exception $e) {
             }
         }

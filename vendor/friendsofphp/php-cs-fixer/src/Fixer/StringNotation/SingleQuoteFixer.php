@@ -33,7 +33,7 @@ final class SingleQuoteFixer extends \PhpCsFixer\AbstractFixer implements \PhpCs
         $codeSample = <<<'EOF'
 <?php
 
-namespace _PhpScoper5e5ebcdbebdf;
+namespace _PhpScoper7b319b4d8e1c;
 
 $a = "sample";
 $b = "sample with 'single-quotes'";

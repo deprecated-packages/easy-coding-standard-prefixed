@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5e5ebcdbebdf\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoper7b319b4d8e1c\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
 trait AutowireTrait
 {
