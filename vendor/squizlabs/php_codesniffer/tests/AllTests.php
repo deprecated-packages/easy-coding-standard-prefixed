@@ -21,8 +21,8 @@ if ($GLOBALS['PHP_CODESNIFFER_PEAR'] === \false) {
 // older PHPUnit versions due to return type hints, so maintain
 // two different suite objects.
 $phpunit7 = \false;
-if (\class_exists('_PhpScoperd8b0b9452568\\PHPUnit\\Runner\\Version') === \true) {
-    $version = \_PhpScoperd8b0b9452568\PHPUnit\Runner\Version::id();
+if (\class_exists('_PhpScopercc9aec205203\\PHPUnit\\Runner\\Version') === \true) {
+    $version = \_PhpScopercc9aec205203\PHPUnit\Runner\Version::id();
     if ($version[0] === '7') {
         $phpunit7 = \true;
     }

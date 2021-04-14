@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Caster;
+namespace _PhpScopercc9aec205203\Symfony\Component\VarDumper\Caster;
 
 use Ds\Collection;
 use Ds\Map;
 use Ds\Pair;
-use _PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScopercc9aec205203\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts Ds extension classes to array representation.
  *
@@ -23,30 +23,30 @@ use _PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class DsCaster
 {
-    public static function castCollection(\Ds\Collection $c, array $a, \_PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castCollection(\Ds\Collection $c, array $a, \_PhpScopercc9aec205203\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
-        $a[\_PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'count'] = $c->count();
-        $a[\_PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'capacity'] = $c->capacity();
+        $a[\_PhpScopercc9aec205203\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'count'] = $c->count();
+        $a[\_PhpScopercc9aec205203\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'capacity'] = $c->capacity();
         if (!$c instanceof \Ds\Map) {
             $a += $c->toArray();
         }
         return $a;
     }
-    public static function castMap(\Ds\Map $c, array $a, \_PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castMap(\Ds\Map $c, array $a, \_PhpScopercc9aec205203\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
         foreach ($c as $k => $v) {
-            $a[] = new \_PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Caster\DsPairStub($k, $v);
+            $a[] = new \_PhpScopercc9aec205203\Symfony\Component\VarDumper\Caster\DsPairStub($k, $v);
         }
         return $a;
     }
-    public static function castPair(\Ds\Pair $c, array $a, \_PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castPair(\Ds\Pair $c, array $a, \_PhpScopercc9aec205203\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
         foreach ($c->toArray() as $k => $v) {
-            $a[\_PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k] = $v;
+            $a[\_PhpScopercc9aec205203\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k] = $v;
         }
         return $a;
     }
-    public static function castPairStub(\_PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Caster\DsPairStub $c, array $a, \_PhpScoperd8b0b9452568\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
+    public static function castPairStub(\_PhpScopercc9aec205203\Symfony\Component\VarDumper\Caster\DsPairStub $c, array $a, \_PhpScopercc9aec205203\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested) : array
     {
         if ($isNested) {
             $stub->class = \Ds\Pair::class;

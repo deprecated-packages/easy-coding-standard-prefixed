@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd8b0b9452568\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScopercc9aec205203\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use _PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperd8b0b9452568\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
+use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 /**
  * Adds services tagged kernel.fragment_renderer as HTTP content rendering strategies.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FragmentRendererPass implements \_PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class FragmentRendererPass implements \_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $handlerService;
     private $rendererTag;
@@ -30,7 +30,7 @@ class FragmentRendererPass implements \_PhpScoperd8b0b9452568\Symfony\Component\
         $this->handlerService = $handlerService;
         $this->rendererTag = $rendererTag;
     }
-    public function process(\_PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->handlerService)) {
             return;
@@ -41,15 +41,15 @@ class FragmentRendererPass implements \_PhpScoperd8b0b9452568\Symfony\Component\
             $def = $container->getDefinition($id);
             $class = $container->getParameterBag()->resolveValue($def->getClass());
             if (!($r = $container->getReflectionClass($class))) {
-                throw new \_PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                throw new \_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
             }
-            if (!$r->isSubclassOf(\_PhpScoperd8b0b9452568\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface::class)) {
-                throw new \_PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must implement interface "%s".', $id, \_PhpScoperd8b0b9452568\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface::class));
+            if (!$r->isSubclassOf(\_PhpScopercc9aec205203\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface::class)) {
+                throw new \_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException(\sprintf('Service "%s" must implement interface "%s".', $id, \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface::class));
             }
             foreach ($tags as $tag) {
-                $renderers[$tag['alias']] = new \_PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\Reference($id);
+                $renderers[$tag['alias']] = new \_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Reference($id);
             }
         }
-        $definition->replaceArgument(0, \_PhpScoperd8b0b9452568\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($container, $renderers));
+        $definition->replaceArgument(0, \_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($container, $renderers));
     }
 }

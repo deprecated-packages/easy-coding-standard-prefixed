@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoperd8b0b9452568\Composer\Semver\Constraint;
+namespace _PhpScopercc9aec205203\Composer\Semver\Constraint;
 
 /**
  * DO NOT IMPLEMENT this interface. It is only meant for usage as a type hint
@@ -25,7 +25,7 @@ interface ConstraintInterface
      *
      * @return bool
      */
-    public function matches(\_PhpScoperd8b0b9452568\Composer\Semver\Constraint\ConstraintInterface $provider);
+    public function matches(\_PhpScopercc9aec205203\Composer\Semver\Constraint\ConstraintInterface $provider);
     /**
      * Provides a compiled version of the constraint for the given operator
      * The compiled version must be a PHP expression.

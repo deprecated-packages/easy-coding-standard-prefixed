@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd8b0b9452568\Symfony\Component\VarExporter;
+namespace _PhpScopercc9aec205203\Symfony\Component\VarExporter;
 
-use _PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use _PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Exporter;
-use _PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Hydrator;
-use _PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Registry;
-use _PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Values;
+use _PhpScopercc9aec205203\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use _PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Exporter;
+use _PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Hydrator;
+use _PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Registry;
+use _PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Values;
 /**
  * Exports serializable PHP values to PHP code.
  *
@@ -42,13 +42,13 @@ final class VarExporter
     {
         $isStaticValue = \true;
         if (!\is_object($value) && !(\is_array($value) && $value) && !$value instanceof \__PHP_Incomplete_Class && !\is_resource($value)) {
-            return \_PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Exporter::export($value);
+            return \_PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Exporter::export($value);
         }
         $objectsPool = new \SplObjectStorage();
         $refsPool = [];
         $objectsCount = 0;
         try {
-            $value = \_PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Exporter::prepare([$value], $objectsPool, $refsPool, $objectsCount, $isStaticValue)[0];
+            $value = \_PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Exporter::prepare([$value], $objectsPool, $refsPool, $objectsCount, $isStaticValue)[0];
         } finally {
             $references = [];
             foreach ($refsPool as $i => $v) {
@@ -59,7 +59,7 @@ final class VarExporter
             }
         }
         if ($isStaticValue) {
-            return \_PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Exporter::export($value);
+            return \_PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Exporter::export($value);
         }
         $classes = [];
         $values = [];
@@ -95,10 +95,10 @@ final class VarExporter
             }
         }
         if ($classes || $references) {
-            $value = new \_PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Hydrator(new \_PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Registry($classes), $references ? new \_PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Values($references) : null, $properties, $value, $wakeups);
+            $value = new \_PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Hydrator(new \_PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Registry($classes), $references ? new \_PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Values($references) : null, $properties, $value, $wakeups);
         } else {
             $isStaticValue = \true;
         }
-        return \_PhpScoperd8b0b9452568\Symfony\Component\VarExporter\Internal\Exporter::export($value);
+        return \_PhpScopercc9aec205203\Symfony\Component\VarExporter\Internal\Exporter::export($value);
     }
 }

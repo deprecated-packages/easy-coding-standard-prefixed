@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd8b0b9452568\Symfony\Component\Console\Command;
+namespace _PhpScopercc9aec205203\Symfony\Component\Console\Command;
 
-use _PhpScoperd8b0b9452568\Symfony\Component\Console\Helper\DescriptorHelper;
-use _PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperd8b0b9452568\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopercc9aec205203\Symfony\Component\Console\Helper\DescriptorHelper;
+use _PhpScopercc9aec205203\Symfony\Component\Console\Input\InputArgument;
+use _PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopercc9aec205203\Symfony\Component\Console\Input\InputOption;
+use _PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface;
 /**
  * ListCommand displays the list of all available commands for the application.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ListCommand extends \_PhpScoperd8b0b9452568\Symfony\Component\Console\Command\Command
+class ListCommand extends \_PhpScopercc9aec205203\Symfony\Component\Console\Command\Command
 {
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this->setName('list')->setDefinition([new \_PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputArgument('namespace', \_PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputArgument::OPTIONAL, 'The namespace name'), new \_PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputOption('raw', null, \_PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'To output raw command list'), new \_PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputOption('format', null, \_PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The output format (txt, xml, json, or md)', 'txt')])->setDescription('List commands')->setHelp(<<<'EOF'
+        $this->setName('list')->setDefinition([new \_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputArgument('namespace', \_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputArgument::OPTIONAL, 'The namespace name'), new \_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputOption('raw', null, \_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'To output raw command list'), new \_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputOption('format', null, \_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'The output format (txt, xml, json, or md)', 'txt')])->setDescription('List commands')->setHelp(<<<'EOF'
 The <info>%command.name%</info> command lists all commands:
 
   <info>%command.full_name%</info>
@@ -49,9 +49,9 @@ EOF
     /**
      * {@inheritdoc}
      */
-    protected function execute(\_PhpScoperd8b0b9452568\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperd8b0b9452568\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function execute(\_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface $output)
     {
-        $helper = new \_PhpScoperd8b0b9452568\Symfony\Component\Console\Helper\DescriptorHelper();
+        $helper = new \_PhpScopercc9aec205203\Symfony\Component\Console\Helper\DescriptorHelper();
         $helper->describe($output, $this->getApplication(), ['format' => $input->getOption('format'), 'raw_text' => $input->getOption('raw'), 'namespace' => $input->getArgument('namespace')]);
         return 0;
     }

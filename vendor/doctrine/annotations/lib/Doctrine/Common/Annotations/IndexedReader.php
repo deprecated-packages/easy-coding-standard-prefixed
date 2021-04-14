@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperd8b0b9452568\Doctrine\Common\Annotations;
+namespace _PhpScopercc9aec205203\Doctrine\Common\Annotations;
 
 use ReflectionClass;
 use ReflectionMethod;
@@ -10,11 +10,11 @@ use function get_class;
 /**
  * Allows the reader to be used in-place of Doctrine's reader.
  */
-class IndexedReader implements \_PhpScoperd8b0b9452568\Doctrine\Common\Annotations\Reader
+class IndexedReader implements \_PhpScopercc9aec205203\Doctrine\Common\Annotations\Reader
 {
     /** @var Reader */
     private $delegate;
-    public function __construct(\_PhpScoperd8b0b9452568\Doctrine\Common\Annotations\Reader $reader)
+    public function __construct(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\Reader $reader)
     {
         $this->delegate = $reader;
     }
