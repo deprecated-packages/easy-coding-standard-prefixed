@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7b319b4d8e1c;
+namespace _PhpScoperd8b0b9452568;
 
-use _PhpScoper7b319b4d8e1c\Nette\Utils\Strings;
-use _PhpScoper7b319b4d8e1c\Isolated\Symfony\Component\Finder\Finder;
-$finder = new \_PhpScoper7b319b4d8e1c\Isolated\Symfony\Component\Finder\Finder();
+use _PhpScoperd8b0b9452568\Nette\Utils\Strings;
+use _PhpScoperd8b0b9452568\Isolated\Symfony\Component\Finder\Finder;
+$finder = new \_PhpScoperd8b0b9452568\Isolated\Symfony\Component\Finder\Finder();
 $polyfillFileInfos = $finder->files()->in(__DIR__ . '/vendor/symfony/polyfill-*')->name('*.php')->getIterator();
 $polyfillFilePaths = [];
 foreach ($polyfillFileInfos as $polyfillFileInfo) {
@@ -21,26 +21,26 @@ return ['files-whitelist' => [
     'PhpCsFixer\\*',
     'PHP_CodeSniffer\\*',
     'SlevomatCodingStandard\\*',
-    '_PhpScoper7b319b4d8e1c\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
-    '_PhpScoper7b319b4d8e1c\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
-    '_PhpScoper7b319b4d8e1c\\Composer\\InstalledVersions',
+    '_PhpScoperd8b0b9452568\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
+    '_PhpScoperd8b0b9452568\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
+    '_PhpScoperd8b0b9452568\\Composer\\InstalledVersions',
     'Symfony\\Polyfill\\*',
 ], 'patchers' => [
     function (string $filePath, string $prefix, string $content) : string {
-        if (!\_PhpScoper7b319b4d8e1c\Nette\Utils\Strings::endsWith($filePath, 'vendor/jean85/pretty-package-versions/src/PrettyVersions.php')) {
+        if (!\_PhpScoperd8b0b9452568\Nette\Utils\Strings::endsWith($filePath, 'vendor/jean85/pretty-package-versions/src/PrettyVersions.php')) {
             return $content;
         }
         // see https://regex101.com/r/v8zRMm/1
-        return \_PhpScoper7b319b4d8e1c\Nette\Utils\Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScoper7b319b4d8e1c\\Composer\\InstalledVersions');
+        return \_PhpScoperd8b0b9452568\Nette\Utils\Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScoperd8b0b9452568\\Composer\\InstalledVersions');
     },
     // fixes https://github.com/symplify/symplify/issues/3102
     function (string $filePath, string $prefix, string $content) : string {
-        if (!\_PhpScoper7b319b4d8e1c\Nette\Utils\Strings::contains($filePath, 'vendor/')) {
+        if (!\_PhpScoperd8b0b9452568\Nette\Utils\Strings::contains($filePath, 'vendor/')) {
             return $content;
         }
         // @see https://regex101.com/r/lBV8IO/2
         $fqcnReservedPattern = \sprintf('#(\\\\)?%s\\\\(parent|self|static)#m', $prefix);
-        $matches = \_PhpScoper7b319b4d8e1c\Nette\Utils\Strings::matchAll($content, $fqcnReservedPattern);
+        $matches = \_PhpScoperd8b0b9452568\Nette\Utils\Strings::matchAll($content, $fqcnReservedPattern);
         if (!$matches) {
             return $content;
         }
