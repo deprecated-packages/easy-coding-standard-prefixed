@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\Bundle;
 
-use _PhpScopere24d949bf310\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper5e5ebcdbebdf\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\Skipper\DependencyInjection\Extension\SkipperExtension;
-final class SkipperBundle extends \_PhpScopere24d949bf310\Symfony\Component\HttpKernel\Bundle\Bundle
+final class SkipperBundle extends \_PhpScoper5e5ebcdbebdf\Symfony\Component\HttpKernel\Bundle\Bundle
 {
     protected function createContainerExtension() : \Symplify\Skipper\DependencyInjection\Extension\SkipperExtension
     {

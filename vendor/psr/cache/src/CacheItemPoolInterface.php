@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScopere24d949bf310\Psr\Cache;
+namespace _PhpScoper5e5ebcdbebdf\Psr\Cache;
 
 /**
  * CacheItemPoolInterface generates CacheItemInterface objects.
@@ -108,7 +108,7 @@ interface CacheItemPoolInterface
      * @return bool
      *   True if the item was successfully persisted. False if there was an error.
      */
-    public function save(\_PhpScopere24d949bf310\Psr\Cache\CacheItemInterface $item);
+    public function save(\_PhpScoper5e5ebcdbebdf\Psr\Cache\CacheItemInterface $item);
     /**
      * Sets a cache item to be persisted later.
      *
@@ -118,7 +118,7 @@ interface CacheItemPoolInterface
      * @return bool
      *   False if the item could not be queued or if a commit was attempted and failed. True otherwise.
      */
-    public function saveDeferred(\_PhpScopere24d949bf310\Psr\Cache\CacheItemInterface $item);
+    public function saveDeferred(\_PhpScoper5e5ebcdbebdf\Psr\Cache\CacheItemInterface $item);
     /**
      * Persists any deferred cache items.
      *

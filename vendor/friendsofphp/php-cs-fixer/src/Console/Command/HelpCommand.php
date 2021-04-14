@@ -26,11 +26,11 @@ use PhpCsFixer\Preg;
 use PhpCsFixer\RuleSet\RuleSet;
 use PhpCsFixer\RuleSet\RuleSets;
 use PhpCsFixer\Utils;
-use _PhpScopere24d949bf310\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
-use _PhpScopere24d949bf310\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScopere24d949bf310\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use _PhpScopere24d949bf310\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopere24d949bf310\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
+use _PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use _PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -38,7 +38,7 @@ use _PhpScopere24d949bf310\Symfony\Component\Console\Output\OutputInterface;
  *
  * @internal
  */
-final class HelpCommand extends \_PhpScopere24d949bf310\Symfony\Component\Console\Command\HelpCommand
+final class HelpCommand extends \_PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Command\HelpCommand
 {
     protected static $defaultName = 'help';
     /**
@@ -371,9 +371,9 @@ EOF;
     /**
      * {@inheritdoc}
      */
-    protected function initialize(\_PhpScopere24d949bf310\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopere24d949bf310\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function initialize(\_PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Output\OutputInterface $output)
     {
-        $output->getFormatter()->setStyle('url', new \_PhpScopere24d949bf310\Symfony\Component\Console\Formatter\OutputFormatterStyle('blue'));
+        $output->getFormatter()->setStyle('url', new \_PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Formatter\OutputFormatterStyle('blue'));
     }
     /**
      * @return null|string
@@ -436,7 +436,7 @@ EOF;
                         return \strcmp($optionA->getName(), $optionB->getName());
                     });
                     foreach ($configurationDefinitionOptions as $option) {
-                        $line = '<info>' . \_PhpScopere24d949bf310\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getName()) . '</info>';
+                        $line = '<info>' . \_PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getName()) . '</info>';
                         $allowed = self::getDisplayableAllowedValues($option);
                         if (null !== $allowed) {
                             foreach ($allowed as &$value) {
@@ -454,14 +454,14 @@ EOF;
                         if (null !== $allowed) {
                             $line .= ' (' . \implode(', ', $allowed) . ')';
                         }
-                        $line .= ': ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScopere24d949bf310\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDescription())))) . '; ';
+                        $line .= ': ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDescription())))) . '; ';
                         if ($option->hasDefault()) {
                             $line .= 'defaults to <comment>' . self::toString($option->getDefault()) . '</comment>';
                         } else {
                             $line .= 'required';
                         }
                         if ($option instanceof \PhpCsFixer\FixerConfiguration\DeprecatedFixerOption) {
-                            $line .= '. DEPRECATED: ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScopere24d949bf310\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDeprecationMessage()))));
+                            $line .= '. DEPRECATED: ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScoper5e5ebcdbebdf\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDeprecationMessage()))));
                         }
                         if ($option instanceof \PhpCsFixer\FixerConfiguration\AliasedFixerOption) {
                             $line .= '; DEPRECATED alias: <comment>' . $option->getAlias() . '</comment>';
