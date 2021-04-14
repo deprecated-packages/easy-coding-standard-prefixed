@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\ValueObjectFactory;
 
-use _PhpScoperd32e35cfad84\Nette\Utils\Strings;
+use _PhpScopere24d949bf310\Nette\Utils\Strings;
 use Symplify\CodingStandard\ValueObject\DocBlockLines;
 final class DocBlockLinesFactory
 {
@@ -20,16 +20,16 @@ final class DocBlockLinesFactory
     public function createFromDocBlock(string $docBlock) : \Symplify\CodingStandard\ValueObject\DocBlockLines
     {
         // Remove the prefix '/**'
-        $docBlock = \_PhpScoperd32e35cfad84\Nette\Utils\Strings::replace($docBlock, self::BEGINNING_OF_DOC_BLOCK_REGEX);
+        $docBlock = \_PhpScopere24d949bf310\Nette\Utils\Strings::replace($docBlock, self::BEGINNING_OF_DOC_BLOCK_REGEX);
         // Remove the suffix '*/'
-        $docBlock = \_PhpScoperd32e35cfad84\Nette\Utils\Strings::replace($docBlock, self::END_OF_DOC_BLOCK_REGEX);
+        $docBlock = \_PhpScopere24d949bf310\Nette\Utils\Strings::replace($docBlock, self::END_OF_DOC_BLOCK_REGEX);
         // Remove extra whitespace at the end
         $docBlock = \rtrim($docBlock);
         $docBlockLines = $this->splitToLines($docBlock);
         $docBlockLines = \array_map(function (string $line) : string {
-            $noWhitespace = \_PhpScoperd32e35cfad84\Nette\Utils\Strings::trim($line, \_PhpScoperd32e35cfad84\Nette\Utils\Strings::TRIM_CHARACTERS);
+            $noWhitespace = \_PhpScopere24d949bf310\Nette\Utils\Strings::trim($line, \_PhpScopere24d949bf310\Nette\Utils\Strings::TRIM_CHARACTERS);
             // Remove asterisks on the left side, plus additional whitespace
-            return \ltrim($noWhitespace, \_PhpScoperd32e35cfad84\Nette\Utils\Strings::TRIM_CHARACTERS . '*');
+            return \ltrim($noWhitespace, \_PhpScopere24d949bf310\Nette\Utils\Strings::TRIM_CHARACTERS . '*');
         }, $docBlockLines);
         return $this->createFromLines($docBlockLines);
     }
@@ -42,7 +42,7 @@ final class DocBlockLinesFactory
         $otherLines = [];
         $collectDescriptionLines = \true;
         foreach ($docBlockLines as $docBlockLine) {
-            if (\_PhpScoperd32e35cfad84\Nette\Utils\Strings::startsWith($docBlockLine, '@') || \_PhpScoperd32e35cfad84\Nette\Utils\Strings::startsWith($docBlockLine, '{@')) {
+            if (\_PhpScopere24d949bf310\Nette\Utils\Strings::startsWith($docBlockLine, '@') || \_PhpScopere24d949bf310\Nette\Utils\Strings::startsWith($docBlockLine, '{@')) {
                 // The line has a special meaning (it's an annotation, or something like {@inheritdoc})
                 $collectDescriptionLines = \false;
             }

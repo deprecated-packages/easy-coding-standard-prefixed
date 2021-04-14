@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperd32e35cfad84\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere24d949bf310\Symfony\Component\Console\Input\InputArgument;
+use _PhpScopere24d949bf310\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopere24d949bf310\Symfony\Component\Console\Input\InputOption;
+use _PhpScopere24d949bf310\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Application\EasyCodingStandardApplication;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
 use Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter;
@@ -47,17 +47,17 @@ abstract class AbstractCheckCommand extends \Symplify\PackageBuilder\Console\Com
         $this->addArgument(
             \Symplify\EasyCodingStandard\ValueObject\Option::PATHS,
             // optional is on purpose here, since path from ecs.php can se ubsed
-            \_PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputArgument::OPTIONAL | \_PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputArgument::IS_ARRAY,
+            \_PhpScopere24d949bf310\Symfony\Component\Console\Input\InputArgument::OPTIONAL | \_PhpScopere24d949bf310\Symfony\Component\Console\Input\InputArgument::IS_ARRAY,
             'The path(s) to be checked.'
         );
         $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::FIX, null, null, 'Fix found violations.');
         $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::CLEAR_CACHE, null, null, 'Clear cache for already checked files.');
-        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::NO_PROGRESS_BAR, null, \_PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Hide progress bar. Useful e.g. for nicer CI output.');
-        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::NO_ERROR_TABLE, null, \_PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Hide error table. Useful e.g. for fast check of error count.');
-        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT, null, \_PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Select output format', \Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter::NAME);
-        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::MATCH_GIT_DIFF, null, \_PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Execute only on file(s) matching the git diff.');
+        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::NO_PROGRESS_BAR, null, \_PhpScopere24d949bf310\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Hide progress bar. Useful e.g. for nicer CI output.');
+        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::NO_ERROR_TABLE, null, \_PhpScopere24d949bf310\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Hide error table. Useful e.g. for fast check of error count.');
+        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::OUTPUT_FORMAT, null, \_PhpScopere24d949bf310\Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED, 'Select output format', \Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter::NAME);
+        $this->addOption(\Symplify\EasyCodingStandard\ValueObject\Option::MATCH_GIT_DIFF, null, \_PhpScopere24d949bf310\Symfony\Component\Console\Input\InputOption::VALUE_NONE, 'Execute only on file(s) matching the git diff.');
     }
-    protected function initialize(\_PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperd32e35cfad84\Symfony\Component\Console\Output\OutputInterface $output) : void
+    protected function initialize(\_PhpScopere24d949bf310\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopere24d949bf310\Symfony\Component\Console\Output\OutputInterface $output) : void
     {
         $this->loadedCheckersGuard->ensureSomeCheckersAreRegistered();
     }

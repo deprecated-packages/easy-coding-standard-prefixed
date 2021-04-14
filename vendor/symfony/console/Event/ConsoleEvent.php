@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd32e35cfad84\Symfony\Component\Console\Event;
+namespace _PhpScopere24d949bf310\Symfony\Component\Console\Event;
 
-use _PhpScoperd32e35cfad84\Symfony\Component\Console\Command\Command;
-use _PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperd32e35cfad84\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperd32e35cfad84\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScopere24d949bf310\Symfony\Component\Console\Command\Command;
+use _PhpScopere24d949bf310\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopere24d949bf310\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere24d949bf310\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Allows to inspect input and output of a command.
  *
  * @author Francesco Levorato <git@flevour.net>
  */
-class ConsoleEvent extends \_PhpScoperd32e35cfad84\Symfony\Contracts\EventDispatcher\Event
+class ConsoleEvent extends \_PhpScopere24d949bf310\Symfony\Contracts\EventDispatcher\Event
 {
     protected $command;
     private $input;
     private $output;
-    public function __construct(\_PhpScoperd32e35cfad84\Symfony\Component\Console\Command\Command $command = null, \_PhpScoperd32e35cfad84\Symfony\Component\Console\Input\InputInterface $input, \_PhpScoperd32e35cfad84\Symfony\Component\Console\Output\OutputInterface $output)
+    public function __construct(\_PhpScopere24d949bf310\Symfony\Component\Console\Command\Command $command = null, \_PhpScopere24d949bf310\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopere24d949bf310\Symfony\Component\Console\Output\OutputInterface $output)
     {
         $this->command = $command;
         $this->input = $input;
