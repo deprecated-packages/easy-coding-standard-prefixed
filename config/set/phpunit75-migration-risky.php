@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper60081b922775;
+namespace _PhpScoperd32e35cfad84;
 
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitDedicateAssertFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitDedicateAssertInternalTypeFixer;
@@ -9,8 +9,8 @@ use PhpCsFixer\Fixer\PhpUnit\PhpUnitExpectationFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMockFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitNamespacedFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitNoExpectationAnnotationFixer;
-use _PhpScoper60081b922775\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (\_PhpScoper60081b922775\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use _PhpScoperd32e35cfad84\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+return static function (\_PhpScoperd32e35cfad84\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
     \trigger_error('ECS set PHPUNIT_75_MIGRATION_RISKY is deprecated. Use more advanced and precise Rector instead (http://github.com/rectorphp/rector)');
     \sleep(3);
     $services = $containerConfigurator->services();

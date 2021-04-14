@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\Finder;
 
-use _PhpScoper60081b922775\Symfony\Component\Finder\Finder;
+use _PhpScoperd32e35cfad84\Symfony\Component\Finder\Finder;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;
 final class FixtureFinder
@@ -21,7 +21,7 @@ final class FixtureFinder
      */
     public function find(array $sources) : array
     {
-        $finder = new \_PhpScoper60081b922775\Symfony\Component\Finder\Finder();
+        $finder = new \_PhpScoperd32e35cfad84\Symfony\Component\Finder\Finder();
         $finder->files()->in($sources)->name('*.php.inc')->path('Fixture')->sortByName();
         return $this->finderSanitizer->sanitize($finder);
     }

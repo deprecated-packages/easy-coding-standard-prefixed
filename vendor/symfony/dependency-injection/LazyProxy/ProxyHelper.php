@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper60081b922775\Symfony\Component\DependencyInjection\LazyProxy;
+namespace _PhpScoperd32e35cfad84\Symfony\Component\DependencyInjection\LazyProxy;
 
 /**
  * @author Nicolas Grekas <p@tchwork.com>

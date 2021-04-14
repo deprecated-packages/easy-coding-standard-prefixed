@@ -5,24 +5,24 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper60081b922775\Nette\Utils;
+namespace _PhpScoperd32e35cfad84\Nette\Utils;
 
-use _PhpScoper60081b922775\Nette;
+use _PhpScoperd32e35cfad84\Nette;
 if (\false) {
     /** @deprecated use Nette\HtmlStringable */
-    interface IHtmlString extends \_PhpScoper60081b922775\Nette\HtmlStringable
+    interface IHtmlString extends \_PhpScoperd32e35cfad84\Nette\HtmlStringable
     {
     }
-} elseif (!\interface_exists(\_PhpScoper60081b922775\Nette\Utils\IHtmlString::class)) {
-    \class_alias(\_PhpScoper60081b922775\Nette\HtmlStringable::class, \_PhpScoper60081b922775\Nette\Utils\IHtmlString::class);
+} elseif (!\interface_exists(\_PhpScoperd32e35cfad84\Nette\Utils\IHtmlString::class)) {
+    \class_alias(\_PhpScoperd32e35cfad84\Nette\HtmlStringable::class, \_PhpScoperd32e35cfad84\Nette\Utils\IHtmlString::class);
 }
-namespace _PhpScoper60081b922775\Nette\Localization;
+namespace _PhpScoperd32e35cfad84\Nette\Localization;
 
 if (\false) {
     /** @deprecated use Nette\Localization\Translator */
-    interface ITranslator extends \_PhpScoper60081b922775\Nette\Localization\Translator
+    interface ITranslator extends \_PhpScoperd32e35cfad84\Nette\Localization\Translator
     {
     }
-} elseif (!\interface_exists(\_PhpScoper60081b922775\Nette\Localization\ITranslator::class)) {
-    \class_alias(\_PhpScoper60081b922775\Nette\Localization\Translator::class, \_PhpScoper60081b922775\Nette\Localization\ITranslator::class);
+} elseif (!\interface_exists(\_PhpScoperd32e35cfad84\Nette\Localization\ITranslator::class)) {
+    \class_alias(\_PhpScoperd32e35cfad84\Nette\Localization\Translator::class, \_PhpScoperd32e35cfad84\Nette\Localization\ITranslator::class);
 }

@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper60081b922775\Symfony\Component\ErrorHandler\ErrorEnhancer;
+namespace _PhpScoperd32e35cfad84\Symfony\Component\ErrorHandler\ErrorEnhancer;
 
-use _PhpScoper60081b922775\Symfony\Component\ErrorHandler\Error\FatalError;
-use _PhpScoper60081b922775\Symfony\Component\ErrorHandler\Error\UndefinedMethodError;
+use _PhpScoperd32e35cfad84\Symfony\Component\ErrorHandler\Error\FatalError;
+use _PhpScoperd32e35cfad84\Symfony\Component\ErrorHandler\Error\UndefinedMethodError;
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
-class UndefinedMethodErrorEnhancer implements \_PhpScoper60081b922775\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
+class UndefinedMethodErrorEnhancer implements \_PhpScoperd32e35cfad84\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function enhance(\Throwable $error) : ?\Throwable
     {
-        if ($error instanceof \_PhpScoper60081b922775\Symfony\Component\ErrorHandler\Error\FatalError) {
+        if ($error instanceof \_PhpScoperd32e35cfad84\Symfony\Component\ErrorHandler\Error\FatalError) {
             return null;
         }
         $message = $error->getMessage();
@@ -35,7 +35,7 @@ class UndefinedMethodErrorEnhancer implements \_PhpScoper60081b922775\Symfony\Co
         $message = \sprintf('Attempted to call an undefined method named "%s" of class "%s".', $methodName, $className);
         if ('' === $methodName || !\class_exists($className) || null === ($methods = \get_class_methods($className))) {
             // failed to get the class or its methods on which an unknown method was called (for example on an anonymous class)
-            return new \_PhpScoper60081b922775\Symfony\Component\ErrorHandler\Error\UndefinedMethodError($message, $error);
+            return new \_PhpScoperd32e35cfad84\Symfony\Component\ErrorHandler\Error\UndefinedMethodError($message, $error);
         }
         $candidates = [];
         foreach ($methods as $definedMethodName) {
@@ -54,6 +54,6 @@ class UndefinedMethodErrorEnhancer implements \_PhpScoper60081b922775\Symfony\Co
             }
             $message .= "\nDid you mean to call " . $candidates;
         }
-        return new \_PhpScoper60081b922775\Symfony\Component\ErrorHandler\Error\UndefinedMethodError($message, $error);
+        return new \_PhpScoperd32e35cfad84\Symfony\Component\ErrorHandler\Error\UndefinedMethodError($message, $error);
     }
 }
