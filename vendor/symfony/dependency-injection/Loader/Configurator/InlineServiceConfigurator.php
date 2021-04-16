@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class InlineServiceConfigurator extends \_PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class InlineServiceConfigurator extends \_PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     public const FACTORY = 'service';
     use Traits\ArgumentTrait;

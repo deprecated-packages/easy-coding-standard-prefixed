@@ -12,8 +12,8 @@ use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer;
 use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\EasyCodingStandard\Configuration\Exception\ConflictingCheckersLoadedException;
 final class ConflictingCheckersCompilerPass implements CompilerPassInterface
 {

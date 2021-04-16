@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera22bb3f4d7b7\Symfony\Component\Console\EventListener;
+namespace _PhpScoper8a8080b03ed6\Symfony\Component\Console\EventListener;
 
-use _PhpScopera22bb3f4d7b7\Psr\Log\LoggerInterface;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\ConsoleEvents;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Event\ConsoleEvent;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Event\ConsoleTerminateEvent;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper8a8080b03ed6\Psr\Log\LoggerInterface;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Console\ConsoleEvents;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Event\ConsoleEvent;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use _PhpScoper8a8080b03ed6\Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * @author James Halsall <james.t.halsall@googlemail.com>
  * @author Robin Chalas <robin.chalas@gmail.com>

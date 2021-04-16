@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Tests\Test;
 
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *

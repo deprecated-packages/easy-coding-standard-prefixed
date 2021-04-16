@@ -18,7 +18,7 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Util\Common;
-use _PhpScopera22bb3f4d7b7\PHPUnit\Framework\TestCase;
+use _PhpScoper8a8080b03ed6\PHPUnit\Framework\TestCase;
 abstract class AbstractSniffUnitTest extends TestCase
 {
     /**

@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Argument;
+namespace _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Argument;
 
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Reference;
 /**
  * Represents a service wrapped in a memoizing closure.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceClosureArgument implements \_PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+class ServiceClosureArgument implements \_PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
 {
     private $values;
     public function __construct(Reference $reference)

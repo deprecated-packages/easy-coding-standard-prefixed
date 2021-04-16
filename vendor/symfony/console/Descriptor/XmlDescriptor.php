@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Descriptor;
+namespace _PhpScoper8a8080b03ed6\Symfony\Component\Console\Descriptor;
 
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Application;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Command\Command;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Input\InputArgument;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Application;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Command\Command;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Input\InputOption;
 /**
  * XML descriptor.
  *
@@ -22,7 +22,7 @@ use _PhpScopera22bb3f4d7b7\Symfony\Component\Console\Input\InputOption;
  *
  * @internal
  */
-class XmlDescriptor extends \_PhpScopera22bb3f4d7b7\Symfony\Component\Console\Descriptor\Descriptor
+class XmlDescriptor extends \_PhpScoper8a8080b03ed6\Symfony\Component\Console\Descriptor\Descriptor
 {
     public function getInputDefinitionDocument(InputDefinition $definition) : \DOMDocument
     {
@@ -69,7 +69,7 @@ class XmlDescriptor extends \_PhpScopera22bb3f4d7b7\Symfony\Component\Console\De
             }
         }
         $rootXml->appendChild($commandsXML = $dom->createElement('commands'));
-        $description = new \_PhpScopera22bb3f4d7b7\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $namespace, \true);
+        $description = new \_PhpScoper8a8080b03ed6\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $namespace, \true);
         if ($namespace) {
             $commandsXML->setAttribute('namespace', $namespace);
         }

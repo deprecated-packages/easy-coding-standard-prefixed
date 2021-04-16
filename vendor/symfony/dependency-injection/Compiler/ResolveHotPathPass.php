@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Reference;
 /**
  * Propagate "container.hot_path" tags to referenced services.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveHotPathPass extends \_PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveHotPathPass extends \_PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $tagName;
     private $resolvedIds = [];

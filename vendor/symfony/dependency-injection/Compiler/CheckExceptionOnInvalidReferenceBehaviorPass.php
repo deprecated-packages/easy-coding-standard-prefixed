@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Reference;
 /**
  * Checks that all references are pointing to a valid service.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class CheckExceptionOnInvalidReferenceBehaviorPass extends \_PhpScopera22bb3f4d7b7\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class CheckExceptionOnInvalidReferenceBehaviorPass extends \_PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $serviceLocatorContextIds = [];
     /**

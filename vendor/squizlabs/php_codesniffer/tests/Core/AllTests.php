@@ -11,8 +11,8 @@
 namespace PHP_CodeSniffer\Tests\Core;
 
 use PHP_CodeSniffer\Tests\FileList;
-use _PhpScopera22bb3f4d7b7\PHPUnit\TextUI\TestRunner;
-use _PhpScopera22bb3f4d7b7\PHPUnit\Framework\TestSuite;
+use _PhpScoper8a8080b03ed6\PHPUnit\TextUI\TestRunner;
+use _PhpScoper8a8080b03ed6\PHPUnit\Framework\TestSuite;
 class AllTests
 {
     /**

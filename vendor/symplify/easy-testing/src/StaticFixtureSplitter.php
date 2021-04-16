@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting;
 
-use _PhpScopera22bb3f4d7b7\Nette\Utils\Strings;
+use _PhpScoper8a8080b03ed6\Nette\Utils\Strings;
 use Symplify\EasyTesting\ValueObject\InputAndExpected;
 use Symplify\EasyTesting\ValueObject\InputFileInfoAndExpected;
 use Symplify\EasyTesting\ValueObject\InputFileInfoAndExpectedFileInfo;

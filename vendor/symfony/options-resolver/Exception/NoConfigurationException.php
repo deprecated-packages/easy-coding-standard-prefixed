@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera22bb3f4d7b7\Symfony\Component\OptionsResolver\Exception;
+namespace _PhpScoper8a8080b03ed6\Symfony\Component\OptionsResolver\Exception;
 
-use _PhpScopera22bb3f4d7b7\Symfony\Component\OptionsResolver\Debug\OptionsResolverIntrospector;
+use _PhpScoper8a8080b03ed6\Symfony\Component\OptionsResolver\Debug\OptionsResolverIntrospector;
 /**
  * Thrown when trying to introspect an option definition property
  * for which no value was configured inside the OptionsResolver instance.
@@ -19,6 +19,6 @@ use _PhpScopera22bb3f4d7b7\Symfony\Component\OptionsResolver\Debug\OptionsResolv
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class NoConfigurationException extends \RuntimeException implements \_PhpScopera22bb3f4d7b7\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
+class NoConfigurationException extends \RuntimeException implements \_PhpScoper8a8080b03ed6\Symfony\Component\OptionsResolver\Exception\ExceptionInterface
 {
 }

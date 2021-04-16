@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera22bb3f4d7b7\Symfony\Contracts\HttpClient\Exception;
+namespace _PhpScoper8a8080b03ed6\Symfony\Contracts\HttpClient\Exception;
 
 /**
  * When a 4xx response is returned.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface ClientExceptionInterface extends \_PhpScopera22bb3f4d7b7\Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
+interface ClientExceptionInterface extends \_PhpScoper8a8080b03ed6\Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
 {
 }

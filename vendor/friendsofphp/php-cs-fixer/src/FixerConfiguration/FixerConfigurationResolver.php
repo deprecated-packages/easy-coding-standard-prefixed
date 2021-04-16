@@ -11,8 +11,8 @@
  */
 namespace PhpCsFixer\FixerConfiguration;
 
-use _PhpScopera22bb3f4d7b7\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScopera22bb3f4d7b7\Symfony\Component\OptionsResolver\OptionsResolver;
+use _PhpScoper8a8080b03ed6\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper8a8080b03ed6\Symfony\Component\OptionsResolver\OptionsResolver;
 final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
 {
     /**

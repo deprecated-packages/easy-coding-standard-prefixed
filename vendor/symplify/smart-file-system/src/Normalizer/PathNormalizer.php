@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Normalizer;
 
-use _PhpScopera22bb3f4d7b7\Nette\Utils\Strings;
+use _PhpScoper8a8080b03ed6\Nette\Utils\Strings;
 /**
  * Used from
  * https://github.com/phpstan/phpstan-src/blob/02425e61aa48f0668b4efb3e73d52ad544048f65/src/File/FileHelper.php#L40,
