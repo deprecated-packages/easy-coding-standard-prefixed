@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\Console\Formatter;
 
-use _PhpScoper8a8080b03ed6\Nette\Utils\Strings;
-use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper9385100df341\Nette\Utils\Strings;
+use _PhpScoper9385100df341\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * Most is copy-pasted from https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/src/Differ/DiffConsoleFormatter.php
  * to be used as standalone class, without need to require whole package.

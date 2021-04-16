@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a8080b03ed6\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper9385100df341\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoper8a8080b03ed6\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper8a8080b03ed6\Symfony\Component\HttpKernel\HttpKernelInterface;
-use _PhpScoper8a8080b03ed6\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScoper9385100df341\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper9385100df341\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoper9385100df341\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Base class for events thrown in the HttpKernel component.
  *

@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Report;
 
 use PhpCsFixer\Preg;
-use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper9385100df341\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *

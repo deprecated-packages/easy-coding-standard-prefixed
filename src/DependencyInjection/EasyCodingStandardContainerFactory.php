@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection;
 
-use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper9385100df341\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\ContainerInterface;
 use Symplify\EasyCodingStandard\Bootstrap\ECSConfigsResolver;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;

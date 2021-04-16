@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper8a8080b03ed6\Jean85;
+namespace _PhpScoper9385100df341\Jean85;
 
 class Version
 {

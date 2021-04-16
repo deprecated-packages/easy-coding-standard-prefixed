@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Reference;
 /**
  * Propagate the "container.no_preload" tag.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveNoPreloadPass extends \_PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveNoPreloadPass extends \_PhpScoper9385100df341\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private const DO_PRELOAD_TAG = '.container.do_preload';
     private $tagName;

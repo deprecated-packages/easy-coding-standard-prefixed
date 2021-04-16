@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper8a8080b03ed6\Composer\Semver;
+namespace _PhpScoper9385100df341\Composer\Semver;
 
-use _PhpScoper8a8080b03ed6\Composer\Semver\Constraint\Constraint;
+use _PhpScoper9385100df341\Composer\Semver\Constraint\Constraint;
 class Semver
 {
     const SORT_ASC = 1;
@@ -28,7 +28,7 @@ class Semver
     public static function satisfies($version, $constraints)
     {
         if (null === self::$versionParser) {
-            self::$versionParser = new \_PhpScoper8a8080b03ed6\Composer\Semver\VersionParser();
+            self::$versionParser = new \_PhpScoper9385100df341\Composer\Semver\VersionParser();
         }
         $versionParser = self::$versionParser;
         $provider = new Constraint('==', $versionParser->normalize($version));
@@ -46,7 +46,7 @@ class Semver
     public static function satisfiedBy(array $versions, $constraints)
     {
         $versions = \array_filter($versions, function ($version) use($constraints) {
-            return \_PhpScoper8a8080b03ed6\Composer\Semver\Semver::satisfies($version, $constraints);
+            return \_PhpScoper9385100df341\Composer\Semver\Semver::satisfies($version, $constraints);
         });
         return \array_values($versions);
     }
@@ -81,7 +81,7 @@ class Semver
     private static function usort(array $versions, $direction)
     {
         if (null === self::$versionParser) {
-            self::$versionParser = new \_PhpScoper8a8080b03ed6\Composer\Semver\VersionParser();
+            self::$versionParser = new \_PhpScoper9385100df341\Composer\Semver\VersionParser();
         }
         $versionParser = self::$versionParser;
         $normalized = array();
@@ -96,7 +96,7 @@ class Semver
             if ($left[0] === $right[0]) {
                 return 0;
             }
-            if (\_PhpScoper8a8080b03ed6\Composer\Semver\Comparator::lessThan($left[0], $right[0])) {
+            if (\_PhpScoper9385100df341\Composer\Semver\Comparator::lessThan($left[0], $right[0])) {
                 return -$direction;
             }
             return $direction;

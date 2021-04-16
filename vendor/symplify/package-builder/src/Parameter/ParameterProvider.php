@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Parameter;
 
-use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Container;
-use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper8a8080b03ed6\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Container;
+use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 /**
  * @see \Symplify\PackageBuilder\Tests\Parameter\ParameterProviderTest
  */

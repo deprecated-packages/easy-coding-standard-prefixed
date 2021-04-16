@@ -11,9 +11,9 @@
  */
 namespace PhpCsFixer\Console\SelfUpdate;
 
-use _PhpScoper8a8080b03ed6\Composer\Semver\Comparator;
-use _PhpScoper8a8080b03ed6\Composer\Semver\Semver;
-use _PhpScoper8a8080b03ed6\Composer\Semver\VersionParser;
+use _PhpScoper9385100df341\Composer\Semver\Comparator;
+use _PhpScoper9385100df341\Composer\Semver\Semver;
+use _PhpScoper9385100df341\Composer\Semver\VersionParser;
 /**
  * @internal
  */

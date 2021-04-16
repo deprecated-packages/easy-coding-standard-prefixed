@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console\Input;
 
-use _PhpScoper8a8080b03ed6\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScoper9385100df341\Symfony\Component\Console\Input\ArgvInput;
 final class StaticInputDetector
 {
     public static function isDebug() : bool

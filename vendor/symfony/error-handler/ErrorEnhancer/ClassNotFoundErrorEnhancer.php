@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a8080b03ed6\Symfony\Component\ErrorHandler\ErrorEnhancer;
+namespace _PhpScoper9385100df341\Symfony\Component\ErrorHandler\ErrorEnhancer;
 
-use _PhpScoper8a8080b03ed6\Composer\Autoload\ClassLoader;
-use _PhpScoper8a8080b03ed6\Symfony\Component\ErrorHandler\DebugClassLoader;
-use _PhpScoper8a8080b03ed6\Symfony\Component\ErrorHandler\Error\ClassNotFoundError;
-use _PhpScoper8a8080b03ed6\Symfony\Component\ErrorHandler\Error\FatalError;
+use _PhpScoper9385100df341\Composer\Autoload\ClassLoader;
+use _PhpScoper9385100df341\Symfony\Component\ErrorHandler\DebugClassLoader;
+use _PhpScoper9385100df341\Symfony\Component\ErrorHandler\Error\ClassNotFoundError;
+use _PhpScoper9385100df341\Symfony\Component\ErrorHandler\Error\FatalError;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ClassNotFoundErrorEnhancer implements \_PhpScoper8a8080b03ed6\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
+class ClassNotFoundErrorEnhancer implements \_PhpScoper9385100df341\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
 {
     /**
      * {@inheritdoc}
