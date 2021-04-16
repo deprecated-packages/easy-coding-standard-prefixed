@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection;
 
-use _PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\ContainerInterface;
 use Symplify\EasyCodingStandard\Bootstrap\ECSConfigsResolver;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
@@ -12,16 +12,16 @@ use Symplify\PackageBuilder\Console\Input\StaticInputDetector;
 use Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs;
 final class EasyCodingStandardContainerFactory
 {
-    public function createFromFromInput(\_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface $input) : \_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerInterface
+    public function createFromFromInput(InputInterface $input) : ContainerInterface
     {
-        $ecsConfigsResolver = new \Symplify\EasyCodingStandard\Bootstrap\ECSConfigsResolver();
+        $ecsConfigsResolver = new ECSConfigsResolver();
         $bootstrapConfigs = $ecsConfigsResolver->resolveFromInput($input);
         return $this->createFromFromBootstrapConfigs($bootstrapConfigs);
     }
-    public function createFromFromBootstrapConfigs(\Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs $bootstrapConfigs) : \_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerInterface
+    public function createFromFromBootstrapConfigs(BootstrapConfigs $bootstrapConfigs) : ContainerInterface
     {
         $environment = 'prod' . \random_int(1, 100000);
-        $easyCodingStandardKernel = new \Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel($environment, \Symplify\PackageBuilder\Console\Input\StaticInputDetector::isDebug());
+        $easyCodingStandardKernel = new EasyCodingStandardKernel($environment, StaticInputDetector::isDebug());
         $configFileInfos = $bootstrapConfigs->getConfigFileInfos();
         if ($configFileInfos !== []) {
             $easyCodingStandardKernel->setConfigs($configFileInfos);
@@ -31,7 +31,7 @@ final class EasyCodingStandardContainerFactory
         if ($configFileInfos !== []) {
             // for cache invalidation on config change
             /** @var ChangedFilesDetector $changedFilesDetector */
-            $changedFilesDetector = $container->get(\Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector::class);
+            $changedFilesDetector = $container->get(ChangedFilesDetector::class);
             $changedFilesDetector->setUsedConfigs($configFileInfos);
         }
         return $container;

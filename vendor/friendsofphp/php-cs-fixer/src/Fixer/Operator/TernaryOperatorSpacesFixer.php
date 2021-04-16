@@ -22,14 +22,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class TernaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
+final class TernaryOperatorSpacesFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Standardize spaces around ternary operator.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$a = \$a   ?1 :0;\n")]);
+        return new FixerDefinition('Standardize spaces around ternary operator.', [new CodeSample("<?php \$a = \$a   ?1 :0;\n")]);
     }
     /**
      * {@inheritdoc}
@@ -43,16 +43,16 @@ final class TernaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound(['?', ':']);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $gotoLabelAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer();
+        $gotoLabelAnalyzer = new GotoLabelAnalyzer();
         $ternaryOperatorIndices = [];
         $excludedIndices = [];
         foreach ($tokens as $index => $token) {
@@ -105,7 +105,7 @@ final class TernaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return bool
      */
-    private function belongsToAlternativeSyntax(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function belongsToAlternativeSyntax(Tokens $tokens, $index)
     {
         if (!$tokens[$index]->equals(':')) {
             return \false;
@@ -117,7 +117,7 @@ final class TernaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
         if (!$tokens[$closeParenthesisIndex]->equals(')')) {
             return \false;
         }
-        $openParenthesisIndex = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $closeParenthesisIndex);
+        $openParenthesisIndex = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $closeParenthesisIndex);
         $alternativeControlStructureIndex = $tokens->getPrevMeaningfulToken($openParenthesisIndex);
         return $tokens[$alternativeControlStructureIndex]->isGivenKind([\T_DECLARE, \T_ELSEIF, \T_FOR, \T_FOREACH, \T_IF, \T_SWITCH, \T_WHILE]);
     }
@@ -126,25 +126,25 @@ final class TernaryOperatorSpacesFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return int[]
      */
-    private function getColonIndicesForSwitch(\PhpCsFixer\Tokenizer\Tokens $tokens, $switchIndex)
+    private function getColonIndicesForSwitch(Tokens $tokens, $switchIndex)
     {
-        return \array_map(static function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\CaseAnalysis $caseAnalysis) {
+        return \array_map(static function (CaseAnalysis $caseAnalysis) {
             return $caseAnalysis->getColonIndex();
-        }, (new \PhpCsFixer\Tokenizer\Analyzer\SwitchAnalyzer())->getSwitchAnalysis($tokens, $switchIndex)->getCases());
+        }, (new SwitchAnalyzer())->getSwitchAnalysis($tokens, $switchIndex)->getCases());
     }
     /**
      * @param int  $index
      * @param bool $after
      */
-    private function ensureWhitespaceExistence(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $after)
+    private function ensureWhitespaceExistence(Tokens $tokens, $index, $after)
     {
         if ($tokens[$index]->isWhitespace()) {
             if (\false === \strpos($tokens[$index]->getContent(), "\n") && !$tokens[$index - 1]->isComment()) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+                $tokens[$index] = new Token([\T_WHITESPACE, ' ']);
             }
             return;
         }
         $index += $after ? 0 : 1;
-        $tokens->insertAt($index, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
+        $tokens->insertAt($index, new Token([\T_WHITESPACE, ' ']));
     }
 }

@@ -19,7 +19,7 @@ final class PhpContentAnalyzer
      * @var TokenFinder
      */
     private $tokenFinder;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\TokenFinder $tokenFinder)
+    public function __construct(TokenFinder $tokenFinder)
     {
         $this->tokenFinder = $tokenFinder;
     }
@@ -112,7 +112,7 @@ final class PhpContentAnalyzer
                 $firstInLineLintedCorrectly = \true;
             }
             // is comment content
-            if (\in_array($rawToken[0], \Symplify\CodingStandard\Tokens\CommentedContentResolver::EMPTY_TOKENS, \true)) {
+            if (\in_array($rawToken[0], CommentedContentResolver::EMPTY_TOKENS, \true)) {
                 continue;
             }
             // new line comming next → restart string check

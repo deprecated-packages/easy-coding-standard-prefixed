@@ -14,15 +14,15 @@ final class ArrayWrapperFactory
      * @var TokenSkipper
      */
     private $tokenSkipper;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\TokenSkipper $tokenSkipper)
+    public function __construct(TokenSkipper $tokenSkipper)
     {
         $this->tokenSkipper = $tokenSkipper;
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    public function createFromTokensAndBlockInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : \Symplify\CodingStandard\TokenRunner\ValueObject\Wrapper\FixerWrapper\ArrayWrapper
+    public function createFromTokensAndBlockInfo(Tokens $tokens, BlockInfo $blockInfo) : ArrayWrapper
     {
-        return new \Symplify\CodingStandard\TokenRunner\ValueObject\Wrapper\FixerWrapper\ArrayWrapper($tokens, $blockInfo, $this->tokenSkipper);
+        return new ArrayWrapper($tokens, $blockInfo, $this->tokenSkipper);
     }
 }

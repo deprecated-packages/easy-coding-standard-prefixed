@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScopereb9508917a55\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request;
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Response;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Request;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Response;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 /**
  * LogDataCollector.
  *
@@ -22,15 +22,15 @@ use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Log\DebugLoggerInterface
  *
  * @final
  */
-class LoggerDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class LoggerDataCollector extends \_PhpScopereb9508917a55\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScopereb9508917a55\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     private $logger;
     private $containerPathPrefix;
     private $currentRequest;
     private $requestStack;
-    public function __construct($logger = null, string $containerPathPrefix = null, \_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
+    public function __construct($logger = null, string $containerPathPrefix = null, RequestStack $requestStack = null)
     {
-        if (null !== $logger && $logger instanceof \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\Log\DebugLoggerInterface) {
+        if (null !== $logger && $logger instanceof DebugLoggerInterface) {
             $this->logger = $logger;
         }
         $this->containerPathPrefix = $containerPathPrefix;
@@ -39,7 +39,7 @@ class LoggerDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\Http
     /**
      * {@inheritdoc}
      */
-    public function collect(\_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request $request, \_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
+    public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         $this->currentRequest = $this->requestStack && $this->requestStack->getMasterRequest() !== $request ? $request : null;
     }
@@ -48,7 +48,7 @@ class LoggerDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\Http
      */
     public function reset()
     {
-        if ($this->logger instanceof \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\Log\DebugLoggerInterface) {
+        if ($this->logger instanceof DebugLoggerInterface) {
             $this->logger->clear();
         }
         $this->data = [];
@@ -115,7 +115,7 @@ class LoggerDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\Http
         $bootTime = \filemtime($file);
         $logs = [];
         foreach (\unserialize($logContent) as $log) {
-            $log['context'] = ['exception' => new \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext($log['type'], $log['file'], $log['line'], $log['trace'], $log['count'])];
+            $log['context'] = ['exception' => new SilencedErrorContext($log['type'], $log['file'], $log['line'], $log['trace'], $log['count'])];
             $log['timestamp'] = $bootTime;
             $log['priority'] = 100;
             $log['priorityName'] = 'DEBUG';
@@ -152,7 +152,7 @@ class LoggerDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\Http
             }
             $message = '_' . $log['message'];
             $exception = $log['context']['exception'];
-            if ($exception instanceof \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
+            if ($exception instanceof SilencedErrorContext) {
                 if (isset($silencedLogs[$h = \spl_object_hash($exception)])) {
                     continue;
                 }
@@ -179,7 +179,7 @@ class LoggerDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\Http
             return \false;
         }
         $exception = $log['context']['exception'];
-        if ($exception instanceof \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
+        if ($exception instanceof SilencedErrorContext) {
             return \true;
         }
         if ($exception instanceof \ErrorException && \in_array($exception->getSeverity(), [\E_DEPRECATED, \E_USER_DEPRECATED], \true)) {
@@ -202,7 +202,7 @@ class LoggerDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\Http
             }
             if ($this->isSilencedOrDeprecationErrorLog($log)) {
                 $exception = $log['context']['exception'];
-                if ($exception instanceof \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext) {
+                if ($exception instanceof SilencedErrorContext) {
                     if (isset($silencedLogs[$h = \spl_object_hash($exception)])) {
                         continue;
                     }

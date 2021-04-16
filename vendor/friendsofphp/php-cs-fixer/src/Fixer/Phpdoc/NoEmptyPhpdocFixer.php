@@ -19,14 +19,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class NoEmptyPhpdocFixer extends \PhpCsFixer\AbstractFixer
+final class NoEmptyPhpdocFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('There should not be empty PHPDoc blocks.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php /**  */\n")]);
+        return new FixerDefinition('There should not be empty PHPDoc blocks.', [new CodeSample("<?php /**  */\n")]);
     }
     /**
      * {@inheritdoc}
@@ -41,20 +41,20 @@ final class NoEmptyPhpdocFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
                 continue;
             }
-            if (\PhpCsFixer\Preg::match('#^/\\*\\*[\\s\\*]*\\*/$#', $token->getContent())) {
+            if (Preg::match('#^/\\*\\*[\\s\\*]*\\*/$#', $token->getContent())) {
                 $tokens->clearTokenAndMergeSurroundingWhitespace($index);
             }
         }

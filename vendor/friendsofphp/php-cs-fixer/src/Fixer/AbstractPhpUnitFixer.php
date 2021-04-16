@@ -17,18 +17,18 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @internal
  */
-abstract class AbstractPhpUnitFixer extends \PhpCsFixer\AbstractFixer
+abstract class AbstractPhpUnitFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
-    public final function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public final function isCandidate(Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_STRING]);
     }
-    protected final function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected final function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $phpUnitTestCaseIndicator = new \PhpCsFixer\Indicator\PhpUnitTestCaseIndicator();
+        $phpUnitTestCaseIndicator = new PhpUnitTestCaseIndicator();
         foreach ($phpUnitTestCaseIndicator->findPhpUnitClasses($tokens) as $indices) {
             $this->applyPhpUnitClassFix($tokens, $indices[0], $indices[1]);
         }
@@ -37,13 +37,13 @@ abstract class AbstractPhpUnitFixer extends \PhpCsFixer\AbstractFixer
      * @param int $startIndex
      * @param int $endIndex
      */
-    protected abstract function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex);
+    protected abstract function applyPhpUnitClassFix(Tokens $tokens, $startIndex, $endIndex);
     /**
      * @param int $index
      *
      * @return int
      */
-    protected final function getDocBlockIndex(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    protected final function getDocBlockIndex(Tokens $tokens, $index)
     {
         do {
             $index = $tokens->getPrevNonWhitespace($index);
@@ -55,7 +55,7 @@ abstract class AbstractPhpUnitFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return bool
      */
-    protected final function isPHPDoc(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    protected final function isPHPDoc(Tokens $tokens, $index)
     {
         return $tokens[$index]->isGivenKind(\T_DOC_COMMENT);
     }

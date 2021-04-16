@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Annotation;
 
-use _PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer;
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Doctrine\Common\Annotations\DocLexer;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\AbstractDoctrineAnnotationFixer;
 use PhpCsFixer\Doctrine\Annotation\Token;
 use PhpCsFixer\Doctrine\Annotation\Tokens;
@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\CodingStandard\Tests\Fixer\Annotation\DoctrineAnnotationNewlineInNestedAnnotationFixer\DoctrineAnnotationNewlineInNestedAnnotationFixerTest
  */
-final class DoctrineAnnotationNewlineInNestedAnnotationFixer extends \PhpCsFixer\AbstractDoctrineAnnotationFixer implements \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
+final class DoctrineAnnotationNewlineInNestedAnnotationFixer extends AbstractDoctrineAnnotationFixer implements DocumentedRuleInterface
 {
     /**
      * @var string
@@ -32,7 +32,7 @@ final class DoctrineAnnotationNewlineInNestedAnnotationFixer extends \PhpCsFixer
      * @var BlockInfo|null
      */
     private $currentBlockInfo;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\DoctrineBlockFinder $doctrineBlockFinder)
+    public function __construct(DoctrineBlockFinder $doctrineBlockFinder)
     {
         $this->doctrineBlockFinder = $doctrineBlockFinder;
         parent::__construct();
@@ -42,13 +42,13 @@ final class DoctrineAnnotationNewlineInNestedAnnotationFixer extends \PhpCsFixer
         // must run before \PhpCsFixer\Fixer\DoctrineAnnotation\DoctrineAnnotationIndentationFixer
         return 100;
     }
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition() : FixerDefinitionInterface
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
+        return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
-    public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+    public function getRuleDefinition() : RuleDefinition
     {
-        return new \Symplify\RuleDocGenerator\ValueObject\RuleDefinition(self::ERROR_MESSAGE, [new \Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample(<<<'CODE_SAMPLE'
+        return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -78,7 +78,7 @@ CODE_SAMPLE
      *
      * @param iterable<Token>&Tokens $tokens
      */
-    protected function fixAnnotations(\PhpCsFixer\Doctrine\Annotation\Tokens $tokens) : void
+    protected function fixAnnotations(Tokens $tokens) : void
     {
         $this->currentBlockInfo = null;
         $tokenCount = $tokens->count();
@@ -86,7 +86,7 @@ CODE_SAMPLE
         for ($index = 0; $index < $tokenCount; ++$index) {
             /** @var Token $currentToken */
             $currentToken = $tokens[$index];
-            if (!$currentToken->isType(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_AT)) {
+            if (!$currentToken->isType(DocLexer::T_AT)) {
                 continue;
             }
             $previousTokenPosition = $index - 1;
@@ -97,9 +97,9 @@ CODE_SAMPLE
             if ($this->shouldSkip($index, $tokens, $previousToken)) {
                 continue;
             }
-            $tokens->insertAt($index, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_NONE, ' * '));
-            $tokens->insertAt($index, new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_NONE, "\n"));
-            $tNone = $previousToken->isType(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_NONE);
+            $tokens->insertAt($index, new Token(DocLexer::T_NONE, ' * '));
+            $tokens->insertAt($index, new Token(DocLexer::T_NONE, "\n"));
+            $tNone = $previousToken->isType(DocLexer::T_NONE);
             // remove redundant space
             if ($tNone) {
                 $tokens->offsetUnset($previousTokenPosition);
@@ -107,22 +107,22 @@ CODE_SAMPLE
             $this->processEndBracket($index, $tokens, $previousTokenPosition);
         }
     }
-    private function isDocOpener(\PhpCsFixer\Doctrine\Annotation\Token $token) : bool
+    private function isDocOpener(Token $token) : bool
     {
-        if ($token->isType(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_NONE)) {
-            return \_PhpScopercc9aec205203\Nette\Utils\Strings::contains($token->getContent(), '*');
+        if ($token->isType(DocLexer::T_NONE)) {
+            return Strings::contains($token->getContent(), '*');
         }
         return \false;
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    private function processEndBracket(int $index, \PhpCsFixer\Doctrine\Annotation\Tokens $tokens, int $previousTokenPosition) : void
+    private function processEndBracket(int $index, Tokens $tokens, int $previousTokenPosition) : void
     {
         /** @var Token $previousToken */
         $previousToken = $tokens->offsetGet($previousTokenPosition);
         // already a space → skip
-        if ($previousToken->isType(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_NONE)) {
+        if ($previousToken->isType(DocLexer::T_NONE)) {
             return;
         }
         // reset
@@ -134,14 +134,14 @@ CODE_SAMPLE
             $this->currentBlockInfo = $this->doctrineBlockFinder->findInTokensByEdge($tokens, $previousTokenPosition);
         }
         if ($this->currentBlockInfo !== null) {
-            $tokens->insertAt($this->currentBlockInfo->getEnd(), new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_NONE, ' * '));
-            $tokens->insertAt($this->currentBlockInfo->getEnd(), new \PhpCsFixer\Doctrine\Annotation\Token(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_NONE, "\n"));
+            $tokens->insertAt($this->currentBlockInfo->getEnd(), new Token(DocLexer::T_NONE, ' * '));
+            $tokens->insertAt($this->currentBlockInfo->getEnd(), new Token(DocLexer::T_NONE, "\n"));
         }
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    private function shouldSkip(int $index, \PhpCsFixer\Doctrine\Annotation\Tokens $tokens, \PhpCsFixer\Doctrine\Annotation\Token $previousToken) : bool
+    private function shouldSkip(int $index, Tokens $tokens, Token $previousToken) : bool
     {
         // docblock opener → skip it
         if ($this->isDocOpener($previousToken)) {
@@ -149,10 +149,10 @@ CODE_SAMPLE
         }
         $nextTokenPosition = $index + 1;
         $nextToken = $tokens[$nextTokenPosition] ?? null;
-        if (!$nextToken instanceof \PhpCsFixer\Doctrine\Annotation\Token) {
+        if (!$nextToken instanceof Token) {
             return \true;
         }
-        if (!\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($nextToken->getContent(), 'ORM')) {
+        if (!Strings::startsWith($nextToken->getContent(), 'ORM')) {
             return \true;
         }
         // not an entity annotation, just some comment

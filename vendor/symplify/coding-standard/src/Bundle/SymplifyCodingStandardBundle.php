@@ -3,22 +3,22 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Bundle;
 
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 use Symplify\CodingStandard\DependencyInjection\Extension\SymplifyCodingStandardExtension;
 /**
  * This class is dislocated in non-standard location, so it's not added by symfony/flex to bundles.php and cause app to
  * crash. See https://github.com/symplify/symplify/issues/1952#issuecomment-628765364
  */
-final class SymplifyCodingStandardBundle extends \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\Bundle\Bundle
+final class SymplifyCodingStandardBundle extends Bundle
 {
-    public function build(\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder) : void
+    public function build(ContainerBuilder $containerBuilder) : void
     {
-        $containerBuilder->addCompilerPass(new \Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass());
+        $containerBuilder->addCompilerPass(new AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : \Symplify\CodingStandard\DependencyInjection\Extension\SymplifyCodingStandardExtension
+    protected function createContainerExtension() : SymplifyCodingStandardExtension
     {
-        return new \Symplify\CodingStandard\DependencyInjection\Extension\SymplifyCodingStandardExtension();
+        return new SymplifyCodingStandardExtension();
     }
 }

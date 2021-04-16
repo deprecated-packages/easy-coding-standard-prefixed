@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
-class NullsafeObjectOperatorTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class NullsafeObjectOperatorTest extends AbstractMethodUnitTest
 {
     /**
      * Tokens to search for.
@@ -83,7 +83,7 @@ class NullsafeObjectOperatorTest extends \PHP_CodeSniffer\Tests\Core\AbstractMet
         $this->assertSame(T_INLINE_THEN, $tokens[$operator]['code'], 'Failed asserting code is inline then');
         $this->assertSame('T_INLINE_THEN', $tokens[$operator]['type'], 'Failed asserting type is inline then');
         if ($testObjectOperator === \true) {
-            $next = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $operator + 1, null, \true);
+            $next = self::$phpcsFile->findNext(Tokens::$emptyTokens, $operator + 1, null, \true);
             $this->assertSame(\T_OBJECT_OPERATOR, $tokens[$next]['code'], 'Failed asserting code is object operator');
             $this->assertSame('T_OBJECT_OPERATOR', $tokens[$next]['type'], 'Failed asserting type is object operator');
         }

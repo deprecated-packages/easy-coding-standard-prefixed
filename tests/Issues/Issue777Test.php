@@ -9,21 +9,21 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see https://github.com/symplify/symplify/issues/777
  */
-final class Issue777Test extends \Symplify\EasyCodingStandardTester\Testing\AbstractCheckerTestCase
+final class Issue777Test extends AbstractCheckerTestCase
 {
     /**
      * @dataProvider provideData()
      */
-    public function test(\Symplify\SmartFileSystem\SmartFileInfo $fileInfo) : void
+    public function test(SmartFileInfo $fileInfo) : void
     {
         $this->doTestFileInfo($fileInfo);
     }
     /**
      * @return Iterator<SmartFileInfo[]>
      */
-    public function provideData() : \Iterator
+    public function provideData() : Iterator
     {
-        (yield [new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/Fixture/fixture777.php.inc')]);
+        (yield [new SmartFileInfo(__DIR__ . '/Fixture/fixture777.php.inc')]);
     }
     protected function provideConfig() : string
     {

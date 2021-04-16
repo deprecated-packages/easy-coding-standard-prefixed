@@ -20,7 +20,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Michał Adamski <michal.adamski@gmail.com>
  * @author Kuba Werłos <werlos@gmail.com>
  */
-final class PhpUnitMockShortWillReturnFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer
+final class PhpUnitMockShortWillReturnFixer extends AbstractPhpUnitFixer
 {
     /**
      * @internal
@@ -31,7 +31,7 @@ final class PhpUnitMockShortWillReturnFixer extends \PhpCsFixer\Fixer\AbstractPh
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Usage of PHPUnit\'s mock e.g. `->will($this->returnValue(..))` must be replaced by its shorter equivalent such as `->willReturn(...)`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Usage of PHPUnit\'s mock e.g. `->will($this->returnValue(..))` must be replaced by its shorter equivalent such as `->willReturn(...)`.', [new CodeSample('<?php
 final class MyTest extends \\PHPUnit_Framework_TestCase
 {
     public function testSomeTest()
@@ -56,7 +56,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
+    protected function applyPhpUnitClassFix(Tokens $tokens, $startIndex, $endIndex)
     {
         for ($index = $startIndex; $index < $endIndex; ++$index) {
             if (!$tokens[$index]->isGivenKind(\T_OBJECT_OPERATOR)) {
@@ -83,8 +83,8 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             if (!$tokens[$openingBraceIndex]->equals('(')) {
                 continue;
             }
-            $closingBraceIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openingBraceIndex);
-            $tokens[$functionToReplaceIndex] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, self::RETURN_METHODS_MAP[\strtolower($tokens[$functionToRemoveIndex]->getContent())]]);
+            $closingBraceIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openingBraceIndex);
+            $tokens[$functionToReplaceIndex] = new Token([\T_STRING, self::RETURN_METHODS_MAP[\strtolower($tokens[$functionToRemoveIndex]->getContent())]]);
             $tokens->clearTokenAndMergeSurroundingWhitespace($classReferenceIndex);
             $tokens->clearTokenAndMergeSurroundingWhitespace($objectOperatorIndex);
             $tokens->clearTokenAndMergeSurroundingWhitespace($functionToRemoveIndex);

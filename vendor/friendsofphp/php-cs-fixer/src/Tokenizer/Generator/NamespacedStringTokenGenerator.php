@@ -29,9 +29,9 @@ final class NamespacedStringTokenGenerator
         $tokens = [];
         $parts = \explode('\\', $input);
         foreach ($parts as $index => $part) {
-            $tokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $part]);
+            $tokens[] = new Token([\T_STRING, $part]);
             if ($index !== \count($parts) - 1) {
-                $tokens[] = new \PhpCsFixer\Tokenizer\Token([\T_NS_SEPARATOR, '\\']);
+                $tokens[] = new Token([\T_NS_SEPARATOR, '\\']);
             }
         }
         return $tokens;

@@ -26,7 +26,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @internal
  */
-final class ImportTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
+final class ImportTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
@@ -38,14 +38,14 @@ final class ImportTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
+    public function process(Tokens $tokens, Token $token, $index)
     {
         if (!$token->isGivenKind([\T_CONST, \T_FUNCTION])) {
             return;
         }
         $prevToken = $tokens[$tokens->getPrevMeaningfulToken($index)];
         if ($prevToken->isGivenKind(\T_USE)) {
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->isGivenKind(\T_FUNCTION) ? \PhpCsFixer\Tokenizer\CT::T_FUNCTION_IMPORT : \PhpCsFixer\Tokenizer\CT::T_CONST_IMPORT, $token->getContent()]);
+            $tokens[$index] = new Token([$token->isGivenKind(\T_FUNCTION) ? CT::T_FUNCTION_IMPORT : CT::T_CONST_IMPORT, $token->getContent()]);
         }
     }
     /**
@@ -53,6 +53,6 @@ final class ImportTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
      */
     public function getCustomTokens()
     {
-        return [\PhpCsFixer\Tokenizer\CT::T_CONST_IMPORT, \PhpCsFixer\Tokenizer\CT::T_FUNCTION_IMPORT];
+        return [CT::T_CONST_IMPORT, CT::T_FUNCTION_IMPORT];
     }
 }

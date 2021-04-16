@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PSR2\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ControlStructureSpacingUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ControlStructureSpacingUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

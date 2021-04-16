@@ -16,8 +16,8 @@ use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\RuleSet\RuleSetInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScopercc9aec205203\Symfony\Component\Finder\SplFileInfo;
+use _PhpScopereb9508917a55\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScopereb9508917a55\Symfony\Component\Finder\SplFileInfo;
 /**
  * Class provides a way to create a group of fixers.
  *
@@ -61,7 +61,7 @@ final class FixerFactory
     public function setWhitespacesConfig(\PhpCsFixer\WhitespacesFixerConfig $config)
     {
         foreach ($this->fixers as $fixer) {
-            if ($fixer instanceof \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface) {
+            if ($fixer instanceof WhitespacesAwareFixerInterface) {
                 $fixer->setWhitespacesConfig($config);
             }
         }
@@ -84,7 +84,7 @@ final class FixerFactory
         if (null === $builtInFixers) {
             $builtInFixers = [];
             /** @var SplFileInfo $file */
-            foreach (\_PhpScopercc9aec205203\Symfony\Component\Finder\Finder::create()->files()->in(__DIR__ . '/Fixer')->depth(1) as $file) {
+            foreach (SymfonyFinder::create()->files()->in(__DIR__ . '/Fixer')->depth(1) as $file) {
                 $relativeNamespace = $file->getRelativePath();
                 $fixerClass = 'PhpCsFixer\\Fixer\\' . ($relativeNamespace ? $relativeNamespace . '\\' : '') . $file->getBasename('.php');
                 if ('Fixer' === \substr($fixerClass, -5)) {
@@ -114,7 +114,7 @@ final class FixerFactory
      *
      * @return $this
      */
-    public function registerFixer(\PhpCsFixer\Fixer\FixerInterface $fixer, $isCustom)
+    public function registerFixer(FixerInterface $fixer, $isCustom)
     {
         $name = $fixer->getName();
         if (isset($this->fixersByName[$name])) {
@@ -132,7 +132,7 @@ final class FixerFactory
      *
      * @return $this
      */
-    public function useRuleSet(\PhpCsFixer\RuleSet\RuleSetInterface $ruleSet)
+    public function useRuleSet(RuleSetInterface $ruleSet)
     {
         $fixers = [];
         $fixersByName = [];
@@ -145,13 +145,13 @@ final class FixerFactory
             $fixer = $this->fixersByName[$name];
             $config = $ruleSet->getRuleConfiguration($name);
             if (null !== $config) {
-                if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
+                if ($fixer instanceof ConfigurableFixerInterface) {
                     if (!\is_array($config) || !\count($config)) {
-                        throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($fixer->getName(), 'Configuration must be an array and may not be empty.');
+                        throw new InvalidFixerConfigurationException($fixer->getName(), 'Configuration must be an array and may not be empty.');
                     }
                     $fixer->configure($config);
                 } else {
-                    throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($fixer->getName(), 'Is not configurable.');
+                    throw new InvalidFixerConfigurationException($fixer->getName(), 'Is not configurable.');
                 }
             }
             $fixers[] = $fixer;
@@ -182,7 +182,7 @@ final class FixerFactory
     /**
      * @return null|string[]
      */
-    private function getFixersConflicts(\PhpCsFixer\Fixer\FixerInterface $fixer)
+    private function getFixersConflicts(FixerInterface $fixer)
     {
         static $conflictMap = ['no_blank_lines_before_namespace' => ['single_blank_line_before_namespace'], 'single_import_per_statement' => ['group_import']];
         $fixerName = $fixer->getName();

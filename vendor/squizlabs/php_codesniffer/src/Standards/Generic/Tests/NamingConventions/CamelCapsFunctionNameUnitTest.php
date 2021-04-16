@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\NamingConventions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class CamelCapsFunctionNameUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class CamelCapsFunctionNameUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

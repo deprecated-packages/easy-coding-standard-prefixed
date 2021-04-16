@@ -18,12 +18,12 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Graham Campbell <graham@alt-three.com>
  */
-final class NoBlankLinesBeforeNamespaceFixer extends \PhpCsFixer\AbstractLinesBeforeNamespaceFixer
+final class NoBlankLinesBeforeNamespaceFixer extends AbstractLinesBeforeNamespaceFixer
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_NAMESPACE);
     }
@@ -32,7 +32,7 @@ final class NoBlankLinesBeforeNamespaceFixer extends \PhpCsFixer\AbstractLinesBe
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('There should be no blank lines before a namespace declaration.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\n\n\nnamespace Example;\n")]);
+        return new FixerDefinition('There should be no blank lines before a namespace declaration.', [new CodeSample("<?php\n\n\n\nnamespace Example;\n")]);
     }
     /**
      * {@inheritdoc}
@@ -46,7 +46,7 @@ final class NoBlankLinesBeforeNamespaceFixer extends \PhpCsFixer\AbstractLinesBe
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = 0, $limit = $tokens->count(); $index < $limit; ++$index) {
             $token = $tokens[$index];

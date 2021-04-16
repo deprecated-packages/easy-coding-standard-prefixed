@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScopercc9aec205203\Nette\Utils;
+namespace _PhpScopereb9508917a55\Nette\Utils;
 
-use _PhpScopercc9aec205203\Nette;
-use _PhpScopercc9aec205203\Nette\HtmlStringable;
+use _PhpScopereb9508917a55\Nette;
+use _PhpScopereb9508917a55\Nette\HtmlStringable;
 use function is_array, is_float, is_object, is_string;
 /**
  * HTML helper.
@@ -227,7 +227,7 @@ use function is_array, is_float, is_object, is_string;
  * @method self width(?int $val)
  * @method self wrap(?string $val)
  */
-class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScopercc9aec205203\Nette\HtmlStringable
+class Html implements \ArrayAccess, \Countable, \IteratorAggregate, HtmlStringable
 {
     use Nette\SmartObject;
     /** @var array<string, mixed>  element's attributes */
@@ -252,13 +252,13 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
         $el = new static();
         $parts = \explode(' ', (string) $name, 2);
         $el->setName($parts[0]);
-        if (\is_array($attrs)) {
+        if (is_array($attrs)) {
             $el->attrs = $attrs;
         } elseif ($attrs !== null) {
             $el->setText($attrs);
         }
         if (isset($parts[1])) {
-            foreach (\_PhpScopercc9aec205203\Nette\Utils\Strings::matchAll($parts[1] . ' ', '#([a-z0-9:-]+)(?:=(["\'])?(.*?)(?(2)\\2|\\s))?#i') as $m) {
+            foreach (\_PhpScopereb9508917a55\Nette\Utils\Strings::matchAll($parts[1] . ' ', '#([a-z0-9:-]+)(?:=(["\'])?(.*?)(?(2)\\2|\\s))?#i') as $m) {
                 $el->attrs[$m[1]] = $m[3] ?? \true;
             }
         }
@@ -340,13 +340,13 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
      */
     public function appendAttribute(string $name, $value, $option = \true)
     {
-        if (\is_array($value)) {
+        if (is_array($value)) {
             $prev = isset($this->attrs[$name]) ? (array) $this->attrs[$name] : [];
             $this->attrs[$name] = $value + $prev;
         } elseif ((string) $value === '') {
             $tmp =& $this->attrs[$name];
             // appending empty value? -> ignore, but ensure it exists
-        } elseif (!isset($this->attrs[$name]) || \is_array($this->attrs[$name])) {
+        } elseif (!isset($this->attrs[$name]) || is_array($this->attrs[$name])) {
             // needs array
             $this->attrs[$name][$value] = $option;
         } else {
@@ -502,7 +502,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
      */
     public final function setText($text)
     {
-        if (!$text instanceof \_PhpScopercc9aec205203\Nette\HtmlStringable) {
+        if (!$text instanceof HtmlStringable) {
             $text = \htmlspecialchars((string) $text, \ENT_NOQUOTES, 'UTF-8');
         }
         $this->children = [(string) $text];
@@ -531,7 +531,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
      */
     public function addText($text)
     {
-        if (!$text instanceof \_PhpScopercc9aec205203\Nette\HtmlStringable) {
+        if (!$text instanceof HtmlStringable) {
             $text = \htmlspecialchars((string) $text, \ENT_NOQUOTES, 'UTF-8');
         }
         return $this->insert(null, $text);
@@ -685,7 +685,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
      */
     public final function attributes() : string
     {
-        if (!\is_array($this->attrs)) {
+        if (!is_array($this->attrs)) {
             return '';
         }
         $s = '';
@@ -700,16 +700,16 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
                     $s .= ' ' . $key;
                 }
                 continue;
-            } elseif (\is_array($value)) {
+            } elseif (is_array($value)) {
                 if (\strncmp($key, 'data-', 5) === 0) {
-                    $value = \_PhpScopercc9aec205203\Nette\Utils\Json::encode($value);
+                    $value = \_PhpScopereb9508917a55\Nette\Utils\Json::encode($value);
                 } else {
                     $tmp = null;
                     foreach ($value as $k => $v) {
                         if ($v != null) {
                             // intentionally ==, skip nulls & empty string
                             // composite 'style' vs. 'others'
-                            $tmp[] = $v === \true ? $k : (\is_string($k) ? $k . ':' . $v : $v);
+                            $tmp[] = $v === \true ? $k : (is_string($k) ? $k . ':' . $v : $v);
                         }
                     }
                     if ($tmp === null) {
@@ -717,7 +717,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
                     }
                     $value = \implode($key === 'style' || !\strncmp($key, 'on', 2) ? ';' : ' ', $tmp);
                 }
-            } elseif (\is_float($value)) {
+            } elseif (is_float($value)) {
                 $value = \rtrim(\rtrim(\number_format($value, 10, '.', ''), '0'), '.');
             } else {
                 $value = (string) $value;
@@ -734,7 +734,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, \_PhpScoperc
     public function __clone()
     {
         foreach ($this->children as $key => $value) {
-            if (\is_object($value)) {
+            if (is_object($value)) {
                 $this->children[$key] = clone $value;
             }
         }

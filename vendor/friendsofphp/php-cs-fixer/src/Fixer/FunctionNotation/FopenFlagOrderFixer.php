@@ -20,20 +20,20 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class FopenFlagOrderFixer extends \PhpCsFixer\AbstractFopenFlagFixer
+final class FopenFlagOrderFixer extends AbstractFopenFlagFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Order the flags in `fopen` calls, `b` and `t` must be last.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = fopen(\$foo, 'br+');\n")], null, 'Risky when the function `fopen` is overridden.');
+        return new FixerDefinition('Order the flags in `fopen` calls, `b` and `t` must be last.', [new CodeSample("<?php\n\$a = fopen(\$foo, 'br+');\n")], null, 'Risky when the function `fopen` is overridden.');
     }
     /**
      * @param int $argumentStartIndex
      * @param int $argumentEndIndex
      */
-    protected function fixFopenFlagToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $argumentStartIndex, $argumentEndIndex)
+    protected function fixFopenFlagToken(Tokens $tokens, $argumentStartIndex, $argumentEndIndex)
     {
         $argumentFlagIndex = null;
         for ($i = $argumentStartIndex; $i <= $argumentEndIndex; ++$i) {
@@ -70,10 +70,10 @@ final class FopenFlagOrderFixer extends \PhpCsFixer\AbstractFopenFlagFixer
         if (\false === $this->isValidModeString($mode)) {
             return;
         }
-        $split = $this->sortFlags(\PhpCsFixer\Preg::split('#([^\\+]\\+?)#', $mode, -1, \PREG_SPLIT_NO_EMPTY | \PREG_SPLIT_DELIM_CAPTURE));
+        $split = $this->sortFlags(Preg::split('#([^\\+]\\+?)#', $mode, -1, \PREG_SPLIT_NO_EMPTY | \PREG_SPLIT_DELIM_CAPTURE));
         $newContent = $binPrefix . $contentQuote . \implode('', $split) . $contentQuote;
         if ($content !== $newContent) {
-            $tokens[$argumentFlagIndex] = new \PhpCsFixer\Tokenizer\Token([\T_CONSTANT_ENCAPSED_STRING, $newContent]);
+            $tokens[$argumentFlagIndex] = new Token([\T_CONSTANT_ENCAPSED_STRING, $newContent]);
         }
     }
     /**

@@ -18,7 +18,7 @@ final class SystemError
      * @var SmartFileInfo
      */
     private $fileInfo;
-    public function __construct(int $line, string $message, \Symplify\SmartFileSystem\SmartFileInfo $fileInfo)
+    public function __construct(int $line, string $message, SmartFileInfo $fileInfo)
     {
         $this->line = $line;
         $this->message = $message;

@@ -56,7 +56,7 @@ class Markdown extends \PHP_CodeSniffer\Generators\Generator
         // don't have their timezone set.
         \error_reporting(0);
         echo 'Documentation generated on ' . \date('r');
-        echo ' by [PHP_CodeSniffer ' . \PHP_CodeSniffer\Config::VERSION . '](https://github.com/squizlabs/PHP_CodeSniffer)' . \PHP_EOL;
+        echo ' by [PHP_CodeSniffer ' . Config::VERSION . '](https://github.com/squizlabs/PHP_CodeSniffer)' . \PHP_EOL;
     }
     //end printFooter()
     /**

@@ -10,7 +10,7 @@ use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class SniffFileProcessorTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
+final class SniffFileProcessorTest extends AbstractKernelTestCase
 {
     /**
      * @var ErrorAndDiffCollector
@@ -26,16 +26,16 @@ final class SniffFileProcessorTest extends \Symplify\PackageBuilder\Testing\Abst
     private $errorAndDiffResultFactory;
     protected function setUp() : void
     {
-        $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/SniffRunnerSource/easy-coding-standard.php']);
-        $this->errorAndDiffCollector = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
-        $this->errorAndDiffResultFactory = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory::class);
-        $this->sniffFileProcessor = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
-        $changedFilesDetector = $this->getService(\Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector::class);
+        $this->bootKernelWithConfigs(EasyCodingStandardKernel::class, [__DIR__ . '/SniffRunnerSource/easy-coding-standard.php']);
+        $this->errorAndDiffCollector = $this->getService(ErrorAndDiffCollector::class);
+        $this->errorAndDiffResultFactory = $this->getService(ErrorAndDiffResultFactory::class);
+        $this->sniffFileProcessor = $this->getService(SniffFileProcessor::class);
+        $changedFilesDetector = $this->getService(ChangedFilesDetector::class);
         $changedFilesDetector->clearCache();
     }
     public function test() : void
     {
-        $smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/ErrorCollectorSource/NotPsr2Class.php.inc');
+        $smartFileInfo = new SmartFileInfo(__DIR__ . '/ErrorCollectorSource/NotPsr2Class.php.inc');
         $this->sniffFileProcessor->processFile($smartFileInfo);
         $errorAndDiffResult = $this->errorAndDiffResultFactory->create($this->errorAndDiffCollector);
         $this->assertSame(0, $errorAndDiffResult->getErrorCount());

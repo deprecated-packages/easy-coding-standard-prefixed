@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class GetMethodParametersTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class GetMethodParametersTest extends AbstractMethodUnitTest
 {
     /**
      * Verify pass-by-reference parsing.
@@ -168,7 +168,7 @@ class GetMethodParametersTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
     public function testNamespaceOperatorTypeHint()
     {
         $expected = [];
-        $expected[0] = ['name' => '$var1', 'content' => '?namespace\\Name $var1', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScopercc9aec205203\\?namespace\\Name', 'nullable_type' => \true];
+        $expected[0] = ['name' => '$var1', 'content' => '?namespace\\Name $var1', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScopereb9508917a55\\?namespace\\Name', 'nullable_type' => \true];
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testNamespaceOperatorTypeHint()
@@ -218,7 +218,7 @@ class GetMethodParametersTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethod
     public function testPHP8UnionTypesTwoClasses()
     {
         $expected = [];
-        $expected[0] = ['name' => '$var', 'content' => 'MyClassA|\\Package\\MyClassB $var', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScopercc9aec205203\\MyClassA|\\Package\\MyClassB', 'nullable_type' => \false];
+        $expected[0] = ['name' => '$var', 'content' => 'MyClassA|\\Package\\MyClassB $var', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScopereb9508917a55\\MyClassA|\\Package\\MyClassB', 'nullable_type' => \false];
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testPHP8UnionTypesTwoClasses()

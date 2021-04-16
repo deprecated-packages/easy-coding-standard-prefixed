@@ -10,7 +10,7 @@ final class LineResolver
     /**
      * @param Tokens<Token> $tokens
      */
-    public function resolve(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : int
+    public function resolve(Tokens $tokens, int $position) : int
     {
         $lineCount = 0;
         for ($i = 0; $i < $position; ++$i) {

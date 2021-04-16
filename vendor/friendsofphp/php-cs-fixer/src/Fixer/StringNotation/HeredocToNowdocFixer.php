@@ -20,17 +20,17 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Gregor Harlan <gharlan@web.de>
  */
-final class HeredocToNowdocFixer extends \PhpCsFixer\AbstractFixer
+final class HeredocToNowdocFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Convert `heredoc` to `nowdoc` where possible.', [new \PhpCsFixer\FixerDefinition\CodeSample(<<<'EOF'
+        return new FixerDefinition('Convert `heredoc` to `nowdoc` where possible.', [new CodeSample(<<<'EOF'
 <?php
 
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 $a = <<<TEST
 Foo
@@ -52,14 +52,14 @@ EOF
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_START_HEREDOC);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_START_HEREDOC) || \false !== \strpos($token->getContent(), "'")) {
@@ -74,12 +74,12 @@ EOF
             }
             $content = $tokens[$index + 1]->getContent();
             // regex: odd number of backslashes, not followed by dollar
-            if (\PhpCsFixer\Preg::match('/(?<!\\\\)(?:\\\\{2})*\\\\(?![$\\\\])/', $content)) {
+            if (Preg::match('/(?<!\\\\)(?:\\\\{2})*\\\\(?![$\\\\])/', $content)) {
                 continue;
             }
             $tokens[$index] = $this->convertToNowdoc($token);
             $content = \str_replace(['\\\\', '\\$'], ['\\', '$'], $content);
-            $tokens[$index + 1] = new \PhpCsFixer\Tokenizer\Token([$tokens[$index + 1]->getId(), $content]);
+            $tokens[$index + 1] = new Token([$tokens[$index + 1]->getId(), $content]);
         }
     }
     /**
@@ -87,8 +87,8 @@ EOF
      *
      * @return Token
      */
-    private function convertToNowdoc(\PhpCsFixer\Tokenizer\Token $token)
+    private function convertToNowdoc(Token $token)
     {
-        return new \PhpCsFixer\Tokenizer\Token([$token->getId(), \PhpCsFixer\Preg::replace('/^([Bb]?<<<)(\\h*)"?([^\\s"]+)"?/', '$1$2\'$3\'', $token->getContent())]);
+        return new Token([$token->getId(), Preg::replace('/^([Bb]?<<<)(\\h*)"?([^\\s"]+)"?/', '$1$2\'$3\'', $token->getContent())]);
     }
 }

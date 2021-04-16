@@ -33,7 +33,7 @@ abstract class AbstractAlignFixerHelper
      * @var int
      */
     protected $deepestLevel = 0;
-    public function fix(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function fix(Tokens $tokens)
     {
         // This fixer works partially on Tokens and partially on string representation of code.
         // During the process of fixing internal state of single Token may be affected by injecting ALIGNABLE_PLACEHOLDER to its content.
@@ -52,13 +52,13 @@ abstract class AbstractAlignFixerHelper
      * @param int $startAt
      * @param int $endAt
      */
-    protected abstract function injectAlignmentPlaceholders(\PhpCsFixer\Tokenizer\Tokens $tokens, $startAt, $endAt);
+    protected abstract function injectAlignmentPlaceholders(Tokens $tokens, $startAt, $endAt);
     /**
      * Look for group of placeholders, and provide vertical alignment.
      *
      * @return string
      */
-    protected function replacePlaceholder(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function replacePlaceholder(Tokens $tokens)
     {
         $tmpCode = $tokens->generateCode();
         for ($j = 0; $j <= $this->deepestLevel; ++$j) {

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Application;
 
-use _PhpScopercc9aec205203\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
 use Symplify\EasyCodingStandard\Reporter\ProcessedFileReporter;
 use Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter;
@@ -37,7 +37,7 @@ final class SnippetFormatterApplication
      * @var ProcessedFileReporter
      */
     private $processedFileReporter;
-    public function __construct(\Symplify\EasyCodingStandard\Configuration\Configuration $configuration, \Symplify\EasyCodingStandard\SnippetFormatter\Reporter\SnippetReporter $snippetReporter, \Symplify\EasyCodingStandard\SnippetFormatter\Formatter\SnippetFormatter $snippetFormatter, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \_PhpScopercc9aec205203\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\EasyCodingStandard\Reporter\ProcessedFileReporter $processedFileReporter)
+    public function __construct(Configuration $configuration, SnippetReporter $snippetReporter, SnippetFormatter $snippetFormatter, SmartFileSystem $smartFileSystem, SymfonyStyle $symfonyStyle, ProcessedFileReporter $processedFileReporter)
     {
         $this->configuration = $configuration;
         $this->snippetReporter = $snippetReporter;
@@ -49,13 +49,13 @@ final class SnippetFormatterApplication
     /**
      * @param SmartFileInfo[] $fileInfos
      */
-    public function processFileInfosWithSnippetPattern(\Symplify\EasyCodingStandard\Configuration\Configuration $configuration, array $fileInfos, string $snippetPattern, string $kind) : int
+    public function processFileInfosWithSnippetPattern(Configuration $configuration, array $fileInfos, string $snippetPattern, string $kind) : int
     {
         $sources = $configuration->getSources();
         $fileCount = \count($fileInfos);
         if ($fileCount === 0) {
             $this->snippetReporter->reportNoFilesFound($sources);
-            return \Symplify\PackageBuilder\Console\ShellCode::SUCCESS;
+            return ShellCode::SUCCESS;
         }
         $this->symfonyStyle->progressStart($fileCount);
         foreach ($fileInfos as $fileInfo) {
@@ -64,7 +64,7 @@ final class SnippetFormatterApplication
         }
         return $this->processedFileReporter->report($fileCount);
     }
-    private function processFileInfoWithPattern(\Symplify\SmartFileSystem\SmartFileInfo $phpFileInfo, string $snippetPattern, string $kind) : void
+    private function processFileInfoWithPattern(SmartFileInfo $phpFileInfo, string $snippetPattern, string $kind) : void
     {
         $fixedContent = $this->snippetFormatter->format($phpFileInfo, $snippetPattern, $kind);
         if ($phpFileInfo->getContents() === $fixedContent) {

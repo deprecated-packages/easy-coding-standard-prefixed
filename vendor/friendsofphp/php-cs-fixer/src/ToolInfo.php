@@ -60,9 +60,9 @@ final class ToolInfo implements \PhpCsFixer\ToolInfoInterface
     public function getVersion()
     {
         if ($this->isInstalledByComposer()) {
-            return \PhpCsFixer\Console\Application::VERSION . ':' . $this->getComposerVersion();
+            return Application::VERSION . ':' . $this->getComposerVersion();
         }
-        return \PhpCsFixer\Console\Application::VERSION;
+        return Application::VERSION;
     }
     public function isInstalledAsPhar()
     {

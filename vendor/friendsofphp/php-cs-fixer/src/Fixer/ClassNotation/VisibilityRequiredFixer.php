@@ -30,14 +30,14 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
  */
-final class VisibilityRequiredFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class VisibilityRequiredFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Visibility MUST be declared on all properties and methods; `abstract` and `final` MUST be declared before the visibility; `static` MUST be declared after the visibility.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Visibility MUST be declared on all properties and methods; `abstract` and `final` MUST be declared before the visibility; `static` MUST be declared after the visibility.', [new CodeSample('<?php
 class Sample
 {
     var $a;
@@ -47,34 +47,34 @@ class Sample
     {
     }
 }
-'), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+'), new VersionSpecificCodeSample('<?php
 class Sample
 {
     const SAMPLE = 1;
 }
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70100), ['elements' => ['const']])]);
+', new VersionSpecification(70100), ['elements' => ['const']])]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound(\PhpCsFixer\Tokenizer\Token::getClassyTokenKinds());
+        return $tokens->isAnyTokenKindsFound(Token::getClassyTokenKinds());
     }
     /**
      * {@inheritdoc}
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('elements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('elements', 'The structural elements to fix (PHP >= 7.1 required for `const`).'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(['property', 'method', 'const'])])->setDefault(['property', 'method'])->getOption()], $this->getName());
+        return new FixerConfigurationResolverRootless('elements', [(new FixerOptionBuilder('elements', 'The structural elements to fix (PHP >= 7.1 required for `const`).'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset(['property', 'method', 'const'])])->setDefault(['property', 'method'])->getOption()], $this->getName());
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
-        $propertyTypeDeclarationKinds = [\T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION];
+        $tokensAnalyzer = new TokensAnalyzer($tokens);
+        $propertyTypeDeclarationKinds = [\T_STRING, \T_NS_SEPARATOR, CT::T_NULLABLE_TYPE, CT::T_ARRAY_TYPEHINT, CT::T_TYPE_ALTERNATION];
         foreach (\array_reverse($tokensAnalyzer->getClassyElements(), \true) as $index => $element) {
             if (!\in_array($element['type'], $this->configuration['elements'], \true)) {
                 continue;
@@ -117,10 +117,10 @@ class Sample
                 }
             }
             if (null === $visibilityIndex) {
-                $tokens->insertAt($index, [new \PhpCsFixer\Tokenizer\Token([\T_PUBLIC, 'public']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])]);
+                $tokens->insertAt($index, [new Token([\T_PUBLIC, 'public']), new Token([\T_WHITESPACE, ' '])]);
             } else {
                 if ($tokens[$visibilityIndex]->isGivenKind(\T_VAR)) {
-                    $tokens[$visibilityIndex] = new \PhpCsFixer\Tokenizer\Token([\T_PUBLIC, 'public']);
+                    $tokens[$visibilityIndex] = new Token([\T_PUBLIC, 'public']);
                 }
                 if ($this->isKeywordPlacedProperly($tokens, $visibilityIndex, $index)) {
                     $index = $visibilityIndex;
@@ -143,7 +143,7 @@ class Sample
      *
      * @return bool
      */
-    private function isKeywordPlacedProperly(\PhpCsFixer\Tokenizer\Tokens $tokens, $keywordIndex, $comparedIndex)
+    private function isKeywordPlacedProperly(Tokens $tokens, $keywordIndex, $comparedIndex)
     {
         return $keywordIndex + 2 === $comparedIndex && ' ' === $tokens[$keywordIndex + 1]->getContent();
     }
@@ -151,9 +151,9 @@ class Sample
      * @param int $fromIndex
      * @param int $toIndex
      */
-    private function moveTokenAndEnsureSingleSpaceFollows(\PhpCsFixer\Tokenizer\Tokens $tokens, $fromIndex, $toIndex)
+    private function moveTokenAndEnsureSingleSpaceFollows(Tokens $tokens, $fromIndex, $toIndex)
     {
-        $tokens->insertAt($toIndex, [$tokens[$fromIndex], new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])]);
+        $tokens->insertAt($toIndex, [$tokens[$fromIndex], new Token([\T_WHITESPACE, ' '])]);
         $tokens->clearAt($fromIndex);
         if ($tokens[$fromIndex + 1]->isWhitespace()) {
             $tokens->clearAt($fromIndex + 1);

@@ -26,14 +26,14 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
  */
-final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class SingleImportPerStatementFixer extends AbstractFixer implements WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('There MUST be one use keyword per declaration.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nuse Foo, Sample, Sample\\Sample as Sample2;\n")]);
+        return new FixerDefinition('There MUST be one use keyword per declaration.', [new CodeSample("<?php\nuse Foo, Sample, Sample\\Sample as Sample2;\n")]);
     }
     /**
      * {@inheritdoc}
@@ -47,21 +47,21 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $tokensAnalyzer = new TokensAnalyzer($tokens);
         $uses = \array_reverse($tokensAnalyzer->getImportUseIndexes());
         foreach ($uses as $index) {
             $endIndex = $tokens->getNextTokenOfKind($index, [';', [\T_CLOSE_TAG]]);
             $groupClose = $tokens->getPrevMeaningfulToken($endIndex);
-            if ($tokens[$groupClose]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_CLOSE)) {
+            if ($tokens[$groupClose]->isGivenKind(CT::T_GROUP_IMPORT_BRACE_CLOSE)) {
                 $this->fixGroupUse($tokens, $index, $endIndex);
             } else {
                 $this->fixMultipleUse($tokens, $index, $endIndex);
@@ -73,13 +73,13 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
      *
      * @return array
      */
-    private function getGroupDeclaration(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getGroupDeclaration(Tokens $tokens, $index)
     {
         $groupPrefix = '';
         $comment = '';
         $groupOpenIndex = null;
         for ($i = $index + 1;; ++$i) {
-            if ($tokens[$i]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_OPEN)) {
+            if ($tokens[$i]->isGivenKind(CT::T_GROUP_IMPORT_BRACE_OPEN)) {
                 $groupOpenIndex = $i;
                 break;
             }
@@ -96,7 +96,7 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
             }
             $groupPrefix .= $tokens[$i]->getContent();
         }
-        return [\rtrim($groupPrefix), $groupOpenIndex, $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_GROUP_IMPORT_BRACE, $groupOpenIndex), $comment];
+        return [\rtrim($groupPrefix), $groupOpenIndex, $tokens->findBlockEnd(Tokens::BLOCK_TYPE_GROUP_IMPORT_BRACE, $groupOpenIndex), $comment];
     }
     /**
      * @param string $groupPrefix
@@ -106,16 +106,16 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
      *
      * @return string[]
      */
-    private function getGroupStatements(\PhpCsFixer\Tokenizer\Tokens $tokens, $groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment)
+    private function getGroupStatements(Tokens $tokens, $groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment)
     {
         $statements = [];
         $statement = $groupPrefix;
         for ($i = $groupOpenIndex + 1; $i <= $groupCloseIndex; ++$i) {
             $token = $tokens[$i];
-            if ($token->equals(',') && $tokens[$tokens->getNextMeaningfulToken($i)]->equals([\PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_CLOSE])) {
+            if ($token->equals(',') && $tokens[$tokens->getNextMeaningfulToken($i)]->equals([CT::T_GROUP_IMPORT_BRACE_CLOSE])) {
                 continue;
             }
-            if ($token->equalsAny([',', [\PhpCsFixer\Tokenizer\CT::T_GROUP_IMPORT_BRACE_CLOSE]])) {
+            if ($token->equalsAny([',', [CT::T_GROUP_IMPORT_BRACE_CLOSE]])) {
                 $statements[] = 'use' . $statement . ';';
                 $statement = $groupPrefix;
                 continue;
@@ -147,7 +147,7 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
      * @param int $index
      * @param int $endIndex
      */
-    private function fixGroupUse(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $endIndex)
+    private function fixGroupUse(Tokens $tokens, $index, $endIndex)
     {
         list($groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment) = $this->getGroupDeclaration($tokens, $index);
         $statements = $this->getGroupStatements($tokens, $groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment);
@@ -159,7 +159,7 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
             $tokens->clearAt($endIndex);
         }
         $ending = $this->whitespacesConfig->getLineEnding();
-        $importTokens = \PhpCsFixer\Tokenizer\Tokens::fromCode('<?php ' . \implode($ending, $statements));
+        $importTokens = Tokens::fromCode('<?php ' . \implode($ending, $statements));
         $importTokens->clearAt(0);
         $importTokens->clearEmptyTokens();
         $tokens->insertAt($index, $importTokens);
@@ -168,24 +168,24 @@ final class SingleImportPerStatementFixer extends \PhpCsFixer\AbstractFixer impl
      * @param int $index
      * @param int $endIndex
      */
-    private function fixMultipleUse(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $endIndex)
+    private function fixMultipleUse(Tokens $tokens, $index, $endIndex)
     {
         $ending = $this->whitespacesConfig->getLineEnding();
         for ($i = $endIndex - 1; $i > $index; --$i) {
             if (!$tokens[$i]->equals(',')) {
                 continue;
             }
-            $tokens[$i] = new \PhpCsFixer\Tokenizer\Token(';');
+            $tokens[$i] = new Token(';');
             $i = $tokens->getNextMeaningfulToken($i);
-            $tokens->insertAt($i, new \PhpCsFixer\Tokenizer\Token([\T_USE, 'use']));
-            $tokens->insertAt($i + 1, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
-            $indent = \PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer::detectIndent($tokens, $index);
+            $tokens->insertAt($i, new Token([\T_USE, 'use']));
+            $tokens->insertAt($i + 1, new Token([\T_WHITESPACE, ' ']));
+            $indent = WhitespacesAnalyzer::detectIndent($tokens, $index);
             if ($tokens[$i - 1]->isWhitespace()) {
-                $tokens[$i - 1] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $ending . $indent]);
+                $tokens[$i - 1] = new Token([\T_WHITESPACE, $ending . $indent]);
                 continue;
             }
             if (\false === \strpos($tokens[$i - 1]->getContent(), "\n")) {
-                $tokens->insertAt($i, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $ending . $indent]));
+                $tokens->insertAt($i, new Token([\T_WHITESPACE, $ending . $indent]));
             }
         }
     }

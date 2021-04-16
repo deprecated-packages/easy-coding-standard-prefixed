@@ -20,7 +20,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Kuba Werłos <werlos@gmail.com>
  */
-final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
+final class SingleLineThrowFixer extends AbstractFixer
 {
     /**
      * @internal
@@ -39,12 +39,12 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Throwing exception must be done in single line.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nthrow new Exception(\n    'Error.',\n    500\n);\n")]);
+        return new FixerDefinition('Throwing exception must be done in single line.', [new CodeSample("<?php\nthrow new Exception(\n    'Error.',\n    500\n);\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_THROW);
     }
@@ -61,7 +61,7 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = 0, $count = $tokens->count(); $index < $count; ++$index) {
             if (!$tokens[$index]->isGivenKind(\T_THROW)) {
@@ -71,7 +71,7 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
             $openingBraceCandidateIndex = $tokens->getNextTokenOfKind($index, [';', '(']);
             while ($tokens[$openingBraceCandidateIndex]->equals('(')) {
                 /** @var int $closingBraceIndex */
-                $closingBraceIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openingBraceCandidateIndex);
+                $closingBraceIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openingBraceCandidateIndex);
                 /** @var int $openingBraceCandidateIndex */
                 $openingBraceCandidateIndex = $tokens->getNextTokenOfKind($closingBraceIndex, [';', '(']);
             }
@@ -82,7 +82,7 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
      * @param int $startIndex
      * @param int $endIndex
      */
-    private function trimNewLines(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
+    private function trimNewLines(Tokens $tokens, $startIndex, $endIndex)
     {
         for ($index = $startIndex; $index < $endIndex; ++$index) {
             $content = $tokens[$index]->getContent();
@@ -93,16 +93,16 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
                 } elseif (0 === \strpos($content, '#')) {
                     $content = '/*' . \substr($content, 1) . ' */';
                     $tokens->clearAt($index + 1);
-                } elseif (\false !== \PhpCsFixer\Preg::match('/\\R/', $content)) {
-                    $content = \PhpCsFixer\Preg::replace('/\\R/', ' ', $content);
+                } elseif (\false !== Preg::match('/\\R/', $content)) {
+                    $content = Preg::replace('/\\R/', ' ', $content);
                 }
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_COMMENT, $content]);
+                $tokens[$index] = new Token([\T_COMMENT, $content]);
                 continue;
             }
             if (!$tokens[$index]->isGivenKind(\T_WHITESPACE)) {
                 continue;
             }
-            if (0 === \PhpCsFixer\Preg::match('/\\R/', $content)) {
+            if (0 === Preg::match('/\\R/', $content)) {
                 continue;
             }
             $prevIndex = $tokens->getNonEmptySibling($index, -1);
@@ -115,7 +115,7 @@ final class SingleLineThrowFixer extends \PhpCsFixer\AbstractFixer
                 $tokens->clearAt($index);
                 continue;
             }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+            $tokens[$index] = new Token([\T_WHITESPACE, ' ']);
         }
     }
 }

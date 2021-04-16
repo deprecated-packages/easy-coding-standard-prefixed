@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\HttpKernel;
 
-use _PhpScopercc9aec205203\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Kernel;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Kernel;
 use Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
 use Symplify\SymplifyKernel\Strings\KernelUniqueHasher;
-abstract class AbstractSymplifyKernel extends \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\Kernel implements \Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface
+abstract class AbstractSymplifyKernel extends Kernel implements ExtraConfigAwareKernelInterface
 {
     /**
      * @var string[]
@@ -29,7 +29,7 @@ abstract class AbstractSymplifyKernel extends \_PhpScopercc9aec205203\Symfony\Co
      */
     public function registerBundles() : iterable
     {
-        return [new \Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle()];
+        return [new SymplifyKernelBundle()];
     }
     /**
      * @param string[]|SmartFileInfo[] $configs
@@ -37,13 +37,13 @@ abstract class AbstractSymplifyKernel extends \_PhpScopercc9aec205203\Symfony\Co
     public function setConfigs(array $configs) : void
     {
         foreach ($configs as $config) {
-            if ($config instanceof \Symplify\SmartFileSystem\SmartFileInfo) {
+            if ($config instanceof SmartFileInfo) {
                 $config = $config->getRealPath();
             }
             $this->configs[] = $config;
         }
     }
-    public function registerContainerConfiguration(\_PhpScopercc9aec205203\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(LoaderInterface $loader) : void
     {
         foreach ($this->configs as $config) {
             $loader->load($config);
@@ -51,7 +51,7 @@ abstract class AbstractSymplifyKernel extends \_PhpScopercc9aec205203\Symfony\Co
     }
     private function getUniqueKernelHash() : string
     {
-        $kernelUniqueHasher = new \Symplify\SymplifyKernel\Strings\KernelUniqueHasher();
+        $kernelUniqueHasher = new KernelUniqueHasher();
         return $kernelUniqueHasher->hashKernelClass(static::class);
     }
 }

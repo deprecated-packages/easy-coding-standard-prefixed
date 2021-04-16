@@ -10,11 +10,11 @@ final class CurrentParentFileInfoProvider
      * @var SmartFileInfo|null
      */
     private $smartFileInfo;
-    public function setParentFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : void
+    public function setParentFileInfo(SmartFileInfo $smartFileInfo) : void
     {
         $this->smartFileInfo = $smartFileInfo;
     }
-    public function provide() : ?\Symplify\SmartFileSystem\SmartFileInfo
+    public function provide() : ?SmartFileInfo
     {
         return $this->smartFileInfo;
     }

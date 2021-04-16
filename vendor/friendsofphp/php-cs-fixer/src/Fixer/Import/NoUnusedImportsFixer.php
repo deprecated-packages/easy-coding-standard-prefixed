@@ -24,14 +24,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
+final class NoUnusedImportsFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Unused `use` statements must be removed.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nuse \\DateTime;\nuse \\Exception;\n\nnew DateTime();\n")]);
+        return new FixerDefinition('Unused `use` statements must be removed.', [new CodeSample("<?php\nuse \\DateTime;\nuse \\Exception;\n\nnew DateTime();\n")]);
     }
     /**
      * {@inheritdoc}
@@ -46,7 +46,7 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
@@ -68,14 +68,14 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $useDeclarations = (new \PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
+        $useDeclarations = (new NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
         if (0 === \count($useDeclarations)) {
             return;
         }
-        foreach ((new \PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer())->getDeclarations($tokens) as $namespace) {
-            $currentNamespaceUseDeclarations = \array_filter($useDeclarations, static function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration) use($namespace) {
+        foreach ((new NamespacesAnalyzer())->getDeclarations($tokens) as $namespace) {
+            $currentNamespaceUseDeclarations = \array_filter($useDeclarations, static function (NamespaceUseAnalysis $useDeclaration) use($namespace) {
                 return $useDeclaration->getStartIndex() >= $namespace->getScopeStartIndex() && $useDeclaration->getEndIndex() <= $namespace->getScopeEndIndex();
             });
             $usagesSearchIgnoredIndexes = [];
@@ -96,7 +96,7 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return bool
      */
-    private function isImportUsed(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis $namespace, array $ignoredIndexes, $shortName)
+    private function isImportUsed(Tokens $tokens, NamespaceAnalysis $namespace, array $ignoredIndexes, $shortName)
     {
         $namespaceEndIndex = $namespace->getScopeEndIndex();
         for ($index = $namespace->getScopeStartIndex(); $index <= $namespaceEndIndex; ++$index) {
@@ -116,13 +116,13 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
                 }
                 continue;
             }
-            if ($token->isComment() && \PhpCsFixer\Preg::match('/(?<![[:alnum:]\\$])(?<!\\\\)' . $shortName . '(?![[:alnum:]])/i', $token->getContent())) {
+            if ($token->isComment() && Preg::match('/(?<![[:alnum:]\\$])(?<!\\\\)' . $shortName . '(?![[:alnum:]])/i', $token->getContent())) {
                 return \true;
             }
         }
         return \false;
     }
-    private function removeUseDeclaration(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration)
+    private function removeUseDeclaration(Tokens $tokens, NamespaceUseAnalysis $useDeclaration)
     {
         for ($index = $useDeclaration->getEndIndex() - 1; $index >= $useDeclaration->getStartIndex(); --$index) {
             if ($tokens[$index]->isComment()) {
@@ -136,7 +136,7 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
             $prevIndex = $tokens->getPrevNonWhitespace($index);
             if ($tokens[$prevIndex]->isComment()) {
                 $content = $tokens[$index]->getContent();
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, \substr($content, \strrpos($content, "\n"))]);
+                $tokens[$index] = new Token([\T_WHITESPACE, \substr($content, \strrpos($content, "\n"))]);
                 // preserve indent only
             } else {
                 $tokens->clearTokenAndMergeSurroundingWhitespace($index);
@@ -154,7 +154,7 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
             if ('' === $content) {
                 $tokens->clearAt($prevIndex);
             } else {
-                $tokens[$prevIndex] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $content]);
+                $tokens[$prevIndex] = new Token([\T_WHITESPACE, $content]);
             }
             $prevToken = $tokens[$prevIndex];
         }
@@ -167,9 +167,9 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
         }
         $nextToken = $tokens[$nextIndex];
         if ($nextToken->isWhitespace()) {
-            $content = \PhpCsFixer\Preg::replace("#^\r\n|^\n#", '', \ltrim($nextToken->getContent(), " \t"), 1);
+            $content = Preg::replace("#^\r\n|^\n#", '', \ltrim($nextToken->getContent(), " \t"), 1);
             if ('' !== $content) {
-                $tokens[$nextIndex] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $content]);
+                $tokens[$nextIndex] = new Token([\T_WHITESPACE, $content]);
             } else {
                 $tokens->clearAt($nextIndex);
             }
@@ -178,14 +178,14 @@ final class NoUnusedImportsFixer extends \PhpCsFixer\AbstractFixer
         if ($prevToken->isWhitespace() && $nextToken->isWhitespace()) {
             $content = $prevToken->getContent() . $nextToken->getContent();
             if ('' !== $content) {
-                $tokens[$nextIndex] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $content]);
+                $tokens[$nextIndex] = new Token([\T_WHITESPACE, $content]);
             } else {
                 $tokens->clearAt($nextIndex);
             }
             $tokens->clearAt($prevIndex);
         }
     }
-    private function removeUsesInSameNamespace(\PhpCsFixer\Tokenizer\Tokens $tokens, array $useDeclarations, \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis $namespaceDeclaration)
+    private function removeUsesInSameNamespace(Tokens $tokens, array $useDeclarations, NamespaceAnalysis $namespaceDeclaration)
     {
         $namespace = $namespaceDeclaration->getFullName();
         $nsLength = \strlen($namespace . '\\');

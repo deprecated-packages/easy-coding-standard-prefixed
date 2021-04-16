@@ -4,11 +4,11 @@ declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\Finder\SmartFinder;
 
 use Iterator;
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestCase;
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestCase;
 use Symplify\SmartFileSystem\FileSystemFilter;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\Finder\SmartFinder;
-final class SmartFinderTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
+final class SmartFinderTest extends TestCase
 {
     /**
      * @var SmartFinder
@@ -16,7 +16,7 @@ final class SmartFinderTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\Te
     private $smartFinder;
     protected function setUp() : void
     {
-        $this->smartFinder = new \Symplify\SmartFileSystem\Finder\SmartFinder(new \Symplify\SmartFileSystem\Finder\FinderSanitizer(), new \Symplify\SmartFileSystem\FileSystemFilter());
+        $this->smartFinder = new SmartFinder(new FinderSanitizer(), new FileSystemFilter());
     }
     /**
      * @param string[] $paths
@@ -27,7 +27,7 @@ final class SmartFinderTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\Te
         $fileInfos = $this->smartFinder->find($paths, $suffix);
         $this->assertCount($expectedCount, $fileInfos);
     }
-    public function provideData() : \Iterator
+    public function provideData() : Iterator
     {
         (yield [[__DIR__ . '/Fixture'], '*.twig', 2]);
         (yield [[__DIR__ . '/Fixture'], '*.txt', 1]);

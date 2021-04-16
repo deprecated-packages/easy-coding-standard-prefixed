@@ -22,7 +22,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @internal
  */
-final class ArrayTypehintTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
+final class ArrayTypehintTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
@@ -34,7 +34,7 @@ final class ArrayTypehintTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
+    public function process(Tokens $tokens, Token $token, $index)
     {
         if (!$token->isGivenKind(\T_ARRAY)) {
             return;
@@ -42,7 +42,7 @@ final class ArrayTypehintTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
         $nextIndex = $tokens->getNextMeaningfulToken($index);
         $nextToken = $tokens[$nextIndex];
         if (!$nextToken->equals('(')) {
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, $token->getContent()]);
+            $tokens[$index] = new Token([CT::T_ARRAY_TYPEHINT, $token->getContent()]);
         }
     }
     /**
@@ -50,6 +50,6 @@ final class ArrayTypehintTransformer extends \PhpCsFixer\Tokenizer\AbstractTrans
      */
     public function getCustomTokens()
     {
-        return [\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT];
+        return [CT::T_ARRAY_TYPEHINT];
     }
 }

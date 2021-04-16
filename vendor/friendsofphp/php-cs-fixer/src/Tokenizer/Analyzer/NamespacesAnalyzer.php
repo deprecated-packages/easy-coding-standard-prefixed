@@ -21,7 +21,7 @@ final class NamespacesAnalyzer
     /**
      * @return NamespaceAnalysis[]
      */
-    public function getDeclarations(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function getDeclarations(Tokens $tokens)
     {
         $namespaces = [];
         for ($index = 1, $count = \count($tokens); $index < $count; ++$index) {
@@ -34,7 +34,7 @@ final class NamespacesAnalyzer
             $declarationParts = \explode('\\', $namespace);
             $shortName = \end($declarationParts);
             if ($tokens[$declarationEndIndex]->equals('{')) {
-                $scopeEndIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $declarationEndIndex);
+                $scopeEndIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $declarationEndIndex);
             } else {
                 $scopeEndIndex = $tokens->getNextTokenOfKind($declarationEndIndex, [[\T_NAMESPACE]]);
                 if (null === $scopeEndIndex) {
@@ -42,12 +42,12 @@ final class NamespacesAnalyzer
                 }
                 --$scopeEndIndex;
             }
-            $namespaces[] = new \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis($namespace, $shortName, $index, $declarationEndIndex, $index, $scopeEndIndex);
+            $namespaces[] = new NamespaceAnalysis($namespace, $shortName, $index, $declarationEndIndex, $index, $scopeEndIndex);
             // Continue the analysis after the end of this namespace to find the next one
             $index = $scopeEndIndex;
         }
         if (0 === \count($namespaces)) {
-            $namespaces[] = new \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis('', '', 0, 0, 0, \count($tokens) - 1);
+            $namespaces[] = new NamespaceAnalysis('', '', 0, 0, 0, \count($tokens) - 1);
         }
         return $namespaces;
     }

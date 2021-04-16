@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\ValueObjectFactory;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException;
@@ -14,13 +14,13 @@ final class LineLengthAndPositionFactory
     /**
      * @param Tokens<Token> $tokens
      */
-    public function createFromTokensAndLineStartPosition(\PhpCsFixer\Tokenizer\Tokens $tokens, int $currentPosition) : \Symplify\CodingStandard\TokenRunner\ValueObject\LineLengthAndPosition
+    public function createFromTokensAndLineStartPosition(Tokens $tokens, int $currentPosition) : LineLengthAndPosition
     {
         $length = 0;
         while (!$this->isNewLineOrOpenTag($tokens, $currentPosition)) {
             // in case of multiline string, we are interested in length of the part on current line only
             if (!isset($tokens[$currentPosition])) {
-                throw new \Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException($currentPosition);
+                throw new TokenNotFoundException($currentPosition);
             }
             $explode = \explode("\n", $tokens[$currentPosition]->getContent());
             // string precedes current token, so we are interested in end part only
@@ -37,17 +37,17 @@ final class LineLengthAndPositionFactory
                 break;
             }
         }
-        return new \Symplify\CodingStandard\TokenRunner\ValueObject\LineLengthAndPosition($length, $currentPosition);
+        return new LineLengthAndPosition($length, $currentPosition);
     }
     /**
      * @param Tokens|Token[] $tokens
      */
-    private function isNewLineOrOpenTag(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
+    private function isNewLineOrOpenTag(Tokens $tokens, int $position) : bool
     {
         if (!isset($tokens[$position])) {
-            throw new \Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException($position);
+            throw new TokenNotFoundException($position);
         }
-        if (\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($tokens[$position]->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
+        if (Strings::startsWith($tokens[$position]->getContent(), StaticEolConfiguration::getEolChar())) {
             return \true;
         }
         return $tokens[$position]->isGivenKind(\T_OPEN_TAG);

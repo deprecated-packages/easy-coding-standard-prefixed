@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Formatting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class OperatorBracketUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class OperatorBracketUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

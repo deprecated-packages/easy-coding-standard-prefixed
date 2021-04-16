@@ -35,7 +35,7 @@ final class LineLengthTransformer
     /**
      * @param Tokens<Token> $tokens
      */
-    public function fixStartPositionToEndPosition(\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo, \PhpCsFixer\Tokenizer\Tokens $tokens, int $lineLength, bool $breakLongLines, bool $inlineShortLine) : void
+    public function fixStartPositionToEndPosition(BlockInfo $blockInfo, Tokens $tokens, int $lineLength, bool $breakLongLines, bool $inlineShortLine) : void
     {
         if ($this->hasPromotedProperty($tokens, $blockInfo)) {
             return;
@@ -54,9 +54,9 @@ final class LineLengthTransformer
     /**
      * @param Tokens<Token> $tokens
      */
-    private function hasPromotedProperty(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
+    private function hasPromotedProperty(Tokens $tokens, BlockInfo $blockInfo) : bool
     {
-        $resultByKind = $tokens->findGivenKind([\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE], $blockInfo->getStart(), $blockInfo->getEnd());
+        $resultByKind = $tokens->findGivenKind([CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE], $blockInfo->getStart(), $blockInfo->getEnd());
         return (bool) \array_filter($resultByKind);
     }
 }

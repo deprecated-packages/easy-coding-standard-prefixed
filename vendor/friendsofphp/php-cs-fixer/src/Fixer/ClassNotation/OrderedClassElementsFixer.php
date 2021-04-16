@@ -25,7 +25,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Gregor Harlan <gharlan@web.de>
  */
-final class OrderedClassElementsFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class OrderedClassElementsFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /** @internal */
     const SORT_ALPHA = 'alpha';
@@ -88,16 +88,16 @@ final class OrderedClassElementsFixer extends \PhpCsFixer\AbstractFixer implemen
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound(\PhpCsFixer\Tokenizer\Token::getClassyTokenKinds());
+        return $tokens->isAnyTokenKindsFound(Token::getClassyTokenKinds());
     }
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Orders the elements of classes/interfaces/traits.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Orders the elements of classes/interfaces/traits.', [new CodeSample('<?php
 final class Example
 {
     use BarTrait;
@@ -127,13 +127,13 @@ final class Example
     protected static function protStatFunc() {}
     public function __destruct() {}
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 class Example
 {
     public function A(){}
     private function B(){}
 }
-', ['order' => ['method_private', 'method_public']]), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+', ['order' => ['method_private', 'method_public']]), new CodeSample('<?php
 class Example
 {
     public function D(){}
@@ -156,7 +156,7 @@ class Example
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($i = 1, $count = $tokens->count(); $i < $count; ++$i) {
             if (!$tokens[$i]->isClassy()) {
@@ -180,16 +180,16 @@ class Example
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('order', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('order', 'List of strings defining order of elements.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(\array_keys(\array_merge(self::$typeHierarchy, self::$specialTypes)))])->setDefault(['use_trait', 'constant_public', 'constant_protected', 'constant_private', 'property_public', 'property_protected', 'property_private', 'construct', 'destruct', 'magic', 'phpunit', 'method_public', 'method_protected', 'method_private'])->getOption(), (new \PhpCsFixer\FixerConfiguration\AliasedFixerOptionBuilder(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('sort_algorithm', 'How multiple occurrences of same type statements should be sorted'), 'sortAlgorithm'))->setAllowedValues($this->supportedSortAlgorithms)->setDefault(self::SORT_NONE)->getOption()], $this->getName());
+        return new FixerConfigurationResolverRootless('order', [(new FixerOptionBuilder('order', 'List of strings defining order of elements.'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset(\array_keys(\array_merge(self::$typeHierarchy, self::$specialTypes)))])->setDefault(['use_trait', 'constant_public', 'constant_protected', 'constant_private', 'property_public', 'property_protected', 'property_private', 'construct', 'destruct', 'magic', 'phpunit', 'method_public', 'method_protected', 'method_private'])->getOption(), (new AliasedFixerOptionBuilder(new FixerOptionBuilder('sort_algorithm', 'How multiple occurrences of same type statements should be sorted'), 'sortAlgorithm'))->setAllowedValues($this->supportedSortAlgorithms)->setDefault(self::SORT_NONE)->getOption()], $this->getName());
     }
     /**
      * @param int $startIndex
      *
      * @return array[]
      */
-    private function getElements(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex)
+    private function getElements(Tokens $tokens, $startIndex)
     {
-        static $elementTokenKinds = [\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, \T_CONST, \T_VARIABLE, \T_FUNCTION];
+        static $elementTokenKinds = [CT::T_USE_TRAIT, \T_CONST, \T_VARIABLE, \T_FUNCTION];
         ++$startIndex;
         $elements = [];
         while (\true) {
@@ -239,10 +239,10 @@ class Example
      *
      * @return array|string type or array of type and name
      */
-    private function detectElementType(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function detectElementType(Tokens $tokens, $index)
     {
         $token = $tokens[$index];
-        if ($token->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT)) {
+        if ($token->isGivenKind(CT::T_USE_TRAIT)) {
             return 'use_trait';
         }
         if ($token->isGivenKind(\T_CONST)) {
@@ -271,11 +271,11 @@ class Example
      *
      * @return int
      */
-    private function findElementEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function findElementEnd(Tokens $tokens, $index)
     {
         $index = $tokens->getNextTokenOfKind($index, ['{', ';']);
         if ($tokens[$index]->equals('{')) {
-            $index = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
+            $index = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
         }
         for (++$index; $tokens[$index]->isWhitespace(" \t") || $tokens[$index]->isComment(); ++$index) {
         }
@@ -335,7 +335,7 @@ class Example
      * @param int     $endIndex
      * @param array[] $elements
      */
-    private function sortTokens(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex, array $elements)
+    private function sortTokens(Tokens $tokens, $startIndex, $endIndex, array $elements)
     {
         $replaceTokens = [];
         foreach ($elements as $element) {

@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class GotoLabelTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class GotoLabelTest extends AbstractMethodUnitTest
 {
     /**
      * Verify that the label in a goto statement is tokenized as T_STRING.

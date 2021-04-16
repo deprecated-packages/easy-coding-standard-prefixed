@@ -9,7 +9,7 @@ use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use ReflectionClass;
 use SplFileInfo;
-abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerInterface
+abstract class AbstractSymplifyFixer implements DefinedFixerInterface
 {
     public function getPriority() : int
     {
@@ -23,7 +23,7 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
     {
         return \false;
     }
-    public function supports(\SplFileInfo $file) : bool
+    public function supports(SplFileInfo $file) : bool
     {
         return \true;
     }
@@ -31,7 +31,7 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
      * @return Token[]
      * @param Tokens<Token> $tokens
      */
-    protected function reverseTokens(\PhpCsFixer\Tokenizer\Tokens $tokens) : array
+    protected function reverseTokens(Tokens $tokens) : array
     {
         return \array_reverse($tokens->toArray(), \true);
     }
@@ -40,10 +40,10 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
      */
     protected function getPriorityBefore(string $fixerClass) : int
     {
-        if (!\is_a($fixerClass, \PhpCsFixer\Fixer\FixerInterface::class, \true)) {
+        if (!\is_a($fixerClass, FixerInterface::class, \true)) {
             return 0;
         }
-        $reflectionClass = new \ReflectionClass($fixerClass);
+        $reflectionClass = new ReflectionClass($fixerClass);
         /** @var FixerInterface $fixer */
         $fixer = $reflectionClass->newInstanceWithoutConstructor();
         return $fixer->getPriority() + 5;
@@ -51,7 +51,7 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
     /**
      * @param Tokens<Token> $tokens
      */
-    protected function getNextMeaningfulToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : ?\PhpCsFixer\Tokenizer\Token
+    protected function getNextMeaningfulToken(Tokens $tokens, int $index) : ?Token
     {
         $nextMeaninfulTokenPosition = $tokens->getNextMeaningfulToken($index);
         if ($nextMeaninfulTokenPosition === null) {
@@ -62,7 +62,7 @@ abstract class AbstractSymplifyFixer implements \PhpCsFixer\Fixer\DefinedFixerIn
     /**
      * @param Tokens<Token> $tokens
      */
-    protected function getPreviousToken(\PhpCsFixer\Tokenizer\Tokens $tokens, int $index) : ?\PhpCsFixer\Tokenizer\Token
+    protected function getPreviousToken(Tokens $tokens, int $index) : ?Token
     {
         $previousIndex = $index - 1;
         if (!isset($tokens[$previousIndex])) {

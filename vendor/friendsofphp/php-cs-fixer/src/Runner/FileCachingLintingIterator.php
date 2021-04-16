@@ -32,7 +32,7 @@ final class FileCachingLintingIterator extends \CachingIterator
      * @var LintingResultInterface
      */
     private $nextResult;
-    public function __construct(\Iterator $iterator, \PhpCsFixer\Linter\LinterInterface $linter)
+    public function __construct(\Iterator $iterator, LinterInterface $linter)
     {
         parent::__construct($iterator);
         $this->linter = $linter;

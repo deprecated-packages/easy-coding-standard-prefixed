@@ -17,7 +17,7 @@ use PhpCsFixer\Tests\Test\AbstractIntegrationTestCase as BaseAbstractIntegration
  *
  * @deprecated since v2.4
  */
-abstract class AbstractIntegrationTestCase extends \PhpCsFixer\Tests\Test\AbstractIntegrationTestCase
+abstract class AbstractIntegrationTestCase extends BaseAbstractIntegrationTestCase
 {
     public function __construct($name = null, array $data = [], $dataName = '')
     {

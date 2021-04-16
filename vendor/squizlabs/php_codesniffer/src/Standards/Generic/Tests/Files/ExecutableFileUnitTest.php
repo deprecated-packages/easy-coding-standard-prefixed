@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ExecutableFileUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ExecutableFileUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Should this test be skipped for some reason.

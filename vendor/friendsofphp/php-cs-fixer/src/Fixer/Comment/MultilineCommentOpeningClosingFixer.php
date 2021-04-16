@@ -20,17 +20,17 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class MultilineCommentOpeningClosingFixer extends \PhpCsFixer\AbstractFixer
+final class MultilineCommentOpeningClosingFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('DocBlocks must start with two asterisks, multiline comments must start with a single asterisk, after the opening slash. Both must end with a single asterisk before the closing slash.', [new \PhpCsFixer\FixerDefinition\CodeSample(<<<'EOT'
+        return new FixerDefinition('DocBlocks must start with two asterisks, multiline comments must start with a single asterisk, after the opening slash. Both must end with a single asterisk before the closing slash.', [new CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 /******
  * Multiline comment with arbitrary asterisks count
@@ -48,14 +48,14 @@ EOT
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_COMMENT, \T_DOC_COMMENT]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             $originalContent = $token->getContent();
@@ -65,12 +65,12 @@ EOT
             $newContent = $originalContent;
             // Fix opening
             if ($token->isGivenKind(\T_COMMENT)) {
-                $newContent = \PhpCsFixer\Preg::replace('/^\\/\\*{2,}(?!\\/)/', '/*', $newContent);
+                $newContent = Preg::replace('/^\\/\\*{2,}(?!\\/)/', '/*', $newContent);
             }
             // Fix closing
-            $newContent = \PhpCsFixer\Preg::replace('/(?<!\\/)\\*{2,}\\/$/', '*/', $newContent);
+            $newContent = Preg::replace('/(?<!\\/)\\*{2,}\\/$/', '*/', $newContent);
             if ($newContent !== $originalContent) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), $newContent]);
+                $tokens[$index] = new Token([$token->getId(), $newContent]);
             }
         }
     }

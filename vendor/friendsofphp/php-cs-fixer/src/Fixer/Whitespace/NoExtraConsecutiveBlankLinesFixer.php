@@ -21,7 +21,7 @@ use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
  *
  * @deprecated in 2.10, proxy to NoExtraBlankLinesFixer
  */
-final class NoExtraConsecutiveBlankLinesFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface, \PhpCsFixer\Fixer\DeprecatedFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class NoExtraConsecutiveBlankLinesFixer extends AbstractProxyFixer implements ConfigurationDefinitionFixerInterface, DeprecatedFixerInterface, WhitespacesAwareFixerInterface
 {
     private $fixer;
     /**

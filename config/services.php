@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Terminal;
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Terminal;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\Bootstrap\NoCheckersLoaderReporter;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyleFactory;
@@ -17,8 +17,8 @@ use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileSystem;
-use function _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\service;
-return static function (\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+use function _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+return static function (ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(__DIR__ . '/services/services_cache.php');
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
@@ -31,15 +31,15 @@ return static function (\_PhpScopercc9aec205203\Symfony\Component\DependencyInje
         __DIR__ . '/../src/Exception',
         __DIR__ . '/../src/ValueObject',
     ]);
-    $services->set(\_PhpScopercc9aec205203\Symfony\Component\Console\Terminal::class);
-    $services->set(\Symplify\SmartFileSystem\FileSystemGuard::class);
-    $services->set(\Symplify\SmartFileSystem\Finder\FinderSanitizer::class);
-    $services->set(\Symplify\SmartFileSystem\SmartFileSystem::class);
-    $services->set(\Symplify\SmartFileSystem\Finder\SmartFinder::class);
-    $services->set(\Symplify\SmartFileSystem\FileSystemFilter::class);
-    $services->set(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class);
-    $services->set(\_PhpScopercc9aec205203\Symfony\Component\Console\Style\SymfonyStyle::class)->factory([\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory::class), 'create']);
-    $services->set(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle::class)->factory([\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyleFactory::class), 'create']);
-    $services->set(\PhpCsFixer\WhitespacesFixerConfig::class)->factory([\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\service(\Symplify\EasyCodingStandard\FixerRunner\WhitespacesFixerConfigFactory::class), 'create']);
-    $services->set(\Symplify\EasyCodingStandard\Bootstrap\NoCheckersLoaderReporter::class);
+    $services->set(Terminal::class);
+    $services->set(FileSystemGuard::class);
+    $services->set(FinderSanitizer::class);
+    $services->set(SmartFileSystem::class);
+    $services->set(SmartFinder::class);
+    $services->set(FileSystemFilter::class);
+    $services->set(SymfonyStyleFactory::class);
+    $services->set(SymfonyStyle::class)->factory([service(SymfonyStyleFactory::class), 'create']);
+    $services->set(EasyCodingStandardStyle::class)->factory([service(EasyCodingStandardStyleFactory::class), 'create']);
+    $services->set(WhitespacesFixerConfig::class)->factory([service(WhitespacesFixerConfigFactory::class), 'create']);
+    $services->set(NoCheckersLoaderReporter::class);
 };

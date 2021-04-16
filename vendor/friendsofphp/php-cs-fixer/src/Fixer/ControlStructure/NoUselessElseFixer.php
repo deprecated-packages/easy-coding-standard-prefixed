@@ -18,12 +18,12 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
+final class NoUselessElseFixer extends AbstractNoUselessElseFixer
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_ELSE);
     }
@@ -32,7 +32,7 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('There should not be useless `else` cases.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nif (\$a) {\n    return 1;\n} else {\n    return 2;\n}\n")]);
+        return new FixerDefinition('There should not be useless `else` cases.', [new CodeSample("<?php\nif (\$a) {\n    return 1;\n} else {\n    return 2;\n}\n")]);
     }
     /**
      * {@inheritdoc}
@@ -47,7 +47,7 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_ELSE)) {
@@ -73,11 +73,11 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
      *
      * @param int $index T_ELSE index
      */
-    private function fixEmptyElse(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function fixEmptyElse(Tokens $tokens, $index)
     {
         $next = $tokens->getNextMeaningfulToken($index);
         if ($tokens[$next]->equals('{')) {
-            $close = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $next);
+            $close = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $next);
             if (1 === $close - $next) {
                 // '{}'
                 $this->clearElse($tokens, $index);
@@ -96,7 +96,7 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
     /**
      * @param int $index index of T_ELSE
      */
-    private function clearElse(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function clearElse(Tokens $tokens, $index)
     {
         $tokens->clearTokenAndMergeSurroundingWhitespace($index);
         // clear T_ELSE and the '{' '}' if there are any
@@ -104,7 +104,7 @@ final class NoUselessElseFixer extends \PhpCsFixer\AbstractNoUselessElseFixer
         if (!$tokens[$next]->equals('{')) {
             return;
         }
-        $tokens->clearTokenAndMergeSurroundingWhitespace($tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $next));
+        $tokens->clearTokenAndMergeSurroundingWhitespace($tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $next));
         $tokens->clearTokenAndMergeSurroundingWhitespace($next);
     }
 }

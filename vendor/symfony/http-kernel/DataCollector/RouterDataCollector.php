@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScopereb9508917a55\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\RedirectResponse;
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request;
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Response;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\RedirectResponse;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Request;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Response;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Event\ControllerEvent;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class RouterDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class RouterDataCollector extends \_PhpScopereb9508917a55\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
     /**
      * @var \SplObjectStorage
@@ -32,9 +32,9 @@ class RouterDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\Http
      *
      * @final
      */
-    public function collect(\_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request $request, \_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception = null)
+    public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
-        if ($response instanceof \_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\RedirectResponse) {
+        if ($response instanceof RedirectResponse) {
             $this->data['redirect'] = \true;
             $this->data['url'] = $response->getTargetUrl();
             if ($this->controllers->contains($request)) {
@@ -48,14 +48,14 @@ class RouterDataCollector extends \_PhpScopercc9aec205203\Symfony\Component\Http
         $this->controllers = new \SplObjectStorage();
         $this->data = ['redirect' => \false, 'url' => null, 'route' => null];
     }
-    protected function guessRoute(\_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request $request, $controller)
+    protected function guessRoute(Request $request, $controller)
     {
         return 'n/a';
     }
     /**
      * Remembers the controller associated to each request.
      */
-    public function onKernelController(\_PhpScopercc9aec205203\Symfony\Component\HttpKernel\Event\ControllerEvent $event)
+    public function onKernelController(ControllerEvent $event)
     {
         $this->controllers[$event->getRequest()] = $event->getController();
     }

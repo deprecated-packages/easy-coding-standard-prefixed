@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\MySource\Tests\Channels;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class DisallowSelfActionsUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class DisallowSelfActionsUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

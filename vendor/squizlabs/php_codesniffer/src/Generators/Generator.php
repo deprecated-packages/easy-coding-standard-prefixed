@@ -35,11 +35,11 @@ abstract class Generator
      *
      * @see generate()
      */
-    public function __construct(\PHP_CodeSniffer\Ruleset $ruleset)
+    public function __construct(Ruleset $ruleset)
     {
         $this->ruleset = $ruleset;
         foreach ($ruleset->sniffs as $className => $sniffClass) {
-            $file = \PHP_CodeSniffer\Autoload::getLoadedFileName($className);
+            $file = Autoload::getLoadedFileName($className);
             $docFile = \str_replace(\DIRECTORY_SEPARATOR . 'Sniffs' . \DIRECTORY_SEPARATOR, \DIRECTORY_SEPARATOR . 'Docs' . \DIRECTORY_SEPARATOR, $file);
             $docFile = \str_replace('Sniff.php', 'Standard.xml', $docFile);
             if (\is_file($docFile) === \true) {

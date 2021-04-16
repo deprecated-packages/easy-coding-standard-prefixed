@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Keywords;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ShortFormTypeKeywordsUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ShortFormTypeKeywordsUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

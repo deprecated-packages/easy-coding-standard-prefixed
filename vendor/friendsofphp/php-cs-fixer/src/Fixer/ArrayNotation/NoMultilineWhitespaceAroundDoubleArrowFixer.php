@@ -21,14 +21,14 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author Graham Campbell <graham@alt-three.com>
  */
-final class NoMultilineWhitespaceAroundDoubleArrowFixer extends \PhpCsFixer\AbstractFixer
+final class NoMultilineWhitespaceAroundDoubleArrowFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Operator `=>` should not be surrounded by multi-line whitespaces.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = array(1\n\n=> 2);\n")]);
+        return new FixerDefinition('Operator `=>` should not be surrounded by multi-line whitespaces.', [new CodeSample("<?php\n\$a = array(1\n\n=> 2);\n")]);
     }
     /**
      * {@inheritdoc}
@@ -42,14 +42,14 @@ final class NoMultilineWhitespaceAroundDoubleArrowFixer extends \PhpCsFixer\Abst
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOUBLE_ARROW);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOUBLE_ARROW)) {
@@ -65,11 +65,11 @@ final class NoMultilineWhitespaceAroundDoubleArrowFixer extends \PhpCsFixer\Abst
     /**
      * @param int $index
      */
-    private function fixWhitespace(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function fixWhitespace(Tokens $tokens, $index)
     {
         $token = $tokens[$index];
         if ($token->isWhitespace() && !$token->isWhitespace(" \t")) {
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, \rtrim($token->getContent()) . ' ']);
+            $tokens[$index] = new Token([\T_WHITESPACE, \rtrim($token->getContent()) . ' ']);
         }
     }
 }

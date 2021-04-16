@@ -44,7 +44,7 @@ class Differ
      *
      * @return string
      */
-    public function diff($from, $to, \PhpCsFixer\Diff\v1_4\LCS\LongestCommonSubsequence $lcs = null)
+    public function diff($from, $to, LongestCommonSubsequence $lcs = null)
     {
         $from = $this->validateDiffInput($from);
         $to = $this->validateDiffInput($to);
@@ -179,7 +179,7 @@ class Differ
      *
      * @return array
      */
-    public function diffToArray($from, $to, \PhpCsFixer\Diff\v1_4\LCS\LongestCommonSubsequence $lcs = null)
+    public function diffToArray($from, $to, LongestCommonSubsequence $lcs = null)
     {
         if (\is_string($from)) {
             $fromMatches = $this->getNewLineMatches($from);
@@ -270,9 +270,9 @@ class Differ
         // will typically allocate a bit more memory than this.
         $memoryLimit = 100 * 1024 * 1024;
         if ($this->calculateEstimatedFootprint($from, $to) > $memoryLimit) {
-            return new \PhpCsFixer\Diff\v1_4\LCS\MemoryEfficientImplementation();
+            return new MemoryEfficientImplementation();
         }
-        return new \PhpCsFixer\Diff\v1_4\LCS\TimeEfficientImplementation();
+        return new TimeEfficientImplementation();
     }
     /**
      * Calculates the estimated memory footprint for the DP-based method.

@@ -12,14 +12,14 @@ final class IndentDetector
      * @var WhitespacesFixerConfig
      */
     private $whitespacesFixerConfig;
-    public function __construct(\PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig)
+    public function __construct(WhitespacesFixerConfig $whitespacesFixerConfig)
     {
         $this->whitespacesFixerConfig = $whitespacesFixerConfig;
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    public function detectOnPosition(\PhpCsFixer\Tokenizer\Tokens $tokens, int $startIndex) : int
+    public function detectOnPosition(Tokens $tokens, int $startIndex) : int
     {
         $indent = $this->whitespacesFixerConfig->getIndent();
         for ($i = $startIndex; $i > 0; --$i) {

@@ -18,14 +18,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  * @author Graham Campbell <graham@alt-three.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpdocNoPackageFixer extends \PhpCsFixer\AbstractProxyFixer
+final class PhpdocNoPackageFixer extends AbstractProxyFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('`@package` and `@subpackage` annotations should be omitted from PHPDoc.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('`@package` and `@subpackage` annotations should be omitted from PHPDoc.', [new CodeSample('<?php
 /**
  * @internal
  * @package Foo

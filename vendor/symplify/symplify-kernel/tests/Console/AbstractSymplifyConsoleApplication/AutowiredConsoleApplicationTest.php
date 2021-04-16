@@ -3,18 +3,18 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Tests\Console\AbstractSymplifyConsoleApplication;
 
-use _PhpScopercc9aec205203\Symfony\Component\Console\Application;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Application;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SymplifyKernel\Tests\HttpKernel\OnlyForTestsKernel;
-final class AutowiredConsoleApplicationTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
+final class AutowiredConsoleApplicationTest extends AbstractKernelTestCase
 {
     protected function setUp() : void
     {
-        $this->bootKernel(\Symplify\SymplifyKernel\Tests\HttpKernel\OnlyForTestsKernel::class);
+        $this->bootKernel(OnlyForTestsKernel::class);
     }
     public function test() : void
     {
-        $application = $this->getService(\_PhpScopercc9aec205203\Symfony\Component\Console\Application::class);
-        $this->assertInstanceOf(\_PhpScopercc9aec205203\Symfony\Component\Console\Application::class, $application);
+        $application = $this->getService(Application::class);
+        $this->assertInstanceOf(Application::class, $application);
     }
 }

@@ -25,7 +25,7 @@ final class ChainMethodCallAnalyzer
      *
      * @param Tokens<Token> $tokens
      */
-    public function isPreceededByFuncCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
+    public function isPreceededByFuncCall(Tokens $tokens, int $position) : bool
     {
         for ($i = $position; $i >= 0; --$i) {
             /** @var Token $currentToken */
@@ -47,7 +47,7 @@ final class ChainMethodCallAnalyzer
      *
      * @param Tokens<Token> $tokens
      */
-    public function isPartOfMethodCallOrArray(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
+    public function isPartOfMethodCallOrArray(Tokens $tokens, int $position) : bool
     {
         $this->bracketNesting = 0;
         for ($i = $position; $i >= 0; --$i) {
@@ -66,9 +66,9 @@ final class ChainMethodCallAnalyzer
         }
         return \false;
     }
-    private function isBreakingChar(\PhpCsFixer\Tokenizer\Token $currentToken) : bool
+    private function isBreakingChar(Token $currentToken) : bool
     {
-        if ($currentToken->isGivenKind([\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN, \T_ARRAY, \T_DOUBLE_COLON])) {
+        if ($currentToken->isGivenKind([CT::T_ARRAY_SQUARE_BRACE_OPEN, \T_ARRAY, \T_DOUBLE_COLON])) {
             return \true;
         }
         if ($currentToken->getContent() === '[') {
@@ -76,7 +76,7 @@ final class ChainMethodCallAnalyzer
         }
         return $currentToken->getContent() === '.';
     }
-    private function shouldBreakOnBracket(\PhpCsFixer\Tokenizer\Token $token) : bool
+    private function shouldBreakOnBracket(Token $token) : bool
     {
         if ($token->getContent() === ')') {
             --$this->bracketNesting;

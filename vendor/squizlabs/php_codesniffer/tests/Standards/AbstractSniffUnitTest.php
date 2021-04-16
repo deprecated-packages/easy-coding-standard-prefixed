@@ -18,8 +18,8 @@ use PHP_CodeSniffer\Exceptions\RuntimeException;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Util\Common;
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestCase;
-abstract class AbstractSniffUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestCase;
+abstract class AbstractSniffUnitTest extends TestCase
 {
     /**
      * Enable or disable the backup and restoration of the $GLOBALS array.
@@ -103,7 +103,7 @@ abstract class AbstractSniffUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Fra
         if ($this->shouldSkipTest() === \true) {
             $this->markTestSkipped();
         }
-        $sniffCode = \PHP_CodeSniffer\Util\Common::getSniffCode(\get_class($this));
+        $sniffCode = Common::getSniffCode(\get_class($this));
         list($standardName, $categoryName, $sniffName) = \explode('.', $sniffCode);
         $testFileBase = $this->testsDir . $categoryName . \DIRECTORY_SEPARATOR . $sniffName . 'UnitTest.';
         // Get a list of all test files to check.
@@ -112,7 +112,7 @@ abstract class AbstractSniffUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Fra
         if (isset($GLOBALS['PHP_CODESNIFFER_CONFIG']) === \true) {
             $config = $GLOBALS['PHP_CODESNIFFER_CONFIG'];
         } else {
-            $config = new \PHP_CodeSniffer\Config();
+            $config = new Config();
             $config->cache = \false;
             $GLOBALS['PHP_CODESNIFFER_CONFIG'] = $config;
         }
@@ -123,14 +123,14 @@ abstract class AbstractSniffUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Fra
             $GLOBALS['PHP_CODESNIFFER_RULESETS'] = [];
         }
         if (isset($GLOBALS['PHP_CODESNIFFER_RULESETS'][$standardName]) === \false) {
-            $ruleset = new \PHP_CodeSniffer\Ruleset($config);
+            $ruleset = new Ruleset($config);
             $GLOBALS['PHP_CODESNIFFER_RULESETS'][$standardName] = $ruleset;
         }
         $ruleset = $GLOBALS['PHP_CODESNIFFER_RULESETS'][$standardName];
         $sniffFile = $this->standardsDir . \DIRECTORY_SEPARATOR . 'Sniffs' . \DIRECTORY_SEPARATOR . $categoryName . \DIRECTORY_SEPARATOR . $sniffName . 'Sniff.php';
         $sniffClassName = \substr(\get_class($this), 0, -8) . 'Sniff';
         $sniffClassName = \str_replace('\\Tests\\', '\\Sniffs\\', $sniffClassName);
-        $sniffClassName = \PHP_CodeSniffer\Util\Common::cleanSniffClass($sniffClassName);
+        $sniffClassName = Common::cleanSniffClass($sniffClassName);
         $restrictions = [\strtolower($sniffClassName) => \true];
         $ruleset->registerSniffs([$sniffFile], $restrictions, []);
         $ruleset->populateTokenListeners();
@@ -140,9 +140,9 @@ abstract class AbstractSniffUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Fra
             $oldConfig = $config->getSettings();
             try {
                 $this->setCliValues($filename, $config);
-                $phpcsFile = new \PHP_CodeSniffer\Files\LocalFile($testFile, $ruleset, $config);
+                $phpcsFile = new LocalFile($testFile, $ruleset, $config);
                 $phpcsFile->process();
-            } catch (\PHP_CodeSniffer\Exceptions\RuntimeException $e) {
+            } catch (RuntimeException $e) {
                 $this->fail('An unexpected exception has been caught: ' . $e->getMessage());
             }
             $failures = $this->generateFailureMessages($phpcsFile);
@@ -182,7 +182,7 @@ abstract class AbstractSniffUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Fra
      * @return array
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException
      */
-    public function generateFailureMessages(\PHP_CodeSniffer\Files\LocalFile $file)
+    public function generateFailureMessages(LocalFile $file)
     {
         $testFile = $file->getFilename();
         $foundErrors = $file->getErrors();
@@ -190,10 +190,10 @@ abstract class AbstractSniffUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Fra
         $expectedErrors = $this->getErrorList(\basename($testFile));
         $expectedWarnings = $this->getWarningList(\basename($testFile));
         if (\is_array($expectedErrors) === \false) {
-            throw new \PHP_CodeSniffer\Exceptions\RuntimeException('getErrorList() must return an array');
+            throw new RuntimeException('getErrorList() must return an array');
         }
         if (\is_array($expectedWarnings) === \false) {
-            throw new \PHP_CodeSniffer\Exceptions\RuntimeException('getWarningList() must return an array');
+            throw new RuntimeException('getWarningList() must return an array');
         }
         /*
             We merge errors and warnings together to make it easier

@@ -11,7 +11,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class DefaultKeywordTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class DefaultKeywordTest extends AbstractMethodUnitTest
 {
     /**
      * Test the retokenization of the `default` keyword for match structure to `T_MATCH_DEFAULT`.

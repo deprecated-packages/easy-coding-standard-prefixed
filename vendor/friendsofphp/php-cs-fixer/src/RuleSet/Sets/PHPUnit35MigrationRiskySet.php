@@ -15,7 +15,7 @@ use PhpCsFixer\RuleSet\AbstractRuleSetDescription;
 /**
  * @internal
  */
-final class PHPUnit35MigrationRiskySet extends \PhpCsFixer\RuleSet\AbstractRuleSetDescription
+final class PHPUnit35MigrationRiskySet extends AbstractRuleSetDescription
 {
     public function getRules()
     {

@@ -21,19 +21,19 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @author SpacePossum
  */
-final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
+final class StaticLambdaFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Lambdas not (indirect) referencing `$this` must be declared `static`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = function () use (\$b)\n{   echo \$b;\n};\n")], null, 'Risky when using `->bindTo` on lambdas without referencing to `$this`.');
+        return new FixerDefinition('Lambdas not (indirect) referencing `$this` must be declared `static`.', [new CodeSample("<?php\n\$a = function () use (\$b)\n{   echo \$b;\n};\n")], null, 'Risky when using `->bindTo` on lambdas without referencing to `$this`.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
             return \true;
@@ -50,9 +50,9 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $analyzer = new TokensAnalyzer($tokens);
         $expectedFunctionKinds = [\T_FUNCTION];
         if (\PHP_VERSION_ID >= 70400) {
             $expectedFunctionKinds[] = \T_FN;
@@ -67,11 +67,11 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
                 // lambda is already 'static'
             }
             $argumentsStartIndex = $tokens->getNextTokenOfKind($index, ['(']);
-            $argumentsEndIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStartIndex);
+            $argumentsEndIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStartIndex);
             // figure out where the lambda starts and ends
             if ($tokens[$index]->isGivenKind(\T_FUNCTION)) {
                 $lambdaOpenIndex = $tokens->getNextTokenOfKind($argumentsEndIndex, ['{']);
-                $lambdaEndIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $lambdaOpenIndex);
+                $lambdaEndIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $lambdaOpenIndex);
             } else {
                 // T_FN
                 $lambdaOpenIndex = $tokens->getNextTokenOfKind($argumentsEndIndex, [[\T_DOUBLE_ARROW]]);
@@ -81,7 +81,7 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
                 continue;
             }
             // make the lambda static
-            $tokens->insertAt($index, [new \PhpCsFixer\Tokenizer\Token([\T_STATIC, 'static']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])]);
+            $tokens->insertAt($index, [new Token([\T_STATIC, 'static']), new Token([\T_WHITESPACE, ' '])]);
             $index -= 4;
             // fixed after a lambda, closes candidate is at least 4 tokens before that
         }
@@ -91,7 +91,7 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return int
      */
-    private function findExpressionEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function findExpressionEnd(Tokens $tokens, $index)
     {
         $nextIndex = $tokens->getNextMeaningfulToken($index);
         while (null !== $nextIndex) {
@@ -101,7 +101,7 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
                 break;
             }
             /** @var null|array{isStart: bool, type: int} $blockType */
-            $blockType = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($nextToken);
+            $blockType = Tokens::detectBlockType($nextToken);
             if (null !== $blockType && $blockType['isStart']) {
                 $nextIndex = $tokens->findBlockEnd($blockType['type'], $nextIndex);
             }
@@ -118,7 +118,7 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return bool
      */
-    private function hasPossibleReferenceToThis(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
+    private function hasPossibleReferenceToThis(Tokens $tokens, $startIndex, $endIndex)
     {
         for ($i = $startIndex; $i < $endIndex; ++$i) {
             if ($tokens[$i]->isGivenKind(\T_VARIABLE) && '$this' === \strtolower($tokens[$i]->getContent())) {
@@ -134,7 +134,7 @@ final class StaticLambdaFixer extends \PhpCsFixer\AbstractFixer
                 // "
                 \T_REQUIRE_ONCE,
                 // "
-                \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_OPEN,
+                CT::T_DYNAMIC_VAR_BRACE_OPEN,
                 // "$h = ${$g};" case
                 \T_EVAL,
             ])) {

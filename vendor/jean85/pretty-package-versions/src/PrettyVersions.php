@@ -1,33 +1,33 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercc9aec205203\Jean85;
+namespace _PhpScopereb9508917a55\Jean85;
 
 use Composer\InstalledVersions;
-use _PhpScopercc9aec205203\Jean85\Exception\ProvidedPackageException;
-use _PhpScopercc9aec205203\Jean85\Exception\ReplacedPackageException;
-use _PhpScopercc9aec205203\Jean85\Exception\VersionMissingExceptionInterface;
+use _PhpScopereb9508917a55\Jean85\Exception\ProvidedPackageException;
+use _PhpScopereb9508917a55\Jean85\Exception\ReplacedPackageException;
+use _PhpScopereb9508917a55\Jean85\Exception\VersionMissingExceptionInterface;
 class PrettyVersions
 {
     /**
      * @throws VersionMissingExceptionInterface When a package is provided ({@see ProvidedPackageException}) or replaced ({@see ReplacedPackageException})
      */
-    public static function getVersion(string $packageName) : \_PhpScopercc9aec205203\Jean85\Version
+    public static function getVersion(string $packageName) : \_PhpScopereb9508917a55\Jean85\Version
     {
-        if (isset(\Composer\InstalledVersions::getRawData()['versions'][$packageName]['provided'])) {
-            throw \_PhpScopercc9aec205203\Jean85\Exception\ProvidedPackageException::create($packageName);
+        if (isset(InstalledVersions::getRawData()['versions'][$packageName]['provided'])) {
+            throw ProvidedPackageException::create($packageName);
         }
-        if (isset(\Composer\InstalledVersions::getRawData()['versions'][$packageName]['replaced'])) {
-            throw \_PhpScopercc9aec205203\Jean85\Exception\ReplacedPackageException::create($packageName);
+        if (isset(InstalledVersions::getRawData()['versions'][$packageName]['replaced'])) {
+            throw ReplacedPackageException::create($packageName);
         }
-        return new \_PhpScopercc9aec205203\Jean85\Version($packageName, \Composer\InstalledVersions::getPrettyVersion($packageName), \Composer\InstalledVersions::getReference($packageName));
+        return new \_PhpScopereb9508917a55\Jean85\Version($packageName, InstalledVersions::getPrettyVersion($packageName), InstalledVersions::getReference($packageName));
     }
     public static function getRootPackageName() : string
     {
-        return \Composer\InstalledVersions::getRootPackage()['name'];
+        return InstalledVersions::getRootPackage()['name'];
     }
-    public static function getRootPackageVersion() : \_PhpScopercc9aec205203\Jean85\Version
+    public static function getRootPackageVersion() : \_PhpScopereb9508917a55\Jean85\Version
     {
-        return new \_PhpScopercc9aec205203\Jean85\Version(self::getRootPackageName(), \Composer\InstalledVersions::getRootPackage()['pretty_version'], \Composer\InstalledVersions::getRootPackage()['reference']);
+        return new \_PhpScopereb9508917a55\Jean85\Version(self::getRootPackageName(), InstalledVersions::getRootPackage()['pretty_version'], InstalledVersions::getRootPackage()['reference']);
     }
 }

@@ -27,7 +27,7 @@ class Summary implements \PHP_CodeSniffer\Reports\Report
      *
      * @return bool
      */
-    public function generateFileReport($report, \PHP_CodeSniffer\Files\File $phpcsFile, $showSources = \false, $width = 80)
+    public function generateFileReport($report, File $phpcsFile, $showSources = \false, $width = 80)
     {
         if (PHP_CODESNIFFER_VERBOSITY === 0 && $report['errors'] === 0 && $report['warnings'] === 0) {
             // Nothing to print.
@@ -132,7 +132,7 @@ class Summary implements \PHP_CodeSniffer\Reports\Report
         }
         echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL . \PHP_EOL;
         if ($toScreen === \true && $interactive === \false) {
-            \PHP_CodeSniffer\Util\Timing::printRunTime();
+            Util\Timing::printRunTime();
         }
     }
     //end generate()

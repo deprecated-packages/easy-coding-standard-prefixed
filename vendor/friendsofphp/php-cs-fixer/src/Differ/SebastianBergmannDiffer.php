@@ -23,7 +23,7 @@ final class SebastianBergmannDiffer implements \PhpCsFixer\Differ\DifferInterfac
     private $differ;
     public function __construct()
     {
-        $this->differ = new \PhpCsFixer\Diff\v1_4\Differ();
+        $this->differ = new Differ();
     }
     /**
      * {@inheritdoc}

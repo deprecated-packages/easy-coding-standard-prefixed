@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScopereb9508917a55\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScopercc9aec205203\Psr\Log\LoggerInterface;
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Log\Logger;
+use _PhpScopereb9508917a55\Psr\Log\LoggerInterface;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Log\Logger;
 /**
  * Registers the default logger if necessary.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class LoggerPass implements \_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class LoggerPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function process(\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerBuilder $container)
+    public function process(ContainerBuilder $container)
     {
-        $container->setAlias(\_PhpScopercc9aec205203\Psr\Log\LoggerInterface::class, 'logger')->setPublic(\false);
+        $container->setAlias(LoggerInterface::class, 'logger')->setPublic(\false);
         if ($container->has('logger')) {
             return;
         }
-        $container->register('logger', \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\Log\Logger::class)->setPublic(\false);
+        $container->register('logger', Logger::class)->setPublic(\false);
     }
 }

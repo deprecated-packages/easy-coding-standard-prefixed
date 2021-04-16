@@ -20,14 +20,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class NativeFunctionCasingFixer extends \PhpCsFixer\AbstractFixer
+final class NativeFunctionCasingFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Function defined by PHP should be called using the correct casing.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nSTRLEN(\$str);\n")]);
+        return new FixerDefinition('Function defined by PHP should be called using the correct casing.', [new CodeSample("<?php\nSTRLEN(\$str);\n")]);
     }
     /**
      * {@inheritdoc}
@@ -41,14 +41,14 @@ final class NativeFunctionCasingFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         static $nativeFunctionNames = null;
         if (null === $nativeFunctionNames) {
@@ -65,7 +65,7 @@ final class NativeFunctionCasingFixer extends \PhpCsFixer\AbstractFixer
                 continue;
             }
             $functionNamePrefix = $tokens->getPrevMeaningfulToken($index);
-            if ($tokens[$functionNamePrefix]->isGivenKind([\T_DOUBLE_COLON, \T_NEW, \T_OBJECT_OPERATOR, \T_FUNCTION, \PhpCsFixer\Tokenizer\CT::T_RETURN_REF])) {
+            if ($tokens[$functionNamePrefix]->isGivenKind([\T_DOUBLE_COLON, \T_NEW, \T_OBJECT_OPERATOR, \T_FUNCTION, CT::T_RETURN_REF])) {
                 continue;
             }
             if ($tokens[$functionNamePrefix]->isGivenKind(\T_NS_SEPARATOR)) {
@@ -80,7 +80,7 @@ final class NativeFunctionCasingFixer extends \PhpCsFixer\AbstractFixer
             if (!\array_key_exists($lower, $nativeFunctionNames)) {
                 continue;
             }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $nativeFunctionNames[$lower]]);
+            $tokens[$index] = new Token([\T_STRING, $nativeFunctionNames[$lower]]);
             $index = $next;
         }
     }

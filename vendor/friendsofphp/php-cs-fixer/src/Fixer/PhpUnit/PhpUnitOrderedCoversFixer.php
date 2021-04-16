@@ -23,14 +23,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class PhpUnitOrderedCoversFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
+final class PhpUnitOrderedCoversFixer extends AbstractProxyFixer implements DeprecatedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Order `@covers` annotation of PHPUnit tests.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Order `@covers` annotation of PHPUnit tests.', [new CodeSample('<?php
 /**
  * @covers Foo
  * @covers Bar
@@ -45,7 +45,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     }
     protected function createProxyFixers()
     {
-        $fixer = new \PhpCsFixer\Fixer\Phpdoc\PhpdocOrderByValueFixer();
+        $fixer = new PhpdocOrderByValueFixer();
         $fixer->configure(['annotations' => ['covers']]);
         return [$fixer];
     }

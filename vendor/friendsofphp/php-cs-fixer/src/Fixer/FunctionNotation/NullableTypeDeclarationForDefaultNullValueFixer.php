@@ -26,19 +26,19 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author HypeMC
  */
-final class NullableTypeDeclarationForDefaultNullValueFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class NullableTypeDeclarationForDefaultNullValueFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Adds or removes `?` before type declarations for parameters with a default `null` value.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample("<?php\nfunction sample(string \$str = null)\n{}\n", new \PhpCsFixer\FixerDefinition\VersionSpecification(70100)), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample("<?php\nfunction sample(?string \$str = null)\n{}\n", new \PhpCsFixer\FixerDefinition\VersionSpecification(70100), ['use_nullable_type_declaration' => \false])], 'Rule is applied only in a PHP 7.1+ environment.');
+        return new FixerDefinition('Adds or removes `?` before type declarations for parameters with a default `null` value.', [new VersionSpecificCodeSample("<?php\nfunction sample(string \$str = null)\n{}\n", new VersionSpecification(70100)), new VersionSpecificCodeSample("<?php\nfunction sample(?string \$str = null)\n{}\n", new VersionSpecification(70100), ['use_nullable_type_declaration' => \false])], 'Rule is applied only in a PHP 7.1+ environment.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         if (\PHP_VERSION_ID < 70100) {
             return \false;
@@ -65,14 +65,14 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends \PhpCsFixer\
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('use_nullable_type_declaration', 'Whether to add or remove `?` before type declarations for parameters with a default `null` value.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('use_nullable_type_declaration', 'Whether to add or remove `?` before type declarations for parameters with a default `null` value.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
+        $functionsAnalyzer = new FunctionsAnalyzer();
         $tokenKinds = [\T_FUNCTION];
         if (\PHP_VERSION_ID >= 70400) {
             $tokenKinds[] = \T_FN;
@@ -89,7 +89,7 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends \PhpCsFixer\
     /**
      * @param ArgumentAnalysis[] $arguments
      */
-    private function fixFunctionParameters(\PhpCsFixer\Tokenizer\Tokens $tokens, array $arguments)
+    private function fixFunctionParameters(Tokens $tokens, array $arguments)
     {
         foreach (\array_reverse($arguments) as $argumentInfo) {
             if (!$argumentInfo->hasTypeAnalysis() || \false !== \strpos($argumentInfo->getTypeAnalysis()->getName(), '|') || !$argumentInfo->hasDefault() || 'null' !== \strtolower($argumentInfo->getDefault())) {
@@ -98,13 +98,13 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends \PhpCsFixer\
             $argumentTypeInfo = $argumentInfo->getTypeAnalysis();
             if (\PHP_VERSION_ID >= 80000 && \false === $this->configuration['use_nullable_type_declaration']) {
                 $visibility = $tokens[$tokens->getPrevMeaningfulToken($argumentTypeInfo->getStartIndex())];
-                if ($visibility->isGivenKind([\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE])) {
+                if ($visibility->isGivenKind([CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE])) {
                     continue;
                 }
             }
             if (\true === $this->configuration['use_nullable_type_declaration']) {
                 if (!$argumentTypeInfo->isNullable() && 'mixed' !== $argumentTypeInfo->getName()) {
-                    $tokens->insertAt($argumentTypeInfo->getStartIndex(), new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, '?']));
+                    $tokens->insertAt($argumentTypeInfo->getStartIndex(), new Token([CT::T_NULLABLE_TYPE, '?']));
                 }
             } else {
                 if ($argumentTypeInfo->isNullable()) {

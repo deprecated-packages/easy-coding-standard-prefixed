@@ -20,7 +20,7 @@ final class LineLengthCloserTransformer
      * @var TokenFinder
      */
     private $tokenFinder;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\CallAnalyzer $callAnalyzer, \Symplify\CodingStandard\TokenRunner\TokenFinder $tokenFinder)
+    public function __construct(CallAnalyzer $callAnalyzer, TokenFinder $tokenFinder)
     {
         $this->callAnalyzer = $callAnalyzer;
         $this->tokenFinder = $tokenFinder;
@@ -28,7 +28,7 @@ final class LineLengthCloserTransformer
     /**
      * @param Tokens<Token> $tokens
      */
-    public function insertNewlineBeforeClosingIfNeeded(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo, int $kind, string $newlineIndentWhitespace, string $closingBracketNewlineIndentWhitespace) : void
+    public function insertNewlineBeforeClosingIfNeeded(Tokens $tokens, BlockInfo $blockInfo, int $kind, string $newlineIndentWhitespace, string $closingBracketNewlineIndentWhitespace) : void
     {
         $isMethodCall = $this->callAnalyzer->isMethodCall($tokens, $blockInfo->getStart());
         $endIndex = $blockInfo->getEnd();
@@ -41,17 +41,17 @@ final class LineLengthCloserTransformer
         }
         $tokens->ensureWhitespaceAtIndex($endIndex - 1, 1, $closingBracketNewlineIndentWhitespace);
     }
-    private function shouldAddNewlineEarlier(\PhpCsFixer\Tokenizer\Token $previousToken, \PhpCsFixer\Tokenizer\Token $previousPreviousToken, bool $isMethodCall, int $kind) : bool
+    private function shouldAddNewlineEarlier(Token $previousToken, Token $previousPreviousToken, bool $isMethodCall, int $kind) : bool
     {
         if ($isMethodCall) {
             return \false;
         }
-        if ($kind !== \Symplify\CodingStandard\TokenRunner\ValueObject\LineKind::CALLS) {
+        if ($kind !== LineKind::CALLS) {
             return \false;
         }
-        if (!$previousToken->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE)) {
+        if (!$previousToken->isGivenKind(CT::T_ARRAY_SQUARE_BRACE_CLOSE)) {
             return \false;
         }
-        return !$previousPreviousToken->isGivenKind([\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN]);
+        return !$previousPreviousToken->isGivenKind([CT::T_ARRAY_SQUARE_BRACE_CLOSE, CT::T_ARRAY_SQUARE_BRACE_OPEN]);
     }
 }

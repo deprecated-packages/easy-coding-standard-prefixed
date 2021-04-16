@@ -20,14 +20,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class SetTypeToCastFixer extends \PhpCsFixer\AbstractFunctionReferenceFixer
+final class SetTypeToCastFixer extends AbstractFunctionReferenceFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Cast shall be used, not `settype`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Cast shall be used, not `settype`.', [new CodeSample('<?php
 settype($foo, "integer");
 settype($bar, "string");
 settype($bar, "null");
@@ -36,17 +36,17 @@ settype($bar, "null");
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_CONSTANT_ENCAPSED_STRING, \T_STRING, \T_VARIABLE]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $map = ['array' => [\T_ARRAY_CAST, '(array)'], 'bool' => [\T_BOOL_CAST, '(bool)'], 'boolean' => [\T_BOOL_CAST, '(bool)'], 'double' => [\T_DOUBLE_CAST, '(float)'], 'float' => [\T_DOUBLE_CAST, '(float)'], 'int' => [\T_INT_CAST, '(int)'], 'integer' => [\T_INT_CAST, '(int)'], 'object' => [\T_OBJECT_CAST, '(object)'], 'string' => [\T_STRING_CAST, '(string)']];
-        $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
+        $argumentsAnalyzer = new ArgumentsAnalyzer();
         foreach (\array_reverse($this->findSettypeCalls($tokens)) as $candidate) {
             $functionNameIndex = $candidate[0];
             $arguments = $argumentsAnalyzer->getArguments($tokens, $candidate[1], $candidate[2]);
@@ -97,11 +97,11 @@ settype($bar, "null");
             if ('null' === $type) {
                 $this->findSettypeNullCall($tokens, $functionNameIndex, $argumentToken);
             } else {
-                $this->fixSettypeCall($tokens, $functionNameIndex, $argumentToken, new \PhpCsFixer\Tokenizer\Token($map[$type]));
+                $this->fixSettypeCall($tokens, $functionNameIndex, $argumentToken, new Token($map[$type]));
             }
         }
     }
-    private function findSettypeCalls(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function findSettypeCalls(Tokens $tokens)
     {
         $candidates = [];
         $end = \count($tokens);
@@ -124,7 +124,7 @@ settype($bar, "null");
      * @param int $secondArgumentStart
      * @param int $closeParenthesisIndex
      */
-    private function removeSettypeCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $functionNameIndex, $openParenthesisIndex, $firstArgumentStart, $commaIndex, $secondArgumentStart, $closeParenthesisIndex)
+    private function removeSettypeCall(Tokens $tokens, $functionNameIndex, $openParenthesisIndex, $firstArgumentStart, $commaIndex, $secondArgumentStart, $closeParenthesisIndex)
     {
         $tokens->clearTokenAndMergeSurroundingWhitespace($closeParenthesisIndex);
         $prevIndex = $tokens->getPrevMeaningfulToken($closeParenthesisIndex);
@@ -142,18 +142,18 @@ settype($bar, "null");
     /**
      * @param int $functionNameIndex
      */
-    private function fixSettypeCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $functionNameIndex, \PhpCsFixer\Tokenizer\Token $argumentToken, \PhpCsFixer\Tokenizer\Token $castToken)
+    private function fixSettypeCall(Tokens $tokens, $functionNameIndex, Token $argumentToken, Token $castToken)
     {
-        $tokens->insertAt($functionNameIndex, [clone $argumentToken, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']), new \PhpCsFixer\Tokenizer\Token('='), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']), $castToken, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']), clone $argumentToken]);
+        $tokens->insertAt($functionNameIndex, [clone $argumentToken, new Token([\T_WHITESPACE, ' ']), new Token('='), new Token([\T_WHITESPACE, ' ']), $castToken, new Token([\T_WHITESPACE, ' ']), clone $argumentToken]);
         $tokens->removeTrailingWhitespace($functionNameIndex + 6);
         // 6 = number of inserted tokens -1 for offset correction
     }
     /**
      * @param int $functionNameIndex
      */
-    private function findSettypeNullCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $functionNameIndex, \PhpCsFixer\Tokenizer\Token $argumentToken)
+    private function findSettypeNullCall(Tokens $tokens, $functionNameIndex, Token $argumentToken)
     {
-        $tokens->insertAt($functionNameIndex, [clone $argumentToken, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']), new \PhpCsFixer\Tokenizer\Token('='), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']), new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'null'])]);
+        $tokens->insertAt($functionNameIndex, [clone $argumentToken, new Token([\T_WHITESPACE, ' ']), new Token('='), new Token([\T_WHITESPACE, ' ']), new Token([\T_STRING, 'null'])]);
         $tokens->removeTrailingWhitespace($functionNameIndex + 4);
         // 4 = number of inserted tokens -1 for offset correction
     }

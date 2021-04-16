@@ -27,7 +27,7 @@ class Full implements \PHP_CodeSniffer\Reports\Report
      *
      * @return bool
      */
-    public function generateFileReport($report, \PHP_CodeSniffer\Files\File $phpcsFile, $showSources = \false, $width = 80)
+    public function generateFileReport($report, File $phpcsFile, $showSources = \false, $width = 80)
     {
         if ($report['errors'] === 0 && $report['warnings'] === 0) {
             // Nothing to print.
@@ -180,7 +180,7 @@ class Full implements \PHP_CodeSniffer\Reports\Report
         }
         echo $cachedData;
         if ($toScreen === \true && $interactive === \false) {
-            \PHP_CodeSniffer\Util\Timing::printRunTime();
+            Util\Timing::printRunTime();
         }
     }
     //end generate()

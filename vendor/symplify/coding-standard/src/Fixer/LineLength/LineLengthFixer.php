@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -25,7 +25,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  * @see \Symplify\CodingStandard\Tests\Fixer\LineLength\LineLengthFixer\LineLengthFixerTest
  * @see \Symplify\CodingStandard\Tests\Fixer\LineLength\LineLengthFixer\ConfiguredLineLengthFixerTest
  */
-final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface, \PhpCsFixer\Fixer\ConfigurableFixerInterface, \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
+final class LineLengthFixer extends AbstractSymplifyFixer implements ConfigurableRuleInterface, ConfigurableFixerInterface, DocumentedRuleInterface
 {
     /**
      * @api
@@ -74,32 +74,32 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
      * @var FunctionCallNameMatcher
      */
     private $functionCallNameMatcher;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthTransformer $lineLengthTransformer, \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder, \Symplify\CodingStandard\TokenAnalyzer\FunctionCallNameMatcher $functionCallNameMatcher)
+    public function __construct(LineLengthTransformer $lineLengthTransformer, BlockFinder $blockFinder, FunctionCallNameMatcher $functionCallNameMatcher)
     {
         $this->lineLengthTransformer = $lineLengthTransformer;
         $this->blockFinder = $blockFinder;
         $this->functionCallNameMatcher = $functionCallNameMatcher;
     }
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition() : FixerDefinitionInterface
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
+        return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([
             // "["
             \T_ARRAY,
             // "array"()
-            \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN,
+            CT::T_ARRAY_SQUARE_BRACE_OPEN,
             '(',
             ')',
             // "function"
             \T_FUNCTION,
             // "use" (...)
-            \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA,
+            CT::T_USE_LAMBDA,
             // "new"
             \T_NEW,
         ]);
@@ -107,7 +107,7 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
     /**
      * @param Tokens<Token> $tokens
      */
-    public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         // function arguments, function call parameters, lambda use()
         for ($position = \count($tokens) - 1; $position >= 0; --$position) {
@@ -118,19 +118,19 @@ final class LineLengthFixer extends \Symplify\CodingStandard\Fixer\AbstractSympl
                 continue;
             }
             // opener
-            if ($token->isGivenKind([\T_FUNCTION, \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA, \T_NEW])) {
+            if ($token->isGivenKind([\T_FUNCTION, CT::T_USE_LAMBDA, \T_NEW])) {
                 $this->processFunctionOrArray($tokens, $position);
                 continue;
             }
             // closer
-            if ($token->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE) || $token->equals(')') && $token->isArray()) {
+            if ($token->isGivenKind(CT::T_ARRAY_SQUARE_BRACE_CLOSE) || $token->equals(')') && $token->isArray()) {
                 $this->processFunctionOrArray($tokens, $position);
             }
         }
     }
-    public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+    public function getRuleDefinition() : RuleDefinition
     {
-        return new \Symplify\RuleDocGenerator\ValueObject\RuleDefinition(self::ERROR_MESSAGE, [new \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample(<<<'CODE_SAMPLE'
+        return new RuleDefinition(self::ERROR_MESSAGE, [new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 function some($veryLong, $superLong, $oneMoreTime)
 {
 }
@@ -156,7 +156,7 @@ CODE_SAMPLE
     }
     public function getPriority() : int
     {
-        return $this->getPriorityBefore(\PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer::class);
+        return $this->getPriorityBefore(TrimArraySpacesFixer::class);
     }
     public function configure(?array $configuration = null) : void
     {
@@ -167,14 +167,14 @@ CODE_SAMPLE
     /**
      * @param Tokens<Token> $tokens
      */
-    private function processMethodCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : void
+    private function processMethodCall(Tokens $tokens, int $position) : void
     {
         $methodNamePosition = $this->functionCallNameMatcher->matchName($tokens, $position);
         if ($methodNamePosition === null) {
             return;
         }
         $blockInfo = $this->blockFinder->findInTokensByPositionAndContent($tokens, $methodNamePosition, '(');
-        if (!$blockInfo instanceof \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo) {
+        if (!$blockInfo instanceof BlockInfo) {
             return;
         }
         // has comments => dangerous to change: https://github.com/symplify/symplify/issues/973
@@ -187,10 +187,10 @@ CODE_SAMPLE
     /**
      * @param Tokens<Token> $tokens
      */
-    private function processFunctionOrArray(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : void
+    private function processFunctionOrArray(Tokens $tokens, int $position) : void
     {
         $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
-        if (!$blockInfo instanceof \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo) {
+        if (!$blockInfo instanceof BlockInfo) {
             return;
         }
         if ($this->shouldSkip($tokens, $blockInfo)) {
@@ -201,7 +201,7 @@ CODE_SAMPLE
     /**
      * @param Tokens<Token> $tokens
      */
-    private function shouldSkip(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
+    private function shouldSkip(Tokens $tokens, BlockInfo $blockInfo) : bool
     {
         // no items inside => skip
         if ($blockInfo->getEnd() - $blockInfo->getStart() <= 1) {
@@ -221,13 +221,13 @@ CODE_SAMPLE
     /**
      * @param Tokens<Token> $tokens
      */
-    private function isHerenowDoc(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : bool
+    private function isHerenowDoc(Tokens $tokens, BlockInfo $blockInfo) : bool
     {
         // heredoc/nowdoc => skip
         $nextToken = $this->getNextMeaningfulToken($tokens, $blockInfo->getStart());
-        if (!$nextToken instanceof \PhpCsFixer\Tokenizer\Token) {
+        if (!$nextToken instanceof Token) {
             return \false;
         }
-        return \_PhpScopercc9aec205203\Nette\Utils\Strings::contains($nextToken->getContent(), '<<<');
+        return Strings::contains($nextToken->getContent(), '<<<');
     }
 }

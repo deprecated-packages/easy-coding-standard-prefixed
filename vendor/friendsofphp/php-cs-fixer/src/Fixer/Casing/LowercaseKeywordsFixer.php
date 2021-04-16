@@ -21,7 +21,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class LowercaseKeywordsFixer extends \PhpCsFixer\AbstractFixer
+final class LowercaseKeywordsFixer extends AbstractFixer
 {
     private static $excludedTokens = [\T_HALT_COMPILER];
     /**
@@ -29,7 +29,7 @@ final class LowercaseKeywordsFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('PHP keywords MUST be in lower case.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('PHP keywords MUST be in lower case.', [new CodeSample('<?php
     FOREACH($a AS $B) {
         TRY {
             NEW $C($a, ISSET($B));
@@ -45,18 +45,18 @@ final class LowercaseKeywordsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound(\PhpCsFixer\Tokenizer\Token::getKeywords());
+        return $tokens->isAnyTokenKindsFound(Token::getKeywords());
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if ($token->isKeyword() && !$token->isGivenKind(self::$excludedTokens)) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \strtolower($token->getContent())]);
+                $tokens[$index] = new Token([$token->getId(), \strtolower($token->getContent())]);
             }
         }
     }

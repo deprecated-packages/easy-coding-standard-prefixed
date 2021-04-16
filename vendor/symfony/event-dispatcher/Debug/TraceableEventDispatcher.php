@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\EventDispatcher\Debug;
+namespace _PhpScopereb9508917a55\Symfony\Component\EventDispatcher\Debug;
 
-use _PhpScopercc9aec205203\Psr\EventDispatcher\StoppableEventInterface;
-use _PhpScopercc9aec205203\Psr\Log\LoggerInterface;
-use _PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request;
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopercc9aec205203\Symfony\Component\Stopwatch\Stopwatch;
-use _PhpScopercc9aec205203\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopereb9508917a55\Psr\EventDispatcher\StoppableEventInterface;
+use _PhpScopereb9508917a55\Psr\Log\LoggerInterface;
+use _PhpScopereb9508917a55\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScopereb9508917a55\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Request;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScopereb9508917a55\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScopereb9508917a55\Symfony\Contracts\Service\ResetInterface;
 /**
  * Collects some data about event listeners.
  *
@@ -25,7 +25,7 @@ use _PhpScopercc9aec205203\Symfony\Contracts\Service\ResetInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventDispatcherInterface, \_PhpScopercc9aec205203\Symfony\Contracts\Service\ResetInterface
+class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterface
 {
     protected $logger;
     protected $stopwatch;
@@ -35,7 +35,7 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
     private $orphanedEvents;
     private $requestStack;
     private $currentRequestHash = '';
-    public function __construct(\_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher, \_PhpScopercc9aec205203\Symfony\Component\Stopwatch\Stopwatch $stopwatch, \_PhpScopercc9aec205203\Psr\Log\LoggerInterface $logger = null, \_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\RequestStack $requestStack = null)
+    public function __construct(EventDispatcherInterface $dispatcher, Stopwatch $stopwatch, LoggerInterface $logger = null, RequestStack $requestStack = null)
     {
         $this->dispatcher = $dispatcher;
         $this->stopwatch = $stopwatch;
@@ -54,7 +54,7 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
     /**
      * {@inheritdoc}
      */
-    public function addSubscriber(\_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function addSubscriber(EventSubscriberInterface $subscriber)
     {
         $this->dispatcher->addSubscriber($subscriber);
     }
@@ -77,7 +77,7 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
     /**
      * {@inheritdoc}
      */
-    public function removeSubscriber(\_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function removeSubscriber(EventSubscriberInterface $subscriber)
     {
         return $this->dispatcher->removeSubscriber($subscriber);
     }
@@ -121,7 +121,7 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
             $this->callStack = new \SplObjectStorage();
         }
         $currentRequestHash = $this->currentRequestHash = $this->requestStack && ($request = $this->requestStack->getCurrentRequest()) ? \spl_object_hash($request) : '';
-        if (null !== $this->logger && $event instanceof \_PhpScopercc9aec205203\Psr\EventDispatcher\StoppableEventInterface && $event->isPropagationStopped()) {
+        if (null !== $this->logger && $event instanceof StoppableEventInterface && $event->isPropagationStopped()) {
             $this->logger->debug(\sprintf('The "%s" event is already stopped. No listeners have been called.', $eventName));
         }
         $this->preProcess($eventName);
@@ -148,7 +148,7 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
     /**
      * @return array
      */
-    public function getCalledListeners(\_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request $request = null)
+    public function getCalledListeners(Request $request = null)
     {
         if (null === $this->callStack) {
             return [];
@@ -166,7 +166,7 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
     /**
      * @return array
      */
-    public function getNotCalledListeners(\_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request $request = null)
+    public function getNotCalledListeners(Request $request = null)
     {
         try {
             $allListeners = $this->getListeners();
@@ -191,8 +191,8 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
         foreach ($allListeners as $eventName => $listeners) {
             foreach ($listeners as $listener) {
                 if (!\in_array($listener, $calledListeners, \true)) {
-                    if (!$listener instanceof \_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
-                        $listener = new \_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener, null, $this->stopwatch, $this);
+                    if (!$listener instanceof \_PhpScopereb9508917a55\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
+                        $listener = new \_PhpScopereb9508917a55\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener, null, $this->stopwatch, $this);
                     }
                     $notCalled[] = $listener->getInfo($eventName);
                 }
@@ -201,7 +201,7 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
         \uasort($notCalled, [$this, 'sortNotCalledListeners']);
         return $notCalled;
     }
-    public function getOrphanedEvents(\_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request $request = null) : array
+    public function getOrphanedEvents(Request $request = null) : array
     {
         if ($request) {
             return $this->orphanedEvents[\spl_object_hash($request)] ?? [];
@@ -249,7 +249,7 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
         }
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
             $priority = $this->getListenerPriority($eventName, $listener);
-            $wrappedListener = new \_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener instanceof \_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener->getWrappedListener() : $listener, null, $this->stopwatch, $this);
+            $wrappedListener = new \_PhpScopereb9508917a55\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener instanceof \_PhpScopereb9508917a55\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener->getWrappedListener() : $listener, null, $this->stopwatch, $this);
             $this->wrappedListeners[$eventName][] = $wrappedListener;
             $this->dispatcher->removeListener($eventName, $listener);
             $this->dispatcher->addListener($eventName, $wrappedListener, $priority);
@@ -261,7 +261,7 @@ class TraceableEventDispatcher implements \_PhpScopercc9aec205203\Symfony\Compon
         unset($this->wrappedListeners[$eventName]);
         $skipped = \false;
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
-            if (!$listener instanceof \_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
+            if (!$listener instanceof \_PhpScopereb9508917a55\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
                 // #12845: a new listener was added during dispatch.
                 continue;
             }

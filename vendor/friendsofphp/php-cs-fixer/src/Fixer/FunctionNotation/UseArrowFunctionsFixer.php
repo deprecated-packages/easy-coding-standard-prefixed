@@ -22,29 +22,29 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @author Gregor Harlan
  */
-final class UseArrowFunctionsFixer extends \PhpCsFixer\AbstractFixer
+final class UseArrowFunctionsFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Anonymous functions with one-liner return statement must use arrow functions.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample(<<<'SAMPLE'
+        return new FixerDefinition('Anonymous functions with one-liner return statement must use arrow functions.', [new VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
-\_PhpScopercc9aec205203\foo(function ($a) use($b) {
+\_PhpScopereb9508917a55\foo(function ($a) use($b) {
     return $a + $b;
 });
 
 SAMPLE
-, new \PhpCsFixer\FixerDefinition\VersionSpecification(70400))], null, 'Risky when using `isset()` on outside variables that are not imported with `use ()`.');
+, new VersionSpecification(70400))], null, 'Risky when using `isset()` on outside variables that are not imported with `use ()`.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return \PHP_VERSION_ID >= 70400 && $tokens->isAllTokenKindsFound([\T_FUNCTION, \T_RETURN]);
     }
@@ -58,9 +58,9 @@ SAMPLE
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $analyzer = new TokensAnalyzer($tokens);
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_FUNCTION) || !$analyzer->isLambda($index)) {
                 continue;
@@ -68,10 +68,10 @@ SAMPLE
             // Find parameters end
             // Abort if they are multilined
             $parametersStart = $tokens->getNextMeaningfulToken($index);
-            if ($tokens[$parametersStart]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_RETURN_REF)) {
+            if ($tokens[$parametersStart]->isGivenKind(CT::T_RETURN_REF)) {
                 $parametersStart = $tokens->getNextMeaningfulToken($parametersStart);
             }
-            $parametersEnd = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $parametersStart);
+            $parametersEnd = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $parametersStart);
             if ($this->isMultilined($tokens, $parametersStart, $parametersEnd)) {
                 continue;
             }
@@ -80,7 +80,7 @@ SAMPLE
             $next = $tokens->getNextMeaningfulToken($parametersEnd);
             $useStart = null;
             $useEnd = null;
-            if ($tokens[$next]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA)) {
+            if ($tokens[$next]->isGivenKind(CT::T_USE_LAMBDA)) {
                 $useStart = $next;
                 if ($tokens[$useStart - 1]->isGivenKind(\T_WHITESPACE)) {
                     --$useStart;
@@ -134,7 +134,7 @@ SAMPLE
      *
      * @return bool
      */
-    private function isMultilined(\PhpCsFixer\Tokenizer\Tokens $tokens, $start, $end)
+    private function isMultilined(Tokens $tokens, $start, $end)
     {
         for ($i = $start; $i < $end; ++$i) {
             if (\false !== \strpos($tokens[$i]->getContent(), "\n")) {
@@ -152,14 +152,14 @@ SAMPLE
      * @param int      $semicolon
      * @param int      $braceClose
      */
-    private function transform(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $useStart, $useEnd, $braceOpen, $return, $semicolon, $braceClose)
+    private function transform(Tokens $tokens, $index, $useStart, $useEnd, $braceOpen, $return, $semicolon, $braceClose)
     {
         $tokens->clearRange($semicolon, $braceClose);
         $tokens->clearRange($braceOpen + 1, $return);
-        $tokens[$braceOpen] = new \PhpCsFixer\Tokenizer\Token([\T_DOUBLE_ARROW, '=>']);
+        $tokens[$braceOpen] = new Token([\T_DOUBLE_ARROW, '=>']);
         if ($useStart) {
             $tokens->clearRange($useStart, $useEnd);
         }
-        $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_FN, 'fn']);
+        $tokens[$index] = new Token([\T_FN, 'fn']);
     }
 }

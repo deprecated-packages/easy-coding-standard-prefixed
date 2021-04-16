@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\TypeResolver;
 
-use _PhpScopercc9aec205203\Nette\Utils\Reflection;
+use _PhpScopereb9508917a55\Nette\Utils\Reflection;
 use ReflectionMethod;
 use Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
 final class ParameterTypeResolver
@@ -16,11 +16,11 @@ final class ParameterTypeResolver
      * @var array<string, string>
      */
     private $resolvedParameterTypesCached = [];
-    public function __construct(\Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver $paramTypeDocBlockResolver)
+    public function __construct(ParamTypeDocBlockResolver $paramTypeDocBlockResolver)
     {
         $this->paramTypeDocBlockResolver = $paramTypeDocBlockResolver;
     }
-    public function resolveParameterType(string $parameterName, \ReflectionMethod $reflectionMethod) : ?string
+    public function resolveParameterType(string $parameterName, ReflectionMethod $reflectionMethod) : ?string
     {
         $docComment = $reflectionMethod->getDocComment();
         if ($docComment === \false) {
@@ -39,7 +39,7 @@ final class ParameterTypeResolver
         if (\ctype_lower($resolvedType[0])) {
             return null;
         }
-        $resolvedClass = \_PhpScopercc9aec205203\Nette\Utils\Reflection::expandClassName($resolvedType, $declaringReflectionClass);
+        $resolvedClass = Reflection::expandClassName($resolvedType, $declaringReflectionClass);
         $this->resolvedParameterTypesCached[$uniqueKey] = $resolvedClass;
         return $resolvedClass;
     }

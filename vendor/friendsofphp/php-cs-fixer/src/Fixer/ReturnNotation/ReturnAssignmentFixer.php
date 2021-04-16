@@ -21,7 +21,7 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @author SpacePossum
  */
-final class ReturnAssignmentFixer extends \PhpCsFixer\AbstractFixer
+final class ReturnAssignmentFixer extends AbstractFixer
 {
     /**
      * @var TokensAnalyzer
@@ -32,7 +32,7 @@ final class ReturnAssignmentFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Local, dynamic and directly referenced variables should not be assigned and directly returned by a function or method.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nfunction a() {\n    \$a = 1;\n    return \$a;\n}\n")]);
+        return new FixerDefinition('Local, dynamic and directly referenced variables should not be assigned and directly returned by a function or method.', [new CodeSample("<?php\nfunction a() {\n    \$a = 1;\n    return \$a;\n}\n")]);
     }
     /**
      * {@inheritdoc}
@@ -47,17 +47,17 @@ final class ReturnAssignmentFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_FUNCTION, \T_RETURN, \T_VARIABLE]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $tokenCount = \count($tokens);
-        $this->tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $this->tokensAnalyzer = new TokensAnalyzer($tokens);
         for ($index = 1; $index < $tokenCount; ++$index) {
             if (!$tokens[$index]->isGivenKind(\T_FUNCTION)) {
                 continue;
@@ -68,7 +68,7 @@ final class ReturnAssignmentFixer extends \PhpCsFixer\AbstractFixer
                 $index = $functionOpenIndex - 1;
                 continue;
             }
-            $functionCloseIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $functionOpenIndex);
+            $functionCloseIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $functionOpenIndex);
             $totalTokensAdded = 0;
             do {
                 $tokensAdded = $this->fixFunction($tokens, $index, $functionOpenIndex, $functionCloseIndex);
@@ -85,10 +85,10 @@ final class ReturnAssignmentFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return int >= 0 number of tokens inserted into the Tokens collection
      */
-    private function fixFunction(\PhpCsFixer\Tokenizer\Tokens $tokens, $functionIndex, $functionOpenIndex, $functionCloseIndex)
+    private function fixFunction(Tokens $tokens, $functionIndex, $functionOpenIndex, $functionCloseIndex)
     {
         static $riskyKinds = [
-            \PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_OPEN,
+            CT::T_DYNAMIC_VAR_BRACE_OPEN,
             // "$h = ${$g};" case
             \T_EVAL,
             // "$c = eval('return $this;');" case
@@ -126,7 +126,7 @@ final class ReturnAssignmentFixer extends \PhpCsFixer\AbstractFixer
                     $index = $nestedFunctionOpenIndex - 1;
                     continue;
                 }
-                $nestedFunctionCloseIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $nestedFunctionOpenIndex);
+                $nestedFunctionCloseIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $nestedFunctionOpenIndex);
                 $tokensAdded = $this->fixFunction($tokens, $index, $nestedFunctionOpenIndex, $nestedFunctionCloseIndex);
                 $index = $nestedFunctionCloseIndex + $tokensAdded;
                 $functionCloseIndex += $tokensAdded;
@@ -192,7 +192,7 @@ final class ReturnAssignmentFixer extends \PhpCsFixer\AbstractFixer
                 if (!$tokens[$prevMeaningFul]->equals(')')) {
                     break;
                 }
-                $assignVarEndIndex = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $prevMeaningFul);
+                $assignVarEndIndex = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $prevMeaningFul);
             } while (\true);
             $assignVarOperatorIndex = $tokens->getPrevTokenOfKind($assignVarEndIndex, ['=', ';', '{', [\T_OPEN_TAG], [\T_OPEN_TAG_WITH_ECHO]]);
             if (null === $assignVarOperatorIndex || !$tokens[$assignVarOperatorIndex]->equals('=')) {
@@ -221,7 +221,7 @@ final class ReturnAssignmentFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return int >= 0 number of tokens inserted into the Tokens collection
      */
-    private function simplifyReturnStatement(\PhpCsFixer\Tokenizer\Tokens $tokens, $assignVarIndex, $assignVarOperatorIndex, $returnIndex, $returnVarEndIndex)
+    private function simplifyReturnStatement(Tokens $tokens, $assignVarIndex, $assignVarOperatorIndex, $returnIndex, $returnVarEndIndex)
     {
         $inserted = 0;
         $originalIndent = $tokens[$assignVarIndex - 1]->isWhitespace() ? $tokens[$assignVarIndex - 1]->getContent() : null;
@@ -238,28 +238,28 @@ final class ReturnAssignmentFixer extends \PhpCsFixer\AbstractFixer
             $content = $tokens[$returnIndex - 1]->getContent();
             $fistLinebreakPos = \strrpos($content, "\n");
             $content = \false === $fistLinebreakPos ? ' ' : \substr($content, $fistLinebreakPos);
-            $tokens[$returnIndex - 1] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $content]);
+            $tokens[$returnIndex - 1] = new Token([\T_WHITESPACE, $content]);
         }
         // remove the variable and the assignment
         for ($i = $assignVarIndex; $i <= $assignVarOperatorIndex; ++$i) {
             $this->clearIfSave($tokens, $i);
         }
         // insert new return statement
-        $tokens->insertAt($assignVarIndex, new \PhpCsFixer\Tokenizer\Token([\T_RETURN, 'return']));
+        $tokens->insertAt($assignVarIndex, new Token([\T_RETURN, 'return']));
         ++$inserted;
         // use the original indent of the var assignment for the new return statement
         if (null !== $originalIndent && $tokens[$assignVarIndex - 1]->isWhitespace() && $originalIndent !== $tokens[$assignVarIndex - 1]->getContent()) {
-            $tokens[$assignVarIndex - 1] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $originalIndent]);
+            $tokens[$assignVarIndex - 1] = new Token([\T_WHITESPACE, $originalIndent]);
         }
         // remove trailing space after the new return statement which might be added during the clean up process
         $nextIndex = $tokens->getNonEmptySibling($assignVarIndex, 1);
         if (!$tokens[$nextIndex]->isWhitespace()) {
-            $tokens->insertAt($nextIndex, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
+            $tokens->insertAt($nextIndex, new Token([\T_WHITESPACE, ' ']));
             ++$inserted;
         }
         return $inserted;
     }
-    private function clearIfSave(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function clearIfSave(Tokens $tokens, $index)
     {
         if ($tokens[$index]->isComment()) {
             return;

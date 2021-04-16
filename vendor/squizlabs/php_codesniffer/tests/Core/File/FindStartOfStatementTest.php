@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class FindStartOfStatementTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class FindStartOfStatementTest extends AbstractMethodUnitTest
 {
     /**
      * Test a simple assignment.

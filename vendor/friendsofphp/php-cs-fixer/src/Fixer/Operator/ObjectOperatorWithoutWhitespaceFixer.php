@@ -19,26 +19,26 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class ObjectOperatorWithoutWhitespaceFixer extends \PhpCsFixer\AbstractFixer
+final class ObjectOperatorWithoutWhitespaceFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('There should not be space before or after object `T_OBJECT_OPERATOR` `->`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$a  ->  b;\n")]);
+        return new FixerDefinition('There should not be space before or after object `T_OBJECT_OPERATOR` `->`.', [new CodeSample("<?php \$a  ->  b;\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_OBJECT_OPERATOR);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         // [Structure] there should not be space before or after T_OBJECT_OPERATOR
         foreach ($tokens as $index => $token) {

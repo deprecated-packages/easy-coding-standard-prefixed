@@ -10,7 +10,7 @@ use Symplify\EasyCodingStandard\SniffRunner\File\FileFactory;
 use Symplify\EasyCodingStandard\SniffRunner\ValueObject\File;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class FileFactoryTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
+final class FileFactoryTest extends AbstractKernelTestCase
 {
     /**
      * @var FileFactory
@@ -18,15 +18,15 @@ final class FileFactoryTest extends \Symplify\PackageBuilder\Testing\AbstractKer
     private $fileFactory;
     protected function setUp() : void
     {
-        $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $this->fileFactory = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\File\FileFactory::class);
+        $this->bootKernel(EasyCodingStandardKernel::class);
+        $this->fileFactory = $this->getService(FileFactory::class);
     }
     public function test() : void
     {
-        $fileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/FileFactorySource/SomeFile.php');
+        $fileInfo = new SmartFileInfo(__DIR__ . '/FileFactorySource/SomeFile.php');
         $file = $this->fileFactory->createFromFileInfo($fileInfo);
-        $this->assertInstanceOf(\Symplify\EasyCodingStandard\SniffRunner\ValueObject\File::class, $file);
-        $this->assertInstanceOf(\PHP_CodeSniffer\Files\File::class, $file);
-        $this->assertInstanceOf(\PHP_CodeSniffer\Fixer::class, $file->fixer);
+        $this->assertInstanceOf(File::class, $file);
+        $this->assertInstanceOf(PhpCodeSnifferFile::class, $file);
+        $this->assertInstanceOf(Fixer::class, $file->fixer);
     }
 }

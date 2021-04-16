@@ -15,7 +15,7 @@ use PhpCsFixer\Cache\CacheManagerInterface;
 use PhpCsFixer\Event\Event;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScopereb9508917a55\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -35,7 +35,7 @@ final class FileFilterIterator extends \FilterIterator
      * @var array<string,bool>
      */
     private $visitedElements = [];
-    public function __construct(\Traversable $iterator, \_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager)
+    public function __construct(\Traversable $iterator, EventDispatcherInterface $eventDispatcher = null, CacheManagerInterface $cacheManager)
     {
         if (!$iterator instanceof \Iterator) {
             $iterator = new \IteratorIterator($iterator);
@@ -58,10 +58,10 @@ final class FileFilterIterator extends \FilterIterator
         if (!$file->isFile() || $file->isLink()) {
             return \false;
         }
-        $content = \PhpCsFixer\FileReader::createSingleton()->read($path);
+        $content = FileReader::createSingleton()->read($path);
         // mark as skipped:
         if ('' === $content || !$this->cacheManager->needFixing($file->getPathname(), $content)) {
-            $this->dispatchEvent(\PhpCsFixer\FixerFileProcessedEvent::NAME, new \PhpCsFixer\FixerFileProcessedEvent(\PhpCsFixer\FixerFileProcessedEvent::STATUS_SKIPPED));
+            $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_SKIPPED));
             return \false;
         }
         return \true;
@@ -69,13 +69,13 @@ final class FileFilterIterator extends \FilterIterator
     /**
      * @param string $name
      */
-    private function dispatchEvent($name, \PhpCsFixer\Event\Event $event)
+    private function dispatchEvent($name, Event $event)
     {
         if (null === $this->eventDispatcher) {
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScopercc9aec205203\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScopereb9508917a55\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

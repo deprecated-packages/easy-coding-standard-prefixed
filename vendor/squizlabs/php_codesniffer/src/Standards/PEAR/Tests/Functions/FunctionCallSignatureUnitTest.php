@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PEAR\Tests\Functions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class FunctionCallSignatureUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class FunctionCallSignatureUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

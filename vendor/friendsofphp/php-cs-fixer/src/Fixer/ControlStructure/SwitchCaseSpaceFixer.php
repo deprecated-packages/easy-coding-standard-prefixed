@@ -20,14 +20,14 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class SwitchCaseSpaceFixer extends \PhpCsFixer\AbstractFixer
+final class SwitchCaseSpaceFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Removes extra spaces between colon and case value.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Removes extra spaces between colon and case value.', [new CodeSample('<?php
     switch($a) {
         case 1   :
             break;
@@ -39,14 +39,14 @@ final class SwitchCaseSpaceFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_CASE, \T_DEFAULT]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind([\T_CASE, \T_DEFAULT])) {

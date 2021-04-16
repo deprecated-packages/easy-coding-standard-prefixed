@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class ScopeSettingWithNamespaceOperatorTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class ScopeSettingWithNamespaceOperatorTest extends AbstractMethodUnitTest
 {
     /**
      * Test that the scope opener/closers are set correctly when the namespace keyword is encountered as an operator.

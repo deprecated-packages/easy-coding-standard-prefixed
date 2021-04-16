@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class FindExtendedClassNameTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class FindExtendedClassNameTest extends AbstractMethodUnitTest
 {
     /**
      * Test retrieving the name of the class being extended by another class

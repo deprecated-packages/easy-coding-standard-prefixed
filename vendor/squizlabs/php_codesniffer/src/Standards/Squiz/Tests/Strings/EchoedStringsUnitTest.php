@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Strings;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class EchoedStringsUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class EchoedStringsUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

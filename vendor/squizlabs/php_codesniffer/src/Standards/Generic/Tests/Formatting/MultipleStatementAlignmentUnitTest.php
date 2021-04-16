@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Formatting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class MultipleStatementAlignmentUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class MultipleStatementAlignmentUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

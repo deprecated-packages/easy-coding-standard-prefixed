@@ -12,16 +12,16 @@ final class FileDiffFactory
      * @var ColorConsoleDiffFormatter
      */
     private $colorConsoleDiffFormatter;
-    public function __construct(\Symplify\ConsoleColorDiff\Console\Formatter\ColorConsoleDiffFormatter $colorConsoleDiffFormatter)
+    public function __construct(ColorConsoleDiffFormatter $colorConsoleDiffFormatter)
     {
         $this->colorConsoleDiffFormatter = $colorConsoleDiffFormatter;
     }
     /**
      * @param string[] $appliedCheckers
      */
-    public function createFromDiffAndAppliedCheckers(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo, string $diff, array $appliedCheckers) : \Symplify\EasyCodingStandard\ValueObject\Error\FileDiff
+    public function createFromDiffAndAppliedCheckers(SmartFileInfo $smartFileInfo, string $diff, array $appliedCheckers) : FileDiff
     {
         $consoleFormattedDiff = $this->colorConsoleDiffFormatter->format($diff);
-        return new \Symplify\EasyCodingStandard\ValueObject\Error\FileDiff($smartFileInfo, $diff, $consoleFormattedDiff, $appliedCheckers);
+        return new FileDiff($smartFileInfo, $diff, $consoleFormattedDiff, $appliedCheckers);
     }
 }

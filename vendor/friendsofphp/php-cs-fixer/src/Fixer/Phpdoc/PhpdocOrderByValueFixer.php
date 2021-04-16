@@ -22,26 +22,26 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScopercc9aec205203\Symfony\Component\OptionsResolver\Options;
+use _PhpScopereb9508917a55\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  * @author Andreas Möller <am@localheinz.com>
  */
-final class PhpdocOrderByValueFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpdocOrderByValueFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Order phpdoc tags by value.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Order phpdoc tags by value.', [new CodeSample('<?php
 /**
  * @covers Foo
  * @covers Bar
  */
 final class MyTest extends \\PHPUnit_Framework_TestCase
 {}
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 /**
  * @author Bob
  * @author Alice
@@ -63,14 +63,14 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_DOC_COMMENT]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         if ([] === $this->configuration['annotations']) {
             return;
@@ -78,10 +78,10 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
             foreach ($this->configuration['annotations'] as $type => $typeLowerCase) {
                 $findPattern = \sprintf('/@%s\\s.+@%s\\s/s', $type, $type);
-                if (!$tokens[$index]->isGivenKind(\T_DOC_COMMENT) || 0 === \PhpCsFixer\Preg::match($findPattern, $tokens[$index]->getContent())) {
+                if (!$tokens[$index]->isGivenKind(\T_DOC_COMMENT) || 0 === Preg::match($findPattern, $tokens[$index]->getContent())) {
                     continue;
                 }
-                $docBlock = new \PhpCsFixer\DocBlock\DocBlock($tokens[$index]->getContent());
+                $docBlock = new DocBlock($tokens[$index]->getContent());
                 $annotations = $docBlock->getAnnotationsOfType($type);
                 $annotationMap = [];
                 if (\in_array($type, ['property', 'property-read', 'property-write'], \true)) {
@@ -96,7 +96,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
                 }
                 foreach ($annotations as $annotation) {
                     $rawContent = $annotation->getContent();
-                    $comparableContent = \PhpCsFixer\Preg::replace($replacePattern, $replacement, \strtolower(\trim($rawContent)));
+                    $comparableContent = Preg::replace($replacePattern, $replacement, \strtolower(\trim($rawContent)));
                     $annotationMap[$comparableContent] = $rawContent;
                 }
                 $orderedAnnotationMap = $annotationMap;
@@ -108,14 +108,14 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
                 foreach (\array_reverse($annotations) as $annotation) {
                     \array_splice($lines, $annotation->getStart(), $annotation->getEnd() - $annotation->getStart() + 1, \array_pop($orderedAnnotationMap));
                 }
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, \implode('', $lines)]);
+                $tokens[$index] = new Token([\T_DOC_COMMENT, \implode('', $lines)]);
             }
         }
     }
     protected function createConfigurationDefinition()
     {
         $allowedValues = ['author', 'covers', 'coversNothing', 'dataProvider', 'depends', 'group', 'internal', 'method', 'property', 'property-read', 'property-write', 'requires', 'throws', 'uses'];
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('annotations', 'List of annotations to order, e.g. `["covers"]`.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset($allowedValues)])->setNormalizer(function (\_PhpScopercc9aec205203\Symfony\Component\OptionsResolver\Options $options, $value) {
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('annotations', 'List of annotations to order, e.g. `["covers"]`.'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset($allowedValues)])->setNormalizer(function (Options $options, $value) {
             $normalized = [];
             foreach ($value as $index => $annotation) {
                 // since we will be using strtolower on the input annotations when building the sorting

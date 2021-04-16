@@ -26,8 +26,8 @@ use PhpCsFixer\Linter\LinterInterface;
 use PhpCsFixer\Linter\LintingException;
 use PhpCsFixer\Linter\LintingResultInterface;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScopereb9508917a55\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
@@ -73,7 +73,7 @@ final class Runner
      * @var bool
      */
     private $stopOnViolation;
-    public function __construct($finder, array $fixers, \PhpCsFixer\Differ\DifferInterface $differ, \_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher = null, \PhpCsFixer\Error\ErrorsManager $errorsManager, \PhpCsFixer\Linter\LinterInterface $linter, $isDryRun, \PhpCsFixer\Cache\CacheManagerInterface $cacheManager, \PhpCsFixer\Cache\DirectoryInterface $directory = null, $stopOnViolation = \false)
+    public function __construct($finder, array $fixers, DifferInterface $differ, EventDispatcherInterface $eventDispatcher = null, ErrorsManager $errorsManager, LinterInterface $linter, $isDryRun, CacheManagerInterface $cacheManager, DirectoryInterface $directory = null, $stopOnViolation = \false)
     {
         $this->finder = $finder;
         $this->fixers = $fixers;
@@ -83,7 +83,7 @@ final class Runner
         $this->linter = $linter;
         $this->isDryRun = $isDryRun;
         $this->cacheManager = $cacheManager;
-        $this->directory = $directory ?: new \PhpCsFixer\Cache\Directory('');
+        $this->directory = $directory ?: new Directory('');
         $this->stopOnViolation = $stopOnViolation;
     }
     /**
@@ -99,7 +99,7 @@ final class Runner
         foreach ($collection as $file) {
             $fixInfo = $this->fixFile($file, $collection->currentLintingResult());
             // we do not need Tokens to still caching just fixed file - so clear the cache
-            \PhpCsFixer\Tokenizer\Tokens::clearCache();
+            Tokens::clearCache();
             if ($fixInfo) {
                 $name = $this->directory->getRelativePathTo($file);
                 $changed[$name] = $fixInfo;
@@ -110,19 +110,19 @@ final class Runner
         }
         return $changed;
     }
-    private function fixFile(\SplFileInfo $file, \PhpCsFixer\Linter\LintingResultInterface $lintingResult)
+    private function fixFile(\SplFileInfo $file, LintingResultInterface $lintingResult)
     {
         $name = $file->getPathname();
         try {
             $lintingResult->check();
-        } catch (\PhpCsFixer\Linter\LintingException $e) {
-            $this->dispatchEvent(\PhpCsFixer\FixerFileProcessedEvent::NAME, new \PhpCsFixer\FixerFileProcessedEvent(\PhpCsFixer\FixerFileProcessedEvent::STATUS_INVALID));
-            $this->errorsManager->report(new \PhpCsFixer\Error\Error(\PhpCsFixer\Error\Error::TYPE_INVALID, $name, $e));
+        } catch (LintingException $e) {
+            $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_INVALID));
+            $this->errorsManager->report(new Error(Error::TYPE_INVALID, $name, $e));
             return;
         }
-        $old = \PhpCsFixer\FileReader::createSingleton()->read($file->getRealPath());
-        \PhpCsFixer\Tokenizer\Tokens::setLegacyMode(\false);
-        $tokens = \PhpCsFixer\Tokenizer\Tokens::fromCode($old);
+        $old = FileReader::createSingleton()->read($file->getRealPath());
+        Tokens::setLegacyMode(\false);
+        $tokens = Tokens::fromCode($old);
         $oldHash = $tokens->getCodeHash();
         $newHash = $oldHash;
         $new = $old;
@@ -131,7 +131,7 @@ final class Runner
             foreach ($this->fixers as $fixer) {
                 // for custom fixers we don't know is it safe to run `->fix()` without checking `->supports()` and `->isCandidate()`,
                 // thus we need to check it and conditionally skip fixing
-                if (!$fixer instanceof \PhpCsFixer\AbstractFixer && (!$fixer->supports($file) || !$fixer->isCandidate($tokens))) {
+                if (!$fixer instanceof AbstractFixer && (!$fixer->supports($file) || !$fixer->isCandidate($tokens))) {
                     continue;
                 }
                 $fixer->fix($file, $tokens);
@@ -145,8 +145,8 @@ final class Runner
             $this->processException($name, $e);
             return;
         } catch (\ParseError $e) {
-            $this->dispatchEvent(\PhpCsFixer\FixerFileProcessedEvent::NAME, new \PhpCsFixer\FixerFileProcessedEvent(\PhpCsFixer\FixerFileProcessedEvent::STATUS_LINT));
-            $this->errorsManager->report(new \PhpCsFixer\Error\Error(\PhpCsFixer\Error\Error::TYPE_LINT, $name, $e));
+            $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_LINT));
+            $this->errorsManager->report(new Error(Error::TYPE_LINT, $name, $e));
             return;
         } catch (\Throwable $e) {
             $this->processException($name, $e);
@@ -165,30 +165,30 @@ final class Runner
             $fixInfo = ['appliedFixers' => $appliedFixers, 'diff' => $this->differ->diff($old, $new)];
             try {
                 $this->linter->lintSource($new)->check();
-            } catch (\PhpCsFixer\Linter\LintingException $e) {
-                $this->dispatchEvent(\PhpCsFixer\FixerFileProcessedEvent::NAME, new \PhpCsFixer\FixerFileProcessedEvent(\PhpCsFixer\FixerFileProcessedEvent::STATUS_LINT));
-                $this->errorsManager->report(new \PhpCsFixer\Error\Error(\PhpCsFixer\Error\Error::TYPE_LINT, $name, $e, $fixInfo['appliedFixers'], $fixInfo['diff']));
+            } catch (LintingException $e) {
+                $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_LINT));
+                $this->errorsManager->report(new Error(Error::TYPE_LINT, $name, $e, $fixInfo['appliedFixers'], $fixInfo['diff']));
                 return;
             }
             if (!$this->isDryRun) {
                 $fileName = $file->getRealPath();
                 if (!\file_exists($fileName)) {
-                    throw new \_PhpScopercc9aec205203\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s" (no longer) exists.', $file->getPathname()), 0, null, $file->getPathname());
+                    throw new IOException(\sprintf('Failed to write file "%s" (no longer) exists.', $file->getPathname()), 0, null, $file->getPathname());
                 }
                 if (\is_dir($fileName)) {
-                    throw new \_PhpScopercc9aec205203\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write file "%s" as the location exists as directory.', $fileName), 0, null, $fileName);
+                    throw new IOException(\sprintf('Cannot write file "%s" as the location exists as directory.', $fileName), 0, null, $fileName);
                 }
                 if (!\is_writable($fileName)) {
-                    throw new \_PhpScopercc9aec205203\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Cannot write to file "%s" as it is not writable.', $fileName), 0, null, $fileName);
+                    throw new IOException(\sprintf('Cannot write to file "%s" as it is not writable.', $fileName), 0, null, $fileName);
                 }
                 if (\false === @\file_put_contents($fileName, $new)) {
                     $error = \error_get_last();
-                    throw new \_PhpScopercc9aec205203\Symfony\Component\Filesystem\Exception\IOException(\sprintf('Failed to write file "%s", "%s".', $fileName, $error ? $error['message'] : 'no reason available'), 0, null, $fileName);
+                    throw new IOException(\sprintf('Failed to write file "%s", "%s".', $fileName, $error ? $error['message'] : 'no reason available'), 0, null, $fileName);
                 }
             }
         }
         $this->cacheManager->setFile($name, $new);
-        $this->dispatchEvent(\PhpCsFixer\FixerFileProcessedEvent::NAME, new \PhpCsFixer\FixerFileProcessedEvent($fixInfo ? \PhpCsFixer\FixerFileProcessedEvent::STATUS_FIXED : \PhpCsFixer\FixerFileProcessedEvent::STATUS_NO_CHANGES));
+        $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent($fixInfo ? FixerFileProcessedEvent::STATUS_FIXED : FixerFileProcessedEvent::STATUS_NO_CHANGES));
         return $fixInfo;
     }
     /**
@@ -199,19 +199,19 @@ final class Runner
      */
     private function processException($name, $e)
     {
-        $this->dispatchEvent(\PhpCsFixer\FixerFileProcessedEvent::NAME, new \PhpCsFixer\FixerFileProcessedEvent(\PhpCsFixer\FixerFileProcessedEvent::STATUS_EXCEPTION));
-        $this->errorsManager->report(new \PhpCsFixer\Error\Error(\PhpCsFixer\Error\Error::TYPE_EXCEPTION, $name, $e));
+        $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_EXCEPTION));
+        $this->errorsManager->report(new Error(Error::TYPE_EXCEPTION, $name, $e));
     }
     /**
      * @param string $name
      */
-    private function dispatchEvent($name, \PhpCsFixer\Event\Event $event)
+    private function dispatchEvent($name, Event $event)
     {
         if (null === $this->eventDispatcher) {
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScopercc9aec205203\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScopereb9508917a55\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

@@ -27,7 +27,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Kuba Werłos <werlos@gmail.com>
  */
-final class OperatorLinebreakFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class OperatorLinebreakFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * @internal
@@ -50,12 +50,12 @@ final class OperatorLinebreakFixer extends \PhpCsFixer\AbstractFixer implements 
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Operators - when multiline - must always be at the beginning or at the end of the line.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Operators - when multiline - must always be at the beginning or at the end of the line.', [new CodeSample('<?php
 function foo() {
     return $bar ||
         $baz;
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 function foo() {
     return $bar
         || $baz;
@@ -81,7 +81,7 @@ function foo() {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return \true;
     }
@@ -90,15 +90,15 @@ function foo() {
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('only_booleans', 'whether to limit operators to only boolean ones'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('position', 'whether to place operators at the beginning or at the end of the line'))->setAllowedValues(['beginning', 'end'])->setDefault($this->position)->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('only_booleans', 'whether to limit operators to only boolean ones'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new FixerOptionBuilder('position', 'whether to place operators at the beginning or at the end of the line'))->setAllowedValues(['beginning', 'end'])->setDefault($this->position)->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $referenceAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ReferenceAnalyzer();
-        $gotoLabelAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer();
+        $referenceAnalyzer = new ReferenceAnalyzer();
+        $gotoLabelAnalyzer = new GotoLabelAnalyzer();
         $excludedIndices = $this->getExcludedIndices($tokens);
         $index = $tokens->count();
         while ($index > 1) {
@@ -132,7 +132,7 @@ function foo() {
      *
      * @return int[]
      */
-    private function getExcludedIndices(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function getExcludedIndices(Tokens $tokens)
     {
         $indices = [];
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
@@ -147,16 +147,16 @@ function foo() {
      *
      * @return int[]
      */
-    private function getCasesColonsForSwitch(\PhpCsFixer\Tokenizer\Tokens $tokens, $switchIndex)
+    private function getCasesColonsForSwitch(Tokens $tokens, $switchIndex)
     {
-        return \array_map(static function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\CaseAnalysis $caseAnalysis) {
+        return \array_map(static function (CaseAnalysis $caseAnalysis) {
             return $caseAnalysis->getColonIndex();
-        }, (new \PhpCsFixer\Tokenizer\Analyzer\SwitchAnalyzer())->getSwitchAnalysis($tokens, $switchIndex)->getCases());
+        }, (new SwitchAnalyzer())->getSwitchAnalysis($tokens, $switchIndex)->getCases());
     }
     /**
      * @param int[] $operatorIndices
      */
-    private function fixOperatorLinebreak(\PhpCsFixer\Tokenizer\Tokens $tokens, array $operatorIndices)
+    private function fixOperatorLinebreak(Tokens $tokens, array $operatorIndices)
     {
         /** @var int $prevIndex */
         $prevIndex = $tokens->getPrevMeaningfulToken(\min($operatorIndices));
@@ -185,18 +185,18 @@ function foo() {
     /**
      * @param int[] $operatorIndices
      */
-    private function fixMoveToTheBeginning(\PhpCsFixer\Tokenizer\Tokens $tokens, array $operatorIndices)
+    private function fixMoveToTheBeginning(Tokens $tokens, array $operatorIndices)
     {
         /** @var int $prevIndex */
         $prevIndex = $tokens->getNonEmptySibling(\min($operatorIndices), -1);
         /** @var int $nextIndex */
         $nextIndex = $tokens->getNextMeaningfulToken(\max($operatorIndices));
         for ($i = $nextIndex - 1; $i > \max($operatorIndices); --$i) {
-            if ($tokens[$i]->isWhitespace() && 1 === \PhpCsFixer\Preg::match('/\\R/u', $tokens[$i]->getContent())) {
+            if ($tokens[$i]->isWhitespace() && 1 === Preg::match('/\\R/u', $tokens[$i]->getContent())) {
                 $isWhitespaceBefore = $tokens[$prevIndex]->isWhitespace();
                 $inserts = $this->getReplacementsAndClear($tokens, $operatorIndices, -1);
                 if ($isWhitespaceBefore) {
-                    $inserts[] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+                    $inserts[] = new Token([\T_WHITESPACE, ' ']);
                 }
                 $tokens->insertAt($nextIndex, $inserts);
                 break;
@@ -206,18 +206,18 @@ function foo() {
     /**
      * @param int[] $operatorIndices
      */
-    private function fixMoveToTheEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, array $operatorIndices)
+    private function fixMoveToTheEnd(Tokens $tokens, array $operatorIndices)
     {
         /** @var int $prevIndex */
         $prevIndex = $tokens->getPrevMeaningfulToken(\min($operatorIndices));
         /** @var int $nextIndex */
         $nextIndex = $tokens->getNonEmptySibling(\max($operatorIndices), 1);
         for ($i = $prevIndex + 1; $i < \max($operatorIndices); ++$i) {
-            if ($tokens[$i]->isWhitespace() && 1 === \PhpCsFixer\Preg::match('/\\R/u', $tokens[$i]->getContent())) {
+            if ($tokens[$i]->isWhitespace() && 1 === Preg::match('/\\R/u', $tokens[$i]->getContent())) {
                 $isWhitespaceAfter = $tokens[$nextIndex]->isWhitespace();
                 $inserts = $this->getReplacementsAndClear($tokens, $operatorIndices, 1);
                 if ($isWhitespaceAfter) {
-                    \array_unshift($inserts, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
+                    \array_unshift($inserts, new Token([\T_WHITESPACE, ' ']));
                 }
                 $tokens->insertAt($prevIndex + 1, $inserts);
                 break;
@@ -230,7 +230,7 @@ function foo() {
      *
      * @return Token[]
      */
-    private function getReplacementsAndClear(\PhpCsFixer\Tokenizer\Tokens $tokens, array $indices, $direction)
+    private function getReplacementsAndClear(Tokens $tokens, array $indices, $direction)
     {
         return \array_map(static function ($index) use($tokens, $direction) {
             $clone = $tokens[$index];
@@ -247,7 +247,7 @@ function foo() {
      *
      * @return bool
      */
-    private function isMultiline(\PhpCsFixer\Tokenizer\Tokens $tokens, $indexStart, $indexEnd)
+    private function isMultiline(Tokens $tokens, $indexStart, $indexEnd)
     {
         for ($index = $indexStart; $index <= $indexEnd; ++$index) {
             if (\false !== \strpos($tokens[$index]->getContent(), "\n")) {

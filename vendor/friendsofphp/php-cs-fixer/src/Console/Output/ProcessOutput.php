@@ -12,8 +12,8 @@
 namespace PhpCsFixer\Console\Output;
 
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Output writer to show the process of a FixCommand.
  *
@@ -26,7 +26,7 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
      *
      * @var array
      */
-    private static $eventStatusMap = [\PhpCsFixer\FixerFileProcessedEvent::STATUS_UNKNOWN => ['symbol' => '?', 'format' => '%s', 'description' => 'unknown'], \PhpCsFixer\FixerFileProcessedEvent::STATUS_INVALID => ['symbol' => 'I', 'format' => '<bg=red>%s</bg=red>', 'description' => 'invalid file syntax (file ignored)'], \PhpCsFixer\FixerFileProcessedEvent::STATUS_SKIPPED => ['symbol' => 'S', 'format' => '<fg=cyan>%s</fg=cyan>', 'description' => 'skipped (cached or empty file)'], \PhpCsFixer\FixerFileProcessedEvent::STATUS_NO_CHANGES => ['symbol' => '.', 'format' => '%s', 'description' => 'no changes'], \PhpCsFixer\FixerFileProcessedEvent::STATUS_FIXED => ['symbol' => 'F', 'format' => '<fg=green>%s</fg=green>', 'description' => 'fixed'], \PhpCsFixer\FixerFileProcessedEvent::STATUS_EXCEPTION => ['symbol' => 'E', 'format' => '<bg=red>%s</bg=red>', 'description' => 'error'], \PhpCsFixer\FixerFileProcessedEvent::STATUS_LINT => ['symbol' => 'E', 'format' => '<bg=red>%s</bg=red>', 'description' => 'error']];
+    private static $eventStatusMap = [FixerFileProcessedEvent::STATUS_UNKNOWN => ['symbol' => '?', 'format' => '%s', 'description' => 'unknown'], FixerFileProcessedEvent::STATUS_INVALID => ['symbol' => 'I', 'format' => '<bg=red>%s</bg=red>', 'description' => 'invalid file syntax (file ignored)'], FixerFileProcessedEvent::STATUS_SKIPPED => ['symbol' => 'S', 'format' => '<fg=cyan>%s</fg=cyan>', 'description' => 'skipped (cached or empty file)'], FixerFileProcessedEvent::STATUS_NO_CHANGES => ['symbol' => '.', 'format' => '%s', 'description' => 'no changes'], FixerFileProcessedEvent::STATUS_FIXED => ['symbol' => 'F', 'format' => '<fg=green>%s</fg=green>', 'description' => 'fixed'], FixerFileProcessedEvent::STATUS_EXCEPTION => ['symbol' => 'E', 'format' => '<bg=red>%s</bg=red>', 'description' => 'error'], FixerFileProcessedEvent::STATUS_LINT => ['symbol' => 'E', 'format' => '<bg=red>%s</bg=red>', 'description' => 'error']];
     /**
      * @var EventDispatcherInterface
      */
@@ -53,11 +53,11 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
      * @param null|int $width
      * @param null|int $nbFiles
      */
-    public function __construct(\_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface $output, \_PhpScopercc9aec205203\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher, $width, $nbFiles)
+    public function __construct(OutputInterface $output, EventDispatcherInterface $dispatcher, $width, $nbFiles)
     {
         $this->output = $output;
         $this->eventDispatcher = $dispatcher;
-        $this->eventDispatcher->addListener(\PhpCsFixer\FixerFileProcessedEvent::NAME, [$this, 'onFixerFileProcessed']);
+        $this->eventDispatcher->addListener(FixerFileProcessedEvent::NAME, [$this, 'onFixerFileProcessed']);
         $this->symbolsPerLine = $width;
         if (null !== $nbFiles) {
             $this->files = $nbFiles;
@@ -69,7 +69,7 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
     }
     public function __destruct()
     {
-        $this->eventDispatcher->removeListener(\PhpCsFixer\FixerFileProcessedEvent::NAME, [$this, 'onFixerFileProcessed']);
+        $this->eventDispatcher->removeListener(FixerFileProcessedEvent::NAME, [$this, 'onFixerFileProcessed']);
     }
     /**
      * This class is not intended to be serialized,
@@ -89,7 +89,7 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
     {
         throw new \BadMethodCallException('Cannot unserialize ' . __CLASS__);
     }
-    public function onFixerFileProcessed(\PhpCsFixer\FixerFileProcessedEvent $event)
+    public function onFixerFileProcessed(FixerFileProcessedEvent $event)
     {
         if (null === $this->files && null !== $this->symbolsPerLine && 0 === $this->processedFiles % $this->symbolsPerLine && 0 !== $this->processedFiles) {
             $this->output->writeln('');

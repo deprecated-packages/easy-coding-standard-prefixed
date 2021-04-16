@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\Cache;
+namespace _PhpScopereb9508917a55\Symfony\Component\Cache;
 
-use _PhpScopercc9aec205203\Doctrine\Common\Cache\CacheProvider;
-use _PhpScopercc9aec205203\Psr\Cache\CacheItemPoolInterface;
-use _PhpScopercc9aec205203\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopereb9508917a55\Doctrine\Common\Cache\CacheProvider;
+use _PhpScopereb9508917a55\Psr\Cache\CacheItemPoolInterface;
+use _PhpScopereb9508917a55\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DoctrineProvider extends \_PhpScopercc9aec205203\Doctrine\Common\Cache\CacheProvider implements \_PhpScopercc9aec205203\Symfony\Component\Cache\PruneableInterface, \_PhpScopercc9aec205203\Symfony\Component\Cache\ResettableInterface
+class DoctrineProvider extends CacheProvider implements \_PhpScopereb9508917a55\Symfony\Component\Cache\PruneableInterface, \_PhpScopereb9508917a55\Symfony\Component\Cache\ResettableInterface
 {
     private $pool;
-    public function __construct(\_PhpScopercc9aec205203\Psr\Cache\CacheItemPoolInterface $pool)
+    public function __construct(CacheItemPoolInterface $pool)
     {
         $this->pool = $pool;
     }
@@ -28,14 +28,14 @@ class DoctrineProvider extends \_PhpScopercc9aec205203\Doctrine\Common\Cache\Cac
      */
     public function prune()
     {
-        return $this->pool instanceof \_PhpScopercc9aec205203\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
+        return $this->pool instanceof \_PhpScopereb9508917a55\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
     }
     /**
      * {@inheritdoc}
      */
     public function reset()
     {
-        if ($this->pool instanceof \_PhpScopercc9aec205203\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->pool instanceof ResetInterface) {
             $this->pool->reset();
         }
         $this->setNamespace($this->getNamespace());

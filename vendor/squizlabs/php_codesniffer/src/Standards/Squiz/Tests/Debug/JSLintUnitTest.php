@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Standards\Squiz\Tests\Debug;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 use PHP_CodeSniffer\Config;
-class JSLintUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class JSLintUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Should this test be skipped for some reason.
@@ -20,7 +20,7 @@ class JSLintUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitT
      */
     protected function shouldSkipTest()
     {
-        $jslPath = \PHP_CodeSniffer\Config::getExecutablePath('jslint');
+        $jslPath = Config::getExecutablePath('jslint');
         if ($jslPath === null) {
             return \true;
         }

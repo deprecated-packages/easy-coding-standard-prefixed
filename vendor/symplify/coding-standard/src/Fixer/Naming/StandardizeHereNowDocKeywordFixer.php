@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Naming;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -18,7 +18,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Symplify\CodingStandard\Tests\Fixer\Naming\StandardizeHereNowDocKeywordFixer\StandardizeHereNowDocKeywordFixerTest
  */
-final class StandardizeHereNowDocKeywordFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface, \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface, \PhpCsFixer\Fixer\ConfigurableFixerInterface
+final class StandardizeHereNowDocKeywordFixer extends AbstractSymplifyFixer implements ConfigurableRuleInterface, DocumentedRuleInterface, ConfigurableFixerInterface
 {
     /**
      * @api
@@ -43,21 +43,21 @@ final class StandardizeHereNowDocKeywordFixer extends \Symplify\CodingStandard\F
      * @var string
      */
     private $keyword = self::DEFAULT_KEYWORD;
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition() : FixerDefinitionInterface
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
+        return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_START_HEREDOC, T_START_NOWDOC]);
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         // function arguments, function call parameters, lambda use()
         for ($position = \count($tokens) - 1; $position >= 0; --$position) {
@@ -71,9 +71,9 @@ final class StandardizeHereNowDocKeywordFixer extends \Symplify\CodingStandard\F
             }
         }
     }
-    public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+    public function getRuleDefinition() : RuleDefinition
     {
-        return new \Symplify\RuleDocGenerator\ValueObject\RuleDefinition(self::ERROR_MESSAGE, [new \Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample(<<<'CODE_SAMPLE'
+        return new RuleDefinition(self::ERROR_MESSAGE, [new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 $value = <<<'WHATEVER'
 ...
 'WHATEVER'
@@ -92,19 +92,19 @@ CODE_SAMPLE
     /**
      * @param Tokens<Token> $tokens
      */
-    private function fixStartToken(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $position) : void
+    private function fixStartToken(Tokens $tokens, Token $token, int $position) : void
     {
-        $match = \_PhpScopercc9aec205203\Nette\Utils\Strings::match($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX);
+        $match = Strings::match($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX);
         if (!isset($match['name'])) {
             return;
         }
-        $newContent = \_PhpScopercc9aec205203\Nette\Utils\Strings::replace($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX, '$1' . $this->keyword . '$4');
-        $tokens[$position] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), $newContent]);
+        $newContent = Strings::replace($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX, '$1' . $this->keyword . '$4');
+        $tokens[$position] = new Token([$token->getId(), $newContent]);
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    private function fixEndToken(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, int $position) : void
+    private function fixEndToken(Tokens $tokens, Token $token, int $position) : void
     {
         if ($token->getContent() === $this->keyword) {
             return;
@@ -115,6 +115,6 @@ CODE_SAMPLE
         if (\PHP_VERSION_ID >= 70300 && $tokenContent !== $trimmedTokenContent) {
             $spaceEnd = \substr($tokenContent, 0, \strlen($tokenContent) - \strlen($trimmedTokenContent));
         }
-        $tokens[$position] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), $spaceEnd . $this->keyword]);
+        $tokens[$position] = new Token([$token->getId(), $spaceEnd . $this->keyword]);
     }
 }

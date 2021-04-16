@@ -23,29 +23,29 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class RegularCallableCallFixer extends \PhpCsFixer\AbstractFixer
+final class RegularCallableCallFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Callables must be called without using `call_user_func*` when possible.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Callables must be called without using `call_user_func*` when possible.', [new CodeSample('<?php
     call_user_func("var_dump", 1, 2);
 
     call_user_func("Bar\\Baz::d", 1, 2);
 
     call_user_func_array($callback, [1, 2]);
-'), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+'), new VersionSpecificCodeSample('<?php
 call_user_func(function ($a, $b) { var_dump($a, $b); }, 1, 2);
 
 call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70000))], null, 'Risky when the `call_user_func` or `call_user_func_array` function is overridden or when are used in constructions that should be avoided, like `call_user_func_array(\'foo\', [\'bar\' => \'baz\'])` or `call_user_func($foo, $foo = \'bar\')`.');
+', new VersionSpecification(70000))], null, 'Risky when the `call_user_func` or `call_user_func_array` function is overridden or when are used in constructions that should be avoided, like `call_user_func_array(\'foo\', [\'bar\' => \'baz\'])` or `call_user_func($foo, $foo = \'bar\')`.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
@@ -56,10 +56,10 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
-        $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
+        $functionsAnalyzer = new FunctionsAnalyzer();
+        $argumentsAnalyzer = new ArgumentsAnalyzer();
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
             if (!$tokens[$index]->equalsAny([[\T_STRING, 'call_user_func'], [\T_STRING, 'call_user_func_array']], \false)) {
                 continue;
@@ -69,7 +69,7 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
                 // redeclare/override
             }
             $openParenthesis = $tokens->getNextMeaningfulToken($index);
-            $closeParenthesis = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis);
+            $closeParenthesis = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis);
             $arguments = $argumentsAnalyzer->getArguments($tokens, $openParenthesis, $closeParenthesis);
             if (1 > \count($arguments)) {
                 return;
@@ -81,7 +81,7 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
     /**
      * @param int $index
      */
-    private function processCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, array $arguments)
+    private function processCall(Tokens $tokens, $index, array $arguments)
     {
         $firstArgIndex = $tokens->getNextMeaningfulToken($tokens->getNextMeaningfulToken($index));
         /** @var Token $firstArgToken */
@@ -92,7 +92,7 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
                 return;
                 // first argument is an expression like `call_user_func("foo"."bar", ...)`, not supported!
             }
-            $newCallTokens = \PhpCsFixer\Tokenizer\Tokens::fromCode('<?php ' . \substr($firstArgToken->getContent(), 1, -1) . '();');
+            $newCallTokens = Tokens::fromCode('<?php ' . \substr($firstArgToken->getContent(), 1, -1) . '();');
             $newCallTokensSize = $newCallTokens->count();
             $newCallTokens->clearAt(0);
             $newCallTokens->clearRange($newCallTokensSize - 3, $newCallTokensSize - 1);
@@ -100,10 +100,10 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
             $this->replaceCallUserFuncWithCallback($tokens, $index, $newCallTokens, $firstArgIndex, $firstArgIndex);
         } elseif ($firstArgToken->isGivenKind([\T_FUNCTION, \T_STATIC])) {
             if (\PHP_VERSION_ID >= 70000) {
-                $firstArgEndIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $tokens->getNextTokenOfKind($firstArgIndex, ['{']));
+                $firstArgEndIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $tokens->getNextTokenOfKind($firstArgIndex, ['{']));
                 $newCallTokens = $this->getTokensSubcollection($tokens, $firstArgIndex, $firstArgEndIndex);
-                $newCallTokens->insertAt($newCallTokens->count(), new \PhpCsFixer\Tokenizer\Token(')'));
-                $newCallTokens->insertAt(0, new \PhpCsFixer\Tokenizer\Token('('));
+                $newCallTokens->insertAt($newCallTokens->count(), new Token(')'));
+                $newCallTokens->insertAt(0, new Token('('));
                 $this->replaceCallUserFuncWithCallback($tokens, $index, $newCallTokens, $firstArgIndex, $firstArgEndIndex);
             }
         } elseif ($firstArgToken->isGivenKind(\T_VARIABLE)) {
@@ -126,8 +126,8 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
                 if ($newCallTokens[$newCallIndex]->isGivenKind([\T_WHITESPACE, \T_COMMENT, \T_DOC_COMMENT, \T_VARIABLE])) {
                     continue;
                 }
-                $blockType = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($newCallTokens[$newCallIndex]);
-                if (null !== $blockType && (\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE === $blockType['type'] || \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_INDEX_SQUARE_BRACE === $blockType['type'])) {
+                $blockType = Tokens::detectBlockType($newCallTokens[$newCallIndex]);
+                if (null !== $blockType && (Tokens::BLOCK_TYPE_ARRAY_INDEX_CURLY_BRACE === $blockType['type'] || Tokens::BLOCK_TYPE_INDEX_SQUARE_BRACE === $blockType['type'])) {
                     $newCallIndex = $newCallTokens->findBlockStart($blockType['type'], $newCallIndex);
                     continue;
                 }
@@ -138,8 +138,8 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
                 if (\PHP_VERSION_ID < 70000) {
                     return;
                 }
-                $newCallTokens->insertAt($newCallTokens->count(), new \PhpCsFixer\Tokenizer\Token(')'));
-                $newCallTokens->insertAt(0, new \PhpCsFixer\Tokenizer\Token('('));
+                $newCallTokens->insertAt($newCallTokens->count(), new Token(')'));
+                $newCallTokens->insertAt(0, new Token('('));
             }
             $this->replaceCallUserFuncWithCallback($tokens, $index, $newCallTokens, $firstArgIndex, $firstArgEndIndex);
         }
@@ -149,7 +149,7 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
      * @param int $firstArgStartIndex
      * @param int $firstArgEndIndex
      */
-    private function replaceCallUserFuncWithCallback(\PhpCsFixer\Tokenizer\Tokens $tokens, $callIndex, \PhpCsFixer\Tokenizer\Tokens $newCallTokens, $firstArgStartIndex, $firstArgEndIndex)
+    private function replaceCallUserFuncWithCallback(Tokens $tokens, $callIndex, Tokens $newCallTokens, $firstArgStartIndex, $firstArgEndIndex)
     {
         $tokens->clearRange($firstArgStartIndex, $firstArgEndIndex);
         // FRS end?
@@ -159,7 +159,7 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
             $useEllipsis = $tokens[$callIndex]->equals([\T_STRING, 'call_user_func_array']);
             if ($useEllipsis) {
                 $secondArgIndex = $tokens->getNextMeaningfulToken($afterFirstArgIndex);
-                $tokens->insertAt($secondArgIndex, new \PhpCsFixer\Tokenizer\Token([\T_ELLIPSIS, '...']));
+                $tokens->insertAt($secondArgIndex, new Token([\T_ELLIPSIS, '...']));
             }
             $tokens->clearAt($afterFirstArgIndex);
             $tokens->removeTrailingWhitespace($afterFirstArgIndex);
@@ -170,10 +170,10 @@ call_user_func(static function ($a, $b) { var_dump($a, $b); }, 1, 2);
             $tokens->clearTokenAndMergeSurroundingWhitespace($prevIndex);
         }
     }
-    private function getTokensSubcollection(\PhpCsFixer\Tokenizer\Tokens $tokens, $indexStart, $indexEnd)
+    private function getTokensSubcollection(Tokens $tokens, $indexStart, $indexEnd)
     {
         $size = $indexEnd - $indexStart + 1;
-        $subcollection = new \PhpCsFixer\Tokenizer\Tokens($size);
+        $subcollection = new Tokens($size);
         for ($i = 0; $i < $size; ++$i) {
             /** @var Token $toClone */
             $toClone = $tokens[$i + $indexStart];

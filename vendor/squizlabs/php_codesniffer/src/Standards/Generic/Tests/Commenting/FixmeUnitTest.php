@@ -11,7 +11,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Commenting;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class FixmeUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class FixmeUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

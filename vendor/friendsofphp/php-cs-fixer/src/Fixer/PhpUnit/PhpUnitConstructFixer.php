@@ -24,7 +24,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpUnitConstructFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpUnitConstructFixer extends AbstractPhpUnitFixer implements ConfigurationDefinitionFixerInterface
 {
     private static $assertionFixers = ['assertSame' => 'fixAssertPositive', 'assertEquals' => 'fixAssertPositive', 'assertNotEquals' => 'fixAssertNegative', 'assertNotSame' => 'fixAssertNegative'];
     /**
@@ -39,7 +39,7 @@ final class PhpUnitConstructFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('PHPUnit assertion method calls like `->assertSame(true, $foo)` should be written with dedicated method like `->assertTrue($foo)`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('PHPUnit assertion method calls like `->assertSame(true, $foo)` should be written with dedicated method like `->assertTrue($foo)`.', [new CodeSample('<?php
 final class FooTest extends \\PHPUnit_Framework_TestCase {
     public function testSomething() {
         $this->assertEquals(false, $b);
@@ -48,7 +48,7 @@ final class FooTest extends \\PHPUnit_Framework_TestCase {
         $this->assertNotSame(null, $d);
     }
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 final class FooTest extends \\PHPUnit_Framework_TestCase {
     public function testSomething() {
         $this->assertEquals(false, $b);
@@ -71,7 +71,7 @@ final class FooTest extends \\PHPUnit_Framework_TestCase {
     /**
      * {@inheritdoc}
      */
-    protected function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
+    protected function applyPhpUnitClassFix(Tokens $tokens, $startIndex, $endIndex)
     {
         // no assertions to be fixed - fast return
         if (empty($this->configuration['assertions'])) {
@@ -92,7 +92,7 @@ final class FooTest extends \\PHPUnit_Framework_TestCase {
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('assertions', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('assertions', 'List of assertion methods to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(\array_keys(self::$assertionFixers))])->setDefault(['assertEquals', 'assertSame', 'assertNotEquals', 'assertNotSame'])->getOption()], $this->getName());
+        return new FixerConfigurationResolverRootless('assertions', [(new FixerOptionBuilder('assertions', 'List of assertion methods to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset(\array_keys(self::$assertionFixers))])->setDefault(['assertEquals', 'assertSame', 'assertNotEquals', 'assertNotSame'])->getOption()], $this->getName());
     }
     /**
      * @param int    $index
@@ -100,7 +100,7 @@ final class FooTest extends \\PHPUnit_Framework_TestCase {
      *
      * @return null|int
      */
-    private function fixAssertNegative(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $method)
+    private function fixAssertNegative(Tokens $tokens, $index, $method)
     {
         static $map = ['false' => 'assertNotFalse', 'null' => 'assertNotNull', 'true' => 'assertNotTrue'];
         return $this->fixAssert($map, $tokens, $index, $method);
@@ -111,7 +111,7 @@ final class FooTest extends \\PHPUnit_Framework_TestCase {
      *
      * @return null|int
      */
-    private function fixAssertPositive(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $method)
+    private function fixAssertPositive(Tokens $tokens, $index, $method)
     {
         static $map = ['false' => 'assertFalse', 'null' => 'assertNull', 'true' => 'assertTrue'];
         return $this->fixAssert($map, $tokens, $index, $method);
@@ -123,9 +123,9 @@ final class FooTest extends \\PHPUnit_Framework_TestCase {
      *
      * @return null|int
      */
-    private function fixAssert(array $map, \PhpCsFixer\Tokenizer\Tokens $tokens, $index, $method)
+    private function fixAssert(array $map, Tokens $tokens, $index, $method)
     {
-        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
+        $functionsAnalyzer = new FunctionsAnalyzer();
         $sequence = $tokens->findSequence([[\T_STRING, $method], '('], $index);
         if (null === $sequence) {
             return null;
@@ -144,7 +144,7 @@ final class FooTest extends \\PHPUnit_Framework_TestCase {
         if (!$tokens[$sequenceIndexes[3]]->equals(',')) {
             return $sequenceIndexes[3];
         }
-        $tokens[$sequenceIndexes[0]] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $map[\strtolower($firstParameterToken->getContent())]]);
+        $tokens[$sequenceIndexes[0]] = new Token([\T_STRING, $map[\strtolower($firstParameterToken->getContent())]]);
         $tokens->clearRange($sequenceIndexes[2], $tokens->getNextNonWhitespace($sequenceIndexes[3]) - 1);
         return $sequenceIndexes[3];
     }

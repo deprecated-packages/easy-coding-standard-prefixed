@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\FileSystemFilter;
 
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestCase;
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestCase;
 use Symplify\SmartFileSystem\FileSystemFilter;
-final class FileSystemFilterTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
+final class FileSystemFilterTest extends TestCase
 {
     /**
      * @var FileSystemFilter
@@ -13,7 +13,7 @@ final class FileSystemFilterTest extends \_PhpScopercc9aec205203\PHPUnit\Framewo
     private $fileSystemFilter;
     protected function setUp() : void
     {
-        $this->fileSystemFilter = new \Symplify\SmartFileSystem\FileSystemFilter();
+        $this->fileSystemFilter = new FileSystemFilter();
     }
     public function testSeparateFilesAndDirectories() : void
     {

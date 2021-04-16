@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo;
@@ -13,7 +13,7 @@ final class LineLengthResolver
     /**
      * @param Tokens|Token[] $tokens
      */
-    public function getLengthFromStartEnd(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : int
+    public function getLengthFromStartEnd(Tokens $tokens, BlockInfo $blockInfo) : int
     {
         $lineLength = 0;
         // compute from function to start of line
@@ -36,11 +36,11 @@ final class LineLengthResolver
     /**
      * @param Tokens|Token[] $tokens
      */
-    private function isNewLineOrOpenTag(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
+    private function isNewLineOrOpenTag(Tokens $tokens, int $position) : bool
     {
         /** @var Token $currentToken */
         $currentToken = $tokens[$position];
-        if (\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($currentToken->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
+        if (Strings::startsWith($currentToken->getContent(), StaticEolConfiguration::getEolChar())) {
             return \true;
         }
         return $currentToken->isGivenKind(\T_OPEN_TAG);
@@ -48,7 +48,7 @@ final class LineLengthResolver
     /**
      * @param Tokens|Token[] $tokens
      */
-    private function getLengthFromFunctionStartToEndOfArguments(\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo, \PhpCsFixer\Tokenizer\Tokens $tokens) : int
+    private function getLengthFromFunctionStartToEndOfArguments(BlockInfo $blockInfo, Tokens $tokens) : int
     {
         $length = 0;
         $start = $blockInfo->getStart();
@@ -71,13 +71,13 @@ final class LineLengthResolver
     /**
      * @param Tokens|Token[] $tokens
      */
-    private function getLengthFromEndOfArgumentToLineBreak(\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo, \PhpCsFixer\Tokenizer\Tokens $tokens) : int
+    private function getLengthFromEndOfArgumentToLineBreak(BlockInfo $blockInfo, Tokens $tokens) : int
     {
         $length = 0;
         $end = $blockInfo->getEnd();
         /** @var Token $currentToken */
         $currentToken = $tokens[$end];
-        while (!\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($currentToken->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
+        while (!Strings::startsWith($currentToken->getContent(), StaticEolConfiguration::getEolChar())) {
             $length += \strlen($currentToken->getContent());
             ++$end;
             if (!isset($tokens[$end])) {

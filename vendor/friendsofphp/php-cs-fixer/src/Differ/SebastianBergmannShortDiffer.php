@@ -23,7 +23,7 @@ final class SebastianBergmannShortDiffer implements \PhpCsFixer\Differ\DifferInt
     private $differ;
     public function __construct()
     {
-        $this->differ = new \PhpCsFixer\Diff\v1_4\Differ("--- Original\n+++ New\n", \false);
+        $this->differ = new Differ("--- Original\n+++ New\n", \false);
     }
     /**
      * {@inheritdoc}

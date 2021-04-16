@@ -22,7 +22,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @internal
  */
-final class TypeColonTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
+final class TypeColonTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
@@ -43,7 +43,7 @@ final class TypeColonTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
+    public function process(Tokens $tokens, Token $token, $index)
     {
         if (!$token->equals(':')) {
             return;
@@ -52,7 +52,7 @@ final class TypeColonTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
         if (!$tokens[$endIndex]->equals(')')) {
             return;
         }
-        $startIndex = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $endIndex);
+        $startIndex = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $endIndex);
         $prevIndex = $tokens->getPrevMeaningfulToken($startIndex);
         $prevToken = $tokens[$prevIndex];
         // if this could be a function name we need to take one more step
@@ -60,12 +60,12 @@ final class TypeColonTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
             $prevIndex = $tokens->getPrevMeaningfulToken($prevIndex);
             $prevToken = $tokens[$prevIndex];
         }
-        $prevKinds = [\T_FUNCTION, \PhpCsFixer\Tokenizer\CT::T_RETURN_REF, \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA];
+        $prevKinds = [\T_FUNCTION, CT::T_RETURN_REF, CT::T_USE_LAMBDA];
         if (\PHP_VERSION_ID >= 70400) {
             $prevKinds[] = \T_FN;
         }
         if ($prevToken->isGivenKind($prevKinds)) {
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON, ':']);
+            $tokens[$index] = new Token([CT::T_TYPE_COLON, ':']);
         }
     }
     /**
@@ -73,6 +73,6 @@ final class TypeColonTransformer extends \PhpCsFixer\Tokenizer\AbstractTransform
      */
     public function getCustomTokens()
     {
-        return [\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON];
+        return [CT::T_TYPE_COLON];
     }
 }

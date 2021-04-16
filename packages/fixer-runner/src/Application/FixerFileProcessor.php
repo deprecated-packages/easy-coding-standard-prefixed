@@ -29,12 +29,12 @@ use Throwable;
 /**
  * @see \Symplify\EasyCodingStandard\Tests\Error\ErrorCollector\FixerFileProcessorTest
  */
-final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\Application\FileProcessorInterface
+final class FixerFileProcessor implements FileProcessorInterface
 {
     /**
      * @var array<class-string<DefinedFixerInterface>>
      */
-    private const MARKDOWN_EXCLUDED_FIXERS = [\PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer::class, \PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer::class, \PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer::class, \PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer::class, \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer::class, \Symplify\CodingStandard\Fixer\Commenting\RemoveCommentedCodeFixer::class];
+    private const MARKDOWN_EXCLUDED_FIXERS = [VoidReturnFixer::class, DeclareStrictTypesFixer::class, SingleBlankLineBeforeNamespaceFixer::class, BlankLineAfterOpeningTagFixer::class, SingleBlankLineAtEofFixer::class, RemoveCommentedCodeFixer::class];
     /**
      * @var class-string[]
      */
@@ -82,7 +82,7 @@ final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\
     /**
      * @param FixerInterface[] $fixers
      */
-    public function __construct(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector, \Symplify\EasyCodingStandard\Configuration\Configuration $configuration, \Symplify\EasyCodingStandard\FixerRunner\Parser\FileToTokensParser $fileToTokensParser, \Symplify\Skipper\Skipper\Skipper $skipper, \PhpCsFixer\Differ\DifferInterface $differ, \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \Symplify\EasyCodingStandard\SnippetFormatter\Provider\CurrentParentFileInfoProvider $currentParentFileInfoProvider, \Symplify\EasyCodingStandard\FileSystem\TargetFileInfoResolver $targetFileInfoResolver, array $fixers = [])
+    public function __construct(ErrorAndDiffCollector $errorAndDiffCollector, Configuration $configuration, FileToTokensParser $fileToTokensParser, Skipper $skipper, DifferInterface $differ, EasyCodingStandardStyle $easyCodingStandardStyle, SmartFileSystem $smartFileSystem, CurrentParentFileInfoProvider $currentParentFileInfoProvider, TargetFileInfoResolver $targetFileInfoResolver, array $fixers = [])
     {
         $this->errorAndDiffCollector = $errorAndDiffCollector;
         $this->skipper = $skipper;
@@ -102,7 +102,7 @@ final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\
     {
         return $this->fixers;
     }
-    public function processFile(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : string
+    public function processFile(SmartFileInfo $smartFileInfo) : string
     {
         $tokens = $this->fileToTokensParser->parseFromFilePath($smartFileInfo->getRealPath());
         $this->appliedFixers = [];
@@ -128,7 +128,7 @@ final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\
         if ($this->configuration->isFixer()) {
             $this->smartFileSystem->dumpFile($smartFileInfo->getRealPath(), $tokenGeneratedCode);
         }
-        \PhpCsFixer\Tokenizer\Tokens::clearCache();
+        Tokens::clearCache();
         return $tokenGeneratedCode;
     }
     /**
@@ -137,7 +137,7 @@ final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\
      */
     private function sortFixers(array $fixers) : array
     {
-        \usort($fixers, function (\PhpCsFixer\Fixer\FixerInterface $firstFixer, \PhpCsFixer\Fixer\FixerInterface $secondFixer) : int {
+        \usort($fixers, function (FixerInterface $firstFixer, FixerInterface $secondFixer) : int {
             return $secondFixer->getPriority() <=> $firstFixer->getPriority();
         });
         return $fixers;
@@ -145,7 +145,7 @@ final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\
     /**
      * @param Tokens<Token> $tokens
      */
-    private function processTokensByFixer(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo, \PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Fixer\FixerInterface $fixer) : void
+    private function processTokensByFixer(SmartFileInfo $smartFileInfo, Tokens $tokens, FixerInterface $fixer) : void
     {
         if ($this->shouldSkip($smartFileInfo, $fixer, $tokens)) {
             return;
@@ -156,8 +156,8 @@ final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\
         }
         try {
             $fixer->fix($smartFileInfo, $tokens);
-        } catch (\Throwable $throwable) {
-            throw new \Symplify\EasyCodingStandard\FixerRunner\Exception\Application\FixerFailedException(\sprintf('Fixing of "%s" file by "%s" failed: %s in file %s on line %d', $smartFileInfo->getRelativeFilePath(), \get_class($fixer), $throwable->getMessage(), $throwable->getFile(), $throwable->getLine()), $throwable->getCode(), $throwable);
+        } catch (Throwable $throwable) {
+            throw new FixerFailedException(\sprintf('Fixing of "%s" file by "%s" failed: %s in file %s on line %d', $smartFileInfo->getRelativeFilePath(), \get_class($fixer), $throwable->getMessage(), $throwable->getFile(), $throwable->getLine()), $throwable->getCode(), $throwable);
         }
         if (!$tokens->isChanged()) {
             return;
@@ -169,7 +169,7 @@ final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\
     /**
      * @param Tokens<Token> $tokens
      */
-    private function shouldSkip(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo, \PhpCsFixer\Fixer\FixerInterface $fixer, \PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    private function shouldSkip(SmartFileInfo $smartFileInfo, FixerInterface $fixer, Tokens $tokens) : bool
     {
         if ($this->skipper->shouldSkipElementAndFileInfo($fixer, $smartFileInfo)) {
             return \true;
@@ -182,7 +182,7 @@ final class FixerFileProcessor implements \Symplify\EasyCodingStandard\Contract\
     /**
      * Is markdown/herenow doc checker → skip useless rules
      */
-    private function shouldSkipForMarkdownHeredocCheck(\PhpCsFixer\Fixer\FixerInterface $fixer) : bool
+    private function shouldSkipForMarkdownHeredocCheck(FixerInterface $fixer) : bool
     {
         if ($this->currentParentFileInfoProvider->provide() === null) {
             return \false;

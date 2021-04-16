@@ -33,7 +33,7 @@ class Cbf implements \PHP_CodeSniffer\Reports\Report
      * @return bool
      * @throws \PHP_CodeSniffer\Exceptions\DeepExitException
      */
-    public function generateFileReport($report, \PHP_CodeSniffer\Files\File $phpcsFile, $showSources = \false, $width = 80)
+    public function generateFileReport($report, File $phpcsFile, $showSources = \false, $width = 80)
     {
         $errors = $phpcsFile->getFixableCount();
         if ($errors !== 0) {
@@ -49,7 +49,7 @@ class Cbf implements \PHP_CodeSniffer\Reports\Report
             // even if nothing was fixed. Exit here because we
             // can't process any more than 1 file in this setup.
             $fixedContent = $phpcsFile->fixer->getContents();
-            throw new \PHP_CodeSniffer\Exceptions\DeepExitException($fixedContent, 1);
+            throw new DeepExitException($fixedContent, 1);
         }
         if ($errors === 0) {
             return \false;
@@ -189,7 +189,7 @@ class Cbf implements \PHP_CodeSniffer\Reports\Report
         }
         echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL . \PHP_EOL;
         if ($toScreen === \true && $interactive === \false) {
-            \PHP_CodeSniffer\Util\Timing::printRunTime();
+            Util\Timing::printRunTime();
         }
     }
     //end generate()

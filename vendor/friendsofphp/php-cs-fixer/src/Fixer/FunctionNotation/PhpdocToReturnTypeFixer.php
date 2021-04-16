@@ -27,7 +27,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class PhpdocToReturnTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDeclarationFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpdocToReturnTypeFixer extends AbstractPhpdocToTypeDeclarationFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * @var array<int, array<int, int|string>>
@@ -54,27 +54,27 @@ final class PhpdocToReturnTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDecl
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('EXPERIMENTAL: Takes `@return` annotation of non-mixed types and adjusts accordingly the function signature. Requires PHP >= 7.0.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+        return new FixerDefinition('EXPERIMENTAL: Takes `@return` annotation of non-mixed types and adjusts accordingly the function signature. Requires PHP >= 7.0.', [new VersionSpecificCodeSample('<?php
 
 /** @return \\My\\Bar */
 function my_foo()
 {}
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70000)), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+', new VersionSpecification(70000)), new VersionSpecificCodeSample('<?php
 
 /** @return void */
 function my_foo()
 {}
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70100)), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+', new VersionSpecification(70100)), new VersionSpecificCodeSample('<?php
 
 /** @return object */
 function my_foo()
 {}
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70200)), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+', new VersionSpecification(70200)), new VersionSpecificCodeSample('<?php
 /** @return Foo */
 function foo() {}
 /** @return string */
 function bar() {}
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70100), ['scalar_types' => \false]), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+', new VersionSpecification(70100), ['scalar_types' => \false]), new VersionSpecificCodeSample('<?php
 final class Foo {
     /**
      * @return static
@@ -83,12 +83,12 @@ final class Foo {
         return new static($prototype);
     }
 }
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(80000))], null, 'This rule is EXPERIMENTAL and [1] is not covered with backward compatibility promise. [2] `@return` annotation is mandatory for the fixer to make changes, signatures of methods without it (no docblock, inheritdocs) will not be fixed. [3] Manual actions are required if inherited signatures are not properly documented. [4] `@inheritdocs` support is under construction.');
+', new VersionSpecification(80000))], null, 'This rule is EXPERIMENTAL and [1] is not covered with backward compatibility promise. [2] `@return` annotation is mandatory for the fixer to make changes, signatures of methods without it (no docblock, inheritdocs) will not be fixed. [3] Manual actions are required if inherited signatures are not properly documented. [4] `@inheritdocs` support is under construction.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
             return \true;
@@ -117,12 +117,12 @@ final class Foo {
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('scalar_types', 'Fix also scalar types; may have unexpected behaviour due to PHP bad type coercion system.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('scalar_types', 'Fix also scalar types; may have unexpected behaviour due to PHP bad type coercion system.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         if (\PHP_VERSION_ID >= 80000) {
             unset($this->skippedTypes['mixed']);
@@ -180,7 +180,7 @@ final class Foo {
                 }
                 $returnType = $this->scalarTypes[$returnType];
             } else {
-                if (1 !== \PhpCsFixer\Preg::match($this->classRegex, $returnType, $matches)) {
+                if (1 !== Preg::match($this->classRegex, $returnType, $matches)) {
                     continue;
                 }
                 if (isset($matches['array'])) {
@@ -204,40 +204,40 @@ final class Foo {
      *
      * @return bool
      */
-    private function hasReturnTypeHint(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function hasReturnTypeHint(Tokens $tokens, $index)
     {
         $endFuncIndex = $tokens->getPrevTokenOfKind($index, [')']);
         $nextIndex = $tokens->getNextMeaningfulToken($endFuncIndex);
-        return $tokens[$nextIndex]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON);
+        return $tokens[$nextIndex]->isGivenKind(CT::T_TYPE_COLON);
     }
     /**
      * @param int    $index      The index of the end of the function definition line, EG at { or ;
      * @param bool   $isNullable
      * @param string $returnType
      */
-    private function fixFunctionDefinition(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $isNullable, $returnType)
+    private function fixFunctionDefinition(Tokens $tokens, $index, $isNullable, $returnType)
     {
-        static $specialTypes = ['array' => [\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, 'array'], 'callable' => [\T_CALLABLE, 'callable'], 'static' => [\T_STATIC, 'static']];
-        $newTokens = [new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON, ':']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])];
+        static $specialTypes = ['array' => [CT::T_ARRAY_TYPEHINT, 'array'], 'callable' => [\T_CALLABLE, 'callable'], 'static' => [\T_STATIC, 'static']];
+        $newTokens = [new Token([CT::T_TYPE_COLON, ':']), new Token([\T_WHITESPACE, ' '])];
         if (\true === $isNullable) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, '?']);
+            $newTokens[] = new Token([CT::T_NULLABLE_TYPE, '?']);
         }
         if (isset($specialTypes[$returnType])) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token($specialTypes[$returnType]);
+            $newTokens[] = new Token($specialTypes[$returnType]);
         } else {
             $returnTypeUnqualified = \ltrim($returnType, '\\');
             if (isset($this->scalarTypes[$returnTypeUnqualified]) || isset($this->versionSpecificTypes[$returnTypeUnqualified])) {
                 // 'scalar's, 'void', 'iterable' and 'object' must be unqualified
-                $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $returnTypeUnqualified]);
+                $newTokens[] = new Token([\T_STRING, $returnTypeUnqualified]);
             } else {
                 foreach (\explode('\\', $returnType) as $nsIndex => $value) {
                     if (0 === $nsIndex && '' === $value) {
                         continue;
                     }
                     if (0 < $nsIndex) {
-                        $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_NS_SEPARATOR, '\\']);
+                        $newTokens[] = new Token([\T_NS_SEPARATOR, '\\']);
                     }
-                    $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $value]);
+                    $newTokens[] = new Token([\T_STRING, $value]);
                 }
             }
         }
@@ -251,7 +251,7 @@ final class Foo {
      *
      * @return Annotation[]
      */
-    private function findReturnAnnotations(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function findReturnAnnotations(Tokens $tokens, $index)
     {
         do {
             $index = $tokens->getPrevNonWhitespace($index);
@@ -259,7 +259,7 @@ final class Foo {
         if (!$tokens[$index]->isGivenKind(\T_DOC_COMMENT)) {
             return [];
         }
-        $doc = new \PhpCsFixer\DocBlock\DocBlock($tokens[$index]->getContent());
+        $doc = new DocBlock($tokens[$index]->getContent());
         return $doc->getAnnotationsOfType('return');
     }
 }

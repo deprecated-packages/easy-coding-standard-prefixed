@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
-class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class NamedFunctionCallArgumentsTest extends AbstractMethodUnitTest
 {
     /**
      * Verify that parameter labels are tokenized as T_PARAM_NAME and that
@@ -33,7 +33,7 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
             $this->assertSame(T_PARAM_NAME, $tokens[$label]['code'], 'Token tokenized as ' . $tokens[$label]['code'] . ', not T_PARAM_NAME (code)');
             $this->assertSame('T_PARAM_NAME', $tokens[$label]['type'], 'Token tokenized as ' . $tokens[$label]['type'] . ', not T_PARAM_NAME (type)');
             // Get the next non-empty token.
-            $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+            $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
             $this->assertSame(':', $tokens[$colon]['content'], 'Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']);
             $this->assertSame(T_COLON, $tokens[$colon]['code'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
             $this->assertSame('T_COLON', $tokens[$colon]['type'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
@@ -128,12 +128,12 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
         $tokens = self::$phpcsFile->getTokens();
         $true = $this->getTargetToken('/* testMixedPositionalAndNamedArgsWithTernary */', T_TRUE);
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $true + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $true + 1, null, \true);
         $this->assertSame(T_INLINE_ELSE, $tokens[$colon]['code'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)');
         $this->assertSame('T_INLINE_ELSE', $tokens[$colon]['type'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)');
         $label = $this->getTargetToken('/* testMixedPositionalAndNamedArgsWithTernary */', T_PARAM_NAME, 'name');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
         $this->assertSame(':', $tokens[$colon]['content'], 'Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
@@ -155,13 +155,13 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
          */
         $label = $this->getTargetToken('/* testNamedArgWithTernary */', T_PARAM_NAME, 'label');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
         $this->assertSame(':', $tokens[$colon]['content'], 'First arg: Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'First arg: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'First arg: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
         $true = $this->getTargetToken('/* testNamedArgWithTernary */', T_TRUE);
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $true + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $true + 1, null, \true);
         $this->assertSame(T_INLINE_ELSE, $tokens[$colon]['code'], 'First arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)');
         $this->assertSame('T_INLINE_ELSE', $tokens[$colon]['type'], 'First arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)');
         /*
@@ -169,13 +169,13 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
          */
         $label = $this->getTargetToken('/* testNamedArgWithTernary */', T_PARAM_NAME, 'more');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
         $this->assertSame(':', $tokens[$colon]['content'], 'Second arg: Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'Second arg: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'Second arg: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
         $true = $this->getTargetToken('/* testNamedArgWithTernary */', \T_STRING, 'CONSTANT_A');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $true + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $true + 1, null, \true);
         $this->assertSame(T_INLINE_ELSE, $tokens[$colon]['code'], 'Second arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)');
         $this->assertSame('T_INLINE_ELSE', $tokens[$colon]['type'], 'Second arg ternary: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)');
     }
@@ -196,13 +196,13 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
          */
         $label = $this->getTargetToken('/* testTernaryWithFunctionCallsInThenElse */', T_PARAM_NAME, 'label');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
         $this->assertSame(':', $tokens[$colon]['content'], 'Function in then: Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'Function in then: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'Function in then: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
         $closeParens = $this->getTargetToken('/* testTernaryWithFunctionCallsInThenElse */', T_CLOSE_PARENTHESIS);
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $closeParens + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $closeParens + 1, null, \true);
         $this->assertSame(T_INLINE_ELSE, $tokens[$colon]['code'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)');
         $this->assertSame('T_INLINE_ELSE', $tokens[$colon]['type'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)');
         /*
@@ -210,7 +210,7 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
          */
         $label = $this->getTargetToken('/* testTernaryWithFunctionCallsInThenElse */', T_PARAM_NAME, 'more');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
         $this->assertSame(':', $tokens[$colon]['content'], 'Function in else: Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'Function in else: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'Function in else: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
@@ -228,7 +228,7 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
         $tokens = self::$phpcsFile->getTokens();
         $constant = $this->getTargetToken('/* testTernaryWithConstantsInThenElse */', \T_STRING, 'CONSTANT_NAME');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $constant + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $constant + 1, null, \true);
         $this->assertSame(T_INLINE_ELSE, $tokens[$colon]['code'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (code)');
         $this->assertSame('T_INLINE_ELSE', $tokens[$colon]['type'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_INLINE_ELSE (type)');
     }
@@ -245,17 +245,17 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
         $tokens = self::$phpcsFile->getTokens();
         $label = $this->getTargetToken('/* testSwitchCaseWithConstant */', \T_STRING, 'MY_CONSTANT');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'First case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'First case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
         $label = $this->getTargetToken('/* testSwitchCaseWithClassProperty */', \T_STRING, 'property');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'Second case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'Second case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
         $default = $this->getTargetToken('/* testSwitchDefault */', \T_DEFAULT);
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $default + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $default + 1, null, \true);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'Default case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'Default case: Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
     }
@@ -274,7 +274,7 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
         $this->assertSame(\T_VARIABLE, $tokens[$label]['code'], 'Token tokenized as ' . $tokens[$label]['type'] . ', not T_VARIABLE (code)');
         $this->assertSame('T_VARIABLE', $tokens[$label]['type'], 'Token tokenized as ' . $tokens[$label]['type'] . ', not T_VARIABLE (type)');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
         $this->assertSame(':', $tokens[$colon]['content'], 'Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');
@@ -300,7 +300,7 @@ class NamedFunctionCallArgumentsTest extends \PHP_CodeSniffer\Tests\Core\Abstrac
         $this->assertSame(T_PARAM_NAME, $tokens[$label]['code'], 'Token tokenized as ' . $tokens[$label]['code'] . ', not T_PARAM_NAME (code)');
         $this->assertSame('T_PARAM_NAME', $tokens[$label]['type'], 'Token tokenized as ' . $tokens[$label]['type'] . ', not T_PARAM_NAME (type)');
         // Get the next non-empty token.
-        $colon = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $label + 1, null, \true);
+        $colon = self::$phpcsFile->findNext(Tokens::$emptyTokens, $label + 1, null, \true);
         $this->assertSame(':', $tokens[$colon]['content'], 'Next token after parameter name is not a colon. Found: ' . $tokens[$colon]['content']);
         $this->assertSame(T_COLON, $tokens[$colon]['code'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (code)');
         $this->assertSame('T_COLON', $tokens[$colon]['type'], 'Token tokenized as ' . $tokens[$colon]['type'] . ', not T_COLON (type)');

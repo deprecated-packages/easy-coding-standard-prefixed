@@ -20,14 +20,14 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @author Gert de Pagter
  */
-final class PhpUnitSetUpTearDownVisibilityFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer
+final class PhpUnitSetUpTearDownVisibilityFixer extends AbstractPhpUnitFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Changes the visibility of the `setUp()` and `tearDown()` functions of PHPUnit to `protected`, to match the PHPUnit TestCase.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Changes the visibility of the `setUp()` and `tearDown()` functions of PHPUnit to `protected`, to match the PHPUnit TestCase.', [new CodeSample('<?php
 final class MyTest extends \\PHPUnit_Framework_TestCase
 {
     private $hello;
@@ -53,10 +53,10 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
+    protected function applyPhpUnitClassFix(Tokens $tokens, $startIndex, $endIndex)
     {
         $counter = 0;
-        $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $tokensAnalyzer = new TokensAnalyzer($tokens);
         for ($i = $endIndex - 1; $i > $startIndex; --$i) {
             if (2 === $counter) {
                 break;
@@ -69,11 +69,11 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             $visibility = $tokensAnalyzer->getMethodAttributes($i)['visibility'];
             if (\T_PUBLIC === $visibility) {
                 $index = $tokens->getPrevTokenOfKind($i, [[\T_PUBLIC]]);
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_PROTECTED, 'protected']);
+                $tokens[$index] = new Token([\T_PROTECTED, 'protected']);
                 continue;
             }
             if (null === $visibility) {
-                $tokens->insertAt($i, [new \PhpCsFixer\Tokenizer\Token([\T_PROTECTED, 'protected']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])]);
+                $tokens->insertAt($i, [new Token([\T_PROTECTED, 'protected']), new Token([\T_WHITESPACE, ' '])]);
             }
         }
     }
@@ -82,9 +82,9 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
      *
      * @return bool
      */
-    private function isSetupOrTearDownMethod(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function isSetupOrTearDownMethod(Tokens $tokens, $index)
     {
-        $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $tokensAnalyzer = new TokensAnalyzer($tokens);
         $isMethod = $tokens[$index]->isGivenKind(\T_FUNCTION) && !$tokensAnalyzer->isLambda($index);
         if (!$isMethod) {
             return \false;

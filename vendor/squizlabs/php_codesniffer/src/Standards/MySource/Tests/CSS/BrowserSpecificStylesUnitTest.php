@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\MySource\Tests\CSS;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class BrowserSpecificStylesUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class BrowserSpecificStylesUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

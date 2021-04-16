@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\MySource\Tests\Strings;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class JoinStringsUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class JoinStringsUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

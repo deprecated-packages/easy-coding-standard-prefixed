@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class BooleanOperatorPlacementUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class BooleanOperatorPlacementUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

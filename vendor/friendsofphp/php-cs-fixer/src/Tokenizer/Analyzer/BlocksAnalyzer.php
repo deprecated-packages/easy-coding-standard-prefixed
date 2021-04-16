@@ -26,7 +26,7 @@ final class BlocksAnalyzer
      *
      * @return bool
      */
-    public function isBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, $openIndex, $closeIndex)
+    public function isBlock(Tokens $tokens, $openIndex, $closeIndex)
     {
         if (null === $openIndex || null === $closeIndex) {
             return \false;
@@ -46,9 +46,9 @@ final class BlocksAnalyzer
     /**
      * @return null|int
      */
-    private function getBlockType(\PhpCsFixer\Tokenizer\Token $token)
+    private function getBlockType(Token $token)
     {
-        foreach (\PhpCsFixer\Tokenizer\Tokens::getBlockEdgeDefinitions() as $blockType => $definition) {
+        foreach (Tokens::getBlockEdgeDefinitions() as $blockType => $definition) {
             if ($token->equals($definition['start'])) {
                 return $blockType;
             }

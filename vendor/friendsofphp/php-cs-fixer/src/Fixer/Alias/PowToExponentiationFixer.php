@@ -21,12 +21,12 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferenceFixer
+final class PowToExponentiationFixer extends AbstractFunctionReferenceFixer
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         // minimal candidate to fix is seven tokens: pow(x,y);
         return $tokens->count() > 7 && $tokens->isTokenKindFound(\T_STRING);
@@ -36,7 +36,7 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Converts `pow` to the `**` operator.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n pow(\$a, 1);\n")], null, 'Risky when the function `pow` is overridden.');
+        return new FixerDefinition('Converts `pow` to the `**` operator.', [new CodeSample("<?php\n pow(\$a, 1);\n")], null, 'Risky when the function `pow` is overridden.');
     }
     /**
      * {@inheritdoc}
@@ -50,10 +50,10 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $candidates = $this->findPowCalls($tokens);
-        $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
+        $argumentsAnalyzer = new ArgumentsAnalyzer();
         $numberOfTokensAdded = 0;
         $previousCloseParenthesisIndex = \count($tokens);
         foreach (\array_reverse($candidates) as $candidate) {
@@ -91,7 +91,7 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
     /**
      * @return array[]
      */
-    private function findPowCalls(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function findPowCalls(Tokens $tokens)
     {
         $candidates = [];
         // Minimal candidate to fix is seven tokens: pow(x,y);
@@ -116,11 +116,11 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
      *
      * @return int number of tokens added to the collection
      */
-    private function fixPowToExponentiation(\PhpCsFixer\Tokenizer\Tokens $tokens, $functionNameIndex, $openParenthesisIndex, $closeParenthesisIndex, array $arguments)
+    private function fixPowToExponentiation(Tokens $tokens, $functionNameIndex, $openParenthesisIndex, $closeParenthesisIndex, array $arguments)
     {
         // find the argument separator ',' directly after the last token of the first argument;
         // replace it with T_POW '**'
-        $tokens[$tokens->getNextTokenOfKind(\reset($arguments), [','])] = new \PhpCsFixer\Tokenizer\Token([\T_POW, '**']);
+        $tokens[$tokens->getNextTokenOfKind(\reset($arguments), [','])] = new Token([\T_POW, '**']);
         // clean up the function call tokens prt. I
         $tokens->clearAt($closeParenthesisIndex);
         $previousIndex = $tokens->getPrevMeaningfulToken($closeParenthesisIndex);
@@ -132,8 +132,8 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
         // check if the arguments need to be wrapped in parenthesis
         foreach (\array_reverse($arguments, \true) as $argumentStartIndex => $argumentEndIndex) {
             if ($this->isParenthesisNeeded($tokens, $argumentStartIndex, $argumentEndIndex)) {
-                $tokens->insertAt($argumentEndIndex + 1, new \PhpCsFixer\Tokenizer\Token(')'));
-                $tokens->insertAt($argumentStartIndex, new \PhpCsFixer\Tokenizer\Token('('));
+                $tokens->insertAt($argumentEndIndex + 1, new Token(')'));
+                $tokens->insertAt($argumentStartIndex, new Token('('));
                 $added += 2;
             }
         }
@@ -152,22 +152,22 @@ final class PowToExponentiationFixer extends \PhpCsFixer\AbstractFunctionReferen
      *
      * @return bool
      */
-    private function isParenthesisNeeded(\PhpCsFixer\Tokenizer\Tokens $tokens, $argumentStartIndex, $argumentEndIndex)
+    private function isParenthesisNeeded(Tokens $tokens, $argumentStartIndex, $argumentEndIndex)
     {
-        static $allowedKinds = [\T_DNUMBER, \T_LNUMBER, \T_VARIABLE, \T_STRING, \T_OBJECT_OPERATOR, \T_CONSTANT_ENCAPSED_STRING, \T_DOUBLE_CAST, \T_INT_CAST, \T_INC, \T_DEC, \T_NS_SEPARATOR, \T_WHITESPACE, \T_DOUBLE_COLON, \T_LINE, \T_COMMENT, \T_DOC_COMMENT, \PhpCsFixer\Tokenizer\CT::T_NAMESPACE_OPERATOR];
+        static $allowedKinds = [\T_DNUMBER, \T_LNUMBER, \T_VARIABLE, \T_STRING, \T_OBJECT_OPERATOR, \T_CONSTANT_ENCAPSED_STRING, \T_DOUBLE_CAST, \T_INT_CAST, \T_INC, \T_DEC, \T_NS_SEPARATOR, \T_WHITESPACE, \T_DOUBLE_COLON, \T_LINE, \T_COMMENT, \T_DOC_COMMENT, CT::T_NAMESPACE_OPERATOR];
         for ($i = $argumentStartIndex; $i <= $argumentEndIndex; ++$i) {
             if ($tokens[$i]->isGivenKind($allowedKinds) || $tokens->isEmptyAt($i)) {
                 continue;
             }
-            $blockType = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($tokens[$i]);
+            $blockType = Tokens::detectBlockType($tokens[$i]);
             if (null !== $blockType) {
                 $i = $tokens->findBlockEnd($blockType['type'], $i);
                 continue;
             }
             if ($tokens[$i]->equals('$')) {
                 $i = $tokens->getNextMeaningfulToken($i);
-                if ($tokens[$i]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_OPEN)) {
-                    $i = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_DYNAMIC_VAR_BRACE, $i);
+                if ($tokens[$i]->isGivenKind(CT::T_DYNAMIC_VAR_BRACE_OPEN)) {
+                    $i = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_DYNAMIC_VAR_BRACE, $i);
                     continue;
                 }
             }

@@ -23,7 +23,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Gregor Harlan <gharlan@web.de>
  */
-final class SingleQuoteFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class SingleQuoteFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
@@ -33,13 +33,13 @@ final class SingleQuoteFixer extends \PhpCsFixer\AbstractFixer implements \PhpCs
         $codeSample = <<<'EOF'
 <?php
 
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 $a = "sample";
 $b = "sample with 'single-quotes'";
 
 EOF;
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Convert double quotes to single quotes for simple strings.', [new \PhpCsFixer\FixerDefinition\CodeSample($codeSample), new \PhpCsFixer\FixerDefinition\CodeSample($codeSample, ['strings_containing_single_quote_chars' => \true])]);
+        return new FixerDefinition('Convert double quotes to single quotes for simple strings.', [new CodeSample($codeSample), new CodeSample($codeSample, ['strings_containing_single_quote_chars' => \true])]);
     }
     /**
      * {@inheritdoc}
@@ -53,14 +53,14 @@ EOF;
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_CONSTANT_ENCAPSED_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_CONSTANT_ENCAPSED_STRING)) {
@@ -72,10 +72,10 @@ EOF;
                 $prefix = $content[0];
                 $content = \substr($content, 1);
             }
-            if ('"' === $content[0] && (\true === $this->configuration['strings_containing_single_quote_chars'] || \false === \strpos($content, "'")) && !\PhpCsFixer\Preg::match('/(?<!\\\\)(?:\\\\{2})*\\\\(?!["$\\\\])/', $content)) {
+            if ('"' === $content[0] && (\true === $this->configuration['strings_containing_single_quote_chars'] || \false === \strpos($content, "'")) && !Preg::match('/(?<!\\\\)(?:\\\\{2})*\\\\(?!["$\\\\])/', $content)) {
                 $content = \substr($content, 1, -1);
                 $content = \str_replace(['\\"', '\\$', '\''], ['"', '$', '\\\''], $content);
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_CONSTANT_ENCAPSED_STRING, $prefix . '\'' . $content . '\'']);
+                $tokens[$index] = new Token([\T_CONSTANT_ENCAPSED_STRING, $prefix . '\'' . $content . '\'']);
             }
         }
     }
@@ -84,6 +84,6 @@ EOF;
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('strings_containing_single_quote_chars', 'Whether to fix double-quoted strings that contains single-quotes.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('strings_containing_single_quote_chars', 'Whether to fix double-quoted strings that contains single-quotes.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
     }
 }

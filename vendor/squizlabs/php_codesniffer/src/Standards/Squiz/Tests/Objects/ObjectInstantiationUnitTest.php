@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Objects;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ObjectInstantiationUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ObjectInstantiationUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

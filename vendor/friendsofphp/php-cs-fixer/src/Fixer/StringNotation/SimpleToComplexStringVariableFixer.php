@@ -20,26 +20,26 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dave van der Brugge <dmvdbrugge@gmail.com>
  */
-final class SimpleToComplexStringVariableFixer extends \PhpCsFixer\AbstractFixer
+final class SimpleToComplexStringVariableFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Converts explicit variables in double-quoted strings and heredoc syntax from simple to complex format (`${` to `{$`).', [new \PhpCsFixer\FixerDefinition\CodeSample(<<<'EOT'
+        return new FixerDefinition('Converts explicit variables in double-quoted strings and heredoc syntax from simple to complex format (`${` to `{$`).', [new CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 $name = 'World';
 echo "Hello {$name}!";
 
 EOT
-), new \PhpCsFixer\FixerDefinition\CodeSample(<<<'EOT'
+), new CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 $name = 'World';
 echo <<<TEST
@@ -62,11 +62,11 @@ EOT
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOLLAR_OPEN_CURLY_BRACES);
     }
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = \count($tokens) - 3; $index > 0; --$index) {
             $token = $tokens[$index];
@@ -78,16 +78,16 @@ EOT
                 continue;
             }
             $dollarCloseToken = $tokens[$index + 2];
-            if (!$dollarCloseToken->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_DOLLAR_CLOSE_CURLY_BRACES)) {
+            if (!$dollarCloseToken->isGivenKind(CT::T_DOLLAR_CLOSE_CURLY_BRACES)) {
                 continue;
             }
             $tokenOfStringBeforeToken = $tokens[$index - 1];
             $stringContent = $tokenOfStringBeforeToken->getContent();
             if ('$' === \substr($stringContent, -1) && '\\$' !== \substr($stringContent, -2)) {
                 $newContent = \substr($stringContent, 0, -1) . '\\$';
-                $tokenOfStringBeforeToken = new \PhpCsFixer\Tokenizer\Token([\T_ENCAPSED_AND_WHITESPACE, $newContent]);
+                $tokenOfStringBeforeToken = new Token([\T_ENCAPSED_AND_WHITESPACE, $newContent]);
             }
-            $tokens->overrideRange($index - 1, $index + 2, [$tokenOfStringBeforeToken, new \PhpCsFixer\Tokenizer\Token([\T_CURLY_OPEN, '{']), new \PhpCsFixer\Tokenizer\Token([\T_VARIABLE, '$' . $varnameToken->getContent()]), new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_CURLY_CLOSE, '}'])]);
+            $tokens->overrideRange($index - 1, $index + 2, [$tokenOfStringBeforeToken, new Token([\T_CURLY_OPEN, '{']), new Token([\T_VARIABLE, '$' . $varnameToken->getContent()]), new Token([CT::T_CURLY_CLOSE, '}'])]);
         }
     }
 }

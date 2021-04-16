@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PEAR\Tests\NamingConventions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ValidClassNameUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ValidClassNameUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

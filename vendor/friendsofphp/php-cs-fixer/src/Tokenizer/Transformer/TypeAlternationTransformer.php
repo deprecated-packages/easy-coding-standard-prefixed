@@ -22,7 +22,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @internal
  */
-final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
+final class TypeAlternationTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
@@ -42,7 +42,7 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
+    public function process(Tokens $tokens, Token $token, $index)
     {
         if (!$token->equals('|')) {
             return;
@@ -63,9 +63,9 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
         /** @var Token $prevToken */
         $prevToken = $tokens[$prevIndex];
         if ($prevToken->isGivenKind([
-            \PhpCsFixer\Tokenizer\CT::T_TYPE_COLON,
+            CT::T_TYPE_COLON,
             // `:` is part of a function return type `foo(): A`
-            \PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION,
+            CT::T_TYPE_ALTERNATION,
             // `|` is part of a union (chain) `X | Y`
             \T_STATIC,
             \T_VAR,
@@ -106,10 +106,10 @@ final class TypeAlternationTransformer extends \PhpCsFixer\Tokenizer\AbstractTra
      */
     public function getCustomTokens()
     {
-        return [\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION];
+        return [CT::T_TYPE_ALTERNATION];
     }
-    private function replaceToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function replaceToken(Tokens $tokens, $index)
     {
-        $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_TYPE_ALTERNATION, '|']);
+        $tokens[$index] = new Token([CT::T_TYPE_ALTERNATION, '|']);
     }
 }

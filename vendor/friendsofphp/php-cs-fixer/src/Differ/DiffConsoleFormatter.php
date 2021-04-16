@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Differ;
 
 use PhpCsFixer\Preg;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -46,11 +46,11 @@ final class DiffConsoleFormatter
     public function format($diff, $lineTemplate = '%s')
     {
         $isDecorated = $this->isDecoratedOutput;
-        $template = $isDecorated ? $this->template : \PhpCsFixer\Preg::replace('/<[^<>]+>/', '', $this->template);
+        $template = $isDecorated ? $this->template : Preg::replace('/<[^<>]+>/', '', $this->template);
         return \sprintf($template, \implode(\PHP_EOL, \array_map(static function ($line) use($isDecorated, $lineTemplate) {
             if ($isDecorated) {
                 $count = 0;
-                $line = \PhpCsFixer\Preg::replaceCallback(['/^(\\+.*)/', '/^(\\-.*)/', '/^(@.*)/'], static function ($matches) {
+                $line = Preg::replaceCallback(['/^(\\+.*)/', '/^(\\-.*)/', '/^(@.*)/'], static function ($matches) {
                     if ('+' === $matches[0][0]) {
                         $colour = 'green';
                     } elseif ('-' === $matches[0][0]) {
@@ -58,13 +58,13 @@ final class DiffConsoleFormatter
                     } else {
                         $colour = 'cyan';
                     }
-                    return \sprintf('<fg=%s>%s</fg=%s>', $colour, \_PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter::escape($matches[0]), $colour);
+                    return \sprintf('<fg=%s>%s</fg=%s>', $colour, OutputFormatter::escape($matches[0]), $colour);
                 }, $line, 1, $count);
                 if (0 === $count) {
-                    $line = \_PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter::escape($line);
+                    $line = OutputFormatter::escape($line);
                 }
             }
             return \sprintf($lineTemplate, $line);
-        }, \PhpCsFixer\Preg::split('#\\R#u', $diff))));
+        }, Preg::split('#\\R#u', $diff))));
     }
 }

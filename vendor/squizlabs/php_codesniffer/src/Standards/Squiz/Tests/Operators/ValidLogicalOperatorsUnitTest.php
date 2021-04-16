@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Operators;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ValidLogicalOperatorsUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ValidLogicalOperatorsUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

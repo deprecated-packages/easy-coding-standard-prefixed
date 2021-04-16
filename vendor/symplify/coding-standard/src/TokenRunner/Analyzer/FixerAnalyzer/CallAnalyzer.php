@@ -10,10 +10,10 @@ final class CallAnalyzer
     /**
      * @param Tokens<Token> $tokens
      */
-    public function isMethodCall(\PhpCsFixer\Tokenizer\Tokens $tokens, int $bracketPosition) : bool
+    public function isMethodCall(Tokens $tokens, int $bracketPosition) : bool
     {
-        $objectToken = new \PhpCsFixer\Tokenizer\Token([\T_OBJECT_OPERATOR, '->']);
-        $whitespaceToken = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+        $objectToken = new Token([\T_OBJECT_OPERATOR, '->']);
+        $whitespaceToken = new Token([\T_WHITESPACE, ' ']);
         $previousTokenOfKindPosition = $tokens->getPrevTokenOfKind($bracketPosition, [$objectToken, $whitespaceToken]);
         // probably a function call
         if ($previousTokenOfKindPosition === null) {

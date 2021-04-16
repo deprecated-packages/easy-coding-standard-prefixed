@@ -19,29 +19,29 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Jared Henderson <jared@netrivet.com>
  */
-final class TrimArraySpacesFixer extends \PhpCsFixer\AbstractFixer
+final class TrimArraySpacesFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Arrays should be formatted like function/method arguments, without leading or trailing single line space.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$sample = array( );\n\$sample = array( 'a', 'b' );\n")]);
+        return new FixerDefinition('Arrays should be formatted like function/method arguments, without leading or trailing single line space.', [new CodeSample("<?php\n\$sample = array( );\n\$sample = array( 'a', 'b' );\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound([\T_ARRAY, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN]);
+        return $tokens->isAnyTokenKindsFound([\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = 0, $c = $tokens->count(); $index < $c; ++$index) {
-            if ($tokens[$index]->isGivenKind([\T_ARRAY, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN])) {
+            if ($tokens[$index]->isGivenKind([\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN])) {
                 self::fixArray($tokens, $index);
             }
         }
@@ -51,14 +51,14 @@ final class TrimArraySpacesFixer extends \PhpCsFixer\AbstractFixer
      *
      * @param int $index
      */
-    private static function fixArray(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private static function fixArray(Tokens $tokens, $index)
     {
         $startIndex = $index;
         if ($tokens[$startIndex]->isGivenKind(\T_ARRAY)) {
             $startIndex = $tokens->getNextMeaningfulToken($startIndex);
-            $endIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $startIndex);
+            $endIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $startIndex);
         } else {
-            $endIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $startIndex);
+            $endIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $startIndex);
         }
         $nextIndex = $startIndex + 1;
         $nextToken = $tokens[$nextIndex];

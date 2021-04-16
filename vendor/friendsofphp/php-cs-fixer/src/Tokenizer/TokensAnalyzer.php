@@ -286,7 +286,7 @@ final class TokensAnalyzer
         // check for goto label
         if ($this->tokens[$nextIndex]->equals(':')) {
             if (null === $this->gotoLabelAnalyzer) {
-                $this->gotoLabelAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\GotoLabelAnalyzer();
+                $this->gotoLabelAnalyzer = new GotoLabelAnalyzer();
             }
             if ($this->gotoLabelAnalyzer->belongsToGoToLabel($this->tokens, $nextIndex)) {
                 return \false;

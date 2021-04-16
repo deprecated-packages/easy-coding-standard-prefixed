@@ -7,7 +7,7 @@ use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class FileProcessorTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
+final class FileProcessorTest extends AbstractKernelTestCase
 {
     /**
      * @var string
@@ -19,12 +19,12 @@ final class FileProcessorTest extends \Symplify\PackageBuilder\Testing\AbstractK
     private $sniffFileProcessor;
     protected function setUp() : void
     {
-        $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/FileProcessorSource/easy-coding-standard.php']);
-        $this->sniffFileProcessor = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor::class);
+        $this->bootKernelWithConfigs(EasyCodingStandardKernel::class, [__DIR__ . '/FileProcessorSource/easy-coding-standard.php']);
+        $this->sniffFileProcessor = $this->getService(SniffFileProcessor::class);
     }
     public function test() : void
     {
-        $smartFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/FileProcessorSource/SomeFile.php.inc');
+        $smartFileInfo = new SmartFileInfo(__DIR__ . '/FileProcessorSource/SomeFile.php.inc');
         $this->initialFileContent = $smartFileInfo->getContents();
         $fixedContent = $this->sniffFileProcessor->processFile($smartFileInfo);
         $this->assertNotSame($this->initialFileContent, $fixedContent);

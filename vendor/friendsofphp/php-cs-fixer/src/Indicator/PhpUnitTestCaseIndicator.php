@@ -18,13 +18,13 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class PhpUnitTestCaseIndicator
 {
-    public function isPhpUnitClass(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    public function isPhpUnitClass(Tokens $tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind(\T_CLASS)) {
             throw new \LogicException(\sprintf('No "T_CLASS" at given index %d, got "%s".', $index, $tokens[$index]->getName()));
         }
         $index = $tokens->getNextMeaningfulToken($index);
-        if (0 !== \PhpCsFixer\Preg::match('/(?:Test|TestCase)$/', $tokens[$index]->getContent())) {
+        if (0 !== Preg::match('/(?:Test|TestCase)$/', $tokens[$index]->getContent())) {
             return \true;
         }
         while (null !== ($index = $tokens->getNextMeaningfulToken($index))) {
@@ -36,7 +36,7 @@ final class PhpUnitTestCaseIndicator
                 continue;
                 // not part of extends nor part of implements; so continue
             }
-            if (0 !== \PhpCsFixer\Preg::match('/(?:Test|TestCase)(?:Interface)?$/', $tokens[$index]->getContent())) {
+            if (0 !== Preg::match('/(?:Test|TestCase)(?:Interface)?$/', $tokens[$index]->getContent())) {
                 return \true;
             }
         }
@@ -45,7 +45,7 @@ final class PhpUnitTestCaseIndicator
     /**
      * @return \Generator array of [int start, int end] indexes from sooner to later classes
      */
-    public function findPhpUnitClasses(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function findPhpUnitClasses(Tokens $tokens)
     {
         for ($index = $tokens->count() - 1; $tokens->offsetExists($index); --$index) {
             if (!$tokens[$index]->isGivenKind(\T_CLASS) || !$this->isPhpUnitClass($tokens, $index)) {
@@ -55,7 +55,7 @@ final class PhpUnitTestCaseIndicator
             if (null === $startIndex) {
                 return;
             }
-            $endIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $startIndex);
+            $endIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $startIndex);
             (yield [$startIndex, $endIndex]);
         }
     }

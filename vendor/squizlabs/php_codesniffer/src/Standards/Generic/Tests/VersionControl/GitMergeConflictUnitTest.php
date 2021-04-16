@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\VersionControl;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class GitMergeConflictUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class GitMergeConflictUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

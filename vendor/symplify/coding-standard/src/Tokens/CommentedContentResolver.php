@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use Symplify\CodingStandard\ValueObject\StartAndEnd;
@@ -30,11 +30,11 @@ final class CommentedContentResolver
     /**
      * @param Tokens<Token> $tokens
      */
-    public function resolve(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : \Symplify\CodingStandard\ValueObject\StartAndEnd
+    public function resolve(Tokens $tokens, int $position) : StartAndEnd
     {
         $token = $tokens[$position];
         if (!$token->isGivenKind(\T_COMMENT)) {
-            throw new \Symplify\SymplifyKernel\Exception\ShouldNotHappenException();
+            throw new ShouldNotHappenException();
         }
         $lastLineSeen = $this->lineResolver->resolve($tokens, $position);
         $startPosition = $position;
@@ -57,17 +57,17 @@ final class CommentedContentResolver
             $lastLineSeen = $tokenLine;
             // Trim as much off the comment as possible so we don't, have additional whitespace tokens or comment tokens
             $tokenContent = \trim($token->getContent());
-            $hasBlockCommentCloser = \_PhpScopercc9aec205203\Nette\Utils\Strings::endsWith($tokenContent, '*/');
+            $hasBlockCommentCloser = Strings::endsWith($tokenContent, '*/');
             if ($hasBlockCommentCloser) {
                 // Closer of a block comment found
                 break;
             }
         }
-        return new \Symplify\CodingStandard\ValueObject\StartAndEnd($startPosition, $lastPosition);
+        return new StartAndEnd($startPosition, $lastPosition);
     }
-    private function shouldBreak(int $lastLineSeen, int $tokenLine, \PhpCsFixer\Tokenizer\Token $token) : bool
+    private function shouldBreak(int $lastLineSeen, int $tokenLine, Token $token) : bool
     {
-        if ($lastLineSeen + 1 <= $tokenLine && \_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($token->getContent(), '/*')) {
+        if ($lastLineSeen + 1 <= $tokenLine && Strings::startsWith($token->getContent(), '/*')) {
             // First non-whitespace token on a new line is start of a different style comment.
             return \true;
         }
@@ -77,11 +77,11 @@ final class CommentedContentResolver
         // Blank line breaks a '//' style comment block.
         return $lastLineSeen + 1 < $tokenLine;
     }
-    private function isNextLineNotComment(int $lastLineSeen, int $tokenLine, \PhpCsFixer\Tokenizer\Token $token) : bool
+    private function isNextLineNotComment(int $lastLineSeen, int $tokenLine, Token $token) : bool
     {
         if ($lastLineSeen >= $tokenLine) {
             return \false;
         }
-        return !\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($token->getContent(), '//');
+        return !Strings::startsWith($token->getContent(), '//');
     }
 }

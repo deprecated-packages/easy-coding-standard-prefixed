@@ -21,14 +21,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Kuba Werłos <werlos@gmail.com>
  */
-final class LowercaseStaticReferenceFixer extends \PhpCsFixer\AbstractFixer
+final class LowercaseStaticReferenceFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Class static references `self`, `static` and `parent` MUST be in lower case.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Class static references `self`, `static` and `parent` MUST be in lower case.', [new CodeSample('<?php
 class Foo extends Bar
 {
     public function baz1()
@@ -46,7 +46,7 @@ class Foo extends Bar
         return true;
     }
 }
-'), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+'), new VersionSpecificCodeSample('<?php
 class Foo extends Bar
 {
     public function baz(?self $x) : SELF
@@ -54,13 +54,13 @@ class Foo extends Bar
         return false;
     }
 }
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70100))]);
+', new VersionSpecification(70100))]);
     }
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_STATIC, \T_STRING]);
     }
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->equalsAny([[\T_STRING, 'self'], [\T_STATIC, 'static'], [\T_STRING, 'parent']], \false)) {
@@ -82,7 +82,7 @@ class Foo extends Bar
             if ('static' === $newContent && $tokens[$nextIndex]->isGivenKind(\T_VARIABLE)) {
                 continue;
             }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), $newContent]);
+            $tokens[$index] = new Token([$token->getId(), $newContent]);
         }
     }
 }

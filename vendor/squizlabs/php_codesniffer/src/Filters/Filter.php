@@ -62,7 +62,7 @@ class Filter extends \RecursiveFilterIterator
      *
      * @return void
      */
-    public function __construct($iterator, $basedir, \PHP_CodeSniffer\Config $config, \PHP_CodeSniffer\Ruleset $ruleset)
+    public function __construct($iterator, $basedir, Config $config, Ruleset $ruleset)
     {
         parent::__construct($iterator);
         $this->basedir = $basedir;
@@ -81,7 +81,7 @@ class Filter extends \RecursiveFilterIterator
     public function accept()
     {
         $filePath = $this->current();
-        $realPath = \PHP_CodeSniffer\Util\Common::realpath($filePath);
+        $realPath = Util\Common::realpath($filePath);
         if ($realPath !== \false) {
             // It's a real path somewhere, so record it
             // to check for circular symlinks.

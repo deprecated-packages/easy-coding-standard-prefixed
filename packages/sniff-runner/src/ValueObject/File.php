@@ -21,14 +21,14 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\EasyCodingStandard\SniffRunner\Tests\ValueObject\FileTest
  */
-final class File extends \PHP_CodeSniffer\Files\File
+final class File extends BaseFile
 {
     /**
      * Explicit list for now.
      *
      * @var string[]
      */
-    private const REPORT_WARNINGS_SNIFFS = [\Symplify\CodingStandard\Sniffs\Debug\CommentedOutCodeSniff::class, \SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff::class, \PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes\PropertyDeclarationSniff::class, \PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff::class];
+    private const REPORT_WARNINGS_SNIFFS = [CommentedOutCodeSniff::class, AssignmentInConditionSniff::class, PropertyDeclarationSniff::class, MethodDeclarationSniff::class];
     /**
      * @var string
      */
@@ -69,13 +69,13 @@ final class File extends \PHP_CodeSniffer\Files\File
      * @var SmartFileInfo
      */
     private $fileInfo;
-    public function __construct(string $path, string $content, \PHP_CodeSniffer\Fixer $fixer, \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector, \Symplify\Skipper\Skipper\Skipper $skipper, \Symplify\EasyCodingStandard\Application\AppliedCheckersCollector $appliedCheckersCollector, \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle)
+    public function __construct(string $path, string $content, Fixer $fixer, ErrorAndDiffCollector $errorAndDiffCollector, Skipper $skipper, AppliedCheckersCollector $appliedCheckersCollector, EasyCodingStandardStyle $easyCodingStandardStyle)
     {
         $this->path = $path;
         $this->content = $content;
         $this->fixer = $fixer;
         $this->errorAndDiffCollector = $errorAndDiffCollector;
-        $this->eolChar = \PHP_CodeSniffer\Util\Common::detectLineEndings($content);
+        $this->eolChar = Common::detectLineEndings($content);
         $this->skipper = $skipper;
         $this->appliedCheckersCollector = $appliedCheckersCollector;
         // compat
@@ -83,7 +83,7 @@ final class File extends \PHP_CodeSniffer\Files\File
             \define('PHP_CODESNIFFER_CBF', \false);
         }
         // parent required
-        $this->config = new \PHP_CodeSniffer\Config([], \false);
+        $this->config = new Config([], \false);
         $this->config->tabWidth = 4;
         $this->config->annotations = \false;
         $this->config->encoding = 'UTF-8';
@@ -113,14 +113,14 @@ final class File extends \PHP_CodeSniffer\Files\File
     }
     public function getErrorCount() : void
     {
-        throw new \Symplify\EasyCodingStandard\SniffRunner\Exception\File\NotImplementedException(\sprintf('Method "%s" is not needed to be public. Use "%s" service.', __METHOD__, \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class));
+        throw new NotImplementedException(\sprintf('Method "%s" is not needed to be public. Use "%s" service.', __METHOD__, ErrorAndDiffCollector::class));
     }
     /**
      * @return mixed[]
      */
     public function getErrors() : void
     {
-        throw new \Symplify\EasyCodingStandard\SniffRunner\Exception\File\NotImplementedException(\sprintf('Method "%s" is not needed to be public. Use "%s" service.', __METHOD__, \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class));
+        throw new NotImplementedException(\sprintf('Method "%s" is not needed to be public. Use "%s" service.', __METHOD__, ErrorAndDiffCollector::class));
     }
     /**
      * Delegate to addError().
@@ -154,7 +154,7 @@ final class File extends \PHP_CodeSniffer\Files\File
     /**
      * @param Sniff[][] $tokenListeners
      */
-    public function processWithTokenListenersAndFileInfo(array $tokenListeners, \Symplify\SmartFileSystem\SmartFileInfo $fileInfo) : void
+    public function processWithTokenListenersAndFileInfo(array $tokenListeners, SmartFileInfo $fileInfo) : void
     {
         $this->tokenListeners = $tokenListeners;
         $this->fileInfo = $fileInfo;
@@ -182,7 +182,7 @@ final class File extends \PHP_CodeSniffer\Files\File
         $this->errorAndDiffCollector->addErrorMessage($this->fileInfo, $line, $message, $this->resolveFullyQualifiedCode($sniffClassOrCode));
         return \true;
     }
-    private function reportActiveSniffClass(\PHP_CodeSniffer\Sniffs\Sniff $sniff) : void
+    private function reportActiveSniffClass(Sniff $sniff) : void
     {
         // used in other places later
         $this->activeSniffClass = \get_class($sniff);

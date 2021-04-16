@@ -22,7 +22,7 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @internal
  */
-abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * @var array
@@ -31,38 +31,38 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         // fetch indexes one time, this is safe as we never add or remove a token during fixing
-        $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $analyzer = new TokensAnalyzer($tokens);
         $this->classyElements = $analyzer->getClassyElements();
         /** @var Token $docCommentToken */
         foreach ($tokens->findGivenKind(\T_DOC_COMMENT) as $index => $docCommentToken) {
             if (!$this->nextElementAcceptsDoctrineAnnotations($tokens, $index)) {
                 continue;
             }
-            $doctrineAnnotationTokens = \PhpCsFixer\Doctrine\Annotation\Tokens::createFromDocComment($docCommentToken, $this->configuration['ignored_tags']);
+            $doctrineAnnotationTokens = DoctrineAnnotationTokens::createFromDocComment($docCommentToken, $this->configuration['ignored_tags']);
             $this->fixAnnotations($doctrineAnnotationTokens);
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $doctrineAnnotationTokens->getCode()]);
+            $tokens[$index] = new Token([\T_DOC_COMMENT, $doctrineAnnotationTokens->getCode()]);
         }
     }
     /**
      * Fixes Doctrine annotations from the given PHPDoc style comment.
      */
-    protected abstract function fixAnnotations(\PhpCsFixer\Doctrine\Annotation\Tokens $doctrineAnnotationTokens);
+    protected abstract function fixAnnotations(DoctrineAnnotationTokens $doctrineAnnotationTokens);
     /**
      * {@inheritdoc}
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('ignored_tags', 'List of tags that must not be treated as Doctrine Annotations.'))->setAllowedTypes(['array'])->setAllowedValues([static function ($values) {
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('ignored_tags', 'List of tags that must not be treated as Doctrine Annotations.'))->setAllowedTypes(['array'])->setAllowedValues([static function ($values) {
             foreach ($values as $value) {
                 if (!\is_string($value)) {
                     return \false;
@@ -173,7 +173,7 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return bool
      */
-    private function nextElementAcceptsDoctrineAnnotations(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function nextElementAcceptsDoctrineAnnotations(Tokens $tokens, $index)
     {
         do {
             $index = $tokens->getNextMeaningfulToken($index);
@@ -184,7 +184,7 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
         if ($tokens[$index]->isClassy()) {
             return \true;
         }
-        while ($tokens[$index]->isGivenKind([\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_FINAL, \T_ABSTRACT, \T_NS_SEPARATOR, \T_STRING, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE])) {
+        while ($tokens[$index]->isGivenKind([\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_FINAL, \T_ABSTRACT, \T_NS_SEPARATOR, \T_STRING, CT::T_NULLABLE_TYPE])) {
             $index = $tokens->getNextMeaningfulToken($index);
         }
         return isset($this->classyElements[$index]);

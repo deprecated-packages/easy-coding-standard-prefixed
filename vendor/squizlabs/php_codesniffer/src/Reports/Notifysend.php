@@ -50,15 +50,15 @@ class Notifysend implements \PHP_CodeSniffer\Reports\Report
      */
     public function __construct()
     {
-        $path = \PHP_CodeSniffer\Config::getExecutablePath('notifysend');
+        $path = Config::getExecutablePath('notifysend');
         if ($path !== null) {
-            $this->path = \PHP_CodeSniffer\Util\Common::escapeshellcmd($path);
+            $this->path = Common::escapeshellcmd($path);
         }
-        $timeout = \PHP_CodeSniffer\Config::getConfigData('notifysend_timeout');
+        $timeout = Config::getConfigData('notifysend_timeout');
         if ($timeout !== null) {
             $this->timeout = (int) $timeout;
         }
-        $showOk = \PHP_CodeSniffer\Config::getConfigData('notifysend_showok');
+        $showOk = Config::getConfigData('notifysend_showok');
         if ($showOk !== null) {
             $this->showOk = (bool) $showOk;
         }
@@ -79,7 +79,7 @@ class Notifysend implements \PHP_CodeSniffer\Reports\Report
      *
      * @return bool
      */
-    public function generateFileReport($report, \PHP_CodeSniffer\Files\File $phpcsFile, $showSources = \false, $width = 80)
+    public function generateFileReport($report, File $phpcsFile, $showSources = \false, $width = 80)
     {
         echo $report['filename'] . \PHP_EOL;
         // We want this file counted in the total number

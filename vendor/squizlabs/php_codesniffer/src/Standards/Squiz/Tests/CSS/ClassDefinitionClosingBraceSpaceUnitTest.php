@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\CSS;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ClassDefinitionClosingBraceSpaceUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ClassDefinitionClosingBraceSpaceUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

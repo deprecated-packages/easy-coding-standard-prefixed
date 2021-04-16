@@ -20,14 +20,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Ceeram <ceeram@cakephp.org>
  */
-final class BlankLineAfterOpeningTagFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class BlankLineAfterOpeningTagFixer extends AbstractFixer implements WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$a = 1;\n\$b = 1;\n")]);
+        return new FixerDefinition('Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.', [new CodeSample("<?php \$a = 1;\n\$b = 1;\n")]);
     }
     /**
      * {@inheritdoc}
@@ -42,14 +42,14 @@ final class BlankLineAfterOpeningTagFixer extends \PhpCsFixer\AbstractFixer impl
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_OPEN_TAG);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         // ignore files with short open tag and ignore non-monolithic files
@@ -70,13 +70,13 @@ final class BlankLineAfterOpeningTagFixer extends \PhpCsFixer\AbstractFixer impl
         }
         $token = $tokens[0];
         if (\false === \strpos($token->getContent(), "\n")) {
-            $tokens[0] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \rtrim($token->getContent()) . $lineEnding]);
+            $tokens[0] = new Token([$token->getId(), \rtrim($token->getContent()) . $lineEnding]);
         }
         if (\false === \strpos($tokens[1]->getContent(), "\n")) {
             if ($tokens[1]->isWhitespace()) {
-                $tokens[1] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $lineEnding . $tokens[1]->getContent()]);
+                $tokens[1] = new Token([\T_WHITESPACE, $lineEnding . $tokens[1]->getContent()]);
             } else {
-                $tokens->insertAt(1, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $lineEnding]));
+                $tokens->insertAt(1, new Token([\T_WHITESPACE, $lineEnding]));
             }
         }
     }

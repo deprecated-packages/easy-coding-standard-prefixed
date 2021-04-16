@@ -26,7 +26,7 @@ interface Report
      *
      * @return bool
      */
-    public function generateFileReport($report, \PHP_CodeSniffer\Files\File $phpcsFile, $showSources = \false, $width = 80);
+    public function generateFileReport($report, File $phpcsFile, $showSources = \false, $width = 80);
     /**
      * Generate the actual report.
      *

@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 use PHP_CodeSniffer\Util\Common;
-class VariableCommentSniff extends \PHP_CodeSniffer\Sniffs\AbstractVariableSniff
+class VariableCommentSniff extends AbstractVariableSniff
 {
     /**
      * Called to process class member vars.
@@ -23,7 +23,7 @@ class VariableCommentSniff extends \PHP_CodeSniffer\Sniffs\AbstractVariableSniff
      *
      * @return void
      */
-    public function processMemberVar(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
+    public function processMemberVar(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $ignore = [\T_PUBLIC, \T_PRIVATE, \T_PROTECTED, \T_VAR, \T_STATIC, \T_WHITESPACE, \T_STRING, \T_NS_SEPARATOR, T_NULLABLE];
@@ -91,7 +91,7 @@ class VariableCommentSniff extends \PHP_CodeSniffer\Sniffs\AbstractVariableSniff
         $typeNames = \explode('|', $varType);
         $suggestedNames = [];
         foreach ($typeNames as $i => $typeName) {
-            $suggestedName = \PHP_CodeSniffer\Util\Common::suggestType($typeName);
+            $suggestedName = Common::suggestType($typeName);
             if (\in_array($suggestedName, $suggestedNames, \true) === \false) {
                 $suggestedNames[] = $suggestedName;
             }
@@ -123,7 +123,7 @@ class VariableCommentSniff extends \PHP_CodeSniffer\Sniffs\AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariable(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, $stackPtr)
     {
     }
     //end processVariable()
@@ -138,7 +138,7 @@ class VariableCommentSniff extends \PHP_CodeSniffer\Sniffs\AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariableInString(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, $stackPtr)
     {
     }
     //end processVariableInString()

@@ -25,7 +25,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @deprecated
  */
-final class Psr0Fixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface, \PhpCsFixer\Fixer\DeprecatedFixerInterface
+final class Psr0Fixer extends AbstractProxyFixer implements ConfigurationDefinitionFixerInterface, DeprecatedFixerInterface
 {
     /**
      * @var PsrAutoloadingFixer
@@ -42,7 +42,7 @@ final class Psr0Fixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFi
     public function getDefinition()
     {
         $definition = $this->fixer->getDefinition();
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.', $definition->getCodeSamples(), $definition->getDescription(), $definition->getRiskyDescription());
+        return new FixerDefinition('Classes must be in a path that matches their namespace, be at least one namespace deep and the class name should match the file name.', $definition->getCodeSamples(), $definition->getDescription(), $definition->getRiskyDescription());
     }
     /**
      * {@inheritdoc}
@@ -64,7 +64,7 @@ final class Psr0Fixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFi
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('dir', 'The directory where the project code is placed.'))->setAllowedTypes(['string'])->setDefault('')->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('dir', 'The directory where the project code is placed.'))->setAllowedTypes(['string'])->setDefault('')->getOption()]);
     }
     /**
      * {@inheritdoc}

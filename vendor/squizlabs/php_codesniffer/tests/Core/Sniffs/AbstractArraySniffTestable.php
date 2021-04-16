@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Sniffs;
 
 use PHP_CodeSniffer\Sniffs\AbstractArraySniff;
-class AbstractArraySniffTestable extends \PHP_CodeSniffer\Sniffs\AbstractArraySniff
+class AbstractArraySniffTestable extends AbstractArraySniff
 {
     /**
      * The array indicies that were found during processing.

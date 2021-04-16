@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
-class BackfillMatchTokenTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class BackfillMatchTokenTest extends AbstractMethodUnitTest
 {
     /**
      * Test tokenization of match expressions.
@@ -76,7 +76,7 @@ class BackfillMatchTokenTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodU
         $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set');
         $this->assertArrayNotHasKey('parenthesis_opener', $tokenArray, 'Parenthesis opener is set');
         $this->assertArrayNotHasKey('parenthesis_closer', $tokenArray, 'Parenthesis closer is set');
-        $next = self::$phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $token + 1, null, \true);
+        $next = self::$phpcsFile->findNext(Tokens::$emptyTokens, $token + 1, null, \true);
         if ($next !== \false && $tokens[$next]['code'] === T_OPEN_PARENTHESIS) {
             $this->assertArrayNotHasKey('parenthesis_owner', $tokenArray, 'Parenthesis owner is set for opener after');
         }

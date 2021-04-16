@@ -6,7 +6,7 @@ namespace Symplify\EasyCodingStandard\Contract\Application;
 use Symplify\SmartFileSystem\SmartFileInfo;
 interface FileProcessorInterface
 {
-    public function processFile(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : string;
+    public function processFile(SmartFileInfo $smartFileInfo) : string;
     /**
      * @return object[]
      */

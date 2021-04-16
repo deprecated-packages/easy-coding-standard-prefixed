@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff;
@@ -23,32 +23,32 @@ use PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\Spacing\NewlineServiceDefinitionConfigFixer;
 use Symplify\CodingStandard\Fixer\Spacing\StandaloneLinePromotedPropertyFixer;
-return static function (\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
-    $services->set(\Symplify\CodingStandard\Fixer\Spacing\StandaloneLinePromotedPropertyFixer::class);
-    $services->set(\Symplify\CodingStandard\Fixer\Spacing\NewlineServiceDefinitionConfigFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer::class)->call('configure', [['elements' => ['const', 'property', 'method']]]);
-    $services->set(\PhpCsFixer\Fixer\Operator\ConcatSpaceFixer::class)->call('configure', [['spacing' => 'one']]);
-    $services->set(\PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer::class);
-    $services->set(\PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff::class)->property('ignoreBlankLines', \false);
-    $services->set(\PhpCsFixer\Fixer\CastNotation\CastSpacesFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer::class)->call('configure', [['operators' => ['=>' => 'single_space', '=' => 'single_space']]]);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\SingleTraitInsertPerStatementFixer::class);
-    $services->set(\PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\NoBlankLinesAfterClassOpeningFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Semicolon\NoSinglelineWhitespaceBeforeSemicolonsFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocSingleLineVarSpacingFixer::class);
-    $services->set(\PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer::class);
-    $services->set(\PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Operator\TernaryOperatorSpacesFixer::class);
-    $services->set(\PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer::class);
-    $services->set(\PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff::class);
+    $services->set(StandaloneLinePromotedPropertyFixer::class);
+    $services->set(NewlineServiceDefinitionConfigFixer::class);
+    $services->set(MethodChainingIndentationFixer::class);
+    $services->set(ClassAttributesSeparationFixer::class)->call('configure', [['elements' => ['const', 'property', 'method']]]);
+    $services->set(ConcatSpaceFixer::class)->call('configure', [['spacing' => 'one']]);
+    $services->set(NotOperatorWithSuccessorSpaceFixer::class);
+    $services->set(SuperfluousWhitespaceSniff::class)->property('ignoreBlankLines', \false);
+    $services->set(CastSpacesFixer::class);
+    $services->set(BinaryOperatorSpacesFixer::class)->call('configure', [['operators' => ['=>' => 'single_space', '=' => 'single_space']]]);
+    $services->set(ClassAttributesSeparationFixer::class);
+    $services->set(SingleTraitInsertPerStatementFixer::class);
+    $services->set(FunctionTypehintSpaceFixer::class);
+    $services->set(NoBlankLinesAfterClassOpeningFixer::class);
+    $services->set(NoSinglelineWhitespaceBeforeSemicolonsFixer::class);
+    $services->set(PhpdocSingleLineVarSpacingFixer::class);
+    $services->set(NoLeadingNamespaceWhitespaceFixer::class);
+    $services->set(NoSpacesAroundOffsetFixer::class);
+    $services->set(NoWhitespaceInBlankLineFixer::class);
+    $services->set(ReturnTypeDeclarationFixer::class);
+    $services->set(SpaceAfterSemicolonFixer::class);
+    $services->set(TernaryOperatorSpacesFixer::class);
+    $services->set(MethodArgumentSpaceFixer::class);
+    $services->set(LanguageConstructSpacingSniff::class);
 };

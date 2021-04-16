@@ -21,7 +21,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 /**
  * @author Graham Campbell <graham@alt-three.com>
  */
-final class PhpdocScalarFixer extends \PhpCsFixer\AbstractPhpdocTypesFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpdocScalarFixer extends AbstractPhpdocTypesFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * The types to fix.
@@ -34,7 +34,7 @@ final class PhpdocScalarFixer extends \PhpCsFixer\AbstractPhpdocTypesFixer imple
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Scalar types should always be written in the same form. `int` not `integer`, `bool` not `boolean`, `float` not `real` or `double`.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Scalar types should always be written in the same form. `int` not `integer`, `bool` not `boolean`, `float` not `real` or `double`.', [new CodeSample('<?php
 /**
  * @param integer $a
  * @param boolean $b
@@ -46,7 +46,7 @@ function sample($a, $b, $c)
 {
     return sample2($a, $b, $c);
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 /**
  * @param integer $a
  * @param boolean $b
@@ -82,7 +82,7 @@ function sample($a, $b, $c)
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('types', 'A list of types to fix.'))->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(\array_keys(self::$types))])->setDefault(['boolean', 'double', 'integer', 'real', 'str'])->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('types', 'A list of types to fix.'))->setAllowedValues([new AllowedValueSubset(\array_keys(self::$types))])->setDefault(['boolean', 'double', 'integer', 'real', 'str'])->getOption()]);
     }
     /**
      * {@inheritdoc}

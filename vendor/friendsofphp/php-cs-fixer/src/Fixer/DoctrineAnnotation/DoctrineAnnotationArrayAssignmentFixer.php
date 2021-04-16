@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Fixer\DoctrineAnnotation;
 
-use _PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer;
+use _PhpScopereb9508917a55\Doctrine\Common\Annotations\DocLexer;
 use PhpCsFixer\AbstractDoctrineAnnotationFixer;
 use PhpCsFixer\Doctrine\Annotation\Tokens;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
@@ -21,14 +21,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 /**
  * Forces the configured operator for assignment in arrays in Doctrine Annotations.
  */
-final class DoctrineAnnotationArrayAssignmentFixer extends \PhpCsFixer\AbstractDoctrineAnnotationFixer
+final class DoctrineAnnotationArrayAssignmentFixer extends AbstractDoctrineAnnotationFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Doctrine annotations must use configured operator for assignment in arrays.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n/**\n * @Foo({bar : \"baz\"})\n */\nclass Bar {}\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n/**\n * @Foo({bar = \"baz\"})\n */\nclass Bar {}\n", ['operator' => ':'])]);
+        return new FixerDefinition('Doctrine annotations must use configured operator for assignment in arrays.', [new CodeSample("<?php\n/**\n * @Foo({bar : \"baz\"})\n */\nclass Bar {}\n"), new CodeSample("<?php\n/**\n * @Foo({bar = \"baz\"})\n */\nclass Bar {}\n", ['operator' => ':'])]);
     }
     /**
      * {@inheritdoc}
@@ -45,30 +45,30 @@ final class DoctrineAnnotationArrayAssignmentFixer extends \PhpCsFixer\AbstractD
     protected function createConfigurationDefinition()
     {
         $options = parent::createConfigurationDefinition()->getOptions();
-        $operator = new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('operator', 'The operator to use.');
+        $operator = new FixerOptionBuilder('operator', 'The operator to use.');
         $options[] = $operator->setAllowedValues(['=', ':'])->setDefault('=')->getOption();
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver($options);
+        return new FixerConfigurationResolver($options);
     }
     /**
      * {@inheritdoc}
      */
-    protected function fixAnnotations(\PhpCsFixer\Doctrine\Annotation\Tokens $tokens)
+    protected function fixAnnotations(Tokens $tokens)
     {
         $scopes = [];
         foreach ($tokens as $token) {
-            if ($token->isType(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_OPEN_PARENTHESIS)) {
+            if ($token->isType(DocLexer::T_OPEN_PARENTHESIS)) {
                 $scopes[] = 'annotation';
                 continue;
             }
-            if ($token->isType(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_OPEN_CURLY_BRACES)) {
+            if ($token->isType(DocLexer::T_OPEN_CURLY_BRACES)) {
                 $scopes[] = 'array';
                 continue;
             }
-            if ($token->isType([\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_CLOSE_PARENTHESIS, \_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_CLOSE_CURLY_BRACES])) {
+            if ($token->isType([DocLexer::T_CLOSE_PARENTHESIS, DocLexer::T_CLOSE_CURLY_BRACES])) {
                 \array_pop($scopes);
                 continue;
             }
-            if ('array' === \end($scopes) && $token->isType([\_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_EQUALS, \_PhpScopercc9aec205203\Doctrine\Common\Annotations\DocLexer::T_COLON])) {
+            if ('array' === \end($scopes) && $token->isType([DocLexer::T_EQUALS, DocLexer::T_COLON])) {
                 $token->setContent($this->configuration['operator']);
             }
         }

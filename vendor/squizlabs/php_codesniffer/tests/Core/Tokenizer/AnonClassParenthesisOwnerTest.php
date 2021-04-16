@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class AnonClassParenthesisOwnerTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class AnonClassParenthesisOwnerTest extends AbstractMethodUnitTest
 {
     /**
      * Test that anonymous class tokens without parenthesis do not get assigned a parenthesis owner.

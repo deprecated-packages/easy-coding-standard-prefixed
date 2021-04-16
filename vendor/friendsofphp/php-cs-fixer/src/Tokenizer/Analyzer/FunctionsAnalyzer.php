@@ -33,7 +33,7 @@ final class FunctionsAnalyzer
      *
      * @return bool
      */
-    public function isGlobalFunctionCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    public function isGlobalFunctionCall(Tokens $tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind(\T_STRING)) {
             return \false;
@@ -48,7 +48,7 @@ final class FunctionsAnalyzer
             $previousIsNamespaceSeparator = \true;
             $prevIndex = $tokens->getPrevMeaningfulToken($prevIndex);
         }
-        $possibleKind = [\T_DOUBLE_COLON, \T_FUNCTION, \PhpCsFixer\Tokenizer\CT::T_NAMESPACE_OPERATOR, \T_NEW, \T_OBJECT_OPERATOR, \PhpCsFixer\Tokenizer\CT::T_RETURN_REF, \T_STRING];
+        $possibleKind = [\T_DOUBLE_COLON, \T_FUNCTION, CT::T_NAMESPACE_OPERATOR, \T_NEW, \T_OBJECT_OPERATOR, CT::T_RETURN_REF, \T_STRING];
         // @TODO: drop condition when PHP 8.0+ is required
         if (\defined('T_ATTRIBUTE')) {
             $possibleKind[] = \T_ATTRIBUTE;
@@ -109,10 +109,10 @@ final class FunctionsAnalyzer
      *
      * @return ArgumentAnalysis[]
      */
-    public function getFunctionArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, $methodIndex)
+    public function getFunctionArguments(Tokens $tokens, $methodIndex)
     {
         $argumentsStart = $tokens->getNextTokenOfKind($methodIndex, ['(']);
-        $argumentsEnd = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
+        $argumentsEnd = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
         $argumentAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
         $arguments = [];
         foreach ($argumentAnalyzer->getArguments($tokens, $argumentsStart, $argumentsEnd) as $start => $end) {
@@ -126,12 +126,12 @@ final class FunctionsAnalyzer
      *
      * @return null|TypeAnalysis
      */
-    public function getFunctionReturnType(\PhpCsFixer\Tokenizer\Tokens $tokens, $methodIndex)
+    public function getFunctionReturnType(Tokens $tokens, $methodIndex)
     {
         $argumentsStart = $tokens->getNextTokenOfKind($methodIndex, ['(']);
-        $argumentsEnd = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
+        $argumentsEnd = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
         $typeColonIndex = $tokens->getNextMeaningfulToken($argumentsEnd);
-        if (!$tokens[$typeColonIndex]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON)) {
+        if (!$tokens[$typeColonIndex]->isGivenKind(CT::T_TYPE_COLON)) {
             return null;
         }
         $type = '';
@@ -145,14 +145,14 @@ final class FunctionsAnalyzer
             $type .= $tokens[$i]->getContent();
             $typeEndIndex = $i;
         }
-        return new \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis($type, $typeStartIndex, $typeEndIndex);
+        return new TypeAnalysis($type, $typeStartIndex, $typeEndIndex);
     }
     /**
      * @param int $index
      *
      * @return bool
      */
-    public function isTheSameClassCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    public function isTheSameClassCall(Tokens $tokens, $index)
     {
         if (!$tokens->offsetExists($index)) {
             return \false;
@@ -167,7 +167,7 @@ final class FunctionsAnalyzer
         }
         return $tokens[$operatorIndex]->equals([\T_OBJECT_OPERATOR, '->']) && $tokens[$referenceIndex]->equals([\T_VARIABLE, '$this'], \false) || $tokens[$operatorIndex]->equals([\T_DOUBLE_COLON, '::']) && $tokens[$referenceIndex]->equals([\T_STRING, 'self'], \false) || $tokens[$operatorIndex]->equals([\T_DOUBLE_COLON, '::']) && $tokens[$referenceIndex]->equals([\T_STATIC, 'static'], \false);
     }
-    private function buildFunctionsAnalysis(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function buildFunctionsAnalysis(Tokens $tokens)
     {
         $this->functionsAnalysis = ['tokens' => $tokens->getCodeHash(), 'imports' => [], 'declarations' => []];
         // find declarations
@@ -175,21 +175,21 @@ final class FunctionsAnalyzer
             $end = \count($tokens);
             for ($i = 0; $i < $end; ++$i) {
                 // skip classy, we are looking for functions not methods
-                if ($tokens[$i]->isGivenKind(\PhpCsFixer\Tokenizer\Token::getClassyTokenKinds())) {
+                if ($tokens[$i]->isGivenKind(Token::getClassyTokenKinds())) {
                     $i = $tokens->getNextTokenOfKind($i, ['(', '{']);
                     if ($tokens[$i]->equals('(')) {
                         // anonymous class
-                        $i = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $i);
+                        $i = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $i);
                         $i = $tokens->getNextTokenOfKind($i, ['{']);
                     }
-                    $i = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $i);
+                    $i = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $i);
                     continue;
                 }
                 if (!$tokens[$i]->isGivenKind(\T_FUNCTION)) {
                     continue;
                 }
                 $i = $tokens->getNextMeaningfulToken($i);
-                if ($tokens[$i]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_RETURN_REF)) {
+                if ($tokens[$i]->isGivenKind(CT::T_RETURN_REF)) {
                     $i = $tokens->getNextMeaningfulToken($i);
                 }
                 if (!$tokens[$i]->isGivenKind(\T_STRING)) {
@@ -200,7 +200,7 @@ final class FunctionsAnalyzer
         }
         // find imported functions
         $namespaceUsesAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer();
-        if ($tokens->isTokenKindFound(\PhpCsFixer\Tokenizer\CT::T_FUNCTION_IMPORT)) {
+        if ($tokens->isTokenKindFound(CT::T_FUNCTION_IMPORT)) {
             $declarations = $namespaceUsesAnalyzer->getDeclarationsFromTokens($tokens);
             foreach ($declarations as $declaration) {
                 if ($declaration->isFunction()) {

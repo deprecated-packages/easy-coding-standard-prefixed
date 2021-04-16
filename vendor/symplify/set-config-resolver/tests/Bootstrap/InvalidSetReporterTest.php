@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Tests\Bootstrap;
 
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestCase;
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestCase;
 use Symplify\SetConfigResolver\Bootstrap\InvalidSetReporter;
 use Symplify\SetConfigResolver\Exception\SetNotFoundException;
-final class InvalidSetReporterTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
+final class InvalidSetReporterTest extends TestCase
 {
     /**
      * @var InvalidSetReporter
@@ -14,14 +14,14 @@ final class InvalidSetReporterTest extends \_PhpScopercc9aec205203\PHPUnit\Frame
     private $invalidSetReporter;
     protected function setUp() : void
     {
-        $this->invalidSetReporter = new \Symplify\SetConfigResolver\Bootstrap\InvalidSetReporter();
+        $this->invalidSetReporter = new InvalidSetReporter();
     }
     /**
      * @doesNotPerformAssertions
      */
     public function test() : void
     {
-        $setNotFoundException = new \Symplify\SetConfigResolver\Exception\SetNotFoundException('not found', 'one', ['two', 'three']);
+        $setNotFoundException = new SetNotFoundException('not found', 'one', ['two', 'three']);
         $this->invalidSetReporter->report($setNotFoundException);
     }
 }

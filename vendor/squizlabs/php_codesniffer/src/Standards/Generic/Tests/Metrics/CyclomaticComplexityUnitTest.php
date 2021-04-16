@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Metrics;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class CyclomaticComplexityUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class CyclomaticComplexityUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

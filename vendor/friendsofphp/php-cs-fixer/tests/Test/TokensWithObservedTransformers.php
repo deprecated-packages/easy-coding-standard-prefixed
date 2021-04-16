@@ -15,7 +15,7 @@ use PhpCsFixer\AccessibleObject\AccessibleObject;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\Transformers;
-class TokensWithObservedTransformers extends \PhpCsFixer\Tokenizer\Tokens
+class TokensWithObservedTransformers extends Tokens
 {
     /**
      * @var null|string
@@ -35,8 +35,8 @@ class TokensWithObservedTransformers extends \PhpCsFixer\Tokenizer\Tokens
     protected function applyTransformers()
     {
         $this->observedModificationsPerTransformer = [];
-        $transformers = \PhpCsFixer\Tokenizer\Transformers::create();
-        foreach (\PhpCsFixer\AccessibleObject\AccessibleObject::create($transformers)->items as $transformer) {
+        $transformers = Transformers::create();
+        foreach (AccessibleObject::create($transformers)->items as $transformer) {
             $this->currentTransformer = $transformer->getName();
             $this->observedModificationsPerTransformer[$this->currentTransformer] = [];
             foreach ($this as $index => $token) {
@@ -52,6 +52,6 @@ class TokensWithObservedTransformers extends \PhpCsFixer\Tokenizer\Tokens
      */
     private function extractTokenKind($token)
     {
-        return $token instanceof \PhpCsFixer\Tokenizer\Token ? $token->isArray() ? $token->getId() : $token->getContent() : (\is_array($token) ? $token[0] : $token);
+        return $token instanceof Token ? $token->isArray() ? $token->getId() : $token->getContent() : (\is_array($token) ? $token[0] : $token);
     }
 }

@@ -22,7 +22,7 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @author SpacePossum
  */
-final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
+final class LambdaNotUsedImportFixer extends AbstractFixer
 {
     /**
      * @var ArgumentsAnalyzer
@@ -41,7 +41,7 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Lambda must not import variables it doesn\'t use.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$foo = function() use (\$bar) {};\n")]);
+        return new FixerDefinition('Lambda must not import variables it doesn\'t use.', [new CodeSample("<?php\n\$foo = function() use (\$bar) {};\n")]);
     }
     /**
      * {@inheritdoc}
@@ -55,15 +55,15 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isAllTokenKindsFound([\T_FUNCTION, \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA]);
+        return $tokens->isAllTokenKindsFound([\T_FUNCTION, CT::T_USE_LAMBDA]);
     }
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $this->argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
-        $this->functionAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
-        $this->tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $this->argumentsAnalyzer = new ArgumentsAnalyzer();
+        $this->functionAnalyzer = new FunctionsAnalyzer();
+        $this->tokensAnalyzer = new TokensAnalyzer($tokens);
         for ($index = $tokens->count() - 4; $index > 0; --$index) {
             $lambdaUseIndex = $this->getLambdaUseIndex($tokens, $index);
             if (\false !== $lambdaUseIndex) {
@@ -74,10 +74,10 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param int $lambdaUseIndex
      */
-    private function fixLambda(\PhpCsFixer\Tokenizer\Tokens $tokens, $lambdaUseIndex)
+    private function fixLambda(Tokens $tokens, $lambdaUseIndex)
     {
         $lambdaUseOpenBraceIndex = $tokens->getNextTokenOfKind($lambdaUseIndex, ['(']);
-        $lambdaUseCloseBraceIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $lambdaUseOpenBraceIndex);
+        $lambdaUseCloseBraceIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $lambdaUseOpenBraceIndex);
         $arguments = $this->argumentsAnalyzer->getArguments($tokens, $lambdaUseOpenBraceIndex, $lambdaUseCloseBraceIndex);
         $imports = $this->filterArguments($tokens, $arguments);
         if (0 === \count($imports)) {
@@ -102,9 +102,9 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return array
      */
-    private function findNotUsedLambdaImports(\PhpCsFixer\Tokenizer\Tokens $tokens, array $imports, $lambdaUseCloseBraceIndex)
+    private function findNotUsedLambdaImports(Tokens $tokens, array $imports, $lambdaUseCloseBraceIndex)
     {
-        static $riskyKinds = [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_OPEN, \T_EVAL, \T_INCLUDE, \T_INCLUDE_ONCE, \T_REQUIRE, \T_REQUIRE_ONCE];
+        static $riskyKinds = [CT::T_DYNAMIC_VAR_BRACE_OPEN, \T_EVAL, \T_INCLUDE, \T_INCLUDE_ONCE, \T_REQUIRE, \T_REQUIRE_ONCE];
         // figure out where the lambda starts ...
         $lambdaOpenIndex = $tokens->getNextTokenOfKind($lambdaUseCloseBraceIndex, ['{']);
         $curlyBracesLevel = 0;
@@ -159,32 +159,32 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
                 // check if used as argument in the constructor of the anonymous class
                 $index = $tokens->getNextTokenOfKind($index, ['(', '{']);
                 if ($tokens[$index]->equals('(')) {
-                    $closeBraceIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
+                    $closeBraceIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
                     $arguments = $this->argumentsAnalyzer->getArguments($tokens, $index, $closeBraceIndex);
                     $imports = $this->countImportsUsedAsArgument($tokens, $imports, $arguments);
                     $index = $tokens->getNextTokenOfKind($closeBraceIndex, ['{']);
                 }
                 // skip body
-                $index = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
+                $index = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
                 continue;
             }
             if ($token->isGivenKind(\T_FUNCTION)) {
                 // check if used as argument
                 $lambdaUseOpenBraceIndex = $tokens->getNextTokenOfKind($index, ['(']);
-                $lambdaUseCloseBraceIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $lambdaUseOpenBraceIndex);
+                $lambdaUseCloseBraceIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $lambdaUseOpenBraceIndex);
                 $arguments = $this->argumentsAnalyzer->getArguments($tokens, $lambdaUseOpenBraceIndex, $lambdaUseCloseBraceIndex);
                 $imports = $this->countImportsUsedAsArgument($tokens, $imports, $arguments);
                 // check if used as import
-                $index = $tokens->getNextTokenOfKind($index, [[\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA], '{']);
-                if ($tokens[$index]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA)) {
+                $index = $tokens->getNextTokenOfKind($index, [[CT::T_USE_LAMBDA], '{']);
+                if ($tokens[$index]->isGivenKind(CT::T_USE_LAMBDA)) {
                     $lambdaUseOpenBraceIndex = $tokens->getNextTokenOfKind($index, ['(']);
-                    $lambdaUseCloseBraceIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $lambdaUseOpenBraceIndex);
+                    $lambdaUseCloseBraceIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $lambdaUseOpenBraceIndex);
                     $arguments = $this->argumentsAnalyzer->getArguments($tokens, $lambdaUseOpenBraceIndex, $lambdaUseCloseBraceIndex);
                     $imports = $this->countImportsUsedAsArgument($tokens, $imports, $arguments);
                     $index = $tokens->getNextTokenOfKind($lambdaUseCloseBraceIndex, ['{']);
                 }
                 // skip body
-                $index = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
+                $index = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
                 continue;
             }
         }
@@ -193,7 +193,7 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @return array
      */
-    private function countImportsUsedAsArgument(\PhpCsFixer\Tokenizer\Tokens $tokens, array $imports, array $arguments)
+    private function countImportsUsedAsArgument(Tokens $tokens, array $imports, array $arguments)
     {
         foreach ($arguments as $start => $end) {
             $info = $this->argumentsAnalyzer->getArgumentInfo($tokens, $start, $end);
@@ -212,20 +212,20 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return false|int
      */
-    private function getLambdaUseIndex(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getLambdaUseIndex(Tokens $tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind(\T_FUNCTION) || !$this->tokensAnalyzer->isLambda($index)) {
             return \false;
         }
         $lambdaUseIndex = $tokens->getNextMeaningfulToken($index);
         // we are @ '(' or '&' after this
-        if ($tokens[$lambdaUseIndex]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_RETURN_REF)) {
+        if ($tokens[$lambdaUseIndex]->isGivenKind(CT::T_RETURN_REF)) {
             $lambdaUseIndex = $tokens->getNextMeaningfulToken($lambdaUseIndex);
         }
-        $lambdaUseIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $lambdaUseIndex);
+        $lambdaUseIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $lambdaUseIndex);
         // we are @ ')' after this
         $lambdaUseIndex = $tokens->getNextMeaningfulToken($lambdaUseIndex);
-        if (!$tokens[$lambdaUseIndex]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA)) {
+        if (!$tokens[$lambdaUseIndex]->isGivenKind(CT::T_USE_LAMBDA)) {
             return \false;
         }
         return $lambdaUseIndex;
@@ -233,7 +233,7 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @return array
      */
-    private function filterArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, array $arguments)
+    private function filterArguments(Tokens $tokens, array $arguments)
     {
         $imports = [];
         foreach ($arguments as $start => $end) {
@@ -253,7 +253,7 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
         }
         return $imports;
     }
-    private function clearImports(\PhpCsFixer\Tokenizer\Tokens $tokens, array $imports)
+    private function clearImports(Tokens $tokens, array $imports)
     {
         foreach ($imports as $content => $removeIndex) {
             $tokens->clearTokenAndMergeSurroundingWhitespace($removeIndex);
@@ -272,7 +272,7 @@ final class LambdaNotUsedImportFixer extends \PhpCsFixer\AbstractFixer
      * @param int $lambdaUseIndex
      * @param int $lambdaUseCloseBraceIndex
      */
-    private function clearImportsAndUse(\PhpCsFixer\Tokenizer\Tokens $tokens, $lambdaUseIndex, $lambdaUseCloseBraceIndex)
+    private function clearImportsAndUse(Tokens $tokens, $lambdaUseIndex, $lambdaUseCloseBraceIndex)
     {
         for ($i = $lambdaUseCloseBraceIndex; $i >= $lambdaUseIndex; --$i) {
             if ($tokens[$i]->isComment()) {

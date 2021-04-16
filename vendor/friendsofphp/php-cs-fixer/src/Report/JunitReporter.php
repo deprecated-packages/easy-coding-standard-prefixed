@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Report;
 
 use PhpCsFixer\Preg;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *
@@ -49,7 +49,7 @@ final class JunitReporter implements \PhpCsFixer\Report\ReporterInterface
             $testsuite->setAttribute('time', \sprintf('%.3f', $reportSummary->getTime() / 1000));
         }
         $dom->formatOutput = \true;
-        return $reportSummary->isDecoratedOutput() ? \_PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
+        return $reportSummary->isDecoratedOutput() ? OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
     }
     private function createSuccessTestCase(\DOMDocument $dom, \DOMElement $testsuite)
     {
@@ -84,7 +84,7 @@ final class JunitReporter implements \PhpCsFixer\Report\ReporterInterface
     private function createFailedTestCase(\DOMDocument $dom, $file, array $fixResult, $shouldAddAppliedFixers)
     {
         $appliedFixersCount = \count($fixResult['appliedFixers']);
-        $testName = \str_replace('.', '_DOT_', \PhpCsFixer\Preg::replace('@\\.' . \pathinfo($file, \PATHINFO_EXTENSION) . '$@', '', $file));
+        $testName = \str_replace('.', '_DOT_', Preg::replace('@\\.' . \pathinfo($file, \PATHINFO_EXTENSION) . '$@', '', $file));
         $testcase = $dom->createElement('testcase');
         $testcase->setAttribute('name', $testName);
         $testcase->setAttribute('file', $file);

@@ -25,7 +25,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  * @author Julien Falque <julien.falque@gmail.com>
  */
-final class AlignMultilineCommentFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class AlignMultilineCommentFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface, WhitespacesAwareFixerInterface
 {
     private $tokenKinds;
     /**
@@ -44,17 +44,17 @@ final class AlignMultilineCommentFixer extends \PhpCsFixer\AbstractFixer impleme
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Each line of multi-line DocComments must have an asterisk [PSR-5] and must be aligned with the first one.', [new CodeSample('<?php
     /**
             * This is a DOC Comment
 with a line not prefixed with asterisk
 
    */
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
     /*
             * This is a doc-like multiline comment
 */
-', ['comment_type' => 'phpdocs_like']), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+', ['comment_type' => 'phpdocs_like']), new CodeSample('<?php
     /*
             * This is a doc-like multiline comment
 with a line not prefixed with asterisk
@@ -75,14 +75,14 @@ with a line not prefixed with asterisk
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound($this->tokenKinds);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         foreach ($tokens as $index => $token) {
@@ -96,16 +96,16 @@ with a line not prefixed with asterisk
                 --$previousIndex;
             }
             if ($tokens[$previousIndex]->isGivenKind(\T_OPEN_TAG)) {
-                $whitespace = \PhpCsFixer\Preg::replace('/\\S/', '', $tokens[$previousIndex]->getContent()) . $whitespace;
+                $whitespace = Preg::replace('/\\S/', '', $tokens[$previousIndex]->getContent()) . $whitespace;
             }
-            if (1 !== \PhpCsFixer\Preg::match('/\\R(\\h*)$/', $whitespace, $matches)) {
+            if (1 !== Preg::match('/\\R(\\h*)$/', $whitespace, $matches)) {
                 continue;
             }
-            if ($token->isGivenKind(\T_COMMENT) && 'all_multiline' !== $this->configuration['comment_type'] && 1 === \PhpCsFixer\Preg::match('/\\R(?:\\R|\\s*[^\\s\\*])/', $token->getContent())) {
+            if ($token->isGivenKind(\T_COMMENT) && 'all_multiline' !== $this->configuration['comment_type'] && 1 === Preg::match('/\\R(?:\\R|\\s*[^\\s\\*])/', $token->getContent())) {
                 continue;
             }
             $indentation = $matches[1];
-            $lines = \PhpCsFixer\Preg::split('/\\R/u', $token->getContent());
+            $lines = Preg::split('/\\R/u', $token->getContent());
             foreach ($lines as $lineNumber => $line) {
                 if (0 === $lineNumber) {
                     continue;
@@ -121,7 +121,7 @@ with a line not prefixed with asterisk
                 }
                 $lines[$lineNumber] = $indentation . ' ' . $line;
             }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \implode($lineEnding, $lines)]);
+            $tokens[$index] = new Token([$token->getId(), \implode($lineEnding, $lines)]);
         }
     }
     /**
@@ -129,6 +129,6 @@ with a line not prefixed with asterisk
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('comment_type', 'Whether to fix PHPDoc comments only (`phpdocs_only`), any multi-line comment whose lines all start with an asterisk (`phpdocs_like`) or any multi-line comment (`all_multiline`).'))->setAllowedValues(['phpdocs_only', 'phpdocs_like', 'all_multiline'])->setDefault('phpdocs_only')->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('comment_type', 'Whether to fix PHPDoc comments only (`phpdocs_only`), any multi-line comment whose lines all start with an asterisk (`phpdocs_like`) or any multi-line comment (`all_multiline`).'))->setAllowedValues(['phpdocs_only', 'phpdocs_like', 'all_multiline'])->setDefault('phpdocs_only')->getOption()]);
     }
 }

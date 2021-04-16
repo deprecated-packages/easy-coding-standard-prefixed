@@ -23,12 +23,12 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @author Ilija Tovilo <ilija.tovilo@me.com>
  */
-final class StringLineEndingFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class StringLineEndingFixer extends AbstractFixer implements WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_CONSTANT_ENCAPSED_STRING, \T_ENCAPSED_AND_WHITESPACE, \T_INLINE_HTML]);
     }
@@ -44,19 +44,19 @@ final class StringLineEndingFixer extends \PhpCsFixer\AbstractFixer implements \
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('All multi-line strings must use correct line ending.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$a = 'my\r\nmulti\nline\r\nstring';\r\n")], null, 'Changing the line endings of multi-line strings might affect string comparisons and outputs.');
+        return new FixerDefinition('All multi-line strings must use correct line ending.', [new CodeSample("<?php \$a = 'my\r\nmulti\nline\r\nstring';\r\n")], null, 'Changing the line endings of multi-line strings might affect string comparisons and outputs.');
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $ending = $this->whitespacesConfig->getLineEnding();
         foreach ($tokens as $tokenIndex => $token) {
             if (!$token->isGivenKind([\T_CONSTANT_ENCAPSED_STRING, \T_ENCAPSED_AND_WHITESPACE, \T_INLINE_HTML])) {
                 continue;
             }
-            $tokens[$tokenIndex] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), \PhpCsFixer\Preg::replace('#\\R#u', $ending, $token->getContent())]);
+            $tokens[$tokenIndex] = new Token([$token->getId(), Preg::replace('#\\R#u', $ending, $token->getContent())]);
         }
     }
 }

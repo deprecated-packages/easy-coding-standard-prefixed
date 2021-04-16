@@ -22,7 +22,7 @@ final class CodingStandardError
      * @var SmartFileInfo
      */
     private $fileInfo;
-    public function __construct(int $line, string $message, string $checkerClass, \Symplify\SmartFileSystem\SmartFileInfo $fileInfo)
+    public function __construct(int $line, string $message, string $checkerClass, SmartFileInfo $fileInfo)
     {
         $this->line = $line;
         $this->message = $message;

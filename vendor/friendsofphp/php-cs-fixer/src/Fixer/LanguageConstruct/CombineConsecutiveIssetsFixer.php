@@ -19,14 +19,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class CombineConsecutiveIssetsFixer extends \PhpCsFixer\AbstractFixer
+final class CombineConsecutiveIssetsFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Using `isset($var) &&` multiple times should be done in one call.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = isset(\$a) && isset(\$b);\n")]);
+        return new FixerDefinition('Using `isset($var) &&` multiple times should be done in one call.', [new CodeSample("<?php\n\$a = isset(\$a) && isset(\$b);\n")]);
     }
     /**
      * {@inheritdoc}
@@ -40,14 +40,14 @@ final class CombineConsecutiveIssetsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_ISSET, \T_BOOLEAN_AND]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $tokenCount = $tokens->count();
         for ($index = 1; $index < $tokenCount; ++$index) {
@@ -79,7 +79,7 @@ final class CombineConsecutiveIssetsFixer extends \PhpCsFixer\AbstractFixer
                 // clean up no the tokens of the 'isset' statement we're merging
                 $this->clearTokens($tokens, \array_merge($nextIssetInfo, [$issetIndex, $booleanAndTokenIndex]));
                 // insert the tokens to create the new statement
-                \array_unshift($clones, new \PhpCsFixer\Tokenizer\Token(','), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
+                \array_unshift($clones, new Token(','), new Token([\T_WHITESPACE, ' ']));
                 $tokens->insertAt($insertLocation, $clones);
                 // correct some counts and offset based on # of tokens inserted
                 $numberOfTokensInserted = \count($clones);
@@ -93,7 +93,7 @@ final class CombineConsecutiveIssetsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param int[] $indexes
      */
-    private function clearTokens(\PhpCsFixer\Tokenizer\Tokens $tokens, array $indexes)
+    private function clearTokens(Tokens $tokens, array $indexes)
     {
         foreach ($indexes as $index) {
             $tokens->clearTokenAndMergeSurroundingWhitespace($index);
@@ -104,7 +104,7 @@ final class CombineConsecutiveIssetsFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return int[] indexes of meaningful tokens belonging to the isset statement
      */
-    private function getIssetInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getIssetInfo(Tokens $tokens, $index)
     {
         $openIndex = $tokens->getNextMeaningfulToken($index);
         $braceOpenCount = 1;
@@ -130,7 +130,7 @@ final class CombineConsecutiveIssetsFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return Token[]
      */
-    private function getTokenClones(\PhpCsFixer\Tokenizer\Tokens $tokens, array $indexes)
+    private function getTokenClones(Tokens $tokens, array $indexes)
     {
         $clones = [];
         foreach ($indexes as $i) {

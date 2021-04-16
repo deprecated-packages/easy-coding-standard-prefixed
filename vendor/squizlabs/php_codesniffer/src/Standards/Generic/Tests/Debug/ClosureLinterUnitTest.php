@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Debug;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 use PHP_CodeSniffer\Config;
-class ClosureLinterUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ClosureLinterUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Should this test be skipped for some reason.
@@ -20,7 +20,7 @@ class ClosureLinterUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSni
      */
     protected function shouldSkipTest()
     {
-        $lintPath = \PHP_CodeSniffer\Config::getExecutablePath('gjslint');
+        $lintPath = Config::getExecutablePath('gjslint');
         if ($lintPath === null) {
             return \true;
         }

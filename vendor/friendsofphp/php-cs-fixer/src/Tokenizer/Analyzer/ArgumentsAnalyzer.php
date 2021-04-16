@@ -31,7 +31,7 @@ final class ArgumentsAnalyzer
      *
      * @return int
      */
-    public function countArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, $openParenthesis, $closeParenthesis)
+    public function countArguments(Tokens $tokens, $openParenthesis, $closeParenthesis)
     {
         return \count($this->getArguments($tokens, $openParenthesis, $closeParenthesis));
     }
@@ -48,7 +48,7 @@ final class ArgumentsAnalyzer
      *
      * @return array<int, int>
      */
-    public function getArguments(\PhpCsFixer\Tokenizer\Tokens $tokens, $openParenthesis, $closeParenthesis)
+    public function getArguments(Tokens $tokens, $openParenthesis, $closeParenthesis)
     {
         $arguments = [];
         $firstSensibleToken = $tokens->getNextMeaningfulToken($openParenthesis);
@@ -60,7 +60,7 @@ final class ArgumentsAnalyzer
         for (; $paramContentIndex < $closeParenthesis; ++$paramContentIndex) {
             $token = $tokens[$paramContentIndex];
             // skip nested (), [], {} constructs
-            $blockDefinitionProbe = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($token);
+            $blockDefinitionProbe = Tokens::detectBlockType($token);
             if (null !== $blockDefinitionProbe && \true === $blockDefinitionProbe['isStart']) {
                 $paramContentIndex = $tokens->findBlockEnd($blockDefinitionProbe['type'], $paramContentIndex);
                 continue;
@@ -84,13 +84,13 @@ final class ArgumentsAnalyzer
      *
      * @return ArgumentAnalysis
      */
-    public function getArgumentInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, $argumentStart, $argumentEnd)
+    public function getArgumentInfo(Tokens $tokens, $argumentStart, $argumentEnd)
     {
         $info = ['default' => null, 'name' => null, 'name_index' => null, 'type' => null, 'type_index_start' => null, 'type_index_end' => null];
         $sawName = \false;
         for ($index = $argumentStart; $index <= $argumentEnd; ++$index) {
             $token = $tokens[$index];
-            if ($token->isComment() || $token->isWhitespace() || $token->isGivenKind([\T_ELLIPSIS, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE]) || $token->equals('&')) {
+            if ($token->isComment() || $token->isWhitespace() || $token->isGivenKind([\T_ELLIPSIS, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE]) || $token->equals('&')) {
                 continue;
             }
             if ($token->isGivenKind(\T_VARIABLE)) {
@@ -110,6 +110,6 @@ final class ArgumentsAnalyzer
                 $info['type'] .= $token->getContent();
             }
         }
-        return new \PhpCsFixer\Tokenizer\Analyzer\Analysis\ArgumentAnalysis($info['name'], $info['name_index'], $info['default'], $info['type'] ? new \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis($info['type'], $info['type_index_start'], $info['type_index_end']) : null);
+        return new ArgumentAnalysis($info['name'], $info['name_index'], $info['default'], $info['type'] ? new TypeAnalysis($info['type'], $info['type_index_start'], $info['type_index_end']) : null);
     }
 }

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\ValueObjectFactory;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use Symplify\CodingStandard\ValueObject\DocBlockLines;
 final class DocBlockLinesFactory
 {
@@ -17,32 +17,32 @@ final class DocBlockLinesFactory
      * @var string
      */
     private const END_OF_DOC_BLOCK_REGEX = '/(\\*\\/)$/';
-    public function createFromDocBlock(string $docBlock) : \Symplify\CodingStandard\ValueObject\DocBlockLines
+    public function createFromDocBlock(string $docBlock) : DocBlockLines
     {
         // Remove the prefix '/**'
-        $docBlock = \_PhpScopercc9aec205203\Nette\Utils\Strings::replace($docBlock, self::BEGINNING_OF_DOC_BLOCK_REGEX);
+        $docBlock = Strings::replace($docBlock, self::BEGINNING_OF_DOC_BLOCK_REGEX);
         // Remove the suffix '*/'
-        $docBlock = \_PhpScopercc9aec205203\Nette\Utils\Strings::replace($docBlock, self::END_OF_DOC_BLOCK_REGEX);
+        $docBlock = Strings::replace($docBlock, self::END_OF_DOC_BLOCK_REGEX);
         // Remove extra whitespace at the end
         $docBlock = \rtrim($docBlock);
         $docBlockLines = $this->splitToLines($docBlock);
         $docBlockLines = \array_map(function (string $line) : string {
-            $noWhitespace = \_PhpScopercc9aec205203\Nette\Utils\Strings::trim($line, \_PhpScopercc9aec205203\Nette\Utils\Strings::TRIM_CHARACTERS);
+            $noWhitespace = Strings::trim($line, Strings::TRIM_CHARACTERS);
             // Remove asterisks on the left side, plus additional whitespace
-            return \ltrim($noWhitespace, \_PhpScopercc9aec205203\Nette\Utils\Strings::TRIM_CHARACTERS . '*');
+            return \ltrim($noWhitespace, Strings::TRIM_CHARACTERS . '*');
         }, $docBlockLines);
         return $this->createFromLines($docBlockLines);
     }
     /**
      * @param string[] $docBlockLines
      */
-    private function createFromLines(array $docBlockLines) : \Symplify\CodingStandard\ValueObject\DocBlockLines
+    private function createFromLines(array $docBlockLines) : DocBlockLines
     {
         $descriptionLines = [];
         $otherLines = [];
         $collectDescriptionLines = \true;
         foreach ($docBlockLines as $docBlockLine) {
-            if (\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($docBlockLine, '@') || \_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($docBlockLine, '{@')) {
+            if (Strings::startsWith($docBlockLine, '@') || Strings::startsWith($docBlockLine, '{@')) {
                 // The line has a special meaning (it's an annotation, or something like {@inheritdoc})
                 $collectDescriptionLines = \false;
             }
@@ -52,7 +52,7 @@ final class DocBlockLinesFactory
                 $otherLines[] = $docBlockLine;
             }
         }
-        return new \Symplify\CodingStandard\ValueObject\DocBlockLines($descriptionLines, $otherLines);
+        return new DocBlockLines($descriptionLines, $otherLines);
     }
     /**
      * @return string[]

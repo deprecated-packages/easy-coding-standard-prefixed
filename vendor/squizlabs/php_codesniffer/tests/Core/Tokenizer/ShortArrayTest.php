@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class ShortArrayTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class ShortArrayTest extends AbstractMethodUnitTest
 {
     /**
      * Test that real square brackets are still tokenized as square brackets.

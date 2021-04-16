@@ -21,17 +21,17 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Graham Campbell <graham@alt-three.com>
  */
-final class SimplifiedNullReturnFixer extends \PhpCsFixer\AbstractFixer
+final class SimplifiedNullReturnFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('A return statement wishing to return `void` should not return `null`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php return null;\n"), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample(<<<'EOT'
+        return new FixerDefinition('A return statement wishing to return `void` should not return `null`.', [new CodeSample("<?php return null;\n"), new VersionSpecificCodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 function foo()
 {
@@ -51,7 +51,7 @@ function xyz() : void
 }
 
 EOT
-, new \PhpCsFixer\FixerDefinition\VersionSpecification(70100))]);
+, new VersionSpecification(70100))]);
     }
     /**
      * {@inheritdoc}
@@ -65,14 +65,14 @@ EOT
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_RETURN);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_RETURN)) {
@@ -88,7 +88,7 @@ EOT
      *
      * @param int $index
      */
-    private function clear(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function clear(Tokens $tokens, $index)
     {
         while (!$tokens[++$index]->equals(';')) {
             if ($this->shouldClearToken($tokens, $index)) {
@@ -103,7 +103,7 @@ EOT
      *
      * @return bool
      */
-    private function needFixing(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function needFixing(Tokens $tokens, $index)
     {
         if ($this->isStrictOrNullableReturnTypeFunction($tokens, $index)) {
             return \false;
@@ -124,7 +124,7 @@ EOT
      *
      * @return bool
      */
-    private function isStrictOrNullableReturnTypeFunction(\PhpCsFixer\Tokenizer\Tokens $tokens, $returnIndex)
+    private function isStrictOrNullableReturnTypeFunction(Tokens $tokens, $returnIndex)
     {
         $functionIndex = $returnIndex;
         do {
@@ -133,11 +133,11 @@ EOT
                 return \false;
             }
             $openingCurlyBraceIndex = $tokens->getNextTokenOfKind($functionIndex, ['{']);
-            $closingCurlyBraceIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $openingCurlyBraceIndex);
+            $closingCurlyBraceIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $openingCurlyBraceIndex);
         } while ($closingCurlyBraceIndex < $returnIndex);
         $possibleVoidIndex = $tokens->getPrevMeaningfulToken($openingCurlyBraceIndex);
         $isStrictReturnType = $tokens[$possibleVoidIndex]->isGivenKind(\T_STRING) && 'void' !== $tokens[$possibleVoidIndex]->getContent();
-        $nullableTypeIndex = $tokens->getNextTokenOfKind($functionIndex, [[\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE]]);
+        $nullableTypeIndex = $tokens->getNextTokenOfKind($functionIndex, [[CT::T_NULLABLE_TYPE]]);
         $isNullableReturnType = null !== $nullableTypeIndex && $nullableTypeIndex < $openingCurlyBraceIndex;
         return $isStrictReturnType || $isNullableReturnType;
     }
@@ -151,7 +151,7 @@ EOT
      *
      * @return bool
      */
-    private function shouldClearToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function shouldClearToken(Tokens $tokens, $index)
     {
         $token = $tokens[$index];
         return !$token->isComment() && !($token->isWhitespace() && $tokens[$index + 1]->isComment());

@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Reporter\CheckerListReporter;
 use Symplify\EasyCodingStandard\Console\Reporter\SetsReporter;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
@@ -12,7 +12,7 @@ use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
-final class ShowCommand extends \Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
+final class ShowCommand extends AbstractSymplifyCommand
 {
     /**
      * @var SniffFileProcessor
@@ -34,7 +34,7 @@ final class ShowCommand extends \Symplify\PackageBuilder\Console\Command\Abstrac
      * @var SetsReporter
      */
     private $setsReporter;
-    public function __construct(\Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor $sniffFileProcessor, \Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor $fixerFileProcessor, \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle, \Symplify\EasyCodingStandard\Console\Reporter\CheckerListReporter $checkerListReporter, \Symplify\EasyCodingStandard\Console\Reporter\SetsReporter $setsReporter)
+    public function __construct(SniffFileProcessor $sniffFileProcessor, FixerFileProcessor $fixerFileProcessor, EasyCodingStandardStyle $easyCodingStandardStyle, CheckerListReporter $checkerListReporter, SetsReporter $setsReporter)
     {
         parent::__construct();
         $this->sniffFileProcessor = $sniffFileProcessor;
@@ -47,7 +47,7 @@ final class ShowCommand extends \Symplify\PackageBuilder\Console\Command\Abstrac
     {
         $this->setDescription('Show loaded checkers');
     }
-    protected function execute(\_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $totalCheckerCount = \count($this->sniffFileProcessor->getCheckers()) + \count($this->fixerFileProcessor->getCheckers());
         $this->checkerListReporter->report($this->sniffFileProcessor->getCheckers(), 'PHP_CodeSniffer');
@@ -55,6 +55,6 @@ final class ShowCommand extends \Symplify\PackageBuilder\Console\Command\Abstrac
         $successMessage = \sprintf('Loaded %d checker%s in total', $totalCheckerCount, $totalCheckerCount === 1 ? '' : 's');
         $this->easyCodingStandardStyle->success($successMessage);
         $this->setsReporter->report();
-        return \Symplify\PackageBuilder\Console\ShellCode::SUCCESS;
+        return ShellCode::SUCCESS;
     }
 }

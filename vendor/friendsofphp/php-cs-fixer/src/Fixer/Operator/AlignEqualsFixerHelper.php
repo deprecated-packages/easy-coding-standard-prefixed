@@ -21,7 +21,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @deprecated
  */
-final class AlignEqualsFixerHelper extends \PhpCsFixer\AbstractAlignFixerHelper
+final class AlignEqualsFixerHelper extends AbstractAlignFixerHelper
 {
     public function __construct()
     {
@@ -30,12 +30,12 @@ final class AlignEqualsFixerHelper extends \PhpCsFixer\AbstractAlignFixerHelper
     /**
      * {@inheritdoc}
      */
-    protected function injectAlignmentPlaceholders(\PhpCsFixer\Tokenizer\Tokens $tokens, $startAt, $endAt)
+    protected function injectAlignmentPlaceholders(Tokens $tokens, $startAt, $endAt)
     {
         for ($index = $startAt; $index < $endAt; ++$index) {
             $token = $tokens[$index];
             if ($token->equals('=')) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token(\sprintf(self::ALIGNABLE_PLACEHOLDER, $this->deepestLevel) . $token->getContent());
+                $tokens[$index] = new Token(\sprintf(self::ALIGNABLE_PLACEHOLDER, $this->deepestLevel) . $token->getContent());
                 continue;
             }
             if ($token->isGivenKind(\T_FUNCTION)) {
@@ -43,15 +43,15 @@ final class AlignEqualsFixerHelper extends \PhpCsFixer\AbstractAlignFixerHelper
                 continue;
             }
             if ($token->equals('(')) {
-                $index = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
+                $index = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
                 continue;
             }
             if ($token->equals('[')) {
-                $index = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_INDEX_SQUARE_BRACE, $index);
+                $index = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_INDEX_SQUARE_BRACE, $index);
                 continue;
             }
-            if ($token->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN)) {
-                $index = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $index);
+            if ($token->isGivenKind(CT::T_ARRAY_SQUARE_BRACE_OPEN)) {
+                $index = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $index);
                 continue;
             }
         }

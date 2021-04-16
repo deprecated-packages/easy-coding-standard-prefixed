@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Standards\Zend\Tests\Debug;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 use PHP_CodeSniffer\Config;
-class CodeAnalyzerUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class CodeAnalyzerUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Should this test be skipped for some reason.
@@ -20,7 +20,7 @@ class CodeAnalyzerUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSnif
      */
     protected function shouldSkipTest()
     {
-        $analyzerPath = \PHP_CodeSniffer\Config::getExecutablePath('zend_ca');
+        $analyzerPath = Config::getExecutablePath('zend_ca');
         if ($analyzerPath === null) {
             return \true;
         }

@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\HttpKernel;
 
-use _PhpScopercc9aec205203\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\Skipper\Bundle\SkipperBundle;
 use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class SkipperKernel extends \Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+final class SkipperKernel extends AbstractSymplifyKernel
 {
-    public function registerContainerConfiguration(\_PhpScopercc9aec205203\Symfony\Component\Config\Loader\LoaderInterface $loader) : void
+    public function registerContainerConfiguration(LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../../config/config.php');
         parent::registerContainerConfiguration($loader);
@@ -20,6 +20,6 @@ final class SkipperKernel extends \Symplify\SymplifyKernel\HttpKernel\AbstractSy
      */
     public function registerBundles() : iterable
     {
-        return [new \Symplify\Skipper\Bundle\SkipperBundle(), new \Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle()];
+        return [new SkipperBundle(), new SymplifyKernelBundle()];
     }
 }

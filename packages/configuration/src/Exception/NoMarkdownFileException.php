@@ -4,6 +4,6 @@ declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Configuration\Exception;
 
 use Exception;
-final class NoMarkdownFileException extends \Exception
+final class NoMarkdownFileException extends Exception
 {
 }

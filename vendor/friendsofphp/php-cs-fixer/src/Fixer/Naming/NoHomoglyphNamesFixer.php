@@ -21,7 +21,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Fred Cox <mcfedr@gmail.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class NoHomoglyphNamesFixer extends \PhpCsFixer\AbstractFixer
+final class NoHomoglyphNamesFixer extends AbstractFixer
 {
     /**
      * Used the program https://github.com/mcfedr/homoglyph-download
@@ -49,7 +49,7 @@ final class NoHomoglyphNamesFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replace accidental usage of homoglyphs (non ascii characters) in names.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$nаmе = 'wrong \"a\" character';\n")], null, 'Renames classes and cannot rename the files. You might have string references to renamed code (`$$name`).');
+        return new FixerDefinition('Replace accidental usage of homoglyphs (non ascii characters) in names.', [new CodeSample("<?php \$nаmе = 'wrong \"a\" character';\n")], null, 'Renames classes and cannot rename the files. You might have string references to renamed code (`$$name`).');
     }
     /**
      * {@inheritdoc}
@@ -61,24 +61,24 @@ final class NoHomoglyphNamesFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_VARIABLE, \T_STRING]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind([\T_VARIABLE, \T_STRING])) {
                 continue;
             }
-            $replaced = \PhpCsFixer\Preg::replaceCallback('/[^[:ascii:]]/u', static function ($matches) {
+            $replaced = Preg::replaceCallback('/[^[:ascii:]]/u', static function ($matches) {
                 return isset(self::$replacements[$matches[0]]) ? self::$replacements[$matches[0]] : $matches[0];
             }, $token->getContent(), -1, $count);
             if ($count) {
-                $tokens->offsetSet($index, new \PhpCsFixer\Tokenizer\Token([$token->getId(), $replaced]));
+                $tokens->offsetSet($index, new Token([$token->getId(), $replaced]));
             }
         }
     }

@@ -20,7 +20,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class UndoNamespacedNameSingleTokenTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class UndoNamespacedNameSingleTokenTest extends AbstractMethodUnitTest
 {
     /**
      * Test that identifier names are tokenized the same across PHP versions, based on the PHP 5/7 tokenization.

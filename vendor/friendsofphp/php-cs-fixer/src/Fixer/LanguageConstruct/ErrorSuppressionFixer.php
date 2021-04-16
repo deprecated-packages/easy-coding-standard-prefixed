@@ -24,7 +24,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Jules Pietri <jules@heahprod.com>
  * @author Kuba Werłos <werlos@gmail.com>
  */
-final class ErrorSuppressionFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class ErrorSuppressionFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     const OPTION_MUTE_DEPRECATION_ERROR = 'mute_deprecation_error';
     const OPTION_NOISE_REMAINING_USAGES = 'noise_remaining_usages';
@@ -34,12 +34,12 @@ final class ErrorSuppressionFixer extends \PhpCsFixer\AbstractFixer implements \
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Error control operator should be added to deprecation notices and/or removed from other cases.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\ntrigger_error('Warning.', E_USER_DEPRECATED);\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n@mkdir(\$dir);\n@unlink(\$path);\n", [self::OPTION_NOISE_REMAINING_USAGES => \true]), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n@mkdir(\$dir);\n@unlink(\$path);\n", [self::OPTION_NOISE_REMAINING_USAGES => \true, self::OPTION_NOISE_REMAINING_USAGES_EXCLUDE => ['unlink']])], null, 'Risky because adding/removing `@` might cause changes to code behaviour or if `trigger_error` function is overridden.');
+        return new FixerDefinition('Error control operator should be added to deprecation notices and/or removed from other cases.', [new CodeSample("<?php\ntrigger_error('Warning.', E_USER_DEPRECATED);\n"), new CodeSample("<?php\n@mkdir(\$dir);\n@unlink(\$path);\n", [self::OPTION_NOISE_REMAINING_USAGES => \true]), new CodeSample("<?php\n@mkdir(\$dir);\n@unlink(\$path);\n", [self::OPTION_NOISE_REMAINING_USAGES => \true, self::OPTION_NOISE_REMAINING_USAGES_EXCLUDE => ['unlink']])], null, 'Risky because adding/removing `@` might cause changes to code behaviour or if `trigger_error` function is overridden.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound(['@', \T_STRING]);
     }
@@ -55,14 +55,14 @@ final class ErrorSuppressionFixer extends \PhpCsFixer\AbstractFixer implements \
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder(self::OPTION_MUTE_DEPRECATION_ERROR, 'Whether to add `@` in deprecation notices.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder(self::OPTION_NOISE_REMAINING_USAGES, 'Whether to remove `@` in remaining usages.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder(self::OPTION_NOISE_REMAINING_USAGES_EXCLUDE, 'List of global functions to exclude from removing `@`'))->setAllowedTypes(['array'])->setDefault([])->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder(self::OPTION_MUTE_DEPRECATION_ERROR, 'Whether to add `@` in deprecation notices.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption(), (new FixerOptionBuilder(self::OPTION_NOISE_REMAINING_USAGES, 'Whether to remove `@` in remaining usages.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new FixerOptionBuilder(self::OPTION_NOISE_REMAINING_USAGES_EXCLUDE, 'List of global functions to exclude from removing `@`'))->setAllowedTypes(['array'])->setDefault([])->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
+        $functionsAnalyzer = new FunctionsAnalyzer();
         $excludedFunctions = \array_map(static function ($function) {
             return \strtolower($function);
         }, $this->configuration[self::OPTION_NOISE_REMAINING_USAGES_EXCLUDE]);
@@ -90,7 +90,7 @@ final class ErrorSuppressionFixer extends \PhpCsFixer\AbstractFixer implements \
                 if ($tokens[$prevIndex]->equals('@')) {
                     continue;
                 }
-                $tokens->insertAt($startIndex, new \PhpCsFixer\Tokenizer\Token('@'));
+                $tokens->insertAt($startIndex, new Token('@'));
                 continue;
             }
             if (!$tokens[$prevIndex]->equals('@')) {
@@ -106,12 +106,12 @@ final class ErrorSuppressionFixer extends \PhpCsFixer\AbstractFixer implements \
      *
      * @return bool
      */
-    private function isDeprecationErrorCall(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function isDeprecationErrorCall(Tokens $tokens, $index)
     {
         if ('trigger_error' !== \strtolower($tokens[$index]->getContent())) {
             return \false;
         }
-        $endBraceIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $tokens->getNextTokenOfKind($index, [\T_STRING, '(']));
+        $endBraceIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $tokens->getNextTokenOfKind($index, [\T_STRING, '(']));
         $prevIndex = $tokens->getPrevMeaningfulToken($endBraceIndex);
         if ($tokens[$prevIndex]->equals(',')) {
             $prevIndex = $tokens->getPrevMeaningfulToken($prevIndex);

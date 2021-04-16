@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\Process\Pipes;
+namespace _PhpScopereb9508917a55\Symfony\Component\Process\Pipes;
 
-use _PhpScopercc9aec205203\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScopercc9aec205203\Symfony\Component\Process\Process;
+use _PhpScopereb9508917a55\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScopereb9508917a55\Symfony\Component\Process\Process;
 /**
  * WindowsPipes implementation uses temporary files as handles.
  *
@@ -22,12 +22,12 @@ use _PhpScopercc9aec205203\Symfony\Component\Process\Process;
  *
  * @internal
  */
-class WindowsPipes extends \_PhpScopercc9aec205203\Symfony\Component\Process\Pipes\AbstractPipes
+class WindowsPipes extends \_PhpScopereb9508917a55\Symfony\Component\Process\Pipes\AbstractPipes
 {
     private $files = [];
     private $fileHandles = [];
     private $lockHandles = [];
-    private $readBytes = [\_PhpScopercc9aec205203\Symfony\Component\Process\Process::STDOUT => 0, \_PhpScopercc9aec205203\Symfony\Component\Process\Process::STDERR => 0];
+    private $readBytes = [Process::STDOUT => 0, Process::STDERR => 0];
     private $haveReadSupport;
     public function __construct($input, bool $haveReadSupport)
     {
@@ -37,7 +37,7 @@ class WindowsPipes extends \_PhpScopercc9aec205203\Symfony\Component\Process\Pip
             // Workaround for this problem is to use temporary files instead of pipes on Windows platform.
             //
             // @see https://bugs.php.net/51800
-            $pipes = [\_PhpScopercc9aec205203\Symfony\Component\Process\Process::STDOUT => \_PhpScopercc9aec205203\Symfony\Component\Process\Process::OUT, \_PhpScopercc9aec205203\Symfony\Component\Process\Process::STDERR => \_PhpScopercc9aec205203\Symfony\Component\Process\Process::ERR];
+            $pipes = [Process::STDOUT => Process::OUT, Process::STDERR => Process::ERR];
             $tmpDir = \sys_get_temp_dir();
             $lastError = 'unknown reason';
             \set_error_handler(function ($type, $msg) use(&$lastError) {
@@ -51,7 +51,7 @@ class WindowsPipes extends \_PhpScopercc9aec205203\Symfony\Component\Process\Pip
                             continue 2;
                         }
                         \restore_error_handler();
-                        throw new \_PhpScopercc9aec205203\Symfony\Component\Process\Exception\RuntimeException('A temporary file could not be opened to write the process output: ' . $lastError);
+                        throw new RuntimeException('A temporary file could not be opened to write the process output: ' . $lastError);
                     }
                     if (!\flock($h, \LOCK_EX | \LOCK_NB)) {
                         continue 2;
@@ -119,9 +119,9 @@ class WindowsPipes extends \_PhpScopercc9aec205203\Symfony\Component\Process\Pip
         $read = $r = $e = [];
         if ($blocking) {
             if ($w) {
-                @\stream_select($r, $w, $e, 0, \_PhpScopercc9aec205203\Symfony\Component\Process\Process::TIMEOUT_PRECISION * 1000000.0);
+                @\stream_select($r, $w, $e, 0, Process::TIMEOUT_PRECISION * 1000000.0);
             } elseif ($this->fileHandles) {
-                \usleep(\_PhpScopercc9aec205203\Symfony\Component\Process\Process::TIMEOUT_PRECISION * 1000000.0);
+                \usleep(Process::TIMEOUT_PRECISION * 1000000.0);
             }
         }
         foreach ($this->fileHandles as $type => $fileHandle) {

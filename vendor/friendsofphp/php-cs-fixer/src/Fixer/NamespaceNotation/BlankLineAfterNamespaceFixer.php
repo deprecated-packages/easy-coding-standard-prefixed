@@ -23,14 +23,14 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class BlankLineAfterNamespaceFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class BlankLineAfterNamespaceFixer extends AbstractFixer implements WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('There MUST be one blank line after the namespace declaration.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nnamespace Sample\\Sample;\n\n\n\$a;\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nnamespace Sample\\Sample;\nClass Test{}\n")]);
+        return new FixerDefinition('There MUST be one blank line after the namespace declaration.', [new CodeSample("<?php\nnamespace Sample\\Sample;\n\n\n\$a;\n"), new CodeSample("<?php\nnamespace Sample\\Sample;\nClass Test{}\n")]);
     }
     /**
      * {@inheritdoc}
@@ -44,14 +44,14 @@ final class BlankLineAfterNamespaceFixer extends \PhpCsFixer\AbstractFixer imple
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_NAMESPACE);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $lastIndex = $tokens->count() - 1;
         for ($index = $lastIndex; $index >= 0; --$index) {
@@ -78,14 +78,14 @@ final class BlankLineAfterNamespaceFixer extends \PhpCsFixer\AbstractFixer imple
      *
      * @return int
      */
-    private function getIndexToEnsureBlankLineAfter(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getIndexToEnsureBlankLineAfter(Tokens $tokens, $index)
     {
         $indexToEnsureBlankLine = $index;
         $nextIndex = $tokens->getNonEmptySibling($indexToEnsureBlankLine, 1);
         while (null !== $nextIndex) {
             $token = $tokens[$nextIndex];
             if ($token->isWhitespace()) {
-                if (1 === \PhpCsFixer\Preg::match('/\\R/', $token->getContent())) {
+                if (1 === Preg::match('/\\R/', $token->getContent())) {
                     break;
                 }
                 $nextNextIndex = $tokens->getNonEmptySibling($nextIndex, 1);
@@ -111,7 +111,7 @@ final class BlankLineAfterNamespaceFixer extends \PhpCsFixer\AbstractFixer imple
     {
         $ending = $this->whitespacesConfig->getLineEnding();
         $emptyLines = $isLastIndex ? $ending : $ending . $ending;
-        $indent = 1 === \PhpCsFixer\Preg::match('/^.*\\R( *)$/s', $currentContent, $matches) ? $matches[1] : '';
-        return new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $emptyLines . $indent]);
+        $indent = 1 === Preg::match('/^.*\\R( *)$/s', $currentContent, $matches) ? $matches[1] : '';
+        return new Token([\T_WHITESPACE, $emptyLines . $indent]);
     }
 }

@@ -37,7 +37,7 @@ abstract class AbstractFunctionReferenceFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return null|int[] returns $functionName, $openParenthesis, $closeParenthesis packed into array
      */
-    protected function find($functionNameToSearch, \PhpCsFixer\Tokenizer\Tokens $tokens, $start = 0, $end = null)
+    protected function find($functionNameToSearch, Tokens $tokens, $start = 0, $end = null)
     {
         // make interface consistent with findSequence
         $end = null === $end ? $tokens->count() : $end;
@@ -50,10 +50,10 @@ abstract class AbstractFunctionReferenceFixer extends \PhpCsFixer\AbstractFixer
         }
         // translate results for humans
         list($functionName, $openParenthesis) = \array_keys($matches);
-        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
+        $functionsAnalyzer = new FunctionsAnalyzer();
         if (!$functionsAnalyzer->isGlobalFunctionCall($tokens, $functionName)) {
             return $this->find($functionNameToSearch, $tokens, $openParenthesis, $end);
         }
-        return [$functionName, $openParenthesis, $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis)];
+        return [$functionName, $openParenthesis, $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis)];
     }
 }

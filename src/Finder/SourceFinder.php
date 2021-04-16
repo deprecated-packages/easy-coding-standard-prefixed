@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Finder;
 
-use _PhpScopercc9aec205203\Symfony\Component\Finder\Finder;
+use _PhpScopereb9508917a55\Symfony\Component\Finder\Finder;
 use Symplify\EasyCodingStandard\Git\GitDiffProvider;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -26,10 +26,10 @@ final class SourceFinder
      * @var GitDiffProvider
      */
     private $gitDiffProvider;
-    public function __construct(\Symplify\SmartFileSystem\Finder\FinderSanitizer $finderSanitizer, \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider, \Symplify\EasyCodingStandard\Git\GitDiffProvider $gitDiffProvider)
+    public function __construct(FinderSanitizer $finderSanitizer, ParameterProvider $parameterProvider, GitDiffProvider $gitDiffProvider)
     {
         $this->finderSanitizer = $finderSanitizer;
-        $this->fileExtensions = $parameterProvider->provideArrayParameter(\Symplify\EasyCodingStandard\ValueObject\Option::FILE_EXTENSIONS);
+        $this->fileExtensions = $parameterProvider->provideArrayParameter(Option::FILE_EXTENSIONS);
         $this->gitDiffProvider = $gitDiffProvider;
     }
     /**
@@ -41,7 +41,7 @@ final class SourceFinder
         $fileInfos = [];
         foreach ($source as $singleSource) {
             if (\is_file($singleSource)) {
-                $fileInfos[] = new \Symplify\SmartFileSystem\SmartFileInfo($singleSource);
+                $fileInfos[] = new SmartFileInfo($singleSource);
             } else {
                 $filesInDirectory = $this->processDirectory($singleSource);
                 $fileInfos = \array_merge($fileInfos, $filesInDirectory);
@@ -57,7 +57,7 @@ final class SourceFinder
     private function processDirectory(string $directory) : array
     {
         $normalizedFileExtensions = $this->normalizeFileExtensions($this->fileExtensions);
-        $finder = \_PhpScopercc9aec205203\Symfony\Component\Finder\Finder::create()->files()->name($normalizedFileExtensions)->in($directory)->exclude('vendor')->size('> 0')->sortByName();
+        $finder = Finder::create()->files()->name($normalizedFileExtensions)->in($directory)->exclude('vendor')->size('> 0')->sortByName();
         return $this->finderSanitizer->sanitize($finder);
     }
     /**

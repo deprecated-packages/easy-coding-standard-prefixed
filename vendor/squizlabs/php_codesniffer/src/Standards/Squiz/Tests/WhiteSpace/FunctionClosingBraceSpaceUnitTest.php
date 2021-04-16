@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class FunctionClosingBraceSpaceUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class FunctionClosingBraceSpaceUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class BitwiseOrTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class BitwiseOrTest extends AbstractMethodUnitTest
 {
     /**
      * Test that non-union type bitwise or tokens are still tokenized as bitwise or.

@@ -19,19 +19,19 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Vladimir Reznichenko <kalessil@gmail.com>
  */
-final class DirConstantFixer extends \PhpCsFixer\AbstractFunctionReferenceFixer
+final class DirConstantFixer extends AbstractFunctionReferenceFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = dirname(__FILE__);\n")], null, 'Risky when the function `dirname` is overridden.');
+        return new FixerDefinition('Replaces `dirname(__FILE__)` expression with equivalent `__DIR__` constant.', [new CodeSample("<?php\n\$a = dirname(__FILE__);\n")], null, 'Risky when the function `dirname` is overridden.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_FILE);
     }
@@ -47,7 +47,7 @@ final class DirConstantFixer extends \PhpCsFixer\AbstractFunctionReferenceFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $currIndex = 0;
         while (null !== $currIndex) {
@@ -99,7 +99,7 @@ final class DirConstantFixer extends \PhpCsFixer\AbstractFunctionReferenceFixer
             $tokens->removeTrailingWhitespace($openParenthesis);
             $tokens->clearTokenAndMergeSurroundingWhitespace($openParenthesis);
             // replace constant and remove function name
-            $tokens[$fileCandidateLeftIndex] = new \PhpCsFixer\Tokenizer\Token([\T_DIR, '__DIR__']);
+            $tokens[$fileCandidateLeftIndex] = new Token([\T_DIR, '__DIR__']);
             $tokens->clearTokenAndMergeSurroundingWhitespace($functionNameIndex);
         }
     }

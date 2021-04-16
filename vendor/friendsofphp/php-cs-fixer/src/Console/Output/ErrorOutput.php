@@ -14,8 +14,8 @@ namespace PhpCsFixer\Console\Output;
 use PhpCsFixer\Differ\DiffConsoleFormatter;
 use PhpCsFixer\Error\Error;
 use PhpCsFixer\Linter\LintingException;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author SpacePossum
  *
@@ -31,7 +31,7 @@ final class ErrorOutput
      * @var bool
      */
     private $isDecorated;
-    public function __construct(\_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface $output)
+    public function __construct(OutputInterface $output)
     {
         $this->output = $output;
         $this->isDecorated = $output->isDecorated();
@@ -43,8 +43,8 @@ final class ErrorOutput
     public function listErrors($process, array $errors)
     {
         $this->output->writeln(['', \sprintf('Files that were not fixed due to errors reported during %s:', $process)]);
-        $showDetails = $this->output->getVerbosity() >= \_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERY_VERBOSE;
-        $showTrace = $this->output->getVerbosity() >= \_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_DEBUG;
+        $showDetails = $this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERY_VERBOSE;
+        $showTrace = $this->output->getVerbosity() >= OutputInterface::VERBOSITY_DEBUG;
         foreach ($errors as $i => $error) {
             $this->output->writeln(\sprintf('%4d) %s', $i + 1, $error->getFilePath()));
             $e = $error->getSource();
@@ -66,24 +66,24 @@ final class ErrorOutput
                 }
                 $this->output->writeln(\sprintf('      <error>  %s  </error>', $this->prepareOutput($line)));
             }
-            if ($showTrace && !$e instanceof \PhpCsFixer\Linter\LintingException) {
+            if ($showTrace && !$e instanceof LintingException) {
                 // stack trace of lint exception is of no interest
                 $this->output->writeln('');
                 $stackTrace = $e->getTrace();
                 foreach ($stackTrace as $trace) {
-                    if (isset($trace['class'], $trace['function']) && \_PhpScopercc9aec205203\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
+                    if (isset($trace['class'], $trace['function']) && \_PhpScopereb9508917a55\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
                         $this->output->writeln('      [ ... ]');
                         break;
                     }
                     $this->outputTrace($trace);
                 }
             }
-            if (\PhpCsFixer\Error\Error::TYPE_LINT === $error->getType() && 0 < \count($error->getAppliedFixers())) {
+            if (Error::TYPE_LINT === $error->getType() && 0 < \count($error->getAppliedFixers())) {
                 $this->output->writeln('');
                 $this->output->writeln(\sprintf('      Applied fixers: <comment>%s</comment>', \implode(', ', $error->getAppliedFixers())));
                 $diff = $error->getDiff();
                 if (!empty($diff)) {
-                    $diffFormatter = new \PhpCsFixer\Differ\DiffConsoleFormatter($this->isDecorated, \sprintf('<comment>      ---------- begin diff ----------</comment>%s%%s%s<comment>      ----------- end diff -----------</comment>', \PHP_EOL, \PHP_EOL));
+                    $diffFormatter = new DiffConsoleFormatter($this->isDecorated, \sprintf('<comment>      ---------- begin diff ----------</comment>%s%%s%s<comment>      ----------- end diff -----------</comment>', \PHP_EOL, \PHP_EOL));
                     $this->output->writeln($diffFormatter->format($diff));
                 }
             }
@@ -107,6 +107,6 @@ final class ErrorOutput
      */
     private function prepareOutput($string)
     {
-        return $this->isDecorated ? \_PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter::escape($string) : $string;
+        return $this->isDecorated ? OutputFormatter::escape($string) : $string;
     }
 }

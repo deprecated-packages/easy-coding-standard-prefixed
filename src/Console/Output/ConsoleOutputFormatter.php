@@ -9,7 +9,7 @@ use Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface
 use Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult;
 use Symplify\EasyCodingStandard\ValueObject\Error\FileDiff;
 use Symplify\PackageBuilder\Console\ShellCode;
-final class ConsoleOutputFormatter implements \Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface
+final class ConsoleOutputFormatter implements OutputFormatterInterface
 {
     /**
      * @var string
@@ -23,12 +23,12 @@ final class ConsoleOutputFormatter implements \Symplify\EasyCodingStandard\Contr
      * @var Configuration
      */
     private $configuration;
-    public function __construct(\Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle, \Symplify\EasyCodingStandard\Configuration\Configuration $configuration)
+    public function __construct(EasyCodingStandardStyle $easyCodingStandardStyle, Configuration $configuration)
     {
         $this->easyCodingStandardStyle = $easyCodingStandardStyle;
         $this->configuration = $configuration;
     }
-    public function report(\Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult, int $processedFilesCount) : int
+    public function report(ErrorAndDiffResult $errorAndDiffResult, int $processedFilesCount) : int
     {
         $this->reportFileDiffs($errorAndDiffResult->getFileDiffs());
         if ($errorAndDiffResult->getErrorCount() === 0 && $errorAndDiffResult->getFileDiffsCount() === 0) {
@@ -36,7 +36,7 @@ final class ConsoleOutputFormatter implements \Symplify\EasyCodingStandard\Contr
                 $this->easyCodingStandardStyle->newLine();
             }
             $this->easyCodingStandardStyle->success('No errors found. Great job - your code is shiny in style!');
-            return \Symplify\PackageBuilder\Console\ShellCode::SUCCESS;
+            return ShellCode::SUCCESS;
         }
         $this->easyCodingStandardStyle->newLine();
         return $this->configuration->isFixer() ? $this->printAfterFixerStatus($errorAndDiffResult) : $this->printNoFixerStatus($errorAndDiffResult);
@@ -68,7 +68,7 @@ final class ConsoleOutputFormatter implements \Symplify\EasyCodingStandard\Contr
             $this->easyCodingStandardStyle->listing($fileDiff->getAppliedCheckers());
         }
     }
-    private function printAfterFixerStatus(\Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult) : int
+    private function printAfterFixerStatus(ErrorAndDiffResult $errorAndDiffResult) : int
     {
         if ($this->configuration->shouldShowErrorTable()) {
             $this->easyCodingStandardStyle->printErrors($errorAndDiffResult->getErrors());
@@ -76,12 +76,12 @@ final class ConsoleOutputFormatter implements \Symplify\EasyCodingStandard\Contr
         if ($errorAndDiffResult->getErrorCount() === 0) {
             $successMessage = \sprintf('%d error%s successfully fixed and no other errors found!', $errorAndDiffResult->getFileDiffsCount(), $errorAndDiffResult->getFileDiffsCount() === 1 ? '' : 's');
             $this->easyCodingStandardStyle->success($successMessage);
-            return \Symplify\PackageBuilder\Console\ShellCode::SUCCESS;
+            return ShellCode::SUCCESS;
         }
         $this->printErrorMessageFromErrorCounts($errorAndDiffResult->getErrorCount(), $errorAndDiffResult->getFileDiffsCount());
-        return \Symplify\PackageBuilder\Console\ShellCode::ERROR;
+        return ShellCode::ERROR;
     }
-    private function printNoFixerStatus(\Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult) : int
+    private function printNoFixerStatus(ErrorAndDiffResult $errorAndDiffResult) : int
     {
         if ($this->configuration->shouldShowErrorTable()) {
             $errors = $errorAndDiffResult->getErrors();
@@ -97,7 +97,7 @@ final class ConsoleOutputFormatter implements \Symplify\EasyCodingStandard\Contr
             $this->easyCodingStandardStyle->warning($systemError->getMessage());
         }
         $this->printErrorMessageFromErrorCounts($errorAndDiffResult->getErrorCount(), $errorAndDiffResult->getFileDiffsCount());
-        return \Symplify\PackageBuilder\Console\ShellCode::ERROR;
+        return ShellCode::ERROR;
     }
     private function printErrorMessageFromErrorCounts(int $errorCount, int $fileDiffsCount) : void
     {

@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\MySource\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ReturnFunctionValueUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ReturnFunctionValueUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

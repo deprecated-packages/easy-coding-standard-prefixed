@@ -22,7 +22,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @internal
  */
-final class NullableTypeTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
+final class NullableTypeTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
@@ -42,15 +42,15 @@ final class NullableTypeTransformer extends \PhpCsFixer\Tokenizer\AbstractTransf
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
+    public function process(Tokens $tokens, Token $token, $index)
     {
         if (!$token->equals('?')) {
             return;
         }
         $prevIndex = $tokens->getPrevMeaningfulToken($index);
         $prevToken = $tokens[$prevIndex];
-        if ($prevToken->equalsAny(['(', ',', [\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON], [\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC], [\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED], [\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE], [\PhpCsFixer\Tokenizer\CT::T_ATTRIBUTE_CLOSE], [\T_PRIVATE], [\T_PROTECTED], [\T_PUBLIC], [\T_VAR], [\T_STATIC]])) {
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, '?']);
+        if ($prevToken->equalsAny(['(', ',', [CT::T_TYPE_COLON], [CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC], [CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED], [CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE], [CT::T_ATTRIBUTE_CLOSE], [\T_PRIVATE], [\T_PROTECTED], [\T_PUBLIC], [\T_VAR], [\T_STATIC]])) {
+            $tokens[$index] = new Token([CT::T_NULLABLE_TYPE, '?']);
         }
     }
     /**
@@ -58,6 +58,6 @@ final class NullableTypeTransformer extends \PhpCsFixer\Tokenizer\AbstractTransf
      */
     public function getCustomTokens()
     {
-        return [\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE];
+        return [CT::T_NULLABLE_TYPE];
     }
 }

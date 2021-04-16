@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
-class FunctionCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
+class FunctionCommentSniff implements Sniff
 {
     /**
      * Disable the check for functions with a lower visibility than the value given.
@@ -47,14 +47,14 @@ class FunctionCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @return void
      */
-    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $scopeModifier = $phpcsFile->getMethodProperties($stackPtr)['scope'];
         if ($scopeModifier === 'protected' && $this->minimumVisibility === 'public' || $scopeModifier === 'private' && ($this->minimumVisibility === 'public' || $this->minimumVisibility === 'protected')) {
             return;
         }
         $tokens = $phpcsFile->getTokens();
-        $ignore = \PHP_CodeSniffer\Util\Tokens::$methodPrefixes;
+        $ignore = Tokens::$methodPrefixes;
         $ignore[] = \T_WHITESPACE;
         $commentEnd = $phpcsFile->findPrevious($ignore, $stackPtr - 1, null, \true);
         if ($tokens[$commentEnd]['code'] === \T_COMMENT) {
@@ -109,7 +109,7 @@ class FunctionCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @return void
      */
-    protected function processReturn(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr, $commentStart)
+    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
         // Skip constructor and destructor.
@@ -152,7 +152,7 @@ class FunctionCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @return void
      */
-    protected function processThrows(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr, $commentStart)
+    protected function processThrows(File $phpcsFile, $stackPtr, $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
@@ -183,7 +183,7 @@ class FunctionCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @return void
      */
-    protected function processParams(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr, $commentStart)
+    protected function processParams(File $phpcsFile, $stackPtr, $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
         $params = [];

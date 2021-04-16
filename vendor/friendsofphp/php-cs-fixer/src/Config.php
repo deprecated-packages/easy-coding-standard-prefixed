@@ -228,7 +228,7 @@ class Config implements \PhpCsFixer\ConfigInterface
         $this->usingCache = $usingCache;
         return $this;
     }
-    private function addCustomFixer(\PhpCsFixer\Fixer\FixerInterface $fixer)
+    private function addCustomFixer(FixerInterface $fixer)
     {
         $this->customFixers[] = $fixer;
     }

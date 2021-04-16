@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class BackfillFnTokenTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class BackfillFnTokenTest extends AbstractMethodUnitTest
 {
     /**
      * Test simple arrow functions.

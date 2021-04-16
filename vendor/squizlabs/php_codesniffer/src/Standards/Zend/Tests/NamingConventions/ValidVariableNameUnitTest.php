@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Zend\Tests\NamingConventions;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ValidVariableNameUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ValidVariableNameUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

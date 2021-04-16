@@ -26,14 +26,14 @@ use PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-final class NoSuperfluousPhpdocTagsFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class NoSuperfluousPhpdocTagsFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Removes `@param`, `@return` and `@var` tags that don\'t provide any useful information.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Removes `@param`, `@return` and `@var` tags that don\'t provide any useful information.', [new CodeSample('<?php
 class Foo {
     /**
      * @param Bar $bar
@@ -41,7 +41,7 @@ class Foo {
      */
     public function doFoo(Bar $bar, $baz) {}
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 class Foo {
     /**
      * @param Bar $bar
@@ -49,7 +49,7 @@ class Foo {
      */
     public function doFoo(Bar $bar, $baz) {}
 }
-', ['allow_mixed' => \true]), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+', ['allow_mixed' => \true]), new VersionSpecificCodeSample('<?php
 class Foo {
     /**
      * @param Bar $bar
@@ -59,14 +59,14 @@ class Foo {
      */
     public function doFoo(Bar $bar, $baz): Baz {}
 }
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70000)), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+', new VersionSpecification(70000)), new CodeSample('<?php
 class Foo {
     /**
      * @inheritDoc
      */
     public function doFoo(Bar $bar, $baz) {}
 }
-', ['remove_inheritdoc' => \true]), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+', ['remove_inheritdoc' => \true]), new CodeSample('<?php
 class Foo {
     /**
      * @param Bar $bar
@@ -90,16 +90,16 @@ class Foo {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $namespaceUseAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer();
+        $namespaceUseAnalyzer = new NamespaceUsesAnalyzer();
         $shortNames = [];
         foreach ($namespaceUseAnalyzer->getDeclarationsFromTokens($tokens) as $namespaceUseAnalysis) {
             $shortNames[\strtolower($namespaceUseAnalysis->getShortName())] = '\\' . \strtolower($namespaceUseAnalysis->getFullName());
@@ -126,7 +126,7 @@ class Foo {
                 $content = '/**  */';
             }
             if ($content !== $initialContent) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $content]);
+                $tokens[$index] = new Token([\T_DOC_COMMENT, $content]);
             }
         }
     }
@@ -135,14 +135,14 @@ class Foo {
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('allow_mixed', 'Whether type `mixed` without description is allowed (`true`) or considered superfluous (`false`)'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('remove_inheritdoc', 'Remove `@inheritDoc` tags'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('allow_unused_params', 'Whether `param` annotation without actual signature is allowed (`true`) or considered superfluous (`false`)'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('allow_mixed', 'Whether type `mixed` without description is allowed (`true`) or considered superfluous (`false`)'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new FixerOptionBuilder('remove_inheritdoc', 'Remove `@inheritDoc` tags'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new FixerOptionBuilder('allow_unused_params', 'Whether `param` annotation without actual signature is allowed (`true`) or considered superfluous (`false`)'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
     }
     /**
      * @param int $docCommentIndex
      *
      * @return null|int
      */
-    private function findDocumentedElement(\PhpCsFixer\Tokenizer\Tokens $tokens, $docCommentIndex)
+    private function findDocumentedElement(Tokens $tokens, $docCommentIndex)
     {
         $index = $docCommentIndex;
         do {
@@ -152,7 +152,7 @@ class Foo {
             }
         } while ($tokens[$index]->isGivenKind([\T_ABSTRACT, \T_FINAL, \T_STATIC, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC]));
         $index = $tokens->getNextMeaningfulToken($docCommentIndex);
-        $kindsBeforeProperty = [\T_STATIC, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \T_STRING, \T_NS_SEPARATOR];
+        $kindsBeforeProperty = [\T_STATIC, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC, CT::T_NULLABLE_TYPE, CT::T_ARRAY_TYPEHINT, \T_STRING, \T_NS_SEPARATOR];
         if (!$tokens[$index]->isGivenKind($kindsBeforeProperty)) {
             return null;
         }
@@ -170,14 +170,14 @@ class Foo {
      *
      * @return string
      */
-    private function fixFunctionDocComment($content, \PhpCsFixer\Tokenizer\Tokens $tokens, $functionIndex, array $shortNames)
+    private function fixFunctionDocComment($content, Tokens $tokens, $functionIndex, array $shortNames)
     {
-        $docBlock = new \PhpCsFixer\DocBlock\DocBlock($content);
+        $docBlock = new DocBlock($content);
         $openingParenthesisIndex = $tokens->getNextTokenOfKind($functionIndex, ['(']);
-        $closingParenthesisIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openingParenthesisIndex);
+        $closingParenthesisIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openingParenthesisIndex);
         $argumentsInfo = $this->getArgumentsInfo($tokens, $openingParenthesisIndex + 1, $closingParenthesisIndex - 1);
         foreach ($docBlock->getAnnotationsOfType('param') as $annotation) {
-            if (0 === \PhpCsFixer\Preg::match('/@param(?:\\s+[^\\$]\\S+)?\\s+(\\$\\S+)/', $annotation->getContent(), $matches)) {
+            if (0 === Preg::match('/@param(?:\\s+[^\\$]\\S+)?\\s+(\\$\\S+)/', $annotation->getContent(), $matches)) {
                 continue;
             }
             $argumentName = $matches[1];
@@ -202,9 +202,9 @@ class Foo {
      *
      * @return string
      */
-    private function fixPropertyDocComment($content, \PhpCsFixer\Tokenizer\Tokens $tokens, $index, array $shortNames)
+    private function fixPropertyDocComment($content, Tokens $tokens, $index, array $shortNames)
     {
-        $docBlock = new \PhpCsFixer\DocBlock\DocBlock($content);
+        $docBlock = new DocBlock($content);
         do {
             $index = $tokens->getNextMeaningfulToken($index);
         } while ($tokens[$index]->isGivenKind([\T_STATIC, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC]));
@@ -222,7 +222,7 @@ class Foo {
      *
      * @return array<string, array>
      */
-    private function getArgumentsInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, $start, $end)
+    private function getArgumentsInfo(Tokens $tokens, $start, $end)
     {
         $argumentsInfo = [];
         for ($index = $start; $index <= $end; ++$index) {
@@ -247,10 +247,10 @@ class Foo {
         }
         return $argumentsInfo;
     }
-    private function getReturnTypeInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, $closingParenthesisIndex)
+    private function getReturnTypeInfo(Tokens $tokens, $closingParenthesisIndex)
     {
         $colonIndex = $tokens->getNextMeaningfulToken($closingParenthesisIndex);
-        if ($tokens[$colonIndex]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_TYPE_COLON)) {
+        if ($tokens[$colonIndex]->isGivenKind(CT::T_TYPE_COLON)) {
             return $this->parseTypeHint($tokens, $tokens->getNextMeaningfulToken($colonIndex));
         }
         return ['type' => null, 'allows_null' => \true];
@@ -260,7 +260,7 @@ class Foo {
      *
      * @return array
      */
-    private function getPropertyTypeInfo(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getPropertyTypeInfo(Tokens $tokens, $index)
     {
         if ($tokens[$index]->isGivenKind(\T_VARIABLE)) {
             return ['type' => null, 'allows_null' => \true];
@@ -272,15 +272,15 @@ class Foo {
      *
      * @return array
      */
-    private function parseTypeHint(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function parseTypeHint(Tokens $tokens, $index)
     {
         $allowsNull = \false;
-        if ($tokens[$index]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE)) {
+        if ($tokens[$index]->isGivenKind(CT::T_NULLABLE_TYPE)) {
             $allowsNull = \true;
             $index = $tokens->getNextMeaningfulToken($index);
         }
         $type = '';
-        while ($tokens[$index]->isGivenKind([\T_NS_SEPARATOR, \T_STATIC, \T_STRING, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \T_CALLABLE])) {
+        while ($tokens[$index]->isGivenKind([\T_NS_SEPARATOR, \T_STATIC, \T_STRING, CT::T_ARRAY_TYPEHINT, \T_CALLABLE])) {
             $type .= $tokens[$index]->getContent();
             $index = $tokens->getNextMeaningfulToken($index);
         }
@@ -291,7 +291,7 @@ class Foo {
      *
      * @return bool
      */
-    private function annotationIsSuperfluous(\PhpCsFixer\DocBlock\Annotation $annotation, array $info, array $symbolShortNames)
+    private function annotationIsSuperfluous(Annotation $annotation, array $info, array $symbolShortNames)
     {
         if ('param' === $annotation->getTag()->getName()) {
             $regex = '/@param\\s+(?:\\S|\\s(?!\\$))++\\s\\$\\S+\\s+\\S/';
@@ -300,7 +300,7 @@ class Foo {
         } else {
             $regex = '/@return\\s+\\S+\\s+\\S/';
         }
-        if (\PhpCsFixer\Preg::match($regex, $annotation->getContent())) {
+        if (Preg::match($regex, $annotation->getContent())) {
             return \false;
         }
         $annotationTypes = $this->toComparableNames($annotation->getTypes(), $symbolShortNames);
@@ -346,7 +346,7 @@ class Foo {
      */
     private function removeSuperfluousInheritDoc($docComment)
     {
-        return \PhpCsFixer\Preg::replace('~
+        return Preg::replace('~
             # $1: before @inheritDoc tag
             (
                 # beginning of comment or a PHPDoc tag

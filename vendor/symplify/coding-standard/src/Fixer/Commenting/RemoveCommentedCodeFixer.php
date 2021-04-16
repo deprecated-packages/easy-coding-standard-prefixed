@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -22,7 +22,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *
  * @see \Symplify\CodingStandard\Tests\Fixer\Commenting\RemoveCommentedCodeFixer\RemoveCommentedCodeFixerTest
  */
-final class RemoveCommentedCodeFixer extends \Symplify\CodingStandard\Fixer\AbstractSymplifyFixer implements \Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface
+final class RemoveCommentedCodeFixer extends AbstractSymplifyFixer implements DocumentedRuleInterface
 {
     /**
      * @var string
@@ -40,27 +40,27 @@ final class RemoveCommentedCodeFixer extends \Symplify\CodingStandard\Fixer\Abst
      * @var Decommenter
      */
     private $decommenter;
-    public function __construct(\Symplify\CodingStandard\Tokens\CommentedContentResolver $commentedContentResolver, \Symplify\CodingStandard\Php\PhpContentAnalyzer $phpContentAnalyzer, \Symplify\CodingStandard\DocBlock\Decommenter $decommenter)
+    public function __construct(CommentedContentResolver $commentedContentResolver, PhpContentAnalyzer $phpContentAnalyzer, Decommenter $decommenter)
     {
         $this->commentedContentResolver = $commentedContentResolver;
         $this->phpContentAnalyzer = $phpContentAnalyzer;
         $this->decommenter = $decommenter;
     }
-    public function getDefinition() : \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+    public function getDefinition() : FixerDefinitionInterface
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition(self::ERROR_MESSAGE, []);
+        return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens) : bool
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_COMMENT);
     }
     /**
      * @param Tokens<Token> $tokens
      */
-    public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens) : void
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         $contentWithPositions = [];
         for ($i = 0; $i < $tokens->count(); ++$i) {
@@ -68,7 +68,7 @@ final class RemoveCommentedCodeFixer extends \Symplify\CodingStandard\Fixer\Abst
             if (!$token->isGivenKind(\T_COMMENT)) {
                 continue;
             }
-            if (!\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($token->getContent(), '//')) {
+            if (!Strings::startsWith($token->getContent(), '//')) {
                 continue;
             }
             $startAndEnd = $this->commentedContentResolver->resolve($tokens, $i);
@@ -89,9 +89,9 @@ final class RemoveCommentedCodeFixer extends \Symplify\CodingStandard\Fixer\Abst
             $tokens->clearRange($realStart, $startAndEnd->getEnd());
         }
     }
-    public function getRuleDefinition() : \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+    public function getRuleDefinition() : RuleDefinition
     {
-        return new \Symplify\RuleDocGenerator\ValueObject\RuleDefinition(self::ERROR_MESSAGE, [new \Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample(<<<'CODE_SAMPLE'
+        return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 // $one = 1;
 // $two = 2;
 // $three = 3;
@@ -105,7 +105,7 @@ CODE_SAMPLE
      *
      * @param Tokens<Token> $tokens
      */
-    private function resolveRealStart(\Symplify\CodingStandard\ValueObject\StartAndEnd $startAndEnd, \PhpCsFixer\Tokenizer\Tokens $tokens) : int
+    private function resolveRealStart(StartAndEnd $startAndEnd, Tokens $tokens) : int
     {
         $preStartPosition = $startAndEnd->getStart() - 1;
         /** @var Token $preStartToken */
@@ -114,7 +114,7 @@ CODE_SAMPLE
         if ($preStartToken->getContent() === \PHP_EOL) {
             return $realStart - 1;
         }
-        if (\_PhpScopercc9aec205203\Nette\Utils\Strings::endsWith($preStartToken->getContent(), '    ')) {
+        if (Strings::endsWith($preStartToken->getContent(), '    ')) {
             return $realStart - 1;
         }
         return $realStart;

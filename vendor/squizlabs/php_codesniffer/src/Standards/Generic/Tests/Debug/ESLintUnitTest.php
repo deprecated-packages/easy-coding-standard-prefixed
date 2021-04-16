@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Standards\Generic\Tests\Debug;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 use PHP_CodeSniffer\Config;
-class ESLintUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ESLintUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Basic ESLint config to use for testing the sniff.
@@ -60,7 +60,7 @@ class ESLintUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitT
      */
     protected function shouldSkipTest()
     {
-        $eslintPath = \PHP_CodeSniffer\Config::getExecutablePath('eslint');
+        $eslintPath = Config::getExecutablePath('eslint');
         if ($eslintPath === null) {
             return \true;
         }

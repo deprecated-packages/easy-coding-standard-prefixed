@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
-class BlockCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
+class BlockCommentSniff implements Sniff
 {
     /**
      * The --tab-width CLI value that is being used.
@@ -39,7 +39,7 @@ class BlockCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @return void
      */
-    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         if ($this->tabWidth === null) {
             if (isset($phpcsFile->config->tabWidth) === \false || $phpcsFile->config->tabWidth === 0) {
@@ -57,12 +57,12 @@ class BlockCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         // If this is a function/class/interface doc block comment, skip it.
         // We are only interested in inline doc block comments.
         if ($tokens[$stackPtr]['code'] === T_DOC_COMMENT_OPEN_TAG) {
-            $nextToken = $phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $stackPtr + 1, null, \true);
+            $nextToken = $phpcsFile->findNext(Tokens::$emptyTokens, $stackPtr + 1, null, \true);
             $ignore = [\T_CLASS => \true, \T_INTERFACE => \true, \T_TRAIT => \true, \T_FUNCTION => \true, \T_PUBLIC => \true, \T_PRIVATE => \true, \T_FINAL => \true, \T_PROTECTED => \true, \T_STATIC => \true, \T_ABSTRACT => \true, \T_CONST => \true, \T_VAR => \true];
             if (isset($ignore[$tokens[$nextToken]['code']]) === \true) {
                 return;
             }
-            $prevToken = $phpcsFile->findPrevious(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $stackPtr - 1, null, \true);
+            $prevToken = $phpcsFile->findPrevious(Tokens::$emptyTokens, $stackPtr - 1, null, \true);
             if ($tokens[$prevToken]['code'] === \T_OPEN_TAG) {
                 return;
             }
@@ -88,7 +88,7 @@ class BlockCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         $commentString = $tokens[$stackPtr]['content'];
         // Construct the comment into an array.
         while (($nextComment = $phpcsFile->findNext(\T_WHITESPACE, $nextComment + 1, null, \true)) !== \false) {
-            if ($tokens[$nextComment]['code'] !== $tokens[$stackPtr]['code'] && isset(\PHP_CodeSniffer\Util\Tokens::$phpcsCommentTokens[$tokens[$nextComment]['code']]) === \false) {
+            if ($tokens[$nextComment]['code'] !== $tokens[$stackPtr]['code'] && isset(Tokens::$phpcsCommentTokens[$tokens[$nextComment]['code']]) === \false) {
                 // Found the next bit of code.
                 break;
             }
@@ -123,7 +123,7 @@ class BlockCommentSniff implements \PHP_CodeSniffer\Sniffs\Sniff
         if (\count($commentLines) === 1) {
             $error = 'Single line block comment not allowed; use inline ("// text") comment instead';
             // Only fix comments when they are the last token on a line.
-            $nextNonEmpty = $phpcsFile->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $stackPtr + 1, null, \true);
+            $nextNonEmpty = $phpcsFile->findNext(Tokens::$emptyTokens, $stackPtr + 1, null, \true);
             if ($tokens[$stackPtr]['line'] !== $tokens[$nextNonEmpty]['line']) {
                 $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SingleLine');
                 if ($fix === \true) {

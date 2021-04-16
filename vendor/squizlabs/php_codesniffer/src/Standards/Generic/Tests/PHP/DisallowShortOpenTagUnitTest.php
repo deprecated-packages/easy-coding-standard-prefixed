@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class DisallowShortOpenTagUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class DisallowShortOpenTagUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Get a list of all test files to check.

@@ -11,7 +11,7 @@ final class LoadedCheckersGuard
      * @var FileProcessorCollector
      */
     private $fileProcessorCollector;
-    public function __construct(\Symplify\EasyCodingStandard\Application\FileProcessorCollector $fileProcessorCollector)
+    public function __construct(FileProcessorCollector $fileProcessorCollector)
     {
         $this->fileProcessorCollector = $fileProcessorCollector;
     }
@@ -21,7 +21,7 @@ final class LoadedCheckersGuard
         if ($checkerCount !== 0) {
             return;
         }
-        throw new \Symplify\EasyCodingStandard\Configuration\Exception\NoCheckersLoadedException();
+        throw new NoCheckersLoadedException();
     }
     private function getCheckerCount() : int
     {

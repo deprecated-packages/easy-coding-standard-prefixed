@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class InlineControlStructureUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class InlineControlStructureUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

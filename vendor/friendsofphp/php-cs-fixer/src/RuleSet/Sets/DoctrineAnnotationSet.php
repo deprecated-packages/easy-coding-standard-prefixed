@@ -15,7 +15,7 @@ use PhpCsFixer\RuleSet\AbstractRuleSetDescription;
 /**
  * @internal
  */
-final class DoctrineAnnotationSet extends \PhpCsFixer\RuleSet\AbstractRuleSetDescription
+final class DoctrineAnnotationSet extends AbstractRuleSetDescription
 {
     public function getRules()
     {

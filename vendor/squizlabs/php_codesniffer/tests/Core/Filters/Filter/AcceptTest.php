@@ -13,8 +13,8 @@ namespace PHP_CodeSniffer\Tests\Core\Filters\Filter;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestCase;
-class AcceptTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestCase;
+class AcceptTest extends TestCase
 {
     /**
      * The Config object.
@@ -55,8 +55,8 @@ class AcceptTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
             return;
         }
         $standard = __DIR__ . '/' . \basename(__FILE__, '.php') . '.xml';
-        self::$config = new \PHP_CodeSniffer\Config(["--standard={$standard}", "--ignore=*/somethingelse/*"]);
-        self::$ruleset = new \PHP_CodeSniffer\Ruleset(self::$config);
+        self::$config = new Config(["--standard={$standard}", "--ignore=*/somethingelse/*"]);
+        self::$ruleset = new Ruleset(self::$config);
     }
     //end setUpBeforeClass()
     /**
@@ -72,7 +72,7 @@ class AcceptTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
     public function testExcludePatterns($inputPaths, $expectedOutput)
     {
         $fakeDI = new \RecursiveArrayIterator($inputPaths);
-        $filter = new \PHP_CodeSniffer\Filters\Filter($fakeDI, '/', self::$config, self::$ruleset);
+        $filter = new Filter($fakeDI, '/', self::$config, self::$ruleset);
         $iterator = new \RecursiveIteratorIterator($filter);
         $files = [];
         foreach ($iterator as $file) {

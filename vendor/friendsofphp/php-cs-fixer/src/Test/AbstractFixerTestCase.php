@@ -17,7 +17,7 @@ use PhpCsFixer\Tests\Test\AbstractFixerTestCase as BaseAbstractFixerTestCase;
  *
  * @deprecated since v2.4
  */
-abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\Test\AbstractFixerTestCase
+abstract class AbstractFixerTestCase extends BaseAbstractFixerTestCase
 {
     public function __construct($name = null, array $data = [], $dataName = '')
     {

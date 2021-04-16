@@ -22,14 +22,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @deprecated in 2.4, proxy to SingleLineCommentStyleFixer
  */
-final class HashToSlashCommentFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
+final class HashToSlashCommentFixer extends AbstractProxyFixer implements DeprecatedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Single line comments should use double slashes `//` and not hash `#`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php # comment\n")]);
+        return new FixerDefinition('Single line comments should use double slashes `//` and not hash `#`.', [new CodeSample("<?php # comment\n")]);
     }
     /**
      * {@inheritdoc}

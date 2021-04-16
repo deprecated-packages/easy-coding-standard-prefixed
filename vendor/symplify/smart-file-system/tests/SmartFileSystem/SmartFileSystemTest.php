@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\SmartFileSystem;
 
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestCase;
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SmartFileSystem\SmartFileSystem;
-final class SmartFileSystemTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
+final class SmartFileSystemTest extends TestCase
 {
     /**
      * @var SmartFileSystem
@@ -14,11 +14,11 @@ final class SmartFileSystemTest extends \_PhpScopercc9aec205203\PHPUnit\Framewor
     private $smartFileSystem;
     protected function setUp() : void
     {
-        $this->smartFileSystem = new \Symplify\SmartFileSystem\SmartFileSystem();
+        $this->smartFileSystem = new SmartFileSystem();
     }
     public function testReadFileToSmartFileInfo() : void
     {
         $readFileToSmartFileInfo = $this->smartFileSystem->readFileToSmartFileInfo(__DIR__ . '/Source/file.txt');
-        $this->assertInstanceof(\Symplify\SmartFileSystem\SmartFileInfo::class, $readFileToSmartFileInfo);
+        $this->assertInstanceof(SmartFileInfo::class, $readFileToSmartFileInfo);
     }
 }

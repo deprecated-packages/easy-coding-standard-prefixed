@@ -22,7 +22,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @TODO To be removed at 3.0
  */
-final class PhpdocInlineTagFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
+final class PhpdocInlineTagFixer extends AbstractProxyFixer implements DeprecatedFixerInterface
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ final class PhpdocInlineTagFixer extends \PhpCsFixer\AbstractProxyFixer implemen
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Fix PHPDoc inline tags, make `@inheritdoc` always inline.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Fix PHPDoc inline tags, make `@inheritdoc` always inline.', [new CodeSample('<?php
 /**
  * @{TUTORIAL}
  * {{ @link }}

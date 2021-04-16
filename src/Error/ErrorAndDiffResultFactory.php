@@ -6,8 +6,8 @@ namespace Symplify\EasyCodingStandard\Error;
 use Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult;
 final class ErrorAndDiffResultFactory
 {
-    public function create(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector) : \Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult
+    public function create(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector) : ErrorAndDiffResult
     {
-        return new \Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult($errorAndDiffCollector->getErrors(), $errorAndDiffCollector->getFileDiffs(), $errorAndDiffCollector->getSystemErrors());
+        return new ErrorAndDiffResult($errorAndDiffCollector->getErrors(), $errorAndDiffCollector->getFileDiffs(), $errorAndDiffCollector->getSystemErrors());
     }
 }

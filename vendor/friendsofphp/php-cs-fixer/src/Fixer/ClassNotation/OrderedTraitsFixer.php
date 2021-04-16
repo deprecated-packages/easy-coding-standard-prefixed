@@ -16,21 +16,21 @@ use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
-final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
+final class OrderedTraitsFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Trait `use` statements must be sorted alphabetically.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php class Foo { \nuse Z; use A; }\n")], null, 'Risky when depending on order of the imports.');
+        return new FixerDefinition('Trait `use` statements must be sorted alphabetically.', [new CodeSample("<?php class Foo { \nuse Z; use A; }\n")], null, 'Risky when depending on order of the imports.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isTokenKindFound(\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT);
+        return $tokens->isTokenKindFound(CT::T_USE_TRAIT);
     }
     /**
      * {@inheritdoc}
@@ -42,7 +42,7 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($this->findUseStatementsGroups($tokens) as $uses) {
             $this->sortUseStatements($tokens, $uses);
@@ -51,7 +51,7 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @return iterable<array<int, Tokens>>
      */
-    private function findUseStatementsGroups(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function findUseStatementsGroups(Tokens $tokens)
     {
         $uses = [];
         for ($index = 1, $max = \count($tokens); $index < $max; ++$index) {
@@ -59,7 +59,7 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
             if ($token->isWhitespace() || $token->isComment()) {
                 continue;
             }
-            if (!$token->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT)) {
+            if (!$token->isGivenKind(CT::T_USE_TRAIT)) {
                 if (\count($uses) > 0) {
                     (yield $uses);
                     $uses = [];
@@ -68,27 +68,27 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
             }
             $endIndex = $tokens->getNextTokenOfKind($index, [';', '{']);
             if ($tokens[$endIndex]->equals('{')) {
-                $endIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $endIndex);
+                $endIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $endIndex);
             }
             $use = [];
             for ($i = $index; $i <= $endIndex; ++$i) {
                 $use[] = $tokens[$i];
             }
-            $uses[$index] = \PhpCsFixer\Tokenizer\Tokens::fromArray($use);
+            $uses[$index] = Tokens::fromArray($use);
             $index = $endIndex;
         }
     }
     /**
      * @param array<int, Tokens> $uses
      */
-    private function sortUseStatements(\PhpCsFixer\Tokenizer\Tokens $tokens, array $uses)
+    private function sortUseStatements(Tokens $tokens, array $uses)
     {
         foreach ($uses as $use) {
             $this->sortMultipleTraitsInStatement($use);
         }
         $this->sort($tokens, $uses);
     }
-    private function sortMultipleTraitsInStatement(\PhpCsFixer\Tokenizer\Tokens $use)
+    private function sortMultipleTraitsInStatement(Tokens $use)
     {
         $traits = [];
         $indexOfName = null;
@@ -103,12 +103,12 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
                 continue;
             }
             if ($token->equalsAny([',', ';', '{'])) {
-                $traits[$indexOfName] = \PhpCsFixer\Tokenizer\Tokens::fromArray($name);
+                $traits[$indexOfName] = Tokens::fromArray($name);
                 $name = [];
                 $indexOfName = null;
             }
             if ($token->equals('{')) {
-                $index = $use->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
+                $index = $use->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
             }
         }
         $this->sort($use, $traits);
@@ -116,12 +116,12 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param array<int, Tokens> $elements
      */
-    private function sort(\PhpCsFixer\Tokenizer\Tokens $tokens, array $elements)
+    private function sort(Tokens $tokens, array $elements)
     {
         /**
          * @return string
          */
-        $toTraitName = static function (\PhpCsFixer\Tokenizer\Tokens $use) {
+        $toTraitName = static function (Tokens $use) {
             $string = '';
             foreach ($use as $token) {
                 if ($token->equalsAny([';', '{'])) {
@@ -134,7 +134,7 @@ final class OrderedTraitsFixer extends \PhpCsFixer\AbstractFixer
             return \ltrim($string, '\\');
         };
         $sortedElements = $elements;
-        \uasort($sortedElements, static function (\PhpCsFixer\Tokenizer\Tokens $useA, \PhpCsFixer\Tokenizer\Tokens $useB) use($toTraitName) {
+        \uasort($sortedElements, static function (Tokens $useA, Tokens $useB) use($toTraitName) {
             return \strcasecmp($toTraitName($useA), $toTraitName($useB));
         });
         $sortedElements = \array_combine(\array_keys($elements), \array_values($sortedElements));

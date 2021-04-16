@@ -9,7 +9,7 @@ use Symplify\EasyCodingStandard\SniffRunner\File\FileFactory;
 use Symplify\EasyCodingStandard\SniffRunner\ValueObject\File;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
+final class FixerTest extends AbstractKernelTestCase
 {
     /**
      * @var Fixer
@@ -21,10 +21,10 @@ final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
     private $file;
     protected function setUp() : void
     {
-        $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $fileFactory = $this->getService(\Symplify\EasyCodingStandard\SniffRunner\File\FileFactory::class);
-        $this->file = $fileFactory->createFromFileInfo(new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/FixerSource/SomeFile.php'));
-        $this->fixer = $this->getService(\PHP_CodeSniffer\Fixer::class);
+        $this->bootKernel(EasyCodingStandardKernel::class);
+        $fileFactory = $this->getService(FileFactory::class);
+        $this->file = $fileFactory->createFromFileInfo(new SmartFileInfo(__DIR__ . '/FixerSource/SomeFile.php'));
+        $this->fixer = $this->getService(Fixer::class);
     }
     public function testStartFile() : void
     {
@@ -54,7 +54,7 @@ final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
         $this->assertSame('A\\', $token);
         $this->fixer->addContent(14, 'B');
         $token = $this->fixer->getTokenContent(14);
-        $this->assertSame('_PhpScopercc9aec205203\\A\\B', $token);
+        $this->assertSame('_PhpScopereb9508917a55\\A\\B', $token);
     }
     public function testChangesets() : void
     {
@@ -69,7 +69,7 @@ final class FixerTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTes
         // during the changeset, you are free to modify current token as you wish...
         $this->fixer->addContent(14, 'B');
         $tokenContent = $this->fixer->getTokenContent(14);
-        $this->assertSame('_PhpScopercc9aec205203\\A\\B', $tokenContent);
+        $this->assertSame('_PhpScopereb9508917a55\\A\\B', $tokenContent);
         // you can also rollback the changes...
         $this->fixer->rollbackChangeset();
         $tokenContent = $this->fixer->getTokenContent(14);

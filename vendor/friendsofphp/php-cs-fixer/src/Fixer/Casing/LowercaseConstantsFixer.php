@@ -22,14 +22,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @deprecated proxy to ConstantCaseFixer
  */
-final class LowercaseConstantsFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
+final class LowercaseConstantsFixer extends AbstractProxyFixer implements DeprecatedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('The PHP constants `true`, `false`, and `null` MUST be in lower case.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = FALSE;\n\$b = True;\n\$c = nuLL;\n")]);
+        return new FixerDefinition('The PHP constants `true`, `false`, and `null` MUST be in lower case.', [new CodeSample("<?php\n\$a = FALSE;\n\$b = True;\n\$c = nuLL;\n")]);
     }
     /**
      * Returns names of fixers to use instead, if any.

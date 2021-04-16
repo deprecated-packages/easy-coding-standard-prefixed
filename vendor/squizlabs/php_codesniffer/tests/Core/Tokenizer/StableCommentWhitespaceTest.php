@@ -17,7 +17,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
-class StableCommentWhitespaceTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class StableCommentWhitespaceTest extends AbstractMethodUnitTest
 {
     /**
      * Test that comment tokenization with new lines at the end of the comment is stable.
@@ -33,7 +33,7 @@ class StableCommentWhitespaceTest extends \PHP_CodeSniffer\Tests\Core\AbstractMe
     public function testCommentTokenization($testMarker, $expectedTokens)
     {
         $tokens = self::$phpcsFile->getTokens();
-        $comment = $this->getTargetToken($testMarker, \PHP_CodeSniffer\Util\Tokens::$commentTokens);
+        $comment = $this->getTargetToken($testMarker, Tokens::$commentTokens);
         foreach ($expectedTokens as $key => $tokenInfo) {
             $this->assertSame(\constant($tokenInfo['type']), $tokens[$comment]['code']);
             $this->assertSame($tokenInfo['type'], $tokens[$comment]['type']);

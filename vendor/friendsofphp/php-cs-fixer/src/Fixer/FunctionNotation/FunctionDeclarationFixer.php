@@ -27,7 +27,7 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
  *
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class FunctionDeclarationFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class FunctionDeclarationFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * @internal
@@ -42,7 +42,7 @@ final class FunctionDeclarationFixer extends \PhpCsFixer\AbstractFixer implement
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
             return \true;
@@ -54,7 +54,7 @@ final class FunctionDeclarationFixer extends \PhpCsFixer\AbstractFixer implement
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Spaces should be properly placed in a function declaration.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Spaces should be properly placed in a function declaration.', [new CodeSample('<?php
 
 class Foo
 {
@@ -68,11 +68,11 @@ function  foo  ($bar, $baz)
 {
     return false;
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 $f = function () {};
-', ['closure_function_spacing' => self::SPACING_NONE]), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+', ['closure_function_spacing' => self::SPACING_NONE]), new VersionSpecificCodeSample('<?php
 $f = fn () => null;
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70400), ['closure_function_spacing' => self::SPACING_NONE])]);
+', new VersionSpecification(70400), ['closure_function_spacing' => self::SPACING_NONE])]);
     }
     /**
      * {@inheritdoc}
@@ -87,9 +87,9 @@ $f = fn () => null;
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $tokensAnalyzer = new TokensAnalyzer($tokens);
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             $token = $tokens[$index];
             if (!$token->isGivenKind(\T_FUNCTION) && (\PHP_VERSION_ID < 70400 || !$token->isGivenKind(\T_FN))) {
@@ -99,7 +99,7 @@ $f = fn () => null;
             if (!$tokens[$startParenthesisIndex]->equals('(')) {
                 continue;
             }
-            $endParenthesisIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $startParenthesisIndex);
+            $endParenthesisIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $startParenthesisIndex);
             $startBraceIndex = $tokens->getNextTokenOfKind($endParenthesisIndex, [';', '{', [\T_DOUBLE_ARROW]]);
             // fix single-line whitespace before { or =>
             // eg: `function foo(){}` => `function foo() {}`
@@ -110,11 +110,11 @@ $f = fn () => null;
             }
             $afterParenthesisIndex = $tokens->getNextNonWhitespace($endParenthesisIndex);
             $afterParenthesisToken = $tokens[$afterParenthesisIndex];
-            if ($afterParenthesisToken->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA)) {
+            if ($afterParenthesisToken->isGivenKind(CT::T_USE_LAMBDA)) {
                 // fix whitespace after CT:T_USE_LAMBDA (we might add a token, so do this before determining start and end parenthesis)
                 $tokens->ensureWhitespaceAtIndex($afterParenthesisIndex + 1, 0, ' ');
                 $useStartParenthesisIndex = $tokens->getNextTokenOfKind($afterParenthesisIndex, ['(']);
-                $useEndParenthesisIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $useStartParenthesisIndex);
+                $useEndParenthesisIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $useStartParenthesisIndex);
                 // remove single-line edge whitespaces inside use parentheses
                 $this->fixParenthesisInnerEdge($tokens, $useStartParenthesisIndex, $useEndParenthesisIndex);
                 // fix whitespace before CT::T_USE_LAMBDA
@@ -154,9 +154,9 @@ $f = fn () => null;
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('closure_function_spacing', 'Spacing to use before open parenthesis for closures.'))->setDefault(self::SPACING_ONE)->setAllowedValues($this->supportedSpacings)->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('closure_function_spacing', 'Spacing to use before open parenthesis for closures.'))->setDefault(self::SPACING_ONE)->setAllowedValues($this->supportedSpacings)->getOption()]);
     }
-    private function fixParenthesisInnerEdge(\PhpCsFixer\Tokenizer\Tokens $tokens, $start, $end)
+    private function fixParenthesisInnerEdge(Tokens $tokens, $start, $end)
     {
         // remove single-line whitespace before )
         if ($tokens[$end - 1]->isWhitespace($this->singleLineWhitespaceOptions)) {

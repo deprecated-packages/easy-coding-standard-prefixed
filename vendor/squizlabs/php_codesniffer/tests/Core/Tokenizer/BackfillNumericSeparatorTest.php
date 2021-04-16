@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class BackfillNumericSeparatorTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class BackfillNumericSeparatorTest extends AbstractMethodUnitTest
 {
     /**
      * Test that numbers using numeric separators are tokenized correctly.

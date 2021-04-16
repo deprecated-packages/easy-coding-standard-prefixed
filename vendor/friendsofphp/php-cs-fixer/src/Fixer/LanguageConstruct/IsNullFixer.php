@@ -23,14 +23,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Vladimir Reznichenko <kalessil@gmail.com>
  */
-final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class IsNullFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replaces `is_null($var)` expression with `null === $var`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = is_null(\$b);\n")], null, 'Risky when the function `is_null` is overridden.');
+        return new FixerDefinition('Replaces `is_null($var)` expression with `null === $var`.', [new CodeSample("<?php\n\$a = is_null(\$b);\n")], null, 'Risky when the function `is_null` is overridden.');
     }
     /**
      * {@inheritdoc}
@@ -44,7 +44,7 @@ final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
@@ -58,10 +58,10 @@ final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         static $sequenceNeeded = [[\T_STRING, 'is_null'], '('];
-        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
+        $functionsAnalyzer = new FunctionsAnalyzer();
         $currIndex = 0;
         while (null !== $currIndex) {
             $matches = $tokens->findSequence($sequenceNeeded, $currIndex, $tokens->count() - 1, \false);
@@ -96,7 +96,7 @@ final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer
                 $tokens->clearAt($prevTokenIndex);
             }
             // before getting rind of `()` around a parameter, ensure it's not assignment/ternary invariant
-            $referenceEnd = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $matches[1]);
+            $referenceEnd = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $matches[1]);
             $isContainingDangerousConstructs = \false;
             for ($paramTokenIndex = $matches[1]; $paramTokenIndex <= $referenceEnd; ++$paramTokenIndex) {
                 if (\in_array($tokens[$paramTokenIndex]->getContent(), ['?', '?:', '=', '??'], \true)) {
@@ -124,18 +124,18 @@ final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer
                 $tokens->clearAt($matches[1]);
             }
             // sequence which we'll use as a replacement
-            $replacement = [new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'null']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']), new \PhpCsFixer\Tokenizer\Token($isInvertedNullCheck ? [\T_IS_NOT_IDENTICAL, '!=='] : [\T_IS_IDENTICAL, '===']), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])];
+            $replacement = [new Token([\T_STRING, 'null']), new Token([\T_WHITESPACE, ' ']), new Token($isInvertedNullCheck ? [\T_IS_NOT_IDENTICAL, '!=='] : [\T_IS_IDENTICAL, '===']), new Token([\T_WHITESPACE, ' '])];
             if (\true === $this->configuration['use_yoda_style']) {
                 if ($wrapIntoParentheses) {
-                    \array_unshift($replacement, new \PhpCsFixer\Tokenizer\Token('('));
-                    $tokens->insertAt($referenceEnd + 1, new \PhpCsFixer\Tokenizer\Token(')'));
+                    \array_unshift($replacement, new Token('('));
+                    $tokens->insertAt($referenceEnd + 1, new Token(')'));
                 }
                 $tokens->overrideRange($isNullIndex, $isNullIndex, $replacement);
             } else {
                 $replacement = \array_reverse($replacement);
                 if ($wrapIntoParentheses) {
-                    $replacement[] = new \PhpCsFixer\Tokenizer\Token(')');
-                    $tokens[$isNullIndex] = new \PhpCsFixer\Tokenizer\Token('(');
+                    $replacement[] = new Token(')');
+                    $tokens[$isNullIndex] = new Token('(');
                 } else {
                     $tokens->clearAt($isNullIndex);
                 }
@@ -151,6 +151,6 @@ final class IsNullFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer
     protected function createConfigurationDefinition()
     {
         // @todo 3.0 drop `ConfigurationDefinitionFixerInterface`
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('use_yoda_style', 'Whether Yoda style conditions should be used.'))->setAllowedTypes(['bool'])->setDefault(\true)->setDeprecationMessage('Use `yoda_style` fixer instead.')->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('use_yoda_style', 'Whether Yoda style conditions should be used.'))->setAllowedTypes(['bool'])->setDefault(\true)->setDeprecationMessage('Use `yoda_style` fixer instead.')->getOption()]);
     }
 }

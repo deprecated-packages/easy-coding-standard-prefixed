@@ -11,8 +11,8 @@ namespace PHP_CodeSniffer\Tests\Core\Ruleset;
 
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestCase;
-class RuleInclusionTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestCase;
+class RuleInclusionTest extends TestCase
 {
     /**
      * The Ruleset object.
@@ -73,8 +73,8 @@ class RuleInclusionTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCa
         if (\file_put_contents($standard, $adjusted) === \false) {
             self::markTestSkipped('On the fly ruleset adjustment failed');
         }
-        $config = new \PHP_CodeSniffer\Config(["--standard={$standard}"]);
-        self::$ruleset = new \PHP_CodeSniffer\Ruleset($config);
+        $config = new Config(["--standard={$standard}"]);
+        self::$ruleset = new Ruleset($config);
     }
     //end setUpBeforeClass()
     /**

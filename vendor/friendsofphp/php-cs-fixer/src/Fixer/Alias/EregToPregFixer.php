@@ -23,7 +23,7 @@ use PhpCsFixer\Utils;
 /**
  * @author Matteo Beccati <matteo@beccati.com>
  */
-final class EregToPregFixer extends \PhpCsFixer\AbstractFixer
+final class EregToPregFixer extends AbstractFixer
 {
     /**
      * @var array the list of the ext/ereg function names, their preg equivalent and the preg modifier(s), if any
@@ -39,12 +39,12 @@ final class EregToPregFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replace deprecated `ereg` regular expression functions with `preg`.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$x = ereg('[A-Z]');\n")], null, 'Risky if the `ereg` function is overridden.');
+        return new FixerDefinition('Replace deprecated `ereg` regular expression functions with `preg`.', [new CodeSample("<?php \$x = ereg('[A-Z]');\n")], null, 'Risky if the `ereg` function is overridden.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
@@ -58,10 +58,10 @@ final class EregToPregFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $end = $tokens->count() - 1;
-        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
+        $functionsAnalyzer = new FunctionsAnalyzer();
         foreach (self::$functions as $map) {
             // the sequence is the function name, followed by "(" and a quoted string
             $seq = [[\T_STRING, $map[0]], '(', [\T_CONSTANT_ENCAPSED_STRING]];
@@ -98,8 +98,8 @@ final class EregToPregFixer extends \PhpCsFixer\AbstractFixer
                     continue;
                 }
                 // modify function and argument
-                $tokens[$match[0]] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $map[1]]);
-                $tokens[$match[2]] = new \PhpCsFixer\Tokenizer\Token([\T_CONSTANT_ENCAPSED_STRING, $quote . $preg . $quote]);
+                $tokens[$match[0]] = new Token([\T_STRING, $map[1]]);
+                $tokens[$match[2]] = new Token([\T_CONSTANT_ENCAPSED_STRING, $quote . $preg . $quote]);
             }
         }
     }
@@ -113,9 +113,9 @@ final class EregToPregFixer extends \PhpCsFixer\AbstractFixer
     private function checkPreg($pattern)
     {
         try {
-            \PhpCsFixer\Preg::match($pattern, '');
+            Preg::match($pattern, '');
             return \true;
-        } catch (\PhpCsFixer\PregException $e) {
+        } catch (PregException $e) {
             return \false;
         }
     }
@@ -139,7 +139,7 @@ final class EregToPregFixer extends \PhpCsFixer\AbstractFixer
         // return the least used delimiter, using the position in the list as a tie breaker
         \uasort($delimiters, static function (array $a, array $b) {
             if ($a[0] === $b[0]) {
-                return \PhpCsFixer\Utils::cmpInt($a[1], $b[1]);
+                return Utils::cmpInt($a[1], $b[1]);
             }
             return $a[0] < $b[0] ? -1 : 1;
         });

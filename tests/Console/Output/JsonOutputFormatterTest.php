@@ -11,7 +11,7 @@ use Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class JsonOutputFormatterTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
+final class JsonOutputFormatterTest extends AbstractKernelTestCase
 {
     /**
      * @var JsonOutputFormatter
@@ -27,17 +27,17 @@ final class JsonOutputFormatterTest extends \Symplify\PackageBuilder\Testing\Abs
     private $errorAndDiffResultFactory;
     protected function setUp() : void
     {
-        $this->bootKernel(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class);
-        $this->jsonOutputFormatter = $this->getService(\Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter::class);
-        $this->errorAndDiffCollector = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
-        $this->errorAndDiffResultFactory = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffResultFactory::class);
+        $this->bootKernel(EasyCodingStandardKernel::class);
+        $this->jsonOutputFormatter = $this->getService(JsonOutputFormatter::class);
+        $this->errorAndDiffCollector = $this->getService(ErrorAndDiffCollector::class);
+        $this->errorAndDiffResultFactory = $this->getService(ErrorAndDiffResultFactory::class);
     }
     public function test() : void
     {
-        $randomFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/Source/RandomFile.php');
-        $this->errorAndDiffCollector->addErrorMessage($randomFileInfo, 100, 'Error message', \PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer::class);
-        $this->errorAndDiffCollector->addDiffForFileInfo($randomFileInfo, 'some diff', [\Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer::class]);
-        $this->errorAndDiffCollector->addDiffForFileInfo($randomFileInfo, 'some other diff', [\Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer::class]);
+        $randomFileInfo = new SmartFileInfo(__DIR__ . '/Source/RandomFile.php');
+        $this->errorAndDiffCollector->addErrorMessage($randomFileInfo, 100, 'Error message', ArraySyntaxFixer::class);
+        $this->errorAndDiffCollector->addDiffForFileInfo($randomFileInfo, 'some diff', [LineLengthFixer::class]);
+        $this->errorAndDiffCollector->addDiffForFileInfo($randomFileInfo, 'some other diff', [LineLengthFixer::class]);
         $errorAndDiffResult = $this->errorAndDiffResultFactory->create($this->errorAndDiffCollector);
         $jsonContent = $this->jsonOutputFormatter->createJsonContent($errorAndDiffResult);
         $this->assertStringMatchesFormatFile(__DIR__ . '/Fixture/expected_json_output.json', $jsonContent . \PHP_EOL);

@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
-use _PhpScopercc9aec205203\Symfony\Component\Finder\SplFileInfo;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Symfony\Component\Finder\SplFileInfo;
 use Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
@@ -12,7 +12,7 @@ use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 /**
  * @see \Symplify\SmartFileSystem\Tests\SmartFileInfo\SmartFileInfoTest
  */
-final class SmartFileInfo extends \_PhpScopercc9aec205203\Symfony\Component\Finder\SplFileInfo
+final class SmartFileInfo extends SplFileInfo
 {
     /**
      * @var string
@@ -28,10 +28,10 @@ final class SmartFileInfo extends \_PhpScopercc9aec205203\Symfony\Component\Find
         $this->smartFileSystem = new \Symplify\SmartFileSystem\SmartFileSystem();
         // accepts also dirs
         if (!\file_exists($filePath)) {
-            throw new \Symplify\SmartFileSystem\Exception\FileNotFoundException(\sprintf('File path "%s" was not found while creating "%s" object.', $filePath, self::class));
+            throw new FileNotFoundException(\sprintf('File path "%s" was not found while creating "%s" object.', $filePath, self::class));
         }
         // real path doesn't work in PHAR: https://www.php.net/manual/en/function.realpath.php
-        if (\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($filePath, 'phar://')) {
+        if (Strings::startsWith($filePath, 'phar://')) {
             $relativeFilePath = $filePath;
             $relativeDirectoryPath = \dirname($filePath);
         } else {
@@ -58,7 +58,7 @@ final class SmartFileInfo extends \_PhpScopercc9aec205203\Symfony\Component\Find
     }
     public function getRealPathWithoutSuffix() : string
     {
-        return \_PhpScopercc9aec205203\Nette\Utils\Strings::replace($this->getRealPath(), self::LAST_SUFFIX_REGEX, '');
+        return Strings::replace($this->getRealPath(), self::LAST_SUFFIX_REGEX, '');
     }
     public function getRelativeFilePath() : string
     {
@@ -71,7 +71,7 @@ final class SmartFileInfo extends \_PhpScopercc9aec205203\Symfony\Component\Find
     public function getRelativeFilePathFromDirectory(string $directory) : string
     {
         if (!\file_exists($directory)) {
-            throw new \Symplify\SmartFileSystem\Exception\DirectoryNotFoundException(\sprintf('Directory "%s" was not found in %s.', $directory, self::class));
+            throw new DirectoryNotFoundException(\sprintf('Directory "%s" was not found in %s.', $directory, self::class));
         }
         $relativeFilePath = $this->smartFileSystem->makePathRelative($this->getNormalizedRealPath(), (string) \realpath($directory));
         return \rtrim($relativeFilePath, '/');
@@ -79,8 +79,8 @@ final class SmartFileInfo extends \_PhpScopercc9aec205203\Symfony\Component\Find
     public function getRelativeFilePathFromCwdInTests() : string
     {
         // special case for tests
-        if (\Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment::isPHPUnitRun()) {
-            return $this->getRelativeFilePathFromDirectory(\Symplify\EasyTesting\StaticFixtureSplitter::getTemporaryPath());
+        if (StaticPHPUnitEnvironment::isPHPUnitRun()) {
+            return $this->getRelativeFilePathFromDirectory(StaticFixtureSplitter::getTemporaryPath());
         }
         return $this->getRelativeFilePathFromDirectory(\getcwd());
     }
@@ -90,7 +90,7 @@ final class SmartFileInfo extends \_PhpScopercc9aec205203\Symfony\Component\Find
     }
     public function endsWith(string $string) : bool
     {
-        return \_PhpScopercc9aec205203\Nette\Utils\Strings::endsWith($this->getNormalizedRealPath(), $string);
+        return Strings::endsWith($this->getNormalizedRealPath(), $string);
     }
     public function doesFnmatch(string $string) : bool
     {
@@ -111,7 +111,7 @@ final class SmartFileInfo extends \_PhpScopercc9aec205203\Symfony\Component\Find
     }
     public function startsWith(string $partialPath) : bool
     {
-        return \_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($this->getNormalizedRealPath(), $partialPath);
+        return Strings::startsWith($this->getNormalizedRealPath(), $partialPath);
     }
     private function getNormalizedRealPath() : string
     {

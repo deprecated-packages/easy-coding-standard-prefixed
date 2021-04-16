@@ -58,7 +58,7 @@ final class IntegrationCase
      * @param string      $expectedCode
      * @param null|string $inputCode
      */
-    public function __construct($fileName, $title, array $settings, array $requirements, array $config, \PhpCsFixer\RuleSet\RuleSet $ruleset, $expectedCode, $inputCode)
+    public function __construct($fileName, $title, array $settings, array $requirements, array $config, RuleSet $ruleset, $expectedCode, $inputCode)
     {
         $this->fileName = $fileName;
         $this->title = $title;

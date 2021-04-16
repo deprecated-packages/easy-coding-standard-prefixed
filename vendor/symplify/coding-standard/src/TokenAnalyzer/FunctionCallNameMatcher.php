@@ -13,11 +13,11 @@ final class FunctionCallNameMatcher
      *
      * @param Tokens<Token> $tokens
      */
-    public function matchName(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : ?int
+    public function matchName(Tokens $tokens, int $position) : ?int
     {
         try {
-            $blockStart = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $position);
-        } catch (\Throwable $throwable) {
+            $blockStart = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $position);
+        } catch (Throwable $throwable) {
             // not a block start
             return null;
         }

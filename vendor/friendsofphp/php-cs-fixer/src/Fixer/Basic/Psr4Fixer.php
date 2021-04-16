@@ -22,7 +22,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @deprecated
  */
-final class Psr4Fixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
+final class Psr4Fixer extends AbstractProxyFixer implements DeprecatedFixerInterface
 {
     /**
      * @var PsrAutoloadingFixer
@@ -39,7 +39,7 @@ final class Psr4Fixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFi
     public function getDefinition()
     {
         $definition = $this->fixer->getDefinition();
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Class names should match the file name.', \array_slice($definition->getCodeSamples(), 0, 1), $definition->getDescription(), $definition->getRiskyDescription());
+        return new FixerDefinition('Class names should match the file name.', \array_slice($definition->getCodeSamples(), 0, 1), $definition->getDescription(), $definition->getRiskyDescription());
     }
     /**
      * {@inheritdoc}

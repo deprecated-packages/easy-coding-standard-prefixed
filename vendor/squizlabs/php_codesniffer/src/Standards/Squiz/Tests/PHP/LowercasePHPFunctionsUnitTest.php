@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class LowercasePHPFunctionsUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class LowercasePHPFunctionsUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

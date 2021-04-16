@@ -24,7 +24,7 @@ final class UnifiedDiffer implements \PhpCsFixer\Differ\DifferInterface
     private $differ;
     public function __construct()
     {
-        $this->differ = new \PhpCsFixer\Diff\v3_0\Differ(new \PhpCsFixer\Diff\v3_0\Output\StrictUnifiedDiffOutputBuilder(['fromFile' => 'Original', 'toFile' => 'New']));
+        $this->differ = new Differ(new StrictUnifiedDiffOutputBuilder(['fromFile' => 'Original', 'toFile' => 'New']));
     }
     /**
      * {@inheritdoc}

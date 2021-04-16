@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Arrays;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ArrayIndentUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ArrayIndentUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

@@ -27,14 +27,14 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @author Gert de Pagter <BackEndTea@gmail.com>
  */
-final class PhpdocLineSpanFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface, \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpdocLineSpanFixer extends AbstractFixer implements WhitespacesAwareFixerInterface, ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Changes doc blocks from single to multi line, or reversed. Works for class constants, properties and methods only.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\nclass Foo{\n    /** @var bool */\n    public \$var;\n}\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\nclass Foo{\n    /**\n    * @var bool\n    */\n    public \$var;\n}\n", ['property' => 'single'])]);
+        return new FixerDefinition('Changes doc blocks from single to multi line, or reversed. Works for class constants, properties and methods only.', [new CodeSample("<?php\n\nclass Foo{\n    /** @var bool */\n    public \$var;\n}\n"), new CodeSample("<?php\n\nclass Foo{\n    /**\n    * @var bool\n    */\n    public \$var;\n}\n", ['property' => 'single'])]);
     }
     /**
      * {@inheritdoc}
@@ -49,7 +49,7 @@ final class PhpdocLineSpanFixer extends \PhpCsFixer\AbstractFixer implements \Ph
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
@@ -58,11 +58,11 @@ final class PhpdocLineSpanFixer extends \PhpCsFixer\AbstractFixer implements \Ph
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('const', 'Whether const blocks should be single or multi line'))->setAllowedValues(['single', 'multi'])->setDefault('multi')->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('property', 'Whether property doc blocks should be single or multi line'))->setAllowedValues(['single', 'multi'])->setDefault('multi')->getOption(), (new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('method', 'Whether method doc blocks should be single or multi line'))->setAllowedValues(['single', 'multi'])->setDefault('multi')->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('const', 'Whether const blocks should be single or multi line'))->setAllowedValues(['single', 'multi'])->setDefault('multi')->getOption(), (new FixerOptionBuilder('property', 'Whether property doc blocks should be single or multi line'))->setAllowedValues(['single', 'multi'])->setDefault('multi')->getOption(), (new FixerOptionBuilder('method', 'Whether method doc blocks should be single or multi line'))->setAllowedValues(['single', 'multi'])->setDefault('multi')->getOption()]);
     }
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $analyzer = new TokensAnalyzer($tokens);
         $elements = $analyzer->getClassyElements();
         foreach ($elements as $index => $element) {
             if (!$this->hasDocBlock($tokens, $index)) {
@@ -70,13 +70,13 @@ final class PhpdocLineSpanFixer extends \PhpCsFixer\AbstractFixer implements \Ph
             }
             $type = $element['type'];
             $docIndex = $this->getDocBlockIndex($tokens, $index);
-            $doc = new \PhpCsFixer\DocBlock\DocBlock($tokens[$docIndex]->getContent());
+            $doc = new DocBlock($tokens[$docIndex]->getContent());
             if ('multi' === $this->configuration[$type]) {
-                $doc->makeMultiLine($originalIndent = \PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer::detectIndent($tokens, $docIndex), $this->whitespacesConfig->getLineEnding());
+                $doc->makeMultiLine($originalIndent = WhitespacesAnalyzer::detectIndent($tokens, $docIndex), $this->whitespacesConfig->getLineEnding());
             } else {
                 $doc->makeSingleLine();
             }
-            $tokens->offsetSet($docIndex, new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $doc->getContent()]));
+            $tokens->offsetSet($docIndex, new Token([\T_DOC_COMMENT, $doc->getContent()]));
         }
     }
     /**
@@ -84,7 +84,7 @@ final class PhpdocLineSpanFixer extends \PhpCsFixer\AbstractFixer implements \Ph
      *
      * @return bool
      */
-    private function hasDocBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function hasDocBlock(Tokens $tokens, $index)
     {
         $docBlockIndex = $this->getDocBlockIndex($tokens, $index);
         return $tokens[$docBlockIndex]->isGivenKind(\T_DOC_COMMENT);
@@ -94,11 +94,11 @@ final class PhpdocLineSpanFixer extends \PhpCsFixer\AbstractFixer implements \Ph
      *
      * @return int
      */
-    private function getDocBlockIndex(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getDocBlockIndex(Tokens $tokens, $index)
     {
         do {
             $index = $tokens->getPrevNonWhitespace($index);
-        } while ($tokens[$index]->isGivenKind([\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_FINAL, \T_ABSTRACT, \T_COMMENT, \T_VAR, \T_STATIC, \T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE]));
+        } while ($tokens[$index]->isGivenKind([\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_FINAL, \T_ABSTRACT, \T_COMMENT, \T_VAR, \T_STATIC, \T_STRING, \T_NS_SEPARATOR, CT::T_ARRAY_TYPEHINT, CT::T_NULLABLE_TYPE]));
         return $index;
     }
 }

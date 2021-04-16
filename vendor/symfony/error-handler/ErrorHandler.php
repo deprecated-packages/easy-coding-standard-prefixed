@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\ErrorHandler;
+namespace _PhpScopereb9508917a55\Symfony\Component\ErrorHandler;
 
-use _PhpScopercc9aec205203\Psr\Log\LoggerInterface;
-use _PhpScopercc9aec205203\Psr\Log\LogLevel;
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Error\FatalError;
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Error\OutOfMemoryError;
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorEnhancer\ClassNotFoundErrorEnhancer;
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface;
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedFunctionErrorEnhancer;
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedMethodErrorEnhancer;
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorRenderer\CliErrorRenderer;
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
-use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
+use _PhpScopereb9508917a55\Psr\Log\LoggerInterface;
+use _PhpScopereb9508917a55\Psr\Log\LogLevel;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\Error\FatalError;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\Error\OutOfMemoryError;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\ErrorEnhancer\ClassNotFoundErrorEnhancer;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedFunctionErrorEnhancer;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedMethodErrorEnhancer;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\ErrorRenderer\CliErrorRenderer;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
+use _PhpScopereb9508917a55\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
 /**
  * A generic ErrorHandler for the PHP engine.
  *
@@ -49,7 +49,7 @@ use _PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Exception\SilencedErro
 class ErrorHandler
 {
     private $levels = [\E_DEPRECATED => 'Deprecated', \E_USER_DEPRECATED => 'User Deprecated', \E_NOTICE => 'Notice', \E_USER_NOTICE => 'User Notice', \E_STRICT => 'Runtime Notice', \E_WARNING => 'Warning', \E_USER_WARNING => 'User Warning', \E_COMPILE_WARNING => 'Compile Warning', \E_CORE_WARNING => 'Core Warning', \E_USER_ERROR => 'User Error', \E_RECOVERABLE_ERROR => 'Catchable Fatal Error', \E_COMPILE_ERROR => 'Compile Error', \E_PARSE => 'Parse Error', \E_ERROR => 'Error', \E_CORE_ERROR => 'Core Error'];
-    private $loggers = [\E_DEPRECATED => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::INFO], \E_USER_DEPRECATED => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::INFO], \E_NOTICE => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::WARNING], \E_USER_NOTICE => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::WARNING], \E_STRICT => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::WARNING], \E_WARNING => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::WARNING], \E_USER_WARNING => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::WARNING], \E_COMPILE_WARNING => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::WARNING], \E_CORE_WARNING => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::WARNING], \E_USER_ERROR => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::CRITICAL], \E_RECOVERABLE_ERROR => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::CRITICAL], \E_COMPILE_ERROR => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::CRITICAL], \E_PARSE => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::CRITICAL], \E_ERROR => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::CRITICAL], \E_CORE_ERROR => [null, \_PhpScopercc9aec205203\Psr\Log\LogLevel::CRITICAL]];
+    private $loggers = [\E_DEPRECATED => [null, LogLevel::INFO], \E_USER_DEPRECATED => [null, LogLevel::INFO], \E_NOTICE => [null, LogLevel::WARNING], \E_USER_NOTICE => [null, LogLevel::WARNING], \E_STRICT => [null, LogLevel::WARNING], \E_WARNING => [null, LogLevel::WARNING], \E_USER_WARNING => [null, LogLevel::WARNING], \E_COMPILE_WARNING => [null, LogLevel::WARNING], \E_CORE_WARNING => [null, LogLevel::WARNING], \E_USER_ERROR => [null, LogLevel::CRITICAL], \E_RECOVERABLE_ERROR => [null, LogLevel::CRITICAL], \E_COMPILE_ERROR => [null, LogLevel::CRITICAL], \E_PARSE => [null, LogLevel::CRITICAL], \E_ERROR => [null, LogLevel::CRITICAL], \E_CORE_ERROR => [null, LogLevel::CRITICAL]];
     private $thrownErrors = 0x1fff;
     // E_ALL - E_DEPRECATED - E_USER_DEPRECATED
     private $scopedErrors = 0x1fff;
@@ -137,7 +137,7 @@ class ErrorHandler
             \restore_error_handler();
         }
     }
-    public function __construct(\_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\BufferingLogger $bootstrappingLogger = null, bool $debug = \false)
+    public function __construct(\_PhpScopereb9508917a55\Symfony\Component\ErrorHandler\BufferingLogger $bootstrappingLogger = null, bool $debug = \false)
     {
         if ($bootstrappingLogger) {
             $this->bootstrappingLogger = $bootstrappingLogger;
@@ -161,7 +161,7 @@ class ErrorHandler
      * @param array|int       $levels  An array map of E_* to LogLevel::* or an integer bit field of E_* constants
      * @param bool            $replace Whether to replace or not any existing logger
      */
-    public function setDefaultLogger(\_PhpScopercc9aec205203\Psr\Log\LoggerInterface $logger, $levels = \E_ALL, bool $replace = \false) : void
+    public function setDefaultLogger(LoggerInterface $logger, $levels = \E_ALL, bool $replace = \false) : void
     {
         $loggers = [];
         if (\is_array($levels)) {
@@ -208,7 +208,7 @@ class ErrorHandler
             }
             if (null === $log[0]) {
                 $this->loggedErrors &= ~$type;
-            } elseif ($log[0] instanceof \_PhpScopercc9aec205203\Psr\Log\LoggerInterface) {
+            } elseif ($log[0] instanceof LoggerInterface) {
                 $this->loggedErrors |= $type;
             } else {
                 throw new \InvalidArgumentException('Invalid logger provided.');
@@ -221,7 +221,7 @@ class ErrorHandler
         $this->reRegister($prevLogged | $this->thrownErrors);
         if ($flush) {
             foreach ($this->bootstrappingLogger->cleanLogs() as $log) {
-                $type = \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ThrowableUtils::getSeverity($log[2]['exception']);
+                $type = \_PhpScopereb9508917a55\Symfony\Component\ErrorHandler\ThrowableUtils::getSeverity($log[2]['exception']);
                 if (!isset($flush[$type])) {
                     $this->bootstrappingLogger->log($log[0], $log[1], $log[2]);
                 } elseif ($this->loggers[$type][0]) {
@@ -368,7 +368,7 @@ class ErrorHandler
         } elseif (!$throw && !($type & $level)) {
             if (!isset(self::$silencedErrorCache[$id = $file . ':' . $line])) {
                 $lightTrace = $this->tracedErrors & $type ? $this->cleanTrace(\debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS, 5), $type, $file, $line, \false) : [];
-                $errorAsException = new \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext($type, $file, $line, isset($lightTrace[1]) ? [$lightTrace[0]] : $lightTrace);
+                $errorAsException = new SilencedErrorContext($type, $file, $line, isset($lightTrace[1]) ? [$lightTrace[0]] : $lightTrace);
             } elseif (isset(self::$silencedErrorCache[$id][$message])) {
                 $lightTrace = null;
                 $errorAsException = self::$silencedErrorCache[$id][$message];
@@ -445,7 +445,7 @@ class ErrorHandler
             }
             try {
                 $this->isRecursive = \true;
-                $level = $type & $level ? $this->loggers[$type][1] : \_PhpScopercc9aec205203\Psr\Log\LogLevel::DEBUG;
+                $level = $type & $level ? $this->loggers[$type][1] : LogLevel::DEBUG;
                 $this->loggers[$type][0]->log($level, $logMessage, $errorAsException ? ['exception' => $errorAsException] : []);
             } finally {
                 $this->isRecursive = \false;
@@ -464,9 +464,9 @@ class ErrorHandler
     public function handleException(\Throwable $exception)
     {
         $handlerException = null;
-        if (!$exception instanceof \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Error\FatalError) {
+        if (!$exception instanceof FatalError) {
             self::$exitCode = 255;
-            $type = \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ThrowableUtils::getSeverity($exception);
+            $type = \_PhpScopereb9508917a55\Symfony\Component\ErrorHandler\ThrowableUtils::getSeverity($exception);
         } else {
             $type = $exception->getError()['type'];
         }
@@ -474,7 +474,7 @@ class ErrorHandler
             if (\false !== \strpos($message = $exception->getMessage(), "@anonymous\0")) {
                 $message = $this->parseAnonymousClass($message);
             }
-            if ($exception instanceof \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Error\FatalError) {
+            if ($exception instanceof FatalError) {
                 $message = 'Fatal ' . $message;
             } elseif ($exception instanceof \Error) {
                 $message = 'Uncaught Error: ' . $message;
@@ -488,7 +488,7 @@ class ErrorHandler
             } catch (\Throwable $handlerException) {
             }
         }
-        if (!$exception instanceof \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Error\OutOfMemoryError) {
+        if (!$exception instanceof OutOfMemoryError) {
             foreach ($this->getErrorEnhancers() as $errorEnhancer) {
                 if ($e = $errorEnhancer->enhance($exception)) {
                     $exception = $e;
@@ -572,9 +572,9 @@ class ErrorHandler
             $handler->throwAt(0, \true);
             $trace = $error['backtrace'] ?? null;
             if (0 === \strpos($error['message'], 'Allowed memory') || 0 === \strpos($error['message'], 'Out of memory')) {
-                $fatalError = new \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Error\OutOfMemoryError($handler->levels[$error['type']] . ': ' . $error['message'], 0, $error, 2, \false, $trace);
+                $fatalError = new OutOfMemoryError($handler->levels[$error['type']] . ': ' . $error['message'], 0, $error, 2, \false, $trace);
             } else {
-                $fatalError = new \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Error\FatalError($handler->levels[$error['type']] . ': ' . $error['message'], 0, $error, 2, \true, $trace);
+                $fatalError = new FatalError($handler->levels[$error['type']] . ': ' . $error['message'], 0, $error, 2, \true, $trace);
             }
         } else {
             $fatalError = null;
@@ -584,7 +584,7 @@ class ErrorHandler
                 self::$exitCode = 255;
                 $handler->handleException($fatalError);
             }
-        } catch (\_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\Error\FatalError $e) {
+        } catch (FatalError $e) {
             // Ignore this re-throw
         }
         if ($exit && self::$exitCode) {
@@ -602,7 +602,7 @@ class ErrorHandler
      */
     private function renderException(\Throwable $exception) : void
     {
-        $renderer = \in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) ? new \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorRenderer\CliErrorRenderer() : new \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer($this->debug);
+        $renderer = \in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) ? new CliErrorRenderer() : new HtmlErrorRenderer($this->debug);
         $exception = $renderer->render($exception);
         if (!\headers_sent()) {
             \http_response_code($exception->getStatusCode());
@@ -619,7 +619,7 @@ class ErrorHandler
      */
     protected function getErrorEnhancers() : iterable
     {
-        return [new \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedFunctionErrorEnhancer(), new \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedMethodErrorEnhancer(), new \_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\ErrorEnhancer\ClassNotFoundErrorEnhancer()];
+        return [new UndefinedFunctionErrorEnhancer(), new UndefinedMethodErrorEnhancer(), new ClassNotFoundErrorEnhancer()];
     }
     /**
      * Cleans the trace by removing function arguments and the frames added by the error handler and DebugClassLoader.
@@ -646,9 +646,9 @@ class ErrorHandler
                 }
             }
         }
-        if (\class_exists(\_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\DebugClassLoader::class, \false)) {
+        if (\class_exists(\_PhpScopereb9508917a55\Symfony\Component\ErrorHandler\DebugClassLoader::class, \false)) {
             for ($i = \count($lightTrace) - 2; 0 < $i; --$i) {
-                if (\_PhpScopercc9aec205203\Symfony\Component\ErrorHandler\DebugClassLoader::class === ($lightTrace[$i]['class'] ?? null)) {
+                if (\_PhpScopereb9508917a55\Symfony\Component\ErrorHandler\DebugClassLoader::class === ($lightTrace[$i]['class'] ?? null)) {
                     \array_splice($lightTrace, --$i, 2);
                 }
             }

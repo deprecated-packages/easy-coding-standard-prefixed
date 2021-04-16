@@ -30,7 +30,7 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return bool
      */
-    protected function isSuperfluousElse(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    protected function isSuperfluousElse(Tokens $tokens, $index)
     {
         $previousBlockStart = $index;
         do {
@@ -72,12 +72,12 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return int[]
      */
-    private function getPreviousBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getPreviousBlock(Tokens $tokens, $index)
     {
         $close = $previous = $tokens->getPrevMeaningfulToken($index);
         // short 'if' detection
         if ($tokens[$close]->equals('}')) {
-            $previous = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $close);
+            $previous = $tokens->findBlockStart(Tokens::BLOCK_TYPE_CURLY_BRACE, $close);
         }
         $open = $tokens->getPrevTokenOfKind($previous, [[\T_IF], [\T_ELSE], [\T_ELSEIF]]);
         if ($tokens[$open]->isGivenKind(\T_IF)) {
@@ -94,7 +94,7 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return bool
      */
-    private function isInConditional(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $lowerLimitIndex)
+    private function isInConditional(Tokens $tokens, $index, $lowerLimitIndex)
     {
         $candidateIndex = $tokens->getPrevTokenOfKind($index, [')', ';', ':']);
         if ($tokens[$candidateIndex]->equals(':')) {
@@ -107,7 +107,7 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
         // token is always ')' here.
         // If it is part of the condition the token is always in, return false.
         // If it is not it is a nested condition so return true
-        $open = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $candidateIndex);
+        $open = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $candidateIndex);
         return $tokens->getPrevMeaningfulToken($open) > $lowerLimitIndex;
     }
     /**
@@ -122,7 +122,7 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return bool
      */
-    private function isInConditionWithoutBraces(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $lowerLimitIndex)
+    private function isInConditionWithoutBraces(Tokens $tokens, $index, $lowerLimitIndex)
     {
         do {
             if ($tokens[$index]->isComment() || $tokens[$index]->isWhitespace()) {
@@ -147,13 +147,13 @@ abstract class AbstractNoUselessElseFixer extends \PhpCsFixer\AbstractFixer
                     return \false;
                     // like `else {`
                 }
-                $index = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
+                $index = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
                 $index = $tokens->getPrevMeaningfulToken($index);
                 if ($tokens[$index]->isGivenKind([\T_IF, \T_ELSEIF])) {
                     return \false;
                 }
             } elseif ($token->equals(')')) {
-                $type = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($token);
+                $type = Tokens::detectBlockType($token);
                 $index = $tokens->findBlockStart($type['type'], $index);
                 $index = $tokens->getPrevMeaningfulToken($index);
             } else {

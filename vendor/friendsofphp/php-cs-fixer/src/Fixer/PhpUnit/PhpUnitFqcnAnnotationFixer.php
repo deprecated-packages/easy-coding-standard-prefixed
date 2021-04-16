@@ -20,14 +20,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-final class PhpUnitFqcnAnnotationFixer extends \PhpCsFixer\Fixer\AbstractPhpUnitFixer
+final class PhpUnitFqcnAnnotationFixer extends AbstractPhpUnitFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('PHPUnit annotations should be a FQCNs including a root namespace.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('PHPUnit annotations should be a FQCNs including a root namespace.', [new CodeSample('<?php
 final class MyTest extends \\PHPUnit_Framework_TestCase
 {
     /**
@@ -54,7 +54,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function applyPhpUnitClassFix(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
+    protected function applyPhpUnitClassFix(Tokens $tokens, $startIndex, $endIndex)
     {
         $prevDocCommentIndex = $tokens->getPrevTokenOfKind($startIndex, [[\T_DOC_COMMENT]]);
         if (null !== $prevDocCommentIndex) {
@@ -66,11 +66,11 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
      * @param int $startIndex
      * @param int $endIndex
      */
-    private function fixPhpUnitClass(\PhpCsFixer\Tokenizer\Tokens $tokens, $startIndex, $endIndex)
+    private function fixPhpUnitClass(Tokens $tokens, $startIndex, $endIndex)
     {
         for ($index = $startIndex; $index < $endIndex; ++$index) {
             if ($tokens[$index]->isGivenKind(\T_DOC_COMMENT)) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, \PhpCsFixer\Preg::replace('~^(\\s*\\*\\s*@(?:expectedException|covers|coversDefaultClass|uses)\\h+)(?!(?:self|static)::)(\\w.*)$~m', '$1\\\\$2', $tokens[$index]->getContent())]);
+                $tokens[$index] = new Token([\T_DOC_COMMENT, Preg::replace('~^(\\s*\\*\\s*@(?:expectedException|covers|coversDefaultClass|uses)\\h+)(?!(?:self|static)::)(\\w.*)$~m', '$1\\\\$2', $tokens[$index]->getContent())]);
             }
         }
     }

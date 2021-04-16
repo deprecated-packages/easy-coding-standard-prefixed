@@ -75,7 +75,7 @@ final class Utils
      *
      * @return string
      */
-    public static function calculateTrailingWhitespaceIndent(\PhpCsFixer\Tokenizer\Token $token)
+    public static function calculateTrailingWhitespaceIndent(Token $token)
     {
         if (!$token->isWhitespace()) {
             throw new \InvalidArgumentException(\sprintf('The given token must be whitespace, got "%s".', $token->getName()));
@@ -124,7 +124,7 @@ final class Utils
     {
         // Schwartzian transform is used to improve the efficiency and avoid
         // `usort(): Array was modified by the user comparison function` warning for mocked objects.
-        return self::stableSort($fixers, static function (\PhpCsFixer\Fixer\FixerInterface $fixer) {
+        return self::stableSort($fixers, static function (FixerInterface $fixer) {
             return $fixer->getPriority();
         }, static function ($a, $b) {
             return self::cmpInt($b, $a);

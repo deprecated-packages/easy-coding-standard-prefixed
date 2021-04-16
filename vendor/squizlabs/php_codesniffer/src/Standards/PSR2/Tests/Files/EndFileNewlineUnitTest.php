@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PSR2\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class EndFileNewlineUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class EndFileNewlineUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

@@ -7,8 +7,8 @@ use Symplify\EasyCodingStandard\ValueObject\Error\CodingStandardError;
 use Symplify\SmartFileSystem\SmartFileInfo;
 final class ErrorFactory
 {
-    public function create(int $line, string $message, string $sourceClass, \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : \Symplify\EasyCodingStandard\ValueObject\Error\CodingStandardError
+    public function create(int $line, string $message, string $sourceClass, SmartFileInfo $smartFileInfo) : CodingStandardError
     {
-        return new \Symplify\EasyCodingStandard\ValueObject\Error\CodingStandardError($line, $message, $sourceClass, $smartFileInfo);
+        return new CodingStandardError($line, $message, $sourceClass, $smartFileInfo);
     }
 }

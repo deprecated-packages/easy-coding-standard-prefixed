@@ -31,14 +31,14 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
  * @author SpacePossum
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class SingleClassElementPerStatementFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class SingleClassElementPerStatementFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface, WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound(\PhpCsFixer\Tokenizer\Token::getClassyTokenKinds());
+        return $tokens->isAnyTokenKindsFound(Token::getClassyTokenKinds());
     }
     /**
      * {@inheritdoc}
@@ -54,13 +54,13 @@ final class SingleClassElementPerStatementFixer extends \PhpCsFixer\AbstractFixe
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('There MUST NOT be more than one property or constant declared per statement.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('There MUST NOT be more than one property or constant declared per statement.', [new CodeSample('<?php
 final class Example
 {
     const FOO_1 = 1, FOO_2 = 2;
     private static $bar1 = array(1,2,3), $bar2 = [1,2,3];
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 final class Example
 {
     const FOO_1 = 1, FOO_2 = 2;
@@ -71,9 +71,9 @@ final class Example
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $analyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $analyzer = new TokensAnalyzer($tokens);
         $elements = \array_reverse($analyzer->getClassyElements(), \true);
         foreach ($elements as $index => $element) {
             if (!\in_array($element['type'], $this->configuration['elements'], \true)) {
@@ -89,15 +89,15 @@ final class Example
     protected function createConfigurationDefinition()
     {
         $values = ['const', 'property'];
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('elements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('elements', 'List of strings which element should be modified.'))->setDefault($values)->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset($values)])->getOption()], $this->getName());
+        return new FixerConfigurationResolverRootless('elements', [(new FixerOptionBuilder('elements', 'List of strings which element should be modified.'))->setDefault($values)->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset($values)])->getOption()], $this->getName());
     }
     /**
      * @param string $type
      * @param int    $index
      */
-    private function fixElement(\PhpCsFixer\Tokenizer\Tokens $tokens, $type, $index)
+    private function fixElement(Tokens $tokens, $type, $index)
     {
-        $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $tokensAnalyzer = new TokensAnalyzer($tokens);
         $repeatIndex = $index;
         while (\true) {
             $repeatIndex = $tokens->getNextMeaningfulToken($repeatIndex);
@@ -105,9 +105,9 @@ final class Example
             if ($tokensAnalyzer->isArray($repeatIndex)) {
                 if ($repeatToken->isGivenKind(\T_ARRAY)) {
                     $repeatIndex = $tokens->getNextTokenOfKind($repeatIndex, ['(']);
-                    $repeatIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $repeatIndex);
+                    $repeatIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $repeatIndex);
                 } else {
-                    $repeatIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $repeatIndex);
+                    $repeatIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $repeatIndex);
                 }
                 continue;
             }
@@ -127,12 +127,12 @@ final class Example
      * @param int    $startIndex
      * @param int    $endIndex
      */
-    private function expandElement(\PhpCsFixer\Tokenizer\Tokens $tokens, $type, $startIndex, $endIndex)
+    private function expandElement(Tokens $tokens, $type, $startIndex, $endIndex)
     {
         $divisionContent = null;
         if ($tokens[$startIndex - 1]->isWhitespace()) {
             $divisionContent = $tokens[$startIndex - 1]->getContent();
-            if (\PhpCsFixer\Preg::match('#(\\n|\\r\\n)#', $divisionContent, $matches)) {
+            if (Preg::match('#(\\n|\\r\\n)#', $divisionContent, $matches)) {
                 $divisionContent = $matches[0] . \trim($divisionContent, "\r\n");
             }
         }
@@ -140,22 +140,22 @@ final class Example
         for ($i = $endIndex - 1; $i > $startIndex; --$i) {
             $token = $tokens[$i];
             if ($token->equals(')')) {
-                $i = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $i);
+                $i = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $i);
                 continue;
             }
-            if ($token->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_CLOSE)) {
-                $i = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $i);
+            if ($token->isGivenKind(CT::T_ARRAY_SQUARE_BRACE_CLOSE)) {
+                $i = $tokens->findBlockStart(Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $i);
                 continue;
             }
             if (!$tokens[$i]->equals(',')) {
                 continue;
             }
-            $tokens[$i] = new \PhpCsFixer\Tokenizer\Token(';');
+            $tokens[$i] = new Token(';');
             if ($tokens[$i + 1]->isWhitespace()) {
                 $tokens->clearAt($i + 1);
             }
             if (null !== $divisionContent && '' !== $divisionContent) {
-                $tokens->insertAt($i + 1, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $divisionContent]));
+                $tokens->insertAt($i + 1, new Token([\T_WHITESPACE, $divisionContent]));
             }
             // collect modifiers
             $sequence = $this->getModifiersSequences($tokens, $type, $startIndex, $endIndex);
@@ -169,10 +169,10 @@ final class Example
      *
      * @return Token[]
      */
-    private function getModifiersSequences(\PhpCsFixer\Tokenizer\Tokens $tokens, $type, $startIndex, $endIndex)
+    private function getModifiersSequences(Tokens $tokens, $type, $startIndex, $endIndex)
     {
         if ('property' === $type) {
-            $tokenKinds = [\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_STATIC, \T_VAR, \T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT];
+            $tokenKinds = [\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_STATIC, \T_VAR, \T_STRING, \T_NS_SEPARATOR, CT::T_NULLABLE_TYPE, CT::T_ARRAY_TYPEHINT];
         } else {
             $tokenKinds = [\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_CONST];
         }

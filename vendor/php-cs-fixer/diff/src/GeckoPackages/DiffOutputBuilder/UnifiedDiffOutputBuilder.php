@@ -22,7 +22,7 @@ use PhpCsFixer\Diff\v2_0\Output\DiffOutputBuilderInterface;
  *
  * @api
  */
-final class UnifiedDiffOutputBuilder implements \PhpCsFixer\Diff\v2_0\Output\DiffOutputBuilderInterface
+final class UnifiedDiffOutputBuilder implements DiffOutputBuilderInterface
 {
     /**
      * @var int

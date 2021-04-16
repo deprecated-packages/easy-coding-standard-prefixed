@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScopercc9aec205203\Nette;
+namespace _PhpScopereb9508917a55\Nette;
 
-use _PhpScopercc9aec205203\Nette\Utils\ObjectHelpers;
+use _PhpScopereb9508917a55\Nette\Utils\ObjectHelpers;
 /**
  * Strict class for better experience.
  * - 'did you mean' hints
@@ -23,7 +23,7 @@ trait SmartObject
     public function __call(string $name, array $args)
     {
         $class = static::class;
-        if (\_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::hasProperty($class, $name) === 'event') {
+        if (ObjectHelpers::hasProperty($class, $name) === 'event') {
             // calling event handlers
             $handlers = $this->{$name} ?? null;
             if (\is_iterable($handlers)) {
@@ -31,10 +31,10 @@ trait SmartObject
                     $handler(...$args);
                 }
             } elseif ($handlers !== null) {
-                throw new \_PhpScopercc9aec205203\Nette\UnexpectedValueException("Property {$class}::\${$name} must be iterable or null, " . \gettype($handlers) . ' given.');
+                throw new \_PhpScopereb9508917a55\Nette\UnexpectedValueException("Property {$class}::\${$name} must be iterable or null, " . \gettype($handlers) . ' given.');
             }
         } else {
-            \_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::strictCall($class, $name);
+            ObjectHelpers::strictCall($class, $name);
         }
     }
     /**
@@ -42,7 +42,7 @@ trait SmartObject
      */
     public static function __callStatic(string $name, array $args)
     {
-        \_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::strictStaticCall(static::class, $name);
+        ObjectHelpers::strictStaticCall(static::class, $name);
     }
     /**
      * @return mixed
@@ -51,10 +51,10 @@ trait SmartObject
     public function &__get(string $name)
     {
         $class = static::class;
-        if ($prop = \_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
+        if ($prop = ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
             // property getter
             if (!($prop & 0b1)) {
-                throw new \_PhpScopercc9aec205203\Nette\MemberAccessException("Cannot read a write-only property {$class}::\${$name}.");
+                throw new \_PhpScopereb9508917a55\Nette\MemberAccessException("Cannot read a write-only property {$class}::\${$name}.");
             }
             $m = ($prop & 0b10 ? 'get' : 'is') . $name;
             if ($prop & 0b100) {
@@ -65,7 +65,7 @@ trait SmartObject
                 return $val;
             }
         } else {
-            \_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::strictGet($class, $name);
+            ObjectHelpers::strictGet($class, $name);
         }
     }
     /**
@@ -76,17 +76,17 @@ trait SmartObject
     public function __set(string $name, $value)
     {
         $class = static::class;
-        if (\_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::hasProperty($class, $name)) {
+        if (ObjectHelpers::hasProperty($class, $name)) {
             // unsetted property
             $this->{$name} = $value;
-        } elseif ($prop = \_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
+        } elseif ($prop = ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
             // property setter
             if (!($prop & 0b1000)) {
-                throw new \_PhpScopercc9aec205203\Nette\MemberAccessException("Cannot write to a read-only property {$class}::\${$name}.");
+                throw new \_PhpScopereb9508917a55\Nette\MemberAccessException("Cannot write to a read-only property {$class}::\${$name}.");
             }
             $this->{'set' . $name}($value);
         } else {
-            \_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::strictSet($class, $name);
+            ObjectHelpers::strictSet($class, $name);
         }
     }
     /**
@@ -96,12 +96,12 @@ trait SmartObject
     public function __unset(string $name)
     {
         $class = static::class;
-        if (!\_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::hasProperty($class, $name)) {
-            throw new \_PhpScopercc9aec205203\Nette\MemberAccessException("Cannot unset the property {$class}::\${$name}.");
+        if (!ObjectHelpers::hasProperty($class, $name)) {
+            throw new \_PhpScopereb9508917a55\Nette\MemberAccessException("Cannot unset the property {$class}::\${$name}.");
         }
     }
     public function __isset(string $name) : bool
     {
-        return isset(\_PhpScopercc9aec205203\Nette\Utils\ObjectHelpers::getMagicProperties(static::class)[$name]);
+        return isset(ObjectHelpers::getMagicProperties(static::class)[$name]);
     }
 }

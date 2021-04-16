@@ -8,29 +8,29 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Request;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields the same instance as the request object passed along.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class RequestValueResolver implements \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
+final class RequestValueResolver implements ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function supports(\_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request $request, \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : bool
+    public function supports(Request $request, ArgumentMetadata $argument) : bool
     {
-        return \_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request::class === $argument->getType() || \is_subclass_of($argument->getType(), \_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request::class);
+        return Request::class === $argument->getType() || \is_subclass_of($argument->getType(), Request::class);
     }
     /**
      * {@inheritdoc}
      */
-    public function resolve(\_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\Request $request, \_PhpScopercc9aec205203\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument) : iterable
+    public function resolve(Request $request, ArgumentMetadata $argument) : iterable
     {
         (yield $request);
     }

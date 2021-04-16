@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class DisallowMultipleAssignmentsUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class DisallowMultipleAssignmentsUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

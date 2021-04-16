@@ -35,7 +35,7 @@ abstract class AbstractProxyFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         foreach ($this->proxyFixers as $fixer) {
             if ($fixer->isCandidate($tokens)) {
@@ -85,7 +85,7 @@ abstract class AbstractProxyFixer extends \PhpCsFixer\AbstractFixer
     {
         parent::setWhitespacesConfig($config);
         foreach ($this->proxyFixers as $fixer) {
-            if ($fixer instanceof \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface) {
+            if ($fixer instanceof WhitespacesAwareFixerInterface) {
                 $fixer->setWhitespacesConfig($config);
             }
         }
@@ -93,7 +93,7 @@ abstract class AbstractProxyFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($this->proxyFixers as $fixer) {
             $fixer->fix($file, $tokens);

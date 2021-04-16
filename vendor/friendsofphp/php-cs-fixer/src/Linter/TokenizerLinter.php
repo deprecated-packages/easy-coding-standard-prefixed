@@ -41,7 +41,7 @@ final class TokenizerLinter implements \PhpCsFixer\Linter\LinterInterface
      */
     public function lintFile($path)
     {
-        return $this->lintSource(\PhpCsFixer\FileReader::createSingleton()->read($path));
+        return $this->lintSource(FileReader::createSingleton()->read($path));
     }
     /**
      * {@inheritdoc}
@@ -53,9 +53,9 @@ final class TokenizerLinter implements \PhpCsFixer\Linter\LinterInterface
             // During that process, it might throw a ParseError or CompileError.
             // If it won't, cache of tokenized version of source will be kept, which is great for Runner.
             // Yet, first we need to clear already existing cache to not hit it and lint the code indeed.
-            $codeHash = \PhpCsFixer\Tokenizer\CodeHasher::calculateCodeHash($source);
-            \PhpCsFixer\Tokenizer\Tokens::clearCache($codeHash);
-            \PhpCsFixer\Tokenizer\Tokens::fromCode($source);
+            $codeHash = CodeHasher::calculateCodeHash($source);
+            Tokens::clearCache($codeHash);
+            Tokens::fromCode($source);
             return new \PhpCsFixer\Linter\TokenizerLintingResult();
         } catch (\ParseError $e) {
             return new \PhpCsFixer\Linter\TokenizerLintingResult($e);

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 // decoupled in own "*.php" file, so ECS, Rector and PHPStan works out of the box here
 use PHP_CodeSniffer\Util\Tokens;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Input\ArgvInput;
 use Symplify\EasyCodingStandard\Console\EasyCodingStandardConsoleApplication;
 use Symplify\EasyCodingStandard\DependencyInjection\EasyCodingStandardContainerFactory;
 use Symplify\PackageBuilder\Console\ShellCode;
@@ -15,26 +15,26 @@ use Symplify\SetConfigResolver\Exception\SetNotFoundException;
 // performance boost
 \gc_disable();
 # 1. autoload
-$autoloadIncluder = new \_PhpScopercc9aec205203\AutoloadIncluder();
+$autoloadIncluder = new \_PhpScopereb9508917a55\AutoloadIncluder();
 $autoloadIncluder->includeCwdVendorAutoloadIfExists();
 $autoloadIncluder->autoloadProjectAutoloaderFile('/../../autoload.php');
 $autoloadIncluder->includeDependencyOrRepositoryVendorAutoloadIfExists();
 $autoloadIncluder->includePhpCodeSnifferAutoloadIfNotInPharAndInitliazeTokens();
 try {
-    $input = new \_PhpScopercc9aec205203\Symfony\Component\Console\Input\ArgvInput();
-    $ecsContainerFactory = new \Symplify\EasyCodingStandard\DependencyInjection\EasyCodingStandardContainerFactory();
+    $input = new ArgvInput();
+    $ecsContainerFactory = new EasyCodingStandardContainerFactory();
     $container = $ecsContainerFactory->createFromFromInput($input);
-} catch (\Symplify\SetConfigResolver\Exception\SetNotFoundException $setNotFoundException) {
-    $invalidSetReporter = new \Symplify\SetConfigResolver\Bootstrap\InvalidSetReporter();
+} catch (SetNotFoundException $setNotFoundException) {
+    $invalidSetReporter = new InvalidSetReporter();
     $invalidSetReporter->report($setNotFoundException);
-    exit(\Symplify\PackageBuilder\Console\ShellCode::ERROR);
+    exit(ShellCode::ERROR);
 } catch (\Throwable $throwable) {
-    $symfonyStyleFactory = new \Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory();
+    $symfonyStyleFactory = new SymfonyStyleFactory();
     $symfonyStyle = $symfonyStyleFactory->create();
     $symfonyStyle->error($throwable->getMessage());
-    exit(\Symplify\PackageBuilder\Console\ShellCode::ERROR);
+    exit(ShellCode::ERROR);
 }
-$application = $container->get(\Symplify\EasyCodingStandard\Console\EasyCodingStandardConsoleApplication::class);
+$application = $container->get(EasyCodingStandardConsoleApplication::class);
 exit($application->run());
 /**
  * Inspired by https://github.com/rectorphp/rector/pull/2373/files#diff-0fc04a2bb7928cac4ae339d5a8bf67f3
@@ -94,7 +94,7 @@ final class AutoloadIncluder
             require_once $possiblePhpCodeSnifferAutoloadPath;
         }
         // initalize PHPCS tokens
-        new \PHP_CodeSniffer\Util\Tokens();
+        new Tokens();
     }
     private function loadIfNotLoadedYet(string $file) : void
     {
@@ -108,4 +108,4 @@ final class AutoloadIncluder
 /**
  * Inspired by https://github.com/rectorphp/rector/pull/2373/files#diff-0fc04a2bb7928cac4ae339d5a8bf67f3
  */
-\class_alias('_PhpScopercc9aec205203\\AutoloadIncluder', 'AutoloadIncluder', \false);
+\class_alias('_PhpScopereb9508917a55\\AutoloadIncluder', 'AutoloadIncluder', \false);

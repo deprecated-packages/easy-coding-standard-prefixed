@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\MySource\Tests\Objects;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class CreateWidgetTypeCallbackUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class CreateWidgetTypeCallbackUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

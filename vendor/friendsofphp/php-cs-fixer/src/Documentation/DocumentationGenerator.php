@@ -46,7 +46,7 @@ final class DocumentationGenerator
     private $path;
     public function __construct()
     {
-        $this->differ = new \PhpCsFixer\Diff\v2_0\Differ(new \PhpCsFixer\Diff\GeckoPackages\DiffOutputBuilder\UnifiedDiffOutputBuilder([
+        $this->differ = new Differ(new UnifiedDiffOutputBuilder([
             'contextLines' => 1024,
             // number large enough to have all lines in diff
             'fromFile' => 'Original',
@@ -76,7 +76,7 @@ final class DocumentationGenerator
     public function generateFixersDocumentationIndex(array $fixers)
     {
         $overrideGroups = ['PhpUnit' => 'PHPUnit', 'PhpTag' => 'PHP Tag', 'Phpdoc' => 'PHPDoc'];
-        \usort($fixers, function (\PhpCsFixer\Fixer\FixerInterface $a, \PhpCsFixer\Fixer\FixerInterface $b) {
+        \usort($fixers, function (FixerInterface $a, FixerInterface $b) {
             return \strcmp(\get_class($a), \get_class($b));
         });
         $documentation = <<<'RST'
@@ -86,11 +86,11 @@ List of Available Rules
 RST;
         $currentGroup = null;
         foreach ($fixers as $fixer) {
-            $namespace = \PhpCsFixer\Preg::replace('/^.*\\\\(.+)\\\\.+Fixer$/', '$1', \get_class($fixer));
+            $namespace = Preg::replace('/^.*\\\\(.+)\\\\.+Fixer$/', '$1', \get_class($fixer));
             if (isset($overrideGroups[$namespace])) {
                 $group = $overrideGroups[$namespace];
             } else {
-                $group = \PhpCsFixer\Preg::replace('/(?<=[[:lower:]])(?=[[:upper:]])/', ' ', $namespace);
+                $group = Preg::replace('/(?<=[[:lower:]])(?=[[:upper:]])/', ' ', $namespace);
             }
             if ($group !== $currentGroup) {
                 $underline = \str_repeat('-', \strlen($group));
@@ -99,7 +99,7 @@ RST;
             }
             $summary = \str_replace('`', '``', $fixer->getDefinition()->getSummary());
             $attributes = [];
-            if ($fixer instanceof \PhpCsFixer\Fixer\DeprecatedFixerInterface) {
+            if ($fixer instanceof DeprecatedFixerInterface) {
                 $attributes[] = 'deprecated';
             }
             if ($fixer->isRisky()) {
@@ -122,38 +122,38 @@ RST;
     /**
      * @return string
      */
-    public function getFixerDocumentationFilePath(\PhpCsFixer\Fixer\FixerInterface $fixer)
+    public function getFixerDocumentationFilePath(FixerInterface $fixer)
     {
-        return $this->getFixersDocumentationDirectoryPath() . '/' . \PhpCsFixer\Preg::replaceCallback('/^.*\\\\(.+)\\\\(.+)Fixer$/', function (array $matches) {
-            return \PhpCsFixer\Utils::camelCaseToUnderscore($matches[1]) . '/' . \PhpCsFixer\Utils::camelCaseToUnderscore($matches[2]);
+        return $this->getFixersDocumentationDirectoryPath() . '/' . Preg::replaceCallback('/^.*\\\\(.+)\\\\(.+)Fixer$/', function (array $matches) {
+            return Utils::camelCaseToUnderscore($matches[1]) . '/' . Utils::camelCaseToUnderscore($matches[2]);
         }, \get_class($fixer)) . '.rst';
     }
     /**
      * @return string
      */
-    public function getFixerDocumentationFileRelativePath(\PhpCsFixer\Fixer\FixerInterface $fixer)
+    public function getFixerDocumentationFileRelativePath(FixerInterface $fixer)
     {
-        return \PhpCsFixer\Preg::replace('#^' . \preg_quote($this->getFixersDocumentationDirectoryPath(), '#') . '/#', '', $this->getFixerDocumentationFilePath($fixer));
+        return Preg::replace('#^' . \preg_quote($this->getFixersDocumentationDirectoryPath(), '#') . '/#', '', $this->getFixerDocumentationFilePath($fixer));
     }
     /**
      * @return string
      */
-    public function generateFixerDocumentation(\PhpCsFixer\Fixer\FixerInterface $fixer)
+    public function generateFixerDocumentation(FixerInterface $fixer)
     {
         $name = $fixer->getName();
         $title = "Rule ``{$name}``";
         $titleLine = \str_repeat('=', \strlen($title));
         $doc = "{$titleLine}\n{$title}\n{$titleLine}";
-        if ($fixer instanceof \PhpCsFixer\Fixer\DeprecatedFixerInterface) {
+        if ($fixer instanceof DeprecatedFixerInterface) {
             $doc .= "\n\n.. warning:: This rule is deprecated and will be removed on next major version.";
             $alternatives = $fixer->getSuccessorsNames();
             if ([] !== $alternatives) {
-                $doc .= $this->toRst(\sprintf("\n\nYou should use %s instead.", \PhpCsFixer\Utils::naturalLanguageJoinWithBackticks($alternatives)), 3);
+                $doc .= $this->toRst(\sprintf("\n\nYou should use %s instead.", Utils::naturalLanguageJoinWithBackticks($alternatives)), 3);
             }
         }
         $riskyDescription = null;
         $samples = [];
-        if ($fixer instanceof \PhpCsFixer\Fixer\DefinedFixerInterface) {
+        if ($fixer instanceof DefinedFixerInterface) {
             $definition = $fixer->getDefinition();
             $doc .= "\n\n" . $this->toRst($definition->getSummary());
             $description = $definition->getDescription();
@@ -183,7 +183,7 @@ RST;
    {$riskyDescription}
 RST;
         }
-        if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface) {
+        if ($fixer instanceof ConfigurationDefinitionFixerInterface) {
             $doc .= <<<'RST'
 
 
@@ -194,21 +194,21 @@ RST;
             foreach ($configurationDefinition->getOptions() as $option) {
                 $optionInfo = "``{$option->getName()}``";
                 $optionInfo .= "\n" . \str_repeat('~', \strlen($optionInfo));
-                if ($option instanceof \PhpCsFixer\FixerConfiguration\DeprecatedFixerOptionInterface) {
+                if ($option instanceof DeprecatedFixerOptionInterface) {
                     $optionInfo .= "\n\n.. warning:: This option is deprecated and will be removed on next major version. {$this->toRst($option->getDeprecationMessage())}";
                 }
                 $optionInfo .= "\n\n" . $this->toRst($option->getDescription());
-                if ($option instanceof \PhpCsFixer\FixerConfiguration\AliasedFixerOption) {
+                if ($option instanceof AliasedFixerOption) {
                     $optionInfo .= "\n\n.. note:: The previous name of this option was ``{$option->getAlias()}`` but it is now deprecated and will be removed on next major version.";
                 }
-                $allowed = \PhpCsFixer\Console\Command\HelpCommand::getDisplayableAllowedValues($option);
+                $allowed = HelpCommand::getDisplayableAllowedValues($option);
                 $allowedKind = 'Allowed values';
                 if (null !== $allowed) {
                     foreach ($allowed as &$value) {
-                        if ($value instanceof \PhpCsFixer\FixerConfiguration\AllowedValueSubset) {
-                            $value = 'a subset of ``' . \PhpCsFixer\Console\Command\HelpCommand::toString($value->getAllowedValues()) . '``';
+                        if ($value instanceof AllowedValueSubset) {
+                            $value = 'a subset of ``' . HelpCommand::toString($value->getAllowedValues()) . '``';
                         } else {
-                            $value = '``' . \PhpCsFixer\Console\Command\HelpCommand::toString($value) . '``';
+                            $value = '``' . HelpCommand::toString($value) . '``';
                         }
                     }
                 } else {
@@ -222,14 +222,14 @@ RST;
                     $optionInfo .= "\n\n{$allowedKind}: {$allowed}";
                 }
                 if ($option->hasDefault()) {
-                    $default = \PhpCsFixer\Console\Command\HelpCommand::toString($option->getDefault());
+                    $default = HelpCommand::toString($option->getDefault());
                     $optionInfo .= "\n\nDefault value: ``{$default}``";
                 } else {
                     $optionInfo .= "\n\nThis option is required.";
                 }
                 $doc .= "\n\n{$optionInfo}";
             }
-        } elseif ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
+        } elseif ($fixer instanceof ConfigurableFixerInterface) {
             $doc .= "\n\nThis rule is configurable.";
         }
         if (0 !== \count($samples)) {
@@ -243,19 +243,19 @@ RST;
                 $title = \sprintf('Example #%d', $index + 1);
                 $titleLine = \str_repeat('~', \strlen($title));
                 $doc .= "\n\n{$title}\n{$titleLine}";
-                if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
+                if ($fixer instanceof ConfigurableFixerInterface) {
                     if (null === $sample->getConfiguration()) {
                         $doc .= "\n\n*Default* configuration.";
                     } else {
-                        $doc .= \sprintf("\n\nWith configuration: ``%s``.", \PhpCsFixer\Console\Command\HelpCommand::toString($sample->getConfiguration()));
+                        $doc .= \sprintf("\n\nWith configuration: ``%s``.", HelpCommand::toString($sample->getConfiguration()));
                     }
                 }
                 $doc .= "\n" . $this->generateSampleDiff($fixer, $sample, $index + 1, $name);
             }
         }
         $ruleSetConfigs = [];
-        foreach (\PhpCsFixer\RuleSet\RuleSets::getSetDefinitionNames() as $set) {
-            $ruleSet = new \PhpCsFixer\RuleSet\RuleSet([$set => \true]);
+        foreach (RuleSets::getSetDefinitionNames() as $set) {
+            $ruleSet = new RuleSet([$set => \true]);
             if ($ruleSet->hasRule($name)) {
                 $ruleSetConfigs[$set] = $ruleSet->getRuleConfiguration($name);
             }
@@ -280,8 +280,8 @@ RST;
   Using the `{$set} <./../../ruleSets{$ruleSetPath}>`_ rule set will enable the ``{$name}`` rule
 RST;
                 if (null !== $config) {
-                    $doc .= " with the config below:\n\n  ``" . \PhpCsFixer\Console\Command\HelpCommand::toString($config) . '``';
-                } elseif ($fixer instanceof \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface) {
+                    $doc .= " with the config below:\n\n  ``" . HelpCommand::toString($config) . '``';
+                } elseif ($fixer instanceof ConfigurationDefinitionFixerInterface) {
                     $doc .= ' with the default config.';
                 } else {
                     $doc .= '.';
@@ -309,7 +309,7 @@ RST;
      *
      * @return string
      */
-    public function generateRuleSetsDocumentation(\PhpCsFixer\RuleSet\RuleSetDescriptionInterface $definition, array $fixers)
+    public function generateRuleSetsDocumentation(RuleSetDescriptionInterface $definition, array $fixers)
     {
         $fixerNames = [];
         foreach ($fixers as $fixer) {
@@ -333,11 +333,11 @@ RST;
                     $ruleSetPath = \substr($ruleSetPath, \strrpos($ruleSetPath, '/'));
                     $doc .= "\n- `{$rule} <.{$ruleSetPath}>`_";
                 } else {
-                    $path = \PhpCsFixer\Preg::replace('#^' . \preg_quote($this->getFixersDocumentationDirectoryPath(), '#') . '/#', './../rules/', $this->getFixerDocumentationFilePath($fixerNames[$rule]));
+                    $path = Preg::replace('#^' . \preg_quote($this->getFixersDocumentationDirectoryPath(), '#') . '/#', './../rules/', $this->getFixerDocumentationFilePath($fixerNames[$rule]));
                     $doc .= "\n- `{$rule} <{$path}>`_";
                 }
                 if (!\is_bool($config)) {
-                    $doc .= "\n  config:\n  ``" . \PhpCsFixer\Console\Command\HelpCommand::toString($config) . '``';
+                    $doc .= "\n  config:\n  ``" . HelpCommand::toString($config) . '``';
                 }
             }
         }
@@ -374,12 +374,12 @@ RST;
      *
      * @return string
      */
-    private function generateSampleDiff(\PhpCsFixer\Fixer\FixerInterface $fixer, \PhpCsFixer\FixerDefinition\CodeSampleInterface $sample, $sampleNumber, $ruleName)
+    private function generateSampleDiff(FixerInterface $fixer, CodeSampleInterface $sample, $sampleNumber, $ruleName)
     {
-        if ($sample instanceof \PhpCsFixer\FixerDefinition\VersionSpecificCodeSampleInterface && !$sample->isSuitableFor(\PHP_VERSION_ID)) {
+        if ($sample instanceof VersionSpecificCodeSampleInterface && !$sample->isSuitableFor(\PHP_VERSION_ID)) {
             $existingFile = @\file_get_contents($this->getFixerDocumentationFilePath($fixer));
             if (\false !== $existingFile) {
-                \PhpCsFixer\Preg::match("/\\RExample #{$sampleNumber}\\R.+?(?<diff>\\R\\.\\. code-block:: diff\\R\\R.*?)\\R(?:\\R\\S|\$)/s", $existingFile, $matches);
+                Preg::match("/\\RExample #{$sampleNumber}\\R.+?(?<diff>\\R\\.\\. code-block:: diff\\R\\R.*?)\\R(?:\\R\\S|\$)/s", $existingFile, $matches);
                 if (isset($matches['diff'])) {
                     return $matches['diff'];
                 }
@@ -393,14 +393,14 @@ RST;
             return \sprintf($error, \PHP_VERSION);
         }
         $old = $sample->getCode();
-        $tokens = \PhpCsFixer\Tokenizer\Tokens::fromCode($old);
-        $file = $sample instanceof \PhpCsFixer\FixerDefinition\FileSpecificCodeSampleInterface ? $sample->getSplFileInfo() : new \PhpCsFixer\StdinFileInfo();
-        if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
+        $tokens = Tokens::fromCode($old);
+        $file = $sample instanceof FileSpecificCodeSampleInterface ? $sample->getSplFileInfo() : new StdinFileInfo();
+        if ($fixer instanceof ConfigurableFixerInterface) {
             $configuration = $sample->getConfiguration();
             if (null === $configuration) {
                 $configuration = [];
             }
-            if ($fixer instanceof \PhpCsFixer\Fixer\Basic\Psr0Fixer && isset($configuration['dir']) && 0 === \strpos($configuration['dir'], './')) {
+            if ($fixer instanceof Psr0Fixer && isset($configuration['dir']) && 0 === \strpos($configuration['dir'], './')) {
                 // Psr0Fixer relies on realpath() which fails for directories
                 // relative to some path when the working directory is a
                 // different path. Using an absolute path prevents this issue.
@@ -410,10 +410,10 @@ RST;
         }
         $fixer->fix($file, $tokens);
         $diff = $this->differ->diff($old, $tokens->generateCode());
-        $diff = \PhpCsFixer\Preg::replace('/@@[ \\+\\-\\d,]+@@\\n/', '', $diff);
-        $diff = \PhpCsFixer\Preg::replace('/\\r/', '^M', $diff);
-        $diff = \PhpCsFixer\Preg::replace('/^ $/m', '', $diff);
-        $diff = \PhpCsFixer\Preg::replace('/\\n$/', '', $diff);
+        $diff = Preg::replace('/@@[ \\+\\-\\d,]+@@\\n/', '', $diff);
+        $diff = Preg::replace('/\\r/', '^M', $diff);
+        $diff = Preg::replace('/^ $/m', '', $diff);
+        $diff = Preg::replace('/\\n$/', '', $diff);
         return <<<RST
 
 .. code-block:: diff
@@ -429,7 +429,7 @@ RST;
      */
     private function toRst($string, $indent = 0)
     {
-        $string = \wordwrap(\PhpCsFixer\Preg::replace('/(?<!`)(`.*?`)(?!`)/', '`$1`', $string), 80 - $indent);
+        $string = \wordwrap(Preg::replace('/(?<!`)(`.*?`)(?!`)/', '`$1`', $string), 80 - $indent);
         if (0 !== $indent) {
             $string = $this->indent($string, $indent);
         }
@@ -443,6 +443,6 @@ RST;
      */
     private function indent($string, $indent)
     {
-        return \PhpCsFixer\Preg::replace('/(\\n)(?!\\n|$)/', '$1' . \str_repeat(' ', $indent), $string);
+        return Preg::replace('/(\\n)(?!\\n|$)/', '$1' . \str_repeat(' ', $indent), $string);
     }
 }

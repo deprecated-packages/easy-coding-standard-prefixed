@@ -23,14 +23,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @author Graham Campbell <graham@alt-three.com>
  */
-final class NoMultilineWhitespaceBeforeSemicolonsFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class NoMultilineWhitespaceBeforeSemicolonsFixer extends AbstractProxyFixer implements DeprecatedFixerInterface, WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Multi-line whitespace before closing semicolon are prohibited.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Multi-line whitespace before closing semicolon are prohibited.', [new CodeSample('<?php
 function foo () {
     return 1 + 2
         ;

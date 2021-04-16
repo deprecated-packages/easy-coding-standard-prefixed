@@ -106,7 +106,7 @@ class Runner
             if ($this->config->interactive === \false && ($toScreen === \false || $this->reporter->totalErrors + $this->reporter->totalWarnings === 0 && $this->config->showProgress === \true)) {
                 \PHP_CodeSniffer\Util\Timing::printRunTime();
             }
-        } catch (\PHP_CodeSniffer\Exceptions\DeepExitException $e) {
+        } catch (DeepExitException $e) {
             echo $e->getMessage();
             return $e->getCode();
         }
@@ -172,7 +172,7 @@ class Runner
             $this->reporter->printReports();
             echo \PHP_EOL;
             \PHP_CodeSniffer\Util\Timing::printRunTime();
-        } catch (\PHP_CodeSniffer\Exceptions\DeepExitException $e) {
+        } catch (DeepExitException $e) {
             echo $e->getMessage();
             return $e->getCode();
         }
@@ -206,7 +206,7 @@ class Runner
         // Check the PHP version.
         if (\PHP_VERSION_ID < 50400) {
             $error = 'ERROR: PHP_CodeSniffer requires PHP version 5.4.0 or greater.' . \PHP_EOL;
-            throw new \PHP_CodeSniffer\Exceptions\DeepExitException($error, 3);
+            throw new DeepExitException($error, 3);
         }
         $requiredExtensions = ['tokenizer', 'xmlwriter', 'SimpleXML'];
         $missingExtensions = [];
@@ -228,7 +228,7 @@ class Runner
             }
             $error = 'ERROR: PHP_CodeSniffer requires the %s extensions to be enabled. Please enable %s.' . \PHP_EOL;
             $error = \sprintf($error, $required, $missing);
-            throw new \PHP_CodeSniffer\Exceptions\DeepExitException($error, 3);
+            throw new DeepExitException($error, 3);
         }
     }
     //end checkRequirements()
@@ -258,7 +258,7 @@ class Runner
                 \PHP_CodeSniffer\Util\Standards::printInstalledStandards();
                 $error .= \ob_get_contents();
                 \ob_end_clean();
-                throw new \PHP_CodeSniffer\Exceptions\DeepExitException($error, 3);
+                throw new DeepExitException($error, 3);
             }
         }
         // Saves passing the Config object into other objects that only need
@@ -270,7 +270,7 @@ class Runner
         // of PHP_CodeSniffer-specific token type constants.
         $tokens = new \PHP_CodeSniffer\Util\Tokens();
         // Allow autoloading of custom files inside installed standards.
-        $installedStandards = \PHP_CodeSniffer\Util\Standards::getInstalledStandardDetails();
+        $installedStandards = Standards::getInstalledStandardDetails();
         foreach ($installedStandards as $name => $details) {
             \PHP_CodeSniffer\Autoload::addSearchPath($details['path'], $details['namespace']);
         }
@@ -278,10 +278,10 @@ class Runner
         // should be checked and/or fixed.
         try {
             $this->ruleset = new \PHP_CodeSniffer\Ruleset($this->config);
-        } catch (\PHP_CodeSniffer\Exceptions\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             $error = 'ERROR: ' . $e->getMessage() . \PHP_EOL . \PHP_EOL;
             $error .= $this->config->printShortUsage(\true);
-            throw new \PHP_CodeSniffer\Exceptions\DeepExitException($error, 3);
+            throw new DeepExitException($error, 3);
         }
     }
     //end init()
@@ -308,19 +308,19 @@ class Runner
                 $fileContents = \stream_get_contents($handle);
                 \fclose($handle);
             }
-            $todo = new \PHP_CodeSniffer\Files\FileList($this->config, $this->ruleset);
-            $dummy = new \PHP_CodeSniffer\Files\DummyFile($fileContents, $this->ruleset, $this->config);
+            $todo = new FileList($this->config, $this->ruleset);
+            $dummy = new DummyFile($fileContents, $this->ruleset, $this->config);
             $todo->addFile($dummy->path, $dummy);
         } else {
             if (empty($this->config->files) === \true) {
                 $error = 'ERROR: You must supply at least one file or directory to process.' . \PHP_EOL . \PHP_EOL;
                 $error .= $this->config->printShortUsage(\true);
-                throw new \PHP_CodeSniffer\Exceptions\DeepExitException($error, 3);
+                throw new DeepExitException($error, 3);
             }
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
                 echo 'Creating file list... ';
             }
-            $todo = new \PHP_CodeSniffer\Files\FileList($this->config, $this->ruleset);
+            $todo = new FileList($this->config, $this->ruleset);
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
                 $numFiles = \count($todo);
                 echo "DONE ({$numFiles} files in queue)" . \PHP_EOL;
@@ -329,9 +329,9 @@ class Runner
                 if (PHP_CODESNIFFER_VERBOSITY > 0) {
                     echo 'Loading cache... ';
                 }
-                \PHP_CodeSniffer\Util\Cache::load($this->ruleset, $this->config);
+                Cache::load($this->ruleset, $this->config);
                 if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                    $size = \PHP_CodeSniffer\Util\Cache::getSize();
+                    $size = Cache::getSize();
                     echo "DONE ({$size} files in cache)" . \PHP_EOL;
                 }
             }
@@ -358,7 +358,7 @@ class Runner
                     $currDir = \dirname($path);
                     if ($lastDir !== $currDir) {
                         if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                            echo 'Changing into directory ' . \PHP_CodeSniffer\Util\Common::stripBasepath($currDir, $this->config->basepath) . \PHP_EOL;
+                            echo 'Changing into directory ' . Common::stripBasepath($currDir, $this->config->basepath) . \PHP_EOL;
                         }
                         $lastDir = $currDir;
                     }
@@ -387,7 +387,7 @@ class Runner
                 $childOutFilename = \tempnam(\sys_get_temp_dir(), 'phpcs-child');
                 $pid = \pcntl_fork();
                 if ($pid === -1) {
-                    throw new \PHP_CodeSniffer\Exceptions\RuntimeException('Failed to create child process');
+                    throw new RuntimeException('Failed to create child process');
                 } else {
                     if ($pid !== 0) {
                         $childProcs[] = ['pid' => $pid, 'out' => $childOutFilename];
@@ -416,7 +416,7 @@ class Runner
                             $currDir = \dirname($path);
                             if ($lastDir !== $currDir) {
                                 if (PHP_CODESNIFFER_VERBOSITY > 0) {
-                                    echo 'Changing into directory ' . \PHP_CodeSniffer\Util\Common::stripBasepath($currDir, $this->config->basepath) . \PHP_EOL;
+                                    echo 'Changing into directory ' . Common::stripBasepath($currDir, $this->config->basepath) . \PHP_EOL;
                                 }
                                 $lastDir = $currDir;
                             }
@@ -437,7 +437,7 @@ class Runner
                         if ($this->config->cache === \true) {
                             $childCache = [];
                             foreach ($pathsProcessed as $path) {
-                                $childCache[$path] = \PHP_CodeSniffer\Util\Cache::get($path);
+                                $childCache[$path] = Cache::get($path);
                             }
                             $output .= ";\n\$childCache = ";
                             $output .= \var_export($childCache, \true);
@@ -452,7 +452,7 @@ class Runner
             //end for
             $success = $this->processChildProcs($childProcs);
             if ($success === \false) {
-                throw new \PHP_CodeSniffer\Exceptions\RuntimeException('One or more child processes failed to run');
+                throw new RuntimeException('One or more child processes failed to run');
             }
         }
         //end if
@@ -461,7 +461,7 @@ class Runner
             echo \PHP_EOL . \PHP_EOL;
         }
         if ($this->config->cache === \true) {
-            \PHP_CodeSniffer\Util\Cache::save();
+            Cache::save();
         }
         $ignoreWarnings = \PHP_CodeSniffer\Config::getConfigData('ignore_warnings_on_exit');
         $ignoreErrors = \PHP_CodeSniffer\Config::getConfigData('ignore_errors_on_exit');
@@ -502,7 +502,7 @@ class Runner
             // This type of error is being muted.
             return \true;
         }
-        throw new \PHP_CodeSniffer\Exceptions\RuntimeException("{$message} in {$file} on line {$line}");
+        throw new RuntimeException("{$message} in {$file} on line {$line}");
     }
     //end handleErrors()
     /**
@@ -569,7 +569,7 @@ class Runner
                     case 's':
                         break 2;
                     case 'q':
-                        throw new \PHP_CodeSniffer\Exceptions\DeepExitException('', 0);
+                        throw new DeepExitException('', 0);
                     default:
                         // Repopulate the sniffs because some of them save their state
                         // and only clear it when the file changes, but we are rechecking
@@ -614,7 +614,7 @@ class Runner
                         $numProcessed++;
                         if (isset($childOutput) === \false) {
                             // The child process died, so the run has failed.
-                            $file = new \PHP_CodeSniffer\Files\DummyFile(null, $this->ruleset, $this->config);
+                            $file = new DummyFile(null, $this->ruleset, $this->config);
                             $file->setErrorCounts(1, 0, 0, 0);
                             $this->printProgress($file, $totalBatches, $numProcessed);
                             $success = \false;
@@ -630,11 +630,11 @@ class Runner
                         }
                         if (isset($childCache) === \true) {
                             foreach ($childCache as $path => $cache) {
-                                \PHP_CodeSniffer\Util\Cache::set($path, $cache);
+                                Cache::set($path, $cache);
                             }
                         }
                         // Fake a processed file so we can print progress output for the batch.
-                        $file = new \PHP_CodeSniffer\Files\DummyFile(null, $this->ruleset, $this->config);
+                        $file = new DummyFile(null, $this->ruleset, $this->config);
                         $file->setErrorCounts($childOutput['totalErrors'], $childOutput['totalWarnings'], $childOutput['totalFixable'], $childOutput['totalFixed']);
                         $this->printProgress($file, $totalBatches, $numProcessed);
                     }
@@ -658,7 +658,7 @@ class Runner
      *
      * @return void
      */
-    public function printProgress(\PHP_CodeSniffer\Files\File $file, $numFiles, $numProcessed)
+    public function printProgress(File $file, $numFiles, $numProcessed)
     {
         if (PHP_CODESNIFFER_VERBOSITY > 0 || $this->config->showProgress === \false) {
             return;

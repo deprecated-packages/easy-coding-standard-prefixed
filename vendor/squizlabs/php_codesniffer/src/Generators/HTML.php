@@ -154,7 +154,7 @@ class HTML extends \PHP_CodeSniffer\Generators\Generator
         $errorLevel = \error_reporting(0);
         echo '  <div class="tag-line">';
         echo 'Documentation generated on ' . \date('r');
-        echo ' by <a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP_CodeSniffer ' . \PHP_CodeSniffer\Config::VERSION . '</a>';
+        echo ' by <a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP_CodeSniffer ' . Config::VERSION . '</a>';
         echo '</div>' . \PHP_EOL;
         \error_reporting($errorLevel);
         echo ' </body>' . \PHP_EOL;

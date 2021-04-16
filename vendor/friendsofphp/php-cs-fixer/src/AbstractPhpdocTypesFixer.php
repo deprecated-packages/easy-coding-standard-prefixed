@@ -36,25 +36,25 @@ abstract class AbstractPhpdocTypesFixer extends \PhpCsFixer\AbstractFixer
     public function __construct()
     {
         parent::__construct();
-        $this->tags = \PhpCsFixer\DocBlock\Annotation::getTagsWithTypes();
+        $this->tags = Annotation::getTagsWithTypes();
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
                 continue;
             }
-            $doc = new \PhpCsFixer\DocBlock\DocBlock($token->getContent());
+            $doc = new DocBlock($token->getContent());
             $annotations = $doc->getAnnotationsOfType($this->tags);
             if (empty($annotations)) {
                 continue;
@@ -62,7 +62,7 @@ abstract class AbstractPhpdocTypesFixer extends \PhpCsFixer\AbstractFixer
             foreach ($annotations as $annotation) {
                 $this->fixTypes($annotation);
             }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $doc->getContent()]);
+            $tokens[$index] = new Token([\T_DOC_COMMENT, $doc->getContent()]);
         }
     }
     /**
@@ -80,7 +80,7 @@ abstract class AbstractPhpdocTypesFixer extends \PhpCsFixer\AbstractFixer
      *
      * This will be nicely handled behind the scenes for us by the annotation class.
      */
-    private function fixTypes(\PhpCsFixer\DocBlock\Annotation $annotation)
+    private function fixTypes(Annotation $annotation)
     {
         $types = $annotation->getTypes();
         $new = $this->normalizeTypes($types);

@@ -20,14 +20,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @deprecated
  */
-final class SilencedDeprecationErrorFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
+final class SilencedDeprecationErrorFixer extends AbstractProxyFixer implements DeprecatedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Ensures deprecation notices are silenced.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\ntrigger_error('Warning.', E_USER_DEPRECATED);\n")], null, 'Silencing of deprecation errors might cause changes to code behaviour.');
+        return new FixerDefinition('Ensures deprecation notices are silenced.', [new CodeSample("<?php\ntrigger_error('Warning.', E_USER_DEPRECATED);\n")], null, 'Silencing of deprecation errors might cause changes to code behaviour.');
     }
     /**
      * {@inheritdoc}

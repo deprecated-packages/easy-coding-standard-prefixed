@@ -48,13 +48,13 @@ class RuleSet implements \PhpCsFixer\RuleSet\RuleSetInterface
                 if (null === $value) {
                     $messageForNullIssue = 'To disable the rule, use "FALSE" instead of "NULL".';
                     if (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
-                        throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($name, $messageForNullIssue);
+                        throw new InvalidFixerConfigurationException($name, $messageForNullIssue);
                     }
                     @\trigger_error($messageForNullIssue, \E_USER_DEPRECATED);
                     continue;
                 }
                 $message = '@' === $name[0] ? 'Set must be enabled (true) or disabled (false). Other values are not allowed.' : 'Rule must be enabled (true), disabled (false) or configured (non-empty, assoc array). Other values are not allowed.';
-                throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($name, $message);
+                throw new InvalidFixerConfigurationException($name, $message);
             }
         }
         $this->resolveSet($set);

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Console;
 
-use _PhpScopercc9aec205203\Symfony\Component\Console\Command\Command;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Command\Command;
 use Symplify\ComposerJsonManipulator\ComposerJsonFactory;
 use Symplify\PackageBuilder\Composer\PackageVersionProvider;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -34,10 +34,10 @@ final class ConsoleApplicationFactory
     /**
      * @param Command[] $commands
      */
-    public function __construct(array $commands, \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider, \Symplify\ComposerJsonManipulator\ComposerJsonFactory $composerJsonFactory, \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
+    public function __construct(array $commands, ParameterProvider $parameterProvider, ComposerJsonFactory $composerJsonFactory, SmartFileSystem $smartFileSystem)
     {
         $this->commands = $commands;
-        $this->stringsConverter = new \Symplify\SymplifyKernel\Strings\StringsConverter();
+        $this->stringsConverter = new StringsConverter();
         $this->parameterProvider = $parameterProvider;
         $this->composerJsonFactory = $composerJsonFactory;
         $this->smartFileSystem = $smartFileSystem;
@@ -68,7 +68,7 @@ final class ConsoleApplicationFactory
         if ($packageName === null) {
             return;
         }
-        $packageVersionProvider = new \Symplify\PackageBuilder\Composer\PackageVersionProvider();
+        $packageVersionProvider = new PackageVersionProvider();
         $version = $packageVersionProvider->provide($packageName);
         $autowiredConsoleApplication->setVersion($version);
     }

@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\VarDumper\Dumper\ContextProvider;
+namespace _PhpScopereb9508917a55\Symfony\Component\VarDumper\Dumper\ContextProvider;
 
-use _PhpScopercc9aec205203\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopercc9aec205203\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use _PhpScopercc9aec205203\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScopereb9508917a55\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use _PhpScopereb9508917a55\Symfony\Component\VarDumper\Cloner\VarCloner;
 /**
  * Tries to provide context from a request.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-final class RequestContextProvider implements \_PhpScopercc9aec205203\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
+final class RequestContextProvider implements \_PhpScopereb9508917a55\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
 {
     private $requestStack;
     private $cloner;
-    public function __construct(\_PhpScopercc9aec205203\Symfony\Component\HttpFoundation\RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->cloner = new \_PhpScopercc9aec205203\Symfony\Component\VarDumper\Cloner\VarCloner();
+        $this->cloner = new VarCloner();
         $this->cloner->setMaxItems(0);
-        $this->cloner->addCasters(\_PhpScopercc9aec205203\Symfony\Component\VarDumper\Caster\ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
+        $this->cloner->addCasters(ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
     }
     public function getContext() : ?array
     {

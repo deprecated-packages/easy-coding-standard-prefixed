@@ -21,12 +21,12 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Bram Gotink <bram@gotink.me>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class NoLeadingNamespaceWhitespaceFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class NoLeadingNamespaceWhitespaceFixer extends AbstractFixer implements WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_NAMESPACE);
     }
@@ -35,7 +35,7 @@ final class NoLeadingNamespaceWhitespaceFixer extends \PhpCsFixer\AbstractFixer 
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('The namespace declaration line shouldn\'t contain leading whitespace.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('The namespace declaration line shouldn\'t contain leading whitespace.', [new CodeSample('<?php
  namespace Test8a;
     namespace Test8b;
 ')]);
@@ -43,7 +43,7 @@ final class NoLeadingNamespaceWhitespaceFixer extends \PhpCsFixer\AbstractFixer 
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = \count($tokens) - 1; 0 <= $index; --$index) {
             $token = $tokens[$index];
@@ -54,7 +54,7 @@ final class NoLeadingNamespaceWhitespaceFixer extends \PhpCsFixer\AbstractFixer 
             $beforeNamespace = $tokens[$beforeNamespaceIndex];
             if (!$beforeNamespace->isWhitespace()) {
                 if (!self::endsWithWhitespace($beforeNamespace->getContent())) {
-                    $tokens->insertAt($index, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $this->whitespacesConfig->getLineEnding()]));
+                    $tokens->insertAt($index, new Token([\T_WHITESPACE, $this->whitespacesConfig->getLineEnding()]));
                 }
                 continue;
             }
@@ -64,10 +64,10 @@ final class NoLeadingNamespaceWhitespaceFixer extends \PhpCsFixer\AbstractFixer 
                 if (self::endsWithWhitespace($beforeBeforeNamespace->getContent())) {
                     $tokens->clearAt($beforeNamespaceIndex);
                 } else {
-                    $tokens[$beforeNamespaceIndex] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+                    $tokens[$beforeNamespaceIndex] = new Token([\T_WHITESPACE, ' ']);
                 }
             } else {
-                $tokens[$beforeNamespaceIndex] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, \substr($beforeNamespace->getContent(), 0, $lastNewline + 1)]);
+                $tokens[$beforeNamespaceIndex] = new Token([\T_WHITESPACE, \substr($beforeNamespace->getContent(), 0, $lastNewline + 1)]);
             }
         }
     }

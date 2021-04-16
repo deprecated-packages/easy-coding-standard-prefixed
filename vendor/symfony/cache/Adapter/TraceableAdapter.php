@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\Cache\Adapter;
+namespace _PhpScopereb9508917a55\Symfony\Component\Cache\Adapter;
 
-use _PhpScopercc9aec205203\Psr\Cache\CacheItemInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Cache\CacheItem;
-use _PhpScopercc9aec205203\Symfony\Component\Cache\PruneableInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Cache\ResettableInterface;
-use _PhpScopercc9aec205203\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScopercc9aec205203\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopereb9508917a55\Psr\Cache\CacheItemInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Cache\CacheItem;
+use _PhpScopereb9508917a55\Symfony\Component\Cache\PruneableInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Cache\ResettableInterface;
+use _PhpScopereb9508917a55\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScopereb9508917a55\Symfony\Contracts\Service\ResetInterface;
 /**
  * An adapter that collects data about all cache calls.
  *
@@ -23,11 +23,11 @@ use _PhpScopercc9aec205203\Symfony\Contracts\Service\ResetInterface;
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TraceableAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScopercc9aec205203\Symfony\Contracts\Cache\CacheInterface, \_PhpScopercc9aec205203\Symfony\Component\Cache\PruneableInterface, \_PhpScopercc9aec205203\Symfony\Component\Cache\ResettableInterface
+class TraceableAdapter implements \_PhpScopereb9508917a55\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
 {
     protected $pool;
     private $calls = [];
-    public function __construct(\_PhpScopercc9aec205203\Symfony\Component\Cache\Adapter\AdapterInterface $pool)
+    public function __construct(\_PhpScopereb9508917a55\Symfony\Component\Cache\Adapter\AdapterInterface $pool)
     {
         $this->pool = $pool;
     }
@@ -36,11 +36,11 @@ class TraceableAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cach
      */
     public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
     {
-        if (!$this->pool instanceof \_PhpScopercc9aec205203\Symfony\Contracts\Cache\CacheInterface) {
-            throw new \BadMethodCallException(\sprintf('Cannot call "%s::get()": this class doesn\'t implement "%s".', \get_debug_type($this->pool), \_PhpScopercc9aec205203\Symfony\Contracts\Cache\CacheInterface::class));
+        if (!$this->pool instanceof CacheInterface) {
+            throw new \BadMethodCallException(\sprintf('Cannot call "%s::get()": this class doesn\'t implement "%s".', \get_debug_type($this->pool), CacheInterface::class));
         }
         $isHit = \true;
-        $callback = function (\_PhpScopercc9aec205203\Symfony\Component\Cache\CacheItem $item, bool &$save) use($callback, &$isHit) {
+        $callback = function (CacheItem $item, bool &$save) use($callback, &$isHit) {
             $isHit = $item->isHit();
             return $callback($item, $save);
         };
@@ -109,7 +109,7 @@ class TraceableAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cach
      *
      * @return bool
      */
-    public function save(\_PhpScopercc9aec205203\Psr\Cache\CacheItemInterface $item)
+    public function save(CacheItemInterface $item)
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -123,7 +123,7 @@ class TraceableAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cach
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScopercc9aec205203\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(CacheItemInterface $item)
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -165,7 +165,7 @@ class TraceableAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cach
     {
         $event = $this->start(__FUNCTION__);
         try {
-            if ($this->pool instanceof \_PhpScopercc9aec205203\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($this->pool instanceof \_PhpScopereb9508917a55\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 return $event->result = $this->pool->clear($prefix);
             }
             return $event->result = $this->pool->clear();
@@ -207,7 +207,7 @@ class TraceableAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cach
      */
     public function prune()
     {
-        if (!$this->pool instanceof \_PhpScopercc9aec205203\Symfony\Component\Cache\PruneableInterface) {
+        if (!$this->pool instanceof PruneableInterface) {
             return \false;
         }
         $event = $this->start(__FUNCTION__);
@@ -222,7 +222,7 @@ class TraceableAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cach
      */
     public function reset()
     {
-        if ($this->pool instanceof \_PhpScopercc9aec205203\Symfony\Contracts\Service\ResetInterface) {
+        if ($this->pool instanceof ResetInterface) {
             $this->pool->reset();
         }
         $this->clearCalls();
@@ -249,7 +249,7 @@ class TraceableAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cach
     }
     protected function start($name)
     {
-        $this->calls[] = $event = new \_PhpScopercc9aec205203\Symfony\Component\Cache\Adapter\TraceableAdapterEvent();
+        $this->calls[] = $event = new \_PhpScopereb9508917a55\Symfony\Component\Cache\Adapter\TraceableAdapterEvent();
         $event->name = $name;
         $event->start = \microtime(\true);
         return $event;

@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Finder;
 
-use _PhpScopercc9aec205203\Nette\Utils\Finder as NetteFinder;
+use _PhpScopereb9508917a55\Nette\Utils\Finder as NetteFinder;
 use SplFileInfo;
-use _PhpScopercc9aec205203\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScopercc9aec205203\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
+use _PhpScopereb9508917a55\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScopereb9508917a55\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
 use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\SmartFileSystem\Tests\Finder\FinderSanitizer\FinderSanitizerTest
@@ -21,17 +21,17 @@ final class FinderSanitizer
     {
         $smartFileInfos = [];
         foreach ($files as $file) {
-            $fileInfo = \is_string($file) ? new \SplFileInfo($file) : $file;
+            $fileInfo = \is_string($file) ? new SplFileInfo($file) : $file;
             if (!$this->isFileInfoValid($fileInfo)) {
                 continue;
             }
             /** @var string $realPath */
             $realPath = $fileInfo->getRealPath();
-            $smartFileInfos[] = new \Symplify\SmartFileSystem\SmartFileInfo($realPath);
+            $smartFileInfos[] = new SmartFileInfo($realPath);
         }
         return $smartFileInfos;
     }
-    private function isFileInfoValid(\SplFileInfo $fileInfo) : bool
+    private function isFileInfoValid(SplFileInfo $fileInfo) : bool
     {
         return (bool) $fileInfo->getRealPath();
     }

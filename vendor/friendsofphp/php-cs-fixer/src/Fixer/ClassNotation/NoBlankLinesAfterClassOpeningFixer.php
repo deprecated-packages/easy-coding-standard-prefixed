@@ -20,21 +20,21 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Ceeram <ceeram@cakephp.org>
  */
-final class NoBlankLinesAfterClassOpeningFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class NoBlankLinesAfterClassOpeningFixer extends AbstractFixer implements WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound(\PhpCsFixer\Tokenizer\Token::getClassyTokenKinds());
+        return $tokens->isAnyTokenKindsFound(Token::getClassyTokenKinds());
     }
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('There should be no empty lines after class opening brace.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('There should be no empty lines after class opening brace.', [new CodeSample('<?php
 final class Sample
 {
 
@@ -56,7 +56,7 @@ final class Sample
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isClassy()) {
@@ -74,13 +74,13 @@ final class Sample
      *
      * @param int $index
      */
-    private function fixWhitespace(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function fixWhitespace(Tokens $tokens, $index)
     {
         $content = $tokens[$index]->getContent();
         // if there is more than one new line in the whitespace, then we need to fix it
         if (\substr_count($content, "\n") > 1) {
             // the final bit of the whitespace must be the next statement's indentation
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $this->whitespacesConfig->getLineEnding() . \substr($content, \strrpos($content, "\n") + 1)]);
+            $tokens[$index] = new Token([\T_WHITESPACE, $this->whitespacesConfig->getLineEnding() . \substr($content, \strrpos($content, "\n") + 1)]);
         }
     }
 }

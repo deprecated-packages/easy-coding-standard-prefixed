@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Arrays;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class DisallowLongArraySyntaxUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class DisallowLongArraySyntaxUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

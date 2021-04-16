@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScopercc9aec205203\Doctrine\Common\Annotations;
+namespace _PhpScopereb9508917a55\Doctrine\Common\Annotations;
 
 use ReflectionClass;
 use ReflectionMethod;
@@ -10,65 +10,65 @@ use function get_class;
 /**
  * Allows the reader to be used in-place of Doctrine's reader.
  */
-class IndexedReader implements \_PhpScopercc9aec205203\Doctrine\Common\Annotations\Reader
+class IndexedReader implements \_PhpScopereb9508917a55\Doctrine\Common\Annotations\Reader
 {
     /** @var Reader */
     private $delegate;
-    public function __construct(\_PhpScopercc9aec205203\Doctrine\Common\Annotations\Reader $reader)
+    public function __construct(\_PhpScopereb9508917a55\Doctrine\Common\Annotations\Reader $reader)
     {
         $this->delegate = $reader;
     }
     /**
      * {@inheritDoc}
      */
-    public function getClassAnnotations(\ReflectionClass $class)
+    public function getClassAnnotations(ReflectionClass $class)
     {
         $annotations = [];
         foreach ($this->delegate->getClassAnnotations($class) as $annot) {
-            $annotations[\get_class($annot)] = $annot;
+            $annotations[get_class($annot)] = $annot;
         }
         return $annotations;
     }
     /**
      * {@inheritDoc}
      */
-    public function getClassAnnotation(\ReflectionClass $class, $annotation)
+    public function getClassAnnotation(ReflectionClass $class, $annotation)
     {
         return $this->delegate->getClassAnnotation($class, $annotation);
     }
     /**
      * {@inheritDoc}
      */
-    public function getMethodAnnotations(\ReflectionMethod $method)
+    public function getMethodAnnotations(ReflectionMethod $method)
     {
         $annotations = [];
         foreach ($this->delegate->getMethodAnnotations($method) as $annot) {
-            $annotations[\get_class($annot)] = $annot;
+            $annotations[get_class($annot)] = $annot;
         }
         return $annotations;
     }
     /**
      * {@inheritDoc}
      */
-    public function getMethodAnnotation(\ReflectionMethod $method, $annotation)
+    public function getMethodAnnotation(ReflectionMethod $method, $annotation)
     {
         return $this->delegate->getMethodAnnotation($method, $annotation);
     }
     /**
      * {@inheritDoc}
      */
-    public function getPropertyAnnotations(\ReflectionProperty $property)
+    public function getPropertyAnnotations(ReflectionProperty $property)
     {
         $annotations = [];
         foreach ($this->delegate->getPropertyAnnotations($property) as $annot) {
-            $annotations[\get_class($annot)] = $annot;
+            $annotations[get_class($annot)] = $annot;
         }
         return $annotations;
     }
     /**
      * {@inheritDoc}
      */
-    public function getPropertyAnnotation(\ReflectionProperty $property, $annotation)
+    public function getPropertyAnnotation(ReflectionProperty $property, $annotation)
     {
         return $this->delegate->getPropertyAnnotation($property, $annotation);
     }
@@ -82,6 +82,6 @@ class IndexedReader implements \_PhpScopercc9aec205203\Doctrine\Common\Annotatio
      */
     public function __call($method, $args)
     {
-        return \call_user_func_array([$this->delegate, $method], $args);
+        return call_user_func_array([$this->delegate, $method], $args);
     }
 }

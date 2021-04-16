@@ -27,7 +27,7 @@ class Json implements \PHP_CodeSniffer\Reports\Report
      *
      * @return bool
      */
-    public function generateFileReport($report, \PHP_CodeSniffer\Files\File $phpcsFile, $showSources = \false, $width = 80)
+    public function generateFileReport($report, File $phpcsFile, $showSources = \false, $width = 80)
     {
         $filename = \str_replace('\\', '\\\\', $report['filename']);
         $filename = \str_replace('"', '\\"', $filename);

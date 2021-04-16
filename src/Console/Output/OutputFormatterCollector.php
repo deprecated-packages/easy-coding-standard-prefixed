@@ -20,13 +20,13 @@ final class OutputFormatterCollector
             $this->outputFormatters[$outputFormatter->getName()] = $outputFormatter;
         }
     }
-    public function getByName(string $name) : \Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface
+    public function getByName(string $name) : OutputFormatterInterface
     {
         if (isset($this->outputFormatters[$name])) {
             return $this->outputFormatters[$name];
         }
         $outputFormatterKeys = \array_keys($this->outputFormatters);
         $errorMessage = \sprintf('Output formatter "%s" not found. Use one of: "%s".', $name, \implode('", "', $outputFormatterKeys));
-        throw new \Symplify\EasyCodingStandard\Configuration\Exception\OutputFormatterNotFoundException($errorMessage);
+        throw new OutputFormatterNotFoundException($errorMessage);
     }
 }

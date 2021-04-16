@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Formatter;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
 use Symplify\EasyCodingStandard\SnippetFormatter\Provider\CurrentParentFileInfoProvider;
@@ -63,7 +63,7 @@ final class SnippetFormatter
      * @var bool
      */
     private $isPhp73OrAbove = \false;
-    public function __construct(\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem, \Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor $fixerFileProcessor, \Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor $sniffFileProcessor, \Symplify\EasyCodingStandard\SnippetFormatter\Provider\CurrentParentFileInfoProvider $currentParentFileInfoProvider)
+    public function __construct(SmartFileSystem $smartFileSystem, FixerFileProcessor $fixerFileProcessor, SniffFileProcessor $sniffFileProcessor, CurrentParentFileInfoProvider $currentParentFileInfoProvider)
     {
         $this->smartFileSystem = $smartFileSystem;
         $this->fixerFileProcessor = $fixerFileProcessor;
@@ -71,11 +71,11 @@ final class SnippetFormatter
         $this->currentParentFileInfoProvider = $currentParentFileInfoProvider;
         $this->isPhp73OrAbove = \PHP_VERSION_ID >= 70300;
     }
-    public function format(\Symplify\SmartFileSystem\SmartFileInfo $fileInfo, string $snippetRegex, string $kind) : string
+    public function format(SmartFileInfo $fileInfo, string $snippetRegex, string $kind) : string
     {
         $this->currentParentFileInfoProvider->setParentFileInfo($fileInfo);
-        return \_PhpScopercc9aec205203\Nette\Utils\Strings::replace($fileInfo->getContents(), $snippetRegex, function ($match) use($kind) : string {
-            if (\_PhpScopercc9aec205203\Nette\Utils\Strings::contains($match[self::CONTENT], '-----')) {
+        return Strings::replace($fileInfo->getContents(), $snippetRegex, function ($match) use($kind) : string {
+            if (Strings::contains($match[self::CONTENT], '-----')) {
                 // do nothing
                 return $match[self::OPENING] . $match[self::CONTENT] . $match[self::CLOSING];
             }
@@ -96,17 +96,17 @@ final class SnippetFormatter
     {
         $content = $this->isPhp73OrAbove ? $content : \trim($content);
         $temporaryFilePath = $this->createTemporaryFilePath($content);
-        if (!\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($this->isPhp73OrAbove ? \trim($content) : $content, '<?php')) {
+        if (!Strings::startsWith($this->isPhp73OrAbove ? \trim($content) : $content, '<?php')) {
             $content = '<?php' . \PHP_EOL . $content;
         }
         $fileContent = $this->isPhp73OrAbove ? \ltrim($content, \PHP_EOL) : $content;
         $this->smartFileSystem->dumpFile($temporaryFilePath, $fileContent);
-        $temporaryFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo($temporaryFilePath);
+        $temporaryFileInfo = new SmartFileInfo($temporaryFilePath);
         try {
             $this->fixerFileProcessor->processFile($temporaryFileInfo);
             $this->sniffFileProcessor->processFile($temporaryFileInfo);
             $fileContent = $temporaryFileInfo->getContents();
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             // Skipped parsed error when processing php temporaryFile
         } finally {
             // remove temporary temporaryFile
@@ -118,14 +118,14 @@ final class SnippetFormatter
             $fileContent = $this->removeOpeningTagAndStrictTypes($fileContent);
             return \ltrim($fileContent);
         }
-        return \_PhpScopercc9aec205203\Nette\Utils\Strings::replace($fileContent, self::OPENING_TAG_HERENOWDOC_REGEX, '$1');
+        return Strings::replace($fileContent, self::OPENING_TAG_HERENOWDOC_REGEX, '$1');
     }
     /**
      * It does not have any added value and only clutters the output
      */
     private function removeOpeningTagAndStrictTypes(string $content) : string
     {
-        $content = \_PhpScopercc9aec205203\Nette\Utils\Strings::replace($content, self::DECLARE_REGEX, '');
+        $content = Strings::replace($content, self::DECLARE_REGEX, '');
         return $this->removeOpeningTag($content);
     }
     private function createTemporaryFilePath(string $content) : string
@@ -136,6 +136,6 @@ final class SnippetFormatter
     }
     private function removeOpeningTag(string $fileContent) : string
     {
-        return \_PhpScopercc9aec205203\Nette\Utils\Strings::replace($fileContent, self::OPENING_TAG_REGEX, '$1');
+        return Strings::replace($fileContent, self::OPENING_TAG_REGEX, '$1');
     }
 }

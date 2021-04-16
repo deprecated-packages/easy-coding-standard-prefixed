@@ -19,11 +19,11 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class StrictComparisonFixer extends \PhpCsFixer\AbstractFixer
+final class StrictComparisonFixer extends AbstractFixer
 {
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Comparisons should be strict.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = 1== \$b;\n")], null, 'Changing comparisons to strict might change code behavior.');
+        return new FixerDefinition('Comparisons should be strict.', [new CodeSample("<?php\n\$a = 1== \$b;\n")], null, 'Changing comparisons to strict might change code behavior.');
     }
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ final class StrictComparisonFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_IS_EQUAL, \T_IS_NOT_EQUAL]);
     }
@@ -51,13 +51,13 @@ final class StrictComparisonFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         static $map = [\T_IS_EQUAL => ['id' => \T_IS_IDENTICAL, 'content' => '==='], \T_IS_NOT_EQUAL => ['id' => \T_IS_NOT_IDENTICAL, 'content' => '!==']];
         foreach ($tokens as $index => $token) {
             $tokenId = $token->getId();
             if (isset($map[$tokenId])) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$map[$tokenId]['id'], $map[$tokenId]['content']]);
+                $tokens[$index] = new Token([$map[$tokenId]['id'], $map[$tokenId]['content']]);
             }
         }
     }

@@ -29,13 +29,13 @@ final class TypeShortNameResolver
      *
      * @return string
      */
-    public function resolve(\PhpCsFixer\Tokenizer\Tokens $tokens, $typeName)
+    public function resolve(Tokens $tokens, $typeName)
     {
         // First match explicit imports:
         $useMap = $this->getUseMapFromTokens($tokens);
         foreach ($useMap as $shortName => $fullName) {
             $regex = '/^\\\\?' . \preg_quote($fullName, '/') . '$/';
-            if (\PhpCsFixer\Preg::match($regex, $typeName)) {
+            if (Preg::match($regex, $typeName)) {
                 return $shortName;
             }
         }
@@ -46,7 +46,7 @@ final class TypeShortNameResolver
             foreach ($namespaces as $fullName) {
                 $matches = [];
                 $regex = '/^\\\\?' . \preg_quote($fullName, '/') . '\\\\(?P<className>.+)$/';
-                if (\PhpCsFixer\Preg::match($regex, $typeName, $matches)) {
+                if (Preg::match($regex, $typeName, $matches)) {
                     return $matches['className'];
                 }
             }
@@ -55,7 +55,7 @@ final class TypeShortNameResolver
         foreach ($useMap as $shortName => $fullName) {
             $matches = [];
             $regex = '/^\\\\?' . \preg_quote($fullName, '/') . '\\\\(?P<className>.+)$/';
-            if (\PhpCsFixer\Preg::match($regex, $typeName, $matches)) {
+            if (Preg::match($regex, $typeName, $matches)) {
                 return $shortName . '\\' . $matches['className'];
             }
         }
@@ -64,19 +64,19 @@ final class TypeShortNameResolver
     /**
      * @return array<string, string> A list of all FQN namespaces in the file with the short name as key
      */
-    private function getNamespacesFromTokens(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function getNamespacesFromTokens(Tokens $tokens)
     {
-        return \array_map(static function (\PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis $info) {
+        return \array_map(static function (NamespaceAnalysis $info) {
             return $info->getFullName();
-        }, (new \PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer())->getDeclarations($tokens));
+        }, (new NamespacesAnalyzer())->getDeclarations($tokens));
     }
     /**
      * @return array<string, string> A list of all FQN use statements in the file with the short name as key
      */
-    private function getUseMapFromTokens(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function getUseMapFromTokens(Tokens $tokens)
     {
         $map = [];
-        foreach ((new \PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens) as $useDeclaration) {
+        foreach ((new NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens) as $useDeclaration) {
             $map[$useDeclaration->getShortName()] = $useDeclaration->getFullName();
         }
         return $map;

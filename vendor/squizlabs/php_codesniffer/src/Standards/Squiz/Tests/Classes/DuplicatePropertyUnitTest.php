@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\Classes;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class DuplicatePropertyUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class DuplicatePropertyUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

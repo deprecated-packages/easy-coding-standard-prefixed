@@ -24,20 +24,20 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Graham Campbell <graham@alt-three.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class GeneralPhpdocAnnotationRemoveFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class GeneralPhpdocAnnotationRemoveFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Configured annotations should be omitted from PHPDoc.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Configured annotations should be omitted from PHPDoc.', [new CodeSample('<?php
 /**
  * @internal
  * @author John Doe
  */
 function foo() {}
-', ['annotations' => ['author']]), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+', ['annotations' => ['author']]), new CodeSample('<?php
 /**
  * @author John Doe
  * @package ACME API
@@ -60,14 +60,14 @@ function foo() {}
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         if (!\count($this->configuration['annotations'])) {
             return;
@@ -76,7 +76,7 @@ function foo() {}
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
                 continue;
             }
-            $doc = new \PhpCsFixer\DocBlock\DocBlock($token->getContent());
+            $doc = new DocBlock($token->getContent());
             $annotations = $doc->getAnnotationsOfType($this->configuration['annotations']);
             // nothing to do if there are no annotations
             if (empty($annotations)) {
@@ -88,7 +88,7 @@ function foo() {}
             if ('' === $doc->getContent()) {
                 $tokens->clearTokenAndMergeSurroundingWhitespace($index);
             } else {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $doc->getContent()]);
+                $tokens[$index] = new Token([\T_DOC_COMMENT, $doc->getContent()]);
             }
         }
     }
@@ -97,6 +97,6 @@ function foo() {}
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('annotations', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('annotations', 'List of annotations to remove, e.g. `["author"]`.'))->setAllowedTypes(['array'])->setDefault([])->getOption()], $this->getName());
+        return new FixerConfigurationResolverRootless('annotations', [(new FixerOptionBuilder('annotations', 'List of annotations to remove, e.g. `["author"]`.'))->setAllowedTypes(['array'])->setDefault([])->getOption()], $this->getName());
     }
 }

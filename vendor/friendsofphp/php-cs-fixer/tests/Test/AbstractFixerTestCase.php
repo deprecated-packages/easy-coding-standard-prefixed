@@ -33,13 +33,13 @@ use PhpCsFixer\Tests\Test\Assert\AssertTokensTrait;
 use PhpCsFixer\Tests\TestCase;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScopercc9aec205203\Prophecy\Argument;
+use _PhpScopereb9508917a55\Prophecy\Argument;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @internal
  */
-abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
+abstract class AbstractFixerTestCase extends TestCase
 {
     use AssertTokensTrait;
     use IsIdenticalConstraint;
@@ -62,7 +62,7 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
         $this->fixer = $this->createFixer();
         // @todo remove at 3.0 together with env var itself
         if (\getenv('PHP_CS_FIXER_TEST_USE_LEGACY_TOKENIZER')) {
-            \PhpCsFixer\Tokenizer\Tokens::setLegacyMode(\true);
+            Tokens::setLegacyMode(\true);
         }
     }
     protected function doTearDown()
@@ -71,7 +71,7 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
         $this->linter = null;
         $this->fixer = null;
         // @todo remove at 3.0
-        \PhpCsFixer\Tokenizer\Tokens::setLegacyMode(\false);
+        Tokens::setLegacyMode(\false);
     }
     public final function testIsRisky()
     {
@@ -81,31 +81,31 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
         } else {
             static::assertNull($this->fixer->getDefinition()->getRiskyDescription(), \sprintf('[%s] Fixer is not risky so no description of it expected.', $this->fixer->getName()));
         }
-        if ($this->fixer instanceof \PhpCsFixer\AbstractProxyFixer) {
+        if ($this->fixer instanceof AbstractProxyFixer) {
             return;
         }
         $reflection = new \ReflectionMethod($this->fixer, 'isRisky');
         // If fixer is not risky then the method `isRisky` from `AbstractFixer` must be used
-        static::assertSame(!$this->fixer->isRisky(), \PhpCsFixer\AbstractFixer::class === $reflection->getDeclaringClass()->getName());
+        static::assertSame(!$this->fixer->isRisky(), AbstractFixer::class === $reflection->getDeclaringClass()->getName());
     }
     public final function testFixerDefinitions()
     {
-        static::assertInstanceOf(\PhpCsFixer\Fixer\DefinedFixerInterface::class, $this->fixer);
+        static::assertInstanceOf(DefinedFixerInterface::class, $this->fixer);
         $fixerName = $this->fixer->getName();
         $definition = $this->fixer->getDefinition();
-        $fixerIsConfigurable = $this->fixer instanceof \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+        $fixerIsConfigurable = $this->fixer instanceof ConfigurationDefinitionFixerInterface;
         self::assertValidDescription($fixerName, 'summary', $definition->getSummary());
         $samples = $definition->getCodeSamples();
         static::assertNotEmpty($samples, \sprintf('[%s] Code samples are required.', $fixerName));
         $configSamplesProvided = [];
-        $dummyFileInfo = new \PhpCsFixer\StdinFileInfo();
+        $dummyFileInfo = new StdinFileInfo();
         foreach ($samples as $sampleCounter => $sample) {
-            static::assertInstanceOf(\PhpCsFixer\FixerDefinition\CodeSampleInterface::class, $sample, \sprintf('[%s] Sample #%d', $fixerName, $sampleCounter));
+            static::assertInstanceOf(CodeSampleInterface::class, $sample, \sprintf('[%s] Sample #%d', $fixerName, $sampleCounter));
             static::assertIsInt($sampleCounter);
             $code = $sample->getCode();
             static::assertIsString($code, \sprintf('[%s] Sample #%d', $fixerName, $sampleCounter));
             static::assertNotEmpty($code, \sprintf('[%s] Sample #%d', $fixerName, $sampleCounter));
-            if (!$this->fixer instanceof \PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer) {
+            if (!$this->fixer instanceof SingleBlankLineAtEofFixer) {
                 static::assertSame("\n", \substr($code, -1), \sprintf('[%s] Sample #%d must end with linebreak', $fixerName, $sampleCounter));
             }
             $config = $sample->getConfiguration();
@@ -114,21 +114,21 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
                 static::assertIsArray($config, \sprintf('[%s] Sample #%d configuration must be an array or null.', $fixerName, $sampleCounter));
                 $configSamplesProvided[$sampleCounter] = $config;
             } elseif ($fixerIsConfigurable) {
-                if (!$sample instanceof \PhpCsFixer\FixerDefinition\VersionSpecificCodeSampleInterface) {
+                if (!$sample instanceof VersionSpecificCodeSampleInterface) {
                     static::assertArrayNotHasKey('default', $configSamplesProvided, \sprintf('[%s] Multiple non-versioned samples with default configuration.', $fixerName));
                 }
                 $configSamplesProvided['default'] = \true;
             }
-            if ($sample instanceof \PhpCsFixer\FixerDefinition\VersionSpecificCodeSampleInterface && !$sample->isSuitableFor(\PHP_VERSION_ID)) {
+            if ($sample instanceof VersionSpecificCodeSampleInterface && !$sample->isSuitableFor(\PHP_VERSION_ID)) {
                 continue;
             }
             if ($fixerIsConfigurable) {
                 // always re-configure as the fixer might have been configured with diff. configuration form previous sample
                 $this->fixer->configure(null === $config ? [] : $config);
             }
-            \PhpCsFixer\Tokenizer\Tokens::clearCache();
-            $tokens = \PhpCsFixer\Tokenizer\Tokens::fromCode($code);
-            $this->fixer->fix($sample instanceof \PhpCsFixer\FixerDefinition\FileSpecificCodeSampleInterface ? $sample->getSplFileInfo() : $dummyFileInfo, $tokens);
+            Tokens::clearCache();
+            $tokens = Tokens::fromCode($code);
+            $this->fixer->fix($sample instanceof FileSpecificCodeSampleInterface ? $sample->getSplFileInfo() : $dummyFileInfo, $tokens);
             static::assertTrue($tokens->isChanged(), \sprintf('[%s] Sample #%d is not changed during fixing.', $fixerName, $sampleCounter));
             $duplicatedCodeSample = \array_search($sample, \array_slice($samples, 0, $sampleCounter), \false);
             static::assertFalse($duplicatedCodeSample, \sprintf('[%s] Sample #%d duplicates #%d.', $fixerName, $sampleCounter, $duplicatedCodeSample));
@@ -177,14 +177,14 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
     }
     public final function testFixersAreDefined()
     {
-        static::assertInstanceOf(\PhpCsFixer\Fixer\DefinedFixerInterface::class, $this->fixer);
+        static::assertInstanceOf(DefinedFixerInterface::class, $this->fixer);
     }
     public final function testDeprecatedFixersHaveCorrectSummary()
     {
         $reflection = new \ReflectionClass($this->fixer);
         $comment = $reflection->getDocComment();
         static::assertStringNotContainsString('DEPRECATED', $this->fixer->getDefinition()->getSummary(), 'Fixer cannot contain word "DEPRECATED" in summary');
-        if ($this->fixer instanceof \PhpCsFixer\Fixer\DeprecatedFixerInterface) {
+        if ($this->fixer instanceof DeprecatedFixerInterface) {
             static::assertStringContainsString('@deprecated', $comment);
         } elseif (\is_string($comment)) {
             static::assertStringNotContainsString('@deprecated', $comment);
@@ -196,7 +196,7 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
     public function testFixerUseInsertSlicesWhenOnlyInsertionsArePerformed()
     {
         $reflection = new \ReflectionClass($this->fixer);
-        $tokens = \PhpCsFixer\Tokenizer\Tokens::fromCode(\file_get_contents($reflection->getFileName()));
+        $tokens = Tokens::fromCode(\file_get_contents($reflection->getFileName()));
         $sequences = $this->findAllTokenSequences($tokens, [[\T_VARIABLE, '$tokens'], [\T_OBJECT_OPERATOR], [\T_STRING]]);
         $usedMethods = \array_unique(\array_map(function (array $sequence) {
             $last = \end($sequence);
@@ -208,7 +208,7 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
             return;
         }
         $usedMethods = \array_filter($usedMethods, function ($method) {
-            return 0 === \PhpCsFixer\Preg::match('/^(count|find|generate|get|is|rewind)/', $method);
+            return 0 === Preg::match('/^(count|find|generate|get|is|rewind)/', $method);
         });
         $allowedMethods = ['insertAt'];
         $nonAllowedMethods = \array_diff($usedMethods, $allowedMethods);
@@ -258,15 +258,15 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
     }
     public final function testFixerConfigurationDefinitions()
     {
-        if (!$this->fixer instanceof \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface) {
+        if (!$this->fixer instanceof ConfigurationDefinitionFixerInterface) {
             $this->addToAssertionCount(1);
             // not applied to the fixer without configuration
             return;
         }
         $configurationDefinition = $this->fixer->getConfigurationDefinition();
-        static::assertInstanceOf(\PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface::class, $configurationDefinition);
+        static::assertInstanceOf(FixerConfigurationResolverInterface::class, $configurationDefinition);
         foreach ($configurationDefinition->getOptions() as $option) {
-            static::assertInstanceOf(\PhpCsFixer\FixerConfiguration\FixerOptionInterface::class, $option);
+            static::assertInstanceOf(FixerOptionInterface::class, $option);
             static::assertNotEmpty($option->getDescription());
             static::assertSame(!isset($this->allowedRequiredOptions[$this->fixer->getName()][$option->getName()]), $option->hasDefault(), \sprintf($option->hasDefault() ? 'Option `%s` of fixer `%s` is wrongly listed in `$allowedRequiredOptions` structure, as it is not required. If you just changed that option to not be required anymore, please adjust mentioned structure.' : 'Option `%s` of fixer `%s` shall not be required. If you want to introduce new required option please adjust `$allowedRequiredOptions` structure.', $option->getName(), $this->fixer->getName()));
             static::assertStringNotContainsString('DEPRECATED', $option->getDescription(), 'Option description cannot contain word "DEPRECATED"');
@@ -274,15 +274,15 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
     }
     public final function testFixersReturnTypes()
     {
-        $tokens = \PhpCsFixer\Tokenizer\Tokens::fromCode('<?php ');
-        $emptyTokens = new \PhpCsFixer\Tokenizer\Tokens();
+        $tokens = Tokens::fromCode('<?php ');
+        $emptyTokens = new Tokens();
         static::assertIsInt($this->fixer->getPriority(), \sprintf('Return type for ::getPriority of "%s" is invalid.', $this->fixer->getName()));
         static::assertIsBool($this->fixer->supports(new \SplFileInfo(__FILE__)), \sprintf('Return type for ::supports of "%s" is invalid.', $this->fixer->getName()));
         static::assertIsBool($this->fixer->isCandidate($emptyTokens), \sprintf('Return type for ::isCandidate with empty tokens of "%s" is invalid.', $this->fixer->getName()));
         static::assertFalse($emptyTokens->isChanged());
         static::assertIsBool($this->fixer->isCandidate($tokens), \sprintf('Return type for ::isCandidate of "%s" is invalid.', $this->fixer->getName()));
         static::assertFalse($tokens->isChanged());
-        if ($this->fixer instanceof \PhpCsFixer\Fixer\Comment\HeaderCommentFixer) {
+        if ($this->fixer instanceof HeaderCommentFixer) {
             $this->fixer->configure(['header' => 'a']);
         }
         static::assertNull($this->fixer->fix(new \SplFileInfo(__FILE__), $emptyTokens), \sprintf('Return type for ::fix with empty tokens of "%s" is invalid.', $this->fixer->getName()));
@@ -333,8 +333,8 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
         $fileIsSupported = $this->fixer->supports($file);
         if (null !== $input) {
             static::assertNull($this->lintSource($input));
-            \PhpCsFixer\Tokenizer\Tokens::clearCache();
-            $tokens = \PhpCsFixer\Tokenizer\Tokens::fromCode($input);
+            Tokens::clearCache();
+            $tokens = Tokens::fromCode($input);
             if ($fileIsSupported) {
                 static::assertTrue($this->fixer->isCandidate($tokens), 'Fixer must be a candidate for input code.');
                 static::assertFalse($tokens->isChanged(), 'Fixer must not touch Tokens on candidate check.');
@@ -344,16 +344,16 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
             static::assertThat($tokens->generateCode(), self::createIsIdenticalStringConstraint($expected), 'Code build on input code must match expected code.');
             static::assertTrue($tokens->isChanged(), 'Tokens collection built on input code must be marked as changed after fixing.');
             $tokens->clearEmptyTokens();
-            static::assertSame(\count($tokens), \count(\array_unique(\array_map(static function (\PhpCsFixer\Tokenizer\Token $token) {
+            static::assertSame(\count($tokens), \count(\array_unique(\array_map(static function (Token $token) {
                 return \spl_object_hash($token);
             }, $tokens->toArray()))), 'Token items inside Tokens collection must be unique.');
-            \PhpCsFixer\Tokenizer\Tokens::clearCache();
-            $expectedTokens = \PhpCsFixer\Tokenizer\Tokens::fromCode($expected);
+            Tokens::clearCache();
+            $expectedTokens = Tokens::fromCode($expected);
             static::assertTokens($expectedTokens, $tokens);
         }
         static::assertNull($this->lintSource($expected));
-        \PhpCsFixer\Tokenizer\Tokens::clearCache();
-        $tokens = \PhpCsFixer\Tokenizer\Tokens::fromCode($expected);
+        Tokens::clearCache();
+        $tokens = Tokens::fromCode($expected);
         if ($fileIsSupported) {
             $fixResult = $this->fixer->fix($file, $tokens);
             static::assertNull($fixResult, '->fix method must return null.');
@@ -384,10 +384,10 @@ abstract class AbstractFixerTestCase extends \PhpCsFixer\Tests\TestCase
         if (null === $linter) {
             if (\getenv('SKIP_LINT_TEST_CASES')) {
                 $linterProphecy = $this->prophesize(\PhpCsFixer\Linter\LinterInterface::class);
-                $linterProphecy->lintSource(\_PhpScopercc9aec205203\Prophecy\Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
+                $linterProphecy->lintSource(Argument::type('string'))->willReturn($this->prophesize(\PhpCsFixer\Linter\LintingResultInterface::class)->reveal());
                 $linter = $linterProphecy->reveal();
             } else {
-                $linter = new \PhpCsFixer\Linter\CachingLinter(\getenv('FAST_LINT_TEST_CASES') ? new \PhpCsFixer\Linter\Linter() : new \PhpCsFixer\Linter\ProcessLinter());
+                $linter = new CachingLinter(\getenv('FAST_LINT_TEST_CASES') ? new Linter() : new ProcessLinter());
             }
         }
         return $linter;

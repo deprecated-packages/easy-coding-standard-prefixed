@@ -27,7 +27,7 @@ class Code implements \PHP_CodeSniffer\Reports\Report
      *
      * @return bool
      */
-    public function generateFileReport($report, \PHP_CodeSniffer\Files\File $phpcsFile, $showSources = \false, $width = 80)
+    public function generateFileReport($report, File $phpcsFile, $showSources = \false, $width = 80)
     {
         if ($report['errors'] === 0 && $report['warnings'] === 0) {
             // Nothing to print.
@@ -198,7 +198,7 @@ class Code implements \PHP_CodeSniffer\Reports\Report
                         $phpcsFile->tokenizer->replaceTabsInToken($token, $tab, "\0");
                         $tokenContent = $token['content'];
                     }
-                    $tokenContent = \PHP_CodeSniffer\Util\Common::prepareForOutput($tokenContent, ["\r", "\n", "\t"]);
+                    $tokenContent = Util\Common::prepareForOutput($tokenContent, ["\r", "\n", "\t"]);
                     $tokenContent = \str_replace("\0", ' ', $tokenContent);
                     $underline = \false;
                     if ($snippetLine === $line && isset($lineErrors[$tokens[$i]['column']]) === \true) {
@@ -289,7 +289,7 @@ class Code implements \PHP_CodeSniffer\Reports\Report
         }
         echo $cachedData;
         if ($toScreen === \true && $interactive === \false) {
-            \PHP_CodeSniffer\Util\Timing::printRunTime();
+            Util\Timing::printRunTime();
         }
     }
     //end generate()

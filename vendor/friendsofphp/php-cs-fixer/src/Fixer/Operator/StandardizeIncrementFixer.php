@@ -20,18 +20,18 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author ntzm
  */
-final class StandardizeIncrementFixer extends \PhpCsFixer\Fixer\AbstractIncrementOperatorFixer
+final class StandardizeIncrementFixer extends AbstractIncrementOperatorFixer
 {
     /**
      * @internal
      */
-    const EXPRESSION_END_TOKENS = [';', ')', ']', ',', ':', [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_PROP_BRACE_CLOSE], [\PhpCsFixer\Tokenizer\CT::T_DYNAMIC_VAR_BRACE_CLOSE], [\T_CLOSE_TAG]];
+    const EXPRESSION_END_TOKENS = [';', ')', ']', ',', ':', [CT::T_DYNAMIC_PROP_BRACE_CLOSE], [CT::T_DYNAMIC_VAR_BRACE_CLOSE], [\T_CLOSE_TAG]];
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Increment and decrement operators should be used if possible.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$i += 1;\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$i -= 1;\n")]);
+        return new FixerDefinition('Increment and decrement operators should be used if possible.', [new CodeSample("<?php\n\$i += 1;\n"), new CodeSample("<?php\n\$i -= 1;\n")]);
     }
     /**
      * {@inheritdoc}
@@ -45,14 +45,14 @@ final class StandardizeIncrementFixer extends \PhpCsFixer\Fixer\AbstractIncremen
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_PLUS_EQUAL, \T_MINUS_EQUAL]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
             $expressionEnd = $tokens[$index];
@@ -71,7 +71,7 @@ final class StandardizeIncrementFixer extends \PhpCsFixer\Fixer\AbstractIncremen
             }
             $startIndex = $this->findStart($tokens, $operatorIndex);
             $this->clearRangeLeaveComments($tokens, $tokens->getPrevMeaningfulToken($operatorIndex) + 1, $numberIndex);
-            $tokens->insertAt($startIndex, new \PhpCsFixer\Tokenizer\Token($operator->isGivenKind(\T_PLUS_EQUAL) ? [\T_INC, '++'] : [\T_DEC, '--']));
+            $tokens->insertAt($startIndex, new Token($operator->isGivenKind(\T_PLUS_EQUAL) ? [\T_INC, '++'] : [\T_DEC, '--']));
         }
     }
     /**
@@ -80,7 +80,7 @@ final class StandardizeIncrementFixer extends \PhpCsFixer\Fixer\AbstractIncremen
      * @param int $indexStart
      * @param int $indexEnd
      */
-    private function clearRangeLeaveComments(\PhpCsFixer\Tokenizer\Tokens $tokens, $indexStart, $indexEnd)
+    private function clearRangeLeaveComments(Tokens $tokens, $indexStart, $indexEnd)
     {
         for ($i = $indexStart; $i <= $indexEnd; ++$i) {
             $token = $tokens[$i];

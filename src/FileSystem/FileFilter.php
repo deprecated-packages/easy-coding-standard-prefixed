@@ -11,7 +11,7 @@ final class FileFilter
      * @var ChangedFilesDetector
      */
     private $changedFilesDetector;
-    public function __construct(\Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector $changedFilesDetector)
+    public function __construct(ChangedFilesDetector $changedFilesDetector)
     {
         $this->changedFilesDetector = $changedFilesDetector;
     }
@@ -21,7 +21,7 @@ final class FileFilter
      */
     public function filterOnlyChangedFiles(array $fileInfos) : array
     {
-        return \array_filter($fileInfos, function (\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : bool {
+        return \array_filter($fileInfos, function (SmartFileInfo $smartFileInfo) : bool {
             return $this->changedFilesDetector->hasFileInfoChanged($smartFileInfo);
         });
     }

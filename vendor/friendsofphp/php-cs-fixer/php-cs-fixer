@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 /*
  * This file is part of PHP CS Fixer.
@@ -81,13 +81,13 @@ if ($require) {
     unset($possibleFiles, $possibleFile, $file);
 }
 unset($require);
-use _PhpScopercc9aec205203\Composer\XdebugHandler\XdebugHandler;
+use _PhpScopereb9508917a55\Composer\XdebugHandler\XdebugHandler;
 use PhpCsFixer\Console\Application;
 // Restart if xdebug is loaded, unless the environment variable PHP_CS_FIXER_ALLOW_XDEBUG is set.
-$xdebug = new \_PhpScopercc9aec205203\Composer\XdebugHandler\XdebugHandler('PHP_CS_FIXER', '--ansi');
+$xdebug = new XdebugHandler('PHP_CS_FIXER', '--ansi');
 $xdebug->check();
 unset($xdebug);
-$application = new \PhpCsFixer\Console\Application();
+$application = new Application();
 $application->run();
 __halt_compiler();
 

@@ -20,14 +20,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @deprecated in 2.8, proxy to IncrementStyleFixer
  */
-final class PreIncrementFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
+final class PreIncrementFixer extends AbstractProxyFixer implements DeprecatedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Pre incrementation/decrementation should be used if possible.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a++;\n\$b--;\n")]);
+        return new FixerDefinition('Pre incrementation/decrementation should be used if possible.', [new CodeSample("<?php\n\$a++;\n\$b--;\n")]);
     }
     /**
      * {@inheritdoc}

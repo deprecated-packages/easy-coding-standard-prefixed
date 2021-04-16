@@ -27,28 +27,28 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpdocAddMissingParamAnnotationFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class PhpdocAddMissingParamAnnotationFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface, WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('PHPDoc should contain `@param` for all params.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('PHPDoc should contain `@param` for all params.', [new CodeSample('<?php
 /**
  * @param int $bar
  *
  * @return void
  */
 function f9(string $foo, $bar, $baz) {}
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 /**
  * @param int $bar
  *
  * @return void
  */
 function f9(string $foo, $bar, $baz) {}
-', ['only_untyped' => \true]), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+', ['only_untyped' => \true]), new CodeSample('<?php
 /**
  * @param int $bar
  *
@@ -70,16 +70,16 @@ function f9(string $foo, $bar, $baz) {}
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
+        $argumentsAnalyzer = new ArgumentsAnalyzer();
         for ($index = 0, $limit = $tokens->count(); $index < $limit; ++$index) {
             $token = $tokens[$index];
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -105,7 +105,7 @@ function f9(string $foo, $bar, $baz) {}
                 continue;
             }
             $openIndex = $tokens->getNextTokenOfKind($index, ['(']);
-            $index = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openIndex);
+            $index = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openIndex);
             $arguments = [];
             foreach ($argumentsAnalyzer->getArguments($tokens, $openIndex, $index) as $start => $end) {
                 $argumentInfo = $this->prepareArgumentInformation($tokens, $start, $end);
@@ -116,10 +116,10 @@ function f9(string $foo, $bar, $baz) {}
             if (!\count($arguments)) {
                 continue;
             }
-            $doc = new \PhpCsFixer\DocBlock\DocBlock($tokenContent);
+            $doc = new DocBlock($tokenContent);
             $lastParamLine = null;
             foreach ($doc->getAnnotationsOfType('param') as $annotation) {
-                $pregMatched = \PhpCsFixer\Preg::match('/^[^$]+(\\$\\w+).*$/s', $annotation->getContent(), $matches);
+                $pregMatched = Preg::match('/^[^$]+(\\$\\w+).*$/s', $annotation->getContent(), $matches);
                 if (1 === $pregMatched) {
                     unset($arguments[$matches[1]]);
                 }
@@ -130,7 +130,7 @@ function f9(string $foo, $bar, $baz) {}
             }
             $lines = $doc->getLines();
             $linesCount = \count($lines);
-            \PhpCsFixer\Preg::match('/^(\\s*).*$/', $lines[$linesCount - 1]->getContent(), $matches);
+            Preg::match('/^(\\s*).*$/', $lines[$linesCount - 1]->getContent(), $matches);
             $indent = $matches[1];
             $newLines = [];
             foreach ($arguments as $argument) {
@@ -138,10 +138,10 @@ function f9(string $foo, $bar, $baz) {}
                 if ('?' !== $type[0] && 'null' === \strtolower($argument['default'])) {
                     $type = 'null|' . $type;
                 }
-                $newLines[] = new \PhpCsFixer\DocBlock\Line(\sprintf('%s* @param %s %s%s', $indent, $type, $argument['name'], $this->whitespacesConfig->getLineEnding()));
+                $newLines[] = new Line(\sprintf('%s* @param %s %s%s', $indent, $type, $argument['name'], $this->whitespacesConfig->getLineEnding()));
             }
             \array_splice($lines, $lastParamLine ? $lastParamLine + 1 : $linesCount - 1, 0, $newLines);
-            $tokens[$mainIndex] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, \implode('', $lines)]);
+            $tokens[$mainIndex] = new Token([\T_DOC_COMMENT, \implode('', $lines)]);
         }
     }
     /**
@@ -149,7 +149,7 @@ function f9(string $foo, $bar, $baz) {}
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('only_untyped', 'Whether to add missing `@param` annotations for untyped parameters only.'))->setDefault(\true)->setAllowedTypes(['bool'])->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('only_untyped', 'Whether to add missing `@param` annotations for untyped parameters only.'))->setDefault(\true)->setAllowedTypes(['bool'])->getOption()]);
     }
     /**
      * @param int $start
@@ -157,7 +157,7 @@ function f9(string $foo, $bar, $baz) {}
      *
      * @return array
      */
-    private function prepareArgumentInformation(\PhpCsFixer\Tokenizer\Tokens $tokens, $start, $end)
+    private function prepareArgumentInformation(Tokens $tokens, $start, $end)
     {
         $info = ['default' => '', 'name' => '', 'type' => ''];
         $sawName = \false;

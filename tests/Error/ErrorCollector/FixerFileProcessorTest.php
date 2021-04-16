@@ -8,7 +8,7 @@ use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SmartFileSystem\SmartFileInfo;
-final class FixerFileProcessorTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
+final class FixerFileProcessorTest extends AbstractKernelTestCase
 {
     /**
      * @var ErrorAndDiffCollector
@@ -20,9 +20,9 @@ final class FixerFileProcessorTest extends \Symplify\PackageBuilder\Testing\Abst
     private $fixerFileProcessor;
     protected function setUp() : void
     {
-        $this->bootKernelWithConfigs(\Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel::class, [__DIR__ . '/FixerRunnerSource/phpunit-fixer-config.php']);
-        $this->errorAndDiffCollector = $this->getService(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector::class);
-        $this->fixerFileProcessor = $this->getService(\Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor::class);
+        $this->bootKernelWithConfigs(EasyCodingStandardKernel::class, [__DIR__ . '/FixerRunnerSource/phpunit-fixer-config.php']);
+        $this->errorAndDiffCollector = $this->getService(ErrorAndDiffCollector::class);
+        $this->fixerFileProcessor = $this->getService(FixerFileProcessor::class);
     }
     public function test() : void
     {
@@ -32,7 +32,7 @@ final class FixerFileProcessorTest extends \Symplify\PackageBuilder\Testing\Abst
     }
     private function runFileProcessor() : void
     {
-        $fileInfo = new \Symplify\SmartFileSystem\SmartFileInfo(__DIR__ . '/ErrorCollectorSource/NotPsr2Class.php.inc');
+        $fileInfo = new SmartFileInfo(__DIR__ . '/ErrorCollectorSource/NotPsr2Class.php.inc');
         $this->fixerFileProcessor->processFile($fileInfo);
     }
 }

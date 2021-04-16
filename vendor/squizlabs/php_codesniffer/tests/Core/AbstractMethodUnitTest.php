@@ -12,8 +12,8 @@ namespace PHP_CodeSniffer\Tests\Core;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestCase;
-abstract class AbstractMethodUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestCase;
+abstract class AbstractMethodUnitTest extends TestCase
 {
     /**
      * The file extension of the test case file (without leading dot).
@@ -40,9 +40,9 @@ abstract class AbstractMethodUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Fr
      */
     public static function setUpBeforeClass()
     {
-        $config = new \PHP_CodeSniffer\Config();
+        $config = new Config();
         $config->standards = ['PSR1'];
-        $ruleset = new \PHP_CodeSniffer\Ruleset($config);
+        $ruleset = new Ruleset($config);
         // Default to a file with the same name as the test class. Extension is property based.
         $relativeCN = \str_replace(__NAMESPACE__, '', \get_called_class());
         $relativePath = \str_replace('\\', \DIRECTORY_SEPARATOR, $relativeCN);
@@ -50,7 +50,7 @@ abstract class AbstractMethodUnitTest extends \_PhpScopercc9aec205203\PHPUnit\Fr
         // Make sure the file gets parsed correctly based on the file type.
         $contents = 'phpcs_input_file: ' . $pathToTestFile . \PHP_EOL;
         $contents .= \file_get_contents($pathToTestFile);
-        self::$phpcsFile = new \PHP_CodeSniffer\Files\DummyFile($contents, $ruleset, $config);
+        self::$phpcsFile = new DummyFile($contents, $ruleset, $config);
         self::$phpcsFile->process();
     }
     //end setUpBeforeClass()

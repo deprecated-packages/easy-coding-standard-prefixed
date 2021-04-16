@@ -7,7 +7,7 @@ use Symplify\EasyTesting\Finder\FixtureFinder;
 use Symplify\EasyTesting\HttpKernel\EasyTestingKernel;
 use Symplify\EasyTesting\MissplacedSkipPrefixResolver;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
-final class MissingSkipPrefixResolverTest extends \Symplify\PackageBuilder\Testing\AbstractKernelTestCase
+final class MissingSkipPrefixResolverTest extends AbstractKernelTestCase
 {
     /**
      * @var MissplacedSkipPrefixResolver
@@ -19,9 +19,9 @@ final class MissingSkipPrefixResolverTest extends \Symplify\PackageBuilder\Testi
     private $fixtureFinder;
     protected function setUp() : void
     {
-        $this->bootKernel(\Symplify\EasyTesting\HttpKernel\EasyTestingKernel::class);
-        $this->missplacedSkipPrefixResolver = $this->getService(\Symplify\EasyTesting\MissplacedSkipPrefixResolver::class);
-        $this->fixtureFinder = $this->getService(\Symplify\EasyTesting\Finder\FixtureFinder::class);
+        $this->bootKernel(EasyTestingKernel::class);
+        $this->missplacedSkipPrefixResolver = $this->getService(MissplacedSkipPrefixResolver::class);
+        $this->fixtureFinder = $this->getService(FixtureFinder::class);
     }
     public function test() : void
     {

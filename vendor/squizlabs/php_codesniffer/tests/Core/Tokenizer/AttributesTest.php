@@ -11,7 +11,7 @@ namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
 use PHP_CodeSniffer\Util\Tokens;
-class AttributesTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class AttributesTest extends AbstractMethodUnitTest
 {
     /**
      * Test that attributes are parsed correctly.

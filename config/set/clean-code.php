@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ClassNotation\ProtectedToPrivateFixer;
@@ -10,16 +10,16 @@ use PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer;
 use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
 use PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer;
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer;
-return static function (\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
-    $services->set(\Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer::class)->call('configure', [['syntax' => 'short']]);
-    $services->set(\PhpCsFixer\Fixer\Import\NoUnusedImportsFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Import\OrderedImportsFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Semicolon\NoEmptyStatementFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\ProtectedToPrivateFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer::class);
+    $services->set(ParamReturnAndVarTagMalformsFixer::class);
+    $services->set(ArraySyntaxFixer::class)->call('configure', [['syntax' => 'short']]);
+    $services->set(NoUnusedImportsFixer::class);
+    $services->set(OrderedImportsFixer::class);
+    $services->set(NoEmptyStatementFixer::class);
+    $services->set(ProtectedToPrivateFixer::class);
+    $services->set(NoUnneededControlParenthesesFixer::class);
+    $services->set(NoUnneededCurlyBracesFixer::class);
 };

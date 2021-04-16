@@ -24,7 +24,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Jan Gantzert <jan@familie-gantzert.de>
  */
-final class PhpdocToParamTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDeclarationFixer
+final class PhpdocToParamTypeFixer extends AbstractPhpdocToTypeDeclarationFixer
 {
     /** @internal */
     const CLASS_REGEX = '/^\\\\?[a-zA-Z_\\x7f-\\xff](?:\\\\?[a-zA-Z0-9_\\x7f-\\xff]+)*(?<array>\\[\\])*$/';
@@ -43,22 +43,22 @@ final class PhpdocToParamTypeFixer extends \PhpCsFixer\AbstractPhpdocToTypeDecla
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('EXPERIMENTAL: Takes `@param` annotations of non-mixed types and adjusts accordingly the function signature. Requires PHP >= 7.0.', [new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+        return new FixerDefinition('EXPERIMENTAL: Takes `@param` annotations of non-mixed types and adjusts accordingly the function signature. Requires PHP >= 7.0.', [new VersionSpecificCodeSample('<?php
 
 /** @param string $bar */
 function my_foo($bar)
 {}
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70000)), new \PhpCsFixer\FixerDefinition\VersionSpecificCodeSample('<?php
+', new VersionSpecification(70000)), new VersionSpecificCodeSample('<?php
 
 /** @param string|null $bar */
 function my_foo($bar)
 {}
-', new \PhpCsFixer\FixerDefinition\VersionSpecification(70100))], null, 'This rule is EXPERIMENTAL and [1] is not covered with backward compatibility promise. [2] `@param` annotation is mandatory for the fixer to make changes, signatures of methods without it (no docblock, inheritdocs) will not be fixed. [3] Manual actions are required if inherited signatures are not properly documented.');
+', new VersionSpecification(70100))], null, 'This rule is EXPERIMENTAL and [1] is not covered with backward compatibility promise. [2] `@param` annotation is mandatory for the fixer to make changes, signatures of methods without it (no docblock, inheritdocs) will not be fixed. [3] Manual actions are required if inherited signatures are not properly documented.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return \PHP_VERSION_ID >= self::MINIMUM_PHP_VERSION && $tokens->isTokenKindFound(\T_FUNCTION);
     }
@@ -82,7 +82,7 @@ function my_foo($bar)
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = $tokens->count() - 1; 0 < $index; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_FUNCTION)) {
@@ -113,7 +113,7 @@ function my_foo($bar)
                 $hasObject = \false;
                 $minimumTokenPhpVersion = self::MINIMUM_PHP_VERSION;
                 foreach ($types as $key => $type) {
-                    if (1 !== \PhpCsFixer\Preg::match(self::CLASS_REGEX, $type, $matches)) {
+                    if (1 !== Preg::match(self::CLASS_REGEX, $type, $matches)) {
                         continue;
                     }
                     if (isset($matches['array'])) {
@@ -198,7 +198,7 @@ function my_foo($bar)
      *
      * @return Annotation[]
      */
-    private function findParamAnnotations(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function findParamAnnotations(Tokens $tokens, $index)
     {
         do {
             $index = $tokens->getPrevNonWhitespace($index);
@@ -206,7 +206,7 @@ function my_foo($bar)
         if (!$tokens[$index]->isGivenKind(\T_DOC_COMMENT)) {
             return [];
         }
-        $doc = new \PhpCsFixer\DocBlock\DocBlock($tokens[$index]->getContent());
+        $doc = new DocBlock($tokens[$index]->getContent());
         return $doc->getAnnotationsOfType('param');
     }
     /**
@@ -215,7 +215,7 @@ function my_foo($bar)
      *
      * @return null|int
      */
-    private function findCorrectVariable(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, $paramTypeAnnotation)
+    private function findCorrectVariable(Tokens $tokens, $index, $paramTypeAnnotation)
     {
         $nextFunction = $tokens->getNextTokenOfKind($index, [[\T_FUNCTION]]);
         $variableIndex = $tokens->getNextTokenOfKind($index, [[\T_VARIABLE]]);
@@ -226,7 +226,7 @@ function my_foo($bar)
             return null;
         }
         $variableToken = $tokens[$variableIndex]->getContent();
-        \PhpCsFixer\Preg::match('/@param\\s*[^\\s!<]+\\s*([^\\s]+)/', $paramTypeAnnotation->getContent(), $paramVariable);
+        Preg::match('/@param\\s*[^\\s!<]+\\s*([^\\s]+)/', $paramTypeAnnotation->getContent(), $paramVariable);
         if (isset($paramVariable[1]) && $paramVariable[1] === $variableToken) {
             return $variableIndex;
         }
@@ -239,9 +239,9 @@ function my_foo($bar)
      *
      * @return bool
      */
-    private function hasParamTypeHint(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function hasParamTypeHint(Tokens $tokens, $index)
     {
-        return $tokens[$index]->isGivenKind([\T_STRING, \T_NS_SEPARATOR, \PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, \T_CALLABLE, \PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE]);
+        return $tokens[$index]->isGivenKind([\T_STRING, \T_NS_SEPARATOR, CT::T_ARRAY_TYPEHINT, \T_CALLABLE, CT::T_NULLABLE_TYPE]);
     }
     /**
      * @param string $paramType
@@ -256,27 +256,27 @@ function my_foo($bar)
      * @param bool   $hasCallable
      * @param bool   $hasObject
      */
-    private function fixFunctionDefinition($paramType, \PhpCsFixer\Tokenizer\Tokens $tokens, $index, $hasNull, $hasArray, $hasIterable, $hasString, $hasInt, $hasFloat, $hasBool, $hasCallable, $hasObject)
+    private function fixFunctionDefinition($paramType, Tokens $tokens, $index, $hasNull, $hasArray, $hasIterable, $hasString, $hasInt, $hasFloat, $hasBool, $hasCallable, $hasObject)
     {
         $newTokens = [];
         if (\true === $hasIterable && \true === $hasArray) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, 'array']);
+            $newTokens[] = new Token([CT::T_ARRAY_TYPEHINT, 'array']);
         } elseif (\true === $hasIterable) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'iterable']);
+            $newTokens[] = new Token([\T_STRING, 'iterable']);
         } elseif (\true === $hasArray) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_ARRAY_TYPEHINT, 'array']);
+            $newTokens[] = new Token([CT::T_ARRAY_TYPEHINT, 'array']);
         } elseif (\true === $hasString) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'string']);
+            $newTokens[] = new Token([\T_STRING, 'string']);
         } elseif (\true === $hasInt) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'int']);
+            $newTokens[] = new Token([\T_STRING, 'int']);
         } elseif (\true === $hasFloat) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'float']);
+            $newTokens[] = new Token([\T_STRING, 'float']);
         } elseif (\true === $hasBool) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'bool']);
+            $newTokens[] = new Token([\T_STRING, 'bool']);
         } elseif (\true === $hasCallable) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_CALLABLE, 'callable']);
+            $newTokens[] = new Token([\T_CALLABLE, 'callable']);
         } elseif (\true === $hasObject) {
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'object']);
+            $newTokens[] = new Token([\T_STRING, 'object']);
         }
         if ('' !== $paramType && [] !== $newTokens) {
             return;
@@ -286,14 +286,14 @@ function my_foo($bar)
                 continue;
             }
             if (0 < $nsIndex) {
-                $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_NS_SEPARATOR, '\\']);
+                $newTokens[] = new Token([\T_NS_SEPARATOR, '\\']);
             }
-            $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $value]);
+            $newTokens[] = new Token([\T_STRING, $value]);
         }
         if (\true === $hasNull) {
-            \array_unshift($newTokens, new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_NULLABLE_TYPE, '?']));
+            \array_unshift($newTokens, new Token([CT::T_NULLABLE_TYPE, '?']));
         }
-        $newTokens[] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+        $newTokens[] = new Token([\T_WHITESPACE, ' ']);
         $tokens->insertAt($index, $newTokens);
     }
 }

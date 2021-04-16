@@ -25,7 +25,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author Gregor Harlan <gharlan@web.de>
  */
-final class NoUnneededControlParenthesesFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class NoUnneededControlParenthesesFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     private static $loops = ['break' => ['lookupTokens' => \T_BREAK, 'neededSuccessors' => [';']], 'clone' => ['lookupTokens' => \T_CLONE, 'neededSuccessors' => [';', ':', ',', ')'], 'forbiddenContents' => ['?', ':']], 'continue' => ['lookupTokens' => \T_CONTINUE, 'neededSuccessors' => [';']], 'echo_print' => ['lookupTokens' => [\T_ECHO, \T_PRINT], 'neededSuccessors' => [';', [\T_CLOSE_TAG]]], 'return' => ['lookupTokens' => \T_RETURN, 'neededSuccessors' => [';', [\T_CLOSE_TAG]]], 'switch_case' => ['lookupTokens' => \T_CASE, 'neededSuccessors' => [';', ':']], 'yield' => ['lookupTokens' => \T_YIELD, 'neededSuccessors' => [';', ')']]];
     /**
@@ -46,7 +46,7 @@ final class NoUnneededControlParenthesesFixer extends \PhpCsFixer\AbstractFixer 
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         $types = [];
         foreach (self::$loops as $loop) {
@@ -60,7 +60,7 @@ final class NoUnneededControlParenthesesFixer extends \PhpCsFixer\AbstractFixer 
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Removes unneeded parentheses around control statements.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Removes unneeded parentheses around control statements.', [new CodeSample('<?php
 while ($x) { while ($y) { break (2); } }
 clone($a);
 while ($y) { continue (2); }
@@ -69,7 +69,7 @@ print("foo");
 return (1 + 2);
 switch ($a) { case($x); }
 yield(2);
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 while ($x) { while ($y) { break (2); } }
 clone($a);
 while ($y) { continue (2); }
@@ -92,12 +92,12 @@ yield(2);
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         // Checks if specific statements are set and uses them in this case.
         $loops = \array_intersect_key(self::$loops, \array_flip($this->configuration['statements']));
         foreach ($tokens as $index => $token) {
-            if (!$token->equalsAny(['(', [\PhpCsFixer\Tokenizer\CT::T_BRACE_CLASS_INSTANTIATION_OPEN]])) {
+            if (!$token->equalsAny(['(', [CT::T_BRACE_CLASS_INSTANTIATION_OPEN]])) {
                 continue;
             }
             $blockStartIndex = $index;
@@ -107,7 +107,7 @@ yield(2);
                 if (!$prevToken->isGivenKind($loop['lookupTokens'])) {
                     continue;
                 }
-                $blockEndIndex = $tokens->findBlockEnd($token->equals('(') ? \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE : \PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_BRACE_CLASS_INSTANTIATION, $blockStartIndex);
+                $blockEndIndex = $tokens->findBlockEnd($token->equals('(') ? Tokens::BLOCK_TYPE_PARENTHESIS_BRACE : Tokens::BLOCK_TYPE_BRACE_CLASS_INSTANTIATION, $blockStartIndex);
                 $blockEndNextIndex = $tokens->getNextMeaningfulToken($blockEndIndex);
                 if (!$tokens[$blockEndNextIndex]->equalsAny($loop['neededSuccessors'])) {
                     continue;
@@ -123,7 +123,7 @@ yield(2);
                     $tokens->clearTokenAndMergeSurroundingWhitespace($blockStartIndex);
                 } else {
                     // Adds a space to prevent broken code like `return2`.
-                    $tokens[$blockStartIndex] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+                    $tokens[$blockStartIndex] = new Token([\T_WHITESPACE, ' ']);
                 }
                 $tokens->clearTokenAndMergeSurroundingWhitespace($blockEndIndex);
             }
@@ -134,6 +134,6 @@ yield(2);
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('statements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('statements', 'List of control statements to fix.'))->setAllowedTypes(['array'])->setDefault(['break', 'clone', 'continue', 'echo_print', 'return', 'switch_case', 'yield'])->getOption()], $this->getName());
+        return new FixerConfigurationResolverRootless('statements', [(new FixerOptionBuilder('statements', 'List of control statements to fix.'))->setAllowedTypes(['array'])->setDefault(['break', 'clone', 'continue', 'echo_print', 'return', 'switch_case', 'yield'])->getOption()], $this->getName());
     }
 }

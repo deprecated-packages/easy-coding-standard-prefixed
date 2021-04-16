@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Properties;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ConstantVisibilityUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ConstantVisibilityUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

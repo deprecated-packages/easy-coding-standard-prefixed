@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Namespaces;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class CompoundNamespaceDepthUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class CompoundNamespaceDepthUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

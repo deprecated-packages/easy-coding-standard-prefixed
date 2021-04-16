@@ -40,7 +40,7 @@ class GitStaged extends \PHP_CodeSniffer\Filters\ExactMatch
             $basedir = \dirname($basedir);
         }
         foreach ($output as $path) {
-            $path = \PHP_CodeSniffer\Util\Common::realpath($path);
+            $path = Util\Common::realpath($path);
             if ($path === \false) {
                 // Skip deleted files.
                 continue;

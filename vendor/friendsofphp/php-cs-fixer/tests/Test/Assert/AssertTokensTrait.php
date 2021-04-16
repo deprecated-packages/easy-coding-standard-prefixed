@@ -20,7 +20,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 trait AssertTokensTrait
 {
-    private static function assertTokens(\PhpCsFixer\Tokenizer\Tokens $expectedTokens, \PhpCsFixer\Tokenizer\Tokens $inputTokens)
+    private static function assertTokens(Tokens $expectedTokens, Tokens $inputTokens)
     {
         foreach ($expectedTokens as $index => $expectedToken) {
             if (!isset($inputTokens[$index])) {
@@ -29,7 +29,7 @@ trait AssertTokensTrait
             $inputToken = $inputTokens[$index];
             static::assertTrue($expectedToken->equals($inputToken), \sprintf("The token at index %d must be:\n%s,\ngot:\n%s.", $index, $expectedToken->toJson(), $inputToken->toJson()));
             $expectedTokenKind = $expectedToken->isArray() ? $expectedToken->getId() : $expectedToken->getContent();
-            static::assertTrue($inputTokens->isTokenKindFound($expectedTokenKind), \sprintf('The token kind %s (%s) must be found in tokens collection.', $expectedTokenKind, \is_string($expectedTokenKind) ? $expectedTokenKind : \PhpCsFixer\Tokenizer\Token::getNameForId($expectedTokenKind)));
+            static::assertTrue($inputTokens->isTokenKindFound($expectedTokenKind), \sprintf('The token kind %s (%s) must be found in tokens collection.', $expectedTokenKind, \is_string($expectedTokenKind) ? $expectedTokenKind : Token::getNameForId($expectedTokenKind)));
         }
         static::assertSame($expectedTokens->count(), $inputTokens->count(), 'Both collections must have the same length.');
     }

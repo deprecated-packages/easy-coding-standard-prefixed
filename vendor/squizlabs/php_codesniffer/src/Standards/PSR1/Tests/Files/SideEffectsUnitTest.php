@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PSR1\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class SideEffectsUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class SideEffectsUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Set CLI values before the file is tested.

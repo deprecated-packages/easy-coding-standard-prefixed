@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\VersionControl;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class SubversionPropertiesUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class SubversionPropertiesUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Should this test be skipped for some reason.

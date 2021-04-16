@@ -27,7 +27,7 @@ class Info implements \PHP_CodeSniffer\Reports\Report
      *
      * @return bool
      */
-    public function generateFileReport($report, \PHP_CodeSniffer\Files\File $phpcsFile, $showSources = \false, $width = 80)
+    public function generateFileReport($report, File $phpcsFile, $showSources = \false, $width = 80)
     {
         $metrics = $phpcsFile->getMetrics();
         foreach ($metrics as $metric => $data) {
@@ -123,7 +123,7 @@ class Info implements \PHP_CodeSniffer\Reports\Report
         //end foreach
         echo \str_repeat('-', 70) . \PHP_EOL;
         if ($toScreen === \true && $interactive === \false) {
-            \PHP_CodeSniffer\Util\Timing::printRunTime();
+            Timing::printRunTime();
         }
     }
     //end generate()

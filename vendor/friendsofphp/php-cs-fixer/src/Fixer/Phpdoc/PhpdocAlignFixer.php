@@ -30,7 +30,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Graham Campbell <graham@alt-three.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpdocAlignFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class PhpdocAlignFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface, WhitespacesAwareFixerInterface
 {
     /**
      * @internal
@@ -92,7 +92,7 @@ final class PhpdocAlignFixer extends \PhpCsFixer\AbstractFixer implements \PhpCs
         $code = <<<'EOF'
 <?php
 
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 /**
  * @param  EngineInterface $templating
@@ -103,7 +103,7 @@ namespace _PhpScopercc9aec205203;
  */
 
 EOF;
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('All items of the given phpdoc tags must be either left-aligned or (by default) aligned vertically.', [new \PhpCsFixer\FixerDefinition\CodeSample($code), new \PhpCsFixer\FixerDefinition\CodeSample($code, ['align' => self::ALIGN_VERTICAL]), new \PhpCsFixer\FixerDefinition\CodeSample($code, ['align' => self::ALIGN_LEFT])]);
+        return new FixerDefinition('All items of the given phpdoc tags must be either left-aligned or (by default) aligned vertically.', [new CodeSample($code), new CodeSample($code, ['align' => self::ALIGN_VERTICAL]), new CodeSample($code, ['align' => self::ALIGN_LEFT])]);
     }
     /**
      * {@inheritdoc}
@@ -124,25 +124,25 @@ EOF;
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
                 continue;
             }
             $content = $token->getContent();
-            $docBlock = new \PhpCsFixer\DocBlock\DocBlock($content);
+            $docBlock = new DocBlock($content);
             $this->fixDocBlock($docBlock);
             $newContent = $docBlock->getContent();
             if ($newContent !== $content) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $newContent]);
+                $tokens[$index] = new Token([\T_DOC_COMMENT, $newContent]);
             }
         }
     }
@@ -151,13 +151,13 @@ EOF;
      */
     protected function createConfigurationDefinition()
     {
-        $tags = new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tags', 'The tags that should be aligned.');
-        $tags->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(self::$alignableTags)])->setDefault(['param', 'return', 'throws', 'type', 'var']);
-        $align = new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('align', 'Align comments');
+        $tags = new FixerOptionBuilder('tags', 'The tags that should be aligned.');
+        $tags->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset(self::$alignableTags)])->setDefault(['param', 'return', 'throws', 'type', 'var']);
+        $align = new FixerOptionBuilder('align', 'Align comments');
         $align->setAllowedTypes(['string'])->setAllowedValues([self::ALIGN_LEFT, self::ALIGN_VERTICAL])->setDefault(self::ALIGN_VERTICAL);
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([$tags->getOption(), $align->getOption()]);
+        return new FixerConfigurationResolver([$tags->getOption(), $align->getOption()]);
     }
-    private function fixDocBlock(\PhpCsFixer\DocBlock\DocBlock $docBlock)
+    private function fixDocBlock(DocBlock $docBlock)
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         for ($i = 0, $l = \count($docBlock->getLines()); $i < $l; ++$i) {
@@ -227,7 +227,7 @@ EOF;
      */
     private function getMatches($line, $matchCommentOnly = \false)
     {
-        if (\PhpCsFixer\Preg::match($this->regex, $line, $matches)) {
+        if (Preg::match($this->regex, $line, $matches)) {
             if (!empty($matches['tag2'])) {
                 $matches['tag'] = $matches['tag2'];
                 $matches['hint'] = $matches['hint2'];
@@ -243,7 +243,7 @@ EOF;
             }
             return $matches;
         }
-        if ($matchCommentOnly && \PhpCsFixer\Preg::match($this->regexCommentLine, $line, $matches)) {
+        if ($matchCommentOnly && Preg::match($this->regexCommentLine, $line, $matches)) {
             $matches['tag'] = null;
             $matches['var'] = '';
             $matches['hint'] = '';

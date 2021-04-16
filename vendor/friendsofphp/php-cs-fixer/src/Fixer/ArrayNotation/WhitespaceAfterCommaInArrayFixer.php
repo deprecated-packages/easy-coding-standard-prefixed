@@ -20,43 +20,43 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Adam Marczuk <adam@marczuk.info>
  */
-final class WhitespaceAfterCommaInArrayFixer extends \PhpCsFixer\AbstractFixer
+final class WhitespaceAfterCommaInArrayFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('In array declaration, there MUST be a whitespace after each comma.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$sample = array(1,'a',\$b,);\n")]);
+        return new FixerDefinition('In array declaration, there MUST be a whitespace after each comma.', [new CodeSample("<?php\n\$sample = array(1,'a',\$b,);\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isAnyTokenKindsFound([\T_ARRAY, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN]);
+        return $tokens->isAnyTokenKindsFound([\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         $tokensToInsert = [];
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
-            if (!$tokens[$index]->isGivenKind([\T_ARRAY, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN])) {
+            if (!$tokens[$index]->isGivenKind([\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN])) {
                 continue;
             }
-            if ($tokens[$index]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN)) {
+            if ($tokens[$index]->isGivenKind(CT::T_ARRAY_SQUARE_BRACE_OPEN)) {
                 $startIndex = $index;
-                $endIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $startIndex);
+                $endIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $startIndex);
             } else {
                 $startIndex = $tokens->getNextTokenOfKind($index, ['(']);
-                $endIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $startIndex);
+                $endIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $startIndex);
             }
             for ($i = $endIndex - 1; $i > $startIndex; --$i) {
                 $i = $this->skipNonArrayElements($i, $tokens);
                 if ($tokens[$i]->equals(',') && !$tokens[$i + 1]->isWhitespace()) {
-                    $tokensToInsert[$i + 1] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+                    $tokensToInsert[$i + 1] = new Token([\T_WHITESPACE, ' ']);
                 }
             }
         }
@@ -71,15 +71,15 @@ final class WhitespaceAfterCommaInArrayFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return int New index
      */
-    private function skipNonArrayElements($index, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    private function skipNonArrayElements($index, Tokens $tokens)
     {
         if ($tokens[$index]->equals('}')) {
-            return $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
+            return $tokens->findBlockStart(Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
         }
         if ($tokens[$index]->equals(')')) {
-            $startIndex = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
+            $startIndex = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
             $startIndex = $tokens->getPrevMeaningfulToken($startIndex);
-            if (!$tokens[$startIndex]->isGivenKind([\T_ARRAY, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN])) {
+            if (!$tokens[$startIndex]->isGivenKind([\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN])) {
                 return $startIndex;
             }
         }

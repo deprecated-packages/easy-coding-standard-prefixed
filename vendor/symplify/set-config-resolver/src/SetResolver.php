@@ -13,14 +13,14 @@ final class SetResolver
      * @var SetProviderInterface
      */
     private $setProvider;
-    public function __construct(\Symplify\SetConfigResolver\Contract\SetProviderInterface $setProvider)
+    public function __construct(SetProviderInterface $setProvider)
     {
         $this->setProvider = $setProvider;
     }
-    public function detectFromName(string $setName) : \Symplify\SmartFileSystem\SmartFileInfo
+    public function detectFromName(string $setName) : SmartFileInfo
     {
         $set = $this->setProvider->provideByName($setName);
-        if (!$set instanceof \Symplify\SetConfigResolver\ValueObject\Set) {
+        if (!$set instanceof Set) {
             $this->reportSetNotFound($setName);
         }
         return $set->getSetFileInfo();
@@ -28,6 +28,6 @@ final class SetResolver
     private function reportSetNotFound(string $setName) : void
     {
         $message = \sprintf('Set "%s" was not found', $setName);
-        throw new \Symplify\SetConfigResolver\Exception\SetNotFoundException($message, $setName, $this->setProvider->provideSetNames());
+        throw new SetNotFoundException($message, $setName, $this->setProvider->provideSetNames());
     }
 }

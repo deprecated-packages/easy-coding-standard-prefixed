@@ -22,27 +22,27 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class FopenFlagsFixer extends \PhpCsFixer\AbstractFopenFlagFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class FopenFlagsFixer extends AbstractFopenFlagFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('The flags in `fopen` calls must omit `t`, and `b` must be omitted or included consistently.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = fopen(\$foo, 'rwt');\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = fopen(\$foo, 'rwt');\n", ['b_mode' => \false])], null, 'Risky when the function `fopen` is overridden.');
+        return new FixerDefinition('The flags in `fopen` calls must omit `t`, and `b` must be omitted or included consistently.', [new CodeSample("<?php\n\$a = fopen(\$foo, 'rwt');\n"), new CodeSample("<?php\n\$a = fopen(\$foo, 'rwt');\n", ['b_mode' => \false])], null, 'Risky when the function `fopen` is overridden.');
     }
     /**
      * {@inheritdoc}
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('b_mode', 'The `b` flag must be used (`true`) or omitted (`false`).'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('b_mode', 'The `b` flag must be used (`true`) or omitted (`false`).'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
     /**
      * @param int $argumentStartIndex
      * @param int $argumentEndIndex
      */
-    protected function fixFopenFlagToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $argumentStartIndex, $argumentEndIndex)
+    protected function fixFopenFlagToken(Tokens $tokens, $argumentStartIndex, $argumentEndIndex)
     {
         $argumentFlagIndex = null;
         for ($i = $argumentStartIndex; $i <= $argumentEndIndex; ++$i) {
@@ -84,7 +84,7 @@ final class FopenFlagsFixer extends \PhpCsFixer\AbstractFopenFlagFixer implement
         }
         $newContent = $binPrefix . $contentQuote . $mode . $contentQuote;
         if ($content !== $newContent) {
-            $tokens[$argumentFlagIndex] = new \PhpCsFixer\Tokenizer\Token([\T_CONSTANT_ENCAPSED_STRING, $newContent]);
+            $tokens[$argumentFlagIndex] = new Token([\T_CONSTANT_ENCAPSED_STRING, $newContent]);
         }
     }
 }

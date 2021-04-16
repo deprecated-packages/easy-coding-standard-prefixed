@@ -21,12 +21,12 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScopercc9aec205203\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScopercc9aec205203\Symfony\Component\OptionsResolver\Options;
+use _PhpScopereb9508917a55\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScopereb9508917a55\Symfony\Component\OptionsResolver\Options;
 /**
  * @author SpacePossum
  */
-final class PhpdocReturnSelfReferenceFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpdocReturnSelfReferenceFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     private static $toTypes = ['$this', 'static', 'self'];
     /**
@@ -34,7 +34,7 @@ final class PhpdocReturnSelfReferenceFixer extends \PhpCsFixer\AbstractFixer imp
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('The type of `@return` annotations of methods returning a reference to itself must the configured one.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('The type of `@return` annotations of methods returning a reference to itself must the configured one.', [new CodeSample('<?php
 class Sample
 {
     /**
@@ -53,7 +53,7 @@ class Sample
         return $this;
     }
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 class Sample
 {
     /**
@@ -77,7 +77,7 @@ class Sample
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return \count($tokens) > 10 && $tokens->isTokenKindFound(\T_DOC_COMMENT) && $tokens->isAnyTokenKindsFound([\T_CLASS, \T_INTERFACE]);
     }
@@ -94,9 +94,9 @@ class Sample
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $tokensAnalyzer = new TokensAnalyzer($tokens);
         foreach ($tokensAnalyzer->getClassyElements() as $index => $element) {
             if ('method' === $element['type']) {
                 $this->fixMethod($tokens, $index);
@@ -109,17 +109,17 @@ class Sample
     protected function createConfigurationDefinition()
     {
         $default = ['this' => '$this', '@this' => '$this', '$self' => 'self', '@self' => 'self', '$static' => 'static', '@static' => 'static'];
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('replacements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('replacements', 'Mapping between replaced return types with new ones.'))->setAllowedTypes(['array'])->setNormalizer(static function (\_PhpScopercc9aec205203\Symfony\Component\OptionsResolver\Options $options, $value) use($default) {
+        return new FixerConfigurationResolverRootless('replacements', [(new FixerOptionBuilder('replacements', 'Mapping between replaced return types with new ones.'))->setAllowedTypes(['array'])->setNormalizer(static function (Options $options, $value) use($default) {
             $normalizedValue = [];
             foreach ($value as $from => $to) {
                 if (\is_string($from)) {
                     $from = \strtolower($from);
                 }
                 if (!isset($default[$from])) {
-                    throw new \_PhpScopercc9aec205203\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unknown key "%s", expected any of "%s".', \is_object($from) ? \get_class($from) : \gettype($from) . (\is_resource($from) ? '' : '#' . $from), \implode('", "', \array_keys($default))));
+                    throw new InvalidOptionsException(\sprintf('Unknown key "%s", expected any of "%s".', \is_object($from) ? \get_class($from) : \gettype($from) . (\is_resource($from) ? '' : '#' . $from), \implode('", "', \array_keys($default))));
                 }
                 if (!\in_array($to, self::$toTypes, \true)) {
-                    throw new \_PhpScopercc9aec205203\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException(\sprintf('Unknown value "%s", expected any of "%s".', \is_object($to) ? \get_class($to) : \gettype($to) . (\is_resource($to) ? '' : '#' . $to), \implode('", "', self::$toTypes)));
+                    throw new InvalidOptionsException(\sprintf('Unknown value "%s", expected any of "%s".', \is_object($to) ? \get_class($to) : \gettype($to) . (\is_resource($to) ? '' : '#' . $to), \implode('", "', self::$toTypes)));
                 }
                 $normalizedValue[$from] = $to;
             }
@@ -129,7 +129,7 @@ class Sample
     /**
      * @param int $index
      */
-    private function fixMethod(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function fixMethod(Tokens $tokens, $index)
     {
         static $methodModifiers = [\T_STATIC, \T_FINAL, \T_ABSTRACT, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC];
         // find PHPDoc of method (if any)
@@ -145,7 +145,7 @@ class Sample
             return;
         }
         // find @return
-        $docBlock = new \PhpCsFixer\DocBlock\DocBlock($tokens[$docIndex]->getContent());
+        $docBlock = new DocBlock($tokens[$docIndex]->getContent());
         $returnsBlock = $docBlock->getAnnotationsOfType('return');
         if (!\count($returnsBlock)) {
             return;
@@ -166,6 +166,6 @@ class Sample
             return;
         }
         $returnsBlock->setTypes($newTypes);
-        $tokens[$docIndex] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $docBlock->getContent()]);
+        $tokens[$docIndex] = new Token([\T_DOC_COMMENT, $docBlock->getContent()]);
     }
 }

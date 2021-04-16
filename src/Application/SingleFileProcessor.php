@@ -26,14 +26,14 @@ final class SingleFileProcessor
      * @var FileProcessorCollector
      */
     private $fileProcessorCollector;
-    public function __construct(\Symplify\Skipper\Skipper\Skipper $skipper, \Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector $changedFilesDetector, \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector, \Symplify\EasyCodingStandard\Application\FileProcessorCollector $fileProcessorCollector)
+    public function __construct(Skipper $skipper, ChangedFilesDetector $changedFilesDetector, ErrorAndDiffCollector $errorAndDiffCollector, \Symplify\EasyCodingStandard\Application\FileProcessorCollector $fileProcessorCollector)
     {
         $this->skipper = $skipper;
         $this->changedFilesDetector = $changedFilesDetector;
         $this->errorAndDiffCollector = $errorAndDiffCollector;
         $this->fileProcessorCollector = $fileProcessorCollector;
     }
-    public function processFileInfo(\Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : void
+    public function processFileInfo(SmartFileInfo $smartFileInfo) : void
     {
         if ($this->skipper->shouldSkipFileInfo($smartFileInfo)) {
             return;
@@ -47,7 +47,7 @@ final class SingleFileProcessor
                 }
                 $fileProcessor->processFile($smartFileInfo);
             }
-        } catch (\ParseError $parseError) {
+        } catch (ParseError $parseError) {
             $this->changedFilesDetector->invalidateFileInfo($smartFileInfo);
             $this->errorAndDiffCollector->addSystemErrorMessage($smartFileInfo, $parseError->getLine(), $parseError->getMessage());
         }

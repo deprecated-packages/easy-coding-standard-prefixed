@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\HttpKernel;
 
-use _PhpScopercc9aec205203\Symfony\Component\Config\Loader\DelegatingLoader;
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopercc9aec205203\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Loader\DelegatingLoader;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\CodingStandard\Bundle\SymplifyCodingStandardBundle;
 use Symplify\ConsoleColorDiff\Bundle\ConsoleColorDiffBundle;
 use Symplify\EasyCodingStandard\Bundle\EasyCodingStandardBundle;
@@ -15,25 +15,25 @@ use Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
 use Symplify\Skipper\Bundle\SkipperBundle;
 use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
-final class EasyCodingStandardKernel extends \Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel
+final class EasyCodingStandardKernel extends AbstractSymplifyKernel
 {
     /**
      * @return BundleInterface[]
      */
     public function registerBundles() : iterable
     {
-        $bundles = [new \Symplify\EasyCodingStandard\Bundle\EasyCodingStandardBundle(), new \Symplify\CodingStandard\Bundle\SymplifyCodingStandardBundle(), new \Symplify\ConsoleColorDiff\Bundle\ConsoleColorDiffBundle(), new \Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle(), new \Symplify\Skipper\Bundle\SkipperBundle()];
+        $bundles = [new EasyCodingStandardBundle(), new SymplifyCodingStandardBundle(), new ConsoleColorDiffBundle(), new SymplifyKernelBundle(), new SkipperBundle()];
         if ($this->environment === 'test') {
-            $bundles[] = new \Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle();
+            $bundles[] = new PhpConfigPrinterBundle();
         }
         return $bundles;
     }
     /**
      * @param ContainerInterface|ContainerBuilder $container
      */
-    protected function getContainerLoader(\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\ContainerInterface $container) : \_PhpScopercc9aec205203\Symfony\Component\Config\Loader\DelegatingLoader
+    protected function getContainerLoader(ContainerInterface $container) : DelegatingLoader
     {
-        $delegatingLoaderFactory = new \Symplify\EasyCodingStandard\DependencyInjection\DelegatingLoaderFactory();
+        $delegatingLoaderFactory = new DelegatingLoaderFactory();
         return $delegatingLoaderFactory->createFromContainerBuilderAndKernel($container, $this);
     }
 }

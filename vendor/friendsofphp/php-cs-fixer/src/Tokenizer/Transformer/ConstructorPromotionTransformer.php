@@ -22,7 +22,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @internal
  */
-final class ConstructorPromotionTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
+final class ConstructorPromotionTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
@@ -34,7 +34,7 @@ final class ConstructorPromotionTransformer extends \PhpCsFixer\Tokenizer\Abstra
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
+    public function process(Tokens $tokens, Token $token, $index)
     {
         if (!$tokens[$index]->isGivenKind(\T_FUNCTION)) {
             return;
@@ -46,14 +46,14 @@ final class ConstructorPromotionTransformer extends \PhpCsFixer\Tokenizer\Abstra
         /** @var int $openIndex */
         $openIndex = $tokens->getNextMeaningfulToken($index);
         // we are @ '(' now
-        $closeIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openIndex);
+        $closeIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openIndex);
         for ($index = $openIndex; $index < $closeIndex; ++$index) {
             if ($tokens[$index]->isGivenKind(\T_PUBLIC)) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, $tokens[$index]->getContent()]);
+                $tokens[$index] = new Token([CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, $tokens[$index]->getContent()]);
             } elseif ($tokens[$index]->isGivenKind(\T_PROTECTED)) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, $tokens[$index]->getContent()]);
+                $tokens[$index] = new Token([CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, $tokens[$index]->getContent()]);
             } elseif ($tokens[$index]->isGivenKind(\T_PRIVATE)) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE, $tokens[$index]->getContent()]);
+                $tokens[$index] = new Token([CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE, $tokens[$index]->getContent()]);
             }
         }
     }
@@ -62,6 +62,6 @@ final class ConstructorPromotionTransformer extends \PhpCsFixer\Tokenizer\Abstra
      */
     public function getCustomTokens()
     {
-        return [\PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, \PhpCsFixer\Tokenizer\CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE];
+        return [CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE];
     }
 }

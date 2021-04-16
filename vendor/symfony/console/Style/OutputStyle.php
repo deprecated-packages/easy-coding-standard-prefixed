@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\Console\Style;
+namespace _PhpScopereb9508917a55\Symfony\Component\Console\Style;
 
-use _PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Helper\ProgressBar;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Helper\ProgressBar;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Decorates output to add console style guide helpers.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-abstract class OutputStyle implements \_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface, \_PhpScopercc9aec205203\Symfony\Component\Console\Style\StyleInterface
+abstract class OutputStyle implements OutputInterface, \_PhpScopereb9508917a55\Symfony\Component\Console\Style\StyleInterface
 {
     private $output;
-    public function __construct(\_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface $output)
+    public function __construct(OutputInterface $output)
     {
         $this->output = $output;
     }
@@ -38,7 +38,7 @@ abstract class OutputStyle implements \_PhpScopercc9aec205203\Symfony\Component\
      */
     public function createProgressBar(int $max = 0)
     {
-        return new \_PhpScopercc9aec205203\Symfony\Component\Console\Helper\ProgressBar($this->output, $max);
+        return new ProgressBar($this->output, $max);
     }
     /**
      * {@inheritdoc}
@@ -85,7 +85,7 @@ abstract class OutputStyle implements \_PhpScopercc9aec205203\Symfony\Component\
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(\_PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter)
+    public function setFormatter(OutputFormatterInterface $formatter)
     {
         $this->output->setFormatter($formatter);
     }
@@ -126,7 +126,7 @@ abstract class OutputStyle implements \_PhpScopercc9aec205203\Symfony\Component\
     }
     protected function getErrorOutput()
     {
-        if (!$this->output instanceof \_PhpScopercc9aec205203\Symfony\Component\Console\Output\ConsoleOutputInterface) {
+        if (!$this->output instanceof ConsoleOutputInterface) {
             return $this->output;
         }
         return $this->output->getErrorOutput();

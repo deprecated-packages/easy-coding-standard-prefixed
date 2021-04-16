@@ -19,7 +19,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
+final class NoEmptyCommentFixer extends AbstractFixer
 {
     const TYPE_HASH = 1;
     const TYPE_DOUBLE_SLASH = 2;
@@ -39,19 +39,19 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('There should not be any empty comments.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n//\n#\n/* */\n")]);
+        return new FixerDefinition('There should not be any empty comments.', [new CodeSample("<?php\n//\n#\n/* */\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = 1, $count = \count($tokens); $index < $count; ++$index) {
             if (!$tokens[$index]->isGivenKind(\T_COMMENT)) {
@@ -73,7 +73,7 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return array
      */
-    private function getCommentBlock(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getCommentBlock(Tokens $tokens, $index)
     {
         $commentType = $this->getCommentType($tokens[$index]->getContent());
         $empty = $this->isEmptyComment($tokens[$index]->getContent());
@@ -121,11 +121,11 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return int
      */
-    private function getLineBreakCount(\PhpCsFixer\Tokenizer\Tokens $tokens, $whiteStart, $whiteEnd)
+    private function getLineBreakCount(Tokens $tokens, $whiteStart, $whiteEnd)
     {
         $lineCount = 0;
         for ($i = $whiteStart; $i < $whiteEnd; ++$i) {
-            $lineCount += \PhpCsFixer\Preg::matchAll('/\\R/u', $tokens[$i]->getContent(), $matches);
+            $lineCount += Preg::matchAll('/\\R/u', $tokens[$i]->getContent(), $matches);
         }
         return $lineCount;
     }
@@ -144,6 +144,6 @@ final class NoEmptyCommentFixer extends \PhpCsFixer\AbstractFixer
             self::TYPE_DOUBLE_SLASH => '|^//\\s*$|',
         ];
         $type = $this->getCommentType($content);
-        return 1 === \PhpCsFixer\Preg::match($mapper[$type], $content);
+        return 1 === Preg::match($mapper[$type], $content);
     }
 }

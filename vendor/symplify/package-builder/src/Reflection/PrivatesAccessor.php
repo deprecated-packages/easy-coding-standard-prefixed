@@ -25,15 +25,15 @@ final class PrivatesAccessor
         $propertyReflection->setAccessible(\true);
         $propertyReflection->setValue($object, $value);
     }
-    private function resolvePropertyReflection(object $object, string $propertyName) : \ReflectionProperty
+    private function resolvePropertyReflection(object $object, string $propertyName) : ReflectionProperty
     {
         if (\property_exists($object, $propertyName)) {
-            return new \ReflectionProperty($object, $propertyName);
+            return new ReflectionProperty($object, $propertyName);
         }
         $parentClass = \get_parent_class($object);
         if ($parentClass === \false) {
-            throw new \Symplify\PHPStanRules\Exception\ShouldNotHappenException();
+            throw new ShouldNotHappenException();
         }
-        return new \ReflectionProperty($parentClass, $propertyName);
+        return new ReflectionProperty($parentClass, $propertyName);
     }
 }

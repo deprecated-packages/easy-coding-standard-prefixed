@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\CodeAnalysis;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ForLoopShouldBeWhileLoopUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ForLoopShouldBeWhileLoopUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

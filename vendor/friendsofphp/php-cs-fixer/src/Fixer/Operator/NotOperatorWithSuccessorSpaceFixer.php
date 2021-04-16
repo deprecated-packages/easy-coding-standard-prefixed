@@ -19,14 +19,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Javier Spagnoletti <phansys@gmail.com>
  */
-final class NotOperatorWithSuccessorSpaceFixer extends \PhpCsFixer\AbstractFixer
+final class NotOperatorWithSuccessorSpaceFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Logical NOT operators (`!`) should have one trailing whitespace.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Logical NOT operators (`!`) should have one trailing whitespace.', [new CodeSample('<?php
 
 if (!$bar) {
     echo "Help!";
@@ -45,22 +45,22 @@ if (!$bar) {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound('!');
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             $token = $tokens[$index];
             if ($token->equals('!')) {
                 if (!$tokens[$index + 1]->isWhitespace()) {
-                    $tokens->insertAt($index + 1, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
+                    $tokens->insertAt($index + 1, new Token([\T_WHITESPACE, ' ']));
                 } else {
-                    $tokens[$index + 1] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+                    $tokens[$index + 1] = new Token([\T_WHITESPACE, ' ']);
                 }
             }
         }

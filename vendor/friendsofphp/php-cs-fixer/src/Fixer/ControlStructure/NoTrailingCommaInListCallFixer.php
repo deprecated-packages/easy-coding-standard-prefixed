@@ -18,26 +18,26 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class NoTrailingCommaInListCallFixer extends \PhpCsFixer\AbstractFixer
+final class NoTrailingCommaInListCallFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Remove trailing commas in list function calls.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nlist(\$a, \$b,) = foo();\n")]);
+        return new FixerDefinition('Remove trailing commas in list function calls.', [new CodeSample("<?php\nlist(\$a, \$b,) = foo();\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_LIST);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             $token = $tokens[$index];
@@ -45,7 +45,7 @@ final class NoTrailingCommaInListCallFixer extends \PhpCsFixer\AbstractFixer
                 continue;
             }
             $openIndex = $tokens->getNextMeaningfulToken($index);
-            $closeIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openIndex);
+            $closeIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openIndex);
             $markIndex = null;
             $prevIndex = $tokens->getPrevNonWhitespace($closeIndex);
             while ($tokens[$prevIndex]->equals(',')) {

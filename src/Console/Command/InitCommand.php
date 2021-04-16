@@ -3,17 +3,17 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
-final class InitCommand extends \Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand
+final class InitCommand extends AbstractSymplifyCommand
 {
     protected function configure() : void
     {
         $this->setDescription('Generate ecs.php configuration file');
     }
-    protected function execute(\_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface $output) : int
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $rectorConfigFiles = $this->smartFileSystem->exists(\getcwd() . '/ecs.php');
         if (!$rectorConfigFiles) {
@@ -22,6 +22,6 @@ final class InitCommand extends \Symplify\PackageBuilder\Console\Command\Abstrac
         } else {
             $this->symfonyStyle->warning('The "ecs.php" configuration file already exists');
         }
-        return \Symplify\PackageBuilder\Console\ShellCode::SUCCESS;
+        return ShellCode::SUCCESS;
     }
 }

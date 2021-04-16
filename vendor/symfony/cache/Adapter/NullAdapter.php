@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\Cache\Adapter;
+namespace _PhpScopereb9508917a55\Symfony\Component\Cache\Adapter;
 
-use _PhpScopercc9aec205203\Psr\Cache\CacheItemInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Cache\CacheItem;
-use _PhpScopercc9aec205203\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScopereb9508917a55\Psr\Cache\CacheItemInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Cache\CacheItem;
+use _PhpScopereb9508917a55\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class NullAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cache\Adapter\AdapterInterface, \_PhpScopercc9aec205203\Symfony\Contracts\Cache\CacheInterface
+class NullAdapter implements \_PhpScopereb9508917a55\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface
 {
     private $createCacheItem;
     public function __construct()
     {
         $this->createCacheItem = \Closure::bind(function ($key) {
-            $item = new \_PhpScopercc9aec205203\Symfony\Component\Cache\CacheItem();
+            $item = new CacheItem();
             $item->key = $key;
             $item->isHit = \false;
             return $item;
-        }, $this, \_PhpScopercc9aec205203\Symfony\Component\Cache\CacheItem::class);
+        }, $this, CacheItem::class);
     }
     /**
      * {@inheritdoc}
@@ -92,7 +92,7 @@ class NullAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cache\Ada
      *
      * @return bool
      */
-    public function save(\_PhpScopercc9aec205203\Psr\Cache\CacheItemInterface $item)
+    public function save(CacheItemInterface $item)
     {
         return \false;
     }
@@ -101,7 +101,7 @@ class NullAdapter implements \_PhpScopercc9aec205203\Symfony\Component\Cache\Ada
      *
      * @return bool
      */
-    public function saveDeferred(\_PhpScopercc9aec205203\Psr\Cache\CacheItemInterface $item)
+    public function saveDeferred(CacheItemInterface $item)
     {
         return \false;
     }

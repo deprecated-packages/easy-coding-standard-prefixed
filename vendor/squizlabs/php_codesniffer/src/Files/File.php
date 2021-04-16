@@ -201,12 +201,12 @@ class File
      *
      * @return void
      */
-    public function __construct($path, \PHP_CodeSniffer\Ruleset $ruleset, \PHP_CodeSniffer\Config $config)
+    public function __construct($path, Ruleset $ruleset, Config $config)
     {
         $this->path = $path;
         $this->ruleset = $ruleset;
         $this->config = $config;
-        $this->fixer = new \PHP_CodeSniffer\Fixer();
+        $this->fixer = new Fixer();
         $parts = \explode('.', $path);
         $extension = \array_pop($parts);
         if (isset($config->extensions[$extension]) === \true) {
@@ -239,8 +239,8 @@ class File
         $this->content = $content;
         $this->tokens = [];
         try {
-            $this->eolChar = \PHP_CodeSniffer\Util\Common::detectLineEndings($content);
-        } catch (\PHP_CodeSniffer\Exceptions\RuntimeException $e) {
+            $this->eolChar = Util\Common::detectLineEndings($content);
+        } catch (RuntimeException $e) {
             $this->addWarningOnLine($e->getMessage(), 1, 'Internal.DetectLineEndings');
             return;
         }
@@ -362,7 +362,7 @@ class File
             //end if
             if (PHP_CODESNIFFER_VERBOSITY > 2) {
                 $type = $token['type'];
-                $content = \PHP_CodeSniffer\Util\Common::prepareForOutput($token['content']);
+                $content = Util\Common::prepareForOutput($token['content']);
                 echo "\t\tProcess token {$stackPtr}: {$type} => {$content}" . \PHP_EOL;
             }
             if ($token['code'] !== \T_INLINE_HTML) {
@@ -489,7 +489,7 @@ class File
             $tokenizerClass = 'PHP_CodeSniffer\\Tokenizers\\' . $this->tokenizerType;
             $this->tokenizer = new $tokenizerClass($this->content, $this->config, $this->eolChar);
             $this->tokens = $this->tokenizer->getTokens();
-        } catch (\PHP_CodeSniffer\Exceptions\TokenizerException $e) {
+        } catch (TokenizerException $e) {
             $this->ignored = \true;
             $this->addWarning($e->getMessage(), null, 'Internal.Tokenizer.Exception');
             if (PHP_CODESNIFFER_VERBOSITY > 0) {
@@ -709,7 +709,7 @@ class File
         $parts = \explode('.', $code);
         if ($parts[0] === 'Internal') {
             // An internal message.
-            $listenerCode = \PHP_CodeSniffer\Util\Common::getSniffCode($this->activeListener);
+            $listenerCode = Util\Common::getSniffCode($this->activeListener);
             $sniffCode = $code;
             $checkCodes = [$sniffCode];
         } else {
@@ -718,7 +718,7 @@ class File
                 $sniffCode = $code;
                 $listenerCode = \substr($sniffCode, 0, \strrpos($sniffCode, '.'));
             } else {
-                $listenerCode = \PHP_CodeSniffer\Util\Common::getSniffCode($this->activeListener);
+                $listenerCode = Util\Common::getSniffCode($this->activeListener);
                 $sniffCode = $listenerCode . '.' . $code;
                 $parts = \explode('.', $sniffCode);
             }
@@ -1026,7 +1026,7 @@ class File
             return null;
         }
         if ($tokenCode !== \T_FUNCTION && $tokenCode !== \T_CLASS && $tokenCode !== \T_INTERFACE && $tokenCode !== \T_TRAIT) {
-            throw new \PHP_CodeSniffer\Exceptions\RuntimeException('Token type "' . $this->tokens[$stackPtr]['type'] . '" is not T_FUNCTION, T_CLASS, T_INTERFACE or T_TRAIT');
+            throw new RuntimeException('Token type "' . $this->tokens[$stackPtr]['type'] . '" is not T_FUNCTION, T_CLASS, T_INTERFACE or T_TRAIT');
         }
         if ($tokenCode === \T_FUNCTION && \strtolower($this->tokens[$stackPtr]['content']) !== 'function') {
             // This is a function declared without the "function" keyword.
@@ -1093,12 +1093,12 @@ class File
     public function getMethodParameters($stackPtr)
     {
         if ($this->tokens[$stackPtr]['code'] !== \T_FUNCTION && $this->tokens[$stackPtr]['code'] !== T_CLOSURE && $this->tokens[$stackPtr]['code'] !== \T_USE && $this->tokens[$stackPtr]['code'] !== \T_FN) {
-            throw new \PHP_CodeSniffer\Exceptions\RuntimeException('$stackPtr must be of type T_FUNCTION or T_CLOSURE or T_USE or T_FN');
+            throw new RuntimeException('$stackPtr must be of type T_FUNCTION or T_CLOSURE or T_USE or T_FN');
         }
         if ($this->tokens[$stackPtr]['code'] === \T_USE) {
             $opener = $this->findNext(T_OPEN_PARENTHESIS, $stackPtr + 1);
             if ($opener === \false || isset($this->tokens[$opener]['parenthesis_owner']) === \true) {
-                throw new \PHP_CodeSniffer\Exceptions\RuntimeException('$stackPtr was not a valid T_USE');
+                throw new RuntimeException('$stackPtr was not a valid T_USE');
             }
         } else {
             if (isset($this->tokens[$stackPtr]['parenthesis_opener']) === \false) {
@@ -1285,7 +1285,7 @@ class File
                     $paramCount++;
                     break;
                 case T_EQUAL:
-                    $defaultStart = $this->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $i + 1, null, \true);
+                    $defaultStart = $this->findNext(Util\Tokens::$emptyTokens, $i + 1, null, \true);
                     $equalToken = $i;
                     break;
             }
@@ -1327,7 +1327,7 @@ class File
     public function getMethodProperties($stackPtr)
     {
         if ($this->tokens[$stackPtr]['code'] !== \T_FUNCTION && $this->tokens[$stackPtr]['code'] !== T_CLOSURE && $this->tokens[$stackPtr]['code'] !== \T_FN) {
-            throw new \PHP_CodeSniffer\Exceptions\RuntimeException('$stackPtr must be of type T_FUNCTION or T_CLOSURE or T_FN');
+            throw new RuntimeException('$stackPtr must be of type T_FUNCTION or T_CLOSURE or T_FN');
         }
         if ($this->tokens[$stackPtr]['code'] === \T_FUNCTION) {
             $valid = [\T_PUBLIC => \T_PUBLIC, \T_PRIVATE => \T_PRIVATE, \T_PROTECTED => \T_PROTECTED, \T_STATIC => \T_STATIC, \T_FINAL => \T_FINAL, \T_ABSTRACT => \T_ABSTRACT, \T_WHITESPACE => \T_WHITESPACE, \T_COMMENT => \T_COMMENT, \T_DOC_COMMENT => \T_DOC_COMMENT];
@@ -1443,7 +1443,7 @@ class File
     public function getMemberProperties($stackPtr)
     {
         if ($this->tokens[$stackPtr]['code'] !== \T_VARIABLE) {
-            throw new \PHP_CodeSniffer\Exceptions\RuntimeException('$stackPtr must be of type T_VARIABLE');
+            throw new RuntimeException('$stackPtr must be of type T_VARIABLE');
         }
         $conditions = \array_keys($this->tokens[$stackPtr]['conditions']);
         $ptr = \array_pop($conditions);
@@ -1459,7 +1459,7 @@ class File
                     return [];
                 }
             } else {
-                throw new \PHP_CodeSniffer\Exceptions\RuntimeException('$stackPtr is not a class member var');
+                throw new RuntimeException('$stackPtr is not a class member var');
             }
         }
         // Make sure it's not a method parameter.
@@ -1467,11 +1467,11 @@ class File
             $parenthesis = \array_keys($this->tokens[$stackPtr]['nested_parenthesis']);
             $deepestOpen = \array_pop($parenthesis);
             if ($deepestOpen > $ptr && isset($this->tokens[$deepestOpen]['parenthesis_owner']) === \true && $this->tokens[$this->tokens[$deepestOpen]['parenthesis_owner']]['code'] === \T_FUNCTION) {
-                throw new \PHP_CodeSniffer\Exceptions\RuntimeException('$stackPtr is not a class member var');
+                throw new RuntimeException('$stackPtr is not a class member var');
             }
         }
         $valid = [\T_PUBLIC => \T_PUBLIC, \T_PRIVATE => \T_PRIVATE, \T_PROTECTED => \T_PROTECTED, \T_STATIC => \T_STATIC, \T_VAR => \T_VAR];
-        $valid += \PHP_CodeSniffer\Util\Tokens::$emptyTokens;
+        $valid += Util\Tokens::$emptyTokens;
         $scope = 'public';
         $scopeSpecified = \false;
         $isStatic = \false;
@@ -1551,7 +1551,7 @@ class File
     public function getClassProperties($stackPtr)
     {
         if ($this->tokens[$stackPtr]['code'] !== \T_CLASS) {
-            throw new \PHP_CodeSniffer\Exceptions\RuntimeException('$stackPtr must be of type T_CLASS');
+            throw new RuntimeException('$stackPtr must be of type T_CLASS');
         }
         $valid = [\T_FINAL => \T_FINAL, \T_ABSTRACT => \T_ABSTRACT, \T_WHITESPACE => \T_WHITESPACE, \T_COMMENT => \T_COMMENT, \T_DOC_COMMENT => \T_DOC_COMMENT];
         $isAbstract = \false;
@@ -1588,7 +1588,7 @@ class File
         if ($this->tokens[$stackPtr]['code'] !== T_BITWISE_AND) {
             return \false;
         }
-        $tokenBefore = $this->findPrevious(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $stackPtr - 1, null, \true);
+        $tokenBefore = $this->findPrevious(Util\Tokens::$emptyTokens, $stackPtr - 1, null, \true);
         if ($this->tokens[$tokenBefore]['code'] === \T_FUNCTION || $this->tokens[$tokenBefore]['code'] === T_CLOSURE || $this->tokens[$tokenBefore]['code'] === \T_FN) {
             // Function returns a reference.
             return \true;
@@ -1601,12 +1601,12 @@ class File
             // Inside a foreach loop, this is a reference.
             return \true;
         }
-        if (isset(\PHP_CodeSniffer\Util\Tokens::$assignmentTokens[$this->tokens[$tokenBefore]['code']]) === \true) {
+        if (isset(Util\Tokens::$assignmentTokens[$this->tokens[$tokenBefore]['code']]) === \true) {
             // This is directly after an assignment. It's a reference. Even if
             // it is part of an operation, the other tests will handle it.
             return \true;
         }
-        $tokenAfter = $this->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $stackPtr + 1, null, \true);
+        $tokenAfter = $this->findNext(Util\Tokens::$emptyTokens, $stackPtr + 1, null, \true);
         if ($this->tokens[$tokenAfter]['code'] === \T_NEW) {
             return \true;
         }
@@ -1646,7 +1646,7 @@ class File
             if ($this->tokens[$tokenAfter]['code'] === \T_VARIABLE) {
                 return \true;
             } else {
-                $skip = \PHP_CodeSniffer\Util\Tokens::$emptyTokens;
+                $skip = Util\Tokens::$emptyTokens;
                 $skip[] = \T_NS_SEPARATOR;
                 $skip[] = T_SELF;
                 $skip[] = T_PARENT;
@@ -1680,7 +1680,7 @@ class File
     public function getTokensAsString($start, $length, $origContent = \false)
     {
         if (\is_int($start) === \false || isset($this->tokens[$start]) === \false) {
-            throw new \PHP_CodeSniffer\Exceptions\RuntimeException('The $start position for getTokensAsString() must exist in the token stack');
+            throw new RuntimeException('The $start position for getTokensAsString() must exist in the token stack');
         }
         if (\is_int($length) === \false || $length <= 0) {
             return '';
@@ -1840,7 +1840,7 @@ class File
      */
     public function findStartOfStatement($start, $ignore = null)
     {
-        $startTokens = \PHP_CodeSniffer\Util\Tokens::$blockOpeners;
+        $startTokens = Util\Tokens::$blockOpeners;
         $startTokens[T_OPEN_SHORT_ARRAY] = \true;
         $startTokens[\T_OPEN_TAG] = \true;
         $endTokens = [\T_CLOSE_TAG => \true, T_COLON => \true, T_COMMA => \true, \T_DOUBLE_ARROW => \true, T_MATCH_ARROW => \true, T_SEMICOLON => \true];
@@ -1875,7 +1875,7 @@ class File
             }
             if ($prevMatch <= $this->tokens[$matchExpression]['scope_opener']) {
                 // We're before the arrow in the first case.
-                $next = $this->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $this->tokens[$matchExpression]['scope_opener'] + 1, null, \true);
+                $next = $this->findNext(Util\Tokens::$emptyTokens, $this->tokens[$matchExpression]['scope_opener'] + 1, null, \true);
                 if ($next === \false) {
                     return $start;
                 }
@@ -1886,11 +1886,11 @@ class File
                 $prevMatchArrow = $this->findPrevious(T_MATCH_ARROW, $prevMatch - 1, $this->tokens[$matchExpression]['scope_opener']);
                 if ($prevMatchArrow === \false) {
                     // We're before the arrow in the first case.
-                    $next = $this->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $this->tokens[$matchExpression]['scope_opener'] + 1, null, \true);
+                    $next = $this->findNext(Util\Tokens::$emptyTokens, $this->tokens[$matchExpression]['scope_opener'] + 1, null, \true);
                     return $next;
                 }
                 $end = $this->findEndOfStatement($prevMatchArrow);
-                $next = $this->findNext(\PHP_CodeSniffer\Util\Tokens::$emptyTokens, $end + 1, null, \true);
+                $next = $this->findNext(Util\Tokens::$emptyTokens, $end + 1, null, \true);
                 return $next;
             }
         }
@@ -1932,7 +1932,7 @@ class File
                 }
             }
             //end if
-            if (isset(\PHP_CodeSniffer\Util\Tokens::$emptyTokens[$this->tokens[$i]['code']]) === \false) {
+            if (isset(Util\Tokens::$emptyTokens[$this->tokens[$i]['code']]) === \false) {
                 $lastNotEmpty = $i;
             }
         }
@@ -2000,7 +2000,7 @@ class File
                     $i = $this->tokens[$i]['scope_closer'] - 1;
                     continue;
                 }
-                if ($i === $start && isset(\PHP_CodeSniffer\Util\Tokens::$scopeOpeners[$this->tokens[$i]['code']]) === \true) {
+                if ($i === $start && isset(Util\Tokens::$scopeOpeners[$this->tokens[$i]['code']]) === \true) {
                     return $this->tokens[$i]['scope_closer'];
                 }
                 $i = $this->tokens[$i]['scope_closer'];
@@ -2021,7 +2021,7 @@ class File
                 }
             }
             //end if
-            if (isset(\PHP_CodeSniffer\Util\Tokens::$emptyTokens[$this->tokens[$i]['code']]) === \false) {
+            if (isset(Util\Tokens::$emptyTokens[$this->tokens[$i]['code']]) === \false) {
                 $lastNotEmpty = $i;
             }
         }

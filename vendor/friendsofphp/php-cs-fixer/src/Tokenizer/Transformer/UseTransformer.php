@@ -24,7 +24,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @internal
  */
-final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
+final class UseTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
@@ -44,10 +44,10 @@ final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function process(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $token, $index)
+    public function process(Tokens $tokens, Token $token, $index)
     {
         if ($token->isGivenKind(\T_USE) && $this->isUseForLambda($tokens, $index)) {
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA, $token->getContent()]);
+            $tokens[$index] = new Token([CT::T_USE_LAMBDA, $token->getContent()]);
             return;
         }
         // Only search inside class/trait body for `T_USE` for traits.
@@ -59,16 +59,16 @@ final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
             return;
         }
         $index = $tokens->getNextTokenOfKind($index, ['{']);
-        $innerLimit = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
+        $innerLimit = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
         while ($index < $innerLimit) {
             $token = $tokens[++$index];
             if (!$token->isGivenKind(\T_USE)) {
                 continue;
             }
             if ($this->isUseForLambda($tokens, $index)) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA, $token->getContent()]);
+                $tokens[$index] = new Token([CT::T_USE_LAMBDA, $token->getContent()]);
             } else {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, $token->getContent()]);
+                $tokens[$index] = new Token([CT::T_USE_TRAIT, $token->getContent()]);
             }
         }
     }
@@ -77,7 +77,7 @@ final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
      */
     public function getCustomTokens()
     {
-        return [\PhpCsFixer\Tokenizer\CT::T_USE_TRAIT, \PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA];
+        return [CT::T_USE_TRAIT, CT::T_USE_LAMBDA];
     }
     /**
      * Check if token under given index is `use` statement for lambda function.
@@ -86,7 +86,7 @@ final class UseTransformer extends \PhpCsFixer\Tokenizer\AbstractTransformer
      *
      * @return bool
      */
-    private function isUseForLambda(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function isUseForLambda(Tokens $tokens, $index)
     {
         $nextToken = $tokens[$tokens->getNextMeaningfulToken($index)];
         // test `function () use ($foo) {}` case

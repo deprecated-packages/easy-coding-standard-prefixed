@@ -20,14 +20,14 @@ use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
-final class PhpdocTagCasingFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpdocTagCasingFixer extends AbstractProxyFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Fixes casing of PHPDoc tags.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n/**\n * @inheritdoc\n */\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n/**\n * @inheritdoc\n * @Foo\n */\n", ['tags' => ['foo']])]);
+        return new FixerDefinition('Fixes casing of PHPDoc tags.', [new CodeSample("<?php\n/**\n * @inheritdoc\n */\n"), new CodeSample("<?php\n/**\n * @inheritdoc\n * @Foo\n */\n", ['tags' => ['foo']])]);
     }
     /**
      * {@inheritdoc}
@@ -50,8 +50,8 @@ final class PhpdocTagCasingFixer extends \PhpCsFixer\AbstractProxyFixer implemen
         $generalPhpdocTagRenameFixer = $this->proxyFixers['general_phpdoc_tag_rename'];
         try {
             $generalPhpdocTagRenameFixer->configure(['fix_annotation' => \true, 'fix_inline' => \true, 'replacements' => $replacements, 'case_sensitive' => \false]);
-        } catch (\PhpCsFixer\ConfigurationException\InvalidConfigurationException $exception) {
-            throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($this->getName(), \PhpCsFixer\Preg::replace('/^\\[.+?\\] /', '', $exception->getMessage()), $exception);
+        } catch (InvalidConfigurationException $exception) {
+            throw new InvalidFixerConfigurationException($this->getName(), Preg::replace('/^\\[.+?\\] /', '', $exception->getMessage()), $exception);
         }
     }
     /**
@@ -59,7 +59,7 @@ final class PhpdocTagCasingFixer extends \PhpCsFixer\AbstractProxyFixer implemen
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tags', 'List of tags to fix with their expected casing.'))->setAllowedTypes(['array'])->setDefault(['inheritDoc'])->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('tags', 'List of tags to fix with their expected casing.'))->setAllowedTypes(['array'])->setDefault(['inheritDoc'])->getOption()]);
     }
     /**
      * {@inheritdoc}

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Reporter;
 
-use _PhpScopercc9aec205203\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -17,21 +17,21 @@ final class SetsReporter
      * @var ParameterProvider
      */
     private $parameterProvider;
-    public function __construct(\_PhpScopercc9aec205203\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle, \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider)
+    public function __construct(SymfonyStyle $symfonyStyle, ParameterProvider $parameterProvider)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->parameterProvider = $parameterProvider;
     }
     public function report() : void
     {
-        $sets = (array) $this->parameterProvider->provideParameter(\Symplify\EasyCodingStandard\ValueObject\Option::SETS);
+        $sets = (array) $this->parameterProvider->provideParameter(Option::SETS);
         if ($sets === []) {
             return;
         }
         $this->symfonyStyle->title('Loaded Sets');
         \sort($sets);
         foreach ($sets as $set) {
-            $setFileInfo = new \Symplify\SmartFileSystem\SmartFileInfo($set);
+            $setFileInfo = new SmartFileInfo($set);
             $filename = $setFileInfo->getRelativeFilePathFromCwd();
             $this->symfonyStyle->writeln(' * ' . $filename);
         }

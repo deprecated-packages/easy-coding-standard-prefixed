@@ -21,14 +21,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class NoWhitespaceInBlankLineFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class NoWhitespaceInBlankLineFixer extends AbstractFixer implements WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Remove trailing whitespace at the end of blank lines.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n   \n\$a = 1;\n")]);
+        return new FixerDefinition('Remove trailing whitespace at the end of blank lines.', [new CodeSample("<?php\n   \n\$a = 1;\n")]);
     }
     /**
      * {@inheritdoc}
@@ -42,14 +42,14 @@ final class NoWhitespaceInBlankLineFixer extends \PhpCsFixer\AbstractFixer imple
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         // skip first as it cannot be a white space token
         for ($i = 1, $count = \count($tokens); $i < $count; ++$i) {
@@ -61,10 +61,10 @@ final class NoWhitespaceInBlankLineFixer extends \PhpCsFixer\AbstractFixer imple
     /**
      * @param int $index
      */
-    private function fixWhitespaceToken(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function fixWhitespaceToken(Tokens $tokens, $index)
     {
         $content = $tokens[$index]->getContent();
-        $lines = \PhpCsFixer\Preg::split("/(\r\n|\n)/", $content);
+        $lines = Preg::split("/(\r\n|\n)/", $content);
         $lineCount = \count($lines);
         if ($lineCount > 2 || $lineCount > 0 && (!isset($tokens[$index + 1]) || $tokens[$index - 1]->isGivenKind(\T_OPEN_TAG))) {
             $lMax = isset($tokens[$index + 1]) ? $lineCount - 1 : $lineCount;
@@ -73,11 +73,11 @@ final class NoWhitespaceInBlankLineFixer extends \PhpCsFixer\AbstractFixer imple
                 $lStart = 0;
             }
             for ($l = $lStart; $l < $lMax; ++$l) {
-                $lines[$l] = \PhpCsFixer\Preg::replace('/^\\h+$/', '', $lines[$l]);
+                $lines[$l] = Preg::replace('/^\\h+$/', '', $lines[$l]);
             }
             $content = \implode($this->whitespacesConfig->getLineEnding(), $lines);
             if ('' !== $content) {
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, $content]);
+                $tokens[$index] = new Token([\T_WHITESPACE, $content]);
             } else {
                 $tokens->clearAt($index);
             }

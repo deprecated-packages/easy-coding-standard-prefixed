@@ -20,14 +20,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @deprecated proxy to EchoTagSyntaxFixer
  */
-final class NoShortEchoTagFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface
+final class NoShortEchoTagFixer extends AbstractProxyFixer implements DeprecatedFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replaces short-echo `<?=` with long format `<?php echo` syntax.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?= \"foo\";\n")]);
+        return new FixerDefinition('Replaces short-echo `<?=` with long format `<?php echo` syntax.', [new CodeSample("<?= \"foo\";\n")]);
     }
     /**
      * {@inheritdoc}

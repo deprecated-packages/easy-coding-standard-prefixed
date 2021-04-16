@@ -46,7 +46,7 @@ abstract class ExactMatch extends \PHP_CodeSniffer\Filters\Filter
         if ($this->whitelist === null) {
             $this->whitelist = $this->getwhitelist();
         }
-        $filePath = \PHP_CodeSniffer\Util\Common::realpath($this->current());
+        $filePath = Util\Common::realpath($this->current());
         // If file is both blacklisted and whitelisted, the blacklist takes precedence.
         if (isset($this->blacklist[$filePath]) === \true) {
             return \false;

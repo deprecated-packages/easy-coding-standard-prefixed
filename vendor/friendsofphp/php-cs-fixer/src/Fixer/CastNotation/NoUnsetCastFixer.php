@@ -19,19 +19,19 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class NoUnsetCastFixer extends \PhpCsFixer\AbstractFixer
+final class NoUnsetCastFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Variables must be set `null` instead of using `(unset)` casting.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$a = (unset) \$b;\n")]);
+        return new FixerDefinition('Variables must be set `null` instead of using `(unset)` casting.', [new CodeSample("<?php\n\$a = (unset) \$b;\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_UNSET_CAST);
     }
@@ -47,7 +47,7 @@ final class NoUnsetCastFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = \count($tokens) - 1; $index > 0; --$index) {
             if ($tokens[$index]->isGivenKind(\T_UNSET_CAST)) {
@@ -58,7 +58,7 @@ final class NoUnsetCastFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param int $index
      */
-    private function fixUnsetCast(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function fixUnsetCast(Tokens $tokens, $index)
     {
         $assignmentIndex = $tokens->getPrevMeaningfulToken($index);
         if (null === $assignmentIndex || !$tokens[$assignmentIndex]->equals('=')) {
@@ -77,9 +77,9 @@ final class NoUnsetCastFixer extends \PhpCsFixer\AbstractFixer
         $tokens->clearTokenAndMergeSurroundingWhitespace($varIndex);
         ++$assignmentIndex;
         if (!$nextIsWhiteSpace) {
-            $tokens->insertAt($assignmentIndex, new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']));
+            $tokens->insertAt($assignmentIndex, new Token([\T_WHITESPACE, ' ']));
         }
         ++$assignmentIndex;
-        $tokens->insertAt($assignmentIndex, new \PhpCsFixer\Tokenizer\Token([\T_STRING, 'null']));
+        $tokens->insertAt($assignmentIndex, new Token([\T_STRING, 'null']));
     }
 }

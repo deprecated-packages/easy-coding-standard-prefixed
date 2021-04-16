@@ -11,13 +11,13 @@ final class FileToTokensParser
      * @var SmartFileSystem
      */
     private $smartFileSystem;
-    public function __construct(\Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem)
+    public function __construct(SmartFileSystem $smartFileSystem)
     {
         $this->smartFileSystem = $smartFileSystem;
     }
-    public function parseFromFilePath(string $filePath) : \PhpCsFixer\Tokenizer\Tokens
+    public function parseFromFilePath(string $filePath) : Tokens
     {
         $fileContent = $this->smartFileSystem->readFile($filePath);
-        return \PhpCsFixer\Tokenizer\Tokens::fromCode($fileContent);
+        return Tokens::fromCode($fileContent);
     }
 }

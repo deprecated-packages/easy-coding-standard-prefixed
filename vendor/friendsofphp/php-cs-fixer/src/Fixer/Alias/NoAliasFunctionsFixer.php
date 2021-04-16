@@ -26,7 +26,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author Vladimir Reznichenko <kalessil@gmail.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class NoAliasFunctionsFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /** @var array<string, array<int|string>|string> stores alias (key) - master (value) functions mapping */
     private $aliases = [];
@@ -69,7 +69,7 @@ final class NoAliasFunctionsFixer extends \PhpCsFixer\AbstractFixer implements \
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Master functions shall be used instead of aliases.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Master functions shall be used instead of aliases.', [new CodeSample('<?php
 $a = chop($b);
 close($b);
 $a = doubleval($b);
@@ -91,7 +91,7 @@ $a = strchr($haystack, $needle);
 $a = imap_header($imap_stream, 1);
 user_error($message);
 mbereg_search_getregs();
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 $a = is_double($b);
 mbereg_search_getregs();
 ', ['sets' => ['@mbreg']])], null, 'Risky when any of the alias functions are overridden.');
@@ -108,7 +108,7 @@ mbereg_search_getregs();
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
@@ -122,10 +122,10 @@ mbereg_search_getregs();
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $functionsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer();
-        $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
+        $functionsAnalyzer = new FunctionsAnalyzer();
+        $argumentsAnalyzer = new ArgumentsAnalyzer();
         /** @var Token $token */
         foreach ($tokens->findGivenKind(\T_STRING) as $index => $token) {
             // check mapping hit
@@ -143,14 +143,14 @@ mbereg_search_getregs();
             }
             if (\is_array($this->aliases[$tokenContent])) {
                 list($alias, $numberOfArguments) = $this->aliases[$tokenContent];
-                $count = $argumentsAnalyzer->countArguments($tokens, $openParenthesis, $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis));
+                $count = $argumentsAnalyzer->countArguments($tokens, $openParenthesis, $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis));
                 if ($numberOfArguments !== $count) {
                     continue;
                 }
             } else {
                 $alias = $this->aliases[$tokenContent];
             }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_STRING, $alias]);
+            $tokens[$index] = new Token([\T_STRING, $alias]);
         }
     }
     /**
@@ -159,6 +159,6 @@ mbereg_search_getregs();
     protected function createConfigurationDefinition()
     {
         $sets = ['@internal', '@IMAP', '@mbreg', '@all', '@time', '@exif'];
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('sets', 'List of sets to fix. Defined sets are `@internal` (native functions), `@IMAP` (IMAP functions), `@mbreg` (from `ext-mbstring`) `@all` (all listed sets).'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset($sets)])->setDefault(['@internal', '@IMAP'])->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('sets', 'List of sets to fix. Defined sets are `@internal` (native functions), `@IMAP` (IMAP functions), `@mbreg` (from `ext-mbstring`) `@all` (all listed sets).'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset($sets)])->setDefault(['@internal', '@IMAP'])->getOption()]);
     }
 }

@@ -24,7 +24,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class SingleLineCommentStyleFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class SingleLineCommentStyleFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * @var bool
@@ -48,7 +48,7 @@ final class SingleLineCommentStyleFixer extends \PhpCsFixer\AbstractFixer implem
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Single-line comments and multi-line comments with only one line of actual content should use the `//` syntax.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Single-line comments and multi-line comments with only one line of actual content should use the `//` syntax.', [new CodeSample('<?php
 /* asterisk comment */
 $a = 1;
 
@@ -60,7 +60,7 @@ $b = 2;
  * comment
  */
 $c = 3;
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 /* first comment */
 $a = 1;
 
@@ -74,7 +74,7 @@ $b = 2;
  * comment
  */
 $c = 3;
-', ['comment_types' => ['asterisk']]), new \PhpCsFixer\FixerDefinition\CodeSample("<?php # comment\n", ['comment_types' => ['hash']])]);
+', ['comment_types' => ['asterisk']]), new CodeSample("<?php # comment\n", ['comment_types' => ['hash']])]);
     }
     /**
      * {@inheritdoc}
@@ -88,14 +88,14 @@ $c = 3;
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_COMMENT)) {
@@ -108,25 +108,25 @@ $c = 3;
                     continue;
                     // This might be attribute on PHP8, do not change
                 }
-                $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), '//' . \substr($content, 1)]);
+                $tokens[$index] = new Token([$token->getId(), '//' . \substr($content, 1)]);
                 continue;
             }
-            if (!$this->asteriskEnabled || \false !== \strpos($commentContent, '?>') || '/*' !== \substr($content, 0, 2) || 1 === \PhpCsFixer\Preg::match('/[^\\s\\*].*\\R.*[^\\s\\*]/s', $commentContent)) {
+            if (!$this->asteriskEnabled || \false !== \strpos($commentContent, '?>') || '/*' !== \substr($content, 0, 2) || 1 === Preg::match('/[^\\s\\*].*\\R.*[^\\s\\*]/s', $commentContent)) {
                 continue;
             }
             $nextTokenIndex = $index + 1;
             if (isset($tokens[$nextTokenIndex])) {
                 $nextToken = $tokens[$nextTokenIndex];
-                if (!$nextToken->isWhitespace() || 1 !== \PhpCsFixer\Preg::match('/\\R/', $nextToken->getContent())) {
+                if (!$nextToken->isWhitespace() || 1 !== Preg::match('/\\R/', $nextToken->getContent())) {
                     continue;
                 }
-                $tokens[$nextTokenIndex] = new \PhpCsFixer\Tokenizer\Token([$nextToken->getId(), \ltrim($nextToken->getContent(), " \t")]);
+                $tokens[$nextTokenIndex] = new Token([$nextToken->getId(), \ltrim($nextToken->getContent(), " \t")]);
             }
             $content = '//';
-            if (1 === \PhpCsFixer\Preg::match('/[^\\s\\*]/', $commentContent)) {
-                $content = '// ' . \PhpCsFixer\Preg::replace('/[\\s\\*]*([^\\s\\*](?:.+[^\\s\\*])?)[\\s\\*]*/', '\\1', $commentContent);
+            if (1 === Preg::match('/[^\\s\\*]/', $commentContent)) {
+                $content = '// ' . Preg::replace('/[\\s\\*]*([^\\s\\*](?:.+[^\\s\\*])?)[\\s\\*]*/', '\\1', $commentContent);
             }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([$token->getId(), $content]);
+            $tokens[$index] = new Token([$token->getId(), $content]);
         }
     }
     /**
@@ -134,6 +134,6 @@ $c = 3;
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('comment_types', 'List of comment types to fix'))->setAllowedTypes(['array'])->setAllowedValues([new \PhpCsFixer\FixerConfiguration\AllowedValueSubset(['asterisk', 'hash'])])->setDefault(['asterisk', 'hash'])->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('comment_types', 'List of comment types to fix'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset(['asterisk', 'hash'])])->setDefault(['asterisk', 'hash'])->getOption()]);
     }
 }

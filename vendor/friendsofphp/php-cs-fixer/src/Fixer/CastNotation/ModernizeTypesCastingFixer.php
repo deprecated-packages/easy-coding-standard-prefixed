@@ -20,14 +20,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Vladimir Reznichenko <kalessil@gmail.com>
  */
-final class ModernizeTypesCastingFixer extends \PhpCsFixer\AbstractFunctionReferenceFixer
+final class ModernizeTypesCastingFixer extends AbstractFunctionReferenceFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Replaces `intval`, `floatval`, `doubleval`, `strval` and `boolval` function calls with according type casting operator.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Replaces `intval`, `floatval`, `doubleval`, `strval` and `boolval` function calls with according type casting operator.', [new CodeSample('<?php
     $a = intval($b);
     $a = floatval($b);
     $a = doubleval($b);
@@ -38,18 +38,18 @@ final class ModernizeTypesCastingFixer extends \PhpCsFixer\AbstractFunctionRefer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         // replacement patterns
         static $replacement = ['intval' => [\T_INT_CAST, '(int)'], 'floatval' => [\T_DOUBLE_CAST, '(float)'], 'doubleval' => [\T_DOUBLE_CAST, '(float)'], 'strval' => [\T_STRING_CAST, '(string)'], 'boolval' => [\T_BOOL_CAST, '(bool)']];
-        $argumentsAnalyzer = new \PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer();
+        $argumentsAnalyzer = new ArgumentsAnalyzer();
         foreach ($replacement as $functionIdentity => $newToken) {
             $currIndex = 0;
             while (null !== $currIndex) {
@@ -93,9 +93,9 @@ final class ModernizeTypesCastingFixer extends \PhpCsFixer\AbstractFunctionRefer
                     $tokens->clearAt($prevTokenIndex);
                 }
                 // perform transformation
-                $replacementSequence = [new \PhpCsFixer\Tokenizer\Token($newToken), new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' '])];
+                $replacementSequence = [new Token($newToken), new Token([\T_WHITESPACE, ' '])];
                 if ($wrapInParenthesises) {
-                    \array_unshift($replacementSequence, new \PhpCsFixer\Tokenizer\Token('('));
+                    \array_unshift($replacementSequence, new Token('('));
                 }
                 if (!$preserveParenthesises) {
                     // closing parenthesis removed with leading spaces
@@ -110,7 +110,7 @@ final class ModernizeTypesCastingFixer extends \PhpCsFixer\AbstractFunctionRefer
                     $tokens->removeTrailingWhitespace($functionName);
                 }
                 if ($wrapInParenthesises) {
-                    $tokens->insertAt($closeParenthesis, new \PhpCsFixer\Tokenizer\Token(')'));
+                    $tokens->insertAt($closeParenthesis, new Token(')'));
                 }
                 $tokens->overrideRange($functionName, $functionName, $replacementSequence);
                 // nested transformations support

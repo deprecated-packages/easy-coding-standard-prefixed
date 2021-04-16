@@ -29,7 +29,7 @@ interface FixerInterface
      *
      * @return bool
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens);
+    public function isCandidate(Tokens $tokens);
     /**
      * Check if fixer is risky or not.
      *
@@ -44,7 +44,7 @@ interface FixerInterface
      * @param \SplFileInfo $file   A \SplFileInfo instance
      * @param Tokens       $tokens Tokens collection
      */
-    public function fix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens);
+    public function fix(\SplFileInfo $file, Tokens $tokens);
     /**
      * Returns the name of the fixer.
      *

@@ -19,7 +19,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
+final class TernaryToElvisOperatorFixer extends AbstractFixer
 {
     /**
      * @internal
@@ -40,7 +40,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
         '[',
         '{',
         '}',
-        [\PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN],
+        [CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN],
         [\T_AND_EQUAL],
         // &=
         [\T_CONCAT_EQUAL],
@@ -70,7 +70,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Use the Elvis operator `?:` where possible.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n\$foo = \$foo ? \$foo : 1;\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php \$foo = \$bar[a()] ? \$bar[a()] : 1; # \"risky\" sample, \"a()\" only gets called once after fixing\n")], null, 'Risky when relying on functions called on both sides of the `?` operator.');
+        return new FixerDefinition('Use the Elvis operator `?:` where possible.', [new CodeSample("<?php\n\$foo = \$foo ? \$foo : 1;\n"), new CodeSample("<?php \$foo = \$bar[a()] ? \$bar[a()] : 1; # \"risky\" sample, \"a()\" only gets called once after fixing\n")], null, 'Risky when relying on functions called on both sides of the `?` operator.');
     }
     /**
      * {@inheritdoc}
@@ -84,7 +84,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound('?');
     }
@@ -98,9 +98,9 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $blockEdgeDefinitions = \PhpCsFixer\Tokenizer\Tokens::getBlockEdgeDefinitions();
+        $blockEdgeDefinitions = Tokens::getBlockEdgeDefinitions();
         for ($index = \count($tokens) - 5; $index > 1; --$index) {
             if (!$tokens[$index]->equals('?')) {
                 continue;
@@ -129,7 +129,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return null|array null if contains ++/-- operator
      */
-    private function getBeforeOperator(\PhpCsFixer\Tokenizer\Tokens $tokens, $index, array $blockEdgeDefinitions)
+    private function getBeforeOperator(Tokens $tokens, $index, array $blockEdgeDefinitions)
     {
         $index = $tokens->getPrevMeaningfulToken($index);
         $before = ['end' => $index];
@@ -137,7 +137,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
             if ($tokens[$index]->isGivenKind([\T_INC, \T_DEC])) {
                 return null;
             }
-            $blockType = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($tokens[$index]);
+            $blockType = Tokens::detectBlockType($tokens[$index]);
             if (null === $blockType || $blockType['isStart']) {
                 $before['start'] = $index;
                 $index = $tokens->getPrevMeaningfulToken($index);
@@ -171,12 +171,12 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return array
      */
-    private function getAfterOperator(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function getAfterOperator(Tokens $tokens, $index)
     {
         $index = $tokens->getNextMeaningfulToken($index);
         $after = ['start' => $index];
         while (!$tokens[$index]->equals(':')) {
-            $blockType = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($tokens[$index]);
+            $blockType = Tokens::detectBlockType($tokens[$index]);
             if (null !== $blockType) {
                 $index = $tokens->findBlockEnd($blockType['type'], $index);
             }
@@ -190,7 +190,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
      *
      * @return bool
      */
-    private function rangeEqualsRange(\PhpCsFixer\Tokenizer\Tokens $tokens, array $range1, array $range2)
+    private function rangeEqualsRange(Tokens $tokens, array $range1, array $range2)
     {
         $leftStart = $range1['start'];
         $leftEnd = $range1['end'];
@@ -205,7 +205,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
             $rightEnd = $tokens->getPrevMeaningfulToken($rightEnd);
         }
         while ($leftStart <= $leftEnd && $rightStart <= $rightEnd) {
-            if (!$tokens[$leftStart]->equals($tokens[$rightStart]) && !($tokens[$leftStart]->equalsAny(['[', [\PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN]]) && $tokens[$rightStart]->equalsAny(['[', [\PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN]])) && !($tokens[$leftStart]->equalsAny([']', [\PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE]]) && $tokens[$rightStart]->equalsAny([']', [\PhpCsFixer\Tokenizer\CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE]]))) {
+            if (!$tokens[$leftStart]->equals($tokens[$rightStart]) && !($tokens[$leftStart]->equalsAny(['[', [CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN]]) && $tokens[$rightStart]->equalsAny(['[', [CT::T_ARRAY_INDEX_CURLY_BRACE_OPEN]])) && !($tokens[$leftStart]->equalsAny([']', [CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE]]) && $tokens[$rightStart]->equalsAny([']', [CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE]]))) {
                 return \false;
             }
             $leftStart = $tokens->getNextMeaningfulToken($leftStart);
@@ -213,7 +213,7 @@ final class TernaryToElvisOperatorFixer extends \PhpCsFixer\AbstractFixer
         }
         return $leftStart > $leftEnd && $rightStart > $rightEnd;
     }
-    private function clearMeaningfulFromRange(\PhpCsFixer\Tokenizer\Tokens $tokens, array $range)
+    private function clearMeaningfulFromRange(Tokens $tokens, array $range)
     {
         // $range['end'] must be meaningful!
         for ($i = $range['end']; $i >= $range['start']; $i = $tokens->getPrevMeaningfulToken($i)) {

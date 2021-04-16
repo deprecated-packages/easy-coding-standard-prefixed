@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenAnalyzer;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 final class NewlineAnalyzer
@@ -11,7 +11,7 @@ final class NewlineAnalyzer
     /**
      * @param Tokens<Token> $tokens
      */
-    public function doesContentBeforeBracketRequireNewline(\PhpCsFixer\Tokenizer\Tokens $tokens, int $i) : bool
+    public function doesContentBeforeBracketRequireNewline(Tokens $tokens, int $i) : bool
     {
         $previousMeaningfulTokenPosition = $tokens->getPrevNonWhitespace($i);
         if ($previousMeaningfulTokenPosition === null) {
@@ -32,11 +32,11 @@ final class NewlineAnalyzer
         // is a function
         return $previousPreviousToken->isGivenKind([\T_RETURN, \T_DOUBLE_COLON, T_OPEN_CURLY_BRACKET]);
     }
-    public function isNewlineToken(\PhpCsFixer\Tokenizer\Token $currentToken) : bool
+    public function isNewlineToken(Token $currentToken) : bool
     {
         if (!$currentToken->isWhitespace()) {
             return \false;
         }
-        return \_PhpScopercc9aec205203\Nette\Utils\Strings::contains($currentToken->getContent(), "\n");
+        return Strings::contains($currentToken->getContent(), "\n");
     }
 }

@@ -25,7 +25,7 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends \PhpCsFixer\Abstract
     {
         if (!isset(self::$syntaxValidationCache[$code])) {
             try {
-                \PhpCsFixer\Tokenizer\Tokens::fromCode($code);
+                Tokens::fromCode($code);
                 self::$syntaxValidationCache[$code] = \true;
             } catch (\ParseError $e) {
                 self::$syntaxValidationCache[$code] = \false;

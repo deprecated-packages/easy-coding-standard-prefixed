@@ -471,11 +471,11 @@ class Token
         static $defaultOptions = null;
         if (null === $options) {
             if (null === $defaultOptions) {
-                $defaultOptions = \PhpCsFixer\Utils::calculateBitmask(['JSON_PRETTY_PRINT', 'JSON_NUMERIC_CHECK']);
+                $defaultOptions = Utils::calculateBitmask(['JSON_PRETTY_PRINT', 'JSON_NUMERIC_CHECK']);
             }
             $options = $defaultOptions;
         } else {
-            $options = \PhpCsFixer\Utils::calculateBitmask($options);
+            $options = Utils::calculateBitmask($options);
         }
         $jsonResult = \json_encode($this->toArray(), $options);
         if (\JSON_ERROR_NONE !== \json_last_error()) {

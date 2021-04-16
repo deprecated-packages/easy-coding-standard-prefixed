@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Squiz\Tests\CSS;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class NamedColoursUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class NamedColoursUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

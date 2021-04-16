@@ -56,7 +56,7 @@ class Tag
     public function getName()
     {
         if (null === $this->name) {
-            \PhpCsFixer\Preg::matchAll('/@[a-zA-Z0-9_-]+(?=\\s|$)/', $this->line->getContent(), $matches);
+            Preg::matchAll('/@[a-zA-Z0-9_-]+(?=\\s|$)/', $this->line->getContent(), $matches);
             if (isset($matches[0][0])) {
                 $this->name = \ltrim($matches[0][0], '@');
             } else {
@@ -78,7 +78,7 @@ class Tag
         if ('other' === $current) {
             throw new \RuntimeException('Cannot set name on unknown tag.');
         }
-        $this->line->setContent(\PhpCsFixer\Preg::replace("/@{$current}/", "@{$name}", $this->line->getContent(), 1));
+        $this->line->setContent(Preg::replace("/@{$current}/", "@{$name}", $this->line->getContent(), 1));
         $this->name = $name;
     }
     /**

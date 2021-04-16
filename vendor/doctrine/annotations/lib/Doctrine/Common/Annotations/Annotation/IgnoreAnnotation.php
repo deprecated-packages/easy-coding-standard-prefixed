@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScopercc9aec205203\Doctrine\Common\Annotations\Annotation;
+namespace _PhpScopereb9508917a55\Doctrine\Common\Annotations\Annotation;
 
 use RuntimeException;
 use function is_array;
@@ -24,11 +24,11 @@ final class IgnoreAnnotation
      */
     public function __construct(array $values)
     {
-        if (\is_string($values['value'])) {
+        if (is_string($values['value'])) {
             $values['value'] = [$values['value']];
         }
-        if (!\is_array($values['value'])) {
-            throw new \RuntimeException(\sprintf('@IgnoreAnnotation expects either a string name, or an array of strings, but got %s.', \json_encode($values['value'])));
+        if (!is_array($values['value'])) {
+            throw new RuntimeException(sprintf('@IgnoreAnnotation expects either a string name, or an array of strings, but got %s.', json_encode($values['value'])));
         }
         $this->names = $values['value'];
     }

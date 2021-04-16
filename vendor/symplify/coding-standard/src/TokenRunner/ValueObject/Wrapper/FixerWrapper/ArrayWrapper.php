@@ -13,7 +13,7 @@ final class ArrayWrapper
     /**
      * @var int[]
      */
-    private const ARRAY_OPEN_TOKENS = [\T_ARRAY, \PhpCsFixer\Tokenizer\CT::T_ARRAY_SQUARE_BRACE_OPEN];
+    private const ARRAY_OPEN_TOKENS = [\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN];
     /**
      * @var Tokens
      */
@@ -26,7 +26,7 @@ final class ArrayWrapper
      * @var BlockInfo
      */
     private $blockInfo;
-    public function __construct(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo, \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\TokenSkipper $tokenSkipper)
+    public function __construct(Tokens $tokens, BlockInfo $blockInfo, TokenSkipper $tokenSkipper)
     {
         $this->tokens = $tokens;
         $this->tokenSkipper = $tokenSkipper;

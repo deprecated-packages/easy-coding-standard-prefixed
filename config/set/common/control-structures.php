@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercc9aec205203;
+namespace _PhpScopereb9508917a55;
 
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
@@ -18,25 +18,25 @@ use PhpCsFixer\Fixer\Operator\StandardizeIncrementFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMethodCasingFixer;
 use PhpCsFixer\Fixer\StringNotation\ExplicitStringVariableFixer;
 use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
-use _PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
-return static function (\_PhpScopercc9aec205203\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator $containerConfigurator) : void {
+return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
-    $services->set(\PhpCsFixer\Fixer\PhpUnit\PhpUnitMethodCasingFixer::class);
-    $services->set(\PhpCsFixer\Fixer\LanguageConstruct\FunctionToConstantFixer::class);
-    $services->set(\PhpCsFixer\Fixer\StringNotation\ExplicitStringVariableFixer::class);
-    $services->set(\PhpCsFixer\Fixer\LanguageConstruct\ExplicitIndirectVariableFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\SingleClassElementPerStatementFixer::class)->call('configure', [['elements' => ['const', 'property']]]);
-    $services->set(\PhpCsFixer\Fixer\Operator\NewWithBracesFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer::class)->call('configure', [['singleLine' => \true]]);
-    $services->set(\PhpCsFixer\Fixer\Operator\StandardizeIncrementFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\SelfAccessorFixer::class);
-    $services->set(\PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer::class);
-    $services->set(\PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff::class);
-    $services->set(\PhpCsFixer\Fixer\ControlStructure\NoUselessElseFixer::class);
-    $services->set(\PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer::class);
-    $services->set(\PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer::class)->call('configure', [['equal' => \false, 'identical' => \false, 'less_and_greater' => \false]]);
-    $services->set(\PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer::class);
+    $services->set(PhpUnitMethodCasingFixer::class);
+    $services->set(FunctionToConstantFixer::class);
+    $services->set(ExplicitStringVariableFixer::class);
+    $services->set(ExplicitIndirectVariableFixer::class);
+    $services->set(SingleClassElementPerStatementFixer::class)->call('configure', [['elements' => ['const', 'property']]]);
+    $services->set(NewWithBracesFixer::class);
+    $services->set(ClassDefinitionFixer::class)->call('configure', [['singleLine' => \true]]);
+    $services->set(StandardizeIncrementFixer::class);
+    $services->set(SelfAccessorFixer::class);
+    $services->set(MagicConstantCasingFixer::class);
+    $services->set(AssignmentInConditionSniff::class);
+    $services->set(NoUselessElseFixer::class);
+    $services->set(SingleQuoteFixer::class);
+    $services->set(YodaStyleFixer::class)->call('configure', [['equal' => \false, 'identical' => \false, 'less_and_greater' => \false]]);
+    $services->set(OrderedClassElementsFixer::class);
     $parameters = $containerConfigurator->parameters();
-    $parameters->set(\Symplify\EasyCodingStandard\ValueObject\Option::SKIP, [\PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff::class . '.FoundInWhileCondition' => null]);
+    $parameters->set(Option::SKIP, [AssignmentInConditionSniff::class . '.FoundInWhileCondition' => null]);
 };

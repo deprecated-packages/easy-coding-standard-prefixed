@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\File;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class IsReferenceTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class IsReferenceTest extends AbstractMethodUnitTest
 {
     /**
      * Test correctly identifying whether a "bitwise and" token is a reference or not.

@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Sniffs;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class AbstractArraySniffTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class AbstractArraySniffTest extends AbstractMethodUnitTest
 {
     /**
      * The sniff objects we are testing.

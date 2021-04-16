@@ -21,12 +21,12 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Graham Campbell <graham@alt-three.com>
  */
-final class PhpdocNoEmptyReturnFixer extends \PhpCsFixer\AbstractFixer
+final class PhpdocNoEmptyReturnFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
@@ -35,12 +35,12 @@ final class PhpdocNoEmptyReturnFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('`@return void` and `@return null` annotations should be omitted from PHPDoc.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('`@return void` and `@return null` annotations should be omitted from PHPDoc.', [new CodeSample('<?php
 /**
  * @return null
 */
 function foo() {}
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 /**
  * @return void
 */
@@ -60,13 +60,13 @@ function foo() {}
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
                 continue;
             }
-            $doc = new \PhpCsFixer\DocBlock\DocBlock($token->getContent());
+            $doc = new DocBlock($token->getContent());
             $annotations = $doc->getAnnotationsOfType('return');
             if (empty($annotations)) {
                 continue;
@@ -82,13 +82,13 @@ function foo() {}
                 $tokens->clearTokenAndMergeSurroundingWhitespace($index);
                 continue;
             }
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $doc->getContent()]);
+            $tokens[$index] = new Token([\T_DOC_COMMENT, $doc->getContent()]);
         }
     }
     /**
      * Remove return void or return null annotations..
      */
-    private function fixAnnotation(\PhpCsFixer\DocBlock\DocBlock $doc, \PhpCsFixer\DocBlock\Annotation $annotation)
+    private function fixAnnotation(DocBlock $doc, Annotation $annotation)
     {
         $types = $annotation->getNormalizedTypes();
         if (1 === \count($types) && ('null' === $types[0] || 'void' === $types[0])) {

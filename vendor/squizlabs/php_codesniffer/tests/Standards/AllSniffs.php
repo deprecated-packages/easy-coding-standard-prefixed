@@ -11,8 +11,8 @@ namespace PHP_CodeSniffer\Tests\Standards;
 
 use PHP_CodeSniffer\Util\Standards;
 use PHP_CodeSniffer\Autoload;
-use _PhpScopercc9aec205203\PHPUnit\TextUI\TestRunner;
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestSuite;
+use _PhpScopereb9508917a55\PHPUnit\TextUI\TestRunner;
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestSuite;
 class AllSniffs
 {
     /**
@@ -22,7 +22,7 @@ class AllSniffs
      */
     public static function main()
     {
-        \_PhpScopercc9aec205203\PHPUnit\TextUI\TestRunner::run(self::suite());
+        TestRunner::run(self::suite());
     }
     //end main()
     /**
@@ -38,7 +38,7 @@ class AllSniffs
         $GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'] = [];
         $GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'] = [];
         $GLOBALS['PHP_CODESNIFFER_SNIFF_CASE_FILES'] = [];
-        $suite = new \_PhpScopercc9aec205203\PHPUnit\Framework\TestSuite('PHP CodeSniffer Standards');
+        $suite = new TestSuite('PHP CodeSniffer Standards');
         $isInstalled = !\is_file(__DIR__ . '/../../autoload.php');
         // Optionally allow for ignoring the tests for one or more standards.
         $ignoreTestsForStandards = \getenv('PHPCS_IGNORE_TESTS');
@@ -49,7 +49,7 @@ class AllSniffs
         }
         $installedStandards = self::getInstalledStandardDetails();
         foreach ($installedStandards as $standard => $details) {
-            \PHP_CodeSniffer\Autoload::addSearchPath($details['path'], $details['namespace']);
+            Autoload::addSearchPath($details['path'], $details['namespace']);
             // If the test is running PEAR installed, the built-in standards
             // are split into different directories; one for the sniffs and
             // a different file system location for tests.
@@ -78,7 +78,7 @@ class AllSniffs
                 if ($ext !== 'php') {
                     continue;
                 }
-                $className = \PHP_CodeSniffer\Autoload::loadFile($file->getPathname());
+                $className = Autoload::loadFile($file->getPathname());
                 $GLOBALS['PHP_CODESNIFFER_STANDARD_DIRS'][$className] = $details['path'];
                 $GLOBALS['PHP_CODESNIFFER_TEST_DIRS'][$className] = $testsDir;
                 $suite->addTestSuite($className);
@@ -96,7 +96,7 @@ class AllSniffs
      */
     protected static function getInstalledStandardDetails()
     {
-        return \PHP_CodeSniffer\Util\Standards::getInstalledStandardDetails(\true);
+        return Standards::getInstalledStandardDetails(\true);
     }
     //end getInstalledStandardDetails()
 }

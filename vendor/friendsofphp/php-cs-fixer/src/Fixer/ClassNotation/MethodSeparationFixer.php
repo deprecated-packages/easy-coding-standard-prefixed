@@ -21,14 +21,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  *
  * @deprecated in 2.8, proxy to ClassAttributesSeparationFixer
  */
-final class MethodSeparationFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\DeprecatedFixerInterface, \PhpCsFixer\Fixer\WhitespacesAwareFixerInterface
+final class MethodSeparationFixer extends AbstractProxyFixer implements DeprecatedFixerInterface, WhitespacesAwareFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Methods must be separated with one blank line.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Methods must be separated with one blank line.', [new CodeSample('<?php
 final class Sample
 {
     protected function foo()

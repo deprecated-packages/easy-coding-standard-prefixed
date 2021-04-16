@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Composer;
 
-use _PhpScopercc9aec205203\Jean85\Exception\ReplacedPackageException;
-use _PhpScopercc9aec205203\Jean85\PrettyVersions;
-use _PhpScopercc9aec205203\Jean85\Version;
+use _PhpScopereb9508917a55\Jean85\Exception\ReplacedPackageException;
+use _PhpScopereb9508917a55\Jean85\PrettyVersions;
+use _PhpScopereb9508917a55\Jean85\Version;
 use OutOfBoundsException;
-use _PhpScopercc9aec205203\PharIo\Version\InvalidVersionException;
+use _PhpScopereb9508917a55\PharIo\Version\InvalidVersionException;
 final class PackageVersionProvider
 {
     /**
@@ -18,7 +18,7 @@ final class PackageVersionProvider
         try {
             $version = $this->getVersion($packageName, 'symplify/symplify');
             return $version->getPrettyVersion();
-        } catch (\OutOfBoundsException|\_PhpScopercc9aec205203\PharIo\Version\InvalidVersionException $exceptoin) {
+        } catch (OutOfBoundsException|InvalidVersionException $exceptoin) {
             return 'Unknown';
         }
     }
@@ -28,12 +28,12 @@ final class PackageVersionProvider
      * @see https://github.com/symplify/symplify/pull/2901#issuecomment-771536136
      * @see https://github.com/Jean85/pretty-package-versions/pull/16#issuecomment-620550459
      */
-    private function getVersion(string $packageName, string $replacingPackageName) : \_PhpScopercc9aec205203\Jean85\Version
+    private function getVersion(string $packageName, string $replacingPackageName) : Version
     {
         try {
-            return \_PhpScopercc9aec205203\Jean85\PrettyVersions::getVersion($packageName);
-        } catch (\OutOfBoundsException|\_PhpScopercc9aec205203\Jean85\Exception\ReplacedPackageException $exception) {
-            return \_PhpScopercc9aec205203\Jean85\PrettyVersions::getVersion($replacingPackageName);
+            return PrettyVersions::getVersion($packageName);
+        } catch (OutOfBoundsException|ReplacedPackageException $exception) {
+            return PrettyVersions::getVersion($replacingPackageName);
         }
     }
 }

@@ -18,14 +18,14 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
  * @author Graham Campbell <graham@alt-three.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpdocNoAccessFixer extends \PhpCsFixer\AbstractProxyFixer
+final class PhpdocNoAccessFixer extends AbstractProxyFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('`@access` annotations should be omitted from PHPDoc.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('`@access` annotations should be omitted from PHPDoc.', [new CodeSample('<?php
 class Foo
 {
     /**

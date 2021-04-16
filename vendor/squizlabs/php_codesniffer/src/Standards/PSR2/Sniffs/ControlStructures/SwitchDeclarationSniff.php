@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
-class SwitchDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
+class SwitchDeclarationSniff implements Sniff
 {
     /**
      * The number of spaces code should be indented.
@@ -39,7 +39,7 @@ class SwitchDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @return void
      */
-    public function process(\PHP_CodeSniffer\Files\File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // We can't process SWITCH statements unless we know where they start and end.
@@ -86,7 +86,7 @@ class SwitchDeclarationSniff implements \PHP_CodeSniffer\Sniffs\Sniff
                     }
                 }
                 $next = $phpcsFile->findNext(\T_WHITESPACE, $opener + 1, null, \true);
-                if ($tokens[$next]['line'] === $tokens[$opener]['line'] && ($tokens[$next]['code'] === \T_COMMENT || isset(\PHP_CodeSniffer\Util\Tokens::$phpcsCommentTokens[$tokens[$next]['code']]) === \true)) {
+                if ($tokens[$next]['line'] === $tokens[$opener]['line'] && ($tokens[$next]['code'] === \T_COMMENT || isset(Tokens::$phpcsCommentTokens[$tokens[$next]['code']]) === \true)) {
                     // Skip comments on the same line.
                     $next = $phpcsFile->findNext(\T_WHITESPACE, $next + 1, null, \true);
                 }

@@ -12,7 +12,7 @@
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
 
 use PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest;
-class DoubleArrowTest extends \PHP_CodeSniffer\Tests\Core\AbstractMethodUnitTest
+class DoubleArrowTest extends AbstractMethodUnitTest
 {
     /**
      * Test that "normal" double arrows are correctly tokenized as `T_DOUBLE_ARROW`.

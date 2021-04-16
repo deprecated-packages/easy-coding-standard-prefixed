@@ -906,7 +906,7 @@ class Tokens extends \SplFixedArray
     {
         static $options = null;
         if (null === $options) {
-            $options = \PhpCsFixer\Utils::calculateBitmask(['JSON_PRETTY_PRINT', 'JSON_NUMERIC_CHECK']);
+            $options = Utils::calculateBitmask(['JSON_PRETTY_PRINT', 'JSON_NUMERIC_CHECK']);
         }
         $output = new \SplFixedArray(\count($this));
         foreach ($this as $index => $token) {
@@ -1127,7 +1127,7 @@ class Tokens extends \SplFixedArray
             $tokenToCheck = $this[$whitespaceIndex];
             // if the token candidate to remove is preceded by single line comment we do not consider the new line after this comment as part of T_WHITESPACE
             if (isset($this[$whitespaceIndex - 1]) && $this[$whitespaceIndex - 1]->isComment() && '/*' !== \substr($this[$whitespaceIndex - 1]->getContent(), 0, 2)) {
-                list($emptyString, $newContent, $whitespacesToCheck) = \PhpCsFixer\Preg::split('/^(\\R)/', $this[$whitespaceIndex]->getContent(), -1, \PREG_SPLIT_DELIM_CAPTURE);
+                list($emptyString, $newContent, $whitespacesToCheck) = Preg::split('/^(\\R)/', $this[$whitespaceIndex]->getContent(), -1, \PREG_SPLIT_DELIM_CAPTURE);
                 if ('' === $whitespacesToCheck) {
                     return;
                 }

@@ -56,13 +56,13 @@ class FileList implements \Iterator, \Countable
      *
      * @return void
      */
-    public function __construct(\PHP_CodeSniffer\Config $config, \PHP_CodeSniffer\Ruleset $ruleset)
+    public function __construct(Config $config, Ruleset $ruleset)
     {
         $this->ruleset = $ruleset;
         $this->config = $config;
         $paths = $config->files;
         foreach ($paths as $path) {
-            $isPharFile = \PHP_CodeSniffer\Util\Common::isPharFile($path);
+            $isPharFile = Util\Common::isPharFile($path);
             if (\is_dir($path) === \true || $isPharFile === \true) {
                 if ($isPharFile === \true) {
                     $path = 'phar://' . $path;
@@ -131,9 +131,9 @@ class FileList implements \Iterator, \Countable
                 $filename = \realpath($filterType);
                 if ($filename === \false) {
                     $error = "ERROR: Custom filter \"{$filterType}\" not found" . \PHP_EOL;
-                    throw new \PHP_CodeSniffer\Exceptions\DeepExitException($error, 3);
+                    throw new DeepExitException($error, 3);
                 }
-                $filterClass = \PHP_CodeSniffer\Autoload::loadFile($filename);
+                $filterClass = Autoload::loadFile($filename);
             } else {
                 $filterClass = '\\PHP_CodeSniffer\\Filters\\' . $filterType;
             }

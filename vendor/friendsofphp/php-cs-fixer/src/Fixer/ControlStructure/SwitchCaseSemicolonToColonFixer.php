@@ -21,14 +21,14 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @author SpacePossum
  */
-final class SwitchCaseSemicolonToColonFixer extends \PhpCsFixer\AbstractFixer
+final class SwitchCaseSemicolonToColonFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('A case should be followed by a colon and not a semicolon.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('A case should be followed by a colon and not a semicolon.', [new CodeSample('<?php
     switch ($a) {
         case 1;
             break;
@@ -49,14 +49,14 @@ final class SwitchCaseSemicolonToColonFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_CASE, \T_DEFAULT]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if ($token->isGivenKind(\T_CASE)) {
@@ -70,13 +70,13 @@ final class SwitchCaseSemicolonToColonFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param int $index
      */
-    protected function fixSwitchCase(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    protected function fixSwitchCase(Tokens $tokens, $index)
     {
         $ternariesCount = 0;
         do {
             if ($tokens[$index]->equalsAny(['(', '{'])) {
                 // skip constructs
-                $type = \PhpCsFixer\Tokenizer\Tokens::detectBlockType($tokens[$index]);
+                $type = Tokens::detectBlockType($tokens[$index]);
                 $index = $tokens->findBlockEnd($type['type'], $index);
                 continue;
             }
@@ -92,13 +92,13 @@ final class SwitchCaseSemicolonToColonFixer extends \PhpCsFixer\AbstractFixer
             }
         } while (++$index);
         if ($tokens[$index]->equals(';')) {
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token(':');
+            $tokens[$index] = new Token(':');
         }
     }
     /**
      * @param int $index
      */
-    protected function fixSwitchDefault(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    protected function fixSwitchDefault(Tokens $tokens, $index)
     {
         do {
             if ($tokens[$index]->equalsAny([':', ';', [\T_DOUBLE_ARROW]])) {
@@ -106,7 +106,7 @@ final class SwitchCaseSemicolonToColonFixer extends \PhpCsFixer\AbstractFixer
             }
         } while (++$index);
         if ($tokens[$index]->equals(';')) {
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token(':');
+            $tokens[$index] = new Token(':');
         }
     }
 }

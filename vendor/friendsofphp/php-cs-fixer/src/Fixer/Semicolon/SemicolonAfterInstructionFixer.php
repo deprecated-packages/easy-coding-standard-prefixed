@@ -19,14 +19,14 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class SemicolonAfterInstructionFixer extends \PhpCsFixer\AbstractFixer
+final class SemicolonAfterInstructionFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Instructions must be terminated with a semicolon.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php echo 1 ?>\n")]);
+        return new FixerDefinition('Instructions must be terminated with a semicolon.', [new CodeSample("<?php echo 1 ?>\n")]);
     }
     /**
      * {@inheritdoc}
@@ -40,14 +40,14 @@ final class SemicolonAfterInstructionFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_CLOSE_TAG);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         for ($index = \count($tokens) - 1; $index > 1; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_CLOSE_TAG)) {
@@ -57,7 +57,7 @@ final class SemicolonAfterInstructionFixer extends \PhpCsFixer\AbstractFixer
             if ($tokens[$prev]->equalsAny([';', '{', '}', ':', [\T_OPEN_TAG]])) {
                 continue;
             }
-            $tokens->insertAt($prev + 1, new \PhpCsFixer\Tokenizer\Token(';'));
+            $tokens->insertAt($prev + 1, new Token(';'));
         }
     }
 }

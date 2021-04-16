@@ -26,11 +26,11 @@ use PhpCsFixer\Preg;
 use PhpCsFixer\RuleSet\RuleSet;
 use PhpCsFixer\RuleSet\RuleSets;
 use PhpCsFixer\Utils;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -38,7 +38,7 @@ use _PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface;
  *
  * @internal
  */
-final class HelpCommand extends \_PhpScopercc9aec205203\Symfony\Component\Console\Command\HelpCommand
+final class HelpCommand extends BaseHelpCommand
 {
     protected static $defaultName = 'help';
     /**
@@ -314,7 +314,7 @@ EOF;
      *
      * @return null|array
      */
-    public static function getDisplayableAllowedValues(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option)
+    public static function getDisplayableAllowedValues(FixerOptionInterface $option)
     {
         $allowed = $option->getAllowedValues();
         if (null !== $allowed) {
@@ -322,10 +322,10 @@ EOF;
                 return !$value instanceof \Closure;
             });
             \usort($allowed, static function ($valueA, $valueB) {
-                if ($valueA instanceof \PhpCsFixer\FixerConfiguration\AllowedValueSubset) {
+                if ($valueA instanceof AllowedValueSubset) {
                     return -1;
                 }
-                if ($valueB instanceof \PhpCsFixer\FixerConfiguration\AllowedValueSubset) {
+                if ($valueB instanceof AllowedValueSubset) {
                     return 1;
                 }
                 return \strcasecmp(self::toString($valueA), self::toString($valueB));
@@ -349,7 +349,7 @@ EOF;
         }
         $changelogFile = self::getChangeLogFile();
         if (null === $changelogFile) {
-            $version = \PhpCsFixer\Console\Application::VERSION;
+            $version = Application::VERSION;
             return $version;
         }
         $changelog = @\file_get_contents($changelogFile);
@@ -357,8 +357,8 @@ EOF;
             $error = \error_get_last();
             throw new \RuntimeException(\sprintf('Failed to read content of the changelog file "%s".%s', $changelogFile, $error ? ' ' . $error['message'] : ''));
         }
-        for ($i = \PhpCsFixer\Console\Application::getMajorVersion(); $i > 0; --$i) {
-            if (1 === \PhpCsFixer\Preg::match('/Changelog for v(' . $i . '.\\d+.\\d+)/', $changelog, $matches)) {
+        for ($i = Application::getMajorVersion(); $i > 0; --$i) {
+            if (1 === Preg::match('/Changelog for v(' . $i . '.\\d+.\\d+)/', $changelog, $matches)) {
                 $version = $matches[1];
                 break;
             }
@@ -371,9 +371,9 @@ EOF;
     /**
      * {@inheritdoc}
      */
-    protected function initialize(\_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $output->getFormatter()->setStyle('url', new \_PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatterStyle('blue'));
+        $output->getFormatter()->setStyle('url', new OutputFormatterStyle('blue'));
     }
     /**
      * @return null|string
@@ -389,16 +389,16 @@ EOF;
     private static function getFixersHelp()
     {
         $help = '';
-        $fixerFactory = new \PhpCsFixer\FixerFactory();
+        $fixerFactory = new FixerFactory();
         /** @var AbstractFixer[] $fixers */
         $fixers = $fixerFactory->registerBuiltInFixers()->getFixers();
         // sort fixers by name
-        \usort($fixers, static function (\PhpCsFixer\Fixer\FixerInterface $a, \PhpCsFixer\Fixer\FixerInterface $b) {
+        \usort($fixers, static function (FixerInterface $a, FixerInterface $b) {
             return \strcmp($a->getName(), $b->getName());
         });
         $ruleSets = [];
-        foreach (\PhpCsFixer\RuleSet\RuleSets::getSetDefinitionNames() as $setName) {
-            $ruleSets[$setName] = new \PhpCsFixer\RuleSet\RuleSet([$setName => \true]);
+        foreach (RuleSets::getSetDefinitionNames() as $setName) {
+            $ruleSets[$setName] = new RuleSet([$setName => \true]);
         }
         $getSetsWithRule = static function ($rule) use($ruleSets) {
             $sets = [];
@@ -413,34 +413,34 @@ EOF;
         foreach ($fixers as $i => $fixer) {
             $sets = $getSetsWithRule($fixer->getName());
             $description = $fixer->getDefinition()->getSummary();
-            if ($fixer instanceof \PhpCsFixer\Fixer\DeprecatedFixerInterface) {
+            if ($fixer instanceof DeprecatedFixerInterface) {
                 $successors = $fixer->getSuccessorsNames();
-                $message = [] === $successors ? 'will be removed on next major version' : \sprintf('use %s instead', \PhpCsFixer\Utils::naturalLanguageJoinWithBackticks($successors));
+                $message = [] === $successors ? 'will be removed on next major version' : \sprintf('use %s instead', Utils::naturalLanguageJoinWithBackticks($successors));
                 $description .= \sprintf(' DEPRECATED: %s.', $message);
             }
-            $description = \implode("\n   | ", self::wordwrap(\PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', $description), 72));
+            $description = \implode("\n   | ", self::wordwrap(Preg::replace('/(`.+?`)/', '<info>$1</info>', $description), 72));
             if (!empty($sets)) {
                 $help .= \sprintf(" * <comment>%s</comment> [%s]\n   | %s\n", $fixer->getName(), \implode(', ', $sets), $description);
             } else {
                 $help .= \sprintf(" * <comment>%s</comment>\n   | %s\n", $fixer->getName(), $description);
             }
             if ($fixer->isRisky()) {
-                $help .= \sprintf("   | *Risky rule: %s.*\n", \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', $fixer->getDefinition()->getRiskyDescription()))));
+                $help .= \sprintf("   | *Risky rule: %s.*\n", Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(Preg::replace('/\\.$/', '', $fixer->getDefinition()->getRiskyDescription()))));
             }
-            if ($fixer instanceof \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface) {
+            if ($fixer instanceof ConfigurationDefinitionFixerInterface) {
                 $configurationDefinition = $fixer->getConfigurationDefinition();
                 $configurationDefinitionOptions = $configurationDefinition->getOptions();
                 if (\count($configurationDefinitionOptions)) {
                     $help .= "   |\n   | Configuration options:\n";
-                    \usort($configurationDefinitionOptions, static function (\PhpCsFixer\FixerConfiguration\FixerOptionInterface $optionA, \PhpCsFixer\FixerConfiguration\FixerOptionInterface $optionB) {
+                    \usort($configurationDefinitionOptions, static function (FixerOptionInterface $optionA, FixerOptionInterface $optionB) {
                         return \strcmp($optionA->getName(), $optionB->getName());
                     });
                     foreach ($configurationDefinitionOptions as $option) {
-                        $line = '<info>' . \_PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getName()) . '</info>';
+                        $line = '<info>' . OutputFormatter::escape($option->getName()) . '</info>';
                         $allowed = self::getDisplayableAllowedValues($option);
                         if (null !== $allowed) {
                             foreach ($allowed as &$value) {
-                                if ($value instanceof \PhpCsFixer\FixerConfiguration\AllowedValueSubset) {
+                                if ($value instanceof AllowedValueSubset) {
                                     $value = 'a subset of <comment>' . self::toString($value->getAllowedValues()) . '</comment>';
                                 } else {
                                     $value = '<comment>' . self::toString($value) . '</comment>';
@@ -454,16 +454,16 @@ EOF;
                         if (null !== $allowed) {
                             $line .= ' (' . \implode(', ', $allowed) . ')';
                         }
-                        $line .= ': ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDescription())))) . '; ';
+                        $line .= ': ' . Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(Preg::replace('/\\.$/', '', OutputFormatter::escape($option->getDescription())))) . '; ';
                         if ($option->hasDefault()) {
                             $line .= 'defaults to <comment>' . self::toString($option->getDefault()) . '</comment>';
                         } else {
                             $line .= 'required';
                         }
-                        if ($option instanceof \PhpCsFixer\FixerConfiguration\DeprecatedFixerOption) {
-                            $line .= '. DEPRECATED: ' . \PhpCsFixer\Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(\PhpCsFixer\Preg::replace('/\\.$/', '', \_PhpScopercc9aec205203\Symfony\Component\Console\Formatter\OutputFormatter::escape($option->getDeprecationMessage()))));
+                        if ($option instanceof DeprecatedFixerOption) {
+                            $line .= '. DEPRECATED: ' . Preg::replace('/(`.+?`)/', '<info>$1</info>', \lcfirst(Preg::replace('/\\.$/', '', OutputFormatter::escape($option->getDeprecationMessage()))));
                         }
-                        if ($option instanceof \PhpCsFixer\FixerConfiguration\AliasedFixerOption) {
+                        if ($option instanceof AliasedFixerOption) {
                             $line .= '; DEPRECATED alias: <comment>' . $option->getAlias() . '</comment>';
                         }
                         foreach (self::wordwrap($line, 72) as $index => $line) {
@@ -471,7 +471,7 @@ EOF;
                         }
                     }
                 }
-            } elseif ($fixer instanceof \PhpCsFixer\Fixer\ConfigurableFixerInterface) {
+            } elseif ($fixer instanceof ConfigurableFixerInterface) {
                 $help .= "   | *Configurable rule.*\n";
             }
             if ($count !== $i) {
@@ -479,7 +479,7 @@ EOF;
             }
         }
         // prevent "\</foo>" from being rendered as an escaped literal style tag
-        return \PhpCsFixer\Preg::replace('#\\\\(</.*?>)#', '<<$1', $help);
+        return Preg::replace('#\\\\(</.*?>)#', '<<$1', $help);
     }
     /**
      * Wraps a string to the given number of characters, ignoring style tags.
@@ -495,7 +495,7 @@ EOF;
         $currentLine = 0;
         $lineLength = 0;
         foreach (\explode(' ', $string) as $word) {
-            $wordLength = \strlen(\PhpCsFixer\Preg::replace('~</?(\\w+)>~', '', $word));
+            $wordLength = \strlen(Preg::replace('~</?(\\w+)>~', '', $word));
             if (0 !== $lineLength) {
                 ++$wordLength;
                 // space before word
@@ -519,7 +519,7 @@ EOF;
     private static function scalarToString($value)
     {
         $str = \var_export($value, \true);
-        return \PhpCsFixer\Preg::replace('/\\bNULL\\b/', 'null', $str);
+        return Preg::replace('/\\bNULL\\b/', 'null', $str);
     }
     /**
      * @return string

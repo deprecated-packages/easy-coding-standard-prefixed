@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercc9aec205203\Symfony\Component\Config\Definition\Dumper;
+namespace _PhpScopereb9508917a55\Symfony\Component\Config\Definition\Dumper;
 
-use _PhpScopercc9aec205203\Symfony\Component\Config\Definition\ArrayNode;
-use _PhpScopercc9aec205203\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Config\Definition\EnumNode;
-use _PhpScopercc9aec205203\Symfony\Component\Config\Definition\NodeInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Config\Definition\PrototypedArrayNode;
-use _PhpScopercc9aec205203\Symfony\Component\Config\Definition\ScalarNode;
-use _PhpScopercc9aec205203\Symfony\Component\Config\Definition\VariableNode;
-use _PhpScopercc9aec205203\Symfony\Component\Yaml\Inline;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Definition\ArrayNode;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Definition\EnumNode;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Definition\NodeInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Definition\ScalarNode;
+use _PhpScopereb9508917a55\Symfony\Component\Config\Definition\VariableNode;
+use _PhpScopereb9508917a55\Symfony\Component\Yaml\Inline;
 /**
  * Dumps a Yaml reference configuration for the given configuration/node instance.
  *
@@ -26,19 +26,19 @@ use _PhpScopercc9aec205203\Symfony\Component\Yaml\Inline;
 class YamlReferenceDumper
 {
     private $reference;
-    public function dump(\_PhpScopercc9aec205203\Symfony\Component\Config\Definition\ConfigurationInterface $configuration)
+    public function dump(ConfigurationInterface $configuration)
     {
         return $this->dumpNode($configuration->getConfigTreeBuilder()->buildTree());
     }
-    public function dumpAtPath(\_PhpScopercc9aec205203\Symfony\Component\Config\Definition\ConfigurationInterface $configuration, string $path)
+    public function dumpAtPath(ConfigurationInterface $configuration, string $path)
     {
         $rootNode = $node = $configuration->getConfigTreeBuilder()->buildTree();
         foreach (\explode('.', $path) as $step) {
-            if (!$node instanceof \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\ArrayNode) {
+            if (!$node instanceof ArrayNode) {
                 throw new \UnexpectedValueException(\sprintf('Unable to find node at path "%s.%s".', $rootNode->getName(), $path));
             }
             /** @var NodeInterface[] $children */
-            $children = $node instanceof \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\PrototypedArrayNode ? $this->getPrototypeChildren($node) : $node->getChildren();
+            $children = $node instanceof PrototypedArrayNode ? $this->getPrototypeChildren($node) : $node->getChildren();
             foreach ($children as $child) {
                 if ($child->getName() === $step) {
                     $node = $child;
@@ -49,7 +49,7 @@ class YamlReferenceDumper
         }
         return $this->dumpNode($node);
     }
-    public function dumpNode(\_PhpScopercc9aec205203\Symfony\Component\Config\Definition\NodeInterface $node)
+    public function dumpNode(NodeInterface $node)
     {
         $this->reference = '';
         $this->writeNode($node);
@@ -57,7 +57,7 @@ class YamlReferenceDumper
         $this->reference = null;
         return $ref;
     }
-    private function writeNode(\_PhpScopercc9aec205203\Symfony\Component\Config\Definition\NodeInterface $node, \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\NodeInterface $parentNode = null, int $depth = 0, bool $prototypedArray = \false)
+    private function writeNode(NodeInterface $node, NodeInterface $parentNode = null, int $depth = 0, bool $prototypedArray = \false)
     {
         $comments = [];
         $default = '';
@@ -65,9 +65,9 @@ class YamlReferenceDumper
         $children = null;
         $example = $node->getExample();
         // defaults
-        if ($node instanceof \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\ArrayNode) {
+        if ($node instanceof ArrayNode) {
             $children = $node->getChildren();
-            if ($node instanceof \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\PrototypedArrayNode) {
+            if ($node instanceof PrototypedArrayNode) {
                 $children = $this->getPrototypeChildren($node);
             }
             if (!$children) {
@@ -77,10 +77,10 @@ class YamlReferenceDumper
                     $default = '[]';
                 }
             }
-        } elseif ($node instanceof \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\EnumNode) {
+        } elseif ($node instanceof EnumNode) {
             $comments[] = 'One of ' . \implode('; ', \array_map('json_encode', $node->getValues()));
-            $default = $node->hasDefaultValue() ? \_PhpScopercc9aec205203\Symfony\Component\Yaml\Inline::dump($node->getDefaultValue()) : '~';
-        } elseif (\_PhpScopercc9aec205203\Symfony\Component\Config\Definition\VariableNode::class === \get_class($node) && \is_array($example)) {
+            $default = $node->hasDefaultValue() ? Inline::dump($node->getDefaultValue()) : '~';
+        } elseif (VariableNode::class === \get_class($node) && \is_array($example)) {
             // If there is an array example, we are sure we dont need to print a default value
             $default = '';
         } else {
@@ -94,7 +94,7 @@ class YamlReferenceDumper
                         $default = '[]';
                     }
                 } else {
-                    $default = \_PhpScopercc9aec205203\Symfony\Component\Yaml\Inline::dump($default);
+                    $default = Inline::dump($default);
                 }
             }
         }
@@ -109,7 +109,7 @@ class YamlReferenceDumper
         }
         // example
         if ($example && !\is_array($example)) {
-            $comments[] = 'Example: ' . \_PhpScopercc9aec205203\Symfony\Component\Yaml\Inline::dump($example);
+            $comments[] = 'Example: ' . Inline::dump($example);
         }
         $default = '' != (string) $default ? ' ' . $default : '';
         $comments = \count($comments) ? '# ' . \implode(', ', $comments) : '';
@@ -133,11 +133,11 @@ class YamlReferenceDumper
             $this->writeLine('');
             $message = \count($example) > 1 ? 'Examples' : 'Example';
             $this->writeLine('# ' . $message . ':', $depth * 4 + 4);
-            $this->writeArray(\array_map([\_PhpScopercc9aec205203\Symfony\Component\Yaml\Inline::class, 'dump'], $example), $depth + 1);
+            $this->writeArray(\array_map([Inline::class, 'dump'], $example), $depth + 1);
         }
         if ($children) {
             foreach ($children as $childNode) {
-                $this->writeNode($childNode, $node, $depth + 1, $node instanceof \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\PrototypedArrayNode && !$node->getKeyAttribute());
+                $this->writeNode($childNode, $node, $depth + 1, $node instanceof PrototypedArrayNode && !$node->getKeyAttribute());
             }
         }
     }
@@ -169,18 +169,18 @@ class YamlReferenceDumper
             }
         }
     }
-    private function getPrototypeChildren(\_PhpScopercc9aec205203\Symfony\Component\Config\Definition\PrototypedArrayNode $node) : array
+    private function getPrototypeChildren(PrototypedArrayNode $node) : array
     {
         $prototype = $node->getPrototype();
         $key = $node->getKeyAttribute();
         // Do not expand prototype if it isn't an array node nor uses attribute as key
-        if (!$key && !$prototype instanceof \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\ArrayNode) {
+        if (!$key && !$prototype instanceof ArrayNode) {
             return $node->getChildren();
         }
-        if ($prototype instanceof \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\ArrayNode) {
-            $keyNode = new \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\ArrayNode($key, $node);
+        if ($prototype instanceof ArrayNode) {
+            $keyNode = new ArrayNode($key, $node);
             $children = $prototype->getChildren();
-            if ($prototype instanceof \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\PrototypedArrayNode && $prototype->getKeyAttribute()) {
+            if ($prototype instanceof PrototypedArrayNode && $prototype->getKeyAttribute()) {
                 $children = $this->getPrototypeChildren($prototype);
             }
             // add children
@@ -188,7 +188,7 @@ class YamlReferenceDumper
                 $keyNode->addChild($childNode);
             }
         } else {
-            $keyNode = new \_PhpScopercc9aec205203\Symfony\Component\Config\Definition\ScalarNode($key, $node);
+            $keyNode = new ScalarNode($key, $node);
         }
         $info = 'Prototype';
         if (null !== $prototype->getInfo()) {

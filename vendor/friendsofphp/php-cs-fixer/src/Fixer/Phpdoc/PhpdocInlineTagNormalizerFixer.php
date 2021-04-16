@@ -23,12 +23,12 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class PhpdocInlineTagNormalizerFixer extends \PhpCsFixer\AbstractFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpdocInlineTagNormalizerFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
@@ -37,7 +37,7 @@ final class PhpdocInlineTagNormalizerFixer extends \PhpCsFixer\AbstractFixer imp
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Fixes PHPDoc inline tags.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n/**\n * @{TUTORIAL}\n * {{ @link }}\n * @inheritDoc\n */\n"), new \PhpCsFixer\FixerDefinition\CodeSample("<?php\n/**\n * @{TUTORIAL}\n * {{ @link }}\n * @inheritDoc\n */\n", ['tags' => ['TUTORIAL']])]);
+        return new FixerDefinition('Fixes PHPDoc inline tags.', [new CodeSample("<?php\n/**\n * @{TUTORIAL}\n * {{ @link }}\n * @inheritDoc\n */\n"), new CodeSample("<?php\n/**\n * @{TUTORIAL}\n * {{ @link }}\n * @inheritDoc\n */\n", ['tags' => ['TUTORIAL']])]);
     }
     /**
      * {@inheritdoc}
@@ -52,7 +52,7 @@ final class PhpdocInlineTagNormalizerFixer extends \PhpCsFixer\AbstractFixer imp
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         if (!$this->configuration['tags']) {
             return;
@@ -64,7 +64,7 @@ final class PhpdocInlineTagNormalizerFixer extends \PhpCsFixer\AbstractFixer imp
             // Move `@` inside tag, for example @{tag} -> {@tag}, replace multiple curly brackets,
             // remove spaces between '{' and '@', remove white space between end
             // of text and closing bracket and between the tag and inline comment.
-            $content = \PhpCsFixer\Preg::replaceCallback(\sprintf('#(?:@{+|{+\\h*@)\\h*(%s)s?([^}]*)(?:}+)#i', \implode('|', \array_map(function ($tag) {
+            $content = Preg::replaceCallback(\sprintf('#(?:@{+|{+\\h*@)\\h*(%s)s?([^}]*)(?:}+)#i', \implode('|', \array_map(function ($tag) {
                 return \preg_quote($tag, '/');
             }, $this->configuration['tags']))), function (array $matches) {
                 $doc = \trim($matches[2]);
@@ -73,7 +73,7 @@ final class PhpdocInlineTagNormalizerFixer extends \PhpCsFixer\AbstractFixer imp
                 }
                 return '{@' . $matches[1] . ' ' . $doc . '}';
             }, $token->getContent());
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $content]);
+            $tokens[$index] = new Token([\T_DOC_COMMENT, $content]);
         }
     }
     /**
@@ -81,6 +81,6 @@ final class PhpdocInlineTagNormalizerFixer extends \PhpCsFixer\AbstractFixer imp
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolver([(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('tags', 'The list of tags to normalize'))->setAllowedTypes(['array'])->setDefault(['example', 'id', 'internal', 'inheritdoc', 'inheritdocs', 'link', 'source', 'toc', 'tutorial'])->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('tags', 'The list of tags to normalize'))->setAllowedTypes(['array'])->setDefault(['example', 'id', 'internal', 'inheritdoc', 'inheritdocs', 'link', 'source', 'toc', 'tutorial'])->getOption()]);
     }
 }

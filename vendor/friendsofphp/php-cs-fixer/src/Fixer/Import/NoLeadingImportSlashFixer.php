@@ -21,14 +21,14 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @author Carlos Cirello <carlos.cirello.nl@gmail.com>
  */
-final class NoLeadingImportSlashFixer extends \PhpCsFixer\AbstractFixer
+final class NoLeadingImportSlashFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Remove leading slashes in `use` clauses.', [new \PhpCsFixer\FixerDefinition\CodeSample("<?php\nnamespace Foo;\nuse \\Bar;\n")]);
+        return new FixerDefinition('Remove leading slashes in `use` clauses.', [new CodeSample("<?php\nnamespace Foo;\nuse \\Bar;\n")]);
     }
     /**
      * {@inheritdoc}
@@ -43,23 +43,23 @@ final class NoLeadingImportSlashFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        $tokensAnalyzer = new \PhpCsFixer\Tokenizer\TokensAnalyzer($tokens);
+        $tokensAnalyzer = new TokensAnalyzer($tokens);
         $usesIndexes = $tokensAnalyzer->getImportUseIndexes();
         foreach ($usesIndexes as $idx) {
             $nextTokenIdx = $tokens->getNextMeaningfulToken($idx);
             $nextToken = $tokens[$nextTokenIdx];
             if ($nextToken->isGivenKind(\T_NS_SEPARATOR)) {
                 $this->removeLeadingImportSlash($tokens, $nextTokenIdx);
-            } elseif ($nextToken->isGivenKind([\PhpCsFixer\Tokenizer\CT::T_FUNCTION_IMPORT, \PhpCsFixer\Tokenizer\CT::T_CONST_IMPORT])) {
+            } elseif ($nextToken->isGivenKind([CT::T_FUNCTION_IMPORT, CT::T_CONST_IMPORT])) {
                 $nextTokenIdx = $tokens->getNextMeaningfulToken($nextTokenIdx);
                 if ($tokens[$nextTokenIdx]->isGivenKind(\T_NS_SEPARATOR)) {
                     $this->removeLeadingImportSlash($tokens, $nextTokenIdx);
@@ -70,13 +70,13 @@ final class NoLeadingImportSlashFixer extends \PhpCsFixer\AbstractFixer
     /**
      * @param int $index
      */
-    private function removeLeadingImportSlash(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function removeLeadingImportSlash(Tokens $tokens, $index)
     {
         $previousIndex = $tokens->getPrevNonWhitespace($index);
         if ($previousIndex < $index - 1 || $tokens[$previousIndex]->isComment()) {
             $tokens->clearAt($index);
             return;
         }
-        $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_WHITESPACE, ' ']);
+        $tokens[$index] = new Token([\T_WHITESPACE, ' ']);
     }
 }

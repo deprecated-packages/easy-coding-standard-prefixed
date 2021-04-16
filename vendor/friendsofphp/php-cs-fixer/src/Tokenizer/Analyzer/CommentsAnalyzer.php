@@ -31,7 +31,7 @@ final class CommentsAnalyzer
      *
      * @return bool
      */
-    public function isHeaderComment(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    public function isHeaderComment(Tokens $tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind([\T_COMMENT, \T_DOC_COMMENT])) {
             throw new \InvalidArgumentException('Given index must point to a comment.');
@@ -45,7 +45,7 @@ final class CommentsAnalyzer
             if (!$tokens[$braceCloseIndex]->equals(')')) {
                 return \false;
             }
-            $braceOpenIndex = $tokens->findBlockStart(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $braceCloseIndex);
+            $braceOpenIndex = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $braceCloseIndex);
             $declareIndex = $tokens->getPrevMeaningfulToken($braceOpenIndex);
             if (!$tokens[$declareIndex]->isGivenKind(\T_DECLARE)) {
                 return \false;
@@ -63,7 +63,7 @@ final class CommentsAnalyzer
      *
      * @return bool
      */
-    public function isBeforeStructuralElement(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    public function isBeforeStructuralElement(Tokens $tokens, $index)
     {
         $token = $tokens[$index];
         if (!$token->isGivenKind([\T_COMMENT, \T_DOC_COMMENT])) {
@@ -75,7 +75,7 @@ final class CommentsAnalyzer
             // @TODO: drop condition when PHP 8.0+ is required
             if (\defined('T_ATTRIBUTE')) {
                 while (null !== $nextIndex && $tokens[$nextIndex]->isGivenKind(\T_ATTRIBUTE)) {
-                    $nextIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_ATTRIBUTE, $nextIndex);
+                    $nextIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_ATTRIBUTE, $nextIndex);
                     $nextIndex = $tokens->getNextMeaningfulToken($nextIndex);
                 }
             }
@@ -105,7 +105,7 @@ final class CommentsAnalyzer
      *
      * @return null|array
      */
-    public function getCommentBlockIndices(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    public function getCommentBlockIndices(Tokens $tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind(\T_COMMENT)) {
             throw new \InvalidArgumentException('Given index must point to a comment.');
@@ -136,7 +136,7 @@ final class CommentsAnalyzer
      *
      * @return bool
      */
-    private function isStructuralElement(\PhpCsFixer\Tokenizer\Token $token)
+    private function isStructuralElement(Token $token)
     {
         static $skip = [\T_PRIVATE, \T_PROTECTED, \T_PUBLIC, \T_VAR, \T_FUNCTION, \T_ABSTRACT, \T_CONST, \T_NAMESPACE, \T_REQUIRE, \T_REQUIRE_ONCE, \T_INCLUDE, \T_INCLUDE_ONCE, \T_FINAL, \T_STATIC];
         return $token->isClassy() || $token->isGivenKind($skip);
@@ -149,14 +149,14 @@ final class CommentsAnalyzer
      *
      * @return bool
      */
-    private function isValidControl(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $docsToken, $controlIndex)
+    private function isValidControl(Tokens $tokens, Token $docsToken, $controlIndex)
     {
         static $controlStructures = [\T_FOR, \T_FOREACH, \T_IF, \T_SWITCH, \T_WHILE];
         if (!$tokens[$controlIndex]->isGivenKind($controlStructures)) {
             return \false;
         }
         $index = $tokens->getNextMeaningfulToken($controlIndex);
-        $endIndex = $tokens->findBlockEnd(\PhpCsFixer\Tokenizer\Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
+        $endIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index);
         $docsContent = $docsToken->getContent();
         for ($index = $index + 1; $index < $endIndex; ++$index) {
             $token = $tokens[$index];
@@ -174,13 +174,13 @@ final class CommentsAnalyzer
      *
      * @return bool
      */
-    private function isValidLanguageConstruct(\PhpCsFixer\Tokenizer\Tokens $tokens, \PhpCsFixer\Tokenizer\Token $docsToken, $languageConstructIndex)
+    private function isValidLanguageConstruct(Tokens $tokens, Token $docsToken, $languageConstructIndex)
     {
-        static $languageStructures = [\T_LIST, \T_PRINT, \T_ECHO, \PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN];
+        static $languageStructures = [\T_LIST, \T_PRINT, \T_ECHO, CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN];
         if (!$tokens[$languageConstructIndex]->isGivenKind($languageStructures)) {
             return \false;
         }
-        $endKind = $tokens[$languageConstructIndex]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN) ? [\PhpCsFixer\Tokenizer\CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE] : ')';
+        $endKind = $tokens[$languageConstructIndex]->isGivenKind(CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN) ? [CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE] : ')';
         $endIndex = $tokens->getNextTokenOfKind($languageConstructIndex, [$endKind]);
         $docsContent = $docsToken->getContent();
         for ($index = $languageConstructIndex + 1; $index < $endIndex; ++$index) {
@@ -198,7 +198,7 @@ final class CommentsAnalyzer
      *
      * @return bool
      */
-    private function isValidVariable(\PhpCsFixer\Tokenizer\Tokens $tokens, $index)
+    private function isValidVariable(Tokens $tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind(\T_VARIABLE)) {
             return \false;
@@ -227,11 +227,11 @@ final class CommentsAnalyzer
      *
      * @return int
      */
-    private function getLineBreakCount(\PhpCsFixer\Tokenizer\Tokens $tokens, $whiteStart, $whiteEnd)
+    private function getLineBreakCount(Tokens $tokens, $whiteStart, $whiteEnd)
     {
         $lineCount = 0;
         for ($i = $whiteStart; $i < $whiteEnd; ++$i) {
-            $lineCount += \PhpCsFixer\Preg::matchAll('/\\R/u', $tokens[$i]->getContent());
+            $lineCount += Preg::matchAll('/\\R/u', $tokens[$i]->getContent());
         }
         return $lineCount;
     }

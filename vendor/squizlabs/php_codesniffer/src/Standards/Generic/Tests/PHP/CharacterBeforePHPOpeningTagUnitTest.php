@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\Generic\Tests\PHP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class CharacterBeforePHPOpeningTagUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class CharacterBeforePHPOpeningTagUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

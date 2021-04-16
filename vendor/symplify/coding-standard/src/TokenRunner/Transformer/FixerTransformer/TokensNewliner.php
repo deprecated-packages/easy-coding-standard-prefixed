@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
@@ -34,7 +34,7 @@ final class TokensNewliner
      * @var IndentResolver
      */
     private $indentResolver;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthCloserTransformer $lineLengthCloserTransformer, \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\TokenSkipper $tokenSkipper, \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthOpenerTransformer $lineLengthOpenerTransformer, \PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig, \Symplify\CodingStandard\TokenRunner\Whitespace\IndentResolver $indentResolver)
+    public function __construct(\Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthCloserTransformer $lineLengthCloserTransformer, TokenSkipper $tokenSkipper, \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthOpenerTransformer $lineLengthOpenerTransformer, WhitespacesFixerConfig $whitespacesFixerConfig, IndentResolver $indentResolver)
     {
         $this->lineLengthCloserTransformer = $lineLengthCloserTransformer;
         $this->tokenSkipper = $tokenSkipper;
@@ -45,7 +45,7 @@ final class TokensNewliner
     /**
      * @param Tokens|Token[] $tokens
      */
-    public function breakItems(\Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo, \PhpCsFixer\Tokenizer\Tokens $tokens, int $kind = \Symplify\CodingStandard\TokenRunner\ValueObject\LineKind::CALLS) : void
+    public function breakItems(BlockInfo $blockInfo, Tokens $tokens, int $kind = LineKind::CALLS) : void
     {
         // from bottom top, to prevent skipping ids
         //  e.g when token is added in the middle, the end index does now point to earlier element!
@@ -77,19 +77,19 @@ final class TokensNewliner
      *
      * @param Tokens|Token[] $tokens
      */
-    private function isLastItem(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
+    private function isLastItem(Tokens $tokens, int $position) : bool
     {
         $nextPosition = $position + 1;
         if (!isset($tokens[$nextPosition])) {
-            throw new \Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException($nextPosition);
+            throw new TokenNotFoundException($nextPosition);
         }
         $tokenContent = $tokens[$nextPosition]->getContent();
-        return \_PhpScopercc9aec205203\Nette\Utils\Strings::contains($tokenContent, $this->whitespacesFixerConfig->getLineEnding());
+        return Strings::contains($tokenContent, $this->whitespacesFixerConfig->getLineEnding());
     }
     /**
      * @param Tokens|Token[] $tokens
      */
-    private function isFollowedByComment(\PhpCsFixer\Tokenizer\Tokens $tokens, int $i) : bool
+    private function isFollowedByComment(Tokens $tokens, int $i) : bool
     {
         $nextToken = $tokens[$i + 1];
         $nextNextToken = $tokens[$i + 2];

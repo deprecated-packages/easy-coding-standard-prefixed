@@ -19,7 +19,7 @@ use PhpCsFixer\Event\Event;
  *
  * @internal
  */
-final class FixerFileProcessedEvent extends \PhpCsFixer\Event\Event
+final class FixerFileProcessedEvent extends Event
 {
     /**
      * Event name.

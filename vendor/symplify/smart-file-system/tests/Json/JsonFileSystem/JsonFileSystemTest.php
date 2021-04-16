@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\Json\JsonFileSystem;
 
-use _PhpScopercc9aec205203\PHPUnit\Framework\TestCase;
+use _PhpScopereb9508917a55\PHPUnit\Framework\TestCase;
 use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Json\JsonFileSystem;
 use Symplify\SmartFileSystem\SmartFileSystem;
-final class JsonFileSystemTest extends \_PhpScopercc9aec205203\PHPUnit\Framework\TestCase
+final class JsonFileSystemTest extends TestCase
 {
     /**
      * @var string
@@ -23,8 +23,8 @@ final class JsonFileSystemTest extends \_PhpScopercc9aec205203\PHPUnit\Framework
     private $smartFileSystem;
     protected function setUp() : void
     {
-        $this->smartFileSystem = new \Symplify\SmartFileSystem\SmartFileSystem();
-        $this->jsonFileSystem = new \Symplify\SmartFileSystem\Json\JsonFileSystem(new \Symplify\SmartFileSystem\FileSystemGuard(), $this->smartFileSystem);
+        $this->smartFileSystem = new SmartFileSystem();
+        $this->jsonFileSystem = new JsonFileSystem(new FileSystemGuard(), $this->smartFileSystem);
     }
     public function testLoadFilePathToJson() : void
     {

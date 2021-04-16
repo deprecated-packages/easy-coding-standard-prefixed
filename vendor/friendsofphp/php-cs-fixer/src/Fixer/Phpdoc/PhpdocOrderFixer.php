@@ -20,12 +20,12 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Graham Campbell <graham@alt-three.com>
  */
-final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
+final class PhpdocOrderFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function isCandidate(Tokens $tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
@@ -34,7 +34,7 @@ final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('Annotations in PHPDoc should be ordered so that `@param` annotations come first, then `@throws` annotations, then `@return` annotations.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('Annotations in PHPDoc should be ordered so that `@param` annotations come first, then `@throws` annotations, then `@return` annotations.', [new CodeSample('<?php
 /**
  * Hello there!
  *
@@ -59,7 +59,7 @@ final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, \PhpCsFixer\Tokenizer\Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -72,7 +72,7 @@ final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
             // state of the dockblock is correct after the modifications
             $content = $this->moveReturnAnnotations($content);
             // persist the content at the end
-            $tokens[$index] = new \PhpCsFixer\Tokenizer\Token([\T_DOC_COMMENT, $content]);
+            $tokens[$index] = new Token([\T_DOC_COMMENT, $content]);
         }
     }
     /**
@@ -84,7 +84,7 @@ final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
      */
     private function moveParamAnnotations($content)
     {
-        $doc = new \PhpCsFixer\DocBlock\DocBlock($content);
+        $doc = new DocBlock($content);
         $params = $doc->getAnnotationsOfType('param');
         // nothing to do if there are no param annotations
         if (empty($params)) {
@@ -116,7 +116,7 @@ final class PhpdocOrderFixer extends \PhpCsFixer\AbstractFixer
      */
     private function moveReturnAnnotations($content)
     {
-        $doc = new \PhpCsFixer\DocBlock\DocBlock($content);
+        $doc = new DocBlock($content);
         $returns = $doc->getAnnotationsOfType('return');
         // nothing to do if there are no return annotations
         if (empty($returns)) {

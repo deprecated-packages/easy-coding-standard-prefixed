@@ -27,14 +27,14 @@ use PhpCsFixer\Preg;
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
  */
-final class PhpdocNoAliasTagFixer extends \PhpCsFixer\AbstractProxyFixer implements \PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface
+final class PhpdocNoAliasTagFixer extends AbstractProxyFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getDefinition()
     {
-        return new \PhpCsFixer\FixerDefinition\FixerDefinition('No alias PHPDoc tags should be used.', [new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+        return new FixerDefinition('No alias PHPDoc tags should be used.', [new CodeSample('<?php
 /**
  * @property string $foo
  * @property-read string $bar
@@ -44,7 +44,7 @@ final class PhpdocNoAliasTagFixer extends \PhpCsFixer\AbstractProxyFixer impleme
 final class Example
 {
 }
-'), new \PhpCsFixer\FixerDefinition\CodeSample('<?php
+'), new CodeSample('<?php
 /**
  * @property string $foo
  * @property-read string $bar
@@ -73,8 +73,8 @@ final class Example
         $generalPhpdocTagRenameFixer = $this->proxyFixers['general_phpdoc_tag_rename'];
         try {
             $generalPhpdocTagRenameFixer->configure(['fix_annotation' => \true, 'fix_inline' => \false, 'replacements' => $this->configuration['replacements'], 'case_sensitive' => \true]);
-        } catch (\PhpCsFixer\ConfigurationException\InvalidConfigurationException $exception) {
-            throw new \PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException($this->getName(), \PhpCsFixer\Preg::replace('/^\\[.+?\\] /', '', $exception->getMessage()), $exception);
+        } catch (InvalidConfigurationException $exception) {
+            throw new InvalidFixerConfigurationException($this->getName(), Preg::replace('/^\\[.+?\\] /', '', $exception->getMessage()), $exception);
         }
     }
     /**
@@ -82,7 +82,7 @@ final class Example
      */
     protected function createConfigurationDefinition()
     {
-        return new \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless('replacements', [(new \PhpCsFixer\FixerConfiguration\FixerOptionBuilder('replacements', 'Mapping between replaced annotations with new ones.'))->setAllowedTypes(['array'])->setDefault(['property-read' => 'property', 'property-write' => 'property', 'type' => 'var', 'link' => 'see'])->getOption()], $this->getName());
+        return new FixerConfigurationResolverRootless('replacements', [(new FixerOptionBuilder('replacements', 'Mapping between replaced annotations with new ones.'))->setAllowedTypes(['array'])->setDefault(['property-read' => 'property', 'property-write' => 'property', 'type' => 'var', 'link' => 'see'])->getOption()], $this->getName());
     }
     /**
      * {@inheritdoc}

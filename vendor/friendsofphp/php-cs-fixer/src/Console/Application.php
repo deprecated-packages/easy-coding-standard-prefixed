@@ -19,18 +19,18 @@ use PhpCsFixer\Console\SelfUpdate\GithubClient;
 use PhpCsFixer\Console\SelfUpdate\NewVersionChecker;
 use PhpCsFixer\PharChecker;
 use PhpCsFixer\ToolInfo;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Application as BaseApplication;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Command\ListCommand;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Application as BaseApplication;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Command\ListCommand;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScopereb9508917a55\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @internal
  */
-final class Application extends \_PhpScopercc9aec205203\Symfony\Component\Console\Application
+final class Application extends BaseApplication
 {
     const VERSION = '2.18.5';
     const VERSION_CODENAME = 'Remote Void';
@@ -44,10 +44,10 @@ final class Application extends \_PhpScopercc9aec205203\Symfony\Component\Consol
             \error_reporting(\E_ALL & ~\E_DEPRECATED & ~\E_USER_DEPRECATED);
         }
         parent::__construct('PHP CS Fixer', self::VERSION);
-        $this->toolInfo = new \PhpCsFixer\ToolInfo();
-        $this->add(new \PhpCsFixer\Console\Command\DescribeCommand());
-        $this->add(new \PhpCsFixer\Console\Command\FixCommand($this->toolInfo));
-        $this->add(new \PhpCsFixer\Console\Command\SelfUpdateCommand(new \PhpCsFixer\Console\SelfUpdate\NewVersionChecker(new \PhpCsFixer\Console\SelfUpdate\GithubClient()), $this->toolInfo, new \PhpCsFixer\PharChecker()));
+        $this->toolInfo = new ToolInfo();
+        $this->add(new DescribeCommand());
+        $this->add(new FixCommand($this->toolInfo));
+        $this->add(new SelfUpdateCommand(new NewVersionChecker(new GithubClient()), $this->toolInfo, new PharChecker()));
     }
     /**
      * @return int
@@ -59,9 +59,9 @@ final class Application extends \_PhpScopercc9aec205203\Symfony\Component\Consol
     /**
      * {@inheritdoc}
      */
-    public function doRun(\_PhpScopercc9aec205203\Symfony\Component\Console\Input\InputInterface $input, \_PhpScopercc9aec205203\Symfony\Component\Console\Output\OutputInterface $output)
+    public function doRun(InputInterface $input, OutputInterface $output)
     {
-        $stdErr = $output instanceof \_PhpScopercc9aec205203\Symfony\Component\Console\Output\ConsoleOutputInterface ? $output->getErrorOutput() : ($input->hasParameterOption('--format', \true) && 'txt' !== $input->getParameterOption('--format', null, \true) ? null : $output);
+        $stdErr = $output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : ($input->hasParameterOption('--format', \true) && 'txt' !== $input->getParameterOption('--format', null, \true) ? null : $output);
         if (null !== $stdErr) {
             $warningsDetector = new \PhpCsFixer\Console\WarningsDetector($this->toolInfo);
             $warningsDetector->detectOldVendor();
@@ -89,6 +89,6 @@ final class Application extends \_PhpScopercc9aec205203\Symfony\Component\Consol
      */
     protected function getDefaultCommands()
     {
-        return [new \PhpCsFixer\Console\Command\HelpCommand(), new \_PhpScopercc9aec205203\Symfony\Component\Console\Command\ListCommand()];
+        return [new HelpCommand(), new ListCommand()];
     }
 }

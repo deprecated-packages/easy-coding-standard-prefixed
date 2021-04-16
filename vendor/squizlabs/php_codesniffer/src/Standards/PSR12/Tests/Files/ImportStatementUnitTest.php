@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Standards\PSR12\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-class ImportStatementUnitTest extends \PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest
+class ImportStatementUnitTest extends AbstractSniffUnitTest
 {
     /**
      * Returns the lines where errors should occur.

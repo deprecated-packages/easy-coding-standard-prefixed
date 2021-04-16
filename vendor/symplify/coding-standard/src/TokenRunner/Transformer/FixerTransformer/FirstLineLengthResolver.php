@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
-use _PhpScopercc9aec205203\Nette\Utils\Strings;
+use _PhpScopereb9508917a55\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -17,14 +17,14 @@ final class FirstLineLengthResolver
      * @var LineLengthAndPositionFactory
      */
     private $lineLengthAndPositionFactory;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\ValueObjectFactory\LineLengthAndPositionFactory $lineLengthAndPositionFactory)
+    public function __construct(LineLengthAndPositionFactory $lineLengthAndPositionFactory)
     {
         $this->lineLengthAndPositionFactory = $lineLengthAndPositionFactory;
     }
     /**
      * @param Tokens|Token[] $tokens
      */
-    public function resolveFromTokensAndStartPosition(\PhpCsFixer\Tokenizer\Tokens $tokens, \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo) : int
+    public function resolveFromTokensAndStartPosition(Tokens $tokens, BlockInfo $blockInfo) : int
     {
         // compute from here to start of line
         $currentPosition = $blockInfo->getStart();
@@ -37,7 +37,7 @@ final class FirstLineLengthResolver
         // includes indent in the beginning
         $lineLength += \strlen($currentToken->getContent());
         // minus end of lines, do not count line feeds as characters
-        $endOfLineCount = \substr_count($currentToken->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar());
+        $endOfLineCount = \substr_count($currentToken->getContent(), StaticEolConfiguration::getEolChar());
         $lineLength -= $endOfLineCount;
         // compute from here to end of line
         $currentPosition = $blockInfo->getStart() + 1;
@@ -63,14 +63,14 @@ final class FirstLineLengthResolver
     /**
      * @param Tokens|Token[] $tokens
      */
-    private function isEndOFArgumentsLine(\PhpCsFixer\Tokenizer\Tokens $tokens, int $position) : bool
+    private function isEndOFArgumentsLine(Tokens $tokens, int $position) : bool
     {
         if (!isset($tokens[$position])) {
-            throw new \Symplify\CodingStandard\TokenRunner\Exception\TokenNotFoundException($position);
+            throw new TokenNotFoundException($position);
         }
-        if (\_PhpScopercc9aec205203\Nette\Utils\Strings::startsWith($tokens[$position]->getContent(), \Symplify\PackageBuilder\Configuration\StaticEolConfiguration::getEolChar())) {
+        if (Strings::startsWith($tokens[$position]->getContent(), StaticEolConfiguration::getEolChar())) {
             return \true;
         }
-        return $tokens[$position]->isGivenKind(\PhpCsFixer\Tokenizer\CT::T_USE_LAMBDA);
+        return $tokens[$position]->isGivenKind(CT::T_USE_LAMBDA);
     }
 }

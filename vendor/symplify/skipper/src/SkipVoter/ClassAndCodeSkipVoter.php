@@ -10,7 +10,7 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * Matching class and code, e.g. App\Category\ArraySniff.SomeCode
  */
-final class ClassAndCodeSkipVoter implements \Symplify\Skipper\Contract\SkipVoterInterface
+final class ClassAndCodeSkipVoter implements SkipVoterInterface
 {
     /**
      * @var SkippedClassAndCodesResolver
@@ -20,7 +20,7 @@ final class ClassAndCodeSkipVoter implements \Symplify\Skipper\Contract\SkipVote
      * @var FileInfoMatcher
      */
     private $fileInfoMatcher;
-    public function __construct(\Symplify\Skipper\SkipCriteriaResolver\SkippedClassAndCodesResolver $skippedClassAndCodesResolver, \Symplify\Skipper\Matcher\FileInfoMatcher $fileInfoMatcher)
+    public function __construct(SkippedClassAndCodesResolver $skippedClassAndCodesResolver, FileInfoMatcher $fileInfoMatcher)
     {
         $this->skippedClassAndCodesResolver = $skippedClassAndCodesResolver;
         $this->fileInfoMatcher = $fileInfoMatcher;
@@ -38,7 +38,7 @@ final class ClassAndCodeSkipVoter implements \Symplify\Skipper\Contract\SkipVote
     /**
      * @param string $element
      */
-    public function shouldSkip($element, \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo) : bool
+    public function shouldSkip($element, SmartFileInfo $smartFileInfo) : bool
     {
         $skippedClassAndCodes = $this->skippedClassAndCodesResolver->resolve();
         if (!\array_key_exists($element, $skippedClassAndCodes)) {
