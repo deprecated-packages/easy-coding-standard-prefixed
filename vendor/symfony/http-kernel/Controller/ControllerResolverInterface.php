@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0752b31150a1\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScopera22bb3f4d7b7\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScoper0752b31150a1\Symfony\Component\HttpFoundation\Request;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\HttpFoundation\Request;
 /**
  * A ControllerResolverInterface implementation knows how to determine the
  * controller to execute based on a Request object.

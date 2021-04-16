@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0752b31150a1\Symfony\Component\Config\Loader;
+namespace _PhpScopera22bb3f4d7b7\Symfony\Component\Config\Loader;
 
-use _PhpScoper0752b31150a1\Symfony\Component\Config\Exception\LoaderLoadException;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\Config\Exception\LoaderLoadException;
 /**
  * Loader is the abstract class used by all built-in loaders.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Loader implements \_PhpScoper0752b31150a1\Symfony\Component\Config\Loader\LoaderInterface
+abstract class Loader implements \_PhpScopera22bb3f4d7b7\Symfony\Component\Config\Loader\LoaderInterface
 {
     protected $resolver;
     /**
@@ -29,7 +29,7 @@ abstract class Loader implements \_PhpScoper0752b31150a1\Symfony\Component\Confi
     /**
      * {@inheritdoc}
      */
-    public function setResolver(\_PhpScoper0752b31150a1\Symfony\Component\Config\Loader\LoaderResolverInterface $resolver)
+    public function setResolver(\_PhpScopera22bb3f4d7b7\Symfony\Component\Config\Loader\LoaderResolverInterface $resolver)
     {
         $this->resolver = $resolver;
     }

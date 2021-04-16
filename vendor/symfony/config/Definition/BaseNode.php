@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0752b31150a1\Symfony\Component\Config\Definition;
+namespace _PhpScopera22bb3f4d7b7\Symfony\Component\Config\Definition;
 
-use _PhpScoper0752b31150a1\Symfony\Component\Config\Definition\Exception\Exception;
-use _PhpScoper0752b31150a1\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
-use _PhpScoper0752b31150a1\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use _PhpScoper0752b31150a1\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
-use _PhpScoper0752b31150a1\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\Config\Definition\Exception\Exception;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * The base node class.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class BaseNode implements \_PhpScoper0752b31150a1\Symfony\Component\Config\Definition\NodeInterface
+abstract class BaseNode implements \_PhpScopera22bb3f4d7b7\Symfony\Component\Config\Definition\NodeInterface
 {
     public const DEFAULT_PATH_SEPARATOR = '.';
     private static $placeholderUniquePrefixes = [];
@@ -39,7 +39,7 @@ abstract class BaseNode implements \_PhpScoper0752b31150a1\Symfony\Component\Con
     /**
      * @throws \InvalidArgumentException if the name contains a period
      */
-    public function __construct(?string $name, \_PhpScoper0752b31150a1\Symfony\Component\Config\Definition\NodeInterface $parent = null, string $pathSeparator = self::DEFAULT_PATH_SEPARATOR)
+    public function __construct(?string $name, \_PhpScopera22bb3f4d7b7\Symfony\Component\Config\Definition\NodeInterface $parent = null, string $pathSeparator = self::DEFAULT_PATH_SEPARATOR)
     {
         if (\false !== \strpos($name = (string) $name, $pathSeparator)) {
             throw new \InvalidArgumentException('The name must not contain ".' . $pathSeparator . '".');

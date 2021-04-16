@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0752b31150a1\Symfony\Component\ErrorHandler\ErrorRenderer;
+namespace _PhpScopera22bb3f4d7b7\Symfony\Component\ErrorHandler\ErrorRenderer;
 
-use _PhpScoper0752b31150a1\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use _PhpScoper0752b31150a1\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScoper0752b31150a1\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScopera22bb3f4d7b7\Symfony\Component\VarDumper\Dumper\CliDumper;
 // Help opcache.preload discover always-needed symbols
 \class_exists(CliDumper::class);
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CliErrorRenderer implements \_PhpScoper0752b31150a1\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
+class CliErrorRenderer implements \_PhpScopera22bb3f4d7b7\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
 {
     /**
      * {@inheritdoc}

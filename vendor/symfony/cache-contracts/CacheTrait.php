@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0752b31150a1\Symfony\Contracts\Cache;
+namespace _PhpScopera22bb3f4d7b7\Symfony\Contracts\Cache;
 
-use _PhpScoper0752b31150a1\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoper0752b31150a1\Psr\Cache\InvalidArgumentException;
-use _PhpScoper0752b31150a1\Psr\Log\LoggerInterface;
+use _PhpScopera22bb3f4d7b7\Psr\Cache\CacheItemPoolInterface;
+use _PhpScopera22bb3f4d7b7\Psr\Cache\InvalidArgumentException;
+use _PhpScopera22bb3f4d7b7\Psr\Log\LoggerInterface;
 // Help opcache.preload discover always-needed symbols
 \class_exists(InvalidArgumentException::class);
 /**
@@ -45,10 +45,10 @@ trait CacheTrait
         }
         $item = $pool->getItem($key);
         $recompute = !$item->isHit() || \INF === $beta;
-        $metadata = $item instanceof \_PhpScoper0752b31150a1\Symfony\Contracts\Cache\ItemInterface ? $item->getMetadata() : [];
+        $metadata = $item instanceof \_PhpScopera22bb3f4d7b7\Symfony\Contracts\Cache\ItemInterface ? $item->getMetadata() : [];
         if (!$recompute && $metadata) {
-            $expiry = $metadata[\_PhpScoper0752b31150a1\Symfony\Contracts\Cache\ItemInterface::METADATA_EXPIRY] ?? \false;
-            $ctime = $metadata[\_PhpScoper0752b31150a1\Symfony\Contracts\Cache\ItemInterface::METADATA_CTIME] ?? \false;
+            $expiry = $metadata[\_PhpScopera22bb3f4d7b7\Symfony\Contracts\Cache\ItemInterface::METADATA_EXPIRY] ?? \false;
+            $ctime = $metadata[\_PhpScopera22bb3f4d7b7\Symfony\Contracts\Cache\ItemInterface::METADATA_CTIME] ?? \false;
             if ($recompute = $ctime && $expiry && $expiry <= ($now = \microtime(\true)) - $ctime / 1000 * $beta * \log(\random_int(1, \PHP_INT_MAX) / \PHP_INT_MAX)) {
                 // force applying defaultLifetime to expiry
                 $item->expiresAt(null);
