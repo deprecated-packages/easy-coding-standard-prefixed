@@ -13,9 +13,9 @@ namespace PhpCsFixer\Linter;
 
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FileRemoval;
-use _PhpScoper1ddca3f92d7d\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScoper1ddca3f92d7d\Symfony\Component\Process\PhpExecutableFinder;
-use _PhpScoper1ddca3f92d7d\Symfony\Component\Process\Process;
+use _PhpScoper0752b31150a1\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper0752b31150a1\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScoper0752b31150a1\Symfony\Component\Process\Process;
 /**
  * Handle PHP code linting using separated process of `php -l _file_`.
  *

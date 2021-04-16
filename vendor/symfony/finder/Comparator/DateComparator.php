@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1ddca3f92d7d\Symfony\Component\Finder\Comparator;
+namespace _PhpScoper0752b31150a1\Symfony\Component\Finder\Comparator;
 
 /**
  * DateCompare compiles date comparisons.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class DateComparator extends \_PhpScoper1ddca3f92d7d\Symfony\Component\Finder\Comparator\Comparator
+class DateComparator extends \_PhpScoper0752b31150a1\Symfony\Component\Finder\Comparator\Comparator
 {
     /**
      * @param string $test A comparison string

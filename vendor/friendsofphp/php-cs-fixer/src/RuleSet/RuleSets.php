@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\RuleSet;
 
-use _PhpScoper1ddca3f92d7d\Symfony\Component\Finder\Finder;
+use _PhpScoper0752b31150a1\Symfony\Component\Finder\Finder;
 /**
  * Set of rule sets to be used by fixer.
  *

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1ddca3f92d7d\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper0752b31150a1\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoper1ddca3f92d7d\Symfony\Component\Config\Definition\VariableNode;
+use _PhpScoper0752b31150a1\Symfony\Component\Config\Definition\VariableNode;
 /**
  * This class provides a fluent interface for defining a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class VariableNodeDefinition extends \_PhpScoper1ddca3f92d7d\Symfony\Component\Config\Definition\Builder\NodeDefinition
+class VariableNodeDefinition extends \_PhpScoper0752b31150a1\Symfony\Component\Config\Definition\Builder\NodeDefinition
 {
     /**
      * Instantiate a Node.

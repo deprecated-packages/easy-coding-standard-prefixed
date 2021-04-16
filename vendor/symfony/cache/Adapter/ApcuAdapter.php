@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1ddca3f92d7d\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper0752b31150a1\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper1ddca3f92d7d\Symfony\Component\Cache\CacheItem;
-use _PhpScoper1ddca3f92d7d\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper0752b31150a1\Symfony\Component\Cache\CacheItem;
+use _PhpScoper0752b31150a1\Symfony\Component\Cache\Exception\CacheException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ApcuAdapter extends \_PhpScoper1ddca3f92d7d\Symfony\Component\Cache\Adapter\AbstractAdapter
+class ApcuAdapter extends \_PhpScoper0752b31150a1\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     /**
      * @throws CacheException if APCu is not enabled

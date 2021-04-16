@@ -1,15 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper1ddca3f92d7d;
+namespace _PhpScoper0752b31150a1;
 
-use _PhpScoper1ddca3f92d7d\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper1ddca3f92d7d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper0752b31150a1\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper0752b31150a1\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper0752b31150a1\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\ComposerJsonManipulator\ValueObject\Option;
+use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 use Symplify\SmartFileSystem\SmartFileSystem;
-use function _PhpScoper1ddca3f92d7d\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use function _PhpScoper0752b31150a1\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::INLINE_SECTIONS, ['keywords']);
@@ -19,4 +21,6 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(SmartFileSystem::class);
     $services->set(PrivatesCaller::class);
     $services->set(ParameterProvider::class)->args([service(ContainerInterface::class)]);
+    $services->set(SymfonyStyleFactory::class);
+    $services->set(SymfonyStyle::class)->factory([service(SymfonyStyleFactory::class), 'create']);
 };

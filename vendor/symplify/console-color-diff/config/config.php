@@ -1,14 +1,14 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper1ddca3f92d7d;
+namespace _PhpScoper0752b31150a1;
 
-use _PhpScoper1ddca3f92d7d\SebastianBergmann\Diff\Differ;
-use _PhpScoper1ddca3f92d7d\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoper1ddca3f92d7d\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper0752b31150a1\SebastianBergmann\Diff\Differ;
+use _PhpScoper0752b31150a1\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper0752b31150a1\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
-use function _PhpScoper1ddca3f92d7d\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use function _PhpScoper0752b31150a1\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();

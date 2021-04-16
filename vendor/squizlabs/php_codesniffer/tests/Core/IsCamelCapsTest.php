@@ -10,7 +10,7 @@
 namespace PHP_CodeSniffer\Tests\Core;
 
 use PHP_CodeSniffer\Util\Common;
-use _PhpScoper1ddca3f92d7d\PHPUnit\Framework\TestCase;
+use _PhpScoper0752b31150a1\PHPUnit\Framework\TestCase;
 class IsCamelCapsTest extends TestCase
 {
     /**

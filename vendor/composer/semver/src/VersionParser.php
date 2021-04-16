@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper1ddca3f92d7d\Composer\Semver;
+namespace _PhpScoper0752b31150a1\Composer\Semver;
 
-use _PhpScoper1ddca3f92d7d\Composer\Semver\Constraint\ConstraintInterface;
-use _PhpScoper1ddca3f92d7d\Composer\Semver\Constraint\MatchAllConstraint;
-use _PhpScoper1ddca3f92d7d\Composer\Semver\Constraint\MultiConstraint;
-use _PhpScoper1ddca3f92d7d\Composer\Semver\Constraint\Constraint;
+use _PhpScoper0752b31150a1\Composer\Semver\Constraint\ConstraintInterface;
+use _PhpScoper0752b31150a1\Composer\Semver\Constraint\MatchAllConstraint;
+use _PhpScoper0752b31150a1\Composer\Semver\Constraint\MultiConstraint;
+use _PhpScoper0752b31150a1\Composer\Semver\Constraint\Constraint;
 /**
  * Version parser.
  *
