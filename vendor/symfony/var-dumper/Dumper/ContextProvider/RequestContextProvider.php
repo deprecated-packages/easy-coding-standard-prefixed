@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb9508917a55\Symfony\Component\VarDumper\Dumper\ContextProvider;
+namespace _PhpScoper1ddca3f92d7d\Symfony\Component\VarDumper\Dumper\ContextProvider;
 
-use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopereb9508917a55\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use _PhpScopereb9508917a55\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\VarDumper\Cloner\VarCloner;
 /**
  * Tries to provide context from a request.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-final class RequestContextProvider implements \_PhpScopereb9508917a55\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
+final class RequestContextProvider implements \_PhpScoper1ddca3f92d7d\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
 {
     private $requestStack;
     private $cloner;

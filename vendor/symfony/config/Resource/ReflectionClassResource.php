@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb9508917a55\Symfony\Component\Config\Resource;
+namespace _PhpScoper1ddca3f92d7d\Symfony\Component\Config\Resource;
 
-use _PhpScopereb9508917a55\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopereb9508917a55\Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
-use _PhpScopereb9508917a55\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
+use _PhpScoper1ddca3f92d7d\Symfony\Contracts\Service\ServiceSubscriberInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @final
  */
-class ReflectionClassResource implements \_PhpScopereb9508917a55\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class ReflectionClassResource implements \_PhpScoper1ddca3f92d7d\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $files = [];
     private $className;

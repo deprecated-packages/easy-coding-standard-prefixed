@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb9508917a55\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Request;
-use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Response;
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\KernelInterface;
-use _PhpScopereb9508917a55\Symfony\Component\Stopwatch\Stopwatch;
-use _PhpScopereb9508917a55\Symfony\Component\Stopwatch\StopwatchEvent;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\Stopwatch\StopwatchEvent;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @final
  */
-class TimeDataCollector extends \_PhpScopereb9508917a55\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScopereb9508917a55\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class TimeDataCollector extends \_PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     protected $kernel;
     protected $stopwatch;

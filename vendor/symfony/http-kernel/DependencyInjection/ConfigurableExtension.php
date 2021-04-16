@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb9508917a55\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * This extension sub-class provides first-class integration with the
  * Config/Definition Component.
@@ -23,7 +23,7 @@ use _PhpScopereb9508917a55\Symfony\Component\DependencyInjection\ContainerBuilde
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class ConfigurableExtension extends \_PhpScopereb9508917a55\Symfony\Component\HttpKernel\DependencyInjection\Extension
+abstract class ConfigurableExtension extends \_PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\DependencyInjection\Extension
 {
     /**
      * {@inheritdoc}

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb9508917a55\Symfony\Component\DependencyInjection;
+namespace _PhpScoper1ddca3f92d7d\Symfony\Component\DependencyInjection;
 
-use _PhpScopereb9508917a55\Psr\Cache\CacheItemPoolInterface;
-use _PhpScopereb9508917a55\Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLanguage;
+use _PhpScoper1ddca3f92d7d\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\ExpressionLanguage\ExpressionLanguage as BaseExpressionLanguage;
 if (!\class_exists(BaseExpressionLanguage::class)) {
     return;
 }
@@ -30,7 +30,7 @@ class ExpressionLanguage extends BaseExpressionLanguage
     public function __construct(CacheItemPoolInterface $cache = null, array $providers = [], callable $serviceCompiler = null)
     {
         // prepend the default provider to let users override it easily
-        \array_unshift($providers, new \_PhpScopereb9508917a55\Symfony\Component\DependencyInjection\ExpressionLanguageProvider($serviceCompiler));
+        \array_unshift($providers, new \_PhpScoper1ddca3f92d7d\Symfony\Component\DependencyInjection\ExpressionLanguageProvider($serviceCompiler));
         parent::__construct($cache, $providers);
     }
 }

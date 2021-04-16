@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb9508917a55\Symfony\Component\HttpKernel;
+namespace _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel;
 
-use _PhpScopereb9508917a55\Symfony\Component\HttpClient\HttpClient;
-use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Request;
-use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Response;
-use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use _PhpScopereb9508917a55\Symfony\Component\Mime\Part\AbstractPart;
-use _PhpScopereb9508917a55\Symfony\Component\Mime\Part\DataPart;
-use _PhpScopereb9508917a55\Symfony\Component\Mime\Part\Multipart\FormDataPart;
-use _PhpScopereb9508917a55\Symfony\Component\Mime\Part\TextPart;
-use _PhpScopereb9508917a55\Symfony\Contracts\HttpClient\HttpClientInterface;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpClient\HttpClient;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\Mime\Part\AbstractPart;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\Mime\Part\DataPart;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\Mime\Part\Multipart\FormDataPart;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\Mime\Part\TextPart;
+use _PhpScoper1ddca3f92d7d\Symfony\Contracts\HttpClient\HttpClientInterface;
 // Help opcache.preload discover always-needed symbols
 \class_exists(ResponseHeaderBag::class);
 /**
@@ -26,7 +26,7 @@ use _PhpScopereb9508917a55\Symfony\Contracts\HttpClient\HttpClientInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-final class HttpClientKernel implements \_PhpScopereb9508917a55\Symfony\Component\HttpKernel\HttpKernelInterface
+final class HttpClientKernel implements \_PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     private $client;
     public function __construct(HttpClientInterface $client = null)
@@ -36,7 +36,7 @@ final class HttpClientKernel implements \_PhpScopereb9508917a55\Symfony\Componen
         }
         $this->client = $client ?? HttpClient::create();
     }
-    public function handle(Request $request, int $type = \_PhpScopereb9508917a55\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, bool $catch = \true) : Response
+    public function handle(Request $request, int $type = \_PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, bool $catch = \true) : Response
     {
         $headers = $this->getHeaders($request);
         $body = '';

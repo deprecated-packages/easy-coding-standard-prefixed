@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb9508917a55\Symfony\Component\HttpKernel;
+namespace _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel;
 
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Event\ControllerEvent;
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Event\TerminateEvent;
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Event\ViewEvent;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Event\TerminateEvent;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Event\ViewEvent;
 /**
  * Contains all events thrown in the HttpKernel component.
  *

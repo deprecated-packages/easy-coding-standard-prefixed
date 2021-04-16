@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\Bundle;
 
-use _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\Skipper\DependencyInjection\Extension\SkipperExtension;
 final class SkipperBundle extends Bundle
 {

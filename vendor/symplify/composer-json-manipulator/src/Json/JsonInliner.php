@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Json;
 
-use _PhpScopereb9508917a55\Nette\Utils\Strings;
+use _PhpScoper1ddca3f92d7d\Nette\Utils\Strings;
 use Symplify\ComposerJsonManipulator\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 final class JsonInliner
@@ -23,6 +23,9 @@ final class JsonInliner
     }
     public function inlineSections(string $jsonContent) : string
     {
+        if (!$this->parameterProvider->hasParameter(Option::INLINE_SECTIONS)) {
+            return $jsonContent;
+        }
         $inlineSections = $this->parameterProvider->provideArrayParameter(Option::INLINE_SECTIONS);
         foreach ($inlineSections as $inlineSection) {
             $pattern = '#("' . \preg_quote($inlineSection, '#') . '": )\\[(.*?)\\](,)#ms';

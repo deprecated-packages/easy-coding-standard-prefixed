@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopereb9508917a55\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoper1ddca3f92d7d\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScopereb9508917a55\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper1ddca3f92d7d\Symfony\Component\HttpFoundation\Request;
 /**
  * An ArgumentResolverInterface instance knows how to determine the
  * arguments for a specific action.
