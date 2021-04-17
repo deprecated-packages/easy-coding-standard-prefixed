@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\FixerConfiguration;
 
-use _PhpScoperfde42a25c345\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper0a055416a443\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *

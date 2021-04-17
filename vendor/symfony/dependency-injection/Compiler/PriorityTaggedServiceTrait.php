@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Trait that allows a generic method to find and sort service by priority option in the tag.
  *
@@ -58,7 +58,7 @@ trait PriorityTaggedServiceTrait
                 if (isset($attribute['priority'])) {
                     $priority = $attribute['priority'];
                 } elseif (null === $defaultPriority && $defaultPriorityMethod && $class) {
-                    $defaultPriority = \_PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefaultPriority($container, $serviceId, $class, $defaultPriorityMethod, $tagName);
+                    $defaultPriority = \_PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefaultPriority($container, $serviceId, $class, $defaultPriorityMethod, $tagName);
                 }
                 $priority = $priority ?? $defaultPriority ?? ($defaultPriority = 0);
                 if (null === $indexAttribute && !$defaultIndexMethod && !$needsIndexes) {
@@ -68,7 +68,7 @@ trait PriorityTaggedServiceTrait
                 if (null !== $indexAttribute && isset($attribute[$indexAttribute])) {
                     $index = $attribute[$indexAttribute];
                 } elseif (null === $defaultIndex && $defaultPriorityMethod && $class) {
-                    $defaultIndex = \_PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefaultIndex($container, $serviceId, $class, $defaultIndexMethod ?? 'getDefaultName', $tagName, $indexAttribute);
+                    $defaultIndex = \_PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefaultIndex($container, $serviceId, $class, $defaultIndexMethod ?? 'getDefaultName', $tagName, $indexAttribute);
                 }
                 $index = $index ?? $defaultIndex ?? ($defaultIndex = $serviceId);
                 $services[] = [$priority, ++$i, $index, $serviceId, $class];

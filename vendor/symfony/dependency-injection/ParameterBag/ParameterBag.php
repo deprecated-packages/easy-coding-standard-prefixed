@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\ParameterBag;
+namespace _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\ParameterBag;
 
-use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * Holds parameters.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ParameterBag implements \_PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
+class ParameterBag implements \_PhpScoper0a055416a443\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
 {
     protected $parameters = [];
     protected $resolved = \false;

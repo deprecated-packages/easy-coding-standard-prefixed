@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfde42a25c345\Symfony\Component\Console\CommandLoader;
+namespace _PhpScoper0a055416a443\Symfony\Component\Console\CommandLoader;
 
-use _PhpScoperfde42a25c345\Symfony\Component\Console\Exception\CommandNotFoundException;
+use _PhpScoper0a055416a443\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * A simple command loader using factories to instantiate commands lazily.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class FactoryCommandLoader implements \_PhpScoperfde42a25c345\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+class FactoryCommandLoader implements \_PhpScoper0a055416a443\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
 {
     private $factories;
     /**

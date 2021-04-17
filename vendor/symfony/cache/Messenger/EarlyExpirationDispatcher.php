@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfde42a25c345\Symfony\Component\Cache\Messenger;
+namespace _PhpScoper0a055416a443\Symfony\Component\Cache\Messenger;
 
-use _PhpScoperfde42a25c345\Psr\Log\LoggerInterface;
-use _PhpScoperfde42a25c345\Symfony\Component\Cache\Adapter\AdapterInterface;
-use _PhpScoperfde42a25c345\Symfony\Component\Cache\CacheItem;
-use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\ReverseContainer;
-use _PhpScoperfde42a25c345\Symfony\Component\Messenger\MessageBusInterface;
-use _PhpScoperfde42a25c345\Symfony\Component\Messenger\Stamp\HandledStamp;
+use _PhpScoper0a055416a443\Psr\Log\LoggerInterface;
+use _PhpScoper0a055416a443\Symfony\Component\Cache\Adapter\AdapterInterface;
+use _PhpScoper0a055416a443\Symfony\Component\Cache\CacheItem;
+use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\ReverseContainer;
+use _PhpScoper0a055416a443\Symfony\Component\Messenger\MessageBusInterface;
+use _PhpScoper0a055416a443\Symfony\Component\Messenger\Stamp\HandledStamp;
 /**
  * Sends the computation of cached values to a message bus.
  */
@@ -32,7 +32,7 @@ class EarlyExpirationDispatcher
     }
     public function __invoke(callable $callback, CacheItem $item, bool &$save, AdapterInterface $pool, \Closure $setMetadata, LoggerInterface $logger = null)
     {
-        if (!$item->isHit() || null === ($message = \_PhpScoperfde42a25c345\Symfony\Component\Cache\Messenger\EarlyExpirationMessage::create($this->reverseContainer, $callback, $item, $pool))) {
+        if (!$item->isHit() || null === ($message = \_PhpScoper0a055416a443\Symfony\Component\Cache\Messenger\EarlyExpirationMessage::create($this->reverseContainer, $callback, $item, $pool))) {
             // The item is stale or the callback cannot be reversed: we must compute the value now
             $logger && $logger->info('Computing item "{key}" online: ' . ($item->isHit() ? 'callback cannot be reversed' : 'item is stale'), ['key' => $item->getKey()]);
             return null !== $this->callbackWrapper ? ($this->callbackWrapper)($callback, $item, $save, $pool, $setMetadata, $logger) : $callback($item, $save);

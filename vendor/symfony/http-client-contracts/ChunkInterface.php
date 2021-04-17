@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperfde42a25c345\Symfony\Contracts\HttpClient;
+namespace _PhpScoper0a055416a443\Symfony\Contracts\HttpClient;
 
-use _PhpScoperfde42a25c345\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use _PhpScoper0a055416a443\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 /**
  * The interface of chunks returned by ResponseStreamInterface::current().
  *
