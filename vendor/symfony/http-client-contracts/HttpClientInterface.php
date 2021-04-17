@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper757c066053f8\Symfony\Contracts\HttpClient;
+namespace _PhpScoper514703a076a2\Symfony\Contracts\HttpClient;
 
-use _PhpScoper757c066053f8\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use _PhpScoper757c066053f8\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
+use _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
 /**
  * Provides flexible methods for requesting HTTP resources synchronously or asynchronously.
  *
@@ -97,12 +97,12 @@ interface HttpClientInterface
      *
      * @throws TransportExceptionInterface When an unsupported option is passed
      */
-    public function request(string $method, string $url, array $options = []) : \_PhpScoper757c066053f8\Symfony\Contracts\HttpClient\ResponseInterface;
+    public function request(string $method, string $url, array $options = []) : \_PhpScoper514703a076a2\Symfony\Contracts\HttpClient\ResponseInterface;
     /**
      * Yields responses chunk by chunk as they complete.
      *
      * @param ResponseInterface|ResponseInterface[]|iterable $responses One or more responses created by the current HTTP client
      * @param float|null                                     $timeout   The idle timeout before yielding timeout chunks
      */
-    public function stream($responses, float $timeout = null) : \_PhpScoper757c066053f8\Symfony\Contracts\HttpClient\ResponseStreamInterface;
+    public function stream($responses, float $timeout = null) : \_PhpScoper514703a076a2\Symfony\Contracts\HttpClient\ResponseStreamInterface;
 }

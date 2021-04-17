@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\HttpKernel;
 
-use _PhpScoper757c066053f8\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoper757c066053f8\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use _PhpScoper757c066053f8\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper514703a076a2\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper514703a076a2\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper514703a076a2\Symfony\Component\HttpKernel\Kernel;
 use Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;

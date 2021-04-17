@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\ValueObject;
 
-use _PhpScoper757c066053f8\Nette\Utils\Arrays;
-use _PhpScoper757c066053f8\Nette\Utils\Strings;
+use _PhpScoper514703a076a2\Nette\Utils\Arrays;
+use _PhpScoper514703a076a2\Nette\Utils\Strings;
 use Symplify\ComposerJsonManipulator\Sorter\ComposerPackageSorter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
