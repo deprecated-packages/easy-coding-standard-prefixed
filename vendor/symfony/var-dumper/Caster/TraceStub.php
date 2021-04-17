@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0a055416a443\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper0c575b5c37d7\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper0a055416a443\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper0c575b5c37d7\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Represents a backtrace as returned by debug_backtrace() or Exception->getTrace().
  *

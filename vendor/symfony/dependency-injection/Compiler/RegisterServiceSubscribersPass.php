@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper0a055416a443\Psr\Container\ContainerInterface as PsrContainerInterface;
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\TypedReference;
-use _PhpScoper0a055416a443\Symfony\Contracts\Service\ServiceProviderInterface;
-use _PhpScoper0a055416a443\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use _PhpScoper0c575b5c37d7\Psr\Container\ContainerInterface as PsrContainerInterface;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoper0c575b5c37d7\Symfony\Contracts\Service\ServiceProviderInterface;
+use _PhpScoper0c575b5c37d7\Symfony\Contracts\Service\ServiceSubscriberInterface;
 /**
  * Compiler pass to register tagged services that require a service locator.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class RegisterServiceSubscribersPass extends \_PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class RegisterServiceSubscribersPass extends \_PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     protected function processValue($value, bool $isRoot = \false)
     {
@@ -96,7 +96,7 @@ class RegisterServiceSubscribersPass extends \_PhpScoper0a055416a443\Symfony\Com
             $message = \sprintf(1 < \count($serviceMap) ? 'keys "%s" do' : 'key "%s" does', \str_replace('%', '%%', \implode('", "', $serviceMap)));
             throw new InvalidArgumentException(\sprintf('Service %s not exist in the map returned by "%s::getSubscribedServices()" for service "%s".', $message, $class, $this->currentId));
         }
-        $locatorRef = \_PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($this->container, $subscriberMap, $this->currentId);
+        $locatorRef = \_PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($this->container, $subscriberMap, $this->currentId);
         $value->addTag('container.service_subscriber.locator', ['id' => (string) $locatorRef]);
         $value->setBindings([PsrContainerInterface::class => new BoundArgument($locatorRef, \false), ServiceProviderInterface::class => new BoundArgument($locatorRef, \false)] + $value->getBindings());
         return parent::processValue($value);

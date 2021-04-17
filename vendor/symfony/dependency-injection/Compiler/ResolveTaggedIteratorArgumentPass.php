@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
 /**
  * Resolves all TaggedIteratorArgument arguments.
  *
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class ResolveTaggedIteratorArgumentPass extends \_PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveTaggedIteratorArgumentPass extends \_PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     use PriorityTaggedServiceTrait;
     /**

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0a055416a443\Symfony\Component\Cache\DependencyInjection;
+namespace _PhpScoper0c575b5c37d7\Symfony\Component\Cache\DependencyInjection;
 
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper0a055416a443\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

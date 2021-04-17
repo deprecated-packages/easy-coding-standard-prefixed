@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper0a055416a443\Nette\Utils\Strings;
+use _PhpScoper0c575b5c37d7\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -12,7 +12,7 @@ final class SwitchedTypeAndNameMalformWorker implements MalformWorkerInterface
 {
     /**
      * @var string
-     * @see https://regex101.com/r/Ie89ks/2
+     * @see https://regex101.com/r/4us32A/1
      */
     private const NAME_THEN_TYPE_REGEX = '#@(param|var)(\\s+)(?<name>\\$\\w+)(\\s+)(?<type>[|\\\\\\w\\[\\]]+)#';
     /**
