@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\DependencyInjection\Extension;
 
-use _PhpScoper45e1bde0f567\Symfony\Component\Config\FileLocator;
-use _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoper757c066053f8\Symfony\Component\Config\FileLocator;
+use _PhpScoper757c066053f8\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper757c066053f8\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoper757c066053f8\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 final class ComposerJsonManipulatorExtension extends Extension
 {
     /**

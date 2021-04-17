@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Doctrine\Annotation;
 
-use _PhpScoper45e1bde0f567\Doctrine\Common\Annotations\DocLexer;
+use _PhpScoper757c066053f8\Doctrine\Common\Annotations\DocLexer;
 /**
  * A Doctrine annotation token.
  *

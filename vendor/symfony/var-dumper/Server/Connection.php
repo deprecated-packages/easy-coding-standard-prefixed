@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper45e1bde0f567\Symfony\Component\VarDumper\Server;
+namespace _PhpScoper757c066053f8\Symfony\Component\VarDumper\Server;
 
-use _PhpScoper45e1bde0f567\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoper45e1bde0f567\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
+use _PhpScoper757c066053f8\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper757c066053f8\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
 /**
  * Forwards serialized Data clones to a server.
  *

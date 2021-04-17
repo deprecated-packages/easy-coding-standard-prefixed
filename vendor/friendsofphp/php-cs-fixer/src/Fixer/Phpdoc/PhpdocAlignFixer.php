@@ -92,7 +92,7 @@ final class PhpdocAlignFixer extends AbstractFixer implements ConfigurationDefin
         $code = <<<'EOF'
 <?php
 
-namespace _PhpScoper45e1bde0f567;
+namespace _PhpScoper757c066053f8;
 
 /**
  * @param  EngineInterface $templating

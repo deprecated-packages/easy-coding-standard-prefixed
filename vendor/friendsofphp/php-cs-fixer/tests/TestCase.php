@@ -11,14 +11,14 @@
  */
 namespace PhpCsFixer\Tests;
 
-use _PhpScoper45e1bde0f567\LegacyPHPUnit\TestCase as BaseTestCase;
-use _PhpScoper45e1bde0f567\PHPUnitGoodPractices\Polyfill\PolyfillTrait;
-use _PhpScoper45e1bde0f567\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
-use _PhpScoper45e1bde0f567\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
-use _PhpScoper45e1bde0f567\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
-use _PhpScoper45e1bde0f567\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
-use _PhpScoper45e1bde0f567\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
-use _PhpScoper45e1bde0f567\Prophecy\PhpUnit\ProphecyTrait;
+use _PhpScoper757c066053f8\LegacyPHPUnit\TestCase as BaseTestCase;
+use _PhpScoper757c066053f8\PHPUnitGoodPractices\Polyfill\PolyfillTrait;
+use _PhpScoper757c066053f8\PHPUnitGoodPractices\Traits\ExpectationViaCodeOverAnnotationTrait;
+use _PhpScoper757c066053f8\PHPUnitGoodPractices\Traits\ExpectOverSetExceptionTrait;
+use _PhpScoper757c066053f8\PHPUnitGoodPractices\Traits\IdentityOverEqualityTrait;
+use _PhpScoper757c066053f8\PHPUnitGoodPractices\Traits\ProphecyOverMockObjectTrait;
+use _PhpScoper757c066053f8\PHPUnitGoodPractices\Traits\ProphesizeOnlyInterfaceTrait;
+use _PhpScoper757c066053f8\Prophecy\PhpUnit\ProphecyTrait;
 // we check single, example DEV dependency - if it's there, we have the dev dependencies, if not, we are using PHP-CS-Fixer as library and trying to use internal TestCase...
 if (\trait_exists(ProphesizeOnlyInterfaceTrait::class)) {
     if (\trait_exists(ProphecyTrait::class)) {

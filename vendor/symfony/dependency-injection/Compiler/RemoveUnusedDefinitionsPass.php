@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper757c066053f8\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper757c066053f8\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper757c066053f8\Symfony\Component\DependencyInjection\Reference;
 /**
  * Removes unused service definitions from the container.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class RemoveUnusedDefinitionsPass extends \_PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class RemoveUnusedDefinitionsPass extends \_PhpScoper757c066053f8\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $connectedIds = [];
     /**

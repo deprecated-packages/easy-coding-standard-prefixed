@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper45e1bde0f567\Symfony\Component\VarExporter\Internal;
+namespace _PhpScoper757c066053f8\Symfony\Component\VarExporter\Internal;
 
-use _PhpScoper45e1bde0f567\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use _PhpScoper757c066053f8\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -24,7 +24,7 @@ class Hydrator
     public $properties;
     public $value;
     public $wakeups;
-    public function __construct(?\_PhpScoper45e1bde0f567\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScoper45e1bde0f567\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
+    public function __construct(?\_PhpScoper757c066053f8\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScoper757c066053f8\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
     {
         $this->registry = $registry;
         $this->values = $values;
