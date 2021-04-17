@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper82a1412fb847;
+namespace _PhpScoperfde42a25c345;
 
 use PhpCsFixer\Fixer\Alias\RandomApiMigrationFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
@@ -9,7 +9,7 @@ use PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer;
 use PhpCsFixer\Fixer\Operator\TernaryToNullCoalescingFixer;
 use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
-use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\Strict\BlankLineAfterStrictTypesFixer;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     \trigger_error('ECS set PHP_70 is deprecated. Use more advanced and precise Rector instead (http://github.com/rectorphp/rector)');

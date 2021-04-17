@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Reference;
 /**
  * Replaces aliases with actual service definitions, effectively removing these
  * aliases.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ReplaceAliasByActualDefinitionPass extends \_PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ReplaceAliasByActualDefinitionPass extends \_PhpScoperfde42a25c345\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $replacements;
     /**

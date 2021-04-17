@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Composer;
 
-use _PhpScoper82a1412fb847\Composer\Autoload\ClassLoader;
-use _PhpScoper82a1412fb847\Nette\Utils\Strings;
+use _PhpScoperfde42a25c345\Composer\Autoload\ClassLoader;
+use _PhpScoperfde42a25c345\Nette\Utils\Strings;
 use ReflectionClass;
 /**
  * @see \Symplify\PackageBuilder\Tests\Composer\VendorDirProviderTest

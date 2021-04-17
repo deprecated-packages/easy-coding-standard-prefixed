@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Formatter;
 
-use _PhpScoper82a1412fb847\Nette\Utils\Strings;
+use _PhpScoperfde42a25c345\Nette\Utils\Strings;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
 use Symplify\EasyCodingStandard\SnippetFormatter\Provider\CurrentParentFileInfoProvider;

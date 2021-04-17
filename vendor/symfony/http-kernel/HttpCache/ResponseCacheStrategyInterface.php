@@ -12,9 +12,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82a1412fb847\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScoperfde42a25c345\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper82a1412fb847\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperfde42a25c345\Symfony\Component\HttpFoundation\Response;
 /**
  * ResponseCacheStrategyInterface implementations know how to compute the
  * Response cache HTTP header based on the different response cache headers.

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82a1412fb847\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScoperfde42a25c345\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoper82a1412fb847\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper82a1412fb847\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper82a1412fb847\Symfony\Component\HttpFoundation\StreamedResponse;
-use _PhpScoper82a1412fb847\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use _PhpScoper82a1412fb847\Symfony\Component\HttpKernel\Exception\HttpException;
+use _PhpScoperfde42a25c345\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoperfde42a25c345\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperfde42a25c345\Symfony\Component\HttpFoundation\StreamedResponse;
+use _PhpScoperfde42a25c345\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScoperfde42a25c345\Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Renders a URI that represents a resource fragment.
  *
@@ -45,7 +45,7 @@ class FragmentHandler
     /**
      * Adds a renderer.
      */
-    public function addRenderer(\_PhpScoper82a1412fb847\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $renderer)
+    public function addRenderer(\_PhpScoperfde42a25c345\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $renderer)
     {
         $this->renderers[$renderer->getName()] = $renderer;
     }

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82a1412fb847\Symfony\Component\Console\Descriptor;
+namespace _PhpScoperfde42a25c345\Symfony\Component\Console\Descriptor;
 
-use _PhpScoper82a1412fb847\Symfony\Component\Console\Application;
-use _PhpScoper82a1412fb847\Symfony\Component\Console\Command\Command;
-use _PhpScoper82a1412fb847\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper82a1412fb847\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoper82a1412fb847\Symfony\Component\Console\Input\InputOption;
+use _PhpScoperfde42a25c345\Symfony\Component\Console\Application;
+use _PhpScoperfde42a25c345\Symfony\Component\Console\Command\Command;
+use _PhpScoperfde42a25c345\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoperfde42a25c345\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoperfde42a25c345\Symfony\Component\Console\Input\InputOption;
 /**
  * JSON descriptor.
  *
@@ -22,7 +22,7 @@ use _PhpScoper82a1412fb847\Symfony\Component\Console\Input\InputOption;
  *
  * @internal
  */
-class JsonDescriptor extends \_PhpScoper82a1412fb847\Symfony\Component\Console\Descriptor\Descriptor
+class JsonDescriptor extends \_PhpScoperfde42a25c345\Symfony\Component\Console\Descriptor\Descriptor
 {
     /**
      * {@inheritdoc}
@@ -58,7 +58,7 @@ class JsonDescriptor extends \_PhpScoper82a1412fb847\Symfony\Component\Console\D
     protected function describeApplication(Application $application, array $options = [])
     {
         $describedNamespace = $options['namespace'] ?? null;
-        $description = new \_PhpScoper82a1412fb847\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace, \true);
+        $description = new \_PhpScoperfde42a25c345\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace, \true);
         $commands = [];
         foreach ($description->getCommands() as $command) {
             $commands[] = $this->getCommandData($command);

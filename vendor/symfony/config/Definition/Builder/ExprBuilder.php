@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82a1412fb847\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoperfde42a25c345\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoper82a1412fb847\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use _PhpScoperfde42a25c345\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * This class builds an if expression.
  *
@@ -22,7 +22,7 @@ class ExprBuilder
     protected $node;
     public $ifPart;
     public $thenPart;
-    public function __construct(\_PhpScoper82a1412fb847\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function __construct(\_PhpScoperfde42a25c345\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->node = $node;
     }

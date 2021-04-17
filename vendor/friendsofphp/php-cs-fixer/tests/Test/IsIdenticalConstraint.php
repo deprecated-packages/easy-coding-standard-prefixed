@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Tests\Test;
 
 use PhpCsFixer\PhpunitConstraintIsIdenticalString\Constraint\IsIdenticalString;
-use _PhpScoper82a1412fb847\PHPUnit\Framework\Constraint\IsIdentical as PhpUnitIsIdentical;
+use _PhpScoperfde42a25c345\PHPUnit\Framework\Constraint\IsIdentical as PhpUnitIsIdentical;
 /**
  * @internal
  *

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82a1412fb847\Symfony\Contracts\Cache;
+namespace _PhpScoperfde42a25c345\Symfony\Contracts\Cache;
 
-use _PhpScoper82a1412fb847\Psr\Cache\InvalidArgumentException;
+use _PhpScoperfde42a25c345\Psr\Cache\InvalidArgumentException;
 /**
  * Allows invalidating cached items using tags.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface TagAwareCacheInterface extends \_PhpScoper82a1412fb847\Symfony\Contracts\Cache\CacheInterface
+interface TagAwareCacheInterface extends \_PhpScoperfde42a25c345\Symfony\Contracts\Cache\CacheInterface
 {
     /**
      * Invalidates cached items using tags.

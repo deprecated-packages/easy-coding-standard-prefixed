@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82a1412fb847\Symfony\Component\VarExporter\Internal;
+namespace _PhpScoperfde42a25c345\Symfony\Component\VarExporter\Internal;
 
-use _PhpScoper82a1412fb847\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
-use _PhpScoper82a1412fb847\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use _PhpScoperfde42a25c345\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use _PhpScoperfde42a25c345\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

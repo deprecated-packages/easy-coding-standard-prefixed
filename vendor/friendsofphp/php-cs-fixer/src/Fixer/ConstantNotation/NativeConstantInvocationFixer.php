@@ -23,7 +23,7 @@ use PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper82a1412fb847\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoperfde42a25c345\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */

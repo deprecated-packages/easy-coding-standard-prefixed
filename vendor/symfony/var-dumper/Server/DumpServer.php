@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82a1412fb847\Symfony\Component\VarDumper\Server;
+namespace _PhpScoperfde42a25c345\Symfony\Component\VarDumper\Server;
 
-use _PhpScoper82a1412fb847\Psr\Log\LoggerInterface;
-use _PhpScoper82a1412fb847\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoper82a1412fb847\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoperfde42a25c345\Psr\Log\LoggerInterface;
+use _PhpScoperfde42a25c345\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoperfde42a25c345\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * A server collecting Data clones sent by a ServerDumper.
  *

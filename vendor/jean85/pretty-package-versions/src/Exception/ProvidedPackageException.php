@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper82a1412fb847\Jean85\Exception;
+namespace _PhpScoperfde42a25c345\Jean85\Exception;
 
-class ProvidedPackageException extends \Exception implements \_PhpScoper82a1412fb847\Jean85\Exception\VersionMissingExceptionInterface
+class ProvidedPackageException extends \Exception implements \_PhpScoperfde42a25c345\Jean85\Exception\VersionMissingExceptionInterface
 {
-    public static function create(string $packageName) : \_PhpScoper82a1412fb847\Jean85\Exception\VersionMissingExceptionInterface
+    public static function create(string $packageName) : \_PhpScoperfde42a25c345\Jean85\Exception\VersionMissingExceptionInterface
     {
         return new self('Cannot retrieve a version for package ' . $packageName . ' since it is provided, probably a metapackage');
     }

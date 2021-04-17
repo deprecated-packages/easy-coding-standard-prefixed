@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper82a1412fb847\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoperfde42a25c345\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoper82a1412fb847\Symfony\Component\Config\Definition\IntegerNode;
+use _PhpScoperfde42a25c345\Symfony\Component\Config\Definition\IntegerNode;
 /**
  * This class provides a fluent interface for defining an integer node.
  *
  * @author Jeanmonod David <david.jeanmonod@gmail.com>
  */
-class IntegerNodeDefinition extends \_PhpScoper82a1412fb847\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
+class IntegerNodeDefinition extends \_PhpScoperfde42a25c345\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
 {
     /**
      * Instantiates a Node.
