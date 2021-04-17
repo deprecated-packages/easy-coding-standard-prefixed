@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait TagTrait
 {
     /**

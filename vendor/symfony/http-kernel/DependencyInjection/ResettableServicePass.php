@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9385100df341\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper82a1412fb847\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Alexander M. Turek <me@derrabus.de>
  */

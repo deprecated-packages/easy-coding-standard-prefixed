@@ -12,8 +12,8 @@
 namespace PhpCsFixer\Tokenizer;
 
 use PhpCsFixer\Utils;
-use _PhpScoper9385100df341\Symfony\Component\Finder\Finder;
-use _PhpScoper9385100df341\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper82a1412fb847\Symfony\Component\Finder\Finder;
+use _PhpScoper82a1412fb847\Symfony\Component\Finder\SplFileInfo;
 /**
  * Collection of Transformer classes.
  *

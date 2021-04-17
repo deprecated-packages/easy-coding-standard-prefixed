@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Extension;
+namespace _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScoper9385100df341\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScoper9385100df341\Symfony\Component\Config\Definition\Processor;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Container;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoper82a1412fb847\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoper82a1412fb847\Symfony\Component\Config\Definition\Processor;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Container;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Exception\LogicException;
 /**
  * Provides useful features shared by many extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Extension implements \_PhpScoper9385100df341\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \_PhpScoper9385100df341\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+abstract class Extension implements \_PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \_PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
 {
     private $processedConfigs = [];
     /**

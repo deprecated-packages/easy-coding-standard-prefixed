@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9385100df341\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper82a1412fb847\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper9385100df341\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper9385100df341\Symfony\Component\Cache\Traits\RedisTrait;
-class RedisAdapter extends \_PhpScoper9385100df341\Symfony\Component\Cache\Adapter\AbstractAdapter
+use _PhpScoper82a1412fb847\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper82a1412fb847\Symfony\Component\Cache\Traits\RedisTrait;
+class RedisAdapter extends \_PhpScoper82a1412fb847\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     use RedisTrait;
     /**

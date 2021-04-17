@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9385100df341\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper82a1412fb847\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper9385100df341\Composer\Autoload\ClassLoader;
-use _PhpScoper9385100df341\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper9385100df341\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper9385100df341\Symfony\Component\ErrorHandler\DebugClassLoader;
-use _PhpScoper9385100df341\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper82a1412fb847\Composer\Autoload\ClassLoader;
+use _PhpScoper82a1412fb847\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper82a1412fb847\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper82a1412fb847\Symfony\Component\ErrorHandler\DebugClassLoader;
+use _PhpScoper82a1412fb847\Symfony\Component\HttpKernel\Kernel;
 /**
  * Sets the classes to compile in the cache for the container.
  *
@@ -35,7 +35,7 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
     {
         $annotatedClasses = $this->kernel->getAnnotatedClassesToCompile();
         foreach ($container->getExtensions() as $extension) {
-            if ($extension instanceof \_PhpScoper9385100df341\Symfony\Component\HttpKernel\DependencyInjection\Extension) {
+            if ($extension instanceof \_PhpScoper82a1412fb847\Symfony\Component\HttpKernel\DependencyInjection\Extension) {
                 $annotatedClasses = \array_merge($annotatedClasses, $extension->getAnnotatedClassesToCompile());
             }
         }

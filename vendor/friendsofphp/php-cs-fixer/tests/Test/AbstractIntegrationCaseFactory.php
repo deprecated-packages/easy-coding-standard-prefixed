@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Tests\Test;
 
 use PhpCsFixer\RuleSet\RuleSet;
-use _PhpScoper9385100df341\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper82a1412fb847\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
