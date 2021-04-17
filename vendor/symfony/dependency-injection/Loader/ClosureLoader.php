@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Loader;
+namespace _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\Loader;
 
-use _PhpScoper0c575b5c37d7\Symfony\Component\Config\Loader\Loader;
-use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper45e1bde0f567\Symfony\Component\Config\Loader\Loader;
+use _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ClosureLoader loads service definitions from a PHP closure.
  *

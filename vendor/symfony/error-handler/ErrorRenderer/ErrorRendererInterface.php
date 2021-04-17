@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0c575b5c37d7\Symfony\Component\ErrorHandler\ErrorRenderer;
+namespace _PhpScoper45e1bde0f567\Symfony\Component\ErrorHandler\ErrorRenderer;
 
-use _PhpScoper0c575b5c37d7\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use _PhpScoper45e1bde0f567\Symfony\Component\ErrorHandler\Exception\FlattenException;
 /**
  * Formats an exception to be used as response content.
  *

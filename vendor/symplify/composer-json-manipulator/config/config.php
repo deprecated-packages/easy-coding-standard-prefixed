@@ -1,17 +1,17 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper0c575b5c37d7;
+namespace _PhpScoper45e1bde0f567;
 
-use _PhpScoper0c575b5c37d7\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper45e1bde0f567\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\ComposerJsonManipulator\ValueObject\Option;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 use Symplify\SmartFileSystem\SmartFileSystem;
-use function _PhpScoper0c575b5c37d7\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use function _PhpScoper45e1bde0f567\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::INLINE_SECTIONS, ['keywords']);
