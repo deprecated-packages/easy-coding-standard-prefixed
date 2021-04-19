@@ -12,7 +12,7 @@
 namespace PhpCsFixer\Differ;
 
 use PhpCsFixer\Preg;
-use _PhpScoper855b7fb41c61\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper1c0f546920a5\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *

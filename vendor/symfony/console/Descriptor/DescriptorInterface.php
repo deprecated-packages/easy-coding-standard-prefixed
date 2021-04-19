@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper855b7fb41c61\Symfony\Component\Console\Descriptor;
+namespace _PhpScoper1c0f546920a5\Symfony\Component\Console\Descriptor;
 
-use _PhpScoper855b7fb41c61\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper1c0f546920a5\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Descriptor interface.
  *

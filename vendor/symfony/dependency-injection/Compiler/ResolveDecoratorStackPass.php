@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper855b7fb41c61\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper855b7fb41c61\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoper855b7fb41c61\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoper855b7fb41c61\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper855b7fb41c61\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper855b7fb41c61\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper855b7fb41c61\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use _PhpScoper855b7fb41c61\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Alias;
+use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveDecoratorStackPass implements \_PhpScoper855b7fb41c61\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolveDecoratorStackPass implements \_PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $tag;
     public function __construct(string $tag = 'container.stack')

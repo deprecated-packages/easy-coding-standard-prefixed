@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper855b7fb41c61\Symfony\Component\Config\Definition;
+namespace _PhpScoper1c0f546920a5\Symfony\Component\Config\Definition;
 
-use _PhpScoper855b7fb41c61\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScoper1c0f546920a5\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 /**
  * This node represents an integer value in the config tree.
  *
  * @author Jeanmonod David <david.jeanmonod@gmail.com>
  */
-class IntegerNode extends \_PhpScoper855b7fb41c61\Symfony\Component\Config\Definition\NumericNode
+class IntegerNode extends \_PhpScoper1c0f546920a5\Symfony\Component\Config\Definition\NumericNode
 {
     /**
      * {@inheritdoc}

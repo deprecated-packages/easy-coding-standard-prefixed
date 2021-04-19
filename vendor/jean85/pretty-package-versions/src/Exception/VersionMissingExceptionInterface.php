@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper855b7fb41c61\Jean85\Exception;
+namespace _PhpScoper1c0f546920a5\Jean85\Exception;
 
 interface VersionMissingExceptionInterface extends \Throwable
 {
