@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper78e1a27e740b\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper514703a076a2\Psr\Container\ContainerInterface;
-use _PhpScoper514703a076a2\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper514703a076a2\Symfony\Component\HttpFoundation\Session\Session;
-use _PhpScoper514703a076a2\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScoper514703a076a2\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScoper514703a076a2\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoper514703a076a2\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScoper514703a076a2\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException;
-use _PhpScoper514703a076a2\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper78e1a27e740b\Psr\Container\ContainerInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpFoundation\Session\Session;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Sets the session onto the request on the "kernel.request" event and saves
  * it on the "kernel.response" event.

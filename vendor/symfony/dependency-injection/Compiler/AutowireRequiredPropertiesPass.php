@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\TypedReference;
-use _PhpScoper514703a076a2\Symfony\Contracts\Service\Attribute\Required;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoper78e1a27e740b\Symfony\Contracts\Service\Attribute\Required;
 /**
  * Looks for definitions with autowiring enabled and registers their corresponding "@required" properties.
  *
  * @author Sebastien Morel (Plopix) <morel.seb@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AutowireRequiredPropertiesPass extends \_PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class AutowireRequiredPropertiesPass extends \_PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}

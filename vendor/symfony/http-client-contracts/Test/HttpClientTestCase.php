@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Test;
+namespace _PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Test;
 
-use _PhpScoper514703a076a2\PHPUnit\Framework\TestCase;
-use _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Exception\TimeoutExceptionInterface;
-use _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\HttpClientInterface;
+use _PhpScoper78e1a27e740b\PHPUnit\Framework\TestCase;
+use _PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use _PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use _PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Exception\TimeoutExceptionInterface;
+use _PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use _PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\HttpClientInterface;
 /**
  * A reference test suite for HttpClientInterface implementations.
  */
@@ -23,7 +23,7 @@ abstract class HttpClientTestCase extends TestCase
 {
     public static function setUpBeforeClass() : void
     {
-        \_PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Test\TestHttpServer::start();
+        \_PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Test\TestHttpServer::start();
     }
     protected abstract function getHttpClient(string $testCase) : HttpClientInterface;
     public function testGetRequest()
@@ -563,8 +563,8 @@ abstract class HttpClientTestCase extends TestCase
     }
     public function testTimeoutWithActiveConcurrentStream()
     {
-        $p1 = \_PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8067);
-        $p2 = \_PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8077);
+        $p1 = \_PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8067);
+        $p2 = \_PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8077);
         $client = $this->getHttpClient(__FUNCTION__);
         $streamingResponse = $client->request('GET', 'http://localhost:8067/max-duration');
         $blockingResponse = $client->request('GET', 'http://localhost:8077/timeout-body', ['timeout' => 0.25]);
@@ -724,5 +724,17 @@ abstract class HttpClientTestCase extends TestCase
         }
         $duration = \microtime(\true) - $start;
         $this->assertLessThan(10, $duration);
+    }
+    public function testWithOptions()
+    {
+        $client = $this->getHttpClient(__FUNCTION__);
+        if (!\method_exists($client, 'withOptions')) {
+            $this->markTestSkipped(\sprintf('Not implementing "%s::withOptions()" is deprecated.', \get_debug_type($client)));
+        }
+        $client2 = $client->withOptions(['base_uri' => 'http://localhost:8057/']);
+        $this->assertNotSame($client, $client2);
+        $this->assertSame(\get_class($client), \get_class($client2));
+        $response = $client2->request('GET', '/');
+        $this->assertSame(200, $response->getStatusCode());
     }
 }

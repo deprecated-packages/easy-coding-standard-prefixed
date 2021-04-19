@@ -8,9 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Contracts\Service\Attribute;
+namespace _PhpScoper78e1a27e740b\Symfony\Contracts\Service\Attribute;
 
-use Attribute;
 /**
  * A required dependency.
  *
@@ -19,7 +18,7 @@ use Attribute;
  *
  * @author Alexander M. Turek <me@derrabus.de>
  */
-#[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_PROPERTY)]
+#[\Attribute(\Attribute::TARGET_METHOD | \Attribute::TARGET_PROPERTY)]
 final class Required
 {
 }

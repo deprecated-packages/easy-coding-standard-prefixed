@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper78e1a27e740b\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper514703a076a2\Psr\Log\LoggerAwareInterface;
-use _PhpScoper514703a076a2\Psr\Log\LoggerInterface;
-use _PhpScoper514703a076a2\Symfony\Component\Cache\CacheItem;
-use _PhpScoper514703a076a2\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper514703a076a2\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper514703a076a2\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use _PhpScoper514703a076a2\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoper514703a076a2\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper78e1a27e740b\Psr\Log\LoggerAwareInterface;
+use _PhpScoper78e1a27e740b\Psr\Log\LoggerInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\Cache\CacheItem;
+use _PhpScoper78e1a27e740b\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper78e1a27e740b\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
+use _PhpScoper78e1a27e740b\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoper78e1a27e740b\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-abstract class AbstractAdapter implements \_PhpScoper514703a076a2\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, LoggerAwareInterface, ResettableInterface
+abstract class AbstractAdapter implements \_PhpScoper78e1a27e740b\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, LoggerAwareInterface, ResettableInterface
 {
     /**
      * @internal
@@ -86,32 +86,32 @@ abstract class AbstractAdapter implements \_PhpScoper514703a076a2\Symfony\Compon
      */
     public static function createSystemCache(string $namespace, int $defaultLifetime, string $version, string $directory, LoggerInterface $logger = null)
     {
-        $opcache = new \_PhpScoper514703a076a2\Symfony\Component\Cache\Adapter\PhpFilesAdapter($namespace, $defaultLifetime, $directory, \true);
+        $opcache = new \_PhpScoper78e1a27e740b\Symfony\Component\Cache\Adapter\PhpFilesAdapter($namespace, $defaultLifetime, $directory, \true);
         if (null !== $logger) {
             $opcache->setLogger($logger);
         }
-        if (!(self::$apcuSupported = self::$apcuSupported ?? \_PhpScoper514703a076a2\Symfony\Component\Cache\Adapter\ApcuAdapter::isSupported())) {
+        if (!(self::$apcuSupported = self::$apcuSupported ?? \_PhpScoper78e1a27e740b\Symfony\Component\Cache\Adapter\ApcuAdapter::isSupported())) {
             return $opcache;
         }
         if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
             return $opcache;
         }
-        $apcu = new \_PhpScoper514703a076a2\Symfony\Component\Cache\Adapter\ApcuAdapter($namespace, (int) $defaultLifetime / 5, $version);
+        $apcu = new \_PhpScoper78e1a27e740b\Symfony\Component\Cache\Adapter\ApcuAdapter($namespace, (int) $defaultLifetime / 5, $version);
         if (null !== $logger) {
             $apcu->setLogger($logger);
         }
-        return new \_PhpScoper514703a076a2\Symfony\Component\Cache\Adapter\ChainAdapter([$apcu, $opcache]);
+        return new \_PhpScoper78e1a27e740b\Symfony\Component\Cache\Adapter\ChainAdapter([$apcu, $opcache]);
     }
     public static function createConnection(string $dsn, array $options = [])
     {
         if (0 === \strpos($dsn, 'redis:') || 0 === \strpos($dsn, 'rediss:')) {
-            return \_PhpScoper514703a076a2\Symfony\Component\Cache\Adapter\RedisAdapter::createConnection($dsn, $options);
+            return \_PhpScoper78e1a27e740b\Symfony\Component\Cache\Adapter\RedisAdapter::createConnection($dsn, $options);
         }
         if (0 === \strpos($dsn, 'memcached:')) {
-            return \_PhpScoper514703a076a2\Symfony\Component\Cache\Adapter\MemcachedAdapter::createConnection($dsn, $options);
+            return \_PhpScoper78e1a27e740b\Symfony\Component\Cache\Adapter\MemcachedAdapter::createConnection($dsn, $options);
         }
         if (0 === \strpos($dsn, 'couchbase:')) {
-            return \_PhpScoper514703a076a2\Symfony\Component\Cache\Adapter\CouchbaseBucketAdapter::createConnection($dsn, $options);
+            return \_PhpScoper78e1a27e740b\Symfony\Component\Cache\Adapter\CouchbaseBucketAdapter::createConnection($dsn, $options);
         }
         throw new InvalidArgumentException(\sprintf('Unsupported DSN: "%s".', $dsn));
     }

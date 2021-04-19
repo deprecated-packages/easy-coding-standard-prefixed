@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Contracts\Cache;
+namespace _PhpScoper78e1a27e740b\Symfony\Contracts\Cache;
 
-use _PhpScoper514703a076a2\Psr\Cache\CacheException;
-use _PhpScoper514703a076a2\Psr\Cache\CacheItemInterface;
-use _PhpScoper514703a076a2\Psr\Cache\InvalidArgumentException;
+use _PhpScoper78e1a27e740b\Psr\Cache\CacheException;
+use _PhpScoper78e1a27e740b\Psr\Cache\CacheItemInterface;
+use _PhpScoper78e1a27e740b\Psr\Cache\InvalidArgumentException;
 /**
  * Augments PSR-6's CacheItemInterface with support for tags and metadata.
  *
@@ -23,19 +23,19 @@ interface ItemInterface extends CacheItemInterface
     /**
      * References the Unix timestamp stating when the item will expire.
      */
-    const METADATA_EXPIRY = 'expiry';
+    public const METADATA_EXPIRY = 'expiry';
     /**
      * References the time the item took to be created, in milliseconds.
      */
-    const METADATA_CTIME = 'ctime';
+    public const METADATA_CTIME = 'ctime';
     /**
      * References the list of tags that were assigned to the item, as string[].
      */
-    const METADATA_TAGS = 'tags';
+    public const METADATA_TAGS = 'tags';
     /**
      * Reserved characters that cannot be used in a key or tag.
      */
-    const RESERVED_CHARACTERS = '{}()/\\@:';
+    public const RESERVED_CHARACTERS = '{}()/\\@:';
     /**
      * Adds a tag to a cache item.
      *

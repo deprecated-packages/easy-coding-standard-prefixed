@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper514703a076a2;
+namespace _PhpScoper78e1a27e740b;
 
-use _PhpScoper514703a076a2\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper78e1a27e740b\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\ComposerJsonManipulator\ComposerJsonFactory;
 use Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
 use Symplify\ComposerJsonManipulator\Json\JsonCleaner;
@@ -19,7 +19,7 @@ use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileSystem;
 use Symplify\SymplifyKernel\Console\ConsoleApplicationFactory;
-use function _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use function _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();

@@ -31,13 +31,13 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper514703a076a2\\Symfony\\Contracts\\EventDispatcher\\": ""
+            "_PhpScoper78e1a27e740b\\Symfony\\Contracts\\EventDispatcher\\": ""
         }
     },
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev"
+            "dev-main": "2.4-dev"
         },
         "thanks": {
             "name": "symfony\/contracts",

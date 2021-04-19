@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Contracts\Service;
+namespace _PhpScoper78e1a27e740b\Symfony\Contracts\Service;
 
-use _PhpScoper514703a076a2\Psr\Container\ContainerInterface;
+use _PhpScoper78e1a27e740b\Psr\Container\ContainerInterface;
 /**
  * Implementation of ServiceSubscriberInterface that determines subscribed services from
  * private method return types. Service ids are available as "ClassName::methodName".
@@ -21,6 +21,9 @@ trait ServiceSubscriberTrait
 {
     /** @var ContainerInterface */
     protected $container;
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedServices() : array
     {
         static $services;
@@ -33,7 +36,7 @@ trait ServiceSubscriberTrait
                 continue;
             }
             if (self::class === $method->getDeclaringClass()->name && ($returnType = $method->getReturnType()) && !$returnType->isBuiltin()) {
-                $services[self::class . '::' . $method->name] = '?' . ($returnType instanceof \ReflectionNamedType ? $returnType->getName() : $type);
+                $services[self::class . '::' . $method->name] = '?' . ($returnType instanceof \ReflectionNamedType ? $returnType->getName() : $returnType);
             }
         }
         return $services;

@@ -21,16 +21,16 @@ use PhpCsFixer\Error\ErrorsManager;
 use PhpCsFixer\Report\ReportSummary;
 use PhpCsFixer\Runner\Runner;
 use PhpCsFixer\ToolInfoInterface;
-use _PhpScoper514703a076a2\Symfony\Component\Console\Command\Command;
-use _PhpScoper514703a076a2\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper514703a076a2\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper514703a076a2\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper514703a076a2\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoper514703a076a2\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper514703a076a2\Symfony\Component\Console\Terminal;
-use _PhpScoper514703a076a2\Symfony\Component\EventDispatcher\EventDispatcher;
-use _PhpScoper514703a076a2\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScoper514703a076a2\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoper78e1a27e740b\Symfony\Component\Console\Command\Command;
+use _PhpScoper78e1a27e740b\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper78e1a27e740b\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper78e1a27e740b\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\Console\Terminal;
+use _PhpScoper78e1a27e740b\Symfony\Component\EventDispatcher\EventDispatcher;
+use _PhpScoper78e1a27e740b\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>

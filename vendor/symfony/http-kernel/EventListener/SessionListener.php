@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper78e1a27e740b\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper514703a076a2\Psr\Container\ContainerInterface;
-use _PhpScoper514703a076a2\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScoper514703a076a2\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
-use _PhpScoper514703a076a2\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper78e1a27e740b\Psr\Container\ContainerInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
+use _PhpScoper78e1a27e740b\Symfony\Component\HttpKernel\Event\RequestEvent;
 /**
  * Sets the session in the request.
  *
@@ -25,7 +25,7 @@ use _PhpScoper514703a076a2\Symfony\Component\HttpKernel\Event\RequestEvent;
  *
  * @final
  */
-class SessionListener extends \_PhpScoper514703a076a2\Symfony\Component\HttpKernel\EventListener\AbstractSessionListener
+class SessionListener extends \_PhpScoper78e1a27e740b\Symfony\Component\HttpKernel\EventListener\AbstractSessionListener
 {
     public function __construct(ContainerInterface $container, bool $debug = \false)
     {

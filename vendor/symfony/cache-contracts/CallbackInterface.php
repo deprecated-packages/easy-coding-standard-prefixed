@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Contracts\Cache;
+namespace _PhpScoper78e1a27e740b\Symfony\Contracts\Cache;
 
-use _PhpScoper514703a076a2\Psr\Cache\CacheItemInterface;
+use _PhpScoper78e1a27e740b\Psr\Cache\CacheItemInterface;
 /**
  * Computes and returns the cached value of an item.
  *

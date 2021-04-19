@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Reference;
 /**
  * Throws an exception for any Definitions that have errors and still exist.
  *
  * @author Ryan Weaver <ryan@knpuniversity.com>
  */
-class DefinitionErrorExceptionPass extends \_PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class DefinitionErrorExceptionPass extends \_PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}

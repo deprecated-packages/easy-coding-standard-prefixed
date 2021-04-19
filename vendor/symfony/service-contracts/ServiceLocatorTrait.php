@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Contracts\Service;
+namespace _PhpScoper78e1a27e740b\Symfony\Contracts\Service;
 
-use _PhpScoper514703a076a2\Psr\Container\ContainerExceptionInterface;
-use _PhpScoper514703a076a2\Psr\Container\NotFoundExceptionInterface;
+use _PhpScoper78e1a27e740b\Psr\Container\ContainerExceptionInterface;
+use _PhpScoper78e1a27e740b\Psr\Container\NotFoundExceptionInterface;
 // Help opcache.preload discover always-needed symbols
 \class_exists(ContainerExceptionInterface::class);
 \class_exists(NotFoundExceptionInterface::class);
@@ -38,14 +38,16 @@ trait ServiceLocatorTrait
      *
      * @return bool
      */
-    public function has($id)
+    public function has(string $id)
     {
         return isset($this->factories[$id]);
     }
     /**
      * {@inheritdoc}
+     *
+     * @return mixed
      */
-    public function get($id)
+    public function get(string $id)
     {
         if (!isset($this->factories[$id])) {
             throw $this->createNotFoundException($id);

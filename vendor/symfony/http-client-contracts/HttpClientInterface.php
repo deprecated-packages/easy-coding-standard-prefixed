@@ -8,14 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Contracts\HttpClient;
+namespace _PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient;
 
-use _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use _PhpScoper514703a076a2\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
+use _PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use _PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
 /**
  * Provides flexible methods for requesting HTTP resources synchronously or asynchronously.
  *
  * @see HttpClientTestCase for a reference test suite
+ *
+ * @method static withOptions(array $options) Returns a new instance of the client with new default options
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -97,12 +99,12 @@ interface HttpClientInterface
      *
      * @throws TransportExceptionInterface When an unsupported option is passed
      */
-    public function request(string $method, string $url, array $options = []) : \_PhpScoper514703a076a2\Symfony\Contracts\HttpClient\ResponseInterface;
+    public function request(string $method, string $url, array $options = []) : \_PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\ResponseInterface;
     /**
      * Yields responses chunk by chunk as they complete.
      *
      * @param ResponseInterface|ResponseInterface[]|iterable $responses One or more responses created by the current HTTP client
      * @param float|null                                     $timeout   The idle timeout before yielding timeout chunks
      */
-    public function stream($responses, float $timeout = null) : \_PhpScoper514703a076a2\Symfony\Contracts\HttpClient\ResponseStreamInterface;
+    public function stream($responses, float $timeout = null) : \_PhpScoper78e1a27e740b\Symfony\Contracts\HttpClient\ResponseStreamInterface;
 }

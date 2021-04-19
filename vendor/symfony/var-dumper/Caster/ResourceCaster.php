@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper514703a076a2\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts common resource types to array representation.
  *
@@ -43,7 +43,7 @@ class ResourceCaster
     {
         $a = \stream_get_meta_data($stream) + static::castStreamContext($stream, $a, $stub, $isNested);
         if (isset($a['uri'])) {
-            $a['uri'] = new \_PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster\LinkStub($a['uri']);
+            $a['uri'] = new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\LinkStub($a['uri']);
         }
         return $a;
     }
@@ -73,7 +73,7 @@ class ResourceCaster
         $pin = \array_slice(\explode("\n", $pin), 1, -2);
         $pin = \base64_decode(\implode('', $pin));
         $pin = \base64_encode(\hash('sha256', $pin, \true));
-        $a += ['subject' => new \_PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster\EnumStub(\array_intersect_key($info['subject'], ['organizationName' => \true, 'commonName' => \true])), 'issuer' => new \_PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster\EnumStub(\array_intersect_key($info['issuer'], ['organizationName' => \true, 'commonName' => \true])), 'expiry' => new \_PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster\ConstStub(\date(\DateTime::ISO8601, $info['validTo_time_t']), $info['validTo_time_t']), 'fingerprint' => new \_PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster\EnumStub(['md5' => new \_PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster\ConstStub(\wordwrap(\strtoupper(\openssl_x509_fingerprint($h, 'md5')), 2, ':', \true)), 'sha1' => new \_PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster\ConstStub(\wordwrap(\strtoupper(\openssl_x509_fingerprint($h, 'sha1')), 2, ':', \true)), 'sha256' => new \_PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster\ConstStub(\wordwrap(\strtoupper(\openssl_x509_fingerprint($h, 'sha256')), 2, ':', \true)), 'pin-sha256' => new \_PhpScoper514703a076a2\Symfony\Component\VarDumper\Caster\ConstStub($pin)])];
+        $a += ['subject' => new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\EnumStub(\array_intersect_key($info['subject'], ['organizationName' => \true, 'commonName' => \true])), 'issuer' => new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\EnumStub(\array_intersect_key($info['issuer'], ['organizationName' => \true, 'commonName' => \true])), 'expiry' => new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\ConstStub(\date(\DateTime::ISO8601, $info['validTo_time_t']), $info['validTo_time_t']), 'fingerprint' => new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\EnumStub(['md5' => new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\ConstStub(\wordwrap(\strtoupper(\openssl_x509_fingerprint($h, 'md5')), 2, ':', \true)), 'sha1' => new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\ConstStub(\wordwrap(\strtoupper(\openssl_x509_fingerprint($h, 'sha1')), 2, ':', \true)), 'sha256' => new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\ConstStub(\wordwrap(\strtoupper(\openssl_x509_fingerprint($h, 'sha256')), 2, ':', \true)), 'pin-sha256' => new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\ConstStub($pin)])];
         return $a;
     }
 }

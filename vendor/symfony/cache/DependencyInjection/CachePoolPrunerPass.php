@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper514703a076a2\Symfony\Component\Cache\DependencyInjection;
+namespace _PhpScoper78e1a27e740b\Symfony\Component\Cache\DependencyInjection;
 
-use _PhpScoper514703a076a2\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper514703a076a2\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper78e1a27e740b\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper78e1a27e740b\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Rob Frawley 2nd <rmf@src.run>
  */
