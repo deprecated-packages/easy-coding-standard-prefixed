@@ -20,12 +20,12 @@ Are you already using another tool?
 ## Install
 
 ```bash
-composer require symplify/easy-coding-standard --dev
+composer require symplify/easy-coding-standard-prefixed --dev
 ```
 
-### Prefixed Version
+### Non-Prefixed Version
 
-Head over to the ["Easy Coding Standard Prefixed" repository](https://github.com/symplify/easy-coding-standard-prefixed) for more information.
+Head over to the ["Easy Coding Standard" repository](https://github.com/symplify/easy-coding-standard) for more information.
 
 ## Usage
 
