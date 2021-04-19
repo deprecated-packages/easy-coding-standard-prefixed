@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper78e1a27e740b\Symfony\Component\Console\Tester;
+namespace _PhpScoper855b7fb41c61\Symfony\Component\Console\Tester;
 
-use _PhpScoper78e1a27e740b\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper78e1a27e740b\Symfony\Component\Console\Output\ConsoleOutput;
-use _PhpScoper78e1a27e740b\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper78e1a27e740b\Symfony\Component\Console\Output\StreamOutput;
+use _PhpScoper855b7fb41c61\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper855b7fb41c61\Symfony\Component\Console\Output\ConsoleOutput;
+use _PhpScoper855b7fb41c61\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper855b7fb41c61\Symfony\Component\Console\Output\StreamOutput;
 /**
  * @author Amrouche Hamza <hamza.simperfit@gmail.com>
  */

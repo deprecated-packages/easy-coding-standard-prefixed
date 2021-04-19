@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper78e1a27e740b\Symfony\Component\Console\Helper;
+namespace _PhpScoper855b7fb41c61\Symfony\Component\Console\Helper;
 
-use _PhpScoper78e1a27e740b\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper855b7fb41c61\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * @author Yewhen Khoptynskyi <khoptynskyi@gmail.com>
  */

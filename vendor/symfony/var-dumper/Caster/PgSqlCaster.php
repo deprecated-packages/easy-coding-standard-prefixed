@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper855b7fb41c61\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper855b7fb41c61\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts pqsql resources to array representation.
  *
@@ -32,11 +32,11 @@ class PgSqlCaster
     public static function castLink($link, array $a, Stub $stub, bool $isNested)
     {
         $a['status'] = \pg_connection_status($link);
-        $a['status'] = new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\ConstStub(\PGSQL_CONNECTION_OK === $a['status'] ? 'PGSQL_CONNECTION_OK' : 'PGSQL_CONNECTION_BAD', $a['status']);
+        $a['status'] = new \_PhpScoper855b7fb41c61\Symfony\Component\VarDumper\Caster\ConstStub(\PGSQL_CONNECTION_OK === $a['status'] ? 'PGSQL_CONNECTION_OK' : 'PGSQL_CONNECTION_BAD', $a['status']);
         $a['busy'] = \pg_connection_busy($link);
         $a['transaction'] = \pg_transaction_status($link);
         if (isset(self::TRANSACTION_STATUS[$a['transaction']])) {
-            $a['transaction'] = new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\ConstStub(self::TRANSACTION_STATUS[$a['transaction']], $a['transaction']);
+            $a['transaction'] = new \_PhpScoper855b7fb41c61\Symfony\Component\VarDumper\Caster\ConstStub(self::TRANSACTION_STATUS[$a['transaction']], $a['transaction']);
         }
         $a['pid'] = \pg_get_pid($link);
         $a['last error'] = \pg_last_error($link);
@@ -52,7 +52,7 @@ class PgSqlCaster
             }
         }
         $a['param']['client_encoding'] = \pg_client_encoding($link);
-        $a['param'] = new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\EnumStub($a['param']);
+        $a['param'] = new \_PhpScoper855b7fb41c61\Symfony\Component\VarDumper\Caster\EnumStub($a['param']);
         return $a;
     }
     public static function castResult($result, array $a, Stub $stub, bool $isNested)
@@ -60,7 +60,7 @@ class PgSqlCaster
         $a['num rows'] = \pg_num_rows($result);
         $a['status'] = \pg_result_status($result);
         if (isset(self::RESULT_STATUS[$a['status']])) {
-            $a['status'] = new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\ConstStub(self::RESULT_STATUS[$a['status']], $a['status']);
+            $a['status'] = new \_PhpScoper855b7fb41c61\Symfony\Component\VarDumper\Caster\ConstStub(self::RESULT_STATUS[$a['status']], $a['status']);
         }
         $a['command-completion tag'] = \pg_result_status($result, \PGSQL_STATUS_STRING);
         if (-1 === $a['num rows']) {
@@ -84,7 +84,7 @@ class PgSqlCaster
             if ('1 chars' === $field['display']) {
                 $field['display'] = '1 char';
             }
-            $a['fields'][] = new \_PhpScoper78e1a27e740b\Symfony\Component\VarDumper\Caster\EnumStub($field);
+            $a['fields'][] = new \_PhpScoper855b7fb41c61\Symfony\Component\VarDumper\Caster\EnumStub($field);
         }
         return $a;
     }

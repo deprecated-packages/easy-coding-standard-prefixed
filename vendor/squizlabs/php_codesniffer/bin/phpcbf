@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoper78e1a27e740b;
+namespace _PhpScoper855b7fb41c61;
 
 /**
  * PHP Code Beautifier and Fixer fixes violations of a defined coding standard.
