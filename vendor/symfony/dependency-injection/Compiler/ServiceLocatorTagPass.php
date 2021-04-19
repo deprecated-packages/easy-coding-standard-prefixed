@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopera46128941588\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\ServiceLocator;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Alias;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\ServiceLocator;
 /**
  * Applies the "container.service_locator" tag by wrapping references into ServiceClosureArgument instances.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-final class ServiceLocatorTagPass extends \_PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+final class ServiceLocatorTagPass extends \_PhpScopera46128941588\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     use PriorityTaggedServiceTrait;
     protected function processValue($value, bool $isRoot = \false)

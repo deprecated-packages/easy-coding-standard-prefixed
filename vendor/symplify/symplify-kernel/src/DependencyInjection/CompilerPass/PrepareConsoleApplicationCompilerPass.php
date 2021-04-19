@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\DependencyInjection\CompilerPass;
 
-use _PhpScoper1c0f546920a5\Symfony\Component\Console\Application;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopera46128941588\Symfony\Component\Console\Application;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Reference;
 use Symplify\SymplifyKernel\Console\AutowiredConsoleApplication;
 use Symplify\SymplifyKernel\Console\ConsoleApplicationFactory;
 final class PrepareConsoleApplicationCompilerPass implements CompilerPassInterface

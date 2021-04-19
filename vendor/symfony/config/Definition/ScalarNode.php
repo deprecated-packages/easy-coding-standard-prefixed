@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1c0f546920a5\Symfony\Component\Config\Definition;
+namespace _PhpScopera46128941588\Symfony\Component\Config\Definition;
 
-use _PhpScoper1c0f546920a5\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScopera46128941588\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 /**
  * This node represents a scalar value in the config tree.
  *
@@ -23,7 +23,7 @@ use _PhpScoper1c0f546920a5\Symfony\Component\Config\Definition\Exception\Invalid
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ScalarNode extends \_PhpScoper1c0f546920a5\Symfony\Component\Config\Definition\VariableNode
+class ScalarNode extends \_PhpScopera46128941588\Symfony\Component\Config\Definition\VariableNode
 {
     /**
      * {@inheritdoc}

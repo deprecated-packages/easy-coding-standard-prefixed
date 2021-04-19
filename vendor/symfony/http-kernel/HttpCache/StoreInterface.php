@@ -11,10 +11,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1c0f546920a5\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScopera46128941588\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper1c0f546920a5\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper1c0f546920a5\Symfony\Component\HttpFoundation\Response;
+use _PhpScopera46128941588\Symfony\Component\HttpFoundation\Request;
+use _PhpScopera46128941588\Symfony\Component\HttpFoundation\Response;
 /**
  * Interface implemented by HTTP cache stores.
  *

@@ -1,18 +1,18 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper1c0f546920a5\Jean85;
+namespace _PhpScopera46128941588\Jean85;
 
 use Composer\InstalledVersions;
-use _PhpScoper1c0f546920a5\Jean85\Exception\ProvidedPackageException;
-use _PhpScoper1c0f546920a5\Jean85\Exception\ReplacedPackageException;
-use _PhpScoper1c0f546920a5\Jean85\Exception\VersionMissingExceptionInterface;
+use _PhpScopera46128941588\Jean85\Exception\ProvidedPackageException;
+use _PhpScopera46128941588\Jean85\Exception\ReplacedPackageException;
+use _PhpScopera46128941588\Jean85\Exception\VersionMissingExceptionInterface;
 class PrettyVersions
 {
     /**
      * @throws VersionMissingExceptionInterface When a package is provided ({@see ProvidedPackageException}) or replaced ({@see ReplacedPackageException})
      */
-    public static function getVersion(string $packageName) : \_PhpScoper1c0f546920a5\Jean85\Version
+    public static function getVersion(string $packageName) : \_PhpScopera46128941588\Jean85\Version
     {
         if (isset(InstalledVersions::getRawData()['versions'][$packageName]['provided'])) {
             throw ProvidedPackageException::create($packageName);
@@ -20,14 +20,14 @@ class PrettyVersions
         if (isset(InstalledVersions::getRawData()['versions'][$packageName]['replaced'])) {
             throw ReplacedPackageException::create($packageName);
         }
-        return new \_PhpScoper1c0f546920a5\Jean85\Version($packageName, InstalledVersions::getPrettyVersion($packageName), InstalledVersions::getReference($packageName));
+        return new \_PhpScopera46128941588\Jean85\Version($packageName, InstalledVersions::getPrettyVersion($packageName), InstalledVersions::getReference($packageName));
     }
     public static function getRootPackageName() : string
     {
         return InstalledVersions::getRootPackage()['name'];
     }
-    public static function getRootPackageVersion() : \_PhpScoper1c0f546920a5\Jean85\Version
+    public static function getRootPackageVersion() : \_PhpScopera46128941588\Jean85\Version
     {
-        return new \_PhpScoper1c0f546920a5\Jean85\Version(self::getRootPackageName(), InstalledVersions::getRootPackage()['pretty_version'], InstalledVersions::getRootPackage()['reference']);
+        return new \_PhpScopera46128941588\Jean85\Version(self::getRootPackageName(), InstalledVersions::getRootPackage()['pretty_version'], InstalledVersions::getRootPackage()['reference']);
     }
 }

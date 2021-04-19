@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1c0f546920a5\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScopera46128941588\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoper1c0f546920a5\Psr\Container\ContainerInterface;
-use _PhpScoper1c0f546920a5\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper1c0f546920a5\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper1c0f546920a5\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoper1c0f546920a5\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScopera46128941588\Psr\Container\ContainerInterface;
+use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScopera46128941588\Symfony\Component\HttpFoundation\Request;
+use _PhpScopera46128941588\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScopera46128941588\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Provides an intuitive error message when controller fails because it is not registered as a service.
  *

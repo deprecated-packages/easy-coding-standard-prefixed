@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Tests\Core;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
-use _PhpScoper1c0f546920a5\PHPUnit\Framework\TestCase;
+use _PhpScopera46128941588\PHPUnit\Framework\TestCase;
 abstract class AbstractMethodUnitTest extends TestCase
 {
     /**
