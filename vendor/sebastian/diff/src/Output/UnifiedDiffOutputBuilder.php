@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9907e2e69ce3\SebastianBergmann\Diff\Output;
+namespace _PhpScoper22e359cd1ab0\SebastianBergmann\Diff\Output;
 
 use function array_splice;
 use function count;
@@ -21,11 +21,11 @@ use function min;
 use function stream_get_contents;
 use function strlen;
 use function substr;
-use _PhpScoper9907e2e69ce3\SebastianBergmann\Diff\Differ;
+use _PhpScoper22e359cd1ab0\SebastianBergmann\Diff\Differ;
 /**
  * Builds a diff string representation in unified diff format in chunks.
  */
-final class UnifiedDiffOutputBuilder extends \_PhpScoper9907e2e69ce3\SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
+final class UnifiedDiffOutputBuilder extends \_PhpScoper22e359cd1ab0\SebastianBergmann\Diff\Output\AbstractChunkOutputBuilder
 {
     /**
      * @var bool

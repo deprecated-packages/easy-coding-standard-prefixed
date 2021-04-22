@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper9907e2e69ce3\Symfony\Component\Config\Definition;
+namespace _PhpScoper22e359cd1ab0\Symfony\Component\Config\Definition;
 
-use _PhpScoper9907e2e69ce3\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use _PhpScoper22e359cd1ab0\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 /**
  * Node which only allows a finite set of values.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class EnumNode extends \_PhpScoper9907e2e69ce3\Symfony\Component\Config\Definition\ScalarNode
+class EnumNode extends \_PhpScoper22e359cd1ab0\Symfony\Component\Config\Definition\ScalarNode
 {
     private $values;
-    public function __construct(?string $name, \_PhpScoper9907e2e69ce3\Symfony\Component\Config\Definition\NodeInterface $parent = null, array $values = [], string $pathSeparator = \_PhpScoper9907e2e69ce3\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
+    public function __construct(?string $name, \_PhpScoper22e359cd1ab0\Symfony\Component\Config\Definition\NodeInterface $parent = null, array $values = [], string $pathSeparator = \_PhpScoper22e359cd1ab0\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
     {
         $values = \array_unique($values);
         if (empty($values)) {
