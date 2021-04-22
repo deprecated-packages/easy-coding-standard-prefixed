@@ -20,6 +20,8 @@ use PhpCsFixer\Cache\NullCacheManager;
 use PhpCsFixer\Cache\Signature;
 use PhpCsFixer\ConfigInterface;
 use PhpCsFixer\ConfigurationException\InvalidConfigurationException;
+use PhpCsFixer\Console\Report\FixReport\ReporterFactory;
+use PhpCsFixer\Console\Report\FixReport\ReporterInterface;
 use PhpCsFixer\Differ\DifferInterface;
 use PhpCsFixer\Differ\NullDiffer;
 use PhpCsFixer\Differ\SebastianBergmannDiffer;
@@ -30,17 +32,15 @@ use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\Linter\Linter;
 use PhpCsFixer\Linter\LinterInterface;
-use PhpCsFixer\Report\ReporterFactory;
-use PhpCsFixer\Report\ReporterInterface;
 use PhpCsFixer\RuleSet\RuleSet;
 use PhpCsFixer\StdinFileInfo;
 use PhpCsFixer\ToolInfoInterface;
 use PhpCsFixer\Utils;
 use PhpCsFixer\WhitespacesFixerConfig;
 use PhpCsFixer\WordMatcher;
-use _PhpScopera46128941588\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopera46128941588\Symfony\Component\Filesystem\Filesystem;
-use _PhpScopera46128941588\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Finder\Finder as SymfonyFinder;
 /**
  * The resolver that resolves configuration to use by command line options and config.
  *
@@ -345,7 +345,7 @@ final class ConfigurationResolver
     public function getReporter()
     {
         if (null === $this->reporter) {
-            $reporterFactory = ReporterFactory::create();
+            $reporterFactory = new ReporterFactory();
             $reporterFactory->registerBuiltInReporters();
             $format = $this->getFormat();
             try {

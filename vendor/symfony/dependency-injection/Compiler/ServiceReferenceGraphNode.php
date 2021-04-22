@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera46128941588\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper9907e2e69ce3\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Alias;
-use _PhpScopera46128941588\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper9907e2e69ce3\Symfony\Component\DependencyInjection\Alias;
+use _PhpScoper9907e2e69ce3\Symfony\Component\DependencyInjection\Definition;
 /**
  * Represents a node in your service graph.
  *
@@ -34,11 +34,11 @@ class ServiceReferenceGraphNode
         $this->id = $id;
         $this->value = $value;
     }
-    public function addInEdge(\_PhpScopera46128941588\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge $edge)
+    public function addInEdge(\_PhpScoper9907e2e69ce3\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge $edge)
     {
         $this->inEdges[] = $edge;
     }
-    public function addOutEdge(\_PhpScopera46128941588\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge $edge)
+    public function addOutEdge(\_PhpScoper9907e2e69ce3\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge $edge)
     {
         $this->outEdges[] = $edge;
     }

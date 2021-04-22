@@ -62,18 +62,22 @@ final class GroupImportFixer extends AbstractFixer
         if (0 === \count($useDeclarations)) {
             return [];
         }
-        $allNamespaces = \array_map(function (NamespaceUseAnalysis $useDeclaration) {
-            return $this->getNamespaceNameWithSlash($useDeclaration);
+        $allNamespaceAndType = \array_map(function (NamespaceUseAnalysis $useDeclaration) {
+            return $this->getNamespaceNameWithSlash($useDeclaration) . $useDeclaration->getType();
         }, $useDeclarations);
-        $sameNamespaces = \array_filter(\array_count_values($allNamespaces), function ($count) {
+        $sameNamespaces = \array_filter(\array_count_values($allNamespaceAndType), function ($count) {
             return $count > 1;
         });
         $sameNamespaces = \array_keys($sameNamespaces);
         $sameNamespaceAnalysis = \array_filter($useDeclarations, function ($useDeclaration) use($sameNamespaces) {
-            $namespaceName = $this->getNamespaceNameWithSlash($useDeclaration);
-            return \in_array($namespaceName, $sameNamespaces, \true);
+            $namespaceNameAndType = $this->getNamespaceNameWithSlash($useDeclaration) . $useDeclaration->getType();
+            return \in_array($namespaceNameAndType, $sameNamespaces, \true);
         });
-        \sort($sameNamespaceAnalysis);
+        \usort($sameNamespaceAnalysis, function (NamespaceUseAnalysis $a, NamespaceUseAnalysis $b) {
+            $namespaceA = $this->getNamespaceNameWithSlash($a);
+            $namespaceB = $this->getNamespaceNameWithSlash($b);
+            return \strlen($namespaceA) - \strlen($namespaceB) ?: \strcmp($a->getFullName(), $b->getFullName());
+        });
         return $sameNamespaceAnalysis;
     }
     /**
@@ -105,19 +109,18 @@ final class GroupImportFixer extends AbstractFixer
      */
     private function addGroupUseStatements(array $statements, Tokens $tokens)
     {
-        $currentNamespace = '';
+        $currentUseDeclaration = null;
         $insertIndex = \array_slice($statements, -1)[0]->getEndIndex();
         while ($tokens[$insertIndex]->isGivenKind([\T_COMMENT, \T_DOC_COMMENT])) {
             ++$insertIndex;
         }
         foreach ($statements as $index => $useDeclaration) {
-            $namespace = $this->getNamespaceNameWithSlash($useDeclaration);
-            if ($currentNamespace !== $namespace) {
+            if ($this->areDeclarationsDifferent($currentUseDeclaration, $useDeclaration)) {
                 if ($index > 1) {
                     ++$insertIndex;
                 }
-                $currentNamespace = $namespace;
-                $insertIndex += $this->createNewGroup($tokens, $insertIndex, $useDeclaration, $currentNamespace);
+                $currentUseDeclaration = $useDeclaration;
+                $insertIndex += $this->createNewGroup($tokens, $insertIndex, $useDeclaration, $this->getNamespaceNameWithSlash($currentUseDeclaration));
             } else {
                 $newTokens = [new Token(','), new Token([\T_WHITESPACE, ' '])];
                 if ($useDeclaration->isAliased()) {
@@ -127,7 +130,7 @@ final class GroupImportFixer extends AbstractFixer
                     $insertIndex += $this->insertToGroupUseWithAlias($tokens, $insertIndex + 1, $useDeclaration);
                 }
                 $newTokens[] = new Token([\T_STRING, $useDeclaration->getShortName()]);
-                if (!isset($statements[$index + 1]) || $this->getNamespaceNameWithSlash($statements[$index + 1]) !== $currentNamespace) {
+                if (!isset($statements[$index + 1]) || $this->areDeclarationsDifferent($currentUseDeclaration, $statements[$index + 1])) {
                     $newTokens[] = new Token([CT::T_GROUP_IMPORT_BRACE_CLOSE, '}']);
                     $newTokens[] = new Token(';');
                     $newTokens[] = new Token([\T_WHITESPACE, "\n"]);
@@ -199,5 +202,22 @@ final class GroupImportFixer extends AbstractFixer
         $tokens->insertAt($insertIndex + 1, new Token([\T_STRING, $useDeclaration->getShortName()]));
         ++$insertedTokens;
         return $insertedTokens;
+    }
+    /**
+     * Check if namespace use analyses are different.
+     *
+     * @param null|NamespaceUseAnalysis $analysis1
+     * @param null|NamespaceUseAnalysis $analysis2
+     *
+     * @return bool
+     */
+    private function areDeclarationsDifferent($analysis1, $analysis2)
+    {
+        if (null === $analysis1 || null === $analysis2) {
+            return \true;
+        }
+        $namespaceName1 = $this->getNamespaceNameWithSlash($analysis1);
+        $namespaceName2 = $this->getNamespaceNameWithSlash($analysis2);
+        return $namespaceName1 !== $namespaceName2 || $analysis1->getType() !== $analysis2->getType();
     }
 }

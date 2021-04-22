@@ -111,7 +111,7 @@ final class NoUnusedImportsFixer extends AbstractFixer
                     $index = $tokens->getNextTokenOfKind($index, [';', '{', [\T_CLOSE_TAG]]);
                     continue;
                 }
-                if (0 === \strcasecmp($shortName, $token->getContent()) && !$prevMeaningfulToken->isGivenKind([\T_NS_SEPARATOR, \T_CONST, \T_OBJECT_OPERATOR, \T_DOUBLE_COLON])) {
+                if (0 === \strcasecmp($shortName, $token->getContent()) && !$prevMeaningfulToken->isGivenKind([\T_NS_SEPARATOR, \T_CONST, \T_DOUBLE_COLON]) && !$prevMeaningfulToken->isObjectOperator()) {
                     return \true;
                 }
                 continue;

@@ -9,16 +9,16 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace PhpCsFixer\Report;
+namespace PhpCsFixer\Console\Report\FixReport;
 
 use PhpCsFixer\Preg;
-use _PhpScopera46128941588\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *
  * @internal
  */
-final class JunitReporter implements \PhpCsFixer\Report\ReporterInterface
+final class JunitReporter implements \PhpCsFixer\Console\Report\FixReport\ReporterInterface
 {
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ final class JunitReporter implements \PhpCsFixer\Report\ReporterInterface
     /**
      * {@inheritdoc}
      */
-    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary)
+    public function generate(\PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary)
     {
         if (!\extension_loaded('dom')) {
             throw new \RuntimeException('Cannot generate report! `ext-dom` is not available!');
@@ -62,7 +62,7 @@ final class JunitReporter implements \PhpCsFixer\Report\ReporterInterface
         $testsuite->setAttribute('failures', '0');
         $testsuite->setAttribute('errors', '0');
     }
-    private function createFailedTestCases(\DOMDocument $dom, \DOMElement $testsuite, \PhpCsFixer\Report\ReportSummary $reportSummary)
+    private function createFailedTestCases(\DOMDocument $dom, \DOMElement $testsuite, \PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary)
     {
         $assertionsCount = 0;
         foreach ($reportSummary->getChanged() as $file => $fixResult) {

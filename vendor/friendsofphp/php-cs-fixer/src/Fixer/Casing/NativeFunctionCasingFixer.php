@@ -65,7 +65,7 @@ final class NativeFunctionCasingFixer extends AbstractFixer
                 continue;
             }
             $functionNamePrefix = $tokens->getPrevMeaningfulToken($index);
-            if ($tokens[$functionNamePrefix]->isGivenKind([\T_DOUBLE_COLON, \T_NEW, \T_OBJECT_OPERATOR, \T_FUNCTION, CT::T_RETURN_REF])) {
+            if ($tokens[$functionNamePrefix]->isGivenKind([\T_DOUBLE_COLON, \T_NEW, \T_FUNCTION, CT::T_RETURN_REF]) || $tokens[$functionNamePrefix]->isObjectOperator()) {
                 continue;
             }
             if ($tokens[$functionNamePrefix]->isGivenKind(\T_NS_SEPARATOR)) {

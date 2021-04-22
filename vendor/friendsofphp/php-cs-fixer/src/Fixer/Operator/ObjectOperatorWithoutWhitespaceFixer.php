@@ -14,6 +14,7 @@ namespace PhpCsFixer\Fixer\Operator;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
@@ -26,23 +27,23 @@ final class ObjectOperatorWithoutWhitespaceFixer extends AbstractFixer
      */
     public function getDefinition()
     {
-        return new FixerDefinition('There should not be space before or after object `T_OBJECT_OPERATOR` `->`.', [new CodeSample("<?php \$a  ->  b;\n")]);
+        return new FixerDefinition('There should not be space before or after object operators `->` and `?->`.', [new CodeSample("<?php \$a  ->  b;\n")]);
     }
     /**
      * {@inheritdoc}
      */
     public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isTokenKindFound(\T_OBJECT_OPERATOR);
+        return $tokens->isAnyTokenKindsFound(Token::getObjectOperatorKinds());
     }
     /**
      * {@inheritdoc}
      */
     protected function applyFix(\SplFileInfo $file, Tokens $tokens)
     {
-        // [Structure] there should not be space before or after T_OBJECT_OPERATOR
+        // [Structure] there should not be space before or after "->" or "?->"
         foreach ($tokens as $index => $token) {
-            if (!$token->isGivenKind(\T_OBJECT_OPERATOR)) {
+            if (!$token->isObjectOperator()) {
                 continue;
             }
             // clear whitespace before ->

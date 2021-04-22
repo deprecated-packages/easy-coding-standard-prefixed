@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera46128941588\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper9907e2e69ce3\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScopera46128941588\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
 /**
  * Abstract class that contains common code of integer and float node definitions.
  *
  * @author David Jeanmonod <david.jeanmonod@gmail.com>
  */
-abstract class NumericNodeDefinition extends \_PhpScopera46128941588\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+abstract class NumericNodeDefinition extends \_PhpScoper9907e2e69ce3\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
 {
     protected $min;
     protected $max;

@@ -17,20 +17,20 @@ use PhpCsFixer\Console\ConfigurationResolver;
 use PhpCsFixer\Console\Output\ErrorOutput;
 use PhpCsFixer\Console\Output\NullOutput;
 use PhpCsFixer\Console\Output\ProcessOutput;
+use PhpCsFixer\Console\Report\FixReport\ReportSummary;
 use PhpCsFixer\Error\ErrorsManager;
-use PhpCsFixer\Report\ReportSummary;
 use PhpCsFixer\Runner\Runner;
 use PhpCsFixer\ToolInfoInterface;
-use _PhpScopera46128941588\Symfony\Component\Console\Command\Command;
-use _PhpScopera46128941588\Symfony\Component\Console\Input\InputArgument;
-use _PhpScopera46128941588\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopera46128941588\Symfony\Component\Console\Input\InputOption;
-use _PhpScopera46128941588\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScopera46128941588\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopera46128941588\Symfony\Component\Console\Terminal;
-use _PhpScopera46128941588\Symfony\Component\EventDispatcher\EventDispatcher;
-use _PhpScopera46128941588\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScopera46128941588\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Command\Command;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Terminal;
+use _PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\EventDispatcher;
+use _PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -83,7 +83,7 @@ final class FixCommand extends Command
      */
     protected function configure()
     {
-        $this->setDefinition([new InputArgument('path', InputArgument::IS_ARRAY, 'The path.'), new InputOption('path-mode', '', InputOption::VALUE_REQUIRED, 'Specify path mode (can be override or intersection).', 'override'), new InputOption('allow-risky', '', InputOption::VALUE_REQUIRED, 'Are risky fixers allowed (can be yes or no).'), new InputOption('config', '', InputOption::VALUE_REQUIRED, 'The path to a .php_cs file.'), new InputOption('dry-run', '', InputOption::VALUE_NONE, 'Only shows which files would have been modified.'), new InputOption('rules', '', InputOption::VALUE_REQUIRED, 'The rules.'), new InputOption('using-cache', '', InputOption::VALUE_REQUIRED, 'Does cache should be used (can be yes or no).'), new InputOption('cache-file', '', InputOption::VALUE_REQUIRED, 'The path to the cache file.'), new InputOption('diff', '', InputOption::VALUE_NONE, 'Also produce diff for each file.'), new InputOption('diff-format', '', InputOption::VALUE_REQUIRED, 'Specify diff format.'), new InputOption('format', '', InputOption::VALUE_REQUIRED, 'To output results in other formats.'), new InputOption('stop-on-violation', '', InputOption::VALUE_NONE, 'Stop execution on first violation.'), new InputOption('show-progress', '', InputOption::VALUE_REQUIRED, 'Type of progress indicator (none, run-in, estimating, estimating-max or dots).')])->setDescription('Fixes a directory or a file.');
+        $this->setDefinition([new InputArgument('path', InputArgument::IS_ARRAY, 'The path.'), new InputOption('path-mode', '', InputOption::VALUE_REQUIRED, 'Specify path mode (can be override or intersection).', ConfigurationResolver::PATH_MODE_OVERRIDE), new InputOption('allow-risky', '', InputOption::VALUE_REQUIRED, 'Are risky fixers allowed (can be yes or no).'), new InputOption('config', '', InputOption::VALUE_REQUIRED, 'The path to a .php_cs file.'), new InputOption('dry-run', '', InputOption::VALUE_NONE, 'Only shows which files would have been modified.'), new InputOption('rules', '', InputOption::VALUE_REQUIRED, 'The rules.'), new InputOption('using-cache', '', InputOption::VALUE_REQUIRED, 'Does cache should be used (can be yes or no).'), new InputOption('cache-file', '', InputOption::VALUE_REQUIRED, 'The path to the cache file.'), new InputOption('diff', '', InputOption::VALUE_NONE, 'Also produce diff for each file.'), new InputOption('diff-format', '', InputOption::VALUE_REQUIRED, 'Specify diff format.'), new InputOption('format', '', InputOption::VALUE_REQUIRED, 'To output results in other formats.'), new InputOption('stop-on-violation', '', InputOption::VALUE_NONE, 'Stop execution on first violation.'), new InputOption('show-progress', '', InputOption::VALUE_REQUIRED, 'Type of progress indicator (none, run-in, estimating, estimating-max or dots).')])->setDescription('Fixes a directory or a file.');
     }
     /**
      * {@inheritdoc}

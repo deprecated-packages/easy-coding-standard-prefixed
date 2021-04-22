@@ -26,11 +26,11 @@ use PhpCsFixer\Runner\Runner;
 use PhpCsFixer\Tests\TestCase;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScopera46128941588\Prophecy\Argument;
-use _PhpScopera46128941588\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScopera46128941588\Symfony\Component\Filesystem\Filesystem;
-use _PhpScopera46128941588\Symfony\Component\Finder\Finder;
-use _PhpScopera46128941588\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper9907e2e69ce3\Prophecy\Argument;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Finder\Finder;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Finder\SplFileInfo;
 /**
  * Integration test base class.
  *
@@ -239,7 +239,7 @@ abstract class AbstractIntegrationTestCase extends TestCase
     private static function createFixers(\PhpCsFixer\Tests\Test\IntegrationCase $case)
     {
         $config = $case->getConfig();
-        return FixerFactory::create()->registerBuiltInFixers()->useRuleSet($case->getRuleset())->setWhitespacesConfig(new WhitespacesFixerConfig($config['indent'], $config['lineEnding']))->getFixers();
+        return (new FixerFactory())->registerBuiltInFixers()->useRuleSet($case->getRuleset())->setWhitespacesConfig(new WhitespacesFixerConfig($config['indent'], $config['lineEnding']))->getFixers();
     }
     /**
      * @param Error[] $errors

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera46128941588\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper9907e2e69ce3\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use _PhpScopera46128941588\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Ahmed TAILOULOUTE <ahmed.tailouloute@gmail.com>
  */

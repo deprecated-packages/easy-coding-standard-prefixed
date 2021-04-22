@@ -20,8 +20,8 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScopera46128941588\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScopera46128941588\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper9907e2e69ce3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper9907e2e69ce3\Symfony\Component\OptionsResolver\Options;
 final class GeneralPhpdocTagRenameFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
 {
     /**
@@ -95,9 +95,9 @@ final class GeneralPhpdocTagRenameFixer extends AbstractFixer implements Configu
         }
         if ($this->configuration['fix_annotation']) {
             if ($this->configuration['fix_inline']) {
-                $regex = '/\\b(?<=@)(%s)\\b/';
+                $regex = '/"[^"]*"(*SKIP)(*FAIL)|\\b(?<=@)(%s)\\b/';
             } else {
-                $regex = '/(?<!\\{@)(?<=@)(%s)(?!\\})/';
+                $regex = '/"[^"]*"(*SKIP)(*FAIL)|(?<!\\{@)(?<=@)(%s)(?!\\})/';
             }
         } else {
             $regex = '/(?<={@)(%s)(?=[ \\t}])/';

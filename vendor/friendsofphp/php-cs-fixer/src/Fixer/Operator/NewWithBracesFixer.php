@@ -74,7 +74,7 @@ final class NewWithBracesFixer extends AbstractFixer
                 $nextToken = $tokens[$nextIndex];
             }
             // new statement with () - nothing to do
-            if ($nextToken->equals('(') || $nextToken->isGivenKind(\T_OBJECT_OPERATOR)) {
+            if ($nextToken->equals('(') || $nextToken->isObjectOperator()) {
                 continue;
             }
             $this->insertBracesAfter($tokens, $tokens->getPrevMeaningfulToken($nextIndex));

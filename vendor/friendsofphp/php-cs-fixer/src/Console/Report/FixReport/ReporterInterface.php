@@ -9,10 +9,12 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace PhpCsFixer\Report;
+namespace PhpCsFixer\Console\Report\FixReport;
 
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
+ *
+ * @internal
  */
 interface ReporterInterface
 {
@@ -25,5 +27,5 @@ interface ReporterInterface
      *
      * @return string
      */
-    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary);
+    public function generate(\PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary);
 }

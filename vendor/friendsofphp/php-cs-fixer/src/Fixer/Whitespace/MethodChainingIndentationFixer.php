@@ -46,7 +46,7 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
      */
     public function isCandidate(Tokens $tokens)
     {
-        return $tokens->isTokenKindFound(\T_OBJECT_OPERATOR);
+        return $tokens->isAnyTokenKindsFound(Token::getObjectOperatorKinds());
     }
     /**
      * {@inheritdoc}
@@ -55,7 +55,7 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         for ($index = 1, $count = \count($tokens); $index < $count; ++$index) {
-            if (!$tokens[$index]->isGivenKind(\T_OBJECT_OPERATOR)) {
+            if (!$tokens[$index]->isObjectOperator()) {
                 continue;
             }
             if ($this->canBeMovedToNextLine($index, $tokens)) {
@@ -102,7 +102,7 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
         return $indent;
     }
     /**
-     * @param int $index position of the T_OBJECT_OPERATOR token
+     * @param int $index position of the object operator token ("->" or "?->")
      *
      * @return bool
      */
@@ -155,7 +155,7 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
      */
     private function currentLineRequiresExtraIndentLevel(Tokens $tokens, $start, $end)
     {
-        if ($tokens[$start + 1]->isGivenKind(\T_OBJECT_OPERATOR)) {
+        if ($tokens[$start + 1]->isObjectOperator()) {
             return \false;
         }
         if ($tokens[$end]->isGivenKind(CT::T_BRACE_CLASS_INSTANTIATION_CLOSE)) {

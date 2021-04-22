@@ -121,7 +121,7 @@ class Sample
                 }
                 $prevToken = $tokens[$tokens->getPrevMeaningfulToken($classStartIndex)];
             }
-            if ($prevToken->isGivenKind([\T_OBJECT_OPERATOR, \T_STRING])) {
+            if ($prevToken->isGivenKind(\T_STRING) || $prevToken->isObjectOperator()) {
                 continue;
             }
             if ($prevToken->isGivenKind([\T_INSTANCEOF, \T_NEW]) || $nextToken->isGivenKind(\T_PAAMAYIM_NEKUDOTAYIM) || null !== $insideMethodSignatureUntil && $i < $insideMethodSignatureUntil && $prevToken->equalsAny(['(', ',', [CT::T_TYPE_COLON], [CT::T_NULLABLE_TYPE]])) {

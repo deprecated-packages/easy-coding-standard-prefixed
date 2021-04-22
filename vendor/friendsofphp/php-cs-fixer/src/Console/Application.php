@@ -19,11 +19,11 @@ use PhpCsFixer\Console\SelfUpdate\GithubClient;
 use PhpCsFixer\Console\SelfUpdate\NewVersionChecker;
 use PhpCsFixer\PharChecker;
 use PhpCsFixer\ToolInfo;
-use _PhpScopera46128941588\Symfony\Component\Console\Application as BaseApplication;
-use _PhpScopera46128941588\Symfony\Component\Console\Command\ListCommand;
-use _PhpScopera46128941588\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopera46128941588\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScopera46128941588\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Application as BaseApplication;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Command\ListCommand;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -32,7 +32,7 @@ use _PhpScopera46128941588\Symfony\Component\Console\Output\OutputInterface;
  */
 final class Application extends BaseApplication
 {
-    const VERSION = '2.18.5';
+    const VERSION = '2.18.6';
     const VERSION_CODENAME = 'Remote Void';
     /**
      * @var ToolInfo
@@ -77,7 +77,12 @@ final class Application extends BaseApplication
      */
     public function getLongVersion()
     {
-        $version = \sprintf('%s <info>%s</info> by <comment>Fabien Potencier</comment> and <comment>Dariusz Ruminski</comment>', parent::getLongVersion(), self::VERSION_CODENAME);
+        $version = \implode('', [
+            parent::getLongVersion(),
+            self::VERSION_CODENAME ? \sprintf(' <info>%s</info>', self::VERSION_CODENAME) : '',
+            // @phpstan-ignore-line to avoid `Ternary operator condition is always true|false.`
+            ' by <comment>Fabien Potencier</comment> and <comment>Dariusz Ruminski</comment>',
+        ]);
         $commit = '@git-commit@';
         if ('@' . 'git-commit@' !== $commit) {
             $version .= ' (' . \substr($commit, 0, 7) . ')';

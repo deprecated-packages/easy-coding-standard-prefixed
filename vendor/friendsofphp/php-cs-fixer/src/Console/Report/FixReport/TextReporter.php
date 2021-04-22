@@ -9,7 +9,7 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace PhpCsFixer\Report;
+namespace PhpCsFixer\Console\Report\FixReport;
 
 use PhpCsFixer\Differ\DiffConsoleFormatter;
 /**
@@ -17,7 +17,7 @@ use PhpCsFixer\Differ\DiffConsoleFormatter;
  *
  * @internal
  */
-final class TextReporter implements \PhpCsFixer\Report\ReporterInterface
+final class TextReporter implements \PhpCsFixer\Console\Report\FixReport\ReporterInterface
 {
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ final class TextReporter implements \PhpCsFixer\Report\ReporterInterface
     /**
      * {@inheritdoc}
      */
-    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary)
+    public function generate(\PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary)
     {
         $output = '';
         $i = 0;

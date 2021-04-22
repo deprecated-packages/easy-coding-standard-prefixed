@@ -23,8 +23,8 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScopera46128941588\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScopera46128941588\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper9907e2e69ce3\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper9907e2e69ce3\Symfony\Component\OptionsResolver\Options;
 /**
  * Make sure there is one blank line above and below class elements.
  *
@@ -196,7 +196,8 @@ class Sample
         if ($tokens[$nextNotWhite]->isWhitespace()) {
             $nextNotWhite = $tokens->getNextNonWhitespace($nextNotWhite);
         }
-        if ($tokens[$nextNotWhite]->isGivenKind(\T_FUNCTION)) {
+        $functionIndex = $tokens->getTokenNotOfKindsSibling($nextNotWhite - 1, 1, [\T_ABSTRACT, \T_FINAL, \T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_STATIC, \T_WHITESPACE, \T_COMMENT, \T_DOC_COMMENT]);
+        if ($tokens[$functionIndex]->isGivenKind(\T_FUNCTION)) {
             $this->correctLineBreaks($tokens, $elementEndIndex, $nextNotWhite, 2);
             return;
         }

@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera46128941588\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScopera46128941588\Psr\Log\LoggerInterface;
-use _PhpScopera46128941588\Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
-use _PhpScopera46128941588\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use _PhpScopera46128941588\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopera46128941588\Symfony\Component\HttpFoundation\Request;
-use _PhpScopera46128941588\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use _PhpScopera46128941588\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScopera46128941588\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScopera46128941588\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use _PhpScopera46128941588\Symfony\Component\HttpKernel\HttpKernelInterface;
-use _PhpScopera46128941588\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScopera46128941588\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+use _PhpScoper9907e2e69ce3\Psr\Log\LoggerInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
+use _PhpScoper9907e2e69ce3\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use _PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */

@@ -9,9 +9,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace PhpCsFixer\Report;
+namespace PhpCsFixer\Console\Report\FixReport;
 
-use _PhpScopera46128941588\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * Generates a report according to gitlabs subset of codeclimate json files.
  *
@@ -21,7 +21,7 @@ use _PhpScopera46128941588\Symfony\Component\Console\Formatter\OutputFormatter;
  *
  * @internal
  */
-final class GitlabReporter implements \PhpCsFixer\Report\ReporterInterface
+final class GitlabReporter implements \PhpCsFixer\Console\Report\FixReport\ReporterInterface
 {
     public function getFormat()
     {
@@ -32,7 +32,7 @@ final class GitlabReporter implements \PhpCsFixer\Report\ReporterInterface
      *
      * @return string
      */
-    public function generate(\PhpCsFixer\Report\ReportSummary $reportSummary)
+    public function generate(\PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary)
     {
         $report = [];
         foreach ($reportSummary->getChanged() as $fileName => $change) {

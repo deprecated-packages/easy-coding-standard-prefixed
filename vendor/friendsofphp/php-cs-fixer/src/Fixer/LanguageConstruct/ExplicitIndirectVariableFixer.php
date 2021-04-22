@@ -31,7 +31,7 @@ final class ExplicitIndirectVariableFixer extends AbstractFixer
         return new FixerDefinition('Add curly braces to indirect variables to make them clear to understand. Requires PHP >= 7.0.', [new VersionSpecificCodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScopera46128941588;
+namespace _PhpScoper9907e2e69ce3;
 
 echo ${$foo};
 echo ${$foo}['bar'];
@@ -60,12 +60,12 @@ EOT
             }
             $prevIndex = $tokens->getPrevMeaningfulToken($index);
             $prevToken = $tokens[$prevIndex];
-            if (!$prevToken->equals('$') && !$prevToken->isGivenKind(\T_OBJECT_OPERATOR)) {
+            if (!$prevToken->equals('$') && !$prevToken->isObjectOperator()) {
                 continue;
             }
             $openingBrace = CT::T_DYNAMIC_VAR_BRACE_OPEN;
             $closingBrace = CT::T_DYNAMIC_VAR_BRACE_CLOSE;
-            if ($prevToken->isGivenKind(\T_OBJECT_OPERATOR)) {
+            if ($prevToken->isObjectOperator()) {
                 $openingBrace = CT::T_DYNAMIC_PROP_BRACE_OPEN;
                 $closingBrace = CT::T_DYNAMIC_PROP_BRACE_CLOSE;
             }

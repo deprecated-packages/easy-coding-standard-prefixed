@@ -9,7 +9,7 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace PhpCsFixer\Report;
+namespace PhpCsFixer\Console\Report\FixReport;
 
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>

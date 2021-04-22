@@ -9,10 +9,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace PhpCsFixer\Report;
+namespace PhpCsFixer\Console\Report\FixReport;
 
-use _PhpScopera46128941588\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScopera46128941588\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *
@@ -22,10 +22,6 @@ final class ReporterFactory
 {
     /** @var ReporterInterface[] */
     private $reporters = [];
-    public static function create()
-    {
-        return new self();
-    }
     public function registerBuiltInReporters()
     {
         /** @var null|string[] $builtInReporters */
@@ -46,7 +42,7 @@ final class ReporterFactory
     /**
      * @return $this
      */
-    public function registerReporter(\PhpCsFixer\Report\ReporterInterface $reporter)
+    public function registerReporter(\PhpCsFixer\Console\Report\FixReport\ReporterInterface $reporter)
     {
         $format = $reporter->getFormat();
         if (isset($this->reporters[$format])) {

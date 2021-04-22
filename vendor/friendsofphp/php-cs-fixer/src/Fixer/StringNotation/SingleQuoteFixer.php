@@ -33,7 +33,7 @@ final class SingleQuoteFixer extends AbstractFixer implements ConfigurationDefin
         $codeSample = <<<'EOF'
 <?php
 
-namespace _PhpScopera46128941588;
+namespace _PhpScoper9907e2e69ce3;
 
 $a = "sample";
 $b = "sample with 'single-quotes'";

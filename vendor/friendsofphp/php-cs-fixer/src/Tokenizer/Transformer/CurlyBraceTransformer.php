@@ -97,7 +97,7 @@ final class CurlyBraceTransformer extends AbstractTransformer
     }
     private function transformIntoDynamicPropBraces(Tokens $tokens, Token $token, $index)
     {
-        if (!$token->isGivenKind(\T_OBJECT_OPERATOR)) {
+        if (!$token->isObjectOperator()) {
             return;
         }
         if (!$tokens[$index + 1]->equals('{')) {
@@ -134,7 +134,7 @@ final class CurlyBraceTransformer extends AbstractTransformer
         if (!$tokens[$prevIndex]->equalsAny([[\T_STRING], [\T_VARIABLE], [CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE], ']', ')'])) {
             return;
         }
-        if ($tokens[$prevIndex]->isGivenKind(\T_STRING) && !$tokens[$tokens->getPrevMeaningfulToken($prevIndex)]->isGivenKind(\T_OBJECT_OPERATOR)) {
+        if ($tokens[$prevIndex]->isGivenKind(\T_STRING) && !$tokens[$tokens->getPrevMeaningfulToken($prevIndex)]->isObjectOperator()) {
             return;
         }
         if ($tokens[$prevIndex]->equals(')') && !$tokens[$tokens->getPrevMeaningfulToken($tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $prevIndex))]->isGivenKind(\T_ARRAY)) {

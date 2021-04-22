@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera46128941588\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\Event;
 
-use _PhpScopera46128941588\Symfony\Component\HttpFoundation\Request;
-use _PhpScopera46128941588\Symfony\Component\HttpFoundation\Response;
-use _PhpScopera46128941588\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows to execute logic after a response was sent.
  *
@@ -21,7 +21,7 @@ use _PhpScopera46128941588\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */
-final class TerminateEvent extends \_PhpScopera46128941588\Symfony\Component\HttpKernel\Event\KernelEvent
+final class TerminateEvent extends \_PhpScoper9907e2e69ce3\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
     public function __construct(HttpKernelInterface $kernel, Request $request, Response $response)

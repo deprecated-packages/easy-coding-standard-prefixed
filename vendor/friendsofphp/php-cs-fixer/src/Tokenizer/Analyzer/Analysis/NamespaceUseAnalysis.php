@@ -108,6 +108,13 @@ final class NamespaceUseAnalysis implements \PhpCsFixer\Tokenizer\Analyzer\Analy
         return $this->endIndex;
     }
     /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+    /**
      * @return bool
      */
     public function isClass()

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera46128941588\Symfony\Component\Console\Helper;
+namespace _PhpScoper9907e2e69ce3\Symfony\Component\Console\Helper;
 
-use _PhpScopera46128941588\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * The Formatter class provides helpers to format messages.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FormatterHelper extends \_PhpScopera46128941588\Symfony\Component\Console\Helper\Helper
+class FormatterHelper extends \_PhpScoper9907e2e69ce3\Symfony\Component\Console\Helper\Helper
 {
     /**
      * Formats a message within a section.

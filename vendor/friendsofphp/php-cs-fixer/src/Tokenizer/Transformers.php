@@ -12,8 +12,8 @@
 namespace PhpCsFixer\Tokenizer;
 
 use PhpCsFixer\Utils;
-use _PhpScopera46128941588\Symfony\Component\Finder\Finder;
-use _PhpScopera46128941588\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Finder\Finder;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Finder\SplFileInfo;
 /**
  * Collection of Transformer classes.
  *
@@ -43,7 +43,7 @@ final class Transformers
     /**
      * @return Transformers
      */
-    public static function create()
+    public static function createSingleton()
     {
         static $instance = null;
         if (!$instance) {

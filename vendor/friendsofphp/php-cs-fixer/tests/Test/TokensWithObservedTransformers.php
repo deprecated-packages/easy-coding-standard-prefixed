@@ -35,7 +35,7 @@ class TokensWithObservedTransformers extends Tokens
     protected function applyTransformers()
     {
         $this->observedModificationsPerTransformer = [];
-        $transformers = Transformers::create();
+        $transformers = Transformers::createSingleton();
         foreach (AccessibleObject::create($transformers)->items as $transformer) {
             $this->currentTransformer = $transformer->getName();
             $this->observedModificationsPerTransformer[$this->currentTransformer] = [];

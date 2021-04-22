@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera46128941588\Symfony\Component\EventDispatcher\Debug;
+namespace _PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\Debug;
 
-use _PhpScopera46128941588\Psr\EventDispatcher\StoppableEventInterface;
-use _PhpScopera46128941588\Psr\Log\LoggerInterface;
-use _PhpScopera46128941588\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScopera46128941588\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopera46128941588\Symfony\Component\HttpFoundation\Request;
-use _PhpScopera46128941588\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopera46128941588\Symfony\Component\Stopwatch\Stopwatch;
-use _PhpScopera46128941588\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper9907e2e69ce3\Psr\EventDispatcher\StoppableEventInterface;
+use _PhpScoper9907e2e69ce3\Psr\Log\LoggerInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper9907e2e69ce3\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper9907e2e69ce3\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoper9907e2e69ce3\Symfony\Contracts\Service\ResetInterface;
 /**
  * Collects some data about event listeners.
  *
@@ -191,8 +191,8 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
         foreach ($allListeners as $eventName => $listeners) {
             foreach ($listeners as $listener) {
                 if (!\in_array($listener, $calledListeners, \true)) {
-                    if (!$listener instanceof \_PhpScopera46128941588\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
-                        $listener = new \_PhpScopera46128941588\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener, null, $this->stopwatch, $this);
+                    if (!$listener instanceof \_PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
+                        $listener = new \_PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener, null, $this->stopwatch, $this);
                     }
                     $notCalled[] = $listener->getInfo($eventName);
                 }
@@ -249,7 +249,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
         }
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
             $priority = $this->getListenerPriority($eventName, $listener);
-            $wrappedListener = new \_PhpScopera46128941588\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener instanceof \_PhpScopera46128941588\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener->getWrappedListener() : $listener, null, $this->stopwatch, $this);
+            $wrappedListener = new \_PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\Debug\WrappedListener($listener instanceof \_PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\Debug\WrappedListener ? $listener->getWrappedListener() : $listener, null, $this->stopwatch, $this);
             $this->wrappedListeners[$eventName][] = $wrappedListener;
             $this->dispatcher->removeListener($eventName, $listener);
             $this->dispatcher->addListener($eventName, $wrappedListener, $priority);
@@ -261,7 +261,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
         unset($this->wrappedListeners[$eventName]);
         $skipped = \false;
         foreach ($this->dispatcher->getListeners($eventName) as $listener) {
-            if (!$listener instanceof \_PhpScopera46128941588\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
+            if (!$listener instanceof \_PhpScoper9907e2e69ce3\Symfony\Component\EventDispatcher\Debug\WrappedListener) {
                 // #12845: a new listener was added during dispatch.
                 continue;
             }

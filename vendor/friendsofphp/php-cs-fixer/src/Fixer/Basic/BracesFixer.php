@@ -549,6 +549,10 @@ class Foo
     private function getControlTokens()
     {
         static $tokens = [\T_DECLARE, \T_DO, \T_ELSE, \T_ELSEIF, \T_FINALLY, \T_FOR, \T_FOREACH, \T_IF, \T_WHILE, \T_TRY, \T_CATCH, \T_SWITCH];
+        // @TODO: drop condition when PHP 8.0+ is required
+        if (\defined('T_MATCH')) {
+            $tokens['match'] = \T_MATCH;
+        }
         return $tokens;
     }
     private function getControlContinuationTokens()

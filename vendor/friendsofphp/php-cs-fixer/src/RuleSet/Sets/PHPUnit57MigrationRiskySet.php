@@ -11,6 +11,7 @@
  */
 namespace PhpCsFixer\RuleSet\Sets;
 
+use PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion;
 use PhpCsFixer\RuleSet\AbstractRuleSetDescription;
 /**
  * @internal
@@ -19,7 +20,7 @@ final class PHPUnit57MigrationRiskySet extends AbstractRuleSetDescription
 {
     public function getRules()
     {
-        return ['@PHPUnit56Migration:risky' => \true, 'php_unit_namespaced' => ['target' => '5.7']];
+        return ['@PHPUnit56Migration:risky' => \true, 'php_unit_namespaced' => ['target' => PhpUnitTargetVersion::VERSION_5_7]];
     }
     public function getDescription()
     {

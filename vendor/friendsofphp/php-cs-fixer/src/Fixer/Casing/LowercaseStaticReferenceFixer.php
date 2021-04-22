@@ -72,7 +72,7 @@ class Foo extends Bar
                 // case is already correct
             }
             $prevIndex = $tokens->getPrevMeaningfulToken($index);
-            if ($tokens[$prevIndex]->isGivenKind([\T_CONST, \T_DOUBLE_COLON, \T_FUNCTION, \T_NAMESPACE, \T_NS_SEPARATOR, \T_OBJECT_OPERATOR, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC])) {
+            if ($tokens[$prevIndex]->isGivenKind([\T_CONST, \T_DOUBLE_COLON, \T_FUNCTION, \T_NAMESPACE, \T_NS_SEPARATOR, \T_PRIVATE, \T_PROTECTED, \T_PUBLIC]) || $tokens[$prevIndex]->isObjectOperator()) {
                 continue;
             }
             $nextIndex = $tokens->getNextMeaningfulToken($index);

@@ -161,6 +161,10 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
             // PlantUML
             'enduml',
             'startuml',
+            // Psalm
+            'psalm',
+            // PHPStan
+            'phpstan',
             // other
             'fix',
             'FIXME',
