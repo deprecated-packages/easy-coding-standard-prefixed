@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class RegisterReverseContainerPass implements \_PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RegisterReverseContainerPass implements \_PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $beforeRemoving;
     private $serviceId;

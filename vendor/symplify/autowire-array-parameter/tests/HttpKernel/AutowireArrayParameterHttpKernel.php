@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\Tests\HttpKernel;
 
-use _PhpScoper22e359cd1ab0\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper22e359cd1ab0\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use _PhpScoper22e359cd1ab0\Symfony\Component\HttpKernel\Kernel;
+use _PhpScopera9d6a31d814c\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera9d6a31d814c\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScopera9d6a31d814c\Symfony\Component\HttpKernel\Kernel;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 final class AutowireArrayParameterHttpKernel extends Kernel
 {

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper22e359cd1ab0\Symfony\Component\Console\Output;
+namespace _PhpScopera9d6a31d814c\Symfony\Component\Console\Output;
 
-use _PhpScoper22e359cd1ab0\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScopera9d6a31d814c\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * OutputInterface is the interface implemented by all Output classes.
  *

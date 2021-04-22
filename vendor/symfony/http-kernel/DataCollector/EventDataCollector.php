@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper22e359cd1ab0\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScopera9d6a31d814c\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoper22e359cd1ab0\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
-use _PhpScoper22e359cd1ab0\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper22e359cd1ab0\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper22e359cd1ab0\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper22e359cd1ab0\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use _PhpScoper22e359cd1ab0\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopera9d6a31d814c\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
+use _PhpScopera9d6a31d814c\Symfony\Component\HttpFoundation\Request;
+use _PhpScopera9d6a31d814c\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScopera9d6a31d814c\Symfony\Component\HttpFoundation\Response;
+use _PhpScopera9d6a31d814c\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use _PhpScopera9d6a31d814c\Symfony\Contracts\Service\ResetInterface;
 /**
  * EventDataCollector.
  *
@@ -23,7 +23,7 @@ use _PhpScoper22e359cd1ab0\Symfony\Contracts\Service\ResetInterface;
  *
  * @final
  */
-class EventDataCollector extends \_PhpScoper22e359cd1ab0\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper22e359cd1ab0\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class EventDataCollector extends \_PhpScopera9d6a31d814c\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScopera9d6a31d814c\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     protected $dispatcher;
     private $requestStack;

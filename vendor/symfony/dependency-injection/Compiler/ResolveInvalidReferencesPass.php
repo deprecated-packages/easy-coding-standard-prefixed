@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Emulates the invalid behavior if the reference is not found within the
  * container.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ResolveInvalidReferencesPass implements \_PhpScoper22e359cd1ab0\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolveInvalidReferencesPass implements \_PhpScopera9d6a31d814c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $container;
     private $signalingException;
