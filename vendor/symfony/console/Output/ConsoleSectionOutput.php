@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera9d6a31d814c\Symfony\Component\Console\Output;
+namespace _PhpScoper446d16070175\Symfony\Component\Console\Output;
 
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Helper\Helper;
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Terminal;
+use _PhpScoper446d16070175\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoper446d16070175\Symfony\Component\Console\Helper\Helper;
+use _PhpScoper446d16070175\Symfony\Component\Console\Terminal;
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  * @author Gabriel Ostrolucký <gabriel.ostrolucky@gmail.com>
  */
-class ConsoleSectionOutput extends \_PhpScopera9d6a31d814c\Symfony\Component\Console\Output\StreamOutput
+class ConsoleSectionOutput extends \_PhpScoper446d16070175\Symfony\Component\Console\Output\StreamOutput
 {
     private $content = [];
     private $lines = 0;

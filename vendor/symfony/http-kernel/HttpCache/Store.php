@@ -11,16 +11,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera9d6a31d814c\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScoper446d16070175\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScopera9d6a31d814c\Symfony\Component\HttpFoundation\Request;
-use _PhpScopera9d6a31d814c\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper446d16070175\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper446d16070175\Symfony\Component\HttpFoundation\Response;
 /**
  * Store implements all the logic for storing cache metadata (Request and Response headers).
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Store implements \_PhpScopera9d6a31d814c\Symfony\Component\HttpKernel\HttpCache\StoreInterface
+class Store implements \_PhpScoper446d16070175\Symfony\Component\HttpKernel\HttpCache\StoreInterface
 {
     protected $root;
     private $keyCache;

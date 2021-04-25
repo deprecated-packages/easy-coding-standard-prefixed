@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper446d16070175\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper446d16070175\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\ShellCode;
 final class InitCommand extends AbstractSymplifyCommand

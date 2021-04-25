@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer;
 
-use _PhpScopera9d6a31d814c\Symfony\Component\Finder\Finder as BaseFinder;
+use _PhpScoper446d16070175\Symfony\Component\Finder\Finder as BaseFinder;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>

@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Console\Report\FixReport;
 
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper446d16070175\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * Generates a report according to gitlabs subset of codeclimate json files.
  *

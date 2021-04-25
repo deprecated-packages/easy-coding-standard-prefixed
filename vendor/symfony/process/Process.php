@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera9d6a31d814c\Symfony\Component\Process;
+namespace _PhpScoper446d16070175\Symfony\Component\Process;
 
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Exception\InvalidArgumentException;
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Exception\LogicException;
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Exception\ProcessFailedException;
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Exception\ProcessSignaledException;
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Exception\ProcessTimedOutException;
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Pipes\PipesInterface;
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Pipes\UnixPipes;
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Pipes\WindowsPipes;
+use _PhpScoper446d16070175\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScoper446d16070175\Symfony\Component\Process\Exception\LogicException;
+use _PhpScoper446d16070175\Symfony\Component\Process\Exception\ProcessFailedException;
+use _PhpScoper446d16070175\Symfony\Component\Process\Exception\ProcessSignaledException;
+use _PhpScoper446d16070175\Symfony\Component\Process\Exception\ProcessTimedOutException;
+use _PhpScoper446d16070175\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScoper446d16070175\Symfony\Component\Process\Pipes\PipesInterface;
+use _PhpScoper446d16070175\Symfony\Component\Process\Pipes\UnixPipes;
+use _PhpScoper446d16070175\Symfony\Component\Process\Pipes\WindowsPipes;
 /**
  * Process is a thin wrapper around proc_* functions to easily
  * start independent PHP processes.
@@ -1037,7 +1037,7 @@ class Process implements \IteratorAggregate
         if ($this->isRunning()) {
             throw new LogicException('Input can not be set while the process is running.');
         }
-        $this->input = \_PhpScopera9d6a31d814c\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
+        $this->input = \_PhpScoper446d16070175\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
         return $this;
     }
     /**

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera9d6a31d814c\Symfony\Component\VarExporter;
+namespace _PhpScoper446d16070175\Symfony\Component\VarExporter;
 
-use _PhpScopera9d6a31d814c\Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use _PhpScopera9d6a31d814c\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
-use _PhpScopera9d6a31d814c\Symfony\Component\VarExporter\Internal\Hydrator;
-use _PhpScopera9d6a31d814c\Symfony\Component\VarExporter\Internal\Registry;
+use _PhpScoper446d16070175\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use _PhpScoper446d16070175\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use _PhpScoper446d16070175\Symfony\Component\VarExporter\Internal\Hydrator;
+use _PhpScoper446d16070175\Symfony\Component\VarExporter\Internal\Registry;
 /**
  * A utility class to create objects without calling their constructor.
  *

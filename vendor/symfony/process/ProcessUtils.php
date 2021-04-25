@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera9d6a31d814c\Symfony\Component\Process;
+namespace _PhpScoper446d16070175\Symfony\Component\Process;
 
-use _PhpScopera9d6a31d814c\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScoper446d16070175\Symfony\Component\Process\Exception\InvalidArgumentException;
 /**
  * ProcessUtils is a bunch of utility methods.
  *
@@ -48,7 +48,7 @@ class ProcessUtils
             if (\is_scalar($input)) {
                 return (string) $input;
             }
-            if ($input instanceof \_PhpScopera9d6a31d814c\Symfony\Component\Process\Process) {
+            if ($input instanceof \_PhpScoper446d16070175\Symfony\Component\Process\Process) {
                 return $input->getIterator($input::ITER_SKIP_ERR);
             }
             if ($input instanceof \Iterator) {

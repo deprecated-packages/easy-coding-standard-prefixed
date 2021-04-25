@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera9d6a31d814c\Symfony\Contracts\Service;
+namespace _PhpScoper446d16070175\Symfony\Contracts\Service;
 
-use _PhpScopera9d6a31d814c\Psr\Container\ContainerExceptionInterface;
-use _PhpScopera9d6a31d814c\Psr\Container\NotFoundExceptionInterface;
+use _PhpScoper446d16070175\Psr\Container\ContainerExceptionInterface;
+use _PhpScoper446d16070175\Psr\Container\NotFoundExceptionInterface;
 // Help opcache.preload discover always-needed symbols
 \class_exists(ContainerExceptionInterface::class);
 \class_exists(NotFoundExceptionInterface::class);

@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Style;
 
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Application;
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Input\ArgvInput;
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Output\ConsoleOutput;
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopera9d6a31d814c\Symfony\Component\Console\Terminal;
+use _PhpScoper446d16070175\Symfony\Component\Console\Application;
+use _PhpScoper446d16070175\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScoper446d16070175\Symfony\Component\Console\Output\ConsoleOutput;
+use _PhpScoper446d16070175\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper446d16070175\Symfony\Component\Console\Terminal;
 use Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
 use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 final class EasyCodingStandardStyleFactory
