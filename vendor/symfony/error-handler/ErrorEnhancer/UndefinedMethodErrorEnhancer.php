@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6b1da46bea54\Symfony\Component\ErrorHandler\ErrorEnhancer;
+namespace _PhpScoper2737ffe13a7b\Symfony\Component\ErrorHandler\ErrorEnhancer;
 
-use _PhpScoper6b1da46bea54\Symfony\Component\ErrorHandler\Error\FatalError;
-use _PhpScoper6b1da46bea54\Symfony\Component\ErrorHandler\Error\UndefinedMethodError;
+use _PhpScoper2737ffe13a7b\Symfony\Component\ErrorHandler\Error\FatalError;
+use _PhpScoper2737ffe13a7b\Symfony\Component\ErrorHandler\Error\UndefinedMethodError;
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
-class UndefinedMethodErrorEnhancer implements \_PhpScoper6b1da46bea54\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
+class UndefinedMethodErrorEnhancer implements \_PhpScoper2737ffe13a7b\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface
 {
     /**
      * {@inheritdoc}

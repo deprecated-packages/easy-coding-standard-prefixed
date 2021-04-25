@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php 
-namespace _PhpScoper6b1da46bea54;
+namespace _PhpScoper2737ffe13a7b;
 
 /*
  * This file is part of the Symfony package.
@@ -15,19 +15,19 @@ namespace _PhpScoper6b1da46bea54;
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-use _PhpScoper6b1da46bea54\Psr\Log\LoggerInterface;
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Application;
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Input\ArgvInput;
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Logger\ConsoleLogger;
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Output\ConsoleOutput;
-use _PhpScoper6b1da46bea54\Symfony\Component\VarDumper\Command\ServerDumpCommand;
-use _PhpScoper6b1da46bea54\Symfony\Component\VarDumper\Server\DumpServer;
+use _PhpScoper2737ffe13a7b\Psr\Log\LoggerInterface;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Application;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Logger\ConsoleLogger;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Output\ConsoleOutput;
+use _PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Command\ServerDumpCommand;
+use _PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Server\DumpServer;
 function includeIfExists(string $file) : bool
 {
     return \file_exists($file) && (include $file);
 }
-if (!\_PhpScoper6b1da46bea54\includeIfExists(__DIR__ . '/../../../../autoload.php') && !\_PhpScoper6b1da46bea54\includeIfExists(__DIR__ . '/../../vendor/autoload.php') && !\_PhpScoper6b1da46bea54\includeIfExists(__DIR__ . '/../../../../../../vendor/autoload.php')) {
+if (!\_PhpScoper2737ffe13a7b\includeIfExists(__DIR__ . '/../../../../autoload.php') && !\_PhpScoper2737ffe13a7b\includeIfExists(__DIR__ . '/../../vendor/autoload.php') && !\_PhpScoper2737ffe13a7b\includeIfExists(__DIR__ . '/../../../../../../vendor/autoload.php')) {
     \fwrite(\STDERR, 'Install dependencies using Composer.' . \PHP_EOL);
     exit(1);
 }

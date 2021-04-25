@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6b1da46bea54\Symfony\Component\Stopwatch;
+namespace _PhpScoper2737ffe13a7b\Symfony\Component\Stopwatch;
 
 /**
  * Represents an Period for an Event.

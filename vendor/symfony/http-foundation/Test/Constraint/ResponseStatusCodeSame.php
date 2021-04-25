@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6b1da46bea54\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace _PhpScoper2737ffe13a7b\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use _PhpScoper6b1da46bea54\PHPUnit\Framework\Constraint\Constraint;
-use _PhpScoper6b1da46bea54\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper2737ffe13a7b\PHPUnit\Framework\Constraint\Constraint;
+use _PhpScoper2737ffe13a7b\Symfony\Component\HttpFoundation\Response;
 final class ResponseStatusCodeSame extends Constraint
 {
     private $statusCode;

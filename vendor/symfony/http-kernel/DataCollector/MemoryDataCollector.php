@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6b1da46bea54\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper2737ffe13a7b\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoper6b1da46bea54\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper6b1da46bea54\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper2737ffe13a7b\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper2737ffe13a7b\Symfony\Component\HttpFoundation\Response;
 /**
  * MemoryDataCollector.
  *
@@ -19,7 +19,7 @@ use _PhpScoper6b1da46bea54\Symfony\Component\HttpFoundation\Response;
  *
  * @final
  */
-class MemoryDataCollector extends \_PhpScoper6b1da46bea54\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper6b1da46bea54\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class MemoryDataCollector extends \_PhpScoper2737ffe13a7b\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper2737ffe13a7b\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     public function __construct()
     {

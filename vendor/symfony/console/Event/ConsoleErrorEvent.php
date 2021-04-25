@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6b1da46bea54\Symfony\Component\Console\Event;
+namespace _PhpScoper2737ffe13a7b\Symfony\Component\Console\Event;
 
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Command\Command;
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Command\Command;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Allows to handle throwables thrown while running a command.
  *
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
-final class ConsoleErrorEvent extends \_PhpScoper6b1da46bea54\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleErrorEvent extends \_PhpScoper2737ffe13a7b\Symfony\Component\Console\Event\ConsoleEvent
 {
     private $error;
     private $exitCode;

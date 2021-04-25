@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6b1da46bea54\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper2737ffe13a7b\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper6b1da46bea54\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScoper6b1da46bea54\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper6b1da46bea54\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoper6b1da46bea54\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Antonio Jose Cerezo Aranda <aj.cerezo@gmail.com>
  */
-class CouchbaseBucketAdapter extends \_PhpScoper6b1da46bea54\Symfony\Component\Cache\Adapter\AbstractAdapter
+class CouchbaseBucketAdapter extends \_PhpScoper2737ffe13a7b\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private const THIRTY_DAYS_IN_SECONDS = 2592000;
     private const MAX_KEY_LENGTH = 250;
@@ -25,7 +25,7 @@ class CouchbaseBucketAdapter extends \_PhpScoper6b1da46bea54\Symfony\Component\C
     private const VALID_DSN_OPTIONS = ['operationTimeout', 'configTimeout', 'configNodeTimeout', 'n1qlTimeout', 'httpTimeout', 'configDelay', 'htconfigIdleTimeout', 'durabilityInterval', 'durabilityTimeout'];
     private $bucket;
     private $marshaller;
-    public function __construct(\_PhpScoper6b1da46bea54\CouchbaseBucket $bucket, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
+    public function __construct(\_PhpScoper2737ffe13a7b\CouchbaseBucket $bucket, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
     {
         if (!static::isSupported()) {
             throw new CacheException('Couchbase >= 2.6.0 < 3.0.0 is required.');
@@ -39,7 +39,7 @@ class CouchbaseBucketAdapter extends \_PhpScoper6b1da46bea54\Symfony\Component\C
     /**
      * @param array|string $servers
      */
-    public static function createConnection($servers, array $options = []) : \_PhpScoper6b1da46bea54\CouchbaseBucket
+    public static function createConnection($servers, array $options = []) : \_PhpScoper2737ffe13a7b\CouchbaseBucket
     {
         if (\is_string($servers)) {
             $servers = [$servers];
@@ -76,7 +76,7 @@ class CouchbaseBucketAdapter extends \_PhpScoper6b1da46bea54\Symfony\Component\C
                 $newServers[] = $matches['host'];
             }
             $connectionString = $protocol . '://' . \implode(',', $newServers);
-            $client = new \_PhpScoper6b1da46bea54\CouchbaseCluster($connectionString);
+            $client = new \_PhpScoper2737ffe13a7b\CouchbaseCluster($connectionString);
             $client->authenticateAs($username, $password);
             $bucket = $client->openBucket($matches['bucketName']);
             unset($options['username'], $options['password']);

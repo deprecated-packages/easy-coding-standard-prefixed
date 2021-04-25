@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6b1da46bea54\Symfony\Component\Console\Tester;
+namespace _PhpScoper2737ffe13a7b\Symfony\Component\Console\Tester;
 
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Application;
-use _PhpScoper6b1da46bea54\Symfony\Component\Console\Input\ArrayInput;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Application;
+use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Input\ArrayInput;
 /**
  * Eases the testing of console applications.
  *
