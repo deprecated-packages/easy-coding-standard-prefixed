@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper99c9619a6243\Symfony\Component\Console\Event;
+namespace _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Event;
 
-use _PhpScoper99c9619a6243\Symfony\Component\Console\Command\Command;
-use _PhpScoper99c9619a6243\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper99c9619a6243\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Command\Command;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author marie <marie@users.noreply.github.com>
  */
-final class ConsoleSignalEvent extends \_PhpScoper99c9619a6243\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleSignalEvent extends \_PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Event\ConsoleEvent
 {
     private $handlingSignal;
     public function __construct(Command $command, InputInterface $input, OutputInterface $output, int $handlingSignal)

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection;
+namespace _PhpScoper4fedb9aa1e5f\Symfony\Component\DependencyInjection;
 
-use _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 class Alias
 {
     private $id;

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper99c9619a6243;
+namespace _PhpScoper4fedb9aa1e5f;
 
 /*
  * This file is part of the Symfony package.

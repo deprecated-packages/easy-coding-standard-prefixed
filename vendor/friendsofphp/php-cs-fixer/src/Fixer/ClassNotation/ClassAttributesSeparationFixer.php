@@ -23,8 +23,8 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper99c9619a6243\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper99c9619a6243\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\OptionsResolver\Options;
 /**
  * Make sure there is one blank line above and below class elements.
  *

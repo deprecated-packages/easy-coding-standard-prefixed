@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection\Loader;
+namespace _PhpScoper4fedb9aa1e5f\Symfony\Component\DependencyInjection\Loader;
 
-use _PhpScoper99c9619a6243\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
-use _PhpScoper99c9619a6243\Symfony\Component\Config\Exception\LoaderLoadException;
-use _PhpScoper99c9619a6243\Symfony\Component\Config\FileLocatorInterface;
-use _PhpScoper99c9619a6243\Symfony\Component\Config\Loader\FileLoader as BaseFileLoader;
-use _PhpScoper99c9619a6243\Symfony\Component\Config\Loader\Loader;
-use _PhpScoper99c9619a6243\Symfony\Component\Config\Resource\GlobResource;
-use _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Exception\LoaderLoadException;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\Config\FileLocatorInterface;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Loader\FileLoader as BaseFileLoader;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Loader\Loader;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Resource\GlobResource;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper4fedb9aa1e5f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * FileLoader is the abstract class used by all built-in loaders that are file based.
  *

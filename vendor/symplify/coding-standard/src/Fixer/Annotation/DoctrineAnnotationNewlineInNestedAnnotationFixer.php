@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Annotation;
 
-use _PhpScoper99c9619a6243\Doctrine\Common\Annotations\DocLexer;
-use _PhpScoper99c9619a6243\Nette\Utils\Strings;
+use _PhpScoper4fedb9aa1e5f\Doctrine\Common\Annotations\DocLexer;
+use _PhpScoper4fedb9aa1e5f\Nette\Utils\Strings;
 use PhpCsFixer\AbstractDoctrineAnnotationFixer;
 use PhpCsFixer\Doctrine\Annotation\Token;
 use PhpCsFixer\Doctrine\Annotation\Tokens;

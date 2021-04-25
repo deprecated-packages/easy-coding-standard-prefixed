@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper99c9619a6243\Symfony\Component\HttpKernel\Log;
+namespace _PhpScoper4fedb9aa1e5f\Symfony\Component\HttpKernel\Log;
 
-use _PhpScoper99c9619a6243\Psr\Log\AbstractLogger;
-use _PhpScoper99c9619a6243\Psr\Log\InvalidArgumentException;
-use _PhpScoper99c9619a6243\Psr\Log\LogLevel;
+use _PhpScoper4fedb9aa1e5f\Psr\Log\AbstractLogger;
+use _PhpScoper4fedb9aa1e5f\Psr\Log\InvalidArgumentException;
+use _PhpScoper4fedb9aa1e5f\Psr\Log\LogLevel;
 /**
  * Minimalist PSR-3 logger designed to write in stderr or any other stream.
  *
