@@ -60,8 +60,8 @@ use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraConsecutiveBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
-use _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\ContainerBuilder;
 final class RemoveMutualCheckersCompilerPass implements CompilerPassInterface
 {
     /**

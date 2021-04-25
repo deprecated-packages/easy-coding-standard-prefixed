@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Sorter;
 
-use _PhpScoper2737ffe13a7b\Nette\Utils\Strings;
+use _PhpScoper96c81c3c1716\Nette\Utils\Strings;
 /**
  * Mostly inspired by https://github.com/composer/composer/blob/master/src/Composer/Json/JsonManipulator.php
  *

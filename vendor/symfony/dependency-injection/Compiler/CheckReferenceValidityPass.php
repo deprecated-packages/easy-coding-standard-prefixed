@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Reference;
 /**
  * Checks the validity of references.
  *
@@ -21,7 +21,7 @@ use _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\Reference;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class CheckReferenceValidityPass extends \_PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class CheckReferenceValidityPass extends \_PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     protected function processValue($value, bool $isRoot = \false)
     {

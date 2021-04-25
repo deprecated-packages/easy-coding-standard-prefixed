@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Bootstrap;
 
-use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper96c81c3c1716\Symfony\Component\Console\Style\SymfonyStyle;
 final class NoCheckersLoaderReporter
 {
     /**

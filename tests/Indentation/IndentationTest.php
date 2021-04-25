@@ -7,7 +7,7 @@ use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\Whitespace\IndentationTypeFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScoper2737ffe13a7b\Psr\Container\ContainerInterface;
+use _PhpScoper96c81c3c1716\Psr\Container\ContainerInterface;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\HttpKernel\EasyCodingStandardKernel;
 use Symplify\PackageBuilder\Configuration\StaticEolConfiguration;

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\Finder;
 
-use _PhpScoper2737ffe13a7b\Symfony\Component\Finder\Finder;
+use _PhpScoper96c81c3c1716\Symfony\Component\Finder\Finder;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;
 final class FixtureFinder

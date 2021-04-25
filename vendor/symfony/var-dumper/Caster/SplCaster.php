@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts SPL related classes to array representation.
  *
@@ -31,22 +31,22 @@ class SplCaster
     }
     public static function castHeap(\Iterator $c, array $a, Stub $stub, $isNested)
     {
-        $a += [\_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'heap' => \iterator_to_array(clone $c)];
+        $a += [\_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'heap' => \iterator_to_array(clone $c)];
         return $a;
     }
     public static function castDoublyLinkedList(\SplDoublyLinkedList $c, array $a, Stub $stub, bool $isNested)
     {
-        $prefix = \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
+        $prefix = \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $mode = $c->getIteratorMode();
         $c->setIteratorMode(\SplDoublyLinkedList::IT_MODE_KEEP | $mode & ~\SplDoublyLinkedList::IT_MODE_DELETE);
-        $a += [$prefix . 'mode' => new \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\ConstStub(($mode & \SplDoublyLinkedList::IT_MODE_LIFO ? 'IT_MODE_LIFO' : 'IT_MODE_FIFO') . ' | ' . ($mode & \SplDoublyLinkedList::IT_MODE_DELETE ? 'IT_MODE_DELETE' : 'IT_MODE_KEEP'), $mode), $prefix . 'dllist' => \iterator_to_array($c)];
+        $a += [$prefix . 'mode' => new \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\ConstStub(($mode & \SplDoublyLinkedList::IT_MODE_LIFO ? 'IT_MODE_LIFO' : 'IT_MODE_FIFO') . ' | ' . ($mode & \SplDoublyLinkedList::IT_MODE_DELETE ? 'IT_MODE_DELETE' : 'IT_MODE_KEEP'), $mode), $prefix . 'dllist' => \iterator_to_array($c)];
         $c->setIteratorMode($mode);
         return $a;
     }
     public static function castFileInfo(\SplFileInfo $c, array $a, Stub $stub, bool $isNested)
     {
         static $map = ['path' => 'getPath', 'filename' => 'getFilename', 'basename' => 'getBasename', 'pathname' => 'getPathname', 'extension' => 'getExtension', 'realPath' => 'getRealPath', 'aTime' => 'getATime', 'mTime' => 'getMTime', 'cTime' => 'getCTime', 'inode' => 'getInode', 'size' => 'getSize', 'perms' => 'getPerms', 'owner' => 'getOwner', 'group' => 'getGroup', 'type' => 'getType', 'writable' => 'isWritable', 'readable' => 'isReadable', 'executable' => 'isExecutable', 'file' => 'isFile', 'dir' => 'isDir', 'link' => 'isLink', 'linkTarget' => 'getLinkTarget'];
-        $prefix = \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
+        $prefix = \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         unset($a["\0SplFileInfo\0fileName"]);
         unset($a["\0SplFileInfo\0pathName"]);
         if (\PHP_VERSION_ID < 80000) {
@@ -78,15 +78,15 @@ class SplCaster
             }
         }
         if (isset($a[$prefix . 'realPath'])) {
-            $a[$prefix . 'realPath'] = new \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\LinkStub($a[$prefix . 'realPath']);
+            $a[$prefix . 'realPath'] = new \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\LinkStub($a[$prefix . 'realPath']);
         }
         if (isset($a[$prefix . 'perms'])) {
-            $a[$prefix . 'perms'] = new \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\ConstStub(\sprintf('0%o', $a[$prefix . 'perms']), $a[$prefix . 'perms']);
+            $a[$prefix . 'perms'] = new \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\ConstStub(\sprintf('0%o', $a[$prefix . 'perms']), $a[$prefix . 'perms']);
         }
         static $mapDate = ['aTime', 'mTime', 'cTime'];
         foreach ($mapDate as $key) {
             if (isset($a[$prefix . $key])) {
-                $a[$prefix . $key] = new \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\ConstStub(\date('Y-m-d H:i:s', $a[$prefix . $key]), $a[$prefix . $key]);
+                $a[$prefix . $key] = new \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\ConstStub(\date('Y-m-d H:i:s', $a[$prefix . $key]), $a[$prefix . $key]);
             }
         }
         return $a;
@@ -94,7 +94,7 @@ class SplCaster
     public static function castFileObject(\SplFileObject $c, array $a, Stub $stub, bool $isNested)
     {
         static $map = ['csvControl' => 'getCsvControl', 'flags' => 'getFlags', 'maxLineLen' => 'getMaxLineLen', 'fstat' => 'fstat', 'eof' => 'eof', 'key' => 'key'];
-        $prefix = \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
+        $prefix = \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         foreach ($map as $key => $accessor) {
             try {
                 $a[$prefix . $key] = $c->{$accessor}();
@@ -108,43 +108,43 @@ class SplCaster
                     $flagsArray[] = $name;
                 }
             }
-            $a[$prefix . 'flags'] = new \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\ConstStub(\implode('|', $flagsArray), $a[$prefix . 'flags']);
+            $a[$prefix . 'flags'] = new \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\ConstStub(\implode('|', $flagsArray), $a[$prefix . 'flags']);
         }
         if (isset($a[$prefix . 'fstat'])) {
-            $a[$prefix . 'fstat'] = new \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\CutArrayStub($a[$prefix . 'fstat'], ['dev', 'ino', 'nlink', 'rdev', 'blksize', 'blocks']);
+            $a[$prefix . 'fstat'] = new \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\CutArrayStub($a[$prefix . 'fstat'], ['dev', 'ino', 'nlink', 'rdev', 'blksize', 'blocks']);
         }
         return $a;
     }
     public static function castObjectStorage(\SplObjectStorage $c, array $a, Stub $stub, bool $isNested)
     {
         $storage = [];
-        unset($a[\_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::PREFIX_DYNAMIC . "\0gcdata"]);
+        unset($a[\_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::PREFIX_DYNAMIC . "\0gcdata"]);
         // Don't hit https://bugs.php.net/65967
         unset($a["\0SplObjectStorage\0storage"]);
         $clone = clone $c;
         foreach ($clone as $obj) {
             $storage[] = ['object' => $obj, 'info' => $clone->getInfo()];
         }
-        $a += [\_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'storage' => $storage];
+        $a += [\_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'storage' => $storage];
         return $a;
     }
     public static function castOuterIterator(\OuterIterator $c, array $a, Stub $stub, bool $isNested)
     {
-        $a[\_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'innerIterator'] = $c->getInnerIterator();
+        $a[\_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'innerIterator'] = $c->getInnerIterator();
         return $a;
     }
     public static function castWeakReference(\WeakReference $c, array $a, Stub $stub, bool $isNested)
     {
-        $a[\_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'object'] = $c->get();
+        $a[\_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'object'] = $c->get();
         return $a;
     }
     private static function castSplArray($c, array $a, Stub $stub, bool $isNested) : array
     {
-        $prefix = \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
+        $prefix = \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $flags = $c->getFlags();
         if (!($flags & \ArrayObject::STD_PROP_LIST)) {
             $c->setFlags(\ArrayObject::STD_PROP_LIST);
-            $a = \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\Caster::castObject($c, \get_class($c), \method_exists($c, '__debugInfo'), $stub->class);
+            $a = \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\Caster::castObject($c, \get_class($c), \method_exists($c, '__debugInfo'), $stub->class);
             $c->setFlags($flags);
         }
         if (\PHP_VERSION_ID < 70400) {
@@ -152,7 +152,7 @@ class SplCaster
         }
         $a += [$prefix . 'flag::STD_PROP_LIST' => (bool) ($flags & \ArrayObject::STD_PROP_LIST), $prefix . 'flag::ARRAY_AS_PROPS' => (bool) ($flags & \ArrayObject::ARRAY_AS_PROPS)];
         if ($c instanceof \ArrayObject) {
-            $a[$prefix . 'iteratorClass'] = new \_PhpScoper2737ffe13a7b\Symfony\Component\VarDumper\Caster\ClassStub($c->getIteratorClass());
+            $a[$prefix . 'iteratorClass'] = new \_PhpScoper96c81c3c1716\Symfony\Component\VarDumper\Caster\ClassStub($c->getIteratorClass());
         }
         return $a;
     }

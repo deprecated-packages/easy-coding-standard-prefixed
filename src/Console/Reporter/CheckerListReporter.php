@@ -5,7 +5,7 @@ namespace Symplify\EasyCodingStandard\Console\Reporter;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpCsFixer\Fixer\FixerInterface;
-use _PhpScoper2737ffe13a7b\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper96c81c3c1716\Symfony\Component\Console\Style\SymfonyStyle;
 final class CheckerListReporter
 {
     /**

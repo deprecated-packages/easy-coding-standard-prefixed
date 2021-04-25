@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Composer;
 
-use _PhpScoper2737ffe13a7b\Jean85\Exception\ReplacedPackageException;
-use _PhpScoper2737ffe13a7b\Jean85\PrettyVersions;
-use _PhpScoper2737ffe13a7b\Jean85\Version;
+use _PhpScoper96c81c3c1716\Jean85\Exception\ReplacedPackageException;
+use _PhpScoper96c81c3c1716\Jean85\PrettyVersions;
+use _PhpScoper96c81c3c1716\Jean85\Version;
 use OutOfBoundsException;
-use _PhpScoper2737ffe13a7b\PharIo\Version\InvalidVersionException;
+use _PhpScoper96c81c3c1716\PharIo\Version\InvalidVersionException;
 final class PackageVersionProvider
 {
     /**

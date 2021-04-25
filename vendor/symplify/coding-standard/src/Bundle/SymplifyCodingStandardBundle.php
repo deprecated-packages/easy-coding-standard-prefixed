@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Bundle;
 
-use _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper2737ffe13a7b\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper96c81c3c1716\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 use Symplify\CodingStandard\DependencyInjection\Extension\SymplifyCodingStandardExtension;
 /**

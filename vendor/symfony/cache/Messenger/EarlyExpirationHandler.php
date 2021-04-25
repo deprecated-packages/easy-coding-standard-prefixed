@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2737ffe13a7b\Symfony\Component\Cache\Messenger;
+namespace _PhpScoper96c81c3c1716\Symfony\Component\Cache\Messenger;
 
-use _PhpScoper2737ffe13a7b\Symfony\Component\Cache\CacheItem;
-use _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection\ReverseContainer;
-use _PhpScoper2737ffe13a7b\Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use _PhpScoper96c81c3c1716\Symfony\Component\Cache\CacheItem;
+use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\ReverseContainer;
+use _PhpScoper96c81c3c1716\Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /**
  * Computes cached values sent to a message bus.
  */
@@ -24,7 +24,7 @@ class EarlyExpirationHandler implements MessageHandlerInterface
     {
         $this->reverseContainer = $reverseContainer;
     }
-    public function __invoke(\_PhpScoper2737ffe13a7b\Symfony\Component\Cache\Messenger\EarlyExpirationMessage $message)
+    public function __invoke(\_PhpScoper96c81c3c1716\Symfony\Component\Cache\Messenger\EarlyExpirationMessage $message)
     {
         $item = $message->getItem();
         $metadata = $item->getMetadata();

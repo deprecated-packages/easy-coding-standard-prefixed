@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\PHPUnit\Behavior;
 
-use _PhpScoper2737ffe13a7b\Symfony\Component\Finder\Finder;
+use _PhpScoper96c81c3c1716\Symfony\Component\Finder\Finder;
 use Symplify\EasyTesting\ValueObject\ExpectedAndOutputFileInfoPair;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;

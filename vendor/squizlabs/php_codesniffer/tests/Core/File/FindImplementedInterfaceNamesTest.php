@@ -38,7 +38,7 @@ class FindImplementedInterfaceNamesTest extends AbstractMethodUnitTest
      */
     public function dataImplementedInterface()
     {
-        return [['/* testImplementedClass */', ['testFIINInterface']], ['/* testMultiImplementedClass */', ['testFIINInterface', 'testFIINInterface2']], ['/* testNamespacedClass */', ['\\PHP_CodeSniffer\\Tests\\Core\\File\\testFIINInterface']], ['/* testNonImplementedClass */', \false], ['/* testInterface */', \false], ['/* testClassThatExtendsAndImplements */', ['InterfaceA', '_PhpScoper2737ffe13a7b\\NameSpaced\\Cat\\InterfaceB']], ['/* testClassThatImplementsAndExtends */', ['\\InterfaceA', 'InterfaceB']]];
+        return [['/* testImplementedClass */', ['testFIINInterface']], ['/* testMultiImplementedClass */', ['testFIINInterface', 'testFIINInterface2']], ['/* testNamespacedClass */', ['\\PHP_CodeSniffer\\Tests\\Core\\File\\testFIINInterface']], ['/* testNonImplementedClass */', \false], ['/* testInterface */', \false], ['/* testClassThatExtendsAndImplements */', ['InterfaceA', '_PhpScoper96c81c3c1716\\NameSpaced\\Cat\\InterfaceB']], ['/* testClassThatImplementsAndExtends */', ['\\InterfaceA', 'InterfaceB']]];
     }
     //end dataImplementedInterface()
 }

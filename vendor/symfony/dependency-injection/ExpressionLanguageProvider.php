@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2737ffe13a7b\Symfony\Component\DependencyInjection;
+namespace _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection;
 
-use _PhpScoper2737ffe13a7b\Symfony\Component\ExpressionLanguage\ExpressionFunction;
-use _PhpScoper2737ffe13a7b\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+use _PhpScoper96c81c3c1716\Symfony\Component\ExpressionLanguage\ExpressionFunction;
+use _PhpScoper96c81c3c1716\Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 /**
  * Define some ExpressionLanguage functions.
  *
