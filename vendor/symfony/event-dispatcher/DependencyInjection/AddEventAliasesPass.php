@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper27cac5a8b4ab\Symfony\Component\EventDispatcher\DependencyInjection;
+namespace _PhpScoper6b1da46bea54\Symfony\Component\EventDispatcher\DependencyInjection;
 
-use _PhpScoper27cac5a8b4ab\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper27cac5a8b4ab\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper6b1da46bea54\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper6b1da46bea54\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * This pass allows bundles to extend the list of event aliases.
  *

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\Diff\Output;
 
-use _PhpScoper27cac5a8b4ab\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use _PhpScoper6b1da46bea54\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 /**
  * Creates @see UnifiedDiffOutputBuilder with "$contextLines = 1000;"

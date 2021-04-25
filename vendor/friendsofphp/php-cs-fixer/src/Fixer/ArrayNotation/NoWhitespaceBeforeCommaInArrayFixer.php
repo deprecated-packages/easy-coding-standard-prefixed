@@ -22,7 +22,7 @@ use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper27cac5a8b4ab\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper6b1da46bea54\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Adam Marczuk <adam@marczuk.info>
  */
@@ -36,7 +36,7 @@ final class NoWhitespaceBeforeCommaInArrayFixer extends AbstractFixer implements
         return new FixerDefinition('In array declaration, there MUST NOT be a whitespace before each comma.', [new CodeSample("<?php \$x = array(1 , \"2\");\n"), new VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScoper27cac5a8b4ab;
+namespace _PhpScoper6b1da46bea54;
 
 $x = [<<<EOD
 foo

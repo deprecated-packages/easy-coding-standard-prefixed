@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper27cac5a8b4ab\SebastianBergmann\Diff;
+namespace _PhpScoper6b1da46bea54\SebastianBergmann\Diff;
 
 final class Chunk
 {
@@ -70,8 +70,8 @@ final class Chunk
     public function setLines(array $lines) : void
     {
         foreach ($lines as $line) {
-            if (!$line instanceof \_PhpScoper27cac5a8b4ab\SebastianBergmann\Diff\Line) {
-                throw new \_PhpScoper27cac5a8b4ab\SebastianBergmann\Diff\InvalidArgumentException();
+            if (!$line instanceof \_PhpScoper6b1da46bea54\SebastianBergmann\Diff\Line) {
+                throw new \_PhpScoper6b1da46bea54\SebastianBergmann\Diff\InvalidArgumentException();
             }
         }
         $this->lines = $lines;

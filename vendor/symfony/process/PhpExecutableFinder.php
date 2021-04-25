@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper27cac5a8b4ab\Symfony\Component\Process;
+namespace _PhpScoper6b1da46bea54\Symfony\Component\Process;
 
 /**
  * An executable finder specifically designed for the PHP executable.
@@ -21,7 +21,7 @@ class PhpExecutableFinder
     private $executableFinder;
     public function __construct()
     {
-        $this->executableFinder = new \_PhpScoper27cac5a8b4ab\Symfony\Component\Process\ExecutableFinder();
+        $this->executableFinder = new \_PhpScoper6b1da46bea54\Symfony\Component\Process\ExecutableFinder();
     }
     /**
      * Finds The PHP executable.

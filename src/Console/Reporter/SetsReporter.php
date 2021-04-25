@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Reporter;
 
-use _PhpScoper27cac5a8b4ab\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper6b1da46bea54\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SmartFileSystem\SmartFileInfo;

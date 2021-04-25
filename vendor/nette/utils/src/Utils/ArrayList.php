@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper27cac5a8b4ab\Nette\Utils;
+namespace _PhpScoper6b1da46bea54\Nette\Utils;
 
-use _PhpScoper27cac5a8b4ab\Nette;
+use _PhpScoper6b1da46bea54\Nette;
 /**
  * Provides the base class for a generic list (items can be accessed by index).
  */

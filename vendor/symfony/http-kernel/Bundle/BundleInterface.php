@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper27cac5a8b4ab\Symfony\Component\HttpKernel\Bundle;
+namespace _PhpScoper6b1da46bea54\Symfony\Component\HttpKernel\Bundle;
 
-use _PhpScoper27cac5a8b4ab\Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use _PhpScoper27cac5a8b4ab\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper27cac5a8b4ab\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper6b1da46bea54\Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use _PhpScoper6b1da46bea54\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper6b1da46bea54\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 /**
  * BundleInterface.
  *

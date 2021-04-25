@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\TypeResolver;
 
-use _PhpScoper27cac5a8b4ab\Nette\Utils\Reflection;
+use _PhpScoper6b1da46bea54\Nette\Utils\Reflection;
 use ReflectionMethod;
 use Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
 final class ParameterTypeResolver

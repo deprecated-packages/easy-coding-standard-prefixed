@@ -20,7 +20,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper27cac5a8b4ab\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper6b1da46bea54\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Vladimir Reznichenko <kalessil@gmail.com>
  */

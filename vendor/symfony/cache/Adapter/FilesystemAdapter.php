@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper6b1da46bea54\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Traits\FilesystemTrait;
-class FilesystemAdapter extends \_PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Adapter\AbstractAdapter implements PruneableInterface
+use _PhpScoper6b1da46bea54\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScoper6b1da46bea54\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper6b1da46bea54\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper6b1da46bea54\Symfony\Component\Cache\Traits\FilesystemTrait;
+class FilesystemAdapter extends \_PhpScoper6b1da46bea54\Symfony\Component\Cache\Adapter\AbstractAdapter implements PruneableInterface
 {
     use FilesystemTrait;
     public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, MarshallerInterface $marshaller = null)

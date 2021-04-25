@@ -33,7 +33,7 @@ use PhpCsFixer\Tests\Test\Assert\AssertTokensTrait;
 use PhpCsFixer\Tests\TestCase;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper27cac5a8b4ab\Prophecy\Argument;
+use _PhpScoper6b1da46bea54\Prophecy\Argument;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *

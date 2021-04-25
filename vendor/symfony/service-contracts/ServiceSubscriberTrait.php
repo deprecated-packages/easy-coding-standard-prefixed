@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper27cac5a8b4ab\Symfony\Contracts\Service;
+namespace _PhpScoper6b1da46bea54\Symfony\Contracts\Service;
 
-use _PhpScoper27cac5a8b4ab\Psr\Container\ContainerInterface;
+use _PhpScoper6b1da46bea54\Psr\Container\ContainerInterface;
 /**
  * Implementation of ServiceSubscriberInterface that determines subscribed services from
  * private method return types. Service ids are available as "ClassName::methodName".

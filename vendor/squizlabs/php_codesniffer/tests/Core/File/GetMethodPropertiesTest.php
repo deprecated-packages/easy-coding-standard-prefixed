@@ -129,7 +129,7 @@ class GetMethodPropertiesTest extends AbstractMethodUnitTest
      */
     public function testReturnNamespace()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper27cac5a8b4ab\\MyNamespace\\MyClass', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper6b1da46bea54\\MyNamespace\\MyClass', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testReturnNamespace()
@@ -140,7 +140,7 @@ class GetMethodPropertiesTest extends AbstractMethodUnitTest
      */
     public function testReturnMultilineNamespace()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper27cac5a8b4ab\\MyNamespace\\MyClass\\Foo', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper6b1da46bea54\\MyNamespace\\MyClass\\Foo', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testReturnMultilineNamespace()
@@ -228,7 +228,7 @@ class GetMethodPropertiesTest extends AbstractMethodUnitTest
      */
     public function testNamespaceOperatorTypeHint()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper27cac5a8b4ab\\?namespace\\Name', 'nullable_return_type' => \true, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper6b1da46bea54\\?namespace\\Name', 'nullable_return_type' => \true, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testNamespaceOperatorTypeHint()
@@ -250,7 +250,7 @@ class GetMethodPropertiesTest extends AbstractMethodUnitTest
      */
     public function testPHP8UnionTypesTwoClasses()
     {
-        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper27cac5a8b4ab\\MyClassA|\\Package\\MyClassB', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
+        $expected = ['scope' => 'public', 'scope_specified' => \false, 'return_type' => '_PhpScoper6b1da46bea54\\MyClassA|\\Package\\MyClassB', 'nullable_return_type' => \false, 'is_abstract' => \false, 'is_final' => \false, 'is_static' => \false, 'has_body' => \true];
         $this->getMethodPropertiesTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testPHP8UnionTypesTwoClasses()

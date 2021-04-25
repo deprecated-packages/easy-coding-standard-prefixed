@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper27cac5a8b4ab\Psr\Log\Test;
+namespace _PhpScoper6b1da46bea54\Psr\Log\Test;
 
-use _PhpScoper27cac5a8b4ab\Psr\Log\AbstractLogger;
+use _PhpScoper6b1da46bea54\Psr\Log\AbstractLogger;
 /**
  * Used for testing purposes.
  *
