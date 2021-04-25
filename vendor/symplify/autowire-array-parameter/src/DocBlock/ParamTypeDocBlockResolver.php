@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\DocBlock;
 
-use _PhpScoper5f836821822a\Nette\Utils\Strings;
+use _PhpScoper99c9619a6243\Nette\Utils\Strings;
 /**
  * @see \Symplify\AutowireArrayParameter\Tests\DocBlock\ParamTypeDocBlockResolverTest
  */

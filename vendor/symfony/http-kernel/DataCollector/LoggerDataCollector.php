@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5f836821822a\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper99c9619a6243\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoper5f836821822a\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
-use _PhpScoper5f836821822a\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper5f836821822a\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper5f836821822a\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper5f836821822a\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+use _PhpScoper99c9619a6243\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
+use _PhpScoper99c9619a6243\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper99c9619a6243\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper99c9619a6243\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper99c9619a6243\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 /**
  * LogDataCollector.
  *
@@ -22,7 +22,7 @@ use _PhpScoper5f836821822a\Symfony\Component\HttpKernel\Log\DebugLoggerInterface
  *
  * @final
  */
-class LoggerDataCollector extends \_PhpScoper5f836821822a\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper5f836821822a\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class LoggerDataCollector extends \_PhpScoper99c9619a6243\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper99c9619a6243\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     private $logger;
     private $containerPathPrefix;

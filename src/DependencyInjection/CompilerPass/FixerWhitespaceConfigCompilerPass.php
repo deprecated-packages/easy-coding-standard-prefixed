@@ -5,9 +5,9 @@ namespace Symplify\EasyCodingStandard\DependencyInjection\CompilerPass;
 
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper99c9619a6243\Symfony\Component\DependencyInjection\Reference;
 final class FixerWhitespaceConfigCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $containerBuilder) : void

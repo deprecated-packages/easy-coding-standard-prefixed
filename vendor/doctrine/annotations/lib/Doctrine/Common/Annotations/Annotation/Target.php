@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper5f836821822a\Doctrine\Common\Annotations\Annotation;
+namespace _PhpScoper99c9619a6243\Doctrine\Common\Annotations\Annotation;
 
 use InvalidArgumentException;
 use function array_keys;

@@ -26,11 +26,11 @@ use PhpCsFixer\Runner\Runner;
 use PhpCsFixer\Tests\TestCase;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScoper5f836821822a\Prophecy\Argument;
-use _PhpScoper5f836821822a\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScoper5f836821822a\Symfony\Component\Filesystem\Filesystem;
-use _PhpScoper5f836821822a\Symfony\Component\Finder\Finder;
-use _PhpScoper5f836821822a\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper99c9619a6243\Prophecy\Argument;
+use _PhpScoper99c9619a6243\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper99c9619a6243\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper99c9619a6243\Symfony\Component\Finder\Finder;
+use _PhpScoper99c9619a6243\Symfony\Component\Finder\SplFileInfo;
 /**
  * Integration test base class.
  *

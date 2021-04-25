@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Contract\HttpKernel;
 
-use _PhpScoper5f836821822a\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoper99c9619a6243\Symfony\Component\HttpKernel\KernelInterface;
 use Symplify\SmartFileSystem\SmartFileInfo;
 interface ExtraConfigAwareKernelInterface extends KernelInterface
 {

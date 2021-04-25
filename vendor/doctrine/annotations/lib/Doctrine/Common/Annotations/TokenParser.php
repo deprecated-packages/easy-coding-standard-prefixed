@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper5f836821822a\Doctrine\Common\Annotations;
+namespace _PhpScoper99c9619a6243\Doctrine\Common\Annotations;
 
 use function array_merge;
 use function count;
