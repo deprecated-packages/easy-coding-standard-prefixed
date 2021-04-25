@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveClassPass implements \_PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolveClassPass implements \_PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}

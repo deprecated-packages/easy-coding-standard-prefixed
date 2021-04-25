@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperff1e514762b4\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper5f836821822a\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperff1e514762b4\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperff1e514762b4\Symfony\Component\HttpFoundation\RequestMatcherInterface;
-use _PhpScoperff1e514762b4\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoperff1e514762b4\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScoperff1e514762b4\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScoperff1e514762b4\Symfony\Component\HttpKernel\Event\TerminateEvent;
-use _PhpScoperff1e514762b4\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScoperff1e514762b4\Symfony\Component\HttpKernel\Profiler\Profiler;
+use _PhpScoper5f836821822a\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper5f836821822a\Symfony\Component\HttpFoundation\RequestMatcherInterface;
+use _PhpScoper5f836821822a\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper5f836821822a\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use _PhpScoper5f836821822a\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper5f836821822a\Symfony\Component\HttpKernel\Event\TerminateEvent;
+use _PhpScoper5f836821822a\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper5f836821822a\Symfony\Component\HttpKernel\Profiler\Profiler;
 /**
  * ProfilerListener collects data for the current request by listening to the kernel events.
  *

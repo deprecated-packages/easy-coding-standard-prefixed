@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperff1e514762b4\Psr\EventDispatcher;
+namespace _PhpScoper5f836821822a\Psr\EventDispatcher;
 
 /**
  * Mapper from an event to the listeners that are applicable to that event.

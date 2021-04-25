@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperff1e514762b4\Symfony\Component\Cache\Messenger;
+namespace _PhpScoper5f836821822a\Symfony\Component\Cache\Messenger;
 
-use _PhpScoperff1e514762b4\Symfony\Component\Cache\Adapter\AdapterInterface;
-use _PhpScoperff1e514762b4\Symfony\Component\Cache\CacheItem;
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\ReverseContainer;
+use _PhpScoper5f836821822a\Symfony\Component\Cache\Adapter\AdapterInterface;
+use _PhpScoper5f836821822a\Symfony\Component\Cache\CacheItem;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\ReverseContainer;
 /**
  * Conveys a cached value that needs to be computed.
  */

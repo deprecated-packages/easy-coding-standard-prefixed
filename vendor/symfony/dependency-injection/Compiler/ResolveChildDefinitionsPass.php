@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Exception\ExceptionInterface;
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Exception\ExceptionInterface;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
 /**
  * This replaces all ChildDefinition instances with their equivalent fully
  * merged Definition instance.
@@ -23,7 +23,7 @@ use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Exception\Servi
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveChildDefinitionsPass extends \_PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveChildDefinitionsPass extends \_PhpScoper5f836821822a\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $currentPath;
     protected function processValue($value, bool $isRoot = \false)

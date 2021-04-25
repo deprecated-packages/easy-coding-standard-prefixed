@@ -19,11 +19,11 @@ use PhpCsFixer\Console\SelfUpdate\GithubClient;
 use PhpCsFixer\Console\SelfUpdate\NewVersionChecker;
 use PhpCsFixer\PharChecker;
 use PhpCsFixer\ToolInfo;
-use _PhpScoperff1e514762b4\Symfony\Component\Console\Application as BaseApplication;
-use _PhpScoperff1e514762b4\Symfony\Component\Console\Command\ListCommand;
-use _PhpScoperff1e514762b4\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperff1e514762b4\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoperff1e514762b4\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper5f836821822a\Symfony\Component\Console\Application as BaseApplication;
+use _PhpScoper5f836821822a\Symfony\Component\Console\Command\ListCommand;
+use _PhpScoper5f836821822a\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper5f836821822a\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper5f836821822a\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>

@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperff1e514762b4\Nette\Utils;
+namespace _PhpScoper5f836821822a\Nette\Utils;
 
-use _PhpScoperff1e514762b4\Nette;
+use _PhpScoper5f836821822a\Nette;
 /**
  * PHP reflection helpers.
  */

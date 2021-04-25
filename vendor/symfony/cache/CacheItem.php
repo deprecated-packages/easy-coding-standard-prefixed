@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperff1e514762b4\Symfony\Component\Cache;
+namespace _PhpScoper5f836821822a\Symfony\Component\Cache;
 
-use _PhpScoperff1e514762b4\Psr\Log\LoggerInterface;
-use _PhpScoperff1e514762b4\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperff1e514762b4\Symfony\Component\Cache\Exception\LogicException;
-use _PhpScoperff1e514762b4\Symfony\Contracts\Cache\ItemInterface;
+use _PhpScoper5f836821822a\Psr\Log\LoggerInterface;
+use _PhpScoper5f836821822a\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper5f836821822a\Symfony\Component\Cache\Exception\LogicException;
+use _PhpScoper5f836821822a\Symfony\Contracts\Cache\ItemInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
