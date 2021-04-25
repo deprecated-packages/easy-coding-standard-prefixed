@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Strings;
 
-use _PhpScoper96c81c3c1716\Nette\Utils\Strings;
+use _PhpScoper32abeec2fe5a\Nette\Utils\Strings;
 /**
  * @api
  * @see \Symplify\PackageBuilder\Tests\Strings\StringFormatConverterTest

@@ -35,7 +35,7 @@ final class HeredocIndentationFixer extends AbstractFixer implements Configurati
         return new FixerDefinition('Heredoc/nowdoc content must be properly indented. Requires PHP >= 7.3.', [new VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScoper96c81c3c1716;
+namespace _PhpScoper32abeec2fe5a;
 
 $a = <<<EOD
 abc
@@ -47,7 +47,7 @@ SAMPLE
 , new VersionSpecification(70300)), new VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScoper96c81c3c1716;
+namespace _PhpScoper32abeec2fe5a;
 
 $a = <<<'EOD'
 abc
@@ -59,7 +59,7 @@ SAMPLE
 , new VersionSpecification(70300)), new VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScoper96c81c3c1716;
+namespace _PhpScoper32abeec2fe5a;
 
 $a = <<<'EOD'
 abc

@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console\Command;
 
-use _PhpScoper96c81c3c1716\Symfony\Component\Console\Command\Command;
-use _PhpScoper96c81c3c1716\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper96c81c3c1716\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper32abeec2fe5a\Symfony\Component\Console\Command\Command;
+use _PhpScoper32abeec2fe5a\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper32abeec2fe5a\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\ValueObject\Option;
 use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Finder\SmartFinder;

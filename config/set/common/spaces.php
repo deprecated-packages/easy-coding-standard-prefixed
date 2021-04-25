@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper96c81c3c1716;
+namespace _PhpScoper32abeec2fe5a;
 
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff;
@@ -23,7 +23,7 @@ use PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
-use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\Spacing\NewlineServiceDefinitionConfigFixer;
 use Symplify\CodingStandard\Fixer\Spacing\StandaloneLinePromotedPropertyFixer;
 return static function (ContainerConfigurator $containerConfigurator) : void {

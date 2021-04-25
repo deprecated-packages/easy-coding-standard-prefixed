@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Output;
 
-use _PhpScoper96c81c3c1716\Nette\Utils\Json;
+use _PhpScoper32abeec2fe5a\Nette\Utils\Json;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface;
 use Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult;

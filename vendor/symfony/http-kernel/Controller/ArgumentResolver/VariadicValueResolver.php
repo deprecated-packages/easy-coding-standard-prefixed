@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper96c81c3c1716\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoper96c81c3c1716\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper96c81c3c1716\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoper96c81c3c1716\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoper32abeec2fe5a\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields a variadic argument's values from the request attributes.
  *

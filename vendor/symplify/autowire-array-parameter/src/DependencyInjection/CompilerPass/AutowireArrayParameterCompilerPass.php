@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass;
 
-use _PhpScoper96c81c3c1716\Nette\Utils\Strings;
+use _PhpScoper32abeec2fe5a\Nette\Utils\Strings;
 use ReflectionClass;
 use ReflectionMethod;
-use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper96c81c3c1716\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Reference;
 use Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver;
 use Symplify\AutowireArrayParameter\Skipper\ParameterSkipper;
 use Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
@@ -32,7 +32,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
      * @var string[]
      * @noRector
      */
-    private $excludedFatalClasses = ['_PhpScoper96c81c3c1716\\Symfony\\Component\\Form\\FormExtensionInterface', '_PhpScoper96c81c3c1716\\Symfony\\Component\\Asset\\PackageInterface', '_PhpScoper96c81c3c1716\\Symfony\\Component\\Config\\Loader\\LoaderInterface', '_PhpScoper96c81c3c1716\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', '_PhpScoper96c81c3c1716\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', '_PhpScoper96c81c3c1716\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', '_PhpScoper96c81c3c1716\\Sonata\\Doctrine\\Adapter\\AdapterChain', '_PhpScoper96c81c3c1716\\Sonata\\Twig\\Extension\\TemplateExtension', '_PhpScoper96c81c3c1716\\Symfony\\Component\\HttpKernel\\KernelInterface'];
+    private $excludedFatalClasses = ['_PhpScoper32abeec2fe5a\\Symfony\\Component\\Form\\FormExtensionInterface', '_PhpScoper32abeec2fe5a\\Symfony\\Component\\Asset\\PackageInterface', '_PhpScoper32abeec2fe5a\\Symfony\\Component\\Config\\Loader\\LoaderInterface', '_PhpScoper32abeec2fe5a\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', '_PhpScoper32abeec2fe5a\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', '_PhpScoper32abeec2fe5a\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', '_PhpScoper32abeec2fe5a\\Sonata\\Doctrine\\Adapter\\AdapterChain', '_PhpScoper32abeec2fe5a\\Sonata\\Twig\\Extension\\TemplateExtension', '_PhpScoper32abeec2fe5a\\Symfony\\Component\\HttpKernel\\KernelInterface'];
     /**
      * @var DefinitionFinder
      */

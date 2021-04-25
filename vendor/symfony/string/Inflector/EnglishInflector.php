@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper96c81c3c1716\Symfony\Component\String\Inflector;
+namespace _PhpScoper32abeec2fe5a\Symfony\Component\String\Inflector;
 
-final class EnglishInflector implements \_PhpScoper96c81c3c1716\Symfony\Component\String\Inflector\InflectorInterface
+final class EnglishInflector implements \_PhpScoper32abeec2fe5a\Symfony\Component\String\Inflector\InflectorInterface
 {
     /**
      * Map English plural to singular suffixes.

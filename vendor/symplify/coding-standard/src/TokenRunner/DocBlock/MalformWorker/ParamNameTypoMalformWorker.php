@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
-use _PhpScoper96c81c3c1716\Nette\Utils\Strings;
+use _PhpScoper32abeec2fe5a\Nette\Utils\Strings;
 use PhpCsFixer\DocBlock\Annotation;
 use PhpCsFixer\DocBlock\DocBlock;
 use PhpCsFixer\Tokenizer\Token;

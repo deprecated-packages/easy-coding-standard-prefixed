@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Configuration;
 
-use _PhpScoper96c81c3c1716\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper32abeec2fe5a\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter;
 use Symplify\EasyCodingStandard\Console\Output\JsonOutputFormatter;
 use Symplify\EasyCodingStandard\Exception\Configuration\SourceNotFoundException;
