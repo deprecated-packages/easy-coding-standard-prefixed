@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd232d3743ab9\Symfony\Component\Console\Input;
+namespace _PhpScoper27cac5a8b4ab\Symfony\Component\Console\Input;
 
-use _PhpScoperd232d3743ab9\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoperd232d3743ab9\Symfony\Component\Console\Exception\InvalidOptionException;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Console\Exception\InvalidOptionException;
 /**
  * ArrayInput represents an input provided as an array.
  *
@@ -21,10 +21,10 @@ use _PhpScoperd232d3743ab9\Symfony\Component\Console\Exception\InvalidOptionExce
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ArrayInput extends \_PhpScoperd232d3743ab9\Symfony\Component\Console\Input\Input
+class ArrayInput extends \_PhpScoper27cac5a8b4ab\Symfony\Component\Console\Input\Input
 {
     private $parameters;
-    public function __construct(array $parameters, \_PhpScoperd232d3743ab9\Symfony\Component\Console\Input\InputDefinition $definition = null)
+    public function __construct(array $parameters, \_PhpScoper27cac5a8b4ab\Symfony\Component\Console\Input\InputDefinition $definition = null)
     {
         $this->parameters = $parameters;
         parent::__construct($definition);

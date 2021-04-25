@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Command\Descriptor;
+namespace _PhpScoper27cac5a8b4ab\Symfony\Component\VarDumper\Command\Descriptor;
 
-use _PhpScoperd232d3743ab9\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\VarDumper\Dumper\HtmlDumper;
 /**
  * Describe collected data clones for html output.
  *
@@ -20,7 +20,7 @@ use _PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Dumper\HtmlDumper;
  *
  * @final
  */
-class HtmlDescriptor implements \_PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
+class HtmlDescriptor implements \_PhpScoper27cac5a8b4ab\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
 {
     private $dumper;
     private $initialized = \false;

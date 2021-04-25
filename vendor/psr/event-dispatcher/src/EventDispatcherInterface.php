@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperd232d3743ab9\Psr\EventDispatcher;
+namespace _PhpScoper27cac5a8b4ab\Psr\EventDispatcher;
 
 /**
  * Defines a dispatcher for events.

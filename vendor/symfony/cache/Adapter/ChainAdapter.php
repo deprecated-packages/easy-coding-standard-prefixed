@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd232d3743ab9\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperd232d3743ab9\Psr\Cache\CacheItemInterface;
-use _PhpScoperd232d3743ab9\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoperd232d3743ab9\Symfony\Component\Cache\CacheItem;
-use _PhpScoperd232d3743ab9\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperd232d3743ab9\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperd232d3743ab9\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperd232d3743ab9\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoperd232d3743ab9\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoperd232d3743ab9\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper27cac5a8b4ab\Psr\Cache\CacheItemInterface;
+use _PhpScoper27cac5a8b4ab\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\CacheItem;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoper27cac5a8b4ab\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper27cac5a8b4ab\Symfony\Contracts\Service\ResetInterface;
 /**
  * Chains several adapters together.
  *
@@ -27,7 +27,7 @@ use _PhpScoperd232d3743ab9\Symfony\Contracts\Service\ResetInterface;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class ChainAdapter implements \_PhpScoperd232d3743ab9\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
+class ChainAdapter implements \_PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
 {
     use ContractsTrait;
     private $adapters = [];
@@ -46,14 +46,14 @@ class ChainAdapter implements \_PhpScoperd232d3743ab9\Symfony\Component\Cache\Ad
             if (!$adapter instanceof CacheItemPoolInterface) {
                 throw new InvalidArgumentException(\sprintf('The class "%s" does not implement the "%s" interface.', \get_debug_type($adapter), CacheItemPoolInterface::class));
             }
-            if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && $adapter instanceof \_PhpScoperd232d3743ab9\Symfony\Component\Cache\Adapter\ApcuAdapter && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
+            if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && $adapter instanceof \_PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Adapter\ApcuAdapter && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
                 continue;
                 // skip putting APCu in the chain when the backend is disabled
             }
-            if ($adapter instanceof \_PhpScoperd232d3743ab9\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($adapter instanceof \_PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 $this->adapters[] = $adapter;
             } else {
-                $this->adapters[] = new \_PhpScoperd232d3743ab9\Symfony\Component\Cache\Adapter\ProxyAdapter($adapter);
+                $this->adapters[] = new \_PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Adapter\ProxyAdapter($adapter);
             }
         }
         $this->adapterCount = \count($this->adapters);
@@ -173,7 +173,7 @@ class ChainAdapter implements \_PhpScoperd232d3743ab9\Symfony\Component\Cache\Ad
         $cleared = \true;
         $i = $this->adapterCount;
         while ($i--) {
-            if ($this->adapters[$i] instanceof \_PhpScoperd232d3743ab9\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($this->adapters[$i] instanceof \_PhpScoper27cac5a8b4ab\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 $cleared = $this->adapters[$i]->clear($prefix) && $cleared;
             } else {
                 $cleared = $this->adapters[$i]->clear() && $cleared;

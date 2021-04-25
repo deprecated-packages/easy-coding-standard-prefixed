@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd232d3743ab9\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace _PhpScoper27cac5a8b4ab\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use _PhpScoperd232d3743ab9\PHPUnit\Framework\Constraint\Constraint;
-use _PhpScoperd232d3743ab9\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper27cac5a8b4ab\PHPUnit\Framework\Constraint\Constraint;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\HttpFoundation\Response;
 final class ResponseHasHeader extends Constraint
 {
     private $headerName;

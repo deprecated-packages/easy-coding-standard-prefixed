@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd232d3743ab9\Symfony\Component\Process;
+namespace _PhpScoper27cac5a8b4ab\Symfony\Component\Process;
 
-use _PhpScoperd232d3743ab9\Symfony\Component\Process\Exception\LogicException;
-use _PhpScoperd232d3743ab9\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Process\Exception\LogicException;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Process\Exception\RuntimeException;
 /**
  * PhpProcess runs a PHP script in an independent process.
  *
@@ -21,7 +21,7 @@ use _PhpScoperd232d3743ab9\Symfony\Component\Process\Exception\RuntimeException;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class PhpProcess extends \_PhpScoperd232d3743ab9\Symfony\Component\Process\Process
+class PhpProcess extends \_PhpScoper27cac5a8b4ab\Symfony\Component\Process\Process
 {
     /**
      * @param string      $script  The PHP script to run (as a string)
@@ -33,7 +33,7 @@ class PhpProcess extends \_PhpScoperd232d3743ab9\Symfony\Component\Process\Proce
     public function __construct(string $script, string $cwd = null, array $env = null, int $timeout = 60, array $php = null)
     {
         if (null === $php) {
-            $executableFinder = new \_PhpScoperd232d3743ab9\Symfony\Component\Process\PhpExecutableFinder();
+            $executableFinder = new \_PhpScoper27cac5a8b4ab\Symfony\Component\Process\PhpExecutableFinder();
             $php = $executableFinder->find(\false);
             $php = \false === $php ? null : \array_merge([$php], $executableFinder->findArguments());
         }

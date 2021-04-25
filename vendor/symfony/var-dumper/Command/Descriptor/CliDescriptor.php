@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Command\Descriptor;
+namespace _PhpScoper27cac5a8b4ab\Symfony\Component\VarDumper\Command\Descriptor;
 
-use _PhpScoperd232d3743ab9\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use _PhpScoperd232d3743ab9\Symfony\Component\Console\Input\ArrayInput;
-use _PhpScoperd232d3743ab9\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperd232d3743ab9\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Console\Input\ArrayInput;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\VarDumper\Dumper\CliDumper;
 /**
  * Describe collected data clones for cli output.
  *
@@ -23,7 +23,7 @@ use _PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Dumper\CliDumper;
  *
  * @final
  */
-class CliDescriptor implements \_PhpScoperd232d3743ab9\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
+class CliDescriptor implements \_PhpScoper27cac5a8b4ab\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface
 {
     private $dumper;
     private $lastIdentifier;

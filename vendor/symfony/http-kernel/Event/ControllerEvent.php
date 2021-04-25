@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper27cac5a8b4ab\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoperd232d3743ab9\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows filtering of a controller callable.
  *
@@ -23,7 +23,7 @@ use _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class ControllerEvent extends \_PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\Event\KernelEvent
+final class ControllerEvent extends \_PhpScoper27cac5a8b4ab\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $controller;
     public function __construct(HttpKernelInterface $kernel, callable $controller, Request $request, ?int $requestType)

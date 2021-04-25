@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperd232d3743ab9\Nette\Utils;
+namespace _PhpScoper27cac5a8b4ab\Nette\Utils;
 
-use _PhpScoperd232d3743ab9\Nette;
+use _PhpScoper27cac5a8b4ab\Nette;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 /**
@@ -272,7 +272,7 @@ class Finder implements \IteratorAggregate, \Countable
             [, $operator, $date] = $matches;
             $operator = $operator ?: '=';
         }
-        $date = \_PhpScoperd232d3743ab9\Nette\Utils\DateTime::from($date)->format('U');
+        $date = \_PhpScoper27cac5a8b4ab\Nette\Utils\DateTime::from($date)->format('U');
         return $this->filter(function (RecursiveDirectoryIterator $file) use($operator, $date) : bool {
             return self::compare($file->getMTime(), $operator, $date);
         });

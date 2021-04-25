@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper27cac5a8b4ab\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperd232d3743ab9\Psr\Container\ContainerInterface;
-use _PhpScoperd232d3743ab9\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper27cac5a8b4ab\Psr\Container\ContainerInterface;
+use _PhpScoper27cac5a8b4ab\Symfony\Component\HttpFoundation\Session\SessionInterface;
 /**
  * Sets the session in the request.
  *
@@ -19,7 +19,7 @@ use _PhpScoperd232d3743ab9\Symfony\Component\HttpFoundation\Session\SessionInter
  *
  * @final
  */
-class TestSessionListener extends \_PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\EventListener\AbstractTestSessionListener
+class TestSessionListener extends \_PhpScoper27cac5a8b4ab\Symfony\Component\HttpKernel\EventListener\AbstractTestSessionListener
 {
     private $container;
     public function __construct(ContainerInterface $container, array $sessionOptions = [])
