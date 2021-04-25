@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5686a261d89c\Symfony\Contracts\HttpClient\Test;
+namespace _PhpScoperd232d3743ab9\Symfony\Contracts\HttpClient\Test;
 
-use _PhpScoper5686a261d89c\PHPUnit\Framework\TestCase;
-use _PhpScoper5686a261d89c\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use _PhpScoper5686a261d89c\Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use _PhpScoper5686a261d89c\Symfony\Contracts\HttpClient\Exception\TimeoutExceptionInterface;
-use _PhpScoper5686a261d89c\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use _PhpScoper5686a261d89c\Symfony\Contracts\HttpClient\HttpClientInterface;
+use _PhpScoperd232d3743ab9\PHPUnit\Framework\TestCase;
+use _PhpScoperd232d3743ab9\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use _PhpScoperd232d3743ab9\Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use _PhpScoperd232d3743ab9\Symfony\Contracts\HttpClient\Exception\TimeoutExceptionInterface;
+use _PhpScoperd232d3743ab9\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use _PhpScoperd232d3743ab9\Symfony\Contracts\HttpClient\HttpClientInterface;
 /**
  * A reference test suite for HttpClientInterface implementations.
  */
@@ -23,7 +23,7 @@ abstract class HttpClientTestCase extends TestCase
 {
     public static function setUpBeforeClass() : void
     {
-        \_PhpScoper5686a261d89c\Symfony\Contracts\HttpClient\Test\TestHttpServer::start();
+        \_PhpScoperd232d3743ab9\Symfony\Contracts\HttpClient\Test\TestHttpServer::start();
     }
     protected abstract function getHttpClient(string $testCase) : HttpClientInterface;
     public function testGetRequest()
@@ -563,8 +563,8 @@ abstract class HttpClientTestCase extends TestCase
     }
     public function testTimeoutWithActiveConcurrentStream()
     {
-        $p1 = \_PhpScoper5686a261d89c\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8067);
-        $p2 = \_PhpScoper5686a261d89c\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8077);
+        $p1 = \_PhpScoperd232d3743ab9\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8067);
+        $p2 = \_PhpScoperd232d3743ab9\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8077);
         $client = $this->getHttpClient(__FUNCTION__);
         $streamingResponse = $client->request('GET', 'http://localhost:8067/max-duration');
         $blockingResponse = $client->request('GET', 'http://localhost:8077/timeout-body', ['timeout' => 0.25]);

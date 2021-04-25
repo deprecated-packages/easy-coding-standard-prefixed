@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Config;
+namespace _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\Config;
 
-use _PhpScoper5686a261d89c\Symfony\Component\Config\Resource\ResourceInterface;
+use _PhpScoperd232d3743ab9\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Tracks container parameters.
  *

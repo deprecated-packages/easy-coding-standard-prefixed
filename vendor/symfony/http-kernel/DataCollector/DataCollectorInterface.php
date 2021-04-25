@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoper5686a261d89c\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper5686a261d89c\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper5686a261d89c\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoperd232d3743ab9\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperd232d3743ab9\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperd232d3743ab9\Symfony\Contracts\Service\ResetInterface;
 /**
  * DataCollectorInterface.
  *

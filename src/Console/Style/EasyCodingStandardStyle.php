@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Style;
 
-use _PhpScoper5686a261d89c\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper5686a261d89c\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper5686a261d89c\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoper5686a261d89c\Symfony\Component\Console\Terminal;
+use _PhpScoperd232d3743ab9\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperd232d3743ab9\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperd232d3743ab9\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoperd232d3743ab9\Symfony\Component\Console\Terminal;
 use Symplify\EasyCodingStandard\ValueObject\Error\CodingStandardError;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 use Symplify\PackageBuilder\Reflection\PrivatesCaller;

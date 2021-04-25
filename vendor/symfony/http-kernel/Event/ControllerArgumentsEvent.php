@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoper5686a261d89c\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoperd232d3743ab9\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows filtering of controller arguments.
  *
@@ -24,7 +24,7 @@ use _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
-final class ControllerArgumentsEvent extends \_PhpScoper5686a261d89c\Symfony\Component\HttpKernel\Event\KernelEvent
+final class ControllerArgumentsEvent extends \_PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $controller;
     private $arguments;

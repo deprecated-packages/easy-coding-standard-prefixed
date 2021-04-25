@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5686a261d89c\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperd232d3743ab9\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper5686a261d89c\Doctrine\Common\Cache\CacheProvider;
+use _PhpScoperd232d3743ab9\Doctrine\Common\Cache\CacheProvider;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DoctrineAdapter extends \_PhpScoper5686a261d89c\Symfony\Component\Cache\Adapter\AbstractAdapter
+class DoctrineAdapter extends \_PhpScoperd232d3743ab9\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private $provider;
     public function __construct(CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)

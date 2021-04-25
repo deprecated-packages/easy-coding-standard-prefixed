@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Exception\LogicException;
-use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper5686a261d89c\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperd232d3743ab9\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-abstract class AbstractRecursivePass implements \_PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+abstract class AbstractRecursivePass implements \_PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * @var ContainerBuilder

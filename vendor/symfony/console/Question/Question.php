@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5686a261d89c\Symfony\Component\Console\Question;
+namespace _PhpScoperd232d3743ab9\Symfony\Component\Console\Question;
 
-use _PhpScoper5686a261d89c\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper5686a261d89c\Symfony\Component\Console\Exception\LogicException;
+use _PhpScoperd232d3743ab9\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperd232d3743ab9\Symfony\Component\Console\Exception\LogicException;
 /**
  * Represents a Question.
  *

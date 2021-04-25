@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper5686a261d89c\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper5686a261d89c\Symfony\Component\HttpFoundation\StreamedResponse;
-use _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoperd232d3743ab9\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoperd232d3743ab9\Symfony\Component\HttpFoundation\StreamedResponse;
+use _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoperd232d3743ab9\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * StreamedResponseListener is responsible for sending the Response
  * to the client.

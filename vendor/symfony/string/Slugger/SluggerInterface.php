@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper5686a261d89c\Symfony\Component\String\Slugger;
+namespace _PhpScoperd232d3743ab9\Symfony\Component\String\Slugger;
 
-use _PhpScoper5686a261d89c\Symfony\Component\String\AbstractUnicodeString;
+use _PhpScoperd232d3743ab9\Symfony\Component\String\AbstractUnicodeString;
 /**
  * Creates a URL-friendly slug from a given string.
  *

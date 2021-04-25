@@ -3,11 +3,11 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\ChangedFilesDetector;
 
-use _PhpScoper5686a261d89c\Symfony\Component\Config\FileLocator;
-use _PhpScoper5686a261d89c\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoper5686a261d89c\Symfony\Component\Config\Loader\LoaderResolver;
-use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
+use _PhpScoperd232d3743ab9\Symfony\Component\Config\FileLocator;
+use _PhpScoperd232d3743ab9\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoperd232d3743ab9\Symfony\Component\Config\Loader\LoaderResolver;
+use _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperd232d3743ab9\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
 use Symplify\EasyCodingStandard\Exception\Configuration\FileNotFoundException;
 use Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
