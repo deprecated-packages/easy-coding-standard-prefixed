@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper32abeec2fe5a\Symfony\Component\Console\Descriptor;
+namespace _PhpScoper4f608e7525a4\Symfony\Component\Console\Descriptor;
 
-use _PhpScoper32abeec2fe5a\Symfony\Component\Console\Application;
-use _PhpScoper32abeec2fe5a\Symfony\Component\Console\Command\Command;
-use _PhpScoper32abeec2fe5a\Symfony\Component\Console\Exception\CommandNotFoundException;
+use _PhpScoper4f608e7525a4\Symfony\Component\Console\Application;
+use _PhpScoper4f608e7525a4\Symfony\Component\Console\Command\Command;
+use _PhpScoper4f608e7525a4\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *

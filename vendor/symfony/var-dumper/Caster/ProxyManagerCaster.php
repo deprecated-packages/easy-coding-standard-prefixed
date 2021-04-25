@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper32abeec2fe5a\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper4f608e7525a4\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper32abeec2fe5a\ProxyManager\Proxy\ProxyInterface;
-use _PhpScoper32abeec2fe5a\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper4f608e7525a4\ProxyManager\Proxy\ProxyInterface;
+use _PhpScoper4f608e7525a4\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

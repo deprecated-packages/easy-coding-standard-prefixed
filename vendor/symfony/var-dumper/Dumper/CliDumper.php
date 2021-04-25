@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper32abeec2fe5a\Symfony\Component\VarDumper\Dumper;
+namespace _PhpScoper4f608e7525a4\Symfony\Component\VarDumper\Dumper;
 
-use _PhpScoper32abeec2fe5a\Symfony\Component\VarDumper\Cloner\Cursor;
-use _PhpScoper32abeec2fe5a\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper4f608e7525a4\Symfony\Component\VarDumper\Cloner\Cursor;
+use _PhpScoper4f608e7525a4\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * CliDumper dumps variables for command line output.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CliDumper extends \_PhpScoper32abeec2fe5a\Symfony\Component\VarDumper\Dumper\AbstractDumper
+class CliDumper extends \_PhpScoper4f608e7525a4\Symfony\Component\VarDumper\Dumper\AbstractDumper
 {
     public static $defaultColors;
     public static $defaultOutput = 'php://stdout';

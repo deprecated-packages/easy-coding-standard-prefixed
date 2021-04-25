@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Reference;
 /**
  * Resolves named arguments to their corresponding numeric index.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class ResolveNamedArgumentsPass extends \_PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveNamedArgumentsPass extends \_PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}

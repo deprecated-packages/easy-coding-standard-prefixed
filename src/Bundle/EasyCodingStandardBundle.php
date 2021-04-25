@@ -5,8 +5,8 @@ namespace Symplify\EasyCodingStandard\Bundle;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpCsFixer\Fixer\FixerInterface;
-use _PhpScoper32abeec2fe5a\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface;
 use Symplify\EasyCodingStandard\DependencyInjection\CompilerPass\ConflictingCheckersCompilerPass;
 use Symplify\EasyCodingStandard\DependencyInjection\CompilerPass\FixerWhitespaceConfigCompilerPass;

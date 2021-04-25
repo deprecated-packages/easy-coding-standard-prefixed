@@ -12,8 +12,8 @@
 namespace PhpCsFixer\Console\Output;
 
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScoper32abeec2fe5a\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper32abeec2fe5a\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper4f608e7525a4\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper4f608e7525a4\Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Output writer to show the process of a FixCommand.
  *

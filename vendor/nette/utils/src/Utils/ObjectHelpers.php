@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper32abeec2fe5a\Nette\Utils;
+namespace _PhpScoper4f608e7525a4\Nette\Utils;
 
-use _PhpScoper32abeec2fe5a\Nette;
-use _PhpScoper32abeec2fe5a\Nette\MemberAccessException;
+use _PhpScoper4f608e7525a4\Nette;
+use _PhpScoper4f608e7525a4\Nette\MemberAccessException;
 /**
  * Nette\SmartObject helpers.
  */

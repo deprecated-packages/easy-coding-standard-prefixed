@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\Config;
+namespace _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\Config;
 
-use _PhpScoper32abeec2fe5a\Symfony\Component\Config\FileLocator as BaseFileLocator;
-use _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoper4f608e7525a4\Symfony\Component\Config\FileLocator as BaseFileLocator;
+use _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\KernelInterface;
 /**
  * FileLocator uses the KernelInterface to locate resources in bundles.
  *

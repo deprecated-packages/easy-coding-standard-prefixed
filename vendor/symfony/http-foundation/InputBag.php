@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper32abeec2fe5a\Symfony\Component\HttpFoundation;
+namespace _PhpScoper4f608e7525a4\Symfony\Component\HttpFoundation;
 
-use _PhpScoper32abeec2fe5a\Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use _PhpScoper4f608e7525a4\Symfony\Component\HttpFoundation\Exception\BadRequestException;
 /**
  * InputBag is a container for user input values such as $_GET, $_POST, $_REQUEST, and $_COOKIE.
  *
  * @author Saif Eddin Gmati <saif.gmati@symfony.com>
  */
-final class InputBag extends \_PhpScoper32abeec2fe5a\Symfony\Component\HttpFoundation\ParameterBag
+final class InputBag extends \_PhpScoper4f608e7525a4\Symfony\Component\HttpFoundation\ParameterBag
 {
     /**
      * Returns a string input value by name.

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper32abeec2fe5a\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper32abeec2fe5a\Symfony\Component\HttpFoundation\Cookie;
-use _PhpScoper32abeec2fe5a\Symfony\Component\HttpFoundation\Session\Session;
-use _PhpScoper32abeec2fe5a\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScoper32abeec2fe5a\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper4f608e7525a4\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper4f608e7525a4\Symfony\Component\HttpFoundation\Cookie;
+use _PhpScoper4f608e7525a4\Symfony\Component\HttpFoundation\Session\Session;
+use _PhpScoper4f608e7525a4\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * TestSessionListener.
  *
