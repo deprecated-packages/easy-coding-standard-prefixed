@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Provider;
 
-use _PhpScoper446d16070175\Nette\Utils\Strings;
+use _PhpScoper8b3c9ad56565\Nette\Utils\Strings;
 use Symplify\SetConfigResolver\Contract\SetProviderInterface;
 use Symplify\SetConfigResolver\Exception\SetNotFoundException;
 use Symplify\SetConfigResolver\ValueObject\Set;

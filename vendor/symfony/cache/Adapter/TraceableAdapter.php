@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper446d16070175\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper8b3c9ad56565\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper446d16070175\Psr\Cache\CacheItemInterface;
-use _PhpScoper446d16070175\Symfony\Component\Cache\CacheItem;
-use _PhpScoper446d16070175\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper446d16070175\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper446d16070175\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoper446d16070175\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper8b3c9ad56565\Psr\Cache\CacheItemInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Component\Cache\CacheItem;
+use _PhpScoper8b3c9ad56565\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Contracts\Service\ResetInterface;
 /**
  * An adapter that collects data about all cache calls.
  *
@@ -23,11 +23,11 @@ use _PhpScoper446d16070175\Symfony\Contracts\Service\ResetInterface;
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TraceableAdapter implements \_PhpScoper446d16070175\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
+class TraceableAdapter implements \_PhpScoper8b3c9ad56565\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
 {
     protected $pool;
     private $calls = [];
-    public function __construct(\_PhpScoper446d16070175\Symfony\Component\Cache\Adapter\AdapterInterface $pool)
+    public function __construct(\_PhpScoper8b3c9ad56565\Symfony\Component\Cache\Adapter\AdapterInterface $pool)
     {
         $this->pool = $pool;
     }
@@ -165,7 +165,7 @@ class TraceableAdapter implements \_PhpScoper446d16070175\Symfony\Component\Cach
     {
         $event = $this->start(__FUNCTION__);
         try {
-            if ($this->pool instanceof \_PhpScoper446d16070175\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            if ($this->pool instanceof \_PhpScoper8b3c9ad56565\Symfony\Component\Cache\Adapter\AdapterInterface) {
                 return $event->result = $this->pool->clear($prefix);
             }
             return $event->result = $this->pool->clear();
@@ -249,7 +249,7 @@ class TraceableAdapter implements \_PhpScoper446d16070175\Symfony\Component\Cach
     }
     protected function start($name)
     {
-        $this->calls[] = $event = new \_PhpScoper446d16070175\Symfony\Component\Cache\Adapter\TraceableAdapterEvent();
+        $this->calls[] = $event = new \_PhpScoper8b3c9ad56565\Symfony\Component\Cache\Adapter\TraceableAdapterEvent();
         $event->name = $name;
         $event->start = \microtime(\true);
         return $event;

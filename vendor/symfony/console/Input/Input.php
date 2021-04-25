@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper446d16070175\Symfony\Component\Console\Input;
+namespace _PhpScoper8b3c9ad56565\Symfony\Component\Console\Input;
 
-use _PhpScoper446d16070175\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper446d16070175\Symfony\Component\Console\Exception\RuntimeException;
+use _PhpScoper8b3c9ad56565\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper8b3c9ad56565\Symfony\Component\Console\Exception\RuntimeException;
 /**
  * Input is the base class for all concrete Input classes.
  *
@@ -23,17 +23,17 @@ use _PhpScoper446d16070175\Symfony\Component\Console\Exception\RuntimeException;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Input implements \_PhpScoper446d16070175\Symfony\Component\Console\Input\InputInterface, \_PhpScoper446d16070175\Symfony\Component\Console\Input\StreamableInputInterface
+abstract class Input implements \_PhpScoper8b3c9ad56565\Symfony\Component\Console\Input\InputInterface, \_PhpScoper8b3c9ad56565\Symfony\Component\Console\Input\StreamableInputInterface
 {
     protected $definition;
     protected $stream;
     protected $options = [];
     protected $arguments = [];
     protected $interactive = \true;
-    public function __construct(\_PhpScoper446d16070175\Symfony\Component\Console\Input\InputDefinition $definition = null)
+    public function __construct(\_PhpScoper8b3c9ad56565\Symfony\Component\Console\Input\InputDefinition $definition = null)
     {
         if (null === $definition) {
-            $this->definition = new \_PhpScoper446d16070175\Symfony\Component\Console\Input\InputDefinition();
+            $this->definition = new \_PhpScoper8b3c9ad56565\Symfony\Component\Console\Input\InputDefinition();
         } else {
             $this->bind($definition);
             $this->validate();
@@ -42,7 +42,7 @@ abstract class Input implements \_PhpScoper446d16070175\Symfony\Component\Consol
     /**
      * {@inheritdoc}
      */
-    public function bind(\_PhpScoper446d16070175\Symfony\Component\Console\Input\InputDefinition $definition)
+    public function bind(\_PhpScoper8b3c9ad56565\Symfony\Component\Console\Input\InputDefinition $definition)
     {
         $this->arguments = [];
         $this->options = [];

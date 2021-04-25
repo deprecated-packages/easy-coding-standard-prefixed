@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper446d16070175\Symfony\Component\Process\Pipes;
+namespace _PhpScoper8b3c9ad56565\Symfony\Component\Process\Pipes;
 
-use _PhpScoper446d16070175\Symfony\Component\Process\Process;
+use _PhpScoper8b3c9ad56565\Symfony\Component\Process\Process;
 /**
  * UnixPipes implementation uses unix pipes as handles.
  *
@@ -18,7 +18,7 @@ use _PhpScoper446d16070175\Symfony\Component\Process\Process;
  *
  * @internal
  */
-class UnixPipes extends \_PhpScoper446d16070175\Symfony\Component\Process\Pipes\AbstractPipes
+class UnixPipes extends \_PhpScoper8b3c9ad56565\Symfony\Component\Process\Pipes\AbstractPipes
 {
     private $ttyMode;
     private $ptyMode;

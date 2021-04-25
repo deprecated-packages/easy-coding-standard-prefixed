@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper446d16070175\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\Builder;
 
 /**
  * This class builds validation conditions.
@@ -19,7 +19,7 @@ class ValidationBuilder
 {
     protected $node;
     public $rules = [];
-    public function __construct(\_PhpScoper446d16070175\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function __construct(\_PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->node = $node;
     }
@@ -34,6 +34,6 @@ class ValidationBuilder
             $this->rules[] = $closure;
             return $this;
         }
-        return $this->rules[] = new \_PhpScoper446d16070175\Symfony\Component\Config\Definition\Builder\ExprBuilder($this->node);
+        return $this->rules[] = new \_PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\Builder\ExprBuilder($this->node);
     }
 }

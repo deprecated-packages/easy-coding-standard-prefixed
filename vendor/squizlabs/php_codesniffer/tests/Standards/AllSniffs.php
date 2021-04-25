@@ -11,8 +11,8 @@ namespace PHP_CodeSniffer\Tests\Standards;
 
 use PHP_CodeSniffer\Util\Standards;
 use PHP_CodeSniffer\Autoload;
-use _PhpScoper446d16070175\PHPUnit\TextUI\TestRunner;
-use _PhpScoper446d16070175\PHPUnit\Framework\TestSuite;
+use _PhpScoper8b3c9ad56565\PHPUnit\TextUI\TestRunner;
+use _PhpScoper8b3c9ad56565\PHPUnit\Framework\TestSuite;
 class AllSniffs
 {
     /**

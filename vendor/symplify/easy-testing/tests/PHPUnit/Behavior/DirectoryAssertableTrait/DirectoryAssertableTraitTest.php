@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\Tests\PHPUnit\Behavior\DirectoryAssertableTrait;
 
-use _PhpScoper446d16070175\PHPUnit\Framework\ExpectationFailedException;
-use _PhpScoper446d16070175\PHPUnit\Framework\TestCase;
+use _PhpScoper8b3c9ad56565\PHPUnit\Framework\ExpectationFailedException;
+use _PhpScoper8b3c9ad56565\PHPUnit\Framework\TestCase;
 use Symplify\EasyTesting\PHPUnit\Behavior\DirectoryAssertableTrait;
 use Throwable;
 final class DirectoryAssertableTraitTest extends TestCase

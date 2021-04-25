@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper446d16070175\Symfony\Component\DependencyInjection;
+namespace _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection;
 
-use _PhpScoper446d16070175\Psr\Container\ContainerExceptionInterface;
-use _PhpScoper446d16070175\Psr\Container\NotFoundExceptionInterface;
-use _PhpScoper446d16070175\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper446d16070175\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use _PhpScoper446d16070175\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScoper446d16070175\Symfony\Contracts\Service\ServiceLocatorTrait;
-use _PhpScoper446d16070175\Symfony\Contracts\Service\ServiceProviderInterface;
-use _PhpScoper446d16070175\Symfony\Contracts\Service\ServiceSubscriberInterface;
+use _PhpScoper8b3c9ad56565\Psr\Container\ContainerExceptionInterface;
+use _PhpScoper8b3c9ad56565\Psr\Container\NotFoundExceptionInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoper8b3c9ad56565\Symfony\Contracts\Service\ServiceLocatorTrait;
+use _PhpScoper8b3c9ad56565\Symfony\Contracts\Service\ServiceProviderInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Contracts\Service\ServiceSubscriberInterface;
 /**
  * @author Robin Chalas <robin.chalas@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
@@ -62,7 +62,7 @@ class ServiceLocator implements ServiceProviderInterface
      *
      * @return static
      */
-    public function withContext(string $externalId, \_PhpScoper446d16070175\Symfony\Component\DependencyInjection\Container $container) : self
+    public function withContext(string $externalId, \_PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Container $container) : self
     {
         $locator = clone $this;
         $locator->externalId = $externalId;

@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session;
+namespace _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session;
 
-use _PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
-use _PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
-use _PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
-use _PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use _PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
-use _PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
+use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
+use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 // Help opcache.preload discover always-needed symbols
 \class_exists(AttributeBag::class);
 \class_exists(FlashBag::class);
-\class_exists(\_PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\SessionBagProxy::class);
+\class_exists(\_PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\SessionBagProxy::class);
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Drak <drak@zikula.org>
  */
-class Session implements \_PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\SessionInterface, \IteratorAggregate, \Countable
+class Session implements \_PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\SessionInterface, \IteratorAggregate, \Countable
 {
     protected $storage;
     private $flashName;
@@ -212,9 +212,9 @@ class Session implements \_PhpScoper446d16070175\Symfony\Component\HttpFoundatio
     /**
      * {@inheritdoc}
      */
-    public function registerBag(\_PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag)
+    public function registerBag(\_PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag)
     {
-        $this->storage->registerBag(new \_PhpScoper446d16070175\Symfony\Component\HttpFoundation\Session\SessionBagProxy($bag, $this->data, $this->usageIndex, $this->usageReporter));
+        $this->storage->registerBag(new \_PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\SessionBagProxy($bag, $this->data, $this->usageIndex, $this->usageReporter));
     }
     /**
      * {@inheritdoc}

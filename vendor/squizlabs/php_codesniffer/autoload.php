@@ -68,7 +68,7 @@ if (\class_exists('PHP_CodeSniffer\\Autoload', \false) === \false) {
                 }
                 if (\strpos(__DIR__, 'phar://') !== 0 && @\file_exists(__DIR__ . '/../../autoload.php') === \true) {
                     self::$composerAutoloader = (include __DIR__ . '/../../autoload.php');
-                    if (self::$composerAutoloader instanceof \_PhpScoper446d16070175\Composer\Autoload\ClassLoader) {
+                    if (self::$composerAutoloader instanceof \_PhpScoper8b3c9ad56565\Composer\Autoload\ClassLoader) {
                         self::$composerAutoloader->unregister();
                         self::$composerAutoloader->register();
                     } else {

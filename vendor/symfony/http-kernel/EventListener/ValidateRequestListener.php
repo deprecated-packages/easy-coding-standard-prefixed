@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper446d16070175\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper446d16070175\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper446d16070175\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoper446d16070175\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper8b3c9ad56565\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Validates Requests.
  *
