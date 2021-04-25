@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoper5686a261d89c\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper5686a261d89c\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields the Session.
  *

@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
-use _PhpScoper8b3c9ad56565\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper8b3c9ad56565\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper5686a261d89c\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper5686a261d89c\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Command\AbstractCheckCommand;
 use Symplify\EasyCodingStandard\SnippetFormatter\Application\SnippetFormatterApplication;
 use Symplify\EasyCodingStandard\SnippetFormatter\ValueObject\SnippetPattern;

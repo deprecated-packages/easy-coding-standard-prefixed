@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem;
 
-use _PhpScoper8b3c9ad56565\Nette\Utils\Strings;
-use _PhpScoper8b3c9ad56565\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper5686a261d89c\Nette\Utils\Strings;
+use _PhpScoper5686a261d89c\Symfony\Component\Finder\SplFileInfo;
 use Symplify\EasyTesting\PHPUnit\StaticPHPUnitEnvironment;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;

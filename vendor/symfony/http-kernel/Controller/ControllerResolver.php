@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScoper8b3c9ad56565\Psr\Log\LoggerInterface;
-use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper5686a261d89c\Psr\Log\LoggerInterface;
+use _PhpScoper5686a261d89c\Symfony\Component\HttpFoundation\Request;
 /**
  * This implementation uses the '_controller' request attribute to determine
  * the controller to execute.
@@ -19,7 +19,7 @@ use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Request;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class ControllerResolver implements \_PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+class ControllerResolver implements \_PhpScoper5686a261d89c\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
 {
     private $logger;
     public function __construct(LoggerInterface $logger = null)

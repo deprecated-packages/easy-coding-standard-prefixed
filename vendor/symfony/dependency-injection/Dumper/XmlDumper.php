@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Dumper;
+namespace _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Dumper;
 
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper8b3c9ad56565\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Alias;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper5686a261d89c\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * XmlDumper dumps a service container as an XML string.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Martin Hasoň <martin.hason@gmail.com>
  */
-class XmlDumper extends \_PhpScoper8b3c9ad56565\Symfony\Component\DependencyInjection\Dumper\Dumper
+class XmlDumper extends \_PhpScoper5686a261d89c\Symfony\Component\DependencyInjection\Dumper\Dumper
 {
     /**
      * @var \DOMDocument

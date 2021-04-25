@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper8b3c9ad56565\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\Kernel;
-use _PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\KernelInterface;
-use _PhpScoper8b3c9ad56565\Symfony\Component\VarDumper\Caster\ClassStub;
+use _PhpScoper5686a261d89c\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper5686a261d89c\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper5686a261d89c\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoper5686a261d89c\Symfony\Component\VarDumper\Caster\ClassStub;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @final
  */
-class ConfigDataCollector extends \_PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper8b3c9ad56565\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class ConfigDataCollector extends \_PhpScoper5686a261d89c\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper5686a261d89c\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     /**
      * @var KernelInterface

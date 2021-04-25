@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition;
+namespace _PhpScoper5686a261d89c\Symfony\Component\Config\Definition;
 
-use _PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use _PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
-use _PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use _PhpScoper5686a261d89c\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use _PhpScoper5686a261d89c\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScoper5686a261d89c\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * Represents an Array node in the config tree.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ArrayNode extends \_PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\BaseNode implements \_PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\PrototypeNodeInterface
+class ArrayNode extends \_PhpScoper5686a261d89c\Symfony\Component\Config\Definition\BaseNode implements \_PhpScoper5686a261d89c\Symfony\Component\Config\Definition\PrototypeNodeInterface
 {
     protected $xmlRemappings = [];
     protected $children = [];
@@ -160,7 +160,7 @@ class ArrayNode extends \_PhpScoper8b3c9ad56565\Symfony\Component\Config\Definit
      * @throws \InvalidArgumentException when the child node has no name
      * @throws \InvalidArgumentException when the child node's name is not unique
      */
-    public function addChild(\_PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\NodeInterface $node)
+    public function addChild(\_PhpScoper5686a261d89c\Symfony\Component\Config\Definition\NodeInterface $node)
     {
         $name = $node->getName();
         if (!\strlen($name)) {
@@ -300,7 +300,7 @@ class ArrayNode extends \_PhpScoper8b3c9ad56565\Symfony\Component\Config\Definit
             if (!isset($value[$singular])) {
                 continue;
             }
-            $value[$plural] = \_PhpScoper8b3c9ad56565\Symfony\Component\Config\Definition\Processor::normalizeConfig($value, $singular, $plural);
+            $value[$plural] = \_PhpScoper5686a261d89c\Symfony\Component\Config\Definition\Processor::normalizeConfig($value, $singular, $plural);
             unset($value[$singular]);
         }
         return $value;
