@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper4f608e7525a4\Composer\Semver;
+namespace _PhpScoperff1e514762b4\Composer\Semver;
 
-use _PhpScoper4f608e7525a4\Composer\Semver\Constraint\Constraint;
+use _PhpScoperff1e514762b4\Composer\Semver\Constraint\Constraint;
 class Interval
 {
     /** @var Constraint */

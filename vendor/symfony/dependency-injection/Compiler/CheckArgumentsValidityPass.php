@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * Checks if arguments of methods are properly configured.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CheckArgumentsValidityPass extends \_PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class CheckArgumentsValidityPass extends \_PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $throwExceptions;
     public function __construct(bool $throwExceptions = \true)

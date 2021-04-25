@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4f608e7525a4\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace _PhpScoperff1e514762b4\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use _PhpScoper4f608e7525a4\PHPUnit\Framework\Constraint\Constraint;
-use _PhpScoper4f608e7525a4\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperff1e514762b4\PHPUnit\Framework\Constraint\Constraint;
+use _PhpScoperff1e514762b4\Symfony\Component\HttpFoundation\Response;
 final class ResponseHeaderSame extends Constraint
 {
     private $headerName;

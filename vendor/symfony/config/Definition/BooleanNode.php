@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4f608e7525a4\Symfony\Component\Config\Definition;
+namespace _PhpScoperff1e514762b4\Symfony\Component\Config\Definition;
 
-use _PhpScoper4f608e7525a4\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScoperff1e514762b4\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 /**
  * This node represents a Boolean value in the config tree.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class BooleanNode extends \_PhpScoper4f608e7525a4\Symfony\Component\Config\Definition\ScalarNode
+class BooleanNode extends \_PhpScoperff1e514762b4\Symfony\Component\Config\Definition\ScalarNode
 {
     /**
      * {@inheritdoc}

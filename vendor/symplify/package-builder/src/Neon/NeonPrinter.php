@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Neon;
 
-use _PhpScoper4f608e7525a4\Nette\Neon\Encoder;
-use _PhpScoper4f608e7525a4\Nette\Neon\Neon;
-use _PhpScoper4f608e7525a4\Nette\Utils\Strings;
+use _PhpScoperff1e514762b4\Nette\Neon\Encoder;
+use _PhpScoperff1e514762b4\Nette\Neon\Neon;
+use _PhpScoperff1e514762b4\Nette\Utils\Strings;
 final class NeonPrinter
 {
     /**

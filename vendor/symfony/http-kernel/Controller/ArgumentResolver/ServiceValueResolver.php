@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScoperff1e514762b4\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoper4f608e7525a4\Psr\Container\ContainerInterface;
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper4f608e7525a4\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoper4f608e7525a4\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoperff1e514762b4\Psr\Container\ContainerInterface;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperff1e514762b4\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperff1e514762b4\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScoperff1e514762b4\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields a service keyed by _controller and argument name.
  *

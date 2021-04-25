@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4f608e7525a4\Symfony\Component\Console\DependencyInjection;
+namespace _PhpScoperff1e514762b4\Symfony\Component\Console\DependencyInjection;
 
-use _PhpScoper4f608e7525a4\Symfony\Component\Console\Command\Command;
-use _PhpScoper4f608e7525a4\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoperff1e514762b4\Symfony\Component\Console\Command\Command;
+use _PhpScoperff1e514762b4\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Registers console commands.
  *

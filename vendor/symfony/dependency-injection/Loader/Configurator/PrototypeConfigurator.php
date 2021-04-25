@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class PrototypeConfigurator extends \_PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class PrototypeConfigurator extends \_PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     public const FACTORY = 'load';
     use Traits\AbstractTrait;
@@ -37,7 +37,7 @@ class PrototypeConfigurator extends \_PhpScoper4f608e7525a4\Symfony\Component\De
     private $resource;
     private $excludes;
     private $allowParent;
-    public function __construct(\_PhpScoper4f608e7525a4\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, PhpFileLoader $loader, Definition $defaults, string $namespace, string $resource, bool $allowParent)
+    public function __construct(\_PhpScoperff1e514762b4\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, PhpFileLoader $loader, Definition $defaults, string $namespace, string $resource, bool $allowParent)
     {
         $definition = new Definition();
         if (!$defaults->isPublic() || !$defaults->isPrivate()) {
