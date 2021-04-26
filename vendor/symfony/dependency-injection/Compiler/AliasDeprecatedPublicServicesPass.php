@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Reference;
-final class AliasDeprecatedPublicServicesPass extends \_PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Reference;
+final class AliasDeprecatedPublicServicesPass extends \_PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $tagName;
     private $aliases = [];

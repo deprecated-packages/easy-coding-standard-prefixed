@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Strings;
 
-use _PhpScoper4575b9150b52\Nette\Utils\Strings;
+use _PhpScoper0261263ca84f\Nette\Utils\Strings;
 final class StringsConverter
 {
     /**

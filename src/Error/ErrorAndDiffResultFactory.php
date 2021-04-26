@@ -6,8 +6,16 @@ namespace Symplify\EasyCodingStandard\Error;
 use Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult;
 final class ErrorAndDiffResultFactory
 {
-    public function create(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector) : ErrorAndDiffResult
+    /**
+     * @var ErrorAndDiffCollector
+     */
+    private $errorAndDiffCollector;
+    public function __construct(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector)
     {
-        return new ErrorAndDiffResult($errorAndDiffCollector->getErrors(), $errorAndDiffCollector->getFileDiffs(), $errorAndDiffCollector->getSystemErrors());
+        $this->errorAndDiffCollector = $errorAndDiffCollector;
+    }
+    public function create() : ErrorAndDiffResult
+    {
+        return new ErrorAndDiffResult($this->errorAndDiffCollector->getErrors(), $this->errorAndDiffCollector->getFileDiffs(), $this->errorAndDiffCollector->getSystemErrors());
     }
 }

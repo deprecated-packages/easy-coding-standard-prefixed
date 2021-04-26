@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4575b9150b52\Symfony\Component\Console;
+namespace _PhpScoper0261263ca84f\Symfony\Component\Console;
 
 class Terminal
 {

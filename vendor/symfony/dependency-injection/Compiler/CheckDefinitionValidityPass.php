@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Loader\FileLoader;
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Loader\FileLoader;
 /**
  * This pass validates each definition individually only taking the information
  * into account which is contained in the definition itself.
@@ -26,7 +26,7 @@ use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Loader\FileLoad
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class CheckDefinitionValidityPass implements \_PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CheckDefinitionValidityPass implements \_PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * Processes the ContainerBuilder to validate the Definition.

@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\DependencyInjection\Extension;
 
-use _PhpScoper4575b9150b52\Symfony\Component\Config\FileLocator;
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoper0261263ca84f\Symfony\Component\Config\FileLocator;
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 final class SkipperExtension extends Extension
 {
     /**

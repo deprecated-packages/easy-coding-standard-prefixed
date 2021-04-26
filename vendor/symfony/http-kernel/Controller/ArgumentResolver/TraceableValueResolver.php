@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoper4575b9150b52\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
-use _PhpScoper4575b9150b52\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoper0261263ca84f\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * Provides timing information via the stopwatch.
  *

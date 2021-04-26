@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper4575b9150b52\Psr\Log\LoggerInterface;
-use _PhpScoper4575b9150b52\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\Kernel;
-use _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScoper4575b9150b52\Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use _PhpScoper4575b9150b52\Symfony\Component\Routing\Exception\NoConfigurationException;
-use _PhpScoper4575b9150b52\Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use _PhpScoper4575b9150b52\Symfony\Component\Routing\Matcher\RequestMatcherInterface;
-use _PhpScoper4575b9150b52\Symfony\Component\Routing\Matcher\UrlMatcherInterface;
-use _PhpScoper4575b9150b52\Symfony\Component\Routing\RequestContext;
-use _PhpScoper4575b9150b52\Symfony\Component\Routing\RequestContextAwareInterface;
+use _PhpScoper0261263ca84f\Psr\Log\LoggerInterface;
+use _PhpScoper0261263ca84f\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper0261263ca84f\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper0261263ca84f\Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use _PhpScoper0261263ca84f\Symfony\Component\Routing\Exception\NoConfigurationException;
+use _PhpScoper0261263ca84f\Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use _PhpScoper0261263ca84f\Symfony\Component\Routing\Matcher\RequestMatcherInterface;
+use _PhpScoper0261263ca84f\Symfony\Component\Routing\Matcher\UrlMatcherInterface;
+use _PhpScoper0261263ca84f\Symfony\Component\Routing\RequestContext;
+use _PhpScoper0261263ca84f\Symfony\Component\Routing\RequestContextAwareInterface;
 /**
  * Initializes the context from the request and sets request attributes based on a matching route.
  *
