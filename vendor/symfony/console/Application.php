@@ -8,44 +8,44 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd51690aa3091\Symfony\Component\Console;
+namespace _PhpScoper8a1ea80774eb\Symfony\Component\Console;
 
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Command\Command;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Command\HelpCommand;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Command\ListCommand;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Command\SignalableCommandInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Event\ConsoleCommandEvent;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Event\ConsoleSignalEvent;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Event\ConsoleTerminateEvent;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Exception\CommandNotFoundException;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Exception\ExceptionInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Exception\LogicException;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Exception\NamespaceNotFoundException;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Exception\RuntimeException;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Helper\DebugFormatterHelper;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Helper\FormatterHelper;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Helper\Helper;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Helper\HelperSet;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Helper\ProcessHelper;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Helper\QuestionHelper;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Input\ArgvInput;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Input\ArrayInput;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Input\InputAwareInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Output\ConsoleOutput;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\SignalRegistry\SignalRegistry;
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoperd51690aa3091\Symfony\Component\ErrorHandler\ErrorHandler;
-use _PhpScoperd51690aa3091\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use _PhpScoperd51690aa3091\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Command\Command;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Command\HelpCommand;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Command\ListCommand;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Command\SignalableCommandInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Event\ConsoleCommandEvent;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Event\ConsoleSignalEvent;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Exception\CommandNotFoundException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Exception\ExceptionInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Exception\LogicException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Exception\NamespaceNotFoundException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Exception\RuntimeException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Helper\DebugFormatterHelper;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Helper\FormatterHelper;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Helper\Helper;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Helper\HelperSet;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Helper\ProcessHelper;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Helper\QuestionHelper;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Input\ArgvInput;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Input\ArrayInput;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Input\InputAwareInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Output\ConsoleOutput;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\SignalRegistry\SignalRegistry;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper8a1ea80774eb\Symfony\Component\ErrorHandler\ErrorHandler;
+use _PhpScoper8a1ea80774eb\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Contracts\Service\ResetInterface;
 /**
  * An Application is the container for a collection of commands.
  *
@@ -84,7 +84,7 @@ class Application implements ResetInterface
     {
         $this->name = $name;
         $this->version = $version;
-        $this->terminal = new \_PhpScoperd51690aa3091\Symfony\Component\Console\Terminal();
+        $this->terminal = new \_PhpScoper8a1ea80774eb\Symfony\Component\Console\Terminal();
         $this->defaultCommand = 'list';
         if (\defined('SIGINT') && SignalRegistry::isSupported()) {
             $this->signalRegistry = new SignalRegistry();
@@ -226,7 +226,7 @@ class Application implements ResetInterface
             if (!($e instanceof CommandNotFoundException && !$e instanceof NamespaceNotFoundException) || 1 !== \count($alternatives = $e->getAlternatives()) || !$input->isInteractive()) {
                 if (null !== $this->dispatcher) {
                     $event = new ConsoleErrorEvent($input, $output, $e);
-                    $this->dispatcher->dispatch($event, \_PhpScoperd51690aa3091\Symfony\Component\Console\ConsoleEvents::ERROR);
+                    $this->dispatcher->dispatch($event, \_PhpScoper8a1ea80774eb\Symfony\Component\Console\ConsoleEvents::ERROR);
                     if (0 === $event->getExitCode()) {
                         return 0;
                     }
@@ -240,7 +240,7 @@ class Application implements ResetInterface
             if (!$style->confirm(\sprintf('Do you want to run "%s" instead? ', $alternative), \false)) {
                 if (null !== $this->dispatcher) {
                     $event = new ConsoleErrorEvent($input, $output, $e);
-                    $this->dispatcher->dispatch($event, \_PhpScoperd51690aa3091\Symfony\Component\Console\ConsoleEvents::ERROR);
+                    $this->dispatcher->dispatch($event, \_PhpScoper8a1ea80774eb\Symfony\Component\Console\ConsoleEvents::ERROR);
                     return $event->getExitCode();
                 }
                 return 1;
@@ -808,7 +808,7 @@ class Application implements ResetInterface
                 foreach ($this->signalsToDispatchEvent as $signal) {
                     $event = new ConsoleSignalEvent($command, $input, $output, $signal);
                     $this->signalRegistry->register($signal, function ($signal, $hasNext) use($event) {
-                        $this->dispatcher->dispatch($event, \_PhpScoperd51690aa3091\Symfony\Component\Console\ConsoleEvents::SIGNAL);
+                        $this->dispatcher->dispatch($event, \_PhpScoper8a1ea80774eb\Symfony\Component\Console\ConsoleEvents::SIGNAL);
                         // No more handlers, we try to simulate PHP default behavior
                         if (!$hasNext) {
                             if (!\in_array($signal, [\SIGUSR1, \SIGUSR2], \true)) {
@@ -835,7 +835,7 @@ class Application implements ResetInterface
         $event = new ConsoleCommandEvent($command, $input, $output);
         $e = null;
         try {
-            $this->dispatcher->dispatch($event, \_PhpScoperd51690aa3091\Symfony\Component\Console\ConsoleEvents::COMMAND);
+            $this->dispatcher->dispatch($event, \_PhpScoper8a1ea80774eb\Symfony\Component\Console\ConsoleEvents::COMMAND);
             if ($event->commandShouldRun()) {
                 $exitCode = $command->run($input, $output);
             } else {
@@ -843,14 +843,14 @@ class Application implements ResetInterface
             }
         } catch (\Throwable $e) {
             $event = new ConsoleErrorEvent($input, $output, $e, $command);
-            $this->dispatcher->dispatch($event, \_PhpScoperd51690aa3091\Symfony\Component\Console\ConsoleEvents::ERROR);
+            $this->dispatcher->dispatch($event, \_PhpScoper8a1ea80774eb\Symfony\Component\Console\ConsoleEvents::ERROR);
             $e = $event->getError();
             if (0 === ($exitCode = $event->getExitCode())) {
                 $e = null;
             }
         }
         $event = new ConsoleTerminateEvent($command, $input, $output, $exitCode);
-        $this->dispatcher->dispatch($event, \_PhpScoperd51690aa3091\Symfony\Component\Console\ConsoleEvents::TERMINATE);
+        $this->dispatcher->dispatch($event, \_PhpScoper8a1ea80774eb\Symfony\Component\Console\ConsoleEvents::TERMINATE);
         if (null !== $e) {
             throw $e;
         }

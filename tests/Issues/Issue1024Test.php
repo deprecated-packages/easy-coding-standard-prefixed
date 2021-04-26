@@ -25,7 +25,7 @@ final class Issue1024Test extends AbstractCheckerTestCase
     {
         (yield [new SmartFileInfo(__DIR__ . '/Fixture/fixture1024.php.inc'), new SmartFileInfo(__DIR__ . '/Fixture/fixture1024_2.php.inc')]);
     }
-    protected function provideConfig() : string
+    public function provideConfig() : string
     {
         return __DIR__ . '/config/config1024.php';
     }

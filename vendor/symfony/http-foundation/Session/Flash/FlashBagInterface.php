@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\Session\Flash;
+namespace _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\Session\Flash;
 
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * FlashBagInterface.
  *

@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File;
+namespace _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File;
 
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException;
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException;
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException;
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\Exception\NoFileException;
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException;
-use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\Exception\PartialFileException;
-use _PhpScoperd51690aa3091\Symfony\Component\Mime\MimeTypes;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\Exception\CannotWriteFileException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\Exception\FormSizeFileException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\Exception\IniSizeFileException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\Exception\NoFileException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\Exception\NoTmpDirFileException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\Exception\PartialFileException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Mime\MimeTypes;
 /**
  * A file uploaded through a form.
  *
@@ -27,7 +27,7 @@ use _PhpScoperd51690aa3091\Symfony\Component\Mime\MimeTypes;
  * @author Florian Eckerstorfer <florian@eckerstorfer.org>
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class UploadedFile extends \_PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\File\File
+class UploadedFile extends \_PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\File\File
 {
     private $test;
     private $originalName;

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class ResolveFactoryClassPass extends \_PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveFactoryClassPass extends \_PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}

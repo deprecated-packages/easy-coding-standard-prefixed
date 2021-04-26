@@ -25,7 +25,7 @@ final class Issue777Test extends AbstractCheckerTestCase
     {
         (yield [new SmartFileInfo(__DIR__ . '/Fixture/fixture777.php.inc')]);
     }
-    protected function provideConfig() : string
+    public function provideConfig() : string
     {
         return __DIR__ . '/config/config777.php';
     }

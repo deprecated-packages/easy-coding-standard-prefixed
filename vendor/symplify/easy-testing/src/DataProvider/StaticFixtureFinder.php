@@ -4,9 +4,9 @@ declare (strict_types=1);
 namespace Symplify\EasyTesting\DataProvider;
 
 use Iterator;
-use _PhpScoperd51690aa3091\Nette\Utils\Strings;
-use _PhpScoperd51690aa3091\Symfony\Component\Finder\Finder;
-use _PhpScoperd51690aa3091\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper8a1ea80774eb\Nette\Utils\Strings;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Finder\Finder;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Finder\SplFileInfo;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;

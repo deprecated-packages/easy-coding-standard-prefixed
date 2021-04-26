@@ -5981,7 +5981,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/easy-coding-standard-tester",
-                "reference": "56d63c8f64af989589c590dec80340fe8d0e76ce"
+                "reference": "5850fbcc6035058f8ec2f2d8ca8e530196802dce"
             },
             "require": {
                 "php": ">=7.3",
@@ -5989,8 +5989,6 @@
                 "symplify/easy-coding-standard": "dev-main",
                 "symplify/easy-testing": "dev-main",
                 "symplify/package-builder": "dev-main",
-                "symplify/php-config-printer": "dev-main",
-                "symplify/skipper": "dev-main",
                 "symplify/smart-file-system": "dev-main"
             },
             "type": "library",

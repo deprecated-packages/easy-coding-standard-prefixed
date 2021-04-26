@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd51690aa3091\Symfony\Component\EventDispatcher;
+namespace _PhpScoper8a1ea80774eb\Symfony\Component\EventDispatcher;
 
-use _PhpScoperd51690aa3091\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScoper8a1ea80774eb\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Event encapsulation class.
  *

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd51690aa3091\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper8a1ea80774eb\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoperd51690aa3091\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper8a1ea80774eb\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Represents a PHP constant and its value.
  *

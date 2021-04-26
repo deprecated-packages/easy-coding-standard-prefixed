@@ -8,34 +8,34 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Loader;
+namespace _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Loader;
 
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperd51690aa3091\Symfony\Component\ExpressionLanguage\Expression;
-use _PhpScoperd51690aa3091\Symfony\Component\Yaml\Exception\ParseException;
-use _PhpScoperd51690aa3091\Symfony\Component\Yaml\Parser as YamlParser;
-use _PhpScoperd51690aa3091\Symfony\Component\Yaml\Tag\TaggedValue;
-use _PhpScoperd51690aa3091\Symfony\Component\Yaml\Yaml;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Alias;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper8a1ea80774eb\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Yaml\Exception\ParseException;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Yaml\Parser as YamlParser;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Yaml\Tag\TaggedValue;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Yaml\Yaml;
 /**
  * YamlFileLoader loads YAML files service definitions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class YamlFileLoader extends \_PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Loader\FileLoader
+class YamlFileLoader extends \_PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Loader\FileLoader
 {
     private const SERVICE_KEYWORDS = ['alias' => 'alias', 'parent' => 'parent', 'class' => 'class', 'shared' => 'shared', 'synthetic' => 'synthetic', 'lazy' => 'lazy', 'public' => 'public', 'abstract' => 'abstract', 'deprecated' => 'deprecated', 'factory' => 'factory', 'file' => 'file', 'arguments' => 'arguments', 'properties' => 'properties', 'configurator' => 'configurator', 'calls' => 'calls', 'tags' => 'tags', 'decorates' => 'decorates', 'decoration_inner_name' => 'decoration_inner_name', 'decoration_priority' => 'decoration_priority', 'decoration_on_invalid' => 'decoration_on_invalid', 'autowire' => 'autowire', 'autoconfigure' => 'autoconfigure', 'bind' => 'bind'];
     private const PROTOTYPE_KEYWORDS = ['resource' => 'resource', 'namespace' => 'namespace', 'exclude' => 'exclude', 'parent' => 'parent', 'shared' => 'shared', 'lazy' => 'lazy', 'public' => 'public', 'abstract' => 'abstract', 'deprecated' => 'deprecated', 'factory' => 'factory', 'arguments' => 'arguments', 'properties' => 'properties', 'configurator' => 'configurator', 'calls' => 'calls', 'tags' => 'tags', 'autowire' => 'autowire', 'autoconfigure' => 'autoconfigure', 'bind' => 'bind'];
@@ -532,7 +532,7 @@ class YamlFileLoader extends \_PhpScoperd51690aa3091\Symfony\Component\Dependenc
      */
     protected function loadFile($file)
     {
-        if (!\class_exists(\_PhpScoperd51690aa3091\Symfony\Component\Yaml\Parser::class)) {
+        if (!\class_exists(\_PhpScoper8a1ea80774eb\Symfony\Component\Yaml\Parser::class)) {
             throw new RuntimeException('Unable to load YAML config files as the Symfony Yaml Component is not installed.');
         }
         if (!\stream_is_local($file)) {

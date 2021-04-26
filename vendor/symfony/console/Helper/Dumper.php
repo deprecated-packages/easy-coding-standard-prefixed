@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd51690aa3091\Symfony\Component\Console\Helper;
+namespace _PhpScoper8a1ea80774eb\Symfony\Component\Console\Helper;
 
-use _PhpScoperd51690aa3091\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use _PhpScoperd51690aa3091\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScoperd51690aa3091\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScoper8a1ea80774eb\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use _PhpScoper8a1ea80774eb\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoper8a1ea80774eb\Symfony\Component\VarDumper\Dumper\CliDumper;
 /**
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
