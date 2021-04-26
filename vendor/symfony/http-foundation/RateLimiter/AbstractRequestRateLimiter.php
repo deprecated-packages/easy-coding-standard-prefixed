@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\RateLimiter;
+namespace _PhpScoper4c15c250a340\Symfony\Component\HttpFoundation\RateLimiter;
 
-use _PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperd2a667bd5a98\Symfony\Component\RateLimiter\LimiterInterface;
-use _PhpScoperd2a667bd5a98\Symfony\Component\RateLimiter\Policy\NoLimiter;
-use _PhpScoperd2a667bd5a98\Symfony\Component\RateLimiter\RateLimit;
+use _PhpScoper4c15c250a340\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper4c15c250a340\Symfony\Component\RateLimiter\LimiterInterface;
+use _PhpScoper4c15c250a340\Symfony\Component\RateLimiter\Policy\NoLimiter;
+use _PhpScoper4c15c250a340\Symfony\Component\RateLimiter\RateLimit;
 /**
  * An implementation of RequestRateLimiterInterface that
  * fits most use-cases.
@@ -22,7 +22,7 @@ use _PhpScoperd2a667bd5a98\Symfony\Component\RateLimiter\RateLimit;
  *
  * @experimental in 5.2
  */
-abstract class AbstractRequestRateLimiter implements \_PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface
+abstract class AbstractRequestRateLimiter implements \_PhpScoper4c15c250a340\Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface
 {
     public function consume(Request $request) : RateLimit
     {

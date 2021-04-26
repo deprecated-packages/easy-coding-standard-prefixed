@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition;
+namespace _PhpScoper4c15c250a340\Symfony\Component\Config\Definition;
 
-use _PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use _PhpScoper4c15c250a340\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 /**
  * This node represents a value of variable type in the config tree.
  *
@@ -19,7 +19,7 @@ use _PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\Exception\Invalid
  *
  * @author Jeremy Mikola <jmikola@gmail.com>
  */
-class VariableNode extends \_PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\BaseNode implements \_PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\PrototypeNodeInterface
+class VariableNode extends \_PhpScoper4c15c250a340\Symfony\Component\Config\Definition\BaseNode implements \_PhpScoper4c15c250a340\Symfony\Component\Config\Definition\PrototypeNodeInterface
 {
     protected $defaultValueSet = \false;
     protected $defaultValue;

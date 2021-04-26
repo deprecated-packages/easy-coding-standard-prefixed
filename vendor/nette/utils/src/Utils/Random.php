@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperd2a667bd5a98\Nette\Utils;
+namespace _PhpScoper4c15c250a340\Nette\Utils;
 
-use _PhpScoperd2a667bd5a98\Nette;
+use _PhpScoper4c15c250a340\Nette;
 /**
  * Secure random string generator.
  */

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\VarDumper\Command\Descriptor;
+namespace _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Command\Descriptor;
 
-use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperd2a667bd5a98\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper4c15c250a340\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Cloner\Data;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */

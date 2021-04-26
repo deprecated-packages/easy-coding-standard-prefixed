@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\Cache\DataCollector;
+namespace _PhpScoper4c15c250a340\Symfony\Component\Cache\DataCollector;
 
-use _PhpScoperd2a667bd5a98\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use _PhpScoperd2a667bd5a98\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
-use _PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperd2a667bd5a98\Symfony\Component\HttpKernel\DataCollector\DataCollector;
-use _PhpScoperd2a667bd5a98\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
+use _PhpScoper4c15c250a340\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use _PhpScoper4c15c250a340\Symfony\Component\Cache\Adapter\TraceableAdapterEvent;
+use _PhpScoper4c15c250a340\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper4c15c250a340\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper4c15c250a340\Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use _PhpScoper4c15c250a340\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
 /**
  * @author Aaron Scherer <aequasi@gmail.com>
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>

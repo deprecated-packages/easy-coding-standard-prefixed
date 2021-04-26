@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver;
+namespace _PhpScoper4c15c250a340\Symfony\Component\OptionsResolver;
 
-use _PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Exception\AccessException;
-use _PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
-use _PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
-use _PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Exception\NoSuchOptionException;
-use _PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException;
-use _PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
+use _PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Exception\AccessException;
+use _PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
+use _PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
+use _PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Exception\NoSuchOptionException;
+use _PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Exception\OptionDefinitionException;
+use _PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 /**
  * Validates options and merges them with default values.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class OptionsResolver implements \_PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Options
+class OptionsResolver implements \_PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Options
 {
     private const VALIDATION_FUNCTIONS = ['bool' => 'is_bool', 'boolean' => 'is_bool', 'int' => 'is_int', 'integer' => 'is_int', 'long' => 'is_int', 'float' => 'is_float', 'double' => 'is_float', 'real' => 'is_float', 'numeric' => 'is_numeric', 'string' => 'is_string', 'scalar' => 'is_scalar', 'array' => 'is_array', 'iterable' => 'is_iterable', 'countable' => 'is_countable', 'callable' => 'is_callable', 'object' => 'is_object', 'resource' => 'is_resource'];
     /**
@@ -161,7 +161,7 @@ class OptionsResolver implements \_PhpScoperd2a667bd5a98\Symfony\Component\Optio
         if ($value instanceof \Closure) {
             $reflClosure = new \ReflectionFunction($value);
             $params = $reflClosure->getParameters();
-            if (isset($params[0]) && \_PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Options::class === $this->getParameterClassName($params[0])) {
+            if (isset($params[0]) && \_PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Options::class === $this->getParameterClassName($params[0])) {
                 // Initialize the option if no previous value exists
                 if (!isset($this->defaults[$option])) {
                     $this->defaults[$option] = null;
@@ -177,7 +177,7 @@ class OptionsResolver implements \_PhpScoperd2a667bd5a98\Symfony\Component\Optio
                 unset($this->resolved[$option], $this->nested[$option]);
                 return $this;
             }
-            if (isset($params[0]) && null !== ($type = $params[0]->getType()) && self::class === $type->getName() && (!isset($params[1]) || ($type = $params[1]->getType()) instanceof \ReflectionNamedType && \_PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\Options::class === $type->getName())) {
+            if (isset($params[0]) && null !== ($type = $params[0]->getType()) && self::class === $type->getName() && (!isset($params[1]) || ($type = $params[1]->getType()) instanceof \ReflectionNamedType && \_PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\Options::class === $type->getName())) {
                 // Store closure for later evaluation
                 $this->nested[$option][] = $value;
                 $this->defaults[$option] = [];
@@ -633,12 +633,12 @@ class OptionsResolver implements \_PhpScoperd2a667bd5a98\Symfony\Component\Optio
     /**
      * Defines an option configurator with the given name.
      */
-    public function define(string $option) : \_PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\OptionConfigurator
+    public function define(string $option) : \_PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\OptionConfigurator
     {
         if (isset($this->defined[$option])) {
             throw new OptionDefinitionException(\sprintf('The option "%s" is already defined.', $option));
         }
-        return new \_PhpScoperd2a667bd5a98\Symfony\Component\OptionsResolver\OptionConfigurator($option, $this);
+        return new \_PhpScoper4c15c250a340\Symfony\Component\OptionsResolver\OptionConfigurator($option, $this);
     }
     /**
      * Sets an info message for an option.

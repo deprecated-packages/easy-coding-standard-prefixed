@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
 /**
  * Checks your services for circular references.
  *
@@ -22,7 +22,7 @@ use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Exception\Servi
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class CheckCircularReferencesPass implements \_PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class CheckCircularReferencesPass implements \_PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $currentPath;
     private $checkedNodes;

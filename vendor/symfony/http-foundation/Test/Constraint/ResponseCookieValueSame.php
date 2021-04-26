@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace _PhpScoper4c15c250a340\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use _PhpScoperd2a667bd5a98\PHPUnit\Framework\Constraint\Constraint;
-use _PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\Cookie;
-use _PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper4c15c250a340\PHPUnit\Framework\Constraint\Constraint;
+use _PhpScoper4c15c250a340\Symfony\Component\HttpFoundation\Cookie;
+use _PhpScoper4c15c250a340\Symfony\Component\HttpFoundation\Response;
 final class ResponseCookieValueSame extends Constraint
 {
     private $name;

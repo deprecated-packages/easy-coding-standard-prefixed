@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\Config;
+namespace _PhpScoper4c15c250a340\Symfony\Component\Config;
 
-use _PhpScoperd2a667bd5a98\Symfony\Component\Config\Resource\SelfCheckingResourceChecker;
+use _PhpScoper4c15c250a340\Symfony\Component\Config\Resource\SelfCheckingResourceChecker;
 /**
  * ConfigCache caches arbitrary content in files on disk.
  *
@@ -21,7 +21,7 @@ use _PhpScoperd2a667bd5a98\Symfony\Component\Config\Resource\SelfCheckingResourc
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ConfigCache extends \_PhpScoperd2a667bd5a98\Symfony\Component\Config\ResourceCheckerConfigCache
+class ConfigCache extends \_PhpScoper4c15c250a340\Symfony\Component\Config\ResourceCheckerConfigCache
 {
     private $debug;
     /**

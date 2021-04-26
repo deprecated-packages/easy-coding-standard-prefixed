@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperd2a667bd5a98\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper4c15c250a340\Symfony\Component\ExpressionLanguage\Expression;
 abstract class AbstractConfigurator
 {
     public const FACTORY = 'unknown';
@@ -60,10 +60,10 @@ abstract class AbstractConfigurator
         if (self::$valuePreProcessor) {
             $value = (self::$valuePreProcessor)($value, $allowServices);
         }
-        if ($value instanceof \_PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator) {
+        if ($value instanceof \_PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator) {
             return new Reference($value->id, $value->invalidBehavior);
         }
-        if ($value instanceof \_PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator) {
+        if ($value instanceof \_PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator) {
             $def = $value->definition;
             $value->definition = null;
             return $def;

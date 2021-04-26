@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Compiler;
 
-trigger_deprecation('symfony/dependency-injection', '5.2', 'The "%s" class is deprecated.', \_PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Compiler\ResolvePrivatesPass::class);
-use _PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\ContainerBuilder;
+trigger_deprecation('symfony/dependency-injection', '5.2', 'The "%s" class is deprecated.', \_PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Compiler\ResolvePrivatesPass::class);
+use _PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @deprecated since Symfony 5.2
  */
-class ResolvePrivatesPass implements \_PhpScoperd2a667bd5a98\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolvePrivatesPass implements \_PhpScoper4c15c250a340\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}

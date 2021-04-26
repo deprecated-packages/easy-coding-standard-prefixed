@@ -32,12 +32,12 @@ use PhpCsFixer\StdinFileInfo;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Utils;
 use PhpCsFixer\WordMatcher;
-use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Command\Command;
-use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper4c15c250a340\Symfony\Component\Console\Command\Command;
+use _PhpScoper4c15c250a340\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper4c15c250a340\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper4c15c250a340\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper4c15c250a340\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper4c15c250a340\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
