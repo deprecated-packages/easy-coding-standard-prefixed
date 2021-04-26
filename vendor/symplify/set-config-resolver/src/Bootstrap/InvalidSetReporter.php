@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Bootstrap;
 
-use _PhpScoper85e989d55df2\Nette\Utils\ObjectHelpers;
-use _PhpScoper85e989d55df2\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoperc5e9eb67638f\Nette\Utils\ObjectHelpers;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
 use Symplify\SetConfigResolver\Exception\SetNotFoundException;
 /**

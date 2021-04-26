@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\VarExporter;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\VarExporter;
 
-use _PhpScoper85e989d55df2\Symfony\Component\VarExporter\Exception\ExceptionInterface;
-use _PhpScoper85e989d55df2\Symfony\Component\VarExporter\Internal\Exporter;
-use _PhpScoper85e989d55df2\Symfony\Component\VarExporter\Internal\Hydrator;
-use _PhpScoper85e989d55df2\Symfony\Component\VarExporter\Internal\Registry;
-use _PhpScoper85e989d55df2\Symfony\Component\VarExporter\Internal\Values;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarExporter\Exception\ExceptionInterface;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarExporter\Internal\Exporter;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarExporter\Internal\Hydrator;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarExporter\Internal\Registry;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarExporter\Internal\Values;
 /**
  * Exports serializable PHP values to PHP code.
  *

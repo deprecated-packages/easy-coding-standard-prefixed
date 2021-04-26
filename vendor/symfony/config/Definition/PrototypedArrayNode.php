@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\Config\Definition;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition;
 
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Definition\Exception\DuplicateKeyException;
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Definition\Exception\Exception;
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\Exception\DuplicateKeyException;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\Exception\Exception;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\Exception\UnsetKeyException;
 /**
  * Represents a prototyped Array node in the config tree.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class PrototypedArrayNode extends \_PhpScoper85e989d55df2\Symfony\Component\Config\Definition\ArrayNode
+class PrototypedArrayNode extends \_PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\ArrayNode
 {
     protected $prototype;
     protected $keyAttribute;
@@ -125,7 +125,7 @@ class PrototypedArrayNode extends \_PhpScoper85e989d55df2\Symfony\Component\Conf
     /**
      * Sets the node prototype.
      */
-    public function setPrototype(\_PhpScoper85e989d55df2\Symfony\Component\Config\Definition\PrototypeNodeInterface $node)
+    public function setPrototype(\_PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\PrototypeNodeInterface $node)
     {
         $this->prototype = $node;
     }
@@ -143,7 +143,7 @@ class PrototypedArrayNode extends \_PhpScoper85e989d55df2\Symfony\Component\Conf
      *
      * @throws Exception
      */
-    public function addChild(\_PhpScoper85e989d55df2\Symfony\Component\Config\Definition\NodeInterface $node)
+    public function addChild(\_PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\NodeInterface $node)
     {
         throw new Exception('A prototyped array node can not have concrete children.');
     }
@@ -213,7 +213,7 @@ class PrototypedArrayNode extends \_PhpScoper85e989d55df2\Symfony\Component\Conf
                     // if only "value" is left
                     if (\array_keys($v) === ['value']) {
                         $v = $v['value'];
-                        if ($this->prototype instanceof \_PhpScoper85e989d55df2\Symfony\Component\Config\Definition\ArrayNode && ($children = $this->prototype->getChildren()) && \array_key_exists('value', $children)) {
+                        if ($this->prototype instanceof \_PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\ArrayNode && ($children = $this->prototype->getChildren()) && \array_key_exists('value', $children)) {
                             $valuePrototype = \current($this->valuePrototypes) ?: clone $children['value'];
                             $valuePrototype->parent = $this;
                             $originalClosures = $this->prototype->normalizationClosures;

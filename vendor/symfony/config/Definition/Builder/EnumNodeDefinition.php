@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Definition\EnumNode;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\EnumNode;
 /**
  * Enum Node Definition.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class EnumNodeDefinition extends \_PhpScoper85e989d55df2\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+class EnumNodeDefinition extends \_PhpScoperc5e9eb67638f\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
 {
     private $values;
     /**

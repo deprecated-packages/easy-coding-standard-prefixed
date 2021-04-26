@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\ErrorHandler;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\ErrorHandler;
 
-use _PhpScoper85e989d55df2\Psr\Log\AbstractLogger;
+use _PhpScoperc5e9eb67638f\Psr\Log\AbstractLogger;
 /**
  * A buffering logger that stacks logs for later.
  *

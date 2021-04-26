@@ -1,10 +1,10 @@
 <?php
 
-namespace _PhpScoper85e989d55df2\Psr\Log\Test;
+namespace _PhpScoperc5e9eb67638f\Psr\Log\Test;
 
-use _PhpScoper85e989d55df2\Psr\Log\LoggerInterface;
-use _PhpScoper85e989d55df2\Psr\Log\LogLevel;
-use _PhpScoper85e989d55df2\PHPUnit\Framework\TestCase;
+use _PhpScoperc5e9eb67638f\Psr\Log\LoggerInterface;
+use _PhpScoperc5e9eb67638f\Psr\Log\LogLevel;
+use _PhpScoperc5e9eb67638f\PHPUnit\Framework\TestCase;
 /**
  * Provides a base test class for ensuring compliance with the LoggerInterface.
  *
@@ -29,7 +29,7 @@ abstract class LoggerInterfaceTest extends TestCase
     public abstract function getLogs();
     public function testImplements()
     {
-        $this->assertInstanceOf('_PhpScoper85e989d55df2\\Psr\\Log\\LoggerInterface', $this->getLogger());
+        $this->assertInstanceOf('_PhpScoperc5e9eb67638f\\Psr\\Log\\LoggerInterface', $this->getLogger());
     }
     /**
      * @dataProvider provideLevelsAndMessages
@@ -64,9 +64,9 @@ abstract class LoggerInterfaceTest extends TestCase
     public function testObjectCastToString()
     {
         if (\method_exists($this, 'createPartialMock')) {
-            $dummy = $this->createPartialMock('_PhpScoper85e989d55df2\\Psr\\Log\\Test\\DummyTest', array('__toString'));
+            $dummy = $this->createPartialMock('_PhpScoperc5e9eb67638f\\Psr\\Log\\Test\\DummyTest', array('__toString'));
         } else {
-            $dummy = $this->getMock('_PhpScoper85e989d55df2\\Psr\\Log\\Test\\DummyTest', array('__toString'));
+            $dummy = $this->getMock('_PhpScoperc5e9eb67638f\\Psr\\Log\\Test\\DummyTest', array('__toString'));
         }
         $dummy->expects($this->once())->method('__toString')->will($this->returnValue('DUMMY'));
         $this->getLogger()->warning($dummy);
@@ -77,7 +77,7 @@ abstract class LoggerInterfaceTest extends TestCase
     {
         $closed = \fopen('php://memory', 'r');
         \fclose($closed);
-        $context = array('bool' => \true, 'null' => null, 'string' => 'Foo', 'int' => 0, 'float' => 0.5, 'nested' => array('with object' => new \_PhpScoper85e989d55df2\Psr\Log\Test\DummyTest()), 'object' => new \DateTime(), 'resource' => \fopen('php://memory', 'r'), 'closed' => $closed);
+        $context = array('bool' => \true, 'null' => null, 'string' => 'Foo', 'int' => 0, 'float' => 0.5, 'nested' => array('with object' => new \_PhpScoperc5e9eb67638f\Psr\Log\Test\DummyTest()), 'object' => new \DateTime(), 'resource' => \fopen('php://memory', 'r'), 'closed' => $closed);
         $this->getLogger()->warning('Crazy context data', $context);
         $expected = array('warning Crazy context data');
         $this->assertEquals($expected, $this->getLogs());

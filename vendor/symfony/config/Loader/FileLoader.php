@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\Config\Loader;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\Config\Loader;
 
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException;
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Exception\LoaderLoadException;
-use _PhpScoper85e989d55df2\Symfony\Component\Config\FileLocatorInterface;
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Resource\FileExistenceResource;
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Resource\GlobResource;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Exception\LoaderLoadException;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\FileLocatorInterface;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Resource\FileExistenceResource;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Resource\GlobResource;
 /**
  * FileLoader is the abstract class used by all built-in loaders that are file based.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class FileLoader extends \_PhpScoper85e989d55df2\Symfony\Component\Config\Loader\Loader
+abstract class FileLoader extends \_PhpScoperc5e9eb67638f\Symfony\Component\Config\Loader\Loader
 {
     protected static $loading = [];
     protected $locator;

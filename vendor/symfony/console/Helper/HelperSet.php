@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\Console\Helper;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\Console\Helper;
 
-use _PhpScoper85e989d55df2\Symfony\Component\Console\Command\Command;
-use _PhpScoper85e989d55df2\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Console\Command\Command;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * HelperSet represents a set of helpers to be used with a command.
  *
@@ -33,7 +33,7 @@ class HelperSet implements \IteratorAggregate
             $this->set($helper, \is_int($alias) ? null : $alias);
         }
     }
-    public function set(\_PhpScoper85e989d55df2\Symfony\Component\Console\Helper\HelperInterface $helper, string $alias = null)
+    public function set(\_PhpScoperc5e9eb67638f\Symfony\Component\Console\Helper\HelperInterface $helper, string $alias = null)
     {
         $this->helpers[$helper->getName()] = $helper;
         if (null !== $alias) {

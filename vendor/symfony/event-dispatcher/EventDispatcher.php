@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\EventDispatcher;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\EventDispatcher;
 
-use _PhpScoper85e989d55df2\Psr\EventDispatcher\StoppableEventInterface;
-use _PhpScoper85e989d55df2\Symfony\Component\EventDispatcher\Debug\WrappedListener;
+use _PhpScoperc5e9eb67638f\Psr\EventDispatcher\StoppableEventInterface;
+use _PhpScoperc5e9eb67638f\Symfony\Component\EventDispatcher\Debug\WrappedListener;
 /**
  * The EventDispatcherInterface is the central point of Symfony's event listener system.
  *
@@ -27,7 +27,7 @@ use _PhpScoper85e989d55df2\Symfony\Component\EventDispatcher\Debug\WrappedListen
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EventDispatcher implements \_PhpScoper85e989d55df2\Symfony\Component\EventDispatcher\EventDispatcherInterface
+class EventDispatcher implements \_PhpScoperc5e9eb67638f\Symfony\Component\EventDispatcher\EventDispatcherInterface
 {
     private $listeners = [];
     private $sorted = [];
@@ -153,7 +153,7 @@ class EventDispatcher implements \_PhpScoper85e989d55df2\Symfony\Component\Event
     /**
      * {@inheritdoc}
      */
-    public function addSubscriber(\_PhpScoper85e989d55df2\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function addSubscriber(\_PhpScoperc5e9eb67638f\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         foreach ($subscriber->getSubscribedEvents() as $eventName => $params) {
             if (\is_string($params)) {
@@ -170,7 +170,7 @@ class EventDispatcher implements \_PhpScoper85e989d55df2\Symfony\Component\Event
     /**
      * {@inheritdoc}
      */
-    public function removeSubscriber(\_PhpScoper85e989d55df2\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function removeSubscriber(\_PhpScoperc5e9eb67638f\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
     {
         foreach ($subscriber->getSubscribedEvents() as $eventName => $params) {
             if (\is_array($params) && \is_array($params[0])) {

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\DependencyInjection;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection;
 
-use _PhpScoper85e989d55df2\Psr\Container\ContainerInterface;
-use _PhpScoper85e989d55df2\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoperc5e9eb67638f\Psr\Container\ContainerInterface;
+use _PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 /**
  * Turns public and "container.reversible" services back to their ids.
  *
@@ -23,14 +23,14 @@ final class ReverseContainer
     private $reversibleLocator;
     private $tagName;
     private $getServiceId;
-    public function __construct(\_PhpScoper85e989d55df2\Symfony\Component\DependencyInjection\Container $serviceContainer, ContainerInterface $reversibleLocator, string $tagName = 'container.reversible')
+    public function __construct(\_PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\Container $serviceContainer, ContainerInterface $reversibleLocator, string $tagName = 'container.reversible')
     {
         $this->serviceContainer = $serviceContainer;
         $this->reversibleLocator = $reversibleLocator;
         $this->tagName = $tagName;
         $this->getServiceId = \Closure::bind(function (object $service) : ?string {
             return (\array_search($service, $this->services, \true) ?: \array_search($service, $this->privates, \true)) ?: null;
-        }, $serviceContainer, \_PhpScoper85e989d55df2\Symfony\Component\DependencyInjection\Container::class);
+        }, $serviceContainer, \_PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\Container::class);
     }
     /**
      * Returns the id of the passed object when it exists as a service.

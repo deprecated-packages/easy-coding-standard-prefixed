@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\Console\Output;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\Console\Output;
 
-use _PhpScoper85e989d55df2\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * ConsoleOutput is the default class for all CLI output. It uses STDOUT and STDERR.
  *
@@ -25,7 +25,7 @@ use _PhpScoper85e989d55df2\Symfony\Component\Console\Formatter\OutputFormatterIn
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ConsoleOutput extends \_PhpScoper85e989d55df2\Symfony\Component\Console\Output\StreamOutput implements \_PhpScoper85e989d55df2\Symfony\Component\Console\Output\ConsoleOutputInterface
+class ConsoleOutput extends \_PhpScoperc5e9eb67638f\Symfony\Component\Console\Output\StreamOutput implements \_PhpScoperc5e9eb67638f\Symfony\Component\Console\Output\ConsoleOutputInterface
 {
     private $stderr;
     private $consoleSectionOutputs = [];
@@ -39,11 +39,11 @@ class ConsoleOutput extends \_PhpScoper85e989d55df2\Symfony\Component\Console\Ou
         parent::__construct($this->openOutputStream(), $verbosity, $decorated, $formatter);
         if (null === $formatter) {
             // for BC reasons, stdErr has it own Formatter only when user don't inject a specific formatter.
-            $this->stderr = new \_PhpScoper85e989d55df2\Symfony\Component\Console\Output\StreamOutput($this->openErrorStream(), $verbosity, $decorated);
+            $this->stderr = new \_PhpScoperc5e9eb67638f\Symfony\Component\Console\Output\StreamOutput($this->openErrorStream(), $verbosity, $decorated);
             return;
         }
         $actualDecorated = $this->isDecorated();
-        $this->stderr = new \_PhpScoper85e989d55df2\Symfony\Component\Console\Output\StreamOutput($this->openErrorStream(), $verbosity, $decorated, $this->getFormatter());
+        $this->stderr = new \_PhpScoperc5e9eb67638f\Symfony\Component\Console\Output\StreamOutput($this->openErrorStream(), $verbosity, $decorated, $this->getFormatter());
         if (null === $decorated) {
             $this->setDecorated($actualDecorated && $this->stderr->isDecorated());
         }
@@ -51,9 +51,9 @@ class ConsoleOutput extends \_PhpScoper85e989d55df2\Symfony\Component\Console\Ou
     /**
      * Creates a new output section.
      */
-    public function section() : \_PhpScoper85e989d55df2\Symfony\Component\Console\Output\ConsoleSectionOutput
+    public function section() : \_PhpScoperc5e9eb67638f\Symfony\Component\Console\Output\ConsoleSectionOutput
     {
-        return new \_PhpScoper85e989d55df2\Symfony\Component\Console\Output\ConsoleSectionOutput($this->getStream(), $this->consoleSectionOutputs, $this->getVerbosity(), $this->isDecorated(), $this->getFormatter());
+        return new \_PhpScoperc5e9eb67638f\Symfony\Component\Console\Output\ConsoleSectionOutput($this->getStream(), $this->consoleSectionOutputs, $this->getVerbosity(), $this->isDecorated(), $this->getFormatter());
     }
     /**
      * {@inheritdoc}
@@ -89,7 +89,7 @@ class ConsoleOutput extends \_PhpScoper85e989d55df2\Symfony\Component\Console\Ou
     /**
      * {@inheritdoc}
      */
-    public function setErrorOutput(\_PhpScoper85e989d55df2\Symfony\Component\Console\Output\OutputInterface $error)
+    public function setErrorOutput(\_PhpScoperc5e9eb67638f\Symfony\Component\Console\Output\OutputInterface $error)
     {
         $this->stderr = $error;
     }

@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\VarDumper;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper;
 
-use _PhpScoper85e989d55df2\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper85e989d55df2\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper85e989d55df2\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
-use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Dumper\CliDumper;
-use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider;
-use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Dumper\ContextProvider\RequestContextProvider;
-use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
-use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Dumper\ContextualizedDumper;
-use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Dumper\ServerDumper;
+use _PhpScoperc5e9eb67638f\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperc5e9eb67638f\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoperc5e9eb67638f\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Dumper\ContextProvider\RequestContextProvider;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Dumper\ContextualizedDumper;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Dumper\ServerDumper;
 // Load the global dump() function
 require_once __DIR__ . '/Resources/functions/dump.php';
 /**

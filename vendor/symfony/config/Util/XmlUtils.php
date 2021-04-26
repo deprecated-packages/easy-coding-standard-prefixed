@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper85e989d55df2\Symfony\Component\Config\Util;
+namespace _PhpScoperc5e9eb67638f\Symfony\Component\Config\Util;
 
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Util\Exception\InvalidXmlException;
-use _PhpScoper85e989d55df2\Symfony\Component\Config\Util\Exception\XmlParsingException;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Util\Exception\InvalidXmlException;
+use _PhpScoperc5e9eb67638f\Symfony\Component\Config\Util\Exception\XmlParsingException;
 /**
  * XMLUtils is a bunch of utility methods to XML operations.
  *
