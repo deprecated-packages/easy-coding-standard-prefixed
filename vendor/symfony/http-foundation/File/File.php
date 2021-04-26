@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5e9eb67638f\Symfony\Component\HttpFoundation\File;
+namespace _PhpScoper4575b9150b52\Symfony\Component\HttpFoundation\File;
 
-use _PhpScoperc5e9eb67638f\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use _PhpScoperc5e9eb67638f\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use _PhpScoperc5e9eb67638f\Symfony\Component\Mime\MimeTypes;
+use _PhpScoper4575b9150b52\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use _PhpScoper4575b9150b52\Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use _PhpScoper4575b9150b52\Symfony\Component\Mime\MimeTypes;
 /**
  * A file in the file system.
  *

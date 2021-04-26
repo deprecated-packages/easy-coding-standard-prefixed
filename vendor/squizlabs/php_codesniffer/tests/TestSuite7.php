@@ -9,8 +9,8 @@
  */
 namespace PHP_CodeSniffer\Tests;
 
-use _PhpScoperc5e9eb67638f\PHPUnit\Framework\TestSuite as PHPUnit_TestSuite;
-use _PhpScoperc5e9eb67638f\PHPUnit\Framework\TestResult;
+use _PhpScoper4575b9150b52\PHPUnit\Framework\TestSuite as PHPUnit_TestSuite;
+use _PhpScoper4575b9150b52\PHPUnit\Framework\TestResult;
 class TestSuite extends PHPUnit_TestSuite
 {
     /**

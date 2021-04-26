@@ -9,7 +9,7 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5e9eb67638f\SebastianBergmann\Diff\Output;
+namespace _PhpScoper4575b9150b52\SebastianBergmann\Diff\Output;
 
 use function array_merge;
 use function array_splice;
@@ -25,14 +25,14 @@ use function min;
 use function sprintf;
 use function stream_get_contents;
 use function substr;
-use _PhpScoperc5e9eb67638f\SebastianBergmann\Diff\ConfigurationException;
-use _PhpScoperc5e9eb67638f\SebastianBergmann\Diff\Differ;
+use _PhpScoper4575b9150b52\SebastianBergmann\Diff\ConfigurationException;
+use _PhpScoper4575b9150b52\SebastianBergmann\Diff\Differ;
 /**
  * Strict Unified diff output builder.
  *
  * Generates (strict) Unified diff's (unidiffs) with hunks.
  */
-final class StrictUnifiedDiffOutputBuilder implements \_PhpScoperc5e9eb67638f\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface
+final class StrictUnifiedDiffOutputBuilder implements \_PhpScoper4575b9150b52\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface
 {
     private static $default = [
         'collapseRanges' => \true,

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5e9eb67638f\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScoper4575b9150b52\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoperc5e9eb67638f\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperc5e9eb67638f\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper4575b9150b52\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper4575b9150b52\Symfony\Component\HttpFoundation\Response;
 /**
  * Esi implements the ESI capabilities to Request and Response instances.
  *
@@ -23,7 +23,7 @@ use _PhpScoperc5e9eb67638f\Symfony\Component\HttpFoundation\Response;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Esi extends \_PhpScoperc5e9eb67638f\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
+class Esi extends \_PhpScoper4575b9150b52\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
 {
     public function getName()
     {

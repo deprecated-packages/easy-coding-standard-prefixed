@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\Dumper;
+namespace _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Dumper;
 
-use _PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Dumper is the abstract class for all built-in dumpers.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Dumper implements \_PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\Dumper\DumperInterface
+abstract class Dumper implements \_PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Dumper\DumperInterface
 {
     protected $container;
     public function __construct(ContainerBuilder $container)

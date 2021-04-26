@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper4575b9150b52\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts DateTimeInterface related classes to array representation.
  *
@@ -23,12 +23,12 @@ class DateCaster
     private const PERIOD_LIMIT = 3;
     public static function castDateTime(\DateTimeInterface $d, array $a, Stub $stub, bool $isNested, int $filter)
     {
-        $prefix = \_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
+        $prefix = \_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $location = $d->getTimezone()->getLocation();
         $fromNow = (new \DateTime())->diff($d);
         $title = $d->format('l, F j, Y') . "\n" . self::formatInterval($fromNow) . ' from now' . ($location ? $d->format('I') ? "\nDST On" : "\nDST Off" : '');
-        unset($a[\_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::PREFIX_DYNAMIC . 'date'], $a[\_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::PREFIX_DYNAMIC . 'timezone'], $a[\_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::PREFIX_DYNAMIC . 'timezone_type']);
-        $a[$prefix . 'date'] = new \_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\ConstStub(self::formatDateTime($d, $location ? ' e (P)' : ' P'), $title);
+        unset($a[\_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::PREFIX_DYNAMIC . 'date'], $a[\_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::PREFIX_DYNAMIC . 'timezone'], $a[\_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::PREFIX_DYNAMIC . 'timezone_type']);
+        $a[$prefix . 'date'] = new \_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\ConstStub(self::formatDateTime($d, $location ? ' e (P)' : ' P'), $title);
         $stub->class .= $d->format(' @U');
         return $a;
     }
@@ -37,8 +37,8 @@ class DateCaster
         $now = new \DateTimeImmutable();
         $numberOfSeconds = $now->add($interval)->getTimestamp() - $now->getTimestamp();
         $title = \number_format($numberOfSeconds, 0, '.', ' ') . 's';
-        $i = [\_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'interval' => new \_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\ConstStub(self::formatInterval($interval), $title)];
-        return $filter & \_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE ? $i : $i + $a;
+        $i = [\_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'interval' => new \_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\ConstStub(self::formatInterval($interval), $title)];
+        return $filter & \_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE ? $i : $i + $a;
     }
     private static function formatInterval(\DateInterval $i) : string
     {
@@ -59,8 +59,8 @@ class DateCaster
         $location = $timeZone->getLocation();
         $formatted = (new \DateTime('now', $timeZone))->format($location ? 'e (P)' : 'P');
         $title = $location && \extension_loaded('intl') ? \Locale::getDisplayRegion('-' . $location['country_code']) : '';
-        $z = [\_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'timezone' => new \_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\ConstStub($formatted, $title)];
-        return $filter & \_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE ? $z : $z + $a;
+        $z = [\_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'timezone' => new \_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\ConstStub($formatted, $title)];
+        return $filter & \_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE ? $z : $z + $a;
     }
     public static function castPeriod(\DatePeriod $p, array $a, Stub $stub, bool $isNested, int $filter)
     {
@@ -74,8 +74,8 @@ class DateCaster
             $dates[] = \sprintf('%s) %s', $i + 1, self::formatDateTime($d));
         }
         $period = \sprintf('every %s, from %s (%s) %s', self::formatInterval($p->getDateInterval()), self::formatDateTime($p->getStartDate()), $p->include_start_date ? 'included' : 'excluded', ($end = $p->getEndDate()) ? 'to ' . self::formatDateTime($end) : 'recurring ' . $p->recurrences . ' time/s');
-        $p = [\_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'period' => new \_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\ConstStub($period, \implode("\n", $dates))];
-        return $filter & \_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE ? $p : $p + $a;
+        $p = [\_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'period' => new \_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\ConstStub($period, \implode("\n", $dates))];
+        return $filter & \_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE ? $p : $p + $a;
     }
     private static function formatDateTime(\DateTimeInterface $d, string $extra = '') : string
     {

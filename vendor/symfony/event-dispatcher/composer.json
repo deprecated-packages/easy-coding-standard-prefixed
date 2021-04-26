@@ -44,7 +44,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperc5e9eb67638f\\Symfony\\Component\\EventDispatcher\\": ""
+            "_PhpScoper4575b9150b52\\Symfony\\Component\\EventDispatcher\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

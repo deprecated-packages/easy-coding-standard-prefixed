@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoperc5e9eb67638f\Composer\Semver;
+namespace _PhpScoper4575b9150b52\Composer\Semver;
 
-use _PhpScoperc5e9eb67638f\Composer\Semver\Constraint\Constraint;
-use _PhpScoperc5e9eb67638f\Composer\Semver\Constraint\ConstraintInterface;
-use _PhpScoperc5e9eb67638f\Composer\Semver\Constraint\MatchAllConstraint;
-use _PhpScoperc5e9eb67638f\Composer\Semver\Constraint\MatchNoneConstraint;
-use _PhpScoperc5e9eb67638f\Composer\Semver\Constraint\MultiConstraint;
+use _PhpScoper4575b9150b52\Composer\Semver\Constraint\Constraint;
+use _PhpScoper4575b9150b52\Composer\Semver\Constraint\ConstraintInterface;
+use _PhpScoper4575b9150b52\Composer\Semver\Constraint\MatchAllConstraint;
+use _PhpScoper4575b9150b52\Composer\Semver\Constraint\MatchNoneConstraint;
+use _PhpScoper4575b9150b52\Composer\Semver\Constraint\MultiConstraint;
 /**
  * Helper class generating intervals from constraints
  *
@@ -122,7 +122,7 @@ class Intervals
         $intervals = self::generateIntervals($constraint);
         $constraints = array();
         $hasNumericMatchAll = \false;
-        if (\count($intervals['numeric']) === 1 && (string) $intervals['numeric'][0]->getStart() === (string) \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::fromZero() && (string) $intervals['numeric'][0]->getEnd() === (string) \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::untilPositiveInfinity()) {
+        if (\count($intervals['numeric']) === 1 && (string) $intervals['numeric'][0]->getStart() === (string) \_PhpScoper4575b9150b52\Composer\Semver\Interval::fromZero() && (string) $intervals['numeric'][0]->getEnd() === (string) \_PhpScoper4575b9150b52\Composer\Semver\Interval::untilPositiveInfinity()) {
             $constraints[] = $intervals['numeric'][0]->getStart();
             $hasNumericMatchAll = \true;
         } else {
@@ -139,7 +139,7 @@ class Intervals
                         // only add a start if we didn't already do so, can be skipped if we're looking at second
                         // interval in [>=M, <N] || [>N, <P] || [>P, <Q] where unEqualConstraints currently contains
                         // [>=M, !=N] already and we only want to add !=P right now
-                        if (\count($unEqualConstraints) === 0 && (string) $interval->getStart() !== (string) \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::fromZero()) {
+                        if (\count($unEqualConstraints) === 0 && (string) $interval->getStart() !== (string) \_PhpScoper4575b9150b52\Composer\Semver\Interval::fromZero()) {
                             $unEqualConstraints[] = $interval->getStart();
                         }
                         $unEqualConstraints[] = new Constraint('!=', $interval->getEnd()->getVersion());
@@ -148,7 +148,7 @@ class Intervals
                 }
                 if (\count($unEqualConstraints) > 0) {
                     // this is where the end of the following interval of a != constraint is added as explained above
-                    if ((string) $interval->getEnd() !== (string) \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::untilPositiveInfinity()) {
+                    if ((string) $interval->getEnd() !== (string) \_PhpScoper4575b9150b52\Composer\Semver\Interval::untilPositiveInfinity()) {
                         $unEqualConstraints[] = $interval->getEnd();
                     }
                     // count is 1 if entire constraint is just one != expression
@@ -165,9 +165,9 @@ class Intervals
                     $constraints[] = new Constraint('==', $interval->getStart()->getVersion());
                     continue;
                 }
-                if ((string) $interval->getStart() === (string) \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::fromZero()) {
+                if ((string) $interval->getStart() === (string) \_PhpScoper4575b9150b52\Composer\Semver\Interval::fromZero()) {
                     $constraints[] = $interval->getEnd();
-                } elseif ((string) $interval->getEnd() === (string) \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::untilPositiveInfinity()) {
+                } elseif ((string) $interval->getEnd() === (string) \_PhpScoper4575b9150b52\Composer\Semver\Interval::untilPositiveInfinity()) {
                     $constraints[] = $interval->getStart();
                 } else {
                     $constraints[] = new MultiConstraint(array($interval->getStart(), $interval->getEnd()), \true);
@@ -196,7 +196,7 @@ class Intervals
                 if (\count($constraints) > 1) {
                     return new MultiConstraint(\array_merge(array(new MultiConstraint($constraints, \false)), $devConstraints), \true);
                 }
-                if (\count($constraints) === 1 && (string) $constraints[0] === (string) \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::fromZero()) {
+                if (\count($constraints) === 1 && (string) $constraints[0] === (string) \_PhpScoper4575b9150b52\Composer\Semver\Interval::fromZero()) {
                     if (\count($devConstraints) > 1) {
                         return new MultiConstraint($devConstraints, \true);
                     }
@@ -240,7 +240,7 @@ class Intervals
     private static function generateIntervals(ConstraintInterface $constraint, $stopOnFirstValidInterval = \false)
     {
         if ($constraint instanceof MatchAllConstraint) {
-            return array('numeric' => array(new \_PhpScoperc5e9eb67638f\Composer\Semver\Interval(\_PhpScoperc5e9eb67638f\Composer\Semver\Interval::fromZero(), \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::untilPositiveInfinity())), 'branches' => \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::anyDev());
+            return array('numeric' => array(new \_PhpScoper4575b9150b52\Composer\Semver\Interval(\_PhpScoper4575b9150b52\Composer\Semver\Interval::fromZero(), \_PhpScoper4575b9150b52\Composer\Semver\Interval::untilPositiveInfinity())), 'branches' => \_PhpScoper4575b9150b52\Composer\Semver\Interval::anyDev());
         }
         if ($constraint instanceof MatchNoneConstraint) {
             return array('numeric' => array(), 'branches' => array('names' => array(), 'exclude' => \false));
@@ -260,7 +260,7 @@ class Intervals
             $constraintBranches[] = $res['branches'];
         }
         if ($constraint->isDisjunctive()) {
-            $branches = \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::noDev();
+            $branches = \_PhpScoper4575b9150b52\Composer\Semver\Interval::noDev();
             foreach ($constraintBranches as $b) {
                 if ($b['exclude']) {
                     if ($branches['exclude']) {
@@ -286,7 +286,7 @@ class Intervals
                 }
             }
         } else {
-            $branches = \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::anyDev();
+            $branches = \_PhpScoper4575b9150b52\Composer\Semver\Interval::anyDev();
             foreach ($constraintBranches as $b) {
                 if ($b['exclude']) {
                     if ($branches['exclude']) {
@@ -353,7 +353,7 @@ class Intervals
                 if (\version_compare($start->getVersion(), $border['version'], '=') && ($start->getOperator() === '>' && $border['operator'] === '<=' || $start->getOperator() === '>=' && $border['operator'] === '<')) {
                     unset($intervals[$index]);
                 } else {
-                    $intervals[$index] = new \_PhpScoperc5e9eb67638f\Composer\Semver\Interval($start, new Constraint($border['operator'], $border['version']));
+                    $intervals[$index] = new \_PhpScoper4575b9150b52\Composer\Semver\Interval($start, new Constraint($border['operator'], $border['version']));
                     $index++;
                     if ($stopOnFirstValidInterval) {
                         break;
@@ -376,7 +376,7 @@ class Intervals
             $branches = array('names' => array(), 'exclude' => \false);
             // != dev-foo means any numeric version may match, we treat >/< like != they are not really defined for branches
             if ($op === '!=') {
-                $intervals[] = new \_PhpScoperc5e9eb67638f\Composer\Semver\Interval(\_PhpScoperc5e9eb67638f\Composer\Semver\Interval::fromZero(), \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::untilPositiveInfinity());
+                $intervals[] = new \_PhpScoper4575b9150b52\Composer\Semver\Interval(\_PhpScoper4575b9150b52\Composer\Semver\Interval::fromZero(), \_PhpScoper4575b9150b52\Composer\Semver\Interval::untilPositiveInfinity());
                 $branches = array('names' => array($constraint->getVersion()), 'exclude' => \true);
             } elseif ($op === '==') {
                 $branches['names'][] = $constraint->getVersion();
@@ -385,17 +385,17 @@ class Intervals
         }
         if ($op[0] === '>') {
             // > & >=
-            return array('numeric' => array(new \_PhpScoperc5e9eb67638f\Composer\Semver\Interval($constraint, \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::untilPositiveInfinity())), 'branches' => \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::noDev());
+            return array('numeric' => array(new \_PhpScoper4575b9150b52\Composer\Semver\Interval($constraint, \_PhpScoper4575b9150b52\Composer\Semver\Interval::untilPositiveInfinity())), 'branches' => \_PhpScoper4575b9150b52\Composer\Semver\Interval::noDev());
         }
         if ($op[0] === '<') {
             // < & <=
-            return array('numeric' => array(new \_PhpScoperc5e9eb67638f\Composer\Semver\Interval(\_PhpScoperc5e9eb67638f\Composer\Semver\Interval::fromZero(), $constraint)), 'branches' => \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::noDev());
+            return array('numeric' => array(new \_PhpScoper4575b9150b52\Composer\Semver\Interval(\_PhpScoper4575b9150b52\Composer\Semver\Interval::fromZero(), $constraint)), 'branches' => \_PhpScoper4575b9150b52\Composer\Semver\Interval::noDev());
         }
         if ($op === '!=') {
             // convert !=x to intervals of 0 - <x && >x - +inf + dev*
-            return array('numeric' => array(new \_PhpScoperc5e9eb67638f\Composer\Semver\Interval(\_PhpScoperc5e9eb67638f\Composer\Semver\Interval::fromZero(), new Constraint('<', $constraint->getVersion())), new \_PhpScoperc5e9eb67638f\Composer\Semver\Interval(new Constraint('>', $constraint->getVersion()), \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::untilPositiveInfinity())), 'branches' => \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::anyDev());
+            return array('numeric' => array(new \_PhpScoper4575b9150b52\Composer\Semver\Interval(\_PhpScoper4575b9150b52\Composer\Semver\Interval::fromZero(), new Constraint('<', $constraint->getVersion())), new \_PhpScoper4575b9150b52\Composer\Semver\Interval(new Constraint('>', $constraint->getVersion()), \_PhpScoper4575b9150b52\Composer\Semver\Interval::untilPositiveInfinity())), 'branches' => \_PhpScoper4575b9150b52\Composer\Semver\Interval::anyDev());
         }
         // convert ==x to an interval of >=x - <=x
-        return array('numeric' => array(new \_PhpScoperc5e9eb67638f\Composer\Semver\Interval(new Constraint('>=', $constraint->getVersion()), new Constraint('<=', $constraint->getVersion()))), 'branches' => \_PhpScoperc5e9eb67638f\Composer\Semver\Interval::noDev());
+        return array('numeric' => array(new \_PhpScoper4575b9150b52\Composer\Semver\Interval(new Constraint('>=', $constraint->getVersion()), new Constraint('<=', $constraint->getVersion()))), 'branches' => \_PhpScoper4575b9150b52\Composer\Semver\Interval::noDev());
     }
 }

@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console\Command;
 
-use _PhpScoperc5e9eb67638f\Nette\Utils\Strings;
-use _PhpScoperc5e9eb67638f\Symfony\Component\Console\Command\Command;
+use _PhpScoper4575b9150b52\Nette\Utils\Strings;
+use _PhpScoper4575b9150b52\Symfony\Component\Console\Command\Command;
 /**
  * @see \Symplify\PackageBuilder\Tests\Console\Command\CommandNamingTest
  */

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoperc5e9eb67638f\Doctrine\Common\Proxy\Proxy as CommonProxy;
-use _PhpScoperc5e9eb67638f\Doctrine\ORM\PersistentCollection;
-use _PhpScoperc5e9eb67638f\Doctrine\ORM\Proxy\Proxy as OrmProxy;
-use _PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper4575b9150b52\Doctrine\Common\Proxy\Proxy as CommonProxy;
+use _PhpScoper4575b9150b52\Doctrine\ORM\PersistentCollection;
+use _PhpScoper4575b9150b52\Doctrine\ORM\Proxy\Proxy as OrmProxy;
+use _PhpScoper4575b9150b52\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts Doctrine related classes to array representation.
  *
@@ -47,7 +47,7 @@ class DoctrineCaster
     {
         foreach (['snapshot', 'association', 'typeClass'] as $k) {
             if (\array_key_exists($k = "\0Doctrine\\ORM\\PersistentCollection\0" . $k, $a)) {
-                $a[$k] = new \_PhpScoperc5e9eb67638f\Symfony\Component\VarDumper\Caster\CutStub($a[$k]);
+                $a[$k] = new \_PhpScoper4575b9150b52\Symfony\Component\VarDumper\Caster\CutStub($a[$k]);
             }
         }
         return $a;

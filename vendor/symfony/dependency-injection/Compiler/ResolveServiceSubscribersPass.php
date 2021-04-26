@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoperc5e9eb67638f\Psr\Container\ContainerInterface;
-use _PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperc5e9eb67638f\Symfony\Contracts\Service\ServiceProviderInterface;
+use _PhpScoper4575b9150b52\Psr\Container\ContainerInterface;
+use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper4575b9150b52\Symfony\Contracts\Service\ServiceProviderInterface;
 /**
  * Compiler pass to inject their service locator to service subscribers.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveServiceSubscribersPass extends \_PhpScoperc5e9eb67638f\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveServiceSubscribersPass extends \_PhpScoper4575b9150b52\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $serviceLocator;
     protected function processValue($value, bool $isRoot = \false)
