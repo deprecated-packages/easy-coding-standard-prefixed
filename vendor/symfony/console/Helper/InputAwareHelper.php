@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0261263ca84f\Symfony\Component\Console\Helper;
+namespace _PhpScoper917c99b6aa4c\Symfony\Component\Console\Helper;
 
-use _PhpScoper0261263ca84f\Symfony\Component\Console\Input\InputAwareInterface;
-use _PhpScoper0261263ca84f\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Console\Input\InputAwareInterface;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Console\Input\InputInterface;
 /**
  * An implementation of InputAwareInterface for Helpers.
  *
  * @author Wouter J <waldio.webdesign@gmail.com>
  */
-abstract class InputAwareHelper extends \_PhpScoper0261263ca84f\Symfony\Component\Console\Helper\Helper implements InputAwareInterface
+abstract class InputAwareHelper extends \_PhpScoper917c99b6aa4c\Symfony\Component\Console\Helper\Helper implements InputAwareInterface
 {
     protected $input;
     /**

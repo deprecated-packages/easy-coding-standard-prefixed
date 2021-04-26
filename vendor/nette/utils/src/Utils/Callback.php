@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper0261263ca84f\Nette\Utils;
+namespace _PhpScoper917c99b6aa4c\Nette\Utils;
 
-use _PhpScoper0261263ca84f\Nette;
+use _PhpScoper917c99b6aa4c\Nette;
 use function is_array, is_object, is_string;
 /**
  * PHP callable tools.
@@ -58,7 +58,7 @@ final class Callback
     {
         $prev = \set_error_handler(function ($severity, $message, $file) use($onError, &$prev, $function) : ?bool {
             if ($file === __FILE__) {
-                $msg = \ini_get('html_errors') ? \_PhpScoper0261263ca84f\Nette\Utils\Html::htmlToText($message) : $message;
+                $msg = \ini_get('html_errors') ? \_PhpScoper917c99b6aa4c\Nette\Utils\Html::htmlToText($message) : $message;
                 $msg = \preg_replace("#^{$function}\\(.*?\\): #", '', $msg);
                 if ($onError($msg, $severity) !== \false) {
                     return null;

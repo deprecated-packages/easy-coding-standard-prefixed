@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0261263ca84f\Symfony\Component\Cache\Traits;
+namespace _PhpScoper917c99b6aa4c\Symfony\Component\Cache\Traits;
 
-use _PhpScoper0261263ca84f\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

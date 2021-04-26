@@ -5,7 +5,7 @@ namespace Symplify\EasyCodingStandard\Console\Reporter;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpCsFixer\Fixer\FixerInterface;
-use _PhpScoper0261263ca84f\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Console\Style\SymfonyStyle;
 final class CheckerListReporter
 {
     /**
@@ -17,15 +17,15 @@ final class CheckerListReporter
         $this->symfonyStyle = $symfonyStyle;
     }
     /**
-     * @param FixerInterface[]|Sniff[]|string[] $checkers
+     * @param FixerInterface[]|Sniff[] $checkers
      */
     public function report(array $checkers, string $type) : void
     {
         if ($checkers === []) {
             return;
         }
-        $checkerNames = \array_map(function ($fixer) : string {
-            return \is_string($fixer) ? $fixer : \get_class($fixer);
+        $checkerNames = \array_map(function ($checker) : string {
+            return \get_class($checker);
         }, $checkers);
         $sectionMessage = \sprintf('%d checker%s from %s:', \count($checkers), \count($checkers) === 1 ? '' : 's', $type);
         $this->symfonyStyle->section($sectionMessage);

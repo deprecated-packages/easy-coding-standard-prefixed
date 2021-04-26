@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\FileSystem;
 
-use _PhpScoper0261263ca84f\Nette\Utils\Strings;
+use _PhpScoper917c99b6aa4c\Nette\Utils\Strings;
 /**
  * @see \Symplify\Skipper\Tests\FileSystem\PathNormalizerTest
  */

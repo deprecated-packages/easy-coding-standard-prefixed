@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0261263ca84f\Symfony\Component\EventDispatcher;
+namespace _PhpScoper917c99b6aa4c\Symfony\Component\EventDispatcher;
 
-use _PhpScoper0261263ca84f\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-trigger_deprecation('symfony/event-dispatcher', '5.1', '%s is deprecated, use the event dispatcher without the proxy.', \_PhpScoper0261263ca84f\Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy::class);
+use _PhpScoper917c99b6aa4c\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+trigger_deprecation('symfony/event-dispatcher', '5.1', '%s is deprecated, use the event dispatcher without the proxy.', \_PhpScoper917c99b6aa4c\Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy::class);
 /**
  * A helper class to provide BC/FC with the legacy signature of EventDispatcherInterface::dispatch().
  *

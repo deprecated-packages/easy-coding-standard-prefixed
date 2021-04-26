@@ -23,7 +23,7 @@ use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper0261263ca84f\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper917c99b6aa4c\Symfony\Component\OptionsResolver\Options;
 /**
  * Removes Zero-width space (ZWSP), Non-breaking space (NBSP) and other invisible unicode symbols.
  *

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0261263ca84f\Symfony\Component\String\Inflector;
+namespace _PhpScoper917c99b6aa4c\Symfony\Component\String\Inflector;
 
 interface InflectorInterface
 {

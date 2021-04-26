@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper0261263ca84f\\Symfony\\Component\\OptionsResolver\\": ""
+            "_PhpScoper917c99b6aa4c\\Symfony\\Component\\OptionsResolver\\": ""
         },
         "exclude-from-classmap": [
             "\/Tests\/"

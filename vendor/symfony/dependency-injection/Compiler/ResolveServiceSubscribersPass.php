@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper917c99b6aa4c\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper0261263ca84f\Psr\Container\ContainerInterface;
-use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper0261263ca84f\Symfony\Contracts\Service\ServiceProviderInterface;
+use _PhpScoper917c99b6aa4c\Psr\Container\ContainerInterface;
+use _PhpScoper917c99b6aa4c\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper917c99b6aa4c\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper917c99b6aa4c\Symfony\Contracts\Service\ServiceProviderInterface;
 /**
  * Compiler pass to inject their service locator to service subscribers.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveServiceSubscribersPass extends \_PhpScoper0261263ca84f\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveServiceSubscribersPass extends \_PhpScoper917c99b6aa4c\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $serviceLocator;
     protected function processValue($value, bool $isRoot = \false)

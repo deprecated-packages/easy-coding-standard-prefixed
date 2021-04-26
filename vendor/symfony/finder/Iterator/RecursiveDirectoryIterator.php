@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0261263ca84f\Symfony\Component\Finder\Iterator;
+namespace _PhpScoper917c99b6aa4c\Symfony\Component\Finder\Iterator;
 
-use _PhpScoper0261263ca84f\Symfony\Component\Finder\Exception\AccessDeniedException;
-use _PhpScoper0261263ca84f\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Finder\Exception\AccessDeniedException;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Finder\SplFileInfo;
 /**
  * Extends the \RecursiveDirectoryIterator to support relative paths.
  *

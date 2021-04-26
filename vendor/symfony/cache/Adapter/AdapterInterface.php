@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0261263ca84f\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper917c99b6aa4c\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper0261263ca84f\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoper0261263ca84f\Symfony\Component\Cache\CacheItem;
+use _PhpScoper917c99b6aa4c\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Cache\CacheItem;
 // Help opcache.preload discover always-needed symbols
 \class_exists(CacheItem::class);
 /**

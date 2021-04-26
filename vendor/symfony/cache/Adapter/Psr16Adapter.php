@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper0261263ca84f\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper917c99b6aa4c\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper0261263ca84f\Psr\SimpleCache\CacheInterface;
-use _PhpScoper0261263ca84f\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper0261263ca84f\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper0261263ca84f\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScoper917c99b6aa4c\Psr\SimpleCache\CacheInterface;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper917c99b6aa4c\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-16 cache into a PSR-6 one.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Psr16Adapter extends \_PhpScoper0261263ca84f\Symfony\Component\Cache\Adapter\AbstractAdapter implements PruneableInterface, ResettableInterface
+class Psr16Adapter extends \_PhpScoper917c99b6aa4c\Symfony\Component\Cache\Adapter\AbstractAdapter implements PruneableInterface, ResettableInterface
 {
     /**
      * @internal

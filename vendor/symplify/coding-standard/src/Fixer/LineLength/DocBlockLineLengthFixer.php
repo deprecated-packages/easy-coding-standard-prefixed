@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoper0261263ca84f\Nette\Utils\Strings;
+use _PhpScoper917c99b6aa4c\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
@@ -91,9 +91,7 @@ final class DocBlockLineLengthFixer extends AbstractSymplifyFixer implements Con
                 continue;
             }
             $paragraphs = $this->extractParagraphsFromDescriptionLines($descriptionLines);
-            $lineWrappedParagraphs = \array_map(function (string $paragraph) use($maximumLineLength) : string {
-                return \wordwrap($paragraph, $maximumLineLength);
-            }, $paragraphs);
+            $lineWrappedParagraphs = $this->wrapParagraphs($paragraphs, $maximumLineLength);
             $wrappedDescription = \implode(\PHP_EOL . \PHP_EOL, $lineWrappedParagraphs);
             $otherLines = $docBlockLines->getOtherLines();
             if ($otherLines !== []) {
@@ -174,5 +172,17 @@ CODE_SAMPLE
     private function getLines(string $string) : array
     {
         return \explode(\PHP_EOL, $string);
+    }
+    /**
+     * @param string[] $lines
+     * @return string[]
+     */
+    private function wrapParagraphs(array $lines, int $maximumLineLength) : array
+    {
+        $wrappedLines = [];
+        foreach ($lines as $line) {
+            $wrappedLines[] = \wordwrap($line, $maximumLineLength);
+        }
+        return $wrappedLines;
     }
 }

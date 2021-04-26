@@ -47,13 +47,13 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper0261263ca84f\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
+            "_PhpScoper917c99b6aa4c\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoper0261263ca84f\\Doctrine\\Performance\\Common\\Annotations\\": "tests\/Doctrine\/Performance\/Common\/Annotations",
-            "_PhpScoper0261263ca84f\\Doctrine\\Tests\\Common\\Annotations\\": "tests\/Doctrine\/Tests\/Common\/Annotations"
+            "_PhpScoper917c99b6aa4c\\Doctrine\\Performance\\Common\\Annotations\\": "tests\/Doctrine\/Performance\/Common\/Annotations",
+            "_PhpScoper917c99b6aa4c\\Doctrine\\Tests\\Common\\Annotations\\": "tests\/Doctrine\/Tests\/Common\/Annotations"
         },
         "files": [
             "tests\/Doctrine\/Tests\/Common\/Annotations\/Fixtures\/functions.php",
