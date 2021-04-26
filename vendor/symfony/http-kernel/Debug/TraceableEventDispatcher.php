@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4c15c250a340\Symfony\Component\HttpKernel\Debug;
+namespace _PhpScoper85e989d55df2\Symfony\Component\HttpKernel\Debug;
 
-use _PhpScoper4c15c250a340\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher as BaseTraceableEventDispatcher;
-use _PhpScoper4c15c250a340\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper85e989d55df2\Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher as BaseTraceableEventDispatcher;
+use _PhpScoper85e989d55df2\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Collects some data about event listeners.
  *

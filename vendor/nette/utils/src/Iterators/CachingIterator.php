@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper4c15c250a340\Nette\Iterators;
+namespace _PhpScoper85e989d55df2\Nette\Iterators;
 
-use _PhpScoper4c15c250a340\Nette;
+use _PhpScoper85e989d55df2\Nette;
 /**
  * Smarter caching iterator.
  *

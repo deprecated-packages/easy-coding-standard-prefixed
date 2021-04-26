@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Command;
+namespace _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Command;
 
-use _PhpScoper4c15c250a340\Symfony\Component\Console\Command\Command;
-use _PhpScoper4c15c250a340\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper4c15c250a340\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper4c15c250a340\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper4c15c250a340\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper4c15c250a340\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor;
-use _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface;
-use _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor;
-use _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Dumper\CliDumper;
-use _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use _PhpScoper4c15c250a340\Symfony\Component\VarDumper\Server\DumpServer;
+use _PhpScoper85e989d55df2\Symfony\Component\Console\Command\Command;
+use _PhpScoper85e989d55df2\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper85e989d55df2\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper85e989d55df2\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper85e989d55df2\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper85e989d55df2\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor;
+use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Command\Descriptor\DumpDescriptorInterface;
+use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor;
+use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use _PhpScoper85e989d55df2\Symfony\Component\VarDumper\Server\DumpServer;
 /**
  * Starts a dump server to collect and output dumps on a single place with multiple formats support.
  *

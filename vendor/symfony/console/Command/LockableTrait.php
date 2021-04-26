@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4c15c250a340\Symfony\Component\Console\Command;
+namespace _PhpScoper85e989d55df2\Symfony\Component\Console\Command;
 
-use _PhpScoper4c15c250a340\Symfony\Component\Console\Exception\LogicException;
-use _PhpScoper4c15c250a340\Symfony\Component\Lock\Lock;
-use _PhpScoper4c15c250a340\Symfony\Component\Lock\LockFactory;
-use _PhpScoper4c15c250a340\Symfony\Component\Lock\Store\FlockStore;
-use _PhpScoper4c15c250a340\Symfony\Component\Lock\Store\SemaphoreStore;
+use _PhpScoper85e989d55df2\Symfony\Component\Console\Exception\LogicException;
+use _PhpScoper85e989d55df2\Symfony\Component\Lock\Lock;
+use _PhpScoper85e989d55df2\Symfony\Component\Lock\LockFactory;
+use _PhpScoper85e989d55df2\Symfony\Component\Lock\Store\FlockStore;
+use _PhpScoper85e989d55df2\Symfony\Component\Lock\Store\SemaphoreStore;
 /**
  * Basic lock feature for commands.
  *
