@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Console\Report\FixReport;
 
-use _PhpScoper917c99b6aa4c\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperd51690aa3091\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *

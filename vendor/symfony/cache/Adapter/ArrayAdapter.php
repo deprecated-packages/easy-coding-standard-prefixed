@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper917c99b6aa4c\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperd51690aa3091\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper917c99b6aa4c\Psr\Cache\CacheItemInterface;
-use _PhpScoper917c99b6aa4c\Psr\Log\LoggerAwareInterface;
-use _PhpScoper917c99b6aa4c\Psr\Log\LoggerAwareTrait;
-use _PhpScoper917c99b6aa4c\Symfony\Component\Cache\CacheItem;
-use _PhpScoper917c99b6aa4c\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper917c99b6aa4c\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper917c99b6aa4c\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoperd51690aa3091\Psr\Cache\CacheItemInterface;
+use _PhpScoperd51690aa3091\Psr\Log\LoggerAwareInterface;
+use _PhpScoperd51690aa3091\Psr\Log\LoggerAwareTrait;
+use _PhpScoperd51690aa3091\Symfony\Component\Cache\CacheItem;
+use _PhpScoperd51690aa3091\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperd51690aa3091\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoperd51690aa3091\Symfony\Contracts\Cache\CacheInterface;
 /**
  * An in-memory cache storage.
  *
@@ -24,7 +24,7 @@ use _PhpScoper917c99b6aa4c\Symfony\Contracts\Cache\CacheInterface;
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ArrayAdapter implements \_PhpScoper917c99b6aa4c\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, LoggerAwareInterface, ResettableInterface
+class ArrayAdapter implements \_PhpScoperd51690aa3091\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, LoggerAwareInterface, ResettableInterface
 {
     use LoggerAwareTrait;
     private $storeSerialized;

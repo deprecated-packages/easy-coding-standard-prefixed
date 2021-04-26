@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\ArrayNotation;
 
-use _PhpScoper917c99b6aa4c\Nette\Utils\Strings;
+use _PhpScoperd51690aa3091\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -48,6 +48,10 @@ final class ArrayListItemNewlineFixer extends AbstractSymplifyFixer implements D
     public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
+    }
+    public function getPriority() : int
+    {
+        return 40;
     }
     /**
      * @param Tokens<Token> $tokens

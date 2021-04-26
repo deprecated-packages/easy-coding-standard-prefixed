@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper917c99b6aa4c\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper917c99b6aa4c\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper917c99b6aa4c\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use _PhpScoper917c99b6aa4c\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Reference;
 /**
  * Replaces all references to aliases with references to the actual service.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ResolveReferencesToAliasesPass extends \_PhpScoper917c99b6aa4c\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveReferencesToAliasesPass extends \_PhpScoperd51690aa3091\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}

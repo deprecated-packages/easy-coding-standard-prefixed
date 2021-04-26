@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper917c99b6aa4c\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScoperd51690aa3091\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper917c99b6aa4c\Symfony\Component\HttpFoundation\IpUtils;
-use _PhpScoper917c99b6aa4c\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper917c99b6aa4c\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper917c99b6aa4c\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\IpUtils;
+use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperd51690aa3091\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper917c99b6aa4c\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoperd51690aa3091\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoper917c99b6aa4c\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use _PhpScoper917c99b6aa4c\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper917c99b6aa4c\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperd51690aa3091\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperd51690aa3091\Symfony\Component\HttpFoundation\Response;
 /**
  * ExceptionDataCollector.
  *
@@ -20,7 +20,7 @@ use _PhpScoper917c99b6aa4c\Symfony\Component\HttpFoundation\Response;
  *
  * @final
  */
-class ExceptionDataCollector extends \_PhpScoper917c99b6aa4c\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class ExceptionDataCollector extends \_PhpScoperd51690aa3091\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
     /**
      * {@inheritdoc}

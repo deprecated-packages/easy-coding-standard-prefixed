@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper917c99b6aa4c\Symfony\Component\Stopwatch;
+namespace _PhpScoperd51690aa3091\Symfony\Component\Stopwatch;
 
-use _PhpScoper917c99b6aa4c\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoperd51690aa3091\Symfony\Contracts\Service\ResetInterface;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\_PhpScoper917c99b6aa4c\Symfony\Component\Stopwatch\Section::class);
+\class_exists(\_PhpScoperd51690aa3091\Symfony\Component\Stopwatch\Section::class);
 /**
  * Stopwatch provides a way to profile code.
  *
@@ -141,6 +141,6 @@ class Stopwatch implements ResetInterface
      */
     public function reset()
     {
-        $this->sections = $this->activeSections = ['__root__' => new \_PhpScoper917c99b6aa4c\Symfony\Component\Stopwatch\Section(null, $this->morePrecision)];
+        $this->sections = $this->activeSections = ['__root__' => new \_PhpScoperd51690aa3091\Symfony\Component\Stopwatch\Section(null, $this->morePrecision)];
     }
 }

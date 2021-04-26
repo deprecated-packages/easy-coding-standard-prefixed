@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper917c99b6aa4c\Symfony\Contracts\EventDispatcher;
+namespace _PhpScoperd51690aa3091\Symfony\Contracts\EventDispatcher;
 
-use _PhpScoper917c99b6aa4c\Psr\EventDispatcher\StoppableEventInterface;
+use _PhpScoperd51690aa3091\Psr\EventDispatcher\StoppableEventInterface;
 /**
  * Event is the base class for classes containing event data.
  *
