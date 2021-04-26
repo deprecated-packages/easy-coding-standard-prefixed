@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Helper;
+namespace _PhpScoperd2a667bd5a98\Symfony\Component\Console\Helper;
 
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Cursor;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Exception\MissingInputException;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Exception\RuntimeException;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Input\StreamableInputInterface;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Question\ChoiceQuestion;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Question\Question;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Terminal;
-use function _PhpScoper4fedb9aa1e5f\Symfony\Component\String\s;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Cursor;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Exception\MissingInputException;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Exception\RuntimeException;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Input\StreamableInputInterface;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Question\ChoiceQuestion;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Question\Question;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Terminal;
+use function _PhpScoperd2a667bd5a98\Symfony\Component\String\s;
 /**
  * The QuestionHelper class provides helpers to interact with the user.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class QuestionHelper extends \_PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Helper\Helper
+class QuestionHelper extends \_PhpScoperd2a667bd5a98\Symfony\Component\Console\Helper\Helper
 {
     private $inputStream;
     private static $shell;

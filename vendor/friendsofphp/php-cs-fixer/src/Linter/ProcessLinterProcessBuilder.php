@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Linter;
 
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Process\Process;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Process\Process;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *

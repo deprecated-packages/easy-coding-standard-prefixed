@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4fedb9aa1e5f\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScoperd2a667bd5a98\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperd2a667bd5a98\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperd2a667bd5a98\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Abstract class implementing Surrogate capabilities to Request and Response instances.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-abstract class AbstractSurrogate implements \_PhpScoper4fedb9aa1e5f\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface
+abstract class AbstractSurrogate implements \_PhpScoperd2a667bd5a98\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface
 {
     protected $contentTypes;
     protected $phpEscapeMap = [['<?', '<%', '<s', '<S'], ['<?php echo "<?"; ?>', '<?php echo "<%"; ?>', '<?php echo "<s"; ?>', '<?php echo "<S"; ?>']];
@@ -38,7 +38,7 @@ abstract class AbstractSurrogate implements \_PhpScoper4fedb9aa1e5f\Symfony\Comp
      */
     public function createCacheStrategy()
     {
-        return new \_PhpScoper4fedb9aa1e5f\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategy();
+        return new \_PhpScoperd2a667bd5a98\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategy();
     }
     /**
      * {@inheritdoc}
@@ -73,7 +73,7 @@ abstract class AbstractSurrogate implements \_PhpScoper4fedb9aa1e5f\Symfony\Comp
     /**
      * {@inheritdoc}
      */
-    public function handle(\_PhpScoper4fedb9aa1e5f\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, string $uri, string $alt, bool $ignoreErrors)
+    public function handle(\_PhpScoperd2a667bd5a98\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, string $uri, string $alt, bool $ignoreErrors)
     {
         $subRequest = Request::create($uri, Request::METHOD_GET, [], $cache->getRequest()->cookies->all(), [], $cache->getRequest()->server->all());
         try {

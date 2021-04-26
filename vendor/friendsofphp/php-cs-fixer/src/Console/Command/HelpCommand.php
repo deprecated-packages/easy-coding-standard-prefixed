@@ -26,11 +26,11 @@ use PhpCsFixer\Preg;
 use PhpCsFixer\RuleSet\RuleSet;
 use PhpCsFixer\RuleSet\RuleSets;
 use PhpCsFixer\Utils;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>

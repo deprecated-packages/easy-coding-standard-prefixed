@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper4fedb9aa1e5f\Composer\Semver\Constraint;
+namespace _PhpScoperd2a667bd5a98\Composer\Semver\Constraint;
 
 /**
  * Blackhole of constraints, nothing escapes it
  */
-class MatchNoneConstraint implements \_PhpScoper4fedb9aa1e5f\Composer\Semver\Constraint\ConstraintInterface
+class MatchNoneConstraint implements \_PhpScoperd2a667bd5a98\Composer\Semver\Constraint\ConstraintInterface
 {
     /** @var string|null */
     protected $prettyString;
@@ -22,7 +22,7 @@ class MatchNoneConstraint implements \_PhpScoper4fedb9aa1e5f\Composer\Semver\Con
      *
      * @return bool
      */
-    public function matches(\_PhpScoper4fedb9aa1e5f\Composer\Semver\Constraint\ConstraintInterface $provider)
+    public function matches(\_PhpScoperd2a667bd5a98\Composer\Semver\Constraint\ConstraintInterface $provider)
     {
         return \false;
     }
@@ -59,13 +59,13 @@ class MatchNoneConstraint implements \_PhpScoper4fedb9aa1e5f\Composer\Semver\Con
      */
     public function getUpperBound()
     {
-        return new \_PhpScoper4fedb9aa1e5f\Composer\Semver\Constraint\Bound('0.0.0.0-dev', \false);
+        return new \_PhpScoperd2a667bd5a98\Composer\Semver\Constraint\Bound('0.0.0.0-dev', \false);
     }
     /**
      * {@inheritDoc}
      */
     public function getLowerBound()
     {
-        return new \_PhpScoper4fedb9aa1e5f\Composer\Semver\Constraint\Bound('0.0.0.0-dev', \false);
+        return new \_PhpScoperd2a667bd5a98\Composer\Semver\Constraint\Bound('0.0.0.0-dev', \false);
     }
 }

@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Definition\NodeInterface;
+use _PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\NodeInterface;
 /**
  * This is the entry class for building a config tree.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class TreeBuilder implements \_PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Definition\Builder\NodeParentInterface
+class TreeBuilder implements \_PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\Builder\NodeParentInterface
 {
     protected $tree;
     protected $root;
-    public function __construct(string $name, string $type = 'array', \_PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder = null)
+    public function __construct(string $name, string $type = 'array', \_PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder = null)
     {
-        $builder = $builder ?: new \_PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Definition\Builder\NodeBuilder();
+        $builder = $builder ?: new \_PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\Builder\NodeBuilder();
         $this->root = $builder->node($name, $type)->setParent($this);
     }
     /**
      * @return NodeDefinition|ArrayNodeDefinition The root node (as an ArrayNodeDefinition when the type is 'array')
      */
-    public function getRootNode() : \_PhpScoper4fedb9aa1e5f\Symfony\Component\Config\Definition\Builder\NodeDefinition
+    public function getRootNode() : \_PhpScoperd2a667bd5a98\Symfony\Component\Config\Definition\Builder\NodeDefinition
     {
         return $this->root;
     }
