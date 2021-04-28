@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper2d11f18408ea\Doctrine\Common\Annotations\Annotation;
+namespace _PhpScoperdb89411b20b4\Doctrine\Common\Annotations\Annotation;
 
 /**
  * Annotation that indicates that the annotated class should be constructed with a named argument call.

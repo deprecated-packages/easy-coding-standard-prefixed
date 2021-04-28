@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper2d11f18408ea\Psr\Log\LoggerInterface;
-use _PhpScoper2d11f18408ea\Symfony\Component\Console\ConsoleEvents;
-use _PhpScoper2d11f18408ea\Symfony\Component\Console\Event\ConsoleEvent;
-use _PhpScoper2d11f18408ea\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoper2d11f18408ea\Symfony\Component\ErrorHandler\ErrorHandler;
-use _PhpScoper2d11f18408ea\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
-use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\Event\KernelEvent;
-use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoperdb89411b20b4\Psr\Log\LoggerInterface;
+use _PhpScoperdb89411b20b4\Symfony\Component\Console\ConsoleEvents;
+use _PhpScoperdb89411b20b4\Symfony\Component\Console\Event\ConsoleEvent;
+use _PhpScoperdb89411b20b4\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoperdb89411b20b4\Symfony\Component\ErrorHandler\ErrorHandler;
+use _PhpScoperdb89411b20b4\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
+use _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\Event\KernelEvent;
+use _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Configures errors and exceptions handlers.
  *

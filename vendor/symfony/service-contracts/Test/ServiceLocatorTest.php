@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2d11f18408ea\Symfony\Contracts\Service\Test;
+namespace _PhpScoperdb89411b20b4\Symfony\Contracts\Service\Test;
 
-use _PhpScoper2d11f18408ea\PHPUnit\Framework\TestCase;
-use _PhpScoper2d11f18408ea\Psr\Container\ContainerInterface;
-use _PhpScoper2d11f18408ea\Symfony\Contracts\Service\ServiceLocatorTrait;
+use _PhpScoperdb89411b20b4\PHPUnit\Framework\TestCase;
+use _PhpScoperdb89411b20b4\Psr\Container\ContainerInterface;
+use _PhpScoperdb89411b20b4\Symfony\Contracts\Service\ServiceLocatorTrait;
 abstract class ServiceLocatorTest extends TestCase
 {
     protected function getServiceLocator(array $factories)
@@ -59,7 +59,7 @@ abstract class ServiceLocatorTest extends TestCase
     public function testThrowsOnUndefinedInternalService()
     {
         if (!$this->getExpectedException()) {
-            $this->expectException(\_PhpScoper2d11f18408ea\Psr\Container\NotFoundExceptionInterface::class);
+            $this->expectException(\_PhpScoperdb89411b20b4\Psr\Container\NotFoundExceptionInterface::class);
             $this->expectExceptionMessage('The service "foo" has a dependency on a non-existent service "bar". This locator only knows about the "foo" service.');
         }
         $locator = $this->getServiceLocator(['foo' => function () use(&$locator) {
@@ -69,7 +69,7 @@ abstract class ServiceLocatorTest extends TestCase
     }
     public function testThrowsOnCircularReference()
     {
-        $this->expectException(\_PhpScoper2d11f18408ea\Psr\Container\ContainerExceptionInterface::class);
+        $this->expectException(\_PhpScoperdb89411b20b4\Psr\Container\ContainerExceptionInterface::class);
         $this->expectExceptionMessage('Circular reference detected for service "bar", path: "bar -> baz -> bar".');
         $locator = $this->getServiceLocator(['foo' => function () use(&$locator) {
             return $locator->get('bar');

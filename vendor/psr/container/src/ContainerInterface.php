@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper2d11f18408ea\Psr\Container;
+namespace _PhpScoperdb89411b20b4\Psr\Container;
 
 /**
  * Describes the interface of a container that exposes methods to read its entries.

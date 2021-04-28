@@ -38,7 +38,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\PackageVersions\\": "src\/PackageVersions"
+                    "_PhpScoperdb89411b20b4\\PackageVersions\\": "src\/PackageVersions"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -108,7 +108,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Composer\\Semver\\": "src"
+                    "_PhpScoperdb89411b20b4\\Composer\\Semver\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -188,7 +188,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Composer\\XdebugHandler\\": "src"
+                    "_PhpScoperdb89411b20b4\\Composer\\XdebugHandler\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -258,7 +258,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
+                    "_PhpScoperdb89411b20b4\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -333,7 +333,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
+                    "_PhpScoperdb89411b20b4\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -526,7 +526,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Jean85\\": "src\/"
+                    "_PhpScoperdb89411b20b4\\Jean85\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -934,7 +934,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Psr\\Cache\\": "src\/"
+                    "_PhpScoperdb89411b20b4\\Psr\\Cache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -981,7 +981,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Psr\\Container\\": "src\/"
+                    "_PhpScoperdb89411b20b4\\Psr\\Container\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1037,7 +1037,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Psr\\EventDispatcher\\": "src\/"
+                    "_PhpScoperdb89411b20b4\\Psr\\EventDispatcher\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1090,7 +1090,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Psr\\Log\\": "Psr\/Log\/"
+                    "_PhpScoperdb89411b20b4\\Psr\\Log\\": "Psr\/Log\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1143,7 +1143,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Psr\\SimpleCache\\": "src\/"
+                    "_PhpScoperdb89411b20b4\\Psr\\SimpleCache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1350,7 +1350,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\Cache\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\Cache\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1431,7 +1431,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Contracts\\Cache\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Contracts\\Cache\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1517,7 +1517,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\Config\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\Config\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1611,7 +1611,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\Console\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\Console\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1707,7 +1707,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\DependencyInjection\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\DependencyInjection\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1849,7 +1849,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\ErrorHandler\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\ErrorHandler\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1937,7 +1937,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\EventDispatcher\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\EventDispatcher\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2014,7 +2014,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Contracts\\EventDispatcher\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Contracts\\EventDispatcher\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2084,7 +2084,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\Filesystem\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\Filesystem\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2148,7 +2148,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\Finder\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\Finder\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2224,7 +2224,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Contracts\\HttpClient\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Contracts\\HttpClient\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2305,7 +2305,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\HttpFoundation\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\HttpFoundation\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2420,7 +2420,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\HttpKernel\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\HttpKernel\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2487,7 +2487,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\OptionsResolver\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\OptionsResolver\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3210,7 +3210,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\Process\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\Process\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3287,7 +3287,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Contracts\\Service\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Contracts\\Service\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -3357,7 +3357,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\Stopwatch\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\Stopwatch\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3432,7 +3432,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\String\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\String\\": ""
                 },
                 "files": [
                     "Resources\/functions.php"
@@ -3530,7 +3530,7 @@
                     "Resources\/functions\/dump.php"
                 ],
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\VarDumper\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\VarDumper\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3602,7 +3602,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScoper2d11f18408ea\\Symfony\\Component\\VarExporter\\": ""
+                    "_PhpScoperdb89411b20b4\\Symfony\\Component\\VarExporter\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3658,7 +3658,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/autowire-array-parameter",
-                "reference": "725320a48156f3972d7d766b70257de1dd86af07"
+                "reference": "082531e1758f170dec639ec9cd5858f94bc208f6"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -3672,7 +3672,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -3703,7 +3703,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/coding-standard",
-                "reference": "c9ab602c4af100147e73a3c1dfe4e12776e008ca"
+                "reference": "32e5e2ed86a7e793e28adf6af01e9c20cc5e3c0e"
             },
             "require": {
                 "friendsofphp\/php-cs-fixer": "^2.18.5",
@@ -3729,7 +3729,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -3760,7 +3760,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/composer-json-manipulator",
-                "reference": "1d07d185c603ac1b1641d4be6009820a6b8bb5ec"
+                "reference": "a58d9f73bb7f756b720428566761854a44d86641"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -3778,7 +3778,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -3809,7 +3809,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/console-color-diff",
-                "reference": "92bda09955c8aa0465323996011217a7ad9d9f95"
+                "reference": "1572b114d39499757fa2d7d46367fc41ba07e006"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -3826,7 +3826,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -3857,7 +3857,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/console-package-builder",
-                "reference": "e196e95414e643ad86b82abaa742148fbb588f48"
+                "reference": "072420b8373cd28e617dbccd7abdef4e5a5a2871"
             },
             "require": {
                 "php": ">=7.3",
@@ -3873,7 +3873,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -3904,7 +3904,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/easy-testing",
-                "reference": "25aad51cc54f9fc5fff7aec46b360c41bb913025"
+                "reference": "d12b5b2772dc757b3b6141819fac9b71287095e4"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -3927,7 +3927,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -3958,7 +3958,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/package-builder",
-                "reference": "0846abe46364a9885a91b0523543cac7646022cf"
+                "reference": "be792b98451e1d6098dc76fcbcc64a664b597239"
             },
             "require": {
                 "nette\/neon": "^3.2",
@@ -3978,7 +3978,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -4009,7 +4009,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/rule-doc-generator-contracts",
-                "reference": "3cca32a431202b6187430c96bbb66421586795d4"
+                "reference": "b661f9642938eb64d076c4eff25ad4ffc439ef8c"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -4018,7 +4018,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -4044,7 +4044,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/set-config-resolver",
-                "reference": "903b9eb865a456cf52e1af96038f576dfa81adb5"
+                "reference": "01defc375e33a7a65f747165afe7ad695f92a0d0"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -4063,7 +4063,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -4094,7 +4094,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/skipper",
-                "reference": "b7ef6bd5188f29ec5632e9c6586a647e022c9f9f"
+                "reference": "5db8993e3167f28b60516b17de50c937df17ba75"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -4113,7 +4113,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -4144,7 +4144,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/smart-file-system",
-                "reference": "0cab2a1255cdeb0840c16f8d25df02818bf0089c"
+                "reference": "2dea618353e3da36cb4244b28f0ca41387d764f2"
             },
             "require": {
                 "nette\/utils": "^3.2",
@@ -4159,7 +4159,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",
@@ -4190,7 +4190,7 @@
             "dist": {
                 "type": "path",
                 "url": "..\/..\/packages\/symplify-kernel",
-                "reference": "242e94bb3e45b8079f8d43cdfc26e072778067af"
+                "reference": "6ce79f29218bd8b90f70b6ed993c227b8d8bd57f"
             },
             "require": {
                 "jean85\/pretty-package-versions": "^1.6|^2.0.1",
@@ -4209,7 +4209,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "9.3-dev"
+                    "dev-main": "9.4-dev"
                 }
             },
             "installation-source": "dist",

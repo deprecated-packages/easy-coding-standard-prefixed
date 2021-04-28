@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\ControllerMetadata;
+namespace _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\ControllerMetadata;
 
-use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\Attribute\ArgumentInterface;
+use _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\Attribute\ArgumentInterface;
 /**
  * Responsible for storing metadata of an argument.
  *

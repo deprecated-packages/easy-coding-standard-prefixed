@@ -3,13 +3,13 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection;
 
-use _PhpScoper2d11f18408ea\Symfony\Component\Config\FileLocator as SimpleFileLocator;
-use _PhpScoper2d11f18408ea\Symfony\Component\Config\Loader\DelegatingLoader;
-use _PhpScoper2d11f18408ea\Symfony\Component\Config\Loader\GlobFileLoader;
-use _PhpScoper2d11f18408ea\Symfony\Component\Config\Loader\LoaderResolver;
-use _PhpScoper2d11f18408ea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\Config\FileLocator;
-use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoperdb89411b20b4\Symfony\Component\Config\FileLocator as SimpleFileLocator;
+use _PhpScoperdb89411b20b4\Symfony\Component\Config\Loader\DelegatingLoader;
+use _PhpScoperdb89411b20b4\Symfony\Component\Config\Loader\GlobFileLoader;
+use _PhpScoperdb89411b20b4\Symfony\Component\Config\Loader\LoaderResolver;
+use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\Config\FileLocator;
+use _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\KernelInterface;
 use Symplify\PackageBuilder\DependencyInjection\FileLoader\ParameterMergingPhpFileLoader;
 final class DelegatingLoaderFactory
 {

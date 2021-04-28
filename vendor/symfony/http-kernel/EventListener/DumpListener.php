@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper2d11f18408ea\Symfony\Component\Console\ConsoleEvents;
-use _PhpScoper2d11f18408ea\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper2d11f18408ea\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use _PhpScoper2d11f18408ea\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
-use _PhpScoper2d11f18408ea\Symfony\Component\VarDumper\Server\Connection;
-use _PhpScoper2d11f18408ea\Symfony\Component\VarDumper\VarDumper;
+use _PhpScoperdb89411b20b4\Symfony\Component\Console\ConsoleEvents;
+use _PhpScoperdb89411b20b4\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
+use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Server\Connection;
+use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\VarDumper;
 /**
  * Configures dump() handler.
  *

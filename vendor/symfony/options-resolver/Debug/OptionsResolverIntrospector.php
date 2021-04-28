@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2d11f18408ea\Symfony\Component\OptionsResolver\Debug;
+namespace _PhpScoperdb89411b20b4\Symfony\Component\OptionsResolver\Debug;
 
-use _PhpScoper2d11f18408ea\Symfony\Component\OptionsResolver\Exception\NoConfigurationException;
-use _PhpScoper2d11f18408ea\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
-use _PhpScoper2d11f18408ea\Symfony\Component\OptionsResolver\OptionsResolver;
+use _PhpScoperdb89411b20b4\Symfony\Component\OptionsResolver\Exception\NoConfigurationException;
+use _PhpScoperdb89411b20b4\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
+use _PhpScoperdb89411b20b4\Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  *

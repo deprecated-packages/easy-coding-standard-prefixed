@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2d11f18408ea\Symfony\Contracts\HttpClient\Exception;
+namespace _PhpScoperdb89411b20b4\Symfony\Contracts\HttpClient\Exception;
 
 /**
  * When an idle timeout occurs.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-interface TimeoutExceptionInterface extends \_PhpScoper2d11f18408ea\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+interface TimeoutExceptionInterface extends \_PhpScoperdb89411b20b4\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
 {
 }
