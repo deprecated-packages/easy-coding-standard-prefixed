@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3fd2fa23bf53;
+namespace _PhpScoper2d11f18408ea;
 
-use _PhpScoper3fd2fa23bf53\Nette\Utils\Strings;
-use _PhpScoper3fd2fa23bf53\Isolated\Symfony\Component\Finder\Finder;
-$finder = new \_PhpScoper3fd2fa23bf53\Isolated\Symfony\Component\Finder\Finder();
+use _PhpScoper2d11f18408ea\Nette\Utils\Strings;
+use _PhpScoper2d11f18408ea\Isolated\Symfony\Component\Finder\Finder;
+$finder = new \_PhpScoper2d11f18408ea\Isolated\Symfony\Component\Finder\Finder();
 $polyfillFileInfos = $finder->files()->in(__DIR__ . '/vendor/symfony/polyfill-*')->name('*.php')->getIterator();
 $polyfillFilePaths = [];
 foreach ($polyfillFileInfos as $polyfillFileInfo) {
@@ -21,9 +21,9 @@ return ['files-whitelist' => [
     'PhpCsFixer\\*',
     'PHP_CodeSniffer\\*',
     'SlevomatCodingStandard\\*',
-    '_PhpScoper3fd2fa23bf53\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
-    '_PhpScoper3fd2fa23bf53\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
-    '_PhpScoper3fd2fa23bf53\\Composer\\InstalledVersions',
+    '_PhpScoper2d11f18408ea\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
+    '_PhpScoper2d11f18408ea\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
+    '_PhpScoper2d11f18408ea\\Composer\\InstalledVersions',
     'Symfony\\Polyfill\\*',
 ], 'patchers' => [
     function (string $filePath, string $prefix, string $content) : string {
@@ -31,7 +31,7 @@ return ['files-whitelist' => [
             return $content;
         }
         // see https://regex101.com/r/v8zRMm/1
-        return Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScoper3fd2fa23bf53\\Composer\\InstalledVersions');
+        return Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScoper2d11f18408ea\\Composer\\InstalledVersions');
     },
     // fixes https://github.com/symplify/symplify/issues/3102
     function (string $filePath, string $prefix, string $content) : string {

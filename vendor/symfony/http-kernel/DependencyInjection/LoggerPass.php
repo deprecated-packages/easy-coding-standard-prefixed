@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper3fd2fa23bf53\Psr\Log\LoggerInterface;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Log\Logger;
+use _PhpScoper2d11f18408ea\Psr\Log\LoggerInterface;
+use _PhpScoper2d11f18408ea\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper2d11f18408ea\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\Log\Logger;
 /**
  * Registers the default logger if necessary.
  *

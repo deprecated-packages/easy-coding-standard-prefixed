@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper3fd2fa23bf53;
+namespace _PhpScoper2d11f18408ea;
 
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper2d11f18408ea\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
 use Symplify\PackageBuilder\Reflection\PrivatesAccessor;
 return static function (ContainerConfigurator $containerConfigurator) : void {

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\ArrayNotation;
 
-use _PhpScoper3fd2fa23bf53\Nette\Utils\Strings;
+use _PhpScoper2d11f18408ea\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;

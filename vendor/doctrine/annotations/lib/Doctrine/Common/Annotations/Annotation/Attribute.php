@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper3fd2fa23bf53\Doctrine\Common\Annotations\Annotation;
+namespace _PhpScoper2d11f18408ea\Doctrine\Common\Annotations\Annotation;
 
 /**
  * Annotation that can be used to signal to the parser

@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Cache;
 
-use _PhpScoper3fd2fa23bf53\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper2d11f18408ea\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * @author Andreas Möller <am@localheinz.com>
  *

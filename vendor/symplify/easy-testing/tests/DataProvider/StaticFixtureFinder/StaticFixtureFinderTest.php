@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\Tests\DataProvider\StaticFixtureFinder;
 
-use _PhpScoper3fd2fa23bf53\PHPUnit\Framework\TestCase;
+use _PhpScoper2d11f18408ea\PHPUnit\Framework\TestCase;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class StaticFixtureFinderTest extends TestCase

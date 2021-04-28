@@ -30,7 +30,7 @@ final class HeredocToNowdocFixer extends AbstractFixer
         return new FixerDefinition('Convert `heredoc` to `nowdoc` where possible.', [new CodeSample(<<<'EOF'
 <?php
 
-namespace _PhpScoper3fd2fa23bf53;
+namespace _PhpScoper2d11f18408ea;
 
 $a = <<<TEST
 Foo

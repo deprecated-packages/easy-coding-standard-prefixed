@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\HttpCache\SubRequestHandler;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\HttpKernelInterface;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScoper3fd2fa23bf53\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper2d11f18408ea\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper2d11f18408ea\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\HttpCache\SubRequestHandler;
+use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper2d11f18408ea\Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 /**
  * Implements the inline rendering strategy where the Request is rendered by the current HTTP kernel.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class InlineFragmentRenderer extends \_PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
+class InlineFragmentRenderer extends \_PhpScoper2d11f18408ea\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
 {
     private $kernel;
     private $dispatcher;

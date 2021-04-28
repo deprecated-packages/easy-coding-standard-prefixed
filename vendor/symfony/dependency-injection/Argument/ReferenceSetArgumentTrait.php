@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3fd2fa23bf53\Symfony\Component\DependencyInjection\Argument;
+namespace _PhpScoper2d11f18408ea\Symfony\Component\DependencyInjection\Argument;
 
-use _PhpScoper3fd2fa23bf53\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper3fd2fa23bf53\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper2d11f18408ea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper2d11f18408ea\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
