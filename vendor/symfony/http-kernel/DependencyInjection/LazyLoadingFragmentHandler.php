@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper8a1ea80774eb\Psr\Container\ContainerInterface;
-use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\Fragment\FragmentHandler;
+use _PhpScoper3fd2fa23bf53\Psr\Container\ContainerInterface;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Fragment\FragmentHandler;
 /**
  * Lazily loads fragment renderers from the dependency injection container.
  *

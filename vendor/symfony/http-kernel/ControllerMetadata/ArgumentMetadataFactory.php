@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\ControllerMetadata;
+namespace _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\ControllerMetadata;
 
-use _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\Attribute\ArgumentInterface;
-use _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\Exception\InvalidMetadataException;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Attribute\ArgumentInterface;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Exception\InvalidMetadataException;
 /**
  * Builds {@see ArgumentMetadata} objects based on the given Controller.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class ArgumentMetadataFactory implements \_PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface
+final class ArgumentMetadataFactory implements \_PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface
 {
     /**
      * {@inheritdoc}
@@ -49,7 +49,7 @@ final class ArgumentMetadataFactory implements \_PhpScoper8a1ea80774eb\Symfony\C
                     $attribute = $reflectionAttributes[0]->newInstance();
                 }
             }
-            $arguments[] = new \_PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata($param->getName(), $this->getType($param, $reflection), $param->isVariadic(), $param->isDefaultValueAvailable(), $param->isDefaultValueAvailable() ? $param->getDefaultValue() : null, $param->allowsNull(), $attribute);
+            $arguments[] = new \_PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata($param->getName(), $this->getType($param, $reflection), $param->isVariadic(), $param->isDefaultValueAvailable(), $param->isDefaultValueAvailable() ? $param->getDefaultValue() : null, $param->allowsNull(), $attribute);
         }
         return $arguments;
     }

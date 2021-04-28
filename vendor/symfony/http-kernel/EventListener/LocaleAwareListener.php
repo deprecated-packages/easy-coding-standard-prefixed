@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper8a1ea80774eb\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper8a1ea80774eb\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScoper8a1ea80774eb\Symfony\Contracts\Translation\LocaleAwareInterface;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper3fd2fa23bf53\Symfony\Contracts\Translation\LocaleAwareInterface;
 /**
  * Pass the current locale to the provided services.
  *

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a1ea80774eb\Symfony\Component\String;
+namespace _PhpScoper3fd2fa23bf53\Symfony\Component\String;
 
-use _PhpScoper8a1ea80774eb\Symfony\Component\String\Exception\ExceptionInterface;
-use _PhpScoper8a1ea80774eb\Symfony\Component\String\Exception\InvalidArgumentException;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\String\Exception\ExceptionInterface;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\String\Exception\InvalidArgumentException;
 /**
  * Represents a string of Unicode grapheme clusters encoded as UTF-8.
  *
@@ -28,7 +28,7 @@ use _PhpScoper8a1ea80774eb\Symfony\Component\String\Exception\InvalidArgumentExc
  *
  * @throws ExceptionInterface
  */
-class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractUnicodeString
+class UnicodeString extends \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractUnicodeString
 {
     public function __construct(string $string = '')
     {
@@ -37,7 +37,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
             throw new InvalidArgumentException('Invalid UTF-8 string.');
         }
     }
-    public function append(string ...$suffix) : \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString
+    public function append(string ...$suffix) : \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         $str->string = $this->string . (1 >= \count($suffix) ? $suffix[0] ?? '' : \implode('', $suffix));
@@ -71,7 +71,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
     }
     public function endsWith($suffix) : bool
     {
-        if ($suffix instanceof \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString) {
+        if ($suffix instanceof \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString) {
             $suffix = $suffix->string;
         } elseif (\is_array($suffix) || $suffix instanceof \Traversable) {
             return parent::endsWith($suffix);
@@ -90,7 +90,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
     }
     public function equalsTo($string) : bool
     {
-        if ($string instanceof \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString) {
+        if ($string instanceof \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString) {
             $string = $string->string;
         } elseif (\is_array($string) || $string instanceof \Traversable) {
             return parent::equalsTo($string);
@@ -106,7 +106,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
     }
     public function indexOf($needle, int $offset = 0) : ?int
     {
-        if ($needle instanceof \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString) {
+        if ($needle instanceof \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
         } elseif (\is_array($needle) || $needle instanceof \Traversable) {
             return parent::indexOf($needle, $offset);
@@ -127,7 +127,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
     }
     public function indexOfLast($needle, int $offset = 0) : ?int
     {
-        if ($needle instanceof \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString) {
+        if ($needle instanceof \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
         } elseif (\is_array($needle) || $needle instanceof \Traversable) {
             return parent::indexOfLast($needle, $offset);
@@ -150,7 +150,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
         $i = $this->ignoreCase ? \grapheme_strripos($string, $needle, $offset) : \grapheme_strrpos($string, $needle, $offset);
         return \false === $i ? null : $i;
     }
-    public function join(array $strings, string $lastGlue = null) : \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString
+    public function join(array $strings, string $lastGlue = null) : \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString
     {
         $str = parent::join($strings, $lastGlue);
         \normalizer_is_normalized($str->string) ?: ($str->string = \normalizer_normalize($str->string));
@@ -176,7 +176,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
         }
         return $str;
     }
-    public function prepend(string ...$prefix) : \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString
+    public function prepend(string ...$prefix) : \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         $str->string = (1 >= \count($prefix) ? $prefix[0] ?? '' : \implode('', $prefix)) . $this->string;
@@ -186,7 +186,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
         }
         return $str;
     }
-    public function replace(string $from, string $to) : \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString
+    public function replace(string $from, string $to) : \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         \normalizer_is_normalized($from) ?: ($from = \normalizer_normalize($from));
@@ -207,13 +207,13 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
         }
         return $str;
     }
-    public function replaceMatches(string $fromRegexp, $to) : \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString
+    public function replaceMatches(string $fromRegexp, $to) : \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString
     {
         $str = parent::replaceMatches($fromRegexp, $to);
         \normalizer_is_normalized($str->string) ?: ($str->string = \normalizer_normalize($str->string));
         return $str;
     }
-    public function slice(int $start = 0, int $length = null) : \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString
+    public function slice(int $start = 0, int $length = null) : \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         if (\PHP_VERSION_ID < 80000 && 0 > $start && \grapheme_strlen($this->string) < -$start) {
@@ -222,7 +222,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
         $str->string = (string) \grapheme_substr($this->string, $start, $length ?? 2147483647);
         return $str;
     }
-    public function splice(string $replacement, int $start = 0, int $length = null) : \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString
+    public function splice(string $replacement, int $start = 0, int $length = null) : \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         if (\PHP_VERSION_ID < 80000 && 0 > $start && \grapheme_strlen($this->string) < -$start) {
@@ -268,7 +268,7 @@ class UnicodeString extends \_PhpScoper8a1ea80774eb\Symfony\Component\String\Abs
     }
     public function startsWith($prefix) : bool
     {
-        if ($prefix instanceof \_PhpScoper8a1ea80774eb\Symfony\Component\String\AbstractString) {
+        if ($prefix instanceof \_PhpScoper3fd2fa23bf53\Symfony\Component\String\AbstractString) {
             $prefix = $prefix->string;
         } elseif (\is_array($prefix) || $prefix instanceof \Traversable) {
             return parent::startsWith($prefix);

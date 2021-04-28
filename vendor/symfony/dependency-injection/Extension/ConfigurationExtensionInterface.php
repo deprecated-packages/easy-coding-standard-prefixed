@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Extension;
+namespace _PhpScoper3fd2fa23bf53\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScoper8a1ea80774eb\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ConfigurationExtensionInterface is the interface implemented by container extension classes.
  *

@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScoper8a1ea80774eb\Psr\Container\ContainerInterface;
-use _PhpScoper8a1ea80774eb\Psr\Log\LoggerInterface;
-use _PhpScoper8a1ea80774eb\Symfony\Component\DependencyInjection\Container;
+use _PhpScoper3fd2fa23bf53\Psr\Container\ContainerInterface;
+use _PhpScoper3fd2fa23bf53\Psr\Log\LoggerInterface;
+use _PhpScoper3fd2fa23bf53\Symfony\Component\DependencyInjection\Container;
 /**
  * A controller resolver searching for a controller in a psr-11 container when using the "service::method" notation.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class ContainerControllerResolver extends \_PhpScoper8a1ea80774eb\Symfony\Component\HttpKernel\Controller\ControllerResolver
+class ContainerControllerResolver extends \_PhpScoper3fd2fa23bf53\Symfony\Component\HttpKernel\Controller\ControllerResolver
 {
     protected $container;
     public function __construct(ContainerInterface $container, LoggerInterface $logger = null)
