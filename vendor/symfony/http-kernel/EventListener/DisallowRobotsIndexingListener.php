@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper1b2f8b9c0339\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperdb89411b20b4\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Ensures that the application is not indexed by search engines.
  *

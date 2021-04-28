@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Symfony\Component\Config;
+namespace _PhpScoper1b2f8b9c0339\Symfony\Component\Config;
 
-use _PhpScoperdb89411b20b4\Symfony\Component\Config\Resource\ResourceInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScoperdb89411b20b4\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Config\Resource\ResourceInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Filesystem\Filesystem;
 /**
  * ResourceCheckerConfigCache uses instances of ResourceCheckerInterface
  * to check whether cached data is still fresh.
  *
  * @author Matthias Pigulla <mp@webfactory.de>
  */
-class ResourceCheckerConfigCache implements \_PhpScoperdb89411b20b4\Symfony\Component\Config\ConfigCacheInterface
+class ResourceCheckerConfigCache implements \_PhpScoper1b2f8b9c0339\Symfony\Component\Config\ConfigCacheInterface
 {
     /**
      * @var string

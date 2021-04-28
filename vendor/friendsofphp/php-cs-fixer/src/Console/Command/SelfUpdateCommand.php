@@ -15,11 +15,11 @@ use PhpCsFixer\Console\SelfUpdate\NewVersionCheckerInterface;
 use PhpCsFixer\PharCheckerInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\ToolInfoInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\Console\Command\Command;
-use _PhpScoperdb89411b20b4\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperdb89411b20b4\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Console\Command\Command;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Igor Wiedler <igor@wiedler.ch>
  * @author Stephane PY <py.stephane1@gmail.com>

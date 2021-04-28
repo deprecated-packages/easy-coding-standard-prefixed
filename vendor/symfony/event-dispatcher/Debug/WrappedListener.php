@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Symfony\Component\EventDispatcher\Debug;
+namespace _PhpScoper1b2f8b9c0339\Symfony\Component\EventDispatcher\Debug;
 
-use _PhpScoperdb89411b20b4\Psr\EventDispatcher\StoppableEventInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\Stopwatch\Stopwatch;
-use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Caster\ClassStub;
+use _PhpScoper1b2f8b9c0339\Psr\EventDispatcher\StoppableEventInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Caster\ClassStub;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */

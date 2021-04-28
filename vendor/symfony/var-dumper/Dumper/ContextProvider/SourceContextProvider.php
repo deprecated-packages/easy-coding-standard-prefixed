@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Dumper\ContextProvider;
+namespace _PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Dumper\ContextProvider;
 
-use _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
-use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\VarDumper;
-use _PhpScoperdb89411b20b4\Twig\Template;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\VarDumper;
+use _PhpScoper1b2f8b9c0339\Twig\Template;
 /**
  * Tries to provide context from sources (class name, file, line, code excerpt, ...).
  *
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-final class SourceContextProvider implements \_PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
+final class SourceContextProvider implements \_PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
 {
     private $limit;
     private $charset;

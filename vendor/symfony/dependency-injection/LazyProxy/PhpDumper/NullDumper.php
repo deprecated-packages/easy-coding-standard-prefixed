@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
+namespace _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper;
 
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\Definition;
 /**
  * Null dumper, negates any proxy code generation for any given service definition.
  *
@@ -18,7 +18,7 @@ use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\Definition;
  *
  * @final
  */
-class NullDumper implements \_PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
+class NullDumper implements \_PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
 {
     /**
      * {@inheritdoc}

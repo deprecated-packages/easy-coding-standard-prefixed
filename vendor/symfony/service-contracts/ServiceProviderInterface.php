@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Symfony\Contracts\Service;
+namespace _PhpScoper1b2f8b9c0339\Symfony\Contracts\Service;
 
-use _PhpScoperdb89411b20b4\Psr\Container\ContainerInterface;
+use _PhpScoper1b2f8b9c0339\Psr\Container\ContainerInterface;
 /**
  * A ServiceProviderInterface exposes the identifiers and the types of services provided by a container.
  *

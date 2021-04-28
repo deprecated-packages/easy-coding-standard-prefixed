@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Dumper;
+namespace _PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Dumper;
 
-use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Server\Connection;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Server\Connection;
 /**
  * ServerDumper forwards serialized Data clones to a server.
  *
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-class ServerDumper implements \_PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Dumper\DataDumperInterface
+class ServerDumper implements \_PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Dumper\DataDumperInterface
 {
     private $connection;
     private $wrappedDumper;
@@ -27,7 +27,7 @@ class ServerDumper implements \_PhpScoperdb89411b20b4\Symfony\Component\VarDumpe
      * @param DataDumperInterface|null   $wrappedDumper    A wrapped instance used whenever we failed contacting the server
      * @param ContextProviderInterface[] $contextProviders Context providers indexed by context name
      */
-    public function __construct(string $host, \_PhpScoperdb89411b20b4\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper = null, array $contextProviders = [])
+    public function __construct(string $host, \_PhpScoper1b2f8b9c0339\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper = null, array $contextProviders = [])
     {
         $this->connection = new Connection($host, $contextProviders);
         $this->wrappedDumper = $wrappedDumper;

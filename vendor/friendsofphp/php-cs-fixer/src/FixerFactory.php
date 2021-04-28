@@ -16,8 +16,8 @@ use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\RuleSet\RuleSetInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoperdb89411b20b4\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Finder\SplFileInfo;
 /**
  * Class provides a way to create a group of fixers.
  *

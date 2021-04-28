@@ -1,15 +1,15 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperdb89411b20b4;
+namespace _PhpScoper1b2f8b9c0339;
 
-use _PhpScoperdb89411b20b4\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoperdb89411b20b4\Psr\SimpleCache\CacheInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use _PhpScoperdb89411b20b4\Symfony\Component\Cache\Adapter\TagAwareAdapter;
-use _PhpScoperdb89411b20b4\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\Cache\Psr16Cache;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper1b2f8b9c0339\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper1b2f8b9c0339\Psr\SimpleCache\CacheInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Cache\Adapter\TagAwareAdapter;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Cache\Psr16Cache;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();

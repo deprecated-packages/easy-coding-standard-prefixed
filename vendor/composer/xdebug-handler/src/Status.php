@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Composer\XdebugHandler;
+namespace _PhpScoper1b2f8b9c0339\Composer\XdebugHandler;
 
-use _PhpScoperdb89411b20b4\Psr\Log\LoggerInterface;
-use _PhpScoperdb89411b20b4\Psr\Log\LogLevel;
+use _PhpScoper1b2f8b9c0339\Psr\Log\LoggerInterface;
+use _PhpScoper1b2f8b9c0339\Psr\Log\LogLevel;
 /**
  * @author John Stevenson <john-stevenson@blueyonder.co.uk>
  * @internal
@@ -40,7 +40,7 @@ class Status
     public function __construct($envAllowXdebug, $debug)
     {
         $start = \getenv(self::ENV_RESTART);
-        \_PhpScoperdb89411b20b4\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART);
+        \_PhpScoper1b2f8b9c0339\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART);
         $this->time = $start ? \round((\microtime(\true) - $start) * 1000) : 0;
         $this->envAllowXdebug = $envAllowXdebug;
         $this->debug = $debug && \defined('STDERR');
@@ -106,7 +106,7 @@ class Status
     private function reportRestart()
     {
         $this->output($this->getLoadedMessage());
-        \_PhpScoperdb89411b20b4\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART, (string) \microtime(\true));
+        \_PhpScoper1b2f8b9c0339\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART, (string) \microtime(\true));
     }
     private function reportRestarted()
     {

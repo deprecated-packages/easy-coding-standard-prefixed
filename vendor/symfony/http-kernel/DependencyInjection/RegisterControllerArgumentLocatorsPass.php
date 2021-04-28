@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper1b2f8b9c0339\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoperdb89411b20b4\Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperdb89411b20b4\Symfony\Component\DependencyInjection\TypedReference;
-use _PhpScoperdb89411b20b4\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper1b2f8b9c0339\Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\HttpFoundation\Request;
 /**
  * Creates the service-locators required by ServiceValueResolver.
  *

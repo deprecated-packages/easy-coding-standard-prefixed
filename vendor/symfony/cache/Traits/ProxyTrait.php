@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperdb89411b20b4\Symfony\Component\Cache\Traits;
+namespace _PhpScoper1b2f8b9c0339\Symfony\Component\Cache\Traits;
 
-use _PhpScoperdb89411b20b4\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoperdb89411b20b4\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper1b2f8b9c0339\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
