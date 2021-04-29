@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper1b2f8b9c0339\Doctrine\Common\Annotations;
+namespace _PhpScoper2dc059b3a969\Doctrine\Common\Annotations;
 
 /**
  *  A list of annotations that are implicitly ignored during the parsing process.

@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper1b2f8b9c0339;
+namespace _PhpScoper2dc059b3a969;
 
-use _PhpScoper1b2f8b9c0339\Symfony\Component\Cache\Adapter\Psr16Adapter;
-use _PhpScoper1b2f8b9c0339\Symfony\Component\Cache\Adapter\TagAwareAdapter;
-use _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function _PhpScoper1b2f8b9c0339\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use _PhpScoper2dc059b3a969\Symfony\Component\Cache\Adapter\Psr16Adapter;
+use _PhpScoper2dc059b3a969\Symfony\Component\Cache\Adapter\TagAwareAdapter;
+use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use function _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();

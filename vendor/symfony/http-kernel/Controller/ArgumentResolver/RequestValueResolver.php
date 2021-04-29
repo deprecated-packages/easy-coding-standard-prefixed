@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper1b2f8b9c0339\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoper1b2f8b9c0339\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper1b2f8b9c0339\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoper1b2f8b9c0339\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoper2dc059b3a969\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields the same instance as the request object passed along.
  *
