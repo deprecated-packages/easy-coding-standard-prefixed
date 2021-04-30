@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Json;
 
-use _PhpScoper2dc059b3a969\Nette\Utils\Strings;
+use _PhpScopera658fe86acec\Nette\Utils\Strings;
 use Symplify\ComposerJsonManipulator\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 final class JsonInliner

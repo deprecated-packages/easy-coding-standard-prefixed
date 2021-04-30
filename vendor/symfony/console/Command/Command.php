@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dc059b3a969\Symfony\Component\Console\Command;
+namespace _PhpScopera658fe86acec\Symfony\Component\Console\Command;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Application;
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Exception\ExceptionInterface;
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Exception\LogicException;
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Helper\HelperSet;
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper2dc059b3a969\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Application;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Exception\ExceptionInterface;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Exception\LogicException;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Helper\HelperSet;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputArgument;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputOption;
+use _PhpScopera658fe86acec\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Base class for all commands.
  *
@@ -206,7 +206,7 @@ class Command
                         \cli_set_process_title($this->processTitle);
                     }
                 }
-            } elseif (\function_exists('_PhpScoper2dc059b3a969\\setproctitle')) {
+            } elseif (\function_exists('_PhpScopera658fe86acec\\setproctitle')) {
                 setproctitle($this->processTitle);
             } elseif (OutputInterface::VERBOSITY_VERY_VERBOSE === $output->getVerbosity()) {
                 $output->writeln('<comment>Install the proctitle PECL to be able to change the process title.</comment>');

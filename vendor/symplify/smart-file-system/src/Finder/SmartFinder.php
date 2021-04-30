@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Finder;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\Finder\Finder;
+use _PhpScopera658fe86acec\Symfony\Component\Finder\Finder;
 use Symplify\SmartFileSystem\FileSystemFilter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 /**

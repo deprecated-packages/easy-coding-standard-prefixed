@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScopera658fe86acec\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Reference;
 /**
  * Register all services that have the "kernel.locale_aware" tag into the listener.
  *

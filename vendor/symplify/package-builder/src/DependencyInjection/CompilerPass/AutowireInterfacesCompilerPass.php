@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\DependencyInjection\CompilerPass;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ContainerBuilder;
 final class AutowireInterfacesCompilerPass implements CompilerPassInterface
 {
     /**

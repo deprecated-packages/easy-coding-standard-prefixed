@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper2dc059b3a969\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\UriSigner;
-use _PhpScoper2dc059b3a969\Twig\Environment;
+use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Request;
+use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Response;
+use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\UriSigner;
+use _PhpScopera658fe86acec\Twig\Environment;
 /**
  * Implements the Hinclude rendering strategy.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class HIncludeFragmentRenderer extends \_PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
+class HIncludeFragmentRenderer extends \_PhpScopera658fe86acec\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
 {
     private $globalDefaultTemplate;
     private $signer;

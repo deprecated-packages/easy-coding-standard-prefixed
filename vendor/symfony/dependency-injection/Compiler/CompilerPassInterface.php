@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Interface that must be implemented by compilation passes.
  *

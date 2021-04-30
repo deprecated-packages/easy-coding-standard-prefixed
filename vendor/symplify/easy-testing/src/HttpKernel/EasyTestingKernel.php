@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\HttpKernel;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScopera658fe86acec\Symfony\Component\Config\Loader\LoaderInterface;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
 final class EasyTestingKernel extends AbstractSymplifyKernel
 {

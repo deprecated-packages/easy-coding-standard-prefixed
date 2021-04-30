@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dc059b3a969\Symfony\Component\VarDumper\Caster;
+namespace _PhpScopera658fe86acec\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScopera658fe86acec\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Helper for filtering out properties in casters.
  *

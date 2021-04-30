@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper2dc059b3a969;
+namespace _PhpScopera658fe86acec;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\Skipper\Tests\Skipper\Only\Source\IncludeThisClass;
 use Symplify\Skipper\Tests\Skipper\Only\Source\SkipCompletely;
 use Symplify\Skipper\Tests\Skipper\Only\Source\SkipCompletelyToo;

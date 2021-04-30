@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper2dc059b3a969\Symfony\Contracts\Service\Attribute\Required;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera658fe86acec\Symfony\Contracts\Service\Attribute\Required;
 /**
  * Looks for definitions with autowiring enabled and registers their corresponding "@required" methods as setters.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AutowireRequiredMethodsPass extends \_PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class AutowireRequiredMethodsPass extends \_PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     /**
      * {@inheritdoc}

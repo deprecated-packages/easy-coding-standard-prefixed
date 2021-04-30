@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Definition;
 /**
  * Replaces env var placeholders by their current values.
  */
-class ResolveEnvPlaceholdersPass extends \_PhpScoper2dc059b3a969\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveEnvPlaceholdersPass extends \_PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     protected function processValue($value, bool $isRoot = \false)
     {

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+namespace _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
-use _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Request;
+use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Yields the default value defined in the action signature when no value has been given.
  *

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Strings;
 
-use _PhpScoper2dc059b3a969\Nette\Utils\Strings;
+use _PhpScopera658fe86acec\Nette\Utils\Strings;
 use Symplify\SymplifyKernel\Exception\HttpKernel\TooGenericKernelClassException;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
 final class KernelUniqueHasher

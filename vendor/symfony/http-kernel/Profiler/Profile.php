@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\Profiler;
+namespace _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Profiler;
 
-use _PhpScoper2dc059b3a969\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
+use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 /**
  * Profile.
  *
