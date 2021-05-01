@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting;
 
-use _PhpScopera658fe86acec\Nette\Utils\Strings;
+use _PhpScoper3c44535fe75f\Nette\Utils\Strings;
 use Symplify\EasyTesting\ValueObject\Prefix;
 use Symplify\EasyTesting\ValueObject\SplitLine;
 use Symplify\SmartFileSystem\SmartFileInfo;

@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection\CompilerPass;
 
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 final class RemoveExcludedCheckersCompilerPass implements CompilerPassInterface
 {

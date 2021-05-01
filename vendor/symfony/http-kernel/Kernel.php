@@ -8,37 +8,37 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\HttpKernel;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel;
 
-use _PhpScopera658fe86acec\Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator;
-use _PhpScopera658fe86acec\Symfony\Bridge\ProxyManager\LazyProxy\PhpDumper\ProxyDumper;
-use _PhpScopera658fe86acec\Symfony\Component\Config\ConfigCache;
-use _PhpScopera658fe86acec\Symfony\Component\Config\Loader\DelegatingLoader;
-use _PhpScopera658fe86acec\Symfony\Component\Config\Loader\LoaderResolver;
-use _PhpScopera658fe86acec\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler\PassConfig;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Dumper\PhpDumper;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Dumper\Preloader;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Loader\ClosureLoader;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Loader\IniFileLoader;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use _PhpScopera658fe86acec\Symfony\Component\ErrorHandler\DebugClassLoader;
-use _PhpScopera658fe86acec\Symfony\Component\Filesystem\Filesystem;
-use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Request;
-use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Response;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Config\FileLocator;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\DependencyInjection\AddAnnotatedClassesToCachePass;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\DependencyInjection\MergeExtensionConfigurationPass;
+use _PhpScoper3c44535fe75f\Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator;
+use _PhpScoper3c44535fe75f\Symfony\Bridge\ProxyManager\LazyProxy\PhpDumper\ProxyDumper;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\ConfigCache;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Loader\DelegatingLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Loader\LoaderResolver;
+use _PhpScoper3c44535fe75f\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Dumper\PhpDumper;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Dumper\Preloader;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Loader\ClosureLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Loader\IniFileLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\ErrorHandler\DebugClassLoader;
+use _PhpScoper3c44535fe75f\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Config\FileLocator;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\DependencyInjection\AddAnnotatedClassesToCachePass;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\DependencyInjection\MergeExtensionConfigurationPass;
 // Help opcache.preload discover always-needed symbols
 \class_exists(ConfigCache::class);
 /**
@@ -51,7 +51,7 @@ use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\DependencyInjection\Merg
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Kernel implements \_PhpScopera658fe86acec\Symfony\Component\HttpKernel\KernelInterface, \_PhpScopera658fe86acec\Symfony\Component\HttpKernel\RebootableInterface, \_PhpScopera658fe86acec\Symfony\Component\HttpKernel\TerminableInterface
+abstract class Kernel implements \_PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\KernelInterface, \_PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\RebootableInterface, \_PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\TerminableInterface
 {
     /**
      * @var BundleInterface[]
@@ -67,11 +67,11 @@ abstract class Kernel implements \_PhpScopera658fe86acec\Symfony\Component\HttpK
     private $requestStackSize = 0;
     private $resetServices = \false;
     private static $freshCache = [];
-    public const VERSION = '5.2.6';
-    public const VERSION_ID = 50206;
+    public const VERSION = '5.2.7';
+    public const VERSION_ID = 50207;
     public const MAJOR_VERSION = 5;
     public const MINOR_VERSION = 2;
-    public const RELEASE_VERSION = 6;
+    public const RELEASE_VERSION = 7;
     public const EXTRA_VERSION = '';
     public const END_OF_MAINTENANCE = '07/2021';
     public const END_OF_LIFE = '07/2021';
@@ -130,7 +130,7 @@ abstract class Kernel implements \_PhpScopera658fe86acec\Symfony\Component\HttpK
         if (\false === $this->booted) {
             return;
         }
-        if ($this->getHttpKernel() instanceof \_PhpScopera658fe86acec\Symfony\Component\HttpKernel\TerminableInterface) {
+        if ($this->getHttpKernel() instanceof \_PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\TerminableInterface) {
             $this->getHttpKernel()->terminate($request, $response);
         }
     }
@@ -154,7 +154,7 @@ abstract class Kernel implements \_PhpScopera658fe86acec\Symfony\Component\HttpK
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request, int $type = \_PhpScopera658fe86acec\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, bool $catch = \true)
+    public function handle(Request $request, int $type = \_PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, bool $catch = \true)
     {
         if (!$this->booted) {
             $container = $this->container ?? $this->preBoot();
@@ -574,7 +574,7 @@ abstract class Kernel implements \_PhpScopera658fe86acec\Symfony\Component\HttpK
         if ($this instanceof CompilerPassInterface) {
             $container->addCompilerPass($this, PassConfig::TYPE_BEFORE_OPTIMIZATION, -10000);
         }
-        if (\class_exists(\_PhpScopera658fe86acec\ProxyManager\Configuration::class) && \class_exists(RuntimeInstantiator::class)) {
+        if (\class_exists(\_PhpScoper3c44535fe75f\ProxyManager\Configuration::class) && \class_exists(RuntimeInstantiator::class)) {
             $container->setProxyInstantiator(new RuntimeInstantiator());
         }
         return $container;
@@ -589,7 +589,7 @@ abstract class Kernel implements \_PhpScopera658fe86acec\Symfony\Component\HttpK
     {
         // cache the container
         $dumper = new PhpDumper($container);
-        if (\class_exists(\_PhpScopera658fe86acec\ProxyManager\Configuration::class) && \class_exists(ProxyDumper::class)) {
+        if (\class_exists(\_PhpScoper3c44535fe75f\ProxyManager\Configuration::class) && \class_exists(ProxyDumper::class)) {
             $dumper->setProxyDumper(new ProxyDumper());
         }
         $content = $dumper->dump(['class' => $class, 'base_class' => $baseClass, 'file' => $cache->getPath(), 'as_files' => \true, 'debug' => $this->debug, 'build_time' => $container->hasParameter('kernel.container_build_time') ? $container->getParameter('kernel.container_build_time') : \time(), 'preload_classes' => \array_map('get_class', $this->bundles)]);

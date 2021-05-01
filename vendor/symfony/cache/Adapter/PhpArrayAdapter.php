@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter;
 
-use _PhpScopera658fe86acec\Psr\Cache\CacheItemInterface;
-use _PhpScopera658fe86acec\Psr\Cache\CacheItemPoolInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\CacheItem;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\PruneableInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\ResettableInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\Traits\ProxyTrait;
-use _PhpScopera658fe86acec\Symfony\Component\VarExporter\VarExporter;
-use _PhpScopera658fe86acec\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper3c44535fe75f\Psr\Cache\CacheItemInterface;
+use _PhpScoper3c44535fe75f\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\CacheItem;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScoper3c44535fe75f\Symfony\Component\VarExporter\VarExporter;
+use _PhpScoper3c44535fe75f\Symfony\Contracts\Cache\CacheInterface;
 /**
  * Caches items at warm up time using a PHP array that is stored in shared memory by OPCache since PHP 7.0.
  * Warmed up items are read-only and run-time discovered items are cached using a fallback adapter.
@@ -27,7 +27,7 @@ use _PhpScopera658fe86acec\Symfony\Contracts\Cache\CacheInterface;
  * @author Titouan Galopin <galopintitouan@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class PhpArrayAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
+class PhpArrayAdapter implements \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
 {
     use ContractsTrait;
     use ProxyTrait;
@@ -40,7 +40,7 @@ class PhpArrayAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache
      * @param string           $file         The PHP file were values are cached
      * @param AdapterInterface $fallbackPool A pool to fallback on when an item is not hit
      */
-    public function __construct(string $file, \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\AdapterInterface $fallbackPool)
+    public function __construct(string $file, \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\AdapterInterface $fallbackPool)
     {
         $this->file = $file;
         $this->pool = $fallbackPool;
@@ -62,8 +62,8 @@ class PhpArrayAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache
      */
     public static function create(string $file, CacheItemPoolInterface $fallbackPool)
     {
-        if (!$fallbackPool instanceof \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\AdapterInterface) {
-            $fallbackPool = new \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\ProxyAdapter($fallbackPool);
+        if (!$fallbackPool instanceof \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\AdapterInterface) {
+            $fallbackPool = new \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\ProxyAdapter($fallbackPool);
         }
         return new static($file, $fallbackPool);
     }
@@ -240,7 +240,7 @@ class PhpArrayAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache
         $this->keys = $this->values = [];
         $cleared = @\unlink($this->file) || !\file_exists($this->file);
         unset(self::$valuesCache[$this->file]);
-        if ($this->pool instanceof \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($prefix) && $cleared;
         }
         return $this->pool->clear() && $cleared;

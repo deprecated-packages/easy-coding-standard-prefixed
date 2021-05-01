@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter;
 
-use _PhpScopera658fe86acec\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\PruneableInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\Traits\FilesystemCommonTrait;
-use _PhpScopera658fe86acec\Symfony\Component\VarExporter\VarExporter;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\Traits\FilesystemCommonTrait;
+use _PhpScoper3c44535fe75f\Symfony\Component\VarExporter\VarExporter;
 /**
  * @author Piotr Stankowski <git@trakos.pl>
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>
  */
-class PhpFilesAdapter extends \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\AbstractAdapter implements PruneableInterface
+class PhpFilesAdapter extends \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\AbstractAdapter implements PruneableInterface
 {
     use FilesystemCommonTrait {
         doClear as private doCommonClear;
@@ -103,7 +103,7 @@ class PhpFilesAdapter extends \_PhpScopera658fe86acec\Symfony\Component\Cache\Ad
                 $values[$id] = null;
             } elseif (!\is_object($value)) {
                 $values[$id] = $value;
-            } elseif (!$value instanceof \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\LazyValue) {
+            } elseif (!$value instanceof \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\LazyValue) {
                 $values[$id] = $value();
             } elseif (\false === ($values[$id] = (include $value->file))) {
                 unset($values[$id], $this->values[$id]);
@@ -130,7 +130,7 @@ class PhpFilesAdapter extends \_PhpScopera658fe86acec\Symfony\Component\Cache\Ad
                         }
                         [$expiresAt, $this->values[$id]] = $expiresAt;
                     } elseif ($now < $expiresAt) {
-                        $this->values[$id] = new \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\LazyValue($file);
+                        $this->values[$id] = new \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\LazyValue($file);
                     }
                     if ($now >= $expiresAt) {
                         unset($this->values[$id], $missingIds[$k], self::$valuesCache[$file]);
@@ -166,7 +166,7 @@ class PhpFilesAdapter extends \_PhpScopera658fe86acec\Symfony\Component\Cache\Ad
                 }
                 [$expiresAt, $value] = $expiresAt;
             } elseif ($this->appendOnly) {
-                $value = new \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\LazyValue($file);
+                $value = new \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\LazyValue($file);
             }
         } catch (\ErrorException $e) {
             return \false;

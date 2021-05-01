@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Session\Storage;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Session\Storage;
 
 /**
  * MockFileSessionStorage is used to mock sessions for
@@ -21,13 +21,13 @@ namespace _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Session\Storag
  *
  * @author Drak <drak@zikula.org>
  */
-class MockFileSessionStorage extends \_PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage
+class MockFileSessionStorage extends \_PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage
 {
     private $savePath;
     /**
      * @param string $savePath Path of directory to save session files
      */
-    public function __construct(string $savePath = null, string $name = 'MOCKSESSID', \_PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(string $savePath = null, string $name = 'MOCKSESSID', \_PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         if (null === $savePath) {
             $savePath = \sys_get_temp_dir();
@@ -95,9 +95,8 @@ class MockFileSessionStorage extends \_PhpScopera658fe86acec\Symfony\Component\H
         } finally {
             $this->data = $data;
         }
-        // this is needed for Silex, where the session object is re-used across requests
-        // in functional tests. In Symfony, the container is rebooted, so we don't have
-        // this issue
+        // this is needed when the session object is re-used across multiple requests
+        // in functional tests.
         $this->started = \false;
     }
     /**

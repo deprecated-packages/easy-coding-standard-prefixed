@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Contracts\Cache;
+namespace _PhpScoper3c44535fe75f\Symfony\Contracts\Cache;
 
-use _PhpScopera658fe86acec\Psr\Cache\CacheException;
-use _PhpScopera658fe86acec\Psr\Cache\CacheItemInterface;
-use _PhpScopera658fe86acec\Psr\Cache\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Psr\Cache\CacheException;
+use _PhpScoper3c44535fe75f\Psr\Cache\CacheItemInterface;
+use _PhpScoper3c44535fe75f\Psr\Cache\InvalidArgumentException;
 /**
  * Augments PSR-6's CacheItemInterface with support for tags and metadata.
  *

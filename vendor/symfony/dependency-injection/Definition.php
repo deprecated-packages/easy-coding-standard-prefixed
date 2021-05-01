@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\DependencyInjection;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection;
 
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 /**
  * Definition represents a service definition.
  *
@@ -85,7 +85,7 @@ class Definition
     /**
      * Sets a factory.
      *
-     * @param string|array|Reference $factory A PHP function, reference or an array containing a class/Reference and a method to call
+     * @param string|array|Reference|null $factory A PHP function, reference or an array containing a class/Reference and a method to call
      *
      * @return $this
      */
@@ -94,7 +94,7 @@ class Definition
         $this->changes['factory'] = \true;
         if (\is_string($factory) && \false !== \strpos($factory, '::')) {
             $factory = \explode('::', $factory, 2);
-        } elseif ($factory instanceof \_PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Reference) {
+        } elseif ($factory instanceof \_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Reference) {
             $factory = [$factory, '__invoke'];
         }
         $this->factory = $factory;
@@ -119,7 +119,7 @@ class Definition
      *
      * @throws InvalidArgumentException in case the decorated service id and the new decorated service id are equals
      */
-    public function setDecoratedService(?string $id, ?string $renamedId = null, int $priority = 0, int $invalidBehavior = \_PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)
+    public function setDecoratedService(?string $id, ?string $renamedId = null, int $priority = 0, int $invalidBehavior = \_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)
     {
         if ($renamedId && $id === $renamedId) {
             throw new InvalidArgumentException(\sprintf('The decorated service inner name for "%s" must be different than the service name itself.', $id));
@@ -129,7 +129,7 @@ class Definition
             $this->decoratedService = null;
         } else {
             $this->decoratedService = [$id, $renamedId, (int) $priority];
-            if (\_PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE !== $invalidBehavior) {
+            if (\_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE !== $invalidBehavior) {
                 $this->decoratedService[] = $invalidBehavior;
             }
         }
@@ -684,7 +684,7 @@ class Definition
         $this->changes['configurator'] = \true;
         if (\is_string($configurator) && \false !== \strpos($configurator, '::')) {
             $configurator = \explode('::', $configurator, 2);
-        } elseif ($configurator instanceof \_PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Reference) {
+        } elseif ($configurator instanceof \_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Reference) {
             $configurator = [$configurator, '__invoke'];
         }
         $this->configurator = $configurator;

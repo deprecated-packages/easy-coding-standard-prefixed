@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter;
 
-use _PhpScopera658fe86acec\Psr\Cache\CacheItemInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\CacheItem;
-use _PhpScopera658fe86acec\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper3c44535fe75f\Psr\Cache\CacheItemInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\CacheItem;
+use _PhpScoper3c44535fe75f\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class NullAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface
+class NullAdapter implements \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface
 {
     private $createCacheItem;
     public function __construct()
@@ -94,7 +94,7 @@ class NullAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache\Ada
      */
     public function save(CacheItemInterface $item)
     {
-        return \false;
+        return \true;
     }
     /**
      * {@inheritdoc}
@@ -103,7 +103,7 @@ class NullAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache\Ada
      */
     public function saveDeferred(CacheItemInterface $item)
     {
-        return \false;
+        return \true;
     }
     /**
      * {@inheritdoc}
@@ -112,7 +112,7 @@ class NullAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache\Ada
      */
     public function commit()
     {
-        return \false;
+        return \true;
     }
     /**
      * {@inheritdoc}

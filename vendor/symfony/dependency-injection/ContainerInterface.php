@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\DependencyInjection;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection;
 
-use _PhpScopera658fe86acec\Psr\Container\ContainerInterface as PsrContainerInterface;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoper3c44535fe75f\Psr\Container\ContainerInterface as PsrContainerInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 /**
  * ContainerInterface is the interface implemented by service container classes.
  *

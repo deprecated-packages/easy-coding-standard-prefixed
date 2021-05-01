@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\HttpFoundation;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation;
 
-use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Exception\BadRequestException;
 /**
  * ParameterBag is a container for key/value pairs.
  *

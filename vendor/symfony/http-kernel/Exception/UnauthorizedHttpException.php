@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Exception;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Exception;
 
 /**
  * @author Ben Ramsey <ben@benramsey.com>
  */
-class UnauthorizedHttpException extends \_PhpScopera658fe86acec\Symfony\Component\HttpKernel\Exception\HttpException
+class UnauthorizedHttpException extends \_PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Exception\HttpException
 {
     /**
      * @param string          $challenge WWW-Authenticate challenge string

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Console\Event;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Console\Event;
 
-use _PhpScopera658fe86acec\Symfony\Component\Console\Command\Command;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopera658fe86acec\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Command\Command;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper3c44535fe75f\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Allows to inspect input and output of a command.
  *

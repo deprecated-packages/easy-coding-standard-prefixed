@@ -38,7 +38,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\PackageVersions\\": "src\/PackageVersions"
+                    "_PhpScoper3c44535fe75f\\PackageVersions\\": "src\/PackageVersions"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -108,7 +108,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Composer\\Semver\\": "src"
+                    "_PhpScoper3c44535fe75f\\Composer\\Semver\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -188,7 +188,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Composer\\XdebugHandler\\": "src"
+                    "_PhpScoper3c44535fe75f\\Composer\\XdebugHandler\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -258,7 +258,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
+                    "_PhpScoper3c44535fe75f\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -333,7 +333,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
+                    "_PhpScoper3c44535fe75f\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -526,7 +526,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Jean85\\": "src\/"
+                    "_PhpScoper3c44535fe75f\\Jean85\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -934,7 +934,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Psr\\Cache\\": "src\/"
+                    "_PhpScoper3c44535fe75f\\Psr\\Cache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -981,7 +981,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Psr\\Container\\": "src\/"
+                    "_PhpScoper3c44535fe75f\\Psr\\Container\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1037,7 +1037,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Psr\\EventDispatcher\\": "src\/"
+                    "_PhpScoper3c44535fe75f\\Psr\\EventDispatcher\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1090,7 +1090,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Psr\\Log\\": "Psr\/Log\/"
+                    "_PhpScoper3c44535fe75f\\Psr\\Log\\": "Psr\/Log\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1143,7 +1143,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Psr\\SimpleCache\\": "src\/"
+                    "_PhpScoper3c44535fe75f\\Psr\\SimpleCache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1299,17 +1299,17 @@
         },
         {
             "name": "symfony\/cache",
-            "version": "v5.2.6",
-            "version_normalized": "5.2.6.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/cache.git",
-                "reference": "093d69bb10c959553c8beb828b8d4ea250a247dd"
+                "reference": "1d801d1dc5e3840e832568db6b35a954cfb435a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/cache\/zipball\/093d69bb10c959553c8beb828b8d4ea250a247dd",
-                "reference": "093d69bb10c959553c8beb828b8d4ea250a247dd",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/cache\/zipball\/1d801d1dc5e3840e832568db6b35a954cfb435a8",
+                "reference": "1d801d1dc5e3840e832568db6b35a954cfb435a8",
                 "shasum": ""
             },
             "require": {
@@ -1345,12 +1345,12 @@
                 "symfony\/messenger": "^4.4|^5.0",
                 "symfony\/var-dumper": "^4.4|^5.0"
             },
-            "time": "2021-03-16T09:10:13+00:00",
+            "time": "2021-04-23T16:56:33+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\Cache\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\Cache\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1377,7 +1377,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/cache\/tree\/v5.2.6"
+                "source": "https:\/\/github.com\/symfony\/cache\/tree\/v5.2.7"
             },
             "funding": [
                 {
@@ -1431,7 +1431,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Contracts\\Cache\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Contracts\\Cache\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1479,17 +1479,17 @@
         },
         {
             "name": "symfony\/config",
-            "version": "v5.2.4",
-            "version_normalized": "5.2.4.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/config.git",
-                "reference": "212d54675bf203ff8aef7d8cee8eecfb72f4a263"
+                "reference": "3817662ada105c8c4d1afdb4ec003003efd1d8d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/config\/zipball\/212d54675bf203ff8aef7d8cee8eecfb72f4a263",
-                "reference": "212d54675bf203ff8aef7d8cee8eecfb72f4a263",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/config\/zipball\/3817662ada105c8c4d1afdb4ec003003efd1d8d8",
+                "reference": "3817662ada105c8c4d1afdb4ec003003efd1d8d8",
                 "shasum": ""
             },
             "require": {
@@ -1512,12 +1512,12 @@
             "suggest": {
                 "symfony\/yaml": "To use the yaml reference dumper"
             },
-            "time": "2021-02-23T23:58:19+00:00",
+            "time": "2021-04-07T16:07:52+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\Config\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\Config\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1540,7 +1540,7 @@
             "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/config\/tree\/v5.2.4"
+                "source": "https:\/\/github.com\/symfony\/config\/tree\/v5.2.7"
             },
             "funding": [
                 {
@@ -1560,17 +1560,17 @@
         },
         {
             "name": "symfony\/console",
-            "version": "v5.2.6",
-            "version_normalized": "5.2.6.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/console.git",
-                "reference": "35f039df40a3b335ebf310f244cb242b3a83ac8d"
+                "reference": "90374b8ed059325b49a29b55b3f8bb4062c87629"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/console\/zipball\/35f039df40a3b335ebf310f244cb242b3a83ac8d",
-                "reference": "35f039df40a3b335ebf310f244cb242b3a83ac8d",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/console\/zipball\/90374b8ed059325b49a29b55b3f8bb4062c87629",
+                "reference": "90374b8ed059325b49a29b55b3f8bb4062c87629",
                 "shasum": ""
             },
             "require": {
@@ -1606,12 +1606,12 @@
                 "symfony\/lock": "",
                 "symfony\/process": ""
             },
-            "time": "2021-03-28T09:42:18+00:00",
+            "time": "2021-04-19T14:07:32+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\Console\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\Console\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1640,7 +1640,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/console\/tree\/v5.2.6"
+                "source": "https:\/\/github.com\/symfony\/console\/tree\/v5.2.7"
             },
             "funding": [
                 {
@@ -1660,17 +1660,17 @@
         },
         {
             "name": "symfony\/dependency-injection",
-            "version": "v5.2.6",
-            "version_normalized": "5.2.6.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/dependency-injection.git",
-                "reference": "1e66194bed2a69fa395d26bf1067e5e34483afac"
+                "reference": "6ca378b99e3c9ba6127eb43b68389fb2b7348577"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/dependency-injection\/zipball\/1e66194bed2a69fa395d26bf1067e5e34483afac",
-                "reference": "1e66194bed2a69fa395d26bf1067e5e34483afac",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/dependency-injection\/zipball\/6ca378b99e3c9ba6127eb43b68389fb2b7348577",
+                "reference": "6ca378b99e3c9ba6127eb43b68389fb2b7348577",
                 "shasum": ""
             },
             "require": {
@@ -1702,12 +1702,12 @@
                 "symfony\/proxy-manager-bridge": "Generate service proxies to lazy load them",
                 "symfony\/yaml": ""
             },
-            "time": "2021-03-22T11:10:24+00:00",
+            "time": "2021-04-24T14:32:26+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\DependencyInjection\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\DependencyInjection\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1730,7 +1730,7 @@
             "description": "Allows you to standardize and centralize the way objects are constructed in your application",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/dependency-injection\/tree\/v5.2.6"
+                "source": "https:\/\/github.com\/symfony\/dependency-injection\/tree\/v5.2.7"
             },
             "funding": [
                 {
@@ -1820,17 +1820,17 @@
         },
         {
             "name": "symfony\/error-handler",
-            "version": "v5.2.6",
-            "version_normalized": "5.2.6.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/error-handler.git",
-                "reference": "bdb7fb4188da7f4211e4b88350ba0dfdad002b03"
+                "reference": "ea3ddbf67615e883ca7c33a4de61213789846782"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/error-handler\/zipball\/bdb7fb4188da7f4211e4b88350ba0dfdad002b03",
-                "reference": "bdb7fb4188da7f4211e4b88350ba0dfdad002b03",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/error-handler\/zipball\/ea3ddbf67615e883ca7c33a4de61213789846782",
+                "reference": "ea3ddbf67615e883ca7c33a4de61213789846782",
                 "shasum": ""
             },
             "require": {
@@ -1844,12 +1844,12 @@
                 "symfony\/http-kernel": "^4.4|^5.0",
                 "symfony\/serializer": "^4.4|^5.0"
             },
-            "time": "2021-03-16T09:07:47+00:00",
+            "time": "2021-04-07T15:57:33+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\ErrorHandler\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\ErrorHandler\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1872,7 +1872,7 @@
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/error-handler\/tree\/v5.2.6"
+                "source": "https:\/\/github.com\/symfony\/error-handler\/tree\/v5.2.7"
             },
             "funding": [
                 {
@@ -1937,7 +1937,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\EventDispatcher\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\EventDispatcher\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2014,7 +2014,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Contracts\\EventDispatcher\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Contracts\\EventDispatcher\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2062,29 +2062,29 @@
         },
         {
             "name": "symfony\/filesystem",
-            "version": "v5.2.6",
-            "version_normalized": "5.2.6.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/filesystem.git",
-                "reference": "8c86a82f51658188119e62cff0a050a12d09836f"
+                "reference": "056e92acc21d977c37e6ea8e97374b2a6c8551b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/filesystem\/zipball\/8c86a82f51658188119e62cff0a050a12d09836f",
-                "reference": "8c86a82f51658188119e62cff0a050a12d09836f",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/filesystem\/zipball\/056e92acc21d977c37e6ea8e97374b2a6c8551b0",
+                "reference": "056e92acc21d977c37e6ea8e97374b2a6c8551b0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony\/polyfill-ctype": "~1.8"
             },
-            "time": "2021-03-28T14:30:26+00:00",
+            "time": "2021-04-01T10:42:13+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\Filesystem\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\Filesystem\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2107,7 +2107,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/filesystem\/tree\/v5.2.6"
+                "source": "https:\/\/github.com\/symfony\/filesystem\/tree\/v5.2.7"
             },
             "funding": [
                 {
@@ -2148,7 +2148,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\Finder\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\Finder\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2224,7 +2224,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Contracts\\HttpClient\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Contracts\\HttpClient\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2272,17 +2272,17 @@
         },
         {
             "name": "symfony\/http-foundation",
-            "version": "v5.2.4",
-            "version_normalized": "5.2.4.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/http-foundation.git",
-                "reference": "54499baea7f7418bce7b5ec92770fd0799e8e9bf"
+                "reference": "a416487a73bb9c9d120e9ba3a60547f4a3fb7a1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/http-foundation\/zipball\/54499baea7f7418bce7b5ec92770fd0799e8e9bf",
-                "reference": "54499baea7f7418bce7b5ec92770fd0799e8e9bf",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/http-foundation\/zipball\/a416487a73bb9c9d120e9ba3a60547f4a3fb7a1f",
+                "reference": "a416487a73bb9c9d120e9ba3a60547f4a3fb7a1f",
                 "shasum": ""
             },
             "require": {
@@ -2300,12 +2300,12 @@
             "suggest": {
                 "symfony\/mime": "To use the file extension guesser"
             },
-            "time": "2021-02-25T17:16:57+00:00",
+            "time": "2021-05-01T13:46:24+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\HttpFoundation\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\HttpFoundation\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2328,7 +2328,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/http-foundation\/tree\/v5.2.4"
+                "source": "https:\/\/github.com\/symfony\/http-foundation\/tree\/v5.2.7"
             },
             "funding": [
                 {
@@ -2348,17 +2348,17 @@
         },
         {
             "name": "symfony\/http-kernel",
-            "version": "v5.2.6",
-            "version_normalized": "5.2.6.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/http-kernel.git",
-                "reference": "f34de4c61ca46df73857f7f36b9a3805bdd7e3b2"
+                "reference": "1e9f6879f070f718e0055fbac232a56f67b8b6bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/http-kernel\/zipball\/f34de4c61ca46df73857f7f36b9a3805bdd7e3b2",
-                "reference": "f34de4c61ca46df73857f7f36b9a3805bdd7e3b2",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/http-kernel\/zipball\/1e9f6879f070f718e0055fbac232a56f67b8b6bd",
+                "reference": "1e9f6879f070f718e0055fbac232a56f67b8b6bd",
                 "shasum": ""
             },
             "require": {
@@ -2415,12 +2415,12 @@
                 "symfony\/console": "",
                 "symfony\/dependency-injection": ""
             },
-            "time": "2021-03-29T05:16:58+00:00",
+            "time": "2021-05-01T14:53:15+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\HttpKernel\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\HttpKernel\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2443,7 +2443,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/http-kernel\/tree\/v5.2.6"
+                "source": "https:\/\/github.com\/symfony\/http-kernel\/tree\/v5.2.7"
             },
             "funding": [
                 {
@@ -2487,7 +2487,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\OptionsResolver\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\OptionsResolver\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3188,29 +3188,29 @@
         },
         {
             "name": "symfony\/process",
-            "version": "v5.2.4",
-            "version_normalized": "5.2.4.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/process.git",
-                "reference": "313a38f09c77fbcdc1d223e57d368cea76a2fd2f"
+                "reference": "98cb8eeb72e55d4196dd1e36f1f16e7b3a9a088e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/process\/zipball\/313a38f09c77fbcdc1d223e57d368cea76a2fd2f",
-                "reference": "313a38f09c77fbcdc1d223e57d368cea76a2fd2f",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/process\/zipball\/98cb8eeb72e55d4196dd1e36f1f16e7b3a9a088e",
+                "reference": "98cb8eeb72e55d4196dd1e36f1f16e7b3a9a088e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony\/polyfill-php80": "^1.15"
             },
-            "time": "2021-01-27T10:15:41+00:00",
+            "time": "2021-04-08T10:27:02+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\Process\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\Process\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3233,7 +3233,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/process\/tree\/v5.2.4"
+                "source": "https:\/\/github.com\/symfony\/process\/tree\/v5.3.0-BETA1"
             },
             "funding": [
                 {
@@ -3287,7 +3287,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Contracts\\Service\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Contracts\\Service\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -3335,29 +3335,29 @@
         },
         {
             "name": "symfony\/stopwatch",
-            "version": "v5.2.4",
-            "version_normalized": "5.2.4.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/stopwatch.git",
-                "reference": "b12274acfab9d9850c52583d136a24398cdf1a0c"
+                "reference": "d99310c33e833def36419c284f60e8027d359678"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/stopwatch\/zipball\/b12274acfab9d9850c52583d136a24398cdf1a0c",
-                "reference": "b12274acfab9d9850c52583d136a24398cdf1a0c",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/stopwatch\/zipball\/d99310c33e833def36419c284f60e8027d359678",
+                "reference": "d99310c33e833def36419c284f60e8027d359678",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony\/service-contracts": "^1.0|^2"
             },
-            "time": "2021-01-27T10:15:41+00:00",
+            "time": "2021-03-29T15:28:41+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\Stopwatch\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\Stopwatch\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3380,7 +3380,7 @@
             "description": "Provides a way to profile code",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/stopwatch\/tree\/v5.2.4"
+                "source": "https:\/\/github.com\/symfony\/stopwatch\/tree\/v5.3.0-BETA1"
             },
             "funding": [
                 {
@@ -3432,7 +3432,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\String\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\String\\": ""
                 },
                 "files": [
                     "Resources\/functions.php"
@@ -3486,17 +3486,17 @@
         },
         {
             "name": "symfony\/var-dumper",
-            "version": "v5.2.6",
-            "version_normalized": "5.2.6.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/var-dumper.git",
-                "reference": "89412a68ea2e675b4e44f260a5666729f77f668e"
+                "reference": "27cb9f7cfa3853c736425c7233a8f68814b19636"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/var-dumper\/zipball\/89412a68ea2e675b4e44f260a5666729f77f668e",
-                "reference": "89412a68ea2e675b4e44f260a5666729f77f668e",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/var-dumper\/zipball\/27cb9f7cfa3853c736425c7233a8f68814b19636",
+                "reference": "27cb9f7cfa3853c736425c7233a8f68814b19636",
                 "shasum": ""
             },
             "require": {
@@ -3519,7 +3519,7 @@
                 "ext-intl": "To show region name in time zone dump",
                 "symfony\/console": "To use the ServerDumpCommand and\/or the bin\/var-dump-server script"
             },
-            "time": "2021-03-28T09:42:18+00:00",
+            "time": "2021-04-19T14:07:32+00:00",
             "bin": [
                 "Resources\/bin\/var-dump-server"
             ],
@@ -3530,7 +3530,7 @@
                     "Resources\/functions\/dump.php"
                 ],
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\VarDumper\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\VarDumper\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3557,7 +3557,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/var-dumper\/tree\/v5.2.6"
+                "source": "https:\/\/github.com\/symfony\/var-dumper\/tree\/v5.2.7"
             },
             "funding": [
                 {
@@ -3577,17 +3577,17 @@
         },
         {
             "name": "symfony\/var-exporter",
-            "version": "v5.2.4",
-            "version_normalized": "5.2.4.0",
+            "version": "v5.2.7",
+            "version_normalized": "5.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/var-exporter.git",
-                "reference": "5aed4875ab514c8cb9b6ff4772baa25fa4c10307"
+                "reference": "01184a5ab95eb9500b9b0ef3e525979e003d9c81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/var-exporter\/zipball\/5aed4875ab514c8cb9b6ff4772baa25fa4c10307",
-                "reference": "5aed4875ab514c8cb9b6ff4772baa25fa4c10307",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/var-exporter\/zipball\/01184a5ab95eb9500b9b0ef3e525979e003d9c81",
+                "reference": "01184a5ab95eb9500b9b0ef3e525979e003d9c81",
                 "shasum": ""
             },
             "require": {
@@ -3597,12 +3597,12 @@
             "require-dev": {
                 "symfony\/var-dumper": "^4.4.9|^5.0.9"
             },
-            "time": "2021-01-27T10:01:46+00:00",
+            "time": "2021-04-01T10:42:13+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopera658fe86acec\\Symfony\\Component\\VarExporter\\": ""
+                    "_PhpScoper3c44535fe75f\\Symfony\\Component\\VarExporter\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3633,7 +3633,7 @@
                 "serialize"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/var-exporter\/tree\/v5.2.4"
+                "source": "https:\/\/github.com\/symfony\/var-exporter\/tree\/v5.3.0-BETA1"
             },
             "funding": [
                 {

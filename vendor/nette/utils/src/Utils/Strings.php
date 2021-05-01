@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScopera658fe86acec\Nette\Utils;
+namespace _PhpScoper3c44535fe75f\Nette\Utils;
 
-use _PhpScopera658fe86acec\Nette;
+use _PhpScoper3c44535fe75f\Nette;
 use function is_array, is_object, strlen;
 /**
  * String tools library.
@@ -386,7 +386,7 @@ class Strings
                 $pos--;
             }
         }
-        return \_PhpScopera658fe86acec\Nette\Utils\Helpers::falseToNull($pos);
+        return \_PhpScoper3c44535fe75f\Nette\Utils\Helpers::falseToNull($pos);
     }
     /**
      * Splits a string into array by the regular expression.
@@ -440,12 +440,12 @@ class Strings
     /** @internal */
     public static function pcre(string $func, array $args)
     {
-        $res = \_PhpScopera658fe86acec\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
+        $res = \_PhpScoper3c44535fe75f\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
             // compile-time error, not detectable by preg_last_error
-            throw new \_PhpScopera658fe86acec\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
+            throw new \_PhpScoper3c44535fe75f\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
         });
         if (($code = \preg_last_error()) && ($res === null || !\in_array($func, ['preg_filter', 'preg_replace_callback', 'preg_replace'], \true))) {
-            throw new \_PhpScopera658fe86acec\Nette\Utils\RegexpException((\_PhpScopera658fe86acec\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
+            throw new \_PhpScoper3c44535fe75f\Nette\Utils\RegexpException((\_PhpScoper3c44535fe75f\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
         }
         return $res;
     }

@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Filesystem;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Filesystem;
 
-use _PhpScopera658fe86acec\Symfony\Component\Filesystem\Exception\FileNotFoundException;
-use _PhpScopera658fe86acec\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * Provides basic utility to manipulate the file system.
  *
@@ -48,7 +48,7 @@ class Filesystem
                 throw new IOException(\sprintf('Failed to copy "%s" to "%s" because source file could not be opened for reading.', $originFile, $targetFile), 0, null, $originFile);
             }
             // Stream context created to allow files overwrite when using FTP stream wrapper - disabled by default
-            if (\false === ($target = @\fopen($targetFile, 'w', null, \stream_context_create(['ftp' => ['overwrite' => \true]])))) {
+            if (\false === ($target = @\fopen($targetFile, 'w', \false, \stream_context_create(['ftp' => ['overwrite' => \true]])))) {
                 throw new IOException(\sprintf('Failed to copy "%s" to "%s" because target file could not be opened for writing.', $originFile, $targetFile), 0, null, $originFile);
             }
             $bytesCopied = \stream_copy_to_stream($source, $target);

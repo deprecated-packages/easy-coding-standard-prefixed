@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ParameterBag;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ParameterBag;
 
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EnvPlaceholderParameterBag extends \_PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+class EnvPlaceholderParameterBag extends \_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
 {
     private $envPlaceholderUniquePrefix;
     private $envPlaceholders = [];

@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScopera658fe86acec\Psr\Container\ContainerInterface;
-use _PhpScopera658fe86acec\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Session\Session;
-use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper3c44535fe75f\Psr\Container\ContainerInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Session\Session;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Sets the session onto the request on the "kernel.request" event and saves
  * it on the "kernel.response" event.
@@ -50,7 +50,6 @@ abstract class AbstractSessionListener implements EventSubscriberInterface
         if (!$event->isMasterRequest()) {
             return;
         }
-        $session = null;
         $request = $event->getRequest();
         if (!$request->hasSession()) {
             $sess = null;
@@ -58,7 +57,7 @@ abstract class AbstractSessionListener implements EventSubscriberInterface
                 return $sess ?? ($sess = $this->getSession());
             });
         }
-        $session = $session ?? ($this->container && $this->container->has('initialized_session') ? $this->container->get('initialized_session') : null);
+        $session = $this->container && $this->container->has('initialized_session') ? $this->container->get('initialized_session') : null;
         $this->sessionUsageStack[] = $session instanceof Session ? $session->getUsageIndex() : 0;
     }
     public function onKernelResponse(ResponseEvent $event)

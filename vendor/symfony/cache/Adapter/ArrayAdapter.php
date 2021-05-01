@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter;
 
-use _PhpScopera658fe86acec\Psr\Cache\CacheItemInterface;
-use _PhpScopera658fe86acec\Psr\Log\LoggerAwareInterface;
-use _PhpScopera658fe86acec\Psr\Log\LoggerAwareTrait;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\CacheItem;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\ResettableInterface;
-use _PhpScopera658fe86acec\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper3c44535fe75f\Psr\Cache\CacheItemInterface;
+use _PhpScoper3c44535fe75f\Psr\Log\LoggerAwareInterface;
+use _PhpScoper3c44535fe75f\Psr\Log\LoggerAwareTrait;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\CacheItem;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper3c44535fe75f\Symfony\Contracts\Cache\CacheInterface;
 /**
  * An in-memory cache storage.
  *
@@ -24,7 +24,7 @@ use _PhpScopera658fe86acec\Symfony\Contracts\Cache\CacheInterface;
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ArrayAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, LoggerAwareInterface, ResettableInterface
+class ArrayAdapter implements \_PhpScoper3c44535fe75f\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, LoggerAwareInterface, ResettableInterface
 {
     use LoggerAwareTrait;
     private $storeSerialized;
@@ -302,6 +302,7 @@ class ArrayAdapter implements \_PhpScopera658fe86acec\Symfony\Component\Cache\Ad
             try {
                 $serialized = \serialize($value);
             } catch (\Exception $e) {
+                unset($this->values[$key]);
                 $type = \get_debug_type($value);
                 $message = \sprintf('Failed to save key "{key}" of type %s: %s', $type, $e->getMessage());
                 CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e, 'cache-adapter' => \get_debug_type($this)]);

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Extension\Extension as BaseExtension;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Extension\Extension as BaseExtension;
 /**
  * Allow adding classes to the class cache.
  *

@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Process;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Process;
 
-use _PhpScopera658fe86acec\Symfony\Component\Process\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\Process\Exception\LogicException;
-use _PhpScopera658fe86acec\Symfony\Component\Process\Exception\ProcessFailedException;
-use _PhpScopera658fe86acec\Symfony\Component\Process\Exception\ProcessSignaledException;
-use _PhpScopera658fe86acec\Symfony\Component\Process\Exception\ProcessTimedOutException;
-use _PhpScopera658fe86acec\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScopera658fe86acec\Symfony\Component\Process\Pipes\PipesInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Process\Pipes\UnixPipes;
-use _PhpScopera658fe86acec\Symfony\Component\Process\Pipes\WindowsPipes;
+use _PhpScoper3c44535fe75f\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Process\Exception\LogicException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Process\Exception\ProcessFailedException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Process\Exception\ProcessSignaledException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Process\Exception\ProcessTimedOutException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Process\Pipes\PipesInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Process\Pipes\UnixPipes;
+use _PhpScoper3c44535fe75f\Symfony\Component\Process\Pipes\WindowsPipes;
 /**
  * Process is a thin wrapper around proc_* functions to easily
  * start independent PHP processes.
@@ -123,7 +123,7 @@ class Process implements \IteratorAggregate
      * @param array          $command The command to run and its arguments listed as separate entries
      * @param string|null    $cwd     The working directory or null to use the working dir of the current PHP process
      * @param array|null     $env     The environment variables or null to use the same environment as the current PHP process
-     * @param mixed|null     $input   The input as stream resource, scalar or \Traversable, or null for no input
+     * @param mixed          $input   The input as stream resource, scalar or \Traversable, or null for no input
      * @param int|float|null $timeout The timeout in seconds or null to disable
      *
      * @throws LogicException When proc_open is not installed
@@ -166,7 +166,7 @@ class Process implements \IteratorAggregate
      * @param string         $command The command line to pass to the shell of the OS
      * @param string|null    $cwd     The working directory or null to use the working dir of the current PHP process
      * @param array|null     $env     The environment variables or null to use the same environment as the current PHP process
-     * @param mixed|null     $input   The input as stream resource, scalar or \Traversable, or null for no input
+     * @param mixed          $input   The input as stream resource, scalar or \Traversable, or null for no input
      * @param int|float|null $timeout The timeout in seconds or null to disable
      *
      * @return static
@@ -1037,7 +1037,7 @@ class Process implements \IteratorAggregate
         if ($this->isRunning()) {
             throw new LogicException('Input can not be set while the process is running.');
         }
-        $this->input = \_PhpScopera658fe86acec\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
+        $this->input = \_PhpScoper3c44535fe75f\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
         return $this;
     }
     /**

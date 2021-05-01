@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver;
 
-use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Input\InputInterface;
 use Symplify\SetConfigResolver\Console\Option\OptionName;
 use Symplify\SetConfigResolver\Console\OptionValueResolver;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;

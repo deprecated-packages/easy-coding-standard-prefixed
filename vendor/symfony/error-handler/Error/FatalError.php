@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\ErrorHandler\Error;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\ErrorHandler\Error;
 
 class FatalError extends \Error
 {
@@ -29,8 +29,7 @@ class FatalError extends \Error
                 }
             }
         } elseif (null !== $traceOffset) {
-            if (\function_exists('xdebug_get_function_stack')) {
-                $trace = \xdebug_get_function_stack();
+            if (\function_exists('xdebug_get_function_stack') && ($trace = @\xdebug_get_function_stack())) {
                 if (0 < $traceOffset) {
                     \array_splice($trace, -$traceOffset);
                 }

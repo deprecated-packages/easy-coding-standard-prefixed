@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Reporter\CheckerListReporter;
 use Symplify\EasyCodingStandard\Console\Reporter\SetsReporter;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScopera658fe86acec\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface;
-use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Request;
-use _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Response;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\Exception\HttpException;
-use _PhpScopera658fe86acec\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Exception\HttpException;
+use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Renders error or exception pages from a given FlattenException.
  *

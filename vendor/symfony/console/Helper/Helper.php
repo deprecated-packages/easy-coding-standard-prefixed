@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Console\Helper;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Console\Helper;
 
-use _PhpScopera658fe86acec\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScopera658fe86acec\Symfony\Component\String\UnicodeString;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\String\UnicodeString;
 /**
  * Helper is the base class for all helper classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Helper implements \_PhpScopera658fe86acec\Symfony\Component\Console\Helper\HelperInterface
+abstract class Helper implements \_PhpScoper3c44535fe75f\Symfony\Component\Console\Helper\HelperInterface
 {
     protected $helperSet = null;
     /**
      * {@inheritdoc}
      */
-    public function setHelperSet(\_PhpScopera658fe86acec\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
+    public function setHelperSet(\_PhpScoper3c44535fe75f\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
     {
         $this->helperSet = $helperSet;
     }
@@ -41,6 +41,16 @@ abstract class Helper implements \_PhpScopera658fe86acec\Symfony\Component\Conso
      */
     public static function strlen(?string $string)
     {
+        return self::width($string);
+    }
+    /**
+     * Returns the width of a string, using mb_strwidth if it is available.
+     * The width is how many characters positions the string will use.
+     *
+     * @internal in Symfony 5.2
+     */
+    public static function width(?string $string) : int
+    {
         $string ?? ($string = '');
         if (\preg_match('//u', $string)) {
             return (new UnicodeString($string))->width(\false);
@@ -49,6 +59,23 @@ abstract class Helper implements \_PhpScopera658fe86acec\Symfony\Component\Conso
             return \strlen($string);
         }
         return \mb_strwidth($string, $encoding);
+    }
+    /**
+     * Returns the length of a string, using mb_strlen if it is available.
+     * The length is related to how many bytes the string will use.
+     *
+     * @internal in Symfony 5.2
+     */
+    public static function length(?string $string) : int
+    {
+        $string ?? ($string = '');
+        if (\preg_match('//u', $string)) {
+            return (new UnicodeString($string))->length();
+        }
+        if (\false === ($encoding = \mb_detect_encoding($string, null, \true))) {
+            return \strlen($string);
+        }
+        return \mb_strlen($string, $encoding);
     }
     /**
      * Returns the subset of a string, using mb_substr if it is available.
@@ -92,11 +119,7 @@ abstract class Helper implements \_PhpScopera658fe86acec\Symfony\Component\Conso
     }
     public static function strlenWithoutDecoration(OutputFormatterInterface $formatter, ?string $string)
     {
-        $string = self::removeDecoration($formatter, $string);
-        if (\preg_match('//u', $string)) {
-            return (new UnicodeString($string))->width(\true);
-        }
-        return self::strlen($string);
+        return self::width(self::removeDecoration($formatter, $string));
     }
     public static function removeDecoration(OutputFormatterInterface $formatter, ?string $string)
     {

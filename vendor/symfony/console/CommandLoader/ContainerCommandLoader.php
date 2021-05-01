@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Console\CommandLoader;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Console\CommandLoader;
 
-use _PhpScopera658fe86acec\Psr\Container\ContainerInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Exception\CommandNotFoundException;
+use _PhpScoper3c44535fe75f\Psr\Container\ContainerInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * Loads commands from a PSR-11 container.
  *
  * @author Robin Chalas <robin.chalas@gmail.com>
  */
-class ContainerCommandLoader implements \_PhpScopera658fe86acec\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+class ContainerCommandLoader implements \_PhpScoper3c44535fe75f\Symfony\Component\Console\CommandLoader\CommandLoaderInterface
 {
     private $container;
     private $commandMap;

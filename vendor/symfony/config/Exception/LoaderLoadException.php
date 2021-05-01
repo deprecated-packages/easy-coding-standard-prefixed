@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Config\Exception;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Config\Exception;
 
 /**
  * Exception class for when a resource cannot be loaded or imported.
@@ -59,7 +59,7 @@ class LoaderLoadException extends \Exception
         } elseif (null !== $type) {
             // maybe there is no loader for this specific type
             if ('annotation' === $type) {
-                $message .= ' Make sure annotations are installed and enabled.';
+                $message .= ' Make sure to use PHP 8+ or that annotations are installed and enabled.';
             } else {
                 $message .= \sprintf(' Make sure there is a loader supporting the "%s" type.', $type);
             }

@@ -8,16 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Config\Definition\Dumper;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Config\Definition\Dumper;
 
-use _PhpScopera658fe86acec\Symfony\Component\Config\Definition\ArrayNode;
-use _PhpScopera658fe86acec\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Config\Definition\EnumNode;
-use _PhpScopera658fe86acec\Symfony\Component\Config\Definition\NodeInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Config\Definition\PrototypedArrayNode;
-use _PhpScopera658fe86acec\Symfony\Component\Config\Definition\ScalarNode;
-use _PhpScopera658fe86acec\Symfony\Component\Config\Definition\VariableNode;
-use _PhpScopera658fe86acec\Symfony\Component\Yaml\Inline;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Definition\ArrayNode;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Definition\BaseNode;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Definition\EnumNode;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Definition\NodeInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Definition\ScalarNode;
+use _PhpScoper3c44535fe75f\Symfony\Component\Config\Definition\VariableNode;
+use _PhpScoper3c44535fe75f\Symfony\Component\Yaml\Inline;
 /**
  * Dumps a Yaml reference configuration for the given configuration/node instance.
  *
@@ -63,7 +64,10 @@ class YamlReferenceDumper
         $default = '';
         $defaultArray = null;
         $children = null;
-        $example = $node->getExample();
+        $example = null;
+        if ($node instanceof BaseNode) {
+            $example = $node->getExample();
+        }
         // defaults
         if ($node instanceof ArrayNode) {
             $children = $node->getChildren();
@@ -103,7 +107,7 @@ class YamlReferenceDumper
             $comments[] = 'Required';
         }
         // deprecated?
-        if ($node->isDeprecated()) {
+        if ($node instanceof BaseNode && $node->isDeprecated()) {
             $deprecation = $node->getDeprecation($node->getName(), $parentNode ? $parentNode->getPath() : $node->getPath());
             $comments[] = \sprintf('Deprecated (%s)', ($deprecation['package'] || $deprecation['version'] ? "Since {$deprecation['package']} {$deprecation['version']}: " : '') . $deprecation['message']);
         }
@@ -115,7 +119,7 @@ class YamlReferenceDumper
         $comments = \count($comments) ? '# ' . \implode(', ', $comments) : '';
         $key = $prototypedArray ? '-' : $node->getName() . ':';
         $text = \rtrim(\sprintf('%-21s%s %s', $key, $default, $comments), ' ');
-        if ($info = $node->getInfo()) {
+        if ($node instanceof BaseNode && ($info = $node->getInfo())) {
             $this->writeLine('');
             // indenting multi-line info
             $info = \str_replace("\n", \sprintf("\n%" . $depth * 4 . 's# ', ' '), $info);

@@ -8,8 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\String\Exception;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\String\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException implements \_PhpScopera658fe86acec\Symfony\Component\String\Exception\ExceptionInterface
+class InvalidArgumentException extends \InvalidArgumentException implements \_PhpScoper3c44535fe75f\Symfony\Component\String\Exception\ExceptionInterface
 {
 }

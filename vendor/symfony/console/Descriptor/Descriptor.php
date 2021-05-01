@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\Console\Descriptor;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\Console\Descriptor;
 
-use _PhpScopera658fe86acec\Symfony\Component\Console\Application;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Command\Command;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputArgument;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Input\InputOption;
-use _PhpScopera658fe86acec\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Application;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Command\Command;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper3c44535fe75f\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *
  * @internal
  */
-abstract class Descriptor implements \_PhpScopera658fe86acec\Symfony\Component\Console\Descriptor\DescriptorInterface
+abstract class Descriptor implements \_PhpScoper3c44535fe75f\Symfony\Component\Console\Descriptor\DescriptorInterface
 {
     /**
      * @var OutputInterface
@@ -63,32 +63,22 @@ abstract class Descriptor implements \_PhpScopera658fe86acec\Symfony\Component\C
     }
     /**
      * Describes an InputArgument instance.
-     *
-     * @return string|mixed
      */
     protected abstract function describeInputArgument(InputArgument $argument, array $options = []);
     /**
      * Describes an InputOption instance.
-     *
-     * @return string|mixed
      */
     protected abstract function describeInputOption(InputOption $option, array $options = []);
     /**
      * Describes an InputDefinition instance.
-     *
-     * @return string|mixed
      */
     protected abstract function describeInputDefinition(InputDefinition $definition, array $options = []);
     /**
      * Describes a Command instance.
-     *
-     * @return string|mixed
      */
     protected abstract function describeCommand(Command $command, array $options = []);
     /**
      * Describes an Application instance.
-     *
-     * @return string|mixed
      */
     protected abstract function describeApplication(Application $application, array $options = []);
 }

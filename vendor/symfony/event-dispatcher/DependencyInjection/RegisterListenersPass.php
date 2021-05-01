@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\EventDispatcher\DependencyInjection;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\EventDispatcher\DependencyInjection;
 
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopera658fe86acec\Symfony\Component\DependencyInjection\Reference;
-use _PhpScopera658fe86acec\Symfony\Component\EventDispatcher\EventDispatcher;
-use _PhpScopera658fe86acec\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopera658fe86acec\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper3c44535fe75f\Symfony\Component\EventDispatcher\EventDispatcher;
+use _PhpScoper3c44535fe75f\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper3c44535fe75f\Symfony\Contracts\EventDispatcher\Event;
 /**
  * Compiler pass to register tagged services for an event dispatcher.
  */
@@ -102,7 +102,7 @@ class RegisterListenersPass implements CompilerPassInterface
                 $container->getDefinition($id)->addTag($this->noPreloadTagName);
             }
         }
-        $extractingDispatcher = new \_PhpScopera658fe86acec\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher();
+        $extractingDispatcher = new \_PhpScoper3c44535fe75f\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher();
         foreach ($container->findTaggedServiceIds($this->subscriberTag, \true) as $id => $tags) {
             $def = $container->getDefinition($id);
             // We must assume that the class value has been correctly filled, even if the service is created by a factory
@@ -125,8 +125,8 @@ class RegisterListenersPass implements CompilerPassInterface
                 $dispatcherDefinitions = [$globalDispatcherDefinition];
             }
             $noPreload = 0;
-            \_PhpScopera658fe86acec\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = $aliases;
-            \_PhpScopera658fe86acec\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$subscriber = $class;
+            \_PhpScoper3c44535fe75f\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = $aliases;
+            \_PhpScoper3c44535fe75f\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$subscriber = $class;
             $extractingDispatcher->addSubscriber($extractingDispatcher);
             foreach ($extractingDispatcher->listeners as $args) {
                 $args[1] = [new ServiceClosureArgument(new Reference($id)), $args[1]];
@@ -143,7 +143,7 @@ class RegisterListenersPass implements CompilerPassInterface
                 $container->getDefinition($id)->addTag($this->noPreloadTagName);
             }
             $extractingDispatcher->listeners = [];
-            \_PhpScopera658fe86acec\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = [];
+            \_PhpScoper3c44535fe75f\Symfony\Component\EventDispatcher\DependencyInjection\ExtractingEventDispatcher::$aliases = [];
         }
     }
     private function getEventFromTypeDeclaration(ContainerBuilder $container, string $id, string $method) : string

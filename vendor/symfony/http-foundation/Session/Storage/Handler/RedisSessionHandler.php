@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use _PhpScopera658fe86acec\Predis\Response\ErrorInterface;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\Traits\RedisClusterProxy;
-use _PhpScopera658fe86acec\Symfony\Component\Cache\Traits\RedisProxy;
+use _PhpScoper3c44535fe75f\Predis\Response\ErrorInterface;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\Traits\RedisClusterProxy;
+use _PhpScoper3c44535fe75f\Symfony\Component\Cache\Traits\RedisProxy;
 /**
  * Redis based session storage handler based on the Redis class
  * provided by the PHP redis extension.
  *
  * @author Dalibor Karlović <dalibor@flexolabs.io>
  */
-class RedisSessionHandler extends \_PhpScopera658fe86acec\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+class RedisSessionHandler extends \_PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
 {
     private $redis;
     /**
@@ -41,7 +41,7 @@ class RedisSessionHandler extends \_PhpScopera658fe86acec\Symfony\Component\Http
      */
     public function __construct($redis, array $options = [])
     {
-        if (!$redis instanceof \Redis && !$redis instanceof \RedisArray && !$redis instanceof \RedisCluster && !$redis instanceof \_PhpScopera658fe86acec\Predis\ClientInterface && !$redis instanceof RedisProxy && !$redis instanceof RedisClusterProxy) {
+        if (!$redis instanceof \Redis && !$redis instanceof \RedisArray && !$redis instanceof \RedisCluster && !$redis instanceof \_PhpScoper3c44535fe75f\Predis\ClientInterface && !$redis instanceof RedisProxy && !$redis instanceof RedisClusterProxy) {
             throw new \InvalidArgumentException(\sprintf('"%s()" expects parameter 1 to be Redis, RedisArray, RedisCluster or Predis\\ClientInterface, "%s" given.', __METHOD__, \get_debug_type($redis)));
         }
         if ($diff = \array_diff(\array_keys($options), ['prefix', 'ttl'])) {
