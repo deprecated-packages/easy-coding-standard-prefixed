@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScoperb5b1090524db\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoper3c44535fe75f\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use _PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\EventListener\FragmentListener;
+use _PhpScoperb5b1090524db\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperb5b1090524db\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScoperb5b1090524db\Symfony\Component\HttpKernel\EventListener\FragmentListener;
 /**
  * Adds the possibility to generate a fragment URI for a given Controller.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class RoutableFragmentRenderer implements \_PhpScoper3c44535fe75f\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
+abstract class RoutableFragmentRenderer implements \_PhpScoperb5b1090524db\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
 {
     private $fragmentPath = '/_fragment';
     /**

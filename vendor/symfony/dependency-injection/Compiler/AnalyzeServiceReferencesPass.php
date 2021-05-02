@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Reference;
 /**
  * Run this pass before passes that need to know more about the relation of
  * your services.
@@ -26,7 +26,7 @@ use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Reference;
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AnalyzeServiceReferencesPass extends \_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class AnalyzeServiceReferencesPass extends \_PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $graph;
     private $currentDefinition;

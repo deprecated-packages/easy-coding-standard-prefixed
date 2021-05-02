@@ -8,32 +8,32 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Dumper;
+namespace _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Dumper;
 
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\LogicException;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper3c44535fe75f\Symfony\Component\ExpressionLanguage\Expression;
-use _PhpScoper3c44535fe75f\Symfony\Component\Yaml\Dumper as YmlDumper;
-use _PhpScoper3c44535fe75f\Symfony\Component\Yaml\Parser;
-use _PhpScoper3c44535fe75f\Symfony\Component\Yaml\Tag\TaggedValue;
-use _PhpScoper3c44535fe75f\Symfony\Component\Yaml\Yaml;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Alias;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperb5b1090524db\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoperb5b1090524db\Symfony\Component\Yaml\Dumper as YmlDumper;
+use _PhpScoperb5b1090524db\Symfony\Component\Yaml\Parser;
+use _PhpScoperb5b1090524db\Symfony\Component\Yaml\Tag\TaggedValue;
+use _PhpScoperb5b1090524db\Symfony\Component\Yaml\Yaml;
 /**
  * YamlDumper dumps a service container as a YAML string.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class YamlDumper extends \_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Dumper\Dumper
+class YamlDumper extends \_PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Dumper\Dumper
 {
     private $dumper;
     /**
@@ -43,7 +43,7 @@ class YamlDumper extends \_PhpScoper3c44535fe75f\Symfony\Component\DependencyInj
      */
     public function dump(array $options = [])
     {
-        if (!\class_exists(\_PhpScoper3c44535fe75f\Symfony\Component\Yaml\Dumper::class)) {
+        if (!\class_exists(\_PhpScoperb5b1090524db\Symfony\Component\Yaml\Dumper::class)) {
             throw new LogicException('Unable to dump the container as the Symfony Yaml Component is not installed.');
         }
         if (null === $this->dumper) {

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c44535fe75f\Symfony\Component\VarDumper\Test;
+namespace _PhpScoperb5b1090524db\Symfony\Component\VarDumper\Test;
 
-use _PhpScoper3c44535fe75f\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScoper3c44535fe75f\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScoperb5b1090524db\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoperb5b1090524db\Symfony\Component\VarDumper\Dumper\CliDumper;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

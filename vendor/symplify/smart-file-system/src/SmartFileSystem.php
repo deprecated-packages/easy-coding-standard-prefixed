@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem;
 
-use _PhpScoper3c44535fe75f\Nette\Utils\Strings;
-use _PhpScoper3c44535fe75f\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScoper3c44535fe75f\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoperb5b1090524db\Nette\Utils\Strings;
+use _PhpScoperb5b1090524db\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoperb5b1090524db\Symfony\Component\Filesystem\Filesystem;
 /**
  * @see \Symplify\SmartFileSystem\Tests\SmartFileSystem\SmartFileSystemTest
  */

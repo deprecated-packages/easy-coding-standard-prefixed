@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c44535fe75f\Symfony\Component\Console\Helper;
+namespace _PhpScoperb5b1090524db\Symfony\Component\Console\Helper;
 
-use _PhpScoper3c44535fe75f\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper3c44535fe75f\Symfony\Component\Console\Exception\LogicException;
-use _PhpScoper3c44535fe75f\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperb5b1090524db\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperb5b1090524db\Symfony\Component\Console\Exception\LogicException;
+use _PhpScoperb5b1090524db\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  */
@@ -192,9 +192,9 @@ class ProgressIndicator
         }, 'message' => function (self $indicator) {
             return $indicator->message;
         }, 'elapsed' => function (self $indicator) {
-            return \_PhpScoper3c44535fe75f\Symfony\Component\Console\Helper\Helper::formatTime(\time() - $indicator->startTime);
+            return \_PhpScoperb5b1090524db\Symfony\Component\Console\Helper\Helper::formatTime(\time() - $indicator->startTime);
         }, 'memory' => function () {
-            return \_PhpScoper3c44535fe75f\Symfony\Component\Console\Helper\Helper::formatMemory(\memory_get_usage(\true));
+            return \_PhpScoperb5b1090524db\Symfony\Component\Console\Helper\Helper::formatMemory(\memory_get_usage(\true));
         }];
     }
     private static function initFormats() : array

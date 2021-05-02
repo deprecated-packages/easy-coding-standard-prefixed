@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Container;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ServiceLocator;
-use _PhpScoper3c44535fe75f\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Container;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\ServiceLocator;
+use _PhpScoperb5b1090524db\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * Checks whether injected parameters are compatible with type declarations.
  *
@@ -37,7 +37,7 @@ use _PhpScoper3c44535fe75f\Symfony\Component\ExpressionLanguage\Expression;
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Julien Maulny <jmaulny@darkmira.fr>
  */
-final class CheckTypeDeclarationsPass extends \_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+final class CheckTypeDeclarationsPass extends \_PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private const SCALAR_TYPES = ['int' => \true, 'float' => \true, 'bool' => \true, 'string' => \true];
     private const BUILTIN_TYPES = ['array' => \true, 'bool' => \true, 'callable' => \true, 'float' => \true, 'int' => \true, 'iterable' => \true, 'object' => \true, 'string' => \true];

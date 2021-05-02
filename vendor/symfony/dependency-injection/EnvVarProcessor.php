@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection;
+namespace _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection;
 
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use _PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class EnvVarProcessor implements \_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\EnvVarProcessorInterface
+class EnvVarProcessor implements \_PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\EnvVarProcessorInterface
 {
     private $container;
     private $loaders;
@@ -24,7 +24,7 @@ class EnvVarProcessor implements \_PhpScoper3c44535fe75f\Symfony\Component\Depen
     /**
      * @param EnvVarLoaderInterface[] $loaders
      */
-    public function __construct(\_PhpScoper3c44535fe75f\Symfony\Component\DependencyInjection\ContainerInterface $container, \Traversable $loaders = null)
+    public function __construct(\_PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\ContainerInterface $container, \Traversable $loaders = null)
     {
         $this->container = $container;
         $this->loaders = $loaders ?? new \ArrayIterator();

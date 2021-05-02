@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\Finder\FinderSanitizer;
 
-use _PhpScoper3c44535fe75f\Nette\Utils\Finder as NetteFinder;
-use _PhpScoper3c44535fe75f\Nette\Utils\Strings;
-use _PhpScoper3c44535fe75f\PHPUnit\Framework\TestCase;
+use _PhpScoperb5b1090524db\Nette\Utils\Finder as NetteFinder;
+use _PhpScoperb5b1090524db\Nette\Utils\Strings;
+use _PhpScoperb5b1090524db\PHPUnit\Framework\TestCase;
 use SplFileInfo;
-use _PhpScoper3c44535fe75f\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoper3c44535fe75f\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
+use _PhpScoperb5b1090524db\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoperb5b1090524db\Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\SmartFileInfo;
 final class FinderSanitizerTest extends TestCase
