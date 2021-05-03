@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb5b1090524db\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper91c59a2f52e1\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperb5b1090524db\Psr\Log\LoggerAwareInterface;
-use _PhpScoperb5b1090524db\Symfony\Component\Cache\CacheItem;
-use _PhpScoperb5b1090524db\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperb5b1090524db\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoperb5b1090524db\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use _PhpScoperb5b1090524db\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoperb5b1090524db\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use _PhpScoper91c59a2f52e1\Psr\Log\LoggerAwareInterface;
+use _PhpScoper91c59a2f52e1\Symfony\Component\Cache\CacheItem;
+use _PhpScoper91c59a2f52e1\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper91c59a2f52e1\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper91c59a2f52e1\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
+use _PhpScoper91c59a2f52e1\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoper91c59a2f52e1\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * Abstract for native TagAware adapters.
  *
@@ -28,7 +28,7 @@ use _PhpScoperb5b1090524db\Symfony\Contracts\Cache\TagAwareCacheInterface;
  *
  * @internal
  */
-abstract class AbstractTagAwareAdapter implements \_PhpScoperb5b1090524db\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, TagAwareCacheInterface, LoggerAwareInterface, ResettableInterface
+abstract class AbstractTagAwareAdapter implements \_PhpScoper91c59a2f52e1\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, TagAwareCacheInterface, LoggerAwareInterface, ResettableInterface
 {
     use AbstractAdapterTrait;
     use ContractsTrait;

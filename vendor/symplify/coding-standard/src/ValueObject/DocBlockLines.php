@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\ValueObject;
 
-use _PhpScoperb5b1090524db\Nette\Utils\Strings;
+use _PhpScoper91c59a2f52e1\Nette\Utils\Strings;
 final class DocBlockLines
 {
     /**

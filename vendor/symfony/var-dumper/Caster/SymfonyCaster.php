@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb5b1090524db\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoperb5b1090524db\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperb5b1090524db\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper91c59a2f52e1\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * @final
  */
@@ -22,12 +22,12 @@ class SymfonyCaster
     {
         $clone = null;
         foreach (self::REQUEST_GETTERS as $prop => $getter) {
-            $key = \_PhpScoperb5b1090524db\Symfony\Component\VarDumper\Caster\Caster::PREFIX_PROTECTED . $prop;
+            $key = \_PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster\Caster::PREFIX_PROTECTED . $prop;
             if (\array_key_exists($key, $a) && null === $a[$key]) {
                 if (null === $clone) {
                     $clone = clone $request;
                 }
-                $a[\_PhpScoperb5b1090524db\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $prop] = $clone->{$getter}();
+                $a[\_PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $prop] = $clone->{$getter}();
             }
         }
         return $a;
@@ -36,7 +36,7 @@ class SymfonyCaster
     {
         $multiKey = \sprintf("\0%s\0multi", \get_class($client));
         if (isset($a[$multiKey])) {
-            $a[$multiKey] = new \_PhpScoperb5b1090524db\Symfony\Component\VarDumper\Caster\CutStub($a[$multiKey]);
+            $a[$multiKey] = new \_PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster\CutStub($a[$multiKey]);
         }
         return $a;
     }
@@ -45,7 +45,7 @@ class SymfonyCaster
         $stub->cut += \count($a);
         $a = [];
         foreach ($response->getInfo() as $k => $v) {
-            $a[\_PhpScoperb5b1090524db\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k] = $v;
+            $a[\_PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k] = $v;
         }
         return $a;
     }

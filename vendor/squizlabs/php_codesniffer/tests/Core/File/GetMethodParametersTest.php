@@ -168,7 +168,7 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
     public function testNamespaceOperatorTypeHint()
     {
         $expected = [];
-        $expected[0] = ['name' => '$var1', 'content' => '?namespace\\Name $var1', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScoperb5b1090524db\\?namespace\\Name', 'nullable_type' => \true];
+        $expected[0] = ['name' => '$var1', 'content' => '?namespace\\Name $var1', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScoper91c59a2f52e1\\?namespace\\Name', 'nullable_type' => \true];
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testNamespaceOperatorTypeHint()
@@ -218,7 +218,7 @@ class GetMethodParametersTest extends AbstractMethodUnitTest
     public function testPHP8UnionTypesTwoClasses()
     {
         $expected = [];
-        $expected[0] = ['name' => '$var', 'content' => 'MyClassA|\\Package\\MyClassB $var', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScoperb5b1090524db\\MyClassA|\\Package\\MyClassB', 'nullable_type' => \false];
+        $expected[0] = ['name' => '$var', 'content' => 'MyClassA|\\Package\\MyClassB $var', 'pass_by_reference' => \false, 'variable_length' => \false, 'type_hint' => '_PhpScoper91c59a2f52e1\\MyClassA|\\Package\\MyClassB', 'nullable_type' => \false];
         $this->getMethodParametersTestHelper('/* ' . __FUNCTION__ . ' */', $expected);
     }
     //end testPHP8UnionTypesTwoClasses()

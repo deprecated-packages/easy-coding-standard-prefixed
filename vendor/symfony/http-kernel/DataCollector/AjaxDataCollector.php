@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb5b1090524db\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper91c59a2f52e1\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoperb5b1090524db\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperb5b1090524db\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper91c59a2f52e1\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper91c59a2f52e1\Symfony\Component\HttpFoundation\Response;
 /**
  * AjaxDataCollector.
  *
@@ -19,7 +19,7 @@ use _PhpScoperb5b1090524db\Symfony\Component\HttpFoundation\Response;
  *
  * @final
  */
-class AjaxDataCollector extends \_PhpScoperb5b1090524db\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class AjaxDataCollector extends \_PhpScoper91c59a2f52e1\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {

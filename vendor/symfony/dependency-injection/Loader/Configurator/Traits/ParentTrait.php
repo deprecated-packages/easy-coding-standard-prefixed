@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoperb5b1090524db\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait ParentTrait
 {
     /**

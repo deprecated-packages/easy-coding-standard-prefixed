@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoperb5b1090524db\Composer\Semver\Constraint;
+namespace _PhpScoper91c59a2f52e1\Composer\Semver\Constraint;
 
 /**
  * Defines the absence of a constraint.
  *
  * This constraint matches everything.
  */
-class MatchAllConstraint implements \_PhpScoperb5b1090524db\Composer\Semver\Constraint\ConstraintInterface
+class MatchAllConstraint implements \_PhpScoper91c59a2f52e1\Composer\Semver\Constraint\ConstraintInterface
 {
     /** @var string|null */
     protected $prettyString;
@@ -24,7 +24,7 @@ class MatchAllConstraint implements \_PhpScoperb5b1090524db\Composer\Semver\Cons
      *
      * @return bool
      */
-    public function matches(\_PhpScoperb5b1090524db\Composer\Semver\Constraint\ConstraintInterface $provider)
+    public function matches(\_PhpScoper91c59a2f52e1\Composer\Semver\Constraint\ConstraintInterface $provider)
     {
         return \true;
     }
@@ -61,13 +61,13 @@ class MatchAllConstraint implements \_PhpScoperb5b1090524db\Composer\Semver\Cons
      */
     public function getUpperBound()
     {
-        return \_PhpScoperb5b1090524db\Composer\Semver\Constraint\Bound::positiveInfinity();
+        return \_PhpScoper91c59a2f52e1\Composer\Semver\Constraint\Bound::positiveInfinity();
     }
     /**
      * {@inheritDoc}
      */
     public function getLowerBound()
     {
-        return \_PhpScoperb5b1090524db\Composer\Semver\Constraint\Bound::zero();
+        return \_PhpScoper91c59a2f52e1\Composer\Semver\Constraint\Bound::zero();
     }
 }

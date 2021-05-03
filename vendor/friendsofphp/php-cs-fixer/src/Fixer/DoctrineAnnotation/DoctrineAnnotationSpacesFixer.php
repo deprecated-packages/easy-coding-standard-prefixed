@@ -11,7 +11,7 @@
  */
 namespace PhpCsFixer\Fixer\DoctrineAnnotation;
 
-use _PhpScoperb5b1090524db\Doctrine\Common\Annotations\DocLexer;
+use _PhpScoper91c59a2f52e1\Doctrine\Common\Annotations\DocLexer;
 use PhpCsFixer\AbstractDoctrineAnnotationFixer;
 use PhpCsFixer\Doctrine\Annotation\Token;
 use PhpCsFixer\Doctrine\Annotation\Tokens;

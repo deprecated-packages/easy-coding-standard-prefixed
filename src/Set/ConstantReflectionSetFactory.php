@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Set;
 
-use _PhpScoperb5b1090524db\Nette\Utils\Strings;
+use _PhpScoper91c59a2f52e1\Nette\Utils\Strings;
 use ReflectionClass;
 use Symplify\SetConfigResolver\ValueObject\Set;
 use Symplify\SmartFileSystem\SmartFileInfo;

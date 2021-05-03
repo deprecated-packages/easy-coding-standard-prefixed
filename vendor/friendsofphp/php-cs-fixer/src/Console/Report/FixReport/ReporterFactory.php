@@ -11,8 +11,8 @@
  */
 namespace PhpCsFixer\Console\Report\FixReport;
 
-use _PhpScoperb5b1090524db\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoperb5b1090524db\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper91c59a2f52e1\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper91c59a2f52e1\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *

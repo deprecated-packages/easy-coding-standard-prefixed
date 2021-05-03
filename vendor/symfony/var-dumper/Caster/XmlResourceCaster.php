@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperb5b1090524db\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoperb5b1090524db\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts XML resources to array representation.
  *
@@ -28,7 +28,7 @@ class XmlResourceCaster
         $a['current_line_number'] = \xml_get_current_line_number($h);
         $a['error_code'] = \xml_get_error_code($h);
         if (isset(self::XML_ERRORS[$a['error_code']])) {
-            $a['error_code'] = new \_PhpScoperb5b1090524db\Symfony\Component\VarDumper\Caster\ConstStub(self::XML_ERRORS[$a['error_code']], $a['error_code']);
+            $a['error_code'] = new \_PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster\ConstStub(self::XML_ERRORS[$a['error_code']], $a['error_code']);
         }
         return $a;
     }

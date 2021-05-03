@@ -23,7 +23,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoperb5b1090524db\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper91c59a2f52e1\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Antonio J. García Lagar <aj@garcialagar.es>
  * @author SpacePossum
