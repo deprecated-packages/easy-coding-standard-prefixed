@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Alias;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * Sets a service to be an alias of another one, given a format pattern.
  */
-class AutoAliasServicePass implements \_PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class AutoAliasServicePass implements \_PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}

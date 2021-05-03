@@ -3,14 +3,14 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\Testing;
 
-use _PhpScoper91c59a2f52e1\PHPUnit\Framework\TestCase;
+use _PhpScopere72a8aaba560\PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Container;
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper91c59a2f52e1\Symfony\Component\HttpKernel\KernelInterface;
-use _PhpScoper91c59a2f52e1\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Container;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScopere72a8aaba560\Symfony\Contracts\Service\ResetInterface;
 use Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
 use Symplify\PackageBuilder\Exception\HttpKernel\MissingInterfaceException;
 use Symplify\SmartFileSystem\SmartFileInfo;

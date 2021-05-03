@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Config;
 
-use _PhpScoper91c59a2f52e1\Symfony\Component\Config\FileLocator;
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScopere72a8aaba560\Symfony\Component\Config\FileLocator;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symplify\Astral\Exception\ShouldNotHappenException;
 use Symplify\SetConfigResolver\SetResolver;
 use Symplify\SmartFileSystem\SmartFileInfo;

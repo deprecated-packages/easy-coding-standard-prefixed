@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace _PhpScopere72a8aaba560\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use _PhpScoper91c59a2f52e1\PHPUnit\Framework\Constraint\Constraint;
-use _PhpScoper91c59a2f52e1\Symfony\Component\HttpFoundation\Cookie;
-use _PhpScoper91c59a2f52e1\Symfony\Component\HttpFoundation\Response;
+use _PhpScopere72a8aaba560\PHPUnit\Framework\Constraint\Constraint;
+use _PhpScopere72a8aaba560\Symfony\Component\HttpFoundation\Cookie;
+use _PhpScopere72a8aaba560\Symfony\Component\HttpFoundation\Response;
 final class ResponseHasCookie extends Constraint
 {
     private $name;

@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Exception;
+namespace _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception;
 
 /**
  * Thrown when a definition cannot be autowired.
  */
-class AutowiringFailedException extends \_PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Exception\RuntimeException
+class AutowiringFailedException extends \_PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception\RuntimeException
 {
     private $serviceId;
     private $messageCallback;
     public function __construct(string $serviceId, $message = '', int $code = 0, \Throwable $previous = null)
     {
         $this->serviceId = $serviceId;
-        if ($message instanceof \Closure && (\function_exists('xdebug_is_enabled') ? \xdebug_is_enabled() : \function_exists('_PhpScoper91c59a2f52e1\\xdebug_info'))) {
+        if ($message instanceof \Closure && (\function_exists('xdebug_is_enabled') ? \xdebug_is_enabled() : \function_exists('_PhpScopere72a8aaba560\\xdebug_info'))) {
             $message = $message();
         }
         if (!$message instanceof \Closure) {

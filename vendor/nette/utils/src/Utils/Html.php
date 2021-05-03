@@ -5,10 +5,10 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper91c59a2f52e1\Nette\Utils;
+namespace _PhpScopere72a8aaba560\Nette\Utils;
 
-use _PhpScoper91c59a2f52e1\Nette;
-use _PhpScoper91c59a2f52e1\Nette\HtmlStringable;
+use _PhpScopere72a8aaba560\Nette;
+use _PhpScopere72a8aaba560\Nette\HtmlStringable;
 use function is_array, is_float, is_object, is_string;
 /**
  * HTML helper.
@@ -258,7 +258,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, HtmlStringab
             $el->setText($attrs);
         }
         if (isset($parts[1])) {
-            foreach (\_PhpScoper91c59a2f52e1\Nette\Utils\Strings::matchAll($parts[1] . ' ', '#([a-z0-9:-]+)(?:=(["\'])?(.*?)(?(2)\\2|\\s))?#i') as $m) {
+            foreach (\_PhpScopere72a8aaba560\Nette\Utils\Strings::matchAll($parts[1] . ' ', '#([a-z0-9:-]+)(?:=(["\'])?(.*?)(?(2)\\2|\\s))?#i') as $m) {
                 $el->attrs[$m[1]] = $m[3] ?? \true;
             }
         }
@@ -702,7 +702,7 @@ class Html implements \ArrayAccess, \Countable, \IteratorAggregate, HtmlStringab
                 continue;
             } elseif (is_array($value)) {
                 if (\strncmp($key, 'data-', 5) === 0) {
-                    $value = \_PhpScoper91c59a2f52e1\Nette\Utils\Json::encode($value);
+                    $value = \_PhpScopere72a8aaba560\Nette\Utils\Json::encode($value);
                 } else {
                     $tmp = null;
                     foreach ($value as $k => $v) {

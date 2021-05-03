@@ -30,7 +30,7 @@ final class SimpleToComplexStringVariableFixer extends AbstractFixer
         return new FixerDefinition('Converts explicit variables in double-quoted strings and heredoc syntax from simple to complex format (`${` to `{$`).', [new CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScoper91c59a2f52e1;
+namespace _PhpScopere72a8aaba560;
 
 $name = 'World';
 echo "Hello {$name}!";
@@ -39,7 +39,7 @@ EOT
 ), new CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScoper91c59a2f52e1;
+namespace _PhpScopere72a8aaba560;
 
 $name = 'World';
 echo <<<TEST

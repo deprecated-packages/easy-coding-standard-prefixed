@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper;
+namespace _PhpScopere72a8aaba560\Symfony\Component\Console\Helper;
 
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Exception\RuntimeException;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Output\ConsoleSectionOutput;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Exception\RuntimeException;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Output\ConsoleSectionOutput;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Provides helpers to display a table.
  *
@@ -86,7 +86,7 @@ class Table
     /**
      * Sets a style definition.
      */
-    public static function setStyleDefinition(string $name, \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableStyle $style)
+    public static function setStyleDefinition(string $name, \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableStyle $style)
     {
         if (!self::$styles) {
             self::$styles = self::initStyles();
@@ -214,7 +214,7 @@ class Table
     }
     public function addRow($row)
     {
-        if ($row instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableSeparator) {
+        if ($row instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableSeparator) {
             $this->rows[] = $row;
             return $this;
         }
@@ -274,18 +274,18 @@ class Table
      */
     public function render()
     {
-        $divider = new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableSeparator();
+        $divider = new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableSeparator();
         if ($this->horizontal) {
             $rows = [];
             foreach ($this->headers[0] ?? [] as $i => $header) {
                 $rows[$i] = [$header];
                 foreach ($this->rows as $row) {
-                    if ($row instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableSeparator) {
+                    if ($row instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableSeparator) {
                         continue;
                     }
                     if (isset($row[$i])) {
                         $rows[$i][] = $row[$i];
-                    } elseif ($rows[$i][0] instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell && $rows[$i][0]->getColspan() >= 2) {
+                    } elseif ($rows[$i][0] instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell && $rows[$i][0]->getColspan() >= 2) {
                         // Noop, there is a "title"
                     } else {
                         $rows[$i][] = null;
@@ -306,7 +306,7 @@ class Table
                 $isFirstRow = \true;
                 continue;
             }
-            if ($row instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableSeparator) {
+            if ($row instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableSeparator) {
                 $this->renderRowSeparator();
                 continue;
             }
@@ -363,12 +363,12 @@ class Table
             $markup .= $column === $count - 1 ? $rightChar : $midChar;
         }
         if (null !== $title) {
-            $titleLength = \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($formatter = $this->output->getFormatter(), $formattedTitle = \sprintf($titleFormat, $title));
-            $markupLength = \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::strlen($markup);
+            $titleLength = \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($formatter = $this->output->getFormatter(), $formattedTitle = \sprintf($titleFormat, $title));
+            $markupLength = \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::strlen($markup);
             if ($titleLength > ($limit = $markupLength - 4)) {
                 $titleLength = $limit;
-                $formatLength = \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($formatter, \sprintf($titleFormat, ''));
-                $formattedTitle = \sprintf($titleFormat, \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::substr($title, 0, $limit - $formatLength - 3) . '...');
+                $formatLength = \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($formatter, \sprintf($titleFormat, ''));
+                $formattedTitle = \sprintf($titleFormat, \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::substr($title, 0, $limit - $formatLength - 3) . '...');
             }
             $titleStart = ($markupLength - $titleLength) / 2;
             if (\false === \mb_detect_encoding($markup, null, \true)) {
@@ -416,7 +416,7 @@ class Table
     {
         $cell = $row[$column] ?? '';
         $width = $this->effectiveColumnWidths[$column];
-        if ($cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell && $cell->getColspan() > 1) {
+        if ($cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell && $cell->getColspan() > 1) {
             // add the width of the following columns(numbers of colspan).
             foreach (\range($column + 1, $column + $cell->getColspan() - 1) as $nextColumn) {
                 $width += $this->getColumnSeparatorWidth() + $this->effectiveColumnWidths[$nextColumn];
@@ -427,13 +427,13 @@ class Table
             $width += \strlen($cell) - \mb_strwidth($cell, $encoding);
         }
         $style = $this->getColumnStyle($column);
-        if ($cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableSeparator) {
+        if ($cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableSeparator) {
             return \sprintf($style->getBorderFormat(), \str_repeat($style->getBorderChars()[2], $width));
         }
-        $width += \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::length($cell) - \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::length(\_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::removeDecoration($this->output->getFormatter(), $cell));
+        $width += \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::length($cell) - \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::length(\_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::removeDecoration($this->output->getFormatter(), $cell));
         $content = \sprintf($style->getCellRowContentFormat(), $cell);
         $padType = $style->getPadType();
-        if ($cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell && $cell->getStyle() instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCellStyle) {
+        if ($cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell && $cell->getStyle() instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCellStyle) {
             $isNotStyledByTag = !\preg_match('/^<(\\w+|(\\w+=[\\w,]+;?)*)>.+<\\/(\\w+|(\\w+=\\w+;?)*)?>$/', $cell);
             if ($isNotStyledByTag) {
                 $cellFormat = $cell->getStyle()->getCellFormat();
@@ -461,14 +461,14 @@ class Table
     {
         $columns = [0];
         foreach ($rows as $row) {
-            if ($row instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableSeparator) {
+            if ($row instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableSeparator) {
                 continue;
             }
             $columns[] = $this->getNumberOfColumns($row);
         }
         $this->numberOfColumns = \max($columns);
     }
-    private function buildTableRows(array $rows) : \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableRows
+    private function buildTableRows(array $rows) : \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableRows
     {
         /** @var WrappableOutputFormatterInterface $formatter */
         $formatter = $this->output->getFormatter();
@@ -477,19 +477,19 @@ class Table
             $rows = $this->fillNextRows($rows, $rowKey);
             // Remove any new line breaks and replace it with a new line
             foreach ($rows[$rowKey] as $column => $cell) {
-                $colspan = $cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell ? $cell->getColspan() : 1;
-                if (isset($this->columnMaxWidths[$column]) && \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($formatter, $cell) > $this->columnMaxWidths[$column]) {
+                $colspan = $cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell ? $cell->getColspan() : 1;
+                if (isset($this->columnMaxWidths[$column]) && \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($formatter, $cell) > $this->columnMaxWidths[$column]) {
                     $cell = $formatter->formatAndWrap($cell, $this->columnMaxWidths[$column] * $colspan);
                 }
                 if (!\strstr($cell, "\n")) {
                     continue;
                 }
                 $escaped = \implode("\n", \array_map([OutputFormatter::class, 'escapeTrailingBackslash'], \explode("\n", $cell)));
-                $cell = $cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell ? new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell($escaped, ['colspan' => $cell->getColspan()]) : $escaped;
+                $cell = $cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell ? new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell($escaped, ['colspan' => $cell->getColspan()]) : $escaped;
                 $lines = \explode("\n", \str_replace("\n", "<fg=default;bg=default>\n</>", $cell));
                 foreach ($lines as $lineKey => $line) {
                     if ($colspan > 1) {
-                        $line = new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell($line, ['colspan' => $colspan]);
+                        $line = new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell($line, ['colspan' => $colspan]);
                     }
                     if (0 === $lineKey) {
                         $rows[$rowKey][$column] = $line;
@@ -502,7 +502,7 @@ class Table
                 }
             }
         }
-        return new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableRows(function () use($rows, $unmergedRows) : \Traversable {
+        return new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableRows(function () use($rows, $unmergedRows) : \Traversable {
             foreach ($rows as $rowKey => $row) {
                 (yield $this->fillCells($row));
                 if (isset($unmergedRows[$rowKey])) {
@@ -515,7 +515,7 @@ class Table
     }
     private function calculateRowCount() : int
     {
-        $numberOfRows = \count(\iterator_to_array($this->buildTableRows(\array_merge($this->headers, [new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableSeparator()], $this->rows))));
+        $numberOfRows = \count(\iterator_to_array($this->buildTableRows(\array_merge($this->headers, [new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableSeparator()], $this->rows))));
         if ($this->headers) {
             ++$numberOfRows;
             // Add row for header separator
@@ -535,23 +535,23 @@ class Table
     {
         $unmergedRows = [];
         foreach ($rows[$line] as $column => $cell) {
-            if (null !== $cell && !$cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell && !\is_scalar($cell) && !(\is_object($cell) && \method_exists($cell, '__toString'))) {
+            if (null !== $cell && !$cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell && !\is_scalar($cell) && !(\is_object($cell) && \method_exists($cell, '__toString'))) {
                 throw new InvalidArgumentException(\sprintf('A cell must be a TableCell, a scalar or an object implementing "__toString()", "%s" given.', \get_debug_type($cell)));
             }
-            if ($cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell && $cell->getRowspan() > 1) {
+            if ($cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell && $cell->getRowspan() > 1) {
                 $nbLines = $cell->getRowspan() - 1;
                 $lines = [$cell];
                 if (\strstr($cell, "\n")) {
                     $lines = \explode("\n", \str_replace("\n", "<fg=default;bg=default>\n</>", $cell));
                     $nbLines = \count($lines) > $nbLines ? \substr_count($cell, "\n") : $nbLines;
-                    $rows[$line][$column] = new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell($lines[0], ['colspan' => $cell->getColspan(), 'style' => $cell->getStyle()]);
+                    $rows[$line][$column] = new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell($lines[0], ['colspan' => $cell->getColspan(), 'style' => $cell->getStyle()]);
                     unset($lines[0]);
                 }
                 // create a two dimensional array (rowspan x colspan)
                 $unmergedRows = \array_replace_recursive(\array_fill($line + 1, $nbLines, []), $unmergedRows);
                 foreach ($unmergedRows as $unmergedRowKey => $unmergedRow) {
                     $value = $lines[$unmergedRowKey - $line] ?? '';
-                    $unmergedRows[$unmergedRowKey][$column] = new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell($value, ['colspan' => $cell->getColspan(), 'style' => $cell->getStyle()]);
+                    $unmergedRows[$unmergedRowKey][$column] = new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell($value, ['colspan' => $cell->getColspan(), 'style' => $cell->getStyle()]);
                     if ($nbLines === $unmergedRowKey - $line) {
                         break;
                     }
@@ -585,7 +585,7 @@ class Table
         $newRow = [];
         foreach ($row as $column => $cell) {
             $newRow[] = $cell;
-            if ($cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell && $cell->getColspan() > 1) {
+            if ($cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell && $cell->getColspan() > 1) {
                 foreach (\range($column + 1, $column + $cell->getColspan() - 1) as $position) {
                     // insert empty value at column position
                     $newRow[] = '';
@@ -599,8 +599,8 @@ class Table
         $row = $rows[$line];
         foreach ($row as $cellKey => $cellValue) {
             $row[$cellKey] = '';
-            if ($cellValue instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell) {
-                $row[$cellKey] = new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell('', ['colspan' => $cellValue->getColspan()]);
+            if ($cellValue instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell) {
+                $row[$cellKey] = new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell('', ['colspan' => $cellValue->getColspan()]);
             }
         }
         return $row;
@@ -612,7 +612,7 @@ class Table
     {
         $columns = \count($row);
         foreach ($row as $column) {
-            $columns += $column instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell ? $column->getColspan() - 1 : 0;
+            $columns += $column instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell ? $column->getColspan() - 1 : 0;
         }
         return $columns;
     }
@@ -623,7 +623,7 @@ class Table
     {
         $columns = \range(0, $this->numberOfColumns - 1);
         foreach ($row as $cellKey => $cell) {
-            if ($cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell && $cell->getColspan() > 1) {
+            if ($cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell && $cell->getColspan() > 1) {
                 // exclude grouped columns.
                 $columns = \array_diff($columns, \range($cellKey + 1, $cellKey + $cell->getColspan() - 1));
             }
@@ -638,13 +638,13 @@ class Table
         for ($column = 0; $column < $this->numberOfColumns; ++$column) {
             $lengths = [];
             foreach ($rows as $row) {
-                if ($row instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableSeparator) {
+                if ($row instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableSeparator) {
                     continue;
                 }
                 foreach ($row as $i => $cell) {
-                    if ($cell instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableCell) {
-                        $textContent = \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::removeDecoration($this->output->getFormatter(), $cell);
-                        $textLength = \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::strlen($textContent);
+                    if ($cell instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableCell) {
+                        $textContent = \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::removeDecoration($this->output->getFormatter(), $cell);
+                        $textLength = \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::strlen($textContent);
                         if ($textLength > 0) {
                             $contentColumns = \str_split($textContent, \ceil($textLength / $cell->getColspan()));
                             foreach ($contentColumns as $position => $content) {
@@ -655,19 +655,19 @@ class Table
                 }
                 $lengths[] = $this->getCellWidth($row, $column);
             }
-            $this->effectiveColumnWidths[$column] = \max($lengths) + \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::strlen($this->style->getCellRowContentFormat()) - 2;
+            $this->effectiveColumnWidths[$column] = \max($lengths) + \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::strlen($this->style->getCellRowContentFormat()) - 2;
         }
     }
     private function getColumnSeparatorWidth() : int
     {
-        return \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::strlen(\sprintf($this->style->getBorderFormat(), $this->style->getBorderChars()[3]));
+        return \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::strlen(\sprintf($this->style->getBorderFormat(), $this->style->getBorderChars()[3]));
     }
     private function getCellWidth(array $row, int $column) : int
     {
         $cellWidth = 0;
         if (isset($row[$column])) {
             $cell = $row[$column];
-            $cellWidth = \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($this->output->getFormatter(), $cell);
+            $cellWidth = \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\Helper::strlenWithoutDecoration($this->output->getFormatter(), $cell);
         }
         $columnWidth = $this->columnWidths[$column] ?? 0;
         $cellWidth = \max($cellWidth, $columnWidth);
@@ -683,19 +683,19 @@ class Table
     }
     private static function initStyles() : array
     {
-        $borderless = new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableStyle();
+        $borderless = new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableStyle();
         $borderless->setHorizontalBorderChars('=')->setVerticalBorderChars(' ')->setDefaultCrossingChar(' ');
-        $compact = new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableStyle();
+        $compact = new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableStyle();
         $compact->setHorizontalBorderChars('')->setVerticalBorderChars(' ')->setDefaultCrossingChar('')->setCellRowContentFormat('%s');
-        $styleGuide = new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableStyle();
+        $styleGuide = new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableStyle();
         $styleGuide->setHorizontalBorderChars('-')->setVerticalBorderChars(' ')->setDefaultCrossingChar(' ')->setCellHeaderFormat('%s');
-        $box = (new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableStyle())->setHorizontalBorderChars('─')->setVerticalBorderChars('│')->setCrossingChars('┼', '┌', '┬', '┐', '┤', '┘', '┴', '└', '├');
-        $boxDouble = (new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableStyle())->setHorizontalBorderChars('═', '─')->setVerticalBorderChars('║', '│')->setCrossingChars('┼', '╔', '╤', '╗', '╢', '╝', '╧', '╚', '╟', '╠', '╪', '╣');
-        return ['default' => new \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableStyle(), 'borderless' => $borderless, 'compact' => $compact, 'symfony-style-guide' => $styleGuide, 'box' => $box, 'box-double' => $boxDouble];
+        $box = (new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableStyle())->setHorizontalBorderChars('─')->setVerticalBorderChars('│')->setCrossingChars('┼', '┌', '┬', '┐', '┤', '┘', '┴', '└', '├');
+        $boxDouble = (new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableStyle())->setHorizontalBorderChars('═', '─')->setVerticalBorderChars('║', '│')->setCrossingChars('┼', '╔', '╤', '╗', '╢', '╝', '╧', '╚', '╟', '╠', '╪', '╣');
+        return ['default' => new \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableStyle(), 'borderless' => $borderless, 'compact' => $compact, 'symfony-style-guide' => $styleGuide, 'box' => $box, 'box-double' => $boxDouble];
     }
-    private function resolveStyle($name) : \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableStyle
+    private function resolveStyle($name) : \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableStyle
     {
-        if ($name instanceof \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Helper\TableStyle) {
+        if ($name instanceof \_PhpScopere72a8aaba560\Symfony\Component\Console\Helper\TableStyle) {
             return $name;
         }
         if (isset(self::$styles[$name])) {

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\Console\Input;
+namespace _PhpScopere72a8aaba560\Symfony\Component\Console\Input;
 
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * StringInput represents an input provided as a string.
  *
@@ -20,7 +20,7 @@ use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Exception\InvalidArgumentEx
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StringInput extends \_PhpScoper91c59a2f52e1\Symfony\Component\Console\Input\ArgvInput
+class StringInput extends \_PhpScopere72a8aaba560\Symfony\Component\Console\Input\ArgvInput
 {
     public const REGEX_STRING = '([^\\s]+?)(?:\\s|(?<!\\\\)"|(?<!\\\\)\'|$)';
     public const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')';

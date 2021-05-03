@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScopere72a8aaba560\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper91c59a2f52e1\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper91c59a2f52e1\Symfony\Component\HttpFoundation\Response;
+use _PhpScopere72a8aaba560\Symfony\Component\HttpFoundation\Request;
+use _PhpScopere72a8aaba560\Symfony\Component\HttpFoundation\Response;
 /**
  * Ssi implements the SSI capabilities to Request and Response instances.
  *
  * @author Sebastian Krebs <krebs.seb@gmail.com>
  */
-class Ssi extends \_PhpScoper91c59a2f52e1\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
+class Ssi extends \_PhpScopere72a8aaba560\Symfony\Component\HttpKernel\HttpCache\AbstractSurrogate
 {
     /**
      * {@inheritdoc}

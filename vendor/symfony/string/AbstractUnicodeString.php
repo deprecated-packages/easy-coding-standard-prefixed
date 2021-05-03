@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\String;
+namespace _PhpScopere72a8aaba560\Symfony\Component\String;
 
-use _PhpScoper91c59a2f52e1\Symfony\Component\String\Exception\ExceptionInterface;
-use _PhpScoper91c59a2f52e1\Symfony\Component\String\Exception\InvalidArgumentException;
-use _PhpScoper91c59a2f52e1\Symfony\Component\String\Exception\RuntimeException;
+use _PhpScopere72a8aaba560\Symfony\Component\String\Exception\ExceptionInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\String\Exception\InvalidArgumentException;
+use _PhpScopere72a8aaba560\Symfony\Component\String\Exception\RuntimeException;
 /**
  * Represents a string of abstract Unicode characters.
  *
@@ -24,7 +24,7 @@ use _PhpScoper91c59a2f52e1\Symfony\Component\String\Exception\RuntimeException;
  *
  * @throws ExceptionInterface
  */
-abstract class AbstractUnicodeString extends \_PhpScoper91c59a2f52e1\Symfony\Component\String\AbstractString
+abstract class AbstractUnicodeString extends \_PhpScopere72a8aaba560\Symfony\Component\String\AbstractString
 {
     public const NFC = \Normalizer::NFC;
     public const NFD = \Normalizer::NFD;
@@ -297,7 +297,7 @@ abstract class AbstractUnicodeString extends \_PhpScoper91c59a2f52e1\Symfony\Com
     public function snake() : parent
     {
         $str = $this->camel()->title();
-        $str->string = \mb_strtolower(\preg_replace(['/(\\p{Lu}+)(\\p{Lu}\\p{Ll})/u', '/([\\p{Ll}0-9])(\\p{Lu})/u'], '_PhpScoper91c59a2f52e1\\1_\\2', $str->string), 'UTF-8');
+        $str->string = \mb_strtolower(\preg_replace(['/(\\p{Lu}+)(\\p{Lu}\\p{Ll})/u', '/([\\p{Ll}0-9])(\\p{Lu})/u'], '_PhpScopere72a8aaba560\\1_\\2', $str->string), 'UTF-8');
         return $str;
     }
     public function title(bool $allWords = \false) : parent

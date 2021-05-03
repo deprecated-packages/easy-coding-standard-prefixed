@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper91c59a2f52e1\Nette\Utils;
+namespace _PhpScopere72a8aaba560\Nette\Utils;
 
-use _PhpScoper91c59a2f52e1\Nette;
+use _PhpScopere72a8aaba560\Nette;
 /**
  * DateTime.
  */

@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console;
 
-use _PhpScoper91c59a2f52e1\Composer\XdebugHandler\XdebugHandler;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Command\Command;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere72a8aaba560\Composer\XdebugHandler\XdebugHandler;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Command\Command;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Input\InputOption;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Bootstrap\NoCheckersLoaderReporter;
 use Symplify\EasyCodingStandard\Configuration\Exception\NoCheckersLoadedException;
 use Symplify\EasyCodingStandard\Console\Command\CheckCommand;

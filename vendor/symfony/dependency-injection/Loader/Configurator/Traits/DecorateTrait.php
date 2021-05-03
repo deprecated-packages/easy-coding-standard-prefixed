@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait DecorateTrait
 {
     /**

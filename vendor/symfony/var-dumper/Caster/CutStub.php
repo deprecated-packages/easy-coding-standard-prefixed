@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster;
+namespace _PhpScopere72a8aaba560\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScopere72a8aaba560\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Represents the main properties of a PHP variable, pre-casted by a caster.
  *
@@ -26,7 +26,7 @@ class CutStub extends Stub
                 $this->type = self::TYPE_OBJECT;
                 $this->class = \get_class($value);
                 if ($value instanceof \Closure) {
-                    \_PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster\ReflectionCaster::castClosure($value, [], $this, \true, \_PhpScoper91c59a2f52e1\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE);
+                    \_PhpScopere72a8aaba560\Symfony\Component\VarDumper\Caster\ReflectionCaster::castClosure($value, [], $this, \true, \_PhpScopere72a8aaba560\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE);
                 }
                 $this->cut = -1;
                 break;

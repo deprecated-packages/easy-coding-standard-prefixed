@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Loader;
+namespace _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Loader;
 
-use _PhpScoper91c59a2f52e1\Symfony\Component\Config\Util\XmlUtils;
-use _PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopere72a8aaba560\Symfony\Component\Config\Util\XmlUtils;
+use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * IniFileLoader loads parameters from INI files.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class IniFileLoader extends \_PhpScoper91c59a2f52e1\Symfony\Component\DependencyInjection\Loader\FileLoader
+class IniFileLoader extends \_PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Loader\FileLoader
 {
     /**
      * {@inheritdoc}

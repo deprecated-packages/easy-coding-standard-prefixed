@@ -14,12 +14,12 @@ namespace PhpCsFixer\Console\Command;
 use PhpCsFixer\Documentation\DocumentationGenerator;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\RuleSet\RuleSets;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Command\Command;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Filesystem\Filesystem;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Finder\Finder;
-use _PhpScoper91c59a2f52e1\Symfony\Component\Finder\SplFileInfo;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Command\Command;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere72a8aaba560\Symfony\Component\Filesystem\Filesystem;
+use _PhpScopere72a8aaba560\Symfony\Component\Finder\Finder;
+use _PhpScopere72a8aaba560\Symfony\Component\Finder\SplFileInfo;
 /**
  * @internal
  */

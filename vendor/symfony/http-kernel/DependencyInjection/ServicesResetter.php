@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper91c59a2f52e1\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScopere72a8aaba560\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper91c59a2f52e1\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopere72a8aaba560\Symfony\Contracts\Service\ResetInterface;
 /**
  * Resets provided services.
  *
