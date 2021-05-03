@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
-use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
-use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Reference;
 trait BindTrait
 {
     /**

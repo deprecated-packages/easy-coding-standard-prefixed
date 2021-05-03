@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7239e3eaf11a\PackageVersions;
+namespace _PhpScoper130a9a1cd4a2\PackageVersions;
 
-use _PhpScoper7239e3eaf11a\Composer\InstalledVersions;
+use _PhpScoper130a9a1cd4a2\Composer\InstalledVersions;
 use OutOfBoundsException;
 \class_exists(InstalledVersions::class);
 /**

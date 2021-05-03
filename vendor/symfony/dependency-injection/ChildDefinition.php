@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection;
+namespace _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection;
 
-use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Exception\OutOfBoundsException;
 /**
  * This definition extends another definition.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ChildDefinition extends \_PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Definition
+class ChildDefinition extends \_PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Definition
 {
     private $parent;
     /**

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7239e3eaf11a\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper130a9a1cd4a2\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoper7239e3eaf11a\Symfony\Component\Config\Definition\FloatNode;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\Config\Definition\FloatNode;
 /**
  * This class provides a fluent interface for defining a float node.
  *
  * @author Jeanmonod David <david.jeanmonod@gmail.com>
  */
-class FloatNodeDefinition extends \_PhpScoper7239e3eaf11a\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
+class FloatNodeDefinition extends \_PhpScoper130a9a1cd4a2\Symfony\Component\Config\Definition\Builder\NumericNodeDefinition
 {
     /**
      * Instantiates a Node.

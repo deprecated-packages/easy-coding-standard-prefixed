@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\ValueObject;
 
-use _PhpScoper7239e3eaf11a\Symfony\Component\Console\Application;
-use _PhpScoper7239e3eaf11a\Symfony\Component\HttpKernel\KernelInterface;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Application;
+use _PhpScoper130a9a1cd4a2\Symfony\Component\HttpKernel\KernelInterface;
 use Symplify\PackageBuilder\Console\Input\StaticInputDetector;
 use Symplify\PackageBuilder\Console\ShellCode;
 use Symplify\PackageBuilder\Console\Style\SymfonyStyleFactory;
