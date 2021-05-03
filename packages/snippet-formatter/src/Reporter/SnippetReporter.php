@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Reporter;
 
-use _PhpScopere72a8aaba560\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper7239e3eaf11a\Symfony\Component\Console\Style\SymfonyStyle;
 final class SnippetReporter
 {
     /**

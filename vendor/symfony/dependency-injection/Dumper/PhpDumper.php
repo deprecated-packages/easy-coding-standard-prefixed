@@ -8,47 +8,47 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Dumper;
+namespace _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Dumper;
 
-use _PhpScopere72a8aaba560\Composer\Autoload\ClassLoader;
-use _PhpScopere72a8aaba560\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Argument\ServiceLocator;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Container;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception\LogicException;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\ExpressionLanguage;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface as ProxyDumper;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Loader\FileLoader;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Reference;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\TypedReference;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Variable;
-use _PhpScopere72a8aaba560\Symfony\Component\ErrorHandler\DebugClassLoader;
-use _PhpScopere72a8aaba560\Symfony\Component\ExpressionLanguage\Expression;
-use _PhpScopere72a8aaba560\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper7239e3eaf11a\Composer\Autoload\ClassLoader;
+use _PhpScoper7239e3eaf11a\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Argument\ServiceLocator;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Container;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Exception\EnvParameterException;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\ExpressionLanguage;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface as ProxyDumper;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Loader\FileLoader;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Variable;
+use _PhpScoper7239e3eaf11a\Symfony\Component\ErrorHandler\DebugClassLoader;
+use _PhpScoper7239e3eaf11a\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScoper7239e3eaf11a\Symfony\Component\HttpKernel\Kernel;
 /**
  * PhpDumper dumps a service container as a PHP class.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class PhpDumper extends \_PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Dumper\Dumper
+class PhpDumper extends \_PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Dumper\Dumper
 {
     /**
      * Characters that might appear in the generated variable name as first character.
@@ -190,8 +190,8 @@ class PhpDumper extends \_PhpScopere72a8aaba560\Symfony\Component\DependencyInje
             $fileTemplate = <<<EOF
 <?php
 
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
 
 /*{$this->docStar}
  * @internal This class has been auto-generated by the Symfony Dependency Injection Component.
@@ -258,7 +258,7 @@ EOF;
 // This file has been auto-generated by the Symfony Dependency Injection Component
 // You can reference it in the "opcache.preload" php.ini setting on PHP >= 7.4 when preloading is desired
 
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\Dumper\\Preloader;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\Dumper\\Preloader;
 
 if (in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
     return;
@@ -978,14 +978,14 @@ EOTXT
         $code = <<<EOF
 <?php
 {$namespaceLine}
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\ContainerInterface;
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\Container;
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException;
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\Exception\\LogicException;
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\ParameterBag\\FrozenParameterBag;
-use _PhpScopere72a8aaba560\\Symfony\\Component\\DependencyInjection\\ParameterBag\\ParameterBagInterface;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\Argument\\RewindableGenerator;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\ContainerInterface;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\Container;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\Exception\\InvalidArgumentException;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\Exception\\LogicException;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\Exception\\RuntimeException;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\ParameterBag\\FrozenParameterBag;
+use _PhpScoper7239e3eaf11a\\Symfony\\Component\\DependencyInjection\\ParameterBag\\ParameterBagInterface;
 
 /*{$this->docStar}
  * @internal This class has been auto-generated by the Symfony Dependency Injection Component.
@@ -1726,7 +1726,7 @@ EOF;
     private function getExpressionLanguage() : ExpressionLanguage
     {
         if (null === $this->expressionLanguage) {
-            if (!\class_exists(\_PhpScopere72a8aaba560\Symfony\Component\ExpressionLanguage\ExpressionLanguage::class)) {
+            if (!\class_exists(\_PhpScoper7239e3eaf11a\Symfony\Component\ExpressionLanguage\ExpressionLanguage::class)) {
                 throw new LogicException('Unable to use expressions as the Symfony ExpressionLanguage component is not installed.');
             }
             $providers = $this->container->getExpressionLanguageProviders();

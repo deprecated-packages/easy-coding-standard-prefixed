@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere72a8aaba560\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper7239e3eaf11a\Symfony\Component\VarDumper\Caster;
 
-use _PhpScopere72a8aaba560\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper7239e3eaf11a\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts a caster's Stub.
  *
@@ -37,7 +37,7 @@ class StubCaster
         }
         return $a;
     }
-    public static function castCutArray(\_PhpScopere72a8aaba560\Symfony\Component\VarDumper\Caster\CutArrayStub $c, array $a, Stub $stub, bool $isNested)
+    public static function castCutArray(\_PhpScoper7239e3eaf11a\Symfony\Component\VarDumper\Caster\CutArrayStub $c, array $a, Stub $stub, bool $isNested)
     {
         return $isNested ? $c->preservedSubset : $a;
     }
@@ -49,7 +49,7 @@ class StubCaster
         }
         return $a;
     }
-    public static function castEnum(\_PhpScopere72a8aaba560\Symfony\Component\VarDumper\Caster\EnumStub $c, array $a, Stub $stub, bool $isNested)
+    public static function castEnum(\_PhpScoper7239e3eaf11a\Symfony\Component\VarDumper\Caster\EnumStub $c, array $a, Stub $stub, bool $isNested)
     {
         if ($isNested) {
             $stub->class = $c->dumpKeys ? '' : null;
@@ -60,7 +60,7 @@ class StubCaster
             $a = [];
             if ($c->value) {
                 foreach (\array_keys($c->value) as $k) {
-                    $keys[] = !isset($k[0]) || "\0" !== $k[0] ? \_PhpScopere72a8aaba560\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k : $k;
+                    $keys[] = !isset($k[0]) || "\0" !== $k[0] ? \_PhpScoper7239e3eaf11a\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k : $k;
                 }
                 // Preserve references with array_combine()
                 $a = \array_combine($keys, $c->value);

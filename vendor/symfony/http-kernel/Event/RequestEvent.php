@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere72a8aaba560\Symfony\Component\HttpKernel\Event;
+namespace _PhpScoper7239e3eaf11a\Symfony\Component\HttpKernel\Event;
 
-use _PhpScopere72a8aaba560\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper7239e3eaf11a\Symfony\Component\HttpFoundation\Response;
 /**
  * Allows to create a response for a request.
  *
@@ -20,7 +20,7 @@ use _PhpScopere72a8aaba560\Symfony\Component\HttpFoundation\Response;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class RequestEvent extends \_PhpScopere72a8aaba560\Symfony\Component\HttpKernel\Event\KernelEvent
+class RequestEvent extends \_PhpScoper7239e3eaf11a\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
     /**

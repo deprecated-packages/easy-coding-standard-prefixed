@@ -23,7 +23,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScopere72a8aaba560\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper7239e3eaf11a\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
@@ -108,7 +108,7 @@ final class FinalInternalClassFixer extends AbstractFixer implements Configurati
             }
             return $newValue;
         };
-        return new FixerConfigurationResolver([(new AliasedFixerOptionBuilder(new FixerOptionBuilder('annotation_include', 'Class level annotations tags that must be set in order to fix the class. (case insensitive)'), 'annotation-white-list'))->setAllowedTypes(['array'])->setAllowedValues($annotationsAsserts)->setDefault(['@internal'])->setNormalizer($annotationsNormalizer)->getOption(), (new AliasedFixerOptionBuilder(new FixerOptionBuilder('annotation_exclude', 'Class level annotations tags that must be omitted to fix the class, even if all of the white list ones are used as well. (case insensitive)'), 'annotation-black-list'))->setAllowedTypes(['array'])->setAllowedValues($annotationsAsserts)->setDefault(['@final', '@Entity', '_PhpScopere72a8aaba560\\@ORM\\Entity', '_PhpScopere72a8aaba560\\@ORM\\Mapping\\Entity', '_PhpScopere72a8aaba560\\@Mapping\\Entity', '@Document', '_PhpScopere72a8aaba560\\@ODM\\Document'])->setNormalizer($annotationsNormalizer)->getOption(), (new AliasedFixerOptionBuilder(new FixerOptionBuilder('consider_absent_docblock_as_internal_class', 'Should classes without any DocBlock be fixed to final?'), 'consider-absent-docblock-as-internal-class'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
+        return new FixerConfigurationResolver([(new AliasedFixerOptionBuilder(new FixerOptionBuilder('annotation_include', 'Class level annotations tags that must be set in order to fix the class. (case insensitive)'), 'annotation-white-list'))->setAllowedTypes(['array'])->setAllowedValues($annotationsAsserts)->setDefault(['@internal'])->setNormalizer($annotationsNormalizer)->getOption(), (new AliasedFixerOptionBuilder(new FixerOptionBuilder('annotation_exclude', 'Class level annotations tags that must be omitted to fix the class, even if all of the white list ones are used as well. (case insensitive)'), 'annotation-black-list'))->setAllowedTypes(['array'])->setAllowedValues($annotationsAsserts)->setDefault(['@final', '@Entity', '_PhpScoper7239e3eaf11a\\@ORM\\Entity', '_PhpScoper7239e3eaf11a\\@ORM\\Mapping\\Entity', '_PhpScoper7239e3eaf11a\\@Mapping\\Entity', '@Document', '_PhpScoper7239e3eaf11a\\@ODM\\Document'])->setNormalizer($annotationsNormalizer)->getOption(), (new AliasedFixerOptionBuilder(new FixerOptionBuilder('consider_absent_docblock_as_internal_class', 'Should classes without any DocBlock be fixed to final?'), 'consider-absent-docblock-as-internal-class'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
     }
     /**
      * @param int $index T_CLASS index

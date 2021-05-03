@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScopere72a8aaba560\Psr\Cache;
+namespace _PhpScoper7239e3eaf11a\Psr\Cache;
 
 /**
  * Exception interface for all exceptions thrown by an Implementing Library.

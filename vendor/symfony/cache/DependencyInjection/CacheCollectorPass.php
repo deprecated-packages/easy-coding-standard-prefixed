@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere72a8aaba560\Symfony\Component\Cache\DependencyInjection;
+namespace _PhpScoper7239e3eaf11a\Symfony\Component\Cache\DependencyInjection;
 
-use _PhpScopere72a8aaba560\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use _PhpScopere72a8aaba560\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use _PhpScopere72a8aaba560\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopere72a8aaba560\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper7239e3eaf11a\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use _PhpScoper7239e3eaf11a\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use _PhpScoper7239e3eaf11a\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper7239e3eaf11a\Symfony\Component\DependencyInjection\Reference;
 /**
  * Inject a data collector to all the cache services to be able to get detailed statistics.
  *
