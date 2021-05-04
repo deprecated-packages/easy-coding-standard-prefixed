@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Helper;
+namespace _PhpScoper653866602a9e\Symfony\Component\Console\Helper;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\String\UnicodeString;
+use _PhpScoper653866602a9e\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoper653866602a9e\Symfony\Component\String\UnicodeString;
 /**
  * Helper is the base class for all helper classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Helper implements \_PhpScoper08fb1f8a2f44\Symfony\Component\Console\Helper\HelperInterface
+abstract class Helper implements \_PhpScoper653866602a9e\Symfony\Component\Console\Helper\HelperInterface
 {
     protected $helperSet = null;
     /**
      * {@inheritdoc}
      */
-    public function setHelperSet(\_PhpScoper08fb1f8a2f44\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
+    public function setHelperSet(\_PhpScoper653866602a9e\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
     {
         $this->helperSet = $helperSet;
     }
@@ -128,7 +128,7 @@ abstract class Helper implements \_PhpScoper08fb1f8a2f44\Symfony\Component\Conso
         // remove <...> formatting
         $string = $formatter->format($string ?? '');
         // remove already formatted characters
-        $string = \preg_replace("/\x1b\\[[^m]*m/", '', $string);
+        $string = \preg_replace("/\33\\[[^m]*m/", '', $string);
         $formatter->setDecorated($isDecorated);
         return $string;
     }

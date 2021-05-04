@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\DependencyInjection\Extension;
+namespace _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Config\Definition\Processor;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\DependencyInjection\Container;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScoper653866602a9e\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoper653866602a9e\Symfony\Component\Config\Definition\Processor;
+use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Container;
+use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
+use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Exception\LogicException;
 /**
  * Provides useful features shared by many extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Extension implements \_PhpScoper08fb1f8a2f44\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \_PhpScoper08fb1f8a2f44\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+abstract class Extension implements \_PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \_PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
 {
     private $processedConfigs = [];
     /**
@@ -74,7 +74,7 @@ abstract class Extension implements \_PhpScoper08fb1f8a2f44\Symfony\Component\De
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
         $class = static::class;
-        if (\false !== \strpos($class, "\x00")) {
+        if (\false !== \strpos($class, "\0")) {
             return null;
             // ignore anonymous classes
         }

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Contracts\HttpClient\Test;
+namespace _PhpScoper653866602a9e\Symfony\Contracts\HttpClient\Test;
 
-use _PhpScoper08fb1f8a2f44\PHPUnit\Framework\TestCase;
-use _PhpScoper08fb1f8a2f44\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Contracts\HttpClient\Exception\TimeoutExceptionInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Contracts\HttpClient\HttpClientInterface;
+use _PhpScoper653866602a9e\PHPUnit\Framework\TestCase;
+use _PhpScoper653866602a9e\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use _PhpScoper653866602a9e\Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use _PhpScoper653866602a9e\Symfony\Contracts\HttpClient\Exception\TimeoutExceptionInterface;
+use _PhpScoper653866602a9e\Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use _PhpScoper653866602a9e\Symfony\Contracts\HttpClient\HttpClientInterface;
 /**
  * A reference test suite for HttpClientInterface implementations.
  */
@@ -23,7 +23,7 @@ abstract class HttpClientTestCase extends TestCase
 {
     public static function setUpBeforeClass() : void
     {
-        \_PhpScoper08fb1f8a2f44\Symfony\Contracts\HttpClient\Test\TestHttpServer::start();
+        \_PhpScoper653866602a9e\Symfony\Contracts\HttpClient\Test\TestHttpServer::start();
     }
     protected abstract function getHttpClient(string $testCase) : HttpClientInterface;
     public function testGetRequest()
@@ -563,8 +563,8 @@ abstract class HttpClientTestCase extends TestCase
     }
     public function testTimeoutWithActiveConcurrentStream()
     {
-        $p1 = \_PhpScoper08fb1f8a2f44\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8067);
-        $p2 = \_PhpScoper08fb1f8a2f44\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8077);
+        $p1 = \_PhpScoper653866602a9e\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8067);
+        $p2 = \_PhpScoper653866602a9e\Symfony\Contracts\HttpClient\Test\TestHttpServer::start(8077);
         $client = $this->getHttpClient(__FUNCTION__);
         $streamingResponse = $client->request('GET', 'http://localhost:8067/max-duration');
         $blockingResponse = $client->request('GET', 'http://localhost:8077/timeout-body', ['timeout' => 0.25]);
@@ -698,7 +698,7 @@ abstract class HttpClientTestCase extends TestCase
         $this->assertSame(['Accept-Encoding'], $headers['vary']);
         $this->assertStringContainsString('gzip', $headers['content-encoding'][0]);
         $body = $response->getContent();
-        $this->assertSame("\x1f", $body[0]);
+        $this->assertSame("\37", $body[0]);
         $body = \json_decode(\gzdecode($body), \true);
         $this->assertSame('gzip', $body['HTTP_ACCEPT_ENCODING']);
     }

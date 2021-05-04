@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Traits;
+namespace _PhpScoper653866602a9e\Symfony\Component\Cache\Traits;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Rob Frawley 2nd <rmf@src.run>
  * @author Nicolas Grekas <p@tchwork.com>
@@ -28,7 +28,7 @@ trait MemcachedTrait
      * {@see \Symfony\Contracts\Cache\ItemInterface::RESERVED_CHARACTERS} that are legal in Memcached.
      * Note: don’t use {@see \Symfony\Component\Cache\Adapter\AbstractAdapter::NS_SEPARATOR}.
      */
-    private static $RESERVED_MEMCACHED = " \n\r\t\v\f\x00";
+    private static $RESERVED_MEMCACHED = " \n\r\t\v\f\0";
     private static $RESERVED_PSR6 = '@()\\{}/';
     private $marshaller;
     private $client;

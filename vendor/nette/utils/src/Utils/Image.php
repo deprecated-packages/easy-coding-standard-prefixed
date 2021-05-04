@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper08fb1f8a2f44\Nette\Utils;
+namespace _PhpScoper653866602a9e\Nette\Utils;
 
-use _PhpScoper08fb1f8a2f44\Nette;
+use _PhpScoper653866602a9e\Nette;
 /**
  * Basic manipulation with images. Supported types are JPEG, PNG, GIF, WEBP and BMP.
  *
@@ -105,7 +105,7 @@ class Image
     public const EXACT = 0b1000;
     /** image types */
     public const JPEG = \IMAGETYPE_JPEG, PNG = \IMAGETYPE_PNG, GIF = \IMAGETYPE_GIF, WEBP = \IMAGETYPE_WEBP, BMP = \IMAGETYPE_BMP;
-    public const EMPTY_GIF = "GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00\x00!\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;";
+    public const EMPTY_GIF = "GIF89a\1\0\1\0€\0\0\0\0\0\0\0\0!ù\4\1\0\0\0\0,\0\0\0\0\1\0\1\0\0\2\2D\1\0;";
     private const FORMATS = [self::JPEG => 'jpeg', self::PNG => 'png', self::GIF => 'gif', self::WEBP => 'webp', self::BMP => 'bmp'];
     /** @var resource|\GdImage */
     private $image;
@@ -129,11 +129,11 @@ class Image
         }
         $type = self::detectTypeFromFile($file);
         if (!$type) {
-            throw new \_PhpScoper08fb1f8a2f44\Nette\Utils\UnknownImageFileException(\is_file($file) ? "Unknown type of file '{$file}'." : "File '{$file}' not found.");
+            throw new \_PhpScoper653866602a9e\Nette\Utils\UnknownImageFileException(\is_file($file) ? "Unknown type of file '{$file}'." : "File '{$file}' not found.");
         }
         $method = 'imagecreatefrom' . self::FORMATS[$type];
-        return new static(\_PhpScoper08fb1f8a2f44\Nette\Utils\Callback::invokeSafe($method, [$file], function (string $message) : void {
-            throw new \_PhpScoper08fb1f8a2f44\Nette\Utils\ImageException($message);
+        return new static(\_PhpScoper653866602a9e\Nette\Utils\Callback::invokeSafe($method, [$file], function (string $message) : void {
+            throw new \_PhpScoper653866602a9e\Nette\Utils\ImageException($message);
         }));
     }
     /**
@@ -149,10 +149,10 @@ class Image
         }
         $type = self::detectTypeFromString($s);
         if (!$type) {
-            throw new \_PhpScoper08fb1f8a2f44\Nette\Utils\UnknownImageFileException('Unknown type of image.');
+            throw new \_PhpScoper653866602a9e\Nette\Utils\UnknownImageFileException('Unknown type of image.');
         }
-        return new static(\_PhpScoper08fb1f8a2f44\Nette\Utils\Callback::invokeSafe('imagecreatefromstring', [$s], function (string $message) : void {
-            throw new \_PhpScoper08fb1f8a2f44\Nette\Utils\ImageException($message);
+        return new static(\_PhpScoper653866602a9e\Nette\Utils\Callback::invokeSafe('imagecreatefromstring', [$s], function (string $message) : void {
+            throw new \_PhpScoper653866602a9e\Nette\Utils\ImageException($message);
         }));
     }
     /**
@@ -243,7 +243,7 @@ class Image
      */
     protected function setImageResource($image)
     {
-        if (!$image instanceof \_PhpScoper08fb1f8a2f44\GdImage && !(\is_resource($image) && \get_resource_type($image) === 'gd')) {
+        if (!$image instanceof \_PhpScoper653866602a9e\GdImage && !(\is_resource($image) && \get_resource_type($image) === 'gd')) {
             throw new Nette\InvalidArgumentException('Image is not valid.');
         }
         $this->image = $image;
@@ -471,7 +471,7 @@ class Image
      */
     public function toString(int $type = self::JPEG, int $quality = null) : string
     {
-        return \_PhpScoper08fb1f8a2f44\Nette\Utils\Helpers::capture(function () use($type, $quality) {
+        return \_PhpScoper653866602a9e\Nette\Utils\Helpers::capture(function () use($type, $quality) {
             $this->output($type, $quality);
         });
     }
@@ -533,7 +533,7 @@ class Image
                 throw new Nette\InvalidArgumentException("Unsupported image type '{$type}'.");
         }
         if (!$success) {
-            throw new \_PhpScoper08fb1f8a2f44\Nette\Utils\ImageException(\_PhpScoper08fb1f8a2f44\Nette\Utils\Helpers::getLastError() ?: 'Unknown error');
+            throw new \_PhpScoper653866602a9e\Nette\Utils\ImageException(\_PhpScoper653866602a9e\Nette\Utils\Helpers::getLastError() ?: 'Unknown error');
         }
     }
     /**
@@ -545,7 +545,7 @@ class Image
     {
         $function = 'image' . $name;
         if (!\function_exists($function)) {
-            \_PhpScoper08fb1f8a2f44\Nette\Utils\ObjectHelpers::strictCall(static::class, $name);
+            \_PhpScoper653866602a9e\Nette\Utils\ObjectHelpers::strictCall(static::class, $name);
         }
         foreach ($args as $key => $value) {
             if ($value instanceof self) {
@@ -556,7 +556,7 @@ class Image
             }
         }
         $res = $function($this->image, ...$args);
-        return $res instanceof \_PhpScoper08fb1f8a2f44\GdImage || \is_resource($res) && \get_resource_type($res) === 'gd' ? $this->setImageResource($res) : $res;
+        return $res instanceof \_PhpScoper653866602a9e\GdImage || \is_resource($res) && \get_resource_type($res) === 'gd' ? $this->setImageResource($res) : $res;
     }
     public function __clone()
     {

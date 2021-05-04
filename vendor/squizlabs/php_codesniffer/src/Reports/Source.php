@@ -124,8 +124,8 @@ class Source implements \PHP_CodeSniffer\Reports\Report
             $counts[$source] = $data['count'];
         }
         \array_multisort($counts, \SORT_DESC, $sourceCodes, \SORT_ASC, \SORT_NATURAL, $sources);
-        echo \PHP_EOL . "\x1b[1mPHP CODE SNIFFER VIOLATION SOURCE SUMMARY\x1b[0m" . \PHP_EOL;
-        echo \str_repeat('-', $width) . \PHP_EOL . "\x1b[1m";
+        echo \PHP_EOL . "\33[1mPHP CODE SNIFFER VIOLATION SOURCE SUMMARY\33[0m" . \PHP_EOL;
+        echo \str_repeat('-', $width) . \PHP_EOL . "\33[1m";
         if ($showSources === \true) {
             if ($totalFixable > 0) {
                 echo '    SOURCE' . \str_repeat(' ', $width - 15) . 'COUNT' . \PHP_EOL;
@@ -139,7 +139,7 @@ class Source implements \PHP_CodeSniffer\Reports\Report
                 echo 'STANDARD  CATEGORY            SNIFF' . \str_repeat(' ', $width - 40) . 'COUNT' . \PHP_EOL;
             }
         }
-        echo "\x1b[0m" . \str_repeat('-', $width) . \PHP_EOL;
+        echo "\33[0m" . \str_repeat('-', $width) . \PHP_EOL;
         $fixableSources = 0;
         if ($showSources === \true) {
             $maxSniffWidth = $width - 7;
@@ -196,7 +196,7 @@ class Source implements \PHP_CodeSniffer\Reports\Report
         }
         //end foreach
         echo \str_repeat('-', $width) . \PHP_EOL;
-        echo "\x1b[1m" . 'A TOTAL OF ' . ($totalErrors + $totalWarnings) . ' SNIFF VIOLATION';
+        echo "\33[1m" . 'A TOTAL OF ' . ($totalErrors + $totalWarnings) . ' SNIFF VIOLATION';
         if ($totalErrors + $totalWarnings > 1) {
             echo 'S';
         }
@@ -204,10 +204,10 @@ class Source implements \PHP_CodeSniffer\Reports\Report
         if (\count($sources) !== 1) {
             echo 'S';
         }
-        echo "\x1b[0m";
+        echo "\33[0m";
         if ($totalFixable > 0) {
             echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL;
-            echo "\x1b[1mPHPCBF CAN FIX THE {$fixableSources} MARKED SOURCES AUTOMATICALLY ({$totalFixable} VIOLATIONS IN TOTAL)\x1b[0m";
+            echo "\33[1mPHPCBF CAN FIX THE {$fixableSources} MARKED SOURCES AUTOMATICALLY ({$totalFixable} VIOLATIONS IN TOTAL)\33[0m";
         }
         echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL . \PHP_EOL;
         if ($toScreen === \true && $interactive === \false) {

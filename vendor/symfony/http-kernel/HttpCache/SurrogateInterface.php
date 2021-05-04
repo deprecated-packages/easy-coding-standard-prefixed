@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScoper653866602a9e\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Response;
 interface SurrogateInterface
 {
     /**
@@ -73,5 +73,5 @@ interface SurrogateInterface
      * @throws \RuntimeException
      * @throws \Exception
      */
-    public function handle(\_PhpScoper08fb1f8a2f44\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, string $uri, string $alt, bool $ignoreErrors);
+    public function handle(\_PhpScoper653866602a9e\Symfony\Component\HttpKernel\HttpCache\HttpCache $cache, string $uri, string $alt, bool $ignoreErrors);
 }

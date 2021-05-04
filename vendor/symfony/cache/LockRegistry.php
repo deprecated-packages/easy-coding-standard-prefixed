@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Cache;
+namespace _PhpScoper653866602a9e\Symfony\Component\Cache;
 
-use _PhpScoper08fb1f8a2f44\Psr\Log\LoggerInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Contracts\Cache\ItemInterface;
+use _PhpScoper653866602a9e\Psr\Log\LoggerInterface;
+use _PhpScoper653866602a9e\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper653866602a9e\Symfony\Contracts\Cache\ItemInterface;
 /**
  * LockRegistry is used internally by existing adapters to protect against cache stampede.
  *
@@ -79,7 +79,7 @@ final class LockRegistry
                 unset(self::$lockedFiles[$key]);
             }
             static $signalingException, $signalingCallback;
-            $signalingException = $signalingException ?? \unserialize("O:9:\"Exception\":1:{s:16:\"\x00Exception\x00trace\";a:0:{}}");
+            $signalingException = $signalingException ?? \unserialize("O:9:\"Exception\":1:{s:16:\"\0Exception\0trace\";a:0:{}}");
             $signalingCallback = $signalingCallback ?? function () use($signalingException) {
                 throw $signalingException;
             };

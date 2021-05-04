@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper653866602a9e\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+use _PhpScoper653866602a9e\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
+use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper653866602a9e\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 /**
  * LogDataCollector.
  *
@@ -22,7 +22,7 @@ use _PhpScoper08fb1f8a2f44\Symfony\Component\HttpKernel\Log\DebugLoggerInterface
  *
  * @final
  */
-class LoggerDataCollector extends \_PhpScoper08fb1f8a2f44\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper08fb1f8a2f44\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class LoggerDataCollector extends \_PhpScoper653866602a9e\Symfony\Component\HttpKernel\DataCollector\DataCollector implements \_PhpScoper653866602a9e\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     private $logger;
     private $containerPathPrefix;
@@ -163,7 +163,7 @@ class LoggerDataCollector extends \_PhpScoper08fb1f8a2f44\Symfony\Component\Http
                 $sanitizedLogs[$message]['errorCount'] += $exception->count;
                 continue;
             }
-            $errorId = \md5("{$exception->getSeverity()}/{$exception->getLine()}/{$exception->getFile()}\x00{$message}", \true);
+            $errorId = \md5("{$exception->getSeverity()}/{$exception->getLine()}/{$exception->getFile()}\0{$message}", \true);
             if (isset($sanitizedLogs[$errorId])) {
                 ++$sanitizedLogs[$errorId]['errorCount'];
             } else {

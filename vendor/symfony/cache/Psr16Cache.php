@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Cache;
+namespace _PhpScoper653866602a9e\Symfony\Component\Cache;
 
-use _PhpScoper08fb1f8a2f44\Psr\Cache\CacheException as Psr6CacheException;
-use _PhpScoper08fb1f8a2f44\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoper08fb1f8a2f44\Psr\SimpleCache\CacheException as SimpleCacheException;
-use _PhpScoper08fb1f8a2f44\Psr\SimpleCache\CacheInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Adapter\AdapterInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScoper653866602a9e\Psr\Cache\CacheException as Psr6CacheException;
+use _PhpScoper653866602a9e\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper653866602a9e\Psr\SimpleCache\CacheException as SimpleCacheException;
+use _PhpScoper653866602a9e\Psr\SimpleCache\CacheInterface;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Adapter\AdapterInterface;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-6 cache into a PSR-16 one.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Psr16Cache implements CacheInterface, \_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\PruneableInterface, \_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\ResettableInterface
+class Psr16Cache implements CacheInterface, \_PhpScoper653866602a9e\Symfony\Component\Cache\PruneableInterface, \_PhpScoper653866602a9e\Symfony\Component\Cache\ResettableInterface
 {
     use ProxyTrait;
     private const METADATA_EXPIRY_OFFSET = 1527506807;
@@ -38,11 +38,11 @@ class Psr16Cache implements CacheInterface, \_PhpScoper08fb1f8a2f44\Symfony\Comp
         $createCacheItem = \Closure::bind(static function ($key, $value, $allowInt = \false) use(&$cacheItemPrototype) {
             $item = clone $cacheItemPrototype;
             $item->poolHash = $item->innerItem = null;
-            $item->key = $allowInt && \is_int($key) ? (string) $key : \_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\CacheItem::validateKey($key);
+            $item->key = $allowInt && \is_int($key) ? (string) $key : \_PhpScoper653866602a9e\Symfony\Component\Cache\CacheItem::validateKey($key);
             $item->value = $value;
             $item->isHit = \false;
             return $item;
-        }, null, \_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\CacheItem::class);
+        }, null, \_PhpScoper653866602a9e\Symfony\Component\Cache\CacheItem::class);
         $this->createCacheItem = function ($key, $value, $allowInt = \false) use($createCacheItem) {
             if (null === $this->cacheItemPrototype) {
                 $this->get($allowInt && \is_int($key) ? (string) $key : $key);
@@ -153,9 +153,9 @@ class Psr16Cache implements CacheInterface, \_PhpScoper08fb1f8a2f44\Symfony\Comp
             if (!($metadata = $item->getMetadata())) {
                 continue;
             }
-            unset($metadata[\_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
+            unset($metadata[\_PhpScoper653866602a9e\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
             if ($metadata) {
-                $values[$key] = ["\x9d" . \pack('VN', (int) (0.1 + $metadata[\_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[\_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\CacheItem::METADATA_CTIME]) . "_" => $values[$key]];
+                $values[$key] = ["" . \pack('VN', (int) (0.1 + $metadata[\_PhpScoper653866602a9e\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[\_PhpScoper653866602a9e\Symfony\Component\Cache\CacheItem::METADATA_CTIME]) . "_" => $values[$key]];
             }
         }
         return $values;

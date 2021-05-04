@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper653866602a9e\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Traits\FilesystemTrait;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Traits\FilesystemTrait;
 /**
  * Stores tag id <> cache id relationship as a symlink, and lookup on invalidation calls.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class FilesystemTagAwareAdapter extends \_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements PruneableInterface
+class FilesystemTagAwareAdapter extends \_PhpScoper653866602a9e\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements PruneableInterface
 {
     use FilesystemTrait {
         doClear as private doClearCache;
@@ -128,8 +128,8 @@ class FilesystemTagAwareAdapter extends \_PhpScoper08fb1f8a2f44\Symfony\Componen
             }
             $meta = \explode("\n", \fread($h, 4096), 3)[2] ?? '';
             // detect the compact format used in marshall() using magic numbers in the form 9D-..-..-..-..-00-..-..-..-5F
-            if (13 < \strlen($meta) && "\x9d" === $meta[0] && "\x00" === $meta[5] && "_" === $meta[9]) {
-                $meta[9] = "\x00";
+            if (13 < \strlen($meta) && "�" === $meta[0] && "\0" === $meta[5] && "_" === $meta[9]) {
+                $meta[9] = "\0";
                 $tagLen = \unpack('Nlen', $meta, 9)['len'];
                 $meta = \substr($meta, 13, $tagLen);
                 if (0 < ($tagLen -= \strlen($meta))) {

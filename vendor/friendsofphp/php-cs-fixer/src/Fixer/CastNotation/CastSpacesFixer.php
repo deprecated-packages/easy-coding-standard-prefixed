@@ -27,7 +27,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class CastSpacesFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
-    private const INSIDE_CAST_SPACE_REPLACE_MAP = [' ' => '', "\t" => '', "\n" => '', "\r" => '', "\x00" => '', "\v" => ''];
+    private const INSIDE_CAST_SPACE_REPLACE_MAP = [' ' => '', "\t" => '', "\n" => '', "\r" => '', "\0" => '', "\v" => ''];
     /**
      * {@inheritdoc}
      */

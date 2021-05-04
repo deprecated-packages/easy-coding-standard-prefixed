@@ -13,8 +13,8 @@ declare (strict_types=1);
 namespace PhpCsFixer\FixerConfiguration;
 
 use PhpCsFixer\Utils;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\OptionsResolver\OptionsResolver;
+use _PhpScoper653866602a9e\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper653866602a9e\Symfony\Component\OptionsResolver\OptionsResolver;
 final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
 {
     /**

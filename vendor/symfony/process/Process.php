@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Process;
+namespace _PhpScoper653866602a9e\Symfony\Component\Process;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Process\Exception\InvalidArgumentException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Process\Exception\LogicException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Process\Exception\ProcessFailedException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Process\Exception\ProcessSignaledException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Process\Exception\ProcessTimedOutException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Process\Pipes\PipesInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Process\Pipes\UnixPipes;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Process\Pipes\WindowsPipes;
+use _PhpScoper653866602a9e\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScoper653866602a9e\Symfony\Component\Process\Exception\LogicException;
+use _PhpScoper653866602a9e\Symfony\Component\Process\Exception\ProcessFailedException;
+use _PhpScoper653866602a9e\Symfony\Component\Process\Exception\ProcessSignaledException;
+use _PhpScoper653866602a9e\Symfony\Component\Process\Exception\ProcessTimedOutException;
+use _PhpScoper653866602a9e\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScoper653866602a9e\Symfony\Component\Process\Pipes\PipesInterface;
+use _PhpScoper653866602a9e\Symfony\Component\Process\Pipes\UnixPipes;
+use _PhpScoper653866602a9e\Symfony\Component\Process\Pipes\WindowsPipes;
 /**
  * Process is a thin wrapper around proc_* functions to easily
  * start independent PHP processes.
@@ -1037,7 +1037,7 @@ class Process implements \IteratorAggregate
         if ($this->isRunning()) {
             throw new LogicException('Input can not be set while the process is running.');
         }
-        $this->input = \_PhpScoper08fb1f8a2f44\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
+        $this->input = \_PhpScoper653866602a9e\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
         return $this;
     }
     /**
@@ -1363,8 +1363,8 @@ class Process implements \IteratorAggregate
             if (isset($varCache[$m[0]])) {
                 return $varCache[$m[0]];
             }
-            if (\false !== \strpos($value = $m[1], "\x00")) {
-                $value = \str_replace("\x00", '?', $value);
+            if (\false !== \strpos($value = $m[1], "\0")) {
+                $value = \str_replace("\0", '?', $value);
             }
             if (\false === \strpbrk($value, "\"%!\n")) {
                 return '"' . $value . '"';
@@ -1414,8 +1414,8 @@ class Process implements \IteratorAggregate
         if ('\\' !== \DIRECTORY_SEPARATOR) {
             return "'" . \str_replace("'", "'\\''", $argument) . "'";
         }
-        if (\false !== \strpos($argument, "\x00")) {
-            $argument = \str_replace("\x00", '?', $argument);
+        if (\false !== \strpos($argument, "\0")) {
+            $argument = \str_replace("\0", '?', $argument);
         }
         if (!\preg_match('/[\\/()%!^"<>&|\\s]/', $argument)) {
             return $argument;

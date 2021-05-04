@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Output;
+namespace _PhpScoper653866602a9e\Symfony\Component\Console\Output;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Helper\Helper;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Terminal;
+use _PhpScoper653866602a9e\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoper653866602a9e\Symfony\Component\Console\Helper\Helper;
+use _PhpScoper653866602a9e\Symfony\Component\Console\Terminal;
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  * @author Gabriel Ostrolucký <gabriel.ostrolucky@gmail.com>
  */
-class ConsoleSectionOutput extends \_PhpScoper08fb1f8a2f44\Symfony\Component\Console\Output\StreamOutput
+class ConsoleSectionOutput extends \_PhpScoper653866602a9e\Symfony\Component\Console\Output\StreamOutput
 {
     private $content = [];
     private $lines = 0;
@@ -110,9 +110,9 @@ class ConsoleSectionOutput extends \_PhpScoper08fb1f8a2f44\Symfony\Component\Con
         }
         if ($numberOfLinesToClear > 0) {
             // move cursor up n lines
-            parent::doWrite(\sprintf("\x1b[%dA", $numberOfLinesToClear), \false);
+            parent::doWrite(\sprintf("\33[%dA", $numberOfLinesToClear), \false);
             // erase to end of screen
-            parent::doWrite("\x1b[0J", \false);
+            parent::doWrite("\33[0J", \false);
         }
         return \implode('', \array_reverse($erasedContent));
     }

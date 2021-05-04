@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper653866602a9e\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper08fb1f8a2f44\Doctrine\Common\Proxy\Proxy as CommonProxy;
-use _PhpScoper08fb1f8a2f44\Doctrine\ORM\PersistentCollection;
-use _PhpScoper08fb1f8a2f44\Doctrine\ORM\Proxy\Proxy as OrmProxy;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper653866602a9e\Doctrine\Common\Proxy\Proxy as CommonProxy;
+use _PhpScoper653866602a9e\Doctrine\ORM\PersistentCollection;
+use _PhpScoper653866602a9e\Doctrine\ORM\Proxy\Proxy as OrmProxy;
+use _PhpScoper653866602a9e\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts Doctrine related classes to array representation.
  *
@@ -36,7 +36,7 @@ class DoctrineCaster
     public static function castOrmProxy(OrmProxy $proxy, array $a, Stub $stub, bool $isNested)
     {
         foreach (['_entityPersister', '_identifier'] as $k) {
-            if (\array_key_exists($k = "\x00Doctrine\\ORM\\Proxy\\Proxy\x00" . $k, $a)) {
+            if (\array_key_exists($k = "\0Doctrine\\ORM\\Proxy\\Proxy\0" . $k, $a)) {
                 unset($a[$k]);
                 ++$stub->cut;
             }
@@ -46,8 +46,8 @@ class DoctrineCaster
     public static function castPersistentCollection(PersistentCollection $coll, array $a, Stub $stub, bool $isNested)
     {
         foreach (['snapshot', 'association', 'typeClass'] as $k) {
-            if (\array_key_exists($k = "\x00Doctrine\\ORM\\PersistentCollection\x00" . $k, $a)) {
-                $a[$k] = new \_PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Caster\CutStub($a[$k]);
+            if (\array_key_exists($k = "\0Doctrine\\ORM\\PersistentCollection\0" . $k, $a)) {
+                $a[$k] = new \_PhpScoper653866602a9e\Symfony\Component\VarDumper\Caster\CutStub($a[$k]);
             }
         }
         return $a;

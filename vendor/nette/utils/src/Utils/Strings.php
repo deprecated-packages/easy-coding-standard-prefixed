@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper08fb1f8a2f44\Nette\Utils;
+namespace _PhpScoper653866602a9e\Nette\Utils;
 
-use _PhpScoper08fb1f8a2f44\Nette;
+use _PhpScoper653866602a9e\Nette;
 use function is_array, is_object, strlen;
 /**
  * String tools library.
@@ -15,7 +15,7 @@ use function is_array, is_object, strlen;
 class Strings
 {
     use Nette\StaticClass;
-    public const TRIM_CHARACTERS = " \t\n\r\x00\vÂ ";
+    public const TRIM_CHARACTERS = " \t\n\r\0\vÂ ";
     /**
      * Checks if the string is valid in UTF-8 encoding.
      */
@@ -138,10 +138,10 @@ class Strings
             $s = $transliterator->transliterate($s);
             // use iconv because The transliterator leaves some characters out of ASCII, eg â†’ Ê¾
             if ($iconv === 'glibc') {
-                $s = \strtr($s, '?', "\x01");
+                $s = \strtr($s, '?', "\1");
                 // temporarily hide ? to distinguish them from the garbage that iconv creates
                 $s = \iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $s);
-                $s = \str_replace(['?', "\x01"], ['', '?'], $s);
+                $s = \str_replace(['?', "\1"], ['', '?'], $s);
                 // remove garbage and restore ? characters
             } elseif ($iconv === 'libiconv') {
                 $s = \iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $s);
@@ -152,11 +152,11 @@ class Strings
             }
         } elseif ($iconv === 'glibc' || $iconv === 'libiconv') {
             // temporarily hide these characters to distinguish them from the garbage that iconv creates
-            $s = \strtr($s, '`\'"^~?', "\x01\x02\x03\x04\x05\x06");
+            $s = \strtr($s, '`\'"^~?', "\1\2\3\4\5\6");
             if ($iconv === 'glibc') {
                 // glibc implementation is very limited. transliterate into Windows-1250 and then into ASCII, so most Eastern European characters are preserved
                 $s = \iconv('UTF-8', 'WINDOWS-1250//TRANSLIT//IGNORE', $s);
-                $s = \strtr($s, "\xa5\xa3\xbc\x8c\xa7\x8a\xaa\x8d\x8f\x8e\xaf\xb9\xb3\xbe\x9c\x9a\xba\x9d\x9f\x9e\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf8\xf9\xfa\xfb\xfc\xfd\xfe\x96\xa0\x8b\x97\x9b\xa6\xad\xb7", 'ALLSSSSTZZZallssstzzzRAAAALCCCEEEEIIDDNNOOOOxRUUUUYTsraaaalccceeeeiiddnnooooruuuuyt- <->|-.');
+                $s = \strtr($s, "¥£¼Œ§Šª¯¹³¾œšºŸ¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõöøùúûüış– ‹—›¦­·", 'ALLSSSSTZZZallssstzzzRAAAALCCCEEEEIIDDNNOOOOxRUUUUYTsraaaalccceeeeiiddnnooooruuuuyt- <->|-.');
                 $s = self::pcre('preg_replace', ['#[^\\x00-\\x7F]++#', '', $s]);
             } else {
                 $s = \iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $s);
@@ -164,7 +164,7 @@ class Strings
             // remove garbage that iconv creates during transliteration (eg Ã -> Y')
             $s = \str_replace(['`', "'", '"', '^', '~', '?'], '', $s);
             // restore temporarily hidden characters
-            $s = \strtr($s, "\x01\x02\x03\x04\x05\x06", '`\'"^~?');
+            $s = \strtr($s, "\1\2\3\4\5\6", '`\'"^~?');
         } else {
             $s = self::pcre('preg_replace', ['#[^\\x00-\\x7F]++#', '', $s]);
             // remove non-ascii chars
@@ -281,7 +281,7 @@ class Strings
         for ($i = 0; $i < strlen($first); $i++) {
             foreach ($strings as $s) {
                 if (!isset($s[$i]) || $first[$i] !== $s[$i]) {
-                    while ($i && $first[$i - 1] >= "\x80" && $first[$i] >= "\x80" && $first[$i] < "\xc0") {
+                    while ($i && $first[$i - 1] >= "€" && $first[$i] >= "€" && $first[$i] < "À") {
                         $i--;
                     }
                     return \substr($first, 0, $i);
@@ -386,7 +386,7 @@ class Strings
                 $pos--;
             }
         }
-        return \_PhpScoper08fb1f8a2f44\Nette\Utils\Helpers::falseToNull($pos);
+        return \_PhpScoper653866602a9e\Nette\Utils\Helpers::falseToNull($pos);
     }
     /**
      * Splits a string into array by the regular expression.
@@ -440,12 +440,12 @@ class Strings
     /** @internal */
     public static function pcre(string $func, array $args)
     {
-        $res = \_PhpScoper08fb1f8a2f44\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
+        $res = \_PhpScoper653866602a9e\Nette\Utils\Callback::invokeSafe($func, $args, function (string $message) use($args) : void {
             // compile-time error, not detectable by preg_last_error
-            throw new \_PhpScoper08fb1f8a2f44\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
+            throw new \_PhpScoper653866602a9e\Nette\Utils\RegexpException($message . ' in pattern: ' . \implode(' or ', (array) $args[0]));
         });
         if (($code = \preg_last_error()) && ($res === null || !\in_array($func, ['preg_filter', 'preg_replace_callback', 'preg_replace'], \true))) {
-            throw new \_PhpScoper08fb1f8a2f44\Nette\Utils\RegexpException((\_PhpScoper08fb1f8a2f44\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
+            throw new \_PhpScoper653866602a9e\Nette\Utils\RegexpException((\_PhpScoper653866602a9e\Nette\Utils\RegexpException::MESSAGES[$code] ?? 'Unknown error') . ' (pattern: ' . \implode(' or ', (array) $args[0]) . ')', $code);
         }
         return $res;
     }

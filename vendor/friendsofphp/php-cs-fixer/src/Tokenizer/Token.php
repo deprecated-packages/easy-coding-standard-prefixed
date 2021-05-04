@@ -347,10 +347,10 @@ final class Token
      *
      * @param null|string $whitespaces whitespace characters, default is " \t\n\r\0\x0B"
      */
-    public function isWhitespace(?string $whitespaces = " \t\n\r\x00\v") : bool
+    public function isWhitespace(?string $whitespaces = " \t\n\r\0\v") : bool
     {
         if (null === $whitespaces) {
-            $whitespaces = " \t\n\r\x00\v";
+            $whitespaces = " \t\n\r\0\v";
         }
         if ($this->isArray && !$this->isGivenKind(\T_WHITESPACE)) {
             return \false;

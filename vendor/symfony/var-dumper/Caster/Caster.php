@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper653866602a9e\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper653866602a9e\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Helper for filtering out properties in casters.
  *
@@ -30,9 +30,9 @@ class Caster
     public const EXCLUDE_EMPTY = 128;
     public const EXCLUDE_NOT_IMPORTANT = 256;
     public const EXCLUDE_STRICT = 512;
-    public const PREFIX_VIRTUAL = "\x00~\x00";
-    public const PREFIX_DYNAMIC = "\x00+\x00";
-    public const PREFIX_PROTECTED = "\x00*\x00";
+    public const PREFIX_VIRTUAL = "\0~\0";
+    public const PREFIX_DYNAMIC = "\0+\0";
+    public const PREFIX_PROTECTED = "\0*\0";
     /**
      * Casts objects to arrays and adds the dynamic property prefix.
      *
@@ -60,7 +60,7 @@ class Caster
             $i = 0;
             $prefixedKeys = [];
             foreach ($a as $k => $v) {
-                if ("\x00" !== ($k[0] ?? '')) {
+                if ("\0" !== ($k[0] ?? '')) {
                     if (!isset($publicProperties[$class])) {
                         foreach ((new \ReflectionClass($class))->getProperties(\ReflectionProperty::IS_PUBLIC) as $prop) {
                             $publicProperties[$class][$prop->name] = \true;
@@ -70,7 +70,7 @@ class Caster
                         $prefixedKeys[$i] = self::PREFIX_DYNAMIC . $k;
                     }
                 } elseif ($debugClass !== $class && 1 === \strpos($k, $class)) {
-                    $prefixedKeys[$i] = "\x00" . $debugClass . \strrchr($k, "\x00");
+                    $prefixedKeys[$i] = "\0" . $debugClass . \strrchr($k, "\0");
                 }
                 ++$i;
             }
@@ -84,7 +84,7 @@ class Caster
         }
         if ($hasDebugInfo && \is_array($debugInfo)) {
             foreach ($debugInfo as $k => $v) {
-                if (!isset($k[0]) || "\x00" !== $k[0]) {
+                if (!isset($k[0]) || "\0" !== $k[0]) {
                     if (\array_key_exists(self::PREFIX_DYNAMIC . $k, $a)) {
                         continue;
                     }
@@ -126,7 +126,7 @@ class Caster
             if (self::EXCLUDE_VERBOSE & $filter && \in_array($k, $listedProperties, \true)) {
                 $type |= self::EXCLUDE_VERBOSE;
             }
-            if (!isset($k[1]) || "\x00" !== $k[0]) {
+            if (!isset($k[1]) || "\0" !== $k[0]) {
                 $type |= self::EXCLUDE_PUBLIC & $filter;
             } elseif ('~' === $k[1]) {
                 $type |= self::EXCLUDE_VIRTUAL & $filter;

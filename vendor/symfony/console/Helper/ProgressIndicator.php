@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Helper;
+namespace _PhpScoper653866602a9e\Symfony\Component\Console\Helper;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Exception\LogicException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper653866602a9e\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper653866602a9e\Symfony\Component\Console\Exception\LogicException;
+use _PhpScoper653866602a9e\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  */
@@ -175,7 +175,7 @@ class ProgressIndicator
     private function overwrite(string $message)
     {
         if ($this->output->isDecorated()) {
-            $this->output->write("\r\x1b[2K");
+            $this->output->write("\r\33[2K");
             $this->output->write($message);
         } else {
             $this->output->writeln($message);
@@ -192,9 +192,9 @@ class ProgressIndicator
         }, 'message' => function (self $indicator) {
             return $indicator->message;
         }, 'elapsed' => function (self $indicator) {
-            return \_PhpScoper08fb1f8a2f44\Symfony\Component\Console\Helper\Helper::formatTime(\time() - $indicator->startTime);
+            return \_PhpScoper653866602a9e\Symfony\Component\Console\Helper\Helper::formatTime(\time() - $indicator->startTime);
         }, 'memory' => function () {
-            return \_PhpScoper08fb1f8a2f44\Symfony\Component\Console\Helper\Helper::formatMemory(\memory_get_usage(\true));
+            return \_PhpScoper653866602a9e\Symfony\Component\Console\Helper\Helper::formatMemory(\memory_get_usage(\true));
         }];
     }
     private static function initFormats() : array

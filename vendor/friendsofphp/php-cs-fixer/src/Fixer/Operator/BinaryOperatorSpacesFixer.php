@@ -25,7 +25,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper653866602a9e\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
@@ -56,7 +56,7 @@ final class BinaryOperatorSpacesFixer extends AbstractFixer implements Configura
      * @internal
      * @const Placeholder used as anchor for right alignment.
      */
-    public const ALIGN_PLACEHOLDER = "\x02 ALIGNABLE%d \x03";
+    public const ALIGN_PLACEHOLDER = "\2 ALIGNABLE%d \3";
     /**
      * @var string[]
      */

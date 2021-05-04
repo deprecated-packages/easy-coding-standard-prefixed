@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Dumper;
+namespace _PhpScoper653866602a9e\Symfony\Component\VarDumper\Dumper;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Cloner\Cursor;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper653866602a9e\Symfony\Component\VarDumper\Cloner\Cursor;
+use _PhpScoper653866602a9e\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * CliDumper dumps variables for command line output.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class CliDumper extends \_PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Dumper\AbstractDumper
+class CliDumper extends \_PhpScoper653866602a9e\Symfony\Component\VarDumper\Dumper\AbstractDumper
 {
     public static $defaultColors;
     public static $defaultOutput = 'php://stdout';
@@ -39,7 +39,7 @@ class CliDumper extends \_PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Dump
         'index' => '38;5;38',
     ];
     protected static $controlCharsRx = '/[\\x00-\\x1F\\x7F]+/';
-    protected static $controlCharsMap = ["\t" => '\\t', "\n" => '\\n', "\v" => '\\v', "\f" => '\\f', "\r" => '\\r', "\x1b" => '\\e'];
+    protected static $controlCharsMap = ["\t" => '\\t', "\n" => '\\n', "\v" => '\\v', "\f" => '\\f', "\r" => '\\r', "\33" => '\\e'];
     protected $collapseNextHash = \false;
     protected $expandNextHash = \false;
     private $displayOptions = ['fileLinkFormat' => null];
@@ -152,7 +152,7 @@ class CliDumper extends \_PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Dump
             $this->endValue($cursor);
         } else {
             $attr += ['length' => 0 <= $cut ? \mb_strlen($str, 'UTF-8') + $cut : 0, 'binary' => $bin];
-            $str = $bin && \false !== \strpos($str, "\x00") ? [$str] : \explode("\n", $str);
+            $str = $bin && \false !== \strpos($str, "\0") ? [$str] : \explode("\n", $str);
             if (isset($str[1]) && !isset($str[2]) && !isset($str[1][0])) {
                 unset($str[1]);
                 $str[0] .= "\n";
@@ -307,13 +307,13 @@ class CliDumper extends \_PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Dump
                     }
                     break;
                 case Cursor::HASH_RESOURCE:
-                    $key = "\x00~\x00" . $key;
+                    $key = "\0~\0" . $key;
                 // no break
                 case Cursor::HASH_OBJECT:
-                    if (!isset($key[0]) || "\x00" !== $key[0]) {
+                    if (!isset($key[0]) || "\0" !== $key[0]) {
                         $this->line .= '+' . $bin . $this->style('public', $key) . ': ';
-                    } elseif (0 < \strpos($key, "\x00", 1)) {
-                        $key = \explode("\x00", \substr($key, 1), 2);
+                    } elseif (0 < \strpos($key, "\0", 1)) {
+                        $key = \explode("\0", \substr($key, 1), 2);
                         switch ($key[0][0]) {
                             case '+':
                                 // User inserted keys
@@ -388,8 +388,8 @@ class CliDumper extends \_PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Dump
             goto href;
         }
         $map = static::$controlCharsMap;
-        $startCchr = $this->colors ? "\x1b[m\x1b[{$this->styles['default']}m" : '';
-        $endCchr = $this->colors ? "\x1b[m\x1b[{$this->styles[$style]}m" : '';
+        $startCchr = $this->colors ? "\33[m\33[{$this->styles['default']}m" : '';
+        $endCchr = $this->colors ? "\33[m\33[{$this->styles[$style]}m" : '';
         $value = \preg_replace_callback(static::$controlCharsRx, function ($c) use($map, $startCchr, $endCchr) {
             $s = $startCchr;
             $c = $c[$i = 0];
@@ -399,28 +399,28 @@ class CliDumper extends \_PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Dump
             return $s . $endCchr;
         }, $value, -1, $cchrCount);
         if ($this->colors) {
-            if ($cchrCount && "\x1b" === $value[0]) {
+            if ($cchrCount && "\33" === $value[0]) {
                 $value = \substr($value, \strlen($startCchr));
             } else {
-                $value = "\x1b[{$this->styles[$style]}m" . $value;
+                $value = "\33[{$this->styles[$style]}m" . $value;
             }
             if ($cchrCount && $endCchr === \substr($value, -\strlen($endCchr))) {
                 $value = \substr($value, 0, -\strlen($endCchr));
             } else {
-                $value .= "\x1b[{$this->styles['default']}m";
+                $value .= "\33[{$this->styles['default']}m";
             }
         }
         href:
         if ($this->colors && $this->handlesHrefGracefully) {
             if (isset($attr['file']) && ($href = $this->getSourceLink($attr['file'], $attr['line'] ?? 0))) {
                 if ('note' === $style) {
-                    $value .= "\x1b]8;;{$href}\x1b\\^\x1b]8;;\x1b\\";
+                    $value .= "\33]8;;{$href}\33\\^\33]8;;\33\\";
                 } else {
                     $attr['href'] = $href;
                 }
             }
             if (isset($attr['href'])) {
-                $value = "\x1b]8;;{$attr['href']}\x1b\\{$value}\x1b]8;;\x1b\\";
+                $value = "\33]8;;{$attr['href']}\33\\{$value}\33]8;;\33\\";
             }
         } elseif ($attr['if_links'] ?? \false) {
             return '';
@@ -471,7 +471,7 @@ class CliDumper extends \_PhpScoper08fb1f8a2f44\Symfony\Component\VarDumper\Dump
     protected function dumpLine(int $depth, bool $endOfValue = \false)
     {
         if ($this->colors) {
-            $this->line = \sprintf("\x1b[%sm%s\x1b[m", $this->styles['default'], $this->line);
+            $this->line = \sprintf("\33[%sm%s\33[m", $this->styles['default'], $this->line);
         }
         parent::dumpLine($depth);
     }

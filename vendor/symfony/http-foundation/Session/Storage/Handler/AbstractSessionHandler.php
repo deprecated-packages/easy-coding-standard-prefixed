@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\HttpFoundation\Session\Storage\Handler;
+namespace _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Session\Storage\Handler;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\HttpFoundation\Session\SessionUtils;
+use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Session\SessionUtils;
 /**
  * This abstract session handler provides a generic implementation
  * of the PHP 7.0 SessionUpdateTimestampHandlerInterface,

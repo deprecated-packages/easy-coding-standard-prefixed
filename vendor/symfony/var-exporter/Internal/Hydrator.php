@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\VarExporter\Internal;
+namespace _PhpScoper653866602a9e\Symfony\Component\VarExporter\Internal;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
+use _PhpScoper653866602a9e\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -24,7 +24,7 @@ class Hydrator
     public $properties;
     public $value;
     public $wakeups;
-    public function __construct(?\_PhpScoper08fb1f8a2f44\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScoper08fb1f8a2f44\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
+    public function __construct(?\_PhpScoper653866602a9e\Symfony\Component\VarExporter\Internal\Registry $registry, ?\_PhpScoper653866602a9e\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
     {
         $this->registry = $registry;
         $this->values = $values;
@@ -73,13 +73,13 @@ class Hydrator
                 $constructor = \Closure::fromCallable([$classReflector->getConstructor(), 'invokeArgs']);
                 return self::$hydrators[$class] = static function ($properties, $objects) use($constructor) {
                     foreach ($properties as $name => $values) {
-                        if ("\x00" !== $name) {
+                        if ("\0" !== $name) {
                             foreach ($values as $i => $v) {
                                 $objects[$i]->{$name} = $v;
                             }
                         }
                     }
-                    foreach ($properties["\x00"] ?? [] as $i => $v) {
+                    foreach ($properties["\0"] ?? [] as $i => $v) {
                         $constructor($objects[$i], $v);
                     }
                 };
@@ -94,7 +94,7 @@ class Hydrator
             case 'SplObjectStorage':
                 return self::$hydrators[$class] = static function ($properties, $objects) {
                     foreach ($properties as $name => $values) {
-                        if ("\x00" === $name) {
+                        if ("\0" === $name) {
                             foreach ($values as $i => $v) {
                                 for ($j = 0; $j < \count($v); ++$j) {
                                     $objects[$i]->attach($v[$j], $v[++$j]);

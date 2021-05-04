@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\String;
+namespace _PhpScoper653866602a9e\Symfony\Component\String;
 
-use _PhpScoper08fb1f8a2f44\Symfony\Component\String\Exception\ExceptionInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\String\Exception\InvalidArgumentException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\String\Exception\RuntimeException;
+use _PhpScoper653866602a9e\Symfony\Component\String\Exception\ExceptionInterface;
+use _PhpScoper653866602a9e\Symfony\Component\String\Exception\InvalidArgumentException;
+use _PhpScoper653866602a9e\Symfony\Component\String\Exception\RuntimeException;
 /**
  * Represents a binary-safe string of bytes.
  *
@@ -21,7 +21,7 @@ use _PhpScoper08fb1f8a2f44\Symfony\Component\String\Exception\RuntimeException;
  *
  * @throws ExceptionInterface
  */
-class ByteString extends \_PhpScoper08fb1f8a2f44\Symfony\Component\String\AbstractString
+class ByteString extends \_PhpScoper653866602a9e\Symfony\Component\String\AbstractString
 {
     private const ALPHABET_ALPHANUMERIC = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     public function __construct(string $string = '')
@@ -294,7 +294,7 @@ class ByteString extends \_PhpScoper08fb1f8a2f44\Symfony\Component\String\Abstra
     public function snake() : parent
     {
         $str = $this->camel()->title();
-        $str->string = \strtolower(\preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\\d])([A-Z])/'], '_PhpScoper08fb1f8a2f44\\1_\\2', $str->string));
+        $str->string = \strtolower(\preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\\d])([A-Z])/'], '_PhpScoper653866602a9e\\1_\\2', $str->string));
         return $str;
     }
     public function splice(string $replacement, int $start = 0, int $length = null) : parent
@@ -337,13 +337,13 @@ class ByteString extends \_PhpScoper08fb1f8a2f44\Symfony\Component\String\Abstra
         $str->string = $allWords ? \ucwords($str->string) : \ucfirst($str->string);
         return $str;
     }
-    public function toUnicodeString(string $fromEncoding = null) : \_PhpScoper08fb1f8a2f44\Symfony\Component\String\UnicodeString
+    public function toUnicodeString(string $fromEncoding = null) : \_PhpScoper653866602a9e\Symfony\Component\String\UnicodeString
     {
-        return new \_PhpScoper08fb1f8a2f44\Symfony\Component\String\UnicodeString($this->toCodePointString($fromEncoding)->string);
+        return new \_PhpScoper653866602a9e\Symfony\Component\String\UnicodeString($this->toCodePointString($fromEncoding)->string);
     }
-    public function toCodePointString(string $fromEncoding = null) : \_PhpScoper08fb1f8a2f44\Symfony\Component\String\CodePointString
+    public function toCodePointString(string $fromEncoding = null) : \_PhpScoper653866602a9e\Symfony\Component\String\CodePointString
     {
-        $u = new \_PhpScoper08fb1f8a2f44\Symfony\Component\String\CodePointString();
+        $u = new \_PhpScoper653866602a9e\Symfony\Component\String\CodePointString();
         if (\in_array($fromEncoding, [null, 'utf8', 'utf-8', 'UTF8', 'UTF-8'], \true) && \preg_match('//u', $this->string)) {
             $u->string = $this->string;
             return $u;
@@ -370,19 +370,19 @@ class ByteString extends \_PhpScoper08fb1f8a2f44\Symfony\Component\String\Abstra
         $u->string = \mb_convert_encoding($this->string, 'UTF-8', $fromEncoding ?? 'Windows-1252');
         return $u;
     }
-    public function trim(string $chars = " \t\n\r\x00\v\f") : parent
+    public function trim(string $chars = " \t\n\r\0\v\f") : parent
     {
         $str = clone $this;
         $str->string = \trim($str->string, $chars);
         return $str;
     }
-    public function trimEnd(string $chars = " \t\n\r\x00\v\f") : parent
+    public function trimEnd(string $chars = " \t\n\r\0\v\f") : parent
     {
         $str = clone $this;
         $str->string = \rtrim($str->string, $chars);
         return $str;
     }
-    public function trimStart(string $chars = " \t\n\r\x00\v\f") : parent
+    public function trimStart(string $chars = " \t\n\r\0\v\f") : parent
     {
         $str = clone $this;
         $str->string = \ltrim($str->string, $chars);
@@ -397,6 +397,6 @@ class ByteString extends \_PhpScoper08fb1f8a2f44\Symfony\Component\String\Abstra
     public function width(bool $ignoreAnsiDecoration = \true) : int
     {
         $string = \preg_match('//u', $this->string) ? $this->string : \preg_replace('/[\\x80-\\xFF]/', '?', $this->string);
-        return (new \_PhpScoper08fb1f8a2f44\Symfony\Component\String\CodePointString($string))->width($ignoreAnsiDecoration);
+        return (new \_PhpScoper653866602a9e\Symfony\Component\String\CodePointString($string))->width($ignoreAnsiDecoration);
     }
 }

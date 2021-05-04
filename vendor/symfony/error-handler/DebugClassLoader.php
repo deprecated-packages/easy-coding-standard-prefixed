@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\ErrorHandler;
+namespace _PhpScoper653866602a9e\Symfony\Component\ErrorHandler;
 
-use _PhpScoper08fb1f8a2f44\Doctrine\Common\Persistence\Proxy as LegacyProxy;
-use _PhpScoper08fb1f8a2f44\Doctrine\Persistence\Proxy;
-use _PhpScoper08fb1f8a2f44\Mockery\MockInterface;
-use _PhpScoper08fb1f8a2f44\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
-use _PhpScoper08fb1f8a2f44\PHPUnit\Framework\MockObject\MockObject;
-use _PhpScoper08fb1f8a2f44\Prophecy\Prophecy\ProphecySubjectInterface;
-use _PhpScoper08fb1f8a2f44\ProxyManager\Proxy\ProxyInterface;
+use _PhpScoper653866602a9e\Doctrine\Common\Persistence\Proxy as LegacyProxy;
+use _PhpScoper653866602a9e\Doctrine\Persistence\Proxy;
+use _PhpScoper653866602a9e\Mockery\MockInterface;
+use _PhpScoper653866602a9e\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
+use _PhpScoper653866602a9e\PHPUnit\Framework\MockObject\MockObject;
+use _PhpScoper653866602a9e\Prophecy\Prophecy\ProphecySubjectInterface;
+use _PhpScoper653866602a9e\ProxyManager\Proxy\ProxyInterface;
 /**
  * Autoloader checking if the class is really defined in the file found.
  *
@@ -111,8 +111,8 @@ class DebugClassLoader
     public static function enable() : void
     {
         // Ensures we don't hit https://bugs.php.net/42098
-        \class_exists(\_PhpScoper08fb1f8a2f44\Symfony\Component\ErrorHandler\ErrorHandler::class);
-        \class_exists(\_PhpScoper08fb1f8a2f44\Psr\Log\LogLevel::class);
+        \class_exists(\_PhpScoper653866602a9e\Symfony\Component\ErrorHandler\ErrorHandler::class);
+        \class_exists(\_PhpScoper653866602a9e\Psr\Log\LogLevel::class);
         if (!\is_array($functions = \spl_autoload_functions())) {
             return;
         }
@@ -246,7 +246,7 @@ class DebugClassLoader
             return [];
         }
         $deprecations = [];
-        $className = \false !== \strpos($class, "@anonymous\x00") ? ((\get_parent_class($class) ?: \key(\class_implements($class))) ?: 'class') . '@anonymous' : $class;
+        $className = \false !== \strpos($class, "@anonymous\0") ? ((\get_parent_class($class) ?: \key(\class_implements($class))) ?: 'class') . '@anonymous' : $class;
         // Don't trigger deprecations for classes in the same vendor
         if ($class !== $className) {
             $vendor = \preg_match('/^namespace ([^;\\\\\\s]++)[;\\\\]/m', @\file_get_contents($refl->getFileName()), $vendor) ? $vendor[1] . '\\' : '';

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper653866602a9e\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper08fb1f8a2f44\Psr\Cache\CacheItemInterface;
-use _PhpScoper08fb1f8a2f44\Psr\Log\LoggerAwareInterface;
-use _PhpScoper08fb1f8a2f44\Psr\Log\LoggerAwareTrait;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\CacheItem;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper08fb1f8a2f44\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper08fb1f8a2f44\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper653866602a9e\Psr\Cache\CacheItemInterface;
+use _PhpScoper653866602a9e\Psr\Log\LoggerAwareInterface;
+use _PhpScoper653866602a9e\Psr\Log\LoggerAwareTrait;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\CacheItem;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper653866602a9e\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper653866602a9e\Symfony\Contracts\Cache\CacheInterface;
 /**
  * An in-memory cache storage.
  *
@@ -24,7 +24,7 @@ use _PhpScoper08fb1f8a2f44\Symfony\Contracts\Cache\CacheInterface;
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ArrayAdapter implements \_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, LoggerAwareInterface, ResettableInterface
+class ArrayAdapter implements \_PhpScoper653866602a9e\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, LoggerAwareInterface, ResettableInterface
 {
     use LoggerAwareTrait;
     private $storeSerialized;
@@ -162,9 +162,9 @@ class ArrayAdapter implements \_PhpScoper08fb1f8a2f44\Symfony\Component\Cache\Ad
             return \false;
         }
         $item = (array) $item;
-        $key = $item["\x00*\x00key"];
-        $value = $item["\x00*\x00value"];
-        $expiry = $item["\x00*\x00expiry"];
+        $key = $item["\0*\0key"];
+        $value = $item["\0*\0value"];
+        $expiry = $item["\0*\0expiry"];
         $now = \microtime(\true);
         if (0 === $expiry) {
             $expiry = \PHP_INT_MAX;
