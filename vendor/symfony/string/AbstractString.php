@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc7a2896cc805\Symfony\Component\String;
+namespace _PhpScoper08fb1f8a2f44\Symfony\Component\String;
 
-use _PhpScoperc7a2896cc805\Symfony\Component\String\Exception\ExceptionInterface;
-use _PhpScoperc7a2896cc805\Symfony\Component\String\Exception\InvalidArgumentException;
-use _PhpScoperc7a2896cc805\Symfony\Component\String\Exception\RuntimeException;
+use _PhpScoper08fb1f8a2f44\Symfony\Component\String\Exception\ExceptionInterface;
+use _PhpScoper08fb1f8a2f44\Symfony\Component\String\Exception\InvalidArgumentException;
+use _PhpScoper08fb1f8a2f44\Symfony\Component\String\Exception\RuntimeException;
 /**
  * Represents a string of abstract characters.
  *
@@ -458,11 +458,11 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
      * @return static
      */
     public abstract function title(bool $allWords = \false) : self;
-    public function toByteString(string $toEncoding = null) : \_PhpScoperc7a2896cc805\Symfony\Component\String\ByteString
+    public function toByteString(string $toEncoding = null) : \_PhpScoper08fb1f8a2f44\Symfony\Component\String\ByteString
     {
-        $b = new \_PhpScoperc7a2896cc805\Symfony\Component\String\ByteString();
+        $b = new \_PhpScoper08fb1f8a2f44\Symfony\Component\String\ByteString();
         $toEncoding = \in_array($toEncoding, ['utf8', 'utf-8', 'UTF8'], \true) ? 'UTF-8' : $toEncoding;
-        if (null === $toEncoding || $toEncoding === ($fromEncoding = $this instanceof \_PhpScoperc7a2896cc805\Symfony\Component\String\AbstractUnicodeString || \preg_match('//u', $b->string) ? 'UTF-8' : 'Windows-1252')) {
+        if (null === $toEncoding || $toEncoding === ($fromEncoding = $this instanceof \_PhpScoper08fb1f8a2f44\Symfony\Component\String\AbstractUnicodeString || \preg_match('//u', $b->string) ? 'UTF-8' : 'Windows-1252')) {
             $b->string = $this->string;
             return $b;
         }
@@ -483,17 +483,17 @@ abstract class AbstractString implements \Stringable, \JsonSerializable
         }
         return $b;
     }
-    public function toCodePointString() : \_PhpScoperc7a2896cc805\Symfony\Component\String\CodePointString
+    public function toCodePointString() : \_PhpScoper08fb1f8a2f44\Symfony\Component\String\CodePointString
     {
-        return new \_PhpScoperc7a2896cc805\Symfony\Component\String\CodePointString($this->string);
+        return new \_PhpScoper08fb1f8a2f44\Symfony\Component\String\CodePointString($this->string);
     }
     public function toString() : string
     {
         return $this->string;
     }
-    public function toUnicodeString() : \_PhpScoperc7a2896cc805\Symfony\Component\String\UnicodeString
+    public function toUnicodeString() : \_PhpScoper08fb1f8a2f44\Symfony\Component\String\UnicodeString
     {
-        return new \_PhpScoperc7a2896cc805\Symfony\Component\String\UnicodeString($this->string);
+        return new \_PhpScoper08fb1f8a2f44\Symfony\Component\String\UnicodeString($this->string);
     }
     /**
      * @return static

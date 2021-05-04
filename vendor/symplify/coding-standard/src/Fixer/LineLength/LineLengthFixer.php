@@ -3,8 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
-use _PhpScoperc7a2896cc805\Nette\Utils\Strings;
-use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
+use _PhpScoper08fb1f8a2f44\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -156,9 +155,14 @@ function another($short, $now) {
 CODE_SAMPLE
 , [self::LINE_LENGTH => 40])]);
     }
+    /**
+     * Must run before
+     *
+     * @see \PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer
+     */
     public function getPriority() : int
     {
-        return $this->getPriorityBefore(TrimArraySpacesFixer::class);
+        return 5;
     }
     public function configure(?array $configuration = null) : void
     {

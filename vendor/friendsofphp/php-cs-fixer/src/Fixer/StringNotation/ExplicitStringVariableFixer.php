@@ -32,7 +32,7 @@ final class ExplicitStringVariableFixer extends AbstractFixer
         return new FixerDefinition('Converts implicit variables into explicit ones in double-quoted strings or heredoc syntax.', [new CodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScoperc7a2896cc805;
+namespace _PhpScoper08fb1f8a2f44;
 
 $a = "My name is {$name} !";
 $b = "I live in {$state->country} !";

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc7a2896cc805\Symfony\Component\HttpFoundation\File\Exception;
+namespace _PhpScoper08fb1f8a2f44\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an UPLOAD_ERR_NO_TMP_DIR error occurred with UploadedFile.
  *
  * @author Florent Mata <florentmata@gmail.com>
  */
-class NoTmpDirFileException extends \_PhpScoperc7a2896cc805\Symfony\Component\HttpFoundation\File\Exception\FileException
+class NoTmpDirFileException extends \_PhpScoper08fb1f8a2f44\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
 }

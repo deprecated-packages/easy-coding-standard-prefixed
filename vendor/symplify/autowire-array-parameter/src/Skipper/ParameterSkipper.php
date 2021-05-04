@@ -5,7 +5,7 @@ namespace Symplify\AutowireArrayParameter\Skipper;
 
 use ReflectionMethod;
 use ReflectionParameter;
-use _PhpScoperc7a2896cc805\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper08fb1f8a2f44\Symfony\Component\DependencyInjection\Definition;
 use Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver;
 final class ParameterSkipper
 {
@@ -15,7 +15,7 @@ final class ParameterSkipper
      * @var string[]
      * @noRector
      */
-    private const DEFAULT_EXCLUDED_FATAL_CLASSES = ['_PhpScoperc7a2896cc805\\Symfony\\Component\\Form\\FormExtensionInterface', '_PhpScoperc7a2896cc805\\Symfony\\Component\\Asset\\PackageInterface', '_PhpScoperc7a2896cc805\\Symfony\\Component\\Config\\Loader\\LoaderInterface', '_PhpScoperc7a2896cc805\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', '_PhpScoperc7a2896cc805\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', '_PhpScoperc7a2896cc805\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', '_PhpScoperc7a2896cc805\\Sonata\\Doctrine\\Adapter\\AdapterChain', '_PhpScoperc7a2896cc805\\Sonata\\Twig\\Extension\\TemplateExtension'];
+    private const DEFAULT_EXCLUDED_FATAL_CLASSES = ['_PhpScoper08fb1f8a2f44\\Symfony\\Component\\Form\\FormExtensionInterface', '_PhpScoper08fb1f8a2f44\\Symfony\\Component\\Asset\\PackageInterface', '_PhpScoper08fb1f8a2f44\\Symfony\\Component\\Config\\Loader\\LoaderInterface', '_PhpScoper08fb1f8a2f44\\Symfony\\Component\\VarDumper\\Dumper\\ContextProvider\\ContextProviderInterface', '_PhpScoper08fb1f8a2f44\\EasyCorp\\Bundle\\EasyAdminBundle\\Form\\Type\\Configurator\\TypeConfiguratorInterface', '_PhpScoper08fb1f8a2f44\\Sonata\\CoreBundle\\Model\\Adapter\\AdapterInterface', '_PhpScoper08fb1f8a2f44\\Sonata\\Doctrine\\Adapter\\AdapterChain', '_PhpScoper08fb1f8a2f44\\Sonata\\Twig\\Extension\\TemplateExtension'];
     /**
      * @var ParameterTypeResolver
      */

@@ -24,8 +24,8 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoperc7a2896cc805\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoperc7a2896cc805\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper08fb1f8a2f44\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper08fb1f8a2f44\Symfony\Component\OptionsResolver\Options;
 /**
  * @author SpacePossum
  */

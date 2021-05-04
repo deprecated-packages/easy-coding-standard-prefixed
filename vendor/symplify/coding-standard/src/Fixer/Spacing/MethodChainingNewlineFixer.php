@@ -3,7 +3,6 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Spacing;
 
-use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -48,9 +47,14 @@ final class MethodChainingNewlineFixer extends AbstractSymplifyFixer implements 
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
+    /**
+     * Must run before
+     *
+     * @see \PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer::getPriority()
+     */
     public function getPriority() : int
     {
-        return $this->getPriorityBefore(MethodChainingIndentationFixer::class);
+        return 39;
     }
     /**
      * @param Tokens<Token> $tokens

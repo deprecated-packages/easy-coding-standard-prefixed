@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc7a2896cc805\Symfony\Component\Console\Event;
+namespace _PhpScoper08fb1f8a2f44\Symfony\Component\Console\Event;
 
 /**
  * Allows to do things before the command is executed, like skipping the command or changing the input.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-final class ConsoleCommandEvent extends \_PhpScoperc7a2896cc805\Symfony\Component\Console\Event\ConsoleEvent
+final class ConsoleCommandEvent extends \_PhpScoper08fb1f8a2f44\Symfony\Component\Console\Event\ConsoleEvent
 {
     /**
      * The return code for skipped commands, this will also be passed into the terminate event.

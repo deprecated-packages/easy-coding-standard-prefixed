@@ -3,7 +3,6 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\ArrayNotation;
 
-use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -50,9 +49,14 @@ final class StandaloneLineInMultilineArrayFixer extends AbstractSymplifyFixer im
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
+    /**
+     * Must run before
+     *
+     * @see \PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer::getPriority()
+     */
     public function getPriority() : int
     {
-        return $this->getPriorityBefore(TrailingCommaInMultilineFixer::class);
+        return 5;
     }
     public function getRuleDefinition() : RuleDefinition
     {

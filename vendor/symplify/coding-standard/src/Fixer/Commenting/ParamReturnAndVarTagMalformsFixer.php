@@ -3,8 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
-use _PhpScoperc7a2896cc805\Nette\Utils\Strings;
-use PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer;
+use _PhpScoper08fb1f8a2f44\Nette\Utils\Strings;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -91,9 +90,14 @@ final class ParamReturnAndVarTagMalformsFixer extends AbstractSymplifyFixer impl
             $tokens[$index] = new Token([\T_DOC_COMMENT, $docContent]);
         }
     }
+    /**
+     * Must run before
+     *
+     * @see \PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer::getPriority()
+     */
     public function getPriority() : int
     {
-        return $this->getPriorityBefore(PhpdocAlignFixer::class);
+        return -37;
     }
     public function getRuleDefinition() : RuleDefinition
     {
