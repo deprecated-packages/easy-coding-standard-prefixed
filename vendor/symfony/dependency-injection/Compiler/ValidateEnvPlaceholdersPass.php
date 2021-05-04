@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper653866602a9e\Symfony\Component\Config\Definition\BaseNode;
-use _PhpScoper653866602a9e\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScoper653866602a9e\Symfony\Component\Config\Definition\Processor;
-use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Definition\BaseNode;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Definition\Processor;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 /**
  * Validates environment variable placeholders used in extension configuration with dummy values.
  *
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class ValidateEnvPlaceholdersPass implements \_PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ValidateEnvPlaceholdersPass implements \_PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private const TYPE_FIXTURES = ['array' => [], 'bool' => \false, 'float' => 0.0, 'int' => 0, 'string' => ''];
     private $extensionConfig = [];

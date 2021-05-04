@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper653866602a9e\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper653866602a9e\Symfony\Component\HttpKernel\Controller\ControllerReference;
-use _PhpScoper653866602a9e\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
-use _PhpScoper653866602a9e\Symfony\Component\HttpKernel\UriSigner;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\UriSigner;
 /**
  * Implements Surrogate rendering strategy.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class AbstractSurrogateFragmentRenderer extends \_PhpScoper653866602a9e\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
+abstract class AbstractSurrogateFragmentRenderer extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
 {
     private $surrogate;
     private $inlineStrategy;
@@ -31,7 +31,7 @@ abstract class AbstractSurrogateFragmentRenderer extends \_PhpScoper653866602a9e
      *
      * @param FragmentRendererInterface $inlineStrategy The inline strategy to use when the surrogate is not supported
      */
-    public function __construct(SurrogateInterface $surrogate = null, \_PhpScoper653866602a9e\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $inlineStrategy, UriSigner $signer = null)
+    public function __construct(SurrogateInterface $surrogate = null, \_PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $inlineStrategy, UriSigner $signer = null)
     {
         $this->surrogate = $surrogate;
         $this->inlineStrategy = $inlineStrategy;

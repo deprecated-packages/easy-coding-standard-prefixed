@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\DependencyInjection\FileLoader;
 
-use _PhpScoper653866602a9e\Symfony\Component\Config\FileLocatorInterface;
-use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper653866602a9e\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\FileLocatorInterface;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symplify\PackageBuilder\Yaml\ParametersMerger;
 /**
  * The need:

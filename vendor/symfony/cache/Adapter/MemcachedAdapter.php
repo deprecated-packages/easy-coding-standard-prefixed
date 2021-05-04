@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper653866602a9e\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Rob Frawley 2nd <rmf@src.run>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class MemcachedAdapter extends \_PhpScoper653866602a9e\Symfony\Component\Cache\Adapter\AbstractAdapter
+class MemcachedAdapter extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     /**
     * We are replacing characters that are illegal in Memcached keys with reserved characters from

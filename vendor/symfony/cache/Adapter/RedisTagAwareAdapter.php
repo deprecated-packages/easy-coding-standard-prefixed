@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper653866602a9e\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper653866602a9e\Predis\Connection\Aggregate\ClusterInterface;
-use _PhpScoper653866602a9e\Predis\Connection\Aggregate\PredisCluster;
-use _PhpScoper653866602a9e\Predis\Connection\Aggregate\ReplicationInterface;
-use _PhpScoper653866602a9e\Predis\Response\Status;
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Exception\LogicException;
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Marshaller\DeflateMarshaller;
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use _PhpScoper653866602a9e\Symfony\Component\Cache\Traits\RedisTrait;
+use _PhpScoperc2b2a9bb0e13\Predis\Connection\Aggregate\ClusterInterface;
+use _PhpScoperc2b2a9bb0e13\Predis\Connection\Aggregate\PredisCluster;
+use _PhpScoperc2b2a9bb0e13\Predis\Connection\Aggregate\ReplicationInterface;
+use _PhpScoperc2b2a9bb0e13\Predis\Response\Status;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Exception\LogicException;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Marshaller\DeflateMarshaller;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Traits\RedisTrait;
 /**
  * Stores tag id <> cache id relationship as a Redis Set, lookup on invalidation using RENAME+SMEMBERS.
  *
@@ -43,7 +43,7 @@ use _PhpScoper653866602a9e\Symfony\Component\Cache\Traits\RedisTrait;
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class RedisTagAwareAdapter extends \_PhpScoper653866602a9e\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter
+class RedisTagAwareAdapter extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter
 {
     use RedisTrait;
     /**
@@ -66,7 +66,7 @@ class RedisTagAwareAdapter extends \_PhpScoper653866602a9e\Symfony\Component\Cac
      */
     public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
     {
-        if ($redisClient instanceof \_PhpScoper653866602a9e\Predis\ClientInterface && $redisClient->getConnection() instanceof ClusterInterface && !$redisClient->getConnection() instanceof PredisCluster) {
+        if ($redisClient instanceof \_PhpScoperc2b2a9bb0e13\Predis\ClientInterface && $redisClient->getConnection() instanceof ClusterInterface && !$redisClient->getConnection() instanceof PredisCluster) {
             throw new InvalidArgumentException(\sprintf('Unsupported Predis cluster connection: only "%s" is, "%s" given.', PredisCluster::class, \get_debug_type($redisClient->getConnection())));
         }
         if (\defined('Redis::OPT_COMPRESSION') && ($redisClient instanceof \Redis || $redisClient instanceof \RedisArray || $redisClient instanceof \RedisCluster)) {
@@ -141,7 +141,7 @@ class RedisTagAwareAdapter extends \_PhpScoper653866602a9e\Symfony\Component\Cac
 
             return v:sub(14, 13 + v:byte(13) + v:byte(12) * 256 + v:byte(11) * 65536)
 EOLUA;
-        if ($this->redis instanceof \_PhpScoper653866602a9e\Predis\ClientInterface) {
+        if ($this->redis instanceof \_PhpScoperc2b2a9bb0e13\Predis\ClientInterface) {
             $evalArgs = [$lua, 1, &$id];
         } else {
             $evalArgs = [$lua, [&$id], 1];
@@ -177,7 +177,7 @@ EOLUA;
      */
     protected function doInvalidate(array $tagIds) : bool
     {
-        if (!$this->redis instanceof \_PhpScoper653866602a9e\Predis\ClientInterface || !$this->redis->getConnection() instanceof PredisCluster) {
+        if (!$this->redis instanceof \_PhpScoperc2b2a9bb0e13\Predis\ClientInterface || !$this->redis->getConnection() instanceof PredisCluster) {
             $movedTagSetIds = $this->renameKeys($this->redis, $tagIds);
         } else {
             $clusterConnection = $this->redis->getConnection();
@@ -245,7 +245,7 @@ EOLUA;
         }
         $hosts = $this->getHosts();
         $host = \reset($hosts);
-        if ($host instanceof \_PhpScoper653866602a9e\Predis\Client && $host->getConnection() instanceof ReplicationInterface) {
+        if ($host instanceof \_PhpScoperc2b2a9bb0e13\Predis\Client && $host->getConnection() instanceof ReplicationInterface) {
             // Predis supports info command only on the master in replication environments
             $hosts = [$host->getClientFor('master')];
         }

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper653866602a9e\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Response;
 /**
  * ResponseCacheStrategy knows how to compute the Response cache HTTP header
  * based on the different response cache headers.
@@ -20,7 +20,7 @@ use _PhpScoper653866602a9e\Symfony\Component\HttpFoundation\Response;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ResponseCacheStrategy implements \_PhpScoper653866602a9e\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategyInterface
+class ResponseCacheStrategy implements \_PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\HttpCache\ResponseCacheStrategyInterface
 {
     /**
      * Cache-Control headers that are sent to the final response if they appear in ANY of the responses.

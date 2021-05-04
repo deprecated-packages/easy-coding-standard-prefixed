@@ -15,10 +15,10 @@ namespace PhpCsFixer\Console\Command;
 use PhpCsFixer\FixerConfiguration\AllowedValueSubset;
 use PhpCsFixer\FixerConfiguration\FixerOptionInterface;
 use PhpCsFixer\Preg;
-use _PhpScoper653866602a9e\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
-use _PhpScoper653866602a9e\Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use _PhpScoper653866602a9e\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper653866602a9e\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Command\HelpCommand as BaseHelpCommand;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>

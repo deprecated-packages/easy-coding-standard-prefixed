@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
-use _PhpScoper653866602a9e\Nette\Utils\Strings;
+use _PhpScoperc2b2a9bb0e13\Nette\Utils\Strings;
 /**
  * Heavily inspired by
  *

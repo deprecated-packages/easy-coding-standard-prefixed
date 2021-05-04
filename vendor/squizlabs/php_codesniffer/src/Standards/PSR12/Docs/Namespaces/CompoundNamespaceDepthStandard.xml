@@ -7,19 +7,19 @@
     <code_comparison>
         <code title="Valid: Max depth of 2.">
         <![CDATA[
-use _PhpScoper653866602a9e\Vendor\Package\SomeNamespace\{
-    _PhpScoper653866602a9e\SubnamespaceOne\ClassA,
-    _PhpScoper653866602a9e\SubnamespaceOne\ClassB,
-    _PhpScoper653866602a9e\SubnamespaceTwo\ClassY,
+use _PhpScoperc2b2a9bb0e13\Vendor\Package\SomeNamespace\{
+    _PhpScoperc2b2a9bb0e13\SubnamespaceOne\ClassA,
+    _PhpScoperc2b2a9bb0e13\SubnamespaceOne\ClassB,
+    _PhpScoperc2b2a9bb0e13\SubnamespaceTwo\ClassY,
     ClassZ,
 };
         ]]>
         </code>
         <code title="Invalid: Max depth of 3.">
         <![CDATA[
-use _PhpScoper653866602a9e\Vendor\Package\SomeNamespace\{
-    <em>_PhpScoper653866602a9e\SubnamespaceOne\AnotherNamespace\ClassA,</em>
-    _PhpScoper653866602a9e\SubnamespaceOne\ClassB,
+use _PhpScoperc2b2a9bb0e13\Vendor\Package\SomeNamespace\{
+    <em>_PhpScoperc2b2a9bb0e13\SubnamespaceOne\AnotherNamespace\ClassA,</em>
+    _PhpScoperc2b2a9bb0e13\SubnamespaceOne\ClassB,
     ClassZ,
 };
         ]]>
