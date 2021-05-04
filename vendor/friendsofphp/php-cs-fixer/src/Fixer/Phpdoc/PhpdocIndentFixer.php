@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\Phpdoc;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,7 +29,7 @@ final class PhpdocIndentFixer extends AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Docblocks should have the same indentation as the documented subject.', [new CodeSample('<?php
 class DocBlocks
@@ -42,24 +44,24 @@ class DocBlocks
     /**
      * {@inheritdoc}
      *
-     * Must run before GeneralPhpdocAnnotationRemoveFixer, GeneralPhpdocTagRenameFixer, NoBlankLinesAfterPhpdocFixer, NoEmptyPhpdocFixer, NoSuperfluousPhpdocTagsFixer, PhpdocAddMissingParamAnnotationFixer, PhpdocAlignFixer, PhpdocAlignFixer, PhpdocAnnotationWithoutDotFixer, PhpdocInlineTagFixer, PhpdocInlineTagNormalizerFixer, PhpdocLineSpanFixer, PhpdocNoAccessFixer, PhpdocNoAliasTagFixer, PhpdocNoEmptyReturnFixer, PhpdocNoPackageFixer, PhpdocNoUselessInheritdocFixer, PhpdocOrderByValueFixer, PhpdocOrderFixer, PhpdocReturnSelfReferenceFixer, PhpdocSeparationFixer, PhpdocSingleLineVarSpacingFixer, PhpdocSummaryFixer, PhpdocTagCasingFixer, PhpdocTagTypeFixer, PhpdocToParamTypeFixer, PhpdocToReturnTypeFixer, PhpdocTrimConsecutiveBlankLineSeparationFixer, PhpdocTrimFixer, PhpdocTypesFixer, PhpdocTypesOrderFixer, PhpdocVarAnnotationCorrectOrderFixer, PhpdocVarWithoutNameFixer.
+     * Must run before GeneralPhpdocAnnotationRemoveFixer, GeneralPhpdocTagRenameFixer, NoBlankLinesAfterPhpdocFixer, NoEmptyPhpdocFixer, NoSuperfluousPhpdocTagsFixer, PhpdocAddMissingParamAnnotationFixer, PhpdocAlignFixer, PhpdocAlignFixer, PhpdocAnnotationWithoutDotFixer, PhpdocInlineTagNormalizerFixer, PhpdocLineSpanFixer, PhpdocNoAccessFixer, PhpdocNoAliasTagFixer, PhpdocNoEmptyReturnFixer, PhpdocNoPackageFixer, PhpdocNoUselessInheritdocFixer, PhpdocOrderByValueFixer, PhpdocOrderFixer, PhpdocReturnSelfReferenceFixer, PhpdocSeparationFixer, PhpdocSingleLineVarSpacingFixer, PhpdocSummaryFixer, PhpdocTagCasingFixer, PhpdocTagTypeFixer, PhpdocToParamTypeFixer, PhpdocToPropertyTypeFixer, PhpdocToReturnTypeFixer, PhpdocTrimConsecutiveBlankLineSeparationFixer, PhpdocTrimFixer, PhpdocTypesFixer, PhpdocTypesOrderFixer, PhpdocVarAnnotationCorrectOrderFixer, PhpdocVarWithoutNameFixer.
      * Must run after IndentationTypeFixer, PhpdocToCommentFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 20;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -101,7 +103,7 @@ class DocBlocks
      *
      * @return string Dockblock contents including correct indentation
      */
-    private function fixDocBlock($content, $indent)
+    private function fixDocBlock(string $content, string $indent) : string
     {
         return \ltrim(Preg::replace('/^\\h*\\*/m', $indent . ' *', $content));
     }
@@ -111,7 +113,7 @@ class DocBlocks
      *
      * @return string Whitespace including correct indentation for Dockblock after this whitespace
      */
-    private function fixWhitespaceBeforeDocblock($content, $indent)
+    private function fixWhitespaceBeforeDocblock(string $content, string $indent) : string
     {
         return \rtrim($content, " \t") . $indent;
     }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\ControlStructure;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -23,21 +25,21 @@ final class NoTrailingCommaInListCallFixer extends AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Remove trailing commas in list function calls.', [new CodeSample("<?php\nlist(\$a, \$b,) = foo();\n")]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_LIST);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             $token = $tokens[$index];

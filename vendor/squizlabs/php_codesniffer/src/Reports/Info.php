@@ -77,13 +77,13 @@ class Info implements \PHP_CodeSniffer\Reports\Report
             }
         }
         \ksort($metrics);
-        echo \PHP_EOL . "\33[1m" . 'PHP CODE SNIFFER INFORMATION REPORT' . "\33[0m" . \PHP_EOL;
+        echo \PHP_EOL . "\x1b[1m" . 'PHP CODE SNIFFER INFORMATION REPORT' . "\x1b[0m" . \PHP_EOL;
         echo \str_repeat('-', 70) . \PHP_EOL;
         foreach ($metrics as $metric => $values) {
             if (\count($values) === 1) {
                 $count = \reset($values);
                 $value = \key($values);
-                echo "{$metric}: \33[4m{$value}\33[0m [{$count}/{$count}, 100%]" . \PHP_EOL;
+                echo "{$metric}: \x1b[4m{$value}\x1b[0m [{$count}/{$count}, 100%]" . \PHP_EOL;
             } else {
                 $totalCount = 0;
                 $valueWidth = 0;

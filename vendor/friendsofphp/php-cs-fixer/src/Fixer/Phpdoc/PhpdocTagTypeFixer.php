@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,32 +13,34 @@
 namespace PhpCsFixer\Fixer\Phpdoc;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\Options;
 /**
  * @author SpacePossum
  */
-final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
+final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Forces PHPDoc tags to be either regular annotations or inline.', [new CodeSample("<?php\n/**\n * {@api}\n */\n"), new CodeSample("<?php\n/**\n * @inheritdoc\n */\n", ['tags' => ['inheritdoc' => 'inline']])]);
     }
@@ -47,14 +50,14 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurationDef
      * Must run before PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         if (!$this->configuration['tags']) {
             return;
@@ -63,7 +66,7 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurationDef
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
                 continue;
             }
-            $parts = Preg::split(\sprintf('/({?@(?:%s)(?:}|\\h.*?(?:}|(?=\\R)|(?=\\h+\\*\\/)))?)/i', \implode('|', \array_map(function ($tag) {
+            $parts = Preg::split(\sprintf('/({?@(?:%s)(?:}|\\h.*?(?:}|(?=\\R)|(?=\\h+\\*\\/)))?)/i', \implode('|', \array_map(function (string $tag) {
                 return \preg_quote($tag, '/');
             }, \array_keys($this->configuration['tags'])))), $token->getContent(), -1, \PREG_SPLIT_DELIM_CAPTURE);
             for ($i = 1, $max = \count($parts) - 1; $i < $max; $i += 2) {
@@ -88,7 +91,7 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurationDef
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('tags', 'The list of tags to fix'))->setAllowedTypes(['array'])->setAllowedValues([function ($value) {
             foreach ($value as $type) {
@@ -105,11 +108,11 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurationDef
             return $normalized;
         })->getOption()]);
     }
-    private function tagIsSurroundedByText(array $parts, $index)
+    private function tagIsSurroundedByText(array $parts, int $index) : bool
     {
         return Preg::match('/(^|\\R)\\h*[^@\\s]\\N*/', $this->cleanComment($parts[$index - 1])) || Preg::match('/^.*?\\R\\s*[^@\\s]/', $this->cleanComment($parts[$index + 1]));
     }
-    private function cleanComment($comment)
+    private function cleanComment(string $comment)
     {
         $comment = Preg::replace('/^\\/\\*\\*|\\*\\/$/', '', $comment);
         return Preg::replace('/(\\R)(\\h*\\*)?\\h*/', '$1', $comment);

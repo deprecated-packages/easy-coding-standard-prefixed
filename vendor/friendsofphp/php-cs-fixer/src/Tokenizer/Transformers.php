@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,8 +13,8 @@
 namespace PhpCsFixer\Tokenizer;
 
 use PhpCsFixer\Utils;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Finder\Finder;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Finder\Finder;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Finder\SplFileInfo;
 /**
  * Collection of Transformer classes.
  *
@@ -40,10 +41,7 @@ final class Transformers
             // TODO: update to use spaceship operator (PHP 7.0 required)
         });
     }
-    /**
-     * @return Transformers
-     */
-    public static function createSingleton()
+    public static function createSingleton() : self
     {
         static $instance = null;
         if (!$instance) {
@@ -56,7 +54,7 @@ final class Transformers
      *
      * @param Tokens $tokens Tokens collection
      */
-    public function transform(\PhpCsFixer\Tokenizer\Tokens $tokens)
+    public function transform(\PhpCsFixer\Tokenizer\Tokens $tokens) : void
     {
         foreach ($this->items as $transformer) {
             foreach ($tokens as $index => $token) {
@@ -67,13 +65,13 @@ final class Transformers
     /**
      * @param TransformerInterface $transformer Transformer
      */
-    private function registerTransformer(\PhpCsFixer\Tokenizer\TransformerInterface $transformer)
+    private function registerTransformer(\PhpCsFixer\Tokenizer\TransformerInterface $transformer) : void
     {
         if (\PHP_VERSION_ID >= $transformer->getRequiredPhpVersionId()) {
             $this->items[] = $transformer;
         }
     }
-    private function registerBuiltInTransformers()
+    private function registerBuiltInTransformers() : void
     {
         static $registered = \false;
         if ($registered) {
@@ -87,7 +85,7 @@ final class Transformers
     /**
      * @return \Generator|TransformerInterface[]
      */
-    private function findBuiltInTransformers()
+    private function findBuiltInTransformers() : iterable
     {
         /** @var SplFileInfo $file */
         foreach (Finder::create()->files()->in(__DIR__ . '/Transformer') as $file) {

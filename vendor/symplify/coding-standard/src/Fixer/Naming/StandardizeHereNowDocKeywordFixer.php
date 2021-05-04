@@ -3,8 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Naming;
 
-use _PhpScoper130a9a1cd4a2\Nette\Utils\Strings;
+use _PhpScoper6ffa0951a2e9\Nette\Utils\Strings;
 use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
@@ -15,6 +16,7 @@ use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 /**
  * @see \Symplify\CodingStandard\Tests\Fixer\Naming\StandardizeHereNowDocKeywordFixer\StandardizeHereNowDocKeywordFixerTest
  */
@@ -88,6 +90,10 @@ CODE_SAMPLE
     public function configure(?array $configuration = null) : void
     {
         $this->keyword = $configuration[self::KEYWORD] ?? self::DEFAULT_KEYWORD;
+    }
+    public function getConfigurationDefinition() : FixerConfigurationResolverInterface
+    {
+        throw new ShouldNotHappenException();
     }
     /**
      * @param Tokens<Token> $tokens

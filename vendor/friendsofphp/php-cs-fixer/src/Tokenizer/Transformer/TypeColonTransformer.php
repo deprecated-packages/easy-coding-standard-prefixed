@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,7 +28,7 @@ final class TypeColonTransformer extends AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         // needs to run after ReturnRefTransformer and UseTransformer
         // and before TypeAlternationTransformer
@@ -36,14 +37,14 @@ final class TypeColonTransformer extends AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId()
+    public function getRequiredPhpVersionId() : int
     {
         return 70000;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(Tokens $tokens, Token $token, $index)
+    public function process(Tokens $tokens, Token $token, int $index) : void
     {
         if (!$token->equals(':')) {
             return;
@@ -71,7 +72,7 @@ final class TypeColonTransformer extends AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
+    public function getCustomTokens() : array
     {
         return [CT::T_TYPE_COLON];
     }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -11,7 +12,7 @@
  */
 namespace PhpCsFixer\Cache;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * @author Andreas Möller <am@localheinz.com>
  *
@@ -23,18 +24,15 @@ final class FileHandler implements \PhpCsFixer\Cache\FileHandlerInterface
      * @var string
      */
     private $file;
-    /**
-     * @param string $file
-     */
-    public function __construct($file)
+    public function __construct(string $file)
     {
         $this->file = $file;
     }
-    public function getFile()
+    public function getFile() : string
     {
         return $this->file;
     }
-    public function read()
+    public function read() : ?\PhpCsFixer\Cache\CacheInterface
     {
         if (!\file_exists($this->file)) {
             return null;
@@ -47,7 +45,7 @@ final class FileHandler implements \PhpCsFixer\Cache\FileHandlerInterface
         }
         return $cache;
     }
-    public function write(\PhpCsFixer\Cache\CacheInterface $cache)
+    public function write(\PhpCsFixer\Cache\CacheInterface $cache) : void
     {
         $content = $cache->toJson();
         if (\file_exists($this->file)) {

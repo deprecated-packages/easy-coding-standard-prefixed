@@ -71,15 +71,15 @@ class Full implements \PHP_CodeSniffer\Reports\Report
         if ($width < 70) {
             $width = 70;
         }
-        echo \PHP_EOL . "\33[1mFILE: ";
+        echo \PHP_EOL . "\x1b[1mFILE: ";
         if ($fileLength <= $width - 6) {
             echo $file;
         } else {
             echo '...' . \substr($file, $fileLength - ($width - 6));
         }
-        echo "\33[0m" . \PHP_EOL;
+        echo "\x1b[0m" . \PHP_EOL;
         echo \str_repeat('-', $width) . \PHP_EOL;
-        echo "\33[1m" . 'FOUND ' . $report['errors'] . ' ERROR';
+        echo "\x1b[1m" . 'FOUND ' . $report['errors'] . ' ERROR';
         if ($report['errors'] !== 1) {
             echo 'S';
         }
@@ -93,7 +93,7 @@ class Full implements \PHP_CodeSniffer\Reports\Report
         if (\count($report['messages']) !== 1) {
             echo 'S';
         }
-        echo "\33[0m" . \PHP_EOL;
+        echo "\x1b[0m" . \PHP_EOL;
         echo \str_repeat('-', $width) . \PHP_EOL;
         // The maximum amount of space an error message can use.
         $maxErrorSpace = $width - $paddingLength - 1;
@@ -110,13 +110,13 @@ class Full implements \PHP_CodeSniffer\Reports\Report
                     foreach ($msgLines as $k => $msgLine) {
                         if ($k === 0) {
                             if ($showSources === \true) {
-                                $errorMsg .= "\33[1m";
+                                $errorMsg .= "\x1b[1m";
                             }
                         } else {
                             $errorMsg .= \PHP_EOL . $paddingLine2;
                         }
                         if ($k === $lastLine && $showSources === \true) {
-                            $msgLine .= "\33[0m" . ' (' . $error['source'] . ')';
+                            $msgLine .= "\x1b[0m" . ' (' . $error['source'] . ')';
                         }
                         $errorMsg .= \wordwrap($msgLine, $maxErrorSpace, \PHP_EOL . $paddingLine2);
                     }
@@ -124,12 +124,12 @@ class Full implements \PHP_CodeSniffer\Reports\Report
                     $padding = $maxLineNumLength - \strlen($line);
                     echo ' ' . \str_repeat(' ', $padding) . $line . ' | ';
                     if ($error['type'] === 'ERROR') {
-                        echo "\33[31mERROR\33[0m";
+                        echo "\x1b[31mERROR\x1b[0m";
                         if ($report['warnings'] > 0) {
                             echo '  ';
                         }
                     } else {
-                        echo "\33[33mWARNING\33[0m";
+                        echo "\x1b[33mWARNING\x1b[0m";
                     }
                     echo ' | ';
                     if ($report['fixable'] > 0) {
@@ -150,7 +150,7 @@ class Full implements \PHP_CodeSniffer\Reports\Report
         //end foreach
         echo \str_repeat('-', $width) . \PHP_EOL;
         if ($report['fixable'] > 0) {
-            echo "\33[1m" . 'PHPCBF CAN FIX THE ' . $report['fixable'] . ' MARKED SNIFF VIOLATIONS AUTOMATICALLY' . "\33[0m" . \PHP_EOL;
+            echo "\x1b[1m" . 'PHPCBF CAN FIX THE ' . $report['fixable'] . ' MARKED SNIFF VIOLATIONS AUTOMATICALLY' . "\x1b[0m" . \PHP_EOL;
             echo \str_repeat('-', $width) . \PHP_EOL;
         }
         echo \PHP_EOL;

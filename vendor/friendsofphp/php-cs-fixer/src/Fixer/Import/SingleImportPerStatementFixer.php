@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,6 +16,7 @@ use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
@@ -31,7 +33,7 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('There MUST be one use keyword per declaration.', [new CodeSample("<?php\nuse Foo, Sample, Sample\\Sample as Sample2;\n")]);
     }
@@ -40,21 +42,21 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
      *
      * Must run before MultilineWhitespaceBeforeSemicolonsFixer, NoLeadingImportSlashFixer, NoSinglelineWhitespaceBeforeSemicolonsFixer, NoUnusedImportsFixer, SpaceAfterSemicolonFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         $uses = \array_reverse($tokensAnalyzer->getImportUseIndexes());
@@ -68,12 +70,7 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
             }
         }
     }
-    /**
-     * @param int $index
-     *
-     * @return array
-     */
-    private function getGroupDeclaration(Tokens $tokens, $index)
+    private function getGroupDeclaration(Tokens $tokens, int $index) : array
     {
         $groupPrefix = '';
         $comment = '';
@@ -99,14 +96,9 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
         return [\rtrim($groupPrefix), $groupOpenIndex, $tokens->findBlockEnd(Tokens::BLOCK_TYPE_GROUP_IMPORT_BRACE, $groupOpenIndex), $comment];
     }
     /**
-     * @param string $groupPrefix
-     * @param int    $groupOpenIndex
-     * @param int    $groupCloseIndex
-     * @param string $comment
-     *
      * @return string[]
      */
-    private function getGroupStatements(Tokens $tokens, $groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment)
+    private function getGroupStatements(Tokens $tokens, string $groupPrefix, int $groupOpenIndex, int $groupCloseIndex, string $comment) : array
     {
         $statements = [];
         $statement = $groupPrefix;
@@ -143,11 +135,7 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
         }
         return $statements;
     }
-    /**
-     * @param int $index
-     * @param int $endIndex
-     */
-    private function fixGroupUse(Tokens $tokens, $index, $endIndex)
+    private function fixGroupUse(Tokens $tokens, int $index, int $endIndex) : void
     {
         list($groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment) = $this->getGroupDeclaration($tokens, $index);
         $statements = $this->getGroupStatements($tokens, $groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment);
@@ -164,11 +152,7 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
         $importTokens->clearEmptyTokens();
         $tokens->insertAt($index, $importTokens);
     }
-    /**
-     * @param int $index
-     * @param int $endIndex
-     */
-    private function fixMultipleUse(Tokens $tokens, $index, $endIndex)
+    private function fixMultipleUse(Tokens $tokens, int $index, int $endIndex) : void
     {
         $ending = $this->whitespacesConfig->getLineEnding();
         for ($i = $endIndex - 1; $i > $index; --$i) {

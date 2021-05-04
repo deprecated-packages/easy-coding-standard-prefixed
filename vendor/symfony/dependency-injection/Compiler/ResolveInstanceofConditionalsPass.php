@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Exception\RuntimeException;
 /**
  * Applies instanceof conditionals to definitions.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ResolveInstanceofConditionalsPass implements \_PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ResolveInstanceofConditionalsPass implements \_PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     /**
      * {@inheritdoc}

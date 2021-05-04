@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,6 +16,7 @@ use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
@@ -27,7 +29,7 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Method chaining MUST be properly indented. Method chaining with different levels of indentation is not supported.', [new CodeSample("<?php\n\$user->setEmail('voff.web@gmail.com')\n         ->setPassword('233434');\n")]);
     }
@@ -37,21 +39,21 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
      * Must run before ArrayIndentationFixer, MethodArgumentSpaceFixer.
      * Must run after BracesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 34;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound(Token::getObjectOperatorKinds());
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         for ($index = 1, $count = \count($tokens); $index < $count; ++$index) {
@@ -79,10 +81,8 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
     }
     /**
      * @param int $index index of the first token on the line to indent
-     *
-     * @return string
      */
-    private function getExpectedIndentAt(Tokens $tokens, $index)
+    private function getExpectedIndentAt(Tokens $tokens, int $index) : string
     {
         $index = $tokens->getPrevMeaningfulToken($index);
         $indent = $this->whitespacesConfig->getIndent();
@@ -103,10 +103,8 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
     }
     /**
      * @param int $index position of the object operator token ("->" or "?->")
-     *
-     * @return bool
      */
-    private function canBeMovedToNextLine($index, Tokens $tokens)
+    private function canBeMovedToNextLine(int $index, Tokens $tokens) : bool
     {
         $prevMeaningful = $tokens->getPrevMeaningfulToken($index);
         $hasCommentBefore = \false;
@@ -123,17 +121,15 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
     }
     /**
      * @param int $index index of the indentation token
-     *
-     * @return null|string
      */
-    private function getIndentAt(Tokens $tokens, $index)
+    private function getIndentAt(Tokens $tokens, int $index) : ?string
     {
         if (1 === Preg::match('/\\R{1}(\\h*)$/', $this->getIndentContentAt($tokens, $index), $matches)) {
             return $matches[1];
         }
         return null;
     }
-    private function getIndentContentAt(Tokens $tokens, $index)
+    private function getIndentContentAt(Tokens $tokens, int $index) : string
     {
         if (!$tokens[$index]->isGivenKind([\T_WHITESPACE, \T_INLINE_HTML])) {
             return '';
@@ -150,10 +146,8 @@ final class MethodChainingIndentationFixer extends AbstractFixer implements Whit
     /**
      * @param int $start index of first meaningful token on previous line
      * @param int $end   index of last token on previous line
-     *
-     * @return bool
      */
-    private function currentLineRequiresExtraIndentLevel(Tokens $tokens, $start, $end)
+    private function currentLineRequiresExtraIndentLevel(Tokens $tokens, int $start, int $end) : bool
     {
         if ($tokens[$start + 1]->isObjectOperator()) {
             return \false;

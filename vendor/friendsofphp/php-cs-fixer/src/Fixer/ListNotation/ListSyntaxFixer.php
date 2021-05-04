@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -13,10 +14,12 @@ namespace PhpCsFixer\Fixer\ListNotation;
 
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Tokenizer\CT;
@@ -25,17 +28,17 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
  */
-final class ListSyntaxFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
+final class ListSyntaxFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     private $candidateTokenKind;
     /**
      * Use 'syntax' => 'long'|'short'.
      *
-     * @param null|array<string, string> $configuration
+     * @param array<string, string> $configuration
      *
      * @throws InvalidFixerConfigurationException
      */
-    public function configure(array $configuration = null)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         $this->candidateTokenKind = 'long' === $this->configuration['syntax'] ? CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN : \T_LIST;
@@ -43,30 +46,30 @@ final class ListSyntaxFixer extends AbstractFixer implements ConfigurationDefini
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
-        return new FixerDefinition('List (`array` destructuring) assignment should be declared using the configured syntax. Requires PHP >= 7.1.', [new VersionSpecificCodeSample("<?php\n[\$sample] = \$array;\n", new VersionSpecification(70100)), new VersionSpecificCodeSample("<?php\nlist(\$sample) = \$array;\n", new VersionSpecification(70100), ['syntax' => 'short'])]);
+        return new FixerDefinition('List (`array` destructuring) assignment should be declared using the configured syntax. Requires PHP >= 7.1.', [new VersionSpecificCodeSample("<?php\nlist(\$sample) = \$array;\n", new VersionSpecification(70100)), new VersionSpecificCodeSample("<?php\n[\$sample] = \$array;\n", new VersionSpecification(70100), ['syntax' => 'long'])]);
     }
     /**
      * {@inheritdoc}
      *
      * Must run before BinaryOperatorSpacesFixer, TernaryOperatorSpacesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return \PHP_VERSION_ID >= 70100 && $tokens->isTokenKindFound($this->candidateTokenKind);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; 0 <= $index; --$index) {
             if ($tokens[$index]->isGivenKind($this->candidateTokenKind)) {
@@ -81,14 +84,11 @@ final class ListSyntaxFixer extends AbstractFixer implements ConfigurationDefini
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
-        return new FixerConfigurationResolver([(new FixerOptionBuilder('syntax', 'Whether to use the `long` or `short` `list` syntax.'))->setAllowedValues(['long', 'short'])->setDefault('long')->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('syntax', 'Whether to use the `long` or `short` `list` syntax.'))->setAllowedValues(['long', 'short'])->setDefault('short')->getOption()]);
     }
-    /**
-     * @param int $index
-     */
-    private function fixToLongSyntax(Tokens $tokens, $index)
+    private function fixToLongSyntax(Tokens $tokens, int $index) : void
     {
         static $typesOfInterest = [[CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE], '['];
         $closeIndex = $tokens->getNextTokenOfKind($index, $typesOfInterest);
@@ -99,10 +99,7 @@ final class ListSyntaxFixer extends AbstractFixer implements ConfigurationDefini
         $tokens[$closeIndex] = new Token(')');
         $tokens->insertAt($index, new Token([\T_LIST, 'list']));
     }
-    /**
-     * @param int $index
-     */
-    private function fixToShortSyntax(Tokens $tokens, $index)
+    private function fixToShortSyntax(Tokens $tokens, int $index) : void
     {
         $openIndex = $tokens->getNextTokenOfKind($index, ['(']);
         $closeIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openIndex);

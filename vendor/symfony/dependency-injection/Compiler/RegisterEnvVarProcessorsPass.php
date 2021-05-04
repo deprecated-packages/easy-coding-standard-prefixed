@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\EnvVarProcessor;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\EnvVarProcessor;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\EnvVarProcessorInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Reference;
 /**
  * Creates the container.env_var_processors_locator service.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class RegisterEnvVarProcessorsPass implements \_PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class RegisterEnvVarProcessorsPass implements \_PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private const ALLOWED_TYPES = ['array', 'bool', 'float', 'int', 'string'];
     public function process(ContainerBuilder $container)
@@ -49,7 +49,7 @@ class RegisterEnvVarProcessorsPass implements \_PhpScoper130a9a1cd4a2\Symfony\Co
             $bag->setProvidedTypes($types);
         }
         if ($processors) {
-            $container->setAlias('container.env_var_processors_locator', (string) \_PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($container, $processors))->setPublic(\true);
+            $container->setAlias('container.env_var_processors_locator', (string) \_PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass::register($container, $processors))->setPublic(\true);
         }
     }
     private static function validateProvidedTypes(string $types, string $class) : array

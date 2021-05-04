@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,12 +13,14 @@
 namespace PhpCsFixer\Fixer\PhpUnit;
 
 use PhpCsFixer\Fixer\AbstractPhpUnitFixer;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\ArgumentsAnalyzer;
 use PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
@@ -25,7 +28,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpUnitExpectationFixer extends AbstractPhpUnitFixer implements ConfigurationDefinitionFixerInterface, WhitespacesAwareFixerInterface
+final class PhpUnitExpectationFixer extends AbstractPhpUnitFixer implements ConfigurableFixerInterface, WhitespacesAwareFixerInterface
 {
     /**
      * @var array<string, string>
@@ -34,7 +37,7 @@ final class PhpUnitExpectationFixer extends AbstractPhpUnitFixer implements Conf
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         $this->methodMap = ['setExpectedException' => 'expectExceptionMessage'];
@@ -49,7 +52,7 @@ final class PhpUnitExpectationFixer extends AbstractPhpUnitFixer implements Conf
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Usages of `->setExpectedException*` methods MUST be replaced by `->expectException*` methods.', [new CodeSample('<?php
 final class MyTest extends \\PHPUnit_Framework_TestCase
@@ -118,28 +121,28 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
      *
      * Must run after PhpUnitNoExpectationAnnotationFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('target', 'Target version of PHPUnit.'))->setAllowedTypes(['string'])->setAllowedValues([\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_2, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_6, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_8_4, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_NEWEST])->setDefault(\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_NEWEST)->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyPhpUnitClassFix(Tokens $tokens, $startIndex, $endIndex)
+    protected function applyPhpUnitClassFix(Tokens $tokens, int $startIndex, int $endIndex) : void
     {
         foreach (Token::getObjectOperatorKinds() as $objectOperator) {
             $this->applyPhpUnitClassFixWithObjectOperator($tokens, $startIndex, $endIndex, $objectOperator);
@@ -150,7 +153,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
      * @param int $endIndex
      * @param int $objectOperator
      */
-    private function applyPhpUnitClassFixWithObjectOperator(Tokens $tokens, $startIndex, $endIndex, $objectOperator)
+    private function applyPhpUnitClassFixWithObjectOperator(Tokens $tokens, $startIndex, $endIndex, $objectOperator) : void
     {
         $argumentsAnalyzer = new ArgumentsAnalyzer();
         $oldMethodSequence = [[\T_VARIABLE, '$this'], [$objectOperator], [\T_STRING]];

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper130a9a1cd4a2\Psr\Log\LoggerAwareInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\CacheItem;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoper130a9a1cd4a2\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use _PhpScoper6ffa0951a2e9\Psr\Log\LoggerAwareInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\CacheItem;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Traits\AbstractAdapterTrait;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoper6ffa0951a2e9\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * Abstract for native TagAware adapters.
  *
@@ -28,11 +28,11 @@ use _PhpScoper130a9a1cd4a2\Symfony\Contracts\Cache\TagAwareCacheInterface;
  *
  * @internal
  */
-abstract class AbstractTagAwareAdapter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, TagAwareCacheInterface, LoggerAwareInterface, ResettableInterface
+abstract class AbstractTagAwareAdapter implements \_PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, TagAwareCacheInterface, LoggerAwareInterface, ResettableInterface
 {
     use AbstractAdapterTrait;
     use ContractsTrait;
-    private const TAGS_PREFIX = "\0tags\0";
+    private const TAGS_PREFIX = "\x00tags\x00";
     protected function __construct(string $namespace = '', int $defaultLifetime = 0)
     {
         $this->namespace = '' === $namespace ? '' : CacheItem::validateKey($namespace) . ':';

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\Operator;
 use PhpCsFixer\Fixer\AbstractIncrementOperatorFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -22,14 +24,11 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class StandardizeIncrementFixer extends AbstractIncrementOperatorFixer
 {
-    /**
-     * @internal
-     */
-    const EXPRESSION_END_TOKENS = [';', ')', ']', ',', ':', [CT::T_DYNAMIC_PROP_BRACE_CLOSE], [CT::T_DYNAMIC_VAR_BRACE_CLOSE], [\T_CLOSE_TAG]];
+    private const EXPRESSION_END_TOKENS = [';', ')', ']', ',', ':', [CT::T_DYNAMIC_PROP_BRACE_CLOSE], [CT::T_DYNAMIC_VAR_BRACE_CLOSE], [\T_CLOSE_TAG]];
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Increment and decrement operators should be used if possible.', [new CodeSample("<?php\n\$i += 1;\n"), new CodeSample("<?php\n\$i -= 1;\n")]);
     }
@@ -38,21 +37,21 @@ final class StandardizeIncrementFixer extends AbstractIncrementOperatorFixer
      *
      * Must run before IncrementStyleFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_PLUS_EQUAL, \T_MINUS_EQUAL]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
             $expressionEnd = $tokens[$index];
@@ -76,11 +75,8 @@ final class StandardizeIncrementFixer extends AbstractIncrementOperatorFixer
     }
     /**
      * Clear tokens in the given range unless they are comments.
-     *
-     * @param int $indexStart
-     * @param int $indexEnd
      */
-    private function clearRangeLeaveComments(Tokens $tokens, $indexStart, $indexEnd)
+    private function clearRangeLeaveComments(Tokens $tokens, int $indexStart, int $indexEnd) : void
     {
         for ($i = $indexStart; $i <= $indexEnd; ++$i) {
             $token = $tokens[$i];

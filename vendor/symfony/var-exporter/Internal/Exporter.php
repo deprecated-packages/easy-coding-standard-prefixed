@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Exception\NotInstantiableTypeException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -45,13 +45,13 @@ class Exporter
                 unset($value);
                 // independent from the original structure
                 $refs[$k] = $value = $values[$k];
-                if ($value instanceof \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Reference && 0 > $value->id) {
+                if ($value instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Reference && 0 > $value->id) {
                     $valuesAreStatic = \false;
                     ++$value->count;
                     continue;
                 }
                 $refsPool[] = [&$refs[$k], $value, &$value];
-                $refs[$k] = $values[$k] = new \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Reference(-\count($refsPool), $value);
+                $refs[$k] = $values[$k] = new \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Reference(-\count($refsPool), $value);
             }
             if (\is_array($value)) {
                 if ($value) {
@@ -64,11 +64,11 @@ class Exporter
             $valueIsStatic = \false;
             if (isset($objectsPool[$value])) {
                 ++$objectsCount;
-                $value = new \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Reference($objectsPool[$value][0]);
+                $value = new \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Reference($objectsPool[$value][0]);
                 goto handle_value;
             }
             $class = \get_class($value);
-            $reflector = \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
+            $reflector = \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
             if ($reflector->hasMethod('__serialize')) {
                 if (!$reflector->getMethod('__serialize')->isPublic()) {
                     throw new \Error(\sprintf('Call to %s method "%s::__serialize()".', $reflector->getMethod('__serialize')->isProtected() ? 'protected' : 'private', $class));
@@ -81,25 +81,25 @@ class Exporter
             $properties = [];
             $sleep = null;
             $arrayValue = (array) $value;
-            $proto = \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class];
+            $proto = \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::$prototypes[$class];
             if (($value instanceof \ArrayIterator || $value instanceof \ArrayObject) && null !== $proto) {
                 // ArrayIterator and ArrayObject need special care because their "flags"
                 // option changes the behavior of the (array) casting operator.
                 $properties = self::getArrayObjectProperties($value, $arrayValue, $proto);
                 // populates Registry::$prototypes[$class] with a new instance
-                \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class, \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class], \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]);
-            } elseif ($value instanceof \SplObjectStorage && \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class] && null !== $proto) {
+                \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class, \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class], \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]);
+            } elseif ($value instanceof \SplObjectStorage && \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class] && null !== $proto) {
                 // By implementing Serializable, SplObjectStorage breaks
                 // internal references; let's deal with it on our own.
                 foreach (clone $value as $v) {
                     $properties[] = $v;
                     $properties[] = $value[$v];
                 }
-                $properties = ['SplObjectStorage' => ["\0" => $properties]];
+                $properties = ['SplObjectStorage' => ["\x00" => $properties]];
             } elseif ($value instanceof \Serializable || $value instanceof \__PHP_Incomplete_Class) {
                 ++$objectsCount;
                 $objectsPool[$value] = [$id = \count($objectsPool), \serialize($value), [], 0];
-                $value = new \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Reference($id);
+                $value = new \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Reference($id);
                 goto handle_value;
             }
             if (\method_exists($class, '__sleep')) {
@@ -119,7 +119,7 @@ class Exporter
             foreach ($arrayValue as $name => $v) {
                 $i = 0;
                 $n = (string) $name;
-                if ('' === $n || "\0" !== $n[0]) {
+                if ('' === $n || "\x00" !== $n[0]) {
                     $c = 'stdClass';
                 } elseif ('*' === $n[1]) {
                     $n = \substr($n, 3);
@@ -130,7 +130,7 @@ class Exporter
                         $c = 'ErrorException';
                     }
                 } else {
-                    $i = \strpos($n, "\0", 2);
+                    $i = \strpos($n, "\x00", 2);
                     $c = \substr($n, 1, $i - 1);
                     $n = \substr($n, 1 + $i);
                 }
@@ -140,7 +140,7 @@ class Exporter
                     }
                     $sleep[$n] = \false;
                 }
-                if (!\array_key_exists($name, $proto) || $proto[$name] !== $v || "\0Error\0trace" === $name || "\0Exception\0trace" === $name) {
+                if (!\array_key_exists($name, $proto) || $proto[$name] !== $v || "\x00Error\x00trace" === $name || "\x00Exception\x00trace" === $name) {
                     $properties[$c][$n] = $v;
                 }
             }
@@ -156,7 +156,7 @@ class Exporter
             $properties = self::prepare($properties, $objectsPool, $refsPool, $objectsCount, $valueIsStatic);
             ++$objectsCount;
             $objectsPool[$value] = [$id, $class, $properties, \method_exists($class, '__unserialize') ? -$objectsCount : (\method_exists($class, '__wakeup') ? $objectsCount : 0)];
-            $value = new \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Reference($id);
+            $value = new \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Reference($id);
             handle_value:
             if ($isRef) {
                 unset($value);
@@ -184,7 +184,7 @@ class Exporter
             case '' === $value:
                 return "''";
         }
-        if ($value instanceof \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Reference) {
+        if ($value instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Reference) {
             if (0 <= $value->id) {
                 return '$o[' . $value->id . ']';
             }
@@ -198,7 +198,7 @@ class Exporter
         if (\is_string($value)) {
             $code = \sprintf("'%s'", \addcslashes($value, "'\\"));
             $code = \preg_replace_callback('/([\\0\\r\\n]++)(.)/', function ($m) use($subIndent) {
-                $m[1] = \sprintf('\'."%s".\'', \str_replace(["\0", "\r", "\n", '\\n\\'], ['\\0', '\\r', '\\n', '\\n"' . "\n" . $subIndent . '."\\'], $m[1]));
+                $m[1] = \sprintf('\'."%s".\'', \str_replace(["\x00", "\r", "\n", '\\n\\'], ['\\0', '\\r', '\\n', '\\n"' . "\n" . $subIndent . '."\\'], $m[1]));
                 if ("'" === $m[2]) {
                     return \substr($m[1], 0, -2);
                 }
@@ -227,43 +227,43 @@ class Exporter
             }
             return "[\n" . $code . $indent . ']';
         }
-        if ($value instanceof \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Values) {
+        if ($value instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Values) {
             $code = $subIndent . "\$r = [],\n";
             foreach ($value->values as $k => $v) {
                 $code .= $subIndent . '$r[' . $k . '] = ' . self::export($v, $subIndent) . ",\n";
             }
             return "[\n" . $code . $indent . ']';
         }
-        if ($value instanceof \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry) {
+        if ($value instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry) {
             return self::exportRegistry($value, $indent, $subIndent);
         }
-        if ($value instanceof \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Hydrator) {
+        if ($value instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Hydrator) {
             return self::exportHydrator($value, $indent, $subIndent);
         }
         throw new \UnexpectedValueException(\sprintf('Cannot export value of type "%s".', \get_debug_type($value)));
     }
-    private static function exportRegistry(\_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry $value, string $indent, string $subIndent) : string
+    private static function exportRegistry(\_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry $value, string $indent, string $subIndent) : string
     {
         $code = '';
         $serializables = [];
         $seen = [];
         $prototypesAccess = 0;
         $factoriesAccess = 0;
-        $r = '\\' . \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::class;
+        $r = '\\' . \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::class;
         $j = -1;
         foreach ($value as $k => $class) {
             if (':' === ($class[1] ?? null)) {
                 $serializables[$k] = $class;
                 continue;
             }
-            if (!\_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class]) {
+            if (!\_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::$instantiableWithoutConstructor[$class]) {
                 if (\is_subclass_of($class, 'Serializable') && !\method_exists($class, '__unserialize')) {
                     $serializables[$k] = 'C:' . \strlen($class) . ':"' . $class . '":0:{}';
                 } else {
                     $serializables[$k] = 'O:' . \strlen($class) . ':"' . $class . '":0:{}';
                 }
                 if (\is_subclass_of($class, 'Throwable')) {
-                    $eol = \is_subclass_of($class, 'Error') ? "\0Error\0" : "\0Exception\0";
+                    $eol = \is_subclass_of($class, 'Error') ? "\x00Error\x00" : "\x00Exception\x00";
                     $serializables[$k] = \substr_replace($serializables[$k], '1:{s:' . (5 + \strlen($eol)) . ':"' . $eol . 'trace";a:0:{}}', -4);
                 }
                 continue;
@@ -273,7 +273,7 @@ class Exporter
             $eol = ",\n";
             $c = '[' . self::export($class) . ']';
             if ($seen[$class] ?? \false) {
-                if (\_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
+                if (\_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
                     ++$prototypesAccess;
                     $code .= 'clone $p' . $c;
                 } else {
@@ -282,7 +282,7 @@ class Exporter
                 }
             } else {
                 $seen[$class] = \true;
-                if (\_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
+                if (\_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
                     $code .= 'clone (' . ($prototypesAccess++ ? '$p' : '($p = &' . $r . '::$prototypes)') . $c . ' ?? ' . $r . '::p';
                 } else {
                     $code .= '(' . ($factoriesAccess++ ? '$f' : '($f = &' . $r . '::$factories)') . $c . ' ?? ' . $r . '::f';
@@ -308,7 +308,7 @@ class Exporter
         }
         return '$o = ' . $code;
     }
-    private static function exportHydrator(\_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Hydrator $value, string $indent, string $subIndent) : string
+    private static function exportHydrator(\_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Hydrator $value, string $indent, string $subIndent) : string
     {
         $code = '';
         foreach ($value->properties as $class => $properties) {
@@ -324,7 +324,7 @@ class Exporter
     private static function getArrayObjectProperties($value, array &$arrayValue, $proto) : array
     {
         $reflector = $value instanceof \ArrayIterator ? 'ArrayIterator' : 'ArrayObject';
-        $reflector = \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$reflector] ?? \_PhpScoper130a9a1cd4a2\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($reflector);
+        $reflector = \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$reflector] ?? \_PhpScoper6ffa0951a2e9\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($reflector);
         $properties = [$arrayValue, $reflector->getMethod('getFlags')->invoke($value), $value instanceof \ArrayObject ? $reflector->getMethod('getIteratorClass')->invoke($value) : 'ArrayIterator'];
         $reflector = $reflector->getMethod('setFlags');
         $reflector->invoke($proto, \ArrayObject::STD_PROP_LIST);
@@ -342,7 +342,7 @@ class Exporter
             if ('ArrayIterator' === $properties[2]) {
                 unset($properties[2]);
             }
-            $properties = [$reflector->class => ["\0" => $properties]];
+            $properties = [$reflector->class => ["\x00" => $properties]];
         }
         return $properties;
     }

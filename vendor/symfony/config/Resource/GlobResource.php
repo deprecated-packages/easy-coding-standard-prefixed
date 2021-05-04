@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\Config\Resource;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Resource;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Finder\Finder;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Finder\Glob;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Finder\Finder;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Finder\Glob;
 /**
  * GlobResource represents a set of resources stored on the filesystem.
  *
@@ -21,7 +21,7 @@ use _PhpScoper130a9a1cd4a2\Symfony\Component\Finder\Glob;
  *
  * @final
  */
-class GlobResource implements \IteratorAggregate, \_PhpScoper130a9a1cd4a2\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class GlobResource implements \IteratorAggregate, \_PhpScoper6ffa0951a2e9\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $prefix;
     private $pattern;
@@ -59,7 +59,7 @@ class GlobResource implements \IteratorAggregate, \_PhpScoper130a9a1cd4a2\Symfon
      */
     public function __toString() : string
     {
-        return 'glob.' . $this->prefix . (int) $this->recursive . $this->pattern . (int) $this->forExclusion . \implode("\0", $this->excludedPrefixes);
+        return 'glob.' . $this->prefix . (int) $this->recursive . $this->pattern . (int) $this->forExclusion . \implode("\x00", $this->excludedPrefixes);
     }
     /**
      * {@inheritdoc}

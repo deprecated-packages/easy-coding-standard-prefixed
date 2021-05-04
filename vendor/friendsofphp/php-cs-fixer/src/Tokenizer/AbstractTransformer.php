@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -22,7 +23,7 @@ abstract class AbstractTransformer implements \PhpCsFixer\Tokenizer\TransformerI
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName() : string
     {
         $nameParts = \explode('\\', static::class);
         $name = \substr(\end($nameParts), 0, -\strlen('Transformer'));
@@ -31,12 +32,12 @@ abstract class AbstractTransformer implements \PhpCsFixer\Tokenizer\TransformerI
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
      */
-    public abstract function getCustomTokens();
+    public abstract function getCustomTokens() : array;
 }

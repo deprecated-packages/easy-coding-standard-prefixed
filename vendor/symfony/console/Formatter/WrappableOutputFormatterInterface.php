@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter;
 
 /**
  * Formatter interface for console output that supports word wrapping.
  *
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-interface WrappableOutputFormatterInterface extends \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterInterface
+interface WrappableOutputFormatterInterface extends \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterInterface
 {
     /**
      * Formats a message according to the given styles, wrapping at `$width` (0 means no wrapping).

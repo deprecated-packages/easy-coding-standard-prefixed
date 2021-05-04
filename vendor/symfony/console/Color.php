@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\Console;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Console;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
@@ -51,7 +51,7 @@ final class Color
         if (0 === \count($setCodes)) {
             return '';
         }
-        return \sprintf("\33[%sm", \implode(';', $setCodes));
+        return \sprintf("\x1b[%sm", \implode(';', $setCodes));
     }
     public function unset() : string
     {
@@ -68,7 +68,7 @@ final class Color
         if (0 === \count($unsetCodes)) {
             return '';
         }
-        return \sprintf("\33[%sm", \implode(';', $unsetCodes));
+        return \sprintf("\x1b[%sm", \implode(';', $unsetCodes));
     }
     private function parseColor(string $color) : string
     {

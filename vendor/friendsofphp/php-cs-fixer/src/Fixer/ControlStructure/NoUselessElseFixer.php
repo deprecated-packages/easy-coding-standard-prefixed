@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\ControlStructure;
 use PhpCsFixer\AbstractNoUselessElseFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author SpacePossum
@@ -23,14 +25,14 @@ final class NoUselessElseFixer extends AbstractNoUselessElseFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_ELSE);
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('There should not be useless `else` cases.', [new CodeSample("<?php\nif (\$a) {\n    return 1;\n} else {\n    return 2;\n}\n")]);
     }
@@ -40,14 +42,14 @@ final class NoUselessElseFixer extends AbstractNoUselessElseFixer
      * Must run before BracesFixer, CombineConsecutiveUnsetsFixer, NoBreakCommentFixer, NoExtraBlankLinesFixer, NoTrailingWhitespaceFixer, NoUselessReturnFixer, NoWhitespaceInBlankLineFixer, SimplifiedIfReturnFixer.
      * Must run after NoAlternativeSyntaxFixer, NoEmptyStatementFixer, NoUnneededCurlyBracesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return parent::getPriority();
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_ELSE)) {
@@ -73,7 +75,7 @@ final class NoUselessElseFixer extends AbstractNoUselessElseFixer
      *
      * @param int $index T_ELSE index
      */
-    private function fixEmptyElse(Tokens $tokens, $index)
+    private function fixEmptyElse(Tokens $tokens, int $index) : void
     {
         $next = $tokens->getNextMeaningfulToken($index);
         if ($tokens[$next]->equals('{')) {
@@ -96,7 +98,7 @@ final class NoUselessElseFixer extends AbstractNoUselessElseFixer
     /**
      * @param int $index index of T_ELSE
      */
-    private function clearElse(Tokens $tokens, $index)
+    private function clearElse(Tokens $tokens, int $index) : void
     {
         $tokens->clearTokenAndMergeSurroundingWhitespace($index);
         // clear T_ELSE and the '{' '}' if there are any

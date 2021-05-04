@@ -7,13 +7,12 @@ use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\LowerCaseConstantSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\UpperCaseConstantSniff;
 use PHP_CodeSniffer\Standards\PSR12\Sniffs\Files\FileHeaderSniff;
 use PhpCsFixer\Fixer\Casing\ConstantCaseFixer;
-use PhpCsFixer\Fixer\Casing\LowercaseConstantsFixer;
 use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\DeclareEqualNormalizeFixer;
 use PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer;
 use PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\EasyCodingStandard\Configuration\Exception\ConflictingCheckersLoadedException;
 final class ConflictingCheckersCompilerPass implements CompilerPassInterface
 {
@@ -22,7 +21,7 @@ final class ConflictingCheckersCompilerPass implements CompilerPassInterface
      *
      * @var string[][]
      */
-    private const CONFLICTING_CHECKER_GROUPS = [['SlevomatCodingStandard\\Sniffs\\ControlStructures\\DisallowYodaComparisonSniff', YodaStyleFixer::class], [LowerCaseConstantSniff::class, UpperCaseConstantSniff::class], [LowercaseConstantsFixer::class, UpperCaseConstantSniff::class], [ConstantCaseFixer::class, UpperCaseConstantSniff::class], ['SlevomatCodingStandard\\Sniffs\\TypeHints\\DeclareStrictTypesSniff', DeclareEqualNormalizeFixer::class], ['SlevomatCodingStandard\\Sniffs\\TypeHints\\DeclareStrictTypesSniff', BlankLineAfterOpeningTagFixer::class], [FileHeaderSniff::class, NoBlankLinesAfterPhpdocFixer::class]];
+    private const CONFLICTING_CHECKER_GROUPS = [['SlevomatCodingStandard\\Sniffs\\ControlStructures\\DisallowYodaComparisonSniff', YodaStyleFixer::class], [LowerCaseConstantSniff::class, UpperCaseConstantSniff::class], [ConstantCaseFixer::class, UpperCaseConstantSniff::class], ['SlevomatCodingStandard\\Sniffs\\TypeHints\\DeclareStrictTypesSniff', DeclareEqualNormalizeFixer::class], ['SlevomatCodingStandard\\Sniffs\\TypeHints\\DeclareStrictTypesSniff', BlankLineAfterOpeningTagFixer::class], [FileHeaderSniff::class, NoBlankLinesAfterPhpdocFixer::class]];
     public function process(ContainerBuilder $containerBuilder) : void
     {
         $checkers = $containerBuilder->getServiceIds();

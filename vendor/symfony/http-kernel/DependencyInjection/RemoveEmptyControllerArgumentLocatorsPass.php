@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * Removes empty service-locators registered for ServiceValueResolver.
  *

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,8 +13,9 @@
 namespace PhpCsFixer;
 
 use PhpCsFixer\Doctrine\Annotation\Tokens as DoctrineAnnotationTokens;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
@@ -22,7 +24,7 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 /**
  * @internal
  */
-abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer implements ConfigurationDefinitionFixerInterface
+abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer implements ConfigurableFixerInterface
 {
     /**
      * @var array
@@ -31,14 +33,14 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         // fetch indexes one time, this is safe as we never add or remove a token during fixing
         $analyzer = new TokensAnalyzer($tokens);
@@ -56,13 +58,13 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
     /**
      * Fixes Doctrine annotations from the given PHPDoc style comment.
      */
-    protected abstract function fixAnnotations(DoctrineAnnotationTokens $doctrineAnnotationTokens);
+    protected abstract function fixAnnotations(DoctrineAnnotationTokens $doctrineAnnotationTokens) : void;
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
-        return new FixerConfigurationResolver([(new FixerOptionBuilder('ignored_tags', 'List of tags that must not be treated as Doctrine Annotations.'))->setAllowedTypes(['array'])->setAllowedValues([static function ($values) {
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('ignored_tags', 'List of tags that must not be treated as Doctrine Annotations.'))->setAllowedTypes(['array'])->setAllowedValues([static function (array $values) {
             foreach ($values as $value) {
                 if (!\is_string($value)) {
                     return \false;
@@ -172,12 +174,7 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
             'override',
         ])->getOption()]);
     }
-    /**
-     * @param int $index
-     *
-     * @return bool
-     */
-    private function nextElementAcceptsDoctrineAnnotations(Tokens $tokens, $index)
+    private function nextElementAcceptsDoctrineAnnotations(Tokens $tokens, int $index) : bool
     {
         do {
             $index = $tokens->getNextMeaningfulToken($index);

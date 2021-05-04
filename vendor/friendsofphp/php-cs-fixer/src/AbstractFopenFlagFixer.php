@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -23,14 +24,14 @@ abstract class AbstractFopenFlagFixer extends \PhpCsFixer\AbstractFunctionRefere
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAllTokenKindsFound([\T_STRING, \T_CONSTANT_ENCAPSED_STRING]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $argumentsAnalyzer = new ArgumentsAnalyzer();
         $index = 0;
@@ -54,13 +55,8 @@ abstract class AbstractFopenFlagFixer extends \PhpCsFixer\AbstractFunctionRefere
             $this->fixFopenFlagToken($tokens, $argumentStartIndex, $arguments[$argumentStartIndex]);
         }
     }
-    protected abstract function fixFopenFlagToken(Tokens $tokens, $argumentStartIndex, $argumentEndIndex);
-    /**
-     * @param string $mode
-     *
-     * @return bool
-     */
-    protected function isValidModeString($mode)
+    protected abstract function fixFopenFlagToken(Tokens $tokens, int $argumentStartIndex, int $argumentEndIndex) : void;
+    protected function isValidModeString(string $mode) : bool
     {
         $modeLength = \strlen($mode);
         if ($modeLength < 1 || $modeLength > 13) {

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 /**
  * PhpFileLoader loads service definitions from a PHP file.
  *
@@ -19,7 +19,7 @@ use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\Configur
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class PhpFileLoader extends \_PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\FileLoader
+class PhpFileLoader extends \_PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader\FileLoader
 {
     protected $autoRegisterAliasesForSinglyImplementedInterfaces = \false;
     /**
@@ -36,7 +36,7 @@ class PhpFileLoader extends \_PhpScoper130a9a1cd4a2\Symfony\Component\Dependency
         // the closure forbids access to the private scope in the included file
         $load = \Closure::bind(function ($path) use($container, $loader, $resource, $type) {
             return include $path;
-        }, $this, \_PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\ProtectedPhpFileLoader::class);
+        }, $this, \_PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader\ProtectedPhpFileLoader::class);
         try {
             $callback = $load($path);
             if (\is_object($callback) && \is_callable($callback)) {
@@ -64,6 +64,6 @@ class PhpFileLoader extends \_PhpScoper130a9a1cd4a2\Symfony\Component\Dependency
 /**
  * @internal
  */
-final class ProtectedPhpFileLoader extends \_PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+final class ProtectedPhpFileLoader extends \_PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader\PhpFileLoader
 {
 }

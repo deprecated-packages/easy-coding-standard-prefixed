@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,22 +13,24 @@
 namespace PhpCsFixer\Fixer\ConstantNotation;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis;
 use PhpCsFixer\Tokenizer\Analyzer\NamespacesAnalyzer;
 use PhpCsFixer\Tokenizer\Analyzer\NamespaceUsesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class NativeConstantInvocationFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
+final class NativeConstantInvocationFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /**
      * @var array<string, true>
@@ -40,7 +43,7 @@ final class NativeConstantInvocationFixer extends AbstractFixer implements Confi
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Add leading `\\` before constant invocation of internal constant to speed up resolving. Constant name match is case-sensitive, except for `null`, `false` and `true`.', [new CodeSample("<?php var_dump(PHP_VERSION, M_PI, MY_CUSTOM_PI);\n"), new CodeSample('<?php
 namespace space1 {
@@ -56,28 +59,28 @@ namespace {
      *
      * Must run before GlobalNamespaceImportFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 10;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         $uniqueConfiguredExclude = \array_unique($this->configuration['exclude']);
@@ -101,7 +104,7 @@ namespace {
                 unset($constantsToEscape[$constantIndex]);
             }
         }
-        $caseInsensitiveConstantsToEscape = \array_diff(\array_unique($caseInsensitiveConstantsToEscape), \array_map(static function ($function) {
+        $caseInsensitiveConstantsToEscape = \array_diff(\array_unique($caseInsensitiveConstantsToEscape), \array_map(static function (string $function) {
             return \strtolower($function);
         }, $uniqueConfiguredExclude));
         // Store the cache
@@ -113,7 +116,7 @@ namespace {
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         if ('all' === $this->configuration['scope']) {
             $this->fixConstantInvocations($tokens, 0, \count($tokens) - 1);
@@ -132,9 +135,9 @@ namespace {
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
-        $constantChecker = static function ($value) {
+        $constantChecker = static function (array $value) {
             foreach ($value as $constantName) {
                 if (!\is_string($constantName) || '' === \trim($constantName) || \trim($constantName) !== $constantName) {
                     throw new InvalidOptionsException(\sprintf('Each element must be a non-empty, trimmed string, got "%s" instead.', \is_object($constantName) ? \get_class($constantName) : \gettype($constantName)));
@@ -142,13 +145,9 @@ namespace {
             }
             return \true;
         };
-        return new FixerConfigurationResolver([(new FixerOptionBuilder('fix_built_in', 'Whether to fix constants returned by `get_defined_constants`. User constants are not accounted in this list and must be specified in the include one.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption(), (new FixerOptionBuilder('include', 'List of additional constants to fix.'))->setAllowedTypes(['array'])->setAllowedValues([$constantChecker])->setDefault([])->getOption(), (new FixerOptionBuilder('exclude', 'List of constants to ignore.'))->setAllowedTypes(['array'])->setAllowedValues([$constantChecker])->setDefault(['null', 'false', 'true'])->getOption(), (new FixerOptionBuilder('scope', 'Only fix constant invocations that are made within a namespace or fix all.'))->setAllowedValues(['all', 'namespaced'])->setDefault('all')->getOption(), (new FixerOptionBuilder('strict', 'Whether leading `\\` of constant invocation not meant to have it should be removed.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('fix_built_in', 'Whether to fix constants returned by `get_defined_constants`. User constants are not accounted in this list and must be specified in the include one.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption(), (new FixerOptionBuilder('include', 'List of additional constants to fix.'))->setAllowedTypes(['array'])->setAllowedValues([$constantChecker])->setDefault([])->getOption(), (new FixerOptionBuilder('exclude', 'List of constants to ignore.'))->setAllowedTypes(['array'])->setAllowedValues([$constantChecker])->setDefault(['null', 'false', 'true'])->getOption(), (new FixerOptionBuilder('scope', 'Only fix constant invocations that are made within a namespace or fix all.'))->setAllowedValues(['all', 'namespaced'])->setDefault('all')->getOption(), (new FixerOptionBuilder('strict', 'Whether leading `\\` of constant invocation not meant to have it should be removed.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
-    /**
-     * @param int $startIndex
-     * @param int $endIndex
-     */
-    private function fixConstantInvocations(Tokens $tokens, $startIndex, $endIndex)
+    private function fixConstantInvocations(Tokens $tokens, int $startIndex, int $endIndex) : void
     {
         $useDeclarations = (new NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
         $useConstantDeclarations = [];

@@ -114,7 +114,7 @@ class PHP extends \PHP_CodeSniffer\Tokenizers\Tokenizer
                         if ($isWin === \true) {
                             echo '\\n';
                         } else {
-                            echo "\33[30;1m\\n\33[0m";
+                            echo "\x1b[30;1m\\n\x1b[0m";
                         }
                     }
                     if ($tokens[$stackPtr + 1][1] === "\n") {

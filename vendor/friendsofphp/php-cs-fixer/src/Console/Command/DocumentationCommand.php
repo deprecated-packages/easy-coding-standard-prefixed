@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,12 +15,12 @@ namespace PhpCsFixer\Console\Command;
 use PhpCsFixer\Documentation\DocumentationGenerator;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\RuleSet\RuleSets;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Command\Command;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Filesystem\Filesystem;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Finder\Finder;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Command\Command;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Finder\Finder;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Finder\SplFileInfo;
 /**
  * @internal
  */
@@ -30,16 +31,16 @@ final class DocumentationCommand extends Command
      * @var DocumentationGenerator
      */
     private $generator;
-    public function __construct($name = null)
+    public function __construct(?string $name = null)
     {
         parent::__construct($name);
         $this->generator = new DocumentationGenerator();
     }
-    protected function configure()
+    protected function configure() : void
     {
         $this->setAliases(['doc'])->setDescription('Dumps the documentation of the project into its /doc directory.');
     }
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $fixerFactory = new FixerFactory();
         $fixerFactory->registerBuiltInFixers();
@@ -49,7 +50,7 @@ final class DocumentationCommand extends Command
         $output->writeln('Docs updated.');
         return 0;
     }
-    private function generateFixersDocs(array $fixers)
+    private function generateFixersDocs(array $fixers) : void
     {
         $filesystem = new Filesystem();
         // Array of existing fixer docs.
@@ -70,7 +71,7 @@ final class DocumentationCommand extends Command
             throw new \RuntimeException("Failed updating file {$index}.");
         }
     }
-    private function generateRuleSetsDocs(array $fixers)
+    private function generateRuleSetsDocs(array $fixers) : void
     {
         $filesystem = new Filesystem();
         /** @var SplFileInfo $file */

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\HttpFoundation\Session\Flash;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation\Session\Flash;
 
 /**
  * FlashBag flash message container.
  *
  * @author Drak <drak@zikula.org>
  */
-class FlashBag implements \_PhpScoper130a9a1cd4a2\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
+class FlashBag implements \_PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
 {
     private $name = 'flashes';
     private $flashes = [];

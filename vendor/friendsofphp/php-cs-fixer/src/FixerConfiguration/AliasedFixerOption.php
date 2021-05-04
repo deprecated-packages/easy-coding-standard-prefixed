@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,36 +27,33 @@ final class AliasedFixerOption implements \PhpCsFixer\FixerConfiguration\FixerOp
      * @var string
      */
     private $alias;
-    public function __construct(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $fixerOption, $alias)
+    public function __construct(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $fixerOption, string $alias)
     {
         $this->fixerOption = $fixerOption;
         $this->alias = $alias;
     }
-    /**
-     * @return string
-     */
-    public function getAlias()
+    public function getAlias() : string
     {
         return $this->alias;
     }
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->fixerOption->getName();
     }
     /**
      * {@inheritdoc}
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->fixerOption->getDescription();
     }
     /**
      * {@inheritdoc}
      */
-    public function hasDefault()
+    public function hasDefault() : bool
     {
         return $this->fixerOption->hasDefault();
     }
@@ -69,21 +67,21 @@ final class AliasedFixerOption implements \PhpCsFixer\FixerConfiguration\FixerOp
     /**
      * {@inheritdoc}
      */
-    public function getAllowedTypes()
+    public function getAllowedTypes() : ?array
     {
         return $this->fixerOption->getAllowedTypes();
     }
     /**
      * {@inheritdoc}
      */
-    public function getAllowedValues()
+    public function getAllowedValues() : ?array
     {
         return $this->fixerOption->getAllowedValues();
     }
     /**
      * {@inheritdoc}
      */
-    public function getNormalizer()
+    public function getNormalizer() : ?\Closure
     {
         return $this->fixerOption->getNormalizer();
     }

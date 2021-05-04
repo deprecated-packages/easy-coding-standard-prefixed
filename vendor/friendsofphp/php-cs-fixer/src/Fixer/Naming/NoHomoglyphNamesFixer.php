@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\Naming;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -47,34 +49,34 @@ final class NoHomoglyphNamesFixer extends AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Replace accidental usage of homoglyphs (non ascii characters) in names.', [new CodeSample("<?php \$nаmе = 'wrong \"a\" character';\n")], null, 'Renames classes and cannot rename the files. You might have string references to renamed code (`$$name`).');
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_VARIABLE, \T_STRING]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind([\T_VARIABLE, \T_STRING])) {
                 continue;
             }
-            $replaced = Preg::replaceCallback('/[^[:ascii:]]/u', static function ($matches) {
+            $replaced = Preg::replaceCallback('/[^[:ascii:]]/u', static function (array $matches) {
                 return isset(self::$replacements[$matches[0]]) ? self::$replacements[$matches[0]] : $matches[0];
             }, $token->getContent(), -1, $count);
             if ($count) {

@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper130a9a1cd4a2\Psr\Cache\CacheItemInterface;
-use _PhpScoper130a9a1cd4a2\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\CacheItem;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Traits\ProxyTrait;
-use _PhpScoper130a9a1cd4a2\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoper6ffa0951a2e9\Psr\Cache\CacheItemInterface;
+use _PhpScoper6ffa0951a2e9\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\CacheItem;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScoper6ffa0951a2e9\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ProxyAdapter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
+class ProxyAdapter implements \_PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
 {
     use ContractsTrait;
     use ProxyTrait;
@@ -51,7 +51,7 @@ class ProxyAdapter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Ad
             // Detect wrapped values that encode for their expiry and creation duration
             // For compactness, these values are packed in the key of an array using
             // magic numbers in the form 9D-..-..-..-..-00-..-..-..-5F
-            if (\is_array($v) && 1 === \count($v) && 10 === \strlen($k = (string) \key($v)) && "" === $k[0] && "\0" === $k[5] && "_" === $k[9]) {
+            if (\is_array($v) && 1 === \count($v) && 10 === \strlen($k = (string) \key($v)) && "\x9d" === $k[0] && "\x00" === $k[5] && "_" === $k[9]) {
                 $item->value = $v[$k];
                 $v = \unpack('Ve/Nc', \substr($k, 1, -1));
                 $item->metadata[CacheItem::METADATA_EXPIRY] = $v['e'] + CacheItem::METADATA_EXPIRY_OFFSET;
@@ -68,15 +68,15 @@ class ProxyAdapter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Ad
              */
             static function (CacheItemInterface $innerItem, array $item) {
                 // Tags are stored separately, no need to account for them when considering this item's newly set metadata
-                if (isset(($metadata = $item["\0*\0newMetadata"])[CacheItem::METADATA_TAGS])) {
+                if (isset(($metadata = $item["\x00*\x00newMetadata"])[CacheItem::METADATA_TAGS])) {
                     unset($metadata[CacheItem::METADATA_TAGS]);
                 }
                 if ($metadata) {
                     // For compactness, expiry and creation duration are packed in the key of an array, using magic numbers as separators
-                    $item["\0*\0value"] = ["" . \pack('VN', (int) (0.1 + $metadata[self::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[self::METADATA_CTIME]) . "_" => $item["\0*\0value"]];
+                    $item["\x00*\x00value"] = ["\x9d" . \pack('VN', (int) (0.1 + $metadata[self::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[self::METADATA_CTIME]) . "_" => $item["\x00*\x00value"]];
                 }
-                $innerItem->set($item["\0*\0value"]);
-                $innerItem->expiresAt(null !== $item["\0*\0expiry"] ? \DateTime::createFromFormat('U.u', \sprintf('%.6F', 0 === $item["\0*\0expiry"] ? \PHP_INT_MAX : $item["\0*\0expiry"])) : null);
+                $innerItem->set($item["\x00*\x00value"]);
+                $innerItem->expiresAt(null !== $item["\x00*\x00expiry"] ? \DateTime::createFromFormat('U.u', \sprintf('%.6F', 0 === $item["\x00*\x00expiry"] ? \PHP_INT_MAX : $item["\x00*\x00expiry"])) : null);
             },
             null,
             CacheItem::class
@@ -134,7 +134,7 @@ class ProxyAdapter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Ad
      */
     public function clear(string $prefix = '')
     {
-        if ($this->pool instanceof \_PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($this->namespace . $prefix);
         }
         return $this->pool->clear();
@@ -195,18 +195,18 @@ class ProxyAdapter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Ad
             return \false;
         }
         $item = (array) $item;
-        if (null === $item["\0*\0expiry"] && 0 < $this->defaultLifetime) {
-            $item["\0*\0expiry"] = \microtime(\true) + $this->defaultLifetime;
+        if (null === $item["\x00*\x00expiry"] && 0 < $this->defaultLifetime) {
+            $item["\x00*\x00expiry"] = \microtime(\true) + $this->defaultLifetime;
         }
-        if ($item["\0*\0poolHash"] === $this->poolHash && $item["\0*\0innerItem"]) {
-            $innerItem = $item["\0*\0innerItem"];
-        } elseif ($this->pool instanceof \_PhpScoper130a9a1cd4a2\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($item["\x00*\x00poolHash"] === $this->poolHash && $item["\x00*\x00innerItem"]) {
+            $innerItem = $item["\x00*\x00innerItem"];
+        } elseif ($this->pool instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter\AdapterInterface) {
             // this is an optimization specific for AdapterInterface implementations
             // so we can save a round-trip to the backend by just creating a new item
             $f = $this->createCacheItem;
-            $innerItem = $f($this->namespace . $item["\0*\0key"], null);
+            $innerItem = $f($this->namespace . $item["\x00*\x00key"], null);
         } else {
-            $innerItem = $this->pool->getItem($this->namespace . $item["\0*\0key"]);
+            $innerItem = $this->pool->getItem($this->namespace . $item["\x00*\x00key"]);
         }
         ($this->setInnerItem)($innerItem, $item);
         return $this->pool->{$method}($innerItem);

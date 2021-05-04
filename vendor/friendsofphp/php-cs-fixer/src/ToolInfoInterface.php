@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -16,10 +17,10 @@ namespace PhpCsFixer;
  */
 interface ToolInfoInterface
 {
-    public function getComposerInstallationDetails();
-    public function getComposerVersion();
-    public function getVersion();
-    public function isInstalledAsPhar();
-    public function isInstalledByComposer();
-    public function getPharDownloadUri($version);
+    public function getComposerInstallationDetails() : array;
+    public function getComposerVersion() : string;
+    public function getVersion() : string;
+    public function isInstalledAsPhar() : bool;
+    public function isInstalledByComposer() : bool;
+    public function getPharDownloadUri(string $version) : string;
 }

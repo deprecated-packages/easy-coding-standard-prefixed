@@ -3,12 +3,12 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console;
 
-use _PhpScoper130a9a1cd4a2\Composer\XdebugHandler\XdebugHandler;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Command\Command;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper6ffa0951a2e9\Composer\XdebugHandler\XdebugHandler;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Command\Command;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Bootstrap\NoCheckersLoaderReporter;
 use Symplify\EasyCodingStandard\Configuration\Exception\NoCheckersLoadedException;
 use Symplify\EasyCodingStandard\Console\Command\CheckCommand;
@@ -40,7 +40,7 @@ final class EasyCodingStandardConsoleApplication extends AbstractSymplifyConsole
         // @fixes https://github.com/rectorphp/rector/issues/2205
         $isXdebugAllowed = $input->hasParameterOption('--xdebug');
         if (!$isXdebugAllowed && !\defined('PHPUNIT_COMPOSER_INSTALL')) {
-            $xdebugHandler = new XdebugHandler('ecs', '--ansi');
+            $xdebugHandler = new XdebugHandler('ecs');
             $xdebugHandler->check();
             unset($xdebugHandler);
         }

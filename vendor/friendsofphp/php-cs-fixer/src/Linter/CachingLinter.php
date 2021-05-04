@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -33,14 +34,14 @@ final class CachingLinter implements \PhpCsFixer\Linter\LinterInterface
     /**
      * {@inheritdoc}
      */
-    public function isAsync()
+    public function isAsync() : bool
     {
         return $this->sublinter->isAsync();
     }
     /**
      * {@inheritdoc}
      */
-    public function lintFile($path)
+    public function lintFile(string $path) : \PhpCsFixer\Linter\LintingResultInterface
     {
         $checksum = \crc32(\file_get_contents($path));
         if (!isset($this->cache[$checksum])) {
@@ -51,7 +52,7 @@ final class CachingLinter implements \PhpCsFixer\Linter\LinterInterface
     /**
      * {@inheritdoc}
      */
-    public function lintSource($source)
+    public function lintSource(string $source) : \PhpCsFixer\Linter\LintingResultInterface
     {
         $checksum = \crc32($source);
         if (!isset($this->cache[$checksum])) {

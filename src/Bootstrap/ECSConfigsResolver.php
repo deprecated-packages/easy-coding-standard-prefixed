@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Bootstrap;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Input\InputInterface;
 use Symplify\EasyCodingStandard\Set\ConstantReflectionSetFactory;
 use Symplify\EasyCodingStandard\Set\EasyCodingStandardSetProvider;
 use Symplify\SetConfigResolver\SetAwareConfigResolver;

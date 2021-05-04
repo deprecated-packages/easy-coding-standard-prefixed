@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,50 +13,54 @@
 namespace PhpCsFixer\Fixer\Operator;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException;
-use PhpCsFixer\Console\Command\HelpCommand;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
  */
-final class BinaryOperatorSpacesFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
+final class BinaryOperatorSpacesFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /**
      * @internal
      */
-    const SINGLE_SPACE = 'single_space';
+    public const SINGLE_SPACE = 'single_space';
     /**
      * @internal
      */
-    const NO_SPACE = 'no_space';
+    public const NO_SPACE = 'no_space';
     /**
      * @internal
      */
-    const ALIGN = 'align';
+    public const ALIGN = 'align';
     /**
      * @internal
      */
-    const ALIGN_SINGLE_SPACE = 'align_single_space';
+    public const ALIGN_SINGLE_SPACE = 'align_single_space';
     /**
      * @internal
      */
-    const ALIGN_SINGLE_SPACE_MINIMAL = 'align_single_space_minimal';
+    public const ALIGN_SINGLE_SPACE_MINIMAL = 'align_single_space_minimal';
     /**
      * @internal
      * @const Placeholder used as anchor for right alignment.
      */
-    const ALIGN_PLACEHOLDER = "\2 ALIGNABLE%d \3";
+    public const ALIGN_PLACEHOLDER = "\x02 ALIGNABLE%d \x03";
+    /**
+     * @var string[]
+     */
+    private const SUPPORTED_OPERATORS = ['=', '*', '/', '%', '<', '>', '|', '^', '+', '-', '&', '&=', '&&', '||', '.=', '/=', '=>', '==', '>=', '===', '!=', '<>', '!==', '<=', 'and', 'or', 'xor', '-=', '%=', '*=', '|=', '+=', '<<', '<<=', '>>', '>>=', '^=', '**', '**=', '<=>', '??', '??='];
     /**
      * Keep track of the deepest level ever achieved while
      * parsing the code. Used later to replace alignment
@@ -74,10 +79,6 @@ final class BinaryOperatorSpacesFixer extends AbstractFixer implements Configura
     private $currentLevel;
     private static $allowedValues = [self::ALIGN, self::ALIGN_SINGLE_SPACE, self::ALIGN_SINGLE_SPACE_MINIMAL, self::SINGLE_SPACE, self::NO_SPACE, null];
     /**
-     * @var string[]
-     */
-    private static $supportedOperators = ['=', '*', '/', '%', '<', '>', '|', '^', '+', '-', '&', '&=', '&&', '||', '.=', '/=', '=>', '==', '>=', '===', '!=', '<>', '!==', '<=', 'and', 'or', 'xor', '-=', '%=', '*=', '|=', '+=', '<<', '<<=', '>>', '>>=', '^=', '**', '**=', '<=>', '??', '??='];
-    /**
      * @var TokensAnalyzer
      */
     private $tokensAnalyzer;
@@ -92,18 +93,15 @@ final class BinaryOperatorSpacesFixer extends AbstractFixer implements Configura
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null)
+    public function configure(array $configuration) : void
     {
-        if (null !== $configuration && (\array_key_exists('align_equals', $configuration) || \array_key_exists('align_double_arrow', $configuration))) {
-            $configuration = $this->resolveOldConfig($configuration);
-        }
         parent::configure($configuration);
         $this->operators = $this->resolveOperatorsFromConfig();
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Binary operators should be surrounded by space as configured.', [new CodeSample("<?php\n\$a= 1  + \$b^ \$d !==  \$e or   \$f;\n"), new CodeSample('<?php
 $aa=  1;
@@ -150,21 +148,21 @@ $array = [
      *
      * Must run after ArrayIndentationFixer, ArraySyntaxFixer, ListSyntaxFixer, NoMultilineWhitespaceAroundDoubleArrowFixer, NoUnsetCastFixer, PowToExponentiationFixer, StandardizeNotEqualsFixer, StrictComparisonFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -32;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $this->tokensAnalyzer = new TokensAnalyzer($tokens);
         // last and first tokens cannot be an operator
@@ -193,30 +191,21 @@ $array = [
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
-        return new FixerConfigurationResolver([
-            (new FixerOptionBuilder('default', 'Default fix strategy.'))->setDefault(self::SINGLE_SPACE)->setAllowedValues(self::$allowedValues)->getOption(),
-            (new FixerOptionBuilder('operators', 'Dictionary of `binary operator` => `fix strategy` values that differ from the default strategy.'))->setAllowedTypes(['array'])->setAllowedValues([static function ($option) {
-                foreach ($option as $operator => $value) {
-                    if (!\in_array($operator, self::$supportedOperators, \true)) {
-                        throw new InvalidOptionsException(\sprintf('Unexpected "operators" key, expected any of "%s", got "%s".', \implode('", "', self::$supportedOperators), \is_object($operator) ? \get_class($operator) : \gettype($operator) . '#' . $operator));
-                    }
-                    if (!\in_array($value, self::$allowedValues, \true)) {
-                        throw new InvalidOptionsException(\sprintf('Unexpected value for operator "%s", expected any of "%s", got "%s".', $operator, \implode('", "', self::$allowedValues), \is_object($value) ? \get_class($value) : (null === $value ? 'null' : \gettype($value) . '#' . $value)));
-                    }
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('default', 'Default fix strategy.'))->setDefault(self::SINGLE_SPACE)->setAllowedValues(self::$allowedValues)->getOption(), (new FixerOptionBuilder('operators', 'Dictionary of `binary operator` => `fix strategy` values that differ from the default strategy.'))->setAllowedTypes(['array'])->setAllowedValues([static function (array $option) {
+            foreach ($option as $operator => $value) {
+                if (!\in_array($operator, self::SUPPORTED_OPERATORS, \true)) {
+                    throw new InvalidOptionsException(\sprintf('Unexpected "operators" key, expected any of "%s", got "%s".', \implode('", "', self::SUPPORTED_OPERATORS), \gettype($operator) . '#' . $operator));
                 }
-                return \true;
-            }])->setDefault([])->getOption(),
-            // add deprecated options as BC layer
-            (new FixerOptionBuilder('align_double_arrow', 'Whether to apply, remove or ignore double arrows alignment.'))->setDefault(\false)->setAllowedValues([\true, \false, null])->setDeprecationMessage('Use options `operators` and `default` instead.')->getOption(),
-            (new FixerOptionBuilder('align_equals', 'Whether to apply, remove or ignore equals alignment.'))->setDefault(\false)->setAllowedValues([\true, \false, null])->setDeprecationMessage('Use options `operators` and `default` instead.')->getOption(),
-        ]);
+                if (!\in_array($value, self::$allowedValues, \true)) {
+                    throw new InvalidOptionsException(\sprintf('Unexpected value for operator "%s", expected any of "%s", got "%s".', $operator, \implode('", "', self::$allowedValues), \is_object($value) ? \get_class($value) : (null === $value ? 'null' : \gettype($value) . '#' . $value)));
+                }
+            }
+            return \true;
+        }])->setDefault([])->getOption()]);
     }
-    /**
-     * @param int $index
-     */
-    private function fixWhiteSpaceAroundOperator(Tokens $tokens, $index)
+    private function fixWhiteSpaceAroundOperator(Tokens $tokens, int $index) : void
     {
         $tokenContent = \strtolower($tokens[$index]->getContent());
         if (!\array_key_exists($tokenContent, $this->operators)) {
@@ -245,10 +234,7 @@ $array = [
         }
         $tokens->insertAt($index + 1, new Token([\T_WHITESPACE, ' ']));
     }
-    /**
-     * @param int $index
-     */
-    private function fixWhiteSpaceAroundOperatorToSingleSpace(Tokens $tokens, $index)
+    private function fixWhiteSpaceAroundOperatorToSingleSpace(Tokens $tokens, int $index) : void
     {
         // fix white space after operator
         if ($tokens[$index + 1]->isWhitespace()) {
@@ -269,10 +255,7 @@ $array = [
             $tokens->insertAt($index, new Token([\T_WHITESPACE, ' ']));
         }
     }
-    /**
-     * @param int $index
-     */
-    private function fixWhiteSpaceAroundOperatorToNoSpace(Tokens $tokens, $index)
+    private function fixWhiteSpaceAroundOperatorToNoSpace(Tokens $tokens, int $index) : void
     {
         // fix white space after operator
         if ($tokens[$index + 1]->isWhitespace()) {
@@ -290,11 +273,9 @@ $array = [
         }
     }
     /**
-     * @param int $index
-     *
      * @return false|int index of T_DECLARE where the `=` belongs to or `false`
      */
-    private function isEqualPartOfDeclareStatement(Tokens $tokens, $index)
+    private function isEqualPartOfDeclareStatement(Tokens $tokens, int $index)
     {
         $prevMeaningfulIndex = $tokens->getPrevMeaningfulToken($index);
         if ($tokens[$prevMeaningfulIndex]->isGivenKind(\T_STRING)) {
@@ -311,11 +292,11 @@ $array = [
     /**
      * @return array<string, string>
      */
-    private function resolveOperatorsFromConfig()
+    private function resolveOperatorsFromConfig() : array
     {
         $operators = [];
         if (null !== $this->configuration['default']) {
-            foreach (self::$supportedOperators as $operator) {
+            foreach (self::SUPPORTED_OPERATORS as $operator) {
                 $operators[$operator] = $this->configuration['default'];
             }
         }
@@ -326,59 +307,17 @@ $array = [
                 $operators[$operator] = $value;
             }
         }
-        // @TODO: drop condition when PHP 7.0+ is required
-        if (!\defined('T_SPACESHIP')) {
-            unset($operators['<=>']);
-        }
-        // @TODO: drop condition when PHP 7.0+ is required
-        if (!\defined('T_COALESCE')) {
-            unset($operators['??']);
-        }
         // @TODO: drop condition when PHP 7.4+ is required
         if (!\defined('T_COALESCE_EQUAL')) {
             unset($operators['??=']);
         }
         return $operators;
     }
-    /**
-     * @return array
-     */
-    private function resolveOldConfig(array $configuration)
-    {
-        $newConfig = ['operators' => []];
-        foreach ($configuration as $name => $setting) {
-            if ('align_double_arrow' === $name) {
-                if (\true === $configuration[$name]) {
-                    $newConfig['operators']['=>'] = self::ALIGN;
-                } elseif (\false === $configuration[$name]) {
-                    $newConfig['operators']['=>'] = self::SINGLE_SPACE;
-                } elseif (null !== $configuration[$name]) {
-                    throw new InvalidFixerConfigurationException($this->getName(), \sprintf('Invalid configuration: The option "align_double_arrow" with value %s is invalid. Accepted values are: true, false, null.', $configuration[$name]));
-                }
-            } elseif ('align_equals' === $name) {
-                if (\true === $configuration[$name]) {
-                    $newConfig['operators']['='] = self::ALIGN;
-                } elseif (\false === $configuration[$name]) {
-                    $newConfig['operators']['='] = self::SINGLE_SPACE;
-                } elseif (null !== $configuration[$name]) {
-                    throw new InvalidFixerConfigurationException($this->getName(), \sprintf('Invalid configuration: The option "align_equals" with value %s is invalid. Accepted values are: true, false, null.', $configuration[$name]));
-                }
-            } else {
-                throw new InvalidFixerConfigurationException($this->getName(), 'Mixing old configuration with new configuration is not allowed.');
-            }
-        }
-        $message = \sprintf('Given configuration is deprecated and will be removed in 3.0. Use configuration %s as replacement for %s.', HelpCommand::toString($newConfig), HelpCommand::toString($configuration));
-        if (\getenv('PHP_CS_FIXER_FUTURE_MODE')) {
-            throw new InvalidFixerConfigurationException($this->getName(), "{$message} This check was performed as `PHP_CS_FIXER_FUTURE_MODE` env var is set.");
-        }
-        @\trigger_error($message, \E_USER_DEPRECATED);
-        return $newConfig;
-    }
     // Alignment logic related methods
     /**
      * @param array<string, string> $toAlign
      */
-    private function fixAlignment(Tokens $tokens, array $toAlign)
+    private function fixAlignment(Tokens $tokens, array $toAlign) : void
     {
         $this->deepestLevel = 0;
         $this->currentLevel = 0;
@@ -423,12 +362,7 @@ $array = [
             $tokens->setCode($this->replacePlaceholders($tokensClone, $alignStrategy));
         }
     }
-    /**
-     * @param int    $startAt
-     * @param int    $endAt
-     * @param string $tokenContent
-     */
-    private function injectAlignmentPlaceholders(Tokens $tokens, $startAt, $endAt, $tokenContent)
+    private function injectAlignmentPlaceholders(Tokens $tokens, int $startAt, int $endAt, string $tokenContent) : void
     {
         for ($index = $startAt; $index < $endAt; ++$index) {
             $token = $tokens[$index];
@@ -455,11 +389,7 @@ $array = [
             }
         }
     }
-    /**
-     * @param int $startAt
-     * @param int $endAt
-     */
-    private function injectAlignmentPlaceholdersForArrow(Tokens $tokens, $startAt, $endAt)
+    private function injectAlignmentPlaceholdersForArrow(Tokens $tokens, int $startAt, int $endAt) : void
     {
         for ($index = $startAt; $index < $endAt; ++$index) {
             $token = $tokens[$index];
@@ -518,11 +448,7 @@ $array = [
             }
         }
     }
-    /**
-     * @param int $from
-     * @param int $until
-     */
-    private function injectArrayAlignmentPlaceholders(Tokens $tokens, $from, $until)
+    private function injectArrayAlignmentPlaceholders(Tokens $tokens, int $from, int $until) : void
     {
         // Only inject placeholders for multi-line arrays
         if ($tokens->isPartialCodeMultiline($from, $until)) {
@@ -532,11 +458,7 @@ $array = [
             --$this->currentLevel;
         }
     }
-    /**
-     * @param int    $index
-     * @param string $alignStrategy
-     */
-    private function fixWhiteSpaceBeforeOperator(Tokens $tokens, $index, $alignStrategy)
+    private function fixWhiteSpaceBeforeOperator(Tokens $tokens, int $index, string $alignStrategy) : void
     {
         // fix white space after operator is not needed as BinaryOperatorSpacesFixer took care of this (if strategy is _not_ ALIGN)
         if (!$tokens[$index - 1]->isWhitespace()) {
@@ -553,12 +475,8 @@ $array = [
     }
     /**
      * Look for group of placeholders and provide vertical alignment.
-     *
-     * @param string $alignStrategy
-     *
-     * @return string
      */
-    private function replacePlaceholders(Tokens $tokens, $alignStrategy)
+    private function replacePlaceholders(Tokens $tokens, string $alignStrategy) : string
     {
         $tmpCode = $tokens->generateCode();
         for ($j = 0; $j <= $this->deepestLevel; ++$j) {

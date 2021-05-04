@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,7 +13,7 @@
 namespace PhpCsFixer\Console\Report\FixReport;
 
 use PhpCsFixer\Preg;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *
@@ -23,14 +24,14 @@ final class JunitReporter implements \PhpCsFixer\Console\Report\FixReport\Report
     /**
      * {@inheritdoc}
      */
-    public function getFormat()
+    public function getFormat() : string
     {
         return 'junit';
     }
     /**
      * {@inheritdoc}
      */
-    public function generate(\PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary)
+    public function generate(\PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary) : string
     {
         if (!\extension_loaded('dom')) {
             throw new \RuntimeException('Cannot generate report! `ext-dom` is not available!');
@@ -51,7 +52,7 @@ final class JunitReporter implements \PhpCsFixer\Console\Report\FixReport\Report
         $dom->formatOutput = \true;
         return $reportSummary->isDecoratedOutput() ? OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
     }
-    private function createSuccessTestCase(\DOMDocument $dom, \DOMElement $testsuite)
+    private function createSuccessTestCase(\DOMDocument $dom, \DOMElement $testsuite) : void
     {
         $testcase = $dom->createElement('testcase');
         $testcase->setAttribute('name', 'All OK');
@@ -62,7 +63,7 @@ final class JunitReporter implements \PhpCsFixer\Console\Report\FixReport\Report
         $testsuite->setAttribute('failures', '0');
         $testsuite->setAttribute('errors', '0');
     }
-    private function createFailedTestCases(\DOMDocument $dom, \DOMElement $testsuite, \PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary)
+    private function createFailedTestCases(\DOMDocument $dom, \DOMElement $testsuite, \PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary) : void
     {
         $assertionsCount = 0;
         foreach ($reportSummary->getChanged() as $file => $fixResult) {
@@ -75,13 +76,7 @@ final class JunitReporter implements \PhpCsFixer\Console\Report\FixReport\Report
         $testsuite->setAttribute('failures', (string) $assertionsCount);
         $testsuite->setAttribute('errors', '0');
     }
-    /**
-     * @param string $file
-     * @param bool   $shouldAddAppliedFixers
-     *
-     * @return \DOMElement
-     */
-    private function createFailedTestCase(\DOMDocument $dom, $file, array $fixResult, $shouldAddAppliedFixers)
+    private function createFailedTestCase(\DOMDocument $dom, string $file, array $fixResult, bool $shouldAddAppliedFixers) : \DOMElement
     {
         $appliedFixersCount = \count($fixResult['appliedFixers']);
         $testName = \str_replace('.', '_DOT_', Preg::replace('@\\.' . \pathinfo($file, \PATHINFO_EXTENSION) . '$@', '', $file));

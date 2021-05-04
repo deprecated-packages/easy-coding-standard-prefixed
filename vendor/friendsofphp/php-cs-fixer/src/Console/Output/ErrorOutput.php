@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,8 +15,8 @@ namespace PhpCsFixer\Console\Output;
 use PhpCsFixer\Differ\DiffConsoleFormatter;
 use PhpCsFixer\Error\Error;
 use PhpCsFixer\Linter\LintingException;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author SpacePossum
  *
@@ -37,10 +38,9 @@ final class ErrorOutput
         $this->isDecorated = $output->isDecorated();
     }
     /**
-     * @param string  $process
      * @param Error[] $errors
      */
-    public function listErrors($process, array $errors)
+    public function listErrors(string $process, array $errors) : void
     {
         $this->output->writeln(['', \sprintf('Files that were not fixed due to errors reported during %s:', $process)]);
         $showDetails = $this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERY_VERBOSE;
@@ -71,7 +71,7 @@ final class ErrorOutput
                 $this->output->writeln('');
                 $stackTrace = $e->getTrace();
                 foreach ($stackTrace as $trace) {
-                    if (isset($trace['class'], $trace['function']) && \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
+                    if (isset($trace['class'], $trace['function']) && \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
                         $this->output->writeln('      [ ... ]');
                         break;
                     }
@@ -89,7 +89,7 @@ final class ErrorOutput
             }
         }
     }
-    private function outputTrace(array $trace)
+    private function outputTrace(array $trace) : void
     {
         if (isset($trace['class'], $trace['type'], $trace['function'])) {
             $this->output->writeln(\sprintf('      <comment>%s</comment>%s<comment>%s()</comment>', $this->prepareOutput($trace['class']), $this->prepareOutput($trace['type']), $this->prepareOutput($trace['function'])));
@@ -100,12 +100,7 @@ final class ErrorOutput
             $this->output->writeln(\sprintf('        in <info>%s</info> at line <info>%d</info>', $this->prepareOutput($trace['file']), $trace['line']));
         }
     }
-    /**
-     * @param string $string
-     *
-     * @return string
-     */
-    private function prepareOutput($string)
+    private function prepareOutput(string $string) : string
     {
         return $this->isDecorated ? OutputFormatter::escape($string) : $string;
     }

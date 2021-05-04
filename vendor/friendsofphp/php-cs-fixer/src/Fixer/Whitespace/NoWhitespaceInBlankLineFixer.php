@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,6 +16,7 @@ use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -26,7 +28,7 @@ final class NoWhitespaceInBlankLineFixer extends AbstractFixer implements Whites
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Remove trailing whitespace at the end of blank lines.', [new CodeSample("<?php\n   \n\$a = 1;\n")]);
     }
@@ -35,21 +37,21 @@ final class NoWhitespaceInBlankLineFixer extends AbstractFixer implements Whites
      *
      * Must run after CombineConsecutiveIssetsFixer, CombineConsecutiveUnsetsFixer, FunctionToConstantFixer, NoEmptyCommentFixer, NoEmptyPhpdocFixer, NoEmptyStatementFixer, NoUselessElseFixer, NoUselessReturnFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -19;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         // skip first as it cannot be a white space token
         for ($i = 1, $count = \count($tokens); $i < $count; ++$i) {
@@ -58,10 +60,7 @@ final class NoWhitespaceInBlankLineFixer extends AbstractFixer implements Whites
             }
         }
     }
-    /**
-     * @param int $index
-     */
-    private function fixWhitespaceToken(Tokens $tokens, $index)
+    private function fixWhitespaceToken(Tokens $tokens, int $index) : void
     {
         $content = $tokens[$index]->getContent();
         $lines = Preg::split("/(\r\n|\n)/", $content);

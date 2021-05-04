@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,12 +13,13 @@
 namespace PhpCsFixer\Fixer\PhpUnit;
 
 use PhpCsFixer\Fixer\AbstractPhpUnitFixer;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
-use PhpCsFixer\FixerConfiguration\AllowedValueSubset;
-use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverRootless;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -25,7 +27,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  * @author SpacePossum
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpUnitDedicateAssertFixer extends AbstractPhpUnitFixer implements ConfigurationDefinitionFixerInterface
+final class PhpUnitDedicateAssertFixer extends AbstractPhpUnitFixer implements ConfigurableFixerInterface
 {
     private static $fixMap = ['array_key_exists' => ['assertArrayNotHasKey', 'assertArrayHasKey'], 'empty' => ['assertNotEmpty', 'assertEmpty'], 'file_exists' => ['assertFileNotExists', 'assertFileExists'], 'is_array' => \true, 'is_bool' => \true, 'is_callable' => \true, 'is_dir' => ['assertDirectoryNotExists', 'assertDirectoryExists'], 'is_double' => \true, 'is_float' => \true, 'is_infinite' => ['assertFinite', 'assertInfinite'], 'is_int' => \true, 'is_integer' => \true, 'is_long' => \true, 'is_nan' => [\false, 'assertNan'], 'is_null' => ['assertNotNull', 'assertNull'], 'is_numeric' => \true, 'is_object' => \true, 'is_readable' => ['assertNotIsReadable', 'assertIsReadable'], 'is_real' => \true, 'is_resource' => \true, 'is_scalar' => \true, 'is_string' => \true, 'is_writable' => ['assertNotIsWritable', 'assertIsWritable']];
     /**
@@ -35,13 +37,9 @@ final class PhpUnitDedicateAssertFixer extends AbstractPhpUnitFixer implements C
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
-        if (isset($this->configuration['functions'])) {
-            $this->functions = $this->configuration['functions'];
-            return;
-        }
         // assertions added in 3.0: assertArrayNotHasKey assertArrayHasKey assertFileNotExists assertFileExists assertNotNull, assertNull
         $this->functions = ['array_key_exists', 'file_exists', 'is_null'];
         if (\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::fulfills($this->configuration['target'], \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_3_5)) {
@@ -60,14 +58,14 @@ final class PhpUnitDedicateAssertFixer extends AbstractPhpUnitFixer implements C
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('PHPUnit assertions like `assertInternalType`, `assertFileExists`, should be used over `assertTrue`.', [new CodeSample('<?php
 final class MyTest extends \\PHPUnit_Framework_TestCase
@@ -96,14 +94,14 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
      * Must run before PhpUnitDedicateAssertInternalTypeFixer.
      * Must run after NoAliasFunctionsFixer, PhpUnitConstructFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -15;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyPhpUnitClassFix(Tokens $tokens, $startIndex, $endIndex)
+    protected function applyPhpUnitClassFix(Tokens $tokens, int $startIndex, int $endIndex) : void
     {
         foreach ($this->getPreviousAssertCall($tokens, $startIndex, $endIndex) as $assertCall) {
             // test and fix for assertTrue/False to dedicated asserts
@@ -120,13 +118,11 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
-        $values = ['array_key_exists', 'empty', 'file_exists', 'is_array', 'is_bool', 'is_callable', 'is_double', 'is_float', 'is_infinite', 'is_int', 'is_integer', 'is_long', 'is_nan', 'is_null', 'is_numeric', 'is_object', 'is_real', 'is_resource', 'is_scalar', 'is_string'];
-        \sort($values);
-        return new FixerConfigurationResolverRootless('functions', [(new FixerOptionBuilder('functions', 'List of assertions to fix (overrides `target`).'))->setAllowedTypes(['null', 'array'])->setAllowedValues([null, new AllowedValueSubset($values)])->setDefault(null)->setDeprecationMessage('Use option `target` instead.')->getOption(), (new FixerOptionBuilder('target', 'Target version of PHPUnit.'))->setAllowedTypes(['string'])->setAllowedValues([\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_3_0, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_3_5, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_0, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_6, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_NEWEST])->setDefault(\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_0)->getOption()], $this->getName());
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('target', 'Target version of PHPUnit.'))->setAllowedTypes(['string'])->setAllowedValues([\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_3_0, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_3_5, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_0, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_6, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_NEWEST])->setDefault(\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_NEWEST)->getOption()]);
     }
-    private function fixAssertTrueFalse(Tokens $tokens, array $assertCall)
+    private function fixAssertTrueFalse(Tokens $tokens, array $assertCall) : void
     {
         $testDefaultNamespaceTokenIndex = \false;
         $testIndex = $tokens->getNextMeaningfulToken($assertCall['openBraceIndex']);
@@ -175,7 +171,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             $tokens->clearTokenAndMergeSurroundingWhitespace($testDefaultNamespaceTokenIndex);
         }
     }
-    private function fixAssertSameEquals(Tokens $tokens, array $assertCall)
+    private function fixAssertSameEquals(Tokens $tokens, array $assertCall) : void
     {
         // @ $this->/self::assertEquals/Same([$nextIndex])
         $expectedIndex = $tokens->getNextMeaningfulToken($assertCall['openBraceIndex']);
@@ -219,11 +215,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
         $this->removeFunctionCall($tokens, $defaultNamespaceTokenIndex, $countCallIndex, $countCallOpenBraceIndex, $countCallCloseBraceIndex);
         $tokens[$assertCall['index']] = new Token([\T_STRING, \false === \strpos($assertCall['loweredName'], 'not', 6) ? 'assertCount' : 'assertNotCount']);
     }
-    /**
-     * @param int $startIndex
-     * @param int $endIndex
-     */
-    private function getPreviousAssertCall(Tokens $tokens, $startIndex, $endIndex)
+    private function getPreviousAssertCall(Tokens $tokens, int $startIndex, int $endIndex) : iterable
     {
         $functionsAnalyzer = new FunctionsAnalyzer();
         for ($index = $endIndex; $index > $startIndex; --$index) {
@@ -249,11 +241,8 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     }
     /**
      * @param false|int $callNSIndex
-     * @param int       $callIndex
-     * @param int       $openIndex
-     * @param int       $closeIndex
      */
-    private function removeFunctionCall(Tokens $tokens, $callNSIndex, $callIndex, $openIndex, $closeIndex)
+    private function removeFunctionCall(Tokens $tokens, $callNSIndex, int $callIndex, int $openIndex, int $closeIndex) : void
     {
         $tokens->clearTokenAndMergeSurroundingWhitespace($callIndex);
         if (\false !== $callNSIndex) {

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,11 +16,11 @@ use PhpCsFixer\Console\SelfUpdate\NewVersionCheckerInterface;
 use PhpCsFixer\PharCheckerInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\ToolInfoInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Command\Command;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Command\Command;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Igor Wiedler <igor@wiedler.ch>
  * @author Stephane PY <py.stephane1@gmail.com>
@@ -54,7 +55,7 @@ final class SelfUpdateCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this->setAliases(['selfupdate'])->setDefinition([new InputOption('--force', '-f', InputOption::VALUE_NONE, 'Force update to next major version if available.')])->setDescription('Update php-cs-fixer.phar to the latest stable version.')->setHelp(<<<'EOT'
 The <info>%command.name%</info> command replace your php-cs-fixer.phar by the
@@ -69,7 +70,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         if (OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity() && $output instanceof ConsoleOutputInterface) {
             $stdErr = $output->getErrorOutput();

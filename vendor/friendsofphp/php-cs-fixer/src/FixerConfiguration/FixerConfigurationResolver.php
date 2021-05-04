@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -11,8 +12,9 @@
  */
 namespace PhpCsFixer\FixerConfiguration;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\OptionsResolver\OptionsResolver;
+use PhpCsFixer\Utils;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\OptionsResolver;
 final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
 {
     /**
@@ -26,7 +28,7 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
     /**
      * @param iterable<FixerOptionInterface> $options
      */
-    public function __construct($options)
+    public function __construct(iterable $options)
     {
         foreach ($options as $option) {
             $this->addOption($option);
@@ -38,14 +40,14 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
     /**
      * {@inheritdoc}
      */
-    public function getOptions()
+    public function getOptions() : array
     {
         return $this->options;
     }
     /**
      * {@inheritdoc}
      */
-    public function resolve(array $options)
+    public function resolve(array $options) : array
     {
         $resolver = new OptionsResolver();
         foreach ($this->options as $option) {
@@ -56,7 +58,7 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
                     if (\array_key_exists($name, $options)) {
                         throw new InvalidOptionsException(\sprintf('Aliased option "%s"/"%s" is passed multiple times.', $name, $alias));
                     }
-                    @\trigger_error(\sprintf('Option "%s" is deprecated, use "%s" instead.', $alias, $name), \E_USER_DEPRECATED);
+                    Utils::triggerDeprecation(\sprintf('Option "%s" is deprecated, use "%s" instead.', $alias, $name));
                     $options[$name] = $options[$alias];
                     unset($options[$alias]);
                 }
@@ -93,7 +95,7 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
      *
      * @return $this
      */
-    private function addOption(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option)
+    private function addOption(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option) : self
     {
         $name = $option->getName();
         if (\in_array($name, $this->registeredNames, \true)) {

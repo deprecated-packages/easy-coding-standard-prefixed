@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Config\Definition\BooleanNode;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\BooleanNode;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
 /**
  * This class provides a fluent interface for defining a node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class BooleanNodeDefinition extends \_PhpScoper130a9a1cd4a2\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
+class BooleanNodeDefinition extends \_PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition
 {
     /**
      * {@inheritdoc}
      */
-    public function __construct(?string $name, \_PhpScoper130a9a1cd4a2\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
+    public function __construct(?string $name, \_PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         parent::__construct($name, $parent);
         $this->nullEquivalent = \true;

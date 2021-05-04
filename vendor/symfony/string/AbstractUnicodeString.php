@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\String;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\String;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\String\Exception\ExceptionInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\String\Exception\InvalidArgumentException;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\String\Exception\RuntimeException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\String\Exception\ExceptionInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\String\Exception\InvalidArgumentException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\String\Exception\RuntimeException;
 /**
  * Represents a string of abstract Unicode characters.
  *
@@ -24,14 +24,14 @@ use _PhpScoper130a9a1cd4a2\Symfony\Component\String\Exception\RuntimeException;
  *
  * @throws ExceptionInterface
  */
-abstract class AbstractUnicodeString extends \_PhpScoper130a9a1cd4a2\Symfony\Component\String\AbstractString
+abstract class AbstractUnicodeString extends \_PhpScoper6ffa0951a2e9\Symfony\Component\String\AbstractString
 {
     public const NFC = \Normalizer::NFC;
     public const NFD = \Normalizer::NFD;
     public const NFKC = \Normalizer::NFKC;
     public const NFKD = \Normalizer::NFKD;
     // all ASCII letters sorted by typical frequency of occurrence
-    private const ASCII = " eiasntrolud][cmp'\ng|hv.fb,:=-q10C2*yx)(L9AS/P\"EjMIk3>5T<D4}B{8FwR67UGN;JzV#HOW_&!K?XQ%Y\\\tZ+~^\$@`\0\1\2\3\4\5\6\7\10\v\f\r\16\17\20\21\22\23\24\25\26\27\30\31\32\33\34\35\36\37";
+    private const ASCII = " eiasntrolud][cmp'\ng|hv.fb,:=-q10C2*yx)(L9AS/P\"EjMIk3>5T<D4}B{8FwR67UGN;JzV#HOW_&!K?XQ%Y\\\tZ+~^\$@`\x00\x01\x02\x03\x04\x05\x06\x07\x08\v\f\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f";
     // the subset of folded case mappings that is not in lower case mappings
     private const FOLD_FROM = ['İ', 'µ', 'ſ', "ͅ", 'ς', 'ϐ', 'ϑ', 'ϕ', 'ϖ', 'ϰ', 'ϱ', 'ϵ', 'ẛ', "ι", 'ß', 'İ', 'ŉ', 'ǰ', 'ΐ', 'ΰ', 'և', 'ẖ', 'ẗ', 'ẘ', 'ẙ', 'ẚ', 'ẞ', 'ὐ', 'ὒ', 'ὔ', 'ὖ', 'ᾀ', 'ᾁ', 'ᾂ', 'ᾃ', 'ᾄ', 'ᾅ', 'ᾆ', 'ᾇ', 'ᾈ', 'ᾉ', 'ᾊ', 'ᾋ', 'ᾌ', 'ᾍ', 'ᾎ', 'ᾏ', 'ᾐ', 'ᾑ', 'ᾒ', 'ᾓ', 'ᾔ', 'ᾕ', 'ᾖ', 'ᾗ', 'ᾘ', 'ᾙ', 'ᾚ', 'ᾛ', 'ᾜ', 'ᾝ', 'ᾞ', 'ᾟ', 'ᾠ', 'ᾡ', 'ᾢ', 'ᾣ', 'ᾤ', 'ᾥ', 'ᾦ', 'ᾧ', 'ᾨ', 'ᾩ', 'ᾪ', 'ᾫ', 'ᾬ', 'ᾭ', 'ᾮ', 'ᾯ', 'ᾲ', 'ᾳ', 'ᾴ', 'ᾶ', 'ᾷ', 'ᾼ', 'ῂ', 'ῃ', 'ῄ', 'ῆ', 'ῇ', 'ῌ', 'ῒ', 'ΐ', 'ῖ', 'ῗ', 'ῢ', 'ΰ', 'ῤ', 'ῦ', 'ῧ', 'ῲ', 'ῳ', 'ῴ', 'ῶ', 'ῷ', 'ῼ', 'ﬀ', 'ﬁ', 'ﬂ', 'ﬃ', 'ﬄ', 'ﬅ', 'ﬆ', 'ﬓ', 'ﬔ', 'ﬕ', 'ﬖ', 'ﬗ'];
     private const FOLD_TO = ['i̇', 'μ', 's', 'ι', 'σ', 'β', 'θ', 'φ', 'π', 'κ', 'ρ', 'ε', 'ṡ', 'ι', 'ss', 'i̇', 'ʼn', 'ǰ', 'ΐ', 'ΰ', 'եւ', 'ẖ', 'ẗ', 'ẘ', 'ẙ', 'aʾ', 'ss', 'ὐ', 'ὒ', 'ὔ', 'ὖ', 'ἀι', 'ἁι', 'ἂι', 'ἃι', 'ἄι', 'ἅι', 'ἆι', 'ἇι', 'ἀι', 'ἁι', 'ἂι', 'ἃι', 'ἄι', 'ἅι', 'ἆι', 'ἇι', 'ἠι', 'ἡι', 'ἢι', 'ἣι', 'ἤι', 'ἥι', 'ἦι', 'ἧι', 'ἠι', 'ἡι', 'ἢι', 'ἣι', 'ἤι', 'ἥι', 'ἦι', 'ἧι', 'ὠι', 'ὡι', 'ὢι', 'ὣι', 'ὤι', 'ὥι', 'ὦι', 'ὧι', 'ὠι', 'ὡι', 'ὢι', 'ὣι', 'ὤι', 'ὥι', 'ὦι', 'ὧι', 'ὰι', 'αι', 'άι', 'ᾶ', 'ᾶι', 'αι', 'ὴι', 'ηι', 'ήι', 'ῆ', 'ῆι', 'ηι', 'ῒ', 'ΐ', 'ῖ', 'ῗ', 'ῢ', 'ΰ', 'ῤ', 'ῦ', 'ῧ', 'ὼι', 'ωι', 'ώι', 'ῶ', 'ῶι', 'ωι', 'ff', 'fi', 'fl', 'ffi', 'ffl', 'st', 'st', 'մն', 'մե', 'մի', 'վն', 'մխ'];
@@ -297,7 +297,7 @@ abstract class AbstractUnicodeString extends \_PhpScoper130a9a1cd4a2\Symfony\Com
     public function snake() : parent
     {
         $str = $this->camel()->title();
-        $str->string = \mb_strtolower(\preg_replace(['/(\\p{Lu}+)(\\p{Lu}\\p{Ll})/u', '/([\\p{Ll}0-9])(\\p{Lu})/u'], '_PhpScoper130a9a1cd4a2\\1_\\2', $str->string), 'UTF-8');
+        $str->string = \mb_strtolower(\preg_replace(['/(\\p{Lu}+)(\\p{Lu}\\p{Ll})/u', '/([\\p{Ll}0-9])(\\p{Lu})/u'], '_PhpScoper6ffa0951a2e9\\1_\\2', $str->string), 'UTF-8');
         return $str;
     }
     public function title(bool $allWords = \false) : parent
@@ -309,9 +309,9 @@ abstract class AbstractUnicodeString extends \_PhpScoper130a9a1cd4a2\Symfony\Com
         }, $str->string, $limit);
         return $str;
     }
-    public function trim(string $chars = " \t\n\r\0\v\f ﻿") : parent
+    public function trim(string $chars = " \t\n\r\x00\v\f ﻿") : parent
     {
-        if (" \t\n\r\0\v\f ﻿" !== $chars && !\preg_match('//u', $chars)) {
+        if (" \t\n\r\x00\v\f ﻿" !== $chars && !\preg_match('//u', $chars)) {
             throw new InvalidArgumentException('Invalid UTF-8 chars.');
         }
         $chars = \preg_quote($chars);
@@ -319,9 +319,9 @@ abstract class AbstractUnicodeString extends \_PhpScoper130a9a1cd4a2\Symfony\Com
         $str->string = \preg_replace("{^[{$chars}]++|[{$chars}]++\$}uD", '', $str->string);
         return $str;
     }
-    public function trimEnd(string $chars = " \t\n\r\0\v\f ﻿") : parent
+    public function trimEnd(string $chars = " \t\n\r\x00\v\f ﻿") : parent
     {
-        if (" \t\n\r\0\v\f ﻿" !== $chars && !\preg_match('//u', $chars)) {
+        if (" \t\n\r\x00\v\f ﻿" !== $chars && !\preg_match('//u', $chars)) {
             throw new InvalidArgumentException('Invalid UTF-8 chars.');
         }
         $chars = \preg_quote($chars);
@@ -329,9 +329,9 @@ abstract class AbstractUnicodeString extends \_PhpScoper130a9a1cd4a2\Symfony\Com
         $str->string = \preg_replace("{[{$chars}]++\$}uD", '', $str->string);
         return $str;
     }
-    public function trimStart(string $chars = " \t\n\r\0\v\f ﻿") : parent
+    public function trimStart(string $chars = " \t\n\r\x00\v\f ﻿") : parent
     {
-        if (" \t\n\r\0\v\f ﻿" !== $chars && !\preg_match('//u', $chars)) {
+        if (" \t\n\r\x00\v\f ﻿" !== $chars && !\preg_match('//u', $chars)) {
             throw new InvalidArgumentException('Invalid UTF-8 chars.');
         }
         $chars = \preg_quote($chars);
@@ -351,7 +351,7 @@ abstract class AbstractUnicodeString extends \_PhpScoper130a9a1cd4a2\Symfony\Com
     public function width(bool $ignoreAnsiDecoration = \true) : int
     {
         $width = 0;
-        $s = \str_replace(["\0", "\5", "\7"], '', $this->string);
+        $s = \str_replace(["\x00", "\x05", "\x07"], '', $this->string);
         if (\false !== \strpos($s, "\r")) {
             $s = \str_replace(["\r\n", "\r"], "\n", $s);
         }

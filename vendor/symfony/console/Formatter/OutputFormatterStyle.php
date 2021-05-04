@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Color;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Color;
 /**
  * Formatter style class for defining styles.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class OutputFormatterStyle implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+class OutputFormatterStyle implements \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
 {
     private $color;
     private $foreground;
@@ -87,7 +87,7 @@ class OutputFormatterStyle implements \_PhpScoper130a9a1cd4a2\Symfony\Component\
             $this->handlesHrefGracefully = 'JetBrains-JediTerm' !== \getenv('TERMINAL_EMULATOR') && (!\getenv('KONSOLE_VERSION') || (int) \getenv('KONSOLE_VERSION') > 201100);
         }
         if (null !== $this->href && $this->handlesHrefGracefully) {
-            $text = "\33]8;;{$this->href}\33\\{$text}\33]8;;\33\\";
+            $text = "\x1b]8;;{$this->href}\x1b\\{$text}\x1b]8;;\x1b\\";
         }
         return $this->color->apply($text);
     }

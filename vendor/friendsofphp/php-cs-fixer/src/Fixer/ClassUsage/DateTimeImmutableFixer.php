@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\ClassUsage;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -24,28 +26,28 @@ final class DateTimeImmutableFixer extends AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Class `DateTimeImmutable` should be used instead of `DateTime`.', [new CodeSample("<?php\nnew DateTime();\n")], null, 'Risky when the code relies on modifying `DateTime` objects or if any of the `date_create*` functions are overridden.');
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $isInNamespace = \false;
         $isImported = \false;
@@ -83,12 +85,7 @@ final class DateTimeImmutableFixer extends AbstractFixer
             }
         }
     }
-    /**
-     * @param int  $index
-     * @param bool $isInNamespace
-     * @param bool $isImported
-     */
-    private function fixClassUsage(Tokens $tokens, $index, $isInNamespace, $isImported)
+    private function fixClassUsage(Tokens $tokens, int $index, bool $isInNamespace, bool $isImported) : void
     {
         $nextIndex = $tokens->getNextMeaningfulToken($index);
         if ($tokens[$nextIndex]->isGivenKind(\T_DOUBLE_COLON)) {
@@ -120,11 +117,7 @@ final class DateTimeImmutableFixer extends AbstractFixer
             }
         }
     }
-    /**
-     * @param int    $index
-     * @param string $replacement
-     */
-    private function fixFunctionUsage(Tokens $tokens, $index, $replacement)
+    private function fixFunctionUsage(Tokens $tokens, int $index, string $replacement) : void
     {
         $prevIndex = $tokens->getPrevMeaningfulToken($index);
         if ($tokens[$prevIndex]->isGivenKind([\T_DOUBLE_COLON, \T_NEW]) || $tokens[$prevIndex]->isObjectOperator()) {

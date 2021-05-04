@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * Formatter class for console output.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class OutputFormatter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface
+class OutputFormatter implements \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\WrappableOutputFormatterInterface
 {
     private $decorated;
     private $styles = [];
@@ -49,8 +49,8 @@ class OutputFormatter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Conso
         if ('\\' === \substr($text, -1)) {
             $len = \strlen($text);
             $text = \rtrim($text, '\\');
-            $text = \str_replace("\0", '', $text);
-            $text .= \str_repeat("\0", $len - \strlen($text));
+            $text = \str_replace("\x00", '', $text);
+            $text .= \str_repeat("\x00", $len - \strlen($text));
         }
         return $text;
     }
@@ -62,14 +62,14 @@ class OutputFormatter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Conso
     public function __construct(bool $decorated = \false, array $styles = [])
     {
         $this->decorated = $decorated;
-        $this->setStyle('error', new \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterStyle('white', 'red'));
-        $this->setStyle('info', new \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterStyle('green'));
-        $this->setStyle('comment', new \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterStyle('yellow'));
-        $this->setStyle('question', new \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'cyan'));
+        $this->setStyle('error', new \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterStyle('white', 'red'));
+        $this->setStyle('info', new \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterStyle('green'));
+        $this->setStyle('comment', new \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterStyle('yellow'));
+        $this->setStyle('question', new \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterStyle('black', 'cyan'));
         foreach ($styles as $name => $style) {
             $this->setStyle($name, $style);
         }
-        $this->styleStack = new \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterStyleStack();
+        $this->styleStack = new \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterStyleStack();
     }
     /**
      * {@inheritdoc}
@@ -88,7 +88,7 @@ class OutputFormatter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Conso
     /**
      * {@inheritdoc}
      */
-    public function setStyle(string $name, \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
+    public function setStyle(string $name, \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
     {
         $this->styles[\strtolower($name)] = $style;
     }
@@ -153,8 +153,8 @@ class OutputFormatter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Conso
             }
         }
         $output .= $this->applyCurrentStyle(\substr($message, $offset), $output, $width, $currentLineLength);
-        if (\false !== \strpos($output, "\0")) {
-            return \strtr($output, ["\0" => '\\', '\\<' => '<']);
+        if (\false !== \strpos($output, "\x00")) {
+            return \strtr($output, ["\x00" => '\\', '\\<' => '<']);
         }
         return \str_replace('\\<', '<', $output);
     }
@@ -168,7 +168,7 @@ class OutputFormatter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Conso
     /**
      * Tries to create new style instance from string.
      */
-    private function createStyleFromString(string $string) : ?\_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+    private function createStyleFromString(string $string) : ?\_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
     {
         if (isset($this->styles[$string])) {
             return $this->styles[$string];
@@ -176,7 +176,7 @@ class OutputFormatter implements \_PhpScoper130a9a1cd4a2\Symfony\Component\Conso
         if (!\preg_match_all('/([^=]+)=([^;]+)(;|$)/', $string, $matches, \PREG_SET_ORDER)) {
             return null;
         }
-        $style = new \_PhpScoper130a9a1cd4a2\Symfony\Component\Console\Formatter\OutputFormatterStyle();
+        $style = new \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterStyle();
         foreach ($matches as $match) {
             \array_shift($match);
             $match[0] = \strtolower($match[0]);

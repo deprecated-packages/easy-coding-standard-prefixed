@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -23,15 +24,10 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class CommentsAnalyzer
 {
-    const TYPE_HASH = 1;
-    const TYPE_DOUBLE_SLASH = 2;
-    const TYPE_SLASH_ASTERISK = 3;
-    /**
-     * @param int $index
-     *
-     * @return bool
-     */
-    public function isHeaderComment(Tokens $tokens, $index)
+    private const TYPE_HASH = 1;
+    private const TYPE_DOUBLE_SLASH = 2;
+    private const TYPE_SLASH_ASTERISK = 3;
+    public function isHeaderComment(Tokens $tokens, int $index) : bool
     {
         if (!$tokens[$index]->isGivenKind([\T_COMMENT, \T_DOC_COMMENT])) {
             throw new \InvalidArgumentException('Given index must point to a comment.');
@@ -58,12 +54,8 @@ final class CommentsAnalyzer
      * Check if comment at given index precedes structural element.
      *
      * @see https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md#3-definitions
-     *
-     * @param int $index
-     *
-     * @return bool
      */
-    public function isBeforeStructuralElement(Tokens $tokens, $index)
+    public function isBeforeStructuralElement(Tokens $tokens, int $index) : bool
     {
         $token = $tokens[$index];
         if (!$token->isGivenKind([\T_COMMENT, \T_DOC_COMMENT])) {
@@ -102,10 +94,8 @@ final class CommentsAnalyzer
      * Return array of indices that are part of a comment started at given index.
      *
      * @param int $index T_COMMENT index
-     *
-     * @return null|array
      */
-    public function getCommentBlockIndices(Tokens $tokens, $index)
+    public function getCommentBlockIndices(Tokens $tokens, int $index) : ?array
     {
         if (!$tokens[$index]->isGivenKind(\T_COMMENT)) {
             throw new \InvalidArgumentException('Given index must point to a comment.');
@@ -133,10 +123,8 @@ final class CommentsAnalyzer
     }
     /**
      * @see https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc.md#3-definitions
-     *
-     * @return bool
      */
-    private function isStructuralElement(Token $token)
+    private function isStructuralElement(Token $token) : bool
     {
         static $skip = [\T_PRIVATE, \T_PROTECTED, \T_PUBLIC, \T_VAR, \T_FUNCTION, \T_ABSTRACT, \T_CONST, \T_NAMESPACE, \T_REQUIRE, \T_REQUIRE_ONCE, \T_INCLUDE, \T_INCLUDE_ONCE, \T_FINAL, \T_STATIC];
         return $token->isClassy() || $token->isGivenKind($skip);
@@ -146,10 +134,8 @@ final class CommentsAnalyzer
      *
      * @param Token $docsToken    docs Token
      * @param int   $controlIndex index of control structure Token
-     *
-     * @return bool
      */
-    private function isValidControl(Tokens $tokens, Token $docsToken, $controlIndex)
+    private function isValidControl(Tokens $tokens, Token $docsToken, int $controlIndex) : bool
     {
         static $controlStructures = [\T_FOR, \T_FOREACH, \T_IF, \T_SWITCH, \T_WHILE];
         if (!$tokens[$controlIndex]->isGivenKind($controlStructures)) {
@@ -171,10 +157,8 @@ final class CommentsAnalyzer
      *
      * @param Token $docsToken              docs Token
      * @param int   $languageConstructIndex index of variable Token
-     *
-     * @return bool
      */
-    private function isValidLanguageConstruct(Tokens $tokens, Token $docsToken, $languageConstructIndex)
+    private function isValidLanguageConstruct(Tokens $tokens, Token $docsToken, int $languageConstructIndex) : bool
     {
         static $languageStructures = [\T_LIST, \T_PRINT, \T_ECHO, CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN];
         if (!$tokens[$languageConstructIndex]->isGivenKind($languageStructures)) {
@@ -195,10 +179,8 @@ final class CommentsAnalyzer
      * Checks variable assignments for correct docblock usage.
      *
      * @param int $index index of variable Token
-     *
-     * @return bool
      */
-    private function isValidVariable(Tokens $tokens, $index)
+    private function isValidVariable(Tokens $tokens, int $index) : bool
     {
         if (!$tokens[$index]->isGivenKind(\T_VARIABLE)) {
             return \false;
@@ -206,12 +188,7 @@ final class CommentsAnalyzer
         $nextIndex = $tokens->getNextMeaningfulToken($index);
         return $tokens[$nextIndex]->equals('=');
     }
-    /**
-     * @param string $content
-     *
-     * @return int
-     */
-    private function getCommentType($content)
+    private function getCommentType(string $content) : int
     {
         if ('#' === $content[0]) {
             return self::TYPE_HASH;
@@ -221,13 +198,7 @@ final class CommentsAnalyzer
         }
         return self::TYPE_DOUBLE_SLASH;
     }
-    /**
-     * @param int $whiteStart
-     * @param int $whiteEnd
-     *
-     * @return int
-     */
-    private function getLineBreakCount(Tokens $tokens, $whiteStart, $whiteEnd)
+    private function getLineBreakCount(Tokens $tokens, int $whiteStart, int $whiteEnd) : int
     {
         $lineCount = 0;
         for ($i = $whiteStart; $i < $whiteEnd; ++$i) {

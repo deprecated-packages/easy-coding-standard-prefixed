@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,26 +15,27 @@ namespace PhpCsFixer\Fixer\ClassNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\ConfigurationException\InvalidFixerConfigurationException;
 use PhpCsFixer\DocBlock\DocBlock;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
-use PhpCsFixer\FixerConfiguration\AliasedFixerOptionBuilder;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\OptionsResolver\Options;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  * @author SpacePossum
  */
-final class FinalInternalClassFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
+final class FinalInternalClassFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         $intersect = \array_intersect_assoc($this->configuration['annotation_include'], $this->configuration['annotation_exclude']);
@@ -44,38 +46,38 @@ final class FinalInternalClassFixer extends AbstractFixer implements Configurati
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Internal classes should be `final`.', [new CodeSample("<?php\n/**\n * @internal\n */\nclass Sample\n{\n}\n"), new CodeSample("<?php\n/**\n * @CUSTOM\n */\nclass A{}\n\n/**\n * @CUSTOM\n * @not-fix\n */\nclass B{}\n", ['annotation_include' => ['@Custom'], 'annotation_exclude' => ['@not-fix']])], null, 'Changing classes to `final` might cause code execution to break.');
     }
     /**
      * {@inheritdoc}
      *
-     * Must run before FinalStaticAccessFixer, ProtectedToPrivateFixer, SelfStaticAccessorFixer.
+     * Must run before ProtectedToPrivateFixer, SelfStaticAccessorFixer.
      * Must run after PhpUnitInternalClassFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 67;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_CLASS);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; 0 <= $index; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_CLASS) || !$this->isClassCandidate($tokens, $index)) {
@@ -88,7 +90,7 @@ final class FinalInternalClassFixer extends AbstractFixer implements Configurati
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         $annotationsAsserts = [static function (array $values) {
             foreach ($values as $value) {
@@ -108,14 +110,12 @@ final class FinalInternalClassFixer extends AbstractFixer implements Configurati
             }
             return $newValue;
         };
-        return new FixerConfigurationResolver([(new AliasedFixerOptionBuilder(new FixerOptionBuilder('annotation_include', 'Class level annotations tags that must be set in order to fix the class. (case insensitive)'), 'annotation-white-list'))->setAllowedTypes(['array'])->setAllowedValues($annotationsAsserts)->setDefault(['@internal'])->setNormalizer($annotationsNormalizer)->getOption(), (new AliasedFixerOptionBuilder(new FixerOptionBuilder('annotation_exclude', 'Class level annotations tags that must be omitted to fix the class, even if all of the white list ones are used as well. (case insensitive)'), 'annotation-black-list'))->setAllowedTypes(['array'])->setAllowedValues($annotationsAsserts)->setDefault(['@final', '@Entity', '_PhpScoper130a9a1cd4a2\\@ORM\\Entity', '_PhpScoper130a9a1cd4a2\\@ORM\\Mapping\\Entity', '_PhpScoper130a9a1cd4a2\\@Mapping\\Entity', '@Document', '_PhpScoper130a9a1cd4a2\\@ODM\\Document'])->setNormalizer($annotationsNormalizer)->getOption(), (new AliasedFixerOptionBuilder(new FixerOptionBuilder('consider_absent_docblock_as_internal_class', 'Should classes without any DocBlock be fixed to final?'), 'consider-absent-docblock-as-internal-class'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('annotation_include', 'Class level annotations tags that must be set in order to fix the class. (case insensitive)'))->setAllowedTypes(['array'])->setAllowedValues($annotationsAsserts)->setDefault(['@internal'])->setNormalizer($annotationsNormalizer)->getOption(), (new FixerOptionBuilder('annotation_exclude', 'Class level annotations tags that must be omitted to fix the class, even if all of the white list ones are used as well. (case insensitive)'))->setAllowedTypes(['array'])->setAllowedValues($annotationsAsserts)->setDefault(['@final', '@Entity', '_PhpScoper6ffa0951a2e9\\@ORM\\Entity', '_PhpScoper6ffa0951a2e9\\@ORM\\Mapping\\Entity', '_PhpScoper6ffa0951a2e9\\@Mapping\\Entity', '@Document', '_PhpScoper6ffa0951a2e9\\@ODM\\Document'])->setNormalizer($annotationsNormalizer)->getOption(), (new FixerOptionBuilder('consider_absent_docblock_as_internal_class', 'Should classes without any DocBlock be fixed to final?'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
     }
     /**
      * @param int $index T_CLASS index
-     *
-     * @return bool
      */
-    private function isClassCandidate(Tokens $tokens, $index)
+    private function isClassCandidate(Tokens $tokens, int $index) : bool
     {
         if ($tokens[$tokens->getPrevMeaningfulToken($index)]->isGivenKind([\T_ABSTRACT, \T_FINAL, \T_NEW])) {
             return \false;

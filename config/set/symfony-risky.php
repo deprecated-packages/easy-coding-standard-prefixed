@@ -1,13 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper130a9a1cd4a2;
+namespace _PhpScoper6ffa0951a2e9;
 
 use PhpCsFixer\Fixer\Alias\EregToPregFixer;
 use PhpCsFixer\Fixer\Alias\NoAliasFunctionsFixer;
 use PhpCsFixer\Fixer\Alias\SetTypeToCastFixer;
 use PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer;
-use PhpCsFixer\Fixer\Basic\Psr4Fixer;
 use PhpCsFixer\Fixer\CastNotation\ModernizeTypesCastingFixer;
 use PhpCsFixer\Fixer\ClassNotation\NoUnneededFinalMethodFixer;
 use PhpCsFixer\Fixer\ClassNotation\SelfAccessorFixer;
@@ -23,7 +22,7 @@ use PhpCsFixer\Fixer\LanguageConstruct\IsNullFixer;
 use PhpCsFixer\Fixer\Naming\NoHomoglyphNamesFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitConstructFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMockShortWillReturnFixer;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(DirConstantFixer::class);
@@ -43,7 +42,6 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(NonPrintableCharacterFixer::class);
     $services->set(PhpUnitConstructFixer::class);
     $services->set(PhpUnitMockShortWillReturnFixer::class);
-    $services->set(Psr4Fixer::class);
     $services->set(SelfAccessorFixer::class);
     $services->set(SetTypeToCastFixer::class);
 };

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -15,6 +16,7 @@ use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -26,14 +28,14 @@ final class NoLeadingNamespaceWhitespaceFixer extends AbstractFixer implements W
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_NAMESPACE);
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('The namespace declaration line shouldn\'t contain leading whitespace.', [new CodeSample('<?php
  namespace Test8a;
@@ -43,7 +45,7 @@ final class NoLeadingNamespaceWhitespaceFixer extends AbstractFixer implements W
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = \count($tokens) - 1; 0 <= $index; --$index) {
             $token = $tokens[$index];
@@ -71,7 +73,7 @@ final class NoLeadingNamespaceWhitespaceFixer extends AbstractFixer implements W
             }
         }
     }
-    private static function endsWithWhitespace($str)
+    private static function endsWithWhitespace(string $str) : bool
     {
         if ('' === $str) {
             return \false;

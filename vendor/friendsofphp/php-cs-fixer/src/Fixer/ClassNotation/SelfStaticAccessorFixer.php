@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\ClassNotation;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Tokenizer\Token;
@@ -28,7 +30,7 @@ final class SelfStaticAccessorFixer extends AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Inside a `final` class or anonymous class `self` should be preferred to `static`.', [new CodeSample('<?php
 final class Sample
@@ -73,7 +75,7 @@ $a = new class() {
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_STATIC]) && $tokens->isAnyTokenKindsFound([\T_DOUBLE_COLON, \T_NEW, \T_INSTANCEOF]);
     }
@@ -82,14 +84,14 @@ $a = new class() {
      *
      * Must run after FinalInternalClassFixer, FunctionToConstantFixer, PhpUnitTestCaseStaticMethodCallsFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -10;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $this->tokensAnalyzer = $tokensAnalyzer = new TokensAnalyzer($tokens);
         $classIndex = $tokens->getNextTokenOfKind(0, [[\T_CLASS]]);
@@ -100,12 +102,7 @@ $a = new class() {
             $classIndex = $tokens->getNextTokenOfKind($classIndex, [[\T_CLASS]]);
         }
     }
-    /**
-     * @param int $index
-     *
-     * @return int
-     */
-    private function fixClass(Tokens $tokens, $index)
+    private function fixClass(Tokens $tokens, int $index) : int
     {
         $index = $tokens->getNextTokenOfKind($index, ['{']);
         $classOpenCount = 1;

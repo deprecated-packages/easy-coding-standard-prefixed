@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -16,7 +17,8 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
- * Transform `|` operator into CT::T_TYPE_ALTERNATION in `} catch (ExceptionType1 | ExceptionType2 $e) {`.
+ * Transform `|` operator into CT::T_TYPE_ALTERNATION in `function foo(Type1 | Type2 $x) {`
+ *                                                    or `} catch (ExceptionType1 | ExceptionType2 $e) {`.
  *
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -27,28 +29,28 @@ final class TypeAlternationTransformer extends AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getPriority()
+    public function getPriority() : int
     {
-        // needs to run after TypeColonTransformer
+        // needs to run after ArrayTypehintTransformer and TypeColonTransformer
         return -15;
     }
     /**
      * {@inheritdoc}
      */
-    public function getRequiredPhpVersionId()
+    public function getRequiredPhpVersionId() : int
     {
         return 70100;
     }
     /**
      * {@inheritdoc}
      */
-    public function process(Tokens $tokens, Token $token, $index)
+    public function process(Tokens $tokens, Token $token, int $index) : void
     {
         if (!$token->equals('|')) {
             return;
         }
         $prevIndex = $tokens->getPrevMeaningfulToken($index);
-        if (!$tokens[$prevIndex]->isGivenKind(\T_STRING)) {
+        if (!$tokens[$prevIndex]->isGivenKind([\T_STRING, CT::T_ARRAY_TYPEHINT])) {
             return;
         }
         do {
@@ -104,11 +106,11 @@ final class TypeAlternationTransformer extends AbstractTransformer
     /**
      * {@inheritdoc}
      */
-    public function getCustomTokens()
+    public function getCustomTokens() : array
     {
         return [CT::T_TYPE_ALTERNATION];
     }
-    private function replaceToken(Tokens $tokens, $index)
+    private function replaceToken(Tokens $tokens, int $index) : void
     {
         $tokens[$index] = new Token([CT::T_TYPE_ALTERNATION, '|']);
     }

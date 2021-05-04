@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -16,8 +17,8 @@ use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\RuleSet\RuleSetInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Finder\SplFileInfo;
 /**
  * Class provides a way to create a group of fixers.
  *
@@ -49,7 +50,7 @@ final class FixerFactory
     {
         $this->nameValidator = new \PhpCsFixer\FixerNameValidator();
     }
-    public function setWhitespacesConfig(\PhpCsFixer\WhitespacesFixerConfig $config)
+    public function setWhitespacesConfig(\PhpCsFixer\WhitespacesFixerConfig $config) : self
     {
         foreach ($this->fixers as $fixer) {
             if ($fixer instanceof WhitespacesAwareFixerInterface) {
@@ -61,7 +62,7 @@ final class FixerFactory
     /**
      * @return FixerInterface[]
      */
-    public function getFixers()
+    public function getFixers() : array
     {
         $this->fixers = \PhpCsFixer\Utils::sortFixers($this->fixers);
         return $this->fixers;
@@ -69,7 +70,7 @@ final class FixerFactory
     /**
      * @return $this
      */
-    public function registerBuiltInFixers()
+    public function registerBuiltInFixers() : self
     {
         static $builtInFixers = null;
         if (null === $builtInFixers) {
@@ -93,7 +94,7 @@ final class FixerFactory
      *
      * @return $this
      */
-    public function registerCustomFixers(array $fixers)
+    public function registerCustomFixers(iterable $fixers) : self
     {
         foreach ($fixers as $fixer) {
             $this->registerFixer($fixer, \true);
@@ -101,11 +102,9 @@ final class FixerFactory
         return $this;
     }
     /**
-     * @param bool $isCustom
-     *
      * @return $this
      */
-    public function registerFixer(FixerInterface $fixer, $isCustom)
+    public function registerFixer(FixerInterface $fixer, bool $isCustom) : self
     {
         $name = $fixer->getName();
         if (isset($this->fixersByName[$name])) {
@@ -123,7 +122,7 @@ final class FixerFactory
      *
      * @return $this
      */
-    public function useRuleSet(RuleSetInterface $ruleSet)
+    public function useRuleSet(RuleSetInterface $ruleSet) : self
     {
         $fixers = [];
         $fixersByName = [];
@@ -161,19 +160,15 @@ final class FixerFactory
     }
     /**
      * Check if fixer exists.
-     *
-     * @param string $name
-     *
-     * @return bool
      */
-    public function hasRule($name)
+    public function hasRule(string $name) : bool
     {
         return isset($this->fixersByName[$name]);
     }
     /**
      * @return null|string[]
      */
-    private function getFixersConflicts(FixerInterface $fixer)
+    private function getFixersConflicts(FixerInterface $fixer) : ?array
     {
         static $conflictMap = ['no_blank_lines_before_namespace' => ['single_blank_line_before_namespace'], 'single_import_per_statement' => ['group_import']];
         $fixerName = $fixer->getName();
@@ -181,16 +176,14 @@ final class FixerFactory
     }
     /**
      * @param array<string, string[]> $fixerConflicts
-     *
-     * @return string
      */
-    private function generateConflictMessage(array $fixerConflicts)
+    private function generateConflictMessage(array $fixerConflicts) : string
     {
         $message = 'Rule contains conflicting fixers:';
         $report = [];
         foreach ($fixerConflicts as $fixer => $fixers) {
             // filter mutual conflicts
-            $report[$fixer] = \array_filter($fixers, static function ($candidate) use($report, $fixer) {
+            $report[$fixer] = \array_filter($fixers, static function (string $candidate) use($report, $fixer) {
                 return !\array_key_exists($candidate, $report) || !\in_array($fixer, $report[$candidate], \true);
             });
             if (\count($report[$fixer]) > 0) {

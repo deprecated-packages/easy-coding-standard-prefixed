@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,10 +13,10 @@
 namespace PhpCsFixer\Runner;
 
 use PhpCsFixer\Cache\CacheManagerInterface;
-use PhpCsFixer\Event\Event;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Contracts\EventDispatcher\Event;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -35,7 +36,7 @@ final class FileFilterIterator extends \FilterIterator
      * @var array<string,bool>
      */
     private $visitedElements = [];
-    public function __construct(\Traversable $iterator, EventDispatcherInterface $eventDispatcher = null, CacheManagerInterface $cacheManager)
+    public function __construct(\Traversable $iterator, ?EventDispatcherInterface $eventDispatcher, CacheManagerInterface $cacheManager)
     {
         if (!$iterator instanceof \Iterator) {
             $iterator = new \IteratorIterator($iterator);
@@ -44,7 +45,7 @@ final class FileFilterIterator extends \FilterIterator
         $this->eventDispatcher = $eventDispatcher;
         $this->cacheManager = $cacheManager;
     }
-    public function accept()
+    public function accept() : bool
     {
         $file = $this->current();
         if (!$file instanceof \SplFileInfo) {
@@ -66,16 +67,13 @@ final class FileFilterIterator extends \FilterIterator
         }
         return \true;
     }
-    /**
-     * @param string $name
-     */
-    private function dispatchEvent($name, Event $event)
+    private function dispatchEvent(string $name, Event $event) : void
     {
         if (null === $this->eventDispatcher) {
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoper130a9a1cd4a2\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScoper6ffa0951a2e9\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

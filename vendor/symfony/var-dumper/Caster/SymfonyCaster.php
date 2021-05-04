@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * @final
  */
@@ -22,21 +22,21 @@ class SymfonyCaster
     {
         $clone = null;
         foreach (self::REQUEST_GETTERS as $prop => $getter) {
-            $key = \_PhpScoper130a9a1cd4a2\Symfony\Component\VarDumper\Caster\Caster::PREFIX_PROTECTED . $prop;
+            $key = \_PhpScoper6ffa0951a2e9\Symfony\Component\VarDumper\Caster\Caster::PREFIX_PROTECTED . $prop;
             if (\array_key_exists($key, $a) && null === $a[$key]) {
                 if (null === $clone) {
                     $clone = clone $request;
                 }
-                $a[\_PhpScoper130a9a1cd4a2\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $prop] = $clone->{$getter}();
+                $a[\_PhpScoper6ffa0951a2e9\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $prop] = $clone->{$getter}();
             }
         }
         return $a;
     }
     public static function castHttpClient($client, array $a, Stub $stub, bool $isNested)
     {
-        $multiKey = \sprintf("\0%s\0multi", \get_class($client));
+        $multiKey = \sprintf("\x00%s\x00multi", \get_class($client));
         if (isset($a[$multiKey])) {
-            $a[$multiKey] = new \_PhpScoper130a9a1cd4a2\Symfony\Component\VarDumper\Caster\CutStub($a[$multiKey]);
+            $a[$multiKey] = new \_PhpScoper6ffa0951a2e9\Symfony\Component\VarDumper\Caster\CutStub($a[$multiKey]);
         }
         return $a;
     }
@@ -45,7 +45,7 @@ class SymfonyCaster
         $stub->cut += \count($a);
         $a = [];
         foreach ($response->getInfo() as $k => $v) {
-            $a[\_PhpScoper130a9a1cd4a2\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k] = $v;
+            $a[\_PhpScoper6ffa0951a2e9\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k] = $v;
         }
         return $a;
     }

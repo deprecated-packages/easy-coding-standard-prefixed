@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Composer\XdebugHandler;
+namespace _PhpScoper6ffa0951a2e9\Composer\XdebugHandler;
 
-use _PhpScoper130a9a1cd4a2\Psr\Log\LoggerInterface;
+use _PhpScoper6ffa0951a2e9\Psr\Log\LoggerInterface;
 /**
  * @author John Stevenson <john-stevenson@blueyonder.co.uk>
  */
@@ -26,12 +26,13 @@ class XdebugHandler
     private static $inRestart;
     private static $name;
     private static $skipped;
+    private static $xdebugActive;
     private $cli;
-    private $colorOption;
     private $debug;
     private $envAllowXdebug;
     private $envOriginalInis;
     private $loaded;
+    private $mode;
     private $persistent;
     private $script;
     /** @var Status|null */
@@ -44,26 +45,30 @@ class XdebugHandler
      * would result in MYAPP_ALLOW_XDEBUG and MYAPP_ORIGINAL_INIS.
      *
      * @param string $envPrefix Value used in environment variables
-     * @param string $colorOption Command-line long option to force color output
-     * @throws \RuntimeException If a parameter is invalid
+     * @throws \RuntimeException If the parameter is invalid
      */
-    public function __construct($envPrefix, $colorOption = '')
+    public function __construct($envPrefix)
     {
-        if (!\is_string($envPrefix) || empty($envPrefix) || !\is_string($colorOption)) {
+        if (!\is_string($envPrefix) || empty($envPrefix)) {
             throw new \RuntimeException('Invalid constructor parameter');
         }
         self::$name = \strtoupper($envPrefix);
         $this->envAllowXdebug = self::$name . self::SUFFIX_ALLOW;
         $this->envOriginalInis = self::$name . self::SUFFIX_INIS;
-        $this->colorOption = $colorOption;
         if (\extension_loaded('xdebug')) {
-            $ext = new \ReflectionExtension('xdebug');
-            $this->loaded = $ext->getVersion() ?: 'unknown';
+            $this->loaded = \phpversion('xdebug') ?: 'unknown';
+            if (\false !== ($mode = \ini_get('xdebug.mode'))) {
+                $this->mode = \getenv('XDEBUG_MODE') ?: ($mode ?: 'off');
+                if (\preg_match('/^,+$/', \str_replace(' ', '', $this->mode))) {
+                    $this->mode = 'off';
+                }
+            }
         }
+        self::$xdebugActive = $this->loaded && $this->mode !== 'off';
         if ($this->cli = \PHP_SAPI === 'cli') {
             $this->debug = \getenv(self::DEBUG);
         }
-        $this->statusWriter = new \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status($this->envAllowXdebug, (bool) $this->debug);
+        $this->statusWriter = new \_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status($this->envAllowXdebug, (bool) $this->debug);
     }
     /**
      * Activates status message output to a PSR3 logger
@@ -108,11 +113,11 @@ class XdebugHandler
      */
     public function check()
     {
-        $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::CHECK, $this->loaded);
+        $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::CHECK, $this->loaded . '|' . $this->mode);
         $envArgs = \explode('|', (string) \getenv($this->envAllowXdebug));
-        if (empty($envArgs[0]) && $this->requiresRestart((bool) $this->loaded)) {
+        if (empty($envArgs[0]) && $this->requiresRestart(self::$xdebugActive)) {
             // Restart required
-            $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::RESTART);
+            $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::RESTART);
             if ($this->prepareRestart()) {
                 $command = $this->getCommand();
                 $this->restart($command);
@@ -121,8 +126,8 @@ class XdebugHandler
         }
         if (self::RESTART_ID === $envArgs[0] && \count($envArgs) === 5) {
             // Restarted, so unset environment variable and use saved values
-            $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::RESTARTED);
-            \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Process::setEnv($this->envAllowXdebug);
+            $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::RESTARTED);
+            \_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Process::setEnv($this->envAllowXdebug);
             self::$inRestart = \true;
             if (!$this->loaded) {
                 // Skipped version is only set if Xdebug is not loaded
@@ -133,7 +138,7 @@ class XdebugHandler
             $this->setEnvRestartSettings($envArgs);
             return;
         }
-        $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::NORESTART);
+        $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::NORESTART);
         if ($settings = self::getRestartSettings()) {
             // Called with existing settings, so sync our settings
             $this->syncSettings($settings);
@@ -187,20 +192,37 @@ class XdebugHandler
         return (string) self::$skipped;
     }
     /**
-     * Returns true if Xdebug is loaded, or as directed by an extending class
+     * Returns whether Xdebug is loaded and active
      *
-     * @param bool $isLoaded Whether Xdebug is loaded
+     * true: if Xdebug is loaded and is running in an active mode.
+     * false: if Xdebug is not loaded, or it is running with xdebug.mode=off.
      *
      * @return bool
      */
-    protected function requiresRestart($isLoaded)
+    public static function isXdebugActive()
     {
-        return $isLoaded;
+        return self::$xdebugActive;
+    }
+    /**
+     * Allows an extending class to decide if there should be a restart
+     *
+     * The default is to restart if Xdebug is loaded and its mode is not "off".
+     * Do not typehint for 1.x compatibility.
+     *
+     * @param bool $default The default behaviour
+     *
+     * @return bool Whether the process should restart
+     */
+    protected function requiresRestart($default)
+    {
+        return $default;
     }
     /**
      * Allows an extending class to access the tmpIni
      *
-     * @param string $command
+     * Do not typehint for 1.x compatibility
+     *
+     * @param array $command
      */
     protected function restart($command)
     {
@@ -209,33 +231,34 @@ class XdebugHandler
     /**
      * Executes the restarted command then deletes the tmp ini
      *
-     * @param string $command
+     * @param array $command
      */
-    private function doRestart($command)
+    private function doRestart(array $command)
     {
         $this->tryEnableSignals();
-        $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::RESTARTING, $command);
-        // Prefer proc_open to keep fds intact, because passthru pipes to stdout
-        if (\function_exists('proc_open')) {
-            if (\defined('PHP_WINDOWS_VERSION_BUILD') && \PHP_VERSION_ID < 80000) {
-                $command = '"' . $command . '"';
-            }
-            $process = \proc_open($command, array(), $pipes);
-            if (\is_resource($process)) {
-                $exitCode = \proc_close($process);
-            }
+        $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::RESTARTING, \implode(' ', $command));
+        if (\PHP_VERSION_ID >= 70400) {
+            $cmd = $command;
         } else {
-            \passthru($command, $exitCode);
+            $cmd = \_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Process::escapeShellCommand($command);
+            if (\defined('PHP_WINDOWS_VERSION_BUILD')) {
+                // Outer quotes required on cmd string below PHP 8
+                $cmd = '"' . $cmd . '"';
+            }
+        }
+        $process = \proc_open($cmd, array(), $pipes);
+        if (\is_resource($process)) {
+            $exitCode = \proc_close($process);
         }
         if (!isset($exitCode)) {
-            // Unlikely that the default shell cannot be invoked
-            $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::ERROR, 'Unable to restart process');
+            // Unlikely that php or the default shell cannot be invoked
+            $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::ERROR, 'Unable to restart process');
             $exitCode = -1;
         } else {
-            $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::INFO, 'Restarted process exited ' . $exitCode);
+            $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::INFO, 'Restarted process exited ' . $exitCode);
         }
         if ($this->debug === '2') {
-            $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::INFO, 'Temp ini saved: ' . $this->tmpIni);
+            $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::INFO, 'Temp ini saved: ' . $this->tmpIni);
         } else {
             @\unlink($this->tmpIni);
         }
@@ -273,7 +296,7 @@ class XdebugHandler
             $error = 'Unable to set environment variables';
         }
         if ($error) {
-            $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::ERROR, $error);
+            $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::ERROR, $error);
         }
         return empty($error);
     }
@@ -315,9 +338,9 @@ class XdebugHandler
         return @\file_put_contents($this->tmpIni, $content);
     }
     /**
-     * Returns the restart command line
+     * Returns the command line arguments for the restart
      *
-     * @return string
+     * @return array
      */
     private function getCommand()
     {
@@ -327,15 +350,7 @@ class XdebugHandler
             // Use command-line options
             \array_push($php, '-n', '-c', $this->tmpIni);
         }
-        if (\defined('STDOUT') && \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Process::supportsColor(\STDOUT)) {
-            $args = \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Process::addColorOption($args, $this->colorOption);
-        }
-        $args = \array_merge($php, array($this->script), $args);
-        $cmd = \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Process::escape(\array_shift($args), \true, \true);
-        foreach ($args as $arg) {
-            $cmd .= ' ' . \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Process::escape($arg);
-        }
-        return $cmd;
+        return \array_merge($php, array($this->script), $args);
     }
     /**
      * Returns true if the restart environment variables were set
@@ -428,7 +443,7 @@ class XdebugHandler
     private function setEnvRestartSettings($envArgs)
     {
         $settings = array(\php_ini_loaded_file(), $envArgs[2], $envArgs[3], $envArgs[4], \getenv($this->envOriginalInis), self::$skipped);
-        \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Process::setEnv(self::RESTART_SETTINGS, \implode('|', $settings));
+        \_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Process::setEnv(self::RESTART_SETTINGS, \implode('|', $settings));
     }
     /**
      * Syncs settings and the environment if called with existing settings
@@ -439,10 +454,10 @@ class XdebugHandler
     {
         if (\false === \getenv($this->envOriginalInis)) {
             // Called by another app, so make original inis available
-            \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Process::setEnv($this->envOriginalInis, \implode(\PATH_SEPARATOR, $settings['inis']));
+            \_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Process::setEnv($this->envOriginalInis, \implode(\PATH_SEPARATOR, $settings['inis']));
         }
         self::$skipped = $settings['skipped'];
-        $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::INFO, 'Process called with existing restart settings');
+        $this->notify(\_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Status::INFO, 'Process called with existing restart settings');
     }
     /**
      * Returns true if there are scanned inis and PHP is able to report them
@@ -464,8 +479,8 @@ class XdebugHandler
      */
     private function checkConfiguration(&$info)
     {
-        if (!\function_exists('proc_open') && !\function_exists('passthru')) {
-            $info = 'execution functions have been disabled (proc_open or passthru required)';
+        if (!\function_exists('proc_open')) {
+            $info = 'proc_open function is disabled';
             return \false;
         }
         if (\extension_loaded('uopz') && !\ini_get('uopz.disable')) {
@@ -492,13 +507,10 @@ class XdebugHandler
             if (!self::$inRestart) {
                 // Restarting, so ignore SIGINT in parent
                 \pcntl_signal(\SIGINT, \SIG_IGN);
-                $message .= ' (SIGINT = SIG_IGN)';
             } elseif (\is_int(\pcntl_signal_get_handler(\SIGINT))) {
                 // Restarted, no handler set so force default action
                 \pcntl_signal(\SIGINT, \SIG_DFL);
-                $message .= ' (SIGINT = SIG_DFL)';
             }
-            $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::INFO, $message);
         }
         if (!self::$inRestart && \function_exists('sapi_windows_set_ctrl_handler')) {
             // Restarting, so set a handler to ignore CTRL events in the parent.
@@ -506,7 +518,6 @@ class XdebugHandler
             // process without having to enable them there, which is unreliable.
             \sapi_windows_set_ctrl_handler(function ($evt) {
             });
-            $this->notify(\_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Status::INFO, 'CTRL signals suppressed');
         }
     }
 }

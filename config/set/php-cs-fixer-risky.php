@@ -1,13 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper130a9a1cd4a2;
+namespace _PhpScoper6ffa0951a2e9;
 
 use PhpCsFixer\Fixer\Alias\EregToPregFixer;
 use PhpCsFixer\Fixer\Alias\NoAliasFunctionsFixer;
 use PhpCsFixer\Fixer\Alias\SetTypeToCastFixer;
 use PhpCsFixer\Fixer\Basic\NonPrintableCharacterFixer;
-use PhpCsFixer\Fixer\Basic\Psr4Fixer;
 use PhpCsFixer\Fixer\CastNotation\ModernizeTypesCastingFixer;
 use PhpCsFixer\Fixer\ClassNotation\FinalInternalClassFixer;
 use PhpCsFixer\Fixer\ClassNotation\NoUnneededFinalMethodFixer;
@@ -35,7 +34,7 @@ use PhpCsFixer\Fixer\PhpUnit\PhpUnitTestCaseStaticMethodCallsFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use PhpCsFixer\Fixer\Strict\StrictParamFixer;
 use PhpCsFixer\Fixer\StringNotation\StringLineEndingFixer;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(CommentToPhpdocFixer::class);
@@ -64,7 +63,6 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(PhpUnitStrictFixer::class);
     $services->set(PhpUnitTestAnnotationFixer::class);
     $services->set(PhpUnitTestCaseStaticMethodCallsFixer::class);
-    $services->set(Psr4Fixer::class);
     $services->set(SelfAccessorFixer::class);
     $services->set(SetTypeToCastFixer::class);
     $services->set(StrictComparisonFixer::class);

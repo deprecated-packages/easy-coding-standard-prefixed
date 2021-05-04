@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoper130a9a1cd4a2\Symfony\Component\HttpFoundation\RedirectResponse;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation\RedirectResponse;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpKernel\Event\ControllerEvent;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class RouterDataCollector extends \_PhpScoper130a9a1cd4a2\Symfony\Component\HttpKernel\DataCollector\DataCollector
+class RouterDataCollector extends \_PhpScoper6ffa0951a2e9\Symfony\Component\HttpKernel\DataCollector\DataCollector
 {
     /**
      * @var \SplObjectStorage

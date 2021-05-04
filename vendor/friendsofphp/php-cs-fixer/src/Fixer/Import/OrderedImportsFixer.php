@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,13 +13,14 @@
 namespace PhpCsFixer\Fixer\Import;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
-use PhpCsFixer\FixerConfiguration\AliasedFixerOptionBuilder;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\FixerDefinition\VersionSpecification;
 use PhpCsFixer\FixerDefinition\VersionSpecificCodeSample;
 use PhpCsFixer\Preg;
@@ -26,7 +28,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Sebastiaan Stok <s.stok@rollerscapes.net>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -34,30 +36,48 @@ use _PhpScoper130a9a1cd4a2\Symfony\Component\OptionsResolver\Exception\InvalidOp
  * @author Darius Matulionis <darius@matulionis.lt>
  * @author Adriano Pilger <adriano.pilger@gmail.com>
  */
-final class OrderedImportsFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface, WhitespacesAwareFixerInterface
+final class OrderedImportsFixer extends AbstractFixer implements ConfigurableFixerInterface, WhitespacesAwareFixerInterface
 {
-    const IMPORT_TYPE_CLASS = 'class';
-    const IMPORT_TYPE_CONST = 'const';
-    const IMPORT_TYPE_FUNCTION = 'function';
-    const SORT_ALPHA = 'alpha';
-    const SORT_LENGTH = 'length';
-    const SORT_NONE = 'none';
+    /**
+     * @internal
+     */
+    public const IMPORT_TYPE_CLASS = 'class';
+    /**
+     * @internal
+     */
+    public const IMPORT_TYPE_CONST = 'const';
+    /**
+     * @internal
+     */
+    public const IMPORT_TYPE_FUNCTION = 'function';
+    /**
+     * @internal
+     */
+    public const SORT_ALPHA = 'alpha';
+    /**
+     * @internal
+     */
+    public const SORT_LENGTH = 'length';
+    /**
+     * @internal
+     */
+    public const SORT_NONE = 'none';
     /**
      * Array of supported sort types in configuration.
      *
      * @var string[]
      */
-    private $supportedSortTypes = [self::IMPORT_TYPE_CLASS, self::IMPORT_TYPE_CONST, self::IMPORT_TYPE_FUNCTION];
+    private const SUPPORTED_SORT_TYPES = [self::IMPORT_TYPE_CLASS, self::IMPORT_TYPE_CONST, self::IMPORT_TYPE_FUNCTION];
     /**
      * Array of supported sort algorithms in configuration.
      *
      * @var string[]
      */
-    private $supportedSortAlgorithms = [self::SORT_ALPHA, self::SORT_LENGTH, self::SORT_NONE];
+    private const SUPPORTED_SORT_ALGORITHMS = [self::SORT_ALPHA, self::SORT_LENGTH, self::SORT_NONE];
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Ordering `use` statements.', [new CodeSample("<?php\nuse Z; use A;\n"), new CodeSample('<?php
 use Acme\\Bar;
@@ -101,21 +121,21 @@ use Bar;
      *
      * Must run after GlobalNamespaceImportFixer, NoLeadingImportSlashFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -30;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         $namespacesImports = $tokensAnalyzer->getImportUseIndexes(\true);
@@ -157,10 +177,10 @@ use Bar;
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
-        $supportedSortTypes = $this->supportedSortTypes;
-        return new FixerConfigurationResolver([(new AliasedFixerOptionBuilder(new FixerOptionBuilder('sort_algorithm', 'whether the statements should be sorted alphabetically or by length, or not sorted'), 'sortAlgorithm'))->setAllowedValues($this->supportedSortAlgorithms)->setDefault(self::SORT_ALPHA)->getOption(), (new AliasedFixerOptionBuilder(new FixerOptionBuilder('imports_order', 'Defines the order of import types.'), 'importsOrder'))->setAllowedTypes(['array', 'null'])->setAllowedValues([static function ($value) use($supportedSortTypes) {
+        $supportedSortTypes = self::SUPPORTED_SORT_TYPES;
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('sort_algorithm', 'whether the statements should be sorted alphabetically or by length, or not sorted'))->setAllowedValues(self::SUPPORTED_SORT_ALGORITHMS)->setDefault(self::SORT_ALPHA)->getOption(), (new FixerOptionBuilder('imports_order', 'Defines the order of import types.'))->setAllowedTypes(['array', 'null'])->setAllowedValues([static function (?array $value) use($supportedSortTypes) {
             if (null !== $value) {
                 $missing = \array_diff($supportedSortTypes, $value);
                 if (\count($missing)) {
@@ -180,11 +200,9 @@ use Bar;
      * @param array<string, bool|int|string> $first
      * @param array<string, bool|int|string> $second
      *
-     * @return int
-     *
      * @internal
      */
-    private function sortAlphabetically(array $first, array $second)
+    private function sortAlphabetically(array $first, array $second) : int
     {
         // Replace backslashes by spaces before sorting for correct sort order
         $firstNamespace = \str_replace('\\', ' ', $this->prepareNamespace($first['namespace']));
@@ -197,11 +215,9 @@ use Bar;
      * @param array<string, bool|int|string> $first
      * @param array<string, bool|int|string> $second
      *
-     * @return int
-     *
      * @internal
      */
-    private function sortByLength(array $first, array $second)
+    private function sortByLength(array $first, array $second) : int
     {
         $firstNamespace = (self::IMPORT_TYPE_CLASS === $first['importType'] ? '' : $first['importType'] . ' ') . $this->prepareNamespace($first['namespace']);
         $secondNamespace = (self::IMPORT_TYPE_CLASS === $second['importType'] ? '' : $second['importType'] . ' ') . $this->prepareNamespace($second['namespace']);
@@ -214,21 +230,14 @@ use Bar;
         }
         return $sortResult;
     }
-    /**
-     * @param string $namespace
-     *
-     * @return string
-     */
-    private function prepareNamespace($namespace)
+    private function prepareNamespace(string $namespace) : string
     {
         return \trim(Preg::replace('%/\\*(.*)\\*/%s', '', $namespace));
     }
     /**
      * @param int[] $uses
-     *
-     * @return array
      */
-    private function getNewOrder(array $uses, Tokens $tokens)
+    private function getNewOrder(array $uses, Tokens $tokens) : array
     {
         $indexes = [];
         $originalIndexes = [];
@@ -363,10 +372,8 @@ use Bar;
     }
     /**
      * @param array[] $indexes
-     *
-     * @return array
      */
-    private function sortByAlgorithm(array $indexes)
+    private function sortByAlgorithm(array $indexes) : array
     {
         if (self::SORT_ALPHA === $this->configuration['sort_algorithm']) {
             \uasort($indexes, [$this, 'sortAlphabetically']);

@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper130a9a1cd4a2;
+namespace _PhpScoper6ffa0951a2e9;
 
 use PhpCsFixer\Fixer\Basic\BracesFixer;
 use PhpCsFixer\Fixer\Basic\EncodingFixer;
@@ -28,7 +28,7 @@ use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(EncodingFixer::class);
@@ -42,7 +42,7 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(IndentationTypeFixer::class);
     $services->set(LineEndingFixer::class);
     $services->set(LowercaseKeywordsFixer::class);
-    $services->set(MethodArgumentSpaceFixer::class)->call('configure', [['ensure_fully_multiline' => \true]]);
+    $services->set(MethodArgumentSpaceFixer::class)->call('configure', [['on_multiline' => 'ensure_fully_multiline']]);
     $services->set(NoBreakCommentFixer::class);
     $services->set(NoClosingTagFixer::class);
     $services->set(NoSpacesAfterFunctionNameFixer::class);

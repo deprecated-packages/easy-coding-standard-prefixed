@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,18 +13,20 @@
 namespace PhpCsFixer\Fixer\PhpUnit;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
-final class PhpUnitNamespacedFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
+final class PhpUnitNamespacedFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /**
      * @var string
@@ -43,7 +46,7 @@ final class PhpUnitNamespacedFixer extends AbstractFixer implements Configuratio
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         $codeSample = '<?php
 final class MyTest extends \\PHPUnit_Framework_TestCase
@@ -59,27 +62,27 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         if (\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::fulfills($this->configuration['target'], \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_6_0)) {
             $this->originalClassRegEx = '/^PHPUnit_\\w+$/i';
             // @noinspection ClassConstantCanBeUsedInspection
-            $this->classMap = ['PHPUnit_Extensions_PhptTestCase' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Runner\\PhptTestCase', 'PHPUnit_Framework_Constraint' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Constraint\\Constraint', 'PHPUnit_Framework_Constraint_StringMatches' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Constraint\\StringMatchesFormatDescription', 'PHPUnit_Framework_Constraint_JsonMatches_ErrorMessageProvider' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Constraint\\JsonMatchesErrorMessageProvider', 'PHPUnit_Framework_Constraint_PCREMatch' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Constraint\\RegularExpression', 'PHPUnit_Framework_Constraint_ExceptionMessageRegExp' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Constraint\\ExceptionMessageRegularExpression', 'PHPUnit_Framework_Constraint_And' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Constraint\\LogicalAnd', 'PHPUnit_Framework_Constraint_Or' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Constraint\\LogicalOr', 'PHPUnit_Framework_Constraint_Not' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Constraint\\LogicalNot', 'PHPUnit_Framework_Constraint_Xor' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Constraint\\LogicalXor', 'PHPUnit_Framework_Error' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\Error\\Error', 'PHPUnit_Framework_TestSuite_DataProvider' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\DataProviderTestSuite', 'PHPUnit_Framework_MockObject_Invocation_Static' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\MockObject\\Invocation\\StaticInvocation', 'PHPUnit_Framework_MockObject_Invocation_Object' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\MockObject\\Invocation\\ObjectInvocation', 'PHPUnit_Framework_MockObject_Stub_Return' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\MockObject\\Stub\\ReturnStub', 'PHPUnit_Runner_Filter_Group_Exclude' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Runner\\Filter\\ExcludeGroupFilterIterator', 'PHPUnit_Runner_Filter_Group_Include' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Runner\\Filter\\IncludeGroupFilterIterator', 'PHPUnit_Runner_Filter_Test' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Runner\\Filter\\NameFilterIterator', 'PHPUnit_Util_PHP' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Util\\PHP\\AbstractPhpProcess', 'PHPUnit_Util_PHP_Default' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Util\\PHP\\DefaultPhpProcess', 'PHPUnit_Util_PHP_Windows' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Util\\PHP\\WindowsPhpProcess', 'PHPUnit_Util_Regex' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Util\\RegularExpression', 'PHPUnit_Util_TestDox_ResultPrinter_XML' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Util\\TestDox\\XmlResultPrinter', 'PHPUnit_Util_TestDox_ResultPrinter_HTML' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Util\\TestDox\\HtmlResultPrinter', 'PHPUnit_Util_TestDox_ResultPrinter_Text' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Util\\TestDox\\TextResultPrinter', 'PHPUnit_Util_TestSuiteIterator' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Framework\\TestSuiteIterator', 'PHPUnit_Util_XML' => '_PhpScoper130a9a1cd4a2\\PHPUnit\\Util\\Xml'];
+            $this->classMap = ['PHPUnit_Extensions_PhptTestCase' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Runner\\PhptTestCase', 'PHPUnit_Framework_Constraint' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Constraint\\Constraint', 'PHPUnit_Framework_Constraint_StringMatches' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Constraint\\StringMatchesFormatDescription', 'PHPUnit_Framework_Constraint_JsonMatches_ErrorMessageProvider' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Constraint\\JsonMatchesErrorMessageProvider', 'PHPUnit_Framework_Constraint_PCREMatch' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Constraint\\RegularExpression', 'PHPUnit_Framework_Constraint_ExceptionMessageRegExp' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Constraint\\ExceptionMessageRegularExpression', 'PHPUnit_Framework_Constraint_And' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Constraint\\LogicalAnd', 'PHPUnit_Framework_Constraint_Or' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Constraint\\LogicalOr', 'PHPUnit_Framework_Constraint_Not' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Constraint\\LogicalNot', 'PHPUnit_Framework_Constraint_Xor' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Constraint\\LogicalXor', 'PHPUnit_Framework_Error' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\Error\\Error', 'PHPUnit_Framework_TestSuite_DataProvider' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\DataProviderTestSuite', 'PHPUnit_Framework_MockObject_Invocation_Static' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\MockObject\\Invocation\\StaticInvocation', 'PHPUnit_Framework_MockObject_Invocation_Object' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\MockObject\\Invocation\\ObjectInvocation', 'PHPUnit_Framework_MockObject_Stub_Return' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\MockObject\\Stub\\ReturnStub', 'PHPUnit_Runner_Filter_Group_Exclude' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Runner\\Filter\\ExcludeGroupFilterIterator', 'PHPUnit_Runner_Filter_Group_Include' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Runner\\Filter\\IncludeGroupFilterIterator', 'PHPUnit_Runner_Filter_Test' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Runner\\Filter\\NameFilterIterator', 'PHPUnit_Util_PHP' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Util\\PHP\\AbstractPhpProcess', 'PHPUnit_Util_PHP_Default' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Util\\PHP\\DefaultPhpProcess', 'PHPUnit_Util_PHP_Windows' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Util\\PHP\\WindowsPhpProcess', 'PHPUnit_Util_Regex' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Util\\RegularExpression', 'PHPUnit_Util_TestDox_ResultPrinter_XML' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Util\\TestDox\\XmlResultPrinter', 'PHPUnit_Util_TestDox_ResultPrinter_HTML' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Util\\TestDox\\HtmlResultPrinter', 'PHPUnit_Util_TestDox_ResultPrinter_Text' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Util\\TestDox\\TextResultPrinter', 'PHPUnit_Util_TestSuiteIterator' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Framework\\TestSuiteIterator', 'PHPUnit_Util_XML' => '_PhpScoper6ffa0951a2e9\\PHPUnit\\Util\\Xml'];
         } elseif (\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::fulfills($this->configuration['target'], \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_7)) {
             $this->originalClassRegEx = '/^PHPUnit_Framework_TestCase|PHPUnit_Framework_Assert|PHPUnit_Framework_BaseTestListener|PHPUnit_Framework_TestListener$/i';
             $this->classMap = [];
@@ -91,7 +94,7 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $importedOriginalClassesMap = [];
         $currIndex = 0;
@@ -99,6 +102,10 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             $currIndex = $tokens->getNextTokenOfKind($currIndex, [[\T_STRING]]);
             if (null === $currIndex) {
                 break;
+            }
+            $prevIndex = $tokens->getPrevMeaningfulToken($currIndex);
+            if ($tokens[$prevIndex]->isGivenKind(\T_CONST)) {
+                continue;
             }
             $originalClass = $tokens[$currIndex]->getContent();
             if (1 !== Preg::match($this->originalClassRegEx, $originalClass)) {
@@ -122,16 +129,11 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('target', 'Target version of PHPUnit.'))->setAllowedTypes(['string'])->setAllowedValues([\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_4_8, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_7, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_6_0, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_NEWEST])->setDefault(\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_NEWEST)->getOption()]);
     }
-    /**
-     * @param string $originalClassName
-     *
-     * @return Tokens
-     */
-    private function generateReplacement($originalClassName)
+    private function generateReplacement(string $originalClassName) : Tokens
     {
         $delimiter = '_';
         $string = $originalClassName;

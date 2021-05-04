@@ -27,16 +27,16 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoper130a9a1cd4a2\\Composer\\XdebugHandler\\": "src"
+            "_PhpScoper6ffa0951a2e9\\Composer\\XdebugHandler\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "_PhpScoper130a9a1cd4a2\\Composer\\XdebugHandler\\": "tests"
+            "_PhpScoper6ffa0951a2e9\\Composer\\XdebugHandler\\": "tests"
         }
     },
     "scripts": {
-        "test": "SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT=1 vendor\/bin\/simple-phpunit",
+        "test": "vendor\/bin\/simple-phpunit",
         "phpstan": "vendor\/bin\/phpstan analyse"
     }
 }

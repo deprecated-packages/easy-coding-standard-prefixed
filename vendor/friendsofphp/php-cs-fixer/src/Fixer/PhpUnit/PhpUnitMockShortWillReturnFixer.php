@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\PhpUnit;
 use PhpCsFixer\Fixer\AbstractPhpUnitFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -23,14 +25,11 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class PhpUnitMockShortWillReturnFixer extends AbstractPhpUnitFixer
 {
-    /**
-     * @internal
-     */
-    const RETURN_METHODS_MAP = ['returnargument' => 'willReturnArgument', 'returncallback' => 'willReturnCallback', 'returnself' => 'willReturnSelf', 'returnvalue' => 'willReturn', 'returnvaluemap' => 'willReturnMap'];
+    private const RETURN_METHODS_MAP = ['returnargument' => 'willReturnArgument', 'returncallback' => 'willReturnCallback', 'returnself' => 'willReturnSelf', 'returnvalue' => 'willReturn', 'returnvaluemap' => 'willReturnMap'];
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Usage of PHPUnit\'s mock e.g. `->will($this->returnValue(..))` must be replaced by its shorter equivalent such as `->willReturn(...)`.', [new CodeSample('<?php
 final class MyTest extends \\PHPUnit_Framework_TestCase
@@ -50,14 +49,14 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     /**
      * {@inheritdoc}
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyPhpUnitClassFix(Tokens $tokens, $startIndex, $endIndex)
+    protected function applyPhpUnitClassFix(Tokens $tokens, int $startIndex, int $endIndex) : void
     {
         $functionsAnalyzer = new FunctionsAnalyzer();
         for ($index = $startIndex; $index < $endIndex; ++$index) {

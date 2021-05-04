@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,11 +13,13 @@
 namespace PhpCsFixer\Fixer\Casing;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -25,7 +28,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  *
  * @author Pol Dellaiera <pol.dellaiera@protonmail.com>
  */
-final class ConstantCaseFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
+final class ConstantCaseFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /**
      * Hold the function that will be used to convert the constants.
@@ -36,45 +39,45 @@ final class ConstantCaseFixer extends AbstractFixer implements ConfigurationDefi
     /**
      * {@inheritdoc}
      */
-    public function configure(array $configuration = null)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         if ('lower' === $this->configuration['case']) {
-            $this->fixFunction = static function ($token) {
-                return \strtolower($token);
+            $this->fixFunction = static function (string $content) {
+                return \strtolower($content);
             };
         }
         if ('upper' === $this->configuration['case']) {
-            $this->fixFunction = static function ($token) {
-                return \strtoupper($token);
+            $this->fixFunction = static function (string $content) {
+                return \strtoupper($content);
             };
         }
     }
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('The PHP constants `true`, `false`, and `null` MUST be written using the correct casing.', [new CodeSample("<?php\n\$a = FALSE;\n\$b = True;\n\$c = nuLL;\n"), new CodeSample("<?php\n\$a = FALSE;\n\$b = True;\n\$c = nuLL;\n", ['case' => 'upper'])]);
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('case', 'Whether to use the `upper` or `lower` case syntax.'))->setAllowedValues(['upper', 'lower'])->setDefault('lower')->getOption()]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $fixFunction = $this->fixFunction;
         foreach ($tokens as $index => $token) {
@@ -86,12 +89,7 @@ final class ConstantCaseFixer extends AbstractFixer implements ConfigurationDefi
             }
         }
     }
-    /**
-     * @param int $index
-     *
-     * @return bool
-     */
-    private function isNeighbourAccepted(Tokens $tokens, $index)
+    private function isNeighbourAccepted(Tokens $tokens, int $index) : bool
     {
         static $forbiddenTokens = null;
         if (null === $forbiddenTokens) {

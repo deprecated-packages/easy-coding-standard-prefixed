@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\LanguageConstruct;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -24,7 +26,7 @@ final class CombineConsecutiveIssetsFixer extends AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Using `isset($var) &&` multiple times should be done in one call.', [new CodeSample("<?php\n\$a = isset(\$a) && isset(\$b);\n")]);
     }
@@ -33,21 +35,21 @@ final class CombineConsecutiveIssetsFixer extends AbstractFixer
      *
      * Must run before MultilineWhitespaceBeforeSemicolonsFixer, NoSinglelineWhitespaceBeforeSemicolonsFixer, NoSpacesInsideParenthesisFixer, NoTrailingWhitespaceFixer, NoWhitespaceInBlankLineFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 3;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAllTokenKindsFound([\T_ISSET, \T_BOOLEAN_AND]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $tokenCount = $tokens->count();
         for ($index = 1; $index < $tokenCount; ++$index) {
@@ -93,7 +95,7 @@ final class CombineConsecutiveIssetsFixer extends AbstractFixer
     /**
      * @param int[] $indexes
      */
-    private function clearTokens(Tokens $tokens, array $indexes)
+    private function clearTokens(Tokens $tokens, array $indexes) : void
     {
         foreach ($indexes as $index) {
             $tokens->clearTokenAndMergeSurroundingWhitespace($index);
@@ -104,7 +106,7 @@ final class CombineConsecutiveIssetsFixer extends AbstractFixer
      *
      * @return int[] indexes of meaningful tokens belonging to the isset statement
      */
-    private function getIssetInfo(Tokens $tokens, $index)
+    private function getIssetInfo(Tokens $tokens, int $index) : array
     {
         $openIndex = $tokens->getNextMeaningfulToken($index);
         $braceOpenCount = 1;
@@ -130,7 +132,7 @@ final class CombineConsecutiveIssetsFixer extends AbstractFixer
      *
      * @return Token[]
      */
-    private function getTokenClones(Tokens $tokens, array $indexes)
+    private function getTokenClones(Tokens $tokens, array $indexes) : array
     {
         $clones = [];
         foreach ($indexes as $i) {

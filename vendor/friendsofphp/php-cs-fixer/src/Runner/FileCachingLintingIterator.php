@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -37,11 +38,11 @@ final class FileCachingLintingIterator extends \CachingIterator
         parent::__construct($iterator);
         $this->linter = $linter;
     }
-    public function currentLintingResult()
+    public function currentLintingResult() : LintingResultInterface
     {
         return $this->currentResult;
     }
-    public function next()
+    public function next() : void
     {
         parent::next();
         $this->currentResult = $this->nextResult;
@@ -49,7 +50,7 @@ final class FileCachingLintingIterator extends \CachingIterator
             $this->nextResult = $this->handleItem($this->getInnerIterator()->current());
         }
     }
-    public function rewind()
+    public function rewind() : void
     {
         parent::rewind();
         if ($this->valid()) {
@@ -59,7 +60,7 @@ final class FileCachingLintingIterator extends \CachingIterator
             $this->nextResult = $this->handleItem($this->getInnerIterator()->current());
         }
     }
-    private function handleItem(\SplFileInfo $file)
+    private function handleItem(\SplFileInfo $file) : LintingResultInterface
     {
         return $this->linter->lintFile($file->getRealPath());
     }

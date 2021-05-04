@@ -138,9 +138,9 @@ class Cbf implements \PHP_CodeSniffer\Reports\Report
         }
         $width = \min($width, $maxLength + 21);
         $width = \max($width, 70);
-        echo \PHP_EOL . "\33[1m" . 'PHPCBF RESULT SUMMARY' . "\33[0m" . \PHP_EOL;
+        echo \PHP_EOL . "\x1b[1m" . 'PHPCBF RESULT SUMMARY' . "\x1b[0m" . \PHP_EOL;
         echo \str_repeat('-', $width) . \PHP_EOL;
-        echo "\33[1m" . 'FILE' . \str_repeat(' ', $width - 20) . 'FIXED  REMAINING' . "\33[0m" . \PHP_EOL;
+        echo "\x1b[1m" . 'FILE' . \str_repeat(' ', $width - 20) . 'FIXED  REMAINING' . "\x1b[0m" . \PHP_EOL;
         echo \str_repeat('-', $width) . \PHP_EOL;
         foreach ($reportFiles as $file => $data) {
             $padding = $width - 18 - $data['strlen'];
@@ -150,7 +150,7 @@ class Cbf implements \PHP_CodeSniffer\Reports\Report
             }
             echo $file . \str_repeat(' ', $padding) . '  ';
             if ($data['fixable'] > 0) {
-                echo "\33[31mFAILED TO FIX\33[0m" . \PHP_EOL;
+                echo "\x1b[31mFAILED TO FIX\x1b[0m" . \PHP_EOL;
                 continue;
             }
             $remaining = $data['errors'] + $data['warnings'];
@@ -169,7 +169,7 @@ class Cbf implements \PHP_CodeSniffer\Reports\Report
         }
         //end foreach
         echo \str_repeat('-', $width) . \PHP_EOL;
-        echo "\33[1mA TOTAL OF {$totalFixed} ERROR";
+        echo "\x1b[1mA TOTAL OF {$totalFixed} ERROR";
         if ($totalFixed !== 1) {
             echo 'S';
         }
@@ -178,14 +178,14 @@ class Cbf implements \PHP_CodeSniffer\Reports\Report
         if ($numFiles !== 1) {
             echo 'S';
         }
-        echo "\33[0m";
+        echo "\x1b[0m";
         if ($failures > 0) {
             echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL;
-            echo "\33[1mPHPCBF FAILED TO FIX {$failures} FILE";
+            echo "\x1b[1mPHPCBF FAILED TO FIX {$failures} FILE";
             if ($failures !== 1) {
                 echo 'S';
             }
-            echo "\33[0m";
+            echo "\x1b[0m";
         }
         echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL . \PHP_EOL;
         if ($toScreen === \true && $interactive === \false) {

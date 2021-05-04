@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,6 +15,7 @@ namespace PhpCsFixer\Fixer\ControlStructure;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Analyzer\BlocksAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
@@ -27,7 +29,7 @@ final class IncludeFixer extends AbstractFixer
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Include/Require and file path should be divided with a single space. File path should not be placed under brackets.', [new CodeSample('<?php
 require ("sample1.php");
@@ -39,18 +41,18 @@ include_once("sample4.php");
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_REQUIRE, \T_REQUIRE_ONCE, \T_INCLUDE, \T_INCLUDE_ONCE]);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $this->clearIncludies($tokens, $this->findIncludies($tokens));
     }
-    private function clearIncludies(Tokens $tokens, array $includies)
+    private function clearIncludies(Tokens $tokens, array $includies) : void
     {
         $blocksAnalyzer = new BlocksAnalyzer();
         foreach ($includies as $includy) {
@@ -81,7 +83,7 @@ include_once("sample4.php");
             }
         }
     }
-    private function findIncludies(Tokens $tokens)
+    private function findIncludies(Tokens $tokens) : array
     {
         static $includyTokenKinds = [\T_REQUIRE, \T_REQUIRE_ONCE, \T_INCLUDE, \T_INCLUDE_ONCE];
         $includies = [];
@@ -99,10 +101,7 @@ include_once("sample4.php");
         \krsort($includies);
         return $includies;
     }
-    /**
-     * @param int $index
-     */
-    private function removeWhitespaceAroundIfPossible(Tokens $tokens, $index)
+    private function removeWhitespaceAroundIfPossible(Tokens $tokens, int $index) : void
     {
         $nextIndex = $tokens->getNextNonWhitespace($index);
         if (null === $nextIndex || !$tokens[$nextIndex]->isComment()) {

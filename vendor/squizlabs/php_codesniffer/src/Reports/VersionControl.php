@@ -184,8 +184,8 @@ abstract class VersionControl implements \PHP_CodeSniffer\Reports\Report
         $width = \min($width, $maxLength + 30);
         $width = \max($width, 70);
         \arsort($authorCache);
-        echo \PHP_EOL . "\33[1m" . 'PHP CODE SNIFFER ' . $this->reportName . ' BLAME SUMMARY' . "\33[0m" . \PHP_EOL;
-        echo \str_repeat('-', $width) . \PHP_EOL . "\33[1m";
+        echo \PHP_EOL . "\x1b[1m" . 'PHP CODE SNIFFER ' . $this->reportName . ' BLAME SUMMARY' . "\x1b[0m" . \PHP_EOL;
+        echo \str_repeat('-', $width) . \PHP_EOL . "\x1b[1m";
         if ($showSources === \true) {
             echo 'AUTHOR   SOURCE' . \str_repeat(' ', $width - 43) . '(Author %) (Overall %) COUNT' . \PHP_EOL;
             echo \str_repeat('-', $width) . \PHP_EOL;
@@ -193,7 +193,7 @@ abstract class VersionControl implements \PHP_CodeSniffer\Reports\Report
             echo 'AUTHOR' . \str_repeat(' ', $width - 34) . '(Author %) (Overall %) COUNT' . \PHP_EOL;
             echo \str_repeat('-', $width) . \PHP_EOL;
         }
-        echo "\33[0m";
+        echo "\x1b[0m";
         if ($showSources === \true) {
             $maxSniffWidth = $width - 15;
             if ($totalFixable > 0) {
@@ -215,7 +215,7 @@ abstract class VersionControl implements \PHP_CodeSniffer\Reports\Report
             $line = \str_repeat(' ', 11 - \strlen($authorPercent)) . $authorPercent . $line;
             $line = $author . \str_repeat(' ', $width - \strlen($author) - \strlen($line)) . $line;
             if ($showSources === \true) {
-                $line = "\33[1m{$line}\33[0m";
+                $line = "\x1b[1m{$line}\x1b[0m";
             }
             echo $line . \PHP_EOL;
             if ($showSources === \true && isset($sourceCache[$author]) === \true) {
@@ -257,7 +257,7 @@ abstract class VersionControl implements \PHP_CodeSniffer\Reports\Report
         }
         //end foreach
         echo \str_repeat('-', $width) . \PHP_EOL;
-        echo "\33[1m" . 'A TOTAL OF ' . $errorsShown . ' SNIFF VIOLATION';
+        echo "\x1b[1m" . 'A TOTAL OF ' . $errorsShown . ' SNIFF VIOLATION';
         if ($errorsShown !== 1) {
             echo 'S';
         }
@@ -265,14 +265,14 @@ abstract class VersionControl implements \PHP_CodeSniffer\Reports\Report
         if (\count($authorCache) !== 1) {
             echo 'S';
         }
-        echo "\33[0m";
+        echo "\x1b[0m";
         if ($totalFixable > 0) {
             if ($showSources === \true) {
                 echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL;
-                echo "\33[1mPHPCBF CAN FIX THE {$fixableSources} MARKED SOURCES AUTOMATICALLY ({$totalFixable} VIOLATIONS IN TOTAL)\33[0m";
+                echo "\x1b[1mPHPCBF CAN FIX THE {$fixableSources} MARKED SOURCES AUTOMATICALLY ({$totalFixable} VIOLATIONS IN TOTAL)\x1b[0m";
             } else {
                 echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL;
-                echo "\33[1mPHPCBF CAN FIX {$totalFixable} OF THESE SNIFF VIOLATIONS AUTOMATICALLY\33[0m";
+                echo "\x1b[1mPHPCBF CAN FIX {$totalFixable} OF THESE SNIFF VIOLATIONS AUTOMATICALLY\x1b[0m";
             }
         }
         echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL . \PHP_EOL;

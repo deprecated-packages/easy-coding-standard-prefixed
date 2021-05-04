@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -12,28 +13,30 @@
 namespace PhpCsFixer\Fixer\StringNotation;
 
 use PhpCsFixer\AbstractFixer;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  */
-final class EscapeImplicitBackslashesFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
+final class EscapeImplicitBackslashesFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         $codeSample = <<<'EOF'
 <?php
 
-namespace _PhpScoper130a9a1cd4a2;
+namespace _PhpScoper6ffa0951a2e9;
 
 $singleQuoted = 'String with \\" and My\\Prefix\\';
 $doubleQuoted = "Interpret my \n but not my \\a";
@@ -48,7 +51,7 @@ EOF;
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_ENCAPSED_AND_WHITESPACE, \T_CONSTANT_ENCAPSED_STRING]);
     }
@@ -58,14 +61,14 @@ EOF;
      * Must run before HeredocToNowdocFixer, SingleQuoteFixer.
      * Must run after BacktickToShellExecFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         static $singleQuotedRegex = '/(?<!\\\\)\\\\((?:\\\\\\\\)*)(?![\\\'\\\\])/';
         static $doubleQuotedRegex = '/(?<!\\\\)\\\\((?:\\\\\\\\)*)(?![efnrtv$"\\\\0-7]|x[0-9A-Fa-f]|u{)/';
@@ -105,7 +108,7 @@ EOF;
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('single_quoted', 'Whether to fix single-quoted strings.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption(), (new FixerOptionBuilder('double_quoted', 'Whether to fix double-quoted strings.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption(), (new FixerOptionBuilder('heredoc_syntax', 'Whether to fix heredoc syntax.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }

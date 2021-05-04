@@ -677,20 +677,20 @@ class Runner
                 // Files with no errors or warnings are . (black).
                 if ($fixable > 0) {
                     if ($this->config->colors === \true) {
-                        echo "\33[31m";
+                        echo "\x1b[31m";
                     }
                     echo 'E';
                     if ($this->config->colors === \true) {
-                        echo "\33[0m";
+                        echo "\x1b[0m";
                     }
                 } else {
                     if ($fixed > 0) {
                         if ($this->config->colors === \true) {
-                            echo "\33[32m";
+                            echo "\x1b[32m";
                         }
                         echo 'F';
                         if ($this->config->colors === \true) {
-                            echo "\33[0m";
+                            echo "\x1b[0m";
                         }
                     } else {
                         echo '.';
@@ -706,27 +706,27 @@ class Runner
                 if ($errors > 0) {
                     if ($this->config->colors === \true) {
                         if ($fixable > 0) {
-                            echo "\33[32m";
+                            echo "\x1b[32m";
                         } else {
-                            echo "\33[31m";
+                            echo "\x1b[31m";
                         }
                     }
                     echo 'E';
                     if ($this->config->colors === \true) {
-                        echo "\33[0m";
+                        echo "\x1b[0m";
                     }
                 } else {
                     if ($warnings > 0) {
                         if ($this->config->colors === \true) {
                             if ($fixable > 0) {
-                                echo "\33[32m";
+                                echo "\x1b[32m";
                             } else {
-                                echo "\33[33m";
+                                echo "\x1b[33m";
                             }
                         }
                         echo 'W';
                         if ($this->config->colors === \true) {
-                            echo "\33[0m";
+                            echo "\x1b[0m";
                         }
                     } else {
                         echo '.';

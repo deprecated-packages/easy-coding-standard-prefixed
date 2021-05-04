@@ -87,9 +87,9 @@ class Summary implements \PHP_CodeSniffer\Reports\Report
         });
         $width = \min($width, $maxLength + 21);
         $width = \max($width, 70);
-        echo \PHP_EOL . "\33[1m" . 'PHP CODE SNIFFER REPORT SUMMARY' . "\33[0m" . \PHP_EOL;
+        echo \PHP_EOL . "\x1b[1m" . 'PHP CODE SNIFFER REPORT SUMMARY' . "\x1b[0m" . \PHP_EOL;
         echo \str_repeat('-', $width) . \PHP_EOL;
-        echo "\33[1m" . 'FILE' . \str_repeat(' ', $width - 20) . 'ERRORS  WARNINGS' . "\33[0m" . \PHP_EOL;
+        echo "\x1b[1m" . 'FILE' . \str_repeat(' ', $width - 20) . 'ERRORS  WARNINGS' . "\x1b[0m" . \PHP_EOL;
         echo \str_repeat('-', $width) . \PHP_EOL;
         foreach ($reportFiles as $file => $data) {
             $padding = $width - 18 - $data['strlen'];
@@ -99,13 +99,13 @@ class Summary implements \PHP_CodeSniffer\Reports\Report
             }
             echo $file . \str_repeat(' ', $padding) . '  ';
             if ($data['errors'] !== 0) {
-                echo "\33[31m" . $data['errors'] . "\33[0m";
+                echo "\x1b[31m" . $data['errors'] . "\x1b[0m";
                 echo \str_repeat(' ', 8 - \strlen((string) $data['errors']));
             } else {
                 echo '0       ';
             }
             if ($data['warnings'] !== 0) {
-                echo "\33[33m" . $data['warnings'] . "\33[0m";
+                echo "\x1b[33m" . $data['warnings'] . "\x1b[0m";
             } else {
                 echo '0';
             }
@@ -113,7 +113,7 @@ class Summary implements \PHP_CodeSniffer\Reports\Report
         }
         //end foreach
         echo \str_repeat('-', $width) . \PHP_EOL;
-        echo "\33[1mA TOTAL OF {$totalErrors} ERROR";
+        echo "\x1b[1mA TOTAL OF {$totalErrors} ERROR";
         if ($totalErrors !== 1) {
             echo 'S';
         }
@@ -125,10 +125,10 @@ class Summary implements \PHP_CodeSniffer\Reports\Report
         if ($totalFiles !== 1) {
             echo 'S';
         }
-        echo "\33[0m";
+        echo "\x1b[0m";
         if ($totalFixable > 0) {
             echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL;
-            echo "\33[1mPHPCBF CAN FIX {$totalFixable} OF THESE SNIFF VIOLATIONS AUTOMATICALLY\33[0m";
+            echo "\x1b[1mPHPCBF CAN FIX {$totalFixable} OF THESE SNIFF VIOLATIONS AUTOMATICALLY\x1b[0m";
         }
         echo \PHP_EOL . \str_repeat('-', $width) . \PHP_EOL . \PHP_EOL;
         if ($toScreen === \true && $interactive === \false) {

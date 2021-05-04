@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Composer\XdebugHandler;
+namespace _PhpScoper6ffa0951a2e9\Composer\XdebugHandler;
 
-use _PhpScoper130a9a1cd4a2\Psr\Log\LoggerInterface;
-use _PhpScoper130a9a1cd4a2\Psr\Log\LogLevel;
+use _PhpScoper6ffa0951a2e9\Psr\Log\LoggerInterface;
+use _PhpScoper6ffa0951a2e9\Psr\Log\LogLevel;
 /**
  * @author John Stevenson <john-stevenson@blueyonder.co.uk>
  * @internal
@@ -30,6 +30,7 @@ class Status
     private $envAllowXdebug;
     private $loaded;
     private $logger;
+    private $modeOff;
     private $time;
     /**
      * Constructor
@@ -40,7 +41,7 @@ class Status
     public function __construct($envAllowXdebug, $debug)
     {
         $start = \getenv(self::ENV_RESTART);
-        \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART);
+        \_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART);
         $this->time = $start ? \round((\microtime(\true) - $start) * 1000) : 0;
         $this->envAllowXdebug = $envAllowXdebug;
         $this->debug = $debug && \defined('STDERR');
@@ -81,7 +82,11 @@ class Status
     }
     private function reportCheck($loaded)
     {
-        $this->loaded = $loaded;
+        list($version, $mode) = \explode('|', $loaded);
+        if ($version) {
+            $this->loaded = '(' . $version . ')' . ($mode ? ' mode=' . $mode : '');
+        }
+        $this->modeOff = $mode === 'off';
         $this->output('Checking ' . $this->envAllowXdebug);
     }
     private function reportError($error)
@@ -98,7 +103,7 @@ class Status
         if ($this->loaded) {
             $text = \sprintf('No restart (%s)', $this->getEnvAllow());
             if (!\getenv($this->envAllowXdebug)) {
-                $text .= ' Allowed by application';
+                $text .= ' Allowed by ' . ($this->modeOff ? 'mode' : 'application');
             }
             $this->output($text);
         }
@@ -106,7 +111,7 @@ class Status
     private function reportRestart()
     {
         $this->output($this->getLoadedMessage());
-        \_PhpScoper130a9a1cd4a2\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART, (string) \microtime(\true));
+        \_PhpScoper6ffa0951a2e9\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART, (string) \microtime(\true));
     }
     private function reportRestarted()
     {
@@ -138,7 +143,7 @@ class Status
      */
     private function getLoadedMessage()
     {
-        $loaded = $this->loaded ? \sprintf('loaded (%s)', $this->loaded) : 'not loaded';
+        $loaded = $this->loaded ? \sprintf('loaded %s', $this->loaded) : 'not loaded';
         return 'The Xdebug extension is ' . $loaded;
     }
 }

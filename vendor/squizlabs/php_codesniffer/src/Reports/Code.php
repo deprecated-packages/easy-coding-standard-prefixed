@@ -139,15 +139,15 @@ class Code implements \PHP_CodeSniffer\Reports\Report
             $width = 70;
         }
         // Print the file header.
-        echo \PHP_EOL . "\33[1mFILE: ";
+        echo \PHP_EOL . "\x1b[1mFILE: ";
         if ($fileLength <= $width - 6) {
             echo $file;
         } else {
             echo '...' . \substr($file, $fileLength - ($width - 6));
         }
-        echo "\33[0m" . \PHP_EOL;
+        echo "\x1b[0m" . \PHP_EOL;
         echo \str_repeat('-', $width) . \PHP_EOL;
-        echo "\33[1m" . 'FOUND ' . $report['errors'] . ' ERROR';
+        echo "\x1b[1m" . 'FOUND ' . $report['errors'] . ' ERROR';
         if ($report['errors'] !== 1) {
             echo 'S';
         }
@@ -161,7 +161,7 @@ class Code implements \PHP_CodeSniffer\Reports\Report
         if (\count($report['messages']) !== 1) {
             echo 'S';
         }
-        echo "\33[0m" . \PHP_EOL;
+        echo "\x1b[0m" . \PHP_EOL;
         foreach ($report['messages'] as $line => $lineErrors) {
             $startLine = \max($line - $surroundingLines, 1);
             $endLine = \min($line + $surroundingLines, $lastLine);
@@ -172,14 +172,14 @@ class Code implements \PHP_CodeSniffer\Reports\Report
                     if ($lineTokens[$snippetLine]['start'] === $i) {
                         // Starting a new line.
                         if ($snippetLine === $line) {
-                            $snippet .= "\33[1m" . '>> ';
+                            $snippet .= "\x1b[1m" . '>> ';
                         } else {
                             $snippet .= '   ';
                         }
                         $snippet .= \str_repeat(' ', $maxLineNumLength - \strlen($snippetLine));
                         $snippet .= $snippetLine . ':  ';
                         if ($snippetLine === $line) {
-                            $snippet .= "\33[0m";
+                            $snippet .= "\x1b[0m";
                         }
                     }
                     if (isset($tokens[$i]['orig_content']) === \true) {
@@ -191,29 +191,29 @@ class Code implements \PHP_CodeSniffer\Reports\Report
                         $token = $tokens[$i];
                         $token['content'] = $tokenContent;
                         if (\strtoupper(\substr(\PHP_OS, 0, 3)) === 'WIN') {
-                            $tab = "\0";
+                            $tab = "\x00";
                         } else {
-                            $tab = "\33[30;1m»\33[0m";
+                            $tab = "\x1b[30;1m»\x1b[0m";
                         }
-                        $phpcsFile->tokenizer->replaceTabsInToken($token, $tab, "\0");
+                        $phpcsFile->tokenizer->replaceTabsInToken($token, $tab, "\x00");
                         $tokenContent = $token['content'];
                     }
                     $tokenContent = Util\Common::prepareForOutput($tokenContent, ["\r", "\n", "\t"]);
-                    $tokenContent = \str_replace("\0", ' ', $tokenContent);
+                    $tokenContent = \str_replace("\x00", ' ', $tokenContent);
                     $underline = \false;
                     if ($snippetLine === $line && isset($lineErrors[$tokens[$i]['column']]) === \true) {
                         $underline = \true;
                     }
                     // Underline invisible characters as well.
                     if ($underline === \true && \trim($tokenContent) === '') {
-                        $snippet .= "\33[4m" . ' ' . "\33[0m" . $tokenContent;
+                        $snippet .= "\x1b[4m" . ' ' . "\x1b[0m" . $tokenContent;
                     } else {
                         if ($underline === \true) {
-                            $snippet .= "\33[4m";
+                            $snippet .= "\x1b[4m";
                         }
                         $snippet .= $tokenContent;
                         if ($underline === \true) {
-                            $snippet .= "\33[0m";
+                            $snippet .= "\x1b[0m";
                         }
                     }
                 }
@@ -226,12 +226,12 @@ class Code implements \PHP_CodeSniffer\Reports\Report
                     $padding = $maxLineNumLength - \strlen($line);
                     echo 'LINE ' . \str_repeat(' ', $padding) . $line . ': ';
                     if ($error['type'] === 'ERROR') {
-                        echo "\33[31mERROR\33[0m";
+                        echo "\x1b[31mERROR\x1b[0m";
                         if ($report['warnings'] > 0) {
                             echo '  ';
                         }
                     } else {
-                        echo "\33[33mWARNING\33[0m";
+                        echo "\x1b[33mWARNING\x1b[0m";
                     }
                     echo ' ';
                     if ($report['fixable'] > 0) {
@@ -246,7 +246,7 @@ class Code implements \PHP_CodeSniffer\Reports\Report
                     $message = $error['message'];
                     $message = \str_replace("\n", "\n" . $errorPadding, $message);
                     if ($showSources === \true) {
-                        $message = "\33[1m" . $message . "\33[0m" . ' (' . $error['source'] . ')';
+                        $message = "\x1b[1m" . $message . "\x1b[0m" . ' (' . $error['source'] . ')';
                     }
                     $errorMsg = \wordwrap($message, $maxErrorSpace, \PHP_EOL . $errorPadding);
                     echo $errorMsg . \PHP_EOL;
@@ -260,7 +260,7 @@ class Code implements \PHP_CodeSniffer\Reports\Report
         //end foreach
         echo \str_repeat('-', $width) . \PHP_EOL;
         if ($report['fixable'] > 0) {
-            echo "\33[1m" . 'PHPCBF CAN FIX THE ' . $report['fixable'] . ' MARKED SNIFF VIOLATIONS AUTOMATICALLY' . "\33[0m" . \PHP_EOL;
+            echo "\x1b[1m" . 'PHPCBF CAN FIX THE ' . $report['fixable'] . ' MARKED SNIFF VIOLATIONS AUTOMATICALLY' . "\x1b[0m" . \PHP_EOL;
             echo \str_repeat('-', $width) . \PHP_EOL;
         }
         return \true;

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,21 +15,23 @@ namespace PhpCsFixer\Fixer\Phpdoc;
 use PhpCsFixer\AbstractFixer;
 use PhpCsFixer\DocBlock\Annotation;
 use PhpCsFixer\DocBlock\DocBlock;
-use PhpCsFixer\Fixer\ConfigurationDefinitionFixerInterface;
+use PhpCsFixer\Fixer\ConfigurableFixerInterface;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolver;
+use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\FixerOptionBuilder;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Utils;
-final class PhpdocTypesOrderFixer extends AbstractFixer implements ConfigurationDefinitionFixerInterface
+final class PhpdocTypesOrderFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Sorts PHPDoc types.', [new CodeSample('<?php
 /**
@@ -58,25 +61,25 @@ final class PhpdocTypesOrderFixer extends AbstractFixer implements Configuration
      * Must run before PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocAnnotationWithoutDotFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('sort_algorithm', 'The sorting algorithm to apply.'))->setAllowedValues(['alpha', 'none'])->setDefault('alpha')->getOption(), (new FixerOptionBuilder('null_adjustment', 'Forces the position of `null` (overrides `sort_algorithm`).'))->setAllowedValues(['always_first', 'always_last', 'none'])->setDefault('always_first')->getOption()]);
     }
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -108,7 +111,7 @@ final class PhpdocTypesOrderFixer extends AbstractFixer implements Configuration
      *
      * @return string[]
      */
-    private function sortTypes(array $types)
+    private function sortTypes(array $types) : array
     {
         foreach ($types as $index => $type) {
             $types[$index] = Preg::replaceCallback('/^([^<]+)<(?:([\\w\\|]+?|<?.*>)(,\\s*))?(.*)>$/', function (array $matches) {
@@ -116,9 +119,9 @@ final class PhpdocTypesOrderFixer extends AbstractFixer implements Configuration
             }, $type);
         }
         if ('alpha' === $this->configuration['sort_algorithm']) {
-            $types = Utils::stableSort($types, static function ($type) {
+            $types = Utils::stableSort($types, static function (string $type) {
                 return $type;
-            }, static function ($typeA, $typeB) {
+            }, static function (string $typeA, string $typeB) {
                 $regexp = '/^\\??\\\\?/';
                 return \strcasecmp(Preg::replace($regexp, '', $typeA), Preg::replace($regexp, '', $typeB));
             });
@@ -141,14 +144,9 @@ final class PhpdocTypesOrderFixer extends AbstractFixer implements Configuration
         }
         return $types;
     }
-    /**
-     * @param string $types
-     *
-     * @return string
-     */
-    private function sortJoinedTypes($types)
+    private function sortJoinedTypes(string $types) : string
     {
-        $types = \array_filter(Preg::split('/([^|<]+(?:<.*>)?)/', $types, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY), static function ($value) {
+        $types = \array_filter(Preg::split('/([^|<]+(?:<.*>)?)/', $types, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY), static function (string $value) {
             return '|' !== $value;
         });
         return \implode('|', $this->sortTypes($types));

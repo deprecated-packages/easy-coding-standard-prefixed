@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -18,7 +19,6 @@ use PhpCsFixer\Cache\DirectoryInterface;
 use PhpCsFixer\Differ\DifferInterface;
 use PhpCsFixer\Error\Error;
 use PhpCsFixer\Error\ErrorsManager;
-use PhpCsFixer\Event\Event;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerFileProcessedEvent;
@@ -26,8 +26,9 @@ use PhpCsFixer\Linter\LinterInterface;
 use PhpCsFixer\Linter\LintingException;
 use PhpCsFixer\Linter\LintingResultInterface;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScoper130a9a1cd4a2\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper6ffa0951a2e9\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper6ffa0951a2e9\Symfony\Contracts\EventDispatcher\Event;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
@@ -73,7 +74,7 @@ final class Runner
      * @var bool
      */
     private $stopOnViolation;
-    public function __construct($finder, array $fixers, DifferInterface $differ, EventDispatcherInterface $eventDispatcher = null, ErrorsManager $errorsManager, LinterInterface $linter, $isDryRun, CacheManagerInterface $cacheManager, DirectoryInterface $directory = null, $stopOnViolation = \false)
+    public function __construct($finder, array $fixers, DifferInterface $differ, ?EventDispatcherInterface $eventDispatcher, ErrorsManager $errorsManager, LinterInterface $linter, $isDryRun, CacheManagerInterface $cacheManager, ?DirectoryInterface $directory = null, $stopOnViolation = \false)
     {
         $this->finder = $finder;
         $this->fixers = $fixers;
@@ -86,10 +87,7 @@ final class Runner
         $this->directory = $directory ?: new Directory('');
         $this->stopOnViolation = $stopOnViolation;
     }
-    /**
-     * @return array
-     */
-    public function fix()
+    public function fix() : array
     {
         $changed = [];
         $finder = $this->finder;
@@ -101,7 +99,7 @@ final class Runner
             // we do not need Tokens to still caching just fixed file - so clear the cache
             Tokens::clearCache();
             if ($fixInfo) {
-                $name = $this->directory->getRelativePathTo($file);
+                $name = $this->directory->getRelativePathTo($file->__toString());
                 $changed[$name] = $fixInfo;
                 if ($this->stopOnViolation) {
                     break;
@@ -110,7 +108,7 @@ final class Runner
         }
         return $changed;
     }
-    private function fixFile(\SplFileInfo $file, LintingResultInterface $lintingResult)
+    private function fixFile(\SplFileInfo $file, LintingResultInterface $lintingResult) : ?array
     {
         $name = $file->getPathname();
         try {
@@ -118,10 +116,9 @@ final class Runner
         } catch (LintingException $e) {
             $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_INVALID));
             $this->errorsManager->report(new Error(Error::TYPE_INVALID, $name, $e));
-            return;
+            return null;
         }
         $old = FileReader::createSingleton()->read($file->getRealPath());
-        Tokens::setLegacyMode(\false);
         $tokens = Tokens::fromCode($old);
         $oldHash = $tokens->getCodeHash();
         $newHash = $oldHash;
@@ -143,14 +140,14 @@ final class Runner
             }
         } catch (\Exception $e) {
             $this->processException($name, $e);
-            return;
+            return null;
         } catch (\ParseError $e) {
             $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_LINT));
             $this->errorsManager->report(new Error(Error::TYPE_LINT, $name, $e));
-            return;
+            return null;
         } catch (\Throwable $e) {
             $this->processException($name, $e);
-            return;
+            return null;
         }
         $fixInfo = null;
         if (!empty($appliedFixers)) {
@@ -162,13 +159,13 @@ final class Runner
         // work of other and both of them will mark collection as changed.
         // Therefore we need to check if code hashes changed.
         if ($oldHash !== $newHash) {
-            $fixInfo = ['appliedFixers' => $appliedFixers, 'diff' => $this->differ->diff($old, $new)];
+            $fixInfo = ['appliedFixers' => $appliedFixers, 'diff' => $this->differ->diff($old, $new, $file)];
             try {
                 $this->linter->lintSource($new)->check();
             } catch (LintingException $e) {
                 $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_LINT));
                 $this->errorsManager->report(new Error(Error::TYPE_LINT, $name, $e, $fixInfo['appliedFixers'], $fixInfo['diff']));
-                return;
+                return null;
             }
             if (!$this->isDryRun) {
                 $fileName = $file->getRealPath();
@@ -193,25 +190,19 @@ final class Runner
     }
     /**
      * Process an exception that occurred.
-     *
-     * @param string     $name
-     * @param \Throwable $e
      */
-    private function processException($name, $e)
+    private function processException(string $name, \Throwable $e) : void
     {
         $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_EXCEPTION));
         $this->errorsManager->report(new Error(Error::TYPE_EXCEPTION, $name, $e));
     }
-    /**
-     * @param string $name
-     */
-    private function dispatchEvent($name, Event $event)
+    private function dispatchEvent(string $name, Event $event) : void
     {
         if (null === $this->eventDispatcher) {
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoper130a9a1cd4a2\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScoper6ffa0951a2e9\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

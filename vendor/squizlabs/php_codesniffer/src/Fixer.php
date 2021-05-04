@@ -234,10 +234,10 @@ class Fixer
             if (isset($line[0]) === \true) {
                 switch ($line[0]) {
                     case '-':
-                        $diff[] = "\33[31m{$line}\33[0m";
+                        $diff[] = "\x1b[31m{$line}\x1b[0m";
                         break;
                     case '+':
-                        $diff[] = "\33[32m{$line}\33[0m";
+                        $diff[] = "\x1b[32m{$line}\x1b[0m";
                         break;
                     default:
                         $diff[] = $line;

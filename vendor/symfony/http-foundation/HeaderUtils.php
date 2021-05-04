@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper130a9a1cd4a2\Symfony\Component\HttpFoundation;
+namespace _PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation;
 
 /**
  * HTTP header utility functions.
@@ -180,7 +180,7 @@ class HeaderUtils
     {
         $q = [];
         foreach (\explode($separator, $query) as $v) {
-            if (\false !== ($i = \strpos($v, "\0"))) {
+            if (\false !== ($i = \strpos($v, "\x00"))) {
                 $v = \substr($v, 0, $i);
             }
             if (\false === ($i = \strpos($v, '='))) {
@@ -190,7 +190,7 @@ class HeaderUtils
                 $k = \urldecode(\substr($v, 0, $i));
                 $v = \substr($v, $i);
             }
-            if (\false !== ($i = \strpos($k, "\0"))) {
+            if (\false !== ($i = \strpos($k, "\x00"))) {
                 $k = \substr($k, 0, $i);
             }
             $k = \ltrim($k, ' ');

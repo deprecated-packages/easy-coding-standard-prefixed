@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -17,6 +18,7 @@ use PhpCsFixer\DocBlock\ShortDescription;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
+use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 /**
@@ -27,7 +29,7 @@ final class PhpdocSummaryFixer extends AbstractFixer implements WhitespacesAware
     /**
      * {@inheritdoc}
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('PHPDoc summary should end in either a full stop, exclamation mark, or question mark.', [new CodeSample('<?php
 /**
@@ -42,21 +44,21 @@ function foo () {}
      * Must run before PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
      */
-    public function isCandidate(Tokens $tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -76,12 +78,8 @@ function foo () {}
     }
     /**
      * Is the last line of the short description correctly formatted?
-     *
-     * @param string $content
-     *
-     * @return bool
      */
-    private function isCorrectlyFormatted($content)
+    private function isCorrectlyFormatted(string $content) : bool
     {
         if (\false !== \stripos($content, '{@inheritdoc}')) {
             return \true;
