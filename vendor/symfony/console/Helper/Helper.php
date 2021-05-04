@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Helper;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Console\Helper;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\String\UnicodeString;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\String\UnicodeString;
 /**
  * Helper is the base class for all helper classes.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Helper implements \_PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Helper\HelperInterface
+abstract class Helper implements \_PhpScopercfeba9d8ad31\Symfony\Component\Console\Helper\HelperInterface
 {
     protected $helperSet = null;
     /**
      * {@inheritdoc}
      */
-    public function setHelperSet(\_PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
+    public function setHelperSet(\_PhpScopercfeba9d8ad31\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
     {
         $this->helperSet = $helperSet;
     }

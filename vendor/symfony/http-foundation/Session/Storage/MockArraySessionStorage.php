@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Session\Storage;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Session\Storage;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * MockArraySessionStorage mocks the session for unit tests.
  *
@@ -23,7 +23,7 @@ use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Session\SessionBagIn
  * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
  * @author Drak <drak@zikula.org>
  */
-class MockArraySessionStorage implements \_PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
+class MockArraySessionStorage implements \_PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
 {
     /**
      * @var string
@@ -53,7 +53,7 @@ class MockArraySessionStorage implements \_PhpScoperc2b2a9bb0e13\Symfony\Compone
      * @var array|SessionBagInterface[]
      */
     protected $bags = [];
-    public function __construct(string $name = 'MOCKSESSID', \_PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(string $name = 'MOCKSESSID', \_PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         $this->name = $name;
         $this->setMetadataBag($metaBag);
@@ -172,10 +172,10 @@ class MockArraySessionStorage implements \_PhpScoperc2b2a9bb0e13\Symfony\Compone
     {
         return $this->started;
     }
-    public function setMetadataBag(\_PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $bag = null)
+    public function setMetadataBag(\_PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $bag = null)
     {
         if (null === $bag) {
-            $bag = new \_PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
+            $bag = new \_PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
         }
         $this->metadataBag = $bag;
     }

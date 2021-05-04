@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoperc2b2a9bb0e13\Nette\Utils;
+namespace _PhpScopercfeba9d8ad31\Nette\Utils;
 
-use _PhpScoperc2b2a9bb0e13\Nette;
+use _PhpScopercfeba9d8ad31\Nette;
 /**
  * Provides objects to work as array.
  */

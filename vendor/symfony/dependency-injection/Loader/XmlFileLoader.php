@@ -8,30 +8,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Loader;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Loader;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Util\XmlUtils;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Alias;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\ExpressionLanguage\Expression;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Config\Util\XmlUtils;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Alias;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Argument\AbstractArgument;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopercfeba9d8ad31\Symfony\Component\ExpressionLanguage\Expression;
 /**
  * XmlFileLoader loads XML files service definitions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class XmlFileLoader extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Loader\FileLoader
+class XmlFileLoader extends \_PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Loader\FileLoader
 {
     public const NS = 'http://symfony.com/schema/dic/services';
     protected $autoRegisterAliasesForSinglyImplementedInterfaces = \false;

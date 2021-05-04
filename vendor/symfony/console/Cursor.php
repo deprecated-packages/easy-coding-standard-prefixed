@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Console;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Console;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  */

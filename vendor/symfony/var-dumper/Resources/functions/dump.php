@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperc2b2a9bb0e13;
+namespace _PhpScopercfeba9d8ad31;
 
 /*
  * This file is part of the Symfony package.
@@ -10,8 +10,8 @@ namespace _PhpScoperc2b2a9bb0e13;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\VarDumper\VarDumper;
-if (!\function_exists('_PhpScoperc2b2a9bb0e13\\dump')) {
+use _PhpScopercfeba9d8ad31\Symfony\Component\VarDumper\VarDumper;
+if (!\function_exists('_PhpScopercfeba9d8ad31\\dump')) {
     /**
      * @author Nicolas Grekas <p@tchwork.com>
      */
@@ -27,7 +27,7 @@ if (!\function_exists('_PhpScoperc2b2a9bb0e13\\dump')) {
         return $var;
     }
 }
-if (!\function_exists('_PhpScoperc2b2a9bb0e13\\dd')) {
+if (!\function_exists('_PhpScopercfeba9d8ad31\\dd')) {
     function dd(...$vars)
     {
         foreach ($vars as $v) {

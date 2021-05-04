@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Cache;
 
-use _PhpScoperc2b2a9bb0e13\Psr\Log\LoggerInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Contracts\Cache\ItemInterface;
+use _PhpScopercfeba9d8ad31\Psr\Log\LoggerInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Contracts\Cache\ItemInterface;
 /**
  * LockRegistry is used internally by existing adapters to protect against cache stampede.
  *

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Loader;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Config\Loader;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Exception\LoaderLoadException;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Config\Exception\LoaderLoadException;
 /**
  * DelegatingLoader delegates loading to other loaders using a loader resolver.
  *
@@ -19,9 +19,9 @@ use _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Exception\LoaderLoadExceptio
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class DelegatingLoader extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Loader\Loader
+class DelegatingLoader extends \_PhpScopercfeba9d8ad31\Symfony\Component\Config\Loader\Loader
 {
-    public function __construct(\_PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Loader\LoaderResolverInterface $resolver)
+    public function __construct(\_PhpScopercfeba9d8ad31\Symfony\Component\Config\Loader\LoaderResolverInterface $resolver)
     {
         $this->resolver = $resolver;
     }

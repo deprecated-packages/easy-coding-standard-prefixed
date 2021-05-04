@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Helper;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Console\Helper;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Question\ChoiceQuestion;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Question\ConfirmationQuestion;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Question\Question;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Question\ChoiceQuestion;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Question\ConfirmationQuestion;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Question\Question;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Symfony Style Guide compliant question helper.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class SymfonyQuestionHelper extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Helper\QuestionHelper
+class SymfonyQuestionHelper extends \_PhpScopercfeba9d8ad31\Symfony\Component\Console\Helper\QuestionHelper
 {
     /**
      * {@inheritdoc}

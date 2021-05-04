@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\String;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\String;
 
 /**
  * A string whose value is computed lazily by a callback.

@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Cache;
 
-use _PhpScoperc2b2a9bb0e13\Doctrine\Common\Cache\CacheProvider;
-use _PhpScoperc2b2a9bb0e13\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopercfeba9d8ad31\Doctrine\Common\Cache\CacheProvider;
+use _PhpScopercfeba9d8ad31\Psr\Cache\CacheItemPoolInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DoctrineProvider extends CacheProvider implements \_PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\PruneableInterface, \_PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\ResettableInterface
+class DoctrineProvider extends CacheProvider implements \_PhpScopercfeba9d8ad31\Symfony\Component\Cache\PruneableInterface, \_PhpScopercfeba9d8ad31\Symfony\Component\Cache\ResettableInterface
 {
     private $pool;
     public function __construct(CacheItemPoolInterface $pool)
@@ -28,7 +28,7 @@ class DoctrineProvider extends CacheProvider implements \_PhpScoperc2b2a9bb0e13\
      */
     public function prune()
     {
-        return $this->pool instanceof \_PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
+        return $this->pool instanceof \_PhpScopercfeba9d8ad31\Symfony\Component\Cache\PruneableInterface && $this->pool->prune();
     }
     /**
      * {@inheritdoc}

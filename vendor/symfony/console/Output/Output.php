@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Output;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Console\Output;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * Base class for output classes.
  *
@@ -25,7 +25,7 @@ use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Formatter\OutputFormatterIn
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Output implements \_PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Output\OutputInterface
+abstract class Output implements \_PhpScopercfeba9d8ad31\Symfony\Component\Console\Output\OutputInterface
 {
     private $verbosity;
     private $formatter;
@@ -134,12 +134,12 @@ abstract class Output implements \_PhpScoperc2b2a9bb0e13\Symfony\Component\Conso
         }
         foreach ($messages as $message) {
             switch ($type) {
-                case \_PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Output\OutputInterface::OUTPUT_NORMAL:
+                case \_PhpScopercfeba9d8ad31\Symfony\Component\Console\Output\OutputInterface::OUTPUT_NORMAL:
                     $message = $this->formatter->format($message);
                     break;
-                case \_PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW:
+                case \_PhpScopercfeba9d8ad31\Symfony\Component\Console\Output\OutputInterface::OUTPUT_RAW:
                     break;
-                case \_PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Output\OutputInterface::OUTPUT_PLAIN:
+                case \_PhpScopercfeba9d8ad31\Symfony\Component\Console\Output\OutputInterface::OUTPUT_PLAIN:
                     $message = \strip_tags($this->formatter->format($message));
                     break;
             }

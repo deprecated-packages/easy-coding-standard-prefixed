@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\ConsoleEvents;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\VarDumper\Server\Connection;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\VarDumper\VarDumper;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\ConsoleEvents;
+use _PhpScopercfeba9d8ad31\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\VarDumper\Server\Connection;
+use _PhpScopercfeba9d8ad31\Symfony\Component\VarDumper\VarDumper;
 /**
  * Configures dump() handler.
  *

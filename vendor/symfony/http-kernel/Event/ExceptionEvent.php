@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Event;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Request;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows to create a response for a thrown exception.
  *
@@ -25,7 +25,7 @@ use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class ExceptionEvent extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Event\RequestEvent
+final class ExceptionEvent extends \_PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\Event\RequestEvent
 {
     private $throwable;
     /**

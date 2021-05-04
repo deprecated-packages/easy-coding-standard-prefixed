@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Exception;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Cache\Exception;
 
-use _PhpScoperc2b2a9bb0e13\Psr\Cache\CacheException as Psr6CacheInterface;
-use _PhpScoperc2b2a9bb0e13\Psr\SimpleCache\CacheException as SimpleCacheInterface;
+use _PhpScopercfeba9d8ad31\Psr\Cache\CacheException as Psr6CacheInterface;
+use _PhpScopercfeba9d8ad31\Psr\SimpleCache\CacheException as SimpleCacheInterface;
 if (\interface_exists(SimpleCacheInterface::class)) {
     class LogicException extends \LogicException implements Psr6CacheInterface, SimpleCacheInterface
     {

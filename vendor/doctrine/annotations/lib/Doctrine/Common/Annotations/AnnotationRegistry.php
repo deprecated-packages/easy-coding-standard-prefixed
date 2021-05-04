@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoperc2b2a9bb0e13\Doctrine\Common\Annotations;
+namespace _PhpScopercfeba9d8ad31\Doctrine\Common\Annotations;
 
 use function array_key_exists;
 use function array_merge;

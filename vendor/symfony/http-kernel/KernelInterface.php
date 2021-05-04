@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 /**
  * The Kernel is the heart of the Symfony system.
  *
@@ -24,7 +24,7 @@ use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Bundle\BundleInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface KernelInterface extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\HttpKernelInterface
+interface KernelInterface extends \_PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     /**
      * Returns an array of bundles to register.

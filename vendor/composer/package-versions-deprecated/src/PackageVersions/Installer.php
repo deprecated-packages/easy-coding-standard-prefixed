@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoperc2b2a9bb0e13\PackageVersions;
+namespace _PhpScopercfeba9d8ad31\PackageVersions;
 
-use _PhpScoperc2b2a9bb0e13\Composer\Composer;
-use _PhpScoperc2b2a9bb0e13\Composer\Config;
-use _PhpScoperc2b2a9bb0e13\Composer\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperc2b2a9bb0e13\Composer\IO\IOInterface;
-use _PhpScoperc2b2a9bb0e13\Composer\Package\AliasPackage;
-use _PhpScoperc2b2a9bb0e13\Composer\Package\Locker;
-use _PhpScoperc2b2a9bb0e13\Composer\Package\PackageInterface;
-use _PhpScoperc2b2a9bb0e13\Composer\Package\RootPackageInterface;
-use _PhpScoperc2b2a9bb0e13\Composer\Plugin\PluginInterface;
-use _PhpScoperc2b2a9bb0e13\Composer\Script\Event;
-use _PhpScoperc2b2a9bb0e13\Composer\Script\ScriptEvents;
+use _PhpScopercfeba9d8ad31\Composer\Composer;
+use _PhpScopercfeba9d8ad31\Composer\Config;
+use _PhpScopercfeba9d8ad31\Composer\EventDispatcher\EventSubscriberInterface;
+use _PhpScopercfeba9d8ad31\Composer\IO\IOInterface;
+use _PhpScopercfeba9d8ad31\Composer\Package\AliasPackage;
+use _PhpScopercfeba9d8ad31\Composer\Package\Locker;
+use _PhpScopercfeba9d8ad31\Composer\Package\PackageInterface;
+use _PhpScopercfeba9d8ad31\Composer\Package\RootPackageInterface;
+use _PhpScopercfeba9d8ad31\Composer\Plugin\PluginInterface;
+use _PhpScopercfeba9d8ad31\Composer\Script\Event;
+use _PhpScopercfeba9d8ad31\Composer\Script\ScriptEvents;
 use Generator;
 use RuntimeException;
 use function array_key_exists;

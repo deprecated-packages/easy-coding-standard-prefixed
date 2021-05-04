@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\Argument;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Argument;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
+use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\ServiceLocator as BaseServiceLocator;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

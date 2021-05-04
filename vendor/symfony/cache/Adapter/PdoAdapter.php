@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Adapter;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Cache\Adapter;
 
-use _PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Connection;
-use _PhpScoperc2b2a9bb0e13\Doctrine\DBAL\DBALException;
-use _PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
-use _PhpScoperc2b2a9bb0e13\Doctrine\DBAL\DriverManager;
-use _PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Exception;
-use _PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Exception\TableNotFoundException;
-use _PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Schema\Schema;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\PruneableInterface;
-class PdoAdapter extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Adapter\AbstractAdapter implements PruneableInterface
+use _PhpScopercfeba9d8ad31\Doctrine\DBAL\Connection;
+use _PhpScopercfeba9d8ad31\Doctrine\DBAL\DBALException;
+use _PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\ServerInfoAwareConnection;
+use _PhpScopercfeba9d8ad31\Doctrine\DBAL\DriverManager;
+use _PhpScopercfeba9d8ad31\Doctrine\DBAL\Exception;
+use _PhpScopercfeba9d8ad31\Doctrine\DBAL\Exception\TableNotFoundException;
+use _PhpScopercfeba9d8ad31\Doctrine\DBAL\Schema\Schema;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Cache\PruneableInterface;
+class PdoAdapter extends \_PhpScopercfeba9d8ad31\Symfony\Component\Cache\Adapter\AbstractAdapter implements PruneableInterface
 {
     protected $maxIdLength = 255;
     private $marshaller;
@@ -401,27 +401,27 @@ class PdoAdapter extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Adapter
             } else {
                 $driver = $this->conn->getDriver();
                 switch (\true) {
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\Mysqli\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\Mysqli\Driver:
                         throw new \LogicException(\sprintf('The adapter "%s" does not support the mysqli driver, use pdo_mysql instead.', static::class));
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\AbstractMySQLDriver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\AbstractMySQLDriver:
                         $this->driver = 'mysql';
                         break;
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\PDOSqlite\Driver:
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\PDO\SQLite\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\PDOSqlite\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\PDO\SQLite\Driver:
                         $this->driver = 'sqlite';
                         break;
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\PDOPgSql\Driver:
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\PDO\PgSQL\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\PDOPgSql\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\PDO\PgSQL\Driver:
                         $this->driver = 'pgsql';
                         break;
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\OCI8\Driver:
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\PDOOracle\Driver:
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\PDO\OCI\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\OCI8\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\PDOOracle\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\PDO\OCI\Driver:
                         $this->driver = 'oci';
                         break;
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\SQLSrv\Driver:
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\PDOSqlsrv\Driver:
-                    case $driver instanceof \_PhpScoperc2b2a9bb0e13\Doctrine\DBAL\Driver\PDO\SQLSrv\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\SQLSrv\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\PDOSqlsrv\Driver:
+                    case $driver instanceof \_PhpScopercfeba9d8ad31\Doctrine\DBAL\Driver\PDO\SQLSrv\Driver:
                         $this->driver = 'sqlsrv';
                         break;
                     default:

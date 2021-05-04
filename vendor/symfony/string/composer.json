@@ -38,7 +38,7 @@
     },
     "autoload": {
         "psr-4": {
-            "_PhpScoperc2b2a9bb0e13\\Symfony\\Component\\String\\": ""
+            "_PhpScopercfeba9d8ad31\\Symfony\\Component\\String\\": ""
         },
         "files": [
             "Resources\/functions.php"

@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Definition;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Config\Definition;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 /**
  * This node represents a numeric value in the config tree.
  *
  * @author David Jeanmonod <david.jeanmonod@gmail.com>
  */
-class NumericNode extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Definition\ScalarNode
+class NumericNode extends \_PhpScopercfeba9d8ad31\Symfony\Component\Config\Definition\ScalarNode
 {
     protected $min;
     protected $max;
-    public function __construct(?string $name, \_PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Definition\NodeInterface $parent = null, $min = null, $max = null, string $pathSeparator = \_PhpScoperc2b2a9bb0e13\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
+    public function __construct(?string $name, \_PhpScopercfeba9d8ad31\Symfony\Component\Config\Definition\NodeInterface $parent = null, $min = null, $max = null, string $pathSeparator = \_PhpScopercfeba9d8ad31\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
     {
         parent::__construct($name, $parent, $pathSeparator);
         $this->min = $min;

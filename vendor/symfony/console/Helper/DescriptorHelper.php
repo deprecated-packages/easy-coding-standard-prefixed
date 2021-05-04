@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Helper;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Console\Helper;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Descriptor\DescriptorInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Descriptor\JsonDescriptor;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Descriptor\TextDescriptor;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Descriptor\XmlDescriptor;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Descriptor\DescriptorInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Descriptor\JsonDescriptor;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Descriptor\MarkdownDescriptor;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Descriptor\TextDescriptor;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Descriptor\XmlDescriptor;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Output\OutputInterface;
 /**
  * This class adds helper method to describe objects in various formats.
  *
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class DescriptorHelper extends \_PhpScoperc2b2a9bb0e13\Symfony\Component\Console\Helper\Helper
+class DescriptorHelper extends \_PhpScopercfeba9d8ad31\Symfony\Component\Console\Helper\Helper
 {
     /**
      * @var DescriptorInterface[]

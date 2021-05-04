@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\UriSigner;
+use _PhpScopercfeba9d8ad31\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Request;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\UriSigner;
 /**
  * Handles content fragments represented by special URIs.
  *

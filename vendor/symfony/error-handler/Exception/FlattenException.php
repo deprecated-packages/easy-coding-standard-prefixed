@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\ErrorHandler\Exception;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\ErrorHandler\Exception;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\Response;
+use _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 /**
  * FlattenException wraps a PHP Error or Exception to be able to serialize it.
  *

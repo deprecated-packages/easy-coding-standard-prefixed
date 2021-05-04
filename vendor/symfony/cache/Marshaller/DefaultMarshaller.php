@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Marshaller;
+namespace _PhpScopercfeba9d8ad31\Symfony\Component\Cache\Marshaller;
 
-use _PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScopercfeba9d8ad31\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Serializes/unserializes values using igbinary_serialize() if available, serialize() otherwise.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DefaultMarshaller implements \_PhpScoperc2b2a9bb0e13\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class DefaultMarshaller implements \_PhpScopercfeba9d8ad31\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $useIgbinarySerialize = \true;
     public function __construct(bool $useIgbinarySerialize = null)
