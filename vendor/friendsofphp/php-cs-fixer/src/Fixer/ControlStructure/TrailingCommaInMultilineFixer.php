@@ -28,7 +28,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\Options;
+use _PhpScoperc7a2896cc805\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Sebastiaan Stok <s.stok@rollerscapes.net>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
@@ -56,7 +56,7 @@ final class TrailingCommaInMultilineFixer extends AbstractFixer implements Confi
         return new FixerDefinition('Multi-line arrays, arguments list and parameters list must have a trailing comma.', [new CodeSample("<?php\narray(\n    1,\n    2\n);\n"), new VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
 
-namespace _PhpScoper6ffa0951a2e9;
+namespace _PhpScoperc7a2896cc805;
 
 $x = ['foo', <<<EOD
 bar

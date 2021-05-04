@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Finder;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Finder\Finder;
+use _PhpScoperc7a2896cc805\Symfony\Component\Finder\Finder;
 use Symplify\EasyCodingStandard\Git\GitDiffProvider;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;

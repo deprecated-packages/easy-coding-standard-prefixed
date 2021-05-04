@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Composer\Semver;
+namespace _PhpScoperc7a2896cc805\Composer\Semver;
 
-use _PhpScoper6ffa0951a2e9\Composer\Semver\Constraint\Constraint;
+use _PhpScoperc7a2896cc805\Composer\Semver\Constraint\Constraint;
 class Comparator
 {
     /**

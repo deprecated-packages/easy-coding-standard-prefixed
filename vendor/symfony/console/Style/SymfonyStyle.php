@@ -8,30 +8,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Style;
+namespace _PhpScoperc7a2896cc805\Symfony\Component\Console\Style;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Exception\RuntimeException;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Helper\Helper;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Helper\ProgressBar;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Helper\SymfonyQuestionHelper;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Helper\Table;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Helper\TableCell;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Helper\TableSeparator;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\TrimmedBufferOutput;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Question\ChoiceQuestion;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Question\ConfirmationQuestion;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Question\Question;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Terminal;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Exception\RuntimeException;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Helper\Helper;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Helper\ProgressBar;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Helper\SymfonyQuestionHelper;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Helper\Table;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Helper\TableCell;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Helper\TableSeparator;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Output\TrimmedBufferOutput;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Question\ChoiceQuestion;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Question\ConfirmationQuestion;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Question\Question;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Terminal;
 /**
  * Output decorator helpers for the Symfony Style Guide.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class SymfonyStyle extends \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Style\OutputStyle
+class SymfonyStyle extends \_PhpScoperc7a2896cc805\Symfony\Component\Console\Style\OutputStyle
 {
     public const MAX_LINE_LENGTH = 120;
     private $input;

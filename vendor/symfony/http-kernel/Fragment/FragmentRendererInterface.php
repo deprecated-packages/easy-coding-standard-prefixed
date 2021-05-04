@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Symfony\Component\HttpKernel\Fragment;
+namespace _PhpScoperc7a2896cc805\Symfony\Component\HttpKernel\Fragment;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpKernel\Controller\ControllerReference;
+use _PhpScoperc7a2896cc805\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperc7a2896cc805\Symfony\Component\HttpFoundation\Response;
+use _PhpScoperc7a2896cc805\Symfony\Component\HttpKernel\Controller\ControllerReference;
 /**
  * Interface implemented by all rendering strategies.
  *

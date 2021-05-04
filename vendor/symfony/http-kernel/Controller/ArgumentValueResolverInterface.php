@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Symfony\Component\HttpKernel\Controller;
+namespace _PhpScoperc7a2896cc805\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use _PhpScoperc7a2896cc805\Symfony\Component\HttpFoundation\Request;
+use _PhpScoperc7a2896cc805\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 /**
  * Responsible for resolving the value of an argument based on its metadata.
  *

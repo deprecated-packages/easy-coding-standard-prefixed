@@ -12,7 +12,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Cache;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoperc7a2896cc805\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * @author Andreas Möller <am@localheinz.com>
  *

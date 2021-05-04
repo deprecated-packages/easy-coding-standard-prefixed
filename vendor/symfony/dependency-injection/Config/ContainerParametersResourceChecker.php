@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Config;
+namespace _PhpScoperc7a2896cc805\Symfony\Component\DependencyInjection\Config;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Resource\ResourceInterface;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\ResourceCheckerInterface;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Config\Resource\ResourceInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Config\ResourceCheckerInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
@@ -29,7 +29,7 @@ class ContainerParametersResourceChecker implements ResourceCheckerInterface
      */
     public function supports(ResourceInterface $metadata)
     {
-        return $metadata instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Config\ContainerParametersResource;
+        return $metadata instanceof \_PhpScoperc7a2896cc805\Symfony\Component\DependencyInjection\Config\ContainerParametersResource;
     }
     /**
      * {@inheritdoc}

@@ -1,10 +1,10 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper6ffa0951a2e9;
+namespace _PhpScoperc7a2896cc805;
 
-use _PhpScoper6ffa0951a2e9\Nette\Utils\Strings;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoperc7a2896cc805\Nette\Utils\Strings;
+use _PhpScoperc7a2896cc805\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(__DIR__ . '/services.php');

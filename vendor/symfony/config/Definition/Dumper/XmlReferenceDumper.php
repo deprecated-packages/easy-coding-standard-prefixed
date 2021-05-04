@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\Dumper;
+namespace _PhpScoperc7a2896cc805\Symfony\Component\Config\Definition\Dumper;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\ArrayNode;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\BaseNode;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\EnumNode;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\NodeInterface;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use _PhpScoperc7a2896cc805\Symfony\Component\Config\Definition\ArrayNode;
+use _PhpScoperc7a2896cc805\Symfony\Component\Config\Definition\BaseNode;
+use _PhpScoperc7a2896cc805\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Config\Definition\EnumNode;
+use _PhpScoperc7a2896cc805\Symfony\Component\Config\Definition\NodeInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Config\Definition\PrototypedArrayNode;
 /**
  * Dumps an XML reference configuration for the given configuration/node instance.
  *

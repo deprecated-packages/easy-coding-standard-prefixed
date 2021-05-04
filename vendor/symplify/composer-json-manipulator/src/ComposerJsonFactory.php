@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator;
 
-use _PhpScoper6ffa0951a2e9\Nette\Utils\Json;
+use _PhpScoperc7a2896cc805\Nette\Utils\Json;
 use Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJson;
 use Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Process\Pipes;
+namespace _PhpScoperc7a2896cc805\Symfony\Component\Process\Pipes;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Process\Process;
+use _PhpScoperc7a2896cc805\Symfony\Component\Process\Exception\RuntimeException;
+use _PhpScoperc7a2896cc805\Symfony\Component\Process\Process;
 /**
  * WindowsPipes implementation uses temporary files as handles.
  *
@@ -22,7 +22,7 @@ use _PhpScoper6ffa0951a2e9\Symfony\Component\Process\Process;
  *
  * @internal
  */
-class WindowsPipes extends \_PhpScoper6ffa0951a2e9\Symfony\Component\Process\Pipes\AbstractPipes
+class WindowsPipes extends \_PhpScoperc7a2896cc805\Symfony\Component\Process\Pipes\AbstractPipes
 {
     private $files = [];
     private $fileHandles = [];

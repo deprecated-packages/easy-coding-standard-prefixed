@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper6ffa0951a2e9;
+namespace _PhpScoperc7a2896cc805;
 
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff;
 use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
@@ -18,7 +18,7 @@ use PhpCsFixer\Fixer\Operator\StandardizeIncrementFixer;
 use PhpCsFixer\Fixer\PhpUnit\PhpUnitMethodCasingFixer;
 use PhpCsFixer\Fixer\StringNotation\ExplicitStringVariableFixer;
 use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoperc7a2896cc805\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
@@ -28,7 +28,7 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(ExplicitIndirectVariableFixer::class);
     $services->set(SingleClassElementPerStatementFixer::class)->call('configure', [['elements' => ['const', 'property']]]);
     $services->set(NewWithBracesFixer::class);
-    $services->set(ClassDefinitionFixer::class)->call('configure', [['singleLine' => \true]]);
+    $services->set(ClassDefinitionFixer::class)->call('configure', [['single_line' => \true]]);
     $services->set(StandardizeIncrementFixer::class);
     $services->set(SelfAccessorFixer::class);
     $services->set(MagicConstantCasingFixer::class);

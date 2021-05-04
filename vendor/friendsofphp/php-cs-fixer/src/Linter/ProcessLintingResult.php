@@ -12,7 +12,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Linter;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Process\Process;
+use _PhpScoperc7a2896cc805\Symfony\Component\Process\Process;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *

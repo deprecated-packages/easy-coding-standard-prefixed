@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter;
+namespace _PhpScoperc7a2896cc805\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper6ffa0951a2e9\Psr\Cache\CacheItemInterface;
-use _PhpScoper6ffa0951a2e9\Psr\Cache\CacheItemPoolInterface;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\CacheItem;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Traits\ProxyTrait;
-use _PhpScoper6ffa0951a2e9\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScoperc7a2896cc805\Psr\Cache\CacheItemInterface;
+use _PhpScoperc7a2896cc805\Psr\Cache\CacheItemPoolInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Cache\CacheItem;
+use _PhpScoperc7a2896cc805\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Cache\ResettableInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScoperc7a2896cc805\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScoperc7a2896cc805\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ProxyAdapter implements \_PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
+class ProxyAdapter implements \_PhpScoperc7a2896cc805\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface, PruneableInterface, ResettableInterface
 {
     use ContractsTrait;
     use ProxyTrait;
@@ -134,7 +134,7 @@ class ProxyAdapter implements \_PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Ad
      */
     public function clear(string $prefix = '')
     {
-        if ($this->pool instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \_PhpScoperc7a2896cc805\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($this->namespace . $prefix);
         }
         return $this->pool->clear();
@@ -200,7 +200,7 @@ class ProxyAdapter implements \_PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Ad
         }
         if ($item["\x00*\x00poolHash"] === $this->poolHash && $item["\x00*\x00innerItem"]) {
             $innerItem = $item["\x00*\x00innerItem"];
-        } elseif ($this->pool instanceof \_PhpScoper6ffa0951a2e9\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        } elseif ($this->pool instanceof \_PhpScoperc7a2896cc805\Symfony\Component\Cache\Adapter\AdapterInterface) {
             // this is an optimization specific for AdapterInterface implementations
             // so we can save a round-trip to the backend by just creating a new item
             $f = $this->createCacheItem;

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject;
 
-use _PhpScoper6ffa0951a2e9\Nette\Utils\Strings;
+use _PhpScoperc7a2896cc805\Nette\Utils\Strings;
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
 use Symplify\RuleDocGenerator\Exception\PoorDocumentationException;
 use Symplify\RuleDocGenerator\Exception\ShouldNotHappenException;

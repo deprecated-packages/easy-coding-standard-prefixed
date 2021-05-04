@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output;
+namespace _PhpScoperc7a2896cc805\Symfony\Component\Console\Output;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * StreamOutput writes the output to a given stream.
  *
@@ -25,7 +25,7 @@ use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterIn
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class StreamOutput extends \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\Output
+class StreamOutput extends \_PhpScoperc7a2896cc805\Symfony\Component\Console\Output\Output
 {
     private $stream;
     /**

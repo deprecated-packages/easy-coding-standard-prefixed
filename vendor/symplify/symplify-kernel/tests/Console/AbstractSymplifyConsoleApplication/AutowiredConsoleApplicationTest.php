@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Tests\Console\AbstractSymplifyConsoleApplication;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Application;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Application;
 use Symplify\PackageBuilder\Testing\AbstractKernelTestCase;
 use Symplify\SymplifyKernel\Tests\HttpKernel\OnlyForTestsKernel;
 final class AutowiredConsoleApplicationTest extends AbstractKernelTestCase

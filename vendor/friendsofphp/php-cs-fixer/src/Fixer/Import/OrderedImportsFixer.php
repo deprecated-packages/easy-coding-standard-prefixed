@@ -28,7 +28,7 @@ use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoperc7a2896cc805\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Sebastiaan Stok <s.stok@rollerscapes.net>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>

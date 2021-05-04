@@ -15,8 +15,8 @@ namespace PhpCsFixer\Console\Output;
 use PhpCsFixer\Differ\DiffConsoleFormatter;
 use PhpCsFixer\Error\Error;
 use PhpCsFixer\Linter\LintingException;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author SpacePossum
  *
@@ -71,7 +71,7 @@ final class ErrorOutput
                 $this->output->writeln('');
                 $stackTrace = $e->getTrace();
                 foreach ($stackTrace as $trace) {
-                    if (isset($trace['class'], $trace['function']) && \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
+                    if (isset($trace['class'], $trace['function']) && \_PhpScoperc7a2896cc805\Symfony\Component\Console\Command\Command::class === $trace['class'] && 'run' === $trace['function']) {
                         $this->output->writeln('      [ ... ]');
                         break;
                     }

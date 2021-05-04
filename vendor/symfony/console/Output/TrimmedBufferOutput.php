@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output;
+namespace _PhpScoperc7a2896cc805\Symfony\Component\Console\Output;
 
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper6ffa0951a2e9\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoperc7a2896cc805\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * A BufferedOutput that keeps only the last N chars.
  *
  * @author Jérémy Derussé <jeremy@derusse.com>
  */
-class TrimmedBufferOutput extends \_PhpScoper6ffa0951a2e9\Symfony\Component\Console\Output\Output
+class TrimmedBufferOutput extends \_PhpScoperc7a2896cc805\Symfony\Component\Console\Output\Output
 {
     private $maxLength;
     private $buffer = '';
