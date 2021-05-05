@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Dumper;
+namespace _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Dumper;
 
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Parameter;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Parameter;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Reference;
 /**
  * GraphvizDumper dumps a service container as a graphviz file.
  *
@@ -26,7 +26,7 @@ use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Reference;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class GraphvizDumper extends \_PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Dumper\Dumper
+class GraphvizDumper extends \_PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Dumper\Dumper
 {
     private $nodes;
     private $edges;

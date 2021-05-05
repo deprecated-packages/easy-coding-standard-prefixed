@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6d453419d16a\Symfony\Component\Console\Command;
+namespace _PhpScoperef2f7aa3581e\Symfony\Component\Console\Command;
 
-use _PhpScoper6d453419d16a\Symfony\Component\Console\Helper\DescriptorHelper;
-use _PhpScoper6d453419d16a\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper6d453419d16a\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper6d453419d16a\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper6d453419d16a\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Helper\DescriptorHelper;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Input\InputOption;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Output\OutputInterface;
 /**
  * HelpCommand displays the help for a given command.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class HelpCommand extends \_PhpScoper6d453419d16a\Symfony\Component\Console\Command\Command
+class HelpCommand extends \_PhpScoperef2f7aa3581e\Symfony\Component\Console\Command\Command
 {
     private $command;
     /**
@@ -42,7 +42,7 @@ To display the list of available commands, please use the <info>list</info> comm
 EOF
 );
     }
-    public function setCommand(\_PhpScoper6d453419d16a\Symfony\Component\Console\Command\Command $command)
+    public function setCommand(\_PhpScoperef2f7aa3581e\Symfony\Component\Console\Command\Command $command)
     {
         $this->command = $command;
     }

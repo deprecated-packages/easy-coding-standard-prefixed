@@ -25,8 +25,8 @@ use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Analyzer\WhitespacesAnalyzer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper6d453419d16a\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper6d453419d16a\Symfony\Component\OptionsResolver\Options;
+use _PhpScoperef2f7aa3581e\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScoperef2f7aa3581e\Symfony\Component\OptionsResolver\Options;
 /**
  * Fixer for rule defined in PSR2 ¶5.2.
  */

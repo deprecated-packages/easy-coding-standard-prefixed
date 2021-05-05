@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScoper6d453419d16a\Doctrine\Common\Annotations;
+namespace _PhpScoperef2f7aa3581e\Doctrine\Common\Annotations;
 
 /**
  * Marker interface for PHP7/PHP8 compatible support

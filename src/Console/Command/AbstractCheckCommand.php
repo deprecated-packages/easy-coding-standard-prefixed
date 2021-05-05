@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScoper6d453419d16a\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper6d453419d16a\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper6d453419d16a\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper6d453419d16a\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Input\InputOption;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Application\EasyCodingStandardApplication;
 use Symplify\EasyCodingStandard\Configuration\Configuration;
 use Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter;

@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\FixtureSplitter;
 
-use _PhpScoper6d453419d16a\Nette\Utils\Strings;
+use _PhpScoperef2f7aa3581e\Nette\Utils\Strings;
 use Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent;
 use Symplify\EasyTesting\ValueObject\SplitLine;
 use Symplify\SmartFileSystem\SmartFileInfo;

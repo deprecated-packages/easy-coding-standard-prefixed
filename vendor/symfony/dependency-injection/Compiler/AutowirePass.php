@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper6d453419d16a\Symfony\Component\Config\Resource\ClassExistenceResource;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoperef2f7aa3581e\Symfony\Component\Config\Resource\ClassExistenceResource;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Exception\AutowiringFailedException;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Inspects existing service definitions and wires the autowired ones using the type hints of their classes.
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class AutowirePass extends \_PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class AutowirePass extends \_PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $types;
     private $ambiguousServiceTypes;
