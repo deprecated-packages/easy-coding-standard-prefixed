@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoperef2f7aa3581e\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use _PhpScoper7e6a1331d94a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper7e6a1331d94a\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper7e6a1331d94a\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 /**
  * Adds services tagged kernel.fragment_renderer as HTTP content rendering strategies.
  *

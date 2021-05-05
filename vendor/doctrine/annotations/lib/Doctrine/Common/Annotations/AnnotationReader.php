@@ -1,9 +1,9 @@
 <?php
 
-namespace _PhpScoperef2f7aa3581e\Doctrine\Common\Annotations;
+namespace _PhpScoper7e6a1331d94a\Doctrine\Common\Annotations;
 
-use _PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
-use _PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\Annotation\Target;
+use _PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
+use _PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\Annotation\Target;
 use ReflectionClass;
 use ReflectionFunction;
 use ReflectionMethod;
@@ -15,14 +15,14 @@ use function ini_get;
 /**
  * A reader for docblock annotations.
  */
-class AnnotationReader implements \_PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\Reader
+class AnnotationReader implements \_PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\Reader
 {
     /**
      * Global map for imports.
      *
      * @var array<string, class-string>
      */
-    private static $globalImports = ['ignoreannotation' => \_PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation::class];
+    private static $globalImports = ['ignoreannotation' => \_PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\Annotation\IgnoreAnnotation::class];
     /**
      * A list with annotations that are not causing exceptions when not resolved to an annotation class.
      *
@@ -30,7 +30,7 @@ class AnnotationReader implements \_PhpScoperef2f7aa3581e\Doctrine\Common\Annota
      *
      * @var array<string, true>
      */
-    private static $globalIgnoredNames = \_PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\ImplicitlyIgnoredAnnotationNames::LIST;
+    private static $globalIgnoredNames = \_PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\ImplicitlyIgnoredAnnotationNames::LIST;
     /**
      * A list with annotations that are not causing exceptions when not resolved to an annotation class.
      *
@@ -92,22 +92,22 @@ class AnnotationReader implements \_PhpScoperef2f7aa3581e\Doctrine\Common\Annota
      *
      * @throws AnnotationException
      */
-    public function __construct(?\_PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\DocParser $parser = null)
+    public function __construct(?\_PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\DocParser $parser = null)
     {
         if (extension_loaded('Zend Optimizer+') && (ini_get('zend_optimizerplus.save_comments') === '0' || ini_get('opcache.save_comments') === '0')) {
-            throw \_PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\AnnotationException::optimizerPlusSaveComments();
+            throw \_PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\AnnotationException::optimizerPlusSaveComments();
         }
         if (extension_loaded('Zend OPcache') && ini_get('opcache.save_comments') === 0) {
-            throw \_PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\AnnotationException::optimizerPlusSaveComments();
+            throw \_PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\AnnotationException::optimizerPlusSaveComments();
         }
         // Make sure that the IgnoreAnnotation annotation is loaded
         class_exists(IgnoreAnnotation::class);
-        $this->parser = $parser ?: new \_PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\DocParser();
-        $this->preParser = new \_PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\DocParser();
+        $this->parser = $parser ?: new \_PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\DocParser();
+        $this->preParser = new \_PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\DocParser();
         $this->preParser->setImports(self::$globalImports);
         $this->preParser->setIgnoreNotImportedAnnotations(\true);
         $this->preParser->setIgnoredAnnotationNames(self::$globalIgnoredNames);
-        $this->phpParser = new \_PhpScoperef2f7aa3581e\Doctrine\Common\Annotations\PhpParser();
+        $this->phpParser = new \_PhpScoper7e6a1331d94a\Doctrine\Common\Annotations\PhpParser();
     }
     /**
      * {@inheritDoc}

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef2f7aa3581e\Symfony\Component\Cache\Traits;
+namespace _PhpScoper7e6a1331d94a\Symfony\Component\Cache\Traits;
 
-use _PhpScoperef2f7aa3581e\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Cache\Marshaller\MarshallerInterface;
 /**
  * @author Rob Frawley 2nd <rmf@src.run>
  * @author Nicolas Grekas <p@tchwork.com>

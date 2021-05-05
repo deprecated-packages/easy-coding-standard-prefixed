@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\Debug;
+namespace _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\Debug;
 
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * Formats debug file links.
  *

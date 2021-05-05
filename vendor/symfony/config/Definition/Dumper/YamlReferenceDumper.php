@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef2f7aa3581e\Symfony\Component\Config\Definition\Dumper;
+namespace _PhpScoper7e6a1331d94a\Symfony\Component\Config\Definition\Dumper;
 
-use _PhpScoperef2f7aa3581e\Symfony\Component\Config\Definition\ArrayNode;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Config\Definition\BaseNode;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Config\Definition\EnumNode;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Config\Definition\NodeInterface;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Config\Definition\PrototypedArrayNode;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Config\Definition\ScalarNode;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Config\Definition\VariableNode;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Yaml\Inline;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Config\Definition\ArrayNode;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Config\Definition\BaseNode;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Config\Definition\ConfigurationInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Config\Definition\EnumNode;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Config\Definition\NodeInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Config\Definition\ScalarNode;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Config\Definition\VariableNode;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Yaml\Inline;
 /**
  * Dumps a Yaml reference configuration for the given configuration/node instance.
  *

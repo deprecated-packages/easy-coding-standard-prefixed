@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoperef2f7aa3581e\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\HttpCache\HttpCache;
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper7e6a1331d94a\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\HttpCache\HttpCache;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * SurrogateListener adds a Surrogate-Control HTTP header when the Response needs to be parsed for Surrogates.
  *

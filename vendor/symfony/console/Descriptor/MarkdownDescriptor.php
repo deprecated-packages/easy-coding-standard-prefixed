@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef2f7aa3581e\Symfony\Component\Console\Descriptor;
+namespace _PhpScoper7e6a1331d94a\Symfony\Component\Console\Descriptor;
 
-use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Application;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Command\Command;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Helper\Helper;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Input\InputOption;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Application;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Command\Command;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Helper\Helper;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Markdown descriptor.
  *
@@ -24,7 +24,7 @@ use _PhpScoperef2f7aa3581e\Symfony\Component\Console\Output\OutputInterface;
  *
  * @internal
  */
-class MarkdownDescriptor extends \_PhpScoperef2f7aa3581e\Symfony\Component\Console\Descriptor\Descriptor
+class MarkdownDescriptor extends \_PhpScoper7e6a1331d94a\Symfony\Component\Console\Descriptor\Descriptor
 {
     /**
      * {@inheritdoc}
@@ -113,11 +113,11 @@ class MarkdownDescriptor extends \_PhpScoperef2f7aa3581e\Symfony\Component\Conso
     protected function describeApplication(Application $application, array $options = [])
     {
         $describedNamespace = $options['namespace'] ?? null;
-        $description = new \_PhpScoperef2f7aa3581e\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
+        $description = new \_PhpScoper7e6a1331d94a\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
         $title = $this->getApplicationTitle($application);
         $this->write($title . "\n" . \str_repeat('=', Helper::strlen($title)));
         foreach ($description->getNamespaces() as $namespace) {
-            if (\_PhpScoperef2f7aa3581e\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
+            if (\_PhpScoper7e6a1331d94a\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
                 $this->write("\n\n");
                 $this->write('**' . $namespace['id'] . ':**');
             }

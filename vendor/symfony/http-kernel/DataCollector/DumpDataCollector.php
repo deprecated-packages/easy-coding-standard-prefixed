@@ -8,26 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpFoundation\Request;
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpFoundation\Response;
-use _PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
-use _PhpScoperef2f7aa3581e\Symfony\Component\Stopwatch\Stopwatch;
-use _PhpScoperef2f7aa3581e\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScoperef2f7aa3581e\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScoperef2f7aa3581e\Symfony\Component\VarDumper\Dumper\CliDumper;
-use _PhpScoperef2f7aa3581e\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
-use _PhpScoperef2f7aa3581e\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
-use _PhpScoperef2f7aa3581e\Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use _PhpScoperef2f7aa3581e\Symfony\Component\VarDumper\Server\Connection;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
+use _PhpScoper7e6a1331d94a\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Dumper\CliDumper;
+use _PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
+use _PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
+use _PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use _PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Server\Connection;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @final
  */
-class DumpDataCollector extends \_PhpScoperef2f7aa3581e\Symfony\Component\HttpKernel\DataCollector\DataCollector implements DataDumperInterface
+class DumpDataCollector extends \_PhpScoper7e6a1331d94a\Symfony\Component\HttpKernel\DataCollector\DataCollector implements DataDumperInterface
 {
     private $stopwatch;
     private $fileLinkFormat;

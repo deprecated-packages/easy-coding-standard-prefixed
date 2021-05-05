@@ -9,19 +9,19 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoperef2f7aa3581e\SebastianBergmann\Diff\Output;
+namespace _PhpScoper7e6a1331d94a\SebastianBergmann\Diff\Output;
 
 use function fclose;
 use function fopen;
 use function fwrite;
 use function stream_get_contents;
 use function substr;
-use _PhpScoperef2f7aa3581e\SebastianBergmann\Diff\Differ;
+use _PhpScoper7e6a1331d94a\SebastianBergmann\Diff\Differ;
 /**
  * Builds a diff string representation in a loose unified diff format
  * listing only changes lines. Does not include line numbers.
  */
-final class DiffOnlyOutputBuilder implements \_PhpScoperef2f7aa3581e\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface
+final class DiffOnlyOutputBuilder implements \_PhpScoper7e6a1331d94a\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface
 {
     /**
      * @var string
