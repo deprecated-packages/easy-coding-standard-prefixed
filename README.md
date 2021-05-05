@@ -20,7 +20,7 @@ Are you already using another tool?
 ## Install
 
 ```bash
-composer require symplify/easy-coding-standard --dev
+composer require symplify/easy-coding-standard-prefixed --dev
 ```
 
 ### Prefixed Version
