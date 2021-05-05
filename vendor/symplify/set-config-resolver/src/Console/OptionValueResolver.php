@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Console;
 
-use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper53db80252f28\Symfony\Component\Console\Input\InputInterface;
 final class OptionValueResolver
 {
     /**

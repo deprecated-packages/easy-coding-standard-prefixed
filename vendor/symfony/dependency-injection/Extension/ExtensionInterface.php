@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7e6a1331d94a\Symfony\Component\DependencyInjection\Extension;
+namespace _PhpScoper53db80252f28\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScoper7e6a1331d94a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper53db80252f28\Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * ExtensionInterface is the interface implemented by container extension classes.
  *
@@ -50,4 +50,4 @@ interface ExtensionInterface
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-\class_alias('_PhpScoper7e6a1331d94a\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface', 'Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface', \false);
+\class_alias('_PhpScoper53db80252f28\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface', 'Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface', \false);

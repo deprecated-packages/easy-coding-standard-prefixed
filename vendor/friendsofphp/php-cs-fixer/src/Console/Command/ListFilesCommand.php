@@ -17,10 +17,10 @@ use PhpCsFixer\ConfigInterface;
 use PhpCsFixer\Console\ConfigurationResolver;
 use PhpCsFixer\ToolInfoInterface;
 use SplFileInfo;
-use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Command\Command;
-use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper53db80252f28\Symfony\Component\Console\Command\Command;
+use _PhpScoper53db80252f28\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper53db80252f28\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper53db80252f28\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Markus Staab <markus.staab@redaxo.org>
  *

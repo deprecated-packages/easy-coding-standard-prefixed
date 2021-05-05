@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper7e6a1331d94a;
+namespace _PhpScoper53db80252f28;
 
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff;
@@ -23,7 +23,7 @@ use PhpCsFixer\Fixer\Semicolon\SpaceAfterSemicolonFixer;
 use PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesAroundOffsetFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
-use _PhpScoper7e6a1331d94a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper53db80252f28\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\Spacing\NewlineServiceDefinitionConfigFixer;
 use Symplify\CodingStandard\Fixer\Spacing\StandaloneLinePromotedPropertyFixer;
 return static function (ContainerConfigurator $containerConfigurator) : void {
@@ -31,7 +31,7 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(StandaloneLinePromotedPropertyFixer::class);
     $services->set(NewlineServiceDefinitionConfigFixer::class);
     $services->set(MethodChainingIndentationFixer::class);
-    $services->set(ClassAttributesSeparationFixer::class)->call('configure', [['elements' => ['const', 'property', 'method']]]);
+    $services->set(ClassAttributesSeparationFixer::class)->call('configure', [['elements' => ['const' => ClassAttributesSeparationFixer::SPACING_ONE, 'property' => ClassAttributesSeparationFixer::SPACING_ONE, 'method' => ClassAttributesSeparationFixer::SPACING_ONE]]]);
     $services->set(ConcatSpaceFixer::class)->call('configure', [['spacing' => 'one']]);
     $services->set(NotOperatorWithSuccessorSpaceFixer::class);
     $services->set(SuperfluousWhitespaceSniff::class)->property('ignoreBlankLines', \false);

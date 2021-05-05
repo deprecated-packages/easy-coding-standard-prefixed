@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Caster;
+namespace _PhpScoper53db80252f28\Symfony\Component\VarDumper\Caster;
 
-use _PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper53db80252f28\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts GMP objects to array representation.
  *
@@ -23,7 +23,7 @@ class GmpCaster
 {
     public static function castGmp(\GMP $gmp, array $a, Stub $stub, bool $isNested, int $filter) : array
     {
-        $a[\_PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'value'] = new \_PhpScoper7e6a1331d94a\Symfony\Component\VarDumper\Caster\ConstStub(\gmp_strval($gmp), \gmp_strval($gmp));
+        $a[\_PhpScoper53db80252f28\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'value'] = new \_PhpScoper53db80252f28\Symfony\Component\VarDumper\Caster\ConstStub(\gmp_strval($gmp), \gmp_strval($gmp));
         return $a;
     }
 }

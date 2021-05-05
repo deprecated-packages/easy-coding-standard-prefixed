@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7e6a1331d94a\Symfony\Component\Console\Input;
+namespace _PhpScoper53db80252f28\Symfony\Component\Console\Input;
 
-use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper7e6a1331d94a\Symfony\Component\Console\Exception\LogicException;
+use _PhpScoper53db80252f28\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper53db80252f28\Symfony\Component\Console\Exception\LogicException;
 /**
  * Represents a command line option.
  *

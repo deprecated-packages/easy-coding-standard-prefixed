@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\DocBlock;
 
-use _PhpScoper7e6a1331d94a\Nette\Utils\Strings;
+use _PhpScoper53db80252f28\Nette\Utils\Strings;
 use PhpCsFixer\Tokenizer\Token;
 final class UselessDocBlockCleaner
 {

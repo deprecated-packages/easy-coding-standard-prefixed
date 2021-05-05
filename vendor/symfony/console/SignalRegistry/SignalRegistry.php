@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7e6a1331d94a\Symfony\Component\Console\SignalRegistry;
+namespace _PhpScoper53db80252f28\Symfony\Component\Console\SignalRegistry;
 
 final class SignalRegistry
 {

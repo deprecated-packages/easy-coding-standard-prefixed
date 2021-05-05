@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Tests\FileSystemFilter;
 
-use _PhpScoper7e6a1331d94a\PHPUnit\Framework\TestCase;
+use _PhpScoper53db80252f28\PHPUnit\Framework\TestCase;
 use Symplify\SmartFileSystem\FileSystemFilter;
 final class FileSystemFilterTest extends TestCase
 {

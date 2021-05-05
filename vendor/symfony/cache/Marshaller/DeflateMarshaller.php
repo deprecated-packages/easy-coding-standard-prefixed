@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper7e6a1331d94a\Symfony\Component\Cache\Marshaller;
+namespace _PhpScoper53db80252f28\Symfony\Component\Cache\Marshaller;
 
-use _PhpScoper7e6a1331d94a\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScoper53db80252f28\Symfony\Component\Cache\Exception\CacheException;
 /**
  * Compresses values using gzdeflate().
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DeflateMarshaller implements \_PhpScoper7e6a1331d94a\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class DeflateMarshaller implements \_PhpScoper53db80252f28\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $marshaller;
-    public function __construct(\_PhpScoper7e6a1331d94a\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
+    public function __construct(\_PhpScoper53db80252f28\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
     {
         if (!\function_exists('gzdeflate')) {
             throw new CacheException('The "zlib" PHP extension is not loaded.');
