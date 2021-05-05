@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 /**
  * Resolves all parameter placeholders "%somevalue%" to their real values.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ResolveParameterPlaceHoldersPass extends \_PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveParameterPlaceHoldersPass extends \_PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $bag;
     private $resolveArrays;

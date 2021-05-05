@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\HttpKernel;
 
-use _PhpScopercfeba9d8ad31\Symfony\Component\Config\Loader\DelegatingLoader;
-use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopercfeba9d8ad31\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper6d453419d16a\Symfony\Component\Config\Loader\DelegatingLoader;
+use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper6d453419d16a\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\CodingStandard\Bundle\SymplifyCodingStandardBundle;
 use Symplify\ConsoleColorDiff\Bundle\ConsoleColorDiffBundle;
 use Symplify\EasyCodingStandard\Bundle\EasyCodingStandardBundle;

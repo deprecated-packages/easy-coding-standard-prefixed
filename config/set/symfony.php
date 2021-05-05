@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercfeba9d8ad31;
+namespace _PhpScoper6d453419d16a;
 
 use PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
@@ -106,7 +106,7 @@ use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
-use _PhpScopercfeba9d8ad31\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper6d453419d16a\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(ArraySyntaxFixer::class)->call('configure', [['syntax' => 'short']]);
@@ -116,7 +116,7 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $services->set(BlankLineBeforeStatementFixer::class)->call('configure', [['statements' => ['return']]]);
     $services->set(BracesFixer::class)->call('configure', [['allow_single_line_closure' => \true]]);
     $services->set(CastSpacesFixer::class);
-    $services->set(ClassAttributesSeparationFixer::class)->call('configure', [['elements' => ['method']]]);
+    $services->set(ClassAttributesSeparationFixer::class)->call('configure', [['elements' => ['method' => ClassAttributesSeparationFixer::SPACING_ONE]]]);
     $services->set(ClassDefinitionFixer::class)->call('configure', [['single_line' => \true]]);
     $services->set(ConcatSpaceFixer::class);
     $services->set(ConstantCaseFixer::class);

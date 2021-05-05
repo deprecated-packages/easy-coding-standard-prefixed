@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation;
+namespace _PhpScoper6d453419d16a\Symfony\Component\HttpFoundation;
 
-use _PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\File\UploadedFile;
+use _PhpScoper6d453419d16a\Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * FileBag is a container for uploaded files.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
  */
-class FileBag extends \_PhpScopercfeba9d8ad31\Symfony\Component\HttpFoundation\ParameterBag
+class FileBag extends \_PhpScoper6d453419d16a\Symfony\Component\HttpFoundation\ParameterBag
 {
     private const FILE_KEYS = ['error', 'name', 'size', 'tmp_name', 'type'];
     /**

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScopercfeba9d8ad31\Composer\Semver;
+namespace _PhpScoper6d453419d16a\Composer\Semver;
 
-use _PhpScopercfeba9d8ad31\Composer\Semver\Constraint\Constraint;
-use _PhpScopercfeba9d8ad31\Composer\Semver\Constraint\ConstraintInterface;
+use _PhpScoper6d453419d16a\Composer\Semver\Constraint\Constraint;
+use _PhpScoper6d453419d16a\Composer\Semver\Constraint\ConstraintInterface;
 /**
  * Helper class to evaluate constraint by compiling and reusing the code to evaluate
  */

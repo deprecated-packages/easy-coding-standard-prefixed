@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercfeba9d8ad31\Symfony\Component\Console;
+namespace _PhpScoper6d453419d16a\Symfony\Component\Console;
 
-use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Event\ConsoleCommandEvent;
-use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Event\ConsoleErrorEvent;
-use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Event\ConsoleSignalEvent;
-use _PhpScopercfeba9d8ad31\Symfony\Component\Console\Event\ConsoleTerminateEvent;
+use _PhpScoper6d453419d16a\Symfony\Component\Console\Event\ConsoleCommandEvent;
+use _PhpScoper6d453419d16a\Symfony\Component\Console\Event\ConsoleErrorEvent;
+use _PhpScoper6d453419d16a\Symfony\Component\Console\Event\ConsoleSignalEvent;
+use _PhpScoper6d453419d16a\Symfony\Component\Console\Event\ConsoleTerminateEvent;
 /**
  * Contains all events dispatched by an Application.
  *

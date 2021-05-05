@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercfeba9d8ad31\Symfony\Component\Config\Definition\Exception;
+namespace _PhpScoper6d453419d16a\Symfony\Component\Config\Definition\Exception;
 
 /**
  * This exception is thrown whenever the key of an array is not unique. This can
@@ -16,6 +16,6 @@ namespace _PhpScopercfeba9d8ad31\Symfony\Component\Config\Definition\Exception;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class DuplicateKeyException extends \_PhpScopercfeba9d8ad31\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+class DuplicateKeyException extends \_PhpScoper6d453419d16a\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 {
 }

@@ -1,5 +1,5 @@
 <div class="exception-summary <?php 
-namespace _PhpScopercfeba9d8ad31;
+namespace _PhpScoper6d453419d16a;
 
 echo !$exceptionMessage ? 'exception-without-message' : '';
 ?>">

@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScopercfeba9d8ad31\Nette\Utils;
+namespace _PhpScoper6d453419d16a\Nette\Utils;
 
-use _PhpScopercfeba9d8ad31\Nette;
+use _PhpScoper6d453419d16a\Nette;
 /**
  * Basic manipulation with images. Supported types are JPEG, PNG, GIF, WEBP and BMP.
  *
@@ -129,11 +129,11 @@ class Image
         }
         $type = self::detectTypeFromFile($file);
         if (!$type) {
-            throw new \_PhpScopercfeba9d8ad31\Nette\Utils\UnknownImageFileException(\is_file($file) ? "Unknown type of file '{$file}'." : "File '{$file}' not found.");
+            throw new \_PhpScoper6d453419d16a\Nette\Utils\UnknownImageFileException(\is_file($file) ? "Unknown type of file '{$file}'." : "File '{$file}' not found.");
         }
         $method = 'imagecreatefrom' . self::FORMATS[$type];
-        return new static(\_PhpScopercfeba9d8ad31\Nette\Utils\Callback::invokeSafe($method, [$file], function (string $message) : void {
-            throw new \_PhpScopercfeba9d8ad31\Nette\Utils\ImageException($message);
+        return new static(\_PhpScoper6d453419d16a\Nette\Utils\Callback::invokeSafe($method, [$file], function (string $message) : void {
+            throw new \_PhpScoper6d453419d16a\Nette\Utils\ImageException($message);
         }));
     }
     /**
@@ -149,10 +149,10 @@ class Image
         }
         $type = self::detectTypeFromString($s);
         if (!$type) {
-            throw new \_PhpScopercfeba9d8ad31\Nette\Utils\UnknownImageFileException('Unknown type of image.');
+            throw new \_PhpScoper6d453419d16a\Nette\Utils\UnknownImageFileException('Unknown type of image.');
         }
-        return new static(\_PhpScopercfeba9d8ad31\Nette\Utils\Callback::invokeSafe('imagecreatefromstring', [$s], function (string $message) : void {
-            throw new \_PhpScopercfeba9d8ad31\Nette\Utils\ImageException($message);
+        return new static(\_PhpScoper6d453419d16a\Nette\Utils\Callback::invokeSafe('imagecreatefromstring', [$s], function (string $message) : void {
+            throw new \_PhpScoper6d453419d16a\Nette\Utils\ImageException($message);
         }));
     }
     /**
@@ -243,7 +243,7 @@ class Image
      */
     protected function setImageResource($image)
     {
-        if (!$image instanceof \_PhpScopercfeba9d8ad31\GdImage && !(\is_resource($image) && \get_resource_type($image) === 'gd')) {
+        if (!$image instanceof \_PhpScoper6d453419d16a\GdImage && !(\is_resource($image) && \get_resource_type($image) === 'gd')) {
             throw new Nette\InvalidArgumentException('Image is not valid.');
         }
         $this->image = $image;
@@ -471,7 +471,7 @@ class Image
      */
     public function toString(int $type = self::JPEG, int $quality = null) : string
     {
-        return \_PhpScopercfeba9d8ad31\Nette\Utils\Helpers::capture(function () use($type, $quality) {
+        return \_PhpScoper6d453419d16a\Nette\Utils\Helpers::capture(function () use($type, $quality) {
             $this->output($type, $quality);
         });
     }
@@ -533,7 +533,7 @@ class Image
                 throw new Nette\InvalidArgumentException("Unsupported image type '{$type}'.");
         }
         if (!$success) {
-            throw new \_PhpScopercfeba9d8ad31\Nette\Utils\ImageException(\_PhpScopercfeba9d8ad31\Nette\Utils\Helpers::getLastError() ?: 'Unknown error');
+            throw new \_PhpScoper6d453419d16a\Nette\Utils\ImageException(\_PhpScoper6d453419d16a\Nette\Utils\Helpers::getLastError() ?: 'Unknown error');
         }
     }
     /**
@@ -545,7 +545,7 @@ class Image
     {
         $function = 'image' . $name;
         if (!\function_exists($function)) {
-            \_PhpScopercfeba9d8ad31\Nette\Utils\ObjectHelpers::strictCall(static::class, $name);
+            \_PhpScoper6d453419d16a\Nette\Utils\ObjectHelpers::strictCall(static::class, $name);
         }
         foreach ($args as $key => $value) {
             if ($value instanceof self) {
@@ -556,7 +556,7 @@ class Image
             }
         }
         $res = $function($this->image, ...$args);
-        return $res instanceof \_PhpScopercfeba9d8ad31\GdImage || \is_resource($res) && \get_resource_type($res) === 'gd' ? $this->setImageResource($res) : $res;
+        return $res instanceof \_PhpScoper6d453419d16a\GdImage || \is_resource($res) && \get_resource_type($res) === 'gd' ? $this->setImageResource($res) : $res;
     }
     public function __clone()
     {

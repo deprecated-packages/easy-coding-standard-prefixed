@@ -23,8 +23,8 @@ use PhpCsFixer\FixerConfiguration\DeprecatedFixerOption;
 use PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface;
 use PhpCsFixer\FixerConfiguration\InvalidOptionsForEnvException;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScopercfeba9d8ad31\Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
-use _PhpScopercfeba9d8ad31\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
+use _PhpScoper6d453419d16a\Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
+use _PhpScoper6d453419d16a\Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
