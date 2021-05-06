@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper53db80252f28\Symfony\Component\Console\Question;
+namespace _PhpScoper890197fe38f7\Symfony\Component\Console\Question;
 
-use _PhpScoper53db80252f28\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper890197fe38f7\Symfony\Component\Console\Exception\InvalidArgumentException;
 /**
  * Represents a choice question.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ChoiceQuestion extends \_PhpScoper53db80252f28\Symfony\Component\Console\Question\Question
+class ChoiceQuestion extends \_PhpScoper890197fe38f7\Symfony\Component\Console\Question\Question
 {
     private $choices;
     private $multiselect = \false;

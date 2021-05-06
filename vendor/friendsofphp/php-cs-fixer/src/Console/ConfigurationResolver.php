@@ -39,9 +39,9 @@ use PhpCsFixer\ToolInfoInterface;
 use PhpCsFixer\Utils;
 use PhpCsFixer\WhitespacesFixerConfig;
 use PhpCsFixer\WordMatcher;
-use _PhpScoper53db80252f28\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper53db80252f28\Symfony\Component\Filesystem\Filesystem;
-use _PhpScoper53db80252f28\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper890197fe38f7\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper890197fe38f7\Symfony\Component\Filesystem\Filesystem;
+use _PhpScoper890197fe38f7\Symfony\Component\Finder\Finder as SymfonyFinder;
 /**
  * The resolver that resolves configuration to use by command line options and config.
  *

@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\CodingStandard\DependencyInjection\Extension;
 
-use _PhpScoper53db80252f28\Symfony\Component\Config\FileLocator;
-use _PhpScoper53db80252f28\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper53db80252f28\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoper53db80252f28\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoper890197fe38f7\Symfony\Component\Config\FileLocator;
+use _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 final class SymplifyCodingStandardExtension extends Extension
 {
     /**

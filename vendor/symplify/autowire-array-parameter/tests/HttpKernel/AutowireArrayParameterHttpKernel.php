@@ -3,13 +3,18 @@
 declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\Tests\HttpKernel;
 
-use _PhpScoper53db80252f28\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoper53db80252f28\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper53db80252f28\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use _PhpScoper53db80252f28\Symfony\Component\HttpKernel\Kernel;
+use _PhpScoper890197fe38f7\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper890197fe38f7\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper890197fe38f7\Symfony\Component\HttpKernel\Kernel;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-final class AutowireArrayParameterHttpKernel extends Kernel
+use Symplify\PackageBuilder\Contract\HttpKernel\ExtraConfigAwareKernelInterface;
+final class AutowireArrayParameterHttpKernel extends Kernel implements ExtraConfigAwareKernelInterface
 {
+    /**
+     * @var string[]
+     */
+    private $configs = [];
     public function __construct()
     {
         // to invoke container override for test re-run
@@ -18,6 +23,9 @@ final class AutowireArrayParameterHttpKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader) : void
     {
         $loader->load(__DIR__ . '/../config/autowire_array_parameter.php');
+        foreach ($this->configs as $config) {
+            $loader->load($config);
+        }
     }
     public function getCacheDir() : string
     {
@@ -33,6 +41,13 @@ final class AutowireArrayParameterHttpKernel extends Kernel
     public function registerBundles() : iterable
     {
         return [];
+    }
+    /**
+     * @param string[] $configs
+     */
+    public function setConfigs(array $configs) : void
+    {
+        $this->configs = $configs;
     }
     protected function build(ContainerBuilder $containerBuilder) : void
     {

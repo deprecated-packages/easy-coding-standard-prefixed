@@ -8,27 +8,27 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper53db80252f28\Symfony\Component\String;
+namespace _PhpScoper890197fe38f7\Symfony\Component\String;
 
-if (!\function_exists(\_PhpScoper53db80252f28\Symfony\Component\String\u::class)) {
-    function u(?string $string = '') : \_PhpScoper53db80252f28\Symfony\Component\String\UnicodeString
+if (!\function_exists(\_PhpScoper890197fe38f7\Symfony\Component\String\u::class)) {
+    function u(?string $string = '') : \_PhpScoper890197fe38f7\Symfony\Component\String\UnicodeString
     {
-        return new \_PhpScoper53db80252f28\Symfony\Component\String\UnicodeString($string ?? '');
+        return new \_PhpScoper890197fe38f7\Symfony\Component\String\UnicodeString($string ?? '');
     }
 }
-if (!\function_exists(\_PhpScoper53db80252f28\Symfony\Component\String\b::class)) {
-    function b(?string $string = '') : \_PhpScoper53db80252f28\Symfony\Component\String\ByteString
+if (!\function_exists(\_PhpScoper890197fe38f7\Symfony\Component\String\b::class)) {
+    function b(?string $string = '') : \_PhpScoper890197fe38f7\Symfony\Component\String\ByteString
     {
-        return new \_PhpScoper53db80252f28\Symfony\Component\String\ByteString($string ?? '');
+        return new \_PhpScoper890197fe38f7\Symfony\Component\String\ByteString($string ?? '');
     }
 }
-if (!\function_exists(\_PhpScoper53db80252f28\Symfony\Component\String\s::class)) {
+if (!\function_exists(\_PhpScoper890197fe38f7\Symfony\Component\String\s::class)) {
     /**
      * @return UnicodeString|ByteString
      */
-    function s(?string $string = '') : \_PhpScoper53db80252f28\Symfony\Component\String\AbstractString
+    function s(?string $string = '') : \_PhpScoper890197fe38f7\Symfony\Component\String\AbstractString
     {
         $string = $string ?? '';
-        return \preg_match('//u', $string) ? new \_PhpScoper53db80252f28\Symfony\Component\String\UnicodeString($string) : new \_PhpScoper53db80252f28\Symfony\Component\String\ByteString($string);
+        return \preg_match('//u', $string) ? new \_PhpScoper890197fe38f7\Symfony\Component\String\UnicodeString($string) : new \_PhpScoper890197fe38f7\Symfony\Component\String\ByteString($string);
     }
 }
