@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter;
+namespace _PhpScopere7e518ee6a5b\Symfony\Component\Cache\Adapter;
 
-use _PhpScoper3c4e863e8a34\Psr\Cache\CacheItemInterface;
-use _PhpScoper3c4e863e8a34\Psr\Cache\InvalidArgumentException;
-use _PhpScoper3c4e863e8a34\Psr\Log\LoggerAwareInterface;
-use _PhpScoper3c4e863e8a34\Psr\Log\LoggerAwareTrait;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\CacheItem;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\PruneableInterface;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\ResettableInterface;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Traits\ContractsTrait;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Traits\ProxyTrait;
-use _PhpScoper3c4e863e8a34\Symfony\Contracts\Cache\TagAwareCacheInterface;
+use _PhpScopere7e518ee6a5b\Psr\Cache\CacheItemInterface;
+use _PhpScopere7e518ee6a5b\Psr\Cache\InvalidArgumentException;
+use _PhpScopere7e518ee6a5b\Psr\Log\LoggerAwareInterface;
+use _PhpScopere7e518ee6a5b\Psr\Log\LoggerAwareTrait;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\CacheItem;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\PruneableInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\ResettableInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\Traits\ContractsTrait;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\Traits\ProxyTrait;
+use _PhpScopere7e518ee6a5b\Symfony\Contracts\Cache\TagAwareCacheInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class TagAwareAdapter implements \_PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, TagAwareCacheInterface, PruneableInterface, ResettableInterface, LoggerAwareInterface
+class TagAwareAdapter implements \_PhpScopere7e518ee6a5b\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, TagAwareCacheInterface, PruneableInterface, ResettableInterface, LoggerAwareInterface
 {
     public const TAGS_PREFIX = "\0tags\0";
     use ContractsTrait;
@@ -37,7 +37,7 @@ class TagAwareAdapter implements \_PhpScoper3c4e863e8a34\Symfony\Component\Cache
     private $tags;
     private $knownTagVersions = [];
     private $knownTagVersionsTtl;
-    public function __construct(\_PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \_PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
+    public function __construct(\_PhpScopere7e518ee6a5b\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \_PhpScopere7e518ee6a5b\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
     {
         $this->pool = $itemsPool;
         $this->tags = $tagsPool ?: $itemsPool;
@@ -74,7 +74,7 @@ class TagAwareAdapter implements \_PhpScoper3c4e863e8a34\Symfony\Component\Cache
             }
             return $tagsByKey;
         }, null, CacheItem::class);
-        $this->invalidateTags = \Closure::bind(static function (\_PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
+        $this->invalidateTags = \Closure::bind(static function (\_PhpScopere7e518ee6a5b\Symfony\Component\Cache\Adapter\AdapterInterface $tagsAdapter, array $tags) {
             foreach ($tags as $v) {
                 $v->expiry = 0;
                 $tagsAdapter->saveDeferred($v);
@@ -195,7 +195,7 @@ class TagAwareAdapter implements \_PhpScoper3c4e863e8a34\Symfony\Component\Cache
         } else {
             $this->deferred = [];
         }
-        if ($this->pool instanceof \_PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter\AdapterInterface) {
+        if ($this->pool instanceof \_PhpScopere7e518ee6a5b\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($prefix);
         }
         return $this->pool->clear();

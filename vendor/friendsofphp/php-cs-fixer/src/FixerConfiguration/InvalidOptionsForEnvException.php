@@ -12,7 +12,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\FixerConfiguration;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScopere7e518ee6a5b\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *

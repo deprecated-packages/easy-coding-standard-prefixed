@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\DependencyInjection;
+namespace _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
-use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
-use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Stopwatch\Stopwatch;
+use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
+use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Stopwatch\Stopwatch;
 /**
  * Gathers and configures the argument value resolvers.
  *

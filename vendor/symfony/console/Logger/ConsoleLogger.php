@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Component\Console\Logger;
+namespace _PhpScopere7e518ee6a5b\Symfony\Component\Console\Logger;
 
-use _PhpScoper3c4e863e8a34\Psr\Log\AbstractLogger;
-use _PhpScoper3c4e863e8a34\Psr\Log\InvalidArgumentException;
-use _PhpScoper3c4e863e8a34\Psr\Log\LogLevel;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere7e518ee6a5b\Psr\Log\AbstractLogger;
+use _PhpScopere7e518ee6a5b\Psr\Log\InvalidArgumentException;
+use _PhpScopere7e518ee6a5b\Psr\Log\LogLevel;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Output\OutputInterface;
 /**
  * PSR-3 compliant console logger.
  *

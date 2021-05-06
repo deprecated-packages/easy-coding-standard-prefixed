@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Component\Config\Definition;
+namespace _PhpScopere7e518ee6a5b\Symfony\Component\Config\Definition;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 /**
  * This node represents a float value in the config tree.
  *
  * @author Jeanmonod David <david.jeanmonod@gmail.com>
  */
-class FloatNode extends \_PhpScoper3c4e863e8a34\Symfony\Component\Config\Definition\NumericNode
+class FloatNode extends \_PhpScopere7e518ee6a5b\Symfony\Component\Config\Definition\NumericNode
 {
     /**
      * {@inheritdoc}

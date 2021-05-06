@@ -12,12 +12,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\HttpCache;
+namespace _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\HttpCache;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper3c4e863e8a34\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\HttpKernelInterface;
-use _PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\TerminableInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Request;
+use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Response;
+use _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\TerminableInterface;
 /**
  * Cache provides HTTP caching.
  *
@@ -74,7 +74,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      *                            This setting is overridden by the stale-if-error HTTP Cache-Control extension
      *                            (see RFC 5861).
      */
-    public function __construct(HttpKernelInterface $kernel, \_PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\HttpCache\StoreInterface $store, \_PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate = null, array $options = [])
+    public function __construct(HttpKernelInterface $kernel, \_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\HttpCache\StoreInterface $store, \_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate = null, array $options = [])
     {
         $this->store = $store;
         $this->kernel = $kernel;
@@ -397,7 +397,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
             $this->surrogate->addSurrogateCapability($request);
         }
         // always a "master" request (as the real master request can be in cache)
-        $response = \_PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\HttpCache\SubRequestHandler::handle($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST, $catch);
+        $response = \_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\HttpCache\SubRequestHandler::handle($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST, $catch);
         /*
          * Support stale-if-error given on Responses or as a config option.
          * RFC 7234 summarizes in Section 4.2.4 (but also mentions with the individual

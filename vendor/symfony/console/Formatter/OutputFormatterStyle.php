@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Component\Console\Formatter;
+namespace _PhpScopere7e518ee6a5b\Symfony\Component\Console\Formatter;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Color;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Color;
 /**
  * Formatter style class for defining styles.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class OutputFormatterStyle implements \_PhpScoper3c4e863e8a34\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
+class OutputFormatterStyle implements \_PhpScopere7e518ee6a5b\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
 {
     private $color;
     private $foreground;

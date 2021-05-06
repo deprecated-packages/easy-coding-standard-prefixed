@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Reporter\ProcessedFileReporter;
 final class CheckCommand extends \Symplify\EasyCodingStandard\Console\Command\AbstractCheckCommand
 {

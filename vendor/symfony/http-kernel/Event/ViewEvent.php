@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\Event;
+namespace _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\Event;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\HttpKernelInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Request;
+use _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * Allows to create a response for the return value of a controller.
  *
@@ -21,7 +21,7 @@ use _PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class ViewEvent extends \_PhpScoper3c4e863e8a34\Symfony\Component\HttpKernel\Event\RequestEvent
+final class ViewEvent extends \_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\Event\RequestEvent
 {
     /**
      * The return value of the controller.

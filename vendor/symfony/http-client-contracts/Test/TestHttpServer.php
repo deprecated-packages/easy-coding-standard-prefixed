@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Contracts\HttpClient\Test;
+namespace _PhpScopere7e518ee6a5b\Symfony\Contracts\HttpClient\Test;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\Process\PhpExecutableFinder;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Process\Process;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Process\PhpExecutableFinder;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Process\Process;
 class TestHttpServer
 {
     private static $process = [];

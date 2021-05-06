@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Traits;
+namespace _PhpScopere7e518ee6a5b\Symfony\Component\Cache\Traits;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Exception\CacheException;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\Exception\CacheException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Rob Frawley 2nd <rmf@src.run>

@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper3c4e863e8a34\Symfony\Component\Console\Helper;
+namespace _PhpScopere7e518ee6a5b\Symfony\Component\Console\Helper;
 
-use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Process\Exception\ProcessFailedException;
-use _PhpScoper3c4e863e8a34\Symfony\Component\Process\Process;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Process\Exception\ProcessFailedException;
+use _PhpScopere7e518ee6a5b\Symfony\Component\Process\Process;
 /**
  * The ProcessHelper class provides helpers to run external processes.
  *
@@ -21,7 +21,7 @@ use _PhpScoper3c4e863e8a34\Symfony\Component\Process\Process;
  *
  * @final
  */
-class ProcessHelper extends \_PhpScoper3c4e863e8a34\Symfony\Component\Console\Helper\Helper
+class ProcessHelper extends \_PhpScopere7e518ee6a5b\Symfony\Component\Console\Helper\Helper
 {
     /**
      * Runs an external process.
