@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper890197fe38f7\Symfony\Component\Cache\Traits;
+namespace _PhpScopera48d5dbb002d\Symfony\Component\Cache\Traits;
 
-use _PhpScoper890197fe38f7\Psr\Log\LoggerInterface;
-use _PhpScoper890197fe38f7\Symfony\Component\Cache\Adapter\AdapterInterface;
-use _PhpScoper890197fe38f7\Symfony\Component\Cache\CacheItem;
-use _PhpScoper890197fe38f7\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScoper890197fe38f7\Symfony\Component\Cache\LockRegistry;
-use _PhpScoper890197fe38f7\Symfony\Contracts\Cache\CacheInterface;
-use _PhpScoper890197fe38f7\Symfony\Contracts\Cache\CacheTrait;
-use _PhpScoper890197fe38f7\Symfony\Contracts\Cache\ItemInterface;
+use _PhpScopera48d5dbb002d\Psr\Log\LoggerInterface;
+use _PhpScopera48d5dbb002d\Symfony\Component\Cache\Adapter\AdapterInterface;
+use _PhpScopera48d5dbb002d\Symfony\Component\Cache\CacheItem;
+use _PhpScopera48d5dbb002d\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use _PhpScopera48d5dbb002d\Symfony\Component\Cache\LockRegistry;
+use _PhpScopera48d5dbb002d\Symfony\Contracts\Cache\CacheInterface;
+use _PhpScopera48d5dbb002d\Symfony\Contracts\Cache\CacheTrait;
+use _PhpScopera48d5dbb002d\Symfony\Contracts\Cache\ItemInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *

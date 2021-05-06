@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper890197fe38f7\Symfony\Component\Config;
+namespace _PhpScopera48d5dbb002d\Symfony\Component\Config;
 
-use _PhpScoper890197fe38f7\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use _PhpScopera48d5dbb002d\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
 /**
  * FileLocator uses an array of pre-defined paths to find files.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FileLocator implements \_PhpScoper890197fe38f7\Symfony\Component\Config\FileLocatorInterface
+class FileLocator implements \_PhpScopera48d5dbb002d\Symfony\Component\Config\FileLocatorInterface
 {
     protected $paths;
     /**

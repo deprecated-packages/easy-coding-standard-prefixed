@@ -13,7 +13,7 @@ namespace PHP_CodeSniffer\Tests\Core\Filters\Filter;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Filters\Filter;
 use PHP_CodeSniffer\Ruleset;
-use _PhpScoper890197fe38f7\PHPUnit\Framework\TestCase;
+use _PhpScopera48d5dbb002d\PHPUnit\Framework\TestCase;
 class AcceptTest extends TestCase
 {
     /**

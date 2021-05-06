@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
-use _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use _PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\Reference;
+use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
+use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Definition;
+use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Reference;
 /**
  * Inline service definitions where this is possible.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class InlineServiceDefinitionsPass extends \_PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class InlineServiceDefinitionsPass extends \_PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $analyzingPass;
     private $cloningIds = [];
@@ -29,7 +29,7 @@ class InlineServiceDefinitionsPass extends \_PhpScoper890197fe38f7\Symfony\Compo
     private $inlinedIds = [];
     private $notInlinableIds = [];
     private $graph;
-    public function __construct(\_PhpScoper890197fe38f7\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass $analyzingPass = null)
+    public function __construct(\_PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass $analyzingPass = null)
     {
         $this->analyzingPass = $analyzingPass;
     }

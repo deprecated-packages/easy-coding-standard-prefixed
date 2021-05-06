@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper890197fe38f7\Symfony\Component\Process\Pipes;
+namespace _PhpScopera48d5dbb002d\Symfony\Component\Process\Pipes;
 
-use _PhpScoper890197fe38f7\Symfony\Component\Process\Exception\InvalidArgumentException;
+use _PhpScopera48d5dbb002d\Symfony\Component\Process\Exception\InvalidArgumentException;
 /**
  * @author Romain Neutron <imprec@gmail.com>
  *
  * @internal
  */
-abstract class AbstractPipes implements \_PhpScoper890197fe38f7\Symfony\Component\Process\Pipes\PipesInterface
+abstract class AbstractPipes implements \_PhpScopera48d5dbb002d\Symfony\Component\Process\Pipes\PipesInterface
 {
     public $pipes = [];
     private $inputBuffer = '';

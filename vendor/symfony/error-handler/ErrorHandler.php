@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler;
+namespace _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler;
 
-use _PhpScoper890197fe38f7\Psr\Log\LoggerInterface;
-use _PhpScoper890197fe38f7\Psr\Log\LogLevel;
-use _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\Error\FatalError;
-use _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\Error\OutOfMemoryError;
-use _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\ErrorEnhancer\ClassNotFoundErrorEnhancer;
-use _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface;
-use _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedFunctionErrorEnhancer;
-use _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedMethodErrorEnhancer;
-use _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\ErrorRenderer\CliErrorRenderer;
-use _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
-use _PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
+use _PhpScopera48d5dbb002d\Psr\Log\LoggerInterface;
+use _PhpScopera48d5dbb002d\Psr\Log\LogLevel;
+use _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\Error\FatalError;
+use _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\Error\OutOfMemoryError;
+use _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\ErrorEnhancer\ClassNotFoundErrorEnhancer;
+use _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\ErrorEnhancer\ErrorEnhancerInterface;
+use _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedFunctionErrorEnhancer;
+use _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\ErrorEnhancer\UndefinedMethodErrorEnhancer;
+use _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\ErrorRenderer\CliErrorRenderer;
+use _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
+use _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\Exception\SilencedErrorContext;
 /**
  * A generic ErrorHandler for the PHP engine.
  *
@@ -137,7 +137,7 @@ class ErrorHandler
             \restore_error_handler();
         }
     }
-    public function __construct(\_PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\BufferingLogger $bootstrappingLogger = null, bool $debug = \false)
+    public function __construct(\_PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\BufferingLogger $bootstrappingLogger = null, bool $debug = \false)
     {
         if ($bootstrappingLogger) {
             $this->bootstrappingLogger = $bootstrappingLogger;
@@ -221,7 +221,7 @@ class ErrorHandler
         $this->reRegister($prevLogged | $this->thrownErrors);
         if ($flush) {
             foreach ($this->bootstrappingLogger->cleanLogs() as $log) {
-                $type = \_PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\ThrowableUtils::getSeverity($log[2]['exception']);
+                $type = \_PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\ThrowableUtils::getSeverity($log[2]['exception']);
                 if (!isset($flush[$type])) {
                     $this->bootstrappingLogger->log($log[0], $log[1], $log[2]);
                 } elseif ($this->loggers[$type][0]) {
@@ -466,7 +466,7 @@ class ErrorHandler
         $handlerException = null;
         if (!$exception instanceof FatalError) {
             self::$exitCode = 255;
-            $type = \_PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\ThrowableUtils::getSeverity($exception);
+            $type = \_PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\ThrowableUtils::getSeverity($exception);
         } else {
             $type = $exception->getError()['type'];
         }
@@ -646,9 +646,9 @@ class ErrorHandler
                 }
             }
         }
-        if (\class_exists(\_PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\DebugClassLoader::class, \false)) {
+        if (\class_exists(\_PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\DebugClassLoader::class, \false)) {
             for ($i = \count($lightTrace) - 2; 0 < $i; --$i) {
-                if (\_PhpScoper890197fe38f7\Symfony\Component\ErrorHandler\DebugClassLoader::class === ($lightTrace[$i]['class'] ?? null)) {
+                if (\_PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\DebugClassLoader::class === ($lightTrace[$i]['class'] ?? null)) {
                     \array_splice($lightTrace, --$i, 2);
                 }
             }

@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\ChangedFilesDetector;
 
-use _PhpScoper890197fe38f7\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use _PhpScoper890197fe38f7\Symfony\Component\Cache\CacheItem;
+use _PhpScopera48d5dbb002d\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use _PhpScopera48d5dbb002d\Symfony\Component\Cache\CacheItem;
 use Symplify\SmartFileSystem\SmartFileInfo;
 /**
  * @see \Symplify\EasyCodingStandard\ChangedFilesDetector\Tests\ChangedFilesDetector\ChangedFilesDetectorTest

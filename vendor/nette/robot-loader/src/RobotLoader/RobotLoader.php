@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScoper890197fe38f7\Nette\Loaders;
+namespace _PhpScopera48d5dbb002d\Nette\Loaders;
 
-use _PhpScoper890197fe38f7\Nette;
+use _PhpScopera48d5dbb002d\Nette;
 use SplFileInfo;
 /**
  * Nette auto loader is responsible for loading classes and interfaces.

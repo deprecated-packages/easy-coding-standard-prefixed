@@ -23,8 +23,8 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper890197fe38f7\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
-use _PhpScoper890197fe38f7\Symfony\Component\OptionsResolver\Options;
+use _PhpScopera48d5dbb002d\Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use _PhpScopera48d5dbb002d\Symfony\Component\OptionsResolver\Options;
 final class GeneralPhpdocTagRenameFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /**

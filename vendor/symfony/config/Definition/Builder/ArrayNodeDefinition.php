@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper890197fe38f7\Symfony\Component\Config\Definition\Builder;
+namespace _PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\Builder;
 
-use _PhpScoper890197fe38f7\Symfony\Component\Config\Definition\ArrayNode;
-use _PhpScoper890197fe38f7\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
-use _PhpScoper890197fe38f7\Symfony\Component\Config\Definition\PrototypedArrayNode;
+use _PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\ArrayNode;
+use _PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\Exception\InvalidDefinitionException;
+use _PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\PrototypedArrayNode;
 /**
  * This class provides a fluent interface for defining an array node.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class ArrayNodeDefinition extends \_PhpScoper890197fe38f7\Symfony\Component\Config\Definition\Builder\NodeDefinition implements \_PhpScoper890197fe38f7\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface
+class ArrayNodeDefinition extends \_PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\Builder\NodeDefinition implements \_PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface
 {
     protected $performDeepMerging = \true;
     protected $ignoreExtraKeys = \false;
@@ -36,7 +36,7 @@ class ArrayNodeDefinition extends \_PhpScoper890197fe38f7\Symfony\Component\Conf
     /**
      * {@inheritdoc}
      */
-    public function __construct(?string $name, \_PhpScoper890197fe38f7\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
+    public function __construct(?string $name, \_PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         parent::__construct($name, $parent);
         $this->nullEquivalent = [];
@@ -45,7 +45,7 @@ class ArrayNodeDefinition extends \_PhpScoper890197fe38f7\Symfony\Component\Conf
     /**
      * {@inheritdoc}
      */
-    public function setBuilder(\_PhpScoper890197fe38f7\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder)
+    public function setBuilder(\_PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder)
     {
         $this->nodeBuilder = $builder;
     }
@@ -300,7 +300,7 @@ class ArrayNodeDefinition extends \_PhpScoper890197fe38f7\Symfony\Component\Conf
     /**
      * {@inheritdoc}
      */
-    public function append(\_PhpScoper890197fe38f7\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
+    public function append(\_PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->children[$node->name] = $node->setParent($this);
         return $this;
@@ -313,7 +313,7 @@ class ArrayNodeDefinition extends \_PhpScoper890197fe38f7\Symfony\Component\Conf
     protected function getNodeBuilder()
     {
         if (null === $this->nodeBuilder) {
-            $this->nodeBuilder = new \_PhpScoper890197fe38f7\Symfony\Component\Config\Definition\Builder\NodeBuilder();
+            $this->nodeBuilder = new \_PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\Builder\NodeBuilder();
         }
         return $this->nodeBuilder->setParent($this);
     }
@@ -437,7 +437,7 @@ class ArrayNodeDefinition extends \_PhpScoper890197fe38f7\Symfony\Component\Conf
      *
      * @param string $nodePath The path of the node to find. e.g "doctrine.orm.mappings"
      */
-    public function find(string $nodePath) : \_PhpScoper890197fe38f7\Symfony\Component\Config\Definition\Builder\NodeDefinition
+    public function find(string $nodePath) : \_PhpScopera48d5dbb002d\Symfony\Component\Config\Definition\Builder\NodeDefinition
     {
         $firstPathSegment = \false === ($pathSeparatorPos = \strpos($nodePath, $this->pathSeparator)) ? $nodePath : \substr($nodePath, 0, $pathSeparatorPos);
         if (null === ($node = $this->children[$firstPathSegment] ?? null)) {

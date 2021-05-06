@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper890197fe38f7\Symfony\Component\Console\Input;
+namespace _PhpScopera48d5dbb002d\Symfony\Component\Console\Input;
 
-use _PhpScoper890197fe38f7\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScoper890197fe38f7\Symfony\Component\Console\Exception\LogicException;
+use _PhpScopera48d5dbb002d\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScopera48d5dbb002d\Symfony\Component\Console\Exception\LogicException;
 /**
  * A InputDefinition represents a set of valid command line arguments and options.
  *
@@ -47,7 +47,7 @@ class InputDefinition
         $arguments = [];
         $options = [];
         foreach ($definition as $item) {
-            if ($item instanceof \_PhpScoper890197fe38f7\Symfony\Component\Console\Input\InputOption) {
+            if ($item instanceof \_PhpScopera48d5dbb002d\Symfony\Component\Console\Input\InputOption) {
                 $options[] = $item;
             } else {
                 $arguments[] = $item;
@@ -85,7 +85,7 @@ class InputDefinition
     /**
      * @throws LogicException When incorrect argument is given
      */
-    public function addArgument(\_PhpScoper890197fe38f7\Symfony\Component\Console\Input\InputArgument $argument)
+    public function addArgument(\_PhpScopera48d5dbb002d\Symfony\Component\Console\Input\InputArgument $argument)
     {
         if (isset($this->arguments[$argument->getName()])) {
             throw new LogicException(\sprintf('An argument with name "%s" already exists.', $argument->getName()));
@@ -200,7 +200,7 @@ class InputDefinition
     /**
      * @throws LogicException When option given already exist
      */
-    public function addOption(\_PhpScoper890197fe38f7\Symfony\Component\Console\Input\InputOption $option)
+    public function addOption(\_PhpScopera48d5dbb002d\Symfony\Component\Console\Input\InputOption $option)
     {
         if (isset($this->options[$option->getName()]) && !$option->equals($this->options[$option->getName()])) {
             throw new LogicException(\sprintf('An option named "%s" already exists.', $option->getName()));

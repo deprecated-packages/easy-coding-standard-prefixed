@@ -12,9 +12,9 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Console\SelfUpdate;
 
-use _PhpScoper890197fe38f7\Composer\Semver\Comparator;
-use _PhpScoper890197fe38f7\Composer\Semver\Semver;
-use _PhpScoper890197fe38f7\Composer\Semver\VersionParser;
+use _PhpScopera48d5dbb002d\Composer\Semver\Comparator;
+use _PhpScopera48d5dbb002d\Composer\Semver\Semver;
+use _PhpScopera48d5dbb002d\Composer\Semver\VersionParser;
 /**
  * @internal
  */
