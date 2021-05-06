@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera48d5dbb002d\Symfony\Component\Filesystem;
+namespace _PhpScoper3c4e863e8a34\Symfony\Component\Filesystem;
 
-use _PhpScopera48d5dbb002d\Symfony\Component\Filesystem\Exception\FileNotFoundException;
-use _PhpScopera48d5dbb002d\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
-use _PhpScopera48d5dbb002d\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * Provides basic utility to manipulate the file system.
  *

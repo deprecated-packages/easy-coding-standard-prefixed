@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera48d5dbb002d\Symfony\Component\Cache\DependencyInjection;
+namespace _PhpScoper3c4e863e8a34\Symfony\Component\Cache\DependencyInjection;
 
-use _PhpScopera48d5dbb002d\Symfony\Component\Cache\Adapter\AbstractAdapter;
-use _PhpScopera48d5dbb002d\Symfony\Component\Cache\Adapter\ArrayAdapter;
-use _PhpScopera48d5dbb002d\Symfony\Component\Cache\Adapter\ChainAdapter;
-use _PhpScopera48d5dbb002d\Symfony\Component\Cache\Adapter\ParameterNormalizer;
-use _PhpScopera48d5dbb002d\Symfony\Component\Cache\Messenger\EarlyExpirationDispatcher;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter\AbstractAdapter;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter\ArrayAdapter;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter\ChainAdapter;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Adapter\ParameterNormalizer;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Cache\Messenger\EarlyExpirationDispatcher;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\ChildDefinition;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */

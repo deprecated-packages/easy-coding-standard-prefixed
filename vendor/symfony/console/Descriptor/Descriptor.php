@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera48d5dbb002d\Symfony\Component\Console\Descriptor;
+namespace _PhpScoper3c4e863e8a34\Symfony\Component\Console\Descriptor;
 
-use _PhpScopera48d5dbb002d\Symfony\Component\Console\Application;
-use _PhpScopera48d5dbb002d\Symfony\Component\Console\Command\Command;
-use _PhpScopera48d5dbb002d\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScopera48d5dbb002d\Symfony\Component\Console\Input\InputArgument;
-use _PhpScopera48d5dbb002d\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScopera48d5dbb002d\Symfony\Component\Console\Input\InputOption;
-use _PhpScopera48d5dbb002d\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Application;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Command\Command;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Exception\InvalidArgumentException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *
  * @internal
  */
-abstract class Descriptor implements \_PhpScopera48d5dbb002d\Symfony\Component\Console\Descriptor\DescriptorInterface
+abstract class Descriptor implements \_PhpScoper3c4e863e8a34\Symfony\Component\Console\Descriptor\DescriptorInterface
 {
     /**
      * @var OutputInterface

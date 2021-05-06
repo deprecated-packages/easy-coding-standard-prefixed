@@ -3,10 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
-use _PhpScopera48d5dbb002d\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopera48d5dbb002d\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyCodingStandard\Console\Reporter\CheckerListReporter;
-use Symplify\EasyCodingStandard\Console\Reporter\SetsReporter;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor;
 use Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor;
@@ -30,18 +29,13 @@ final class ShowCommand extends AbstractSymplifyCommand
      * @var CheckerListReporter
      */
     private $checkerListReporter;
-    /**
-     * @var SetsReporter
-     */
-    private $setsReporter;
-    public function __construct(SniffFileProcessor $sniffFileProcessor, FixerFileProcessor $fixerFileProcessor, EasyCodingStandardStyle $easyCodingStandardStyle, CheckerListReporter $checkerListReporter, SetsReporter $setsReporter)
+    public function __construct(SniffFileProcessor $sniffFileProcessor, FixerFileProcessor $fixerFileProcessor, EasyCodingStandardStyle $easyCodingStandardStyle, CheckerListReporter $checkerListReporter)
     {
         parent::__construct();
         $this->sniffFileProcessor = $sniffFileProcessor;
         $this->fixerFileProcessor = $fixerFileProcessor;
         $this->easyCodingStandardStyle = $easyCodingStandardStyle;
         $this->checkerListReporter = $checkerListReporter;
-        $this->setsReporter = $setsReporter;
     }
     protected function configure() : void
     {
@@ -54,7 +48,6 @@ final class ShowCommand extends AbstractSymplifyCommand
         $this->checkerListReporter->report($this->fixerFileProcessor->getCheckers(), 'PHP-CS-Fixer');
         $successMessage = \sprintf('Loaded %d checker%s in total', $totalCheckerCount, $totalCheckerCount === 1 ? '' : 's');
         $this->easyCodingStandardStyle->success($successMessage);
-        $this->setsReporter->report();
         return ShellCode::SUCCESS;
     }
 }

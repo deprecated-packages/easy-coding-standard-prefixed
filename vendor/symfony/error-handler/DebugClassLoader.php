@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler;
+namespace _PhpScoper3c4e863e8a34\Symfony\Component\ErrorHandler;
 
-use _PhpScopera48d5dbb002d\Doctrine\Common\Persistence\Proxy as LegacyProxy;
-use _PhpScopera48d5dbb002d\Doctrine\Persistence\Proxy;
-use _PhpScopera48d5dbb002d\Mockery\MockInterface;
-use _PhpScopera48d5dbb002d\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
-use _PhpScopera48d5dbb002d\PHPUnit\Framework\MockObject\MockObject;
-use _PhpScopera48d5dbb002d\Prophecy\Prophecy\ProphecySubjectInterface;
-use _PhpScopera48d5dbb002d\ProxyManager\Proxy\ProxyInterface;
+use _PhpScoper3c4e863e8a34\Doctrine\Common\Persistence\Proxy as LegacyProxy;
+use _PhpScoper3c4e863e8a34\Doctrine\Persistence\Proxy;
+use _PhpScoper3c4e863e8a34\Mockery\MockInterface;
+use _PhpScoper3c4e863e8a34\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
+use _PhpScoper3c4e863e8a34\PHPUnit\Framework\MockObject\MockObject;
+use _PhpScoper3c4e863e8a34\Prophecy\Prophecy\ProphecySubjectInterface;
+use _PhpScoper3c4e863e8a34\ProxyManager\Proxy\ProxyInterface;
 /**
  * Autoloader checking if the class is really defined in the file found.
  *
@@ -111,8 +111,8 @@ class DebugClassLoader
     public static function enable() : void
     {
         // Ensures we don't hit https://bugs.php.net/42098
-        \class_exists(\_PhpScopera48d5dbb002d\Symfony\Component\ErrorHandler\ErrorHandler::class);
-        \class_exists(\_PhpScopera48d5dbb002d\Psr\Log\LogLevel::class);
+        \class_exists(\_PhpScoper3c4e863e8a34\Symfony\Component\ErrorHandler\ErrorHandler::class);
+        \class_exists(\_PhpScoper3c4e863e8a34\Psr\Log\LogLevel::class);
         if (!\is_array($functions = \spl_autoload_functions())) {
             return;
         }

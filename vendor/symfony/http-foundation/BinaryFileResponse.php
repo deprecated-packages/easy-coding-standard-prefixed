@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera48d5dbb002d\Symfony\Component\HttpFoundation;
+namespace _PhpScoper3c4e863e8a34\Symfony\Component\HttpFoundation;
 
-use _PhpScopera48d5dbb002d\Symfony\Component\HttpFoundation\File\Exception\FileException;
-use _PhpScopera48d5dbb002d\Symfony\Component\HttpFoundation\File\File;
+use _PhpScoper3c4e863e8a34\Symfony\Component\HttpFoundation\File\Exception\FileException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\HttpFoundation\File\File;
 /**
  * BinaryFileResponse represents an HTTP response delivering a file.
  *
@@ -21,7 +21,7 @@ use _PhpScopera48d5dbb002d\Symfony\Component\HttpFoundation\File\File;
  * @author Jordan Alliot <jordan.alliot@gmail.com>
  * @author Sergey Linnik <linniksa@gmail.com>
  */
-class BinaryFileResponse extends \_PhpScopera48d5dbb002d\Symfony\Component\HttpFoundation\Response
+class BinaryFileResponse extends \_PhpScoper3c4e863e8a34\Symfony\Component\HttpFoundation\Response
 {
     protected static $trustXSendfileTypeHeader = \false;
     /**
@@ -156,7 +156,7 @@ class BinaryFileResponse extends \_PhpScopera48d5dbb002d\Symfony\Component\HttpF
     /**
      * {@inheritdoc}
      */
-    public function prepare(\_PhpScopera48d5dbb002d\Symfony\Component\HttpFoundation\Request $request)
+    public function prepare(\_PhpScoper3c4e863e8a34\Symfony\Component\HttpFoundation\Request $request)
     {
         if (!$this->headers->has('Content-Type')) {
             $this->headers->set('Content-Type', $this->file->getMimeType() ?: 'application/octet-stream');
@@ -186,7 +186,7 @@ class BinaryFileResponse extends \_PhpScopera48d5dbb002d\Symfony\Component\HttpF
             if ('x-accel-redirect' === \strtolower($type)) {
                 // Do X-Accel-Mapping substitutions.
                 // @link https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/#x-accel-redirect
-                $parts = \_PhpScopera48d5dbb002d\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
+                $parts = \_PhpScoper3c4e863e8a34\Symfony\Component\HttpFoundation\HeaderUtils::split($request->headers->get('X-Accel-Mapping', ''), ',=');
                 foreach ($parts as $part) {
                     [$pathPrefix, $location] = $part;
                     if (\substr($path, 0, \strlen($pathPrefix)) === $pathPrefix) {

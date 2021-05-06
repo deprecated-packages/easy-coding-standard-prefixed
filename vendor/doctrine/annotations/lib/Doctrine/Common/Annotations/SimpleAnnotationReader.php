@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScopera48d5dbb002d\Doctrine\Common\Annotations;
+namespace _PhpScoper3c4e863e8a34\Doctrine\Common\Annotations;
 
 use ReflectionClass;
 use ReflectionMethod;
@@ -13,7 +13,7 @@ use ReflectionProperty;
  *
  * @deprecated Deprecated in favour of using AnnotationReader
  */
-class SimpleAnnotationReader implements \_PhpScopera48d5dbb002d\Doctrine\Common\Annotations\Reader
+class SimpleAnnotationReader implements \_PhpScoper3c4e863e8a34\Doctrine\Common\Annotations\Reader
 {
     /** @var DocParser */
     private $parser;
@@ -22,7 +22,7 @@ class SimpleAnnotationReader implements \_PhpScopera48d5dbb002d\Doctrine\Common\
      */
     public function __construct()
     {
-        $this->parser = new \_PhpScopera48d5dbb002d\Doctrine\Common\Annotations\DocParser();
+        $this->parser = new \_PhpScoper3c4e863e8a34\Doctrine\Common\Annotations\DocParser();
         $this->parser->setIgnoreNotImportedAnnotations(\true);
     }
     /**

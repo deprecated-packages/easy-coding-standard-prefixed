@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection;
+namespace _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection;
 
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Argument\ServiceLocator as ArgumentServiceLocator;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
-use _PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use _PhpScopera48d5dbb002d\Symfony\Contracts\Service\ResetInterface;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Argument\ServiceLocator as ArgumentServiceLocator;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
+use _PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use _PhpScoper3c4e863e8a34\Symfony\Contracts\Service\ResetInterface;
 // Help opcache.preload discover always-needed symbols
 \class_exists(RewindableGenerator::class);
 \class_exists(ArgumentServiceLocator::class);
@@ -42,7 +42,7 @@ use _PhpScopera48d5dbb002d\Symfony\Contracts\Service\ResetInterface;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class Container implements \_PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\ContainerInterface, ResetInterface
+class Container implements \_PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\ContainerInterface, ResetInterface
 {
     protected $parameterBag;
     protected $services = [];
@@ -348,7 +348,7 @@ class Container implements \_PhpScopera48d5dbb002d\Symfony\Component\DependencyI
             return $this->envCache[$name];
         }
         if (!$this->has($id = 'container.env_var_processors_locator')) {
-            $this->set($id, new \_PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\ServiceLocator([]));
+            $this->set($id, new \_PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\ServiceLocator([]));
         }
         if (!$this->getEnv) {
             $this->getEnv = new \ReflectionMethod($this, __FUNCTION__);
@@ -363,7 +363,7 @@ class Container implements \_PhpScopera48d5dbb002d\Symfony\Component\DependencyI
             $prefix = 'string';
             $localName = $name;
         }
-        $processor = $processors->has($prefix) ? $processors->get($prefix) : new \_PhpScopera48d5dbb002d\Symfony\Component\DependencyInjection\EnvVarProcessor($this);
+        $processor = $processors->has($prefix) ? $processors->get($prefix) : new \_PhpScoper3c4e863e8a34\Symfony\Component\DependencyInjection\EnvVarProcessor($this);
         $this->resolving[$envName] = \true;
         try {
             return $this->envCache[$name] = $processor->getEnv($prefix, $localName, $this->getEnv);

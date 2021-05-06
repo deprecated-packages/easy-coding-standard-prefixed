@@ -12,7 +12,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\RuleSet;
 
-use _PhpScopera48d5dbb002d\Symfony\Component\Finder\Finder;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Finder\Finder;
 /**
  * Set of rule sets to be used by fixer.
  *

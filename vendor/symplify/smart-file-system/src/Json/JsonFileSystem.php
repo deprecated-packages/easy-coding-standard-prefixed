@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Json;
 
-use _PhpScopera48d5dbb002d\Nette\Utils\Arrays;
-use _PhpScopera48d5dbb002d\Nette\Utils\Json;
+use _PhpScoper3c4e863e8a34\Nette\Utils\Arrays;
+use _PhpScoper3c4e863e8a34\Nette\Utils\Json;
 use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\SmartFileSystem;
 /**

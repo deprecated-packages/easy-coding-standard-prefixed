@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera48d5dbb002d\Symfony\Component\Config;
+namespace _PhpScoper3c4e863e8a34\Symfony\Component\Config;
 
-use _PhpScopera48d5dbb002d\Symfony\Component\Config\Resource\ResourceInterface;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Interface for ResourceCheckers.
  *

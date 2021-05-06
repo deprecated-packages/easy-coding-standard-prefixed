@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopera48d5dbb002d\Symfony\Component\Config\Resource;
+namespace _PhpScoper3c4e863e8a34\Symfony\Component\Config\Resource;
 
-use _PhpScopera48d5dbb002d\Symfony\Component\Finder\Finder;
-use _PhpScopera48d5dbb002d\Symfony\Component\Finder\Glob;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Finder\Finder;
+use _PhpScoper3c4e863e8a34\Symfony\Component\Finder\Glob;
 /**
  * GlobResource represents a set of resources stored on the filesystem.
  *
@@ -21,7 +21,7 @@ use _PhpScopera48d5dbb002d\Symfony\Component\Finder\Glob;
  *
  * @final
  */
-class GlobResource implements \IteratorAggregate, \_PhpScopera48d5dbb002d\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
+class GlobResource implements \IteratorAggregate, \_PhpScoper3c4e863e8a34\Symfony\Component\Config\Resource\SelfCheckingResourceInterface
 {
     private $prefix;
     private $pattern;
