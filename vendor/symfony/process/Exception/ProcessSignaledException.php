@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Process\Exception;
+namespace ECSPrefix20210507\Symfony\Component\Process\Exception;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Process;
+use ECSPrefix20210507\Symfony\Component\Process\Process;
 /**
  * Exception that is thrown when a process has been signaled.
  *
  * @author Sullivan Senechal <soullivaneuh@gmail.com>
  */
-final class ProcessSignaledException extends \_PhpScopercae9e6ab5cea\Symfony\Component\Process\Exception\RuntimeException
+final class ProcessSignaledException extends \ECSPrefix20210507\Symfony\Component\Process\Exception\RuntimeException
 {
     private $process;
     public function __construct(Process $process)

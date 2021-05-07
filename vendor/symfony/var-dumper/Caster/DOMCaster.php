@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster;
+namespace ECSPrefix20210507\Symfony\Component\VarDumper\Caster;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Cloner\Stub;
+use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * Casts DOM related classes to array representation.
  *
@@ -24,9 +24,9 @@ class DOMCaster
     private const NODE_TYPES = [\XML_ELEMENT_NODE => 'XML_ELEMENT_NODE', \XML_ATTRIBUTE_NODE => 'XML_ATTRIBUTE_NODE', \XML_TEXT_NODE => 'XML_TEXT_NODE', \XML_CDATA_SECTION_NODE => 'XML_CDATA_SECTION_NODE', \XML_ENTITY_REF_NODE => 'XML_ENTITY_REF_NODE', \XML_ENTITY_NODE => 'XML_ENTITY_NODE', \XML_PI_NODE => 'XML_PI_NODE', \XML_COMMENT_NODE => 'XML_COMMENT_NODE', \XML_DOCUMENT_NODE => 'XML_DOCUMENT_NODE', \XML_DOCUMENT_TYPE_NODE => 'XML_DOCUMENT_TYPE_NODE', \XML_DOCUMENT_FRAG_NODE => 'XML_DOCUMENT_FRAG_NODE', \XML_NOTATION_NODE => 'XML_NOTATION_NODE', \XML_HTML_DOCUMENT_NODE => 'XML_HTML_DOCUMENT_NODE', \XML_DTD_NODE => 'XML_DTD_NODE', \XML_ELEMENT_DECL_NODE => 'XML_ELEMENT_DECL_NODE', \XML_ATTRIBUTE_DECL_NODE => 'XML_ATTRIBUTE_DECL_NODE', \XML_ENTITY_DECL_NODE => 'XML_ENTITY_DECL_NODE', \XML_NAMESPACE_DECL_NODE => 'XML_NAMESPACE_DECL_NODE'];
     public static function castException(\DOMException $e, array $a, Stub $stub, bool $isNested)
     {
-        $k = \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\Caster::PREFIX_PROTECTED . 'code';
+        $k = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_PROTECTED . 'code';
         if (isset($a[$k], self::ERROR_CODES[$a[$k]])) {
-            $a[$k] = new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\ConstStub(self::ERROR_CODES[$a[$k]], $a[$k]);
+            $a[$k] = new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\ConstStub(self::ERROR_CODES[$a[$k]], $a[$k]);
         }
         return $a;
     }
@@ -37,26 +37,26 @@ class DOMCaster
     }
     public static function castImplementation($dom, array $a, Stub $stub, bool $isNested)
     {
-        $a += [\_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'Core' => '1.0', \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'XML' => '2.0'];
+        $a += [\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'Core' => '1.0', \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'XML' => '2.0'];
         return $a;
     }
     public static function castNode(\DOMNode $dom, array $a, Stub $stub, bool $isNested)
     {
-        $a += ['nodeName' => $dom->nodeName, 'nodeValue' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->nodeValue), 'nodeType' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\ConstStub(self::NODE_TYPES[$dom->nodeType], $dom->nodeType), 'parentNode' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->parentNode), 'childNodes' => $dom->childNodes, 'firstChild' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->firstChild), 'lastChild' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->lastChild), 'previousSibling' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->previousSibling), 'nextSibling' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->nextSibling), 'attributes' => $dom->attributes, 'ownerDocument' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->ownerDocument), 'namespaceURI' => $dom->namespaceURI, 'prefix' => $dom->prefix, 'localName' => $dom->localName, 'baseURI' => $dom->baseURI ? new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\LinkStub($dom->baseURI) : $dom->baseURI, 'textContent' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->textContent)];
+        $a += ['nodeName' => $dom->nodeName, 'nodeValue' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->nodeValue), 'nodeType' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\ConstStub(self::NODE_TYPES[$dom->nodeType], $dom->nodeType), 'parentNode' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->parentNode), 'childNodes' => $dom->childNodes, 'firstChild' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->firstChild), 'lastChild' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->lastChild), 'previousSibling' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->previousSibling), 'nextSibling' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->nextSibling), 'attributes' => $dom->attributes, 'ownerDocument' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->ownerDocument), 'namespaceURI' => $dom->namespaceURI, 'prefix' => $dom->prefix, 'localName' => $dom->localName, 'baseURI' => $dom->baseURI ? new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\LinkStub($dom->baseURI) : $dom->baseURI, 'textContent' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->textContent)];
         return $a;
     }
     public static function castNameSpaceNode(\DOMNameSpaceNode $dom, array $a, Stub $stub, bool $isNested)
     {
-        $a += ['nodeName' => $dom->nodeName, 'nodeValue' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->nodeValue), 'nodeType' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\ConstStub(self::NODE_TYPES[$dom->nodeType], $dom->nodeType), 'prefix' => $dom->prefix, 'localName' => $dom->localName, 'namespaceURI' => $dom->namespaceURI, 'ownerDocument' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->ownerDocument), 'parentNode' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->parentNode)];
+        $a += ['nodeName' => $dom->nodeName, 'nodeValue' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->nodeValue), 'nodeType' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\ConstStub(self::NODE_TYPES[$dom->nodeType], $dom->nodeType), 'prefix' => $dom->prefix, 'localName' => $dom->localName, 'namespaceURI' => $dom->namespaceURI, 'ownerDocument' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->ownerDocument), 'parentNode' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->parentNode)];
         return $a;
     }
     public static function castDocument(\DOMDocument $dom, array $a, Stub $stub, bool $isNested, int $filter = 0)
     {
-        $a += ['doctype' => $dom->doctype, 'implementation' => $dom->implementation, 'documentElement' => new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\CutStub($dom->documentElement), 'actualEncoding' => $dom->actualEncoding, 'encoding' => $dom->encoding, 'xmlEncoding' => $dom->xmlEncoding, 'standalone' => $dom->standalone, 'xmlStandalone' => $dom->xmlStandalone, 'version' => $dom->version, 'xmlVersion' => $dom->xmlVersion, 'strictErrorChecking' => $dom->strictErrorChecking, 'documentURI' => $dom->documentURI ? new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\LinkStub($dom->documentURI) : $dom->documentURI, 'config' => $dom->config, 'formatOutput' => $dom->formatOutput, 'validateOnParse' => $dom->validateOnParse, 'resolveExternals' => $dom->resolveExternals, 'preserveWhiteSpace' => $dom->preserveWhiteSpace, 'recover' => $dom->recover, 'substituteEntities' => $dom->substituteEntities];
-        if (!($filter & \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE)) {
+        $a += ['doctype' => $dom->doctype, 'implementation' => $dom->implementation, 'documentElement' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($dom->documentElement), 'actualEncoding' => $dom->actualEncoding, 'encoding' => $dom->encoding, 'xmlEncoding' => $dom->xmlEncoding, 'standalone' => $dom->standalone, 'xmlStandalone' => $dom->xmlStandalone, 'version' => $dom->version, 'xmlVersion' => $dom->xmlVersion, 'strictErrorChecking' => $dom->strictErrorChecking, 'documentURI' => $dom->documentURI ? new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\LinkStub($dom->documentURI) : $dom->documentURI, 'config' => $dom->config, 'formatOutput' => $dom->formatOutput, 'validateOnParse' => $dom->validateOnParse, 'resolveExternals' => $dom->resolveExternals, 'preserveWhiteSpace' => $dom->preserveWhiteSpace, 'recover' => $dom->recover, 'substituteEntities' => $dom->substituteEntities];
+        if (!($filter & \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::EXCLUDE_VERBOSE)) {
             $formatOutput = $dom->formatOutput;
             $dom->formatOutput = \true;
-            $a += [\_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'xml' => $dom->saveXML()];
+            $a += [\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'xml' => $dom->saveXML()];
             $dom->formatOutput = $formatOutput;
         }
         return $a;
@@ -93,7 +93,7 @@ class DOMCaster
     }
     public static function castLocator(\DOMLocator $dom, array $a, Stub $stub, bool $isNested)
     {
-        $a += ['lineNumber' => $dom->lineNumber, 'columnNumber' => $dom->columnNumber, 'offset' => $dom->offset, 'relatedNode' => $dom->relatedNode, 'uri' => $dom->uri ? new \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Caster\LinkStub($dom->uri, $dom->lineNumber) : $dom->uri];
+        $a += ['lineNumber' => $dom->lineNumber, 'columnNumber' => $dom->columnNumber, 'offset' => $dom->offset, 'relatedNode' => $dom->relatedNode, 'uri' => $dom->uri ? new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\LinkStub($dom->uri, $dom->lineNumber) : $dom->uri];
         return $a;
     }
     public static function castDocumentType(\DOMDocumentType $dom, array $a, Stub $stub, bool $isNested)

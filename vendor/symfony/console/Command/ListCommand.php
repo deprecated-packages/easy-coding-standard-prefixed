@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Command;
+namespace ECSPrefix20210507\Symfony\Component\Console\Command;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Helper\DescriptorHelper;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputArgument;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputOption;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\OutputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Helper\DescriptorHelper;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputArgument;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputOption;
+use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
 /**
  * ListCommand displays the list of all available commands for the application.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ListCommand extends \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Command\Command
+class ListCommand extends \ECSPrefix20210507\Symfony\Component\Console\Command\Command
 {
     /**
      * {@inheritdoc}

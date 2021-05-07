@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Helper;
+namespace ECSPrefix20210507\Symfony\Component\Console\Helper;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Exception\LogicException;
+use ECSPrefix20210507\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\Console\Exception\LogicException;
 /**
  * Defines the styles for a Table.
  *

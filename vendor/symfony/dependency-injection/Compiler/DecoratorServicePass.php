@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Alias;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Reference;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Alias;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 /**
  * Overwrites a service but keeps the overridden one.
  *
@@ -22,7 +22,7 @@ use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Reference;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Diego Saint Esteben <diego@saintesteben.me>
  */
-class DecoratorServicePass extends \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class DecoratorServicePass extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $innerId = '.inner';
     public function __construct(?string $innerId = '.inner')

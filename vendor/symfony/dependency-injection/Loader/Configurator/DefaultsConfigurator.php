@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DefaultsConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class DefaultsConfigurator extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     public const FACTORY = 'defaults';
     use Traits\AutoconfigureTrait;
@@ -23,7 +23,7 @@ class DefaultsConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\Dep
     use Traits\BindTrait;
     use Traits\PublicTrait;
     private $path;
-    public function __construct(\_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, Definition $definition, string $path = null)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, Definition $definition, string $path = null)
     {
         parent::__construct($parent, $definition, null, []);
         $this->path = $path;
@@ -51,7 +51,7 @@ class DefaultsConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\Dep
     /**
      * Defines an instanceof-conditional to be applied to following service definitions.
      */
-    public final function instanceof(string $fqcn) : \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
+    public final function instanceof(string $fqcn) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
     {
         return $this->parent->instanceof($fqcn);
     }

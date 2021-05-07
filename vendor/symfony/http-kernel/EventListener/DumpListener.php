@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\EventListener;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\ConsoleEvents;
-use _PhpScopercae9e6ab5cea\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Server\Connection;
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\VarDumper;
+use ECSPrefix20210507\Symfony\Component\Console\ConsoleEvents;
+use ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\DataDumperInterface;
+use ECSPrefix20210507\Symfony\Component\VarDumper\Server\Connection;
+use ECSPrefix20210507\Symfony\Component\VarDumper\VarDumper;
 /**
  * Configures dump() handler.
  *

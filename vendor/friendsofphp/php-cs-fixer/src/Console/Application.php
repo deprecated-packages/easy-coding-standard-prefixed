@@ -23,11 +23,11 @@ use PhpCsFixer\Console\SelfUpdate\NewVersionChecker;
 use PhpCsFixer\PharChecker;
 use PhpCsFixer\ToolInfo;
 use PhpCsFixer\Utils;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Application as BaseApplication;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Command\ListCommand;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\OutputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Application as BaseApplication;
+use ECSPrefix20210507\Symfony\Component\Console\Command\ListCommand;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>

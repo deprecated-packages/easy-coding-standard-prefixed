@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Definition\BaseNode;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Definition\Processor;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use ECSPrefix20210507\Symfony\Component\Config\Definition\BaseNode;
+use ECSPrefix20210507\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ECSPrefix20210507\Symfony\Component\Config\Definition\Processor;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 /**
  * Validates environment variable placeholders used in extension configuration with dummy values.
  *
  * @author Roland Franssen <franssen.roland@gmail.com>
  */
-class ValidateEnvPlaceholdersPass implements \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+class ValidateEnvPlaceholdersPass implements \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private const TYPE_FIXTURES = ['array' => [], 'bool' => \false, 'float' => 0.0, 'int' => 0, 'string' => ''];
     private $extensionConfig = [];

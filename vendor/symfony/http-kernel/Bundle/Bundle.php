@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Bundle;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel\Bundle;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Application;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Container;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Application;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Container;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 /**
  * An implementation of BundleInterface that adds a few conventions for DependencyInjection extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Bundle implements \_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Bundle\BundleInterface
+abstract class Bundle implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Bundle\BundleInterface
 {
     use ContainerAwareTrait;
     protected $name;

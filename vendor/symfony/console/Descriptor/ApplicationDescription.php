@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Descriptor;
+namespace ECSPrefix20210507\Symfony\Component\Console\Descriptor;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Application;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Command\Command;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Exception\CommandNotFoundException;
+use ECSPrefix20210507\Symfony\Component\Console\Application;
+use ECSPrefix20210507\Symfony\Component\Console\Command\Command;
+use ECSPrefix20210507\Symfony\Component\Console\Exception\CommandNotFoundException;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *

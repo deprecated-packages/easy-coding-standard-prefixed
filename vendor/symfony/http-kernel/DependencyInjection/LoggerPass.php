@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScopercae9e6ab5cea\Psr\Log\LoggerInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Log\Logger;
+use ECSPrefix20210507\Psr\Log\LoggerInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Log\Logger;
 /**
  * Registers the default logger if necessary.
  *

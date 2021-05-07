@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Helper;
+namespace ECSPrefix20210507\Symfony\Component\Console\Helper;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Exception\ProcessFailedException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Process;
+use ECSPrefix20210507\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
+use ECSPrefix20210507\Symfony\Component\Process\Exception\ProcessFailedException;
+use ECSPrefix20210507\Symfony\Component\Process\Process;
 /**
  * The ProcessHelper class provides helpers to run external processes.
  *
@@ -21,7 +21,7 @@ use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Process;
  *
  * @final
  */
-class ProcessHelper extends \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Helper\Helper
+class ProcessHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper\Helper
 {
     /**
      * Runs an external process.

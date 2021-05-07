@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\DependencyInjection;
+namespace ECSPrefix20210507\Symfony\Component\Console\DependencyInjection;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Command\Command;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\TypedReference;
+use ECSPrefix20210507\Symfony\Component\Console\Command\Command;
+use ECSPrefix20210507\Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * Registers console commands.
  *

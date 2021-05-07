@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Adapter;
+namespace ECSPrefix20210507\Symfony\Component\Cache\Adapter;
 
-use _PhpScopercae9e6ab5cea\Psr\Cache\CacheItemInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\CacheItem;
-use _PhpScopercae9e6ab5cea\Symfony\Contracts\Cache\CacheInterface;
+use ECSPrefix20210507\Psr\Cache\CacheItemInterface;
+use ECSPrefix20210507\Symfony\Component\Cache\CacheItem;
+use ECSPrefix20210507\Symfony\Contracts\Cache\CacheInterface;
 /**
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class NullAdapter implements \_PhpScopercae9e6ab5cea\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface
+class NullAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface, CacheInterface
 {
     private $createCacheItem;
     public function __construct()

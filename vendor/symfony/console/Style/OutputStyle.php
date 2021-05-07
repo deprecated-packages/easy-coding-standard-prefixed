@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Style;
+namespace ECSPrefix20210507\Symfony\Component\Console\Style;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Helper\ProgressBar;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\OutputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Helper\ProgressBar;
+use ECSPrefix20210507\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Decorates output to add console style guide helpers.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-abstract class OutputStyle implements OutputInterface, \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Style\StyleInterface
+abstract class OutputStyle implements OutputInterface, \ECSPrefix20210507\Symfony\Component\Console\Style\StyleInterface
 {
     private $output;
     public function __construct(OutputInterface $output)

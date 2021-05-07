@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ControllerEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\TerminateEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ViewEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\TerminateEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ViewEvent;
 /**
  * Contains all events thrown in the HttpKernel component.
  *

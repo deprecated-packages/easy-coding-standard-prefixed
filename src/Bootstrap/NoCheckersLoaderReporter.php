@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Bootstrap;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Style\SymfonyStyle;
+use ECSPrefix20210507\Symfony\Component\Console\Style\SymfonyStyle;
 final class NoCheckersLoaderReporter
 {
     /**
@@ -24,8 +24,7 @@ final class NoCheckersLoaderReporter
         $this->symfonyStyle->writeln('  $services->set(...);');
         $this->symfonyStyle->newLine(2);
         $this->symfonyStyle->title('Add set of rules to "ecs.php"');
-        $this->symfonyStyle->writeln('  $parameters = $containerConfigurator->parameters();');
-        $this->symfonyStyle->writeln('  $parameters->set(Option::SETS, [...]);');
+        $this->symfonyStyle->writeln('  $containerConfigurator->import(...);');
         $this->symfonyStyle->newLine(2);
         $this->symfonyStyle->title('Missing "ecs.php" in your project? Let ECS create it for you');
         $this->symfonyStyle->writeln('  vendor/bin/ecs init');

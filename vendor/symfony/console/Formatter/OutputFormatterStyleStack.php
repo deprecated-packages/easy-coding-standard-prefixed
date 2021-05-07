@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter;
+namespace ECSPrefix20210507\Symfony\Component\Console\Formatter;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Contracts\Service\ResetInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Contracts\Service\ResetInterface;
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
@@ -22,9 +22,9 @@ class OutputFormatterStyleStack implements ResetInterface
      */
     private $styles;
     private $emptyStyle;
-    public function __construct(\_PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle = null)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle = null)
     {
-        $this->emptyStyle = $emptyStyle ?? new \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\OutputFormatterStyle();
+        $this->emptyStyle = $emptyStyle ?? new \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyle();
         $this->reset();
     }
     /**
@@ -37,7 +37,7 @@ class OutputFormatterStyleStack implements ResetInterface
     /**
      * Pushes a style in the stack.
      */
-    public function push(\_PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
+    public function push(\ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
     {
         $this->styles[] = $style;
     }
@@ -48,7 +48,7 @@ class OutputFormatterStyleStack implements ResetInterface
      *
      * @throws InvalidArgumentException When style tags incorrectly nested
      */
-    public function pop(\_PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style = null)
+    public function pop(\ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style = null)
     {
         if (empty($this->styles)) {
             return $this->emptyStyle;
@@ -79,7 +79,7 @@ class OutputFormatterStyleStack implements ResetInterface
     /**
      * @return $this
      */
-    public function setEmptyStyle(\_PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle)
+    public function setEmptyStyle(\ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle)
     {
         $this->emptyStyle = $emptyStyle;
         return $this;

@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Reference;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 /**
  * Adds services tagged kernel.fragment_renderer as HTTP content rendering strategies.
  *

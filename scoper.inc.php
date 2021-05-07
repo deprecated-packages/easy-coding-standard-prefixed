@@ -1,17 +1,21 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercae9e6ab5cea;
+namespace ECSPrefix20210507;
 
-use _PhpScopercae9e6ab5cea\Nette\Utils\Strings;
-use _PhpScopercae9e6ab5cea\Isolated\Symfony\Component\Finder\Finder;
-$finder = new \_PhpScopercae9e6ab5cea\Isolated\Symfony\Component\Finder\Finder();
+use ECSPrefix20210507\Nette\Utils\DateTime;
+use ECSPrefix20210507\Nette\Utils\Strings;
+use ECSPrefix20210507\Isolated\Symfony\Component\Finder\Finder;
+$finder = new \ECSPrefix20210507\Isolated\Symfony\Component\Finder\Finder();
 $polyfillFileInfos = $finder->files()->in(__DIR__ . '/vendor/symfony/polyfill-*')->name('*.php')->getIterator();
 $polyfillFilePaths = [];
 foreach ($polyfillFileInfos as $polyfillFileInfo) {
     $polyfillFilePaths[] = $polyfillFileInfo->getPathname();
 }
-return ['files-whitelist' => [
+$dateTime = DateTime::from('now');
+$timestamp = $dateTime->format('Ymd');
+// see https://github.com/humbug/php-scoper
+return ['prefix' => 'ECSPrefix' . $timestamp, 'files-whitelist' => [
     // do not prefix "trigger_deprecation" from symfony - https://github.com/symfony/symfony/commit/0032b2a2893d3be592d4312b7b098fb9d71aca03
     // these paths are relative to this file location, so it should be in the root directory
     'vendor/symfony/deprecation-contracts/function.php',
@@ -20,16 +24,16 @@ return ['files-whitelist' => [
     'Symplify\\*',
     'PhpCsFixer\\*',
     'PHP_CodeSniffer\\*',
-    '_PhpScopercae9e6ab5cea\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
-    '_PhpScopercae9e6ab5cea\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
-    '_PhpScopercae9e6ab5cea\\Composer\\InstalledVersions',
+    'ECSPrefix20210507\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
+    'ECSPrefix20210507\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
+    'ECSPrefix20210507\\Composer\\InstalledVersions',
 ], 'patchers' => [
     function (string $filePath, string $prefix, string $content) : string {
         if (!Strings::endsWith($filePath, 'vendor/jean85/pretty-package-versions/src/PrettyVersions.php')) {
             return $content;
         }
         // see https://regex101.com/r/v8zRMm/1
-        return Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScopercae9e6ab5cea\\Composer\\InstalledVersions');
+        return Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', 'ECSPrefix20210507\\Composer\\InstalledVersions');
     },
     // fixes https://github.com/symplify/symplify/issues/3102
     function (string $filePath, string $prefix, string $content) : string {

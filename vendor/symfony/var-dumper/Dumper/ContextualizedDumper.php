@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Dumper;
+namespace ECSPrefix20210507\Symfony\Component\VarDumper\Dumper;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
+use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data;
+use ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface;
 /**
  * @author Kévin Thérage <therage.kevin@gmail.com>
  */
-class ContextualizedDumper implements \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Dumper\DataDumperInterface
+class ContextualizedDumper implements \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\DataDumperInterface
 {
     private $wrappedDumper;
     private $contextProviders;
     /**
      * @param ContextProviderInterface[] $contextProviders
      */
-    public function __construct(\_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper, array $contextProviders)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper, array $contextProviders)
     {
         $this->wrappedDumper = $wrappedDumper;
         $this->contextProviders = $contextProviders;

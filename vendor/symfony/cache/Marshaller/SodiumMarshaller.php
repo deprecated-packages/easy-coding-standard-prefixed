@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Marshaller;
+namespace ECSPrefix20210507\Symfony\Component\Cache\Marshaller;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Exception\CacheException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\Cache\Exception\CacheException;
+use ECSPrefix20210507\Symfony\Component\Cache\Exception\InvalidArgumentException;
 /**
  * Encrypt/decrypt values using Libsodium.
  *
  * @author Ahmed TAILOULOUTE <ahmed.tailouloute@gmail.com>
  */
-class SodiumMarshaller implements \_PhpScopercae9e6ab5cea\Symfony\Component\Cache\Marshaller\MarshallerInterface
+class SodiumMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $marshaller;
     private $decryptionKeys;
@@ -26,7 +26,7 @@ class SodiumMarshaller implements \_PhpScopercae9e6ab5cea\Symfony\Component\Cach
      *                                 more rotating keys can be provided to decrypt values;
      *                                 each key must be generated using sodium_crypto_box_keypair()
      */
-    public function __construct(array $decryptionKeys, \_PhpScopercae9e6ab5cea\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    public function __construct(array $decryptionKeys, \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (!self::isSupported()) {
             throw new CacheException('The "sodium" PHP extension is not loaded.');
@@ -34,7 +34,7 @@ class SodiumMarshaller implements \_PhpScopercae9e6ab5cea\Symfony\Component\Cach
         if (!isset($decryptionKeys[0])) {
             throw new InvalidArgumentException('At least one decryption key must be provided at index "0".');
         }
-        $this->marshaller = $marshaller ?? new \_PhpScopercae9e6ab5cea\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         $this->decryptionKeys = $decryptionKeys;
     }
     public static function isSupported() : bool

@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Composer\XdebugHandler;
+namespace ECSPrefix20210507\Composer\XdebugHandler;
 
-use _PhpScopercae9e6ab5cea\Psr\Log\LoggerInterface;
-use _PhpScopercae9e6ab5cea\Psr\Log\LogLevel;
+use ECSPrefix20210507\Psr\Log\LoggerInterface;
+use ECSPrefix20210507\Psr\Log\LogLevel;
 /**
  * @author John Stevenson <john-stevenson@blueyonder.co.uk>
  * @internal
@@ -41,7 +41,7 @@ class Status
     public function __construct($envAllowXdebug, $debug)
     {
         $start = \getenv(self::ENV_RESTART);
-        \_PhpScopercae9e6ab5cea\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART);
+        \ECSPrefix20210507\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART);
         $this->time = $start ? \round((\microtime(\true) - $start) * 1000) : 0;
         $this->envAllowXdebug = $envAllowXdebug;
         $this->debug = $debug && \defined('STDERR');
@@ -111,7 +111,7 @@ class Status
     private function reportRestart()
     {
         $this->output($this->getLoadedMessage());
-        \_PhpScopercae9e6ab5cea\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART, (string) \microtime(\true));
+        \ECSPrefix20210507\Composer\XdebugHandler\Process::setEnv(self::ENV_RESTART, (string) \microtime(\true));
     }
     private function reportRestarted()
     {

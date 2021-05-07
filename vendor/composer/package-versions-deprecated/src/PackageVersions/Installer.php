@@ -1,19 +1,19 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercae9e6ab5cea\PackageVersions;
+namespace ECSPrefix20210507\PackageVersions;
 
-use _PhpScopercae9e6ab5cea\Composer\Composer;
-use _PhpScopercae9e6ab5cea\Composer\Config;
-use _PhpScopercae9e6ab5cea\Composer\EventDispatcher\EventSubscriberInterface;
-use _PhpScopercae9e6ab5cea\Composer\IO\IOInterface;
-use _PhpScopercae9e6ab5cea\Composer\Package\AliasPackage;
-use _PhpScopercae9e6ab5cea\Composer\Package\Locker;
-use _PhpScopercae9e6ab5cea\Composer\Package\PackageInterface;
-use _PhpScopercae9e6ab5cea\Composer\Package\RootPackageInterface;
-use _PhpScopercae9e6ab5cea\Composer\Plugin\PluginInterface;
-use _PhpScopercae9e6ab5cea\Composer\Script\Event;
-use _PhpScopercae9e6ab5cea\Composer\Script\ScriptEvents;
+use ECSPrefix20210507\Composer\Composer;
+use ECSPrefix20210507\Composer\Config;
+use ECSPrefix20210507\Composer\EventDispatcher\EventSubscriberInterface;
+use ECSPrefix20210507\Composer\IO\IOInterface;
+use ECSPrefix20210507\Composer\Package\AliasPackage;
+use ECSPrefix20210507\Composer\Package\Locker;
+use ECSPrefix20210507\Composer\Package\PackageInterface;
+use ECSPrefix20210507\Composer\Package\RootPackageInterface;
+use ECSPrefix20210507\Composer\Plugin\PluginInterface;
+use ECSPrefix20210507\Composer\Script\Event;
+use ECSPrefix20210507\Composer\Script\ScriptEvents;
 use Generator;
 use RuntimeException;
 use function array_key_exists;

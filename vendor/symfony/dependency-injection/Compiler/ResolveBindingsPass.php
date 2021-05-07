@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Reference;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\TypedReference;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * @author Guilhem Niot <guilhem.niot@gmail.com>
  */
-class ResolveBindingsPass extends \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveBindingsPass extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $usedBindings = [];
     private $unusedBindings = [];

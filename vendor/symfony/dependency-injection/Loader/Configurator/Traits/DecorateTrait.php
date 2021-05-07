@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 trait DecorateTrait
 {
     /**

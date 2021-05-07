@@ -8,37 +8,37 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel;
 
-use _PhpScopercae9e6ab5cea\Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator;
-use _PhpScopercae9e6ab5cea\Symfony\Bridge\ProxyManager\LazyProxy\PhpDumper\ProxyDumper;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\ConfigCache;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Loader\DelegatingLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Loader\LoaderResolver;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\PassConfig;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Dumper\PhpDumper;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Dumper\Preloader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\ClosureLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\IniFileLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\ErrorHandler\DebugClassLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Filesystem\Filesystem;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Response;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Config\FileLocator;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\DependencyInjection\AddAnnotatedClassesToCachePass;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\DependencyInjection\MergeExtensionConfigurationPass;
+use ECSPrefix20210507\Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator;
+use ECSPrefix20210507\Symfony\Bridge\ProxyManager\LazyProxy\PhpDumper\ProxyDumper;
+use ECSPrefix20210507\Symfony\Component\Config\ConfigCache;
+use ECSPrefix20210507\Symfony\Component\Config\Loader\DelegatingLoader;
+use ECSPrefix20210507\Symfony\Component\Config\Loader\LoaderResolver;
+use ECSPrefix20210507\Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Dumper\PhpDumper;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Dumper\Preloader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\ClosureLoader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\IniFileLoader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use ECSPrefix20210507\Symfony\Component\ErrorHandler\DebugClassLoader;
+use ECSPrefix20210507\Symfony\Component\Filesystem\Filesystem;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Request;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Response;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Config\FileLocator;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\DependencyInjection\AddAnnotatedClassesToCachePass;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\DependencyInjection\MergeExtensionConfigurationPass;
 // Help opcache.preload discover always-needed symbols
 \class_exists(ConfigCache::class);
 /**
@@ -51,7 +51,7 @@ use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\DependencyInjection\Merg
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Kernel implements \_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\KernelInterface, \_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\RebootableInterface, \_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\TerminableInterface
+abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelInterface, \ECSPrefix20210507\Symfony\Component\HttpKernel\RebootableInterface, \ECSPrefix20210507\Symfony\Component\HttpKernel\TerminableInterface
 {
     /**
      * @var BundleInterface[]
@@ -130,7 +130,7 @@ abstract class Kernel implements \_PhpScopercae9e6ab5cea\Symfony\Component\HttpK
         if (\false === $this->booted) {
             return;
         }
-        if ($this->getHttpKernel() instanceof \_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\TerminableInterface) {
+        if ($this->getHttpKernel() instanceof \ECSPrefix20210507\Symfony\Component\HttpKernel\TerminableInterface) {
             $this->getHttpKernel()->terminate($request, $response);
         }
     }
@@ -154,7 +154,7 @@ abstract class Kernel implements \_PhpScopercae9e6ab5cea\Symfony\Component\HttpK
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request, int $type = \_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, bool $catch = \true)
+    public function handle(Request $request, int $type = \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, bool $catch = \true)
     {
         if (!$this->booted) {
             $container = $this->container ?? $this->preBoot();
@@ -574,7 +574,7 @@ abstract class Kernel implements \_PhpScopercae9e6ab5cea\Symfony\Component\HttpK
         if ($this instanceof CompilerPassInterface) {
             $container->addCompilerPass($this, PassConfig::TYPE_BEFORE_OPTIMIZATION, -10000);
         }
-        if (\class_exists(\_PhpScopercae9e6ab5cea\ProxyManager\Configuration::class) && \class_exists(RuntimeInstantiator::class)) {
+        if (\class_exists(\ECSPrefix20210507\ProxyManager\Configuration::class) && \class_exists(RuntimeInstantiator::class)) {
             $container->setProxyInstantiator(new RuntimeInstantiator());
         }
         return $container;
@@ -589,7 +589,7 @@ abstract class Kernel implements \_PhpScopercae9e6ab5cea\Symfony\Component\HttpK
     {
         // cache the container
         $dumper = new PhpDumper($container);
-        if (\class_exists(\_PhpScopercae9e6ab5cea\ProxyManager\Configuration::class) && \class_exists(ProxyDumper::class)) {
+        if (\class_exists(\ECSPrefix20210507\ProxyManager\Configuration::class) && \class_exists(ProxyDumper::class)) {
             $dumper->setProxyDumper(new ProxyDumper());
         }
         $content = $dumper->dump(['class' => $class, 'base_class' => $baseClass, 'file' => $cache->getPath(), 'as_files' => \true, 'debug' => $this->debug, 'build_time' => $container->hasParameter('kernel.container_build_time') ? $container->getParameter('kernel.container_build_time') : \time(), 'preload_classes' => \array_map('get_class', $this->bundles)]);

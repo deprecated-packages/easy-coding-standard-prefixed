@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\DependencyInjection;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel\DependencyInjection;
 
-use _PhpScopercae9e6ab5cea\Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Reference;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\TypedReference;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
+use ECSPrefix20210507\Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ChildDefinition;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\TypedReference;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Request;
 /**
  * Creates the service-locators required by ServiceValueResolver.
  *

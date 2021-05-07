@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Config;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Config;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Resource\ResourceInterface;
+use ECSPrefix20210507\Symfony\Component\Config\Resource\ResourceInterface;
 /**
  * Tracks container parameters.
  *

@@ -25,7 +25,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Preg;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScopercae9e6ab5cea\Symfony\Component\OptionsResolver\Options;
+use ECSPrefix20210507\Symfony\Component\OptionsResolver\Options;
 /**
  * @author Filippo Tessarotto <zoeslam@gmail.com>
  * @author Andreas Möller <am@localheinz.com>

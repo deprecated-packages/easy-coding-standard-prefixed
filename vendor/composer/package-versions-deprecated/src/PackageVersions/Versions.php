@@ -1,9 +1,9 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercae9e6ab5cea\PackageVersions;
+namespace ECSPrefix20210507\PackageVersions;
 
-use _PhpScopercae9e6ab5cea\Composer\InstalledVersions;
+use ECSPrefix20210507\Composer\InstalledVersions;
 use OutOfBoundsException;
 \class_exists(InstalledVersions::class);
 /**

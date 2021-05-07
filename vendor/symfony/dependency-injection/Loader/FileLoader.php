@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Exception\LoaderLoadException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\FileLocatorInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Loader\FileLoader as BaseFileLoader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Loader\Loader;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Resource\GlobResource;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
+use ECSPrefix20210507\Symfony\Component\Config\Exception\LoaderLoadException;
+use ECSPrefix20210507\Symfony\Component\Config\FileLocatorInterface;
+use ECSPrefix20210507\Symfony\Component\Config\Loader\FileLoader as BaseFileLoader;
+use ECSPrefix20210507\Symfony\Component\Config\Loader\Loader;
+use ECSPrefix20210507\Symfony\Component\Config\Resource\GlobResource;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ChildDefinition;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * FileLoader is the abstract class used by all built-in loaders that are file based.
  *

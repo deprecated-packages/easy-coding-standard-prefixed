@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output;
+namespace ECSPrefix20210507\Symfony\Component\Console\Output;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\NullOutputFormatter;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Formatter\NullOutputFormatter;
+use ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface;
 /**
  * NullOutput suppresses all output.
  *
@@ -20,7 +20,7 @@ use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\OutputFormatterIn
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Tobias Schultze <http://tobion.de>
  */
-class NullOutput implements \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\OutputInterface
+class NullOutput implements \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface
 {
     private $formatter;
     /**

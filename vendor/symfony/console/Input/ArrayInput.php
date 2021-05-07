@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input;
+namespace ECSPrefix20210507\Symfony\Component\Console\Input;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Exception\InvalidOptionException;
+use ECSPrefix20210507\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\Console\Exception\InvalidOptionException;
 /**
  * ArrayInput represents an input provided as an array.
  *
@@ -21,10 +21,10 @@ use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Exception\InvalidOptionExce
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ArrayInput extends \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\Input
+class ArrayInput extends \ECSPrefix20210507\Symfony\Component\Console\Input\Input
 {
     private $parameters;
-    public function __construct(array $parameters, \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputDefinition $definition = null)
+    public function __construct(array $parameters, \ECSPrefix20210507\Symfony\Component\Console\Input\InputDefinition $definition = null)
     {
         $this->parameters = $parameters;
         parent::__construct($definition);

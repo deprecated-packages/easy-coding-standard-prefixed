@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 /**
  * StorageInterface.
  *

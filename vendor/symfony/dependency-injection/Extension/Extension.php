@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Extension;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Definition\ConfigurationInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Definition\Processor;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Container;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\LogicException;
+use ECSPrefix20210507\Symfony\Component\Config\Definition\ConfigurationInterface;
+use ECSPrefix20210507\Symfony\Component\Config\Definition\Processor;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Container;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\LogicException;
 /**
  * Provides useful features shared by many extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Extension implements \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+abstract class Extension implements \ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ExtensionInterface, \ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
 {
     private $processedConfigs = [];
     /**

@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\Skipper\HttpKernel;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use ECSPrefix20210507\Symfony\Component\Config\Loader\LoaderInterface;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\Skipper\Bundle\SkipperBundle;
 use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;

@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\File\Exception;
+namespace ECSPrefix20210507\Symfony\Component\HttpFoundation\File\Exception;
 
 /**
  * Thrown when an UPLOAD_ERR_INI_SIZE error occurred with UploadedFile.
  *
  * @author Florent Mata <florentmata@gmail.com>
  */
-class IniSizeFileException extends \_PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\File\Exception\FileException
+class IniSizeFileException extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
 }

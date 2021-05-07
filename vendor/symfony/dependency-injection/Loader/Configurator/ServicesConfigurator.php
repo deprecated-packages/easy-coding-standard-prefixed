@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Alias;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ChildDefinition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Alias;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ChildDefinition;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServicesConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class ServicesConfigurator extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     public const FACTORY = 'services';
     private $defaults;
@@ -44,17 +44,17 @@ class ServicesConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\Dep
     /**
      * Defines a set of defaults for following service definitions.
      */
-    public final function defaults() : \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator
+    public final function defaults() : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator
     {
-        return new \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator($this, $this->defaults = new Definition(), $this->path);
+        return new \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator($this, $this->defaults = new Definition(), $this->path);
     }
     /**
      * Defines an instanceof-conditional to be applied to following service definitions.
      */
-    public final function instanceof(string $fqcn) : \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
+    public final function instanceof(string $fqcn) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
     {
         $this->instanceof[$fqcn] = $definition = new ChildDefinition('');
-        return new \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator($this, $definition, $fqcn, $this->path);
+        return new \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator($this, $definition, $fqcn, $this->path);
     }
     /**
      * Registers a service.
@@ -62,7 +62,7 @@ class ServicesConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\Dep
      * @param string|null $id    The service id, or null to create an anonymous service
      * @param string|null $class The class of the service, or null when $id is also the class name
      */
-    public final function set(?string $id, string $class = null) : \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
+    public final function set(?string $id, string $class = null) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
     {
         $defaults = $this->defaults;
         $definition = new Definition();
@@ -79,13 +79,13 @@ class ServicesConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\Dep
         // deep clone, to avoid multiple process of the same instance in the passes
         $definition->setBindings(\unserialize(\serialize($defaults->getBindings())));
         $definition->setChanges([]);
-        $configurator = new \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator($this->container, $this->instanceof, \true, $this, $definition, $id, $defaults->getTags(), $this->path);
+        $configurator = new \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator($this->container, $this->instanceof, \true, $this, $definition, $id, $defaults->getTags(), $this->path);
         return null !== $class ? $configurator->class($class) : $configurator;
     }
     /**
      * Creates an alias.
      */
-    public final function alias(string $id, string $referencedId) : \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator
+    public final function alias(string $id, string $referencedId) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator
     {
         $ref = static::processValue($referencedId, \true);
         $alias = new Alias((string) $ref);
@@ -93,34 +93,34 @@ class ServicesConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\Dep
             $alias->setPublic($this->defaults->isPublic());
         }
         $this->container->setAlias($id, $alias);
-        return new \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator($this, $alias);
+        return new \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator($this, $alias);
     }
     /**
      * Registers a PSR-4 namespace using a glob pattern.
      */
-    public final function load(string $namespace, string $resource) : \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\PrototypeConfigurator
+    public final function load(string $namespace, string $resource) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\PrototypeConfigurator
     {
-        return new \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\PrototypeConfigurator($this, $this->loader, $this->defaults, $namespace, $resource, \true);
+        return new \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\PrototypeConfigurator($this, $this->loader, $this->defaults, $namespace, $resource, \true);
     }
     /**
      * Gets an already defined service definition.
      *
      * @throws ServiceNotFoundException if the service definition does not exist
      */
-    public final function get(string $id) : \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
+    public final function get(string $id) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
     {
         $definition = $this->container->getDefinition($id);
-        return new \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator($this->container, $definition->getInstanceofConditionals(), \true, $this, $definition, $id, []);
+        return new \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator($this->container, $definition->getInstanceofConditionals(), \true, $this, $definition, $id, []);
     }
     /**
      * Registers a stack of decorator services.
      *
      * @param InlineServiceConfigurator[]|ReferenceConfigurator[] $services
      */
-    public final function stack(string $id, array $services) : \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator
+    public final function stack(string $id, array $services) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AliasConfigurator
     {
         foreach ($services as $i => $service) {
-            if ($service instanceof \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator) {
+            if ($service instanceof \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator) {
                 $definition = $service->definition->setInstanceofConditionals($this->instanceof);
                 $changes = $definition->getChanges();
                 $definition->setAutowired((isset($changes['autowired']) ? $definition : $this->defaults)->isAutowired());
@@ -128,8 +128,8 @@ class ServicesConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\Dep
                 $definition->setBindings(\array_merge($this->defaults->getBindings(), $definition->getBindings()));
                 $definition->setChanges($changes);
                 $services[$i] = $definition;
-            } elseif (!$service instanceof \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator) {
-                throw new InvalidArgumentException(\sprintf('"%s()" expects a list of definitions as returned by "%s()" or "%s()", "%s" given at index "%s" for service "%s".', __METHOD__, \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator::FACTORY, \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator::FACTORY, $service instanceof \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator ? $service::FACTORY . '()' : \get_debug_type($service), $i, $id));
+            } elseif (!$service instanceof \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator) {
+                throw new InvalidArgumentException(\sprintf('"%s()" expects a list of definitions as returned by "%s()" or "%s()", "%s" given at index "%s" for service "%s".', __METHOD__, \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\InlineServiceConfigurator::FACTORY, \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator::FACTORY, $service instanceof \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator ? $service::FACTORY . '()' : \get_debug_type($service), $i, $id));
             }
         }
         $alias = $this->alias($id, '');
@@ -139,7 +139,7 @@ class ServicesConfigurator extends \_PhpScopercae9e6ab5cea\Symfony\Component\Dep
     /**
      * Registers a service.
      */
-    public final function __invoke(string $id, string $class = null) : \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
+    public final function __invoke(string $id, string $class = null) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServiceConfigurator
     {
         return $this->set($id, $class);
     }

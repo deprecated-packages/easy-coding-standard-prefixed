@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercae9e6ab5cea;
+namespace ECSPrefix20210507;
 
 // decoupled in own "*.php" file, so ECS, Rector and PHPStan works out of the box here
 use PHP_CodeSniffer\Util\Tokens;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\ArgvInput;
+use ECSPrefix20210507\Symfony\Component\Console\Input\ArgvInput;
 use Symplify\EasyCodingStandard\Console\EasyCodingStandardConsoleApplication;
 use Symplify\EasyCodingStandard\DependencyInjection\EasyCodingStandardContainerFactory;
 use Symplify\PackageBuilder\Console\ShellCode;
@@ -15,7 +15,7 @@ use Symplify\SetConfigResolver\Exception\SetNotFoundException;
 // performance boost
 \gc_disable();
 # 1. autoload
-$autoloadIncluder = new \_PhpScopercae9e6ab5cea\AutoloadIncluder();
+$autoloadIncluder = new \ECSPrefix20210507\AutoloadIncluder();
 $autoloadIncluder->includeCwdVendorAutoloadIfExists();
 $autoloadIncluder->autoloadProjectAutoloaderFile('/../../autoload.php');
 $autoloadIncluder->includeDependencyOrRepositoryVendorAutoloadIfExists();
@@ -111,4 +111,4 @@ final class AutoloadIncluder
 /**
  * Inspired by https://github.com/rectorphp/rector/pull/2373/files#diff-0fc04a2bb7928cac4ae339d5a8bf67f3
  */
-\class_alias('_PhpScopercae9e6ab5cea\\AutoloadIncluder', 'AutoloadIncluder', \false);
+\class_alias('ECSPrefix20210507\\AutoloadIncluder', 'AutoloadIncluder', \false);

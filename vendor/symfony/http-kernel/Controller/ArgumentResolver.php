@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Controller;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel\Controller;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Request;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface;
 /**
  * Responsible for resolving the arguments passed to an action.
  *
  * @author Iltar van der Berg <kjarli@gmail.com>
  */
-final class ArgumentResolver implements \_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
+final class ArgumentResolver implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
 {
     private $argumentMetadataFactory;
     /**

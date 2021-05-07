@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Cache\DependencyInjection;
+namespace ECSPrefix20210507\Symfony\Component\Cache\DependencyInjection;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Adapter\TraceableAdapter;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Definition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Reference;
+use ECSPrefix20210507\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use ECSPrefix20210507\Symfony\Component\Cache\Adapter\TraceableAdapter;
+use ECSPrefix20210507\Symfony\Component\Cache\Adapter\TraceableTagAwareAdapter;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 /**
  * Inject a data collector to all the cache services to be able to get detailed statistics.
  *

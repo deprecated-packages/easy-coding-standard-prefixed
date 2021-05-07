@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Descriptor;
+namespace ECSPrefix20210507\Symfony\Component\Console\Descriptor;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Application;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Command\Command;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputArgument;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputOption;
+use ECSPrefix20210507\Symfony\Component\Console\Application;
+use ECSPrefix20210507\Symfony\Component\Console\Command\Command;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputArgument;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputDefinition;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputOption;
 /**
  * XML descriptor.
  *
@@ -22,7 +22,7 @@ use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputOption;
  *
  * @internal
  */
-class XmlDescriptor extends \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Descriptor\Descriptor
+class XmlDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descriptor\Descriptor
 {
     public function getInputDefinitionDocument(InputDefinition $definition) : \DOMDocument
     {
@@ -69,7 +69,7 @@ class XmlDescriptor extends \_PhpScopercae9e6ab5cea\Symfony\Component\Console\De
             }
         }
         $rootXml->appendChild($commandsXML = $dom->createElement('commands'));
-        $description = new \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $namespace, \true);
+        $description = new \ECSPrefix20210507\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $namespace, \true);
         if ($namespace) {
             $commandsXML->setAttribute('namespace', $namespace);
         }

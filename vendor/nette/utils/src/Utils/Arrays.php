@@ -5,9 +5,9 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 declare (strict_types=1);
-namespace _PhpScopercae9e6ab5cea\Nette\Utils;
+namespace ECSPrefix20210507\Nette\Utils;
 
-use _PhpScopercae9e6ab5cea\Nette;
+use ECSPrefix20210507\Nette;
 use function is_array, is_int, is_object, count;
 /**
  * Array tools library.
@@ -75,7 +75,7 @@ class Arrays
      */
     public static function getKeyOffset(array $array, $key) : ?int
     {
-        return \_PhpScopercae9e6ab5cea\Nette\Utils\Helpers::falseToNull(\array_search(self::toKey($key), \array_keys($array), \true));
+        return \ECSPrefix20210507\Nette\Utils\Helpers::falseToNull(\array_search(self::toKey($key), \array_keys($array), \true));
     }
     /**
      * @deprecated  use  getKeyOffset()
@@ -154,7 +154,7 @@ class Arrays
      */
     public static function grep(array $array, string $pattern, int $flags = 0) : array
     {
-        return \_PhpScopercae9e6ab5cea\Nette\Utils\Strings::pcre('preg_grep', [$pattern, $array, $flags]);
+        return \ECSPrefix20210507\Nette\Utils\Strings::pcre('preg_grep', [$pattern, $array, $flags]);
     }
     /**
      * Transforms multidimensional array to flat array.

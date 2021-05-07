@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
+namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\Traits;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Reference;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\DefaultsConfigurator;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 trait BindTrait
 {
     /**

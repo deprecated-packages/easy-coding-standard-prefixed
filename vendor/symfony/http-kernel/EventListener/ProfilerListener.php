@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\EventListener;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\RequestMatcherInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\TerminateEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Profiler\Profiler;
+use ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestMatcherInterface;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\TerminateEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Profiler\Profiler;
 /**
  * ProfilerListener collects data for the current request by listening to the kernel events.
  *

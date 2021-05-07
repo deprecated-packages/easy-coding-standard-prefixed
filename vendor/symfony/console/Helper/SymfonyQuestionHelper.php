@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Helper;
+namespace ECSPrefix20210507\Symfony\Component\Console\Helper;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\OutputInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Question\ChoiceQuestion;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Question\ConfirmationQuestion;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Question\Question;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Style\SymfonyStyle;
+use ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatter;
+use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Question\ChoiceQuestion;
+use ECSPrefix20210507\Symfony\Component\Console\Question\ConfirmationQuestion;
+use ECSPrefix20210507\Symfony\Component\Console\Question\Question;
+use ECSPrefix20210507\Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Symfony Style Guide compliant question helper.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class SymfonyQuestionHelper extends \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Helper\QuestionHelper
+class SymfonyQuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper\QuestionHelper
 {
     /**
      * {@inheritdoc}

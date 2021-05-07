@@ -8,17 +8,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Process;
+namespace ECSPrefix20210507\Symfony\Component\Process;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Exception\LogicException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Exception\ProcessFailedException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Exception\ProcessSignaledException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Exception\ProcessTimedOutException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Exception\RuntimeException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Pipes\PipesInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Pipes\UnixPipes;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Process\Pipes\WindowsPipes;
+use ECSPrefix20210507\Symfony\Component\Process\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\Process\Exception\LogicException;
+use ECSPrefix20210507\Symfony\Component\Process\Exception\ProcessFailedException;
+use ECSPrefix20210507\Symfony\Component\Process\Exception\ProcessSignaledException;
+use ECSPrefix20210507\Symfony\Component\Process\Exception\ProcessTimedOutException;
+use ECSPrefix20210507\Symfony\Component\Process\Exception\RuntimeException;
+use ECSPrefix20210507\Symfony\Component\Process\Pipes\PipesInterface;
+use ECSPrefix20210507\Symfony\Component\Process\Pipes\UnixPipes;
+use ECSPrefix20210507\Symfony\Component\Process\Pipes\WindowsPipes;
 /**
  * Process is a thin wrapper around proc_* functions to easily
  * start independent PHP processes.
@@ -1037,7 +1037,7 @@ class Process implements \IteratorAggregate
         if ($this->isRunning()) {
             throw new LogicException('Input can not be set while the process is running.');
         }
-        $this->input = \_PhpScopercae9e6ab5cea\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
+        $this->input = \ECSPrefix20210507\Symfony\Component\Process\ProcessUtils::validateInput(__METHOD__, $input);
         return $this;
     }
     /**

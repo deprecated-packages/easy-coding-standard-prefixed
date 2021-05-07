@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Console\Descriptor;
+namespace ECSPrefix20210507\Symfony\Component\Console\Descriptor;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Application;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Command\Command;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputArgument;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputOption;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\OutputInterface;
+use ECSPrefix20210507\Symfony\Component\Console\Application;
+use ECSPrefix20210507\Symfony\Component\Console\Command\Command;
+use ECSPrefix20210507\Symfony\Component\Console\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputArgument;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputDefinition;
+use ECSPrefix20210507\Symfony\Component\Console\Input\InputOption;
+use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Jean-François Simon <jeanfrancois.simon@sensiolabs.com>
  *
  * @internal
  */
-abstract class Descriptor implements \_PhpScopercae9e6ab5cea\Symfony\Component\Console\Descriptor\DescriptorInterface
+abstract class Descriptor implements \ECSPrefix20210507\Symfony\Component\Console\Descriptor\DescriptorInterface
 {
     /**
      * @var OutputInterface

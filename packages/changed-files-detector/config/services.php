@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercae9e6ab5cea;
+namespace ECSPrefix20210507;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Adapter\Psr16Adapter;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Adapter\TagAwareAdapter;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use function _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use ECSPrefix20210507\Symfony\Component\Cache\Adapter\Psr16Adapter;
+use ECSPrefix20210507\Symfony\Component\Cache\Adapter\TagAwareAdapter;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use function ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();

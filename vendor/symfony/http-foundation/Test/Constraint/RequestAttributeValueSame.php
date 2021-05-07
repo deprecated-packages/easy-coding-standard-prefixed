@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Test\Constraint;
+namespace ECSPrefix20210507\Symfony\Component\HttpFoundation\Test\Constraint;
 
-use _PhpScopercae9e6ab5cea\PHPUnit\Framework\Constraint\Constraint;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
+use ECSPrefix20210507\PHPUnit\Framework\Constraint\Constraint;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Request;
 final class RequestAttributeValueSame extends Constraint
 {
     private $name;

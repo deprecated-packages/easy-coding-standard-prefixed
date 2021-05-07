@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\String;
+namespace ECSPrefix20210507\Symfony\Component\String;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\String\Exception\ExceptionInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\String\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\String\Exception\ExceptionInterface;
+use ECSPrefix20210507\Symfony\Component\String\Exception\InvalidArgumentException;
 /**
  * Represents a string of Unicode code points encoded as UTF-8.
  *
@@ -20,7 +20,7 @@ use _PhpScopercae9e6ab5cea\Symfony\Component\String\Exception\InvalidArgumentExc
  *
  * @throws ExceptionInterface
  */
-class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractUnicodeString
+class CodePointString extends \ECSPrefix20210507\Symfony\Component\String\AbstractUnicodeString
 {
     public function __construct(string $string = '')
     {
@@ -29,7 +29,7 @@ class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\A
         }
         $this->string = $string;
     }
-    public function append(string ...$suffix) : \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString
+    public function append(string ...$suffix) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         $str->string .= 1 >= \count($suffix) ? $suffix[0] ?? '' : \implode('', $suffix);
@@ -67,7 +67,7 @@ class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\A
     }
     public function endsWith($suffix) : bool
     {
-        if ($suffix instanceof \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString) {
+        if ($suffix instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $suffix = $suffix->string;
         } elseif (\is_array($suffix) || $suffix instanceof \Traversable) {
             return parent::endsWith($suffix);
@@ -84,7 +84,7 @@ class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\A
     }
     public function equalsTo($string) : bool
     {
-        if ($string instanceof \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString) {
+        if ($string instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $string = $string->string;
         } elseif (\is_array($string) || $string instanceof \Traversable) {
             return parent::equalsTo($string);
@@ -98,7 +98,7 @@ class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\A
     }
     public function indexOf($needle, int $offset = 0) : ?int
     {
-        if ($needle instanceof \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString) {
+        if ($needle instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
         } elseif (\is_array($needle) || $needle instanceof \Traversable) {
             return parent::indexOf($needle, $offset);
@@ -113,7 +113,7 @@ class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\A
     }
     public function indexOfLast($needle, int $offset = 0) : ?int
     {
-        if ($needle instanceof \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString) {
+        if ($needle instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
         } elseif (\is_array($needle) || $needle instanceof \Traversable) {
             return parent::indexOfLast($needle, $offset);
@@ -130,7 +130,7 @@ class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\A
     {
         return \mb_strlen($this->string, 'UTF-8');
     }
-    public function prepend(string ...$prefix) : \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString
+    public function prepend(string ...$prefix) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         $str->string = (1 >= \count($prefix) ? $prefix[0] ?? '' : \implode('', $prefix)) . $this->string;
@@ -139,7 +139,7 @@ class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\A
         }
         return $str;
     }
-    public function replace(string $from, string $to) : \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString
+    public function replace(string $from, string $to) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         if ('' === $from || !\preg_match('//u', $from)) {
@@ -155,13 +155,13 @@ class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\A
         }
         return $str;
     }
-    public function slice(int $start = 0, int $length = null) : \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString
+    public function slice(int $start = 0, int $length = null) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         $str->string = \mb_substr($this->string, $start, $length, 'UTF-8');
         return $str;
     }
-    public function splice(string $replacement, int $start = 0, int $length = null) : \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString
+    public function splice(string $replacement, int $start = 0, int $length = null) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         if (!\preg_match('//u', $replacement)) {
             throw new InvalidArgumentException('Invalid UTF-8 string.');
@@ -196,7 +196,7 @@ class CodePointString extends \_PhpScopercae9e6ab5cea\Symfony\Component\String\A
     }
     public function startsWith($prefix) : bool
     {
-        if ($prefix instanceof \_PhpScopercae9e6ab5cea\Symfony\Component\String\AbstractString) {
+        if ($prefix instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $prefix = $prefix->string;
         } elseif (\is_array($prefix) || $prefix instanceof \Traversable) {
             return parent::startsWith($prefix);

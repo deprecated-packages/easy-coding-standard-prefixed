@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\OptionsResolver;
+namespace ECSPrefix20210507\Symfony\Component\OptionsResolver;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\OptionsResolver\Exception\AccessException;
+use ECSPrefix20210507\Symfony\Component\OptionsResolver\Exception\AccessException;
 final class OptionConfigurator
 {
     private $name;
     private $resolver;
-    public function __construct(string $name, \_PhpScopercae9e6ab5cea\Symfony\Component\OptionsResolver\OptionsResolver $resolver)
+    public function __construct(string $name, \ECSPrefix20210507\Symfony\Component\OptionsResolver\OptionsResolver $resolver)
     {
         $this->name = $name;
         $this->resolver = $resolver;

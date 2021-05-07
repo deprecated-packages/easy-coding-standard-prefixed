@@ -8,12 +8,12 @@
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Composer\Semver\Constraint;
+namespace ECSPrefix20210507\Composer\Semver\Constraint;
 
 /**
  * Defines a constraint.
  */
-class Constraint implements \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\ConstraintInterface
+class Constraint implements \ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface
 {
     /* operator integer values */
     const OP_EQ = 0;
@@ -78,7 +78,7 @@ class Constraint implements \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\C
      *
      * @return bool
      */
-    public function matches(\_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\ConstraintInterface $provider)
+    public function matches(\ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $provider)
     {
         if ($provider instanceof self) {
             return $this->matchSpecific($provider);
@@ -222,7 +222,7 @@ class Constraint implements \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\C
      *
      * @return bool
      */
-    public function matchSpecific(\_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Constraint $provider, $compareBranches = \false)
+    public function matchSpecific(\ECSPrefix20210507\Composer\Semver\Constraint\Constraint $provider, $compareBranches = \false)
     {
         $noEqualOp = \str_replace('=', '', self::$transOpInt[$this->operator]);
         $providerNoEqualOp = \str_replace('=', '', self::$transOpInt[$provider->operator]);
@@ -289,34 +289,34 @@ class Constraint implements \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\C
         }
         // Branches
         if (\strpos($this->version, 'dev-') === 0) {
-            $this->lowerBound = \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound::zero();
-            $this->upperBound = \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound::positiveInfinity();
+            $this->lowerBound = \ECSPrefix20210507\Composer\Semver\Constraint\Bound::zero();
+            $this->upperBound = \ECSPrefix20210507\Composer\Semver\Constraint\Bound::positiveInfinity();
             return;
         }
         switch ($this->operator) {
             case self::OP_EQ:
-                $this->lowerBound = new \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound($this->version, \true);
-                $this->upperBound = new \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound($this->version, \true);
+                $this->lowerBound = new \ECSPrefix20210507\Composer\Semver\Constraint\Bound($this->version, \true);
+                $this->upperBound = new \ECSPrefix20210507\Composer\Semver\Constraint\Bound($this->version, \true);
                 break;
             case self::OP_LT:
-                $this->lowerBound = \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound::zero();
-                $this->upperBound = new \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound($this->version, \false);
+                $this->lowerBound = \ECSPrefix20210507\Composer\Semver\Constraint\Bound::zero();
+                $this->upperBound = new \ECSPrefix20210507\Composer\Semver\Constraint\Bound($this->version, \false);
                 break;
             case self::OP_LE:
-                $this->lowerBound = \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound::zero();
-                $this->upperBound = new \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound($this->version, \true);
+                $this->lowerBound = \ECSPrefix20210507\Composer\Semver\Constraint\Bound::zero();
+                $this->upperBound = new \ECSPrefix20210507\Composer\Semver\Constraint\Bound($this->version, \true);
                 break;
             case self::OP_GT:
-                $this->lowerBound = new \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound($this->version, \false);
-                $this->upperBound = \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound::positiveInfinity();
+                $this->lowerBound = new \ECSPrefix20210507\Composer\Semver\Constraint\Bound($this->version, \false);
+                $this->upperBound = \ECSPrefix20210507\Composer\Semver\Constraint\Bound::positiveInfinity();
                 break;
             case self::OP_GE:
-                $this->lowerBound = new \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound($this->version, \true);
-                $this->upperBound = \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound::positiveInfinity();
+                $this->lowerBound = new \ECSPrefix20210507\Composer\Semver\Constraint\Bound($this->version, \true);
+                $this->upperBound = \ECSPrefix20210507\Composer\Semver\Constraint\Bound::positiveInfinity();
                 break;
             case self::OP_NE:
-                $this->lowerBound = \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound::zero();
-                $this->upperBound = \_PhpScopercae9e6ab5cea\Composer\Semver\Constraint\Bound::positiveInfinity();
+                $this->lowerBound = \ECSPrefix20210507\Composer\Semver\Constraint\Bound::zero();
+                $this->upperBound = \ECSPrefix20210507\Composer\Semver\Constraint\Bound::positiveInfinity();
                 break;
         }
     }

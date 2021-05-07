@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\EventListener;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScopercae9e6ab5cea\Psr\Log\LoggerInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\HttpKernelInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
+use ECSPrefix20210507\Psr\Log\LoggerInterface;
+use ECSPrefix20210507\Symfony\Component\Debug\Exception\FlattenException as LegacyFlattenException;
+use ECSPrefix20210507\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Request;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  */

@@ -8,21 +8,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\Cache;
+namespace ECSPrefix20210507\Symfony\Component\Cache;
 
-use _PhpScopercae9e6ab5cea\Psr\Cache\CacheException as Psr6CacheException;
-use _PhpScopercae9e6ab5cea\Psr\Cache\CacheItemPoolInterface;
-use _PhpScopercae9e6ab5cea\Psr\SimpleCache\CacheException as SimpleCacheException;
-use _PhpScopercae9e6ab5cea\Psr\SimpleCache\CacheInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Adapter\AdapterInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Exception\InvalidArgumentException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Cache\Traits\ProxyTrait;
+use ECSPrefix20210507\Psr\Cache\CacheException as Psr6CacheException;
+use ECSPrefix20210507\Psr\Cache\CacheItemPoolInterface;
+use ECSPrefix20210507\Psr\SimpleCache\CacheException as SimpleCacheException;
+use ECSPrefix20210507\Psr\SimpleCache\CacheInterface;
+use ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface;
+use ECSPrefix20210507\Symfony\Component\Cache\Exception\InvalidArgumentException;
+use ECSPrefix20210507\Symfony\Component\Cache\Traits\ProxyTrait;
 /**
  * Turns a PSR-6 cache into a PSR-16 one.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class Psr16Cache implements CacheInterface, \_PhpScopercae9e6ab5cea\Symfony\Component\Cache\PruneableInterface, \_PhpScopercae9e6ab5cea\Symfony\Component\Cache\ResettableInterface
+class Psr16Cache implements CacheInterface, \ECSPrefix20210507\Symfony\Component\Cache\PruneableInterface, \ECSPrefix20210507\Symfony\Component\Cache\ResettableInterface
 {
     use ProxyTrait;
     private const METADATA_EXPIRY_OFFSET = 1527506807;
@@ -38,11 +38,11 @@ class Psr16Cache implements CacheInterface, \_PhpScopercae9e6ab5cea\Symfony\Comp
         $createCacheItem = \Closure::bind(static function ($key, $value, $allowInt = \false) use(&$cacheItemPrototype) {
             $item = clone $cacheItemPrototype;
             $item->poolHash = $item->innerItem = null;
-            $item->key = $allowInt && \is_int($key) ? (string) $key : \_PhpScopercae9e6ab5cea\Symfony\Component\Cache\CacheItem::validateKey($key);
+            $item->key = $allowInt && \is_int($key) ? (string) $key : \ECSPrefix20210507\Symfony\Component\Cache\CacheItem::validateKey($key);
             $item->value = $value;
             $item->isHit = \false;
             return $item;
-        }, null, \_PhpScopercae9e6ab5cea\Symfony\Component\Cache\CacheItem::class);
+        }, null, \ECSPrefix20210507\Symfony\Component\Cache\CacheItem::class);
         $this->createCacheItem = function ($key, $value, $allowInt = \false) use($createCacheItem) {
             if (null === $this->cacheItemPrototype) {
                 $this->get($allowInt && \is_int($key) ? (string) $key : $key);
@@ -153,9 +153,9 @@ class Psr16Cache implements CacheInterface, \_PhpScopercae9e6ab5cea\Symfony\Comp
             if (!($metadata = $item->getMetadata())) {
                 continue;
             }
-            unset($metadata[\_PhpScopercae9e6ab5cea\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
+            unset($metadata[\ECSPrefix20210507\Symfony\Component\Cache\CacheItem::METADATA_TAGS]);
             if ($metadata) {
-                $values[$key] = ["" . \pack('VN', (int) (0.1 + $metadata[\_PhpScopercae9e6ab5cea\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[\_PhpScopercae9e6ab5cea\Symfony\Component\Cache\CacheItem::METADATA_CTIME]) . "_" => $values[$key]];
+                $values[$key] = ["" . \pack('VN', (int) (0.1 + $metadata[\ECSPrefix20210507\Symfony\Component\Cache\CacheItem::METADATA_EXPIRY] - self::METADATA_EXPIRY_OFFSET), $metadata[\ECSPrefix20210507\Symfony\Component\Cache\CacheItem::METADATA_CTIME]) . "_" => $values[$key]];
             }
         }
         return $values;

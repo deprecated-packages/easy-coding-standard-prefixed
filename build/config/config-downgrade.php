@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopercae9e6ab5cea;
+namespace ECSPrefix20210507;
 
-use _PhpScopercae9e6ab5cea\Rector\Core\Configuration\Option;
-use _PhpScopercae9e6ab5cea\Rector\Set\ValueObject\DowngradeSetList;
-use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use ECSPrefix20210507\Rector\Core\Configuration\Option;
+use ECSPrefix20210507\Rector\Set\ValueObject\DowngradeSetList;
+use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(DowngradeSetList::PHP_80);
     $containerConfigurator->import(DowngradeSetList::PHP_74);
@@ -14,5 +14,5 @@ return static function (ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(DowngradeSetList::PHP_71);
     $containerConfigurator->import(DowngradeSetList::PHP_70);
     $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::SKIP, ['*/Tests/*', '*/tests/*']);
+    $parameters->set(Option::SKIP, ['*/Tests/*', '*/tests/*', __DIR__ . '/../../tests']);
 };

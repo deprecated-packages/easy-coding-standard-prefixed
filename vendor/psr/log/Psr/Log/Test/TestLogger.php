@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScopercae9e6ab5cea\Psr\Log\Test;
+namespace ECSPrefix20210507\Psr\Log\Test;
 
-use _PhpScopercae9e6ab5cea\Psr\Log\AbstractLogger;
+use ECSPrefix20210507\Psr\Log\AbstractLogger;
 /**
  * Used for testing purposes.
  *

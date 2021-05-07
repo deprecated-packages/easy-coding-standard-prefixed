@@ -8,28 +8,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\EventListener;
+namespace ECSPrefix20210507\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScopercae9e6ab5cea\Psr\Log\LoggerInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Response;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Kernel;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Routing\Exception\NoConfigurationException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Routing\Matcher\RequestMatcherInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Routing\Matcher\UrlMatcherInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Routing\RequestContext;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Routing\RequestContextAwareInterface;
+use ECSPrefix20210507\Psr\Log\LoggerInterface;
+use ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Request;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Response;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Kernel;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents;
+use ECSPrefix20210507\Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use ECSPrefix20210507\Symfony\Component\Routing\Exception\NoConfigurationException;
+use ECSPrefix20210507\Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use ECSPrefix20210507\Symfony\Component\Routing\Matcher\RequestMatcherInterface;
+use ECSPrefix20210507\Symfony\Component\Routing\Matcher\UrlMatcherInterface;
+use ECSPrefix20210507\Symfony\Component\Routing\RequestContext;
+use ECSPrefix20210507\Symfony\Component\Routing\RequestContextAwareInterface;
 /**
  * Initializes the context from the request and sets request attributes based on a matching route.
  *

@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\ErrorHandler\ErrorRenderer;
+namespace ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorRenderer;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\ErrorHandler\Exception\FlattenException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Serializer\Exception\NotEncodableValueException;
-use _PhpScopercae9e6ab5cea\Symfony\Component\Serializer\SerializerInterface;
+use ECSPrefix20210507\Symfony\Component\ErrorHandler\Exception\FlattenException;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Request;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack;
+use ECSPrefix20210507\Symfony\Component\Serializer\Exception\NotEncodableValueException;
+use ECSPrefix20210507\Symfony\Component\Serializer\SerializerInterface;
 /**
  * Formats an exception using Serializer for rendering.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class SerializerErrorRenderer implements \_PhpScopercae9e6ab5cea\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
+class SerializerErrorRenderer implements \ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface
 {
     private $serializer;
     private $format;
@@ -31,7 +31,7 @@ class SerializerErrorRenderer implements \_PhpScopercae9e6ab5cea\Symfony\Compone
      *                                                  formats not supported by Request::getMimeTypes() should be given as mime types
      * @param bool|callable                     $debug  The debugging mode as a boolean or a callable that should return it
      */
-    public function __construct(SerializerInterface $serializer, $format, \_PhpScopercae9e6ab5cea\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $fallbackErrorRenderer = null, $debug = \false)
+    public function __construct(SerializerInterface $serializer, $format, \ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $fallbackErrorRenderer = null, $debug = \false)
     {
         if (!\is_string($format) && !\is_callable($format)) {
             throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be a string or a callable, "%s" given.', __METHOD__, \get_debug_type($format)));
@@ -41,7 +41,7 @@ class SerializerErrorRenderer implements \_PhpScopercae9e6ab5cea\Symfony\Compone
         }
         $this->serializer = $serializer;
         $this->format = $format;
-        $this->fallbackErrorRenderer = $fallbackErrorRenderer ?? new \_PhpScopercae9e6ab5cea\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer();
+        $this->fallbackErrorRenderer = $fallbackErrorRenderer ?? new \ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer();
         $this->debug = $debug;
     }
     /**

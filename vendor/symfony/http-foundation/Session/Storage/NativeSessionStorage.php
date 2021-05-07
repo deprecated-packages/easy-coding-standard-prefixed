@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage;
+namespace ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\SessionUtils;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\SessionUtils;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy;
+use ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy;
 // Help opcache.preload discover always-needed symbols
-\class_exists(\_PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag::class);
+\class_exists(\ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag::class);
 \class_exists(StrictSessionHandler::class);
 \class_exists(SessionHandlerProxy::class);
 /**
@@ -24,7 +24,7 @@ use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage\Prox
  *
  * @author Drak <drak@zikula.org>
  */
-class NativeSessionStorage implements \_PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
+class NativeSessionStorage implements \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface
 {
     /**
      * @var SessionBagInterface[]
@@ -95,7 +95,7 @@ class NativeSessionStorage implements \_PhpScopercae9e6ab5cea\Symfony\Component\
      *
      * @param AbstractProxy|\SessionHandlerInterface|null $handler
      */
-    public function __construct(array $options = [], $handler = null, \_PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(array $options = [], $handler = null, \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         if (!\extension_loaded('session')) {
             throw new \LogicException('PHP extension "session" is required.');
@@ -273,10 +273,10 @@ class NativeSessionStorage implements \_PhpScopercae9e6ab5cea\Symfony\Component\
         }
         return $this->bags[$name];
     }
-    public function setMetadataBag(\_PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function setMetadataBag(\ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
     {
         if (null === $metaBag) {
-            $metaBag = new \_PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
+            $metaBag = new \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();
         }
         $this->metadataBag = $metaBag;
     }

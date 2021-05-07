@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\ErrorHandler;
+namespace ECSPrefix20210507\Symfony\Component\ErrorHandler;
 
-use _PhpScopercae9e6ab5cea\Doctrine\Common\Persistence\Proxy as LegacyProxy;
-use _PhpScopercae9e6ab5cea\Doctrine\Persistence\Proxy;
-use _PhpScopercae9e6ab5cea\Mockery\MockInterface;
-use _PhpScopercae9e6ab5cea\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
-use _PhpScopercae9e6ab5cea\PHPUnit\Framework\MockObject\MockObject;
-use _PhpScopercae9e6ab5cea\Prophecy\Prophecy\ProphecySubjectInterface;
-use _PhpScopercae9e6ab5cea\ProxyManager\Proxy\ProxyInterface;
+use ECSPrefix20210507\Doctrine\Common\Persistence\Proxy as LegacyProxy;
+use ECSPrefix20210507\Doctrine\Persistence\Proxy;
+use ECSPrefix20210507\Mockery\MockInterface;
+use ECSPrefix20210507\PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
+use ECSPrefix20210507\PHPUnit\Framework\MockObject\MockObject;
+use ECSPrefix20210507\Prophecy\Prophecy\ProphecySubjectInterface;
+use ECSPrefix20210507\ProxyManager\Proxy\ProxyInterface;
 /**
  * Autoloader checking if the class is really defined in the file found.
  *
@@ -111,8 +111,8 @@ class DebugClassLoader
     public static function enable() : void
     {
         // Ensures we don't hit https://bugs.php.net/42098
-        \class_exists(\_PhpScopercae9e6ab5cea\Symfony\Component\ErrorHandler\ErrorHandler::class);
-        \class_exists(\_PhpScopercae9e6ab5cea\Psr\Log\LogLevel::class);
+        \class_exists(\ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorHandler::class);
+        \class_exists(\ECSPrefix20210507\Psr\Log\LogLevel::class);
         if (!\is_array($functions = \spl_autoload_functions())) {
             return;
         }

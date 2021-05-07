@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScopercae9e6ab5cea;
+namespace ECSPrefix20210507;
 
 /*
  * This file is part of the Symfony package.
@@ -10,7 +10,7 @@ namespace _PhpScopercae9e6ab5cea;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use _PhpScopercae9e6ab5cea\Symfony\Polyfill\Ctype as p;
+use ECSPrefix20210507\Symfony\Polyfill\Ctype as p;
 if (!\function_exists('ctype_alnum')) {
     function ctype_alnum(mixed $text) : bool
     {

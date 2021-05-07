@@ -8,20 +8,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Dumper\ContextProvider;
+namespace ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\ContextProvider;
 
-use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Cloner\VarCloner;
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Dumper\HtmlDumper;
-use _PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\VarDumper;
-use _PhpScopercae9e6ab5cea\Twig\Template;
+use ECSPrefix20210507\Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
+use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\VarCloner;
+use ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use ECSPrefix20210507\Symfony\Component\VarDumper\VarDumper;
+use ECSPrefix20210507\Twig\Template;
 /**
  * Tries to provide context from sources (class name, file, line, code excerpt, ...).
  *
  * @author Nicolas Grekas <p@tchwork.com>
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  */
-final class SourceContextProvider implements \_PhpScopercae9e6ab5cea\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
+final class SourceContextProvider implements \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
 {
     private $limit;
     private $charset;
