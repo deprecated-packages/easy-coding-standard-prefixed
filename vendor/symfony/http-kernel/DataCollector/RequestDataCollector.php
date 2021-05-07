@@ -8,25 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper000f93dc572d\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Cookie;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\ParameterBag;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Request;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Response;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Session\SessionInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\Event\ControllerEvent;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\Event\ResponseEvent;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScoper000f93dc572d\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\Cookie;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\ParameterBag;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\Session\SessionInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpKernel\Event\ControllerEvent;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpKernel\Event\ResponseEvent;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpKernel\KernelEvents;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @final
  */
-class RequestDataCollector extends \_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\DataCollector\DataCollector implements EventSubscriberInterface, \_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+class RequestDataCollector extends \_PhpScoper000f93dc572d\Symfony\Component\HttpKernel\DataCollector\DataCollector implements EventSubscriberInterface, \_PhpScoper000f93dc572d\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
 {
     protected $controllers;
     private $sessionUsages = [];

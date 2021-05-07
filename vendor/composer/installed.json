@@ -38,7 +38,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\PackageVersions\\": "src\/PackageVersions"
+                    "_PhpScoper000f93dc572d\\PackageVersions\\": "src\/PackageVersions"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -108,7 +108,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Composer\\Semver\\": "src"
+                    "_PhpScoper000f93dc572d\\Composer\\Semver\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -188,7 +188,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Composer\\XdebugHandler\\": "src"
+                    "_PhpScoper000f93dc572d\\Composer\\XdebugHandler\\": "src"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -258,7 +258,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
+                    "_PhpScoper000f93dc572d\\Doctrine\\Common\\Annotations\\": "lib\/Doctrine\/Common\/Annotations"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -333,7 +333,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
+                    "_PhpScoper000f93dc572d\\Doctrine\\Common\\Lexer\\": "lib\/Doctrine\/Common\/Lexer"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -510,7 +510,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Jean85\\": "src\/"
+                    "_PhpScoper000f93dc572d\\Jean85\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -535,76 +535,6 @@
                 "source": "https:\/\/github.com\/Jean85\/pretty-package-versions\/tree\/2.0.3"
             },
             "install-path": "..\/jean85\/pretty-package-versions"
-        },
-        {
-            "name": "nette\/finder",
-            "version": "v2.5.2",
-            "version_normalized": "2.5.2.0",
-            "source": {
-                "type": "git",
-                "url": "https:\/\/github.com\/nette\/finder.git",
-                "reference": "4ad2c298eb8c687dd0e74ae84206a4186eeaed50"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/nette\/finder\/zipball\/4ad2c298eb8c687dd0e74ae84206a4186eeaed50",
-                "reference": "4ad2c298eb8c687dd0e74ae84206a4186eeaed50",
-                "shasum": ""
-            },
-            "require": {
-                "nette\/utils": "^2.4 || ^3.0",
-                "php": ">=7.1"
-            },
-            "conflict": {
-                "nette\/nette": "<2.2"
-            },
-            "require-dev": {
-                "nette\/tester": "^2.0",
-                "phpstan\/phpstan": "^0.12",
-                "tracy\/tracy": "^2.3"
-            },
-            "time": "2020-01-03T20:35:40+00:00",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.5-dev"
-                }
-            },
-            "installation-source": "dist",
-            "autoload": {
-                "classmap": [
-                    "src\/"
-                ]
-            },
-            "notification-url": "https:\/\/packagist.org\/downloads\/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https:\/\/davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https:\/\/nette.org\/contributors"
-                }
-            ],
-            "description": "\ud83d\udd0d Nette Finder: find files and directories with an intuitive API.",
-            "homepage": "https:\/\/nette.org",
-            "keywords": [
-                "filesystem",
-                "glob",
-                "iterator",
-                "nette"
-            ],
-            "support": {
-                "issues": "https:\/\/github.com\/nette\/finder\/issues",
-                "source": "https:\/\/github.com\/nette\/finder\/tree\/v2.5.2"
-            },
-            "install-path": "..\/nette\/finder"
         },
         {
             "name": "nette\/neon",
@@ -673,76 +603,6 @@
                 "source": "https:\/\/github.com\/nette\/neon\/tree\/v3.2.2"
             },
             "install-path": "..\/nette\/neon"
-        },
-        {
-            "name": "nette\/robot-loader",
-            "version": "v3.4.0",
-            "version_normalized": "3.4.0.0",
-            "source": {
-                "type": "git",
-                "url": "https:\/\/github.com\/nette\/robot-loader.git",
-                "reference": "3973cf3970d1de7b30888fd10b92dac9e0c2fd82"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/nette\/robot-loader\/zipball\/3973cf3970d1de7b30888fd10b92dac9e0c2fd82",
-                "reference": "3973cf3970d1de7b30888fd10b92dac9e0c2fd82",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "nette\/finder": "^2.5 || ^3.0",
-                "nette\/utils": "^3.0",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "nette\/tester": "^2.0",
-                "phpstan\/phpstan": "^0.12",
-                "tracy\/tracy": "^2.3"
-            },
-            "time": "2021-03-07T15:12:01+00:00",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.4-dev"
-                }
-            },
-            "installation-source": "dist",
-            "autoload": {
-                "classmap": [
-                    "src\/"
-                ]
-            },
-            "notification-url": "https:\/\/packagist.org\/downloads\/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0-only",
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https:\/\/davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https:\/\/nette.org\/contributors"
-                }
-            ],
-            "description": "\ud83c\udf40 Nette RobotLoader: high performance and comfortable autoloader that will search and autoload classes within your application.",
-            "homepage": "https:\/\/nette.org",
-            "keywords": [
-                "autoload",
-                "class",
-                "interface",
-                "nette",
-                "trait"
-            ],
-            "support": {
-                "issues": "https:\/\/github.com\/nette\/robot-loader\/issues",
-                "source": "https:\/\/github.com\/nette\/robot-loader\/tree\/v3.4.0"
-            },
-            "install-path": "..\/nette\/robot-loader"
         },
         {
             "name": "nette\/utils",
@@ -915,7 +775,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Psr\\Cache\\": "src\/"
+                    "_PhpScoper000f93dc572d\\Psr\\Cache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -962,7 +822,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Psr\\Container\\": "src\/"
+                    "_PhpScoper000f93dc572d\\Psr\\Container\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1018,7 +878,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Psr\\EventDispatcher\\": "src\/"
+                    "_PhpScoper000f93dc572d\\Psr\\EventDispatcher\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1071,7 +931,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Psr\\Log\\": "Psr\/Log\/"
+                    "_PhpScoper000f93dc572d\\Psr\\Log\\": "Psr\/Log\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1124,7 +984,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Psr\\SimpleCache\\": "src\/"
+                    "_PhpScoper000f93dc572d\\Psr\\SimpleCache\\": "src\/"
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1331,7 +1191,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\Cache\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\Cache\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1412,7 +1272,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Contracts\\Cache\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Contracts\\Cache\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -1498,7 +1358,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\Config\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\Config\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1592,7 +1452,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\Console\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\Console\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1688,7 +1548,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\DependencyInjection\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\DependencyInjection\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1830,7 +1690,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\ErrorHandler\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\ErrorHandler\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1918,7 +1778,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\EventDispatcher\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\EventDispatcher\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -1995,7 +1855,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Contracts\\EventDispatcher\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Contracts\\EventDispatcher\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2065,7 +1925,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\Filesystem\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\Filesystem\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2129,7 +1989,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\Finder\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\Finder\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2205,7 +2065,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Contracts\\HttpClient\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Contracts\\HttpClient\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -2286,7 +2146,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\HttpFoundation\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\HttpFoundation\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2401,7 +2261,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\HttpKernel\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\HttpKernel\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2468,7 +2328,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\OptionsResolver\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\OptionsResolver\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -2549,7 +2409,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Polyfill\\Ctype\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2631,7 +2491,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Grapheme\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Polyfill\\Intl\\Grapheme\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2715,7 +2575,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Polyfill\\Intl\\Normalizer\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Polyfill\\Intl\\Normalizer\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2802,7 +2662,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Polyfill\\Mbstring\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2882,7 +2742,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Polyfill\\Php72\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Polyfill\\Php72\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -2961,7 +2821,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Polyfill\\Php73\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Polyfill\\Php73\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -3043,7 +2903,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Polyfill\\Php80\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Polyfill\\Php80\\": ""
                 },
                 "files": [
                     "bootstrap.php"
@@ -3121,7 +2981,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\Process\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\Process\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3198,7 +3058,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Contracts\\Service\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Contracts\\Service\\": ""
                 }
             },
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -3268,7 +3128,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\Stopwatch\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\Stopwatch\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3343,7 +3203,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\String\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\String\\": ""
                 },
                 "files": [
                     "Resources\/functions.php"
@@ -3441,7 +3301,7 @@
                     "Resources\/functions\/dump.php"
                 ],
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\VarDumper\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\VarDumper\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"
@@ -3513,7 +3373,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "_PhpScopere7e518ee6a5b\\Symfony\\Component\\VarExporter\\": ""
+                    "_PhpScoper000f93dc572d\\Symfony\\Component\\VarExporter\\": ""
                 },
                 "exclude-from-classmap": [
                     "\/Tests\/"

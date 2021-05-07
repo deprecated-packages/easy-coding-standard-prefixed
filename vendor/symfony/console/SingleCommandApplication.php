@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\Symfony\Component\Console;
+namespace _PhpScoper000f93dc572d\Symfony\Component\Console;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Command\Command;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Input\InputInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Command\Command;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Grégoire Pineau <lyrixx@lyrixx.info>
  */
@@ -40,7 +40,7 @@ class SingleCommandApplication extends Command
             return parent::run($input, $output);
         }
         // We use the command name as the application name
-        $application = new \_PhpScopere7e518ee6a5b\Symfony\Component\Console\Application($this->getName() ?: 'UNKNOWN', $this->version);
+        $application = new \_PhpScoper000f93dc572d\Symfony\Component\Console\Application($this->getName() ?: 'UNKNOWN', $this->version);
         $application->setAutoExit($this->autoExit);
         // Fix the usage of the command displayed with "--help"
         $this->setName($_SERVER['argv'][0]);

@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScopere7e518ee6a5b;
+namespace _PhpScoper000f93dc572d;
 
-use _PhpScopere7e518ee6a5b\Nette\Utils\Strings;
-use _PhpScopere7e518ee6a5b\Isolated\Symfony\Component\Finder\Finder;
-$finder = new \_PhpScopere7e518ee6a5b\Isolated\Symfony\Component\Finder\Finder();
+use _PhpScoper000f93dc572d\Nette\Utils\Strings;
+use _PhpScoper000f93dc572d\Isolated\Symfony\Component\Finder\Finder;
+$finder = new \_PhpScoper000f93dc572d\Isolated\Symfony\Component\Finder\Finder();
 $polyfillFileInfos = $finder->files()->in(__DIR__ . '/vendor/symfony/polyfill-*')->name('*.php')->getIterator();
 $polyfillFilePaths = [];
 foreach ($polyfillFileInfos as $polyfillFileInfo) {
@@ -20,18 +20,16 @@ return ['files-whitelist' => [
     'Symplify\\*',
     'PhpCsFixer\\*',
     'PHP_CodeSniffer\\*',
-    'SlevomatCodingStandard\\*',
-    '_PhpScopere7e518ee6a5b\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
-    '_PhpScopere7e518ee6a5b\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
-    '_PhpScopere7e518ee6a5b\\Composer\\InstalledVersions',
-    'Symfony\\Polyfill\\*',
+    '_PhpScoper000f93dc572d\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
+    '_PhpScoper000f93dc572d\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
+    '_PhpScoper000f93dc572d\\Composer\\InstalledVersions',
 ], 'patchers' => [
     function (string $filePath, string $prefix, string $content) : string {
         if (!Strings::endsWith($filePath, 'vendor/jean85/pretty-package-versions/src/PrettyVersions.php')) {
             return $content;
         }
         // see https://regex101.com/r/v8zRMm/1
-        return Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScopere7e518ee6a5b\\Composer\\InstalledVersions');
+        return Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScoper000f93dc572d\\Composer\\InstalledVersions');
     },
     // fixes https://github.com/symplify/symplify/issues/3102
     function (string $filePath, string $prefix, string $content) : string {

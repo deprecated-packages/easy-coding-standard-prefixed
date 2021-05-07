@@ -12,8 +12,8 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Console\Report\ListSetsReport;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\Finder\Finder as SymfonyFinder;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Finder\SplFileInfo;
+use _PhpScoper000f93dc572d\Symfony\Component\Finder\Finder as SymfonyFinder;
+use _PhpScoper000f93dc572d\Symfony\Component\Finder\SplFileInfo;
 /**
  * @author Boris Gorbylev <ekho@ekho.name>
  *

@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Command\Command;
-use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Command\Command;
+use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 /**
  * @see \Symplify\ConsolePackageBuilder\Tests\DependencyInjection\CompilerPass\NamelessConsoleCommandCompilerPassTest

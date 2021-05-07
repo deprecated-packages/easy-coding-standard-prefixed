@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\Symfony\Component\Cache\Adapter;
+namespace _PhpScoper000f93dc572d\Symfony\Component\Cache\Adapter;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\Marshaller\MarshallerInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\PruneableInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Cache\Traits\FilesystemTrait;
+use _PhpScoper000f93dc572d\Symfony\Component\Cache\Marshaller\MarshallerInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\Cache\Marshaller\TagAwareMarshaller;
+use _PhpScoper000f93dc572d\Symfony\Component\Cache\PruneableInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\Cache\Traits\FilesystemTrait;
 /**
  * Stores tag id <> cache id relationship as a symlink, and lookup on invalidation calls.
  *
  * @author Nicolas Grekas <p@tchwork.com>
  * @author André Rømcke <andre.romcke+symfony@gmail.com>
  */
-class FilesystemTagAwareAdapter extends \_PhpScopere7e518ee6a5b\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements PruneableInterface
+class FilesystemTagAwareAdapter extends \_PhpScoper000f93dc572d\Symfony\Component\Cache\Adapter\AbstractTagAwareAdapter implements PruneableInterface
 {
     use FilesystemTrait {
         doClear as private doClearCache;

@@ -1,6 +1,6 @@
 <?php
 
-namespace _PhpScopere7e518ee6a5b;
+namespace _PhpScoper000f93dc572d;
 
 /*
  * This file is part of the Symfony package.
@@ -10,7 +10,7 @@ namespace _PhpScopere7e518ee6a5b;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use Symfony\Polyfill\Ctype as p;
+use _PhpScoper000f93dc572d\Symfony\Polyfill\Ctype as p;
 if (!\function_exists('ctype_alnum')) {
     function ctype_alnum(mixed $text) : bool
     {

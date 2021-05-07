@@ -1,37 +1,54 @@
 <?php
 
-declare (strict_types=1);
+declare(strict_types=1);
+
 namespace Symplify\EasyCodingStandard\HttpKernel;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\Config\Loader\DelegatingLoader;
-use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symfony\Component\Config\Loader\DelegatingLoader;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\CodingStandard\Bundle\SymplifyCodingStandardBundle;
 use Symplify\ConsoleColorDiff\Bundle\ConsoleColorDiffBundle;
 use Symplify\EasyCodingStandard\Bundle\EasyCodingStandardBundle;
+use Symplify\EasyCodingStandard\DependencyInjection\CompilerPass\DeprecationWarningCompilerPass;
 use Symplify\EasyCodingStandard\DependencyInjection\DelegatingLoaderFactory;
 use Symplify\PhpConfigPrinter\Bundle\PhpConfigPrinterBundle;
 use Symplify\Skipper\Bundle\SkipperBundle;
 use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
+
 final class EasyCodingStandardKernel extends AbstractSymplifyKernel
 {
     /**
      * @return BundleInterface[]
      */
-    public function registerBundles() : iterable
+    public function registerBundles(): iterable
     {
-        $bundles = [new EasyCodingStandardBundle(), new SymplifyCodingStandardBundle(), new ConsoleColorDiffBundle(), new SymplifyKernelBundle(), new SkipperBundle()];
+        $bundles = [
+            new EasyCodingStandardBundle(),
+            new SymplifyCodingStandardBundle(),
+            new ConsoleColorDiffBundle(),
+            new SymplifyKernelBundle(),
+            new SkipperBundle(),
+        ];
+
         if ($this->environment === 'test') {
             $bundles[] = new PhpConfigPrinterBundle();
         }
+
         return $bundles;
     }
+
+    protected function build(ContainerBuilder $containerBuilder): void
+    {
+        $containerBuilder->addCompilerPass(new DeprecationWarningCompilerPass())
+    }
+
     /**
      * @param ContainerInterface|ContainerBuilder $container
      */
-    protected function getContainerLoader(ContainerInterface $container) : DelegatingLoader
+    protected function getContainerLoader(ContainerInterface $container): DelegatingLoader
     {
         $delegatingLoaderFactory = new DelegatingLoaderFactory();
         return $delegatingLoaderFactory->createFromContainerBuilderAndKernel($container, $this);

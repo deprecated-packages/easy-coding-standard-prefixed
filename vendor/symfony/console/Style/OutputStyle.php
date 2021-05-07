@@ -8,18 +8,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\Symfony\Component\Console\Style;
+namespace _PhpScoper000f93dc572d\Symfony\Component\Console\Style;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Formatter\OutputFormatterInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Helper\ProgressBar;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Output\ConsoleOutputInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Formatter\OutputFormatterInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Helper\ProgressBar;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Output\ConsoleOutputInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Output\OutputInterface;
 /**
  * Decorates output to add console style guide helpers.
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-abstract class OutputStyle implements OutputInterface, \_PhpScopere7e518ee6a5b\Symfony\Component\Console\Style\StyleInterface
+abstract class OutputStyle implements OutputInterface, \_PhpScoper000f93dc572d\Symfony\Component\Console\Style\StyleInterface
 {
     private $output;
     public function __construct(OutputInterface $output)

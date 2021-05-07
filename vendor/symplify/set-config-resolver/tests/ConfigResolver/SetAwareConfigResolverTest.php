@@ -4,8 +4,8 @@ declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Tests\ConfigResolver;
 
 use Iterator;
-use _PhpScopere7e518ee6a5b\PHPUnit\Framework\TestCase;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Input\ArrayInput;
+use _PhpScoper000f93dc572d\PHPUnit\Framework\TestCase;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Input\ArrayInput;
 use Symplify\SetConfigResolver\Exception\SetNotFoundException;
 use Symplify\SetConfigResolver\SetAwareConfigResolver;
 use Symplify\SetConfigResolver\Tests\ConfigResolver\Source\DummySetProvider;

@@ -51,8 +51,8 @@ use PhpCsFixer\Fixer\Whitespace\IndentationTypeFixer;
 use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
-use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\ContainerBuilder;
 final class RemoveMutualCheckersCompilerPass implements CompilerPassInterface
 {
     /**
@@ -63,27 +63,27 @@ final class RemoveMutualCheckersCompilerPass implements CompilerPassInterface
     private const DUPLICATED_CHECKER_GROUPS = [
         [IndentationTypeFixer::class, DisallowTabIndentSniff::class],
         [IndentationTypeFixer::class, DisallowSpaceIndentSniff::class],
-        [StrictComparisonFixer::class, 'SlevomatCodingStandard\\Sniffs\\Operators\\DisallowEqualOperatorsSniff'],
-        [VisibilityRequiredFixer::class, 'SlevomatCodingStandard\\Sniffs\\Classes\\ClassConstantVisibilitySniff'],
+        [StrictComparisonFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\Operators\\DisallowEqualOperatorsSniff'],
+        [VisibilityRequiredFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\Classes\\ClassConstantVisibilitySniff'],
         [ArraySyntaxFixer::class, DisallowShortArraySyntaxSniff::class],
         [ArraySyntaxFixer::class, DisallowLongArraySyntaxSniff::class],
         [LowercaseKeywordsFixer::class, LowercaseClassKeywordsSniff::class],
         [LowercaseKeywordsFixer::class, LowerCaseKeywordSniff::class],
         [SingleImportPerStatementFixer::class, UseDeclarationSniff::class],
-        [SingleImportPerStatementFixer::class, 'SlevomatCodingStandard\\Sniffs\\Namespaces\\DisallowGroupUseSniff'],
-        [SingleImportPerStatementFixer::class, 'SlevomatCodingStandard\\Sniffs\\Namespaces\\MultipleUsesPerLineSniff'],
-        [PhpdocScalarFixer::class, 'SlevomatCodingStandard\\Sniffs\\TypeHints\\LongTypeHintsSniff'],
-        [OrderedImportsFixer::class, 'SlevomatCodingStandard\\Sniffs\\Namespaces\\AlphabeticallySortedUsesSniff'],
-        [NoUnusedImportsFixer::class, 'SlevomatCodingStandard\\Sniffs\\Namespaces\\UnusedUsesSniff'],
-        [TrailingCommaInMultilineFixer::class, 'SlevomatCodingStandard\\Sniffs\\Arrays\\TrailingArrayCommaSniff'],
-        [NoUnneededControlParenthesesFixer::class, 'SlevomatCodingStandard\\Sniffs\\ControlStructures\\LanguageConstructWithParenthesesSniff'],
-        [ReturnTypeDeclarationFixer::class, 'SlevomatCodingStandard\\Sniffs\\TypeHints\\ReturnTypeHintSpacingSniff'],
-        [FunctionTypehintSpaceFixer::class, 'SlevomatCodingStandard\\Sniffs\\TypeHints\\ParameterTypeHintSpacingSniff'],
+        [SingleImportPerStatementFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\Namespaces\\DisallowGroupUseSniff'],
+        [SingleImportPerStatementFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\Namespaces\\MultipleUsesPerLineSniff'],
+        [PhpdocScalarFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\TypeHints\\LongTypeHintsSniff'],
+        [OrderedImportsFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\Namespaces\\AlphabeticallySortedUsesSniff'],
+        [NoUnusedImportsFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\Namespaces\\UnusedUsesSniff'],
+        [TrailingCommaInMultilineFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\Arrays\\TrailingArrayCommaSniff'],
+        [NoUnneededControlParenthesesFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\ControlStructures\\LanguageConstructWithParenthesesSniff'],
+        [ReturnTypeDeclarationFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\TypeHints\\ReturnTypeHintSpacingSniff'],
+        [FunctionTypehintSpaceFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\TypeHints\\ParameterTypeHintSpacingSniff'],
         [FunctionTypehintSpaceFixer::class, FunctionDeclarationArgumentSpacingSniff::class],
-        [GeneralPhpdocAnnotationRemoveFixer::class, 'SlevomatCodingStandard\\Sniffs\\Commenting\\ForbiddenAnnotationsSniff'],
+        [GeneralPhpdocAnnotationRemoveFixer::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\Commenting\\ForbiddenAnnotationsSniff'],
         [NoExtraBlankLinesFixer::class, SuperfluousWhitespaceSniff::class],
         [IncludeFixer::class, LanguageConstructSpacingSniff::class],
-        [AssignmentInConditionSniff::class, 'SlevomatCodingStandard\\Sniffs\\ControlStructures\\AssignmentInConditionSniff'],
+        [AssignmentInConditionSniff::class, '_PhpScoper000f93dc572d\\SlevomatCodingStandard\\Sniffs\\ControlStructures\\AssignmentInConditionSniff'],
         [SingleQuoteFixer::class, DoubleQuoteUsageSniff::class],
         // PSR2
         [BracesFixer::class, ScopeClosingBraceSniff::class],

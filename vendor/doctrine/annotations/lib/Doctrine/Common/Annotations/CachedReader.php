@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScopere7e518ee6a5b\Doctrine\Common\Annotations;
+namespace _PhpScoper000f93dc572d\Doctrine\Common\Annotations;
 
-use _PhpScopere7e518ee6a5b\Doctrine\Common\Cache\Cache;
+use _PhpScoper000f93dc572d\Doctrine\Common\Cache\Cache;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
@@ -15,7 +15,7 @@ use function time;
 /**
  * A cache aware annotation reader.
  */
-final class CachedReader implements \_PhpScopere7e518ee6a5b\Doctrine\Common\Annotations\Reader
+final class CachedReader implements \_PhpScoper000f93dc572d\Doctrine\Common\Annotations\Reader
 {
     /** @var Reader */
     private $delegate;
@@ -30,7 +30,7 @@ final class CachedReader implements \_PhpScopere7e518ee6a5b\Doctrine\Common\Anno
     /**
      * @param bool $debug
      */
-    public function __construct(\_PhpScopere7e518ee6a5b\Doctrine\Common\Annotations\Reader $reader, Cache $cache, $debug = \false)
+    public function __construct(\_PhpScoper000f93dc572d\Doctrine\Common\Annotations\Reader $reader, Cache $cache, $debug = \false)
     {
         $this->delegate = $reader;
         $this->cache = $cache;

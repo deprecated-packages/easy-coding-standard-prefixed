@@ -9,14 +9,14 @@ declare (strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\SebastianBergmann\Diff;
+namespace _PhpScoper000f93dc572d\SebastianBergmann\Diff;
 
 use function get_class;
 use function gettype;
 use function is_object;
 use function sprintf;
 use Exception;
-final class ConfigurationException extends \_PhpScopere7e518ee6a5b\SebastianBergmann\Diff\InvalidArgumentException
+final class ConfigurationException extends \_PhpScoper000f93dc572d\SebastianBergmann\Diff\InvalidArgumentException
 {
     public function __construct(string $option, string $expected, $value, int $code = 0, Exception $previous = null)
     {

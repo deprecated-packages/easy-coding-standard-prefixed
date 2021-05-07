@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel;
+namespace _PhpScoper000f93dc572d\Symfony\Component\HttpKernel;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\BrowserKit\AbstractBrowser;
-use _PhpScopere7e518ee6a5b\Symfony\Component\BrowserKit\CookieJar;
-use _PhpScopere7e518ee6a5b\Symfony\Component\BrowserKit\History;
-use _PhpScopere7e518ee6a5b\Symfony\Component\BrowserKit\Request as DomRequest;
-use _PhpScopere7e518ee6a5b\Symfony\Component\BrowserKit\Response as DomResponse;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\File\UploadedFile;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Request;
-use _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Response;
+use _PhpScoper000f93dc572d\Symfony\Component\BrowserKit\AbstractBrowser;
+use _PhpScoper000f93dc572d\Symfony\Component\BrowserKit\CookieJar;
+use _PhpScoper000f93dc572d\Symfony\Component\BrowserKit\History;
+use _PhpScoper000f93dc572d\Symfony\Component\BrowserKit\Request as DomRequest;
+use _PhpScoper000f93dc572d\Symfony\Component\BrowserKit\Response as DomResponse;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\File\UploadedFile;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\Request;
+use _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\Response;
 /**
  * Simulates a browser and makes requests to an HttpKernel instance.
  *
@@ -33,7 +33,7 @@ class HttpKernelBrowser extends AbstractBrowser
     /**
      * @param array $server The server parameters (equivalent of $_SERVER)
      */
-    public function __construct(\_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, array $server = [], History $history = null, CookieJar $cookieJar = null)
+    public function __construct(\_PhpScoper000f93dc572d\Symfony\Component\HttpKernel\HttpKernelInterface $kernel, array $server = [], History $history = null, CookieJar $cookieJar = null)
     {
         // These class properties must be set before calling the parent constructor, as it may depend on it.
         $this->kernel = $kernel;
@@ -54,8 +54,8 @@ class HttpKernelBrowser extends AbstractBrowser
      */
     protected function doRequest($request)
     {
-        $response = $this->kernel->handle($request, \_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, $this->catchExceptions);
-        if ($this->kernel instanceof \_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\TerminableInterface) {
+        $response = $this->kernel->handle($request, \_PhpScoper000f93dc572d\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, $this->catchExceptions);
+        if ($this->kernel instanceof \_PhpScoper000f93dc572d\Symfony\Component\HttpKernel\TerminableInterface) {
             $this->kernel->terminate($request, $response);
         }
         return $response;

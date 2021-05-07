@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\Symfony\Component\Config\Definition\Exception;
+namespace _PhpScoper000f93dc572d\Symfony\Component\Config\Definition\Exception;
 
 /**
  * This exception is thrown if an invalid type is encountered.
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class InvalidTypeException extends \_PhpScopere7e518ee6a5b\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+class InvalidTypeException extends \_PhpScoper000f93dc572d\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
 {
 }

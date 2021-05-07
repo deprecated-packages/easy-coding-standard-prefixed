@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation;
+namespace _PhpScoper000f93dc572d\Symfony\Component\HttpFoundation;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use _PhpScoper000f93dc572d\Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 /**
  * ExpressionRequestMatcher uses an expression to match a Request.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class ExpressionRequestMatcher extends \_PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\RequestMatcher
+class ExpressionRequestMatcher extends \_PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\RequestMatcher
 {
     private $language;
     private $expression;
@@ -25,7 +25,7 @@ class ExpressionRequestMatcher extends \_PhpScopere7e518ee6a5b\Symfony\Component
         $this->language = $language;
         $this->expression = $expression;
     }
-    public function matches(\_PhpScopere7e518ee6a5b\Symfony\Component\HttpFoundation\Request $request)
+    public function matches(\_PhpScoper000f93dc572d\Symfony\Component\HttpFoundation\Request $request)
     {
         if (!$this->language) {
             throw new \LogicException('Unable to match the request as the expression language is not available.');

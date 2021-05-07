@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\DataCollector;
+namespace _PhpScoper000f93dc572d\Symfony\Component\HttpKernel\DataCollector;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\VarDumper\Caster\CutStub;
-use _PhpScopere7e518ee6a5b\Symfony\Component\VarDumper\Caster\ReflectionCaster;
-use _PhpScopere7e518ee6a5b\Symfony\Component\VarDumper\Cloner\ClonerInterface;
-use _PhpScopere7e518ee6a5b\Symfony\Component\VarDumper\Cloner\Data;
-use _PhpScopere7e518ee6a5b\Symfony\Component\VarDumper\Cloner\Stub;
-use _PhpScopere7e518ee6a5b\Symfony\Component\VarDumper\Cloner\VarCloner;
+use _PhpScoper000f93dc572d\Symfony\Component\VarDumper\Caster\CutStub;
+use _PhpScoper000f93dc572d\Symfony\Component\VarDumper\Caster\ReflectionCaster;
+use _PhpScoper000f93dc572d\Symfony\Component\VarDumper\Cloner\ClonerInterface;
+use _PhpScoper000f93dc572d\Symfony\Component\VarDumper\Cloner\Data;
+use _PhpScoper000f93dc572d\Symfony\Component\VarDumper\Cloner\Stub;
+use _PhpScoper000f93dc572d\Symfony\Component\VarDumper\Cloner\VarCloner;
 /**
  * DataCollector.
  *
@@ -24,7 +24,7 @@ use _PhpScopere7e518ee6a5b\Symfony\Component\VarDumper\Cloner\VarCloner;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Bernhard Schussek <bschussek@symfony.com>
  */
-abstract class DataCollector implements \_PhpScopere7e518ee6a5b\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+abstract class DataCollector implements \_PhpScoper000f93dc572d\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
 {
     /**
      * @var array|Data

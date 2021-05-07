@@ -1,9 +1,9 @@
 {
     "name": "symplify/easy-coding-standard-prefixed",
-    "description": "Prefixed scoped version of \"symplify/easy-coding-standard\" package",
+    "description": "Prefixed scoped version of ECS package",
     "license": "MIT",
     "require": {
-        "php": ">=7.3"
+        "php": ">=7.0"
     },
     "bin": [
         "bin/ecs"

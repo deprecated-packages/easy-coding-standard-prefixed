@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScopere7e518ee6a5b\Symfony\Component\Console\Descriptor;
+namespace _PhpScoper000f93dc572d\Symfony\Component\Console\Descriptor;
 
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Application;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Command\Command;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Helper\Helper;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Input\InputArgument;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Input\InputDefinition;
-use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Application;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Command\Command;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Helper\Helper;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Input\InputArgument;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Input\InputDefinition;
+use _PhpScoper000f93dc572d\Symfony\Component\Console\Input\InputOption;
 /**
  * Text descriptor.
  *
@@ -24,7 +24,7 @@ use _PhpScopere7e518ee6a5b\Symfony\Component\Console\Input\InputOption;
  *
  * @internal
  */
-class TextDescriptor extends \_PhpScopere7e518ee6a5b\Symfony\Component\Console\Descriptor\Descriptor
+class TextDescriptor extends \_PhpScoper000f93dc572d\Symfony\Component\Console\Descriptor\Descriptor
 {
     /**
      * {@inheritdoc}
@@ -153,7 +153,7 @@ class TextDescriptor extends \_PhpScopere7e518ee6a5b\Symfony\Component\Console\D
     protected function describeApplication(Application $application, array $options = [])
     {
         $describedNamespace = $options['namespace'] ?? null;
-        $description = new \_PhpScopere7e518ee6a5b\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
+        $description = new \_PhpScoper000f93dc572d\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
         if (isset($options['raw_text']) && $options['raw_text']) {
             $width = $this->getColumnWidth($description->getCommands());
             foreach ($description->getCommands() as $command) {
@@ -194,7 +194,7 @@ class TextDescriptor extends \_PhpScopere7e518ee6a5b\Symfony\Component\Console\D
                 if (!$namespace['commands']) {
                     continue;
                 }
-                if (!$describedNamespace && \_PhpScopere7e518ee6a5b\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
+                if (!$describedNamespace && \_PhpScoper000f93dc572d\Symfony\Component\Console\Descriptor\ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {
                     $this->writeText("\n");
                     $this->writeText(' <comment>' . $namespace['id'] . '</comment>', $options);
                 }
