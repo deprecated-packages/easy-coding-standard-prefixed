@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\EventListener;
+namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\EventListener;
 
-use _PhpScoper2dcc760f8ff8\Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpFoundation\RequestStack;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\Event\KernelEvent;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\Event\RequestEvent;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\KernelEvents;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\Routing\RequestContextAwareInterface;
+use _PhpScopercae9e6ab5cea\Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\RequestStack;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\KernelEvent;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Event\RequestEvent;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\KernelEvents;
+use _PhpScopercae9e6ab5cea\Symfony\Component\Routing\RequestContextAwareInterface;
 /**
  * Initializes the locale based on the current request.
  *

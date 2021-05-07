@@ -8,10 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dcc760f8ff8\Symfony\Component\HttpFoundation\RateLimiter;
+namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\RateLimiter;
 
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\RateLimiter\RateLimit;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
+use _PhpScopercae9e6ab5cea\Symfony\Component\RateLimiter\RateLimit;
 /**
  * A special type of limiter that deals with requests.
  *

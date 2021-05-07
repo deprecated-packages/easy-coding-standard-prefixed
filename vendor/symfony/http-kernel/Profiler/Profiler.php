@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\Profiler;
+namespace _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Profiler;
 
-use _PhpScoper2dcc760f8ff8\Psr\Log\LoggerInterface;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpFoundation\Request;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpFoundation\Response;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
-use _PhpScoper2dcc760f8ff8\Symfony\Contracts\Service\ResetInterface;
+use _PhpScopercae9e6ab5cea\Psr\Log\LoggerInterface;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Request;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpFoundation\Response;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
+use _PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
+use _PhpScopercae9e6ab5cea\Symfony\Contracts\Service\ResetInterface;
 /**
  * Profiler.
  *
@@ -32,7 +32,7 @@ class Profiler implements ResetInterface
     private $logger;
     private $initiallyEnabled = \true;
     private $enabled = \true;
-    public function __construct(\_PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\Profiler\ProfilerStorageInterface $storage, LoggerInterface $logger = null, bool $enable = \true)
+    public function __construct(\_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Profiler\ProfilerStorageInterface $storage, LoggerInterface $logger = null, bool $enable = \true)
     {
         $this->storage = $storage;
         $this->logger = $logger;
@@ -78,7 +78,7 @@ class Profiler implements ResetInterface
      *
      * @return bool
      */
-    public function saveProfile(\_PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\Profiler\Profile $profile)
+    public function saveProfile(\_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Profiler\Profile $profile)
     {
         // late collect
         foreach ($profile->getCollectors() as $collector) {
@@ -123,7 +123,7 @@ class Profiler implements ResetInterface
         if (\false === $this->enabled) {
             return null;
         }
-        $profile = new \_PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\Profiler\Profile(\substr(\hash('sha256', \uniqid(\mt_rand(), \true)), 0, 6));
+        $profile = new \_PhpScopercae9e6ab5cea\Symfony\Component\HttpKernel\Profiler\Profile(\substr(\hash('sha256', \uniqid(\mt_rand(), \true)), 0, 6));
         $profile->setTime(\time());
         $profile->setUrl($request->getUri());
         $profile->setMethod($request->getMethod());

@@ -3,9 +3,9 @@
 declare (strict_types=1);
 namespace Symplify\EasyTesting\Command;
 
-use _PhpScoper2dcc760f8ff8\Symfony\Component\Console\Input\InputArgument;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputArgument;
+use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Input\InputInterface;
+use _PhpScopercae9e6ab5cea\Symfony\Component\Console\Output\OutputInterface;
 use Symplify\EasyTesting\Finder\FixtureFinder;
 use Symplify\EasyTesting\MissplacedSkipPrefixResolver;
 use Symplify\EasyTesting\ValueObject\Option;

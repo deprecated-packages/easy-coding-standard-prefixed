@@ -26,9 +26,9 @@ use PhpCsFixer\Linter\LinterInterface;
 use PhpCsFixer\Linter\LintingException;
 use PhpCsFixer\Linter\LintingResultInterface;
 use PhpCsFixer\Tokenizer\Tokens;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\Filesystem\Exception\IOException;
-use _PhpScoper2dcc760f8ff8\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScopercae9e6ab5cea\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScopercae9e6ab5cea\Symfony\Component\Filesystem\Exception\IOException;
+use _PhpScopercae9e6ab5cea\Symfony\Contracts\EventDispatcher\Event;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
@@ -202,7 +202,7 @@ final class Runner
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoper2dcc760f8ff8\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScopercae9e6ab5cea\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

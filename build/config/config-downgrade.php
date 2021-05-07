@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper2dcc760f8ff8;
+namespace _PhpScopercae9e6ab5cea;
 
-use _PhpScoper2dcc760f8ff8\Rector\Core\Configuration\Option;
-use _PhpScoper2dcc760f8ff8\Rector\Set\ValueObject\DowngradeSetList;
-use _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScopercae9e6ab5cea\Rector\Core\Configuration\Option;
+use _PhpScopercae9e6ab5cea\Rector\Set\ValueObject\DowngradeSetList;
+use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(DowngradeSetList::PHP_80);
     $containerConfigurator->import(DowngradeSetList::PHP_74);

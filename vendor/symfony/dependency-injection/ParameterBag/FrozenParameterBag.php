@@ -8,15 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\ParameterBag;
+namespace _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ParameterBag;
 
-use _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\Exception\LogicException;
+use _PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\Exception\LogicException;
 /**
  * Holds read-only parameters.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FrozenParameterBag extends \_PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+class FrozenParameterBag extends \_PhpScopercae9e6ab5cea\Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
 {
     /**
      * For performance reasons, the constructor assumes that

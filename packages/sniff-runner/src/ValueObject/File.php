@@ -10,7 +10,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Standards\PSR2\Sniffs\Classes\PropertyDeclarationSniff;
 use PHP_CodeSniffer\Standards\PSR2\Sniffs\Methods\MethodDeclarationSniff;
 use PHP_CodeSniffer\Util\Common;
-use _PhpScoper2dcc760f8ff8\SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff;
+use _PhpScopercae9e6ab5cea\SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff;
 use Symplify\CodingStandard\Sniffs\Debug\CommentedOutCodeSniff;
 use Symplify\EasyCodingStandard\Application\AppliedCheckersCollector;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
