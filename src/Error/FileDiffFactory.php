@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Error;
 
 use Symplify\ConsoleColorDiff\Console\Formatter\ColorConsoleDiffFormatter;
@@ -11,20 +12,14 @@ final class FileDiffFactory
      * @var ColorConsoleDiffFormatter
      */
     private $colorConsoleDiffFormatter;
-    /**
-     * @param \Symplify\ConsoleColorDiff\Console\Formatter\ColorConsoleDiffFormatter $colorConsoleDiffFormatter
-     */
-    public function __construct($colorConsoleDiffFormatter)
+    public function __construct(ColorConsoleDiffFormatter $colorConsoleDiffFormatter)
     {
         $this->colorConsoleDiffFormatter = $colorConsoleDiffFormatter;
     }
     /**
      * @param string[] $appliedCheckers
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
-     * @param string $diff
-     * @return \Symplify\EasyCodingStandard\ValueObject\Error\FileDiff
      */
-    public function createFromDiffAndAppliedCheckers($smartFileInfo, $diff, array $appliedCheckers)
+    public function createFromDiffAndAppliedCheckers(SmartFileInfo $smartFileInfo, string $diff, array $appliedCheckers) : FileDiff
     {
         $consoleFormattedDiff = $this->colorConsoleDiffFormatter->format($diff);
         return new FileDiff($smartFileInfo, $diff, $consoleFormattedDiff, $appliedCheckers);

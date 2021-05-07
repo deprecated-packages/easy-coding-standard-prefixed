@@ -15,11 +15,7 @@ namespace ECSPrefix20210507\Symfony\Component\Cache\Adapter;
  */
 final class ParameterNormalizer
 {
-    /**
-     * @param string $duration
-     * @return int
-     */
-    public static function normalizeDuration($duration)
+    public static function normalizeDuration(string $duration) : int
     {
         if (\is_numeric($duration)) {
             return $duration;

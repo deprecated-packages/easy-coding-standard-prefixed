@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -41,9 +42,8 @@ final class ReporterFactory
     }
     /**
      * @return $this
-     * @param \PhpCsFixer\Console\Report\ListSetsReport\ReporterInterface $reporter
      */
-    public function registerReporter($reporter)
+    public function registerReporter(\PhpCsFixer\Console\Report\ListSetsReport\ReporterInterface $reporter)
     {
         $format = $reporter->getFormat();
         if (isset($this->reporters[$format])) {

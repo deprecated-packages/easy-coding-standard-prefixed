@@ -22,10 +22,7 @@ class ExprBuilder
     protected $node;
     public $ifPart;
     public $thenPart;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeDefinition $node
-     */
-    public function __construct($node)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->node = $node;
     }
@@ -33,9 +30,8 @@ class ExprBuilder
      * Marks the expression as being always used.
      *
      * @return $this
-     * @param \Closure $then
      */
-    public function always($then = null)
+    public function always(\Closure $then = null)
     {
         $this->ifPart = function ($v) {
             return \true;
@@ -51,9 +47,8 @@ class ExprBuilder
      * The default one tests if the value is true.
      *
      * @return $this
-     * @param \Closure $closure
      */
-    public function ifTrue($closure = null)
+    public function ifTrue(\Closure $closure = null)
     {
         if (null === $closure) {
             $closure = function ($v) {
@@ -154,9 +149,8 @@ class ExprBuilder
      * Sets the closure to run if the test pass.
      *
      * @return $this
-     * @param \Closure $closure
      */
-    public function then($closure)
+    public function then(\Closure $closure)
     {
         $this->thenPart = $closure;
         return $this;
@@ -181,9 +175,8 @@ class ExprBuilder
      * @return $this
      *
      * @throws \InvalidArgumentException
-     * @param string $message
      */
-    public function thenInvalid($message)
+    public function thenInvalid(string $message)
     {
         $this->thenPart = function ($v) use($message) {
             throw new \InvalidArgumentException(\sprintf($message, \json_encode($v)));

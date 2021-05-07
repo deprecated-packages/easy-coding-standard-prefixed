@@ -46,10 +46,8 @@ class DebugHandlersListener implements EventSubscriberInterface
      * @param bool                          $scream           Enables/disables screaming mode, where even silenced errors are logged
      * @param string|FileLinkFormatter|null $fileLinkFormat   The format for links to source files
      * @param bool                          $scope            Enables/disables scoping mode
-     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $logger
-     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $deprecationLogger
      */
-    public function __construct(callable $exceptionHandler = null, $logger = null, $levels = \E_ALL, $throwAt = \E_ALL, $scream = \true, $fileLinkFormat = null, $scope = \true, $deprecationLogger = null)
+    public function __construct(callable $exceptionHandler = null, LoggerInterface $logger = null, $levels = \E_ALL, ?int $throwAt = \E_ALL, bool $scream = \true, $fileLinkFormat = null, bool $scope = \true, LoggerInterface $deprecationLogger = null)
     {
         $handler = \set_exception_handler('var_dump');
         $this->earlyHandler = \is_array($handler) ? $handler[0] : null;
@@ -65,9 +63,8 @@ class DebugHandlersListener implements EventSubscriberInterface
     }
     /**
      * Configures the error handler.
-     * @param object $event
      */
-    public function configure($event = null)
+    public function configure(object $event = null)
     {
         if ($event instanceof ConsoleEvent && !\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true)) {
             return;
@@ -137,11 +134,7 @@ class DebugHandlersListener implements EventSubscriberInterface
             $this->exceptionHandler = null;
         }
     }
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorHandler $handler
-     */
-    private function setDefaultLoggers($handler)
+    private function setDefaultLoggers(ErrorHandler $handler) : void
     {
         if (\is_array($this->levels)) {
             $levelsDeprecatedOnly = [];
@@ -166,10 +159,7 @@ class DebugHandlersListener implements EventSubscriberInterface
             $handler->setDefaultLogger($this->logger, $defaultLoggerLevels);
         }
     }
-    /**
-     * @return mixed[]
-     */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents() : array
     {
         $events = [KernelEvents::REQUEST => ['configure', 2048]];
         if (\defined('Symfony\\Component\\Console\\ConsoleEvents::COMMAND')) {

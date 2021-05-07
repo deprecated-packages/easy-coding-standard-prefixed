@@ -21,13 +21,7 @@ class TrimmedBufferOutput extends \ECSPrefix20210507\Symfony\Component\Console\O
 {
     private $maxLength;
     private $buffer = '';
-    /**
-     * @param int|null $verbosity
-     * @param int $maxLength
-     * @param bool $decorated
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter
-     */
-    public function __construct($maxLength, $verbosity = self::VERBOSITY_NORMAL, $decorated = \false, $formatter = null)
+    public function __construct(int $maxLength, ?int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = \false, OutputFormatterInterface $formatter = null)
     {
         if ($maxLength <= 0) {
             throw new InvalidArgumentException(\sprintf('"%s()" expects a strictly positive maxLength. Got %d.', __METHOD__, $maxLength));

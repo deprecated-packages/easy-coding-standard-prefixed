@@ -23,10 +23,7 @@ class ServicesResetter implements ResetInterface
 {
     private $resettableServices;
     private $resetMethods;
-    /**
-     * @param \Traversable $resettableServices
-     */
-    public function __construct($resettableServices, array $resetMethods)
+    public function __construct(\Traversable $resettableServices, array $resetMethods)
     {
         $this->resettableServices = $resettableServices;
         $this->resetMethods = $resetMethods;

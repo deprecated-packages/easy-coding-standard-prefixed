@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\ArrayNotation;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -25,7 +26,7 @@ final class ArrayListItemNewlineFixer extends AbstractSymplifyFixer implements D
     /**
      * @var string
      */
-    const ERROR_MESSAGE = 'Indexed PHP array item has to have one line per item';
+    private const ERROR_MESSAGE = 'Indexed PHP array item has to have one line per item';
     /**
      * @var ArrayAnalyzer
      */
@@ -38,36 +39,24 @@ final class ArrayListItemNewlineFixer extends AbstractSymplifyFixer implements D
      * @var ArrayBlockInfoFinder
      */
     private $arrayBlockInfoFinder;
-    /**
-     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\ArrayAnalyzer $arrayAnalyzer
-     * @param \PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig
-     * @param \Symplify\CodingStandard\TokenRunner\Traverser\ArrayBlockInfoFinder $arrayBlockInfoFinder
-     */
-    public function __construct($arrayAnalyzer, $whitespacesFixerConfig, $arrayBlockInfoFinder)
+    public function __construct(ArrayAnalyzer $arrayAnalyzer, WhitespacesFixerConfig $whitespacesFixerConfig, ArrayBlockInfoFinder $arrayBlockInfoFinder)
     {
         $this->arrayAnalyzer = $arrayAnalyzer;
         $this->whitespacesFixerConfig = $whitespacesFixerConfig;
         $this->arrayBlockInfoFinder = $arrayBlockInfoFinder;
     }
-    /**
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
-     */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
-    /**
-     * @return int
-     */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 40;
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         if (!$tokens->isAnyTokenKindsFound(TokenKinds::ARRAY_OPEN_TOKENS)) {
             return \false;
@@ -76,20 +65,15 @@ final class ArrayListItemNewlineFixer extends AbstractSymplifyFixer implements D
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \SplFileInfo $fileInfo
      */
-    public function fix($fileInfo, $tokens)
+    public function fix(SplFileInfo $fileInfo, Tokens $tokens) : void
     {
         $arrayBlockInfos = $this->arrayBlockInfoFinder->findArrayOpenerBlockInfos($tokens);
         foreach ($arrayBlockInfos as $arrayBlockInfo) {
             $this->fixArrayOpener($tokens, $arrayBlockInfo);
         }
     }
-    /**
-     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
-     */
-    public function getRuleDefinition()
+    public function getRuleDefinition() : RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 $value = ['simple' => 1, 'easy' => 2];
@@ -102,20 +86,18 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
      */
-    private function fixArrayOpener($tokens, $blockInfo)
+    private function fixArrayOpener(Tokens $tokens, BlockInfo $blockInfo) : void
     {
         if (!$this->arrayAnalyzer->isIndexedList($tokens, $blockInfo)) {
             return;
         }
-        $this->arrayAnalyzer->traverseArrayWithoutNesting($tokens, $blockInfo, function (Token $token, int $position, Tokens $tokens) {
+        $this->arrayAnalyzer->traverseArrayWithoutNesting($tokens, $blockInfo, function (Token $token, int $position, Tokens $tokens) : void {
             if ($token->getContent() !== ',') {
                 return;
             }
             $nextTokenPosition = $position + 1;
-            $nextToken = isset($tokens[$nextTokenPosition]) ? $tokens[$nextTokenPosition] : null;
+            $nextToken = $tokens[$nextTokenPosition] ?? null;
             if (!$nextToken instanceof Token) {
                 return;
             }

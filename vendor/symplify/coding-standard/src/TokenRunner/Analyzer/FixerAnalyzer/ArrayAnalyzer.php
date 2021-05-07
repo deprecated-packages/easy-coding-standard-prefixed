@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer;
 
 use PhpCsFixer\Tokenizer\CT;
@@ -12,19 +13,14 @@ final class ArrayAnalyzer
      * @var TokenSkipper
      */
     private $tokenSkipper;
-    /**
-     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\TokenSkipper $tokenSkipper
-     */
-    public function __construct($tokenSkipper)
+    public function __construct(\Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\TokenSkipper $tokenSkipper)
     {
         $this->tokenSkipper = $tokenSkipper;
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
-     * @return int
      */
-    public function getItemCount($tokens, $blockInfo)
+    public function getItemCount(Tokens $tokens, BlockInfo $blockInfo) : int
     {
         $nextMeanninfulPosition = $tokens->getNextMeaningfulToken($blockInfo->getStart());
         if ($nextMeanninfulPosition === null) {
@@ -37,7 +33,7 @@ final class ArrayAnalyzer
             return 0;
         }
         $itemCount = 1;
-        $this->traverseArrayWithoutNesting($tokens, $blockInfo, function (Token $token) use(&$itemCount) {
+        $this->traverseArrayWithoutNesting($tokens, $blockInfo, function (Token $token) use(&$itemCount) : void {
             if ($token->getContent() === ',') {
                 ++$itemCount;
             }
@@ -46,13 +42,11 @@ final class ArrayAnalyzer
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
-     * @return bool
      */
-    public function isIndexedList($tokens, $blockInfo)
+    public function isIndexedList(Tokens $tokens, BlockInfo $blockInfo) : bool
     {
         $isIndexedList = \false;
-        $this->traverseArrayWithoutNesting($tokens, $blockInfo, function (Token $token) use(&$isIndexedList) {
+        $this->traverseArrayWithoutNesting($tokens, $blockInfo, function (Token $token) use(&$isIndexedList) : void {
             if ($token->isGivenKind(\T_DOUBLE_ARROW)) {
                 $isIndexedList = \true;
             }
@@ -61,10 +55,8 @@ final class ArrayAnalyzer
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
      */
-    public function traverseArrayWithoutNesting($tokens, $blockInfo, callable $callable)
+    public function traverseArrayWithoutNesting(Tokens $tokens, BlockInfo $blockInfo, callable $callable) : void
     {
         for ($i = $blockInfo->getEnd() - 1; $i >= $blockInfo->getStart() + 1; --$i) {
             $i = $this->tokenSkipper->skipBlocksReversed($tokens, $i);
@@ -73,11 +65,7 @@ final class ArrayAnalyzer
             $callable($token, $i, $tokens);
         }
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @return bool
-     */
-    private function isArrayCloser($token)
+    private function isArrayCloser(Token $token) : bool
     {
         if ($token->isGivenKind(CT::T_ARRAY_SQUARE_BRACE_CLOSE)) {
             return \true;

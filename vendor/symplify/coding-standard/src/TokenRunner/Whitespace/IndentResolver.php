@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Whitespace;
 
 use PhpCsFixer\Tokenizer\Token;
@@ -16,31 +17,23 @@ final class IndentResolver
      * @var WhitespacesFixerConfig
      */
     private $whitespacesFixerConfig;
-    /**
-     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\IndentDetector $indentDetector
-     * @param \PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig
-     */
-    public function __construct($indentDetector, $whitespacesFixerConfig)
+    public function __construct(IndentDetector $indentDetector, WhitespacesFixerConfig $whitespacesFixerConfig)
     {
         $this->indentDetector = $indentDetector;
         $this->whitespacesFixerConfig = $whitespacesFixerConfig;
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param int $startIndex
-     * @return string
      */
-    public function resolveClosingBracketNewlineWhitespace($tokens, $startIndex)
+    public function resolveClosingBracketNewlineWhitespace(Tokens $tokens, int $startIndex) : string
     {
         $indentLevel = $this->indentDetector->detectOnPosition($tokens, $startIndex);
         return $this->whitespacesFixerConfig->getLineEnding() . \str_repeat($this->whitespacesFixerConfig->getIndent(), $indentLevel);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param int $index
-     * @return string
      */
-    public function resolveCurrentNewlineIndentWhitespace($tokens, $index)
+    public function resolveCurrentNewlineIndentWhitespace(Tokens $tokens, int $index) : string
     {
         $indentLevel = $this->indentDetector->detectOnPosition($tokens, $index);
         $indentWhitespace = \str_repeat($this->whitespacesFixerConfig->getIndent(), $indentLevel);
@@ -48,20 +41,16 @@ final class IndentResolver
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param int $index
-     * @return string
      */
-    public function resolveNewlineIndentWhitespace($tokens, $index)
+    public function resolveNewlineIndentWhitespace(Tokens $tokens, int $index) : string
     {
         $indentWhitespace = $this->resolveIndentWhitespace($tokens, $index);
         return $this->whitespacesFixerConfig->getLineEnding() . $indentWhitespace;
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param int $index
-     * @return string
      */
-    private function resolveIndentWhitespace($tokens, $index)
+    private function resolveIndentWhitespace(Tokens $tokens, int $index) : string
     {
         $indentLevel = $this->indentDetector->detectOnPosition($tokens, $index);
         return \str_repeat($this->whitespacesFixerConfig->getIndent(), $indentLevel + 1);

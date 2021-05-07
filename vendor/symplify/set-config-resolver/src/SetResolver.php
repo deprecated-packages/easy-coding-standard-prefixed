@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SetConfigResolver;
 
 use Symplify\SetConfigResolver\Contract\SetProviderInterface;
@@ -12,18 +13,11 @@ final class SetResolver
      * @var SetProviderInterface
      */
     private $setProvider;
-    /**
-     * @param \Symplify\SetConfigResolver\Contract\SetProviderInterface $setProvider
-     */
-    public function __construct($setProvider)
+    public function __construct(SetProviderInterface $setProvider)
     {
         $this->setProvider = $setProvider;
     }
-    /**
-     * @param string $setName
-     * @return \Symplify\SmartFileSystem\SmartFileInfo
-     */
-    public function detectFromName($setName)
+    public function detectFromName(string $setName) : SmartFileInfo
     {
         $set = $this->setProvider->provideByName($setName);
         if (!$set instanceof Set) {
@@ -31,11 +25,7 @@ final class SetResolver
         }
         return $set->getSetFileInfo();
     }
-    /**
-     * @return void
-     * @param string $setName
-     */
-    private function reportSetNotFound($setName)
+    private function reportSetNotFound(string $setName) : void
     {
         $message = \sprintf('Set "%s" was not found', $setName);
         throw new SetNotFoundException($message, $setName, $this->setProvider->provideSetNames());

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,10 +31,8 @@ final class ConcatSpaceFixer extends AbstractFixer implements ConfigurableFixerI
     private $fixCallback;
     /**
      * {@inheritdoc}
-     * @param mixed[] $configuration
-     * @return void
      */
-    public function configure($configuration)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         if ('one' === $this->configuration['spacing']) {
@@ -44,9 +43,8 @@ final class ConcatSpaceFixer extends AbstractFixer implements ConfigurableFixerI
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Concatenation should be spaced according configuration.', [new CodeSample("<?php\n\$foo = 'bar' . 3 . 'baz'.'qux';\n"), new CodeSample("<?php\n\$foo = 'bar' . 3 . 'baz'.'qux';\n", ['spacing' => 'none']), new CodeSample("<?php\n\$foo = 'bar' . 3 . 'baz'.'qux';\n", ['spacing' => 'one'])]);
     }
@@ -54,28 +52,22 @@ final class ConcatSpaceFixer extends AbstractFixer implements ConfigurableFixerI
      * {@inheritdoc}
      *
      * Must run after SingleLineThrowFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound('.');
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $callBack = $this->fixCallback;
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
@@ -86,18 +78,15 @@ final class ConcatSpaceFixer extends AbstractFixer implements ConfigurableFixerI
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('spacing', 'Spacing to apply around concatenation operator.'))->setAllowedValues(['one', 'none'])->setDefault('none')->getOption()]);
     }
     /**
      * @param int $index index of concatenation '.' token
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fixConcatenationToNoSpace($tokens, $index)
+    private function fixConcatenationToNoSpace(Tokens $tokens, int $index) : void
     {
         $prevNonWhitespaceToken = $tokens[$tokens->getPrevNonWhitespace($index)];
         if (!$prevNonWhitespaceToken->isGivenKind([\T_LNUMBER, \T_COMMENT, \T_DOC_COMMENT]) || '/*' === \substr($prevNonWhitespaceToken->getContent(), 0, 2)) {
@@ -109,10 +98,8 @@ final class ConcatSpaceFixer extends AbstractFixer implements ConfigurableFixerI
     }
     /**
      * @param int $index index of concatenation '.' token
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fixConcatenationToSingleSpace($tokens, $index)
+    private function fixConcatenationToSingleSpace(Tokens $tokens, int $index) : void
     {
         $this->fixWhiteSpaceAroundConcatToken($tokens, $index, 1);
         $this->fixWhiteSpaceAroundConcatToken($tokens, $index, -1);
@@ -120,10 +107,8 @@ final class ConcatSpaceFixer extends AbstractFixer implements ConfigurableFixerI
     /**
      * @param int $index  index of concatenation '.' token
      * @param int $offset 1 or -1
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fixWhiteSpaceAroundConcatToken($tokens, $index, $offset)
+    private function fixWhiteSpaceAroundConcatToken(Tokens $tokens, int $index, int $offset) : void
     {
         $offsetIndex = $index + $offset;
         if (!$tokens[$offsetIndex]->isWhitespace()) {

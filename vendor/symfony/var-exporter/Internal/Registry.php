@@ -49,7 +49,7 @@ class Registry
     }
     public static function f($class)
     {
-        $reflector = isset(self::$reflectors[$class]) ? self::$reflectors[$class] : self::getClassReflector($class, \true, \false);
+        $reflector = self::$reflectors[$class] ?? self::getClassReflector($class, \true, \false);
         return self::$factories[$class] = \Closure::fromCallable([$reflector, 'newInstanceWithoutConstructor']);
     }
     public static function getClassReflector($class, $instantiableWithoutConstructor = \false, $cloneable = null)
@@ -63,7 +63,7 @@ class Registry
         } elseif (!$isClass || $reflector->isAbstract()) {
             throw new NotInstantiableTypeException($class);
         } elseif ($reflector->name !== $class) {
-            $reflector = isset(self::$reflectors[$name = $reflector->name]) ? self::$reflectors[$name = $reflector->name] : self::getClassReflector($name, \false, $cloneable);
+            $reflector = self::$reflectors[$name = $reflector->name] ?? self::getClassReflector($name, \false, $cloneable);
             self::$cloneable[$class] = self::$cloneable[$name];
             self::$instantiableWithoutConstructor[$class] = self::$instantiableWithoutConstructor[$name];
             self::$prototypes[$class] = self::$prototypes[$name];

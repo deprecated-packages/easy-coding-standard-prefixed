@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -29,10 +30,10 @@ use PhpCsFixer\Tokenizer\Tokens;
 final class OrderedClassElementsFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /** @internal */
-    const SORT_ALPHA = 'alpha';
+    public const SORT_ALPHA = 'alpha';
     /** @internal */
-    const SORT_NONE = 'none';
-    const SUPPORTED_SORT_ALGORITHMS = [self::SORT_NONE, self::SORT_ALPHA];
+    public const SORT_NONE = 'none';
+    private const SUPPORTED_SORT_ALGORITHMS = [self::SORT_NONE, self::SORT_ALPHA];
     /**
      * @var array Array containing all class element base types (keys) and their parent types (values)
      */
@@ -47,10 +48,8 @@ final class OrderedClassElementsFixer extends AbstractFixer implements Configura
     private $typePosition;
     /**
      * {@inheritdoc}
-     * @param mixed[] $configuration
-     * @return void
      */
-    public function configure($configuration)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         $this->typePosition = [];
@@ -85,18 +84,15 @@ final class OrderedClassElementsFixer extends AbstractFixer implements Configura
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound(Token::getClassyTokenKinds());
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Orders the elements of classes/interfaces/traits.', [new CodeSample('<?php
 final class Example
@@ -149,19 +145,15 @@ class Example
      *
      * Must run before ClassAttributesSeparationFixer, NoBlankLinesAfterClassOpeningFixer, SpaceAfterSemicolonFixer.
      * Must run after NoPhp4ConstructorFixer, ProtectedToPrivateFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 65;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($i = 1, $count = $tokens->count(); $i < $count; ++$i) {
             if (!$tokens[$i]->isClassy()) {
@@ -182,18 +174,15 @@ class Example
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('order', 'List of strings defining order of elements.'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset(\array_keys(\array_merge(self::$typeHierarchy, self::$specialTypes)))])->setDefault(['use_trait', 'constant_public', 'constant_protected', 'constant_private', 'property_public', 'property_protected', 'property_private', 'construct', 'destruct', 'magic', 'phpunit', 'method_public', 'method_protected', 'method_private'])->getOption(), (new FixerOptionBuilder('sort_algorithm', 'How multiple occurrences of same type statements should be sorted'))->setAllowedValues(self::SUPPORTED_SORT_ALGORITHMS)->setDefault(self::SORT_NONE)->getOption()]);
     }
     /**
-     * @return mixed[]
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $startIndex
+     * @return array[]
      */
-    private function getElements($tokens, $startIndex)
+    private function getElements(Tokens $tokens, int $startIndex) : array
     {
         static $elementTokenKinds = [CT::T_USE_TRAIT, \T_CONST, \T_VARIABLE, \T_FUNCTION];
         ++$startIndex;
@@ -242,10 +231,8 @@ class Example
     }
     /**
      * @return array|string type or array of type and name
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
      */
-    private function detectElementType($tokens, $index)
+    private function detectElementType(Tokens $tokens, int $index)
     {
         $token = $tokens[$index];
         if ($token->isGivenKind(CT::T_USE_TRAIT)) {
@@ -272,12 +259,7 @@ class Example
         }
         return 'method';
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @return int
-     */
-    private function findElementEnd($tokens, $index)
+    private function findElementEnd(Tokens $tokens, int $index) : int
     {
         $index = $tokens->getNextTokenOfKind($index, ['{', ';']);
         if ($tokens[$index]->equals('{')) {
@@ -291,9 +273,9 @@ class Example
     /**
      * @param array[] $elements
      *
-     * @return mixed[]
+     * @return array[]
      */
-    private function sortElements(array $elements)
+    private function sortElements(array $elements) : array
     {
         static $phpunitPositions = ['setupbeforeclass' => 1, 'dosetupbeforeclass' => 2, 'teardownafterclass' => 3, 'doteardownafterclass' => 4, 'setup' => 5, 'dosetup' => 6, 'teardown' => 7, 'doteardown' => 8];
         foreach ($elements as &$element) {
@@ -328,10 +310,7 @@ class Example
         });
         return $elements;
     }
-    /**
-     * @return int
-     */
-    private function sortGroupElements(array $a, array $b)
+    private function sortGroupElements(array $a, array $b) : int
     {
         $selectedSortAlgorithm = $this->configuration['sort_algorithm'];
         if (self::SORT_ALPHA === $selectedSortAlgorithm) {
@@ -341,12 +320,8 @@ class Example
     }
     /**
      * @param array[] $elements
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $startIndex
-     * @param int $endIndex
      */
-    private function sortTokens($tokens, $startIndex, $endIndex, array $elements)
+    private function sortTokens(Tokens $tokens, int $startIndex, int $endIndex, array $elements) : void
     {
         $replaceTokens = [];
         foreach ($elements as $element) {

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Console;
 
 use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
@@ -7,10 +8,8 @@ final class OptionValueResolver
 {
     /**
      * @param string[] $optionNames
-     * @return string|null
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
      */
-    public function getOptionValue($input, array $optionNames)
+    public function getOptionValue(InputInterface $input, array $optionNames) : ?string
     {
         foreach ($optionNames as $optionName) {
             if ($input->hasParameterOption($optionName, \true)) {

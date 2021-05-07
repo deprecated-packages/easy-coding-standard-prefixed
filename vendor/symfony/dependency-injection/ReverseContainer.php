@@ -23,17 +23,12 @@ final class ReverseContainer
     private $reversibleLocator;
     private $tagName;
     private $getServiceId;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Container $serviceContainer
-     * @param \ECSPrefix20210507\Psr\Container\ContainerInterface $reversibleLocator
-     * @param string $tagName
-     */
-    public function __construct($serviceContainer, $reversibleLocator, $tagName = 'container.reversible')
+    public function __construct(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Container $serviceContainer, ContainerInterface $reversibleLocator, string $tagName = 'container.reversible')
     {
         $this->serviceContainer = $serviceContainer;
         $this->reversibleLocator = $reversibleLocator;
         $this->tagName = $tagName;
-        $this->getServiceId = \Closure::bind(function (object $service) {
+        $this->getServiceId = \Closure::bind(function (object $service) : ?string {
             return (\array_search($service, $this->services, \true) ?: \array_search($service, $this->privates, \true)) ?: null;
         }, $serviceContainer, \ECSPrefix20210507\Symfony\Component\DependencyInjection\Container::class);
     }
@@ -41,10 +36,8 @@ final class ReverseContainer
      * Returns the id of the passed object when it exists as a service.
      *
      * To be reversible, services need to be either public or be tagged with "container.reversible".
-     * @param object $service
-     * @return string|null
      */
-    public function getId($service)
+    public function getId(object $service) : ?string
     {
         if ($this->serviceContainer === $service) {
             return 'service_container';
@@ -59,10 +52,8 @@ final class ReverseContainer
     }
     /**
      * @throws ServiceNotFoundException When the service is not reversible
-     * @return object
-     * @param string $id
      */
-    public function getService($id)
+    public function getService(string $id) : object
     {
         if ($this->serviceContainer->has($id)) {
             return $this->serviceContainer->get($id);

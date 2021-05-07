@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Naming;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -25,46 +26,40 @@ final class StandardizeHereNowDocKeywordFixer extends AbstractSymplifyFixer impl
      * @api
      * @var string
      */
-    const KEYWORD = 'keyword';
+    public const KEYWORD = 'keyword';
     /**
      * @var string
      */
-    const ERROR_MESSAGE = 'Use configured nowdoc and heredoc keyword';
+    private const ERROR_MESSAGE = 'Use configured nowdoc and heredoc keyword';
     /**
      * @api
      * @var string
      */
-    const DEFAULT_KEYWORD = 'CODE_SAMPLE';
+    private const DEFAULT_KEYWORD = 'CODE_SAMPLE';
     /**
      * @see https://regex101.com/r/ED2b9V/1
      * @var string
      */
-    const START_HEREDOC_NOWDOC_NAME_REGEX = '#(<<<(\')?)(?<name>.*?)((\')?\\s)#';
+    private const START_HEREDOC_NOWDOC_NAME_REGEX = '#(<<<(\')?)(?<name>.*?)((\')?\\s)#';
     /**
      * @var string
      */
     private $keyword = self::DEFAULT_KEYWORD;
-    /**
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
-     */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_START_HEREDOC, T_START_NOWDOC]);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \SplFileInfo $file
      */
-    public function fix($file, $tokens)
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         // function arguments, function call parameters, lambda use()
         for ($position = \count($tokens) - 1; $position >= 0; --$position) {
@@ -78,10 +73,7 @@ final class StandardizeHereNowDocKeywordFixer extends AbstractSymplifyFixer impl
             }
         }
     }
-    /**
-     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
-     */
-    public function getRuleDefinition()
+    public function getRuleDefinition() : RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 $value = <<<'WHATEVER'
@@ -95,28 +87,18 @@ $value = <<<'CODE_SNIPPET'
 CODE_SAMPLE
 , [self::KEYWORD => 'CODE_SNIPPET'])]);
     }
-    /**
-     * @param mixed[]|null $configuration
-     * @return void
-     */
-    public function configure($configuration = null)
+    public function configure(?array $configuration = null) : void
     {
-        $this->keyword = isset($configuration[self::KEYWORD]) ? $configuration[self::KEYWORD] : self::DEFAULT_KEYWORD;
+        $this->keyword = $configuration[self::KEYWORD] ?? self::DEFAULT_KEYWORD;
     }
-    /**
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
-     */
-    public function getConfigurationDefinition()
+    public function getConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         throw new ShouldNotHappenException();
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @param int $position
      */
-    private function fixStartToken($tokens, $token, $position)
+    private function fixStartToken(Tokens $tokens, Token $token, int $position) : void
     {
         $match = Strings::match($token->getContent(), self::START_HEREDOC_NOWDOC_NAME_REGEX);
         if (!isset($match['name'])) {
@@ -127,11 +109,8 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @param int $position
      */
-    private function fixEndToken($tokens, $token, $position)
+    private function fixEndToken(Tokens $tokens, Token $token, int $position) : void
     {
         if ($token->getContent() === $this->keyword) {
             return;

@@ -36,10 +36,7 @@ class ServerDumpCommand extends Command
     private $server;
     /** @var DumpDescriptorInterface[] */
     private $descriptors;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Server\DumpServer $server
-     */
-    public function __construct($server, array $descriptors = [])
+    public function __construct(DumpServer $server, array $descriptors = [])
     {
         $this->server = $server;
         $this->descriptors = $descriptors + ['cli' => new CliDescriptor(new CliDumper()), 'html' => new HtmlDescriptor(new HtmlDumper())];
@@ -62,16 +59,11 @@ and redirecting the output to a file:
 EOF
 );
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @return int
-     */
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $io = new SymfonyStyle($input, $output);
         $format = $input->getOption('format');
-        if (!($descriptor = isset($this->descriptors[$format]) ? $this->descriptors[$format] : null)) {
+        if (!($descriptor = $this->descriptors[$format] ?? null)) {
             throw new InvalidArgumentException(\sprintf('Unsupported format "%s".', $format));
         }
         $errorIo = $io->getErrorStyle();

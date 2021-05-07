@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -21,9 +22,8 @@ final class CleanNamespaceFixer extends AbstractLinesBeforeNamespaceFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         $samples = [];
         foreach (['namespace Foo \\ Bar;', 'echo foo /* comment */ \\ bar();'] as $sample) {
@@ -33,20 +33,15 @@ final class CleanNamespaceFixer extends AbstractLinesBeforeNamespaceFixer
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return \PHP_VERSION_ID < 80000 && $tokens->isTokenKindFound(\T_NS_SEPARATOR);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $count = $tokens->count();
         for ($index = 0; $index < $count; ++$index) {
@@ -58,10 +53,8 @@ final class CleanNamespaceFixer extends AbstractLinesBeforeNamespaceFixer
     }
     /**
      * @param int $index start of namespace
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return int
      */
-    private function fixNamespace($tokens, $index)
+    private function fixNamespace(Tokens $tokens, int $index) : int
     {
         $tillIndex = $index;
         // go to the end of the namespace

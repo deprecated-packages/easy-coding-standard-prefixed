@@ -10,26 +10,6 @@
  */
 namespace ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception;
 
-class AnonymousFor_AutowiringFailedException
-{
-    private $message;
-    private $messageCallback;
-    public function __construct(&$message, &$messageCallback)
-    {
-        $this->message =& $message;
-        $this->messageCallback =& $messageCallback;
-    }
-    public function __toString() : string
-    {
-        $messageCallback = $this->messageCallback;
-        $this->messageCallback = null;
-        try {
-            return $this->message = $messageCallback();
-        } catch (\Throwable $e) {
-            return $this->message = $e->getMessage();
-        }
-    }
-}
 /**
  * Thrown when a definition cannot be autowired.
  */
@@ -37,12 +17,7 @@ class AutowiringFailedException extends \ECSPrefix20210507\Symfony\Component\Dep
 {
     private $serviceId;
     private $messageCallback;
-    /**
-     * @param string $serviceId
-     * @param int $code
-     * @param \Throwable $previous
-     */
-    public function __construct($serviceId, $message = '', $code = 0, $previous = null)
+    public function __construct(string $serviceId, $message = '', int $code = 0, \Throwable $previous = null)
     {
         $this->serviceId = $serviceId;
         if ($message instanceof \Closure && (\function_exists('xdebug_is_enabled') ? \xdebug_is_enabled() : \function_exists('ECSPrefix20210507\\xdebug_info'))) {
@@ -54,12 +29,28 @@ class AutowiringFailedException extends \ECSPrefix20210507\Symfony\Component\Dep
         }
         $this->messageCallback = $message;
         parent::__construct('', $code, $previous);
-        $this->message = new AnonymousFor_AutowiringFailedException($this->message, $this->messageCallback);
+        $this->message = new class($this->message, $this->messageCallback)
+        {
+            private $message;
+            private $messageCallback;
+            public function __construct(&$message, &$messageCallback)
+            {
+                $this->message =& $message;
+                $this->messageCallback =& $messageCallback;
+            }
+            public function __toString() : string
+            {
+                $messageCallback = $this->messageCallback;
+                $this->messageCallback = null;
+                try {
+                    return $this->message = $messageCallback();
+                } catch (\Throwable $e) {
+                    return $this->message = $e->getMessage();
+                }
+            }
+        };
     }
-    /**
-     * @return \Closure|null
-     */
-    public function getMessageCallback()
+    public function getMessageCallback() : ?\Closure
     {
         return $this->messageCallback;
     }

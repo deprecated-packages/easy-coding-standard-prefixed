@@ -19,25 +19,16 @@ use ECSPrefix20210507\Symfony\Component\Process\Process;
 final class ProcessSignaledException extends \ECSPrefix20210507\Symfony\Component\Process\Exception\RuntimeException
 {
     private $process;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Process\Process $process
-     */
-    public function __construct($process)
+    public function __construct(Process $process)
     {
         $this->process = $process;
         parent::__construct(\sprintf('The process has been signaled with signal "%s".', $process->getTermSignal()));
     }
-    /**
-     * @return \ECSPrefix20210507\Symfony\Component\Process\Process
-     */
-    public function getProcess()
+    public function getProcess() : Process
     {
         return $this->process;
     }
-    /**
-     * @return int
-     */
-    public function getSignal()
+    public function getSignal() : int
     {
         return $this->getProcess()->getTermSignal();
     }

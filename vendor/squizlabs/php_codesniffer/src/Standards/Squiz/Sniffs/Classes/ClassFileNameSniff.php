@@ -32,7 +32,7 @@ class ClassFileNameSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $fullPath = \basename($phpcsFile->getFilename());
         $fileName = \substr($fullPath, 0, \strrpos($fullPath, '.'));

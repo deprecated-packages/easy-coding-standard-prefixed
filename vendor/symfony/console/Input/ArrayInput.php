@@ -24,10 +24,7 @@ use ECSPrefix20210507\Symfony\Component\Console\Exception\InvalidOptionException
 class ArrayInput extends \ECSPrefix20210507\Symfony\Component\Console\Input\Input
 {
     private $parameters;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputDefinition $definition
-     */
-    public function __construct(array $parameters, $definition = null)
+    public function __construct(array $parameters, \ECSPrefix20210507\Symfony\Component\Console\Input\InputDefinition $definition = null)
     {
         $this->parameters = $parameters;
         parent::__construct($definition);
@@ -47,9 +44,8 @@ class ArrayInput extends \ECSPrefix20210507\Symfony\Component\Console\Input\Inpu
     }
     /**
      * {@inheritdoc}
-     * @param bool $onlyParams
      */
-    public function hasParameterOption($values, $onlyParams = \false)
+    public function hasParameterOption($values, bool $onlyParams = \false)
     {
         $values = (array) $values;
         foreach ($this->parameters as $k => $v) {
@@ -67,9 +63,8 @@ class ArrayInput extends \ECSPrefix20210507\Symfony\Component\Console\Input\Inpu
     }
     /**
      * {@inheritdoc}
-     * @param bool $onlyParams
      */
-    public function getParameterOption($values, $default = \false, $onlyParams = \false)
+    public function getParameterOption($values, $default = \false, bool $onlyParams = \false)
     {
         $values = (array) $values;
         foreach ($this->parameters as $k => $v) {
@@ -132,9 +127,8 @@ class ArrayInput extends \ECSPrefix20210507\Symfony\Component\Console\Input\Inpu
      * Adds a short option value.
      *
      * @throws InvalidOptionException When option given doesn't exist
-     * @param string $shortcut
      */
-    private function addShortOption($shortcut, $value)
+    private function addShortOption(string $shortcut, $value)
     {
         if (!$this->definition->hasShortcut($shortcut)) {
             throw new InvalidOptionException(\sprintf('The "-%s" option does not exist.', $shortcut));
@@ -146,9 +140,8 @@ class ArrayInput extends \ECSPrefix20210507\Symfony\Component\Console\Input\Inpu
      *
      * @throws InvalidOptionException When option given doesn't exist
      * @throws InvalidOptionException When a required value is missing
-     * @param string $name
      */
-    private function addLongOption($name, $value)
+    private function addLongOption(string $name, $value)
     {
         if (!$this->definition->hasOption($name)) {
             throw new InvalidOptionException(\sprintf('The "--%s" option does not exist.', $name));

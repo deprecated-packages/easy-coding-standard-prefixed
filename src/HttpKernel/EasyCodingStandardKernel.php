@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\HttpKernel;
 
 use ECSPrefix20210507\Symfony\Component\Config\Loader\DelegatingLoader;
@@ -18,9 +19,9 @@ use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
 final class EasyCodingStandardKernel extends AbstractSymplifyKernel
 {
     /**
-     * @return mixed[]
+     * @return BundleInterface[]
      */
-    public function registerBundles()
+    public function registerBundles() : iterable
     {
         $bundles = [new EasyCodingStandardBundle(), new SymplifyCodingStandardBundle(), new ConsoleColorDiffBundle(), new SymplifyKernelBundle(), new SkipperBundle()];
         if ($this->environment === 'test') {
@@ -28,19 +29,14 @@ final class EasyCodingStandardKernel extends AbstractSymplifyKernel
         }
         return $bundles;
     }
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     */
-    protected function build($containerBuilder)
+    protected function build(ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->addCompilerPass(new DeprecationWarningCompilerPass());
     }
     /**
      * @param ContainerInterface|ContainerBuilder $container
-     * @return \Symfony\Component\Config\Loader\DelegatingLoader
      */
-    protected function getContainerLoader($container)
+    protected function getContainerLoader(ContainerInterface $container) : DelegatingLoader
     {
         $delegatingLoaderFactory = new DelegatingLoaderFactory();
         return $delegatingLoaderFactory->createFromContainerBuilderAndKernel($container, $this);

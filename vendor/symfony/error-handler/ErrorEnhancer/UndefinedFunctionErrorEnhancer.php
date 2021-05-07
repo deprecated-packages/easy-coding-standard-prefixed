@@ -19,10 +19,8 @@ class UndefinedFunctionErrorEnhancer implements \ECSPrefix20210507\Symfony\Compo
 {
     /**
      * {@inheritdoc}
-     * @return \Throwable|null
-     * @param \Throwable $error
      */
-    public function enhance($error)
+    public function enhance(\Throwable $error) : ?\Throwable
     {
         if ($error instanceof FatalError) {
             return null;

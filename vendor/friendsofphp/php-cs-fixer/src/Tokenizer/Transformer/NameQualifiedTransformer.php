@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,29 +26,23 @@ final class NameQualifiedTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
         // must run before NamespaceOperatorTransformer
     }
     /**
      * {@inheritdoc}
-     * @return int
      */
-    public function getRequiredPhpVersionId()
+    public function getRequiredPhpVersionId() : int
     {
         return 80000;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @param int $index
      */
-    public function process($tokens, $token, $index)
+    public function process(Tokens $tokens, Token $token, int $index) : void
     {
         if ($token->isGivenKind([\T_NAME_QUALIFIED, \T_NAME_FULLY_QUALIFIED])) {
             $this->transformQualified($tokens, $token, $index);
@@ -57,19 +52,12 @@ final class NameQualifiedTransformer extends AbstractTransformer
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    public function getCustomTokens()
+    public function getCustomTokens() : array
     {
         return [];
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @param int $index
-     */
-    private function transformQualified($tokens, $token, $index)
+    private function transformQualified(Tokens $tokens, Token $token, int $index) : void
     {
         $parts = \explode('\\', $token->getContent());
         $newTokens = [];
@@ -84,13 +72,7 @@ final class NameQualifiedTransformer extends AbstractTransformer
         \array_pop($newTokens);
         $tokens->overrideRange($index, $index, $newTokens);
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @param int $index
-     */
-    private function transformRelative($tokens, $token, $index)
+    private function transformRelative(Tokens $tokens, Token $token, int $index) : void
     {
         $parts = \explode('\\', $token->getContent());
         $newTokens = [new Token([\T_NAMESPACE, \array_shift($parts)]), new Token([\T_NS_SEPARATOR, '\\'])];

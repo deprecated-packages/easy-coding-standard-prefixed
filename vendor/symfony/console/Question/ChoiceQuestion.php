@@ -27,7 +27,7 @@ class ChoiceQuestion extends \ECSPrefix20210507\Symfony\Component\Console\Questi
      * @param array  $choices  The list of available choices
      * @param mixed  $default  The default answer to return
      */
-    public function __construct($question, array $choices, $default = null)
+    public function __construct(string $question, array $choices, $default = null)
     {
         if (!$choices) {
             throw new \LogicException('Choice question must have at least 1 choice available.');
@@ -52,9 +52,8 @@ class ChoiceQuestion extends \ECSPrefix20210507\Symfony\Component\Console\Questi
      * When multiselect is set to true, multiple choices can be answered.
      *
      * @return $this
-     * @param bool $multiselect
      */
-    public function setMultiselect($multiselect)
+    public function setMultiselect(bool $multiselect)
     {
         $this->multiselect = $multiselect;
         $this->setValidator($this->getDefaultValidator());
@@ -82,9 +81,8 @@ class ChoiceQuestion extends \ECSPrefix20210507\Symfony\Component\Console\Questi
      * Sets the prompt for choices.
      *
      * @return $this
-     * @param string $prompt
      */
-    public function setPrompt($prompt)
+    public function setPrompt(string $prompt)
     {
         $this->prompt = $prompt;
         return $this;
@@ -95,18 +93,14 @@ class ChoiceQuestion extends \ECSPrefix20210507\Symfony\Component\Console\Questi
      * The error message has a string placeholder (%s) for the invalid value.
      *
      * @return $this
-     * @param string $errorMessage
      */
-    public function setErrorMessage($errorMessage)
+    public function setErrorMessage(string $errorMessage)
     {
         $this->errorMessage = $errorMessage;
         $this->setValidator($this->getDefaultValidator());
         return $this;
     }
-    /**
-     * @return callable
-     */
-    private function getDefaultValidator()
+    private function getDefaultValidator() : callable
     {
         $choices = $this->choices;
         $errorMessage = $this->errorMessage;

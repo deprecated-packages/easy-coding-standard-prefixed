@@ -41,11 +41,8 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
      * @return mixed The user answer
      *
      * @throws RuntimeException If there is no data to read in the input stream
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Question\Question $question
      */
-    public function ask($input, $output, $question)
+    public function ask(InputInterface $input, OutputInterface $output, Question $question)
     {
         if ($output instanceof ConsoleOutputInterface) {
             $output = $output->getErrorOutput();
@@ -92,10 +89,8 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
      * @return mixed
      *
      * @throws RuntimeException In case the fallback is deactivated and the response cannot be hidden
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Question\Question $question
      */
-    private function doAsk($output, $question)
+    private function doAsk(OutputInterface $output, Question $question)
     {
         $this->writePrompt($output, $question);
         $inputStream = $this->inputStream ?: \STDIN;
@@ -140,9 +135,8 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
     }
     /**
      * @return mixed
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Question\Question $question
      */
-    private function getDefaultAnswer($question)
+    private function getDefaultAnswer(Question $question)
     {
         $default = $question->getDefault();
         if (null === $default) {
@@ -153,22 +147,20 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
         } elseif ($question instanceof ChoiceQuestion) {
             $choices = $question->getChoices();
             if (!$question->isMultiselect()) {
-                return isset($choices[$default]) ? $choices[$default] : $default;
+                return $choices[$default] ?? $default;
             }
             $default = \explode(',', $default);
             foreach ($default as $k => $v) {
                 $v = $question->isTrimmable() ? \trim($v) : $v;
-                $default[$k] = isset($choices[$v]) ? $choices[$v] : $v;
+                $default[$k] = $choices[$v] ?? $v;
             }
         }
         return $default;
     }
     /**
      * Outputs the question prompt.
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Question\Question $question
      */
-    protected function writePrompt($output, $question)
+    protected function writePrompt(OutputInterface $output, Question $question)
     {
         $message = $question->getQuestion();
         if ($question instanceof ChoiceQuestion) {
@@ -179,10 +171,8 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
     }
     /**
      * @return string[]
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Question\ChoiceQuestion $question
-     * @param string $tag
      */
-    protected function formatChoiceQuestionChoices($question, $tag)
+    protected function formatChoiceQuestionChoices(ChoiceQuestion $question, string $tag)
     {
         $messages = [];
         $maxWidth = \max(\array_map('self::strlen', \array_keys($choices = $question->getChoices())));
@@ -194,10 +184,8 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
     }
     /**
      * Outputs an error message.
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \Exception $error
      */
-    protected function writeError($output, $error)
+    protected function writeError(OutputInterface $output, \Exception $error)
     {
         if (null !== $this->getHelperSet() && $this->getHelperSet()->has('formatter')) {
             $message = $this->getHelperSet()->get('formatter')->formatBlock($error->getMessage(), 'error');
@@ -210,11 +198,8 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
      * Autocompletes a question.
      *
      * @param resource $inputStream
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Question\Question $question
-     * @return string
      */
-    private function autocomplete($output, $question, $inputStream, callable $autocomplete)
+    private function autocomplete(OutputInterface $output, Question $question, $inputStream, callable $autocomplete) : string
     {
         $cursor = new Cursor($output, $inputStream);
         $fullChoice = '';
@@ -321,11 +306,7 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
         \shell_exec(\sprintf('stty %s', $sttyMode));
         return $fullChoice;
     }
-    /**
-     * @param string $entered
-     * @return string
-     */
-    private function mostRecentlyEnteredValue($entered)
+    private function mostRecentlyEnteredValue(string $entered) : string
     {
         // Determine the most recent value that the user entered
         if (\false === \strpos($entered, ',')) {
@@ -344,10 +325,8 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
      * @param bool     $trimmable   Is the answer trimmable
      *
      * @throws RuntimeException In case the fallback is deactivated and the response cannot be hidden
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @return string
      */
-    private function getHiddenResponse($output, $inputStream, $trimmable = \true)
+    private function getHiddenResponse(OutputInterface $output, $inputStream, bool $trimmable = \true) : string
     {
         if ('\\' === \DIRECTORY_SEPARATOR) {
             $exe = __DIR__ . '/../Resources/bin/hiddeninput.exe';
@@ -392,10 +371,8 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
      * @return mixed The validated response
      *
      * @throws \Exception In case the max number of attempts has been reached and no valid response has been given
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Question\Question $question
      */
-    private function validateAttempts(callable $interviewer, $output, $question)
+    private function validateAttempts(callable $interviewer, OutputInterface $output, Question $question)
     {
         $error = null;
         $attempts = $question->getMaxAttempts();
@@ -412,26 +389,16 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
         }
         throw $error;
     }
-    /**
-     * @return bool
-     */
-    private function isInteractiveInput($inputStream)
+    private function isInteractiveInput($inputStream) : bool
     {
-        if ('php://stdin' !== (isset(\stream_get_meta_data($inputStream)['uri']) ? \stream_get_meta_data($inputStream)['uri'] : null)) {
+        if ('php://stdin' !== (\stream_get_meta_data($inputStream)['uri'] ?? null)) {
             return \false;
         }
         if (null !== self::$stdinIsInteractive) {
             return self::$stdinIsInteractive;
         }
         if (\function_exists('stream_isatty')) {
-            $streamIsatty = function ($stream) {
-                if ('\\' === \DIRECTORY_SEPARATOR) {
-                    $stat = @fstat($stream);
-                    return $stat ? 020000 === ($stat['mode'] & 0170000) : false;
-                }
-                return @posix_isatty($stream);
-            };
-            return self::$stdinIsInteractive = $streamIsatty(\fopen('php://stdin', 'r'));
+            return self::$stdinIsInteractive = \stream_isatty(\fopen('php://stdin', 'r'));
         }
         if (\function_exists('posix_isatty')) {
             return self::$stdinIsInteractive = \posix_isatty(\fopen('php://stdin', 'r'));
@@ -450,7 +417,7 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
      *
      * @return string|bool The input received, false in case input could not be read
      */
-    private function readInput($inputStream, $question)
+    private function readInput($inputStream, Question $question)
     {
         if (!$question->isMultiline()) {
             return \fgets($inputStream, 4096);
@@ -479,9 +446,9 @@ class QuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper
     private function cloneInputStream($inputStream)
     {
         $streamMetaData = \stream_get_meta_data($inputStream);
-        $seekable = isset($streamMetaData['seekable']) ? $streamMetaData['seekable'] : \false;
-        $mode = isset($streamMetaData['mode']) ? $streamMetaData['mode'] : 'rb';
-        $uri = isset($streamMetaData['uri']) ? $streamMetaData['uri'] : null;
+        $seekable = $streamMetaData['seekable'] ?? \false;
+        $mode = $streamMetaData['mode'] ?? 'rb';
+        $uri = $streamMetaData['uri'] ?? null;
         if (null === $uri) {
             return null;
         }

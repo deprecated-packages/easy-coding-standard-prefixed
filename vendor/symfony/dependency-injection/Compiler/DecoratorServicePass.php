@@ -25,17 +25,11 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 class DecoratorServicePass extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $innerId = '.inner';
-    /**
-     * @param string|null $innerId
-     */
-    public function __construct($innerId = '.inner')
+    public function __construct(?string $innerId = '.inner')
     {
         $this->innerId = $innerId;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         $definitions = new \SplPriorityQueue();
         $order = \PHP_INT_MAX;
@@ -46,10 +40,10 @@ class DecoratorServicePass extends \ECSPrefix20210507\Symfony\Component\Dependen
             $definitions->insert([$id, $definition], [$decorated[2], --$order]);
         }
         $decoratingDefinitions = [];
-        foreach ($definitions as list($id, $definition)) {
+        foreach ($definitions as [$id, $definition]) {
             $decoratedService = $definition->getDecoratedService();
-            list($inner, $renamedId) = $decoratedService;
-            $invalidBehavior = isset($decoratedService[3]) ? $decoratedService[3] : ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
+            [$inner, $renamedId] = $decoratedService;
+            $invalidBehavior = $decoratedService[3] ?? ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
             $definition->setDecoratedService(null);
             if (!$renamedId) {
                 $renamedId = $id . '.inner';
@@ -97,10 +91,7 @@ class DecoratorServicePass extends \ECSPrefix20210507\Symfony\Component\Dependen
             $container->setAlias($inner, $id)->setPublic($public);
         }
     }
-    /**
-     * @param bool $isRoot
-     */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         if ($value instanceof Reference && $this->innerId === (string) $value) {
             return new Reference($this->currentId, $value->getInvalidBehavior());

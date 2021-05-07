@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,60 +27,34 @@ final class Cache implements \PhpCsFixer\Cache\CacheInterface
      * @var array
      */
     private $hashes = [];
-    /**
-     * @param \PhpCsFixer\Cache\SignatureInterface $signature
-     */
-    public function __construct($signature)
+    public function __construct(\PhpCsFixer\Cache\SignatureInterface $signature)
     {
         $this->signature = $signature;
     }
-    /**
-     * @return \PhpCsFixer\Cache\SignatureInterface
-     */
-    public function getSignature()
+    public function getSignature() : \PhpCsFixer\Cache\SignatureInterface
     {
         return $this->signature;
     }
-    /**
-     * @param string $file
-     * @return bool
-     */
-    public function has($file)
+    public function has(string $file) : bool
     {
         return \array_key_exists($file, $this->hashes);
     }
-    /**
-     * @return int|null
-     * @param string $file
-     */
-    public function get($file)
+    public function get(string $file) : ?int
     {
         if (!$this->has($file)) {
             return null;
         }
         return $this->hashes[$file];
     }
-    /**
-     * @return void
-     * @param string $file
-     * @param int $hash
-     */
-    public function set($file, $hash)
+    public function set(string $file, int $hash) : void
     {
         $this->hashes[$file] = $hash;
     }
-    /**
-     * @return void
-     * @param string $file
-     */
-    public function clear($file)
+    public function clear(string $file) : void
     {
         unset($this->hashes[$file]);
     }
-    /**
-     * @return string
-     */
-    public function toJson()
+    public function toJson() : string
     {
         $json = \json_encode(['php' => $this->getSignature()->getPhpVersion(), 'version' => $this->getSignature()->getFixerVersion(), 'indent' => $this->getSignature()->getIndent(), 'lineEnding' => $this->getSignature()->getLineEnding(), 'rules' => $this->getSignature()->getRules(), 'hashes' => $this->hashes]);
         if (\JSON_ERROR_NONE !== \json_last_error()) {
@@ -91,9 +66,8 @@ final class Cache implements \PhpCsFixer\Cache\CacheInterface
      * @throws \InvalidArgumentException
      *
      * @return Cache
-     * @param string $json
      */
-    public static function fromJson($json)
+    public static function fromJson(string $json) : self
     {
         $data = \json_decode($json, \true);
         if (null === $data && \JSON_ERROR_NONE !== \json_last_error()) {

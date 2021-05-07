@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -12,14 +13,11 @@ final class MissingVarNameMalformWorker implements MalformWorkerInterface
      * @var string
      * @see https://regex101.com/r/QtWnWv/3
      */
-    const VAR_WITHOUT_NAME_REGEX = '#^(?<open>\\/\\*\\* @var )(?<type>[\\\\\\w\\|]+)(?<close>\\s+\\*\\/)$#';
+    private const VAR_WITHOUT_NAME_REGEX = '#^(?<open>\\/\\*\\* @var )(?<type>[\\\\\\w\\|]+)(?<close>\\s+\\*\\/)$#';
     /**
      * @param Tokens<Token> $tokens
-     * @param string $docContent
-     * @param int $position
-     * @return string
      */
-    public function work($docContent, $tokens, $position)
+    public function work(string $docContent, Tokens $tokens, int $position) : string
     {
         if (!Strings::match($docContent, self::VAR_WITHOUT_NAME_REGEX)) {
             return $docContent;
@@ -34,16 +32,14 @@ final class MissingVarNameMalformWorker implements MalformWorkerInterface
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return \PhpCsFixer\Tokenizer\Token|null
-     * @param int $position
      */
-    private function getNextVariableToken($tokens, $position)
+    private function getNextVariableToken(Tokens $tokens, int $position) : ?Token
     {
         $nextMeaningfulTokenPosition = $tokens->getNextMeaningfulToken($position);
         if ($nextMeaningfulTokenPosition === null) {
             return null;
         }
-        $nextToken = isset($tokens[$nextMeaningfulTokenPosition]) ? $tokens[$nextMeaningfulTokenPosition] : null;
+        $nextToken = $tokens[$nextMeaningfulTokenPosition] ?? null;
         if (!$nextToken instanceof Token) {
             return null;
         }

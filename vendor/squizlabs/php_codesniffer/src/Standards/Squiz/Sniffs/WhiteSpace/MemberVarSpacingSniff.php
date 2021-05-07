@@ -36,7 +36,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
      *                  called again on the current file until the returned stack
      *                  pointer is reached.
      */
-    protected function processMemberVar($phpcsFile, $stackPtr)
+    protected function processMemberVar(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $validPrefixes = Tokens::$methodPrefixes;
@@ -157,7 +157,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariable($phpcsFile, $stackPtr)
+    protected function processVariable(File $phpcsFile, $stackPtr)
     {
         /*
             We don't care about normal variables.
@@ -172,7 +172,7 @@ class MemberVarSpacingSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariableInString($phpcsFile, $stackPtr)
+    protected function processVariableInString(File $phpcsFile, $stackPtr)
     {
         /*
             We don't care about normal variables.

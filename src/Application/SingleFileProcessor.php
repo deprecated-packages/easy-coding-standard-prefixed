@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Application;
 
 use ParseError;
@@ -25,24 +26,14 @@ final class SingleFileProcessor
      * @var FileProcessorCollector
      */
     private $fileProcessorCollector;
-    /**
-     * @param \Symplify\Skipper\Skipper\Skipper $skipper
-     * @param \Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector $changedFilesDetector
-     * @param \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector
-     * @param \Symplify\EasyCodingStandard\Application\FileProcessorCollector $fileProcessorCollector
-     */
-    public function __construct($skipper, $changedFilesDetector, $errorAndDiffCollector, $fileProcessorCollector)
+    public function __construct(Skipper $skipper, ChangedFilesDetector $changedFilesDetector, ErrorAndDiffCollector $errorAndDiffCollector, \Symplify\EasyCodingStandard\Application\FileProcessorCollector $fileProcessorCollector)
     {
         $this->skipper = $skipper;
         $this->changedFilesDetector = $changedFilesDetector;
         $this->errorAndDiffCollector = $errorAndDiffCollector;
         $this->fileProcessorCollector = $fileProcessorCollector;
     }
-    /**
-     * @return void
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
-     */
-    public function processFileInfo($smartFileInfo)
+    public function processFileInfo(SmartFileInfo $smartFileInfo) : void
     {
         if ($this->skipper->shouldSkipFileInfo($smartFileInfo)) {
             return;

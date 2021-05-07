@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject\CodeSample;
 
 use Symplify\RuleDocGenerator\ValueObject\AbstractCodeSample;
@@ -9,20 +10,12 @@ final class ComposerJsonAwareCodeSample extends AbstractCodeSample
      * @var string
      */
     private $composerJson;
-    /**
-     * @param string $badCode
-     * @param string $goodCode
-     * @param string $composerJson
-     */
-    public function __construct($badCode, $goodCode, $composerJson)
+    public function __construct(string $badCode, string $goodCode, string $composerJson)
     {
         parent::__construct($badCode, $goodCode);
         $this->composerJson = $composerJson;
     }
-    /**
-     * @return string
-     */
-    public function getComposerJson()
+    public function getComposerJson() : string
     {
         return $this->composerJson;
     }

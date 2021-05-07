@@ -20,11 +20,7 @@ trait FilesystemCommonTrait
 {
     private $directory;
     private $tmp;
-    /**
-     * @param string|null $directory
-     * @param string $namespace
-     */
-    private function init($namespace, $directory)
+    private function init(string $namespace, ?string $directory)
     {
         if (!isset($directory[0])) {
             $directory = \sys_get_temp_dir() . \DIRECTORY_SEPARATOR . 'symfony-cache';
@@ -51,9 +47,8 @@ trait FilesystemCommonTrait
     }
     /**
      * {@inheritdoc}
-     * @param string $namespace
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $ok = \true;
         foreach ($this->scanHashDir($this->directory) as $file) {
@@ -80,12 +75,7 @@ trait FilesystemCommonTrait
     {
         return @\unlink($file);
     }
-    /**
-     * @param string $file
-     * @param string $data
-     * @param int $expiresAt
-     */
-    private function write($file, $data, $expiresAt = null)
+    private function write(string $file, string $data, int $expiresAt = null)
     {
         \set_error_handler(__CLASS__ . '::throwError');
         try {
@@ -111,34 +101,21 @@ trait FilesystemCommonTrait
             \restore_error_handler();
         }
     }
-    /**
-     * @param string $id
-     * @param bool $mkdir
-     * @param string $directory
-     */
-    private function getFile($id, $mkdir = \false, $directory = null)
+    private function getFile(string $id, bool $mkdir = \false, string $directory = null)
     {
         // Use MD5 to favor speed over security, which is not an issue here
         $hash = \str_replace('/', '-', \base64_encode(\hash('md5', static::class . $id, \true)));
-        $dir = (isset($directory) ? $directory : $this->directory) . \strtoupper($hash[0] . \DIRECTORY_SEPARATOR . $hash[1] . \DIRECTORY_SEPARATOR);
+        $dir = ($directory ?? $this->directory) . \strtoupper($hash[0] . \DIRECTORY_SEPARATOR . $hash[1] . \DIRECTORY_SEPARATOR);
         if ($mkdir && !\is_dir($dir)) {
             @\mkdir($dir, 0777, \true);
         }
         return $dir . \substr($hash, 2, 20);
     }
-    /**
-     * @param string $file
-     * @return string
-     */
-    private function getFileKey($file)
+    private function getFileKey(string $file) : string
     {
         return '';
     }
-    /**
-     * @param string $directory
-     * @return \Generator
-     */
-    private function scanHashDir($directory)
+    private function scanHashDir(string $directory) : \Generator
     {
         if (!\is_dir($directory)) {
             return;

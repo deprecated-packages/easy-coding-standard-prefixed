@@ -22,47 +22,27 @@ final class ConsoleErrorEvent extends \ECSPrefix20210507\Symfony\Component\Conso
 {
     private $error;
     private $exitCode;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \Throwable $error
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
-     */
-    public function __construct($input, $output, $error, $command = null)
+    public function __construct(InputInterface $input, OutputInterface $output, \Throwable $error, Command $command = null)
     {
         parent::__construct($command, $input, $output);
         $this->error = $error;
     }
-    /**
-     * @return \Throwable
-     */
-    public function getError()
+    public function getError() : \Throwable
     {
         return $this->error;
     }
-    /**
-     * @return void
-     * @param \Throwable $error
-     */
-    public function setError($error)
+    public function setError(\Throwable $error) : void
     {
         $this->error = $error;
     }
-    /**
-     * @return void
-     * @param int $exitCode
-     */
-    public function setExitCode($exitCode)
+    public function setExitCode(int $exitCode) : void
     {
         $this->exitCode = $exitCode;
         $r = new \ReflectionProperty($this->error, 'code');
         $r->setAccessible(\true);
         $r->setValue($this->error, $this->exitCode);
     }
-    /**
-     * @return int
-     */
-    public function getExitCode()
+    public function getExitCode() : int
     {
         return null !== $this->exitCode ? $this->exitCode : (\is_int($this->error->getCode()) && 0 !== $this->error->getCode() ? $this->error->getCode() : 1);
     }

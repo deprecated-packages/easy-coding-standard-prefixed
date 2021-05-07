@@ -17,12 +17,7 @@ use ECSPrefix20210507\Doctrine\Common\Cache\CacheProvider;
 class DoctrineAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
     private $provider;
-    /**
-     * @param \ECSPrefix20210507\Doctrine\Common\Cache\CacheProvider $provider
-     * @param string $namespace
-     * @param int $defaultLifetime
-     */
-    public function __construct($provider, $namespace = '', $defaultLifetime = 0)
+    public function __construct(CacheProvider $provider, string $namespace = '', int $defaultLifetime = 0)
     {
         parent::__construct('', $defaultLifetime);
         $this->provider = $provider;
@@ -61,17 +56,15 @@ class DoctrineAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     /**
      * {@inheritdoc}
-     * @param string $id
      */
-    protected function doHave($id)
+    protected function doHave(string $id)
     {
         return $this->provider->contains($id);
     }
     /**
      * {@inheritdoc}
-     * @param string $namespace
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $namespace = $this->provider->getNamespace();
         return isset($namespace[0]) ? $this->provider->deleteAll() : $this->provider->flushAll();
@@ -89,9 +82,8 @@ class DoctrineAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     /**
      * {@inheritdoc}
-     * @param int $lifetime
      */
-    protected function doSave(array $values, $lifetime)
+    protected function doSave(array $values, int $lifetime)
     {
         return $this->provider->saveMultiple($values, $lifetime);
     }

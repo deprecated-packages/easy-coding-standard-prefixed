@@ -38,11 +38,8 @@ class ProfilerListener implements EventSubscriberInterface
     /**
      * @param bool $onlyException      True if the profiler only collects data when an exception occurs, false otherwise
      * @param bool $onlyMasterRequests True if the profiler only collects data when the request is a master request, false otherwise
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Profiler\Profiler $profiler
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestMatcherInterface $matcher
      */
-    public function __construct($profiler, $requestStack, $matcher = null, $onlyException = \false, $onlyMasterRequests = \false)
+    public function __construct(Profiler $profiler, RequestStack $requestStack, RequestMatcherInterface $matcher = null, bool $onlyException = \false, bool $onlyMasterRequests = \false)
     {
         $this->profiler = $profiler;
         $this->matcher = $matcher;
@@ -54,9 +51,8 @@ class ProfilerListener implements EventSubscriberInterface
     }
     /**
      * Handles the onKernelException event.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ExceptionEvent $event
      */
-    public function onKernelException($event)
+    public function onKernelException(ExceptionEvent $event)
     {
         if ($this->onlyMasterRequests && !$event->isMasterRequest()) {
             return;
@@ -65,9 +61,8 @@ class ProfilerListener implements EventSubscriberInterface
     }
     /**
      * Handles the onKernelResponse event.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ResponseEvent $event
      */
-    public function onKernelResponse($event)
+    public function onKernelResponse(ResponseEvent $event)
     {
         $master = $event->isMasterRequest();
         if ($this->onlyMasterRequests && !$master) {
@@ -88,10 +83,7 @@ class ProfilerListener implements EventSubscriberInterface
         $this->profiles[$request] = $profile;
         $this->parents[$request] = $this->requestStack->getParentRequest();
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\TerminateEvent $event
-     */
-    public function onKernelTerminate($event)
+    public function onKernelTerminate(TerminateEvent $event)
     {
         // attach children to parents
         foreach ($this->profiles as $request) {
@@ -108,10 +100,7 @@ class ProfilerListener implements EventSubscriberInterface
         $this->profiles = new \SplObjectStorage();
         $this->parents = new \SplObjectStorage();
     }
-    /**
-     * @return mixed[]
-     */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents() : array
     {
         return [KernelEvents::RESPONSE => ['onKernelResponse', -100], KernelEvents::EXCEPTION => ['onKernelException', 0], KernelEvents::TERMINATE => ['onKernelTerminate', -1024]];
     }

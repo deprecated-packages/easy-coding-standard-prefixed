@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,9 +28,8 @@ final class PhpdocToPropertyTypeFixer extends AbstractPhpdocToTypeDeclarationFix
     private $skippedTypes = ['mixed' => \true, 'resource' => \true, 'null' => \true];
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('EXPERIMENTAL: Takes `@var` annotation of non-mixed types and adjusts accordingly the property signature. Requires PHP >= 7.4.', [new VersionSpecificCodeSample('<?php
 class Foo {
@@ -49,10 +49,8 @@ class Foo {
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return \PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
@@ -61,27 +59,19 @@ class Foo {
      *
      * Must run before PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return parent::getPriority();
     }
-    /**
-     * @param string $type
-     * @return bool
-     */
-    protected function isSkippedType($type)
+    protected function isSkippedType(string $type) : bool
     {
         return isset($this->skippedTypes[$type]);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; 0 < $index; --$index) {
             if ($tokens[$index]->isGivenKind([\T_CLASS, \T_TRAIT])) {
@@ -89,12 +79,7 @@ class Foo {
             }
         }
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     */
-    private function fixClass($tokens, $index)
+    private function fixClass(Tokens $tokens, int $index) : void
     {
         $index = $tokens->getNextTokenOfKind($index, ['{']);
         $classEndIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
@@ -129,11 +114,9 @@ class Foo {
         }
     }
     /**
-     * @return mixed[]
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
+     * @return array<string, int>
      */
-    private function findNextUntypedPropertiesDeclaration($tokens, $index)
+    private function findNextUntypedPropertiesDeclaration(Tokens $tokens, int $index) : array
     {
         do {
             $index = $tokens->getNextMeaningfulToken($index);
@@ -153,9 +136,8 @@ class Foo {
     /**
      * @param array<string, int> $propertyIndexes
      * @param Annotation[]       $annotations
-     * @return mixed[]|null
      */
-    private function resolveAppliableType(array $propertyIndexes, array $annotations)
+    private function resolveAppliableType(array $propertyIndexes, array $annotations) : ?array
     {
         $propertyTypes = [];
         foreach ($annotations as $annotation) {

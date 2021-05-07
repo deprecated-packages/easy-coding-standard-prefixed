@@ -22,7 +22,7 @@ class ClassStub extends \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Co
      * @param string   $identifier A PHP identifier, e.g. a class, method, interface, etc. name
      * @param callable $callable   The callable targeted by the identifier when it is ambiguous or not a real PHP identifier
      */
-    public function __construct($identifier, $callable = null)
+    public function __construct(string $identifier, $callable = null)
     {
         $this->value = $identifier;
         try {

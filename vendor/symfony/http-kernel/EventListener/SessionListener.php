@@ -27,18 +27,11 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent;
  */
 class SessionListener extends \ECSPrefix20210507\Symfony\Component\HttpKernel\EventListener\AbstractSessionListener
 {
-    /**
-     * @param \ECSPrefix20210507\Psr\Container\ContainerInterface $container
-     * @param bool $debug
-     */
-    public function __construct($container, $debug = \false)
+    public function __construct(ContainerInterface $container, bool $debug = \false)
     {
         parent::__construct($container, $debug);
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent $event
-     */
-    public function onKernelRequest($event)
+    public function onKernelRequest(RequestEvent $event)
     {
         parent::onKernelRequest($event);
         if (!$event->isMasterRequest() || !$this->container->has('session')) {
@@ -48,10 +41,7 @@ class SessionListener extends \ECSPrefix20210507\Symfony\Component\HttpKernel\Ev
             $storage->setOptions(['cookie_secure' => \true]);
         }
     }
-    /**
-     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\SessionInterface|null
-     */
-    protected function getSession()
+    protected function getSession() : ?SessionInterface
     {
         if (!$this->container->has('session')) {
             return null;

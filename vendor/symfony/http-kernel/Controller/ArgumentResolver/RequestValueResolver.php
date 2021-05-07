@@ -22,21 +22,15 @@ final class RequestValueResolver implements ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
-     * @return bool
      */
-    public function supports($request, $argument)
+    public function supports(Request $request, ArgumentMetadata $argument) : bool
     {
         return Request::class === $argument->getType() || \is_subclass_of($argument->getType(), Request::class);
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
      */
-    public function resolve($request, $argument)
+    public function resolve(Request $request, ArgumentMetadata $argument) : iterable
     {
         (yield $request);
     }

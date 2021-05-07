@@ -23,17 +23,11 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 class ResolveDecoratorStackPass implements \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
     private $tag;
-    /**
-     * @param string $tag
-     */
-    public function __construct($tag = 'container.stack')
+    public function __construct(string $tag = 'container.stack')
     {
         $this->tag = $tag;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         $stacks = [];
         foreach ($container->findTaggedServiceIds($this->tag) as $id => $tags) {
@@ -59,7 +53,7 @@ class ResolveDecoratorStackPass implements \ECSPrefix20210507\Symfony\Component\
                 $resolvedDefinitions[$k] = $v;
             }
             $alias = $container->setAlias($id, $k);
-            if (isset($definition->getChanges()['public']) ? $definition->getChanges()['public'] : \false) {
+            if ($definition->getChanges()['public'] ?? \false) {
                 $alias->setPublic($definition->isPublic());
             }
             if ($definition->isDeprecated()) {
@@ -68,10 +62,7 @@ class ResolveDecoratorStackPass implements \ECSPrefix20210507\Symfony\Component\
         }
         $container->setDefinitions($resolvedDefinitions);
     }
-    /**
-     * @return mixed[]
-     */
-    private function resolveStack(array $stacks, array $path)
+    private function resolveStack(array $stacks, array $path) : array
     {
         $definitions = [];
         $id = \end($path);

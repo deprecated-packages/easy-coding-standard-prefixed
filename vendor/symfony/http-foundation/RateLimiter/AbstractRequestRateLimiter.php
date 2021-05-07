@@ -24,11 +24,7 @@ use ECSPrefix20210507\Symfony\Component\RateLimiter\RateLimit;
  */
 abstract class AbstractRequestRateLimiter implements \ECSPrefix20210507\Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface
 {
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @return \ECSPrefix20210507\Symfony\Component\RateLimiter\RateLimit
-     */
-    public function consume($request)
+    public function consume(Request $request) : RateLimit
     {
         $limiters = $this->getLimiters($request);
         if (0 === \count($limiters)) {
@@ -43,19 +39,14 @@ abstract class AbstractRequestRateLimiter implements \ECSPrefix20210507\Symfony\
         }
         return $minimalRateLimit;
     }
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     */
-    public function reset($request)
+    public function reset(Request $request) : void
     {
         foreach ($this->getLimiters($request) as $limiter) {
             $limiter->reset();
         }
     }
     /**
-     * @return mixed[] a set of limiters using keys extracted from the request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @return LimiterInterface[] a set of limiters using keys extracted from the request
      */
-    protected abstract function getLimiters($request);
+    protected abstract function getLimiters(Request $request) : array;
 }

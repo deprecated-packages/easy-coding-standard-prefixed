@@ -38,10 +38,10 @@ class PhpFilesAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      *
      * @throws CacheException if OPcache is not enabled
      */
-    public function __construct($namespace = '', $defaultLifetime = 0, $directory = null, $appendOnly = \false)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, bool $appendOnly = \false)
     {
         $this->appendOnly = $appendOnly;
-        self::$startTime = isset(self::$startTime) ? self::$startTime : (isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME'] : \time());
+        self::$startTime = self::$startTime ?? $_SERVER['REQUEST_TIME'] ?? \time();
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
         $this->includeHandler = static function ($type, $msg, $file, $line) {
@@ -50,7 +50,7 @@ class PhpFilesAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     public static function isSupported()
     {
-        self::$startTime = isset(self::$startTime) ? self::$startTime : (isset($_SERVER['REQUEST_TIME']) ? $_SERVER['REQUEST_TIME'] : \time());
+        self::$startTime = self::$startTime ?? $_SERVER['REQUEST_TIME'] ?? \time();
         return \function_exists('opcache_invalidate') && \filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOLEAN) && (!\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) || \filter_var(\ini_get('opcache.enable_cli'), \FILTER_VALIDATE_BOOLEAN));
     }
     /**
@@ -97,7 +97,7 @@ class PhpFilesAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
         begin:
         $getExpiry = \false;
         foreach ($ids as $id) {
-            if (null === ($value = isset($this->values[$id]) ? $this->values[$id] : null)) {
+            if (null === ($value = $this->values[$id] ?? null)) {
                 $missingIds[] = $id;
             } elseif ('N;' === $value) {
                 $values[$id] = null;
@@ -121,14 +121,14 @@ class PhpFilesAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
             $getExpiry = \true;
             foreach ($missingIds as $k => $id) {
                 try {
-                    $file = isset($this->files[$id]) ? $this->files[$id] : ($this->files[$id] = $this->getFile($id));
+                    $file = $this->files[$id] ?? ($this->files[$id] = $this->getFile($id));
                     if (isset(self::$valuesCache[$file])) {
-                        list($expiresAt, $this->values[$id]) = self::$valuesCache[$file];
+                        [$expiresAt, $this->values[$id]] = self::$valuesCache[$file];
                     } elseif (\is_array($expiresAt = (include $file))) {
                         if ($this->appendOnly) {
                             self::$valuesCache[$file] = $expiresAt;
                         }
-                        list($expiresAt, $this->values[$id]) = $expiresAt;
+                        [$expiresAt, $this->values[$id]] = $expiresAt;
                     } elseif ($now < $expiresAt) {
                         $this->values[$id] = new \ECSPrefix20210507\Symfony\Component\Cache\Adapter\LazyValue($file);
                     }
@@ -148,24 +148,23 @@ class PhpFilesAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     /**
      * {@inheritdoc}
-     * @param string $id
      */
-    protected function doHave($id)
+    protected function doHave(string $id)
     {
         if ($this->appendOnly && isset($this->values[$id])) {
             return \true;
         }
         \set_error_handler($this->includeHandler);
         try {
-            $file = isset($this->files[$id]) ? $this->files[$id] : ($this->files[$id] = $this->getFile($id));
+            $file = $this->files[$id] ?? ($this->files[$id] = $this->getFile($id));
             $getExpiry = \true;
             if (isset(self::$valuesCache[$file])) {
-                list($expiresAt, $value) = self::$valuesCache[$file];
+                [$expiresAt, $value] = self::$valuesCache[$file];
             } elseif (\is_array($expiresAt = (include $file))) {
                 if ($this->appendOnly) {
                     self::$valuesCache[$file] = $expiresAt;
                 }
-                list($expiresAt, $value) = $expiresAt;
+                [$expiresAt, $value] = $expiresAt;
             } elseif ($this->appendOnly) {
                 $value = new \ECSPrefix20210507\Symfony\Component\Cache\Adapter\LazyValue($file);
             }
@@ -184,9 +183,8 @@ class PhpFilesAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     /**
      * {@inheritdoc}
-     * @param int $lifetime
      */
-    protected function doSave(array $values, $lifetime)
+    protected function doSave(array $values, int $lifetime)
     {
         $ok = \true;
         $expiry = $lifetime ? \time() + $lifetime : 'PHP_INT_MAX';
@@ -239,9 +237,8 @@ class PhpFilesAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     /**
      * {@inheritdoc}
-     * @param string $namespace
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $this->values = [];
         return $this->doCommonClear($namespace);
@@ -264,11 +261,7 @@ class PhpFilesAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter
         }
         return @\unlink($file);
     }
-    /**
-     * @param string $file
-     * @return string
-     */
-    private function getFileKey($file)
+    private function getFileKey(string $file) : string
     {
         if (!($h = @\fopen($file, 'r'))) {
             return '';

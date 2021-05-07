@@ -16,25 +16,25 @@ use function substr;
  */
 final class DocLexer extends AbstractLexer
 {
-    const T_NONE = 1;
-    const T_INTEGER = 2;
-    const T_STRING = 3;
-    const T_FLOAT = 4;
+    public const T_NONE = 1;
+    public const T_INTEGER = 2;
+    public const T_STRING = 3;
+    public const T_FLOAT = 4;
     // All tokens that are also identifiers should be >= 100
-    const T_IDENTIFIER = 100;
-    const T_AT = 101;
-    const T_CLOSE_CURLY_BRACES = 102;
-    const T_CLOSE_PARENTHESIS = 103;
-    const T_COMMA = 104;
-    const T_EQUALS = 105;
-    const T_FALSE = 106;
-    const T_NAMESPACE_SEPARATOR = 107;
-    const T_OPEN_CURLY_BRACES = 108;
-    const T_OPEN_PARENTHESIS = 109;
-    const T_TRUE = 110;
-    const T_NULL = 111;
-    const T_COLON = 112;
-    const T_MINUS = 113;
+    public const T_IDENTIFIER = 100;
+    public const T_AT = 101;
+    public const T_CLOSE_CURLY_BRACES = 102;
+    public const T_CLOSE_PARENTHESIS = 103;
+    public const T_COMMA = 104;
+    public const T_EQUALS = 105;
+    public const T_FALSE = 106;
+    public const T_NAMESPACE_SEPARATOR = 107;
+    public const T_OPEN_CURLY_BRACES = 108;
+    public const T_OPEN_PARENTHESIS = 109;
+    public const T_TRUE = 110;
+    public const T_NULL = 111;
+    public const T_COLON = 112;
+    public const T_MINUS = 113;
     /** @var array<string, int> */
     protected $noCase = ['@' => self::T_AT, ',' => self::T_COMMA, '(' => self::T_OPEN_PARENTHESIS, ')' => self::T_CLOSE_PARENTHESIS, '{' => self::T_OPEN_CURLY_BRACES, '}' => self::T_CLOSE_CURLY_BRACES, '=' => self::T_EQUALS, ':' => self::T_COLON, '-' => self::T_MINUS, '\\' => self::T_NAMESPACE_SEPARATOR];
     /** @var array<string, int> */
@@ -42,9 +42,8 @@ final class DocLexer extends AbstractLexer
     /**
      * Whether the next token starts immediately, or if there were
      * non-captured symbols before that
-     * @return bool
      */
-    public function nextTokenIsAdjacent()
+    public function nextTokenIsAdjacent() : bool
     {
         return $this->token === null || $this->lookahead !== null && $this->lookahead['position'] - $this->token['position'] === strlen($this->token['value']);
     }

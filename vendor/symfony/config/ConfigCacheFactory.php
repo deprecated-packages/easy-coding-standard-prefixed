@@ -25,15 +25,14 @@ class ConfigCacheFactory implements \ECSPrefix20210507\Symfony\Component\Config\
     /**
      * @param bool $debug The debug flag to pass to ConfigCache
      */
-    public function __construct($debug)
+    public function __construct(bool $debug)
     {
         $this->debug = $debug;
     }
     /**
      * {@inheritdoc}
-     * @param string $file
      */
-    public function cache($file, callable $callback)
+    public function cache(string $file, callable $callback)
     {
         $cache = new \ECSPrefix20210507\Symfony\Component\Config\ConfigCache($file, $this->debug);
         if (!$cache->isFresh()) {

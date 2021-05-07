@@ -18,7 +18,7 @@ namespace ECSPrefix20210507\Symfony\Component\DependencyInjection;
 interface EnvVarLoaderInterface
 {
     /**
-     * @return mixed[] Key/value pairs that can be accessed using the regular "%env()%" syntax
+     * @return string[] Key/value pairs that can be accessed using the regular "%env()%" syntax
      */
-    public function loadEnvVars();
+    public function loadEnvVars() : array;
 }

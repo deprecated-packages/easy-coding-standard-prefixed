@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Normalizer;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -16,26 +17,21 @@ final class PathNormalizer
      * @see https://regex101.com/r/d4F5Fm/1
      * @var string
      */
-    const SCHEME_PATH_REGEX = '#^([a-z]+)\\:\\/\\/(.+)#';
+    private const SCHEME_PATH_REGEX = '#^([a-z]+)\\:\\/\\/(.+)#';
     /**
      * @see https://regex101.com/r/no28vw/1
      * @var string
      */
-    const TWO_AND_MORE_SLASHES_REGEX = '#/{2,}#';
+    private const TWO_AND_MORE_SLASHES_REGEX = '#/{2,}#';
     /**
      * @var string
      */
-    const SCHEME_UNDEFINED = 'undefined';
-    /**
-     * @param string $originalPath
-     * @param string $directorySeparator
-     * @return string
-     */
-    public function normalizePath($originalPath, $directorySeparator = \DIRECTORY_SEPARATOR)
+    private const SCHEME_UNDEFINED = 'undefined';
+    public function normalizePath(string $originalPath, string $directorySeparator = \DIRECTORY_SEPARATOR) : string
     {
         $matches = Strings::match($originalPath, self::SCHEME_PATH_REGEX);
         if ($matches !== null) {
-            list(, $scheme, $path) = $matches;
+            [, $scheme, $path] = $matches;
         } else {
             $scheme = self::SCHEME_UNDEFINED;
             $path = $originalPath;
@@ -50,10 +46,9 @@ final class PathNormalizer
     }
     /**
      * @param string[] $pathParts
-     * @return mixed[]
-     * @param string $scheme
+     * @return string[]
      */
-    private function normalizePathParts(array $pathParts, $scheme)
+    private function normalizePathParts(array $pathParts, string $scheme) : array
     {
         $normalizedPathParts = [];
         foreach ($pathParts as $pathPart) {

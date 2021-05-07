@@ -38,7 +38,7 @@ class EndFileNoNewlineSniff implements Sniff
      *
      * @return int
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         // Skip to the end of the file.
         $tokens = $phpcsFile->getTokens();

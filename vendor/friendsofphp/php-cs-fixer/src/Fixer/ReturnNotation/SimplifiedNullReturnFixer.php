@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,9 +27,8 @@ final class SimplifiedNullReturnFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('A return statement wishing to return `void` should not return `null`.', [new CodeSample("<?php return null;\n"), new VersionSpecificCodeSample(<<<'EOT'
 <?php
@@ -59,28 +59,22 @@ EOT
      * {@inheritdoc}
      *
      * Must run before NoUselessReturnFixer, VoidReturnFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 16;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_RETURN);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_RETURN)) {
@@ -93,11 +87,8 @@ EOT
     }
     /**
      * Clear the return statement located at a given index.
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
      */
-    private function clear($tokens, $index)
+    private function clear(Tokens $tokens, int $index) : void
     {
         while (!$tokens[++$index]->equals(';')) {
             if ($this->shouldClearToken($tokens, $index)) {
@@ -107,11 +98,8 @@ EOT
     }
     /**
      * Does the return statement located at a given index need fixing?
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @return bool
      */
-    private function needFixing($tokens, $index)
+    private function needFixing(Tokens $tokens, int $index) : bool
     {
         if ($this->isStrictOrNullableReturnTypeFunction($tokens, $index)) {
             return \false;
@@ -129,10 +117,8 @@ EOT
      * Is the return within a function with a non-void or nullable return type?
      *
      * @param int $returnIndex Current return token index
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    private function isStrictOrNullableReturnTypeFunction($tokens, $returnIndex)
+    private function isStrictOrNullableReturnTypeFunction(Tokens $tokens, int $returnIndex) : bool
     {
         $functionIndex = $returnIndex;
         do {
@@ -154,11 +140,8 @@ EOT
      *
      * If the token is a comment, or is whitespace that is immediately before a
      * comment, then we'll leave it alone.
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @return bool
      */
-    private function shouldClearToken($tokens, $index)
+    private function shouldClearToken(Tokens $tokens, int $index) : bool
     {
         $token = $tokens[$index];
         return !$token->isComment() && !($token->isWhitespace() && $tokens[$index + 1]->isComment());

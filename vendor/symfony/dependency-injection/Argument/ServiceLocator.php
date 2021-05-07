@@ -21,10 +21,7 @@ class ServiceLocator extends BaseServiceLocator
     private $factory;
     private $serviceMap;
     private $serviceTypes;
-    /**
-     * @param \Closure $factory
-     */
-    public function __construct($factory, array $serviceMap, array $serviceTypes = null)
+    public function __construct(\Closure $factory, array $serviceMap, array $serviceTypes = null)
     {
         $this->factory = $factory;
         $this->serviceMap = $serviceMap;
@@ -42,11 +39,10 @@ class ServiceLocator extends BaseServiceLocator
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    public function getProvidedServices()
+    public function getProvidedServices() : array
     {
-        return isset($this->serviceTypes) ? $this->serviceTypes : ($this->serviceTypes = \array_map(function () {
+        return $this->serviceTypes ?? ($this->serviceTypes = \array_map(function () {
             return '?';
         }, $this->serviceMap));
     }

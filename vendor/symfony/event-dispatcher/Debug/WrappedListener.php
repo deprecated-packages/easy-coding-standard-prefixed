@@ -30,12 +30,7 @@ final class WrappedListener
     private $stub;
     private $priority;
     private static $hasClassStub;
-    /**
-     * @param string|null $name
-     * @param \ECSPrefix20210507\Symfony\Component\Stopwatch\Stopwatch $stopwatch
-     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
-     */
-    public function __construct($listener, $name, $stopwatch, $dispatcher = null)
+    public function __construct($listener, ?string $name, Stopwatch $stopwatch, EventDispatcherInterface $dispatcher = null)
     {
         $this->listener = $listener;
         $this->optimizedListener = $listener instanceof \Closure ? $listener : (\is_callable($listener) ? \Closure::fromCallable($listener) : null);
@@ -73,51 +68,32 @@ final class WrappedListener
     {
         return $this->listener;
     }
-    /**
-     * @return bool
-     */
-    public function wasCalled()
+    public function wasCalled() : bool
     {
         return $this->called;
     }
-    /**
-     * @return bool
-     */
-    public function stoppedPropagation()
+    public function stoppedPropagation() : bool
     {
         return $this->stoppedPropagation;
     }
-    /**
-     * @return string
-     */
-    public function getPretty()
+    public function getPretty() : string
     {
         return $this->pretty;
     }
-    /**
-     * @param string $eventName
-     * @return mixed[]
-     */
-    public function getInfo($eventName)
+    public function getInfo(string $eventName) : array
     {
         if (null === $this->stub) {
             $this->stub = self::$hasClassStub ? new ClassStub($this->pretty . '()', $this->listener) : $this->pretty . '()';
         }
         return ['event' => $eventName, 'priority' => null !== $this->priority ? $this->priority : (null !== $this->dispatcher ? $this->dispatcher->getListenerPriority($eventName, $this->listener) : null), 'pretty' => $this->pretty, 'stub' => $this->stub];
     }
-    /**
-     * @param object $event
-     * @return void
-     * @param string $eventName
-     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
-     */
-    public function __invoke($event, $eventName, $dispatcher)
+    public function __invoke(object $event, string $eventName, EventDispatcherInterface $dispatcher) : void
     {
         $dispatcher = $this->dispatcher ?: $dispatcher;
         $this->called = \true;
         $this->priority = $dispatcher->getListenerPriority($eventName, $this->listener);
         $e = $this->stopwatch->start($this->name, 'event_listener');
-        (isset($this->optimizedListener) ? $this->optimizedListener : $this->listener)($event, $eventName, $dispatcher);
+        ($this->optimizedListener ?? $this->listener)($event, $eventName, $dispatcher);
         if ($e->isStarted()) {
             $e->stop();
         }

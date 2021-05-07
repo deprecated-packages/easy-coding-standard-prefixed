@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\DocBlock;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -15,23 +16,16 @@ final class Decommenter
      * @see https://regex101.com/r/MbNMeH/1
      * @var string
      */
-    const LINE_BREAKER_REGEX = '#[\\-=\\#\\*]{2,}#';
+    private const LINE_BREAKER_REGEX = '#[\\-=\\#\\*]{2,}#';
     /**
      * @var CommentedLineTrimmer
      */
     private $commentedLineTrimmer;
-    /**
-     * @param \Symplify\CodingStandard\Tokens\CommentedLineTrimmer $commentedLineTrimmer
-     */
-    public function __construct($commentedLineTrimmer)
+    public function __construct(CommentedLineTrimmer $commentedLineTrimmer)
     {
         $this->commentedLineTrimmer = $commentedLineTrimmer;
     }
-    /**
-     * @param string $content
-     * @return string
-     */
-    public function decoment($content)
+    public function decoment(string $content) : string
     {
         $lines = \explode(\PHP_EOL, $content);
         foreach ($lines as $key => $line) {
@@ -43,10 +37,8 @@ final class Decommenter
     }
     /**
      * Quite a few comments use multiple dashes, equals signs etc to frame comments and licence headers.
-     * @param string $content
-     * @return string
      */
-    private function clearContent($content)
+    private function clearContent(string $content) : string
     {
         return Strings::replace($content, self::LINE_BREAKER_REGEX, '-');
     }

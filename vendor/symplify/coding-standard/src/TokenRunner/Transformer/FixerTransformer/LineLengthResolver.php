@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -10,11 +11,9 @@ use Symplify\PackageBuilder\Configuration\StaticEolConfiguration;
 final class LineLengthResolver
 {
     /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
-     * @return int
+     * @param Tokens|Token[] $tokens
      */
-    public function getLengthFromStartEnd($tokens, $blockInfo)
+    public function getLengthFromStartEnd(Tokens $tokens, BlockInfo $blockInfo) : int
     {
         $lineLength = 0;
         // compute from function to start of line
@@ -35,11 +34,9 @@ final class LineLengthResolver
         return $lineLength;
     }
     /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $position
-     * @return bool
+     * @param Tokens|Token[] $tokens
      */
-    private function isNewLineOrOpenTag($tokens, $position)
+    private function isNewLineOrOpenTag(Tokens $tokens, int $position) : bool
     {
         /** @var Token $currentToken */
         $currentToken = $tokens[$position];
@@ -49,11 +46,9 @@ final class LineLengthResolver
         return $currentToken->isGivenKind(\T_OPEN_TAG);
     }
     /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
-     * @return int
+     * @param Tokens|Token[] $tokens
      */
-    private function getLengthFromFunctionStartToEndOfArguments($blockInfo, $tokens)
+    private function getLengthFromFunctionStartToEndOfArguments(BlockInfo $blockInfo, Tokens $tokens) : int
     {
         $length = 0;
         $start = $blockInfo->getStart();
@@ -74,11 +69,9 @@ final class LineLengthResolver
         return $length;
     }
     /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
-     * @return int
+     * @param Tokens|Token[] $tokens
      */
-    private function getLengthFromEndOfArgumentToLineBreak($blockInfo, $tokens)
+    private function getLengthFromEndOfArgumentToLineBreak(BlockInfo $blockInfo, Tokens $tokens) : int
     {
         $length = 0;
         $end = $blockInfo->getEnd();

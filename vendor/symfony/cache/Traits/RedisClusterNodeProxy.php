@@ -33,10 +33,7 @@ class RedisClusterNodeProxy
         $this->host = $host;
         $this->redis = $redis;
     }
-    /**
-     * @param string $method
-     */
-    public function __call($method, array $args)
+    public function __call(string $method, array $args)
     {
         return $this->redis->{$method}($this->host, ...$args);
     }

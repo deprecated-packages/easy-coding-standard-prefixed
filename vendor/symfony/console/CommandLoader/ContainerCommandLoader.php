@@ -23,18 +23,16 @@ class ContainerCommandLoader implements \ECSPrefix20210507\Symfony\Component\Con
     private $commandMap;
     /**
      * @param array $commandMap An array with command names as keys and service ids as values
-     * @param \ECSPrefix20210507\Psr\Container\ContainerInterface $container
      */
-    public function __construct($container, array $commandMap)
+    public function __construct(ContainerInterface $container, array $commandMap)
     {
         $this->container = $container;
         $this->commandMap = $commandMap;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function get($name)
+    public function get(string $name)
     {
         if (!$this->has($name)) {
             throw new CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
@@ -43,9 +41,8 @@ class ContainerCommandLoader implements \ECSPrefix20210507\Symfony\Component\Con
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function has($name)
+    public function has(string $name)
     {
         return isset($this->commandMap[$name]) && $this->container->has($this->commandMap[$name]);
     }

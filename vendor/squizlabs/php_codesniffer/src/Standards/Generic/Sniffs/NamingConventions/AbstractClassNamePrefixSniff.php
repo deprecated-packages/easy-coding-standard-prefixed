@@ -31,7 +31,7 @@ class AbstractClassNamePrefixSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         if ($phpcsFile->getClassProperties($stackPtr)['is_abstract'] === \false) {
             // This class is not abstract so we don't need to check it.

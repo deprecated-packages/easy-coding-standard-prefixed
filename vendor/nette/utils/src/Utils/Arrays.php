@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Nette Framework (https://nette.org)
+ * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ */
+declare (strict_types=1);
 namespace ECSPrefix20210507\Nette\Utils;
 
 use ECSPrefix20210507\Nette;
@@ -52,9 +57,8 @@ class Arrays
      * Recursively merges two fields. It is useful, for example, for merging tree structures. It behaves as
      * the + operator for array, ie. it adds a key/value pair from the second array to the first one and retains
      * the value from the first array in the case of a key collision.
-     * @return mixed[]
      */
-    public static function mergeTree(array $array1, array $array2)
+    public static function mergeTree(array $array1, array $array2) : array
     {
         $res = $array1 + $array2;
         foreach (\array_intersect_key($array1, $array2) as $k => $v) {
@@ -69,24 +73,22 @@ class Arrays
      * @param  string|int  $key
      * @return int|null offset if it is found, null otherwise
      */
-    public static function getKeyOffset(array $array, $key)
+    public static function getKeyOffset(array $array, $key) : ?int
     {
         return \ECSPrefix20210507\Nette\Utils\Helpers::falseToNull(\array_search(self::toKey($key), \array_keys($array), \true));
     }
     /**
      * @deprecated  use  getKeyOffset()
-     * @return int|null
      */
-    public static function searchKey(array $array, $key)
+    public static function searchKey(array $array, $key) : ?int
     {
         return self::getKeyOffset($array, $key);
     }
     /**
      * Tests an array for the presence of value.
      * @param  mixed  $value
-     * @return bool
      */
-    public static function contains(array $array, $value)
+    public static function contains(array $array, $value) : bool
     {
         return \in_array($value, $array, \true);
     }
@@ -110,9 +112,8 @@ class Arrays
      * Inserts the contents of the $inserted array into the $array immediately after the $key.
      * If $key is null (or does not exist), it is inserted at the beginning.
      * @param  string|int|null  $key
-     * @return void
      */
-    public static function insertBefore(array &$array, $key, array $inserted)
+    public static function insertBefore(array &$array, $key, array $inserted) : void
     {
         $offset = $key === null ? 0 : (int) self::getKeyOffset($array, $key);
         $array = \array_slice($array, 0, $offset, \true) + $inserted + \array_slice($array, $offset, count($array), \true);
@@ -121,9 +122,8 @@ class Arrays
      * Inserts the contents of the $inserted array into the $array before the $key.
      * If $key is null (or does not exist), it is inserted at the end.
      * @param  string|int|null  $key
-     * @return void
      */
-    public static function insertAfter(array &$array, $key, array $inserted)
+    public static function insertAfter(array &$array, $key, array $inserted) : void
     {
         if ($key === null || ($offset = self::getKeyOffset($array, $key)) === null) {
             $offset = count($array) - 1;
@@ -134,9 +134,8 @@ class Arrays
      * Renames key in array.
      * @param  string|int  $oldKey
      * @param  string|int  $newKey
-     * @return bool
      */
-    public static function renameKey(array &$array, $oldKey, $newKey)
+    public static function renameKey(array &$array, $oldKey, $newKey) : bool
     {
         $offset = self::getKeyOffset($array, $oldKey);
         if ($offset === null) {
@@ -152,25 +151,20 @@ class Arrays
     /**
      * Returns only those array items, which matches a regular expression $pattern.
      * @throws Nette\RegexpException  on compilation or runtime error
-     * @param string $pattern
-     * @param int $flags
-     * @return mixed[]
      */
-    public static function grep(array $array, $pattern, $flags = 0)
+    public static function grep(array $array, string $pattern, int $flags = 0) : array
     {
         return \ECSPrefix20210507\Nette\Utils\Strings::pcre('preg_grep', [$pattern, $array, $flags]);
     }
     /**
      * Transforms multidimensional array to flat array.
-     * @param bool $preserveKeys
-     * @return mixed[]
      */
-    public static function flatten(array $array, $preserveKeys = \false)
+    public static function flatten(array $array, bool $preserveKeys = \false) : array
     {
         $res = [];
-        $cb = $preserveKeys ? function ($v, $k) use(&$res) {
+        $cb = $preserveKeys ? function ($v, $k) use(&$res) : void {
             $res[$k] = $v;
-        } : function ($v) use(&$res) {
+        } : function ($v) use(&$res) : void {
             $res[] = $v;
         };
         \array_walk_recursive($array, $cb);
@@ -179,9 +173,8 @@ class Arrays
     /**
      * Checks if the array is indexed in ascending order of numeric keys from zero, a.k.a list.
      * @param  mixed  $value
-     * @return bool
      */
-    public static function isList($value)
+    public static function isList($value) : bool
     {
         return is_array($value) && (!$value || \array_keys($value) === \range(0, count($value) - 1));
     }
@@ -231,9 +224,8 @@ class Arrays
     /**
      * Normalizes array to associative array. Replace numeric keys with their values, the new value will be $filling.
      * @param  mixed  $filling
-     * @return mixed[]
      */
-    public static function normalize(array $array, $filling = null)
+    public static function normalize(array $array, $filling = null) : array
     {
         $res = [];
         foreach ($array as $k => $v) {
@@ -264,10 +256,8 @@ class Arrays
     /**
      * Tests whether at least one element in the array passes the test implemented by the
      * provided callback with signature `function ($value, $key, array $array): bool`.
-     * @param mixed[] $array
-     * @return bool
      */
-    public static function some($array, callable $callback)
+    public static function some(iterable $array, callable $callback) : bool
     {
         foreach ($array as $k => $v) {
             if ($callback($v, $k, $array)) {
@@ -279,10 +269,8 @@ class Arrays
     /**
      * Tests whether all elements in the array pass the test implemented by the provided function,
      * which has the signature `function ($value, $key, array $array): bool`.
-     * @param mixed[] $array
-     * @return bool
      */
-    public static function every($array, callable $callback)
+    public static function every(iterable $array, callable $callback) : bool
     {
         foreach ($array as $k => $v) {
             if (!$callback($v, $k, $array)) {
@@ -294,10 +282,8 @@ class Arrays
     /**
      * Calls $callback on all elements in the array and returns the array of return values.
      * The callback has the signature `function ($value, $key, array $array): bool`.
-     * @param mixed[] $array
-     * @return mixed[]
      */
-    public static function map($array, callable $callback)
+    public static function map(iterable $array, callable $callback) : array
     {
         $res = [];
         foreach ($array as $k => $v) {
@@ -308,9 +294,8 @@ class Arrays
     /**
      * Invokes all callbacks and returns array of results.
      * @param  callable[]  $callbacks
-     * @return mixed[]
      */
-    public static function invoke($callbacks, ...$args)
+    public static function invoke(iterable $callbacks, ...$args) : array
     {
         $res = [];
         foreach ($callbacks as $k => $cb) {
@@ -321,10 +306,8 @@ class Arrays
     /**
      * Invokes method on every object in an array and returns array of results.
      * @param  object[]  $objects
-     * @param string $method
-     * @return mixed[]
      */
-    public static function invokeMethod($objects, $method, ...$args)
+    public static function invokeMethod(iterable $objects, string $method, ...$args) : array
     {
         $res = [];
         foreach ($objects as $k => $obj) {
@@ -336,9 +319,8 @@ class Arrays
      * Copies the elements of the $array array to the $object object and then returns it.
      * @param  object  $object
      * @return object
-     * @param mixed[] $array
      */
-    public static function toObject($array, $object)
+    public static function toObject(iterable $array, $object)
     {
         foreach ($array as $k => $v) {
             $object->{$k} = $v;
@@ -357,11 +339,9 @@ class Arrays
     /**
      * Returns copy of the $array where every item is converted to string
      * and prefixed by $prefix and suffixed by $suffix.
-     * @return mixed[]
-     * @param string $prefix
-     * @param string $suffix
+     * @return string[]
      */
-    public static function wrap(array $array, $prefix = '', $suffix = '')
+    public static function wrap(array $array, string $prefix = '', string $suffix = '') : array
     {
         $res = [];
         foreach ($array as $k => $v) {

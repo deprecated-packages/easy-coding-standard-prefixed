@@ -30,10 +30,8 @@ class NullAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter\
     }
     /**
      * {@inheritdoc}
-     * @param string $key
-     * @param float $beta
      */
-    public function get($key, callable $callback, $beta = null, array &$metadata = null)
+    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
     {
         $save = \true;
         return $callback(($this->createCacheItem)($key), $save);
@@ -66,9 +64,8 @@ class NullAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter\
      * {@inheritdoc}
      *
      * @return bool
-     * @param string $prefix
      */
-    public function clear($prefix = '')
+    public function clear(string $prefix = '')
     {
         return \true;
     }
@@ -94,9 +91,8 @@ class NullAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter\
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function save($item)
+    public function save(CacheItemInterface $item)
     {
         return \true;
     }
@@ -104,9 +100,8 @@ class NullAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter\
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred($item)
+    public function saveDeferred(CacheItemInterface $item)
     {
         return \true;
     }
@@ -121,10 +116,8 @@ class NullAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter\
     }
     /**
      * {@inheritdoc}
-     * @param string $key
-     * @return bool
      */
-    public function delete($key)
+    public function delete(string $key) : bool
     {
         return $this->deleteItem($key);
     }

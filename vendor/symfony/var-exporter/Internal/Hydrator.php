@@ -11,12 +11,6 @@
 namespace ECSPrefix20210507\Symfony\Component\VarExporter\Internal;
 
 use ECSPrefix20210507\Symfony\Component\VarExporter\Exception\ClassNotFoundException;
-class AnonymousFor_Hydrator extends \ErrorException
-{
-}
-class AnonymousFor_Hydrator extends \Error
-{
-}
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  *
@@ -30,11 +24,7 @@ class Hydrator
     public $properties;
     public $value;
     public $wakeups;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry|null $registry
-     * @param \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Values|null $values
-     */
-    public function __construct($registry, $values, array $properties, $value, array $wakeups)
+    public function __construct(?\ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry $registry, ?\ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Values $values, array $properties, $value, array $wakeups)
     {
         $this->registry = $registry;
         $this->values = $values;
@@ -45,11 +35,11 @@ class Hydrator
     public static function hydrate($objects, $values, $properties, $value, $wakeups)
     {
         foreach ($properties as $class => $vars) {
-            (isset(self::$hydrators[$class]) ? self::$hydrators[$class] : self::getHydrator($class))($vars, $objects);
+            (self::$hydrators[$class] ?? self::getHydrator($class))($vars, $objects);
         }
         foreach ($wakeups as $k => $v) {
             if (\is_array($v)) {
-                $objects[strlen($objects) - $k]->__unserialize($v);
+                $objects[-$k]->__unserialize($v);
             } else {
                 $objects[$v]->__wakeup();
             }
@@ -72,10 +62,10 @@ class Hydrator
         }
         $classReflector = new \ReflectionClass($class);
         if (!$classReflector->isInternal()) {
-            return self::$hydrators[$class] = (isset(self::$hydrators['stdClass']) ? self::$hydrators['stdClass'] : self::getHydrator('stdClass'))->bindTo(null, $class);
+            return self::$hydrators[$class] = (self::$hydrators['stdClass'] ?? self::getHydrator('stdClass'))->bindTo(null, $class);
         }
         if ($classReflector->name !== $class) {
-            return isset(self::$hydrators[$classReflector->name]) ? self::$hydrators[$classReflector->name] : self::getHydrator($classReflector->name);
+            return self::$hydrators[$classReflector->name] ?? self::getHydrator($classReflector->name);
         }
         switch ($class) {
             case 'ArrayIterator':
@@ -89,14 +79,18 @@ class Hydrator
                             }
                         }
                     }
-                    foreach (isset($properties["\0"]) ? $properties["\0"] : [] as $i => $v) {
+                    foreach ($properties["\0"] ?? [] as $i => $v) {
                         $constructor($objects[$i], $v);
                     }
                 };
             case 'ErrorException':
-                return self::$hydrators[$class] = (isset(self::$hydrators['stdClass']) ? self::$hydrators['stdClass'] : self::getHydrator('stdClass'))->bindTo(null, new AnonymousFor_Hydrator());
+                return self::$hydrators[$class] = (self::$hydrators['stdClass'] ?? self::getHydrator('stdClass'))->bindTo(null, new class extends \ErrorException
+                {
+                });
             case 'TypeError':
-                return self::$hydrators[$class] = (isset(self::$hydrators['stdClass']) ? self::$hydrators['stdClass'] : self::getHydrator('stdClass'))->bindTo(null, new AnonymousFor_Hydrator());
+                return self::$hydrators[$class] = (self::$hydrators['stdClass'] ?? self::getHydrator('stdClass'))->bindTo(null, new class extends \Error
+                {
+                });
             case 'SplObjectStorage':
                 return self::$hydrators[$class] = static function ($properties, $objects) {
                     foreach ($properties as $name => $values) {
@@ -122,11 +116,11 @@ class Hydrator
             }
         }
         if (!$propertySetters) {
-            return self::$hydrators[$class] = isset(self::$hydrators['stdClass']) ? self::$hydrators['stdClass'] : self::getHydrator('stdClass');
+            return self::$hydrators[$class] = self::$hydrators['stdClass'] ?? self::getHydrator('stdClass');
         }
         return self::$hydrators[$class] = static function ($properties, $objects) use($propertySetters) {
             foreach ($properties as $name => $values) {
-                if ($setValue = isset($propertySetters[$name]) ? $propertySetters[$name] : null) {
+                if ($setValue = $propertySetters[$name] ?? null) {
                     foreach ($values as $i => $v) {
                         $setValue($objects[$i], $v);
                     }

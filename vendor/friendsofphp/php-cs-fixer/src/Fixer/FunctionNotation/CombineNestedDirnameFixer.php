@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,26 +27,22 @@ final class CombineNestedDirnameFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Replace multiple nested calls of `dirname` by only one call with second `$level` parameter. Requires PHP >= 7.0.', [new VersionSpecificCodeSample("<?php\ndirname(dirname(dirname(\$path)));\n", new VersionSpecification(70000))], null, 'Risky when the function `dirname` is overridden.');
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return \PHP_VERSION_ID >= 70000 && $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
@@ -54,19 +51,15 @@ final class CombineNestedDirnameFixer extends AbstractFixer
      *
      * Must run before MethodArgumentSpaceFixer, NoSpacesInsideParenthesisFixer.
      * Must run after DirConstantFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 35;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; 0 <= $index; --$index) {
             $dirnameInfo = $this->getDirnameInfo($tokens, $index);
@@ -100,9 +93,8 @@ final class CombineNestedDirnameFixer extends AbstractFixer
      * @param null|int $firstArgumentEndIndex Index of last token of first argument of `dirname` call
      *
      * @return array|bool `false` when it is not a (supported) `dirname` call, an array with info about the dirname call otherwise
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function getDirnameInfo($tokens, $index, $firstArgumentEndIndex = null)
+    private function getDirnameInfo(Tokens $tokens, int $index, ?int $firstArgumentEndIndex = null)
     {
         if (!$tokens[$index]->equals([\T_STRING, 'dirname'], \false)) {
             return \false;
@@ -161,11 +153,7 @@ final class CombineNestedDirnameFixer extends AbstractFixer
         $info['end'] = $next;
         return $info;
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     */
-    private function combineDirnames($tokens, array $dirnameInfoArray)
+    private function combineDirnames(Tokens $tokens, array $dirnameInfoArray) : void
     {
         $outerDirnameInfo = \array_pop($dirnameInfoArray);
         $levels = $outerDirnameInfo['levels'];

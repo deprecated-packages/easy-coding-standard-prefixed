@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Sorter;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -14,38 +15,28 @@ final class ComposerPackageSorter
      * @see https://regex101.com/r/tMrjMY/1
      * @var string
      */
-    const PLATFORM_PACKAGE_REGEX = '#^(?:php(?:-64bit|-ipv6|-zts|-debug)?|hhvm|(?:ext|lib)-[a-z0-9](?:[_.-]?[a-z0-9]+)*|composer-(?:plugin|runtime)-api)$#iD';
+    private const PLATFORM_PACKAGE_REGEX = '#^(?:php(?:-64bit|-ipv6|-zts|-debug)?|hhvm|(?:ext|lib)-[a-z0-9](?:[_.-]?[a-z0-9]+)*|composer-(?:plugin|runtime)-api)$#iD';
     /**
      * @see https://regex101.com/r/SXZcfb/1
      * @var string
      */
-    const REQUIREMENT_TYPE_REGEX = '#^(?<name>php|hhvm|ext|lib|\\D)#';
+    private const REQUIREMENT_TYPE_REGEX = '#^(?<name>php|hhvm|ext|lib|\\D)#';
     /**
      * Sorts packages by importance (platform packages first, then PHP dependencies) and alphabetically.
      *
      * @link https://getcomposer.org/doc/02-libraries.md#platform-packages
      *
      * @param array<string, string> $packages
-     * @return mixed[]
+     * @return array<string, string>
      */
-    public function sortPackages(array $packages = [])
+    public function sortPackages(array $packages = []) : array
     {
         \uksort($packages, function (string $firstPackageName, string $secondPackageName) : int {
-            $battleShipcompare = function ($left, $right) {
-                if ($left === $right) {
-                    return 0;
-                }
-                return $left < $right ? -1 : 1;
-            };
-            return $battleShipcompare($this->createNameWithPriority($firstPackageName), $this->createNameWithPriority($secondPackageName));
+            return $this->createNameWithPriority($firstPackageName) <=> $this->createNameWithPriority($secondPackageName);
         });
         return $packages;
     }
-    /**
-     * @param string $requirementName
-     * @return string
-     */
-    private function createNameWithPriority($requirementName)
+    private function createNameWithPriority(string $requirementName) : string
     {
         if ($this->isPlatformPackage($requirementName)) {
             return Strings::replace($requirementName, self::REQUIREMENT_TYPE_REGEX, function (array $match) : string {
@@ -67,11 +58,7 @@ final class ComposerPackageSorter
         }
         return '4-' . $requirementName;
     }
-    /**
-     * @param string $name
-     * @return bool
-     */
-    private function isPlatformPackage($name)
+    private function isPlatformPackage(string $name) : bool
     {
         return (bool) Strings::match($name, self::PLATFORM_PACKAGE_REGEX);
     }

@@ -39,7 +39,7 @@ class DocCommentAlignmentSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // We are only interested in function/class/interface doc block comments.

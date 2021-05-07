@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -15,25 +16,19 @@ final class ParamNameTypoMalformWorker implements MalformWorkerInterface
      * @var string
      * @see https://regex101.com/r/5szHlw/1
      */
-    const PARAM_NAME_REGEX = '#@param(.*?)(?<paramName>\\$\\w+)#';
+    private const PARAM_NAME_REGEX = '#@param(.*?)(?<paramName>\\$\\w+)#';
     /**
      * @var DocblockRelatedParamNamesResolver
      */
     private $docblockRelatedParamNamesResolver;
-    /**
-     * @param \Symplify\CodingStandard\TokenAnalyzer\DocblockRelatedParamNamesResolver $docblockRelatedParamNamesResolver
-     */
-    public function __construct($docblockRelatedParamNamesResolver)
+    public function __construct(DocblockRelatedParamNamesResolver $docblockRelatedParamNamesResolver)
     {
         $this->docblockRelatedParamNamesResolver = $docblockRelatedParamNamesResolver;
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param string $docContent
-     * @param int $position
-     * @return string
      */
-    public function work($docContent, $tokens, $position)
+    public function work(string $docContent, Tokens $tokens, int $position) : string
     {
         $argumentNames = $this->docblockRelatedParamNamesResolver->resolve($tokens, $position);
         if ($argumentNames === []) {
@@ -58,10 +53,9 @@ final class ParamNameTypoMalformWorker implements MalformWorkerInterface
         return $this->fixTypos($argumentNames, $paramNames, $docContent);
     }
     /**
-     * @return mixed[]
-     * @param string $docContent
+     * @return string[]
      */
-    private function getParamNames($docContent)
+    private function getParamNames(string $docContent) : array
     {
         $paramAnnotations = $this->getAnnotationsOfType($docContent, 'param');
         $paramNames = [];
@@ -74,11 +68,9 @@ final class ParamNameTypoMalformWorker implements MalformWorkerInterface
         return $paramNames;
     }
     /**
-     * @return mixed[]
-     * @param string $docContent
-     * @param string $type
+     * @return Annotation[]
      */
-    private function getAnnotationsOfType($docContent, $type)
+    private function getAnnotationsOfType(string $docContent, string $type) : array
     {
         $docBlock = new DocBlock($docContent);
         return $docBlock->getAnnotationsOfType($type);
@@ -86,10 +78,8 @@ final class ParamNameTypoMalformWorker implements MalformWorkerInterface
     /**
      * @param string[] $argumentNames
      * @param string[] $paramNames
-     * @param string $docContent
-     * @return string
      */
-    private function fixTypos(array $argumentNames, array $paramNames, $docContent)
+    private function fixTypos(array $argumentNames, array $paramNames, string $docContent) : string
     {
         foreach ($argumentNames as $key => $argumentName) {
             // 1. the same position

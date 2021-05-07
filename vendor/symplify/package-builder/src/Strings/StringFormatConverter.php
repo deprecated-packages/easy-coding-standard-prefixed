@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\PackageBuilder\Strings;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -13,31 +14,19 @@ final class StringFormatConverter
      * @var string
      * @see https://regex101.com/r/rl1nvl/1
      */
-    const BIG_LETTER_REGEX = '#([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]*)#';
-    /**
-     * @param string $value
-     * @return string
-     */
-    public function underscoreAndHyphenToCamelCase($value)
+    private const BIG_LETTER_REGEX = '#([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]*)#';
+    public function underscoreAndHyphenToCamelCase(string $value) : string
     {
         $underscoreToHyphensValue = \str_replace(['_', '-'], ' ', $value);
         $uppercasedWords = \ucwords($underscoreToHyphensValue);
         $value = \str_replace(' ', '', $uppercasedWords);
         return \lcfirst($value);
     }
-    /**
-     * @param string $input
-     * @return string
-     */
-    public function camelCaseToUnderscore($input)
+    public function camelCaseToUnderscore(string $input) : string
     {
         return $this->camelCaseToGlue($input, '_');
     }
-    /**
-     * @param string $input
-     * @return string
-     */
-    public function camelCaseToDashed($input)
+    public function camelCaseToDashed(string $input) : string
     {
         return $this->camelCaseToGlue($input, '-');
     }
@@ -45,7 +34,7 @@ final class StringFormatConverter
      * @param mixed[] $items
      * @return mixed[]
      */
-    public function camelCaseToUnderscoreInArrayKeys(array $items)
+    public function camelCaseToUnderscoreInArrayKeys(array $items) : array
     {
         foreach ($items as $key => $value) {
             if (!\is_string($key)) {
@@ -60,12 +49,7 @@ final class StringFormatConverter
         }
         return $items;
     }
-    /**
-     * @param string $input
-     * @param string $glue
-     * @return string
-     */
-    private function camelCaseToGlue($input, $glue)
+    private function camelCaseToGlue(string $input, string $glue) : string
     {
         $matches = Strings::matchAll($input, self::BIG_LETTER_REGEX);
         $parts = [];

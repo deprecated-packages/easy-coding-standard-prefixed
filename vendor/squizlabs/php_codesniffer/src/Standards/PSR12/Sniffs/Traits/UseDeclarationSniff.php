@@ -33,7 +33,7 @@ class UseDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // Needs to be a use statement directly inside a class.
@@ -247,7 +247,7 @@ class UseDeclarationSniff implements Sniff
      *
      * @return void
      */
-    protected function processUseGroup($phpcsFile, $stackPtr)
+    protected function processUseGroup(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $opener = $tokens[$stackPtr]['scope_opener'];
@@ -600,7 +600,7 @@ class UseDeclarationSniff implements Sniff
      *
      * @return void
      */
-    protected function processUseStatement($phpcsFile, $stackPtr)
+    protected function processUseStatement(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $error = 'Expected 1 space after USE in trait import statement; %s found';

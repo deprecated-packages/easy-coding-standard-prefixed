@@ -25,9 +25,8 @@ class SodiumMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Mar
      * @param string[] $decryptionKeys The key at index "0" is required and is used to decrypt and encrypt values;
      *                                 more rotating keys can be provided to decrypt values;
      *                                 each key must be generated using sodium_crypto_box_keypair()
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller
      */
-    public function __construct(array $decryptionKeys, $marshaller = null)
+    public function __construct(array $decryptionKeys, \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
     {
         if (!self::isSupported()) {
             throw new CacheException('The "sodium" PHP extension is not loaded.');
@@ -35,22 +34,17 @@ class SodiumMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Mar
         if (!isset($decryptionKeys[0])) {
             throw new InvalidArgumentException('At least one decryption key must be provided at index "0".');
         }
-        $this->marshaller = isset($marshaller) ? $marshaller : new \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
         $this->decryptionKeys = $decryptionKeys;
     }
-    /**
-     * @return bool
-     */
-    public static function isSupported()
+    public static function isSupported() : bool
     {
         return \function_exists('sodium_crypto_box_seal');
     }
     /**
      * {@inheritdoc}
-     * @param mixed[]|null $failed
-     * @return mixed[]
      */
-    public function marshall(array $values, &$failed)
+    public function marshall(array $values, ?array &$failed) : array
     {
         $encryptionKey = \sodium_crypto_box_publickey($this->decryptionKeys[0]);
         $encryptedValues = [];
@@ -61,9 +55,8 @@ class SodiumMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Mar
     }
     /**
      * {@inheritdoc}
-     * @param string $value
      */
-    public function unmarshall($value)
+    public function unmarshall(string $value)
     {
         foreach ($this->decryptionKeys as $k) {
             if (\false !== ($decryptedValue = @\sodium_crypto_box_seal_open($value, $k))) {

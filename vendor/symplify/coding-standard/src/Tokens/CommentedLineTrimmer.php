@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -13,12 +14,8 @@ final class CommentedLineTrimmer
     /**
      * @var string[]
      */
-    const OPENING_LINE = ['//', '#'];
-    /**
-     * @param string $tokenContent
-     * @return string
-     */
-    public function trim($tokenContent)
+    private const OPENING_LINE = ['//', '#'];
+    public function trim(string $tokenContent) : string
     {
         foreach (self::OPENING_LINE as $openingLine) {
             if (!Strings::startsWith($tokenContent, $openingLine)) {

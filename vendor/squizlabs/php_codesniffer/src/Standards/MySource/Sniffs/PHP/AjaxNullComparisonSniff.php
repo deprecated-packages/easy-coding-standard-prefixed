@@ -35,7 +35,7 @@ class AjaxNullComparisonSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // Make sure it is an API function. We know this by the doc comment.

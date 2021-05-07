@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Php;
 
 use Symplify\CodingStandard\TokenRunner\TokenFinder;
@@ -9,27 +10,20 @@ final class PhpContentAnalyzer
     /**
      * @var int[]
      */
-    const STMT_OPENING_TYPES = [\T_IF, \T_WHILE, \T_DO, \T_FOR, \T_SWITCH];
+    private const STMT_OPENING_TYPES = [\T_IF, \T_WHILE, \T_DO, \T_FOR, \T_SWITCH];
     /**
      * @var int[]
      */
-    const END_SEMI_COLON_TYPES = [\T_INCLUDE, \T_EMPTY, \T_USE];
+    private const END_SEMI_COLON_TYPES = [\T_INCLUDE, \T_EMPTY, \T_USE];
     /**
      * @var TokenFinder
      */
     private $tokenFinder;
-    /**
-     * @param \Symplify\CodingStandard\TokenRunner\TokenFinder $tokenFinder
-     */
-    public function __construct($tokenFinder)
+    public function __construct(TokenFinder $tokenFinder)
     {
         $this->tokenFinder = $tokenFinder;
     }
-    /**
-     * @param string $content
-     * @return bool
-     */
-    public function isPhpContent($content)
+    public function isPhpContent(string $content) : bool
     {
         // is content commented PHP code?
         $rawTokens = $this->parseCodeToTokens($content);
@@ -130,10 +124,8 @@ final class PhpContentAnalyzer
     }
     /**
      * @param mixed[] $tokens
-     * @param int $i
-     * @return bool
      */
-    private function isFunctionStart(array $tokens, $i)
+    private function isFunctionStart(array $tokens, int $i) : bool
     {
         $twoNextTokens = $this->tokenFinder->getNextMeaninfulTokens($tokens, $i + 1, 2);
         if (\count($twoNextTokens) !== 2) {
@@ -146,11 +138,7 @@ final class PhpContentAnalyzer
         }
         return $openBracketToken === '(';
     }
-    /**
-     * @param int $tokenCount
-     * @return bool
-     */
-    private function hasTwoStringsTokensInRow($tokenCount, array $rawTokens)
+    private function hasTwoStringsTokensInRow(int $tokenCount, array $rawTokens) : bool
     {
         for ($i = 0; $i < $tokenCount; ++$i) {
             $token = $rawTokens[$i];

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\Skipper\SkipCriteriaResolver;
 
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -14,17 +15,14 @@ final class SkippedMessagesResolver
      * @var ParameterProvider
      */
     private $parameterProvider;
-    /**
-     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
-     */
-    public function __construct($parameterProvider)
+    public function __construct(ParameterProvider $parameterProvider)
     {
         $this->parameterProvider = $parameterProvider;
     }
     /**
-     * @return mixed[]
+     * @return array<string, string[]|null>
      */
-    public function resolve()
+    public function resolve() : array
     {
         if ($this->skippedMessages !== []) {
             return $this->skippedMessages;

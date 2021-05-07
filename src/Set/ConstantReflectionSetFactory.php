@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Set;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -13,16 +14,15 @@ final class ConstantReflectionSetFactory
      * @see https://regex101.com/r/mkleqU/1
      * @var string
      */
-    const REMOVE_DASH_BEFORE_NUMBER_REGEX = '#([a-z])-(\\d+)$$#';
+    private const REMOVE_DASH_BEFORE_NUMBER_REGEX = '#([a-z])-(\\d+)$$#';
     /**
      * @var string
      */
-    const UNDERSCORE_REGEX = '#_#';
+    private const UNDERSCORE_REGEX = '#_#';
     /**
-     * @return mixed[]
-     * @param string $setClassName
+     * @return Set[]
      */
-    public function createSetsFromClass($setClassName)
+    public function createSetsFromClass(string $setClassName) : array
     {
         $setListReflectionClass = new ReflectionClass($setClassName);
         $sets = [];
@@ -41,11 +41,7 @@ final class ConstantReflectionSetFactory
         }
         return $sets;
     }
-    /**
-     * @param string $string
-     * @return string
-     */
-    private function constantToDashes($string)
+    private function constantToDashes(string $string) : string
     {
         $string = \strtolower($string);
         return Strings::replace($string, self::UNDERSCORE_REGEX, '-');

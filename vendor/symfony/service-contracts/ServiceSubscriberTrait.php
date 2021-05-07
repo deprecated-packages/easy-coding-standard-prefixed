@@ -23,9 +23,8 @@ trait ServiceSubscriberTrait
     protected $container;
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    public static function getSubscribedServices()
+    public static function getSubscribedServices() : array
     {
         static $services;
         if (null !== $services) {
@@ -44,9 +43,8 @@ trait ServiceSubscriberTrait
     }
     /**
      * @required
-     * @param \ECSPrefix20210507\Psr\Container\ContainerInterface $container
      */
-    public function setContainer($container)
+    public function setContainer(ContainerInterface $container)
     {
         $this->container = $container;
         if (\is_callable(['parent', __FUNCTION__])) {

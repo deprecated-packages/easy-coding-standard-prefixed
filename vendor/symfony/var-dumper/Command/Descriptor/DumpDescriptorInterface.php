@@ -17,11 +17,5 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data;
  */
 interface DumpDescriptorInterface
 {
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data $data
-     * @param int $clientId
-     */
-    public function describe($output, $data, array $context, $clientId);
+    public function describe(OutputInterface $output, Data $data, array $context, int $clientId) : void;
 }

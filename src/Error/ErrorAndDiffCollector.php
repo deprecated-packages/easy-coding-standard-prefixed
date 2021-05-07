@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Error;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -42,13 +43,7 @@ final class ErrorAndDiffCollector
      * @var CurrentParentFileInfoProvider
      */
     private $currentParentFileInfoProvider;
-    /**
-     * @param \Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector $changedFilesDetector
-     * @param \Symplify\EasyCodingStandard\Error\FileDiffFactory $fileDiffFactory
-     * @param \Symplify\EasyCodingStandard\Error\ErrorFactory $errorFactory
-     * @param \Symplify\EasyCodingStandard\SnippetFormatter\Provider\CurrentParentFileInfoProvider $currentParentFileInfoProvider
-     */
-    public function __construct($changedFilesDetector, $fileDiffFactory, $errorFactory, $currentParentFileInfoProvider)
+    public function __construct(ChangedFilesDetector $changedFilesDetector, \Symplify\EasyCodingStandard\Error\FileDiffFactory $fileDiffFactory, \Symplify\EasyCodingStandard\Error\ErrorFactory $errorFactory, CurrentParentFileInfoProvider $currentParentFileInfoProvider)
     {
         $this->changedFilesDetector = $changedFilesDetector;
         $this->fileDiffFactory = $fileDiffFactory;
@@ -57,12 +52,8 @@ final class ErrorAndDiffCollector
     }
     /**
      * @param class-string $sourceClass
-     * @return void
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $fileInfo
-     * @param int $line
-     * @param string $message
      */
-    public function addErrorMessage($fileInfo, $line, $message, $sourceClass)
+    public function addErrorMessage(SmartFileInfo $fileInfo, int $line, string $message, string $sourceClass) : void
     {
         if ($this->currentParentFileInfoProvider->provide() !== null) {
             // skip sniff errors
@@ -73,38 +64,29 @@ final class ErrorAndDiffCollector
         $codingStandardError = $this->errorFactory->create($line, $message, $sourceClass, $fileInfo);
         $this->codingStandardErrors[] = $codingStandardError;
     }
-    /**
-     * @return void
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
-     * @param int $line
-     * @param string $message
-     */
-    public function addSystemErrorMessage($smartFileInfo, $line, $message)
+    public function addSystemErrorMessage(SmartFileInfo $smartFileInfo, int $line, string $message) : void
     {
         $this->changedFilesDetector->invalidateFileInfo($smartFileInfo);
         $this->systemErrors[] = new SystemError($line, $message, $smartFileInfo);
     }
     /**
-     * @return mixed[]
+     * @return CodingStandardError[]
      */
-    public function getErrors()
+    public function getErrors() : array
     {
         return $this->codingStandardErrors;
     }
     /**
-     * @return mixed[]
+     * @return SystemError[]
      */
-    public function getSystemErrors()
+    public function getSystemErrors() : array
     {
         return $this->systemErrors;
     }
     /**
      * @param class-string[] $appliedCheckers
-     * @return void
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
-     * @param string $diff
      */
-    public function addDiffForFileInfo($smartFileInfo, $diff, array $appliedCheckers)
+    public function addDiffForFileInfo(SmartFileInfo $smartFileInfo, string $diff, array $appliedCheckers) : void
     {
         $this->changedFilesDetector->invalidateFileInfo($smartFileInfo);
         foreach ($appliedCheckers as $appliedChecker) {
@@ -113,26 +95,21 @@ final class ErrorAndDiffCollector
         $this->fileDiffs[] = $this->fileDiffFactory->createFromDiffAndAppliedCheckers($smartFileInfo, $diff, $appliedCheckers);
     }
     /**
-     * @return mixed[]
+     * @return FileDiff[]
      */
-    public function getFileDiffs()
+    public function getFileDiffs() : array
     {
         return $this->fileDiffs;
     }
     /**
      * Used by external sniff/fixer testing classes
-     * @return void
      */
-    public function resetCounters()
+    public function resetCounters() : void
     {
         $this->codingStandardErrors = [];
         $this->fileDiffs = [];
     }
-    /**
-     * @return void
-     * @param string $sourceClass
-     */
-    private function ensureIsFixerOrChecker($sourceClass)
+    private function ensureIsFixerOrChecker(string $sourceClass) : void
     {
         // remove dot suffix of "."
         if (Strings::contains($sourceClass, '.')) {

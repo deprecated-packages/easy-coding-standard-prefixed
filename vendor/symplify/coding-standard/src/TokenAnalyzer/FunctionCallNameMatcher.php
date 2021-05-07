@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenAnalyzer;
 
 use PhpCsFixer\Tokenizer\Token;
@@ -11,10 +12,8 @@ final class FunctionCallNameMatcher
      * We go through tokens from down to up, so we need to find ")" and then the start of function
      *
      * @param Tokens<Token> $tokens
-     * @return int|null
-     * @param int $position
      */
-    public function matchName($tokens, $position)
+    public function matchName(Tokens $tokens, int $position) : ?int
     {
         try {
             $blockStart = $tokens->findBlockStart(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $position);

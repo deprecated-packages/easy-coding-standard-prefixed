@@ -19,12 +19,7 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class ProxyManagerCaster
 {
-    /**
-     * @param \ECSPrefix20210507\ProxyManager\Proxy\ProxyInterface $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castProxy($c, array $a, $stub, $isNested)
+    public static function castProxy(ProxyInterface $c, array $a, Stub $stub, bool $isNested)
     {
         if ($parent = \get_parent_class($c)) {
             $stub->class .= ' - ' . $parent;

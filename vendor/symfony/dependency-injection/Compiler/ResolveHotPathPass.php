@@ -23,18 +23,14 @@ class ResolveHotPathPass extends \ECSPrefix20210507\Symfony\Component\Dependency
 {
     private $tagName;
     private $resolvedIds = [];
-    /**
-     * @param string $tagName
-     */
-    public function __construct($tagName = 'container.hot_path')
+    public function __construct(string $tagName = 'container.hot_path')
     {
         $this->tagName = $tagName;
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         try {
             parent::process($container);
@@ -45,9 +41,8 @@ class ResolveHotPathPass extends \ECSPrefix20210507\Symfony\Component\Dependency
     }
     /**
      * {@inheritdoc}
-     * @param bool $isRoot
      */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         if ($value instanceof ArgumentInterface) {
             return $value;

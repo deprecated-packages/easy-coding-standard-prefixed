@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,36 +27,29 @@ final class NoShortBoolCastFixer extends AbstractFixer
      * {@inheritdoc}
      *
      * Must run before CastSpacesFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -9;
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Short cast `bool` using double exclamation mark should not be used.', [new CodeSample("<?php\n\$a = !!\$b;\n")]);
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound('!');
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = \count($tokens) - 1; $index > 1; --$index) {
             if ($tokens[$index]->equals('!')) {
@@ -63,12 +57,7 @@ final class NoShortBoolCastFixer extends AbstractFixer
             }
         }
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @return int
-     */
-    private function fixShortCast($tokens, $index)
+    private function fixShortCast(Tokens $tokens, int $index) : int
     {
         for ($i = $index - 1; $i > 1; --$i) {
             if ($tokens[$i]->equals('!')) {
@@ -81,13 +70,7 @@ final class NoShortBoolCastFixer extends AbstractFixer
         }
         return $i;
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $start
-     * @param int $end
-     */
-    private function fixShortCastToBoolCast($tokens, $start, $end)
+    private function fixShortCastToBoolCast(Tokens $tokens, int $start, int $end) : void
     {
         for (; $start <= $end; ++$start) {
             if (!$tokens[$start]->isComment() && !($tokens[$start]->isWhitespace() && $tokens[$start - 1]->isComment())) {

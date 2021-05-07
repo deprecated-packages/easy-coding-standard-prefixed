@@ -34,28 +34,22 @@ trait ContractsTrait
      * Wraps the callback passed to ->get() in a callable.
      *
      * @return callable the previous callback wrapper
-     * @param callable|null $callbackWrapper
      */
-    public function setCallbackWrapper($callbackWrapper)
+    public function setCallbackWrapper(?callable $callbackWrapper) : callable
     {
         $previousWrapper = $this->callbackWrapper;
-        $this->callbackWrapper = isset($callbackWrapper) ? $callbackWrapper : function (callable $callback, ItemInterface $item, bool &$save, CacheInterface $pool, \Closure $setMetadata, $logger) {
+        $this->callbackWrapper = $callbackWrapper ?? function (callable $callback, ItemInterface $item, bool &$save, CacheInterface $pool, \Closure $setMetadata, ?LoggerInterface $logger) {
             return $callback($item, $save);
         };
         return $previousWrapper;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $pool
-     * @param float|null $beta
-     * @param string $key
-     */
-    private function doGet($pool, $key, callable $callback, $beta, array &$metadata = null)
+    private function doGet(AdapterInterface $pool, string $key, callable $callback, ?float $beta, array &$metadata = null)
     {
-        if (0 > ($beta = isset($beta) ? $beta : 1.0)) {
+        if (0 > ($beta = $beta ?? 1.0)) {
             throw new InvalidArgumentException(\sprintf('Argument "$beta" provided to "%s::get()" must be a positive number, %f given.', static::class, $beta));
         }
         static $setMetadata;
-        $setMetadata = isset($setMetadata) ? $setMetadata : \Closure::bind(static function (CacheItem $item, float $startTime, &$metadata) {
+        $setMetadata = $setMetadata ?? \Closure::bind(static function (CacheItem $item, float $startTime, ?array &$metadata) {
             if ($item->expiry > ($endTime = \microtime(\true))) {
                 $item->newMetadata[CacheItem::METADATA_EXPIRY] = $metadata[CacheItem::METADATA_EXPIRY] = $item->expiry;
                 $item->newMetadata[CacheItem::METADATA_CTIME] = $metadata[CacheItem::METADATA_CTIME] = (int) \ceil(1000 * ($endTime - $startTime));
@@ -75,12 +69,12 @@ trait ContractsTrait
             try {
                 $value = ($this->callbackWrapper)($callback, $item, $save, $pool, function (CacheItem $item) use($setMetadata, $startTime, &$metadata) {
                     $setMetadata($item, $startTime, $metadata);
-                }, isset($this->logger) ? $this->logger : null);
+                }, $this->logger ?? null);
                 $setMetadata($item, $startTime, $metadata);
                 return $value;
             } finally {
                 unset($this->computing[$key]);
             }
-        }, $beta, $metadata, isset($this->logger) ? $this->logger : null);
+        }, $beta, $metadata, $this->logger ?? null);
     }
 }

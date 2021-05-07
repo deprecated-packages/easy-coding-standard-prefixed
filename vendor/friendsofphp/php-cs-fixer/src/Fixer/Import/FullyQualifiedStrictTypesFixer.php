@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -33,9 +34,8 @@ final class FullyQualifiedStrictTypesFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Transforms imported FQCN parameters and return types in function arguments to short version.', [new CodeSample('<?php
 
@@ -65,28 +65,22 @@ class SomeClass
      *
      * Must run before NoSuperfluousPhpdocTagsFixer.
      * Must run after PhpdocToReturnTypeFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 7;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_FUNCTION) && (\count((new NamespacesAnalyzer())->getDeclarations($tokens)) || \count((new NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens)));
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $lastIndex = $tokens->count() - 1;
         for ($index = $lastIndex; $index >= 0; --$index) {
@@ -98,12 +92,7 @@ class SomeClass
             $this->fixFunctionArguments($tokens, $index);
         }
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     */
-    private function fixFunctionArguments($tokens, $index)
+    private function fixFunctionArguments(Tokens $tokens, int $index) : void
     {
         $arguments = (new FunctionsAnalyzer())->getFunctionArguments($tokens, $index);
         foreach ($arguments as $argument) {
@@ -113,12 +102,7 @@ class SomeClass
             $this->detectAndReplaceTypeWithShortType($tokens, $argument->getTypeAnalysis());
         }
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     */
-    private function fixFunctionReturnType($tokens, $index)
+    private function fixFunctionReturnType(Tokens $tokens, int $index) : void
     {
         if (\PHP_VERSION_ID < 70000) {
             return;
@@ -129,12 +113,7 @@ class SomeClass
         }
         $this->detectAndReplaceTypeWithShortType($tokens, $returnType);
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis $type
-     */
-    private function detectAndReplaceTypeWithShortType($tokens, $type)
+    private function detectAndReplaceTypeWithShortType(Tokens $tokens, TypeAnalysis $type) : void
     {
         if ($type->isReservedType()) {
             return;

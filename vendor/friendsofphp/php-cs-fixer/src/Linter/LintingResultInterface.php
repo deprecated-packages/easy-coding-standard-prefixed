@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -18,7 +19,6 @@ interface LintingResultInterface
 {
     /**
      * Check if linting process was successful and raise LintingException if not.
-     * @return void
      */
-    public function check();
+    public function check() : void;
 }

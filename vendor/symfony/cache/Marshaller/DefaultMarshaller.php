@@ -19,10 +19,7 @@ use ECSPrefix20210507\Symfony\Component\Cache\Exception\CacheException;
 class DefaultMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $useIgbinarySerialize = \true;
-    /**
-     * @param bool $useIgbinarySerialize
-     */
-    public function __construct($useIgbinarySerialize = null)
+    public function __construct(bool $useIgbinarySerialize = null)
     {
         if (null === $useIgbinarySerialize) {
             $useIgbinarySerialize = \extension_loaded('igbinary') && (\PHP_VERSION_ID < 70400 || \version_compare('3.1.6', \phpversion('igbinary'), '<='));
@@ -33,10 +30,8 @@ class DefaultMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Ma
     }
     /**
      * {@inheritdoc}
-     * @param mixed[]|null $failed
-     * @return mixed[]
      */
-    public function marshall(array $values, &$failed)
+    public function marshall(array $values, ?array &$failed) : array
     {
         $serialized = $failed = [];
         foreach ($values as $id => $value) {
@@ -54,9 +49,8 @@ class DefaultMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Ma
     }
     /**
      * {@inheritdoc}
-     * @param string $value
      */
-    public function unmarshall($value)
+    public function unmarshall(string $value)
     {
         if ('b:0;' === $value) {
             return \false;
@@ -65,12 +59,12 @@ class DefaultMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Ma
             return null;
         }
         static $igbinaryNull;
-        if ($value === (isset($igbinaryNull) ? $igbinaryNull : ($igbinaryNull = \extension_loaded('igbinary') ? \igbinary_serialize(null) : \false))) {
+        if ($value === ($igbinaryNull ?? ($igbinaryNull = \extension_loaded('igbinary') ? \igbinary_serialize(null) : \false))) {
             return null;
         }
         $unserializeCallbackHandler = \ini_set('unserialize_callback_func', __CLASS__ . '::handleUnserializeCallback');
         try {
-            if (':' === (isset($value[1]) ? $value[1] : ':')) {
+            if (':' === ($value[1] ?? ':')) {
                 if (\false !== ($value = \unserialize($value))) {
                     return $value;
                 }
@@ -88,9 +82,8 @@ class DefaultMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Ma
     }
     /**
      * @internal
-     * @param string $class
      */
-    public static function handleUnserializeCallback($class)
+    public static function handleUnserializeCallback(string $class)
     {
         throw new \DomainException('Class not found: ' . $class);
     }

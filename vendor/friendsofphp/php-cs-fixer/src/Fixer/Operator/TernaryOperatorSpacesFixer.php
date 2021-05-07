@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,9 +28,8 @@ final class TernaryOperatorSpacesFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Standardize spaces around ternary operator.', [new CodeSample("<?php \$a = \$a   ?1 :0;\n")]);
     }
@@ -37,28 +37,22 @@ final class TernaryOperatorSpacesFixer extends AbstractFixer
      * {@inheritdoc}
      *
      * Must run after ArraySyntaxFixer, ListSyntaxFixer, TernaryToElvisOperatorFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAllTokenKindsFound(['?', ':']);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $gotoLabelAnalyzer = new GotoLabelAnalyzer();
         $ternaryOperatorIndices = [];
@@ -108,12 +102,7 @@ final class TernaryOperatorSpacesFixer extends AbstractFixer
             }
         }
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @return bool
-     */
-    private function belongsToAlternativeSyntax($tokens, $index)
+    private function belongsToAlternativeSyntax(Tokens $tokens, int $index) : bool
     {
         if (!$tokens[$index]->equals(':')) {
             return \false;
@@ -130,23 +119,15 @@ final class TernaryOperatorSpacesFixer extends AbstractFixer
         return $tokens[$alternativeControlStructureIndex]->isGivenKind([\T_DECLARE, \T_ELSEIF, \T_FOR, \T_FOREACH, \T_IF, \T_SWITCH, \T_WHILE]);
     }
     /**
-     * @return mixed[]
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $switchIndex
+     * @return int[]
      */
-    private function getColonIndicesForSwitch($tokens, $switchIndex)
+    private function getColonIndicesForSwitch(Tokens $tokens, int $switchIndex) : array
     {
         return \array_map(static function (CaseAnalysis $caseAnalysis) {
             return $caseAnalysis->getColonIndex();
         }, (new SwitchAnalyzer())->getSwitchAnalysis($tokens, $switchIndex)->getCases());
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @param bool $after
-     */
-    private function ensureWhitespaceExistence($tokens, $index, $after)
+    private function ensureWhitespaceExistence(Tokens $tokens, int $index, bool $after) : void
     {
         if ($tokens[$index]->isWhitespace()) {
             if (\false === \strpos($tokens[$index]->getContent(), "\n") && !$tokens[$index - 1]->isComment()) {

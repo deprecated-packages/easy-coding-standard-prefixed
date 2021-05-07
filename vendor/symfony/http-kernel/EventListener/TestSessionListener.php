@@ -22,18 +22,12 @@ use ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\SessionInterface;
 class TestSessionListener extends \ECSPrefix20210507\Symfony\Component\HttpKernel\EventListener\AbstractTestSessionListener
 {
     private $container;
-    /**
-     * @param \ECSPrefix20210507\Psr\Container\ContainerInterface $container
-     */
-    public function __construct($container, array $sessionOptions = [])
+    public function __construct(ContainerInterface $container, array $sessionOptions = [])
     {
         $this->container = $container;
         parent::__construct($sessionOptions);
     }
-    /**
-     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\SessionInterface|null
-     */
-    protected function getSession()
+    protected function getSession() : ?SessionInterface
     {
         if (!$this->container->has('session')) {
             return null;

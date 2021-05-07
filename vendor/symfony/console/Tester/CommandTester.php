@@ -24,10 +24,7 @@ class CommandTester
     private $command;
     private $input;
     private $statusCode;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
-     */
-    public function __construct($command)
+    public function __construct(Command $command)
     {
         $this->command = $command;
     }

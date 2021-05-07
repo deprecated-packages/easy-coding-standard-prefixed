@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,9 +26,8 @@ final class BlankLineAfterOpeningTagFixer extends AbstractFixer implements White
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Ensure there is no code on the same line as the PHP open tag and it is followed by a blank line.', [new CodeSample("<?php \$a = 1;\n\$b = 1;\n")]);
     }
@@ -36,28 +36,22 @@ final class BlankLineAfterOpeningTagFixer extends AbstractFixer implements White
      *
      * Must run before NoBlankLinesBeforeNamespaceFixer.
      * Must run after DeclareStrictTypesFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_OPEN_TAG);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         // ignore files with short open tag and ignore non-monolithic files

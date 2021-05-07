@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,18 +31,15 @@ final class HelpCommand extends BaseHelpCommand
     protected static $defaultName = 'help';
     /**
      * @param mixed $value
-     * @return string
      */
-    public static function toString($value)
+    public static function toString($value) : string
     {
         return \is_array($value) ? static::arrayToString($value) : static::scalarToString($value);
     }
     /**
      * Returns the allowed values of the given option that can be converted to a string.
-     * @return mixed[]|null
-     * @param \PhpCsFixer\FixerConfiguration\FixerOptionInterface $option
      */
-    public static function getDisplayableAllowedValues($option)
+    public static function getDisplayableAllowedValues(FixerOptionInterface $option) : ?array
     {
         $allowed = $option->getAllowedValues();
         if (null !== $allowed) {
@@ -65,22 +63,17 @@ final class HelpCommand extends BaseHelpCommand
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function initialize($input, $output)
+    protected function initialize(InputInterface $input, OutputInterface $output) : void
     {
         $output->getFormatter()->setStyle('url', new OutputFormatterStyle('blue'));
     }
     /**
      * Wraps a string to the given number of characters, ignoring style tags.
      *
-     * @return mixed[]
-     * @param string $string
-     * @param int $width
+     * @return string[]
      */
-    private static function wordwrap($string, $width)
+    private static function wordwrap(string $string, int $width) : array
     {
         $result = [];
         $currentLine = 0;
@@ -104,17 +97,13 @@ final class HelpCommand extends BaseHelpCommand
     }
     /**
      * @param mixed $value
-     * @return string
      */
-    private static function scalarToString($value)
+    private static function scalarToString($value) : string
     {
         $str = \var_export($value, \true);
         return Preg::replace('/\\bNULL\\b/', 'null', $str);
     }
-    /**
-     * @return string
-     */
-    private static function arrayToString(array $value)
+    private static function arrayToString(array $value) : string
     {
         if (0 === \count($value)) {
             return '[]';
@@ -129,10 +118,7 @@ final class HelpCommand extends BaseHelpCommand
         }
         return \substr($str, 0, -2) . ']';
     }
-    /**
-     * @return bool
-     */
-    private static function isHash(array $array)
+    private static function isHash(array $array) : bool
     {
         $i = 0;
         foreach ($array as $k => $v) {

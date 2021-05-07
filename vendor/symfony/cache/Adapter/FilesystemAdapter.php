@@ -17,15 +17,9 @@ use ECSPrefix20210507\Symfony\Component\Cache\Traits\FilesystemTrait;
 class FilesystemAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AbstractAdapter implements PruneableInterface
 {
     use FilesystemTrait;
-    /**
-     * @param string $namespace
-     * @param int $defaultLifetime
-     * @param string $directory
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller
-     */
-    public function __construct($namespace = '', $defaultLifetime = 0, $directory = null, $marshaller = null)
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, MarshallerInterface $marshaller = null)
     {
-        $this->marshaller = isset($marshaller) ? $marshaller : new DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new DefaultMarshaller();
         parent::__construct('', $defaultLifetime);
         $this->init($namespace, $directory);
     }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -13,19 +14,16 @@ final class SuperfluousVarNameMalformWorker implements MalformWorkerInterface
      * @var string
      * @see https://regex101.com/r/euhrn8/1
      */
-    const THIS_VARIABLE_REGEX = '#\\$this$#';
+    private const THIS_VARIABLE_REGEX = '#\\$this$#';
     /**
      * @var string
      * @see https://regex101.com/r/8LCnOl/1
      */
-    const VAR_VARIABLE_NAME_REGEX = '#(?<tag>@var)(?<type>\\s+[|\\\\\\w]+)?(\\s+)(?<propertyName>\\$[\\w]+)#';
+    private const VAR_VARIABLE_NAME_REGEX = '#(?<tag>@var)(?<type>\\s+[|\\\\\\w]+)?(\\s+)(?<propertyName>\\$[\\w]+)#';
     /**
      * @param Tokens<Token> $tokens
-     * @param string $docContent
-     * @param int $position
-     * @return string
      */
-    public function work($docContent, $tokens, $position)
+    public function work(string $docContent, Tokens $tokens, int $position) : string
     {
         if ($this->shouldSkip($tokens, $position)) {
             return $docContent;
@@ -55,10 +53,8 @@ final class SuperfluousVarNameMalformWorker implements MalformWorkerInterface
      * Is property doc block?
      *
      * @param Tokens<Token> $tokens
-     * @param int $position
-     * @return bool
      */
-    private function shouldSkip($tokens, $position)
+    private function shouldSkip(Tokens $tokens, int $position) : bool
     {
         $nextMeaningfulTokenPosition = $tokens->getNextMeaningfulToken($position);
         // nothing to change

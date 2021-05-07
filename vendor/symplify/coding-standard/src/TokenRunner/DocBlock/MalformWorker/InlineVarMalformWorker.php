@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -12,14 +13,11 @@ final class InlineVarMalformWorker implements MalformWorkerInterface
      * @var string
      * @see https://regex101.com/r/8OuO60/1
      */
-    const SINGLE_ASTERISK_START_REGEX = '#^/\\*(\\n?\\s+@var)#';
+    private const SINGLE_ASTERISK_START_REGEX = '#^/\\*(\\n?\\s+@var)#';
     /**
      * @param Tokens<Token> $tokens
-     * @param string $docContent
-     * @param int $position
-     * @return string
      */
-    public function work($docContent, $tokens, $position)
+    public function work(string $docContent, Tokens $tokens, int $position) : string
     {
         /** @var Token $token */
         $token = $tokens[$position];

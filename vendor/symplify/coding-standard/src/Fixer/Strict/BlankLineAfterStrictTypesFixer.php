@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Strict;
 
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -23,7 +24,7 @@ final class BlankLineAfterStrictTypesFixer extends AbstractSymplifyFixer impleme
     /**
      * @var string
      */
-    const ERROR_MESSAGE = 'Strict type declaration has to be followed by empty line';
+    private const ERROR_MESSAGE = 'Strict type declaration has to be followed by empty line';
     /**
      * @var WhitespacesFixerConfig
      */
@@ -34,42 +35,32 @@ final class BlankLineAfterStrictTypesFixer extends AbstractSymplifyFixer impleme
      * @var Token[]
      */
     private $declareStrictTypeTokens = [];
-    /**
-     * @param \PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig
-     */
-    public function __construct($whitespacesFixerConfig)
+    public function __construct(WhitespacesFixerConfig $whitespacesFixerConfig)
     {
         $this->whitespacesFixerConfig = $whitespacesFixerConfig;
         $this->declareStrictTypeTokens = [new Token([\T_DECLARE, 'declare']), new Token('('), new Token([\T_STRING, 'strict_types']), new Token('='), new Token([\T_LNUMBER, '1']), new Token(')'), new Token(';')];
     }
-    /**
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
-     */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAllTokenKindsFound([\T_OPEN_TAG, \T_WHITESPACE, \T_DECLARE, \T_STRING, '=', \T_LNUMBER, ';']);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \SplFileInfo $file
      */
-    public function fix($file, $tokens)
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         $sequenceLocation = $tokens->findSequence($this->declareStrictTypeTokens, 1, 15);
         if ($sequenceLocation === null) {
             return;
         }
-        end($sequenceLocation);
-        $semicolonPosition = (int) key($sequenceLocation);
+        $semicolonPosition = (int) \array_key_last($sequenceLocation);
         // empty file
         if (!isset($tokens[$semicolonPosition + 2])) {
             return;
@@ -77,10 +68,7 @@ final class BlankLineAfterStrictTypesFixer extends AbstractSymplifyFixer impleme
         $lineEnding = $this->whitespacesFixerConfig->getLineEnding();
         $tokens->ensureWhitespaceAtIndex($semicolonPosition + 1, 0, $lineEnding . $lineEnding);
     }
-    /**
-     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
-     */
-    public function getRuleDefinition()
+    public function getRuleDefinition() : RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 declare(strict_types=1);

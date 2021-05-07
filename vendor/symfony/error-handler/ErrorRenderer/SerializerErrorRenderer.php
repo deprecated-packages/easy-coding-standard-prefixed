@@ -31,7 +31,7 @@ class SerializerErrorRenderer implements \ECSPrefix20210507\Symfony\Component\Er
      *                                                  formats not supported by Request::getMimeTypes() should be given as mime types
      * @param bool|callable                     $debug  The debugging mode as a boolean or a callable that should return it
      */
-    public function __construct($serializer, $format, $fallbackErrorRenderer = null, $debug = \false)
+    public function __construct(SerializerInterface $serializer, $format, \ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $fallbackErrorRenderer = null, $debug = \false)
     {
         if (!\is_string($format) && !\is_callable($format)) {
             throw new \TypeError(\sprintf('Argument 2 passed to "%s()" must be a string or a callable, "%s" given.', __METHOD__, \get_debug_type($format)));
@@ -41,15 +41,13 @@ class SerializerErrorRenderer implements \ECSPrefix20210507\Symfony\Component\Er
         }
         $this->serializer = $serializer;
         $this->format = $format;
-        $this->fallbackErrorRenderer = isset($fallbackErrorRenderer) ? $fallbackErrorRenderer : new \ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer();
+        $this->fallbackErrorRenderer = $fallbackErrorRenderer ?? new \ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer();
         $this->debug = $debug;
     }
     /**
      * {@inheritdoc}
-     * @param \Throwable $exception
-     * @return \ECSPrefix20210507\Symfony\Component\ErrorHandler\Exception\FlattenException
      */
-    public function render($exception)
+    public function render(\Throwable $exception) : FlattenException
     {
         $headers = [];
         $debug = \is_bool($this->debug) ? $this->debug : ($this->debug)($exception);
@@ -60,17 +58,13 @@ class SerializerErrorRenderer implements \ECSPrefix20210507\Symfony\Component\Er
         $flattenException = FlattenException::createFromThrowable($exception, null, $headers);
         try {
             $format = \is_string($this->format) ? $this->format : ($this->format)($flattenException);
-            $headers = ['Content-Type' => isset(Request::getMimeTypes($format)[0]) ? Request::getMimeTypes($format)[0] : $format, 'Vary' => 'Accept'];
+            $headers = ['Content-Type' => Request::getMimeTypes($format)[0] ?? $format, 'Vary' => 'Accept'];
             return $flattenException->setAsString($this->serializer->serialize($flattenException, $format, ['exception' => $exception, 'debug' => $debug]))->setHeaders($flattenException->getHeaders() + $headers);
         } catch (NotEncodableValueException $e) {
             return $this->fallbackErrorRenderer->render($exception);
         }
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @return \Closure
-     */
-    public static function getPreferredFormat($requestStack)
+    public static function getPreferredFormat(RequestStack $requestStack) : \Closure
     {
         return static function () use($requestStack) {
             if (!($request = $requestStack->getCurrentRequest())) {

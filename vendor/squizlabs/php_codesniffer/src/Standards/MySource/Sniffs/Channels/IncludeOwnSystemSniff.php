@@ -32,7 +32,7 @@ class IncludeOwnSystemSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $fileName = $phpcsFile->getFilename();
         $matches = [];

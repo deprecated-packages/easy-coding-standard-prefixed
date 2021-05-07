@@ -16,7 +16,7 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition;
  */
 class InstanceofConfigurator extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
-    const FACTORY = 'instanceof';
+    public const FACTORY = 'instanceof';
     use Traits\AutowireTrait;
     use Traits\BindTrait;
     use Traits\CallTrait;
@@ -27,23 +27,15 @@ class InstanceofConfigurator extends \ECSPrefix20210507\Symfony\Component\Depend
     use Traits\ShareTrait;
     use Traits\TagTrait;
     private $path;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
-     * @param string $id
-     * @param string $path
-     */
-    public function __construct($parent, $definition, $id, $path = null)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, Definition $definition, string $id, string $path = null)
     {
         parent::__construct($parent, $definition, $id, []);
         $this->path = $path;
     }
     /**
      * Defines an instanceof-conditional to be applied to following service definitions.
-     * @return $this
-     * @param string $fqcn
      */
-    public final function instanceof($fqcn)
+    public final function instanceof(string $fqcn) : self
     {
         return $this->parent->instanceof($fqcn);
     }

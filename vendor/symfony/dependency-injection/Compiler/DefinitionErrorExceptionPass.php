@@ -23,9 +23,8 @@ class DefinitionErrorExceptionPass extends \ECSPrefix20210507\Symfony\Component\
 {
     /**
      * {@inheritdoc}
-     * @param bool $isRoot
      */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         if (!$value instanceof Definition || !$value->hasErrors()) {
             return parent::processValue($value, $isRoot);

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -26,7 +27,7 @@ final class RemoveCommentedCodeFixer extends AbstractSymplifyFixer implements Do
     /**
      * @var string
      */
-    const ERROR_MESSAGE = 'Remove commented code like "// $one = 1000;"';
+    private const ERROR_MESSAGE = 'Remove commented code like "// $one = 1000;"';
     /**
      * @var CommentedContentResolver
      */
@@ -39,38 +40,27 @@ final class RemoveCommentedCodeFixer extends AbstractSymplifyFixer implements Do
      * @var Decommenter
      */
     private $decommenter;
-    /**
-     * @param \Symplify\CodingStandard\Tokens\CommentedContentResolver $commentedContentResolver
-     * @param \Symplify\CodingStandard\Php\PhpContentAnalyzer $phpContentAnalyzer
-     * @param \Symplify\CodingStandard\DocBlock\Decommenter $decommenter
-     */
-    public function __construct($commentedContentResolver, $phpContentAnalyzer, $decommenter)
+    public function __construct(CommentedContentResolver $commentedContentResolver, PhpContentAnalyzer $phpContentAnalyzer, Decommenter $decommenter)
     {
         $this->commentedContentResolver = $commentedContentResolver;
         $this->phpContentAnalyzer = $phpContentAnalyzer;
         $this->decommenter = $decommenter;
     }
-    /**
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
-     */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_COMMENT);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \SplFileInfo $file
      */
-    public function fix($file, $tokens)
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         $contentWithPositions = [];
         for ($i = 0; $i < $tokens->count(); ++$i) {
@@ -99,10 +89,7 @@ final class RemoveCommentedCodeFixer extends AbstractSymplifyFixer implements Do
             $tokens->clearRange($realStart, $startAndEnd->getEnd());
         }
     }
-    /**
-     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
-     */
-    public function getRuleDefinition()
+    public function getRuleDefinition() : RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 // $one = 1;
@@ -117,10 +104,8 @@ CODE_SAMPLE
      * Remove the indent space ahead of comments
      *
      * @param Tokens<Token> $tokens
-     * @param \Symplify\CodingStandard\ValueObject\StartAndEnd $startAndEnd
-     * @return int
      */
-    private function resolveRealStart($startAndEnd, $tokens)
+    private function resolveRealStart(StartAndEnd $startAndEnd, Tokens $tokens) : int
     {
         $preStartPosition = $startAndEnd->getStart() - 1;
         /** @var Token $preStartToken */

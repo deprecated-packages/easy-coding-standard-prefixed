@@ -48,35 +48,28 @@ class RedisSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFound
             throw new \InvalidArgumentException(\sprintf('The following options are not supported "%s".', \implode(', ', $diff)));
         }
         $this->redis = $redis;
-        $this->prefix = isset($options['prefix']) ? $options['prefix'] : 'sf_s';
-        $this->ttl = isset($options['ttl']) ? $options['ttl'] : null;
+        $this->prefix = $options['prefix'] ?? 'sf_s';
+        $this->ttl = $options['ttl'] ?? null;
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
-     * @return string
      */
-    protected function doRead($sessionId)
+    protected function doRead(string $sessionId) : string
     {
         return $this->redis->get($this->prefix . $sessionId) ?: '';
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
-     * @param string $data
-     * @return bool
      */
-    protected function doWrite($sessionId, $data)
+    protected function doWrite(string $sessionId, string $data) : bool
     {
-        $result = $this->redis->setEx($this->prefix . $sessionId, (int) (isset($this->ttl) ? $this->ttl : \ini_get('session.gc_maxlifetime')), $data);
+        $result = $this->redis->setEx($this->prefix . $sessionId, (int) ($this->ttl ?? \ini_get('session.gc_maxlifetime')), $data);
         return $result && !$result instanceof ErrorInterface;
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
-     * @return bool
      */
-    protected function doDestroy($sessionId)
+    protected function doDestroy(string $sessionId) : bool
     {
         static $unlink = \true;
         if ($unlink) {
@@ -93,17 +86,15 @@ class RedisSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFound
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function close()
+    public function close() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function gc($maxlifetime)
+    public function gc($maxlifetime) : bool
     {
         return \true;
     }
@@ -112,6 +103,6 @@ class RedisSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFound
      */
     public function updateTimestamp($sessionId, $data)
     {
-        return (bool) $this->redis->expire($this->prefix . $sessionId, (int) (isset($this->ttl) ? $this->ttl : \ini_get('session.gc_maxlifetime')));
+        return (bool) $this->redis->expire($this->prefix . $sessionId, (int) ($this->ttl ?? \ini_get('session.gc_maxlifetime')));
     }
 }

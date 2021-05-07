@@ -33,23 +33,14 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
     private $controllerTag;
     private $controllerLocator;
     private $notTaggedControllerResolverServiceId;
-    /**
-     * @param string $resolverServiceId
-     * @param string $controllerTag
-     * @param string $controllerLocator
-     * @param string $notTaggedControllerResolverServiceId
-     */
-    public function __construct($resolverServiceId = 'argument_resolver.service', $controllerTag = 'controller.service_arguments', $controllerLocator = 'argument_resolver.controller_locator', $notTaggedControllerResolverServiceId = 'argument_resolver.not_tagged_controller')
+    public function __construct(string $resolverServiceId = 'argument_resolver.service', string $controllerTag = 'controller.service_arguments', string $controllerLocator = 'argument_resolver.controller_locator', string $notTaggedControllerResolverServiceId = 'argument_resolver.not_tagged_controller')
     {
         $this->resolverServiceId = $resolverServiceId;
         $this->controllerTag = $controllerTag;
         $this->controllerLocator = $controllerLocator;
         $this->notTaggedControllerResolverServiceId = $notTaggedControllerResolverServiceId;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         if (\false === $container->hasDefinition($this->resolverServiceId) && \false === $container->hasDefinition($this->notTaggedControllerResolverServiceId)) {
             return;
@@ -104,7 +95,7 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
                 if (!isset($methods[$action = \strtolower($attributes['action'])])) {
                     throw new InvalidArgumentException(\sprintf('Invalid "action" attribute on tag "%s" for service "%s": no public "%s()" method found on class "%s".', $this->controllerTag, $id, $attributes['action'], $class));
                 }
-                list($r, $parameters) = $methods[$action];
+                [$r, $parameters] = $methods[$action];
                 $found = \false;
                 foreach ($parameters as $p) {
                     if ($attributes['argument'] === $p->name) {
@@ -119,7 +110,7 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
                     throw new InvalidArgumentException(\sprintf('Invalid "%s" tag for service "%s": method "%s()" has no "%s" argument on class "%s".', $this->controllerTag, $id, $r->name, $attributes['argument'], $class));
                 }
             }
-            foreach ($methods as list($r, $parameters)) {
+            foreach ($methods as [$r, $parameters]) {
                 /** @var \ReflectionMethod $r */
                 // create a per-method map of argument-names to service/type-references
                 $args = [];
@@ -138,7 +129,7 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
                         }
                     } elseif (isset($bindings[$bindingName = $type . ' $' . $p->name]) || isset($bindings[$bindingName = '$' . $p->name]) || isset($bindings[$bindingName = $type])) {
                         $binding = $bindings[$bindingName];
-                        list($bindingValue, $bindingId, , $bindingType, $bindingFile) = $binding->getValues();
+                        [$bindingValue, $bindingId, , $bindingType, $bindingFile] = $binding->getValues();
                         $binding->setValues([$bindingValue, $bindingId, \true, $bindingType, $bindingFile]);
                         if (!$bindingValue instanceof Reference) {
                             $args[$p->name] = new Reference('.value.' . $container->hash($bindingValue));
@@ -171,7 +162,7 @@ class RegisterControllerArgumentLocatorsPass implements CompilerPassInterface
                 // register the maps as a per-method service-locators
                 if ($args) {
                     $controllers[$id . '::' . $r->name] = ServiceLocatorTagPass::register($container, $args);
-                    foreach (isset($publicAliases[$id]) ? $publicAliases[$id] : [] as $alias) {
+                    foreach ($publicAliases[$id] ?? [] as $alias) {
                         $controllers[$alias . '::' . $r->name] = clone $controllers[$id . '::' . $r->name];
                     }
                 }

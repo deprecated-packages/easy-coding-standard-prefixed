@@ -20,20 +20,12 @@ final class UrlHelper
 {
     private $requestStack;
     private $requestContext;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @param \ECSPrefix20210507\Symfony\Component\Routing\RequestContext $requestContext
-     */
-    public function __construct($requestStack, $requestContext = null)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack, RequestContext $requestContext = null)
     {
         $this->requestStack = $requestStack;
         $this->requestContext = $requestContext;
     }
-    /**
-     * @param string $path
-     * @return string
-     */
-    public function getAbsoluteUrl($path)
+    public function getAbsoluteUrl(string $path) : string
     {
         if (\false !== \strpos($path, '://') || '//' === \substr($path, 0, 2)) {
             return $path;
@@ -56,11 +48,7 @@ final class UrlHelper
         }
         return $request->getSchemeAndHttpHost() . $path;
     }
-    /**
-     * @param string $path
-     * @return string
-     */
-    public function getRelativePath($path)
+    public function getRelativePath(string $path) : string
     {
         if (\false !== \strpos($path, '://') || '//' === \substr($path, 0, 2)) {
             return $path;
@@ -70,11 +58,7 @@ final class UrlHelper
         }
         return $request->getRelativeUriForPath($path);
     }
-    /**
-     * @param string $path
-     * @return string
-     */
-    private function getAbsoluteUrlFromContext($path)
+    private function getAbsoluteUrlFromContext(string $path) : string
     {
         if (null === $this->requestContext || '' === ($host = $this->requestContext->getHost())) {
             return $path;

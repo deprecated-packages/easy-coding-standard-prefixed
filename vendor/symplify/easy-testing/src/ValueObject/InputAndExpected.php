@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyTesting\ValueObject;
 
 final class InputAndExpected
@@ -14,17 +15,13 @@ final class InputAndExpected
     private $expected;
     /**
      * @param mixed $expected
-     * @param string $original
      */
-    public function __construct($original, $expected)
+    public function __construct(string $original, $expected)
     {
         $this->input = $original;
         $this->expected = $expected;
     }
-    /**
-     * @return string
-     */
-    public function getInput()
+    public function getInput() : string
     {
         return $this->input;
     }

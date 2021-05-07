@@ -36,11 +36,8 @@ class ArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     private $maxItems;
     /**
      * @param bool $storeSerialized Disabling serialization can lead to cache corruptions when storing mutable values but increases performance otherwise
-     * @param int $defaultLifetime
-     * @param float $maxLifetime
-     * @param int $maxItems
      */
-    public function __construct($defaultLifetime = 0, $storeSerialized = \true, $maxLifetime = 0, $maxItems = 0)
+    public function __construct(int $defaultLifetime = 0, bool $storeSerialized = \true, float $maxLifetime = 0, int $maxItems = 0)
     {
         if (0 > $maxLifetime) {
             throw new InvalidArgumentException(\sprintf('Argument $maxLifetime must be positive, %F passed.', $maxLifetime));
@@ -62,10 +59,8 @@ class ArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     /**
      * {@inheritdoc}
-     * @param string $key
-     * @param float $beta
      */
-    public function get($key, callable $callback, $beta = null, array &$metadata = null)
+    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
     {
         $item = $this->getItem($key);
         $metadata = $item->getMetadata();
@@ -78,10 +73,8 @@ class ArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     /**
      * {@inheritdoc}
-     * @param string $key
-     * @return bool
      */
-    public function delete($key)
+    public function delete(string $key) : bool
     {
         return $this->deleteItem($key);
     }
@@ -162,9 +155,8 @@ class ArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function save($item)
+    public function save(CacheItemInterface $item)
     {
         if (!$item instanceof CacheItem) {
             return \false;
@@ -208,9 +200,8 @@ class ArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred($item)
+    public function saveDeferred(CacheItemInterface $item)
     {
         return $this->save($item);
     }
@@ -227,9 +218,8 @@ class ArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * {@inheritdoc}
      *
      * @return bool
-     * @param string $prefix
      */
-    public function clear($prefix = '')
+    public function clear(string $prefix = '')
     {
         if ('' !== $prefix) {
             $now = \microtime(\true);
@@ -325,11 +315,7 @@ class ArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
         }
         return $value;
     }
-    /**
-     * @param string $key
-     * @param bool $isHit
-     */
-    private function unfreeze($key, &$isHit)
+    private function unfreeze(string $key, bool &$isHit)
     {
         if ('N;' === ($value = $this->values[$key])) {
             return null;

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -54,10 +55,8 @@ final class NoExtraBlankLinesFixer extends AbstractFixer implements Configurable
     private $tokensAnalyzer;
     /**
      * {@inheritdoc}
-     * @param mixed[] $configuration
-     * @return void
      */
-    public function configure($configuration)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         static $reprToTokenMap = ['break' => \T_BREAK, 'case' => \T_CASE, 'continue' => \T_CONTINUE, 'curly_brace_block' => '{', 'default' => \T_DEFAULT, 'extra' => \T_WHITESPACE, 'parenthesis_brace_block' => '(', 'return' => \T_RETURN, 'square_brace_block' => CT::T_ARRAY_SQUARE_BRACE_OPEN, 'switch' => \T_SWITCH, 'throw' => \T_THROW, 'use' => \T_USE, 'use_trait' => CT::T_USE_TRAIT];
@@ -73,9 +72,8 @@ final class NoExtraBlankLinesFixer extends AbstractFixer implements Configurable
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Removes extra blank lines and/or blank lines following configuration.', [new CodeSample('<?php
 
@@ -177,28 +175,22 @@ switch($a) {
      *
      * Must run before BlankLineBeforeStatementFixer.
      * Must run after CombineConsecutiveUnsetsFixer, FunctionToConstantFixer, NoEmptyCommentFixer, NoEmptyPhpdocFixer, NoEmptyStatementFixer, NoUnusedImportsFixer, NoUselessElseFixer, NoUselessReturnFixer, NoUselessSprintfFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -20;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $this->tokens = $tokens;
         $this->tokensAnalyzer = new TokensAnalyzer($this->tokens);
@@ -208,18 +200,12 @@ switch($a) {
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('tokens', 'List of tokens to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset(self::$availableTokens)])->setDefault(['extra'])->getOption()]);
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @param int $index
-     */
-    private function fixByToken($token, $index)
+    private function fixByToken(Token $token, int $index) : void
     {
         foreach ($this->tokenKindCallbackMap as $kind => $callback) {
             if (!$token->isGivenKind($kind)) {
@@ -236,11 +222,7 @@ switch($a) {
             return;
         }
     }
-    /**
-     * @return void
-     * @param int $index
-     */
-    private function removeBetweenUse($index)
+    private function removeBetweenUse(int $index) : void
     {
         $next = $this->tokens->getNextTokenOfKind($index, [';', [\T_CLOSE_TAG]]);
         if (null === $next || $this->tokens[$next]->isGivenKind(\T_CLOSE_TAG)) {
@@ -252,11 +234,7 @@ switch($a) {
         }
         $this->removeEmptyLinesAfterLineWithTokenAt($next);
     }
-    /**
-     * @return void
-     * @param int $index
-     */
-    private function removeMultipleBlankLines($index)
+    private function removeMultipleBlankLines(int $index) : void
     {
         $expected = $this->tokens[$index - 1]->isGivenKind(\T_OPEN_TAG) && 1 === Preg::match('/\\R$/', $this->tokens[$index - 1]->getContent()) ? 1 : 2;
         $parts = Preg::split('/(.*\\R)/', $this->tokens[$index]->getContent(), -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
@@ -265,11 +243,7 @@ switch($a) {
             $this->tokens[$index] = new Token([\T_WHITESPACE, \implode('', \array_slice($parts, 0, $expected)) . \rtrim($parts[$count - 1], "\r\n")]);
         }
     }
-    /**
-     * @return void
-     * @param int $index
-     */
-    private function fixAfterToken($index)
+    private function fixAfterToken(int $index) : void
     {
         for ($i = $index - 1; $i > 0; --$i) {
             if ($this->tokens[$i]->isGivenKind(\T_FUNCTION) && $this->tokensAnalyzer->isLambda($i)) {
@@ -284,11 +258,7 @@ switch($a) {
         }
         $this->removeEmptyLinesAfterLineWithTokenAt($index);
     }
-    /**
-     * @return void
-     * @param int $index
-     */
-    private function fixAfterThrowToken($index)
+    private function fixAfterThrowToken(int $index) : void
     {
         if ($this->tokens[$this->tokens->getPrevMeaningfulToken($index)]->equalsAny([';', '{', '}', ':', [\T_OPEN_TAG]])) {
             $this->fixAfterToken($index);
@@ -299,9 +269,8 @@ switch($a) {
      * but only if the block is not on one line.
      *
      * @param int $index body start
-     * @return void
      */
-    private function fixStructureOpenCloseIfMultiLine($index)
+    private function fixStructureOpenCloseIfMultiLine(int $index) : void
     {
         $blockTypeInfo = Tokens::detectBlockType($this->tokens[$index]);
         $bodyEnd = $this->tokens->findBlockEnd($blockTypeInfo['type'], $index);
@@ -313,11 +282,7 @@ switch($a) {
             }
         }
     }
-    /**
-     * @return void
-     * @param int $index
-     */
-    private function removeEmptyLinesAfterLineWithTokenAt($index)
+    private function removeEmptyLinesAfterLineWithTokenAt(int $index) : void
     {
         // find the line break
         $tokenCount = \count($this->tokens);
@@ -346,12 +311,7 @@ switch($a) {
             $this->tokens[$i] = new Token([\T_WHITESPACE, $newContent]);
         }
     }
-    /**
-     * @param int $startIndex
-     * @param int $endIndex
-     * @return bool
-     */
-    private function containsLinebreak($startIndex, $endIndex)
+    private function containsLinebreak(int $startIndex, int $endIndex) : bool
     {
         for ($i = $endIndex; $i > $startIndex; --$i) {
             if (Preg::match('/\\R/', $this->tokens[$i]->getContent())) {

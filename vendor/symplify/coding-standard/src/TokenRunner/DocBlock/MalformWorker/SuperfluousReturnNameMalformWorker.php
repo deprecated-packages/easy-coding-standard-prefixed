@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -13,27 +14,24 @@ final class SuperfluousReturnNameMalformWorker implements MalformWorkerInterface
      * @var string
      * @see https://regex101.com/r/26Wy7Y/1
      */
-    const RETURN_VARIABLE_NAME_REGEX = '#(?<tag>@return)(?<type>\\s+[|\\\\\\w]+)?(\\s+)(?<' . self::VARIABLE_NAME_PART . '>\\$[\\w]+)#';
+    private const RETURN_VARIABLE_NAME_REGEX = '#(?<tag>@return)(?<type>\\s+[|\\\\\\w]+)?(\\s+)(?<' . self::VARIABLE_NAME_PART . '>\\$[\\w]+)#';
     /**
      * @var string[]
      */
-    const ALLOWED_VARIABLE_NAMES = ['$this'];
+    private const ALLOWED_VARIABLE_NAMES = ['$this'];
     /**
      * @var string
      * @see https://regex101.com/r/IE9fA6/1
      */
-    const VARIABLE_NAME_REGEX = '#\\$\\w+#';
+    private const VARIABLE_NAME_REGEX = '#\\$\\w+#';
     /**
      * @var string
      */
-    const VARIABLE_NAME_PART = 'variableName';
+    private const VARIABLE_NAME_PART = 'variableName';
     /**
      * @param Tokens<Token> $tokens
-     * @param string $docContent
-     * @param int $position
-     * @return string
      */
-    public function work($docContent, $tokens, $position)
+    public function work(string $docContent, Tokens $tokens, int $position) : string
     {
         $docBlock = new DocBlock($docContent);
         $lines = $docBlock->getLines();
@@ -58,10 +56,8 @@ final class SuperfluousReturnNameMalformWorker implements MalformWorkerInterface
     }
     /**
      * @param array<string, string> $match
-     * @param string $content
-     * @return bool
      */
-    private function shouldSkip(array $match, $content)
+    private function shouldSkip(array $match, string $content) : bool
     {
         if (\in_array($match[self::VARIABLE_NAME_PART], self::ALLOWED_VARIABLE_NAMES, \true)) {
             return \true;

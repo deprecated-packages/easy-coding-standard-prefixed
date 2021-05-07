@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -18,17 +19,7 @@ namespace PhpCsFixer\Cache;
  */
 interface FileHandlerInterface
 {
-    /**
-     * @return string
-     */
-    public function getFile();
-    /**
-     * @return \PhpCsFixer\Cache\CacheInterface|null
-     */
-    public function read();
-    /**
-     * @return void
-     * @param \PhpCsFixer\Cache\CacheInterface $cache
-     */
-    public function write($cache);
+    public function getFile() : string;
+    public function read() : ?\PhpCsFixer\Cache\CacheInterface;
+    public function write(\PhpCsFixer\Cache\CacheInterface $cache) : void;
 }

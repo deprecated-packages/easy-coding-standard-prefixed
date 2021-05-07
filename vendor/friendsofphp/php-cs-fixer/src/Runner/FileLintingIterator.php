@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,43 +29,26 @@ final class FileLintingIterator extends \IteratorIterator
      * @var null|LinterInterface
      */
     private $linter;
-    /**
-     * @param \Iterator $iterator
-     * @param \PhpCsFixer\Linter\LinterInterface $linter
-     */
-    public function __construct($iterator, $linter)
+    public function __construct(\Iterator $iterator, LinterInterface $linter)
     {
         parent::__construct($iterator);
         $this->linter = $linter;
     }
-    /**
-     * @return \PhpCsFixer\Linter\LintingResultInterface|null
-     */
-    public function currentLintingResult()
+    public function currentLintingResult() : ?LintingResultInterface
     {
         return $this->currentResult;
     }
-    /**
-     * @return void
-     */
-    public function next()
+    public function next() : void
     {
         parent::next();
         $this->currentResult = $this->valid() ? $this->handleItem($this->current()) : null;
     }
-    /**
-     * @return void
-     */
-    public function rewind()
+    public function rewind() : void
     {
         parent::rewind();
         $this->currentResult = $this->valid() ? $this->handleItem($this->current()) : null;
     }
-    /**
-     * @param \SplFileInfo $file
-     * @return \PhpCsFixer\Linter\LintingResultInterface
-     */
-    private function handleItem($file)
+    private function handleItem(\SplFileInfo $file) : LintingResultInterface
     {
         return $this->linter->lintFile($file->getRealPath());
     }

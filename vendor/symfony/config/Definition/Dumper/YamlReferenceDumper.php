@@ -27,18 +27,11 @@ use ECSPrefix20210507\Symfony\Component\Yaml\Inline;
 class YamlReferenceDumper
 {
     private $reference;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\ConfigurationInterface $configuration
-     */
-    public function dump($configuration)
+    public function dump(ConfigurationInterface $configuration)
     {
         return $this->dumpNode($configuration->getConfigTreeBuilder()->buildTree());
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\ConfigurationInterface $configuration
-     * @param string $path
-     */
-    public function dumpAtPath($configuration, $path)
+    public function dumpAtPath(ConfigurationInterface $configuration, string $path)
     {
         $rootNode = $node = $configuration->getConfigTreeBuilder()->buildTree();
         foreach (\explode('.', $path) as $step) {
@@ -57,10 +50,7 @@ class YamlReferenceDumper
         }
         return $this->dumpNode($node);
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface $node
-     */
-    public function dumpNode($node)
+    public function dumpNode(NodeInterface $node)
     {
         $this->reference = '';
         $this->writeNode($node);
@@ -68,13 +58,7 @@ class YamlReferenceDumper
         $this->reference = null;
         return $ref;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface $node
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface $parentNode
-     * @param int $depth
-     * @param bool $prototypedArray
-     */
-    private function writeNode($node, $parentNode = null, $depth = 0, $prototypedArray = \false)
+    private function writeNode(NodeInterface $node, NodeInterface $parentNode = null, int $depth = 0, bool $prototypedArray = \false)
     {
         $comments = [];
         $default = '';
@@ -163,19 +147,14 @@ class YamlReferenceDumper
     }
     /**
      * Outputs a single config reference line.
-     * @param string $text
-     * @param int $indent
      */
-    private function writeLine($text, $indent = 0)
+    private function writeLine(string $text, int $indent = 0)
     {
         $indent = \strlen($text) + $indent;
         $format = '%' . $indent . 's';
         $this->reference .= \sprintf($format, $text) . "\n";
     }
-    /**
-     * @param int $depth
-     */
-    private function writeArray(array $array, $depth)
+    private function writeArray(array $array, int $depth)
     {
         $isIndexed = \array_values($array) === $array;
         foreach ($array as $key => $value) {
@@ -194,11 +173,7 @@ class YamlReferenceDumper
             }
         }
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\PrototypedArrayNode $node
-     * @return mixed[]
-     */
-    private function getPrototypeChildren($node)
+    private function getPrototypeChildren(PrototypedArrayNode $node) : array
     {
         $prototype = $node->getPrototype();
         $key = $node->getKeyAttribute();

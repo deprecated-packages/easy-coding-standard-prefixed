@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,9 +26,8 @@ final class NativeFunctionCasingFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Function defined by PHP should be called using the correct casing.', [new CodeSample("<?php\nSTRLEN(\$str);\n")]);
     }
@@ -35,28 +35,22 @@ final class NativeFunctionCasingFixer extends AbstractFixer
      * {@inheritdoc}
      *
      * Must run after FunctionToConstantFixer, NoUselessSprintfFixer, PowToExponentiationFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         static $nativeFunctionNames = null;
         if (null === $nativeFunctionNames) {
@@ -93,9 +87,9 @@ final class NativeFunctionCasingFixer extends AbstractFixer
         }
     }
     /**
-     * @return mixed[]
+     * @return array<string, string>
      */
-    private function getNativeFunctionNames()
+    private function getNativeFunctionNames() : array
     {
         $allFunctions = \get_defined_functions();
         $functions = [];

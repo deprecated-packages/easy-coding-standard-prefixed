@@ -28,21 +28,14 @@ class CacheDataCollector extends DataCollector implements LateDataCollectorInter
      * @var TraceableAdapter[]
      */
     private $instances = [];
-    /**
-     * @param string $name
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Adapter\TraceableAdapter $instance
-     */
-    public function addInstance($name, $instance)
+    public function addInstance(string $name, TraceableAdapter $instance)
     {
         $this->instances[$name] = $instance;
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
-     * @param \Throwable $exception
      */
-    public function collect($request, $response, $exception = null)
+    public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         $empty = ['calls' => [], 'config' => [], 'options' => [], 'statistics' => []];
         $this->data = ['instances' => $empty, 'total' => $empty];
@@ -97,10 +90,7 @@ class CacheDataCollector extends DataCollector implements LateDataCollectorInter
     {
         return $this->data['instances']['calls'];
     }
-    /**
-     * @return mixed[]
-     */
-    private function calculateStatistics()
+    private function calculateStatistics() : array
     {
         $statistics = [];
         foreach ($this->data['instances']['calls'] as $name => $calls) {
@@ -149,10 +139,7 @@ class CacheDataCollector extends DataCollector implements LateDataCollectorInter
         }
         return $statistics;
     }
-    /**
-     * @return mixed[]
-     */
-    private function calculateTotalStatistics()
+    private function calculateTotalStatistics() : array
     {
         $statistics = $this->getStatistics();
         $totals = ['calls' => 0, 'time' => 0, 'reads' => 0, 'writes' => 0, 'deletes' => 0, 'hits' => 0, 'misses' => 0];

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenAnalyzer;
 
 use PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer;
@@ -15,10 +16,7 @@ final class DocblockRelatedParamNamesResolver
      * @var Token[]
      */
     private $functionTokens = [];
-    /**
-     * @param \PhpCsFixer\Tokenizer\Analyzer\FunctionsAnalyzer $functionsAnalyzer
-     */
-    public function __construct($functionsAnalyzer)
+    public function __construct(FunctionsAnalyzer $functionsAnalyzer)
     {
         $this->functionsAnalyzer = $functionsAnalyzer;
         $this->functionTokens[] = new Token([\T_FUNCTION, 'function']);
@@ -28,11 +26,10 @@ final class DocblockRelatedParamNamesResolver
         }
     }
     /**
-     * @return mixed[]
+     * @return string[]
      * @param Tokens<Token> $tokens
-     * @param int $docTokenPosition
      */
-    public function resolve($tokens, $docTokenPosition)
+    public function resolve(Tokens $tokens, int $docTokenPosition) : array
     {
         $functionTokenPosition = $tokens->getNextTokenOfKind($docTokenPosition, $this->functionTokens);
         if ($functionTokenPosition === null) {
@@ -42,10 +39,7 @@ final class DocblockRelatedParamNamesResolver
         $functionArgumentAnalyses = $this->functionsAnalyzer->getFunctionArguments($tokens, $functionTokenPosition);
         return \array_keys($functionArgumentAnalyses);
     }
-    /**
-     * @return bool
-     */
-    private function doesFnTokenExist()
+    private function doesFnTokenExist() : bool
     {
         if (!\defined('T_FN')) {
             return \false;

@@ -47,17 +47,15 @@ class FrozenParameterBag extends \ECSPrefix20210507\Symfony\Component\Dependency
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function set($name, $value)
+    public function set(string $name, $value)
     {
         throw new LogicException('Impossible to call set() on a frozen ParameterBag.');
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function remove($name)
+    public function remove(string $name)
     {
         throw new LogicException('Impossible to call remove() on a frozen ParameterBag.');
     }

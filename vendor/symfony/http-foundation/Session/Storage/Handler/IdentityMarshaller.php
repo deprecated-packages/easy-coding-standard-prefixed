@@ -18,10 +18,8 @@ class IdentityMarshaller implements MarshallerInterface
 {
     /**
      * {@inheritdoc}
-     * @param mixed[]|null $failed
-     * @return mixed[]
      */
-    public function marshall(array $values, &$failed)
+    public function marshall(array $values, ?array &$failed) : array
     {
         foreach ($values as $key => $value) {
             if (!\is_string($value)) {
@@ -32,10 +30,8 @@ class IdentityMarshaller implements MarshallerInterface
     }
     /**
      * {@inheritdoc}
-     * @param string $value
-     * @return string
      */
-    public function unmarshall($value)
+    public function unmarshall(string $value) : string
     {
         return $value;
     }

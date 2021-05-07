@@ -44,7 +44,7 @@ class LowerCaseTypeSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if (isset(Tokens::$castTokens[$tokens[$stackPtr]['code']]) === \true) {
@@ -131,7 +131,7 @@ class LowerCaseTypeSniff implements Sniff
      *
      * @return void
      */
-    protected function processUnionType($phpcsFile, $typeDeclStart, $typeDeclEnd, $error, $errorCode)
+    protected function processUnionType(File $phpcsFile, $typeDeclStart, $typeDeclEnd, $error, $errorCode)
     {
         $tokens = $phpcsFile->getTokens();
         $current = $typeDeclStart;
@@ -172,7 +172,7 @@ class LowerCaseTypeSniff implements Sniff
      *
      * @return void
      */
-    protected function processType($phpcsFile, $stackPtr, $type, $error, $errorCode)
+    protected function processType(File $phpcsFile, $stackPtr, $type, $error, $errorCode)
     {
         $typeLower = \strtolower($type);
         if ($typeLower === $type) {

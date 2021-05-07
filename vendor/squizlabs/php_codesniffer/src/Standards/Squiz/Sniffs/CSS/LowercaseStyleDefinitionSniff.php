@@ -38,7 +38,7 @@ class LowercaseStyleDefinitionSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $start = $stackPtr + 1;

@@ -24,5 +24,5 @@ interface CallbackInterface
      *
      * @return mixed The computed value for the passed item
      */
-    public function __invoke($item, &$save);
+    public function __invoke(CacheItemInterface $item, bool &$save);
 }

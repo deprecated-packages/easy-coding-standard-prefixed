@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SymplifyKernel\HttpKernel;
 
 use ECSPrefix20210507\Symfony\Component\Config\Loader\LoaderInterface;
@@ -15,32 +16,25 @@ abstract class AbstractSymplifyKernel extends Kernel implements ExtraConfigAware
      * @var string[]
      */
     private $configs = [];
-    /**
-     * @return string
-     */
-    public function getCacheDir()
+    public function getCacheDir() : string
     {
         return \sys_get_temp_dir() . '/' . $this->getUniqueKernelHash();
     }
-    /**
-     * @return string
-     */
-    public function getLogDir()
+    public function getLogDir() : string
     {
         return \sys_get_temp_dir() . '/' . $this->getUniqueKernelHash() . '_log';
     }
     /**
-     * @return mixed[]
+     * @return BundleInterface[]
      */
-    public function registerBundles()
+    public function registerBundles() : iterable
     {
         return [new SymplifyKernelBundle()];
     }
     /**
      * @param string[]|SmartFileInfo[] $configs
-     * @return void
      */
-    public function setConfigs(array $configs)
+    public function setConfigs(array $configs) : void
     {
         foreach ($configs as $config) {
             if ($config instanceof SmartFileInfo) {
@@ -49,20 +43,13 @@ abstract class AbstractSymplifyKernel extends Kernel implements ExtraConfigAware
             $this->configs[] = $config;
         }
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Loader\LoaderInterface $loader
-     * @return void
-     */
-    public function registerContainerConfiguration($loader)
+    public function registerContainerConfiguration(LoaderInterface $loader) : void
     {
         foreach ($this->configs as $config) {
             $loader->load($config);
         }
     }
-    /**
-     * @return string
-     */
-    private function getUniqueKernelHash()
+    private function getUniqueKernelHash() : string
     {
         $kernelUniqueHasher = new KernelUniqueHasher();
         return $kernelUniqueHasher->hashKernelClass(static::class);

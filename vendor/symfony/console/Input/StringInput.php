@@ -22,12 +22,12 @@ use ECSPrefix20210507\Symfony\Component\Console\Exception\InvalidArgumentExcepti
  */
 class StringInput extends \ECSPrefix20210507\Symfony\Component\Console\Input\ArgvInput
 {
-    const REGEX_STRING = '([^\\s]+?)(?:\\s|(?<!\\\\)"|(?<!\\\\)\'|$)';
-    const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')';
+    public const REGEX_STRING = '([^\\s]+?)(?:\\s|(?<!\\\\)"|(?<!\\\\)\'|$)';
+    public const REGEX_QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')';
     /**
      * @param string $input A string representing the parameters from the CLI
      */
-    public function __construct($input)
+    public function __construct(string $input)
     {
         parent::__construct([]);
         $this->setTokens($this->tokenize($input));
@@ -36,10 +36,8 @@ class StringInput extends \ECSPrefix20210507\Symfony\Component\Console\Input\Arg
      * Tokenizes a string.
      *
      * @throws InvalidArgumentException When unable to parse input (should never happen)
-     * @param string $input
-     * @return mixed[]
      */
-    private function tokenize($input)
+    private function tokenize(string $input) : array
     {
         $tokens = [];
         $length = \strlen($input);

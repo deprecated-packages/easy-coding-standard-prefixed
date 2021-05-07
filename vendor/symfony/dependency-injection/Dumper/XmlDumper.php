@@ -53,10 +53,7 @@ class XmlDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInjection
         $this->document = null;
         return $this->container->resolveEnvPlaceholders($xml);
     }
-    /**
-     * @param \DOMElement $parent
-     */
-    private function addParameters($parent)
+    private function addParameters(\DOMElement $parent)
     {
         $data = $this->container->getParameterBag()->all();
         if (!$data) {
@@ -69,10 +66,7 @@ class XmlDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInjection
         $parent->appendChild($parameters);
         $this->convertParameters($data, 'parameter', $parameters);
     }
-    /**
-     * @param \DOMElement $parent
-     */
-    private function addMethodCalls(array $methodcalls, $parent)
+    private function addMethodCalls(array $methodcalls, \DOMElement $parent)
     {
         foreach ($methodcalls as $methodcall) {
             $call = $this->document->createElement('call');
@@ -80,18 +74,13 @@ class XmlDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInjection
             if (\count($methodcall[1])) {
                 $this->convertParameters($methodcall[1], 'argument', $call);
             }
-            if (isset($methodcall[2]) ? $methodcall[2] : \false) {
+            if ($methodcall[2] ?? \false) {
                 $call->setAttribute('returns-clone', 'true');
             }
             $parent->appendChild($call);
         }
     }
-    /**
-     * @param string|null $id
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
-     * @param \DOMElement $parent
-     */
-    private function addService($definition, $id, $parent)
+    private function addService(Definition $definition, ?string $id, \DOMElement $parent)
     {
         $service = $this->document->createElement('service');
         if (null !== $id) {
@@ -116,9 +105,9 @@ class XmlDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInjection
             $service->setAttribute('lazy', 'true');
         }
         if (null !== ($decoratedService = $definition->getDecoratedService())) {
-            list($decorated, $renamedId, $priority) = $decoratedService;
+            [$decorated, $renamedId, $priority] = $decoratedService;
             $service->setAttribute('decorates', $decorated);
-            $decorationOnInvalid = isset($decoratedService[3]) ? $decoratedService[3] : ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
+            $decorationOnInvalid = $decoratedService[3] ?? ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
             if (\in_array($decorationOnInvalid, [ContainerInterface::IGNORE_ON_INVALID_REFERENCE, ContainerInterface::NULL_ON_INVALID_REFERENCE], \true)) {
                 $invalidBehavior = ContainerInterface::NULL_ON_INVALID_REFERENCE === $decorationOnInvalid ? 'null' : 'ignore';
                 $service->setAttribute('decoration-on-invalid', $invalidBehavior);
@@ -203,12 +192,7 @@ class XmlDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInjection
         }
         $parent->appendChild($service);
     }
-    /**
-     * @param string $alias
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Alias $id
-     * @param \DOMElement $parent
-     */
-    private function addServiceAlias($alias, $id, $parent)
+    private function addServiceAlias(string $alias, Alias $id, \DOMElement $parent)
     {
         $service = $this->document->createElement('service');
         $service->setAttribute('id', $alias);
@@ -226,10 +210,7 @@ class XmlDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInjection
         }
         $parent->appendChild($service);
     }
-    /**
-     * @param \DOMElement $parent
-     */
-    private function addServices($parent)
+    private function addServices(\DOMElement $parent)
     {
         $definitions = $this->container->getDefinitions();
         if (!$definitions) {
@@ -248,12 +229,7 @@ class XmlDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInjection
         }
         $parent->appendChild($services);
     }
-    /**
-     * @param string $type
-     * @param \DOMElement $parent
-     * @param string $keyAttribute
-     */
-    private function convertParameters(array $parameters, $type, $parent, $keyAttribute = 'key')
+    private function convertParameters(array $parameters, string $type, \DOMElement $parent, string $keyAttribute = 'key')
     {
         $withKeys = \array_keys($parameters) !== \range(0, \count($parameters) - 1);
         foreach ($parameters as $key => $value) {
@@ -326,9 +302,8 @@ class XmlDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInjection
     }
     /**
      * Escapes arguments.
-     * @return mixed[]
      */
-    private function escape(array $arguments)
+    private function escape(array $arguments) : array
     {
         $args = [];
         foreach ($arguments as $k => $v) {
@@ -348,9 +323,8 @@ class XmlDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInjection
      * @param mixed $value Value to convert
      *
      * @throws RuntimeException When trying to dump object or resource
-     * @return string
      */
-    public static function phpToXml($value)
+    public static function phpToXml($value) : string
     {
         switch (\true) {
             case null === $value:

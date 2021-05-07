@@ -19,21 +19,12 @@ use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
 final class ConsoleSignalEvent extends \ECSPrefix20210507\Symfony\Component\Console\Event\ConsoleEvent
 {
     private $handlingSignal;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param int $handlingSignal
-     */
-    public function __construct($command, $input, $output, $handlingSignal)
+    public function __construct(Command $command, InputInterface $input, OutputInterface $output, int $handlingSignal)
     {
         parent::__construct($command, $input, $output);
         $this->handlingSignal = $handlingSignal;
     }
-    /**
-     * @return int
-     */
-    public function getHandlingSignal()
+    public function getHandlingSignal() : int
     {
         return $this->handlingSignal;
     }

@@ -17,7 +17,7 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\PhpFileLoader
  */
 class PrototypeConfigurator extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
-    const FACTORY = 'load';
+    public const FACTORY = 'load';
     use Traits\AbstractTrait;
     use Traits\ArgumentTrait;
     use Traits\AutoconfigureTrait;
@@ -37,15 +37,7 @@ class PrototypeConfigurator extends \ECSPrefix20210507\Symfony\Component\Depende
     private $resource;
     private $excludes;
     private $allowParent;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\PhpFileLoader $loader
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $defaults
-     * @param string $namespace
-     * @param string $resource
-     * @param bool $allowParent
-     */
-    public function __construct($parent, $loader, $defaults, $namespace, $resource, $allowParent)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, PhpFileLoader $loader, Definition $defaults, string $namespace, string $resource, bool $allowParent)
     {
         $definition = new Definition();
         if (!$defaults->isPublic() || !$defaults->isPrivate()) {
@@ -76,7 +68,7 @@ class PrototypeConfigurator extends \ECSPrefix20210507\Symfony\Component\Depende
      *
      * @return $this
      */
-    public final function exclude($excludes)
+    public final function exclude($excludes) : self
     {
         $this->excludes = (array) $excludes;
         return $this;

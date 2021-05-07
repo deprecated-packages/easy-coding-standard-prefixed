@@ -24,20 +24,11 @@ class HtmlDescriptor implements \ECSPrefix20210507\Symfony\Component\VarDumper\C
 {
     private $dumper;
     private $initialized = \false;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\HtmlDumper $dumper
-     */
-    public function __construct($dumper)
+    public function __construct(HtmlDumper $dumper)
     {
         $this->dumper = $dumper;
     }
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data $data
-     * @param int $clientId
-     */
-    public function describe($output, $data, array $context, $clientId)
+    public function describe(OutputInterface $output, Data $data, array $context, int $clientId) : void
     {
         if (!$this->initialized) {
             $styles = \file_get_contents(__DIR__ . '/../../Resources/css/htmlDescriptor.css');
@@ -60,14 +51,14 @@ class HtmlDescriptor implements \ECSPrefix20210507\Symfony\Component\VarDumper\C
         $sourceDescription = '';
         if (isset($context['source'])) {
             $source = $context['source'];
-            $projectDir = isset($source['project_dir']) ? $source['project_dir'] : null;
+            $projectDir = $source['project_dir'] ?? null;
             $sourceDescription = \sprintf('%s on line %d', $source['name'], $source['line']);
             if (isset($source['file_link'])) {
                 $sourceDescription = \sprintf('<a href="%s">%s</a>', $source['file_link'], $sourceDescription);
             }
         }
         $isoDate = $this->extractDate($context, 'c');
-        $tags = \array_filter(['controller' => isset($controller) ? $controller : null, 'project dir' => isset($projectDir) ? $projectDir : null]);
+        $tags = \array_filter(['controller' => $controller ?? null, 'project dir' => $projectDir ?? null]);
         $output->writeln(<<<HTML
 <article data-dedup-id="{$dedupIdentifier}">
     <header>
@@ -89,18 +80,11 @@ class HtmlDescriptor implements \ECSPrefix20210507\Symfony\Component\VarDumper\C
 HTML
 );
     }
-    /**
-     * @param string $format
-     * @return string
-     */
-    private function extractDate(array $context, $format = 'r')
+    private function extractDate(array $context, string $format = 'r') : string
     {
         return \date($format, $context['timestamp']);
     }
-    /**
-     * @return string
-     */
-    private function renderTags(array $tags)
+    private function renderTags(array $tags) : string
     {
         if (!$tags) {
             return '';

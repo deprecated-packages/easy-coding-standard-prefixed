@@ -29,9 +29,8 @@ trait TesterTrait
      * @throws \RuntimeException If it's called before the execute method
      *
      * @return string The display
-     * @param bool $normalize
      */
-    public function getDisplay($normalize = \false)
+    public function getDisplay(bool $normalize = \false)
     {
         if (null === $this->output) {
             throw new \RuntimeException('Output not initialized, did you execute the command before requesting the display?');
@@ -50,7 +49,7 @@ trait TesterTrait
      *
      * @return string
      */
-    public function getErrorOutput($normalize = \false)
+    public function getErrorOutput(bool $normalize = \false)
     {
         if (!$this->captureStreamsIndependently) {
             throw new \LogicException('The error output is not available when the tester is run without "capture_stderr_separately" option set.');
@@ -128,7 +127,7 @@ trait TesterTrait
                 $this->output->setVerbosity($options['verbosity']);
             }
         } else {
-            $this->output = new ConsoleOutput(isset($options['verbosity']) ? $options['verbosity'] : ConsoleOutput::VERBOSITY_NORMAL, isset($options['decorated']) ? $options['decorated'] : null);
+            $this->output = new ConsoleOutput($options['verbosity'] ?? ConsoleOutput::VERBOSITY_NORMAL, $options['decorated'] ?? null);
             $errorOutput = new StreamOutput(\fopen('php://memory', 'w', \false));
             $errorOutput->setFormatter($this->output->getFormatter());
             $errorOutput->setVerbosity($this->output->getVerbosity());

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -23,24 +24,15 @@ final class FileHandler implements \PhpCsFixer\Cache\FileHandlerInterface
      * @var string
      */
     private $file;
-    /**
-     * @param string $file
-     */
-    public function __construct($file)
+    public function __construct(string $file)
     {
         $this->file = $file;
     }
-    /**
-     * @return string
-     */
-    public function getFile()
+    public function getFile() : string
     {
         return $this->file;
     }
-    /**
-     * @return \PhpCsFixer\Cache\CacheInterface|null
-     */
-    public function read()
+    public function read() : ?\PhpCsFixer\Cache\CacheInterface
     {
         if (!\file_exists($this->file)) {
             return null;
@@ -53,11 +45,7 @@ final class FileHandler implements \PhpCsFixer\Cache\FileHandlerInterface
         }
         return $cache;
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Cache\CacheInterface $cache
-     */
-    public function write($cache)
+    public function write(\PhpCsFixer\Cache\CacheInterface $cache) : void
     {
         $content = $cache->toJson();
         if (\file_exists($this->file)) {

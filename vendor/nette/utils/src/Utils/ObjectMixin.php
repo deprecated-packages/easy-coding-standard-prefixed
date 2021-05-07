@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Nette Framework (https://nette.org)
+ * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ */
+declare (strict_types=1);
 namespace ECSPrefix20210507\Nette\Utils;
 
 use ECSPrefix20210507\Nette;
@@ -10,25 +15,17 @@ use ECSPrefix20210507\Nette;
 final class ObjectMixin
 {
     use Nette\StaticClass;
-    /** @deprecated  use ObjectHelpers::getSuggestion()
-     * @return string|null
-     * @param string $value */
-    public static function getSuggestion(array $possibilities, $value)
+    /** @deprecated  use ObjectHelpers::getSuggestion() */
+    public static function getSuggestion(array $possibilities, string $value) : ?string
     {
         \trigger_error(__METHOD__ . '() has been renamed to Nette\\Utils\\ObjectHelpers::getSuggestion()', \E_USER_DEPRECATED);
         return \ECSPrefix20210507\Nette\Utils\ObjectHelpers::getSuggestion($possibilities, $value);
     }
-    /**
-     * @return void
-     */
-    public static function setExtensionMethod()
+    public static function setExtensionMethod() : void
     {
         \trigger_error('Class Nette\\Utils\\ObjectMixin is deprecated', \E_USER_DEPRECATED);
     }
-    /**
-     * @return void
-     */
-    public static function getExtensionMethod()
+    public static function getExtensionMethod() : void
     {
         \trigger_error('Class Nette\\Utils\\ObjectMixin is deprecated', \E_USER_DEPRECATED);
     }

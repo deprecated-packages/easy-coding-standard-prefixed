@@ -1,29 +1,20 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SmartFileSystem;
 
 use Symplify\SmartFileSystem\Exception\DirectoryNotFoundException;
 use Symplify\SmartFileSystem\Exception\FileNotFoundException;
 final class FileSystemGuard
 {
-    /**
-     * @return void
-     * @param string $file
-     * @param string $location
-     */
-    public function ensureFileExists($file, $location)
+    public function ensureFileExists(string $file, string $location) : void
     {
         if (\file_exists($file)) {
             return;
         }
         throw new FileNotFoundException(\sprintf('File "%s" not found in "%s".', $file, $location));
     }
-    /**
-     * @return void
-     * @param string $directory
-     * @param string $extraMessage
-     */
-    public function ensureDirectoryExists($directory, $extraMessage = '')
+    public function ensureDirectoryExists(string $directory, string $extraMessage = '') : void
     {
         if (\is_dir($directory) && \file_exists($directory)) {
             return;

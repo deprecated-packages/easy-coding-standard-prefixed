@@ -24,9 +24,8 @@ class ValidateRequestListener implements EventSubscriberInterface
 {
     /**
      * Performs the validation.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent $event
      */
-    public function onKernelRequest($event)
+    public function onKernelRequest(RequestEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -39,9 +38,8 @@ class ValidateRequestListener implements EventSubscriberInterface
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents() : array
     {
         return [KernelEvents::REQUEST => [['onKernelRequest', 256]]];
     }

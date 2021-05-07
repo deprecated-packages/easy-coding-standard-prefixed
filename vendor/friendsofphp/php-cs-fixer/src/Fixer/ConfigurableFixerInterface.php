@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -34,12 +35,10 @@ interface ConfigurableFixerInterface extends \PhpCsFixer\Fixer\FixerInterface
      * @param array $configuration configuration depends on Fixer
      *
      * @throws InvalidFixerConfigurationException
-     * @return void
      */
-    public function configure($configuration);
+    public function configure(array $configuration) : void;
     /**
      * Defines the available configuration options of the fixer.
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    public function getConfigurationDefinition();
+    public function getConfigurationDefinition() : FixerConfigurationResolverInterface;
 }

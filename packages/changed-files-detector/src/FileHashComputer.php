@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\ChangedFilesDetector;
 
 use ECSPrefix20210507\Symfony\Component\Config\FileLocator;
@@ -15,11 +16,7 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
  */
 final class FileHashComputer
 {
-    /**
-     * @param string $filePath
-     * @return string
-     */
-    public function computeConfig($filePath)
+    public function computeConfig(string $filePath) : string
     {
         $containerBuilder = new ContainerBuilder();
         $loader = $this->createLoader($filePath, $containerBuilder);
@@ -27,11 +24,7 @@ final class FileHashComputer
         $parameterBag = $containerBuilder->getParameterBag();
         return $this->arrayToHash($containerBuilder->getServiceIds()) . $this->arrayToHash($parameterBag->all());
     }
-    /**
-     * @param string $filePath
-     * @return string
-     */
-    public function compute($filePath)
+    public function compute(string $filePath) : string
     {
         $fileHash = \md5_file($filePath);
         if (!$fileHash) {
@@ -41,19 +34,13 @@ final class FileHashComputer
     }
     /**
      * @param mixed[] $array
-     * @return string
      */
-    private function arrayToHash(array $array)
+    private function arrayToHash(array $array) : string
     {
         $serializedArray = \serialize($array);
         return \md5($serializedArray);
     }
-    /**
-     * @param string $filePath
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     * @return \ECSPrefix20210507\Symfony\Component\Config\Loader\LoaderInterface
-     */
-    private function createLoader($filePath, $containerBuilder)
+    private function createLoader(string $filePath, ContainerBuilder $containerBuilder) : LoaderInterface
     {
         $fileLocator = new FileLocator([\dirname($filePath)]);
         $loaders = [new GlobFileLoader($containerBuilder, $fileLocator), new ParameterMergingPhpFileLoader($containerBuilder, $fileLocator)];

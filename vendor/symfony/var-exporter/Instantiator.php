@@ -55,9 +55,9 @@ final class Instantiator
      *
      * @throws ExceptionInterface When the instance cannot be created
      */
-    public static function instantiate($class, array $properties = [], array $privateProperties = [])
+    public static function instantiate(string $class, array $properties = [], array $privateProperties = []) : object
     {
-        $reflector = isset(Registry::$reflectors[$class]) ? Registry::$reflectors[$class] : Registry::getClassReflector($class);
+        $reflector = Registry::$reflectors[$class] ?? Registry::getClassReflector($class);
         if (Registry::$cloneable[$class]) {
             $wrappedInstance = [clone Registry::$prototypes[$class]];
         } elseif (Registry::$instantiableWithoutConstructor[$class]) {
@@ -81,7 +81,7 @@ final class Instantiator
                 // deal with array of instances, so we need to wrap values
                 $properties[$name] = [$value];
             }
-            (isset(Hydrator::$hydrators[$class]) ? Hydrator::$hydrators[$class] : Hydrator::getHydrator($class))($properties, $wrappedInstance);
+            (Hydrator::$hydrators[$class] ?? Hydrator::getHydrator($class))($properties, $wrappedInstance);
         }
         return $wrappedInstance[0];
     }

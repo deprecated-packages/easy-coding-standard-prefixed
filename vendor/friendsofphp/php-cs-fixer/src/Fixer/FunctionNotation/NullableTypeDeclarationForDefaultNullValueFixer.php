@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -32,18 +33,15 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends AbstractFixe
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Adds or removes `?` before type declarations for parameters with a default `null` value.', [new VersionSpecificCodeSample("<?php\nfunction sample(string \$str = null)\n{}\n", new VersionSpecification(70100)), new VersionSpecificCodeSample("<?php\nfunction sample(?string \$str = null)\n{}\n", new VersionSpecification(70100), ['use_nullable_type_declaration' => \false])], 'Rule is applied only in a PHP 7.1+ environment.');
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         if (\PHP_VERSION_ID < 70100) {
             return \false;
@@ -60,27 +58,22 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends AbstractFixe
      * {@inheritdoc}
      *
      * Must run before NoUnreachableDefaultArgumentValueFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('use_nullable_type_declaration', 'Whether to add or remove `?` before type declarations for parameters with a default `null` value.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $functionsAnalyzer = new FunctionsAnalyzer();
         $tokenKinds = [\T_FUNCTION];
@@ -98,10 +91,8 @@ final class NullableTypeDeclarationForDefaultNullValueFixer extends AbstractFixe
     }
     /**
      * @param ArgumentAnalysis[] $arguments
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fixFunctionParameters($tokens, array $arguments)
+    private function fixFunctionParameters(Tokens $tokens, array $arguments) : void
     {
         foreach (\array_reverse($arguments) as $argumentInfo) {
             if (!$argumentInfo->hasTypeAnalysis() || \false !== \strpos($argumentInfo->getTypeAnalysis()->getName(), '|') || !$argumentInfo->hasDefault() || 'null' !== \strtolower($argumentInfo->getDefault())) {

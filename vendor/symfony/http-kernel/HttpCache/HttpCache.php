@@ -73,11 +73,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      *                            the cache can serve a stale response when an error is encountered (default: 60).
      *                            This setting is overridden by the stale-if-error HTTP Cache-Control extension
      *                            (see RFC 5861).
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface $kernel
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\StoreInterface $store
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate
      */
-    public function __construct($kernel, $store, $surrogate = null, array $options = [])
+    public function __construct(HttpKernelInterface $kernel, \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\StoreInterface $store, \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate = null, array $options = [])
     {
         $this->store = $store;
         $this->kernel = $kernel;
@@ -107,17 +104,13 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     {
         return $this->traces;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
-     */
-    private function addTraces($response)
+    private function addTraces(Response $response)
     {
         $traceString = null;
         if ('full' === $this->options['trace_level']) {
             $traceString = $this->getLog();
         }
-        reset($this->traces);
-        if ('short' === $this->options['trace_level'] && ($masterId = key($this->traces))) {
+        if ('short' === $this->options['trace_level'] && ($masterId = \array_key_first($this->traces))) {
             $traceString = \implode('/', $this->traces[$masterId]);
         }
         if (null !== $traceString) {
@@ -168,11 +161,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param int $type
-     * @param bool $catch
      */
-    public function handle($request, $type = HttpKernelInterface::MASTER_REQUEST, $catch = \true)
+    public function handle(Request $request, int $type = HttpKernelInterface::MASTER_REQUEST, bool $catch = \true)
     {
         // FIXME: catch exceptions and implement a 500 error page here? -> in Varnish, there is a built-in error page mechanism
         if (HttpKernelInterface::MASTER_REQUEST === $type) {
@@ -218,10 +208,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    public function terminate($request, $response)
+    public function terminate(Request $request, Response $response)
     {
         if ($this->getKernel() instanceof TerminableInterface) {
             $this->getKernel()->terminate($request, $response);
@@ -233,9 +221,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * @param bool $catch Whether to process exceptions
      *
      * @return Response A Response instance
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    protected function pass($request, $catch = \false)
+    protected function pass(Request $request, bool $catch = \false)
     {
         $this->record($request, 'pass');
         return $this->forward($request, $catch);
@@ -250,9 +237,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * @throws \Exception
      *
      * @see RFC2616 13.10
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    protected function invalidate($request, $catch = \false)
+    protected function invalidate(Request $request, bool $catch = \false)
     {
         $response = $this->pass($request, $catch);
         // invalidate only when the response is successful
@@ -290,9 +276,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * @return Response A Response instance
      *
      * @throws \Exception
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    protected function lookup($request, $catch = \false)
+    protected function lookup(Request $request, bool $catch = \false)
     {
         try {
             $entry = $this->store->lookup($request);
@@ -327,10 +312,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * @param bool $catch Whether to process exceptions
      *
      * @return Response A Response instance
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $entry
      */
-    protected function validate($request, $entry, $catch = \false)
+    protected function validate(Request $request, Response $entry, bool $catch = \false)
     {
         $subRequest = clone $request;
         // send no head requests because we want content
@@ -380,9 +363,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * @param bool $catch Whether to process exceptions
      *
      * @return Response A Response instance
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    protected function fetch($request, $catch = \false)
+    protected function fetch(Request $request, bool $catch = \false)
     {
         $subRequest = clone $request;
         // send no head requests because we want content
@@ -405,12 +387,11 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * run through this method.
      *
      * @param bool          $catch Whether to catch exceptions or not
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $entry A Response instance (the stale entry if present, null otherwise)
+     * @param Response|null $entry A Response instance (the stale entry if present, null otherwise)
      *
      * @return Response A Response instance
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    protected function forward($request, $catch = \false, $entry = null)
+    protected function forward(Request $request, bool $catch = \false, Response $entry = null)
     {
         if ($this->surrogate) {
             $this->surrogate->addSurrogateCapability($request);
@@ -469,10 +450,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * Checks whether the cache entry is "fresh enough" to satisfy the Request.
      *
      * @return bool true if the cache entry if fresh enough, false otherwise
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $entry
      */
-    protected function isFreshEnough($request, $entry)
+    protected function isFreshEnough(Request $request, Response $entry)
     {
         if (!$entry->isFresh()) {
             return $this->lock($request, $entry);
@@ -486,10 +465,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * Locks a Request during the call to the backend.
      *
      * @return bool true if the cache entry can be returned even if it is staled, false otherwise
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $entry
      */
-    protected function lock($request, $entry)
+    protected function lock(Request $request, Response $entry)
     {
         // try to acquire a lock to call the backend
         $lock = $this->store->lock($request);
@@ -526,10 +503,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      * Writes the Response to the cache.
      *
      * @throws \Exception
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    protected function store($request, $response)
+    protected function store(Request $request, Response $response)
     {
         try {
             $this->store->write($request, $response);
@@ -546,10 +521,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     }
     /**
      * Restores the Response body.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    private function restoreResponseBody($request, $response)
+    private function restoreResponseBody(Request $request, Response $response)
     {
         if ($response->headers->has('X-Body-Eval')) {
             \ob_start();
@@ -574,11 +547,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
         }
         $response->headers->remove('X-Body-File');
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
-     */
-    protected function processResponseBody($request, $response)
+    protected function processResponseBody(Request $request, Response $response)
     {
         if (null !== $this->surrogate && $this->surrogate->needsParsing($response)) {
             $this->surrogate->process($request, $response);
@@ -587,10 +556,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     /**
      * Checks if the Request includes authorization or other sensitive information
      * that should cause the Response to be considered private by default.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @return bool
      */
-    private function isPrivateRequest($request)
+    private function isPrivateRequest(Request $request) : bool
     {
         foreach ($this->options['private_headers'] as $key) {
             $key = \strtolower(\str_replace('HTTP_', '', $key));
@@ -606,19 +573,15 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     }
     /**
      * Records that an event took place.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param string $event
      */
-    private function record($request, $event)
+    private function record(Request $request, string $event)
     {
         $this->traces[$this->getTraceKey($request)][] = $event;
     }
     /**
      * Calculates the key we use in the "trace" array for a given request.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @return string
      */
-    private function getTraceKey($request)
+    private function getTraceKey(Request $request) : string
     {
         $path = $request->getPathInfo();
         if ($qs = $request->getQueryString()) {
@@ -629,10 +592,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     /**
      * Checks whether the given (cached) response may be served as "stale" when a revalidation
      * is currently in progress.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $entry
-     * @return bool
      */
-    private function mayServeStaleWhileRevalidate($entry)
+    private function mayServeStaleWhileRevalidate(Response $entry) : bool
     {
         $timeout = $entry->headers->getCacheControlDirective('stale-while-revalidate');
         if (null === $timeout) {
@@ -642,10 +603,8 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
     }
     /**
      * Waits for the store to release a locked entry.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @return bool
      */
-    private function waitForLock($request)
+    private function waitForLock(Request $request) : bool
     {
         $wait = 0;
         while ($this->store->isLocked($request) && $wait < 100) {

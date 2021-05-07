@@ -17,10 +17,10 @@ namespace ECSPrefix20210507\Symfony\Component\HttpFoundation;
  */
 class ResponseHeaderBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\HeaderBag
 {
-    const COOKIES_FLAT = 'flat';
-    const COOKIES_ARRAY = 'array';
-    const DISPOSITION_ATTACHMENT = 'attachment';
-    const DISPOSITION_INLINE = 'inline';
+    public const COOKIES_FLAT = 'flat';
+    public const COOKIES_ARRAY = 'array';
+    public const DISPOSITION_ATTACHMENT = 'attachment';
+    public const DISPOSITION_INLINE = 'inline';
     protected $computedCacheControl = [];
     protected $cookies = [];
     protected $headerNames = [];
@@ -44,7 +44,7 @@ class ResponseHeaderBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     {
         $headers = [];
         foreach ($this->all() as $name => $value) {
-            $headers[isset($this->headerNames[$name]) ? $this->headerNames[$name] : $name] = $value;
+            $headers[$this->headerNames[$name] ?? $name] = $value;
         }
         return $headers;
     }
@@ -72,14 +72,13 @@ class ResponseHeaderBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * {@inheritdoc}
-     * @param string $key
      */
-    public function all($key = null)
+    public function all(string $key = null)
     {
         $headers = parent::all();
         if (null !== $key) {
             $key = \strtr($key, self::UPPER, self::LOWER);
-            return 'set-cookie' !== $key ? isset($headers[$key]) ? $headers[$key] : [] : \array_map('strval', $this->getCookies());
+            return 'set-cookie' !== $key ? $headers[$key] ?? [] : \array_map('strval', $this->getCookies());
         }
         foreach ($this->getCookies() as $cookie) {
             $headers['set-cookie'][] = (string) $cookie;
@@ -88,10 +87,8 @@ class ResponseHeaderBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * {@inheritdoc}
-     * @param string $key
-     * @param bool $replace
      */
-    public function set($key, $values, $replace = \true)
+    public function set(string $key, $values, bool $replace = \true)
     {
         $uniqueKey = \strtr($key, self::UPPER, self::LOWER);
         if ('set-cookie' === $uniqueKey) {
@@ -115,9 +112,8 @@ class ResponseHeaderBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * {@inheritdoc}
-     * @param string $key
      */
-    public function remove($key)
+    public function remove(string $key)
     {
         $uniqueKey = \strtr($key, self::UPPER, self::LOWER);
         unset($this->headerNames[$uniqueKey]);
@@ -135,35 +131,27 @@ class ResponseHeaderBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * {@inheritdoc}
-     * @param string $key
      */
-    public function hasCacheControlDirective($key)
+    public function hasCacheControlDirective(string $key)
     {
         return \array_key_exists($key, $this->computedCacheControl);
     }
     /**
      * {@inheritdoc}
-     * @param string $key
      */
-    public function getCacheControlDirective($key)
+    public function getCacheControlDirective(string $key)
     {
         return \array_key_exists($key, $this->computedCacheControl) ? $this->computedCacheControl[$key] : null;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Cookie $cookie
-     */
-    public function setCookie($cookie)
+    public function setCookie(\ECSPrefix20210507\Symfony\Component\HttpFoundation\Cookie $cookie)
     {
         $this->cookies[$cookie->getDomain()][$cookie->getPath()][$cookie->getName()] = $cookie;
         $this->headerNames['set-cookie'] = 'Set-Cookie';
     }
     /**
      * Removes a cookie from the array, but does not unset it in the browser.
-     * @param string|null $path
-     * @param string $name
-     * @param string $domain
      */
-    public function removeCookie($name, $path = '/', $domain = null)
+    public function removeCookie(string $name, ?string $path = '/', string $domain = null)
     {
         if (null === $path) {
             $path = '/';
@@ -185,9 +173,8 @@ class ResponseHeaderBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
      * @return Cookie[]
      *
      * @throws \InvalidArgumentException When the $format is invalid
-     * @param string $format
      */
-    public function getCookies($format = self::COOKIES_FLAT)
+    public function getCookies(string $format = self::COOKIES_FLAT)
     {
         if (!\in_array($format, [self::COOKIES_FLAT, self::COOKIES_ARRAY])) {
             throw new \InvalidArgumentException(\sprintf('Format "%s" invalid (%s).', $format, \implode(', ', [self::COOKIES_FLAT, self::COOKIES_ARRAY])));
@@ -207,24 +194,15 @@ class ResponseHeaderBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * Clears a cookie in the browser.
-     * @param string|null $path
-     * @param string $name
-     * @param string $domain
-     * @param bool $secure
-     * @param bool $httpOnly
-     * @param string $sameSite
      */
-    public function clearCookie($name, $path = '/', $domain = null, $secure = \false, $httpOnly = \true, $sameSite = null)
+    public function clearCookie(string $name, ?string $path = '/', string $domain = null, bool $secure = \false, bool $httpOnly = \true, string $sameSite = null)
     {
         $this->setCookie(new \ECSPrefix20210507\Symfony\Component\HttpFoundation\Cookie($name, null, 1, $path, $domain, $secure, $httpOnly, \false, $sameSite));
     }
     /**
      * @see HeaderUtils::makeDisposition()
-     * @param string $disposition
-     * @param string $filename
-     * @param string $filenameFallback
      */
-    public function makeDisposition($disposition, $filename, $filenameFallback = '')
+    public function makeDisposition(string $disposition, string $filename, string $filenameFallback = '')
     {
         return \ECSPrefix20210507\Symfony\Component\HttpFoundation\HeaderUtils::makeDisposition($disposition, $filename, $filenameFallback);
     }
@@ -256,10 +234,7 @@ class ResponseHeaderBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
         }
         return $header;
     }
-    /**
-     * @return void
-     */
-    private function initDate()
+    private function initDate() : void
     {
         $this->set('Date', \gmdate('D, d M Y H:i:s') . ' GMT');
     }

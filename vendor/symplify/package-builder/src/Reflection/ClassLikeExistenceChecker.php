@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\PackageBuilder\Reflection;
 
 use ReflectionClass;
@@ -13,11 +14,7 @@ final class ClassLikeExistenceChecker
      * @var string[]
      */
     private $sensitiveNonExistingClasses = [];
-    /**
-     * @param string $classLike
-     * @return bool
-     */
-    public function doesClassLikeExist($classLike)
+    public function doesClassLikeExist(string $classLike) : bool
     {
         if (\class_exists($classLike)) {
             return \true;
@@ -27,11 +24,7 @@ final class ClassLikeExistenceChecker
         }
         return \trait_exists($classLike);
     }
-    /**
-     * @param string $classLikeName
-     * @return bool
-     */
-    public function doesClassLikeInsensitiveExists($classLikeName)
+    public function doesClassLikeInsensitiveExists(string $classLikeName) : bool
     {
         if (!$this->doesClassLikeExist($classLikeName)) {
             return \false;

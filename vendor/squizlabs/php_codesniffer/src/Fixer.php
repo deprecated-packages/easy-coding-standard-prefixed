@@ -100,7 +100,7 @@ class Fixer
      *
      * @return void
      */
-    public function startFile($phpcsFile)
+    public function startFile(File $phpcsFile)
     {
         $this->currentFile = $phpcsFile;
         $this->numFixes = 0;

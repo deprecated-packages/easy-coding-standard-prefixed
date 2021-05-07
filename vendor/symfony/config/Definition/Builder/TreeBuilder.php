@@ -20,20 +20,15 @@ class TreeBuilder implements \ECSPrefix20210507\Symfony\Component\Config\Definit
 {
     protected $tree;
     protected $root;
-    /**
-     * @param string $name
-     * @param string $type
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder
-     */
-    public function __construct($name, $type = 'array', $builder = null)
+    public function __construct(string $name, string $type = 'array', \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeBuilder $builder = null)
     {
-        $builder = isset($builder) ? $builder : new \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeBuilder();
+        $builder = $builder ?? new \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeBuilder();
         $this->root = $builder->node($name, $type)->setParent($this);
     }
     /**
-     * @return \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeDefinition The root node (as an ArrayNodeDefinition when the type is 'array')
+     * @return NodeDefinition|ArrayNodeDefinition The root node (as an ArrayNodeDefinition when the type is 'array')
      */
-    public function getRootNode()
+    public function getRootNode() : \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeDefinition
     {
         return $this->root;
     }
@@ -51,10 +46,7 @@ class TreeBuilder implements \ECSPrefix20210507\Symfony\Component\Config\Definit
         }
         return $this->tree = $this->root->getNode(\true);
     }
-    /**
-     * @param string $separator
-     */
-    public function setPathSeparator($separator)
+    public function setPathSeparator(string $separator)
     {
         // unset last built as changing path separator changes all nodes
         $this->tree = null;

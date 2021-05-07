@@ -34,7 +34,7 @@ class DisallowYodaConditionsSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $previousIndex = $phpcsFile->findPrevious(Tokens::$emptyTokens, $stackPtr - 1, null, \true);
@@ -97,7 +97,7 @@ class DisallowYodaConditionsSniff implements Sniff
      *
      * @return bool
      */
-    public function isArrayStatic($phpcsFile, $arrayToken)
+    public function isArrayStatic(File $phpcsFile, $arrayToken)
     {
         $tokens = $phpcsFile->getTokens();
         $arrayEnd = null;

@@ -1,21 +1,18 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Contract;
 
 use Symplify\SetConfigResolver\ValueObject\Set;
 interface SetProviderInterface
 {
     /**
-     * @return mixed[]
+     * @return Set[]
      */
-    public function provide();
+    public function provide() : array;
     /**
-     * @return mixed[]
+     * @return string[]
      */
-    public function provideSetNames();
-    /**
-     * @return \Symplify\SetConfigResolver\ValueObject\Set|null
-     * @param string $setName
-     */
-    public function provideByName($setName);
+    public function provideSetNames() : array;
+    public function provideByName(string $setName) : ?Set;
 }

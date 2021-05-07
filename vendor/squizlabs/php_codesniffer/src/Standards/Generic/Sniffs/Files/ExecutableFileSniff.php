@@ -32,7 +32,7 @@ class ExecutableFileSniff implements Sniff
      *
      * @return int
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $filename = $phpcsFile->getFilename();
         if ($filename !== 'STDIN') {

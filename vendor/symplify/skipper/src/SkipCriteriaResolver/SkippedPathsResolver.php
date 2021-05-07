@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\Skipper\SkipCriteriaResolver;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -23,19 +24,15 @@ final class SkippedPathsResolver
      * @var PathNormalizer
      */
     private $pathNormalizer;
-    /**
-     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
-     * @param \Symplify\SmartFileSystem\Normalizer\PathNormalizer $pathNormalizer
-     */
-    public function __construct($parameterProvider, $pathNormalizer)
+    public function __construct(ParameterProvider $parameterProvider, PathNormalizer $pathNormalizer)
     {
         $this->parameterProvider = $parameterProvider;
         $this->pathNormalizer = $pathNormalizer;
     }
     /**
-     * @return mixed[]
+     * @return string[]
      */
-    public function resolve()
+    public function resolve() : array
     {
         if ($this->skippedPaths !== []) {
             return $this->skippedPaths;

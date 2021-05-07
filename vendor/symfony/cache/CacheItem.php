@@ -19,7 +19,7 @@ use ECSPrefix20210507\Symfony\Contracts\Cache\ItemInterface;
  */
 final class CacheItem implements ItemInterface
 {
-    const METADATA_EXPIRY_OFFSET = 1527506807;
+    private const METADATA_EXPIRY_OFFSET = 1527506807;
     protected $key;
     protected $value;
     protected $isHit = \false;
@@ -31,9 +31,8 @@ final class CacheItem implements ItemInterface
     protected $isTaggable = \false;
     /**
      * {@inheritdoc}
-     * @return string
      */
-    public function getKey()
+    public function getKey() : string
     {
         return $this->key;
     }
@@ -48,9 +47,8 @@ final class CacheItem implements ItemInterface
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function isHit()
+    public function isHit() : bool
     {
         return $this->isHit;
     }
@@ -59,7 +57,7 @@ final class CacheItem implements ItemInterface
      *
      * @return $this
      */
-    public function set($value)
+    public function set($value) : self
     {
         $this->value = $value;
         return $this;
@@ -69,7 +67,7 @@ final class CacheItem implements ItemInterface
      *
      * @return $this
      */
-    public function expiresAt($expiration)
+    public function expiresAt($expiration) : self
     {
         if (null === $expiration) {
             $this->expiry = null;
@@ -85,7 +83,7 @@ final class CacheItem implements ItemInterface
      *
      * @return $this
      */
-    public function expiresAfter($time)
+    public function expiresAfter($time) : self
     {
         if (null === $time) {
             $this->expiry = null;
@@ -101,12 +99,12 @@ final class CacheItem implements ItemInterface
     /**
      * {@inheritdoc}
      */
-    public function tag($tags)
+    public function tag($tags) : ItemInterface
     {
         if (!$this->isTaggable) {
             throw new LogicException(\sprintf('Cache item "%s" comes from a non tag-aware pool: you cannot tag it.', $this->key));
         }
-        if (!(is_array($tags) || $tags instanceof \Traversable)) {
+        if (!\is_iterable($tags)) {
             $tags = [$tags];
         }
         foreach ($tags as $tag) {
@@ -129,9 +127,8 @@ final class CacheItem implements ItemInterface
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    public function getMetadata()
+    public function getMetadata() : array
     {
         return $this->metadata;
     }
@@ -141,9 +138,8 @@ final class CacheItem implements ItemInterface
      * @param string $key The key to validate
      *
      * @throws InvalidArgumentException When $key is not valid
-     * @return string
      */
-    public static function validateKey($key)
+    public static function validateKey($key) : string
     {
         if (!\is_string($key)) {
             throw new InvalidArgumentException(\sprintf('Cache key must be string, "%s" given.', \get_debug_type($key)));
@@ -160,10 +156,8 @@ final class CacheItem implements ItemInterface
      * Internal logging helper.
      *
      * @internal
-     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface|null $logger
-     * @param string $message
      */
-    public static function log($logger, $message, array $context = [])
+    public static function log(?LoggerInterface $logger, string $message, array $context = [])
     {
         if ($logger) {
             $logger->warning($message, $context);

@@ -21,18 +21,14 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\RuntimeExc
 class CheckArgumentsValidityPass extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $throwExceptions;
-    /**
-     * @param bool $throwExceptions
-     */
-    public function __construct($throwExceptions = \true)
+    public function __construct(bool $throwExceptions = \true)
     {
         $this->throwExceptions = $throwExceptions;
     }
     /**
      * {@inheritdoc}
-     * @param bool $isRoot
      */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         if (!$value instanceof Definition) {
             return parent::processValue($value, $isRoot);

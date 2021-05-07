@@ -23,7 +23,7 @@ class ChildDefinition extends \ECSPrefix20210507\Symfony\Component\DependencyInj
     /**
      * @param string $parent The id of Definition instance to decorate
      */
-    public function __construct($parent)
+    public function __construct(string $parent)
     {
         $this->parent = $parent;
     }

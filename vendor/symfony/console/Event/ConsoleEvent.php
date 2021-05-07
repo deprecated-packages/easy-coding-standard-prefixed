@@ -24,12 +24,7 @@ class ConsoleEvent extends Event
     protected $command;
     private $input;
     private $output;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     */
-    public function __construct($command = null, $input, $output)
+    public function __construct(Command $command = null, InputInterface $input, OutputInterface $output)
     {
         $this->command = $command;
         $this->input = $input;

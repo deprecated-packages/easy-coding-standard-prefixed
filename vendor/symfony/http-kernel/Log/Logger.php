@@ -20,19 +20,16 @@ use ECSPrefix20210507\Psr\Log\LogLevel;
  */
 class Logger extends AbstractLogger
 {
-    const LEVELS = [LogLevel::DEBUG => 0, LogLevel::INFO => 1, LogLevel::NOTICE => 2, LogLevel::WARNING => 3, LogLevel::ERROR => 4, LogLevel::CRITICAL => 5, LogLevel::ALERT => 6, LogLevel::EMERGENCY => 7];
+    private const LEVELS = [LogLevel::DEBUG => 0, LogLevel::INFO => 1, LogLevel::NOTICE => 2, LogLevel::WARNING => 3, LogLevel::ERROR => 4, LogLevel::CRITICAL => 5, LogLevel::ALERT => 6, LogLevel::EMERGENCY => 7];
     private $minLevelIndex;
     private $formatter;
     private $handle;
-    /**
-     * @param string $minLevel
-     */
-    public function __construct($minLevel = null, $output = null, callable $formatter = null)
+    public function __construct(string $minLevel = null, $output = null, callable $formatter = null)
     {
         if (null === $minLevel) {
             $minLevel = null === $output || 'php://stdout' === $output || 'php://stderr' === $output ? LogLevel::ERROR : LogLevel::WARNING;
             if (isset($_ENV['SHELL_VERBOSITY']) || isset($_SERVER['SHELL_VERBOSITY'])) {
-                switch ((int) (isset($_ENV['SHELL_VERBOSITY']) ? $_ENV['SHELL_VERBOSITY'] : $_SERVER['SHELL_VERBOSITY'])) {
+                switch ((int) ($_ENV['SHELL_VERBOSITY'] ?? $_SERVER['SHELL_VERBOSITY'])) {
                     case -1:
                         $minLevel = LogLevel::ERROR;
                         break;
@@ -77,13 +74,7 @@ class Logger extends AbstractLogger
             \error_log($formatter($level, $message, $context, \false));
         }
     }
-    /**
-     * @param string $level
-     * @param string $message
-     * @param bool $prefixDate
-     * @return string
-     */
-    private function format($level, $message, array $context, $prefixDate = \true)
+    private function format(string $level, string $message, array $context, bool $prefixDate = \true) : string
     {
         if (\false !== \strpos($message, '{')) {
             $replacements = [];

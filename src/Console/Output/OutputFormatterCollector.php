@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Output;
 
 use Symplify\EasyCodingStandard\Configuration\Exception\OutputFormatterNotFoundException;
@@ -19,11 +20,7 @@ final class OutputFormatterCollector
             $this->outputFormatters[$outputFormatter->getName()] = $outputFormatter;
         }
     }
-    /**
-     * @param string $name
-     * @return \Symplify\EasyCodingStandard\Contract\Console\Output\OutputFormatterInterface
-     */
-    public function getByName($name)
+    public function getByName(string $name) : OutputFormatterInterface
     {
         if (isset($this->outputFormatters[$name])) {
             return $this->outputFormatters[$name];

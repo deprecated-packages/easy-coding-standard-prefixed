@@ -30,21 +30,15 @@ final class ArgumentResolver implements \ECSPrefix20210507\Symfony\Component\Htt
      * @var iterable|ArgumentValueResolverInterface[]
      */
     private $argumentValueResolvers;
-    /**
-     * @param mixed[] $argumentValueResolvers
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface $argumentMetadataFactory
-     */
-    public function __construct($argumentMetadataFactory = null, $argumentValueResolvers = [])
+    public function __construct(ArgumentMetadataFactoryInterface $argumentMetadataFactory = null, iterable $argumentValueResolvers = [])
     {
-        $this->argumentMetadataFactory = isset($argumentMetadataFactory) ? $argumentMetadataFactory : new ArgumentMetadataFactory();
+        $this->argumentMetadataFactory = $argumentMetadataFactory ?? new ArgumentMetadataFactory();
         $this->argumentValueResolvers = $argumentValueResolvers ?: self::getDefaultArgumentValueResolvers();
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @return mixed[]
      */
-    public function getArguments($request, callable $controller)
+    public function getArguments(Request $request, callable $controller) : array
     {
         $arguments = [];
         foreach ($this->argumentMetadataFactory->createArgumentMetadata($controller) as $metadata) {
@@ -74,10 +68,7 @@ final class ArgumentResolver implements \ECSPrefix20210507\Symfony\Component\Htt
         }
         return $arguments;
     }
-    /**
-     * @return mixed[]
-     */
-    public static function getDefaultArgumentValueResolvers()
+    public static function getDefaultArgumentValueResolvers() : iterable
     {
         return [new RequestAttributeValueResolver(), new RequestValueResolver(), new SessionValueResolver(), new DefaultValueResolver(), new VariadicValueResolver()];
     }

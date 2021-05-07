@@ -28,21 +28,13 @@ class ControllerArgumentValueResolverPass implements CompilerPassInterface
     private $argumentResolverService;
     private $argumentValueResolverTag;
     private $traceableResolverStopwatch;
-    /**
-     * @param string $argumentResolverService
-     * @param string $argumentValueResolverTag
-     * @param string $traceableResolverStopwatch
-     */
-    public function __construct($argumentResolverService = 'argument_resolver', $argumentValueResolverTag = 'controller.argument_value_resolver', $traceableResolverStopwatch = 'debug.stopwatch')
+    public function __construct(string $argumentResolverService = 'argument_resolver', string $argumentValueResolverTag = 'controller.argument_value_resolver', string $traceableResolverStopwatch = 'debug.stopwatch')
     {
         $this->argumentResolverService = $argumentResolverService;
         $this->argumentValueResolverTag = $argumentValueResolverTag;
         $this->traceableResolverStopwatch = $traceableResolverStopwatch;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->argumentResolverService)) {
             return;

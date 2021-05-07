@@ -20,24 +20,15 @@ class MemcachedCaster
 {
     private static $optionConstants;
     private static $defaultOptions;
-    /**
-     * @param \Memcached $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castMemcached($c, array $a, $stub, $isNested)
+    public static function castMemcached(\Memcached $c, array $a, Stub $stub, bool $isNested)
     {
         $a += [\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'servers' => $c->getServerList(), \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'options' => new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\EnumStub(self::getNonDefaultOptions($c))];
         return $a;
     }
-    /**
-     * @param \Memcached $c
-     * @return mixed[]
-     */
-    private static function getNonDefaultOptions($c)
+    private static function getNonDefaultOptions(\Memcached $c) : array
     {
-        self::$defaultOptions = isset(self::$defaultOptions) ? self::$defaultOptions : self::discoverDefaultOptions();
-        self::$optionConstants = isset(self::$optionConstants) ? self::$optionConstants : self::getOptionConstants();
+        self::$defaultOptions = self::$defaultOptions ?? self::discoverDefaultOptions();
+        self::$optionConstants = self::$optionConstants ?? self::getOptionConstants();
         $nonDefaultOptions = [];
         foreach (self::$optionConstants as $constantKey => $value) {
             if (self::$defaultOptions[$constantKey] !== ($option = $c->getOption($value))) {
@@ -46,24 +37,18 @@ class MemcachedCaster
         }
         return $nonDefaultOptions;
     }
-    /**
-     * @return mixed[]
-     */
-    private static function discoverDefaultOptions()
+    private static function discoverDefaultOptions() : array
     {
         $defaultMemcached = new \Memcached();
         $defaultMemcached->addServer('127.0.0.1', 11211);
         $defaultOptions = [];
-        self::$optionConstants = isset(self::$optionConstants) ? self::$optionConstants : self::getOptionConstants();
+        self::$optionConstants = self::$optionConstants ?? self::getOptionConstants();
         foreach (self::$optionConstants as $constantKey => $value) {
             $defaultOptions[$constantKey] = $defaultMemcached->getOption($value);
         }
         return $defaultOptions;
     }
-    /**
-     * @return mixed[]
-     */
-    private static function getOptionConstants()
+    private static function getOptionConstants() : array
     {
         $reflectedMemcached = new \ReflectionClass(\Memcached::class);
         $optionConstants = [];

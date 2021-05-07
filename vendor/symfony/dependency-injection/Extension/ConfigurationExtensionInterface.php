@@ -23,7 +23,6 @@ interface ConfigurationExtensionInterface
      * Returns extension configuration.
      *
      * @return ConfigurationInterface|null The configuration or null
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function getConfiguration(array $config, $container);
+    public function getConfiguration(array $config, ContainerBuilder $container);
 }

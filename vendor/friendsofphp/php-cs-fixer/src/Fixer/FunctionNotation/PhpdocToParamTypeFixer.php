@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,20 +25,19 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class PhpdocToParamTypeFixer extends AbstractPhpdocToTypeDeclarationFixer
 {
-    const MINIMUM_PHP_VERSION = 70000;
+    private const MINIMUM_PHP_VERSION = 70000;
     /**
      * @var array{int, string}[]
      */
-    const EXCLUDE_FUNC_NAMES = [[\T_STRING, '__clone'], [\T_STRING, '__destruct']];
+    private const EXCLUDE_FUNC_NAMES = [[\T_STRING, '__clone'], [\T_STRING, '__destruct']];
     /**
      * @var array<string, true>
      */
-    const SKIPPED_TYPES = ['mixed' => \true, 'resource' => \true, 'static' => \true, 'void' => \true];
+    private const SKIPPED_TYPES = ['mixed' => \true, 'resource' => \true, 'static' => \true, 'void' => \true];
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('EXPERIMENTAL: Takes `@param` annotations of non-mixed types and adjusts accordingly the function signature. Requires PHP >= 7.0.', [new VersionSpecificCodeSample('<?php
 
@@ -59,10 +59,8 @@ function bar($foo) {}
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return \PHP_VERSION_ID >= self::MINIMUM_PHP_VERSION && $tokens->isTokenKindFound(\T_FUNCTION);
     }
@@ -71,27 +69,19 @@ function bar($foo) {}
      *
      * Must run before NoSuperfluousPhpdocTagsFixer, PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 8;
     }
-    /**
-     * @param string $type
-     * @return bool
-     */
-    protected function isSkippedType($type)
+    protected function isSkippedType(string $type) : bool
     {
         return isset(self::SKIPPED_TYPES[$type]);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; 0 < $index; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_FUNCTION)) {
@@ -130,13 +120,7 @@ function bar($foo) {}
             }
         }
     }
-    /**
-     * @return int|null
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $startIndex
-     * @param \PhpCsFixer\DocBlock\Annotation $paramTypeAnnotation
-     */
-    private function findCorrectVariable($tokens, $startIndex, $paramTypeAnnotation)
+    private function findCorrectVariable(Tokens $tokens, int $startIndex, Annotation $paramTypeAnnotation) : ?int
     {
         $endIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $startIndex);
         for ($index = $startIndex + 1; $index < $endIndex; ++$index) {
@@ -154,10 +138,8 @@ function bar($foo) {}
      * Determine whether the function already has a param type hint.
      *
      * @param int $index The index of the end of the function definition line, EG at { or ;
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    private function hasParamTypeHint($tokens, $index)
+    private function hasParamTypeHint(Tokens $tokens, int $index) : bool
     {
         $prevIndex = $tokens->getPrevMeaningfulToken($index);
         return !$tokens[$prevIndex]->equalsAny([',', '(']);

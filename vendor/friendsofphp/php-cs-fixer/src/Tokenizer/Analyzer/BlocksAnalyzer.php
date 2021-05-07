@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -20,13 +21,7 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class BlocksAnalyzer
 {
-    /**
-     * @param int|null $openIndex
-     * @param int|null $closeIndex
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
-     */
-    public function isBlock($tokens, $openIndex, $closeIndex)
+    public function isBlock(Tokens $tokens, ?int $openIndex, ?int $closeIndex) : bool
     {
         if (null === $openIndex || null === $closeIndex) {
             return \false;
@@ -43,11 +38,7 @@ final class BlocksAnalyzer
         }
         return $closeIndex === $tokens->findBlockEnd($blockType, $openIndex);
     }
-    /**
-     * @return int|null
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     */
-    private function getBlockType($token)
+    private function getBlockType(Token $token) : ?int
     {
         foreach (Tokens::getBlockEdgeDefinitions() as $blockType => $definition) {
             if ($token->equals($definition['start'])) {

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -31,18 +32,15 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurableFixe
 {
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Forces PHPDoc tags to be either regular annotations or inline.', [new CodeSample("<?php\n/**\n * {@api}\n */\n"), new CodeSample("<?php\n/**\n * @inheritdoc\n */\n", ['tags' => ['inheritdoc' => 'inline']])]);
     }
@@ -51,19 +49,15 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurableFixe
      *
      * Must run before PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         if (!$this->configuration['tags']) {
             return;
@@ -96,9 +90,8 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurableFixe
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('tags', 'The list of tags to fix'))->setAllowedTypes(['array'])->setAllowedValues([function ($value) {
             foreach ($value as $type) {
@@ -115,18 +108,11 @@ final class PhpdocTagTypeFixer extends AbstractFixer implements ConfigurableFixe
             return $normalized;
         })->getOption()]);
     }
-    /**
-     * @param int $index
-     * @return bool
-     */
-    private function tagIsSurroundedByText(array $parts, $index)
+    private function tagIsSurroundedByText(array $parts, int $index) : bool
     {
         return Preg::match('/(^|\\R)\\h*[^@\\s]\\N*/', $this->cleanComment($parts[$index - 1])) || Preg::match('/^.*?\\R\\s*[^@\\s]/', $this->cleanComment($parts[$index + 1]));
     }
-    /**
-     * @param string $comment
-     */
-    private function cleanComment($comment)
+    private function cleanComment(string $comment)
     {
         $comment = Preg::replace('/^\\/\\*\\*|\\*\\/$/', '', $comment);
         return Preg::replace('/(\\R)(\\h*\\*)?\\h*/', '$1', $comment);

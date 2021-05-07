@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace ECSPrefix20210507;
 
 use ECSPrefix20210507\Psr\Cache\CacheItemPoolInterface;
@@ -9,7 +10,7 @@ use ECSPrefix20210507\Symfony\Component\Cache\Adapter\TagAwareAdapter;
 use ECSPrefix20210507\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use ECSPrefix20210507\Symfony\Component\Cache\Psr16Cache;
 use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-return static function (ContainerConfigurator $containerConfigurator) {
+return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->defaults()->autowire()->autoconfigure()->public();
     $services->set(Psr16Cache::class);

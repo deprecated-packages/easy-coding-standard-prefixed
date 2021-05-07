@@ -32,7 +32,7 @@ class ClassDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $errorData = [\strtolower($tokens[$stackPtr]['content'])];

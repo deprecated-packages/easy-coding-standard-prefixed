@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\ValueObject\Wrapper\FixerWrapper;
 
 use PhpCsFixer\Tokenizer\CT;
@@ -12,7 +13,7 @@ final class ArrayWrapper
     /**
      * @var int[]
      */
-    const ARRAY_OPEN_TOKENS = [\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN];
+    private const ARRAY_OPEN_TOKENS = [\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN];
     /**
      * @var Tokens
      */
@@ -25,21 +26,13 @@ final class ArrayWrapper
      * @var BlockInfo
      */
     private $blockInfo;
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
-     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\TokenSkipper $tokenSkipper
-     */
-    public function __construct($tokens, $blockInfo, $tokenSkipper)
+    public function __construct(Tokens $tokens, BlockInfo $blockInfo, TokenSkipper $tokenSkipper)
     {
         $this->tokens = $tokens;
         $this->tokenSkipper = $tokenSkipper;
         $this->blockInfo = $blockInfo;
     }
-    /**
-     * @return bool
-     */
-    public function isAssociativeArray()
+    public function isAssociativeArray() : bool
     {
         for ($i = $this->blockInfo->getStart() + 1; $i <= $this->blockInfo->getEnd() - 1; ++$i) {
             $i = $this->tokenSkipper->skipBlocks($this->tokens, $i);
@@ -50,10 +43,7 @@ final class ArrayWrapper
         }
         return \false;
     }
-    /**
-     * @return int
-     */
-    public function getItemCount()
+    public function getItemCount() : int
     {
         $itemCount = 0;
         for ($i = $this->blockInfo->getEnd() - 1; $i >= $this->blockInfo->getStart(); --$i) {
@@ -65,10 +55,7 @@ final class ArrayWrapper
         }
         return $itemCount;
     }
-    /**
-     * @return bool
-     */
-    public function isFirstItemArray()
+    public function isFirstItemArray() : bool
     {
         for ($i = $this->blockInfo->getEnd() - 1; $i >= $this->blockInfo->getStart(); --$i) {
             $i = $this->tokenSkipper->skipBlocksReversed($this->tokens, $i);

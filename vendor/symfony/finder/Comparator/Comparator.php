@@ -28,10 +28,7 @@ class Comparator
     {
         return $this->target;
     }
-    /**
-     * @param string $target
-     */
-    public function setTarget($target)
+    public function setTarget(string $target)
     {
         $this->target = $target;
     }
@@ -48,9 +45,8 @@ class Comparator
      * Sets the comparison operator.
      *
      * @throws \InvalidArgumentException
-     * @param string $operator
      */
-    public function setOperator($operator)
+    public function setOperator(string $operator)
     {
         if ('' === $operator) {
             $operator = '==';

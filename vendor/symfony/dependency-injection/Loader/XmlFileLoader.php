@@ -33,13 +33,12 @@ use ECSPrefix20210507\Symfony\Component\ExpressionLanguage\Expression;
  */
 class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\FileLoader
 {
-    const NS = 'http://symfony.com/schema/dic/services';
+    public const NS = 'http://symfony.com/schema/dic/services';
     protected $autoRegisterAliasesForSinglyImplementedInterfaces = \false;
     /**
      * {@inheritdoc}
-     * @param string|null $type
      */
-    public function load($resource, $type = null)
+    public function load($resource, string $type = null)
     {
         $path = $this->locator->locate($resource);
         $xml = $this->parseFileToDOM($path);
@@ -63,9 +62,8 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
     }
     /**
      * {@inheritdoc}
-     * @param string $type
      */
-    public function supports($resource, $type = null)
+    public function supports($resource, string $type = null)
     {
         if (!\is_string($resource)) {
             return \false;
@@ -75,21 +73,13 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
         }
         return 'xml' === $type;
     }
-    /**
-     * @param \DOMDocument $xml
-     * @param string $file
-     */
-    private function parseParameters($xml, $file)
+    private function parseParameters(\DOMDocument $xml, string $file)
     {
         if ($parameters = $this->getChildren($xml->documentElement, 'parameters')) {
             $this->container->getParameterBag()->add($this->getArgumentsAsPhp($parameters[0], 'parameter', $file));
         }
     }
-    /**
-     * @param \DOMDocument $xml
-     * @param string $file
-     */
-    private function parseImports($xml, $file)
+    private function parseImports(\DOMDocument $xml, string $file)
     {
         $xpath = new \DOMXPath($xml);
         $xpath->registerNamespace('container', self::NS);
@@ -102,12 +92,7 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
             $this->import($import->getAttribute('resource'), XmlUtils::phpize($import->getAttribute('type')) ?: null, XmlUtils::phpize($import->getAttribute('ignore-errors')) ?: \false, $file);
         }
     }
-    /**
-     * @param \DOMDocument $xml
-     * @param string $file
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $defaults
-     */
-    private function parseDefinitions($xml, $file, $defaults)
+    private function parseDefinitions(\DOMDocument $xml, string $file, Definition $defaults)
     {
         $xpath = new \DOMXPath($xml);
         $xpath->registerNamespace('container', self::NS);
@@ -155,12 +140,7 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
             }
         }
     }
-    /**
-     * @param \DOMDocument $xml
-     * @param string $file
-     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition
-     */
-    private function getServiceDefaults($xml, $file)
+    private function getServiceDefaults(\DOMDocument $xml, string $file) : Definition
     {
         $xpath = new \DOMXPath($xml);
         $xpath->registerNamespace('container', self::NS);
@@ -172,19 +152,15 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
     }
     /**
      * Parses an individual Definition.
-     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition|null
-     * @param \DOMElement $service
-     * @param string $file
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $defaults
      */
-    private function parseDefinition($service, $file, $defaults)
+    private function parseDefinition(\DOMElement $service, string $file, Definition $defaults) : ?Definition
     {
         if ($alias = $service->getAttribute('alias')) {
             $this->validateAlias($service, $file);
             $this->container->setAlias((string) $service->getAttribute('id'), $alias = new Alias($alias));
             if ($publicAttr = $service->getAttribute('public')) {
                 $alias->setPublic(XmlUtils::phpize($publicAttr));
-            } elseif (isset($defaults->getChanges()['public']) ? $defaults->getChanges()['public'] : \false) {
+            } elseif ($defaults->getChanges()['public'] ?? \false) {
                 $alias->setPublic($defaults->isPublic());
             }
             if ($deprecated = $this->getChildren($service, 'deprecated')) {
@@ -208,7 +184,7 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
         } else {
             $definition = new Definition();
         }
-        if (isset($defaults->getChanges()['public']) ? $defaults->getChanges()['public'] : \false) {
+        if ($defaults->getChanges()['public'] ?? \false) {
             $definition->setPublic($defaults->isPublic());
         }
         $definition->setAutowired($defaults->isAutowired());
@@ -329,10 +305,8 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
      * Parses an XML file to a \DOMDocument.
      *
      * @throws InvalidArgumentException When loading of XML file returns error
-     * @param string $file
-     * @return \DOMDocument
      */
-    private function parseFileToDOM($file)
+    private function parseFileToDOM(string $file) : \DOMDocument
     {
         try {
             $dom = XmlUtils::loadFile($file, [$this, 'validateSchema']);
@@ -344,10 +318,8 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
     }
     /**
      * Processes anonymous services.
-     * @param \DOMDocument $xml
-     * @param string $file
      */
-    private function processAnonymousServices($xml, $file)
+    private function processAnonymousServices(\DOMDocument $xml, string $file)
     {
         $definitions = [];
         $count = 0;
@@ -378,20 +350,13 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
         }
         // resolve definitions
         \uksort($definitions, 'strnatcmp');
-        foreach (\array_reverse($definitions) as $id => list($domElement, $file)) {
+        foreach (\array_reverse($definitions) as $id => [$domElement, $file]) {
             if (null !== ($definition = $this->parseDefinition($domElement, $file, new Definition()))) {
                 $this->setDefinition($id, $definition);
             }
         }
     }
-    /**
-     * @param \DOMElement $node
-     * @param string $name
-     * @param string $file
-     * @param bool $isChildDefinition
-     * @return mixed[]
-     */
-    private function getArgumentsAsPhp($node, $name, $file, $isChildDefinition = \false)
+    private function getArgumentsAsPhp(\DOMElement $node, string $name, string $file, bool $isChildDefinition = \false) : array
     {
         $arguments = [];
         foreach ($this->getChildren($node, $name) as $arg) {
@@ -488,11 +453,9 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
     /**
      * Get child elements by name.
      *
-     * @return mixed[]
-     * @param \DOMNode $node
-     * @param string $name
+     * @return \DOMElement[]
      */
-    private function getChildren($node, $name)
+    private function getChildren(\DOMNode $node, string $name) : array
     {
         $children = [];
         foreach ($node->childNodes as $child) {
@@ -508,9 +471,8 @@ class XmlFileLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInjec
      * @return bool
      *
      * @throws RuntimeException When extension references a non-existent XSD file
-     * @param \DOMDocument $dom
      */
-    public function validateSchema($dom)
+    public function validateSchema(\DOMDocument $dom)
     {
         $schemaLocations = ['http://symfony.com/schema/dic/services' => \str_replace('\\', '/', __DIR__ . '/schema/dic/services/services-1.0.xsd')];
         if ($element = $dom->documentElement->getAttributeNS('http://www.w3.org/2001/XMLSchema-instance', 'schemaLocation')) {
@@ -574,10 +536,7 @@ EOF;
         }
         return $valid;
     }
-    /**
-     * @return bool
-     */
-    private function shouldEnableEntityLoader()
+    private function shouldEnableEntityLoader() : bool
     {
         // Version prior to 8.0 can be enabled without deprecation
         if (\PHP_VERSION_ID < 80000) {
@@ -603,11 +562,7 @@ EOF;
         }
         return !@$dom->schemaValidateSource($schema);
     }
-    /**
-     * @param \DOMElement $alias
-     * @param string $file
-     */
-    private function validateAlias($alias, $file)
+    private function validateAlias(\DOMElement $alias, string $file)
     {
         foreach ($alias->attributes as $name => $node) {
             if (!\in_array($name, ['alias', 'id', 'public'])) {
@@ -627,10 +582,8 @@ EOF;
      * Validates an extension.
      *
      * @throws InvalidArgumentException When no extension is found corresponding to a tag
-     * @param \DOMDocument $dom
-     * @param string $file
      */
-    private function validateExtensions($dom, $file)
+    private function validateExtensions(\DOMDocument $dom, string $file)
     {
         foreach ($dom->documentElement->childNodes as $node) {
             if (!$node instanceof \DOMElement || 'http://symfony.com/schema/dic/services' === $node->namespaceURI) {
@@ -647,9 +600,8 @@ EOF;
     }
     /**
      * Loads from an extension.
-     * @param \DOMDocument $xml
      */
-    private function loadFromExtensions($xml)
+    private function loadFromExtensions(\DOMDocument $xml)
     {
         foreach ($xml->documentElement->childNodes as $node) {
             if (!$node instanceof \DOMElement || self::NS === $node->namespaceURI) {
@@ -681,7 +633,7 @@ EOF;
      *
      * @return mixed
      */
-    public static function convertDomElementToArray($element)
+    public static function convertDomElementToArray(\DOMElement $element)
     {
         return XmlUtils::convertDomElementToArray($element);
     }

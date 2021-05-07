@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,9 +27,8 @@ final class NoMultilineWhitespaceAroundDoubleArrowFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Operator `=>` should not be surrounded by multi-line whitespaces.', [new CodeSample("<?php\n\$a = array(1\n\n=> 2);\n")]);
     }
@@ -36,28 +36,22 @@ final class NoMultilineWhitespaceAroundDoubleArrowFixer extends AbstractFixer
      * {@inheritdoc}
      *
      * Must run before BinaryOperatorSpacesFixer, TrailingCommaInMultilineFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 1;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOUBLE_ARROW);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOUBLE_ARROW)) {
@@ -70,12 +64,7 @@ final class NoMultilineWhitespaceAroundDoubleArrowFixer extends AbstractFixer
             }
         }
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     */
-    private function fixWhitespace($tokens, $index)
+    private function fixWhitespace(Tokens $tokens, int $index) : void
     {
         $token = $tokens[$index];
         if ($token->isWhitespace() && !$token->isWhitespace(" \t")) {

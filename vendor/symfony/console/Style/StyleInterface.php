@@ -19,14 +19,12 @@ interface StyleInterface
 {
     /**
      * Formats a command title.
-     * @param string $message
      */
-    public function title($message);
+    public function title(string $message);
     /**
      * Formats a section title.
-     * @param string $message
      */
-    public function section($message);
+    public function section(string $message);
     /**
      * Formats a list.
      */
@@ -75,51 +73,40 @@ interface StyleInterface
      * Asks a question.
      *
      * @return mixed
-     * @param callable|null $validator
-     * @param string|null $default
-     * @param string $question
      */
-    public function ask($question, $default = null, $validator = null);
+    public function ask(string $question, ?string $default = null, callable $validator = null);
     /**
      * Asks a question with the user input hidden.
      *
      * @return mixed
-     * @param callable|null $validator
-     * @param string $question
      */
-    public function askHidden($question, $validator = null);
+    public function askHidden(string $question, callable $validator = null);
     /**
      * Asks for confirmation.
      *
      * @return bool
-     * @param string $question
-     * @param bool $default
      */
-    public function confirm($question, $default = \true);
+    public function confirm(string $question, bool $default = \true);
     /**
      * Asks a choice question.
      *
      * @param string|int|null $default
      *
      * @return mixed
-     * @param string $question
      */
-    public function choice($question, array $choices, $default = null);
+    public function choice(string $question, array $choices, $default = null);
     /**
      * Add newline(s).
-     * @param int $count
      */
-    public function newLine($count = 1);
+    public function newLine(int $count = 1);
     /**
      * Starts the progress output.
-     * @param int $max
      */
-    public function progressStart($max = 0);
+    public function progressStart(int $max = 0);
     /**
      * Advances the progress output X steps.
-     * @param int $step
      */
-    public function progressAdvance($step = 1);
+    public function progressAdvance(int $step = 1);
     /**
      * Finishes the progress output.
      */

@@ -31,12 +31,7 @@ class ProxyAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     private $setInnerItem;
     private $poolHash;
     private $defaultLifetime;
-    /**
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemPoolInterface $pool
-     * @param string $namespace
-     * @param int $defaultLifetime
-     */
-    public function __construct($pool, $namespace = '', $defaultLifetime = 0)
+    public function __construct(CacheItemPoolInterface $pool, string $namespace = '', int $defaultLifetime = 0)
     {
         $this->pool = $pool;
         $this->poolHash = $poolHash = \spl_object_hash($pool);
@@ -89,10 +84,8 @@ class ProxyAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     /**
      * {@inheritdoc}
-     * @param string $key
-     * @param float $beta
      */
-    public function get($key, callable $callback, $beta = null, array &$metadata = null)
+    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
     {
         if (!$this->pool instanceof CacheInterface) {
             return $this->doGet($this, $key, $callback, $beta, $metadata);
@@ -138,9 +131,8 @@ class ProxyAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * {@inheritdoc}
      *
      * @return bool
-     * @param string $prefix
      */
-    public function clear($prefix = '')
+    public function clear(string $prefix = '')
     {
         if ($this->pool instanceof \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface) {
             return $this->pool->clear($this->namespace . $prefix);
@@ -174,9 +166,8 @@ class ProxyAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function save($item)
+    public function save(CacheItemInterface $item)
     {
         return $this->doSave($item, __FUNCTION__);
     }
@@ -184,9 +175,8 @@ class ProxyAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred($item)
+    public function saveDeferred(CacheItemInterface $item)
     {
         return $this->doSave($item, __FUNCTION__);
     }
@@ -199,11 +189,7 @@ class ProxyAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     {
         return $this->pool->commit();
     }
-    /**
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
-     * @param string $method
-     */
-    private function doSave($item, $method)
+    private function doSave(CacheItemInterface $item, string $method)
     {
         if (!$item instanceof CacheItem) {
             return \false;
@@ -225,10 +211,7 @@ class ProxyAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
         ($this->setInnerItem)($innerItem, $item);
         return $this->pool->{$method}($innerItem);
     }
-    /**
-     * @param mixed[] $items
-     */
-    private function generateItems($items)
+    private function generateItems(iterable $items)
     {
         $f = $this->createCacheItem;
         foreach ($items as $key => $item) {
@@ -238,10 +221,7 @@ class ProxyAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
             (yield $key => $f($key, $item));
         }
     }
-    /**
-     * @return string
-     */
-    private function getId($key)
+    private function getId($key) : string
     {
         CacheItem::validateKey($key);
         return $this->namespace . $key;

@@ -29,9 +29,8 @@ class AddRequestFormatsListener implements EventSubscriberInterface
     }
     /**
      * Adds request formats.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent $event
      */
-    public function onKernelRequest($event)
+    public function onKernelRequest(RequestEvent $event)
     {
         $request = $event->getRequest();
         foreach ($this->formats as $format => $mimeTypes) {
@@ -40,9 +39,8 @@ class AddRequestFormatsListener implements EventSubscriberInterface
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents() : array
     {
         return [KernelEvents::REQUEST => ['onKernelRequest', 100]];
     }

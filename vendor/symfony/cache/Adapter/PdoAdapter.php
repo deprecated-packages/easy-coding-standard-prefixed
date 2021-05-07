@@ -61,11 +61,8 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
      * @throws InvalidArgumentException When first argument is not PDO nor Connection nor string
      * @throws InvalidArgumentException When PDO error mode is not PDO::ERRMODE_EXCEPTION
      * @throws InvalidArgumentException When namespace contains invalid characters
-     * @param string $namespace
-     * @param int $defaultLifetime
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller
      */
-    public function __construct($connOrDsn, $namespace = '', $defaultLifetime = 0, array $options = [], $marshaller = null)
+    public function __construct($connOrDsn, string $namespace = '', int $defaultLifetime = 0, array $options = [], MarshallerInterface $marshaller = null)
     {
         if (isset($namespace[0]) && \preg_match('#[^-+.A-Za-z0-9]#', $namespace, $match)) {
             throw new InvalidArgumentException(\sprintf('Namespace contains "%s" but only characters in [-+.A-Za-z0-9] are allowed.', $match[0]));
@@ -82,16 +79,16 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
         } else {
             throw new InvalidArgumentException(\sprintf('"%s" requires PDO or Doctrine\\DBAL\\Connection instance or DSN string as first argument, "%s" given.', __CLASS__, \get_debug_type($connOrDsn)));
         }
-        $this->table = isset($options['db_table']) ? $options['db_table'] : $this->table;
-        $this->idCol = isset($options['db_id_col']) ? $options['db_id_col'] : $this->idCol;
-        $this->dataCol = isset($options['db_data_col']) ? $options['db_data_col'] : $this->dataCol;
-        $this->lifetimeCol = isset($options['db_lifetime_col']) ? $options['db_lifetime_col'] : $this->lifetimeCol;
-        $this->timeCol = isset($options['db_time_col']) ? $options['db_time_col'] : $this->timeCol;
-        $this->username = isset($options['db_username']) ? $options['db_username'] : $this->username;
-        $this->password = isset($options['db_password']) ? $options['db_password'] : $this->password;
-        $this->connectionOptions = isset($options['db_connection_options']) ? $options['db_connection_options'] : $this->connectionOptions;
+        $this->table = $options['db_table'] ?? $this->table;
+        $this->idCol = $options['db_id_col'] ?? $this->idCol;
+        $this->dataCol = $options['db_data_col'] ?? $this->dataCol;
+        $this->lifetimeCol = $options['db_lifetime_col'] ?? $this->lifetimeCol;
+        $this->timeCol = $options['db_time_col'] ?? $this->timeCol;
+        $this->username = $options['db_username'] ?? $this->username;
+        $this->password = $options['db_password'] ?? $this->password;
+        $this->connectionOptions = $options['db_connection_options'] ?? $this->connectionOptions;
         $this->namespace = $namespace;
-        $this->marshaller = isset($marshaller) ? $marshaller : new DefaultMarshaller();
+        $this->marshaller = $marshaller ?? new DefaultMarshaller();
         parent::__construct($namespace, $defaultLifetime);
     }
     /**
@@ -153,11 +150,8 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
     }
     /**
      * Adds the Table to the Schema if the adapter uses this Connection.
-     * @return void
-     * @param \ECSPrefix20210507\Doctrine\DBAL\Schema\Schema $schema
-     * @param \ECSPrefix20210507\Doctrine\DBAL\Connection $forConnection
      */
-    public function configureSchema($schema, $forConnection)
+    public function configureSchema(Schema $schema, Connection $forConnection) : void
     {
         // only update the schema for this connection
         if ($forConnection !== $this->getConnection()) {
@@ -237,9 +231,8 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
     }
     /**
      * {@inheritdoc}
-     * @param string $id
      */
-    protected function doHave($id)
+    protected function doHave(string $id)
     {
         $sql = "SELECT 1 FROM {$this->table} WHERE {$this->idCol} = :id AND ({$this->lifetimeCol} IS NULL OR {$this->lifetimeCol} + {$this->timeCol} > :time)";
         $stmt = $this->getConnection()->prepare($sql);
@@ -250,9 +243,8 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
     }
     /**
      * {@inheritdoc}
-     * @param string $namespace
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $conn = $this->getConnection();
         if ('' === $namespace) {
@@ -292,9 +284,8 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
     }
     /**
      * {@inheritdoc}
-     * @param int $lifetime
      */
-    protected function doSave(array $values, $lifetime)
+    protected function doSave(array $values, int $lifetime)
     {
         if (!($values = $this->marshaller->marshall($values, $failed))) {
             return $failed;
@@ -380,8 +371,7 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
             if (null === $driver && !(\is_object($result) ? $result->rowCount() : $stmt->rowCount())) {
                 try {
                     $insertStmt->execute();
-                } catch (DBALException $e) {
-                } catch (Exception $e) {
+                } catch (DBALException|Exception $e) {
                 } catch (\PDOException $e) {
                     // A concurrent write won, let it be
                 }
@@ -390,9 +380,9 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
         return $failed;
     }
     /**
-     * @return object
+     * @return \PDO|Connection
      */
-    private function getConnection()
+    private function getConnection() : object
     {
         if (null === $this->conn) {
             if (\strpos($this->dsn, '://')) {
@@ -442,10 +432,7 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
         }
         return $this->conn;
     }
-    /**
-     * @return string
-     */
-    private function getServerVersion()
+    private function getServerVersion() : string
     {
         if (null === $this->serverVersion) {
             $conn = $this->conn instanceof \PDO ? $this->conn : $this->conn->getWrappedConnection();
@@ -459,11 +446,7 @@ class PdoAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abst
         }
         return $this->serverVersion;
     }
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Doctrine\DBAL\Schema\Schema $schema
-     */
-    private function addTableToSchema($schema)
+    private function addTableToSchema(Schema $schema) : void
     {
         $types = ['mysql' => 'binary', 'sqlite' => 'text', 'pgsql' => 'string', 'oci' => 'string', 'sqlsrv' => 'string'];
         if (!isset($types[$this->driver])) {

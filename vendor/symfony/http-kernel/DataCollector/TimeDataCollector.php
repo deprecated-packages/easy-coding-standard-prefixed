@@ -24,22 +24,15 @@ class TimeDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKernel\
 {
     protected $kernel;
     protected $stopwatch;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelInterface $kernel
-     * @param \ECSPrefix20210507\Symfony\Component\Stopwatch\Stopwatch $stopwatch
-     */
-    public function __construct($kernel = null, $stopwatch = null)
+    public function __construct(KernelInterface $kernel = null, Stopwatch $stopwatch = null)
     {
         $this->kernel = $kernel;
         $this->stopwatch = $stopwatch;
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
-     * @param \Throwable $exception
      */
-    public function collect($request, $response, $exception = null)
+    public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         if (null !== $this->kernel) {
             $startTime = $this->kernel->getStartTime();

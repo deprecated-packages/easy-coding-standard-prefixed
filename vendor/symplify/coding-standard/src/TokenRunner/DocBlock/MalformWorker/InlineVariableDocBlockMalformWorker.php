@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -13,24 +14,21 @@ final class InlineVariableDocBlockMalformWorker implements MalformWorkerInterfac
      * @var string
      * @see https://regex101.com/r/GkyV1C/1
      */
-    const SINGLE_ASTERISK_START_REGEX = '#^/\\*\\s+\\*(\\s+@var)#';
+    private const SINGLE_ASTERISK_START_REGEX = '#^/\\*\\s+\\*(\\s+@var)#';
     /**
      * @var string
      * @see https://regex101.com/r/9cfhFI/1
      */
-    const SPACE_REGEX = '#\\s+#m';
+    private const SPACE_REGEX = '#\\s+#m';
     /**
      * @var string
      * @see https://regex101.com/r/VpTDCd/1
      */
-    const ASTERISK_LEFTOVERS_REGEX = '#(\\*\\*)(\\s+\\*)#';
+    private const ASTERISK_LEFTOVERS_REGEX = '#(\\*\\*)(\\s+\\*)#';
     /**
      * @param Tokens<Token> $tokens
-     * @param string $docContent
-     * @param int $position
-     * @return string
      */
-    public function work($docContent, $tokens, $position)
+    public function work(string $docContent, Tokens $tokens, int $position) : string
     {
         if (!$this->isVariableComment($tokens, $position)) {
             return $docContent;
@@ -48,10 +46,8 @@ final class InlineVariableDocBlockMalformWorker implements MalformWorkerInterfac
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param int $position
-     * @return bool
      */
-    private function isVariableComment($tokens, $position)
+    private function isVariableComment(Tokens $tokens, int $position) : bool
     {
         $nextPosition = $tokens->getNextMeaningfulToken($position);
         if ($nextPosition === null) {

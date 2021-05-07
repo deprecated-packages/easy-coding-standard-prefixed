@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,20 +27,15 @@ final class ConstructorPromotionTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
-     * @return int
      */
-    public function getRequiredPhpVersionId()
+    public function getRequiredPhpVersionId() : int
     {
         return 80000;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @param int $index
      */
-    public function process($tokens, $token, $index)
+    public function process(Tokens $tokens, Token $token, int $index) : void
     {
         if (!$tokens[$index]->isGivenKind(\T_FUNCTION)) {
             return;
@@ -64,9 +60,8 @@ final class ConstructorPromotionTransformer extends AbstractTransformer
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    public function getCustomTokens()
+    public function getCustomTokens() : array
     {
         return [CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE];
     }

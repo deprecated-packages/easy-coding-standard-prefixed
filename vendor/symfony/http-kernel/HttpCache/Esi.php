@@ -31,9 +31,8 @@ class Esi extends \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\Abst
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    public function addSurrogateControl($response)
+    public function addSurrogateControl(Response $response)
     {
         if (\false !== \strpos($response->getContent(), '<esi:include')) {
             $response->headers->set('Surrogate-Control', 'content="ESI/1.0"');
@@ -41,12 +40,8 @@ class Esi extends \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\Abst
     }
     /**
      * {@inheritdoc}
-     * @param string $uri
-     * @param string $alt
-     * @param bool $ignoreErrors
-     * @param string $comment
      */
-    public function renderIncludeTag($uri, $alt = null, $ignoreErrors = \true, $comment = '')
+    public function renderIncludeTag(string $uri, string $alt = null, bool $ignoreErrors = \true, string $comment = '')
     {
         $html = \sprintf('<esi:include src="%s"%s%s />', $uri, $ignoreErrors ? ' onerror="continue"' : '', $alt ? \sprintf(' alt="%s"', $alt) : '');
         if (!empty($comment)) {
@@ -56,10 +51,8 @@ class Esi extends \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\Abst
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    public function process($request, $response)
+    public function process(Request $request, Response $response)
     {
         $type = $response->headers->get('Content-Type');
         if (empty($type)) {
@@ -85,7 +78,7 @@ class Esi extends \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\Abst
             if (!isset($options['src'])) {
                 throw new \RuntimeException('Unable to process an ESI tag without a "src" attribute.');
             }
-            $chunks[$i] = \sprintf('<?php echo $this->surrogate->handle($this, %s, %s, %s) ?>' . "\n", \var_export($options['src'], \true), \var_export(isset($options['alt']) ? $options['alt'] : '', \true), isset($options['onerror']) && 'continue' === $options['onerror'] ? 'true' : 'false');
+            $chunks[$i] = \sprintf('<?php echo $this->surrogate->handle($this, %s, %s, %s) ?>' . "\n", \var_export($options['src'], \true), \var_export($options['alt'] ?? '', \true), isset($options['onerror']) && 'continue' === $options['onerror'] ? 'true' : 'false');
             ++$i;
             $chunks[$i] = \str_replace($this->phpEscapeMap[0], $this->phpEscapeMap[1], $chunks[$i]);
             ++$i;

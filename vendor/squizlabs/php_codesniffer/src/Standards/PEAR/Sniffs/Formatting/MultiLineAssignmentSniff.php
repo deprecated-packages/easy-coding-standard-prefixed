@@ -38,7 +38,7 @@ class MultiLineAssignmentSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // Equal sign can't be the last thing on the line.

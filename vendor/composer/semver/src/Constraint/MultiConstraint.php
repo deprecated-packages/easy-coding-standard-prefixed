@@ -89,7 +89,7 @@ class MultiConstraint implements \ECSPrefix20210507\Composer\Semver\Constraint\C
      *
      * @return bool
      */
-    public function matches($provider)
+    public function matches(\ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $provider)
     {
         if (\false === $this->conjunctive) {
             foreach ($this->constraints as $constraint) {

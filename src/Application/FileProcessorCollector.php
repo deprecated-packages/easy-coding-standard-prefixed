@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Application;
 
 use Symplify\EasyCodingStandard\Contract\Application\FileProcessorInterface;
@@ -13,18 +14,16 @@ final class FileProcessorCollector
     private $fileProcessors = [];
     /**
      * orders matters, so Fixer can cleanup after Sniffer
-     * @param \Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor $sniffFileProcessor
-     * @param \Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor $fixerFileProcessor
      */
-    public function __construct($sniffFileProcessor, $fixerFileProcessor)
+    public function __construct(SniffFileProcessor $sniffFileProcessor, FixerFileProcessor $fixerFileProcessor)
     {
         $this->fileProcessors[] = $sniffFileProcessor;
         $this->fileProcessors[] = $fixerFileProcessor;
     }
     /**
-     * @return mixed[]
+     * @return FileProcessorInterface[]
      */
-    public function getFileProcessors()
+    public function getFileProcessors() : array
     {
         return $this->fileProcessors;
     }

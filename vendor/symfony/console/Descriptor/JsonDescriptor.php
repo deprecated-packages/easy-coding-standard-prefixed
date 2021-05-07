@@ -26,43 +26,38 @@ class JsonDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
 {
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputArgument $argument
      */
-    protected function describeInputArgument($argument, array $options = [])
+    protected function describeInputArgument(InputArgument $argument, array $options = [])
     {
         $this->writeData($this->getInputArgumentData($argument), $options);
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputOption $option
      */
-    protected function describeInputOption($option, array $options = [])
+    protected function describeInputOption(InputOption $option, array $options = [])
     {
         $this->writeData($this->getInputOptionData($option), $options);
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputDefinition $definition
      */
-    protected function describeInputDefinition($definition, array $options = [])
+    protected function describeInputDefinition(InputDefinition $definition, array $options = [])
     {
         $this->writeData($this->getInputDefinitionData($definition), $options);
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
      */
-    protected function describeCommand($command, array $options = [])
+    protected function describeCommand(Command $command, array $options = [])
     {
         $this->writeData($this->getCommandData($command), $options);
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Application $application
      */
-    protected function describeApplication($application, array $options = [])
+    protected function describeApplication(Application $application, array $options = [])
     {
-        $describedNamespace = isset($options['namespace']) ? $options['namespace'] : null;
+        $describedNamespace = $options['namespace'] ?? null;
         $description = new \ECSPrefix20210507\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace, \true);
         $commands = [];
         foreach ($description->getCommands() as $command) {
@@ -88,30 +83,18 @@ class JsonDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
      */
     private function writeData(array $data, array $options)
     {
-        $flags = isset($options['json_encoding']) ? $options['json_encoding'] : 0;
+        $flags = $options['json_encoding'] ?? 0;
         $this->write(\json_encode($data, $flags));
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputArgument $argument
-     * @return mixed[]
-     */
-    private function getInputArgumentData($argument)
+    private function getInputArgumentData(InputArgument $argument) : array
     {
         return ['name' => $argument->getName(), 'is_required' => $argument->isRequired(), 'is_array' => $argument->isArray(), 'description' => \preg_replace('/\\s*[\\r\\n]\\s*/', ' ', $argument->getDescription()), 'default' => \INF === $argument->getDefault() ? 'INF' : $argument->getDefault()];
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputOption $option
-     * @return mixed[]
-     */
-    private function getInputOptionData($option)
+    private function getInputOptionData(InputOption $option) : array
     {
         return ['name' => '--' . $option->getName(), 'shortcut' => $option->getShortcut() ? '-' . \str_replace('|', '|-', $option->getShortcut()) : '', 'accept_value' => $option->acceptValue(), 'is_value_required' => $option->isValueRequired(), 'is_multiple' => $option->isArray(), 'description' => \preg_replace('/\\s*[\\r\\n]\\s*/', ' ', $option->getDescription()), 'default' => \INF === $option->getDefault() ? 'INF' : $option->getDefault()];
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputDefinition $definition
-     * @return mixed[]
-     */
-    private function getInputDefinitionData($definition)
+    private function getInputDefinitionData(InputDefinition $definition) : array
     {
         $inputArguments = [];
         foreach ($definition->getArguments() as $name => $argument) {
@@ -123,11 +106,7 @@ class JsonDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
         }
         return ['arguments' => $inputArguments, 'options' => $inputOptions];
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
-     * @return mixed[]
-     */
-    private function getCommandData($command)
+    private function getCommandData(Command $command) : array
     {
         $command->mergeApplicationDefinition(\false);
         return ['name' => $command->getName(), 'usage' => \array_merge([$command->getSynopsis()], $command->getUsages(), $command->getAliases()), 'description' => $command->getDescription(), 'help' => $command->getProcessedHelp(), 'definition' => $this->getInputDefinitionData($command->getDefinition()), 'hidden' => $command->isHidden()];

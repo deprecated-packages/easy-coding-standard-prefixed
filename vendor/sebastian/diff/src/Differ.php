@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of sebastian/diff.
  *
@@ -35,11 +36,11 @@ use ECSPrefix20210507\SebastianBergmann\Diff\Output\DiffOutputBuilderInterface;
 use ECSPrefix20210507\SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 final class Differ
 {
-    const OLD = 0;
-    const ADDED = 1;
-    const REMOVED = 2;
-    const DIFF_LINE_END_WARNING = 3;
-    const NO_LINE_END_EOF_WARNING = 4;
+    public const OLD = 0;
+    public const ADDED = 1;
+    public const REMOVED = 2;
+    public const DIFF_LINE_END_WARNING = 3;
+    public const NO_LINE_END_EOF_WARNING = 4;
     /**
      * @var DiffOutputBuilderInterface
      */
@@ -69,10 +70,8 @@ final class Differ
      *
      * @param array|string $from
      * @param array|string $to
-     * @param \ECSPrefix20210507\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator $lcs
-     * @return string
      */
-    public function diff($from, $to, $lcs = null)
+    public function diff($from, $to, \ECSPrefix20210507\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator $lcs = null) : string
     {
         $diff = $this->diffToArray($this->normalizeDiffInput($from), $this->normalizeDiffInput($to), $lcs);
         return $this->outputBuilder->getDiff($diff);
@@ -91,9 +90,8 @@ final class Differ
      * @param array|string                       $from
      * @param array|string                       $to
      * @param LongestCommonSubsequenceCalculator $lcs
-     * @return mixed[]
      */
-    public function diffToArray($from, $to, $lcs = null)
+    public function diffToArray($from, $to, \ECSPrefix20210507\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator $lcs = null) : array
     {
         if (is_string($from)) {
             $from = $this->splitStringByLines($from);
@@ -105,7 +103,7 @@ final class Differ
         } elseif (!is_array($to)) {
             throw new \ECSPrefix20210507\SebastianBergmann\Diff\InvalidArgumentException('"to" must be an array or string.');
         }
-        list($from, $to, $start, $end) = self::getArrayDiffParted($from, $to);
+        [$from, $to, $start, $end] = self::getArrayDiffParted($from, $to);
         if ($lcs === null) {
             $lcs = $this->selectLcsImplementation($from, $to);
         }
@@ -155,17 +153,12 @@ final class Differ
     }
     /**
      * Checks if input is string, if so it will split it line-by-line.
-     * @param string $input
-     * @return mixed[]
      */
-    private function splitStringByLines($input)
+    private function splitStringByLines(string $input) : array
     {
         return preg_split('/(.*\\R)/', $input, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
     }
-    /**
-     * @return \ECSPrefix20210507\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
-     */
-    private function selectLcsImplementation(array $from, array $to)
+    private function selectLcsImplementation(array $from, array $to) : \ECSPrefix20210507\SebastianBergmann\Diff\LongestCommonSubsequenceCalculator
     {
         // We do not want to use the time-efficient implementation if its memory
         // footprint will probably exceed this value. Note that the footprint
@@ -189,9 +182,8 @@ final class Differ
     }
     /**
      * Returns true if line ends don't match in a diff.
-     * @return bool
      */
-    private function detectUnmatchedLineEndings(array $diff)
+    private function detectUnmatchedLineEndings(array $diff) : bool
     {
         $newLineBreaks = ['' => \true];
         $oldLineBreaks = ['' => \true];
@@ -223,10 +215,7 @@ final class Differ
         }
         return \false;
     }
-    /**
-     * @return string
-     */
-    private function getLinebreak($line)
+    private function getLinebreak($line) : string
     {
         if (!is_string($line)) {
             return '';
@@ -243,10 +232,7 @@ final class Differ
         }
         return "\n";
     }
-    /**
-     * @return mixed[]
-     */
-    private static function getArrayDiffParted(array &$from, array &$to)
+    private static function getArrayDiffParted(array &$from, array &$to) : array
     {
         $start = [];
         $end = [];

@@ -50,10 +50,8 @@ class Intervals
      * Checks whether $candidate is a subset of $constraint
      *
      * @return bool
-     * @param \ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $candidate
-     * @param \ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $constraint
      */
-    public static function isSubsetOf($candidate, $constraint)
+    public static function isSubsetOf(ConstraintInterface $candidate, ConstraintInterface $constraint)
     {
         if ($constraint instanceof MatchAllConstraint) {
             return \true;
@@ -94,10 +92,8 @@ class Intervals
      * Checks whether $a and $b have any intersection, equivalent to $a->matches($b)
      *
      * @return bool
-     * @param \ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $a
-     * @param \ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $b
      */
-    public static function haveIntersections($a, $b)
+    public static function haveIntersections(ConstraintInterface $a, ConstraintInterface $b)
     {
         if ($a instanceof MatchAllConstraint || $b instanceof MatchAllConstraint) {
             return \true;
@@ -117,9 +113,8 @@ class Intervals
      * to match the same intervals.
      *
      * @return ConstraintInterface
-     * @param \ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $constraint
      */
-    public static function compactConstraint($constraint)
+    public static function compactConstraint(ConstraintInterface $constraint)
     {
         if (!$constraint instanceof MultiConstraint) {
             return $constraint;
@@ -230,9 +225,8 @@ class Intervals
      *
      * @return array
      * @phpstan-return array{'numeric': Interval[], 'branches': array{'names': string[], 'exclude': bool}}
-     * @param \ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $constraint
      */
-    public static function get($constraint)
+    public static function get(ConstraintInterface $constraint)
     {
         $key = (string) $constraint;
         if (!isset(self::$intervalsCache[$key])) {
@@ -242,9 +236,8 @@ class Intervals
     }
     /**
      * @phpstan-return array{'numeric': Interval[], 'branches': array{'names': string[], 'exclude': bool}}
-     * @param \ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $constraint
      */
-    private static function generateIntervals($constraint, $stopOnFirstValidInterval = \false)
+    private static function generateIntervals(ConstraintInterface $constraint, $stopOnFirstValidInterval = \false)
     {
         if ($constraint instanceof MatchAllConstraint) {
             return array('numeric' => array(new \ECSPrefix20210507\Composer\Semver\Interval(\ECSPrefix20210507\Composer\Semver\Interval::fromZero(), \ECSPrefix20210507\Composer\Semver\Interval::untilPositiveInfinity())), 'branches' => \ECSPrefix20210507\Composer\Semver\Interval::anyDev());
@@ -373,9 +366,8 @@ class Intervals
     }
     /**
      * @phpstan-return array{'numeric': Interval[], 'branches': array{'names': string[], 'exclude': bool}}}
-     * @param \ECSPrefix20210507\Composer\Semver\Constraint\Constraint $constraint
      */
-    private static function generateSingleConstraintIntervals($constraint)
+    private static function generateSingleConstraintIntervals(Constraint $constraint)
     {
         $op = $constraint->getOperator();
         // handle branch constraints first

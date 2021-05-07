@@ -32,7 +32,7 @@ class OneInterfacePerFileSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $nextInterface = $phpcsFile->findNext($this->register(), $stackPtr + 1);
         if ($nextInterface !== \false) {

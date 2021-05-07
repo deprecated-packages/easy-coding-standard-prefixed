@@ -26,16 +26,12 @@ abstract class AbstractAdapter implements \ECSPrefix20210507\Symfony\Component\C
     /**
      * @internal
      */
-    const NS_SEPARATOR = ':';
+    protected const NS_SEPARATOR = ':';
     use AbstractAdapterTrait;
     use ContractsTrait;
     private static $apcuSupported;
     private static $phpFilesSupported;
-    /**
-     * @param string $namespace
-     * @param int $defaultLifetime
-     */
-    protected function __construct($namespace = '', $defaultLifetime = 0)
+    protected function __construct(string $namespace = '', int $defaultLifetime = 0)
     {
         $this->namespace = '' === $namespace ? '' : CacheItem::validateKey($namespace) . static::NS_SEPARATOR;
         if (null !== $this->maxIdLength && \strlen($namespace) > $this->maxIdLength - 24) {
@@ -87,19 +83,14 @@ abstract class AbstractAdapter implements \ECSPrefix20210507\Symfony\Component\C
      * Using ApcuAdapter makes system caches compatible with read-only filesystems.
      *
      * @return AdapterInterface
-     * @param string $namespace
-     * @param int $defaultLifetime
-     * @param string $version
-     * @param string $directory
-     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $logger
      */
-    public static function createSystemCache($namespace, $defaultLifetime, $version, $directory, $logger = null)
+    public static function createSystemCache(string $namespace, int $defaultLifetime, string $version, string $directory, LoggerInterface $logger = null)
     {
         $opcache = new \ECSPrefix20210507\Symfony\Component\Cache\Adapter\PhpFilesAdapter($namespace, $defaultLifetime, $directory, \true);
         if (null !== $logger) {
             $opcache->setLogger($logger);
         }
-        if (!(self::$apcuSupported = isset(self::$apcuSupported) ? self::$apcuSupported : \ECSPrefix20210507\Symfony\Component\Cache\Adapter\ApcuAdapter::isSupported())) {
+        if (!(self::$apcuSupported = self::$apcuSupported ?? \ECSPrefix20210507\Symfony\Component\Cache\Adapter\ApcuAdapter::isSupported())) {
             return $opcache;
         }
         if (\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && !\filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) {
@@ -111,10 +102,7 @@ abstract class AbstractAdapter implements \ECSPrefix20210507\Symfony\Component\C
         }
         return new \ECSPrefix20210507\Symfony\Component\Cache\Adapter\ChainAdapter([$apcu, $opcache]);
     }
-    /**
-     * @param string $dsn
-     */
-    public static function createConnection($dsn, array $options = [])
+    public static function createConnection(string $dsn, array $options = [])
     {
         if (0 === \strpos($dsn, 'redis:') || 0 === \strpos($dsn, 'rediss:')) {
             return \ECSPrefix20210507\Symfony\Component\Cache\Adapter\RedisAdapter::createConnection($dsn, $options);

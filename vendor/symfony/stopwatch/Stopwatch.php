@@ -35,7 +35,7 @@ class Stopwatch implements ResetInterface
     /**
      * @param bool $morePrecision If true, time is stored as float to keep the original microsecond precision
      */
-    public function __construct($morePrecision = \false)
+    public function __construct(bool $morePrecision = \false)
     {
         $this->morePrecision = $morePrecision;
         $this->reset();
@@ -50,11 +50,11 @@ class Stopwatch implements ResetInterface
     /**
      * Creates a new section or re-opens an existing section.
      *
-     * @param string $id The id of the session to re-open, null to create a new one
+     * @param string|null $id The id of the session to re-open, null to create a new one
      *
      * @throws \LogicException When the section to re-open is not reachable
      */
-    public function openSection($id = null)
+    public function openSection(string $id = null)
     {
         $current = \end($this->activeSections);
         if (null !== $id && null === $current->get($id)) {
@@ -72,9 +72,8 @@ class Stopwatch implements ResetInterface
      * @see getSectionEvents()
      *
      * @throws \LogicException When there's no started section to be stopped
-     * @param string $id
      */
-    public function stopSection($id)
+    public function stopSection(string $id)
     {
         $this->stop('__section__');
         if (1 == \count($this->activeSections)) {
@@ -87,10 +86,8 @@ class Stopwatch implements ResetInterface
      * Starts an event.
      *
      * @return StopwatchEvent
-     * @param string $name
-     * @param string $category
      */
-    public function start($name, $category = null)
+    public function start(string $name, string $category = null)
     {
         return \end($this->activeSections)->startEvent($name, $category);
     }
@@ -98,9 +95,8 @@ class Stopwatch implements ResetInterface
      * Checks if the event was started.
      *
      * @return bool
-     * @param string $name
      */
-    public function isStarted($name)
+    public function isStarted(string $name)
     {
         return \end($this->activeSections)->isEventStarted($name);
     }
@@ -108,9 +104,8 @@ class Stopwatch implements ResetInterface
      * Stops an event.
      *
      * @return StopwatchEvent
-     * @param string $name
      */
-    public function stop($name)
+    public function stop(string $name)
     {
         return \end($this->activeSections)->stopEvent($name);
     }
@@ -118,9 +113,8 @@ class Stopwatch implements ResetInterface
      * Stops then restarts an event.
      *
      * @return StopwatchEvent
-     * @param string $name
      */
-    public function lap($name)
+    public function lap(string $name)
     {
         return \end($this->activeSections)->stopEvent($name)->start();
     }
@@ -128,9 +122,8 @@ class Stopwatch implements ResetInterface
      * Returns a specific event by name.
      *
      * @return StopwatchEvent
-     * @param string $name
      */
-    public function getEvent($name)
+    public function getEvent(string $name)
     {
         return \end($this->activeSections)->getEvent($name);
     }
@@ -138,9 +131,8 @@ class Stopwatch implements ResetInterface
      * Gets all events for a given section.
      *
      * @return StopwatchEvent[]
-     * @param string $id
      */
-    public function getSectionEvents($id)
+    public function getSectionEvents(string $id)
     {
         return isset($this->sections[$id]) ? $this->sections[$id]->getEvents() : [];
     }

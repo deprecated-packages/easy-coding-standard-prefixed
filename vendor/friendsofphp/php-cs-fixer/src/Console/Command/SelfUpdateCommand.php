@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -44,12 +45,7 @@ final class SelfUpdateCommand extends Command
      * @var PharCheckerInterface
      */
     private $pharChecker;
-    /**
-     * @param \PhpCsFixer\Console\SelfUpdate\NewVersionCheckerInterface $versionChecker
-     * @param \PhpCsFixer\ToolInfoInterface $toolInfo
-     * @param \PhpCsFixer\PharCheckerInterface $pharChecker
-     */
-    public function __construct($versionChecker, $toolInfo, $pharChecker)
+    public function __construct(NewVersionCheckerInterface $versionChecker, ToolInfoInterface $toolInfo, PharCheckerInterface $pharChecker)
     {
         parent::__construct();
         $this->versionChecker = $versionChecker;
@@ -58,9 +54,8 @@ final class SelfUpdateCommand extends Command
     }
     /**
      * {@inheritdoc}
-     * @return void
      */
-    protected function configure()
+    protected function configure() : void
     {
         $this->setAliases(['selfupdate'])->setDefinition([new InputOption('--force', '-f', InputOption::VALUE_NONE, 'Force update to next major version if available.')])->setDescription('Update php-cs-fixer.phar to the latest stable version.')->setHelp(<<<'EOT'
 The <info>%command.name%</info> command replace your php-cs-fixer.phar by the
@@ -74,11 +69,8 @@ EOT
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @return int
      */
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         if (OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity() && $output instanceof ConsoleOutputInterface) {
             $stdErr = $output->getErrorOutput();

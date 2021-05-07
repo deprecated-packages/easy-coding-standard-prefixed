@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\Skipper\SkipVoter;
 
 use Symplify\Skipper\Contract\SkipVoterInterface;
@@ -19,20 +20,15 @@ final class ClassAndCodeSkipVoter implements SkipVoterInterface
      * @var FileInfoMatcher
      */
     private $fileInfoMatcher;
-    /**
-     * @param \Symplify\Skipper\SkipCriteriaResolver\SkippedClassAndCodesResolver $skippedClassAndCodesResolver
-     * @param \Symplify\Skipper\Matcher\FileInfoMatcher $fileInfoMatcher
-     */
-    public function __construct($skippedClassAndCodesResolver, $fileInfoMatcher)
+    public function __construct(SkippedClassAndCodesResolver $skippedClassAndCodesResolver, FileInfoMatcher $fileInfoMatcher)
     {
         $this->skippedClassAndCodesResolver = $skippedClassAndCodesResolver;
         $this->fileInfoMatcher = $fileInfoMatcher;
     }
     /**
      * @param string|object $element
-     * @return bool
      */
-    public function match($element)
+    public function match($element) : bool
     {
         if (!\is_string($element)) {
             return \false;
@@ -41,10 +37,8 @@ final class ClassAndCodeSkipVoter implements SkipVoterInterface
     }
     /**
      * @param string $element
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
-     * @return bool
      */
-    public function shouldSkip($element, $smartFileInfo)
+    public function shouldSkip($element, SmartFileInfo $smartFileInfo) : bool
     {
         $skippedClassAndCodes = $this->skippedClassAndCodesResolver->resolve();
         if (!\array_key_exists($element, $skippedClassAndCodes)) {

@@ -33,9 +33,8 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
      * Escapes "<" special char in given text.
      *
      * @return string Escaped text
-     * @param string $text
      */
-    public static function escape($text)
+    public static function escape(string $text)
     {
         $text = \preg_replace('/([^\\\\]?)</', '$1\\<', $text);
         return self::escapeTrailingBackslash($text);
@@ -44,10 +43,8 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
      * Escapes trailing "\" in given text.
      *
      * @internal
-     * @param string $text
-     * @return string
      */
-    public static function escapeTrailingBackslash($text)
+    public static function escapeTrailingBackslash(string $text) : string
     {
         if ('\\' === \substr($text, -1)) {
             $len = \strlen($text);
@@ -61,9 +58,8 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
      * Initializes console output formatter.
      *
      * @param OutputFormatterStyleInterface[] $styles Array of "name => FormatterStyle" instances
-     * @param bool $decorated
      */
-    public function __construct($decorated = \false, array $styles = [])
+    public function __construct(bool $decorated = \false, array $styles = [])
     {
         $this->decorated = $decorated;
         $this->setStyle('error', new \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyle('white', 'red'));
@@ -77,9 +73,8 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
     }
     /**
      * {@inheritdoc}
-     * @param bool $decorated
      */
-    public function setDecorated($decorated)
+    public function setDecorated(bool $decorated)
     {
         $this->decorated = $decorated;
     }
@@ -92,26 +87,22 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
     }
     /**
      * {@inheritdoc}
-     * @param string $name
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style
      */
-    public function setStyle($name, $style)
+    public function setStyle(string $name, \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
     {
         $this->styles[\strtolower($name)] = $style;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function hasStyle($name)
+    public function hasStyle(string $name)
     {
         return isset($this->styles[\strtolower($name)]);
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function getStyle($name)
+    public function getStyle(string $name)
     {
         if (!$this->hasStyle($name)) {
             throw new InvalidArgumentException(\sprintf('Undefined style: "%s".', $name));
@@ -120,18 +111,15 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
     }
     /**
      * {@inheritdoc}
-     * @param string|null $message
      */
-    public function format($message)
+    public function format(?string $message)
     {
         return $this->formatAndWrap($message, 0);
     }
     /**
      * {@inheritdoc}
-     * @param string|null $message
-     * @param int $width
      */
-    public function formatAndWrap($message, $width)
+    public function formatAndWrap(?string $message, int $width)
     {
         $offset = 0;
         $output = '';
@@ -151,7 +139,7 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
             if ($open = '/' != $text[1]) {
                 $tag = $matches[1][$i][0];
             } else {
-                $tag = isset($matches[3][$i][0]) ? $matches[3][$i][0] : '';
+                $tag = $matches[3][$i][0] ?? '';
             }
             if (!$open && !$tag) {
                 // </>
@@ -179,10 +167,8 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
     }
     /**
      * Tries to create new style instance from string.
-     * @return \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface|null
-     * @param string $string
      */
-    private function createStyleFromString($string)
+    private function createStyleFromString(string $string) : ?\ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
     {
         if (isset($this->styles[$string])) {
             return $this->styles[$string];
@@ -214,13 +200,8 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
     }
     /**
      * Applies current style from stack to text, if must be applied.
-     * @param string $text
-     * @param string $current
-     * @param int $width
-     * @param int $currentLineLength
-     * @return string
      */
-    private function applyCurrentStyle($text, $current, $width, &$currentLineLength)
+    private function applyCurrentStyle(string $text, string $current, int $width, int &$currentLineLength) : string
     {
         if ('' === $text) {
             return '';
@@ -239,7 +220,7 @@ class OutputFormatter implements \ECSPrefix20210507\Symfony\Component\Console\Fo
         }
         \preg_match('~(\\n)$~', $text, $matches);
         $text = $prefix . \preg_replace('~([^\\n]{' . $width . '})\\ *~', "\$1\n", $text);
-        $text = \rtrim($text, "\n") . (isset($matches[1]) ? $matches[1] : '');
+        $text = \rtrim($text, "\n") . ($matches[1] ?? '');
         if (!$currentLineLength && '' !== $current && "\n" !== \substr($current, -1)) {
             $text = "\n" . $text;
         }

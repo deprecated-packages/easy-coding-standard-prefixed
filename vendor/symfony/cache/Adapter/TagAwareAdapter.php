@@ -25,7 +25,7 @@ use ECSPrefix20210507\Symfony\Contracts\Cache\TagAwareCacheInterface;
  */
 class TagAwareAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, TagAwareCacheInterface, PruneableInterface, ResettableInterface, LoggerAwareInterface
 {
-    const TAGS_PREFIX = "\0tags\0";
+    public const TAGS_PREFIX = "\0tags\0";
     use ContractsTrait;
     use LoggerAwareTrait;
     use ProxyTrait;
@@ -37,12 +37,7 @@ class TagAwareAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
     private $tags;
     private $knownTagVersions = [];
     private $knownTagVersionsTtl;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool
-     * @param float $knownTagVersionsTtl
-     */
-    public function __construct($itemsPool, $tagsPool = null, $knownTagVersionsTtl = 0.15)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $itemsPool, \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $tagsPool = null, float $knownTagVersionsTtl = 0.15)
     {
         $this->pool = $itemsPool;
         $this->tags = $tagsPool ?: $itemsPool;
@@ -74,7 +69,7 @@ class TagAwareAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
         $this->getTagsByKey = \Closure::bind(static function ($deferred) {
             $tagsByKey = [];
             foreach ($deferred as $key => $item) {
-                $tagsByKey[$key] = isset($item->newMetadata[CacheItem::METADATA_TAGS]) ? $item->newMetadata[CacheItem::METADATA_TAGS] : [];
+                $tagsByKey[$key] = $item->newMetadata[CacheItem::METADATA_TAGS] ?? [];
                 $item->metadata = $item->newMetadata;
             }
             return $tagsByKey;
@@ -188,9 +183,8 @@ class TagAwareAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
      * {@inheritdoc}
      *
      * @return bool
-     * @param string $prefix
      */
-    public function clear($prefix = '')
+    public function clear(string $prefix = '')
     {
         if ('' !== $prefix) {
             foreach ($this->deferred as $key => $item) {
@@ -233,9 +227,8 @@ class TagAwareAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function save($item)
+    public function save(CacheItemInterface $item)
     {
         if (!$item instanceof CacheItem) {
             return \false;
@@ -247,9 +240,8 @@ class TagAwareAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred($item)
+    public function saveDeferred(CacheItemInterface $item)
     {
         if (!$item instanceof CacheItem) {
             return \false;
@@ -278,10 +270,7 @@ class TagAwareAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
     {
         $this->commit();
     }
-    /**
-     * @param mixed[] $items
-     */
-    private function generateItems($items, array $tagKeys)
+    private function generateItems(iterable $items, array $tagKeys)
     {
         $bufferedItems = $itemTags = [];
         $f = $this->setCacheItemTags;

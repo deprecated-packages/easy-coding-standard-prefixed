@@ -59,7 +59,7 @@ class Bound
      *
      * @return bool
      */
-    public function compareTo($other, $operator)
+    public function compareTo(\ECSPrefix20210507\Composer\Semver\Constraint\Bound $other, $operator)
     {
         if (!\in_array($operator, array('<', '>'), \true)) {
             throw new \InvalidArgumentException('Does not support any other operator other than > or <.');

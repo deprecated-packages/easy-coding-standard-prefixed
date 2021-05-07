@@ -22,18 +22,14 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 class ResettableServicePass implements CompilerPassInterface
 {
     private $tagName;
-    /**
-     * @param string $tagName
-     */
-    public function __construct($tagName = 'kernel.reset')
+    public function __construct(string $tagName = 'kernel.reset')
     {
         $this->tagName = $tagName;
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         if (!$container->has('services_resetter')) {
             return;

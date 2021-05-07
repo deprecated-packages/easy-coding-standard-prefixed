@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,18 +27,15 @@ final class StaticLambdaFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Lambdas not (indirect) referencing `$this` must be declared `static`.', [new CodeSample("<?php\n\$a = function () use (\$b)\n{   echo \$b;\n};\n")], null, 'Risky when using `->bindTo` on lambdas without referencing to `$this`.');
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
             return \true;
@@ -46,19 +44,15 @@ final class StaticLambdaFixer extends AbstractFixer
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $analyzer = new TokensAnalyzer($tokens);
         $expectedFunctionKinds = [\T_FUNCTION];
@@ -94,12 +88,7 @@ final class StaticLambdaFixer extends AbstractFixer
             // fixed after a lambda, closes candidate is at least 4 tokens before that
         }
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @return int
-     */
-    private function findExpressionEnd($tokens, $index)
+    private function findExpressionEnd(Tokens $tokens, int $index) : int
     {
         $nextIndex = $tokens->getNextMeaningfulToken($index);
         while (null !== $nextIndex) {
@@ -120,12 +109,8 @@ final class StaticLambdaFixer extends AbstractFixer
     }
     /**
      * Returns 'true' if there is a possible reference to '$this' within the given tokens index range.
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $startIndex
-     * @param int $endIndex
-     * @return bool
      */
-    private function hasPossibleReferenceToThis($tokens, $startIndex, $endIndex)
+    private function hasPossibleReferenceToThis(Tokens $tokens, int $startIndex, int $endIndex) : bool
     {
         for ($i = $startIndex; $i < $endIndex; ++$i) {
             if ($tokens[$i]->isGivenKind(\T_VARIABLE) && '$this' === \strtolower($tokens[$i]->getContent())) {

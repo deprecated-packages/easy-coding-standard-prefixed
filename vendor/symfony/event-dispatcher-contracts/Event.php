@@ -31,9 +31,8 @@ class Event implements StoppableEventInterface
     private $propagationStopped = \false;
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function isPropagationStopped()
+    public function isPropagationStopped() : bool
     {
         return $this->propagationStopped;
     }
@@ -43,9 +42,8 @@ class Event implements StoppableEventInterface
      * If multiple event listeners are connected to the same event, no
      * further event listener will be triggered once any trigger calls
      * stopPropagation().
-     * @return void
      */
-    public function stopPropagation()
+    public function stopPropagation() : void
     {
         $this->propagationStopped = \true;
     }

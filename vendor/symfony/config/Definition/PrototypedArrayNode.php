@@ -34,9 +34,8 @@ class PrototypedArrayNode extends \ECSPrefix20210507\Symfony\Component\Config\De
     /**
      * Sets the minimum number of elements that a prototype based node must
      * contain. By default this is zero, meaning no elements.
-     * @param int $number
      */
-    public function setMinNumberOfElements($number)
+    public function setMinNumberOfElements(int $number)
     {
         $this->minNumberOfElements = $number;
     }
@@ -64,7 +63,7 @@ class PrototypedArrayNode extends \ECSPrefix20210507\Symfony\Component\Config\De
      * @param string $attribute The name of the attribute which value is to be used as a key
      * @param bool   $remove    Whether or not to remove the key
      */
-    public function setKeyAttribute($attribute, $remove = \true)
+    public function setKeyAttribute(string $attribute, bool $remove = \true)
     {
         $this->keyAttribute = $attribute;
         $this->removeKeyAttribute = $remove;
@@ -125,9 +124,8 @@ class PrototypedArrayNode extends \ECSPrefix20210507\Symfony\Component\Config\De
     }
     /**
      * Sets the node prototype.
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\PrototypeNodeInterface $node
      */
-    public function setPrototype($node)
+    public function setPrototype(\ECSPrefix20210507\Symfony\Component\Config\Definition\PrototypeNodeInterface $node)
     {
         $this->prototype = $node;
     }
@@ -144,9 +142,8 @@ class PrototypedArrayNode extends \ECSPrefix20210507\Symfony\Component\Config\De
      * Disable adding concrete children for prototyped nodes.
      *
      * @throws Exception
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface $node
      */
-    public function addChild($node)
+    public function addChild(\ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface $node)
     {
         throw new Exception('A prototyped array node can not have concrete children.');
     }
@@ -322,11 +319,10 @@ class PrototypedArrayNode extends \ECSPrefix20210507\Symfony\Component\Config\De
      * the prototype of child node 'name001' should be a ScalarNode instead of an ArrayNode instance.
      *
      * @return mixed The prototype instance
-     * @param string $key
      */
-    private function getPrototypeForChild($key)
+    private function getPrototypeForChild(string $key)
     {
-        $prototype = isset($this->valuePrototypes[$key]) ? $this->valuePrototypes[$key] : $this->prototype;
+        $prototype = $this->valuePrototypes[$key] ?? $this->prototype;
         $prototype->setName($key);
         return $prototype;
     }

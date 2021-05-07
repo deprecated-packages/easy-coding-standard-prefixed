@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Finder;
 
 use ECSPrefix20210507\Nette\Utils\Finder as NetteFinder;
@@ -13,10 +14,10 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 final class FinderSanitizer
 {
     /**
-     * @param mixed[] $files
-     * @return mixed[]
+     * @param NetteFinder|SymfonyFinder|SplFileInfo[]|SymfonySplFileInfo[]|string[] $files
+     * @return SmartFileInfo[]
      */
-    public function sanitize($files)
+    public function sanitize(iterable $files) : array
     {
         $smartFileInfos = [];
         foreach ($files as $file) {
@@ -30,11 +31,7 @@ final class FinderSanitizer
         }
         return $smartFileInfos;
     }
-    /**
-     * @param \SplFileInfo $fileInfo
-     * @return bool
-     */
-    private function isFileInfoValid($fileInfo)
+    private function isFileInfoValid(SplFileInfo $fileInfo) : bool
     {
         return (bool) $fileInfo->getRealPath();
     }

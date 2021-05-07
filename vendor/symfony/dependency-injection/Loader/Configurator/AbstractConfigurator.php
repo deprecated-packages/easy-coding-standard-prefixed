@@ -19,17 +19,14 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 use ECSPrefix20210507\Symfony\Component\ExpressionLanguage\Expression;
 abstract class AbstractConfigurator
 {
-    const FACTORY = 'unknown';
+    public const FACTORY = 'unknown';
     /**
      * @var callable(mixed, bool $allowService)|null
      */
     public static $valuePreProcessor;
     /** @internal */
     protected $definition;
-    /**
-     * @param string $method
-     */
-    public function __call($method, array $args)
+    public function __call(string $method, array $args)
     {
         if (\method_exists($this, 'set' . $method)) {
             return $this->{'set' . $method}(...$args);

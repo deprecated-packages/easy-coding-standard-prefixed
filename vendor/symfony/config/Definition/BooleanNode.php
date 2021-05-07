@@ -42,9 +42,8 @@ class BooleanNode extends \ECSPrefix20210507\Symfony\Component\Config\Definition
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    protected function getValidPlaceholderTypes()
+    protected function getValidPlaceholderTypes() : array
     {
         return ['bool'];
     }

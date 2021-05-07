@@ -27,23 +27,14 @@ final class SourceContextProvider implements \ECSPrefix20210507\Symfony\Componen
     private $charset;
     private $projectDir;
     private $fileLinkFormatter;
-    /**
-     * @param string $charset
-     * @param string $projectDir
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Debug\FileLinkFormatter $fileLinkFormatter
-     * @param int $limit
-     */
-    public function __construct($charset = null, $projectDir = null, $fileLinkFormatter = null, $limit = 9)
+    public function __construct(string $charset = null, string $projectDir = null, FileLinkFormatter $fileLinkFormatter = null, int $limit = 9)
     {
         $this->charset = $charset;
         $this->projectDir = $projectDir;
         $this->fileLinkFormatter = $fileLinkFormatter;
         $this->limit = $limit;
     }
-    /**
-     * @return mixed[]|null
-     */
-    public function getContext()
+    public function getContext() : ?array
     {
         $trace = \debug_backtrace(\DEBUG_BACKTRACE_PROVIDE_OBJECT | \DEBUG_BACKTRACE_IGNORE_ARGS, $this->limit);
         $file = $trace[1]['file'];
@@ -52,8 +43,8 @@ final class SourceContextProvider implements \ECSPrefix20210507\Symfony\Componen
         $fileExcerpt = \false;
         for ($i = 2; $i < $this->limit; ++$i) {
             if (isset($trace[$i]['class'], $trace[$i]['function']) && 'dump' === $trace[$i]['function'] && VarDumper::class === $trace[$i]['class']) {
-                $file = isset($trace[$i]['file']) ? $trace[$i]['file'] : $file;
-                $line = isset($trace[$i]['line']) ? $trace[$i]['line'] : $line;
+                $file = $trace[$i]['file'] ?? $file;
+                $line = $trace[$i]['line'] ?? $line;
                 while (++$i < $this->limit) {
                     if (isset($trace[$i]['function'], $trace[$i]['file']) && empty($trace[$i]['class']) && 0 !== \strpos($trace[$i]['function'], 'call_user_func')) {
                         $file = $trace[$i]['file'];
@@ -99,11 +90,7 @@ final class SourceContextProvider implements \ECSPrefix20210507\Symfony\Componen
         }
         return $context;
     }
-    /**
-     * @param string $s
-     * @return string
-     */
-    private function htmlEncode($s)
+    private function htmlEncode(string $s) : string
     {
         $html = '';
         $dumper = new HtmlDumper(function ($line) use(&$html) {

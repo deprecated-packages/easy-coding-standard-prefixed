@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -22,21 +23,18 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 final class NamespaceUsesAnalyzer
 {
     /**
-     * @return mixed[]
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return NamespaceUseAnalysis[]
      */
-    public function getDeclarationsFromTokens($tokens)
+    public function getDeclarationsFromTokens(Tokens $tokens) : array
     {
         $tokenAnalyzer = new TokensAnalyzer($tokens);
         $useIndexes = $tokenAnalyzer->getImportUseIndexes();
         return $this->getDeclarations($tokens, $useIndexes);
     }
     /**
-     * @return mixed[]
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis $namespace
+     * @return NamespaceUseAnalysis[]
      */
-    public function getDeclarationsInNamespace($tokens, $namespace)
+    public function getDeclarationsInNamespace(Tokens $tokens, NamespaceAnalysis $namespace) : array
     {
         $namespaceUses = [];
         foreach ($this->getDeclarationsFromTokens($tokens) as $namespaceUse) {
@@ -47,10 +45,9 @@ final class NamespaceUsesAnalyzer
         return $namespaceUses;
     }
     /**
-     * @return mixed[]
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return NamespaceUseAnalysis[]
      */
-    private function getDeclarations($tokens, array $useIndexes)
+    private function getDeclarations(Tokens $tokens, array $useIndexes) : array
     {
         $uses = [];
         foreach ($useIndexes as $index) {
@@ -62,13 +59,7 @@ final class NamespaceUsesAnalyzer
         }
         return $uses;
     }
-    /**
-     * @return \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis|null
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $startIndex
-     * @param int $endIndex
-     */
-    private function parseDeclaration($tokens, $startIndex, $endIndex)
+    private function parseDeclaration(Tokens $tokens, int $startIndex, int $endIndex) : ?NamespaceUseAnalysis
     {
         $fullName = $shortName = '';
         $aliased = \false;

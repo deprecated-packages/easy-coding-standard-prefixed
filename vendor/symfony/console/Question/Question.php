@@ -33,7 +33,7 @@ class Question
      * @param string $question The question to ask to the user
      * @param mixed  $default  The default answer to return if the user enters nothing
      */
-    public function __construct($question, $default = null)
+    public function __construct(string $question, $default = null)
     {
         $this->question = $question;
         $this->default = $default;
@@ -58,9 +58,8 @@ class Question
     }
     /**
      * Returns whether the user response accepts newline characters.
-     * @return bool
      */
-    public function isMultiline()
+    public function isMultiline() : bool
     {
         return $this->multiline;
     }
@@ -68,9 +67,8 @@ class Question
      * Sets whether the user response should accept newline characters.
      *
      * @return $this
-     * @param bool $multiline
      */
-    public function setMultiline($multiline)
+    public function setMultiline(bool $multiline) : self
     {
         $this->multiline = $multiline;
         return $this;
@@ -138,9 +136,8 @@ class Question
      * @return $this
      *
      * @throws LogicException
-     * @param mixed[]|null $values
      */
-    public function setAutocompleterValues($values)
+    public function setAutocompleterValues(?iterable $values)
     {
         if (\is_array($values)) {
             $values = $this->isAssoc($values) ? \array_merge(\array_keys($values), \array_values($values)) : \array_values($values);
@@ -150,7 +147,7 @@ class Question
         } elseif ($values instanceof \Traversable) {
             $valueCache = null;
             $callback = static function () use($values, &$valueCache) {
-                return isset($valueCache) ? $valueCache : ($valueCache = \iterator_to_array($values, \false));
+                return $valueCache ?? ($valueCache = \iterator_to_array($values, \false));
             };
         } else {
             $callback = null;
@@ -159,9 +156,8 @@ class Question
     }
     /**
      * Gets the callback function used for the autocompleter.
-     * @return callable|null
      */
-    public function getAutocompleterCallback()
+    public function getAutocompleterCallback() : ?callable
     {
         return $this->autocompleterCallback;
     }
@@ -172,7 +168,7 @@ class Question
      *
      * @return $this
      */
-    public function setAutocompleterCallback(callable $callback = null)
+    public function setAutocompleterCallback(callable $callback = null) : self
     {
         if ($this->hidden && null !== $callback) {
             throw new LogicException('A hidden question cannot use the autocompleter.');
@@ -207,9 +203,8 @@ class Question
      * @return $this
      *
      * @throws InvalidArgumentException in case the number of attempts is invalid
-     * @param int|null $attempts
      */
-    public function setMaxAttempts($attempts)
+    public function setMaxAttempts(?int $attempts)
     {
         if (null !== $attempts) {
             $attempts = (int) $attempts;
@@ -258,18 +253,14 @@ class Question
     {
         return (bool) \count(\array_filter(\array_keys($array), 'is_string'));
     }
-    /**
-     * @return bool
-     */
-    public function isTrimmable()
+    public function isTrimmable() : bool
     {
         return $this->trimmable;
     }
     /**
      * @return $this
-     * @param bool $trimmable
      */
-    public function setTrimmable($trimmable)
+    public function setTrimmable(bool $trimmable) : self
     {
         $this->trimmable = $trimmable;
         return $this;

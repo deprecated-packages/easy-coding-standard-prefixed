@@ -17,14 +17,11 @@ namespace ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\ContextProvider;
  */
 final class CliContextProvider implements \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\ContextProvider\ContextProviderInterface
 {
-    /**
-     * @return mixed[]|null
-     */
-    public function getContext()
+    public function getContext() : ?array
     {
         if ('cli' !== \PHP_SAPI) {
             return null;
         }
-        return ['command_line' => $commandLine = \implode(' ', isset($_SERVER['argv']) ? $_SERVER['argv'] : []), 'identifier' => \hash('crc32b', $commandLine . $_SERVER['REQUEST_TIME_FLOAT'])];
+        return ['command_line' => $commandLine = \implode(' ', $_SERVER['argv'] ?? []), 'identifier' => \hash('crc32b', $commandLine . $_SERVER['REQUEST_TIME_FLOAT'])];
     }
 }

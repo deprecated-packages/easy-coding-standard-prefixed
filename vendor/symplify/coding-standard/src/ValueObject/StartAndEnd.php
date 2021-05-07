@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\ValueObject;
 
 final class StartAndEnd
@@ -12,26 +13,16 @@ final class StartAndEnd
      * @var int
      */
     private $end;
-    /**
-     * @param int $start
-     * @param int $end
-     */
-    public function __construct($start, $end)
+    public function __construct(int $start, int $end)
     {
         $this->start = $start;
         $this->end = $end;
     }
-    /**
-     * @return int
-     */
-    public function getStart()
+    public function getStart() : int
     {
         return $this->start;
     }
-    /**
-     * @return int
-     */
-    public function getEnd()
+    public function getEnd() : int
     {
         return $this->end;
     }

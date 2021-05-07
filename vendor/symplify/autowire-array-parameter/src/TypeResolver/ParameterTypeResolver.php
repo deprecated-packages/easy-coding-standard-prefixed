@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\TypeResolver;
 
 use ECSPrefix20210507\Nette\Utils\Reflection;
@@ -15,19 +16,11 @@ final class ParameterTypeResolver
      * @var array<string, string>
      */
     private $resolvedParameterTypesCached = [];
-    /**
-     * @param \Symplify\AutowireArrayParameter\DocBlock\ParamTypeDocBlockResolver $paramTypeDocBlockResolver
-     */
-    public function __construct($paramTypeDocBlockResolver)
+    public function __construct(ParamTypeDocBlockResolver $paramTypeDocBlockResolver)
     {
         $this->paramTypeDocBlockResolver = $paramTypeDocBlockResolver;
     }
-    /**
-     * @return string|null
-     * @param string $parameterName
-     * @param \ReflectionMethod $reflectionMethod
-     */
-    public function resolveParameterType($parameterName, $reflectionMethod)
+    public function resolveParameterType(string $parameterName, ReflectionMethod $reflectionMethod) : ?string
     {
         $docComment = $reflectionMethod->getDocComment();
         if ($docComment === \false) {

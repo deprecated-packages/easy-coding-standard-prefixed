@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -35,8 +36,8 @@ use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
  */
 final class Application extends BaseApplication
 {
-    const VERSION = '3.0.0';
-    const VERSION_CODENAME = 'Constitution';
+    public const VERSION = '3.0.0';
+    public const VERSION_CODENAME = 'Constitution';
     /**
      * @var ToolInfo
      */
@@ -52,20 +53,14 @@ final class Application extends BaseApplication
         $this->add(new ListSetsCommand());
         $this->add(new SelfUpdateCommand(new NewVersionChecker(new GithubClient()), $this->toolInfo, new PharChecker()));
     }
-    /**
-     * @return int
-     */
-    public static function getMajorVersion()
+    public static function getMajorVersion() : int
     {
         return (int) \explode('.', self::VERSION)[0];
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @return int
      */
-    public function doRun($input, $output)
+    public function doRun(InputInterface $input, OutputInterface $output) : int
     {
         $stdErr = $output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : ($input->hasParameterOption('--format', \true) && 'txt' !== $input->getParameterOption('--format', null, \true) ? null : $output);
         if (null !== $stdErr) {
@@ -96,9 +91,8 @@ final class Application extends BaseApplication
     }
     /**
      * {@inheritdoc}
-     * @return string
      */
-    public function getLongVersion()
+    public function getLongVersion() : string
     {
         $version = \implode('', [
             parent::getLongVersion(),
@@ -115,9 +109,8 @@ final class Application extends BaseApplication
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    protected function getDefaultCommands()
+    protected function getDefaultCommands() : array
     {
         return [new HelpCommand(), new ListCommand()];
     }

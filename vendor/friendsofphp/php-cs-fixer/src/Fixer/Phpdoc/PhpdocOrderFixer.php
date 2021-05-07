@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,18 +26,15 @@ final class PhpdocOrderFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Annotations in PHPDoc should be ordered so that `@param` annotations come first, then `@throws` annotations, then `@return` annotations.', [new CodeSample('<?php
 /**
@@ -55,19 +53,15 @@ final class PhpdocOrderFixer extends AbstractFixer
      *
      * Must run before PhpdocAlignFixer, PhpdocSeparationFixer, PhpdocTrimFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocAddMissingParamAnnotationFixer, PhpdocIndentFixer, PhpdocNoEmptyReturnFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -2;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -85,10 +79,8 @@ final class PhpdocOrderFixer extends AbstractFixer
     }
     /**
      * Move all param annotations in before throws and return annotations.
-     * @param string $content
-     * @return string
      */
-    private function moveParamAnnotations($content)
+    private function moveParamAnnotations(string $content) : string
     {
         $doc = new DocBlock($content);
         $params = $doc->getAnnotationsOfType('param');
@@ -115,10 +107,8 @@ final class PhpdocOrderFixer extends AbstractFixer
     }
     /**
      * Move all return annotations after param and throws annotations.
-     * @param string $content
-     * @return string
      */
-    private function moveReturnAnnotations($content)
+    private function moveReturnAnnotations(string $content) : string
     {
         $doc = new DocBlock($content);
         $returns = $doc->getAnnotationsOfType('return');

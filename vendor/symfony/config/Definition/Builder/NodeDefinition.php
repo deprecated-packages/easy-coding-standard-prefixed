@@ -35,11 +35,7 @@ abstract class NodeDefinition implements \ECSPrefix20210507\Symfony\Component\Co
     protected $pathSeparator = BaseNode::DEFAULT_PATH_SEPARATOR;
     protected $parent;
     protected $attributes = [];
-    /**
-     * @param string|null $name
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent
-     */
-    public function __construct($name, $parent = null)
+    public function __construct(?string $name, \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         $this->parent = $parent;
         $this->name = $name;
@@ -48,9 +44,8 @@ abstract class NodeDefinition implements \ECSPrefix20210507\Symfony\Component\Co
      * Sets the parent node.
      *
      * @return $this
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent
      */
-    public function setParent($parent)
+    public function setParent(\ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent)
     {
         $this->parent = $parent;
         return $this;
@@ -59,9 +54,8 @@ abstract class NodeDefinition implements \ECSPrefix20210507\Symfony\Component\Co
      * Sets info message.
      *
      * @return $this
-     * @param string $info
      */
-    public function info($info)
+    public function info(string $info)
     {
         return $this->attribute('info', $info);
     }
@@ -82,9 +76,8 @@ abstract class NodeDefinition implements \ECSPrefix20210507\Symfony\Component\Co
      * @param mixed $value
      *
      * @return $this
-     * @param string $key
      */
-    public function attribute($key, $value)
+    public function attribute(string $key, $value)
     {
         $this->attributes[$key] = $value;
         return $this;
@@ -105,7 +98,7 @@ abstract class NodeDefinition implements \ECSPrefix20210507\Symfony\Component\Co
      *
      * @return NodeInterface
      */
-    public function getNode($forceRootNode = \false)
+    public function getNode(bool $forceRootNode = \false)
     {
         if ($forceRootNode) {
             $this->parent = null;
@@ -162,12 +155,12 @@ abstract class NodeDefinition implements \ECSPrefix20210507\Symfony\Component\Co
         $args = \func_get_args();
         if (\func_num_args() < 2) {
             trigger_deprecation('symfony/config', '5.1', 'The signature of method "%s()" requires 3 arguments: "string $package, string $version, string $message", not defining them is deprecated.', __METHOD__);
-            $message = isset($args[0]) ? $args[0] : 'The child node "%node%" at path "%path%" is deprecated.';
+            $message = $args[0] ?? 'The child node "%node%" at path "%path%" is deprecated.';
             $package = $version = '';
         } else {
             $package = (string) $args[0];
             $version = (string) $args[1];
-            $message = (string) (isset($args[2]) ? $args[2] : 'The child node "%node%" at path "%path%" is deprecated.');
+            $message = (string) ($args[2] ?? 'The child node "%node%" at path "%path%" is deprecated.');
         }
         $this->deprecation = ['package' => $package, 'version' => $version, 'message' => $message];
         return $this;
@@ -271,9 +264,8 @@ abstract class NodeDefinition implements \ECSPrefix20210507\Symfony\Component\Co
      * Sets whether the node can be overwritten.
      *
      * @return $this
-     * @param bool $deny
      */
-    public function cannotBeOverwritten($deny = \true)
+    public function cannotBeOverwritten(bool $deny = \true)
     {
         $this->merge()->denyOverwrite($deny);
         return $this;
@@ -326,9 +318,8 @@ abstract class NodeDefinition implements \ECSPrefix20210507\Symfony\Component\Co
      * Set PathSeparator to use.
      *
      * @return $this
-     * @param string $separator
      */
-    public function setPathSeparator($separator)
+    public function setPathSeparator(string $separator)
     {
         if ($this instanceof \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\ParentNodeDefinitionInterface) {
             foreach ($this->getChildNodeDefinitions() as $child) {

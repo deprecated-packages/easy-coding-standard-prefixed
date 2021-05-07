@@ -22,51 +22,42 @@ use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
 abstract class OutputStyle implements OutputInterface, \ECSPrefix20210507\Symfony\Component\Console\Style\StyleInterface
 {
     private $output;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     */
-    public function __construct($output)
+    public function __construct(OutputInterface $output)
     {
         $this->output = $output;
     }
     /**
      * {@inheritdoc}
-     * @param int $count
      */
-    public function newLine($count = 1)
+    public function newLine(int $count = 1)
     {
         $this->output->write(\str_repeat(\PHP_EOL, $count));
     }
     /**
      * @return ProgressBar
-     * @param int $max
      */
-    public function createProgressBar($max = 0)
+    public function createProgressBar(int $max = 0)
     {
         return new ProgressBar($this->output, $max);
     }
     /**
      * {@inheritdoc}
-     * @param bool $newline
-     * @param int $type
      */
-    public function write($messages, $newline = \false, $type = self::OUTPUT_NORMAL)
+    public function write($messages, bool $newline = \false, int $type = self::OUTPUT_NORMAL)
     {
         $this->output->write($messages, $newline, $type);
     }
     /**
      * {@inheritdoc}
-     * @param int $type
      */
-    public function writeln($messages, $type = self::OUTPUT_NORMAL)
+    public function writeln($messages, int $type = self::OUTPUT_NORMAL)
     {
         $this->output->writeln($messages, $type);
     }
     /**
      * {@inheritdoc}
-     * @param int $level
      */
-    public function setVerbosity($level)
+    public function setVerbosity(int $level)
     {
         $this->output->setVerbosity($level);
     }
@@ -79,9 +70,8 @@ abstract class OutputStyle implements OutputInterface, \ECSPrefix20210507\Symfon
     }
     /**
      * {@inheritdoc}
-     * @param bool $decorated
      */
-    public function setDecorated($decorated)
+    public function setDecorated(bool $decorated)
     {
         $this->output->setDecorated($decorated);
     }
@@ -94,9 +84,8 @@ abstract class OutputStyle implements OutputInterface, \ECSPrefix20210507\Symfon
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter
      */
-    public function setFormatter($formatter)
+    public function setFormatter(OutputFormatterInterface $formatter)
     {
         $this->output->setFormatter($formatter);
     }

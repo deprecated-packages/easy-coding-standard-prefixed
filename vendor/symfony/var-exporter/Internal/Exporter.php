@@ -30,9 +30,8 @@ class Exporter
      * @param bool              &$valuesAreStatic
      *
      * @throws NotInstantiableTypeException When a value cannot be serialized
-     * @return mixed[]
      */
-    public static function prepare($values, $objectsPool, &$refsPool, &$objectsCount, &$valuesAreStatic)
+    public static function prepare($values, $objectsPool, &$refsPool, &$objectsCount, &$valuesAreStatic) : array
     {
         $refs = $values;
         foreach ($values as $k => $value) {
@@ -69,7 +68,7 @@ class Exporter
                 goto handle_value;
             }
             $class = \get_class($value);
-            $reflector = isset(\ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class]) ? \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] : \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
+            $reflector = \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$class] ?? \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($class);
             if ($reflector->hasMethod('__serialize')) {
                 if (!$reflector->getMethod('__serialize')->isPublic()) {
                     throw new \Error(\sprintf('Call to %s method "%s::__serialize()".', $reflector->getMethod('__serialize')->isProtected() ? 'protected' : 'private', $class));
@@ -169,10 +168,7 @@ class Exporter
         }
         return $values;
     }
-    /**
-     * @param string $indent
-     */
-    public static function export($value, $indent = '')
+    public static function export($value, string $indent = '')
     {
         switch (\true) {
             case \is_int($value) || \is_float($value):
@@ -246,13 +242,7 @@ class Exporter
         }
         throw new \UnexpectedValueException(\sprintf('Cannot export value of type "%s".', \get_debug_type($value)));
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry $value
-     * @param string $indent
-     * @param string $subIndent
-     * @return string
-     */
-    private static function exportRegistry($value, $indent, $subIndent)
+    private static function exportRegistry(\ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry $value, string $indent, string $subIndent) : string
     {
         $code = '';
         $serializables = [];
@@ -262,7 +252,7 @@ class Exporter
         $r = '\\' . \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::class;
         $j = -1;
         foreach ($value as $k => $class) {
-            if (':' === (isset($class[1]) ? $class[1] : null)) {
+            if (':' === ($class[1] ?? null)) {
                 $serializables[$k] = $class;
                 continue;
             }
@@ -282,7 +272,7 @@ class Exporter
             $j = $k;
             $eol = ",\n";
             $c = '[' . self::export($class) . ']';
-            if (isset($seen[$class]) ? $seen[$class] : \false) {
+            if ($seen[$class] ?? \false) {
                 if (\ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::$cloneable[$class]) {
                     ++$prototypesAccess;
                     $code .= 'clone $p' . $c;
@@ -318,13 +308,7 @@ class Exporter
         }
         return '$o = ' . $code;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Hydrator $value
-     * @param string $indent
-     * @param string $subIndent
-     * @return string
-     */
-    private static function exportHydrator($value, $indent, $subIndent)
+    private static function exportHydrator(\ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Hydrator $value, string $indent, string $subIndent) : string
     {
         $code = '';
         foreach ($value->properties as $class => $properties) {
@@ -336,12 +320,11 @@ class Exporter
     /**
      * @param \ArrayIterator|\ArrayObject $value
      * @param \ArrayIterator|\ArrayObject $proto
-     * @return mixed[]
      */
-    private static function getArrayObjectProperties($value, array &$arrayValue, $proto)
+    private static function getArrayObjectProperties($value, array &$arrayValue, $proto) : array
     {
         $reflector = $value instanceof \ArrayIterator ? 'ArrayIterator' : 'ArrayObject';
-        $reflector = isset(\ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$reflector]) ? \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$reflector] : \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($reflector);
+        $reflector = \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::$reflectors[$reflector] ?? \ECSPrefix20210507\Symfony\Component\VarExporter\Internal\Registry::getClassReflector($reflector);
         $properties = [$arrayValue, $reflector->getMethod('getFlags')->invoke($value), $value instanceof \ArrayObject ? $reflector->getMethod('getIteratorClass')->invoke($value) : 'ArrayIterator'];
         $reflector = $reflector->getMethod('setFlags');
         $reflector->invoke($proto, \ArrayObject::STD_PROP_LIST);

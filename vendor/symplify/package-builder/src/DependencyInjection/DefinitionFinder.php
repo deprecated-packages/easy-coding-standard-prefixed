@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\PackageBuilder\DependencyInjection;
 
 use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -12,11 +13,9 @@ use Throwable;
 final class DefinitionFinder
 {
     /**
-     * @return mixed[]
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     * @param string $type
+     * @return Definition[]
      */
-    public function findAllByType($containerBuilder, $type)
+    public function findAllByType(ContainerBuilder $containerBuilder, string $type) : array
     {
         $definitions = [];
         $containerBuilderDefinitions = $containerBuilder->getDefinitions();
@@ -31,12 +30,7 @@ final class DefinitionFinder
         }
         return $definitions;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     * @param string $type
-     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition
-     */
-    public function getByType($containerBuilder, $type)
+    public function getByType(ContainerBuilder $containerBuilder, string $type) : Definition
     {
         $definition = $this->getByTypeIfExists($containerBuilder, $type);
         if ($definition !== null) {
@@ -44,12 +38,7 @@ final class DefinitionFinder
         }
         throw new DefinitionForTypeNotFoundException(\sprintf('Definition for type "%s" was not found.', $type));
     }
-    /**
-     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition|null
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     * @param string $type
-     */
-    private function getByTypeIfExists($containerBuilder, $type)
+    private function getByTypeIfExists(ContainerBuilder $containerBuilder, string $type) : ?Definition
     {
         $containerBuilderDefinitions = $containerBuilder->getDefinitions();
         foreach ($containerBuilderDefinitions as $name => $definition) {
@@ -63,11 +52,7 @@ final class DefinitionFinder
         }
         return null;
     }
-    /**
-     * @param string $class
-     * @return bool
-     */
-    private function doesClassExists($class)
+    private function doesClassExists(string $class) : bool
     {
         try {
             return \class_exists($class);

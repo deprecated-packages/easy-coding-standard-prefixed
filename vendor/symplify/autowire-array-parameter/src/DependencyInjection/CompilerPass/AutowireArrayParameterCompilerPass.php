@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -24,7 +25,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
      *
      * @var string[]
      */
-    const EXCLUDED_NAMESPACES = ['Doctrine', 'JMS', 'Symfony', 'Sensio', 'Knp', 'EasyCorp', 'Sonata', 'Twig'];
+    private const EXCLUDED_NAMESPACES = ['Doctrine', 'JMS', 'Symfony', 'Sensio', 'Knp', 'EasyCorp', 'Sonata', 'Twig'];
     /**
      * Classes that create circular dependencies
      *
@@ -54,11 +55,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
         $this->parameterTypeResolver = new ParameterTypeResolver($paramTypeDocBlockResolver);
         $this->parameterSkipper = new ParameterSkipper($this->parameterTypeResolver, $excludedFatalClasses);
     }
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     */
-    public function process($containerBuilder)
+    public function process(ContainerBuilder $containerBuilder) : void
     {
         $definitions = $containerBuilder->getDefinitions();
         foreach ($definitions as $definition) {
@@ -72,12 +69,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
             $this->processParameters($containerBuilder, $constructorReflectionMethod, $definition);
         }
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
-     * @return bool
-     */
-    private function shouldSkipDefinition($containerBuilder, $definition)
+    private function shouldSkipDefinition(ContainerBuilder $containerBuilder, Definition $definition) : bool
     {
         if ($definition->isAbstract()) {
             return \true;
@@ -113,13 +105,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
         $constructorReflectionMethod = $reflectionClass->getConstructor();
         return !$constructorReflectionMethod->getParameters();
     }
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     * @param \ReflectionMethod $reflectionMethod
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
-     */
-    private function processParameters($containerBuilder, $reflectionMethod, $definition)
+    private function processParameters(ContainerBuilder $containerBuilder, ReflectionMethod $reflectionMethod, Definition $definition) : void
     {
         $reflectionParameters = $reflectionMethod->getParameters();
         foreach ($reflectionParameters as $reflectionParameter) {
@@ -140,9 +126,9 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
      * Abstract definitions cannot be the target of references
      *
      * @param Definition[] $definitions
-     * @return mixed[]
+     * @return Definition[]
      */
-    private function filterOutAbstractDefinitions(array $definitions)
+    private function filterOutAbstractDefinitions(array $definitions) : array
     {
         foreach ($definitions as $key => $definition) {
             if ($definition->isAbstract()) {
@@ -153,9 +139,9 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
     }
     /**
      * @param Definition[] $definitions
-     * @return mixed[]
+     * @return Reference[]
      */
-    private function createReferencesFromDefinitions(array $definitions)
+    private function createReferencesFromDefinitions(array $definitions) : array
     {
         $references = [];
         $definitionOfTypeNames = \array_keys($definitions);

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace ECSPrefix20210507\Psr\EventDispatcher;
 
 /**
@@ -16,5 +17,5 @@ interface EventDispatcherInterface
      * @return object
      *   The Event that was passed, now modified by listeners.
      */
-    public function dispatch($event);
+    public function dispatch(object $event);
 }

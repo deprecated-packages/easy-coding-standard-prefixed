@@ -44,7 +44,7 @@ class DisallowSpaceIndentSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tabsReplaced = \false;
         if ($this->tabWidth === null) {

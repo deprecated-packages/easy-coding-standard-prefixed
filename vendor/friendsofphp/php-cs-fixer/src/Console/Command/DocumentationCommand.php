@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,27 +31,16 @@ final class DocumentationCommand extends Command
      * @var DocumentationGenerator
      */
     private $generator;
-    /**
-     * @param string|null $name
-     */
-    public function __construct($name = null)
+    public function __construct(?string $name = null)
     {
         parent::__construct($name);
         $this->generator = new DocumentationGenerator();
     }
-    /**
-     * @return void
-     */
-    protected function configure()
+    protected function configure() : void
     {
         $this->setAliases(['doc'])->setDescription('Dumps the documentation of the project into its /doc directory.');
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @return int
-     */
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $fixerFactory = new FixerFactory();
         $fixerFactory->registerBuiltInFixers();
@@ -60,10 +50,7 @@ final class DocumentationCommand extends Command
         $output->writeln('Docs updated.');
         return 0;
     }
-    /**
-     * @return void
-     */
-    private function generateFixersDocs(array $fixers)
+    private function generateFixersDocs(array $fixers) : void
     {
         $filesystem = new Filesystem();
         // Array of existing fixer docs.
@@ -84,10 +71,7 @@ final class DocumentationCommand extends Command
             throw new \RuntimeException("Failed updating file {$index}.");
         }
     }
-    /**
-     * @return void
-     */
-    private function generateRuleSetsDocs(array $fixers)
+    private function generateRuleSetsDocs(array $fixers) : void
     {
         $filesystem = new Filesystem();
         /** @var SplFileInfo $file */

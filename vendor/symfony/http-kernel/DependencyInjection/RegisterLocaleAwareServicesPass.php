@@ -23,19 +23,12 @@ class RegisterLocaleAwareServicesPass implements CompilerPassInterface
 {
     private $listenerServiceId;
     private $localeAwareTag;
-    /**
-     * @param string $listenerServiceId
-     * @param string $localeAwareTag
-     */
-    public function __construct($listenerServiceId = 'locale_aware_listener', $localeAwareTag = 'kernel.locale_aware')
+    public function __construct(string $listenerServiceId = 'locale_aware_listener', string $localeAwareTag = 'kernel.locale_aware')
     {
         $this->listenerServiceId = $listenerServiceId;
         $this->localeAwareTag = $localeAwareTag;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->listenerServiceId)) {
             return;

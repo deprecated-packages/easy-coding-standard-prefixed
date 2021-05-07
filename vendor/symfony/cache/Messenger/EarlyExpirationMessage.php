@@ -21,13 +21,7 @@ final class EarlyExpirationMessage
     private $item;
     private $pool;
     private $callback;
-    /**
-     * @return $this|null
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\CacheItem $item
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $pool
-     */
-    public static function create($reverseContainer, callable $callback, $item, $pool)
+    public static function create(ReverseContainer $reverseContainer, callable $callback, CacheItem $item, AdapterInterface $pool) : ?self
     {
         try {
             $item = clone $item;
@@ -53,17 +47,11 @@ final class EarlyExpirationMessage
         }
         return new self($item, $pool, $callback);
     }
-    /**
-     * @return \ECSPrefix20210507\Symfony\Component\Cache\CacheItem
-     */
-    public function getItem()
+    public function getItem() : CacheItem
     {
         return $this->item;
     }
-    /**
-     * @return string
-     */
-    public function getPool()
+    public function getPool() : string
     {
         return $this->pool;
     }
@@ -71,19 +59,11 @@ final class EarlyExpirationMessage
     {
         return $this->callback;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer
-     * @return \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface
-     */
-    public function findPool($reverseContainer)
+    public function findPool(ReverseContainer $reverseContainer) : AdapterInterface
     {
         return $reverseContainer->getService($this->pool);
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer
-     * @return callable
-     */
-    public function findCallback($reverseContainer)
+    public function findCallback(ReverseContainer $reverseContainer) : callable
     {
         if (\is_string($callback = $this->callback)) {
             return '@' === $callback[0] ? $reverseContainer->getService(\substr($callback, 1)) : $callback;
@@ -93,11 +73,7 @@ final class EarlyExpirationMessage
         }
         return $callback;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\CacheItem $item
-     * @param string $pool
-     */
-    private function __construct($item, $pool, $callback)
+    private function __construct(CacheItem $item, string $pool, $callback)
     {
         $this->item = $item;
         $this->pool = $pool;

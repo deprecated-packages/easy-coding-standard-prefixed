@@ -17,7 +17,7 @@ final class EnglishInflector implements \ECSPrefix20210507\Symfony\Component\Str
      *
      * @see http://english-zone.com/spelling/plurals.html
      */
-    const PLURAL_MAP = [
+    private const PLURAL_MAP = [
         // First entry: plural suffix, reversed
         // Second entry: length of plural suffix
         // Third entry: Whether the suffix may succeed a vocal
@@ -102,7 +102,7 @@ final class EnglishInflector implements \ECSPrefix20210507\Symfony\Component\Str
      *
      * @see http://english-zone.com/spelling/plurals.html
      */
-    const SINGULAR_MAP = [
+    private const SINGULAR_MAP = [
         // First entry: singular suffix, reversed
         // Second entry: length of singular suffix
         // Third entry: Whether the suffix may succeed a vocal
@@ -218,13 +218,11 @@ final class EnglishInflector implements \ECSPrefix20210507\Symfony\Component\Str
     /**
      * A list of words which should not be inflected, reversed.
      */
-    const UNINFLECTED = ['', 'atad', 'reed', 'kcabdeef', 'hsif', 'ofni', 'esoom', 'seires', 'peehs', 'seiceps'];
+    private const UNINFLECTED = ['', 'atad', 'reed', 'kcabdeef', 'hsif', 'ofni', 'esoom', 'seires', 'peehs', 'seiceps'];
     /**
      * {@inheritdoc}
-     * @param string $plural
-     * @return mixed[]
      */
-    public function singularize($plural)
+    public function singularize(string $plural) : array
     {
         $pluralRev = \strrev($plural);
         $lowerPluralRev = \strtolower($pluralRev);
@@ -287,10 +285,8 @@ final class EnglishInflector implements \ECSPrefix20210507\Symfony\Component\Str
     }
     /**
      * {@inheritdoc}
-     * @param string $singular
-     * @return mixed[]
      */
-    public function pluralize($singular)
+    public function pluralize(string $singular) : array
     {
         $singularRev = \strrev($singular);
         $lowerSingularRev = \strtolower($singularRev);

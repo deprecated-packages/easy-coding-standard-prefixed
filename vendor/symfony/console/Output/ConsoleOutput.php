@@ -31,10 +31,10 @@ class ConsoleOutput extends \ECSPrefix20210507\Symfony\Component\Console\Output\
     private $consoleSectionOutputs = [];
     /**
      * @param int                           $verbosity The verbosity level (one of the VERBOSITY constants in OutputInterface)
-     * @param bool $decorated Whether to decorate messages (null for auto-guessing)
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter Output formatter instance (null to use default OutputFormatter)
+     * @param bool|null                     $decorated Whether to decorate messages (null for auto-guessing)
+     * @param OutputFormatterInterface|null $formatter Output formatter instance (null to use default OutputFormatter)
      */
-    public function __construct($verbosity = self::VERBOSITY_NORMAL, $decorated = null, $formatter = null)
+    public function __construct(int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = null, OutputFormatterInterface $formatter = null)
     {
         parent::__construct($this->openOutputStream(), $verbosity, $decorated, $formatter);
         if (null === $formatter) {
@@ -50,35 +50,31 @@ class ConsoleOutput extends \ECSPrefix20210507\Symfony\Component\Console\Output\
     }
     /**
      * Creates a new output section.
-     * @return \ECSPrefix20210507\Symfony\Component\Console\Output\ConsoleSectionOutput
      */
-    public function section()
+    public function section() : \ECSPrefix20210507\Symfony\Component\Console\Output\ConsoleSectionOutput
     {
         return new \ECSPrefix20210507\Symfony\Component\Console\Output\ConsoleSectionOutput($this->getStream(), $this->consoleSectionOutputs, $this->getVerbosity(), $this->isDecorated(), $this->getFormatter());
     }
     /**
      * {@inheritdoc}
-     * @param bool $decorated
      */
-    public function setDecorated($decorated)
+    public function setDecorated(bool $decorated)
     {
         parent::setDecorated($decorated);
         $this->stderr->setDecorated($decorated);
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter
      */
-    public function setFormatter($formatter)
+    public function setFormatter(OutputFormatterInterface $formatter)
     {
         parent::setFormatter($formatter);
         $this->stderr->setFormatter($formatter);
     }
     /**
      * {@inheritdoc}
-     * @param int $level
      */
-    public function setVerbosity($level)
+    public function setVerbosity(int $level)
     {
         parent::setVerbosity($level);
         $this->stderr->setVerbosity($level);
@@ -92,9 +88,8 @@ class ConsoleOutput extends \ECSPrefix20210507\Symfony\Component\Console\Output\
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $error
      */
-    public function setErrorOutput($error)
+    public function setErrorOutput(\ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $error)
     {
         $this->stderr = $error;
     }
@@ -121,9 +116,8 @@ class ConsoleOutput extends \ECSPrefix20210507\Symfony\Component\Console\Output\
     /**
      * Checks if current executing environment is IBM iSeries (OS400), which
      * doesn't properly convert character-encodings between ASCII to EBCDIC.
-     * @return bool
      */
-    private function isRunningOS400()
+    private function isRunningOS400() : bool
     {
         $checks = [\function_exists('php_uname') ? \php_uname('s') : '', \getenv('OSTYPE'), \PHP_OS];
         return \false !== \stripos(\implode(';', $checks), 'OS400');

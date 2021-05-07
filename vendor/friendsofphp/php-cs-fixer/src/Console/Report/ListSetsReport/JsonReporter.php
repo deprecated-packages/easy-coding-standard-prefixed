@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,9 +29,8 @@ final class JsonReporter implements \PhpCsFixer\Console\Report\ListSetsReport\Re
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Console\Report\ListSetsReport\ReportSummary $reportSummary
      */
-    public function generate($reportSummary)
+    public function generate(\PhpCsFixer\Console\Report\ListSetsReport\ReportSummary $reportSummary)
     {
         $json = ['sets' => []];
         $sets = $reportSummary->getSets();

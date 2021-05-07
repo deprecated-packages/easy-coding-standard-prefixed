@@ -52,17 +52,11 @@ class HttpKernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Http
     protected $resolver;
     protected $requestStack;
     private $argumentResolver;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ControllerResolverInterface $resolver
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface $argumentResolver
-     */
-    public function __construct($dispatcher, $resolver, $requestStack = null, $argumentResolver = null)
+    public function __construct(EventDispatcherInterface $dispatcher, ControllerResolverInterface $resolver, RequestStack $requestStack = null, ArgumentResolverInterface $argumentResolver = null)
     {
         $this->dispatcher = $dispatcher;
         $this->resolver = $resolver;
-        $this->requestStack = isset($requestStack) ? $requestStack : new RequestStack();
+        $this->requestStack = $requestStack ?? new RequestStack();
         $this->argumentResolver = $argumentResolver;
         if (null === $this->argumentResolver) {
             $this->argumentResolver = new ArgumentResolver();
@@ -70,11 +64,8 @@ class HttpKernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Http
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param int $type
-     * @param bool $catch
      */
-    public function handle($request, $type = \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, $catch = \true)
+    public function handle(Request $request, int $type = \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, bool $catch = \true)
     {
         $request->headers->set('X-Php-Ob-Level', (string) \ob_get_level());
         try {
@@ -92,19 +83,15 @@ class HttpKernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Http
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    public function terminate($request, $response)
+    public function terminate(Request $request, Response $response)
     {
         $this->dispatcher->dispatch(new TerminateEvent($this, $request, $response), \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents::TERMINATE);
     }
     /**
      * @internal
-     * @param \Throwable $exception
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function terminateWithException($exception, $request = null)
+    public function terminateWithException(\Throwable $exception, Request $request = null)
     {
         if (!($request = $request ?: $this->requestStack->getMasterRequest())) {
             throw $exception;
@@ -121,11 +108,8 @@ class HttpKernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Http
      *
      * @throws \LogicException       If one of the listener does not behave as expected
      * @throws NotFoundHttpException When controller cannot be found
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param int $type
-     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response
      */
-    private function handleRaw($request, $type = self::MASTER_REQUEST)
+    private function handleRaw(Request $request, int $type = self::MASTER_REQUEST) : Response
     {
         $this->requestStack->push($request);
         // request
@@ -170,12 +154,8 @@ class HttpKernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Http
      * Filters a response object.
      *
      * @throws \RuntimeException if the passed object is not a Response instance
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param int $type
-     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response
      */
-    private function filterResponse($response, $request, $type)
+    private function filterResponse(Response $response, Request $request, int $type) : Response
     {
         $event = new ResponseEvent($this, $request, $type, $response);
         $this->dispatcher->dispatch($event, \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents::RESPONSE);
@@ -188,10 +168,8 @@ class HttpKernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Http
      * Note that the order of the operations is important here, otherwise
      * operations such as {@link RequestStack::getParentRequest()} can lead to
      * weird results.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param int $type
      */
-    private function finishRequest($request, $type)
+    private function finishRequest(Request $request, int $type)
     {
         $this->dispatcher->dispatch(new FinishRequestEvent($this, $request, $type), \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents::FINISH_REQUEST);
         $this->requestStack->pop();
@@ -200,12 +178,8 @@ class HttpKernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Http
      * Handles a throwable by trying to convert it to a Response.
      *
      * @throws \Exception
-     * @param \Throwable $e
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param int $type
-     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response
      */
-    private function handleThrowable($e, $request, $type)
+    private function handleThrowable(\Throwable $e, Request $request, int $type) : Response
     {
         $event = new ExceptionEvent($this, $request, $type, $e);
         $this->dispatcher->dispatch($event, \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents::EXCEPTION);
@@ -235,9 +209,8 @@ class HttpKernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\Http
     }
     /**
      * Returns a human-readable string for the specified variable.
-     * @return string
      */
-    private function varToString($var)
+    private function varToString($var) : string
     {
         if (\is_object($var)) {
             return \sprintf('an object of type %s', \get_class($var));

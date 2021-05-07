@@ -25,10 +25,7 @@ class ReflectionClassResource implements \ECSPrefix20210507\Symfony\Component\Co
     private $classReflector;
     private $excludedVendors = [];
     private $hash;
-    /**
-     * @param \ReflectionClass $classReflector
-     */
-    public function __construct($classReflector, array $excludedVendors = [])
+    public function __construct(\ReflectionClass $classReflector, array $excludedVendors = [])
     {
         $this->className = $classReflector->name;
         $this->classReflector = $classReflector;
@@ -36,10 +33,8 @@ class ReflectionClassResource implements \ECSPrefix20210507\Symfony\Component\Co
     }
     /**
      * {@inheritdoc}
-     * @param int $timestamp
-     * @return bool
      */
-    public function isFresh($timestamp)
+    public function isFresh(int $timestamp) : bool
     {
         if (null === $this->hash) {
             $this->hash = $this->computeHash();
@@ -55,18 +50,14 @@ class ReflectionClassResource implements \ECSPrefix20210507\Symfony\Component\Co
         }
         return \true;
     }
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString() : string
     {
         return 'reflection.' . $this->className;
     }
     /**
      * @internal
-     * @return mixed[]
      */
-    public function __sleep()
+    public function __sleep() : array
     {
         if (null === $this->hash) {
             $this->hash = $this->computeHash();
@@ -74,10 +65,7 @@ class ReflectionClassResource implements \ECSPrefix20210507\Symfony\Component\Co
         }
         return ['files', 'className', 'hash'];
     }
-    /**
-     * @param \ReflectionClass $class
-     */
-    private function loadFiles($class)
+    private function loadFiles(\ReflectionClass $class)
     {
         foreach ($class->getInterfaces() as $v) {
             $this->loadFiles($v);
@@ -100,10 +88,7 @@ class ReflectionClassResource implements \ECSPrefix20210507\Symfony\Component\Co
             }
         } while ($class = $class->getParentClass());
     }
-    /**
-     * @return string
-     */
-    private function computeHash()
+    private function computeHash() : string
     {
         if (null === $this->classReflector) {
             try {
@@ -119,11 +104,7 @@ class ReflectionClassResource implements \ECSPrefix20210507\Symfony\Component\Co
         }
         return \hash_final($hash);
     }
-    /**
-     * @return mixed[]
-     * @param \ReflectionClass $class
-     */
-    private function generateSignature($class)
+    private function generateSignature(\ReflectionClass $class) : iterable
     {
         (yield $class->getDocComment());
         (yield (int) $class->isFinal());

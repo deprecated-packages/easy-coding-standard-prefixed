@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
 use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
@@ -13,28 +14,17 @@ final class CheckMarkdownCommand extends AbstractCheckCommand
      * @var SnippetFormatterApplication
      */
     private $snippetFormatterApplication;
-    /**
-     * @param \Symplify\EasyCodingStandard\SnippetFormatter\Application\SnippetFormatterApplication $snippetFormatterApplication
-     */
-    public function __construct($snippetFormatterApplication)
+    public function __construct(SnippetFormatterApplication $snippetFormatterApplication)
     {
         $this->snippetFormatterApplication = $snippetFormatterApplication;
         parent::__construct();
     }
-    /**
-     * @return void
-     */
-    protected function configure()
+    protected function configure() : void
     {
         $this->setDescription('Format Markdown PHP code');
         parent::configure();
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @return int
-     */
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $this->configuration->resolveFromInput($input);
         $sources = $this->configuration->getSources();

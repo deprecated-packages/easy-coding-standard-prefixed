@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\LineLength;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -26,24 +27,24 @@ final class DocBlockLineLengthFixer extends AbstractSymplifyFixer implements Con
      * @api
      * @var string
      */
-    const LINE_LENGTH = 'line_length';
+    public const LINE_LENGTH = 'line_length';
     /**
      * @var string
      */
-    const ERROR_MESSAGE = 'Docblock lenght should fit expected width';
+    private const ERROR_MESSAGE = 'Docblock lenght should fit expected width';
     /**
      * @see https://regex101.com/r/DNWfB6/1
      * @var string
      */
-    const INDENTATION_BEFORE_ASTERISK_REGEX = '/^(?<' . self::INDENTATION_PART . '>\\s*) \\*/m';
+    private const INDENTATION_BEFORE_ASTERISK_REGEX = '/^(?<' . self::INDENTATION_PART . '>\\s*) \\*/m';
     /**
      * @var string
      */
-    const INDENTATION_PART = 'indentation_part';
+    private const INDENTATION_PART = 'indentation_part';
     /**
      * @var int
      */
-    const DEFAULT_LINE_LENGHT = 120;
+    private const DEFAULT_LINE_LENGHT = 120;
     /**
      * @var int
      */
@@ -52,34 +53,25 @@ final class DocBlockLineLengthFixer extends AbstractSymplifyFixer implements Con
      * @var DocBlockLinesFactory
      */
     private $docBlockLinesFactory;
-    /**
-     * @param \Symplify\CodingStandard\ValueObjectFactory\DocBlockLinesFactory $docBlockLinesFactory
-     */
-    public function __construct($docBlockLinesFactory)
+    public function __construct(DocBlockLinesFactory $docBlockLinesFactory)
     {
         $this->docBlockLinesFactory = $docBlockLinesFactory;
     }
-    /**
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
-     */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \SplFileInfo $file
      */
-    public function fix($file, $tokens)
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         // function arguments, function call parameters, lambda use()
         for ($position = \count($tokens) - 1; $position >= 0; --$position) {
@@ -115,18 +107,11 @@ final class DocBlockLineLengthFixer extends AbstractSymplifyFixer implements Con
             $tokens[$position] = new Token([\T_DOC_COMMENT, $newDocBlockContent]);
         }
     }
-    /**
-     * @param mixed[]|null $configuration
-     * @return void
-     */
-    public function configure($configuration = null)
+    public function configure(?array $configuration = null) : void
     {
-        $this->lineLength = isset($configuration[self::LINE_LENGTH]) ? $configuration[self::LINE_LENGTH] : self::DEFAULT_LINE_LENGHT;
+        $this->lineLength = $configuration[self::LINE_LENGTH] ?? self::DEFAULT_LINE_LENGHT;
     }
-    /**
-     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
-     */
-    public function getRuleDefinition()
+    public function getRuleDefinition() : RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new ConfiguredCodeSample(<<<'CODE_SAMPLE'
 /**
@@ -147,27 +132,16 @@ function some()
 CODE_SAMPLE
 , [self::LINE_LENGTH => 40])]);
     }
-    /**
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
-     */
-    public function getConfigurationDefinition()
+    public function getConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         throw new ShouldNotHappenException();
     }
-    /**
-     * @param string $docBlock
-     * @return string
-     */
-    private function resolveIndentationStringFor($docBlock)
+    private function resolveIndentationStringFor(string $docBlock) : string
     {
         $matches = Strings::match($docBlock, self::INDENTATION_BEFORE_ASTERISK_REGEX);
-        return isset($matches[self::INDENTATION_PART]) ? $matches[self::INDENTATION_PART] : '';
+        return $matches[self::INDENTATION_PART] ?? '';
     }
-    /**
-     * @param string $indentationString
-     * @return string
-     */
-    private function formatLinesAsDocBlockContent(array $docBlockLines, $indentationString)
+    private function formatLinesAsDocBlockContent(array $docBlockLines, string $indentationString) : string
     {
         foreach ($docBlockLines as $index => $docBlockLine) {
             $docBlockLines[$index] = $indentationString . ' *' . ($docBlockLine !== '' ? ' ' : '') . $docBlockLine;
@@ -177,9 +151,9 @@ CODE_SAMPLE
         return \implode(\PHP_EOL, $docBlockLines);
     }
     /**
-     * @return mixed[]
+     * @return array<string>
      */
-    private function extractParagraphsFromDescriptionLines(array $descriptionLines)
+    private function extractParagraphsFromDescriptionLines(array $descriptionLines) : array
     {
         $paragraphLines = [];
         $paragraphIndex = 0;
@@ -199,19 +173,17 @@ CODE_SAMPLE
         }, $paragraphLines);
     }
     /**
-     * @return mixed[]
-     * @param string $string
+     * @return string[]
      */
-    private function getLines($string)
+    private function getLines(string $string) : array
     {
         return \explode(\PHP_EOL, $string);
     }
     /**
      * @param string[] $lines
-     * @return mixed[]
-     * @param int $maximumLineLength
+     * @return string[]
      */
-    private function wrapParagraphs(array $lines, $maximumLineLength)
+    private function wrapParagraphs(array $lines, int $maximumLineLength) : array
     {
         $wrappedLines = [];
         foreach ($lines as $line) {

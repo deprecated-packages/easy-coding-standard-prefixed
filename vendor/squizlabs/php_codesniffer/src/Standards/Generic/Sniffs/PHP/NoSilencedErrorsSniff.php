@@ -45,7 +45,7 @@ class NoSilencedErrorsSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         // Prepare the "Found" string to display.
         $contextLength = 4;

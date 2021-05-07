@@ -35,13 +35,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
     private $orphanedEvents;
     private $requestStack;
     private $currentRequestHash = '';
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
-     * @param \ECSPrefix20210507\Symfony\Component\Stopwatch\Stopwatch $stopwatch
-     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $logger
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
-     */
-    public function __construct($dispatcher, $stopwatch, $logger = null, $requestStack = null)
+    public function __construct(EventDispatcherInterface $dispatcher, Stopwatch $stopwatch, LoggerInterface $logger = null, RequestStack $requestStack = null)
     {
         $this->dispatcher = $dispatcher;
         $this->stopwatch = $stopwatch;
@@ -52,26 +46,22 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
-     * @param int $priority
      */
-    public function addListener($eventName, $listener, $priority = 0)
+    public function addListener(string $eventName, $listener, int $priority = 0)
     {
         $this->dispatcher->addListener($eventName, $listener, $priority);
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
-    public function addSubscriber($subscriber)
+    public function addSubscriber(EventSubscriberInterface $subscriber)
     {
         $this->dispatcher->addSubscriber($subscriber);
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
      */
-    public function removeListener($eventName, $listener)
+    public function removeListener(string $eventName, $listener)
     {
         if (isset($this->wrappedListeners[$eventName])) {
             foreach ($this->wrappedListeners[$eventName] as $index => $wrappedListener) {
@@ -86,25 +76,22 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
-    public function removeSubscriber($subscriber)
+    public function removeSubscriber(EventSubscriberInterface $subscriber)
     {
         return $this->dispatcher->removeSubscriber($subscriber);
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
      */
-    public function getListeners($eventName = null)
+    public function getListeners(string $eventName = null)
     {
         return $this->dispatcher->getListeners($eventName);
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
      */
-    public function getListenerPriority($eventName, $listener)
+    public function getListenerPriority(string $eventName, $listener)
     {
         // we might have wrapped listeners for the event (if called while dispatching)
         // in that case get the priority by wrapper
@@ -119,21 +106,17 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
     }
     /**
      * {@inheritdoc}
-     * @param string $eventName
      */
-    public function hasListeners($eventName = null)
+    public function hasListeners(string $eventName = null)
     {
         return $this->dispatcher->hasListeners($eventName);
     }
     /**
      * {@inheritdoc}
-     * @param string|null $eventName
-     * @param object $event
-     * @return object
      */
-    public function dispatch($event, $eventName = null)
+    public function dispatch(object $event, string $eventName = null) : object
     {
-        $eventName = isset($eventName) ? $eventName : \get_class($event);
+        $eventName = $eventName ?? \get_class($event);
         if (null === $this->callStack) {
             $this->callStack = new \SplObjectStorage();
         }
@@ -164,9 +147,8 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
     }
     /**
      * @return array
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function getCalledListeners($request = null)
+    public function getCalledListeners(Request $request = null)
     {
         if (null === $this->callStack) {
             return [];
@@ -174,7 +156,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
         $hash = $request ? \spl_object_hash($request) : null;
         $called = [];
         foreach ($this->callStack as $listener) {
-            list($eventName, $requestHash) = $this->callStack->getInfo();
+            [$eventName, $requestHash] = $this->callStack->getInfo();
             if (null === $hash || $hash === $requestHash) {
                 $called[] = $listener->getInfo($eventName);
             }
@@ -183,9 +165,8 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
     }
     /**
      * @return array
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function getNotCalledListeners($request = null)
+    public function getNotCalledListeners(Request $request = null)
     {
         try {
             $allListeners = $this->getListeners();
@@ -200,7 +181,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
         $calledListeners = [];
         if (null !== $this->callStack) {
             foreach ($this->callStack as $calledListener) {
-                list(, $requestHash) = $this->callStack->getInfo();
+                [, $requestHash] = $this->callStack->getInfo();
                 if (null === $hash || $hash === $requestHash) {
                     $calledListeners[] = $calledListener->getWrappedListener();
                 }
@@ -220,14 +201,10 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
         \uasort($notCalled, [$this, 'sortNotCalledListeners']);
         return $notCalled;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @return mixed[]
-     */
-    public function getOrphanedEvents($request = null)
+    public function getOrphanedEvents(Request $request = null) : array
     {
         if ($request) {
-            return isset($this->orphanedEvents[\spl_object_hash($request)]) ? $this->orphanedEvents[\spl_object_hash($request)] : [];
+            return $this->orphanedEvents[\spl_object_hash($request)] ?? [];
         }
         if (!$this->orphanedEvents) {
             return [];
@@ -248,31 +225,23 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
      *
      * @return mixed
      */
-    public function __call($method, array $arguments)
+    public function __call(string $method, array $arguments)
     {
         return $this->dispatcher->{$method}(...$arguments);
     }
     /**
      * Called before dispatching the event.
-     * @param object $event
-     * @param string $eventName
      */
-    protected function beforeDispatch($eventName, $event)
+    protected function beforeDispatch(string $eventName, object $event)
     {
     }
     /**
      * Called after dispatching the event.
-     * @param object $event
-     * @param string $eventName
      */
-    protected function afterDispatch($eventName, $event)
+    protected function afterDispatch(string $eventName, object $event)
     {
     }
-    /**
-     * @return void
-     * @param string $eventName
-     */
-    private function preProcess($eventName)
+    private function preProcess(string $eventName) : void
     {
         if (!$this->dispatcher->hasListeners($eventName)) {
             $this->orphanedEvents[$this->currentRequestHash][] = $eventName;
@@ -287,11 +256,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
             $this->callStack->attach($wrappedListener, [$eventName, $this->currentRequestHash]);
         }
     }
-    /**
-     * @return void
-     * @param string $eventName
-     */
-    private function postProcess($eventName)
+    private function postProcess(string $eventName) : void
     {
         unset($this->wrappedListeners[$eventName]);
         $skipped = \false;

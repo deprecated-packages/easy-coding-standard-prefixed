@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Reporter;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -11,19 +12,14 @@ final class CheckerListReporter
      * @var SymfonyStyle
      */
     private $symfonyStyle;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
-     */
-    public function __construct($symfonyStyle)
+    public function __construct(SymfonyStyle $symfonyStyle)
     {
         $this->symfonyStyle = $symfonyStyle;
     }
     /**
      * @param FixerInterface[]|Sniff[] $checkers
-     * @return void
-     * @param string $type
      */
-    public function report(array $checkers, $type)
+    public function report(array $checkers, string $type) : void
     {
         if ($checkers === []) {
             return;

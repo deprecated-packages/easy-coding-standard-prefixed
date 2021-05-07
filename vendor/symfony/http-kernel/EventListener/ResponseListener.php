@@ -23,18 +23,14 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents;
 class ResponseListener implements EventSubscriberInterface
 {
     private $charset;
-    /**
-     * @param string $charset
-     */
-    public function __construct($charset)
+    public function __construct(string $charset)
     {
         $this->charset = $charset;
     }
     /**
      * Filters the Response.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ResponseEvent $event
      */
-    public function onKernelResponse($event)
+    public function onKernelResponse(ResponseEvent $event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -45,10 +41,7 @@ class ResponseListener implements EventSubscriberInterface
         }
         $response->prepare($event->getRequest());
     }
-    /**
-     * @return mixed[]
-     */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents() : array
     {
         return [KernelEvents::RESPONSE => 'onKernelResponse'];
     }

@@ -43,7 +43,7 @@ class SubversionPropertiesSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $path = $phpcsFile->getFilename();
         $properties = $this->getProperties($path);

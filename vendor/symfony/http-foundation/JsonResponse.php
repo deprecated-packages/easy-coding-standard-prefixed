@@ -27,7 +27,7 @@ class JsonResponse extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\R
     protected $callback;
     // Encode <, >, ', &, and " characters in the JSON, making it also safe to be embedded into HTML.
     // 15 === JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT
-    const DEFAULT_ENCODING_OPTIONS = 15;
+    public const DEFAULT_ENCODING_OPTIONS = 15;
     protected $encodingOptions = self::DEFAULT_ENCODING_OPTIONS;
     /**
      * @param mixed $data    The response data
@@ -35,7 +35,7 @@ class JsonResponse extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\R
      * @param array $headers An array of response headers
      * @param bool  $json    If the data is already a JSON string
      */
-    public function __construct($data = null, $status = 200, array $headers = [], $json = \false)
+    public function __construct($data = null, int $status = 200, array $headers = [], bool $json = \false)
     {
         parent::__construct('', $status, $headers);
         if ($json && !\is_string($data) && !\is_numeric($data) && !\is_callable([$data, '__toString'])) {
@@ -62,7 +62,7 @@ class JsonResponse extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\R
      *
      * @deprecated since Symfony 5.1, use __construct() instead.
      */
-    public static function create($data = null, $status = 200, array $headers = [])
+    public static function create($data = null, int $status = 200, array $headers = [])
     {
         trigger_deprecation('symfony/http-foundation', '5.1', 'The "%s()" method is deprecated, use "new %s()" instead.', __METHOD__, static::class);
         return new static($data, $status, $headers);
@@ -81,20 +81,20 @@ class JsonResponse extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\R
      *
      * @return static
      */
-    public static function fromJsonString($data, $status = 200, array $headers = [])
+    public static function fromJsonString(string $data, int $status = 200, array $headers = [])
     {
         return new static($data, $status, $headers, \true);
     }
     /**
      * Sets the JSONP callback.
      *
-     * @param string $callback The JSONP callback or null to use none
+     * @param string|null $callback The JSONP callback or null to use none
      *
      * @return $this
      *
      * @throws \InvalidArgumentException When the callback name is not valid
      */
-    public function setCallback($callback = null)
+    public function setCallback(string $callback = null)
     {
         if (null !== $callback) {
             // partially taken from https://geekality.net/2011/08/03/valid-javascript-identifier/
@@ -117,9 +117,8 @@ class JsonResponse extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\R
      * Sets a raw string containing a JSON document to be sent.
      *
      * @return $this
-     * @param string $json
      */
-    public function setJson($json)
+    public function setJson(string $json)
     {
         $this->data = $json;
         return $this->update();
@@ -164,9 +163,8 @@ class JsonResponse extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\R
      * Sets options used while encoding data to JSON.
      *
      * @return $this
-     * @param int $encodingOptions
      */
-    public function setEncodingOptions($encodingOptions)
+    public function setEncodingOptions(int $encodingOptions)
     {
         $this->encodingOptions = $encodingOptions;
         return $this->setData(\json_decode($this->data));

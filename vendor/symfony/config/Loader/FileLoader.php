@@ -26,18 +26,14 @@ abstract class FileLoader extends \ECSPrefix20210507\Symfony\Component\Config\Lo
     protected static $loading = [];
     protected $locator;
     private $currentDir;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\FileLocatorInterface $locator
-     */
-    public function __construct($locator)
+    public function __construct(FileLocatorInterface $locator)
     {
         $this->locator = $locator;
     }
     /**
      * Sets the current directory.
-     * @param string $dir
      */
-    public function setCurrentDir($dir)
+    public function setCurrentDir(string $dir)
     {
         $this->currentDir = $dir;
     }
@@ -65,7 +61,7 @@ abstract class FileLoader extends \ECSPrefix20210507\Symfony\Component\Config\Lo
      * @throws FileLoaderImportCircularReferenceException
      * @throws FileLocatorFileNotFoundException
      */
-    public function import($resource, $type = null, $ignoreErrors = \false, $sourceResource = null, $exclude = null)
+    public function import($resource, string $type = null, bool $ignoreErrors = \false, string $sourceResource = null, $exclude = null)
     {
         if (\is_string($resource) && \strlen($resource) !== ($i = \strcspn($resource, '*?{[')) && \false === \strpos($resource, "\n")) {
             $excluded = [];
@@ -84,19 +80,15 @@ abstract class FileLoader extends \ECSPrefix20210507\Symfony\Component\Config\Lo
                 $isSubpath = \true;
             }
             if ($isSubpath) {
-                return isset($ret[1]) ? $ret : (isset($ret[0]) ? $ret[0] : null);
+                return isset($ret[1]) ? $ret : $ret[0] ?? null;
             }
         }
         return $this->doImport($resource, $type, $ignoreErrors, $sourceResource);
     }
     /**
      * @internal
-     * @param string $pattern
-     * @param bool $recursive
-     * @param bool $ignoreErrors
-     * @param bool $forExclusion
      */
-    protected function glob($pattern, $recursive, &$resource = null, $ignoreErrors = \false, $forExclusion = \false, array $excluded = [])
+    protected function glob(string $pattern, bool $recursive, &$resource = null, bool $ignoreErrors = \false, bool $forExclusion = \false, array $excluded = [])
     {
         if (\strlen($pattern) === ($i = \strcspn($pattern, '*?{['))) {
             $prefix = $pattern;
@@ -123,12 +115,7 @@ abstract class FileLoader extends \ECSPrefix20210507\Symfony\Component\Config\Lo
         $resource = new GlobResource($prefix, $pattern, $recursive, $forExclusion, $excluded);
         yield from $resource;
     }
-    /**
-     * @param string $type
-     * @param bool $ignoreErrors
-     * @param string $sourceResource
-     */
-    private function doImport($resource, $type = null, $ignoreErrors = \false, $sourceResource = null)
+    private function doImport($resource, string $type = null, bool $ignoreErrors = \false, string $sourceResource = null)
     {
         try {
             $loader = $this->resolve($resource, $type);

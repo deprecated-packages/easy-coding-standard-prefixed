@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -21,46 +22,38 @@ final class OrderedTraitsFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Trait `use` statements must be sorted alphabetically.', [new CodeSample("<?php class Foo { \nuse Z; use A; }\n")], null, 'Risky when depending on order of the imports.');
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(CT::T_USE_TRAIT);
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($this->findUseStatementsGroups($tokens) as $uses) {
             $this->sortUseStatements($tokens, $uses);
         }
     }
     /**
-     * @return mixed[]
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return iterable<array<int, Tokens>>
      */
-    private function findUseStatementsGroups($tokens)
+    private function findUseStatementsGroups(Tokens $tokens) : iterable
     {
         $uses = [];
         for ($index = 1, $max = \count($tokens); $index < $max; ++$index) {
@@ -89,21 +82,15 @@ final class OrderedTraitsFixer extends AbstractFixer
     }
     /**
      * @param array<int, Tokens> $uses
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function sortUseStatements($tokens, array $uses)
+    private function sortUseStatements(Tokens $tokens, array $uses) : void
     {
         foreach ($uses as $use) {
             $this->sortMultipleTraitsInStatement($use);
         }
         $this->sort($tokens, $uses);
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $use
-     */
-    private function sortMultipleTraitsInStatement($use)
+    private function sortMultipleTraitsInStatement(Tokens $use) : void
     {
         $traits = [];
         $indexOfName = null;
@@ -130,10 +117,8 @@ final class OrderedTraitsFixer extends AbstractFixer
     }
     /**
      * @param array<int, Tokens> $elements
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function sort($tokens, array $elements)
+    private function sort(Tokens $tokens, array $elements) : void
     {
         /**
          * @return string

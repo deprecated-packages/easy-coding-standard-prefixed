@@ -49,15 +49,15 @@ class UploadedFile extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\F
      *
      * @param string      $path         The full temporary path to the file
      * @param string      $originalName The original file name of the uploaded file
-     * @param string $mimeType The type of the file as provided by PHP; null defaults to application/octet-stream
-     * @param int $error The error constant of the upload (one of PHP's UPLOAD_ERR_XXX constants); null defaults to UPLOAD_ERR_OK
+     * @param string|null $mimeType     The type of the file as provided by PHP; null defaults to application/octet-stream
+     * @param int|null    $error        The error constant of the upload (one of PHP's UPLOAD_ERR_XXX constants); null defaults to UPLOAD_ERR_OK
      * @param bool        $test         Whether the test mode is active
      *                                  Local files are used in test mode hence the code should not enforce HTTP uploads
      *
      * @throws FileException         If file_uploads is disabled
      * @throws FileNotFoundException If the file does not exist
      */
-    public function __construct($path, $originalName, $mimeType = null, $error = null, $test = \false)
+    public function __construct(string $path, string $originalName, string $mimeType = null, int $error = null, bool $test = \false)
     {
         $this->originalName = $this->getName($originalName);
         $this->mimeType = $mimeType ?: 'application/octet-stream';
@@ -128,7 +128,7 @@ class UploadedFile extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\F
         if (!\class_exists(MimeTypes::class)) {
             throw new \LogicException('You cannot guess the extension as the Mime component is not installed. Try running "composer require symfony/mime".');
         }
-        return isset(MimeTypes::getDefault()->getExtensions($this->getClientMimeType())[0]) ? MimeTypes::getDefault()->getExtensions($this->getClientMimeType())[0] : null;
+        return MimeTypes::getDefault()->getExtensions($this->getClientMimeType())[0] ?? null;
     }
     /**
      * Returns the upload error.
@@ -158,10 +158,8 @@ class UploadedFile extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\F
      * @return File A File object representing the new file
      *
      * @throws FileException if, for any reason, the file could not have been moved
-     * @param string $directory
-     * @param string $name
      */
-    public function move($directory, $name = null)
+    public function move(string $directory, string $name = null)
     {
         if ($this->isValid()) {
             if ($this->test) {
@@ -252,7 +250,7 @@ class UploadedFile extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\F
         static $errors = [\UPLOAD_ERR_INI_SIZE => 'The file "%s" exceeds your upload_max_filesize ini directive (limit is %d KiB).', \UPLOAD_ERR_FORM_SIZE => 'The file "%s" exceeds the upload limit defined in your form.', \UPLOAD_ERR_PARTIAL => 'The file "%s" was only partially uploaded.', \UPLOAD_ERR_NO_FILE => 'No file was uploaded.', \UPLOAD_ERR_CANT_WRITE => 'The file "%s" could not be written on disk.', \UPLOAD_ERR_NO_TMP_DIR => 'File could not be uploaded: missing temporary directory.', \UPLOAD_ERR_EXTENSION => 'File upload was stopped by a PHP extension.'];
         $errorCode = $this->error;
         $maxFilesize = \UPLOAD_ERR_INI_SIZE === $errorCode ? self::getMaxFilesize() / 1024 : 0;
-        $message = isset($errors[$errorCode]) ? $errors[$errorCode] : 'The file "%s" was not uploaded due to an unknown error.';
+        $message = $errors[$errorCode] ?? 'The file "%s" was not uploaded due to an unknown error.';
         return \sprintf($message, $this->getClientOriginalName(), $maxFilesize);
     }
 }

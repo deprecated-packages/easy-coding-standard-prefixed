@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\AutowireArrayParameter\Skipper;
 
 use ReflectionMethod;
@@ -25,20 +26,13 @@ final class ParameterSkipper
     private $excludedFatalClasses = [];
     /**
      * @param string[] $excludedFatalClasses
-     * @param \Symplify\AutowireArrayParameter\TypeResolver\ParameterTypeResolver $parameterTypeResolver
      */
-    public function __construct($parameterTypeResolver, array $excludedFatalClasses)
+    public function __construct(ParameterTypeResolver $parameterTypeResolver, array $excludedFatalClasses)
     {
         $this->parameterTypeResolver = $parameterTypeResolver;
         $this->excludedFatalClasses = \array_merge(self::DEFAULT_EXCLUDED_FATAL_CLASSES, $excludedFatalClasses);
     }
-    /**
-     * @param \ReflectionMethod $reflectionMethod
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
-     * @param \ReflectionParameter $reflectionParameter
-     * @return bool
-     */
-    public function shouldSkipParameter($reflectionMethod, $definition, $reflectionParameter)
+    public function shouldSkipParameter(ReflectionMethod $reflectionMethod, Definition $definition, ReflectionParameter $reflectionParameter) : bool
     {
         if (!$this->isArrayType($reflectionParameter)) {
             return \true;
@@ -64,11 +58,7 @@ final class ParameterSkipper
         }
         return \is_a($definition->getClass(), $parameterType, \true);
     }
-    /**
-     * @param \ReflectionParameter $reflectionParameter
-     * @return bool
-     */
-    private function isArrayType($reflectionParameter)
+    private function isArrayType(ReflectionParameter $reflectionParameter) : bool
     {
         if ($reflectionParameter->getType() === null) {
             return \false;

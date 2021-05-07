@@ -19,10 +19,7 @@ class ValidationBuilder
 {
     protected $node;
     public $rules = [];
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeDefinition $node
-     */
-    public function __construct($node)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeDefinition $node)
     {
         $this->node = $node;
     }
@@ -30,9 +27,8 @@ class ValidationBuilder
      * Registers a closure to run as normalization or an expression builder to build it if null is provided.
      *
      * @return ExprBuilder|$this
-     * @param \Closure $closure
      */
-    public function rule($closure = null)
+    public function rule(\Closure $closure = null)
     {
         if (null !== $closure) {
             $this->rules[] = $closure;

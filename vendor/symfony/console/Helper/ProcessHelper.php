@@ -31,11 +31,8 @@ class ProcessHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper\
      *                                output available on STDOUT or STDERR
      *
      * @return Process The process that ran
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param string $error
-     * @param int $verbosity
      */
-    public function run($output, $cmd, $error = null, callable $callback = null, $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE)
+    public function run(OutputInterface $output, $cmd, string $error = null, callable $callback = null, int $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE) : Process
     {
         if (!\class_exists(Process::class)) {
             throw new \LogicException('The ProcessHelper cannot be run as the Process component is not installed. Try running "compose require symfony/process".');
@@ -50,10 +47,10 @@ class ProcessHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper\
         if (!\is_array($cmd)) {
             throw new \TypeError(\sprintf('The "command" argument of "%s()" must be an array or a "%s" instance, "%s" given.', __METHOD__, Process::class, \get_debug_type($cmd)));
         }
-        if (\is_string(isset($cmd[0]) ? $cmd[0] : null)) {
+        if (\is_string($cmd[0] ?? null)) {
             $process = new Process($cmd);
             $cmd = [];
-        } elseif ((isset($cmd[0]) ? $cmd[0] : null) instanceof Process) {
+        } elseif (($cmd[0] ?? null) instanceof Process) {
             $process = $cmd[0];
             unset($cmd[0]);
         } else {
@@ -90,10 +87,8 @@ class ProcessHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper\
      * @throws ProcessFailedException
      *
      * @see run()
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param string $error
      */
-    public function mustRun($output, $cmd, $error = null, callable $callback = null)
+    public function mustRun(OutputInterface $output, $cmd, string $error = null, callable $callback = null) : Process
     {
         $process = $this->run($output, $cmd, $error, $callback);
         if (!$process->isSuccessful()) {
@@ -103,11 +98,8 @@ class ProcessHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper\
     }
     /**
      * Wraps a Process callback to add debugging output.
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\Process\Process $process
-     * @return callable
      */
-    public function wrapCallback($output, $process, callable $callback = null)
+    public function wrapCallback(OutputInterface $output, Process $process, callable $callback = null) : callable
     {
         if ($output instanceof ConsoleOutputInterface) {
             $output = $output->getErrorOutput();
@@ -120,19 +112,14 @@ class ProcessHelper extends \ECSPrefix20210507\Symfony\Component\Console\Helper\
             }
         };
     }
-    /**
-     * @param string $str
-     * @return string
-     */
-    private function escapeString($str)
+    private function escapeString(string $str) : string
     {
         return \str_replace('<', '\\<', $str);
     }
     /**
      * {@inheritdoc}
-     * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return 'process';
     }

@@ -36,17 +36,11 @@ class Profile
      * @var Profile[]
      */
     private $children = [];
-    /**
-     * @param string $token
-     */
-    public function __construct($token)
+    public function __construct(string $token)
     {
         $this->token = $token;
     }
-    /**
-     * @param string $token
-     */
-    public function setToken($token)
+    public function setToken(string $token)
     {
         $this->token = $token;
     }
@@ -61,9 +55,8 @@ class Profile
     }
     /**
      * Sets the parent token.
-     * @param $this $parent
      */
-    public function setParent($parent)
+    public function setParent(self $parent)
     {
         $this->parent = $parent;
     }
@@ -94,10 +87,7 @@ class Profile
     {
         return $this->ip;
     }
-    /**
-     * @param string|null $ip
-     */
-    public function setIp($ip)
+    public function setIp(?string $ip)
     {
         $this->ip = $ip;
     }
@@ -110,10 +100,7 @@ class Profile
     {
         return $this->method;
     }
-    /**
-     * @param string $method
-     */
-    public function setMethod($method)
+    public function setMethod(string $method)
     {
         $this->method = $method;
     }
@@ -126,10 +113,7 @@ class Profile
     {
         return $this->url;
     }
-    /**
-     * @param string|null $url
-     */
-    public function setUrl($url)
+    public function setUrl(?string $url)
     {
         $this->url = $url;
     }
@@ -143,17 +127,11 @@ class Profile
         }
         return $this->time;
     }
-    /**
-     * @param int $time
-     */
-    public function setTime($time)
+    public function setTime(int $time)
     {
         $this->time = $time;
     }
-    /**
-     * @param int $statusCode
-     */
-    public function setStatusCode($statusCode)
+    public function setStatusCode(int $statusCode)
     {
         $this->statusCode = $statusCode;
     }
@@ -187,18 +165,13 @@ class Profile
     }
     /**
      * Adds the child token.
-     * @param $this $child
      */
-    public function addChild($child)
+    public function addChild(self $child)
     {
         $this->children[] = $child;
         $child->setParent($this);
     }
-    /**
-     * @return $this|null
-     * @param string $token
-     */
-    public function getChildByToken($token)
+    public function getChildByToken(string $token) : ?self
     {
         foreach ($this->children as $child) {
             if ($token === $child->getToken()) {
@@ -213,9 +186,8 @@ class Profile
      * @return DataCollectorInterface A DataCollectorInterface instance
      *
      * @throws \InvalidArgumentException if the collector does not exist
-     * @param string $name
      */
-    public function getCollector($name)
+    public function getCollector(string $name)
     {
         if (!isset($this->collectors[$name])) {
             throw new \InvalidArgumentException(\sprintf('Collector "%s" does not exist.', $name));
@@ -245,17 +217,15 @@ class Profile
     }
     /**
      * Adds a Collector.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface $collector
      */
-    public function addCollector($collector)
+    public function addCollector(DataCollectorInterface $collector)
     {
         $this->collectors[$collector->getName()] = $collector;
     }
     /**
      * @return bool
-     * @param string $name
      */
-    public function hasCollector($name)
+    public function hasCollector(string $name)
     {
         return isset($this->collectors[$name]);
     }

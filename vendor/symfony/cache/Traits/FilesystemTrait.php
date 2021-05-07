@@ -69,18 +69,16 @@ trait FilesystemTrait
     }
     /**
      * {@inheritdoc}
-     * @param string $id
      */
-    protected function doHave($id)
+    protected function doHave(string $id)
     {
         $file = $this->getFile($id);
         return \is_file($file) && (@\filemtime($file) > \time() || $this->doFetch([$id]));
     }
     /**
      * {@inheritdoc}
-     * @param int $lifetime
      */
-    protected function doSave(array $values, $lifetime)
+    protected function doSave(array $values, int $lifetime)
     {
         $expiresAt = $lifetime ? \time() + $lifetime : 0;
         $values = $this->marshaller->marshall($values, $failed);
@@ -94,11 +92,7 @@ trait FilesystemTrait
         }
         return $failed;
     }
-    /**
-     * @param string $file
-     * @return string
-     */
-    private function getFileKey($file)
+    private function getFileKey(string $file) : string
     {
         if (!($h = @\fopen($file, 'r'))) {
             return '';

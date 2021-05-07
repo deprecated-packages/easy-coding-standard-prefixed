@@ -17,7 +17,7 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition;
  */
 class ServiceConfigurator extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
-    const FACTORY = 'services';
+    public const FACTORY = 'services';
     use Traits\AbstractTrait;
     use Traits\ArgumentTrait;
     use Traits\AutoconfigureTrait;
@@ -41,14 +41,7 @@ class ServiceConfigurator extends \ECSPrefix20210507\Symfony\Component\Dependenc
     private $instanceof;
     private $allowParent;
     private $path;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param bool $allowParent
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
-     * @param string $path
-     */
-    public function __construct($container, array $instanceof, $allowParent, $parent, $definition, $id, array $defaultTags, $path = null)
+    public function __construct(ContainerBuilder $container, array $instanceof, bool $allowParent, \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, Definition $definition, $id, array $defaultTags, string $path = null)
     {
         $this->container = $container;
         $this->instanceof = $instanceof;

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,28 +26,22 @@ final class MagicConstantCasingFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Magic constants should be referred to using the correct casing.', [new CodeSample("<?php\necho __dir__;\n")]);
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound($this->getMagicConstantTokens());
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $magicConstants = $this->getMagicConstants();
         $magicConstantTokens = $this->getMagicConstantTokens();
@@ -57,9 +52,9 @@ final class MagicConstantCasingFixer extends AbstractFixer
         }
     }
     /**
-     * @return mixed[]
+     * @return array<int, string>
      */
-    private function getMagicConstants()
+    private function getMagicConstants() : array
     {
         static $magicConstants = null;
         if (null === $magicConstants) {
@@ -68,9 +63,9 @@ final class MagicConstantCasingFixer extends AbstractFixer
         return $magicConstants;
     }
     /**
-     * @return mixed[]
+     * @return array<int>
      */
-    private function getMagicConstantTokens()
+    private function getMagicConstantTokens() : array
     {
         static $magicConstantTokens = null;
         if (null === $magicConstantTokens) {

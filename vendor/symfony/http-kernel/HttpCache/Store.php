@@ -27,9 +27,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
     private $locks;
     /**
      * @throws \RuntimeException
-     * @param string $root
      */
-    public function __construct($root)
+    public function __construct(string $root)
     {
         $this->root = $root;
         if (!\is_dir($this->root) && !@\mkdir($this->root, 0777, \true) && !\is_dir($this->root)) {
@@ -54,9 +53,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * Tries to lock the cache for a given Request, without blocking.
      *
      * @return bool|string true if the lock is acquired, the path to the current lock otherwise
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function lock($request)
+    public function lock(Request $request)
     {
         $key = $this->getCacheKey($request);
         if (!isset($this->locks[$key])) {
@@ -77,9 +75,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * Releases the lock for the given Request.
      *
      * @return bool False if the lock file does not exist or cannot be unlocked, true otherwise
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function unlock($request)
+    public function unlock(Request $request)
     {
         $key = $this->getCacheKey($request);
         if (isset($this->locks[$key])) {
@@ -90,10 +87,7 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
         }
         return \false;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     */
-    public function isLocked($request)
+    public function isLocked(Request $request)
     {
         $key = $this->getCacheKey($request);
         if (isset($this->locks[$key])) {
@@ -114,9 +108,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * Locates a cached Response for the Request provided.
      *
      * @return Response|null A Response instance, or null if no cache entry was found
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function lookup($request)
+    public function lookup(Request $request)
     {
         $key = $this->getCacheKey($request);
         if (!($entries = $this->getMetadata($key))) {
@@ -151,10 +144,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * @return string The key under which the response is stored
      *
      * @throws \RuntimeException
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    public function write($request, $response)
+    public function write(Request $request, Response $response)
     {
         $key = $this->getCacheKey($request);
         $storedEnv = $this->persistRequest($request);
@@ -185,7 +176,7 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
             if (!isset($entry[1]['vary'][0])) {
                 $entry[1]['vary'] = [''];
             }
-            if ($entry[1]['vary'][0] != $vary || !$this->requestsMatch(isset($vary) ? $vary : '', $entry[0], $storedEnv)) {
+            if ($entry[1]['vary'][0] != $vary || !$this->requestsMatch($vary ?? '', $entry[0], $storedEnv)) {
                 $entries[] = $entry;
             }
         }
@@ -201,9 +192,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * Returns content digest for $response.
      *
      * @return string
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    protected function generateContentDigest($response)
+    protected function generateContentDigest(Response $response)
     {
         return 'en' . \hash('sha256', $response->getContent());
     }
@@ -211,9 +201,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * Invalidates all cache entries that match the request.
      *
      * @throws \RuntimeException
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function invalidate($request)
+    public function invalidate(Request $request)
     {
         $modified = \false;
         $key = $this->getCacheKey($request);
@@ -239,17 +228,16 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * @param string|null $vary A Response vary header
      * @param array       $env1 A Request HTTP header array
      * @param array       $env2 A Request HTTP header array
-     * @return bool
      */
-    private function requestsMatch($vary, array $env1, array $env2)
+    private function requestsMatch(?string $vary, array $env1, array $env2) : bool
     {
         if (empty($vary)) {
             return \true;
         }
         foreach (\preg_split('/[\\s,]+/', $vary) as $header) {
             $key = \str_replace('_', '-', \strtolower($header));
-            $v1 = isset($env1[$key]) ? $env1[$key] : null;
-            $v2 = isset($env2[$key]) ? $env2[$key] : null;
+            $v1 = $env1[$key] ?? null;
+            $v2 = $env2[$key] ?? null;
             if ($v1 !== $v2) {
                 return \false;
             }
@@ -260,10 +248,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * Gets all data associated with the given key.
      *
      * Use this method only if you know what you are doing.
-     * @param string $key
-     * @return mixed[]
      */
-    private function getMetadata($key)
+    private function getMetadata(string $key) : array
     {
         if (!($entries = $this->load($key))) {
             return [];
@@ -276,9 +262,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * This method purges both the HTTP and the HTTPS version of the cache entry.
      *
      * @return bool true if the URL exists with either HTTP or HTTPS scheme and has been purged, false otherwise
-     * @param string $url
      */
-    public function purge($url)
+    public function purge(string $url)
     {
         $http = \preg_replace('#^https:#', 'http:', $url);
         $https = \preg_replace('#^http:#', 'https:', $url);
@@ -288,10 +273,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
     }
     /**
      * Purges data for the given URL.
-     * @param string $url
-     * @return bool
      */
-    private function doPurge($url)
+    private function doPurge(string $url) : bool
     {
         $key = $this->getCacheKey(Request::create($url));
         if (isset($this->locks[$key])) {
@@ -307,22 +290,16 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
     }
     /**
      * Loads data for the given key.
-     * @return string|null
-     * @param string $key
      */
-    private function load($key)
+    private function load(string $key) : ?string
     {
         $path = $this->getPath($key);
         return \is_file($path) && \false !== ($contents = \file_get_contents($path)) ? $contents : null;
     }
     /**
      * Save data for the given key.
-     * @param string $key
-     * @param string $data
-     * @param bool $overwrite
-     * @return bool
      */
-    private function save($key, $data, $overwrite = \true)
+    private function save(string $key, string $data, bool $overwrite = \true) : bool
     {
         $path = $this->getPath($key);
         if (!$overwrite && \file_exists($path)) {
@@ -360,10 +337,7 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
         @\chmod($path, 0666 & ~\umask());
         return \true;
     }
-    /**
-     * @param string $key
-     */
-    public function getPath($key)
+    public function getPath(string $key)
     {
         return $this->root . \DIRECTORY_SEPARATOR . \substr($key, 0, 2) . \DIRECTORY_SEPARATOR . \substr($key, 2, 2) . \DIRECTORY_SEPARATOR . \substr($key, 4, 2) . \DIRECTORY_SEPARATOR . \substr($key, 6);
     }
@@ -378,18 +352,15 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
      * be stored independently under the same cache key.
      *
      * @return string A key for the given Request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    protected function generateCacheKey($request)
+    protected function generateCacheKey(Request $request)
     {
         return 'md' . \hash('sha256', $request->getUri());
     }
     /**
      * Returns a cache key for the given Request.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @return string
      */
-    private function getCacheKey($request)
+    private function getCacheKey(Request $request) : string
     {
         if (isset($this->keyCache[$request])) {
             return $this->keyCache[$request];
@@ -398,19 +369,15 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
     }
     /**
      * Persists the Request HTTP headers.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @return mixed[]
      */
-    private function persistRequest($request)
+    private function persistRequest(Request $request) : array
     {
         return $request->headers->all();
     }
     /**
      * Persists the Response HTTP headers.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
-     * @return mixed[]
      */
-    private function persistResponse($response)
+    private function persistResponse(Response $response) : array
     {
         $headers = $response->headers->all();
         $headers['X-Status'] = [$response->getStatusCode()];
@@ -418,10 +385,8 @@ class Store implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache
     }
     /**
      * Restores a Response from the HTTP headers and body.
-     * @param string $path
-     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response
      */
-    private function restoreResponse(array $headers, $path = null)
+    private function restoreResponse(array $headers, string $path = null) : Response
     {
         $status = $headers['X-Status'][0];
         unset($headers['X-Status']);

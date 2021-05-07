@@ -38,7 +38,7 @@ class DisallowMultipleStyleDefinitionsSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $next = $phpcsFile->findNext(T_STYLE, $stackPtr + 1);

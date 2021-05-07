@@ -21,10 +21,8 @@ class BooleanNodeDefinition extends \ECSPrefix20210507\Symfony\Component\Config\
 {
     /**
      * {@inheritdoc}
-     * @param string|null $name
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent
      */
-    public function __construct($name, $parent = null)
+    public function __construct(?string $name, \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeParentInterface $parent = null)
     {
         parent::__construct($name, $parent);
         $this->nullEquivalent = \true;

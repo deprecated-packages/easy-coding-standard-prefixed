@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,9 +27,8 @@ final class SwitchCaseSemicolonToColonFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('A case should be followed by a colon and not a semicolon.', [new CodeSample('<?php
     switch ($a) {
@@ -43,28 +43,22 @@ final class SwitchCaseSemicolonToColonFixer extends AbstractFixer
      * {@inheritdoc}
      *
      * Must run after NoEmptyStatementFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_CASE, \T_DEFAULT]);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         foreach ($tokens as $index => $token) {
             if ($token->isGivenKind(\T_CASE)) {
@@ -75,12 +69,7 @@ final class SwitchCaseSemicolonToColonFixer extends AbstractFixer
             }
         }
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     */
-    protected function fixSwitchCase($tokens, $index)
+    protected function fixSwitchCase(Tokens $tokens, int $index) : void
     {
         $ternariesCount = 0;
         do {
@@ -105,12 +94,7 @@ final class SwitchCaseSemicolonToColonFixer extends AbstractFixer
             $tokens[$index] = new Token(':');
         }
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     */
-    protected function fixSwitchDefault($tokens, $index)
+    protected function fixSwitchDefault(Tokens $tokens, int $index) : void
     {
         do {
             if ($tokens[$index]->equalsAny([':', ';', [\T_DOUBLE_ARROW]])) {

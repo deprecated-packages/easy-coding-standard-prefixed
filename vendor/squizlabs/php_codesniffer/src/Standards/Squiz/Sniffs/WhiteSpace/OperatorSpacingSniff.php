@@ -87,7 +87,7 @@ class OperatorSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($this->isOperator($phpcsFile, $stackPtr) === \false) {
@@ -243,7 +243,7 @@ class OperatorSpacingSniff implements Sniff
      *
      * @return boolean
      */
-    protected function isOperator($phpcsFile, $stackPtr)
+    protected function isOperator(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // Skip default values in function declarations.

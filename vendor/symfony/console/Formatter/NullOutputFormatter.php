@@ -18,19 +18,15 @@ final class NullOutputFormatter implements \ECSPrefix20210507\Symfony\Component\
     private $style;
     /**
      * {@inheritdoc}
-     * @param string|null $message
-     * @return void
      */
-    public function format($message)
+    public function format(?string $message) : void
     {
         // do nothing
     }
     /**
      * {@inheritdoc}
-     * @param string $name
-     * @return \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
      */
-    public function getStyle($name)
+    public function getStyle(string $name) : \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface
     {
         if ($this->style) {
             return $this->style;
@@ -40,37 +36,29 @@ final class NullOutputFormatter implements \ECSPrefix20210507\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     * @param string $name
-     * @return bool
      */
-    public function hasStyle($name)
+    public function hasStyle(string $name) : bool
     {
         return \false;
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function isDecorated()
+    public function isDecorated() : bool
     {
         return \false;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param bool $decorated
      */
-    public function setDecorated($decorated)
+    public function setDecorated(bool $decorated) : void
     {
         // do nothing
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param string $name
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style
      */
-    public function setStyle($name, $style)
+    public function setStyle(string $name, \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style) : void
     {
         // do nothing
     }

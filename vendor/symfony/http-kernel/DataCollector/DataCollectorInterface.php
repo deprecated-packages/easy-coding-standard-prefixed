@@ -22,11 +22,8 @@ interface DataCollectorInterface extends ResetInterface
 {
     /**
      * Collects data for the given Request and Response.
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
-     * @param \Throwable $exception
      */
-    public function collect($request, $response, $exception = null);
+    public function collect(Request $request, Response $response, \Throwable $exception = null);
     /**
      * Returns the name of the collector.
      *

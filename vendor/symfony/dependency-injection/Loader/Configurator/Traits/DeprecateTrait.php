@@ -24,13 +24,13 @@ trait DeprecateTrait
      *
      * @throws InvalidArgumentException when the message template is invalid
      */
-    public final function deprecate()
+    public final function deprecate() : self
     {
         $args = \func_get_args();
         $package = $version = $message = '';
         if (\func_num_args() < 3) {
             trigger_deprecation('symfony/dependency-injection', '5.1', 'The signature of method "%s()" requires 3 arguments: "string $package, string $version, string $message", not defining them is deprecated.', __METHOD__);
-            $message = (string) (isset($args[0]) ? $args[0] : null);
+            $message = (string) ($args[0] ?? null);
         } else {
             $package = (string) $args[0];
             $version = (string) $args[1];

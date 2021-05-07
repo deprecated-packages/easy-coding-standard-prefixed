@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,9 +26,8 @@ final class NoPhp4ConstructorFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Convert PHP4-style constructors to `__construct`.', [new CodeSample('<?php
 class Foo
@@ -42,36 +42,29 @@ class Foo
      * {@inheritdoc}
      *
      * Must run before OrderedClassElementsFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 75;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_CLASS);
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         $classes = \array_keys($tokens->findGivenKind(\T_CLASS));
@@ -123,9 +116,8 @@ class Foo
      * @param string $className  the class name
      * @param int    $classStart the class start index
      * @param int    $classEnd   the class end index
-     * @return void
      */
-    private function fixConstructor($tokens, $className, $classStart, $classEnd)
+    private function fixConstructor(Tokens $tokens, string $className, int $classStart, int $classEnd) : void
     {
         $php4 = $this->findFunction($tokens, $className, $classStart, $classEnd);
         if (null === $php4) {
@@ -175,9 +167,8 @@ class Foo
      * @param Tokens $tokens     the Tokens instance
      * @param int    $classStart the class start index
      * @param int    $classEnd   the class end index
-     * @return void
      */
-    private function fixParent($tokens, $classStart, $classEnd)
+    private function fixParent(Tokens $tokens, int $classStart, int $classEnd) : void
     {
         // check calls to the parent constructor
         foreach ($tokens->findGivenKind(\T_EXTENDS) as $index => $token) {
@@ -216,9 +207,8 @@ class Foo
      * @param Tokens $tokens the Tokens instance
      * @param int    $start  the PHP4 constructor body start
      * @param int    $end    the PHP4 constructor body end
-     * @return void
      */
-    private function fixInfiniteRecursion($tokens, $start, $end)
+    private function fixInfiniteRecursion(Tokens $tokens, int $start, int $end) : void
     {
         foreach (Token::getObjectOperatorKinds() as $objectOperatorKind) {
             $seq = [[\T_VARIABLE, '$this'], [$objectOperatorKind], [\T_STRING, '__construct']];
@@ -244,7 +234,7 @@ class Foo
      *
      * @return array an array containing the sequence and case sensitiveness [ 0 => $seq, 1 => $case ]
      */
-    private function getWrapperMethodSequence($tokens, $method, $startIndex, $bodyIndex)
+    private function getWrapperMethodSequence(Tokens $tokens, string $method, int $startIndex, int $bodyIndex) : array
     {
         $sequences = [];
         foreach (Token::getObjectOperatorKinds() as $objectOperatorKind) {
@@ -291,7 +281,7 @@ class Foo
      *     - modifiers (array): The modifiers as array keys and their index as
      *       the values, e.g. array(T_PUBLIC => 10)
      */
-    private function findFunction($tokens, $name, $startIndex, $endIndex)
+    private function findFunction(Tokens $tokens, string $name, int $startIndex, int $endIndex) : ?array
     {
         $function = $tokens->findSequence([[\T_FUNCTION], [\T_STRING, $name], '('], $startIndex, $endIndex, \false);
         if (null === $function) {

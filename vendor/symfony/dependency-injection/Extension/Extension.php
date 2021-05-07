@@ -70,9 +70,8 @@ abstract class Extension implements \ECSPrefix20210507\Symfony\Component\Depende
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function getConfiguration(array $config, $container)
+    public function getConfiguration(array $config, ContainerBuilder $container)
     {
         $class = static::class;
         if (\false !== \strpos($class, "\0")) {
@@ -92,20 +91,15 @@ abstract class Extension implements \ECSPrefix20210507\Symfony\Component\Depende
         }
         return null;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\ConfigurationInterface $configuration
-     * @return mixed[]
-     */
-    protected final function processConfiguration($configuration, array $configs)
+    protected final function processConfiguration(ConfigurationInterface $configuration, array $configs) : array
     {
         $processor = new Processor();
         return $this->processedConfigs[] = $processor->processConfiguration($configuration, $configs);
     }
     /**
      * @internal
-     * @return mixed[]
      */
-    public final function getProcessedConfigs()
+    public final function getProcessedConfigs() : array
     {
         try {
             return $this->processedConfigs;
@@ -117,9 +111,8 @@ abstract class Extension implements \ECSPrefix20210507\Symfony\Component\Depende
      * @return bool Whether the configuration is enabled
      *
      * @throws InvalidArgumentException When the config is not enableable
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    protected function isConfigEnabled($container, array $config)
+    protected function isConfigEnabled(ContainerBuilder $container, array $config)
     {
         if (!\array_key_exists('enabled', $config)) {
             throw new InvalidArgumentException("The config array has no 'enabled' key.");

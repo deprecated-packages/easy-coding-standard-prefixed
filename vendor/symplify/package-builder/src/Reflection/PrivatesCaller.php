@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\PackageBuilder\Reflection;
 
 use ReflectionClass;
@@ -14,9 +15,8 @@ final class PrivatesCaller
      * @param object|string $object
      * @param mixed[] $arguments
      * @return mixed
-     * @param string $methodName
      */
-    public function callPrivateMethod($object, $methodName, array $arguments)
+    public function callPrivateMethod($object, string $methodName, array $arguments)
     {
         $this->ensureIsNotNull($object, __METHOD__);
         if (\is_string($object)) {
@@ -29,9 +29,8 @@ final class PrivatesCaller
     /**
      * @param object|string $object
      * @return mixed
-     * @param string $methodName
      */
-    public function callPrivateMethodWithReference($object, $methodName, $argument)
+    public function callPrivateMethodWithReference($object, string $methodName, $argument)
     {
         $this->ensureIsNotNull($object, __METHOD__);
         if (\is_string($object)) {
@@ -42,12 +41,7 @@ final class PrivatesCaller
         $methodReflection->invokeArgs($object, [&$argument]);
         return $argument;
     }
-    /**
-     * @param object $object
-     * @param string $methodName
-     * @return \ReflectionMethod
-     */
-    private function createAccessibleMethodReflection($object, $methodName)
+    private function createAccessibleMethodReflection(object $object, string $methodName) : ReflectionMethod
     {
         $reflectionMethod = new ReflectionMethod(\get_class($object), $methodName);
         $reflectionMethod->setAccessible(\true);
@@ -55,10 +49,8 @@ final class PrivatesCaller
     }
     /**
      * @param mixed $object
-     * @return void
-     * @param string $location
      */
-    private function ensureIsNotNull($object, $location)
+    private function ensureIsNotNull($object, string $location) : void
     {
         if ($object !== null) {
             return;

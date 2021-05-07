@@ -22,10 +22,7 @@ use ECSPrefix20210507\Symfony\Contracts\Service\ServiceProviderInterface;
 class ResolveServiceSubscribersPass extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $serviceLocator;
-    /**
-     * @param bool $isRoot
-     */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         if ($value instanceof Reference && $this->serviceLocator && \in_array((string) $value, [ContainerInterface::class, ServiceProviderInterface::class], \true)) {
             return new Reference($this->serviceLocator);

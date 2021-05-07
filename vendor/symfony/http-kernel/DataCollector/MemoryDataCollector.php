@@ -27,11 +27,8 @@ class MemoryDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
-     * @param \Throwable $exception
      */
-    public function collect($request, $response, $exception = null)
+    public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         $this->updateMemoryUsage();
     }
@@ -83,9 +80,8 @@ class MemoryDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
     }
     /**
      * @return int|float
-     * @param string $memoryLimit
      */
-    private function convertToBytes($memoryLimit)
+    private function convertToBytes(string $memoryLimit)
     {
         if ('-1' === $memoryLimit) {
             return -1;

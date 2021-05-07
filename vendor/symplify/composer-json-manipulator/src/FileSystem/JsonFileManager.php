@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\FileSystem;
 
 use ECSPrefix20210507\Nette\Utils\Json;
@@ -30,12 +31,7 @@ final class JsonFileManager
      * @var mixed[]
      */
     private $cachedJSONFiles = [];
-    /**
-     * @param \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem
-     * @param \Symplify\ComposerJsonManipulator\Json\JsonCleaner $jsonCleaner
-     * @param \Symplify\ComposerJsonManipulator\Json\JsonInliner $jsonInliner
-     */
-    public function __construct($smartFileSystem, $jsonCleaner, $jsonInliner)
+    public function __construct(SmartFileSystem $smartFileSystem, JsonCleaner $jsonCleaner, JsonInliner $jsonInliner)
     {
         $this->smartFileSystem = $smartFileSystem;
         $this->jsonCleaner = $jsonCleaner;
@@ -43,9 +39,8 @@ final class JsonFileManager
     }
     /**
      * @return mixed[]
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
      */
-    public function loadFromFileInfo($smartFileInfo)
+    public function loadFromFileInfo(SmartFileInfo $smartFileInfo) : array
     {
         $realPath = $smartFileInfo->getRealPath();
         if (!isset($this->cachedJSONFiles[$realPath])) {
@@ -54,31 +49,23 @@ final class JsonFileManager
         return $this->cachedJSONFiles[$realPath];
     }
     /**
-     * @return mixed[]
-     * @param string $filePath
+     * @return array<string, mixed>
      */
-    public function loadFromFilePath($filePath)
+    public function loadFromFilePath(string $filePath) : array
     {
         $fileContent = $this->smartFileSystem->readFile($filePath);
         return Json::decode($fileContent, Json::FORCE_ARRAY);
     }
     /**
      * @param mixed[] $json
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
-     * @return string
      */
-    public function printJsonToFileInfo(array $json, $smartFileInfo)
+    public function printJsonToFileInfo(array $json, SmartFileInfo $smartFileInfo) : string
     {
         $jsonString = $this->encodeJsonToFileContent($json);
         $this->smartFileSystem->dumpFile($smartFileInfo->getPathname(), $jsonString);
         return $jsonString;
     }
-    /**
-     * @param \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson $composerJson
-     * @param string $filePath
-     * @return string
-     */
-    public function printComposerJsonToFilePath($composerJson, $filePath)
+    public function printComposerJsonToFilePath(ComposerJson $composerJson, string $filePath) : string
     {
         $jsonString = $this->encodeJsonToFileContent($composerJson->getJsonArray());
         $this->smartFileSystem->dumpFile($filePath, $jsonString);
@@ -86,9 +73,8 @@ final class JsonFileManager
     }
     /**
      * @param mixed[] $json
-     * @return string
      */
-    public function encodeJsonToFileContent(array $json)
+    public function encodeJsonToFileContent(array $json) : string
     {
         // Empty arrays may lead to bad encoding since we can't be sure whether they need to be arrays or objects.
         $json = $this->jsonCleaner->removeEmptyKeysFromJsonArray($json);

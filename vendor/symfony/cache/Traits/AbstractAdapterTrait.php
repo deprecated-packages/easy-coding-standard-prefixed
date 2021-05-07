@@ -54,7 +54,7 @@ trait AbstractAdapterTrait
      *
      * @return bool True if item exists in the cache, false otherwise
      */
-    protected abstract function doHave($id);
+    protected abstract function doHave(string $id);
     /**
      * Deletes all items in the pool.
      *
@@ -62,7 +62,7 @@ trait AbstractAdapterTrait
      *
      * @return bool True if the pool was successfully cleared, false otherwise
      */
-    protected abstract function doClear($namespace);
+    protected abstract function doClear(string $namespace);
     /**
      * Removes multiple items from the pool.
      *
@@ -79,7 +79,7 @@ trait AbstractAdapterTrait
      *
      * @return array|bool The identifiers that failed to be cached or a boolean stating if caching succeeded or not
      */
-    protected abstract function doSave(array $values, $lifetime);
+    protected abstract function doSave(array $values, int $lifetime);
     /**
      * {@inheritdoc}
      *
@@ -102,9 +102,8 @@ trait AbstractAdapterTrait
      * {@inheritdoc}
      *
      * @return bool
-     * @param string $prefix
      */
-    public function clear($prefix = '')
+    public function clear(string $prefix = '')
     {
         $this->deferred = [];
         if ($cleared = $this->versioningIsEnabled) {
@@ -224,9 +223,8 @@ trait AbstractAdapterTrait
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function save($item)
+    public function save(CacheItemInterface $item)
     {
         if (!$item instanceof CacheItem) {
             return \false;
@@ -238,9 +236,8 @@ trait AbstractAdapterTrait
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred($item)
+    public function saveDeferred(CacheItemInterface $item)
     {
         if (!$item instanceof CacheItem) {
             return \false;
@@ -293,11 +290,7 @@ trait AbstractAdapterTrait
             $this->commit();
         }
     }
-    /**
-     * @param mixed[] $items
-     * @return mixed[]
-     */
-    private function generateItems($items, array &$keys)
+    private function generateItems(iterable $items, array &$keys) : iterable
     {
         $f = $this->createCacheItem;
         try {

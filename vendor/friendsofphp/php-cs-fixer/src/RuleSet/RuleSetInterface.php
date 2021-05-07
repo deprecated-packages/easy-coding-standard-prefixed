@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,19 +26,16 @@ interface RuleSetInterface
      * Get configuration for given rule.
      *
      * @param string $rule name of rule
-     * @return mixed[]|null
      */
-    public function getRuleConfiguration($rule);
+    public function getRuleConfiguration(string $rule) : ?array;
     /**
      * Get all rules from rules set.
-     * @return mixed[]
      */
-    public function getRules();
+    public function getRules() : array;
     /**
      * Check given rule is in rules set.
      *
      * @param string $rule name of rule
-     * @return bool
      */
-    public function hasRule($rule);
+    public function hasRule(string $rule) : bool;
 }

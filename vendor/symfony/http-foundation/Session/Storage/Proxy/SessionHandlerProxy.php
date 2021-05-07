@@ -16,10 +16,7 @@ namespace ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\Pro
 class SessionHandlerProxy extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy implements \SessionHandlerInterface, \SessionUpdateTimestampHandlerInterface
 {
     protected $handler;
-    /**
-     * @param \SessionHandlerInterface $handler
-     */
-    public function __construct($handler)
+    public function __construct(\SessionHandlerInterface $handler)
     {
         $this->handler = $handler;
         $this->wrapper = $handler instanceof \SessionHandler;

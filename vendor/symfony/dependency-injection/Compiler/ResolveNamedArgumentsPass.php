@@ -24,9 +24,8 @@ class ResolveNamedArgumentsPass extends \ECSPrefix20210507\Symfony\Component\Dep
 {
     /**
      * {@inheritdoc}
-     * @param bool $isRoot
      */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         if ($value instanceof AbstractArgument && $value->getText() . '.' === $value->getTextWithContext()) {
             $value->setContext(\sprintf('A value found in service "%s"', $this->currentId));
@@ -37,7 +36,7 @@ class ResolveNamedArgumentsPass extends \ECSPrefix20210507\Symfony\Component\Dep
         $calls = $value->getMethodCalls();
         $calls[] = ['__construct', $value->getArguments()];
         foreach ($calls as $i => $call) {
-            list($method, $arguments) = $call;
+            [$method, $arguments] = $call;
             $parameters = null;
             $resolvedArguments = [];
             foreach ($arguments as $key => $argument) {
@@ -91,7 +90,7 @@ class ResolveNamedArgumentsPass extends \ECSPrefix20210507\Symfony\Component\Dep
                 $calls[$i][1] = $resolvedArguments;
             }
         }
-        list(, $arguments) = \array_pop($calls);
+        [, $arguments] = \array_pop($calls);
         if ($arguments !== $value->getArguments()) {
             $value->setArguments($arguments);
         }

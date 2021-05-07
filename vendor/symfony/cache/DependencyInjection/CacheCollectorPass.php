@@ -27,12 +27,7 @@ class CacheCollectorPass implements CompilerPassInterface
     private $dataCollectorCacheId;
     private $cachePoolTag;
     private $cachePoolRecorderInnerSuffix;
-    /**
-     * @param string $dataCollectorCacheId
-     * @param string $cachePoolTag
-     * @param string $cachePoolRecorderInnerSuffix
-     */
-    public function __construct($dataCollectorCacheId = 'data_collector.cache', $cachePoolTag = 'cache.pool', $cachePoolRecorderInnerSuffix = '.recorder_inner')
+    public function __construct(string $dataCollectorCacheId = 'data_collector.cache', string $cachePoolTag = 'cache.pool', string $cachePoolRecorderInnerSuffix = '.recorder_inner')
     {
         $this->dataCollectorCacheId = $dataCollectorCacheId;
         $this->cachePoolTag = $cachePoolTag;
@@ -40,24 +35,18 @@ class CacheCollectorPass implements CompilerPassInterface
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition($this->dataCollectorCacheId)) {
             return;
         }
         foreach ($container->findTaggedServiceIds($this->cachePoolTag) as $id => $attributes) {
-            $poolName = isset($attributes[0]['name']) ? $attributes[0]['name'] : $id;
+            $poolName = $attributes[0]['name'] ?? $id;
             $this->addToCollector($id, $poolName, $container);
         }
     }
-    /**
-     * @param string $id
-     * @param string $name
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    private function addToCollector($id, $name, $container)
+    private function addToCollector(string $id, string $name, ContainerBuilder $container)
     {
         $definition = $container->getDefinition($id);
         if ($definition->isAbstract()) {

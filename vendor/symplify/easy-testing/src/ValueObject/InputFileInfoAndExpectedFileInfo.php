@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyTesting\ValueObject;
 
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -13,40 +14,24 @@ final class InputFileInfoAndExpectedFileInfo
      * @var SmartFileInfo
      */
     private $expectedFileInfo;
-    /**
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $inputFileInfo
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $expectedFileInfo
-     */
-    public function __construct($inputFileInfo, $expectedFileInfo)
+    public function __construct(SmartFileInfo $inputFileInfo, SmartFileInfo $expectedFileInfo)
     {
         $this->inputFileInfo = $inputFileInfo;
         $this->expectedFileInfo = $expectedFileInfo;
     }
-    /**
-     * @return \Symplify\SmartFileSystem\SmartFileInfo
-     */
-    public function getInputFileInfo()
+    public function getInputFileInfo() : SmartFileInfo
     {
         return $this->inputFileInfo;
     }
-    /**
-     * @return \Symplify\SmartFileSystem\SmartFileInfo
-     */
-    public function getExpectedFileInfo()
+    public function getExpectedFileInfo() : SmartFileInfo
     {
         return $this->expectedFileInfo;
     }
-    /**
-     * @return string
-     */
-    public function getExpectedFileContent()
+    public function getExpectedFileContent() : string
     {
         return $this->expectedFileInfo->getContents();
     }
-    /**
-     * @return string
-     */
-    public function getExpectedFileInfoRealPath()
+    public function getExpectedFileInfoRealPath() : string
     {
         return $this->expectedFileInfo->getRealPath();
     }

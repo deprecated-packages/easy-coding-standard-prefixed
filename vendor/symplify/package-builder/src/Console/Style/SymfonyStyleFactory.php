@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console\Style;
 
 use ECSPrefix20210507\Symfony\Component\Console\Application;
@@ -19,10 +20,7 @@ final class SymfonyStyleFactory
     {
         $this->privatesCaller = new PrivatesCaller();
     }
-    /**
-     * @return \ECSPrefix20210507\Symfony\Component\Console\Style\SymfonyStyle
-     */
-    public function create()
+    public function create() : SymfonyStyle
     {
         // to prevent missing argv indexes
         if (!isset($_SERVER['argv'])) {

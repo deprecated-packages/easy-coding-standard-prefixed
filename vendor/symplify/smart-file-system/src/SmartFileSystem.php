@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SmartFileSystem;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -14,13 +15,11 @@ final class SmartFileSystem extends Filesystem
      * @var string
      * @see https://regex101.com/r/tx6eyw/1
      */
-    const BEFORE_COLLON_REGEX = '#^\\w+\\(.*?\\): #';
+    private const BEFORE_COLLON_REGEX = '#^\\w+\\(.*?\\): #';
     /**
      * @see https://github.com/symfony/filesystem/pull/4/files
-     * @param string $filename
-     * @return string
      */
-    public function readFile($filename)
+    public function readFile(string $filename) : string
     {
         $source = @\file_get_contents($filename);
         if (!$source) {
@@ -29,11 +28,7 @@ final class SmartFileSystem extends Filesystem
         }
         return $source;
     }
-    /**
-     * @param string $filename
-     * @return \Symplify\SmartFileSystem\SmartFileInfo
-     */
-    public function readFileToSmartFileInfo($filename)
+    public function readFileToSmartFileInfo(string $filename) : \Symplify\SmartFileSystem\SmartFileInfo
     {
         return new \Symplify\SmartFileSystem\SmartFileInfo($filename);
     }
@@ -41,19 +36,17 @@ final class SmartFileSystem extends Filesystem
      * Converts given HTML code to plain text
      *
      * @source https://github.com/nette/utils/blob/e7bd59f1dd860d25dbbb1ac720dddd0fa1388f4c/src/Utils/Html.php#L325-L331
-     * @param string $html
-     * @return string
      */
-    public function htmlToText($html)
+    public function htmlToText(string $html) : string
     {
         $content = \strip_tags($html);
         return \html_entity_decode($content, \ENT_QUOTES | \ENT_HTML5, 'UTF-8');
     }
     /**
      * @param SmartFileInfo[] $fileInfos
-     * @return mixed[]
+     * @return string[]
      */
-    public function resolveFilePathsFromFileInfos(array $fileInfos)
+    public function resolveFilePathsFromFileInfos(array $fileInfos) : array
     {
         $filePaths = [];
         foreach ($fileInfos as $fileInfo) {
@@ -65,11 +58,10 @@ final class SmartFileSystem extends Filesystem
      * Returns the last PHP error as plain string.
      *
      * @source https://github.com/nette/utils/blob/ab8eea12b8aacc7ea5bdafa49b711c2988447994/src/Utils/Helpers.php#L31-L40
-     * @return string
      */
-    private function getLastError()
+    private function getLastError() : string
     {
-        $message = isset(\error_get_last()['message']) ? \error_get_last()['message'] : '';
+        $message = \error_get_last()['message'] ?? '';
         $message = \ini_get('html_errors') ? $this->htmlToText($message) : $message;
         return Strings::replace($message, self::BEFORE_COLLON_REGEX, '');
     }

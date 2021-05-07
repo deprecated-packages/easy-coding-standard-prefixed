@@ -47,7 +47,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenWithinScope($phpcsFile, $stackPtr, $currScope)
+    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
     {
         $tokens = $phpcsFile->getTokens();
         // Determine if this is a function which needs to be examined.
@@ -103,7 +103,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function processTokenOutsideScope($phpcsFile, $stackPtr)
+    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {
     }
     //end processTokenOutsideScope()
@@ -115,7 +115,7 @@ class ConstructorNameSniff extends AbstractScopeSniff
      *
      * @return void
      */
-    protected function loadFunctionNamesInScope($phpcsFile, $currScope)
+    protected function loadFunctionNamesInScope(File $phpcsFile, $currScope)
     {
         $this->functionList = [];
         $tokens = $phpcsFile->getTokens();

@@ -56,9 +56,8 @@ class ParameterBag implements \ECSPrefix20210507\Symfony\Component\DependencyInj
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function get($name)
+    public function get(string $name)
     {
         if (!\array_key_exists($name, $this->parameters)) {
             if (!$name) {
@@ -95,15 +94,14 @@ class ParameterBag implements \ECSPrefix20210507\Symfony\Component\DependencyInj
      * @param string $name  The parameter name
      * @param mixed  $value The parameter value
      */
-    public function set($name, $value)
+    public function set(string $name, $value)
     {
         $this->parameters[$name] = $value;
     }
     /**
      * {@inheritdoc}
-     * @param string $name
      */
-    public function has($name)
+    public function has(string $name)
     {
         return \array_key_exists((string) $name, $this->parameters);
     }
@@ -112,7 +110,7 @@ class ParameterBag implements \ECSPrefix20210507\Symfony\Component\DependencyInj
      *
      * @param string $name The parameter name
      */
-    public function remove($name)
+    public function remove(string $name)
     {
         unset($this->parameters[$name]);
     }
@@ -149,7 +147,7 @@ class ParameterBag implements \ECSPrefix20210507\Symfony\Component\DependencyInj
      * @throws ParameterCircularReferenceException if a circular reference if detected
      * @throws RuntimeException                    when a given parameter has a type problem
      */
-    public function resolveValue($value, $resolving = [])
+    public function resolveValue($value, array $resolving = [])
     {
         if (\is_array($value)) {
             $args = [];
@@ -173,9 +171,8 @@ class ParameterBag implements \ECSPrefix20210507\Symfony\Component\DependencyInj
      * @throws ParameterNotFoundException          if a placeholder references a parameter that does not exist
      * @throws ParameterCircularReferenceException if a circular reference if detected
      * @throws RuntimeException                    when a given parameter has a type problem
-     * @param string $value
      */
-    public function resolveString($value, array $resolving = [])
+    public function resolveString(string $value, array $resolving = [])
     {
         // we do this to deal with non string values (Boolean, integer, ...)
         // as the preg_replace_callback throw an exception when trying

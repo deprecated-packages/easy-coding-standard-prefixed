@@ -29,14 +29,8 @@ class FilesystemTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cac
     /**
      * Folder used for tag symlinks.
      */
-    const TAG_FOLDER = 'tags';
-    /**
-     * @param string $namespace
-     * @param int $defaultLifetime
-     * @param string $directory
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller
-     */
-    public function __construct($namespace = '', $defaultLifetime = 0, $directory = null, $marshaller = null)
+    private const TAG_FOLDER = 'tags';
+    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $directory = null, MarshallerInterface $marshaller = null)
     {
         $this->marshaller = new TagAwareMarshaller($marshaller);
         parent::__construct('', $defaultLifetime);
@@ -44,9 +38,8 @@ class FilesystemTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cac
     }
     /**
      * {@inheritdoc}
-     * @param string $namespace
      */
-    protected function doClear($namespace)
+    protected function doClear(string $namespace)
     {
         $ok = $this->doClearCache($namespace);
         if ('' !== $namespace) {
@@ -89,12 +82,8 @@ class FilesystemTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cac
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $addTagData
-     * @param mixed[] $removeTagData
-     * @param int $lifetime
-     * @return mixed[]
      */
-    protected function doSave(array $values, $lifetime, $addTagData = [], $removeTagData = [])
+    protected function doSave(array $values, int $lifetime, array $addTagData = [], array $removeTagData = []) : array
     {
         $failed = $this->doSaveCache($values, $lifetime);
         // Add Tags as symlinks
@@ -125,9 +114,8 @@ class FilesystemTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cac
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    protected function doDeleteYieldTags(array $ids)
+    protected function doDeleteYieldTags(array $ids) : iterable
     {
         foreach ($ids as $id) {
             $file = $this->getFile($id);
@@ -138,7 +126,7 @@ class FilesystemTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cac
                 \fclose($h);
                 continue;
             }
-            $meta = isset(\explode("\n", \fread($h, 4096), 3)[2]) ? \explode("\n", \fread($h, 4096), 3)[2] : '';
+            $meta = \explode("\n", \fread($h, 4096), 3)[2] ?? '';
             // detect the compact format used in marshall() using magic numbers in the form 9D-..-..-..-..-00-..-..-..-5F
             if (13 < \strlen($meta) && "" === $meta[0] && "\0" === $meta[5] && "_" === $meta[9]) {
                 $meta[9] = "\0";
@@ -161,9 +149,8 @@ class FilesystemTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cac
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    protected function doDeleteTagRelations(array $tagData)
+    protected function doDeleteTagRelations(array $tagData) : bool
     {
         foreach ($tagData as $tagId => $idList) {
             $tagFolder = $this->getTagFolder($tagId);
@@ -175,9 +162,8 @@ class FilesystemTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cac
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    protected function doInvalidate(array $tagIds)
+    protected function doInvalidate(array $tagIds) : bool
     {
         foreach ($tagIds as $tagId) {
             if (!\is_dir($tagFolder = $this->getTagFolder($tagId))) {
@@ -212,11 +198,7 @@ class FilesystemTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cac
         }
         return \true;
     }
-    /**
-     * @param string $tagId
-     * @return string
-     */
-    private function getTagFolder($tagId)
+    private function getTagFolder(string $tagId) : string
     {
         return $this->getFile($tagId, \false, $this->directory . self::TAG_FOLDER . \DIRECTORY_SEPARATOR) . \DIRECTORY_SEPARATOR;
     }

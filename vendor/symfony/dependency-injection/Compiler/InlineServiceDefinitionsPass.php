@@ -29,17 +29,11 @@ class InlineServiceDefinitionsPass extends \ECSPrefix20210507\Symfony\Component\
     private $inlinedIds = [];
     private $notInlinableIds = [];
     private $graph;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass $analyzingPass
-     */
-    public function __construct($analyzingPass = null)
+    public function __construct(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass $analyzingPass = null)
     {
         $this->analyzingPass = $analyzingPass;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         $this->container = $container;
         if ($this->analyzingPass) {
@@ -102,9 +96,8 @@ class InlineServiceDefinitionsPass extends \ECSPrefix20210507\Symfony\Component\
     }
     /**
      * {@inheritdoc}
-     * @param bool $isRoot
      */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         if ($value instanceof ArgumentInterface) {
             // Reference found in ArgumentInterface::getValues() are not inlineable
@@ -146,11 +139,8 @@ class InlineServiceDefinitionsPass extends \ECSPrefix20210507\Symfony\Component\
     }
     /**
      * Checks if the definition is inlineable.
-     * @param string $id
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
-     * @return bool
      */
-    private function isInlineableDefinition($id, $definition)
+    private function isInlineableDefinition(string $id, Definition $definition) : bool
     {
         if ($definition->hasErrors() || $definition->isDeprecated() || $definition->isLazy() || $definition->isSynthetic()) {
             return \false;

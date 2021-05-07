@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,29 +28,23 @@ final class TypeAlternationTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         // needs to run after ArrayTypehintTransformer and TypeColonTransformer
         return -15;
     }
     /**
      * {@inheritdoc}
-     * @return int
      */
-    public function getRequiredPhpVersionId()
+    public function getRequiredPhpVersionId() : int
     {
         return 70100;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @param int $index
      */
-    public function process($tokens, $token, $index)
+    public function process(Tokens $tokens, Token $token, int $index) : void
     {
         if (!$token->equals('|')) {
             return;
@@ -110,18 +105,12 @@ final class TypeAlternationTransformer extends AbstractTransformer
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    public function getCustomTokens()
+    public function getCustomTokens() : array
     {
         return [CT::T_TYPE_ALTERNATION];
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     */
-    private function replaceToken($tokens, $index)
+    private function replaceToken(Tokens $tokens, int $index) : void
     {
         $tokens[$index] = new Token([CT::T_TYPE_ALTERNATION, '|']);
     }

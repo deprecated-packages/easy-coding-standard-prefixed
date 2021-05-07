@@ -19,13 +19,9 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
 class ArgsStub extends \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\EnumStub
 {
     private static $parameters = [];
-    /**
-     * @param string|null $class
-     * @param string $function
-     */
-    public function __construct(array $args, $function, $class)
+    public function __construct(array $args, string $function, ?string $class)
     {
-        list($variadic, $params) = self::getParameters($function, $class);
+        [$variadic, $params] = self::getParameters($function, $class);
         $values = [];
         foreach ($args as $k => $v) {
             $values[$k] = !\is_scalar($v) && !$v instanceof Stub ? new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\CutStub($v) : $v;
@@ -47,12 +43,7 @@ class ArgsStub extends \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Enu
             $this->value = \array_combine($params, $values);
         }
     }
-    /**
-     * @param string|null $class
-     * @param string $function
-     * @return mixed[]
-     */
-    private static function getParameters($function, $class)
+    private static function getParameters(string $function, ?string $class) : array
     {
         if (isset(self::$parameters[$k = $class . '::' . $function])) {
             return self::$parameters[$k];

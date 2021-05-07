@@ -16,7 +16,7 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition;
  */
 class InlineServiceConfigurator extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
-    const FACTORY = 'service';
+    public const FACTORY = 'service';
     use Traits\ArgumentTrait;
     use Traits\AutowireTrait;
     use Traits\BindTrait;
@@ -31,10 +31,7 @@ class InlineServiceConfigurator extends \ECSPrefix20210507\Symfony\Component\Dep
     private $id = '[inline]';
     private $allowParent = \true;
     private $path = null;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
-     */
-    public function __construct($definition)
+    public function __construct(Definition $definition)
     {
         $this->definition = $definition;
     }

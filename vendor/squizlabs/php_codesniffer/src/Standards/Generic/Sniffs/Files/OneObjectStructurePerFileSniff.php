@@ -32,7 +32,7 @@ class OneObjectStructurePerFileSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $nextClass = $phpcsFile->findNext($this->register(), $stackPtr + 1);
         if ($nextClass !== \false) {

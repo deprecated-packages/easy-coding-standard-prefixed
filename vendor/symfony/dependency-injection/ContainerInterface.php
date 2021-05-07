@@ -22,17 +22,15 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\ServiceNot
  */
 interface ContainerInterface extends PsrContainerInterface
 {
-    const RUNTIME_EXCEPTION_ON_INVALID_REFERENCE = 0;
-    const EXCEPTION_ON_INVALID_REFERENCE = 1;
-    const NULL_ON_INVALID_REFERENCE = 2;
-    const IGNORE_ON_INVALID_REFERENCE = 3;
-    const IGNORE_ON_UNINITIALIZED_REFERENCE = 4;
+    public const RUNTIME_EXCEPTION_ON_INVALID_REFERENCE = 0;
+    public const EXCEPTION_ON_INVALID_REFERENCE = 1;
+    public const NULL_ON_INVALID_REFERENCE = 2;
+    public const IGNORE_ON_INVALID_REFERENCE = 3;
+    public const IGNORE_ON_UNINITIALIZED_REFERENCE = 4;
     /**
      * Sets a service.
-     * @param object|null $service
-     * @param string $id
      */
-    public function set($id, $service);
+    public function set(string $id, ?object $service);
     /**
      * Gets a service.
      *
@@ -46,7 +44,7 @@ interface ContainerInterface extends PsrContainerInterface
      *
      * @see Reference
      */
-    public function get($id, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE);
+    public function get($id, int $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE);
     /**
      * Returns true if the given service is defined.
      *
@@ -59,9 +57,8 @@ interface ContainerInterface extends PsrContainerInterface
      * Check for whether or not a service has been initialized.
      *
      * @return bool true if the service has been initialized, false otherwise
-     * @param string $id
      */
-    public function initialized($id);
+    public function initialized(string $id);
     /**
      * Gets a parameter.
      *
@@ -71,7 +68,7 @@ interface ContainerInterface extends PsrContainerInterface
      *
      * @throws InvalidArgumentException if the parameter is not defined
      */
-    public function getParameter($name);
+    public function getParameter(string $name);
     /**
      * Checks if a parameter exists.
      *
@@ -79,12 +76,12 @@ interface ContainerInterface extends PsrContainerInterface
      *
      * @return bool The presence of parameter in container
      */
-    public function hasParameter($name);
+    public function hasParameter(string $name);
     /**
      * Sets a parameter.
      *
      * @param string $name  The parameter name
      * @param mixed  $value The parameter value
      */
-    public function setParameter($name, $value);
+    public function setParameter(string $name, $value);
 }

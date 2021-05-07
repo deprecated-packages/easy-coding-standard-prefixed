@@ -36,9 +36,8 @@ class GlobResource implements \IteratorAggregate, \ECSPrefix20210507\Symfony\Com
      * @param bool   $recursive Whether directories should be scanned recursively or not
      *
      * @throws \InvalidArgumentException
-     * @param bool $forExclusion
      */
-    public function __construct($prefix, $pattern, $recursive, $forExclusion = \false, array $excludedPrefixes = [])
+    public function __construct(string $prefix, string $pattern, bool $recursive, bool $forExclusion = \false, array $excludedPrefixes = [])
     {
         \ksort($excludedPrefixes);
         $this->prefix = \realpath($prefix) ?: (\file_exists($prefix) ? $prefix : \false);
@@ -51,27 +50,21 @@ class GlobResource implements \IteratorAggregate, \ECSPrefix20210507\Symfony\Com
             throw new \InvalidArgumentException(\sprintf('The path "%s" does not exist.', $prefix));
         }
     }
-    /**
-     * @return string
-     */
-    public function getPrefix()
+    public function getPrefix() : string
     {
         return $this->prefix;
     }
     /**
      * {@inheritdoc}
-     * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return 'glob.' . $this->prefix . (int) $this->recursive . $this->pattern . (int) $this->forExclusion . \implode("\0", $this->excludedPrefixes);
     }
     /**
      * {@inheritdoc}
-     * @param int $timestamp
-     * @return bool
      */
-    public function isFresh($timestamp)
+    public function isFresh(int $timestamp) : bool
     {
         $hash = $this->computeHash();
         if (null === $this->hash) {
@@ -81,9 +74,8 @@ class GlobResource implements \IteratorAggregate, \ECSPrefix20210507\Symfony\Com
     }
     /**
      * @internal
-     * @return mixed[]
      */
-    public function __sleep()
+    public function __sleep() : array
     {
         if (null === $this->hash) {
             $this->hash = $this->computeHash();
@@ -92,16 +84,12 @@ class GlobResource implements \IteratorAggregate, \ECSPrefix20210507\Symfony\Com
     }
     /**
      * @internal
-     * @return void
      */
-    public function __wakeup()
+    public function __wakeup() : void
     {
         $this->globBrace = \defined('GLOB_BRACE') ? \GLOB_BRACE : 0;
     }
-    /**
-     * @return \Traversable
-     */
-    public function getIterator()
+    public function getIterator() : \Traversable
     {
         if (!\file_exists($this->prefix) || !$this->recursive && '' === $this->pattern) {
             return;
@@ -178,10 +166,7 @@ class GlobResource implements \IteratorAggregate, \ECSPrefix20210507\Symfony\Com
             (yield $path => $info);
         }
     }
-    /**
-     * @return string
-     */
-    private function computeHash()
+    private function computeHash() : string
     {
         $hash = \hash_init('md5');
         foreach ($this->getIterator() as $path => $info) {
@@ -189,11 +174,7 @@ class GlobResource implements \IteratorAggregate, \ECSPrefix20210507\Symfony\Com
         }
         return \hash_final($hash);
     }
-    /**
-     * @param string $pattern
-     * @return mixed[]
-     */
-    private function expandGlob($pattern)
+    private function expandGlob(string $pattern) : array
     {
         $segments = \preg_split('/\\{([^{}]*+)\\}/', $pattern, -1, \PREG_SPLIT_DELIM_CAPTURE);
         $paths = [$segments[0]];

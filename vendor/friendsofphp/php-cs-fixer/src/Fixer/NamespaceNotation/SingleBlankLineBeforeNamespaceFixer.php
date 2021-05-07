@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -23,18 +24,15 @@ final class SingleBlankLineBeforeNamespaceFixer extends AbstractLinesBeforeNames
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('There should be exactly one blank line before a namespace declaration.', [new CodeSample("<?php  namespace A {}\n"), new CodeSample("<?php\n\n\nnamespace A{}\n")]);
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_NAMESPACE);
     }
@@ -42,19 +40,15 @@ final class SingleBlankLineBeforeNamespaceFixer extends AbstractLinesBeforeNames
      * {@inheritdoc}
      *
      * Must run after NoBlankLinesAfterPhpdocFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -21;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             $token = $tokens[$index];

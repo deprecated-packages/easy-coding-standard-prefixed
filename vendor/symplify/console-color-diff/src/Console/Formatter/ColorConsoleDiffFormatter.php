@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\Console\Formatter;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -17,22 +18,22 @@ final class ColorConsoleDiffFormatter
      * @var string
      * @see https://regex101.com/r/ovLMDF/1
      */
-    const PLUS_START_REGEX = '#^(\\+.*)#';
+    private const PLUS_START_REGEX = '#^(\\+.*)#';
     /**
      * @var string
      * @see https://regex101.com/r/xwywpa/1
      */
-    const MINUT_START_REGEX = '#^(\\-.*)#';
+    private const MINUT_START_REGEX = '#^(\\-.*)#';
     /**
      * @var string
      * @see https://regex101.com/r/CMlwa8/1
      */
-    const AT_START_REGEX = '#^(@.*)#';
+    private const AT_START_REGEX = '#^(@.*)#';
     /**
      * @var string
      * @see https://regex101.com/r/qduj2O/1
      */
-    const NEWLINES_REGEX = "#\n\r|\n#";
+    private const NEWLINES_REGEX = "#\n\r|\n#";
     /**
      * @var string
      */
@@ -41,20 +42,11 @@ final class ColorConsoleDiffFormatter
     {
         $this->template = \sprintf('<comment>    ---------- begin diff ----------</comment>%s%%s%s<comment>    ----------- end diff -----------</comment>' . \PHP_EOL, \PHP_EOL, \PHP_EOL);
     }
-    /**
-     * @param string $diff
-     * @return string
-     */
-    public function format($diff)
+    public function format(string $diff) : string
     {
         return $this->formatWithTemplate($diff, $this->template);
     }
-    /**
-     * @param string $diff
-     * @param string $template
-     * @return string
-     */
-    private function formatWithTemplate($diff, $template)
+    private function formatWithTemplate(string $diff, string $template) : string
     {
         $escapedDiff = OutputFormatter::escape(\rtrim($diff));
         $escapedDiffLines = Strings::split($escapedDiff, self::NEWLINES_REGEX);
@@ -69,27 +61,15 @@ final class ColorConsoleDiffFormatter
         }, $escapedDiffLines);
         return \sprintf($template, \implode(\PHP_EOL, $coloredLines));
     }
-    /**
-     * @param string $string
-     * @return string
-     */
-    private function makePlusLinesGreen($string)
+    private function makePlusLinesGreen(string $string) : string
     {
         return Strings::replace($string, self::PLUS_START_REGEX, '<fg=green>$1</fg=green>');
     }
-    /**
-     * @param string $string
-     * @return string
-     */
-    private function makeMinusLinesRed($string)
+    private function makeMinusLinesRed(string $string) : string
     {
         return Strings::replace($string, self::MINUT_START_REGEX, '<fg=red>$1</fg=red>');
     }
-    /**
-     * @param string $string
-     * @return string
-     */
-    private function makeAtNoteCyan($string)
+    private function makeAtNoteCyan(string $string) : string
     {
         return Strings::replace($string, self::AT_START_REGEX, '<fg=cyan>$1</fg=cyan>');
     }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace ECSPrefix20210507\Jean85;
 
 use Composer\InstalledVersions;
@@ -10,10 +11,8 @@ class PrettyVersions
 {
     /**
      * @throws VersionMissingExceptionInterface When a package is provided ({@see ProvidedPackageException}) or replaced ({@see ReplacedPackageException})
-     * @param string $packageName
-     * @return \ECSPrefix20210507\Jean85\Version
      */
-    public static function getVersion($packageName)
+    public static function getVersion(string $packageName) : \ECSPrefix20210507\Jean85\Version
     {
         if (isset(InstalledVersions::getRawData()['versions'][$packageName]['provided'])) {
             throw ProvidedPackageException::create($packageName);
@@ -23,17 +22,11 @@ class PrettyVersions
         }
         return new \ECSPrefix20210507\Jean85\Version($packageName, InstalledVersions::getPrettyVersion($packageName), InstalledVersions::getReference($packageName));
     }
-    /**
-     * @return string
-     */
-    public static function getRootPackageName()
+    public static function getRootPackageName() : string
     {
         return InstalledVersions::getRootPackage()['name'];
     }
-    /**
-     * @return \ECSPrefix20210507\Jean85\Version
-     */
-    public static function getRootPackageVersion()
+    public static function getRootPackageVersion() : \ECSPrefix20210507\Jean85\Version
     {
         return new \ECSPrefix20210507\Jean85\Version(self::getRootPackageName(), InstalledVersions::getRootPackage()['pretty_version'], InstalledVersions::getRootPackage()['reference']);
     }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Output;
 
 use Symplify\EasyCodingStandard\Configuration\Configuration;
@@ -13,7 +14,7 @@ final class ConsoleOutputFormatter implements OutputFormatterInterface
     /**
      * @var string
      */
-    const NAME = 'console';
+    public const NAME = 'console';
     /**
      * @var EasyCodingStandardStyle
      */
@@ -22,21 +23,12 @@ final class ConsoleOutputFormatter implements OutputFormatterInterface
      * @var Configuration
      */
     private $configuration;
-    /**
-     * @param \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle
-     * @param \Symplify\EasyCodingStandard\Configuration\Configuration $configuration
-     */
-    public function __construct($easyCodingStandardStyle, $configuration)
+    public function __construct(EasyCodingStandardStyle $easyCodingStandardStyle, Configuration $configuration)
     {
         $this->easyCodingStandardStyle = $easyCodingStandardStyle;
         $this->configuration = $configuration;
     }
-    /**
-     * @param \Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult
-     * @param int $processedFilesCount
-     * @return int
-     */
-    public function report($errorAndDiffResult, $processedFilesCount)
+    public function report(ErrorAndDiffResult $errorAndDiffResult, int $processedFilesCount) : int
     {
         $this->reportFileDiffs($errorAndDiffResult->getFileDiffs());
         if ($errorAndDiffResult->getErrorCount() === 0 && $errorAndDiffResult->getFileDiffsCount() === 0) {
@@ -49,18 +41,14 @@ final class ConsoleOutputFormatter implements OutputFormatterInterface
         $this->easyCodingStandardStyle->newLine();
         return $this->configuration->isFixer() ? $this->printAfterFixerStatus($errorAndDiffResult) : $this->printNoFixerStatus($errorAndDiffResult);
     }
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : string
     {
         return self::NAME;
     }
     /**
      * @param FileDiff[] $fileDiffs
-     * @return void
      */
-    private function reportFileDiffs(array $fileDiffs)
+    private function reportFileDiffs(array $fileDiffs) : void
     {
         if ($fileDiffs === []) {
             return;
@@ -80,11 +68,7 @@ final class ConsoleOutputFormatter implements OutputFormatterInterface
             $this->easyCodingStandardStyle->listing($fileDiff->getAppliedCheckers());
         }
     }
-    /**
-     * @param \Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult
-     * @return int
-     */
-    private function printAfterFixerStatus($errorAndDiffResult)
+    private function printAfterFixerStatus(ErrorAndDiffResult $errorAndDiffResult) : int
     {
         if ($this->configuration->shouldShowErrorTable()) {
             $this->easyCodingStandardStyle->printErrors($errorAndDiffResult->getErrors());
@@ -97,11 +81,7 @@ final class ConsoleOutputFormatter implements OutputFormatterInterface
         $this->printErrorMessageFromErrorCounts($errorAndDiffResult->getErrorCount(), $errorAndDiffResult->getFileDiffsCount());
         return ShellCode::ERROR;
     }
-    /**
-     * @param \Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult
-     * @return int
-     */
-    private function printNoFixerStatus($errorAndDiffResult)
+    private function printNoFixerStatus(ErrorAndDiffResult $errorAndDiffResult) : int
     {
         if ($this->configuration->shouldShowErrorTable()) {
             $errors = $errorAndDiffResult->getErrors();
@@ -119,12 +99,7 @@ final class ConsoleOutputFormatter implements OutputFormatterInterface
         $this->printErrorMessageFromErrorCounts($errorAndDiffResult->getErrorCount(), $errorAndDiffResult->getFileDiffsCount());
         return ShellCode::ERROR;
     }
-    /**
-     * @return void
-     * @param int $errorCount
-     * @param int $fileDiffsCount
-     */
-    private function printErrorMessageFromErrorCounts($errorCount, $fileDiffsCount)
+    private function printErrorMessageFromErrorCounts(int $errorCount, int $fileDiffsCount) : void
     {
         if ($errorCount !== 0) {
             $errorMessage = \sprintf('Found %d error%s that need%s to be fixed manually.', $errorCount, $errorCount === 1 ? '' : 's', $errorCount === 1 ? 's' : '');

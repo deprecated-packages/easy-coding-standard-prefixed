@@ -22,9 +22,8 @@ interface ExtensionInterface
      * Loads a specific configuration.
      *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function load(array $configs, $container);
+    public function load(array $configs, ContainerBuilder $container);
     /**
      * Returns the namespace to be used for this extension (XML namespace).
      *

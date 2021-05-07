@@ -29,10 +29,7 @@ class InstalledVersions
         }
         return \false;
     }
-    /**
-     * @param \ECSPrefix20210507\Composer\Semver\VersionParser $parser
-     */
-    public static function satisfies($parser, $packageName, $constraint)
+    public static function satisfies(VersionParser $parser, $packageName, $constraint)
     {
         $constraint = $parser->parseConstraints($constraint);
         $provided = $parser->parseConstraints(self::getVersionRanges($packageName));

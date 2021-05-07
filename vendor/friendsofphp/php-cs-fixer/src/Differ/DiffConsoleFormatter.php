@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,21 +29,12 @@ final class DiffConsoleFormatter
      * @var string
      */
     private $template;
-    /**
-     * @param bool $isDecoratedOutput
-     * @param string $template
-     */
-    public function __construct($isDecoratedOutput, $template = '%s')
+    public function __construct(bool $isDecoratedOutput, string $template = '%s')
     {
         $this->isDecoratedOutput = $isDecoratedOutput;
         $this->template = $template;
     }
-    /**
-     * @param string $diff
-     * @param string $lineTemplate
-     * @return string
-     */
-    public function format($diff, $lineTemplate = '%s')
+    public function format(string $diff, string $lineTemplate = '%s') : string
     {
         $isDecorated = $this->isDecoratedOutput;
         $template = $isDecorated ? $this->template : Preg::replace('/<[^<>]+>/', '', $this->template);

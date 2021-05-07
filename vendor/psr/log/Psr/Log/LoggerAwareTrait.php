@@ -16,9 +16,9 @@ trait LoggerAwareTrait
     /**
      * Sets a logger.
      *
-     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $logger
+     * @param LoggerInterface $logger
      */
-    public function setLogger($logger)
+    public function setLogger(\ECSPrefix20210507\Psr\Log\LoggerInterface $logger)
     {
         $this->logger = $logger;
     }

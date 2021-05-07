@@ -23,19 +23,19 @@ interface ItemInterface extends CacheItemInterface
     /**
      * References the Unix timestamp stating when the item will expire.
      */
-    const METADATA_EXPIRY = 'expiry';
+    public const METADATA_EXPIRY = 'expiry';
     /**
      * References the time the item took to be created, in milliseconds.
      */
-    const METADATA_CTIME = 'ctime';
+    public const METADATA_CTIME = 'ctime';
     /**
      * References the list of tags that were assigned to the item, as string[].
      */
-    const METADATA_TAGS = 'tags';
+    public const METADATA_TAGS = 'tags';
     /**
      * Reserved characters that cannot be used in a key or tag.
      */
-    const RESERVED_CHARACTERS = '{}()/\\@:';
+    public const RESERVED_CHARACTERS = '{}()/\\@:';
     /**
      * Adds a tag to a cache item.
      *
@@ -48,12 +48,11 @@ interface ItemInterface extends CacheItemInterface
      * @throws InvalidArgumentException When $tag is not valid
      * @throws CacheException           When the item comes from a pool that is not tag-aware
      */
-    public function tag($tags);
+    public function tag($tags) : self;
     /**
      * Returns a list of metadata info that were saved alongside with the cached value.
      *
      * See ItemInterface::METADATA_* consts for keys potentially found in the returned array.
-     * @return mixed[]
      */
-    public function getMetadata();
+    public function getMetadata() : array;
 }

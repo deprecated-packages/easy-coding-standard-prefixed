@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\ValueObject\Error;
 
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -17,28 +18,17 @@ final class SystemError
      * @var SmartFileInfo
      */
     private $fileInfo;
-    /**
-     * @param int $line
-     * @param string $message
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $fileInfo
-     */
-    public function __construct($line, $message, $fileInfo)
+    public function __construct(int $line, string $message, SmartFileInfo $fileInfo)
     {
         $this->line = $line;
         $this->message = $message;
         $this->fileInfo = $fileInfo;
     }
-    /**
-     * @return string
-     */
-    public function getMessage()
+    public function getMessage() : string
     {
         return $this->message;
     }
-    /**
-     * @return string
-     */
-    public function getFileWithLine()
+    public function getFileWithLine() : string
     {
         return $this->fileInfo->getRelativeFilePathFromCwd() . ':' . $this->line;
     }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,9 +25,8 @@ final class CombineConsecutiveUnsetsFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Calling `unset` on multiple items should be done in one call.', [new CodeSample("<?php\nunset(\$a); unset(\$b);\n")]);
     }
@@ -35,28 +35,22 @@ final class CombineConsecutiveUnsetsFixer extends AbstractFixer
      *
      * Must run before NoExtraBlankLinesFixer, NoTrailingWhitespaceFixer, NoWhitespaceInBlankLineFixer, SpaceAfterSemicolonFixer.
      * Must run after NoEmptyStatementFixer, NoUnsetOnPropertyFixer, NoUselessElseFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 24;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_UNSET);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_UNSET)) {
@@ -87,11 +81,8 @@ final class CombineConsecutiveUnsetsFixer extends AbstractFixer
     }
     /**
      * @param int[] $indices
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $offset
      */
-    private function clearOffsetTokens($tokens, $offset, array $indices)
+    private function clearOffsetTokens(Tokens $tokens, int $offset, array $indices) : void
     {
         foreach ($indices as $index) {
             $tokens->clearTokenAndMergeSurroundingWhitespace($index + $offset);
@@ -109,10 +100,8 @@ final class CombineConsecutiveUnsetsFixer extends AbstractFixer
      * Or the index to where the method looked for an call.
      *
      * @return int|int[]
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
      */
-    private function getPreviousUnsetCall($tokens, $index)
+    private function getPreviousUnsetCall(Tokens $tokens, int $index)
     {
         $previousUnsetSemicolon = $tokens->getPrevMeaningfulToken($index);
         if (null === $previousUnsetSemicolon) {
@@ -144,9 +133,8 @@ final class CombineConsecutiveUnsetsFixer extends AbstractFixer
      * @param int $to    Upper boundary index
      *
      * @return int Number of tokens inserted
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function moveTokens($tokens, $start, $end, $to)
+    private function moveTokens(Tokens $tokens, int $start, int $end, int $to) : int
     {
         $added = 0;
         for ($i = $start + 1; $i < $end; $i += 2) {

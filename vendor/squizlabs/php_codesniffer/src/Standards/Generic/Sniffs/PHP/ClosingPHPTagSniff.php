@@ -32,7 +32,7 @@ class ClosingPHPTagSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $closeTag = $phpcsFile->findNext(\T_CLOSE_TAG, $stackPtr);
         if ($closeTag === \false) {

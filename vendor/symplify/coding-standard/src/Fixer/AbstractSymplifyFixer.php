@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer;
 
 use PhpCsFixer\Fixer\FixerInterface;
@@ -8,49 +9,34 @@ use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 abstract class AbstractSymplifyFixer implements FixerInterface
 {
-    /**
-     * @return int
-     */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : string
     {
         return self::class;
     }
-    /**
-     * @return bool
-     */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \false;
     }
-    /**
-     * @param \SplFileInfo $file
-     * @return bool
-     */
-    public function supports($file)
+    public function supports(SplFileInfo $file) : bool
     {
         return \true;
     }
     /**
-     * @return mixed[]
+     * @return Token[]
      * @param Tokens<Token> $tokens
      */
-    protected function reverseTokens($tokens)
+    protected function reverseTokens(Tokens $tokens) : array
     {
         return \array_reverse($tokens->toArray(), \true);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return \PhpCsFixer\Tokenizer\Token|null
-     * @param int $index
      */
-    protected function getNextMeaningfulToken($tokens, $index)
+    protected function getNextMeaningfulToken(Tokens $tokens, int $index) : ?Token
     {
         $nextMeaninfulTokenPosition = $tokens->getNextMeaningfulToken($index);
         if ($nextMeaninfulTokenPosition === null) {
@@ -60,10 +46,8 @@ abstract class AbstractSymplifyFixer implements FixerInterface
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return \PhpCsFixer\Tokenizer\Token|null
-     * @param int $index
      */
-    protected function getPreviousToken($tokens, $index)
+    protected function getPreviousToken(Tokens $tokens, int $index) : ?Token
     {
         $previousIndex = $index - 1;
         if (!isset($tokens[$previousIndex])) {

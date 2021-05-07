@@ -20,40 +20,21 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class SplCaster
 {
-    const SPL_FILE_OBJECT_FLAGS = [\SplFileObject::DROP_NEW_LINE => 'DROP_NEW_LINE', \SplFileObject::READ_AHEAD => 'READ_AHEAD', \SplFileObject::SKIP_EMPTY => 'SKIP_EMPTY', \SplFileObject::READ_CSV => 'READ_CSV'];
-    /**
-     * @param \ArrayObject $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castArrayObject($c, array $a, $stub, $isNested)
+    private const SPL_FILE_OBJECT_FLAGS = [\SplFileObject::DROP_NEW_LINE => 'DROP_NEW_LINE', \SplFileObject::READ_AHEAD => 'READ_AHEAD', \SplFileObject::SKIP_EMPTY => 'SKIP_EMPTY', \SplFileObject::READ_CSV => 'READ_CSV'];
+    public static function castArrayObject(\ArrayObject $c, array $a, Stub $stub, bool $isNested)
     {
         return self::castSplArray($c, $a, $stub, $isNested);
     }
-    /**
-     * @param \ArrayIterator $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castArrayIterator($c, array $a, $stub, $isNested)
+    public static function castArrayIterator(\ArrayIterator $c, array $a, Stub $stub, bool $isNested)
     {
         return self::castSplArray($c, $a, $stub, $isNested);
     }
-    /**
-     * @param \Iterator $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     */
-    public static function castHeap($c, array $a, $stub, $isNested)
+    public static function castHeap(\Iterator $c, array $a, Stub $stub, $isNested)
     {
         $a += [\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'heap' => \iterator_to_array(clone $c)];
         return $a;
     }
-    /**
-     * @param \SplDoublyLinkedList $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castDoublyLinkedList($c, array $a, $stub, $isNested)
+    public static function castDoublyLinkedList(\SplDoublyLinkedList $c, array $a, Stub $stub, bool $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $mode = $c->getIteratorMode();
@@ -62,12 +43,7 @@ class SplCaster
         $c->setIteratorMode($mode);
         return $a;
     }
-    /**
-     * @param \SplFileInfo $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castFileInfo($c, array $a, $stub, $isNested)
+    public static function castFileInfo(\SplFileInfo $c, array $a, Stub $stub, bool $isNested)
     {
         static $map = ['path' => 'getPath', 'filename' => 'getFilename', 'basename' => 'getBasename', 'pathname' => 'getPathname', 'extension' => 'getExtension', 'realPath' => 'getRealPath', 'aTime' => 'getATime', 'mTime' => 'getMTime', 'cTime' => 'getCTime', 'inode' => 'getInode', 'size' => 'getSize', 'perms' => 'getPerms', 'owner' => 'getOwner', 'group' => 'getGroup', 'type' => 'getType', 'writable' => 'isWritable', 'readable' => 'isReadable', 'executable' => 'isExecutable', 'file' => 'isFile', 'dir' => 'isDir', 'link' => 'isLink', 'linkTarget' => 'getLinkTarget'];
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
@@ -115,12 +91,7 @@ class SplCaster
         }
         return $a;
     }
-    /**
-     * @param \SplFileObject $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castFileObject($c, array $a, $stub, $isNested)
+    public static function castFileObject(\SplFileObject $c, array $a, Stub $stub, bool $isNested)
     {
         static $map = ['csvControl' => 'getCsvControl', 'flags' => 'getFlags', 'maxLineLen' => 'getMaxLineLen', 'fstat' => 'fstat', 'eof' => 'eof', 'key' => 'key'];
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
@@ -144,12 +115,7 @@ class SplCaster
         }
         return $a;
     }
-    /**
-     * @param \SplObjectStorage $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castObjectStorage($c, array $a, $stub, $isNested)
+    public static function castObjectStorage(\SplObjectStorage $c, array $a, Stub $stub, bool $isNested)
     {
         $storage = [];
         unset($a[\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_DYNAMIC . "\0gcdata"]);
@@ -162,32 +128,17 @@ class SplCaster
         $a += [\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'storage' => $storage];
         return $a;
     }
-    /**
-     * @param \OuterIterator $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castOuterIterator($c, array $a, $stub, $isNested)
+    public static function castOuterIterator(\OuterIterator $c, array $a, Stub $stub, bool $isNested)
     {
         $a[\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'innerIterator'] = $c->getInnerIterator();
         return $a;
     }
-    /**
-     * @param \WeakReference $c
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     */
-    public static function castWeakReference($c, array $a, $stub, $isNested)
+    public static function castWeakReference(\WeakReference $c, array $a, Stub $stub, bool $isNested)
     {
         $a[\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'object'] = $c->get();
         return $a;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
-     * @param bool $isNested
-     * @return mixed[]
-     */
-    private static function castSplArray($c, array $a, $stub, $isNested)
+    private static function castSplArray($c, array $a, Stub $stub, bool $isNested) : array
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $flags = $c->getFlags();

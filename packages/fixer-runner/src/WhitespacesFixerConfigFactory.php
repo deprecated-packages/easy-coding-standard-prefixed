@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\FixerRunner;
 
 use PhpCsFixer\WhitespacesFixerConfig;
@@ -12,17 +13,11 @@ final class WhitespacesFixerConfigFactory
      * @var ParameterProvider
      */
     private $parameterProvider;
-    /**
-     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
-     */
-    public function __construct($parameterProvider)
+    public function __construct(ParameterProvider $parameterProvider)
     {
         $this->parameterProvider = $parameterProvider;
     }
-    /**
-     * @return \PhpCsFixer\WhitespacesFixerConfig
-     */
-    public function create()
+    public function create() : WhitespacesFixerConfig
     {
         $lineEnding = $this->parameterProvider->provideParameter('line_ending');
         if ($lineEnding === '\\n') {
@@ -30,10 +25,7 @@ final class WhitespacesFixerConfigFactory
         }
         return new WhitespacesFixerConfig($this->resolveIndentation(), $lineEnding);
     }
-    /**
-     * @return string
-     */
-    private function resolveIndentation()
+    private function resolveIndentation() : string
     {
         $indentation = $this->parameterProvider->provideParameter('indentation');
         if ($this->isOneTab($indentation)) {
@@ -48,22 +40,14 @@ final class WhitespacesFixerConfigFactory
         $allowedValues = ['tab', 'spaces', Spacing::TWO_SPACES, Spacing::FOUR_SPACES, Spacing::ONE_TAB];
         throw new WhitespaceConfigurationException(\sprintf('Value "%s" is not supported in "parameters > indentation".%sUse one of: "%s".', $indentation, \PHP_EOL, \implode('", "', $allowedValues)));
     }
-    /**
-     * @param string $indentation
-     * @return bool
-     */
-    private function isOneTab($indentation)
+    private function isOneTab(string $indentation) : bool
     {
         if ($indentation === 'tab') {
             return \true;
         }
         return $indentation === Spacing::ONE_TAB;
     }
-    /**
-     * @param string $indentation
-     * @return bool
-     */
-    private function isFourSpaces($indentation)
+    private function isFourSpaces(string $indentation) : bool
     {
         if ($indentation === 'spaces') {
             return \true;

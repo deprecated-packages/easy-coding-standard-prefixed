@@ -30,35 +30,24 @@ use ECSPrefix20210507\Symfony\Component\String\Exception\InvalidArgumentExceptio
  */
 class UnicodeString extends \ECSPrefix20210507\Symfony\Component\String\AbstractUnicodeString
 {
-    /**
-     * @param string $string
-     */
-    public function __construct($string = '')
+    public function __construct(string $string = '')
     {
         $this->string = \normalizer_is_normalized($string) ? $string : \normalizer_normalize($string);
         if (\false === $this->string) {
             throw new InvalidArgumentException('Invalid UTF-8 string.');
         }
     }
-    /**
-     * @param string ...$suffix
-     * @return \ECSPrefix20210507\Symfony\Component\String\AbstractString
-     */
-    public function append(...$suffix)
+    public function append(string ...$suffix) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
-        $str->string = $this->string . (1 >= \count($suffix) ? isset($suffix[0]) ? $suffix[0] : '' : \implode('', $suffix));
+        $str->string = $this->string . (1 >= \count($suffix) ? $suffix[0] ?? '' : \implode('', $suffix));
         \normalizer_is_normalized($str->string) ?: ($str->string = \normalizer_normalize($str->string));
         if (\false === $str->string) {
             throw new InvalidArgumentException('Invalid UTF-8 string.');
         }
         return $str;
     }
-    /**
-     * @param int $length
-     * @return mixed[]
-     */
-    public function chunk($length = 1)
+    public function chunk(int $length = 1) : array
     {
         if (1 > $length) {
             throw new InvalidArgumentException('The chunk length must be greater than zero.');
@@ -80,10 +69,7 @@ class UnicodeString extends \ECSPrefix20210507\Symfony\Component\String\Abstract
         }
         return $chunks;
     }
-    /**
-     * @return bool
-     */
-    public function endsWith($suffix)
+    public function endsWith($suffix) : bool
     {
         if ($suffix instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $suffix = $suffix->string;
@@ -102,10 +88,7 @@ class UnicodeString extends \ECSPrefix20210507\Symfony\Component\String\Abstract
         }
         return $suffix === \grapheme_extract($this->string, \strlen($suffix), \GRAPHEME_EXTR_MAXBYTES, \strlen($this->string) - \strlen($suffix));
     }
-    /**
-     * @return bool
-     */
-    public function equalsTo($string)
+    public function equalsTo($string) : bool
     {
         if ($string instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $string = $string->string;
@@ -121,11 +104,7 @@ class UnicodeString extends \ECSPrefix20210507\Symfony\Component\String\Abstract
         }
         return $string === $this->string;
     }
-    /**
-     * @return int|null
-     * @param int $offset
-     */
-    public function indexOf($needle, $offset = 0)
+    public function indexOf($needle, int $offset = 0) : ?int
     {
         if ($needle instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
@@ -146,11 +125,7 @@ class UnicodeString extends \ECSPrefix20210507\Symfony\Component\String\Abstract
         }
         return \false === $i ? null : $i;
     }
-    /**
-     * @return int|null
-     * @param int $offset
-     */
-    public function indexOfLast($needle, $offset = 0)
+    public function indexOfLast($needle, int $offset = 0) : ?int
     {
         if ($needle instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $needle = $needle->string;
@@ -175,28 +150,20 @@ class UnicodeString extends \ECSPrefix20210507\Symfony\Component\String\Abstract
         $i = $this->ignoreCase ? \grapheme_strripos($string, $needle, $offset) : \grapheme_strrpos($string, $needle, $offset);
         return \false === $i ? null : $i;
     }
-    /**
-     * @param string $lastGlue
-     * @return \ECSPrefix20210507\Symfony\Component\String\AbstractString
-     */
-    public function join(array $strings, $lastGlue = null)
+    public function join(array $strings, string $lastGlue = null) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = parent::join($strings, $lastGlue);
         \normalizer_is_normalized($str->string) ?: ($str->string = \normalizer_normalize($str->string));
         return $str;
     }
-    /**
-     * @return int
-     */
-    public function length()
+    public function length() : int
     {
         return \grapheme_strlen($this->string);
     }
     /**
-     * @return mixed
-     * @param int $form
+     * @return static
      */
-    public function normalize($form = self::NFC)
+    public function normalize(int $form = self::NFC) : parent
     {
         $str = clone $this;
         if (\in_array($form, [self::NFC, self::NFKC], \true)) {
@@ -209,26 +176,17 @@ class UnicodeString extends \ECSPrefix20210507\Symfony\Component\String\Abstract
         }
         return $str;
     }
-    /**
-     * @param string ...$prefix
-     * @return \ECSPrefix20210507\Symfony\Component\String\AbstractString
-     */
-    public function prepend(...$prefix)
+    public function prepend(string ...$prefix) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
-        $str->string = (1 >= \count($prefix) ? isset($prefix[0]) ? $prefix[0] : '' : \implode('', $prefix)) . $this->string;
+        $str->string = (1 >= \count($prefix) ? $prefix[0] ?? '' : \implode('', $prefix)) . $this->string;
         \normalizer_is_normalized($str->string) ?: ($str->string = \normalizer_normalize($str->string));
         if (\false === $str->string) {
             throw new InvalidArgumentException('Invalid UTF-8 string.');
         }
         return $str;
     }
-    /**
-     * @param string $from
-     * @param string $to
-     * @return \ECSPrefix20210507\Symfony\Component\String\AbstractString
-     */
-    public function replace($from, $to)
+    public function replace(string $from, string $to) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         \normalizer_is_normalized($from) ?: ($from = \normalizer_normalize($from));
@@ -249,60 +207,39 @@ class UnicodeString extends \ECSPrefix20210507\Symfony\Component\String\Abstract
         }
         return $str;
     }
-    /**
-     * @param string $fromRegexp
-     * @return \ECSPrefix20210507\Symfony\Component\String\AbstractString
-     */
-    public function replaceMatches($fromRegexp, $to)
+    public function replaceMatches(string $fromRegexp, $to) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = parent::replaceMatches($fromRegexp, $to);
         \normalizer_is_normalized($str->string) ?: ($str->string = \normalizer_normalize($str->string));
         return $str;
     }
-    /**
-     * @param int $start
-     * @param int $length
-     * @return \ECSPrefix20210507\Symfony\Component\String\AbstractString
-     */
-    public function slice($start = 0, $length = null)
+    public function slice(int $start = 0, int $length = null) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         if (\PHP_VERSION_ID < 80000 && 0 > $start && \grapheme_strlen($this->string) < -$start) {
             $start = 0;
         }
-        $str->string = (string) \grapheme_substr($this->string, $start, isset($length) ? $length : 2147483647);
+        $str->string = (string) \grapheme_substr($this->string, $start, $length ?? 2147483647);
         return $str;
     }
-    /**
-     * @param string $replacement
-     * @param int $start
-     * @param int $length
-     * @return \ECSPrefix20210507\Symfony\Component\String\AbstractString
-     */
-    public function splice($replacement, $start = 0, $length = null)
+    public function splice(string $replacement, int $start = 0, int $length = null) : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
         $str = clone $this;
         if (\PHP_VERSION_ID < 80000 && 0 > $start && \grapheme_strlen($this->string) < -$start) {
             $start = 0;
         }
         $start = $start ? \strlen(\grapheme_substr($this->string, 0, $start)) : 0;
-        $length = $length ? \strlen(\grapheme_substr($this->string, $start, isset($length) ? $length : 2147483647)) : $length;
-        $str->string = \substr_replace($this->string, $replacement, $start, isset($length) ? $length : 2147483647);
+        $length = $length ? \strlen(\grapheme_substr($this->string, $start, $length ?? 2147483647)) : $length;
+        $str->string = \substr_replace($this->string, $replacement, $start, $length ?? 2147483647);
         \normalizer_is_normalized($str->string) ?: ($str->string = \normalizer_normalize($str->string));
         if (\false === $str->string) {
             throw new InvalidArgumentException('Invalid UTF-8 string.');
         }
         return $str;
     }
-    /**
-     * @param string $delimiter
-     * @param int $limit
-     * @param int $flags
-     * @return mixed[]
-     */
-    public function split($delimiter, $limit = null, $flags = null)
+    public function split(string $delimiter, int $limit = null, int $flags = null) : array
     {
-        if (1 > ($limit = isset($limit) ? $limit : 2147483647)) {
+        if (1 > ($limit = $limit ?? 2147483647)) {
             throw new InvalidArgumentException('Split limit must be a positive integer.');
         }
         if ('' === $delimiter) {
@@ -329,10 +266,7 @@ class UnicodeString extends \ECSPrefix20210507\Symfony\Component\String\Abstract
         $chunks[] = clone $str;
         return $chunks;
     }
-    /**
-     * @return bool
-     */
-    public function startsWith($prefix)
+    public function startsWith($prefix) : bool
     {
         if ($prefix instanceof \ECSPrefix20210507\Symfony\Component\String\AbstractString) {
             $prefix = $prefix->string;

@@ -17,10 +17,10 @@ class PreconditionFailedHttpException extends \ECSPrefix20210507\Symfony\Compone
 {
     /**
      * @param string|null     $message  The internal exception message
-     * @param \Throwable $previous The previous exception
+     * @param \Throwable|null $previous The previous exception
      * @param int             $code     The internal exception code
      */
-    public function __construct($message = '', $previous = null, $code = 0, array $headers = [])
+    public function __construct(?string $message = '', \Throwable $previous = null, int $code = 0, array $headers = [])
     {
         parent::__construct(412, $message, $previous, $headers, $code);
     }

@@ -46,7 +46,7 @@ class NamedColoursSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr - 1]['code'] === T_HASH || $tokens[$stackPtr - 1]['code'] === T_STRING_CONCAT) {

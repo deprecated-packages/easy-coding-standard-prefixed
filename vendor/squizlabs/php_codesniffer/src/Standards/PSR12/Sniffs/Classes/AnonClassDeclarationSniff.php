@@ -47,7 +47,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if (isset($tokens[$stackPtr]['scope_opener']) === \false) {
@@ -118,7 +118,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
      *
      * @return void
      */
-    public function processSingleLineArgumentList($phpcsFile, $stackPtr)
+    public function processSingleLineArgumentList(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $openBracket = $tokens[$stackPtr]['parenthesis_opener'];
@@ -194,7 +194,7 @@ class AnonClassDeclarationSniff extends ClassDeclarationSniff
      *
      * @return void
      */
-    public function processMultiLineArgumentList($phpcsFile, $stackPtr)
+    public function processMultiLineArgumentList(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $openBracket = $tokens[$stackPtr]['parenthesis_opener'];

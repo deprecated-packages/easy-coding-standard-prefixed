@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Spacing;
 
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -21,11 +22,11 @@ final class NewlineServiceDefinitionConfigFixer extends AbstractSymplifyFixer im
     /**
      * @var string
      */
-    const ERROR_MESSAGE = 'Add newline for a fluent call on service definition in Symfony config';
+    private const ERROR_MESSAGE = 'Add newline for a fluent call on service definition in Symfony config';
     /**
      * @var string[]
      */
-    const FLUENT_METHOD_NAMES = ['call', 'property', 'args', 'arg'];
+    private const FLUENT_METHOD_NAMES = ['call', 'property', 'args', 'arg'];
     /**
      * @var WhitespacesFixerConfig
      */
@@ -34,36 +35,26 @@ final class NewlineServiceDefinitionConfigFixer extends AbstractSymplifyFixer im
      * @var SymfonyClosureAnalyzer
      */
     private $symfonyClosureAnalyzer;
-    /**
-     * @param \PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig
-     * @param \Symplify\CodingStandard\TokenAnalyzer\SymfonyClosureAnalyzer $symfonyClosureAnalyzer
-     */
-    public function __construct($whitespacesFixerConfig, $symfonyClosureAnalyzer)
+    public function __construct(WhitespacesFixerConfig $whitespacesFixerConfig, SymfonyClosureAnalyzer $symfonyClosureAnalyzer)
     {
         $this->whitespacesFixerConfig = $whitespacesFixerConfig;
         $this->symfonyClosureAnalyzer = $symfonyClosureAnalyzer;
     }
-    /**
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
-     */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAllTokenKindsFound([\T_RETURN, \T_STATIC, \T_FUNCTION, \T_VARIABLE, \T_STRING, \T_OBJECT_OPERATOR]);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \SplFileInfo $file
      */
-    public function fix($file, $tokens)
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         if (!$this->symfonyClosureAnalyzer->isContainerConfiguratorClosure($tokens)) {
             return;
@@ -87,10 +78,7 @@ final class NewlineServiceDefinitionConfigFixer extends AbstractSymplifyFixer im
             $tokens->ensureWhitespaceAtIndex($index, 0, $newlineAndIndent);
         }
     }
-    /**
-     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
-     */
-    public function getRuleDefinition()
+    public function getRuleDefinition() : RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -117,19 +105,16 @@ CODE_SAMPLE
      * Must run before
      *
      * @see \PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer::getPriority()
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 39;
     }
     /**
      * @param string[] $methodNames
      * @param Tokens<Token> $tokens
-     * @param int $index
-     * @return bool
      */
-    private function isNextTokenMethodCallNamed($tokens, $index, array $methodNames)
+    private function isNextTokenMethodCallNamed(Tokens $tokens, int $index, array $methodNames) : bool
     {
         $nextToken = $this->getNextMeaningfulToken($tokens, $index);
         if (!$nextToken instanceof Token) {

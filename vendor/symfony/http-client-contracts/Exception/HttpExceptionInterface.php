@@ -18,8 +18,5 @@ use ECSPrefix20210507\Symfony\Contracts\HttpClient\ResponseInterface;
  */
 interface HttpExceptionInterface extends \ECSPrefix20210507\Symfony\Contracts\HttpClient\Exception\ExceptionInterface
 {
-    /**
-     * @return \ECSPrefix20210507\Symfony\Contracts\HttpClient\ResponseInterface
-     */
-    public function getResponse();
+    public function getResponse() : ResponseInterface;
 }

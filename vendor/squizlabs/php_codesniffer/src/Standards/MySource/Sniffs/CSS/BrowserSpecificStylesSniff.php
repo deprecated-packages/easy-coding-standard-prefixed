@@ -48,7 +48,7 @@ class BrowserSpecificStylesSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         // Ignore files with browser-specific suffixes.
         $filename = $phpcsFile->getFilename();

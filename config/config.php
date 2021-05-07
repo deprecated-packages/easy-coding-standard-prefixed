@@ -1,11 +1,12 @@
 <?php
 
+declare (strict_types=1);
 namespace ECSPrefix20210507;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
 use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
-return static function (ContainerConfigurator $containerConfigurator) {
+return static function (ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(__DIR__ . '/services.php');
     $containerConfigurator->import(__DIR__ . '/../packages/*/config/*.php');
     $parameters = $containerConfigurator->parameters();

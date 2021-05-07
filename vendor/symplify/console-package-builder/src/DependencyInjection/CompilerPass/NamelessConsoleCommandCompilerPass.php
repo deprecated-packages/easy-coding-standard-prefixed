@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\ConsolePackageBuilder\DependencyInjection\CompilerPass;
 
 use ECSPrefix20210507\Symfony\Component\Console\Command\Command;
@@ -11,11 +12,7 @@ use Symplify\PackageBuilder\Console\Command\CommandNaming;
  */
 final class NamelessConsoleCommandCompilerPass implements CompilerPassInterface
 {
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     */
-    public function process($containerBuilder)
+    public function process(ContainerBuilder $containerBuilder) : void
     {
         foreach ($containerBuilder->getDefinitions() as $definition) {
             $definitionClass = $definition->getClass();

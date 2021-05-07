@@ -11,33 +11,24 @@
 namespace ECSPrefix20210507\Symfony\Component\String;
 
 if (!\function_exists(\ECSPrefix20210507\Symfony\Component\String\u::class)) {
-    /**
-     * @param string|null $string
-     * @return \ECSPrefix20210507\Symfony\Component\String\UnicodeString
-     */
-    function u($string = '')
+    function u(?string $string = '') : \ECSPrefix20210507\Symfony\Component\String\UnicodeString
     {
-        return new \ECSPrefix20210507\Symfony\Component\String\UnicodeString(isset($string) ? $string : '');
+        return new \ECSPrefix20210507\Symfony\Component\String\UnicodeString($string ?? '');
     }
 }
 if (!\function_exists(\ECSPrefix20210507\Symfony\Component\String\b::class)) {
-    /**
-     * @param string|null $string
-     * @return \ECSPrefix20210507\Symfony\Component\String\ByteString
-     */
-    function b($string = '')
+    function b(?string $string = '') : \ECSPrefix20210507\Symfony\Component\String\ByteString
     {
-        return new \ECSPrefix20210507\Symfony\Component\String\ByteString(isset($string) ? $string : '');
+        return new \ECSPrefix20210507\Symfony\Component\String\ByteString($string ?? '');
     }
 }
 if (!\function_exists(\ECSPrefix20210507\Symfony\Component\String\s::class)) {
     /**
-     * @return \ECSPrefix20210507\Symfony\Component\String\AbstractString
-     * @param string|null $string
+     * @return UnicodeString|ByteString
      */
-    function s($string = '')
+    function s(?string $string = '') : \ECSPrefix20210507\Symfony\Component\String\AbstractString
     {
-        $string = isset($string) ? $string : '';
+        $string = $string ?? '';
         return \preg_match('//u', $string) ? new \ECSPrefix20210507\Symfony\Component\String\UnicodeString($string) : new \ECSPrefix20210507\Symfony\Component\String\ByteString($string);
     }
 }

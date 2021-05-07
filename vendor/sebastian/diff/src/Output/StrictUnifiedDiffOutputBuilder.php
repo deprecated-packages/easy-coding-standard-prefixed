@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of sebastian/diff.
  *
@@ -86,10 +87,7 @@ final class StrictUnifiedDiffOutputBuilder implements \ECSPrefix20210507\Sebasti
         $this->commonLineThreshold = $options['commonLineThreshold'];
         $this->contextLines = $options['contextLines'];
     }
-    /**
-     * @return string
-     */
-    public function getDiff(array $diff)
+    public function getDiff(array $diff) : string
     {
         if (0 === count($diff)) {
             return '';
@@ -109,10 +107,7 @@ final class StrictUnifiedDiffOutputBuilder implements \ECSPrefix20210507\Sebasti
         $last = substr($diff, -1);
         return "\n" !== $last && "\r" !== $last ? $diff . "\n" : $diff;
     }
-    /**
-     * @return void
-     */
-    private function writeDiffHunks($output, array $diff)
+    private function writeDiffHunks($output, array $diff) : void
     {
         // detect "No newline at end of file" and insert into `$diff` if needed
         $upperLimit = count($diff);
@@ -206,16 +201,7 @@ final class StrictUnifiedDiffOutputBuilder implements \ECSPrefix20210507\Sebasti
         $toRange -= $sameCount;
         $this->writeHunk($diff, $hunkCapture - $contextStartOffset, $i - $sameCount + $contextEndOffset + 1, $fromStart - $contextStartOffset, $fromRange + $contextStartOffset + $contextEndOffset, $toStart - $contextStartOffset, $toRange + $contextStartOffset + $contextEndOffset, $output);
     }
-    /**
-     * @return void
-     * @param int $diffStartIndex
-     * @param int $diffEndIndex
-     * @param int $fromStart
-     * @param int $fromRange
-     * @param int $toStart
-     * @param int $toRange
-     */
-    private function writeHunk(array $diff, $diffStartIndex, $diffEndIndex, $fromStart, $fromRange, $toStart, $toRange, $output)
+    private function writeHunk(array $diff, int $diffStartIndex, int $diffEndIndex, int $fromStart, int $fromRange, int $toStart, int $toRange, $output) : void
     {
         fwrite($output, '@@ -' . $fromStart);
         if (!$this->collapseRanges || 1 !== $fromRange) {
@@ -246,21 +232,13 @@ final class StrictUnifiedDiffOutputBuilder implements \ECSPrefix20210507\Sebasti
             //}
         }
     }
-    /**
-     * @return void
-     * @param string $option
-     */
-    private function assertString(array $options, $option)
+    private function assertString(array $options, string $option) : void
     {
         if (!is_string($options[$option])) {
             throw new ConfigurationException($option, 'a string', $options[$option]);
         }
     }
-    /**
-     * @return void
-     * @param string $option
-     */
-    private function assertStringOrNull(array $options, $option)
+    private function assertStringOrNull(array $options, string $option) : void
     {
         if (null !== $options[$option] && !is_string($options[$option])) {
             throw new ConfigurationException($option, 'a string or <null>', $options[$option]);

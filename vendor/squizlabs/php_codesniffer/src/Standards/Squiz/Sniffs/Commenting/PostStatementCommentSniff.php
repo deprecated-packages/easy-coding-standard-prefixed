@@ -47,7 +47,7 @@ class PostStatementCommentSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if (\substr($tokens[$stackPtr]['content'], 0, 2) !== '//') {

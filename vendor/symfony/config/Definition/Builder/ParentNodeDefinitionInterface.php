@@ -37,9 +37,8 @@ interface ParentNodeDefinitionInterface extends \ECSPrefix20210507\Symfony\Compo
      *     ;
      *
      * @return $this
-     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeDefinition $node
      */
-    public function append($node);
+    public function append(\ECSPrefix20210507\Symfony\Component\Config\Definition\Builder\NodeDefinition $node);
     /**
      * Gets the child node definitions.
      *

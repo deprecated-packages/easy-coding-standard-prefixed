@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -31,20 +32,15 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
     private $classyElements;
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         // fetch indexes one time, this is safe as we never add or remove a token during fixing
         $analyzer = new TokensAnalyzer($tokens);
@@ -61,15 +57,12 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * Fixes Doctrine annotations from the given PHPDoc style comment.
-     * @return void
-     * @param DoctrineAnnotationTokens $doctrineAnnotationTokens
      */
-    protected abstract function fixAnnotations($doctrineAnnotationTokens);
+    protected abstract function fixAnnotations(DoctrineAnnotationTokens $doctrineAnnotationTokens) : void;
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('ignored_tags', 'List of tags that must not be treated as Doctrine Annotations.'))->setAllowedTypes(['array'])->setAllowedValues([static function (array $values) {
             foreach ($values as $value) {
@@ -181,12 +174,7 @@ abstract class AbstractDoctrineAnnotationFixer extends \PhpCsFixer\AbstractFixer
             'override',
         ])->getOption()]);
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @return bool
-     */
-    private function nextElementAcceptsDoctrineAnnotations($tokens, $index)
+    private function nextElementAcceptsDoctrineAnnotations(Tokens $tokens, int $index) : bool
     {
         do {
             $index = $tokens->getNextMeaningfulToken($index);

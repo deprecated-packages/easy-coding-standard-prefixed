@@ -20,18 +20,12 @@ class ExpressionRequestMatcher extends \ECSPrefix20210507\Symfony\Component\Http
 {
     private $language;
     private $expression;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\ExpressionLanguage\ExpressionLanguage $language
-     */
-    public function setExpression($language, $expression)
+    public function setExpression(ExpressionLanguage $language, $expression)
     {
         $this->language = $language;
         $this->expression = $expression;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     */
-    public function matches($request)
+    public function matches(\ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request)
     {
         if (!$this->language) {
             throw new \LogicException('Unable to match the request as the expression language is not available.');

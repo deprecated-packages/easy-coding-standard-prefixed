@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -34,12 +35,12 @@ final class ParamReturnAndVarTagMalformsFixer extends AbstractSymplifyFixer impl
     /**
      * @var string
      */
-    const ERROR_MESSAGE = 'Fixes @param, @return, @var and inline @var annotations broken formats';
+    private const ERROR_MESSAGE = 'Fixes @param, @return, @var and inline @var annotations broken formats';
     /**
      * @var string
      * @see https://regex101.com/r/8iqNuR/1
      */
-    const TYPE_ANNOTATION_REGEX = '#@(param|return|var)#';
+    private const TYPE_ANNOTATION_REGEX = '#@(param|return|var)#';
     /**
      * @var MalformWorkerInterface[]
      */
@@ -51,18 +52,14 @@ final class ParamReturnAndVarTagMalformsFixer extends AbstractSymplifyFixer impl
     {
         $this->malformWorkers = $malformWorkers;
     }
-    /**
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
-     */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         if (!$tokens->isAnyTokenKindsFound([\T_DOC_COMMENT, \T_COMMENT])) {
             return \false;
@@ -71,10 +68,8 @@ final class ParamReturnAndVarTagMalformsFixer extends AbstractSymplifyFixer impl
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \SplFileInfo $file
      */
-    public function fix($file, $tokens)
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         $reversedTokens = $this->reverseTokens($tokens);
         foreach ($reversedTokens as $index => $token) {
@@ -99,16 +94,12 @@ final class ParamReturnAndVarTagMalformsFixer extends AbstractSymplifyFixer impl
      * Must run before
      *
      * @see \PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer::getPriority()
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return -37;
     }
-    /**
-     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
-     */
-    public function getRuleDefinition()
+    public function getRuleDefinition() : RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 /**

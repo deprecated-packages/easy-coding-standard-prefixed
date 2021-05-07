@@ -22,7 +22,6 @@ interface DescriptorInterface
      * Describes an object if supported.
      *
      * @param object $object
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
      */
-    public function describe($output, $object, array $options = []);
+    public function describe(OutputInterface $output, $object, array $options = []);
 }

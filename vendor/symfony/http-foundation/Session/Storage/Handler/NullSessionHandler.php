@@ -33,9 +33,8 @@ class NullSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFounda
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
      */
-    protected function doRead($sessionId)
+    protected function doRead(string $sessionId)
     {
         return '';
     }
@@ -48,18 +47,15 @@ class NullSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFounda
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
-     * @param string $data
      */
-    protected function doWrite($sessionId, $data)
+    protected function doWrite(string $sessionId, string $data)
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     * @param string $sessionId
      */
-    protected function doDestroy($sessionId)
+    protected function doDestroy(string $sessionId)
     {
         return \true;
     }

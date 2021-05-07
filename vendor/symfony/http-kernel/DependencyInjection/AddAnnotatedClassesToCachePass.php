@@ -24,18 +24,14 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\Kernel;
 class AddAnnotatedClassesToCachePass implements CompilerPassInterface
 {
     private $kernel;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Kernel $kernel
-     */
-    public function __construct($kernel)
+    public function __construct(Kernel $kernel)
     {
         $this->kernel = $kernel;
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         $annotatedClasses = $this->kernel->getAnnotatedClassesToCompile();
         foreach ($container->getExtensions() as $extension) {
@@ -52,9 +48,8 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
      *
      * @param array $patterns The class patterns to expand
      * @param array $classes  The existing classes to match against the patterns
-     * @return mixed[]
      */
-    private function expandClasses(array $patterns, array $classes)
+    private function expandClasses(array $patterns, array $classes) : array
     {
         $expanded = [];
         // Explicit classes declared in the patterns are returned directly
@@ -74,10 +69,7 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
         }
         return \array_unique($expanded);
     }
-    /**
-     * @return mixed[]
-     */
-    private function getClassesInComposerClassMaps()
+    private function getClassesInComposerClassMaps() : array
     {
         $classes = [];
         foreach (\spl_autoload_functions() as $function) {
@@ -93,10 +85,7 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
         }
         return \array_keys($classes);
     }
-    /**
-     * @return mixed[]
-     */
-    private function patternsToRegexps(array $patterns)
+    private function patternsToRegexps(array $patterns) : array
     {
         $regexps = [];
         foreach ($patterns as $pattern) {
@@ -112,11 +101,7 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
         }
         return $regexps;
     }
-    /**
-     * @param string $class
-     * @return bool
-     */
-    private function matchAnyRegexps($class, array $regexps)
+    private function matchAnyRegexps(string $class, array $regexps) : bool
     {
         $isTest = \false !== \strpos($class, 'Test');
         foreach ($regexps as $regex) {

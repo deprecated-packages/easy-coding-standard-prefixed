@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This file is part of the Nette Framework (https://nette.org)
+ * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ */
+declare (strict_types=1);
 namespace ECSPrefix20210507\Nette;
 
 use ECSPrefix20210507\Nette\Utils\ObjectHelpers;
@@ -14,15 +19,14 @@ trait SmartObject
 {
     /**
      * @throws MemberAccessException
-     * @param string $name
      */
-    public function __call($name, array $args)
+    public function __call(string $name, array $args)
     {
         $class = static::class;
         if (ObjectHelpers::hasProperty($class, $name) === 'event') {
             // calling event handlers
-            $handlers = isset($this->{$name}) ? $this->{$name} : null;
-            if (is_array($handlers) || $handlers instanceof \Traversable) {
+            $handlers = $this->{$name} ?? null;
+            if (\is_iterable($handlers)) {
                 foreach ($handlers as $handler) {
                     $handler(...$args);
                 }
@@ -35,21 +39,19 @@ trait SmartObject
     }
     /**
      * @throws MemberAccessException
-     * @param string $name
      */
-    public static function __callStatic($name, array $args)
+    public static function __callStatic(string $name, array $args)
     {
         ObjectHelpers::strictStaticCall(static::class, $name);
     }
     /**
      * @return mixed
      * @throws MemberAccessException if the property is not defined.
-     * @param string $name
      */
-    public function &__get($name)
+    public function &__get(string $name)
     {
         $class = static::class;
-        if ($prop = isset(ObjectHelpers::getMagicProperties($class)[$name]) ? ObjectHelpers::getMagicProperties($class)[$name] : null) {
+        if ($prop = ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
             // property getter
             if (!($prop & 0b1)) {
                 throw new \ECSPrefix20210507\Nette\MemberAccessException("Cannot read a write-only property {$class}::\${$name}.");
@@ -70,15 +72,14 @@ trait SmartObject
      * @param  mixed  $value
      * @return void
      * @throws MemberAccessException if the property is not defined or is read-only
-     * @param string $name
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         $class = static::class;
         if (ObjectHelpers::hasProperty($class, $name)) {
             // unsetted property
             $this->{$name} = $value;
-        } elseif ($prop = isset(ObjectHelpers::getMagicProperties($class)[$name]) ? ObjectHelpers::getMagicProperties($class)[$name] : null) {
+        } elseif ($prop = ObjectHelpers::getMagicProperties($class)[$name] ?? null) {
             // property setter
             if (!($prop & 0b1000)) {
                 throw new \ECSPrefix20210507\Nette\MemberAccessException("Cannot write to a read-only property {$class}::\${$name}.");
@@ -91,20 +92,15 @@ trait SmartObject
     /**
      * @return void
      * @throws MemberAccessException
-     * @param string $name
      */
-    public function __unset($name)
+    public function __unset(string $name)
     {
         $class = static::class;
         if (!ObjectHelpers::hasProperty($class, $name)) {
             throw new \ECSPrefix20210507\Nette\MemberAccessException("Cannot unset the property {$class}::\${$name}.");
         }
     }
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function __isset($name)
+    public function __isset(string $name) : bool
     {
         return isset(ObjectHelpers::getMagicProperties(static::class)[$name]);
     }

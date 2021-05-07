@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -44,19 +45,16 @@ final class YodaStyleFixer extends AbstractFixer implements ConfigurableFixerInt
     private $candidateTypes;
     /**
      * {@inheritdoc}
-     * @param mixed[] $configuration
-     * @return void
      */
-    public function configure($configuration)
+    public function configure(array $configuration) : void
     {
         parent::configure($configuration);
         $this->resolveConfiguration();
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Write conditions in Yoda style (`true`), non-Yoda style (`[\'equal\' => false, \'identical\' => false, \'less_and_greater\' => false]`) or ignore those conditions (`null`) based on configuration.', [new CodeSample('<?php
     if ($a === null) {
@@ -79,36 +77,29 @@ return $foo === count($bar);
      * {@inheritdoc}
      *
      * Must run after IsNullFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound($this->candidateTypes);
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         $this->fixTokens($tokens);
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('equal', 'Style for equal (`==`, `!=`) statements.'))->setAllowedTypes(['bool', 'null'])->setDefault(\true)->getOption(), (new FixerOptionBuilder('identical', 'Style for identical (`===`, `!==`) statements.'))->setAllowedTypes(['bool', 'null'])->setDefault(\true)->getOption(), (new FixerOptionBuilder('less_and_greater', 'Style for less and greater than (`<`, `<=`, `>`, `>=`) statements.'))->setAllowedTypes(['bool', 'null'])->setDefault(null)->getOption(), (new FixerOptionBuilder('always_move_variable', 'Whether variables should always be on non assignable side when applying Yoda style.'))->setAllowedTypes(['bool'])->setDefault(\false)->getOption()]);
     }
@@ -125,7 +116,7 @@ return $foo === count($bar);
      *
      * @return int The last index of the right-hand side of the comparison
      */
-    private function findComparisonEnd($tokens, $index)
+    private function findComparisonEnd(Tokens $tokens, int $index) : int
     {
         ++$index;
         $count = \count($tokens);
@@ -164,7 +155,7 @@ return $foo === count($bar);
      *
      * @return int The first index of the left-hand side of the comparison
      */
-    private function findComparisonStart($tokens, $index)
+    private function findComparisonStart(Tokens $tokens, int $index) : int
     {
         --$index;
         $nonBlockFound = \false;
@@ -190,11 +181,7 @@ return $foo === count($bar);
         }
         return $tokens->getNextMeaningfulToken($index);
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return \PhpCsFixer\Tokenizer\Tokens
-     */
-    private function fixTokens($tokens)
+    private function fixTokens(Tokens $tokens) : Tokens
     {
         for ($i = \count($tokens) - 1; $i > 1; --$i) {
             if ($tokens[$i]->isGivenKind($this->candidateTypes)) {
@@ -224,14 +211,8 @@ return $foo === count($bar);
      * swapped, this function runs recursively on the previous left-hand-side.
      *
      * @return int a upper bound for all non-fixed comparisons
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $startLeft
-     * @param int $endLeft
-     * @param int $compareOperatorIndex
-     * @param int $startRight
-     * @param int $endRight
      */
-    private function fixTokensCompare($tokens, $startLeft, $endLeft, $compareOperatorIndex, $startRight, $endRight)
+    private function fixTokensCompare(Tokens $tokens, int $startLeft, int $endLeft, int $compareOperatorIndex, int $startRight, int $endRight) : int
     {
         $type = $tokens[$compareOperatorIndex]->getId();
         $content = $tokens[$compareOperatorIndex]->getContent();
@@ -252,13 +233,7 @@ return $foo === count($bar);
         $tokens->insertAt($startLeft, $right);
         return $startLeft;
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $start
-     * @param int $end
-     * @return \PhpCsFixer\Tokenizer\Tokens
-     */
-    private function fixTokensComparePart($tokens, $start, $end)
+    private function fixTokensComparePart(Tokens $tokens, int $start, int $end) : Tokens
     {
         $newTokens = $tokens->generatePartialCode($start, $end);
         $newTokens = $this->fixTokens(Tokens::fromCode(\sprintf('<?php %s;', $newTokens)));
@@ -267,13 +242,7 @@ return $foo === count($bar);
         $newTokens->clearEmptyTokens();
         return $newTokens;
     }
-    /**
-     * @return mixed[]|null
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @param bool $yoda
-     */
-    private function getCompareFixableInfo($tokens, $index, $yoda)
+    private function getCompareFixableInfo(Tokens $tokens, int $index, bool $yoda) : ?array
     {
         $left = $this->getLeftSideCompareFixableInfo($tokens, $index);
         $right = $this->getRightSideCompareFixableInfo($tokens, $index);
@@ -298,31 +267,15 @@ return $foo === count($bar);
         }
         return $yoda && !$leftSideIsVariable || !$yoda && !$rightSideIsVariable ? null : ['left' => $left, 'right' => $right];
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @return mixed[]
-     */
-    private function getLeftSideCompareFixableInfo($tokens, $index)
+    private function getLeftSideCompareFixableInfo(Tokens $tokens, int $index) : array
     {
         return ['start' => $this->findComparisonStart($tokens, $index), 'end' => $tokens->getPrevMeaningfulToken($index)];
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @return mixed[]
-     */
-    private function getRightSideCompareFixableInfo($tokens, $index)
+    private function getRightSideCompareFixableInfo(Tokens $tokens, int $index) : array
     {
         return ['start' => $tokens->getNextMeaningfulToken($index), 'end' => $this->findComparisonEnd($tokens, $index)];
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @param int $end
-     * @return bool
-     */
-    private function isListStatement($tokens, $index, $end)
+    private function isListStatement(Tokens $tokens, int $index, int $end) : bool
     {
         for ($i = $index; $i <= $end; ++$i) {
             if ($tokens[$i]->isGivenKind([\T_LIST, CT::T_DESTRUCTURING_SQUARE_BRACE_OPEN, CT::T_DESTRUCTURING_SQUARE_BRACE_CLOSE])) {
@@ -339,7 +292,7 @@ return $foo === count($bar);
      *
      * @return bool Whether the token has a lower precedence
      */
-    private function isOfLowerPrecedence($token)
+    private function isOfLowerPrecedence(Token $token) : bool
     {
         static $tokens;
         if (null === $tokens) {
@@ -430,7 +383,7 @@ return $foo === count($bar);
      *
      * @return bool Whether the tokens describe a variable
      */
-    private function isVariable($tokens, $start, $end, $strict)
+    private function isVariable(Tokens $tokens, int $start, int $end, bool $strict) : bool
     {
         $tokenAnalyzer = new TokensAnalyzer($tokens);
         if ($start === $end) {
@@ -525,13 +478,7 @@ return $foo === count($bar);
         }
         return !$this->isConstant($tokens, $start, $end);
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $index
-     * @param int $end
-     * @return bool
-     */
-    private function isConstant($tokens, $index, $end)
+    private function isConstant(Tokens $tokens, int $index, int $end) : bool
     {
         $expectArrayOnly = \false;
         $expectNumberOnly = \false;
@@ -569,10 +516,7 @@ return $foo === count($bar);
         }
         return \true;
     }
-    /**
-     * @return void
-     */
-    private function resolveConfiguration()
+    private function resolveConfiguration() : void
     {
         $candidateTypes = [];
         $this->candidatesMap = [];

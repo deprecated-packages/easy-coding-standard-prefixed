@@ -24,9 +24,8 @@ class ResolveInstanceofConditionalsPass implements \ECSPrefix20210507\Symfony\Co
 {
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         foreach ($container->getAutoconfiguredInstanceof() as $interface => $definition) {
             if ($definition->getArguments()) {
@@ -44,13 +43,7 @@ class ResolveInstanceofConditionalsPass implements \ECSPrefix20210507\Symfony\Co
             $container->getParameterBag()->remove('container.behavior_describing_tags');
         }
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param string $id
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
-     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition
-     */
-    private function processDefinition($container, $id, $definition, array $tagsToKeep)
+    private function processDefinition(ContainerBuilder $container, string $id, Definition $definition, array $tagsToKeep) : Definition
     {
         $instanceofConditionals = $definition->getInstanceofConditionals();
         $autoconfiguredInstanceof = $definition->isAutoconfigured() ? $container->getAutoconfiguredInstanceof() : [];
@@ -69,7 +62,7 @@ class ResolveInstanceofConditionalsPass implements \ECSPrefix20210507\Symfony\Co
         $reflectionClass = null;
         $parent = $definition instanceof ChildDefinition ? $definition->getParent() : null;
         foreach ($conditionals as $interface => $instanceofDefs) {
-            if ($interface !== $class && !(isset($reflectionClass) ? $reflectionClass : ($reflectionClass = $container->getReflectionClass($class, \false) ?: \false))) {
+            if ($interface !== $class && !($reflectionClass ?? ($reflectionClass = $container->getReflectionClass($class, \false) ?: \false))) {
                 continue;
             }
             if ($interface !== $class && !\is_subclass_of($class, $interface)) {
@@ -131,11 +124,7 @@ class ResolveInstanceofConditionalsPass implements \ECSPrefix20210507\Symfony\Co
         }
         return $definition;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @return mixed[]
-     */
-    private function mergeConditionals(array $autoconfiguredInstanceof, array $instanceofConditionals, $container)
+    private function mergeConditionals(array $autoconfiguredInstanceof, array $instanceofConditionals, ContainerBuilder $container) : array
     {
         // make each value an array of ChildDefinition
         $conditionals = \array_map(function ($childDef) {

@@ -27,11 +27,7 @@ class ServiceReferenceGraph
      * @var ServiceReferenceGraphNode[]
      */
     private $nodes = [];
-    /**
-     * @param string $id
-     * @return bool
-     */
-    public function hasNode($id)
+    public function hasNode(string $id) : bool
     {
         return isset($this->nodes[$id]);
     }
@@ -39,10 +35,8 @@ class ServiceReferenceGraph
      * Gets a node by identifier.
      *
      * @throws InvalidArgumentException if no node matches the supplied identifier
-     * @param string $id
-     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
      */
-    public function getNode($id)
+    public function getNode(string $id) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
     {
         if (!isset($this->nodes[$id])) {
             throw new InvalidArgumentException(\sprintf('There is no node with id "%s".', $id));
@@ -52,9 +46,9 @@ class ServiceReferenceGraph
     /**
      * Returns all nodes.
      *
-     * @return mixed[]
+     * @return ServiceReferenceGraphNode[]
      */
-    public function getNodes()
+    public function getNodes() : array
     {
         return $this->nodes;
     }
@@ -70,13 +64,8 @@ class ServiceReferenceGraph
     }
     /**
      * Connects 2 nodes together in the Graph.
-     * @param string|null $sourceId
-     * @param string|null $destId
-     * @param bool $lazy
-     * @param bool $weak
-     * @param bool $byConstructor
      */
-    public function connect($sourceId, $sourceValue, $destId, $destValue = null, $reference = null, $lazy = \false, $weak = \false, $byConstructor = \false)
+    public function connect(?string $sourceId, $sourceValue, ?string $destId, $destValue = null, $reference = null, bool $lazy = \false, bool $weak = \false, bool $byConstructor = \false)
     {
         if (null === $sourceId || null === $destId) {
             return;
@@ -87,11 +76,7 @@ class ServiceReferenceGraph
         $sourceNode->addOutEdge($edge);
         $destNode->addInEdge($edge);
     }
-    /**
-     * @param string $id
-     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
-     */
-    private function createNode($id, $value)
+    private function createNode(string $id, $value) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode
     {
         if (isset($this->nodes[$id]) && $this->nodes[$id]->getValue() === $value) {
             return $this->nodes[$id];

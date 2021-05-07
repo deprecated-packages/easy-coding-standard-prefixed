@@ -21,9 +21,8 @@ class AutowireRequiredMethodsPass extends \ECSPrefix20210507\Symfony\Component\D
 {
     /**
      * {@inheritdoc}
-     * @param bool $isRoot
      */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         $value = parent::processValue($value, $isRoot);
         if (!$value instanceof Definition || !$value->isAutowired() || $value->isAbstract() || !$value->getClass()) {
@@ -34,7 +33,7 @@ class AutowireRequiredMethodsPass extends \ECSPrefix20210507\Symfony\Component\D
         }
         $alreadyCalledMethods = [];
         $withers = [];
-        foreach ($value->getMethodCalls() as list($method)) {
+        foreach ($value->getMethodCalls() as [$method]) {
             $alreadyCalledMethods[\strtolower($method)] = \true;
         }
         foreach ($reflectionClass->getMethods() as $reflectionMethod) {
@@ -77,17 +76,12 @@ class AutowireRequiredMethodsPass extends \ECSPrefix20210507\Symfony\Component\D
             $setters = $value->getMethodCalls();
             $value->setMethodCalls($withers);
             foreach ($setters as $call) {
-                $value->addMethodCall($call[0], $call[1], isset($call[2]) ? $call[2] : \false);
+                $value->addMethodCall($call[0], $call[1], $call[2] ?? \false);
             }
         }
         return $value;
     }
-    /**
-     * @param \ReflectionMethod $reflectionMethod
-     * @param string $doc
-     * @return bool
-     */
-    private function isWither($reflectionMethod, $doc)
+    private function isWither(\ReflectionMethod $reflectionMethod, string $doc) : bool
     {
         $match = \preg_match('#(?:^/\\*\\*|\\n\\s*+\\*)\\s*+@return\\s++(static|\\$this)[\\s\\*]#i', $doc, $matches);
         if ($match && 'static' === $matches[1]) {

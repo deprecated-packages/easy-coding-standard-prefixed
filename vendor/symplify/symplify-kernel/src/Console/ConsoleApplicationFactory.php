@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Console;
 
 use ECSPrefix20210507\Symfony\Component\Console\Command\Command;
@@ -32,11 +33,8 @@ final class ConsoleApplicationFactory
     private $smartFileSystem;
     /**
      * @param Command[] $commands
-     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
-     * @param \Symplify\ComposerJsonManipulator\ComposerJsonFactory $composerJsonFactory
-     * @param \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem
      */
-    public function __construct(array $commands, $parameterProvider, $composerJsonFactory, $smartFileSystem)
+    public function __construct(array $commands, ParameterProvider $parameterProvider, ComposerJsonFactory $composerJsonFactory, SmartFileSystem $smartFileSystem)
     {
         $this->commands = $commands;
         $this->stringsConverter = new StringsConverter();
@@ -44,20 +42,13 @@ final class ConsoleApplicationFactory
         $this->composerJsonFactory = $composerJsonFactory;
         $this->smartFileSystem = $smartFileSystem;
     }
-    /**
-     * @return \Symplify\SymplifyKernel\Console\AutowiredConsoleApplication
-     */
-    public function create()
+    public function create() : \Symplify\SymplifyKernel\Console\AutowiredConsoleApplication
     {
         $autowiredConsoleApplication = new \Symplify\SymplifyKernel\Console\AutowiredConsoleApplication($this->commands);
         $this->decorateApplicationWithNameAndVersion($autowiredConsoleApplication);
         return $autowiredConsoleApplication;
     }
-    /**
-     * @return void
-     * @param \Symplify\SymplifyKernel\Console\AutowiredConsoleApplication $autowiredConsoleApplication
-     */
-    private function decorateApplicationWithNameAndVersion($autowiredConsoleApplication)
+    private function decorateApplicationWithNameAndVersion(\Symplify\SymplifyKernel\Console\AutowiredConsoleApplication $autowiredConsoleApplication) : void
     {
         $projectDir = $this->parameterProvider->provideStringParameter('kernel.project_dir');
         $packageComposerJsonFilePath = $projectDir . \DIRECTORY_SEPARATOR . 'composer.json';

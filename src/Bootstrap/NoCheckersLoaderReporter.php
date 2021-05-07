@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Bootstrap;
 
 use ECSPrefix20210507\Symfony\Component\Console\Style\SymfonyStyle;
@@ -9,17 +10,11 @@ final class NoCheckersLoaderReporter
      * @var SymfonyStyle
      */
     private $symfonyStyle;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
-     */
-    public function __construct($symfonyStyle)
+    public function __construct(SymfonyStyle $symfonyStyle)
     {
         $this->symfonyStyle = $symfonyStyle;
     }
-    /**
-     * @return void
-     */
-    public function report()
+    public function report() : void
     {
         $this->symfonyStyle->error('We could not find any sniffs/fixers rules to run');
         $this->symfonyStyle->writeln('You have few options to add them:');

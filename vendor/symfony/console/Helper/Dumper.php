@@ -23,21 +23,16 @@ final class Dumper
     private $dumper;
     private $cloner;
     private $handler;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\CliDumper $dumper
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\ClonerInterface $cloner
-     */
-    public function __construct($output, $dumper = null, $cloner = null)
+    public function __construct(OutputInterface $output, CliDumper $dumper = null, ClonerInterface $cloner = null)
     {
         $this->output = $output;
         $this->dumper = $dumper;
         $this->cloner = $cloner;
         if (\class_exists(CliDumper::class)) {
             $this->handler = function ($var) : string {
-                $dumper = isset($this->dumper) ? $this->dumper : ($this->dumper = new CliDumper(null, null, CliDumper::DUMP_LIGHT_ARRAY | CliDumper::DUMP_COMMA_SEPARATOR));
+                $dumper = $this->dumper ?? ($this->dumper = new CliDumper(null, null, CliDumper::DUMP_LIGHT_ARRAY | CliDumper::DUMP_COMMA_SEPARATOR));
                 $dumper->setColors($this->output->isDecorated());
-                return \rtrim($dumper->dump((isset($this->cloner) ? $this->cloner : ($this->cloner = new VarCloner()))->cloneVar($var)->withRefHandles(\false), \true));
+                return \rtrim($dumper->dump(($this->cloner ?? ($this->cloner = new VarCloner()))->cloneVar($var)->withRefHandles(\false), \true));
             };
         } else {
             $this->handler = function ($var) : string {
@@ -56,10 +51,7 @@ final class Dumper
             };
         }
     }
-    /**
-     * @return string
-     */
-    public function __invoke($var)
+    public function __invoke($var) : string
     {
         return ($this->handler)($var);
     }

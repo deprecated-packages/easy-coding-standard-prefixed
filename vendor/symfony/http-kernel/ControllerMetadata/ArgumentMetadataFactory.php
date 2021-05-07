@@ -21,9 +21,8 @@ final class ArgumentMetadataFactory implements \ECSPrefix20210507\Symfony\Compon
 {
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    public function createArgumentMetadata($controller)
+    public function createArgumentMetadata($controller) : array
     {
         $arguments = [];
         if (\is_array($controller)) {
@@ -56,11 +55,8 @@ final class ArgumentMetadataFactory implements \ECSPrefix20210507\Symfony\Compon
     }
     /**
      * Returns an associated type to the given parameter if available.
-     * @return string|null
-     * @param \ReflectionParameter $parameter
-     * @param \ReflectionFunctionAbstract $function
      */
-    private function getType($parameter, $function)
+    private function getType(\ReflectionParameter $parameter, \ReflectionFunctionAbstract $function) : ?string
     {
         if (!($type = $parameter->getType())) {
             return null;

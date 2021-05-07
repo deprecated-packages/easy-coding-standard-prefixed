@@ -43,11 +43,8 @@ class DumpDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKernel\
     /**
      * @param string|FileLinkFormatter|null       $fileLinkFormat
      * @param DataDumperInterface|Connection|null $dumper
-     * @param \ECSPrefix20210507\Symfony\Component\Stopwatch\Stopwatch $stopwatch
-     * @param string $charset
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
      */
-    public function __construct($stopwatch = null, $fileLinkFormat = null, $charset = null, $requestStack = null, $dumper = null)
+    public function __construct(Stopwatch $stopwatch = null, $fileLinkFormat = null, string $charset = null, RequestStack $requestStack = null, $dumper = null)
     {
         $this->stopwatch = $stopwatch;
         $this->fileLinkFormat = ($fileLinkFormat ?: \ini_get('xdebug.file_link_format')) ?: \get_cfg_var('xdebug.file_link_format');
@@ -62,15 +59,12 @@ class DumpDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKernel\
     {
         $this->clonesIndex = ++$this->clonesCount;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data $data
-     */
-    public function dump($data)
+    public function dump(Data $data)
     {
         if ($this->stopwatch) {
             $this->stopwatch->start('dump');
         }
-        list($name, $file, $line, $fileExcerpt) = $this->sourceContextProvider->getContext();
+        ['name' => $name, 'file' => $file, 'line' => $line, 'file_excerpt' => $fileExcerpt] = $this->sourceContextProvider->getContext();
         if ($this->dumper instanceof Connection) {
             if (!$this->dumper->write($data)) {
                 $this->isCollected = \false;
@@ -89,12 +83,7 @@ class DumpDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKernel\
             $this->stopwatch->stop('dump');
         }
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
-     * @param \Throwable $exception
-     */
-    public function collect($request, $response, $exception = null)
+    public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         if (!$this->dataCount) {
             $this->data = [];
@@ -132,9 +121,8 @@ class DumpDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKernel\
     }
     /**
      * @internal
-     * @return mixed[]
      */
-    public function __sleep()
+    public function __sleep() : array
     {
         if (!$this->dataCount) {
             $this->data = [];
@@ -164,17 +152,11 @@ class DumpDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKernel\
         }
         self::__construct($this->stopwatch, \is_string($fileLinkFormat) || $fileLinkFormat instanceof FileLinkFormatter ? $fileLinkFormat : null, \is_string($charset) ? $charset : null);
     }
-    /**
-     * @return int
-     */
-    public function getDumpsCount()
+    public function getDumpsCount() : int
     {
         return $this->dataCount;
     }
-    /**
-     * @return mixed[]
-     */
-    public function getDumps($format, $maxDepthLimit = -1, $maxItemsPerDepth = -1)
+    public function getDumps($format, $maxDepthLimit = -1, $maxItemsPerDepth = -1) : array
     {
         $data = \fopen('php://memory', 'r+');
         if ('html' === $format) {
@@ -196,10 +178,7 @@ class DumpDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKernel\
         }
         return $dumps;
     }
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName() : string
     {
         return 'dump';
     }
@@ -231,14 +210,7 @@ class DumpDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKernel\
             $this->dataCount = 0;
         }
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\DataDumperInterface $dumper
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data $data
-     * @param string $name
-     * @param string $file
-     * @param int $line
-     */
-    private function doDump($dumper, $data, $name, $file, $line)
+    private function doDump(DataDumperInterface $dumper, Data $data, string $name, string $file, int $line)
     {
         if ($dumper instanceof CliDumper) {
             $contextDumper = function ($name, $file, $line, $fmt) {

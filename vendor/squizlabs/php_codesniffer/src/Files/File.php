@@ -201,7 +201,7 @@ class File
      *
      * @return void
      */
-    public function __construct($path, $ruleset, $config)
+    public function __construct($path, Ruleset $ruleset, Config $config)
     {
         $this->path = $path;
         $this->ruleset = $ruleset;

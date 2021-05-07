@@ -25,11 +25,7 @@ class DumpServer
     private $host;
     private $socket;
     private $logger;
-    /**
-     * @param string $host
-     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $logger
-     */
-    public function __construct($host, $logger = null)
+    public function __construct(string $host, LoggerInterface $logger = null)
     {
         if (\false === \strpos($host, '://')) {
             $host = 'tcp://' . $host;
@@ -37,19 +33,13 @@ class DumpServer
         $this->host = $host;
         $this->logger = $logger;
     }
-    /**
-     * @return void
-     */
-    public function start()
+    public function start() : void
     {
         if (!($this->socket = \stream_socket_server($this->host, $errno, $errstr))) {
             throw new \RuntimeException(\sprintf('Server start failed on "%s": ', $this->host) . $errstr . ' ' . $errno);
         }
     }
-    /**
-     * @return void
-     */
-    public function listen(callable $callback)
+    public function listen(callable $callback) : void
     {
         if (null === $this->socket) {
             $this->start();
@@ -72,21 +62,15 @@ class DumpServer
                 }
                 continue;
             }
-            list($data, $context) = $payload;
+            [$data, $context] = $payload;
             $callback($data, $context, $clientId);
         }
     }
-    /**
-     * @return string
-     */
-    public function getHost()
+    public function getHost() : string
     {
         return $this->host;
     }
-    /**
-     * @return mixed[]
-     */
-    private function getMessages()
+    private function getMessages() : iterable
     {
         $sockets = [(int) $this->socket => $this->socket];
         $write = [];

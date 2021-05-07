@@ -38,7 +38,7 @@ class NullableTypeDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $nextNonEmptyPtr = $phpcsFile->findNext([\T_WHITESPACE], $stackPtr + 1, null, \true);
         if ($nextNonEmptyPtr === \false) {

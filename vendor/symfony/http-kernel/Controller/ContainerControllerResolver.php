@@ -22,19 +22,12 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Container;
 class ContainerControllerResolver extends \ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ControllerResolver
 {
     protected $container;
-    /**
-     * @param \ECSPrefix20210507\Psr\Container\ContainerInterface $container
-     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $logger
-     */
-    public function __construct($container, $logger = null)
+    public function __construct(ContainerInterface $container, LoggerInterface $logger = null)
     {
         $this->container = $container;
         parent::__construct($logger);
     }
-    /**
-     * @param string $controller
-     */
-    protected function createController($controller)
+    protected function createController(string $controller)
     {
         if (1 === \substr_count($controller, ':')) {
             $controller = \str_replace(':', '::', $controller);
@@ -44,9 +37,8 @@ class ContainerControllerResolver extends \ECSPrefix20210507\Symfony\Component\H
     }
     /**
      * {@inheritdoc}
-     * @param string $class
      */
-    protected function instantiateController($class)
+    protected function instantiateController(string $class)
     {
         $class = \ltrim($class, '\\');
         if ($this->container->has($class)) {
@@ -62,11 +54,7 @@ class ContainerControllerResolver extends \ECSPrefix20210507\Symfony\Component\H
         }
         throw new \InvalidArgumentException(\sprintf('Controller "%s" does neither exist as service nor as class.', $class), 0, $e);
     }
-    /**
-     * @param string $controller
-     * @param \Throwable $previous
-     */
-    private function throwExceptionIfControllerWasRemoved($controller, $previous)
+    private function throwExceptionIfControllerWasRemoved(string $controller, \Throwable $previous)
     {
         if ($this->container instanceof Container && isset($this->container->getRemovedIds()[$controller])) {
             throw new \InvalidArgumentException(\sprintf('Controller "%s" cannot be fetched from the container because it is private. Did you forget to tag the service with "controller.service_arguments"?', $controller), 0, $previous);

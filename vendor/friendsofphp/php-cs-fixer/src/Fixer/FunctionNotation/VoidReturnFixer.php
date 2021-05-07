@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -29,9 +30,8 @@ final class VoidReturnFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('Add `void` return type to functions with missing or empty return statements, but priority is given to `@return` annotations. Requires PHP >= 7.1.', [new VersionSpecificCodeSample("<?php\nfunction foo(\$a) {};\n", new VersionSpecification(70100))], null, 'Modifies the signature of functions.');
     }
@@ -40,36 +40,29 @@ final class VoidReturnFixer extends AbstractFixer
      *
      * Must run before PhpdocNoEmptyReturnFixer, ReturnTypeDeclarationFixer.
      * Must run after NoSuperfluousPhpdocTagsFixer, SimplifiedNullReturnFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 5;
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return \PHP_VERSION_ID >= 70100 && $tokens->isTokenKindFound(\T_FUNCTION);
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    public function isRisky()
+    public function isRisky() : bool
     {
         return \true;
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         // These cause syntax errors.
         static $excludeFuncNames = [[\T_STRING, '__construct'], [\T_STRING, '__destruct'], [\T_STRING, '__clone']];
@@ -105,10 +98,8 @@ final class VoidReturnFixer extends AbstractFixer
      * Determine whether there is a non-void return annotation in the function's PHPDoc comment.
      *
      * @param int $index The index of the function token
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    private function hasReturnAnnotation($tokens, $index)
+    private function hasReturnAnnotation(Tokens $tokens, int $index) : bool
     {
         foreach ($this->findReturnAnnotations($tokens, $index) as $return) {
             if (['void'] !== $return->getTypes()) {
@@ -121,10 +112,8 @@ final class VoidReturnFixer extends AbstractFixer
      * Determine whether there is a void return annotation in the function's PHPDoc comment.
      *
      * @param int $index The index of the function token
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    private function hasVoidReturnAnnotation($tokens, $index)
+    private function hasVoidReturnAnnotation(Tokens $tokens, int $index) : bool
     {
         foreach ($this->findReturnAnnotations($tokens, $index) as $return) {
             if (['void'] === $return->getTypes()) {
@@ -137,10 +126,8 @@ final class VoidReturnFixer extends AbstractFixer
      * Determine whether the function already has a return type hint.
      *
      * @param int $index The index of the end of the function definition line, EG at { or ;
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    private function hasReturnTypeHint($tokens, $index)
+    private function hasReturnTypeHint(Tokens $tokens, int $index) : bool
     {
         $endFuncIndex = $tokens->getPrevTokenOfKind($index, [')']);
         $nextIndex = $tokens->getNextMeaningfulToken($endFuncIndex);
@@ -151,10 +138,8 @@ final class VoidReturnFixer extends AbstractFixer
      *
      * @param int $startIndex Start of function body
      * @param int $endIndex   End of function body
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    private function hasVoidReturn($tokens, $startIndex, $endIndex)
+    private function hasVoidReturn(Tokens $tokens, int $startIndex, int $endIndex) : bool
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         for ($i = $startIndex; $i < $endIndex; ++$i) {
@@ -179,10 +164,8 @@ final class VoidReturnFixer extends AbstractFixer
     }
     /**
      * @param int $index The index of the end of the function definition line, EG at { or ;
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fixFunctionDefinition($tokens, $index)
+    private function fixFunctionDefinition(Tokens $tokens, int $index) : void
     {
         $endFuncIndex = $tokens->getPrevTokenOfKind($index, [')']);
         $tokens->insertAt($endFuncIndex + 1, [new Token([CT::T_TYPE_COLON, ':']), new Token([\T_WHITESPACE, ' ']), new Token([\T_STRING, 'void'])]);
@@ -192,10 +175,9 @@ final class VoidReturnFixer extends AbstractFixer
      *
      * @param int $index The index of the function token
      *
-     * @return mixed[]
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return Annotation[]
      */
-    private function findReturnAnnotations($tokens, $index)
+    private function findReturnAnnotations(Tokens $tokens, int $index) : array
     {
         do {
             $index = $tokens->getPrevNonWhitespace($index);

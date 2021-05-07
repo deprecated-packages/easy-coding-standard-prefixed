@@ -1,14 +1,12 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SniffRunner\PHP_CodeSniffer;
 
 use PHP_CodeSniffer\Fixer;
 final class FixerFactory
 {
-    /**
-     * @return \PHP_CodeSniffer\Fixer
-     */
-    public function create()
+    public function create() : Fixer
     {
         $fixer = new Fixer();
         $fixer->enabled = \true;

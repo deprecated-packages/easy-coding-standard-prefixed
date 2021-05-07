@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Annotation;
 
 use ECSPrefix20210507\Doctrine\Common\Annotations\DocLexer;
@@ -22,7 +23,7 @@ final class DoctrineAnnotationNewlineInNestedAnnotationFixer extends AbstractDoc
     /**
      * @var string
      */
-    const ERROR_MESSAGE = 'Nested object annotations should start on a standalone line';
+    private const ERROR_MESSAGE = 'Nested object annotations should start on a standalone line';
     /**
      * @var DoctrineBlockFinder
      */
@@ -31,33 +32,21 @@ final class DoctrineAnnotationNewlineInNestedAnnotationFixer extends AbstractDoc
      * @var BlockInfo|null
      */
     private $currentBlockInfo;
-    /**
-     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\DoctrineBlockFinder $doctrineBlockFinder
-     */
-    public function __construct($doctrineBlockFinder)
+    public function __construct(DoctrineBlockFinder $doctrineBlockFinder)
     {
         $this->doctrineBlockFinder = $doctrineBlockFinder;
         parent::__construct();
     }
-    /**
-     * @return int
-     */
-    public function getPriority()
+    public function getPriority() : int
     {
         // must run before \PhpCsFixer\Fixer\DoctrineAnnotation\DoctrineAnnotationIndentationFixer
         return 100;
     }
-    /**
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
-     */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
-    /**
-     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
-     */
-    public function getRuleDefinition()
+    public function getRuleDefinition() : RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 use Doctrine\ORM\Mapping as ORM;
@@ -88,9 +77,8 @@ CODE_SAMPLE
      * @see \PhpCsFixer\Fixer\DoctrineAnnotation\DoctrineAnnotationIndentationFixer
      *
      * @param iterable<Token>&Tokens $tokens
-     * @return void
      */
-    protected function fixAnnotations($tokens)
+    protected function fixAnnotations(Tokens $tokens) : void
     {
         $this->currentBlockInfo = null;
         $tokenCount = $tokens->count();
@@ -102,7 +90,7 @@ CODE_SAMPLE
                 continue;
             }
             $previousTokenPosition = $index - 1;
-            $previousToken = isset($tokens[$previousTokenPosition]) ? $tokens[$previousTokenPosition] : null;
+            $previousToken = $tokens[$previousTokenPosition] ?? null;
             if ($previousToken === null) {
                 continue;
             }
@@ -119,11 +107,7 @@ CODE_SAMPLE
             $this->processEndBracket($index, $tokens, $previousTokenPosition);
         }
     }
-    /**
-     * @param \PhpCsFixer\Doctrine\Annotation\Token $token
-     * @return bool
-     */
-    private function isDocOpener($token)
+    private function isDocOpener(Token $token) : bool
     {
         if ($token->isType(DocLexer::T_NONE)) {
             return Strings::contains($token->getContent(), '*');
@@ -132,11 +116,8 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param int $index
-     * @param int $previousTokenPosition
      */
-    private function processEndBracket($index, $tokens, $previousTokenPosition)
+    private function processEndBracket(int $index, Tokens $tokens, int $previousTokenPosition) : void
     {
         /** @var Token $previousToken */
         $previousToken = $tokens->offsetGet($previousTokenPosition);
@@ -159,18 +140,15 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param int $index
-     * @param \PhpCsFixer\Doctrine\Annotation\Token $previousToken
-     * @return bool
      */
-    private function shouldSkip($index, $tokens, $previousToken)
+    private function shouldSkip(int $index, Tokens $tokens, Token $previousToken) : bool
     {
         // docblock opener → skip it
         if ($this->isDocOpener($previousToken)) {
             return \true;
         }
         $nextTokenPosition = $index + 1;
-        $nextToken = isset($tokens[$nextTokenPosition]) ? $tokens[$nextTokenPosition] : null;
+        $nextToken = $tokens[$nextTokenPosition] ?? null;
         if (!$nextToken instanceof Token) {
             return \true;
         }

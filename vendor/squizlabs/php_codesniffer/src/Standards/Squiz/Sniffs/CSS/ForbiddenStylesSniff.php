@@ -71,7 +71,7 @@ class ForbiddenStylesSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $style = \strtolower($tokens[$stackPtr]['content']);

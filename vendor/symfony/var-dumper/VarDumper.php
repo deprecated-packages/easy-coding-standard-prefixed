@@ -47,14 +47,11 @@ class VarDumper
         self::$handler = $callable;
         return $prevHandler;
     }
-    /**
-     * @return void
-     */
-    private static function register()
+    private static function register() : void
     {
         $cloner = new VarCloner();
         $cloner->addCasters(ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
-        $format = isset($_SERVER['VAR_DUMPER_FORMAT']) ? $_SERVER['VAR_DUMPER_FORMAT'] : null;
+        $format = $_SERVER['VAR_DUMPER_FORMAT'] ?? null;
         switch (\true) {
             case 'html' === $format:
                 $dumper = new HtmlDumper();
@@ -64,7 +61,7 @@ class VarDumper
                 break;
             case 'server' === $format:
             case 'tcp' === \parse_url($format, \PHP_URL_SCHEME):
-                $host = 'server' === $format ? isset($_SERVER['VAR_DUMPER_SERVER']) ? $_SERVER['VAR_DUMPER_SERVER'] : '127.0.0.1:9912' : $format;
+                $host = 'server' === $format ? $_SERVER['VAR_DUMPER_SERVER'] ?? '127.0.0.1:9912' : $format;
                 $dumper = \in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) ? new CliDumper() : new HtmlDumper();
                 $dumper = new ServerDumper($host, $dumper, self::getDefaultContextProviders());
                 break;
@@ -78,10 +75,7 @@ class VarDumper
             $dumper->dump($cloner->cloneVar($var));
         };
     }
-    /**
-     * @return mixed[]
-     */
-    private static function getDefaultContextProviders()
+    private static function getDefaultContextProviders() : array
     {
         $contextProviders = [];
         if (!\in_array(\PHP_SAPI, ['cli', 'phpdbg'], \true) && \class_exists(Request::class)) {
@@ -89,7 +83,7 @@ class VarDumper
             $requestStack->push(Request::createFromGlobals());
             $contextProviders['request'] = new RequestContextProvider($requestStack);
         }
-        $fileLinkFormatter = \class_exists(FileLinkFormatter::class) ? new FileLinkFormatter(null, isset($requestStack) ? $requestStack : null) : null;
+        $fileLinkFormatter = \class_exists(FileLinkFormatter::class) ? new FileLinkFormatter(null, $requestStack ?? null) : null;
         return $contextProviders + ['cli' => new CliContextProvider(), 'source' => new SourceContextProvider(null, null, $fileLinkFormatter)];
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyTesting\FixtureSplitter;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -9,11 +10,7 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class TrioFixtureSplitter
 {
-    /**
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
-     * @return \Symplify\EasyTesting\ValueObject\FixtureSplit\TrioContent
-     */
-    public function splitFileInfo($smartFileInfo)
+    public function splitFileInfo(SmartFileInfo $smartFileInfo) : TrioContent
     {
         $parts = Strings::split($smartFileInfo->getContents(), SplitLine::SPLIT_LINE_REGEX);
         $this->ensureHasThreeParts($parts, $smartFileInfo);
@@ -21,10 +18,8 @@ final class TrioFixtureSplitter
     }
     /**
      * @param mixed[] $parts
-     * @return void
-     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
      */
-    private function ensureHasThreeParts(array $parts, $smartFileInfo)
+    private function ensureHasThreeParts(array $parts, SmartFileInfo $smartFileInfo) : void
     {
         if (\count($parts) === 3) {
             return;

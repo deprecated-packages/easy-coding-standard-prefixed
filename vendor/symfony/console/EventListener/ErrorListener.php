@@ -23,17 +23,11 @@ use ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface
 class ErrorListener implements EventSubscriberInterface
 {
     private $logger;
-    /**
-     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $logger
-     */
-    public function __construct($logger = null)
+    public function __construct(LoggerInterface $logger = null)
     {
         $this->logger = $logger;
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Event\ConsoleErrorEvent $event
-     */
-    public function onConsoleError($event)
+    public function onConsoleError(ConsoleErrorEvent $event)
     {
         if (null === $this->logger) {
             return;
@@ -45,10 +39,7 @@ class ErrorListener implements EventSubscriberInterface
         }
         $this->logger->critical('Error thrown while running command "{command}". Message: "{message}"', ['exception' => $error, 'command' => $inputString, 'message' => $error->getMessage()]);
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Event\ConsoleTerminateEvent $event
-     */
-    public function onConsoleTerminate($event)
+    public function onConsoleTerminate(ConsoleTerminateEvent $event)
     {
         if (null === $this->logger) {
             return;
@@ -67,11 +58,7 @@ class ErrorListener implements EventSubscriberInterface
     {
         return [ConsoleEvents::ERROR => ['onConsoleError', -128], ConsoleEvents::TERMINATE => ['onConsoleTerminate', -128]];
     }
-    /**
-     * @return string|null
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Event\ConsoleEvent $event
-     */
-    private static function getInputString($event)
+    private static function getInputString(ConsoleEvent $event) : ?string
     {
         $commandName = $event->getCommand() ? $event->getCommand()->getName() : null;
         $input = $event->getInput();

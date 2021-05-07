@@ -46,10 +46,8 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
     private $handlesHrefGracefully;
     /**
      * {@inheritdoc}
-     * @param string $charset
-     * @param int $flags
      */
-    public function __construct($output = null, $charset = null, $flags = 0)
+    public function __construct($output = null, string $charset = null, int $flags = 0)
     {
         parent::__construct($output, $charset, $flags);
         if ('\\' === \DIRECTORY_SEPARATOR && !$this->isWindowsTrueColor()) {
@@ -60,17 +58,15 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
     }
     /**
      * Enables/disables colored output.
-     * @param bool $colors
      */
-    public function setColors($colors)
+    public function setColors(bool $colors)
     {
         $this->colors = $colors;
     }
     /**
      * Sets the maximum number of characters per line for dumped strings.
-     * @param int $maxStringWidth
      */
-    public function setMaxStringWidth($maxStringWidth)
+    public function setMaxStringWidth(int $maxStringWidth)
     {
         $this->maxStringWidth = $maxStringWidth;
     }
@@ -94,10 +90,8 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param string $type
      */
-    public function dumpScalar($cursor, $type, $value)
+    public function dumpScalar(Cursor $cursor, string $type, $value)
     {
         $this->dumpKey($cursor);
         $style = 'const';
@@ -145,12 +139,8 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param string $str
-     * @param bool $bin
-     * @param int $cut
      */
-    public function dumpString($cursor, $str, $bin, $cut)
+    public function dumpString(Cursor $cursor, string $str, bool $bin, int $cut)
     {
         $this->dumpKey($cursor);
         $attr = $cursor->attr;
@@ -228,11 +218,8 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param int $type
-     * @param bool $hasChild
      */
-    public function enterHash($cursor, $type, $class, $hasChild)
+    public function enterHash(Cursor $cursor, int $type, $class, bool $hasChild)
     {
         if (null === $this->colors) {
             $this->colors = $this->supportsColors();
@@ -265,12 +252,8 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     * @param int $type
-     * @param bool $hasChild
-     * @param int $cut
      */
-    public function leaveHash($cursor, $type, $class, $hasChild, $cut)
+    public function leaveHash(Cursor $cursor, int $type, $class, bool $hasChild, int $cut)
     {
         if (empty($cursor->attr['cut_hash'])) {
             $this->dumpEllipsis($cursor, $hasChild, $cut);
@@ -283,9 +266,8 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
      *
      * @param bool $hasChild When the dump of the hash has child item
      * @param int  $cut      The number of items the hash has been cut by
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
      */
-    protected function dumpEllipsis($cursor, $hasChild, $cut)
+    protected function dumpEllipsis(Cursor $cursor, $hasChild, $cut)
     {
         if ($cut) {
             $this->line .= ' …';
@@ -299,9 +281,8 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
     }
     /**
      * Dumps a key in a hash structure.
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
      */
-    protected function dumpKey($cursor)
+    protected function dumpKey(Cursor $cursor)
     {
         if (null !== ($key = $cursor->hashKey)) {
             if ($cursor->hashKeyIsBinary) {
@@ -363,7 +344,7 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
                                 $this->expandNextHash = \true;
                             }
                         }
-                        $this->line .= $bin . $this->style($style, $key[1], $attr) . (isset($attr['separator']) ? $attr['separator'] : ': ');
+                        $this->line .= $bin . $this->style($style, $key[1], $attr) . ($attr['separator'] ?? ': ');
                     } else {
                         // This case should not happen
                         $this->line .= '-' . $bin . '"' . $this->style('private', $key, ['class' => '']) . '": ';
@@ -413,7 +394,7 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
             $s = $startCchr;
             $c = $c[$i = 0];
             do {
-                $s .= isset($map[$c[$i]]) ? $map[$c[$i]] : \sprintf('\\x%02X', \ord($c[$i]));
+                $s .= $map[$c[$i]] ?? \sprintf('\\x%02X', \ord($c[$i]));
             } while (isset($c[++$i]));
             return $s . $endCchr;
         }, $value, -1, $cchrCount);
@@ -431,7 +412,7 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
         }
         href:
         if ($this->colors && $this->handlesHrefGracefully) {
-            if (isset($attr['file']) && ($href = $this->getSourceLink($attr['file'], isset($attr['line']) ? $attr['line'] : 0))) {
+            if (isset($attr['file']) && ($href = $this->getSourceLink($attr['file'], $attr['line'] ?? 0))) {
                 if ('note' === $style) {
                     $value .= "\33]8;;{$href}\33\\^\33]8;;\33\\";
                 } else {
@@ -441,7 +422,7 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
             if (isset($attr['href'])) {
                 $value = "\33]8;;{$attr['href']}\33\\{$value}\33]8;;\33\\";
             }
-        } elseif (isset($attr['if_links']) ? $attr['if_links'] : \false) {
+        } elseif ($attr['if_links'] ?? \false) {
             return '';
         }
         return $value;
@@ -486,20 +467,15 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
     }
     /**
      * {@inheritdoc}
-     * @param bool $endOfValue
-     * @param int $depth
      */
-    protected function dumpLine($depth, $endOfValue = \false)
+    protected function dumpLine(int $depth, bool $endOfValue = \false)
     {
         if ($this->colors) {
             $this->line = \sprintf("\33[%sm%s\33[m", $this->styles['default'], $this->line);
         }
         parent::dumpLine($depth);
     }
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
-     */
-    protected function endValue($cursor)
+    protected function endValue(Cursor $cursor)
     {
         if (-1 === $cursor->hashType) {
             return;
@@ -520,9 +496,8 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
      * https://github.com/composer/xdebug-handler
      *
      * @param mixed $stream A CLI output stream
-     * @return bool
      */
-    private function hasColorSupport($stream)
+    private function hasColorSupport($stream) : bool
     {
         if (!\is_resource($stream) || 'stream' !== \get_resource_type($stream)) {
             return \false;
@@ -537,14 +512,7 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
         if (\DIRECTORY_SEPARATOR === '\\') {
             return \function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support($stream) || \false !== \getenv('ANSICON') || 'ON' === \getenv('ConEmuANSI') || 'xterm' === \getenv('TERM');
         }
-        $streamIsatty = function ($stream) {
-            if ('\\' === \DIRECTORY_SEPARATOR) {
-                $stat = @fstat($stream);
-                return $stat ? 020000 === ($stat['mode'] & 0170000) : false;
-            }
-            return @posix_isatty($stream);
-        };
-        return $streamIsatty($stream);
+        return \stream_isatty($stream);
     }
     /**
      * Returns true if the Windows terminal supports true color.
@@ -552,9 +520,8 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
      * Note that this does not check an output stream, but relies on environment
      * variables from known implementations, or a PHP and Windows version that
      * supports true color.
-     * @return bool
      */
-    private function isWindowsTrueColor()
+    private function isWindowsTrueColor() : bool
     {
         $result = 183 <= \getenv('ANSICON_VER') || 'ON' === \getenv('ConEmuANSI') || 'xterm' === \getenv('TERM') || 'Hyper' === \getenv('TERM_PROGRAM');
         if (!$result) {
@@ -563,11 +530,7 @@ class CliDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\Ab
         }
         return $result;
     }
-    /**
-     * @param string $file
-     * @param int $line
-     */
-    private function getSourceLink($file, $line)
+    private function getSourceLink(string $file, int $line)
     {
         if ($fmt = $this->displayOptions['fileLinkFormat']) {
             return \is_string($fmt) ? \strtr($fmt, ['%f' => $file, '%l' => $line]) : ($fmt->format($file, $line) ?: 'file://' . $file . '#L' . $line);

@@ -48,9 +48,8 @@ abstract class AbstractPipes implements \ECSPrefix20210507\Symfony\Component\Pro
     }
     /**
      * Returns true if a system call has been interrupted.
-     * @return bool
      */
-    protected function hasSystemCallBeenInterrupted()
+    protected function hasSystemCallBeenInterrupted() : bool
     {
         $lastError = $this->lastError;
         $this->lastError = null;
@@ -77,9 +76,8 @@ abstract class AbstractPipes implements \ECSPrefix20210507\Symfony\Component\Pro
      * Writes input to stdin.
      *
      * @throws InvalidArgumentException When an input iterator yields a non supported value
-     * @return mixed[]|null
      */
-    protected function write()
+    protected function write() : ?array
     {
         if (!isset($this->pipes[0])) {
             return null;

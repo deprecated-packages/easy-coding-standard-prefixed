@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Spacing;
 
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -23,7 +24,7 @@ final class MethodChainingNewlineFixer extends AbstractSymplifyFixer implements 
     /**
      * @var string
      */
-    const ERROR_MESSAGE = 'Each chain method call must be on own line';
+    private const ERROR_MESSAGE = 'Each chain method call must be on own line';
     /**
      * @var WhitespacesFixerConfig
      */
@@ -36,21 +37,13 @@ final class MethodChainingNewlineFixer extends AbstractSymplifyFixer implements 
      * @var ChainMethodCallAnalyzer
      */
     private $chainMethodCallAnalyzer;
-    /**
-     * @param \PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig
-     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder
-     * @param \Symplify\CodingStandard\TokenAnalyzer\ChainMethodCallAnalyzer $chainMethodCallAnalyzer
-     */
-    public function __construct($whitespacesFixerConfig, $blockFinder, $chainMethodCallAnalyzer)
+    public function __construct(WhitespacesFixerConfig $whitespacesFixerConfig, BlockFinder $blockFinder, ChainMethodCallAnalyzer $chainMethodCallAnalyzer)
     {
         $this->whitespacesFixerConfig = $whitespacesFixerConfig;
         $this->blockFinder = $blockFinder;
         $this->chainMethodCallAnalyzer = $chainMethodCallAnalyzer;
     }
-    /**
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
-     */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
@@ -58,26 +51,22 @@ final class MethodChainingNewlineFixer extends AbstractSymplifyFixer implements 
      * Must run before
      *
      * @see \PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer::getPriority()
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 39;
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_OBJECT_OPERATOR]);
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return void
-     * @param \SplFileInfo $file
      */
-    public function fix($file, $tokens)
+    public function fix(SplFileInfo $file, Tokens $tokens) : void
     {
         // function arguments, function call parameters, lambda use()
         for ($index = 1, $count = \count($tokens); $index < $count; ++$index) {
@@ -92,10 +81,7 @@ final class MethodChainingNewlineFixer extends AbstractSymplifyFixer implements 
             ++$index;
         }
     }
-    /**
-     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
-     */
-    public function getRuleDefinition()
+    public function getRuleDefinition() : RuleDefinition
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 $someClass->firstCall()->secondCall();
@@ -108,10 +94,8 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param int $objectOperatorIndex
-     * @return bool
      */
-    private function shouldPrefixNewline($tokens, $objectOperatorIndex)
+    private function shouldPrefixNewline(Tokens $tokens, int $objectOperatorIndex) : bool
     {
         for ($i = $objectOperatorIndex; $i >= 0; --$i) {
             /** @var Token $currentToken */
@@ -130,10 +114,8 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param int $position
-     * @return bool
      */
-    private function isDoubleBracket($tokens, $position)
+    private function isDoubleBracket(Tokens $tokens, int $position) : bool
     {
         /** @var int $nextTokenPosition */
         $nextTokenPosition = $tokens->getNextNonWhitespace($position);
@@ -145,10 +127,8 @@ CODE_SAMPLE
      * Matches e.g.: - app([ ])->some()
      *
      * @param Tokens<Token> $tokens
-     * @param int $position
-     * @return bool
      */
-    private function isPreceededByOpenedCallInAnotherBracket($tokens, $position)
+    private function isPreceededByOpenedCallInAnotherBracket(Tokens $tokens, int $position) : bool
     {
         $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
         if (!$blockInfo instanceof BlockInfo) {
@@ -158,11 +138,8 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
-     * @param int $position
-     * @param int $objectOperatorIndex
-     * @return bool
      */
-    private function shouldBracketPrefix($tokens, $position, $objectOperatorIndex)
+    private function shouldBracketPrefix(Tokens $tokens, int $position, int $objectOperatorIndex) : bool
     {
         if ($this->isDoubleBracket($tokens, $position)) {
             return \false;

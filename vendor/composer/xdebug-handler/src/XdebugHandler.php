@@ -77,7 +77,7 @@ class XdebugHandler
      *
      * @return $this
      */
-    public function setLogger($logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->statusWriter->setLogger($logger);
         return $this;

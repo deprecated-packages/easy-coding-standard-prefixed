@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\SymplifyKernel\DependencyInjection\CompilerPass;
 
 use ECSPrefix20210507\Symfony\Component\Console\Application;
@@ -10,11 +11,7 @@ use Symplify\SymplifyKernel\Console\AutowiredConsoleApplication;
 use Symplify\SymplifyKernel\Console\ConsoleApplicationFactory;
 final class PrepareConsoleApplicationCompilerPass implements CompilerPassInterface
 {
-    /**
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     */
-    public function process($containerBuilder)
+    public function process(ContainerBuilder $containerBuilder) : void
     {
         $consoleApplicationClass = $this->resolveConsoleApplicationClass($containerBuilder);
         if ($consoleApplicationClass === null) {
@@ -30,11 +27,7 @@ final class PrepareConsoleApplicationCompilerPass implements CompilerPassInterfa
         // resolve name
         // resolve version
     }
-    /**
-     * @return string|null
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-     */
-    private function resolveConsoleApplicationClass($containerBuilder)
+    private function resolveConsoleApplicationClass(ContainerBuilder $containerBuilder) : ?string
     {
         foreach ($containerBuilder->getDefinitions() as $definition) {
             if (!\is_a((string) $definition->getClass(), Application::class, \true)) {
@@ -46,10 +39,8 @@ final class PrepareConsoleApplicationCompilerPass implements CompilerPassInterfa
     }
     /**
      * Missing console application? add basic one
-     * @return void
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
-    private function registerAutowiredSymfonyConsole($containerBuilder)
+    private function registerAutowiredSymfonyConsole(ContainerBuilder $containerBuilder) : void
     {
         $containerBuilder->autowire(AutowiredConsoleApplication::class, AutowiredConsoleApplication::class)->setFactory([new Reference(ConsoleApplicationFactory::class), 'create']);
         $containerBuilder->setAlias(Application::class, AutowiredConsoleApplication::class)->setPublic(\true);

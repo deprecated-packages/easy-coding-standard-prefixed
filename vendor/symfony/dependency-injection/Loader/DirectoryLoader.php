@@ -19,9 +19,8 @@ class DirectoryLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInj
 {
     /**
      * {@inheritdoc}
-     * @param string|null $type
      */
-    public function load($file, $type = null)
+    public function load($file, string $type = null)
     {
         $file = \rtrim($file, '/');
         $path = $this->locator->locate($file);
@@ -39,9 +38,8 @@ class DirectoryLoader extends \ECSPrefix20210507\Symfony\Component\DependencyInj
     }
     /**
      * {@inheritdoc}
-     * @param string $type
      */
-    public function supports($resource, $type = null)
+    public function supports($resource, string $type = null)
     {
         if ('directory' === $type) {
             return \true;

@@ -38,7 +38,7 @@ class DocCommentSniff implements Sniff
      *
      * @return void
      */
-    public function process($phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if (isset($tokens[$stackPtr]['comment_closer']) === \false || $tokens[$tokens[$stackPtr]['comment_closer']]['content'] === '' && $tokens[$stackPtr]['comment_closer'] === $phpcsFile->numTokens - 1) {

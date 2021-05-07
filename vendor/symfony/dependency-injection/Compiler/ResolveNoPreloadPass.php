@@ -20,21 +20,17 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
  */
 class ResolveNoPreloadPass extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
-    const DO_PRELOAD_TAG = '.container.do_preload';
+    private const DO_PRELOAD_TAG = '.container.do_preload';
     private $tagName;
     private $resolvedIds = [];
-    /**
-     * @param string $tagName
-     */
-    public function __construct($tagName = 'container.no_preload')
+    public function __construct(string $tagName = 'container.no_preload')
     {
         $this->tagName = $tagName;
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process($container)
+    public function process(ContainerBuilder $container)
     {
         $this->container = $container;
         try {
@@ -64,9 +60,8 @@ class ResolveNoPreloadPass extends \ECSPrefix20210507\Symfony\Component\Dependen
     }
     /**
      * {@inheritdoc}
-     * @param bool $isRoot
      */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         if ($value instanceof Reference && ContainerBuilder::IGNORE_ON_UNINITIALIZED_REFERENCE !== $value->getInvalidBehavior() && $this->container->hasDefinition($id = (string) $value)) {
             $definition = $this->container->getDefinition($id);

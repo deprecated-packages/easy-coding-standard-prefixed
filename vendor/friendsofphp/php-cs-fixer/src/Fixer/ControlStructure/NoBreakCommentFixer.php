@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -33,9 +34,8 @@ final class NoBreakCommentFixer extends AbstractFixer implements ConfigurableFix
 {
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition()
+    public function getDefinition() : FixerDefinitionInterface
     {
         return new FixerDefinition('There must be a comment when fall-through is intentional in a non-empty case body.', [new CodeSample('<?php
 switch ($foo) {
@@ -59,10 +59,8 @@ switch ($foo) {
     }
     /**
      * {@inheritdoc}
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @return bool
      */
-    public function isCandidate($tokens)
+    public function isCandidate(Tokens $tokens) : bool
     {
         return $tokens->isAnyTokenKindsFound([\T_CASE, \T_DEFAULT]);
     }
@@ -70,17 +68,15 @@ switch ($foo) {
      * {@inheritdoc}
      *
      * Must run after NoUselessElseFixer.
-     * @return int
      */
-    public function getPriority()
+    public function getPriority() : int
     {
         return 0;
     }
     /**
      * {@inheritdoc}
-     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition()
+    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('comment_text', 'The text to use in the added comment and to detect it.'))->setAllowedTypes(['string'])->setAllowedValues([static function (string $value) {
             if (\is_string($value) && Preg::match('/\\R/', $value)) {
@@ -93,11 +89,8 @@ switch ($foo) {
     }
     /**
      * {@inheritdoc}
-     * @return void
-     * @param \SplFileInfo $file
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix($file, $tokens)
+    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
     {
         for ($position = \count($tokens) - 1; $position >= 0; --$position) {
             if ($tokens[$position]->isGivenKind([\T_CASE, \T_DEFAULT])) {
@@ -105,12 +98,7 @@ switch ($foo) {
             }
         }
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $casePosition
-     */
-    private function fixCase($tokens, $casePosition)
+    private function fixCase(Tokens $tokens, int $casePosition) : void
     {
         $empty = \true;
         $fallThrough = \true;
@@ -166,11 +154,7 @@ switch ($foo) {
             }
         }
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Token $token
-     * @return bool
-     */
-    private function isNoBreakComment($token)
+    private function isNoBreakComment(Token $token) : bool
     {
         if (!$token->isComment()) {
             return \false;
@@ -178,12 +162,7 @@ switch ($foo) {
         $text = \preg_quote($this->configuration['comment_text'], '~');
         return 1 === Preg::match("~^((//|#)\\s*{$text}\\s*)|(/\\*\\*?\\s*{$text}\\s*\\*/)\$~i", $token->getContent());
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $casePosition
-     */
-    private function insertCommentAt($tokens, $casePosition)
+    private function insertCommentAt(Tokens $tokens, int $casePosition) : void
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         $newlinePosition = $this->ensureNewLineAt($tokens, $casePosition);
@@ -208,10 +187,8 @@ switch ($foo) {
     }
     /**
      * @return int The newline token position
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $position
      */
-    private function ensureNewLineAt($tokens, $position)
+    private function ensureNewLineAt(Tokens $tokens, int $position) : int
     {
         $lineEnding = $this->whitespacesConfig->getLineEnding();
         $content = $lineEnding . WhitespacesAnalyzer::detectIndent($tokens, $position);
@@ -237,12 +214,7 @@ switch ($foo) {
         }
         return $position - 1;
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $commentPosition
-     */
-    private function removeComment($tokens, $commentPosition)
+    private function removeComment(Tokens $tokens, int $commentPosition) : void
     {
         if ($tokens[$tokens->getPrevNonWhitespace($commentPosition)]->isGivenKind(\T_OPEN_TAG)) {
             $whitespacePosition = $commentPosition + 1;
@@ -262,12 +234,7 @@ switch ($foo) {
         }
         $tokens->clearTokenAndMergeSurroundingWhitespace($commentPosition);
     }
-    /**
-     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
-     * @param int $position
-     * @return int
-     */
-    private function getStructureEnd($tokens, $position)
+    private function getStructureEnd(Tokens $tokens, int $position) : int
     {
         $initialToken = $tokens[$position];
         if ($initialToken->isGivenKind([\T_FOR, \T_FOREACH, \T_WHILE, \T_IF, \T_ELSEIF, \T_SWITCH, \T_FUNCTION])) {

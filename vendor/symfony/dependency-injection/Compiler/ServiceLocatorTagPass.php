@@ -26,10 +26,7 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\ServiceLocator;
 final class ServiceLocatorTagPass extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     use PriorityTaggedServiceTrait;
-    /**
-     * @param bool $isRoot
-     */
-    protected function processValue($value, $isRoot = \false)
+    protected function processValue($value, bool $isRoot = \false)
     {
         if ($value instanceof ServiceLocatorArgument) {
             if ($value->getTaggedIteratorArgument()) {
@@ -78,11 +75,8 @@ final class ServiceLocatorTagPass extends \ECSPrefix20210507\Symfony\Component\D
     }
     /**
      * @param Reference[] $refMap
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param string $callerId
-     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference
      */
-    public static function register($container, array $refMap, $callerId = null)
+    public static function register(ContainerBuilder $container, array $refMap, string $callerId = null) : Reference
     {
         foreach ($refMap as $id => $ref) {
             if (!$ref instanceof Reference) {

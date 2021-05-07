@@ -49,12 +49,12 @@ class RedisTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Ad
     /**
      * Limits for how many keys are deleted in batch.
      */
-    const BULK_DELETE_LIMIT = 10000;
+    private const BULK_DELETE_LIMIT = 10000;
     /**
      * On cache items without a lifetime set, we set it to 100 days. This is to make sure cache items are
      * preferred to be evicted over tag Sets, if eviction policy is configured according to requirements.
      */
-    const DEFAULT_CACHE_TTL = 8640000;
+    private const DEFAULT_CACHE_TTL = 8640000;
     /**
      * @var string|null detected eviction policy used on Redis server
      */
@@ -63,9 +63,8 @@ class RedisTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Ad
      * @param \Redis|\RedisArray|\RedisCluster|\Predis\ClientInterface $redisClient     The redis client
      * @param string                                                   $namespace       The default namespace
      * @param int                                                      $defaultLifetime The default lifetime
-     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller
      */
-    public function __construct($redisClient, $namespace = '', $defaultLifetime = 0, $marshaller = null)
+    public function __construct($redisClient, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
     {
         if ($redisClient instanceof \ECSPrefix20210507\Predis\ClientInterface && $redisClient->getConnection() instanceof ClusterInterface && !$redisClient->getConnection() instanceof PredisCluster) {
             throw new InvalidArgumentException(\sprintf('Unsupported Predis cluster connection: only "%s" is, "%s" given.', PredisCluster::class, \get_debug_type($redisClient->getConnection())));
@@ -82,12 +81,8 @@ class RedisTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Ad
     }
     /**
      * {@inheritdoc}
-     * @param mixed[] $addTagData
-     * @param mixed[] $delTagData
-     * @param int $lifetime
-     * @return mixed[]
      */
-    protected function doSave(array $values, $lifetime, $addTagData = [], $delTagData = [])
+    protected function doSave(array $values, int $lifetime, array $addTagData = [], array $delTagData = []) : array
     {
         $eviction = $this->getRedisEvictionPolicy();
         if ('noeviction' !== $eviction && 0 !== \strpos($eviction, 'volatile-')) {
@@ -129,9 +124,8 @@ class RedisTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Ad
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
      */
-    protected function doDeleteYieldTags(array $ids)
+    protected function doDeleteYieldTags(array $ids) : iterable
     {
         $lua = <<<'EOLUA'
             local v = redis.call('GET', KEYS[1])
@@ -167,9 +161,8 @@ EOLUA;
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    protected function doDeleteTagRelations(array $tagData)
+    protected function doDeleteTagRelations(array $tagData) : bool
     {
         $this->pipeline(static function () use($tagData) {
             foreach ($tagData as $tagId => $idList) {
@@ -181,9 +174,8 @@ EOLUA;
     }
     /**
      * {@inheritdoc}
-     * @return bool
      */
-    protected function doInvalidate(array $tagIds)
+    protected function doInvalidate(array $tagIds) : bool
     {
         if (!$this->redis instanceof \ECSPrefix20210507\Predis\ClientInterface || !$this->redis->getConnection() instanceof PredisCluster) {
             $movedTagSetIds = $this->renameKeys($this->redis, $tagIds);
@@ -193,7 +185,7 @@ EOLUA;
             $movedTagSetIds = [];
             foreach ($tagIds as $id) {
                 $connection = $clusterConnection->getConnectionByKey($id);
-                $slot = isset($tagIdsByConnection[$connection]) ? $tagIdsByConnection[$connection] : ($tagIdsByConnection[$connection] = new \ArrayObject());
+                $slot = $tagIdsByConnection[$connection] ?? ($tagIdsByConnection[$connection] = new \ArrayObject());
                 $slot[] = $id;
             }
             foreach ($tagIdsByConnection as $connection) {
@@ -229,7 +221,7 @@ EOLUA;
      *
      * @return array Filtered list of the valid moved keys (only those that existed)
      */
-    private function renameKeys($redis, array $ids)
+    private function renameKeys($redis, array $ids) : array
     {
         $newIds = [];
         $uniqueToken = \bin2hex(\random_bytes(10));
@@ -246,10 +238,7 @@ EOLUA;
         }
         return $newIds;
     }
-    /**
-     * @return string
-     */
-    private function getRedisEvictionPolicy()
+    private function getRedisEvictionPolicy() : string
     {
         if (null !== $this->redisEvictionPolicy) {
             return $this->redisEvictionPolicy;
@@ -262,7 +251,7 @@ EOLUA;
         }
         foreach ($hosts as $host) {
             $info = $host->info('Memory');
-            $info = isset($info['Memory']) ? $info['Memory'] : $info;
+            $info = $info['Memory'] ?? $info;
             return $this->redisEvictionPolicy = $info['maxmemory_policy'];
         }
         return $this->redisEvictionPolicy = '';

@@ -20,10 +20,7 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 class ServiceClosureArgument implements \ECSPrefix20210507\Symfony\Component\DependencyInjection\Argument\ArgumentInterface
 {
     private $values;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference $reference
-     */
-    public function __construct($reference)
+    public function __construct(Reference $reference)
     {
         $this->values = [$reference];
     }

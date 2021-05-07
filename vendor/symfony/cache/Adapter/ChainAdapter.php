@@ -37,7 +37,7 @@ class ChainAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * @param CacheItemPoolInterface[] $adapters        The ordered list of adapters used to fetch cached items
      * @param int                      $defaultLifetime The default lifetime of items propagated from lower adapters to upper ones
      */
-    public function __construct(array $adapters, $defaultLifetime = 0)
+    public function __construct(array $adapters, int $defaultLifetime = 0)
     {
         if (!$adapters) {
             throw new InvalidArgumentException('At least one adapter must be specified.');
@@ -59,7 +59,7 @@ class ChainAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
         $this->adapterCount = \count($this->adapters);
         $this->syncItem = \Closure::bind(static function ($sourceItem, $item, $sourceMetadata = null) use($defaultLifetime) {
             $sourceItem->isTaggable = \false;
-            $sourceMetadata = isset($sourceMetadata) ? $sourceMetadata : $sourceItem->metadata;
+            $sourceMetadata = $sourceMetadata ?? $sourceItem->metadata;
             unset($sourceMetadata[CacheItem::METADATA_TAGS]);
             $item->value = $sourceItem->value;
             $item->isHit = $sourceItem->isHit;
@@ -74,10 +74,8 @@ class ChainAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     }
     /**
      * {@inheritdoc}
-     * @param string $key
-     * @param float $beta
      */
-    public function get($key, callable $callback, $beta = null, array &$metadata = null)
+    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
     {
         $lastItem = null;
         $i = 0;
@@ -93,7 +91,7 @@ class ChainAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
                 $value = $this->doGet($adapter, $key, $callback, $beta, $metadata);
             }
             if (null !== $item) {
-                ($this->syncItem)($lastItem = isset($lastItem) ? $lastItem : $item, $item, $metadata);
+                ($this->syncItem)($lastItem = $lastItem ?? $item, $item, $metadata);
             }
             return $value;
         };
@@ -125,16 +123,12 @@ class ChainAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
     {
         return $this->generateItems($this->adapters[0]->getItems($keys), 0);
     }
-    /**
-     * @param mixed[] $items
-     * @param int $adapterIndex
-     */
-    private function generateItems($items, $adapterIndex)
+    private function generateItems(iterable $items, int $adapterIndex)
     {
         $missing = [];
         $misses = [];
         $nextAdapterIndex = $adapterIndex + 1;
-        $nextAdapter = isset($this->adapters[$nextAdapterIndex]) ? $this->adapters[$nextAdapterIndex] : null;
+        $nextAdapter = $this->adapters[$nextAdapterIndex] ?? null;
         foreach ($items as $k => $item) {
             if (!$nextAdapter || $item->isHit()) {
                 (yield $k => $item);
@@ -173,9 +167,8 @@ class ChainAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * {@inheritdoc}
      *
      * @return bool
-     * @param string $prefix
      */
-    public function clear($prefix = '')
+    public function clear(string $prefix = '')
     {
         $cleared = \true;
         $i = $this->adapterCount;
@@ -220,9 +213,8 @@ class ChainAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function save($item)
+    public function save(CacheItemInterface $item)
     {
         $saved = \true;
         $i = $this->adapterCount;
@@ -235,9 +227,8 @@ class ChainAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter
      * {@inheritdoc}
      *
      * @return bool
-     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred($item)
+    public function saveDeferred(CacheItemInterface $item)
     {
         $saved = \true;
         $i = $this->adapterCount;

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Json;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -11,23 +12,16 @@ final class JsonInliner
      * @var string
      * @see https://regex101.com/r/jhWo9g/1
      */
-    const SPACE_REGEX = '#\\s+#';
+    private const SPACE_REGEX = '#\\s+#';
     /**
      * @var ParameterProvider
      */
     private $parameterProvider;
-    /**
-     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
-     */
-    public function __construct($parameterProvider)
+    public function __construct(ParameterProvider $parameterProvider)
     {
         $this->parameterProvider = $parameterProvider;
     }
-    /**
-     * @param string $jsonContent
-     * @return string
-     */
-    public function inlineSections($jsonContent)
+    public function inlineSections(string $jsonContent) : string
     {
         if (!$this->parameterProvider->hasParameter(Option::INLINE_SECTIONS)) {
             return $jsonContent;

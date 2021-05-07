@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace ECSPrefix20210507;
 
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
@@ -13,7 +14,7 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\
 use Symplify\CodingStandard\Fixer\ArrayNotation\ArrayListItemNewlineFixer;
 use Symplify\CodingStandard\Fixer\ArrayNotation\ArrayOpenerAndCloserNewlineFixer;
 use Symplify\CodingStandard\Fixer\ArrayNotation\StandaloneLineInMultilineArrayFixer;
-return static function (ContainerConfigurator $containerConfigurator) {
+return static function (ContainerConfigurator $containerConfigurator) : void {
     $services = $containerConfigurator->services();
     $services->set(NoWhitespaceBeforeCommaInArrayFixer::class);
     $services->set(ArrayOpenerAndCloserNewlineFixer::class);

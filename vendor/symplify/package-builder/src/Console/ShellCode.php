@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console;
 
 final class ShellCode
@@ -7,9 +8,9 @@ final class ShellCode
     /**
      * @var int
      */
-    const SUCCESS = 0;
+    public const SUCCESS = 0;
     /**
      * @var int
      */
-    const ERROR = 1;
+    public const ERROR = 1;
 }

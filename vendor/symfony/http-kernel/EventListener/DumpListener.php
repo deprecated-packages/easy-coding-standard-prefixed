@@ -26,12 +26,7 @@ class DumpListener implements EventSubscriberInterface
     private $cloner;
     private $dumper;
     private $connection;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\ClonerInterface $cloner
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\DataDumperInterface $dumper
-     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Server\Connection $connection
-     */
-    public function __construct($cloner, $dumper, $connection = null)
+    public function __construct(ClonerInterface $cloner, DataDumperInterface $dumper, Connection $connection = null)
     {
         $this->cloner = $cloner;
         $this->dumper = $dumper;

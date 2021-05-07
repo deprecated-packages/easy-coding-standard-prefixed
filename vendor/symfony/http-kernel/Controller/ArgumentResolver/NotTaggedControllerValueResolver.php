@@ -23,20 +23,14 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMe
 final class NotTaggedControllerValueResolver implements ArgumentValueResolverInterface
 {
     private $container;
-    /**
-     * @param \ECSPrefix20210507\Psr\Container\ContainerInterface $container
-     */
-    public function __construct($container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
     /**
      * {@inheritdoc}
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
-     * @return bool
      */
-    public function supports($request, $argument)
+    public function supports(Request $request, ArgumentMetadata $argument) : bool
     {
         $controller = $request->attributes->get('_controller');
         if (\is_array($controller) && \is_callable($controller, \true) && \is_string($controller[0])) {
@@ -54,11 +48,8 @@ final class NotTaggedControllerValueResolver implements ArgumentValueResolverInt
     }
     /**
      * {@inheritdoc}
-     * @return mixed[]
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
-     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
      */
-    public function resolve($request, $argument)
+    public function resolve(Request $request, ArgumentMetadata $argument) : iterable
     {
         if (\is_array($controller = $request->attributes->get('_controller'))) {
             $controller = $controller[0] . '::' . $controller[1];

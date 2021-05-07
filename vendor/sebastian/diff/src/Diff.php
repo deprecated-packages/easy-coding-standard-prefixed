@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of sebastian/diff.
  *
@@ -26,41 +27,32 @@ final class Diff
     private $chunks;
     /**
      * @param Chunk[] $chunks
-     * @param string $from
-     * @param string $to
      */
-    public function __construct($from, $to, array $chunks = [])
+    public function __construct(string $from, string $to, array $chunks = [])
     {
         $this->from = $from;
         $this->to = $to;
         $this->chunks = $chunks;
     }
-    /**
-     * @return string
-     */
-    public function getFrom()
+    public function getFrom() : string
     {
         return $this->from;
     }
-    /**
-     * @return string
-     */
-    public function getTo()
+    public function getTo() : string
     {
         return $this->to;
     }
     /**
-     * @return mixed[]
+     * @return Chunk[]
      */
-    public function getChunks()
+    public function getChunks() : array
     {
         return $this->chunks;
     }
     /**
      * @param Chunk[] $chunks
-     * @return void
      */
-    public function setChunks(array $chunks)
+    public function setChunks(array $chunks) : void
     {
         $this->chunks = $chunks;
     }

@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 namespace Symplify\EasyTesting\PHPUnit\Behavior;
 
 use ECSPrefix20210507\Symfony\Component\Finder\Finder;
@@ -15,12 +16,7 @@ use Symplify\SmartFileSystem\SmartFileInfo;
  */
 trait DirectoryAssertableTrait
 {
-    /**
-     * @return void
-     * @param string $expectedDirectory
-     * @param string $outputDirectory
-     */
-    protected function assertDirectoryEquals($expectedDirectory, $outputDirectory)
+    protected function assertDirectoryEquals(string $expectedDirectory, string $outputDirectory) : void
     {
         $expectedFileInfos = $this->findFileInfosInDirectory($expectedDirectory);
         $outputFileInfos = $this->findFileInfosInDirectory($outputDirectory);
@@ -36,10 +32,9 @@ trait DirectoryAssertableTrait
         }
     }
     /**
-     * @return mixed[]
-     * @param string $directory
+     * @return SmartFileInfo[]
      */
-    private function findFileInfosInDirectory($directory)
+    private function findFileInfosInDirectory(string $directory) : array
     {
         $firstDirectoryFinder = new Finder();
         $firstDirectoryFinder->files()->in($directory);
@@ -49,11 +44,9 @@ trait DirectoryAssertableTrait
     /**
      * @param SmartFileInfo[] $expectedFileInfos
      * @param SmartFileInfo[] $outputFileInfos
-     * @return mixed[]
-     * @param string $expectedDirectory
-     * @param string $outputDirectory
+     * @return array<string, ExpectedAndOutputFileInfoPair>
      */
-    private function groupFileInfosByRelativeFilePath(array $expectedFileInfos, $expectedDirectory, array $outputFileInfos, $outputDirectory)
+    private function groupFileInfosByRelativeFilePath(array $expectedFileInfos, string $expectedDirectory, array $outputFileInfos, string $outputDirectory) : array
     {
         $fileInfosByRelativeFilePath = [];
         foreach ($expectedFileInfos as $expectedFileInfo) {
@@ -66,11 +59,8 @@ trait DirectoryAssertableTrait
     }
     /**
      * @param SmartFileInfo[] $fileInfos
-     * @return \Symplify\SmartFileSystem\SmartFileInfo|null
-     * @param string $directory
-     * @param string $desiredRelativeFilePath
      */
-    private function resolveFileInfoByRelativeFilePath(array $fileInfos, $directory, $desiredRelativeFilePath)
+    private function resolveFileInfoByRelativeFilePath(array $fileInfos, string $directory, string $desiredRelativeFilePath) : ?SmartFileInfo
     {
         foreach ($fileInfos as $fileInfo) {
             $relativeFilePath = $fileInfo->getRelativeFilePathFromDirectory($directory);

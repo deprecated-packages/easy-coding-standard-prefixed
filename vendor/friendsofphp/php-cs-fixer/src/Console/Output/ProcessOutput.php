@@ -1,5 +1,6 @@
 <?php
 
+declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -47,13 +48,7 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
      * @var int
      */
     private $symbolsPerLine;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
-     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
-     * @param int $width
-     * @param int $nbFiles
-     */
-    public function __construct($output, $dispatcher, $width, $nbFiles)
+    public function __construct(OutputInterface $output, EventDispatcherInterface $dispatcher, int $width, int $nbFiles)
     {
         $this->output = $output;
         $this->eventDispatcher = $dispatcher;
@@ -71,9 +66,8 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
     /**
      * This class is not intended to be serialized,
      * and cannot be deserialized (see __wakeup method).
-     * @return mixed[]
      */
-    public function __sleep()
+    public function __sleep() : array
     {
         throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
     }
@@ -82,17 +76,12 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
      * code by leveraging the __destruct method.
      *
      * @see https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection
-     * @return void
      */
-    public function __wakeup()
+    public function __wakeup() : void
     {
         throw new \BadMethodCallException('Cannot unserialize ' . __CLASS__);
     }
-    /**
-     * @return void
-     * @param \PhpCsFixer\FixerFileProcessedEvent $event
-     */
-    public function onFixerFileProcessed($event)
+    public function onFixerFileProcessed(FixerFileProcessedEvent $event) : void
     {
         $status = self::$eventStatusMap[$event->getStatus()];
         $this->output->write($this->output->isDecorated() ? \sprintf($status['format'], $status['symbol']) : $status['symbol']);
@@ -106,10 +95,7 @@ final class ProcessOutput implements \PhpCsFixer\Console\Output\ProcessOutputInt
             }
         }
     }
-    /**
-     * @return void
-     */
-    public function printLegend()
+    public function printLegend() : void
     {
         $symbols = [];
         foreach (self::$eventStatusMap as $status) {

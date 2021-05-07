@@ -22,20 +22,14 @@ final class RequestContextProvider implements \ECSPrefix20210507\Symfony\Compone
 {
     private $requestStack;
     private $cloner;
-    /**
-     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
-     */
-    public function __construct($requestStack)
+    public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
         $this->cloner = new VarCloner();
         $this->cloner->setMaxItems(0);
         $this->cloner->addCasters(ReflectionCaster::UNSET_CLOSURE_FILE_INFO);
     }
-    /**
-     * @return mixed[]|null
-     */
-    public function getContext()
+    public function getContext() : ?array
     {
         if (null === ($request = $this->requestStack->getCurrentRequest())) {
             return null;
