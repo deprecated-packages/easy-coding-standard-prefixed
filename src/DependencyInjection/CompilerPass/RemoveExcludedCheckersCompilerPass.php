@@ -32,20 +32,29 @@ final class RemoveExcludedCheckersCompilerPass implements CompilerPassInterface
         $excludedCheckers = [];
         $skip = (array) $parameterBag->get(Option::SKIP);
         foreach ($skip as $key => $value) {
-            // "SomeClass::class" => null
-            if (\is_string($key) && \class_exists($key) && $value === null) {
-                $excludedCheckers[] = $key;
-            }
-            // "SomeClass::class"
-            if (!\is_int($key)) {
+            $excludedChecker = $this->matchFullClassSkip($key, $value);
+            if ($excludedChecker === null) {
                 continue;
             }
-            if (!\class_exists($value)) {
-                continue;
-            }
-            $excludedCheckers[] = $value;
-            return \array_unique($excludedCheckers);
+            $excludedCheckers[] = $excludedChecker;
         }
         return \array_unique($excludedCheckers);
+    }
+    /**
+     * @param mixed $key
+     * @param mixed $value
+     * @return class-string|null
+     */
+    private function matchFullClassSkip($key, $value) : ?string
+    {
+        // "SomeClass::class" => null
+        if (\is_string($key) && \class_exists($key) && $value === null) {
+            return $key;
+        }
+        // "SomeClass::class"
+        if (\is_int($key) && \is_string($value) && \class_exists($value)) {
+            return $value;
+        }
+        return null;
     }
 }
