@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\PackageBuilder\DependencyInjection;
 
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Definition;
 use Symplify\PackageBuilder\Exception\DependencyInjection\DefinitionForTypeNotFoundException;
 use Throwable;
 /**

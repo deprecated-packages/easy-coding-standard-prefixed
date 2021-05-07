@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper000f93dc572d\Symfony\Component\HttpKernel;
+namespace _PhpScoper91fe47cd7f25\Symfony\Component\HttpKernel;
 
-use _PhpScoper000f93dc572d\Symfony\Component\Config\Loader\LoaderInterface;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\ContainerInterface;
-use _PhpScoper000f93dc572d\Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use _PhpScoper91fe47cd7f25\Symfony\Component\Config\Loader\LoaderInterface;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper91fe47cd7f25\Symfony\Component\HttpKernel\Bundle\BundleInterface;
 /**
  * The Kernel is the heart of the Symfony system.
  *
@@ -24,7 +24,7 @@ use _PhpScoper000f93dc572d\Symfony\Component\HttpKernel\Bundle\BundleInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-interface KernelInterface extends \_PhpScoper000f93dc572d\Symfony\Component\HttpKernel\HttpKernelInterface
+interface KernelInterface extends \_PhpScoper91fe47cd7f25\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     /**
      * Returns an array of bundles to register.

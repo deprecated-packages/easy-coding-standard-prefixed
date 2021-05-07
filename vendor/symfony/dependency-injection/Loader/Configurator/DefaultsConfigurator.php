@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class DefaultsConfigurator extends \_PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class DefaultsConfigurator extends \_PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     public const FACTORY = 'defaults';
     use Traits\AutoconfigureTrait;
@@ -23,7 +23,7 @@ class DefaultsConfigurator extends \_PhpScoper000f93dc572d\Symfony\Component\Dep
     use Traits\BindTrait;
     use Traits\PublicTrait;
     private $path;
-    public function __construct(\_PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, Definition $definition, string $path = null)
+    public function __construct(\_PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, Definition $definition, string $path = null)
     {
         parent::__construct($parent, $definition, null, []);
         $this->path = $path;
@@ -51,7 +51,7 @@ class DefaultsConfigurator extends \_PhpScoper000f93dc572d\Symfony\Component\Dep
     /**
      * Defines an instanceof-conditional to be applied to following service definitions.
      */
-    public final function instanceof(string $fqcn) : \_PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
+    public final function instanceof(string $fqcn) : \_PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
     {
         return $this->parent->instanceof($fqcn);
     }

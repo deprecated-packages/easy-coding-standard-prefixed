@@ -12,7 +12,7 @@ namespace PHP_CodeSniffer\Tests\Core;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Files\DummyFile;
-use _PhpScoper000f93dc572d\PHPUnit\Framework\TestCase;
+use _PhpScoper91fe47cd7f25\PHPUnit\Framework\TestCase;
 class ErrorSuppressionTest extends TestCase
 {
     /**

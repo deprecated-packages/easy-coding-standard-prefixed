@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\ContainerInterface;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ReferenceConfigurator extends \_PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+class ReferenceConfigurator extends \_PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
     /** @internal */
     protected $id;

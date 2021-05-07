@@ -17,11 +17,11 @@ use PhpCsFixer\Console\Report\ListSetsReport\ReporterFactory;
 use PhpCsFixer\Console\Report\ListSetsReport\ReportSummary;
 use PhpCsFixer\Console\Report\ListSetsReport\TextReporter;
 use PhpCsFixer\RuleSet\RuleSets;
-use _PhpScoper000f93dc572d\Symfony\Component\Console\Command\Command;
-use _PhpScoper000f93dc572d\Symfony\Component\Console\Formatter\OutputFormatter;
-use _PhpScoper000f93dc572d\Symfony\Component\Console\Input\InputInterface;
-use _PhpScoper000f93dc572d\Symfony\Component\Console\Input\InputOption;
-use _PhpScoper000f93dc572d\Symfony\Component\Console\Output\OutputInterface;
+use _PhpScoper91fe47cd7f25\Symfony\Component\Console\Command\Command;
+use _PhpScoper91fe47cd7f25\Symfony\Component\Console\Formatter\OutputFormatter;
+use _PhpScoper91fe47cd7f25\Symfony\Component\Console\Input\InputInterface;
+use _PhpScoper91fe47cd7f25\Symfony\Component\Console\Input\InputOption;
+use _PhpScoper91fe47cd7f25\Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *

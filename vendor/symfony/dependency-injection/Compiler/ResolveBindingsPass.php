@@ -8,22 +8,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Compiler;
+namespace _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Compiler;
 
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Argument\BoundArgument;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Definition;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Reference;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\TypedReference;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Argument\BoundArgument;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\LazyProxy\ProxyHelper;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Reference;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\TypedReference;
 /**
  * @author Guilhem Niot <guilhem.niot@gmail.com>
  */
-class ResolveBindingsPass extends \_PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
+class ResolveBindingsPass extends \_PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $usedBindings = [];
     private $unusedBindings = [];

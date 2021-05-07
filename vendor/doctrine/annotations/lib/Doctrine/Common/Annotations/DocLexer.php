@@ -1,8 +1,8 @@
 <?php
 
-namespace _PhpScoper000f93dc572d\Doctrine\Common\Annotations;
+namespace _PhpScoper91fe47cd7f25\Doctrine\Common\Annotations;
 
-use _PhpScoper000f93dc572d\Doctrine\Common\Lexer\AbstractLexer;
+use _PhpScoper91fe47cd7f25\Doctrine\Common\Lexer\AbstractLexer;
 use function ctype_alpha;
 use function is_numeric;
 use function str_replace;

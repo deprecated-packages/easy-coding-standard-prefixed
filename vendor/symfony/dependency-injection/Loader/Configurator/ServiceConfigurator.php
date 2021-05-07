@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Definition;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
-class ServiceConfigurator extends \_PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
+class ServiceConfigurator extends \_PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
     public const FACTORY = 'services';
     use Traits\AbstractTrait;
@@ -41,7 +41,7 @@ class ServiceConfigurator extends \_PhpScoper000f93dc572d\Symfony\Component\Depe
     private $instanceof;
     private $allowParent;
     private $path;
-    public function __construct(ContainerBuilder $container, array $instanceof, bool $allowParent, \_PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, Definition $definition, $id, array $defaultTags, string $path = null)
+    public function __construct(ContainerBuilder $container, array $instanceof, bool $allowParent, \_PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, Definition $definition, $id, array $defaultTags, string $path = null)
     {
         $this->container = $container;
         $this->instanceof = $instanceof;

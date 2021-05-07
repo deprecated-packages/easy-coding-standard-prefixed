@@ -1,11 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper000f93dc572d;
+namespace _PhpScoper91fe47cd7f25;
 
-use _PhpScoper000f93dc572d\Nette\Utils\Strings;
-use _PhpScoper000f93dc572d\Isolated\Symfony\Component\Finder\Finder;
-$finder = new \_PhpScoper000f93dc572d\Isolated\Symfony\Component\Finder\Finder();
+use _PhpScoper91fe47cd7f25\Nette\Utils\Strings;
+use _PhpScoper91fe47cd7f25\Isolated\Symfony\Component\Finder\Finder;
+$finder = new \_PhpScoper91fe47cd7f25\Isolated\Symfony\Component\Finder\Finder();
 $polyfillFileInfos = $finder->files()->in(__DIR__ . '/vendor/symfony/polyfill-*')->name('*.php')->getIterator();
 $polyfillFilePaths = [];
 foreach ($polyfillFileInfos as $polyfillFileInfo) {
@@ -20,16 +20,16 @@ return ['files-whitelist' => [
     'Symplify\\*',
     'PhpCsFixer\\*',
     'PHP_CodeSniffer\\*',
-    '_PhpScoper000f93dc572d\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
-    '_PhpScoper000f93dc572d\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
-    '_PhpScoper000f93dc572d\\Composer\\InstalledVersions',
+    '_PhpScoper91fe47cd7f25\\Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\ContainerConfigurator',
+    '_PhpScoper91fe47cd7f25\\Symfony\\Component\\DependencyInjection\\Extension\\ExtensionInterface',
+    '_PhpScoper91fe47cd7f25\\Composer\\InstalledVersions',
 ], 'patchers' => [
     function (string $filePath, string $prefix, string $content) : string {
         if (!Strings::endsWith($filePath, 'vendor/jean85/pretty-package-versions/src/PrettyVersions.php')) {
             return $content;
         }
         // see https://regex101.com/r/v8zRMm/1
-        return Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScoper000f93dc572d\\Composer\\InstalledVersions');
+        return Strings::replace($content, '#' . $prefix . '\\\\Composer\\\\InstalledVersions#', '_PhpScoper91fe47cd7f25\\Composer\\InstalledVersions');
     },
     // fixes https://github.com/symplify/symplify/issues/3102
     function (string $filePath, string $prefix, string $content) : string {

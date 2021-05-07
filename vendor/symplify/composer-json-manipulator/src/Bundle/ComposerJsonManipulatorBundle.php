@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Bundle;
 
-use _PhpScoper000f93dc572d\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper91fe47cd7f25\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\ComposerJsonManipulator\DependencyInjection\Extension\ComposerJsonManipulatorExtension;
 final class ComposerJsonManipulatorBundle extends Bundle
 {

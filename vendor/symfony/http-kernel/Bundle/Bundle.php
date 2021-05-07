@@ -8,19 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper000f93dc572d\Symfony\Component\HttpKernel\Bundle;
+namespace _PhpScoper91fe47cd7f25\Symfony\Component\HttpKernel\Bundle;
 
-use _PhpScoper000f93dc572d\Symfony\Component\Console\Application;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Container;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper000f93dc572d\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use _PhpScoper91fe47cd7f25\Symfony\Component\Console\Application;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Container;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 /**
  * An implementation of BundleInterface that adds a few conventions for DependencyInjection extensions.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-abstract class Bundle implements \_PhpScoper000f93dc572d\Symfony\Component\HttpKernel\Bundle\BundleInterface
+abstract class Bundle implements \_PhpScoper91fe47cd7f25\Symfony\Component\HttpKernel\Bundle\BundleInterface
 {
     use ContainerAwareTrait;
     protected $name;

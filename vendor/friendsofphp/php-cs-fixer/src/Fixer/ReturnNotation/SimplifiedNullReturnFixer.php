@@ -33,7 +33,7 @@ final class SimplifiedNullReturnFixer extends AbstractFixer
         return new FixerDefinition('A return statement wishing to return `void` should not return `null`.', [new CodeSample("<?php return null;\n"), new VersionSpecificCodeSample(<<<'EOT'
 <?php
 
-namespace _PhpScoper000f93dc572d;
+namespace _PhpScoper91fe47cd7f25;
 
 function foo()
 {

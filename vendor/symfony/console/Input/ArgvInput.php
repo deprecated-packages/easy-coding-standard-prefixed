@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace _PhpScoper000f93dc572d\Symfony\Component\Console\Input;
+namespace _PhpScoper91fe47cd7f25\Symfony\Component\Console\Input;
 
-use _PhpScoper000f93dc572d\Symfony\Component\Console\Exception\RuntimeException;
+use _PhpScoper91fe47cd7f25\Symfony\Component\Console\Exception\RuntimeException;
 /**
  * ArgvInput represents an input coming from the CLI arguments.
  *
@@ -36,11 +36,11 @@ use _PhpScoper000f93dc572d\Symfony\Component\Console\Exception\RuntimeException;
  * @see http://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html
  * @see http://www.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap12.html#tag_12_02
  */
-class ArgvInput extends \_PhpScoper000f93dc572d\Symfony\Component\Console\Input\Input
+class ArgvInput extends \_PhpScoper91fe47cd7f25\Symfony\Component\Console\Input\Input
 {
     private $tokens;
     private $parsed;
-    public function __construct(array $argv = null, \_PhpScoper000f93dc572d\Symfony\Component\Console\Input\InputDefinition $definition = null)
+    public function __construct(array $argv = null, \_PhpScoper91fe47cd7f25\Symfony\Component\Console\Input\InputDefinition $definition = null)
     {
         $argv = $argv ?? $_SERVER['argv'] ?? [];
         // strip the application name
