@@ -1533,7 +1533,6 @@ return array(
     'Symplify\\EasyCodingStandard\\Configuration\\Exception\\NoCheckersLoadedException' => $baseDir . '/packages/configuration/src/Exception/NoCheckersLoadedException.php',
     'Symplify\\EasyCodingStandard\\Configuration\\Exception\\NoDirectoryException' => $baseDir . '/packages/configuration/src/Exception/NoDirectoryException.php',
     'Symplify\\EasyCodingStandard\\Configuration\\Exception\\NoMarkdownFileException' => $baseDir . '/packages/configuration/src/Exception/NoMarkdownFileException.php',
-    'Symplify\\EasyCodingStandard\\Configuration\\Exception\\NoPHPFileException' => $baseDir . '/packages/configuration/src/Exception/NoPHPFileException.php',
     'Symplify\\EasyCodingStandard\\Configuration\\Exception\\OutputFormatterNotFoundException' => $baseDir . '/packages/configuration/src/Exception/OutputFormatterNotFoundException.php',
     'Symplify\\EasyCodingStandard\\Console\\Command\\AbstractCheckCommand' => $baseDir . '/src/Console/Command/AbstractCheckCommand.php',
     'Symplify\\EasyCodingStandard\\Console\\Command\\CheckCommand' => $baseDir . '/src/Console/Command/CheckCommand.php',

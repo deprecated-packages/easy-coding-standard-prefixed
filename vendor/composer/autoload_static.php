@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf880c78d9c6e77df8a5be25c11f107f5
+class ComposerStaticInit7acd9a4234fb39ee2f656fb03df947a3
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -1872,7 +1872,6 @@ class ComposerStaticInitf880c78d9c6e77df8a5be25c11f107f5
         'Symplify\\EasyCodingStandard\\Configuration\\Exception\\NoCheckersLoadedException' => __DIR__ . '/../..' . '/packages/configuration/src/Exception/NoCheckersLoadedException.php',
         'Symplify\\EasyCodingStandard\\Configuration\\Exception\\NoDirectoryException' => __DIR__ . '/../..' . '/packages/configuration/src/Exception/NoDirectoryException.php',
         'Symplify\\EasyCodingStandard\\Configuration\\Exception\\NoMarkdownFileException' => __DIR__ . '/../..' . '/packages/configuration/src/Exception/NoMarkdownFileException.php',
-        'Symplify\\EasyCodingStandard\\Configuration\\Exception\\NoPHPFileException' => __DIR__ . '/../..' . '/packages/configuration/src/Exception/NoPHPFileException.php',
         'Symplify\\EasyCodingStandard\\Configuration\\Exception\\OutputFormatterNotFoundException' => __DIR__ . '/../..' . '/packages/configuration/src/Exception/OutputFormatterNotFoundException.php',
         'Symplify\\EasyCodingStandard\\Console\\Command\\AbstractCheckCommand' => __DIR__ . '/../..' . '/src/Console/Command/AbstractCheckCommand.php',
         'Symplify\\EasyCodingStandard\\Console\\Command\\CheckCommand' => __DIR__ . '/../..' . '/src/Console/Command/CheckCommand.php',
@@ -2089,9 +2088,9 @@ class ComposerStaticInitf880c78d9c6e77df8a5be25c11f107f5
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf880c78d9c6e77df8a5be25c11f107f5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf880c78d9c6e77df8a5be25c11f107f5::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitf880c78d9c6e77df8a5be25c11f107f5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7acd9a4234fb39ee2f656fb03df947a3::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7acd9a4234fb39ee2f656fb03df947a3::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7acd9a4234fb39ee2f656fb03df947a3::$classMap;
 
         }, null, ClassLoader::class);
     }
