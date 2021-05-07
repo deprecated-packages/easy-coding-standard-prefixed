@@ -35,7 +35,10 @@ abstract class AbstractTestSessionListener implements EventSubscriberInterface
     {
         $this->sessionOptions = $sessionOptions;
     }
-    public function onKernelRequest(RequestEvent $event)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent $event
+     */
+    public function onKernelRequest($event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -53,8 +56,9 @@ abstract class AbstractTestSessionListener implements EventSubscriberInterface
     /**
      * Checks if session was initialized and saves if current request is master
      * Runs on 'kernel.response' in test environment.
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ResponseEvent $event
      */
-    public function onKernelResponse(ResponseEvent $event)
+    public function onKernelResponse($event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -83,7 +87,10 @@ abstract class AbstractTestSessionListener implements EventSubscriberInterface
             $this->sessionId = $session->getId();
         }
     }
-    public static function getSubscribedEvents() : array
+    /**
+     * @return mixed[]
+     */
+    public static function getSubscribedEvents()
     {
         return [KernelEvents::REQUEST => ['onKernelRequest', 192], KernelEvents::RESPONSE => ['onKernelResponse', -128]];
     }

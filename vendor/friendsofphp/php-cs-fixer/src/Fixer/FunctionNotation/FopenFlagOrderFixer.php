@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,12 +25,19 @@ final class FopenFlagOrderFixer extends AbstractFopenFlagFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Order the flags in `fopen` calls, `b` and `t` must be last.', [new CodeSample("<?php\n\$a = fopen(\$foo, 'br+');\n")], null, 'Risky when the function `fopen` is overridden.');
     }
-    protected function fixFopenFlagToken(Tokens $tokens, int $argumentStartIndex, int $argumentEndIndex) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $argumentStartIndex
+     * @param int $argumentEndIndex
+     */
+    protected function fixFopenFlagToken($tokens, $argumentStartIndex, $argumentEndIndex)
     {
         $argumentFlagIndex = null;
         for ($i = $argumentStartIndex; $i <= $argumentEndIndex; ++$i) {
@@ -77,9 +83,9 @@ final class FopenFlagOrderFixer extends AbstractFopenFlagFixer
     /**
      * @param string[] $flags
      *
-     * @return string[]
+     * @return mixed[]
      */
-    private function sortFlags(array $flags) : array
+    private function sortFlags(array $flags)
     {
         \usort($flags, static function (string $flag1, string $flag2) {
             if ($flag1 === $flag2) {

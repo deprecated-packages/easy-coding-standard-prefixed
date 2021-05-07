@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Strings;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -16,13 +15,21 @@ final class KernelUniqueHasher
     {
         $this->stringsConverter = new \Symplify\SymplifyKernel\Strings\StringsConverter();
     }
-    public function hashKernelClass(string $kernelClass) : string
+    /**
+     * @param string $kernelClass
+     * @return string
+     */
+    public function hashKernelClass($kernelClass)
     {
         $this->ensureIsNotGenericKernelClass($kernelClass);
         $shortClassName = (string) Strings::after($kernelClass, '\\', -1);
         return $this->stringsConverter->camelCaseToGlue($shortClassName, '_');
     }
-    private function ensureIsNotGenericKernelClass(string $kernelClass) : void
+    /**
+     * @return void
+     * @param string $kernelClass
+     */
+    private function ensureIsNotGenericKernelClass($kernelClass)
     {
         if ($kernelClass !== AbstractSymplifyKernel::class) {
             return;

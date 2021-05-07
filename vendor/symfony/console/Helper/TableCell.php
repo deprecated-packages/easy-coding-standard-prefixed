@@ -18,7 +18,10 @@ class TableCell
 {
     private $value;
     private $options = ['rowspan' => 1, 'colspan' => 1, 'style' => null];
-    public function __construct(string $value = '', array $options = [])
+    /**
+     * @param string $value
+     */
+    public function __construct($value = '', array $options = [])
     {
         $this->value = $value;
         // check option names
@@ -57,7 +60,10 @@ class TableCell
     {
         return (int) $this->options['rowspan'];
     }
-    public function getStyle() : ?\ECSPrefix20210507\Symfony\Component\Console\Helper\TableCellStyle
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\Console\Helper\TableCellStyle|null
+     */
+    public function getStyle()
     {
         return $this->options['style'];
     }

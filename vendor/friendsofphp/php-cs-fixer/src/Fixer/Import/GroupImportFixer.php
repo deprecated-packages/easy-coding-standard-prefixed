@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -29,22 +28,28 @@ final class GroupImportFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('There MUST be group use for the same namespaces.', [new VersionSpecificCodeSample("<?php\nuse Foo\\Bar;\nuse Foo\\Baz;\n", new VersionSpecification(70000))]);
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return \PHP_VERSION_ID >= 70000 && $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $useWithSameNamespaces = $this->getSameNamespaces($tokens);
         if ([] === $useWithSameNamespaces) {
@@ -56,9 +61,10 @@ final class GroupImportFixer extends AbstractFixer
     /**
      * Gets namespace use analyzers with same namespaces.
      *
-     * @return NamespaceUseAnalysis[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function getSameNamespaces(Tokens $tokens) : array
+    private function getSameNamespaces($tokens)
     {
         $useDeclarations = (new NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
         if (0 === \count($useDeclarations)) {
@@ -84,8 +90,10 @@ final class GroupImportFixer extends AbstractFixer
     }
     /**
      * @param NamespaceUseAnalysis[] $statements
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function removeSingleUseStatements(array $statements, Tokens $tokens) : void
+    private function removeSingleUseStatements(array $statements, $tokens)
     {
         foreach ($statements as $useDeclaration) {
             $index = $useDeclaration->getStartIndex();
@@ -108,8 +116,10 @@ final class GroupImportFixer extends AbstractFixer
     }
     /**
      * @param NamespaceUseAnalysis[] $statements
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function addGroupUseStatements(array $statements, Tokens $tokens) : void
+    private function addGroupUseStatements(array $statements, $tokens)
     {
         $currentUseDeclaration = null;
         $insertIndex = \array_slice($statements, -1)[0]->getEndIndex() + 1;
@@ -136,7 +146,11 @@ final class GroupImportFixer extends AbstractFixer
             }
         }
     }
-    private function getNamespaceNameWithSlash(NamespaceUseAnalysis $useDeclaration) : string
+    /**
+     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration
+     * @return string
+     */
+    private function getNamespaceNameWithSlash($useDeclaration)
     {
         $position = \strrpos($useDeclaration->getFullName(), '\\');
         if (\false === $position || 0 === $position) {
@@ -146,8 +160,12 @@ final class GroupImportFixer extends AbstractFixer
     }
     /**
      * Insert use with alias to the group.
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $insertIndex
+     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration
+     * @return int
      */
-    private function insertToGroupUseWithAlias(Tokens $tokens, int $insertIndex, NamespaceUseAnalysis $useDeclaration) : int
+    private function insertToGroupUseWithAlias($tokens, $insertIndex, $useDeclaration)
     {
         $newTokens = [new Token([\T_STRING, \substr($useDeclaration->getFullName(), \strripos($useDeclaration->getFullName(), '\\') + 1)]), new Token([\T_WHITESPACE, ' ']), new Token([\T_AS, 'as']), new Token([\T_WHITESPACE, ' '])];
         $tokens->insertAt($insertIndex, $newTokens);
@@ -155,8 +173,13 @@ final class GroupImportFixer extends AbstractFixer
     }
     /**
      * Creates new use statement group.
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $insertIndex
+     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration
+     * @param string $currentNamespace
+     * @return int
      */
-    private function createNewGroup(Tokens $tokens, int $insertIndex, NamespaceUseAnalysis $useDeclaration, string $currentNamespace) : int
+    private function createNewGroup($tokens, $insertIndex, $useDeclaration, $currentNamespace)
     {
         $insertedTokens = 0;
         if (\count($tokens) === $insertIndex) {

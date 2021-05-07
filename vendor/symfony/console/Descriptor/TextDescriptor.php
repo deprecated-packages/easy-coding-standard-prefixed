@@ -28,15 +28,16 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
 {
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputArgument $argument
      */
-    protected function describeInputArgument(InputArgument $argument, array $options = [])
+    protected function describeInputArgument($argument, array $options = [])
     {
         if (null !== $argument->getDefault() && (!\is_array($argument->getDefault()) || \count($argument->getDefault()))) {
             $default = \sprintf('<comment> [default: %s]</comment>', $this->formatDefaultValue($argument->getDefault()));
         } else {
             $default = '';
         }
-        $totalWidth = $options['total_width'] ?? Helper::strlen($argument->getName());
+        $totalWidth = isset($options['total_width']) ? $options['total_width'] : Helper::strlen($argument->getName());
         $spacingWidth = $totalWidth - \strlen($argument->getName());
         $this->writeText(\sprintf(
             '  <info>%s</info>  %s%s%s',
@@ -49,8 +50,9 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputOption $option
      */
-    protected function describeInputOption(InputOption $option, array $options = [])
+    protected function describeInputOption($option, array $options = [])
     {
         if ($option->acceptValue() && null !== $option->getDefault() && (!\is_array($option->getDefault()) || \count($option->getDefault()))) {
             $default = \sprintf('<comment> [default: %s]</comment>', $this->formatDefaultValue($option->getDefault()));
@@ -64,7 +66,7 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
                 $value = '[' . $value . ']';
             }
         }
-        $totalWidth = $options['total_width'] ?? $this->calculateTotalWidthForOptions([$option]);
+        $totalWidth = isset($options['total_width']) ? $options['total_width'] : $this->calculateTotalWidthForOptions([$option]);
         $synopsis = \sprintf('%s%s', $option->getShortcut() ? \sprintf('-%s, ', $option->getShortcut()) : '    ', \sprintf('--%s%s', $option->getName(), $value));
         $spacingWidth = $totalWidth - Helper::strlen($synopsis);
         $this->writeText(\sprintf(
@@ -79,8 +81,9 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputDefinition $definition
      */
-    protected function describeInputDefinition(InputDefinition $definition, array $options = [])
+    protected function describeInputDefinition($definition, array $options = [])
     {
         $totalWidth = $this->calculateTotalWidthForOptions($definition->getOptions());
         foreach ($definition->getArguments() as $argument) {
@@ -116,8 +119,9 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
      */
-    protected function describeCommand(Command $command, array $options = [])
+    protected function describeCommand($command, array $options = [])
     {
         $command->mergeApplicationDefinition(\false);
         if ($description = $command->getDescription()) {
@@ -149,10 +153,11 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Application $application
      */
-    protected function describeApplication(Application $application, array $options = [])
+    protected function describeApplication($application, array $options = [])
     {
-        $describedNamespace = $options['namespace'] ?? null;
+        $describedNamespace = isset($options['namespace']) ? $options['namespace'] : null;
         $description = new \ECSPrefix20210507\Symfony\Component\Console\Descriptor\ApplicationDescription($application, $describedNamespace);
         if (isset($options['raw_text']) && $options['raw_text']) {
             $width = $this->getColumnWidth($description->getCommands());
@@ -211,15 +216,18 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
     }
     /**
      * {@inheritdoc}
+     * @param string $content
      */
-    private function writeText(string $content, array $options = [])
+    private function writeText($content, array $options = [])
     {
         $this->write(isset($options['raw_text']) && $options['raw_text'] ? \strip_tags($content) : $content, isset($options['raw_output']) ? !$options['raw_output'] : \true);
     }
     /**
      * Formats command aliases to show them in the command description.
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
+     * @return string
      */
-    private function getCommandAliasesText(Command $command) : string
+    private function getCommandAliasesText($command)
     {
         $text = '';
         $aliases = $command->getAliases();
@@ -232,8 +240,9 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
      * Formats input option/argument default value.
      *
      * @param mixed $default
+     * @return string
      */
-    private function formatDefaultValue($default) : string
+    private function formatDefaultValue($default)
     {
         if (\INF === $default) {
             return 'INF';
@@ -251,8 +260,9 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
     }
     /**
      * @param array<Command|string> $commands
+     * @return int
      */
-    private function getColumnWidth(array $commands) : int
+    private function getColumnWidth(array $commands)
     {
         $widths = [];
         foreach ($commands as $command) {
@@ -269,8 +279,9 @@ class TextDescriptor extends \ECSPrefix20210507\Symfony\Component\Console\Descri
     }
     /**
      * @param InputOption[] $options
+     * @return int
      */
-    private function calculateTotalWidthForOptions(array $options) : int
+    private function calculateTotalWidthForOptions(array $options)
     {
         $totalWidth = 0;
         foreach ($options as $option) {

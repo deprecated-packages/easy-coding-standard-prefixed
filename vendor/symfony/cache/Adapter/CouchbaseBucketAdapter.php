@@ -19,13 +19,19 @@ use ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface;
  */
 class CouchbaseBucketAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AbstractAdapter
 {
-    private const THIRTY_DAYS_IN_SECONDS = 2592000;
-    private const MAX_KEY_LENGTH = 250;
-    private const KEY_NOT_FOUND = 13;
-    private const VALID_DSN_OPTIONS = ['operationTimeout', 'configTimeout', 'configNodeTimeout', 'n1qlTimeout', 'httpTimeout', 'configDelay', 'htconfigIdleTimeout', 'durabilityInterval', 'durabilityTimeout'];
+    const THIRTY_DAYS_IN_SECONDS = 2592000;
+    const MAX_KEY_LENGTH = 250;
+    const KEY_NOT_FOUND = 13;
+    const VALID_DSN_OPTIONS = ['operationTimeout', 'configTimeout', 'configNodeTimeout', 'n1qlTimeout', 'httpTimeout', 'configDelay', 'htconfigIdleTimeout', 'durabilityInterval', 'durabilityTimeout'];
     private $bucket;
     private $marshaller;
-    public function __construct(\ECSPrefix20210507\CouchbaseBucket $bucket, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
+    /**
+     * @param \ECSPrefix20210507\CouchbaseBucket $bucket
+     * @param string $namespace
+     * @param int $defaultLifetime
+     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller
+     */
+    public function __construct($bucket, $namespace = '', $defaultLifetime = 0, $marshaller = null)
     {
         if (!static::isSupported()) {
             throw new CacheException('Couchbase >= 2.6.0 < 3.0.0 is required.');
@@ -34,12 +40,13 @@ class CouchbaseBucketAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\
         $this->bucket = $bucket;
         parent::__construct($namespace, $defaultLifetime);
         $this->enableVersioning();
-        $this->marshaller = $marshaller ?? new DefaultMarshaller();
+        $this->marshaller = isset($marshaller) ? $marshaller : new DefaultMarshaller();
     }
     /**
      * @param array|string $servers
+     * @return \ECSPrefix20210507\CouchbaseBucket
      */
-    public static function createConnection($servers, array $options = []) : \ECSPrefix20210507\CouchbaseBucket
+    public static function createConnection($servers, array $options = [])
     {
         if (\is_string($servers)) {
             $servers = [$servers];
@@ -90,35 +97,45 @@ class CouchbaseBucketAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\
             \restore_error_handler();
         }
     }
-    public static function isSupported() : bool
+    /**
+     * @return bool
+     */
+    public static function isSupported()
     {
         return \extension_loaded('couchbase') && \version_compare(\phpversion('couchbase'), '2.6.0', '>=') && \version_compare(\phpversion('couchbase'), '3.0', '<');
     }
-    private static function getOptions(string $options) : array
+    /**
+     * @param string $options
+     * @return mixed[]
+     */
+    private static function getOptions($options)
     {
         $results = [];
         $optionsInArray = \explode('&', $options);
         foreach ($optionsInArray as $option) {
-            [$key, $value] = \explode('=', $option);
+            list($key, $value) = \explode('=', $option);
             if (\in_array($key, static::VALID_DSN_OPTIONS, \true)) {
                 $results[$key] = $value;
             }
         }
         return $results;
     }
-    private static function initOptions(array $options) : array
+    /**
+     * @return mixed[]
+     */
+    private static function initOptions(array $options)
     {
-        $options['username'] = $options['username'] ?? '';
-        $options['password'] = $options['password'] ?? '';
-        $options['operationTimeout'] = $options['operationTimeout'] ?? 0;
-        $options['configTimeout'] = $options['configTimeout'] ?? 0;
-        $options['configNodeTimeout'] = $options['configNodeTimeout'] ?? 0;
-        $options['n1qlTimeout'] = $options['n1qlTimeout'] ?? 0;
-        $options['httpTimeout'] = $options['httpTimeout'] ?? 0;
-        $options['configDelay'] = $options['configDelay'] ?? 0;
-        $options['htconfigIdleTimeout'] = $options['htconfigIdleTimeout'] ?? 0;
-        $options['durabilityInterval'] = $options['durabilityInterval'] ?? 0;
-        $options['durabilityTimeout'] = $options['durabilityTimeout'] ?? 0;
+        $options['username'] = isset($options['username']) ? $options['username'] : '';
+        $options['password'] = isset($options['password']) ? $options['password'] : '';
+        $options['operationTimeout'] = isset($options['operationTimeout']) ? $options['operationTimeout'] : 0;
+        $options['configTimeout'] = isset($options['configTimeout']) ? $options['configTimeout'] : 0;
+        $options['configNodeTimeout'] = isset($options['configNodeTimeout']) ? $options['configNodeTimeout'] : 0;
+        $options['n1qlTimeout'] = isset($options['n1qlTimeout']) ? $options['n1qlTimeout'] : 0;
+        $options['httpTimeout'] = isset($options['httpTimeout']) ? $options['httpTimeout'] : 0;
+        $options['configDelay'] = isset($options['configDelay']) ? $options['configDelay'] : 0;
+        $options['htconfigIdleTimeout'] = isset($options['htconfigIdleTimeout']) ? $options['htconfigIdleTimeout'] : 0;
+        $options['durabilityInterval'] = isset($options['durabilityInterval']) ? $options['durabilityInterval'] : 0;
+        $options['durabilityTimeout'] = isset($options['durabilityTimeout']) ? $options['durabilityTimeout'] : 0;
         return $options;
     }
     /**
@@ -138,15 +155,17 @@ class CouchbaseBucketAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    protected function doHave($id) : bool
+    protected function doHave($id)
     {
         return \false !== $this->bucket->get($id);
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    protected function doClear($namespace) : bool
+    protected function doClear($namespace)
     {
         if ('' === $namespace) {
             $this->bucket->manager()->flush();
@@ -156,8 +175,9 @@ class CouchbaseBucketAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    protected function doDelete(array $ids) : bool
+    protected function doDelete(array $ids)
     {
         $results = $this->bucket->remove(\array_values($ids));
         foreach ($results as $key => $result) {
@@ -186,7 +206,11 @@ class CouchbaseBucketAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\
         }
         return [] === $ko ? \true : $ko;
     }
-    private function normalizeExpiry(int $expiry) : int
+    /**
+     * @param int $expiry
+     * @return int
+     */
+    private function normalizeExpiry($expiry)
     {
         if ($expiry && $expiry > static::THIRTY_DAYS_IN_SECONDS) {
             $expiry += \time();

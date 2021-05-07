@@ -32,18 +32,19 @@ abstract class Output implements \ECSPrefix20210507\Symfony\Component\Console\Ou
     /**
      * @param int                           $verbosity The verbosity level (one of the VERBOSITY constants in OutputInterface)
      * @param bool                          $decorated Whether to decorate messages
-     * @param OutputFormatterInterface|null $formatter Output formatter instance (null to use default OutputFormatter)
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter Output formatter instance (null to use default OutputFormatter)
      */
-    public function __construct(?int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = \false, OutputFormatterInterface $formatter = null)
+    public function __construct($verbosity = self::VERBOSITY_NORMAL, $decorated = \false, $formatter = null)
     {
         $this->verbosity = null === $verbosity ? self::VERBOSITY_NORMAL : $verbosity;
-        $this->formatter = $formatter ?? new OutputFormatter();
+        $this->formatter = isset($formatter) ? $formatter : new OutputFormatter();
         $this->formatter->setDecorated($decorated);
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter
      */
-    public function setFormatter(OutputFormatterInterface $formatter)
+    public function setFormatter($formatter)
     {
         $this->formatter = $formatter;
     }
@@ -56,8 +57,9 @@ abstract class Output implements \ECSPrefix20210507\Symfony\Component\Console\Ou
     }
     /**
      * {@inheritdoc}
+     * @param bool $decorated
      */
-    public function setDecorated(bool $decorated)
+    public function setDecorated($decorated)
     {
         $this->formatter->setDecorated($decorated);
     }
@@ -70,8 +72,9 @@ abstract class Output implements \ECSPrefix20210507\Symfony\Component\Console\Ou
     }
     /**
      * {@inheritdoc}
+     * @param int $level
      */
-    public function setVerbosity(int $level)
+    public function setVerbosity($level)
     {
         $this->verbosity = $level;
     }
@@ -112,17 +115,20 @@ abstract class Output implements \ECSPrefix20210507\Symfony\Component\Console\Ou
     }
     /**
      * {@inheritdoc}
+     * @param int $options
      */
-    public function writeln($messages, int $options = self::OUTPUT_NORMAL)
+    public function writeln($messages, $options = self::OUTPUT_NORMAL)
     {
         $this->write($messages, \true, $options);
     }
     /**
      * {@inheritdoc}
+     * @param bool $newline
+     * @param int $options
      */
-    public function write($messages, bool $newline = \false, int $options = self::OUTPUT_NORMAL)
+    public function write($messages, $newline = \false, $options = self::OUTPUT_NORMAL)
     {
-        if (!\is_iterable($messages)) {
+        if (!(is_array($messages) || $messages instanceof \Traversable)) {
             $messages = [$messages];
         }
         $types = self::OUTPUT_NORMAL | self::OUTPUT_RAW | self::OUTPUT_PLAIN;
@@ -148,6 +154,8 @@ abstract class Output implements \ECSPrefix20210507\Symfony\Component\Console\Ou
     }
     /**
      * Writes a message to the output.
+     * @param string $message
+     * @param bool $newline
      */
-    protected abstract function doWrite(string $message, bool $newline);
+    protected abstract function doWrite($message, $newline);
 }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\ValueObject;
 
 final class DocBlockEdgeDefinition
@@ -17,21 +16,35 @@ final class DocBlockEdgeDefinition
      * @var string
      */
     private $endChar;
-    public function __construct(int $kind, string $startChar, string $endChar)
+    /**
+     * @param int $kind
+     * @param string $startChar
+     * @param string $endChar
+     */
+    public function __construct($kind, $startChar, $endChar)
     {
         $this->kind = $kind;
         $this->startChar = $startChar;
         $this->endChar = $endChar;
     }
-    public function getKind() : int
+    /**
+     * @return int
+     */
+    public function getKind()
     {
         return $this->kind;
     }
-    public function getStartChar() : string
+    /**
+     * @return string
+     */
+    public function getStartChar()
     {
         return $this->startChar;
     }
-    public function getEndChar() : string
+    /**
+     * @return string
+     */
+    public function getEndChar()
     {
         return $this->endChar;
     }

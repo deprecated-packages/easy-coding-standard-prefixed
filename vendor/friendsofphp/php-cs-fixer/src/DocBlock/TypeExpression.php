@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,7 +24,7 @@ final class TypeExpression
      *
      * @internal
      */
-    public const REGEX_TYPES = '
+    const REGEX_TYPES = '
     # <simple> is any non-array, non-generic, non-alternated type, eg `int` or `\\Foo`
     # <array> is array of <simple>, eg `int[]` or `\\Foo[]`
     # <generic> is generic collection type, like `array<string, int>`, `Collection<Item>` and more complex like `Collection<int, \\null|SubCollection<string>>`

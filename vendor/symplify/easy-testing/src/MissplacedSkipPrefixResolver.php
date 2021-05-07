@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyTesting;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -14,9 +13,9 @@ final class MissplacedSkipPrefixResolver
 {
     /**
      * @param SmartFileInfo[] $fixtureFileInfos
-     * @return array<string, SmartFileInfo[]>
+     * @return mixed[]
      */
-    public function resolve(array $fixtureFileInfos) : array
+    public function resolve(array $fixtureFileInfos)
     {
         $invalidFileInfos = ['incorrect_skips' => [], 'missing_skips' => []];
         foreach ($fixtureFileInfos as $fixtureFileInfo) {
@@ -34,7 +33,11 @@ final class MissplacedSkipPrefixResolver
         }
         return $invalidFileInfos;
     }
-    private function hasNameSkipStart(SmartFileInfo $fixtureFileInfo) : bool
+    /**
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $fixtureFileInfo
+     * @return bool
+     */
+    private function hasNameSkipStart($fixtureFileInfo)
     {
         return (bool) Strings::match($fixtureFileInfo->getBasenameWithoutSuffix(), Prefix::SKIP_PREFIX_REGEX);
     }

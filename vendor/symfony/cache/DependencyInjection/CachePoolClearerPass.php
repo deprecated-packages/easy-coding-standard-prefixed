@@ -19,14 +19,18 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 class CachePoolClearerPass implements CompilerPassInterface
 {
     private $cachePoolClearerTag;
-    public function __construct(string $cachePoolClearerTag = 'cache.pool.clearer')
+    /**
+     * @param string $cachePoolClearerTag
+     */
+    public function __construct($cachePoolClearerTag = 'cache.pool.clearer')
     {
         $this->cachePoolClearerTag = $cachePoolClearerTag;
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process($container)
     {
         $container->getParameterBag()->remove('cache.prefix.seed');
         foreach ($container->findTaggedServiceIds($this->cachePoolClearerTag) as $id => $attr) {

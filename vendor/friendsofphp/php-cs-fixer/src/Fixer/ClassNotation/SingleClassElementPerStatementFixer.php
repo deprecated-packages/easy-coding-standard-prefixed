@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -38,8 +37,10 @@ final class SingleClassElementPerStatementFixer extends AbstractFixer implements
 {
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound(Token::getClassyTokenKinds());
     }
@@ -47,15 +48,17 @@ final class SingleClassElementPerStatementFixer extends AbstractFixer implements
      * {@inheritdoc}
      *
      * Must run before ClassAttributesSeparationFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 56;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('There MUST NOT be more than one property or constant declared per statement.', [new CodeSample('<?php
 final class Example
@@ -73,8 +76,11 @@ final class Example
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $analyzer = new TokensAnalyzer($tokens);
         $elements = \array_reverse($analyzer->getClassyElements(), \true);
@@ -88,13 +94,20 @@ final class Example
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         $values = ['const', 'property'];
         return new FixerConfigurationResolver([(new FixerOptionBuilder('elements', 'List of strings which element should be modified.'))->setDefault($values)->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset($values)])->getOption()]);
     }
-    private function fixElement(Tokens $tokens, string $type, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param string $type
+     * @param int $index
+     */
+    private function fixElement($tokens, $type, $index)
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         $repeatIndex = $index;
@@ -121,7 +134,14 @@ final class Example
         $start = $tokens->getPrevTokenOfKind($index, [';', '{', '}']);
         $this->expandElement($tokens, $type, $tokens->getNextMeaningfulToken($start), $tokens->getNextTokenOfKind($index, [';']));
     }
-    private function expandElement(Tokens $tokens, string $type, int $startIndex, int $endIndex) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param string $type
+     * @param int $startIndex
+     * @param int $endIndex
+     */
+    private function expandElement($tokens, $type, $startIndex, $endIndex)
     {
         $divisionContent = null;
         if ($tokens[$startIndex - 1]->isWhitespace()) {
@@ -157,9 +177,13 @@ final class Example
         }
     }
     /**
-     * @return Token[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param string $type
+     * @param int $startIndex
+     * @param int $endIndex
      */
-    private function getModifiersSequences(Tokens $tokens, string $type, int $startIndex, int $endIndex) : array
+    private function getModifiersSequences($tokens, $type, $startIndex, $endIndex)
     {
         if ('property' === $type) {
             $tokenKinds = [\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_STATIC, \T_VAR, \T_STRING, \T_NS_SEPARATOR, CT::T_NULLABLE_TYPE, CT::T_ARRAY_TYPEHINT];

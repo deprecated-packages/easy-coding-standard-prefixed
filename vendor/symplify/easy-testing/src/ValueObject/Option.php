@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyTesting\ValueObject;
 
 final class Option
@@ -8,5 +7,5 @@ final class Option
     /**
      * @var string
      */
-    public const SOURCE = 'source';
+    const SOURCE = 'source';
 }

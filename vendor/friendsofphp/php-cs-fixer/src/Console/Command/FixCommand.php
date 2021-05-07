@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -62,7 +61,10 @@ final class FixCommand extends Command
      * @var ToolInfoInterface
      */
     private $toolInfo;
-    public function __construct(ToolInfoInterface $toolInfo)
+    /**
+     * @param \PhpCsFixer\ToolInfoInterface $toolInfo
+     */
+    public function __construct($toolInfo)
     {
         parent::__construct();
         $this->defaultConfig = new Config();
@@ -75,8 +77,9 @@ final class FixCommand extends Command
      * {@inheritdoc}
      *
      * Override here to only generate the help copy when used.
+     * @return string
      */
-    public function getHelp() : string
+    public function getHelp()
     {
         return <<<'EOF'
 The <info>%command.name%</info> command tries to fix as much coding standards
@@ -183,15 +186,19 @@ EOF;
     }
     /**
      * {@inheritdoc}
+     * @return void
      */
-    protected function configure() : void
+    protected function configure()
     {
         $this->setDefinition([new InputArgument('path', InputArgument::IS_ARRAY, 'The path.'), new InputOption('path-mode', '', InputOption::VALUE_REQUIRED, 'Specify path mode (can be override or intersection).', ConfigurationResolver::PATH_MODE_OVERRIDE), new InputOption('allow-risky', '', InputOption::VALUE_REQUIRED, 'Are risky fixers allowed (can be yes or no).'), new InputOption('config', '', InputOption::VALUE_REQUIRED, 'The path to a .php-cs-fixer.php file.'), new InputOption('dry-run', '', InputOption::VALUE_NONE, 'Only shows which files would have been modified.'), new InputOption('rules', '', InputOption::VALUE_REQUIRED, 'The rules.'), new InputOption('using-cache', '', InputOption::VALUE_REQUIRED, 'Does cache should be used (can be yes or no).'), new InputOption('cache-file', '', InputOption::VALUE_REQUIRED, 'The path to the cache file.'), new InputOption('diff', '', InputOption::VALUE_NONE, 'Also produce diff for each file.'), new InputOption('format', '', InputOption::VALUE_REQUIRED, 'To output results in other formats.'), new InputOption('stop-on-violation', '', InputOption::VALUE_NONE, 'Stop execution on first violation.'), new InputOption('show-progress', '', InputOption::VALUE_REQUIRED, 'Type of progress indicator (none, dots).')])->setDescription('Fixes a directory or a file.');
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    protected function execute($input, $output)
     {
         $verbosity = $output->getVerbosity();
         $passedConfig = $input->getOption('config');

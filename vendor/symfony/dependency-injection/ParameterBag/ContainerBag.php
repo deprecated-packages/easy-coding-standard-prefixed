@@ -17,7 +17,10 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Container;
 class ContainerBag extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag implements \ECSPrefix20210507\Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface
 {
     private $container;
-    public function __construct(Container $container)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Container $container
+     */
+    public function __construct($container)
     {
         $this->container = $container;
     }

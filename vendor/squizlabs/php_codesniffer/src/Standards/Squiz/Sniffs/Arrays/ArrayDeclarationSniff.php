@@ -33,7 +33,7 @@ class ArrayDeclarationSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr]['code'] === \T_ARRAY) {
@@ -491,7 +491,7 @@ class ArrayDeclarationSniff implements Sniff
         //end if
         /*
             This section checks for arrays that don't specify keys.
-        
+
             Arrays such as:
                array(
                 'aaa',
@@ -577,19 +577,19 @@ class ArrayDeclarationSniff implements Sniff
             are not reported for the rest of the line to avoid reporting
             spaces and columns incorrectly. Often fixing the first
             problem will fix the other 2 anyway.
-        
+
             For example:
-        
+
             $a = array(
                   'index'  => '2',
                  );
-        
+
             or
-        
+
             $a = [
                   'index'  => '2',
                  ];
-        
+
             In this array, the double arrow is indented too far, but this
             will also cause an error in the value's alignment. If the arrow were
             to be moved back one space however, then both errors would be fixed.

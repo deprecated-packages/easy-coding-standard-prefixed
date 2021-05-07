@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\DependencyInjection\Extension;
 
 use ECSPrefix20210507\Symfony\Component\Config\FileLocator;
@@ -11,8 +10,10 @@ final class ConsoleColorDiffExtension extends Extension
 {
     /**
      * @param string[] $configs
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
-    public function load(array $configs, ContainerBuilder $containerBuilder) : void
+    public function load(array $configs, $containerBuilder)
     {
         $phpFileLoader = new PhpFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../../../config'));
         $phpFileLoader->load('config.php');

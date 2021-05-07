@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace ECSPrefix20210507;
 
 use ECSPrefix20210507\Symfony\Component\Console\Style\SymfonyStyle;
@@ -12,7 +11,7 @@ use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\PackageBuilder\Reflection\PrivatesCaller;
 use Symplify\SmartFileSystem\SmartFileSystem;
 use function ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\service;
-return static function (ContainerConfigurator $containerConfigurator) : void {
+return static function (ContainerConfigurator $containerConfigurator) {
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::INLINE_SECTIONS, ['keywords']);
     $services = $containerConfigurator->services();

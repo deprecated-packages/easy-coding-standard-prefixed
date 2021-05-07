@@ -20,7 +20,7 @@ use ECSPrefix20210507\Symfony\Component\Console\Exception\CommandNotFoundExcepti
  */
 class ApplicationDescription
 {
-    public const GLOBAL_NAMESPACE = '_global';
+    const GLOBAL_NAMESPACE = '_global';
     private $application;
     private $namespace;
     private $showHidden;
@@ -36,13 +36,21 @@ class ApplicationDescription
      * @var Command[]
      */
     private $aliases;
-    public function __construct(Application $application, string $namespace = null, bool $showHidden = \false)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Application $application
+     * @param string $namespace
+     * @param bool $showHidden
+     */
+    public function __construct($application, $namespace = null, $showHidden = \false)
     {
         $this->application = $application;
         $this->namespace = $namespace;
         $this->showHidden = $showHidden;
     }
-    public function getNamespaces() : array
+    /**
+     * @return mixed[]
+     */
+    public function getNamespaces()
     {
         if (null === $this->namespaces) {
             $this->inspectApplication();
@@ -50,9 +58,9 @@ class ApplicationDescription
         return $this->namespaces;
     }
     /**
-     * @return Command[]
+     * @return mixed[]
      */
-    public function getCommands() : array
+    public function getCommands()
     {
         if (null === $this->commands) {
             $this->inspectApplication();
@@ -61,13 +69,15 @@ class ApplicationDescription
     }
     /**
      * @throws CommandNotFoundException
+     * @param string $name
+     * @return \ECSPrefix20210507\Symfony\Component\Console\Command\Command
      */
-    public function getCommand(string $name) : Command
+    public function getCommand($name)
     {
         if (!isset($this->commands[$name]) && !isset($this->aliases[$name])) {
             throw new CommandNotFoundException(\sprintf('Command "%s" does not exist.', $name));
         }
-        return $this->commands[$name] ?? $this->aliases[$name];
+        return isset($this->commands[$name]) ? $this->commands[$name] : $this->aliases[$name];
     }
     private function inspectApplication()
     {
@@ -91,7 +101,10 @@ class ApplicationDescription
             $this->namespaces[$namespace] = ['id' => $namespace, 'commands' => $names];
         }
     }
-    private function sortCommands(array $commands) : array
+    /**
+     * @return mixed[]
+     */
+    private function sortCommands(array $commands)
     {
         $namespacedCommands = [];
         $globalCommands = [];

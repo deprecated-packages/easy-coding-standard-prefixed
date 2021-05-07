@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SmartFileSystem\Finder;
 
 use ECSPrefix20210507\Symfony\Component\Finder\Finder;
@@ -19,16 +18,21 @@ final class SmartFinder
      * @var FileSystemFilter
      */
     private $fileSystemFilter;
-    public function __construct(\Symplify\SmartFileSystem\Finder\FinderSanitizer $finderSanitizer, FileSystemFilter $fileSystemFilter)
+    /**
+     * @param \Symplify\SmartFileSystem\Finder\FinderSanitizer $finderSanitizer
+     * @param \Symplify\SmartFileSystem\FileSystemFilter $fileSystemFilter
+     */
+    public function __construct($finderSanitizer, $fileSystemFilter)
     {
         $this->finderSanitizer = $finderSanitizer;
         $this->fileSystemFilter = $fileSystemFilter;
     }
     /**
      * @param string[] $directoriesOrFiles
-     * @return SmartFileInfo[]
+     * @return mixed[]
+     * @param string $path
      */
-    public function findPaths(array $directoriesOrFiles, string $path) : array
+    public function findPaths(array $directoriesOrFiles, $path)
     {
         $directories = $this->fileSystemFilter->filterDirectories($directoriesOrFiles);
         $fileInfos = [];
@@ -42,9 +46,10 @@ final class SmartFinder
     /**
      * @param string[] $directoriesOrFiles
      * @param string[] $excludedDirectories
-     * @return SmartFileInfo[]
+     * @return mixed[]
+     * @param string $name
      */
-    public function find(array $directoriesOrFiles, string $name, array $excludedDirectories = []) : array
+    public function find(array $directoriesOrFiles, $name, array $excludedDirectories = [])
     {
         $directories = $this->fileSystemFilter->filterDirectories($directoriesOrFiles);
         $fileInfos = [];

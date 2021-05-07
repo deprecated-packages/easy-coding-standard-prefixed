@@ -25,7 +25,7 @@ interface ConstraintInterface
      *
      * @return bool
      */
-    public function matches(\ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $provider);
+    public function matches($provider);
     /**
      * Provides a compiled version of the constraint for the given operator
      * The compiled version must be a PHP expression.

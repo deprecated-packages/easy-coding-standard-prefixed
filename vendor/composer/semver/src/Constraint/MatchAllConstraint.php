@@ -24,7 +24,7 @@ class MatchAllConstraint implements \ECSPrefix20210507\Composer\Semver\Constrain
      *
      * @return bool
      */
-    public function matches(\ECSPrefix20210507\Composer\Semver\Constraint\ConstraintInterface $provider)
+    public function matches($provider)
     {
         return \true;
     }

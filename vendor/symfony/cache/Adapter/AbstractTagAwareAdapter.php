@@ -32,8 +32,12 @@ abstract class AbstractTagAwareAdapter implements \ECSPrefix20210507\Symfony\Com
 {
     use AbstractAdapterTrait;
     use ContractsTrait;
-    private const TAGS_PREFIX = "\0tags\0";
-    protected function __construct(string $namespace = '', int $defaultLifetime = 0)
+    const TAGS_PREFIX = "\0tags\0";
+    /**
+     * @param string $namespace
+     * @param int $defaultLifetime
+     */
+    protected function __construct($namespace = '', $defaultLifetime = 0)
     {
         $this->namespace = '' === $namespace ? '' : CacheItem::validateKey($namespace) . ':';
         if (null !== $this->maxIdLength && \strlen($namespace) > $this->maxIdLength - 24) {
@@ -50,7 +54,7 @@ abstract class AbstractTagAwareAdapter implements \ECSPrefix20210507\Symfony\Com
             $item->isHit = $isHit;
             // Extract value, tags and meta data from the cache value
             $item->value = $value['value'];
-            $item->metadata[CacheItem::METADATA_TAGS] = $value['tags'] ?? [];
+            $item->metadata[CacheItem::METADATA_TAGS] = isset($value['tags']) ? $value['tags'] : [];
             if (isset($value['meta'])) {
                 // For compactness these values are packed, & expiry is offset to reduce size
                 $v = \unpack('Ve/Nc', $value['meta']);
@@ -88,7 +92,7 @@ abstract class AbstractTagAwareAdapter implements \ECSPrefix20210507\Symfony\Com
                 }
                 // Extract tag changes, these should be removed from values in doSave()
                 $value['tag-operations'] = ['add' => [], 'remove' => []];
-                $oldTags = $item->metadata[CacheItem::METADATA_TAGS] ?? [];
+                $oldTags = isset($item->metadata[CacheItem::METADATA_TAGS]) ? $item->metadata[CacheItem::METADATA_TAGS] : [];
                 foreach (\array_diff($value['tags'], $oldTags) as $addedTag) {
                     $value['tag-operations']['add'][] = $getId($tagPrefix . $addedTag);
                 }
@@ -111,7 +115,7 @@ abstract class AbstractTagAwareAdapter implements \ECSPrefix20210507\Symfony\Com
      *
      * @return array The identifiers that failed to be cached or a boolean stating if caching succeeded or not
      */
-    protected abstract function doSave(array $values, int $lifetime, array $addTagData = [], array $removeTagData = []) : array;
+    protected abstract function doSave(array $values, $lifetime, $addTagData = [], $removeTagData = []);
     /**
      * Removes multiple items from the pool and their corresponding tags.
      *
@@ -124,8 +128,9 @@ abstract class AbstractTagAwareAdapter implements \ECSPrefix20210507\Symfony\Com
      * Removes relations between tags and deleted items.
      *
      * @param array $tagData Array of tag => key identifiers that should be removed from the pool
+     * @return bool
      */
-    protected abstract function doDeleteTagRelations(array $tagData) : bool;
+    protected abstract function doDeleteTagRelations(array $tagData);
     /**
      * Invalidates cached items using tags.
      *
@@ -133,21 +138,23 @@ abstract class AbstractTagAwareAdapter implements \ECSPrefix20210507\Symfony\Com
      *
      * @return bool True on success
      */
-    protected abstract function doInvalidate(array $tagIds) : bool;
+    protected abstract function doInvalidate(array $tagIds);
     /**
      * Delete items and yields the tags they were bound to.
+     * @return mixed[]
      */
-    protected function doDeleteYieldTags(array $ids) : iterable
+    protected function doDeleteYieldTags(array $ids)
     {
         foreach ($this->doFetch($ids) as $id => $value) {
-            (yield $id => \is_array($value) && \is_array($value['tags'] ?? null) ? $value['tags'] : []);
+            (yield $id => \is_array($value) && \is_array(isset($value['tags']) ? $value['tags'] : null) ? $value['tags'] : []);
         }
         $this->doDelete($ids);
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function commit() : bool
+    public function commit()
     {
         $ok = \true;
         $byLifetime = $this->mergeByLifetime;
@@ -202,8 +209,9 @@ abstract class AbstractTagAwareAdapter implements \ECSPrefix20210507\Symfony\Com
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function deleteItems(array $keys) : bool
+    public function deleteItems(array $keys)
     {
         if (!$keys) {
             return \true;
@@ -264,8 +272,11 @@ abstract class AbstractTagAwareAdapter implements \ECSPrefix20210507\Symfony\Com
     }
     /**
      * Extracts tags operation data from $values set in mergeByLifetime, and returns values without it.
+     * @param mixed[]|null $addTagData
+     * @param mixed[]|null $removeTagData
+     * @return mixed[]
      */
-    private function extractTagData(array $values, ?array &$addTagData, ?array &$removeTagData) : array
+    private function extractTagData(array $values, &$addTagData, &$removeTagData)
     {
         $addTagData = $removeTagData = [];
         foreach ($values as $id => $value) {

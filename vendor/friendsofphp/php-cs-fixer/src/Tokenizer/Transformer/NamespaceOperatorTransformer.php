@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,15 +26,20 @@ final class NamespaceOperatorTransformer extends AbstractTransformer
 {
     /**
      * {@inheritdoc}
+     * @return int
      */
-    public function getRequiredPhpVersionId() : int
+    public function getRequiredPhpVersionId()
     {
         return 50300;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param \PhpCsFixer\Tokenizer\Token $token
+     * @param int $index
      */
-    public function process(Tokens $tokens, Token $token, int $index) : void
+    public function process($tokens, $token, $index)
     {
         if (!$token->isGivenKind(\T_NAMESPACE)) {
             return;
@@ -47,8 +51,9 @@ final class NamespaceOperatorTransformer extends AbstractTransformer
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getCustomTokens() : array
+    public function getCustomTokens()
     {
         return [CT::T_NAMESPACE_OPERATOR];
     }

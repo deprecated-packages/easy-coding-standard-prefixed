@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -32,24 +31,38 @@ final class Token
      * @param int    $type    The type
      * @param string $content The content
      */
-    public function __construct(int $type = DocLexer::T_NONE, string $content = '')
+    public function __construct($type = DocLexer::T_NONE, $content = '')
     {
         $this->type = $type;
         $this->content = $content;
     }
-    public function getType() : int
+    /**
+     * @return int
+     */
+    public function getType()
     {
         return $this->type;
     }
-    public function setType(int $type) : void
+    /**
+     * @return void
+     * @param int $type
+     */
+    public function setType($type)
     {
         $this->type = $type;
     }
-    public function getContent() : string
+    /**
+     * @return string
+     */
+    public function getContent()
     {
         return $this->content;
     }
-    public function setContent(string $content) : void
+    /**
+     * @return void
+     * @param string $content
+     */
+    public function setContent($content)
     {
         $this->content = $content;
     }
@@ -57,8 +70,9 @@ final class Token
      * Returns whether the token type is one of the given types.
      *
      * @param int|int[] $types
+     * @return bool
      */
-    public function isType($types) : bool
+    public function isType($types)
     {
         if (!\is_array($types)) {
             $types = [$types];
@@ -67,8 +81,9 @@ final class Token
     }
     /**
      * Overrides the content with an empty string.
+     * @return void
      */
-    public function clear() : void
+    public function clear()
     {
         $this->setContent('');
     }

@@ -30,8 +30,10 @@ abstract class AbstractSurrogateFragmentRenderer extends \ECSPrefix20210507\Symf
      * instance of InlineFragmentRenderer.
      *
      * @param FragmentRendererInterface $inlineStrategy The inline strategy to use when the surrogate is not supported
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\UriSigner $signer
      */
-    public function __construct(SurrogateInterface $surrogate = null, \ECSPrefix20210507\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $inlineStrategy, UriSigner $signer = null)
+    public function __construct($surrogate = null, $inlineStrategy, $signer = null)
     {
         $this->surrogate = $surrogate;
         $this->inlineStrategy = $inlineStrategy;
@@ -52,8 +54,9 @@ abstract class AbstractSurrogateFragmentRenderer extends \ECSPrefix20210507\Symf
      * 'alt' and 'comment' are only supported by ESI.
      *
      * @see Symfony\Component\HttpKernel\HttpCache\SurrogateInterface
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function render($uri, Request $request, array $options = [])
+    public function render($uri, $request, array $options = [])
     {
         if (!$this->surrogate || !$this->surrogate->hasSurrogateCapability($request)) {
             if ($uri instanceof ControllerReference && $this->containsNonScalars($uri->attributes)) {
@@ -64,14 +67,19 @@ abstract class AbstractSurrogateFragmentRenderer extends \ECSPrefix20210507\Symf
         if ($uri instanceof ControllerReference) {
             $uri = $this->generateSignedFragmentUri($uri, $request);
         }
-        $alt = $options['alt'] ?? null;
+        $alt = isset($options['alt']) ? $options['alt'] : null;
         if ($alt instanceof ControllerReference) {
             $alt = $this->generateSignedFragmentUri($alt, $request);
         }
-        $tag = $this->surrogate->renderIncludeTag($uri, $alt, $options['ignore_errors'] ?? \false, $options['comment'] ?? '');
+        $tag = $this->surrogate->renderIncludeTag($uri, $alt, isset($options['ignore_errors']) ? $options['ignore_errors'] : \false, isset($options['comment']) ? $options['comment'] : '');
         return new Response($tag);
     }
-    private function generateSignedFragmentUri(ControllerReference $uri, Request $request) : string
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ControllerReference $uri
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @return string
+     */
+    private function generateSignedFragmentUri($uri, $request)
     {
         if (null === $this->signer) {
             throw new \LogicException('You must use a URI when using the ESI rendering strategy or set a URL signer.');
@@ -80,7 +88,10 @@ abstract class AbstractSurrogateFragmentRenderer extends \ECSPrefix20210507\Symf
         $fragmentUri = $this->signer->sign($this->generateFragmentUri($uri, $request, \true));
         return \substr($fragmentUri, \strlen($request->getSchemeAndHttpHost()));
     }
-    private function containsNonScalars(array $values) : bool
+    /**
+     * @return bool
+     */
+    private function containsNonScalars(array $values)
     {
         foreach ($values as $value) {
             if (\is_array($value)) {

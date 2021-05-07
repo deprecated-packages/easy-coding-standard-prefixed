@@ -17,14 +17,18 @@ final class AliasDeprecatedPublicServicesPass extends \ECSPrefix20210507\Symfony
 {
     private $tagName;
     private $aliases = [];
-    public function __construct(string $tagName = 'container.private')
+    /**
+     * @param string $tagName
+     */
+    public function __construct($tagName = 'container.private')
     {
         $this->tagName = $tagName;
     }
     /**
      * {@inheritdoc}
+     * @param bool $isRoot
      */
-    protected function processValue($value, bool $isRoot = \false)
+    protected function processValue($value, $isRoot = \false)
     {
         if ($value instanceof Reference && isset($this->aliases[$id = (string) $value])) {
             return new Reference($this->aliases[$id], $value->getInvalidBehavior());
@@ -33,14 +37,15 @@ final class AliasDeprecatedPublicServicesPass extends \ECSPrefix20210507\Symfony
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process($container)
     {
         foreach ($container->findTaggedServiceIds($this->tagName) as $id => $tags) {
-            if (null === ($package = $tags[0]['package'] ?? null)) {
+            if (null === ($package = isset($tags[0]['package']) ? $tags[0]['package'] : null)) {
                 throw new InvalidArgumentException(\sprintf('The "package" attribute is mandatory for the "%s" tag on the "%s" service.', $this->tagName, $id));
             }
-            if (null === ($version = $tags[0]['version'] ?? null)) {
+            if (null === ($version = isset($tags[0]['version']) ? $tags[0]['version'] : null)) {
                 throw new InvalidArgumentException(\sprintf('The "version" attribute is mandatory for the "%s" tag on the "%s" service.', $this->tagName, $id));
             }
             $definition = $container->getDefinition($id);

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,8 +26,10 @@ final class VersionSpecification implements \PhpCsFixer\FixerDefinition\VersionS
     private $maximum;
     /**
      * @throws \InvalidArgumentException
+     * @param int|null $minimum
+     * @param int|null $maximum
      */
-    public function __construct(?int $minimum = null, ?int $maximum = null)
+    public function __construct($minimum = null, $maximum = null)
     {
         if (null === $minimum && null === $maximum) {
             throw new \InvalidArgumentException('Minimum or maximum need to be specified.');
@@ -49,8 +50,10 @@ final class VersionSpecification implements \PhpCsFixer\FixerDefinition\VersionS
     }
     /**
      * {@inheritdoc}
+     * @param int $version
+     * @return bool
      */
-    public function isSatisfiedBy(int $version) : bool
+    public function isSatisfiedBy($version)
     {
         if (null !== $this->minimum && $version < $this->minimum) {
             return \false;

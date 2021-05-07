@@ -19,7 +19,7 @@ use ECSPrefix20210507\Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class FileBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\ParameterBag
 {
-    private const FILE_KEYS = ['error', 'name', 'size', 'tmp_name', 'type'];
+    const FILE_KEYS = ['error', 'name', 'size', 'tmp_name', 'type'];
     /**
      * @param array|UploadedFile[] $parameters An array of HTTP files
      */
@@ -37,8 +37,9 @@ class FileBag extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\Parame
     }
     /**
      * {@inheritdoc}
+     * @param string $key
      */
-    public function set(string $key, $value)
+    public function set($key, $value)
     {
         if (!\is_array($value) && !$value instanceof UploadedFile) {
             throw new \InvalidArgumentException('An uploaded file must be an array or an instance of UploadedFile.');

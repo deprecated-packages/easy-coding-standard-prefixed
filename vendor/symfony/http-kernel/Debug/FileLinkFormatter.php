@@ -28,8 +28,10 @@ class FileLinkFormatter
     private $urlFormat;
     /**
      * @param string|\Closure $urlFormat the URL format, or a closure that returns it on-demand
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @param string $baseDir
      */
-    public function __construct($fileLinkFormat = null, RequestStack $requestStack = null, string $baseDir = null, $urlFormat = null)
+    public function __construct($fileLinkFormat = null, $requestStack = null, $baseDir = null, $urlFormat = null)
     {
         $fileLinkFormat = ($fileLinkFormat ?: \ini_get('xdebug.file_link_format')) ?: \get_cfg_var('xdebug.file_link_format');
         if ($fileLinkFormat && !\is_array($fileLinkFormat)) {
@@ -41,7 +43,11 @@ class FileLinkFormatter
         $this->baseDir = $baseDir;
         $this->urlFormat = $urlFormat;
     }
-    public function format(string $file, int $line)
+    /**
+     * @param string $file
+     * @param int $line
+     */
+    public function format($file, $line)
     {
         if ($fmt = $this->getFileLinkFormat()) {
             for ($i = 1; isset($fmt[$i]); ++$i) {
@@ -56,16 +62,21 @@ class FileLinkFormatter
     }
     /**
      * @internal
+     * @return mixed[]
      */
-    public function __sleep() : array
+    public function __sleep()
     {
         $this->fileLinkFormat = $this->getFileLinkFormat();
         return ['fileLinkFormat'];
     }
     /**
      * @internal
+     * @return string|null
+     * @param \ECSPrefix20210507\Symfony\Component\Routing\Generator\UrlGeneratorInterface $router
+     * @param string $routeName
+     * @param string $queryString
      */
-    public static function generateUrlFormat(UrlGeneratorInterface $router, string $routeName, string $queryString) : ?string
+    public static function generateUrlFormat($router, $routeName, $queryString)
     {
         try {
             return $router->generate($routeName) . $queryString;

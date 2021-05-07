@@ -34,16 +34,17 @@ trait PriorityTaggedServiceTrait
      *
      * @param string|TaggedIteratorArgument $tagName
      *
-     * @return Reference[]
+     * @return mixed[]
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    private function findAndSortTaggedServices($tagName, ContainerBuilder $container) : array
+    private function findAndSortTaggedServices($tagName, $container)
     {
         $indexAttribute = $defaultIndexMethod = $needsIndexes = $defaultPriorityMethod = null;
         if ($tagName instanceof TaggedIteratorArgument) {
             $indexAttribute = $tagName->getIndexAttribute();
             $defaultIndexMethod = $tagName->getDefaultIndexMethod();
             $needsIndexes = $tagName->needsIndexes();
-            $defaultPriorityMethod = $tagName->getDefaultPriorityMethod() ?? 'getDefaultPriority';
+            $defaultPriorityMethod = isset($tagName->getDefaultPriorityMethod()) ? $tagName->getDefaultPriorityMethod() : 'getDefaultPriority';
             $tagName = $tagName->getTag();
         }
         $i = 0;
@@ -60,7 +61,7 @@ trait PriorityTaggedServiceTrait
                 } elseif (null === $defaultPriority && $defaultPriorityMethod && $class) {
                     $defaultPriority = \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefaultPriority($container, $serviceId, $class, $defaultPriorityMethod, $tagName);
                 }
-                $priority = $priority ?? $defaultPriority ?? ($defaultPriority = 0);
+                $priority = isset($priority) ? $priority : (isset($defaultPriority) ? $defaultPriority : ($defaultPriority = 0));
                 if (null === $indexAttribute && !$defaultIndexMethod && !$needsIndexes) {
                     $services[] = [$priority, ++$i, null, $serviceId, null];
                     continue 2;
@@ -68,17 +69,29 @@ trait PriorityTaggedServiceTrait
                 if (null !== $indexAttribute && isset($attribute[$indexAttribute])) {
                     $index = $attribute[$indexAttribute];
                 } elseif (null === $defaultIndex && $defaultPriorityMethod && $class) {
-                    $defaultIndex = \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefaultIndex($container, $serviceId, $class, $defaultIndexMethod ?? 'getDefaultName', $tagName, $indexAttribute);
+                    $defaultIndex = \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceUtil::getDefaultIndex($container, $serviceId, $class, isset($defaultIndexMethod) ? $defaultIndexMethod : 'getDefaultName', $tagName, $indexAttribute);
                 }
-                $index = $index ?? $defaultIndex ?? ($defaultIndex = $serviceId);
+                $index = isset($index) ? $index : (isset($defaultIndex) ? $defaultIndex : ($defaultIndex = $serviceId));
                 $services[] = [$priority, ++$i, $index, $serviceId, $class];
             }
         }
         \uasort($services, static function ($a, $b) {
-            return $b[0] <=> $a[0] ?: $a[1] <=> $b[1];
+            $battleShipcompare = function ($left, $right) {
+                if ($left === $right) {
+                    return 0;
+                }
+                return $left < $right ? -1 : 1;
+            };
+            $battleShipcompare = function ($left, $right) {
+                if ($left === $right) {
+                    return 0;
+                }
+                return $left < $right ? -1 : 1;
+            };
+            return $battleShipcompare($b[0], $a[0]) ?: $battleShipcompare($a[1], $b[1]);
         });
         $refs = [];
-        foreach ($services as [, , $index, $serviceId, $class]) {
+        foreach ($services as list(, , $index, $serviceId, $class)) {
             if (!$class) {
                 $reference = new Reference($serviceId);
             } elseif ($index === $serviceId) {
@@ -102,8 +115,15 @@ class PriorityTaggedServiceUtil
 {
     /**
      * Gets the index defined by the default index method.
+     * @param string|null $indexAttribute
+     * @return string|null
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param string $serviceId
+     * @param string $class
+     * @param string $defaultIndexMethod
+     * @param string $tagName
      */
-    public static function getDefaultIndex(ContainerBuilder $container, string $serviceId, string $class, string $defaultIndexMethod, string $tagName, ?string $indexAttribute) : ?string
+    public static function getDefaultIndex($container, $serviceId, $class, $defaultIndexMethod, $tagName, $indexAttribute)
     {
         if (!($r = $container->getReflectionClass($class)) || !$r->hasMethod($defaultIndexMethod)) {
             return null;
@@ -128,8 +148,14 @@ class PriorityTaggedServiceUtil
     }
     /**
      * Gets the priority defined by the default priority method.
+     * @return int|null
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param string $serviceId
+     * @param string $class
+     * @param string $defaultPriorityMethod
+     * @param string $tagName
      */
-    public static function getDefaultPriority(ContainerBuilder $container, string $serviceId, string $class, string $defaultPriorityMethod, string $tagName) : ?int
+    public static function getDefaultPriority($container, $serviceId, $class, $defaultPriorityMethod, $tagName)
     {
         if (!($r = $container->getReflectionClass($class)) || !$r->hasMethod($defaultPriorityMethod)) {
             return null;

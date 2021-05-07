@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection\CompilerPass;
 
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
@@ -10,7 +9,11 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
 use ECSPrefix20210507\Symfony\Component\DependencyInjection\Reference;
 final class FixerWhitespaceConfigCompilerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $containerBuilder) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
+     */
+    public function process($containerBuilder)
     {
         $definitions = $containerBuilder->getDefinitions();
         foreach ($definitions as $definition) {

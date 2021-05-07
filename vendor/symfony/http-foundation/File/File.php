@@ -28,7 +28,7 @@ class File extends \SplFileInfo
      *
      * @throws FileNotFoundException If the given path is not a file
      */
-    public function __construct(string $path, bool $checkPath = \true)
+    public function __construct($path, $checkPath = \true)
     {
         if ($checkPath && !\is_file($path)) {
             throw new FileNotFoundException($path);
@@ -53,7 +53,7 @@ class File extends \SplFileInfo
         if (!\class_exists(MimeTypes::class)) {
             throw new \LogicException('You cannot guess the extension as the Mime component is not installed. Try running "composer require symfony/mime".');
         }
-        return MimeTypes::getDefault()->getExtensions($this->getMimeType())[0] ?? null;
+        return isset(MimeTypes::getDefault()->getExtensions($this->getMimeType())[0]) ? MimeTypes::getDefault()->getExtensions($this->getMimeType())[0] : null;
     }
     /**
      * Returns the mime type of the file.
@@ -79,8 +79,10 @@ class File extends \SplFileInfo
      * @return self A File object representing the new file
      *
      * @throws FileException if the target file could not be created
+     * @param string $directory
+     * @param string $name
      */
-    public function move(string $directory, string $name = null)
+    public function move($directory, $name = null)
     {
         $target = $this->getTargetFile($directory, $name);
         \set_error_handler(function ($type, $msg) use(&$error) {
@@ -94,7 +96,10 @@ class File extends \SplFileInfo
         @\chmod($target, 0666 & ~\umask());
         return $target;
     }
-    public function getContent() : string
+    /**
+     * @return string
+     */
+    public function getContent()
     {
         $content = \file_get_contents($this->getPathname());
         if (\false === $content) {
@@ -104,8 +109,10 @@ class File extends \SplFileInfo
     }
     /**
      * @return self
+     * @param string $directory
+     * @param string $name
      */
-    protected function getTargetFile(string $directory, string $name = null)
+    protected function getTargetFile($directory, $name = null)
     {
         if (!\is_dir($directory)) {
             if (\false === @\mkdir($directory, 0777, \true) && !\is_dir($directory)) {
@@ -121,8 +128,9 @@ class File extends \SplFileInfo
      * Returns locale independent base name of the given path.
      *
      * @return string
+     * @param string $name
      */
-    protected function getName(string $name)
+    protected function getName($name)
     {
         $originalName = \str_replace('\\', '/', $name);
         $pos = \strrpos($originalName, '/');

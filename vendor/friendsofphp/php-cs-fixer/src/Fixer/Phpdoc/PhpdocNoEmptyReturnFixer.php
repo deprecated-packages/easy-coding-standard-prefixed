@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,15 +26,18 @@ final class PhpdocNoEmptyReturnFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('`@return void` and `@return null` annotations should be omitted from PHPDoc.', [new CodeSample('<?php
 /**
@@ -54,15 +56,19 @@ function foo() {}
      *
      * Must run before NoEmptyPhpdocFixer, PhpdocAlignFixer, PhpdocOrderFixer, PhpdocSeparationFixer, PhpdocTrimFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer, VoidReturnFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 4;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -89,8 +95,11 @@ function foo() {}
     }
     /**
      * Remove return void or return null annotations..
+     * @return void
+     * @param \PhpCsFixer\DocBlock\DocBlock $doc
+     * @param \PhpCsFixer\DocBlock\Annotation $annotation
      */
-    private function fixAnnotation(DocBlock $doc, Annotation $annotation) : void
+    private function fixAnnotation($doc, $annotation)
     {
         $types = $annotation->getNormalizedTypes();
         if (1 === \count($types) && ('null' === $types[0] || 'void' === $types[0])) {

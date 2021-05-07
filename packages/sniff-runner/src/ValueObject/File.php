@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SniffRunner\ValueObject;
 
 use PHP_CodeSniffer\Config;
@@ -28,7 +27,7 @@ final class File extends BaseFile
      *
      * @var string[]
      */
-    private const REPORT_WARNINGS_SNIFFS = [CommentedOutCodeSniff::class, AssignmentInConditionSniff::class, PropertyDeclarationSniff::class, MethodDeclarationSniff::class];
+    const REPORT_WARNINGS_SNIFFS = [CommentedOutCodeSniff::class, AssignmentInConditionSniff::class, PropertyDeclarationSniff::class, MethodDeclarationSniff::class];
     /**
      * @var string
      */
@@ -69,7 +68,16 @@ final class File extends BaseFile
      * @var SmartFileInfo
      */
     private $fileInfo;
-    public function __construct(string $path, string $content, Fixer $fixer, ErrorAndDiffCollector $errorAndDiffCollector, Skipper $skipper, AppliedCheckersCollector $appliedCheckersCollector, EasyCodingStandardStyle $easyCodingStandardStyle)
+    /**
+     * @param string $path
+     * @param string $content
+     * @param \PHP_CodeSniffer\Fixer $fixer
+     * @param \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector
+     * @param \Symplify\Skipper\Skipper\Skipper $skipper
+     * @param \Symplify\EasyCodingStandard\Application\AppliedCheckersCollector $appliedCheckersCollector
+     * @param \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle
+     */
+    public function __construct($path, $content, $fixer, $errorAndDiffCollector, $skipper, $appliedCheckersCollector, $easyCodingStandardStyle)
     {
         $this->path = $path;
         $this->content = $content;
@@ -92,8 +100,9 @@ final class File extends BaseFile
     /**
      * Mimics @see
      * https://github.com/squizlabs/PHP_CodeSniffer/blob/e4da24f399d71d1077f93114a72e305286020415/src/Files/File.php#L310
+     * @return void
      */
-    public function process() : void
+    public function process()
     {
         $this->parse();
         $this->fixer->startFile($this);
@@ -111,14 +120,17 @@ final class File extends BaseFile
         }
         $this->fixedCount += $this->fixer->getFixCount();
     }
-    public function getErrorCount() : void
+    /**
+     * @return void
+     */
+    public function getErrorCount()
     {
         throw new NotImplementedException(\sprintf('Method "%s" is not needed to be public. Use "%s" service.', __METHOD__, ErrorAndDiffCollector::class));
     }
     /**
      * @return mixed[]
      */
-    public function getErrors() : void
+    public function getErrors()
     {
         throw new NotImplementedException(\sprintf('Method "%s" is not needed to be public. Use "%s" service.', __METHOD__, ErrorAndDiffCollector::class));
     }
@@ -126,13 +138,17 @@ final class File extends BaseFile
      * Delegate to addError().
      *
      * {@inheritdoc}
+     * @return bool
      */
-    public function addFixableError($error, $stackPtr, $code, $data = [], $severity = 0) : bool
+    public function addFixableError($error, $stackPtr, $code, $data = [], $severity = 0)
     {
         $this->appliedCheckersCollector->addFileInfoAndChecker($this->fileInfo, $this->resolveFullyQualifiedCode($code));
         return !$this->shouldSkipError($error, $code, $data);
     }
-    public function addError($error, $stackPtr, $code, $data = [], $severity = 0, $fixable = \false) : bool
+    /**
+     * @return bool
+     */
+    public function addError($error, $stackPtr, $code, $data = [], $severity = 0, $fixable = \false)
     {
         if ($this->shouldSkipError($error, $code, $data)) {
             return \false;
@@ -143,8 +159,9 @@ final class File extends BaseFile
      * Allow only specific classes
      *
      * {@inheritdoc}
+     * @return bool
      */
-    public function addWarning($warning, $stackPtr, $code, $data = [], $severity = 0, $fixable = \false) : bool
+    public function addWarning($warning, $stackPtr, $code, $data = [], $severity = 0, $fixable = \false)
     {
         if (!$this->isSniffClassWarningAllowed($this->activeSniffClass)) {
             return \false;
@@ -153,8 +170,10 @@ final class File extends BaseFile
     }
     /**
      * @param Sniff[][] $tokenListeners
+     * @return void
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $fileInfo
      */
-    public function processWithTokenListenersAndFileInfo(array $tokenListeners, SmartFileInfo $fileInfo) : void
+    public function processWithTokenListenersAndFileInfo(array $tokenListeners, $fileInfo)
     {
         $this->tokenListeners = $tokenListeners;
         $this->fileInfo = $fileInfo;
@@ -164,8 +183,9 @@ final class File extends BaseFile
      * Delegated from addError().
      *
      * {@inheritdoc}
+     * @return bool
      */
-    protected function addMessage($isError, $message, $line, $column, $sniffClassOrCode, $data, $severity, $isFixable = \false) : bool
+    protected function addMessage($isError, $message, $line, $column, $sniffClassOrCode, $data, $severity, $isFixable = \false)
     {
         // skip warnings
         if (!$isError) {
@@ -182,7 +202,11 @@ final class File extends BaseFile
         $this->errorAndDiffCollector->addErrorMessage($this->fileInfo, $line, $message, $this->resolveFullyQualifiedCode($sniffClassOrCode));
         return \true;
     }
-    private function reportActiveSniffClass(Sniff $sniff) : void
+    /**
+     * @return void
+     * @param \PHP_CodeSniffer\Sniffs\Sniff $sniff
+     */
+    private function reportActiveSniffClass($sniff)
     {
         // used in other places later
         $this->activeSniffClass = \get_class($sniff);
@@ -195,7 +219,11 @@ final class File extends BaseFile
         $this->easyCodingStandardStyle->writeln('     [sniff] ' . $this->activeSniffClass);
         $this->previousActiveSniffClass = $this->activeSniffClass;
     }
-    private function resolveFullyQualifiedCode(string $sniffClassOrCode) : string
+    /**
+     * @param string $sniffClassOrCode
+     * @return string
+     */
+    private function resolveFullyQualifiedCode($sniffClassOrCode)
     {
         if (\class_exists($sniffClassOrCode)) {
             return $sniffClassOrCode;
@@ -204,8 +232,11 @@ final class File extends BaseFile
     }
     /**
      * @param string[] $data
+     * @param string $error
+     * @param string $code
+     * @return bool
      */
-    private function shouldSkipError(string $error, string $code, array $data) : bool
+    private function shouldSkipError($error, $code, array $data)
     {
         $fullyQualifiedCode = $this->resolveFullyQualifiedCode($code);
         if ($this->skipper->shouldSkipElementAndFileInfo($fullyQualifiedCode, $this->fileInfo)) {
@@ -214,7 +245,11 @@ final class File extends BaseFile
         $message = $data !== [] ? \vsprintf($error, $data) : $error;
         return $this->skipper->shouldSkipElementAndFileInfo($message, $this->fileInfo);
     }
-    private function isSniffClassWarningAllowed(string $sniffClass) : bool
+    /**
+     * @param string $sniffClass
+     * @return bool
+     */
+    private function isSniffClassWarningAllowed($sniffClass)
     {
         foreach (self::REPORT_WARNINGS_SNIFFS as $reportWarningsSniff) {
             if (\is_a($sniffClass, $reportWarningsSniff, \true)) {

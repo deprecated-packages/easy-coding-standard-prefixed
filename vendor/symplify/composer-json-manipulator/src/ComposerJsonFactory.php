@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator;
 
 use ECSPrefix20210507\Nette\Utils\Json;
@@ -17,23 +16,38 @@ final class ComposerJsonFactory
      * @var JsonFileManager
      */
     private $jsonFileManager;
-    public function __construct(JsonFileManager $jsonFileManager)
+    /**
+     * @param \Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager $jsonFileManager
+     */
+    public function __construct($jsonFileManager)
     {
         $this->jsonFileManager = $jsonFileManager;
     }
-    public function createFromString(string $jsonString) : ComposerJson
+    /**
+     * @param string $jsonString
+     * @return \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson
+     */
+    public function createFromString($jsonString)
     {
         $jsonArray = Json::decode($jsonString, Json::FORCE_ARRAY);
         return $this->createFromArray($jsonArray);
     }
-    public function createFromFileInfo(SmartFileInfo $smartFileInfo) : ComposerJson
+    /**
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
+     * @return \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson
+     */
+    public function createFromFileInfo($smartFileInfo)
     {
         $jsonArray = $this->jsonFileManager->loadFromFilePath($smartFileInfo->getRealPath());
         $composerJson = $this->createFromArray($jsonArray);
         $composerJson->setOriginalFileInfo($smartFileInfo);
         return $composerJson;
     }
-    public function createFromFilePath(string $filePath) : ComposerJson
+    /**
+     * @param string $filePath
+     * @return \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson
+     */
+    public function createFromFilePath($filePath)
     {
         $jsonArray = $this->jsonFileManager->loadFromFilePath($filePath);
         $composerJson = $this->createFromArray($jsonArray);
@@ -41,14 +55,18 @@ final class ComposerJsonFactory
         $composerJson->setOriginalFileInfo($fileInfo);
         return $composerJson;
     }
-    public function createEmpty() : ComposerJson
+    /**
+     * @return \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson
+     */
+    public function createEmpty()
     {
         return new ComposerJson();
     }
     /**
      * @param mixed[] $jsonArray
+     * @return \Symplify\ComposerJsonManipulator\ValueObject\ComposerJson
      */
-    public function createFromArray(array $jsonArray) : ComposerJson
+    public function createFromArray(array $jsonArray)
     {
         $composerJson = new ComposerJson();
         if (isset($jsonArray[ComposerJsonSection::CONFIG])) {

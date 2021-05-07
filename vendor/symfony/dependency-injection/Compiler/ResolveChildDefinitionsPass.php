@@ -26,7 +26,10 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\ServiceCir
 class ResolveChildDefinitionsPass extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\AbstractRecursivePass
 {
     private $currentPath;
-    protected function processValue($value, bool $isRoot = \false)
+    /**
+     * @param bool $isRoot
+     */
+    protected function processValue($value, $isRoot = \false)
     {
         if (!$value instanceof Definition) {
             return parent::processValue($value, $isRoot);
@@ -49,8 +52,10 @@ class ResolveChildDefinitionsPass extends \ECSPrefix20210507\Symfony\Component\D
      * Resolves the definition.
      *
      * @throws RuntimeException When the definition is invalid
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ChildDefinition $definition
+     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition
      */
-    private function resolveDefinition(ChildDefinition $definition) : Definition
+    private function resolveDefinition($definition)
     {
         try {
             return $this->doResolveDefinition($definition);
@@ -63,7 +68,11 @@ class ResolveChildDefinitionsPass extends \ECSPrefix20210507\Symfony\Component\D
             throw $e;
         }
     }
-    private function doResolveDefinition(ChildDefinition $definition) : Definition
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ChildDefinition $definition
+     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition
+     */
+    private function doResolveDefinition($definition)
     {
         if (!$this->container->has($parent = $definition->getParent())) {
             throw new RuntimeException(\sprintf('Parent definition "%s" does not exist.', $parent));
@@ -142,7 +151,7 @@ class ResolveChildDefinitionsPass extends \ECSPrefix20210507\Symfony\Component\D
             if (null === $decoratedService) {
                 $def->setDecoratedService($decoratedService);
             } else {
-                $def->setDecoratedService($decoratedService[0], $decoratedService[1], $decoratedService[2], $decoratedService[3] ?? ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE);
+                $def->setDecoratedService($decoratedService[0], $decoratedService[1], $decoratedService[2], isset($decoratedService[3]) ? $decoratedService[3] : ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE);
             }
         }
         // merge arguments

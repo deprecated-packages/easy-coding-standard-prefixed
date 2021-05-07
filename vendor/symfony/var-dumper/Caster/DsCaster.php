@@ -23,7 +23,13 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class DsCaster
 {
-    public static function castCollection(Collection $c, array $a, Stub $stub, bool $isNested) : array
+    /**
+     * @param \Ds\Collection $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     * @return mixed[]
+     */
+    public static function castCollection($c, array $a, $stub, $isNested)
     {
         $a[\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'count'] = $c->count();
         $a[\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'capacity'] = $c->capacity();
@@ -32,21 +38,39 @@ class DsCaster
         }
         return $a;
     }
-    public static function castMap(Map $c, array $a, Stub $stub, bool $isNested) : array
+    /**
+     * @param \Ds\Map $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     * @return mixed[]
+     */
+    public static function castMap($c, array $a, $stub, $isNested)
     {
         foreach ($c as $k => $v) {
             $a[] = new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\DsPairStub($k, $v);
         }
         return $a;
     }
-    public static function castPair(Pair $c, array $a, Stub $stub, bool $isNested) : array
+    /**
+     * @param \Ds\Pair $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     * @return mixed[]
+     */
+    public static function castPair($c, array $a, $stub, $isNested)
     {
         foreach ($c->toArray() as $k => $v) {
             $a[\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . $k] = $v;
         }
         return $a;
     }
-    public static function castPairStub(\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\DsPairStub $c, array $a, Stub $stub, bool $isNested) : array
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\DsPairStub $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     * @return mixed[]
+     */
+    public static function castPairStub($c, array $a, $stub, $isNested)
     {
         if ($isNested) {
             $stub->class = Pair::class;

@@ -17,7 +17,10 @@ namespace ECSPrefix20210507\Symfony\Component\HttpFoundation\File\Exception;
  */
 class AccessDeniedException extends \ECSPrefix20210507\Symfony\Component\HttpFoundation\File\Exception\FileException
 {
-    public function __construct(string $path)
+    /**
+     * @param string $path
+     */
+    public function __construct($path)
     {
         parent::__construct(\sprintf('The file %s could not be accessed', $path));
     }

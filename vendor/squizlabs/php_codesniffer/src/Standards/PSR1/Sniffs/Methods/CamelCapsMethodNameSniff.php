@@ -24,7 +24,7 @@ class CamelCapsMethodNameSniff extends GenericCamelCapsFunctionNameSniff
      *
      * @return void
      */
-    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
+    protected function processTokenWithinScope($phpcsFile, $stackPtr, $currScope)
     {
         $tokens = $phpcsFile->getTokens();
         // Determine if this is a function which needs to be examined.
@@ -70,7 +70,7 @@ class CamelCapsMethodNameSniff extends GenericCamelCapsFunctionNameSniff
      *
      * @return void
      */
-    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    protected function processTokenOutsideScope($phpcsFile, $stackPtr)
     {
     }
     //end processTokenOutsideScope()

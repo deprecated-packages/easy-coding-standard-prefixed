@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,7 +26,11 @@ final class AliasedFixerOptionBuilder
      * @var string
      */
     private $alias;
-    public function __construct(\PhpCsFixer\FixerConfiguration\FixerOptionBuilder $optionBuilder, string $alias)
+    /**
+     * @param \PhpCsFixer\FixerConfiguration\FixerOptionBuilder $optionBuilder
+     * @param string $alias
+     */
+    public function __construct($optionBuilder, $alias)
     {
         $this->optionBuilder = $optionBuilder;
         $this->alias = $alias;
@@ -37,7 +40,7 @@ final class AliasedFixerOptionBuilder
      *
      * @return $this
      */
-    public function setDefault($default) : self
+    public function setDefault($default)
     {
         $this->optionBuilder->setDefault($default);
         return $this;
@@ -47,7 +50,7 @@ final class AliasedFixerOptionBuilder
      *
      * @return $this
      */
-    public function setAllowedTypes(array $allowedTypes) : self
+    public function setAllowedTypes(array $allowedTypes)
     {
         $this->optionBuilder->setAllowedTypes($allowedTypes);
         return $this;
@@ -55,20 +58,24 @@ final class AliasedFixerOptionBuilder
     /**
      * @return $this
      */
-    public function setAllowedValues(array $allowedValues) : self
+    public function setAllowedValues(array $allowedValues)
     {
         $this->optionBuilder->setAllowedValues($allowedValues);
         return $this;
     }
     /**
      * @return $this
+     * @param \Closure $normalizer
      */
-    public function setNormalizer(\Closure $normalizer) : self
+    public function setNormalizer($normalizer)
     {
         $this->optionBuilder->setNormalizer($normalizer);
         return $this;
     }
-    public function getOption() : \PhpCsFixer\FixerConfiguration\AliasedFixerOption
+    /**
+     * @return \PhpCsFixer\FixerConfiguration\AliasedFixerOption
+     */
+    public function getOption()
     {
         return new \PhpCsFixer\FixerConfiguration\AliasedFixerOption($this->optionBuilder->getOption(), $this->alias);
     }

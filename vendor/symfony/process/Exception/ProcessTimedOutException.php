@@ -18,11 +18,15 @@ use ECSPrefix20210507\Symfony\Component\Process\Process;
  */
 class ProcessTimedOutException extends \ECSPrefix20210507\Symfony\Component\Process\Exception\RuntimeException
 {
-    public const TYPE_GENERAL = 1;
-    public const TYPE_IDLE = 2;
+    const TYPE_GENERAL = 1;
+    const TYPE_IDLE = 2;
     private $process;
     private $timeoutType;
-    public function __construct(Process $process, int $timeoutType)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Process\Process $process
+     * @param int $timeoutType
+     */
+    public function __construct($process, $timeoutType)
     {
         $this->process = $process;
         $this->timeoutType = $timeoutType;

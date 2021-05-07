@@ -27,21 +27,22 @@ interface ResponseInterface
      * Gets the HTTP status code of the response.
      *
      * @throws TransportExceptionInterface when a network error occurs
+     * @return int
      */
-    public function getStatusCode() : int;
+    public function getStatusCode();
     /**
      * Gets the HTTP headers of the response.
      *
      * @param bool $throw Whether an exception should be thrown on 3/4/5xx status codes
      *
-     * @return string[][] The headers of the response keyed by header names in lowercase
+     * @return mixed[] The headers of the response keyed by header names in lowercase
      *
      * @throws TransportExceptionInterface   When a network error occurs
      * @throws RedirectionExceptionInterface On a 3xx when $throw is true and the "max_redirects" option has been reached
      * @throws ClientExceptionInterface      On a 4xx when $throw is true
      * @throws ServerExceptionInterface      On a 5xx when $throw is true
      */
-    public function getHeaders(bool $throw = \true) : array;
+    public function getHeaders($throw = \true);
     /**
      * Gets the response body as a string.
      *
@@ -51,8 +52,9 @@ interface ResponseInterface
      * @throws RedirectionExceptionInterface On a 3xx when $throw is true and the "max_redirects" option has been reached
      * @throws ClientExceptionInterface      On a 4xx when $throw is true
      * @throws ServerExceptionInterface      On a 5xx when $throw is true
+     * @return string
      */
-    public function getContent(bool $throw = \true) : string;
+    public function getContent($throw = \true);
     /**
      * Gets the response body decoded as array, typically from a JSON payload.
      *
@@ -63,14 +65,16 @@ interface ResponseInterface
      * @throws RedirectionExceptionInterface On a 3xx when $throw is true and the "max_redirects" option has been reached
      * @throws ClientExceptionInterface      On a 4xx when $throw is true
      * @throws ServerExceptionInterface      On a 5xx when $throw is true
+     * @return mixed[]
      */
-    public function toArray(bool $throw = \true) : array;
+    public function toArray($throw = \true);
     /**
      * Closes the response stream and all related buffers.
      *
      * No further chunk will be yielded after this method has been called.
+     * @return void
      */
-    public function cancel() : void;
+    public function cancel();
     /**
      * Returns info coming from the transport layer.
      *
@@ -97,6 +101,7 @@ interface ResponseInterface
      *
      * @return mixed An array of all available info, or one of them when $type is
      *               provided, or null when an unsupported type is requested
+     * @param string $type
      */
-    public function getInfo(string $type = null);
+    public function getInfo($type = null);
 }

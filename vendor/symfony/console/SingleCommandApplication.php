@@ -21,20 +21,31 @@ class SingleCommandApplication extends Command
     private $version = 'UNKNOWN';
     private $autoExit = \true;
     private $running = \false;
-    public function setVersion(string $version) : self
+    /**
+     * @return $this
+     * @param string $version
+     */
+    public function setVersion($version)
     {
         $this->version = $version;
         return $this;
     }
     /**
      * @final
+     * @return $this
+     * @param bool $autoExit
      */
-    public function setAutoExit(bool $autoExit) : self
+    public function setAutoExit($autoExit)
     {
         $this->autoExit = $autoExit;
         return $this;
     }
-    public function run(InputInterface $input = null, OutputInterface $output = null) : int
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
+     */
+    public function run($input = null, $output = null)
     {
         if ($this->running) {
             return parent::run($input, $output);
@@ -52,6 +63,6 @@ class SingleCommandApplication extends Command
         } finally {
             $this->running = \false;
         }
-        return $ret ?? 1;
+        return isset($ret) ? $ret : 1;
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -23,18 +22,21 @@ use PhpCsFixer\Tokenizer\TokensAnalyzer;
 final class NamespaceUsesAnalyzer
 {
     /**
-     * @return NamespaceUseAnalysis[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    public function getDeclarationsFromTokens(Tokens $tokens) : array
+    public function getDeclarationsFromTokens($tokens)
     {
         $tokenAnalyzer = new TokensAnalyzer($tokens);
         $useIndexes = $tokenAnalyzer->getImportUseIndexes();
         return $this->getDeclarations($tokens, $useIndexes);
     }
     /**
-     * @return NamespaceUseAnalysis[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis $namespace
      */
-    public function getDeclarationsInNamespace(Tokens $tokens, NamespaceAnalysis $namespace) : array
+    public function getDeclarationsInNamespace($tokens, $namespace)
     {
         $namespaceUses = [];
         foreach ($this->getDeclarationsFromTokens($tokens) as $namespaceUse) {
@@ -45,9 +47,10 @@ final class NamespaceUsesAnalyzer
         return $namespaceUses;
     }
     /**
-     * @return NamespaceUseAnalysis[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function getDeclarations(Tokens $tokens, array $useIndexes) : array
+    private function getDeclarations($tokens, array $useIndexes)
     {
         $uses = [];
         foreach ($useIndexes as $index) {
@@ -59,7 +62,13 @@ final class NamespaceUsesAnalyzer
         }
         return $uses;
     }
-    private function parseDeclaration(Tokens $tokens, int $startIndex, int $endIndex) : ?NamespaceUseAnalysis
+    /**
+     * @return \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis|null
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startIndex
+     * @param int $endIndex
+     */
+    private function parseDeclaration($tokens, $startIndex, $endIndex)
     {
         $fullName = $shortName = '';
         $aliased = \false;

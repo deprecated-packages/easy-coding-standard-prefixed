@@ -19,8 +19,11 @@ class ApcuAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abs
 {
     /**
      * @throws CacheException if APCu is not enabled
+     * @param string $namespace
+     * @param int $defaultLifetime
+     * @param string $version
      */
-    public function __construct(string $namespace = '', int $defaultLifetime = 0, string $version = null)
+    public function __construct($namespace = '', $defaultLifetime = 0, $version = null)
     {
         if (!static::isSupported()) {
             throw new CacheException('APCu is not enabled.');
@@ -63,15 +66,17 @@ class ApcuAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abs
     }
     /**
      * {@inheritdoc}
+     * @param string $id
      */
-    protected function doHave(string $id)
+    protected function doHave($id)
     {
         return \apcu_exists($id);
     }
     /**
      * {@inheritdoc}
+     * @param string $namespace
      */
-    protected function doClear(string $namespace)
+    protected function doClear($namespace)
     {
         return isset($namespace[0]) && \class_exists(\APCuIterator::class, \false) && ('cli' !== \PHP_SAPI || \filter_var(\ini_get('apc.enable_cli'), \FILTER_VALIDATE_BOOLEAN)) ? \apcu_delete(new \APCuIterator(\sprintf('/^%s/', \preg_quote($namespace, '/')), \APC_ITER_KEY)) : \apcu_clear_cache();
     }
@@ -87,8 +92,9 @@ class ApcuAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Abs
     }
     /**
      * {@inheritdoc}
+     * @param int $lifetime
      */
-    protected function doSave(array $values, int $lifetime)
+    protected function doSave(array $values, $lifetime)
     {
         try {
             if (\false === ($failures = \apcu_store($values, null, $lifetime))) {

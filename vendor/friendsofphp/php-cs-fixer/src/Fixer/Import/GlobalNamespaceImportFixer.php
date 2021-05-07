@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -40,8 +39,9 @@ final class GlobalNamespaceImportFixer extends AbstractFixer implements Configur
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Imports or fully qualifies global classes/functions/constants.', [new CodeSample('<?php
 
@@ -77,22 +77,28 @@ if (count($x)) {
      *
      * Must run before NoUnusedImportsFixer, OrderedImportsFixer.
      * Must run after NativeConstantInvocationFixer, NativeFunctionInvocationFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_DOC_COMMENT, \T_NS_SEPARATOR, \T_USE]) && $tokens->isTokenKindFound(\T_NAMESPACE) && 1 === $tokens->countTokenKind(\T_NAMESPACE) && $tokens->isMonolithicPhp();
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $namespaceAnalyses = (new NamespacesAnalyzer())->getDeclarations($tokens);
         if (1 !== \count($namespaceAnalyses) || '' === $namespaceAnalyses[0]->getFullName()) {
@@ -120,14 +126,19 @@ if (count($x)) {
             $this->insertImports($tokens, $newImports, $useDeclarations);
         }
     }
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    /**
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+     */
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('import_constants', 'Whether to import, not import or ignore global constants.'))->setDefault(null)->setAllowedValues([\true, \false, null])->getOption(), (new FixerOptionBuilder('import_functions', 'Whether to import, not import or ignore global functions.'))->setDefault(null)->setAllowedValues([\true, \false, null])->getOption(), (new FixerOptionBuilder('import_classes', 'Whether to import, not import or ignore global classes.'))->setDefault(\true)->setAllowedValues([\true, \false, null])->getOption()]);
     }
     /**
      * @param NamespaceUseAnalysis[] $useDeclarations
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return mixed[]
      */
-    private function importConstants(Tokens $tokens, array $useDeclarations) : array
+    private function importConstants($tokens, array $useDeclarations)
     {
         list($global, $other) = $this->filterUseDeclarations($useDeclarations, static function (NamespaceUseAnalysis $declaration) {
             return $declaration->isConstant();
@@ -180,8 +191,10 @@ if (count($x)) {
     }
     /**
      * @param NamespaceUseAnalysis[] $useDeclarations
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return mixed[]
      */
-    private function importFunctions(Tokens $tokens, array $useDeclarations) : array
+    private function importFunctions($tokens, array $useDeclarations)
     {
         list($global, $other) = $this->filterUseDeclarations($useDeclarations, static function (NamespaceUseAnalysis $declaration) {
             return $declaration->isFunction();
@@ -218,8 +231,10 @@ if (count($x)) {
     }
     /**
      * @param NamespaceUseAnalysis[] $useDeclarations
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return mixed[]
      */
-    private function importClasses(Tokens $tokens, array $useDeclarations) : array
+    private function importClasses($tokens, array $useDeclarations)
     {
         list($global, $other) = $this->filterUseDeclarations($useDeclarations, static function (NamespaceUseAnalysis $declaration) {
             return $declaration->isClass();
@@ -232,7 +247,7 @@ if (count($x)) {
             $token = $tokens[$index];
             if ($token->isGivenKind(\T_DOC_COMMENT)) {
                 $docBlocks[$index] = new DocBlock($token->getContent());
-                $this->traverseDocBlockTypes($docBlocks[$index], static function (string $type) use($global, &$other) : void {
+                $this->traverseDocBlockTypes($docBlocks[$index], static function (string $type) use($global, &$other) {
                     if (\false !== \strpos($type, '\\')) {
                         return;
                     }
@@ -305,8 +320,10 @@ if (count($x)) {
      * @param int[] $indexes
      *
      * @return array array keys contain the names that must be imported
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param bool $caseSensitive
      */
-    private function prepareImports(Tokens $tokens, array $indexes, array $global, array $other, bool $caseSensitive) : array
+    private function prepareImports($tokens, array $indexes, array $global, array $other, $caseSensitive)
     {
         $imports = [];
         foreach ($indexes as $index) {
@@ -326,8 +343,10 @@ if (count($x)) {
     }
     /**
      * @param NamespaceUseAnalysis[] $useDeclarations
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function insertImports(Tokens $tokens, array $imports, array $useDeclarations) : void
+    private function insertImports($tokens, array $imports, array $useDeclarations)
     {
         if ($useDeclarations) {
             $useDeclaration = \end($useDeclarations);
@@ -358,8 +377,10 @@ if (count($x)) {
     }
     /**
      * @param NamespaceUseAnalysis[] $useDeclarations
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fullyQualifyConstants(Tokens $tokens, array $useDeclarations) : void
+    private function fullyQualifyConstants($tokens, array $useDeclarations)
     {
         if (!$tokens->isTokenKindFound(CT::T_CONST_IMPORT)) {
             return;
@@ -390,8 +411,10 @@ if (count($x)) {
     }
     /**
      * @param NamespaceUseAnalysis[] $useDeclarations
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fullyQualifyFunctions(Tokens $tokens, array $useDeclarations) : void
+    private function fullyQualifyFunctions($tokens, array $useDeclarations)
     {
         if (!$tokens->isTokenKindFound(CT::T_FUNCTION_IMPORT)) {
             return;
@@ -422,8 +445,10 @@ if (count($x)) {
     }
     /**
      * @param NamespaceUseAnalysis[] $useDeclarations
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fullyQualifyClasses(Tokens $tokens, array $useDeclarations) : void
+    private function fullyQualifyClasses($tokens, array $useDeclarations)
     {
         if (!$tokens->isTokenKindFound(\T_USE)) {
             return;
@@ -467,8 +492,10 @@ if (count($x)) {
     }
     /**
      * @param NamespaceUseAnalysis[] $declarations
+     * @param bool $caseSensitive
+     * @return mixed[]
      */
-    private function filterUseDeclarations(array $declarations, callable $callback, bool $caseSensitive) : array
+    private function filterUseDeclarations(array $declarations, callable $callback, $caseSensitive)
     {
         $global = [];
         $other = [];
@@ -488,7 +515,13 @@ if (count($x)) {
         }
         return [$global, $other];
     }
-    private function findFunctionDeclarations(Tokens $tokens, int $start, int $end) : iterable
+    /**
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $start
+     * @param int $end
+     */
+    private function findFunctionDeclarations($tokens, $start, $end)
     {
         for ($index = $start; $index <= $end; ++$index) {
             $token = $tokens[$index];
@@ -524,7 +557,11 @@ if (count($x)) {
             }
         }
     }
-    private function traverseDocBlockTypes(DocBlock $doc, callable $callback) : bool
+    /**
+     * @param \PhpCsFixer\DocBlock\DocBlock $doc
+     * @return bool
+     */
+    private function traverseDocBlockTypes($doc, callable $callback)
     {
         $annotations = $doc->getAnnotationsOfType(Annotation::getTagsWithTypes());
         if (!$annotations) {

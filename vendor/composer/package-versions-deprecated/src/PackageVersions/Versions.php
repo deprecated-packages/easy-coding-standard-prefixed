@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace ECSPrefix20210507\PackageVersions;
 
 use ECSPrefix20210507\Composer\InstalledVersions;
@@ -37,8 +36,9 @@ final class Versions
      *
      * @psalm-suppress ImpureMethodCall we know that {@see InstalledVersions} interaction does not
      *                                  cause any side effects here.
+     * @return string
      */
-    public static function rootPackageName() : string
+    public static function rootPackageName()
     {
         if (!\class_exists(InstalledVersions::class, \false) || !InstalledVersions::getRawData()) {
             return self::ROOT_PACKAGE_NAME;
@@ -53,8 +53,10 @@ final class Versions
      *
      * @psalm-suppress ImpureMethodCall we know that {@see InstalledVersions} interaction does not
      *                                  cause any side effects here.
+     * @param string $packageName
+     * @return string
      */
-    public static function getVersion(string $packageName) : string
+    public static function getVersion($packageName)
     {
         if (\class_exists(InstalledVersions::class, \false) && InstalledVersions::getRawData()) {
             return InstalledVersions::getPrettyVersion($packageName) . '@' . InstalledVersions::getReference($packageName);

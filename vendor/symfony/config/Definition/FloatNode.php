@@ -38,8 +38,9 @@ class FloatNode extends \ECSPrefix20210507\Symfony\Component\Config\Definition\N
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    protected function getValidPlaceholderTypes() : array
+    protected function getValidPlaceholderTypes()
     {
         return ['float'];
     }

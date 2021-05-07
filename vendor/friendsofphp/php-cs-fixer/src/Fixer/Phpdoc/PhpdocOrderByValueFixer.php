@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -34,8 +33,9 @@ final class PhpdocOrderByValueFixer extends AbstractFixer implements Configurabl
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Order phpdoc tags by value.', [new CodeSample('<?php
 /**
@@ -58,22 +58,28 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
      *
      * Must run before PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpUnitFqcnAnnotationFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -10;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_DOC_COMMENT]);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         if ([] === $this->configuration['annotations']) {
             return;
@@ -115,7 +121,10 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
             }
         }
     }
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    /**
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+     */
+    protected function createConfigurationDefinition()
     {
         $allowedValues = ['author', 'covers', 'coversNothing', 'dataProvider', 'depends', 'group', 'internal', 'method', 'property', 'property-read', 'property-write', 'requires', 'throws', 'uses'];
         return new FixerConfigurationResolver([(new FixerOptionBuilder('annotations', 'List of annotations to order, e.g. `["covers"]`.'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset($allowedValues)])->setNormalizer(function (Options $options, $value) {

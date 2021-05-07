@@ -28,15 +28,19 @@ class ConfigDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
     private $kernel;
     /**
      * Sets the Kernel associated with this Request.
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelInterface $kernel
      */
-    public function setKernel(KernelInterface $kernel = null)
+    public function setKernel($kernel = null)
     {
         $this->kernel = $kernel;
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
+     * @param \Throwable $exception
      */
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    public function collect($request, $response, $exception = null)
     {
         $eom = \DateTime::createFromFormat('d/m/Y', '01/' . Kernel::END_OF_MAINTENANCE);
         $eol = \DateTime::createFromFormat('d/m/Y', '01/' . Kernel::END_OF_LIFE);
@@ -101,8 +105,9 @@ class ConfigDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
     }
     /**
      * Returns if the current Symfony version is a Long-Term Support one.
+     * @return bool
      */
-    public function isSymfonyLts() : bool
+    public function isSymfonyLts()
     {
         return $this->data['symfony_lts'];
     }
@@ -142,7 +147,7 @@ class ConfigDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
      */
     public function getPhpVersionExtra()
     {
-        return $this->data['php_version_extra'] ?? null;
+        return isset($this->data['php_version_extra']) ? $this->data['php_version_extra'] : null;
     }
     /**
      * @return int The PHP architecture as number of bits (e.g. 32 or 64)
@@ -235,7 +240,7 @@ class ConfigDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
      *
      * @return string One of: dev, stable, eom, eol
      */
-    private function determineSymfonyState() : string
+    private function determineSymfonyState()
     {
         $now = new \DateTime();
         $eom = \DateTime::createFromFormat('d/m/Y', '01/' . Kernel::END_OF_MAINTENANCE)->modify('last day of this month');

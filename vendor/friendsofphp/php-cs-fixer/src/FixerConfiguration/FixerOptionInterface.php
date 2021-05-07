@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -14,9 +13,18 @@ namespace PhpCsFixer\FixerConfiguration;
 
 interface FixerOptionInterface
 {
-    public function getName() : string;
-    public function getDescription() : string;
-    public function hasDefault() : bool;
+    /**
+     * @return string
+     */
+    public function getName();
+    /**
+     * @return string
+     */
+    public function getDescription();
+    /**
+     * @return bool
+     */
+    public function hasDefault();
     /**
      * @throws \LogicException when no default value is defined
      *
@@ -24,9 +32,15 @@ interface FixerOptionInterface
      */
     public function getDefault();
     /**
-     * @return null|string[]
+     * @return mixed[]|null
      */
-    public function getAllowedTypes() : ?array;
-    public function getAllowedValues() : ?array;
-    public function getNormalizer() : ?\Closure;
+    public function getAllowedTypes();
+    /**
+     * @return mixed[]|null
+     */
+    public function getAllowedValues();
+    /**
+     * @return \Closure|null
+     */
+    public function getNormalizer();
 }

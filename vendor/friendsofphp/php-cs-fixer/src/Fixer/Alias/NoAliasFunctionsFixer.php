@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -41,7 +40,11 @@ final class NoAliasFunctionsFixer extends AbstractFixer implements ConfigurableF
     private static $mbregSet = ['mbereg' => 'mb_ereg', 'mbereg_match' => 'mb_ereg_match', 'mbereg_replace' => 'mb_ereg_replace', 'mbereg_search' => 'mb_ereg_search', 'mbereg_search_getpos' => 'mb_ereg_search_getpos', 'mbereg_search_getregs' => 'mb_ereg_search_getregs', 'mbereg_search_init' => 'mb_ereg_search_init', 'mbereg_search_pos' => 'mb_ereg_search_pos', 'mbereg_search_regs' => 'mb_ereg_search_regs', 'mbereg_search_setpos' => 'mb_ereg_search_setpos', 'mberegi' => 'mb_eregi', 'mberegi_replace' => 'mb_eregi_replace', 'mbregex_encoding' => 'mb_regex_encoding', 'mbsplit' => 'mb_split'];
     private static $exifSet = ['read_exif_data' => 'exif_read_data'];
     private static $timeSet = ['mktime' => ['time', 0], 'gmmktime' => ['time', 0]];
-    public function configure(array $configuration) : void
+    /**
+     * @param mixed[] $configuration
+     * @return void
+     */
+    public function configure($configuration)
     {
         parent::configure($configuration);
         $this->aliases = [];
@@ -69,8 +72,9 @@ final class NoAliasFunctionsFixer extends AbstractFixer implements ConfigurableF
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Master functions shall be used instead of aliases.', [new CodeSample('<?php
 $a = chop($b);
@@ -103,29 +107,36 @@ mbereg_search_getregs();
      * {@inheritdoc}
      *
      * Must run before ImplodeCallFixer, PhpUnitDedicateAssertFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 40;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $functionsAnalyzer = new FunctionsAnalyzer();
         $argumentsAnalyzer = new ArgumentsAnalyzer();
@@ -158,8 +169,9 @@ mbereg_search_getregs();
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         $sets = ['@internal', '@IMAP', '@mbreg', '@all', '@time', '@exif'];
         return new FixerConfigurationResolver([(new FixerOptionBuilder('sets', 'List of sets to fix. Defined sets are `@internal` (native functions), `@IMAP` (IMAP functions), `@mbreg` (from `ext-mbstring`) `@all` (all listed sets).'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset($sets)])->setDefault(['@internal', '@IMAP'])->getOption()]);

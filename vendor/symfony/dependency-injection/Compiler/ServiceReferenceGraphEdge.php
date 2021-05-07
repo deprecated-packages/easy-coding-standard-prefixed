@@ -25,7 +25,14 @@ class ServiceReferenceGraphEdge
     private $lazy;
     private $weak;
     private $byConstructor;
-    public function __construct(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $sourceNode, \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $destNode, $value = null, bool $lazy = \false, bool $weak = \false, bool $byConstructor = \false)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $sourceNode
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphNode $destNode
+     * @param bool $lazy
+     * @param bool $weak
+     * @param bool $byConstructor
+     */
+    public function __construct($sourceNode, $destNode, $value = null, $lazy = \false, $weak = \false, $byConstructor = \false)
     {
         $this->sourceNode = $sourceNode;
         $this->destNode = $destNode;

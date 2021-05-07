@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,8 +25,9 @@ final class NoEmptyStatementFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Remove useless (semicolon) statements.', [new CodeSample("<?php \$a = 1;;\n"), new CodeSample("<?php echo 1;2;\n"), new CodeSample("<?php while(foo()){\n    continue 1;\n}\n")]);
     }
@@ -36,22 +36,28 @@ final class NoEmptyStatementFixer extends AbstractFixer
      *
      * Must run before BracesFixer, CombineConsecutiveUnsetsFixer, MultilineWhitespaceBeforeSemicolonsFixer, NoExtraBlankLinesFixer, NoSinglelineWhitespaceBeforeSemicolonsFixer, NoTrailingWhitespaceFixer, NoUselessElseFixer, NoUselessReturnFixer, NoWhitespaceInBlankLineFixer, ReturnAssignmentFixer, SpaceAfterSemicolonFixer, SwitchCaseSemicolonToColonFixer.
      * Must run after NoUselessSprintfFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 40;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(';');
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         for ($index = 0, $count = $tokens->count(); $index < $count; ++$index) {
             if ($tokens[$index]->isGivenKind([\T_BREAK, \T_CONTINUE])) {
@@ -103,8 +109,11 @@ final class NoEmptyStatementFixer extends AbstractFixer
      * - namespace (with '{' '}')
      *
      * @param int $index Semicolon index
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $curlyCloseIndex
      */
-    private function fixSemicolonAfterCurlyBraceClose(Tokens $tokens, int $index, int $curlyCloseIndex) : void
+    private function fixSemicolonAfterCurlyBraceClose($tokens, $index, $curlyCloseIndex)
     {
         static $beforeCurlyOpeningKinds = null;
         if (null === $beforeCurlyOpeningKinds) {

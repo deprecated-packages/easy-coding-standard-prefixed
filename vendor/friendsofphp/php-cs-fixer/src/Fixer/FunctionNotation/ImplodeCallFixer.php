@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,22 +26,26 @@ final class ImplodeCallFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Function `implode` must be called with 2 arguments in the documented order.', [new CodeSample("<?php\nimplode(\$pieces, '');\n"), new CodeSample("<?php\nimplode(\$pieces);\n")], null, 'Risky when the function `implode` is overridden.');
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
@@ -51,15 +54,19 @@ final class ImplodeCallFixer extends AbstractFixer
      *
      * Must run before MethodArgumentSpaceFixer.
      * Must run after NoAliasFunctionsFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 37;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $functionsAnalyzer = new FunctionsAnalyzer();
         for ($index = \count($tokens) - 1; $index > 0; --$index) {
@@ -101,9 +108,11 @@ final class ImplodeCallFixer extends AbstractFixer
         }
     }
     /**
-     * @return array<int, int> In the format: startIndex => endIndex
+     * @return mixed[] In the format: startIndex => endIndex
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $functionNameIndex
      */
-    private function getArgumentIndices(Tokens $tokens, int $functionNameIndex) : array
+    private function getArgumentIndices($tokens, $functionNameIndex)
     {
         $argumentsAnalyzer = new ArgumentsAnalyzer();
         $openParenthesis = $tokens->getNextTokenOfKind($functionNameIndex, ['(']);

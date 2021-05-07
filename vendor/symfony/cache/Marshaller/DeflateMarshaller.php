@@ -19,7 +19,10 @@ use ECSPrefix20210507\Symfony\Component\Cache\Exception\CacheException;
 class DeflateMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $marshaller;
-    public function __construct(\ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller
+     */
+    public function __construct($marshaller)
     {
         if (!\function_exists('gzdeflate')) {
             throw new CacheException('The "zlib" PHP extension is not loaded.');
@@ -28,15 +31,18 @@ class DeflateMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Ma
     }
     /**
      * {@inheritdoc}
+     * @param mixed[]|null $failed
+     * @return mixed[]
      */
-    public function marshall(array $values, ?array &$failed) : array
+    public function marshall(array $values, &$failed)
     {
         return \array_map('gzdeflate', $this->marshaller->marshall($values, $failed));
     }
     /**
      * {@inheritdoc}
+     * @param string $value
      */
-    public function unmarshall(string $value)
+    public function unmarshall($value)
     {
         if (\false !== ($inflatedValue = @\gzinflate($value))) {
             $value = $inflatedValue;

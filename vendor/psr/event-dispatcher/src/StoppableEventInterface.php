@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace ECSPrefix20210507\Psr\EventDispatcher;
 
 /**
@@ -22,5 +21,5 @@ interface StoppableEventInterface
      *   True if the Event is complete and no further listeners should be called.
      *   False to continue calling listeners.
      */
-    public function isPropagationStopped() : bool;
+    public function isPropagationStopped();
 }

@@ -57,9 +57,12 @@ class Container implements \ECSPrefix20210507\Symfony\Component\DependencyInject
     private $envCache = [];
     private $compiled = \false;
     private $getEnv;
-    public function __construct(ParameterBagInterface $parameterBag = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag
+     */
+    public function __construct($parameterBag = null)
     {
-        $this->parameterBag = $parameterBag ?? new EnvPlaceholderParameterBag();
+        $this->parameterBag = isset($parameterBag) ? $parameterBag : new EnvPlaceholderParameterBag();
     }
     /**
      * Compiles the container.
@@ -102,7 +105,7 @@ class Container implements \ECSPrefix20210507\Symfony\Component\DependencyInject
      *
      * @throws InvalidArgumentException if the parameter is not defined
      */
-    public function getParameter(string $name)
+    public function getParameter($name)
     {
         return $this->parameterBag->get($name);
     }
@@ -113,7 +116,7 @@ class Container implements \ECSPrefix20210507\Symfony\Component\DependencyInject
      *
      * @return bool The presence of parameter in container
      */
-    public function hasParameter(string $name)
+    public function hasParameter($name)
     {
         return $this->parameterBag->has($name);
     }
@@ -123,7 +126,7 @@ class Container implements \ECSPrefix20210507\Symfony\Component\DependencyInject
      * @param string $name  The parameter name
      * @param mixed  $value The parameter value
      */
-    public function setParameter(string $name, $value)
+    public function setParameter($name, $value)
     {
         $this->parameterBag->set($name, $value);
     }
@@ -132,8 +135,10 @@ class Container implements \ECSPrefix20210507\Symfony\Component\DependencyInject
      *
      * Setting a synthetic service to null resets it: has() returns false and get()
      * behaves in the same way as if the service was never created.
+     * @param object|null $service
+     * @param string $id
      */
-    public function set(string $id, ?object $service)
+    public function set($id, $service)
     {
         // Runs the internal initializer; used by the dumped container to include always-needed files
         if (isset($this->privates['service_container']) && $this->privates['service_container'] instanceof \Closure) {
@@ -198,16 +203,18 @@ class Container implements \ECSPrefix20210507\Symfony\Component\DependencyInject
      *
      * @see Reference
      */
-    public function get($id, int $invalidBehavior = 1)
+    public function get($id, $invalidBehavior = 1)
     {
-        return $this->services[$id] ?? $this->services[$id = $this->aliases[$id] ?? $id] ?? ('service_container' === $id ? $this : ($this->factories[$id] ?? [$this, 'make'])($id, $invalidBehavior));
+        return isset($this->services[$id]) ? $this->services[$id] : (isset($this->services[$id = isset($this->aliases[$id]) ? $this->aliases[$id] : $id]) ? $this->services[$id = isset($this->aliases[$id]) ? $this->aliases[$id] : $id] : ('service_container' === $id ? $this : (isset($this->factories[$id]) ? $this->factories[$id] : [$this, 'make'])($id, $invalidBehavior)));
     }
     /**
      * Creates a service.
      *
      * As a separate method to allow "get()" to use the really fast `??` operator.
+     * @param string $id
+     * @param int $invalidBehavior
      */
-    private function make(string $id, int $invalidBehavior)
+    private function make($id, $invalidBehavior)
     {
         if (isset($this->loading[$id])) {
             throw new ServiceCircularReferenceException($id, \array_merge(\array_keys($this->loading), [$id]));
@@ -256,7 +263,7 @@ class Container implements \ECSPrefix20210507\Symfony\Component\DependencyInject
      *
      * @return bool true if service has already been initialized, false otherwise
      */
-    public function initialized(string $id)
+    public function initialized($id)
     {
         if (isset($this->aliases[$id])) {
             $id = $this->aliases[$id];
@@ -378,8 +385,10 @@ class Container implements \ECSPrefix20210507\Symfony\Component\DependencyInject
      * @return mixed
      *
      * @internal
+     * @param string|null $method
+     * @param string $id
      */
-    protected final function getService($registry, string $id, ?string $method, $load)
+    protected final function getService($registry, $id, $method, $load)
     {
         if ('service_container' === $id) {
             return $this;
@@ -388,15 +397,15 @@ class Container implements \ECSPrefix20210507\Symfony\Component\DependencyInject
             throw new RuntimeException($load);
         }
         if (null === $method) {
-            return \false !== $registry ? $this->{$registry}[$id] ?? null : null;
+            return \false !== $registry ? isset($this->{$registry}[$id]) ? $this->{$registry}[$id] : null : null;
         }
         if (\false !== $registry) {
-            return $this->{$registry}[$id] ?? ($this->{$registry}[$id] = $load ? $this->load($method) : $this->{$method}());
+            return isset($this->{$registry}[$id]) ? $this->{$registry}[$id] : ($this->{$registry}[$id] = $load ? $this->load($method) : $this->{$method}());
         }
         if (!$load) {
             return $this->{$method}();
         }
-        return ($factory = $this->factories[$id] ?? $this->factories['service_container'][$id] ?? null) ? $factory() : $this->load($method);
+        return ($factory = isset($this->factories[$id]) ? $this->factories[$id] : (isset($this->factories['service_container'][$id]) ? $this->factories['service_container'][$id] : null)) ? $factory() : $this->load($method);
     }
     private function __clone()
     {

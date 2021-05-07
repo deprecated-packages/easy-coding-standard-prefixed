@@ -53,7 +53,10 @@ class ServiceLocator implements ServiceProviderInterface
             throw $e;
         }
     }
-    public function __invoke(string $id)
+    /**
+     * @param string $id
+     */
+    public function __invoke($id)
     {
         return isset($this->factories[$id]) ? $this->get($id) : null;
     }
@@ -61,15 +64,21 @@ class ServiceLocator implements ServiceProviderInterface
      * @internal
      *
      * @return static
+     * @param string $externalId
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Container $container
      */
-    public function withContext(string $externalId, \ECSPrefix20210507\Symfony\Component\DependencyInjection\Container $container) : self
+    public function withContext($externalId, $container)
     {
         $locator = clone $this;
         $locator->externalId = $externalId;
         $locator->container = $container;
         return $locator;
     }
-    private function createNotFoundException(string $id) : NotFoundExceptionInterface
+    /**
+     * @param string $id
+     * @return \ECSPrefix20210507\Psr\Container\NotFoundExceptionInterface
+     */
+    private function createNotFoundException($id)
     {
         if ($this->loading) {
             $msg = \sprintf('The service "%s" has a dependency on a non-existent service "%s". This locator %s', \end($this->loading), $id, $this->formatAlternatives());
@@ -110,11 +119,19 @@ class ServiceLocator implements ServiceProviderInterface
         }
         return new ServiceNotFoundException($id, \end($this->loading) ?: null, null, [], \implode(' ', $msg));
     }
-    private function createCircularReferenceException(string $id, array $path) : ContainerExceptionInterface
+    /**
+     * @param string $id
+     * @return \ECSPrefix20210507\Psr\Container\ContainerExceptionInterface
+     */
+    private function createCircularReferenceException($id, array $path)
     {
         return new ServiceCircularReferenceException($id, $path);
     }
-    private function formatAlternatives(array $alternatives = null, string $separator = 'and') : string
+    /**
+     * @param string $separator
+     * @return string
+     */
+    private function formatAlternatives(array $alternatives = null, $separator = 'and')
     {
         $format = '"%s"%s';
         if (null === $alternatives) {

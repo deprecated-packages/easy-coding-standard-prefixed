@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -34,8 +33,9 @@ final class PhpdocNoAliasTagFixer extends AbstractProxyFixer implements Configur
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('No alias PHPDoc tags should be used.', [new CodeSample('<?php
 /**
@@ -64,12 +64,17 @@ final class Example
      *
      * Must run before PhpdocAddMissingParamAnnotationFixer, PhpdocAlignFixer, PhpdocSingleLineVarSpacingFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return parent::getPriority();
     }
-    public function configure(array $configuration) : void
+    /**
+     * @param mixed[] $configuration
+     * @return void
+     */
+    public function configure($configuration)
     {
         parent::configure($configuration);
         /** @var GeneralPhpdocTagRenameFixer $generalPhpdocTagRenameFixer */
@@ -82,15 +87,17 @@ final class Example
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('replacements', 'Mapping between replaced annotations with new ones.'))->setAllowedTypes(['array'])->setDefault(['property-read' => 'property', 'property-write' => 'property', 'type' => 'var', 'link' => 'see'])->getOption()]);
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    protected function createProxyFixers() : array
+    protected function createProxyFixers()
     {
         return [new \PhpCsFixer\Fixer\Phpdoc\GeneralPhpdocTagRenameFixer()];
     }

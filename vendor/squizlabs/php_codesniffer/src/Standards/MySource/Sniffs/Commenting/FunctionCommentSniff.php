@@ -25,7 +25,7 @@ class FunctionCommentSniff extends SquizFunctionCommentSniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         parent::process($phpcsFile, $stackPtr);
         $tokens = $phpcsFile->getTokens();

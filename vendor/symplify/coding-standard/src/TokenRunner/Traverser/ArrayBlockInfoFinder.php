@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Traverser;
 
 use PhpCsFixer\Tokenizer\Token;
@@ -14,15 +13,18 @@ final class ArrayBlockInfoFinder
      * @var BlockFinder
      */
     private $blockFinder;
-    public function __construct(BlockFinder $blockFinder)
+    /**
+     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder
+     */
+    public function __construct($blockFinder)
     {
         $this->blockFinder = $blockFinder;
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return BlockInfo[]
+     * @return mixed[]
      */
-    public function findArrayOpenerBlockInfos(Tokens $tokens) : array
+    public function findArrayOpenerBlockInfos($tokens)
     {
         $reversedTokens = $this->reverseTokens($tokens);
         $blockInfos = [];
@@ -40,9 +42,9 @@ final class ArrayBlockInfoFinder
     }
     /**
      * @param Tokens<Token> $tokens
-     * @return Token[]
+     * @return mixed[]
      */
-    private function reverseTokens(Tokens $tokens) : array
+    private function reverseTokens($tokens)
     {
         return \array_reverse($tokens->toArray(), \true);
     }

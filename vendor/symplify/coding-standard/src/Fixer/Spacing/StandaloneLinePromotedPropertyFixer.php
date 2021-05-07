@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Spacing;
 
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -25,7 +24,7 @@ final class StandaloneLinePromotedPropertyFixer extends AbstractSymplifyFixer im
     /**
      * @var string
      */
-    private const ERROR_MESSAGE = 'Promoted property should be on standalone line';
+    const ERROR_MESSAGE = 'Promoted property should be on standalone line';
     /**
      * @var BlockFinder
      */
@@ -34,26 +33,36 @@ final class StandaloneLinePromotedPropertyFixer extends AbstractSymplifyFixer im
      * @var TokensNewliner
      */
     private $tokensNewliner;
-    public function __construct(BlockFinder $blockFinder, TokensNewliner $tokensNewliner)
+    /**
+     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder
+     * @param \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\TokensNewliner $tokensNewliner
+     */
+    public function __construct($blockFinder, $tokensNewliner)
     {
         $this->blockFinder = $blockFinder;
         $this->tokensNewliner = $tokensNewliner;
     }
-    public function getDefinition() : FixerDefinitionInterface
+    /**
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+     */
+    public function getDefinition()
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound([CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE]);
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param \SplFileInfo $splFileInfo
      */
-    public function fix(SplFileInfo $splFileInfo, Tokens $tokens) : void
+    public function fix($splFileInfo, $tokens)
     {
         // function arguments, function call parameters, lambda use()
         for ($position = \count($tokens) - 1; $position >= 0; --$position) {
@@ -69,7 +78,10 @@ final class StandaloneLinePromotedPropertyFixer extends AbstractSymplifyFixer im
             $this->processFunction($tokens, $position);
         }
     }
-    public function getRuleDefinition() : RuleDefinition
+    /**
+     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+     */
+    public function getRuleDefinition()
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 final class PromotedProperties
@@ -93,8 +105,10 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param int $position
      */
-    private function processFunction(Tokens $tokens, int $position) : void
+    private function processFunction($tokens, $position)
     {
         $blockInfo = $this->blockFinder->findInTokensByEdge($tokens, $position);
         if (!$blockInfo instanceof BlockInfo) {
@@ -104,8 +118,10 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return string|null
+     * @param int $position
      */
-    private function getFunctionName(Tokens $tokens, int $position) : ?string
+    private function getFunctionName($tokens, $position)
     {
         $nextToken = $this->getNextMeaningfulToken($tokens, $position);
         if (!$nextToken instanceof Token) {

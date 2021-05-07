@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -20,9 +19,10 @@ use PhpCsFixer\Tokenizer\Tokens;
 final class NamespacesAnalyzer
 {
     /**
-     * @return NamespaceAnalysis[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    public function getDeclarations(Tokens $tokens) : array
+    public function getDeclarations($tokens)
     {
         $namespaces = [];
         for ($index = 1, $count = \count($tokens); $index < $count; ++$index) {
@@ -56,8 +56,9 @@ final class NamespacesAnalyzer
      * @param int $index
      *
      * @return NamespaceAnalysis
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    public function getNamespaceAt(Tokens $tokens, $index)
+    public function getNamespaceAt($tokens, $index)
     {
         if (!$tokens->offsetExists($index)) {
             throw new \InvalidArgumentException("Token index {$index} does not exist.");

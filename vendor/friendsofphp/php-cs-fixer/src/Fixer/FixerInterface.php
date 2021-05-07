@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,25 +27,30 @@ interface FixerInterface
      * When this method returns true then to the Tokens collection may or may not
      * need a fixing, but when this method returns false then the Tokens collection
      * need no fixing for sure.
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool;
+    public function isCandidate($tokens);
     /**
      * Check if fixer is risky or not.
      *
      * Risky fixer could change code behavior!
+     * @return bool
      */
-    public function isRisky() : bool;
+    public function isRisky();
     /**
      * Fixes a file.
      *
      * @param \SplFileInfo $file   A \SplFileInfo instance
      * @param Tokens       $tokens Tokens collection
+     * @return void
      */
-    public function fix(\SplFileInfo $file, Tokens $tokens) : void;
+    public function fix($file, $tokens);
     /**
      * Returns the definition of the fixer.
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface;
+    public function getDefinition();
     /**
      * Returns the name of the fixer.
      *
@@ -54,17 +58,19 @@ interface FixerInterface
      *
      * @return string The name of the fixer
      */
-    public function getName() : string;
+    public function getName();
     /**
      * Returns the priority of the fixer.
      *
      * The default priority is 0 and higher priorities are executed first.
+     * @return int
      */
-    public function getPriority() : int;
+    public function getPriority();
     /**
      * Returns true if the file is supported by this fixer.
      *
      * @return bool true if the file is supported by this fixer, false otherwise
+     * @param \SplFileInfo $file
      */
-    public function supports(\SplFileInfo $file) : bool;
+    public function supports($file);
 }

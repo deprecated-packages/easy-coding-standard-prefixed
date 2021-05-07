@@ -21,28 +21,45 @@ trait VarDumperTestTrait
      * @internal
      */
     private $varDumperConfig = ['casters' => [], 'flags' => null];
-    protected function setUpVarDumper(array $casters, int $flags = null) : void
+    /**
+     * @return void
+     * @param int $flags
+     */
+    protected function setUpVarDumper(array $casters, $flags = null)
     {
         $this->varDumperConfig['casters'] = $casters;
         $this->varDumperConfig['flags'] = $flags;
     }
     /**
      * @after
+     * @return void
      */
-    protected function tearDownVarDumper() : void
+    protected function tearDownVarDumper()
     {
         $this->varDumperConfig['casters'] = [];
         $this->varDumperConfig['flags'] = null;
     }
-    public function assertDumpEquals($expected, $data, int $filter = 0, string $message = '')
+    /**
+     * @param int $filter
+     * @param string $message
+     */
+    public function assertDumpEquals($expected, $data, $filter = 0, $message = '')
     {
         $this->assertSame($this->prepareExpectation($expected, $filter), $this->getDump($data, null, $filter), $message);
     }
-    public function assertDumpMatchesFormat($expected, $data, int $filter = 0, string $message = '')
+    /**
+     * @param int $filter
+     * @param string $message
+     */
+    public function assertDumpMatchesFormat($expected, $data, $filter = 0, $message = '')
     {
         $this->assertStringMatchesFormat($this->prepareExpectation($expected, $filter), $this->getDump($data, null, $filter), $message);
     }
-    protected function getDump($data, $key = null, int $filter = 0) : ?string
+    /**
+     * @return string|null
+     * @param int $filter
+     */
+    protected function getDump($data, $key = null, $filter = 0)
     {
         if (null === ($flags = $this->varDumperConfig['flags'])) {
             $flags = \getenv('DUMP_LIGHT_ARRAY') ? CliDumper::DUMP_LIGHT_ARRAY : 0;
@@ -60,7 +77,11 @@ trait VarDumperTestTrait
         }
         return \rtrim($dumper->dump($data, \true));
     }
-    private function prepareExpectation($expected, int $filter) : string
+    /**
+     * @param int $filter
+     * @return string
+     */
+    private function prepareExpectation($expected, $filter)
     {
         if (!\is_string($expected)) {
             $expected = $this->getDump($expected, null, $filter);

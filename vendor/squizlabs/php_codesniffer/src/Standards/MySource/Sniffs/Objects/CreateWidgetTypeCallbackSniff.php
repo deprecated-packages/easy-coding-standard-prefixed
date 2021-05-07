@@ -39,7 +39,7 @@ class CreateWidgetTypeCallbackSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $className = $phpcsFile->findPrevious(\T_STRING, $stackPtr - 1);

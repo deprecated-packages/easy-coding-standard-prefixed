@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -71,22 +70,28 @@ final class NativeFunctionTypeDeclarationCasingFixer extends AbstractFixer
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Native type hints for functions should use the correct case.', [new CodeSample("<?php\nclass Bar {\n    public function Foo(CALLABLE \$bar)\n    {\n        return 1;\n    }\n}\n"), new VersionSpecificCodeSample("<?php\nfunction Foo(INT \$a): Bool\n{\n    return true;\n}\n", new VersionSpecification(70000)), new VersionSpecificCodeSample("<?php\nfunction Foo(Iterable \$a): VOID\n{\n    echo 'Hello world';\n}\n", new VersionSpecification(70100)), new VersionSpecificCodeSample("<?php\nfunction Foo(Object \$a)\n{\n    return 'hi!';\n}\n", new VersionSpecification(70200))]);
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_FUNCTION, \T_STRING]);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
             if ($tokens[$index]->isGivenKind(\T_FUNCTION)) {
@@ -97,17 +102,32 @@ final class NativeFunctionTypeDeclarationCasingFixer extends AbstractFixer
             }
         }
     }
-    private function fixFunctionArgumentTypes(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function fixFunctionArgumentTypes($tokens, $index)
     {
         foreach ($this->functionsAnalyzer->getFunctionArguments($tokens, $index) as $argument) {
             $this->fixArgumentType($tokens, $argument->getTypeAnalysis());
         }
     }
-    private function fixFunctionReturnType(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function fixFunctionReturnType($tokens, $index)
     {
         $this->fixArgumentType($tokens, $this->functionsAnalyzer->getFunctionReturnType($tokens, $index));
     }
-    private function fixArgumentType(Tokens $tokens, ?TypeAnalysis $type = null) : void
+    /**
+     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis|null $type
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     */
+    private function fixArgumentType($tokens, $type = null)
     {
         if (null === $type) {
             return;

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,11 +23,12 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class StandardizeIncrementFixer extends AbstractIncrementOperatorFixer
 {
-    private const EXPRESSION_END_TOKENS = [';', ')', ']', ',', ':', [CT::T_DYNAMIC_PROP_BRACE_CLOSE], [CT::T_DYNAMIC_VAR_BRACE_CLOSE], [\T_CLOSE_TAG]];
+    const EXPRESSION_END_TOKENS = [';', ')', ']', ',', ':', [CT::T_DYNAMIC_PROP_BRACE_CLOSE], [CT::T_DYNAMIC_VAR_BRACE_CLOSE], [\T_CLOSE_TAG]];
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Increment and decrement operators should be used if possible.', [new CodeSample("<?php\n\$i += 1;\n"), new CodeSample("<?php\n\$i -= 1;\n")]);
     }
@@ -36,22 +36,28 @@ final class StandardizeIncrementFixer extends AbstractIncrementOperatorFixer
      * {@inheritdoc}
      *
      * Must run before IncrementStyleFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 1;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_PLUS_EQUAL, \T_MINUS_EQUAL]);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
             $expressionEnd = $tokens[$index];
@@ -75,8 +81,12 @@ final class StandardizeIncrementFixer extends AbstractIncrementOperatorFixer
     }
     /**
      * Clear tokens in the given range unless they are comments.
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $indexStart
+     * @param int $indexEnd
      */
-    private function clearRangeLeaveComments(Tokens $tokens, int $indexStart, int $indexEnd) : void
+    private function clearRangeLeaveComments($tokens, $indexStart, $indexEnd)
     {
         for ($i = $indexStart; $i <= $indexEnd; ++$i) {
             $token = $tokens[$i];

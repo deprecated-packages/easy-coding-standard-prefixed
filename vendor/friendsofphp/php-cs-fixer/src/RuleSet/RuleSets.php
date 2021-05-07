@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,9 +23,9 @@ final class RuleSets
 {
     private static $setDefinitions;
     /**
-     * @return array<string, RuleSetDescriptionInterface>
+     * @return mixed[]
      */
-    public static function getSetDefinitions() : array
+    public static function getSetDefinitions()
     {
         if (null === self::$setDefinitions) {
             self::$setDefinitions = [];
@@ -40,13 +39,17 @@ final class RuleSets
         return self::$setDefinitions;
     }
     /**
-     * @return string[]
+     * @return mixed[]
      */
-    public static function getSetDefinitionNames() : array
+    public static function getSetDefinitionNames()
     {
         return \array_keys(self::getSetDefinitions());
     }
-    public static function getSetDefinition(string $name) : \PhpCsFixer\RuleSet\RuleSetDescriptionInterface
+    /**
+     * @param string $name
+     * @return \PhpCsFixer\RuleSet\RuleSetDescriptionInterface
+     */
+    public static function getSetDefinition($name)
     {
         $definitions = self::getSetDefinitions();
         if (!isset($definitions[$name])) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SetConfigResolver;
 
 use Symplify\SetConfigResolver\Config\SetsParameterResolver;
@@ -15,7 +14,10 @@ final class SetAwareConfigResolver extends \Symplify\SetConfigResolver\AbstractC
      * @var SetsParameterResolver
      */
     private $setsParameterResolver;
-    public function __construct(SetProviderInterface $setProvider)
+    /**
+     * @param \Symplify\SetConfigResolver\Contract\SetProviderInterface $setProvider
+     */
+    public function __construct($setProvider)
     {
         $setResolver = new \Symplify\SetConfigResolver\SetResolver($setProvider);
         $this->setsParameterResolver = new SetsParameterResolver($setResolver);
@@ -23,9 +25,9 @@ final class SetAwareConfigResolver extends \Symplify\SetConfigResolver\AbstractC
     }
     /**
      * @param SmartFileInfo[] $fileInfos
-     * @return SmartFileInfo[]
+     * @return mixed[]
      */
-    public function resolveFromParameterSetsFromConfigFiles(array $fileInfos) : array
+    public function resolveFromParameterSetsFromConfigFiles(array $fileInfos)
     {
         return $this->setsParameterResolver->resolveFromFileInfos($fileInfos);
     }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,15 +24,19 @@ final class ShortDescription
      * @var DocBlock
      */
     private $doc;
-    public function __construct(\PhpCsFixer\DocBlock\DocBlock $doc)
+    /**
+     * @param \PhpCsFixer\DocBlock\DocBlock $doc
+     */
+    public function __construct($doc)
     {
         $this->doc = $doc;
     }
     /**
      * Get the line index of the line containing the end of the short
      * description, if present.
+     * @return int|null
      */
-    public function getEnd() : ?int
+    public function getEnd()
     {
         $reachedContent = \false;
         foreach ($this->doc->getLines() as $index => $line) {

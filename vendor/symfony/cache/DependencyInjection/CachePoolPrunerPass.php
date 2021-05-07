@@ -23,15 +23,20 @@ class CachePoolPrunerPass implements CompilerPassInterface
 {
     private $cacheCommandServiceId;
     private $cachePoolTag;
-    public function __construct(string $cacheCommandServiceId = 'console.command.cache_pool_prune', string $cachePoolTag = 'cache.pool')
+    /**
+     * @param string $cacheCommandServiceId
+     * @param string $cachePoolTag
+     */
+    public function __construct($cacheCommandServiceId = 'console.command.cache_pool_prune', $cachePoolTag = 'cache.pool')
     {
         $this->cacheCommandServiceId = $cacheCommandServiceId;
         $this->cachePoolTag = $cachePoolTag;
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process($container)
     {
         if (!$container->hasDefinition($this->cacheCommandServiceId)) {
             return;

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Bundle;
 
 use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -10,12 +9,19 @@ use Symplify\SymplifyKernel\DependencyInjection\CompilerPass\PrepareConsoleAppli
 use Symplify\SymplifyKernel\DependencyInjection\Extension\SymplifyKernelExtension;
 final class SymplifyKernelBundle extends Bundle
 {
-    public function build(ContainerBuilder $containerBuilder) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
+     */
+    public function build($containerBuilder)
     {
         $containerBuilder->addCompilerPass(new PrepareConsoleApplicationCompilerPass());
         $containerBuilder->addCompilerPass(new AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : SymplifyKernelExtension
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ExtensionInterface|null
+     */
+    protected function createContainerExtension()
     {
         return new SymplifyKernelExtension();
     }

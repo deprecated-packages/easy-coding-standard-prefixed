@@ -17,8 +17,13 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class SymfonyCaster
 {
-    private const REQUEST_GETTERS = ['pathInfo' => 'getPathInfo', 'requestUri' => 'getRequestUri', 'baseUrl' => 'getBaseUrl', 'basePath' => 'getBasePath', 'method' => 'getMethod', 'format' => 'getRequestFormat'];
-    public static function castRequest(Request $request, array $a, Stub $stub, bool $isNested)
+    const REQUEST_GETTERS = ['pathInfo' => 'getPathInfo', 'requestUri' => 'getRequestUri', 'baseUrl' => 'getBaseUrl', 'basePath' => 'getBasePath', 'method' => 'getMethod', 'format' => 'getRequestFormat'];
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     */
+    public static function castRequest($request, array $a, $stub, $isNested)
     {
         $clone = null;
         foreach (self::REQUEST_GETTERS as $prop => $getter) {
@@ -32,7 +37,11 @@ class SymfonyCaster
         }
         return $a;
     }
-    public static function castHttpClient($client, array $a, Stub $stub, bool $isNested)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     */
+    public static function castHttpClient($client, array $a, $stub, $isNested)
     {
         $multiKey = \sprintf("\0%s\0multi", \get_class($client));
         if (isset($a[$multiKey])) {
@@ -40,7 +49,11 @@ class SymfonyCaster
         }
         return $a;
     }
-    public static function castHttpClientResponse($response, array $a, Stub $stub, bool $isNested)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     */
+    public static function castHttpClientResponse($response, array $a, $stub, $isNested)
     {
         $stub->cut += \count($a);
         $a = [];

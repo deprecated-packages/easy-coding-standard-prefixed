@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -17,5 +16,9 @@ namespace PhpCsFixer\FixerDefinition;
  */
 interface VersionSpecificationInterface
 {
-    public function isSatisfiedBy(int $version) : bool;
+    /**
+     * @param int $version
+     * @return bool
+     */
+    public function isSatisfiedBy($version);
 }

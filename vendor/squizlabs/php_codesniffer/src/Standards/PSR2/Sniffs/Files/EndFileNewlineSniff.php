@@ -32,7 +32,7 @@ class EndFileNewlineSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         if ($phpcsFile->findNext(\T_INLINE_HTML, $stackPtr + 1) !== \false) {
             return $phpcsFile->numTokens + 1;

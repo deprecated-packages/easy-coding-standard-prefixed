@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,30 +29,37 @@ final class SingleBlankLineAtEofFixer extends AbstractFixer implements Whitespac
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('A PHP file without end tag must always end with a single empty line feed.', [new CodeSample("<?php\n\$a = 1;"), new CodeSample("<?php\n\$a = 1;\n\n")]);
     }
     /**
      * {@inheritdoc}
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         // must run last to be sure the file is properly formatted before it runs
         return -50;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $count = $tokens->count();
         if ($count && !$tokens[$count - 1]->isGivenKind([\T_INLINE_HTML, \T_CLOSE_TAG, \T_OPEN_TAG])) {

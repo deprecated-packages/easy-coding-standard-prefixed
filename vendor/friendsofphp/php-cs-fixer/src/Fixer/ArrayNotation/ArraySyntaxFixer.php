@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -37,8 +36,10 @@ final class ArraySyntaxFixer extends AbstractFixer implements ConfigurableFixerI
     private $fixCallback;
     /**
      * {@inheritdoc}
+     * @param mixed[] $configuration
+     * @return void
      */
-    public function configure(array $configuration) : void
+    public function configure($configuration)
     {
         parent::configure($configuration);
         $this->resolveCandidateTokenKind();
@@ -46,8 +47,9 @@ final class ArraySyntaxFixer extends AbstractFixer implements ConfigurableFixerI
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('PHP arrays should be declared using the configured syntax.', [new VersionSpecificCodeSample("<?php\narray(1,2);\n", new VersionSpecification(50400)), new CodeSample("<?php\n[1,2];\n", ['syntax' => 'long'])]);
     }
@@ -55,22 +57,28 @@ final class ArraySyntaxFixer extends AbstractFixer implements ConfigurableFixerI
      * {@inheritdoc}
      *
      * Must run before BinaryOperatorSpacesFixer, TernaryOperatorSpacesFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 1;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound($this->candidateTokenKind);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $callback = $this->fixCallback;
         for ($index = $tokens->count() - 1; 0 <= $index; --$index) {
@@ -81,19 +89,30 @@ final class ArraySyntaxFixer extends AbstractFixer implements ConfigurableFixerI
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('syntax', 'Whether to use the `long` or `short` array syntax.'))->setAllowedValues(['long', 'short'])->setDefault('short')->getOption()]);
     }
-    private function fixToLongArraySyntax(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function fixToLongArraySyntax($tokens, $index)
     {
         $closeIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $index);
         $tokens[$index] = new Token('(');
         $tokens[$closeIndex] = new Token(')');
         $tokens->insertAt($index, new Token([\T_ARRAY, 'array']));
     }
-    private function fixToShortArraySyntax(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function fixToShortArraySyntax($tokens, $index)
     {
         $openIndex = $tokens->getNextTokenOfKind($index, ['(']);
         $closeIndex = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openIndex);
@@ -101,11 +120,17 @@ final class ArraySyntaxFixer extends AbstractFixer implements ConfigurableFixerI
         $tokens[$closeIndex] = new Token([CT::T_ARRAY_SQUARE_BRACE_CLOSE, ']']);
         $tokens->clearTokenAndMergeSurroundingWhitespace($index);
     }
-    private function resolveFixCallback() : void
+    /**
+     * @return void
+     */
+    private function resolveFixCallback()
     {
         $this->fixCallback = \sprintf('fixTo%sArraySyntax', \ucfirst($this->configuration['syntax']));
     }
-    private function resolveCandidateTokenKind() : void
+    /**
+     * @return void
+     */
+    private function resolveCandidateTokenKind()
     {
         $this->candidateTokenKind = 'long' === $this->configuration['syntax'] ? CT::T_ARRAY_SQUARE_BRACE_OPEN : \T_ARRAY;
     }

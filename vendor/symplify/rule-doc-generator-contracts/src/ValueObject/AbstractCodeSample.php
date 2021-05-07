@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject;
 
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
@@ -15,7 +14,11 @@ abstract class AbstractCodeSample implements CodeSampleInterface
      * @var string
      */
     private $badCode;
-    public function __construct(string $badCode, string $goodCode)
+    /**
+     * @param string $badCode
+     * @param string $goodCode
+     */
+    public function __construct($badCode, $goodCode)
     {
         $badCode = \trim($badCode);
         $goodCode = \trim($goodCode);
@@ -29,11 +32,17 @@ abstract class AbstractCodeSample implements CodeSampleInterface
         $this->goodCode = $goodCode;
         $this->badCode = $badCode;
     }
-    public function getGoodCode() : string
+    /**
+     * @return string
+     */
+    public function getGoodCode()
     {
         return $this->goodCode;
     }
-    public function getBadCode() : string
+    /**
+     * @return string
+     */
+    public function getBadCode()
     {
         return $this->badCode;
     }

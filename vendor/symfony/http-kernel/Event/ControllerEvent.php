@@ -26,16 +26,27 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface;
 final class ControllerEvent extends \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $controller;
-    public function __construct(HttpKernelInterface $kernel, callable $controller, Request $request, ?int $requestType)
+    /**
+     * @param int|null $requestType
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface $kernel
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     */
+    public function __construct($kernel, callable $controller, $request, $requestType)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->setController($controller);
     }
-    public function getController() : callable
+    /**
+     * @return callable
+     */
+    public function getController()
     {
         return $this->controller;
     }
-    public function setController(callable $controller) : void
+    /**
+     * @return void
+     */
+    public function setController(callable $controller)
     {
         $this->controller = $controller;
     }

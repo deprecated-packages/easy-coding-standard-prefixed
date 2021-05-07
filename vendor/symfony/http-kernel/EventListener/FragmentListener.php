@@ -35,8 +35,9 @@ class FragmentListener implements EventSubscriberInterface
     private $fragmentPath;
     /**
      * @param string $fragmentPath The path that triggers this listener
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\UriSigner $signer
      */
-    public function __construct(UriSigner $signer, string $fragmentPath = '/_fragment')
+    public function __construct($signer, $fragmentPath = '/_fragment')
     {
         $this->signer = $signer;
         $this->fragmentPath = $fragmentPath;
@@ -45,8 +46,9 @@ class FragmentListener implements EventSubscriberInterface
      * Fixes request attributes when the path is '/_fragment'.
      *
      * @throws AccessDeniedHttpException if the request does not come from a trusted IP
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent $event
      */
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest($event)
     {
         $request = $event->getRequest();
         if ($this->fragmentPath !== \rawurldecode($request->getPathInfo())) {
@@ -65,7 +67,10 @@ class FragmentListener implements EventSubscriberInterface
         $request->attributes->set('_route_params', \array_replace($request->attributes->get('_route_params', []), $attributes));
         $request->query->remove('_path');
     }
-    protected function validateRequest(Request $request)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     */
+    protected function validateRequest($request)
     {
         // is the Request safe?
         if (!$request->isMethodSafe()) {
@@ -77,7 +82,10 @@ class FragmentListener implements EventSubscriberInterface
         }
         throw new AccessDeniedHttpException();
     }
-    public static function getSubscribedEvents() : array
+    /**
+     * @return mixed[]
+     */
+    public static function getSubscribedEvents()
     {
         return [KernelEvents::REQUEST => [['onKernelRequest', 48]]];
     }

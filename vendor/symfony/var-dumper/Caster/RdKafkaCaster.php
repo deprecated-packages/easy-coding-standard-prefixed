@@ -29,7 +29,11 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class RdKafkaCaster
 {
-    public static function castKafkaConsumer(KafkaConsumer $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param \RdKafka\KafkaConsumer $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castKafkaConsumer($c, array $a, $stub, $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         try {
@@ -41,25 +45,40 @@ class RdKafkaCaster
         $a += self::extractMetadata($c);
         return $a;
     }
-    public static function castTopic(Topic $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param \RdKafka\Topic $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castTopic($c, array $a, $stub, $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $a += [$prefix . 'name' => $c->getName()];
         return $a;
     }
-    public static function castTopicPartition(TopicPartition $c, array $a)
+    /**
+     * @param \RdKafka\TopicPartition $c
+     */
+    public static function castTopicPartition($c, array $a)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $a += [$prefix . 'offset' => $c->getOffset(), $prefix . 'partition' => $c->getPartition(), $prefix . 'topic' => $c->getTopic()];
         return $a;
     }
-    public static function castMessage(Message $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param \RdKafka\Message $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castMessage($c, array $a, $stub, $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $a += [$prefix . 'errstr' => $c->errstr()];
         return $a;
     }
-    public static function castConf(Conf $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param \RdKafka\Conf $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castConf($c, array $a, $stub, $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         foreach ($c->dump() as $key => $value) {
@@ -67,7 +86,11 @@ class RdKafkaCaster
         }
         return $a;
     }
-    public static function castTopicConf(TopicConf $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param \RdKafka\TopicConf $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castTopicConf($c, array $a, $stub, $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         foreach ($c->dump() as $key => $value) {
@@ -75,31 +98,51 @@ class RdKafkaCaster
         }
         return $a;
     }
-    public static function castRdKafka(\RdKafka $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param \RdKafka $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castRdKafka($c, array $a, $stub, $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $a += [$prefix . 'out_q_len' => $c->getOutQLen()];
         $a += self::extractMetadata($c);
         return $a;
     }
-    public static function castCollectionMetadata(CollectionMetadata $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param CollectionMetadata $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castCollectionMetadata($c, array $a, $stub, $isNested)
     {
         $a += \iterator_to_array($c);
         return $a;
     }
-    public static function castTopicMetadata(TopicMetadata $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param TopicMetadata $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castTopicMetadata($c, array $a, $stub, $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $a += [$prefix . 'name' => $c->getTopic(), $prefix . 'partitions' => $c->getPartitions()];
         return $a;
     }
-    public static function castPartitionMetadata(PartitionMetadata $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param PartitionMetadata $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castPartitionMetadata($c, array $a, $stub, $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $a += [$prefix . 'id' => $c->getId(), $prefix . 'err' => $c->getErr(), $prefix . 'leader' => $c->getLeader()];
         return $a;
     }
-    public static function castBrokerMetadata(BrokerMetadata $c, array $a, Stub $stub, $isNested)
+    /**
+     * @param BrokerMetadata $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     */
+    public static function castBrokerMetadata($c, array $a, $stub, $isNested)
     {
         $prefix = \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL;
         $a += [$prefix . 'id' => $c->getId(), $prefix . 'host' => $c->getHost(), $prefix . 'port' => $c->getPort()];

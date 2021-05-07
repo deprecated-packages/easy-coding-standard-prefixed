@@ -42,7 +42,7 @@ class OperatorSpacingSniff extends SquizOperatorSpacingSniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($this->isOperator($phpcsFile, $stackPtr) === \false) {

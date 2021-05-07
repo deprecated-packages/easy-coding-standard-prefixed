@@ -29,7 +29,7 @@ trait BindTrait
      *
      * @return $this
      */
-    public final function bind(string $nameOrFqcn, $valueOrRef) : self
+    public final function bind($nameOrFqcn, $valueOrRef)
     {
         $valueOrRef = static::processValue($valueOrRef, \true);
         if (!\preg_match('/^(?:(?:array|bool|float|int|string)[ \\t]*+)?\\$/', $nameOrFqcn) && !$valueOrRef instanceof Reference) {
@@ -37,7 +37,7 @@ trait BindTrait
         }
         $bindings = $this->definition->getBindings();
         $type = $this instanceof DefaultsConfigurator ? BoundArgument::DEFAULTS_BINDING : ($this instanceof InstanceofConfigurator ? BoundArgument::INSTANCEOF_BINDING : BoundArgument::SERVICE_BINDING);
-        $bindings[$nameOrFqcn] = new BoundArgument($valueOrRef, \true, $type, $this->path ?? null);
+        $bindings[$nameOrFqcn] = new BoundArgument($valueOrRef, \true, $type, isset($this->path) ? $this->path : null);
         $this->definition->setBindings($bindings);
         return $this;
     }

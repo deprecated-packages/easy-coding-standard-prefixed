@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -32,28 +31,33 @@ class Config implements \PhpCsFixer\ConfigInterface
     private $phpExecutable;
     private $rules = ['@PSR12' => \true];
     private $usingCache = \true;
-    public function __construct(string $name = 'default')
+    /**
+     * @param string $name
+     */
+    public function __construct($name = 'default')
     {
         $this->name = $name;
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getCacheFile() : string
+    public function getCacheFile()
     {
         return $this->cacheFile;
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getCustomFixers() : array
+    public function getCustomFixers()
     {
         return $this->customFixers;
     }
     /**
-     * @return Finder
+     * @return mixed[]
      */
-    public function getFinder() : iterable
+    public function getFinder()
     {
         if (null === $this->finder) {
             $this->finder = new \PhpCsFixer\Finder();
@@ -62,71 +66,82 @@ class Config implements \PhpCsFixer\ConfigInterface
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getFormat() : string
+    public function getFormat()
     {
         return $this->format;
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function getHideProgress() : bool
+    public function getHideProgress()
     {
         return $this->hideProgress;
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getIndent() : string
+    public function getIndent()
     {
         return $this->indent;
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getLineEnding() : string
+    public function getLineEnding()
     {
         return $this->lineEnding;
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getName() : string
+    public function getName()
     {
         return $this->name;
     }
     /**
      * {@inheritdoc}
+     * @return string|null
      */
-    public function getPhpExecutable() : ?string
+    public function getPhpExecutable()
     {
         return $this->phpExecutable;
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function getRiskyAllowed() : bool
+    public function getRiskyAllowed()
     {
         return $this->isRiskyAllowed;
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getRules() : array
+    public function getRules()
     {
         return $this->rules;
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function getUsingCache() : bool
+    public function getUsingCache()
     {
         return $this->usingCache;
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $fixers
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function registerCustomFixers(iterable $fixers) : \PhpCsFixer\ConfigInterface
+    public function registerCustomFixers($fixers)
     {
         foreach ($fixers as $fixer) {
             $this->addCustomFixer($fixer);
@@ -135,85 +150,108 @@ class Config implements \PhpCsFixer\ConfigInterface
     }
     /**
      * {@inheritdoc}
+     * @param string $cacheFile
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setCacheFile(string $cacheFile) : \PhpCsFixer\ConfigInterface
+    public function setCacheFile($cacheFile)
     {
         $this->cacheFile = $cacheFile;
         return $this;
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $finder
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setFinder(iterable $finder) : \PhpCsFixer\ConfigInterface
+    public function setFinder($finder)
     {
         $this->finder = $finder;
         return $this;
     }
     /**
      * {@inheritdoc}
+     * @param string $format
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setFormat(string $format) : \PhpCsFixer\ConfigInterface
+    public function setFormat($format)
     {
         $this->format = $format;
         return $this;
     }
     /**
      * {@inheritdoc}
+     * @param bool $hideProgress
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setHideProgress(bool $hideProgress) : \PhpCsFixer\ConfigInterface
+    public function setHideProgress($hideProgress)
     {
         $this->hideProgress = $hideProgress;
         return $this;
     }
     /**
      * {@inheritdoc}
+     * @param string $indent
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setIndent(string $indent) : \PhpCsFixer\ConfigInterface
+    public function setIndent($indent)
     {
         $this->indent = $indent;
         return $this;
     }
     /**
      * {@inheritdoc}
+     * @param string $lineEnding
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setLineEnding(string $lineEnding) : \PhpCsFixer\ConfigInterface
+    public function setLineEnding($lineEnding)
     {
         $this->lineEnding = $lineEnding;
         return $this;
     }
     /**
      * {@inheritdoc}
+     * @param string|null $phpExecutable
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setPhpExecutable(?string $phpExecutable) : \PhpCsFixer\ConfigInterface
+    public function setPhpExecutable($phpExecutable)
     {
         $this->phpExecutable = $phpExecutable;
         return $this;
     }
     /**
      * {@inheritdoc}
+     * @param bool $isRiskyAllowed
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setRiskyAllowed(bool $isRiskyAllowed) : \PhpCsFixer\ConfigInterface
+    public function setRiskyAllowed($isRiskyAllowed)
     {
         $this->isRiskyAllowed = $isRiskyAllowed;
         return $this;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setRules(array $rules) : \PhpCsFixer\ConfigInterface
+    public function setRules(array $rules)
     {
         $this->rules = $rules;
         return $this;
     }
     /**
      * {@inheritdoc}
+     * @param bool $usingCache
+     * @return \PhpCsFixer\ConfigInterface
      */
-    public function setUsingCache(bool $usingCache) : \PhpCsFixer\ConfigInterface
+    public function setUsingCache($usingCache)
     {
         $this->usingCache = $usingCache;
         return $this;
     }
-    private function addCustomFixer(FixerInterface $fixer) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Fixer\FixerInterface $fixer
+     */
+    private function addCustomFixer($fixer)
     {
         $this->customFixers[] = $fixer;
     }

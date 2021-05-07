@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace ECSPrefix20210507;
 
 use ECSPrefix20210507\Symfony\Component\Console\Style\SymfonyStyle;
@@ -20,7 +19,7 @@ use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileSystem;
 use Symplify\SymplifyKernel\Console\ConsoleApplicationFactory;
 use function ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\service;
-return static function (ContainerConfigurator $containerConfigurator) : void {
+return static function (ContainerConfigurator $containerConfigurator) {
     $services = $containerConfigurator->services();
     $services->defaults()->public()->autowire()->autoconfigure();
     // symfony style

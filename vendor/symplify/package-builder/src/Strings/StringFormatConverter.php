@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\Strings;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -14,19 +13,31 @@ final class StringFormatConverter
      * @var string
      * @see https://regex101.com/r/rl1nvl/1
      */
-    private const BIG_LETTER_REGEX = '#([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]*)#';
-    public function underscoreAndHyphenToCamelCase(string $value) : string
+    const BIG_LETTER_REGEX = '#([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]*)#';
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function underscoreAndHyphenToCamelCase($value)
     {
         $underscoreToHyphensValue = \str_replace(['_', '-'], ' ', $value);
         $uppercasedWords = \ucwords($underscoreToHyphensValue);
         $value = \str_replace(' ', '', $uppercasedWords);
         return \lcfirst($value);
     }
-    public function camelCaseToUnderscore(string $input) : string
+    /**
+     * @param string $input
+     * @return string
+     */
+    public function camelCaseToUnderscore($input)
     {
         return $this->camelCaseToGlue($input, '_');
     }
-    public function camelCaseToDashed(string $input) : string
+    /**
+     * @param string $input
+     * @return string
+     */
+    public function camelCaseToDashed($input)
     {
         return $this->camelCaseToGlue($input, '-');
     }
@@ -34,7 +45,7 @@ final class StringFormatConverter
      * @param mixed[] $items
      * @return mixed[]
      */
-    public function camelCaseToUnderscoreInArrayKeys(array $items) : array
+    public function camelCaseToUnderscoreInArrayKeys(array $items)
     {
         foreach ($items as $key => $value) {
             if (!\is_string($key)) {
@@ -49,7 +60,12 @@ final class StringFormatConverter
         }
         return $items;
     }
-    private function camelCaseToGlue(string $input, string $glue) : string
+    /**
+     * @param string $input
+     * @param string $glue
+     * @return string
+     */
+    private function camelCaseToGlue($input, $glue)
     {
         $matches = Strings::matchAll($input, self::BIG_LETTER_REGEX);
         $parts = [];

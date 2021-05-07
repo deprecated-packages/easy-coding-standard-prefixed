@@ -24,8 +24,9 @@ class AutowireRequiredPropertiesPass extends \ECSPrefix20210507\Symfony\Componen
 {
     /**
      * {@inheritdoc}
+     * @param bool $isRoot
      */
-    protected function processValue($value, bool $isRoot = \false)
+    protected function processValue($value, $isRoot = \false)
     {
         if (\PHP_VERSION_ID < 70400) {
             return $value;

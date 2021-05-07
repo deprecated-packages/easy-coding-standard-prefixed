@@ -22,12 +22,13 @@ class EnvVarProcessor implements \ECSPrefix20210507\Symfony\Component\Dependency
     private $loaders;
     private $loadedVars = [];
     /**
-     * @param EnvVarLoaderInterface[] $loaders
+     * @param \Traversable $loaders
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface $container
      */
-    public function __construct(\ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface $container, \Traversable $loaders = null)
+    public function __construct($container, $loaders = null)
     {
         $this->container = $container;
-        $this->loaders = $loaders ?? new \ArrayIterator();
+        $this->loaders = isset($loaders) ? $loaders : new \ArrayIterator();
     }
     /**
      * {@inheritdoc}
@@ -38,8 +39,11 @@ class EnvVarProcessor implements \ECSPrefix20210507\Symfony\Component\Dependency
     }
     /**
      * {@inheritdoc}
+     * @param string $prefix
+     * @param string $name
+     * @param \Closure $getEnv
      */
-    public function getEnv(string $prefix, string $name, \Closure $getEnv)
+    public function getEnv($prefix, $name, $getEnv)
     {
         $i = \strpos($name, ':');
         if ('key' === $prefix) {
@@ -98,7 +102,7 @@ class EnvVarProcessor implements \ECSPrefix20210507\Symfony\Component\Dependency
         } elseif (\false === ($env = \getenv($name)) || null === $env) {
             // null is a possible value because of thread safety issues
             foreach ($this->loadedVars as $vars) {
-                if (\false !== ($env = $vars[$name] ?? \false)) {
+                if (\false !== ($env = isset($vars[$name]) ? $vars[$name] : \false)) {
                     break;
                 }
             }
@@ -114,7 +118,7 @@ class EnvVarProcessor implements \ECSPrefix20210507\Symfony\Component\Dependency
                             continue;
                         }
                         $this->loadedVars[] = $vars = $loader->loadEnvVars();
-                        if (\false !== ($env = $vars[$name] ?? \false)) {
+                        if (\false !== ($env = isset($vars[$name]) ? $vars[$name] : \false)) {
                             $ended = \false;
                             break;
                         }

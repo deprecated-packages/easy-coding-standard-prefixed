@@ -24,13 +24,24 @@ class EarlyExpirationDispatcher
     private $bus;
     private $reverseContainer;
     private $callbackWrapper;
-    public function __construct(MessageBusInterface $bus, ReverseContainer $reverseContainer, callable $callbackWrapper = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Messenger\MessageBusInterface $bus
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ReverseContainer $reverseContainer
+     */
+    public function __construct($bus, $reverseContainer, callable $callbackWrapper = null)
     {
         $this->bus = $bus;
         $this->reverseContainer = $reverseContainer;
         $this->callbackWrapper = $callbackWrapper;
     }
-    public function __invoke(callable $callback, CacheItem $item, bool &$save, AdapterInterface $pool, \Closure $setMetadata, LoggerInterface $logger = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Cache\CacheItem $item
+     * @param bool $save
+     * @param \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $pool
+     * @param \Closure $setMetadata
+     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $logger
+     */
+    public function __invoke(callable $callback, $item, &$save, $pool, $setMetadata, $logger = null)
     {
         if (!$item->isHit() || null === ($message = \ECSPrefix20210507\Symfony\Component\Cache\Messenger\EarlyExpirationMessage::create($this->reverseContainer, $callback, $item, $pool))) {
             // The item is stale or the callback cannot be reversed: we must compute the value now
@@ -47,6 +58,6 @@ class EarlyExpirationDispatcher
         }
         // The item's value is not stale, no need to write it to the backend
         $save = \false;
-        return $message->getItem()->get() ?? $item->get();
+        return isset($message->getItem()->get()) ? $message->getItem()->get() : $item->get();
     }
 }

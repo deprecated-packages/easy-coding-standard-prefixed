@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
 use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
@@ -29,7 +28,13 @@ final class ShowCommand extends AbstractSymplifyCommand
      * @var CheckerListReporter
      */
     private $checkerListReporter;
-    public function __construct(SniffFileProcessor $sniffFileProcessor, FixerFileProcessor $fixerFileProcessor, EasyCodingStandardStyle $easyCodingStandardStyle, CheckerListReporter $checkerListReporter)
+    /**
+     * @param \Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor $sniffFileProcessor
+     * @param \Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor $fixerFileProcessor
+     * @param \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle
+     * @param \Symplify\EasyCodingStandard\Console\Reporter\CheckerListReporter $checkerListReporter
+     */
+    public function __construct($sniffFileProcessor, $fixerFileProcessor, $easyCodingStandardStyle, $checkerListReporter)
     {
         parent::__construct();
         $this->sniffFileProcessor = $sniffFileProcessor;
@@ -37,11 +42,19 @@ final class ShowCommand extends AbstractSymplifyCommand
         $this->easyCodingStandardStyle = $easyCodingStandardStyle;
         $this->checkerListReporter = $checkerListReporter;
     }
-    protected function configure() : void
+    /**
+     * @return void
+     */
+    protected function configure()
     {
         $this->setDescription('Show loaded checkers');
     }
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
+     */
+    protected function execute($input, $output)
     {
         $totalCheckerCount = \count($this->sniffFileProcessor->getCheckers()) + \count($this->fixerFileProcessor->getCheckers());
         $this->checkerListReporter->report($this->sniffFileProcessor->getCheckers(), 'PHP_CodeSniffer');

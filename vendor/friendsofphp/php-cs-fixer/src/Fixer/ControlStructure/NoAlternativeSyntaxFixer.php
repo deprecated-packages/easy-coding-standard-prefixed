@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,15 +24,18 @@ final class NoAlternativeSyntaxFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Replace control structure alternative syntax to use braces.', [new CodeSample("<?php\nif(true):echo 't';else:echo 'f';endif;\n"), new CodeSample("<?php\nwhile(true):echo 'red';endwhile;\n"), new CodeSample("<?php\nfor(;;):echo 'xc';endfor;\n"), new CodeSample("<?php\nforeach(array('a') as \$item):echo 'xc';endforeach;\n")]);
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->hasAlternativeSyntax();
     }
@@ -41,15 +43,19 @@ final class NoAlternativeSyntaxFixer extends AbstractFixer
      * {@inheritdoc}
      *
      * Must run before BracesFixer, ElseifFixer, NoSuperfluousElseifFixer, NoUselessElseFixer, SwitchContinueToBreakFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 42;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         for ($index = \count($tokens) - 1; 0 <= $index; --$index) {
             $token = $tokens[$index];
@@ -58,7 +64,12 @@ final class NoAlternativeSyntaxFixer extends AbstractFixer
             $this->fixOpenCloseControls($index, $token, $tokens);
         }
     }
-    private function findParenthesisEnd(Tokens $tokens, int $structureTokenIndex) : int
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $structureTokenIndex
+     * @return int
+     */
+    private function findParenthesisEnd($tokens, $structureTokenIndex)
     {
         $nextIndex = $tokens->getNextMeaningfulToken($structureTokenIndex);
         $nextToken = $tokens[$nextIndex];
@@ -75,8 +86,9 @@ final class NoAlternativeSyntaxFixer extends AbstractFixer
      * @param int    $index  the index of the token being processed
      * @param Token  $token  the token being processed
      * @param Tokens $tokens the collection of tokens
+     * @return void
      */
-    private function fixOpenCloseControls(int $index, Token $token, Tokens $tokens) : void
+    private function fixOpenCloseControls($index, $token, $tokens)
     {
         if ($token->isGivenKind([\T_IF, \T_FOREACH, \T_WHILE, \T_FOR, \T_SWITCH, \T_DECLARE])) {
             $openIndex = $tokens->getNextTokenOfKind($index, ['(']);
@@ -113,8 +125,9 @@ final class NoAlternativeSyntaxFixer extends AbstractFixer
      * @param int    $index  the index of the token being processed
      * @param Token  $token  the token being processed
      * @param Tokens $tokens the collection of tokens
+     * @return void
      */
-    private function fixElse(int $index, Token $token, Tokens $tokens) : void
+    private function fixElse($index, $token, $tokens)
     {
         if (!$token->isGivenKind(\T_ELSE)) {
             return;
@@ -132,8 +145,9 @@ final class NoAlternativeSyntaxFixer extends AbstractFixer
      * @param int    $index  the index of the token being processed
      * @param Token  $token  the token being processed
      * @param Tokens $tokens the collection of tokens
+     * @return void
      */
-    private function fixElseif(int $index, Token $token, Tokens $tokens) : void
+    private function fixElseif($index, $token, $tokens)
     {
         if (!$token->isGivenKind(\T_ELSEIF)) {
             return;
@@ -153,8 +167,9 @@ final class NoAlternativeSyntaxFixer extends AbstractFixer
      * @param Token  $token      the current token
      * @param int    $index      the current token index
      * @param int    $colonIndex the index of the colon
+     * @return void
      */
-    private function addBraces(Tokens $tokens, Token $token, int $index, int $colonIndex) : void
+    private function addBraces($tokens, $token, $index, $colonIndex)
     {
         $items = [new Token('}'), new Token([\T_WHITESPACE, ' ']), $token];
         if (!$tokens[$index + 1]->isWhitespace()) {

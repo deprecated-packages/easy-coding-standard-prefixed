@@ -21,12 +21,19 @@ class AddEventAliasesPass implements CompilerPassInterface
 {
     private $eventAliases;
     private $eventAliasesParameter;
-    public function __construct(array $eventAliases, string $eventAliasesParameter = 'event_dispatcher.event_aliases')
+    /**
+     * @param string $eventAliasesParameter
+     */
+    public function __construct(array $eventAliases, $eventAliasesParameter = 'event_dispatcher.event_aliases')
     {
         $this->eventAliases = $eventAliases;
         $this->eventAliasesParameter = $eventAliasesParameter;
     }
-    public function process(ContainerBuilder $container) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    public function process($container)
     {
         $eventAliases = $container->hasParameter($this->eventAliasesParameter) ? $container->getParameter($this->eventAliasesParameter) : [];
         $container->setParameter($this->eventAliasesParameter, \array_merge($eventAliases, $this->eventAliases));

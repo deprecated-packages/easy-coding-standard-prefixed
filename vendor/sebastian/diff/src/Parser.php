@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of sebastian/diff.
  *
@@ -22,9 +21,10 @@ use function preg_split;
 final class Parser
 {
     /**
-     * @return Diff[]
+     * @return mixed[]
+     * @param string $string
      */
-    public function parse(string $string) : array
+    public function parse($string)
     {
         $lines = preg_split('(\\r\\n|\\r|\\n)', $string);
         if (!empty($lines) && $lines[count($lines) - 1] === '') {
@@ -56,7 +56,11 @@ final class Parser
         }
         return $diffs;
     }
-    private function parseFileDiff(\ECSPrefix20210507\SebastianBergmann\Diff\Diff $diff, array $lines) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\SebastianBergmann\Diff\Diff $diff
+     */
+    private function parseFileDiff($diff, array $lines)
     {
         $chunks = [];
         $chunk = null;

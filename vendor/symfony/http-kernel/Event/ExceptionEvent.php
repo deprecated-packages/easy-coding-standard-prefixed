@@ -32,12 +32,21 @@ final class ExceptionEvent extends \ECSPrefix20210507\Symfony\Component\HttpKern
      * @var bool
      */
     private $allowCustomResponseCode = \false;
-    public function __construct(HttpKernelInterface $kernel, Request $request, int $requestType, \Throwable $e)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface $kernel
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param int $requestType
+     * @param \Throwable $e
+     */
+    public function __construct($kernel, $request, $requestType, $e)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->setThrowable($e);
     }
-    public function getThrowable() : \Throwable
+    /**
+     * @return \Throwable
+     */
+    public function getThrowable()
     {
         return $this->throwable;
     }
@@ -45,22 +54,26 @@ final class ExceptionEvent extends \ECSPrefix20210507\Symfony\Component\HttpKern
      * Replaces the thrown exception.
      *
      * This exception will be thrown if no response is set in the event.
+     * @return void
+     * @param \Throwable $exception
      */
-    public function setThrowable(\Throwable $exception) : void
+    public function setThrowable($exception)
     {
         $this->throwable = $exception;
     }
     /**
      * Mark the event as allowing a custom response code.
+     * @return void
      */
-    public function allowCustomResponseCode() : void
+    public function allowCustomResponseCode()
     {
         $this->allowCustomResponseCode = \true;
     }
     /**
      * Returns true if the event allows a custom response code.
+     * @return bool
      */
-    public function isAllowingCustomResponseCode() : bool
+    public function isAllowingCustomResponseCode()
     {
         return $this->allowCustomResponseCode;
     }

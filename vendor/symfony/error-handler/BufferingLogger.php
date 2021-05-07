@@ -19,11 +19,17 @@ use ECSPrefix20210507\Psr\Log\AbstractLogger;
 class BufferingLogger extends AbstractLogger
 {
     private $logs = [];
-    public function log($level, $message, array $context = []) : void
+    /**
+     * @return void
+     */
+    public function log($level, $message, array $context = [])
     {
         $this->logs[] = [$level, $message, $context];
     }
-    public function cleanLogs() : array
+    /**
+     * @return mixed[]
+     */
+    public function cleanLogs()
     {
         $logs = $this->logs;
         $this->logs = [];
@@ -39,7 +45,7 @@ class BufferingLogger extends AbstractLogger
     }
     public function __destruct()
     {
-        foreach ($this->logs as [$level, $message, $context]) {
+        foreach ($this->logs as list($level, $message, $context)) {
             if (\false !== \strpos($message, '{')) {
                 foreach ($context as $key => $val) {
                     if (null === $val || \is_scalar($val) || \is_object($val) && \is_callable([$val, '__toString'])) {

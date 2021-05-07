@@ -25,7 +25,7 @@ class StopwatchPeriod
      * @param int|float $end           The relative time of the end of the period (in milliseconds)
      * @param bool      $morePrecision If true, time is stored as float to keep the original microsecond precision
      */
-    public function __construct($start, $end, bool $morePrecision = \false)
+    public function __construct($start, $end, $morePrecision = \false)
     {
         $this->start = $morePrecision ? (float) $start : (int) $start;
         $this->end = $morePrecision ? (float) $end : (int) $end;
@@ -67,7 +67,10 @@ class StopwatchPeriod
     {
         return $this->memory;
     }
-    public function __toString() : string
+    /**
+     * @return string
+     */
+    public function __toString()
     {
         return \sprintf('%.2F MiB - %d ms', $this->getMemory() / 1024 / 1024, $this->getDuration());
     }

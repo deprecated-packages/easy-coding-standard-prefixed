@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -22,15 +21,18 @@ final class JsonReporter implements \PhpCsFixer\Console\Report\FixReport\Reporte
 {
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getFormat() : string
+    public function getFormat()
     {
         return 'json';
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary
+     * @return string
      */
-    public function generate(\PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary) : string
+    public function generate($reportSummary)
     {
         $jFiles = [];
         foreach ($reportSummary->getChanged() as $file => $fixResult) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -46,7 +45,11 @@ final class FixerOptionBuilder
      * @var null|string
      */
     private $deprecationMessage;
-    public function __construct(string $name, string $description)
+    /**
+     * @param string $name
+     * @param string $description
+     */
+    public function __construct($name, $description)
     {
         $this->name = $name;
         $this->description = $description;
@@ -56,7 +59,7 @@ final class FixerOptionBuilder
      *
      * @return $this
      */
-    public function setDefault($default) : self
+    public function setDefault($default)
     {
         $this->default = $default;
         $this->isRequired = \false;
@@ -67,7 +70,7 @@ final class FixerOptionBuilder
      *
      * @return $this
      */
-    public function setAllowedTypes(array $allowedTypes) : self
+    public function setAllowedTypes(array $allowedTypes)
     {
         $this->allowedTypes = $allowedTypes;
         return $this;
@@ -75,28 +78,33 @@ final class FixerOptionBuilder
     /**
      * @return $this
      */
-    public function setAllowedValues(array $allowedValues) : self
+    public function setAllowedValues(array $allowedValues)
     {
         $this->allowedValues = $allowedValues;
         return $this;
     }
     /**
      * @return $this
+     * @param \Closure $normalizer
      */
-    public function setNormalizer(\Closure $normalizer) : self
+    public function setNormalizer($normalizer)
     {
         $this->normalizer = $normalizer;
         return $this;
     }
     /**
      * @return $this
+     * @param string|null $deprecationMessage
      */
-    public function setDeprecationMessage(?string $deprecationMessage) : self
+    public function setDeprecationMessage($deprecationMessage)
     {
         $this->deprecationMessage = $deprecationMessage;
         return $this;
     }
-    public function getOption() : \PhpCsFixer\FixerConfiguration\FixerOptionInterface
+    /**
+     * @return \PhpCsFixer\FixerConfiguration\FixerOptionInterface
+     */
+    public function getOption()
     {
         $option = new \PhpCsFixer\FixerConfiguration\FixerOption($this->name, $this->description, $this->isRequired, $this->default, $this->allowedTypes, $this->allowedValues, $this->normalizer);
         if (null !== $this->deprecationMessage) {

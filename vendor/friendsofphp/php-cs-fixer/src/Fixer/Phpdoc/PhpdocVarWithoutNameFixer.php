@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -29,8 +28,9 @@ final class PhpdocVarWithoutNameFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('`@var` and `@type` annotations of classy properties should not contain the name.', [new CodeSample('<?php
 final class Foo
@@ -52,22 +52,28 @@ final class Foo
      *
      * Must run before PhpdocAlignFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT) && $tokens->isAnyTokenKindsFound(Token::getClassyTokenKinds());
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_DOC_COMMENT)) {
@@ -96,7 +102,11 @@ final class Foo
             $tokens[$index] = new Token([\T_DOC_COMMENT, $doc->getContent()]);
         }
     }
-    private function fixLine(Line $line) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\DocBlock\Line $line
+     */
+    private function fixLine($line)
     {
         $content = $line->getContent();
         Preg::matchAll('/ \\$[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*/', $content, $matches);
@@ -105,9 +115,10 @@ final class Foo
         }
     }
     /**
-     * @return Line[]
+     * @return mixed[]
+     * @param \PhpCsFixer\DocBlock\DocBlock $docBlock
      */
-    private function getFirstLevelLines(DocBlock $docBlock) : array
+    private function getFirstLevelLines($docBlock)
     {
         $nested = 0;
         $lines = $docBlock->getLines();

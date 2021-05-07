@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Exception;
 
 use Exception;
@@ -16,21 +15,26 @@ final class SetNotFoundException extends Exception
     private $availableSetNames = [];
     /**
      * @param string[] $availableSetNames
+     * @param string $message
+     * @param string $setName
      */
-    public function __construct(string $message, string $setName, array $availableSetNames)
+    public function __construct($message, $setName, array $availableSetNames)
     {
         $this->setName = $setName;
         $this->availableSetNames = $availableSetNames;
         parent::__construct($message);
     }
-    public function getSetName() : string
+    /**
+     * @return string
+     */
+    public function getSetName()
     {
         return $this->setName;
     }
     /**
-     * @return string[]
+     * @return mixed[]
      */
-    public function getAvailableSetNames() : array
+    public function getAvailableSetNames()
     {
         return $this->availableSetNames;
     }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,8 +29,11 @@ final class TagComparator
     private static $groups = [['deprecated', 'link', 'see', 'since'], ['author', 'copyright', 'license'], ['category', 'package', 'subpackage'], ['property', 'property-read', 'property-write']];
     /**
      * Should the given tags be kept together, or kept apart?
+     * @param \PhpCsFixer\DocBlock\Tag $first
+     * @param \PhpCsFixer\DocBlock\Tag $second
+     * @return bool
      */
-    public static function shouldBeTogether(\PhpCsFixer\DocBlock\Tag $first, \PhpCsFixer\DocBlock\Tag $second) : bool
+    public static function shouldBeTogether($first, $second)
     {
         $firstName = $first->getName();
         $secondName = $second->getName();

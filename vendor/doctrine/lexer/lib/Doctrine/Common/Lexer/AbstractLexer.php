@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace ECSPrefix20210507\Doctrine\Common\Lexer;
 
 use ReflectionClass;

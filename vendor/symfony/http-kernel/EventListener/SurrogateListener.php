@@ -25,14 +25,18 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents;
 class SurrogateListener implements EventSubscriberInterface
 {
     private $surrogate;
-    public function __construct(SurrogateInterface $surrogate = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpCache\SurrogateInterface $surrogate
+     */
+    public function __construct($surrogate = null)
     {
         $this->surrogate = $surrogate;
     }
     /**
      * Filters the Response.
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ResponseEvent $event
      */
-    public function onKernelResponse(ResponseEvent $event)
+    public function onKernelResponse($event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -50,7 +54,10 @@ class SurrogateListener implements EventSubscriberInterface
         }
         $surrogate->addSurrogateControl($event->getResponse());
     }
-    public static function getSubscribedEvents() : array
+    /**
+     * @return mixed[]
+     */
+    public static function getSubscribedEvents()
     {
         return [KernelEvents::RESPONSE => 'onKernelResponse'];
     }

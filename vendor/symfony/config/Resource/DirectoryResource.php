@@ -23,11 +23,11 @@ class DirectoryResource implements \ECSPrefix20210507\Symfony\Component\Config\R
     private $pattern;
     /**
      * @param string      $resource The file path to the resource
-     * @param string|null $pattern  A pattern to restrict monitored files
+     * @param string $pattern A pattern to restrict monitored files
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(string $resource, string $pattern = null)
+    public function __construct($resource, $pattern = null)
     {
         $this->resource = \realpath($resource) ?: (\file_exists($resource) ? $resource : \false);
         $this->pattern = $pattern;
@@ -37,29 +37,33 @@ class DirectoryResource implements \ECSPrefix20210507\Symfony\Component\Config\R
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function __toString() : string
+    public function __toString()
     {
         return \md5(\serialize([$this->resource, $this->pattern]));
     }
     /**
      * @return string The file path to the resource
      */
-    public function getResource() : string
+    public function getResource()
     {
         return $this->resource;
     }
     /**
      * Returns the pattern to restrict monitored files.
+     * @return string|null
      */
-    public function getPattern() : ?string
+    public function getPattern()
     {
         return $this->pattern;
     }
     /**
      * {@inheritdoc}
+     * @param int $timestamp
+     * @return bool
      */
-    public function isFresh(int $timestamp) : bool
+    public function isFresh($timestamp)
     {
         if (!\is_dir($this->resource)) {
             return \false;

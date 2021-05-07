@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,27 +23,41 @@ final class FixerDefinition implements \PhpCsFixer\FixerDefinition\FixerDefiniti
     /**
      * @param CodeSampleInterface[] $codeSamples      array of samples, where single sample is [code, configuration]
      * @param null|string           $riskyDescription null for non-risky fixer
+     * @param string|null $description
+     * @param string $summary
      */
-    public function __construct(string $summary, array $codeSamples, ?string $description = null, ?string $riskyDescription = null)
+    public function __construct($summary, array $codeSamples, $description = null, $riskyDescription = null)
     {
         $this->summary = $summary;
         $this->codeSamples = $codeSamples;
         $this->description = $description;
         $this->riskyDescription = $riskyDescription;
     }
-    public function getSummary() : string
+    /**
+     * @return string
+     */
+    public function getSummary()
     {
         return $this->summary;
     }
-    public function getDescription() : ?string
+    /**
+     * @return string|null
+     */
+    public function getDescription()
     {
         return $this->description;
     }
-    public function getRiskyDescription() : ?string
+    /**
+     * @return string|null
+     */
+    public function getRiskyDescription()
     {
         return $this->riskyDescription;
     }
-    public function getCodeSamples() : array
+    /**
+     * @return mixed[]
+     */
+    public function getCodeSamples()
     {
         return $this->codeSamples;
     }

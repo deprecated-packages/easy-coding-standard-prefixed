@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -29,8 +28,9 @@ final class PhpUnitTestClassRequiresCoversFixer extends AbstractPhpUnitFixer imp
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Adds a default `@coversNothing` annotation to PHPUnit test classes that have no `@covers*` annotation.', [new CodeSample('<?php
 final class MyTest extends \\PHPUnit_Framework_TestCase
@@ -44,8 +44,12 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startIndex
+     * @param int $endIndex
      */
-    protected function applyPhpUnitClassFix(Tokens $tokens, int $startIndex, int $endIndex) : void
+    protected function applyPhpUnitClassFix($tokens, $startIndex, $endIndex)
     {
         $classIndex = $tokens->getPrevTokenOfKind($startIndex, [[\T_CLASS]]);
         $prevIndex = $tokens->getPrevMeaningfulToken($classIndex);

@@ -22,7 +22,7 @@ use ECSPrefix20210507\Symfony\Component\Config\Definition\Exception\UnsetKeyExce
  */
 abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface
 {
-    public const DEFAULT_PATH_SEPARATOR = '.';
+    const DEFAULT_PATH_SEPARATOR = '.';
     private static $placeholderUniquePrefixes = [];
     private static $placeholders = [];
     protected $name;
@@ -38,8 +38,11 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
     private $handlingPlaceholder;
     /**
      * @throws \InvalidArgumentException if the name contains a period
+     * @param string|null $name
+     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface $parent
+     * @param string $pathSeparator
      */
-    public function __construct(?string $name, \ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface $parent = null, string $pathSeparator = self::DEFAULT_PATH_SEPARATOR)
+    public function __construct($name, $parent = null, $pathSeparator = self::DEFAULT_PATH_SEPARATOR)
     {
         if (\false !== \strpos($name = (string) $name, $pathSeparator)) {
             throw new \InvalidArgumentException('The name must not contain ".' . $pathSeparator . '".');
@@ -55,8 +58,10 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
      * successfully processed the configuration value is returned as is, thus preserving the placeholder.
      *
      * @internal
+     * @return void
+     * @param string $placeholder
      */
-    public static function setPlaceholder(string $placeholder, array $values) : void
+    public static function setPlaceholder($placeholder, array $values)
     {
         if (!$values) {
             throw new \InvalidArgumentException('At least one value must be provided.');
@@ -70,8 +75,10 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
      * placeholder. An exact match provided by {@see setPlaceholder()} might take precedence.
      *
      * @internal
+     * @return void
+     * @param string $prefix
      */
-    public static function setPlaceholderUniquePrefix(string $prefix) : void
+    public static function setPlaceholderUniquePrefix($prefix)
     {
         self::$placeholderUniquePrefixes[] = $prefix;
     }
@@ -79,27 +86,33 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
      * Resets all current placeholders available.
      *
      * @internal
+     * @return void
      */
-    public static function resetPlaceholders() : void
+    public static function resetPlaceholders()
     {
         self::$placeholderUniquePrefixes = [];
         self::$placeholders = [];
     }
-    public function setAttribute(string $key, $value)
+    /**
+     * @param string $key
+     */
+    public function setAttribute($key, $value)
     {
         $this->attributes[$key] = $value;
     }
     /**
      * @return mixed
+     * @param string $key
      */
-    public function getAttribute(string $key, $default = null)
+    public function getAttribute($key, $default = null)
     {
-        return $this->attributes[$key] ?? $default;
+        return isset($this->attributes[$key]) ? $this->attributes[$key] : $default;
     }
     /**
      * @return bool
+     * @param string $key
      */
-    public function hasAttribute(string $key)
+    public function hasAttribute($key)
     {
         return isset($this->attributes[$key]);
     }
@@ -114,14 +127,18 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
     {
         $this->attributes = $attributes;
     }
-    public function removeAttribute(string $key)
+    /**
+     * @param string $key
+     */
+    public function removeAttribute($key)
     {
         unset($this->attributes[$key]);
     }
     /**
      * Sets an info message.
+     * @param string $info
      */
-    public function setInfo(string $info)
+    public function setInfo($info)
     {
         $this->setAttribute('info', $info);
     }
@@ -167,7 +184,7 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
      *
      * @param bool $boolean Required node
      */
-    public function setRequired(bool $boolean)
+    public function setRequired($boolean)
     {
         $this->required = $boolean;
     }
@@ -181,7 +198,7 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
      * You can use %node% and %path% placeholders in your message to display,
      * respectively, the node name and its complete path
      */
-    public function setDeprecated(?string $package)
+    public function setDeprecated($package)
     {
         $args = \func_get_args();
         if (\func_num_args() < 2) {
@@ -196,14 +213,15 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
         } else {
             $package = (string) $args[0];
             $version = (string) $args[1];
-            $message = (string) ($args[2] ?? 'The child node "%node%" at path "%path%" is deprecated.');
+            $message = (string) (isset($args[2]) ? $args[2] : 'The child node "%node%" at path "%path%" is deprecated.');
         }
         $this->deprecation = ['package' => $package, 'version' => $version, 'message' => $message];
     }
     /**
      * Sets if this node can be overridden.
+     * @param bool $allow
      */
-    public function setAllowOverwrite(bool $allow)
+    public function setAllowOverwrite($allow)
     {
         $this->allowOverwrite = $allow;
     }
@@ -251,7 +269,7 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
      *
      * @deprecated since Symfony 5.1, use "getDeprecation()" instead.
      */
-    public function getDeprecationMessage(string $node, string $path)
+    public function getDeprecationMessage($node, $path)
     {
         trigger_deprecation('symfony/config', '5.1', 'The "%s()" method is deprecated, use "getDeprecation()" instead.', __METHOD__);
         return $this->getDeprecation($node, $path)['message'];
@@ -259,10 +277,11 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
     /**
      * @param string $node The configuration node name
      * @param string $path The path of the node
+     * @return mixed[]
      */
-    public function getDeprecation(string $node, string $path) : array
+    public function getDeprecation($node, $path)
     {
-        return ['package' => $this->deprecation['package'] ?? '', 'version' => $this->deprecation['version'] ?? '', 'message' => \strtr($this->deprecation['message'] ?? '', ['%node%' => $node, '%path%' => $path])];
+        return ['package' => isset($this->deprecation['package']) ? $this->deprecation['package'] : '', 'version' => isset($this->deprecation['version']) ? $this->deprecation['version'] : '', 'message' => \strtr(isset($this->deprecation['message']) ? $this->deprecation['message'] : '', ['%node%' => $node, '%path%' => $path])];
     }
     /**
      * {@inheritdoc}
@@ -437,22 +456,25 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
     protected abstract function finalizeValue($value);
     /**
      * Tests if placeholder values are allowed for this node.
+     * @return bool
      */
-    protected function allowPlaceholders() : bool
+    protected function allowPlaceholders()
     {
         return \true;
     }
     /**
      * Tests if a placeholder is being handled currently.
+     * @return bool
      */
-    protected function isHandlingPlaceholder() : bool
+    protected function isHandlingPlaceholder()
     {
         return null !== $this->handlingPlaceholder;
     }
     /**
      * Gets allowed dynamic types for this node.
+     * @return mixed[]
      */
-    protected function getValidPlaceholderTypes() : array
+    protected function getValidPlaceholderTypes()
     {
         return [];
     }
@@ -470,7 +492,10 @@ abstract class BaseNode implements \ECSPrefix20210507\Symfony\Component\Config\D
         }
         return $value;
     }
-    private function doValidateType($value) : void
+    /**
+     * @return void
+     */
+    private function doValidateType($value)
     {
         if (null !== $this->handlingPlaceholder && !$this->allowPlaceholders()) {
             $e = new InvalidTypeException(\sprintf('A dynamic value is not compatible with a "%s" node type at path "%s".', static::class, $this->getPath()));

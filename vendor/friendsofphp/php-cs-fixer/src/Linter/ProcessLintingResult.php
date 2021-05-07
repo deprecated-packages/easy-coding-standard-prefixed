@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -32,22 +31,30 @@ final class ProcessLintingResult implements \PhpCsFixer\Linter\LintingResultInte
      * @var null|string
      */
     private $path;
-    public function __construct(Process $process, ?string $path = null)
+    /**
+     * @param string|null $path
+     * @param \ECSPrefix20210507\Symfony\Component\Process\Process $process
+     */
+    public function __construct($process, $path = null)
     {
         $this->process = $process;
         $this->path = $path;
     }
     /**
      * {@inheritdoc}
+     * @return void
      */
-    public function check() : void
+    public function check()
     {
         if (!$this->isSuccessful()) {
             // on some systems stderr is used, but on others, it's not
             throw new \PhpCsFixer\Linter\LintingException($this->getProcessErrorMessage(), $this->process->getExitCode());
         }
     }
-    private function getProcessErrorMessage() : string
+    /**
+     * @return string
+     */
+    private function getProcessErrorMessage()
     {
         $output = \strtok(\ltrim($this->process->getErrorOutput() ?: $this->process->getOutput()), "\n");
         if (\false === $output) {
@@ -69,7 +76,10 @@ final class ProcessLintingResult implements \PhpCsFixer\Linter\LintingResultInte
         }
         return \sprintf('%s.', $output);
     }
-    private function isSuccessful() : bool
+    /**
+     * @return bool
+     */
+    private function isSuccessful()
     {
         if (null === $this->isSuccessful) {
             $this->process->wait();

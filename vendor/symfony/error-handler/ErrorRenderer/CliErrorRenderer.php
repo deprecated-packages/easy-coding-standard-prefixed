@@ -15,6 +15,19 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\VarCloner;
 use ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\CliDumper;
 // Help opcache.preload discover always-needed symbols
 \class_exists(CliDumper::class);
+class AnonymousFor_CliErrorRenderer extends CliDumper
+{
+    protected function supportsColors() : bool
+    {
+        $outputStream = $this->outputStream;
+        $this->outputStream = \fopen('php://stdout', 'w');
+        try {
+            return parent::supportsColors();
+        } finally {
+            $this->outputStream = $outputStream;
+        }
+    }
+}
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
@@ -22,23 +35,13 @@ class CliErrorRenderer implements \ECSPrefix20210507\Symfony\Component\ErrorHand
 {
     /**
      * {@inheritdoc}
+     * @param \Throwable $exception
+     * @return \ECSPrefix20210507\Symfony\Component\ErrorHandler\Exception\FlattenException
      */
-    public function render(\Throwable $exception) : FlattenException
+    public function render($exception)
     {
         $cloner = new VarCloner();
-        $dumper = new class extends CliDumper
-        {
-            protected function supportsColors() : bool
-            {
-                $outputStream = $this->outputStream;
-                $this->outputStream = \fopen('php://stdout', 'w');
-                try {
-                    return parent::supportsColors();
-                } finally {
-                    $this->outputStream = $outputStream;
-                }
-            }
-        };
+        $dumper = new AnonymousFor_CliErrorRenderer();
         return FlattenException::createFromThrowable($exception)->setAsString($dumper->dump($cloner->cloneVar($exception), \true));
     }
 }

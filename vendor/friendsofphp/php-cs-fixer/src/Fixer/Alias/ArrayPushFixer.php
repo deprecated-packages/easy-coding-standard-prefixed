@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,26 +27,35 @@ final class ArrayPushFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Converts simple usages of `array_push($x, $y);` to `$x[] = $y;`.', [new VersionSpecificCodeSample("<?php\narray_push(\$x, \$y);\n", new VersionSpecification(70000))], null, 'Risky when the function `array_push` is overridden.');
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return \PHP_VERSION_ID >= 70000 && $tokens->isTokenKindFound(\T_STRING) && $tokens->count() > 7;
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    /**
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     */
+    protected function applyFix($file, $tokens)
     {
         $functionsAnalyzer = new FunctionsAnalyzer();
         for ($index = $tokens->count() - 7; $index > 0; --$index) {
@@ -109,7 +117,12 @@ final class ArrayPushFixer extends AbstractFixer
             }
         }
     }
-    private function getFirstArgumentEnd(Tokens $tokens, int $index) : int
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return int
+     */
+    private function getFirstArgumentEnd($tokens, $index)
     {
         $nextIndex = $tokens->getNextMeaningfulToken($index);
         $nextToken = $tokens[$nextIndex];
@@ -132,8 +145,11 @@ final class ArrayPushFixer extends AbstractFixer
     }
     /**
      * @param int $endIndex boundary, i.e. tokens index of `)`
+     * @return int|null
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
      */
-    private function getSecondArgumentEnd(Tokens $tokens, int $index, int $endIndex) : ?int
+    private function getSecondArgumentEnd($tokens, $index, $endIndex)
     {
         if ($tokens[$index]->isGivenKind(\T_ELLIPSIS)) {
             return null;

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,17 +26,27 @@ final class DescribeNameNotFoundException extends \InvalidArgumentException
      * @var string 'rule'|'set'
      */
     private $type;
-    public function __construct(string $name, string $type)
+    /**
+     * @param string $name
+     * @param string $type
+     */
+    public function __construct($name, $type)
     {
         $this->name = $name;
         $this->type = $type;
         parent::__construct();
     }
-    public function getName() : string
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return $this->name;
     }
-    public function getType() : string
+    /**
+     * @return string
+     */
+    public function getType()
     {
         return $this->type;
     }

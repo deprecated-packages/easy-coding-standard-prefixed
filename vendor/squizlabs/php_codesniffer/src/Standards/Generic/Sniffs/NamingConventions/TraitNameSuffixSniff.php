@@ -31,7 +31,7 @@ class TraitNameSuffixSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $traitName = $phpcsFile->getDeclarationName($stackPtr);
         if ($traitName === null) {

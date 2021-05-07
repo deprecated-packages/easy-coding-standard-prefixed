@@ -37,8 +37,9 @@ trait ServiceLocatorTrait
      * {@inheritdoc}
      *
      * @return bool
+     * @param string $id
      */
-    public function has(string $id)
+    public function has($id)
     {
         return isset($this->factories[$id]);
     }
@@ -46,8 +47,9 @@ trait ServiceLocatorTrait
      * {@inheritdoc}
      *
      * @return mixed
+     * @param string $id
      */
-    public function get(string $id)
+    public function get($id)
     {
         if (!isset($this->factories[$id])) {
             throw $this->createNotFoundException($id);
@@ -67,8 +69,9 @@ trait ServiceLocatorTrait
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getProvidedServices() : array
+    public function getProvidedServices()
     {
         if (null === $this->providedTypes) {
             $this->providedTypes = [];
@@ -83,7 +86,11 @@ trait ServiceLocatorTrait
         }
         return $this->providedTypes;
     }
-    private function createNotFoundException(string $id) : NotFoundExceptionInterface
+    /**
+     * @param string $id
+     * @return \ECSPrefix20210507\Psr\Container\NotFoundExceptionInterface
+     */
+    private function createNotFoundException($id)
     {
         if (!($alternatives = \array_keys($this->factories))) {
             $message = 'is empty...';
@@ -100,14 +107,20 @@ trait ServiceLocatorTrait
         } else {
             $message = \sprintf('Service "%s" not found: the current service locator %s', $id, $message);
         }
-        return new class($message) extends \InvalidArgumentException implements NotFoundExceptionInterface
+        class AnonymousFor_NotInFunction extends \InvalidArgumentException implements NotFoundExceptionInterface
         {
-        };
+        }
+        return new AnonymousFor_NotInFunction($message);
     }
-    private function createCircularReferenceException(string $id, array $path) : ContainerExceptionInterface
+    /**
+     * @param string $id
+     * @return \ECSPrefix20210507\Psr\Container\ContainerExceptionInterface
+     */
+    private function createCircularReferenceException($id, array $path)
     {
-        return new class(\sprintf('Circular reference detected for service "%s", path: "%s".', $id, \implode(' -> ', $path))) extends \RuntimeException implements ContainerExceptionInterface
+        class AnonymousFor_NotInFunction extends \RuntimeException implements ContainerExceptionInterface
         {
-        };
+        }
+        return new AnonymousFor_NotInFunction(\sprintf('Circular reference detected for service "%s", path: "%s".', $id, \implode(' -> ', $path)));
     }
 }

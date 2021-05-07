@@ -25,7 +25,15 @@ class ArgumentMetadata
     private $defaultValue;
     private $isNullable;
     private $attribute;
-    public function __construct(string $name, ?string $type, bool $isVariadic, bool $hasDefaultValue, $defaultValue, bool $isNullable = \false, ?ArgumentInterface $attribute = null)
+    /**
+     * @param string|null $type
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Attribute\ArgumentInterface|null $attribute
+     * @param string $name
+     * @param bool $isVariadic
+     * @param bool $hasDefaultValue
+     * @param bool $isNullable
+     */
+    public function __construct($name, $type, $isVariadic, $hasDefaultValue, $defaultValue, $isNullable = \false, $attribute = null)
     {
         $this->name = $name;
         $this->type = $type;
@@ -100,8 +108,9 @@ class ArgumentMetadata
     }
     /**
      * Returns the attribute (if any) that was set on the argument.
+     * @return \ECSPrefix20210507\Symfony\Component\HttpKernel\Attribute\ArgumentInterface|null
      */
-    public function getAttribute() : ?ArgumentInterface
+    public function getAttribute()
     {
         return $this->attribute;
     }

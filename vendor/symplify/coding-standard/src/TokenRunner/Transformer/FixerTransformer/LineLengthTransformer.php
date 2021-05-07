@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
 use PhpCsFixer\Tokenizer\CT;
@@ -25,7 +24,13 @@ final class LineLengthTransformer
      * @var FirstLineLengthResolver
      */
     private $firstLineLengthResolver;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthResolver $lineLengthResolver, \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\TokensInliner $tokensInliner, \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\FirstLineLengthResolver $firstLineLengthResolver, \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\TokensNewliner $tokensNewliner)
+    /**
+     * @param \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthResolver $lineLengthResolver
+     * @param \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\TokensInliner $tokensInliner
+     * @param \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\FirstLineLengthResolver $firstLineLengthResolver
+     * @param \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\TokensNewliner $tokensNewliner
+     */
+    public function __construct($lineLengthResolver, $tokensInliner, $firstLineLengthResolver, $tokensNewliner)
     {
         $this->lineLengthResolver = $lineLengthResolver;
         $this->tokensInliner = $tokensInliner;
@@ -34,8 +39,13 @@ final class LineLengthTransformer
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
+     * @param int $lineLength
+     * @param bool $breakLongLines
+     * @param bool $inlineShortLine
      */
-    public function fixStartPositionToEndPosition(BlockInfo $blockInfo, Tokens $tokens, int $lineLength, bool $breakLongLines, bool $inlineShortLine) : void
+    public function fixStartPositionToEndPosition($blockInfo, $tokens, $lineLength, $breakLongLines, $inlineShortLine)
     {
         if ($this->hasPromotedProperty($tokens, $blockInfo)) {
             return;
@@ -53,8 +63,10 @@ final class LineLengthTransformer
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
+     * @return bool
      */
-    private function hasPromotedProperty(Tokens $tokens, BlockInfo $blockInfo) : bool
+    private function hasPromotedProperty($tokens, $blockInfo)
     {
         $resultByKind = $tokens->findGivenKind([CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PUBLIC, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PROTECTED, CT::T_CONSTRUCTOR_PROPERTY_PROMOTION_PRIVATE], $blockInfo->getStart(), $blockInfo->getEnd());
         return (bool) \array_filter($resultByKind);

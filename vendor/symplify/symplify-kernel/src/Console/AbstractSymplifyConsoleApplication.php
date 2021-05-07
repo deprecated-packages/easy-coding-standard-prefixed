@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Console;
 
 use ECSPrefix20210507\Symfony\Component\Console\Application;
@@ -14,8 +13,10 @@ abstract class AbstractSymplifyConsoleApplication extends Application
     private $commandNaming;
     /**
      * @param Command[] $commands
+     * @param string $name
+     * @param string $version
      */
-    public function __construct(array $commands, string $name = 'UNKNOWN', string $version = 'UNKNOWN')
+    public function __construct(array $commands, $name = 'UNKNOWN', $version = 'UNKNOWN')
     {
         $this->commandNaming = new CommandNaming();
         $this->addCommands($commands);
@@ -25,8 +26,9 @@ abstract class AbstractSymplifyConsoleApplication extends Application
      * Add names to all commands by class-name convention
      *
      * @param Command[] $commands
+     * @return void
      */
-    public function addCommands(array $commands) : void
+    public function addCommands(array $commands)
     {
         foreach ($commands as $command) {
             $commandName = $this->commandNaming->resolveFromCommand($command);

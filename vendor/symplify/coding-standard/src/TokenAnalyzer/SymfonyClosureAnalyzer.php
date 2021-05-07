@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenAnalyzer;
 
 use PhpCsFixer\Tokenizer\Token;
@@ -17,8 +16,9 @@ final class SymfonyClosureAnalyzer
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return bool
      */
-    public function isContainerConfiguratorClosure(Tokens $tokens) : bool
+    public function isContainerConfiguratorClosure($tokens)
     {
         foreach ($tokens as $token) {
             if (!$token->isGivenKind(\T_FUNCTION)) {

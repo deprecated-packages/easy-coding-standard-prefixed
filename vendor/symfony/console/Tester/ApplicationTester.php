@@ -28,7 +28,10 @@ class ApplicationTester
     private $application;
     private $input;
     private $statusCode;
-    public function __construct(Application $application)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Application $application
+     */
+    public function __construct($application)
     {
         $this->application = $application;
     }

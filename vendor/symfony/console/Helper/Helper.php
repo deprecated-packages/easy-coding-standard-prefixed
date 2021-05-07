@@ -22,8 +22,9 @@ abstract class Helper implements \ECSPrefix20210507\Symfony\Component\Console\He
     protected $helperSet = null;
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Helper\HelperSet $helperSet
      */
-    public function setHelperSet(\ECSPrefix20210507\Symfony\Component\Console\Helper\HelperSet $helperSet = null)
+    public function setHelperSet($helperSet = null)
     {
         $this->helperSet = $helperSet;
     }
@@ -38,8 +39,9 @@ abstract class Helper implements \ECSPrefix20210507\Symfony\Component\Console\He
      * Returns the length of a string, using mb_strwidth if it is available.
      *
      * @return int The length of the string
+     * @param string|null $string
      */
-    public static function strlen(?string $string)
+    public static function strlen($string)
     {
         return self::width($string);
     }
@@ -48,10 +50,12 @@ abstract class Helper implements \ECSPrefix20210507\Symfony\Component\Console\He
      * The width is how many characters positions the string will use.
      *
      * @internal in Symfony 5.2
+     * @param string|null $string
+     * @return int
      */
-    public static function width(?string $string) : int
+    public static function width($string)
     {
-        $string ?? ($string = '');
+        isset($string) ? $string : ($string = '');
         if (\preg_match('//u', $string)) {
             return (new UnicodeString($string))->width(\false);
         }
@@ -65,10 +69,12 @@ abstract class Helper implements \ECSPrefix20210507\Symfony\Component\Console\He
      * The length is related to how many bytes the string will use.
      *
      * @internal in Symfony 5.2
+     * @param string|null $string
+     * @return int
      */
-    public static function length(?string $string) : int
+    public static function length($string)
     {
-        $string ?? ($string = '');
+        isset($string) ? $string : ($string = '');
         if (\preg_match('//u', $string)) {
             return (new UnicodeString($string))->length();
         }
@@ -81,10 +87,13 @@ abstract class Helper implements \ECSPrefix20210507\Symfony\Component\Console\He
      * Returns the subset of a string, using mb_substr if it is available.
      *
      * @return string The string subset
+     * @param string|null $string
+     * @param int $from
+     * @param int $length
      */
-    public static function substr(?string $string, int $from, int $length = null)
+    public static function substr($string, $from, $length = null)
     {
-        $string ?? ($string = '');
+        isset($string) ? $string : ($string = '');
         if (\false === ($encoding = \mb_detect_encoding($string, null, \true))) {
             return \substr($string, $from, $length);
         }
@@ -104,7 +113,10 @@ abstract class Helper implements \ECSPrefix20210507\Symfony\Component\Console\He
             }
         }
     }
-    public static function formatMemory(int $memory)
+    /**
+     * @param int $memory
+     */
+    public static function formatMemory($memory)
     {
         if ($memory >= 1024 * 1024 * 1024) {
             return \sprintf('%.1f GiB', $memory / 1024 / 1024 / 1024);
@@ -117,16 +129,24 @@ abstract class Helper implements \ECSPrefix20210507\Symfony\Component\Console\He
         }
         return \sprintf('%d B', $memory);
     }
-    public static function strlenWithoutDecoration(OutputFormatterInterface $formatter, ?string $string)
+    /**
+     * @param string|null $string
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter
+     */
+    public static function strlenWithoutDecoration($formatter, $string)
     {
         return self::width(self::removeDecoration($formatter, $string));
     }
-    public static function removeDecoration(OutputFormatterInterface $formatter, ?string $string)
+    /**
+     * @param string|null $string
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter
+     */
+    public static function removeDecoration($formatter, $string)
     {
         $isDecorated = $formatter->isDecorated();
         $formatter->setDecorated(\false);
         // remove <...> formatting
-        $string = $formatter->format($string ?? '');
+        $string = $formatter->format(isset($string) ? $string : '');
         // remove already formatted characters
         $string = \preg_replace("/\33\\[[^m]*m/", '', $string);
         $formatter->setDecorated($isDecorated);

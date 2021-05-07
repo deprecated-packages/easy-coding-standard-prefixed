@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,8 +25,9 @@ final class ModernizeTypesCastingFixer extends AbstractFunctionReferenceFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Replaces `intval`, `floatval`, `doubleval`, `strval` and `boolval` function calls with according type casting operator.', [new CodeSample('<?php
     $a = intval($b);
@@ -39,15 +39,20 @@ final class ModernizeTypesCastingFixer extends AbstractFunctionReferenceFixer
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         // replacement patterns
         static $replacement = ['intval' => [\T_INT_CAST, '(int)'], 'floatval' => [\T_DOUBLE_CAST, '(float)'], 'doubleval' => [\T_DOUBLE_CAST, '(float)'], 'strval' => [\T_STRING_CAST, '(string)'], 'boolval' => [\T_BOOL_CAST, '(bool)']];

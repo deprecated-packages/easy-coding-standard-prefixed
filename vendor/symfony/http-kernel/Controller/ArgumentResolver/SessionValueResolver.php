@@ -23,8 +23,11 @@ final class SessionValueResolver implements ArgumentValueResolverInterface
 {
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
+     * @return bool
      */
-    public function supports(Request $request, ArgumentMetadata $argument) : bool
+    public function supports($request, $argument)
     {
         if (!$request->hasSession()) {
             return \false;
@@ -37,8 +40,11 @@ final class SessionValueResolver implements ArgumentValueResolverInterface
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
      */
-    public function resolve(Request $request, ArgumentMetadata $argument) : iterable
+    public function resolve($request, $argument)
     {
         (yield $request->getSession());
     }

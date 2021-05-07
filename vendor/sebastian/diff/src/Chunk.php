@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of sebastian/diff.
  *
@@ -33,7 +32,13 @@ final class Chunk
      * @var Line[]
      */
     private $lines;
-    public function __construct(int $start = 0, int $startRange = 1, int $end = 0, int $endRange = 1, array $lines = [])
+    /**
+     * @param int $start
+     * @param int $startRange
+     * @param int $end
+     * @param int $endRange
+     */
+    public function __construct($start = 0, $startRange = 1, $end = 0, $endRange = 1, array $lines = [])
     {
         $this->start = $start;
         $this->startRange = $startRange;
@@ -41,33 +46,46 @@ final class Chunk
         $this->endRange = $endRange;
         $this->lines = $lines;
     }
-    public function getStart() : int
+    /**
+     * @return int
+     */
+    public function getStart()
     {
         return $this->start;
     }
-    public function getStartRange() : int
+    /**
+     * @return int
+     */
+    public function getStartRange()
     {
         return $this->startRange;
     }
-    public function getEnd() : int
+    /**
+     * @return int
+     */
+    public function getEnd()
     {
         return $this->end;
     }
-    public function getEndRange() : int
+    /**
+     * @return int
+     */
+    public function getEndRange()
     {
         return $this->endRange;
     }
     /**
-     * @return Line[]
+     * @return mixed[]
      */
-    public function getLines() : array
+    public function getLines()
     {
         return $this->lines;
     }
     /**
      * @param Line[] $lines
+     * @return void
      */
-    public function setLines(array $lines) : void
+    public function setLines(array $lines)
     {
         foreach ($lines as $line) {
             if (!$line instanceof \ECSPrefix20210507\SebastianBergmann\Diff\Line) {

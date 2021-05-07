@@ -30,8 +30,9 @@ abstract class Descriptor implements \ECSPrefix20210507\Symfony\Component\Consol
     protected $output;
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
      */
-    public function describe(OutputInterface $output, $object, array $options = [])
+    public function describe($output, $object, array $options = [])
     {
         $this->output = $output;
         switch (\true) {
@@ -56,29 +57,36 @@ abstract class Descriptor implements \ECSPrefix20210507\Symfony\Component\Consol
     }
     /**
      * Writes content to output.
+     * @param string $content
+     * @param bool $decorated
      */
-    protected function write(string $content, bool $decorated = \false)
+    protected function write($content, $decorated = \false)
     {
         $this->output->write($content, \false, $decorated ? OutputInterface::OUTPUT_NORMAL : OutputInterface::OUTPUT_RAW);
     }
     /**
      * Describes an InputArgument instance.
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputArgument $argument
      */
-    protected abstract function describeInputArgument(InputArgument $argument, array $options = []);
+    protected abstract function describeInputArgument($argument, array $options = []);
     /**
      * Describes an InputOption instance.
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputOption $option
      */
-    protected abstract function describeInputOption(InputOption $option, array $options = []);
+    protected abstract function describeInputOption($option, array $options = []);
     /**
      * Describes an InputDefinition instance.
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputDefinition $definition
      */
-    protected abstract function describeInputDefinition(InputDefinition $definition, array $options = []);
+    protected abstract function describeInputDefinition($definition, array $options = []);
     /**
      * Describes a Command instance.
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
      */
-    protected abstract function describeCommand(Command $command, array $options = []);
+    protected abstract function describeCommand($command, array $options = []);
     /**
      * Describes an Application instance.
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Application $application
      */
-    protected abstract function describeApplication(Application $application, array $options = []);
+    protected abstract function describeApplication($application, array $options = []);
 }

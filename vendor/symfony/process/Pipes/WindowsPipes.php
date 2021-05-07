@@ -29,7 +29,10 @@ class WindowsPipes extends \ECSPrefix20210507\Symfony\Component\Process\Pipes\Ab
     private $lockHandles = [];
     private $readBytes = [Process::STDOUT => 0, Process::STDERR => 0];
     private $haveReadSupport;
-    public function __construct($input, bool $haveReadSupport)
+    /**
+     * @param bool $haveReadSupport
+     */
+    public function __construct($input, $haveReadSupport)
     {
         $this->haveReadSupport = $haveReadSupport;
         if ($this->haveReadSupport) {
@@ -90,8 +93,9 @@ class WindowsPipes extends \ECSPrefix20210507\Symfony\Component\Process\Pipes\Ab
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getDescriptors() : array
+    public function getDescriptors()
     {
         if (!$this->haveReadSupport) {
             $nullstream = \fopen('NUL', 'c');
@@ -104,15 +108,19 @@ class WindowsPipes extends \ECSPrefix20210507\Symfony\Component\Process\Pipes\Ab
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getFiles() : array
+    public function getFiles()
     {
         return $this->files;
     }
     /**
      * {@inheritdoc}
+     * @param bool $blocking
+     * @param bool $close
+     * @return mixed[]
      */
-    public function readAndWrite(bool $blocking, bool $close = \false) : array
+    public function readAndWrite($blocking, $close = \false)
     {
         $this->unblock();
         $w = $this->write();
@@ -142,15 +150,17 @@ class WindowsPipes extends \ECSPrefix20210507\Symfony\Component\Process\Pipes\Ab
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function haveReadSupport() : bool
+    public function haveReadSupport()
     {
         return $this->haveReadSupport;
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function areOpen() : bool
+    public function areOpen()
     {
         return $this->pipes && $this->fileHandles;
     }

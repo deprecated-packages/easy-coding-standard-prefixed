@@ -22,7 +22,13 @@ class TraceStub extends Stub
     public $sliceOffset;
     public $sliceLength;
     public $numberingOffset;
-    public function __construct(array $trace, bool $keepArgs = \true, int $sliceOffset = 0, int $sliceLength = null, int $numberingOffset = 0)
+    /**
+     * @param bool $keepArgs
+     * @param int $sliceOffset
+     * @param int $sliceLength
+     * @param int $numberingOffset
+     */
+    public function __construct(array $trace, $keepArgs = \true, $sliceOffset = 0, $sliceLength = null, $numberingOffset = 0)
     {
         $this->value = $trace;
         $this->keepArgs = $keepArgs;

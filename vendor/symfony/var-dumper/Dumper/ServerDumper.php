@@ -24,22 +24,26 @@ class ServerDumper implements \ECSPrefix20210507\Symfony\Component\VarDumper\Dum
     private $wrappedDumper;
     /**
      * @param string                     $host             The server host
-     * @param DataDumperInterface|null   $wrappedDumper    A wrapped instance used whenever we failed contacting the server
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper A wrapped instance used whenever we failed contacting the server
      * @param ContextProviderInterface[] $contextProviders Context providers indexed by context name
      */
-    public function __construct(string $host, \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper = null, array $contextProviders = [])
+    public function __construct($host, $wrappedDumper = null, array $contextProviders = [])
     {
         $this->connection = new Connection($host, $contextProviders);
         $this->wrappedDumper = $wrappedDumper;
     }
-    public function getContextProviders() : array
+    /**
+     * @return mixed[]
+     */
+    public function getContextProviders()
     {
         return $this->connection->getContextProviders();
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data $data
      */
-    public function dump(Data $data)
+    public function dump($data)
     {
         if (!$this->connection->write($data) && $this->wrappedDumper) {
             $this->wrappedDumper->dump($data);

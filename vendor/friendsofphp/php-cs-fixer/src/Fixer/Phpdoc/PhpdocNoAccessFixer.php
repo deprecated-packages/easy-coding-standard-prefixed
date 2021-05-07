@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,8 +23,9 @@ final class PhpdocNoAccessFixer extends AbstractProxyFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('`@access` annotations should be omitted from PHPDoc.', [new CodeSample('<?php
 class Foo
@@ -43,15 +43,17 @@ class Foo
      *
      * Must run before NoEmptyPhpdocFixer, PhpdocAlignFixer, PhpdocSeparationFixer, PhpdocTrimFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, PhpdocIndentFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return parent::getPriority();
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    protected function createProxyFixers() : array
+    protected function createProxyFixers()
     {
         $fixer = new \PhpCsFixer\Fixer\Phpdoc\GeneralPhpdocAnnotationRemoveFixer();
         $fixer->configure(['annotations' => ['access']]);

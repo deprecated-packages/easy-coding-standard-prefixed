@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\Skipper\SkipVoter;
 
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -33,7 +32,14 @@ final class ClassSkipVoter implements SkipVoterInterface
      * @var SkippedClassResolver
      */
     private $skippedClassResolver;
-    public function __construct(ClassLikeExistenceChecker $classLikeExistenceChecker, ParameterProvider $parameterProvider, SkipSkipper $skipSkipper, OnlySkipper $onlySkipper, SkippedClassResolver $skippedClassResolver)
+    /**
+     * @param \Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker $classLikeExistenceChecker
+     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
+     * @param \Symplify\Skipper\Skipper\SkipSkipper $skipSkipper
+     * @param \Symplify\Skipper\Skipper\OnlySkipper $onlySkipper
+     * @param \Symplify\Skipper\SkipCriteriaResolver\SkippedClassResolver $skippedClassResolver
+     */
+    public function __construct($classLikeExistenceChecker, $parameterProvider, $skipSkipper, $onlySkipper, $skippedClassResolver)
     {
         $this->classLikeExistenceChecker = $classLikeExistenceChecker;
         $this->parameterProvider = $parameterProvider;
@@ -43,8 +49,9 @@ final class ClassSkipVoter implements SkipVoterInterface
     }
     /**
      * @param string|object $element
+     * @return bool
      */
-    public function match($element) : bool
+    public function match($element)
     {
         if (\is_object($element)) {
             return \true;
@@ -53,8 +60,10 @@ final class ClassSkipVoter implements SkipVoterInterface
     }
     /**
      * @param string|object $element
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
+     * @return bool
      */
-    public function shouldSkip($element, SmartFileInfo $smartFileInfo) : bool
+    public function shouldSkip($element, $smartFileInfo)
     {
         $only = $this->parameterProvider->provideArrayParameter(Option::ONLY);
         $doesMatchOnly = $this->onlySkipper->doesMatchOnly($element, $smartFileInfo, $only);

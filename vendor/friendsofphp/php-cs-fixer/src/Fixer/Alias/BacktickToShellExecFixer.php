@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,15 +25,18 @@ final class BacktickToShellExecFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound('`');
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Converts backtick operators to `shell_exec` calls.', [new CodeSample(<<<'EOT'
 <?php
@@ -51,15 +53,19 @@ EOT
      * {@inheritdoc}
      *
      * Must run before EscapeImplicitBackslashesFixer, ExplicitStringVariableFixer, NativeFunctionInvocationFixer, SingleQuoteFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 2;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $backtickStarted = \false;
         $backtickTokens = [];
@@ -81,8 +87,10 @@ EOT
     }
     /**
      * Override backtick code with corresponding double-quoted string.
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fixBackticks(Tokens $tokens, array $backtickTokens) : void
+    private function fixBackticks($tokens, array $backtickTokens)
     {
         // Track indexes for final override
         \ksort($backtickTokens);

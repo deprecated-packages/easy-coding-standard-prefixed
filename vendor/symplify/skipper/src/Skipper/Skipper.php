@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\Skipper\Skipper;
 
 use Symplify\Skipper\Contract\SkipVoterInterface;
@@ -13,7 +12,7 @@ final class Skipper
     /**
      * @var string
      */
-    private const FILE_ELEMENT = 'file_elements';
+    const FILE_ELEMENT = 'file_elements';
     /**
      * @var SkipVoterInterface[]
      */
@@ -27,20 +26,27 @@ final class Skipper
     }
     /**
      * @param string|object $element
+     * @return bool
      */
-    public function shouldSkipElement($element) : bool
+    public function shouldSkipElement($element)
     {
         $fileInfo = new SmartFileInfo(__FILE__);
         return $this->shouldSkipElementAndFileInfo($element, $fileInfo);
     }
-    public function shouldSkipFileInfo(SmartFileInfo $smartFileInfo) : bool
+    /**
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
+     * @return bool
+     */
+    public function shouldSkipFileInfo($smartFileInfo)
     {
         return $this->shouldSkipElementAndFileInfo(self::FILE_ELEMENT, $smartFileInfo);
     }
     /**
      * @param string|object $element
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
+     * @return bool
      */
-    public function shouldSkipElementAndFileInfo($element, SmartFileInfo $smartFileInfo) : bool
+    public function shouldSkipElementAndFileInfo($element, $smartFileInfo)
     {
         foreach ($this->skipVoters as $skipVoter) {
             if ($skipVoter->match($element)) {

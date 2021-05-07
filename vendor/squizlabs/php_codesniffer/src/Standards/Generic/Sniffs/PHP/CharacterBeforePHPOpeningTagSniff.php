@@ -40,7 +40,7 @@ class CharacterBeforePHPOpeningTagSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $expected = 0;
         if ($stackPtr > 0) {

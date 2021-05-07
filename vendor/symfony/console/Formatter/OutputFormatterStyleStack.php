@@ -22,9 +22,12 @@ class OutputFormatterStyleStack implements ResetInterface
      */
     private $styles;
     private $emptyStyle;
-    public function __construct(\ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle
+     */
+    public function __construct($emptyStyle = null)
     {
-        $this->emptyStyle = $emptyStyle ?? new \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyle();
+        $this->emptyStyle = isset($emptyStyle) ? $emptyStyle : new \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyle();
         $this->reset();
     }
     /**
@@ -36,8 +39,9 @@ class OutputFormatterStyleStack implements ResetInterface
     }
     /**
      * Pushes a style in the stack.
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style
      */
-    public function push(\ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style)
+    public function push($style)
     {
         $this->styles[] = $style;
     }
@@ -47,8 +51,9 @@ class OutputFormatterStyleStack implements ResetInterface
      * @return OutputFormatterStyleInterface
      *
      * @throws InvalidArgumentException When style tags incorrectly nested
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style
      */
-    public function pop(\ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $style = null)
+    public function pop($style = null)
     {
         if (empty($this->styles)) {
             return $this->emptyStyle;
@@ -78,8 +83,9 @@ class OutputFormatterStyleStack implements ResetInterface
     }
     /**
      * @return $this
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle
      */
-    public function setEmptyStyle(\ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterStyleInterface $emptyStyle)
+    public function setEmptyStyle($emptyStyle)
     {
         $this->emptyStyle = $emptyStyle;
         return $this;

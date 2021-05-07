@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SniffRunner\File;
 
 use PHP_CodeSniffer\Fixer;
@@ -35,7 +34,14 @@ final class FileFactory
      * @var EasyCodingStandardStyle
      */
     private $easyCodingStandardStyle;
-    public function __construct(Fixer $fixer, ErrorAndDiffCollector $errorAndDiffCollector, Skipper $skipper, AppliedCheckersCollector $appliedCheckersCollector, EasyCodingStandardStyle $easyCodingStandardStyle)
+    /**
+     * @param \PHP_CodeSniffer\Fixer $fixer
+     * @param \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector
+     * @param \Symplify\Skipper\Skipper\Skipper $skipper
+     * @param \Symplify\EasyCodingStandard\Application\AppliedCheckersCollector $appliedCheckersCollector
+     * @param \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle
+     */
+    public function __construct($fixer, $errorAndDiffCollector, $skipper, $appliedCheckersCollector, $easyCodingStandardStyle)
     {
         $this->fixer = $fixer;
         $this->errorAndDiffCollector = $errorAndDiffCollector;
@@ -43,7 +49,11 @@ final class FileFactory
         $this->appliedCheckersCollector = $appliedCheckersCollector;
         $this->easyCodingStandardStyle = $easyCodingStandardStyle;
     }
-    public function createFromFileInfo(SmartFileInfo $smartFileInfo) : File
+    /**
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
+     * @return \Symplify\EasyCodingStandard\SniffRunner\ValueObject\File
+     */
+    public function createFromFileInfo($smartFileInfo)
     {
         return new File($smartFileInfo->getRelativeFilePath(), $smartFileInfo->getContents(), $this->fixer, $this->errorAndDiffCollector, $this->skipper, $this->appliedCheckersCollector, $this->easyCodingStandardStyle);
     }

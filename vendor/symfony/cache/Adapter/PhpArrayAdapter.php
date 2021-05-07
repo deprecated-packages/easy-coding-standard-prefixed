@@ -40,7 +40,7 @@ class PhpArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
      * @param string           $file         The PHP file were values are cached
      * @param AdapterInterface $fallbackPool A pool to fallback on when an item is not hit
      */
-    public function __construct(string $file, \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $fallbackPool)
+    public function __construct($file, $fallbackPool)
     {
         $this->file = $file;
         $this->pool = $fallbackPool;
@@ -60,7 +60,7 @@ class PhpArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
      *
      * @return CacheItemPoolInterface
      */
-    public static function create(string $file, CacheItemPoolInterface $fallbackPool)
+    public static function create($file, $fallbackPool)
     {
         if (!$fallbackPool instanceof \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface) {
             $fallbackPool = new \ECSPrefix20210507\Symfony\Component\Cache\Adapter\ProxyAdapter($fallbackPool);
@@ -69,8 +69,10 @@ class PhpArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
     }
     /**
      * {@inheritdoc}
+     * @param string $key
+     * @param float $beta
      */
-    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
+    public function get($key, callable $callback, $beta = null, array &$metadata = null)
     {
         if (null === $this->values) {
             $this->initialize();
@@ -201,8 +203,9 @@ class PhpArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
      * {@inheritdoc}
      *
      * @return bool
+     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function save(CacheItemInterface $item)
+    public function save($item)
     {
         if (null === $this->values) {
             $this->initialize();
@@ -213,8 +216,9 @@ class PhpArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
      * {@inheritdoc}
      *
      * @return bool
+     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred(CacheItemInterface $item)
+    public function saveDeferred($item)
     {
         if (null === $this->values) {
             $this->initialize();
@@ -234,8 +238,9 @@ class PhpArrayAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adap
      * {@inheritdoc}
      *
      * @return bool
+     * @param string $prefix
      */
-    public function clear(string $prefix = '')
+    public function clear($prefix = '')
     {
         $this->keys = $this->values = [];
         $cleared = @\unlink($this->file) || !\file_exists($this->file);
@@ -309,7 +314,7 @@ EOF;
                 $value = "static function () {\n    return {$value};\n}";
             }
             $hash = \hash('md5', $value);
-            if (null === ($id = $dumpedMap[$hash] ?? null)) {
+            if (null === ($id = isset($dumpedMap[$hash]) ? $dumpedMap[$hash] : null)) {
                 $id = $dumpedMap[$hash] = \count($dumpedMap);
                 $dumpedValues .= "{$id} => {$value},\n";
             }
@@ -341,10 +346,13 @@ EOF;
         if (2 !== \count($values) || !isset($values[0], $values[1])) {
             $this->keys = $this->values = [];
         } else {
-            [$this->keys, $this->values] = $values;
+            list($this->keys, $this->values) = $values;
         }
     }
-    private function generateItems(array $keys) : \Generator
+    /**
+     * @return \Generator
+     */
+    private function generateItems(array $keys)
     {
         $f = $this->createCacheItem;
         $fallbackKeys = [];

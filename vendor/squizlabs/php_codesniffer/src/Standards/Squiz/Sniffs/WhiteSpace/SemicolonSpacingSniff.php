@@ -39,7 +39,7 @@ class SemicolonSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $prevType = $tokens[$stackPtr - 1]['code'];

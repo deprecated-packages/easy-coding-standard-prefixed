@@ -36,16 +36,23 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\KernelEvents;
  */
 abstract class AbstractSessionListener implements EventSubscriberInterface
 {
-    public const NO_AUTO_CACHE_CONTROL_HEADER = 'Symfony-Session-NoAutoCacheControl';
+    const NO_AUTO_CACHE_CONTROL_HEADER = 'Symfony-Session-NoAutoCacheControl';
     protected $container;
     private $sessionUsageStack = [];
     private $debug;
-    public function __construct(ContainerInterface $container = null, bool $debug = \false)
+    /**
+     * @param \ECSPrefix20210507\Psr\Container\ContainerInterface $container
+     * @param bool $debug
+     */
+    public function __construct($container = null, $debug = \false)
     {
         $this->container = $container;
         $this->debug = $debug;
     }
-    public function onKernelRequest(RequestEvent $event)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent $event
+     */
+    public function onKernelRequest($event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -54,13 +61,16 @@ abstract class AbstractSessionListener implements EventSubscriberInterface
         if (!$request->hasSession()) {
             $sess = null;
             $request->setSessionFactory(function () use(&$sess) {
-                return $sess ?? ($sess = $this->getSession());
+                return isset($sess) ? $sess : ($sess = $this->getSession());
             });
         }
         $session = $this->container && $this->container->has('initialized_session') ? $this->container->get('initialized_session') : null;
         $this->sessionUsageStack[] = $session instanceof Session ? $session->getUsageIndex() : 0;
     }
-    public function onKernelResponse(ResponseEvent $event)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ResponseEvent $event
+     */
+    public function onKernelResponse($event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -116,13 +126,19 @@ abstract class AbstractSessionListener implements EventSubscriberInterface
             $this->container->get('logger')->warning('Session was used while the request was declared stateless.');
         }
     }
-    public function onFinishRequest(FinishRequestEvent $event)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event
+     */
+    public function onFinishRequest($event)
     {
         if ($event->isMasterRequest()) {
             \array_pop($this->sessionUsageStack);
         }
     }
-    public function onSessionUsage() : void
+    /**
+     * @return void
+     */
+    public function onSessionUsage()
     {
         if (!$this->debug) {
             return;
@@ -149,7 +165,10 @@ abstract class AbstractSessionListener implements EventSubscriberInterface
         }
         throw new UnexpectedSessionUsageException('Session was used while the request was declared stateless.');
     }
-    public static function getSubscribedEvents() : array
+    /**
+     * @return mixed[]
+     */
+    public static function getSubscribedEvents()
     {
         return [
             KernelEvents::REQUEST => ['onKernelRequest', 128],

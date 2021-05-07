@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -35,32 +34,32 @@ final class BinaryOperatorSpacesFixer extends AbstractFixer implements Configura
     /**
      * @internal
      */
-    public const SINGLE_SPACE = 'single_space';
+    const SINGLE_SPACE = 'single_space';
     /**
      * @internal
      */
-    public const NO_SPACE = 'no_space';
+    const NO_SPACE = 'no_space';
     /**
      * @internal
      */
-    public const ALIGN = 'align';
+    const ALIGN = 'align';
     /**
      * @internal
      */
-    public const ALIGN_SINGLE_SPACE = 'align_single_space';
+    const ALIGN_SINGLE_SPACE = 'align_single_space';
     /**
      * @internal
      */
-    public const ALIGN_SINGLE_SPACE_MINIMAL = 'align_single_space_minimal';
+    const ALIGN_SINGLE_SPACE_MINIMAL = 'align_single_space_minimal';
     /**
      * @internal
      * @const Placeholder used as anchor for right alignment.
      */
-    public const ALIGN_PLACEHOLDER = "\2 ALIGNABLE%d \3";
+    const ALIGN_PLACEHOLDER = "\2 ALIGNABLE%d \3";
     /**
      * @var string[]
      */
-    private const SUPPORTED_OPERATORS = ['=', '*', '/', '%', '<', '>', '|', '^', '+', '-', '&', '&=', '&&', '||', '.=', '/=', '=>', '==', '>=', '===', '!=', '<>', '!==', '<=', 'and', 'or', 'xor', '-=', '%=', '*=', '|=', '+=', '<<', '<<=', '>>', '>>=', '^=', '**', '**=', '<=>', '??', '??='];
+    const SUPPORTED_OPERATORS = ['=', '*', '/', '%', '<', '>', '|', '^', '+', '-', '&', '&=', '&&', '||', '.=', '/=', '=>', '==', '>=', '===', '!=', '<>', '!==', '<=', 'and', 'or', 'xor', '-=', '%=', '*=', '|=', '+=', '<<', '<<=', '>>', '>>=', '^=', '**', '**=', '<=>', '??', '??='];
     /**
      * Keep track of the deepest level ever achieved while
      * parsing the code. Used later to replace alignment
@@ -92,16 +91,19 @@ final class BinaryOperatorSpacesFixer extends AbstractFixer implements Configura
     private $operators = [];
     /**
      * {@inheritdoc}
+     * @param mixed[] $configuration
+     * @return void
      */
-    public function configure(array $configuration) : void
+    public function configure($configuration)
     {
         parent::configure($configuration);
         $this->operators = $this->resolveOperatorsFromConfig();
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Binary operators should be surrounded by space as configured.', [new CodeSample("<?php\n\$a= 1  + \$b^ \$d !==  \$e or   \$f;\n"), new CodeSample('<?php
 $aa=  1;
@@ -147,22 +149,28 @@ $array = [
      * {@inheritdoc}
      *
      * Must run after ArrayIndentationFixer, ArraySyntaxFixer, ListSyntaxFixer, NoMultilineWhitespaceAroundDoubleArrowFixer, NoUnsetCastFixer, PowToExponentiationFixer, StandardizeNotEqualsFixer, StrictComparisonFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -32;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $this->tokensAnalyzer = new TokensAnalyzer($tokens);
         // last and first tokens cannot be an operator
@@ -190,8 +198,9 @@ $array = [
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('default', 'Default fix strategy.'))->setDefault(self::SINGLE_SPACE)->setAllowedValues(self::$allowedValues)->getOption(), (new FixerOptionBuilder('operators', 'Dictionary of `binary operator` => `fix strategy` values that differ from the default strategy.'))->setAllowedTypes(['array'])->setAllowedValues([static function (array $option) {
             foreach ($option as $operator => $value) {
@@ -205,7 +214,12 @@ $array = [
             return \true;
         }])->setDefault([])->getOption()]);
     }
-    private function fixWhiteSpaceAroundOperator(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function fixWhiteSpaceAroundOperator($tokens, $index)
     {
         $tokenContent = \strtolower($tokens[$index]->getContent());
         if (!\array_key_exists($tokenContent, $this->operators)) {
@@ -234,7 +248,12 @@ $array = [
         }
         $tokens->insertAt($index + 1, new Token([\T_WHITESPACE, ' ']));
     }
-    private function fixWhiteSpaceAroundOperatorToSingleSpace(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function fixWhiteSpaceAroundOperatorToSingleSpace($tokens, $index)
     {
         // fix white space after operator
         if ($tokens[$index + 1]->isWhitespace()) {
@@ -255,7 +274,12 @@ $array = [
             $tokens->insertAt($index, new Token([\T_WHITESPACE, ' ']));
         }
     }
-    private function fixWhiteSpaceAroundOperatorToNoSpace(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function fixWhiteSpaceAroundOperatorToNoSpace($tokens, $index)
     {
         // fix white space after operator
         if ($tokens[$index + 1]->isWhitespace()) {
@@ -274,8 +298,10 @@ $array = [
     }
     /**
      * @return false|int index of T_DECLARE where the `=` belongs to or `false`
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
      */
-    private function isEqualPartOfDeclareStatement(Tokens $tokens, int $index)
+    private function isEqualPartOfDeclareStatement($tokens, $index)
     {
         $prevMeaningfulIndex = $tokens->getPrevMeaningfulToken($index);
         if ($tokens[$prevMeaningfulIndex]->isGivenKind(\T_STRING)) {
@@ -290,9 +316,9 @@ $array = [
         return \false;
     }
     /**
-     * @return array<string, string>
+     * @return mixed[]
      */
-    private function resolveOperatorsFromConfig() : array
+    private function resolveOperatorsFromConfig()
     {
         $operators = [];
         if (null !== $this->configuration['default']) {
@@ -316,8 +342,10 @@ $array = [
     // Alignment logic related methods
     /**
      * @param array<string, string> $toAlign
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fixAlignment(Tokens $tokens, array $toAlign) : void
+    private function fixAlignment($tokens, array $toAlign)
     {
         $this->deepestLevel = 0;
         $this->currentLevel = 0;
@@ -362,7 +390,14 @@ $array = [
             $tokens->setCode($this->replacePlaceholders($tokensClone, $alignStrategy));
         }
     }
-    private function injectAlignmentPlaceholders(Tokens $tokens, int $startAt, int $endAt, string $tokenContent) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startAt
+     * @param int $endAt
+     * @param string $tokenContent
+     */
+    private function injectAlignmentPlaceholders($tokens, $startAt, $endAt, $tokenContent)
     {
         for ($index = $startAt; $index < $endAt; ++$index) {
             $token = $tokens[$index];
@@ -389,7 +424,13 @@ $array = [
             }
         }
     }
-    private function injectAlignmentPlaceholdersForArrow(Tokens $tokens, int $startAt, int $endAt) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startAt
+     * @param int $endAt
+     */
+    private function injectAlignmentPlaceholdersForArrow($tokens, $startAt, $endAt)
     {
         for ($index = $startAt; $index < $endAt; ++$index) {
             $token = $tokens[$index];
@@ -448,7 +489,13 @@ $array = [
             }
         }
     }
-    private function injectArrayAlignmentPlaceholders(Tokens $tokens, int $from, int $until) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $from
+     * @param int $until
+     */
+    private function injectArrayAlignmentPlaceholders($tokens, $from, $until)
     {
         // Only inject placeholders for multi-line arrays
         if ($tokens->isPartialCodeMultiline($from, $until)) {
@@ -458,7 +505,13 @@ $array = [
             --$this->currentLevel;
         }
     }
-    private function fixWhiteSpaceBeforeOperator(Tokens $tokens, int $index, string $alignStrategy) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @param string $alignStrategy
+     */
+    private function fixWhiteSpaceBeforeOperator($tokens, $index, $alignStrategy)
     {
         // fix white space after operator is not needed as BinaryOperatorSpacesFixer took care of this (if strategy is _not_ ALIGN)
         if (!$tokens[$index - 1]->isWhitespace()) {
@@ -475,8 +528,11 @@ $array = [
     }
     /**
      * Look for group of placeholders and provide vertical alignment.
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param string $alignStrategy
+     * @return string
      */
-    private function replacePlaceholders(Tokens $tokens, string $alignStrategy) : string
+    private function replacePlaceholders($tokens, $alignStrategy)
     {
         $tmpCode = $tokens->generateCode();
         for ($j = 0; $j <= $this->deepestLevel; ++$j) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection\CompilerPass;
 
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Arrays\DisallowLongArraySyntaxSniff;
@@ -60,7 +59,7 @@ final class RemoveMutualCheckersCompilerPass implements CompilerPassInterface
      *
      * @var string[][]
      */
-    private const DUPLICATED_CHECKER_GROUPS = [
+    const DUPLICATED_CHECKER_GROUPS = [
         [IndentationTypeFixer::class, DisallowTabIndentSniff::class],
         [IndentationTypeFixer::class, DisallowSpaceIndentSniff::class],
         [StrictComparisonFixer::class, 'ECSPrefix20210507\\SlevomatCodingStandard\\Sniffs\\Operators\\DisallowEqualOperatorsSniff'],
@@ -99,7 +98,11 @@ final class RemoveMutualCheckersCompilerPass implements CompilerPassInterface
         [NoClosingTagFixer::class, ClosingTagSniff::class],
         [SingleClassElementPerStatementFixer::class, PropertyDeclarationSniff::class],
     ];
-    public function process(ContainerBuilder $containerBuilder) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
+     */
+    public function process($containerBuilder)
     {
         $checkersToRemove = $this->resolveCheckersToRemove($containerBuilder->getServiceIds());
         $definitions = $containerBuilder->getDefinitions();
@@ -111,9 +114,9 @@ final class RemoveMutualCheckersCompilerPass implements CompilerPassInterface
     }
     /**
      * @param string[] $checkers
-     * @return string[]
+     * @return mixed[]
      */
-    private function resolveCheckersToRemove(array $checkers) : array
+    private function resolveCheckersToRemove(array $checkers)
     {
         $checkers = \array_flip($checkers);
         $checkersToRemove = [];
@@ -131,8 +134,9 @@ final class RemoveMutualCheckersCompilerPass implements CompilerPassInterface
     /**
      * @param string[] $checkers
      * @param string[] $matchingCheckerGroup
+     * @return bool
      */
-    private function isMatch(array $checkers, array $matchingCheckerGroup) : bool
+    private function isMatch(array $checkers, array $matchingCheckerGroup)
     {
         $matchingCheckerGroupKeys = \array_flip($matchingCheckerGroup);
         $matchingCheckers = \array_intersect_key($matchingCheckerGroupKeys, $checkers);

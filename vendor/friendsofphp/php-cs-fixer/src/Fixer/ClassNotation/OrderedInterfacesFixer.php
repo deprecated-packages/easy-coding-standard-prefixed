@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,54 +27,61 @@ use PhpCsFixer\Tokenizer\Tokens;
 final class OrderedInterfacesFixer extends AbstractFixer implements ConfigurableFixerInterface
 {
     /** @internal */
-    public const OPTION_DIRECTION = 'direction';
+    const OPTION_DIRECTION = 'direction';
     /** @internal */
-    public const OPTION_ORDER = 'order';
+    const OPTION_ORDER = 'order';
     /** @internal */
-    public const DIRECTION_ASCEND = 'ascend';
+    const DIRECTION_ASCEND = 'ascend';
     /** @internal */
-    public const DIRECTION_DESCEND = 'descend';
+    const DIRECTION_DESCEND = 'descend';
     /** @internal */
-    public const ORDER_ALPHA = 'alpha';
+    const ORDER_ALPHA = 'alpha';
     /** @internal */
-    public const ORDER_LENGTH = 'length';
+    const ORDER_LENGTH = 'length';
     /**
      * Array of supported directions in configuration.
      *
      * @var string[]
      */
-    private const SUPPORTED_DIRECTION_OPTIONS = [self::DIRECTION_ASCEND, self::DIRECTION_DESCEND];
+    const SUPPORTED_DIRECTION_OPTIONS = [self::DIRECTION_ASCEND, self::DIRECTION_DESCEND];
     /**
      * Array of supported orders in configuration.
      *
      * @var string[]
      */
-    private const SUPPORTED_ORDER_OPTIONS = [self::ORDER_ALPHA, self::ORDER_LENGTH];
+    const SUPPORTED_ORDER_OPTIONS = [self::ORDER_ALPHA, self::ORDER_LENGTH];
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Orders the interfaces in an `implements` or `interface extends` clause.', [new CodeSample("<?php\n\nfinal class ExampleA implements Gamma, Alpha, Beta {}\n\ninterface ExampleB extends Gamma, Alpha, Beta {}\n"), new CodeSample("<?php\n\nfinal class ExampleA implements Gamma, Alpha, Beta {}\n\ninterface ExampleB extends Gamma, Alpha, Beta {}\n", [self::OPTION_DIRECTION => self::DIRECTION_DESCEND]), new CodeSample("<?php\n\nfinal class ExampleA implements MuchLonger, Short, Longer {}\n\ninterface ExampleB extends MuchLonger, Short, Longer {}\n", [self::OPTION_ORDER => self::ORDER_LENGTH]), new CodeSample("<?php\n\nfinal class ExampleA implements MuchLonger, Short, Longer {}\n\ninterface ExampleB extends MuchLonger, Short, Longer {}\n", [self::OPTION_ORDER => self::ORDER_LENGTH, self::OPTION_DIRECTION => self::DIRECTION_DESCEND])], null, "Risky for `implements` when specifying both an interface and its parent interface, because PHP doesn't break on `parent, child` but does on `child, parent`.");
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_IMPLEMENTS) || $tokens->isAllTokenKindsFound([\T_INTERFACE, \T_EXTENDS]);
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(\T_IMPLEMENTS)) {
@@ -146,8 +152,9 @@ final class OrderedInterfacesFixer extends AbstractFixer implements Configurable
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder(self::OPTION_ORDER, 'How the interfaces should be ordered'))->setAllowedValues(self::SUPPORTED_ORDER_OPTIONS)->setDefault(self::ORDER_ALPHA)->getOption(), (new FixerOptionBuilder(self::OPTION_DIRECTION, 'Which direction the interfaces should be ordered'))->setAllowedValues(self::SUPPORTED_DIRECTION_OPTIONS)->setDefault(self::DIRECTION_ASCEND)->getOption()]);
     }

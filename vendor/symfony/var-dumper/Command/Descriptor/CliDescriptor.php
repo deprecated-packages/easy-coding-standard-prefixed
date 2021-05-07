@@ -28,12 +28,21 @@ class CliDescriptor implements \ECSPrefix20210507\Symfony\Component\VarDumper\Co
     private $dumper;
     private $lastIdentifier;
     private $supportsHref;
-    public function __construct(CliDumper $dumper)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\CliDumper $dumper
+     */
+    public function __construct($dumper)
     {
         $this->dumper = $dumper;
         $this->supportsHref = \method_exists(OutputFormatterStyle::class, 'setHref');
     }
-    public function describe(OutputInterface $output, Data $data, array $context, int $clientId) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data $data
+     * @param int $clientId
+     */
+    public function describe($output, $data, array $context, $clientId)
     {
         $io = $output instanceof SymfonyStyle ? $output : new SymfonyStyle(new ArrayInput([]), $output);
         $this->dumper->setColors($output->isDecorated());
@@ -58,12 +67,12 @@ class CliDescriptor implements \ECSPrefix20210507\Symfony\Component\VarDumper\Co
         if (isset($context['source'])) {
             $source = $context['source'];
             $sourceInfo = \sprintf('%s on line %d', $source['name'], $source['line']);
-            $fileLink = $source['file_link'] ?? null;
+            $fileLink = isset($source['file_link']) ? $source['file_link'] : null;
             if ($this->supportsHref && $fileLink) {
                 $sourceInfo = \sprintf('<href=%s>%s</>', $fileLink, $sourceInfo);
             }
             $rows[] = ['source', $sourceInfo];
-            $file = $source['file_relative'] ?? $source['file'];
+            $file = isset($source['file_relative']) ? $source['file_relative'] : $source['file'];
             $rows[] = ['file', $file];
         }
         $io->table([], $rows);

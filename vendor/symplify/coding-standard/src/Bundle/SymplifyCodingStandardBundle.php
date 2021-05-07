@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\Bundle;
 
 use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,11 +12,18 @@ use Symplify\CodingStandard\DependencyInjection\Extension\SymplifyCodingStandard
  */
 final class SymplifyCodingStandardBundle extends Bundle
 {
-    public function build(ContainerBuilder $containerBuilder) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
+     */
+    public function build($containerBuilder)
     {
         $containerBuilder->addCompilerPass(new AutowireArrayParameterCompilerPass());
     }
-    protected function createContainerExtension() : SymplifyCodingStandardExtension
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ExtensionInterface|null
+     */
+    protected function createContainerExtension()
     {
         return new SymplifyCodingStandardExtension();
     }

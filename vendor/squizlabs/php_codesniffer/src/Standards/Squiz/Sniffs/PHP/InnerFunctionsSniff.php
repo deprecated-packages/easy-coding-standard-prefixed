@@ -32,7 +32,7 @@ class InnerFunctionsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $function = $phpcsFile->getCondition($stackPtr, \T_FUNCTION);

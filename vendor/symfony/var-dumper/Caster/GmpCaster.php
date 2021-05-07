@@ -21,7 +21,14 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class GmpCaster
 {
-    public static function castGmp(\GMP $gmp, array $a, Stub $stub, bool $isNested, int $filter) : array
+    /**
+     * @param \GMP $gmp
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     * @param int $filter
+     * @return mixed[]
+     */
+    public static function castGmp($gmp, array $a, $stub, $isNested, $filter)
     {
         $a[\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'value'] = new \ECSPrefix20210507\Symfony\Component\VarDumper\Caster\ConstStub(\gmp_strval($gmp), \gmp_strval($gmp));
         return $a;

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -57,7 +56,12 @@ abstract class AbstractFixer implements FixerInterface
             $this->whitespacesConfig = $this->getDefaultWhitespacesFixerConfig();
         }
     }
-    public final function fix(\SplFileInfo $file, Tokens $tokens) : void
+    /**
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     */
+    public final function fix($file, $tokens)
     {
         if ($this instanceof ConfigurableFixerInterface && null === $this->configuration) {
             throw new RequiredFixerConfigurationException($this->getName(), 'Configuration is required.');
@@ -68,15 +72,17 @@ abstract class AbstractFixer implements FixerInterface
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \false;
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getName() : string
+    public function getName()
     {
         $nameParts = \explode('\\', static::class);
         $name = \substr(\end($nameParts), 0, -\strlen('Fixer'));
@@ -84,19 +90,26 @@ abstract class AbstractFixer implements FixerInterface
     }
     /**
      * {@inheritdoc}
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
+     * @param \SplFileInfo $file
+     * @return bool
      */
-    public function supports(\SplFileInfo $file) : bool
+    public function supports($file)
     {
         return \true;
     }
-    public function configure(array $configuration) : void
+    /**
+     * @param mixed[] $configuration
+     * @return void
+     */
+    public function configure($configuration)
     {
         if (!$this instanceof ConfigurableFixerInterface) {
             throw new \LogicException('Cannot configure using Abstract parent, child not implementing "PhpCsFixer\\Fixer\\ConfigurableFixerInterface".');
@@ -120,7 +133,10 @@ abstract class AbstractFixer implements FixerInterface
             throw new InvalidFixerConfigurationException($this->getName(), \sprintf('Invalid configuration: %s', $exception->getMessage()), $exception);
         }
     }
-    public function getConfigurationDefinition() : FixerConfigurationResolverInterface
+    /**
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+     */
+    public function getConfigurationDefinition()
     {
         if (!$this instanceof ConfigurableFixerInterface) {
             throw new \LogicException(\sprintf('Cannot get configuration definition using Abstract parent, child "%s" not implementing "PhpCsFixer\\Fixer\\ConfigurableFixerInterface".', static::class));
@@ -130,22 +146,37 @@ abstract class AbstractFixer implements FixerInterface
         }
         return $this->configurationDefinition;
     }
-    public function setWhitespacesConfig(\PhpCsFixer\WhitespacesFixerConfig $config) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\WhitespacesFixerConfig $config
+     */
+    public function setWhitespacesConfig($config)
     {
         if (!$this instanceof WhitespacesAwareFixerInterface) {
             throw new \LogicException('Cannot run method for class not implementing "PhpCsFixer\\Fixer\\WhitespacesAwareFixerInterface".');
         }
         $this->whitespacesConfig = $config;
     }
-    protected abstract function applyFix(\SplFileInfo $file, Tokens $tokens) : void;
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    /**
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     */
+    protected abstract function applyFix($file, $tokens);
+    /**
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
+     */
+    protected function createConfigurationDefinition()
     {
         if (!$this instanceof ConfigurableFixerInterface) {
             throw new \LogicException('Cannot create configuration definition using Abstract parent, child not implementing "PhpCsFixer\\Fixer\\ConfigurableFixerInterface".');
         }
         throw new \LogicException('Not implemented.');
     }
-    private function getDefaultWhitespacesFixerConfig() : \PhpCsFixer\WhitespacesFixerConfig
+    /**
+     * @return \PhpCsFixer\WhitespacesFixerConfig
+     */
+    private function getDefaultWhitespacesFixerConfig()
     {
         static $defaultWhitespacesFixerConfig = null;
         if (null === $defaultWhitespacesFixerConfig) {

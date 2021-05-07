@@ -23,7 +23,7 @@ use ECSPrefix20210507\Symfony\Contracts\HttpClient\Test\HttpClientTestCase;
  */
 interface HttpClientInterface
 {
-    public const OPTIONS_DEFAULTS = [
+    const OPTIONS_DEFAULTS = [
         'auth_basic' => null,
         // array|string - an array containing the username as first value, and optionally the
         //   password as the second one; or string like username:password - enabling HTTP Basic
@@ -98,13 +98,17 @@ interface HttpClientInterface
      * when an unsupported option is passed.
      *
      * @throws TransportExceptionInterface When an unsupported option is passed
+     * @param string $method
+     * @param string $url
+     * @return \ECSPrefix20210507\Symfony\Contracts\HttpClient\ResponseInterface
      */
-    public function request(string $method, string $url, array $options = []) : \ECSPrefix20210507\Symfony\Contracts\HttpClient\ResponseInterface;
+    public function request($method, $url, array $options = []);
     /**
      * Yields responses chunk by chunk as they complete.
      *
      * @param ResponseInterface|ResponseInterface[]|iterable $responses One or more responses created by the current HTTP client
-     * @param float|null                                     $timeout   The idle timeout before yielding timeout chunks
+     * @param float $timeout The idle timeout before yielding timeout chunks
+     * @return \ECSPrefix20210507\Symfony\Contracts\HttpClient\ResponseStreamInterface
      */
-    public function stream($responses, float $timeout = null) : \ECSPrefix20210507\Symfony\Contracts\HttpClient\ResponseStreamInterface;
+    public function stream($responses, $timeout = null);
 }

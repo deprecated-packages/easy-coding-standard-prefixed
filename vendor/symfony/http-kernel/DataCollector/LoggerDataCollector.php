@@ -28,7 +28,11 @@ class LoggerDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
     private $containerPathPrefix;
     private $currentRequest;
     private $requestStack;
-    public function __construct($logger = null, string $containerPathPrefix = null, RequestStack $requestStack = null)
+    /**
+     * @param string $containerPathPrefix
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
+     */
+    public function __construct($logger = null, $containerPathPrefix = null, $requestStack = null)
     {
         if (null !== $logger && $logger instanceof DebugLoggerInterface) {
             $this->logger = $logger;
@@ -38,8 +42,11 @@ class LoggerDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
+     * @param \Throwable $exception
      */
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    public function collect($request, $response, $exception = null)
     {
         $this->currentRequest = $this->requestStack && $this->requestStack->getMasterRequest() !== $request ? $request : null;
     }
@@ -71,31 +78,31 @@ class LoggerDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
     }
     public function getLogs()
     {
-        return $this->data['logs'] ?? [];
+        return isset($this->data['logs']) ? $this->data['logs'] : [];
     }
     public function getPriorities()
     {
-        return $this->data['priorities'] ?? [];
+        return isset($this->data['priorities']) ? $this->data['priorities'] : [];
     }
     public function countErrors()
     {
-        return $this->data['error_count'] ?? 0;
+        return isset($this->data['error_count']) ? $this->data['error_count'] : 0;
     }
     public function countDeprecations()
     {
-        return $this->data['deprecation_count'] ?? 0;
+        return isset($this->data['deprecation_count']) ? $this->data['deprecation_count'] : 0;
     }
     public function countWarnings()
     {
-        return $this->data['warning_count'] ?? 0;
+        return isset($this->data['warning_count']) ? $this->data['warning_count'] : 0;
     }
     public function countScreams()
     {
-        return $this->data['scream_count'] ?? 0;
+        return isset($this->data['scream_count']) ? $this->data['scream_count'] : 0;
     }
     public function getCompilerLogs()
     {
-        return $this->cloneVar($this->getContainerCompilerLogs($this->data['compiler_logs_filepath'] ?? null));
+        return $this->cloneVar($this->getContainerCompilerLogs(isset($this->data['compiler_logs_filepath']) ? $this->data['compiler_logs_filepath'] : null));
     }
     /**
      * {@inheritdoc}
@@ -104,7 +111,10 @@ class LoggerDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
     {
         return 'logger';
     }
-    private function getContainerDeprecationLogs() : array
+    /**
+     * @return mixed[]
+     */
+    private function getContainerDeprecationLogs()
     {
         if (null === $this->containerPathPrefix || !\is_file($file = $this->containerPathPrefix . 'Deprecations.log')) {
             return [];
@@ -126,7 +136,11 @@ class LoggerDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
         }
         return $logs;
     }
-    private function getContainerCompilerLogs(string $compilerLogsFilepath = null) : array
+    /**
+     * @param string $compilerLogsFilepath
+     * @return mixed[]
+     */
+    private function getContainerCompilerLogs($compilerLogsFilepath = null)
     {
         if (!\is_file($compilerLogsFilepath)) {
             return [];
@@ -173,7 +187,10 @@ class LoggerDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
         }
         return \array_values($sanitizedLogs);
     }
-    private function isSilencedOrDeprecationErrorLog(array $log) : bool
+    /**
+     * @return bool
+     */
+    private function isSilencedOrDeprecationErrorLog(array $log)
     {
         if (!isset($log['context']['exception'])) {
             return \false;
@@ -187,7 +204,10 @@ class LoggerDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
         }
         return \false;
     }
-    private function computeErrorsCount(array $containerDeprecationLogs) : array
+    /**
+     * @return mixed[]
+     */
+    private function computeErrorsCount(array $containerDeprecationLogs)
     {
         $silencedLogs = [];
         $count = ['error_count' => $this->logger->countErrors($this->currentRequest), 'deprecation_count' => 0, 'warning_count' => 0, 'scream_count' => 0, 'priorities' => []];

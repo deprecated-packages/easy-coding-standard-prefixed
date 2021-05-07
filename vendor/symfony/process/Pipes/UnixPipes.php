@@ -23,7 +23,12 @@ class UnixPipes extends \ECSPrefix20210507\Symfony\Component\Process\Pipes\Abstr
     private $ttyMode;
     private $ptyMode;
     private $haveReadSupport;
-    public function __construct(?bool $ttyMode, bool $ptyMode, $input, bool $haveReadSupport)
+    /**
+     * @param bool|null $ttyMode
+     * @param bool $ptyMode
+     * @param bool $haveReadSupport
+     */
+    public function __construct($ttyMode, $ptyMode, $input, $haveReadSupport)
     {
         $this->ttyMode = $ttyMode;
         $this->ptyMode = $ptyMode;
@@ -44,8 +49,9 @@ class UnixPipes extends \ECSPrefix20210507\Symfony\Component\Process\Pipes\Abstr
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getDescriptors() : array
+    public function getDescriptors()
     {
         if (!$this->haveReadSupport) {
             $nullstream = \fopen('/dev/null', 'c');
@@ -66,15 +72,19 @@ class UnixPipes extends \ECSPrefix20210507\Symfony\Component\Process\Pipes\Abstr
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getFiles() : array
+    public function getFiles()
     {
         return [];
     }
     /**
      * {@inheritdoc}
+     * @param bool $blocking
+     * @param bool $close
+     * @return mixed[]
      */
-    public function readAndWrite(bool $blocking, bool $close = \false) : array
+    public function readAndWrite($blocking, $close = \false)
     {
         $this->unblock();
         $w = $this->write();
@@ -113,15 +123,17 @@ class UnixPipes extends \ECSPrefix20210507\Symfony\Component\Process\Pipes\Abstr
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function haveReadSupport() : bool
+    public function haveReadSupport()
     {
         return $this->haveReadSupport;
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function areOpen() : bool
+    public function areOpen()
     {
         return (bool) $this->pipes;
     }

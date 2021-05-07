@@ -32,7 +32,7 @@ class ArrayBracketSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr]['code'] === T_OPEN_SQUARE_BRACKET && isset($tokens[$stackPtr]['bracket_closer']) === \false || $tokens[$stackPtr]['code'] === T_CLOSE_SQUARE_BRACKET && isset($tokens[$stackPtr]['bracket_opener']) === \false) {

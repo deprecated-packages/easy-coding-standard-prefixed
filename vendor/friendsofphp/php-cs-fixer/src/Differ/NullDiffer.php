@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -19,8 +18,12 @@ final class NullDiffer implements \PhpCsFixer\Differ\DifferInterface
 {
     /**
      * {@inheritdoc}
+     * @param \SplFileInfo|null $file
+     * @param string $old
+     * @param string $new
+     * @return string
      */
-    public function diff(string $old, string $new, ?\SplFileInfo $file = null) : string
+    public function diff($old, $new, $file = null)
     {
         return '';
     }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -36,7 +35,12 @@ final class FileFilterIterator extends \FilterIterator
      * @var array<string,bool>
      */
     private $visitedElements = [];
-    public function __construct(\Traversable $iterator, ?EventDispatcherInterface $eventDispatcher, CacheManagerInterface $cacheManager)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventDispatcherInterface|null $eventDispatcher
+     * @param \Traversable $iterator
+     * @param \PhpCsFixer\Cache\CacheManagerInterface $cacheManager
+     */
+    public function __construct($iterator, $eventDispatcher, $cacheManager)
     {
         if (!$iterator instanceof \Iterator) {
             $iterator = new \IteratorIterator($iterator);
@@ -45,7 +49,10 @@ final class FileFilterIterator extends \FilterIterator
         $this->eventDispatcher = $eventDispatcher;
         $this->cacheManager = $cacheManager;
     }
-    public function accept() : bool
+    /**
+     * @return bool
+     */
+    public function accept()
     {
         $file = $this->current();
         if (!$file instanceof \SplFileInfo) {
@@ -67,7 +74,12 @@ final class FileFilterIterator extends \FilterIterator
         }
         return \true;
     }
-    private function dispatchEvent(string $name, Event $event) : void
+    /**
+     * @return void
+     * @param string $name
+     * @param \ECSPrefix20210507\Symfony\Contracts\EventDispatcher\Event $event
+     */
+    private function dispatchEvent($name, $event)
     {
         if (null === $this->eventDispatcher) {
             return;

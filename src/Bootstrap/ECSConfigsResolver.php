@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Bootstrap;
 
 use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
@@ -22,7 +21,11 @@ final class ECSConfigsResolver
         $easyCodingStandardSetProvider = new EasyCodingStandardSetProvider(new ConstantReflectionSetFactory());
         $this->setAwareConfigResolver = new SetAwareConfigResolver($easyCodingStandardSetProvider);
     }
-    public function resolveFromInput(InputInterface $input) : BootstrapConfigs
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @return \Symplify\SetConfigResolver\ValueObject\Bootstrap\BootstrapConfigs
+     */
+    public function resolveFromInput($input)
     {
         $configFileInfos = [];
         $mainConfigFileInfo = $this->setAwareConfigResolver->resolveFromInputWithFallback($input, ['ecs.php']);

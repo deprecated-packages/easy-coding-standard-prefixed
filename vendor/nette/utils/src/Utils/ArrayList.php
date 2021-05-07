@@ -1,10 +1,5 @@
 <?php
 
-/**
- * This file is part of the Nette Framework (https://nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
- */
-declare (strict_types=1);
 namespace ECSPrefix20210507\Nette\Utils;
 
 use ECSPrefix20210507\Nette;
@@ -18,15 +13,17 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
     private $list = [];
     /**
      * Returns an iterator over all items.
+     * @return \ArrayIterator
      */
-    public function getIterator() : \ArrayIterator
+    public function getIterator()
     {
         return new \ArrayIterator($this->list);
     }
     /**
      * Returns items count.
+     * @return int
      */
-    public function count() : int
+    public function count()
     {
         return \count($this->list);
     }
@@ -35,8 +32,9 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
      * @param  int|null  $index
      * @param  mixed  $value
      * @throws Nette\OutOfRangeException
+     * @return void
      */
-    public function offsetSet($index, $value) : void
+    public function offsetSet($index, $value)
     {
         if ($index === null) {
             $this->list[] = $value;
@@ -62,8 +60,9 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Determines whether a item exists.
      * @param  int  $index
+     * @return bool
      */
-    public function offsetExists($index) : bool
+    public function offsetExists($index)
     {
         return \is_int($index) && $index >= 0 && $index < \count($this->list);
     }
@@ -71,8 +70,9 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
      * Removes the element at the specified position in this list.
      * @param  int  $index
      * @throws Nette\OutOfRangeException
+     * @return void
      */
-    public function offsetUnset($index) : void
+    public function offsetUnset($index)
     {
         if (!\is_int($index) || $index < 0 || $index >= \count($this->list)) {
             throw new Nette\OutOfRangeException('Offset invalid or out of range');
@@ -82,8 +82,9 @@ class ArrayList implements \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Prepends a item.
      * @param  mixed  $value
+     * @return void
      */
-    public function prepend($value) : void
+    public function prepend($value)
     {
         $first = \array_slice($this->list, 0, 1);
         $this->offsetSet(0, $value);

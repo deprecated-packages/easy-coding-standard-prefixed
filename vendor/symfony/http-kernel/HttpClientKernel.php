@@ -21,6 +21,14 @@ use ECSPrefix20210507\Symfony\Component\Mime\Part\TextPart;
 use ECSPrefix20210507\Symfony\Contracts\HttpClient\HttpClientInterface;
 // Help opcache.preload discover always-needed symbols
 \class_exists(ResponseHeaderBag::class);
+class AnonymousFor_HttpClientKernel extends ResponseHeaderBag
+{
+    protected function computeCacheControlValue() : string
+    {
+        return $this->getCacheControlHeader();
+        // preserve the original value
+    }
+}
 /**
  * An implementation of a Symfony HTTP kernel using a "real" HTTP client.
  *
@@ -29,14 +37,23 @@ use ECSPrefix20210507\Symfony\Contracts\HttpClient\HttpClientInterface;
 final class HttpClientKernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface
 {
     private $client;
-    public function __construct(HttpClientInterface $client = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Contracts\HttpClient\HttpClientInterface $client
+     */
+    public function __construct($client = null)
     {
         if (null === $client && !\class_exists(HttpClient::class)) {
             throw new \LogicException(\sprintf('You cannot use "%s" as the HttpClient component is not installed. Try running "composer require symfony/http-client".', __CLASS__));
         }
-        $this->client = $client ?? HttpClient::create();
+        $this->client = isset($client) ? $client : HttpClient::create();
     }
-    public function handle(Request $request, int $type = \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, bool $catch = \true) : Response
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param int $type
+     * @param bool $catch
+     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response
+     */
+    public function handle($request, $type = \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, $catch = \true)
     {
         $headers = $this->getHeaders($request);
         $body = '';
@@ -49,17 +66,14 @@ final class HttpClientKernel implements \ECSPrefix20210507\Symfony\Component\Htt
         $response->headers->remove('X-Body-File');
         $response->headers->remove('X-Body-Eval');
         $response->headers->remove('X-Content-Digest');
-        $response->headers = new class($response->headers->all()) extends ResponseHeaderBag
-        {
-            protected function computeCacheControlValue() : string
-            {
-                return $this->getCacheControlHeader();
-                // preserve the original value
-            }
-        };
+        $response->headers = new AnonymousFor_HttpClientKernel($response->headers->all());
         return $response;
     }
-    private function getBody(Request $request) : ?AbstractPart
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\Mime\Part\AbstractPart|null
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     */
+    private function getBody($request)
     {
         if (\in_array($request->getMethod(), ['GET', 'HEAD'])) {
             return null;
@@ -76,7 +90,11 @@ final class HttpClientKernel implements \ECSPrefix20210507\Symfony\Component\Htt
         }
         return new FormDataPart($fields);
     }
-    private function getHeaders(Request $request) : array
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @return mixed[]
+     */
+    private function getHeaders($request)
     {
         $headers = [];
         foreach ($request->headers as $key => $value) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -40,8 +39,10 @@ final class NoUnneededControlParenthesesFixer extends AbstractFixer implements C
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         $types = [];
         foreach (self::$loops as $loop) {
@@ -52,8 +53,9 @@ final class NoUnneededControlParenthesesFixer extends AbstractFixer implements C
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Removes unneeded parentheses around control statements.', [new CodeSample('<?php
 while ($x) { while ($y) { break (2); } }
@@ -79,15 +81,19 @@ yield(2);
      * {@inheritdoc}
      *
      * Must run before NoTrailingWhitespaceFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 30;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         // Checks if specific statements are set and uses them in this case.
         $loops = \array_intersect_key(self::$loops, \array_flip($this->configuration['statements']));
@@ -126,8 +132,9 @@ yield(2);
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('statements', 'List of control statements to fix.'))->setAllowedTypes(['array'])->setDefault(['break', 'clone', 'continue', 'echo_print', 'return', 'switch_case', 'yield'])->getOption()]);
     }

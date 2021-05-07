@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\Skipper\SkipCriteriaResolver;
 
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -15,14 +14,17 @@ final class SkippedClassAndCodesResolver
      * @var ParameterProvider
      */
     private $parameterProvider;
-    public function __construct(ParameterProvider $parameterProvider)
+    /**
+     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
+     */
+    public function __construct($parameterProvider)
     {
         $this->parameterProvider = $parameterProvider;
     }
     /**
-     * @return array<string, string[]|null>
+     * @return mixed[]
      */
-    public function resolve() : array
+    public function resolve()
     {
         if ($this->skippedClassAndCodes !== []) {
             return $this->skippedClassAndCodes;

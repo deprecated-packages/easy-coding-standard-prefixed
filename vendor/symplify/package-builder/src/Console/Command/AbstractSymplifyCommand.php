@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console\Command;
 
 use ECSPrefix20210507\Symfony\Component\Console\Command\Command;
@@ -35,8 +34,13 @@ abstract class AbstractSymplifyCommand extends Command
     }
     /**
      * @required
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Style\SymfonyStyle $symfonyStyle
+     * @param \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem
+     * @param \Symplify\SmartFileSystem\Finder\SmartFinder $smartFinder
+     * @param \Symplify\SmartFileSystem\FileSystemGuard $fileSystemGuard
      */
-    public function autowireAbstractSymplifyCommand(SymfonyStyle $symfonyStyle, SmartFileSystem $smartFileSystem, SmartFinder $smartFinder, FileSystemGuard $fileSystemGuard) : void
+    public function autowireAbstractSymplifyCommand($symfonyStyle, $smartFileSystem, $smartFinder, $fileSystemGuard)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->smartFileSystem = $smartFileSystem;

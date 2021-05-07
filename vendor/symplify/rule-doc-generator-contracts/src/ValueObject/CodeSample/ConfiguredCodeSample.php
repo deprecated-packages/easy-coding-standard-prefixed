@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject\CodeSample;
 
 use Symplify\RuleDocGenerator\Contract\CodeSampleInterface;
@@ -14,8 +13,10 @@ final class ConfiguredCodeSample extends AbstractCodeSample implements CodeSampl
     private $configuration = [];
     /**
      * @param array<string, mixed> $configuration
+     * @param string $badCode
+     * @param string $goodCode
      */
-    public function __construct(string $badCode, string $goodCode, array $configuration)
+    public function __construct($badCode, $goodCode, array $configuration)
     {
         if ($configuration === []) {
             $message = \sprintf('Configuration cannot be empty. Look for "%s"', $badCode);
@@ -25,9 +26,9 @@ final class ConfiguredCodeSample extends AbstractCodeSample implements CodeSampl
         parent::__construct($badCode, $goodCode);
     }
     /**
-     * @return array<string, mixed>
+     * @return mixed[]
      */
-    public function getConfiguration() : array
+    public function getConfiguration()
     {
         return $this->configuration;
     }

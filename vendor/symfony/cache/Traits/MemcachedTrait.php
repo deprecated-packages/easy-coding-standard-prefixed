@@ -37,7 +37,13 @@ trait MemcachedTrait
     {
         return \extension_loaded('memcached') && \version_compare(\phpversion('memcached'), '2.2.0', '>=');
     }
-    private function init(\Memcached $client, string $namespace, int $defaultLifetime, ?MarshallerInterface $marshaller)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface|null $marshaller
+     * @param \Memcached $client
+     * @param string $namespace
+     * @param int $defaultLifetime
+     */
+    private function init($client, $namespace, $defaultLifetime, $marshaller)
     {
         if (!static::isSupported()) {
             throw new CacheException('Memcached >= 2.2.0 is required.');
@@ -54,7 +60,7 @@ trait MemcachedTrait
         }
         parent::__construct($namespace, $defaultLifetime);
         $this->enableVersioning();
-        $this->marshaller = $marshaller ?? new DefaultMarshaller();
+        $this->marshaller = isset($marshaller) ? $marshaller : new DefaultMarshaller();
     }
     /**
      * Creates a Memcached instance.
@@ -99,9 +105,9 @@ trait MemcachedTrait
                 }
                 $params = \preg_replace_callback('#^memcached:(//)?(?:([^@]*+)@)?#', function ($m) use(&$username, &$password) {
                     if (!empty($m[2])) {
-                        [$username, $password] = \explode(':', $m[2], 2) + [1 => null];
+                        list($username, $password) = \explode(':', $m[2], 2) + [1 => null];
                     }
-                    return 'file:' . ($m[1] ?? '');
+                    return 'file:' . (isset($m[1]) ? $m[1] : '');
                 }, $dsn);
                 if (\false === ($params = \parse_url($params))) {
                     throw new InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s".', $dsn));
@@ -136,7 +142,7 @@ trait MemcachedTrait
                     $params['weight'] = $m[1];
                     $params['path'] = \substr($params['path'], 0, -\strlen($m[0]));
                 }
-                $params += ['host' => $params['host'] ?? $params['path'], 'port' => isset($params['host']) ? 11211 : null, 'weight' => 0];
+                $params += ['host' => isset($params['host']) ? $params['host'] : $params['path'], 'port' => isset($params['host']) ? 11211 : null, 'weight' => 0];
                 if ($query) {
                     $params += $query;
                     $options = $query + $options;
@@ -202,8 +208,9 @@ trait MemcachedTrait
     }
     /**
      * {@inheritdoc}
+     * @param int $lifetime
      */
-    protected function doSave(array $values, int $lifetime)
+    protected function doSave(array $values, $lifetime)
     {
         if (!($values = $this->marshaller->marshall($values, $failed))) {
             return $failed;
@@ -271,7 +278,10 @@ trait MemcachedTrait
         }
         throw new CacheException('MemcachedAdapter client error: ' . \strtolower($this->client->getResultMessage()));
     }
-    private function getClient() : \Memcached
+    /**
+     * @return \Memcached
+     */
+    private function getClient()
     {
         if ($this->client) {
             return $this->client;
@@ -285,11 +295,19 @@ trait MemcachedTrait
         }
         return $this->client = $this->lazyClient;
     }
-    private static function encodeKey(string $key) : string
+    /**
+     * @param string $key
+     * @return string
+     */
+    private static function encodeKey($key)
     {
         return \strtr($key, self::$RESERVED_MEMCACHED, self::$RESERVED_PSR6);
     }
-    private static function decodeKey(string $key) : string
+    /**
+     * @param string $key
+     * @return string
+     */
+    private static function decodeKey($key)
     {
         return \strtr($key, self::$RESERVED_PSR6, self::$RESERVED_MEMCACHED);
     }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Formatter;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -20,29 +19,29 @@ final class SnippetFormatter
      * @see https://regex101.com/r/MJTq5C/1
      * @var string
      */
-    private const DECLARE_REGEX = '#(declare\\(strict\\_types\\=1\\)\\;\\n)#ms';
+    const DECLARE_REGEX = '#(declare\\(strict\\_types\\=1\\)\\;\\n)#ms';
     /**
      * @see https://regex101.com/r/MJTq5C/3
      * @var string
      */
-    private const OPENING_TAG_REGEX = '#^\\<\\?php\\n#ms';
+    const OPENING_TAG_REGEX = '#^\\<\\?php\\n#ms';
     /**
      * @see https://regex101.com/r/MJTq5C/3
      * @var string
      */
-    private const OPENING_TAG_HERENOWDOC_REGEX = '#^\\<\\?php\\n#ms';
+    const OPENING_TAG_HERENOWDOC_REGEX = '#^\\<\\?php\\n#ms';
     /**
      * @var string
      */
-    private const CONTENT = 'content';
+    const CONTENT = 'content';
     /**
      * @var string
      */
-    private const OPENING = 'opening';
+    const OPENING = 'opening';
     /**
      * @var string
      */
-    private const CLOSING = 'closing';
+    const CLOSING = 'closing';
     /**
      * @var SmartFileSystem
      */
@@ -63,7 +62,13 @@ final class SnippetFormatter
      * @var bool
      */
     private $isPhp73OrAbove = \false;
-    public function __construct(SmartFileSystem $smartFileSystem, FixerFileProcessor $fixerFileProcessor, SniffFileProcessor $sniffFileProcessor, CurrentParentFileInfoProvider $currentParentFileInfoProvider)
+    /**
+     * @param \Symplify\SmartFileSystem\SmartFileSystem $smartFileSystem
+     * @param \Symplify\EasyCodingStandard\FixerRunner\Application\FixerFileProcessor $fixerFileProcessor
+     * @param \Symplify\EasyCodingStandard\SniffRunner\Application\SniffFileProcessor $sniffFileProcessor
+     * @param \Symplify\EasyCodingStandard\SnippetFormatter\Provider\CurrentParentFileInfoProvider $currentParentFileInfoProvider
+     */
+    public function __construct($smartFileSystem, $fixerFileProcessor, $sniffFileProcessor, $currentParentFileInfoProvider)
     {
         $this->smartFileSystem = $smartFileSystem;
         $this->fixerFileProcessor = $fixerFileProcessor;
@@ -71,7 +76,13 @@ final class SnippetFormatter
         $this->currentParentFileInfoProvider = $currentParentFileInfoProvider;
         $this->isPhp73OrAbove = \PHP_VERSION_ID >= 70300;
     }
-    public function format(SmartFileInfo $fileInfo, string $snippetRegex, string $kind) : string
+    /**
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $fileInfo
+     * @param string $snippetRegex
+     * @param string $kind
+     * @return string
+     */
+    public function format($fileInfo, $snippetRegex, $kind)
     {
         $this->currentParentFileInfoProvider->setParentFileInfo($fileInfo);
         return Strings::replace($fileInfo->getContents(), $snippetRegex, function ($match) use($kind) : string {
@@ -84,15 +95,22 @@ final class SnippetFormatter
     }
     /**
      * @param string[] $match
+     * @param string $kind
+     * @return string
      */
-    private function fixContentAndPreserveFormatting(array $match, string $kind) : string
+    private function fixContentAndPreserveFormatting(array $match, $kind)
     {
         if ($this->isPhp73OrAbove) {
             return \str_replace(\PHP_EOL, '', $match[self::OPENING]) . \PHP_EOL . $this->fixContent($match[self::CONTENT], $kind) . \str_replace(\PHP_EOL, '', $match[self::CLOSING]);
         }
         return \rtrim($match[self::OPENING], \PHP_EOL) . \PHP_EOL . $this->fixContent($match[self::CONTENT], $kind) . \ltrim($match[self::CLOSING], \PHP_EOL);
     }
-    private function fixContent(string $content, string $kind) : string
+    /**
+     * @param string $content
+     * @param string $kind
+     * @return string
+     */
+    private function fixContent($content, $kind)
     {
         $content = $this->isPhp73OrAbove ? $content : \trim($content);
         $temporaryFilePath = $this->createTemporaryFilePath($content);
@@ -122,19 +140,29 @@ final class SnippetFormatter
     }
     /**
      * It does not have any added value and only clutters the output
+     * @param string $content
+     * @return string
      */
-    private function removeOpeningTagAndStrictTypes(string $content) : string
+    private function removeOpeningTagAndStrictTypes($content)
     {
         $content = Strings::replace($content, self::DECLARE_REGEX, '');
         return $this->removeOpeningTag($content);
     }
-    private function createTemporaryFilePath(string $content) : string
+    /**
+     * @param string $content
+     * @return string
+     */
+    private function createTemporaryFilePath($content)
     {
         $key = \md5($content);
         $fileName = \sprintf('php-code-%s.php', $key);
         return \sys_get_temp_dir() . \DIRECTORY_SEPARATOR . 'ecs_temp' . \DIRECTORY_SEPARATOR . $fileName;
     }
-    private function removeOpeningTag(string $fileContent) : string
+    /**
+     * @param string $fileContent
+     * @return string
+     */
+    private function removeOpeningTag($fileContent)
     {
         return Strings::replace($fileContent, self::OPENING_TAG_REGEX, '$1');
     }

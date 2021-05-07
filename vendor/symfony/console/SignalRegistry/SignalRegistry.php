@@ -19,7 +19,11 @@ final class SignalRegistry
             \pcntl_async_signals(\true);
         }
     }
-    public function register(int $signal, callable $signalHandler) : void
+    /**
+     * @return void
+     * @param int $signal
+     */
+    public function register($signal, callable $signalHandler)
     {
         if (!isset($this->signalHandlers[$signal])) {
             $previousCallback = \pcntl_signal_get_handler($signal);
@@ -30,7 +34,10 @@ final class SignalRegistry
         $this->signalHandlers[$signal][] = $signalHandler;
         \pcntl_signal($signal, [$this, 'handle']);
     }
-    public static function isSupported() : bool
+    /**
+     * @return bool
+     */
+    public static function isSupported()
     {
         if (!\function_exists('pcntl_signal')) {
             return \false;
@@ -42,8 +49,10 @@ final class SignalRegistry
     }
     /**
      * @internal
+     * @return void
+     * @param int $signal
      */
-    public function handle(int $signal) : void
+    public function handle($signal)
     {
         $count = \count($this->signalHandlers[$signal]);
         foreach ($this->signalHandlers[$signal] as $i => $signalHandler) {

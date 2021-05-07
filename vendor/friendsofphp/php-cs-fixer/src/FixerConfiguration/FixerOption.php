@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -45,8 +44,13 @@ final class FixerOption implements \PhpCsFixer\FixerConfiguration\FixerOptionInt
     /**
      * @param mixed         $default
      * @param null|string[] $allowedTypes
+     * @param mixed[]|null $allowedValues
+     * @param \Closure|null $normalizer
+     * @param string $name
+     * @param string $description
+     * @param bool $isRequired
      */
-    public function __construct(string $name, string $description, bool $isRequired = \true, $default = null, ?array $allowedTypes = null, ?array $allowedValues = null, ?\Closure $normalizer = null)
+    public function __construct($name, $description, $isRequired = \true, $default = null, $allowedTypes = null, $allowedValues = null, $normalizer = null)
     {
         if ($isRequired && null !== $default) {
             throw new \LogicException('Required options cannot have a default value.');
@@ -70,22 +74,25 @@ final class FixerOption implements \PhpCsFixer\FixerConfiguration\FixerOptionInt
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getName() : string
+    public function getName()
     {
         return $this->name;
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getDescription() : string
+    public function getDescription()
     {
         return $this->description;
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function hasDefault() : bool
+    public function hasDefault()
     {
         return !$this->isRequired;
     }
@@ -101,22 +108,25 @@ final class FixerOption implements \PhpCsFixer\FixerConfiguration\FixerOptionInt
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]|null
      */
-    public function getAllowedTypes() : ?array
+    public function getAllowedTypes()
     {
         return $this->allowedTypes;
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]|null
      */
-    public function getAllowedValues() : ?array
+    public function getAllowedValues()
     {
         return $this->allowedValues;
     }
     /**
      * {@inheritdoc}
+     * @return \Closure|null
      */
-    public function getNormalizer() : ?\Closure
+    public function getNormalizer()
     {
         return $this->normalizer;
     }
@@ -134,8 +144,10 @@ final class FixerOption implements \PhpCsFixer\FixerConfiguration\FixerOptionInt
      * all elements are still referenced.
      *
      * See {@see https://bugs.php.net/bug.php?id=69639 Bug #69639} for details.
+     * @param \Closure $closure
+     * @return \Closure
      */
-    private function unbind(\Closure $closure) : \Closure
+    private function unbind($closure)
     {
         return $closure->bindTo(null);
     }

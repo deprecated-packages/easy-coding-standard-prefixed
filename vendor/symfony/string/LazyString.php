@@ -23,7 +23,7 @@ class LazyString implements \Stringable, \JsonSerializable
      *
      * @return static
      */
-    public static function fromCallable($callback, ...$arguments) : self
+    public static function fromCallable($callback, ...$arguments)
     {
         if (!\is_callable($callback) && !(\is_array($callback) && isset($callback[0]) && $callback[0] instanceof \Closure && 2 >= \count($callback))) {
             throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a callable or a [Closure, method] lazy-callable, "%s" given.', __METHOD__, \get_debug_type($callback)));
@@ -33,13 +33,13 @@ class LazyString implements \Stringable, \JsonSerializable
             if (null !== $arguments) {
                 if (!\is_callable($callback)) {
                     $callback[0] = $callback[0]();
-                    $callback[1] = $callback[1] ?? '__invoke';
+                    $callback[1] = isset($callback[1]) ? $callback[1] : '__invoke';
                 }
                 $value = $callback(...$arguments);
                 $callback = self::getPrettyName($callback);
                 $arguments = null;
             }
-            return $value ?? '';
+            return isset($value) ? $value : '';
         };
         return $lazyString;
     }
@@ -48,7 +48,7 @@ class LazyString implements \Stringable, \JsonSerializable
      *
      * @return static
      */
-    public static function fromStringable($value) : self
+    public static function fromStringable($value)
     {
         if (!self::isStringable($value)) {
             throw new \TypeError(\sprintf('Argument 1 passed to "%s()" must be a scalar or a stringable object, "%s" given.', __METHOD__, \get_debug_type($value)));
@@ -62,8 +62,9 @@ class LazyString implements \Stringable, \JsonSerializable
     }
     /**
      * Tells whether the provided value can be cast to string.
+     * @return bool
      */
-    public static final function isStringable($value) : bool
+    public static final function isStringable($value)
     {
         return \is_string($value) || $value instanceof self || (\is_object($value) ? \method_exists($value, '__toString') : \is_scalar($value));
     }
@@ -73,8 +74,9 @@ class LazyString implements \Stringable, \JsonSerializable
      * @param object|string|int|float|bool $value
      *
      * @throws \TypeError When the provided value is not stringable
+     * @return string
      */
-    public static final function resolve($value) : string
+    public static final function resolve($value)
     {
         return $value;
     }
@@ -103,19 +105,28 @@ class LazyString implements \Stringable, \JsonSerializable
             throw $e;
         }
     }
-    public function __sleep() : array
+    /**
+     * @return mixed[]
+     */
+    public function __sleep()
     {
         $this->__toString();
         return ['value'];
     }
-    public function jsonSerialize() : string
+    /**
+     * @return string
+     */
+    public function jsonSerialize()
     {
         return $this->__toString();
     }
     private function __construct()
     {
     }
-    private static function getPrettyName(callable $callback) : string
+    /**
+     * @return string
+     */
+    private static function getPrettyName(callable $callback)
     {
         if (\is_string($callback)) {
             return $callback;

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection\CompilerPass;
 
 use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -9,7 +8,11 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\ParameterBag\Paramet
 use Symplify\EasyCodingStandard\ValueObject\Option;
 final class RemoveExcludedCheckersCompilerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $containerBuilder) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
+     */
+    public function process($containerBuilder)
     {
         $excludedCheckers = $this->getExcludedCheckersFromParameterBag($containerBuilder->getParameterBag());
         $definitions = $containerBuilder->getDefinitions();
@@ -21,9 +24,10 @@ final class RemoveExcludedCheckersCompilerPass implements CompilerPassInterface
         }
     }
     /**
-     * @return array<int, class-string>
+     * @return mixed[]
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag
      */
-    private function getExcludedCheckersFromParameterBag(ParameterBagInterface $parameterBag) : array
+    private function getExcludedCheckersFromParameterBag($parameterBag)
     {
         // parts of "skip" parameter
         if (!$parameterBag->has(Option::SKIP)) {
@@ -43,9 +47,9 @@ final class RemoveExcludedCheckersCompilerPass implements CompilerPassInterface
     /**
      * @param mixed $key
      * @param mixed $value
-     * @return class-string|null
+     * @return string|null
      */
-    private function matchFullClassSkip($key, $value) : ?string
+    private function matchFullClassSkip($key, $value)
     {
         // "SomeClass::class" => null
         if (\is_string($key) && \class_exists($key) && $value === null) {

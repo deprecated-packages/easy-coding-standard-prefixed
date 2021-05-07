@@ -29,8 +29,9 @@ class MergeExtensionConfigurationPass implements \ECSPrefix20210507\Symfony\Comp
 {
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process($container)
     {
         $parameters = $container->getParameterBag()->all();
         $definitions = $container->getDefinitions();
@@ -96,12 +97,19 @@ class MergeExtensionConfigurationPass implements \ECSPrefix20210507\Symfony\Comp
 class MergeExtensionConfigurationParameterBag extends EnvPlaceholderParameterBag
 {
     private $processedEnvPlaceholders;
-    public function __construct(parent $parameterBag)
+    /**
+     * @param mixed $parameterBag
+     */
+    public function __construct($parameterBag)
     {
         parent::__construct($parameterBag->all());
         $this->mergeEnvPlaceholders($parameterBag);
     }
-    public function freezeAfterProcessing(Extension $extension, ContainerBuilder $container)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\Extension $extension
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    public function freezeAfterProcessing($extension, $container)
     {
         if (!($config = $extension->getProcessedConfigs())) {
             // Extension::processConfiguration() wasn't called, we cannot know how configs were merged
@@ -121,12 +129,16 @@ class MergeExtensionConfigurationParameterBag extends EnvPlaceholderParameterBag
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getEnvPlaceholders() : array
+    public function getEnvPlaceholders()
     {
         return null !== $this->processedEnvPlaceholders ? $this->processedEnvPlaceholders : parent::getEnvPlaceholders();
     }
-    public function getUnusedEnvPlaceholders() : array
+    /**
+     * @return mixed[]
+     */
+    public function getUnusedEnvPlaceholders()
     {
         return null === $this->processedEnvPlaceholders ? [] : \array_diff_key(parent::getEnvPlaceholders(), $this->processedEnvPlaceholders);
     }
@@ -139,29 +151,39 @@ class MergeExtensionConfigurationParameterBag extends EnvPlaceholderParameterBag
 class MergeExtensionConfigurationContainerBuilder extends ContainerBuilder
 {
     private $extensionClass;
-    public function __construct(ExtensionInterface $extension, ParameterBagInterface $parameterBag = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface $parameterBag
+     */
+    public function __construct($extension, $parameterBag = null)
     {
         parent::__construct($parameterBag);
         $this->extensionClass = \get_class($extension);
     }
     /**
      * {@inheritdoc}
+     * @return $this
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass
+     * @param string $type
+     * @param int $priority
      */
-    public function addCompilerPass(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, string $type = \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, int $priority = 0) : self
+    public function addCompilerPass($pass, $type = \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\PassConfig::TYPE_BEFORE_OPTIMIZATION, $priority = 0)
     {
         throw new LogicException(\sprintf('You cannot add compiler pass "%s" from extension "%s". Compiler passes must be registered before the container is compiled.', \get_debug_type($pass), $this->extensionClass));
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ExtensionInterface $extension
      */
-    public function registerExtension(ExtensionInterface $extension)
+    public function registerExtension($extension)
     {
         throw new LogicException(\sprintf('You cannot register extension "%s" from "%s". Extensions must be registered before the container is compiled.', \get_debug_type($extension), $this->extensionClass));
     }
     /**
      * {@inheritdoc}
+     * @param bool $resolveEnvPlaceholders
      */
-    public function compile(bool $resolveEnvPlaceholders = \false)
+    public function compile($resolveEnvPlaceholders = \false)
     {
         throw new LogicException(\sprintf('Cannot compile the container in extension "%s".', $this->extensionClass));
     }

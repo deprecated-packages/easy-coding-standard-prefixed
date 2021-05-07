@@ -33,7 +33,7 @@ class DisallowSelfActionsSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // We are not interested in abstract classes.

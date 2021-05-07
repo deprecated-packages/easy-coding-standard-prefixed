@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -18,19 +17,24 @@ final class CommentedContentResolver
     /**
      * @var int[]
      */
-    public const EMPTY_TOKENS = [\T_WHITESPACE, \T_STRING, \T_ENCAPSED_AND_WHITESPACE, \T_COMMENT];
+    const EMPTY_TOKENS = [\T_WHITESPACE, \T_STRING, \T_ENCAPSED_AND_WHITESPACE, \T_COMMENT];
     /**
      * @var LineResolver
      */
     private $lineResolver;
-    public function __construct(\Symplify\CodingStandard\Tokens\LineResolver $lineResolver)
+    /**
+     * @param \Symplify\CodingStandard\Tokens\LineResolver $lineResolver
+     */
+    public function __construct($lineResolver)
     {
         $this->lineResolver = $lineResolver;
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param int $position
+     * @return \Symplify\CodingStandard\ValueObject\StartAndEnd
      */
-    public function resolve(Tokens $tokens, int $position) : StartAndEnd
+    public function resolve($tokens, $position)
     {
         $token = $tokens[$position];
         if (!$token->isGivenKind(\T_COMMENT)) {
@@ -65,7 +69,13 @@ final class CommentedContentResolver
         }
         return new StartAndEnd($startPosition, $lastPosition);
     }
-    private function shouldBreak(int $lastLineSeen, int $tokenLine, Token $token) : bool
+    /**
+     * @param int $lastLineSeen
+     * @param int $tokenLine
+     * @param \PhpCsFixer\Tokenizer\Token $token
+     * @return bool
+     */
+    private function shouldBreak($lastLineSeen, $tokenLine, $token)
     {
         if ($lastLineSeen + 1 <= $tokenLine && Strings::startsWith($token->getContent(), '/*')) {
             // First non-whitespace token on a new line is start of a different style comment.
@@ -77,7 +87,13 @@ final class CommentedContentResolver
         // Blank line breaks a '//' style comment block.
         return $lastLineSeen + 1 < $tokenLine;
     }
-    private function isNextLineNotComment(int $lastLineSeen, int $tokenLine, Token $token) : bool
+    /**
+     * @param int $lastLineSeen
+     * @param int $tokenLine
+     * @param \PhpCsFixer\Tokenizer\Token $token
+     * @return bool
+     */
+    private function isNextLineNotComment($lastLineSeen, $tokenLine, $token)
     {
         if ($lastLineSeen >= $tokenLine) {
             return \false;

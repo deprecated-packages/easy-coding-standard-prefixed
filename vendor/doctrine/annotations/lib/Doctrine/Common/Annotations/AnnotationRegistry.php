@@ -42,7 +42,10 @@ final class AnnotationRegistry
      * @var bool
      */
     private static $registerFileUsed = \false;
-    public static function reset() : void
+    /**
+     * @return void
+     */
+    public static function reset()
     {
         self::$autoloadNamespaces = [];
         self::$loaders = [];
@@ -54,8 +57,10 @@ final class AnnotationRegistry
      *
      * @deprecated This method is deprecated and will be removed in
      *             doctrine/annotations 2.0. Annotations will be autoloaded in 2.0.
+     * @return void
+     * @param string $file
      */
-    public static function registerFile(string $file) : void
+    public static function registerFile($file)
     {
         self::$registerFileUsed = \true;
         require_once $file;
@@ -69,8 +74,10 @@ final class AnnotationRegistry
      *             doctrine/annotations 2.0. Annotations will be autoloaded in 2.0.
      *
      * @phpstan-param string|list<string>|null $dirs
+     * @return void
+     * @param string $namespace
      */
-    public static function registerAutoloadNamespace(string $namespace, $dirs = null) : void
+    public static function registerAutoloadNamespace($namespace, $dirs = null)
     {
         self::$autoloadNamespaces[$namespace] = $dirs;
     }
@@ -83,8 +90,9 @@ final class AnnotationRegistry
      *             doctrine/annotations 2.0. Annotations will be autoloaded in 2.0.
      *
      * @param string[][]|string[]|null[] $namespaces indexed by namespace name
+     * @return void
      */
-    public static function registerAutoloadNamespaces(array $namespaces) : void
+    public static function registerAutoloadNamespaces(array $namespaces)
     {
         self::$autoloadNamespaces = array_merge(self::$autoloadNamespaces, $namespaces);
     }
@@ -96,8 +104,9 @@ final class AnnotationRegistry
      *
      * @deprecated This method is deprecated and will be removed in
      *             doctrine/annotations 2.0. Annotations will be autoloaded in 2.0.
+     * @return void
      */
-    public static function registerLoader(callable $callable) : void
+    public static function registerLoader(callable $callable)
     {
         // Reset our static cache now that we have a new loader to work with
         self::$failedToAutoload = [];
@@ -108,8 +117,9 @@ final class AnnotationRegistry
      *
      * @deprecated This method is deprecated and will be removed in
      *             doctrine/annotations 2.0. Annotations will be autoloaded in 2.0.
+     * @return void
      */
-    public static function registerUniqueLoader(callable $callable) : void
+    public static function registerUniqueLoader(callable $callable)
     {
         if (in_array($callable, self::$loaders, \true)) {
             return;
@@ -118,8 +128,10 @@ final class AnnotationRegistry
     }
     /**
      * Autoloads an annotation class silently.
+     * @param string $class
+     * @return bool
      */
-    public static function loadAnnotationClass(string $class) : bool
+    public static function loadAnnotationClass($class)
     {
         if (class_exists($class, \false)) {
             return \true;

@@ -20,11 +20,11 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArg
  */
 class PassConfig
 {
-    public const TYPE_AFTER_REMOVING = 'afterRemoving';
-    public const TYPE_BEFORE_OPTIMIZATION = 'beforeOptimization';
-    public const TYPE_BEFORE_REMOVING = 'beforeRemoving';
-    public const TYPE_OPTIMIZE = 'optimization';
-    public const TYPE_REMOVE = 'removing';
+    const TYPE_AFTER_REMOVING = 'afterRemoving';
+    const TYPE_BEFORE_OPTIMIZATION = 'beforeOptimization';
+    const TYPE_BEFORE_REMOVING = 'beforeRemoving';
+    const TYPE_OPTIMIZE = 'optimization';
+    const TYPE_REMOVE = 'removing';
     private $mergePass;
     private $afterRemovingPasses = [];
     private $beforeOptimizationPasses = [];
@@ -52,8 +52,11 @@ class PassConfig
      * Adds a pass.
      *
      * @throws InvalidArgumentException when a pass type doesn't exist
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass
+     * @param string $type
+     * @param int $priority
      */
-    public function addPass(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass, string $type = self::TYPE_BEFORE_OPTIMIZATION, int $priority = 0)
+    public function addPass($pass, $type = self::TYPE_BEFORE_OPTIMIZATION, $priority = 0)
     {
         $property = $type . 'Passes';
         if (!isset($this->{$property})) {
@@ -119,7 +122,10 @@ class PassConfig
     {
         return $this->mergePass;
     }
-    public function setMergePass(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface $pass
+     */
+    public function setMergePass($pass)
     {
         $this->mergePass = $pass;
     }
@@ -173,9 +179,9 @@ class PassConfig
      *
      * @param array $passes CompilerPassInterface instances with their priority as key
      *
-     * @return CompilerPassInterface[]
+     * @return mixed[]
      */
-    private function sortPasses(array $passes) : array
+    private function sortPasses(array $passes)
     {
         if (0 === \count($passes)) {
             return [];

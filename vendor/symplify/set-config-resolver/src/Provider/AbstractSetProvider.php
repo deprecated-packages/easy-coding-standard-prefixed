@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Provider;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -11,9 +10,9 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 abstract class AbstractSetProvider implements SetProviderInterface
 {
     /**
-     * @return string[]
+     * @return mixed[]
      */
-    public function provideSetNames() : array
+    public function provideSetNames()
     {
         $setNames = [];
         $sets = $this->provide();
@@ -22,7 +21,11 @@ abstract class AbstractSetProvider implements SetProviderInterface
         }
         return $setNames;
     }
-    public function provideByName(string $desiredSetName) : ?Set
+    /**
+     * @return \Symplify\SetConfigResolver\ValueObject\Set|null
+     * @param string $desiredSetName
+     */
+    public function provideByName($desiredSetName)
     {
         // 1. name-based approach
         $sets = $this->provide();
@@ -50,7 +53,11 @@ abstract class AbstractSetProvider implements SetProviderInterface
         $message = \sprintf('Set "%s" was not found', $desiredSetName);
         throw new SetNotFoundException($message, $desiredSetName, $this->provideSetNames());
     }
-    private function resolveSetUniquePathId(string $setPath) : string
+    /**
+     * @param string $setPath
+     * @return string
+     */
+    private function resolveSetUniquePathId($setPath)
     {
         $setPath = Strings::after($setPath, \DIRECTORY_SEPARATOR, -2);
         if ($setPath === null) {

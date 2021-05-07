@@ -23,7 +23,7 @@ class FlashBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundation\Se
     /**
      * @param string $storageKey The key used to store flashes in the session
      */
-    public function __construct(string $storageKey = '_symfony_flashes')
+    public function __construct($storageKey = '_symfony_flashes')
     {
         $this->storageKey = $storageKey;
     }
@@ -34,7 +34,10 @@ class FlashBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundation\Se
     {
         return $this->name;
     }
-    public function setName(string $name)
+    /**
+     * @param string $name
+     */
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -47,15 +50,17 @@ class FlashBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundation\Se
     }
     /**
      * {@inheritdoc}
+     * @param string $type
      */
-    public function add(string $type, $message)
+    public function add($type, $message)
     {
         $this->flashes[$type][] = $message;
     }
     /**
      * {@inheritdoc}
+     * @param string $type
      */
-    public function peek(string $type, array $default = [])
+    public function peek($type, array $default = [])
     {
         return $this->has($type) ? $this->flashes[$type] : $default;
     }
@@ -68,8 +73,9 @@ class FlashBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundation\Se
     }
     /**
      * {@inheritdoc}
+     * @param string $type
      */
-    public function get(string $type, array $default = [])
+    public function get($type, array $default = [])
     {
         if (!$this->has($type)) {
             return $default;
@@ -89,8 +95,9 @@ class FlashBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundation\Se
     }
     /**
      * {@inheritdoc}
+     * @param string $type
      */
-    public function set(string $type, $messages)
+    public function set($type, $messages)
     {
         $this->flashes[$type] = (array) $messages;
     }
@@ -103,8 +110,9 @@ class FlashBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundation\Se
     }
     /**
      * {@inheritdoc}
+     * @param string $type
      */
-    public function has(string $type)
+    public function has($type)
     {
         return \array_key_exists($type, $this->flashes) && $this->flashes[$type];
     }

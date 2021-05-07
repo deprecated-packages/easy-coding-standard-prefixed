@@ -39,7 +39,7 @@ class InlineCommentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // If this is a function/class/interface doc block comment, skip it.

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,8 +25,10 @@ final class Tokens extends \SplFixedArray
      * @param string[] $ignoredTags
      *
      * @throws \InvalidArgumentException
+     * @return $this
+     * @param PhpToken $input
      */
-    public static function createFromDocComment(PhpToken $input, array $ignoredTags = []) : self
+    public static function createFromDocComment($input, array $ignoredTags = [])
     {
         if (!$input->isGivenKind(\T_DOC_COMMENT)) {
             throw new \InvalidArgumentException('Input must be a T_DOC_COMMENT token.');
@@ -103,15 +104,19 @@ final class Tokens extends \SplFixedArray
     }
     /**
      * Returns the index of the closest next token that is neither a comment nor a whitespace token.
+     * @return int|null
+     * @param int $index
      */
-    public function getNextMeaningfulToken(int $index) : ?int
+    public function getNextMeaningfulToken($index)
     {
         return $this->getMeaningfulTokenSibling($index, 1);
     }
     /**
      * Returns the index of the closest previous token that is neither a comment nor a whitespace token.
+     * @return int|null
+     * @param int $index
      */
-    public function getPreviousMeaningfulToken(int $index) : ?int
+    public function getPreviousMeaningfulToken($index)
     {
         return $this->getMeaningfulTokenSibling($index, -1);
     }
@@ -119,8 +124,10 @@ final class Tokens extends \SplFixedArray
      * Returns the index of the closest next token of the given type.
      *
      * @param string|string[] $type
+     * @return int|null
+     * @param int $index
      */
-    public function getNextTokenOfType($type, int $index) : ?int
+    public function getNextTokenOfType($type, $index)
     {
         return $this->getTokenOfTypeSibling($index, $type, 1);
     }
@@ -128,15 +135,19 @@ final class Tokens extends \SplFixedArray
      * Returns the index of the closest previous token of the given type.
      *
      * @param string|string[] $type
+     * @return int|null
+     * @param int $index
      */
-    public function getPreviousTokenOfType($type, int $index) : ?int
+    public function getPreviousTokenOfType($type, $index)
     {
         return $this->getTokenOfTypeSibling($index, $type, -1);
     }
     /**
      * Returns the index of the last token that is part of the annotation at the given index.
+     * @return int|null
+     * @param int $index
      */
-    public function getAnnotationEnd(int $index) : ?int
+    public function getAnnotationEnd($index)
     {
         $currentIndex = null;
         if (isset($this[$index + 2])) {
@@ -164,8 +175,10 @@ final class Tokens extends \SplFixedArray
     }
     /**
      * Returns the index of the close brace that matches the open brace at the given index.
+     * @return int|null
+     * @param int $index
      */
-    public function getArrayEnd(int $index) : ?int
+    public function getArrayEnd($index)
     {
         $level = 1;
         for (++$index, $max = \count($this); $index < $max; ++$index) {
@@ -182,8 +195,9 @@ final class Tokens extends \SplFixedArray
     }
     /**
      * Returns the code from the tokens.
+     * @return string
      */
-    public function getCode() : string
+    public function getCode()
     {
         $code = '';
         foreach ($this as $token) {
@@ -193,8 +207,11 @@ final class Tokens extends \SplFixedArray
     }
     /**
      * Inserts a token at the given index.
+     * @return void
+     * @param int $index
+     * @param \PhpCsFixer\Doctrine\Annotation\Token $token
      */
-    public function insertAt(int $index, \PhpCsFixer\Doctrine\Annotation\Token $token) : void
+    public function insertAt($index, $token)
     {
         $this->setSize($this->getSize() + 1);
         for ($i = $this->getSize() - 1; $i > $index; --$i) {
@@ -206,8 +223,9 @@ final class Tokens extends \SplFixedArray
      * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
+     * @return void
      */
-    public function offsetSet($index, $token) : void
+    public function offsetSet($index, $token)
     {
         if (!$token instanceof \PhpCsFixer\Doctrine\Annotation\Token) {
             $type = \gettype($token);
@@ -226,8 +244,9 @@ final class Tokens extends \SplFixedArray
      * {@inheritdoc}
      *
      * @throws \OutOfBoundsException
+     * @return void
      */
-    public function offsetUnset($index) : void
+    public function offsetUnset($index)
     {
         if (!isset($this[$index])) {
             throw new \OutOfBoundsException(\sprintf('Index %s is invalid or does not exist.', $index));
@@ -240,7 +259,12 @@ final class Tokens extends \SplFixedArray
         parent::offsetUnset($index);
         $this->setSize($max);
     }
-    private function getMeaningfulTokenSibling(int $index, int $direction) : ?int
+    /**
+     * @return int|null
+     * @param int $index
+     * @param int $direction
+     */
+    private function getMeaningfulTokenSibling($index, $direction)
     {
         while (\true) {
             $index += $direction;
@@ -255,8 +279,11 @@ final class Tokens extends \SplFixedArray
     }
     /**
      * @param string|string[] $type
+     * @return int|null
+     * @param int $index
+     * @param int $direction
      */
-    private function getTokenOfTypeSibling(int $index, $type, int $direction) : ?int
+    private function getTokenOfTypeSibling($index, $type, $direction)
     {
         while (\true) {
             $index += $direction;

@@ -21,7 +21,7 @@ class AttributeBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundatio
     /**
      * @param string $storageKey The key used to store attributes in the session
      */
-    public function __construct(string $storageKey = '_sf2_attributes')
+    public function __construct($storageKey = '_sf2_attributes')
     {
         $this->storageKey = $storageKey;
     }
@@ -32,7 +32,10 @@ class AttributeBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundatio
     {
         return $this->name;
     }
-    public function setName(string $name)
+    /**
+     * @param string $name
+     */
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -52,22 +55,25 @@ class AttributeBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundatio
     }
     /**
      * {@inheritdoc}
+     * @param string $name
      */
-    public function has(string $name)
+    public function has($name)
     {
         return \array_key_exists($name, $this->attributes);
     }
     /**
      * {@inheritdoc}
+     * @param string $name
      */
-    public function get(string $name, $default = null)
+    public function get($name, $default = null)
     {
         return \array_key_exists($name, $this->attributes) ? $this->attributes[$name] : $default;
     }
     /**
      * {@inheritdoc}
+     * @param string $name
      */
-    public function set(string $name, $value)
+    public function set($name, $value)
     {
         $this->attributes[$name] = $value;
     }
@@ -90,8 +96,9 @@ class AttributeBag implements \ECSPrefix20210507\Symfony\Component\HttpFoundatio
     }
     /**
      * {@inheritdoc}
+     * @param string $name
      */
-    public function remove(string $name)
+    public function remove($name)
     {
         $retval = null;
         if (\array_key_exists($name, $this->attributes)) {

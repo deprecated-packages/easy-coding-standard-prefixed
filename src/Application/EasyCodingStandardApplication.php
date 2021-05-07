@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Application;
 
 use Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector;
@@ -35,7 +34,15 @@ final class EasyCodingStandardApplication
      * @var SingleFileProcessor
      */
     private $singleFileProcessor;
-    public function __construct(EasyCodingStandardStyle $easyCodingStandardStyle, SourceFinder $sourceFinder, ChangedFilesDetector $changedFilesDetector, Configuration $configuration, FileFilter $fileFilter, \Symplify\EasyCodingStandard\Application\SingleFileProcessor $singleFileProcessor)
+    /**
+     * @param \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle
+     * @param \Symplify\EasyCodingStandard\Finder\SourceFinder $sourceFinder
+     * @param \Symplify\EasyCodingStandard\ChangedFilesDetector\ChangedFilesDetector $changedFilesDetector
+     * @param \Symplify\EasyCodingStandard\Configuration\Configuration $configuration
+     * @param \Symplify\EasyCodingStandard\FileSystem\FileFilter $fileFilter
+     * @param \Symplify\EasyCodingStandard\Application\SingleFileProcessor $singleFileProcessor
+     */
+    public function __construct($easyCodingStandardStyle, $sourceFinder, $changedFilesDetector, $configuration, $fileFilter, $singleFileProcessor)
     {
         $this->easyCodingStandardStyle = $easyCodingStandardStyle;
         $this->sourceFinder = $sourceFinder;
@@ -44,7 +51,10 @@ final class EasyCodingStandardApplication
         $this->fileFilter = $fileFilter;
         $this->singleFileProcessor = $singleFileProcessor;
     }
-    public function run() : int
+    /**
+     * @return int
+     */
+    public function run()
     {
         // 1. find files in sources
         $files = $this->sourceFinder->find($this->configuration->getSources(), $this->configuration->doesMatchGitDiff());
@@ -73,8 +83,9 @@ final class EasyCodingStandardApplication
     }
     /**
      * @param SmartFileInfo[] $fileInfos
+     * @return void
      */
-    private function processFoundFiles(array $fileInfos) : void
+    private function processFoundFiles(array $fileInfos)
     {
         foreach ($fileInfos as $fileInfo) {
             if ($this->easyCodingStandardStyle->isDebug()) {

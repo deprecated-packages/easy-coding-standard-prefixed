@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Spacing;
 
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -21,22 +20,28 @@ final class SpaceAfterCommaHereNowDocFixer extends AbstractSymplifyFixer impleme
     /**
      * @var string
      */
-    private const ERROR_MESSAGE = 'Add space after nowdoc and heredoc keyword, to prevent bugs on PHP 7.2 and lower, see https://laravel-news.com/flexible-heredoc-and-nowdoc-coming-to-php-7-3';
-    public function getDefinition() : FixerDefinitionInterface
+    const ERROR_MESSAGE = 'Add space after nowdoc and heredoc keyword, to prevent bugs on PHP 7.2 and lower, see https://laravel-news.com/flexible-heredoc-and-nowdoc-coming-to-php-7-3';
+    /**
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+     */
+    public function getDefinition()
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_START_HEREDOC, T_START_NOWDOC]);
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param \SplFileInfo $file
      */
-    public function fix(SplFileInfo $file, Tokens $tokens) : void
+    public function fix($file, $tokens)
     {
         // function arguments, function call parameters, lambda use()
         for ($position = \count($tokens) - 1; $position >= 0; --$position) {
@@ -57,7 +62,10 @@ final class SpaceAfterCommaHereNowDocFixer extends AbstractSymplifyFixer impleme
             $tokens->ensureWhitespaceAtIndex($position + 1, 0, \PHP_EOL);
         }
     }
-    public function getRuleDefinition() : RuleDefinition
+    /**
+     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+     */
+    public function getRuleDefinition()
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 $values = [

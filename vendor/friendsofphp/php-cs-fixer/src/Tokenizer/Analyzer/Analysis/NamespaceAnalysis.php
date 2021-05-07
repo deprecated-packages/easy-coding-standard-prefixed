@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -53,7 +52,15 @@ final class NamespaceAnalysis implements \PhpCsFixer\Tokenizer\Analyzer\Analysis
      * @var int
      */
     private $scopeEndIndex;
-    public function __construct(string $fullName, string $shortName, int $startIndex, int $endIndex, int $scopeStartIndex, int $scopeEndIndex)
+    /**
+     * @param string $fullName
+     * @param string $shortName
+     * @param int $startIndex
+     * @param int $endIndex
+     * @param int $scopeStartIndex
+     * @param int $scopeEndIndex
+     */
+    public function __construct($fullName, $shortName, $startIndex, $endIndex, $scopeStartIndex, $scopeEndIndex)
     {
         $this->fullName = $fullName;
         $this->shortName = $shortName;
@@ -62,27 +69,45 @@ final class NamespaceAnalysis implements \PhpCsFixer\Tokenizer\Analyzer\Analysis
         $this->scopeStartIndex = $scopeStartIndex;
         $this->scopeEndIndex = $scopeEndIndex;
     }
-    public function getFullName() : string
+    /**
+     * @return string
+     */
+    public function getFullName()
     {
         return $this->fullName;
     }
-    public function getShortName() : string
+    /**
+     * @return string
+     */
+    public function getShortName()
     {
         return $this->shortName;
     }
-    public function getStartIndex() : int
+    /**
+     * @return int
+     */
+    public function getStartIndex()
     {
         return $this->startIndex;
     }
-    public function getEndIndex() : int
+    /**
+     * @return int
+     */
+    public function getEndIndex()
     {
         return $this->endIndex;
     }
-    public function getScopeStartIndex() : int
+    /**
+     * @return int
+     */
+    public function getScopeStartIndex()
     {
         return $this->scopeStartIndex;
     }
-    public function getScopeEndIndex() : int
+    /**
+     * @return int
+     */
+    public function getScopeEndIndex()
     {
         return $this->scopeEndIndex;
     }

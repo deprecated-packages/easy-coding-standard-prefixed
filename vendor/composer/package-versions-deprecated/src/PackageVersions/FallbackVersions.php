@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace ECSPrefix20210507\PackageVersions;
 
 use Generator;
@@ -33,8 +32,10 @@ final class FallbackVersions
     /**
      * @throws OutOfBoundsException If a version cannot be located.
      * @throws UnexpectedValueException If the composer.lock file could not be located.
+     * @param string $packageName
+     * @return string
      */
-    public static function getVersion(string $packageName) : string
+    public static function getVersion($packageName)
     {
         $versions = iterator_to_array(self::getVersions(self::getPackageData()));
         if (!array_key_exists($packageName, $versions)) {
@@ -47,7 +48,7 @@ final class FallbackVersions
      *
      * @throws UnexpectedValueException
      */
-    private static function getPackageData() : array
+    private static function getPackageData()
     {
         $checkedPaths = [
             // The top-level project's ./vendor/composer/installed.json
@@ -76,7 +77,7 @@ final class FallbackVersions
                     }
                     break;
                 case 'composer.lock':
-                    $packageData[] = $data['packages'] + ($data['packages-dev'] ?? []);
+                    $packageData[] = $data['packages'] + (isset($data['packages-dev']) ? $data['packages-dev'] : []);
                     break;
                 default:
             }
@@ -89,14 +90,14 @@ final class FallbackVersions
     /**
      * @param mixed[] $packageData
      *
-     * @return Generator&string[]
+     * @return \Generator
      *
      * @psalm-return Generator<string, string>
      */
-    private static function getVersions(array $packageData) : Generator
+    private static function getVersions(array $packageData)
     {
         foreach ($packageData as $package) {
-            (yield $package['name'] => $package['version'] . '@' . ($package['source']['reference'] ?? $package['dist']['reference'] ?? ''));
+            (yield $package['name'] => $package['version'] . '@' . (isset($package['source']['reference']) ? $package['source']['reference'] : (isset($package['dist']['reference']) ? $package['dist']['reference'] : '')));
         }
         (yield self::ROOT_PACKAGE_NAME => self::ROOT_PACKAGE_NAME);
     }

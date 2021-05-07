@@ -16,9 +16,12 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class ParametersConfigurator extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
 {
-    public const FACTORY = 'parameters';
+    const FACTORY = 'parameters';
     private $container;
-    public function __construct(ContainerBuilder $container)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    public function __construct($container)
     {
         $this->container = $container;
     }
@@ -26,8 +29,9 @@ class ParametersConfigurator extends \ECSPrefix20210507\Symfony\Component\Depend
      * Creates a parameter.
      *
      * @return $this
+     * @param string $name
      */
-    public final function set(string $name, $value) : self
+    public final function set($name, $value)
     {
         $this->container->setParameter($name, static::processValue($value, \true));
         return $this;
@@ -36,8 +40,9 @@ class ParametersConfigurator extends \ECSPrefix20210507\Symfony\Component\Depend
      * Creates a parameter.
      *
      * @return $this
+     * @param string $name
      */
-    public final function __invoke(string $name, $value) : self
+    public final function __invoke($name, $value)
     {
         return $this->set($name, $value);
     }

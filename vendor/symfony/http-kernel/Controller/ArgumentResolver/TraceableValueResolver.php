@@ -23,15 +23,22 @@ final class TraceableValueResolver implements ArgumentValueResolverInterface
 {
     private $inner;
     private $stopwatch;
-    public function __construct(ArgumentValueResolverInterface $inner, Stopwatch $stopwatch)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface $inner
+     * @param \ECSPrefix20210507\Symfony\Component\Stopwatch\Stopwatch $stopwatch
+     */
+    public function __construct($inner, $stopwatch)
     {
         $this->inner = $inner;
         $this->stopwatch = $stopwatch;
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
+     * @return bool
      */
-    public function supports(Request $request, ArgumentMetadata $argument) : bool
+    public function supports($request, $argument)
     {
         $method = \get_class($this->inner) . '::' . __FUNCTION__;
         $this->stopwatch->start($method, 'controller.argument_value_resolver');
@@ -41,8 +48,11 @@ final class TraceableValueResolver implements ArgumentValueResolverInterface
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
      */
-    public function resolve(Request $request, ArgumentMetadata $argument) : iterable
+    public function resolve($request, $argument)
     {
         $method = \get_class($this->inner) . '::' . __FUNCTION__;
         $this->stopwatch->start($method, 'controller.argument_value_resolver');

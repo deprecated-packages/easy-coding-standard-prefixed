@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,16 +24,26 @@ final class CodeSample implements \PhpCsFixer\FixerDefinition\CodeSampleInterfac
      * @var null|array
      */
     private $configuration;
-    public function __construct(string $code, ?array $configuration = null)
+    /**
+     * @param mixed[]|null $configuration
+     * @param string $code
+     */
+    public function __construct($code, $configuration = null)
     {
         $this->code = $code;
         $this->configuration = $configuration;
     }
-    public function getCode() : string
+    /**
+     * @return string
+     */
+    public function getCode()
     {
         return $this->code;
     }
-    public function getConfiguration() : ?array
+    /**
+     * @return mixed[]|null
+     */
+    public function getConfiguration()
     {
         return $this->configuration;
     }

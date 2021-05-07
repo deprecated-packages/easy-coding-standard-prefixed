@@ -19,7 +19,11 @@ class Reference
 {
     private $id;
     private $invalidBehavior;
-    public function __construct(string $id, int $invalidBehavior = \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)
+    /**
+     * @param string $id
+     * @param int $invalidBehavior
+     */
+    public function __construct($id, $invalidBehavior = \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)
     {
         $this->id = $id;
         $this->invalidBehavior = $invalidBehavior;

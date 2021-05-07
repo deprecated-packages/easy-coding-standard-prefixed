@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,21 +23,24 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class SingleLineThrowFixer extends AbstractFixer
 {
-    private const REMOVE_WHITESPACE_AFTER_TOKENS = ['['];
-    private const REMOVE_WHITESPACE_AROUND_TOKENS = ['(', [\T_DOUBLE_COLON]];
-    private const REMOVE_WHITESPACE_BEFORE_TOKENS = [')', ']', ',', ';'];
-    private const THROW_END_TOKENS = [';', '(', '{', '}'];
+    const REMOVE_WHITESPACE_AFTER_TOKENS = ['['];
+    const REMOVE_WHITESPACE_AROUND_TOKENS = ['(', [\T_DOUBLE_COLON]];
+    const REMOVE_WHITESPACE_BEFORE_TOKENS = [')', ']', ',', ';'];
+    const THROW_END_TOKENS = [';', '(', '{', '}'];
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Throwing exception must be done in single line.', [new CodeSample("<?php\nthrow new Exception(\n    'Error.',\n    500\n);\n")]);
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_THROW);
     }
@@ -46,16 +48,20 @@ final class SingleLineThrowFixer extends AbstractFixer
      * {@inheritdoc}
      *
      * Must run before BracesFixer, ConcatSpaceFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         // must be fun before ConcatSpaceFixer
         return 36;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         for ($index = 0, $count = $tokens->count(); $index < $count; ++$index) {
             if (!$tokens[$index]->isGivenKind(\T_THROW)) {
@@ -70,7 +76,13 @@ final class SingleLineThrowFixer extends AbstractFixer
             $this->trimNewLines($tokens, $index, $tokens->getPrevMeaningfulToken($endCandidateIndex));
         }
     }
-    private function trimNewLines(Tokens $tokens, int $startIndex, int $endIndex) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startIndex
+     * @param int $endIndex
+     */
+    private function trimNewLines($tokens, $startIndex, $endIndex)
     {
         for ($index = $startIndex; $index < $endIndex; ++$index) {
             $content = $tokens[$index]->getContent();
@@ -108,8 +120,9 @@ final class SingleLineThrowFixer extends AbstractFixer
     }
     /**
      * @return bool
+     * @param \PhpCsFixer\Tokenizer\Token $token
      */
-    private function isPreviousTokenToClear(Token $token)
+    private function isPreviousTokenToClear($token)
     {
         static $tokens = null;
         if (null === $tokens) {
@@ -119,8 +132,9 @@ final class SingleLineThrowFixer extends AbstractFixer
     }
     /**
      * @return bool
+     * @param \PhpCsFixer\Tokenizer\Token $token
      */
-    private function isNextTokenToClear(Token $token)
+    private function isNextTokenToClear($token)
     {
         static $tokens = null;
         if (null === $tokens) {

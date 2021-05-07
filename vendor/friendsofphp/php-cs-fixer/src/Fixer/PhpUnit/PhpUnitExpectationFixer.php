@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -36,8 +35,10 @@ final class PhpUnitExpectationFixer extends AbstractPhpUnitFixer implements Conf
     private $methodMap = [];
     /**
      * {@inheritdoc}
+     * @param mixed[] $configuration
+     * @return void
      */
-    public function configure(array $configuration) : void
+    public function configure($configuration)
     {
         parent::configure($configuration);
         $this->methodMap = ['setExpectedException' => 'expectExceptionMessage'];
@@ -51,8 +52,9 @@ final class PhpUnitExpectationFixer extends AbstractPhpUnitFixer implements Conf
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Usages of `->setExpectedException*` methods MUST be replaced by `->expectException*` methods.', [new CodeSample('<?php
 final class MyTest extends \\PHPUnit_Framework_TestCase
@@ -120,29 +122,36 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
      * {@inheritdoc}
      *
      * Must run after PhpUnitNoExpectationAnnotationFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('target', 'Target version of PHPUnit.'))->setAllowedTypes(['string'])->setAllowedValues([\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_2, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_5_6, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_8_4, \PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_NEWEST])->setDefault(\PhpCsFixer\Fixer\PhpUnit\PhpUnitTargetVersion::VERSION_NEWEST)->getOption()]);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startIndex
+     * @param int $endIndex
      */
-    protected function applyPhpUnitClassFix(Tokens $tokens, int $startIndex, int $endIndex) : void
+    protected function applyPhpUnitClassFix($tokens, $startIndex, $endIndex)
     {
         foreach (Token::getObjectOperatorKinds() as $objectOperator) {
             $this->applyPhpUnitClassFixWithObjectOperator($tokens, $startIndex, $endIndex, $objectOperator);
@@ -152,8 +161,10 @@ final class MyTest extends \\PHPUnit_Framework_TestCase
      * @param int $startIndex
      * @param int $endIndex
      * @param int $objectOperator
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function applyPhpUnitClassFixWithObjectOperator(Tokens $tokens, $startIndex, $endIndex, $objectOperator) : void
+    private function applyPhpUnitClassFixWithObjectOperator($tokens, $startIndex, $endIndex, $objectOperator)
     {
         $argumentsAnalyzer = new ArgumentsAnalyzer();
         $oldMethodSequence = [[\T_VARIABLE, '$this'], [$objectOperator], [\T_STRING]];

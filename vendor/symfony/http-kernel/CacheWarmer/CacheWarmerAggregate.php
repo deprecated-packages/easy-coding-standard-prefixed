@@ -24,7 +24,12 @@ class CacheWarmerAggregate implements \ECSPrefix20210507\Symfony\Component\HttpK
     private $deprecationLogsFilepath;
     private $optionalsEnabled = \false;
     private $onlyOptionalsEnabled = \false;
-    public function __construct(iterable $warmers = [], bool $debug = \false, string $deprecationLogsFilepath = null)
+    /**
+     * @param mixed[] $warmers
+     * @param bool $debug
+     * @param string $deprecationLogsFilepath
+     */
+    public function __construct($warmers = [], $debug = \false, $deprecationLogsFilepath = null)
     {
         $this->warmers = $warmers;
         $this->debug = $debug;
@@ -42,8 +47,9 @@ class CacheWarmerAggregate implements \ECSPrefix20210507\Symfony\Component\HttpK
      * Warms up the cache.
      *
      * @return string[] A list of classes or files to preload on PHP 7.4+
+     * @param string $cacheDir
      */
-    public function warmUp(string $cacheDir)
+    public function warmUp($cacheDir)
     {
         if ($collectDeprecations = $this->debug && !\defined('PHPUNIT_COMPOSER_INSTALL')) {
             $collectedLogs = [];
@@ -95,7 +101,7 @@ class CacheWarmerAggregate implements \ECSPrefix20210507\Symfony\Component\HttpK
      *
      * @return bool always false
      */
-    public function isOptional() : bool
+    public function isOptional()
     {
         return \false;
     }

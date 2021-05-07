@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\Commenting;
 
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -21,30 +20,39 @@ final class RemoveUselessDefaultCommentFixer extends AbstractSymplifyFixer imple
     /**
      * @var string
      */
-    private const ERROR_MESSAGE = 'Remove useless PHPStorm-generated @todo comments, redundant "Class XY" or "gets service" comments etc.';
+    const ERROR_MESSAGE = 'Remove useless PHPStorm-generated @todo comments, redundant "Class XY" or "gets service" comments etc.';
     /**
      * @var UselessDocBlockCleaner
      */
     private $uselessDocBlockCleaner;
-    public function __construct(UselessDocBlockCleaner $uselessDocBlockCleaner)
+    /**
+     * @param \Symplify\CodingStandard\DocBlock\UselessDocBlockCleaner $uselessDocBlockCleaner
+     */
+    public function __construct($uselessDocBlockCleaner)
     {
         $this->uselessDocBlockCleaner = $uselessDocBlockCleaner;
     }
-    public function getDefinition() : FixerDefinitionInterface
+    /**
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+     */
+    public function getDefinition()
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_DOC_COMMENT, \T_COMMENT]);
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param \SplFileInfo $file
      */
-    public function fix(SplFileInfo $file, Tokens $tokens) : void
+    public function fix($file, $tokens)
     {
         $reversedTokens = $this->reverseTokens($tokens);
         foreach ($reversedTokens as $index => $token) {
@@ -59,7 +67,10 @@ final class RemoveUselessDefaultCommentFixer extends AbstractSymplifyFixer imple
             $tokens->clearAt($index);
         }
     }
-    public function getRuleDefinition() : RuleDefinition
+    /**
+     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+     */
+    public function getRuleDefinition()
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 /**

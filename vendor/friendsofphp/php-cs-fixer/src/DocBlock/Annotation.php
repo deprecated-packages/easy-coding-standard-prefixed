@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -93,38 +92,42 @@ final class Annotation
     }
     /**
      * Get the string representation of object.
+     * @return string
      */
-    public function __toString() : string
+    public function __toString()
     {
         return $this->getContent();
     }
     /**
      * Get all the annotation tag names with types.
      *
-     * @return string[]
+     * @return mixed[]
      */
-    public static function getTagsWithTypes() : array
+    public static function getTagsWithTypes()
     {
         return self::$tags;
     }
     /**
      * Get the start position of this annotation.
+     * @return int
      */
-    public function getStart() : int
+    public function getStart()
     {
         return $this->start;
     }
     /**
      * Get the end position of this annotation.
+     * @return int
      */
-    public function getEnd() : int
+    public function getEnd()
     {
         return $this->end;
     }
     /**
      * Get the associated tag.
+     * @return \PhpCsFixer\DocBlock\Tag
      */
-    public function getTag() : \PhpCsFixer\DocBlock\Tag
+    public function getTag()
     {
         if (null === $this->tag) {
             $this->tag = new \PhpCsFixer\DocBlock\Tag($this->lines[0]);
@@ -157,9 +160,9 @@ final class Annotation
     /**
      * Get the types associated with this annotation.
      *
-     * @return string[]
+     * @return mixed[]
      */
-    public function getTypes() : array
+    public function getTypes()
     {
         if (null === $this->types) {
             $this->types = $this->getTypeExpression()->getTypes();
@@ -170,8 +173,9 @@ final class Annotation
      * Set the types associated with this annotation.
      *
      * @param string[] $types
+     * @return void
      */
-    public function setTypes(array $types) : void
+    public function setTypes(array $types)
     {
         $pattern = '/' . \preg_quote($this->getTypesContent(), '/') . '/';
         $this->lines[0]->setContent(Preg::replace($pattern, \implode('|', $types), $this->lines[0]->getContent(), 1));
@@ -180,9 +184,9 @@ final class Annotation
     /**
      * Get the normalized types associated with this annotation, so they can easily be compared.
      *
-     * @return string[]
+     * @return mixed[]
      */
-    public function getNormalizedTypes() : array
+    public function getNormalizedTypes()
     {
         $normalized = \array_map(static function (string $type) {
             return \strtolower($type);
@@ -192,8 +196,9 @@ final class Annotation
     }
     /**
      * Remove this annotation by removing all its lines.
+     * @return void
      */
-    public function remove() : void
+    public function remove()
     {
         foreach ($this->lines as $line) {
             if ($line->isTheStart() && $line->isTheEnd()) {
@@ -216,12 +221,16 @@ final class Annotation
     }
     /**
      * Get the annotation content.
+     * @return string
      */
-    public function getContent() : string
+    public function getContent()
     {
         return \implode('', $this->lines);
     }
-    public function supportTypes() : bool
+    /**
+     * @return bool
+     */
+    public function supportTypes()
     {
         return \in_array($this->getTag()->getName(), self::$tags, \true);
     }
@@ -229,8 +238,9 @@ final class Annotation
      * Get the current types content.
      *
      * Be careful modifying the underlying line as that won't flush the cache.
+     * @return string
      */
-    private function getTypesContent() : string
+    private function getTypesContent()
     {
         if (null === $this->typesContent) {
             $name = $this->getTag()->getName();
@@ -242,7 +252,10 @@ final class Annotation
         }
         return $this->typesContent;
     }
-    private function clearCache() : void
+    /**
+     * @return void
+     */
+    private function clearCache()
     {
         $this->types = null;
         $this->typesContent = null;

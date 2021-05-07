@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace ECSPrefix20210507;
 
 // decoupled in own "*.php" file, so ECS, Rector and PHPStan works out of the box here
@@ -39,7 +38,10 @@ final class AutoloadIncluder
      * @var string[]
      */
     private $alreadyLoadedAutoloadFiles = [];
-    public function includeCwdVendorAutoloadIfExists() : void
+    /**
+     * @return void
+     */
+    public function includeCwdVendorAutoloadIfExists()
     {
         $cwdVendorAutoload = \getcwd() . '/vendor/autoload.php';
         if (!\is_file($cwdVendorAutoload)) {
@@ -47,7 +49,10 @@ final class AutoloadIncluder
         }
         $this->loadIfNotLoadedYet($cwdVendorAutoload);
     }
-    public function includeDependencyOrRepositoryVendorAutoloadIfExists() : void
+    /**
+     * @return void
+     */
+    public function includeDependencyOrRepositoryVendorAutoloadIfExists()
     {
         // ECS' vendor is already loaded
         if (\class_exists('\\Symplify\\EasyCodingStandard\\HttpKernel\\EasyCodingStandardKernel')) {
@@ -59,7 +64,11 @@ final class AutoloadIncluder
         }
         $this->loadIfNotLoadedYet($devVendorAutoload);
     }
-    public function autoloadProjectAutoloaderFile(string $file) : void
+    /**
+     * @return void
+     * @param string $file
+     */
+    public function autoloadProjectAutoloaderFile($file)
     {
         $path = \dirname(__DIR__) . $file;
         if (!\is_file($path)) {
@@ -67,7 +76,10 @@ final class AutoloadIncluder
         }
         $this->loadIfNotLoadedYet($path);
     }
-    public function includePhpCodeSnifferAutoloadIfNotInPharAndInitliazeTokens() : void
+    /**
+     * @return void
+     */
+    public function includePhpCodeSnifferAutoloadIfNotInPharAndInitliazeTokens()
     {
         // file is autoloaded with classmap in PHAR
         // without phar, we still need to autoload it
@@ -93,7 +105,11 @@ final class AutoloadIncluder
         }
         new Tokens();
     }
-    private function loadIfNotLoadedYet(string $file) : void
+    /**
+     * @return void
+     * @param string $file
+     */
+    private function loadIfNotLoadedYet($file)
     {
         if (\in_array($file, $this->alreadyLoadedAutoloadFiles, \true)) {
             return;

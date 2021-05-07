@@ -28,15 +28,22 @@ class EventDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKernel
     protected $dispatcher;
     private $requestStack;
     private $currentRequest;
-    public function __construct(EventDispatcherInterface $dispatcher = null, RequestStack $requestStack = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
+     */
+    public function __construct($dispatcher = null, $requestStack = null)
     {
         $this->dispatcher = $dispatcher;
         $this->requestStack = $requestStack;
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
+     * @param \Throwable $exception
      */
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    public function collect($request, $response, $exception = null)
     {
         $this->currentRequest = $this->requestStack && $this->requestStack->getMasterRequest() !== $request ? $request : null;
         $this->data = ['called_listeners' => [], 'not_called_listeners' => [], 'orphaned_events' => []];

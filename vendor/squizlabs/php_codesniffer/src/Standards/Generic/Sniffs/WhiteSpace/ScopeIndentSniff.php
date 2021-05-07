@@ -106,7 +106,7 @@ class ScopeIndentSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $debug = Config::getConfigData('scope_indent_debug');
         if ($debug !== null) {
@@ -770,10 +770,10 @@ class ScopeIndentSniff implements Sniff
             }
             /*
                 The indent of the line is checked by the following IF block.
-            
+
                 Up until now, we've just been figuring out what the indent
                 of this line should be.
-            
+
                 After this IF block, we adjust the indent again for
                 the checking of future lines
             */
@@ -1217,7 +1217,7 @@ class ScopeIndentSniff implements Sniff
      *
      * @return bool
      */
-    protected function adjustIndent(File $phpcsFile, $stackPtr, $length, $change)
+    protected function adjustIndent($phpcsFile, $stackPtr, $length, $change)
     {
         $tokens = $phpcsFile->getTokens();
         // We don't adjust indents outside of PHP.

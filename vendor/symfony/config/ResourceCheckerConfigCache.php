@@ -33,7 +33,7 @@ class ResourceCheckerConfigCache implements \ECSPrefix20210507\Symfony\Component
      * @param string                              $file             The absolute cache path
      * @param iterable|ResourceCheckerInterface[] $resourceCheckers The ResourceCheckers to use for the freshness check
      */
-    public function __construct(string $file, iterable $resourceCheckers = [])
+    public function __construct($file, $resourceCheckers = [])
     {
         $this->file = $file;
         $this->resourceCheckers = $resourceCheckers;
@@ -103,7 +103,7 @@ class ResourceCheckerConfigCache implements \ECSPrefix20210507\Symfony\Component
      *
      * @throws \RuntimeException When cache file can't be written
      */
-    public function write(string $content, array $metadata = null)
+    public function write($content, array $metadata = null)
     {
         $mode = 0666;
         $umask = \umask();
@@ -128,12 +128,16 @@ class ResourceCheckerConfigCache implements \ECSPrefix20210507\Symfony\Component
     }
     /**
      * Gets the meta file path.
+     * @return string
      */
-    private function getMetaFile() : string
+    private function getMetaFile()
     {
         return $this->file . '.meta';
     }
-    private function safelyUnserialize(string $file)
+    /**
+     * @param string $file
+     */
+    private function safelyUnserialize($file)
     {
         $meta = \false;
         $content = \file_get_contents($file);

@@ -37,15 +37,16 @@ class MemcachedSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpF
      *  * expiretime: The time to live in seconds.
      *
      * @throws \InvalidArgumentException When unsupported options are passed
+     * @param \Memcached $memcached
      */
-    public function __construct(\Memcached $memcached, array $options = [])
+    public function __construct($memcached, array $options = [])
     {
         $this->memcached = $memcached;
         if ($diff = \array_diff(\array_keys($options), ['prefix', 'expiretime'])) {
             throw new \InvalidArgumentException(\sprintf('The following options are not supported "%s".', \implode(', ', $diff)));
         }
         $this->ttl = isset($options['expiretime']) ? (int) $options['expiretime'] : 86400;
-        $this->prefix = $options['prefix'] ?? 'sf2s';
+        $this->prefix = isset($options['prefix']) ? $options['prefix'] : 'sf2s';
     }
     /**
      * @return bool
@@ -56,8 +57,9 @@ class MemcachedSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpF
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
      */
-    protected function doRead(string $sessionId)
+    protected function doRead($sessionId)
     {
         return $this->memcached->get($this->prefix . $sessionId) ?: '';
     }
@@ -71,15 +73,18 @@ class MemcachedSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpF
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
+     * @param string $data
      */
-    protected function doWrite(string $sessionId, string $data)
+    protected function doWrite($sessionId, $data)
     {
         return $this->memcached->set($this->prefix . $sessionId, $data, \time() + $this->ttl);
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
      */
-    protected function doDestroy(string $sessionId)
+    protected function doDestroy($sessionId)
     {
         $result = $this->memcached->delete($this->prefix . $sessionId);
         return $result || \Memcached::RES_NOTFOUND == $this->memcached->getResultCode();

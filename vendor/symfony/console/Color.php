@@ -16,12 +16,16 @@ use ECSPrefix20210507\Symfony\Component\Console\Exception\InvalidArgumentExcepti
  */
 final class Color
 {
-    private const COLORS = ['black' => 0, 'red' => 1, 'green' => 2, 'yellow' => 3, 'blue' => 4, 'magenta' => 5, 'cyan' => 6, 'white' => 7, 'default' => 9];
-    private const AVAILABLE_OPTIONS = ['bold' => ['set' => 1, 'unset' => 22], 'underscore' => ['set' => 4, 'unset' => 24], 'blink' => ['set' => 5, 'unset' => 25], 'reverse' => ['set' => 7, 'unset' => 27], 'conceal' => ['set' => 8, 'unset' => 28]];
+    const COLORS = ['black' => 0, 'red' => 1, 'green' => 2, 'yellow' => 3, 'blue' => 4, 'magenta' => 5, 'cyan' => 6, 'white' => 7, 'default' => 9];
+    const AVAILABLE_OPTIONS = ['bold' => ['set' => 1, 'unset' => 22], 'underscore' => ['set' => 4, 'unset' => 24], 'blink' => ['set' => 5, 'unset' => 25], 'reverse' => ['set' => 7, 'unset' => 27], 'conceal' => ['set' => 8, 'unset' => 28]];
     private $foreground;
     private $background;
     private $options = [];
-    public function __construct(string $foreground = '', string $background = '', array $options = [])
+    /**
+     * @param string $foreground
+     * @param string $background
+     */
+    public function __construct($foreground = '', $background = '', array $options = [])
     {
         $this->foreground = $this->parseColor($foreground);
         $this->background = $this->parseColor($background);
@@ -32,11 +36,18 @@ final class Color
             $this->options[$option] = self::AVAILABLE_OPTIONS[$option];
         }
     }
-    public function apply(string $text) : string
+    /**
+     * @param string $text
+     * @return string
+     */
+    public function apply($text)
     {
         return $this->set() . $text . $this->unset();
     }
-    public function set() : string
+    /**
+     * @return string
+     */
+    public function set()
     {
         $setCodes = [];
         if ('' !== $this->foreground) {
@@ -53,7 +64,10 @@ final class Color
         }
         return \sprintf("\33[%sm", \implode(';', $setCodes));
     }
-    public function unset() : string
+    /**
+     * @return string
+     */
+    public function unset()
     {
         $unsetCodes = [];
         if ('' !== $this->foreground) {
@@ -70,7 +84,11 @@ final class Color
         }
         return \sprintf("\33[%sm", \implode(';', $unsetCodes));
     }
-    private function parseColor(string $color) : string
+    /**
+     * @param string $color
+     * @return string
+     */
+    private function parseColor($color)
     {
         if ('' === $color) {
             return '';
@@ -90,7 +108,11 @@ final class Color
         }
         return (string) self::COLORS[$color];
     }
-    private function convertHexColorToAnsi(int $color) : string
+    /**
+     * @param int $color
+     * @return string
+     */
+    private function convertHexColorToAnsi($color)
     {
         $r = $color >> 16 & 255;
         $g = $color >> 8 & 255;
@@ -101,14 +123,26 @@ final class Color
         }
         return \sprintf('8;2;%d;%d;%d', $r, $g, $b);
     }
-    private function degradeHexColorToAnsi(int $r, int $g, int $b) : int
+    /**
+     * @param int $r
+     * @param int $g
+     * @param int $b
+     * @return int
+     */
+    private function degradeHexColorToAnsi($r, $g, $b)
     {
         if (0 === \round($this->getSaturation($r, $g, $b) / 50)) {
             return 0;
         }
         return \round($b / 255) << 2 | \round($g / 255) << 1 | \round($r / 255);
     }
-    private function getSaturation(int $r, int $g, int $b) : int
+    /**
+     * @param int $r
+     * @param int $g
+     * @param int $b
+     * @return int
+     */
+    private function getSaturation($r, $g, $b)
     {
         $r = $r / 255;
         $g = $g / 255;

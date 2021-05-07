@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -18,7 +17,12 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class WhitespacesAnalyzer
 {
-    public static function detectIndent(Tokens $tokens, int $index) : string
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return string
+     */
+    public static function detectIndent($tokens, $index)
     {
         while (\true) {
             $whitespaceIndex = $tokens->getPrevTokenOfKind($index, [[\T_WHITESPACE]]);

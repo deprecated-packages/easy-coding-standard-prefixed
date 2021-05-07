@@ -17,8 +17,9 @@ trait SyntheticTrait
      * container, but dynamically injected.
      *
      * @return $this
+     * @param bool $synthetic
      */
-    public final function synthetic(bool $synthetic = \true) : self
+    public final function synthetic($synthetic = \true)
     {
         $this->definition->setSynthetic($synthetic);
         return $this;

@@ -20,14 +20,17 @@ class ReferenceConfigurator extends \ECSPrefix20210507\Symfony\Component\Depende
     protected $id;
     /** @internal */
     protected $invalidBehavior = ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE;
-    public function __construct(string $id)
+    /**
+     * @param string $id
+     */
+    public function __construct($id)
     {
         $this->id = $id;
     }
     /**
      * @return $this
      */
-    public final function ignoreOnInvalid() : self
+    public final function ignoreOnInvalid()
     {
         $this->invalidBehavior = ContainerInterface::IGNORE_ON_INVALID_REFERENCE;
         return $this;
@@ -35,7 +38,7 @@ class ReferenceConfigurator extends \ECSPrefix20210507\Symfony\Component\Depende
     /**
      * @return $this
      */
-    public final function nullOnInvalid() : self
+    public final function nullOnInvalid()
     {
         $this->invalidBehavior = ContainerInterface::NULL_ON_INVALID_REFERENCE;
         return $this;
@@ -43,7 +46,7 @@ class ReferenceConfigurator extends \ECSPrefix20210507\Symfony\Component\Depende
     /**
      * @return $this
      */
-    public final function ignoreOnUninitialized() : self
+    public final function ignoreOnUninitialized()
     {
         $this->invalidBehavior = ContainerInterface::IGNORE_ON_UNINITIALIZED_REFERENCE;
         return $this;

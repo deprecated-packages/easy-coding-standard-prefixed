@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -19,7 +18,12 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class PhpUnitTestCaseIndicator
 {
-    public function isPhpUnitClass(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    public function isPhpUnitClass($tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind(\T_CLASS)) {
             throw new \LogicException(\sprintf('No "T_CLASS" at given index %d, got "%s".', $index, $tokens[$index]->getName()));
@@ -45,8 +49,9 @@ final class PhpUnitTestCaseIndicator
     }
     /**
      * @return \Generator array of [int start, int end] indexes from sooner to later classes
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    public function findPhpUnitClasses(Tokens $tokens) : \Generator
+    public function findPhpUnitClasses($tokens)
     {
         for ($index = $tokens->count() - 1; $tokens->offsetExists($index); --$index) {
             if (!$tokens[$index]->isGivenKind(\T_CLASS) || !$this->isPhpUnitClass($tokens, $index)) {

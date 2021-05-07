@@ -29,16 +29,22 @@ class ServiceReferenceGraphNode
      * @param string $id    The node identifier
      * @param mixed  $value The node value
      */
-    public function __construct(string $id, $value)
+    public function __construct($id, $value)
     {
         $this->id = $id;
         $this->value = $value;
     }
-    public function addInEdge(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge $edge)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge $edge
+     */
+    public function addInEdge($edge)
     {
         $this->inEdges[] = $edge;
     }
-    public function addOutEdge(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge $edge)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\ServiceReferenceGraphEdge $edge
+     */
+    public function addOutEdge($edge)
     {
         $this->outEdges[] = $edge;
     }

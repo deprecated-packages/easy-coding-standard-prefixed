@@ -15,7 +15,11 @@ final class OptionConfigurator
 {
     private $name;
     private $resolver;
-    public function __construct(string $name, \ECSPrefix20210507\Symfony\Component\OptionsResolver\OptionsResolver $resolver)
+    /**
+     * @param string $name
+     * @param \ECSPrefix20210507\Symfony\Component\OptionsResolver\OptionsResolver $resolver
+     */
+    public function __construct($name, $resolver)
     {
         $this->name = $name;
         $this->resolver = $resolver;
@@ -30,7 +34,7 @@ final class OptionConfigurator
      *
      * @throws AccessException If called from a lazy option or normalizer
      */
-    public function allowedTypes(string ...$types) : self
+    public function allowedTypes(...$types)
     {
         $this->resolver->setAllowedTypes($this->name, $types);
         return $this;
@@ -44,7 +48,7 @@ final class OptionConfigurator
      *
      * @throws AccessException If called from a lazy option or normalizer
      */
-    public function allowedValues(...$values) : self
+    public function allowedValues(...$values)
     {
         $this->resolver->setAllowedValues($this->name, $values);
         return $this;
@@ -58,15 +62,17 @@ final class OptionConfigurator
      *
      * @throws AccessException If called from a lazy option or normalizer
      */
-    public function default($value) : self
+    public function default($value)
     {
         $this->resolver->setDefault($this->name, $value);
         return $this;
     }
     /**
      * Defines an option configurator with the given name.
+     * @return $this
+     * @param string $option
      */
-    public function define(string $option) : self
+    public function define($option)
     {
         return $this->resolver->define($option);
     }
@@ -79,7 +85,7 @@ final class OptionConfigurator
      *
      * @return $this
      */
-    public function deprecated(string $package, string $version, $message = 'The option "%name%" is deprecated.') : self
+    public function deprecated($package, $version, $message = 'The option "%name%" is deprecated.')
     {
         $this->resolver->setDeprecated($this->name, $package, $version, $message);
         return $this;
@@ -93,7 +99,7 @@ final class OptionConfigurator
      *
      * @throws AccessException If called from a lazy option or normalizer
      */
-    public function normalize(\Closure $normalizer) : self
+    public function normalize($normalizer)
     {
         $this->resolver->setNormalizer($this->name, $normalizer);
         return $this;
@@ -105,7 +111,7 @@ final class OptionConfigurator
      *
      * @throws AccessException If called from a lazy option or normalizer
      */
-    public function required() : self
+    public function required()
     {
         $this->resolver->setRequired($this->name);
         return $this;
@@ -116,8 +122,9 @@ final class OptionConfigurator
      * @return $this
      *
      * @throws AccessException If called from a lazy option or normalizer
+     * @param string $info
      */
-    public function info(string $info) : self
+    public function info($info)
     {
         $this->resolver->setInfo($this->name, $info);
         return $this;

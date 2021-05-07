@@ -38,7 +38,7 @@ class PropertyLabelSpacingSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $colon = $phpcsFile->findNext(T_COLON, $stackPtr + 1);

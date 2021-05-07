@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyTesting\ValueObject\FixtureSplit;
 
 final class TrioContent
@@ -17,21 +16,35 @@ final class TrioContent
      * @var string
      */
     private $expectedResult;
-    public function __construct(string $firstValue, string $secondValue, string $expectedResult)
+    /**
+     * @param string $firstValue
+     * @param string $secondValue
+     * @param string $expectedResult
+     */
+    public function __construct($firstValue, $secondValue, $expectedResult)
     {
         $this->firstValue = $firstValue;
         $this->secondValue = $secondValue;
         $this->expectedResult = $expectedResult;
     }
-    public function getFirstValue() : string
+    /**
+     * @return string
+     */
+    public function getFirstValue()
     {
         return $this->firstValue;
     }
-    public function getSecondValue() : string
+    /**
+     * @return string
+     */
+    public function getSecondValue()
     {
         return $this->secondValue;
     }
-    public function getExpectedResult() : string
+    /**
+     * @return string
+     */
+    public function getExpectedResult()
     {
         return $this->expectedResult;
     }

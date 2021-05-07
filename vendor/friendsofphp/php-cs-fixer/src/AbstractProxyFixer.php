@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -35,8 +34,10 @@ abstract class AbstractProxyFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         foreach ($this->proxyFixers as $fixer) {
             if ($fixer->isCandidate($tokens)) {
@@ -47,8 +48,9 @@ abstract class AbstractProxyFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         foreach ($this->proxyFixers as $fixer) {
             if ($fixer->isRisky()) {
@@ -59,8 +61,9 @@ abstract class AbstractProxyFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         if (\count($this->proxyFixers) > 1) {
             throw new \LogicException('You need to override this method to provide the priority of combined fixers.');
@@ -69,8 +72,10 @@ abstract class AbstractProxyFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     * @param \SplFileInfo $file
+     * @return bool
      */
-    public function supports(\SplFileInfo $file) : bool
+    public function supports($file)
     {
         foreach ($this->proxyFixers as $fixer) {
             if ($fixer->supports($file)) {
@@ -81,8 +86,10 @@ abstract class AbstractProxyFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \PhpCsFixer\WhitespacesFixerConfig $config
      */
-    public function setWhitespacesConfig(\PhpCsFixer\WhitespacesFixerConfig $config) : void
+    public function setWhitespacesConfig($config)
     {
         parent::setWhitespacesConfig($config);
         foreach ($this->proxyFixers as $fixer) {
@@ -93,15 +100,18 @@ abstract class AbstractProxyFixer extends \PhpCsFixer\AbstractFixer
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         foreach ($this->proxyFixers as $fixer) {
             $fixer->fix($file, $tokens);
         }
     }
     /**
-     * @return FixerInterface[]
+     * @return mixed[]
      */
-    protected abstract function createProxyFixers() : array;
+    protected abstract function createProxyFixers();
 }

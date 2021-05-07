@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\ComposerJsonManipulator\Json;
 
 final class JsonCleaner
@@ -9,7 +8,7 @@ final class JsonCleaner
      * @param mixed[] $data
      * @return mixed[]
      */
-    public function removeEmptyKeysFromJsonArray(array $data) : array
+    public function removeEmptyKeysFromJsonArray(array $data)
     {
         foreach ($data as $key => $value) {
             if (!\is_array($value)) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,8 +29,9 @@ final class NoUnusedImportsFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Unused `use` statements must be removed.', [new CodeSample("<?php\nuse \\DateTime;\nuse \\Exception;\n\nnew DateTime();\n")]);
     }
@@ -40,22 +40,28 @@ final class NoUnusedImportsFixer extends AbstractFixer
      *
      * Must run before BlankLineAfterNamespaceFixer, NoExtraBlankLinesFixer, NoLeadingImportSlashFixer, SingleLineAfterImportsFixer.
      * Must run after ClassKeywordRemoveFixer, GlobalNamespaceImportFixer, PhpUnitFqcnAnnotationFixer, SingleImportPerStatementFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -10;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $useDeclarations = (new NamespaceUsesAnalyzer())->getDeclarationsFromTokens($tokens);
         if (0 === \count($useDeclarations)) {
@@ -79,8 +85,12 @@ final class NoUnusedImportsFixer extends AbstractFixer
     }
     /**
      * @param array<int, int> $ignoredIndexes
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis $namespace
+     * @param string $shortName
+     * @return bool
      */
-    private function isImportUsed(Tokens $tokens, NamespaceAnalysis $namespace, array $ignoredIndexes, string $shortName) : bool
+    private function isImportUsed($tokens, $namespace, array $ignoredIndexes, $shortName)
     {
         $namespaceEndIndex = $namespace->getScopeEndIndex();
         for ($index = $namespace->getScopeStartIndex(); $index <= $namespaceEndIndex; ++$index) {
@@ -106,7 +116,12 @@ final class NoUnusedImportsFixer extends AbstractFixer
         }
         return \false;
     }
-    private function removeUseDeclaration(Tokens $tokens, NamespaceUseAnalysis $useDeclaration) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceUseAnalysis $useDeclaration
+     */
+    private function removeUseDeclaration($tokens, $useDeclaration)
     {
         for ($index = $useDeclaration->getEndIndex() - 1; $index >= $useDeclaration->getStartIndex(); --$index) {
             if ($tokens[$index]->isComment()) {
@@ -169,7 +184,12 @@ final class NoUnusedImportsFixer extends AbstractFixer
             $tokens->clearAt($prevIndex);
         }
     }
-    private function removeUsesInSameNamespace(Tokens $tokens, array $useDeclarations, NamespaceAnalysis $namespaceDeclaration) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis $namespaceDeclaration
+     */
+    private function removeUsesInSameNamespace($tokens, array $useDeclarations, $namespaceDeclaration)
     {
         $namespace = $namespaceDeclaration->getFullName();
         $nsLength = \strlen($namespace . '\\');

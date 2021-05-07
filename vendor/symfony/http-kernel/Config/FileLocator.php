@@ -20,15 +20,21 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\KernelInterface;
 class FileLocator extends BaseFileLocator
 {
     private $kernel;
-    public function __construct(KernelInterface $kernel)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelInterface $kernel
+     */
+    public function __construct($kernel)
     {
         $this->kernel = $kernel;
         parent::__construct();
     }
     /**
      * {@inheritdoc}
+     * @param string $file
+     * @param string $currentPath
+     * @param bool $first
      */
-    public function locate(string $file, string $currentPath = null, bool $first = \true)
+    public function locate($file, $currentPath = null, $first = \true)
     {
         if (isset($file[0]) && '@' === $file[0]) {
             $resource = $this->kernel->locateResource($file);

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -38,8 +37,10 @@ final class ConstantCaseFixer extends AbstractFixer implements ConfigurableFixer
     private $fixFunction;
     /**
      * {@inheritdoc}
+     * @param mixed[] $configuration
+     * @return void
      */
-    public function configure(array $configuration) : void
+    public function configure($configuration)
     {
         parent::configure($configuration);
         if ('lower' === $this->configuration['case']) {
@@ -55,29 +56,36 @@ final class ConstantCaseFixer extends AbstractFixer implements ConfigurableFixer
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('The PHP constants `true`, `false`, and `null` MUST be written using the correct casing.', [new CodeSample("<?php\n\$a = FALSE;\n\$b = True;\n\$c = nuLL;\n"), new CodeSample("<?php\n\$a = FALSE;\n\$b = True;\n\$c = nuLL;\n", ['case' => 'upper'])]);
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('case', 'Whether to use the `upper` or `lower` case syntax.'))->setAllowedValues(['upper', 'lower'])->setDefault('lower')->getOption()]);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $fixFunction = $this->fixFunction;
         foreach ($tokens as $index => $token) {
@@ -89,7 +97,12 @@ final class ConstantCaseFixer extends AbstractFixer implements ConfigurableFixer
             }
         }
     }
-    private function isNeighbourAccepted(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    private function isNeighbourAccepted($tokens, $index)
     {
         static $forbiddenTokens = null;
         if (null === $forbiddenTokens) {

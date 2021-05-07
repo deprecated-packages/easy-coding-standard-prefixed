@@ -23,7 +23,11 @@ class MigratingSessionHandler implements \SessionHandlerInterface, \SessionUpdat
 {
     private $currentHandler;
     private $writeOnlyHandler;
-    public function __construct(\SessionHandlerInterface $currentHandler, \SessionHandlerInterface $writeOnlyHandler)
+    /**
+     * @param \SessionHandlerInterface $currentHandler
+     * @param \SessionHandlerInterface $writeOnlyHandler
+     */
+    public function __construct($currentHandler, $writeOnlyHandler)
     {
         if (!$currentHandler instanceof \SessionUpdateTimestampHandlerInterface) {
             $currentHandler = new \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler($currentHandler);

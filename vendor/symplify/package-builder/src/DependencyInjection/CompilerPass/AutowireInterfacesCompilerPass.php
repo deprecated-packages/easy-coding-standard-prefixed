@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\DependencyInjection\CompilerPass;
 
 use ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -18,7 +17,11 @@ final class AutowireInterfacesCompilerPass implements CompilerPassInterface
     {
         $this->typesToAutowire = $typesToAutowire;
     }
-    public function process(ContainerBuilder $containerBuilder) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
+     */
+    public function process($containerBuilder)
     {
         $containerBuilderDefinitions = $containerBuilder->getDefinitions();
         foreach ($containerBuilderDefinitions as $definition) {

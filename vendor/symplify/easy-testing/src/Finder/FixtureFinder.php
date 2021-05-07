@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyTesting\Finder;
 
 use ECSPrefix20210507\Symfony\Component\Finder\Finder;
@@ -12,14 +11,17 @@ final class FixtureFinder
      * @var FinderSanitizer
      */
     private $finderSanitizer;
-    public function __construct(FinderSanitizer $finderSanitizer)
+    /**
+     * @param \Symplify\SmartFileSystem\Finder\FinderSanitizer $finderSanitizer
+     */
+    public function __construct($finderSanitizer)
     {
         $this->finderSanitizer = $finderSanitizer;
     }
     /**
-     * @return SmartFileInfo[]
+     * @return mixed[]
      */
-    public function find(array $sources) : array
+    public function find(array $sources)
     {
         $finder = new Finder();
         $finder->files()->in($sources)->name('*.php.inc')->path('Fixture')->sortByName();

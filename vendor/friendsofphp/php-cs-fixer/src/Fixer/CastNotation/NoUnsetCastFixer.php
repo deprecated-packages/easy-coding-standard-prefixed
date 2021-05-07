@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,15 +24,18 @@ final class NoUnsetCastFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Variables must be set `null` instead of using `(unset)` casting.', [new CodeSample("<?php\n\$a = (unset) \$b;\n")]);
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_UNSET_CAST);
     }
@@ -41,15 +43,19 @@ final class NoUnsetCastFixer extends AbstractFixer
      * {@inheritdoc}
      *
      * Must run before BinaryOperatorSpacesFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         for ($index = \count($tokens) - 1; $index > 0; --$index) {
             if ($tokens[$index]->isGivenKind(\T_UNSET_CAST)) {
@@ -57,7 +63,12 @@ final class NoUnsetCastFixer extends AbstractFixer
             }
         }
     }
-    private function fixUnsetCast(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function fixUnsetCast($tokens, $index)
     {
         $assignmentIndex = $tokens->getPrevMeaningfulToken($index);
         if (null === $assignmentIndex || !$tokens[$assignmentIndex]->equals('=')) {

@@ -20,12 +20,19 @@ class RedisProxy
     private $redis;
     private $initializer;
     private $ready = \false;
-    public function __construct(\Redis $redis, \Closure $initializer)
+    /**
+     * @param \Redis $redis
+     * @param \Closure $initializer
+     */
+    public function __construct($redis, $initializer)
     {
         $this->redis = $redis;
         $this->initializer = $initializer;
     }
-    public function __call(string $method, array $args)
+    /**
+     * @param string $method
+     */
+    public function __call($method, array $args)
     {
         $this->ready ?: ($this->ready = $this->initializer->__invoke($this->redis));
         return $this->redis->{$method}(...$args);

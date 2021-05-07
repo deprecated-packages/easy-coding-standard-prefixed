@@ -26,8 +26,9 @@ class StreamedResponseListener implements EventSubscriberInterface
 {
     /**
      * Filters the Response.
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ResponseEvent $event
      */
-    public function onKernelResponse(ResponseEvent $event)
+    public function onKernelResponse($event)
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -37,7 +38,10 @@ class StreamedResponseListener implements EventSubscriberInterface
             $response->send();
         }
     }
-    public static function getSubscribedEvents() : array
+    /**
+     * @return mixed[]
+     */
+    public static function getSubscribedEvents()
     {
         return [KernelEvents::RESPONSE => ['onKernelResponse', -1024]];
     }

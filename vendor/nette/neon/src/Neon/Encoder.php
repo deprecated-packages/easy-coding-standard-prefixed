@@ -1,10 +1,5 @@
 <?php
 
-/**
- * This file is part of the Nette Framework (https://nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
- */
-declare (strict_types=1);
 namespace ECSPrefix20210507\Nette\Neon;
 
 /**
@@ -13,11 +8,13 @@ namespace ECSPrefix20210507\Nette\Neon;
  */
 final class Encoder
 {
-    public const BLOCK = 1;
+    const BLOCK = 1;
     /**
      * Returns the NEON representation of a value.
+     * @param int $flags
+     * @return string
      */
-    public function encode($var, int $flags = 0) : string
+    public function encode($var, $flags = 0)
     {
         if ($var instanceof \DateTimeInterface) {
             return $var->format('Y-m-d H:i:s O');
@@ -62,7 +59,7 @@ final class Encoder
             }
             if (\strpos($var, "\n") !== \false) {
                 $res = \preg_replace_callback('#[^\\\\]|\\\\(.)#s', function ($m) {
-                    return ['n' => "\n\t", 't' => "\t", '"' => '"'][$m[1] ?? ''] ?? $m[0];
+                    return isset(['n' => "\n\t", 't' => "\t", '"' => '"'][isset($m[1]) ? $m[1] : '']) ? ['n' => "\n\t", 't' => "\t", '"' => '"'][isset($m[1]) ? $m[1] : ''] : $m[0];
                 }, $res);
                 $res = '"""' . "\n\t" . \substr($res, 1, -1) . "\n" . '"""';
             }

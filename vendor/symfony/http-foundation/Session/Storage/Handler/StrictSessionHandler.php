@@ -19,7 +19,10 @@ class StrictSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoun
 {
     private $handler;
     private $doDestroy;
-    public function __construct(\SessionHandlerInterface $handler)
+    /**
+     * @param \SessionHandlerInterface $handler
+     */
+    public function __construct($handler)
     {
         if ($handler instanceof \SessionUpdateTimestampHandlerInterface) {
             throw new \LogicException(\sprintf('"%s" is already an instance of "SessionUpdateTimestampHandlerInterface", you cannot wrap it with "%s".', \get_debug_type($handler), self::class));
@@ -36,8 +39,9 @@ class StrictSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoun
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
      */
-    protected function doRead(string $sessionId)
+    protected function doRead($sessionId)
     {
         return $this->handler->read($sessionId);
     }
@@ -50,8 +54,10 @@ class StrictSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoun
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
+     * @param string $data
      */
-    protected function doWrite(string $sessionId, string $data)
+    protected function doWrite($sessionId, $data)
     {
         return $this->handler->write($sessionId, $data);
     }
@@ -66,8 +72,9 @@ class StrictSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoun
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
      */
-    protected function doDestroy(string $sessionId)
+    protected function doDestroy($sessionId)
     {
         $this->doDestroy = \false;
         return $this->handler->destroy($sessionId);

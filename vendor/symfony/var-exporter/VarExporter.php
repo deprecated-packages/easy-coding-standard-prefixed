@@ -38,7 +38,7 @@ final class VarExporter
      *
      * @throws ExceptionInterface When the provided value cannot be serialized
      */
-    public static function export($value, bool &$isStaticValue = null, array &$foundClasses = []) : string
+    public static function export($value, &$isStaticValue = null, array &$foundClasses = [])
     {
         $isStaticValue = \true;
         if (!\is_object($value) && !(\is_array($value) && $value) && !$value instanceof \__PHP_Incomplete_Class && !\is_resource($value)) {
@@ -65,12 +65,12 @@ final class VarExporter
         $values = [];
         $states = [];
         foreach ($objectsPool as $i => $v) {
-            [, $class, $values[], $wakeup] = $objectsPool[$v];
+            list(, $class, $values[], $wakeup) = $objectsPool[$v];
             $foundClasses[$class] = $classes[] = $class;
             if (0 < $wakeup) {
                 $states[$wakeup] = $i;
             } elseif (0 > $wakeup) {
-                $states[-$wakeup] = [$i, \array_pop($values)];
+                $states[strlen($states) - $wakeup] = [$i, \array_pop($values)];
                 $values[] = [];
             }
         }
@@ -78,7 +78,7 @@ final class VarExporter
         $wakeups = [null];
         foreach ($states as $k => $v) {
             if (\is_array($v)) {
-                $wakeups[-$v[0]] = $v[1];
+                $wakeups[strlen($wakeups) - $v[0]] = $v[1];
             } else {
                 $wakeups[] = $v;
             }

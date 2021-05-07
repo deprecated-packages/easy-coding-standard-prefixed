@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -57,7 +56,10 @@ final class DescribeCommand extends Command
      * @var array<string, FixerInterface>
      */
     private $fixers;
-    public function __construct(?FixerFactory $fixerFactory = null)
+    /**
+     * @param \PhpCsFixer\FixerFactory|null $fixerFactory
+     */
+    public function __construct($fixerFactory = null)
     {
         parent::__construct();
         if (null === $fixerFactory) {
@@ -68,15 +70,19 @@ final class DescribeCommand extends Command
     }
     /**
      * {@inheritdoc}
+     * @return void
      */
-    protected function configure() : void
+    protected function configure()
     {
         $this->setDefinition([new InputArgument('name', InputArgument::REQUIRED, 'Name of rule / set.')])->setDescription('Describe rule / ruleset.');
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    protected function execute($input, $output)
     {
         if (OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity() && $output instanceof ConsoleOutputInterface) {
             $stdErr = $output->getErrorOutput();
@@ -98,7 +104,12 @@ final class DescribeCommand extends Command
         }
         return 0;
     }
-    private function describeRule(OutputInterface $output, string $name) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @param string $name
+     */
+    private function describeRule($output, $name)
     {
         $fixers = $this->getFixers();
         if (!isset($fixers[$name])) {
@@ -206,7 +217,12 @@ final class DescribeCommand extends Command
             }
         }
     }
-    private function describeSet(OutputInterface $output, string $name) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @param string $name
+     */
+    private function describeSet($output, $name)
     {
         if (!\in_array($name, $this->getSetNames(), \true)) {
             throw new \PhpCsFixer\Console\Command\DescribeNameNotFoundException($name, 'set');
@@ -234,9 +250,9 @@ final class DescribeCommand extends Command
         $output->write($help);
     }
     /**
-     * @return array<string, FixerInterface>
+     * @return mixed[]
      */
-    private function getFixers() : array
+    private function getFixers()
     {
         if (null !== $this->fixers) {
             return $this->fixers;
@@ -250,9 +266,9 @@ final class DescribeCommand extends Command
         return $this->fixers;
     }
     /**
-     * @return string[]
+     * @return mixed[]
      */
-    private function getSetNames() : array
+    private function getSetNames()
     {
         if (null !== $this->setNames) {
             return $this->setNames;
@@ -262,8 +278,10 @@ final class DescribeCommand extends Command
     }
     /**
      * @param string $type 'rule'|'set'
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
      */
-    private function describeList(OutputInterface $output, string $type) : void
+    private function describeList($output, $type)
     {
         if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERY_VERBOSE) {
             $describe = ['sets' => $this->getSetNames(), 'rules' => $this->getFixers()];
@@ -280,7 +298,11 @@ final class DescribeCommand extends Command
             }
         }
     }
-    private function replaceRstLinks(string $content) : string
+    /**
+     * @param string $content
+     * @return string
+     */
+    private function replaceRstLinks($content)
     {
         return Preg::replaceCallback('/(`[^<]+<[^>]+>`_)/', static function (array $matches) {
             return Preg::replaceCallback('/`(.*)<(.*)>`_/', static function (array $matches) {

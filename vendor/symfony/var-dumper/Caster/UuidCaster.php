@@ -17,7 +17,13 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
  */
 final class UuidCaster
 {
-    public static function castRamseyUuid(UuidInterface $c, array $a, Stub $stub, bool $isNested) : array
+    /**
+     * @param \ECSPrefix20210507\Ramsey\Uuid\UuidInterface $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     * @return mixed[]
+     */
+    public static function castRamseyUuid($c, array $a, $stub, $isNested)
     {
         $a += [\ECSPrefix20210507\Symfony\Component\VarDumper\Caster\Caster::PREFIX_VIRTUAL . 'uuid' => (string) $c];
         return $a;

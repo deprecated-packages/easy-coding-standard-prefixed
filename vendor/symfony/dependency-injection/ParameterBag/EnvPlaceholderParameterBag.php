@@ -24,8 +24,9 @@ class EnvPlaceholderParameterBag extends \ECSPrefix20210507\Symfony\Component\De
     private static $counter = 0;
     /**
      * {@inheritdoc}
+     * @param string $name
      */
-    public function get(string $name)
+    public function get($name)
     {
         if (0 === \strpos($name, 'env(') && ')' === \substr($name, -1) && 'env()' !== $name) {
             $env = \substr($name, 4, -1);
@@ -56,8 +57,9 @@ class EnvPlaceholderParameterBag extends \ECSPrefix20210507\Symfony\Component\De
     }
     /**
      * Gets the common env placeholder prefix for env vars created by this bag.
+     * @return string
      */
-    public function getEnvPlaceholderUniquePrefix() : string
+    public function getEnvPlaceholderUniquePrefix()
     {
         if (null === $this->envPlaceholderUniquePrefix) {
             $reproducibleEntropy = \unserialize(\serialize($this->parameters));
@@ -77,7 +79,10 @@ class EnvPlaceholderParameterBag extends \ECSPrefix20210507\Symfony\Component\De
     {
         return $this->envPlaceholders;
     }
-    public function getUnusedEnvPlaceholders() : array
+    /**
+     * @return mixed[]
+     */
+    public function getUnusedEnvPlaceholders()
     {
         return $this->unusedEnvPlaceholders;
     }
@@ -87,8 +92,9 @@ class EnvPlaceholderParameterBag extends \ECSPrefix20210507\Symfony\Component\De
     }
     /**
      * Merges the env placeholders of another EnvPlaceholderParameterBag.
+     * @param $this $bag
      */
-    public function mergeEnvPlaceholders(self $bag)
+    public function mergeEnvPlaceholders($bag)
     {
         if ($newPlaceholders = $bag->getEnvPlaceholders()) {
             $this->envPlaceholders += $newPlaceholders;

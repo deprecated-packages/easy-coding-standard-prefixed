@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,8 +24,9 @@ final class SemicolonAfterInstructionFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Instructions must be terminated with a semicolon.', [new CodeSample("<?php echo 1 ?>\n")]);
     }
@@ -34,22 +34,28 @@ final class SemicolonAfterInstructionFixer extends AbstractFixer
      * {@inheritdoc}
      *
      * Must run before SimplifiedIfReturnFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 2;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_CLOSE_TAG);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         for ($index = \count($tokens) - 1; $index > 1; --$index) {
             if (!$tokens[$index]->isGivenKind(\T_CLOSE_TAG)) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -32,15 +31,20 @@ final class ErrorOutput
      * @var bool
      */
     private $isDecorated;
-    public function __construct(OutputInterface $output)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     */
+    public function __construct($output)
     {
         $this->output = $output;
         $this->isDecorated = $output->isDecorated();
     }
     /**
      * @param Error[] $errors
+     * @return void
+     * @param string $process
      */
-    public function listErrors(string $process, array $errors) : void
+    public function listErrors($process, array $errors)
     {
         $this->output->writeln(['', \sprintf('Files that were not fixed due to errors reported during %s:', $process)]);
         $showDetails = $this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERY_VERBOSE;
@@ -89,7 +93,10 @@ final class ErrorOutput
             }
         }
     }
-    private function outputTrace(array $trace) : void
+    /**
+     * @return void
+     */
+    private function outputTrace(array $trace)
     {
         if (isset($trace['class'], $trace['type'], $trace['function'])) {
             $this->output->writeln(\sprintf('      <comment>%s</comment>%s<comment>%s()</comment>', $this->prepareOutput($trace['class']), $this->prepareOutput($trace['type']), $this->prepareOutput($trace['function'])));
@@ -100,7 +107,11 @@ final class ErrorOutput
             $this->output->writeln(\sprintf('        in <info>%s</info> at line <info>%d</info>', $this->prepareOutput($trace['file']), $trace['line']));
         }
     }
-    private function prepareOutput(string $string) : string
+    /**
+     * @param string $string
+     * @return string
+     */
+    private function prepareOutput($string)
     {
         return $this->isDecorated ? OutputFormatter::escape($string) : $string;
     }

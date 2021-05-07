@@ -18,18 +18,23 @@ namespace ECSPrefix20210507\Symfony\Component\Cache\Marshaller;
 class TagAwareMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface
 {
     private $marshaller;
-    public function __construct(\ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller
+     */
+    public function __construct($marshaller = null)
     {
-        $this->marshaller = $marshaller ?? new \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
+        $this->marshaller = isset($marshaller) ? $marshaller : new \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\DefaultMarshaller();
     }
     /**
      * {@inheritdoc}
+     * @param mixed[]|null $failed
+     * @return mixed[]
      */
-    public function marshall(array $values, ?array &$failed) : array
+    public function marshall(array $values, &$failed)
     {
         $failed = $notSerialized = $serialized = [];
         foreach ($values as $id => $value) {
-            if (\is_array($value) && \is_array($value['tags'] ?? null) && \array_key_exists('value', $value) && \count($value) === 2 + (\is_string($value['meta'] ?? null) && 8 === \strlen($value['meta']))) {
+            if (\is_array($value) && \is_array(isset($value['tags']) ? $value['tags'] : null) && \array_key_exists('value', $value) && \count($value) === 2 + (\is_string(isset($value['meta']) ? $value['meta'] : null) && 8 === \strlen($value['meta']))) {
                 // if the value is an array with keys "tags", "value" and "meta", use a compact serialization format
                 // magic numbers in the form 9D-..-..-..-..-00-..-..-..-5F allow detecting this format quickly in unmarshall()
                 $v = $this->marshaller->marshall($value, $f);
@@ -40,7 +45,7 @@ class TagAwareMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\M
                     if ([] === $value['tags']) {
                         $v['tags'] = '';
                     }
-                    $serialized[$id] = "ù" . ($value['meta'] ?? "\0\0\0\0\0\0\0\0") . \pack('N', \strlen($v['tags'])) . $v['tags'] . $v['value'];
+                    $serialized[$id] = "ù" . (isset($value['meta']) ? $value['meta'] : "\0\0\0\0\0\0\0\0") . \pack('N', \strlen($v['tags'])) . $v['tags'] . $v['value'];
                     $serialized[$id][9] = "_";
                 }
             } else {
@@ -56,8 +61,9 @@ class TagAwareMarshaller implements \ECSPrefix20210507\Symfony\Component\Cache\M
     }
     /**
      * {@inheritdoc}
+     * @param string $value
      */
-    public function unmarshall(string $value)
+    public function unmarshall($value)
     {
         // detect the compact format used in marshall() using magic numbers in the form 9D-..-..-..-..-00-..-..-..-5F
         if (13 >= \strlen($value) || "ù" !== $value[0] || "\0" !== $value[5] || "_" !== $value[9]) {

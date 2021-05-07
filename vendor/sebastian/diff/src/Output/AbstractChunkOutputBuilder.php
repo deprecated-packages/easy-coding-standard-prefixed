@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of sebastian/diff.
  *
@@ -17,8 +16,10 @@ abstract class AbstractChunkOutputBuilder implements \ECSPrefix20210507\Sebastia
     /**
      * Takes input of the diff array and returns the common parts.
      * Iterates through diff line by line.
+     * @param int $lineThreshold
+     * @return mixed[]
      */
-    protected function getCommonChunks(array $diff, int $lineThreshold = 5) : array
+    protected function getCommonChunks(array $diff, $lineThreshold = 5)
     {
         $diffSize = count($diff);
         $capturing = \false;

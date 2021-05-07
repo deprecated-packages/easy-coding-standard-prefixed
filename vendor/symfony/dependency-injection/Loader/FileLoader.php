@@ -27,14 +27,18 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArg
  */
 abstract class FileLoader extends BaseFileLoader
 {
-    public const ANONYMOUS_ID_REGEXP = '/^\\.\\d+_[^~]*+~[._a-zA-Z\\d]{7}$/';
+    const ANONYMOUS_ID_REGEXP = '/^\\.\\d+_[^~]*+~[._a-zA-Z\\d]{7}$/';
     protected $container;
     protected $isLoadingInstanceof = \false;
     protected $instanceof = [];
     protected $interfaces = [];
     protected $singlyImplemented = [];
     protected $autoRegisterAliasesForSinglyImplementedInterfaces = \true;
-    public function __construct(ContainerBuilder $container, FileLocatorInterface $locator)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param \ECSPrefix20210507\Symfony\Component\Config\FileLocatorInterface $locator
+     */
+    public function __construct($container, $locator)
     {
         $this->container = $container;
         parent::__construct($locator);
@@ -59,7 +63,7 @@ abstract class FileLoader extends BaseFileLoader
                 throw $e;
             }
             foreach ($prev->getTrace() as $frame) {
-                if ('import' === ($frame['function'] ?? null) && \is_a($frame['class'] ?? '', Loader::class, \true)) {
+                if ('import' === (isset($frame['function']) ? $frame['function'] : null) && \is_a(isset($frame['class']) ? $frame['class'] : '', Loader::class, \true)) {
                     break;
                 }
             }
@@ -76,7 +80,7 @@ abstract class FileLoader extends BaseFileLoader
      * @param string               $resource  The directory to look for classes, glob-patterns allowed
      * @param string|string[]|null $exclude   A globbed path of files to exclude or an array of globbed paths of files to exclude
      */
-    public function registerClasses(Definition $prototype, $namespace, $resource, $exclude = null)
+    public function registerClasses($prototype, $namespace, $resource, $exclude = null)
     {
         if ('\\' !== \substr($namespace, -1)) {
             throw new InvalidArgumentException(\sprintf('Namespace prefix must end with a "\\": "%s".', $namespace));
@@ -97,7 +101,7 @@ abstract class FileLoader extends BaseFileLoader
                     continue;
                 }
                 foreach (\class_implements($class, \false) as $interface) {
-                    $this->singlyImplemented[$interface] = ($this->singlyImplemented[$interface] ?? $class) !== $class ? \false : $class;
+                    $this->singlyImplemented[$interface] = (isset($this->singlyImplemented[$interface]) ? $this->singlyImplemented[$interface] : $class) !== $class ? \false : $class;
                 }
             }
         }
@@ -118,8 +122,9 @@ abstract class FileLoader extends BaseFileLoader
      * Registers a definition in the container with its instanceof-conditionals.
      *
      * @param string $id
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
      */
-    protected function setDefinition($id, Definition $definition)
+    protected function setDefinition($id, $definition)
     {
         $this->container->removeBindings($id);
         if ($this->isLoadingInstanceof) {
@@ -131,7 +136,12 @@ abstract class FileLoader extends BaseFileLoader
             $this->container->setDefinition($id, $definition->setInstanceofConditionals($this->instanceof));
         }
     }
-    private function findClasses(string $namespace, string $pattern, array $excludePatterns) : array
+    /**
+     * @param string $namespace
+     * @param string $pattern
+     * @return mixed[]
+     */
+    private function findClasses($namespace, $pattern, array $excludePatterns)
     {
         $parameterBag = $this->container->getParameterBag();
         $excludePaths = [];

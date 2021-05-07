@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,26 +23,36 @@ interface ConfigInterface
      *
      * @return null|string Returns null if not using cache
      */
-    public function getCacheFile() : ?string;
+    public function getCacheFile();
     /**
      * Returns the custom fixers to use.
      *
-     * @return FixerInterface[]
+     * @return mixed[]
      */
-    public function getCustomFixers() : array;
+    public function getCustomFixers();
     /**
      * Returns files to scan.
      *
-     * @return iterable|\Traversable
+     * @return mixed[]
      */
-    public function getFinder() : iterable;
-    public function getFormat() : string;
+    public function getFinder();
+    /**
+     * @return string
+     */
+    public function getFormat();
     /**
      * Returns true if progress should be hidden.
+     * @return bool
      */
-    public function getHideProgress() : bool;
-    public function getIndent() : string;
-    public function getLineEnding() : string;
+    public function getHideProgress();
+    /**
+     * @return string
+     */
+    public function getIndent();
+    /**
+     * @return string
+     */
+    public function getLineEnding();
     /**
      * Returns the name of the configuration.
      *
@@ -51,50 +60,81 @@ interface ConfigInterface
      *
      * @return string The name of the configuration
      */
-    public function getName() : string;
+    public function getName();
     /**
      * Get configured PHP executable, if any.
+     * @return string|null
      */
-    public function getPhpExecutable() : ?string;
+    public function getPhpExecutable();
     /**
      * Check if it is allowed to run risky fixers.
+     * @return bool
      */
-    public function getRiskyAllowed() : bool;
+    public function getRiskyAllowed();
     /**
      * Get rules.
      *
      * Keys of array are names of fixers/sets, values are true/false.
+     * @return mixed[]
      */
-    public function getRules() : array;
+    public function getRules();
     /**
      * Returns true if caching should be enabled.
+     * @return bool
      */
-    public function getUsingCache() : bool;
+    public function getUsingCache();
     /**
      * Adds a suite of custom fixers.
      *
      * Name of custom fixer should follow `VendorName/rule_name` convention.
      *
      * @param FixerInterface[]|iterable|\Traversable $fixers
+     * @return $this
      */
-    public function registerCustomFixers(iterable $fixers) : self;
+    public function registerCustomFixers($fixers);
     /**
      * Sets the path to the cache file.
+     * @return $this
+     * @param string $cacheFile
      */
-    public function setCacheFile(string $cacheFile) : self;
-    public function setFinder(iterable $finder) : self;
-    public function setFormat(string $format) : self;
-    public function setHideProgress(bool $hideProgress) : self;
-    public function setIndent(string $indent) : self;
-    public function setLineEnding(string $lineEnding) : self;
+    public function setCacheFile($cacheFile);
+    /**
+     * @return $this
+     * @param mixed[] $finder
+     */
+    public function setFinder($finder);
+    /**
+     * @return $this
+     * @param string $format
+     */
+    public function setFormat($format);
+    /**
+     * @return $this
+     * @param bool $hideProgress
+     */
+    public function setHideProgress($hideProgress);
+    /**
+     * @return $this
+     * @param string $indent
+     */
+    public function setIndent($indent);
+    /**
+     * @return $this
+     * @param string $lineEnding
+     */
+    public function setLineEnding($lineEnding);
     /**
      * Set PHP executable.
+     * @return $this
+     * @param string|null $phpExecutable
      */
-    public function setPhpExecutable(?string $phpExecutable) : self;
+    public function setPhpExecutable($phpExecutable);
     /**
      * Set if it is allowed to run risky fixers.
+     * @return $this
+     * @param bool $isRiskyAllowed
      */
-    public function setRiskyAllowed(bool $isRiskyAllowed) : self;
+    public function setRiskyAllowed($isRiskyAllowed);
     /**
      * Set rules.
      *
@@ -102,7 +142,12 @@ interface ConfigInterface
      * Value for set must be bool (turn it on or off).
      * Value for fixer may be bool (turn it on or off) or array of configuration
      * (turn it on and contains configuration for FixerInterface::configure method).
+     * @return $this
      */
-    public function setRules(array $rules) : self;
-    public function setUsingCache(bool $usingCache) : self;
+    public function setRules(array $rules);
+    /**
+     * @return $this
+     * @param bool $usingCache
+     */
+    public function setUsingCache($usingCache);
 }

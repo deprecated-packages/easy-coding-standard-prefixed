@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -35,7 +34,7 @@ final class NativeFunctionInvocationFixer extends AbstractFixer implements Confi
     /**
      * @internal
      */
-    public const SET_ALL = '@all';
+    const SET_ALL = '@all';
     /**
      * Subset of SET_INTERNAL.
      *
@@ -46,24 +45,29 @@ final class NativeFunctionInvocationFixer extends AbstractFixer implements Confi
      *
      * @internal
      */
-    public const SET_COMPILER_OPTIMIZED = '@compiler_optimized';
+    const SET_COMPILER_OPTIMIZED = '@compiler_optimized';
     /**
      * @internal
      */
-    public const SET_INTERNAL = '@internal';
+    const SET_INTERNAL = '@internal';
     /**
      * @var callable
      */
     private $functionFilter;
-    public function configure(array $configuration) : void
+    /**
+     * @param mixed[] $configuration
+     * @return void
+     */
+    public function configure($configuration)
     {
         parent::configure($configuration);
         $this->functionFilter = $this->getFunctionFilter();
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Add leading `\\` before function invocation to speed up resolving.', [new CodeSample('<?php
 
@@ -118,29 +122,36 @@ $c = get_class($d);
      *
      * Must run before GlobalNamespaceImportFixer.
      * Must run after BacktickToShellExecFixer, StrictParamFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 1;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         if ('all' === $this->configuration['scope']) {
             $this->fixFunctionCalls($tokens, $this->functionFilter, 0, \count($tokens) - 1, \false);
@@ -155,8 +166,9 @@ $c = get_class($d);
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('exclude', 'List of functions to ignore.'))->setAllowedTypes(['array'])->setAllowedValues([static function (array $value) {
             foreach ($value as $functionName) {
@@ -178,7 +190,14 @@ $c = get_class($d);
             return \true;
         }])->setDefault([self::SET_COMPILER_OPTIMIZED])->getOption(), (new FixerOptionBuilder('scope', 'Only fix function calls that are made within a namespace or fix all.'))->setAllowedValues(['all', 'namespaced'])->setDefault('all')->getOption(), (new FixerOptionBuilder('strict', 'Whether leading `\\` of function call not meant to have it should be removed.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
-    private function fixFunctionCalls(Tokens $tokens, callable $functionFilter, int $start, int $end, bool $tryToRemove) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $start
+     * @param int $end
+     * @param bool $tryToRemove
+     */
+    private function fixFunctionCalls($tokens, callable $functionFilter, $start, $end, $tryToRemove)
     {
         $functionsAnalyzer = new FunctionsAnalyzer();
         $tokensToInsert = [];
@@ -204,7 +223,10 @@ $c = get_class($d);
         }
         $tokens->insertSlices($tokensToInsert);
     }
-    private function getFunctionFilter() : callable
+    /**
+     * @return callable
+     */
+    private function getFunctionFilter()
     {
         $exclude = $this->normalizeFunctionNames($this->configuration['exclude']);
         if (\in_array(self::SET_ALL, $this->configuration['include'], \true)) {

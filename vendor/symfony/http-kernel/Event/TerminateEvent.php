@@ -24,12 +24,20 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface;
 final class TerminateEvent extends \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
-    public function __construct(HttpKernelInterface $kernel, Request $request, Response $response)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface $kernel
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
+     */
+    public function __construct($kernel, $request, $response)
     {
         parent::__construct($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
         $this->response = $response;
     }
-    public function getResponse() : Response
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response
+     */
+    public function getResponse()
     {
         return $this->response;
     }

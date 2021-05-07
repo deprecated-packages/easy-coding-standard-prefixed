@@ -40,12 +40,15 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
     }
     /**
      * {@inheritdoc}
+     * @param string|null $eventName
+     * @param object $event
+     * @return object
      */
-    public function dispatch(object $event, string $eventName = null) : object
+    public function dispatch($event, $eventName = null)
     {
-        $eventName = $eventName ?? \get_class($event);
+        $eventName = isset($eventName) ? $eventName : \get_class($event);
         if (null !== $this->optimized) {
-            $listeners = $this->optimized[$eventName] ?? (empty($this->listeners[$eventName]) ? [] : $this->optimizeListeners($eventName));
+            $listeners = isset($this->optimized[$eventName]) ? $this->optimized[$eventName] : (empty($this->listeners[$eventName]) ? [] : $this->optimizeListeners($eventName));
         } else {
             $listeners = $this->getListeners($eventName);
         }
@@ -56,8 +59,9 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
     }
     /**
      * {@inheritdoc}
+     * @param string $eventName
      */
-    public function getListeners(string $eventName = null)
+    public function getListeners($eventName = null)
     {
         if (null !== $eventName) {
             if (empty($this->listeners[$eventName])) {
@@ -77,21 +81,22 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
     }
     /**
      * {@inheritdoc}
+     * @param string $eventName
      */
-    public function getListenerPriority(string $eventName, $listener)
+    public function getListenerPriority($eventName, $listener)
     {
         if (empty($this->listeners[$eventName])) {
             return null;
         }
         if (\is_array($listener) && isset($listener[0]) && $listener[0] instanceof \Closure && 2 >= \count($listener)) {
             $listener[0] = $listener[0]();
-            $listener[1] = $listener[1] ?? '__invoke';
+            $listener[1] = isset($listener[1]) ? $listener[1] : '__invoke';
         }
         foreach ($this->listeners[$eventName] as $priority => &$listeners) {
             foreach ($listeners as &$v) {
                 if ($v !== $listener && \is_array($v) && isset($v[0]) && $v[0] instanceof \Closure && 2 >= \count($v)) {
                     $v[0] = $v[0]();
-                    $v[1] = $v[1] ?? '__invoke';
+                    $v[1] = isset($v[1]) ? $v[1] : '__invoke';
                 }
                 if ($v === $listener) {
                     return $priority;
@@ -102,8 +107,9 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
     }
     /**
      * {@inheritdoc}
+     * @param string $eventName
      */
-    public function hasListeners(string $eventName = null)
+    public function hasListeners($eventName = null)
     {
         if (null !== $eventName) {
             return !empty($this->listeners[$eventName]);
@@ -117,29 +123,32 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
     }
     /**
      * {@inheritdoc}
+     * @param string $eventName
+     * @param int $priority
      */
-    public function addListener(string $eventName, $listener, int $priority = 0)
+    public function addListener($eventName, $listener, $priority = 0)
     {
         $this->listeners[$eventName][$priority][] = $listener;
         unset($this->sorted[$eventName], $this->optimized[$eventName]);
     }
     /**
      * {@inheritdoc}
+     * @param string $eventName
      */
-    public function removeListener(string $eventName, $listener)
+    public function removeListener($eventName, $listener)
     {
         if (empty($this->listeners[$eventName])) {
             return;
         }
         if (\is_array($listener) && isset($listener[0]) && $listener[0] instanceof \Closure && 2 >= \count($listener)) {
             $listener[0] = $listener[0]();
-            $listener[1] = $listener[1] ?? '__invoke';
+            $listener[1] = isset($listener[1]) ? $listener[1] : '__invoke';
         }
         foreach ($this->listeners[$eventName] as $priority => &$listeners) {
             foreach ($listeners as $k => &$v) {
                 if ($v !== $listener && \is_array($v) && isset($v[0]) && $v[0] instanceof \Closure && 2 >= \count($v)) {
                     $v[0] = $v[0]();
-                    $v[1] = $v[1] ?? '__invoke';
+                    $v[1] = isset($v[1]) ? $v[1] : '__invoke';
                 }
                 if ($v === $listener) {
                     unset($listeners[$k], $this->sorted[$eventName], $this->optimized[$eventName]);
@@ -152,25 +161,27 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
-    public function addSubscriber(\ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function addSubscriber($subscriber)
     {
         foreach ($subscriber->getSubscribedEvents() as $eventName => $params) {
             if (\is_string($params)) {
                 $this->addListener($eventName, [$subscriber, $params]);
             } elseif (\is_string($params[0])) {
-                $this->addListener($eventName, [$subscriber, $params[0]], $params[1] ?? 0);
+                $this->addListener($eventName, [$subscriber, $params[0]], isset($params[1]) ? $params[1] : 0);
             } else {
                 foreach ($params as $listener) {
-                    $this->addListener($eventName, [$subscriber, $listener[0]], $listener[1] ?? 0);
+                    $this->addListener($eventName, [$subscriber, $listener[0]], isset($listener[1]) ? $listener[1] : 0);
                 }
             }
         }
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
-    public function removeSubscriber(\ECSPrefix20210507\Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber)
+    public function removeSubscriber($subscriber)
     {
         foreach ($subscriber->getSubscribedEvents() as $eventName => $params) {
             if (\is_array($params) && \is_array($params[0])) {
@@ -192,7 +203,7 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
      * @param string     $eventName The name of the event to dispatch
      * @param object     $event     The event object to pass to the event handlers/listeners
      */
-    protected function callListeners(iterable $listeners, string $eventName, object $event)
+    protected function callListeners($listeners, $eventName, $event)
     {
         $stoppable = $event instanceof StoppableEventInterface;
         foreach ($listeners as $listener) {
@@ -204,8 +215,9 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
     }
     /**
      * Sorts the internal list of listeners for the given event by priority.
+     * @param string $eventName
      */
-    private function sortListeners(string $eventName)
+    private function sortListeners($eventName)
     {
         \krsort($this->listeners[$eventName]);
         $this->sorted[$eventName] = [];
@@ -213,7 +225,7 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
             foreach ($listeners as $k => &$listener) {
                 if (\is_array($listener) && isset($listener[0]) && $listener[0] instanceof \Closure && 2 >= \count($listener)) {
                     $listener[0] = $listener[0]();
-                    $listener[1] = $listener[1] ?? '__invoke';
+                    $listener[1] = isset($listener[1]) ? $listener[1] : '__invoke';
                 }
                 $this->sorted[$eventName][] = $listener;
             }
@@ -221,8 +233,10 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
     }
     /**
      * Optimizes the internal list of listeners for the given event by priority.
+     * @param string $eventName
+     * @return mixed[]
      */
-    private function optimizeListeners(string $eventName) : array
+    private function optimizeListeners($eventName)
     {
         \krsort($this->listeners[$eventName]);
         $this->optimized[$eventName] = [];
@@ -233,7 +247,7 @@ class EventDispatcher implements \ECSPrefix20210507\Symfony\Component\EventDispa
                     $closure = static function (...$args) use(&$listener, &$closure) {
                         if ($listener[0] instanceof \Closure) {
                             $listener[0] = $listener[0]();
-                            $listener[1] = $listener[1] ?? '__invoke';
+                            $listener[1] = isset($listener[1]) ? $listener[1] : '__invoke';
                         }
                         ($closure = \Closure::fromCallable($listener))(...$args);
                     };

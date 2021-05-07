@@ -24,12 +24,13 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\ParameterBag\Paramet
  */
 class ValidateEnvPlaceholdersPass implements \ECSPrefix20210507\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
 {
-    private const TYPE_FIXTURES = ['array' => [], 'bool' => \false, 'float' => 0.0, 'int' => 0, 'string' => ''];
+    const TYPE_FIXTURES = ['array' => [], 'bool' => \false, 'float' => 0.0, 'int' => 0, 'string' => ''];
     private $extensionConfig = [];
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process($container)
     {
         $this->extensionConfig = [];
         if (!\class_exists(BaseNode::class) || !($extensions = $container->getExtensions())) {
@@ -50,8 +51,8 @@ class ValidateEnvPlaceholdersPass implements \ECSPrefix20210507\Symfony\Componen
                     $values[$defaultType] = $default;
                 } else {
                     $prefix = \substr($env, 0, $i);
-                    foreach ($envTypes[$prefix] ?? ['string'] as $type) {
-                        $values[$type] = self::TYPE_FIXTURES[$type] ?? null;
+                    foreach (isset($envTypes[$prefix]) ? $envTypes[$prefix] : ['string'] as $type) {
+                        $values[$type] = isset(self::TYPE_FIXTURES[$type]) ? self::TYPE_FIXTURES[$type] : null;
                     }
                 }
                 foreach ($placeholders as $placeholder) {
@@ -79,8 +80,9 @@ class ValidateEnvPlaceholdersPass implements \ECSPrefix20210507\Symfony\Componen
     }
     /**
      * @internal
+     * @return mixed[]
      */
-    public function getExtensionConfig() : array
+    public function getExtensionConfig()
     {
         try {
             return $this->extensionConfig;

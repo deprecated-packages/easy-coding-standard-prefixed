@@ -26,21 +26,27 @@ class ComposerResource implements \ECSPrefix20210507\Symfony\Component\Config\Re
         self::refresh();
         $this->vendors = self::$runtimeVendors;
     }
-    public function getVendors() : array
+    /**
+     * @return mixed[]
+     */
+    public function getVendors()
     {
         return \array_keys($this->vendors);
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function __toString() : string
+    public function __toString()
     {
         return __CLASS__;
     }
     /**
      * {@inheritdoc}
+     * @param int $timestamp
+     * @return bool
      */
-    public function isFresh(int $timestamp) : bool
+    public function isFresh($timestamp)
     {
         self::refresh();
         return \array_values(self::$runtimeVendors) === \array_values($this->vendors);

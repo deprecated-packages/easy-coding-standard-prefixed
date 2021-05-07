@@ -33,13 +33,15 @@ class HtmlDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\C
     private $extraDisplayOptions = [];
     /**
      * {@inheritdoc}
+     * @param string $charset
+     * @param int $flags
      */
-    public function __construct($output = null, string $charset = null, int $flags = 0)
+    public function __construct($output = null, $charset = null, $flags = 0)
     {
         \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\AbstractDumper::__construct($output, $charset, $flags);
         $this->dumpId = 'sf-dump-' . \mt_rand();
         $this->displayOptions['fileLinkFormat'] = \ini_get('xdebug.file_link_format') ?: \get_cfg_var('xdebug.file_link_format');
-        $this->styles = static::$themes['dark'] ?? self::$themes['dark'];
+        $this->styles = isset(static::$themes['dark']) ? static::$themes['dark'] : self::$themes['dark'];
     }
     /**
      * {@inheritdoc}
@@ -49,7 +51,10 @@ class HtmlDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\C
         $this->headerIsDumped = \false;
         $this->styles = $styles + $this->styles;
     }
-    public function setTheme(string $themeName)
+    /**
+     * @param string $themeName
+     */
+    public function setTheme($themeName)
     {
         if (!isset(static::$themes[$themeName])) {
             throw new \InvalidArgumentException(\sprintf('Theme "%s" does not exist in class "%s".', $themeName, static::class));
@@ -88,8 +93,10 @@ class HtmlDumper extends \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\C
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $extraDisplayOptions
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data $data
      */
-    public function dump(Data $data, $output = null, array $extraDisplayOptions = [])
+    public function dump($data, $output = null, $extraDisplayOptions = [])
     {
         $this->extraDisplayOptions = $extraDisplayOptions;
         $result = parent::dump($data, $output);
@@ -732,12 +739,16 @@ EOHTML
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
+     * @param string $str
+     * @param bool $bin
+     * @param int $cut
      */
-    public function dumpString(Cursor $cursor, string $str, bool $bin, int $cut)
+    public function dumpString($cursor, $str, $bin, $cut)
     {
         if ('' === $str && isset($cursor->attr['img-data'], $cursor->attr['content-type'])) {
             $this->dumpKey($cursor);
-            $this->line .= $this->style('default', $cursor->attr['img-size'] ?? '', []);
+            $this->line .= $this->style('default', isset($cursor->attr['img-size']) ? $cursor->attr['img-size'] : '', []);
             $this->line .= $cursor->depth >= $this->displayOptions['maxDepth'] ? ' <samp class=sf-dump-compact>' : ' <samp class=sf-dump-expanded>';
             $this->endValue($cursor);
             $this->line .= $this->indentPad;
@@ -749,8 +760,11 @@ EOHTML
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
+     * @param int $type
+     * @param bool $hasChild
      */
-    public function enterHash(Cursor $cursor, int $type, $class, bool $hasChild)
+    public function enterHash($cursor, $type, $class, $hasChild)
     {
         if (Cursor::HASH_OBJECT === $type) {
             $cursor->attr['depth'] = $cursor->depth;
@@ -776,8 +790,12 @@ EOHTML
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Cursor $cursor
+     * @param int $type
+     * @param bool $hasChild
+     * @param int $cut
      */
-    public function leaveHash(Cursor $cursor, int $type, $class, bool $hasChild, int $cut)
+    public function leaveHash($cursor, $type, $class, $hasChild, $cut)
     {
         $this->dumpEllipsis($cursor, $hasChild, $cut);
         if ($hasChild) {
@@ -807,7 +825,7 @@ EOHTML
             $style .= \sprintf(' title="%s"', empty($attr['dynamic']) ? 'Public property' : 'Runtime added dynamic property');
         } elseif ('str' === $style && 1 < $attr['length']) {
             $style .= \sprintf(' title="%d%s characters"', $attr['length'], $attr['binary'] ? ' binary or non-UTF-8' : '');
-        } elseif ('note' === $style && 0 < ($attr['depth'] ?? 0) && \false !== ($c = \strrpos($value, '\\'))) {
+        } elseif ('note' === $style && 0 < (isset($attr['depth']) ? $attr['depth'] : 0) && \false !== ($c = \strrpos($value, '\\'))) {
             $style .= ' title=""';
             $attr += ['ellipsis' => \strlen($value) - $c, 'ellipsis-type' => 'note', 'ellipsis-tail' => 1];
         } elseif ('protected' === $style) {
@@ -848,11 +866,11 @@ EOHTML
                     }
                     $s .= '">';
                 }
-                $s .= $map[$c[$i]] ?? \sprintf('\\x%02X', \ord($c[$i]));
+                $s .= isset($map[$c[$i]]) ? $map[$c[$i]] : \sprintf('\\x%02X', \ord($c[$i]));
             } while (isset($c[++$i]));
             return $s . '</span>';
         }, $v) . '</span>';
-        if (isset($attr['file']) && ($href = $this->getSourceLink($attr['file'], $attr['line'] ?? 0))) {
+        if (isset($attr['file']) && ($href = $this->getSourceLink($attr['file'], isset($attr['line']) ? $attr['line'] : 0))) {
             $attr['href'] = $href;
         }
         if (isset($attr['href'])) {
@@ -866,8 +884,10 @@ EOHTML
     }
     /**
      * {@inheritdoc}
+     * @param bool $endOfValue
+     * @param int $depth
      */
-    protected function dumpLine(int $depth, bool $endOfValue = \false)
+    protected function dumpLine($depth, $endOfValue = \false)
     {
         if (-1 === $this->lastDepth) {
             $this->line = \sprintf($this->dumpPrefix, $this->dumpId, $this->indentPad) . $this->line;
@@ -890,7 +910,11 @@ EOHTML
         }
         \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\AbstractDumper::dumpLine($depth);
     }
-    private function getSourceLink(string $file, int $line)
+    /**
+     * @param string $file
+     * @param int $line
+     */
+    private function getSourceLink($file, $line)
     {
         $options = $this->extraDisplayOptions + $this->displayOptions;
         if ($fmt = $options['fileLinkFormat']) {

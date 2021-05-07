@@ -26,18 +26,31 @@ class ErrorController
     private $kernel;
     private $controller;
     private $errorRenderer;
-    public function __construct(HttpKernelInterface $kernel, $controller, ErrorRendererInterface $errorRenderer)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface $kernel
+     * @param \ECSPrefix20210507\Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface $errorRenderer
+     */
+    public function __construct($kernel, $controller, $errorRenderer)
     {
         $this->kernel = $kernel;
         $this->controller = $controller;
         $this->errorRenderer = $errorRenderer;
     }
-    public function __invoke(\Throwable $exception) : Response
+    /**
+     * @param \Throwable $exception
+     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response
+     */
+    public function __invoke($exception)
     {
         $exception = $this->errorRenderer->render($exception);
         return new Response($exception->getAsString(), $exception->getStatusCode(), $exception->getHeaders());
     }
-    public function preview(Request $request, int $code) : Response
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param int $code
+     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response
+     */
+    public function preview($request, $code)
     {
         /*
          * This Request mimics the parameters set by

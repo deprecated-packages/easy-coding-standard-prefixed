@@ -32,7 +32,7 @@ class ReturnFunctionValueSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $functionName = $phpcsFile->findNext(\T_STRING, $stackPtr + 1, null, \false, null, \true);

@@ -26,8 +26,10 @@ class KernelEvent extends Event
     /**
      * @param int $requestType The request type the kernel is currently processing; one of
      *                         HttpKernelInterface::MASTER_REQUEST or HttpKernelInterface::SUB_REQUEST
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface $kernel
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function __construct(HttpKernelInterface $kernel, Request $request, ?int $requestType)
+    public function __construct($kernel, $request, $requestType)
     {
         $this->kernel = $kernel;
         $this->request = $request;

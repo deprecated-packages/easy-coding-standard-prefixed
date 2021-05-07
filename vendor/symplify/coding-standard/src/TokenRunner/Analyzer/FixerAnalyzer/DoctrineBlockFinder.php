@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer;
 
 use PhpCsFixer\Doctrine\Annotation\Token;
@@ -14,7 +13,7 @@ final class DoctrineBlockFinder
     /**
      * @var string[]
      */
-    private const START_EDGES = ['(', '{'];
+    const START_EDGES = ['(', '{'];
     /**
      * @var DocBlockEdgeDefinition[]
      */
@@ -23,7 +22,10 @@ final class DoctrineBlockFinder
      * @var BlockFinder
      */
     private $blockFinder;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder)
+    /**
+     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder
+     */
+    public function __construct($blockFinder)
     {
         $this->docBlockEdgeDefinitions = [new DocBlockEdgeDefinition(PhpTokens::BLOCK_TYPE_CURLY_BRACE, '{', '}'), new DocBlockEdgeDefinition(PhpTokens::BLOCK_TYPE_PARENTHESIS_BRACE, '(', ')')];
         $this->blockFinder = $blockFinder;
@@ -32,8 +34,10 @@ final class DoctrineBlockFinder
      * Accepts position to both start and end token, e.g. (, ), {, }
      *
      * @param Tokens<Token> $tokens
+     * @param int $position
+     * @return \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo
      */
-    public function findInTokensByEdge(Tokens $tokens, int $position) : BlockInfo
+    public function findInTokensByEdge($tokens, $position)
     {
         /** @var Token $token */
         $token = $tokens[$position];
@@ -47,7 +51,11 @@ final class DoctrineBlockFinder
         }
         return new BlockInfo($blockStart, $blockEnd);
     }
-    private function getBlockTypeByToken(Token $token) : int
+    /**
+     * @param \PhpCsFixer\Doctrine\Annotation\Token $token
+     * @return int
+     */
+    private function getBlockTypeByToken($token)
     {
         return $this->blockFinder->getBlockTypeByContent($token->getContent());
     }
@@ -56,8 +64,12 @@ final class DoctrineBlockFinder
      *
      * @copied from
      * @see \PhpCsFixer\Tokenizer\Tokens::findBlockEnd()
+     * @param int $type
+     * @param int $searchIndex
+     * @param bool $findEnd
+     * @return int
      */
-    private function findOppositeBlockEdge(Tokens $tokens, int $type, int $searchIndex, bool $findEnd = \true) : int
+    private function findOppositeBlockEdge($tokens, $type, $searchIndex, $findEnd = \true)
     {
         foreach ($this->docBlockEdgeDefinitions as $docBlockEdgeDefinition) {
             if ($docBlockEdgeDefinition->getKind() !== $type) {
@@ -70,8 +82,14 @@ final class DoctrineBlockFinder
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param int $startIndex
+     * @param int $endIndex
+     * @param string $startEdge
+     * @param string $endEdge
+     * @param int $indexOffset
+     * @return int
      */
-    private function resolveIndexForBlockLevel(int $startIndex, int $endIndex, Tokens $tokens, string $startEdge, string $endEdge, int $indexOffset) : int
+    private function resolveIndexForBlockLevel($startIndex, $endIndex, $tokens, $startEdge, $endEdge, $indexOffset)
     {
         $blockLevel = 0;
         for ($index = $startIndex; $index !== $endIndex; $index += $indexOffset) {
@@ -93,8 +111,12 @@ final class DoctrineBlockFinder
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param int $startIndex
+     * @param string $startEdge
+     * @param bool $findEnd
      */
-    private function ensureStartTokenIsNotStartEdge(Tokens $tokens, int $startIndex, string $startEdge, bool $findEnd) : void
+    private function ensureStartTokenIsNotStartEdge($tokens, $startIndex, $startEdge, $findEnd)
     {
         /** @var Token $startToken */
         $startToken = $tokens[$startIndex];
@@ -104,8 +126,12 @@ final class DoctrineBlockFinder
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\DocBlockEdgeDefinition $docBlockEdgeDefinition
+     * @param int $searchIndex
+     * @param bool $findEnd
+     * @return int
      */
-    private function resolveDocBlockEdgeByType(DocBlockEdgeDefinition $docBlockEdgeDefinition, int $searchIndex, Tokens $tokens, bool $findEnd) : int
+    private function resolveDocBlockEdgeByType($docBlockEdgeDefinition, $searchIndex, $tokens, $findEnd)
     {
         $startChart = $docBlockEdgeDefinition->getStartChar();
         $endChar = $docBlockEdgeDefinition->getEndChar();
@@ -113,7 +139,7 @@ final class DoctrineBlockFinder
         $endIndex = $tokens->count() - 1;
         $indexOffset = 1;
         if (!$findEnd) {
-            [$startChart, $endChar] = [$endChar, $startChart];
+            list($startChart, $endChar) = [$endChar, $startChart];
             $indexOffset = -1;
             $endIndex = 0;
         }

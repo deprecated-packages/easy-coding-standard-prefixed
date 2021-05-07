@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -34,8 +33,9 @@ final class PhpdocAddMissingParamAnnotationFixer extends AbstractFixer implement
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('PHPDoc should contain `@param` for all params.', [new CodeSample('<?php
 /**
@@ -65,22 +65,28 @@ function f9(string $foo, $bar, $baz) {}
      *
      * Must run before NoEmptyPhpdocFixer, NoSuperfluousPhpdocTagsFixer, PhpdocAlignFixer, PhpdocAlignFixer, PhpdocOrderFixer.
      * Must run after AlignMultilineCommentFixer, CommentToPhpdocFixer, GeneralPhpdocTagRenameFixer, PhpdocIndentFixer, PhpdocNoAliasTagFixer, PhpdocScalarFixer, PhpdocToCommentFixer, PhpdocTypesFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 10;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_DOC_COMMENT);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $argumentsAnalyzer = new ArgumentsAnalyzer();
         for ($index = 0, $limit = $tokens->count(); $index < $limit; ++$index) {
@@ -149,12 +155,19 @@ function f9(string $foo, $bar, $baz) {}
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('only_untyped', 'Whether to add missing `@param` annotations for untyped parameters only.'))->setDefault(\true)->setAllowedTypes(['bool'])->getOption()]);
     }
-    private function prepareArgumentInformation(Tokens $tokens, int $start, int $end) : array
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $start
+     * @param int $end
+     * @return mixed[]
+     */
+    private function prepareArgumentInformation($tokens, $start, $end)
     {
         $info = ['default' => '', 'name' => '', 'type' => ''];
         $sawName = \false;

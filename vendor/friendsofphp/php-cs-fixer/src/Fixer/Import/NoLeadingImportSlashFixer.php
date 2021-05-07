@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,8 +26,9 @@ final class NoLeadingImportSlashFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Remove leading slashes in `use` clauses.', [new CodeSample("<?php\nnamespace Foo;\nuse \\Bar;\n")]);
     }
@@ -37,22 +37,28 @@ final class NoLeadingImportSlashFixer extends AbstractFixer
      *
      * Must run before OrderedImportsFixer.
      * Must run after NoUnusedImportsFixer, SingleImportPerStatementFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -20;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         $usesIndexes = $tokensAnalyzer->getImportUseIndexes();
@@ -69,7 +75,12 @@ final class NoLeadingImportSlashFixer extends AbstractFixer
             }
         }
     }
-    private function removeLeadingImportSlash(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function removeLeadingImportSlash($tokens, $index)
     {
         $previousIndex = $tokens->getPrevNonWhitespace($index);
         if ($previousIndex < $index - 1 || $tokens[$previousIndex]->isComment()) {

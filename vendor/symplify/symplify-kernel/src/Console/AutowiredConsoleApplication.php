@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Console;
 
 use ECSPrefix20210507\Symfony\Component\Console\Command\Command;
@@ -11,8 +10,10 @@ final class AutowiredConsoleApplication extends \Symplify\SymplifyKernel\Console
 {
     /**
      * @param Command[] $commands
+     * @param string $name
+     * @param string $version
      */
-    public function __construct(array $commands, string $name = 'UNKNOWN', string $version = 'UNKNOWN')
+    public function __construct(array $commands, $name = 'UNKNOWN', $version = 'UNKNOWN')
     {
         parent::__construct($commands, $name, $version);
     }

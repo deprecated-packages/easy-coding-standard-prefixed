@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Finder;
 
 use ECSPrefix20210507\Symfony\Component\Finder\Finder;
@@ -26,7 +25,12 @@ final class SourceFinder
      * @var GitDiffProvider
      */
     private $gitDiffProvider;
-    public function __construct(FinderSanitizer $finderSanitizer, ParameterProvider $parameterProvider, GitDiffProvider $gitDiffProvider)
+    /**
+     * @param \Symplify\SmartFileSystem\Finder\FinderSanitizer $finderSanitizer
+     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
+     * @param \Symplify\EasyCodingStandard\Git\GitDiffProvider $gitDiffProvider
+     */
+    public function __construct($finderSanitizer, $parameterProvider, $gitDiffProvider)
     {
         $this->finderSanitizer = $finderSanitizer;
         $this->fileExtensions = $parameterProvider->provideArrayParameter(Option::FILE_EXTENSIONS);
@@ -34,9 +38,10 @@ final class SourceFinder
     }
     /**
      * @param string[] $source
-     * @return SmartFileInfo[]
+     * @return mixed[]
+     * @param bool $doesMatchGitDiff
      */
-    public function find(array $source, bool $doesMatchGitDiff = \false) : array
+    public function find(array $source, $doesMatchGitDiff = \false)
     {
         $fileInfos = [];
         foreach ($source as $singleSource) {
@@ -52,9 +57,10 @@ final class SourceFinder
         return $fileInfos;
     }
     /**
-     * @return SmartFileInfo[]
+     * @return mixed[]
+     * @param string $directory
      */
-    private function processDirectory(string $directory) : array
+    private function processDirectory($directory)
     {
         $normalizedFileExtensions = $this->normalizeFileExtensions($this->fileExtensions);
         $finder = Finder::create()->files()->name($normalizedFileExtensions)->in($directory)->exclude('vendor')->size('> 0')->sortByName();
@@ -62,9 +68,9 @@ final class SourceFinder
     }
     /**
      * @param string[] $fileExtensions
-     * @return string[]
+     * @return mixed[]
      */
-    private function normalizeFileExtensions(array $fileExtensions) : array
+    private function normalizeFileExtensions(array $fileExtensions)
     {
         $normalizedFileExtensions = [];
         foreach ($fileExtensions as $fileExtension) {
@@ -74,9 +80,10 @@ final class SourceFinder
     }
     /**
      * @param SmartFileInfo[] $fileInfos
-     * @return SmartFileInfo[]
+     * @return mixed[]
+     * @param bool $doesMatchGitDiff
      */
-    private function filterOutGitDiffFiles(array $fileInfos, bool $doesMatchGitDiff) : array
+    private function filterOutGitDiffFiles(array $fileInfos, $doesMatchGitDiff)
     {
         if (!$doesMatchGitDiff) {
             return $fileInfos;

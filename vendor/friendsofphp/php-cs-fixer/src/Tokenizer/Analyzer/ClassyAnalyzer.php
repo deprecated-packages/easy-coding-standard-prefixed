@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -19,7 +18,12 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class ClassyAnalyzer
 {
-    public function isClassyInvocation(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    public function isClassyInvocation($tokens, $index)
     {
         $token = $tokens[$index];
         if (!$token->isGivenKind(\T_STRING)) {

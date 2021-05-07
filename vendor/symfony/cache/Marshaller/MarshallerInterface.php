@@ -25,14 +25,17 @@ interface MarshallerInterface
      *
      * When serialization fails for a specific value, no exception should be
      * thrown. Instead, its key should be listed in $failed.
+     * @param mixed[]|null $failed
+     * @return mixed[]
      */
-    public function marshall(array $values, ?array &$failed) : array;
+    public function marshall(array $values, &$failed);
     /**
      * Unserializes a single value and throws an exception if anything goes wrong.
      *
      * @return mixed
      *
      * @throws \Exception Whenever unserialization fails
+     * @param string $value
      */
-    public function unmarshall(string $value);
+    public function unmarshall($value);
 }

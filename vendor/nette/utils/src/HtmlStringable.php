@@ -1,17 +1,13 @@
 <?php
 
-/**
- * This file is part of the Nette Framework (https://nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
- */
-declare (strict_types=1);
 namespace ECSPrefix20210507\Nette;
 
 interface HtmlStringable
 {
     /**
      * Returns string in HTML format
+     * @return string
      */
-    function __toString() : string;
+    function __toString();
 }
 \interface_exists(\ECSPrefix20210507\Nette\Utils\IHtmlString::class);

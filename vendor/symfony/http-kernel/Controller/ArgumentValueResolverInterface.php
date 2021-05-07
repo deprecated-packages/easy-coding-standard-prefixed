@@ -23,12 +23,16 @@ interface ArgumentValueResolverInterface
      * Whether this resolver can resolve the value for the given ArgumentMetadata.
      *
      * @return bool
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
      */
-    public function supports(Request $request, ArgumentMetadata $argument);
+    public function supports($request, $argument);
     /**
      * Returns the possible value(s).
      *
      * @return iterable
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
      */
-    public function resolve(Request $request, ArgumentMetadata $argument);
+    public function resolve($request, $argument);
 }

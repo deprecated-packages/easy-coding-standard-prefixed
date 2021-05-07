@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -36,8 +35,8 @@ use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
  */
 final class Application extends BaseApplication
 {
-    public const VERSION = '3.0.0';
-    public const VERSION_CODENAME = 'Constitution';
+    const VERSION = '3.0.0';
+    const VERSION_CODENAME = 'Constitution';
     /**
      * @var ToolInfo
      */
@@ -53,14 +52,20 @@ final class Application extends BaseApplication
         $this->add(new ListSetsCommand());
         $this->add(new SelfUpdateCommand(new NewVersionChecker(new GithubClient()), $this->toolInfo, new PharChecker()));
     }
-    public static function getMajorVersion() : int
+    /**
+     * @return int
+     */
+    public static function getMajorVersion()
     {
         return (int) \explode('.', self::VERSION)[0];
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
      */
-    public function doRun(InputInterface $input, OutputInterface $output) : int
+    public function doRun($input, $output)
     {
         $stdErr = $output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : ($input->hasParameterOption('--format', \true) && 'txt' !== $input->getParameterOption('--format', null, \true) ? null : $output);
         if (null !== $stdErr) {
@@ -91,8 +96,9 @@ final class Application extends BaseApplication
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getLongVersion() : string
+    public function getLongVersion()
     {
         $version = \implode('', [
             parent::getLongVersion(),
@@ -109,8 +115,9 @@ final class Application extends BaseApplication
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    protected function getDefaultCommands() : array
+    protected function getDefaultCommands()
     {
         return [new HelpCommand(), new ListCommand()];
     }

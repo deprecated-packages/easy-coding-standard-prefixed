@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -21,9 +20,10 @@ final class NamespacedStringTokenGenerator
     /**
      * Parse a string that contains a namespace into tokens.
      *
-     * @return Token[]
+     * @return mixed[]
+     * @param string $input
      */
-    public function generate(string $input) : array
+    public function generate($input)
     {
         $tokens = [];
         $parts = \explode('\\', $input);

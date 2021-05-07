@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -49,8 +48,10 @@ final class BlankLineBeforeStatementFixer extends AbstractFixer implements Confi
     }
     /**
      * {@inheritdoc}
+     * @param mixed[] $configuration
+     * @return void
      */
-    public function configure(array $configuration) : void
+    public function configure($configuration)
     {
         parent::configure($configuration);
         $this->fixTokenMap = [];
@@ -61,8 +62,9 @@ final class BlankLineBeforeStatementFixer extends AbstractFixer implements Confi
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('An empty line feed must precede any configured statement.', [new CodeSample('<?php
 function A() {
@@ -146,22 +148,28 @@ if (true) {
      * {@inheritdoc}
      *
      * Must run after NoExtraBlankLinesFixer, NoUselessReturnFixer, ReturnAssignmentFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -21;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound($this->fixTokenMap);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $analyzer = new TokensAnalyzer($tokens);
         for ($index = $tokens->count() - 1; $index > 0; --$index) {
@@ -181,8 +189,9 @@ if (true) {
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         $allowed = self::$tokenMap;
         $allowed['yield_from'] = \true;
@@ -191,7 +200,12 @@ if (true) {
         $allowed = \array_keys($allowed);
         return new FixerConfigurationResolver([(new FixerOptionBuilder('statements', 'List of statements which must be preceded by an empty line.'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset($allowed)])->setDefault(['break', 'continue', 'declare', 'return', 'throw', 'try'])->getOption()]);
     }
-    private function shouldAddBlankLine(Tokens $tokens, int $prevNonWhitespace) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $prevNonWhitespace
+     * @return bool
+     */
+    private function shouldAddBlankLine($tokens, $prevNonWhitespace)
     {
         $prevNonWhitespaceToken = $tokens[$prevNonWhitespace];
         if ($prevNonWhitespaceToken->isComment()) {
@@ -207,7 +221,12 @@ if (true) {
         }
         return $prevNonWhitespaceToken->equalsAny([';', '}']);
     }
-    private function insertBlankLine(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function insertBlankLine($tokens, $index)
     {
         $prevIndex = $index - 1;
         $prevToken = $tokens[$prevIndex];

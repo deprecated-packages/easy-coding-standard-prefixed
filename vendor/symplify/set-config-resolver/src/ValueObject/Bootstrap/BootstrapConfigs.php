@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SetConfigResolver\ValueObject\Bootstrap;
 
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -16,20 +15,24 @@ final class BootstrapConfigs
     private $setConfigFileInfos = [];
     /**
      * @param SmartFileInfo[] $setConfigFileInfos
+     * @param \Symplify\SmartFileSystem\SmartFileInfo|null $mainConfigFileInfo
      */
-    public function __construct(?SmartFileInfo $mainConfigFileInfo, array $setConfigFileInfos)
+    public function __construct($mainConfigFileInfo, array $setConfigFileInfos)
     {
         $this->mainConfigFileInfo = $mainConfigFileInfo;
         $this->setConfigFileInfos = $setConfigFileInfos;
     }
-    public function getMainConfigFileInfo() : ?SmartFileInfo
+    /**
+     * @return \Symplify\SmartFileSystem\SmartFileInfo|null
+     */
+    public function getMainConfigFileInfo()
     {
         return $this->mainConfigFileInfo;
     }
     /**
-     * @return SmartFileInfo[]
+     * @return mixed[]
      */
-    public function getConfigFileInfos() : array
+    public function getConfigFileInfos()
     {
         if (!$this->mainConfigFileInfo instanceof SmartFileInfo) {
             return $this->setConfigFileInfos;

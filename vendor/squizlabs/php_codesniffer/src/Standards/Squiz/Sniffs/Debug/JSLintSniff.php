@@ -41,7 +41,7 @@ class JSLintSniff implements Sniff
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If jslint.js could not be run
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $rhinoPath = Config::getExecutablePath('rhino');
         $jslintPath = Config::getExecutablePath('jslint');

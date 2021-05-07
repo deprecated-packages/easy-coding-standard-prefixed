@@ -42,7 +42,7 @@ class JavaScriptLintSniff implements Sniff
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If Javascript Lint ran into trouble.
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $jslPath = Config::getExecutablePath('jsl');
         if ($jslPath === null) {

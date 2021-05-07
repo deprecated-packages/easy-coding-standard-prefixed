@@ -27,17 +27,26 @@ class LocaleAwareListener implements EventSubscriberInterface
     private $requestStack;
     /**
      * @param LocaleAwareInterface[] $localeAwareServices
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
      */
-    public function __construct(iterable $localeAwareServices, RequestStack $requestStack)
+    public function __construct($localeAwareServices, $requestStack)
     {
         $this->localeAwareServices = $localeAwareServices;
         $this->requestStack = $requestStack;
     }
-    public function onKernelRequest(RequestEvent $event) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\RequestEvent $event
+     */
+    public function onKernelRequest($event)
     {
         $this->setLocale($event->getRequest()->getLocale(), $event->getRequest()->getDefaultLocale());
     }
-    public function onKernelFinishRequest(FinishRequestEvent $event) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\FinishRequestEvent $event
+     */
+    public function onKernelFinishRequest($event)
     {
         if (null === ($parentRequest = $this->requestStack->getParentRequest())) {
             foreach ($this->localeAwareServices as $service) {
@@ -55,7 +64,12 @@ class LocaleAwareListener implements EventSubscriberInterface
             KernelEvents::FINISH_REQUEST => [['onKernelFinishRequest', -15]],
         ];
     }
-    private function setLocale(string $locale, string $defaultLocale) : void
+    /**
+     * @return void
+     * @param string $locale
+     * @param string $defaultLocale
+     */
+    private function setLocale($locale, $defaultLocale)
     {
         foreach ($this->localeAwareServices as $service) {
             try {

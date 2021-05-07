@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -35,15 +34,17 @@ final class PhpUnitTestAnnotationFixer extends AbstractPhpUnitFixer implements C
 {
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Adds or removes @test annotations from tests, following configuration.', [new CodeSample('<?php
 class Test extends \\PhpUnit\\FrameWork\\TestCase
@@ -60,15 +61,20 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
      * {@inheritdoc}
      *
      * Must run before NoEmptyPhpdocFixer, PhpUnitMethodCasingFixer, PhpdocTrimFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 10;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startIndex
+     * @param int $endIndex
      */
-    protected function applyPhpUnitClassFix(Tokens $tokens, int $startIndex, int $endIndex) : void
+    protected function applyPhpUnitClassFix($tokens, $startIndex, $endIndex)
     {
         if ('annotation' === $this->configuration['style']) {
             $this->applyTestAnnotation($tokens, $startIndex, $endIndex);
@@ -78,12 +84,19 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('style', 'Whether to use the @test annotation or not.'))->setAllowedValues(['prefix', 'annotation'])->setDefault('prefix')->getOption()]);
     }
-    private function applyTestAnnotation(Tokens $tokens, int $startIndex, int $endIndex) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startIndex
+     * @param int $endIndex
+     */
+    private function applyTestAnnotation($tokens, $startIndex, $endIndex)
     {
         for ($i = $endIndex - 1; $i > $startIndex; --$i) {
             if (!$this->isTestMethod($tokens, $i)) {
@@ -107,7 +120,13 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
             }
         }
     }
-    private function applyTestPrefix(Tokens $tokens, int $startIndex, int $endIndex) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startIndex
+     * @param int $endIndex
+     */
+    private function applyTestPrefix($tokens, $startIndex, $endIndex)
     {
         for ($i = $endIndex - 1; $i > $startIndex; --$i) {
             // We explicitly check again if the function has a doc block to save some time.
@@ -132,8 +151,10 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
     }
     /**
      * @param int$index
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    private function isTestMethod(Tokens $tokens, int $index) : bool
+    private function isTestMethod($tokens, $index)
     {
         // Check if we are dealing with a (non abstract, non lambda) function
         if (!$this->isMethod($tokens, $index)) {
@@ -149,22 +170,40 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
         // If the function doesn't have test in its name, and no doc block, its not a test
         return $this->isPHPDoc($tokens, $docBlockIndex) && \false !== \strpos($tokens[$docBlockIndex]->getContent(), '@test');
     }
-    private function isMethod(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    private function isMethod($tokens, $index)
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         return $tokens[$index]->isGivenKind(\T_FUNCTION) && !$tokensAnalyzer->isLambda($index);
     }
-    private function hasTestPrefix(string $functionName) : bool
+    /**
+     * @param string $functionName
+     * @return bool
+     */
+    private function hasTestPrefix($functionName)
     {
         return 0 === \strpos($functionName, 'test');
     }
-    private function hasProperTestAnnotation(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    private function hasProperTestAnnotation($tokens, $index)
     {
         $docBlockIndex = $this->getDocBlockIndex($tokens, $index);
         $doc = $tokens[$docBlockIndex]->getContent();
         return 1 === Preg::match('/\\*\\s+@test\\b/', $doc);
     }
-    private function removeTestPrefix(string $functionName) : string
+    /**
+     * @param string $functionName
+     * @return string
+     */
+    private function removeTestPrefix($functionName)
     {
         $remainder = Preg::replace('/^test(?=[A-Z_])_?/', '', $functionName);
         if ('' === $remainder) {
@@ -172,11 +211,20 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
         }
         return \lcfirst($remainder);
     }
-    private function addTestPrefix(string $functionName) : string
+    /**
+     * @param string $functionName
+     * @return string
+     */
+    private function addTestPrefix($functionName)
     {
         return 'test' . \ucfirst($functionName);
     }
-    private function createDocBlock(Tokens $tokens, int $docBlockIndex) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $docBlockIndex
+     */
+    private function createDocBlock($tokens, $docBlockIndex)
     {
         $lineEnd = $this->whitespacesConfig->getLineEnding();
         $originalIndent = WhitespacesAnalyzer::detectIndent($tokens, $tokens->getNextNonWhitespace($docBlockIndex));
@@ -185,9 +233,11 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
         $tokens->insertAt($index, $toInsert);
     }
     /**
-     * @return Line[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $docBlockIndex
      */
-    private function updateDocBlock(Tokens $tokens, int $docBlockIndex) : array
+    private function updateDocBlock($tokens, $docBlockIndex)
     {
         $doc = new DocBlock($tokens[$docBlockIndex]->getContent());
         $lines = $doc->getLines();
@@ -196,9 +246,11 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
     /**
      * @param Line[] $lines
      *
-     * @return Line[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $docBlockIndex
      */
-    private function updateLines(array $lines, Tokens $tokens, int $docBlockIndex) : array
+    private function updateLines(array $lines, $tokens, $docBlockIndex)
     {
         $needsAnnotation = 'annotation' === $this->configuration['style'];
         $doc = new DocBlock($tokens[$docBlockIndex]->getContent());
@@ -228,9 +280,11 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
      *
      * @param Line[] $lines
      *
-     * @return Line[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $docBlockIndex
      */
-    private function splitUpDocBlock(array $lines, Tokens $tokens, int $docBlockIndex) : array
+    private function splitUpDocBlock(array $lines, $tokens, $docBlockIndex)
     {
         $lineContent = $this->getSingleLineDocBlockEntry($lines);
         $lineEnd = $this->whitespacesConfig->getLineEnding();
@@ -241,8 +295,9 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
      * @todo check whether it's doable to use \PhpCsFixer\DocBlock\DocBlock::getSingleLineDocBlockEntry instead
      *
      * @param Line[] $lines
+     * @return string
      */
-    private function getSingleLineDocBlockEntry(array $lines) : string
+    private function getSingleLineDocBlockEntry(array $lines)
     {
         $line = $lines[0];
         $line = \str_replace('*/', '', $line->getContent());
@@ -260,15 +315,21 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
     }
     /**
      * Updates the depends tag on the current doc block.
+     * @param \PhpCsFixer\DocBlock\Line $line
+     * @return \PhpCsFixer\DocBlock\Line
      */
-    private function updateDependsAnnotation(Line $line) : Line
+    private function updateDependsAnnotation($line)
     {
         if ('annotation' === $this->configuration['style']) {
             return $this->removeTestPrefixFromDependsAnnotation($line);
         }
         return $this->addTestPrefixToDependsAnnotation($line);
     }
-    private function removeTestPrefixFromDependsAnnotation(Line $line) : Line
+    /**
+     * @param \PhpCsFixer\DocBlock\Line $line
+     * @return \PhpCsFixer\DocBlock\Line
+     */
+    private function removeTestPrefixFromDependsAnnotation($line)
     {
         $line = \str_split($line->getContent());
         $dependsIndex = $this->findWhereDependsFunctionNameStarts($line);
@@ -279,7 +340,11 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
         \array_splice($line, $dependsIndex);
         return new Line(\implode('', $line) . $dependsFunctionName);
     }
-    private function addTestPrefixToDependsAnnotation(Line $line) : Line
+    /**
+     * @param \PhpCsFixer\DocBlock\Line $line
+     * @return \PhpCsFixer\DocBlock\Line
+     */
+    private function addTestPrefixToDependsAnnotation($line)
     {
         $line = \str_split($line->getContent());
         $dependsIndex = $this->findWhereDependsFunctionNameStarts($line);
@@ -292,8 +357,9 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
     }
     /**
      * Helps to find where the function name in the doc block starts.
+     * @return int
      */
-    private function findWhereDependsFunctionNameStarts(array $line) : int
+    private function findWhereDependsFunctionNameStarts(array $line)
     {
         $counter = \count($line);
         do {
@@ -304,9 +370,11 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
     /**
      * @param Line[] $lines
      *
-     * @return Line[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $docBlockIndex
      */
-    private function addTestAnnotation(array $lines, Tokens $tokens, int $docBlockIndex) : array
+    private function addTestAnnotation(array $lines, $tokens, $docBlockIndex)
     {
         $doc = new DocBlock($tokens[$docBlockIndex]->getContent());
         if (!$this->doesDocBlockContainTest($doc)) {
@@ -316,7 +384,11 @@ public function testItDoesSomething() {}}' . $this->whitespacesConfig->getLineEn
         }
         return $lines;
     }
-    private function doesDocBlockContainTest(DocBlock $doc) : bool
+    /**
+     * @param \PhpCsFixer\DocBlock\DocBlock $doc
+     * @return bool
+     */
+    private function doesDocBlockContainTest($doc)
     {
         return !empty($doc->getAnnotationsOfType('test'));
     }

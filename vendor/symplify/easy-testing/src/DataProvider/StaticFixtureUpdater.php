@@ -1,13 +1,18 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyTesting\DataProvider;
 
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SmartFileSystem\SmartFileSystem;
 final class StaticFixtureUpdater
 {
-    public static function updateFixtureContent(SmartFileInfo $originalFileInfo, string $changedContent, SmartFileInfo $fixtureFileInfo) : void
+    /**
+     * @return void
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $originalFileInfo
+     * @param string $changedContent
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $fixtureFileInfo
+     */
+    public static function updateFixtureContent($originalFileInfo, $changedContent, $fixtureFileInfo)
     {
         if (!\getenv('UPDATE_TESTS') && !\getenv('UT')) {
             return;
@@ -15,18 +20,31 @@ final class StaticFixtureUpdater
         $newOriginalContent = self::resolveNewFixtureContent($originalFileInfo, $changedContent);
         self::getSmartFileSystem()->dumpFile($fixtureFileInfo->getRealPath(), $newOriginalContent);
     }
-    public static function updateExpectedFixtureContent(string $newOriginalContent, SmartFileInfo $expectedFixtureFileInfo) : void
+    /**
+     * @return void
+     * @param string $newOriginalContent
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $expectedFixtureFileInfo
+     */
+    public static function updateExpectedFixtureContent($newOriginalContent, $expectedFixtureFileInfo)
     {
         if (!\getenv('UPDATE_TESTS') && !\getenv('UT')) {
             return;
         }
         self::getSmartFileSystem()->dumpFile($expectedFixtureFileInfo->getRealPath(), $newOriginalContent);
     }
-    private static function getSmartFileSystem() : SmartFileSystem
+    /**
+     * @return \Symplify\SmartFileSystem\SmartFileSystem
+     */
+    private static function getSmartFileSystem()
     {
         return new SmartFileSystem();
     }
-    private static function resolveNewFixtureContent(SmartFileInfo $originalFileInfo, string $changedContent) : string
+    /**
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $originalFileInfo
+     * @param string $changedContent
+     * @return string
+     */
+    private static function resolveNewFixtureContent($originalFileInfo, $changedContent)
     {
         if ($originalFileInfo->getContents() === $changedContent) {
             return $originalFileInfo->getContents();

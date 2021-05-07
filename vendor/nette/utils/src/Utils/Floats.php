@@ -1,10 +1,5 @@
 <?php
 
-/**
- * This file is part of the Nette Framework (https://nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
- */
-declare (strict_types=1);
 namespace ECSPrefix20210507\Nette\Utils;
 
 use ECSPrefix20210507\Nette;
@@ -14,20 +9,31 @@ use ECSPrefix20210507\Nette;
 class Floats
 {
     use Nette\StaticClass;
-    private const EPSILON = 1.0E-10;
-    public static function isZero(float $value) : bool
+    const EPSILON = 1.0E-10;
+    /**
+     * @param float $value
+     * @return bool
+     */
+    public static function isZero($value)
     {
         return \abs($value) < self::EPSILON;
     }
-    public static function isInteger(float $value) : bool
+    /**
+     * @param float $value
+     * @return bool
+     */
+    public static function isInteger($value)
     {
         return \abs(\round($value) - $value) < self::EPSILON;
     }
     /**
      * Compare two floats. If $a < $b it returns -1, if they are equal it returns 0 and if $a > $b it returns 1
      * @throws \LogicException if one of parameters is NAN
+     * @param float $a
+     * @param float $b
+     * @return int
      */
-    public static function compare(float $a, float $b) : int
+    public static function compare($a, $b)
     {
         if (\is_nan($a) || \is_nan($b)) {
             throw new \LogicException('Trying to compare NAN');
@@ -43,40 +49,55 @@ class Floats
     /**
      * Returns true if $a = $b
      * @throws \LogicException if one of parameters is NAN
+     * @param float $a
+     * @param float $b
+     * @return bool
      */
-    public static function areEqual(float $a, float $b) : bool
+    public static function areEqual($a, $b)
     {
         return self::compare($a, $b) === 0;
     }
     /**
      * Returns true if $a < $b
      * @throws \LogicException if one of parameters is NAN
+     * @param float $a
+     * @param float $b
+     * @return bool
      */
-    public static function isLessThan(float $a, float $b) : bool
+    public static function isLessThan($a, $b)
     {
         return self::compare($a, $b) < 0;
     }
     /**
      * Returns true if $a <= $b
      * @throws \LogicException if one of parameters is NAN
+     * @param float $a
+     * @param float $b
+     * @return bool
      */
-    public static function isLessThanOrEqualTo(float $a, float $b) : bool
+    public static function isLessThanOrEqualTo($a, $b)
     {
         return self::compare($a, $b) <= 0;
     }
     /**
      * Returns true if $a > $b
      * @throws \LogicException if one of parameters is NAN
+     * @param float $a
+     * @param float $b
+     * @return bool
      */
-    public static function isGreaterThan(float $a, float $b) : bool
+    public static function isGreaterThan($a, $b)
     {
         return self::compare($a, $b) > 0;
     }
     /**
      * Returns true if $a >= $b
      * @throws \LogicException if one of parameters is NAN
+     * @param float $a
+     * @param float $b
+     * @return bool
      */
-    public static function isGreaterThanOrEqualTo(float $a, float $b) : bool
+    public static function isGreaterThanOrEqualTo($a, $b)
     {
         return self::compare($a, $b) >= 0;
     }

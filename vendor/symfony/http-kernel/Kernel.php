@@ -67,15 +67,19 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
     private $requestStackSize = 0;
     private $resetServices = \false;
     private static $freshCache = [];
-    public const VERSION = '5.2.7';
-    public const VERSION_ID = 50207;
-    public const MAJOR_VERSION = 5;
-    public const MINOR_VERSION = 2;
-    public const RELEASE_VERSION = 7;
-    public const EXTRA_VERSION = '';
-    public const END_OF_MAINTENANCE = '07/2021';
-    public const END_OF_LIFE = '07/2021';
-    public function __construct(string $environment, bool $debug)
+    const VERSION = '5.2.7';
+    const VERSION_ID = 50207;
+    const MAJOR_VERSION = 5;
+    const MINOR_VERSION = 2;
+    const RELEASE_VERSION = 7;
+    const EXTRA_VERSION = '';
+    const END_OF_MAINTENANCE = '07/2021';
+    const END_OF_LIFE = '07/2021';
+    /**
+     * @param string $environment
+     * @param bool $debug
+     */
+    public function __construct($environment, $debug)
     {
         $this->environment = $environment;
         $this->debug = $debug;
@@ -115,8 +119,9 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
     }
     /**
      * {@inheritdoc}
+     * @param string|null $warmupDir
      */
-    public function reboot(?string $warmupDir)
+    public function reboot($warmupDir)
     {
         $this->shutdown();
         $this->warmupDir = $warmupDir;
@@ -124,8 +129,10 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    public function terminate(Request $request, Response $response)
+    public function terminate($request, $response)
     {
         if (\false === $this->booted) {
             return;
@@ -153,11 +160,14 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param int $type
+     * @param bool $catch
      */
-    public function handle(Request $request, int $type = \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, bool $catch = \true)
+    public function handle($request, $type = \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface::MASTER_REQUEST, $catch = \true)
     {
         if (!$this->booted) {
-            $container = $this->container ?? $this->preBoot();
+            $container = isset($this->container) ? $this->container : $this->preBoot();
             if ($container->has('http_cache')) {
                 return $container->get('http_cache')->handle($request, $type, $catch);
             }
@@ -189,8 +199,9 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
     }
     /**
      * {@inheritdoc}
+     * @param string $name
      */
-    public function getBundle(string $name)
+    public function getBundle($name)
     {
         if (!isset($this->bundles[$name])) {
             throw new \InvalidArgumentException(\sprintf('Bundle "%s" does not exist or it is not enabled. Maybe you forgot to add it in the "registerBundles()" method of your "%s.php" file?', $name, \get_debug_type($this)));
@@ -199,8 +210,9 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
     }
     /**
      * {@inheritdoc}
+     * @param string $name
      */
-    public function locateResource(string $name)
+    public function locateResource($name)
     {
         if ('@' !== $name[0]) {
             throw new \InvalidArgumentException(\sprintf('A resource name must start with @ ("%s" given).', $name));
@@ -211,7 +223,7 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
         $bundleName = \substr($name, 1);
         $path = '';
         if (\false !== \strpos($bundleName, '/')) {
-            [$bundleName, $path] = \explode('/', $bundleName, 2);
+            list($bundleName, $path) = \explode('/', $bundleName, 2);
         }
         $bundle = $this->getBundle($bundleName);
         if (\file_exists($file = $bundle->getPath() . '/' . $path)) {
@@ -289,8 +301,9 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getBuildDir() : string
+    public function getBuildDir()
     {
         // Returns $this->getCacheDir() for backward compatibility
         return $this->getCacheDir();
@@ -311,8 +324,9 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
     }
     /**
      * Gets the patterns defining the classes to parse and cache for annotations.
+     * @return mixed[]
      */
-    public function getAnnotatedClassesToCompile() : array
+    public function getAnnotatedClassesToCompile()
     {
         return [];
     }
@@ -337,8 +351,9 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
      * The extension point similar to the Bundle::build() method.
      *
      * Use this method to register compiler passes and manipulate the container during the building process.
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    protected function build(ContainerBuilder $container)
+    protected function build($container)
     {
     }
     /**
@@ -384,7 +399,7 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
         // Silence E_WARNING to ignore "include" failures - don't use "@" to prevent silencing fatal errors
         $errorLevel = \error_reporting(\E_ALL ^ \E_WARNING);
         try {
-            if (\is_file($cachePath) && \is_object($this->container = (include $cachePath)) && (!$this->debug || (self::$freshCache[$cachePath] ?? $cache->isFresh()))) {
+            if (\is_file($cachePath) && \is_object($this->container = (include $cachePath)) && (!$this->debug || (isset(self::$freshCache[$cachePath]) ? self::$freshCache[$cachePath] : $cache->isFresh()))) {
                 self::$freshCache[$cachePath] = \true;
                 $this->container->set('kernel', $this);
                 \error_reporting($errorLevel);
@@ -444,7 +459,7 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
                 }
                 // Remove frames added by DebugClassLoader.
                 for ($i = \count($backtrace) - 2; 0 < $i; --$i) {
-                    if (\in_array($backtrace[$i]['class'] ?? null, [DebugClassLoader::class, LegacyDebugClassLoader::class], \true)) {
+                    if (\in_array(isset($backtrace[$i]['class']) ? $backtrace[$i]['class'] : null, [DebugClassLoader::class, LegacyDebugClassLoader::class], \true)) {
                         $backtrace = [$backtrace[$i + 1]];
                         break;
                     }
@@ -537,8 +552,9 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
     }
     /**
      * Prepares the ContainerBuilder before it is compiled.
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    protected function prepareContainer(ContainerBuilder $container)
+    protected function prepareContainer($container)
     {
         $extensions = [];
         foreach ($this->bundles as $bundle) {
@@ -584,8 +600,10 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
      *
      * @param string $class     The name of the class to generate
      * @param string $baseClass The name of the container's base class
+     * @param \ECSPrefix20210507\Symfony\Component\Config\ConfigCache $cache
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    protected function dumpContainer(ConfigCache $cache, ContainerBuilder $container, string $class, string $baseClass)
+    protected function dumpContainer($cache, $container, $class, $baseClass)
     {
         // cache the container
         $dumper = new PhpDumper($container);
@@ -610,14 +628,18 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
      * Returns a loader for the container.
      *
      * @return DelegatingLoader The loader
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface $container
      */
-    protected function getContainerLoader(ContainerInterface $container)
+    protected function getContainerLoader($container)
     {
         $locator = new FileLocator($this);
         $resolver = new LoaderResolver([new XmlFileLoader($container, $locator), new YamlFileLoader($container, $locator), new IniFileLoader($container, $locator), new PhpFileLoader($container, $locator), new GlobFileLoader($container, $locator), new DirectoryLoader($container, $locator), new ClosureLoader($container)]);
         return new DelegatingLoader($resolver);
     }
-    private function preBoot() : ContainerInterface
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    private function preBoot()
     {
         if ($this->debug) {
             $this->startTime = \microtime(\true);
@@ -645,8 +667,9 @@ abstract class Kernel implements \ECSPrefix20210507\Symfony\Component\HttpKernel
      * as we want the content to be readable and well-formatted.
      *
      * @return string The PHP string with the comments removed
+     * @param string $source
      */
-    public static function stripComments(string $source)
+    public static function stripComments($source)
     {
         if (!\function_exists('token_get_all')) {
             return $source;

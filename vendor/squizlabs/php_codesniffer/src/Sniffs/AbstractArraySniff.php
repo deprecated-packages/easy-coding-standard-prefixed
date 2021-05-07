@@ -32,7 +32,7 @@ abstract class AbstractArraySniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPtr]['code'] === \T_ARRAY) {
@@ -85,7 +85,7 @@ abstract class AbstractArraySniff implements \PHP_CodeSniffer\Sniffs\Sniff
      *
      * @return int
      */
-    private function getNext(File $phpcsFile, $ptr, $arrayEnd)
+    private function getNext($phpcsFile, $ptr, $arrayEnd)
     {
         $tokens = $phpcsFile->getTokens();
         while ($ptr < $arrayEnd) {

@@ -17,8 +17,8 @@ namespace ECSPrefix20210507\Symfony\Component\HttpFoundation;
  */
 class HeaderUtils
 {
-    public const DISPOSITION_ATTACHMENT = 'attachment';
-    public const DISPOSITION_INLINE = 'inline';
+    const DISPOSITION_ATTACHMENT = 'attachment';
+    const DISPOSITION_INLINE = 'inline';
     /**
      * This class should not be instantiated.
      */
@@ -38,8 +38,9 @@ class HeaderUtils
      *
      * @return array Nested array with as many levels as there are characters in
      *               $separators
+     * @param string $header
      */
-    public static function split(string $header, string $separators) : array
+    public static function split($header, $separators)
     {
         $quotedSeparators = \preg_quote($separators, '/');
         \preg_match_all('
@@ -73,13 +74,14 @@ class HeaderUtils
      *
      *     HeaderUtils::combine([["foo", "abc"], ["bar"]])
      *     // => ["foo" => "abc", "bar" => true]
+     * @return mixed[]
      */
-    public static function combine(array $parts) : array
+    public static function combine(array $parts)
     {
         $assoc = [];
         foreach ($parts as $part) {
             $name = \strtolower($part[0]);
-            $value = $part[1] ?? \true;
+            $value = isset($part[1]) ? $part[1] : \true;
             $assoc[$name] = $value;
         }
         return $assoc;
@@ -95,8 +97,10 @@ class HeaderUtils
      *
      *     HeaderUtils::toString(["foo" => "abc", "bar" => true, "baz" => "a b c"], ",")
      *     // => 'foo=abc, bar, baz="a b c"'
+     * @param string $separator
+     * @return string
      */
-    public static function toString(array $assoc, string $separator) : string
+    public static function toString(array $assoc, $separator)
     {
         $parts = [];
         foreach ($assoc as $name => $value) {
@@ -114,8 +118,10 @@ class HeaderUtils
      * If a string contains characters not allowed by the "token" construct in
      * the HTTP specification, it is backslash-escaped and enclosed in quotes
      * to match the "quoted-string" construct.
+     * @param string $s
+     * @return string
      */
-    public static function quote(string $s) : string
+    public static function quote($s)
     {
         if (\preg_match('/^[a-z0-9!#$%&\'*.^_`|~-]+$/i', $s)) {
             return $s;
@@ -127,8 +133,10 @@ class HeaderUtils
      *
      * If passed an unquoted string that matches the "token" construct (as
      * defined in the HTTP specification), it is passed through verbatimly.
+     * @param string $s
+     * @return string
      */
-    public static function unquote(string $s) : string
+    public static function unquote($s)
     {
         return \preg_replace('/\\\\(.)|"/', '$1', $s);
     }
@@ -147,7 +155,7 @@ class HeaderUtils
      *
      * @see RFC 6266
      */
-    public static function makeDisposition(string $disposition, string $filename, string $filenameFallback = '') : string
+    public static function makeDisposition($disposition, $filename, $filenameFallback = '')
     {
         if (!\in_array($disposition, [self::DISPOSITION_ATTACHMENT, self::DISPOSITION_INLINE])) {
             throw new \InvalidArgumentException(\sprintf('The disposition must be either "%s" or "%s".', self::DISPOSITION_ATTACHMENT, self::DISPOSITION_INLINE));
@@ -175,8 +183,12 @@ class HeaderUtils
     }
     /**
      * Like parse_str(), but preserves dots in variable names.
+     * @param string $query
+     * @param bool $ignoreBrackets
+     * @param string $separator
+     * @return mixed[]
      */
-    public static function parseQuery(string $query, bool $ignoreBrackets = \false, string $separator = '&') : array
+    public static function parseQuery($query, $ignoreBrackets = \false, $separator = '&')
     {
         $q = [];
         foreach (\explode($separator, $query) as $v) {
@@ -218,7 +230,12 @@ class HeaderUtils
         }
         return $query;
     }
-    private static function groupParts(array $matches, string $separators, bool $first = \true) : array
+    /**
+     * @param string $separators
+     * @param bool $first
+     * @return mixed[]
+     */
+    private static function groupParts(array $matches, $separators, $first = \true)
     {
         $separator = $separators[0];
         $partSeparators = \substr($separators, 1);

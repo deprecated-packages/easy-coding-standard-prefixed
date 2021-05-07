@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer;
 
 use PhpCsFixer\Tokenizer\Token;
@@ -9,8 +8,10 @@ final class CallAnalyzer
 {
     /**
      * @param Tokens<Token> $tokens
+     * @param int $bracketPosition
+     * @return bool
      */
-    public function isMethodCall(Tokens $tokens, int $bracketPosition) : bool
+    public function isMethodCall($tokens, $bracketPosition)
     {
         $objectToken = new Token([\T_OBJECT_OPERATOR, '->']);
         $whitespaceToken = new Token([\T_WHITESPACE, ' ']);

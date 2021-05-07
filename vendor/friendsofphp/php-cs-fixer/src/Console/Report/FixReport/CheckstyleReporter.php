@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -22,15 +21,18 @@ final class CheckstyleReporter implements \PhpCsFixer\Console\Report\FixReport\R
 {
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getFormat() : string
+    public function getFormat()
     {
         return 'checkstyle';
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary
+     * @return string
      */
-    public function generate(\PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary) : string
+    public function generate($reportSummary)
     {
         if (!\extension_loaded('dom')) {
             throw new \RuntimeException('Cannot generate report! `ext-dom` is not available!');
@@ -49,7 +51,12 @@ final class CheckstyleReporter implements \PhpCsFixer\Console\Report\FixReport\R
         $dom->formatOutput = \true;
         return $reportSummary->isDecoratedOutput() ? OutputFormatter::escape($dom->saveXML()) : $dom->saveXML();
     }
-    private function createError(\DOMDocument $dom, string $appliedFixer) : \DOMElement
+    /**
+     * @param \DOMDocument $dom
+     * @param string $appliedFixer
+     * @return \DOMElement
+     */
+    private function createError($dom, $appliedFixer)
     {
         $error = $dom->createElement('error');
         $error->setAttribute('severity', 'warning');

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\Neon;
 
 use ECSPrefix20210507\Nette\Neon\Encoder;
@@ -12,16 +11,17 @@ final class NeonPrinter
      * @see https://regex101.com/r/r8DGyV/1
      * @var string
      */
-    private const TAGS_REGEX = '#tags:\\s+\\-\\s+(?<tag>.*?)$#ms';
+    const TAGS_REGEX = '#tags:\\s+\\-\\s+(?<tag>.*?)$#ms';
     /**
      * @see https://regex101.com/r/KjekIe/1
      * @var string
      */
-    private const ARGUMENTS_DOUBLE_SPACE_REGEX = '#\\n(\\n\\s+arguments:)#ms';
+    const ARGUMENTS_DOUBLE_SPACE_REGEX = '#\\n(\\n\\s+arguments:)#ms';
     /**
      * @param mixed[] $phpStanNeon
+     * @return string
      */
-    public function printNeon(array $phpStanNeon) : string
+    public function printNeon(array $phpStanNeon)
     {
         $neonContent = Neon::encode($phpStanNeon, Encoder::BLOCK);
         // tabs to spaces for consistency
@@ -31,15 +31,27 @@ final class NeonPrinter
         $neonContent = $this->fixDoubleSpaceInArguments($neonContent);
         return \rtrim($neonContent) . \PHP_EOL;
     }
-    private function replaceTabsWithSpaces(string $neonContent) : string
+    /**
+     * @param string $neonContent
+     * @return string
+     */
+    private function replaceTabsWithSpaces($neonContent)
     {
         return Strings::replace($neonContent, '#\\t#', '    ');
     }
-    private function inlineSingleTags(string $neonContent) : string
+    /**
+     * @param string $neonContent
+     * @return string
+     */
+    private function inlineSingleTags($neonContent)
     {
         return Strings::replace($neonContent, self::TAGS_REGEX, 'tags: [$1]');
     }
-    private function fixDoubleSpaceInArguments(string $neonContent) : string
+    /**
+     * @param string $neonContent
+     * @return string
+     */
+    private function fixDoubleSpaceInArguments($neonContent)
     {
         return Strings::replace($neonContent, self::ARGUMENTS_DOUBLE_SPACE_REGEX, '$1');
     }

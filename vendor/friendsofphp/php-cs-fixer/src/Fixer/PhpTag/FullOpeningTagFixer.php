@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,8 +27,9 @@ final class FullOpeningTagFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('PHP code must use the long `<?php` tags or short-echo `<?=` tags and not other tag variations.', [new CodeSample('<?
 
@@ -38,23 +38,29 @@ echo "Hello!";
     }
     /**
      * {@inheritdoc}
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         // must run before all Token-based fixers
         return 98;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokensOrg
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokensOrg) : void
+    protected function applyFix($file, $tokensOrg)
     {
         $content = $tokensOrg->generateCode();
         // replace all <? with <?php to replace all short open tags even without short_open_tag option enabled

@@ -20,6 +20,7 @@ interface InputAwareInterface
 {
     /**
      * Sets the Console Input.
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
      */
-    public function setInput(\ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input);
+    public function setInput($input);
 }

@@ -111,7 +111,7 @@ class Ruleset
      * @return void
      * @throws \PHP_CodeSniffer\Exceptions\RuntimeException If no sniffs were registered.
      */
-    public function __construct(\PHP_CodeSniffer\Config $config)
+    public function __construct($config)
     {
         $this->config = $config;
         $restrictions = $config->sniffs;

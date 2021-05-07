@@ -20,27 +20,30 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
  */
 class Caster
 {
-    public const EXCLUDE_VERBOSE = 1;
-    public const EXCLUDE_VIRTUAL = 2;
-    public const EXCLUDE_DYNAMIC = 4;
-    public const EXCLUDE_PUBLIC = 8;
-    public const EXCLUDE_PROTECTED = 16;
-    public const EXCLUDE_PRIVATE = 32;
-    public const EXCLUDE_NULL = 64;
-    public const EXCLUDE_EMPTY = 128;
-    public const EXCLUDE_NOT_IMPORTANT = 256;
-    public const EXCLUDE_STRICT = 512;
-    public const PREFIX_VIRTUAL = "\0~\0";
-    public const PREFIX_DYNAMIC = "\0+\0";
-    public const PREFIX_PROTECTED = "\0*\0";
+    const EXCLUDE_VERBOSE = 1;
+    const EXCLUDE_VIRTUAL = 2;
+    const EXCLUDE_DYNAMIC = 4;
+    const EXCLUDE_PUBLIC = 8;
+    const EXCLUDE_PROTECTED = 16;
+    const EXCLUDE_PRIVATE = 32;
+    const EXCLUDE_NULL = 64;
+    const EXCLUDE_EMPTY = 128;
+    const EXCLUDE_NOT_IMPORTANT = 256;
+    const EXCLUDE_STRICT = 512;
+    const PREFIX_VIRTUAL = "\0~\0";
+    const PREFIX_DYNAMIC = "\0+\0";
+    const PREFIX_PROTECTED = "\0*\0";
     /**
      * Casts objects to arrays and adds the dynamic property prefix.
      *
      * @param bool $hasDebugInfo Whether the __debugInfo method exists on $obj or not
      *
      * @return array The array-cast of the object, with prefixed dynamic properties
+     * @param object $obj
+     * @param string $class
+     * @param string $debugClass
      */
-    public static function castObject(object $obj, string $class, bool $hasDebugInfo = \false, string $debugClass = null) : array
+    public static function castObject($obj, $class, $hasDebugInfo = \false, $debugClass = null)
     {
         if ($hasDebugInfo) {
             try {
@@ -56,11 +59,11 @@ class Caster
         }
         if ($a) {
             static $publicProperties = [];
-            $debugClass = $debugClass ?? \get_debug_type($obj);
+            $debugClass = isset($debugClass) ? $debugClass : \get_debug_type($obj);
             $i = 0;
             $prefixedKeys = [];
             foreach ($a as $k => $v) {
-                if ("\0" !== ($k[0] ?? '')) {
+                if ("\0" !== (isset($k[0]) ? $k[0] : '')) {
                     if (!isset($publicProperties[$class])) {
                         foreach ((new \ReflectionClass($class))->getProperties(\ReflectionProperty::IS_PUBLIC) as $prop) {
                             $publicProperties[$class][$prop->name] = \true;
@@ -109,7 +112,7 @@ class Caster
      *
      * @return array The filtered array
      */
-    public static function filter(array $a, int $filter, array $listedProperties = [], ?int &$count = 0) : array
+    public static function filter(array $a, $filter, array $listedProperties = [], &$count = 0)
     {
         $count = 0;
         foreach ($a as $k => $v) {
@@ -144,7 +147,13 @@ class Caster
         }
         return $a;
     }
-    public static function castPhpIncompleteClass(\__PHP_Incomplete_Class $c, array $a, Stub $stub, bool $isNested) : array
+    /**
+     * @param \__PHP_Incomplete_Class $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     * @return mixed[]
+     */
+    public static function castPhpIncompleteClass($c, array $a, $stub, $isNested)
     {
         if (isset($a['__PHP_Incomplete_Class_Name'])) {
             $stub->class .= '(' . $a['__PHP_Incomplete_Class_Name'] . ')';

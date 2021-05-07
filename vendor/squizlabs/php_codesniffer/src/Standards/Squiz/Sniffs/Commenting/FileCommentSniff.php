@@ -38,7 +38,7 @@ class FileCommentSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $commentStart = $phpcsFile->findNext(\T_WHITESPACE, $stackPtr + 1, null, \true);

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\Skipper\SkipVoter;
 
 use Symplify\Skipper\Contract\SkipVoterInterface;
@@ -17,22 +16,29 @@ final class PathSkipVoter implements SkipVoterInterface
      * @var SkippedPathsResolver
      */
     private $skippedPathsResolver;
-    public function __construct(FileInfoMatcher $fileInfoMatcher, SkippedPathsResolver $skippedPathsResolver)
+    /**
+     * @param \Symplify\Skipper\Matcher\FileInfoMatcher $fileInfoMatcher
+     * @param \Symplify\Skipper\SkipCriteriaResolver\SkippedPathsResolver $skippedPathsResolver
+     */
+    public function __construct($fileInfoMatcher, $skippedPathsResolver)
     {
         $this->fileInfoMatcher = $fileInfoMatcher;
         $this->skippedPathsResolver = $skippedPathsResolver;
     }
     /**
      * @param string|object $element
+     * @return bool
      */
-    public function match($element) : bool
+    public function match($element)
     {
         return \true;
     }
     /**
      * @param string|object $element
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $smartFileInfo
+     * @return bool
      */
-    public function shouldSkip($element, SmartFileInfo $smartFileInfo) : bool
+    public function shouldSkip($element, $smartFileInfo)
     {
         $skippedPaths = $this->skippedPathsResolver->resolve();
         return $this->fileInfoMatcher->doesFileInfoMatchPatterns($smartFileInfo, $skippedPaths);

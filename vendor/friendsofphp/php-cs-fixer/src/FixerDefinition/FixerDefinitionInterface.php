@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -17,16 +16,22 @@ namespace PhpCsFixer\FixerDefinition;
  */
 interface FixerDefinitionInterface
 {
-    public function getSummary() : string;
-    public function getDescription() : ?string;
+    /**
+     * @return string
+     */
+    public function getSummary();
+    /**
+     * @return string|null
+     */
+    public function getDescription();
     /**
      * @return null|string null for non-risky fixer
      */
-    public function getRiskyDescription() : ?string;
+    public function getRiskyDescription();
     /**
      * Array of samples, where single sample is [code, configuration].
      *
-     * @return CodeSampleInterface[]
+     * @return mixed[]
      */
-    public function getCodeSamples() : array;
+    public function getCodeSamples();
 }

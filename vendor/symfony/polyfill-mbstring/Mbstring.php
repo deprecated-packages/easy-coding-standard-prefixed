@@ -67,7 +67,7 @@ namespace Symfony\Polyfill\Mbstring;
  */
 final class Mbstring
 {
-    public const MB_CASE_FOLD = \PHP_INT_MAX;
+    const MB_CASE_FOLD = \PHP_INT_MAX;
 
     private static $encodingList = ['ASCII', 'UTF-8'];
     private static $language = 'neutral';

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Contract\DocBlock;
 
 use PhpCsFixer\Tokenizer\Token;
@@ -9,6 +8,9 @@ interface MalformWorkerInterface
 {
     /**
      * @param Tokens<Token> $tokens
+     * @param string $docContent
+     * @param int $position
+     * @return string
      */
-    public function work(string $docContent, Tokens $tokens, int $position) : string;
+    public function work($docContent, $tokens, $position);
 }

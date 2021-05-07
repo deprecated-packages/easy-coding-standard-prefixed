@@ -20,6 +20,8 @@ interface ErrorRendererInterface
 {
     /**
      * Renders a Throwable as a FlattenException.
+     * @param \Throwable $exception
+     * @return \ECSPrefix20210507\Symfony\Component\ErrorHandler\Exception\FlattenException
      */
-    public function render(\Throwable $exception) : FlattenException;
+    public function render($exception);
 }

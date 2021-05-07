@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -19,15 +18,21 @@ interface NewVersionCheckerInterface
 {
     /**
      * Returns the tag of the latest version.
+     * @return string
      */
-    public function getLatestVersion() : string;
+    public function getLatestVersion();
     /**
      * Returns the tag of the latest minor/patch version of the given major version.
+     * @return string|null
+     * @param int $majorVersion
      */
-    public function getLatestVersionOfMajor(int $majorVersion) : ?string;
+    public function getLatestVersionOfMajor($majorVersion);
     /**
      * Returns -1, 0, or 1 if the first version is respectively less than,
      * equal to, or greater than the second.
+     * @param string $versionA
+     * @param string $versionB
+     * @return int
      */
-    public function compareVersions(string $versionA, string $versionB) : int;
+    public function compareVersions($versionA, $versionB);
 }

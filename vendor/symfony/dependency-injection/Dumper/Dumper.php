@@ -19,7 +19,10 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
 abstract class Dumper implements \ECSPrefix20210507\Symfony\Component\DependencyInjection\Dumper\DumperInterface
 {
     protected $container;
-    public function __construct(ContainerBuilder $container)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    public function __construct($container)
     {
         $this->container = $container;
     }

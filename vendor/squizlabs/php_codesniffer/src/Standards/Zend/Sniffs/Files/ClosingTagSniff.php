@@ -33,7 +33,7 @@ class ClosingTagSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         // Find the last non-empty token.
         $tokens = $phpcsFile->getTokens();

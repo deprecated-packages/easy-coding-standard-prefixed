@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\Reflection;
 
 use ReflectionProperty;
@@ -12,20 +11,32 @@ final class PrivatesAccessor
 {
     /**
      * @return mixed
+     * @param object $object
+     * @param string $propertyName
      */
-    public function getPrivateProperty(object $object, string $propertyName)
+    public function getPrivateProperty($object, $propertyName)
     {
         $propertyReflection = $this->resolvePropertyReflection($object, $propertyName);
         $propertyReflection->setAccessible(\true);
         return $propertyReflection->getValue($object);
     }
-    public function setPrivateProperty(object $object, string $propertyName, $value) : void
+    /**
+     * @param object $object
+     * @return void
+     * @param string $propertyName
+     */
+    public function setPrivateProperty($object, $propertyName, $value)
     {
         $propertyReflection = $this->resolvePropertyReflection($object, $propertyName);
         $propertyReflection->setAccessible(\true);
         $propertyReflection->setValue($object, $value);
     }
-    private function resolvePropertyReflection(object $object, string $propertyName) : ReflectionProperty
+    /**
+     * @param object $object
+     * @param string $propertyName
+     * @return \ReflectionProperty
+     */
+    private function resolvePropertyReflection($object, $propertyName)
     {
         if (\property_exists($object, $propertyName)) {
             return new ReflectionProperty($object, $propertyName);

@@ -17,7 +17,13 @@ use ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub;
  */
 final class ImagineCaster
 {
-    public static function castImage(ImageInterface $c, array $a, Stub $stub, bool $isNested) : array
+    /**
+     * @param \ECSPrefix20210507\Imagine\Image\ImageInterface $c
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
+     * @param bool $isNested
+     * @return mixed[]
+     */
+    public static function castImage($c, array $a, $stub, $isNested)
     {
         $imgData = $c->get('png');
         if (\strlen($imgData) > 1 * 1000 * 1000) {

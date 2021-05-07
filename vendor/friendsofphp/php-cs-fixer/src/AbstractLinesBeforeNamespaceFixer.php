@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -30,8 +29,11 @@ abstract class AbstractLinesBeforeNamespaceFixer extends \PhpCsFixer\AbstractFix
      *
      * @param int $expectedMin min. # of line breaks
      * @param int $expectedMax max. # of line breaks
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
      */
-    protected function fixLinesBeforeNamespace(Tokens $tokens, int $index, int $expectedMin, int $expectedMax) : void
+    protected function fixLinesBeforeNamespace($tokens, $index, $expectedMin, $expectedMax)
     {
         // Let's determine the total numbers of new lines before the namespace
         // and the opening token

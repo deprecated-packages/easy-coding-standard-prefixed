@@ -17,8 +17,9 @@ trait TagTrait
      * Adds a tag for this definition.
      *
      * @return $this
+     * @param string $name
      */
-    public final function tag(string $name, array $attributes = []) : self
+    public final function tag($name, array $attributes = [])
     {
         if ('' === $name) {
             throw new InvalidArgumentException(\sprintf('The tag name for service "%s" must be a non-empty string.', $this->id));

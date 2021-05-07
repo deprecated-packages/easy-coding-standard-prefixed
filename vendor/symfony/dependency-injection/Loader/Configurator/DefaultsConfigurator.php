@@ -17,13 +17,18 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\Exception\InvalidArg
  */
 class DefaultsConfigurator extends \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\AbstractServiceConfigurator
 {
-    public const FACTORY = 'defaults';
+    const FACTORY = 'defaults';
     use Traits\AutoconfigureTrait;
     use Traits\AutowireTrait;
     use Traits\BindTrait;
     use Traits\PublicTrait;
     private $path;
-    public function __construct(\ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent, Definition $definition, string $path = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator $parent
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Definition $definition
+     * @param string $path
+     */
+    public function __construct($parent, $definition, $path = null)
     {
         parent::__construct($parent, $definition, null, []);
         $this->path = $path;
@@ -34,8 +39,9 @@ class DefaultsConfigurator extends \ECSPrefix20210507\Symfony\Component\Dependen
      * @return $this
      *
      * @throws InvalidArgumentException when an invalid tag name or attribute is provided
+     * @param string $name
      */
-    public final function tag(string $name, array $attributes = []) : self
+    public final function tag($name, array $attributes = [])
     {
         if ('' === $name) {
             throw new InvalidArgumentException('The tag name in "_defaults" must be a non-empty string.');
@@ -50,8 +56,10 @@ class DefaultsConfigurator extends \ECSPrefix20210507\Symfony\Component\Dependen
     }
     /**
      * Defines an instanceof-conditional to be applied to following service definitions.
+     * @param string $fqcn
+     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
      */
-    public final function instanceof(string $fqcn) : \ECSPrefix20210507\Symfony\Component\DependencyInjection\Loader\Configurator\InstanceofConfigurator
+    public final function instanceof($fqcn)
     {
         return $this->parent->instanceof($fqcn);
     }

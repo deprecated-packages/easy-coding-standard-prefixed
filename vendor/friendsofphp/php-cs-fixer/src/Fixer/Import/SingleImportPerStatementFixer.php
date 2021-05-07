@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -32,8 +31,9 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('There MUST be one use keyword per declaration.', [new CodeSample("<?php\nuse Foo, Sample, Sample\\Sample as Sample2;\n")]);
     }
@@ -41,22 +41,28 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
      * {@inheritdoc}
      *
      * Must run before MultilineWhitespaceBeforeSemicolonsFixer, NoLeadingImportSlashFixer, NoSinglelineWhitespaceBeforeSemicolonsFixer, NoUnusedImportsFixer, SpaceAfterSemicolonFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 1;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         $uses = \array_reverse($tokensAnalyzer->getImportUseIndexes());
@@ -70,7 +76,12 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
             }
         }
     }
-    private function getGroupDeclaration(Tokens $tokens, int $index) : array
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return mixed[]
+     */
+    private function getGroupDeclaration($tokens, $index)
     {
         $groupPrefix = '';
         $comment = '';
@@ -96,9 +107,14 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
         return [\rtrim($groupPrefix), $groupOpenIndex, $tokens->findBlockEnd(Tokens::BLOCK_TYPE_GROUP_IMPORT_BRACE, $groupOpenIndex), $comment];
     }
     /**
-     * @return string[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param string $groupPrefix
+     * @param int $groupOpenIndex
+     * @param int $groupCloseIndex
+     * @param string $comment
      */
-    private function getGroupStatements(Tokens $tokens, string $groupPrefix, int $groupOpenIndex, int $groupCloseIndex, string $comment) : array
+    private function getGroupStatements($tokens, $groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment)
     {
         $statements = [];
         $statement = $groupPrefix;
@@ -135,7 +151,13 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
         }
         return $statements;
     }
-    private function fixGroupUse(Tokens $tokens, int $index, int $endIndex) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @param int $endIndex
+     */
+    private function fixGroupUse($tokens, $index, $endIndex)
     {
         list($groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment) = $this->getGroupDeclaration($tokens, $index);
         $statements = $this->getGroupStatements($tokens, $groupPrefix, $groupOpenIndex, $groupCloseIndex, $comment);
@@ -152,7 +174,13 @@ final class SingleImportPerStatementFixer extends AbstractFixer implements White
         $importTokens->clearEmptyTokens();
         $tokens->insertAt($index, $importTokens);
     }
-    private function fixMultipleUse(Tokens $tokens, int $index, int $endIndex) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @param int $endIndex
+     */
+    private function fixMultipleUse($tokens, $index, $endIndex)
     {
         $ending = $this->whitespacesConfig->getLineEnding();
         for ($i = $endIndex - 1; $i > $index; --$i) {

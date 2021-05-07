@@ -27,14 +27,19 @@ class TraceableAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Ada
 {
     protected $pool;
     private $calls = [];
-    public function __construct(\ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $pool)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Cache\Adapter\AdapterInterface $pool
+     */
+    public function __construct($pool)
     {
         $this->pool = $pool;
     }
     /**
      * {@inheritdoc}
+     * @param string $key
+     * @param float $beta
      */
-    public function get(string $key, callable $callback, float $beta = null, array &$metadata = null)
+    public function get($key, callable $callback, $beta = null, array &$metadata = null)
     {
         if (!$this->pool instanceof CacheInterface) {
             throw new \BadMethodCallException(\sprintf('Cannot call "%s::get()": this class doesn\'t implement "%s".', \get_debug_type($this->pool), CacheInterface::class));
@@ -108,8 +113,9 @@ class TraceableAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Ada
      * {@inheritdoc}
      *
      * @return bool
+     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function save(CacheItemInterface $item)
+    public function save($item)
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -122,8 +128,9 @@ class TraceableAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Ada
      * {@inheritdoc}
      *
      * @return bool
+     * @param \ECSPrefix20210507\Psr\Cache\CacheItemInterface $item
      */
-    public function saveDeferred(CacheItemInterface $item)
+    public function saveDeferred($item)
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -160,8 +167,9 @@ class TraceableAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Ada
      * {@inheritdoc}
      *
      * @return bool
+     * @param string $prefix
      */
-    public function clear(string $prefix = '')
+    public function clear($prefix = '')
     {
         $event = $this->start(__FUNCTION__);
         try {
@@ -229,8 +237,10 @@ class TraceableAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Ada
     }
     /**
      * {@inheritdoc}
+     * @param string $key
+     * @return bool
      */
-    public function delete(string $key) : bool
+    public function delete($key)
     {
         $event = $this->start(__FUNCTION__);
         try {

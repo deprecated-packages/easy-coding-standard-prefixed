@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -39,19 +38,20 @@ final class TrailingCommaInMultilineFixer extends AbstractFixer implements Confi
     /**
      * @internal
      */
-    public const ELEMENTS_ARRAYS = 'arrays';
+    const ELEMENTS_ARRAYS = 'arrays';
     /**
      * @internal
      */
-    public const ELEMENTS_ARGUMENTS = 'arguments';
+    const ELEMENTS_ARGUMENTS = 'arguments';
     /**
      * @internal
      */
-    public const ELEMENTS_PARAMETERS = 'parameters';
+    const ELEMENTS_PARAMETERS = 'parameters';
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Multi-line arrays, arguments list and parameters list must have a trailing comma.', [new CodeSample("<?php\narray(\n    1,\n    2\n);\n"), new VersionSpecificCodeSample(<<<'SAMPLE'
 <?php
@@ -70,22 +70,26 @@ SAMPLE
      * {@inheritdoc}
      *
      * Must run after NoMultilineWhitespaceAroundDoubleArrowFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN, '(']);
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('after_heredoc', 'Whether a trailing comma should also be placed after heredoc end.'))->setAllowedTypes(['bool'])->setDefault(\false)->setNormalizer(static function (Options $options, $value) {
             if (\PHP_VERSION_ID < 70300 && $value) {
@@ -104,8 +108,11 @@ SAMPLE
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $fixArrays = \in_array(self::ELEMENTS_ARRAYS, $this->configuration['elements'], \true);
         $fixArguments = \in_array(self::ELEMENTS_ARGUMENTS, $this->configuration['elements'], \true);
@@ -132,8 +139,10 @@ SAMPLE
     }
     /**
      * @param int $startIndex
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function fixBlock(Tokens $tokens, $startIndex) : void
+    private function fixBlock($tokens, $startIndex)
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         if (!$tokensAnalyzer->isBlockMultiline($tokens, $startIndex)) {

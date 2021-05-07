@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Output;
 
 use ECSPrefix20210507\Nette\Utils\Json;
@@ -17,31 +16,46 @@ final class JsonOutputFormatter implements OutputFormatterInterface
     /**
      * @var string
      */
-    public const NAME = 'json';
+    const NAME = 'json';
     /**
      * @var string
      */
-    private const FILES = 'files';
+    const FILES = 'files';
     /**
      * @var EasyCodingStandardStyle
      */
     private $easyCodingStandardStyle;
-    public function __construct(EasyCodingStandardStyle $easyCodingStandardStyle)
+    /**
+     * @param \Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle $easyCodingStandardStyle
+     */
+    public function __construct($easyCodingStandardStyle)
     {
         $this->easyCodingStandardStyle = $easyCodingStandardStyle;
     }
-    public function report(ErrorAndDiffResult $errorAndDiffResult, int $processedFilesCount) : int
+    /**
+     * @param \Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult
+     * @param int $processedFilesCount
+     * @return int
+     */
+    public function report($errorAndDiffResult, $processedFilesCount)
     {
         $json = $this->createJsonContent($errorAndDiffResult);
         $this->easyCodingStandardStyle->writeln($json);
         $errorCount = $errorAndDiffResult->getErrorCount();
         return $errorCount === 0 ? ShellCode::SUCCESS : ShellCode::ERROR;
     }
-    public function getName() : string
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return self::NAME;
     }
-    public function createJsonContent(ErrorAndDiffResult $errorAndDiffResult) : string
+    /**
+     * @param \Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult
+     * @return string
+     */
+    public function createJsonContent($errorAndDiffResult)
     {
         $errorsArray = $this->createBaseErrorsArray($errorAndDiffResult);
         $codingStandardErrors = $errorAndDiffResult->getErrors();
@@ -56,8 +70,9 @@ final class JsonOutputFormatter implements OutputFormatterInterface
     }
     /**
      * @return mixed[]
+     * @param \Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult $errorAndDiffResult
      */
-    private function createBaseErrorsArray(ErrorAndDiffResult $errorAndDiffResult) : array
+    private function createBaseErrorsArray($errorAndDiffResult)
     {
         $packageVersionProvider = new PackageVersionProvider();
         $version = $packageVersionProvider->provide('symplify/easy-coding-standard');

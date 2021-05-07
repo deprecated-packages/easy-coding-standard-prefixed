@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyTesting\DataProvider;
 
 use Iterator;
@@ -16,42 +15,50 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class StaticFixtureFinder
 {
     /**
-     * @return Iterator<array<int, SmartFileInfo>>
+     * @return \Iterator
+     * @param string $directory
+     * @param string $suffix
      */
-    public static function yieldDirectory(string $directory, string $suffix = '*.php.inc') : Iterator
+    public static function yieldDirectory($directory, $suffix = '*.php.inc')
     {
         $fileInfos = self::findFilesInDirectory($directory, $suffix);
         return self::yieldFileInfos($fileInfos);
     }
     /**
-     * @return Iterator<SmartFileInfo>
+     * @return \Iterator
+     * @param string $directory
+     * @param string $suffix
      */
-    public static function yieldDirectoryExclusively(string $directory, string $suffix = '*.php.inc') : Iterator
+    public static function yieldDirectoryExclusively($directory, $suffix = '*.php.inc')
     {
         $fileInfos = self::findFilesInDirectoryExclusively($directory, $suffix);
         return self::yieldFileInfos($fileInfos);
     }
     /**
-     * @return Iterator<string, array<int, SplFileInfo>>
+     * @return \Iterator
+     * @param string $directory
+     * @param string $suffix
      */
-    public static function yieldDirectoryWithRelativePathname(string $directory, string $suffix = '*.php.inc') : Iterator
+    public static function yieldDirectoryWithRelativePathname($directory, $suffix = '*.php.inc')
     {
         $fileInfos = self::findFilesInDirectory($directory, $suffix);
         return self::yieldFileInfosWithRelativePathname($fileInfos);
     }
     /**
-     * @return Iterator<string, array<int, SplFileInfo>>
+     * @return \Iterator
+     * @param string $directory
+     * @param string $suffix
      */
-    public static function yieldDirectoryExclusivelyWithRelativePathname(string $directory, string $suffix = '*.php.inc') : Iterator
+    public static function yieldDirectoryExclusivelyWithRelativePathname($directory, $suffix = '*.php.inc')
     {
         $fileInfos = self::findFilesInDirectoryExclusively($directory, $suffix);
         return self::yieldFileInfosWithRelativePathname($fileInfos);
     }
     /**
      * @param SplFileInfo[] $fileInfos
-     * @return Iterator<array<int, SmartFileInfo>>
+     * @return \Iterator
      */
-    private static function yieldFileInfos(array $fileInfos) : Iterator
+    private static function yieldFileInfos(array $fileInfos)
     {
         foreach ($fileInfos as $fileInfo) {
             try {
@@ -63,9 +70,9 @@ final class StaticFixtureFinder
     }
     /**
      * @param SplFileInfo[] $fileInfos
-     * @return Iterator<string, array<int, SplFileInfo>>
+     * @return \Iterator
      */
-    private static function yieldFileInfosWithRelativePathname(array $fileInfos) : Iterator
+    private static function yieldFileInfosWithRelativePathname(array $fileInfos)
     {
         foreach ($fileInfos as $fileInfo) {
             try {
@@ -76,25 +83,34 @@ final class StaticFixtureFinder
         }
     }
     /**
-     * @return SplFileInfo[]
+     * @return mixed[]
+     * @param string $directory
+     * @param string $suffix
      */
-    private static function findFilesInDirectory(string $directory, string $suffix) : array
+    private static function findFilesInDirectory($directory, $suffix)
     {
         $finder = Finder::create()->in($directory)->files()->name($suffix);
         $fileInfos = \iterator_to_array($finder);
         return \array_values($fileInfos);
     }
     /**
-     * @return SplFileInfo[]
+     * @return mixed[]
+     * @param string $directory
+     * @param string $suffix
      */
-    private static function findFilesInDirectoryExclusively(string $directory, string $suffix) : array
+    private static function findFilesInDirectoryExclusively($directory, $suffix)
     {
         self::ensureNoOtherFileName($directory, $suffix);
         $finder = Finder::create()->in($directory)->files()->name($suffix);
         $fileInfos = \iterator_to_array($finder->getIterator());
         return \array_values($fileInfos);
     }
-    private static function ensureNoOtherFileName(string $directory, string $suffix) : void
+    /**
+     * @return void
+     * @param string $directory
+     * @param string $suffix
+     */
+    private static function ensureNoOtherFileName($directory, $suffix)
     {
         $iterator = Finder::create()->in($directory)->files()->notName($suffix)->getIterator();
         $relativeFilePaths = [];

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\ValueObject;
 
 final class MethodName
@@ -8,13 +7,13 @@ final class MethodName
     /**
      * @var string
      */
-    public const CONSTRUCTOR = '__construct';
+    const CONSTRUCTOR = '__construct';
     /**
      * @var string
      */
-    public const SET_UP = 'setUp';
+    const SET_UP = 'setUp';
     /**
      * @var string
      */
-    public const INVOKE = '__invoke';
+    const INVOKE = '__invoke';
 }

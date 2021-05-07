@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,15 +23,15 @@ final class Error
     /**
      * Error which has occurred in linting phase, before applying any fixers.
      */
-    public const TYPE_INVALID = 1;
+    const TYPE_INVALID = 1;
     /**
      * Error which has occurred during fixing phase.
      */
-    public const TYPE_EXCEPTION = 2;
+    const TYPE_EXCEPTION = 2;
     /**
      * Error which has occurred in linting phase, after applying any fixers.
      */
-    public const TYPE_LINT = 3;
+    const TYPE_LINT = 3;
     /**
      * @var int
      */
@@ -53,7 +52,13 @@ final class Error
      * @var null|string
      */
     private $diff;
-    public function __construct(int $type, string $filePath, ?\Throwable $source = null, array $appliedFixers = [], ?string $diff = null)
+    /**
+     * @param \Throwable|null $source
+     * @param string|null $diff
+     * @param int $type
+     * @param string $filePath
+     */
+    public function __construct($type, $filePath, $source = null, array $appliedFixers = [], $diff = null)
     {
         $this->type = $type;
         $this->filePath = $filePath;
@@ -61,23 +66,38 @@ final class Error
         $this->appliedFixers = $appliedFixers;
         $this->diff = $diff;
     }
-    public function getFilePath() : string
+    /**
+     * @return string
+     */
+    public function getFilePath()
     {
         return $this->filePath;
     }
-    public function getSource() : ?\Throwable
+    /**
+     * @return \Throwable|null
+     */
+    public function getSource()
     {
         return $this->source;
     }
-    public function getType() : int
+    /**
+     * @return int
+     */
+    public function getType()
     {
         return $this->type;
     }
-    public function getAppliedFixers() : array
+    /**
+     * @return mixed[]
+     */
+    public function getAppliedFixers()
     {
         return $this->appliedFixers;
     }
-    public function getDiff() : ?string
+    /**
+     * @return string|null
+     */
+    public function getDiff()
     {
         return $this->diff;
     }

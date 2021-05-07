@@ -20,7 +20,10 @@ class Reference
     public $id;
     public $value;
     public $count = 0;
-    public function __construct(int $id, $value = null)
+    /**
+     * @param int $id
+     */
+    public function __construct($id, $value = null)
     {
         $this->id = $id;
         $this->value = $value;

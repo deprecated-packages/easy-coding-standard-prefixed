@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of sebastian/diff.
  *
@@ -17,5 +16,8 @@ namespace ECSPrefix20210507\SebastianBergmann\Diff\Output;
  */
 interface DiffOutputBuilderInterface
 {
-    public function getDiff(array $diff) : string;
+    /**
+     * @return string
+     */
+    public function getDiff(array $diff);
 }

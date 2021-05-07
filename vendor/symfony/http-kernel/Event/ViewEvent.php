@@ -29,7 +29,12 @@ final class ViewEvent extends \ECSPrefix20210507\Symfony\Component\HttpKernel\Ev
      * @var mixed
      */
     private $controllerResult;
-    public function __construct(HttpKernelInterface $kernel, Request $request, int $requestType, $controllerResult)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface $kernel
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param int $requestType
+     */
+    public function __construct($kernel, $request, $requestType, $controllerResult)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->controllerResult = $controllerResult;
@@ -47,8 +52,9 @@ final class ViewEvent extends \ECSPrefix20210507\Symfony\Component\HttpKernel\Ev
      * Assigns the return value of the controller.
      *
      * @param mixed $controllerResult The controller return value
+     * @return void
      */
-    public function setControllerResult($controllerResult) : void
+    public function setControllerResult($controllerResult)
     {
         $this->controllerResult = $controllerResult;
     }

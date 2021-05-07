@@ -39,7 +39,7 @@ class ClassDefinitionOpeningBraceSpaceSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $prevNonWhitespace = $phpcsFile->findPrevious(\T_WHITESPACE, $stackPtr - 1, null, \true);

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SetConfigResolver;
 
 use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
@@ -18,7 +17,11 @@ abstract class AbstractConfigResolver
     {
         $this->optionValueResolver = new OptionValueResolver();
     }
-    public function resolveFromInput(InputInterface $input) : ?SmartFileInfo
+    /**
+     * @return \Symplify\SmartFileSystem\SmartFileInfo|null
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     */
+    public function resolveFromInput($input)
     {
         $configValue = $this->optionValueResolver->getOptionValue($input, OptionName::CONFIG);
         if ($configValue !== null) {
@@ -32,8 +35,10 @@ abstract class AbstractConfigResolver
     }
     /**
      * @param string[] $fallbackFiles
+     * @return \Symplify\SmartFileSystem\SmartFileInfo|null
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
      */
-    public function resolveFromInputWithFallback(InputInterface $input, array $fallbackFiles) : ?SmartFileInfo
+    public function resolveFromInputWithFallback($input, array $fallbackFiles)
     {
         $configFileInfo = $this->resolveFromInput($input);
         if ($configFileInfo !== null) {
@@ -43,8 +48,9 @@ abstract class AbstractConfigResolver
     }
     /**
      * @param string[] $fallbackFiles
+     * @return \Symplify\SmartFileSystem\SmartFileInfo|null
      */
-    private function createFallbackFileInfoIfFound(array $fallbackFiles) : ?SmartFileInfo
+    private function createFallbackFileInfoIfFound(array $fallbackFiles)
     {
         foreach ($fallbackFiles as $fallbackFile) {
             $rootFallbackFile = \getcwd() . \DIRECTORY_SEPARATOR . $fallbackFile;
@@ -54,7 +60,11 @@ abstract class AbstractConfigResolver
         }
         return null;
     }
-    private function createFileInfo(string $configValue) : SmartFileInfo
+    /**
+     * @param string $configValue
+     * @return \Symplify\SmartFileSystem\SmartFileInfo
+     */
+    private function createFileInfo($configValue)
     {
         return new SmartFileInfo($configValue);
     }

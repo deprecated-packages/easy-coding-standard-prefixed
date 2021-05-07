@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SymplifyKernel\Strings;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -10,8 +9,13 @@ final class StringsConverter
      * @see https://regex101.com/r/5Lp2FX/1
      * @var string
      */
-    private const CAMEL_CASE_BY_WORD_REGEX = '#([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)#';
-    public function camelCaseToGlue(string $input, string $glue) : string
+    const CAMEL_CASE_BY_WORD_REGEX = '#([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)#';
+    /**
+     * @param string $input
+     * @param string $glue
+     * @return string
+     */
+    public function camelCaseToGlue($input, $glue)
     {
         if ($input === \strtolower($input)) {
             return $input;
@@ -23,7 +27,12 @@ final class StringsConverter
         }
         return \implode($glue, $parts);
     }
-    public function dashedToCamelCaseWithGlue(string $content, string $glue) : string
+    /**
+     * @param string $content
+     * @param string $glue
+     * @return string
+     */
+    public function dashedToCamelCaseWithGlue($content, $glue)
     {
         $parts = \explode('-', $content);
         $casedParts = [];

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,16 +26,19 @@ final class PowToExponentiationFixer extends AbstractFunctionReferenceFixer
 {
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         // minimal candidate to fix is seven tokens: pow(x,y);
         return $tokens->count() > 7 && $tokens->isTokenKindFound(\T_STRING);
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Converts `pow` to the `**` operator.', [new CodeSample("<?php\n pow(\$a, 1);\n")], null, 'Risky when the function `pow` is overridden.');
     }
@@ -44,15 +46,19 @@ final class PowToExponentiationFixer extends AbstractFunctionReferenceFixer
      * {@inheritdoc}
      *
      * Must run before BinaryOperatorSpacesFixer, MethodArgumentSpaceFixer, NativeFunctionCasingFixer, NoSpacesAfterFunctionNameFixer, NoSpacesInsideParenthesisFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 32;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $candidates = $this->findPowCalls($tokens);
         $argumentsAnalyzer = new ArgumentsAnalyzer();
@@ -91,9 +97,10 @@ final class PowToExponentiationFixer extends AbstractFunctionReferenceFixer
         }
     }
     /**
-     * @return array[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function findPowCalls(Tokens $tokens) : array
+    private function findPowCalls($tokens)
     {
         $candidates = [];
         // Minimal candidate to fix is seven tokens: pow(x,y);
@@ -114,8 +121,12 @@ final class PowToExponentiationFixer extends AbstractFunctionReferenceFixer
      * @param array<int, int> $arguments
      *
      * @return int number of tokens added to the collection
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $functionNameIndex
+     * @param int $openParenthesisIndex
+     * @param int $closeParenthesisIndex
      */
-    private function fixPowToExponentiation(Tokens $tokens, int $functionNameIndex, int $openParenthesisIndex, int $closeParenthesisIndex, array $arguments) : int
+    private function fixPowToExponentiation($tokens, $functionNameIndex, $openParenthesisIndex, $closeParenthesisIndex, array $arguments)
     {
         // find the argument separator ',' directly after the last token of the first argument;
         // replace it with T_POW '**'
@@ -145,7 +156,13 @@ final class PowToExponentiationFixer extends AbstractFunctionReferenceFixer
         }
         return $added;
     }
-    private function isParenthesisNeeded(Tokens $tokens, int $argumentStartIndex, int $argumentEndIndex) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $argumentStartIndex
+     * @param int $argumentEndIndex
+     * @return bool
+     */
+    private function isParenthesisNeeded($tokens, $argumentStartIndex, $argumentEndIndex)
     {
         static $allowedKinds = null;
         if (null === $allowedKinds) {

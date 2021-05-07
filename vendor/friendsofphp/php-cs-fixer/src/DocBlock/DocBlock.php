@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -46,7 +45,11 @@ final class DocBlock
      * @var NamespaceUseAnalysis[]
      */
     private $namespaceUses;
-    public function __construct(string $content, ?NamespaceAnalysis $namespace = null, array $namespaceUses = [])
+    /**
+     * @param \PhpCsFixer\Tokenizer\Analyzer\Analysis\NamespaceAnalysis|null $namespace
+     * @param string $content
+     */
+    public function __construct($content, $namespace = null, array $namespaceUses = [])
     {
         foreach (Preg::split('/([^\\n\\r]+\\R*)/', $content, -1, \PREG_SPLIT_NO_EMPTY | \PREG_SPLIT_DELIM_CAPTURE) as $line) {
             $this->lines[] = new \PhpCsFixer\DocBlock\Line($line);
@@ -56,33 +59,36 @@ final class DocBlock
     }
     /**
      * Get the string representation of object.
+     * @return string
      */
-    public function __toString() : string
+    public function __toString()
     {
         return $this->getContent();
     }
     /**
      * Get this docblock's lines.
      *
-     * @return Line[]
+     * @return mixed[]
      */
-    public function getLines() : array
+    public function getLines()
     {
         return $this->lines;
     }
     /**
      * Get a single line.
+     * @return \PhpCsFixer\DocBlock\Line|null
+     * @param int $pos
      */
-    public function getLine(int $pos) : ?\PhpCsFixer\DocBlock\Line
+    public function getLine($pos)
     {
         return isset($this->lines[$pos]) ? $this->lines[$pos] : null;
     }
     /**
      * Get this docblock's annotations.
      *
-     * @return Annotation[]
+     * @return mixed[]
      */
-    public function getAnnotations() : array
+    public function getAnnotations()
     {
         if (null !== $this->annotations) {
             return $this->annotations;
@@ -104,14 +110,20 @@ final class DocBlock
         }
         return $this->annotations;
     }
-    public function isMultiLine() : bool
+    /**
+     * @return bool
+     */
+    public function isMultiLine()
     {
         return 1 !== \count($this->lines);
     }
     /**
      * Take a one line doc block, and turn it into a multi line doc block.
+     * @return void
+     * @param string $indent
+     * @param string $lineEnd
      */
-    public function makeMultiLine(string $indent, string $lineEnd) : void
+    public function makeMultiLine($indent, $lineEnd)
     {
         if ($this->isMultiLine()) {
             return;
@@ -123,7 +135,10 @@ final class DocBlock
         }
         $this->lines = [new \PhpCsFixer\DocBlock\Line('/**' . $lineEnd), new \PhpCsFixer\DocBlock\Line($indent . ' * ' . $lineContent . $lineEnd), new \PhpCsFixer\DocBlock\Line($indent . ' */')];
     }
-    public function makeSingleLine() : void
+    /**
+     * @return void
+     */
+    public function makeSingleLine()
     {
         if (!$this->isMultiLine()) {
             return;
@@ -140,7 +155,11 @@ final class DocBlock
         }
         $this->lines = [new \PhpCsFixer\DocBlock\Line('/** ' . $lineContent . ' */')];
     }
-    public function getAnnotation(int $pos) : ?\PhpCsFixer\DocBlock\Annotation
+    /**
+     * @return \PhpCsFixer\DocBlock\Annotation|null
+     * @param int $pos
+     */
+    public function getAnnotation($pos)
     {
         $annotations = $this->getAnnotations();
         return isset($annotations[$pos]) ? $annotations[$pos] : null;
@@ -152,9 +171,9 @@ final class DocBlock
      *
      * @param string|string[] $types
      *
-     * @return Annotation[]
+     * @return mixed[]
      */
-    public function getAnnotationsOfType($types) : array
+    public function getAnnotationsOfType($types)
     {
         $annotations = [];
         $types = (array) $types;
@@ -170,12 +189,17 @@ final class DocBlock
     }
     /**
      * Get the actual content of this docblock.
+     * @return string
      */
-    public function getContent() : string
+    public function getContent()
     {
         return \implode('', $this->lines);
     }
-    private function findAnnotationLength(int $start) : int
+    /**
+     * @param int $start
+     * @return int
+     */
+    private function findAnnotationLength($start)
     {
         $index = $start;
         while ($line = $this->getLine(++$index)) {
@@ -194,7 +218,11 @@ final class DocBlock
         }
         return $index - $start;
     }
-    private function getSingleLineDocBlockEntry(\PhpCsFixer\DocBlock\Line $line) : string
+    /**
+     * @param \PhpCsFixer\DocBlock\Line $line
+     * @return string
+     */
+    private function getSingleLineDocBlockEntry($line)
     {
         $lineString = $line->getContent();
         if (0 === \strlen($lineString)) {

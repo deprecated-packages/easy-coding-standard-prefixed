@@ -50,7 +50,7 @@ class ObjectOperatorIndentSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // Make sure this is the first object operator in a chain of them.

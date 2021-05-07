@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\ValueObjectFactory;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -11,13 +10,17 @@ final class DocBlockLinesFactory
      * @see https://regex101.com/r/CUxOj5/1
      * @var string
      */
-    private const BEGINNING_OF_DOC_BLOCK_REGEX = '/^(\\/\\*\\*[\\n]?)/';
+    const BEGINNING_OF_DOC_BLOCK_REGEX = '/^(\\/\\*\\*[\\n]?)/';
     /**
      * @see https://regex101.com/r/otQGPe/1
      * @var string
      */
-    private const END_OF_DOC_BLOCK_REGEX = '/(\\*\\/)$/';
-    public function createFromDocBlock(string $docBlock) : DocBlockLines
+    const END_OF_DOC_BLOCK_REGEX = '/(\\*\\/)$/';
+    /**
+     * @param string $docBlock
+     * @return \Symplify\CodingStandard\ValueObject\DocBlockLines
+     */
+    public function createFromDocBlock($docBlock)
     {
         // Remove the prefix '/**'
         $docBlock = Strings::replace($docBlock, self::BEGINNING_OF_DOC_BLOCK_REGEX);
@@ -35,8 +38,9 @@ final class DocBlockLinesFactory
     }
     /**
      * @param string[] $docBlockLines
+     * @return \Symplify\CodingStandard\ValueObject\DocBlockLines
      */
-    private function createFromLines(array $docBlockLines) : DocBlockLines
+    private function createFromLines(array $docBlockLines)
     {
         $descriptionLines = [];
         $otherLines = [];
@@ -55,9 +59,10 @@ final class DocBlockLinesFactory
         return new DocBlockLines($descriptionLines, $otherLines);
     }
     /**
-     * @return string[]
+     * @return mixed[]
+     * @param string $string
      */
-    private function splitToLines(string $string) : array
+    private function splitToLines($string)
     {
         return \explode(\PHP_EOL, $string);
     }

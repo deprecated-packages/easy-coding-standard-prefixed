@@ -39,8 +39,9 @@ class AnalyzeServiceReferencesPass extends \ECSPrefix20210507\Symfony\Component\
     private $aliases;
     /**
      * @param bool $onlyConstructorArguments Sets this Service Reference pass to ignore method calls
+     * @param bool $hasProxyDumper
      */
-    public function __construct(bool $onlyConstructorArguments = \false, bool $hasProxyDumper = \true)
+    public function __construct($onlyConstructorArguments = \false, $hasProxyDumper = \true)
     {
         $this->onlyConstructorArguments = $onlyConstructorArguments;
         $this->hasProxyDumper = $hasProxyDumper;
@@ -48,8 +49,9 @@ class AnalyzeServiceReferencesPass extends \ECSPrefix20210507\Symfony\Component\
     }
     /**
      * Processes a ContainerBuilder object to populate the service reference graph.
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process($container)
     {
         $this->container = $container;
         $this->graph = $container->getCompiler()->getServiceReferenceGraph();
@@ -69,7 +71,10 @@ class AnalyzeServiceReferencesPass extends \ECSPrefix20210507\Symfony\Component\
             $this->aliases = $this->definitions = [];
         }
     }
-    protected function processValue($value, bool $isRoot = \false)
+    /**
+     * @param bool $isRoot
+     */
+    protected function processValue($value, $isRoot = \false)
     {
         $lazy = $this->lazy;
         $inExpression = $this->inExpression();
@@ -112,7 +117,7 @@ class AnalyzeServiceReferencesPass extends \ECSPrefix20210507\Symfony\Component\
         // Any references before a "wither" are part of the constructor-instantiation graph
         $lastWitherIndex = null;
         foreach ($setters as $k => $call) {
-            if ($call[2] ?? \false) {
+            if (isset($call[2]) ? $call[2] : \false) {
                 $lastWitherIndex = $k;
             }
         }
@@ -139,7 +144,11 @@ class AnalyzeServiceReferencesPass extends \ECSPrefix20210507\Symfony\Component\
         $this->lazy = $lazy;
         return $value;
     }
-    private function getDefinitionId(string $id) : ?string
+    /**
+     * @return string|null
+     * @param string $id
+     */
+    private function getDefinitionId($id)
     {
         while (isset($this->aliases[$id])) {
             $id = (string) $this->aliases[$id];

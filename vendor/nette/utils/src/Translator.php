@@ -1,10 +1,5 @@
 <?php
 
-/**
- * This file is part of the Nette Framework (https://nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
- */
-declare (strict_types=1);
 namespace ECSPrefix20210507\Nette\Localization;
 
 /**
@@ -16,7 +11,8 @@ interface Translator
      * Translates the given string.
      * @param  mixed  $message
      * @param  mixed  ...$parameters
+     * @return string
      */
-    function translate($message, ...$parameters) : string;
+    function translate($message, ...$parameters);
 }
 \interface_exists(\ECSPrefix20210507\Nette\Localization\Nette\Localization\ITranslator::class);

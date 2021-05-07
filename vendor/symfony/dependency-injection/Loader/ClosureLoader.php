@@ -22,21 +22,26 @@ use ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder;
 class ClosureLoader extends Loader
 {
     private $container;
-    public function __construct(ContainerBuilder $container)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
+    public function __construct($container)
     {
         $this->container = $container;
     }
     /**
      * {@inheritdoc}
+     * @param string|null $type
      */
-    public function load($resource, string $type = null)
+    public function load($resource, $type = null)
     {
         $resource($this->container);
     }
     /**
      * {@inheritdoc}
+     * @param string $type
      */
-    public function supports($resource, string $type = null)
+    public function supports($resource, $type = null)
     {
         return $resource instanceof \Closure;
     }

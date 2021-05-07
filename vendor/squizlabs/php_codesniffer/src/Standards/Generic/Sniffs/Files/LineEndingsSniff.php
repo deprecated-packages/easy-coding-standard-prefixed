@@ -44,7 +44,7 @@ class LineEndingsSniff implements Sniff
      *
      * @return int
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $found = $phpcsFile->eolChar;
         $found = \str_replace("\n", '\\n', $found);

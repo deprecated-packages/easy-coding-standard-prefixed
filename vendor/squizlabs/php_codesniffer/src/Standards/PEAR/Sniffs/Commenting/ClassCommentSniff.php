@@ -32,7 +32,7 @@ class ClassCommentSniff extends \PHP_CodeSniffer\Standards\PEAR\Sniffs\Commentin
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $type = \strtolower($tokens[$stackPtr]['content']);

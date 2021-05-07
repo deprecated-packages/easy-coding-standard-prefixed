@@ -28,8 +28,8 @@ use ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface;
 class Command
 {
     // see https://tldp.org/LDP/abs/html/exitcodes.html
-    public const SUCCESS = 0;
-    public const FAILURE = 1;
+    const SUCCESS = 0;
+    const FAILURE = 1;
     /**
      * @var string|null The default command name
      */
@@ -58,11 +58,11 @@ class Command
         return $class === $r->class ? static::$defaultName : null;
     }
     /**
-     * @param string|null $name The name of the command; passing null means it must be set in configure()
+     * @param string $name The name of the command; passing null means it must be set in configure()
      *
      * @throws LogicException When the command name is empty
      */
-    public function __construct(string $name = null)
+    public function __construct($name = null)
     {
         $this->definition = new InputDefinition();
         if (null !== $name || null !== ($name = static::getDefaultName())) {
@@ -79,7 +79,10 @@ class Command
     {
         $this->ignoreValidationErrors = \true;
     }
-    public function setApplication(Application $application = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Application $application
+     */
+    public function setApplication($application = null)
     {
         $this->application = $application;
         if ($application) {
@@ -89,7 +92,10 @@ class Command
         }
         $this->fullDefinition = null;
     }
-    public function setHelperSet(HelperSet $helperSet)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Helper\HelperSet $helperSet
+     */
+    public function setHelperSet($helperSet)
     {
         $this->helperSet = $helperSet;
     }
@@ -142,8 +148,10 @@ class Command
      * @throws LogicException When this abstract method is not implemented
      *
      * @see setCode()
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute($input, $output)
     {
         throw new LogicException('You must override the execute() method in the concrete command class.');
     }
@@ -153,8 +161,10 @@ class Command
      * This method is executed before the InputDefinition is validated.
      * This means that this is the only place where the command can
      * interactively ask for values of missing required arguments.
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function interact(InputInterface $input, OutputInterface $output)
+    protected function interact($input, $output)
     {
     }
     /**
@@ -166,8 +176,10 @@ class Command
      *
      * @see InputInterface::bind()
      * @see InputInterface::validate()
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize($input, $output)
     {
     }
     /**
@@ -183,8 +195,10 @@ class Command
      *
      * @see setCode()
      * @see execute()
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
      */
-    public function run(InputInterface $input, OutputInterface $output)
+    public function run($input, $output)
     {
         // add the application arguments and options
         $this->mergeApplicationDefinition();
@@ -272,7 +286,7 @@ class Command
      *
      * @param bool $mergeArgs Whether to merge or not the Application definition arguments to Command definition arguments
      */
-    public function mergeApplicationDefinition(bool $mergeArgs = \true)
+    public function mergeApplicationDefinition($mergeArgs = \true)
     {
         if (null === $this->application) {
             return;
@@ -311,7 +325,7 @@ class Command
      */
     public function getDefinition()
     {
-        return $this->fullDefinition ?? $this->getNativeDefinition();
+        return isset($this->fullDefinition) ? $this->fullDefinition : $this->getNativeDefinition();
     }
     /**
      * Gets the InputDefinition to be used to create representations of this Command.
@@ -333,14 +347,16 @@ class Command
     /**
      * Adds an argument.
      *
-     * @param int|null             $mode    The argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL
+     * @param int $mode The argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL
      * @param string|string[]|null $default The default value (for InputArgument::OPTIONAL mode only)
      *
      * @throws InvalidArgumentException When argument mode is not valid
      *
      * @return $this
+     * @param string $name
+     * @param string $description
      */
-    public function addArgument(string $name, int $mode = null, string $description = '', $default = null)
+    public function addArgument($name, $mode = null, $description = '', $default = null)
     {
         $this->definition->addArgument(new InputArgument($name, $mode, $description, $default));
         if (null !== $this->fullDefinition) {
@@ -352,14 +368,16 @@ class Command
      * Adds an option.
      *
      * @param string|array|null         $shortcut The shortcuts, can be null, a string of shortcuts delimited by | or an array of shortcuts
-     * @param int|null                  $mode     The option mode: One of the InputOption::VALUE_* constants
+     * @param int $mode The option mode: One of the InputOption::VALUE_* constants
      * @param string|string[]|bool|null $default  The default value (must be null for InputOption::VALUE_NONE)
      *
      * @throws InvalidArgumentException If option mode is invalid or incompatible
      *
      * @return $this
+     * @param string $name
+     * @param string $description
      */
-    public function addOption(string $name, $shortcut = null, int $mode = null, string $description = '', $default = null)
+    public function addOption($name, $shortcut = null, $mode = null, $description = '', $default = null)
     {
         $this->definition->addOption(new InputOption($name, $shortcut, $mode, $description, $default));
         if (null !== $this->fullDefinition) {
@@ -378,8 +396,9 @@ class Command
      * @return $this
      *
      * @throws InvalidArgumentException When the name is invalid
+     * @param string $name
      */
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->validateName($name);
         $this->name = $name;
@@ -392,8 +411,9 @@ class Command
      * like a daemon.
      *
      * @return $this
+     * @param string $title
      */
-    public function setProcessTitle(string $title)
+    public function setProcessTitle($title)
     {
         $this->processTitle = $title;
         return $this;
@@ -415,7 +435,7 @@ class Command
      *
      * @final since Symfony 5.1
      */
-    public function setHidden(bool $hidden)
+    public function setHidden($hidden)
     {
         $this->hidden = $hidden;
         return $this;
@@ -431,8 +451,9 @@ class Command
      * Sets the description for the command.
      *
      * @return $this
+     * @param string $description
      */
-    public function setDescription(string $description)
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;
@@ -450,8 +471,9 @@ class Command
      * Sets the help for the command.
      *
      * @return $this
+     * @param string $help
      */
-    public function setHelp(string $help)
+    public function setHelp($help)
     {
         $this->help = $help;
         return $this;
@@ -488,7 +510,7 @@ class Command
      *
      * @throws InvalidArgumentException When an alias is invalid
      */
-    public function setAliases(iterable $aliases)
+    public function setAliases($aliases)
     {
         foreach ($aliases as $alias) {
             $this->validateName($alias);
@@ -512,7 +534,7 @@ class Command
      *
      * @return string The synopsis
      */
-    public function getSynopsis(bool $short = \false)
+    public function getSynopsis($short = \false)
     {
         $key = $short ? 'short' : 'long';
         if (!isset($this->synopsis[$key])) {
@@ -524,8 +546,9 @@ class Command
      * Add a command usage example, it'll be prefixed with the command name.
      *
      * @return $this
+     * @param string $usage
      */
-    public function addUsage(string $usage)
+    public function addUsage($usage)
     {
         if (0 !== \strpos($usage, $this->name)) {
             $usage = \sprintf('%s %s', $this->name, $usage);
@@ -549,8 +572,9 @@ class Command
      *
      * @throws LogicException           if no HelperSet is defined
      * @throws InvalidArgumentException if the helper is not defined
+     * @param string $name
      */
-    public function getHelper(string $name)
+    public function getHelper($name)
     {
         if (null === $this->helperSet) {
             throw new LogicException(\sprintf('Cannot retrieve helper "%s" because there is no HelperSet defined. Did you forget to add your command to the application or to set the application on the command using the setApplication() method? You can also set the HelperSet directly using the setHelperSet() method.', $name));
@@ -563,8 +587,9 @@ class Command
      * It must be non-empty and parts can optionally be separated by ":".
      *
      * @throws InvalidArgumentException When the name is invalid
+     * @param string $name
      */
-    private function validateName(string $name)
+    private function validateName($name)
     {
         if (!\preg_match('/^[^\\:]++(\\:[^\\:]++)*$/', $name)) {
             throw new InvalidArgumentException(\sprintf('Command name "%s" is invalid.', $name));

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -22,27 +21,50 @@ abstract class AbstractPhpUnitFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public final function isCandidate(Tokens $tokens) : bool
+    public final function isCandidate($tokens)
     {
         return $tokens->isAllTokenKindsFound([\T_CLASS, \T_STRING]);
     }
-    protected final function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    /**
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     */
+    protected final function applyFix($file, $tokens)
     {
         $phpUnitTestCaseIndicator = new PhpUnitTestCaseIndicator();
         foreach ($phpUnitTestCaseIndicator->findPhpUnitClasses($tokens) as $indices) {
             $this->applyPhpUnitClassFix($tokens, $indices[0], $indices[1]);
         }
     }
-    protected abstract function applyPhpUnitClassFix(Tokens $tokens, int $startIndex, int $endIndex) : void;
-    protected final function getDocBlockIndex(Tokens $tokens, int $index) : int
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startIndex
+     * @param int $endIndex
+     */
+    protected abstract function applyPhpUnitClassFix($tokens, $startIndex, $endIndex);
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return int
+     */
+    protected final function getDocBlockIndex($tokens, $index)
     {
         do {
             $index = $tokens->getPrevNonWhitespace($index);
         } while ($tokens[$index]->isGivenKind([\T_PUBLIC, \T_PROTECTED, \T_PRIVATE, \T_FINAL, \T_ABSTRACT, \T_COMMENT]));
         return $index;
     }
-    protected final function isPHPDoc(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    protected final function isPHPDoc($tokens, $index)
     {
         return $tokens[$index]->isGivenKind(\T_DOC_COMMENT);
     }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,8 +27,9 @@ final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis.', [new CodeSample("<?php\nrequire ('sample.php');\necho (test (3));\nexit  (1);\n\$func ();\n")]);
     }
@@ -38,22 +38,28 @@ final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
      *
      * Must run before FunctionToConstantFixer.
      * Must run after PowToExponentiationFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 2;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound(\array_merge($this->getFunctionyTokenKinds(), [\T_STRING]));
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $functionyTokens = $this->getFunctionyTokenKinds();
         $languageConstructionTokens = $this->getLanguageConstructionTokenKinds();
@@ -93,8 +99,9 @@ final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
      *
      * @param Tokens $tokens tokens to handle
      * @param int    $index  index of token
+     * @return void
      */
-    private function fixFunctionCall(Tokens $tokens, int $index) : void
+    private function fixFunctionCall($tokens, $index)
     {
         // remove space before opening brace
         if ($tokens[$index - 1]->isWhitespace()) {
@@ -102,9 +109,9 @@ final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
         }
     }
     /**
-     * @return array<array|string>
+     * @return mixed[]
      */
-    private function getBraceAfterVariableKinds() : array
+    private function getBraceAfterVariableKinds()
     {
         static $tokens = [')', ']', [CT::T_DYNAMIC_VAR_BRACE_CLOSE], [CT::T_ARRAY_INDEX_CURLY_BRACE_CLOSE]];
         return $tokens;
@@ -112,9 +119,9 @@ final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
     /**
      * Gets the token kinds which can work as function calls.
      *
-     * @return int[] Token names
+     * @return mixed[] Token names
      */
-    private function getFunctionyTokenKinds() : array
+    private function getFunctionyTokenKinds()
     {
         static $tokens = [\T_ARRAY, \T_ECHO, \T_EMPTY, \T_EVAL, \T_EXIT, \T_INCLUDE, \T_INCLUDE_ONCE, \T_ISSET, \T_LIST, \T_PRINT, \T_REQUIRE, \T_REQUIRE_ONCE, \T_UNSET, \T_VARIABLE];
         return $tokens;
@@ -122,9 +129,9 @@ final class NoSpacesAfterFunctionNameFixer extends AbstractFixer
     /**
      * Gets the token kinds of actually language construction.
      *
-     * @return int[]
+     * @return mixed[]
      */
-    private function getLanguageConstructionTokenKinds() : array
+    private function getLanguageConstructionTokenKinds()
     {
         static $languageConstructionTokens = [\T_ECHO, \T_PRINT, \T_INCLUDE, \T_INCLUDE_ONCE, \T_REQUIRE, \T_REQUIRE_ONCE];
         return $languageConstructionTokens;

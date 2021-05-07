@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -34,7 +33,14 @@ final class TokensNewliner
      * @var IndentResolver
      */
     private $indentResolver;
-    public function __construct(\Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthCloserTransformer $lineLengthCloserTransformer, TokenSkipper $tokenSkipper, \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthOpenerTransformer $lineLengthOpenerTransformer, WhitespacesFixerConfig $whitespacesFixerConfig, IndentResolver $indentResolver)
+    /**
+     * @param \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthCloserTransformer $lineLengthCloserTransformer
+     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\TokenSkipper $tokenSkipper
+     * @param \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\LineLengthOpenerTransformer $lineLengthOpenerTransformer
+     * @param \PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig
+     * @param \Symplify\CodingStandard\TokenRunner\Whitespace\IndentResolver $indentResolver
+     */
+    public function __construct($lineLengthCloserTransformer, $tokenSkipper, $lineLengthOpenerTransformer, $whitespacesFixerConfig, $indentResolver)
     {
         $this->lineLengthCloserTransformer = $lineLengthCloserTransformer;
         $this->tokenSkipper = $tokenSkipper;
@@ -43,9 +49,12 @@ final class TokensNewliner
         $this->indentResolver = $indentResolver;
     }
     /**
-     * @param Tokens|Token[] $tokens
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return void
+     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
+     * @param int $kind
      */
-    public function breakItems(BlockInfo $blockInfo, Tokens $tokens, int $kind = LineKind::CALLS) : void
+    public function breakItems($blockInfo, $tokens, $kind = LineKind::CALLS)
     {
         // from bottom top, to prevent skipping ids
         //  e.g when token is added in the middle, the end index does now point to earlier element!
@@ -75,9 +84,11 @@ final class TokensNewliner
     /**
      * Has already newline? usually the last line => skip to prevent double spacing
      *
-     * @param Tokens|Token[] $tokens
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $position
+     * @return bool
      */
-    private function isLastItem(Tokens $tokens, int $position) : bool
+    private function isLastItem($tokens, $position)
     {
         $nextPosition = $position + 1;
         if (!isset($tokens[$nextPosition])) {
@@ -87,9 +98,11 @@ final class TokensNewliner
         return Strings::contains($tokenContent, $this->whitespacesFixerConfig->getLineEnding());
     }
     /**
-     * @param Tokens|Token[] $tokens
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $i
+     * @return bool
      */
-    private function isFollowedByComment(Tokens $tokens, int $i) : bool
+    private function isFollowedByComment($tokens, $i)
     {
         $nextToken = $tokens[$i + 1];
         $nextNextToken = $tokens[$i + 2];

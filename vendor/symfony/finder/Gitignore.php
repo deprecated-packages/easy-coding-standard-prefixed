@@ -21,8 +21,9 @@ class Gitignore
      * Returns a regexp which is the equivalent of the gitignore pattern.
      *
      * @return string The regexp
+     * @param string $gitignoreFileContent
      */
-    public static function toRegex(string $gitignoreFileContent) : string
+    public static function toRegex($gitignoreFileContent)
     {
         $gitignoreFileContent = \preg_replace('/^[^\\\\r\\n]*#.*/m', '', $gitignoreFileContent);
         $gitignoreLines = \preg_split('/\\r\\n|\\r|\\n/', $gitignoreFileContent);
@@ -55,7 +56,12 @@ class Gitignore
         }
         return \sprintf('/^((%s))$/', \implode(')|(', $patterns));
     }
-    private static function getRegexFromGitignore(string $gitignorePattern, bool $negative = \false) : string
+    /**
+     * @param string $gitignorePattern
+     * @param bool $negative
+     * @return string
+     */
+    private static function getRegexFromGitignore($gitignorePattern, $negative = \false)
     {
         $regex = '';
         $isRelativePath = \false;

@@ -21,7 +21,10 @@ use ECSPrefix20210507\Symfony\Component\OptionsResolver\OptionsResolver;
 class OptionsResolverIntrospector
 {
     private $get;
-    public function __construct(OptionsResolver $optionsResolver)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\OptionsResolver\OptionsResolver $optionsResolver
+     */
+    public function __construct($optionsResolver)
     {
         $this->get = \Closure::bind(function ($property, $option, $message) {
             /** @var OptionsResolver $this */
@@ -38,26 +41,29 @@ class OptionsResolverIntrospector
      * @return mixed
      *
      * @throws NoConfigurationException on no configured value
+     * @param string $option
      */
-    public function getDefault(string $option)
+    public function getDefault($option)
     {
         return ($this->get)('defaults', $option, \sprintf('No default value was set for the "%s" option.', $option));
     }
     /**
-     * @return \Closure[]
+     * @return mixed[]
      *
      * @throws NoConfigurationException on no configured closures
+     * @param string $option
      */
-    public function getLazyClosures(string $option) : array
+    public function getLazyClosures($option)
     {
         return ($this->get)('lazy', $option, \sprintf('No lazy closures were set for the "%s" option.', $option));
     }
     /**
-     * @return string[]
+     * @return mixed[]
      *
      * @throws NoConfigurationException on no configured types
+     * @param string $option
      */
-    public function getAllowedTypes(string $option) : array
+    public function getAllowedTypes($option)
     {
         return ($this->get)('allowedTypes', $option, \sprintf('No allowed types were set for the "%s" option.', $option));
     }
@@ -65,22 +71,27 @@ class OptionsResolverIntrospector
      * @return mixed[]
      *
      * @throws NoConfigurationException on no configured values
+     * @param string $option
      */
-    public function getAllowedValues(string $option) : array
+    public function getAllowedValues($option)
     {
         return ($this->get)('allowedValues', $option, \sprintf('No allowed values were set for the "%s" option.', $option));
     }
     /**
      * @throws NoConfigurationException on no configured normalizer
+     * @param string $option
+     * @return \Closure
      */
-    public function getNormalizer(string $option) : \Closure
+    public function getNormalizer($option)
     {
         return \current($this->getNormalizers($option));
     }
     /**
      * @throws NoConfigurationException when no normalizer is configured
+     * @param string $option
+     * @return mixed[]
      */
-    public function getNormalizers(string $option) : array
+    public function getNormalizers($option)
     {
         return ($this->get)('normalizers', $option, \sprintf('No normalizer was set for the "%s" option.', $option));
     }
@@ -90,16 +101,19 @@ class OptionsResolverIntrospector
      * @throws NoConfigurationException on no configured deprecation
      *
      * @deprecated since Symfony 5.1, use "getDeprecation()" instead.
+     * @param string $option
      */
-    public function getDeprecationMessage(string $option)
+    public function getDeprecationMessage($option)
     {
         trigger_deprecation('symfony/options-resolver', '5.1', 'The "%s()" method is deprecated, use "getDeprecation()" instead.', __METHOD__);
         return $this->getDeprecation($option)['message'];
     }
     /**
      * @throws NoConfigurationException on no configured deprecation
+     * @param string $option
+     * @return mixed[]
      */
-    public function getDeprecation(string $option) : array
+    public function getDeprecation($option)
     {
         return ($this->get)('deprecated', $option, \sprintf('No deprecation was set for the "%s" option.', $option));
     }

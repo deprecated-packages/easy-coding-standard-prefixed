@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
 use PhpCsFixer\Tokenizer\CT;
@@ -14,14 +13,20 @@ final class LineLengthOpenerTransformer
      * @var CallAnalyzer
      */
     private $callAnalyzer;
-    public function __construct(CallAnalyzer $callAnalyzer)
+    /**
+     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\CallAnalyzer $callAnalyzer
+     */
+    public function __construct($callAnalyzer)
     {
         $this->callAnalyzer = $callAnalyzer;
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param int $blockStartIndex
+     * @param string $newlineIndentWhitespace
      */
-    public function insertNewlineAfterOpeningIfNeeded(Tokens $tokens, int $blockStartIndex, string $newlineIndentWhitespace) : void
+    public function insertNewlineAfterOpeningIfNeeded($tokens, $blockStartIndex, $newlineIndentWhitespace)
     {
         if (!isset($tokens[$blockStartIndex + 1])) {
             throw new TokenNotFoundException($blockStartIndex + 1);

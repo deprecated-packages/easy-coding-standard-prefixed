@@ -26,10 +26,10 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
     This conversation was marked as resolved by lstrojny
     * Note: don’t use {@see \Symfony\Component\Cache\Adapter\AbstractAdapter::NS_SEPARATOR}.
     */
-    private const RESERVED_MEMCACHED = " \n\r\t\v\f\0";
-    private const RESERVED_PSR6 = '@()\\{}/';
+    const RESERVED_MEMCACHED = " \n\r\t\v\f\0";
+    const RESERVED_PSR6 = '@()\\{}/';
     protected $maxIdLength = 250;
-    private const DEFAULT_CLIENT_OPTIONS = ['persistent_id' => null, 'username' => null, 'password' => null, \Memcached::OPT_SERIALIZER => \Memcached::SERIALIZER_PHP];
+    const DEFAULT_CLIENT_OPTIONS = ['persistent_id' => null, 'username' => null, 'password' => null, \Memcached::OPT_SERIALIZER => \Memcached::SERIALIZER_PHP];
     private $marshaller;
     private $client;
     private $lazyClient;
@@ -42,8 +42,12 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
      *   your Memcached memory should be large enough to never trigger LRU.
      *
      * Using a MemcachedAdapter as a pure items store is fine.
+     * @param \Memcached $client
+     * @param string $namespace
+     * @param int $defaultLifetime
+     * @param \ECSPrefix20210507\Symfony\Component\Cache\Marshaller\MarshallerInterface $marshaller
      */
-    public function __construct(\Memcached $client, string $namespace = '', int $defaultLifetime = 0, MarshallerInterface $marshaller = null)
+    public function __construct($client, $namespace = '', $defaultLifetime = 0, $marshaller = null)
     {
         if (!static::isSupported()) {
             throw new CacheException('Memcached >= 2.2.0 is required.');
@@ -60,7 +64,7 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
         }
         parent::__construct($namespace, $defaultLifetime);
         $this->enableVersioning();
-        $this->marshaller = $marshaller ?? new DefaultMarshaller();
+        $this->marshaller = isset($marshaller) ? $marshaller : new DefaultMarshaller();
     }
     public static function isSupported()
     {
@@ -110,9 +114,9 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
                 }
                 $params = \preg_replace_callback('#^memcached:(//)?(?:([^@]*+)@)?#', function ($m) use(&$username, &$password) {
                     if (!empty($m[2])) {
-                        [$username, $password] = \explode(':', $m[2], 2) + [1 => null];
+                        list($username, $password) = \explode(':', $m[2], 2) + [1 => null];
                     }
-                    return 'file:' . ($m[1] ?? '');
+                    return 'file:' . (isset($m[1]) ? $m[1] : '');
                 }, $dsn);
                 if (\false === ($params = \parse_url($params))) {
                     throw new InvalidArgumentException(\sprintf('Invalid Memcached DSN: "%s".', $dsn));
@@ -147,7 +151,7 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
                     $params['weight'] = $m[1];
                     $params['path'] = \substr($params['path'], 0, -\strlen($m[0]));
                 }
-                $params += ['host' => $params['host'] ?? $params['path'], 'port' => isset($params['host']) ? 11211 : null, 'weight' => 0];
+                $params += ['host' => isset($params['host']) ? $params['host'] : $params['path'], 'port' => isset($params['host']) ? 11211 : null, 'weight' => 0];
                 if ($query) {
                     $params += $query;
                     $options = $query + $options;
@@ -213,8 +217,9 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
     }
     /**
      * {@inheritdoc}
+     * @param int $lifetime
      */
-    protected function doSave(array $values, int $lifetime)
+    protected function doSave(array $values, $lifetime)
     {
         if (!($values = $this->marshaller->marshall($values, $failed))) {
             return $failed;
@@ -247,8 +252,9 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
     }
     /**
      * {@inheritdoc}
+     * @param string $id
      */
-    protected function doHave(string $id)
+    protected function doHave($id)
     {
         return \false !== $this->getClient()->get(self::encodeKey($id)) || $this->checkResultCode(\Memcached::RES_SUCCESS === $this->client->getResultCode());
     }
@@ -268,8 +274,9 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
     }
     /**
      * {@inheritdoc}
+     * @param string $namespace
      */
-    protected function doClear(string $namespace)
+    protected function doClear($namespace)
     {
         return '' === $namespace && $this->getClient()->flush();
     }
@@ -281,7 +288,10 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
         }
         throw new CacheException('MemcachedAdapter client error: ' . \strtolower($this->client->getResultMessage()));
     }
-    private function getClient() : \Memcached
+    /**
+     * @return \Memcached
+     */
+    private function getClient()
     {
         if ($this->client) {
             return $this->client;
@@ -295,11 +305,19 @@ class MemcachedAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapte
         }
         return $this->client = $this->lazyClient;
     }
-    private static function encodeKey(string $key) : string
+    /**
+     * @param string $key
+     * @return string
+     */
+    private static function encodeKey($key)
     {
         return \strtr($key, self::RESERVED_MEMCACHED, self::RESERVED_PSR6);
     }
-    private static function decodeKey(string $key) : string
+    /**
+     * @param string $key
+     * @return string
+     */
+    private static function decodeKey($key)
     {
         return \strtr($key, self::RESERVED_PSR6, self::RESERVED_MEMCACHED);
     }

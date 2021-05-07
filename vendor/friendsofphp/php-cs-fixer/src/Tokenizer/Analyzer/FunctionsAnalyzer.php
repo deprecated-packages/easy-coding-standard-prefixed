@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -29,8 +28,11 @@ final class FunctionsAnalyzer
     private $functionsAnalysis = ['tokens' => '', 'imports' => [], 'declarations' => []];
     /**
      * Important: risky because of the limited (file) scope of the tool.
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
      */
-    public function isGlobalFunctionCall(Tokens $tokens, int $index) : bool
+    public function isGlobalFunctionCall($tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind(\T_STRING)) {
             return \false;
@@ -102,9 +104,11 @@ final class FunctionsAnalyzer
         return \true;
     }
     /**
-     * @return ArgumentAnalysis[]
+     * @return mixed[]
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $methodIndex
      */
-    public function getFunctionArguments(Tokens $tokens, int $methodIndex) : array
+    public function getFunctionArguments($tokens, $methodIndex)
     {
         $argumentsStart = $tokens->getNextTokenOfKind($methodIndex, ['(']);
         $argumentsEnd = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
@@ -116,7 +120,12 @@ final class FunctionsAnalyzer
         }
         return $arguments;
     }
-    public function getFunctionReturnType(Tokens $tokens, int $methodIndex) : ?TypeAnalysis
+    /**
+     * @return \PhpCsFixer\Tokenizer\Analyzer\Analysis\TypeAnalysis|null
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $methodIndex
+     */
+    public function getFunctionReturnType($tokens, $methodIndex)
     {
         $argumentsStart = $tokens->getNextTokenOfKind($methodIndex, ['(']);
         $argumentsEnd = $tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $argumentsStart);
@@ -137,7 +146,12 @@ final class FunctionsAnalyzer
         }
         return new TypeAnalysis($type, $typeStartIndex, $typeEndIndex);
     }
-    public function isTheSameClassCall(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    public function isTheSameClassCall($tokens, $index)
     {
         if (!$tokens->offsetExists($index)) {
             return \false;
@@ -152,7 +166,11 @@ final class FunctionsAnalyzer
         }
         return $tokens[$operatorIndex]->isObjectOperator() && $tokens[$referenceIndex]->equals([\T_VARIABLE, '$this'], \false) || $tokens[$operatorIndex]->isGivenKind(\T_DOUBLE_COLON) && $tokens[$referenceIndex]->equals([\T_STRING, 'self'], \false) || $tokens[$operatorIndex]->isGivenKind(\T_DOUBLE_COLON) && $tokens[$referenceIndex]->equals([\T_STATIC, 'static'], \false);
     }
-    private function buildFunctionsAnalysis(Tokens $tokens) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     */
+    private function buildFunctionsAnalysis($tokens)
     {
         $this->functionsAnalysis = ['tokens' => $tokens->getCodeHash(), 'imports' => [], 'declarations' => []];
         // find declarations

@@ -63,7 +63,10 @@ class GraphvizDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInje
         }
         return $this->container->resolveEnvPlaceholders($this->startDot() . $this->addNodes() . $this->addEdges() . $this->endDot(), '__ENV_%s__');
     }
-    private function addNodes() : string
+    /**
+     * @return string
+     */
+    private function addNodes()
     {
         $code = '';
         foreach ($this->nodes as $id => $node) {
@@ -72,7 +75,10 @@ class GraphvizDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInje
         }
         return $code;
     }
-    private function addEdges() : string
+    /**
+     * @return string
+     */
+    private function addEdges()
     {
         $code = '';
         foreach ($this->edges as $id => $edges) {
@@ -84,8 +90,13 @@ class GraphvizDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInje
     }
     /**
      * Finds all edges belonging to a specific service id.
+     * @param string $id
+     * @param bool $required
+     * @param string $name
+     * @param bool $lazy
+     * @return mixed[]
      */
-    private function findEdges(string $id, array $arguments, bool $required, string $name, bool $lazy = \false) : array
+    private function findEdges($id, array $arguments, $required, $name, $lazy = \false)
     {
         $edges = [];
         foreach ($arguments as $argument) {
@@ -115,7 +126,10 @@ class GraphvizDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInje
         }
         return $edges;
     }
-    private function findNodes() : array
+    /**
+     * @return mixed[]
+     */
+    private function findNodes()
     {
         $nodes = [];
         $container = $this->cloneContainer();
@@ -141,7 +155,10 @@ class GraphvizDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInje
         }
         return $nodes;
     }
-    private function cloneContainer() : ContainerBuilder
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder
+     */
+    private function cloneContainer()
     {
         $parameterBag = new ParameterBag($this->container->getParameterBag()->all());
         $container = new ContainerBuilder($parameterBag);
@@ -153,15 +170,24 @@ class GraphvizDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInje
         }
         return $container;
     }
-    private function startDot() : string
+    /**
+     * @return string
+     */
+    private function startDot()
     {
         return \sprintf("digraph sc {\n  %s\n  node [%s];\n  edge [%s];\n\n", $this->addOptions($this->options['graph']), $this->addOptions($this->options['node']), $this->addOptions($this->options['edge']));
     }
-    private function endDot() : string
+    /**
+     * @return string
+     */
+    private function endDot()
     {
         return "}\n";
     }
-    private function addAttributes(array $attributes) : string
+    /**
+     * @return string
+     */
+    private function addAttributes(array $attributes)
     {
         $code = [];
         foreach ($attributes as $k => $v) {
@@ -169,7 +195,10 @@ class GraphvizDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInje
         }
         return $code ? ', ' . \implode(', ', $code) : '';
     }
-    private function addOptions(array $options) : string
+    /**
+     * @return string
+     */
+    private function addOptions(array $options)
     {
         $code = [];
         foreach ($options as $k => $v) {
@@ -177,11 +206,19 @@ class GraphvizDumper extends \ECSPrefix20210507\Symfony\Component\DependencyInje
         }
         return \implode(' ', $code);
     }
-    private function dotize(string $id) : string
+    /**
+     * @param string $id
+     * @return string
+     */
+    private function dotize($id)
     {
         return \preg_replace('/\\W/i', '_', $id);
     }
-    private function getAliases(string $id) : array
+    /**
+     * @param string $id
+     * @return mixed[]
+     */
+    private function getAliases($id)
     {
         $aliases = [];
         foreach ($this->container->getAliases() as $alias => $origin) {

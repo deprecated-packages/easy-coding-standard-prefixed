@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of sebastian/diff.
  *
@@ -19,8 +18,9 @@ final class TimeEfficientLongestCommonSubsequenceCalculator implements \ECSPrefi
 {
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function calculate(array $from, array $to) : array
+    public function calculate(array $from, array $to)
     {
         $common = [];
         $fromLength = count($from);

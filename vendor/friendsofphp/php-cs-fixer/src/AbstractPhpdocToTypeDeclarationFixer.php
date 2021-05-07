@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -46,23 +45,31 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends \PhpCsFixer\Abstract
     private static $syntaxValidationCache = [];
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
-    protected abstract function isSkippedType(string $type) : bool;
+    /**
+     * @param string $type
+     * @return bool
+     */
+    protected abstract function isSkippedType($type);
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('scalar_types', 'Fix also scalar types; may have unexpected behaviour due to PHP bad type coercion system.'))->setAllowedTypes(['bool'])->setDefault(\true)->getOption()]);
     }
     /**
      * @param int $index The index of the function token
+     * @return int|null
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function findFunctionDocComment(Tokens $tokens, int $index) : ?int
+    protected function findFunctionDocComment($tokens, $index)
     {
         do {
             $index = $tokens->getPrevNonWhitespace($index);
@@ -73,9 +80,12 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends \PhpCsFixer\Abstract
         return null;
     }
     /**
-     * @return Annotation[]
+     * @return mixed[]
+     * @param string $name
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $docCommentIndex
      */
-    protected function getAnnotationsFromDocComment(string $name, Tokens $tokens, int $docCommentIndex) : array
+    protected function getAnnotationsFromDocComment($name, $tokens, $docCommentIndex)
     {
         $namespacesAnalyzer = new NamespacesAnalyzer();
         $namespace = $namespacesAnalyzer->getNamespaceAt($tokens, $docCommentIndex);
@@ -85,9 +95,11 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends \PhpCsFixer\Abstract
         return $doc->getAnnotationsOfType($name);
     }
     /**
-     * @return Token[]
+     * @return mixed[]
+     * @param string $type
+     * @param bool $isNullable
      */
-    protected function createTypeDeclarationTokens(string $type, bool $isNullable) : array
+    protected function createTypeDeclarationTokens($type, $isNullable)
     {
         static $specialTypes = ['array' => [CT::T_ARRAY_TYPEHINT, 'array'], 'callable' => [\T_CALLABLE, 'callable'], 'static' => [\T_STATIC, 'static']];
         $newTokens = [];
@@ -115,7 +127,12 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends \PhpCsFixer\Abstract
         }
         return $newTokens;
     }
-    protected function getCommonTypeFromAnnotation(Annotation $annotation, bool $isReturnType) : ?array
+    /**
+     * @return mixed[]|null
+     * @param \PhpCsFixer\DocBlock\Annotation $annotation
+     * @param bool $isReturnType
+     */
+    protected function getCommonTypeFromAnnotation($annotation, $isReturnType)
     {
         $typesExpression = $annotation->getTypeExpression();
         $commonType = $typesExpression->getCommonType();
@@ -144,7 +161,11 @@ abstract class AbstractPhpdocToTypeDeclarationFixer extends \PhpCsFixer\Abstract
         }
         return [$commonType, $isNullable];
     }
-    protected final function isValidSyntax(string $code) : bool
+    /**
+     * @param string $code
+     * @return bool
+     */
+    protected final function isValidSyntax($code)
     {
         if (!isset(self::$syntaxValidationCache[$code])) {
             try {

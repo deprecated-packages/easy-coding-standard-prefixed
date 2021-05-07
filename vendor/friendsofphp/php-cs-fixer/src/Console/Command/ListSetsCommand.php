@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -32,12 +31,17 @@ final class ListSetsCommand extends Command
     protected static $defaultName = 'list-sets';
     /**
      * {@inheritdoc}
+     * @return void
      */
-    protected function configure() : void
+    protected function configure()
     {
         $this->setDefinition([new InputOption('format', '', InputOption::VALUE_REQUIRED, 'To output results in other formats.', (new TextReporter())->getFormat())])->setDescription('List all available RuleSets.');
     }
-    protected function execute(InputInterface $input, OutputInterface $output)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     */
+    protected function execute($input, $output)
     {
         $reporter = $this->resolveReporterWithFactory($input->getOption('format'), new ReporterFactory());
         $reportSummary = new ReportSummary(\array_values(RuleSets::getSetDefinitions()));
@@ -47,8 +51,9 @@ final class ListSetsCommand extends Command
     }
     /**
      * @param string $format
+     * @param \PhpCsFixer\Console\Report\ListSetsReport\ReporterFactory $factory
      */
-    private function resolveReporterWithFactory($format, ReporterFactory $factory)
+    private function resolveReporterWithFactory($format, $factory)
     {
         try {
             $factory->registerBuiltInReporters();

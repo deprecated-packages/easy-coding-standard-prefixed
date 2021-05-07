@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -24,14 +23,19 @@ use ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatter;
  */
 final class GitlabReporter implements \PhpCsFixer\Console\Report\FixReport\ReporterInterface
 {
-    public function getFormat() : string
+    /**
+     * @return string
+     */
+    public function getFormat()
     {
         return 'gitlab';
     }
     /**
      * Process changed files array. Returns generated report.
+     * @param \PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary
+     * @return string
      */
-    public function generate(\PhpCsFixer\Console\Report\FixReport\ReportSummary $reportSummary) : string
+    public function generate($reportSummary)
     {
         $report = [];
         foreach ($reportSummary->getChanged() as $fileName => $change) {

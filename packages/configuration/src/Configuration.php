@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Configuration;
 
 use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
@@ -43,14 +42,19 @@ final class Configuration
      * @var bool
      */
     private $doesMatchGitDiff = \false;
-    public function __construct(ParameterProvider $parameterProvider)
+    /**
+     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
+     */
+    public function __construct($parameterProvider)
     {
         $this->paths = $parameterProvider->provideArrayParameter(Option::PATHS);
     }
     /**
      * Needs to run in the start of the life cycle, since the rest of workflow uses it.
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
      */
-    public function resolveFromInput(InputInterface $input) : void
+    public function resolveFromInput($input)
     {
         /** @var string[] $paths */
         $paths = (array) $input->getArgument(Option::PATHS);
@@ -68,60 +72,84 @@ final class Configuration
         $this->setOutputFormat($input);
     }
     /**
-     * @return string[]
+     * @return mixed[]
      */
-    public function getSources() : array
+    public function getSources()
     {
         return $this->sources;
     }
-    public function isFixer() : bool
+    /**
+     * @return bool
+     */
+    public function isFixer()
     {
         return $this->isFixer;
     }
-    public function shouldClearCache() : bool
+    /**
+     * @return bool
+     */
+    public function shouldClearCache()
     {
         return $this->shouldClearCache;
     }
-    public function shouldShowProgressBar() : bool
+    /**
+     * @return bool
+     */
+    public function shouldShowProgressBar()
     {
         return $this->showProgressBar;
     }
-    public function shouldShowErrorTable() : bool
+    /**
+     * @return bool
+     */
+    public function shouldShowErrorTable()
     {
         return $this->showErrorTable;
     }
     /**
      * @param string[] $sources
+     * @return void
      */
-    public function setSources(array $sources) : void
+    public function setSources(array $sources)
     {
         $this->ensureSourcesExists($sources);
         $this->sources = $this->normalizeSources($sources);
     }
     /**
-     * @return string[]
+     * @return mixed[]
      */
-    public function getPaths() : array
+    public function getPaths()
     {
         return $this->paths;
     }
-    public function getOutputFormat() : string
+    /**
+     * @return string
+     */
+    public function getOutputFormat()
     {
         return $this->outputFormat;
     }
     /**
      * @api
      * For tests
+     * @return void
      */
-    public function enableFixing() : void
+    public function enableFixing()
     {
         $this->isFixer = \true;
     }
-    public function doesMatchGitDiff() : bool
+    /**
+     * @return bool
+     */
+    public function doesMatchGitDiff()
     {
         return $this->doesMatchGitDiff;
     }
-    private function canShowProgressBar(InputInterface $input) : bool
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @return bool
+     */
+    private function canShowProgressBar($input)
     {
         $notJsonOutput = $input->getOption(Option::OUTPUT_FORMAT) !== JsonOutputFormatter::NAME;
         if (!$notJsonOutput) {
@@ -131,8 +159,9 @@ final class Configuration
     }
     /**
      * @param string[] $sources
+     * @return void
      */
-    private function ensureSourcesExists(array $sources) : void
+    private function ensureSourcesExists(array $sources)
     {
         foreach ($sources as $source) {
             if (\file_exists($source)) {
@@ -143,16 +172,20 @@ final class Configuration
     }
     /**
      * @param string[] $sources
-     * @return string[]
+     * @return mixed[]
      */
-    private function normalizeSources(array $sources) : array
+    private function normalizeSources(array $sources)
     {
         foreach ($sources as $key => $value) {
             $sources[$key] = \rtrim($value, \DIRECTORY_SEPARATOR);
         }
         return $sources;
     }
-    private function setOutputFormat(InputInterface $input) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     */
+    private function setOutputFormat($input)
     {
         $outputFormat = (string) $input->getOption(Option::OUTPUT_FORMAT);
         // Backwards compatibility with older version

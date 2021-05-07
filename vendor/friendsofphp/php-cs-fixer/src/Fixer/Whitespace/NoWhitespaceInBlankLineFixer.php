@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,8 +26,9 @@ final class NoWhitespaceInBlankLineFixer extends AbstractFixer implements Whites
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Remove trailing whitespace at the end of blank lines.', [new CodeSample("<?php\n   \n\$a = 1;\n")]);
     }
@@ -36,22 +36,28 @@ final class NoWhitespaceInBlankLineFixer extends AbstractFixer implements Whites
      * {@inheritdoc}
      *
      * Must run after CombineConsecutiveIssetsFixer, CombineConsecutiveUnsetsFixer, FunctionToConstantFixer, NoEmptyCommentFixer, NoEmptyPhpdocFixer, NoEmptyStatementFixer, NoUselessElseFixer, NoUselessReturnFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -19;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         // skip first as it cannot be a white space token
         for ($i = 1, $count = \count($tokens); $i < $count; ++$i) {
@@ -60,7 +66,12 @@ final class NoWhitespaceInBlankLineFixer extends AbstractFixer implements Whites
             }
         }
     }
-    private function fixWhitespaceToken(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function fixWhitespaceToken($tokens, $index)
     {
         $content = $tokens[$index]->getContent();
         $lines = Preg::split("/(\r\n|\n)/", $content);

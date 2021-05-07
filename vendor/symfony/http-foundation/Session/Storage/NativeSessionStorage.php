@@ -94,8 +94,9 @@ class NativeSessionStorage implements \ECSPrefix20210507\Symfony\Component\HttpF
      * trans_sid_tags, "a=href,area=href,frame=src,form="
      *
      * @param AbstractProxy|\SessionHandlerInterface|null $handler
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag
      */
-    public function __construct(array $options = [], $handler = null, \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct(array $options = [], $handler = null, $metaBag = null)
     {
         if (!\extension_loaded('session')) {
             throw new \LogicException('PHP extension "session" is required.');
@@ -151,8 +152,9 @@ class NativeSessionStorage implements \ECSPrefix20210507\Symfony\Component\HttpF
     }
     /**
      * {@inheritdoc}
+     * @param string $id
      */
-    public function setId(string $id)
+    public function setId($id)
     {
         $this->saveHandler->setId($id);
     }
@@ -165,15 +167,18 @@ class NativeSessionStorage implements \ECSPrefix20210507\Symfony\Component\HttpF
     }
     /**
      * {@inheritdoc}
+     * @param string $name
      */
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->saveHandler->setName($name);
     }
     /**
      * {@inheritdoc}
+     * @param bool $destroy
+     * @param int $lifetime
      */
-    public function regenerate(bool $destroy = \false, int $lifetime = null)
+    public function regenerate($destroy = \false, $lifetime = null)
     {
         // Cannot regenerate the session ID for non-active sessions.
         if (\PHP_SESSION_ACTIVE !== \session_status()) {
@@ -250,8 +255,9 @@ class NativeSessionStorage implements \ECSPrefix20210507\Symfony\Component\HttpF
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\SessionBagInterface $bag
      */
-    public function registerBag(SessionBagInterface $bag)
+    public function registerBag($bag)
     {
         if ($this->started) {
             throw new \LogicException('Cannot register a bag when the session is already started.');
@@ -260,8 +266,9 @@ class NativeSessionStorage implements \ECSPrefix20210507\Symfony\Component\HttpF
     }
     /**
      * {@inheritdoc}
+     * @param string $name
      */
-    public function getBag(string $name)
+    public function getBag($name)
     {
         if (!isset($this->bags[$name])) {
             throw new \InvalidArgumentException(\sprintf('The SessionBagInterface "%s" is not registered.', $name));
@@ -273,7 +280,10 @@ class NativeSessionStorage implements \ECSPrefix20210507\Symfony\Component\HttpF
         }
         return $this->bags[$name];
     }
-    public function setMetadataBag(\ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag
+     */
+    public function setMetadataBag($metaBag = null)
     {
         if (null === $metaBag) {
             $metaBag = new \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag();

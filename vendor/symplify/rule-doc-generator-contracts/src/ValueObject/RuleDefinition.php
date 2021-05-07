@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\RuleDocGenerator\ValueObject;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -28,8 +27,9 @@ final class RuleDefinition
     private $codeSamples = [];
     /**
      * @param CodeSampleInterface[] $codeSamples
+     * @param string $description
      */
-    public function __construct(string $description, array $codeSamples)
+    public function __construct($description, array $codeSamples)
     {
         $this->description = $description;
         if ($codeSamples === []) {
@@ -37,45 +37,68 @@ final class RuleDefinition
         }
         $this->codeSamples = $codeSamples;
     }
-    public function getDescription() : string
+    /**
+     * @return string
+     */
+    public function getDescription()
     {
         return $this->description;
     }
-    public function setRuleClass(string $ruleClass) : void
+    /**
+     * @return void
+     * @param string $ruleClass
+     */
+    public function setRuleClass($ruleClass)
     {
         $this->ruleClass = $ruleClass;
     }
-    public function getRuleClass() : string
+    /**
+     * @return string
+     */
+    public function getRuleClass()
     {
         if ($this->ruleClass === null) {
             throw new ShouldNotHappenException();
         }
         return $this->ruleClass;
     }
-    public function setRuleFilePath(string $ruleFilePath) : void
+    /**
+     * @return void
+     * @param string $ruleFilePath
+     */
+    public function setRuleFilePath($ruleFilePath)
     {
         // fir relative file path for GitHub
         $this->ruleFilePath = \ltrim($ruleFilePath, '/');
     }
-    public function getRuleFilePath() : string
+    /**
+     * @return string
+     */
+    public function getRuleFilePath()
     {
         if ($this->ruleFilePath === null) {
             throw new ShouldNotHappenException();
         }
         return $this->ruleFilePath;
     }
-    public function getRuleShortClass() : string
+    /**
+     * @return string
+     */
+    public function getRuleShortClass()
     {
         return (string) Strings::after($this->ruleClass, '\\', -1);
     }
     /**
-     * @return CodeSampleInterface[]
+     * @return mixed[]
      */
-    public function getCodeSamples() : array
+    public function getCodeSamples()
     {
         return $this->codeSamples;
     }
-    public function isConfigurable() : bool
+    /**
+     * @return bool
+     */
+    public function isConfigurable()
     {
         foreach ($this->codeSamples as $codeSample) {
             if ($codeSample instanceof ConfiguredCodeSample) {

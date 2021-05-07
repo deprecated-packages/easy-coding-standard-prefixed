@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SymplifyKernel\ValueObject;
 
 use ECSPrefix20210507\Symfony\Component\Console\Application;
@@ -26,12 +25,15 @@ final class KernelBootAndApplicationRun
      * @param class-string $kernelClass
      * @param string[]|SmartFileInfo[] $extraConfigs
      */
-    public function __construct(string $kernelClass, array $extraConfigs = [])
+    public function __construct($kernelClass, array $extraConfigs = [])
     {
         $this->setKernelClass($kernelClass);
         $this->extraConfigs = $extraConfigs;
     }
-    public function run() : void
+    /**
+     * @return void
+     */
+    public function run()
     {
         try {
             $this->booKernelAndRunApplication();
@@ -42,7 +44,10 @@ final class KernelBootAndApplicationRun
             exit(ShellCode::ERROR);
         }
     }
-    private function createKernel() : KernelInterface
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelInterface
+     */
+    private function createKernel()
     {
         // random has is needed, so cache is invalidated and changes from config are loaded
         $environment = 'prod' . \random_int(1, 100000);
@@ -51,7 +56,10 @@ final class KernelBootAndApplicationRun
         $this->setExtraConfigs($kernel, $kernelClass);
         return $kernel;
     }
-    private function booKernelAndRunApplication() : void
+    /**
+     * @return void
+     */
+    private function booKernelAndRunApplication()
     {
         $kernel = $this->createKernel();
         if ($kernel instanceof ExtraConfigAwareKernelInterface && $this->extraConfigs !== []) {
@@ -63,7 +71,12 @@ final class KernelBootAndApplicationRun
         $application = $container->get(Application::class);
         exit($application->run());
     }
-    private function setExtraConfigs(KernelInterface $kernel, string $kernelClass) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\KernelInterface $kernel
+     * @param string $kernelClass
+     */
+    private function setExtraConfigs($kernel, $kernelClass)
     {
         if ($this->extraConfigs === []) {
             return;
@@ -78,8 +91,9 @@ final class KernelBootAndApplicationRun
     }
     /**
      * @param class-string $kernelClass
+     * @return void
      */
-    private function setKernelClass(string $kernelClass) : void
+    private function setKernelClass($kernelClass)
     {
         if (!\is_a($kernelClass, KernelInterface::class, \true)) {
             $message = \sprintf('Class "%s" must by type of "%s"', $kernelClass, KernelInterface::class);

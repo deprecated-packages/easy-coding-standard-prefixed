@@ -46,7 +46,7 @@ class ShorthandSizeSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // Some styles look like shorthand but are not actually a set of 4 sizes.

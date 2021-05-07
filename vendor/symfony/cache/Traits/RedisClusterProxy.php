@@ -19,11 +19,17 @@ class RedisClusterProxy
 {
     private $redis;
     private $initializer;
-    public function __construct(\Closure $initializer)
+    /**
+     * @param \Closure $initializer
+     */
+    public function __construct($initializer)
     {
         $this->initializer = $initializer;
     }
-    public function __call(string $method, array $args)
+    /**
+     * @param string $method
+     */
+    public function __call($method, array $args)
     {
         $this->redis ?: ($this->redis = $this->initializer->__invoke());
         return $this->redis->{$method}(...$args);

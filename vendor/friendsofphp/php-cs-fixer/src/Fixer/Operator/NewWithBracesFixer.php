@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -26,22 +25,28 @@ final class NewWithBracesFixer extends AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('All instances created with new keyword must be followed by braces.', [new CodeSample("<?php \$x = new X;\n")]);
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_NEW);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         static $nextTokenKinds = null;
         if (null === $nextTokenKinds) {
@@ -78,7 +83,12 @@ final class NewWithBracesFixer extends AbstractFixer
             $this->insertBracesAfter($tokens, $tokens->getPrevMeaningfulToken($nextIndex));
         }
     }
-    private function insertBracesAfter(Tokens $tokens, int $index) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function insertBracesAfter($tokens, $index)
     {
         $tokens->insertAt(++$index, [new Token('('), new Token(')')]);
     }

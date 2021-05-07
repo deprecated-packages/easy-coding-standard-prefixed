@@ -38,7 +38,7 @@ class DisallowObjectStringIndexSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // Check if the next non whitespace token is a string.

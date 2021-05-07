@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Bootstrap;
 
 use ECSPrefix20210507\Nette\Utils\ObjectHelpers;
@@ -21,7 +20,11 @@ final class InvalidSetReporter
         $symfonyStyleFactory = new SymfonyStyleFactory();
         $this->symfonyStyle = $symfonyStyleFactory->create();
     }
-    public function report(SetNotFoundException $setNotFoundException) : void
+    /**
+     * @return void
+     * @param \Symplify\SetConfigResolver\Exception\SetNotFoundException $setNotFoundException
+     */
+    public function report($setNotFoundException)
     {
         $message = $setNotFoundException->getMessage();
         $suggestedSet = ObjectHelpers::getSuggestion($setNotFoundException->getAvailableSetNames(), $setNotFoundException->getSetName());

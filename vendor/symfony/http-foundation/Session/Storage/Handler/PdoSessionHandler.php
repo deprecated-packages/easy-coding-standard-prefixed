@@ -45,7 +45,7 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
      * write will win in this case. It might be useful when you implement your own
      * logic to deal with this like an optimistic approach.
      */
-    public const LOCK_NONE = 0;
+    const LOCK_NONE = 0;
     /**
      * Creates an application-level lock on a session. The disadvantage is that the
      * lock is not enforced by the database and thus other, unaware parts of the
@@ -53,15 +53,15 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
      * does not require a transaction.
      * This mode is not available for SQLite and not yet implemented for oci and sqlsrv.
      */
-    public const LOCK_ADVISORY = 1;
+    const LOCK_ADVISORY = 1;
     /**
      * Issues a real row lock. Since it uses a transaction between opening and
      * closing a session, you have to be careful when you use same database connection
      * that you also use for your application logic. This mode is the default because
      * it's the only reliable solution across DBMSs.
      */
-    public const LOCK_TRANSACTIONAL = 2;
-    private const MAX_LIFETIME = 315576000;
+    const LOCK_TRANSACTIONAL = 2;
+    const MAX_LIFETIME = 315576000;
     /**
      * @var \PDO|null PDO instance or null when not connected yet
      */
@@ -162,15 +162,15 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
         } else {
             $this->dsn = $pdoOrDsn;
         }
-        $this->table = $options['db_table'] ?? $this->table;
-        $this->idCol = $options['db_id_col'] ?? $this->idCol;
-        $this->dataCol = $options['db_data_col'] ?? $this->dataCol;
-        $this->lifetimeCol = $options['db_lifetime_col'] ?? $this->lifetimeCol;
-        $this->timeCol = $options['db_time_col'] ?? $this->timeCol;
-        $this->username = $options['db_username'] ?? $this->username;
-        $this->password = $options['db_password'] ?? $this->password;
-        $this->connectionOptions = $options['db_connection_options'] ?? $this->connectionOptions;
-        $this->lockMode = $options['lock_mode'] ?? $this->lockMode;
+        $this->table = isset($options['db_table']) ? $options['db_table'] : $this->table;
+        $this->idCol = isset($options['db_id_col']) ? $options['db_id_col'] : $this->idCol;
+        $this->dataCol = isset($options['db_data_col']) ? $options['db_data_col'] : $this->dataCol;
+        $this->lifetimeCol = isset($options['db_lifetime_col']) ? $options['db_lifetime_col'] : $this->lifetimeCol;
+        $this->timeCol = isset($options['db_time_col']) ? $options['db_time_col'] : $this->timeCol;
+        $this->username = isset($options['db_username']) ? $options['db_username'] : $this->username;
+        $this->password = isset($options['db_password']) ? $options['db_password'] : $this->password;
+        $this->connectionOptions = isset($options['db_connection_options']) ? $options['db_connection_options'] : $this->connectionOptions;
+        $this->lockMode = isset($options['lock_mode']) ? $options['lock_mode'] : $this->lockMode;
     }
     /**
      * Creates the table to store sessions which can be called once for setup.
@@ -265,8 +265,9 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
      */
-    protected function doDestroy(string $sessionId)
+    protected function doDestroy($sessionId)
     {
         // delete the record associated with this id
         $sql = "DELETE FROM {$this->table} WHERE {$this->idCol} = :id";
@@ -282,8 +283,10 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * {@inheritdoc}
+     * @param string $sessionId
+     * @param string $data
      */
-    protected function doWrite(string $sessionId, string $data)
+    protected function doWrite($sessionId, $data)
     {
         $maxlifetime = (int) \ini_get('session.gc_maxlifetime');
         try {
@@ -373,8 +376,10 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * Lazy-connects to the database.
+     * @return void
+     * @param string $dsn
      */
-    private function connect(string $dsn) : void
+    private function connect($dsn)
     {
         $this->pdo = new \PDO($dsn, $this->username, $this->password, $this->connectionOptions);
         $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -384,8 +389,10 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
      * Builds a PDO DSN from a URL-like connection string.
      *
      * @todo implement missing support for oci DSN (which look totally different from other PDO ones)
+     * @param string $dsnOrUrl
+     * @return string
      */
-    private function buildDsnFromUrl(string $dsnOrUrl) : string
+    private function buildDsnFromUrl($dsnOrUrl)
     {
         // (pdo_)?sqlite3?:///... => (pdo_)?sqlite3?://localhost/... or else the URL will be invalid
         $url = \preg_replace('#^((?:pdo_)?sqlite3?):///#', '$1://localhost/', $dsnOrUrl);
@@ -413,7 +420,7 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
             'postgresql' => 'pgsql',
             'sqlite3' => 'sqlite',
         ];
-        $driver = $driverAliasMap[$params['scheme']] ?? $params['scheme'];
+        $driver = isset($driverAliasMap[$params['scheme']]) ? $driverAliasMap[$params['scheme']] : $params['scheme'];
         // Doctrine DBAL supports passing its internal pdo_* driver names directly too (allowing both dashes and underscores). This allows supporting the same here.
         if (0 === \strpos($driver, 'pdo_') || 0 === \strpos($driver, 'pdo-')) {
             $driver = \substr($driver, 4);
@@ -465,8 +472,9 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
      * Also MySQLs default isolation, REPEATABLE READ, causes deadlock for different sessions
      * due to https://percona.com/blog/2013/12/12/one-more-innodb-gap-lock-to-avoid/ .
      * So we change it to READ COMMITTED.
+     * @return void
      */
-    private function beginTransaction() : void
+    private function beginTransaction()
     {
         if (!$this->inTransaction) {
             if ('sqlite' === $this->driver) {
@@ -482,8 +490,9 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * Helper method to commit a transaction.
+     * @return void
      */
-    private function commit() : void
+    private function commit()
     {
         if ($this->inTransaction) {
             try {
@@ -502,8 +511,9 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * Helper method to rollback a transaction.
+     * @return void
      */
-    private function rollback() : void
+    private function rollback()
     {
         // We only need to rollback if we are in a transaction. Otherwise the resulting
         // error would hide the real problem why rollback was called. We might not be
@@ -525,8 +535,9 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
      * to the session.gc_maxlifetime setting because gc() is called after read() and only sometimes.
      *
      * @return string
+     * @param string $sessionId
      */
-    protected function doRead(string $sessionId)
+    protected function doRead($sessionId)
     {
         if (self::LOCK_ADVISORY === $this->lockMode) {
             $this->unlockStatements[] = $this->doAdvisoryLock($sessionId);
@@ -588,8 +599,9 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
      * @todo implement missing advisory locks
      *       - for oci using DBMS_LOCK.REQUEST
      *       - for sqlsrv using sp_getapplock with LockOwner = Session
+     * @param string $sessionId
      */
-    private function doAdvisoryLock(string $sessionId) : \PDOStatement
+    private function doAdvisoryLock($sessionId)
     {
         switch ($this->driver) {
             case 'mysql':
@@ -636,8 +648,10 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
      * Encodes the first 4 (when PHP_INT_SIZE == 4) or 8 characters of the string as an integer.
      *
      * Keep in mind, PHP integers are signed.
+     * @param string $string
+     * @return int
      */
-    private function convertStringToInt(string $string) : int
+    private function convertStringToInt($string)
     {
         if (4 === \PHP_INT_SIZE) {
             return (\ord($string[3]) << 24) + (\ord($string[2]) << 16) + (\ord($string[1]) << 8) + \ord($string[0]);
@@ -650,8 +664,9 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
      * Return a locking or nonlocking SQL query to read session information.
      *
      * @throws \DomainException When an unsupported PDO driver is used
+     * @return string
      */
-    private function getSelectSql() : string
+    private function getSelectSql()
     {
         if (self::LOCK_TRANSACTIONAL === $this->lockMode) {
             $this->beginTransaction();
@@ -674,8 +689,12 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * Returns an insert statement supported by the database for writing session data.
+     * @param string $sessionId
+     * @param string $sessionData
+     * @param int $maxlifetime
+     * @return \PDOStatement
      */
-    private function getInsertStatement(string $sessionId, string $sessionData, int $maxlifetime) : \PDOStatement
+    private function getInsertStatement($sessionId, $sessionData, $maxlifetime)
     {
         switch ($this->driver) {
             case 'oci':
@@ -698,8 +717,12 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * Returns an update statement supported by the database for writing session data.
+     * @param string $sessionId
+     * @param string $sessionData
+     * @param int $maxlifetime
+     * @return \PDOStatement
      */
-    private function getUpdateStatement(string $sessionId, string $sessionData, int $maxlifetime) : \PDOStatement
+    private function getUpdateStatement($sessionId, $sessionData, $maxlifetime)
     {
         switch ($this->driver) {
             case 'oci':
@@ -722,8 +745,12 @@ class PdoSessionHandler extends \ECSPrefix20210507\Symfony\Component\HttpFoundat
     }
     /**
      * Returns a merge/upsert (i.e. insert or update) statement when supported by the database for writing session data.
+     * @return \PDOStatement|null
+     * @param string $sessionId
+     * @param string $data
+     * @param int $maxlifetime
      */
-    private function getMergeStatement(string $sessionId, string $data, int $maxlifetime) : ?\PDOStatement
+    private function getMergeStatement($sessionId, $data, $maxlifetime)
     {
         switch (\true) {
             case 'mysql' === $this->driver:

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\Skipper\SkipCriteriaResolver;
 
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
@@ -20,15 +19,19 @@ final class SkippedClassResolver
      * @var ClassLikeExistenceChecker
      */
     private $classLikeExistenceChecker;
-    public function __construct(ParameterProvider $parameterProvider, ClassLikeExistenceChecker $classLikeExistenceChecker)
+    /**
+     * @param \Symplify\PackageBuilder\Parameter\ParameterProvider $parameterProvider
+     * @param \Symplify\PackageBuilder\Reflection\ClassLikeExistenceChecker $classLikeExistenceChecker
+     */
+    public function __construct($parameterProvider, $classLikeExistenceChecker)
     {
         $this->parameterProvider = $parameterProvider;
         $this->classLikeExistenceChecker = $classLikeExistenceChecker;
     }
     /**
-     * @return array<string, string[]|null>
+     * @return mixed[]
      */
-    public function resolve() : array
+    public function resolve()
     {
         if ($this->skippedClasses !== []) {
             return $this->skippedClasses;

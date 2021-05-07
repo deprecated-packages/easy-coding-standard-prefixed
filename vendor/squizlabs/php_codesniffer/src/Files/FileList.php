@@ -56,7 +56,7 @@ class FileList implements \Iterator, \Countable
      *
      * @return void
      */
-    public function __construct(Config $config, Ruleset $ruleset)
+    public function __construct($config, $ruleset)
     {
         $this->ruleset = $ruleset;
         $this->config = $config;

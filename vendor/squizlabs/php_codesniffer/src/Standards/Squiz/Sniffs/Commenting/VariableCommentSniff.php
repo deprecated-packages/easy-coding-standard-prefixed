@@ -23,7 +23,7 @@ class VariableCommentSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    public function processMemberVar(File $phpcsFile, $stackPtr)
+    public function processMemberVar($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $ignore = [\T_PUBLIC, \T_PRIVATE, \T_PROTECTED, \T_VAR, \T_STATIC, \T_WHITESPACE, \T_STRING, \T_NS_SEPARATOR, T_NULLABLE];
@@ -123,7 +123,7 @@ class VariableCommentSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariable(File $phpcsFile, $stackPtr)
+    protected function processVariable($phpcsFile, $stackPtr)
     {
     }
     //end processVariable()
@@ -138,7 +138,7 @@ class VariableCommentSniff extends AbstractVariableSniff
      *
      * @return void
      */
-    protected function processVariableInString(File $phpcsFile, $stackPtr)
+    protected function processVariableInString($phpcsFile, $stackPtr)
     {
     }
     //end processVariableInString()

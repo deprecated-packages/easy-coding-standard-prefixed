@@ -32,7 +32,7 @@ class DoubleQuoteUsageSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // If tabs are being converted to spaces by the tokeniser, the

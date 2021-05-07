@@ -21,13 +21,17 @@ class ContextualizedDumper implements \ECSPrefix20210507\Symfony\Component\VarDu
     private $contextProviders;
     /**
      * @param ContextProviderInterface[] $contextProviders
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper
      */
-    public function __construct(\ECSPrefix20210507\Symfony\Component\VarDumper\Dumper\DataDumperInterface $wrappedDumper, array $contextProviders)
+    public function __construct($wrappedDumper, array $contextProviders)
     {
         $this->wrappedDumper = $wrappedDumper;
         $this->contextProviders = $contextProviders;
     }
-    public function dump(Data $data)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Data $data
+     */
+    public function dump($data)
     {
         $context = [];
         foreach ($this->contextProviders as $contextProvider) {

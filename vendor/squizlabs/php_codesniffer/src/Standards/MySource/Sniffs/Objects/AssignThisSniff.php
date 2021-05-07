@@ -38,7 +38,7 @@ class AssignThisSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         // Ignore this.something and other uses of "this" that are not

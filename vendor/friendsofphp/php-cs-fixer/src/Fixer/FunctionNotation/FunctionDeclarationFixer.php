@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -35,17 +34,19 @@ final class FunctionDeclarationFixer extends AbstractFixer implements Configurab
     /**
      * @internal
      */
-    public const SPACING_NONE = 'none';
+    const SPACING_NONE = 'none';
     /**
      * @internal
      */
-    public const SPACING_ONE = 'one';
-    private const SUPPORTED_SPACINGS = [self::SPACING_NONE, self::SPACING_ONE];
+    const SPACING_ONE = 'one';
+    const SUPPORTED_SPACINGS = [self::SPACING_NONE, self::SPACING_ONE];
     private $singleLineWhitespaceOptions = " \t";
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         if (\PHP_VERSION_ID >= 70400 && $tokens->isTokenKindFound(\T_FN)) {
             return \true;
@@ -54,8 +55,9 @@ final class FunctionDeclarationFixer extends AbstractFixer implements Configurab
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Spaces should be properly placed in a function declaration.', [new CodeSample('<?php
 
@@ -82,15 +84,19 @@ $f = fn () => null;
      *
      * Must run before MethodArgumentSpaceFixer.
      * Must run after SingleSpaceAfterConstructFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 31;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         for ($index = $tokens->count() - 1; $index >= 0; --$index) {
@@ -154,12 +160,19 @@ $f = fn () => null;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('closure_function_spacing', 'Spacing to use before open parenthesis for closures.'))->setDefault(self::SPACING_ONE)->setAllowedValues(self::SUPPORTED_SPACINGS)->getOption()]);
     }
-    private function fixParenthesisInnerEdge(Tokens $tokens, int $start, int $end) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $start
+     * @param int $end
+     */
+    private function fixParenthesisInnerEdge($tokens, $start, $end)
     {
         // remove single-line whitespace before )
         if ($tokens[$end - 1]->isWhitespace($this->singleLineWhitespaceOptions)) {

@@ -33,7 +33,7 @@ class FunctionCommentThrowTagSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if (isset($tokens[$stackPtr]['scope_closer']) === \false) {
@@ -66,11 +66,11 @@ class FunctionCommentThrowTagSniff implements Sniff
             /*
                 If we can't find a NEW, we are probably throwing
                 a variable or calling a method.
-            
+
                 If we're throwing a variable, and it's the same variable as the
                 exception container from the nearest 'catch' block, we take that exception
                 as it is likely to be a re-throw.
-            
+
                 If we can't find a matching catch block, or the variable name
                 is different, it's probably a different variable, so we ignore it,
                 but they still need to provide at least one @throws tag, even through we

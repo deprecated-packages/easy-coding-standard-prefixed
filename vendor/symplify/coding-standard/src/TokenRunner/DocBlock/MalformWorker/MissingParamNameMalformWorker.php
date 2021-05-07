@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -17,29 +16,35 @@ final class MissingParamNameMalformWorker implements MalformWorkerInterface
      * @var string
      * @see https://regex101.com/r/QtWnWv/1
      */
-    private const PARAM_WITHOUT_NAME_REGEX = '#@param ([^$]*?)( ([^$]*?))?\\n#';
+    const PARAM_WITHOUT_NAME_REGEX = '#@param ([^$]*?)( ([^$]*?))?\\n#';
     /**
      * @var string
      * @see https://regex101.com/r/58YJNy/1
      */
-    private const PARAM_ANNOTATOIN_START_REGEX = '@param ';
+    const PARAM_ANNOTATOIN_START_REGEX = '@param ';
     /**
      * @var string
      * @see https://regex101.com/r/JhugsI/1
      */
-    private const PARAM_WITH_NAME_REGEX = '#@param(.*?)\\$[\\w]+(.*?)\\n#';
+    const PARAM_WITH_NAME_REGEX = '#@param(.*?)\\$[\\w]+(.*?)\\n#';
     /**
      * @var DocblockRelatedParamNamesResolver
      */
     private $docblockRelatedParamNamesResolver;
-    public function __construct(DocblockRelatedParamNamesResolver $docblockRelatedParamNamesResolver)
+    /**
+     * @param \Symplify\CodingStandard\TokenAnalyzer\DocblockRelatedParamNamesResolver $docblockRelatedParamNamesResolver
+     */
+    public function __construct($docblockRelatedParamNamesResolver)
     {
         $this->docblockRelatedParamNamesResolver = $docblockRelatedParamNamesResolver;
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param string $docContent
+     * @param int $position
+     * @return string
      */
-    public function work(string $docContent, Tokens $tokens, int $position) : string
+    public function work($docContent, $tokens, $position)
     {
         $argumentNames = $this->docblockRelatedParamNamesResolver->resolve($tokens, $position);
         if ($argumentNames === []) {
@@ -55,9 +60,10 @@ final class MissingParamNameMalformWorker implements MalformWorkerInterface
     }
     /**
      * @param string[] $functionArgumentNames
-     * @return string[]
+     * @return mixed[]
+     * @param string $docContent
      */
-    private function filterOutExistingParamNames(string $docContent, array $functionArgumentNames) : array
+    private function filterOutExistingParamNames($docContent, array $functionArgumentNames)
     {
         foreach ($functionArgumentNames as $key => $functionArgumentName) {
             $pattern = '# ' . \preg_quote($functionArgumentName, '#') . '\\b#';
@@ -70,8 +76,10 @@ final class MissingParamNameMalformWorker implements MalformWorkerInterface
     /**
      * @param string[] $missingArgumentNames
      * @param string[] $argumentNames
+     * @return void
+     * @param \PhpCsFixer\DocBlock\DocBlock $docBlock
      */
-    private function completeMissingArgumentNames(array $missingArgumentNames, array $argumentNames, DocBlock $docBlock) : void
+    private function completeMissingArgumentNames(array $missingArgumentNames, array $argumentNames, $docBlock)
     {
         foreach ($missingArgumentNames as $key => $missingArgumentName) {
             $newArgumentName = $this->resolveNewArgumentName($argumentNames, $missingArgumentName, $key);
@@ -88,15 +96,22 @@ final class MissingParamNameMalformWorker implements MalformWorkerInterface
     }
     /**
      * @param string[] $argumentNames
+     * @param string $missingArgumentName
+     * @param int $key
+     * @return string
      */
-    private function resolveNewArgumentName(array $argumentNames, string $missingArgumentName, int $key) : string
+    private function resolveNewArgumentName(array $argumentNames, $missingArgumentName, $key)
     {
         if (\array_search($missingArgumentName, $argumentNames, \true)) {
             return $missingArgumentName;
         }
         return $argumentNames[$key];
     }
-    private function shouldSkipLine(Line $line) : bool
+    /**
+     * @param \PhpCsFixer\DocBlock\Line $line
+     * @return bool
+     */
+    private function shouldSkipLine($line)
     {
         if (!Strings::contains($line->getContent(), self::PARAM_ANNOTATOIN_START_REGEX)) {
             return \true;
@@ -108,7 +123,12 @@ final class MissingParamNameMalformWorker implements MalformWorkerInterface
         $match = Strings::match($line->getContent(), self::PARAM_WITHOUT_NAME_REGEX);
         return $match === null;
     }
-    private function createNewLineContent(string $newArgumentName, Line $line) : string
+    /**
+     * @param string $newArgumentName
+     * @param \PhpCsFixer\DocBlock\Line $line
+     * @return string
+     */
+    private function createNewLineContent($newArgumentName, $line)
     {
         // @see https://regex101.com/r/4FL49H/1
         $missingDollarSignPattern = '#(@param\\s+([\\w\\|\\[\\]\\\\]+\\s)?)(' . \ltrim($newArgumentName, '$') . ')#';

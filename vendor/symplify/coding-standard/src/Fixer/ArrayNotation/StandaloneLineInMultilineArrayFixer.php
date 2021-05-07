@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\ArrayNotation;
 
 use PhpCsFixer\FixerDefinition\FixerDefinition;
@@ -26,7 +25,7 @@ final class StandaloneLineInMultilineArrayFixer extends AbstractSymplifyFixer im
     /**
      * @var string
      */
-    private const ERROR_MESSAGE = 'Indexed arrays must have 1 item per line';
+    const ERROR_MESSAGE = 'Indexed arrays must have 1 item per line';
     /**
      * @var ArrayWrapperFactory
      */
@@ -39,13 +38,21 @@ final class StandaloneLineInMultilineArrayFixer extends AbstractSymplifyFixer im
      * @var BlockFinder
      */
     private $blockFinder;
-    public function __construct(ArrayWrapperFactory $arrayWrapperFactory, TokensNewliner $tokensNewliner, BlockFinder $blockFinder)
+    /**
+     * @param \Symplify\CodingStandard\TokenRunner\Wrapper\FixerWrapper\ArrayWrapperFactory $arrayWrapperFactory
+     * @param \Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer\TokensNewliner $tokensNewliner
+     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\BlockFinder $blockFinder
+     */
+    public function __construct($arrayWrapperFactory, $tokensNewliner, $blockFinder)
     {
         $this->arrayWrapperFactory = $arrayWrapperFactory;
         $this->tokensNewliner = $tokensNewliner;
         $this->blockFinder = $blockFinder;
     }
-    public function getDefinition() : FixerDefinitionInterface
+    /**
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+     */
+    public function getDefinition()
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
@@ -53,12 +60,16 @@ final class StandaloneLineInMultilineArrayFixer extends AbstractSymplifyFixer im
      * Must run before
      *
      * @see \PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer::getPriority()
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 5;
     }
-    public function getRuleDefinition() : RuleDefinition
+    /**
+     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+     */
+    public function getRuleDefinition()
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 $friends = [1 => 'Peter', 2 => 'Paul'];
@@ -73,8 +84,9 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         if (!$tokens->isAnyTokenKindsFound(TokenKinds::ARRAY_OPEN_TOKENS)) {
             return \false;
@@ -83,8 +95,10 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param \SplFileInfo $fileInfo
      */
-    public function fix(SplFileInfo $fileInfo, Tokens $tokens) : void
+    public function fix($fileInfo, $tokens)
     {
         foreach ($tokens as $index => $token) {
             if (!$token->isGivenKind(TokenKinds::ARRAY_OPEN_TOKENS)) {
@@ -102,8 +116,10 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
+     * @return bool
      */
-    private function shouldSkipNestedArrayValue(Tokens $tokens, BlockInfo $blockInfo) : bool
+    private function shouldSkipNestedArrayValue($tokens, $blockInfo)
     {
         $arrayWrapper = $this->arrayWrapperFactory->createFromTokensAndBlockInfo($tokens, $blockInfo);
         if (!$arrayWrapper->isAssociativeArray()) {

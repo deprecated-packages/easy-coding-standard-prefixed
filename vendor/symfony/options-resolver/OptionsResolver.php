@@ -25,7 +25,7 @@ use ECSPrefix20210507\Symfony\Component\OptionsResolver\Exception\UndefinedOptio
  */
 class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsResolver\Options
 {
-    private const VALIDATION_FUNCTIONS = ['bool' => 'is_bool', 'boolean' => 'is_bool', 'int' => 'is_int', 'integer' => 'is_int', 'long' => 'is_int', 'float' => 'is_float', 'double' => 'is_float', 'real' => 'is_float', 'numeric' => 'is_numeric', 'string' => 'is_string', 'scalar' => 'is_scalar', 'array' => 'is_array', 'iterable' => 'is_iterable', 'countable' => 'is_countable', 'callable' => 'is_callable', 'object' => 'is_object', 'resource' => 'is_resource'];
+    const VALIDATION_FUNCTIONS = ['bool' => 'is_bool', 'boolean' => 'is_bool', 'int' => 'is_int', 'integer' => 'is_int', 'long' => 'is_int', 'float' => 'is_float', 'double' => 'is_float', 'real' => 'is_float', 'numeric' => 'is_numeric', 'string' => 'is_string', 'scalar' => 'is_scalar', 'array' => 'is_array', 'iterable' => 'is_iterable', 'countable' => 'is_countable', 'callable' => 'is_callable', 'object' => 'is_object', 'resource' => 'is_resource'];
     /**
      * The names of all defined options.
      */
@@ -148,7 +148,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      *
      * @throws AccessException If called from a lazy option or normalizer
      */
-    public function setDefault(string $option, $value)
+    public function setDefault($option, $value)
     {
         // Setting is not possible once resolving starts, because then lazy
         // options could manipulate the state of the object, leading to
@@ -226,7 +226,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      *
      * @return bool Whether a default value is set
      */
-    public function hasDefault(string $option)
+    public function hasDefault($option)
     {
         return \array_key_exists($option, $this->defaults);
     }
@@ -259,7 +259,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      *
      * @return bool Whether the option is required
      */
-    public function isRequired(string $option)
+    public function isRequired($option)
     {
         return isset($this->required[$option]);
     }
@@ -285,7 +285,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      *
      * @return bool Whether the option is missing
      */
-    public function isMissing(string $option)
+    public function isMissing($option)
     {
         return isset($this->required[$option]) && !\array_key_exists($option, $this->defaults);
     }
@@ -333,7 +333,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      *
      * @return bool Whether the option is defined
      */
-    public function isDefined(string $option)
+    public function isDefined($option)
     {
         return isset($this->defined[$option]);
     }
@@ -348,7 +348,11 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
     {
         return \array_keys($this->defined);
     }
-    public function isNested(string $option) : bool
+    /**
+     * @param string $option
+     * @return bool
+     */
+    public function isNested($option)
     {
         return isset($this->nested[$option]);
     }
@@ -372,8 +376,10 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * @param string          $package The name of the composer package that is triggering the deprecation
      * @param string          $version The version of the package that introduced the deprecation
      * @param string|\Closure $message The deprecation message to use
+     * @return $this
+     * @param string $option
      */
-    public function setDeprecated(string $option) : self
+    public function setDeprecated($option)
     {
         if ($this->locked) {
             throw new AccessException('Options cannot be deprecated from a lazy option or normalizer.');
@@ -384,12 +390,12 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
         $args = \func_get_args();
         if (\func_num_args() < 3) {
             trigger_deprecation('symfony/options-resolver', '5.1', 'The signature of method "%s()" requires 2 new arguments: "string $package, string $version", not defining them is deprecated.', __METHOD__);
-            $message = $args[1] ?? 'The option "%name%" is deprecated.';
+            $message = isset($args[1]) ? $args[1] : 'The option "%name%" is deprecated.';
             $package = $version = '';
         } else {
             $package = $args[1];
             $version = $args[2];
-            $message = $args[3] ?? 'The option "%name%" is deprecated.';
+            $message = isset($args[3]) ? $args[3] : 'The option "%name%" is deprecated.';
         }
         if (!\is_string($message) && !$message instanceof \Closure) {
             throw new InvalidArgumentException(\sprintf('Invalid type for deprecation message argument, expected string or \\Closure, but got "%s".', \get_debug_type($message)));
@@ -403,7 +409,11 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
         unset($this->resolved[$option]);
         return $this;
     }
-    public function isDeprecated(string $option) : bool
+    /**
+     * @param string $option
+     * @return bool
+     */
+    public function isDeprecated($option)
     {
         return isset($this->deprecated[$option]);
     }
@@ -433,7 +443,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * @throws UndefinedOptionsException If the option is undefined
      * @throws AccessException           If called from a lazy option or normalizer
      */
-    public function setNormalizer(string $option, \Closure $normalizer)
+    public function setNormalizer($option, $normalizer)
     {
         if ($this->locked) {
             throw new AccessException('Normalizers cannot be set from a lazy option or normalizer.');
@@ -473,7 +483,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * @throws UndefinedOptionsException If the option is undefined
      * @throws AccessException           If called from a lazy option or normalizer
      */
-    public function addNormalizer(string $option, \Closure $normalizer, bool $forcePrepend = \false) : self
+    public function addNormalizer($option, $normalizer, $forcePrepend = \false)
     {
         if ($this->locked) {
             throw new AccessException('Normalizers cannot be set from a lazy option or normalizer.');
@@ -482,7 +492,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
             throw new UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
         if ($forcePrepend) {
-            $this->normalizers[$option] = $this->normalizers[$option] ?? [];
+            $this->normalizers[$option] = isset($this->normalizers[$option]) ? $this->normalizers[$option] : [];
             \array_unshift($this->normalizers[$option], $normalizer);
         } else {
             $this->normalizers[$option][] = $normalizer;
@@ -512,7 +522,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * @throws UndefinedOptionsException If the option is undefined
      * @throws AccessException           If called from a lazy option or normalizer
      */
-    public function setAllowedValues(string $option, $allowedValues)
+    public function setAllowedValues($option, $allowedValues)
     {
         if ($this->locked) {
             throw new AccessException('Allowed values cannot be set from a lazy option or normalizer.');
@@ -548,7 +558,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * @throws UndefinedOptionsException If the option is undefined
      * @throws AccessException           If called from a lazy option or normalizer
      */
-    public function addAllowedValues(string $option, $allowedValues)
+    public function addAllowedValues($option, $allowedValues)
     {
         if ($this->locked) {
             throw new AccessException('Allowed values cannot be added from a lazy option or normalizer.');
@@ -583,7 +593,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * @throws UndefinedOptionsException If the option is undefined
      * @throws AccessException           If called from a lazy option or normalizer
      */
-    public function setAllowedTypes(string $option, $allowedTypes)
+    public function setAllowedTypes($option, $allowedTypes)
     {
         if ($this->locked) {
             throw new AccessException('Allowed types cannot be set from a lazy option or normalizer.');
@@ -613,7 +623,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * @throws UndefinedOptionsException If the option is undefined
      * @throws AccessException           If called from a lazy option or normalizer
      */
-    public function addAllowedTypes(string $option, $allowedTypes)
+    public function addAllowedTypes($option, $allowedTypes)
     {
         if ($this->locked) {
             throw new AccessException('Allowed types cannot be added from a lazy option or normalizer.');
@@ -632,8 +642,10 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
     }
     /**
      * Defines an option configurator with the given name.
+     * @param string $option
+     * @return \ECSPrefix20210507\Symfony\Component\OptionsResolver\OptionConfigurator
      */
-    public function define(string $option) : \ECSPrefix20210507\Symfony\Component\OptionsResolver\OptionConfigurator
+    public function define($option)
     {
         if (isset($this->defined[$option])) {
             throw new OptionDefinitionException(\sprintf('The option "%s" is already defined.', $option));
@@ -647,8 +659,10 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      *
      * @throws UndefinedOptionsException If the option is undefined
      * @throws AccessException           If called from a lazy option or normalizer
+     * @param string $option
+     * @param string $info
      */
-    public function setInfo(string $option, string $info) : self
+    public function setInfo($option, $info)
     {
         if ($this->locked) {
             throw new AccessException('The Info message cannot be set from a lazy option or normalizer.');
@@ -661,13 +675,15 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
     }
     /**
      * Gets the info message for an option.
+     * @return string|null
+     * @param string $option
      */
-    public function getInfo(string $option) : ?string
+    public function getInfo($option)
     {
         if (!isset($this->defined[$option])) {
             throw new UndefinedOptionsException(\sprintf('The option "%s" does not exist. Defined options are: "%s".', $this->formatOptions([$option]), \implode('", "', \array_keys($this->defined))));
         }
-        return $this->info[$option] ?? null;
+        return isset($this->info[$option]) ? $this->info[$option] : null;
     }
     /**
      * Removes the option with the given name.
@@ -791,7 +807,7 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * @throws OptionDefinitionException If there is a cyclic dependency between
      *                                   lazy options and/or normalizers
      */
-    public function offsetGet($option, bool $triggerDeprecation = \true)
+    public function offsetGet($option, $triggerDeprecation = \true)
     {
         if (!$this->locked) {
             throw new AccessException('Array access is only supported within closures of lazy options and normalizers.');
@@ -955,7 +971,12 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
         $this->resolved[$option] = $value;
         return $value;
     }
-    private function verifyTypes(string $type, $value, array &$invalidTypes, int $level = 0) : bool
+    /**
+     * @param string $type
+     * @param int $level
+     * @return bool
+     */
+    private function verifyTypes($type, $value, array &$invalidTypes, $level = 0)
     {
         if (\is_array($value) && '[]' === \substr($type, -2)) {
             $type = \substr($type, 0, -2);
@@ -1037,8 +1058,9 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * in double quotes (").
      *
      * @param mixed $value The value to format as string
+     * @return string
      */
-    private function formatValue($value) : string
+    private function formatValue($value)
     {
         if (\is_object($value)) {
             return \get_class($value);
@@ -1070,15 +1092,19 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
      * {@link formatValue()}. The values are then concatenated with commas.
      *
      * @see formatValue()
+     * @return string
      */
-    private function formatValues(array $values) : string
+    private function formatValues(array $values)
     {
         foreach ($values as $key => $value) {
             $values[$key] = $this->formatValue($value);
         }
         return \implode(', ', $values);
     }
-    private function formatOptions(array $options) : string
+    /**
+     * @return string
+     */
+    private function formatOptions(array $options)
     {
         if ($this->parentsOptions) {
             $prefix = \array_shift($this->parentsOptions);
@@ -1091,7 +1117,11 @@ class OptionsResolver implements \ECSPrefix20210507\Symfony\Component\OptionsRes
         }
         return \implode('", "', $options);
     }
-    private function getParameterClassName(\ReflectionParameter $parameter) : ?string
+    /**
+     * @return string|null
+     * @param \ReflectionParameter $parameter
+     */
+    private function getParameterClassName($parameter)
     {
         if (!($type = $parameter->getType()) instanceof \ReflectionNamedType || $type->isBuiltin()) {
             return null;

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -23,8 +22,9 @@ abstract class AbstractFunctionReferenceFixer extends \PhpCsFixer\AbstractFixer
 {
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isRisky() : bool
+    public function isRisky()
     {
         return \true;
     }
@@ -32,9 +32,13 @@ abstract class AbstractFunctionReferenceFixer extends \PhpCsFixer\AbstractFixer
      * Looks up Tokens sequence for suitable candidates and delivers boundaries information,
      * which can be supplied by other methods in this abstract class.
      *
-     * @return null|int[] returns $functionName, $openParenthesis, $closeParenthesis packed into array
+     * @return mixed[]|null returns $functionName, $openParenthesis, $closeParenthesis packed into array
+     * @param int|null $end
+     * @param string $functionNameToSearch
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $start
      */
-    protected function find(string $functionNameToSearch, Tokens $tokens, int $start = 0, ?int $end = null) : ?array
+    protected function find($functionNameToSearch, $tokens, $start = 0, $end = null)
     {
         // make interface consistent with findSequence
         $end = null === $end ? $tokens->count() : $end;

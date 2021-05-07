@@ -1,10 +1,5 @@
 <?php
 
-/**
- * This file is part of the Nette Framework (https://nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
- */
-declare (strict_types=1);
 namespace ECSPrefix20210507\Nette\Iterators;
 
 use ECSPrefix20210507\Nette;
@@ -44,50 +39,59 @@ class CachingIterator extends \CachingIterator implements \Countable
     }
     /**
      * Is the current element the first one?
+     * @param int $gridWidth
+     * @return bool
      */
-    public function isFirst(int $gridWidth = null) : bool
+    public function isFirst($gridWidth = null)
     {
         return $this->counter === 1 || $gridWidth && $this->counter !== 0 && ($this->counter - 1) % $gridWidth === 0;
     }
     /**
      * Is the current element the last one?
+     * @param int $gridWidth
+     * @return bool
      */
-    public function isLast(int $gridWidth = null) : bool
+    public function isLast($gridWidth = null)
     {
         return !$this->hasNext() || $gridWidth && $this->counter % $gridWidth === 0;
     }
     /**
      * Is the iterator empty?
+     * @return bool
      */
-    public function isEmpty() : bool
+    public function isEmpty()
     {
         return $this->counter === 0;
     }
     /**
      * Is the counter odd?
+     * @return bool
      */
-    public function isOdd() : bool
+    public function isOdd()
     {
         return $this->counter % 2 === 1;
     }
     /**
      * Is the counter even?
+     * @return bool
      */
-    public function isEven() : bool
+    public function isEven()
     {
         return $this->counter % 2 === 0;
     }
     /**
      * Returns the counter.
+     * @return int
      */
-    public function getCounter() : int
+    public function getCounter()
     {
         return $this->counter;
     }
     /**
      * Returns the count of elements.
+     * @return int
      */
-    public function count() : int
+    public function count()
     {
         $inner = $this->getInnerIterator();
         if ($inner instanceof \Countable) {
@@ -98,8 +102,9 @@ class CachingIterator extends \CachingIterator implements \Countable
     }
     /**
      * Forwards to the next element.
+     * @return void
      */
-    public function next() : void
+    public function next()
     {
         parent::next();
         if (parent::valid()) {
@@ -108,8 +113,9 @@ class CachingIterator extends \CachingIterator implements \Countable
     }
     /**
      * Rewinds the Iterator.
+     * @return void
      */
-    public function rewind() : void
+    public function rewind()
     {
         parent::rewind();
         $this->counter = parent::valid() ? 1 : 0;

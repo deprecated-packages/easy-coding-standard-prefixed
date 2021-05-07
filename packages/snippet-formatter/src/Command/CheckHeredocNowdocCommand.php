@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\SnippetFormatter\Command;
 
 use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
@@ -14,17 +13,28 @@ final class CheckHeredocNowdocCommand extends AbstractCheckCommand
      * @var SnippetFormatterApplication
      */
     private $snippetFormatterApplication;
-    public function __construct(SnippetFormatterApplication $snippetFormatterApplication)
+    /**
+     * @param \Symplify\EasyCodingStandard\SnippetFormatter\Application\SnippetFormatterApplication $snippetFormatterApplication
+     */
+    public function __construct($snippetFormatterApplication)
     {
         $this->snippetFormatterApplication = $snippetFormatterApplication;
         parent::__construct();
     }
-    protected function configure() : void
+    /**
+     * @return void
+     */
+    protected function configure()
     {
         $this->setDescription('Format Heredoc/Nowdoc PHP snippets in PHP files');
         parent::configure();
     }
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
+     */
+    protected function execute($input, $output)
     {
         $this->configuration->resolveFromInput($input);
         $sources = $this->configuration->getSources();

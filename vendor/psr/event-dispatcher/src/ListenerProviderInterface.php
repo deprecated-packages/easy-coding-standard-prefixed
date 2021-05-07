@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace ECSPrefix20210507\Psr\EventDispatcher;
 
 /**
@@ -15,5 +14,5 @@ interface ListenerProviderInterface
      *   An iterable (array, iterator, or generator) of callables.  Each
      *   callable MUST be type-compatible with $event.
      */
-    public function getListenersForEvent(object $event) : iterable;
+    public function getListenersForEvent($event);
 }

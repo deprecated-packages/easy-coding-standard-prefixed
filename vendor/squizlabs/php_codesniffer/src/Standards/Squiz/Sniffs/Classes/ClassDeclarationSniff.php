@@ -23,7 +23,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         // We want all the errors from the PSR2 standard, plus some of our own.
         parent::process($phpcsFile, $stackPtr);
@@ -45,7 +45,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
      *
      * @return void
      */
-    public function processOpen(File $phpcsFile, $stackPtr)
+    public function processOpen($phpcsFile, $stackPtr)
     {
         parent::processOpen($phpcsFile, $stackPtr);
         $tokens = $phpcsFile->getTokens();
@@ -80,7 +80,7 @@ class ClassDeclarationSniff extends PSR2ClassDeclarationSniff
      *
      * @return void
      */
-    public function processClose(File $phpcsFile, $stackPtr)
+    public function processClose($phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         if (isset($tokens[$stackPtr]['scope_closer']) === \false) {

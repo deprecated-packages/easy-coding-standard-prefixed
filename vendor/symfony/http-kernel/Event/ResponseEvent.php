@@ -25,16 +25,29 @@ use ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface;
 final class ResponseEvent extends \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\KernelEvent
 {
     private $response;
-    public function __construct(HttpKernelInterface $kernel, Request $request, int $requestType, Response $response)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\HttpKernelInterface $kernel
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param int $requestType
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
+     */
+    public function __construct($kernel, $request, $requestType, $response)
     {
         parent::__construct($kernel, $request, $requestType);
         $this->setResponse($response);
     }
-    public function getResponse() : Response
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response
+     */
+    public function getResponse()
     {
         return $this->response;
     }
-    public function setResponse(Response $response) : void
+    /**
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
+     */
+    public function setResponse($response)
     {
         $this->response = $response;
     }

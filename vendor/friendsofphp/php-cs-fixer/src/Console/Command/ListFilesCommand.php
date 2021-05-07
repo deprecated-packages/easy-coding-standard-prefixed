@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -37,7 +36,10 @@ final class ListFilesCommand extends Command
      * @var ToolInfoInterface
      */
     private $toolInfo;
-    public function __construct(ToolInfoInterface $toolInfo)
+    /**
+     * @param \PhpCsFixer\ToolInfoInterface $toolInfo
+     */
+    public function __construct($toolInfo)
     {
         parent::__construct();
         $this->defaultConfig = new Config();
@@ -45,12 +47,18 @@ final class ListFilesCommand extends Command
     }
     /**
      * {@inheritdoc}
+     * @return void
      */
-    protected function configure() : void
+    protected function configure()
     {
         $this->setDefinition([new InputOption('config', '', InputOption::VALUE_REQUIRED, 'The path to a .php-cs-fixer.php file.')])->setDescription('List all files being fixed by the given config.');
     }
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
+     */
+    protected function execute($input, $output)
     {
         $passedConfig = $input->getOption('config');
         $cwd = \getcwd();

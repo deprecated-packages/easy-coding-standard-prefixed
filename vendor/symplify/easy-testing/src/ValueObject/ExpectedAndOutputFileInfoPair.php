@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyTesting\ValueObject;
 
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -15,7 +14,11 @@ final class ExpectedAndOutputFileInfoPair
      * @var SmartFileInfo|null
      */
     private $outputFileInfo;
-    public function __construct(SmartFileInfo $expectedFileInfo, ?SmartFileInfo $outputFileInfo)
+    /**
+     * @param \Symplify\SmartFileSystem\SmartFileInfo|null $outputFileInfo
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $expectedFileInfo
+     */
+    public function __construct($expectedFileInfo, $outputFileInfo)
     {
         $this->expectedFileInfo = $expectedFileInfo;
         $this->outputFileInfo = $outputFileInfo;

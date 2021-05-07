@@ -30,16 +30,17 @@ class ResolveBindingsPass extends \ECSPrefix20210507\Symfony\Component\Dependenc
     private $errorMessages = [];
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process($container)
     {
         $this->usedBindings = $container->getRemovedBindingIds();
         try {
             parent::process($container);
-            foreach ($this->unusedBindings as [$key, $serviceId, $bindingType, $file]) {
+            foreach ($this->unusedBindings as list($key, $serviceId, $bindingType, $file)) {
                 $argumentType = $argumentName = $message = null;
                 if (\false !== \strpos($key, ' ')) {
-                    [$argumentType, $argumentName] = \explode(' ', $key, 2);
+                    list($argumentType, $argumentName) = \explode(' ', $key, 2);
                 } elseif ('$' === $key[0]) {
                     $argumentName = $key;
                 } else {
@@ -78,8 +79,9 @@ class ResolveBindingsPass extends \ECSPrefix20210507\Symfony\Component\Dependenc
     }
     /**
      * {@inheritdoc}
+     * @param bool $isRoot
      */
-    protected function processValue($value, bool $isRoot = \false)
+    protected function processValue($value, $isRoot = \false)
     {
         if ($value instanceof TypedReference && $value->getType() === (string) $value) {
             // Already checked
@@ -98,7 +100,7 @@ class ResolveBindingsPass extends \ECSPrefix20210507\Symfony\Component\Dependenc
         }
         $bindingNames = [];
         foreach ($bindings as $key => $binding) {
-            [$bindingValue, $bindingId, $used, $bindingType, $file] = $binding->getValues();
+            list($bindingValue, $bindingId, $used, $bindingType, $file) = $binding->getValues();
             if ($used) {
                 $this->usedBindings[$bindingId] = \true;
                 unset($this->unusedBindings[$bindingId]);
@@ -129,7 +131,7 @@ class ResolveBindingsPass extends \ECSPrefix20210507\Symfony\Component\Dependenc
             return parent::processValue($value, $isRoot);
         }
         foreach ($calls as $i => $call) {
-            [$method, $arguments] = $call;
+            list($method, $arguments) = $call;
             if ($method instanceof \ReflectionFunctionAbstract) {
                 $reflectionMethod = $method;
             } else {
@@ -171,7 +173,7 @@ class ResolveBindingsPass extends \ECSPrefix20210507\Symfony\Component\Dependenc
             }
         }
         if ($constructor) {
-            [, $arguments] = \array_pop($calls);
+            list(, $arguments) = \array_pop($calls);
             if ($arguments !== $value->getArguments()) {
                 $value->setArguments($arguments);
             }
@@ -183,10 +185,11 @@ class ResolveBindingsPass extends \ECSPrefix20210507\Symfony\Component\Dependenc
     }
     /**
      * @return mixed
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\Argument\BoundArgument $binding
      */
-    private function getBindingValue(BoundArgument $binding)
+    private function getBindingValue($binding)
     {
-        [$bindingValue, $bindingId] = $binding->getValues();
+        list($bindingValue, $bindingId) = $binding->getValues();
         $this->usedBindings[$bindingId] = \true;
         unset($this->unusedBindings[$bindingId]);
         return $bindingValue;

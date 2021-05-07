@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -12,8 +11,9 @@ final class TokenFinder
     /**
      * @param int|Token $position
      * @param Tokens<Token> $tokens
+     * @return \PhpCsFixer\Tokenizer\Token
      */
-    public function getPreviousMeaningfulToken(Tokens $tokens, $position) : Token
+    public function getPreviousMeaningfulToken($tokens, $position)
     {
         if (\is_int($position)) {
             return $this->findPreviousTokenByPosition($tokens, $position);
@@ -23,17 +23,20 @@ final class TokenFinder
     /**
      * @param mixed[] $tokens
      * @return mixed[]|string|null
+     * @param int $position
      */
-    public function getNextMeaninfulToken(array $tokens, int $position)
+    public function getNextMeaninfulToken(array $tokens, $position)
     {
         $tokens = $this->getNextMeaninfulTokens($tokens, $position, 1);
-        return $tokens[0] ?? null;
+        return isset($tokens[0]) ? $tokens[0] : null;
     }
     /**
      * @param mixed[] $tokens
      * @return mixed[]
+     * @param int $position
+     * @param int $count
      */
-    public function getNextMeaninfulTokens(array $tokens, int $position, int $count) : array
+    public function getNextMeaninfulTokens(array $tokens, $position, $count)
     {
         $foundTokens = [];
         $tokensCount = \count($tokens);
@@ -52,8 +55,9 @@ final class TokenFinder
     /**
      * @param mixed[] $rawTokens
      * @return mixed[]|string
+     * @param int $position
      */
-    public function getSameRowLastToken(array $rawTokens, int $position)
+    public function getSameRowLastToken(array $rawTokens, $position)
     {
         $lastToken = null;
         $rawTokensCount = \count($rawTokens);
@@ -68,8 +72,10 @@ final class TokenFinder
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param int $position
+     * @return \PhpCsFixer\Tokenizer\Token
      */
-    private function findPreviousTokenByPosition(Tokens $tokens, int $position) : Token
+    private function findPreviousTokenByPosition($tokens, $position)
     {
         $previousPosition = $position - 1;
         if (!isset($tokens[$previousPosition])) {
@@ -79,16 +85,20 @@ final class TokenFinder
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param \PhpCsFixer\Tokenizer\Token $positionToken
+     * @return \PhpCsFixer\Tokenizer\Token
      */
-    private function findPreviousTokenByToken(Tokens $tokens, Token $positionToken) : Token
+    private function findPreviousTokenByToken($tokens, $positionToken)
     {
         $position = $this->resolvePositionByToken($tokens, $positionToken);
         return $this->findPreviousTokenByPosition($tokens, $position - 1);
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param \PhpCsFixer\Tokenizer\Token $positionToken
+     * @return int
      */
-    private function resolvePositionByToken(Tokens $tokens, Token $positionToken) : int
+    private function resolvePositionByToken($tokens, $positionToken)
     {
         foreach ($tokens as $position => $token) {
             if ($token === $positionToken) {

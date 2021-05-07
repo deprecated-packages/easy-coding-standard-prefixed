@@ -16,7 +16,10 @@ use ECSPrefix20210507\Symfony\Contracts\Cache\TagAwareCacheInterface;
  */
 class TraceableTagAwareAdapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\TraceableAdapter implements \ECSPrefix20210507\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface, TagAwareCacheInterface
 {
-    public function __construct(\ECSPrefix20210507\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $pool)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Cache\Adapter\TagAwareAdapterInterface $pool
+     */
+    public function __construct($pool)
     {
         parent::__construct($pool);
     }

@@ -1,11 +1,10 @@
 <?php
 
-declare (strict_types=1);
 namespace ECSPrefix20210507\Jean85;
 
 class Version
 {
-    private const SHORT_COMMIT_LENGTH = 7;
+    const SHORT_COMMIT_LENGTH = 7;
     /** @var string */
     private $packageName;
     /** @var string */
@@ -14,67 +13,99 @@ class Version
     private $reference;
     /** @var bool */
     private $versionIsTagged;
-    public const NO_REFERENCE_TEXT = '{no reference}';
-    public function __construct(string $packageName, string $prettyVersion, ?string $reference = null)
+    const NO_REFERENCE_TEXT = '{no reference}';
+    /**
+     * @param string|null $reference
+     * @param string $packageName
+     * @param string $prettyVersion
+     */
+    public function __construct($packageName, $prettyVersion, $reference = null)
     {
         $this->packageName = $packageName;
         $this->prettyVersion = $prettyVersion;
-        $this->reference = $reference ?? self::NO_REFERENCE_TEXT;
+        $this->reference = isset($reference) ? $reference : self::NO_REFERENCE_TEXT;
         $this->versionIsTagged = \preg_match('/[^v\\d.]/', $this->getShortVersion()) === 0;
     }
-    public function getPrettyVersion() : string
+    /**
+     * @return string
+     */
+    public function getPrettyVersion()
     {
         if ($this->versionIsTagged) {
             return $this->prettyVersion;
         }
         return $this->getVersionWithShortReference();
     }
-    public function getFullVersion() : string
+    /**
+     * @return string
+     */
+    public function getFullVersion()
     {
         return $this->prettyVersion . '@' . $this->getReference();
     }
     /**
      * @deprecated
+     * @return string
      */
-    public function getVersionWithShortCommit() : string
+    public function getVersionWithShortCommit()
     {
         return $this->getVersionWithShortReference();
     }
-    public function getVersionWithShortReference() : string
+    /**
+     * @return string
+     */
+    public function getVersionWithShortReference()
     {
         return $this->prettyVersion . '@' . $this->getShortReference();
     }
-    public function getPackageName() : string
+    /**
+     * @return string
+     */
+    public function getPackageName()
     {
         return $this->packageName;
     }
-    public function getShortVersion() : string
+    /**
+     * @return string
+     */
+    public function getShortVersion()
     {
         return $this->prettyVersion;
     }
     /**
      * @deprecated
+     * @return string
      */
-    public function getCommitHash() : string
+    public function getCommitHash()
     {
         return $this->getReference();
     }
-    public function getReference() : string
+    /**
+     * @return string
+     */
+    public function getReference()
     {
         return $this->reference;
     }
     /**
      * @deprecated
+     * @return string
      */
-    public function getShortCommitHash() : string
+    public function getShortCommitHash()
     {
         return $this->getShortReference();
     }
-    public function getShortReference() : string
+    /**
+     * @return string
+     */
+    public function getShortReference()
     {
         return \substr($this->reference, 0, self::SHORT_COMMIT_LENGTH);
     }
-    public function __toString() : string
+    /**
+     * @return string
+     */
+    public function __toString()
     {
         return $this->getPrettyVersion();
     }

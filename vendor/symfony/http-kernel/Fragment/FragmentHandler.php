@@ -33,8 +33,9 @@ class FragmentHandler
     /**
      * @param FragmentRendererInterface[] $renderers An array of FragmentRendererInterface instances
      * @param bool                        $debug     Whether the debug mode is enabled or not
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\RequestStack $requestStack
      */
-    public function __construct(RequestStack $requestStack, array $renderers = [], bool $debug = \false)
+    public function __construct($requestStack, array $renderers = [], $debug = \false)
     {
         $this->requestStack = $requestStack;
         foreach ($renderers as $renderer) {
@@ -44,8 +45,9 @@ class FragmentHandler
     }
     /**
      * Adds a renderer.
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $renderer
      */
-    public function addRenderer(\ECSPrefix20210507\Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface $renderer)
+    public function addRenderer($renderer)
     {
         $this->renderers[$renderer->getName()] = $renderer;
     }
@@ -62,8 +64,9 @@ class FragmentHandler
      *
      * @throws \InvalidArgumentException when the renderer does not exist
      * @throws \LogicException           when no master request is being handled
+     * @param string $renderer
      */
-    public function render($uri, string $renderer = 'inline', array $options = [])
+    public function render($uri, $renderer = 'inline', array $options = [])
     {
         if (!isset($options['ignore_errors'])) {
             $options['ignore_errors'] = !$this->debug;
@@ -85,8 +88,9 @@ class FragmentHandler
      * @return string|null The Response content or null when the Response is streamed
      *
      * @throws \RuntimeException when the Response is not successful
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
      */
-    protected function deliver(Response $response)
+    protected function deliver($response)
     {
         if (!$response->isSuccessful()) {
             $responseStatusCode = $response->getStatusCode();

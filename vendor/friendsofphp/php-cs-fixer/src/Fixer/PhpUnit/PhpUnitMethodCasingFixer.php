@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -35,15 +34,16 @@ final class PhpUnitMethodCasingFixer extends AbstractPhpUnitFixer implements Con
     /**
      * @internal
      */
-    public const CAMEL_CASE = 'camel_case';
+    const CAMEL_CASE = 'camel_case';
     /**
      * @internal
      */
-    public const SNAKE_CASE = 'snake_case';
+    const SNAKE_CASE = 'snake_case';
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Enforce camel (or snake) case for PHPUnit test methods, following configuration.', [new CodeSample('<?php
 class MyTest extends \\PhpUnit\\FrameWork\\TestCase
@@ -61,22 +61,28 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
      * {@inheritdoc}
      *
      * Must run after PhpUnitTestAnnotationFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('case', 'Apply camel or snake case to test methods'))->setAllowedValues([self::CAMEL_CASE, self::SNAKE_CASE])->setDefault(self::CAMEL_CASE)->getOption()]);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $startIndex
+     * @param int $endIndex
      */
-    protected function applyPhpUnitClassFix(Tokens $tokens, int $startIndex, int $endIndex) : void
+    protected function applyPhpUnitClassFix($tokens, $startIndex, $endIndex)
     {
         for ($index = $endIndex - 1; $index > $startIndex; --$index) {
             if (!$this->isTestMethod($tokens, $index)) {
@@ -94,7 +100,11 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
             }
         }
     }
-    private function updateMethodCasing(string $functionName) : string
+    /**
+     * @param string $functionName
+     * @return string
+     */
+    private function updateMethodCasing($functionName)
     {
         $parts = \explode('::', $functionName);
         $functionNamePart = \array_pop($parts);
@@ -109,7 +119,12 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
         $parts[] = $newFunctionNamePart;
         return \implode('::', $parts);
     }
-    private function isTestMethod(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    private function isTestMethod($tokens, $index)
     {
         // Check if we are dealing with a (non abstract, non lambda) function
         if (!$this->isMethod($tokens, $index)) {
@@ -124,16 +139,31 @@ class MyTest extends \\PhpUnit\\FrameWork\\TestCase
         $docBlockIndex = $this->getDocBlockIndex($tokens, $index);
         return $this->isPHPDoc($tokens, $docBlockIndex) && \false !== \strpos($tokens[$docBlockIndex]->getContent(), '@test');
     }
-    private function isMethod(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    private function isMethod($tokens, $index)
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         return $tokens[$index]->isGivenKind(\T_FUNCTION) && !$tokensAnalyzer->isLambda($index);
     }
-    private function startsWith(string $needle, string $haystack) : bool
+    /**
+     * @param string $needle
+     * @param string $haystack
+     * @return bool
+     */
+    private function startsWith($needle, $haystack)
     {
         return \substr($haystack, 0, \strlen($needle)) === $needle;
     }
-    private function updateDocBlock(Tokens $tokens, int $docBlockIndex) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $docBlockIndex
+     */
+    private function updateDocBlock($tokens, $docBlockIndex)
     {
         $doc = new DocBlock($tokens[$docBlockIndex]->getContent());
         $lines = $doc->getLines();

@@ -40,7 +40,7 @@ class CSSLintSniff implements Sniff
      *
      * @return void
      */
-    public function process(File $phpcsFile, $stackPtr)
+    public function process($phpcsFile, $stackPtr)
     {
         $csslintPath = Config::getExecutablePath('csslint');
         if ($csslintPath === null) {

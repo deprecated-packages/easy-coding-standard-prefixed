@@ -21,8 +21,10 @@ class ClassNotFoundErrorEnhancer implements \ECSPrefix20210507\Symfony\Component
 {
     /**
      * {@inheritdoc}
+     * @return \Throwable|null
+     * @param \Throwable $error
      */
-    public function enhance(\Throwable $error) : ?\Throwable
+    public function enhance($error)
     {
         // Some specific versions of PHP produce a fatal error when extending a not found class.
         $message = !$error instanceof FatalError ? $error->getMessage() : $error->getError()['message'];
@@ -61,8 +63,9 @@ class ClassNotFoundErrorEnhancer implements \ECSPrefix20210507\Symfony\Component
      * @param string $class A class name (without its namespace)
      *
      * Returns an array of possible fully qualified class names
+     * @return mixed[]
      */
-    private function getClassCandidates(string $class) : array
+    private function getClassCandidates($class)
     {
         if (!\is_array($functions = \spl_autoload_functions())) {
             return [];
@@ -95,7 +98,13 @@ class ClassNotFoundErrorEnhancer implements \ECSPrefix20210507\Symfony\Component
         }
         return \array_unique($classes);
     }
-    private function findClassInPath(string $path, string $class, string $prefix) : array
+    /**
+     * @param string $path
+     * @param string $class
+     * @param string $prefix
+     * @return mixed[]
+     */
+    private function findClassInPath($path, $class, $prefix)
     {
         if (!($path = (\realpath($path . '/' . \strtr($prefix, '\\_', '//')) ?: \realpath($path . '/' . \dirname(\strtr($prefix, '\\_', '//')))) ?: \realpath($path))) {
             return [];
@@ -109,7 +118,13 @@ class ClassNotFoundErrorEnhancer implements \ECSPrefix20210507\Symfony\Component
         }
         return $classes;
     }
-    private function convertFileToClass(string $path, string $file, string $prefix) : ?string
+    /**
+     * @return string|null
+     * @param string $path
+     * @param string $file
+     * @param string $prefix
+     */
+    private function convertFileToClass($path, $file, $prefix)
     {
         $candidates = [
             // namespaced class
@@ -150,7 +165,11 @@ class ClassNotFoundErrorEnhancer implements \ECSPrefix20210507\Symfony\Component
         }
         return null;
     }
-    private function classExists(string $class) : bool
+    /**
+     * @param string $class
+     * @return bool
+     */
+    private function classExists($class)
     {
         return \class_exists($class, \false) || \interface_exists($class, \false) || \trait_exists($class, \false);
     }

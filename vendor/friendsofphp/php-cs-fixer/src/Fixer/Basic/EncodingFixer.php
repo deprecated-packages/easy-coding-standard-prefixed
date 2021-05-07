@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -33,8 +32,9 @@ final class EncodingFixer extends AbstractFixer
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('PHP code MUST use only UTF-8 without BOM (remove BOM).', [new CodeSample($this->BOM . '<?php
 
@@ -43,23 +43,29 @@ echo "Hello!";
     }
     /**
      * {@inheritdoc}
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         // must run first (at least before Fixers that using Tokens) - for speed reason of whole fixing process
         return 100;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $content = $tokens[0]->getContent();
         if (0 === \strncmp($content, $this->BOM, 3)) {

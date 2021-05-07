@@ -35,7 +35,7 @@ final class LockRegistry
      *
      * @return array The previously defined set of files
      */
-    public static function setFiles(array $files) : array
+    public static function setFiles(array $files)
     {
         $previousFiles = self::$files;
         self::$files = $files;
@@ -48,10 +48,17 @@ final class LockRegistry
         self::$openedFiles = self::$lockedFiles = [];
         return $previousFiles;
     }
-    public static function compute(callable $callback, ItemInterface $item, bool &$save, CacheInterface $pool, \Closure $setMetadata = null, LoggerInterface $logger = null)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Contracts\Cache\ItemInterface $item
+     * @param bool $save
+     * @param \ECSPrefix20210507\Symfony\Contracts\Cache\CacheInterface $pool
+     * @param \Closure $setMetadata
+     * @param \ECSPrefix20210507\Psr\Log\LoggerInterface $logger
+     */
+    public static function compute(callable $callback, $item, &$save, $pool, $setMetadata = null, $logger = null)
     {
         $key = self::$files ? \abs(\crc32($item->getKey())) % \count(self::$files) : -1;
-        if ($key < 0 || (self::$lockedFiles[$key] ?? \false) || !($lock = self::open($key))) {
+        if ($key < 0 || (isset(self::$lockedFiles[$key]) ? self::$lockedFiles[$key] : \false) || !($lock = self::open($key))) {
             return $callback($item, $save);
         }
         while (\true) {
@@ -79,8 +86,8 @@ final class LockRegistry
                 unset(self::$lockedFiles[$key]);
             }
             static $signalingException, $signalingCallback;
-            $signalingException = $signalingException ?? \unserialize("O:9:\"Exception\":1:{s:16:\"\0Exception\0trace\";a:0:{}}");
-            $signalingCallback = $signalingCallback ?? function () use($signalingException) {
+            $signalingException = isset($signalingException) ? $signalingException : \unserialize("O:9:\"Exception\":1:{s:16:\"\0Exception\0trace\";a:0:{}}");
+            $signalingCallback = isset($signalingCallback) ? $signalingCallback : function () use($signalingException) {
                 throw $signalingException;
             };
             try {
@@ -97,9 +104,12 @@ final class LockRegistry
         }
         return null;
     }
-    private static function open(int $key)
+    /**
+     * @param int $key
+     */
+    private static function open($key)
     {
-        if (null !== ($h = self::$openedFiles[$key] ?? null)) {
+        if (null !== ($h = isset(self::$openedFiles[$key]) ? self::$openedFiles[$key] : null)) {
             return $h;
         }
         \set_error_handler(function () {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -41,43 +40,44 @@ final class OrderedImportsFixer extends AbstractFixer implements ConfigurableFix
     /**
      * @internal
      */
-    public const IMPORT_TYPE_CLASS = 'class';
+    const IMPORT_TYPE_CLASS = 'class';
     /**
      * @internal
      */
-    public const IMPORT_TYPE_CONST = 'const';
+    const IMPORT_TYPE_CONST = 'const';
     /**
      * @internal
      */
-    public const IMPORT_TYPE_FUNCTION = 'function';
+    const IMPORT_TYPE_FUNCTION = 'function';
     /**
      * @internal
      */
-    public const SORT_ALPHA = 'alpha';
+    const SORT_ALPHA = 'alpha';
     /**
      * @internal
      */
-    public const SORT_LENGTH = 'length';
+    const SORT_LENGTH = 'length';
     /**
      * @internal
      */
-    public const SORT_NONE = 'none';
+    const SORT_NONE = 'none';
     /**
      * Array of supported sort types in configuration.
      *
      * @var string[]
      */
-    private const SUPPORTED_SORT_TYPES = [self::IMPORT_TYPE_CLASS, self::IMPORT_TYPE_CONST, self::IMPORT_TYPE_FUNCTION];
+    const SUPPORTED_SORT_TYPES = [self::IMPORT_TYPE_CLASS, self::IMPORT_TYPE_CONST, self::IMPORT_TYPE_FUNCTION];
     /**
      * Array of supported sort algorithms in configuration.
      *
      * @var string[]
      */
-    private const SUPPORTED_SORT_ALGORITHMS = [self::SORT_ALPHA, self::SORT_LENGTH, self::SORT_NONE];
+    const SUPPORTED_SORT_ALGORITHMS = [self::SORT_ALPHA, self::SORT_LENGTH, self::SORT_NONE];
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Ordering `use` statements.', [new CodeSample("<?php\nuse Z; use A;\n"), new CodeSample('<?php
 use Acme\\Bar;
@@ -120,22 +120,28 @@ use Bar;
      * {@inheritdoc}
      *
      * Must run after GlobalNamespaceImportFixer, NoLeadingImportSlashFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return -30;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_USE);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $tokensAnalyzer = new TokensAnalyzer($tokens);
         $namespacesImports = $tokensAnalyzer->getImportUseIndexes(\true);
@@ -176,11 +182,12 @@ use Bar;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         $supportedSortTypes = self::SUPPORTED_SORT_TYPES;
-        return new FixerConfigurationResolver([(new FixerOptionBuilder('sort_algorithm', 'whether the statements should be sorted alphabetically or by length, or not sorted'))->setAllowedValues(self::SUPPORTED_SORT_ALGORITHMS)->setDefault(self::SORT_ALPHA)->getOption(), (new FixerOptionBuilder('imports_order', 'Defines the order of import types.'))->setAllowedTypes(['array', 'null'])->setAllowedValues([static function (?array $value) use($supportedSortTypes) {
+        return new FixerConfigurationResolver([(new FixerOptionBuilder('sort_algorithm', 'whether the statements should be sorted alphabetically or by length, or not sorted'))->setAllowedValues(self::SUPPORTED_SORT_ALGORITHMS)->setDefault(self::SORT_ALPHA)->getOption(), (new FixerOptionBuilder('imports_order', 'Defines the order of import types.'))->setAllowedTypes(['array', 'null'])->setAllowedValues([static function ($value) use($supportedSortTypes) {
             if (null !== $value) {
                 $missing = \array_diff($supportedSortTypes, $value);
                 if (\count($missing)) {
@@ -201,8 +208,9 @@ use Bar;
      * @param array<string, bool|int|string> $second
      *
      * @internal
+     * @return int
      */
-    private function sortAlphabetically(array $first, array $second) : int
+    private function sortAlphabetically(array $first, array $second)
     {
         // Replace backslashes by spaces before sorting for correct sort order
         $firstNamespace = \str_replace('\\', ' ', $this->prepareNamespace($first['namespace']));
@@ -216,8 +224,9 @@ use Bar;
      * @param array<string, bool|int|string> $second
      *
      * @internal
+     * @return int
      */
-    private function sortByLength(array $first, array $second) : int
+    private function sortByLength(array $first, array $second)
     {
         $firstNamespace = (self::IMPORT_TYPE_CLASS === $first['importType'] ? '' : $first['importType'] . ' ') . $this->prepareNamespace($first['namespace']);
         $secondNamespace = (self::IMPORT_TYPE_CLASS === $second['importType'] ? '' : $second['importType'] . ' ') . $this->prepareNamespace($second['namespace']);
@@ -230,14 +239,20 @@ use Bar;
         }
         return $sortResult;
     }
-    private function prepareNamespace(string $namespace) : string
+    /**
+     * @param string $namespace
+     * @return string
+     */
+    private function prepareNamespace($namespace)
     {
         return \trim(Preg::replace('%/\\*(.*)\\*/%s', '', $namespace));
     }
     /**
      * @param int[] $uses
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return mixed[]
      */
-    private function getNewOrder(array $uses, Tokens $tokens) : array
+    private function getNewOrder(array $uses, $tokens)
     {
         $indexes = [];
         $originalIndexes = [];
@@ -372,8 +387,9 @@ use Bar;
     }
     /**
      * @param array[] $indexes
+     * @return mixed[]
      */
-    private function sortByAlgorithm(array $indexes) : array
+    private function sortByAlgorithm(array $indexes)
     {
         if (self::SORT_ALPHA === $this->configuration['sort_algorithm']) {
             \uasort($indexes, [$this, 'sortAlphabetically']);

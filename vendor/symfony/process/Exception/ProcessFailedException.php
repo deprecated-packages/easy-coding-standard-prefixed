@@ -19,7 +19,10 @@ use ECSPrefix20210507\Symfony\Component\Process\Process;
 class ProcessFailedException extends \ECSPrefix20210507\Symfony\Component\Process\Exception\RuntimeException
 {
     private $process;
-    public function __construct(Process $process)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Process\Process $process
+     */
+    public function __construct($process)
     {
         if ($process->isSuccessful()) {
             throw new \ECSPrefix20210507\Symfony\Component\Process\Exception\InvalidArgumentException('Expected a failed process, but the given process was successful.');

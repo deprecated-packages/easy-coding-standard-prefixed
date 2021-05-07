@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SetConfigResolver\Config;
 
 use ECSPrefix20210507\Symfony\Component\Config\FileLocator;
@@ -14,20 +13,23 @@ final class SetsParameterResolver
     /**
      * @var string
      */
-    private const SETS = 'sets';
+    const SETS = 'sets';
     /**
      * @var SetResolver
      */
     private $setResolver;
-    public function __construct(SetResolver $setResolver)
+    /**
+     * @param \Symplify\SetConfigResolver\SetResolver $setResolver
+     */
+    public function __construct($setResolver)
     {
         $this->setResolver = $setResolver;
     }
     /**
      * @param SmartFileInfo[] $fileInfos
-     * @return SmartFileInfo[]
+     * @return mixed[]
      */
-    public function resolveFromFileInfos(array $fileInfos) : array
+    public function resolveFromFileInfos(array $fileInfos)
     {
         $setFileInfos = [];
         foreach ($fileInfos as $fileInfo) {
@@ -39,9 +41,10 @@ final class SetsParameterResolver
         return $setFileInfos;
     }
     /**
-     * @return string[]
+     * @return mixed[]
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $configFileInfo
      */
-    private function resolveSetsFromFileInfo(SmartFileInfo $configFileInfo) : array
+    private function resolveSetsFromFileInfo($configFileInfo)
     {
         if ($configFileInfo->hasSuffixes(['yml', 'yaml'])) {
             throw new ShouldNotHappenException('Only PHP config suffix is supported now. Migrete your Symfony config to PHP');
@@ -49,9 +52,10 @@ final class SetsParameterResolver
         return $this->resolveSetsParameterFromPhpFileInfo($configFileInfo);
     }
     /**
-     * @return string[]
+     * @return mixed[]
+     * @param \Symplify\SmartFileSystem\SmartFileInfo $configFileInfo
      */
-    private function resolveSetsParameterFromPhpFileInfo(SmartFileInfo $configFileInfo) : array
+    private function resolveSetsParameterFromPhpFileInfo($configFileInfo)
     {
         // php file loader
         $containerBuilder = new ContainerBuilder();

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\Console\Command;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -14,13 +13,15 @@ final class CommandNaming
      * @var string
      * @see https://regex101.com/r/DfCWPx/1
      */
-    private const BIG_LETTER_REGEX = '#[A-Z]#';
+    const BIG_LETTER_REGEX = '#[A-Z]#';
     /**
      * Converts:
      * - "SomeClass\SomeSuperCommand" → "some-super"
      * - "SomeClass\SOMESuperCommand" → "some-super"
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
+     * @return string
      */
-    public function resolveFromCommand(Command $command) : string
+    public function resolveFromCommand($command)
     {
         $commandClass = \get_class($command);
         return self::classToName($commandClass);
@@ -29,8 +30,10 @@ final class CommandNaming
      * Converts:
      * - "SomeClass\SomeSuperCommand" → "some-super"
      * - "SomeClass\SOMESuperCommand" → "some-super"
+     * @param string $class
+     * @return string
      */
-    public static function classToName(string $class) : string
+    public static function classToName($class)
     {
         /** @var string $shortClassName */
         $shortClassName = self::resolveShortName($class);
@@ -48,12 +51,21 @@ final class CommandNaming
             return '-' . \strtolower($matches[0]);
         });
     }
-    private static function resolveShortName(string $class) : string
+    /**
+     * @param string $class
+     * @return string
+     */
+    private static function resolveShortName($class)
     {
         $classParts = \explode('\\', $class);
         return \array_pop($classParts);
     }
-    private static function isFollowedByUpperCaseLetterOrNothing(string $string, int $position) : bool
+    /**
+     * @param string $string
+     * @param int $position
+     * @return bool
+     */
+    private static function isFollowedByUpperCaseLetterOrNothing($string, $position)
     {
         // this is the last letter
         if (!isset($string[$position + 1])) {

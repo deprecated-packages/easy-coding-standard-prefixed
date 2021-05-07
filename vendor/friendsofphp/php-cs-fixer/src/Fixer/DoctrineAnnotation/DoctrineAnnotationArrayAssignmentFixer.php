@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,8 +27,9 @@ final class DoctrineAnnotationArrayAssignmentFixer extends AbstractDoctrineAnnot
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Doctrine annotations must use configured operator for assignment in arrays.', [new CodeSample("<?php\n/**\n * @Foo({bar : \"baz\"})\n */\nclass Bar {}\n"), new CodeSample("<?php\n/**\n * @Foo({bar = \"baz\"})\n */\nclass Bar {}\n", ['operator' => ':'])]);
     }
@@ -37,15 +37,17 @@ final class DoctrineAnnotationArrayAssignmentFixer extends AbstractDoctrineAnnot
      * {@inheritdoc}
      *
      * Must run before DoctrineAnnotationSpacesFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 1;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         $options = parent::createConfigurationDefinition()->getOptions();
         $operator = new FixerOptionBuilder('operator', 'The operator to use.');
@@ -54,8 +56,10 @@ final class DoctrineAnnotationArrayAssignmentFixer extends AbstractDoctrineAnnot
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \PhpCsFixer\Doctrine\Annotation\Tokens $tokens
      */
-    protected function fixAnnotations(Tokens $tokens) : void
+    protected function fixAnnotations($tokens)
     {
         $scopes = [];
         foreach ($tokens as $token) {

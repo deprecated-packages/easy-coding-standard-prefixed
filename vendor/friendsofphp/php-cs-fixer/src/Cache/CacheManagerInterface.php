@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -19,6 +18,16 @@ namespace PhpCsFixer\Cache;
  */
 interface CacheManagerInterface
 {
-    public function needFixing(string $file, string $fileContent) : bool;
-    public function setFile(string $file, string $fileContent) : void;
+    /**
+     * @param string $file
+     * @param string $fileContent
+     * @return bool
+     */
+    public function needFixing($file, $fileContent);
+    /**
+     * @return void
+     * @param string $file
+     * @param string $fileContent
+     */
+    public function setFile($file, $fileContent);
 }

@@ -27,7 +27,7 @@ class CustomFilterIterator extends \FilterIterator
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(\Iterator $iterator, array $filters)
+    public function __construct($iterator, array $filters)
     {
         foreach ($filters as $filter) {
             if (!\is_callable($filter)) {

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -34,16 +33,19 @@ final class DeclareEqualNormalizeFixer extends AbstractFixer implements Configur
     private $callback;
     /**
      * {@inheritdoc}
+     * @param mixed[] $configuration
+     * @return void
      */
-    public function configure(array $configuration) : void
+    public function configure($configuration)
     {
         parent::configure($configuration);
         $this->callback = 'none' === $this->configuration['space'] ? 'removeWhitespaceAroundToken' : 'ensureWhitespaceAroundToken';
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Equal sign in declare statement should be surrounded by spaces or not following configuration.', [new CodeSample("<?php\ndeclare(ticks =  1);\n"), new CodeSample("<?php\ndeclare(ticks=1);\n", ['space' => 'single'])]);
     }
@@ -51,22 +53,28 @@ final class DeclareEqualNormalizeFixer extends AbstractFixer implements Configur
      * {@inheritdoc}
      *
      * Must run after DeclareStrictTypesFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 0;
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_DECLARE);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         $callback = $this->callback;
         for ($index = 0, $count = $tokens->count(); $index < $count - 6; ++$index) {
@@ -80,15 +88,18 @@ final class DeclareEqualNormalizeFixer extends AbstractFixer implements Configur
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         return new FixerConfigurationResolver([(new FixerOptionBuilder('space', 'Spacing to apply around the equal sign.'))->setAllowedValues(['single', 'none'])->setDefault('none')->getOption()]);
     }
     /**
      * @param int $index of `=` token
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function ensureWhitespaceAroundToken(Tokens $tokens, int $index) : void
+    private function ensureWhitespaceAroundToken($tokens, $index)
     {
         if ($tokens[$index + 1]->isWhitespace()) {
             if (' ' !== $tokens[$index + 1]->getContent()) {
@@ -107,8 +118,10 @@ final class DeclareEqualNormalizeFixer extends AbstractFixer implements Configur
     }
     /**
      * @param int $index of `=` token
+     * @return void
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    private function removeWhitespaceAroundToken(Tokens $tokens, int $index) : void
+    private function removeWhitespaceAroundToken($tokens, $index)
     {
         if (!$tokens[$tokens->getPrevNonWhitespace($index)]->isComment()) {
             $tokens->removeLeadingWhitespace($index);

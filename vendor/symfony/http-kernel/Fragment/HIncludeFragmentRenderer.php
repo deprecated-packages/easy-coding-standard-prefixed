@@ -28,8 +28,11 @@ class HIncludeFragmentRenderer extends \ECSPrefix20210507\Symfony\Component\Http
     private $charset;
     /**
      * @param string $globalDefaultTemplate The global default content (it can be a template name or the content)
+     * @param \ECSPrefix20210507\Twig\Environment $twig
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\UriSigner $signer
+     * @param string $charset
      */
-    public function __construct(Environment $twig = null, UriSigner $signer = null, string $globalDefaultTemplate = null, string $charset = 'utf-8')
+    public function __construct($twig = null, $signer = null, $globalDefaultTemplate = null, $charset = 'utf-8')
     {
         $this->twig = $twig;
         $this->globalDefaultTemplate = $globalDefaultTemplate;
@@ -53,8 +56,9 @@ class HIncludeFragmentRenderer extends \ECSPrefix20210507\Symfony\Component\Http
      *  * default:    The default content (it can be a template name or the content)
      *  * id:         An optional hx:include tag id attribute
      *  * attributes: An optional array of hx:include tag attributes
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function render($uri, Request $request, array $options = [])
+    public function render($uri, $request, array $options = [])
     {
         if ($uri instanceof ControllerReference) {
             if (null === $this->signer) {
@@ -65,7 +69,7 @@ class HIncludeFragmentRenderer extends \ECSPrefix20210507\Symfony\Component\Http
         }
         // We need to replace ampersands in the URI with the encoded form in order to return valid html/xml content.
         $uri = \str_replace('&', '&amp;', $uri);
-        $template = $options['default'] ?? $this->globalDefaultTemplate;
+        $template = isset($options['default']) ? $options['default'] : $this->globalDefaultTemplate;
         if (null !== $this->twig && $template && $this->twig->getLoader()->exists($template)) {
             $content = $this->twig->render($template);
         } else {

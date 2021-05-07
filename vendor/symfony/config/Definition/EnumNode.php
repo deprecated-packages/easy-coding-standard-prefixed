@@ -19,7 +19,12 @@ use ECSPrefix20210507\Symfony\Component\Config\Definition\Exception\InvalidConfi
 class EnumNode extends \ECSPrefix20210507\Symfony\Component\Config\Definition\ScalarNode
 {
     private $values;
-    public function __construct(?string $name, \ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface $parent = null, array $values = [], string $pathSeparator = \ECSPrefix20210507\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
+    /**
+     * @param string|null $name
+     * @param \ECSPrefix20210507\Symfony\Component\Config\Definition\NodeInterface $parent
+     * @param string $pathSeparator
+     */
+    public function __construct($name, $parent = null, array $values = [], $pathSeparator = \ECSPrefix20210507\Symfony\Component\Config\Definition\BaseNode::DEFAULT_PATH_SEPARATOR)
     {
         $values = \array_unique($values);
         if (empty($values)) {
@@ -44,8 +49,9 @@ class EnumNode extends \ECSPrefix20210507\Symfony\Component\Config\Definition\Sc
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    protected function allowPlaceholders() : bool
+    protected function allowPlaceholders()
     {
         return \false;
     }

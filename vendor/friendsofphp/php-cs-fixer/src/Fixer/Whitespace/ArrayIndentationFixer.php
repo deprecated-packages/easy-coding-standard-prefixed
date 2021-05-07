@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -25,15 +24,18 @@ final class ArrayIndentationFixer extends AbstractFixer implements WhitespacesAw
 {
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('Each element of an array must be indented exactly once.', [new CodeSample("<?php\n\$foo = [\n   'bar' => [\n    'baz' => true,\n  ],\n];\n")]);
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isAnyTokenKindsFound([\T_ARRAY, CT::T_ARRAY_SQUARE_BRACE_OPEN]);
     }
@@ -42,12 +44,18 @@ final class ArrayIndentationFixer extends AbstractFixer implements WhitespacesAw
      *
      * Must run before AlignMultilineCommentFixer, BinaryOperatorSpacesFixer.
      * Must run after BracesFixer, MethodArgumentSpaceFixer, MethodChainingIndentationFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 29;
     }
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    /**
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     */
+    protected function applyFix($file, $tokens)
     {
         $scopes = [];
         $previousLineInitialIndent = '';
@@ -106,7 +114,13 @@ final class ArrayIndentationFixer extends AbstractFixer implements WhitespacesAw
             }
         }
     }
-    private function findExpressionEndIndex(Tokens $tokens, int $index, int $parentScopeEndIndex) : int
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @param int $parentScopeEndIndex
+     * @return int
+     */
+    private function findExpressionEndIndex($tokens, $index, $parentScopeEndIndex)
     {
         $endIndex = null;
         for ($searchEndIndex = $index + 1; $searchEndIndex < $parentScopeEndIndex; ++$searchEndIndex) {
@@ -126,7 +140,12 @@ final class ArrayIndentationFixer extends AbstractFixer implements WhitespacesAw
         }
         return $tokens->getPrevMeaningfulToken($parentScopeEndIndex);
     }
-    private function getLineIndentation(Tokens $tokens, int $index) : string
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return string
+     */
+    private function getLineIndentation($tokens, $index)
     {
         $newlineTokenIndex = $this->getPreviousNewlineTokenIndex($tokens, $index);
         if (null === $newlineTokenIndex) {
@@ -134,14 +153,23 @@ final class ArrayIndentationFixer extends AbstractFixer implements WhitespacesAw
         }
         return $this->extractIndent($this->computeNewLineContent($tokens, $newlineTokenIndex));
     }
-    private function extractIndent(string $content) : string
+    /**
+     * @param string $content
+     * @return string
+     */
+    private function extractIndent($content)
     {
         if (Preg::match('/\\R(\\h*)[^\\r\\n]*$/D', $content, $matches)) {
             return $matches[1];
         }
         return '';
     }
-    private function getPreviousNewlineTokenIndex(Tokens $tokens, int $index) : ?int
+    /**
+     * @return int|null
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     */
+    private function getPreviousNewlineTokenIndex($tokens, $index)
     {
         while ($index > 0) {
             $index = $tokens->getPrevTokenOfKind($index, [[\T_WHITESPACE], [\T_INLINE_HTML]]);
@@ -154,14 +182,24 @@ final class ArrayIndentationFixer extends AbstractFixer implements WhitespacesAw
         }
         return null;
     }
-    private function isNewLineToken(Tokens $tokens, int $index) : bool
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return bool
+     */
+    private function isNewLineToken($tokens, $index)
     {
         if (!$tokens[$index]->isGivenKind([\T_WHITESPACE, \T_INLINE_HTML])) {
             return \false;
         }
         return (bool) Preg::match('/\\R/', $this->computeNewLineContent($tokens, $index));
     }
-    private function computeNewLineContent(Tokens $tokens, int $index) : string
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $index
+     * @return string
+     */
+    private function computeNewLineContent($tokens, $index)
     {
         $content = $tokens[$index]->getContent();
         if (0 !== $index && $tokens[$index - 1]->equalsAny([[\T_OPEN_TAG], [\T_CLOSE_TAG]])) {

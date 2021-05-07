@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -43,7 +42,7 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
     /**
      * @param null|string $executable PHP executable, null for autodetection
      */
-    public function __construct(?string $executable = null)
+    public function __construct($executable = null)
     {
         if (null === $executable) {
             $executableFinder = new PhpExecutableFinder();
@@ -74,8 +73,9 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
     /**
      * This class is not intended to be serialized,
      * and cannot be deserialized (see __wakeup method).
+     * @return mixed[]
      */
-    public function __sleep() : array
+    public function __sleep()
     {
         throw new \BadMethodCallException('Cannot serialize ' . __CLASS__);
     }
@@ -84,36 +84,43 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
      * code by leveraging the __destruct method.
      *
      * @see https://owasp.org/www-community/vulnerabilities/PHP_Object_Injection
+     * @return void
      */
-    public function __wakeup() : void
+    public function __wakeup()
     {
         throw new \BadMethodCallException('Cannot unserialize ' . __CLASS__);
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function isAsync() : bool
+    public function isAsync()
     {
         return \true;
     }
     /**
      * {@inheritdoc}
+     * @param string $path
+     * @return \PhpCsFixer\Linter\LintingResultInterface
      */
-    public function lintFile(string $path) : \PhpCsFixer\Linter\LintingResultInterface
+    public function lintFile($path)
     {
         return new \PhpCsFixer\Linter\ProcessLintingResult($this->createProcessForFile($path), $path);
     }
     /**
      * {@inheritdoc}
+     * @param string $source
+     * @return \PhpCsFixer\Linter\LintingResultInterface
      */
-    public function lintSource(string $source) : \PhpCsFixer\Linter\LintingResultInterface
+    public function lintSource($source)
     {
         return new \PhpCsFixer\Linter\ProcessLintingResult($this->createProcessForSource($source), $this->temporaryFile);
     }
     /**
      * @param string $path path to file
+     * @return \ECSPrefix20210507\Symfony\Component\Process\Process
      */
-    private function createProcessForFile(string $path) : Process
+    private function createProcessForFile($path)
     {
         // in case php://stdin
         if (!\is_file($path)) {
@@ -128,8 +135,9 @@ final class ProcessLinter implements \PhpCsFixer\Linter\LinterInterface
      * Create process that lint PHP code.
      *
      * @param string $source code
+     * @return \ECSPrefix20210507\Symfony\Component\Process\Process
      */
-    private function createProcessForSource(string $source) : Process
+    private function createProcessForSource($source)
     {
         if (null === $this->temporaryFile) {
             $this->temporaryFile = \tempnam(\sys_get_temp_dir(), 'cs_fixer_tmp_');

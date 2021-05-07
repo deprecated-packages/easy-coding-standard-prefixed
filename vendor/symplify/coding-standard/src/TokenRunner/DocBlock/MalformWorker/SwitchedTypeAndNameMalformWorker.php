@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\DocBlock\MalformWorker;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -14,11 +13,14 @@ final class SwitchedTypeAndNameMalformWorker implements MalformWorkerInterface
      * @var string
      * @see https://regex101.com/r/4us32A/1
      */
-    private const NAME_THEN_TYPE_REGEX = '#@(param|var)(\\s+)(?<name>\\$\\w+)(\\s+)(?<type>[|\\\\\\w\\[\\]]+)#';
+    const NAME_THEN_TYPE_REGEX = '#@(param|var)(\\s+)(?<name>\\$\\w+)(\\s+)(?<type>[|\\\\\\w\\[\\]]+)#';
     /**
      * @param Tokens<Token> $tokens
+     * @param string $docContent
+     * @param int $position
+     * @return string
      */
-    public function work(string $docContent, Tokens $tokens, int $position) : string
+    public function work($docContent, $tokens, $position)
     {
         $docBlock = new DocBlock($docContent);
         $lines = $docBlock->getLines();

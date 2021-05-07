@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -19,6 +18,7 @@ interface PharCheckerInterface
 {
     /**
      * @return null|string the invalidity reason if any, null otherwise
+     * @param string $filename
      */
-    public function checkFileValidity(string $filename) : ?string;
+    public function checkFileValidity($filename);
 }

@@ -42,14 +42,19 @@ To display the list of available commands, please use the <info>list</info> comm
 EOF
 );
     }
-    public function setCommand(\ECSPrefix20210507\Symfony\Component\Console\Command\Command $command)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Command\Command $command
+     */
+    public function setCommand($command)
     {
         $this->command = $command;
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute($input, $output)
     {
         if (null === $this->command) {
             $this->command = $this->getApplication()->find($input->getArgument('command_name'));

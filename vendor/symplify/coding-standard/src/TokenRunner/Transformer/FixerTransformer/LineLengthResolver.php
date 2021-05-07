@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\TokenRunner\Transformer\FixerTransformer;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -11,9 +10,11 @@ use Symplify\PackageBuilder\Configuration\StaticEolConfiguration;
 final class LineLengthResolver
 {
     /**
-     * @param Tokens|Token[] $tokens
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
+     * @return int
      */
-    public function getLengthFromStartEnd(Tokens $tokens, BlockInfo $blockInfo) : int
+    public function getLengthFromStartEnd($tokens, $blockInfo)
     {
         $lineLength = 0;
         // compute from function to start of line
@@ -34,9 +35,11 @@ final class LineLengthResolver
         return $lineLength;
     }
     /**
-     * @param Tokens|Token[] $tokens
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $position
+     * @return bool
      */
-    private function isNewLineOrOpenTag(Tokens $tokens, int $position) : bool
+    private function isNewLineOrOpenTag($tokens, $position)
     {
         /** @var Token $currentToken */
         $currentToken = $tokens[$position];
@@ -46,9 +49,11 @@ final class LineLengthResolver
         return $currentToken->isGivenKind(\T_OPEN_TAG);
     }
     /**
-     * @param Tokens|Token[] $tokens
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
+     * @return int
      */
-    private function getLengthFromFunctionStartToEndOfArguments(BlockInfo $blockInfo, Tokens $tokens) : int
+    private function getLengthFromFunctionStartToEndOfArguments($blockInfo, $tokens)
     {
         $length = 0;
         $start = $blockInfo->getStart();
@@ -69,9 +74,11 @@ final class LineLengthResolver
         return $length;
     }
     /**
-     * @param Tokens|Token[] $tokens
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
+     * @return int
      */
-    private function getLengthFromEndOfArgumentToLineBreak(BlockInfo $blockInfo, Tokens $tokens) : int
+    private function getLengthFromEndOfArgumentToLineBreak($blockInfo, $tokens)
     {
         $length = 0;
         $end = $blockInfo->getEnd();

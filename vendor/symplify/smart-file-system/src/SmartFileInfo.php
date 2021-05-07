@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\SmartFileSystem;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -18,12 +17,15 @@ final class SmartFileInfo extends SplFileInfo
      * @var string
      * @see https://regex101.com/r/SYP00O/1
      */
-    private const LAST_SUFFIX_REGEX = '#\\.[^.]+$#';
+    const LAST_SUFFIX_REGEX = '#\\.[^.]+$#';
     /**
      * @var SmartFileSystem
      */
     private $smartFileSystem;
-    public function __construct(string $filePath)
+    /**
+     * @param string $filePath
+     */
+    public function __construct($filePath)
     {
         $this->smartFileSystem = new \Symplify\SmartFileSystem\SmartFileSystem();
         // accepts also dirs
@@ -41,34 +43,54 @@ final class SmartFileInfo extends SplFileInfo
         }
         parent::__construct($filePath, $relativeDirectoryPath, $relativeFilePath);
     }
-    public function getBasenameWithoutSuffix() : string
+    /**
+     * @return string
+     */
+    public function getBasenameWithoutSuffix()
     {
         return \pathinfo($this->getFilename())['filename'];
     }
-    public function getSuffix() : string
+    /**
+     * @return string
+     */
+    public function getSuffix()
     {
         return \pathinfo($this->getFilename(), \PATHINFO_EXTENSION);
     }
     /**
      * @param string[] $suffixes
+     * @return bool
      */
-    public function hasSuffixes(array $suffixes) : bool
+    public function hasSuffixes(array $suffixes)
     {
         return \in_array($this->getSuffix(), $suffixes, \true);
     }
-    public function getRealPathWithoutSuffix() : string
+    /**
+     * @return string
+     */
+    public function getRealPathWithoutSuffix()
     {
         return Strings::replace($this->getRealPath(), self::LAST_SUFFIX_REGEX, '');
     }
-    public function getRelativeFilePath() : string
+    /**
+     * @return string
+     */
+    public function getRelativeFilePath()
     {
         return $this->getRelativePathname();
     }
-    public function getRelativeDirectoryPath() : string
+    /**
+     * @return string
+     */
+    public function getRelativeDirectoryPath()
     {
         return $this->getRelativePath();
     }
-    public function getRelativeFilePathFromDirectory(string $directory) : string
+    /**
+     * @param string $directory
+     * @return string
+     */
+    public function getRelativeFilePathFromDirectory($directory)
     {
         if (!\file_exists($directory)) {
             throw new DirectoryNotFoundException(\sprintf('Directory "%s" was not found in %s.', $directory, self::class));
@@ -76,7 +98,10 @@ final class SmartFileInfo extends SplFileInfo
         $relativeFilePath = $this->smartFileSystem->makePathRelative($this->getNormalizedRealPath(), (string) \realpath($directory));
         return \rtrim($relativeFilePath, '/');
     }
-    public function getRelativeFilePathFromCwdInTests() : string
+    /**
+     * @return string
+     */
+    public function getRelativeFilePathFromCwdInTests()
     {
         // special case for tests
         if (StaticPHPUnitEnvironment::isPHPUnitRun()) {
@@ -84,15 +109,26 @@ final class SmartFileInfo extends SplFileInfo
         }
         return $this->getRelativeFilePathFromDirectory(\getcwd());
     }
-    public function getRelativeFilePathFromCwd() : string
+    /**
+     * @return string
+     */
+    public function getRelativeFilePathFromCwd()
     {
         return $this->getRelativeFilePathFromDirectory(\getcwd());
     }
-    public function endsWith(string $string) : bool
+    /**
+     * @param string $string
+     * @return bool
+     */
+    public function endsWith($string)
     {
         return Strings::endsWith($this->getNormalizedRealPath(), $string);
     }
-    public function doesFnmatch(string $string) : bool
+    /**
+     * @param string $string
+     * @return bool
+     */
+    public function doesFnmatch($string)
     {
         if (\fnmatch($this->normalizePath($string), $this->getNormalizedRealPath())) {
             return \true;
@@ -100,24 +136,41 @@ final class SmartFileInfo extends SplFileInfo
         // in case of relative compare
         return \fnmatch('*/' . $this->normalizePath($string), $this->getNormalizedRealPath());
     }
-    public function getRealPath() : string
+    /**
+     * @return string
+     */
+    public function getRealPath()
     {
         // for phar compatibility @see https://github.com/rectorphp/rector/commit/e5d7cee69558f7e6b35d995a5ca03fa481b0407c
         return parent::getRealPath() ?: $this->getPathname();
     }
-    public function getRealPathDirectory() : string
+    /**
+     * @return string
+     */
+    public function getRealPathDirectory()
     {
         return \dirname($this->getRealPath());
     }
-    public function startsWith(string $partialPath) : bool
+    /**
+     * @param string $partialPath
+     * @return bool
+     */
+    public function startsWith($partialPath)
     {
         return Strings::startsWith($this->getNormalizedRealPath(), $partialPath);
     }
-    private function getNormalizedRealPath() : string
+    /**
+     * @return string
+     */
+    private function getNormalizedRealPath()
     {
         return $this->normalizePath($this->getRealPath());
     }
-    private function normalizePath(string $path) : string
+    /**
+     * @param string $path
+     * @return string
+     */
+    private function normalizePath($path)
     {
         return \str_replace('\\', '/', $path);
     }

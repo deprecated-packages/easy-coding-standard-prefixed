@@ -25,8 +25,10 @@ class SymfonyQuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console
 {
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Question\Question $question
      */
-    protected function writePrompt(OutputInterface $output, Question $question)
+    protected function writePrompt($output, $question)
     {
         $text = OutputFormatter::escapeTrailingBackslash($question->getQuestion());
         $default = $question->getDefault();
@@ -50,7 +52,7 @@ class SymfonyQuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console
                 break;
             case $question instanceof ChoiceQuestion:
                 $choices = $question->getChoices();
-                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, OutputFormatter::escape($choices[$default] ?? $default));
+                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, OutputFormatter::escape(isset($choices[$default]) ? $choices[$default] : $default));
                 break;
             default:
                 $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, OutputFormatter::escape($default));
@@ -65,8 +67,10 @@ class SymfonyQuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console
     }
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Exception $error
      */
-    protected function writeError(OutputInterface $output, \Exception $error)
+    protected function writeError($output, $error)
     {
         if ($output instanceof SymfonyStyle) {
             $output->newLine();
@@ -75,7 +79,10 @@ class SymfonyQuestionHelper extends \ECSPrefix20210507\Symfony\Component\Console
         }
         parent::writeError($output, $error);
     }
-    private function getEofShortcut() : string
+    /**
+     * @return string
+     */
+    private function getEofShortcut()
     {
         if (\false !== \strpos(\PHP_OS, 'WIN')) {
             return '<comment>Ctrl+Z</comment> then <comment>Enter</comment>';

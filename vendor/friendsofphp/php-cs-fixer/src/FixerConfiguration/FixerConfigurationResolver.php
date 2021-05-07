@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,7 +27,7 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
     /**
      * @param iterable<FixerOptionInterface> $options
      */
-    public function __construct(iterable $options)
+    public function __construct($options)
     {
         foreach ($options as $option) {
             $this->addOption($option);
@@ -39,15 +38,17 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function getOptions() : array
+    public function getOptions()
     {
         return $this->options;
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function resolve(array $options) : array
+    public function resolve(array $options)
     {
         $resolver = new OptionsResolver();
         foreach ($this->options as $option) {
@@ -94,8 +95,9 @@ final class FixerConfigurationResolver implements \PhpCsFixer\FixerConfiguration
      * @throws \LogicException when the option is already defined
      *
      * @return $this
+     * @param \PhpCsFixer\FixerConfiguration\FixerOptionInterface $option
      */
-    private function addOption(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $option) : self
+    private function addOption($option)
     {
         $name = $option->getName();
         if (\in_array($name, $this->registeredNames, \true)) {

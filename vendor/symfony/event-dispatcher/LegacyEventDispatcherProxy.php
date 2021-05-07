@@ -21,7 +21,11 @@ trigger_deprecation('symfony/event-dispatcher', '5.1', '%s is deprecated, use th
  */
 final class LegacyEventDispatcherProxy
 {
-    public static function decorate(?EventDispatcherInterface $dispatcher) : ?EventDispatcherInterface
+    /**
+     * @param \ECSPrefix20210507\Symfony\Contracts\EventDispatcher\EventDispatcherInterface|null $dispatcher
+     * @return \ECSPrefix20210507\Symfony\Contracts\EventDispatcher\EventDispatcherInterface|null
+     */
+    public static function decorate($dispatcher)
     {
         return $dispatcher;
     }

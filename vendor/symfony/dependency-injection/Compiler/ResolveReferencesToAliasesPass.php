@@ -22,8 +22,9 @@ class ResolveReferencesToAliasesPass extends \ECSPrefix20210507\Symfony\Componen
 {
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process($container)
     {
         parent::process($container);
         foreach ($container->getAliases() as $id => $alias) {
@@ -36,8 +37,9 @@ class ResolveReferencesToAliasesPass extends \ECSPrefix20210507\Symfony\Componen
     }
     /**
      * {@inheritdoc}
+     * @param bool $isRoot
      */
-    protected function processValue($value, bool $isRoot = \false)
+    protected function processValue($value, $isRoot = \false)
     {
         if (!$value instanceof Reference) {
             return parent::processValue($value, $isRoot);
@@ -45,7 +47,12 @@ class ResolveReferencesToAliasesPass extends \ECSPrefix20210507\Symfony\Componen
         $defId = $this->getDefinitionId($id = (string) $value, $this->container);
         return $defId !== $id ? new Reference($defId, $value->getInvalidBehavior()) : $value;
     }
-    private function getDefinitionId(string $id, ContainerBuilder $container) : string
+    /**
+     * @param string $id
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @return string
+     */
+    private function getDefinitionId($id, $container)
     {
         if (!$container->hasAlias($id)) {
             return $id;

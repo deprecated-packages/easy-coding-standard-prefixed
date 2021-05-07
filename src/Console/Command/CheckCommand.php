@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Console\Command;
 
 use ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface;
@@ -12,17 +11,28 @@ final class CheckCommand extends \Symplify\EasyCodingStandard\Console\Command\Ab
      * @var ProcessedFileReporter
      */
     private $processedFileReporter;
-    public function __construct(ProcessedFileReporter $processedFileReporter)
+    /**
+     * @param \Symplify\EasyCodingStandard\Reporter\ProcessedFileReporter $processedFileReporter
+     */
+    public function __construct($processedFileReporter)
     {
         $this->processedFileReporter = $processedFileReporter;
         parent::__construct();
     }
-    protected function configure() : void
+    /**
+     * @return void
+     */
+    protected function configure()
     {
         $this->setDescription('Check coding standard in one or more directories.');
         parent::configure();
     }
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Input\InputInterface $input
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
+     */
+    protected function execute($input, $output)
     {
         $this->configuration->resolveFromInput($input);
         // CLI paths override parameter paths

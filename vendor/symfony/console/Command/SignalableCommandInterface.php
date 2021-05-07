@@ -19,10 +19,13 @@ interface SignalableCommandInterface
 {
     /**
      * Returns the list of signals to subscribe.
+     * @return mixed[]
      */
-    public function getSubscribedSignals() : array;
+    public function getSubscribedSignals();
     /**
      * The method will be called when the application is signaled.
+     * @return void
+     * @param int $signal
      */
-    public function handleSignal(int $signal) : void;
+    public function handleSignal($signal);
 }

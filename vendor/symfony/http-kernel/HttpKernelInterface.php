@@ -19,8 +19,8 @@ use ECSPrefix20210507\Symfony\Component\HttpFoundation\Response;
  */
 interface HttpKernelInterface
 {
-    public const MASTER_REQUEST = 1;
-    public const SUB_REQUEST = 2;
+    const MASTER_REQUEST = 1;
+    const SUB_REQUEST = 2;
     /**
      * Handles a Request to convert it to a Response.
      *
@@ -34,6 +34,7 @@ interface HttpKernelInterface
      * @return Response A Response instance
      *
      * @throws \Exception When an Exception occurs during processing
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
      */
-    public function handle(Request $request, int $type = self::MASTER_REQUEST, bool $catch = \true);
+    public function handle($request, $type = self::MASTER_REQUEST, $catch = \true);
 }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\Fixer\ArrayNotation;
 
 use ECSPrefix20210507\Nette\Utils\Strings;
@@ -26,7 +25,7 @@ final class ArrayOpenerAndCloserNewlineFixer extends AbstractSymplifyFixer imple
     /**
      * @var string
      */
-    private const ERROR_MESSAGE = 'Indexed PHP array opener [ and closer ] must be on own line';
+    const ERROR_MESSAGE = 'Indexed PHP array opener [ and closer ] must be on own line';
     /**
      * @var ArrayBlockInfoFinder
      */
@@ -39,13 +38,21 @@ final class ArrayOpenerAndCloserNewlineFixer extends AbstractSymplifyFixer imple
      * @var ArrayAnalyzer
      */
     private $arrayAnalyzer;
-    public function __construct(ArrayBlockInfoFinder $arrayBlockInfoFinder, WhitespacesFixerConfig $whitespacesFixerConfig, ArrayAnalyzer $arrayAnalyzer)
+    /**
+     * @param \Symplify\CodingStandard\TokenRunner\Traverser\ArrayBlockInfoFinder $arrayBlockInfoFinder
+     * @param \PhpCsFixer\WhitespacesFixerConfig $whitespacesFixerConfig
+     * @param \Symplify\CodingStandard\TokenRunner\Analyzer\FixerAnalyzer\ArrayAnalyzer $arrayAnalyzer
+     */
+    public function __construct($arrayBlockInfoFinder, $whitespacesFixerConfig, $arrayAnalyzer)
     {
         $this->arrayBlockInfoFinder = $arrayBlockInfoFinder;
         $this->whitespacesFixerConfig = $whitespacesFixerConfig;
         $this->arrayAnalyzer = $arrayAnalyzer;
     }
-    public function getDefinition() : FixerDefinitionInterface
+    /**
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
+     */
+    public function getDefinition()
     {
         return new FixerDefinition(self::ERROR_MESSAGE, []);
     }
@@ -53,12 +60,16 @@ final class ArrayOpenerAndCloserNewlineFixer extends AbstractSymplifyFixer imple
      * Must run before
      *
      * @see \PhpCsFixer\Fixer\Whitespace\ArrayIndentationFixer::getPriority()
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 34;
     }
-    public function getRuleDefinition() : RuleDefinition
+    /**
+     * @return \Symplify\RuleDocGenerator\ValueObject\RuleDefinition
+     */
+    public function getRuleDefinition()
     {
         return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(<<<'CODE_SAMPLE'
 $items = [1 => 'Hey'];
@@ -72,8 +83,9 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         if (!$tokens->isAnyTokenKindsFound(TokenKinds::ARRAY_OPEN_TOKENS)) {
             return \false;
@@ -82,8 +94,10 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param \SplFileInfo $fileInfo
      */
-    public function fix(SplFileInfo $fileInfo, Tokens $tokens) : void
+    public function fix($fileInfo, $tokens)
     {
         $blockInfos = $this->arrayBlockInfoFinder->findArrayOpenerBlockInfos($tokens);
         foreach ($blockInfos as $blockInfo) {
@@ -92,8 +106,10 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param \Symplify\CodingStandard\TokenRunner\ValueObject\BlockInfo $blockInfo
      */
-    private function fixArrayOpener(Tokens $tokens, BlockInfo $blockInfo) : void
+    private function fixArrayOpener($tokens, $blockInfo)
     {
         if ($this->isNextTokenAlsoArrayOpener($tokens, $blockInfo->getStart())) {
             return;
@@ -112,8 +128,10 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @param int $index
+     * @return bool
      */
-    private function isNextTokenAlsoArrayOpener(Tokens $tokens, int $index) : bool
+    private function isNextTokenAlsoArrayOpener($tokens, $index)
     {
         $nextToken = $this->getNextMeaningfulToken($tokens, $index);
         if (!$nextToken instanceof Token) {
@@ -123,11 +141,13 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param int $arrayCloserPosition
      */
-    private function handleArrayCloser(Tokens $tokens, int $arrayCloserPosition) : void
+    private function handleArrayCloser($tokens, $arrayCloserPosition)
     {
         $preArrayCloserPosition = $arrayCloserPosition - 1;
-        $previousCloserToken = $tokens[$preArrayCloserPosition] ?? null;
+        $previousCloserToken = isset($tokens[$preArrayCloserPosition]) ? $tokens[$preArrayCloserPosition] : null;
         if (!$previousCloserToken instanceof Token) {
             return;
         }
@@ -139,11 +159,13 @@ CODE_SAMPLE
     }
     /**
      * @param Tokens<Token> $tokens
+     * @return void
+     * @param int $arrayOpenerPosition
      */
-    private function handleArrayOpener(Tokens $tokens, int $arrayOpenerPosition) : void
+    private function handleArrayOpener($tokens, $arrayOpenerPosition)
     {
         $postArrayOpenerPosition = $arrayOpenerPosition + 1;
-        $nextToken = $tokens[$postArrayOpenerPosition] ?? null;
+        $nextToken = isset($tokens[$postArrayOpenerPosition]) ? $tokens[$postArrayOpenerPosition] : null;
         if (!$nextToken instanceof Token) {
             return;
         }

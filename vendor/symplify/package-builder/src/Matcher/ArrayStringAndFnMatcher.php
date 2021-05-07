@@ -1,14 +1,15 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\Matcher;
 
 final class ArrayStringAndFnMatcher
 {
     /**
      * @param string[] $matchingValues
+     * @param string $currentValue
+     * @return bool
      */
-    public function isMatchWithIsA(string $currentValue, array $matchingValues) : bool
+    public function isMatchWithIsA($currentValue, array $matchingValues)
     {
         if ($this->isMatch($currentValue, $matchingValues)) {
             return \true;
@@ -22,8 +23,10 @@ final class ArrayStringAndFnMatcher
     }
     /**
      * @param string[] $matchingValues
+     * @param string $currentValue
+     * @return bool
      */
-    public function isMatch(string $currentValue, array $matchingValues) : bool
+    public function isMatch($currentValue, array $matchingValues)
     {
         foreach ($matchingValues as $matchingValue) {
             if ($currentValue === $matchingValue) {

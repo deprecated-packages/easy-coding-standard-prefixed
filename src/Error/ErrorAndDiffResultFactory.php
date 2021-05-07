@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Error;
 
 use Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult;
@@ -10,11 +9,17 @@ final class ErrorAndDiffResultFactory
      * @var ErrorAndDiffCollector
      */
     private $errorAndDiffCollector;
-    public function __construct(\Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector)
+    /**
+     * @param \Symplify\EasyCodingStandard\Error\ErrorAndDiffCollector $errorAndDiffCollector
+     */
+    public function __construct($errorAndDiffCollector)
     {
         $this->errorAndDiffCollector = $errorAndDiffCollector;
     }
-    public function create() : ErrorAndDiffResult
+    /**
+     * @return \Symplify\EasyCodingStandard\ValueObject\Error\ErrorAndDiffResult
+     */
+    public function create()
     {
         return new ErrorAndDiffResult($this->errorAndDiffCollector->getErrors(), $this->errorAndDiffCollector->getFileDiffs(), $this->errorAndDiffCollector->getSystemErrors());
     }

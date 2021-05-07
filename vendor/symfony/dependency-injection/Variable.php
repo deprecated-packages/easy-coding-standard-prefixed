@@ -26,7 +26,10 @@ namespace ECSPrefix20210507\Symfony\Component\DependencyInjection;
 class Variable
 {
     private $name;
-    public function __construct(string $name)
+    /**
+     * @param string $name
+     */
+    public function __construct($name)
     {
         $this->name = $name;
     }

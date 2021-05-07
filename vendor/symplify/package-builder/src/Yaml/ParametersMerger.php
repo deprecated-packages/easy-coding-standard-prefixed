@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\Yaml;
 
 use Closure;
@@ -53,8 +52,9 @@ final class ParametersMerger
     }
     /**
      * @return mixed[]
+     * @param \Closure $mergeCallback
      */
-    private function mergeLeftToRightWithCallable(array $left, array $right, Closure $mergeCallback) : array
+    private function mergeLeftToRightWithCallable(array $left, array $right, $mergeCallback)
     {
         foreach ($left as $key => $val) {
             if (\is_int($key)) {

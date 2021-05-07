@@ -25,10 +25,13 @@ use ECSPrefix20210507\Symfony\Component\Cache\Traits\ProxyTrait;
 class Psr16Cache implements CacheInterface, \ECSPrefix20210507\Symfony\Component\Cache\PruneableInterface, \ECSPrefix20210507\Symfony\Component\Cache\ResettableInterface
 {
     use ProxyTrait;
-    private const METADATA_EXPIRY_OFFSET = 1527506807;
+    const METADATA_EXPIRY_OFFSET = 1527506807;
     private $createCacheItem;
     private $cacheItemPrototype;
-    public function __construct(CacheItemPoolInterface $pool)
+    /**
+     * @param \ECSPrefix20210507\Psr\Cache\CacheItemPoolInterface $pool
+     */
+    public function __construct($pool)
     {
         $this->pool = $pool;
         if (!$pool instanceof AdapterInterface) {

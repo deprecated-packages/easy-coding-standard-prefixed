@@ -15,7 +15,10 @@ use ECSPrefix20210507\Symfony\Component\Process\Process;
 class TestHttpServer
 {
     private static $process = [];
-    public static function start(int $port = 8057)
+    /**
+     * @param int $port
+     */
+    public static function start($port = 8057)
     {
         if (isset(self::$process[$port])) {
             self::$process[$port]->stop();

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -27,33 +26,43 @@ final class AliasedFixerOption implements \PhpCsFixer\FixerConfiguration\FixerOp
      * @var string
      */
     private $alias;
-    public function __construct(\PhpCsFixer\FixerConfiguration\FixerOptionInterface $fixerOption, string $alias)
+    /**
+     * @param \PhpCsFixer\FixerConfiguration\FixerOptionInterface $fixerOption
+     * @param string $alias
+     */
+    public function __construct($fixerOption, $alias)
     {
         $this->fixerOption = $fixerOption;
         $this->alias = $alias;
     }
-    public function getAlias() : string
+    /**
+     * @return string
+     */
+    public function getAlias()
     {
         return $this->alias;
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getName() : string
+    public function getName()
     {
         return $this->fixerOption->getName();
     }
     /**
      * {@inheritdoc}
+     * @return string
      */
-    public function getDescription() : string
+    public function getDescription()
     {
         return $this->fixerOption->getDescription();
     }
     /**
      * {@inheritdoc}
+     * @return bool
      */
-    public function hasDefault() : bool
+    public function hasDefault()
     {
         return $this->fixerOption->hasDefault();
     }
@@ -66,22 +75,25 @@ final class AliasedFixerOption implements \PhpCsFixer\FixerConfiguration\FixerOp
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]|null
      */
-    public function getAllowedTypes() : ?array
+    public function getAllowedTypes()
     {
         return $this->fixerOption->getAllowedTypes();
     }
     /**
      * {@inheritdoc}
+     * @return mixed[]|null
      */
-    public function getAllowedValues() : ?array
+    public function getAllowedValues()
     {
         return $this->fixerOption->getAllowedValues();
     }
     /**
      * {@inheritdoc}
+     * @return \Closure|null
      */
-    public function getNormalizer() : ?\Closure
+    public function getNormalizer()
     {
         return $this->fixerOption->getNormalizer();
     }

@@ -26,8 +26,10 @@ class MockFileSessionStorage extends \ECSPrefix20210507\Symfony\Component\HttpFo
     private $savePath;
     /**
      * @param string $savePath Path of directory to save session files
+     * @param string $name
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag
      */
-    public function __construct(string $savePath = null, string $name = 'MOCKSESSID', \ECSPrefix20210507\Symfony\Component\HttpFoundation\Session\Storage\MetadataBag $metaBag = null)
+    public function __construct($savePath = null, $name = 'MOCKSESSID', $metaBag = null)
     {
         if (null === $savePath) {
             $savePath = \sys_get_temp_dir();
@@ -55,8 +57,10 @@ class MockFileSessionStorage extends \ECSPrefix20210507\Symfony\Component\HttpFo
     }
     /**
      * {@inheritdoc}
+     * @param bool $destroy
+     * @param int $lifetime
      */
-    public function regenerate(bool $destroy = \false, int $lifetime = null)
+    public function regenerate($destroy = \false, $lifetime = null)
     {
         if (!$this->started) {
             $this->start();
@@ -102,8 +106,9 @@ class MockFileSessionStorage extends \ECSPrefix20210507\Symfony\Component\HttpFo
     /**
      * Deletes a session from persistent storage.
      * Deliberately leaves session data in memory intact.
+     * @return void
      */
-    private function destroy() : void
+    private function destroy()
     {
         \set_error_handler(static function () {
         });
@@ -115,15 +120,17 @@ class MockFileSessionStorage extends \ECSPrefix20210507\Symfony\Component\HttpFo
     }
     /**
      * Calculate path to file.
+     * @return string
      */
-    private function getFilePath() : string
+    private function getFilePath()
     {
         return $this->savePath . '/' . $this->id . '.mocksess';
     }
     /**
      * Reads session from storage and loads session.
+     * @return void
      */
-    private function read() : void
+    private function read()
     {
         \set_error_handler(static function () {
         });

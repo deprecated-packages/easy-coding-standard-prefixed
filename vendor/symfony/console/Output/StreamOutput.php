@@ -31,12 +31,12 @@ class StreamOutput extends \ECSPrefix20210507\Symfony\Component\Console\Output\O
     /**
      * @param resource                      $stream    A stream resource
      * @param int                           $verbosity The verbosity level (one of the VERBOSITY constants in OutputInterface)
-     * @param bool|null                     $decorated Whether to decorate messages (null for auto-guessing)
-     * @param OutputFormatterInterface|null $formatter Output formatter instance (null to use default OutputFormatter)
+     * @param bool $decorated Whether to decorate messages (null for auto-guessing)
+     * @param \ECSPrefix20210507\Symfony\Component\Console\Formatter\OutputFormatterInterface $formatter Output formatter instance (null to use default OutputFormatter)
      *
      * @throws InvalidArgumentException When first argument is not a real stream
      */
-    public function __construct($stream, int $verbosity = self::VERBOSITY_NORMAL, bool $decorated = null, OutputFormatterInterface $formatter = null)
+    public function __construct($stream, $verbosity = self::VERBOSITY_NORMAL, $decorated = null, $formatter = null)
     {
         if (!\is_resource($stream) || 'stream' !== \get_resource_type($stream)) {
             throw new InvalidArgumentException('The StreamOutput class needs a stream as its first argument.');
@@ -58,8 +58,10 @@ class StreamOutput extends \ECSPrefix20210507\Symfony\Component\Console\Output\O
     }
     /**
      * {@inheritdoc}
+     * @param string $message
+     * @param bool $newline
      */
-    protected function doWrite(string $message, bool $newline)
+    protected function doWrite($message, $newline)
     {
         if ($newline) {
             $message .= \PHP_EOL;
@@ -92,6 +94,13 @@ class StreamOutput extends \ECSPrefix20210507\Symfony\Component\Console\Output\O
         if (\DIRECTORY_SEPARATOR === '\\') {
             return \function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support($this->stream) || \false !== \getenv('ANSICON') || 'ON' === \getenv('ConEmuANSI') || 'xterm' === \getenv('TERM');
         }
-        return \stream_isatty($this->stream);
+        $streamIsatty = function ($stream) {
+            if ('\\' === \DIRECTORY_SEPARATOR) {
+                $stat = @fstat($stream);
+                return $stat ? 020000 === ($stat['mode'] & 0170000) : false;
+            }
+            return @posix_isatty($stream);
+        };
+        return $streamIsatty($this->stream);
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -39,8 +38,10 @@ final class PhpdocTypesFixer extends AbstractPhpdocTypesFixer implements Configu
     private $typesToFix = [];
     /**
      * {@inheritdoc}
+     * @param mixed[] $configuration
+     * @return void
      */
-    public function configure(array $configuration) : void
+    public function configure($configuration)
     {
         parent::configure($configuration);
         $this->typesToFix = \array_merge(...\array_map(static function (string $group) {
@@ -49,8 +50,9 @@ final class PhpdocTypesFixer extends AbstractPhpdocTypesFixer implements Configu
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('The correct case must be used for standard PHP types in PHPDoc.', [new CodeSample('<?php
 /**
@@ -71,8 +73,9 @@ final class PhpdocTypesFixer extends AbstractPhpdocTypesFixer implements Configu
      *
      * Must run before GeneralPhpdocAnnotationRemoveFixer, GeneralPhpdocTagRenameFixer, NoBlankLinesAfterPhpdocFixer, NoEmptyPhpdocFixer, NoSuperfluousPhpdocTagsFixer, PhpdocAddMissingParamAnnotationFixer, PhpdocAlignFixer, PhpdocAlignFixer, PhpdocInlineTagNormalizerFixer, PhpdocLineSpanFixer, PhpdocNoAccessFixer, PhpdocNoAliasTagFixer, PhpdocNoEmptyReturnFixer, PhpdocNoPackageFixer, PhpdocNoUselessInheritdocFixer, PhpdocOrderByValueFixer, PhpdocOrderFixer, PhpdocReturnSelfReferenceFixer, PhpdocScalarFixer, PhpdocSeparationFixer, PhpdocSingleLineVarSpacingFixer, PhpdocSummaryFixer, PhpdocTagCasingFixer, PhpdocTagTypeFixer, PhpdocToParamTypeFixer, PhpdocToPropertyTypeFixer, PhpdocToReturnTypeFixer, PhpdocToReturnTypeFixer, PhpdocTrimConsecutiveBlankLineSeparationFixer, PhpdocTrimFixer, PhpdocTypesOrderFixer, PhpdocVarAnnotationCorrectOrderFixer, PhpdocVarWithoutNameFixer.
      * Must run after PhpdocAnnotationWithoutDotFixer, PhpdocIndentFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         /*
          * Should be run before all other docblock fixers apart from the
@@ -86,16 +89,19 @@ final class PhpdocTypesFixer extends AbstractPhpdocTypesFixer implements Configu
     }
     /**
      * {@inheritdoc}
+     * @param string $type
+     * @return string
      */
-    protected function normalize(string $type) : string
+    protected function normalize($type)
     {
         $lower = \strtolower($type);
         return \in_array($lower, $this->typesToFix, \true) ? $lower : $type;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerConfiguration\FixerConfigurationResolverInterface
      */
-    protected function createConfigurationDefinition() : FixerConfigurationResolverInterface
+    protected function createConfigurationDefinition()
     {
         $possibleGroups = \array_keys(self::$possibleTypes);
         return new FixerConfigurationResolver([(new FixerOptionBuilder('groups', 'Type groups to fix.'))->setAllowedTypes(['array'])->setAllowedValues([new AllowedValueSubset($possibleGroups)])->setDefault($possibleGroups)->getOption()]);

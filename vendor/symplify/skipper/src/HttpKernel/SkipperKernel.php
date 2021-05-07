@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\Skipper\HttpKernel;
 
 use ECSPrefix20210507\Symfony\Component\Config\Loader\LoaderInterface;
@@ -10,15 +9,19 @@ use Symplify\SymplifyKernel\Bundle\SymplifyKernelBundle;
 use Symplify\SymplifyKernel\HttpKernel\AbstractSymplifyKernel;
 final class SkipperKernel extends AbstractSymplifyKernel
 {
-    public function registerContainerConfiguration(LoaderInterface $loader) : void
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\Config\Loader\LoaderInterface $loader
+     * @return void
+     */
+    public function registerContainerConfiguration($loader)
     {
         $loader->load(__DIR__ . '/../../config/config.php');
         parent::registerContainerConfiguration($loader);
     }
     /**
-     * @return BundleInterface[]
+     * @return mixed[]
      */
-    public function registerBundles() : iterable
+    public function registerBundles()
     {
         return [new SkipperBundle(), new SymplifyKernelBundle()];
     }

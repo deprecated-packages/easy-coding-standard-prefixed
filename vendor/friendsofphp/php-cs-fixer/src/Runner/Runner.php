@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -74,7 +73,15 @@ final class Runner
      * @var bool
      */
     private $stopOnViolation;
-    public function __construct($finder, array $fixers, DifferInterface $differ, ?EventDispatcherInterface $eventDispatcher, ErrorsManager $errorsManager, LinterInterface $linter, $isDryRun, CacheManagerInterface $cacheManager, ?DirectoryInterface $directory = null, $stopOnViolation = \false)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\EventDispatcher\EventDispatcherInterface|null $eventDispatcher
+     * @param \PhpCsFixer\Cache\DirectoryInterface|null $directory
+     * @param \PhpCsFixer\Differ\DifferInterface $differ
+     * @param \PhpCsFixer\Error\ErrorsManager $errorsManager
+     * @param \PhpCsFixer\Linter\LinterInterface $linter
+     * @param \PhpCsFixer\Cache\CacheManagerInterface $cacheManager
+     */
+    public function __construct($finder, array $fixers, $differ, $eventDispatcher, $errorsManager, $linter, $isDryRun, $cacheManager, $directory = null, $stopOnViolation = \false)
     {
         $this->finder = $finder;
         $this->fixers = $fixers;
@@ -87,7 +94,10 @@ final class Runner
         $this->directory = $directory ?: new Directory('');
         $this->stopOnViolation = $stopOnViolation;
     }
-    public function fix() : array
+    /**
+     * @return mixed[]
+     */
+    public function fix()
     {
         $changed = [];
         $finder = $this->finder;
@@ -108,7 +118,12 @@ final class Runner
         }
         return $changed;
     }
-    private function fixFile(\SplFileInfo $file, LintingResultInterface $lintingResult) : ?array
+    /**
+     * @return mixed[]|null
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Linter\LintingResultInterface $lintingResult
+     */
+    private function fixFile($file, $lintingResult)
     {
         $name = $file->getPathname();
         try {
@@ -190,13 +205,21 @@ final class Runner
     }
     /**
      * Process an exception that occurred.
+     * @return void
+     * @param string $name
+     * @param \Throwable $e
      */
-    private function processException(string $name, \Throwable $e) : void
+    private function processException($name, $e)
     {
         $this->dispatchEvent(FixerFileProcessedEvent::NAME, new FixerFileProcessedEvent(FixerFileProcessedEvent::STATUS_EXCEPTION));
         $this->errorsManager->report(new Error(Error::TYPE_EXCEPTION, $name, $e));
     }
-    private function dispatchEvent(string $name, Event $event) : void
+    /**
+     * @return void
+     * @param string $name
+     * @param \ECSPrefix20210507\Symfony\Contracts\EventDispatcher\Event $event
+     */
+    private function dispatchEvent($name, $event)
     {
         if (null === $this->eventDispatcher) {
             return;

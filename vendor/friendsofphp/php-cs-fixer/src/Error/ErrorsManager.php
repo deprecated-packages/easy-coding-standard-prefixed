@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -28,9 +27,9 @@ final class ErrorsManager
     /**
      * Returns errors reported during linting before fixing.
      *
-     * @return Error[]
+     * @return mixed[]
      */
-    public function getInvalidErrors() : array
+    public function getInvalidErrors()
     {
         return \array_filter($this->errors, static function (\PhpCsFixer\Error\Error $error) {
             return \PhpCsFixer\Error\Error::TYPE_INVALID === $error->getType();
@@ -39,9 +38,9 @@ final class ErrorsManager
     /**
      * Returns errors reported during fixing.
      *
-     * @return Error[]
+     * @return mixed[]
      */
-    public function getExceptionErrors() : array
+    public function getExceptionErrors()
     {
         return \array_filter($this->errors, static function (\PhpCsFixer\Error\Error $error) {
             return \PhpCsFixer\Error\Error::TYPE_EXCEPTION === $error->getType();
@@ -50,9 +49,9 @@ final class ErrorsManager
     /**
      * Returns errors reported during linting after fixing.
      *
-     * @return Error[]
+     * @return mixed[]
      */
-    public function getLintErrors() : array
+    public function getLintErrors()
     {
         return \array_filter($this->errors, static function (\PhpCsFixer\Error\Error $error) {
             return \PhpCsFixer\Error\Error::TYPE_LINT === $error->getType();
@@ -60,12 +59,17 @@ final class ErrorsManager
     }
     /**
      * Returns true if no errors were reported.
+     * @return bool
      */
-    public function isEmpty() : bool
+    public function isEmpty()
     {
         return empty($this->errors);
     }
-    public function report(\PhpCsFixer\Error\Error $error) : void
+    /**
+     * @return void
+     * @param \PhpCsFixer\Error\Error $error
+     */
+    public function report($error)
     {
         $this->errors[] = $error;
     }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 /*
  * This file is part of PHP CS Fixer.
  *
@@ -23,37 +22,44 @@ use PhpCsFixer\Tokenizer\Tokens;
  */
 final class NoEmptyCommentFixer extends AbstractFixer
 {
-    private const TYPE_HASH = 1;
-    private const TYPE_DOUBLE_SLASH = 2;
-    private const TYPE_SLASH_ASTERISK = 3;
+    const TYPE_HASH = 1;
+    const TYPE_DOUBLE_SLASH = 2;
+    const TYPE_SLASH_ASTERISK = 3;
     /**
      * {@inheritdoc}
      *
      * Must run before NoExtraBlankLinesFixer, NoTrailingWhitespaceFixer, NoWhitespaceInBlankLineFixer.
      * Must run after PhpdocToCommentFixer.
+     * @return int
      */
-    public function getPriority() : int
+    public function getPriority()
     {
         return 2;
     }
     /**
      * {@inheritdoc}
+     * @return \PhpCsFixer\FixerDefinition\FixerDefinitionInterface
      */
-    public function getDefinition() : FixerDefinitionInterface
+    public function getDefinition()
     {
         return new FixerDefinition('There should not be any empty comments.', [new CodeSample("<?php\n//\n#\n/* */\n")]);
     }
     /**
      * {@inheritdoc}
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return bool
      */
-    public function isCandidate(Tokens $tokens) : bool
+    public function isCandidate($tokens)
     {
         return $tokens->isTokenKindFound(\T_COMMENT);
     }
     /**
      * {@inheritdoc}
+     * @return void
+     * @param \SplFileInfo $file
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
      */
-    protected function applyFix(\SplFileInfo $file, Tokens $tokens) : void
+    protected function applyFix($file, $tokens)
     {
         for ($index = 1, $count = \count($tokens); $index < $count; ++$index) {
             if (!$tokens[$index]->isGivenKind(\T_COMMENT)) {
@@ -72,8 +78,10 @@ final class NoEmptyCommentFixer extends AbstractFixer
      * Return the start index, end index and a flag stating if the comment block is empty.
      *
      * @param int $index T_COMMENT index
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @return mixed[]
      */
-    private function getCommentBlock(Tokens $tokens, int $index) : array
+    private function getCommentBlock($tokens, $index)
     {
         $commentType = $this->getCommentType($tokens[$index]->getContent());
         $empty = $this->isEmptyComment($tokens[$index]->getContent());
@@ -100,7 +108,11 @@ final class NoEmptyCommentFixer extends AbstractFixer
         }
         return [$start, $index - 1, $empty];
     }
-    private function getCommentType(string $content) : int
+    /**
+     * @param string $content
+     * @return int
+     */
+    private function getCommentType($content)
     {
         if ('#' === $content[0]) {
             return self::TYPE_HASH;
@@ -110,7 +122,13 @@ final class NoEmptyCommentFixer extends AbstractFixer
         }
         return self::TYPE_DOUBLE_SLASH;
     }
-    private function getLineBreakCount(Tokens $tokens, int $whiteStart, int $whiteEnd) : int
+    /**
+     * @param \PhpCsFixer\Tokenizer\Tokens $tokens
+     * @param int $whiteStart
+     * @param int $whiteEnd
+     * @return int
+     */
+    private function getLineBreakCount($tokens, $whiteStart, $whiteEnd)
     {
         $lineCount = 0;
         for ($i = $whiteStart; $i < $whiteEnd; ++$i) {
@@ -118,7 +136,11 @@ final class NoEmptyCommentFixer extends AbstractFixer
         }
         return $lineCount;
     }
-    private function isEmptyComment(string $content) : bool
+    /**
+     * @param string $content
+     * @return bool
+     */
+    private function isEmptyComment($content)
     {
         static $mapper = [
             self::TYPE_HASH => '|^#\\s*$|',

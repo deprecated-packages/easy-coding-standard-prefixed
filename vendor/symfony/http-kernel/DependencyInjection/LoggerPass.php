@@ -23,8 +23,9 @@ class LoggerPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process($container)
     {
         $container->setAlias(LoggerInterface::class, 'logger')->setPublic(\false);
         if ($container->has('logger')) {

@@ -57,23 +57,26 @@ abstract class AbstractCloner implements \ECSPrefix20210507\Symfony\Component\Va
     }
     /**
      * Sets the maximum number of items to clone past the minimum depth in nested structures.
+     * @param int $maxItems
      */
-    public function setMaxItems(int $maxItems)
+    public function setMaxItems($maxItems)
     {
         $this->maxItems = $maxItems;
     }
     /**
      * Sets the maximum cloned length for strings.
+     * @param int $maxString
      */
-    public function setMaxString(int $maxString)
+    public function setMaxString($maxString)
     {
         $this->maxString = $maxString;
     }
     /**
      * Sets the minimum tree depth where we are guaranteed to clone all the items.  After this
      * depth is reached, only setMaxItems items will be cloned.
+     * @param int $minDepth
      */
-    public function setMinDepth(int $minDepth)
+    public function setMinDepth($minDepth)
     {
         $this->minDepth = $minDepth;
     }
@@ -85,7 +88,7 @@ abstract class AbstractCloner implements \ECSPrefix20210507\Symfony\Component\Va
      *
      * @return Data The cloned variable represented by a Data object
      */
-    public function cloneVar($var, int $filter = 0)
+    public function cloneVar($var, $filter = 0)
     {
         $this->prevErrorHandler = \set_error_handler(function ($type, $msg, $file, $line, $context = []) {
             if (\E_RECOVERABLE_ERROR === $type || \E_USER_ERROR === $type) {
@@ -125,16 +128,17 @@ abstract class AbstractCloner implements \ECSPrefix20210507\Symfony\Component\Va
      * @param bool $isNested True if the object is nested in the dumped structure
      *
      * @return array The object casted as array
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
      */
-    protected function castObject(\ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
+    protected function castObject($stub, $isNested)
     {
         $obj = $stub->value;
         $class = $stub->class;
-        if (\PHP_VERSION_ID < 80000 ? "\0" === ($class[15] ?? null) : \false !== \strpos($class, "@anonymous\0")) {
+        if (\PHP_VERSION_ID < 80000 ? "\0" === (isset($class[15]) ? $class[15] : null) : \false !== \strpos($class, "@anonymous\0")) {
             $stub->class = \get_debug_type($obj);
         }
         if (isset($this->classInfo[$class])) {
-            [$i, $parents, $hasDebugInfo, $fileInfo] = $this->classInfo[$class];
+            list($i, $parents, $hasDebugInfo, $fileInfo) = $this->classInfo[$class];
         } else {
             $i = 2;
             $parents = [$class];
@@ -173,8 +177,9 @@ abstract class AbstractCloner implements \ECSPrefix20210507\Symfony\Component\Va
      * @param bool $isNested True if the object is nested in the dumped structure
      *
      * @return array The resource casted as array
+     * @param \ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub
      */
-    protected function castResource(\ECSPrefix20210507\Symfony\Component\VarDumper\Cloner\Stub $stub, bool $isNested)
+    protected function castResource($stub, $isNested)
     {
         $a = [];
         $res = $stub->value;

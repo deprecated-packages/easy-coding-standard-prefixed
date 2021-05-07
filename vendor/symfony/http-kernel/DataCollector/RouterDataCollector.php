@@ -31,8 +31,11 @@ class RouterDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
      * {@inheritdoc}
      *
      * @final
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Response $response
+     * @param \Throwable $exception
      */
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    public function collect($request, $response, $exception = null)
     {
         if ($response instanceof RedirectResponse) {
             $this->data['redirect'] = \true;
@@ -48,14 +51,18 @@ class RouterDataCollector extends \ECSPrefix20210507\Symfony\Component\HttpKerne
         $this->controllers = new \SplObjectStorage();
         $this->data = ['redirect' => \false, 'url' => null, 'route' => null];
     }
-    protected function guessRoute(Request $request, $controller)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\HttpFoundation\Request $request
+     */
+    protected function guessRoute($request, $controller)
     {
         return 'n/a';
     }
     /**
      * Remembers the controller associated to each request.
+     * @param \ECSPrefix20210507\Symfony\Component\HttpKernel\Event\ControllerEvent $event
      */
-    public function onKernelController(ControllerEvent $event)
+    public function onKernelController($event)
     {
         $this->controllers[$event->getRequest()] = $event->getController();
     }

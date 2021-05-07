@@ -24,10 +24,15 @@ class Psr16Adapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Ab
     /**
      * @internal
      */
-    protected const NS_SEPARATOR = '_';
+    const NS_SEPARATOR = '_';
     use ProxyTrait;
     private $miss;
-    public function __construct(CacheInterface $pool, string $namespace = '', int $defaultLifetime = 0)
+    /**
+     * @param \ECSPrefix20210507\Psr\SimpleCache\CacheInterface $pool
+     * @param string $namespace
+     * @param int $defaultLifetime
+     */
+    public function __construct($pool, $namespace = '', $defaultLifetime = 0)
     {
         parent::__construct($namespace, $defaultLifetime);
         $this->pool = $pool;
@@ -46,15 +51,17 @@ class Psr16Adapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Ab
     }
     /**
      * {@inheritdoc}
+     * @param string $id
      */
-    protected function doHave(string $id)
+    protected function doHave($id)
     {
         return $this->pool->has($id);
     }
     /**
      * {@inheritdoc}
+     * @param string $namespace
      */
-    protected function doClear(string $namespace)
+    protected function doClear($namespace)
     {
         return $this->pool->clear();
     }
@@ -67,8 +74,9 @@ class Psr16Adapter extends \ECSPrefix20210507\Symfony\Component\Cache\Adapter\Ab
     }
     /**
      * {@inheritdoc}
+     * @param int $lifetime
      */
-    protected function doSave(array $values, int $lifetime)
+    protected function doSave(array $values, $lifetime)
     {
         return $this->pool->setMultiple($values, 0 === $lifetime ? null : $lifetime);
     }

@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\Bundle;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -18,8 +17,10 @@ final class EasyCodingStandardBundle extends Bundle
 {
     /**
      * Order of compiler passes matters!
+     * @return void
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
-    public function build(ContainerBuilder $containerBuilder) : void
+    public function build($containerBuilder)
     {
         // cleanup
         $containerBuilder->addCompilerPass(new RemoveExcludedCheckersCompilerPass());
@@ -31,7 +32,10 @@ final class EasyCodingStandardBundle extends Bundle
         // method calls
         $containerBuilder->addCompilerPass(new FixerWhitespaceConfigCompilerPass());
     }
-    protected function createContainerExtension() : EasyCodingStandardExtension
+    /**
+     * @return \ECSPrefix20210507\Symfony\Component\DependencyInjection\Extension\ExtensionInterface|null
+     */
+    protected function createContainerExtension()
     {
         return new EasyCodingStandardExtension();
     }

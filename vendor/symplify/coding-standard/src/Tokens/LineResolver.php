@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\CodingStandard\Tokens;
 
 use PhpCsFixer\Tokenizer\Token;
@@ -9,8 +8,10 @@ final class LineResolver
 {
     /**
      * @param Tokens<Token> $tokens
+     * @param int $position
+     * @return int
      */
-    public function resolve(Tokens $tokens, int $position) : int
+    public function resolve($tokens, $position)
     {
         $lineCount = 0;
         for ($i = 0; $i < $position; ++$i) {

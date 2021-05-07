@@ -1,6 +1,5 @@
 <?php
 
-declare (strict_types=1);
 namespace Symplify\PackageBuilder\DependencyInjection\FileLoader;
 
 use ECSPrefix20210507\Symfony\Component\Config\FileLocatorInterface;
@@ -18,7 +17,11 @@ final class ParameterMergingPhpFileLoader extends PhpFileLoader
      * @var ParametersMerger
      */
     private $parametersMerger;
-    public function __construct(ContainerBuilder $containerBuilder, FileLocatorInterface $fileLocator)
+    /**
+     * @param \ECSPrefix20210507\Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
+     * @param \ECSPrefix20210507\Symfony\Component\Config\FileLocatorInterface $fileLocator
+     */
+    public function __construct($containerBuilder, $fileLocator)
     {
         $this->parametersMerger = new ParametersMerger();
         parent::__construct($containerBuilder, $fileLocator);
@@ -29,8 +32,9 @@ final class ParameterMergingPhpFileLoader extends PhpFileLoader
      * @see https://github.com/symplify/symplify/pull/697
      *
      * @param string|null $type
+     * @return void
      */
-    public function load($resource, $type = null) : void
+    public function load($resource, $type = null)
     {
         // get old parameters
         $parameterBag = $this->container->getParameterBag();
