@@ -37,9 +37,14 @@ final class RemoveExcludedCheckersCompilerPass implements CompilerPassInterface
                 $excludedCheckers[] = $key;
             }
             // "SomeClass::class"
-            if (\is_int($key) && \class_exists($value)) {
-                $excludedCheckers[] = $value;
+            if (!\is_int($key)) {
+                continue;
             }
+            if (!\class_exists($value)) {
+                continue;
+            }
+            $excludedCheckers[] = $value;
+            return \array_unique($excludedCheckers);
         }
         return \array_unique($excludedCheckers);
     }
