@@ -12,7 +12,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer;
 
-use _PhpScoper91fe47cd7f25\Symfony\Component\Finder\Finder as BaseFinder;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\Finder\Finder as BaseFinder;
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>

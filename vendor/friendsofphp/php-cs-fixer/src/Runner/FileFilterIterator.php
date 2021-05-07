@@ -15,8 +15,8 @@ namespace PhpCsFixer\Runner;
 use PhpCsFixer\Cache\CacheManagerInterface;
 use PhpCsFixer\FileReader;
 use PhpCsFixer\FixerFileProcessedEvent;
-use _PhpScoper91fe47cd7f25\Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use _PhpScoper91fe47cd7f25\Symfony\Contracts\EventDispatcher\Event;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use _PhpScoper2dcc760f8ff8\Symfony\Contracts\EventDispatcher\Event;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
@@ -73,7 +73,7 @@ final class FileFilterIterator extends \FilterIterator
             return;
         }
         // BC compatibility < Sf 4.3
-        if (!$this->eventDispatcher instanceof \_PhpScoper91fe47cd7f25\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
+        if (!$this->eventDispatcher instanceof \_PhpScoper2dcc760f8ff8\Symfony\Contracts\EventDispatcher\EventDispatcherInterface) {
             $this->eventDispatcher->dispatch($name, $event);
             return;
         }

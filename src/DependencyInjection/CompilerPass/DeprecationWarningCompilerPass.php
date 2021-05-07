@@ -3,8 +3,8 @@
 declare (strict_types=1);
 namespace Symplify\EasyCodingStandard\DependencyInjection\CompilerPass;
 
-use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 final class DeprecationWarningCompilerPass implements CompilerPassInterface
 {
@@ -14,12 +14,12 @@ final class DeprecationWarningCompilerPass implements CompilerPassInterface
     private const DEPRECATED_PARAMETERS = [Option::SETS => 'Use $containerConfigurator->import(<set>); instead'];
     public function process(ContainerBuilder $containerBuilder) : void
     {
-        $parametersBag = $containerBuilder->getParameterBag();
+        $parameterBag = $containerBuilder->getParameterBag();
         foreach (self::DEPRECATED_PARAMETERS as $parameter => $message) {
-            if (!$parametersBag->has($parameter)) {
+            if (!$parameterBag->has($parameter)) {
                 continue;
             }
-            $setsParameters = $parametersBag->get($parameter);
+            $setsParameters = $parameterBag->get($parameter);
             if ($setsParameters === []) {
                 continue;
             }

@@ -12,7 +12,7 @@ declare (strict_types=1);
  */
 namespace PhpCsFixer\Fixer\PhpUnit;
 
-use _PhpScoper91fe47cd7f25\Composer\Semver\Comparator;
+use _PhpScoper2dcc760f8ff8\Composer\Semver\Comparator;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *

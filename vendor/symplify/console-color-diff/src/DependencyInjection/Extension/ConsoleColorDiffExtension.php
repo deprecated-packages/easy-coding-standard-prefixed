@@ -3,10 +3,10 @@
 declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\DependencyInjection\Extension;
 
-use _PhpScoper91fe47cd7f25\Symfony\Component\Config\FileLocator;
-use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\ContainerBuilder;
-use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Extension\Extension;
-use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\Config\FileLocator;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\ContainerBuilder;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\Extension\Extension;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 final class ConsoleColorDiffExtension extends Extension
 {
     /**

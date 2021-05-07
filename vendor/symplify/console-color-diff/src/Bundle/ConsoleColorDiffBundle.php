@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Symplify\ConsoleColorDiff\Bundle;
 
-use _PhpScoper91fe47cd7f25\Symfony\Component\HttpKernel\Bundle\Bundle;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symplify\ConsoleColorDiff\DependencyInjection\Extension\ConsoleColorDiffExtension;
 final class ConsoleColorDiffBundle extends Bundle
 {

@@ -1,12 +1,12 @@
 <?php
 
 declare (strict_types=1);
-namespace _PhpScoper91fe47cd7f25;
+namespace _PhpScoper2dcc760f8ff8;
 
 use PhpCsFixer\WhitespacesFixerConfig;
-use _PhpScoper91fe47cd7f25\Symfony\Component\Console\Style\SymfonyStyle;
-use _PhpScoper91fe47cd7f25\Symfony\Component\Console\Terminal;
-use _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\Console\Style\SymfonyStyle;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\Console\Terminal;
+use _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\Bootstrap\NoCheckersLoaderReporter;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyleFactory;
@@ -17,7 +17,7 @@ use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Finder\FinderSanitizer;
 use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileSystem;
-use function _PhpScoper91fe47cd7f25\Symfony\Component\DependencyInjection\Loader\Configurator\service;
+use function _PhpScoper2dcc760f8ff8\Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator) : void {
     $containerConfigurator->import(__DIR__ . '/services/services_cache.php');
     $services = $containerConfigurator->services();
